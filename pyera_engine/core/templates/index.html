@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pyera</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+    <style type='text/css'></style>
+</head>
+
+<body>
+<div id="textbox" style="white-space:pre-wrap">
+</div>
+<div id="inputbox">
+    <input type=text size=50 name=proglang>
+    <a href=# id=process_input>
+        <button class='btn btn-default'>提交</button>
+    </a>
+</div>
+<div><br/><br/></div>
+</body>
+
+<script>
+
+    function throttle(fn, threshhold, scope) {
+        threshhold || (threshhold = 250);
+        var last,
+            deferTimer;
+        return function () {
+            var context = scope || this;
+
+            var now = +new Date,
+                args = arguments;
+            if (last && now < last + threshhold) {
+                // hold on to it
+                clearTimeout(deferTimer);
+                deferTimer = setTimeout(function () {
+                    last = now;
+                    fn.apply(context, args);
+                }, threshhold);
+            } else {
+                last = now;
+                fn.apply(context, args);
+            }
+        };
+    }
+
+    showtext = function (item) {
+        $("#textbox").append('<span class=' + item.style + '>' + item.text + '</span>');
+    };
+
+    showcmd = function (item) {
+        var appendstr = "<span class='cmd' id=" + item.num + ">"
+            + item.text + "</span>";
+        var idstr = "#" + item.num;
+        if ($(idstr).length) {
+            clearcmd_func(item.num)
+        }
+        $("#textbox").append(appendstr);
+        $(idstr).addClass(item.normal_style);
+//        $.each(item.normal_style,$(idstr).addClass);
+//        for( var s in item.normal_style) {
+//            console.log(s);
+//            $(idstr).addClass(s);
+//        }
+        $(idstr).bind("click", function () {
+            cmdsendorder(item.num);
+            event.stopPropagation();
+        });
+        $(idstr).hover(function () {
+            $(idstr).removeClass(item.normal_style);
+            $(idstr).addClass(item.on_style);
+        }, function () {
+            $(idstr).removeClass(item.on_style);
+            $(idstr).addClass(item.normal_style);
+        });
+    };
+
+    cmdsendorder = function (number) {
+        $('input[name="proglang"]').val(number);
+        socket_global.emit('dealorder', $('input[name="proglang"]').val());
+    };
+    showword = function (i, item) {
+        if (item.type == "text")
+            showtext(item);
+        if (item.type == "cmd")
+            showcmd(item);
+    };
+
+    clearcmd_func = function (numbers) {
+        if (numbers == "all") {
+            $(".cmd").unbind('click mouseenter mouseleave');
+            $(".cmd").attr("id", "");
+            $(".cmd").attr("class", "standard");
+        } else {
+            idstr = "#" + numbers;
+            ob = $(".cmd" + idstr);
+            ob.unbind('click mouseenter mouseleave');
+            ob.attr("class", "standard");
+            ob.removeAttr("id")
+        }
+    };
+
+    set_bgcolor = function (color) {
+        $("body").attr("bgcolor", color);
+    };
+
+    function addCSSRule(sheet, selector, rules, index) {
+        if ("insertRule" in sheet) {
+            sheet.insertRule(selector + "{" + rules + "}", index);
+        }
+        else if ("addRule" in sheet) {
+            sheet.addRule(selector, rules, index);
+        }
+    }
+
+    set_style = function (style) {
+        s = document.getElementsByName('style').sheet;
+        rule_str = " background-color:" + style.background + ";color:" + style.foreground + ";font-family:" + style.font +
+            ";font-size:" + style.fontsize + "px";
+        if (style.bold == true)
+            rule_str = rule_str + ";font-weight:bold";
+        if (style.underline == true)
+            rule_str = rule_str + ";text-decoration:underline";
+        if (style.italic == true)
+            rule_str = rule_str + ";font-style:italic";
+        addCSSRule(document.styleSheets[0], "." + style.style_name, rule_str);
+    };
+
+    show = function (data) {
+        d = eval("(" + data + ")");
+        if (d.clear_cmd == 'true') {
+            $("#textbox").empty();
+        }
+        if (d.clearorder_cmd == 'true') {
+            $('input[name="proglang"]').val("")
+        }
+        if (d.clearcmd_cmd)
+            clearcmd_func(d.clearcmd_cmd);
+        if (d.bgcolor)
+            set_bgcolor(d.bgcolor);
+        if (d.set_style)
+            set_style(d.set_style);
+        $.each(d.content, showword);
+        window.scrollTo(0, document.body.scrollHeight);
+        return false
+    };
+
+    var socket_global = 0;
+
+    run = function () {
+        var socket = io.connect('http://127.0.0.1:5000/test');
+//        var socket = io.connect('http://10.235.200.139:5000/test');
+        socket_global = socket;
+        socket.on('game_display', function (data) {
+            show(data);
+        });
+
+        socket.on('connect', function () {
+            socket.emit('run');
+            console.log('one run');
+        });
+
+
+        $('a#process_input').unbind('click');
+        $('a#process_input').bind('click', function () {
+            socket.emit('dealorder', $('input[name="proglang"]').val());
+        });
+
+        $('body').bind('click', function (e) {
+            console.log(e.which);
+            socket.emit('dealorder', '')
+        });
+
+        $('body').bind('dblclick', function () {
+            console.log('click dbl');
+            socket.emit('dealorder', 'skip_all_wait')
+        });
+
+        sendorder = throttle(function () {
+            if (event.keyCode == 13) {
+                $('a#process_input').click();
+            }
+        }, 300);
+
+        $(document).keydown(sendorder);
+
+        $(window).unload(function () {
+            socket.emit('disconnect');
+        });
+
+
+        return socket;
+    };
+
+    run()
+
+</script>
+
+</html>

@@ -1,0 +1,9 @@
+﻿{
+    "background_color": "#2C4A69",
+    "font_color": "#C8C8C8",
+    "onbutton_color": "#A40018",
+    "font": "新宋体",
+    "font_comment":"新宋体 Inziu Roboto SC 也是一个选择，兼容性也不错",
+    "font_size": "16",
+    "language": "chinese"
+}
