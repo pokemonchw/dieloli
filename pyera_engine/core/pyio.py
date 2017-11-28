@@ -16,6 +16,7 @@ import queue
 import json
 
 import sys
+import script.GameConfig as config
 
 sys.setrecursionlimit(100000)
 
@@ -182,3 +183,4 @@ def init_style(foreground_c, background_c, onbutton_c, font, font_size):
     style_def = new_style_def
     style_def('standard')
     style_def('onbutton', foreground=onbutton_c)
+    style_def('title',fontsize=config.title_fontsize)

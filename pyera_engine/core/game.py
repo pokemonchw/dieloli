@@ -6,6 +6,9 @@ import core.data
 import os
 import re
 import unicodedata
+import time
+import script.GameConfig as config
+import core.winframe as winframe
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'
@@ -133,9 +136,12 @@ def pl(string='', style='standard'):
         p('\n')
 
 
-def pline(sample='▃', style='standard'):
+def pline(sample='＝', style='standard'):
     """输出一条横线"""
-    pl(sample * 43, style)
+    fontName = config.font
+    fontSize = config.font_size
+    width = winframe.getWinFrameWidth(sample,fontName,fontSize)
+    pl(sample * width, style)
 
 
 def pwarn(string, style='warning'):
@@ -154,6 +160,20 @@ def plwait(string='', style='standard'):
     """输出一行并等待"""
     pl(string, style)
     wait()
+
+def pobo(sleepTime,string, style='standard'):
+    """"逐字输出"""
+    index = len(string)
+    for i in range(0,index):
+        p(string[i],style)
+        time.sleep(sleepTime)
+
+def pti(string,style='title'):
+    """输出标题"""
+    fontSize = config.title_fontsize
+    fontName = config.font
+    width = int(winframe.getWinFrameWidth(string,fontName,fontSize))
+    io.print(align(string,width,'center'), style)
 
 
 clr_screen = io.clear_screen
@@ -211,11 +231,15 @@ def display_len(text):
 def align(text, width, just='left'):
     """返回对齐的字符串函数，默认左对齐，左：left，右：right"""
     text = str(text)
-    count = display_len(text)
+    count = len(text)
     if just == "right":
         return " " * (width - count) + text
     elif just == "left":
         return text + " " * (width - count)
+    elif just == "center":
+        widthI = int(int(width)/2)
+        countI = int(int(count)/2)
+        return " " * (widthI - countI + 2) + text
 
 
 # 命令相关函数#################################################################
