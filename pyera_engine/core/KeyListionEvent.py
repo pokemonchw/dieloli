@@ -1,16 +1,18 @@
 import core.winframe as winframe
+import core.PyCmd as pycmd
 
 wframe = winframe.root
 
-wframeMouse = {}
+wframeMouse = {'wFrameUp':2}
 
 def onWFrameMouse():
-    wframeMouse["leftMouse"] = 0
-    wframe.bind('<ButtonPress-1>',setWFrameUp)
+    wframe.bind('<ButtonPress-1>', mouseLeftCheck)
 
-def offWFrameMouse():
-    wframeMouse["leftMouse"] = 0
-    wframe.unbind('<ButtonPress-1>')
+def mouseLeftCheck(event):
+    if wframeMouse['wFrameUp'] ==0:
+        setWFrameUp(event)
+    else:
+        pycmd.focusCmd()
 
 def setWFrameUp(event):
-    wframeMouse["leftMouse"] = 1
+    wframeMouse['wFrameUp'] = 1

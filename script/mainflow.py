@@ -6,6 +6,7 @@ import os
 import time
 import core.PyCmd as pycmd
 import core.pyio as pyio
+import script.flow.CreatorPlayer as creatorplayer
 
 def open_func():
     eprint.pobo(1/3,text.loadMessageAdv(text.advGameLoadText),)
@@ -24,6 +25,7 @@ def open_func():
     pass
 
 def main_func():
+    pycmd.focusCmd()
     pycmd.pcmd(text.loadCmdAdv(text.cmdStartGameText),1,newgame_func)
     eprint.p('\n')
     pycmd.pcmd(text.loadCmdAdv(text.cmdLoadGameText),2,loadgame_func)
@@ -33,9 +35,12 @@ def main_func():
 
 def newgame_func():
     pycmd.clr_cmd()
+    eprint.pnextscreen()
+    creatorplayer.creator_func()
     pass
 
 def loadgame_func():
+    pycmd.clr_cmd()
     pass
 
 def quitgame_func():

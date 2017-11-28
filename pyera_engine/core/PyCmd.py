@@ -30,3 +30,6 @@ def clr_cmd(*number, clr_default_flow=True):
         global  unused_cmd_num
         unused_cmd_num = 500
         flow.cmd_clear()
+
+def focusCmd():
+    winframe.inputbox.focus_force()

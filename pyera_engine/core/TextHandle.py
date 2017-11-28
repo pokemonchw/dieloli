@@ -2,6 +2,7 @@ import core.winframe as winframe
 import core.GameConfig as config
 import tkinter.font as tkFont
 
+#获取窗体宽度(字数)
 def getWinFrameWidth(textS,fontName,fontSizePt):
     indexText = len(textS)
     textLong = 0
@@ -13,12 +14,28 @@ def getWinFrameWidth(textS,fontName,fontSizePt):
     width = int(int(frameWidth) / int(fontSizePx))
     return width
 
+#获取字体宽度
 def getFontWidth(text,fontName,fontSize):
     fontDpi = config.font_dpi
     font = tkFont.Font(name=fontName, size=int(fontSize))
     textwidth = font.measure(text)
-    width = int(textwidth) * int(fontDpi)/72
+    width = int(textwidth) * int(fontDpi) / 72
     return width
+
+#获取窗体高度(字数)
+def getWinFrameHight(fontName,fontSizePt):
+    frameHight = winframe.root.winfo_height()
+    fontHight = getFontHight("A", fontName, fontSizePt)
+    hight = int(int(frameHight)/int(fontHight))
+    return hight
+
+#获取字体高度
+def getFontHight(text,fontName,fontSize):
+    fontDpi = config.font_dpi
+    font = tkFont.Font(name=fontName, size=int(fontSize))
+    texthight = font.metrics("linespace")
+    hight = int(texthight) * int(fontDpi) / 72
+    return hight
 
 #文本对齐
 def align(text, width, just='left'):

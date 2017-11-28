@@ -10,6 +10,8 @@ cmdQuitGameText = '3'
 
 advGameLoadText = 'adv1'
 advGameIntroduce = 'adv2'
+advInputPlayerName = 'adv3'
+advEnterPlayerName = 'adv4'
 
 menuRestart = '1'
 menuQuit = '2'

@@ -53,21 +53,27 @@ def plwait(string='', style='standard'):
 
 #逐字输出
 def pobo(sleepTime,string, style='standard'):
-    keylistion.onWFrameMouse()
+    keylistion.wframeMouse['wFrameUp'] = 0
     index = len(string)
     for i in range(0,index):
         p(string[i],style)
         time.sleep(sleepTime)
-        if keylistion.wframeMouse['leftMouse'] == 1:
+        if keylistion.wframeMouse['wFrameUp'] == 1:
             indexI = i + 1
-            keylistion.offWFrameMouse()
+            keylistion.wframeMouse['wFrameUp'] = 2
             for indexI in range(indexI,index):
                 p(string[indexI],style)
             break
+
 
 #输出标题
 def pti(string,style='title'):
     fontSize = config.title_fontsize
     fontName = config.font
     width = int(text.getWinFrameWidth(string,fontName,fontSize))
-    pyio.print(text.align(string,width,'center'), style)
+    p(text.align(string,width,'center'), style)
+
+#切换下一屏
+def pnextscreen(string = '',style='standard'):
+    winHight = text.getWinFrameHight(config.font,config.font_size)
+    p('\n' * winHight * 2)

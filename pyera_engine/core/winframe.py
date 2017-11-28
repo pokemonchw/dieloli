@@ -33,7 +33,7 @@ s_vertical.grid(column=1, row=0, sticky=(N, E, S))
 
 # 输入栏
 order = StringVar()
-inputbox = ttk.Entry(mainframe, textvariable=order, font = (config.font,config.font_size))
+inputbox = ttk.Entry(mainframe, textvariable=order,font = (config.font,config.font_size))
 inputbox.grid(column=0, row=1, sticky=(W, E, S))
 
 # 构建菜单栏
@@ -242,9 +242,9 @@ def _io_clear_cmd(*cmd_numbers):
     else:
         for num in cmd_tag_map.keys():
             index_first = textbox.tag_ranges(cmd_tag_map[num])[0]
-            index_last = textbox.tag_ranges(cmd_tag_map[num])[1]
+            index_lskip_one_waitast = textbox.tag_ranges(cmd_tag_map[num])[1]
             for tag_name in textbox.tag_names(index_first):
-                textbox.tag_remove(tag_name, index_first, index_last)
-            textbox.tag_add('standard', index_first, index_last)
+                textbox.tag_remove(tag_name, index_first, index_lskip_one_waitast)
+            textbox.tag_add('standard', index_first, index_lskip_one_waitast)
             textbox.tag_delete(cmd_tag_map[num])
         cmd_tag_map.clear()
