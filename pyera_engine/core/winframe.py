@@ -2,12 +2,11 @@
 
 from tkinter import *
 from tkinter import ttk
-import tkinter.font as tkFont
-import sys
-import threading
 import json
 import uuid
-import script.GameConfig as config
+import os
+import core.GameConfig as config
+import script.TextLoading as textload
 
 # 显示主框架
 root = Tk()
@@ -34,7 +33,7 @@ s_vertical.grid(column=1, row=0, sticky=(N, E, S))
 
 # 输入栏
 order = StringVar()
-inputbox = ttk.Entry(mainframe, textvariable=order, font = "微软雅黑 13")
+inputbox = ttk.Entry(mainframe, textvariable=order, font = (config.font,config.font_size))
 inputbox.grid(column=0, row=1, sticky=(W, E, S))
 
 # 构建菜单栏
@@ -44,38 +43,19 @@ root['menu'] = menubar
 menufile = Menu(menubar)
 menutest = Menu(menubar)
 menuother = Menu(menubar)
-menubar.add_cascade(menu=menufile, label=' 文件')
-menubar.add_cascade(menu=menutest, label=' 测试')
-menubar.add_cascade(menu=menuother, label=' 其他')
-
-def getWinFrameWidth(text,fontName,fontSizePt):
-    indexText = len(text)
-    textLong = 0
-    for i in range(0,indexText):
-        textLong = textLong + get_width(ord(text[i]))
-    print('index:' + str(textLong))
-    frameWidth = root.winfo_width()
-    textWidth = getFontWidth(text,fontName,fontSizePt)
-    fontSizePx = int(textWidth/textLong)
-    width = int(int(frameWidth) / int(fontSizePx))
-    return width
-
-def getFontWidth(text,fontName,fontSize):
-    fontDpi = config.font_dpi
-    font = tkFont.Font(name=fontName, size=int(fontSize))
-    textwidth = font.measure(text)
-    width = int(textwidth) * int(fontDpi)/72
-    return width
+menubar.add_cascade(menu=menufile, label=textload.loadMenuText(textload.menuFile))
+menubar.add_cascade(menu=menutest, label=textload.loadMenuText(textload.menuTest))
+menubar.add_cascade(menu=menuother, label=textload.loadMenuText(textload.menuOther))
 
 def reset(*args):
     order.set('_reset_this_game_')
     send_input()
 
 def quit(*args):
-    root.destroy()
+    os._exit(0)
 
-menufile.add_command(label='重新开始', command=reset)
-menufile.add_command(label='退出', command=quit)
+menufile.add_command(label=textload.loadMenuText(textload.menuRestart), command=reset)
+menufile.add_command(label=textload.loadMenuText(textload.menuQuit), command=quit)
 
 def on_textbox_edit():
     textbox.config(insertbackground='black')
@@ -85,11 +65,11 @@ def off_textbox_edit():
     textbox.config(insertbackground='white')
     textbox.bind("<Key>", lambda e: "break")
 
-menutest.add_command(label='启动显式编辑', command=on_textbox_edit)
-menutest.add_command(label='关闭显式编辑', command=off_textbox_edit)
+menutest.add_command(label=textload.loadMenuText(textload.menuOnTextBox), command=on_textbox_edit)
+menutest.add_command(label=textload.loadMenuText(textload.menuOffTextBox), command=off_textbox_edit)
 
-menuother.add_command(label='设置')
-menuother.add_command(label='关于')
+menuother.add_command(label=textload.loadMenuText(textload.menuSetting))
+menuother.add_command(label=textload.loadMenuText(textload.menuAbout))
 
 input_event_func = None
 send_order_state = False
@@ -101,7 +81,6 @@ def send_input(*args):
     input_event_func(order)
     _clearorder()
 
-
 def click(*args):
     global send_order_state
     if send_order_state==False:
@@ -109,11 +88,9 @@ def click(*args):
     send_order_state=False
     send_input()
 
-
 def click_skip(*args):
     order.set('skip_all_wait')
     send_input()
-
 
 off_textbox_edit()
 textbox.bind("<1>", click)
@@ -123,27 +100,6 @@ root.bind('<Return>', send_input)
 # #######################################################################
 # 运行函数
 _flowthread = None
-
-widths = [
-    (126,    1), (159,    0), (687,     1), (710,   0), (711,   1),
-    (727,    0), (733,    1), (879,     0), (1154,  1), (1161,  0),
-    (4347,   1), (4447,   2), (7467,    1), (7521,  0), (8369,  1),
-    (8426,   0), (9000,   1), (9002,    2), (11021, 1), (12350, 2),
-    (12351,  1), (12438,  2), (12442,   0), (19893, 2), (19967, 1),
-    (55203,  2), (63743,  1), (64106,   2), (65039, 1), (65059, 0),
-    (65131,  2), (65279,  1), (65376,   2), (65500, 1), (65510, 2),
-    (120831, 1), (262141, 2), (1114109, 1),
-]
-
-def get_width( o ):
-    """计算字符宽度"""
-    global widths
-    if o == 0xe or o == 0xf:
-        return 0
-    for num, wid in widths:
-        if o <= num:
-            return wid
-    return 1
 
 def read_queue():
     while not _queue.empty():
@@ -173,20 +129,16 @@ def read_queue():
                 _io_print_cmd(c['text'],c['num'],normal_style=tuple(c['normal_style']),on_style=tuple(c['on_style']))
     root.after(10, read_queue)
 
-
 def _run():
     root.after(10, read_queue)
     root.mainloop()
 
-
 def seeend():
     textbox.see(END)
-
 
 def set_background(color):
     textbox.config(insertbackground=color)
     textbox.configure(background=color, selectbackground="red")
-
 
 # ######################################################################
 # ######################################################################
@@ -195,36 +147,29 @@ def set_background(color):
 
 _queue = None
 
-
 def bind_return(func):
     global input_event_func
     input_event_func = func
 
-
 def bind_queue(q):
     global _queue
     _queue = q
-
 
 # #######################################################################
 # 输出格式化
 
 sysprint = print
 
-
 def _print(string, style=('standard',)):
     textbox.insert('end', string, style)
     seeend()
-
 
 def _clear_screen():
     _io_clear_cmd()
     textbox.delete('1.0', END)
 
-
 def _frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic):
     # include foreground, background, font, size, bold, underline, slant
-
     # font_str = font + ' ' + fontsize + ['', ' bold'][bold == True] + ['', ' underline'][underline == True] + \
     #            ['', ' italic'][italic == True]
     font_list = []
@@ -238,26 +183,21 @@ def _frame_style_def(style_name, foreground, background, font, fontsize, bold, u
         font_list.append('italic')
     textbox.tag_configure(style_name, foreground=foreground, background=background, font=tuple(font_list))
 
-
 # #########################################################3
 # 输入处理函数
 
 def _getorder():
     return order.get()
 
-
 def setorder(orderstr):
     order.set(orderstr)
-
 
 def _clearorder():
     order.set('')
 
-
 # ############################################################
 
 cmd_tag_map = {}
-
 
 # 命令生成函数
 def _io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutton'):
@@ -285,7 +225,6 @@ def _io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutt
     textbox.tag_bind(cmd_tagname, '<Enter>', enter_func)
     textbox.tag_bind(cmd_tagname, '<Leave>', leave_func)
     _print(cmd_str, style=(cmd_tagname, normal_style))
-
 
 # 清除命令函数
 def _io_clear_cmd(*cmd_numbers):

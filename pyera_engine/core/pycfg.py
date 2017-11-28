@@ -10,10 +10,6 @@ else:
     # unfrozen
     dir_ = os.path.dirname(os.path.realpath(__file__))
     gamepath = os.path.dirname(os.path.dirname(dir_))
-print(dir_)
-print(gamepath)
 sys.path.append(gamepath)
-print(gamepath)
-
 
 platform = None

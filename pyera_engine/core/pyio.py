@@ -1,12 +1,9 @@
 # -*- coding: UTF-8 -*-
 
 import core.pycfg
+import core.winframe
 
 sys_print = print
-
-if core.pycfg.platform == 'web':
-    str = 'from core.webframe import *'
-    exec(str)
 
 if core.pycfg.platform == 'win':
     from core.winframe import *
@@ -16,7 +13,7 @@ import queue
 import json
 
 import sys
-import script.GameConfig as config
+import core.GameConfig as config
 
 sys.setrecursionlimit(100000)
 
@@ -53,8 +50,6 @@ def run(open_func):
     global _flowthread
     _flowthread = threading.Thread(target=open_func, name='flowthread')
     _flowthread.start()
-    if core.pycfg.platform == 'web':
-        core.webframe._run()
     if core.pycfg.platform == 'win':
         core.winframe._run()
     _order_queue.put_nowait('_exit_game_')

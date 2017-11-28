@@ -31,7 +31,6 @@ def _loadjson(filepath):
             jsondata = []
     return jsondata
 
-
 def _loaddir(datapath):
     for dirpath, dirnames, filenames in os.walk(datapath):
         for name in filenames:
@@ -42,12 +41,10 @@ def _loaddir(datapath):
             if name.split('.')[1] == 'json':
                 _gamedata[prefix + name.split('.')[0]] = _loadjson(thefilepath)
 
-
 def init():
     global gamepath
     datapath = os.path.join(gamepath,'data')
     _loaddir(datapath)
-
 
 def _get_savefilename_path(filename):
     global gamepath
@@ -57,7 +54,6 @@ def _get_savefilename_path(filename):
     filepath = os.path.join(savepath,filename + '.save')
     return filepath
 
-
 def save(filename, data=None):
     if data == None:
         data = _gamedata
@@ -66,7 +62,6 @@ def save(filename, data=None):
         # json.dump(data, f, ensure_ascii=False)
     with open(filepath, 'wb') as f:
         pickle.dump(data,f)
-
 
 def load(filename, selfdata=False):
     filepath = _get_savefilename_path(filename)
@@ -82,5 +77,3 @@ def load(filename, selfdata=False):
         global _gamedata
         _gamedata.update(data)
     return data
-
-

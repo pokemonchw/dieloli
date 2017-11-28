@@ -1,11 +1,13 @@
 # -*- coding: UTF-8 -*-
 
 import core.game as game
+import core.PyCmd as pycmd
+import core.EraPrint as eprint
 
 
 def yes_or_no():
-    game.pcmd('[0] 是  ', 0, None)
-    game.pcmd('[1] 否  ', 1, None)
+    pycmd.pcmd('[0] 是  ', 0, None)
+    pycmd.pcmd('[1] 否  ', 1, None)
     while True:
         ans = game.askfor_int()
         if ans == 0:
@@ -17,17 +19,17 @@ def yes_or_no():
 def list_cmd(print_list, func_list, first_cmd_num=None, spilt_mark=' / ', default_position=None,
              default_style='standard'):
     if len(print_list) != len(func_list):
-        game.pwarn("list_choice调用,print_list和func_list不匹配")
+        eprint.pwarn("list_choice调用,print_list和func_list不匹配")
     for n in range(len(print_list)):
         if first_cmd_num == None:
-            cmd_num = game.get_unused_cmd_num()
+            cmd_num = pycmd.get_unused_cmd_num()
         else:
             cmd_num = first_cmd_num + n
         cmd_str = '[' + str(cmd_num) + '] ' + str(print_list[n]) + spilt_mark
         if default_position == n:
-            game.pcmd(cmd_str, cmd_num, func_list[n], normal_style=default_style)
+            pycmd.pcmd(cmd_str, cmd_num, func_list[n], normal_style=default_style)
         else:
-            game.pcmd(cmd_str, cmd_num, func_list[n])
+            pycmd.pcmd(cmd_str, cmd_num, func_list[n])
 
 
 def list_nums(num_list, set_func, current_value, first_cmd_num=None, split_mark=' / '):
@@ -90,17 +92,17 @@ class IterExceptNoneInList():
 import os
 
 def load_func(return_func, next_func):
-    game.clr_cmd()
-    game.pl('读取游戏：' + game.savedir)
-    game.pline()
+    pycmd.clr_cmd()
+    eprint.pl('读取游戏：' + game.savedir)
+    eprint.pline()
 
     def loadhere(load_file_name):
-        game.pl('load: ' + load_file_name)
+        eprint.pl('load: ' + load_file_name)
         game.load(load_file_name)
         next_func()
 
     def loadnodata(load_file_name):
-        game.pl(load_file_name + ": 没有数据")
+        eprint.pl(load_file_name + ": 没有数据")
 
 
     for i in range(0, 11):
@@ -110,24 +112,24 @@ def load_func(return_func, next_func):
         # 此处修改显示信息
         if os.path.exists(load_file_path):
             file_str = '[{:0>2}]'.format(i) + "  " + load_file_path
-            game.pcmd(file_str, i, loadhere, arg=(load_file_name,))
+            pycmd.pcmd(file_str, i, loadhere, arg=(load_file_name,))
         else:
             file_str = '[{:0>2}]'.format(i) + "  ----"
-            game.pcmd(file_str, i, loadnodata, arg=(load_file_name,))
-        game.pl()
-    game.pl()
-    game.pcmd('[99] 返回', 99, return_func)
+            pycmd.pcmd(file_str, i, loadnodata, arg=(load_file_name,))
+        eprint.pl()
+    eprint.pl()
+    pycmd.pcmd('[99] 返回', 99, return_func)
 
 
 
 def save_func(return_func):
-    game.clr_cmd()
-    game.pline()
-    game.pl('游戏存储目录：' + game.savedir)
-    game.pl()
+    pycmd.clr_cmd()
+    eprint.pline()
+    eprint.pl('游戏存储目录：' + game.savedir)
+    eprint.pl()
 
     def savehere(save_file_name):
-        game.pl('save: ' + save_file_path)
+        eprint.pl('save: ' + save_file_path)
         game.save(save_file_name)
         save_func(return_func)
 
@@ -140,9 +142,9 @@ def save_func(return_func):
             file_str = '[{:0>2}]'.format(i) + "  " + save_file_path
         else:
             file_str = '[{:0>2}]'.format(i) + "  ----"
-        game.pcmd(file_str, i, savehere, arg=(save_file_name,))
-        game.pl()
-    game.pl()
-    game.pcmd('[99] 返回', 99, return_func)
+        pycmd.pcmd(file_str, i, savehere, arg=(save_file_name,))
+        eprint.pl()
+    eprint.pl()
+    pycmd.pcmd('[99] 返回', 99, return_func)
 
 
