@@ -4,6 +4,7 @@ import core.TextHandle as text
 import core.flow as flow
 import core.pyio as pyio
 import core.KeyListionEvent as keylistion
+import core.CacheContorl as cache
 
 last_char = '\n'
 
@@ -53,14 +54,14 @@ def plwait(string='', style='standard'):
 
 #逐字输出
 def pobo(sleepTime,string, style='standard'):
-    keylistion.wframeMouse['wFrameUp'] = 0
+    cache.wframeMouse['wFrameUp'] = 0
     index = len(string)
     for i in range(0,index):
         p(string[i],style)
         time.sleep(sleepTime)
-        if keylistion.wframeMouse['wFrameUp'] == 1:
+        if cache.wframeMouse['wFrameUp'] == 1:
             indexI = i + 1
-            keylistion.wframeMouse['wFrameUp'] = 2
+            cache.wframeMouse['wFrameUp'] = 2
             for indexI in range(indexI,index):
                 p(string[indexI],style)
             break

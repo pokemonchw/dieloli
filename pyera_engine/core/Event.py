@@ -114,8 +114,6 @@ import importlib
 
 def load_event_file(script_path='script'):
     datapath = core.data.gamepath + script_path
-    baseDir = os.path.dirname(__file__)
-
     for dirpath, dirnames, filenames in os.walk(datapath):
         for name in filenames:
             prefix = dirpath.replace(core.data.gamepath + '\\', '').replace('\\', '.') + '.'

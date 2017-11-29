@@ -7,6 +7,7 @@ import uuid
 import os
 import core.GameConfig as config
 import script.TextLoading as textload
+import core.CacheContorl as cache
 
 # 显示主框架
 root = Tk()
@@ -44,29 +45,18 @@ menufile = Menu(menubar)
 menutest = Menu(menubar)
 menuother = Menu(menubar)
 menubar.add_cascade(menu=menufile, label=textload.loadMenuText(textload.menuFile))
-menubar.add_cascade(menu=menutest, label=textload.loadMenuText(textload.menuTest))
 menubar.add_cascade(menu=menuother, label=textload.loadMenuText(textload.menuOther))
 
 def reset(*args):
-    order.set('_reset_this_game_')
+    cache.flowContorl['restartGame'] = 1
     send_input()
 
 def quit(*args):
-    os._exit(0)
+    cache.flowContorl['quitGame'] = 1
+    send_input()
 
 menufile.add_command(label=textload.loadMenuText(textload.menuRestart), command=reset)
 menufile.add_command(label=textload.loadMenuText(textload.menuQuit), command=quit)
-
-def on_textbox_edit():
-    textbox.config(insertbackground='black')
-    textbox.unbind("<Key>")
-
-def off_textbox_edit():
-    textbox.config(insertbackground='white')
-    textbox.bind("<Key>", lambda e: "break")
-
-menutest.add_command(label=textload.loadMenuText(textload.menuOnTextBox), command=on_textbox_edit)
-menutest.add_command(label=textload.loadMenuText(textload.menuOffTextBox), command=off_textbox_edit)
 
 menuother.add_command(label=textload.loadMenuText(textload.menuSetting))
 menuother.add_command(label=textload.loadMenuText(textload.menuAbout))
@@ -80,22 +70,6 @@ def send_input(*args):
     order = _getorder()
     input_event_func(order)
     _clearorder()
-
-def click(*args):
-    global send_order_state
-    if send_order_state==False:
-        order.set('skip_one_wait')
-    send_order_state=False
-    send_input()
-
-def click_skip(*args):
-    order.set('skip_all_wait')
-    send_input()
-
-off_textbox_edit()
-textbox.bind("<1>", click)
-textbox.bind("<3>", click_skip)
-root.bind('<Return>', send_input)
 
 # #######################################################################
 # 运行函数
@@ -216,10 +190,12 @@ def _io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutt
     def enter_func(*args):
         textbox.tag_remove(normal_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
         textbox.tag_add(on_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
+        cache.wframeMouse['mouseLeaveCmd'] = 0
 
     def leave_func(*args):
         textbox.tag_add(normal_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
         textbox.tag_remove(on_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
+        cache.wframeMouse['mouseLeaveCmd'] = 1
 
     textbox.tag_bind(cmd_tagname, '<1>', send_cmd)
     textbox.tag_bind(cmd_tagname, '<Enter>', enter_func)

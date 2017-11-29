@@ -15,13 +15,10 @@ advEnterPlayerName = 'adv4'
 
 menuRestart = '1'
 menuQuit = '2'
-menuOnTextBox = '3'
-menuOffTextBox = '4'
-menuSetting = '5'
-menuAbout = '6'
-menuFile = '7'
-menuTest = '8'
-menuOther = '9'
+menuSetting = '3'
+menuAbout = '4'
+menuFile = '5'
+menuOther = '6'
 
 language = config.language
 

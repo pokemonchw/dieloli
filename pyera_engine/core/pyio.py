@@ -1,17 +1,11 @@
 # -*- coding: UTF-8 -*-
 
 import core.pycfg
-import core.winframe
-
+import core.winframe as winframe
 sys_print = print
-
-if core.pycfg.platform == 'win':
-    from core.winframe import *
-
 import threading
 import queue
 import json
-
 import sys
 import core.GameConfig as config
 
@@ -31,8 +25,8 @@ def getorder():
     return _order_queue.get()
 
 
-bind_return(_input_evnet_set)
-bind_queue(_send_queue)
+winframe.bind_return(_input_evnet_set)
+winframe.bind_queue(_send_queue)
 
 
 def _get_input_event():

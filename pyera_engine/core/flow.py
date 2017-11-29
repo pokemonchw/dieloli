@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
-import core.pyio as io
+import core.pyio as pyio
 import time
+import core.CacheContorl as cache
+import os
 
 def null_func():
     return
@@ -27,9 +29,7 @@ def clear_default_flow():
     global default_flow, null_func
     set_default_flow(null_func)
 
-# 管理命令
-cmd_map = {}
-
+cmd_map = cache.cmd_map
 
 def default_tail_deal_cmd_func(order):
     return
@@ -64,7 +64,7 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
 def print_cmd(cmd_str, cmd_number, cmd_func=null_func, arg=(), kw={}, normal_style='standard', on_style='onbutton'):
     '''arg is tuple contain args which cmd_func could be used'''
     bind_cmd(cmd_number, cmd_func, arg, kw)
-    io.io_print_cmd(cmd_str, cmd_number, normal_style, on_style)
+    pyio.io_print_cmd(cmd_str, cmd_number, normal_style, on_style)
     return cmd_str
 
 
@@ -73,10 +73,10 @@ def cmd_clear(*number):
     if number:
         for num in number:
             cmd_map.pop(num)
-            io.io_clear_cmd(num)
+            pyio.io_clear_cmd(num)
     else:
         cmd_map.clear()
-        io.io_clear_cmd()
+        pyio.io_clear_cmd()
 
 
 def _cmd_deal(order_number):
@@ -98,17 +98,17 @@ def order_deal(flag='order', print_order=True):
     __skip_flag__ = False
     while True:
         time.sleep(0.01)
-        while not io._order_queue.empty():
-            order = io.getorder()
-            if order == '_exit_game_':
-                global exit_flag
-                exit_flag=True
+        while not pyio._order_queue.empty():
+            order = pyio.getorder()
+            if cache.flowContorl['quitGame']:
+                os._exit(0)
                 return
-            if order == '_reset_this_game_':
+            if cache.flowContorl['restartGame'] == 1:
+                cache.flowContorl['restartGame'] = 0
                 reset_func()
                 return
-            if print_order == True and order != '' and order != 'skip_all_wait' and order != 'skip_one_wait':
-                io.print('\n' + order + '\n')
+            if print_order == True and order != '':
+                pyio.print('\n' + order + '\n')
 
             if flag == 'str':
                 return order
@@ -144,14 +144,12 @@ def askfor_int(print_order=False):
         else:
             if order == '':
                 continue
-            io.print('\n' + "不是有效数字" + '\n')
+            pyio.print('\n' + "不是有效数字" + '\n')
 
 
 def askfor_wait():
     global __skip_flag__
     while __skip_flag__ == False:
         re = askfor_str(donot_return_null_str=False)
-        if re == 'skip_one_wait'or re == '':
+        if re == '':
             break
-        if re == 'skip_all_wait':
-            __skip_flag__ = True
