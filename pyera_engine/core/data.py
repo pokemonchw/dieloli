@@ -58,8 +58,6 @@ def save(filename, data=None):
     if data == None:
         data = _gamedata
     filepath = _get_savefilename_path(filename)
-    # with open(filepath, 'w', encoding='utf-8') as f:
-        # json.dump(data, f, ensure_ascii=False)
     with open(filepath, 'wb') as f:
         pickle.dump(data,f)
 
@@ -67,8 +65,6 @@ def load(filename, selfdata=False):
     filepath = _get_savefilename_path(filename)
     data = {}
     try:
-        # with open(filepath, 'r', encoding='utf-8') as f:
-            # data = json.load(f)
         with open(filepath, 'rb') as f:
             data=pickle.load(f)
     except FileNotFoundError:

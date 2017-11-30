@@ -3,8 +3,8 @@ import core.GameConfig as config
 import core.TextHandle as text
 import core.flow as flow
 import core.pyio as pyio
-import core.KeyListionEvent as keylistion
 import core.CacheContorl as cache
+import core.Dictionaries as doctionaries
 
 last_char = '\n'
 
@@ -14,6 +14,7 @@ def_style = pyio.style_def
 #基本输出
 def p(string, style='standard'):
     string=str(string)
+    string = doctionaries.handleText(string)
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
@@ -65,7 +66,6 @@ def pobo(sleepTime,string, style='standard'):
             for indexI in range(indexI,index):
                 p(string[indexI],style)
             break
-
 
 #输出标题
 def pti(string,style='title'):

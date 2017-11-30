@@ -39,15 +39,11 @@ _background = '#2C4A69'
 _font = '微软雅黑'
 _fontsize = '14'
 
-
 def run(open_func):
     global _flowthread
     _flowthread = threading.Thread(target=open_func, name='flowthread')
     _flowthread.start()
-    if core.pycfg.platform == 'win':
-        core.winframe._run()
-    _order_queue.put_nowait('_exit_game_')
-
+    core.winframe._run()
 
 def putQ(message):
     _send_queue.put_nowait(message)
@@ -63,7 +59,6 @@ def new_json():
     flowjson['content'] = []
     return flowjson
 
-
 def text_json(string, style):
     re = {}
     re['type'] = 'text'
@@ -74,7 +69,6 @@ def text_json(string, style):
     if type(style) == type(''):
         re['style'] = (style,)
     return re
-
 
 def cmd_json(cmd_str, cmd_num, normal_style, on_style):
     re = {}
@@ -93,7 +87,6 @@ def cmd_json(cmd_str, cmd_num, normal_style, on_style):
         re['on_style'] = (on_style,)
     return re
 
-
 def style_json(style_name, foreground, background, font, fontsize, bold, underline, italic):
     re = {}
     re['style_name'] = style_name
@@ -105,7 +98,6 @@ def style_json(style_name, foreground, background, font, fontsize, bold, underli
     re['underline'] = underline
     re['italic'] = italic
     return re
-
 
 # #######################################################################
 # 输出格式化
@@ -120,7 +112,6 @@ def clear_screen():
     jsonstr = new_json()
     jsonstr['clear_cmd'] = 'true'
     putQ(json.dumps(jsonstr, ensure_ascii=False))
-
 
 def frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic):
     jsonstr = new_json()

@@ -24,7 +24,7 @@ def init(main_flow):
     # 事件载入
     event.load_event_file()
     # 载入按键监听
-    keylistion.onWFrameMouse()
+    keylistion.onWFrameListion()
     # 设置背景颜色
     core.data._get_savefilename_path('')
     pyio.set_background(core.data.gamedata()['core_cfg']['background_color'])

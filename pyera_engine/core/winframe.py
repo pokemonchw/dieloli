@@ -68,6 +68,13 @@ send_order_state = False
 def send_input(*args):
     global input_event_func
     order = _getorder()
+    if len(cache.inputCache) >= 20:
+        del cache.inputCache[0]
+        cache.inputCache.append(order)
+        cache.inputPosition['position'] = 0
+    else:
+        cache.inputCache.append(order)
+        cache.inputPosition['position'] = 0
     input_event_func(order)
     _clearorder()
 
