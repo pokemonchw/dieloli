@@ -11,7 +11,7 @@ def getWinFrameWidth(textS,fontName,fontSizePt):
     frameWidth = winframe.root.winfo_width()
     textWidth = getFontWidth(textS,fontName,fontSizePt)
     fontSizePx = int(textWidth/textLong)
-    width = int(int(frameWidth) / int(fontSizePx))
+    width = int(frameWidth) / int(fontSizePx)
     return width
 
 #获取字体宽度
@@ -46,9 +46,9 @@ def align(text, width, just='left'):
     elif just == "left":
         return text + " " * (width - count)
     elif just == "center":
-        widthI = int(int(width)/2)
-        countI = int(int(count)/2)
-        return " " * (widthI - countI + 2) + text
+        widthI = width/2
+        countI = count/2
+        return " " * int(widthI - countI + 2) + text
 
 def get_width( o ):
     """计算字符宽度"""

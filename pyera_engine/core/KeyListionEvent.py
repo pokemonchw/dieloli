@@ -47,6 +47,7 @@ def keyDown(event):
 
 def setWFrameUp(event):
     cache.wframeMouse['wFrameUp'] = 1
+    cache.wframeMouse['wFrameLinesUp'] = 1
 
 def mouseCheckPush(event):
     pycmd.focusCmd()

@@ -4,15 +4,6 @@ import core.GameConfig as config
 import core.data as data
 from core.pycfg import gamepath
 
-cmdStartGameText = '1'
-cmdLoadGameText = '2'
-cmdQuitGameText = '3'
-
-advGameLoadText = 'adv1'
-advGameIntroduce = 'adv2'
-advInputPlayerName = 'adv3'
-advEnterPlayerName = 'adv4'
-
 menuRestart = '1'
 menuQuit = '2'
 menuSetting = '3'

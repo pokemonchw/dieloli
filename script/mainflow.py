@@ -9,7 +9,7 @@ import core.pyio as pyio
 import script.flow.CreatorPlayer as creatorplayer
 
 def open_func():
-    eprint.pobo(1/3,text.loadMessageAdv(text.advGameLoadText),)
+    eprint.pobo(1/3,text.loadMessageAdv('1'))
     time.sleep(1)
     pyio.clear_screen()
     eprint.pti(config.game_name)
@@ -17,7 +17,7 @@ def open_func():
     eprint.p('\n')
     eprint.p('\n')
     time.sleep(1)
-    eprint.pobo(1/15,text.loadMessageAdv(text.advGameIntroduce))
+    eprint.lcp(1/8,text.loadMessageAdv('2'))
     time.sleep(1)
     eprint.pline()
     time.sleep(1)
@@ -26,17 +26,17 @@ def open_func():
 
 def main_func():
     pycmd.focusCmd()
-    pycmd.pcmd(text.loadCmdAdv(text.cmdStartGameText),1,newgame_func)
+    pycmd.pcmd(text.loadCmdAdv('1'),1,newgame_func)
     eprint.p('\n')
-    pycmd.pcmd(text.loadCmdAdv(text.cmdLoadGameText),2,loadgame_func)
+    pycmd.pcmd(text.loadCmdAdv('2'),2,loadgame_func)
     eprint.p('\n')
-    pycmd.pcmd(text.loadCmdAdv(text.cmdQuitGameText),3,quitgame_func)
+    pycmd.pcmd(text.loadCmdAdv('3'),3,quitgame_func)
     pass
 
 def newgame_func():
     pycmd.clr_cmd()
     eprint.pnextscreen()
-    creatorplayer.creator_func()
+    creatorplayer.inputName_func()
     pass
 
 def loadgame_func():

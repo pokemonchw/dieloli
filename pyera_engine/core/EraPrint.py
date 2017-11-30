@@ -35,7 +35,7 @@ def pline(sample='＝', style='standard'):
     fontName = config.font
     fontSize = config.font_size
     width = text.getWinFrameWidth(sample,fontName,fontSize)
-    pl(sample * width, style)
+    pl(sample * int(width), style)
 
 #输出警告
 def pwarn(string, style='warning'):
@@ -65,6 +65,8 @@ def pobo(sleepTime,string, style='standard'):
             cache.wframeMouse['wFrameUp'] = 2
             for indexI in range(indexI,index):
                 p(string[indexI],style)
+            if cache.wframeMouse['wFrameLineState'] == 2:
+                cache.wframeMouse['wFrameLinesUp'] = 2
             break
 
 #输出标题
@@ -78,3 +80,27 @@ def pti(string,style='title'):
 def pnextscreen(string = '',style='standard'):
     winHight = text.getWinFrameHight(config.font,config.font_size)
     p('\n' * winHight * 2)
+
+#多行居中逐字输出
+def lcp(sleepTime,string='',style='standard'):
+    cache.wframeMouse['wFrameLineState'] = 1
+    string = str(string)
+    stringlist = string.split('\n')
+    fontSize = config.font_size
+    fontName = config.font
+    width = int(text.getWinFrameWidth(string, fontName, fontSize))
+    for i in range(0,len(stringlist)):
+        indexI = len(stringlist[i])
+        widthI = int(width) / 2
+        countI = int(indexI) / 2
+        p(' '* int((widthI - countI + 2)))
+        pobo(sleepTime,stringlist[i])
+        p('\n')
+        if cache.wframeMouse['wFrameLinesUp'] == 1:
+            indexIUp = i + 1
+            cache.wframeMouse['wFrameLinesUp'] = 2
+            for indexIUp in range(indexIUp,len(stringlist)):
+                p(text.align(stringlist[indexIUp],width,'center'),style)
+                p('\n')
+            cache.wframeMouse['wFrameLineState'] = 2
+            break

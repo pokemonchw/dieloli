@@ -4,18 +4,6 @@ import core.game as game
 import core.PyCmd as pycmd
 import core.EraPrint as eprint
 
-
-def yes_or_no():
-    pycmd.pcmd('[0] 是  ', 0, None)
-    pycmd.pcmd('[1] 否  ', 1, None)
-    while True:
-        ans = game.askfor_int()
-        if ans == 0:
-            return True
-        if ans == 1:
-            return False
-
-
 def list_cmd(print_list, func_list, first_cmd_num=None, spilt_mark=' / ', default_position=None,
              default_style='standard'):
     if len(print_list) != len(func_list):
