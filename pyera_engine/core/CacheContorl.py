@@ -7,7 +7,7 @@ cmd_map = {}
 
 playObject = {'objectId':'','object':{}}
 
-temporaryObjectBak = {'Name':'','Age':'',}
+temporaryObjectBak = {'Name':'','NickName':'','Sex':'','Age':''}
 
 temporaryObject = {}
 

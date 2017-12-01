@@ -19,6 +19,8 @@ cmdPath = os.path.join(gamepath,'data',language,'CmdText.json')
 cmdData = data._loadjson(cmdPath)
 menuPath = os.path.join(gamepath,'data',language,'MenuText.json')
 menuData = data._loadjson(menuPath)
+rolePath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
+roleData = data._loadjson(rolePath)
 
 def loadMessageAdv(advid):
     message = messageData[advid]
@@ -31,3 +33,7 @@ def loadCmdAdv(cmdid):
 def loadMenuText(menuid):
     menuText = menuData[menuid]
     return menuText
+
+def loadRoleAtrText(atrid):
+    atrText = roleData[atrid]
+    return atrText

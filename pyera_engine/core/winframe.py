@@ -193,6 +193,7 @@ def _io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutt
         global send_order_state
         send_order_state=True
         order.set(cmd_number)
+        send_input(order)
 
     def enter_func(*args):
         textbox.tag_remove(normal_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])

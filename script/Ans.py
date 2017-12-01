@@ -4,7 +4,7 @@ import script.TextLoading as text
 import core.EraPrint as eprint
 
 yesorno = ['4','5','12']
-sex = ['6','7','8','9','10']
+sex = ['6','7','8','9','10','11','13','12']
 
 def option(inputI):
     for i in range(0,len(inputI)):
