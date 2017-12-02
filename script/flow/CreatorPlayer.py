@@ -7,17 +7,11 @@ import core.PyCmd as pycmd
 import core.winframe as winframe
 import random
 
+playerId = '0'
+
 def inputName_func():
-    playerId = '0'
     cache.playObject['objectId'] = playerId
-    eprint.pl(textload.loadMessageAdv('3'))
-    playerName = game.askfor_str()
-    cache.temporaryObject = cache.temporaryObjectBak
-    cache.temporaryObject['Name'] = playerName
     cache.playObject['object'][playerId] = cache.temporaryObject
-    eprint.p(playerName)
-    eprint.p('\n')
-    eprint.p('\n')
     eprint.pl(textload.loadMessageAdv('4'))
     yrn = ans.option(ans.yesorno)
     if yrn == 4:
@@ -25,81 +19,102 @@ def inputName_func():
         eprint.p('\n')
         inputNickName_func()
         return
-    elif yrn ==5:
+    elif yrn == 5:
+        pycmd.clr_cmd()
+        eprint.p('\n')
+        eprint.pl(textload.loadMessageAdv('3'))
+        playerName = game.askfor_str()
+        cache.temporaryObject['Name'] = playerName
+        eprint.p('\n')
+        pycmd.clr_cmd()
+        inputName_func()
+    elif yrn == 12:
+        cache.flowContorl['restartGame'] = 1
+        winframe.send_input()
+    else:
         pycmd.clr_cmd()
         eprint.p('\n')
         inputName_func()
-    else:
-        cache.flowContorl['restartGame'] = 1
-        winframe.send_input()
     pass
 
 def inputNickName_func():
-    playerId = '0'
-    eprint.pl(textload.loadMessageAdv('5'))
-    playerNickName = game.askfor_str()
-    cache.temporaryObject['NickName'] = playerNickName
     cache.playObject['object'][playerId] = cache.temporaryObject
-    eprint.p(playerNickName)
-    eprint.p('\n')
-    eprint.p('\n')
     eprint.pl(textload.loadMessageAdv('6'))
     yrn = ans.option(ans.yesorno)
     if yrn == 4:
         pycmd.clr_cmd()
         eprint.p('\n')
-        inputSex_func()
-        return
-    elif yrn ==5:
+        inputSexConfirm_func()
+    elif yrn == 5:
         pycmd.clr_cmd()
         eprint.p('\n')
+        eprint.pl(textload.loadMessageAdv('5'))
+        playerNickName = game.askfor_str()
+        cache.temporaryObject['NickName'] = playerNickName
+        eprint.p('\n')
+        pycmd.clr_cmd()
         inputNickName_func()
-    else:
-        pycmd.clr_cmd()
-        eprint.p('\n')
-        inputName_func()
-    pass
-
-def inputSex_func():
-    playerId = '0'
-    eprint.pl(textload.loadMessageAdv('7'))
-    yrn = ans.option(ans.sex)
-    sex = textload.loadRoleAtrText('Sex')
-    sexList = ['6','7','8','9','10','11']
-    for i in  range(0,len(sex)):
-        if str(yrn) == sexList[i]:
-            sexAtr = sex[i]
-            cache.temporaryObject['Sex'] = sexAtr
-            cache.playObject['object'][playerId] = cache.temporaryObject
-            eprint.p(sexAtr)
-            eprint.p('\n')
-            eprint.p('\n')
-            eprint.pl(textload.loadMessageAdv('8')[sex[i]])
-    if yrn == 13:
-        rand = random.randint(0,len(sex)-1)
-        sexAtr = sex[rand]
-        cache.temporaryObject['Sex'] = sexAtr
-        cache.playObject['object'][playerId] = cache.temporaryObject
-        eprint.p(sexAtr)
-        eprint.p('\n')
-        eprint.p('\n')
-        eprint.pl(textload.loadMessageAdv('8')[sexAtr])
     elif yrn == 12:
         pycmd.clr_cmd()
         eprint.p('\n')
+        inputName_func()
+    else:
+        pycmd.clr_cmd()
+        eprint.p('\n')
         inputNickName_func()
+    pass
+
+def inputSexConfirm_func():
     pycmd.clr_cmd()
+    sexId = cache.playObject['object'][playerId]['Sex']
+    eprint.pl(textload.loadMessageAdv('8')[sexId])
     yrn = ans.option(ans.yesorno)
     if yrn == 4:
         pycmd.clr_cmd()
         eprint.p('\n')
         return
-    elif yrn ==5:
+    elif yrn == 5:
         pycmd.clr_cmd()
         eprint.p('\n')
-        inputSex_func()
-    else:
+        inputSexChoice_func()
+    elif yrn == 12:
         pycmd.clr_cmd()
         eprint.p('\n')
         inputNickName_func()
+    else:
+        pycmd.clr_cmd()
+        eprint.p('\n')
+        inputSexConfirm_func()
+    pass
+
+def inputSexChoice_func():
+    pycmd.clr_cmd()
+    eprint.pl(textload.loadMessageAdv('7'))
+    yrn = ans.option(ans.sex)
+    sex = textload.loadRoleAtrText('Sex')
+    sexList = ['6', '7', '8', '9', '10', '11']
+    for i in range(0, len(sex)):
+        if str(yrn) == sexList[i]:
+            sexAtr = sex[i]
+            cache.temporaryObject['Sex'] = sexAtr
+            cache.playObject['object'][playerId] = cache.temporaryObject
+            pycmd.clr_cmd()
+            eprint.p('\n')
+            inputSexConfirm_func()
+    if yrn == 13:
+        rand = random.randint(0, len(sex) - 1)
+        sexAtr = sex[rand]
+        cache.temporaryObject['Sex'] = sexAtr
+        cache.playObject['object'][playerId] = cache.temporaryObject
+        pycmd.clr_cmd()
+        eprint.p('\n')
+        inputSexConfirm_func()
+    elif yrn == 12:
+        pycmd.clr_cmd()
+        eprint.p('\n')
+        inputSexConfirm_func()
+    else:
+        pycmd.clr_cmd()
+        eprint.p('\n')
+        inputSexChoice_func()
     pass

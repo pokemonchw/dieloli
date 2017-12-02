@@ -1,3 +1,4 @@
+import script.TextLoading as textload
 
 flowContorl = {'restartGame':0,'quitGame':0}
 
@@ -7,7 +8,12 @@ cmd_map = {}
 
 playObject = {'objectId':'','object':{}}
 
-temporaryObjectBak = {'Name':'','NickName':'','Sex':'','Age':''}
+temObjectDefault = textload.loadRoleAtrText('Default')
+
+temporaryObjectBak = {'Name':temObjectDefault['Name'],
+                      'NickName':temObjectDefault['NickName'],
+                      'Sex':temObjectDefault['Sex'],
+                      'Age':temObjectDefault['Age']}
 
 temporaryObject = {}
 

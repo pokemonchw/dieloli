@@ -7,6 +7,7 @@ import time
 import core.PyCmd as pycmd
 import core.pyio as pyio
 import script.flow.CreatorPlayer as creatorplayer
+import core.CacheContorl as cache
 
 def open_func():
     eprint.pobo(1/3,text.loadMessageAdv('1'))
@@ -36,6 +37,7 @@ def main_func():
 def newgame_func():
     pycmd.clr_cmd()
     eprint.pnextscreen()
+    cache.temporaryObject = cache.temporaryObjectBak
     creatorplayer.inputName_func()
     pass
 

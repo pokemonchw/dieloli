@@ -140,6 +140,7 @@ def askfor_int(print_order=False):
     while True:
         order = order_deal('str', print_order)
         if order.isdigit():
+            pyio.print(order + '\n')
             return int(order)
         else:
             if order == '':
