@@ -1,12 +1,18 @@
 ﻿{
     "game_name": "死亡萝莉",
-    "background_color": "#2C4A69",
+    "verson":"Past 0.1",
+    "author":"任悠云",
+    "background_color": "#000000",
     "font_color": "#C8C8C8",
     "onbutton_color": "#A40018",
     "font": "新宋体",
     "font_comment":"新宋体 Inziu Roboto SC 也是一个选择，兼容性也不错",
-    "font_size": "16",
-    "title_fontsize": "40",
-    "font_dpi": "96",
-    "language": "chinese"
+    "font_size": "14",
+    "language": "chinese",
+    "window_width":"1000",
+    "window_hight":"720",
+    "textbox_width":"150",
+    "textbox_hight":"60",
+    "text_width":"108",
+    "text_hight":"31"
 }

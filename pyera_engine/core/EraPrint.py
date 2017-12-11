@@ -31,11 +31,8 @@ def pl(string='', style='standard'):
         p('\n')
 
 #输出分割线
-def pline(sample='＝', style='standard'):
-    fontName = config.font
-    fontSize = config.font_size
-    width = text.getWinFrameWidth(sample,fontName,fontSize)
-    pl(sample * int(width), style)
+def pline(sample='=', style='standard'):
+    p("-" * 108)
 
 #输出警告
 def pwarn(string, style='warning'):
@@ -69,38 +66,31 @@ def pobo(sleepTime,string, style='standard'):
                 cache.wframeMouse['wFrameLinesUp'] = 2
             break
 
-#输出标题
-def pti(string,style='title'):
-    fontSize = config.title_fontsize
-    fontName = config.font
-    width = int(text.getWinFrameWidth(string,fontName,fontSize))
-    p(text.align(string,width,'center'), style)
-
 #切换下一屏
 def pnextscreen(string = '',style='standard'):
-    winHight = text.getWinFrameHight(config.font,config.font_size)
-    p('\n' * winHight * 2)
+    p('\n' * config.text_hight)
 
 #多行居中逐字输出
 def lcp(sleepTime,string='',style='standard'):
     cache.wframeMouse['wFrameLineState'] = 1
     string = str(string)
     stringlist = string.split('\n')
-    fontSize = config.font_size
-    fontName = config.font
-    width = int(text.getWinFrameWidth(string, fontName, fontSize))
+    width = config.text_width
     for i in range(0,len(stringlist)):
         indexI = len(stringlist[i])
         widthI = int(width) / 2
-        countI = int(indexI) / 2
-        p(' '* int((widthI - countI + 2)))
+        countIndex = 0
+        for inn in range(0, indexI):
+            countIndex = countIndex + text.get_width(ord(stringlist[i][inn]))
+        countI = int(countIndex) / 2
+        p(' '* int((widthI - countI)))
         pobo(sleepTime,stringlist[i])
         p('\n')
         if cache.wframeMouse['wFrameLinesUp'] == 1:
             indexIUp = i + 1
             cache.wframeMouse['wFrameLinesUp'] = 2
             for indexIUp in range(indexIUp,len(stringlist)):
-                p(text.align(stringlist[indexIUp],width,'center'),style)
+                p(text.align(stringlist[indexIUp],'center'),style)
                 p('\n')
             cache.wframeMouse['wFrameLineState'] = 2
             break

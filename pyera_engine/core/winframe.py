@@ -4,7 +4,6 @@ from tkinter import *
 from tkinter import ttk
 import json
 import uuid
-import os
 import core.GameConfig as config
 import script.TextLoading as textload
 import core.CacheContorl as cache
@@ -12,7 +11,7 @@ import core.CacheContorl as cache
 # 显示主框架
 root = Tk()
 root.title("dieloli")
-root.geometry('1000x720+0+0')
+root.geometry(config.window_width + 'x' + config.window_hight + '+0+0')
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
@@ -24,7 +23,7 @@ mainframe.rowconfigure(0, weight=1)
 # 缩放角标
 ttk.Sizegrip(root).grid(column=0, row=0, sticky=(S, E))
 # 显示窗口
-textbox = Text(mainframe, width='150', height='60')
+textbox = Text(mainframe, width=config.textbox_width, height=config.textbox_hight)
 textbox.grid(column=0, row=0, sticky=(N, W, E, S))
 
 # 垂直滚动条

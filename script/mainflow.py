@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import core.EraPrint as eprint
-import script.TextLoading as text
+import script.TextLoading as textload
+import core.TextHandle as text
 import core.GameConfig as config
 import os
 import time
@@ -10,16 +11,18 @@ import script.flow.CreatorPlayer as creatorplayer
 import core.CacheContorl as cache
 
 def open_func():
-    eprint.pobo(1/3,text.loadMessageAdv('1'))
+    eprint.pobo(1/3,textload.loadMessageAdv('1'))
     time.sleep(1)
     pyio.clear_screen()
-    eprint.pti(config.game_name)
+    eprint.pline()
+    eprint.pl(text.align(config.game_name,'center'))
+    eprint.pl(text.align(config.author,'right'))
+    eprint.pl(text.align(config.verson,'right'))
+    eprint.pline()
     eprint.p('\n')
-    eprint.p('\n')
-    eprint.p('\n')
+    eprint.lcp(1/8,textload.loadMessageAdv('2'))
     time.sleep(1)
-    eprint.lcp(1/8,text.loadMessageAdv('2'))
-    time.sleep(1)
+    eprint.p('\n' * 4)
     eprint.pline()
     time.sleep(1)
     main_func()
@@ -27,11 +30,12 @@ def open_func():
 
 def main_func():
     pycmd.focusCmd()
-    pycmd.pcmd(text.loadCmdAdv('1'),1,newgame_func)
     eprint.p('\n')
-    pycmd.pcmd(text.loadCmdAdv('2'),2,loadgame_func)
+    pycmd.pcmd(textload.loadCmdAdv('1'),1,newgame_func)
     eprint.p('\n')
-    pycmd.pcmd(text.loadCmdAdv('3'),3,quitgame_func)
+    pycmd.pcmd(textload.loadCmdAdv('2'),2,loadgame_func)
+    eprint.p('\n')
+    pycmd.pcmd(textload.loadCmdAdv('3'),3,quitgame_func)
     pass
 
 def newgame_func():
