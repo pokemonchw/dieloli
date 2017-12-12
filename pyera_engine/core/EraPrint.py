@@ -20,6 +20,14 @@ def p(string, style='standard'):
         last_char = string[-1:]
     pyio.print(string, style)
 
+# 小标题输出
+def plt(string,style='standard'):
+    string=str(string)
+    width = config.text_width
+    textWidth = text.getTextIndex(string)
+    lineWidth = int(int(width)/2 - int(textWidth)/2 - 2)
+    print(lineWidth)
+    pl('-'*lineWidth + '□' + string + '□' + '-'*lineWidth)
 
 #输出一行
 def pl(string='', style='standard'):
@@ -32,7 +40,8 @@ def pl(string='', style='standard'):
 
 #输出分割线
 def pline(sample='=', style='standard'):
-    p("-" * 108)
+    textWidth = config.text_width
+    pl("-" * textWidth)
 
 #输出警告
 def pwarn(string, style='warning'):
@@ -77,20 +86,20 @@ def lcp(sleepTime,string='',style='standard'):
     stringlist = string.split('\n')
     width = config.text_width
     for i in range(0,len(stringlist)):
-        indexI = len(stringlist[i])
         widthI = int(width) / 2
-        countIndex = 0
-        for inn in range(0, indexI):
-            countIndex = countIndex + text.get_width(ord(stringlist[i][inn]))
+        countIndex = text.getTextIndex(stringlist[i])
         countI = int(countIndex) / 2
-        p(' '* int((widthI - countI)))
-        pobo(sleepTime,stringlist[i])
-        p('\n')
-        if cache.wframeMouse['wFrameLinesUp'] == 1:
-            indexIUp = i + 1
-            cache.wframeMouse['wFrameLinesUp'] = 2
-            for indexIUp in range(indexIUp,len(stringlist)):
-                p(text.align(stringlist[indexIUp],'center'),style)
-                p('\n')
-            cache.wframeMouse['wFrameLineState'] = 2
-            break
+        if cache.wframeMouse['wFrameRePrint'] == 1:
+            pl(' ' * int((widthI - countI)) + stringlist[i])
+        else:
+            p(' ' * int((widthI - countI)))
+            pobo(sleepTime, stringlist[i])
+            p('\n')
+            if cache.wframeMouse['wFrameLinesUp'] == 1:
+                indexIUp = i + 1
+                cache.wframeMouse['wFrameLinesUp'] = 2
+                for indexIUp in range(indexIUp, len(stringlist)):
+                    pl(text.align(stringlist[indexIUp], 'center'), style)
+                cache.wframeMouse['wFrameLineState'] = 2
+                break
+    cache.wframeMouse['wFrameRePrint'] = 0

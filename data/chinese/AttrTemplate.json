@@ -1,0 +1,32 @@
+{
+  "PlayerMan":{
+    "Sex":"男",
+    "MaxAge":"28",
+    "MiniAge":"17"
+  },
+  "PlayerWoman":{
+    "Sex":"女",
+    "MaxAge":"28",
+    "MiniAge":"17"
+  },
+  "PlayerDragQueen":{
+    "Sex":"伪娘",
+    "MaxAge":"28",
+    "MiniAge":"17"
+  },
+  "PlayerFuta":{
+    "Sex":"扶她",
+    "MaxAge":"28",
+    "MiniAge":"17"
+  },
+  "PlayerLoli":{
+    "Sex":"萝莉",
+    "MaxAge":"16",
+    "MiniAge":"10"
+  },
+  "PlayerShota":{
+    "Sex":"正太",
+    "MaxAge":"16",
+    "MiniAge":"10"
+  }
+}

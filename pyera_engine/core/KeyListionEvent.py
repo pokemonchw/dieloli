@@ -40,7 +40,6 @@ def keyDown(event):
             cache.inputPosition['position'] = cache.inputPosition['position'] + 1
             inpotId = cache.inputPosition['position']
             winframe.order.set(cache.inputCache[inpotId])
-            break
         except KeyError:
             cache.inputPosition['position'] = cache.inputPosition['position'] - 1
     pass

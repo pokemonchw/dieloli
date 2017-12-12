@@ -13,27 +13,38 @@ menuOther = '6'
 
 language = config.language
 
-messagePath = os.path.join(gamepath, 'data',language,'MessageList.json')
-messageData = data._loadjson(messagePath)
-cmdPath = os.path.join(gamepath,'data',language,'CmdText.json')
-cmdData = data._loadjson(cmdPath)
-menuPath = os.path.join(gamepath,'data',language,'MenuText.json')
-menuData = data._loadjson(menuPath)
-rolePath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
-roleData = data._loadjson(rolePath)
+messagePath = 'MessageList.json'
+cmdPath = 'CmdText.json'
+menuPath = 'MenuText.json'
+rolePath = 'RoleAttributes.json'
+stageWordPath = 'StageWord.json'
+
+def getData(jsonName):
+    dataPath = os.path.join(gamepath,'data',language,jsonName)
+    dataData = data._loadjson(dataPath)
+    return dataData
 
 def loadMessageAdv(advid):
+    messageData = getData(messagePath)
     message = messageData[advid]
     return message
 
 def loadCmdAdv(cmdid):
+    cmdData = getData(cmdPath)
     cmdText = cmdData[cmdid]
     return cmdText
 
 def loadMenuText(menuid):
+    menuData = getData(menuPath)
     menuText = menuData[menuid]
     return menuText
 
 def loadRoleAtrText(atrid):
+    roleData = getData(rolePath)
     atrText = roleData[atrid]
     return atrText
+
+def loadStageWordText(wordId):
+    stageWordData = getData(stageWordPath)
+    stageWordText = stageWordData[wordId]
+    return stageWordText

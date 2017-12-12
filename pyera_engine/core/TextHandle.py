@@ -3,19 +3,23 @@ import core.GameConfig as config
 #文本对齐
 def align(text,just='left'):
     text = str(text)
-    count = len(text)
-    countIndex = 0
-    for i in range(0,count):
-        countIndex = countIndex + get_width(ord(text[i]))
+    countIndex = getTextIndex(text)
     width = config.text_width
     if just == "right":
-        return " " * (width - countIndex - 1) + text
+        return " " * (width - countIndex) + text
     elif just == "left":
         return text
     elif just == "center":
         widthI = width/2
         countI = countIndex/2
         return " " * int(widthI - countI) + text
+
+def getTextIndex(text):
+    textIndex = 0
+    count = len(text)
+    for i in range(0,count):
+        textIndex = textIndex + get_width(ord(text[i]))
+    return textIndex
 
 def get_width( o ):
     """计算字符宽度"""

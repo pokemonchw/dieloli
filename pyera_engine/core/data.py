@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 from core.pycfg import gamepath
 import json
+
 try:
     import cPickle as pickle
 except ImportError:

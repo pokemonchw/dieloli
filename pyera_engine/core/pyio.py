@@ -7,7 +7,6 @@ import threading
 import queue
 import json
 import sys
-import core.GameConfig as config
 
 sys.setrecursionlimit(100000)
 
