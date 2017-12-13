@@ -5,6 +5,7 @@ import core.CacheContorl as cache
 import script.Ans as ans
 import core.PyCmd as pycmd
 import random
+import script.AttrCalculation as attr
 
 playerId = '0'
 
@@ -83,7 +84,6 @@ def inputSexConfirm_func():
     if yrn == 4:
         pycmd.clr_cmd()
         acknowledgmentAttribute_func()
-        return
     elif yrn == 5:
         pycmd.clr_cmd()
         inputSexChoice_func()
@@ -103,14 +103,16 @@ def inputSexChoice_func():
     eprint.p('\n')
     sex = textload.loadRoleAtrText('Sex')
     sexList = ['6', '7', '8', '9', '10', '11']
-    for i in range(0, len(sex)):
-        if str(yrn) == sexList[i]:
-            sexAtr = sex[i]
-            cache.temporaryObject['Sex'] = sexAtr
-            cache.playObject['object'][playerId] = cache.temporaryObject.copy()
-            inputSexConfirm_func()
-    if yrn == 13:
-        rand = random.randint(0, len(sex) - 1)
+    if str(yrn) in sexList:
+        for i in range(0,len(sexList)):
+            if str(yrn) == sexList[i]:
+                sexAtr = sex[i]
+                cache.temporaryObject['Sex'] = sexAtr
+                cache.playObject['object'][playerId] = cache.temporaryObject.copy()
+                pycmd.clr_cmd()
+                inputSexConfirm_func()
+    elif yrn == 13:
+        rand = random.randint(0, len(sex))
         sexAtr = sex[rand]
         cache.temporaryObject['Sex'] = sexAtr
         cache.playObject['object'][playerId] = cache.temporaryObject.copy()
@@ -127,8 +129,21 @@ def inputSexChoice_func():
     pass
 
 def acknowledgmentAttribute_func():
+    playerSex = cache.playObject['object']['0']['Sex']
+    temlist = attr.getTemList()
+    temId = temlist[playerSex]
+    temData = attr.getAttr(temId)
+    playerAge = cache.playObject['object']['0']['Age'] = temData['Age']
     title1 = textload.loadStageWordText('1')
     playerName = cache.playObject['object']['0']['Name']
     eprint.plt(title1)
     eprint.pl(playerName)
+    eprint.p(textload.loadStageWordText('2'))
+    eprint.p(playerSex)
+    eprint.p('\n')
+    eprint.p(textload.loadStageWordText('3'))
+    eprint.p(playerAge)
+    eprint.p('\n')
+    eprint.p('\n')
+    eprint.pline()
     pass

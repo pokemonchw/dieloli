@@ -24,7 +24,7 @@ def mouseRightCheck(event):
 def keyUp(event):
     while cache.inputPosition['position'] == 0:
         cache.inputPosition['position'] = len(cache.inputCache)
-    while cache.inputPosition['position'] <= 20 and cache.inputPosition['position'] > 1:
+    while cache.inputPosition['position'] <= 21 and cache.inputPosition['position'] > 1:
         cache.inputPosition['position'] = cache.inputPosition['position'] - 1
         inpotId = cache.inputPosition['position']
         try:
@@ -35,13 +35,16 @@ def keyUp(event):
     pass
 
 def keyDown(event):
-    while cache.inputPosition['position'] > 0 and cache.inputPosition['position'] < len(cache.inputCache) - 1:
+    if cache.inputPosition['position'] > 0 and cache.inputPosition['position'] < len(cache.inputCache) - 1:
         try:
             cache.inputPosition['position'] = cache.inputPosition['position'] + 1
             inpotId = cache.inputPosition['position']
             winframe.order.set(cache.inputCache[inpotId])
         except KeyError:
             cache.inputPosition['position'] = cache.inputPosition['position'] - 1
+    elif cache.inputPosition['position'] == len(cache.inputCache) - 1:
+        cache.inputPosition['position'] = 0
+        winframe.order.set('')
     pass
 
 def setWFrameUp(event):

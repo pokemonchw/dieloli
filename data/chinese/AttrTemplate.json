@@ -1,30 +1,32 @@
 {
-  "PlayerMan":{
+  "TemList":{"男":"Man","女":"Woman","伪娘":"DragQueen","扶她":"Futa","萝莉":"Loli",
+    "正太":"Shota"},
+  "Man":{
     "Sex":"男",
     "MaxAge":"28",
     "MiniAge":"17"
   },
-  "PlayerWoman":{
+  "Woman":{
     "Sex":"女",
     "MaxAge":"28",
     "MiniAge":"17"
   },
-  "PlayerDragQueen":{
+  "DragQueen":{
     "Sex":"伪娘",
     "MaxAge":"28",
     "MiniAge":"17"
   },
-  "PlayerFuta":{
+  "Futa":{
     "Sex":"扶她",
     "MaxAge":"28",
     "MiniAge":"17"
   },
-  "PlayerLoli":{
+  "Loli":{
     "Sex":"萝莉",
     "MaxAge":"16",
     "MiniAge":"10"
   },
-  "PlayerShota":{
+  "Shota":{
     "Sex":"正太",
     "MaxAge":"16",
     "MiniAge":"10"

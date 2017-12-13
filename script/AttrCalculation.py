@@ -2,15 +2,20 @@ import core.data as data
 import os
 import random
 from core.GameConfig import language
+from core.pycfg import gamepath
 
-templatePath = os.path.join('data',language,'AttrTemplate.json')
+templatePath = os.path.join(gamepath,'data',language,'AttrTemplate.json')
 templateData = data._loadjson(templatePath)
+
+def getTemList():
+    list = templateData['TemList']
+    return list
 
 def getAttr(temName):
     temData = templateData[temName]
     age = getAge(temData)
     attrList = {
-        age
+        'Age':age
     }
     return attrList
 
