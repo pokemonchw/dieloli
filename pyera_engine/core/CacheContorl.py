@@ -12,6 +12,8 @@ temporaryObjectBak = {'Name': temObjectDefault['Name'],
                       'Age': temObjectDefault['Age'],
                       'Features':temObjectDefault['Features']
                       }
+featuresList = []
+
 temporaryObject = {}
 
 inputCache = ['']

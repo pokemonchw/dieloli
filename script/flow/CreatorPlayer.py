@@ -127,7 +127,8 @@ def attributeGenerationBranch_func():
         temlist = attr.getTemList()
         temId = temlist[playerSex]
         temData = attr.getAttr(temId)
-        acknowledgmentAttribute_func(temData)
+        cache.temporaryObject['Age'] = temData['Age']
+        acknowledgmentAttribute_func()
     elif yrn == 12:
         pycmd.clr_cmd()
         inputSexConfirm_func()
@@ -136,21 +137,38 @@ def attributeGenerationBranch_func():
 def detailedSetting_func1():
     ansList = ['16','17']
     eprint.p('\n')
+    eprint.pline()
+    playerSex = cache.playObject['object']['0']['Sex']
+    sexList = textload.loadRoleAtrText('Sex')
+    featuresList = attr.getFeaturesList()
     eprint.pl(textload.loadMessageAdv('10'))
     yrn = ans.option(ansList)
     if yrn == 16:
         pycmd.clr_cmd()
         detailedSetting_func2()
     elif yrn == 17:
-        pass
+        if playerSex == sexList[0]:
+            cache.featuresList.append(featuresList["1"])
+        elif playerSex == sexList[1]:
+            cache.featuresList.append(featuresList["2"])
+        else:
+            cache.featuresList.append(featuresList["9"])
+        pycmd.clr_cmd()
+        cache.temporaryObject['Features'] = cache.featuresList.copy()
+        playerAgeTemName = attr.getAgeTemList()[1]
+        playerAge = attr.getAge(playerAgeTemName)
+        cache.temporaryObject['Age'] = playerAge
+        detailedSetting_func2()
     pass
 
 def detailedSetting_func2():
+
     pass
 
-def acknowledgmentAttribute_func(temData):
+def acknowledgmentAttribute_func():
+    cache.playObject['object']['0'] = cache.temporaryObject.copy()
     playerSex = cache.playObject['object']['0']['Sex']
-    playerAge = cache.playObject['object']['0']['Age'] = temData['Age']
+    playerAge = cache.playObject['object']['0']['Age']
     title1 = textload.loadStageWordText('1')
     playerName = cache.playObject['object']['0']['Name']
     eprint.plt(title1)
@@ -161,6 +179,11 @@ def acknowledgmentAttribute_func(temData):
     eprint.p(textload.loadStageWordText('3'))
     eprint.p(playerAge)
     eprint.p('\n')
+    eprint.p(textload.loadStageWordText('4'))
+    featuresList = cache.playObject['object']['0']['Features']
+    featuresIndex = len(featuresList)
+    for i in range(0,featuresIndex):
+        eprint.p(featuresList[i] + ' ')
     eprint.p('\n')
     eprint.pline()
     pass

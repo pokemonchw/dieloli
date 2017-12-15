@@ -1,23 +1,30 @@
 {
   "TemList":{"男":"Man","女":"Woman","扶她":"Futa","无性人":"Asexual"},
+  "AgeTem":{
+    "List":["Usually","Young"],
+    "Usually":{
+      "MaxAge":"28",
+      "MiniAge":"17"
+    },
+    "Young":{
+      "MaxAge":"16",
+      "MiniAge":"10"
+    }
+  },
   "Man":{
     "Sex":"男",
-    "MaxAge":"28",
-    "MiniAge":"17"
+    "Age":"Usually"
   },
   "Woman":{
     "Sex":"女",
-    "MaxAge":"28",
-    "MiniAge":"17"
+    "Age":"Usually"
   },
   "Futa":{
     "Sex":"扶她",
-    "MaxAge":"28",
-    "MiniAge":"17"
+    "Age":"Usually"
   },
   "Asexual":{
     "Sex":"无性人",
-    "MaxAge":"28",
-    "MiniAge":"17"
+    "Age":"Usually"
   }
 }
