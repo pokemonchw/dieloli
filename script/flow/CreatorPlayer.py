@@ -163,5 +163,4 @@ def acknowledgmentAttribute_func(temData):
     eprint.p('\n')
     eprint.p('\n')
     eprint.pline()
-    
     pass
