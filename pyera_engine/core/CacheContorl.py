@@ -7,9 +7,11 @@ cmd_map = {}
 playObject = {'objectId': '', 'object': {}}
 temObjectDefault = textload.loadRoleAtrText('Default')
 temporaryObjectBak = {'Name': temObjectDefault['Name'],
-                           'NickName': temObjectDefault['NickName'],
-                           'Sex': temObjectDefault['Sex'],
-                           'Age': temObjectDefault['Age']}
+                      'NickName': temObjectDefault['NickName'],
+                      'Sex': temObjectDefault['Sex'],
+                      'Age': temObjectDefault['Age'],
+                      'Features':temObjectDefault['Features']
+                      }
 temporaryObject = {}
 
 inputCache = ['']

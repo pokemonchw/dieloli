@@ -39,10 +39,6 @@ def main_func():
         loadgame_func()
     elif menuInt == 3:
         quitgame_func()
-    else:
-        cache.wframeMouse['wFrameRePrint'] = 1
-        eprint.pnextscreen()
-        main_func()
     pass
 
 def newgame_func():

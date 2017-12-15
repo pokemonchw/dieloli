@@ -1,6 +1,5 @@
 {
-  "TemList":{"男":"Man","女":"Woman","伪娘":"DragQueen","扶她":"Futa","萝莉":"Loli",
-    "正太":"Shota"},
+  "TemList":{"男":"Man","女":"Woman","扶她":"Futa","无性人":"Asexual"},
   "Man":{
     "Sex":"男",
     "MaxAge":"28",
@@ -11,24 +10,14 @@
     "MaxAge":"28",
     "MiniAge":"17"
   },
-  "DragQueen":{
-    "Sex":"伪娘",
-    "MaxAge":"28",
-    "MiniAge":"17"
-  },
   "Futa":{
     "Sex":"扶她",
     "MaxAge":"28",
     "MiniAge":"17"
   },
-  "Loli":{
-    "Sex":"萝莉",
-    "MaxAge":"16",
-    "MiniAge":"10"
-  },
-  "Shota":{
-    "Sex":"正太",
-    "MaxAge":"16",
-    "MiniAge":"10"
+  "Asexual":{
+    "Sex":"无性人",
+    "MaxAge":"28",
+    "MiniAge":"17"
   }
 }

@@ -136,16 +136,17 @@ def askfor_str(donot_return_null_str=True, print_order=False):
             return order
 
 
-def askfor_int(print_order=False):
+def askfor_int(list,print_order=False):
     while True:
         order = order_deal('str', print_order)
-        if order.isdigit():
+        if order in list:
             pyio.print(order + '\n')
             return int(order)
+        elif order == '':
+            continue
         else:
-            if order == '':
-                continue
-            pyio.print('\n' + "不是有效数字" + '\n')
+            pyio.print(order + '\n')
+            continue
 
 
 def askfor_wait():
