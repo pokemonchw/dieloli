@@ -25,7 +25,7 @@ def main_func():
     eprint.pl(text.align(config.verson, 'right'))
     eprint.p('\n')
     eprint.pline()
-    eprint.lcp(1 / 3, textload.loadMessageAdv('2'))
+    eprint.lcp(1/3,textload.loadMessageAdv('2'))
     time.sleep(1)
     eprint.p('\n')
     eprint.pline()

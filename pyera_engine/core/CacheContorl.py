@@ -12,7 +12,7 @@ temporaryObjectBak = {'Name': temObjectDefault['Name'],
                       'Age': temObjectDefault['Age'],
                       'Features':temObjectDefault['Features']
                       }
-featuresList = []
+featuresList = {"Age":"","Virginity":"","Courage":""}
 
 temporaryObject = {}
 

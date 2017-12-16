@@ -148,11 +148,11 @@ def detailedSetting_func1():
         detailedSetting_func2()
     elif yrn == 17:
         if playerSex == sexList[0]:
-            cache.featuresList.append(featuresList["1"])
+            cache.featuresList['Age'] = featuresList["1"]
         elif playerSex == sexList[1]:
-            cache.featuresList.append(featuresList["2"])
+            cache.featuresList['Age'] = featuresList["2"]
         else:
-            cache.featuresList.append(featuresList["9"])
+            cache.featuresList['Age'] = featuresList["3"]
         pycmd.clr_cmd()
         cache.temporaryObject['Features'] = cache.featuresList.copy()
         playerAgeTemName = attr.getAgeTemList()[1]
@@ -181,9 +181,7 @@ def acknowledgmentAttribute_func():
     eprint.p('\n')
     eprint.p(textload.loadStageWordText('4'))
     featuresList = cache.playObject['object']['0']['Features']
-    featuresIndex = len(featuresList)
-    for i in range(0,featuresIndex):
-        eprint.p(featuresList[i] + ' ')
-    eprint.p('\n')
+    featuresListStr = attr.getFeaturesStr(featuresList)
+    eprint.pl(featuresListStr)
     eprint.pline()
     pass

@@ -36,3 +36,12 @@ def getAge(temName):
     miniAge = int(temData['MiniAge'])
     age = random.randint(miniAge,maxAge)
     return age
+
+def getFeaturesStr(fList):
+    featuresListStr = ''
+    Age = fList['Age']
+    if Age == '':
+        Age = Age
+    else:
+        featuresListStr = featuresListStr + '[' + Age + ']'
+    return featuresListStr

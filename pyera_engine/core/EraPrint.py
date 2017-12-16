@@ -102,3 +102,12 @@ def lcp(sleepTime,string='',style='standard'):
                 cache.wframeMouse['wFrameLineState'] = 2
                 break
     cache.wframeMouse['wFrameRePrint'] = 0
+
+#多行回车逐行输出
+def lkeyp(string='',style='standard'):
+    cache.wframeMouse['wFrameMouseNextLine'] = 1
+    string = str(string)
+    stringlist = string.split('\n')
+    for i in range(0,len(stringlist)):
+        plwait(stringlist[i])
+    cache.wframeMouse['wFrameMouseNextLine'] = 0

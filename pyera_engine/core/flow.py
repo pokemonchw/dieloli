@@ -148,7 +148,6 @@ def askfor_int(list,print_order=False):
             pyio.print(order + '\n')
             continue
 
-
 def askfor_wait():
     global __skip_flag__
     while __skip_flag__ == False:
