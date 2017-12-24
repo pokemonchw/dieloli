@@ -14,13 +14,13 @@ def inputName_func():
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('4'))
-    yrn = ans.option(ans.yesorno)
+    yrn = ans.optionint(ans.currencymenu,1)
     eprint.p('\n')
-    if yrn == 4:
+    if yrn == 0:
         pycmd.clr_cmd()
         inputNickName_func()
         return
-    elif yrn == 5:
+    elif yrn == 1:
         pycmd.clr_cmd()
         eprint.pline()
         eprint.pl(textload.loadMessageAdv('3'))
@@ -30,7 +30,7 @@ def inputName_func():
         cache.temporaryObject['Name'] = playerName
         pycmd.clr_cmd()
         inputName_func()
-    elif yrn == 12:
+    elif yrn == 2:
         cache.wframeMouse['wFrameRePrint'] = 1
         eprint.pnextscreen()
         import script.mainflow as mainflow
@@ -41,12 +41,12 @@ def inputNickName_func():
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('6'))
-    yrn = ans.option(ans.inputNickNameList)
+    yrn = ans.optionint(ans.inputnickname,1)
     eprint.p('\n')
-    if yrn == 4:
+    if yrn == 0:
         pycmd.clr_cmd()
         inputSexConfirm_func()
-    elif yrn == 5:
+    elif yrn == 1:
         pycmd.clr_cmd()
         eprint.pline()
         eprint.pl(textload.loadMessageAdv('5'))
@@ -56,11 +56,11 @@ def inputNickName_func():
         cache.temporaryObject['NickName'] = playerNickName
         pycmd.clr_cmd()
         inputNickName_func()
-    elif yrn == 14:
+    elif yrn == 2:
         pycmd.clr_cmd()
         cache.temporaryObject['NickName'] = cache.temporaryObject['Name']
         inputNickName_func()
-    elif yrn == 12:
+    elif yrn == 3:
         pycmd.clr_cmd()
         eprint.p('\n')
         inputName_func()
@@ -71,15 +71,15 @@ def inputSexConfirm_func():
     sexId = cache.playObject['object'][playerId]['Sex']
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('8')[sexId])
-    yrn = ans.option(ans.yesorno)
+    yrn = ans.optionint(ans.currencymenu,1)
     eprint.p('\n')
-    if yrn == 4:
+    if yrn == 0:
         pycmd.clr_cmd()
         attributeGenerationBranch_func()
-    elif yrn == 5:
+    elif yrn == 1:
         pycmd.clr_cmd()
         inputSexChoice_func()
-    elif yrn == 12:
+    elif yrn == 2:
         pycmd.clr_cmd()
         inputNickName_func()
     pass
@@ -88,26 +88,24 @@ def inputSexChoice_func():
     pycmd.clr_cmd()
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('7'))
-    yrn = ans.option(ans.sex)
+    yrn = ans.optionint(ans.sexmenu,1)
     eprint.p('\n')
     sex = textload.loadRoleAtrText('Sex')
-    sexList = ['6', '7', '9', '15']
-    if str(yrn) in sexList:
-        for i in range(0,len(sexList)):
-            if str(yrn) == sexList[i]:
-                sexAtr = sex[i]
-                cache.temporaryObject['Sex'] = sexAtr
-                cache.playObject['object'][playerId] = cache.temporaryObject.copy()
-                pycmd.clr_cmd()
-                inputSexConfirm_func()
-    elif yrn == 13:
+    sexMax = len(sex) - 1
+    if yrn in range(0,sexMax):
+        sexAtr = sex[yrn]
+        cache.temporaryObject['Sex'] = sexAtr
+        cache.playObject['object'][playerId] = cache.temporaryObject.copy()
+        pycmd.clr_cmd()
+        inputSexConfirm_func()
+    elif yrn == 4:
         rand = random.randint(0, len(sex) - 1)
         sexAtr = sex[rand]
         cache.temporaryObject['Sex'] = sexAtr
         cache.playObject['object'][playerId] = cache.temporaryObject.copy()
         pycmd.clr_cmd()
         inputSexConfirm_func()
-    elif yrn == 12:
+    elif yrn == 5:
         pycmd.clr_cmd()
         eprint.p('\n')
         inputSexConfirm_func()
@@ -117,11 +115,11 @@ def attributeGenerationBranch_func():
     pycmd.clr_cmd()
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('9'))
-    yrn = ans.option(ans.yesorno)
-    if yrn == 4:
+    yrn = ans.optionint(ans.currencymenu,1)
+    if yrn == 0:
         pycmd.clr_cmd()
         detailedSetting_func1()
-    elif yrn == 5:
+    elif yrn == 1:
         pycmd.clr_cmd()
         playerSex = cache.playObject['object']['0']['Sex']
         temlist = attr.getTemList()
@@ -129,24 +127,23 @@ def attributeGenerationBranch_func():
         temData = attr.getAttr(temId)
         cache.temporaryObject['Age'] = temData['Age']
         acknowledgmentAttribute_func()
-    elif yrn == 12:
+    elif yrn == 2:
         pycmd.clr_cmd()
         inputSexConfirm_func()
     pass
 
 def detailedSetting_func1():
-    ansList = ['16','17']
     eprint.p('\n')
     eprint.pline()
     playerSex = cache.playObject['object']['0']['Sex']
     sexList = textload.loadRoleAtrText('Sex')
     featuresList = attr.getFeaturesList()
     eprint.pl(textload.loadMessageAdv('10'))
-    yrn = ans.option(ansList)
-    if yrn == 16:
+    yrn = ans.optionint(ans.detailedsetting1,1)
+    if yrn == 0:
         pycmd.clr_cmd()
         detailedSetting_func2()
-    elif yrn == 17:
+    elif yrn == 1:
         if playerSex == sexList[0]:
             cache.featuresList['Age'] = featuresList["1"]
         elif playerSex == sexList[1]:
@@ -162,7 +159,10 @@ def detailedSetting_func1():
     pass
 
 def detailedSetting_func2():
-
+    eprint.p('\n')
+    eprint.pline()
+    eprint.pl(textload.loadMessageAdv('11'))
+    ans.optionstr(ans.detailedsetting2, 5)
     pass
 
 def acknowledgmentAttribute_func():

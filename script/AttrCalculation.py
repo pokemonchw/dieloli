@@ -39,9 +39,9 @@ def getAge(temName):
 
 def getFeaturesStr(fList):
     featuresListStr = ''
-    Age = fList['Age']
-    if Age == '':
-        Age = Age
-    else:
+    try:
+        Age = fList['Age']
         featuresListStr = featuresListStr + '[' + Age + ']'
+    except KeyError:
+        Age = ""
     return featuresListStr

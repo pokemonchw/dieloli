@@ -136,12 +136,12 @@ def askfor_str(donot_return_null_str=True, print_order=False):
             return order
 
 
-def askfor_int(list,print_order=False):
+def askfor_All(list,print_order=False):
     while True:
         order = order_deal('str', print_order)
         if order in list:
             pyio.print(order + '\n')
-            return int(order)
+            return order
         elif order == '':
             continue
         else:

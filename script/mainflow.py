@@ -31,13 +31,13 @@ def main_func():
     eprint.pline()
     time.sleep(1)
     pycmd.focusCmd()
-    menuInt = ans.option(ans.logomenu)
+    menuInt = ans.optionint(ans.logomenu,1)
     eprint.p('\n')
-    if menuInt == 1:
+    if menuInt == 0:
         newgame_func()
-    elif menuInt == 2:
+    elif menuInt == 1:
         loadgame_func()
-    elif menuInt == 3:
+    elif menuInt == 2:
         quitgame_func()
     pass
 

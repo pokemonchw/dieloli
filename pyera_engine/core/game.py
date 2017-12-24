@@ -85,7 +85,7 @@ askfor_order = core.flow.order_deal
 askfor_str = core.flow.askfor_str
 
 # 请求输入一个数字
-askfor_int = core.flow.askfor_int
+askfor_All = core.flow.askfor_All
 
 # 设置尾命令处理函数
 set_deal_cmd_func=core.flow.set_tail_deal_cmd_func
