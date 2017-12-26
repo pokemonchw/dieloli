@@ -1,6 +1,7 @@
 import core.data as data
 import os
 import random
+import core.CacheContorl as cache
 from core.GameConfig import language
 from core.pycfg import gamepath
 
@@ -41,7 +42,85 @@ def getFeaturesStr(fList):
     featuresListStr = ''
     try:
         Age = fList['Age']
-        featuresListStr = featuresListStr + '[' + Age + ']'
+        if Age != '':
+            featuresListStr = featuresListStr + '[' + Age + ']'
+        else:
+            pass
     except KeyError:
-        Age = ""
+        pass
+    try:
+        Figure = fList['Figure']
+        if Figure != '':
+            featuresListStr = featuresListStr + '[' + Figure + ']'
+        else:
+            pass
+    except KeyError:
+        pass
+    try:
+        Sex = fList['Sex']
+        if Sex != '':
+            featuresListStr = featuresListStr + '[' + Sex + ']'
+        else:
+            pass
+    except KeyError:
+        pass
+    try:
+        AnimalInternal = fList['AnimalInternal']
+        if AnimalInternal != '':
+            featuresListStr = featuresListStr + '[' + AnimalInternal + ']'
+        else:
+            pass
+    except KeyError:
+        pass
+    try:
+        AnimalExternal = fList['AnimalExternal']
+        if AnimalExternal != '':
+            featuresListStr = featuresListStr + '[' + AnimalExternal + ']'
+        else:
+            pass
+    except KeyError:
+        pass
+    try:
+        Charm = fList['Charm']
+        if Charm != '':
+            featuresListStr = featuresListStr + '[' + Charm + ']'
+        else:
+            pass
+    except KeyError:
+        pass
     return featuresListStr
+
+def setAnimalCache(animalName):
+    animalData = roleAttrData["AnimalFeatures"][animalName]
+    cacheSize = cache.temporaryObject['Features']
+    try:
+        Age = animalData['Age']
+        cacheSize['Age'] = Age
+    except KeyError:
+        pass
+    try:
+        Figure = animalData['Figure']
+        cacheSize['Figure'] = Figure
+    except KeyError:
+        pass
+    try:
+        Sex = animalData['Sex']
+        cacheSize['Sex'] = Sex
+    except KeyError:
+        pass
+    try:
+        AnimalInternal = animalData['AnimalInternal']
+        cacheSize['AnimalInternal'] = AnimalInternal
+    except KeyError:
+        pass
+    try:
+        AnimalExternal = animalData['AnimalExternal']
+        cacheSize['AnimalExternal'] = AnimalExternal
+    except KeyError:
+        pass
+    try:
+        Charm = animalData['Charm']
+        cacheSize['Charm'] = Charm
+    except KeyError:
+        pass
+    pass

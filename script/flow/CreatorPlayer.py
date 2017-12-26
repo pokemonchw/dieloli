@@ -74,6 +74,10 @@ def inputSexConfirm_func():
     yrn = ans.optionint(ans.currencymenu,1)
     eprint.p('\n')
     if yrn == 0:
+        if sexId == textload.loadRoleAtrText('Sex')[2]:
+            cache.temporaryObject['Features']['Sex'] = textload.loadRoleAtrText('Features')['Sex'][0]
+        elif sexId == textload.loadRoleAtrText('Sex')[3]:
+            cache.temporaryObject['Features']['Sex'] = textload.loadRoleAtrText('Features')['Sex'][1]
         pycmd.clr_cmd()
         attributeGenerationBranch_func()
     elif yrn == 1:
@@ -145,11 +149,11 @@ def detailedSetting_func1():
         detailedSetting_func2()
     elif yrn == 1:
         if playerSex == sexList[0]:
-            cache.featuresList['Age'] = featuresList["1"]
+            cache.featuresList['Age'] = featuresList["Age"][0]
         elif playerSex == sexList[1]:
-            cache.featuresList['Age'] = featuresList["2"]
+            cache.featuresList['Age'] = featuresList["Age"][1]
         else:
-            cache.featuresList['Age'] = featuresList["3"]
+            cache.featuresList['Age'] = featuresList["Age"][2]
         pycmd.clr_cmd()
         cache.temporaryObject['Features'] = cache.featuresList.copy()
         playerAgeTemName = attr.getAgeTemList()[1]
@@ -162,7 +166,22 @@ def detailedSetting_func2():
     eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('11'))
-    ans.optionstr(ans.detailedsetting2, 5)
+    ansList = textload.loadCmdAdv("detailedSetting2")
+    yrn = ans.optionstr(ans.detailedsetting2, 5,True)
+    if yrn == ansList[len(ansList)-1]:
+        pycmd.clr_cmd()
+        detailedSetting_func3()
+    else:
+        pycmd.clr_cmd()
+        attr.setAnimalCache(yrn)
+        detailedSetting_func3()
+    pass
+
+def detailedSetting_func3():
+    eprint.p('\n')
+    eprint.pline()
+    eprint.pl(textload.loadMessageAdv('12'))
+    yrn = ans.optionint(ans.detailedsetting3,1)
     pass
 
 def acknowledgmentAttribute_func():
@@ -171,6 +190,7 @@ def acknowledgmentAttribute_func():
     playerAge = cache.playObject['object']['0']['Age']
     title1 = textload.loadStageWordText('1')
     playerName = cache.playObject['object']['0']['Name']
+    eprint.p('\n')
     eprint.plt(title1)
     eprint.pl(playerName)
     eprint.p(textload.loadStageWordText('2'))

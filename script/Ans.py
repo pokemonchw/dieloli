@@ -9,9 +9,10 @@ sexmenu = "sexMenu"
 inputnickname = "inputNickName"
 detailedsetting1 = "detailedSetting1"
 detailedsetting2 = "detailedSetting2"
+detailedsetting3 = "detailedSetting3"
 
 def optionint(cmdList,cmdColumn,idSwitch = True):
-    cmdListDate = text.loadCmdAdv(cmdList)
+    cmdListDate = text.loadCmdAdv(cmdList).copy()
     inputI = []
     for i in range(0,len(cmdListDate)):
         if idSwitch == True:
@@ -33,20 +34,32 @@ def optionint(cmdList,cmdColumn,idSwitch = True):
     ans = int(game.askfor_All(inputI))
     return ans
 
-def optionstr(cmdList,cmdColumn):
+def optionstr(cmdList,cmdColumn,lastLine = False):
     cmdListDate = text.loadCmdAdv(cmdList)
     inputS = []
     for i in range(0,len(cmdListDate)):
         if i == 0:
-            pycmd.pcmd(cmdListDate[i], cmdListDate[i], None)
+            pycmd.pcmd("[" + cmdListDate[i] +"]", cmdListDate[i], None)
             inputS.append(cmdListDate[i])
-        else:
+        elif lastLine == False:
             if i / cmdColumn >= 1 and i % cmdColumn == 0:
                 eprint.p('\n')
-                pycmd.pcmd(cmdListDate[i], cmdListDate[i], None)
+                pycmd.pcmd("[" + cmdListDate[i] +"]", cmdListDate[i], None)
                 inputS.append(cmdListDate[i])
             else:
-                pycmd.pcmd(cmdListDate[i], cmdListDate[i], None)
+                pycmd.pcmd("[" + cmdListDate[i] +"]", cmdListDate[i], None)
+                inputS.append(cmdListDate[i])
+        elif lastLine == True:
+            if i / cmdColumn >= 1 and i % cmdColumn == 0:
+                eprint.p('\n')
+                pycmd.pcmd("[" + cmdListDate[i] +"]", cmdListDate[i], None)
+                inputS.append(cmdListDate[i])
+            elif i == len(cmdListDate) - 1:
+                eprint.p('\n')
+                pycmd.pcmd("[" + cmdListDate[i] + "]", cmdListDate[i], None)
+                inputS.append(cmdListDate[i])
+            else:
+                pycmd.pcmd("[" + cmdListDate[i] +"]", cmdListDate[i], None)
                 inputS.append(cmdListDate[i])
     eprint.p('\n')
     ans = game.askfor_All(inputS)
