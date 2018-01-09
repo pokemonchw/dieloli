@@ -146,6 +146,8 @@ def askfor_All(list,print_order=False):
             continue
         else:
             pyio.print(order + '\n')
+            import script.TextLoading as textload
+            pyio.print(textload.loadErrorText('noInputListError') + '\n')
             continue
 
 def askfor_wait():

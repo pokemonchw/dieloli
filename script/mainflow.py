@@ -31,7 +31,7 @@ def main_func():
     eprint.pline()
     time.sleep(1)
     pycmd.focusCmd()
-    menuInt = ans.optionint(ans.logomenu,1)
+    menuInt = ans.optionint(ans.logomenu)
     eprint.p('\n')
     if menuInt == 0:
         newgame_func()

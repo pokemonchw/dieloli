@@ -26,7 +26,7 @@ def plt(string,style='standard'):
     width = config.text_width
     textWidth = text.getTextIndex(string)
     lineWidth = int(int(width)/2 - int(textWidth)/2 - 2)
-    pl('-'*lineWidth + '□' + string + '□' + '-'*lineWidth)
+    pl('-'*lineWidth + '▢' + string + '▢' + '-'*lineWidth)
 
 #输出一行
 def pl(string='', style='standard'):

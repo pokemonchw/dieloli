@@ -2,9 +2,12 @@
   "Default":{
     "Name":"主人公",
     "NickName":"你",
+    "SelfName":"我",
     "Sex":"男",
     "Age":"17",
-    "Features":{}
+    "Features":{},
+    "HitPointMax":"2000",
+    "ManaPointMax":"2000"
   },
   "Sex":["男","女","扶她","无性人"],
   "Features":{

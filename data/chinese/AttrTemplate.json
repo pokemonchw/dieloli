@@ -11,20 +11,52 @@
       "MiniAge":"10"
     }
   },
+  "HitPointTem":{
+    "List":["Ordinary","Strong","Thin"],
+    "Ordinary":{
+      "HitPointMax":"2000"
+    },
+    "Strong":{
+      "HitPointMax":"2500"
+    },
+    "Thin":{
+      "HitPointMax":"1500"
+    }
+  },
+  "ManaPointTem":{
+    "List":["Ordinary","Strong","WeakMagic"],
+    "Ordinary":{
+      "ManaPointMax":"2000"
+    },
+    "StrongMagic":{
+      "ManaPointMax":"2500"
+    },
+    "WeakMagic":{
+      "ManaPointMax":"1500"
+    }
+  },
   "Man":{
     "Sex":"男",
-    "Age":"Usually"
+    "Age":"Usually",
+    "HitPoint":"Ordinary",
+    "ManaPoint":"Ordinary"
   },
   "Woman":{
     "Sex":"女",
-    "Age":"Usually"
+    "Age":"Usually",
+    "HitPoint":"Ordinary",
+    "ManaPoint":"Ordinary"
   },
   "Futa":{
     "Sex":"扶她",
-    "Age":"Usually"
+    "Age":"Usually",
+    "HitPoint":"Ordinary",
+    "ManaPoint":"Ordinary"
   },
   "Asexual":{
     "Sex":"无性人",
-    "Age":"Usually"
+    "Age":"Usually",
+    "HitPoint":"Ordinary",
+    "ManaPoint":"Ordinary"
   }
 }

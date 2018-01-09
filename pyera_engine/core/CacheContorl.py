@@ -8,9 +8,14 @@ playObject = {'objectId': '', 'object': {}}
 temObjectDefault = textload.loadRoleAtrText('Default')
 temporaryObjectBak = {'Name': temObjectDefault['Name'],
                       'NickName': temObjectDefault['NickName'],
+                      'SelfName': temObjectDefault['SelfName'],
                       'Sex': temObjectDefault['Sex'],
                       'Age': temObjectDefault['Age'],
-                      'Features':temObjectDefault['Features']
+                      'Features':temObjectDefault['Features'],
+                      'HitPointMax':temObjectDefault['HitPointMax'],
+                      'HitPoint':temObjectDefault['HitPointMax'],
+                      'ManaPointMax':temObjectDefault['ManaPointMax'],
+                      'ManaPoint':temObjectDefault['ManaPointMax']
                       }
 featuresList = {"Age":"","Figure":"","Sex":"","AnimalInternal":"","AnimalExternal":"",
                 "Charm":""}

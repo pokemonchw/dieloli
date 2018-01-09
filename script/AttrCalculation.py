@@ -26,8 +26,16 @@ def getAttr(temName):
     temData = templateData[temName]
     ageTemName = temData["Age"]
     age = getAge(ageTemName)
+    hitPointTemName = temData["HitPoint"]
+    maxHitPoint = getMaxHitPoint(hitPointTemName)
+    manaPointTemName = temData["ManaPoint"]
+    maxManaPoint = getMaxManaPoint(manaPointTemName)
     attrList = {
-        'Age':age
+        'Age':age,
+        'MaxHitPoint':maxHitPoint,
+        'HitPoint':maxHitPoint,
+        'MaxManaPoint':maxManaPoint,
+        'ManaPoint':maxManaPoint
     }
     return attrList
 
@@ -37,6 +45,22 @@ def getAge(temName):
     miniAge = int(temData['MiniAge'])
     age = random.randint(miniAge,maxAge)
     return age
+
+def getMaxHitPoint(temName):
+    temData = templateData['HitPointTem'][temName]
+    maxHitPoint = int(temData['HitPointMax'])
+    addValue = random.randint(0,500)
+    impairment = random.randint(0,500)
+    maxHitPoint = maxHitPoint + addValue - impairment
+    return maxHitPoint
+
+def getMaxManaPoint(temName):
+    temData = templateData['ManaPointTem'][temName]
+    maxManaPoint = int(temData['ManaPointMax'])
+    addValue = random.randint(0,500)
+    impairment = random.randint(0,500)
+    maxManaPoint = maxManaPoint + addValue - impairment
+    return maxManaPoint
 
 def getFeaturesStr(fList):
     featuresListStr = ''

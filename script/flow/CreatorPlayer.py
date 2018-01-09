@@ -6,6 +6,7 @@ import script.Ans as ans
 import core.PyCmd as pycmd
 import random
 import script.AttrCalculation as attr
+import core.TextHandle as text
 
 playerId = '0'
 
@@ -24,10 +25,16 @@ def inputName_func():
         pycmd.clr_cmd()
         eprint.pline()
         eprint.pl(textload.loadMessageAdv('3'))
-        playerName = game.askfor_str()
-        eprint.pl(playerName)
+        inputState = 0
+        while inputState == 0:
+            playerName = game.askfor_str()
+            eprint.pl(playerName)
+            if text.getTextIndex(playerName) > 10:
+                eprint.pl(textload.loadErrorText('inputNameTooLongError'))
+            else:
+                inputState = 1
+                cache.temporaryObject['Name'] = playerName
         eprint.p('\n')
-        cache.temporaryObject['Name'] = playerName
         pycmd.clr_cmd()
         inputName_func()
     elif yrn == 2:
@@ -45,15 +52,21 @@ def inputNickName_func():
     eprint.p('\n')
     if yrn == 0:
         pycmd.clr_cmd()
-        inputSexConfirm_func()
+        inputSelfName_func()
     elif yrn == 1:
         pycmd.clr_cmd()
         eprint.pline()
         eprint.pl(textload.loadMessageAdv('5'))
-        playerNickName = game.askfor_str()
-        eprint.pl(playerNickName)
+        inputState = 0
+        while inputState == 0:
+            playerNickName = game.askfor_str()
+            eprint.pl(playerNickName)
+            if text.getTextIndex(playerNickName) > 10:
+                eprint.pl(textload.loadErrorText('inputNickNameTooLongError'))
+            else:
+                inputState = 1
+                cache.temporaryObject['NickName'] = playerNickName
         eprint.p('\n')
-        cache.temporaryObject['NickName'] = playerNickName
         pycmd.clr_cmd()
         inputNickName_func()
     elif yrn == 2:
@@ -65,6 +78,37 @@ def inputNickName_func():
         eprint.p('\n')
         inputName_func()
     pass
+
+def inputSelfName_func():
+    pycmd.clr_cmd()
+    cache.playObject['object'][playerId] = cache.temporaryObject.copy()
+    eprint.pline()
+    eprint.pl(textload.loadMessageAdv('14'))
+    yrn = ans.optionint(ans.inputselfname,1)
+    eprint.p('\n')
+    if yrn == 0:
+        pycmd.clr_cmd()
+        inputSexConfirm_func()
+    elif yrn == 1:
+        pycmd.clr_cmd()
+        eprint.pline()
+        eprint.pl(textload.loadMessageAdv('15'))
+        inputState = 0
+        while inputState == 0:
+            playerSelfName = game.askfor_str()
+            eprint.pl(playerSelfName)
+            if text.getTextIndex(playerSelfName) > 10:
+                eprint.pl(textload.loadErrorText('inputNickNameTooLongError'))
+            else:
+                inputState = 1
+                cache.temporaryObject['SelfName'] = playerSelfName
+        eprint.p('\n')
+        pycmd.clr_cmd()
+        inputSelfName_func()
+    elif yrn == 2:
+        pycmd.clr_cmd()
+        eprint.p('\n')
+        inputNickName_func()
 
 def inputSexConfirm_func():
     pycmd.clr_cmd()
@@ -167,7 +211,7 @@ def detailedSetting_func2():
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('11'))
     ansList = textload.loadCmdAdv("detailedSetting2")
-    yrn = ans.optionstr(ans.detailedsetting2, 5,True)
+    yrn = ans.optionstr(ans.detailedsetting2,5,'center',True)
     if yrn == ansList[len(ansList)-1]:
         pycmd.clr_cmd()
         detailedSetting_func3()
@@ -181,7 +225,7 @@ def detailedSetting_func3():
     eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('12'))
-    yrn = ans.optionint(ans.detailedsetting3,1)
+    yrn = ans.optionint(ans.detailedsetting3)
     pass
 
 def acknowledgmentAttribute_func():
@@ -192,16 +236,49 @@ def acknowledgmentAttribute_func():
     playerName = cache.playObject['object']['0']['Name']
     eprint.p('\n')
     eprint.plt(title1)
-    eprint.pl(playerName)
+    playerid = textload.loadStageWordText('0') + '0'
+    indexPlayerId = text.getTextIndex(playerid)
+    fixPlayerId = playerid + ' ' * (6 - indexPlayerId)
+    eprint.p(fixPlayerId)
+    fixPlayerName = textload.loadStageWordText('13')
+    eprint.p(fixPlayerName)
+    indexPlayerName = text.getTextIndex(playerName)
+    fixPlayerNameSpace = ' ' * (11 - indexPlayerName)
+    pycmd.pcmd(playerName,playerName,None)
+    eprint.p(fixPlayerNameSpace)
+    playerSelfName = cache.playObject['object']['0']['SelfName']
+    fixPlayerSelfName = textload.loadStageWordText('11')
+    eprint.p(fixPlayerSelfName)
+    pycmd.pcmd(playerSelfName,playerSelfName,None)
+    fixPlayerSelfNameSpace = ' ' * (11 - text.getTextIndex(playerSelfName))
+    eprint.p(fixPlayerSelfNameSpace)
+    playerNickName = cache.playObject['object']['0']['NickName']
+    eprint.p(textload.loadStageWordText('12'))
+    pycmd.pcmd(playerNickName,playerNickName,None)
+    eprint.p('\n')
     eprint.p(textload.loadStageWordText('2'))
     eprint.p(playerSex)
     eprint.p('\n')
     eprint.p(textload.loadStageWordText('3'))
     eprint.p(playerAge)
     eprint.p('\n')
-    eprint.p(textload.loadStageWordText('4'))
-    featuresList = cache.playObject['object']['0']['Features']
-    featuresListStr = attr.getFeaturesStr(featuresList)
-    eprint.pl(featuresListStr)
     eprint.pline()
+    eprint.pl(textload.loadStageWordText('5'))
+    eprint.pline()
+    eprint.pl(textload.loadStageWordText('6'))
+    eprint.pline()
+    eprint.pl(textload.loadStageWordText('7'))
+    eprint.p('\n')
+    eprint.pline()
+    cmdData = textload.loadCmdAdv('acknowledgmentAttribute')
+    cmdYesText = cmdData[0]
+    cmdYesTextAndId = ans.idIndex(0) + cmdYesText
+    cmdNoText = cmdData[1]
+    cmdNoTextAndId = ans.idIndex(1) + cmdNoText
+    pycmd.pcmd(cmdYesTextAndId,'0',None)
+    eprint.p('\n')
+    pycmd.pcmd(cmdNoTextAndId,'1',None)
+    inputS = [playerName,playerSelfName,playerNickName,'0','1']
+    eprint.p('\n')
+    yrn = game.askfor_All(inputS)
     pass
