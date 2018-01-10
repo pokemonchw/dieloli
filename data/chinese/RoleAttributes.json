@@ -3,11 +3,21 @@
     "Name":"主人公",
     "NickName":"你",
     "SelfName":"我",
+    "Species":"人类",
     "Sex":"男",
     "Age":"17",
+    "Relationship":"无",
+    "San":"50",
+    "Intimate":"0",
+    "Graces":"0",
     "Features":{},
     "HitPointMax":"2000",
-    "ManaPointMax":"2000"
+    "ManaPointMax":"2000",
+    "MouthExperience":"25",
+    "BosomExperience":"25",
+    "VaginaExperience":"25",
+    "ClitorisExperience":"25",
+    "AnusExperience":"25"
   },
   "Sex":["男","女","扶她","无性人"],
   "Features":{
@@ -18,6 +28,8 @@
     "AnimalExternal":["吸血","狐臭"],
     "Charm":["魅力","迷之魅力"]
   },
+  "Species":["人类"],
+  "Relationship":["无","恋慕","爱慕","厌恶","仇恨"],
   "AnimalFeatures":{
     "可爱的猫咪":{
       "AnimalInternal":"兽耳",

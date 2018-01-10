@@ -10,6 +10,7 @@ def configData():
 game_name = configData()['game_name']
 verson = configData()['verson']
 author = configData()['author']
+verson_time = configData()['verson_time']
 background_color = configData()['background_color']
 font_color = configData()['font_color']
 onbutton = configData()['onbutton_color']

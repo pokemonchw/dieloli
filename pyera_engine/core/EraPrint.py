@@ -38,9 +38,13 @@ def pl(string='', style='standard'):
         p('\n')
 
 #输出分割线
-def pline(sample='=', style='standard'):
+def pline(sample='-', style='standard'):
     textWidth = config.text_width
-    pl("-" * textWidth)
+    pl(sample * textWidth,style)
+
+def plittleline(sample = '.',style = 'standard'):
+    textWidth = config.text_width
+    pl(sample * textWidth, style)
 
 #输出警告
 def pwarn(string, style='warning'):

@@ -6,11 +6,16 @@ wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesU
 cmd_map = {}
 playObject = {'objectId': '', 'object': {}}
 temObjectDefault = textload.loadRoleAtrText('Default')
-temporaryObjectBak = {'Name': temObjectDefault['Name'],
-                      'NickName': temObjectDefault['NickName'],
-                      'SelfName': temObjectDefault['SelfName'],
-                      'Sex': temObjectDefault['Sex'],
-                      'Age': temObjectDefault['Age'],
+temporaryObjectBak = {'Name':temObjectDefault['Name'],
+                      'NickName':temObjectDefault['NickName'],
+                      'SelfName':temObjectDefault['SelfName'],
+                      'Species':temObjectDefault['Species'],
+                      'Relationship':temObjectDefault['Relationship'],
+                      'Sex':temObjectDefault['Sex'],
+                      'Age':temObjectDefault['Age'],
+                      'San':temObjectDefault['San'],
+                      'Intimate':temObjectDefault['Intimate'],
+                      'Graces':temObjectDefault['Graces'],
                       'Features':temObjectDefault['Features'],
                       'HitPointMax':temObjectDefault['HitPointMax'],
                       'HitPoint':temObjectDefault['HitPointMax'],

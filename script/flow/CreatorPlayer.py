@@ -7,6 +7,8 @@ import core.PyCmd as pycmd
 import random
 import script.AttrCalculation as attr
 import core.TextHandle as text
+import script.ProportionalBar as proportionalBar
+import core.GameConfig as config
 
 playerId = '0'
 
@@ -237,48 +239,99 @@ def acknowledgmentAttribute_func():
     eprint.p('\n')
     eprint.plt(title1)
     playerid = textload.loadStageWordText('0') + '0'
-    indexPlayerId = text.getTextIndex(playerid)
-    fixPlayerId = playerid + ' ' * (6 - indexPlayerId)
-    eprint.p(fixPlayerId)
+    eprint.pl(playerid)
     fixPlayerName = textload.loadStageWordText('13')
-    eprint.p(fixPlayerName)
+    playerName = fixPlayerName + playerName
     indexPlayerName = text.getTextIndex(playerName)
-    fixPlayerNameSpace = ' ' * (11 - indexPlayerName)
-    pycmd.pcmd(playerName,playerName,None)
+    fixPlayerNameSpace = ' ' * (24 - indexPlayerName)
     eprint.p(fixPlayerNameSpace)
+    eprint.p(playerName)
     playerSelfName = cache.playObject['object']['0']['SelfName']
     fixPlayerSelfName = textload.loadStageWordText('11')
-    eprint.p(fixPlayerSelfName)
-    pycmd.pcmd(playerSelfName,playerSelfName,None)
-    fixPlayerSelfNameSpace = ' ' * (11 - text.getTextIndex(playerSelfName))
+    playerSelfName = fixPlayerSelfName + playerSelfName
+    indexPlayerSelfName = text.getTextIndex(playerSelfName)
+    fixPlayerSelfNameSpace = ' ' * (24 - indexPlayerSelfName)
     eprint.p(fixPlayerSelfNameSpace)
+    eprint.p(playerSelfName)
     playerNickName = cache.playObject['object']['0']['NickName']
-    eprint.p(textload.loadStageWordText('12'))
-    pycmd.pcmd(playerNickName,playerNickName,None)
+    playerNickName = textload.loadStageWordText('12') + playerNickName
+    indexplayerNickName = text.getTextIndex(playerNickName)
+    fixPlayerNickName = ' ' * (24 - indexplayerNickName)
+    playerNickName = fixPlayerNickName + playerNickName
+    eprint.p(playerNickName)
+    relationship = cache.playObject['object']['0']['Relationship']
+    relationship = textload.loadStageWordText('14') + relationship
+    indexrelationship = text.getTextIndex(relationship)
+    fixRelationship = ' ' * (24 - indexrelationship)
+    relationship = fixRelationship + relationship
+    eprint.p(relationship)
     eprint.p('\n')
-    eprint.p(textload.loadStageWordText('2'))
+    playerSpecies = cache.playObject['object']['0']['Species']
+    playerSpecies = textload.loadStageWordText('15') + playerSpecies
+    indexplayerSpercies = text.getTextIndex(playerSpecies)
+    fixPlayerSpercies = ' ' * (24 - indexplayerSpercies)
+    playerSpecies = fixPlayerSpercies + playerSpecies
+    eprint.p(playerSpecies)
+    playerSex = textload.loadStageWordText('2') + playerSex
+    indexplayerSex = text.getTextIndex(playerSex)
+    fixPlayerSex = ' ' * (24 - indexplayerSex)
+    playerSex = fixPlayerSex + playerSex
     eprint.p(playerSex)
-    eprint.p('\n')
-    eprint.p(textload.loadStageWordText('3'))
+    playerAge = textload.loadStageWordText('3') + str(playerAge)
+    indexplayerAge = text.getTextIndex(playerAge)
+    fixPlayerAge = ' ' * (24 - indexplayerAge)
+    playerAge = fixPlayerAge + playerAge
     eprint.p(playerAge)
     eprint.p('\n')
-    eprint.pline()
+    playerSan = cache.playObject['object']['0']['San']
+    playerSan = textload.loadStageWordText('10') + playerSan
+    indexPlayerSan = text.getTextIndex(playerSan)
+    fixPlayerSan = ' ' * (24 - indexPlayerSan)
+    playerSan = fixPlayerSan + playerSan
+    eprint.p(playerSan)
+    playerIntimate = cache.playObject['object']['0']['Intimate']
+    playerIntimate = textload.loadStageWordText('16') + playerIntimate
+    indexPlayerIntimate = text.getTextIndex(playerIntimate)
+    fixPlayerIntimate = ' ' * (24 - indexPlayerIntimate)
+    playerIntimate = fixPlayerIntimate + playerIntimate
+    eprint.p(playerIntimate)
+    playerGraces = cache.playObject['object']['0']['Graces']
+    playerGraces = textload.loadStageWordText('17') + playerGraces
+    indexPlayerGraces = text.getTextIndex(playerGraces)
+    fixPlayerGraces = ' ' * (24 - indexPlayerGraces)
+    playerGraces = fixPlayerGraces + playerGraces
+    eprint.p(playerGraces)
+    eprint.p('\n')
+    playerHitPoint = cache.playObject['object']['0']['HitPoint']
+    playerMaxHitPoint = cache.playObject['object']['0']['HitPointMax']
+    hitPointText = textload.loadStageWordText('8')
+    hitPointBar = proportionalBar.getProportionalBar(hitPointText,playerMaxHitPoint,playerHitPoint)
+    textWidth = config.text_width
+    indexHitPointBar = text.getTextIndex(hitPointBar)
+    fixHitPointBar = ' ' * (int(textWidth/2) - int(indexHitPointBar) - 1)
+    hitPointBar = fixHitPointBar + hitPointBar
+    eprint.p(hitPointBar)
+    playerManaPoint = cache.playObject['object']['0']['ManaPoint']
+    playerMaxManaPoint = cache.playObject['object']['0']['ManaPointMax']
+    manaPointText = textload.loadStageWordText('9')
+    manaPointBar = proportionalBar.getProportionalBar(manaPointText,playerMaxManaPoint,playerManaPoint)
+    eprint.p(' ' * 2)
+    eprint.p(manaPointBar)
+    eprint.p('\n')
+    eprint.plittleline()
+    eprint.p(textload.loadStageWordText('18'))
+    eprint.plittleline()
     eprint.pl(textload.loadStageWordText('5'))
-    eprint.pline()
+    eprint.plittleline()
     eprint.pl(textload.loadStageWordText('6'))
-    eprint.pline()
+    eprint.plittleline()
     eprint.pl(textload.loadStageWordText('7'))
     eprint.p('\n')
     eprint.pline()
-    cmdData = textload.loadCmdAdv('acknowledgmentAttribute')
-    cmdYesText = cmdData[0]
-    cmdYesTextAndId = ans.idIndex(0) + cmdYesText
-    cmdNoText = cmdData[1]
-    cmdNoTextAndId = ans.idIndex(1) + cmdNoText
-    pycmd.pcmd(cmdYesTextAndId,'0',None)
-    eprint.p('\n')
-    pycmd.pcmd(cmdNoTextAndId,'1',None)
-    inputS = [playerName,playerSelfName,playerNickName,'0','1']
-    eprint.p('\n')
-    yrn = game.askfor_All(inputS)
+    yrn = ans.optionint(ans.acknowledgmentAttribute,1)
+    if yrn == '1':
+        cache.wframeMouse['wFrameRePrint'] = 1
+        eprint.pnextscreen()
+        import script.mainflow as mainflow
+        mainflow.main_func()
     pass

@@ -14,6 +14,7 @@ inputselfname = 'inputSelfName'
 detailedsetting1 = "detailedSetting1"
 detailedsetting2 = "detailedSetting2"
 detailedsetting3 = "detailedSetting3"
+acknowledgmentAttribute = "acknowledgmentAttribute"
 
 def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True):
     cmdListDate = textload.loadCmdAdv(cmdList).copy()

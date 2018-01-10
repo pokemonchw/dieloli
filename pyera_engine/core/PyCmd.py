@@ -7,11 +7,14 @@ clear_default_flow=flow.clear_default_flow
 bind_cmd = flow.bind_cmd
 
 #输出命令
-def pcmd(cmd_str, cmd_number, cmd_func=flow.null_func, arg=(), kw={}, normal_style='standard', on_style='onbutton'):
+def pcmd(cmd_str, cmd_id, cmd_func=flow.null_func, arg=(), kw={}, normal_style='standard', on_style='onbutton'):
+    import core.Dictionaries as dictionaries
+    cmd_str = dictionaries.handleText(cmd_str)
+    cmd_id = dictionaries.handleText(str(cmd_id))
     global last_char
     if len(cmd_str) > 0:
         last_char = cmd_str[-1:]
-    flow.print_cmd(cmd_str, cmd_number, cmd_func, arg, kw, normal_style, on_style)
+    flow.print_cmd(cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style)
 
 #获得一个没有用过的命令编号
 unused_cmd_num=500

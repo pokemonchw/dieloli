@@ -23,6 +23,7 @@ def main_func():
     eprint.pl(text.align(config.game_name, 'center'))
     eprint.pl(text.align(config.author, 'right'))
     eprint.pl(text.align(config.verson, 'right'))
+    eprint.pl(text.align(config.verson_time,'right'))
     eprint.p('\n')
     eprint.pline()
     eprint.lcp(1/3,textload.loadMessageAdv('2'))
