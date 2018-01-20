@@ -9,6 +9,7 @@ import script.AttrCalculation as attr
 import core.TextHandle as text
 import script.ProportionalBar as proportionalBar
 import core.GameConfig as config
+import script.AttrText as attrtext
 
 playerId = '0'
 
@@ -176,6 +177,8 @@ def attributeGenerationBranch_func():
         temId = temlist[playerSex]
         temData = attr.getAttr(temId)
         cache.temporaryObject['Age'] = temData['Age']
+        cache.temporaryObject['SexExperience'] = temData['SexExperienceList']
+        cache.temporaryObject['SexGrade'] = temData['SexGradeList']
         acknowledgmentAttribute_func()
     elif yrn == 2:
         pycmd.clr_cmd()
@@ -240,7 +243,7 @@ def acknowledgmentAttribute_func():
     eprint.p('\n')
     eprint.plt(title1)
     playerid = textload.loadStageWordText('0') + '0'
-    eprint.pl(playerid)
+    eprint.p(playerid)
     fixPlayerName = textload.loadStageWordText('13')
     playerName = fixPlayerName + playerName
     attrListString.append(playerName)
@@ -271,7 +274,7 @@ def acknowledgmentAttribute_func():
     playerGraces = cache.playObject['object']['0']['Graces']
     playerGraces = textload.loadStageWordText('17') + playerGraces
     attrListString.append(playerGraces)
-    eprint.plist(attrListString,4)
+    eprint.plist(attrListString,4,'center')
     eprint.p('\n')
     playerHitPoint = cache.playObject['object']['0']['HitPoint']
     playerMaxHitPoint = cache.playObject['object']['0']['HitPointMax']
@@ -291,16 +294,26 @@ def acknowledgmentAttribute_func():
     eprint.p('\n')
     eprint.plittleline()
     eprint.p(textload.loadStageWordText('18'))
+    eprint.p('\n')
+    playerSexExperienceList = cache.playObject['object']['0']['SexExperience']
+    playerSexTextList = attrtext.getSexExperienceText(playerSexExperienceList,cache.playObject['object']['0']['Sex'])
+    eprint.plist(playerSexTextList,4,'center')
     eprint.plittleline()
     eprint.pl(textload.loadStageWordText('5'))
+    playerSexGradeList = cache.playObject['object']['0']['SexGrade']
+    playerSexGradeTextList = attrtext.getSexGradeTextList(playerSexGradeList,cache.playObject['object']['0']['Sex'])
+    eprint.plist(playerSexGradeTextList,4,'center')
     eprint.plittleline()
     eprint.pl(textload.loadStageWordText('6'))
+    playerFeatures = cache.playObject['object']['0']['Features']
+    playerFeaturesStr = attrtext.getFeaturesStr(playerFeatures)
+    eprint.p(playerFeaturesStr)
     eprint.plittleline()
     eprint.pl(textload.loadStageWordText('7'))
     eprint.p('\n')
     eprint.pline()
     yrn = ans.optionint(ans.acknowledgmentAttribute,1)
-    if yrn == '1':
+    if yrn == 1:
         cache.wframeMouse['wFrameRePrint'] = 1
         eprint.pnextscreen()
         import script.mainflow as mainflow

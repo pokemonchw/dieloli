@@ -13,7 +13,8 @@
     "Features":{},
     "HitPointMax":"2000",
     "ManaPointMax":"2000",
-    "SexExperience":"None"
+    "SexExperience":{},
+    "SexGrade":{}
   },
   "Sex":["男","女","扶她","无性人"],
   "Features":{

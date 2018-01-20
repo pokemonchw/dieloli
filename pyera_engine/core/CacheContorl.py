@@ -20,7 +20,9 @@ temporaryObjectBak = {'Name':temObjectDefault['Name'],
                       'HitPointMax':temObjectDefault['HitPointMax'],
                       'HitPoint':temObjectDefault['HitPointMax'],
                       'ManaPointMax':temObjectDefault['ManaPointMax'],
-                      'ManaPoint':temObjectDefault['ManaPointMax']
+                      'ManaPoint':temObjectDefault['ManaPointMax'],
+                      'SexExperience':temObjectDefault['SexExperience'],
+                      'SexGrade':temObjectDefault['SexGrade']
                       }
 featuresList = {"Age":"","Figure":"","Sex":"","AnimalInternal":"","AnimalExternal":"",
                 "Charm":""}

@@ -2,7 +2,6 @@ import core.data as data
 import os
 import random
 import core.CacheContorl as cache
-import script.TextLoading as textload
 from core.GameConfig import language
 from core.pycfg import gamepath
 
@@ -33,13 +32,15 @@ def getAttr(temName):
     maxManaPoint = getMaxManaPoint(manaPointTemName)
     sexExperienceTemName = temData["SexExperience"]
     sexExperienceList = getSexExperience(sexExperienceTemName)
+    sexGradeList = getSexGrade(sexExperienceList)
     attrList = {
         'Age':age,
         'MaxHitPoint':maxHitPoint,
         'HitPoint':maxHitPoint,
         'MaxManaPoint':maxManaPoint,
         'ManaPoint':maxManaPoint,
-        'SexExperienceList':sexExperienceList
+        'SexExperienceList':sexExperienceList,
+        'SexGradeList':sexGradeList
     }
     return attrList
 
@@ -74,17 +75,17 @@ def getSexExperience(temName):
     clitorisExperienceTemName = temData['ClitorisExperienceTem']
     anusExperienceTemName = temData['AnusExperienceTem']
     penisExperienceTemName = temData['PenisExperienceTem']
-    mouthExperienceList = templateData['MouthExperienceTem'][mouthExperienceTemName]
+    mouthExperienceList = templateData['SexExperience']['MouthExperienceTem'][mouthExperienceTemName]
     mouthExperience = random.randint(int(mouthExperienceList[0]),int(mouthExperienceList[1]))
-    bosomExperienceList = templateData['BosomExperienceTem'][bosomExperienceTemName]
+    bosomExperienceList = templateData['SexExperience']['BosomExperienceTem'][bosomExperienceTemName]
     bosomExperience = random.randint(int(bosomExperienceList[0]),int(bosomExperienceList[1]))
-    vaginaExperienceList = templateData['VaginaExperienceTem'][vaginaExperienceTemName]
+    vaginaExperienceList = templateData['SexExperience']['VaginaExperienceTem'][vaginaExperienceTemName]
     vaginaExperience = random.randint(int(vaginaExperienceList[0]),int(vaginaExperienceList[1]))
-    clitorisExperienceList = templateData['ClitorisExperienceTem'][clitorisExperienceTemName]
+    clitorisExperienceList = templateData['SexExperience']['ClitorisExperienceTem'][clitorisExperienceTemName]
     clitorisExperience = random.randint(int(clitorisExperienceList[0]),int(clitorisExperienceList[1]))
-    anusExperienceList = templateData['AnusExperienceTem'][anusExperienceTemName]
+    anusExperienceList = templateData['SexExperience']['AnusExperienceTem'][anusExperienceTemName]
     anusExperience = random.randint(int(anusExperienceList[0]),int(anusExperienceList[1]))
-    penisExperienceList = templateData['PenisExperienceTem'][penisExperienceTemName]
+    penisExperienceList = templateData['SexExperience']['PenisExperienceTem'][penisExperienceTemName]
     penisExperience = random.randint(int(penisExperienceList[0]),int(penisExperienceList[1]))
     sexExperience = {
         'mouthExperience' : mouthExperience,
@@ -96,98 +97,51 @@ def getSexExperience(temName):
     }
     return sexExperience
 
-def getSexExperienceText(sexList,sexName):
-    mouthExperience = sexList['mouthExperience']
-    bosomExperience = sexList['bosomExperience']
-    vaginaExperience = sexList['vaginaExperience']
-    clitorisExperience = sexList['clitorisExperience']
-    anusExperience = sexList['anusExperience']
-    penisExperience = sexList['penisExperience']
-    sexData = roleAttrData['Sex']
-    sexExperienceText = []
-    if sexName == sexData[0]:
-        sexExperienceText = [
-            textload.loadStageWordText('19') + mouthExperience,
-            textload.loadStageWordText('20') + bosomExperience,
-            textload.loadStageWordText('23') + anusExperience,
-            textload.loadStageWordText('24') + penisExperience
-        ]
-    elif sexName == sexData[1]:
-        sexExperienceText = [
-            textload.loadStageWordText('19') + mouthExperience,
-            textload.loadStageWordText('20') + bosomExperience,
-            textload.loadStageWordText('21') + vaginaExperience,
-            textload.loadStageWordText('22') + clitorisExperience,
-            textload.loadStageWordText('23') + anusExperience
-        ]
-    elif sexName == sexData[2]:
-        sexExperienceText = [
-            textload.loadStageWordText('19') + mouthExperience,
-            textload.loadStageWordText('20') + bosomExperience,
-            textload.loadStageWordText('21') + vaginaExperience,
-            textload.loadStageWordText('22') + clitorisExperience,
-            textload.loadStageWordText('23') + anusExperience,
-            textload.loadStageWordText('24') + penisExperience
-        ]
-    elif sexName == sexData[3]:
-        sexExperienceText = [
-            textload.loadStageWordText('19') + mouthExperience,
-            textload.loadStageWordText('20') + bosomExperience,
-            textload.loadStageWordText('23') + anusExperience
-        ]
-    return sexExperienceText
+def getSexGrade(sexExperienceData):
+    mouthExperience = sexExperienceData['mouthExperience']
+    bosomExperience = sexExperienceData['bosomExperience']
+    vaginaExperience = sexExperienceData['vaginaExperience']
+    clitorisExperience = sexExperienceData['clitorisExperience']
+    anusExperience = sexExperienceData['anusExperience']
+    penisExperience = sexExperienceData['penisExperience']
+    mouthGrade = judgeGrade(mouthExperience)
+    bosomGrade = judgeGrade(bosomExperience)
+    vaginaGrade = judgeGrade(vaginaExperience)
+    clitorisGrade = judgeGrade(clitorisExperience)
+    anusGrade = judgeGrade(anusExperience)
+    penisGrade = judgeGrade(penisExperience)
+    sexGradeList = {
+        'mouthGrade' : mouthGrade,
+        'bosomGrade' : bosomGrade,
+        'vaginaGrade' : vaginaGrade,
+        'clitorisGrade' : clitorisGrade,
+        'anusGrade' : anusGrade,
+        'penisGrade' : penisGrade
+    }
+    return sexGradeList
 
-def getFeaturesStr(fList):
-    featuresListStr = ''
-    try:
-        Age = fList['Age']
-        if Age != '':
-            featuresListStr = featuresListStr + '[' + Age + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    try:
-        Figure = fList['Figure']
-        if Figure != '':
-            featuresListStr = featuresListStr + '[' + Figure + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    try:
-        Sex = fList['Sex']
-        if Sex != '':
-            featuresListStr = featuresListStr + '[' + Sex + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    try:
-        AnimalInternal = fList['AnimalInternal']
-        if AnimalInternal != '':
-            featuresListStr = featuresListStr + '[' + AnimalInternal + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    try:
-        AnimalExternal = fList['AnimalExternal']
-        if AnimalExternal != '':
-            featuresListStr = featuresListStr + '[' + AnimalExternal + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    try:
-        Charm = fList['Charm']
-        if Charm != '':
-            featuresListStr = featuresListStr + '[' + Charm + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    return featuresListStr
+def judgeGrade(experience):
+    experience = int(experience)
+    grade = ''
+    if experience < 50:
+        grade = 'G'
+    elif experience < 100:
+        grade = 'F'
+    elif experience < 200:
+        grade = 'E'
+    elif experience < 500:
+        grade = 'D'
+    elif experience < 1000:
+        grade = 'C'
+    elif experience < 2000:
+        grade = 'B'
+    elif experience < 5000:
+        grade = 'A'
+    elif experience < 10000:
+        grade = 'S'
+    elif experience >= 10000:
+        grade = 'EX'
+    return grade
 
 def setAnimalCache(animalName):
     animalData = roleAttrData["AnimalFeatures"][animalName]

@@ -19,6 +19,7 @@ menuPath = 'MenuText.json'
 rolePath = 'RoleAttributes.json'
 stageWordPath = 'StageWord.json'
 errorPath = 'ErrorText.json'
+attrTemplatePath = 'AttrTemplate.json'
 
 def getData(jsonName):
     dataPath = os.path.join(gamepath,'data',language,jsonName)
@@ -54,3 +55,8 @@ def loadErrorText(errorId):
     errorData = getData(errorPath)
     errorText = errorData[errorId]
     return errorText
+
+def loadAttrTemplateText(temId):
+    temData = getData(attrTemplatePath)
+    temText = temData[temId]
+    return temText

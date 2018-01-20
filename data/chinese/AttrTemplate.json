@@ -1,5 +1,33 @@
 {
   "TemList":{"男":"Man","女":"Woman","扶她":"Futa","无性人":"Asexual"},
+  "Man":{
+    "Sex":"男",
+    "Age":"Usually",
+    "HitPoint":"Ordinary",
+    "ManaPoint":"Ordinary",
+    "SexExperience":"None"
+  },
+  "Woman":{
+    "Sex":"女",
+    "Age":"Usually",
+    "HitPoint":"Ordinary",
+    "ManaPoint":"Ordinary",
+    "SexExperience":"None"
+  },
+  "Futa":{
+    "Sex":"扶她",
+    "Age":"Usually",
+    "HitPoint":"Ordinary",
+    "ManaPoint":"Ordinary",
+    "SexExperience":"None"
+  },
+  "Asexual":{
+    "Sex":"无性人",
+    "Age":"Usually",
+    "HitPoint":"Ordinary",
+    "ManaPoint":"Ordinary",
+    "SexExperience":"None"
+  },
   "AgeTem":{
     "List":["Usually","Young"],
     "Usually":{
@@ -34,34 +62,6 @@
     "WeakMagic":{
       "ManaPointMax":"1500"
     }
-  },
-  "Man":{
-    "Sex":"男",
-    "Age":"Usually",
-    "HitPoint":"Ordinary",
-    "ManaPoint":"Ordinary",
-    "SexExperience":"None"
-  },
-  "Woman":{
-    "Sex":"女",
-    "Age":"Usually",
-    "HitPoint":"Ordinary",
-    "ManaPoint":"Ordinary",
-    "SexExperience":"None"
-  },
-  "Futa":{
-    "Sex":"扶她",
-    "Age":"Usually",
-    "HitPoint":"Ordinary",
-    "ManaPoint":"Ordinary",
-    "SexExperience":"None"
-  },
-  "Asexual":{
-    "Sex":"无性人",
-    "Age":"Usually",
-    "HitPoint":"Ordinary",
-    "ManaPoint":"Ordinary",
-    "SexExperience":"None"
   },
   "SexExperience": {
     "None": {
