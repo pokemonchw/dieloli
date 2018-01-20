@@ -57,10 +57,6 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
         cmd_func(*arg, **kw)
     cmd_map[cmd_number] = run_func
 
-
-
-
-
 def print_cmd(cmd_str, cmd_number, cmd_func=null_func, arg=(), kw={}, normal_style='standard', on_style='onbutton'):
     '''arg is tuple contain args which cmd_func could be used'''
     bind_cmd(cmd_number, cmd_func, arg, kw)

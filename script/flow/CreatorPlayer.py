@@ -231,6 +231,7 @@ def detailedSetting_func3():
     pass
 
 def acknowledgmentAttribute_func():
+    attrListString = []
     cache.playObject['object']['0'] = cache.temporaryObject.copy()
     playerSex = cache.playObject['object']['0']['Sex']
     playerAge = cache.playObject['object']['0']['Age']
@@ -242,65 +243,35 @@ def acknowledgmentAttribute_func():
     eprint.pl(playerid)
     fixPlayerName = textload.loadStageWordText('13')
     playerName = fixPlayerName + playerName
-    indexPlayerName = text.getTextIndex(playerName)
-    fixPlayerNameSpace = ' ' * (24 - indexPlayerName)
-    eprint.p(fixPlayerNameSpace)
-    eprint.p(playerName)
+    attrListString.append(playerName)
     playerSelfName = cache.playObject['object']['0']['SelfName']
     fixPlayerSelfName = textload.loadStageWordText('11')
     playerSelfName = fixPlayerSelfName + playerSelfName
-    indexPlayerSelfName = text.getTextIndex(playerSelfName)
-    fixPlayerSelfNameSpace = ' ' * (24 - indexPlayerSelfName)
-    eprint.p(fixPlayerSelfNameSpace)
-    eprint.p(playerSelfName)
+    attrListString.append(playerSelfName)
     playerNickName = cache.playObject['object']['0']['NickName']
     playerNickName = textload.loadStageWordText('12') + playerNickName
-    indexplayerNickName = text.getTextIndex(playerNickName)
-    fixPlayerNickName = ' ' * (24 - indexplayerNickName)
-    playerNickName = fixPlayerNickName + playerNickName
-    eprint.p(playerNickName)
+    attrListString.append(playerNickName)
     relationship = cache.playObject['object']['0']['Relationship']
     relationship = textload.loadStageWordText('14') + relationship
-    indexrelationship = text.getTextIndex(relationship)
-    fixRelationship = ' ' * (24 - indexrelationship)
-    relationship = fixRelationship + relationship
-    eprint.p(relationship)
-    eprint.p('\n')
+    attrListString.append(relationship)
     playerSpecies = cache.playObject['object']['0']['Species']
     playerSpecies = textload.loadStageWordText('15') + playerSpecies
-    indexplayerSpercies = text.getTextIndex(playerSpecies)
-    fixPlayerSpercies = ' ' * (24 - indexplayerSpercies)
-    playerSpecies = fixPlayerSpercies + playerSpecies
-    eprint.p(playerSpecies)
+    attrListString.append(playerSpecies)
     playerSex = textload.loadStageWordText('2') + playerSex
-    indexplayerSex = text.getTextIndex(playerSex)
-    fixPlayerSex = ' ' * (24 - indexplayerSex)
-    playerSex = fixPlayerSex + playerSex
-    eprint.p(playerSex)
+    attrListString.append(playerSex)
     playerAge = textload.loadStageWordText('3') + str(playerAge)
-    indexplayerAge = text.getTextIndex(playerAge)
-    fixPlayerAge = ' ' * (24 - indexplayerAge)
-    playerAge = fixPlayerAge + playerAge
-    eprint.p(playerAge)
+    attrListString.append(playerAge)
     eprint.p('\n')
     playerSan = cache.playObject['object']['0']['San']
     playerSan = textload.loadStageWordText('10') + playerSan
-    indexPlayerSan = text.getTextIndex(playerSan)
-    fixPlayerSan = ' ' * (24 - indexPlayerSan)
-    playerSan = fixPlayerSan + playerSan
-    eprint.p(playerSan)
+    attrListString.append(playerSan)
     playerIntimate = cache.playObject['object']['0']['Intimate']
     playerIntimate = textload.loadStageWordText('16') + playerIntimate
-    indexPlayerIntimate = text.getTextIndex(playerIntimate)
-    fixPlayerIntimate = ' ' * (24 - indexPlayerIntimate)
-    playerIntimate = fixPlayerIntimate + playerIntimate
-    eprint.p(playerIntimate)
+    attrListString.append(playerIntimate)
     playerGraces = cache.playObject['object']['0']['Graces']
     playerGraces = textload.loadStageWordText('17') + playerGraces
-    indexPlayerGraces = text.getTextIndex(playerGraces)
-    fixPlayerGraces = ' ' * (24 - indexPlayerGraces)
-    playerGraces = fixPlayerGraces + playerGraces
-    eprint.p(playerGraces)
+    attrListString.append(playerGraces)
+    eprint.plist(attrListString,4)
     eprint.p('\n')
     playerHitPoint = cache.playObject['object']['0']['HitPoint']
     playerMaxHitPoint = cache.playObject['object']['0']['HitPointMax']

@@ -21,7 +21,7 @@ def p(string, style='standard'):
     pyio.print(string, style)
 
 # 小标题输出
-def plt(string,style='standard'):
+def plt(string):
     string=str(string)
     width = config.text_width
     textWidth = text.getTextIndex(string)
@@ -78,8 +78,31 @@ def pobo(sleepTime,string, style='standard'):
                 cache.wframeMouse['wFrameLinesUp'] = 2
             break
 
+def plist(stringList,stringColumn = 1,stringSize = 'left'):
+    textWidth = config.text_width
+    stringIndex = int(textWidth / stringColumn)
+    for i in range(0, len(stringList)):
+        stringText = stringList[i]
+        stringIdIndex = text.getTextIndex(stringList[i])
+        if stringSize == 'left':
+            stringTextFix = ' ' * (stringIndex - stringIdIndex)
+            stringText = stringText + stringTextFix
+        elif stringSize == 'center':
+            stringTextFix = ' ' * int((stringIndex - stringIdIndex) / 2)
+            stringText = stringTextFix + stringText + stringTextFix
+        elif stringSize == 'right':
+            stringTextFix = ' ' * (stringIndex - stringIdIndex)
+            stringText = stringTextFix + stringText
+        if i == 0:
+            p(stringText)
+        elif i / stringColumn >= 1 and i % stringColumn == 0:
+            p('\n')
+            p(stringText)
+        else:
+            p(stringText)
+
 #切换下一屏
-def pnextscreen(string = '',style='standard'):
+def pnextscreen():
     p('\n' * config.text_hight)
 
 #多行居中逐字输出
@@ -108,7 +131,7 @@ def lcp(sleepTime,string='',style='standard'):
     cache.wframeMouse['wFrameRePrint'] = 0
 
 #多行回车逐行输出
-def lkeyp(string='',style='standard'):
+def lkeyp(string=''):
     cache.wframeMouse['wFrameMouseNextLine'] = 1
     string = str(string)
     stringlist = string.split('\n')

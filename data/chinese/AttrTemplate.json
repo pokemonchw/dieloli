@@ -39,33 +39,38 @@
     "Sex":"男",
     "Age":"Usually",
     "HitPoint":"Ordinary",
-    "ManaPoint":"Ordinary"
+    "ManaPoint":"Ordinary",
+    "SexExperience":"None"
   },
   "Woman":{
     "Sex":"女",
     "Age":"Usually",
     "HitPoint":"Ordinary",
-    "ManaPoint":"Ordinary"
+    "ManaPoint":"Ordinary",
+    "SexExperience":"None"
   },
   "Futa":{
     "Sex":"扶她",
     "Age":"Usually",
     "HitPoint":"Ordinary",
-    "ManaPoint":"Ordinary"
+    "ManaPoint":"Ordinary",
+    "SexExperience":"None"
   },
   "Asexual":{
     "Sex":"无性人",
     "Age":"Usually",
     "HitPoint":"Ordinary",
-    "ManaPoint":"Ordinary"
+    "ManaPoint":"Ordinary",
+    "SexExperience":"None"
   },
-  "Experience": {
+  "SexExperience": {
     "None": {
       "MouthExperienceTem": "None",
       "BosomExperienceTem": "None",
       "VaginaExperienceTem": "None",
       "ClitorisExperienceTem": "None",
-      "AnusExperienceTem": "None"
+      "AnusExperienceTem": "None",
+      "PenisExperienceTem": "None"
     },
     "MouthExperienceTem":{
       "Abundant":[51,100],
