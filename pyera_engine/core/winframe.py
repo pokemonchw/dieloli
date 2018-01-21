@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-
 from tkinter import *
 from tkinter import ttk
 import json
@@ -7,6 +6,8 @@ import uuid
 import core.GameConfig as config
 import script.TextLoading as textload
 import core.CacheContorl as cache
+from tkinter import font
+
 
 # 显示主框架
 root = Tk()
@@ -14,8 +15,7 @@ root.title("dieloli")
 root.geometry(config.window_width + 'x' + config.window_hight + '+0+0')
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
-
-mainframe = ttk.Frame(root, padding='3 3 3 3')
+mainframe = ttk.Frame(root,borderwidth = 2)
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
 mainframe.columnconfigure(0, weight=1)
 mainframe.rowconfigure(0, weight=1)
@@ -23,7 +23,8 @@ mainframe.rowconfigure(0, weight=1)
 # 缩放角标
 ttk.Sizegrip(root).grid(column=0, row=0, sticky=(S, E))
 # 显示窗口
-textbox = Text(mainframe, width=config.textbox_width, height=config.textbox_hight)
+textbox = Text(mainframe, width=config.textbox_width, height=config.textbox_hight,
+               highlightbackground = config.background_color,bd = 0)
 textbox.grid(column=0, row=0, sticky=(N, W, E, S))
 
 # 垂直滚动条
@@ -32,8 +33,22 @@ textbox.configure(yscrollcommand=s_vertical.set)
 s_vertical.grid(column=1, row=0, sticky=(N, E, S))
 
 # 输入栏
+estyle = ttk.Style()
+orderFontData = textload.loadFontData('order')
+estyle.element_create("plain.field", "from", "clam")
+estyle.layout("EntryStyle.TEntry",
+                   [('Entry.plain.field', {'children': [('Entry.background', {'children': [(
+                           'Entry.padding', {'children': [(
+                               'Entry.textarea', {'sticky': 'nswe'})],
+                      'sticky': 'nswe'})], 'sticky': 'nswe'})],
+                      'border':'0', 'sticky': 'nswe'})])
+estyle.configure("EntryStyle.TEntry",
+                 background=orderFontData['background'],
+                 foreground=orderFontData['foreground'],
+                 selectbackground = orderFontData['selectbackground'],)
 order = StringVar()
-inputbox = ttk.Entry(mainframe, textvariable=order,font = (config.font,config.font_size))
+orderFont = font.Font(family = orderFontData['font'],size = orderFontData['fontSize'])
+inputbox = ttk.Entry(mainframe, style = 'EntryStyle.TEntry',textvariable=order,font = orderFont)
 inputbox.grid(column=0, row=1, sticky=(W, E, S))
 
 # 构建菜单栏
@@ -112,7 +127,7 @@ def read_queue():
             if c['type']=='text':
                 _print(c['text'], style=tuple(c['style']))
             if c['type'] == 'cmd':
-                _io_print_cmd(c['text'],c['num'],normal_style=tuple(c['normal_style']),on_style=tuple(c['on_style']))
+                _io_print_cmd(c['text'],c['num'])
     root.after(10, read_queue)
 
 def _run():

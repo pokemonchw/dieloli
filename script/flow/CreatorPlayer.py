@@ -121,6 +121,7 @@ def inputSexConfirm_func():
     yrn = ans.optionint(ans.currencymenu,1)
     eprint.p('\n')
     if yrn == 0:
+        attr.setSexCache(sexId)
         if sexId == textload.loadRoleAtrText('Sex')[2]:
             cache.temporaryObject['Features']['Sex'] = textload.loadRoleAtrText('Features')['Sex'][0]
         elif sexId == textload.loadRoleAtrText('Sex')[3]:
@@ -163,6 +164,14 @@ def inputSexChoice_func():
     pass
 
 def attributeGenerationBranch_func():
+    playerSex = cache.playObject['object']['0']['Sex']
+    temlist = attr.getTemList()
+    temId = temlist[playerSex]
+    temData = attr.getAttr(temId)
+    cache.temporaryObject['Age'] = temData['Age']
+    cache.temporaryObject['SexExperience'] = temData['SexExperienceList']
+    cache.temporaryObject['SexGrade'] = temData['SexGradeList']
+
     pycmd.clr_cmd()
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('9'))
@@ -172,13 +181,6 @@ def attributeGenerationBranch_func():
         detailedSetting_func1()
     elif yrn == 1:
         pycmd.clr_cmd()
-        playerSex = cache.playObject['object']['0']['Sex']
-        temlist = attr.getTemList()
-        temId = temlist[playerSex]
-        temData = attr.getAttr(temId)
-        cache.temporaryObject['Age'] = temData['Age']
-        cache.temporaryObject['SexExperience'] = temData['SexExperienceList']
-        cache.temporaryObject['SexGrade'] = temData['SexGradeList']
         acknowledgmentAttribute_func()
     elif yrn == 2:
         pycmd.clr_cmd()

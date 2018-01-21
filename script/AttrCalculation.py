@@ -33,6 +33,7 @@ def getAttr(temName):
     sexExperienceTemName = temData["SexExperience"]
     sexExperienceList = getSexExperience(sexExperienceTemName)
     sexGradeList = getSexGrade(sexExperienceList)
+
     attrList = {
         'Age':age,
         'MaxHitPoint':maxHitPoint,
@@ -143,37 +144,28 @@ def judgeGrade(experience):
         grade = 'EX'
     return grade
 
+def setSexCache(SexName):
+    SexId = templateData['TemList'][SexName]
+    featuresTemData = roleAttrData['SexFeatures'][SexId]
+    cacheList = ['Age', "Chastity", 'Disposition', 'SelfConfidence', 'Friends', 'Figure',
+                 'Sex', 'AnimalInternal', 'AnimalExternal', 'Charm'
+                 ]
+    for i in range(0,len(cacheList)):
+        try:
+            cacheText = featuresTemData[cacheList[i]]
+            cache.temporaryObject['Features'][cacheList[i]] = cacheText
+        except:
+            pass
+
 def setAnimalCache(animalName):
     animalData = roleAttrData["AnimalFeatures"][animalName]
-    cacheSize = cache.temporaryObject['Features']
-    try:
-        Age = animalData['Age']
-        cacheSize['Age'] = Age
-    except KeyError:
-        pass
-    try:
-        Figure = animalData['Figure']
-        cacheSize['Figure'] = Figure
-    except KeyError:
-        pass
-    try:
-        Sex = animalData['Sex']
-        cacheSize['Sex'] = Sex
-    except KeyError:
-        pass
-    try:
-        AnimalInternal = animalData['AnimalInternal']
-        cacheSize['AnimalInternal'] = AnimalInternal
-    except KeyError:
-        pass
-    try:
-        AnimalExternal = animalData['AnimalExternal']
-        cacheSize['AnimalExternal'] = AnimalExternal
-    except KeyError:
-        pass
-    try:
-        Charm = animalData['Charm']
-        cacheSize['Charm'] = Charm
-    except KeyError:
-        pass
+    cacheList = ['Age',"Chastity",'Disposition','SelfConfidence','Friends','Figure',
+                        'Sex','AnimalInternal','AnimalExternal','Charm'
+                        ]
+    for i in range(0,len(cacheList)):
+        try:
+            cacheText = animalData[cacheList[i]]
+            cache.temporaryObject['Features'][cacheList[i]] = cacheText
+        except KeyError:
+            pass
     pass

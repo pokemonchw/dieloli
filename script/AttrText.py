@@ -46,52 +46,16 @@ def getSexGradeTextList(sexGradeList,sexName):
 
 def getFeaturesStr(fList):
     featuresListStr = ''
-    try:
-        Age = fList['Age']
-        if Age != '':
-            featuresListStr = featuresListStr + '[' + Age + ']'
-        else:
+    featuresListText = ['Age',"Chastity",'Disposition','SelfConfidence','Friends','Figure',
+                        'Sex','AnimalInternal','AnimalExternal','Charm'
+                        ]
+    for i in range(0,len(featuresListText)):
+        try:
+            featureText = fList[featuresListText[i]]
+            if featureText != '':
+                featuresListStr = featuresListStr + '[' + featureText + ']'
+            else:
+                pass
+        except KeyError:
             pass
-    except KeyError:
-        pass
-    try:
-        Figure = fList['Figure']
-        if Figure != '':
-            featuresListStr = featuresListStr + '[' + Figure + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    try:
-        Sex = fList['Sex']
-        if Sex != '':
-            featuresListStr = featuresListStr + '[' + Sex + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    try:
-        AnimalInternal = fList['AnimalInternal']
-        if AnimalInternal != '':
-            featuresListStr = featuresListStr + '[' + AnimalInternal + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    try:
-        AnimalExternal = fList['AnimalExternal']
-        if AnimalExternal != '':
-            featuresListStr = featuresListStr + '[' + AnimalExternal + ']'
-        else:
-            pass
-    except KeyError:
-        pass
-    try:
-        Charm = fList['Charm']
-        if Charm != '':
-            featuresListStr = featuresListStr + '[' + Charm + ']'
-        else:
-            pass
-    except KeyError:
-        pass
     return featuresListStr

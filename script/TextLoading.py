@@ -20,6 +20,7 @@ rolePath = 'RoleAttributes.json'
 stageWordPath = 'StageWord.json'
 errorPath = 'ErrorText.json'
 attrTemplatePath = 'AttrTemplate.json'
+fontConfigPath = os.path.join(gamepath, 'data', 'FontConfig.json')
 
 def getData(jsonName):
     dataPath = os.path.join(gamepath,'data',language,jsonName)
@@ -60,3 +61,8 @@ def loadAttrTemplateText(temId):
     temData = getData(attrTemplatePath)
     temText = temData[temId]
     return temText
+
+def loadFontData(fontStyleName):
+    fontList = getData(fontConfigPath)
+    fontData = fontList[fontStyleName]
+    return fontData

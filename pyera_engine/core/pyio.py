@@ -1,12 +1,14 @@
 # -*- coding: UTF-8 -*-
-
+import os
 import core.pycfg
 import core.winframe as winframe
-sys_print = print
 import threading
 import queue
 import json
 import sys
+import core.data as data
+from core.pycfg import gamepath
+sys_print = print
 
 sys.setrecursionlimit(100000)
 
@@ -30,13 +32,6 @@ winframe.bind_queue(_send_queue)
 
 def _get_input_event():
     return input_evnet
-
-
-# style设置
-_foreground = '#C8C8C8'
-_background = '#2C4A69'
-_font = '微软雅黑'
-_fontsize = '14'
 
 def run(open_func):
     global _flowthread
@@ -147,18 +142,37 @@ def io_clear_cmd(*cmd_numbers):
     putQ(json.dumps(jsonstr, ensure_ascii=False))
 
 
-def style_def(style_name, foreground=_foreground, background=_background, font=_font, fontsize=_fontsize, bold=False,
-              underline=False, italic=False):
+def style_def():
     pass
 
 
-def init_style(foreground_c, background_c, onbutton_c, font, font_size):
+def init_style():
     global style_def
 
-    def new_style_def(style_name, foreground=foreground_c, background=background_c, font=font, fontsize=font_size,
-                      bold=False, underline=False, italic=False):
+    def new_style_def(style_name, foreground, background, font, fontsize,bold, underline, italic):
         frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic)
 
     style_def = new_style_def
-    style_def('standard')
-    style_def('onbutton', foreground=onbutton_c)
+    fontConfigPath = os.path.join(gamepath, 'data', 'FontConfig.json')
+    fontData = data._loadjson(fontConfigPath)
+    styleList = fontData["styleList"]
+    for i in range(0,len(styleList)):
+        styleName = styleList[i]
+        styleData = fontData[styleName]
+        styleForeground = styleData['foreground']
+        styleBackground = styleData['background']
+        styleFont = styleData['font']
+        styleFontSize = styleData['fontSize']
+        if styleData['bold'] == '0':
+            styleBold = False
+        else:
+            styleBold = True
+        if styleData['underline'] == '0':
+            styleUnderline = False
+        else:
+            styleUnderline = True
+        if styleData['italic'] == '0':
+            styleItalic = False
+        else:
+            styleItalic = True
+        style_def(styleName,styleForeground,styleBackground,styleFont,styleFontSize,styleBold,styleUnderline,styleItalic)

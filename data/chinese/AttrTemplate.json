@@ -5,28 +5,32 @@
     "Age":"Usually",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
-    "SexExperience":"None"
+    "SexExperience":"None",
+    "FeaturesTem":"Man"
   },
   "Woman":{
     "Sex":"女",
     "Age":"Usually",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
-    "SexExperience":"None"
+    "SexExperience":"None",
+    "FeaturesTem":"Woman"
   },
   "Futa":{
     "Sex":"扶她",
     "Age":"Usually",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
-    "SexExperience":"None"
+    "SexExperience":"None",
+    "FeaturesTem":"Futa"
   },
   "Asexual":{
     "Sex":"无性人",
     "Age":"Usually",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
-    "SexExperience":"None"
+    "SexExperience":"None",
+    "FeaturesTem":"Asexual"
   },
   "AgeTem":{
     "List":["Usually","Young"],

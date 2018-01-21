@@ -28,16 +28,9 @@ def init(main_flow):
     # 设置背景颜色
     core.data._get_savefilename_path('')
     pyio.set_background(core.data.gamedata()['core_cfg']['background_color'])
-    foreground_c = core.data.gamedata()['core_cfg']['font_color']
-    background_c = core.data.gamedata()['core_cfg']['background_color']
-    onbutton_color = core.data.gamedata()['core_cfg']['onbutton_color']
-    font = core.data.gamedata()['core_cfg']['font']
-    fontsize = core.data.gamedata()['core_cfg']['font_size']
-    pyio.init_style(foreground_c, background_c, onbutton_color, font, fontsize)
-    pyio.style_def('warning', foreground='red', underline=True)
-    pyio.style_def('special', foreground='yellow')
-    pyio.style_def('grey',foreground='grey')
-    def_style = pyio.style_def
+    # 初始化字体
+    pyio.init_style()
+
     core.flow.reset_func = reset
 
     global _main_flow

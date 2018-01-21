@@ -19,6 +19,10 @@
   "Sex":["男","女","扶她","无性人"],
   "Features":{
     "Age":["正太","萝莉","幼齿","苍老"],
+    "Chastity":["处男","处女","纯洁"],
+    "Disposition":["外向","内向"],
+    "SelfConfidence":["自负","自信","自卑"],
+    "Friends":["友善","孤僻"],
     "Figure":["巨人","矮人"],
     "Sex":["双性器","无性器"],
     "AnimalInternal":["兽耳","利爪"],
@@ -27,6 +31,20 @@
   },
   "Species":["人类"],
   "Relationship":["无","恋慕","爱慕","厌恶","仇恨"],
+  "SexFeatures":{
+    "Man":{
+      "Chastity":"处男"
+    },
+    "Woman":{
+      "Chastity":"处女"
+    },
+    "Futa":{
+      "Chastity":"纯洁"
+    },
+    "Asexual":{
+      "Chastity":"纯洁"
+    }
+  },
   "AnimalFeatures":{
     "可爱的猫咪":{
       "AnimalInternal":"兽耳",
