@@ -1,8 +1,8 @@
 
-def getProportionalBar(valueName,maxValue,value):
+def getProportionalBar(valueName,maxValue,value,style = 'standard',icon = '=',nilicon = '.'):
     proportion = int(int(value)/int(maxValue)* 20)
-    proportionBar = '=' * proportion
-    fixProportionBar = '.' * (20 - proportion)
+    proportionBar = icon * proportion
+    fixProportionBar = nilicon * (20 - proportion)
     proportionBar = proportionBar + fixProportionBar
-    proportionBar = valueName + ':[' + proportionBar + ']' + '(' + value + '/' + maxValue + ')'
+    proportionBar = valueName + ':[<' + style + '>' + proportionBar + '</' + style + '>]' + '(' + value + '/' + maxValue + ')'
     return proportionBar

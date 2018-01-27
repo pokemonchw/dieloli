@@ -16,6 +16,15 @@ def align(text,just='left'):
 
 def getTextIndex(text):
     textIndex = 0
+    styleNameList = config.getFontData('styleList')
+    for i in range(0, len(styleNameList)):
+        styleTextHead = '<' + styleNameList[i] + '>'
+        styleTextTail = '</' + styleNameList[i] + '>'
+        if styleTextHead in text:
+            text = text.replace(styleTextHead, '')
+            text = text.replace(styleTextTail, '')
+        else:
+            pass
     count = len(text)
     for i in range(0,count):
         textIndex = textIndex + get_width(ord(text[i]))

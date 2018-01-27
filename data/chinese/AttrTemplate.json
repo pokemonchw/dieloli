@@ -80,7 +80,7 @@
       "Abundant":[51,100],
       "Ordinary":[30,50],
       "Scarce":[1,29],
-      "None":[0,0]
+      "None":[100,500]
     },
     "BosomExperienceTem":{
       "Abundant":[51,100],

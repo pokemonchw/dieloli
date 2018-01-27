@@ -276,22 +276,23 @@ def acknowledgmentAttribute_func():
     playerGraces = cache.playObject['object']['0']['Graces']
     playerGraces = textload.loadStageWordText('17') + playerGraces
     attrListString.append(playerGraces)
-    eprint.plist(attrListString,4,'center')
+    eprint.plist(attrListString,4,'left')
     eprint.p('\n')
     playerHitPoint = cache.playObject['object']['0']['HitPoint']
     playerMaxHitPoint = cache.playObject['object']['0']['HitPointMax']
     hitPointText = textload.loadStageWordText('8')
-    hitPointBar = proportionalBar.getProportionalBar(hitPointText,playerMaxHitPoint,playerHitPoint)
+    hitPointBar = proportionalBar.getProportionalBar(hitPointText,playerMaxHitPoint,playerHitPoint,'hp','❤')
     textWidth = config.text_width
     indexHitPointBar = text.getTextIndex(hitPointBar)
-    fixHitPointBar = ' ' * (int(textWidth/2) - int(indexHitPointBar) - 1)
-    hitPointBar = fixHitPointBar + hitPointBar
+    fixHitPointBar = ' ' * int((int(textWidth/2) - int(indexHitPointBar))/2)
+    hitPointBar = hitPointBar
+    eprint.p(fixHitPointBar)
     eprint.p(hitPointBar)
     playerManaPoint = cache.playObject['object']['0']['ManaPoint']
     playerMaxManaPoint = cache.playObject['object']['0']['ManaPointMax']
     manaPointText = textload.loadStageWordText('9')
-    manaPointBar = proportionalBar.getProportionalBar(manaPointText,playerMaxManaPoint,playerManaPoint)
-    eprint.p(' ' * 2)
+    manaPointBar = proportionalBar.getProportionalBar(manaPointText,playerMaxManaPoint,playerManaPoint,'mp','❤')
+    eprint.p(fixHitPointBar)
     eprint.p(manaPointBar)
     eprint.p('\n')
     eprint.plittleline()
@@ -299,7 +300,7 @@ def acknowledgmentAttribute_func():
     eprint.p('\n')
     playerSexExperienceList = cache.playObject['object']['0']['SexExperience']
     playerSexTextList = attrtext.getSexExperienceText(playerSexExperienceList,cache.playObject['object']['0']['Sex'])
-    eprint.plist(playerSexTextList,4,'center')
+    eprint.plist(playerSexTextList,4,'left')
     eprint.plittleline()
     eprint.pl(textload.loadStageWordText('5'))
     playerSexGradeList = cache.playObject['object']['0']['SexGrade']

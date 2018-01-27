@@ -1,5 +1,7 @@
 {
-  "styleList":["standard","onbutton","order","warning","special","grey"],
+  "styleList":["standard","onbutton","order","warning","special","grey","hp","mp",
+    "levelg","levelf","levele","leveld","levelc","levelb","levela","levelex"
+  ],
   "standard":{
     "foreground":"#C8C8C8",
     "background":"#000000",
@@ -48,6 +50,96 @@
   },
   "grey":{
     "foreground":"grey",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "hp":{
+    "foreground":"#E71B64",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "mp":{
+    "foreground":"#f0ffff",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "levelg":{
+    "foreground":"#292421",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "levelf":{
+    "foreground":"#f0ffff",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "levele":{
+    "foreground":"#00ff00",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "leveld":{
+    "foreground":"#F7EED6",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "levelc":{
+    "foreground":"#e3cf57",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "levelb":{
+    "foreground":"#ed9121",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "levela":{
+    "foreground":"#da70d6",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "levelex":{
+    "foreground":"#a020f0",
     "background":"#000000",
     "font":"新宋体",
     "fontSize":"14",

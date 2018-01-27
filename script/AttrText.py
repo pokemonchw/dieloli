@@ -27,12 +27,12 @@ def getSexExperienceText(sexList,sexName):
     return sexExperienceText
 
 def getSexGradeTextList(sexGradeList,sexName):
-    mouthText = textload.loadStageWordText('25') + sexGradeList['mouthGrade']
-    bosomText = textload.loadStageWordText('26') + sexGradeList['bosomGrade']
-    vaginaText = textload.loadStageWordText('27') + sexGradeList['vaginaGrade']
-    clitorisText = textload.loadStageWordText('28') + sexGradeList['clitorisGrade']
-    anusText = textload.loadStageWordText('29') + sexGradeList['anusGrade']
-    penisText = textload.loadStageWordText('30') + sexGradeList['penisGrade']
+    mouthText = textload.loadStageWordText('25') + getSexGradeTextColor(sexGradeList['mouthGrade'])
+    bosomText = textload.loadStageWordText('26') + getSexGradeTextColor(sexGradeList['bosomGrade'])
+    vaginaText = textload.loadStageWordText('27') + getSexGradeTextColor(sexGradeList['vaginaGrade'])
+    clitorisText = textload.loadStageWordText('28') + getSexGradeTextColor(sexGradeList['clitorisGrade'])
+    anusText = textload.loadStageWordText('29') + getSexGradeTextColor(sexGradeList['anusGrade'])
+    penisText = textload.loadStageWordText('30') + getSexGradeTextColor(sexGradeList['penisGrade'])
     sexGradeTextList = []
     if sexName == sexData[0]:
         sexGradeTextList = [mouthText,bosomText,anusText,penisText]
@@ -43,6 +43,25 @@ def getSexGradeTextList(sexGradeList,sexName):
     elif sexName == sexData[3]:
         sexGradeTextList = [mouthText,bosomText,anusText]
     return sexGradeTextList
+
+def getSexGradeTextColor(sexGrade):
+    if sexGrade == 'G':
+        sexGrade = '<levelg>' + sexGrade + '</levelg>'
+    elif sexGrade == 'F':
+        sexGrade = '<levelf>' + sexGrade + '</levelf>'
+    elif sexGrade == 'E':
+        sexGrade = '<leveld>' + sexGrade + '</levele>'
+    elif sexGrade == 'D':
+        sexGrade = '<levele>' + sexGrade + '</leveld>'
+    elif sexGrade == 'C':
+        sexGrade = '<levelc>' + sexGrade + '</levelc>'
+    elif sexGrade == 'B':
+        sexGrade = '<levelb>' + sexGrade + '</levelb>'
+    elif sexGrade == 'A':
+        sexGrade = '<levela>' + sexGrade + '</levela>'
+    elif sexGrade == 'EX':
+        sexGrade = '<levelex>' + sexGrade + '</levelex>'
+    return sexGrade
 
 def getFeaturesStr(fList):
     featuresListStr = ''
