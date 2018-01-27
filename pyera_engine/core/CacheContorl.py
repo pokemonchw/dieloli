@@ -32,3 +32,11 @@ temporaryObject = {}
 inputCache = ['']
 
 inputPosition = {'position': 0}
+
+outputTextStyle = 'standard'
+
+textStylePosition = {'position':0}
+
+textStyleCache = ['standard']
+
+textOneByOneRichCache = {'textList':[],'styleList':[]}

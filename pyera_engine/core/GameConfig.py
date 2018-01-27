@@ -7,6 +7,11 @@ def configData():
     configData = data._loadjson(configPath)
     return configData
 
+def getFontData(listId):
+    FontPath = os.path.join(gamepath,'data','FontConfig.json')
+    FontData = data._loadjson(FontPath)
+    return FontData[listId]
+
 game_name = configData()['game_name']
 verson = configData()['verson']
 author = configData()['author']

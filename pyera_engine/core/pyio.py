@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-import os
 import core.pycfg
 import core.winframe as winframe
 import threading
@@ -7,7 +6,7 @@ import queue
 import json
 import sys
 import core.data as data
-from core.pycfg import gamepath
+import core.GameConfig as config
 sys_print = print
 
 sys.setrecursionlimit(100000)
@@ -17,18 +16,14 @@ _send_queue = queue.Queue()
 _order_queue = queue.Queue()
 order_swap = None
 
-
 def _input_evnet_set(order):
     putOrder(order)
-
 
 def getorder():
     return _order_queue.get()
 
-
 winframe.bind_return(_input_evnet_set)
 winframe.bind_queue(_send_queue)
-
 
 def _get_input_event():
     return input_evnet
@@ -101,7 +96,6 @@ def print(string, style='standard'):
     jsonstr['content'].append(text_json(string, style))
     putQ(json.dumps(jsonstr, ensure_ascii=False))
 
-
 def clear_screen():
     jsonstr = new_json()
     jsonstr['clear_cmd'] = 'true'
@@ -111,7 +105,6 @@ def frame_style_def(style_name, foreground, background, font, fontsize, bold, un
     jsonstr = new_json()
     jsonstr['set_style'] = style_json(style_name, foreground, background, font, fontsize, bold, underline, italic)
     putQ(json.dumps(jsonstr, ensure_ascii=False))
-
 
 def set_background(color):
     jsonstr = new_json()
@@ -131,7 +124,6 @@ def io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutto
     jsonstr['content'].append(cmd_json(cmd_str, cmd_number, normal_style, on_style))
     putQ(json.dumps(jsonstr, ensure_ascii=False))
 
-
 # 清除命令函数
 def io_clear_cmd(*cmd_numbers):
     jsonstr = new_json()
@@ -141,24 +133,18 @@ def io_clear_cmd(*cmd_numbers):
         jsonstr['clearcmd_cmd'] = 'all'
     putQ(json.dumps(jsonstr, ensure_ascii=False))
 
-
 def style_def():
     pass
 
-
 def init_style():
     global style_def
-
     def new_style_def(style_name, foreground, background, font, fontsize,bold, underline, italic):
         frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic)
-
     style_def = new_style_def
-    fontConfigPath = os.path.join(gamepath, 'data', 'FontConfig.json')
-    fontData = data._loadjson(fontConfigPath)
-    styleList = fontData["styleList"]
+    styleList = config.getFontData("styleList")
     for i in range(0,len(styleList)):
         styleName = styleList[i]
-        styleData = fontData[styleName]
+        styleData = config.getFontData(styleName)
         styleForeground = styleData['foreground']
         styleBackground = styleData['background']
         styleFont = styleData['font']

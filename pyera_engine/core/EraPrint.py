@@ -5,6 +5,7 @@ import core.flow as flow
 import core.pyio as pyio
 import core.CacheContorl as cache
 import core.Dictionaries as doctionaries
+import core.RichText as richtext
 
 last_char = '\n'
 
@@ -18,11 +19,17 @@ def p(string, style='standard'):
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
-    pyio.print(string, style)
+    styleList = richtext.setRichTextPrint(string, style)
+    for i in range(0,len(string)):
+        pyio.print(string[i],styleList[i])
 
 # 小标题输出
 def plt(string):
-    string=str(string)
+    string = str(string)
+    string = doctionaries.handleText(string)
+    global last_char
+    if len(string) > 0:
+        last_char = string[-1:]
     width = config.text_width
     textWidth = text.getTextIndex(string)
     lineWidth = int(int(width)/2 - int(textWidth)/2 - 2)
@@ -65,15 +72,25 @@ def plwait(string='', style='standard'):
 #逐字输出
 def pobo(sleepTime,string, style='standard'):
     cache.wframeMouse['wFrameUp'] = 0
+    styleList = richtext.setRichTextPrint(string,style)
+    styleNameList = config.getFontData('styleList')
+    for i in range(0,len(styleNameList)):
+        styleTextHead = '<' + styleNameList[i] + '>'
+        styleTextTail = '</' + styleNameList[i] + '>'
+        if styleTextHead in string:
+            string = string.replace(styleTextHead,'')
+            string = string.replace(styleTextTail, '')
+        else:
+            pass
     index = len(string)
     for i in range(0,index):
-        p(string[i],style)
+        p(string[i],styleList[i])
         time.sleep(sleepTime)
         if cache.wframeMouse['wFrameUp'] == 1:
             indexI = i + 1
             cache.wframeMouse['wFrameUp'] = 2
             for indexI in range(indexI,index):
-                p(string[indexI],style)
+                p(string[indexI],styleList[indexI])
             if cache.wframeMouse['wFrameLineState'] == 2:
                 cache.wframeMouse['wFrameLinesUp'] = 2
             break
@@ -111,9 +128,20 @@ def lcp(sleepTime,string='',style='standard'):
     string = str(string)
     stringlist = string.split('\n')
     width = config.text_width
+    stringCenter = ''
+    styleNameList = config.getFontData('styleList')
+    for i in range(0, len(styleNameList)):
+        styleTextHead = '<' + styleNameList[i] + '>'
+        styleTextTail = '</' + styleNameList[i] + '>'
+        if styleTextHead in string:
+            stringCenter = string.replace(styleTextHead, '')
+            stringCenter = stringCenter.replace(styleTextTail, '')
+        else:
+            pass
+    stringCenterList = stringCenter.split('\n')
     for i in range(0,len(stringlist)):
         widthI = int(width) / 2
-        countIndex = text.getTextIndex(stringlist[i])
+        countIndex = text.getTextIndex(stringCenterList[i])
         countI = int(countIndex) / 2
         if cache.wframeMouse['wFrameRePrint'] == 1:
             pl(' ' * int((widthI - countI)) + stringlist[i])
