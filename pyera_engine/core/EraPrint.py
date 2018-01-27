@@ -20,6 +20,15 @@ def p(string, style='standard'):
     if len(string) > 0:
         last_char = string[-1:]
     styleList = richtext.setRichTextPrint(string, style)
+    styleNameList = config.getFontData('styleList')
+    for i in range(0, len(styleNameList)):
+        styleTextHead = '<' + styleNameList[i] + '>'
+        styleTextTail = '</' + styleNameList[i] + '>'
+        if styleTextHead in string:
+            string = string.replace(styleTextHead, '')
+            string = string.replace(styleTextTail, '')
+        else:
+            pass
     for i in range(0,len(string)):
         pyio.print(string[i],styleList[i])
 
@@ -128,23 +137,25 @@ def lcp(sleepTime,string='',style='standard'):
     string = str(string)
     stringlist = string.split('\n')
     width = config.text_width
-    stringCenter = ''
     styleNameList = config.getFontData('styleList')
+    stringCenterList = ''
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'
         if styleTextHead in string:
             stringCenter = string.replace(styleTextHead, '')
             stringCenter = stringCenter.replace(styleTextTail, '')
+            stringCenterList = stringCenter.split('\n')
         else:
-            pass
-    stringCenterList = stringCenter.split('\n')
+            stringCenterList = stringlist
     for i in range(0,len(stringlist)):
         widthI = int(width) / 2
         countIndex = text.getTextIndex(stringCenterList[i])
         countI = int(countIndex) / 2
         if cache.wframeMouse['wFrameRePrint'] == 1:
-            pl(' ' * int((widthI - countI)) + stringlist[i])
+            p('\n')
+            p(' ' * int((widthI - countI)))
+            p(stringlist[i])
         else:
             p(' ' * int((widthI - countI)))
             pobo(sleepTime, stringlist[i])
