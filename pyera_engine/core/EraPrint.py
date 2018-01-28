@@ -104,6 +104,7 @@ def pobo(sleepTime,string, style='standard'):
                 cache.wframeMouse['wFrameLinesUp'] = 2
             break
 
+# 列表输出
 def plist(stringList,stringColumn = 1,stringSize = 'left'):
     textWidth = config.text_width
     stringIndex = int(textWidth / stringColumn)

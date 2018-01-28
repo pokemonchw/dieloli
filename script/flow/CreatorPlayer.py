@@ -13,6 +13,7 @@ import script.AttrText as attrtext
 
 playerId = '0'
 
+# 请求玩家输入姓名界面
 def inputName_func():
     cache.playObject['objectId'] = playerId
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
@@ -47,6 +48,7 @@ def inputName_func():
         mainflow.main_func()
     pass
 
+# 请求玩家输入昵称界面
 def inputNickName_func():
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
     eprint.pline()
@@ -82,6 +84,7 @@ def inputNickName_func():
         inputName_func()
     pass
 
+# 请求玩家输入自称界面
 def inputSelfName_func():
     pycmd.clr_cmd()
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
@@ -113,6 +116,7 @@ def inputSelfName_func():
         eprint.p('\n')
         inputNickName_func()
 
+# 请求玩家输入性别界面
 def inputSexConfirm_func():
     pycmd.clr_cmd()
     sexId = cache.playObject['object'][playerId]['Sex']
@@ -136,6 +140,7 @@ def inputSexConfirm_func():
         inputNickName_func()
     pass
 
+# 玩家确认性别界面
 def inputSexChoice_func():
     pycmd.clr_cmd()
     eprint.pline()
@@ -163,6 +168,7 @@ def inputSexChoice_func():
         inputSexConfirm_func()
     pass
 
+# 询问玩家是否需要详细设置属性
 def attributeGenerationBranch_func():
     playerSex = cache.playObject['object']['0']['Sex']
     temlist = attr.getTemList()
@@ -171,7 +177,7 @@ def attributeGenerationBranch_func():
     cache.temporaryObject['Age'] = temData['Age']
     cache.temporaryObject['SexExperience'] = temData['SexExperienceList']
     cache.temporaryObject['SexGrade'] = temData['SexGradeList']
-
+    cache.temporaryObject['Engraving'] = temData['EngravingList']
     pycmd.clr_cmd()
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('9'))
@@ -187,6 +193,7 @@ def attributeGenerationBranch_func():
         inputSexConfirm_func()
     pass
 
+# 详细设置属性1:询问玩家是否是小孩子
 def detailedSetting_func1():
     eprint.p('\n')
     eprint.pline()
@@ -213,6 +220,7 @@ def detailedSetting_func1():
         detailedSetting_func2()
     pass
 
+# 详细设置属性2:询问玩家是否具备动物特征
 def detailedSetting_func2():
     eprint.p('\n')
     eprint.pline()
@@ -228,6 +236,7 @@ def detailedSetting_func2():
         detailedSetting_func3()
     pass
 
+# 详细设置属性3:询问玩家是否具备丰富的性经验
 def detailedSetting_func3():
     eprint.p('\n')
     eprint.pline()
@@ -235,6 +244,7 @@ def detailedSetting_func3():
     yrn = ans.optionint(ans.detailedsetting3)
     pass
 
+# 确认玩家属性界面
 def acknowledgmentAttribute_func():
     attrListString = []
     cache.playObject['object']['0'] = cache.temporaryObject.copy()
@@ -242,7 +252,6 @@ def acknowledgmentAttribute_func():
     playerAge = cache.playObject['object']['0']['Age']
     title1 = textload.loadStageWordText('1')
     playerName = cache.playObject['object']['0']['Name']
-    eprint.p('\n')
     eprint.plt(title1)
     playerid = textload.loadStageWordText('0') + '0'
     eprint.p(playerid)
@@ -276,7 +285,7 @@ def acknowledgmentAttribute_func():
     playerGraces = cache.playObject['object']['0']['Graces']
     playerGraces = textload.loadStageWordText('17') + playerGraces
     attrListString.append(playerGraces)
-    eprint.plist(attrListString,4,'left')
+    eprint.plist(attrListString,4,'center')
     eprint.p('\n')
     playerHitPoint = cache.playObject['object']['0']['HitPoint']
     playerMaxHitPoint = cache.playObject['object']['0']['HitPointMax']
@@ -300,7 +309,7 @@ def acknowledgmentAttribute_func():
     eprint.p('\n')
     playerSexExperienceList = cache.playObject['object']['0']['SexExperience']
     playerSexTextList = attrtext.getSexExperienceText(playerSexExperienceList,cache.playObject['object']['0']['Sex'])
-    eprint.plist(playerSexTextList,4,'left')
+    eprint.plist(playerSexTextList,4,'center')
     eprint.plittleline()
     eprint.pl(textload.loadStageWordText('5'))
     playerSexGradeList = cache.playObject['object']['0']['SexGrade']
@@ -313,6 +322,9 @@ def acknowledgmentAttribute_func():
     eprint.p(playerFeaturesStr)
     eprint.plittleline()
     eprint.pl(textload.loadStageWordText('7'))
+    playerEngraving = cache.playObject['object']['0']['Engraving']
+    playerEngravingText = attrtext.getEngravingText(playerEngraving)
+    eprint.plist(playerEngravingText,4,'center')
     eprint.p('\n')
     eprint.pline()
     yrn = ans.optionint(ans.acknowledgmentAttribute,1)

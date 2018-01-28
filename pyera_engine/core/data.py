@@ -11,14 +11,17 @@ import os
 
 _gamedata = {}
 
+# 初始化游戏数据
 def gamedata():
     return _gamedata
 
+# 判断文件编码是否为utf-8
 def is_utf8bom(pathfile):
     if b'\xef\xbb\xbf' == open(pathfile, mode='rb').read(3):
         return True
     return False
 
+# 载入json文件
 def _loadjson(filepath):
     if is_utf8bom(filepath):
         ec='utf-8-sig'
@@ -32,6 +35,7 @@ def _loadjson(filepath):
             jsondata = []
     return jsondata
 
+# 载入路径下所有json文件
 def _loaddir(datapath):
     for dirpath, dirnames, filenames in os.walk(datapath):
         for name in filenames:
@@ -42,11 +46,13 @@ def _loaddir(datapath):
             if name.split('.')[1] == 'json':
                 _gamedata[prefix + name.split('.')[0]] = _loadjson(thefilepath)
 
+# 游戏初始化
 def init():
     global gamepath
     datapath = os.path.join(gamepath,'data')
     _loaddir(datapath)
 
+# 获取存档所在路径
 def _get_savefilename_path(filename):
     global gamepath
     savepath = os.path.join(gamepath,'save')
@@ -55,6 +61,7 @@ def _get_savefilename_path(filename):
     filepath = os.path.join(savepath,filename + '.save')
     return filepath
 
+# 存入存档数据
 def save(filename, data=None):
     if data == None:
         data = _gamedata
@@ -62,6 +69,7 @@ def save(filename, data=None):
     with open(filepath, 'wb') as f:
         pickle.dump(data,f)
 
+# 读取存档数据
 def load(filename, selfdata=False):
     filepath = _get_savefilename_path(filename)
     data = {}

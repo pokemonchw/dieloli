@@ -1,6 +1,7 @@
 {
   "styleList":["standard","onbutton","order","warning","special","grey","hp","mp",
-    "levelg","levelf","levele","leveld","levelc","levelb","levela","levelex"
+    "levelg","levelf","levele","leveld","levelc","levelb","levela","levelex",
+    "engravingfull","engravingempty"
   ],
   "standard":{
     "foreground":"#C8C8C8",
@@ -140,6 +141,24 @@
   },
   "levelex":{
     "foreground":"#a020f0",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "engravingfull":{
+    "foreground":"#0000ff",
+    "background":"#000000",
+    "font":"新宋体",
+    "fontSize":"14",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
+  "engravingempty":{
+    "foreground":"#696969",
     "background":"#000000",
     "font":"新宋体",
     "fontSize":"14",

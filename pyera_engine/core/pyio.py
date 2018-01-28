@@ -136,6 +136,7 @@ def io_clear_cmd(*cmd_numbers):
 def style_def():
     pass
 
+# 初始化样式
 def init_style():
     global style_def
     def new_style_def(style_name, foreground, background, font, fontsize,bold, underline, italic):

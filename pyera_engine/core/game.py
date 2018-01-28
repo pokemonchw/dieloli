@@ -13,7 +13,7 @@ NO_EVENT_FUNC='no_event_func'
 # 初始化函数
 _main_flow = None
 
-
+# 游戏初始化
 def init(main_flow):
     global def_style
     pyio.clear_screen()
@@ -50,20 +50,18 @@ def init(main_flow):
 
     run_main_flow()
 
-
+# 运行函数
 def run(main_func):
-    """运行函数"""
     def _init():
         init(main_func)
     core.pyio.run(_init)
 
-
+# 向控制台输入信息
 def console_log(string):
-    """向控制台输入信息"""
     print('game log:')
     print(string + '\n')
 
-
+# 重启游戏
 def reset():
     global _main_flow
     pyio.io_clear_cmd()

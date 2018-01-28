@@ -1,5 +1,6 @@
 import core.flow as flow
 import core.winframe as winframe
+import core.Dictionaries as dictionaries
 
 #清除命令
 clear_default_flow=flow.clear_default_flow
@@ -8,7 +9,6 @@ bind_cmd = flow.bind_cmd
 
 #输出命令
 def pcmd(cmd_str, cmd_id, cmd_func=flow.null_func, arg=(), kw={}, normal_style='standard', on_style='onbutton'):
-    import core.Dictionaries as dictionaries
     cmd_str = dictionaries.handleText(cmd_str)
     cmd_id = dictionaries.handleText(str(cmd_id))
     global last_char

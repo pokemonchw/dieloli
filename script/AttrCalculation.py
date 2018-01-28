@@ -10,18 +10,27 @@ templateData = data._loadjson(templatePath)
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
 roleAttrData = data._loadjson(roleAttrPath)
 
+# 获取模板列表
 def getTemList():
     list = templateData['TemList']
     return list
 
+# 获取特征数据
 def getFeaturesList():
     list = roleAttrData['Features']
     return list
 
+# 获取年龄模板
 def getAgeTemList():
     list = templateData["AgeTem"]["List"]
     return list
 
+# 获取刻应列表
+def getEngravingList():
+    list = roleAttrData['Default']['Engraving']
+    return list
+
+# 获取属性
 def getAttr(temName):
     temData = templateData[temName]
     ageTemName = temData["Age"]
@@ -33,7 +42,7 @@ def getAttr(temName):
     sexExperienceTemName = temData["SexExperience"]
     sexExperienceList = getSexExperience(sexExperienceTemName)
     sexGradeList = getSexGrade(sexExperienceList)
-
+    EngravingList = getEngravingList()
     attrList = {
         'Age':age,
         'MaxHitPoint':maxHitPoint,
@@ -41,10 +50,12 @@ def getAttr(temName):
         'MaxManaPoint':maxManaPoint,
         'ManaPoint':maxManaPoint,
         'SexExperienceList':sexExperienceList,
-        'SexGradeList':sexGradeList
+        'SexGradeList':sexGradeList,
+        'EngravingList':EngravingList
     }
     return attrList
 
+# 获取年龄信息
 def getAge(temName):
     temData = templateData['AgeTem'][temName]
     maxAge = int(temData['MaxAge'])
@@ -52,6 +63,7 @@ def getAge(temName):
     age = random.randint(miniAge,maxAge)
     return age
 
+# 获取最大hp值
 def getMaxHitPoint(temName):
     temData = templateData['HitPointTem'][temName]
     maxHitPoint = int(temData['HitPointMax'])
@@ -60,6 +72,7 @@ def getMaxHitPoint(temName):
     maxHitPoint = maxHitPoint + addValue - impairment
     return maxHitPoint
 
+# 获取最大mp值
 def getMaxManaPoint(temName):
     temData = templateData['ManaPointTem'][temName]
     maxManaPoint = int(temData['ManaPointMax'])
@@ -68,6 +81,7 @@ def getMaxManaPoint(temName):
     maxManaPoint = maxManaPoint + addValue - impairment
     return maxManaPoint
 
+# 获取性经验数据
 def getSexExperience(temName):
     temData = templateData['SexExperience'][temName]
     mouthExperienceTemName = temData['MouthExperienceTem']
@@ -98,6 +112,7 @@ def getSexExperience(temName):
     }
     return sexExperience
 
+# 获取性器官敏感等级
 def getSexGrade(sexExperienceData):
     mouthExperience = sexExperienceData['mouthExperience']
     bosomExperience = sexExperienceData['bosomExperience']
@@ -121,6 +136,7 @@ def getSexGrade(sexExperienceData):
     }
     return sexGradeList
 
+# 计算等级
 def judgeGrade(experience):
     experience = int(experience)
     grade = ''
@@ -144,6 +160,7 @@ def judgeGrade(experience):
         grade = 'EX'
     return grade
 
+# 设置性别对应特征
 def setSexCache(SexName):
     SexId = templateData['TemList'][SexName]
     featuresTemData = roleAttrData['SexFeatures'][SexId]
@@ -157,6 +174,7 @@ def setSexCache(SexName):
         except:
             pass
 
+# 设置动物特征
 def setAnimalCache(animalName):
     animalData = roleAttrData["AnimalFeatures"][animalName]
     cacheList = ['Age',"Chastity",'Disposition','SelfConfidence','Friends','Figure',

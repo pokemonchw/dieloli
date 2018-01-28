@@ -16,6 +16,7 @@ detailedsetting2 = "detailedSetting2"
 detailedsetting3 = "detailedSetting3"
 acknowledgmentAttribute = "acknowledgmentAttribute"
 
+# 用于批量生成id命令
 def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True):
     cmdListDate = textload.loadCmdAdv(cmdList).copy()
     inputI = []
@@ -68,6 +69,7 @@ def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True):
     ans = int(game.askfor_All(inputI))
     return ans
 
+# 用于批量生成文本命令
 def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False):
     cmdListDate = textload.loadCmdAdv(cmdList)
     inputS = []
@@ -174,6 +176,7 @@ def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False):
     ans = game.askfor_All(inputS)
     return ans
 
+# 生成id文本
 def idIndex(id):
     if id -100 >= 0:
         idS = "[" + str(id) + "] "

@@ -10,6 +10,7 @@ import script.flow.CreatorPlayer as creatorplayer
 import core.CacheContorl as cache
 import script.Ans as ans
 
+# 启动游戏界面
 def open_func():
     eprint.pnextscreen()
     eprint.pobo(1 / 3, textload.loadMessageAdv('1'))
@@ -18,6 +19,7 @@ def open_func():
     main_func()
     pass
 
+# 主界面
 def main_func():
     eprint.pline()
     eprint.pl(text.align(config.game_name, 'center'))
@@ -42,16 +44,19 @@ def main_func():
         quitgame_func()
     pass
 
+# 主界面新建游戏调用
 def newgame_func():
     pycmd.clr_cmd()
     cache.temporaryObject = cache.temporaryObjectBak.copy()
     creatorplayer.inputName_func()
     pass
 
+# 主界面读取游戏调用
 def loadgame_func():
     pycmd.clr_cmd()
     pass
 
+# 主界面退出游戏调用
 def quitgame_func():
     os._exit(0)
     pass

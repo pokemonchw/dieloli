@@ -14,7 +14,14 @@
     "HitPointMax":"2000",
     "ManaPointMax":"2000",
     "SexExperience":{},
-    "SexGrade":{}
+    "SexGrade":{},
+    "Engraving":{
+      "Pain":"0",
+      "Happy":"0",
+      "Yield":"0",
+      "Fear":"0",
+      "Resistance":"0"
+  }
   },
   "Sex":["男","女","扶她","无性人"],
   "Features":{

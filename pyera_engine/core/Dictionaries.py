@@ -1,11 +1,13 @@
 import core.CacheContorl as cache
 
+# 转义文本处理
 def handleText(string):
     string = objectName(string)
     string = objectNickName(string)
     string = objectSelfName(string)
     return string
 
+# 转义当前访问对象姓名
 def objectName(string):
     try:
         objectId = cache.playObject['objectId']
@@ -15,6 +17,7 @@ def objectName(string):
     except KeyError:
         return string
 
+# 转义当前访问对象昵称
 def objectNickName(string):
     try:
         objectId = cache.playObject['objectId']
@@ -24,6 +27,7 @@ def objectNickName(string):
     except KeyError:
         return string
 
+# 转义当前访问对象自称
 def objectSelfName(string):
     try:
         objectId = cache.playObject['objectId']

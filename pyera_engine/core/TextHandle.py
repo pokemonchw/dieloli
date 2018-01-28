@@ -14,6 +14,7 @@ def align(text,just='left'):
         countI = countIndex/2
         return " " * int(widthI - countI) + text
 
+#文本长度计算
 def getTextIndex(text):
     textIndex = 0
     styleNameList = config.getFontData('styleList')
@@ -30,8 +31,8 @@ def getTextIndex(text):
         textIndex = textIndex + get_width(ord(text[i]))
     return textIndex
 
+# 计算字符宽度
 def get_width( o ):
-    """计算字符宽度"""
     global widths
     if o == 0xe or o == 0xf:
         return 0
