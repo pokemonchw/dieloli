@@ -70,7 +70,7 @@ def getGradeTextColor(sexGrade):
 # 获取特征文本
 def getFeaturesStr(fList):
     featuresListStr = ''
-    featuresListText = ['Age',"Chastity",'Disposition','SelfConfidence','Friends','Figure',
+    featuresListText = ['Age',"Chastity",'Disposition','Courage','SelfConfidence','Friends','Figure',
                         'Sex','AnimalInternal','AnimalExternal','Charm'
                         ]
     for i in range(0,len(featuresListText)):

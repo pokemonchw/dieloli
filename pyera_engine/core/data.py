@@ -48,7 +48,6 @@ def _loaddir(datapath):
 
 # 游戏初始化
 def init():
-    global gamepath
     datapath = os.path.join(gamepath,'data')
     _loaddir(datapath)
 

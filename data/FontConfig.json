@@ -12,15 +12,6 @@
     "underline":"0",
     "italic":"0"
   },
-  "onbutton":{
-    "foreground":"#A40018",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
-  },
   "order":{
     "foreground":"#C8C8C8",
     "background":"#000000",
@@ -31,139 +22,53 @@
     "underline":"0",
     "italic":"0"
   },
+  "onbutton":{
+    "foreground":"#A40018"
+  },
   "warning":{
     "foreground":"red",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"1",
-    "italic":"0"
+    "underline":"1"
   },
   "special":{
-    "foreground":"yellow",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"yellow"
   },
   "grey":{
-    "foreground":"grey",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"grey"
   },
   "hp":{
-    "foreground":"#E71B64",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#E71B64"
   },
   "mp":{
-    "foreground":"#f0ffff",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#f0ffff"
   },
   "levelg":{
-    "foreground":"#292421",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#292421"
   },
   "levelf":{
-    "foreground":"#f0ffff",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#f0ffff"
   },
   "levele":{
-    "foreground":"#00ff00",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#00ff00"
   },
   "leveld":{
-    "foreground":"#F7EED6",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#F7EED6"
   },
   "levelc":{
-    "foreground":"#e3cf57",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#e3cf57"
   },
   "levelb":{
-    "foreground":"#ed9121",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#ed9121"
   },
   "levela":{
-    "foreground":"#da70d6",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#da70d6"
   },
   "levelex":{
-    "foreground":"#a020f0",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#a020f0"
   },
   "engravingfull":{
-    "foreground":"#0000ff",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#0000ff"
   },
   "engravingempty":{
-    "foreground":"#696969",
-    "background":"#000000",
-    "font":"新宋体",
-    "fontSize":"14",
-    "bold":"0",
-    "underline":"0",
-    "italic":"0"
+    "foreground":"#696969"
   }
 }

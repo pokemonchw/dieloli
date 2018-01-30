@@ -14,6 +14,7 @@ inputselfname = 'inputSelfName'
 detailedsetting1 = "detailedSetting1"
 detailedsetting2 = "detailedSetting2"
 detailedsetting3 = "detailedSetting3"
+detailedsetting4 = "detailedSetting4"
 acknowledgmentAttribute = "acknowledgmentAttribute"
 
 # 用于批量生成id命令

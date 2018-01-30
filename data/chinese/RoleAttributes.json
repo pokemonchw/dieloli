@@ -29,6 +29,7 @@
     "Chastity":["处男","处女","纯洁"],
     "Disposition":["外向","内向"],
     "SelfConfidence":["自负","自信","自卑"],
+    "Courage":["勇敢","胆小"],
     "Friends":["友善","孤僻"],
     "Figure":["巨人","矮人"],
     "Sex":["双性器","无性器"],
@@ -66,6 +67,7 @@
       "Charm":"迷之魅力"
     },
     "勇猛的狮子":{
+      "Courage":"勇敢",
       "AnimalInternal":"利爪"
     }
   }

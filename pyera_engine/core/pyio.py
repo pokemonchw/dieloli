@@ -5,7 +5,6 @@ import threading
 import queue
 import json
 import sys
-import core.data as data
 import core.GameConfig as config
 sys_print = print
 
@@ -51,7 +50,6 @@ def new_json():
 def text_json(string, style):
     re = {}
     re['type'] = 'text'
-    # re['text'] = string.replace('\n', '<br/>')
     re['text'] = string
     if type(style) == tuple:
         re['style'] = style
@@ -62,14 +60,12 @@ def text_json(string, style):
 def cmd_json(cmd_str, cmd_num, normal_style, on_style):
     re = {}
     re['type'] = 'cmd'
-    # re['text'] = cmd_str.replace('\n', '<br/>')
     re['text'] = cmd_str
     re['num'] = cmd_num
     if type(normal_style) == tuple:
         re['normal_style'] = normal_style
     if type(normal_style) == type(''):
         re['normal_style'] = (normal_style,)
-
     if type(on_style) == tuple:
         re['on_style'] = on_style
     if type(on_style) == type(''):
@@ -143,22 +139,47 @@ def init_style():
         frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic)
     style_def = new_style_def
     styleList = config.getFontData("styleList")
+    standardData = config.getFontData('standard')
     for i in range(0,len(styleList)):
         styleName = styleList[i]
         styleData = config.getFontData(styleName)
-        styleForeground = styleData['foreground']
-        styleBackground = styleData['background']
-        styleFont = styleData['font']
-        styleFontSize = styleData['fontSize']
-        if styleData['bold'] == '0':
+        try:
+            styleForeground = styleData['foreground']
+        except KeyError:
+            styleForeground = standardData['foreground']
+        try:
+            styleBackground = styleData['background']
+        except KeyError:
+            styleBackground = standardData['background']
+        try:
+            styleFont = styleData['font']
+        except KeyError:
+            styleFont = standardData['font']
+        try:
+            styleFontSize = styleData['fontSize']
+        except KeyError:
+            styleFontSize = standardData['fontSize']
+        try:
+            styleBold = styleData['bold']
+        except KeyError:
+            styleBold = standardData['bold']
+        try:
+            styleUnderline = styleData['underline']
+        except KeyError:
+            styleUnderline = standardData['underline']
+        try:
+            styleItalic = styleData['italic']
+        except KeyError:
+            styleItalic = standardData['italic']
+        if styleBold == '0':
             styleBold = False
         else:
             styleBold = True
-        if styleData['underline'] == '0':
+        if styleUnderline == '0':
             styleUnderline = False
         else:
             styleUnderline = True
-        if styleData['italic'] == '0':
+        if styleItalic == '0':
             styleItalic = False
         else:
             styleItalic = True

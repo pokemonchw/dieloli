@@ -38,7 +38,7 @@ temporaryObjectBak = {'Name':temObjectDefault['Name'],
                       }
 
 # 素质数据临时缓存
-featuresList = {'Age':"","Chastity":"",'Disposition':"",'SelfConfidence':"",'Friends':"",
+featuresList = {'Age':"","Chastity":"",'Disposition':"",'Courage':"",'SelfConfidence':"",'Friends':"",
                 'Figure':"",'Sex':"",'AnimalInternal':"",'AnimalExternal':"",'Charm':""}
 
 # 临时角色数据控制对象

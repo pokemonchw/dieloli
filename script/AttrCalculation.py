@@ -164,26 +164,26 @@ def judgeGrade(experience):
 def setSexCache(SexName):
     SexId = templateData['TemList'][SexName]
     featuresTemData = roleAttrData['SexFeatures'][SexId]
-    cacheList = ['Age', "Chastity", 'Disposition', 'SelfConfidence', 'Friends', 'Figure',
+    cacheList = ['Age', "Chastity", 'Disposition','Courage', 'SelfConfidence', 'Friends', 'Figure',
                  'Sex', 'AnimalInternal', 'AnimalExternal', 'Charm'
                  ]
     for i in range(0,len(cacheList)):
         try:
             cacheText = featuresTemData[cacheList[i]]
-            cache.temporaryObject['Features'][cacheList[i]] = cacheText
+            cache.featuresList[cacheList[i]] = cacheText
         except:
             pass
 
 # 设置动物特征
 def setAnimalCache(animalName):
     animalData = roleAttrData["AnimalFeatures"][animalName]
-    cacheList = ['Age',"Chastity",'Disposition','SelfConfidence','Friends','Figure',
+    cacheList = ['Age',"Chastity",'Disposition',"Courage",'SelfConfidence','Friends','Figure',
                         'Sex','AnimalInternal','AnimalExternal','Charm'
                         ]
     for i in range(0,len(cacheList)):
         try:
             cacheText = animalData[cacheList[i]]
-            cache.temporaryObject['Features'][cacheList[i]] = cacheText
+            cache.featuresList[cacheList[i]] = cacheText
         except KeyError:
             pass
     pass

@@ -12,6 +12,7 @@ import core.GameConfig as config
 import script.AttrText as attrtext
 
 playerId = '0'
+featuresList = attr.getFeaturesList()
 
 # 请求玩家输入姓名界面
 def inputName_func():
@@ -148,7 +149,7 @@ def inputSexChoice_func():
     yrn = ans.optionint(ans.sexmenu,1)
     eprint.p('\n')
     sex = textload.loadRoleAtrText('Sex')
-    sexMax = len(sex) - 1
+    sexMax = len(sex)
     if yrn in range(0,sexMax):
         sexAtr = sex[yrn]
         cache.temporaryObject['Sex'] = sexAtr
@@ -178,6 +179,7 @@ def attributeGenerationBranch_func():
     cache.temporaryObject['SexExperience'] = temData['SexExperienceList']
     cache.temporaryObject['SexGrade'] = temData['SexGradeList']
     cache.temporaryObject['Engraving'] = temData['EngravingList']
+    cache.temporaryObject['Features'] = cache.featuresList.copy()
     pycmd.clr_cmd()
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('9'))
@@ -199,7 +201,6 @@ def detailedSetting_func1():
     eprint.pline()
     playerSex = cache.playObject['object']['0']['Sex']
     sexList = textload.loadRoleAtrText('Sex')
-    featuresList = attr.getFeaturesList()
     eprint.pl(textload.loadMessageAdv('10'))
     yrn = ans.optionint(ans.detailedsetting1,1)
     if yrn == 0:
@@ -242,7 +243,34 @@ def detailedSetting_func3():
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('12'))
     yrn = ans.optionint(ans.detailedsetting3)
-    pass
+    if not yrn == 3:
+        cache.featuresList['Chastity'] = ''
+    else:
+        pass
+    sexTemDataList = textload.loadAttrTemplateText('SexExperience')['SexTemList']
+    sexTemName = sexTemDataList[yrn]
+    playerSexExperienceData = attr.getSexExperience(sexTemName)
+    cache.temporaryObject['SexExperience'] = playerSexExperienceData
+    cache.temporaryObject['SexGrade'] = attr.getSexGrade(playerSexExperienceData)
+    pycmd.clr_cmd()
+    detailedSettind_func4()
+
+# 详细设置属性4:询问玩家的胆量
+def detailedSettind_func4():
+    eprint.p('\n')
+    eprint.pline()
+    eprint.pl(textload.loadMessageAdv('13'))
+    yrn = ans.optionint(ans.detailedsetting4)
+    courageList = featuresList['Courage']
+    if yrn == 0:
+        cache.featuresList['Courage'] = courageList[0]
+    elif yrn == 1:
+        pass
+    elif yrn == 2:
+        cache.featuresList['Courage'] = courageList[1]
+    cache.temporaryObject['Features'] = cache.featuresList.copy()
+    pycmd.clr_cmd()
+    acknowledgmentAttribute_func()
 
 # 确认玩家属性界面
 def acknowledgmentAttribute_func():
