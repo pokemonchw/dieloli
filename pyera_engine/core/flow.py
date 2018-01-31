@@ -3,6 +3,7 @@ import core.pyio as pyio
 import time
 import core.CacheContorl as cache
 import os
+import script.TextLoading as textload
 
 def null_func():
     return
@@ -142,7 +143,6 @@ def askfor_All(list,print_order=False):
             continue
         else:
             pyio.print(order + '\n')
-            import script.TextLoading as textload
             pyio.print(textload.loadErrorText('noInputListError') + '\n')
             continue
 
@@ -152,3 +152,20 @@ def askfor_wait():
         re = askfor_str(donot_return_null_str=False)
         if re == '':
             break
+
+def initCache():
+    cache.flowContorl = {'restartGame': 0, 'quitGame': 0}
+    cache.wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesUp': 2, 'wFrameLineState': 2,
+                   'wFrameRePrint': 0}
+    cache.cmd_map = {}
+    cache.playObject = {'objectId': '', 'object': {}}
+    cache.featuresList = {'Age': "", "Chastity": "", 'Disposition': "", 'Courage': "", 'SelfConfidence': "", 'Friends': "",
+                    'Figure': "", 'Sex': "", 'AnimalInternal': "", 'AnimalExternal': "", 'Charm': ""}
+    cache.temporaryObject = {}
+    cache.inputCache = ['']
+    cache.inputPosition = {'position': 0}
+    cache.outputTextStyle = 'standard'
+    cache.textStylePosition = {'position': 0}
+    cache.textStyleCache = ['standard']
+    cache.textOneByOneRichCache = {'textList': [], 'styleList': []}
+    pass

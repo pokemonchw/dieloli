@@ -10,6 +10,7 @@ import core.TextHandle as text
 import script.ProportionalBar as proportionalBar
 import core.GameConfig as config
 import script.AttrText as attrtext
+import script.flow.MainFrame as mainframe
 
 playerId = '0'
 featuresList = attr.getFeaturesList()
@@ -18,6 +19,8 @@ featuresList = attr.getFeaturesList()
 def inputName_func():
     cache.playObject['objectId'] = playerId
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
+    attr.setDefaultCache()
+    eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.loadMessageAdv('4'))
     yrn = ans.optionint(ans.currencymenu,1)
@@ -270,6 +273,47 @@ def detailedSettind_func4():
         cache.featuresList['Courage'] = courageList[1]
     cache.temporaryObject['Features'] = cache.featuresList.copy()
     pycmd.clr_cmd()
+    detailedSetting_func5()
+
+# 详细设置属性5:询问玩家的性格
+def detailedSetting_func5():
+    eprint.p('\n')
+    eprint.pline()
+    eprint.pl(textload.loadMessageAdv('16'))
+    yrn = ans.optionint(ans.detailedsetting5)
+    dispositionList = featuresList['Disposition']
+    if yrn == 0:
+        cache.featuresList['Disposition'] = dispositionList[0]
+    elif yrn == 1:
+        pass
+    elif yrn == 2:
+        cache.featuresList['Disposition'] = dispositionList[1]
+    cache.temporaryObject['Features'] = cache.featuresList.copy()
+    pycmd.clr_cmd()
+    detailedSetting_func6()
+
+# 详细设置属性6:询问玩家的自信
+def detailedSetting_func6():
+    eprint.p('\n')
+    eprint.pline()
+    eprint.pl(textload.loadMessageAdv('17'))
+    yrn = ans.optionint(ans.detailedsetting6)
+    selfConfidenceList = featuresList['SelfConfidence']
+    cache.featuresList['SelfConfidence'] = selfConfidenceList[yrn]
+    cache.temporaryObject['Features'] = cache.featuresList.copy()
+    pycmd.clr_cmd()
+    detailedSetting_func7()
+
+# 详细设置属性7:询问玩家友善
+def detailedSetting_func7():
+    eprint.p('\n')
+    eprint.pline()
+    eprint.pl(textload.loadMessageAdv('18'))
+    yrn = ans.optionint(ans.detailedsetting7)
+    friendsList = featuresList['Friends']
+    cache.featuresList['Friends'] = friendsList[yrn]
+    cache.temporaryObject['Features'] = cache.featuresList.copy()
+    pycmd.clr_cmd()
     acknowledgmentAttribute_func()
 
 # 确认玩家属性界面
@@ -356,7 +400,10 @@ def acknowledgmentAttribute_func():
     eprint.p('\n')
     eprint.pline()
     yrn = ans.optionint(ans.acknowledgmentAttribute,1)
-    if yrn == 1:
+    if yrn == 0:
+        pycmd.clr_cmd()
+        mainframe.mainFrame_func()
+    elif yrn == 1:
         cache.wframeMouse['wFrameRePrint'] = 1
         eprint.pnextscreen()
         import script.mainflow as mainflow

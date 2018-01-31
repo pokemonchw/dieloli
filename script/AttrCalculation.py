@@ -160,6 +160,19 @@ def judgeGrade(experience):
         grade = 'EX'
     return grade
 
+# 设置默认特征
+def setDefaultCache():
+    featuresTemData = roleAttrData['defaultFeatures']
+    cacheList = ['Age', "Chastity", 'Disposition', 'Courage', 'SelfConfidence', 'Friends', 'Figure',
+                 'Sex', 'AnimalInternal', 'AnimalExternal', 'Charm'
+                 ]
+    for i in range(0,len(cacheList)):
+        try:
+            cacheText = featuresTemData[cacheList[i]]
+            cache.featuresList[cacheList[i]] = cacheText
+        except:
+            pass
+
 # 设置性别对应特征
 def setSexCache(SexName):
     SexId = templateData['TemList'][SexName]

@@ -97,15 +97,12 @@ def getEngravingText(eList):
     fearLevelFix = textload.loadStageWordText('34')
     resistanceLevelFix = textload.loadStageWordText('35')
     LVText = textload.loadStageWordText('36')
-    painLevelText = painLevelFix + LVText + painLevel
-    happyLevelText = happyLevelFix + LVText + happyLevel
-    yieldLevelText = yieldLevelFix + LVText + yieldLevel
-    fearLevelText = fearLevelFix + LVText + fearLevel
-    resistanceLevelText = resistanceLevelFix + LVText + resistanceLevel
-    painBar = proportionalbar.getCountBar(painLevelText,3,painLevel,'engravingfull','✡','✡','engravingempty')
-    happyBar = proportionalbar.getCountBar(happyLevelText,3,happyLevel,'engravingfull','✡','✡','engravingempty')
-    yieldBar = proportionalbar.getCountBar(yieldLevelText,3,yieldLevel,'engravingfull','✡','✡','engravingempty')
-    fearBar = proportionalbar.getCountBar(fearLevelText,3,fearLevel,'engravingfull','✡','✡','engravingempty')
-    resistanceBar = proportionalbar.getCountBar(resistanceLevelText,3,resistanceLevel,'engravingfull','✡','✡','engravingempty')
-    engravingList = [painBar,happyBar,yieldBar,fearBar,resistanceBar]
-    return engravingList
+    levelList = [painLevel,happyLevel,yieldLevel,fearLevel,resistanceLevel]
+    levelFixList = [painLevelFix,happyLevelFix,yieldLevelFix,fearLevelFix,resistanceLevelFix]
+    levelTextList = []
+    levelBarList = []
+    for i in range(0,len(levelList)):
+        levelTextList.append(levelFixList[i] + LVText + levelList[i])
+    for i in range(0,len(levelList)):
+        levelBarList.append(proportionalbar.getCountBar(levelTextList[i],3,levelList[i],'engravingfull','✡','✡','engravingempty'))
+    return levelBarList

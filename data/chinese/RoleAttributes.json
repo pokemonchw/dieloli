@@ -30,7 +30,7 @@
     "Disposition":["外向","内向"],
     "SelfConfidence":["自负","自信","自卑"],
     "Courage":["勇敢","胆小"],
-    "Friends":["友善","孤僻"],
+    "Friends":["友善","冷淡","孤僻"],
     "Figure":["巨人","矮人"],
     "Sex":["双性器","无性器"],
     "AnimalInternal":["兽耳","利爪"],
@@ -39,6 +39,10 @@
   },
   "Species":["人类"],
   "Relationship":["无","恋慕","爱慕","厌恶","仇恨"],
+  "defaultFeatures":{
+    "SelfConfidence":"自信",
+    "Friends":"冷淡"
+  },
   "SexFeatures":{
     "Man":{
       "Chastity":"处男"
@@ -47,10 +51,12 @@
       "Chastity":"处女"
     },
     "Futa":{
-      "Chastity":"纯洁"
+      "Chastity":"纯洁",
+      "Sex":"双性器"
     },
     "Asexual":{
-      "Chastity":"纯洁"
+      "Chastity":"纯洁",
+      "Sex":"无性器"
     }
   },
   "AnimalFeatures":{

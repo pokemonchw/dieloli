@@ -9,10 +9,13 @@ import core.PyCmd as pycmd
 import script.flow.CreatorPlayer as creatorplayer
 import core.CacheContorl as cache
 import script.Ans as ans
+import  script.flow.LoadSave as loadsave
+import core.flow as flow
 
 # 启动游戏界面
 def open_func():
     eprint.pnextscreen()
+    flow.initCache()
     eprint.pobo(1 / 3, textload.loadMessageAdv('1'))
     eprint.p('\n')
     time.sleep(1)
@@ -35,7 +38,6 @@ def main_func():
     time.sleep(1)
     pycmd.focusCmd()
     menuInt = ans.optionint(ans.logomenu)
-    eprint.p('\n')
     if menuInt == 0:
         newgame_func()
     elif menuInt == 1:
@@ -54,6 +56,7 @@ def newgame_func():
 # 主界面读取游戏调用
 def loadgame_func():
     pycmd.clr_cmd()
+    loadsave.loadSave_func()
     pass
 
 # 主界面退出游戏调用

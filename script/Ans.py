@@ -15,6 +15,9 @@ detailedsetting1 = "detailedSetting1"
 detailedsetting2 = "detailedSetting2"
 detailedsetting3 = "detailedSetting3"
 detailedsetting4 = "detailedSetting4"
+detailedsetting5 = "detailedSetting5"
+detailedsetting6 = "detailedSetting6"
+detailedsetting7 = "detailedSettind7"
 acknowledgmentAttribute = "acknowledgmentAttribute"
 
 # 用于批量生成id命令
