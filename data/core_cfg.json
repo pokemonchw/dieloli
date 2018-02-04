@@ -10,5 +10,6 @@
     "textbox_width":"150",
     "textbox_hight":"60",
     "text_width":"107",
-    "text_hight":"32"
+    "text_hight":"32",
+    "cursor":">>"
 }

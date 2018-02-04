@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+import os
 from tkinter import *
 from tkinter import ttk
 import json
@@ -6,8 +7,12 @@ import uuid
 import core.GameConfig as config
 import script.TextLoading as textload
 import core.CacheContorl as cache
+import core.SettingFrame as settingframe
+import core.TextHandle as text
 from tkinter import font
 
+def closeWindow():
+    os._exit(0)
 
 # 显示主框架
 root = Tk()
@@ -15,6 +20,7 @@ root.title("dieloli")
 root.geometry(config.window_width + 'x' + config.window_hight + '+0+0')
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
+root.protocol('WM_DELETE_WINDOW', closeWindow)
 mainframe = ttk.Frame(root,borderwidth = 2)
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
 mainframe.columnconfigure(0, weight=1)
@@ -32,24 +38,55 @@ s_vertical = ttk.Scrollbar(mainframe, orient=VERTICAL, command=textbox.yview)
 textbox.configure(yscrollcommand=s_vertical.set)
 s_vertical.grid(column=1, row=0, sticky=(N, E, S))
 
+# 输入框背景容器
+orderFontData = textload.loadFontData('order')
+inputBackgroundBox = Text(mainframe,highlightbackground = config.background_color,background = config.background_color,bd = 0)
+inputBackgroundBox.grid(column=0, row=1, sticky=(W, E, S))
+
+cursorText = config.cursor
+cursorWidth = text.getTextIndex(cursorText)
+inputBackgroundBoxCursor = Text(inputBackgroundBox,width=cursorWidth, height=1,highlightbackground = orderFontData['background'],background = orderFontData['background'],bd = 0)
+inputBackgroundBoxCursor.grid(column=0, row=0, sticky=(W, E, S))
+inputBackgroundBoxCursor.insert('end',cursorText)
+inputBackgroundBoxCursor.config(foreground=orderFontData['foreground'])
+
 # 输入栏
 estyle = ttk.Style()
-orderFontData = textload.loadFontData('order')
 estyle.element_create("plain.field", "from", "clam")
-estyle.layout("EntryStyle.TEntry",
-                   [('Entry.plain.field', {'children': [('Entry.background', {'children': [(
-                           'Entry.padding', {'children': [(
-                               'Entry.textarea', {'sticky': 'nswe'})],
-                      'sticky': 'nswe'})], 'sticky': 'nswe'})],
-                      'border':'0', 'sticky': 'nswe'})])
+estyle.layout(
+    "EntryStyle.TEntry",
+    [(
+        'Entry.plain.field',{
+            'children':[(
+                'Entry.background',{
+                    'children':[(
+                        'Entry.padding',{
+                            'children':[(
+                                'Entry.textarea',{
+                                    'sticky':'nswe'
+                                }
+                            )],
+                            'sticky':'nswe'
+                        }
+                    )],
+                    'sticky':'nswe'
+                }
+            )],
+            'border':'0',
+            'sticky':'nswe'
+        }
+    )]
+)
 estyle.configure("EntryStyle.TEntry",
                  background=orderFontData['background'],
                  foreground=orderFontData['foreground'],
-                 selectbackground = orderFontData['selectbackground'],)
+                 selectbackground = orderFontData['selectbackground']
+                 )
 order = StringVar()
 orderFont = font.Font(family = orderFontData['font'],size = orderFontData['fontSize'])
-inputbox = ttk.Entry(mainframe, style = 'EntryStyle.TEntry',textvariable=order,font = orderFont)
-inputbox.grid(column=0, row=1, sticky=(W, E, S))
+inputboxWidth = int(config.textbox_width) - cursorWidth
+inputbox = ttk.Entry(inputBackgroundBox, style = 'EntryStyle.TEntry',textvariable=order,font = orderFont,width = inputboxWidth)
+inputbox.grid(column=1, row=0, sticky=(N, E, S))
 
 # 构建菜单栏
 root.option_add('*tearOff', FALSE)
@@ -69,10 +106,13 @@ def quit(*args):
     cache.flowContorl['quitGame'] = 1
     send_input()
 
+def setting(*args):
+    settingframe.openSettingFrame()
+
 menufile.add_command(label=textload.loadMenuText(textload.menuRestart), command=reset)
 menufile.add_command(label=textload.loadMenuText(textload.menuQuit), command=quit)
 
-menuother.add_command(label=textload.loadMenuText(textload.menuSetting))
+menuother.add_command(label=textload.loadMenuText(textload.menuSetting),command=setting)
 menuother.add_command(label=textload.loadMenuText(textload.menuAbout))
 
 input_event_func = None

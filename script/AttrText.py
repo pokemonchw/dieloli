@@ -49,22 +49,8 @@ def getSexGradeTextList(sexGradeList,sexName):
 
 # 处理等级富文本
 def getGradeTextColor(sexGrade):
-    if sexGrade == 'G':
-        sexGrade = '<levelg>' + sexGrade + '</levelg>'
-    elif sexGrade == 'F':
-        sexGrade = '<levelf>' + sexGrade + '</levelf>'
-    elif sexGrade == 'E':
-        sexGrade = '<levele>' + sexGrade + '</levele>'
-    elif sexGrade == 'D':
-        sexGrade = '<leveld>' + sexGrade + '</leveld>'
-    elif sexGrade == 'C':
-        sexGrade = '<levelc>' + sexGrade + '</levelc>'
-    elif sexGrade == 'B':
-        sexGrade = '<levelb>' + sexGrade + '</levelb>'
-    elif sexGrade == 'A':
-        sexGrade = '<levela>' + sexGrade + '</levela>'
-    elif sexGrade == 'EX':
-        sexGrade = '<levelex>' + sexGrade + '</levelex>'
+    lowerGrade = sexGrade.lower()
+    sexGrade = '<level' + lowerGrade + '>' + sexGrade + '</level' + lowerGrade + '>'
     return sexGrade
 
 # 获取特征文本

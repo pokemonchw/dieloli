@@ -26,3 +26,4 @@ textbox_width = configData()['textbox_width']
 textbox_hight = configData()['textbox_hight']
 text_width = int(configData()['text_width'])
 text_hight = int(configData()['text_hight'])
+cursor = configData()['cursor']

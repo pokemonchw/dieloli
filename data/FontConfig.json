@@ -62,6 +62,9 @@
   "levela":{
     "foreground":"#da70d6"
   },
+  "levels":{
+    "foreground":"#ff0000"
+  },
   "levelex":{
     "foreground":"#a020f0"
   },

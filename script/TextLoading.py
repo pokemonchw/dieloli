@@ -20,6 +20,7 @@ rolePath = 'RoleAttributes.json'
 stageWordPath = 'StageWord.json'
 errorPath = 'ErrorText.json'
 attrTemplatePath = 'AttrTemplate.json'
+systemTextPath = 'SystemText.json'
 fontConfigPath = os.path.join(gamepath, 'data', 'FontConfig.json')
 
 # 载入文本数据
@@ -69,6 +70,12 @@ def loadAttrTemplateText(temId):
     temData = getData(attrTemplatePath)
     temText = temData[temId]
     return temText
+
+# 载入系统文本
+def loadSystemText(systemId):
+    systemData = getData(systemTextPath)
+    systemText = systemData[systemId]
+    return systemText
 
 # 载入字体数据
 def loadFontData(fontStyleName):

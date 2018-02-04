@@ -67,6 +67,49 @@
       "ManaPointMax":"1500"
     }
   },
+  "Equipment":{
+    "EquipmentTemList":["Man"],
+    "Man":{
+      "Coat":0,
+      "Pants":1,
+      "Shoes":1,
+      "Socks":1,
+      "Underwear":3,
+      "Bra":0,
+      "Underpants":1,
+      "Leggings":0
+    },
+    "Waman":{
+      "Coat":0,
+      "Pants":1,
+      "Shoes":1,
+      "Socks":2,
+      "Underwear":4,
+      "Bra":1,
+      "Underpants":1,
+      "Leggings":1
+    },
+    "Futa":{
+      "Coat":0,
+      "Pants":1,
+      "Shoes":1,
+      "Socks":2,
+      "Underwear":4,
+      "Bra":1,
+      "Underpants":1,
+      "Leggings":1
+    },
+    "Asexual":{
+      "Coat":0,
+      "Pants":1,
+      "Shoes":1,
+      "Socks":1,
+      "Underwear":3,
+      "Bra":0,
+      "Underpants":1,
+      "Leggings":0
+    }
+  },
   "SexExperience": {
     "SexTemList":["Abundant","Ordinary","Scarce","None"],
     "None": {
