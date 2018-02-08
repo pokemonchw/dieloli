@@ -59,3 +59,5 @@ textStyleCache = []
 
 # 富文本精确样式记录
 textOneByOneRichCache = {}
+
+lastcursor = [0]

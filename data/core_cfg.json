@@ -1,5 +1,5 @@
 ﻿{
-    "game_name": "*死亡萝莉*",
+    "game_name": "死亡萝莉",
     "verson":"Past 0.1",
     "author":"任悠云",
     "verson_time":"©2017-2018",
@@ -9,7 +9,7 @@
     "window_hight":"720",
     "textbox_width":"150",
     "textbox_hight":"60",
-    "text_width":"107",
+    "text_width":"108",
     "text_hight":"32",
-    "cursor":">>"
+    "cursor":"~$"
 }

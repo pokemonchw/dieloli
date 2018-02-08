@@ -15,8 +15,9 @@ def closeWindow():
     os._exit(0)
 
 # 显示主框架
+gameName = config.game_name
 root = Tk()
-root.title("dieloli")
+root.title(gameName)
 root.geometry(config.window_width + 'x' + config.window_hight + '+0+0')
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
@@ -26,8 +27,6 @@ mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
 mainframe.columnconfigure(0, weight=1)
 mainframe.rowconfigure(0, weight=1)
 
-# 缩放角标
-ttk.Sizegrip(root).grid(column=0, row=0, sticky=(S, E))
 # 显示窗口
 textbox = Text(mainframe, width=config.textbox_width, height=config.textbox_hight,
                highlightbackground = config.background_color,bd = 0)
@@ -36,7 +35,7 @@ textbox.grid(column=0, row=0, sticky=(N, W, E, S))
 # 垂直滚动条
 s_vertical = ttk.Scrollbar(mainframe, orient=VERTICAL, command=textbox.yview)
 textbox.configure(yscrollcommand=s_vertical.set)
-s_vertical.grid(column=1, row=0, sticky=(N, E, S))
+s_vertical.grid(column=1, row=0, sticky=(N, E, S),rowspan=2)
 
 # 输入框背景容器
 orderFontData = textload.loadFontData('order')
@@ -87,6 +86,7 @@ orderFont = font.Font(family = orderFontData['font'],size = orderFontData['fontS
 inputboxWidth = int(config.textbox_width) - cursorWidth
 inputbox = ttk.Entry(inputBackgroundBox, style = 'EntryStyle.TEntry',textvariable=order,font = orderFont,width = inputboxWidth)
 inputbox.grid(column=1, row=0, sticky=(N, E, S))
+
 
 # 构建菜单栏
 root.option_add('*tearOff', FALSE)
@@ -163,6 +163,7 @@ def read_queue():
             temp=jsonstr['set_style']
             _frame_style_def(temp['style_name'],temp['foreground'],temp['background'],temp['font'],
                              temp['fontsize'],temp['bold'],temp['underline'],temp['italic'])
+
         for c in jsonstr['content']:
             if c['type']=='text':
                 _print(c['text'], style=tuple(c['style']))

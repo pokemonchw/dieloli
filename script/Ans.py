@@ -70,7 +70,7 @@ def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True):
         else:
             pass
     eprint.p('\n')
-    ans = int(game.askfor_All(inputI))
+    ans = int(game.askfor_Int(inputI))
     return ans
 
 # 用于批量生成文本命令

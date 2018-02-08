@@ -4,6 +4,7 @@ import time
 import core.CacheContorl as cache
 import os
 import script.TextLoading as textload
+import core.TextHandle as text
 
 def null_func():
     return
@@ -136,6 +137,20 @@ def askfor_str(donot_return_null_str=True, print_order=False):
 def askfor_All(list,print_order=False):
     while True:
         order = order_deal('str', print_order)
+        if order in list:
+            pyio.print(order + '\n')
+            return order
+        elif order == '':
+            continue
+        else:
+            pyio.print(order + '\n')
+            pyio.print(textload.loadErrorText('noInputListError') + '\n')
+            continue
+
+def askfor_Int(list,print_order=False):
+    while True:
+        order = order_deal('str', print_order)
+        order = text.fullToHalfText(order)
         if order in list:
             pyio.print(order + '\n')
             return order
