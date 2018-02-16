@@ -61,3 +61,7 @@ textStyleCache = []
 textOneByOneRichCache = {}
 
 lastcursor = [0]
+
+textid = 0
+
+cmdData = {}

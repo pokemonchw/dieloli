@@ -202,7 +202,15 @@ def bind_queue(q):
 
 sysprint = print
 
-def _print(string, style=('standard',)):
+def _print(string,style=('standard',)):
+    import core.EraImage as eraimage
+    if string == '\n':
+        textbox.insert(END,'\n')
+    else:
+        eraimage.printImageText(string,'simsun')
+    seeend()
+
+def _printCmd(string,style=('standard',)):
     textbox.insert('end', string, style)
     seeend()
 
@@ -269,7 +277,8 @@ def _io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutt
     textbox.tag_bind(cmd_tagname, '<1>', send_cmd)
     textbox.tag_bind(cmd_tagname, '<Enter>', enter_func)
     textbox.tag_bind(cmd_tagname, '<Leave>', leave_func)
-    _print(cmd_str, style=(cmd_tagname, normal_style))
+    _printCmd(cmd_str, style=(cmd_tagname, normal_style))
+
 
 # 清除命令函数
 def _io_clear_cmd(*cmd_numbers):

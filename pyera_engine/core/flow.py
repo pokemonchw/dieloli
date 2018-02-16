@@ -183,4 +183,5 @@ def initCache():
     cache.textStylePosition = {'position': 0}
     cache.textStyleCache = ['standard']
     cache.textOneByOneRichCache = {'textList': [], 'styleList': []}
+    cache.cmdData = {}
     pass
