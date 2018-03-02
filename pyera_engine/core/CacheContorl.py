@@ -1,4 +1,4 @@
-import script.TextLoading as textload
+import core.TextLoading as textload
 
 # 流程用变量组
 flowContorl = {}

@@ -5,7 +5,7 @@ from tkinter import ttk
 import json
 import uuid
 import core.GameConfig as config
-import script.TextLoading as textload
+import core.TextLoading as textload
 import core.CacheContorl as cache
 import core.SettingFrame as settingframe
 import core.TextHandle as text
@@ -203,7 +203,6 @@ def bind_queue(q):
 sysprint = print
 
 def _print(string,style=('standard',)):
-    import core.EraImage as eraimage
     textbox.insert(END,string,style)
     seeend()
 

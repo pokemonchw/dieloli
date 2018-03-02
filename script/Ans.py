@@ -1,6 +1,6 @@
 import core.PyCmd as pycmd
 import core.game as game
-import script.TextLoading as textload
+import core.TextLoading as textload
 import core.EraPrint as eprint
 import core.TextHandle as text
 import core.GameConfig as config

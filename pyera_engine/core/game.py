@@ -5,7 +5,6 @@ import core.pycfg
 import core.pyio as pyio
 import core.Event as event
 import core.KeyListionEvent as keylistion
-import core.LoadFont as loadFont
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'
@@ -31,7 +30,6 @@ def init(main_flow):
     pyio.set_background(core.data.gamedata()['core_cfg']['background_color'])
     # 初始化字体
     pyio.init_style()
-    loadFont.initFont()
 
     core.flow.reset_func = reset
 

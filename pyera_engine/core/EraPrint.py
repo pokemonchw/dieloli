@@ -6,7 +6,7 @@ import core.pyio as pyio
 import core.CacheContorl as cache
 import core.Dictionaries as doctionaries
 import core.RichText as richtext
-import script.TextLoading as textload
+import core.TextLoading as textload
 import core.EraImage as eraimage
 
 last_char = '\n'

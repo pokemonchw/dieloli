@@ -3,7 +3,7 @@ import core.pyio as pyio
 import time
 import core.CacheContorl as cache
 import os
-import script.TextLoading as textload
+import core.TextLoading as textload
 import core.TextHandle as text
 
 def null_func():

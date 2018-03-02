@@ -1,6 +1,6 @@
 import os
 import core.data as data
-import script.TextLoading as textload
+import core.TextLoading as textload
 import script.ProportionalBar as proportionalbar
 from core.GameConfig import language
 from core.pycfg import gamepath

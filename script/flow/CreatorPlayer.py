@@ -1,5 +1,5 @@
 import core.EraPrint as eprint
-import script.TextLoading as textload
+import core.TextLoading as textload
 import core.game as game
 import core.CacheContorl as cache
 import script.Ans as ans
@@ -8,7 +8,6 @@ import random
 import script.AttrCalculation as attr
 import core.TextHandle as text
 import script.ProportionalBar as proportionalBar
-import core.GameConfig as config
 import script.AttrText as attrtext
 import script.flow.MainFrame as mainframe
 
@@ -363,18 +362,12 @@ def acknowledgmentAttribute_func():
     playerMaxHitPoint = cache.playObject['object']['0']['HitPointMax']
     hitPointText = textload.loadStageWordText('8')
     hitPointBar = proportionalBar.getProportionalBar(hitPointText,playerMaxHitPoint,playerHitPoint,'hpbar')
-    textWidth = config.text_width
-    indexHitPointBar = text.getTextIndex(hitPointBar)
-    fixHitPointBar = ' ' * int((int(textWidth/2) - int(indexHitPointBar))/2)
-    hitPointBar = hitPointBar
-    eprint.p(fixHitPointBar)
-    eprint.p(hitPointBar)
     playerManaPoint = cache.playObject['object']['0']['ManaPoint']
     playerMaxManaPoint = cache.playObject['object']['0']['ManaPointMax']
     manaPointText = textload.loadStageWordText('9')
     manaPointBar = proportionalBar.getProportionalBar(manaPointText,playerMaxManaPoint,playerManaPoint,'mpbar')
-    eprint.p(fixHitPointBar)
-    eprint.p(manaPointBar)
+    hpmpBarList = [hitPointBar,manaPointBar]
+    eprint.plist(hpmpBarList,2,'center')
     eprint.p('\n')
     eprint.plittleline()
     eprint.p(textload.loadStageWordText('37'))

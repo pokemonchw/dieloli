@@ -9,6 +9,8 @@ templatePath = os.path.join(gamepath,'data',language,'AttrTemplate.json')
 templateData = data._loadjson(templatePath)
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
 roleAttrData = data._loadjson(roleAttrPath)
+equipmentPath = os.path.join(gamepath,'data',language,'Equipment.json')
+equipmentData = data._loadjson(equipmentPath)
 
 # 获取模板列表
 def getTemList():
@@ -199,4 +201,9 @@ def setAnimalCache(animalName):
             cache.featuresList[cacheList[i]] = cacheText
         except KeyError:
             pass
+    pass
+
+def setEquipment():
+    clothingList = equipmentData['Clothing']
+
     pass

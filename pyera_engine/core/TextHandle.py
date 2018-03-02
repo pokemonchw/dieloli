@@ -1,7 +1,7 @@
 from idna import unichr
 
 import core.GameConfig as config
-import script.TextLoading as textload
+import core.TextLoading as textload
 import core.RichText as richtext
 
 widths = [

@@ -1,5 +1,3 @@
-import script.TextLoading as textload
-
 # 通用用计算比例条的函数
 
 def getProportionalBar(valueName,maxValue,value,barid):

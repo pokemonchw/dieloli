@@ -1,6 +1,6 @@
 import core.GameConfig as config
 import core.CacheContorl as cache
-import script.TextLoading as textload
+import core.TextLoading as textload
 
 # 富文本计算
 def setRichTextPrint(textMessage,defaultStyle):

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import core.EraPrint as eprint
-import script.TextLoading as textload
+import core.TextLoading as textload
 import core.TextHandle as text
 import core.GameConfig as config
 import os
