@@ -21,7 +21,7 @@ def inputName_func():
     attr.setDefaultCache()
     eprint.p('\n')
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('4'))
+    eprint.pl(textload.getTextData(textload.messageId,'4'))
     yrn = ans.optionint(ans.currencymenu,1)
     eprint.p('\n')
     if yrn == 0:
@@ -31,13 +31,13 @@ def inputName_func():
     elif yrn == 1:
         pycmd.clr_cmd()
         eprint.pline()
-        eprint.pl(textload.loadMessageAdv('3'))
+        eprint.pl(textload.getTextData(textload.messageId, '3'))
         inputState = 0
         while inputState == 0:
             playerName = game.askfor_str()
             eprint.pl(playerName)
             if text.getTextIndex(playerName) > 10:
-                eprint.pl(textload.loadErrorText('inputNameTooLongError'))
+                eprint.pl(textload.getTextData(textload.errorId, 'inputNameTooLongError'))
             else:
                 inputState = 1
                 cache.temporaryObject['Name'] = playerName
@@ -55,7 +55,7 @@ def inputName_func():
 def inputNickName_func():
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('6'))
+    eprint.pl(textload.getTextData(textload.messageId, '6'))
     yrn = ans.optionint(ans.inputnickname,1)
     eprint.p('\n')
     if yrn == 0:
@@ -64,13 +64,13 @@ def inputNickName_func():
     elif yrn == 1:
         pycmd.clr_cmd()
         eprint.pline()
-        eprint.pl(textload.loadMessageAdv('5'))
+        eprint.pl(textload.getTextData(textload.messageId, '5'))
         inputState = 0
         while inputState == 0:
             playerNickName = game.askfor_str()
             eprint.pl(playerNickName)
             if text.getTextIndex(playerNickName) > 10:
-                eprint.pl(textload.loadErrorText('inputNickNameTooLongError'))
+                eprint.pl(textload.getTextData(textload.errorId, 'inputNickNameTooLongError'))
             else:
                 inputState = 1
                 cache.temporaryObject['NickName'] = playerNickName
@@ -92,7 +92,7 @@ def inputSelfName_func():
     pycmd.clr_cmd()
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('14'))
+    eprint.pl(textload.getTextData(textload.messageId, '14'))
     yrn = ans.optionint(ans.inputselfname,1)
     eprint.p('\n')
     if yrn == 0:
@@ -101,13 +101,13 @@ def inputSelfName_func():
     elif yrn == 1:
         pycmd.clr_cmd()
         eprint.pline()
-        eprint.pl(textload.loadMessageAdv('15'))
+        eprint.pl(textload.getTextData(textload.messageId, '15'))
         inputState = 0
         while inputState == 0:
             playerSelfName = game.askfor_str()
             eprint.pl(playerSelfName)
             if text.getTextIndex(playerSelfName) > 10:
-                eprint.pl(textload.loadErrorText('inputNickNameTooLongError'))
+                eprint.pl(textload.getTextData(textload.errorId, 'inputSelfNameTooLongError'))
             else:
                 inputState = 1
                 cache.temporaryObject['SelfName'] = playerSelfName
@@ -124,15 +124,15 @@ def inputSexConfirm_func():
     pycmd.clr_cmd()
     sexId = cache.playObject['object'][playerId]['Sex']
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('8')[sexId])
+    eprint.pl(textload.getTextData(textload.messageId,'8')[sexId])
     yrn = ans.optionint(ans.currencymenu,1)
     eprint.p('\n')
     if yrn == 0:
         attr.setSexCache(sexId)
-        if sexId == textload.loadRoleAtrText('Sex')[2]:
-            cache.temporaryObject['Features']['Sex'] = textload.loadRoleAtrText('Features')['Sex'][0]
-        elif sexId == textload.loadRoleAtrText('Sex')[3]:
-            cache.temporaryObject['Features']['Sex'] = textload.loadRoleAtrText('Features')['Sex'][1]
+        if sexId == textload.getTextData(textload.roleId,'Sex')[2]:
+            cache.temporaryObject['Features']['Sex'] = textload.getTextData(textload.roleId,'Features')['Sex'][0]
+        elif sexId == textload.getTextData(textload.roleId,'Sex')[3]:
+            cache.temporaryObject['Features']['Sex'] = textload.getTextData(textload.roleId,'Features')['Sex'][1]
         pycmd.clr_cmd()
         attributeGenerationBranch_func()
     elif yrn == 1:
@@ -147,10 +147,10 @@ def inputSexConfirm_func():
 def inputSexChoice_func():
     pycmd.clr_cmd()
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('7'))
+    eprint.pl(textload.getTextData(textload.messageId, '7'))
     yrn = ans.optionint(ans.sexmenu,1)
     eprint.p('\n')
-    sex = textload.loadRoleAtrText('Sex')
+    sex = textload.getTextData(textload.roleId,'Sex')
     sexMax = len(sex)
     if yrn in range(0,sexMax):
         sexAtr = sex[yrn]
@@ -184,7 +184,7 @@ def attributeGenerationBranch_func():
     cache.temporaryObject['Features'] = cache.featuresList.copy()
     pycmd.clr_cmd()
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('9'))
+    eprint.pl(textload.getTextData(textload.messageId, '9'))
     yrn = ans.optionint(ans.currencymenu,1)
     if yrn == 0:
         pycmd.clr_cmd()
@@ -202,8 +202,8 @@ def detailedSetting_func1():
     eprint.p('\n')
     eprint.pline()
     playerSex = cache.playObject['object']['0']['Sex']
-    sexList = textload.loadRoleAtrText('Sex')
-    eprint.pl(textload.loadMessageAdv('10'))
+    sexList = textload.getTextData(textload.roleId,'Sex')
+    eprint.pl(textload.getTextData(textload.messageId, '10'))
     yrn = ans.optionint(ans.detailedsetting1,1)
     if yrn == 0:
         pycmd.clr_cmd()
@@ -227,8 +227,8 @@ def detailedSetting_func1():
 def detailedSetting_func2():
     eprint.p('\n')
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('11'))
-    ansList = textload.loadCmdAdv("detailedSetting2")
+    eprint.pl(textload.getTextData(textload.messageId, '11'))
+    ansList = textload.getTextData(textload.cmdId,'detailedSetting2')
     yrn = ans.optionstr(ans.detailedsetting2,5,'center',True)
     if yrn == ansList[len(ansList)-1]:
         pycmd.clr_cmd()
@@ -243,13 +243,13 @@ def detailedSetting_func2():
 def detailedSetting_func3():
     eprint.p('\n')
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('12'))
+    eprint.pl(textload.getTextData(textload.messageId, '12'))
     yrn = ans.optionint(ans.detailedsetting3)
     if not yrn == 3:
         cache.featuresList['Chastity'] = ''
     else:
         pass
-    sexTemDataList = textload.loadAttrTemplateText('SexExperience')['SexTemList']
+    sexTemDataList = textload.getTextData(textload.temId,'SexExperience')['SexTemList']
     sexTemName = sexTemDataList[yrn]
     playerSexExperienceData = attr.getSexExperience(sexTemName)
     cache.temporaryObject['SexExperience'] = playerSexExperienceData
@@ -261,7 +261,7 @@ def detailedSetting_func3():
 def detailedSettind_func4():
     eprint.p('\n')
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('13'))
+    eprint.pl(textload.getTextData(textload.messageId, '13'))
     yrn = ans.optionint(ans.detailedsetting4)
     courageList = featuresList['Courage']
     if yrn == 0:
@@ -278,7 +278,7 @@ def detailedSettind_func4():
 def detailedSetting_func5():
     eprint.p('\n')
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('16'))
+    eprint.pl(textload.getTextData(textload.messageId, '16'))
     yrn = ans.optionint(ans.detailedsetting5)
     dispositionList = featuresList['Disposition']
     if yrn == 0:
@@ -295,7 +295,7 @@ def detailedSetting_func5():
 def detailedSetting_func6():
     eprint.p('\n')
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('17'))
+    eprint.pl(textload.getTextData(textload.messageId, '17'))
     yrn = ans.optionint(ans.detailedsetting6)
     selfConfidenceList = featuresList['SelfConfidence']
     cache.featuresList['SelfConfidence'] = selfConfidenceList[yrn]
@@ -307,7 +307,7 @@ def detailedSetting_func6():
 def detailedSetting_func7():
     eprint.p('\n')
     eprint.pline()
-    eprint.pl(textload.loadMessageAdv('18'))
+    eprint.pl(textload.getTextData(textload.messageId, '18'))
     yrn = ans.optionint(ans.detailedsetting7)
     friendsList = featuresList['Friends']
     cache.featuresList['Friends'] = friendsList[yrn]
@@ -321,81 +321,81 @@ def acknowledgmentAttribute_func():
     cache.playObject['object']['0'] = cache.temporaryObject.copy()
     playerSex = cache.playObject['object']['0']['Sex']
     playerAge = cache.playObject['object']['0']['Age']
-    title1 = textload.loadStageWordText('1')
+    title1 = textload.getTextData(textload.stageWordId,'1')
     playerName = cache.playObject['object']['0']['Name']
     eprint.plt(title1)
-    playerid = textload.loadStageWordText('0') + '0'
+    playerid = textload.getTextData(textload.stageWordId, '0') + '0'
     eprint.p(playerid)
-    fixPlayerName = textload.loadStageWordText('13')
+    fixPlayerName = textload.getTextData(textload.stageWordId,'13')
     playerName = fixPlayerName + playerName
     attrListString.append(playerName)
     playerSelfName = cache.playObject['object']['0']['SelfName']
-    fixPlayerSelfName = textload.loadStageWordText('11')
+    fixPlayerSelfName = textload.getTextData(textload.stageWordId,'11')
     playerSelfName = fixPlayerSelfName + playerSelfName
     attrListString.append(playerSelfName)
     playerNickName = cache.playObject['object']['0']['NickName']
-    playerNickName = textload.loadStageWordText('12') + playerNickName
+    playerNickName = textload.getTextData(textload.stageWordId,'12') + playerNickName
     attrListString.append(playerNickName)
     relationship = cache.playObject['object']['0']['Relationship']
-    relationship = textload.loadStageWordText('14') + relationship
+    relationship = textload.getTextData(textload.stageWordId,'14') + relationship
     attrListString.append(relationship)
     playerSpecies = cache.playObject['object']['0']['Species']
-    playerSpecies = textload.loadStageWordText('15') + playerSpecies
+    playerSpecies = textload.getTextData(textload.stageWordId,'15') + playerSpecies
     attrListString.append(playerSpecies)
-    playerSex = textload.loadStageWordText('2') + playerSex
+    playerSex = textload.getTextData(textload.stageWordId,'2') + playerSex
     attrListString.append(playerSex)
-    playerAge = textload.loadStageWordText('3') + str(playerAge)
+    playerAge = textload.getTextData(textload.stageWordId,'3') + str(playerAge)
     attrListString.append(playerAge)
     eprint.p('\n')
     playerSan = cache.playObject['object']['0']['San']
-    playerSan = textload.loadStageWordText('10') + playerSan
+    playerSan = textload.getTextData(textload.stageWordId,'10') + playerSan
     attrListString.append(playerSan)
     playerIntimate = cache.playObject['object']['0']['Intimate']
-    playerIntimate = textload.loadStageWordText('16') + playerIntimate
+    playerIntimate = textload.getTextData(textload.stageWordId,'16') + playerIntimate
     attrListString.append(playerIntimate)
     playerGraces = cache.playObject['object']['0']['Graces']
-    playerGraces = textload.loadStageWordText('17') + playerGraces
+    playerGraces = textload.getTextData(textload.stageWordId,'17') + playerGraces
     attrListString.append(playerGraces)
     eprint.plist(attrListString,4,'center')
     eprint.p('\n')
     playerHitPoint = cache.playObject['object']['0']['HitPoint']
     playerMaxHitPoint = cache.playObject['object']['0']['HitPointMax']
-    hitPointText = textload.loadStageWordText('8')
+    hitPointText = textload.getTextData(textload.stageWordId,'8')
     hitPointBar = proportionalBar.getProportionalBar(hitPointText,playerMaxHitPoint,playerHitPoint,'hpbar')
     playerManaPoint = cache.playObject['object']['0']['ManaPoint']
     playerMaxManaPoint = cache.playObject['object']['0']['ManaPointMax']
-    manaPointText = textload.loadStageWordText('9')
+    manaPointText = textload.getTextData(textload.stageWordId,'9')
     manaPointBar = proportionalBar.getProportionalBar(manaPointText,playerMaxManaPoint,playerManaPoint,'mpbar')
     hpmpBarList = [hitPointBar,manaPointBar]
     eprint.plist(hpmpBarList,2,'center')
     eprint.p('\n')
     eprint.plittleline()
-    eprint.p(textload.loadStageWordText('37'))
+    eprint.p(textload.getTextData(textload.stageWordId,'37'))
     eprint.p('\n')
-    eprint.p(textload.loadStageWordText('39'))
+    eprint.p(textload.getTextData(textload.stageWordId,'39'))
     eprint.p('\n')
-    eprint.p(textload.loadStageWordText('40'))
+    eprint.p(textload.getTextData(textload.stageWordId,'40'))
     eprint.plittleline()
-    eprint.p(textload.loadStageWordText('38'))
+    eprint.p(textload.getTextData(textload.stageWordId,'38'))
     eprint.p('\n')
     eprint.plittleline()
-    eprint.p(textload.loadStageWordText('18'))
+    eprint.p(textload.getTextData(textload.stageWordId,'18'))
     eprint.p('\n')
     playerSexExperienceList = cache.playObject['object']['0']['SexExperience']
     playerSexTextList = attrtext.getSexExperienceText(playerSexExperienceList,cache.playObject['object']['0']['Sex'])
     eprint.plist(playerSexTextList,4,'center')
     eprint.plittleline()
-    eprint.pl(textload.loadStageWordText('5'))
+    eprint.pl(textload.getTextData(textload.stageWordId,'5'))
     playerSexGradeList = cache.playObject['object']['0']['SexGrade']
     playerSexGradeTextList = attrtext.getSexGradeTextList(playerSexGradeList,cache.playObject['object']['0']['Sex'])
     eprint.plist(playerSexGradeTextList,4,'center')
     eprint.plittleline()
-    eprint.pl(textload.loadStageWordText('6'))
+    eprint.pl(textload.getTextData(textload.stageWordId,'6'))
     playerFeatures = cache.playObject['object']['0']['Features']
     playerFeaturesStr = attrtext.getFeaturesStr(playerFeatures)
     eprint.p(playerFeaturesStr)
     eprint.plittleline()
-    eprint.pl(textload.loadStageWordText('7'))
+    eprint.pl(textload.getTextData(textload.stageWordId,'7'))
     playerEngraving = cache.playObject['object']['0']['Engraving']
     playerEngravingText = attrtext.getEngravingText(playerEngraving)
     eprint.plist(playerEngravingText,3,'center')

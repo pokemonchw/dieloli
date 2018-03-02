@@ -16,7 +16,7 @@ import core.flow as flow
 def open_func():
     eprint.pnextscreen()
     flow.initCache()
-    eprint.pobo(1 / 3, textload.loadMessageAdv('1'))
+    eprint.pobo(1/3,textload.getTextData(textload.messageId,'1'))
     eprint.p('\n')
     time.sleep(1)
     main_func()
@@ -31,7 +31,7 @@ def main_func():
     eprint.pl(text.align(config.verson_time,'right'))
     eprint.p('\n')
     eprint.pline()
-    eprint.lcp(1/3,textload.loadMessageAdv('2'))
+    eprint.lcp(1/3,textload.getTextData(textload.messageId,'2'))
     time.sleep(1)
     eprint.p('\n')
     eprint.pline()

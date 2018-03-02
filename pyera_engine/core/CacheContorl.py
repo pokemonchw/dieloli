@@ -13,7 +13,7 @@ cmd_map = {}
 playObject = {}
 
 # 默认属性模板数据读取
-temObjectDefault = textload.loadRoleAtrText('Default')
+temObjectDefault = textload.getTextData(textload.roleId,'Default')
 
 # 默认属性模板数据备份
 temporaryObjectBak = {'Name':temObjectDefault['Name'],

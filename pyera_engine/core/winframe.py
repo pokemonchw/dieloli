@@ -38,7 +38,7 @@ textbox.configure(yscrollcommand=s_vertical.set)
 s_vertical.grid(column=1, row=0, sticky=(N, E, S),rowspan=2)
 
 # 输入框背景容器
-orderFontData = textload.loadFontData('order')
+orderFontData = textload.getTextData(textload.fontListId,'order')
 inputBackgroundBox = Text(mainframe,highlightbackground = config.background_color,background = config.background_color,bd = 0)
 inputBackgroundBox.grid(column=0, row=1, sticky=(W, E, S))
 
@@ -95,8 +95,8 @@ root['menu'] = menubar
 menufile = Menu(menubar)
 menutest = Menu(menubar)
 menuother = Menu(menubar)
-menubar.add_cascade(menu=menufile, label=textload.loadMenuText(textload.menuFile))
-menubar.add_cascade(menu=menuother, label=textload.loadMenuText(textload.menuOther))
+menubar.add_cascade(menu=menufile, label=textload.getTextData(textload.menuId,textload.menuFile))
+menubar.add_cascade(menu=menuother, label=textload.getTextData(textload.menuId,textload.menuOther))
 
 def reset(*args):
     cache.flowContorl['restartGame'] = 1
@@ -109,11 +109,11 @@ def quit(*args):
 def setting(*args):
     settingframe.openSettingFrame()
 
-menufile.add_command(label=textload.loadMenuText(textload.menuRestart), command=reset)
-menufile.add_command(label=textload.loadMenuText(textload.menuQuit), command=quit)
+menufile.add_command(label=textload.getTextData(textload.menuId,textload.menuRestart),command=reset)
+menufile.add_command(label=textload.getTextData(textload.menuId,textload.menuQuit),command=quit)
 
-menuother.add_command(label=textload.loadMenuText(textload.menuSetting),command=setting)
-menuother.add_command(label=textload.loadMenuText(textload.menuAbout))
+menuother.add_command(label=textload.getTextData(textload.menuId,textload.menuSetting),command=setting)
+menuother.add_command(label=textload.getTextData(textload.menuId,textload.menuAbout))
 
 input_event_func = None
 send_order_state = False

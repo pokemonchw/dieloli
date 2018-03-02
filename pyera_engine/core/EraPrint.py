@@ -18,7 +18,7 @@ def_style = pyio.style_def
 def p(string, style='standard'):
     string=str(string)
     string = doctionaries.handleText(string)
-    barlist = textload.loadBarData('barlist')
+    barlist = textload.getTextData(textload.barListId,'barlist')
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
@@ -34,7 +34,7 @@ def p(string, style='standard'):
             pass
     for i in range(0,len(string)):
         if styleList[i] in barlist:
-            styledata = textload.loadBarData(styleList[i])
+            styledata = textload.getTextData(textload.barListId,styleList[i])
             truebar = styledata['truebar']
             nullbar = styledata['nullbar']
             if string[i] == '0':

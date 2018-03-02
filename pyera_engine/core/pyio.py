@@ -1,8 +1,4 @@
 # -*- coding: UTF-8 -*-
-import os
-
-from PIL import ImageFont
-
 import core.pycfg
 import core.winframe as winframe
 import threading

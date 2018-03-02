@@ -1,5 +1,4 @@
 import os
-
 import core.GameConfig as config
 import core.data as data
 from core.pycfg import gamepath
@@ -30,62 +29,24 @@ def getData(jsonName):
     dataData = data._loadjson(dataPath)
     return dataData
 
-# 获取messageAdv数据
-def loadMessageAdv(advid):
-    messageData = getData(messagePath)
-    message = messageData[advid]
-    return message
+messageId = 'message'
+cmdId = 'cmd'
+menuId = 'menu'
+roleId = 'role'
+stageWordId = 'stageWord'
+errorId = 'error'
+temId = 'tem'
+systemId = 'system'
+fontListId = 'fontList'
+barListId = 'barList'
 
-# 获取cmdadv数据
-def loadCmdAdv(cmdid):
-    cmdData = getData(cmdPath)
-    cmdText = cmdData[cmdid]
-    return cmdText
+textDataList = {
+    "message":getData(messagePath),"cmd":getData(cmdPath),"menu":getData(menuPath),
+    "role":getData(rolePath),"stageWord":getData(stageWordPath),"error":getData(errorPath),
+    "tem":getData(attrTemplatePath),"system":getData(systemTextPath),"fontList":getData(fontConfigPath),
+    "barList":getData(barConfigPath)
+}
 
-# 获取menu数据
-def loadMenuText(menuid):
-    menuData = getData(menuPath)
-    menuText = menuData[menuid]
-    return menuText
-
-# 获取默认属性数据
-def loadRoleAtrText(atrid):
-    roleData = getData(rolePath)
-    atrText = roleData[atrid]
-    return atrText
-
-# 获取舞台语文本
-def loadStageWordText(wordId):
-    stageWordData = getData(stageWordPath)
-    stageWordText = stageWordData[wordId]
-    return stageWordText
-
-# 获取错误信息文本
-def loadErrorText(errorId):
-    errorData = getData(errorPath)
-    errorText = errorData[errorId]
-    return errorText
-
-# 获取属性模板数据
-def loadAttrTemplateText(temId):
-    temData = getData(attrTemplatePath)
-    temText = temData[temId]
-    return temText
-
-# 载入系统文本
-def loadSystemText(systemId):
-    systemData = getData(systemTextPath)
-    systemText = systemData[systemId]
-    return systemText
-
-# 载入字体数据
-def loadFontData(fontStyleName):
-    fontList = getData(fontConfigPath)
-    fontData = fontList[fontStyleName]
-    return fontData
-
-# 载入比例条设置
-def loadBarData(barStyleName):
-    barList = getData(barConfigPath)
-    barData = barList[barStyleName]
-    return barData
+def getTextData(textPath,textId):
+    textData = textDataList[textPath]
+    return textData[textId]

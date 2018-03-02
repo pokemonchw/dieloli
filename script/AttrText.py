@@ -11,12 +11,12 @@ sexData = roleAttrData['Sex']
 
 #获取性经验文本
 def getSexExperienceText(sexList,sexName):
-    mouthExperience = textload.loadStageWordText('19') + str(sexList['mouthExperience'])
-    bosomExperience = textload.loadStageWordText('20') + str(sexList['bosomExperience'])
-    vaginaExperience = textload.loadStageWordText('21') + str(sexList['vaginaExperience'])
-    clitorisExperience = textload.loadStageWordText('22') + str(sexList['clitorisExperience'])
-    anusExperience = textload.loadStageWordText('23') + str(sexList['anusExperience'])
-    penisExperience = textload.loadStageWordText('24') + str(sexList['penisExperience'])
+    mouthExperience = textload.getTextData(textload.stageWordId,'19') + str(sexList['mouthExperience'])
+    bosomExperience = textload.getTextData(textload.stageWordId,'20') + str(sexList['bosomExperience'])
+    vaginaExperience = textload.getTextData(textload.stageWordId,'21') + str(sexList['vaginaExperience'])
+    clitorisExperience = textload.getTextData(textload.stageWordId,'22') + str(sexList['clitorisExperience'])
+    anusExperience = textload.getTextData(textload.stageWordId,'23') + str(sexList['anusExperience'])
+    penisExperience = textload.getTextData(textload.stageWordId,'24') + str(sexList['penisExperience'])
     sexExperienceText = []
     if sexName == sexData[0]:
         sexExperienceText = [mouthExperience,bosomExperience,anusExperience,penisExperience]
@@ -30,12 +30,12 @@ def getSexExperienceText(sexList,sexName):
 
 #获取性等级文本
 def getSexGradeTextList(sexGradeList,sexName):
-    mouthText = textload.loadStageWordText('25') + getGradeTextColor(sexGradeList['mouthGrade'])
-    bosomText = textload.loadStageWordText('26') + getGradeTextColor(sexGradeList['bosomGrade'])
-    vaginaText = textload.loadStageWordText('27') + getGradeTextColor(sexGradeList['vaginaGrade'])
-    clitorisText = textload.loadStageWordText('28') + getGradeTextColor(sexGradeList['clitorisGrade'])
-    anusText = textload.loadStageWordText('29') + getGradeTextColor(sexGradeList['anusGrade'])
-    penisText = textload.loadStageWordText('30') + getGradeTextColor(sexGradeList['penisGrade'])
+    mouthText = textload.getTextData(textload.stageWordId,'25') + getGradeTextColor(sexGradeList['mouthGrade'])
+    bosomText = textload.getTextData(textload.stageWordId,'26') + getGradeTextColor(sexGradeList['bosomGrade'])
+    vaginaText = textload.getTextData(textload.stageWordId,'27') + getGradeTextColor(sexGradeList['vaginaGrade'])
+    clitorisText = textload.getTextData(textload.stageWordId,'28') + getGradeTextColor(sexGradeList['clitorisGrade'])
+    anusText = textload.getTextData(textload.stageWordId,'29') + getGradeTextColor(sexGradeList['anusGrade'])
+    penisText = textload.getTextData(textload.stageWordId,'30') + getGradeTextColor(sexGradeList['penisGrade'])
     sexGradeTextList = []
     if sexName == sexData[0]:
         sexGradeTextList = [mouthText,bosomText,anusText,penisText]
@@ -77,12 +77,12 @@ def getEngravingText(eList):
     yieldLevel = eList["Yield"]
     fearLevel = eList["Fear"]
     resistanceLevel = eList["Resistance"]
-    painLevelFix = textload.loadStageWordText('31')
-    happyLevelFix = textload.loadStageWordText('32')
-    yieldLevelFix = textload.loadStageWordText('33')
-    fearLevelFix = textload.loadStageWordText('34')
-    resistanceLevelFix = textload.loadStageWordText('35')
-    LVText = textload.loadStageWordText('36')
+    painLevelFix = textload.getTextData(textload.stageWordId,'31')
+    happyLevelFix = textload.getTextData(textload.stageWordId,'32')
+    yieldLevelFix = textload.getTextData(textload.stageWordId,'33')
+    fearLevelFix = textload.getTextData(textload.stageWordId,'34')
+    resistanceLevelFix = textload.getTextData(textload.stageWordId,'35')
+    LVText = textload.getTextData(textload.stageWordId,'36')
     levelList = [painLevel,happyLevel,yieldLevel,fearLevel,resistanceLevel]
     levelFixList = [painLevelFix,happyLevelFix,yieldLevelFix,fearLevelFix,resistanceLevelFix]
     levelTextList = []

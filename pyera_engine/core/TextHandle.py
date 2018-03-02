@@ -34,13 +34,13 @@ def getTextIndex(text):
     textStyleList = richtext.setRichTextPrint(text, 'standard')
     textIndex = 0
     stylewidth = 0
-    barlist = textload.loadBarData('barlist')
-    styleNameList = config.getFontData('styleList') + textload.loadBarData('barlist')
+    barlist = textload.getTextData(textload.barListId,'barlist')
+    styleNameList = config.getFontData('styleList') + textload.getTextData(textload.barListId,'barlist')
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'
         if styleTextHead in text:
-            if styleNameList[i] in textload.loadBarData('barlist'):
+            if styleNameList[i] in textload.getTextData(textload.barListId,'barlist'):
                 text = text.replace(styleTextHead, '')
                 text = text.replace(styleTextTail, '')
             else:
@@ -51,7 +51,7 @@ def getTextIndex(text):
     count = len(text)
     for i in range(0,count):
         if textStyleList[i] in barlist:
-            textwidth = textload.loadBarData(textStyleList[i])['width']
+            textwidth = textload.getTextData(textload.barListId,textStyleList[i])['width']
             textIndex = textIndex + int(textwidth)
         else:
             textIndex = textIndex + get_width(ord(text[i]))

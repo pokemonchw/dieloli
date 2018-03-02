@@ -144,7 +144,7 @@ def askfor_All(list,print_order=False):
             continue
         else:
             pyio.print(order + '\n')
-            pyio.print(textload.loadErrorText('noInputListError') + '\n')
+            pyio.print(textload.getTextData(textload.errorId,'noInputListError') + '\n')
             continue
 
 def askfor_Int(list,print_order=False):
@@ -158,7 +158,7 @@ def askfor_Int(list,print_order=False):
             continue
         else:
             pyio.print(order + '\n')
-            pyio.print(textload.loadErrorText('noInputListError') + '\n')
+            pyio.print(textload.getTextData(textload.errorId, 'noInputListError') + '\n')
             continue
 
 def askfor_wait():
