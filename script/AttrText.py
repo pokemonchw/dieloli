@@ -90,5 +90,5 @@ def getEngravingText(eList):
     for i in range(0,len(levelList)):
         levelTextList.append(levelFixList[i] + LVText + levelList[i])
     for i in range(0,len(levelList)):
-        levelBarList.append(proportionalbar.getCountBar(levelTextList[i],3,levelList[i],'engravingfull','✡','✡','engravingempty'))
+        levelBarList.append(proportionalbar.getCountBar(levelTextList[i],3,levelList[i],'engravingemptybar'))
     return levelBarList

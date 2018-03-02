@@ -1,0 +1,18 @@
+{
+  "barlist":["hpbar","mpbar","engravingemptybar"],
+  "hpbar":{
+    "width":"1",
+    "truebar":"hpbar_true",
+    "nullbar":"hpbar_null"
+  },
+  "mpbar":{
+    "width":"1",
+    "truebar":"mpbar_true",
+    "nullbar":"mpbar_null"
+  },
+  "engravingemptybar":{
+    "width":"2",
+    "truebar":"engravingemptybar_true",
+    "nullbar":"engravingemptybar_null"
+  }
+}

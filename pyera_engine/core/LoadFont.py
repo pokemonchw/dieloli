@@ -12,7 +12,7 @@ def initFont():
         fontPathList.append(fontPath)
         index = str(fontFile).rfind('.')
         fontName = str(fontFile)[:index]
-        varFont = imagefont.truetype(fontPath)
+        varFont = imagefont.truetype(fontPath,18)
         fontData[fontName] = varFont
     pass
 

@@ -184,4 +184,5 @@ def initCache():
     cache.textStyleCache = ['standard']
     cache.textOneByOneRichCache = {'textList': [], 'styleList': []}
     cache.cmdData = {}
+    cache.imageid = 0
     pass

@@ -1,9 +1,10 @@
 import core.GameConfig as config
 import core.CacheContorl as cache
+import script.TextLoading as textload
 
 # 富文本计算
 def setRichTextPrint(textMessage,defaultStyle):
-    styleNameList = config.getFontData('styleList')
+    styleNameList = config.getFontData('styleList') + textload.loadBarData('barlist')
     styleIndex = 0
     styleLastIndex = None
     styleMaxIndex = None

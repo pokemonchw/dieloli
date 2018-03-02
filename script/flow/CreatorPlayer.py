@@ -362,7 +362,7 @@ def acknowledgmentAttribute_func():
     playerHitPoint = cache.playObject['object']['0']['HitPoint']
     playerMaxHitPoint = cache.playObject['object']['0']['HitPointMax']
     hitPointText = textload.loadStageWordText('8')
-    hitPointBar = proportionalBar.getProportionalBar(hitPointText,playerMaxHitPoint,playerHitPoint,'hp','❤')
+    hitPointBar = proportionalBar.getProportionalBar(hitPointText,playerMaxHitPoint,playerHitPoint,'hpbar')
     textWidth = config.text_width
     indexHitPointBar = text.getTextIndex(hitPointBar)
     fixHitPointBar = ' ' * int((int(textWidth/2) - int(indexHitPointBar))/2)
@@ -372,7 +372,7 @@ def acknowledgmentAttribute_func():
     playerManaPoint = cache.playObject['object']['0']['ManaPoint']
     playerMaxManaPoint = cache.playObject['object']['0']['ManaPointMax']
     manaPointText = textload.loadStageWordText('9')
-    manaPointBar = proportionalBar.getProportionalBar(manaPointText,playerMaxManaPoint,playerManaPoint,'mp','❤')
+    manaPointBar = proportionalBar.getProportionalBar(manaPointText,playerMaxManaPoint,playerManaPoint,'mpbar')
     eprint.p(fixHitPointBar)
     eprint.p(manaPointBar)
     eprint.p('\n')
@@ -405,7 +405,7 @@ def acknowledgmentAttribute_func():
     eprint.pl(textload.loadStageWordText('7'))
     playerEngraving = cache.playObject['object']['0']['Engraving']
     playerEngravingText = attrtext.getEngravingText(playerEngraving)
-    eprint.plist(playerEngravingText,4,'center')
+    eprint.plist(playerEngravingText,3,'center')
     eprint.p('\n')
     eprint.pline()
     yrn = ans.optionint(ans.acknowledgmentAttribute,1)

@@ -6,6 +6,8 @@ import core.pyio as pyio
 import core.CacheContorl as cache
 import core.Dictionaries as doctionaries
 import core.RichText as richtext
+import script.TextLoading as textload
+import core.EraImage as eraimage
 
 last_char = '\n'
 
@@ -16,11 +18,12 @@ def_style = pyio.style_def
 def p(string, style='standard'):
     string=str(string)
     string = doctionaries.handleText(string)
+    barlist = textload.loadBarData('barlist')
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
     styleList = richtext.setRichTextPrint(string, style)
-    styleNameList = config.getFontData('styleList')
+    styleNameList = config.getFontData('styleList') + barlist
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'
@@ -30,7 +33,18 @@ def p(string, style='standard'):
         else:
             pass
     for i in range(0,len(string)):
-        pyio.print(string[i],styleList[i])
+        if styleList[i] in barlist:
+            styledata = textload.loadBarData(styleList[i])
+            truebar = styledata['truebar']
+            nullbar = styledata['nullbar']
+            if string[i] == '0':
+                eraimage.printImage(nullbar,'bar')
+            elif string[i] == '1':
+                eraimage.printImage(truebar,'bar')
+            else:
+                pyio.print(string[i], styleList[i])
+        else:
+            pyio.print(string[i], styleList[i])
 
 # 小标题输出
 def plt(string):

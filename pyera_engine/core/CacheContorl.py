@@ -62,6 +62,6 @@ textOneByOneRichCache = {}
 
 lastcursor = [0]
 
-textid = 0
+imageid = 0
 
 cmdData = {}

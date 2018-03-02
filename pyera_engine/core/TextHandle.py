@@ -1,6 +1,8 @@
 from idna import unichr
 
 import core.GameConfig as config
+import script.TextLoading as textload
+import core.RichText as richtext
 
 widths = [
     (126,    1), (159,    0), (687,     1), (710,   0), (711,   1),
@@ -29,20 +31,31 @@ def align(text,just='left'):
 
 #文本长度计算
 def getTextIndex(text):
+    textStyleList = richtext.setRichTextPrint(text, 'standard')
     textIndex = 0
-    styleNameList = config.getFontData('styleList')
+    stylewidth = 0
+    barlist = textload.loadBarData('barlist')
+    styleNameList = config.getFontData('styleList') + textload.loadBarData('barlist')
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'
         if styleTextHead in text:
-            text = text.replace(styleTextHead, '')
-            text = text.replace(styleTextTail, '')
+            if styleNameList[i] in textload.loadBarData('barlist'):
+                text = text.replace(styleTextHead, '')
+                text = text.replace(styleTextTail, '')
+            else:
+                text = text.replace(styleTextHead, '')
+                text = text.replace(styleTextTail, '')
         else:
             pass
     count = len(text)
     for i in range(0,count):
-        textIndex = textIndex + get_width(ord(text[i]))
-    return textIndex
+        if textStyleList[i] in barlist:
+            textwidth = textload.loadBarData(textStyleList[i])['width']
+            textIndex = textIndex + int(textwidth)
+        else:
+            textIndex = textIndex + get_width(ord(text[i]))
+    return textIndex + stylewidth
 
 # 计算字符宽度
 def get_width( o ):

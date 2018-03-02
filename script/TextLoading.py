@@ -22,6 +22,7 @@ errorPath = 'ErrorText.json'
 attrTemplatePath = 'AttrTemplate.json'
 systemTextPath = 'SystemText.json'
 fontConfigPath = os.path.join(gamepath, 'data', 'FontConfig.json')
+barConfigPath = os.path.join(gamepath,'data','BarConfig.json')
 
 # 载入文本数据
 def getData(jsonName):
@@ -82,3 +83,9 @@ def loadFontData(fontStyleName):
     fontList = getData(fontConfigPath)
     fontData = fontList[fontStyleName]
     return fontData
+
+# 载入比例条设置
+def loadBarData(barStyleName):
+    barList = getData(barConfigPath)
+    barData = barList[barStyleName]
+    return barData

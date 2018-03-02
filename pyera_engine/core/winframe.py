@@ -204,10 +204,7 @@ sysprint = print
 
 def _print(string,style=('standard',)):
     import core.EraImage as eraimage
-    if string == '\n':
-        textbox.insert(END,'\n')
-    else:
-        eraimage.printImageText(string,'simsun')
+    textbox.insert(END,string,style)
     seeend()
 
 def _printCmd(string,style=('standard',)):
