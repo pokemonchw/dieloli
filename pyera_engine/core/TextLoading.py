@@ -47,6 +47,7 @@ textDataList = {
     "barList":getData(barConfigPath)
 }
 
+# 获取文本数据
 def getTextData(textPath,textId):
     textData = textDataList[textPath]
     return textData[textId]
