@@ -183,6 +183,7 @@ def initCache():
     cache.textStylePosition = {'position': 0}
     cache.textStyleCache = ['standard']
     cache.textOneByOneRichCache = {'textList': [], 'styleList': []}
+    cache.gameTime = {"year":0,"month":0,"day":0,"hour":0,"minute":0}
     cache.cmdData = {}
     cache.imageid = 0
     pass

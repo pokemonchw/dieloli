@@ -33,7 +33,9 @@ temporaryObjectBak = {'Name':temObjectDefault['Name'],
                       'ManaPoint':temObjectDefault['ManaPointMax'],
                       'SexExperience':temObjectDefault['SexExperience'],
                       'SexGrade':temObjectDefault['SexGrade'],
-                      'Engraving':temObjectDefault['Engraving']
+                      'Engraving':temObjectDefault['Engraving'],
+                      'Clothing':temObjectDefault['Clothing'],
+                      'SexItem':temObjectDefault['SexItem']
                       }
 
 # 素质数据临时缓存
@@ -62,6 +64,10 @@ textOneByOneRichCache = {}
 
 lastcursor = [0]
 
+# 图片id
 imageid = 0
 
+# cmd数据
 cmdData = {}
+
+gameTime = {}

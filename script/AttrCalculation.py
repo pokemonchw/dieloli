@@ -9,8 +9,6 @@ templatePath = os.path.join(gamepath,'data',language,'AttrTemplate.json')
 templateData = data._loadjson(templatePath)
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
 roleAttrData = data._loadjson(roleAttrPath)
-equipmentPath = os.path.join(gamepath,'data',language,'Equipment.json')
-equipmentData = data._loadjson(equipmentPath)
 
 # 获取模板列表
 def getTemList():
@@ -32,6 +30,18 @@ def getEngravingList():
     list = roleAttrData['Default']['Engraving']
     return list
 
+# 获取服装模板
+def getClothing(sexId):
+    clothingTem = templateData["Equipment"]
+    clothingList = clothingTem[sexId]
+    return clothingList
+
+# 获取性道具模板
+def getSexItem(sexid):
+    SexItemTem = templateData["SexItem"]
+    sexItemList = SexItemTem[sexid]
+    return sexItemList
+
 # 获取属性
 def getAttr(temName):
     temData = templateData[temName]
@@ -45,6 +55,8 @@ def getAttr(temName):
     sexExperienceList = getSexExperience(sexExperienceTemName)
     sexGradeList = getSexGrade(sexExperienceList)
     EngravingList = getEngravingList()
+    clothingList = getClothing(temName)
+    sexItemList = getSexItem(temName)
     attrList = {
         'Age':age,
         'MaxHitPoint':maxHitPoint,
@@ -53,7 +65,9 @@ def getAttr(temName):
         'ManaPoint':maxManaPoint,
         'SexExperienceList':sexExperienceList,
         'SexGradeList':sexGradeList,
-        'EngravingList':EngravingList
+        'EngravingList':EngravingList,
+        'ClothingList':clothingList,
+        'SexItemList':sexItemList
     }
     return attrList
 
@@ -201,9 +215,4 @@ def setAnimalCache(animalName):
             cache.featuresList[cacheList[i]] = cacheText
         except KeyError:
             pass
-    pass
-
-def setEquipment():
-    clothingList = equipmentData['Clothing']
-
     pass

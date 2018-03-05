@@ -10,6 +10,7 @@ import core.TextHandle as text
 import script.ProportionalBar as proportionalBar
 import script.AttrText as attrtext
 import script.flow.MainFrame as mainframe
+import script.GameTime as gametime
 
 playerId = '0'
 featuresList = attr.getFeaturesList()
@@ -182,6 +183,8 @@ def attributeGenerationBranch_func():
     cache.temporaryObject['SexGrade'] = temData['SexGradeList']
     cache.temporaryObject['Engraving'] = temData['EngravingList']
     cache.temporaryObject['Features'] = cache.featuresList.copy()
+    cache.temporaryObject['Clothing'] = temData['ClothingList']
+    cache.temporaryObject['SexItem'] = temData['SexItemList']
     pycmd.clr_cmd()
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '9'))
@@ -374,7 +377,15 @@ def acknowledgmentAttribute_func():
     eprint.p('\n')
     eprint.p(textload.getTextData(textload.stageWordId,'39'))
     eprint.p('\n')
+    playerClothingList = cache.playObject['object']['0']['Clothing']
+    playerClothingText = attrtext.getClothingText(playerClothingList)
+    eprint.plist(playerClothingText,4,'center')
+    eprint.p('\n')
     eprint.p(textload.getTextData(textload.stageWordId,'40'))
+    eprint.p('\n')
+    playerSexItemList = cache.playObject['object']['0']['SexItem']
+    playerSexItemText = attrtext.getSexItemText(playerSexItemList)
+    eprint.plist(playerSexItemText,5,'center')
     eprint.plittleline()
     eprint.p(textload.getTextData(textload.stageWordId,'38'))
     eprint.p('\n')
@@ -404,6 +415,7 @@ def acknowledgmentAttribute_func():
     yrn = ans.optionint(ans.acknowledgmentAttribute,1)
     if yrn == 0:
         pycmd.clr_cmd()
+        gametime.initTime()
         mainframe.mainFrame_func()
     elif yrn == 1:
         cache.wframeMouse['wFrameRePrint'] = 1

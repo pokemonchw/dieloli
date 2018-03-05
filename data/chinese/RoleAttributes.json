@@ -22,7 +22,8 @@
       "Fear":"0",
       "Resistance":"0"
     },
-    "Clothing":"Man"
+    "Clothing":{},
+    "SexItem":{}
   },
   "Sex":["男","女","扶她","无性人"],
   "Features":{

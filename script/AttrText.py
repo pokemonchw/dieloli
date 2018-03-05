@@ -8,6 +8,8 @@ from core.pycfg import gamepath
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
 roleAttrData = data._loadjson(roleAttrPath)
 sexData = roleAttrData['Sex']
+equipmentPath = os.path.join(gamepath,'data',language,'Equipment.json')
+equipmentData = data._loadjson(equipmentPath)
 
 #获取性经验文本
 def getSexExperienceText(sexList,sexName):
@@ -92,3 +94,75 @@ def getEngravingText(eList):
     for i in range(0,len(levelList)):
         levelBarList.append(proportionalbar.getCountBar(levelTextList[i],3,levelList[i],'engravingemptybar'))
     return levelBarList
+
+# 获取服装列表文本
+def getClothingText(clothingList):
+    coatid = int(clothingList["Coat"])
+    pantsid = int(clothingList["Pants"])
+    shoesid = int(clothingList["Shoes"])
+    socksid = int(clothingList["Socks"])
+    underwearid = int(clothingList["Underwear"])
+    braid = int(clothingList["Bra"])
+    underpantsid = int(clothingList["Underpants"])
+    leggingsid = int(clothingList["Leggings"])
+    clothingData = equipmentData["Clothing"]
+    coatText = clothingData["Coat"][coatid]
+    pantsText = clothingData["Pants"][pantsid]
+    shoesText = clothingData["Shoes"][shoesid]
+    socksText = clothingData["Socks"][socksid]
+    underwearText = clothingData["Underwear"][underwearid]
+    braText = clothingData["Bra"][braid]
+    underpantsText = clothingData["Underpants"][underpantsid]
+    leggingsText = clothingData["Leggings"][leggingsid]
+    coatText = textload.getTextData(textload.stageWordId,"41") + coatText
+    pantsText = textload.getTextData(textload.stageWordId, "42") + pantsText
+    shoesText = textload.getTextData(textload.stageWordId, "43") + shoesText
+    socksText = textload.getTextData(textload.stageWordId, "44") + socksText
+    underwearText = textload.getTextData(textload.stageWordId, "45") + underwearText
+    braText = textload.getTextData(textload.stageWordId, "46") + braText
+    underpantsText = textload.getTextData(textload.stageWordId, "47") + underpantsText
+    leggingsText = textload.getTextData(textload.stageWordId, "48") + leggingsText
+    clothingTextList = [
+        coatText,pantsText,shoesText,socksText,underwearText,
+        braText,underpantsText,leggingsText
+    ]
+    return clothingTextList
+
+# 获取性道具文本
+def getSexItemText(sexItemList):
+    headid = sexItemList["Head"]
+    eyeid = sexItemList["Eye"]
+    earid = sexItemList["Ear"]
+    mouthid = sexItemList["Mouth"]
+    finesseid = sexItemList["Finesse"]
+    fingerid = sexItemList["Finger"]
+    chestid = sexItemList["Chest"]
+    privatesid = sexItemList["Privates"]
+    anusid = sexItemList["Anus"]
+    otherid = sexItemList["Other"]
+    sexItemData = equipmentData["SexItem"]
+    headText = sexItemData["Head"][headid]
+    eyeText = sexItemData["Eye"][eyeid]
+    earText = sexItemData["Ear"][earid]
+    mouthText = sexItemData["Mouth"][mouthid]
+    finesseText = sexItemData["Finesse"][finesseid]
+    fingerText = sexItemData["Finger"][fingerid]
+    chestText = sexItemData["Chest"][chestid]
+    privatesText = sexItemData["Privates"][privatesid]
+    anusText = sexItemData["Anus"][anusid]
+    otherText = sexItemData["Other"][otherid]
+    headText = textload.getTextData(textload.stageWordId,"49") + headText
+    eyeText = textload.getTextData(textload.stageWordId,"50") + eyeText
+    earText = textload.getTextData(textload.stageWordId,"51") + earText
+    mouthText = textload.getTextData(textload.stageWordId,"52") + mouthText
+    finesseText = textload.getTextData(textload.stageWordId,"53") + finesseText
+    fingerText = textload.getTextData(textload.stageWordId,"54") + fingerText
+    chestText = textload.getTextData(textload.stageWordId,"55") + chestText
+    privatesText = textload.getTextData(textload.stageWordId,"56") + privatesText
+    anusText = textload.getTextData(textload.stageWordId,"57") + anusText
+    otherText = textload.getTextData(textload.stageWordId,"58") + otherText
+    sexItemTextList = [
+        headText,eyeText,earText,mouthText,finesseText,
+        fingerText,chestText,privatesText,anusText,otherText
+    ]
+    return sexItemTextList

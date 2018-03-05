@@ -68,7 +68,6 @@
     }
   },
   "Equipment":{
-    "EquipmentTemList":["Man"],
     "Man":{
       "Coat":0,
       "Pants":1,
@@ -108,6 +107,56 @@
       "Bra":0,
       "Underpants":1,
       "Leggings":0
+    }
+  },
+  "SexItem":{
+    "Man":{
+      "Head":0,
+      "Eye":0,
+      "Ear":0,
+      "Mouth":0,
+      "Finesse":0,
+      "Finger":0,
+      "Chest":0,
+      "Privates":0,
+      "Anus":0,
+      "Other":0
+    },
+    "WaMan":{
+      "Head":0,
+      "Eye":0,
+      "Ear":0,
+      "Mouth":0,
+      "Finesse":0,
+      "Finger":0,
+      "Chest":0,
+      "Privates":0,
+      "Anus":0,
+      "Other":0
+    },
+    "Futa":{
+      "Head":0,
+      "Eye":0,
+      "Ear":0,
+      "Mouth":0,
+      "Finesse":0,
+      "Finger":0,
+      "Chest":0,
+      "Privates":0,
+      "Anus":0,
+      "Other":0
+    },
+    "Asexual":{
+      "Head":0,
+      "Eye":0,
+      "Ear":0,
+      "Mouth":0,
+      "Finesse":0,
+      "Finger":0,
+      "Chest":0,
+      "Privates":0,
+      "Anus":0,
+      "Other":0
     }
   },
   "SexExperience": {
