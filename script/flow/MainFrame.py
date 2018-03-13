@@ -9,3 +9,4 @@ def mainFrame_func():
     eprint.plt(titleText)
     dateText = gametime.getDateText()
     eprint.p(dateText)
+    eprint.p('\n')

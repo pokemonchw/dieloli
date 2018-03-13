@@ -42,6 +42,11 @@ def getSexItem(sexid):
     sexItemList = SexItemTem[sexid]
     return sexItemList
 
+# 获取金钱模板
+def getGold():
+    gold = roleAttrData['Default']['Gold']
+    return gold
+
 # 获取属性
 def getAttr(temName):
     temData = templateData[temName]
@@ -57,6 +62,7 @@ def getAttr(temName):
     EngravingList = getEngravingList()
     clothingList = getClothing(temName)
     sexItemList = getSexItem(temName)
+    gold = getGold()
     attrList = {
         'Age':age,
         'MaxHitPoint':maxHitPoint,
@@ -67,7 +73,8 @@ def getAttr(temName):
         'SexGradeList':sexGradeList,
         'EngravingList':EngravingList,
         'ClothingList':clothingList,
-        'SexItemList':sexItemList
+        'SexItemList':sexItemList,
+        'Gold':gold
     }
     return attrList
 
@@ -216,3 +223,25 @@ def setAnimalCache(animalName):
         except KeyError:
             pass
     pass
+
+# 创建角色默认属性
+def setAttrDefault(playerId):
+    temList = getTemList()
+    playerId = str(playerId)
+    playerSex = cache.playObject['object'][playerId]['Sex']
+    temId = temList[playerSex]
+    temData = getAttr(temId)
+    cache.temporaryObject['Age'] = temData['Age']
+    cache.temporaryObject['SexExperience'] = temData['SexExperienceList']
+    cache.temporaryObject['SexGrade'] = temData['SexGradeList']
+    cache.temporaryObject['Engraving'] = temData['EngravingList']
+    cache.temporaryObject['Features'] = cache.featuresList.copy()
+    cache.temporaryObject['Clothing'] = temData['ClothingList']
+    cache.temporaryObject['SexItem'] = temData['SexItemList']
+    cache.temporaryObject['Gold'] = temData['Gold']
+    pass
+
+# 确认角色最终属性生成
+def setAttrOver(playerId):
+    playerId = str(playerId)
+    cache.playObject['object'][playerId] = cache.temporaryObject.copy()

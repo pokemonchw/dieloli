@@ -12,5 +12,6 @@
   "detailedSetting5":["太好了，马上就到！","如果没什么事情的话可能会去","不行，绝对不行，说不定是传销什么的，绝对不能去"],
   "detailedSetting6":["这世上还没有问题能难得了{SelfName}","只要努力前进的话，一定能克服一切困难","不行，还是放弃吧，{SelfName}这种人也就如此而已罢了"],
   "detailedSettind7":["自然是义不容辞，尽己所能的去帮助了","看情况而定吧，不会随意帮助别人","不行不行，我帮他以后，他赖上我怎么办"],
-  "acknowledgmentAttribute":["这样就可以了","请给{SelfName}一个重头再来的机会"]
+  "acknowledgmentAttribute":["这样就可以了","请给{SelfName}一个重头再来的机会"],
+  "cmdSwitch":["-","+"]
 }

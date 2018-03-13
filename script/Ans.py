@@ -21,7 +21,7 @@ detailedsetting7 = "detailedSettind7"
 acknowledgmentAttribute = "acknowledgmentAttribute"
 
 # 用于批量生成id命令
-def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True):
+def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True,askfor = True):
     cmdListDate = textload.getTextData(textload.cmdId,cmdList).copy()
     inputI = []
     textWidth = config.text_width
@@ -70,11 +70,14 @@ def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True):
         else:
             pass
     eprint.p('\n')
-    ans = int(game.askfor_Int(inputI))
-    return ans
+    if askfor == True:
+        ans = int(game.askfor_Int(inputI))
+        return ans
+    else:
+        return inputI
 
 # 用于批量生成文本命令
-def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False):
+def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True):
     cmdListDate = textload.getTextData(textload.cmdId,cmdList).copy()
     inputS = []
     textWidth = config.text_width
@@ -177,8 +180,11 @@ def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False):
                     eprint.p(cmdTextFix)
                     inputS.append(cmdTextBak)
     eprint.p('\n')
-    ans = game.askfor_All(inputS)
-    return ans
+    if askfor == True:
+        ans = int(game.askfor_All(inputS))
+        return ans
+    else:
+        return inputS
 
 # 生成id文本
 def idIndex(id):

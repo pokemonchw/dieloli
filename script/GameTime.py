@@ -60,23 +60,23 @@ def setSubDay(subDay):
     cacheDay = int(cacheDay) + int(subDay)
     if cacheMonth == 1 or 3 or 5 or 7 or 8 or 10 or 12:
         if cacheDay >= 31:
-            if cacheDay // 31 > 1:
-                setSubMonth(1)
+            if cacheDay // 31 > 0:
+                setSubMonth("1")
                 cache.gameTime['day'] = cacheDay - 31
-                setSubDay(0)
+                setSubDay("0")
             else:
-                setSubMonth(1)
+                setSubMonth("1")
                 cache.gameTime['day'] = cacheDay
         else:
             cache.gameTime['day'] = cacheDay
     elif cacheMonth == 4 or 6 or 9 or 11:
         if cacheDay >= 30:
-            if cacheDay // 30 > 1:
-                setSubMonth(1)
+            if cacheDay // 30 > 0:
+                setSubMonth("1")
                 cache.gameTime['day'] = cacheDay - 30
-                setSubDay(0)
+                setSubDay("0")
             else:
-                setSubMonth(1)
+                setSubMonth("1")
                 cache.gameTime['day'] = cacheDay
         else:
             cache.gameTime['day'] = cacheDay
@@ -85,46 +85,46 @@ def setSubDay(subDay):
         if cacheYear // 1000 > 0:
             if cacheYear % 400 == 0:
                 if cacheDay > 29:
-                    if cacheDay // 29 > 1:
-                        setSubMonth(1)
+                    if cacheDay // 29 > 0:
+                        setSubMonth("1")
                         cache.gameTime['day'] = cacheDay - 29
-                        setSubDay(0)
+                        setSubDay("0")
                     else:
-                        setSubMonth(1)
+                        setSubMonth("1")
                         cache.gameTime['day'] = cacheDay - 29
                 else:
                     cache.gameTime['day'] = cacheDay
             else:
                 if cacheDay > 28:
-                    if cacheDay // 28 > 1:
-                        setSubMonth(1)
+                    if cacheDay // 28 > 0:
+                        setSubMonth("1")
                         cache.gameTime['day'] = cacheDay - 28
-                        setSubDay(0)
+                        setSubDay("0")
                     else:
-                        setSubMonth(1)
+                        setSubMonth("1")
                         cache.gameTime['day'] = cacheDay - 28
                 else:
                     cache.gameTime['day'] = cacheDay
         else:
             if cacheYear % 4 == 0:
                 if cacheDay > 29:
-                    if cacheDay // 29 > 1:
-                        setSubMonth(1)
+                    if cacheDay // 29 > 0:
+                        setSubMonth("1")
                         cache.gameTime['day'] = cacheDay - 29
-                        setSubDay(0)
+                        setSubDay("0")
                     else:
-                        setSubMonth(1)
+                        setSubMonth("1")
                         cache.gameTime['day'] = cacheDay - 29
                 else:
                     cache.gameTime['day'] = cacheDay
             else:
                 if cacheDay > 28:
-                    if cacheDay // 28 > 1:
-                        setSubMonth(1)
+                    if cacheDay // 28 > 0:
+                        setSubMonth("1")
                         cache.gameTime['day'] = cacheDay - 28
-                        setSubDay(0)
+                        setSubDay("0")
                     else:
-                        setSubMonth(1)
+                        setSubMonth("1")
                         cache.gameTime['day'] = cacheDay - 28
                 else:
                     cache.gameTime['day'] = cacheDay

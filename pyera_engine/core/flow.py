@@ -186,4 +186,10 @@ def initCache():
     cache.gameTime = {"year":0,"month":0,"day":0,"hour":0,"minute":0}
     cache.cmdData = {}
     cache.imageid = 0
+    cache.panelState = {
+        "PlayerMainAttrPanel":"1","PlayerEquipmentPanel":"1",
+        "PlayerItemPanel":"1","PlayerExperiencePanel":"1",
+        "PlayerLevelPanel":"1","PlayerFeaturesPanel":"1",
+        "PlayerEngravingPanel":"1"
+    }
     pass

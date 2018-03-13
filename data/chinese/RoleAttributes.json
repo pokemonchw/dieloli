@@ -23,7 +23,8 @@
       "Resistance":"0"
     },
     "Clothing":{},
-    "SexItem":{}
+    "SexItem":{},
+    "Gold":"0"
   },
   "Sex":["男","女","扶她","无性人"],
   "Features":{

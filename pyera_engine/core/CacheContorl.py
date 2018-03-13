@@ -35,7 +35,8 @@ temporaryObjectBak = {'Name':temObjectDefault['Name'],
                       'SexGrade':temObjectDefault['SexGrade'],
                       'Engraving':temObjectDefault['Engraving'],
                       'Clothing':temObjectDefault['Clothing'],
-                      'SexItem':temObjectDefault['SexItem']
+                      'SexItem':temObjectDefault['SexItem'],
+                      'Gold':temObjectDefault['Gold']
                       }
 
 # 素质数据临时缓存
@@ -70,4 +71,8 @@ imageid = 0
 # cmd数据
 cmdData = {}
 
+# 游戏时间
 gameTime = {}
+
+# 面板状态
+panelState = {}
