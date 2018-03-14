@@ -10,7 +10,7 @@ import core.ValueHandle as valuehandle
 def mainFrame_func():
     inputS = []
     flowReturn = mainframepanel.mainFramePanel()
-    inputS = valuehandle.listAppendToList(flowReturn,inputS)
+    inputS = inputS + flowReturn
     askForMainFrame(inputS)
 
 # 主页控制流程

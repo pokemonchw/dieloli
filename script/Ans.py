@@ -19,9 +19,10 @@ detailedsetting5 = "detailedSetting5"
 detailedsetting6 = "detailedSetting6"
 detailedsetting7 = "detailedSettind7"
 acknowledgmentAttribute = "acknowledgmentAttribute"
+mainmenu = "mainMenu"
 
 # 用于批量生成id命令
-def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True,askfor = True):
+def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left'):
     cmdListDate = textload.getTextData(textload.cmdId,cmdList).copy()
     inputI = []
     textWidth = config.text_width
@@ -34,39 +35,24 @@ def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True,askfor = Tr
             id = ''
         cmdTextAndId = id + cmdText
         cmdTextAndIdIndex = text.getTextIndex(cmdTextAndId)
-        cmdfix = " " * (cmdIndex - cmdTextAndIdIndex)
         if cmdTextAndIdIndex < cmdIndex:
-            if cmdSize == 'right':
+            if idSize == 'right':
                 cmdTextAndId = cmdText + id
-                if i == 0:
-                    eprint.p(cmdfix)
-                    pycmd.pcmd(cmdTextAndId, i, None)
-                    inputI.append(str(i))
-                elif i / cmdColumn >= 1 and i % cmdColumn == 0:
-                    eprint.p('\n')
-                    eprint.p(cmdfix)
-                    cmdTextAndId = cmdTextAndId.rstrip()
-                    pycmd.pcmd(cmdTextAndId, i, None)
-                    inputI.append(str(i))
-                else:
-                    eprint.p(cmdfix)
-                    pycmd.pcmd(cmdTextAndId, i, None)
-                    inputI.append(str(i))
-            elif cmdSize == 'left':
+            elif idSize == 'left':
                 cmdTextAndId = id + cmdText
-                if i == 0:
-                    pycmd.pcmd(cmdTextAndId, i, None)
-                    eprint.p(cmdfix)
-                    inputI.append(str(i))
-                elif i / cmdColumn >= 1 and i % cmdColumn == 0:
-                    eprint.p('\n')
-                    cmdTextAndId = cmdTextAndId.rstrip()
-                    pycmd.pcmd(cmdTextAndId, i, None)
-                    inputI.append(str(i))
-                else:
-                    pycmd.pcmd(cmdTextAndId, i, None)
-                    eprint.p(cmdfix)
-                    inputI.append(str(i))
+            if i == 0:
+                cmdTextAndId = cmdTextAndId.rstrip()
+                cmdSizePrint(cmdTextAndId, i, None, cmdIndex, cmdSize)
+                inputI.append(str(i))
+            elif i + 1 / cmdColumn >= 1 and i % cmdColumn == 0:
+                eprint.p('\n')
+                cmdTextAndId = cmdTextAndId.rstrip()
+                cmdSizePrint(cmdTextAndId, i, None, cmdIndex, cmdSize)
+                inputI.append(str(i))
+            else:
+                cmdTextAndId = cmdTextAndId.rstrip()
+                cmdSizePrint(cmdTextAndId, i, None, cmdIndex, cmdSize)
+                inputI.append(str(i))
         else:
             pass
     eprint.p('\n')
@@ -78,107 +64,33 @@ def optionint(cmdList,cmdColumn = 1,cmdSize = 'left',idSwitch = True,askfor = Tr
 
 # 用于批量生成文本命令
 def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True):
-    cmdListDate = textload.getTextData(textload.cmdId,cmdList).copy()
+    cmdListData = textload.getTextData(textload.cmdId,cmdList).copy()
     inputS = []
     textWidth = config.text_width
+    if lastLine == True:
+        if len(cmdListData) - 1 < cmdColumn:
+            cmdColumn = len(cmdListData) - 1
+    else:
+        if len(cmdListData) < cmdColumn:
+            cmdColumn = len(cmdListData) - 1
     cmdIndex = int(textWidth / cmdColumn)
-    for i in range(0,len(cmdListDate)):
-        cmdTextBak = dictionaries.handleText(cmdListDate[i])
+    for i in range(0,len(cmdListData)):
+        cmdTextBak = dictionaries.handleText(cmdListData[i])
         cmdText = '[' + cmdTextBak + ']'
-        cmdTextWidth = text.getTextIndex(cmdText)
-        cmdTextFix = ' ' * (cmdIndex - cmdTextWidth)
-        if cmdSize == 'right':
-            if i == 0:
-                eprint.p(cmdTextFix)
-                pycmd.pcmd(cmdText, cmdTextBak, None)
-                inputS.append(cmdListDate[i])
-            elif lastLine == False:
-                if i / cmdColumn >= 1 and i % cmdColumn == 0:
-                    eprint.p('\n')
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-                else:
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-            elif lastLine == True:
-                if i / cmdColumn >= 1 and i % cmdColumn == 0:
-                    eprint.p('\n')
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-                elif i == len(cmdListDate) - 1:
-                    eprint.p('\n')
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-                else:
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-        elif cmdSize == 'left':
-            if i == 0:
-                pycmd.pcmd(cmdText, cmdTextBak, None)
-                eprint.p(cmdTextFix)
-                inputS.append(cmdTextBak)
-            elif lastLine == False:
-                if i / cmdColumn >= 1 and i % cmdColumn == 0:
-                    eprint.p('\n')
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-                else:
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    eprint.p(cmdTextFix)
-                    inputS.append(cmdTextBak)
-            elif lastLine == True:
-                if i / cmdColumn >= 1 and i % cmdColumn == 0:
-                    eprint.p('\n')
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-                elif i == len(cmdListDate) - 1:
-                    eprint.p('\n')
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-                else:
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    eprint.p(cmdTextFix)
-                    inputS.append(cmdTextBak)
-        elif cmdSize == 'center':
-            cmdTextFix = ' ' * int(cmdIndex/2 - cmdTextWidth/2)
-            if i == 0:
-                eprint.p(cmdTextFix)
-                pycmd.pcmd(cmdText, cmdTextBak, None)
-                eprint.p(cmdTextFix)
-                inputS.append(cmdTextBak)
-            elif lastLine == False:
-                if i / cmdColumn >= 1 and i % cmdColumn == 0:
-                    eprint.p('\n')
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-                else:
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    eprint.p(cmdTextFix)
-                    inputS.append(cmdTextBak)
-            elif lastLine == True:
-                if i / cmdColumn >= 1 and i % cmdColumn == 0:
-                    eprint.p('\n')
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    eprint.p(cmdTextFix)
-                    inputS.append(cmdTextBak)
-                elif i == len(cmdListDate) - 1:
-                    eprint.p('\n')
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    inputS.append(cmdTextBak)
-                else:
-                    eprint.p(cmdTextFix)
-                    pycmd.pcmd(cmdText, cmdTextBak, None)
-                    eprint.p(cmdTextFix)
-                    inputS.append(cmdTextBak)
+        if i == 0:
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize)
+            inputS.append(cmdListData[i])
+        elif i / cmdColumn >= 1 and i % cmdColumn == 0:
+            eprint.p('\n')
+            cmdSizePrint(cmdText, cmdTextBak, None, cmdIndex, cmdSize)
+            inputS.append(cmdTextBak)
+        elif i == len(cmdListData) - 1 and lastLine == True:
+            eprint.p('\n')
+            cmdSizePrint(cmdText, cmdTextBak, None, cmdIndex, cmdSize)
+            inputS.append(cmdTextBak)
+        else:
+            cmdSizePrint(cmdText, cmdTextBak, None, cmdIndex, cmdSize)
+            inputS.append(cmdTextBak)
     eprint.p('\n')
     if askfor == True:
         ans = game.askfor_All(inputS)
@@ -201,3 +113,22 @@ def idIndex(id):
     else:
         idS = "[00" + str(id) + "] "
         return idS
+
+# 命令对齐
+def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'left'):
+    if cmdSize == 'left':
+        cmdWidth = text.getTextIndex(cmdText)
+        cmdTextFix = ' ' * (textWidth - cmdWidth - 1)
+        pycmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        eprint.p(cmdTextFix)
+    elif cmdSize == 'center':
+        cmdWidth = text.getTextIndex(cmdText)
+        cmdTextFix = ' ' * (int(textWidth/2) - int(cmdWidth/2) - 1)
+        eprint.p(cmdTextFix)
+        pycmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        eprint.p(cmdTextFix)
+    elif cmdSize == 'right':
+        cmdWidth = text.getTextIndex(cmdText)
+        cmdTextFix = ' ' * (textWidth - cmdWidth - 1)
+        eprint.p(cmdTextFix)
+        pycmd.pcmd(cmdText, cmdTextBak, cmdEvent)

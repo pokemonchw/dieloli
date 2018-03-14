@@ -6,6 +6,7 @@ import script.AttrText as attrtext
 import script.AttrPrint as attrprint
 import script.AttrHandle as attrhandle
 import core.PyCmd as pycmd
+import script.Ans as ans
 
 # 游戏主页流程
 def mainFramePanel():
@@ -27,4 +28,7 @@ def mainFramePanel():
     attrprint.printHpAndMpBar(playerId)
     mainMenuText = textload.getTextData(textload.stageWordId,'68')
     eprint.sontitleprint(mainMenuText)
+    eprint.p('\n')
+    askForMainMenu = ans.optionint(ans.mainmenu,4,'left',askfor=False,cmdSize='center')
+    cmdList = cmdList + askForMainMenu
     return cmdList
