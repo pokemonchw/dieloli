@@ -1,7 +1,7 @@
 {
   "styleList":["standard","onbutton","order","warning","special","grey","hp","mp",
     "levelg","levelf","levele","leveld","levelc","levelb","levela","levelex",
-    "engravingfull","engravingempty"
+    "littletitle","sontitle"
   ],
   "standard":{
     "foreground":"#C8C8C8",
@@ -68,10 +68,10 @@
   "levelex":{
     "foreground":"#a020f0"
   },
-  "engravingfull":{
-    "foreground":"#0000ff"
+  "littletitle":{
+    "foreground":"#ff00ff"
   },
-  "engravingempty":{
-    "foreground":"#696969"
+  "sontitle":{
+    "foreground":"#00ff00"
   }
 }

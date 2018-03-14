@@ -181,7 +181,7 @@ def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = T
                     inputS.append(cmdTextBak)
     eprint.p('\n')
     if askfor == True:
-        ans = int(game.askfor_All(inputS))
+        ans = game.askfor_All(inputS)
         return ans
     else:
         return inputS

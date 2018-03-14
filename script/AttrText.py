@@ -2,6 +2,7 @@ import os
 import core.data as data
 import core.TextLoading as textload
 import script.ProportionalBar as proportionalbar
+import core.CacheContorl as cache
 from core.GameConfig import language
 from core.pycfg import gamepath
 
@@ -166,3 +167,12 @@ def getSexItemText(sexItemList):
         fingerText,chestText,privatesText,anusText,otherText
     ]
     return sexItemTextList
+
+# 获取金钱信息文本
+def getGoldText(playerId):
+    goldData = cache.playObject['object'][playerId]['Gold']
+    goldData = str(goldData)
+    moneyText = textload.getTextData(textload.stageWordId,'66')
+    goldText = textload.getTextData(textload.stageWordId,'67')
+    goldText = goldText + goldData + moneyText
+    return goldText

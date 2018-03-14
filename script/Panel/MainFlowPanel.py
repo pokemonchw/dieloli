@@ -17,7 +17,6 @@ def loadGamePanel():
 
 # 游戏主面板
 def gameMainPanel():
-    import script.mainflow as mainflow
     eprint.pline()
     eprint.pl(text.align(config.game_name, 'center'))
     eprint.pl(text.align(config.author, 'right'))
@@ -32,10 +31,4 @@ def gameMainPanel():
     time.sleep(1)
     pycmd.focusCmd()
     menuInt = ans.optionint(ans.logomenu)
-    if menuInt == 0:
-        mainflow.newgame_func()
-    elif menuInt == 1:
-        mainflow.loadgame_func()
-    elif menuInt == 2:
-        mainflow.quitgame_func()
-    pass
+    return menuInt

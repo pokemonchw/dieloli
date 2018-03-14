@@ -56,7 +56,20 @@ def plt(string):
     width = config.text_width
     textWidth = text.getTextIndex(string)
     lineWidth = int(int(width)/2 - int(textWidth)/2 - 2)
-    pl('-'*lineWidth + '▢' + string + '▢' + '-'*lineWidth)
+    pl('-'*lineWidth + '<littletitle>▢' + string + '▢</littletitle>' + '-'*lineWidth)
+
+# 子标题输出
+def sontitleprint(string):
+    string = string
+    string = doctionaries.handleText(string)
+    global last_char
+    if len(string) > 0:
+        last_char = string[-1:]
+    width = config.text_width
+    textWidth = text.getTextIndex(string)
+    lineWidth = int(int(width)/4)
+    lineWidthFix = int(int(width)/4 - int(textWidth))
+    pl('-' * lineWidthFix + '<sontitle>' + string + '</sontitle>' + '-' * lineWidth * 3)
 
 #输出一行
 def pl(string='', style='standard'):

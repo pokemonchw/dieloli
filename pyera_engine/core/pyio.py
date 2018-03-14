@@ -140,47 +140,35 @@ def init_style():
     style_def = new_style_def
     styleList = config.getFontData("styleList")
     standardData = config.getFontData('standard')
+    styleDataList = ['foreground','background','font','fontSize','bold','underline','italic']
+    defStyleList = {}
     for i in range(0,len(styleList)):
         styleName = styleList[i]
         styleData = config.getFontData(styleName)
-        try:
-            styleForeground = styleData['foreground']
-        except KeyError:
-            styleForeground = standardData['foreground']
-        try:
-            styleBackground = styleData['background']
-        except KeyError:
-            styleBackground = standardData['background']
-        try:
-            styleFont = styleData['font']
-        except KeyError:
-            styleFont = standardData['font']
-        try:
-            styleFontSize = styleData['fontSize']
-        except KeyError:
-            styleFontSize = standardData['fontSize']
-        try:
-            styleBold = styleData['bold']
-        except KeyError:
-            styleBold = standardData['bold']
-        try:
-            styleUnderline = styleData['underline']
-        except KeyError:
-            styleUnderline = standardData['underline']
-        try:
-            styleItalic = styleData['italic']
-        except KeyError:
-            styleItalic = standardData['italic']
-        if styleBold == '0':
-            styleBold = False
-        else:
-            styleBold = True
-        if styleUnderline == '0':
-            styleUnderline = False
-        else:
-            styleUnderline = True
-        if styleItalic == '0':
-            styleItalic = False
-        else:
-            styleItalic = True
-        style_def(styleName,styleForeground,styleBackground,styleFont,styleFontSize,styleBold,styleUnderline,styleItalic)
+        for index in range(0,len(styleDataList)):
+            try:
+                if styleDataList[index] == 'bold' or styleDataList[index] == 'underline' or styleDataList[index] == 'italic':
+                    if styleData[styleDataList[index]] == '0':
+                        styleDataValue = False
+                    else:
+                        styleDataValue = True
+                else:
+                    styleDataValue = styleData[styleDataList[index]]
+            except KeyError:
+                if styleDataList[index] == 'bold' or styleDataList[index] == 'underline' or styleDataList[index] == 'italic':
+                    if standardData[styleDataList[index]] == '0':
+                        styleDataValue = False
+                    else:
+                        styleDataValue = True
+                else:
+                    styleDataValue = standardData[styleDataList[index]]
+            defStyleList[styleDataList[index]] = styleDataValue
+        styleForeground = defStyleList['foreground']
+        styleBackground = defStyleList['background']
+        styleFont = defStyleList['font']
+        styleFontSize = defStyleList['fontSize']
+        styleBold = defStyleList['bold']
+        styleUnderline = defStyleList['underline']
+        styleItalic = defStyleList['italic']
+        style_def(styleName, styleForeground, styleBackground, styleFont, styleFontSize, styleBold, styleUnderline,
+                  styleItalic)

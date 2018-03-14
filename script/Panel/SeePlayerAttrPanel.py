@@ -2,7 +2,7 @@ import core.CacheContorl as cache
 import script.AttrHandle as attrhandle
 import core.TextLoading as textload
 import core.EraPrint as eprint
-import script.ProportionalBar as proportionalbar
+import script.AttrPrint as attrprint
 import script.AttrText as attrtext
 import script.Ans as ans
 import core.PyCmd as pycmd
@@ -58,16 +58,7 @@ def seePlayerMainAttrPanel(playerId):
         attrListString.append(playerGraces)
         eprint.plist(attrListString, 4, 'center')
         eprint.p('\n')
-        playerHitPoint = playerData['HitPoint']
-        playerMaxHitPoint = playerData['HitPointMax']
-        hitPointText = textload.getTextData(textload.stageWordId, '8')
-        hitPointBar = proportionalbar.getProportionalBar(hitPointText, playerMaxHitPoint, playerHitPoint, 'hpbar')
-        playerManaPoint = playerData['ManaPoint']
-        playerMaxManaPoint = playerData['ManaPointMax']
-        manaPointText = textload.getTextData(textload.stageWordId, '9')
-        manaPointBar = proportionalbar.getProportionalBar(manaPointText, playerMaxManaPoint, playerManaPoint, 'mpbar')
-        hpmpBarList = [hitPointBar, manaPointBar]
-        eprint.plist(hpmpBarList, 2, 'center')
+        attrprint.printHpAndMpBar(playerId)
         return 'PlayerMainAttrPanel'
     else:
         pycmd.pcmd(panelStateOnText, 'PlayerMainAttrPanel', None)
@@ -129,11 +120,11 @@ def seePlayerExperiencePanel(playerId):
         playerSexTextList = attrtext.getSexExperienceText(playerSexExperienceList,
                                                           cache.playObject['object']['0']['Sex'])
         eprint.plist(playerSexTextList, 4, 'center')
-        return 'PlayerItemPanel'
+        return 'PlayerExperiencePanel'
     else:
         pycmd.pcmd(panelStateOnText, 'PlayerExperiencePanel')
         eprint.p('\n')
-        return 'PlayerItemPanel'
+        return 'PlayerExperiencePanel'
 
 # 查看角色技能等级
 def seePlayerLevelPanel(playerId):

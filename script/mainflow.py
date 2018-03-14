@@ -16,8 +16,13 @@ def open_func():
 
 # 主界面
 def main_func():
-    mainflowpanel.gameMainPanel()
-    pass
+    ans = mainflowpanel.gameMainPanel()
+    if ans == 0:
+        newgame_func()
+    elif ans == 1:
+        loadgame_func()
+    elif ans == 2:
+        quitgame_func()
 
 # 主界面新建游戏调用
 def newgame_func():
