@@ -2,6 +2,7 @@ import core.data as data
 import os
 import random
 import core.CacheContorl as cache
+import core.ValueHandle as valuehandle
 from core.GameConfig import language
 from core.pycfg import gamepath
 
@@ -22,7 +23,7 @@ def getFeaturesList():
 
 # 获取年龄模板
 def getAgeTemList():
-    list = templateData["AgeTem"]["List"]
+    list = valuehandle.dictKeysToList(templateData["AgeTem"])
     return list
 
 # 获取刻应列表

@@ -1,8 +1,4 @@
 {
-  "styleList":["standard","onbutton","order","warning","special","grey","hp","mp",
-    "levelg","levelf","levele","leveld","levelc","levelb","levela","levelex",
-    "littletitle","sontitle"
-  ],
   "standard":{
     "foreground":"#C8C8C8",
     "background":"#000000",

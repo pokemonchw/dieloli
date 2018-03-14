@@ -33,7 +33,6 @@
     "FeaturesTem":"Asexual"
   },
   "AgeTem":{
-    "List":["Usually","Young"],
     "Usually":{
       "MaxAge":"28",
       "MiniAge":"17"
@@ -44,7 +43,6 @@
     }
   },
   "HitPointTem":{
-    "List":["Ordinary","Strong","Thin"],
     "Ordinary":{
       "HitPointMax":"2000"
     },
@@ -56,7 +54,6 @@
     }
   },
   "ManaPointTem":{
-    "List":["Ordinary","Strong","WeakMagic"],
     "Ordinary":{
       "ManaPointMax":"2000"
     },
@@ -160,7 +157,6 @@
     }
   },
   "SexExperience": {
-    "SexTemList":["Abundant","Ordinary","Scarce","None"],
     "None": {
       "MouthExperienceTem": "None",
       "BosomExperienceTem": "None",

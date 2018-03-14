@@ -4,7 +4,7 @@ import core.TextLoading as textload
 
 # 富文本计算
 def setRichTextPrint(textMessage,defaultStyle):
-    styleNameList = config.getFontData('styleList') + textload.getTextData(textload.barListId,'barlist')
+    styleNameList = config.getFontDataList() + textload.getTextData(textload.barListId,'barlist')
     styleIndex = 0
     styleLastIndex = None
     styleMaxIndex = None

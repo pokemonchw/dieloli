@@ -6,9 +6,11 @@ import core.CacheContorl as cache
 import script.flow.LoadSave as loadsave
 import script.Panel.MainFlowPanel as mainflowpanel
 import time
+import core.TextLoading as textload
 
 # 启动游戏界面
 def open_func():
+    textData = textload.getData(textload.stageWordPath)
     mainflowpanel.loadGamePanel()
     time.sleep(1)
     main_func()

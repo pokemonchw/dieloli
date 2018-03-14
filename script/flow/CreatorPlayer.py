@@ -6,6 +6,7 @@ import core.TextLoading as textload
 import script.flow.SeePlayerAttr as seeplayerattr
 import core.EraPrint as eprint
 import random
+import core.ValueHandle as valuehandle
 
 playerId = '0'
 featuresList = attr.getFeaturesList()
@@ -164,7 +165,7 @@ def detailedSetting_func3():
         cache.featuresList['Chastity'] = ''
     else:
         pass
-    sexTemDataList = textload.getTextData(textload.temId,'SexExperience')['SexTemList']
+    sexTemDataList = valuehandle.dictKeysToList(textload.getTextData(textload.temId,'SexExperience'))
     sexTemName = sexTemDataList[flowReturn]
     playerSexExperienceData = attr.getSexExperience(sexTemName)
     cache.temporaryObject['SexExperience'] = playerSexExperienceData

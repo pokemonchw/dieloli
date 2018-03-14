@@ -7,8 +7,6 @@ import core.CacheContorl as cache
 import core.Dictionaries as doctionaries
 import core.RichText as richtext
 import core.TextLoading as textload
-import core.EraImage as eraimage
-import threading
 
 last_char = '\n'
 
@@ -24,7 +22,7 @@ def p(string, style='standard'):
     if len(string) > 0:
         last_char = string[-1:]
     styleList = richtext.setRichTextPrint(string, style)
-    styleNameList = config.getFontData('styleList') + barlist
+    styleNameList = config.getFontDataList() + barlist
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'
@@ -39,15 +37,18 @@ def p(string, style='standard'):
             truebar = styledata['truebar']
             nullbar = styledata['nullbar']
             if string[i] == '0':
-                pyio.imageprint(nullbar, 'bar')
-                #eraimage.printImage(nullbar, 'bar')
+                pimage(nullbar, 'bar')
             elif string[i] == '1':
-                pyio.imageprint(truebar, 'bar')
-                #eraimage.printImage(truebar, 'bar')
+                pimage(truebar, 'bar')
             else:
                 pyio.print(string[i], styleList[i])
         else:
             pyio.print(string[i], styleList[i])
+
+# 输出图片
+def pimage(imageName,imagePath=''):
+    pyio.imageprint(imageName,imagePath)
+    pass
 
 # 小标题输出
 def plt(string):
@@ -59,7 +60,7 @@ def plt(string):
     width = config.text_width
     textWidth = text.getTextIndex(string)
     lineWidth = int(int(width)/2 - int(textWidth)/2 - 2)
-    pl('-'*lineWidth + '<littletitle>▢' + string + '▢</littletitle>' + '-'*lineWidth)
+    pl('='*lineWidth + '<littletitle>▢' + string + '▢</littletitle>' + '='*lineWidth)
 
 # 子标题输出
 def sontitleprint(string):
@@ -72,7 +73,7 @@ def sontitleprint(string):
     textWidth = text.getTextIndex(string)
     lineWidth = int(int(width)/4)
     lineWidthFix = int(int(width)/4 - int(textWidth))
-    pl('-' * lineWidthFix + '<sontitle>' + string + '</sontitle>' + '-' * lineWidth * 3)
+    pl(':' * lineWidthFix + '<sontitle>' + string + '</sontitle>' + ':' * lineWidth * 3)
 
 #输出一行
 def pl(string='', style='standard'):
@@ -84,11 +85,11 @@ def pl(string='', style='standard'):
         p('\n')
 
 #输出分割线
-def pline(sample='-', style='standard'):
+def pline(sample='=', style='standard'):
     textWidth = config.text_width
     pl(sample * textWidth,style)
 
-def plittleline(sample = '.',style = 'standard'):
+def plittleline(sample = ':',style = 'standard'):
     textWidth = config.text_width
     pl(sample * textWidth, style)
 
@@ -112,7 +113,7 @@ def plwait(string='', style='standard'):
 def pobo(sleepTime,string, style='standard'):
     cache.wframeMouse['wFrameUp'] = 0
     styleList = richtext.setRichTextPrint(string,style)
-    styleNameList = config.getFontData('styleList')
+    styleNameList = config.getFontDataList()
     for i in range(0,len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'
@@ -168,7 +169,7 @@ def lcp(sleepTime,string='',style='standard'):
     string = str(string)
     stringlist = string.split('\n')
     width = config.text_width
-    styleNameList = config.getFontData('styleList')
+    styleNameList = config.getFontDataList()
     stringCenterList = ''
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'

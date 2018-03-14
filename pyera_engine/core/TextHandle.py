@@ -1,5 +1,4 @@
 from idna import unichr
-
 import core.GameConfig as config
 import core.TextLoading as textload
 import core.RichText as richtext
@@ -35,7 +34,7 @@ def getTextIndex(text):
     textIndex = 0
     stylewidth = 0
     barlist = textload.getTextData(textload.barListId,'barlist')
-    styleNameList = config.getFontData('styleList') + textload.getTextData(textload.barListId,'barlist')
+    styleNameList = config.getFontDataList() + textload.getTextData(textload.barListId,'barlist')
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'

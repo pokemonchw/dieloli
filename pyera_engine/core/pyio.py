@@ -145,7 +145,7 @@ def init_style():
     def new_style_def(style_name, foreground, background, font, fontsize,bold, underline, italic):
         frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic)
     style_def = new_style_def
-    styleList = config.getFontData("styleList")
+    styleList = config.getFontDataList()
     standardData = config.getFontData('standard')
     styleDataList = ['foreground','background','font','fontSize','bold','underline','italic']
     defStyleList = {}
