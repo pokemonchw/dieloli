@@ -8,6 +8,7 @@ import core.Dictionaries as doctionaries
 import core.RichText as richtext
 import core.TextLoading as textload
 import core.EraImage as eraimage
+import threading
 
 last_char = '\n'
 
@@ -38,9 +39,11 @@ def p(string, style='standard'):
             truebar = styledata['truebar']
             nullbar = styledata['nullbar']
             if string[i] == '0':
-                eraimage.printImage(nullbar,'bar')
+                pyio.imageprint(nullbar, 'bar')
+                #eraimage.printImage(nullbar, 'bar')
             elif string[i] == '1':
-                eraimage.printImage(truebar,'bar')
+                pyio.imageprint(truebar, 'bar')
+                #eraimage.printImage(truebar, 'bar')
             else:
                 pyio.print(string[i], styleList[i])
         else:

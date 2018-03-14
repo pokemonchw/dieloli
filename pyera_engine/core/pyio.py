@@ -6,6 +6,7 @@ import queue
 import json
 import sys
 import core.GameConfig as config
+import core.EraImage as eraimage
 sys_print = print
 
 sys.setrecursionlimit(100000)
@@ -90,6 +91,12 @@ def style_json(style_name, foreground, background, font, fontsize, bold, underli
 def print(string, style='standard'):
     jsonstr = new_json()
     jsonstr['content'].append(text_json(string, style))
+    putQ(json.dumps(jsonstr, ensure_ascii=False))
+
+def imageprint(imageName,imagePath=''):
+    jsonstr = new_json()
+    imageJson = {"imageName":imageName,"imagePath":imagePath}
+    jsonstr['image'] = imageJson
     putQ(json.dumps(jsonstr, ensure_ascii=False))
 
 def clear_screen():

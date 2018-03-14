@@ -3,11 +3,11 @@ import core.winframe as winframe
 from tkinter import *
 from core.pycfg import gamepath
 import core.CacheContorl as cache
-import time
 
 textBox = winframe.textbox
 imageData = {}
 imageTextData = {}
+imageLock = 0
 
 # 获取图片数据
 def getImageData(imageName,imagePath=''):
@@ -21,6 +21,5 @@ def getImageData(imageName,imagePath=''):
 
 # 打印图片
 def printImage(imageName,imagePath=''):
-    time.sleep(0.01)
-    imageData[str(cache.imageid)] = getImageData(imageName,imagePath)
-    textBox.image_create(END,image = imageData[str(cache.imageid)])
+    imageData[str(cache.imageid)] = getImageData(imageName, imagePath)
+    textBox.image_create(END, image=imageData[str(cache.imageid)])

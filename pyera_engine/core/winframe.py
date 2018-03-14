@@ -163,6 +163,9 @@ def read_queue():
             temp=jsonstr['set_style']
             _frame_style_def(temp['style_name'],temp['foreground'],temp['background'],temp['font'],
                              temp['fontsize'],temp['bold'],temp['underline'],temp['italic'])
+        if 'image' in jsonstr.keys():
+            import core.EraImage as eraimage
+            eraimage.printImage(jsonstr['image']['imageName'],jsonstr['image']['imagePath'])
 
         for c in jsonstr['content']:
             if c['type']=='text':
