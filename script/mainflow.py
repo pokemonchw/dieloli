@@ -3,14 +3,12 @@ import os
 import core.PyCmd as pycmd
 import script.flow.CreatorPlayer as creatorplayer
 import core.CacheContorl as cache
-import script.flow.LoadSave as loadsave
+import script.flow.SaveHandle as savehandle
 import script.Panel.MainFlowPanel as mainflowpanel
 import time
-import core.TextLoading as textload
 
 # 启动游戏界面
 def open_func():
-    textData = textload.getData(textload.stageWordPath)
     mainflowpanel.loadGamePanel()
     time.sleep(1)
     main_func()
@@ -36,7 +34,7 @@ def newgame_func():
 # 主界面读取游戏调用
 def loadgame_func():
     pycmd.clr_cmd()
-    loadsave.loadSave_func()
+    savehandle.loadSave_func()
     pass
 
 # 主界面退出游戏调用

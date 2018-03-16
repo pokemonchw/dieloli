@@ -11,6 +11,17 @@ panelStateTextData = textload.getTextData(textload.cmdId,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
 panelStateOffText = panelStateTextData[0]
 
+
+# 初始化查看属性面板状态
+def initShowAttrPanelList():
+    cache.panelState['PlayerMainAttrPanel'] = '0'
+    cache.panelState['PlayerEquipmentPanel'] = '0'
+    cache.panelState['PlayerItemPanel'] = '0'
+    cache.panelState['PlayerExperiencePanel'] = '0'
+    cache.panelState['PlayerLevelPanel'] = '0'
+    cache.panelState['PlayerFeaturesPanel'] = '0'
+    cache.panelState['PlayerEngravingPanel'] = '0'
+
 # 查看角色主属性面板
 def seePlayerMainAttrPanel(playerId):
     title1 = textload.getTextData(textload.stageWordId, '1')
@@ -182,6 +193,23 @@ def seePlayerEngravingPanel(playerId):
         pycmd.pcmd(panelStateOnText, 'PlayerEngravingPanel')
         eprint.p('\n')
         return 'PlayerEngravingPanel'
+
+# 查看属性页显示控制
+def seeAttrShowHandlePanel():
+    ansListData = textload.getTextData(textload.cmdId,'seeAttrPanelHandle')
+    seeAttrPanelHandleCache = cache.panelState['AttrShowHandlePanel']
+    inputS = []
+    if seeAttrPanelHandleCache == '0':
+        inputS.append(ansListData[2])
+        inputS.append(ansListData[1])
+    elif seeAttrPanelHandleCache == '1':
+        inputS.append(ansListData[0])
+        inputS.append(ansListData[2])
+    elif seeAttrPanelHandleCache == '2':
+        inputS.append(ansListData[1])
+        inputS.append(ansListData[0])
+    yrn = ans.optionstr(ans.seeattrpanelmenu,2,cmdSize='center',askfor=False,cmdListData=inputS)
+    return yrn
 
 def inputAttrOverPanel():
     yrn = ans.optionint(ans.acknowledgmentAttribute, 1,askfor=False)

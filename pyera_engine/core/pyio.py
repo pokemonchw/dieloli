@@ -154,21 +154,9 @@ def init_style():
         styleData = config.getFontData(styleName)
         for index in range(0,len(styleDataList)):
             try:
-                if styleDataList[index] == 'bold' or styleDataList[index] == 'underline' or styleDataList[index] == 'italic':
-                    if styleData[styleDataList[index]] == '0':
-                        styleDataValue = False
-                    else:
-                        styleDataValue = True
-                else:
-                    styleDataValue = styleData[styleDataList[index]]
+                styleDataValue = styleData[styleDataList[index]]
             except KeyError:
-                if styleDataList[index] == 'bold' or styleDataList[index] == 'underline' or styleDataList[index] == 'italic':
-                    if standardData[styleDataList[index]] == '0':
-                        styleDataValue = False
-                    else:
-                        styleDataValue = True
-                else:
-                    styleDataValue = standardData[styleDataList[index]]
+                styleDataValue = standardData[styleDataList[index]]
             defStyleList[styleDataList[index]] = styleDataValue
         styleForeground = defStyleList['foreground']
         styleBackground = defStyleList['background']

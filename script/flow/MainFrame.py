@@ -4,7 +4,11 @@ import script.AttrHandle as attrhandle
 import core.game as game
 import core.PyCmd as pycmd
 import script.flow.SeePlayerAttr as seeplayerattr
-import core.ValueHandle as valuehandle
+import script.flow.MapEvent as mapevent
+import script.flow.SeeObjectListFlow as seeobjectlistflow
+import script.flow.Shop as shop
+import script.flow.ChangeClothes as changeclothes
+import script.flow.GameSetting as gamesetting
 
 # 游戏主页
 def mainFrame_func():
@@ -22,7 +26,21 @@ def askForMainFrame(ansList):
     if ans == playerName:
         pycmd.clr_cmd()
         mainFrameSeeAttrPanel()
-    else:
+    elif ans == '0':
+        pycmd.clr_cmd()
+        mapevent.playerOnScene_Func()
+    elif ans == '1':
+        pycmd.clr_cmd()
+        seeobjectlistflow.seePlayerObjectList_func()
+    elif ans == '2':
+        pycmd.clr_cmd()
+        changeclothes.changePlayerClothes(playerId)
+    elif ans == '3':
+        pycmd.clr_cmd()
+        shop.shopMainFrame_func()
+    elif ans == '4':
+        pycmd.clr_cmd()
+        gamesetting.changeGameSetting_func()
         pass
 
 # 游戏主页查看属性流程

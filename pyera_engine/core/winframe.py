@@ -218,17 +218,14 @@ def _clear_screen():
     textbox.delete('1.0', END)
 
 def _frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic):
-    # include foreground, background, font, size, bold, underline, slant
-    # font_str = font + ' ' + fontsize + ['', ' bold'][bold == True] + ['', ' underline'][underline == True] + \
-    #            ['', ' italic'][italic == True]
     font_list = []
     font_list.append(font)
     font_list.append(fontsize)
-    if bold == True:
+    if bold == '1':
         font_list.append('bold')
-    if underline == True:
+    if underline == '1':
         font_list.append('underline')
-    if italic == True:
+    if italic == '1':
         font_list.append('italic')
     textbox.tag_configure(style_name, foreground=foreground, background=background, font=tuple(font_list))
 

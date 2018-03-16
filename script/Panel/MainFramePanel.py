@@ -31,4 +31,10 @@ def mainFramePanel():
     eprint.p('\n')
     askForMainMenu = ans.optionint(ans.mainmenu,4,'left',askfor=False,cmdSize='center')
     cmdList = cmdList + askForMainMenu
+    systemMenuText = textload.getTextData(textload.stageWordId,'69')
+    eprint.sontitleprint(systemMenuText)
+    eprint.p('\n')
+    systemMenuStartId = len(askForMainMenu)
+    askForSystemMenu = ans.optionint(ans.systemmenu,4,'left',askfor=False,cmdSize='center',startId=systemMenuStartId)
+    cmdList = cmdList + askForSystemMenu
     return cmdList

@@ -190,6 +190,6 @@ def initCache():
         "PlayerMainAttrPanel":"1","PlayerEquipmentPanel":"1",
         "PlayerItemPanel":"1","PlayerExperiencePanel":"1",
         "PlayerLevelPanel":"1","PlayerFeaturesPanel":"1",
-        "PlayerEngravingPanel":"1"
+        "PlayerEngravingPanel":"1","AttrShowHandlePanel":"0"
     }
     pass

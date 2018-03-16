@@ -20,17 +20,26 @@ detailedsetting6 = "detailedSetting6"
 detailedsetting7 = "detailedSettind7"
 acknowledgmentAttribute = "acknowledgmentAttribute"
 mainmenu = "mainMenu"
+systemmenu = "systemMenu"
+seeattrpanelmenu = "seeAttrPanelHandle"
 
 # 用于批量生成id命令
-def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left'):
-    cmdListDate = textload.getTextData(textload.cmdId,cmdList).copy()
+def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left',startId = '0',cmdListData=None):
+    if cmdListData == None:
+        cmdListData = textload.getTextData(textload.cmdId, cmdList).copy()
+    else:
+        pass
     inputI = []
     textWidth = config.text_width
     cmdIndex = int(textWidth/cmdColumn)
-    for i in range(0,len(cmdListDate)):
-        cmdText = dictionaries.handleText(cmdListDate[i])
+    if len(cmdListData) < cmdColumn:
+        cmdColumn = len(cmdListData) - 1
+    for i in range(0,len(cmdListData)):
+        cmdText = dictionaries.handleText(cmdListData[i])
+        startId = int(startId)
+        returnId = i + startId
         if idSwitch == True:
-            id = idIndex(i)
+            id = idIndex(returnId)
         else:
             id = ''
         cmdTextAndId = id + cmdText
@@ -42,17 +51,17 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
                 cmdTextAndId = id + cmdText
             if i == 0:
                 cmdTextAndId = cmdTextAndId.rstrip()
-                cmdSizePrint(cmdTextAndId, i, None, cmdIndex, cmdSize)
-                inputI.append(str(i))
-            elif i + 1 / cmdColumn >= 1 and i % cmdColumn == 0:
+                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
+                inputI.append(str(returnId))
+            elif i / cmdColumn >= 1 and i % cmdColumn == 0:
                 eprint.p('\n')
                 cmdTextAndId = cmdTextAndId.rstrip()
-                cmdSizePrint(cmdTextAndId, i, None, cmdIndex, cmdSize)
-                inputI.append(str(i))
+                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
+                inputI.append(str(returnId))
             else:
                 cmdTextAndId = cmdTextAndId.rstrip()
-                cmdSizePrint(cmdTextAndId, i, None, cmdIndex, cmdSize)
-                inputI.append(str(i))
+                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
+                inputI.append(str(returnId))
         else:
             pass
     eprint.p('\n')
@@ -63,8 +72,11 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
         return inputI
 
 # 用于批量生成文本命令
-def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True):
-    cmdListData = textload.getTextData(textload.cmdId,cmdList).copy()
+def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True,cmdListData=None):
+    if cmdListData == None:
+        cmdListData = textload.getTextData(textload.cmdId, cmdList).copy()
+    else:
+        pass
     inputS = []
     textWidth = config.text_width
     if lastLine == True:
@@ -118,17 +130,17 @@ def idIndex(id):
 def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'left'):
     if cmdSize == 'left':
         cmdWidth = text.getTextIndex(cmdText)
-        cmdTextFix = ' ' * (textWidth - cmdWidth - 1)
+        cmdTextFix = ' ' * (textWidth - cmdWidth)
         pycmd.pcmd(cmdText, cmdTextBak, cmdEvent)
         eprint.p(cmdTextFix)
     elif cmdSize == 'center':
         cmdWidth = text.getTextIndex(cmdText)
-        cmdTextFix = ' ' * (int(textWidth/2) - int(cmdWidth/2) - 1)
+        cmdTextFix = ' ' * (int(textWidth/2) - int(cmdWidth/2))
         eprint.p(cmdTextFix)
         pycmd.pcmd(cmdText, cmdTextBak, cmdEvent)
         eprint.p(cmdTextFix)
     elif cmdSize == 'right':
         cmdWidth = text.getTextIndex(cmdText)
-        cmdTextFix = ' ' * (textWidth - cmdWidth - 1)
+        cmdTextFix = ' ' * (textWidth - cmdWidth)
         eprint.p(cmdTextFix)
         pycmd.pcmd(cmdText, cmdTextBak, cmdEvent)
