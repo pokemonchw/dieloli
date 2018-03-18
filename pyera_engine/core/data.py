@@ -50,34 +50,3 @@ def _loaddir(datapath):
 def init():
     datapath = os.path.join(gamepath,'data')
     _loaddir(datapath)
-
-# 获取存档所在路径
-def _get_savefilename_path(filename):
-    global gamepath
-    savepath = os.path.join(gamepath,'save')
-    if not os.path.exists(savepath):
-        os.makedirs(savepath)
-    filepath = os.path.join(savepath,filename + '.save')
-    return filepath
-
-# 存入存档数据
-def save(filename, data=None):
-    if data == None:
-        data = _gamedata
-    filepath = _get_savefilename_path(filename)
-    with open(filepath, 'wb') as f:
-        pickle.dump(data,f)
-
-# 读取存档数据
-def load(filename, selfdata=False):
-    filepath = _get_savefilename_path(filename)
-    data = {}
-    try:
-        with open(filepath, 'rb') as f:
-            data=pickle.load(f)
-    except FileNotFoundError:
-        print(filepath + '  没有该存档文件')
-    if selfdata == False:
-        global _gamedata
-        _gamedata.update(data)
-    return data

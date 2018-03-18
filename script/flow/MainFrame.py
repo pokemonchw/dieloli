@@ -9,6 +9,7 @@ import script.flow.SeeObjectListFlow as seeobjectlistflow
 import script.flow.Shop as shop
 import script.flow.ChangeClothes as changeclothes
 import script.flow.GameSetting as gamesetting
+import script.flow.SaveHandleFrame as savehandleframe
 
 # 游戏主页
 def mainFrame_func():
@@ -41,6 +42,11 @@ def askForMainFrame(ansList):
     elif ans == '4':
         pycmd.clr_cmd()
         gamesetting.changeGameSetting_func()
+    elif ans == '5':
+        pass
+    elif ans == '6':
+        savehandleframe.establishSave_func()
+    elif ans == '7':
         pass
 
 # 游戏主页查看属性流程

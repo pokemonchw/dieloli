@@ -3,7 +3,7 @@ import os
 import core.PyCmd as pycmd
 import script.flow.CreatorPlayer as creatorplayer
 import core.CacheContorl as cache
-import script.flow.SaveHandle as savehandle
+import script.flow.SaveHandleFrame as savehandleframe
 import script.Panel.MainFlowPanel as mainflowpanel
 import time
 
@@ -34,7 +34,7 @@ def newgame_func():
 # 主界面读取游戏调用
 def loadgame_func():
     pycmd.clr_cmd()
-    savehandle.loadSave_func()
+    savehandleframe.loadSave_func()
     pass
 
 # 主界面退出游戏调用

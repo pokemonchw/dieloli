@@ -18,6 +18,9 @@ def mainFramePanel():
     dateText = gametime.getDateText()
     eprint.p(dateText)
     eprint.p(' ')
+    weekDateText = gametime.getWeekDayText()
+    eprint.p(weekDateText)
+    eprint.p(' ')
     playerName = playerData['Name']
     pycmd.pcmd(playerName,playerName,None)
     cmdList.append(playerName)

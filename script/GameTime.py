@@ -28,6 +28,12 @@ def getDateText():
     dateText = dateText + gameYearText + gameMonthText + gameDayText + gameHourText + gameMinuteText
     return dateText
 
+# 获取星期文本
+def getWeekDayText():
+    weekDay = getWeekDate()
+    weekDateData = textload.getTextData(textload.messageId,'19')
+    return weekDateData[weekDay]
+
 # 增加分钟
 def setSubMinute(subMinute):
     cacheMinute = cache.gameTime['minute']
@@ -81,53 +87,29 @@ def setSubDay(subDay):
         else:
             cache.gameTime['day'] = cacheDay
     elif cacheMonth == 2:
-        cacheYear = int(cache.gameTime['year'])
-        if cacheYear // 1000 > 0:
-            if cacheYear % 400 == 0:
-                if cacheDay > 29:
-                    if cacheDay // 29 > 0:
-                        setSubMonth("1")
-                        cache.gameTime['day'] = cacheDay - 29
-                        setSubDay("0")
-                    else:
-                        setSubMonth("1")
-                        cache.gameTime['day'] = cacheDay - 29
+        leapYear = judgeLeapYear()
+        if leapYear == "1":
+            if cacheDay > 29:
+                if cacheDay // 29 > 0:
+                    setSubMonth("1")
+                    cache.gameTime['day'] = cacheDay - 29
+                    setSubDay("0")
                 else:
-                    cache.gameTime['day'] = cacheDay
+                    setSubMonth("1")
+                    cache.gameTime['day'] = cacheDay - 29
             else:
-                if cacheDay > 28:
-                    if cacheDay // 28 > 0:
-                        setSubMonth("1")
-                        cache.gameTime['day'] = cacheDay - 28
-                        setSubDay("0")
-                    else:
-                        setSubMonth("1")
-                        cache.gameTime['day'] = cacheDay - 28
-                else:
-                    cache.gameTime['day'] = cacheDay
+                cache.gameTime['day'] = cacheDay
         else:
-            if cacheYear % 4 == 0:
-                if cacheDay > 29:
-                    if cacheDay // 29 > 0:
-                        setSubMonth("1")
-                        cache.gameTime['day'] = cacheDay - 29
-                        setSubDay("0")
-                    else:
-                        setSubMonth("1")
-                        cache.gameTime['day'] = cacheDay - 29
+            if cacheDay > 28:
+                if cacheDay // 28 > 0:
+                    setSubMonth("1")
+                    cache.gameTime['day'] = cacheDay - 28
+                    setSubDay("0")
                 else:
-                    cache.gameTime['day'] = cacheDay
+                    setSubMonth("1")
+                    cache.gameTime['day'] = cacheDay - 28
             else:
-                if cacheDay > 28:
-                    if cacheDay // 28 > 0:
-                        setSubMonth("1")
-                        cache.gameTime['day'] = cacheDay - 28
-                        setSubDay("0")
-                    else:
-                        setSubMonth("1")
-                        cache.gameTime['day'] = cacheDay - 28
-                else:
-                    cache.gameTime['day'] = cacheDay
+                cache.gameTime['day'] = cacheDay
 
 #增加月数
 def setSubMonth(subMonth):
@@ -146,3 +128,39 @@ def setSubYear(subMonth):
     cacheYear = cache.gameTime['year']
     cacheYear = int(cacheYear) + int(subMonth)
     cache.gameTime['year'] = cacheYear
+
+# 计算星期
+def getWeekDate():
+    gameTime = cache.gameTime
+    cacheYear = int(gameTime['year'])
+    cacheYear = cacheYear - int(cacheYear / 100) * 100
+    cacheCentury = int(cacheYear/100)
+    cacheMonth = int(gameTime['month'])
+    if cacheMonth == 1 or cacheMonth == 2:
+        cacheMonth = cacheMonth + 12
+        if cacheYear == 0:
+            cacheYear = 99
+            cacheCentury = cacheCentury - 1
+        else:
+            cacheYear = cacheYear - 1
+    cacheDay =int(gameTime['day'])
+    week = cacheYear + int(cacheYear/4) + int(cacheCentury/4) - 2 * cacheCentury + int(26 * (cacheMonth + 1)/10) + cacheDay - 1
+    if week < 0:
+        weekDay = (week % 7 + 7) % 7
+    else:
+        weekDay = week % 7
+    return weekDay
+
+def judgeLeapYear():
+    cacheYear = int(cache.gameTime['year'])
+    if cacheYear % 4 == 0:
+        if cacheYear % 100 == 0:
+            if cacheYear % 400 == 0:
+                return "1"
+            else:
+                return "0"
+        else:
+            return "1"
+    else:
+        return "0"
+    pass

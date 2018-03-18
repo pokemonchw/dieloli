@@ -26,7 +26,6 @@ def init(main_flow):
     # 载入按键监听
     keylistion.onWFrameListion()
     # 设置背景颜色
-    core.data._get_savefilename_path('')
     pyio.set_background(core.data.gamedata()['core_cfg']['background_color'])
     # 初始化字体
     pyio.init_style()
@@ -87,12 +86,3 @@ set_deal_cmd_func_deco=core.flow.deco_set_tail_deal_cmd_func
 
 # 返回主数据集合
 data = core.data.gamedata()
-
-# 获得存档目录
-savedir = core.data._get_savefilename_path('')[:-6]
-
-# 保存数据集合到文件, 也可将可以game.data序列化保存到某个文件中
-save = core.data.save
-
-# 从文件中加载数据集合, selfdata为True时，只返回反序列化之后的数据，不会将数据加载到gamedata
-load = core.data.load
