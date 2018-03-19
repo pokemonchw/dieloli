@@ -5,6 +5,7 @@ import core.CacheContorl as cache
 import os
 import core.TextLoading as textload
 import core.TextHandle as text
+import core.GameConfig as config
 
 def null_func():
     return
@@ -193,4 +194,5 @@ def initCache():
         "PlayerEngravingPanel":"1","AttrShowHandlePanel":"0",
         "SeeSaveListPanel":"0"
     }
+    cache.maxSavePage = config.save_page
     pass

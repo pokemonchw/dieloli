@@ -151,16 +151,19 @@ def getWeekDate():
         weekDay = week % 7
     return weekDay
 
+# 判断当前是否是润年
 def judgeLeapYear():
     cacheYear = int(cache.gameTime['year'])
-    if cacheYear % 4 == 0:
-        if cacheYear % 100 == 0:
-            if cacheYear % 400 == 0:
-                return "1"
-            else:
-                return "0"
-        else:
+    if cacheYear % 3200 == 0:
+        if cacheYear % 172800 == 0:
             return "1"
+        else:
+            return "0"
     else:
-        return "0"
+        if cacheYear % 4 == 0 and cacheYear % 100 != 0:
+            return "1"
+        elif cacheYear % 100 == 0 and cacheYear % 400 == 0:
+            return "1"
+        else:
+            return "0"
     pass

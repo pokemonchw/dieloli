@@ -76,3 +76,6 @@ gameTime = {}
 
 # 面板状态
 panelState = {}
+
+# 存档页面最大数量
+maxSavePage = 0

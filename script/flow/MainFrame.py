@@ -47,6 +47,7 @@ def askForMainFrame(ansList):
     elif ans == '6':
         savehandleframe.establishSave_func()
     elif ans == '7':
+        savehandleframe.loadSave_func()
         pass
 
 # 游戏主页查看属性流程

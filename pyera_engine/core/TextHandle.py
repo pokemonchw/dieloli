@@ -15,18 +15,28 @@ widths = [
 ]
 
 #文本对齐
-def align(text,just='left'):
+def align(text,just='left',onlyFix = False,columns = 1):
     text = str(text)
     countIndex = getTextIndex(text)
     width = config.text_width
+    width = int(width/columns)
     if just == "right":
-        return " " * (width - countIndex) + text
+        if onlyFix == True:
+            return " " * (width - countIndex)
+        else:
+            return " " * (width - countIndex) + text
     elif just == "left":
-        return text
+        if onlyFix == True:
+            return " " * (width - countIndex)
+        else:
+            return text + " " * (width - countIndex)
     elif just == "center":
         widthI = width/2
         countI = countIndex/2
-        return " " * int(widthI - countI) + text
+        if onlyFix == True:
+            return " " * int(widthI - countI)
+        else:
+            return " " * int(widthI - countI) + text
 
 #文本长度计算
 def getTextIndex(text):
