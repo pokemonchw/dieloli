@@ -5,6 +5,8 @@ import core.TextLoading as textload
 import core.EraPrint as eprint
 import script.Ans as ans
 import core.TextHandle as text
+import core.SaveHandle as savehandle
+import script.GameTime as gametime
 
 # 载入存档信息头面板
 def loadSaveInfoHeadPanel():
@@ -25,76 +27,107 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
     idTextList = []
     idInfoText = textload.getTextData(textload.stageWordId,'72')
     textWidth = int(config.text_width)
+    saveNoneText = textload.getTextData(textload.messageId,'20')
     if savePanelPage == int(config.save_page) + 1:
-        startSaveId = int(pageSaveValue) * savePanelPage + 1
+        startSaveId = int(pageSaveValue) * (savePanelPage - 1)
         overSaveId = startSaveId + lastSavePageValue
     else:
         overSaveId = int(pageSaveValue) * savePanelPage
         startSaveId = overSaveId - int(pageSaveValue)
-    for i in range(startSaveId,overSaveId):
+    for i in range(0,overSaveId - startSaveId):
         id = ans.idIndex(i)
-        idText = id + idInfoText  + " " + str(i) + ":"
-        idTextList.append(idText)
-    for i in range(startSaveId,overSaveId):
+        saveId = startSaveId + i
+        if autoSave == False:
+            idText = id + idInfoText + " " + str(saveId) + ":"
+            idTextList.append(idText)
+        else:
+            if savehandle.judgeSaveFileExist(i) == '1':
+                idText = id + idInfoText + " " + str(saveId) + ":"
+                idTextList.append(idText)
+            else:
+                idText = idInfoText + " " + str(saveId) + ":"
+                idTextList.append(idText)
+    for i in range(0,overSaveId - startSaveId):
         id = str(i)
         idText = idTextList[i]
-        idTextIndex = int(text.getTextIndex(idText))
-        fixIdText = ' ' * (textWidth - idTextIndex)
-        idText = idText + fixIdText
         eprint.plittleline()
-        pycmd.pcmd(idText,id,None)
-        inputS.append(id)
-        eprint.p('\n')
+        saveid = savehandle.getSavePageSaveId(pageSaveValue,i)
+        if savehandle.judgeSaveFileExist(saveid) == '1':
+            saveData = savehandle.loadSave(saveid)
+            playerData = saveData['playerData']
+            gameTimeData = saveData['gameTime']
+            gameTimeText = gametime.getDateText(gameTimeData)
+            playerName = playerData['object']['0']['Name']
+            saveVerson = saveData['gameVerson']
+            saveText = playerName + ' ' + gameTimeText + ' ' + saveVerson
+            idTextIndex = int(text.getTextIndex(idText))
+            fixIdWidth = textWidth - idTextIndex
+            saveAlign = text.align(saveText,'center',textWidth=fixIdWidth)
+            idText = idText + saveAlign
+            pycmd.pcmd(idText, id, None)
+            eprint.p('\n')
+            inputS.append(id)
+        else:
+            idTextIndex = int(text.getTextIndex(idText))
+            fixIdWidth = textWidth - idTextIndex
+            saveNoneAlign = text.align(saveNoneText,'center',textWidth=fixIdWidth)
+            idText = idText + saveNoneAlign
+            if autoSave == True:
+                eprint.p(idText)
+                eprint.p('\n')
+            else:
+                pycmd.pcmd(idText, id, None)
+                inputS.append(id)
+                eprint.p('\n')
     if autoSave == True:
         autoInfoText = textload.getTextData(textload.stageWordId,"73")
         i = pageSaveValue
         id = ans.idIndex(i)
-        idText = id + autoInfoText
-        idTextIndex = int(text.getTextIndex(idText))
-        fixIdText = ' ' * (textWidth - idTextIndex)
-        idText = idText + fixIdText
         eprint.plittleline()
-        pycmd.pcmd(idText, id, None)
-        inputS.append(id)
-        eprint.p('\n')
+        if savehandle.judgeSaveFileExist('auto') == '1':
+            saveData = savehandle.loadSave('auto')
+            playerData = saveData['playerData']
+            gameTimeData = saveData['gameTime']
+            gameTimeText = gametime.getDateText(gameTimeData)
+            saveVerson = saveData['gameVerson']
+            playerName = playerData['object']['0']['Name']
+            saveText = playerName + ' ' + gameTimeText + ' ' + saveVerson
+            idText = id + autoInfoText
+            idTextIndex = int(text.getTextIndex(idText))
+            fixIdWidth = textWidth - idTextIndex
+            saveTextAlign = text.align(saveText, 'center', textWidth=fixIdWidth)
+            idText = idText + saveTextAlign
+            pycmd.pcmd(idText, id, None)
+            inputS.append(id)
+            eprint.p('\n')
+        else:
+            idTextIndex = int(text.getTextIndex(autoInfoText))
+            fixIdWidth = textWidth - idTextIndex
+            saveNoneAlign = text.align(saveNoneText, 'center', textWidth=fixIdWidth)
+            idText = autoInfoText + saveNoneAlign
+            eprint.p(idText)
+            eprint.p('\n')
     else:
         pass
-    eprint.pline()
     return inputS
 
+# 询问切换存档页面板
 def askForChangeSavePagePanel(startId):
-    inputS = []
     cmdList = textload.getTextData(textload.cmdId,"changeSavePage")
     savePanelPage = str(cache.panelState['SeeSaveListPanel'])
     maxSavePanelPage = str(cache.maxSavePage)
-    upPage = cmdList[0]
-    downPage = cmdList[1]
-    backButton = cmdList[2]
-    upPageId = ans.idIndex(startId)
-    upPageText = upPageId + upPage
-    upPageFix = text.align(upPageText,just='center',onlyFix=True,columns=3)
-    eprint.p(upPageFix)
-    pycmd.pcmd(upPageText,startId,None)
-    inputS.append(startId)
-    eprint.p(upPageFix)
     savePageText = '(' + savePanelPage + '/' + maxSavePanelPage + ')'
-    savePageFix = text.align(savePageText,just='center',onlyFix=True,columns=3)
-    eprint.p(savePageFix)
-    eprint.p(savePageText)
-    eprint.p(savePageFix)
-    downPageId = ans.idIndex(startId + 1)
-    downPageText = downPageId + downPage
-    downPageFix = text.align(downPageText, just='center', onlyFix=True, columns=3)
-    eprint.p(downPageFix)
-    pycmd.pcmd(downPageText,startId + 1,None)
-    eprint.p(downPageFix)
+    eprint.printPageLine(sample='-',string=savePageText)
     eprint.p('\n')
-    inputS.append(startId + 1)
-    backButtonId = ans.idIndex(startId + 2)
-    backButtonText = backButtonId + backButton
-    backButtonFix = text.align(backButtonText,just='center',onlyFix=True)
-    eprint.p(backButtonFix)
-    pycmd.pcmd(backButtonText,startId + 2,None)
-    eprint.p(backButtonFix)
-    inputS.append(startId + 2)
-    return inputS
+    yrn = ans.optionint(None,3,askfor=False,cmdSize='center',startId=startId,cmdListData=cmdList)
+    return yrn
+
+# 询问覆盖存档面板
+def askForOverlaySavePanel():
+    cmdList = textload.getTextData(textload.cmdId,"overlaySave")
+    messageText = textload.getTextData(textload.messageId,'21')
+    eprint.pline()
+    eprint.p(messageText)
+    eprint.p('\n')
+    yrn = ans.optionint(None,1,askfor=False,cmdListData=cmdList)
+    return yrn

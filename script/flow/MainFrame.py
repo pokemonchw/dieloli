@@ -45,9 +45,9 @@ def askForMainFrame(ansList):
     elif ans == '5':
         pass
     elif ans == '6':
-        savehandleframe.establishSave_func()
+        savehandleframe.establishSave_func('MainFramePanel')
     elif ans == '7':
-        savehandleframe.loadSave_func()
+        savehandleframe.loadSave_func('MainFramePanel')
         pass
 
 # 游戏主页查看属性流程

@@ -93,6 +93,14 @@ def plittleline(sample = ':',style = 'standard'):
     textWidth = config.text_width
     pl(sample * textWidth, style)
 
+# 输出页数线
+def printPageLine(sample = ':',string = '',style = 'standard'):
+    textWidth = int(config.text_width)
+    stringWidth = int(text.getTextIndex(string))
+    fixText = sample * int(textWidth / 2 - stringWidth / 2)
+    stringText = fixText + string + fixText
+    p(stringText,style)
+
 #输出警告
 def pwarn(string, style='warning'):
     """输出警告"""

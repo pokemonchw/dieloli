@@ -13,13 +13,17 @@ def initTime():
     pass
 
 # 获取时间信息文本
-def getDateText():
+def getDateText(gameTimeData = None):
+    if gameTimeData == None:
+        gameTimeData = cache.gameTime
+    else:
+        pass
     dateText = textload.getTextData(textload.stageWordId,'65')
-    gameYear = str(cache.gameTime['year'])
-    gameMonth = str(cache.gameTime['month'])
-    gameDay = str(cache.gameTime['day'])
-    gameHour = str(cache.gameTime['hour'])
-    gameMinute = str(cache.gameTime['minute'])
+    gameYear = str(gameTimeData['year'])
+    gameMonth = str(gameTimeData['month'])
+    gameDay = str(gameTimeData['day'])
+    gameHour = str(gameTimeData['hour'])
+    gameMinute = str(gameTimeData['minute'])
     gameYearText = gameYear + textload.getTextData(textload.stageWordId,'59')
     gameMonthText = gameMonth + textload.getTextData(textload.stageWordId,'60')
     gameDayText = gameDay + textload.getTextData(textload.stageWordId,'61')

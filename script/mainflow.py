@@ -34,7 +34,7 @@ def newgame_func():
 # 主界面读取游戏调用
 def loadgame_func():
     pycmd.clr_cmd()
-    savehandleframe.loadSave_func()
+    savehandleframe.loadSave_func('MainFlowPanel')
     pass
 
 # 主界面退出游戏调用

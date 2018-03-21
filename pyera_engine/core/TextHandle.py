@@ -15,11 +15,14 @@ widths = [
 ]
 
 #文本对齐
-def align(text,just='left',onlyFix = False,columns = 1):
+def align(text,just='left',onlyFix = False,columns = 1,textWidth = None):
     text = str(text)
     countIndex = getTextIndex(text)
-    width = config.text_width
-    width = int(width/columns)
+    if textWidth == None:
+        width = config.text_width
+        width = int(width / columns)
+    else:
+        width = int(textWidth)
     if just == "right":
         if onlyFix == True:
             return " " * (width - countIndex)
@@ -36,9 +39,9 @@ def align(text,just='left',onlyFix = False,columns = 1):
         if onlyFix == True:
             return " " * int(widthI - countI)
         else:
-            return " " * int(widthI - countI) + text
+            return " " * int(widthI - countI) + text + " " * int(widthI - countI - 2)
 
-#文本长度计算
+# 文本长度计算
 def getTextIndex(text):
     textStyleList = richtext.setRichTextPrint(text, 'standard')
     textIndex = 0
