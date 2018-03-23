@@ -5,7 +5,7 @@ import core.game as game
 import core.PyCmd as pycmd
 import script.flow.SeePlayerAttr as seeplayerattr
 import script.flow.MapEvent as mapevent
-import script.flow.SeeObjectListFlow as seeobjectlistflow
+import script.flow.SeePlayerList as seeplayerlist
 import script.flow.Shop as shop
 import script.flow.ChangeClothes as changeclothes
 import script.flow.GameSetting as gamesetting
@@ -32,7 +32,7 @@ def askForMainFrame(ansList):
         mapevent.playerOnScene_Func()
     elif ans == '1':
         pycmd.clr_cmd()
-        seeobjectlistflow.seePlayerObjectList_func()
+        seeplayerlist.seePlayerList_func('MainFramePanel')
     elif ans == '2':
         pycmd.clr_cmd()
         changeclothes.changePlayerClothes(playerId)
@@ -52,5 +52,5 @@ def askForMainFrame(ansList):
 
 # 游戏主页查看属性流程
 def mainFrameSeeAttrPanel():
-    seeplayerattr.seeAttrInEveryTime_func()
+    seeplayerattr.seeAttrOnEveryTime_func('MainFramePanel')
     pass

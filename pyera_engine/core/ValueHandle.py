@@ -12,3 +12,15 @@ def dictKeysToList(dict):
     for key in keys:
         value.append(key)
     return value
+
+# 对字典的keys进行计数
+def indexDictKeysMax(dict):
+    list = dictKeysToList(dict)
+    return len(list)
+
+# 倒序排列表单
+def reverseArrayList(list):
+    ofList = []
+    for i in reversed(list):
+        ofList.append(i)
+    return ofList

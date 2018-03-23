@@ -161,12 +161,13 @@ def detailedSetting_func2():
 # 详细设置属性3:询问玩家是否具备丰富的性经验
 def detailedSetting_func3():
     flowReturn = creatorplayerpanel.detailedSetting3Panel()
-    if not flowReturn == 3:
+    sexTemDataList = valuehandle.dictKeysToList(textload.getTextData(textload.temId,'SexExperience'))
+    sexTemDataList = valuehandle.reverseArrayList(sexTemDataList)
+    sexTemName = sexTemDataList[flowReturn]
+    if flowReturn != len(sexTemDataList) - 1:
         cache.featuresList['Chastity'] = ''
     else:
         pass
-    sexTemDataList = valuehandle.dictKeysToList(textload.getTextData(textload.temId,'SexExperience'))
-    sexTemName = sexTemDataList[flowReturn]
     playerSexExperienceData = attr.getSexExperience(sexTemName)
     cache.temporaryObject['SexExperience'] = playerSexExperienceData
     cache.temporaryObject['SexGrade'] = attr.getSexGrade(playerSexExperienceData)
@@ -206,7 +207,7 @@ def detailedSetting_func6():
     flowReturn = creatorplayerpanel.detailedSetting6Panel()
     selfConfidenceList = featuresList['SelfConfidence']
     cache.featuresList['SelfConfidence'] = selfConfidenceList[flowReturn]
-    cache.temporaryObject['Features'] = cache.featuresList.copy()
+    cache.temporaryObject['Features'] = cache.feafturesList.copy()
     pycmd.clr_cmd()
     detailedSetting_func7()
 

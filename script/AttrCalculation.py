@@ -114,17 +114,17 @@ def getSexExperience(temName):
     clitorisExperienceTemName = temData['ClitorisExperienceTem']
     anusExperienceTemName = temData['AnusExperienceTem']
     penisExperienceTemName = temData['PenisExperienceTem']
-    mouthExperienceList = templateData['SexExperience']['MouthExperienceTem'][mouthExperienceTemName]
+    mouthExperienceList = templateData['SexExperienceTem']['MouthExperienceTem'][mouthExperienceTemName]
     mouthExperience = random.randint(int(mouthExperienceList[0]),int(mouthExperienceList[1]))
-    bosomExperienceList = templateData['SexExperience']['BosomExperienceTem'][bosomExperienceTemName]
+    bosomExperienceList = templateData['SexExperienceTem']['BosomExperienceTem'][bosomExperienceTemName]
     bosomExperience = random.randint(int(bosomExperienceList[0]),int(bosomExperienceList[1]))
-    vaginaExperienceList = templateData['SexExperience']['VaginaExperienceTem'][vaginaExperienceTemName]
+    vaginaExperienceList = templateData['SexExperienceTem']['VaginaExperienceTem'][vaginaExperienceTemName]
     vaginaExperience = random.randint(int(vaginaExperienceList[0]),int(vaginaExperienceList[1]))
-    clitorisExperienceList = templateData['SexExperience']['ClitorisExperienceTem'][clitorisExperienceTemName]
+    clitorisExperienceList = templateData['SexExperienceTem']['ClitorisExperienceTem'][clitorisExperienceTemName]
     clitorisExperience = random.randint(int(clitorisExperienceList[0]),int(clitorisExperienceList[1]))
-    anusExperienceList = templateData['SexExperience']['AnusExperienceTem'][anusExperienceTemName]
+    anusExperienceList = templateData['SexExperienceTem']['AnusExperienceTem'][anusExperienceTemName]
     anusExperience = random.randint(int(anusExperienceList[0]),int(anusExperienceList[1]))
-    penisExperienceList = templateData['SexExperience']['PenisExperienceTem'][penisExperienceTemName]
+    penisExperienceList = templateData['SexExperienceTem']['PenisExperienceTem'][penisExperienceTemName]
     penisExperience = random.randint(int(penisExperienceList[0]),int(penisExperienceList[1]))
     sexExperience = {
         'mouthExperience' : mouthExperience,

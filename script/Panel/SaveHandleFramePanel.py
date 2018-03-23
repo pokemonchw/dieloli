@@ -37,16 +37,12 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
     for i in range(0,overSaveId - startSaveId):
         id = ans.idIndex(i)
         saveId = startSaveId + i
-        if autoSave == False:
-            idText = id + idInfoText + " " + str(saveId) + ":"
+        if autoSave == True and savehandle.judgeSaveFileExist(saveId) != '1':
+            idText = idInfoText + " " + str(saveId) + ":"
             idTextList.append(idText)
         else:
-            if savehandle.judgeSaveFileExist(i) == '1':
-                idText = id + idInfoText + " " + str(saveId) + ":"
-                idTextList.append(idText)
-            else:
-                idText = idInfoText + " " + str(saveId) + ":"
-                idTextList.append(idText)
+            idText = id + idInfoText + " " + str(saveId) + ":"
+            idTextList.append(idText)
     for i in range(0,overSaveId - startSaveId):
         id = str(i)
         idText = idTextList[i]
@@ -124,10 +120,55 @@ def askForChangeSavePagePanel(startId):
 
 # 询问覆盖存档面板
 def askForOverlaySavePanel():
+    eprint.p('\n')
     cmdList = textload.getTextData(textload.cmdId,"overlaySave")
     messageText = textload.getTextData(textload.messageId,'21')
     eprint.pline()
     eprint.p(messageText)
     eprint.p('\n')
     yrn = ans.optionint(None,1,askfor=False,cmdListData=cmdList)
+    return yrn
+
+# 确认覆盖面板
+def confirmationOverlaySavePanel():
+    eprint.p('\n')
+    cmdList = textload.getTextData(textload.cmdId, "confirmationOverlaySave")
+    messageText = textload.getTextData(textload.messageId, '22')
+    eprint.pline()
+    eprint.p(messageText)
+    eprint.p('\n')
+    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    return yrn
+
+# 询问读档面板
+def askLoadSavePanel():
+    eprint.p('\n')
+    cmdList = textload.getTextData(textload.cmdId,"loadSaveAsk")
+    messageText = textload.getTextData(textload.messageId,'23')
+    eprint.pline()
+    eprint.p(messageText)
+    eprint.p('\n')
+    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    return yrn
+
+# 确认读档面板
+def confirmationLoadSavePanel():
+    eprint.p('\n')
+    cmdList = textload.getTextData(textload.cmdId, "confirmationLoadSave")
+    messageText = textload.getTextData(textload.messageId, '24')
+    eprint.pline()
+    eprint.p(messageText)
+    eprint.p('\n')
+    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    return yrn
+
+# 确认删除存档面板
+def confirmationRemoveSavePanel():
+    eprint.p('\n')
+    cmdList = textload.getTextData(textload.cmdId,"confirmationRemoveSave")
+    messageText = textload.getTextData(textload.messageId, '25')
+    eprint.pline()
+    eprint.p(messageText)
+    eprint.p('\n')
+    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn

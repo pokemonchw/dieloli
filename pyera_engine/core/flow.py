@@ -192,7 +192,7 @@ def initCache():
         "PlayerItemPanel":"1","PlayerExperiencePanel":"1",
         "PlayerLevelPanel":"1","PlayerFeaturesPanel":"1",
         "PlayerEngravingPanel":"1","AttrShowHandlePanel":"0",
-        "SeeSaveListPanel":"0"
+        "SeeSaveListPanel":"0","SeePlayerListPanel":"0"
     }
     cache.maxSavePage = config.save_page
     pass

@@ -8,6 +8,10 @@ import core.game as game
 import script.PanelStateHandle as panelstatehandle
 import core.ValueHandle as valuehandle
 import core.TextLoading as textload
+import script.CharacterHandle as characterhandle
+
+panelList = ['PlayerMainAttrPanel','PlayerEquipmentPanel','PlayerItemPanel','PlayerExperiencePanel',
+                   'PlayerLevelPanel','PlayerFeaturesPanel','PlayerEngravingPanel']
 
 # 创建角色时用于查看角色属性的流程
 def acknowledgmentAttribute_func():
@@ -23,50 +27,85 @@ def acknowledgmentAttribute_func():
 
 # 创建角色时用于查看角色属性的流程的事件控制
 def acknowledgmentAttributeAns(inputList):
-    ans = game.askfor_All(inputList)
+    yrn = game.askfor_All(inputList)
     showAttrHandleData = textload.getTextData(textload.cmdId,'seeAttrPanelHandle')
-    panelList = ['PlayerMainAttrPanel','PlayerEquipmentPanel','PlayerItemPanel','PlayerExperiencePanel',
-                   'PlayerLevelPanel','PlayerFeaturesPanel','PlayerEngravingPanel']
-    if ans in panelList:
-        panelstatehandle.panelStateChange(ans)
-        updateAcknowledg()
-    elif ans == '0':
-        pycmd.clr_cmd()
+    pycmd.clr_cmd()
+    if yrn in panelList:
+        panelstatehandle.panelStateChange(yrn)
+        acknowledgmentAttribute_func()
+    elif yrn == '0':
         gametime.initTime()
         seeplayerattrpanel.initShowAttrPanelList()
+        attr.setAttrOver(playerId)
         import script.flow.MainFrame as mainframe
         mainframe.mainFrame_func()
-    elif ans == '1':
+    elif yrn == '1':
         cache.wframeMouse['wFrameRePrint'] = 1
         eprint.pnextscreen()
         seeplayerattrpanel.initShowAttrPanelList()
         import script.mainflow as mainflow
         mainflow.main_func()
-    elif ans == showAttrHandleData[0]:
-        pycmd.clr_cmd()
-        cache.panelState['AttrShowHandlePanel'] = '0'
-        updateAcknowledg()
-    elif ans == showAttrHandleData[1]:
-        pycmd.clr_cmd()
-        cache.panelState['AttrShowHandlePanel'] = '1'
-        updateAcknowledg()
-    elif ans == showAttrHandleData[2]:
-        pycmd.clr_cmd()
-        cache.panelState['AttrShowHandlePanel'] = '2'
-        updateAcknowledg()
-    pass
+    elif yrn in showAttrHandleData:
+        index = showAttrHandleData.index(yrn)
+        index = str(index)
+        cache.panelState['AttrShowHandlePanel'] = index
+        acknowledgmentAttribute_func()
 
-# 用于刷新创建角色时查看角色属性的流程面板
-def updateAcknowledg():
+# 通用查看角色属性流程
+def seeAttrOnEveryTime_func(oldPanel,tooOldFlow = None):
+    playerId = cache.playObject['objectId']
+    playerId = int(playerId)
+    playerIdMax = characterhandle.getCharacterIndexMax()
+    inputS = []
+    seeAttrList = seeAttrInEveryTime_func()
+    inputS = inputS + seeAttrList
+    askSeeAttr = seeplayerattrpanel.askForSeeAttr()
+    inputS = inputS + askSeeAttr
+    yrn = game.askfor_All(inputS)
     pycmd.clr_cmd()
-    acknowledgmentAttribute_func()
+    showAttrHandleData = textload.getTextData(textload.cmdId, 'seeAttrPanelHandle')
+    if yrn in showAttrHandleData:
+        index = showAttrHandleData.index(yrn)
+        index = str(index)
+        cache.panelState['AttrShowHandlePanel'] = index
+        seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
+    elif yrn in panelList:
+        panelstatehandle.panelStateChange(yrn)
+        seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
+    elif yrn == '0':
+        if playerId == 0:
+            playerIdMax = str(playerIdMax)
+            cache.playObject['objectId'] = playerIdMax
+            seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
+        else:
+            playerId = str(playerId - 1)
+            cache.playObject['objectId'] = playerId
+            seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
+    elif yrn == '1':
+        if oldPanel == 'MainFramePanel':
+            import script.flow.MainFrame as mainframe
+            seeplayerattrpanel.initShowAttrPanelList()
+            cache.playObject['objectId'] = '0'
+            mainframe.mainFrame_func()
+        elif oldPanel == 'SeePlayerListPanel':
+            seeplayerattrpanel.initShowAttrPanelList()
+            import script.flow.SeePlayerList as seeplayerlist
+            seeplayerlist.seePlayerList_func(tooOldFlow)
+    elif yrn == '2':
+        if playerId == playerIdMax:
+            playerId = '0'
+            cache.playObject['objectId'] = playerId
+            seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
+        else:
+            playerId = str(playerId + 1)
+            cache.playObject['objectId'] = playerId
+            seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
     pass
 
 # 用于任何时候查看角色属性的流程
 def seeAttrInEveryTime_func():
     playerId = cache.playObject['objectId']
     showAttrHandle = cache.panelState['AttrShowHandlePanel']
-    attr.setAttrOver(playerId)
     inputS = []
     playerMainAttrPanelAsk = seeplayerattrpanel.seePlayerMainAttrPanel(playerId)
     inputS.append(playerMainAttrPanelAsk)

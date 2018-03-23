@@ -61,3 +61,12 @@ def getSavePageSaveId(pageSaveValue,inputId):
     inputId = int(inputId)
     saveId = startSaveId + inputId
     return saveId
+
+# 删除存档
+def removeSave(saveId):
+    savePath = getSavefilePath(saveId)
+    if os.path.isfile(savePath):
+        os.remove(savePath)
+    else:
+        errorText = textload.getTextData(textload.errorId,'notSaveError')
+        eprint.pl(errorText)

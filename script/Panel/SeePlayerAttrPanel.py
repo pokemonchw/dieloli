@@ -14,13 +14,13 @@ panelStateOffText = panelStateTextData[0]
 
 # 初始化查看属性面板状态
 def initShowAttrPanelList():
-    cache.panelState['PlayerMainAttrPanel'] = '0'
-    cache.panelState['PlayerEquipmentPanel'] = '0'
-    cache.panelState['PlayerItemPanel'] = '0'
-    cache.panelState['PlayerExperiencePanel'] = '0'
-    cache.panelState['PlayerLevelPanel'] = '0'
-    cache.panelState['PlayerFeaturesPanel'] = '0'
-    cache.panelState['PlayerEngravingPanel'] = '0'
+    cache.panelState['PlayerMainAttrPanel'] = '1'
+    cache.panelState['PlayerEquipmentPanel'] = '1'
+    cache.panelState['PlayerItemPanel'] = '1'
+    cache.panelState['PlayerExperiencePanel'] = '1'
+    cache.panelState['PlayerLevelPanel'] = '1'
+    cache.panelState['PlayerFeaturesPanel'] = '1'
+    cache.panelState['PlayerEngravingPanel'] = '1'
 
 # 查看角色主属性面板
 def seePlayerMainAttrPanel(playerId):
@@ -211,6 +211,12 @@ def seeAttrShowHandlePanel():
     yrn = ans.optionstr(ans.seeattrpanelmenu,2,cmdSize='center',askfor=False,cmdListData=inputS)
     return yrn
 
+# 查看角色属性时输入面板
+def askForSeeAttr():
+    yrn = ans.optionint(ans.seeattronrverytime,3,cmdSize='center',askfor=False)
+    return yrn
+
+# 创建角色完成时确认角色属性输入面板
 def inputAttrOverPanel():
     yrn = ans.optionint(ans.acknowledgmentAttribute, 1,askfor=False)
     return yrn

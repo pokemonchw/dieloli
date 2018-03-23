@@ -32,7 +32,6 @@ def startInputNamePanel():
         else:
             inputState = 1
             cache.temporaryObject['Name'] = playerName
-    eprint.p('\n')
 
 # 请求玩家输入昵称面板
 def inputNickNamePanel():

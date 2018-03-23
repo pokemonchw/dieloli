@@ -188,7 +188,9 @@
       "ClitorisExperienceTem": "Abundant",
       "AnusExperienceTem": "Scarce",
       "PenisExperienceTem": "Abundant"
-    },
+    }
+  },
+  "SexExperienceTem":{
     "MouthExperienceTem":{
       "Abundant":[51,100],
       "Ordinary":[30,50],

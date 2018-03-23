@@ -18,5 +18,11 @@
   "systemMenu":["系统设置","查看帮助","储存游戏","读取存档"],
   "seeAttrPanelHandle":["查看装备和道具","查看经验和能力","查看素质和刻印"],
   "changeSavePage":["上一页","返回","下一页"],
-  "overlaySave":["是","否"]
+  "overlaySave":["覆盖","删除","返回"],
+  "confirmationOverlaySave":["确定","再考虑下"],
+  "loadSaveAsk":["读取","删除","返回"],
+  "confirmationLoadSave":["确定","再选选"],
+  "confirmationRemoveSave":["确定","还是算了"],
+  "seeAttrOnEveryTime":["上一个人","返回","下一个人"],
+  "seePlayerList":["上一页","返回","下一页"]
 }
