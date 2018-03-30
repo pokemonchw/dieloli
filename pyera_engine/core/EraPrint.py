@@ -52,6 +52,11 @@ def pimage(imageName,imagePath=''):
 
 # 小标题输出
 def plt(string):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     string = str(string)
     string = doctionaries.handleText(string)
     global last_char
@@ -64,6 +69,11 @@ def plt(string):
 
 # 子标题输出
 def sontitleprint(string):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     string = string
     string = doctionaries.handleText(string)
     global last_char
@@ -77,6 +87,11 @@ def sontitleprint(string):
 
 #输出一行
 def pl(string='', style='standard'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     global last_char
     if not last_char == '\n':
         p('\n')
@@ -86,15 +101,30 @@ def pl(string='', style='standard'):
 
 #输出分割线
 def pline(sample='=', style='standard'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     textWidth = config.text_width
     pl(sample * textWidth,style)
 
 def plittleline(sample = ':',style = 'standard'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     textWidth = config.text_width
     pl(sample * textWidth, style)
 
 # 输出页数线
 def printPageLine(sample = ':',string = '',style = 'standard'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     textWidth = int(config.text_width)
     stringWidth = int(text.getTextIndex(string))
     fixText = sample * int(textWidth / 2 - stringWidth / 2)
@@ -103,22 +133,42 @@ def printPageLine(sample = ':',string = '',style = 'standard'):
 
 #输出警告
 def pwarn(string, style='warning'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     """输出警告"""
     pl(string, style)
     print(string)
 
 #输出并等待
 def pwait(string, style='standard'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     p(string, style)
     flow.askfor_wait()
 
 #输出一行并等待
 def plwait(string='', style='standard'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     pl(string, style)
     flow.askfor_wait()
 
 #逐字输出
 def pobo(sleepTime,string, style='standard'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     cache.wframeMouse['wFrameUp'] = 0
     styleList = richtext.setRichTextPrint(string,style)
     styleNameList = config.getFontDataList()
@@ -145,6 +195,11 @@ def pobo(sleepTime,string, style='standard'):
 
 # 列表输出
 def plist(stringList,stringColumn = 1,stringSize = 'left'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     textWidth = config.text_width
     stringIndex = int(textWidth / stringColumn)
     for i in range(0, len(stringList)):
@@ -169,10 +224,20 @@ def plist(stringList,stringColumn = 1,stringSize = 'left'):
 
 #切换下一屏
 def pnextscreen():
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     p('\n' * config.text_hight)
 
 #多行居中逐字输出
 def lcp(sleepTime,string='',style='standard'):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     cache.wframeMouse['wFrameLineState'] = 1
     string = str(string)
     stringlist = string.split('\n')
@@ -211,6 +276,11 @@ def lcp(sleepTime,string='',style='standard'):
 
 #多行回车逐行输出
 def lkeyp(string=''):
+    textWait = cache.textWait
+    if textWait != 0:
+        time.sleep(textWait)
+    else:
+        pass
     cache.wframeMouse['wFrameMouseNextLine'] = 1
     string = str(string)
     stringlist = string.split('\n')

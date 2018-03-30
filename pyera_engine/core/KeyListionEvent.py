@@ -23,6 +23,11 @@ def mouseLeftCheck(event):
 #鼠标右键事件
 def mouseRightCheck(event):
     cache.wframeMouse['mouseRight'] = 1
+    cache.textWait = 0
+    if cache.wframeMouse['wFrameUp'] ==0:
+        setWFrameUp(event)
+    else:
+        mouseCheckPush(event)
 
 #键盘上键事件
 def keyUp(event):

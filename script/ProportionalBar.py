@@ -6,7 +6,7 @@ def getProportionalBar(valueName,maxValue,value,barid):
     proportionBar = trueBar * proportion
     fixProportionBar =  nullBar * (20 - proportion)
     proportionBar = '<' + barid + '>' + proportionBar + fixProportionBar + '</' + barid + '>'
-    proportionBar = str(valueName) + '[' + proportionBar + ']' + '(' + value + '/' + maxValue + ')'
+    proportionBar = str(valueName) + '[' + proportionBar + ']' + '(' + str(value) + '/' + str(maxValue) + ')'
     return proportionBar
 
 # 通用用于计数条的函数

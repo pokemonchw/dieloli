@@ -46,6 +46,17 @@ def _loaddir(datapath):
             if name.split('.')[1] == 'json':
                 _gamedata[prefix + name.split('.')[0]] = _loadjson(thefilepath)
 
+# 获取路径下所有子路径列表
+def getPathList(pathData):
+    pathList = []
+    for i in os.listdir(pathData):
+        path = os.path.join(pathData,i)
+        if os.path.isfile(path):
+            pass
+        else:
+            pathList.append(i)
+    return pathList
+
 # 游戏初始化
 def init():
     datapath = os.path.join(gamepath,'data')

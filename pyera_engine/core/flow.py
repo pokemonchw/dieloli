@@ -195,4 +195,5 @@ def initCache():
         "SeeSaveListPanel":"0","SeePlayerListPanel":"0"
     }
     cache.maxSavePage = config.save_page
+    cache.textWait = float(config.text_wait)
     pass

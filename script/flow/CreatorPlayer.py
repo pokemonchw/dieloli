@@ -207,7 +207,7 @@ def detailedSetting_func6():
     flowReturn = creatorplayerpanel.detailedSetting6Panel()
     selfConfidenceList = featuresList['SelfConfidence']
     cache.featuresList['SelfConfidence'] = selfConfidenceList[flowReturn]
-    cache.temporaryObject['Features'] = cache.feafturesList.copy()
+    cache.temporaryObject['Features'] = cache.featuresList.copy()
     pycmd.clr_cmd()
     detailedSetting_func7()
 

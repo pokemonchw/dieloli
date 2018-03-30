@@ -31,6 +31,12 @@ def seePlayerListPanel(maxPage):
         playerIdInfo = textload.getTextData(textload.stageWordId,'0')
         playerIdText = playerIdInfo + playerId
         playerName = playerData['Name']
+        playerSex = playerData['Sex']
+        playerSexInfo = textload.getTextData(textload.stageWordId,'2')
+        playerSexText = playerSexInfo + playerSex
+        playerAge = playerData['Age']
+        playerAgeInfo = textload.getTextData(textload.stageWordId,'3')
+        playerAgeText = playerAgeInfo + str(playerAge)
         playerHpAndMpText = attrprint.getHpAndMpText(playerId)
         playerIntimate = playerData['Intimate']
         playerIntimateInfo = textload.getTextData(textload.stageWordId, '16')
@@ -38,7 +44,7 @@ def seePlayerListPanel(maxPage):
         playerGraces = playerData['Graces']
         playerGracesInfo = textload.getTextData(textload.stageWordId, '17')
         playerGracesText = playerGracesInfo + playerGraces
-        cmdText = playerIdText + ' ' + playerName + ' ' + playerHpAndMpText + ' ' + playerIntimateText + ' ' + playerGracesText
+        cmdText = playerIdText + ' ' + playerName + ' ' + playerSexText +' ' + playerAgeText +' ' + playerHpAndMpText + ' ' + playerIntimateText + ' ' + playerGracesText
         cmdIdTextIndex = text.getTextIndex(cmdIdText)
         windowWidth = int(config.text_width)
         textWidth = windowWidth - cmdIdTextIndex

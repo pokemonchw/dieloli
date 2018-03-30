@@ -21,6 +21,7 @@ def seePlayerList_func(oldPanel):
     pageId = int(cache.panelState['SeePlayerListPanel'])
     if yrn in playerIdList:
         import script.flow.SeePlayerAttr as seeplayerattr
+        cache.playObject['objectId'] = yrn
         seeplayerattr.seeAttrOnEveryTime_func('SeePlayerListPanel',oldPanel)
     elif yrn == str(startId):
         if pageId == 0:

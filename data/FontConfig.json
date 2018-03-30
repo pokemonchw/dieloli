@@ -2,7 +2,7 @@
   "standard":{
     "foreground":"#C8C8C8",
     "background":"#000000",
-    "font":"simsun",
+    "font":"AR PL New Sung Mono",
     "fontSize":"14",
     "bold":"0",
     "underline":"0",
@@ -12,7 +12,7 @@
     "foreground":"#C8C8C8",
     "background":"#000000",
     "selectbackground":"grey",
-    "font":"simsun",
+    "font":"AR PL New Sung Mono",
     "fontSize":"14",
     "bold":"0",
     "underline":"0",

@@ -27,6 +27,7 @@ def acknowledgmentAttribute_func():
 
 # 创建角色时用于查看角色属性的流程的事件控制
 def acknowledgmentAttributeAns(inputList):
+    playerId = cache.playObject['objectId']
     yrn = game.askfor_All(inputList)
     showAttrHandleData = textload.getTextData(textload.cmdId,'seeAttrPanelHandle')
     pycmd.clr_cmd()
@@ -35,8 +36,9 @@ def acknowledgmentAttributeAns(inputList):
         acknowledgmentAttribute_func()
     elif yrn == '0':
         gametime.initTime()
-        seeplayerattrpanel.initShowAttrPanelList()
         attr.setAttrOver(playerId)
+        characterhandle.initCharacterList()
+        seeplayerattrpanel.initShowAttrPanelList()
         import script.flow.MainFrame as mainframe
         mainframe.mainFrame_func()
     elif yrn == '1':

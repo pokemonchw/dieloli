@@ -1,6 +1,8 @@
 import core.flow as flow
 import core.winframe as winframe
 import core.Dictionaries as dictionaries
+import core.CacheContorl as cache
+import core.GameConfig as config
 
 #清除命令
 clear_default_flow=flow.clear_default_flow
@@ -11,6 +13,7 @@ bind_cmd = flow.bind_cmd
 def pcmd(cmd_str, cmd_id, cmd_func=flow.null_func, arg=(), kw={}, normal_style='standard', on_style='onbutton'):
     cmd_str = dictionaries.handleText(cmd_str)
     cmd_id = dictionaries.handleText(str(cmd_id))
+    cache.textWait = float(config.text_wait)
     global last_char
     if len(cmd_str) > 0:
         last_char = cmd_str[-1:]

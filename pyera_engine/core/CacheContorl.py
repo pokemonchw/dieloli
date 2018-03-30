@@ -36,7 +36,7 @@ temporaryObjectBak = {'Name':temObjectDefault['Name'],
                       'Engraving':temObjectDefault['Engraving'],
                       'Clothing':temObjectDefault['Clothing'],
                       'SexItem':temObjectDefault['SexItem'],
-                      'Gold':temObjectDefault['Gold']
+                      'Gold':temObjectDefault['Gold'],
                       }
 
 # 素质数据临时缓存
@@ -79,3 +79,5 @@ panelState = {}
 
 # 存档页面最大数量
 maxSavePage = 0
+
+textWait = 0

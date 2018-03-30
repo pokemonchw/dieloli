@@ -89,6 +89,7 @@ def seePlayerEquipmentPanel(playerId):
         eprint.p(textload.getTextData(textload.stageWordId, '39'))
         eprint.p('\n')
         playerClothingList = playerData['Clothing']
+        print(playerData)
         playerClothingText = attrtext.getClothingText(playerClothingList)
         eprint.plist(playerClothingText, 4, 'center')
         eprint.p('\n')
