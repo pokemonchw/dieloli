@@ -1,6 +1,7 @@
 import core.GameConfig as config
 import core.CacheContorl as cache
 import core.TextLoading as textload
+import core.Dictionaries as dictionaries
 
 # 富文本计算
 def setRichTextPrint(textMessage,defaultStyle):
@@ -50,3 +51,19 @@ def setRichTextPrint(textMessage,defaultStyle):
                 else:
                     styleList.append(cache.outputTextStyle)
     return styleList
+
+# 移除富文本标签
+def removeRichCache(string):
+    string = str(string)
+    string = dictionaries.handleText(string)
+    barlist = textload.getTextData(textload.barListId, 'barlist')
+    styleNameList = config.getFontDataList() + barlist
+    for i in range(0, len(styleNameList)):
+        styleTextHead = '<' + styleNameList[i] + '>'
+        styleTextTail = '</' + styleNameList[i] + '>'
+        if styleTextHead in string:
+            string = string.replace(styleTextHead, '')
+            string = string.replace(styleTextTail, '')
+        else:
+            pass
+    return string

@@ -43,8 +43,11 @@ def _loaddir(datapath):
             prefix = dirpath.replace(datapath, '').replace('\\', '.') + '.'
             if prefix == '.':
                 prefix = ''
-            if name.split('.')[1] == 'json':
-                _gamedata[prefix + name.split('.')[0]] = _loadjson(thefilepath)
+            try:
+                if name.split('.')[1] == 'json':
+                    _gamedata[prefix + name.split('.')[0]] = _loadjson(thefilepath)
+            except IndexError:
+                pass
 
 # 获取路径下所有子路径列表
 def getPathList(pathData):

@@ -89,7 +89,6 @@ def seePlayerEquipmentPanel(playerId):
         eprint.p(textload.getTextData(textload.stageWordId, '39'))
         eprint.p('\n')
         playerClothingList = playerData['Clothing']
-        print(playerData)
         playerClothingText = attrtext.getClothingText(playerClothingList)
         eprint.plist(playerClothingText, 4, 'center')
         eprint.p('\n')
@@ -129,8 +128,8 @@ def seePlayerExperiencePanel(playerId):
         playerData = attrhandle.getAttrData(playerId)
         eprint.p('\n')
         playerSexExperienceList = playerData['SexExperience']
-        playerSexTextList = attrtext.getSexExperienceText(playerSexExperienceList,
-                                                          cache.playObject['object']['0']['Sex'])
+        playerSex = cache.playObject['object'][playerId]['Sex']
+        playerSexTextList = attrtext.getSexExperienceText(playerSexExperienceList,playerSex)
         eprint.plist(playerSexTextList, 4, 'center')
         return 'PlayerExperiencePanel'
     else:
@@ -148,8 +147,8 @@ def seePlayerLevelPanel(playerId):
         eprint.p('\n')
         playerData = attrhandle.getAttrData(playerId)
         playerSexGradeList = playerData['SexGrade']
-        playerSexGradeTextList = attrtext.getSexGradeTextList(playerSexGradeList,
-                                                              cache.playObject['object']['0']['Sex'])
+        playerSex = cache.playObject['object'][playerId]['Sex']
+        playerSexGradeTextList = attrtext.getSexGradeTextList(playerSexGradeList,playerSex)
         eprint.plist(playerSexGradeTextList, 4, 'center')
         return 'PlayerLevelPanel'
     else:

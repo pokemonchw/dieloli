@@ -15,22 +15,12 @@ def_style = pyio.style_def
 
 #基本输出
 def p(string, style='standard'):
-    string=str(string)
-    string = doctionaries.handleText(string)
     barlist = textload.getTextData(textload.barListId,'barlist')
+    styleList = richtext.setRichTextPrint(string, style)
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
-    styleList = richtext.setRichTextPrint(string, style)
-    styleNameList = config.getFontDataList() + barlist
-    for i in range(0, len(styleNameList)):
-        styleTextHead = '<' + styleNameList[i] + '>'
-        styleTextTail = '</' + styleNameList[i] + '>'
-        if styleTextHead in string:
-            string = string.replace(styleTextHead, '')
-            string = string.replace(styleTextTail, '')
-        else:
-            pass
+    string = richtext.removeRichCache(string)
     for i in range(0,len(string)):
         if styleList[i] in barlist:
             styledata = textload.getTextData(textload.barListId,styleList[i])

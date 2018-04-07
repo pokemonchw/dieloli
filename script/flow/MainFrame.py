@@ -4,12 +4,12 @@ import script.AttrHandle as attrhandle
 import core.game as game
 import core.PyCmd as pycmd
 import script.flow.SeePlayerAttr as seeplayerattr
-import script.flow.MapEvent as mapevent
 import script.flow.SeePlayerList as seeplayerlist
 import script.flow.Shop as shop
 import script.flow.ChangeClothes as changeclothes
 import script.flow.GameSetting as gamesetting
 import script.flow.SaveHandleFrame as savehandleframe
+import script.flow.InScene as inscene
 
 # 游戏主页
 def mainFrame_func():
@@ -24,23 +24,18 @@ def askForMainFrame(ansList):
     playerData = attrhandle.getAttrData(playerId)
     playerName = playerData['Name']
     ans = game.askfor_All(ansList)
+    pycmd.clr_cmd()
     if ans == playerName:
-        pycmd.clr_cmd()
         mainFrameSeeAttrPanel()
     elif ans == '0':
-        pycmd.clr_cmd()
-        mapevent.playerOnScene_Func()
+        inscene.seeScene_func()
     elif ans == '1':
-        pycmd.clr_cmd()
         seeplayerlist.seePlayerList_func('MainFramePanel')
     elif ans == '2':
-        pycmd.clr_cmd()
         changeclothes.changePlayerClothes(playerId)
     elif ans == '3':
-        pycmd.clr_cmd()
         shop.shopMainFrame_func()
     elif ans == '4':
-        pycmd.clr_cmd()
         gamesetting.changeGameSetting_func()
     elif ans == '5':
         pass

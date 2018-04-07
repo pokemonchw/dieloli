@@ -81,3 +81,5 @@ panelState = {}
 maxSavePage = 0
 
 textWait = 0
+
+sceneData = {}

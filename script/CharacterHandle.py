@@ -27,6 +27,8 @@ def initCharacterList():
         defaultAttr = attr.getAttr(characterSexTem)
         defaultAttr['Name'] = characterName
         defaultAttr['Sex'] = characterSex
+        attr.setSexCache(characterSex)
+        defaultAttr['Features'] = cache.featuresList.copy()
         if 'Age' in  characterDataKeys:
             ageTem = characterData['Age']
             characterAge = attr.getAge(ageTem)
@@ -34,11 +36,11 @@ def initCharacterList():
         elif 'Features' in characterDataKeys:
             attr.setAddFeatures(characterData['Features'])
             defaultAttr['Features'] = cache.featuresList.copy()
-            cache.featuresList = {}
         for keys in defaultAttr:
             cache.temporaryObject[keys] = defaultAttr[keys]
+        cache.featuresList = {}
         cache.playObject['object'][playerId] = cache.temporaryObject.copy()
-        cache.temporaryObject = cache.temporaryObjectBak
+        cache.temporaryObject = cache.temporaryObjectBak.copy()
     pass
 
 # 获取角色最大数量
