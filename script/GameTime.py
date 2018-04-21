@@ -70,23 +70,21 @@ def setSubDay(subDay):
     cacheDay = int(cacheDay) + int(subDay)
     if cacheMonth == 1 or 3 or 5 or 7 or 8 or 10 or 12:
         if cacheDay >= 31:
+            setSubMonth("1")
             if cacheDay // 31 > 0:
-                setSubMonth("1")
                 cache.gameTime['day'] = cacheDay - 31
                 setSubDay("0")
             else:
-                setSubMonth("1")
                 cache.gameTime['day'] = cacheDay
         else:
             cache.gameTime['day'] = cacheDay
     elif cacheMonth == 4 or 6 or 9 or 11:
         if cacheDay >= 30:
+            setSubMonth("1")
             if cacheDay // 30 > 0:
-                setSubMonth("1")
                 cache.gameTime['day'] = cacheDay - 30
                 setSubDay("0")
             else:
-                setSubMonth("1")
                 cache.gameTime['day'] = cacheDay
         else:
             cache.gameTime['day'] = cacheDay
@@ -94,24 +92,18 @@ def setSubDay(subDay):
         leapYear = judgeLeapYear()
         if leapYear == "1":
             if cacheDay > 29:
+                setSubMonth("1")
+                cache.gameTime['day'] = cacheDay - 29
                 if cacheDay // 29 > 0:
-                    setSubMonth("1")
-                    cache.gameTime['day'] = cacheDay - 29
                     setSubDay("0")
-                else:
-                    setSubMonth("1")
-                    cache.gameTime['day'] = cacheDay - 29
             else:
                 cache.gameTime['day'] = cacheDay
         else:
             if cacheDay > 28:
+                setSubMonth("1")
+                cache.gameTime['day'] = cacheDay - 28
                 if cacheDay // 28 > 0:
-                    setSubMonth("1")
-                    cache.gameTime['day'] = cacheDay - 28
                     setSubDay("0")
-                else:
-                    setSubMonth("1")
-                    cache.gameTime['day'] = cacheDay - 28
             else:
                 cache.gameTime['day'] = cacheDay
 

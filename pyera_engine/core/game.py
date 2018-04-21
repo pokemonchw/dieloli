@@ -32,6 +32,7 @@ def init(main_flow):
     pyio.init_style()
     # 初始化地图数据
     maphandle.initSceneData()
+    maphandle.initMapData()
 
     core.flow.reset_func = reset
 

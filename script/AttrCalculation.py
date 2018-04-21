@@ -75,7 +75,7 @@ def getAttr(temName):
         'Engraving':EngravingList,
         'Clothing':clothingList,
         'SexItem':sexItemList,
-        'Gold':gold
+        'Gold':gold,
     }
     return attrList
 

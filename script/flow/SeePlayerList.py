@@ -34,6 +34,7 @@ def seePlayerList_func(oldPanel):
     elif yrn == str(startId + 1):
         if oldPanel == 'MainFramePanel':
             import script.flow.MainFrame as mainframe
+            cache.playObject['objectId'] = '0'
             mainframe.mainFrame_func()
         else:
             pass

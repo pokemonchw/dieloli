@@ -21,6 +21,7 @@
   "onbutton":{
     "foreground":"#A40018"
   },
+  "mapbutton":{},
   "warning":{
     "foreground":"red",
     "underline":"1"

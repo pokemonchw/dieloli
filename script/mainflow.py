@@ -6,12 +6,14 @@ import core.CacheContorl as cache
 import script.flow.SaveHandleFrame as savehandleframe
 import script.Panel.MainFlowPanel as mainflowpanel
 import time
+import script.MapHandle as maphandle
 
 # 启动游戏界面
 def open_func():
     mainflowpanel.loadGamePanel()
     time.sleep(1)
-    main_func()
+    maphandle.printMap(0)
+    #main_func()
     pass
 
 # 主界面
