@@ -1,3 +1,6 @@
 {
-  "MapName":"学校"
+  "MapName":"学校",
+  "PathEdge":{
+    "0":{"0":0}
+  }
 }

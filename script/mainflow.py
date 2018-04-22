@@ -12,8 +12,7 @@ import script.MapHandle as maphandle
 def open_func():
     mainflowpanel.loadGamePanel()
     time.sleep(1)
-    maphandle.printMap(0)
-    #main_func()
+    main_func()
     pass
 
 # 主界面

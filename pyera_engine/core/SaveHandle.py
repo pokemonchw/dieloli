@@ -51,6 +51,7 @@ def loadSave(filename):
 def inputLoadSave(saveId):
     saveData = loadSave(saveId)
     cache.playObject = saveData['playerData']
+    cache.playObject['objectId'] = '0'
     cache.gameTime = saveData['gameTime']
     pass
 

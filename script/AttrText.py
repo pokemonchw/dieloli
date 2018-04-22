@@ -98,7 +98,6 @@ def getEngravingText(eList):
 
 # 获取服装列表文本
 def getClothingText(clothingList):
-    print(clothingList)
     coatid = int(clothingList["Coat"])
     pantsid = int(clothingList["Pants"])
     shoesid = int(clothingList["Shoes"])

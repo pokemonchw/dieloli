@@ -12,7 +12,7 @@ mapDataDir = os.path.join(gamepath, 'data',language, 'map')
 
 # 输出地图
 def printMap(mapId):
-    mapText = cache.mapData['MapData'][mapId]
+    mapText = cache.mapData['MapTextData'][mapId]
     sceneList = getSceneListForMap(mapId)
     inputS = []
     inputCmd = ''
@@ -65,33 +65,38 @@ def getSceneListForMap(mapId):
     sceneList = data.getPathList(mapPath)
     return sceneList
 
-# 获取地图上所有节点的xy坐标
-def getMapCoordinate(mapId):
-    mapText = cache.mapData['MapData'][mapId]
-    sceneList = getSceneListForMap(mapId)
-    inputCmd = ''
-    passList = []
-    mapYList = mapText.split('\n')
-    cmdCoordinate = {}
-    for y in range(0,len(mapYList)):
-        mapXList = mapYList[y]
-        mapXListStyle = richtext.setRichTextPrint(mapXList, 'standard')
-        mapXList = richtext.removeRichCache(mapXList)
-        for i in range(0, len(mapXList)):
-            if str(i) not in passList:
-                if mapXListStyle[i] == 'mapbutton':
-                    inputCmd = inputCmd + mapXList[i]
-                    for n in range(i + 1, len(mapXList)):
-                        if mapXListStyle[n] == 'mapbutton':
-                            inputCmd = inputCmd + mapXList[n]
-                            passList.append(str(n))
-                        else:
-                            break
-                    if inputCmd in sceneList:
-                        cmdXY = {'x':i,'y':y}
-                        cmdCoordinate[inputCmd] = cmdXY
-                    inputCmd = ''
-    return cmdCoordinate
+# 计算寻路路径
+def getPathfinding(mapId,origin,destination):
+    mapId = int(mapId)
+    origin = str(origin)
+    destination = str(destination)
+    mapData = cache.mapData['MapData'][mapId]
+    pathEdge = mapData['PathEdge']
+    book = set()
+    minv = origin
+    INF = 999
+    needTime = dict((k, INF) for k in pathEdge.keys())
+    needTime[origin] = 0
+    nodePath = dict((k, []) for k in pathEdge.keys())
+    nodePath[origin] = [origin]
+    timeList = nodePath.copy()
+    timeList[origin] = [0]
+    while len(book) < len(pathEdge):
+        book.add(minv)
+        for w in pathEdge[minv]:
+            if needTime[minv] + pathEdge[minv][w] < needTime[w]:
+                needTime[w] = needTime[minv] + pathEdge[minv][w]
+                nodePath[w] = nodePath[minv].copy()
+                nodePath[w].append(w)
+                timeList[w] = timeList[minv].copy()
+                timeList[w].append(pathEdge[minv][w])
+        new = INF
+        for v in needTime.keys():
+            if v in book: continue
+            if needTime[v] < new:
+                new = needTime[v]
+                minv = v
+    return {"Path":nodePath[destination],"Time":timeList[destination]}
 
 # 载入所有场景数据
 def initSceneData():
@@ -110,12 +115,16 @@ def initSceneData():
 def initMapData():
     mapData = []
     mapPathData = []
+    mapTextData = []
     for dirpath, dirnames, filenames in os.walk(mapDataDir):
         for filename in filenames:
             if filename == 'Map':
-                mapPath = os.path.join(dirpath,filename)
+                mapPath = os.path.join(dirpath,'Map')
+                mapDataPath = os.path.join(dirpath,'Map.json')
                 openMap = open(mapPath)
                 mapText = openMap.read()
-                mapData.append(mapText)
+                mapJsonData = data._loadjson(mapDataPath)
+                mapData.append(mapJsonData)
+                mapTextData.append(mapText)
                 mapPathData.append(dirpath)
-    cache.mapData = {"MapData":mapData,"MapPathData":mapPathData}
+    cache.mapData = {"MapData":mapData,"MapPathData":mapPathData,"MapTextData":mapTextData}
