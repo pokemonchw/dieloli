@@ -4,6 +4,7 @@ import core.data as data
 import os
 import core.TextLoading as textload
 import script.AttrCalculation as attr
+import script.MapHandle as maphandle
 from core.pycfg import gamepath
 from core.GameConfig import language
 
@@ -41,6 +42,7 @@ def initCharacterList():
         cache.featuresList = {}
         cache.playObject['object'][playerId] = cache.temporaryObject.copy()
         cache.temporaryObject = cache.temporaryObjectBak.copy()
+    initPlayerPosition()
     pass
 
 # 获取角色最大数量
@@ -54,3 +56,18 @@ def getCharacterIdList():
     playerData = cache.playObject['object']
     playerList = valuehandle.dictKeysToList(playerData)
     return playerList
+
+
+# 初始化角色的位置
+def initPlayerPosition():
+    characterListPath = os.path.join(gamepath, 'data', language, 'character')
+    characterList = data.getPathList(characterListPath)
+    for i in range(0, len(characterList)):
+        playerIdS = str(i + 1)
+        characterDataName = characterList[i]
+        characterAttrTemPath = os.path.join(characterListPath, characterDataName, 'AttrTemplate.json')
+        characterData = data._loadjson(characterAttrTemPath)
+        characterInitPosition = characterData['Position']
+        characterPosition = cache.playObject['object'][playerIdS]['Position']
+        maphandle.playerMoveScene(characterPosition,characterInitPosition,playerIdS)
+    pass

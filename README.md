@@ -5,22 +5,21 @@ DieLoli
 
 介绍
 ----
-这是一个基于pyera引擎的游戏项目 \
-[pyera](https://github.com/qsjl11/pyera) \
-它是开源并免费的 \
-如果你愿意，也可以捐赠作者一些生活费 \
-热烈欢迎参与到开发中来
+这是一个[ERALIKE游戏](http://xiaxiansy.pw) \
+游戏tag为英雄/学园/热血/萝莉/童话 \
+基于Python独立进行开发 \
+在引擎构架中，一定程度参考了[pyera](https://github.com/qsjl11/pyera/) \
+开发者允许任何人基于GPL3.0协议，对此项目进行二次开发 \
+请勿将其用作商业用途 \
+想要参与开发请与开发者联系，联系方式在本md底部
 
 警告
 ----
 特别注意，在游戏设计中，有可预期的18x内容
 
-作者
-----
-任悠云
-
 联系方式
 ----
-e-mail:admin@byayoi.org
-g+:pokemonchw
-twitter:pokemonchw
+e-mail:admin@byayoi.org \
+g+:pokemonchw \
+twitter:pokemonchw \
+企鹅群:688166358

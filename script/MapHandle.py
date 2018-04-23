@@ -65,6 +65,20 @@ def getSceneListForMap(mapId):
     sceneList = data.getPathList(mapPath)
     return sceneList
 
+# 场景移动
+def playerMoveScene(oldSceneId,newSceneId,characterId):
+    scenePlayerData = cache.sceneData['ScenePlayerData']
+    characterId = str(characterId)
+    if characterId in scenePlayerData[oldSceneId]:
+        scenePlayerData[oldSceneId].remove(characterId)
+    if characterId in scenePlayerData[newSceneId]:
+        pass
+    else:
+        cache.playObject['object'][characterId]['Position'] = newSceneId
+        scenePlayerData[newSceneId].append(characterId)
+    cache.sceneData['ScenePlayerData'] = scenePlayerData
+    pass
+
 # 计算寻路路径
 def getPathfinding(mapId,origin,destination):
     mapId = int(mapId)
@@ -102,14 +116,18 @@ def getPathfinding(mapId,origin,destination):
 def initSceneData():
     sceneData = []
     scenePathData = []
+    scenePlayerData = {}
     for dirpath, dirnames, filenames in os.walk(mapDataDir):
-        for filename in filenames:
+        for i in range(0,len(filenames)):
+            filename = filenames[i]
             if filename == 'Scene.json':
                 scenePath = os.path.join(dirpath,filename)
                 scene = data._loadjson(scenePath)
                 sceneData.append(scene)
                 scenePathData.append(dirpath)
-    cache.sceneData = {"SceneData":sceneData,"ScenePathData":scenePathData}
+                sceneId = str(i)
+                scenePlayerData[sceneId] = []
+    cache.sceneData = {"SceneData":sceneData,"ScenePathData":scenePathData,"ScenePlayerData":scenePlayerData}
 
 # 载入所有地图数据
 def initMapData():
@@ -128,3 +146,11 @@ def initMapData():
                 mapTextData.append(mapText)
                 mapPathData.append(dirpath)
     cache.mapData = {"MapData":mapData,"MapPathData":mapPathData,"MapTextData":mapTextData}
+
+# 初始化场景上的角色
+def initScanePlayerData():
+    scenePlayerData = cache.sceneData['ScenePlayerData']
+    for i in range(0,len(scenePlayerData)):
+        sceneId = str(i)
+        scenePlayerData[sceneId] = []
+    cache.sceneData['ScenePlayerData'] = scenePlayerData

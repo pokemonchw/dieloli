@@ -9,6 +9,7 @@ import script.PanelStateHandle as panelstatehandle
 import core.ValueHandle as valuehandle
 import core.TextLoading as textload
 import script.CharacterHandle as characterhandle
+import script.MapHandle as maphandle
 
 panelList = ['PlayerMainAttrPanel','PlayerEquipmentPanel','PlayerItemPanel','PlayerExperiencePanel',
                    'PlayerLevelPanel','PlayerFeaturesPanel','PlayerEngravingPanel']
@@ -39,6 +40,9 @@ def acknowledgmentAttributeAns(inputList):
         attr.setAttrOver(playerId)
         characterhandle.initCharacterList()
         seeplayerattrpanel.initShowAttrPanelList()
+        playerPosition = cache.playObject['object'][playerId]['Position']
+        maphandle.playerMoveScene('0',playerPosition,playerId)
+        characterhandle.initPlayerPosition()
         import script.flow.MainFrame as mainframe
         mainframe.mainFrame_func()
     elif yrn == '1':

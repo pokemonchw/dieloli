@@ -28,6 +28,7 @@ def establishSave_func(oldPanel):
         establishSave_func(oldPanel)
     elif yrn == str(startId + 1):
         if oldPanel == 'MainFramePanel':
+            cache.panelState['SeeSaveListPanel'] = 0
             import script.flow.MainFrame as mainframe
             mainframe.mainFrame_func()
             pass
@@ -74,9 +75,11 @@ def loadSave_func(oldPanel):
     elif yrn == str(startId + 1):
         if oldPanel == 'MainFlowPanel':
             cache.wframeMouse['wFrameRePrint'] = 1
+            cache.panelState['SeeSaveListPanel'] = 0
             import script.mainflow as mainflow
             mainflow.main_func()
         elif oldPanel == 'MainFramePanel':
+            cache.panelState['SeeSaveListPanel'] = 0
             import script.flow.MainFrame as mainframe
             mainframe.mainFrame_func()
             pass

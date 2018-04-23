@@ -37,6 +37,7 @@ temporaryObjectBak = {'Name':temObjectDefault['Name'],
                       'Clothing':temObjectDefault['Clothing'],
                       'SexItem':temObjectDefault['SexItem'],
                       'Gold':temObjectDefault['Gold'],
+                      'Position':temObjectDefault['Position']
                       }
 
 # 素质数据临时缓存

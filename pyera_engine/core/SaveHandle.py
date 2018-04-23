@@ -8,6 +8,8 @@ import core.TextLoading as textload
 import core.CacheContorl as cache
 from core.pycfg import gamepath
 import core.GameConfig as config
+import script.MapHandle as maphandle
+import script.CharacterHandle as characterhandle
 
 # 获取存档所在路径
 def getSavefilePath(filename):
@@ -31,7 +33,9 @@ def establishSave(saveId):
     playerData = cache.playObject
     gameTime = cache.gameTime
     gameVerson = config.verson
-    data = {"playerData":playerData,"gameTime":gameTime,"gameVerson":gameVerson}
+    scaneData = cache.sceneData
+    maphandle.initScanePlayerData()
+    data = {"playerData":playerData,"gameTime":gameTime,"gameVerson":gameVerson,"sceneData":scaneData}
     filepath = getSavefilePath(saveId)
     with open(filepath, 'wb') as f:
         pickle.dump(data,f)
@@ -53,6 +57,8 @@ def inputLoadSave(saveId):
     cache.playObject = saveData['playerData']
     cache.playObject['objectId'] = '0'
     cache.gameTime = saveData['gameTime']
+    cache.sceneData = saveData['sceneData']
+    characterhandle.initPlayerPosition()
     pass
 
 # 获取存档页对应存档id
