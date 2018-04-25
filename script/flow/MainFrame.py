@@ -28,7 +28,7 @@ def askForMainFrame(ansList):
     if ans == playerName:
         mainFrameSeeAttrPanel()
     elif ans == '0':
-        inscene.seeScene_func()
+        inscene.getInScene_func()
     elif ans == '1':
         seeplayerlist.seePlayerList_func('MainFramePanel')
     elif ans == '2':

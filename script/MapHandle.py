@@ -50,13 +50,20 @@ def getMapForScene(sceneId):
     return mapPath
 
 # 查找场景所在地图
-def getMapForPath(mapPath):
-    mapPath = os.path.abspath(os.path.join(mapPath, '..'))
+def getMapForPath(scenePath):
+    mapPath = os.path.abspath(os.path.join(scenePath, '..'))
     if 'Map' in os.listdir(mapPath):
         pass
     else:
         mapPath = getMapForPath(mapPath)
     return mapPath
+
+# 查找场景所在地图ID
+def getMapIdForScene(sceneId):
+    mapPath = getMapForScene(sceneId)
+    mapData = cache.mapData['MapPathData']
+    mapId = mapData.index(mapPath)
+    return mapId
 
 # 获取地图下所有场景
 def getSceneListForMap(mapId):
@@ -111,6 +118,57 @@ def getPathfinding(mapId,origin,destination):
                 new = needTime[v]
                 minv = v
     return {"Path":nodePath[destination],"Time":timeList[destination]}
+
+# 载入地图下对应场景数据
+def getSceneDataForMap(mapId,mapSceneId):
+    mapId = int(mapId)
+    mapSceneId = str(mapSceneId)
+    mapPath = cache.mapData['MapPathData'][mapId]
+    scenePath = os.path.join(mapPath,mapSceneId)
+    sceneData = getSceneDataForPath(scenePath)
+    return sceneData
+
+# 获取全局场景id对应的地图场景id
+def getMapSceneIdForSceneId(sceneId):
+    sceneId = int(sceneId)
+    mapId = getMapIdForScene(sceneId)
+    mapPath = cache.mapData['MapPathData'][mapId]
+    scenePath = cache.sceneData['ScenePathData'][sceneId]
+    sceneList = os.listdir(mapPath)
+    sceneLoadList = []
+    for scene in sceneList:
+        sceneLoadPath = os.path.join(mapPath,scene)
+        sceneLoadList.append(sceneLoadPath)
+    mapSceneId = sceneLoadList.index(scenePath)
+    return mapSceneId
+
+# 从对应地图场景id查找场景路径
+def getScenePathForMapSceneId(mapId,mapSceneId):
+    mapId = int(mapId)
+    mapSceneId = str(mapSceneId)
+    mapPath = cache.mapData['MapPathData'][mapId]
+    scenePath = os.path.join(mapPath,mapSceneId)
+    scenePath = getScenePathForTrue(scenePath)
+    return scenePath
+
+# 获取有效场景路径
+def getScenePathForTrue(scenePath):
+    if 'Scene.jspn' in os.listdir(scenePath):
+        pass
+    else:
+        scenePath = os.path.join(scenePath,'0')
+        scenePath = getScenePathForTrue(scenePath)
+    return scenePath
+
+# 从对应路径查找场景数据
+def getSceneDataForPath(scenePath):
+    if 'Scene.json' in os.listdir(scenePath):
+        scenePath = os.path.join(scenePath,'Scene.json')
+        sceneData = data._loadjson(scenePath)
+    else:
+        scenePath = os.path.join(scenePath,'0')
+        sceneData = getSceneDataForPath(scenePath)
+    return sceneData
 
 # 载入所有场景数据
 def initSceneData():

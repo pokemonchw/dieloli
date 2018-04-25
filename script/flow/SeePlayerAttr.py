@@ -42,7 +42,6 @@ def acknowledgmentAttributeAns(inputList):
         seeplayerattrpanel.initShowAttrPanelList()
         playerPosition = cache.playObject['object'][playerId]['Position']
         maphandle.playerMoveScene('0',playerPosition,playerId)
-        characterhandle.initPlayerPosition()
         import script.flow.MainFrame as mainframe
         mainframe.mainFrame_func()
     elif yrn == '1':
