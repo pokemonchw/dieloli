@@ -3,10 +3,10 @@ import core.GameConfig as config
 import core.PyCmd as pycmd
 import core.TextLoading as textload
 import core.EraPrint as eprint
-import script.Ans as ans
 import core.TextHandle as text
 import core.SaveHandle as savehandle
-import script.GameTime as gametime
+import design.Ans as ans
+import design.GameTime as gametime
 
 # 载入存档信息头面板
 def loadSaveInfoHeadPanel():
@@ -115,7 +115,7 @@ def askForChangeSavePagePanel(startId):
     savePageText = '(' + savePanelPage + '/' + maxSavePanelPage + ')'
     eprint.printPageLine(sample='-',string=savePageText)
     eprint.p('\n')
-    yrn = ans.optionint(None,3,askfor=False,cmdSize='center',startId=startId,cmdListData=cmdList)
+    yrn = ans.optionint(None, 3, askfor=False, cmdSize='center', startId=startId, cmdListData=cmdList)
     return yrn
 
 # 询问覆盖存档面板
@@ -126,7 +126,7 @@ def askForOverlaySavePanel():
     eprint.pline()
     eprint.p(messageText)
     eprint.p('\n')
-    yrn = ans.optionint(None,1,askfor=False,cmdListData=cmdList)
+    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn
 
 # 确认覆盖面板

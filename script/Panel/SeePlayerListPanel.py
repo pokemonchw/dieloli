@@ -2,11 +2,11 @@ import core.TextLoading as textload
 import core.EraPrint as eprint
 import core.CacheContorl as cache
 import core.GameConfig as config
-import script.CharacterHandle as characterhandle
-import script.AttrPrint as attrprint
-import script.Ans as ans
 import core.PyCmd as pycmd
 import core.TextHandle as text
+import design.CharacterHandle as characterhandle
+import design.Ans as ans
+import design.AttrPrint as attrprint
 
 # 查看角色列表面板
 def seePlayerListPanel(maxPage):
@@ -62,5 +62,5 @@ def seePlayerListPanel(maxPage):
 
 # 询问切换角色列表页面面板
 def askForSeePlayerListPanel(startId):
-    yrn = ans.optionint(ans.seeplayerlist,3,'left',askfor=False,cmdSize='center',startId=startId)
+    yrn = ans.optionint(ans.seeplayerlist, 3, 'left', askfor=False, cmdSize='center', startId=startId)
     return yrn

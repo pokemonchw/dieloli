@@ -1,7 +1,6 @@
 import os
 import core.data as data
 import core.TextLoading as textload
-import script.ProportionalBar as proportionalbar
 import core.CacheContorl as cache
 from core.GameConfig import language
 from core.pycfg import gamepath
@@ -93,7 +92,7 @@ def getEngravingText(eList):
     for i in range(0,len(levelList)):
         levelTextList.append(levelFixList[i] + LVText + levelList[i])
     for i in range(0,len(levelList)):
-        levelBarList.append(proportionalbar.getCountBar(levelTextList[i],3,levelList[i],'engravingemptybar'))
+        levelBarList.append(ProportionalBar.getCountBar(levelTextList[i], 3, levelList[i], 'engravingemptybar'))
     return levelBarList
 
 # 获取服装列表文本

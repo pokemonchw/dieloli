@@ -6,7 +6,6 @@ import queue
 import json
 import sys
 import core.GameConfig as config
-import core.EraImage as eraimage
 sys_print = print
 
 sys.setrecursionlimit(100000)

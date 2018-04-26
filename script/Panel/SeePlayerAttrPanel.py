@@ -1,11 +1,11 @@
 import core.CacheContorl as cache
-import script.AttrHandle as attrhandle
 import core.TextLoading as textload
 import core.EraPrint as eprint
-import script.AttrPrint as attrprint
-import script.AttrText as attrtext
-import script.Ans as ans
 import core.PyCmd as pycmd
+import design.AttrPrint as attrprint
+import design.AttrHandle as attrhandle
+import design.AttrText as attrtext
+import design.Ans as ans
 
 panelStateTextData = textload.getTextData(textload.cmdId,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
@@ -129,7 +129,7 @@ def seePlayerExperiencePanel(playerId):
         eprint.p('\n')
         playerSexExperienceList = playerData['SexExperience']
         playerSex = cache.playObject['object'][playerId]['Sex']
-        playerSexTextList = attrtext.getSexExperienceText(playerSexExperienceList,playerSex)
+        playerSexTextList = attrtext.getSexExperienceText(playerSexExperienceList, playerSex)
         eprint.plist(playerSexTextList, 4, 'center')
         return 'PlayerExperiencePanel'
     else:
@@ -148,7 +148,7 @@ def seePlayerLevelPanel(playerId):
         playerData = attrhandle.getAttrData(playerId)
         playerSexGradeList = playerData['SexGrade']
         playerSex = cache.playObject['object'][playerId]['Sex']
-        playerSexGradeTextList = attrtext.getSexGradeTextList(playerSexGradeList,playerSex)
+        playerSexGradeTextList = attrtext.getSexGradeTextList(playerSexGradeList, playerSex)
         eprint.plist(playerSexGradeTextList, 4, 'center')
         return 'PlayerLevelPanel'
     else:
@@ -208,15 +208,15 @@ def seeAttrShowHandlePanel():
     elif seeAttrPanelHandleCache == '2':
         inputS.append(ansListData[1])
         inputS.append(ansListData[0])
-    yrn = ans.optionstr(ans.seeattrpanelmenu,2,cmdSize='center',askfor=False,cmdListData=inputS)
+    yrn = ans.optionstr(ans.seeattrpanelmenu, 2, cmdSize='center', askfor=False, cmdListData=inputS)
     return yrn
 
 # 查看角色属性时输入面板
 def askForSeeAttr():
-    yrn = ans.optionint(ans.seeattronrverytime,3,cmdSize='center',askfor=False)
+    yrn = ans.optionint(ans.seeattronrverytime, 3, cmdSize='center', askfor=False)
     return yrn
 
 # 创建角色完成时确认角色属性输入面板
 def inputAttrOverPanel():
-    yrn = ans.optionint(ans.acknowledgmentAttribute, 1,askfor=False)
+    yrn = ans.optionint(ans.acknowledgmentAttribute, 1, askfor=False)
     return yrn

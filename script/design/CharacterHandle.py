@@ -3,10 +3,10 @@ import core.ValueHandle as valuehandle
 import core.data as data
 import os
 import core.TextLoading as textload
-import script.AttrCalculation as attr
-import script.MapHandle as maphandle
+import design.AttrCalculation as attr
 from core.pycfg import gamepath
 from core.GameConfig import language
+import design.MapHandle as maphandle
 
 # 初始化角色数据
 def initCharacterList():
@@ -69,5 +69,5 @@ def initPlayerPosition():
         characterData = data._loadjson(characterAttrTemPath)
         characterInitPosition = characterData['Position']
         characterPosition = cache.playObject['object'][playerIdS]['Position']
-        maphandle.playerMoveScene(characterPosition,characterInitPosition,playerIdS)
+        maphandle.playerMoveScene(characterPosition, characterInitPosition, playerIdS)
     pass

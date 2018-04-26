@@ -1,6 +1,6 @@
 import core.CacheContorl as cache
 import core.PyCmd as pycmd
-import script.AttrCalculation as attr
+import design.AttrCalculation as attr
 import script.Panel.CreatorPlayerPanel as creatorplayerpanel
 import core.TextLoading as textload
 import script.flow.SeePlayerAttr as seeplayerattr
@@ -26,7 +26,7 @@ def inputName_func():
     elif flowReturn == 2:
         cache.wframeMouse['wFrameRePrint'] = 1
         eprint.pnextscreen()
-        import script.mainflow as mainflow
+        import design.mainflow as mainflow
         mainflow.main_func()
     pass
 

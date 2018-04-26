@@ -1,15 +1,15 @@
-import script.AttrCalculation as attr
+import design.AttrCalculation as attr
 import core.EraPrint as eprint
 import core.CacheContorl as cache
-import script.Panel.SeePlayerAttrPanel as seeplayerattrpanel
+import Panel.SeePlayerAttrPanel as seeplayerattrpanel
 import core.PyCmd as pycmd
-import script.GameTime as gametime
 import core.game as game
-import script.PanelStateHandle as panelstatehandle
 import core.ValueHandle as valuehandle
 import core.TextLoading as textload
-import script.CharacterHandle as characterhandle
-import script.MapHandle as maphandle
+import design.PanelStateHandle as panelstatehandle
+import design.GameTime as gametime
+import design.CharacterHandle as characterhandle
+import design.MapHandle as maphandle
 
 panelList = ['PlayerMainAttrPanel','PlayerEquipmentPanel','PlayerItemPanel','PlayerExperiencePanel',
                    'PlayerLevelPanel','PlayerFeaturesPanel','PlayerEngravingPanel']
@@ -41,14 +41,14 @@ def acknowledgmentAttributeAns(inputList):
         characterhandle.initCharacterList()
         seeplayerattrpanel.initShowAttrPanelList()
         playerPosition = cache.playObject['object'][playerId]['Position']
-        maphandle.playerMoveScene('0',playerPosition,playerId)
+        maphandle.playerMoveScene('0', playerPosition, playerId)
         import script.flow.MainFrame as mainframe
         mainframe.mainFrame_func()
     elif yrn == '1':
         cache.wframeMouse['wFrameRePrint'] = 1
         eprint.pnextscreen()
         seeplayerattrpanel.initShowAttrPanelList()
-        import script.mainflow as mainflow
+        import design.mainflow as mainflow
         mainflow.main_func()
     elif yrn in showAttrHandleData:
         index = showAttrHandleData.index(yrn)

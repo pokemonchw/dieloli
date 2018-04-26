@@ -1,5 +1,5 @@
 import core.GameConfig as config
-import script.Panel.SaveHandleFramePanel as savehandleframepanel
+import Panel.SaveHandleFramePanel as savehandleframepanel
 import core.CacheContorl as cache
 import core.game as game
 import core.PyCmd as pycmd
@@ -76,7 +76,7 @@ def loadSave_func(oldPanel):
         if oldPanel == 'MainFlowPanel':
             cache.wframeMouse['wFrameRePrint'] = 1
             cache.panelState['SeeSaveListPanel'] = 0
-            import script.mainflow as mainflow
+            import design.mainflow as mainflow
             mainflow.main_func()
         elif oldPanel == 'MainFramePanel':
             cache.panelState['SeeSaveListPanel'] = 0

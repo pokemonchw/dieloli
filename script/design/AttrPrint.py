@@ -1,8 +1,8 @@
 import core.TextLoading as textload
-import script.ProportionalBar as proportionalbar
 import core.EraPrint as eprint
-import script.AttrHandle as attrhandle
 import core.CacheContorl as cache
+import design.AttrHandle as attrhandle
+import design.ProportionalBar as proportionalbar
 
 # 用于输出角色血条和蓝条的方法（占一行，自动居中）
 def printHpAndMpBar(playerId):

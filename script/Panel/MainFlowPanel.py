@@ -5,7 +5,7 @@ import time
 import core.TextHandle as text
 import core.GameConfig as config
 import core.PyCmd as pycmd
-import script.Ans as ans
+import design.Ans as ans
 
 # 载入游戏面板
 def loadGamePanel():

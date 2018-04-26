@@ -84,7 +84,6 @@ def playerMoveScene(oldSceneId,newSceneId,characterId):
         cache.playObject['object'][characterId]['Position'] = newSceneId
         scenePlayerData[newSceneId].append(characterId)
     cache.sceneData['ScenePlayerData'] = scenePlayerData
-    pass
 
 # 计算寻路路径
 def getPathfinding(mapId,origin,destination):
@@ -129,18 +128,40 @@ def getSceneDataForMap(mapId,mapSceneId):
     return sceneData
 
 # 获取全局场景id对应的地图场景id
-def getMapSceneIdForSceneId(sceneId):
+def getMapSceneIdForSceneId(mapId,sceneId):
     sceneId = int(sceneId)
-    mapId = getMapIdForScene(sceneId)
-    mapPath = cache.mapData['MapPathData'][mapId]
-    scenePath = cache.sceneData['ScenePathData'][sceneId]
-    sceneList = os.listdir(mapPath)
-    sceneLoadList = []
-    for scene in sceneList:
-        sceneLoadPath = os.path.join(mapPath,scene)
-        sceneLoadList.append(sceneLoadPath)
-    mapSceneId = sceneLoadList.index(scenePath)
+    sceneMapId = getMapIdForScene(sceneId)
+    mapId = str(mapId)
+    sceneMapId = str(sceneMapId)
+    if mapId == sceneMapId:
+        mapId = int(mapId)
+        mapPath = cache.mapData['MapPathData'][mapId]
+        scenePath = cache.sceneData['ScenePathData'][sceneId]
+        sceneList = os.listdir(mapPath)
+        sceneLoadList = []
+        for scene in sceneList:
+            sceneLoadPath = os.path.join(mapPath, scene)
+            sceneLoadList.append(sceneLoadPath)
+        mapSceneId = sceneLoadList.index(scenePath)
+    else:
+        mapPath = cache.mapData['MapPathData'][mapId]
+        sonMapPath = cache.mapData['MapPathData'][sceneMapId]
+        mapSceneId = judgeSonMapInMap(mapPath,sonMapPath)
     return mapSceneId
+
+# 判断地图在指定地图中的位置
+def judgeSonMapInMap(mapPath,sonMapPath):
+    mapDirList = os.listdir(mapPath)
+    mapPathList = []
+    for i in mapDirList:
+        loadPath = os.path.join(mapPath,i)
+        mapPathList.append(loadPath)
+    if sonMapPath in mapPathList:
+        sonMapId =  mapPathList.index(sonMapPath)
+    else:
+        loadSonMapPath = os.path.join(sonMapPath,'..')
+        sonMapId = judgeSonMapInMap(mapPath,loadSonMapPath)
+    return sonMapId
 
 # 从对应地图场景id查找场景路径
 def getScenePathForMapSceneId(mapId,mapSceneId):

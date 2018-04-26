@@ -8,8 +8,8 @@ import core.TextLoading as textload
 import core.CacheContorl as cache
 from core.pycfg import gamepath
 import core.GameConfig as config
-import script.MapHandle as maphandle
-import script.CharacterHandle as characterhandle
+import design.MapHandle as maphandle
+import design.CharacterHandle as characterhandle
 
 # 获取存档所在路径
 def getSavefilePath(filename):

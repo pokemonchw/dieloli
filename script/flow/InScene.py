@@ -1,5 +1,6 @@
 import core.CacheContorl as cache
 import script.Panel.InScenePanel as inscenepanel
+import core.game as game
 
 # 用于进入场景流程
 def getInScene_func():
@@ -18,9 +19,11 @@ def seeScene_func(judge):
     inputS = []
     inscenepanel.seeScenePanel()
     if judge  == '0':
-        inputS.append(inscenepanel.seeScenePlayerListPanel())
+        inputS = inputS + inscenepanel.seeScenePlayerListPanel()
     else:
         pass
     inscenepanel.seeObjectInfoPanel()
-    inscenepanel.seeMovePathPanel()
+    inputS = inputS + inscenepanel.seeMovePathPanel()
+    yrn = game.askfor_All(inputS)
+
     pass

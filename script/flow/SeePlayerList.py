@@ -1,9 +1,9 @@
-import script.Panel.SeePlayerListPanel as seeplayerlistpanel
-import script.CharacterHandle as characterhandle
+import Panel.SeePlayerListPanel as seeplayerlistpanel
 import core.GameConfig as config
 import core.game as game
 import core.PyCmd as pycmd
 import core.CacheContorl as cache
+import design.CharacterHandle as characterhandle
 
 # 用于查看角色列表的流程
 def seePlayerList_func(oldPanel):

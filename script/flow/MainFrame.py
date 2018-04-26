@@ -1,15 +1,15 @@
-import script.Panel.MainFramePanel as mainframepanel
+import Panel.MainFramePanel as mainframepanel
 import core.CacheContorl as cache
-import script.AttrHandle as attrhandle
 import core.game as game
 import core.PyCmd as pycmd
-import script.flow.SeePlayerAttr as seeplayerattr
-import script.flow.SeePlayerList as seeplayerlist
-import script.flow.Shop as shop
-import script.flow.ChangeClothes as changeclothes
-import script.flow.GameSetting as gamesetting
-import script.flow.SaveHandleFrame as savehandleframe
-import script.flow.InScene as inscene
+import flow.SeePlayerAttr as seeplayerattr
+import flow.SeePlayerList as seeplayerlist
+import flow.Shop as shop
+import flow.ChangeClothes as changeclothes
+import flow.GameSetting as gamesetting
+import flow.SaveHandleFrame as savehandleframe
+import flow.InScene as inscene
+import design.AttrHandle as attrhandle
 
 # 游戏主页
 def mainFrame_func():

@@ -1,12 +1,12 @@
 import core.EraPrint as eprint
 import core.TextLoading as textload
-import script.GameTime as gametime
 import core.CacheContorl as cache
-import script.AttrText as attrtext
-import script.AttrPrint as attrprint
-import script.AttrHandle as attrhandle
 import core.PyCmd as pycmd
-import script.Ans as ans
+import design.AttrHandle as attrhandle
+import design.AttrText as attrtext
+import design.AttrPrint as attrprint
+import design.GameTime as gametime
+import design.Ans as ans
 
 # 游戏主页流程
 def mainFramePanel():
@@ -32,12 +32,12 @@ def mainFramePanel():
     mainMenuText = textload.getTextData(textload.stageWordId,'68')
     eprint.sontitleprint(mainMenuText)
     eprint.p('\n')
-    askForMainMenu = ans.optionint(ans.mainmenu,4,'left',askfor=False,cmdSize='center')
+    askForMainMenu = ans.optionint(ans.mainmenu, 4, 'left', askfor=False, cmdSize='center')
     cmdList = cmdList + askForMainMenu
     systemMenuText = textload.getTextData(textload.stageWordId,'69')
     eprint.sontitleprint(systemMenuText)
     eprint.p('\n')
     systemMenuStartId = len(askForMainMenu)
-    askForSystemMenu = ans.optionint(ans.systemmenu,4,'left',askfor=False,cmdSize='center',startId=systemMenuStartId)
+    askForSystemMenu = ans.optionint(ans.systemmenu, 4, 'left', askfor=False, cmdSize='center', startId=systemMenuStartId)
     cmdList = cmdList + askForSystemMenu
     return cmdList

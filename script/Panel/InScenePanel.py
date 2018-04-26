@@ -1,11 +1,11 @@
 import core.CacheContorl as cache
 import core.TextLoading as textload
 import core.EraPrint as eprint
-import script.GameTime as gametime
 import core.PyCmd as pycmd
-import script.MapHandle as maphandle
-import script.Ans as ans
 import core.ValueHandle as valuehandle
+import design.GameTime as gametime
+import design.MapHandle as maphandle
+import design.Ans as ans
 
 # 用于查看当前场景的面板
 def seeScenePanel():
@@ -73,7 +73,7 @@ def seeMovePathPanel():
     eprint.p(movePathInfo)
     eprint.p('\n')
     pathEdge = mapData['PathEdge']
-    mapSceneId = str(maphandle.getMapSceneIdForSceneId(sceneId))
+    mapSceneId = str(maphandle.getMapSceneIdForSceneId(mapId, sceneId))
     scenePath = pathEdge[mapSceneId]
     scenePathList = valuehandle.dictKeysToList(scenePath)
     scenePathList.remove(mapSceneId)

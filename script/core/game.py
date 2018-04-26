@@ -5,7 +5,7 @@ import core.pycfg
 import core.pyio as pyio
 import core.Event as event
 import core.KeyListionEvent as keylistion
-import script.MapHandle as maphandle
+import design.MapHandle as maphandle
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'
