@@ -58,9 +58,14 @@ def acknowledgmentAttributeAns(inputList):
 
 # 通用查看角色属性流程
 def seeAttrOnEveryTime_func(oldPanel,tooOldFlow = None):
-    playerId = cache.playObject['objectId']
-    playerId = int(playerId)
-    playerIdMax = characterhandle.getCharacterIndexMax()
+    objectId = cache.playObject['objectId']
+    if oldPanel == 'InScenePanel':
+        sceneId = cache.playObject['object']['0']['Position']
+        objectIdList = ['0']
+        objectIdList = objectIdList + maphandle.getScenePlayerIdList(sceneId)
+    else:
+        objectIdList = valuehandle.dictKeysToList(cache.playObject['object'])
+    objectIdIndex = objectIdList.index(objectId)
     inputS = []
     seeAttrList = seeAttrInEveryTime_func()
     inputS = inputS + seeAttrList
@@ -69,6 +74,7 @@ def seeAttrOnEveryTime_func(oldPanel,tooOldFlow = None):
     yrn = game.askfor_All(inputS)
     pycmd.clr_cmd()
     showAttrHandleData = textload.getTextData(textload.cmdId, 'seeAttrPanelHandle')
+    objectMax = objectIdList[len(objectIdList) - 1]
     if yrn in showAttrHandleData:
         index = showAttrHandleData.index(yrn)
         index = str(index)
@@ -78,32 +84,36 @@ def seeAttrOnEveryTime_func(oldPanel,tooOldFlow = None):
         panelstatehandle.panelStateChange(yrn)
         seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
     elif yrn == '0':
-        if playerId == 0:
-            playerIdMax = str(playerIdMax)
-            cache.playObject['objectId'] = playerIdMax
+        if objectIdIndex == 0:
+            cache.playObject['objectId'] = objectMax
             seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
         else:
-            playerId = str(playerId - 1)
+            playerId = objectIdList[objectIdIndex - 1]
             cache.playObject['objectId'] = playerId
             seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
     elif yrn == '1':
         if oldPanel == 'MainFramePanel':
-            import script.flow.MainFrame as mainframe
+            import flow.MainFrame as mainframe
             seeplayerattrpanel.initShowAttrPanelList()
             cache.playObject['objectId'] = '0'
             mainframe.mainFrame_func()
         elif oldPanel == 'SeePlayerListPanel':
             seeplayerattrpanel.initShowAttrPanelList()
-            import script.flow.SeePlayerList as seeplayerlist
+            import flow.SeePlayerList as seeplayerlist
             seeplayerlist.seePlayerList_func(tooOldFlow)
+        elif oldPanel == 'InScenePanel':
+            seeplayerattrpanel.initShowAttrPanelList()
+            import flow.InScene as inscene
+            cache.playObject['objectId'] = '0'
+            inscene.getInScene_func()
     elif yrn == '2':
-        if playerId == playerIdMax:
-            playerId = '0'
-            cache.playObject['objectId'] = playerId
+        if objectId == objectMax:
+            objectId = objectIdList[0]
+            cache.playObject['objectId'] = objectId
             seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
         else:
-            playerId = str(playerId + 1)
-            cache.playObject['objectId'] = playerId
+            objectId = objectIdList[objectIdIndex  + 1]
+            cache.playObject['objectId'] = objectId
             seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
     pass
 

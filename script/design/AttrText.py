@@ -4,6 +4,7 @@ import core.TextLoading as textload
 import core.CacheContorl as cache
 from core.GameConfig import language
 from core.pycfg import gamepath
+import design.ProportionalBar as proportionalbar
 
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
 roleAttrData = data._loadjson(roleAttrPath)
@@ -92,7 +93,7 @@ def getEngravingText(eList):
     for i in range(0,len(levelList)):
         levelTextList.append(levelFixList[i] + LVText + levelList[i])
     for i in range(0,len(levelList)):
-        levelBarList.append(ProportionalBar.getCountBar(levelTextList[i], 3, levelList[i], 'engravingemptybar'))
+        levelBarList.append(proportionalbar.getCountBar(levelTextList[i], 3, levelList[i], 'engravingemptybar'))
     return levelBarList
 
 # 获取服装列表文本

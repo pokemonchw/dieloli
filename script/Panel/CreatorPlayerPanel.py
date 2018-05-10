@@ -39,7 +39,7 @@ def inputNickNamePanel():
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '6'))
-    yrn = Ans.optionint(Ans.inputnickname, 1)
+    yrn = ans.optionint(ans.inputnickname, 1)
     eprint.p('\n')
     return yrn
 
@@ -66,7 +66,7 @@ def inputSelfNamePanel():
     cache.playObject['object'][playerId] = cache.temporaryObject.copy()
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '14'))
-    yrn = Ans.optionint(Ans.inputselfname, 1)
+    yrn = ans.optionint(ans.inputselfname, 1)
     eprint.p('\n')
     return yrn
 
@@ -91,7 +91,7 @@ def inputSexPanel():
     sexId = cache.playObject['object'][playerId]['Sex']
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '8')[sexId])
-    yrn = Ans.optionint(Ans.currencymenu, 1)
+    yrn = ans.optionint(ans.currencymenu, 1)
     eprint.p('\n')
     return yrn
 
@@ -99,7 +99,7 @@ def inputSexPanel():
 def inputSexChoicePanel():
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '7'))
-    yrn = Ans.optionint(Ans.sexmenu, 1)
+    yrn = ans.optionint(ans.sexmenu, 1)
     return yrn
 
 # 询问玩家是否进行详细设置面板
@@ -109,7 +109,7 @@ def attributeGenerationBranchPanel():
     pycmd.clr_cmd()
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '9'))
-    yrn = Ans.optionint(Ans.currencymenu, 1)
+    yrn = ans.optionint(ans.currencymenu, 1)
     return yrn
 
 # 详细设置属性1:询问玩家是否是小孩子
@@ -117,7 +117,7 @@ def detailedSetting1Panel():
     eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '10'))
-    yrn = Ans.optionint(Ans.detailedsetting1, 1)
+    yrn = ans.optionint(ans.detailedsetting1, 1)
     return yrn
 
 # 详细设置属性2:询问玩家是否具备动物特征
@@ -125,7 +125,7 @@ def detailedSetting2Panel():
     eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '11'))
-    yrn = Ans.optionstr(Ans.detailedsetting2, 5, 'center', True)
+    yrn = ans.optionstr(ans.detailedsetting2, 5, 'center', True)
     return yrn
 
 # 详细设置属性3:询问玩家是否具备丰富的性经验
@@ -133,7 +133,7 @@ def detailedSetting3Panel():
     eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '12'))
-    yrn = Ans.optionint(Ans.detailedsetting3)
+    yrn = ans.optionint(ans.detailedsetting3)
     return yrn
 
 # 详细设置属性4:询问玩家的胆量
@@ -141,7 +141,7 @@ def detailedSetting4Panel():
     eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '13'))
-    yrn = Ans.optionint(Ans.detailedsetting4)
+    yrn = ans.optionint(ans.detailedsetting4)
     return yrn
 
 # 详细设置属性5:询问玩家的性格
@@ -149,7 +149,7 @@ def detailedSetting5Panel():
     eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '16'))
-    yrn = Ans.optionint(Ans.detailedsetting5)
+    yrn = ans.optionint(ans.detailedsetting5)
     return yrn
 
 # 详细设置属性6:询问玩家的自信
@@ -157,7 +157,7 @@ def detailedSetting6Panel():
     eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '17'))
-    yrn = Ans.optionint(Ans.detailedsetting6)
+    yrn = ans.optionint(ans.detailedsetting6)
     return yrn
 
 # 详细设置属性7:询问玩家友善
@@ -165,5 +165,5 @@ def detailedSetting7Panel():
     eprint.p('\n')
     eprint.pline()
     eprint.pl(textload.getTextData(textload.messageId, '18'))
-    yrn = Ans.optionint(Ans.detailedsetting7)
+    yrn = ans.optionint(ans.detailedsetting7)
     return yrn

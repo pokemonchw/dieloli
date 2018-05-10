@@ -25,18 +25,26 @@ seeattrpanelmenu = "seeAttrPanelHandle"
 changesavepage = "changeSavePage"
 seeattronrverytime = "seeAttrOnEveryTime"
 seeplayerlist = "seePlayerList"
+inscenelist1 = "inSceneList1"
+seemap = "seeMap"
 
 # 用于批量生成id命令
-def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left',startId = '0',cmdListData=None):
+def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left',startId = '0',cmdListData=None,lastLine = False):
     if cmdListData == None:
         cmdListData = textload.getTextData(textload.cmdId, cmdList).copy()
     else:
         pass
     inputI = []
     textWidth = config.text_width
+    if lastLine == True:
+        if len(cmdListData) < cmdColumn:
+            cmdColumn = len(cmdListData)
+    else:
+        if len(cmdListData) + 1 < cmdColumn:
+            cmdColumn = len(cmdListData)
     cmdIndex = int(textWidth/cmdColumn)
-    if len(cmdListData) < cmdColumn:
-        cmdColumn = len(cmdListData) - 1
+    if len(cmdListData) + 1 < cmdColumn:
+        cmdColumn = len(cmdListData) + 1
     for i in range(0,len(cmdListData)):
         cmdText = dictionaries.handleText(cmdListData[i])
         startId = int(startId)
@@ -57,6 +65,11 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
                 cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
                 inputI.append(str(returnId))
             elif i / cmdColumn >= 1 and i % cmdColumn == 0:
+                eprint.p('\n')
+                cmdTextAndId = cmdTextAndId.rstrip()
+                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
+                inputI.append(str(returnId))
+            elif i == len(cmdListData) and lastLine == True:
                 eprint.p('\n')
                 cmdTextAndId = cmdTextAndId.rstrip()
                 cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
@@ -87,7 +100,7 @@ def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = T
             cmdColumn = len(cmdListData) - 1
     else:
         if len(cmdListData) < cmdColumn:
-            cmdColumn = len(cmdListData) - 1
+            cmdColumn = len(cmdListData)
     cmdIndex = int(textWidth / cmdColumn)
     for i in range(0,len(cmdListData)):
         cmdTextBak = dictionaries.handleText(cmdListData[i])

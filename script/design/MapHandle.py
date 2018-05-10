@@ -6,6 +6,7 @@ import core.data as data
 import core.EraPrint as eprint
 import core.PyCmd as pycmd
 import core.CacheContorl as cache
+import core.TextHandle as texthandle
 
 language = config.language
 mapDataDir = os.path.join(gamepath, 'data',language, 'map')
@@ -21,6 +22,8 @@ def printMap(mapId):
     for mapXList in mapYList:
         mapXListStyle = richtext.setRichTextPrint(mapXList,'standard')
         mapXList = richtext.removeRichCache(mapXList)
+        mapXFix = texthandle.align(mapXList,'center',True)
+        eprint.p(mapXFix)
         for i in range(0, len(mapXList)):
             if str(i) not in passList:
                 if mapXListStyle[i] == 'mapbutton':
@@ -233,3 +236,28 @@ def initScanePlayerData():
         sceneId = str(i)
         scenePlayerData[sceneId] = []
     cache.sceneData['ScenePlayerData'] = scenePlayerData
+
+# 获取场景上所有角色的数据
+def getScenePlayerData(sceneId):
+    playerData = cache.playObject['object']
+    scenePlayerData = []
+    scenePlayerDataList = cache.sceneData['ScenePlayerData'][sceneId]
+    for i in scenePlayerDataList:
+        scenePlayerData.append(playerData[i])
+    return scenePlayerData
+
+# 获取场景上所有角色的姓名列表
+def getScenePlayerNameList(sceneId):
+    scenePlayerData = getScenePlayerData(sceneId)
+    scenePlayerNameList = []
+    for i in scenePlayerData:
+        scenePlayerNameList.append(i['Name'])
+    return scenePlayerNameList
+
+# 获取场景上所有角色的id列表
+def getScenePlayerIdList(sceneId):
+    scenePlayerDataList = cache.sceneData['ScenePlayerData'][sceneId]
+    scenePlayerIdList = []
+    for i in scenePlayerDataList:
+        scenePlayerIdList.append(i)
+    return scenePlayerIdList
