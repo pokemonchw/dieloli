@@ -1,17 +1,20 @@
 # -*- coding: UTF-8 -*-
 import os
 import core.PyCmd as pycmd
-import script.flow.CreatorPlayer as creatorplayer
+import flow.CreatorPlayer as creatorplayer
 import core.CacheContorl as cache
-import script.flow.SaveHandleFrame as savehandleframe
-import script.Panel.MainFlowPanel as mainflowpanel
+import flow.SaveHandleFrame as savehandleframe
+import Panel.MainFlowPanel as mainflowpanel
 import time
+import design.MapHandle as maphandle
 
 # 启动游戏界面
 def open_func():
     mainflowpanel.loadGamePanel()
     time.sleep(1)
-    main_func()
+    path = maphandle.getPathfinding('0','1','3')
+    print(path)
+    #main_func()
     pass
 
 # 主界面

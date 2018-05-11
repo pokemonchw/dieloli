@@ -7,6 +7,7 @@ import core.EraPrint as eprint
 import core.PyCmd as pycmd
 import core.CacheContorl as cache
 import core.TextHandle as texthandle
+import core.ValueHandle as valuehandle
 
 language = config.language
 mapDataDir = os.path.join(gamepath, 'data',language, 'map')
@@ -89,37 +90,66 @@ def playerMoveScene(oldSceneId,newSceneId,characterId):
     cache.sceneData['ScenePlayerData'] = scenePlayerData
 
 # 计算寻路路径
-def getPathfinding(mapId,origin,destination):
+def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],pathTime = 0,pathList = [],timeList = []):
     mapId = int(mapId)
-    origin = str(origin)
-    destination = str(destination)
+    nowNode = str(nowNode)
+    targetNode = str(targetNode)
     mapData = cache.mapData['MapData'][mapId]
     pathEdge = mapData['PathEdge']
-    book = set()
-    minv = origin
-    INF = 999
-    needTime = dict((k, INF) for k in pathEdge.keys())
-    needTime[origin] = 0
-    nodePath = dict((k, []) for k in pathEdge.keys())
-    nodePath[origin] = [origin]
-    timeList = nodePath.copy()
-    timeList[origin] = [0]
-    while len(book) < len(pathEdge):
-        book.add(minv)
-        for w in pathEdge[minv]:
-            if needTime[minv] + pathEdge[minv][w] < needTime[w]:
-                needTime[w] = needTime[minv] + pathEdge[minv][w]
-                nodePath[w] = nodePath[minv].copy()
-                nodePath[w].append(w)
-                timeList[w] = timeList[minv].copy()
-                timeList[w].append(pathEdge[minv][w])
-        new = INF
-        for v in needTime.keys():
-            if v in book: continue
-            if needTime[v] < new:
-                new = needTime[v]
-                minv = v
-    return {"Path":nodePath[destination],"Time":timeList[destination]}
+    targetListDict = pathEdge[nowNode]
+    targetList = valuehandle.dictKeysToList(targetListDict)
+    if nowNode == targetNode:
+        return 'End'
+    else:
+        for i in range(0,len(targetList)):
+            target = targetList[i]
+            if target in pathNodeList:
+                pass
+            else:
+                targetTime = targetListDict[target]
+                pathTime = pathTime + targetTime
+                findPath = pathNodeList.copy()
+                if findPath == []:
+                    findPath = [nowNode]
+                    findTime = [0]
+                else:
+                    findTime = pathTimeList.copy()
+                findPath.append(target)
+                findTime.append(targetTime)
+                if target == targetNode:
+                    pathList.append(findPath)
+                    timeList.append(findTime)
+                else:
+                    pathEdgeNow = pathEdge[target].copy()
+                    pathEdgeNow.pop(nowNode)
+                    targetNodeInTargetList = pathEdgeNow
+                    targetNodeInTargetToList = valuehandle.dictKeysToList(targetNodeInTargetList)
+                    for i in range(0,len(targetNodeInTargetToList)):
+                        targetNodeInTarget = targetNodeInTargetToList[i]
+                        findPath.append(targetNodeInTarget)
+                        findTime.append(targetNodeInTargetList[targetNodeInTarget])
+                        pathData = getPathfinding(mapId,targetNodeInTarget,targetNode,findPath,findTime,pathTime,pathList,timeList)
+                        if pathData == 'Null':
+                            pass
+                        else:
+                            pathList.append(pathData['Path'])
+                            timeList.append(pathData['Time'])
+        if len(pathList) > 0:
+            pathId = 0
+            needTime = 'Null'
+            for i in range(0,len(timeList)):
+                nowTime = 0
+                for index in range(0,len(timeList[i])):
+                    if index == 0:
+                        needTime = 0
+                    nowTime = needTime + timeList[i][index]
+                if needTime == 'Null' or nowTime < needTime:
+                    needTime = nowTime
+                    pathId = i
+            pathData = {'Path':pathList[pathId],'Time':timeList[pathId]}
+            return pathData
+        else:
+            return 'Null'
 
 # 载入地图下对应场景数据
 def getSceneDataForMap(mapId,mapSceneId):
