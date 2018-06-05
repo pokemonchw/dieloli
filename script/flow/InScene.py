@@ -3,12 +3,11 @@ import script.Panel.InScenePanel as inscenepanel
 import core.game as game
 import design.MapHandle as maphandle
 import flow.SeePlayerAttr as seeplayerattr
-import flow.SeeMap as seemap
 import core.PyCmd as pycmd
 
 # 用于进入场景流程
 def getInScene_func():
-    sceneData = cache.sceneData
+    sceneData = cache.sceneData.copy()
     sceneId = cache.playObject['object']['0']['Position']
     scenePlayerList = sceneData['ScenePlayerData'][sceneId]
     if len(scenePlayerList) > 1:
@@ -16,7 +15,6 @@ def getInScene_func():
         seeScene_func('0')
     else:
         seeScene_func('1')
-    pass
 
 # 用于查看当前场景的流程
 def seeScene_func(judge):
@@ -37,6 +35,7 @@ def seeScene_func(judge):
     if yrn in scenePlayerNameList:
         seeplayerattr.seeAttrOnEveryTime_func('InScenePanel')
     elif yrn == '0':
+        import flow.SeeMap as seemap
         seemap.seeMapFlow()
     elif yrn == '1':
         seeplayerattr.seeAttrOnEveryTime_func('InScenePanel')

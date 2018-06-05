@@ -26,9 +26,13 @@ def seeMovePathPanel():
     eprint.p('\n')
     pathEdge = mapData['PathEdge']
     mapSceneId = str(maphandle.getMapSceneIdForSceneId(mapId, sceneId))
+    print(mapSceneId)
     scenePath = pathEdge[mapSceneId]
     scenePathList = valuehandle.dictKeysToList(scenePath)
-    scenePathList.remove(mapSceneId)
+    try:
+        scenePathList.remove(mapSceneId)
+    except ValueError:
+        pass
     if len(scenePathList) > 0:
         sceneCmd = []
         for scene in scenePathList:

@@ -7,14 +7,13 @@ import design.Ans as ans
 
 # 用于查看当前场景的面板
 def seeScenePanel():
-    sceneData = cache.sceneData
+    sceneData = cache.sceneData.copy()
     titleText = textload.getTextData(textload.stageWordId,'75')
     eprint.plt(titleText)
     timeText = gametime.getDateText()
     eprint.p(timeText)
     eprint.p(' ')
-    sceneIdS = cache.playObject['object']['0']['Position']
-    sceneId = int(sceneIdS)
+    sceneId = cache.playObject['object']['0']['Position']
     sceneName = sceneData['SceneData'][sceneId]['SceneName']
     sceneInfoHead = textload.getTextData(textload.stageWordId, '76')
     sceneInfo = sceneInfoHead + sceneName
@@ -24,12 +23,12 @@ def seeScenePanel():
 # 用于查看当前场景上角色列表的面板
 def seeScenePlayerListPanel():
     inputS = []
-    sceneData = cache.sceneData
+    sceneData = cache.sceneData.copy()
     seePlayerText = textload.getTextData(textload.messageId,'26')
     eprint.p(seePlayerText)
     eprint.p('\n')
-    sceneIdS = cache.playObject['object']['0']['Position']
-    scenePlayerList = sceneData['ScenePlayerData'][sceneIdS]
+    sceneId = cache.playObject['object']['0']['Position']
+    scenePlayerList = sceneData['ScenePlayerData'][sceneId]
     for playerId in scenePlayerList:
         if playerId == '0':
             pass

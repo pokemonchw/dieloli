@@ -80,6 +80,8 @@ def getSceneListForMap(mapId):
 def playerMoveScene(oldSceneId,newSceneId,characterId):
     scenePlayerData = cache.sceneData['ScenePlayerData']
     characterId = str(characterId)
+    oldSceneId = int(oldSceneId)
+    newSceneId = int(newSceneId)
     if characterId in scenePlayerData[oldSceneId]:
         scenePlayerData[oldSceneId].remove(characterId)
     if characterId in scenePlayerData[newSceneId]:
@@ -131,6 +133,8 @@ def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],
                         pathData = getPathfinding(mapId,targetNodeInTarget,targetNode,findPath,findTime,pathTime,pathList,timeList)
                         if pathData == 'Null':
                             pass
+                        elif pathData == 'End':
+                            pass
                         else:
                             pathList.append(pathData['Path'])
                             timeList.append(pathData['Time'])
@@ -163,24 +167,31 @@ def getSceneDataForMap(mapId,mapSceneId):
 # 获取全局场景id对应的地图场景id
 def getMapSceneIdForSceneId(mapId,sceneId):
     sceneId = int(sceneId)
-    sceneMapId = getMapIdForScene(sceneId)
-    mapId = str(mapId)
-    sceneMapId = str(sceneMapId)
-    if mapId == sceneMapId:
-        mapId = int(mapId)
-        mapPath = cache.mapData['MapPathData'][mapId]
-        scenePath = cache.sceneData['ScenePathData'][sceneId]
-        sceneList = os.listdir(mapPath)
-        sceneLoadList = []
-        for scene in sceneList:
-            sceneLoadPath = os.path.join(mapPath, scene)
-            sceneLoadList.append(sceneLoadPath)
-        mapSceneId = sceneLoadList.index(scenePath)
-    else:
-        mapPath = cache.mapData['MapPathData'][mapId]
-        sonMapPath = cache.mapData['MapPathData'][sceneMapId]
-        mapSceneId = judgeSonMapInMap(mapPath,sonMapPath)
+    scenePath = cache.sceneData['ScenePathData'][sceneId]
+    mapId = int(mapId)
+    sceneInPath = getMapScenePathForScenePath(mapId,scenePath)
+    mapPath = cache.mapData['MapPathData'][mapId]
+    mapSceneId = judgeSonMapInMap(mapPath, sceneInPath)
     return mapSceneId
+
+# 获取从场景路径获取对应地图下路径
+def getMapScenePathForScenePath(mapId,scenePath):
+    mapPath = cache.mapData['MapPathData'][mapId]
+    sceneInPath = os.path.abspath(os.path.join(scenePath, '..'))
+    if mapPath == sceneInPath:
+        nowPath = scenePath
+    else:
+        nowPath = getMapScenePathForScenePath(mapId,sceneInPath)
+    return nowPath
+
+
+# 获取地图场景id对应的全剧场景id
+def getSceneIdForMapSceneId(mapId,mapSceneId):
+    scenePath = getScenePathForMapSceneId(mapId,mapSceneId)
+    sceneData = cache.sceneData.copy()
+    scenePathData = sceneData['ScenePathData']
+    sceneId = scenePathData.index(scenePath)
+    return sceneId
 
 # 判断地图在指定地图中的位置
 def judgeSonMapInMap(mapPath,sonMapPath):
@@ -188,11 +199,14 @@ def judgeSonMapInMap(mapPath,sonMapPath):
     mapPathList = []
     for i in mapDirList:
         loadPath = os.path.join(mapPath,i)
-        mapPathList.append(loadPath)
+        if os.path.isfile(loadPath):
+            pass
+        else:
+            mapPathList.append(loadPath)
     if sonMapPath in mapPathList:
-        sonMapId =  mapPathList.index(sonMapPath)
+        sonMapId = mapPathList.index(sonMapPath)
     else:
-        loadSonMapPath = os.path.join(sonMapPath,'..')
+        loadSonMapPath = os.path.abspath(os.path.join(sonMapPath, '..'))
         sonMapId = judgeSonMapInMap(mapPath,loadSonMapPath)
     return sonMapId
 
@@ -207,7 +221,7 @@ def getScenePathForMapSceneId(mapId,mapSceneId):
 
 # 获取有效场景路径
 def getScenePathForTrue(scenePath):
-    if 'Scene.jspn' in os.listdir(scenePath):
+    if 'Scene.json' in os.listdir(scenePath):
         pass
     else:
         scenePath = os.path.join(scenePath,'0')
@@ -228,7 +242,7 @@ def getSceneDataForPath(scenePath):
 def initSceneData():
     sceneData = []
     scenePathData = []
-    scenePlayerData = {}
+    scenePlayerData = []
     for dirpath, dirnames, filenames in os.walk(mapDataDir):
         for i in range(0,len(filenames)):
             filename = filenames[i]
@@ -237,8 +251,7 @@ def initSceneData():
                 scene = data._loadjson(scenePath)
                 sceneData.append(scene)
                 scenePathData.append(dirpath)
-                sceneId = str(i)
-                scenePlayerData[sceneId] = []
+                scenePlayerData.append([])
     cache.sceneData = {"SceneData":sceneData,"ScenePathData":scenePathData,"ScenePlayerData":scenePlayerData}
 
 # 载入所有地图数据
@@ -263,8 +276,7 @@ def initMapData():
 def initScanePlayerData():
     scenePlayerData = cache.sceneData['ScenePlayerData']
     for i in range(0,len(scenePlayerData)):
-        sceneId = str(i)
-        scenePlayerData[sceneId] = []
+        scenePlayerData[i] = []
     cache.sceneData['ScenePlayerData'] = scenePlayerData
 
 # 获取场景上所有角色的数据
