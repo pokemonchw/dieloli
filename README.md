@@ -9,7 +9,7 @@ DieLoli
 游戏tag为英雄/学园/热血/萝莉/童话 \
 基于Python独立进行开发 \
 在引擎构架中，一定程度参考了[pyera](https://github.com/qsjl11/pyera/) \
-开发者允许任何人基于GPL3.0协议，对此项目进行二次开发 \
+开发者允许任何人基于cc by-nc-sa协议，对此项目进行二次开发 \
 请勿将其用作商业用途 \
 想要参与开发请与开发者联系，联系方式在本md底部
 
@@ -19,7 +19,7 @@ DieLoli
 
 联系方式
 ----
-e-mail:admin@byayoi.org \
+e-mail:pokemonchw@gmail.com \
 g+:pokemonchw \
 twitter:pokemonchw \
 企鹅群:688166358
