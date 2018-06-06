@@ -26,7 +26,6 @@ def seeMovePathPanel():
     eprint.p('\n')
     pathEdge = mapData['PathEdge']
     mapSceneId = str(maphandle.getMapSceneIdForSceneId(mapId, sceneId))
-    print(mapSceneId)
     scenePath = pathEdge[mapSceneId]
     scenePathList = valuehandle.dictKeysToList(scenePath)
     try:
@@ -45,7 +44,7 @@ def seeMovePathPanel():
         errorMoveText = textload.getTextData(textload.messageId, '28')
         eprint.p(errorMoveText)
     eprint.pline()
-    return inputS
+    return {'inputS':inputS,'scenePathList':scenePathList}
 
 # 用于绘制通常按钮面板
 def backScenePanel(startId):

@@ -24,16 +24,21 @@ def seeScene_func(judge):
         inputS = inputS + inscenepanel.seeScenePlayerListPanel()
     else:
         pass
+    sceneId = cache.playObject['object']['0']['Position']
+    scenePlayerNameList = maphandle.getScenePlayerNameList(sceneId)
+    if len(scenePlayerNameList) == 1:
+        cache.playObject['objectId'] = '0'
+    else:
+        pass
     inscenepanel.seeObjectInfoPanel()
     inSceneCmdList1 = inscenepanel.inSceneButtonPanel()
     inputS = inputS + inSceneCmdList1
     startId1 = len(inSceneCmdList1)
     yrn = game.askfor_All(inputS)
-    sceneId = cache.playObject['object']['0']['Position']
-    scenePlayerNameList = maphandle.getScenePlayerNameList(sceneId)
     pycmd.clr_cmd()
     if yrn in scenePlayerNameList:
-        seeplayerattr.seeAttrOnEveryTime_func('InScenePanel')
+        cache.playObject['objectId'] = maphandle.getPlayerIdByPlayerName(yrn,sceneId)
+        seeScene_func(judge)
     elif yrn == '0':
         import flow.SeeMap as seemap
         seemap.seeMapFlow()
@@ -42,4 +47,3 @@ def seeScene_func(judge):
     elif yrn == '2':
         cache.playObject['objectId'] = '0'
         seeplayerattr.seeAttrOnEveryTime_func('InScenePanel')
-    pass

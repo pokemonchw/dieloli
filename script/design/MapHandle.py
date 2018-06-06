@@ -15,6 +15,9 @@ mapDataDir = os.path.join(gamepath, 'data',language, 'map')
 # 输出地图
 def printMap(mapId):
     mapText = cache.mapData['MapTextData'][mapId]
+    playerNowSceneId = cache.playObject['object']['0']['Position']
+    playerNowSceneId = getMapSceneIdForSceneId(mapId,playerNowSceneId)
+    playerNowSceneId = str(playerNowSceneId)
     sceneList = getSceneListForMap(mapId)
     inputS = []
     inputCmd = ''
@@ -36,8 +39,12 @@ def printMap(mapId):
                         else:
                             break
                     if inputCmd in sceneList:
-                        pycmd.pcmd(inputCmd, inputCmd, None)
-                        inputS.append(inputCmd)
+                        if inputCmd == playerNowSceneId:
+                            eprint.p(inputCmd)
+                            inputS.append(None)
+                        else:
+                            pycmd.pcmd(inputCmd, inputCmd, None)
+                            inputS.append(inputCmd)
                     else:
                         eprint.p(inputCmd,'standard')
                     inputCmd = ''
@@ -68,6 +75,13 @@ def getMapIdForScene(sceneId):
     mapData = cache.mapData['MapPathData']
     mapId = mapData.index(mapPath)
     return mapId
+
+# 从场景路径获取所在地图ID
+def getMapIdForScenePath(scenePath):
+    path = getScenePathForTrue(scenePath)
+    pathData = cache.sceneData['ScenePathData']
+    sceneId = pathData.index(path)
+    return getMapIdForScene(sceneId)
 
 # 获取地图下所有场景
 def getSceneListForMap(mapId):
@@ -219,6 +233,13 @@ def getScenePathForMapSceneId(mapId,mapSceneId):
     scenePath = getScenePathForTrue(scenePath)
     return scenePath
 
+# 从场景路径查找地图场景id
+def getMapSceneIdForScenePath(mapId,scenePath):
+    mapId = int(mapId)
+    mapPath = cache.mapData['MapPathData'][mapId]
+    sceneId = judgeSonMapInMap(mapPath,scenePath)
+    return sceneId
+
 # 获取有效场景路径
 def getScenePathForTrue(scenePath):
     if 'Scene.json' in os.listdir(scenePath):
@@ -295,6 +316,14 @@ def getScenePlayerNameList(sceneId):
     for i in scenePlayerData:
         scenePlayerNameList.append(i['Name'])
     return scenePlayerNameList
+
+# 获取场景上角色姓名对应角色id
+def getPlayerIdByPlayerName(playerName,sceneId):
+    playerNameList = getScenePlayerNameList(sceneId)
+    playerNameIndex = playerNameList.index(playerName)
+    playerIdList = getScenePlayerIdList(sceneId)
+    playerId = playerIdList[playerNameIndex]
+    return playerId
 
 # 获取场景上所有角色的id列表
 def getScenePlayerIdList(sceneId):

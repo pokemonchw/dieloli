@@ -20,6 +20,5 @@ def playerMove(targetScene):
             targetScenePosition = maphandle.getSceneIdForMapSceneId(mapId, targetScene)
             timeList = pathData['Time']
             maphandle.playerMoveScene(playerPosition, targetScenePosition, '0')
-            gametime.setSubMinute(timeList[0])
+            gametime.setSubMinute(timeList[1])
             playerMove(targetScene)
-    pass
