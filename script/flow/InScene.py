@@ -1,17 +1,19 @@
-import core.CacheContorl as cache
-import script.Panel.InScenePanel as inscenepanel
-import core.game as game
-import design.MapHandle as maphandle
-import flow.SeePlayerAttr as seeplayerattr
-import core.PyCmd as pycmd
+from core import CacheContorl,game,PyCmd
+from design import MapHandle
+from Panel import InScenePanel
+from flow import SeePlayerAttr
 
 # 用于进入场景流程
 def getInScene_func():
-    sceneData = cache.sceneData.copy()
-    sceneId = cache.playObject['object']['0']['Position']
+    sceneData = CacheContorl.sceneData.copy()
+    sceneId = CacheContorl.playObject['object']['0']['Position']
     scenePlayerList = sceneData['ScenePlayerData'][sceneId]
+    if '0' not in scenePlayerList:
+        objectIdList = ['0']
+        scenePlayerList = scenePlayerList + objectIdList
+        CacheContorl.sceneData['ScenePlayerData'][sceneId] = scenePlayerList
     if len(scenePlayerList) > 1:
-        cache.playObject['objectId'] = scenePlayerList[0]
+        CacheContorl.playObject['objectId'] = scenePlayerList[0]
         seeScene_func('0')
     else:
         seeScene_func('1')
@@ -19,31 +21,31 @@ def getInScene_func():
 # 用于查看当前场景的流程
 def seeScene_func(judge):
     inputS = []
-    inscenepanel.seeScenePanel()
+    InScenePanel.seeScenePanel()
     if judge  == '0':
-        inputS = inputS + inscenepanel.seeScenePlayerListPanel()
+        inputS = inputS + InScenePanel.seeScenePlayerListPanel()
     else:
         pass
-    sceneId = cache.playObject['object']['0']['Position']
-    scenePlayerNameList = maphandle.getScenePlayerNameList(sceneId)
+    sceneId = CacheContorl.playObject['object']['0']['Position']
+    scenePlayerNameList = MapHandle.getScenePlayerNameList(sceneId)
     if len(scenePlayerNameList) == 1:
-        cache.playObject['objectId'] = '0'
+        CacheContorl.playObject['objectId'] = '0'
     else:
         pass
-    inscenepanel.seeObjectInfoPanel()
-    inSceneCmdList1 = inscenepanel.inSceneButtonPanel()
+    InScenePanel.seeObjectInfoPanel()
+    inSceneCmdList1 = InScenePanel.inSceneButtonPanel()
     inputS = inputS + inSceneCmdList1
     startId1 = len(inSceneCmdList1)
     yrn = game.askfor_All(inputS)
-    pycmd.clr_cmd()
+    PyCmd.clr_cmd()
     if yrn in scenePlayerNameList:
-        cache.playObject['objectId'] = maphandle.getPlayerIdByPlayerName(yrn,sceneId)
+        CacheContorl.playObject['objectId'] = MapHandle.getPlayerIdByPlayerName(yrn,sceneId)
         seeScene_func(judge)
     elif yrn == '0':
         import flow.SeeMap as seemap
         seemap.seeMapFlow()
     elif yrn == '1':
-        seeplayerattr.seeAttrOnEveryTime_func('InScenePanel')
+        SeePlayerAttr.seeAttrOnEveryTime_func('InScenePanel')
     elif yrn == '2':
-        cache.playObject['objectId'] = '0'
-        seeplayerattr.seeAttrOnEveryTime_func('InScenePanel')
+        CacheContorl.playObject['objectId'] = '0'
+        SeePlayerAttr.seeAttrOnEveryTime_func('InScenePanel')

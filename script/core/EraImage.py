@@ -1,10 +1,9 @@
 import os
-import core.winframe as winframe
-from tkinter import *
-from core.pycfg import gamepath
-import core.CacheContorl as cache
+from tkinter import PhotoImage,END
+from core import CacheContorl,GamePathConfig,MainFrame
 
-textBox = winframe.textbox
+gamepath = GamePathConfig.gamepath
+textBox = MainFrame.textbox
 imageData = {}
 imageTextData = {}
 imageLock = 0
@@ -16,10 +15,10 @@ def getImageData(imageName,imagePath=''):
     else:
         imagePath = os.path.join(gamepath,'image',imagePath,imageName + '.png')
     image = PhotoImage(file=imagePath)
-    cache.imageid = cache.imageid + 1
+    CacheContorl.imageid = CacheContorl.imageid + 1
     return image
 
 # 打印图片
 def printImage(imageName,imagePath=''):
-    imageData[str(cache.imageid)] = getImageData(imageName, imagePath)
-    textBox.image_create(END, image=imageData[str(cache.imageid)])
+    imageData[str(CacheContorl.imageid)] = getImageData(imageName, imagePath)
+    textBox.image_create(END, image=imageData[str(CacheContorl.imageid)])

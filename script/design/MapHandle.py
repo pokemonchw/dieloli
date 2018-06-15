@@ -1,21 +1,14 @@
 import os
-from core.pycfg import gamepath
-import core.GameConfig as config
-import core.RichText as richtext
-import core.data as data
-import core.EraPrint as eprint
-import core.PyCmd as pycmd
-import core.CacheContorl as cache
-import core.TextHandle as texthandle
-import core.ValueHandle as valuehandle
+from core import GameConfig,RichText,GameData,EraPrint,PyCmd,CacheContorl,TextHandle,ValueHandle,GamePathConfig
 
-language = config.language
+language = GameConfig.language
+gamepath = GamePathConfig.gamepath
 mapDataDir = os.path.join(gamepath, 'data',language, 'map')
 
 # 输出地图
 def printMap(mapId):
-    mapText = cache.mapData['MapTextData'][mapId]
-    playerNowSceneId = cache.playObject['object']['0']['Position']
+    mapText = CacheContorl.mapData['MapTextData'][mapId]
+    playerNowSceneId = CacheContorl.playObject['object']['0']['Position']
     playerNowSceneId = getMapSceneIdForSceneId(mapId,playerNowSceneId)
     playerNowSceneId = str(playerNowSceneId)
     sceneList = getSceneListForMap(mapId)
@@ -24,10 +17,10 @@ def printMap(mapId):
     passList = []
     mapYList = mapText.split('\n')
     for mapXList in mapYList:
-        mapXListStyle = richtext.setRichTextPrint(mapXList,'standard')
-        mapXList = richtext.removeRichCache(mapXList)
-        mapXFix = texthandle.align(mapXList,'center',True)
-        eprint.p(mapXFix)
+        mapXListStyle = RichText.setRichTextPrint(mapXList,'standard')
+        mapXList = RichText.removeRichCache(mapXList)
+        mapXFix = TextHandle.align(mapXList,'center',True)
+        EraPrint.p(mapXFix)
         for i in range(0, len(mapXList)):
             if str(i) not in passList:
                 if mapXListStyle[i] == 'mapbutton':
@@ -40,23 +33,23 @@ def printMap(mapId):
                             break
                     if inputCmd in sceneList:
                         if inputCmd == playerNowSceneId:
-                            eprint.p(inputCmd)
+                            EraPrint.p(inputCmd,'nowmap')
                             inputS.append(None)
                         else:
-                            pycmd.pcmd(inputCmd, inputCmd, None)
+                            PyCmd.pcmd(inputCmd, inputCmd, None)
                             inputS.append(inputCmd)
                     else:
-                        eprint.p(inputCmd,'standard')
+                        EraPrint.p(inputCmd,'standard')
                     inputCmd = ''
                 else:
-                    eprint.p(mapXList[i], mapXListStyle[i])
-        eprint.p('\n')
+                    EraPrint.p(mapXList[i], mapXListStyle[i])
+        EraPrint.p('\n')
     return inputS
 
 # 获取场景所在地图
 def getMapForScene(sceneId):
     sceneId = int(sceneId)
-    scenePath = cache.sceneData['ScenePathData'][sceneId]
+    scenePath = CacheContorl.sceneData['ScenePathData'][sceneId]
     mapPath = getMapForPath(scenePath)
     return mapPath
 
@@ -72,27 +65,27 @@ def getMapForPath(scenePath):
 # 查找场景所在地图ID
 def getMapIdForScene(sceneId):
     mapPath = getMapForScene(sceneId)
-    mapData = cache.mapData['MapPathData']
+    mapData = CacheContorl.mapData['MapPathData']
     mapId = mapData.index(mapPath)
     return mapId
 
 # 从场景路径获取所在地图ID
 def getMapIdForScenePath(scenePath):
     path = getScenePathForTrue(scenePath)
-    pathData = cache.sceneData['ScenePathData']
+    pathData = CacheContorl.sceneData['ScenePathData']
     sceneId = pathData.index(path)
     return getMapIdForScene(sceneId)
 
 # 获取地图下所有场景
 def getSceneListForMap(mapId):
     mapId = int(mapId)
-    mapPath = cache.mapData['MapPathData'][mapId]
-    sceneList = data.getPathList(mapPath)
+    mapPath = CacheContorl.mapData['MapPathData'][mapId]
+    sceneList = GameData.getPathList(mapPath)
     return sceneList
 
 # 场景移动
 def playerMoveScene(oldSceneId,newSceneId,characterId):
-    scenePlayerData = cache.sceneData['ScenePlayerData']
+    scenePlayerData = CacheContorl.sceneData['ScenePlayerData']
     characterId = str(characterId)
     oldSceneId = int(oldSceneId)
     newSceneId = int(newSceneId)
@@ -101,19 +94,19 @@ def playerMoveScene(oldSceneId,newSceneId,characterId):
     if characterId in scenePlayerData[newSceneId]:
         pass
     else:
-        cache.playObject['object'][characterId]['Position'] = newSceneId
+        CacheContorl.playObject['object'][characterId]['Position'] = newSceneId
         scenePlayerData[newSceneId].append(characterId)
-    cache.sceneData['ScenePlayerData'] = scenePlayerData
+    CacheContorl.sceneData['ScenePlayerData'] = scenePlayerData
 
 # 计算寻路路径
 def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],pathTime = 0,pathList = [],timeList = []):
     mapId = int(mapId)
     nowNode = str(nowNode)
     targetNode = str(targetNode)
-    mapData = cache.mapData['MapData'][mapId]
+    mapData = CacheContorl.mapData['MapData'][mapId]
     pathEdge = mapData['PathEdge']
     targetListDict = pathEdge[nowNode]
-    targetList = valuehandle.dictKeysToList(targetListDict)
+    targetList = ValueHandle.dictKeysToList(targetListDict)
     if nowNode == targetNode:
         return 'End'
     else:
@@ -139,7 +132,7 @@ def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],
                     pathEdgeNow = pathEdge[target].copy()
                     pathEdgeNow.pop(nowNode)
                     targetNodeInTargetList = pathEdgeNow
-                    targetNodeInTargetToList = valuehandle.dictKeysToList(targetNodeInTargetList)
+                    targetNodeInTargetToList = ValueHandle.dictKeysToList(targetNodeInTargetList)
                     for i in range(0,len(targetNodeInTargetToList)):
                         targetNodeInTarget = targetNodeInTargetToList[i]
                         findPath.append(targetNodeInTarget)
@@ -173,7 +166,7 @@ def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],
 def getSceneDataForMap(mapId,mapSceneId):
     mapId = int(mapId)
     mapSceneId = str(mapSceneId)
-    mapPath = cache.mapData['MapPathData'][mapId]
+    mapPath = CacheContorl.mapData['MapPathData'][mapId]
     scenePath = os.path.join(mapPath,mapSceneId)
     sceneData = getSceneDataForPath(scenePath)
     return sceneData
@@ -181,16 +174,16 @@ def getSceneDataForMap(mapId,mapSceneId):
 # 获取全局场景id对应的地图场景id
 def getMapSceneIdForSceneId(mapId,sceneId):
     sceneId = int(sceneId)
-    scenePath = cache.sceneData['ScenePathData'][sceneId]
+    scenePath = CacheContorl.sceneData['ScenePathData'][sceneId]
     mapId = int(mapId)
     sceneInPath = getMapScenePathForScenePath(mapId,scenePath)
-    mapPath = cache.mapData['MapPathData'][mapId]
+    mapPath = CacheContorl.mapData['MapPathData'][mapId]
     mapSceneId = judgeSonMapInMap(mapPath, sceneInPath)
     return mapSceneId
 
 # 获取从场景路径获取对应地图下路径
 def getMapScenePathForScenePath(mapId,scenePath):
-    mapPath = cache.mapData['MapPathData'][mapId]
+    mapPath = CacheContorl.mapData['MapPathData'][mapId]
     sceneInPath = os.path.abspath(os.path.join(scenePath, '..'))
     if mapPath == sceneInPath:
         nowPath = scenePath
@@ -202,7 +195,7 @@ def getMapScenePathForScenePath(mapId,scenePath):
 # 获取地图场景id对应的全剧场景id
 def getSceneIdForMapSceneId(mapId,mapSceneId):
     scenePath = getScenePathForMapSceneId(mapId,mapSceneId)
-    sceneData = cache.sceneData.copy()
+    sceneData = CacheContorl.sceneData.copy()
     scenePathData = sceneData['ScenePathData']
     sceneId = scenePathData.index(scenePath)
     return sceneId
@@ -228,7 +221,7 @@ def judgeSonMapInMap(mapPath,sonMapPath):
 def getScenePathForMapSceneId(mapId,mapSceneId):
     mapId = int(mapId)
     mapSceneId = str(mapSceneId)
-    mapPath = cache.mapData['MapPathData'][mapId]
+    mapPath = CacheContorl.mapData['MapPathData'][mapId]
     scenePath = os.path.join(mapPath,mapSceneId)
     scenePath = getScenePathForTrue(scenePath)
     return scenePath
@@ -236,7 +229,7 @@ def getScenePathForMapSceneId(mapId,mapSceneId):
 # 从场景路径查找地图场景id
 def getMapSceneIdForScenePath(mapId,scenePath):
     mapId = int(mapId)
-    mapPath = cache.mapData['MapPathData'][mapId]
+    mapPath = CacheContorl.mapData['MapPathData'][mapId]
     sceneId = judgeSonMapInMap(mapPath,scenePath)
     return sceneId
 
@@ -253,7 +246,7 @@ def getScenePathForTrue(scenePath):
 def getSceneDataForPath(scenePath):
     if 'Scene.json' in os.listdir(scenePath):
         scenePath = os.path.join(scenePath,'Scene.json')
-        sceneData = data._loadjson(scenePath)
+        sceneData = GameData._loadjson(scenePath)
     else:
         scenePath = os.path.join(scenePath,'0')
         sceneData = getSceneDataForPath(scenePath)
@@ -269,11 +262,11 @@ def initSceneData():
             filename = filenames[i]
             if filename == 'Scene.json':
                 scenePath = os.path.join(dirpath,filename)
-                scene = data._loadjson(scenePath)
+                scene = GameData._loadjson(scenePath)
                 sceneData.append(scene)
                 scenePathData.append(dirpath)
                 scenePlayerData.append([])
-    cache.sceneData = {"SceneData":sceneData,"ScenePathData":scenePathData,"ScenePlayerData":scenePlayerData}
+    CacheContorl.sceneData = {"SceneData":sceneData,"ScenePathData":scenePathData,"ScenePlayerData":scenePlayerData}
 
 # 载入所有地图数据
 def initMapData():
@@ -287,24 +280,24 @@ def initMapData():
                 mapDataPath = os.path.join(dirpath,'Map.json')
                 openMap = open(mapPath)
                 mapText = openMap.read()
-                mapJsonData = data._loadjson(mapDataPath)
+                mapJsonData = GameData._loadjson(mapDataPath)
                 mapData.append(mapJsonData)
                 mapTextData.append(mapText)
                 mapPathData.append(dirpath)
-    cache.mapData = {"MapData":mapData,"MapPathData":mapPathData,"MapTextData":mapTextData}
+    CacheContorl.mapData = {"MapData":mapData,"MapPathData":mapPathData,"MapTextData":mapTextData}
 
 # 初始化场景上的角色
 def initScanePlayerData():
-    scenePlayerData = cache.sceneData['ScenePlayerData']
+    scenePlayerData = CacheContorl.sceneData['ScenePlayerData']
     for i in range(0,len(scenePlayerData)):
         scenePlayerData[i] = []
-    cache.sceneData['ScenePlayerData'] = scenePlayerData
+    CacheContorl.sceneData['ScenePlayerData'] = scenePlayerData
 
 # 获取场景上所有角色的数据
 def getScenePlayerData(sceneId):
-    playerData = cache.playObject['object']
+    playerData = CacheContorl.playObject['object']
     scenePlayerData = []
-    scenePlayerDataList = cache.sceneData['ScenePlayerData'][sceneId]
+    scenePlayerDataList = CacheContorl.sceneData['ScenePlayerData'][sceneId]
     for i in scenePlayerDataList:
         scenePlayerData.append(playerData[i])
     return scenePlayerData
@@ -327,7 +320,7 @@ def getPlayerIdByPlayerName(playerName,sceneId):
 
 # 获取场景上所有角色的id列表
 def getScenePlayerIdList(sceneId):
-    scenePlayerDataList = cache.sceneData['ScenePlayerData'][sceneId]
+    scenePlayerDataList = CacheContorl.sceneData['ScenePlayerData'][sceneId]
     scenePlayerIdList = []
     for i in scenePlayerDataList:
         scenePlayerIdList.append(i)

@@ -1,24 +1,18 @@
 # -*- coding: UTF-8 -*-
 import os
-from tkinter import *
-from tkinter import ttk
 import json
 import uuid
-import core.GameConfig as config
-import core.TextLoading as textload
-import core.CacheContorl as cache
-import core.SettingFrame as settingframe
-import core.TextHandle as text
-from tkinter import font
+from tkinter import ttk,Tk,Text,StringVar,FALSE,Menu,END,N,W,E,S,VERTICAL,font
+from core import GameConfig,TextLoading,CacheContorl,SettingFrame,TextHandle
 
 def closeWindow():
     os._exit(0)
 
 # 显示主框架
-gameName = config.game_name
+gameName = GameConfig.game_name
 root = Tk()
 root.title(gameName)
-root.geometry(config.window_width + 'x' + config.window_hight + '+0+0')
+root.geometry(GameConfig.window_width + 'x' + GameConfig.window_hight + '+0+0')
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 root.protocol('WM_DELETE_WINDOW', closeWindow)
@@ -28,8 +22,8 @@ mainframe.columnconfigure(0, weight=1)
 mainframe.rowconfigure(0, weight=1)
 
 # 显示窗口
-textbox = Text(mainframe, width=config.textbox_width, height=config.textbox_hight,
-               highlightbackground = config.background_color,bd = 0)
+textbox = Text(mainframe, width=GameConfig.textbox_width, height=GameConfig.textbox_hight,
+               highlightbackground = GameConfig.background_color,bd = 0)
 textbox.grid(column=0, row=0, sticky=(N, W, E, S))
 
 # 垂直滚动条
@@ -38,12 +32,12 @@ textbox.configure(yscrollcommand=s_vertical.set)
 s_vertical.grid(column=1, row=0, sticky=(N, E, S),rowspan=2)
 
 # 输入框背景容器
-orderFontData = textload.getTextData(textload.fontListId,'order')
-inputBackgroundBox = Text(mainframe,highlightbackground = config.background_color,background = config.background_color,bd = 0)
+orderFontData = TextLoading.getTextData(TextLoading.fontListId,'order')
+inputBackgroundBox = Text(mainframe,highlightbackground = GameConfig.background_color,background = GameConfig.background_color,bd = 0)
 inputBackgroundBox.grid(column=0, row=1, sticky=(W, E, S))
 
-cursorText = config.cursor
-cursorWidth = text.getTextIndex(cursorText)
+cursorText = GameConfig.cursor
+cursorWidth = TextHandle.getTextIndex(cursorText)
 inputBackgroundBoxCursor = Text(inputBackgroundBox,width=cursorWidth, height=1,highlightbackground = orderFontData['background'],background = orderFontData['background'],bd = 0)
 inputBackgroundBoxCursor.grid(column=0, row=0, sticky=(W, E, S))
 inputBackgroundBoxCursor.insert('end',cursorText)
@@ -83,7 +77,7 @@ estyle.configure("EntryStyle.TEntry",
                  )
 order = StringVar()
 orderFont = font.Font(family = orderFontData['font'],size = orderFontData['fontSize'])
-inputboxWidth = int(config.textbox_width) - cursorWidth
+inputboxWidth = int(GameConfig.textbox_width) - cursorWidth
 inputbox = ttk.Entry(inputBackgroundBox, style = 'EntryStyle.TEntry',textvariable=order,font = orderFont,width = inputboxWidth)
 inputbox.grid(column=1, row=0, sticky=(N, E, S))
 
@@ -95,25 +89,25 @@ root['menu'] = menubar
 menufile = Menu(menubar)
 menutest = Menu(menubar)
 menuother = Menu(menubar)
-menubar.add_cascade(menu=menufile, label=textload.getTextData(textload.menuId,textload.menuFile))
-menubar.add_cascade(menu=menuother, label=textload.getTextData(textload.menuId,textload.menuOther))
+menubar.add_cascade(menu=menufile, label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuFile))
+menubar.add_cascade(menu=menuother, label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuOther))
 
 def reset(*args):
-    cache.flowContorl['restartGame'] = 1
+    CacheContorl.flowContorl['restartGame'] = 1
     send_input()
 
 def quit(*args):
-    cache.flowContorl['quitGame'] = 1
+    CacheContorl.flowContorl['quitGame'] = 1
     send_input()
 
 def setting(*args):
-    settingframe.openSettingFrame()
+    SettingFrame.openSettingFrame()
 
-menufile.add_command(label=textload.getTextData(textload.menuId,textload.menuRestart),command=reset)
-menufile.add_command(label=textload.getTextData(textload.menuId,textload.menuQuit),command=quit)
+menufile.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuRestart),command=reset)
+menufile.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuQuit),command=quit)
 
-menuother.add_command(label=textload.getTextData(textload.menuId,textload.menuSetting),command=setting)
-menuother.add_command(label=textload.getTextData(textload.menuId,textload.menuAbout))
+menuother.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuSetting),command=setting)
+menuother.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuAbout))
 
 input_event_func = None
 send_order_state = False
@@ -122,19 +116,19 @@ send_order_state = False
 def send_input(*args):
     global input_event_func
     order = _getorder()
-    if len(cache.inputCache) >= 21:
+    if len(CacheContorl.inputCache) >= 21:
         if(order) == '':
             pass
         else:
-            del cache.inputCache[0]
-            cache.inputCache.append(order)
-            cache.inputPosition['position'] = 0
+            del CacheContorl.inputCache[0]
+            CacheContorl.inputCache.append(order)
+            CacheContorl.inputPosition['position'] = 0
     else:
         if (order) == '':
             pass
         else:
-            cache.inputCache.append(order)
-            cache.inputPosition['position'] = 0
+            CacheContorl.inputCache.append(order)
+            CacheContorl.inputPosition['position'] = 0
     input_event_func(order)
     _clearorder()
 
@@ -263,12 +257,12 @@ def _io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutt
     def enter_func(*args):
         textbox.tag_remove(normal_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
         textbox.tag_add(on_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
-        cache.wframeMouse['mouseLeaveCmd'] = 0
+        CacheContorl.wframeMouse['mouseLeaveCmd'] = 0
 
     def leave_func(*args):
         textbox.tag_add(normal_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
         textbox.tag_remove(on_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
-        cache.wframeMouse['mouseLeaveCmd'] = 1
+        CacheContorl.wframeMouse['mouseLeaveCmd'] = 1
 
     textbox.tag_bind(cmd_tagname, '<1>', send_cmd)
     textbox.tag_bind(cmd_tagname, '<Enter>', enter_func)

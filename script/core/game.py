@@ -1,11 +1,6 @@
 # -*- coding: UTF-8 -*-
-import core.data
-import core.flow
-import core.pycfg
-import core.pyio as pyio
-import core.Event as event
-import core.KeyListionEvent as keylistion
-import design.MapHandle as maphandle
+from core import GameData,FlowHandle,pyio,Event,KeyListionEvent
+from design import MapHandle
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'
@@ -19,22 +14,22 @@ def init(main_flow):
     global def_style
     pyio.clear_screen()
     pyio.clearorder()
-    core.flow.cmd_clear()
+    FlowHandle.cmd_clear()
     # 载入数据库数据
-    core.data.init()
+    GameData.init()
     # 事件载入
-    event.load_event_file()
+    Event.load_event_file()
     # 载入按键监听
-    keylistion.onWFrameListion()
+    KeyListionEvent.onWFrameListion()
     # 设置背景颜色
-    pyio.set_background(core.data.gamedata()['core_cfg']['background_color'])
+    pyio.set_background(GameData.gamedata()['core_cfg']['background_color'])
     # 初始化字体
     pyio.init_style()
     # 初始化地图数据
-    maphandle.initSceneData()
-    maphandle.initMapData()
+    MapHandle.initSceneData()
+    MapHandle.initMapData()
 
-    core.flow.reset_func = reset
+    FlowHandle.reset_func = reset
 
     global _main_flow
     _main_flow = main_flow
@@ -47,8 +42,8 @@ def init(main_flow):
                 main_flow()
                 _have_run=True
             askfor_order()
-            core.flow.call_default_flow()
-            if core.flow.exit_flag==True:
+            FlowHandle.call_default_flow()
+            if FlowHandle.exit_flag==True:
                 break
 
     run_main_flow()
@@ -57,7 +52,7 @@ def init(main_flow):
 def run(main_func):
     def _init():
         init(main_func)
-    core.pyio.run(_init)
+    pyio.run(_init)
 
 # 向控制台输入信息
 def console_log(string):
@@ -73,20 +68,20 @@ def reset():
     init(_main_flow)
 
 # 请求输入命令
-askfor_order = core.flow.order_deal
+askfor_order = FlowHandle.order_deal
 
 # 请求输入一个字符串
-askfor_str = core.flow.askfor_str
+askfor_str = FlowHandle.askfor_str
 
 # 请求输入一个数字
-askfor_Int = core.flow.askfor_Int
-askfor_All = core.flow.askfor_All
+askfor_Int = FlowHandle.askfor_Int
+askfor_All = FlowHandle.askfor_All
 
 # 设置尾命令处理函数
-set_deal_cmd_func=core.flow.set_tail_deal_cmd_func
+set_deal_cmd_func = FlowHandle.set_tail_deal_cmd_func
 
 # 设置尾命令处理函数装饰器
-set_deal_cmd_func_deco=core.flow.deco_set_tail_deal_cmd_func
+set_deal_cmd_func_deco = FlowHandle.deco_set_tail_deal_cmd_func
 
 # 返回主数据集合
-data = core.data.gamedata()
+data = GameData.gamedata()

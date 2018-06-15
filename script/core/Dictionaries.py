@@ -1,4 +1,4 @@
-import core.CacheContorl as cache
+from core import CacheContorl
 
 # 转义文本处理
 def handleText(string):
@@ -10,8 +10,8 @@ def handleText(string):
 # 转义当前访问对象姓名
 def objectName(string):
     try:
-        objectId = cache.playObject['objectId']
-        objectname = cache.playObject['object'][objectId]['Name']
+        objectId = CacheContorl.playObject['objectId']
+        objectname = CacheContorl.playObject['object'][objectId]['Name']
         string = string.replace('{Name}', objectname)
         return string
     except KeyError:
@@ -20,8 +20,8 @@ def objectName(string):
 # 转义当前访问对象昵称
 def objectNickName(string):
     try:
-        objectId = cache.playObject['objectId']
-        objectname = cache.playObject['object'][objectId]['NickName']
+        objectId = CacheContorl.playObject['objectId']
+        objectname = CacheContorl.playObject['object'][objectId]['NickName']
         string = string.replace('{NickName}', objectname)
         return string
     except KeyError:
@@ -30,8 +30,8 @@ def objectNickName(string):
 # 转义当前访问对象自称
 def objectSelfName(string):
     try:
-        objectId = cache.playObject['objectId']
-        objectselfname = cache.playObject['object'][objectId]['SelfName']
+        objectId = CacheContorl.playObject['objectId']
+        objectselfname = CacheContorl.playObject['object'][objectId]['SelfName']
         string = string.replace('{SelfName}',objectselfname)
         return string
     except KeyError:

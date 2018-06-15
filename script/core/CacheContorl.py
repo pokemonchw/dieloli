@@ -1,4 +1,4 @@
-import core.TextLoading as textload
+from core import TextLoading
 
 # 流程用变量组
 flowContorl = {}
@@ -13,7 +13,7 @@ cmd_map = {}
 playObject = {}
 
 # 默认属性模板数据读取
-temObjectDefault = textload.getTextData(textload.roleId,'Default')
+temObjectDefault = TextLoading.getTextData(TextLoading.roleId,'Default')
 
 # 默认属性模板数据备份
 temporaryObjectBak = {'Name':temObjectDefault['Name'],

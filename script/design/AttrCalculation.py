@@ -1,10 +1,10 @@
-import core.data as data
+import core.GameData as data
 import os
 import random
-import core.CacheContorl as cache
-import core.ValueHandle as valuehandle
-from core.GameConfig import language
-from core.pycfg import gamepath
+from core import CacheContorl,ValueHandle,GameConfig,GamePathConfig
+
+language = GameConfig.language
+gamepath = GamePathConfig.gamepath
 
 templatePath = os.path.join(gamepath,'data',language,'AttrTemplate.json')
 templateData = data._loadjson(templatePath)
@@ -23,7 +23,7 @@ def getFeaturesList():
 
 # 获取年龄模板
 def getAgeTemList():
-    list = valuehandle.dictKeysToList(templateData["AgeTem"])
+    list = ValueHandle.dictKeysToList(templateData["AgeTem"])
     return list
 
 # 获取刻应列表
@@ -193,7 +193,7 @@ def setDefaultCache():
     for i in range(0,len(cacheList)):
         try:
             cacheText = featuresTemData[cacheList[i]]
-            cache.featuresList[cacheList[i]] = cacheText
+            CacheContorl.featuresList[cacheList[i]] = cacheText
         except:
             pass
 
@@ -207,7 +207,7 @@ def setSexCache(SexName):
     for i in range(0,len(cacheList)):
         try:
             cacheText = featuresTemData[cacheList[i]]
-            cache.featuresList[cacheList[i]] = cacheText
+            CacheContorl.featuresList[cacheList[i]] = cacheText
         except:
             pass
 
@@ -225,7 +225,7 @@ def setAddFeatures(featuresData):
     for i in range(0,len(cacheList)):
         try:
             cacheText = featuresData[cacheList[i]]
-            cache.featuresList[cacheList[i]] = cacheText
+            CacheContorl.featuresList[cacheList[i]] = cacheText
         except KeyError:
             pass
     pass
@@ -234,25 +234,25 @@ def setAddFeatures(featuresData):
 def setAttrDefault(playerId):
     temList = getTemList()
     playerId = str(playerId)
-    playerSex = cache.playObject['object'][playerId]['Sex']
+    playerSex = CacheContorl.playObject['object'][playerId]['Sex']
     temId = temList[playerSex]
     temData = getAttr(temId)
-    cache.temporaryObject['Age'] = temData['Age']
-    cache.temporaryObject['SexExperience'] = temData['SexExperience']
-    cache.temporaryObject['SexGrade'] = temData['SexGrade']
-    cache.temporaryObject['Engraving'] = temData['Engraving']
-    cache.temporaryObject['Features'] = cache.featuresList.copy()
-    cache.temporaryObject['Clothing'] = temData['Clothing']
-    cache.temporaryObject['SexItem'] = temData['SexItem']
-    cache.temporaryObject['Gold'] = temData['Gold']
+    CacheContorl.temporaryObject['Age'] = temData['Age']
+    CacheContorl.temporaryObject['SexExperience'] = temData['SexExperience']
+    CacheContorl.temporaryObject['SexGrade'] = temData['SexGrade']
+    CacheContorl.temporaryObject['Engraving'] = temData['Engraving']
+    CacheContorl.temporaryObject['Features'] = CacheContorl.featuresList.copy()
+    CacheContorl.temporaryObject['Clothing'] = temData['Clothing']
+    CacheContorl.temporaryObject['SexItem'] = temData['SexItem']
+    CacheContorl.temporaryObject['Gold'] = temData['Gold']
 
 # 初始化角色属性模板
 def initTemporaryObject():
-    cache.temporaryObject = cache.temporaryObjectBak.copy()
+    CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
     pass
 
 # 确认角色最终属性生成
 def setAttrOver(playerId):
     playerId = str(playerId)
-    cache.playObject['object'][playerId] = cache.temporaryObject.copy()
-    cache.featuresList = {}
+    CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+    CacheContorl.featuresList = {}

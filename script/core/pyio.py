@@ -1,11 +1,9 @@
 # -*- coding: UTF-8 -*-
-import core.pycfg
-import core.winframe as winframe
 import threading
 import queue
 import json
 import sys
-import core.GameConfig as config
+from core import GamePathConfig,MainFrame,GameConfig
 sys_print = print
 
 sys.setrecursionlimit(100000)
@@ -21,8 +19,8 @@ def _input_evnet_set(order):
 def getorder():
     return _order_queue.get()
 
-winframe.bind_return(_input_evnet_set)
-winframe.bind_queue(_send_queue)
+MainFrame.bind_return(_input_evnet_set)
+MainFrame.bind_queue(_send_queue)
 
 def _get_input_event():
     return input_evnet
@@ -31,7 +29,7 @@ def run(open_func):
     global _flowthread
     _flowthread = threading.Thread(target=open_func, name='flowthread')
     _flowthread.start()
-    core.winframe._run()
+    MainFrame._run()
 
 def putQ(message):
     _send_queue.put_nowait(message)
@@ -144,13 +142,13 @@ def init_style():
     def new_style_def(style_name, foreground, background, font, fontsize,bold, underline, italic):
         frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic)
     style_def = new_style_def
-    styleList = config.getFontDataList()
-    standardData = config.getFontData('standard')
+    styleList = GameConfig.getFontDataList()
+    standardData = GameConfig.getFontData('standard')
     styleDataList = ['foreground','background','font','fontSize','bold','underline','italic']
     defStyleList = {}
     for i in range(0,len(styleList)):
         styleName = styleList[i]
-        styleData = config.getFontData(styleName)
+        styleData = GameConfig.getFontData(styleName)
         for index in range(0,len(styleDataList)):
             try:
                 styleDataValue = styleData[styleDataList[index]]

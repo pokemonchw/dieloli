@@ -1,22 +1,20 @@
 # -*- coding: UTF-8 -*-
 import os
-import core.PyCmd as pycmd
-import flow.CreatorPlayer as creatorplayer
-import core.CacheContorl as cache
-import flow.SaveHandleFrame as savehandleframe
-import Panel.MainFlowPanel as mainflowpanel
 import time
+from core import PyCmd,CacheContorl
+from flow import CreatorPlayer,SaveHandleFrame
+from Panel import MainPanel
 
 # 启动游戏界面
 def open_func():
-    mainflowpanel.loadGamePanel()
+    MainPanel.loadGamePanel()
     time.sleep(1)
     main_func()
     pass
 
 # 主界面
 def main_func():
-    ans = mainflowpanel.gameMainPanel()
+    ans = MainPanel.gameMainPanel()
     if ans == 0:
         newgame_func()
     elif ans == 1:
@@ -26,15 +24,15 @@ def main_func():
 
 # 主界面新建游戏调用
 def newgame_func():
-    pycmd.clr_cmd()
-    cache.temporaryObject = cache.temporaryObjectBak.copy()
-    creatorplayer.inputName_func()
+    PyCmd.clr_cmd()
+    CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
+    CreatorPlayer.inputName_func()
     pass
 
 # 主界面读取游戏调用
 def loadgame_func():
-    pycmd.clr_cmd()
-    savehandleframe.loadSave_func('MainFlowPanel')
+    PyCmd.clr_cmd()
+    SaveHandleFrame.loadSave_func('MainFlowPanel')
     pass
 
 # 主界面退出游戏调用

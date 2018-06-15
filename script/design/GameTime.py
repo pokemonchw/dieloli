@@ -1,133 +1,131 @@
-import core.CacheContorl as cache
-import core.GameConfig as gameconfig
-import core.TextLoading as textload
+from core import CacheContorl,GameConfig,TextLoading
 
 # 时间初始化
 def initTime():
-    cache.gameTime['year'] = int(gameconfig.year)
-    cache.gameTime['month'] = int(gameconfig.month)
-    cache.gameTime['day'] = int(gameconfig.day)
-    cache.gameTime['hour'] = int(gameconfig.hour)
-    cache.gameTime['minute'] = int(gameconfig.minute)
+    CacheContorl.gameTime['year'] = int(GameConfig.year)
+    CacheContorl.gameTime['month'] = int(GameConfig.month)
+    CacheContorl.gameTime['day'] = int(GameConfig.day)
+    CacheContorl.gameTime['hour'] = int(GameConfig.hour)
+    CacheContorl.gameTime['minute'] = int(GameConfig.minute)
     setSubMinute(0)
     pass
 
 # 获取时间信息文本
 def getDateText(gameTimeData = None):
     if gameTimeData == None:
-        gameTimeData = cache.gameTime
+        gameTimeData = CacheContorl.gameTime
     else:
         pass
-    dateText = textload.getTextData(textload.stageWordId,'65')
+    dateText = TextLoading.getTextData(TextLoading.stageWordId,'65')
     gameYear = str(gameTimeData['year'])
     gameMonth = str(gameTimeData['month'])
     gameDay = str(gameTimeData['day'])
     gameHour = str(gameTimeData['hour'])
     gameMinute = str(gameTimeData['minute'])
-    gameYearText = gameYear + textload.getTextData(textload.stageWordId,'59')
-    gameMonthText = gameMonth + textload.getTextData(textload.stageWordId,'60')
-    gameDayText = gameDay + textload.getTextData(textload.stageWordId,'61')
-    gameHourText = gameHour + textload.getTextData(textload.stageWordId,'62')
-    gameMinuteText = gameMinute + textload.getTextData(textload.stageWordId,'63')
+    gameYearText = gameYear + TextLoading.getTextData(TextLoading.stageWordId,'59')
+    gameMonthText = gameMonth + TextLoading.getTextData(TextLoading.stageWordId,'60')
+    gameDayText = gameDay + TextLoading.getTextData(TextLoading.stageWordId,'61')
+    gameHourText = gameHour + TextLoading.getTextData(TextLoading.stageWordId,'62')
+    gameMinuteText = gameMinute + TextLoading.getTextData(TextLoading.stageWordId,'63')
     dateText = dateText + gameYearText + gameMonthText + gameDayText + gameHourText + gameMinuteText
     return dateText
 
 # 获取星期文本
 def getWeekDayText():
     weekDay = getWeekDate()
-    weekDateData = textload.getTextData(textload.messageId,'19')
+    weekDateData = TextLoading.getTextData(TextLoading.messageId,'19')
     return weekDateData[weekDay]
 
 # 增加分钟
 def setSubMinute(subMinute):
-    cacheMinute = cache.gameTime['minute']
+    cacheMinute = CacheContorl.gameTime['minute']
     cacheMinute = int(cacheMinute) + int(subMinute)
     if cacheMinute >= 60:
         subHour = cacheMinute // 60
         cacheMinute = cacheMinute % 60
-        cache.gameTime['minute'] = cacheMinute
+        CacheContorl.gameTime['minute'] = cacheMinute
         setSubHour(subHour)
     else:
-        cache.gameTime['minute'] = cacheMinute
+        CacheContorl.gameTime['minute'] = cacheMinute
 
 # 增加小时
 def setSubHour(subHour):
-    cacheHour = cache.gameTime['hour']
+    cacheHour = CacheContorl.gameTime['hour']
     cacheHour = int(cacheHour) + int(subHour)
     if cacheHour >= 24:
         subDay = cacheHour // 24
         cacheHour = cacheHour % 24
-        cache.gameTime['hour'] = cacheHour
+        CacheContorl.gameTime['hour'] = cacheHour
         setSubDay(subDay)
     else:
-        cache.gameTime['hour'] = cacheHour
+        CacheContorl.gameTime['hour'] = cacheHour
 
 # 增加天数
 def setSubDay(subDay):
-    cacheDay = cache.gameTime['day']
-    cacheMonth = cache.gameTime['month']
+    cacheDay = CacheContorl.gameTime['day']
+    cacheMonth = CacheContorl.gameTime['month']
     cacheMonth = int(cacheMonth)
     cacheDay = int(cacheDay) + int(subDay)
     if cacheMonth == 1 or 3 or 5 or 7 or 8 or 10 or 12:
         if cacheDay >= 31:
             setSubMonth("1")
             if cacheDay // 31 > 0:
-                cache.gameTime['day'] = cacheDay - 31
+                CacheContorl.gameTime['day'] = cacheDay - 31
                 setSubDay("0")
             else:
-                cache.gameTime['day'] = cacheDay
+                CacheContorl.gameTime['day'] = cacheDay
         else:
-            cache.gameTime['day'] = cacheDay
+            CacheContorl.gameTime['day'] = cacheDay
     elif cacheMonth == 4 or 6 or 9 or 11:
         if cacheDay >= 30:
             setSubMonth("1")
             if cacheDay // 30 > 0:
-                cache.gameTime['day'] = cacheDay - 30
+                CacheContorl.gameTime['day'] = cacheDay - 30
                 setSubDay("0")
             else:
-                cache.gameTime['day'] = cacheDay
+                CacheContorl.gameTime['day'] = cacheDay
         else:
-            cache.gameTime['day'] = cacheDay
+            CacheContorl.gameTime['day'] = cacheDay
     elif cacheMonth == 2:
         leapYear = judgeLeapYear()
         if leapYear == "1":
             if cacheDay > 29:
                 setSubMonth("1")
-                cache.gameTime['day'] = cacheDay - 29
+                CacheContorl.gameTime['day'] = cacheDay - 29
                 if cacheDay // 29 > 0:
                     setSubDay("0")
             else:
-                cache.gameTime['day'] = cacheDay
+                CacheContorl.gameTime['day'] = cacheDay
         else:
             if cacheDay > 28:
                 setSubMonth("1")
-                cache.gameTime['day'] = cacheDay - 28
+                CacheContorl.gameTime['day'] = cacheDay - 28
                 if cacheDay // 28 > 0:
                     setSubDay("0")
             else:
-                cache.gameTime['day'] = cacheDay
+                CacheContorl.gameTime['day'] = cacheDay
 
 #增加月数
 def setSubMonth(subMonth):
-    cacheMonth = cache.gameTime['month']
+    cacheMonth = CacheContorl.gameTime['month']
     cacheMonth = int(cacheMonth) + int(subMonth)
     if cacheMonth > 12:
         subYear = cacheMonth // 12
         cacheMonth = cacheMonth % 12
-        cache.gameTime['month'] = cacheMonth
+        CacheContorl.gameTime['month'] = cacheMonth
         setSubYear(subYear)
     else:
-        cache.gameTime['month'] = cacheMonth
+        CacheContorl.gameTime['month'] = cacheMonth
 
 # 增加年数
 def setSubYear(subMonth):
-    cacheYear = cache.gameTime['year']
+    cacheYear = CacheContorl.gameTime['year']
     cacheYear = int(cacheYear) + int(subMonth)
-    cache.gameTime['year'] = cacheYear
+    CacheContorl.gameTime['year'] = cacheYear
 
 # 计算星期
 def getWeekDate():
-    gameTime = cache.gameTime
+    gameTime = CacheContorl.gameTime
     cacheYear = int(gameTime['year'])
     cacheYear = cacheYear - int(cacheYear / 100) * 100
     cacheCentury = int(cacheYear/100)
@@ -149,7 +147,7 @@ def getWeekDate():
 
 # 判断当前是否是润年
 def judgeLeapYear():
-    cacheYear = int(cache.gameTime['year'])
+    cacheYear = int(CacheContorl.gameTime['year'])
     if cacheYear % 3200 == 0:
         if cacheYear % 172800 == 0:
             return "1"

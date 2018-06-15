@@ -1,12 +1,5 @@
 import time
-import core.GameConfig as config
-import core.TextHandle as text
-import core.flow as flow
-import core.pyio as pyio
-import core.CacheContorl as cache
-import core.Dictionaries as doctionaries
-import core.RichText as richtext
-import core.TextLoading as textload
+from core import GameConfig,TextHandle,FlowHandle,pyio,CacheContorl,Dictionaries,RichText,TextLoading
 
 last_char = '\n'
 
@@ -15,15 +8,15 @@ def_style = pyio.style_def
 
 #基本输出
 def p(string, style='standard'):
-    barlist = textload.getTextData(textload.barListId,'barlist')
-    styleList = richtext.setRichTextPrint(string, style)
+    barlist = TextLoading.getTextData(TextLoading.barListId,'barlist')
+    styleList = RichText.setRichTextPrint(string, style)
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
-    string = richtext.removeRichCache(string)
+    string = RichText.removeRichCache(string)
     for i in range(0,len(string)):
         if styleList[i] in barlist:
-            styledata = textload.getTextData(textload.barListId,styleList[i])
+            styledata = TextLoading.getTextData(TextLoading.barListId,styleList[i])
             truebar = styledata['truebar']
             nullbar = styledata['nullbar']
             if string[i] == '0':
@@ -42,42 +35,42 @@ def pimage(imageName,imagePath=''):
 
 # 小标题输出
 def plt(string):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
     string = str(string)
-    string = doctionaries.handleText(string)
+    string = Dictionaries.handleText(string)
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
-    width = config.text_width
-    textWidth = text.getTextIndex(string)
+    width = GameConfig.text_width
+    textWidth = TextHandle.getTextIndex(string)
     lineWidth = int(int(width)/2 - int(textWidth)/2 - 2)
     pl('='*lineWidth + '<littletitle>▢' + string + '▢</littletitle>' + '='*lineWidth)
 
 # 子标题输出
 def sontitleprint(string):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
     string = string
-    string = doctionaries.handleText(string)
+    string = Dictionaries.handleText(string)
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
-    width = config.text_width
-    textWidth = text.getTextIndex(string)
+    width = GameConfig.text_width
+    textWidth = TextHandle.getTextIndex(string)
     lineWidth = int(int(width)/4)
     lineWidthFix = int(int(width)/4 - int(textWidth))
     pl(':' * lineWidthFix + '<sontitle>' + string + '</sontitle>' + ':' * lineWidth * 3)
 
 #输出一行
 def pl(string='', style='standard'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
@@ -91,39 +84,39 @@ def pl(string='', style='standard'):
 
 #输出分割线
 def pline(sample='=', style='standard'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
-    textWidth = config.text_width
+    textWidth = GameConfig.text_width
     pl(sample * textWidth,style)
 
 def plittleline(sample = ':',style = 'standard'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
-    textWidth = config.text_width
+    textWidth = GameConfig.text_width
     pl(sample * textWidth, style)
 
 # 输出页数线
 def printPageLine(sample = ':',string = '',style = 'standard'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
-    textWidth = int(config.text_width)
-    stringWidth = int(text.getTextIndex(string))
+    textWidth = int(GameConfig.text_width)
+    stringWidth = int(TextHandle.getTextIndex(string))
     fixText = sample * int(textWidth / 2 - stringWidth / 2)
     stringText = fixText + string + fixText
     p(stringText,style)
 
 #输出警告
 def pwarn(string, style='warning'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
@@ -134,34 +127,34 @@ def pwarn(string, style='warning'):
 
 #输出并等待
 def pwait(string, style='standard'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
     p(string, style)
-    flow.askfor_wait()
+    FlowHandle.askfor_wait()
 
 #输出一行并等待
 def plwait(string='', style='standard'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
     pl(string, style)
-    flow.askfor_wait()
+    FlowHandle.askfor_wait()
 
 #逐字输出
 def pobo(sleepTime,string, style='standard'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
-    cache.wframeMouse['wFrameUp'] = 0
-    styleList = richtext.setRichTextPrint(string,style)
-    styleNameList = config.getFontDataList()
+    CacheContorl.wframeMouse['wFrameUp'] = 0
+    styleList = RichText.setRichTextPrint(string,style)
+    styleNameList = GameConfig.getFontDataList()
     for i in range(0,len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'
@@ -174,27 +167,27 @@ def pobo(sleepTime,string, style='standard'):
     for i in range(0,index):
         p(string[i],styleList[i])
         time.sleep(sleepTime)
-        if cache.wframeMouse['wFrameUp'] == 1:
+        if CacheContorl.wframeMouse['wFrameUp'] == 1:
             indexI = i + 1
-            cache.wframeMouse['wFrameUp'] = 2
+            CacheContorl.wframeMouse['wFrameUp'] = 2
             for indexI in range(indexI,index):
                 p(string[indexI],styleList[indexI])
-            if cache.wframeMouse['wFrameLineState'] == 2:
-                cache.wframeMouse['wFrameLinesUp'] = 2
+            if CacheContorl.wframeMouse['wFrameLineState'] == 2:
+                CacheContorl.wframeMouse['wFrameLinesUp'] = 2
             break
 
 # 列表输出
 def plist(stringList,stringColumn = 1,stringSize = 'left'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
-    textWidth = config.text_width
+    textWidth = GameConfig.text_width
     stringIndex = int(textWidth / stringColumn)
     for i in range(0, len(stringList)):
         stringText = stringList[i]
-        stringIdIndex = text.getTextIndex(stringList[i])
+        stringIdIndex = TextHandle.getTextIndex(stringList[i])
         if stringSize == 'left':
             stringTextFix = ' ' * (stringIndex - stringIdIndex)
             stringText = stringText + stringTextFix
@@ -214,25 +207,25 @@ def plist(stringList,stringColumn = 1,stringSize = 'left'):
 
 #切换下一屏
 def pnextscreen():
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
-    p('\n' * config.text_hight)
+    p('\n' * GameConfig.text_hight)
 
 #多行居中逐字输出
 def lcp(sleepTime,string='',style='standard'):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
-    cache.wframeMouse['wFrameLineState'] = 1
+    CacheContorl.wframeMouse['wFrameLineState'] = 1
     string = str(string)
     stringlist = string.split('\n')
-    width = config.text_width
-    styleNameList = config.getFontDataList()
+    width = GameConfig.text_width
+    styleNameList = GameConfig.getFontDataList()
     stringCenterList = ''
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
@@ -245,9 +238,9 @@ def lcp(sleepTime,string='',style='standard'):
             stringCenterList = stringlist
     for i in range(0,len(stringlist)):
         widthI = int(width) / 2
-        countIndex = text.getTextIndex(stringCenterList[i])
+        countIndex = TextHandle.getTextIndex(stringCenterList[i])
         countI = int(countIndex) / 2
-        if cache.wframeMouse['wFrameRePrint'] == 1:
+        if CacheContorl.wframeMouse['wFrameRePrint'] == 1:
             p('\n')
             p(' ' * int((widthI - countI)))
             p(stringlist[i])
@@ -255,25 +248,25 @@ def lcp(sleepTime,string='',style='standard'):
             p(' ' * int((widthI - countI)))
             pobo(sleepTime, stringlist[i])
             p('\n')
-            if cache.wframeMouse['wFrameLinesUp'] == 1:
+            if CacheContorl.wframeMouse['wFrameLinesUp'] == 1:
                 indexIUp = i + 1
-                cache.wframeMouse['wFrameLinesUp'] = 2
+                CacheContorl.wframeMouse['wFrameLinesUp'] = 2
                 for indexIUp in range(indexIUp, len(stringlist)):
-                    pl(text.align(stringlist[indexIUp], 'center'), style)
-                cache.wframeMouse['wFrameLineState'] = 2
+                    pl(TextHandle.align(stringlist[indexIUp], 'center'), style)
+                CacheContorl.wframeMouse['wFrameLineState'] = 2
                 break
-    cache.wframeMouse['wFrameRePrint'] = 0
+    CacheContorl.wframeMouse['wFrameRePrint'] = 0
 
 #多行回车逐行输出
 def lkeyp(string=''):
-    textWait = cache.textWait
+    textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     else:
         pass
-    cache.wframeMouse['wFrameMouseNextLine'] = 1
+    CacheContorl.wframeMouse['wFrameMouseNextLine'] = 1
     string = str(string)
     stringlist = string.split('\n')
     for i in range(0,len(stringlist)):
         plwait(stringlist[i])
-    cache.wframeMouse['wFrameMouseNextLine'] = 0
+    CacheContorl.wframeMouse['wFrameMouseNextLine'] = 0

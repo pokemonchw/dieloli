@@ -1,7 +1,7 @@
 import os
-import core.GameConfig as config
-import core.data as data
-from core.pycfg import gamepath
+from core import GameConfig,GameData,GamePathConfig
+
+gamepath = GamePathConfig.gamepath
 
 menuRestart = '1'
 menuQuit = '2'
@@ -10,7 +10,7 @@ menuAbout = '4'
 menuFile = '5'
 menuOther = '6'
 
-language = config.language
+language = GameConfig.language
 
 messagePath = 'MessageList.json'
 cmdPath = 'CmdText.json'
@@ -26,7 +26,7 @@ barConfigPath = os.path.join(gamepath,'data','BarConfig.json')
 # 载入文本数据
 def getData(jsonName):
     dataPath = os.path.join(gamepath,'data',language,jsonName)
-    dataData = data._loadjson(dataPath)
+    dataData = GameData._loadjson(dataPath)
     return dataData
 
 messageId = 'message'

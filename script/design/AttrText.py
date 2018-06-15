@@ -1,25 +1,24 @@
 import os
-import core.data as data
-import core.TextLoading as textload
-import core.CacheContorl as cache
-from core.GameConfig import language
-from core.pycfg import gamepath
-import design.ProportionalBar as proportionalbar
+from core import TextLoading,GameData,CacheContorl,GameConfig,GamePathConfig
+from design import ProportionalBar,AttrPrint
+
+language = GameConfig.language
+gamepath = GamePathConfig.gamepath
 
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
-roleAttrData = data._loadjson(roleAttrPath)
+roleAttrData = GameData._loadjson(roleAttrPath)
 sexData = roleAttrData['Sex']
 equipmentPath = os.path.join(gamepath,'data',language,'Equipment.json')
-equipmentData = data._loadjson(equipmentPath)
+equipmentData = GameData._loadjson(equipmentPath)
 
 #获取性经验文本
 def getSexExperienceText(sexList,sexName):
-    mouthExperience = textload.getTextData(textload.stageWordId,'19') + str(sexList['mouthExperience'])
-    bosomExperience = textload.getTextData(textload.stageWordId,'20') + str(sexList['bosomExperience'])
-    vaginaExperience = textload.getTextData(textload.stageWordId,'21') + str(sexList['vaginaExperience'])
-    clitorisExperience = textload.getTextData(textload.stageWordId,'22') + str(sexList['clitorisExperience'])
-    anusExperience = textload.getTextData(textload.stageWordId,'23') + str(sexList['anusExperience'])
-    penisExperience = textload.getTextData(textload.stageWordId,'24') + str(sexList['penisExperience'])
+    mouthExperience = TextLoading.getTextData(TextLoading.stageWordId,'19') + str(sexList['mouthExperience'])
+    bosomExperience = TextLoading.getTextData(TextLoading.stageWordId,'20') + str(sexList['bosomExperience'])
+    vaginaExperience = TextLoading.getTextData(TextLoading.stageWordId,'21') + str(sexList['vaginaExperience'])
+    clitorisExperience = TextLoading.getTextData(TextLoading.stageWordId,'22') + str(sexList['clitorisExperience'])
+    anusExperience = TextLoading.getTextData(TextLoading.stageWordId,'23') + str(sexList['anusExperience'])
+    penisExperience = TextLoading.getTextData(TextLoading.stageWordId,'24') + str(sexList['penisExperience'])
     sexExperienceText = []
     if sexName == sexData[0]:
         sexExperienceText = [mouthExperience,bosomExperience,anusExperience,penisExperience]
@@ -33,12 +32,12 @@ def getSexExperienceText(sexList,sexName):
 
 #获取性等级文本
 def getSexGradeTextList(sexGradeList,sexName):
-    mouthText = textload.getTextData(textload.stageWordId,'25') + getGradeTextColor(sexGradeList['mouthGrade'])
-    bosomText = textload.getTextData(textload.stageWordId,'26') + getGradeTextColor(sexGradeList['bosomGrade'])
-    vaginaText = textload.getTextData(textload.stageWordId,'27') + getGradeTextColor(sexGradeList['vaginaGrade'])
-    clitorisText = textload.getTextData(textload.stageWordId,'28') + getGradeTextColor(sexGradeList['clitorisGrade'])
-    anusText = textload.getTextData(textload.stageWordId,'29') + getGradeTextColor(sexGradeList['anusGrade'])
-    penisText = textload.getTextData(textload.stageWordId,'30') + getGradeTextColor(sexGradeList['penisGrade'])
+    mouthText = TextLoading.getTextData(TextLoading.stageWordId,'25') + getGradeTextColor(sexGradeList['mouthGrade'])
+    bosomText = TextLoading.getTextData(TextLoading.stageWordId,'26') + getGradeTextColor(sexGradeList['bosomGrade'])
+    vaginaText = TextLoading.getTextData(TextLoading.stageWordId,'27') + getGradeTextColor(sexGradeList['vaginaGrade'])
+    clitorisText = TextLoading.getTextData(TextLoading.stageWordId,'28') + getGradeTextColor(sexGradeList['clitorisGrade'])
+    anusText = TextLoading.getTextData(TextLoading.stageWordId,'29') + getGradeTextColor(sexGradeList['anusGrade'])
+    penisText = TextLoading.getTextData(TextLoading.stageWordId,'30') + getGradeTextColor(sexGradeList['penisGrade'])
     sexGradeTextList = []
     if sexName == sexData[0]:
         sexGradeTextList = [mouthText,bosomText,anusText,penisText]
@@ -80,12 +79,12 @@ def getEngravingText(eList):
     yieldLevel = eList["Yield"]
     fearLevel = eList["Fear"]
     resistanceLevel = eList["Resistance"]
-    painLevelFix = textload.getTextData(textload.stageWordId,'31')
-    happyLevelFix = textload.getTextData(textload.stageWordId,'32')
-    yieldLevelFix = textload.getTextData(textload.stageWordId,'33')
-    fearLevelFix = textload.getTextData(textload.stageWordId,'34')
-    resistanceLevelFix = textload.getTextData(textload.stageWordId,'35')
-    LVText = textload.getTextData(textload.stageWordId,'36')
+    painLevelFix = TextLoading.getTextData(TextLoading.stageWordId,'31')
+    happyLevelFix = TextLoading.getTextData(TextLoading.stageWordId,'32')
+    yieldLevelFix = TextLoading.getTextData(TextLoading.stageWordId,'33')
+    fearLevelFix = TextLoading.getTextData(TextLoading.stageWordId,'34')
+    resistanceLevelFix = TextLoading.getTextData(TextLoading.stageWordId,'35')
+    LVText = TextLoading.getTextData(TextLoading.stageWordId,'36')
     levelList = [painLevel,happyLevel,yieldLevel,fearLevel,resistanceLevel]
     levelFixList = [painLevelFix,happyLevelFix,yieldLevelFix,fearLevelFix,resistanceLevelFix]
     levelTextList = []
@@ -93,7 +92,7 @@ def getEngravingText(eList):
     for i in range(0,len(levelList)):
         levelTextList.append(levelFixList[i] + LVText + levelList[i])
     for i in range(0,len(levelList)):
-        levelBarList.append(proportionalbar.getCountBar(levelTextList[i], 3, levelList[i], 'engravingemptybar'))
+        levelBarList.append(ProportionalBar.getCountBar(levelTextList[i], 3, levelList[i], 'engravingemptybar'))
     return levelBarList
 
 # 获取服装列表文本
@@ -115,14 +114,14 @@ def getClothingText(clothingList):
     braText = clothingData["Bra"][braid]
     underpantsText = clothingData["Underpants"][underpantsid]
     leggingsText = clothingData["Leggings"][leggingsid]
-    coatText = textload.getTextData(textload.stageWordId,"41") + coatText
-    pantsText = textload.getTextData(textload.stageWordId, "42") + pantsText
-    shoesText = textload.getTextData(textload.stageWordId, "43") + shoesText
-    socksText = textload.getTextData(textload.stageWordId, "44") + socksText
-    underwearText = textload.getTextData(textload.stageWordId, "45") + underwearText
-    braText = textload.getTextData(textload.stageWordId, "46") + braText
-    underpantsText = textload.getTextData(textload.stageWordId, "47") + underpantsText
-    leggingsText = textload.getTextData(textload.stageWordId, "48") + leggingsText
+    coatText = TextLoading.getTextData(TextLoading.stageWordId,"41") + coatText
+    pantsText = TextLoading.getTextData(TextLoading.stageWordId, "42") + pantsText
+    shoesText = TextLoading.getTextData(TextLoading.stageWordId, "43") + shoesText
+    socksText = TextLoading.getTextData(TextLoading.stageWordId, "44") + socksText
+    underwearText = TextLoading.getTextData(TextLoading.stageWordId, "45") + underwearText
+    braText = TextLoading.getTextData(TextLoading.stageWordId, "46") + braText
+    underpantsText = TextLoading.getTextData(TextLoading.stageWordId, "47") + underpantsText
+    leggingsText = TextLoading.getTextData(TextLoading.stageWordId, "48") + leggingsText
     clothingTextList = [
         coatText,pantsText,shoesText,socksText,underwearText,
         braText,underpantsText,leggingsText
@@ -152,16 +151,16 @@ def getSexItemText(sexItemList):
     privatesText = sexItemData["Privates"][privatesid]
     anusText = sexItemData["Anus"][anusid]
     otherText = sexItemData["Other"][otherid]
-    headText = textload.getTextData(textload.stageWordId,"49") + headText
-    eyeText = textload.getTextData(textload.stageWordId,"50") + eyeText
-    earText = textload.getTextData(textload.stageWordId,"51") + earText
-    mouthText = textload.getTextData(textload.stageWordId,"52") + mouthText
-    finesseText = textload.getTextData(textload.stageWordId,"53") + finesseText
-    fingerText = textload.getTextData(textload.stageWordId,"54") + fingerText
-    chestText = textload.getTextData(textload.stageWordId,"55") + chestText
-    privatesText = textload.getTextData(textload.stageWordId,"56") + privatesText
-    anusText = textload.getTextData(textload.stageWordId,"57") + anusText
-    otherText = textload.getTextData(textload.stageWordId,"58") + otherText
+    headText = TextLoading.getTextData(TextLoading.stageWordId,"49") + headText
+    eyeText = TextLoading.getTextData(TextLoading.stageWordId,"50") + eyeText
+    earText = TextLoading.getTextData(TextLoading.stageWordId,"51") + earText
+    mouthText = TextLoading.getTextData(TextLoading.stageWordId,"52") + mouthText
+    finesseText = TextLoading.getTextData(TextLoading.stageWordId,"53") + finesseText
+    fingerText = TextLoading.getTextData(TextLoading.stageWordId,"54") + fingerText
+    chestText = TextLoading.getTextData(TextLoading.stageWordId,"55") + chestText
+    privatesText = TextLoading.getTextData(TextLoading.stageWordId,"56") + privatesText
+    anusText = TextLoading.getTextData(TextLoading.stageWordId,"57") + anusText
+    otherText = TextLoading.getTextData(TextLoading.stageWordId,"58") + otherText
     sexItemTextList = [
         headText,eyeText,earText,mouthText,finesseText,
         fingerText,chestText,privatesText,anusText,otherText
@@ -170,9 +169,32 @@ def getSexItemText(sexItemList):
 
 # 获取金钱信息文本
 def getGoldText(playerId):
-    goldData = cache.playObject['object'][playerId]['Gold']
+    goldData = CacheContorl.playObject['object'][playerId]['Gold']
     goldData = str(goldData)
-    moneyText = textload.getTextData(textload.stageWordId,'66')
-    goldText = textload.getTextData(textload.stageWordId,'67')
+    moneyText = TextLoading.getTextData(TextLoading.stageWordId,'66')
+    goldText = TextLoading.getTextData(TextLoading.stageWordId,'67')
     goldText = goldText + goldData + moneyText
     return goldText
+
+
+# 获取角色缩略信息
+def getPlayerAbbreviationsInfo(playerId):
+    playerData = CacheContorl.playObject['object'][playerId]
+    playerIdInfo = TextLoading.getTextData(TextLoading.stageWordId, '0')
+    playerIdText = playerIdInfo + playerId
+    playerName = playerData['Name']
+    playerSex = playerData['Sex']
+    playerSexInfo = TextLoading.getTextData(TextLoading.stageWordId, '2')
+    playerSexText = playerSexInfo + playerSex
+    playerAge = playerData['Age']
+    playerAgeInfo = TextLoading.getTextData(TextLoading.stageWordId, '3')
+    playerAgeText = playerAgeInfo + str(playerAge)
+    playerHpAndMpText = AttrPrint.getHpAndMpText(playerId)
+    playerIntimate = playerData['Intimate']
+    playerIntimateInfo = TextLoading.getTextData(TextLoading.stageWordId, '16')
+    playerIntimateText = playerIntimateInfo + playerIntimate
+    playerGraces = playerData['Graces']
+    playerGracesInfo = TextLoading.getTextData(TextLoading.stageWordId, '17')
+    playerGracesText = playerGracesInfo + playerGraces
+    abbreviationsInfo = playerIdText + ' ' + playerName + ' ' + playerSexText + ' ' + playerAgeText + ' ' + playerHpAndMpText + ' ' + playerIntimateText + ' ' + playerGracesText
+    return abbreviationsInfo

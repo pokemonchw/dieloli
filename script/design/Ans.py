@@ -1,10 +1,4 @@
-import core.PyCmd as pycmd
-import core.game as game
-import core.TextLoading as textload
-import core.EraPrint as eprint
-import core.TextHandle as text
-import core.GameConfig as config
-import core.Dictionaries as dictionaries
+from core import PyCmd,TextLoading,game,EraPrint,TextHandle,GameConfig,Dictionaries
 
 logomenu = "logoMenu"
 currencymenu = "currencyMenu"
@@ -31,11 +25,11 @@ seemap = "seeMap"
 # 用于批量生成id命令
 def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left',startId = '0',cmdListData=None,lastLine = False):
     if cmdListData == None:
-        cmdListData = textload.getTextData(textload.cmdId, cmdList).copy()
+        cmdListData = TextLoading.getTextData(TextLoading.cmdId, cmdList).copy()
     else:
         pass
     inputI = []
-    textWidth = config.text_width
+    textWidth = GameConfig.text_width
     if lastLine == True:
         if len(cmdListData) < cmdColumn:
             cmdColumn = len(cmdListData)
@@ -46,7 +40,7 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
     if len(cmdListData) + 1 < cmdColumn:
         cmdColumn = len(cmdListData) + 1
     for i in range(0,len(cmdListData)):
-        cmdText = dictionaries.handleText(cmdListData[i])
+        cmdText = Dictionaries.handleText(cmdListData[i])
         startId = int(startId)
         returnId = i + startId
         if idSwitch == True:
@@ -54,7 +48,7 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
         else:
             id = ''
         cmdTextAndId = id + cmdText
-        cmdTextAndIdIndex = text.getTextIndex(cmdTextAndId)
+        cmdTextAndIdIndex = TextHandle.getTextIndex(cmdTextAndId)
         if cmdTextAndIdIndex < cmdIndex:
             if idSize == 'right':
                 cmdTextAndId = cmdText + id
@@ -65,12 +59,12 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
                 cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
                 inputI.append(str(returnId))
             elif i / cmdColumn >= 1 and i % cmdColumn == 0:
-                eprint.p('\n')
+                EraPrint.p('\n')
                 cmdTextAndId = cmdTextAndId.rstrip()
                 cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
                 inputI.append(str(returnId))
             elif i == len(cmdListData) and lastLine == True:
-                eprint.p('\n')
+                EraPrint.p('\n')
                 cmdTextAndId = cmdTextAndId.rstrip()
                 cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
                 inputI.append(str(returnId))
@@ -80,7 +74,7 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
                 inputI.append(str(returnId))
         else:
             pass
-    eprint.p('\n')
+    EraPrint.p('\n')
     if askfor == True:
         ans = int(game.askfor_Int(inputI))
         return ans
@@ -90,11 +84,11 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
 # 用于批量生成文本命令
 def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True,cmdListData=None):
     if cmdListData == None:
-        cmdListData = textload.getTextData(textload.cmdId, cmdList).copy()
+        cmdListData = TextLoading.getTextData(TextLoading.cmdId, cmdList).copy()
     else:
         pass
     inputS = []
-    textWidth = config.text_width
+    textWidth = GameConfig.text_width
     if lastLine == True:
         if len(cmdListData) - 1 < cmdColumn:
             cmdColumn = len(cmdListData) - 1
@@ -103,23 +97,23 @@ def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = T
             cmdColumn = len(cmdListData)
     cmdIndex = int(textWidth / cmdColumn)
     for i in range(0,len(cmdListData)):
-        cmdTextBak = dictionaries.handleText(cmdListData[i])
+        cmdTextBak = Dictionaries.handleText(cmdListData[i])
         cmdText = '[' + cmdTextBak + ']'
         if i == 0:
             cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize)
             inputS.append(cmdListData[i])
         elif i / cmdColumn >= 1 and i % cmdColumn == 0:
-            eprint.p('\n')
+            EraPrint.p('\n')
             cmdSizePrint(cmdText, cmdTextBak, None, cmdIndex, cmdSize)
             inputS.append(cmdTextBak)
         elif i == len(cmdListData) - 1 and lastLine == True:
-            eprint.p('\n')
+            EraPrint.p('\n')
             cmdSizePrint(cmdText, cmdTextBak, None, cmdIndex, cmdSize)
             inputS.append(cmdTextBak)
         else:
             cmdSizePrint(cmdText, cmdTextBak, None, cmdIndex, cmdSize)
             inputS.append(cmdTextBak)
-    eprint.p('\n')
+    EraPrint.p('\n')
     if askfor == True:
         ans = game.askfor_All(inputS)
         return ans
@@ -145,18 +139,18 @@ def idIndex(id):
 # 命令对齐
 def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'left'):
     if cmdSize == 'left':
-        cmdWidth = text.getTextIndex(cmdText)
+        cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (textWidth - cmdWidth)
-        pycmd.pcmd(cmdText, cmdTextBak, cmdEvent)
-        eprint.p(cmdTextFix)
+        PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        EraPrint.p(cmdTextFix)
     elif cmdSize == 'center':
-        cmdWidth = text.getTextIndex(cmdText)
+        cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (int(textWidth/2) - int(cmdWidth/2))
-        eprint.p(cmdTextFix)
-        pycmd.pcmd(cmdText, cmdTextBak, cmdEvent)
-        eprint.p(cmdTextFix)
+        EraPrint.p(cmdTextFix)
+        PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        EraPrint.p(cmdTextFix)
     elif cmdSize == 'right':
-        cmdWidth = text.getTextIndex(cmdText)
+        cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (textWidth - cmdWidth)
-        eprint.p(cmdTextFix)
-        pycmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        EraPrint.p(cmdTextFix)
+        PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)

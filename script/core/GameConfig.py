@@ -1,25 +1,25 @@
-import core.data as data
 import os
-from core.pycfg import gamepath
-import core.ValueHandle as valuehandle
+from core import GameData,ValueHandle,GamePathConfig
+
+gamepath = GamePathConfig.gamepath
 
 # 读取配置数据
 def configData():
     configPath = os.path.join(gamepath,'data','core_cfg.json')
-    configData = data._loadjson(configPath)
+    configData = GameData._loadjson(configPath)
     return configData
 
 # 读取字体样式配置数据
 def getFontData(listId):
     FontPath = os.path.join(gamepath,'data','FontConfig.json')
-    FontData = data._loadjson(FontPath)
+    FontData = GameData._loadjson(FontPath)
     return FontData[listId]
 
 # 读取字体样式配置列表
 def getFontDataList():
     FontPath = os.path.join(gamepath, 'data', 'FontConfig.json')
-    FontData = data._loadjson(FontPath)
-    fontList = valuehandle.dictKeysToList(FontData)
+    FontData = GameData._loadjson(FontPath)
+    fontList = ValueHandle.dictKeysToList(FontData)
     return fontList
 
 #配置数据定义

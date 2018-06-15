@@ -1,73 +1,70 @@
-import core.CacheContorl as cache
-import core.ValueHandle as valuehandle
-import core.data as data
 import os
-import core.TextLoading as textload
-import design.AttrCalculation as attr
-from core.pycfg import gamepath
-from core.GameConfig import language
-import design.MapHandle as maphandle
+from core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
+from design import AttrCalculation,MapHandle
+
+language = GameConfig.language
+gamepath = GamePathConfig.gamepath
 
 # 初始化角色数据
 def initCharacterList():
     characterListPath = os.path.join(gamepath,'data',language,'character')
-    characterList = data.getPathList(characterListPath)
+    characterList = GameData.getPathList(characterListPath)
     for i in range(0,len(characterList)):
-        attr.initTemporaryObject()
+        AttrCalculation.initTemporaryObject()
         playerId = str(i + 1)
-        cache.playObject['object'][playerId] = cache.temporaryObject.copy()
-        attr.setDefaultCache()
+        CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+        AttrCalculation.setDefaultCache()
         characterDataName = characterList[i]
         characterAttrTemPath = os.path.join(characterListPath,characterDataName,'AttrTemplate.json')
-        characterData = data._loadjson(characterAttrTemPath)
+        characterData = GameData._loadjson(characterAttrTemPath)
         characterName = characterData['Name']
         characterSex = characterData['Sex']
-        characterSexTem = textload.getTextData(textload.temId,'TemList')[characterSex]
-        cache.playObject['object'][playerId]['Sex'] = characterSex
-        characterDataKeys = valuehandle.dictKeysToList(characterData)
-        defaultAttr = attr.getAttr(characterSexTem)
+        characterSexTem = TextLoading.getTextData(TextLoading.temId,'TemList')[characterSex]
+        CacheContorl.playObject['object'][playerId]['Sex'] = characterSex
+        characterDataKeys = ValueHandle.dictKeysToList(characterData)
+        defaultAttr = AttrCalculation.getAttr(characterSexTem)
         defaultAttr['Name'] = characterName
         defaultAttr['Sex'] = characterSex
-        attr.setSexCache(characterSex)
-        defaultAttr['Features'] = cache.featuresList.copy()
+        AttrCalculation.setSexCache(characterSex)
+        defaultAttr['Features'] = CacheContorl.featuresList.copy()
         if 'Age' in  characterDataKeys:
             ageTem = characterData['Age']
-            characterAge = attr.getAge(ageTem)
+            characterAge = AttrCalculation.getAge(ageTem)
             defaultAttr['Age'] = characterAge
         elif 'Features' in characterDataKeys:
-            attr.setAddFeatures(characterData['Features'])
-            defaultAttr['Features'] = cache.featuresList.copy()
+            AttrCalculation.setAddFeatures(characterData['Features'])
+            defaultAttr['Features'] = CacheContorl.featuresList.copy()
         for keys in defaultAttr:
-            cache.temporaryObject[keys] = defaultAttr[keys]
-        cache.featuresList = {}
-        cache.playObject['object'][playerId] = cache.temporaryObject.copy()
-        cache.temporaryObject = cache.temporaryObjectBak.copy()
+            CacheContorl.temporaryObject[keys] = defaultAttr[keys]
+        CacheContorl.featuresList = {}
+        CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+        CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
     initPlayerPosition()
     pass
 
 # 获取角色最大数量
 def getCharacterIndexMax():
-    playerData = cache.playObject['object']
-    playerMax = valuehandle.indexDictKeysMax(playerData) - 1
+    playerData = CacheContorl.playObject['object']
+    playerMax = ValueHandle.indexDictKeysMax(playerData) - 1
     return playerMax
 
 # 获取角色id列表
 def getCharacterIdList():
-    playerData = cache.playObject['object']
-    playerList = valuehandle.dictKeysToList(playerData)
+    playerData = CacheContorl.playObject['object']
+    playerList = ValueHandle.dictKeysToList(playerData)
     return playerList
 
 
 # 初始化角色的位置
 def initPlayerPosition():
     characterListPath = os.path.join(gamepath, 'data', language, 'character')
-    characterList = data.getPathList(characterListPath)
+    characterList = GameData.getPathList(characterListPath)
     for i in range(0, len(characterList)):
         playerIdS = str(i + 1)
         characterDataName = characterList[i]
         characterAttrTemPath = os.path.join(characterListPath, characterDataName, 'AttrTemplate.json')
-        characterData = data._loadjson(characterAttrTemPath)
+        characterData = GameData._loadjson(characterAttrTemPath)
         characterInitPosition = characterData['Position']
-        characterPosition = cache.playObject['object'][playerIdS]['Position']
-        maphandle.playerMoveScene(characterPosition, characterInitPosition, playerIdS)
+        characterPosition = CacheContorl.playObject['object'][playerIdS]['Position']
+        MapHandle.playerMoveScene(characterPosition, characterInitPosition, playerIdS)
     pass

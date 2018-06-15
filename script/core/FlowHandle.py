@@ -1,11 +1,7 @@
 # -*- coding: UTF-8 -*-
-import core.pyio as pyio
 import time
-import core.CacheContorl as cache
 import os
-import core.TextLoading as textload
-import core.TextHandle as text
-import core.GameConfig as config
+from core import CacheContorl,TextLoading,TextHandle,GameConfig,pyio
 
 def null_func():
     return
@@ -32,7 +28,7 @@ def clear_default_flow():
     global default_flow, null_func
     set_default_flow(null_func)
 
-cmd_map = cache.cmd_map
+cmd_map = CacheContorl.cmd_map
 
 def default_tail_deal_cmd_func(order):
     return
@@ -99,11 +95,11 @@ def order_deal(flag='order', print_order=True):
         time.sleep(0.01)
         while not pyio._order_queue.empty():
             order = pyio.getorder()
-            if cache.flowContorl['quitGame']:
+            if CacheContorl.flowContorl['quitGame']:
                 os._exit(0)
                 return
-            if cache.flowContorl['restartGame'] == 1:
-                cache.flowContorl['restartGame'] = 0
+            if CacheContorl.flowContorl['restartGame'] == 1:
+                CacheContorl.flowContorl['restartGame'] = 0
                 reset_func()
                 return
             if print_order == True and order != '':
@@ -145,13 +141,13 @@ def askfor_All(list,print_order=False):
             continue
         else:
             pyio.print(order + '\n')
-            pyio.print(textload.getTextData(textload.errorId,'noInputListError') + '\n')
+            pyio.print(TextLoading.getTextData(TextLoading.errorId,'noInputListError') + '\n')
             continue
 
 def askfor_Int(list,print_order=False):
     while True:
         order = order_deal('str', print_order)
-        order = text.fullToHalfText(order)
+        order = TextHandle.fullToHalfText(order)
         if order in list:
             pyio.print(order + '\n')
             return order
@@ -159,7 +155,7 @@ def askfor_Int(list,print_order=False):
             continue
         else:
             pyio.print(order + '\n')
-            pyio.print(textload.getTextData(textload.errorId, 'noInputListError') + '\n')
+            pyio.print(TextLoading.getTextData(TextLoading.errorId, 'noInputListError') + '\n')
             continue
 
 def askfor_wait():
@@ -170,30 +166,30 @@ def askfor_wait():
             break
 
 def initCache():
-    cache.flowContorl = {'restartGame': 0, 'quitGame': 0}
-    cache.wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesUp': 2, 'wFrameLineState': 2,
+    CacheContorl.flowContorl = {'restartGame': 0, 'quitGame': 0}
+    CacheContorl.wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesUp': 2, 'wFrameLineState': 2,
                    'wFrameRePrint': 0}
-    cache.cmd_map = {}
-    cache.playObject = {'objectId': '', 'object': {}}
-    cache.featuresList = {'Age': "", "Chastity": "", 'Disposition': "", 'Courage': "", 'SelfConfidence': "", 'Friends': "",
+    CacheContorl.cmd_map = {}
+    CacheContorl.playObject = {'objectId': '', 'object': {}}
+    CacheContorl.featuresList = {'Age': "", "Chastity": "", 'Disposition': "", 'Courage': "", 'SelfConfidence': "", 'Friends': "",
                     'Figure': "", 'Sex': "", 'AnimalInternal': "", 'AnimalExternal': "", 'Charm': ""}
-    cache.temporaryObject = {}
-    cache.inputCache = ['']
-    cache.inputPosition = {'position': 0}
-    cache.outputTextStyle = 'standard'
-    cache.textStylePosition = {'position': 0}
-    cache.textStyleCache = ['standard']
-    cache.textOneByOneRichCache = {'textList': [], 'styleList': []}
-    cache.gameTime = {"year":0,"month":0,"day":0,"hour":0,"minute":0}
-    cache.cmdData = {}
-    cache.imageid = 0
-    cache.panelState = {
+    CacheContorl.temporaryObject = {}
+    CacheContorl.inputCache = ['']
+    CacheContorl.inputPosition = {'position': 0}
+    CacheContorl.outputTextStyle = 'standard'
+    CacheContorl.textStylePosition = {'position': 0}
+    CacheContorl.textStyleCache = ['standard']
+    CacheContorl.textOneByOneRichCache = {'textList': [], 'styleList': []}
+    CacheContorl.gameTime = {"year":0,"month":0,"day":0,"hour":0,"minute":0}
+    CacheContorl.cmdData = {}
+    CacheContorl.imageid = 0
+    CacheContorl.panelState = {
         "PlayerMainAttrPanel":"1","PlayerEquipmentPanel":"1",
         "PlayerItemPanel":"1","PlayerExperiencePanel":"1",
         "PlayerLevelPanel":"1","PlayerFeaturesPanel":"1",
         "PlayerEngravingPanel":"1","AttrShowHandlePanel":"0",
         "SeeSaveListPanel":"0","SeePlayerListPanel":"0"
     }
-    cache.maxSavePage = config.save_page
-    cache.textWait = float(config.text_wait)
+    CacheContorl.maxSavePage = GameConfig.save_page
+    CacheContorl.textWait = float(GameConfig.text_wait)
     pass

@@ -1,43 +1,36 @@
-import core.CacheContorl as cache
-import core.GameConfig as config
-import core.PyCmd as pycmd
-import core.TextLoading as textload
-import core.EraPrint as eprint
-import core.TextHandle as text
-import core.SaveHandle as savehandle
-import design.Ans as ans
-import design.GameTime as gametime
+from core import CacheContorl,GameConfig,PyCmd,TextLoading,EraPrint,TextHandle,SaveHandle
+from design import Ans,GameTime
 
 # 载入存档信息头面板
 def loadSaveInfoHeadPanel():
-    saveFrameTitle = textload.getTextData(textload.stageWordId, '71')
-    eprint.plt(saveFrameTitle)
+    saveFrameTitle = TextLoading.getTextData(TextLoading.stageWordId, '71')
+    EraPrint.plt(saveFrameTitle)
     pass
 
 # 储存存档信息头面板
 def establishSaveInfoHeadPanel():
-    saveFrameTitle = textload.getTextData(textload.stageWordId, '70')
-    eprint.plt(saveFrameTitle)
+    saveFrameTitle = TextLoading.getTextData(TextLoading.stageWordId, '70')
+    EraPrint.plt(saveFrameTitle)
     pass
 
 # 查看存档页面面板
 def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
-    savePanelPage = int(cache.panelState['SeeSaveListPanel']) + 1
+    savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel']) + 1
     inputS = []
     idTextList = []
-    idInfoText = textload.getTextData(textload.stageWordId,'72')
-    textWidth = int(config.text_width)
-    saveNoneText = textload.getTextData(textload.messageId,'20')
-    if savePanelPage == int(config.save_page) + 1:
+    idInfoText = TextLoading.getTextData(TextLoading.stageWordId,'72')
+    textWidth = int(GameConfig.text_width)
+    saveNoneText = TextLoading.getTextData(TextLoading.messageId,'20')
+    if savePanelPage == int(GameConfig.save_page) + 1:
         startSaveId = int(pageSaveValue) * (savePanelPage - 1)
         overSaveId = startSaveId + lastSavePageValue
     else:
         overSaveId = int(pageSaveValue) * savePanelPage
         startSaveId = overSaveId - int(pageSaveValue)
     for i in range(0,overSaveId - startSaveId):
-        id = ans.idIndex(i)
+        id = Ans.idIndex(i)
         saveId = startSaveId + i
-        if autoSave == True and savehandle.judgeSaveFileExist(saveId) != '1':
+        if autoSave == True and SaveHandle.judgeSaveFileExist(saveId) != '1':
             idText = idInfoText + " " + str(saveId) + ":"
             idTextList.append(idText)
         else:
@@ -46,129 +39,129 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
     for i in range(0,overSaveId - startSaveId):
         id = str(i)
         idText = idTextList[i]
-        eprint.plittleline()
-        saveid = savehandle.getSavePageSaveId(pageSaveValue,i)
-        if savehandle.judgeSaveFileExist(saveid) == '1':
-            saveData = savehandle.loadSave(saveid)
+        EraPrint.plittleline()
+        saveid = SaveHandle.getSavePageSaveId(pageSaveValue,i)
+        if SaveHandle.judgeSaveFileExist(saveid) == '1':
+            saveData = SaveHandle.loadSave(saveid)
             playerData = saveData['playerData']
             gameTimeData = saveData['gameTime']
-            gameTimeText = gametime.getDateText(gameTimeData)
+            gameTimeText = GameTime.getDateText(gameTimeData)
             playerName = playerData['object']['0']['Name']
             saveVerson = saveData['gameVerson']
             saveText = playerName + ' ' + gameTimeText + ' ' + saveVerson
-            idTextIndex = int(text.getTextIndex(idText))
+            idTextIndex = int(TextHandle.getTextIndex(idText))
             fixIdWidth = textWidth - idTextIndex
-            saveAlign = text.align(saveText,'center',textWidth=fixIdWidth)
+            saveAlign = TextHandle.align(saveText,'center',textWidth=fixIdWidth)
             idText = idText + saveAlign
-            pycmd.pcmd(idText, id, None)
-            eprint.p('\n')
+            PyCmd.pcmd(idText, id, None)
+            EraPrint.p('\n')
             inputS.append(id)
         else:
-            idTextIndex = int(text.getTextIndex(idText))
+            idTextIndex = int(TextHandle.getTextIndex(idText))
             fixIdWidth = textWidth - idTextIndex
-            saveNoneAlign = text.align(saveNoneText,'center',textWidth=fixIdWidth)
+            saveNoneAlign = TextHandle.align(saveNoneText,'center',textWidth=fixIdWidth)
             idText = idText + saveNoneAlign
             if autoSave == True:
-                eprint.p(idText)
-                eprint.p('\n')
+                EraPrint.p(idText)
+                EraPrint.p('\n')
             else:
-                pycmd.pcmd(idText, id, None)
+                PyCmd.pcmd(idText, id, None)
                 inputS.append(id)
-                eprint.p('\n')
+                EraPrint.p('\n')
     if autoSave == True:
-        autoInfoText = textload.getTextData(textload.stageWordId,"73")
+        autoInfoText = TextLoading.getTextData(TextLoading.stageWordId,"73")
         i = pageSaveValue
-        id = ans.idIndex(i)
-        eprint.plittleline()
-        if savehandle.judgeSaveFileExist('auto') == '1':
-            saveData = savehandle.loadSave('auto')
+        id = Ans.idIndex(i)
+        EraPrint.plittleline()
+        if SaveHandle.judgeSaveFileExist('auto') == '1':
+            saveData = SaveHandle.loadSave('auto')
             playerData = saveData['playerData']
             gameTimeData = saveData['gameTime']
-            gameTimeText = gametime.getDateText(gameTimeData)
+            gameTimeText = GameTime.getDateText(gameTimeData)
             saveVerson = saveData['gameVerson']
             playerName = playerData['object']['0']['Name']
             saveText = playerName + ' ' + gameTimeText + ' ' + saveVerson
             idText = id + autoInfoText
-            idTextIndex = int(text.getTextIndex(idText))
+            idTextIndex = int(TextHandle.getTextIndex(idText))
             fixIdWidth = textWidth - idTextIndex
-            saveTextAlign = text.align(saveText, 'center', textWidth=fixIdWidth)
+            saveTextAlign = TextHandle.align(saveText, 'center', textWidth=fixIdWidth)
             idText = idText + saveTextAlign
-            pycmd.pcmd(idText, id, None)
+            PyCmd.pcmd(idText, id, None)
             inputS.append(id)
-            eprint.p('\n')
+            EraPrint.p('\n')
         else:
-            idTextIndex = int(text.getTextIndex(autoInfoText))
+            idTextIndex = int(TextHandle.getTextIndex(autoInfoText))
             fixIdWidth = textWidth - idTextIndex
-            saveNoneAlign = text.align(saveNoneText, 'center', textWidth=fixIdWidth)
+            saveNoneAlign = TextHandle.align(saveNoneText, 'center', textWidth=fixIdWidth)
             idText = autoInfoText + saveNoneAlign
-            eprint.p(idText)
-            eprint.p('\n')
+            EraPrint.p(idText)
+            EraPrint.p('\n')
     else:
         pass
     return inputS
 
 # 询问切换存档页面板
 def askForChangeSavePagePanel(startId):
-    cmdList = textload.getTextData(textload.cmdId,"changeSavePage")
-    savePanelPage = str(cache.panelState['SeeSaveListPanel'])
-    maxSavePanelPage = str(cache.maxSavePage)
+    cmdList = TextLoading.getTextData(TextLoading.cmdId,"changeSavePage")
+    savePanelPage = str(CacheContorl.panelState['SeeSaveListPanel'])
+    maxSavePanelPage = str(CacheContorl.maxSavePage)
     savePageText = '(' + savePanelPage + '/' + maxSavePanelPage + ')'
-    eprint.printPageLine(sample='-',string=savePageText)
-    eprint.p('\n')
-    yrn = ans.optionint(None, 3, askfor=False, cmdSize='center', startId=startId, cmdListData=cmdList)
+    EraPrint.printPageLine(sample='-',string=savePageText)
+    EraPrint.p('\n')
+    yrn = Ans.optionint(None, 3, askfor=False, cmdSize='center', startId=startId, cmdListData=cmdList)
     return yrn
 
 # 询问覆盖存档面板
 def askForOverlaySavePanel():
-    eprint.p('\n')
-    cmdList = textload.getTextData(textload.cmdId,"overlaySave")
-    messageText = textload.getTextData(textload.messageId,'21')
-    eprint.pline()
-    eprint.p(messageText)
-    eprint.p('\n')
-    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    EraPrint.p('\n')
+    cmdList = TextLoading.getTextData(TextLoading.cmdId,"overlaySave")
+    messageText = TextLoading.getTextData(TextLoading.messageId,'21')
+    EraPrint.pline()
+    EraPrint.p(messageText)
+    EraPrint.p('\n')
+    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn
 
 # 确认覆盖面板
 def confirmationOverlaySavePanel():
-    eprint.p('\n')
-    cmdList = textload.getTextData(textload.cmdId, "confirmationOverlaySave")
-    messageText = textload.getTextData(textload.messageId, '22')
-    eprint.pline()
-    eprint.p(messageText)
-    eprint.p('\n')
-    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    EraPrint.p('\n')
+    cmdList = TextLoading.getTextData(TextLoading.cmdId, "confirmationOverlaySave")
+    messageText = TextLoading.getTextData(TextLoading.messageId, '22')
+    EraPrint.pline()
+    EraPrint.p(messageText)
+    EraPrint.p('\n')
+    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn
 
 # 询问读档面板
 def askLoadSavePanel():
-    eprint.p('\n')
-    cmdList = textload.getTextData(textload.cmdId,"loadSaveAsk")
-    messageText = textload.getTextData(textload.messageId,'23')
-    eprint.pline()
-    eprint.p(messageText)
-    eprint.p('\n')
-    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    EraPrint.p('\n')
+    cmdList = TextLoading.getTextData(TextLoading.cmdId,"loadSaveAsk")
+    messageText = TextLoading.getTextData(TextLoading.messageId,'23')
+    EraPrint.pline()
+    EraPrint.p(messageText)
+    EraPrint.p('\n')
+    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn
 
 # 确认读档面板
 def confirmationLoadSavePanel():
-    eprint.p('\n')
-    cmdList = textload.getTextData(textload.cmdId, "confirmationLoadSave")
-    messageText = textload.getTextData(textload.messageId, '24')
-    eprint.pline()
-    eprint.p(messageText)
-    eprint.p('\n')
-    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    EraPrint.p('\n')
+    cmdList = TextLoading.getTextData(TextLoading.cmdId, "confirmationLoadSave")
+    messageText = TextLoading.getTextData(TextLoading.messageId, '24')
+    EraPrint.pline()
+    EraPrint.p(messageText)
+    EraPrint.p('\n')
+    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn
 
 # 确认删除存档面板
 def confirmationRemoveSavePanel():
-    eprint.p('\n')
-    cmdList = textload.getTextData(textload.cmdId,"confirmationRemoveSave")
-    messageText = textload.getTextData(textload.messageId, '25')
-    eprint.pline()
-    eprint.p(messageText)
-    eprint.p('\n')
-    yrn = ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    EraPrint.p('\n')
+    cmdList = TextLoading.getTextData(TextLoading.cmdId,"confirmationRemoveSave")
+    messageText = TextLoading.getTextData(TextLoading.messageId, '25')
+    EraPrint.pline()
+    EraPrint.p(messageText)
+    EraPrint.p('\n')
+    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn

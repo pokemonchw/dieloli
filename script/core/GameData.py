@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from core.pycfg import gamepath
+from core.GamePathConfig import gamepath
 import json
 
 try:

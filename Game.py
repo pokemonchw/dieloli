@@ -1,11 +1,9 @@
 # -*- coding: UTF-8 -*-
 import sys
 sys.path.append('script')
-import core.pycfg
+from core import GamePathConfig,game
+from design import StartFlow
 
-core.pycfg.platform = 'win'
-import core.game
+GamePathConfig.platform = 'win'
 
-script = __import__('design.mainflow')
-
-core.game.run(script.mainflow.open_func)
+game.run(StartFlow.open_func)

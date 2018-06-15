@@ -1,9 +1,5 @@
-import core.GameConfig as config
-import Panel.SaveHandleFramePanel as savehandleframepanel
-import core.CacheContorl as cache
-import core.game as game
-import core.PyCmd as pycmd
-import core.SaveHandle as savehandle
+from core import GameConfig,CacheContorl,game,PyCmd,SaveHandle
+from Panel import SaveHandleFramePanel
 
 # 绘制保存存档页面流程
 def establishSave_func(oldPanel):
@@ -11,43 +7,43 @@ def establishSave_func(oldPanel):
     savePage = savePageIndex()
     showSaveValue = savePage[0]
     lastSavePageValue = savePage[1]
-    savehandleframepanel.establishSaveInfoHeadPanel()
-    flowReturn = savehandleframepanel.seeSaveListPanel(showSaveValue,lastSavePageValue)
+    SaveHandleFramePanel.establishSaveInfoHeadPanel()
+    flowReturn = SaveHandleFramePanel.seeSaveListPanel(showSaveValue,lastSavePageValue)
     inputS = inputS + flowReturn
     startId = len(inputS)
-    flowReturn = savehandleframepanel.askForChangeSavePagePanel(startId)
+    flowReturn = SaveHandleFramePanel.askForChangeSavePagePanel(startId)
     inputS = inputS + flowReturn
     yrn = game.askfor_Int(inputS)
-    pycmd.clr_cmd()
+    PyCmd.clr_cmd()
     if yrn == str(startId):
-        savePanelPage = int(cache.panelState['SeeSaveListPanel'])
+        savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel'])
         if savePanelPage == 0:
-            cache.panelState['SeeSaveListPanel'] = cache.maxSavePage
+            CacheContorl.panelState['SeeSaveListPanel'] = CacheContorl.maxSavePage
         else:
-            cache.panelState['SeeSaveListPanel'] = savePanelPage - 1
+            CacheContorl.panelState['SeeSaveListPanel'] = savePanelPage - 1
         establishSave_func(oldPanel)
     elif yrn == str(startId + 1):
         if oldPanel == 'MainFramePanel':
-            cache.panelState['SeeSaveListPanel'] = 0
-            import script.flow.MainFrame as mainframe
+            CacheContorl.panelState['SeeSaveListPanel'] = 0
+            import script.flow.Main as mainframe
             mainframe.mainFrame_func()
             pass
         else:
             pass
     elif yrn == str(startId + 2):
-        savePanelPage = int(cache.panelState['SeeSaveListPanel'])
-        if savePanelPage == cache.maxSavePage:
-            cache.panelState['SeeSaveListPanel'] = 0
+        savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel'])
+        if savePanelPage == CacheContorl.maxSavePage:
+            CacheContorl.panelState['SeeSaveListPanel'] = 0
         else:
-            cache.panelState['SeeSaveListPanel'] = savePanelPage + 1
+            CacheContorl.panelState['SeeSaveListPanel'] = savePanelPage + 1
         establishSave_func(oldPanel)
     else:
         ansReturn = int(yrn)
-        saveId = savehandle.getSavePageSaveId(showSaveValue,ansReturn)
-        if savehandle.judgeSaveFileExist(saveId) == '1':
+        saveId = SaveHandle.getSavePageSaveId(showSaveValue,ansReturn)
+        if SaveHandle.judgeSaveFileExist(saveId) == '1':
             askForOverlaySave_func(oldPanel,saveId)
         else:
-            savehandle.establishSave(saveId)
+            SaveHandle.establishSave(saveId)
             establishSave_func(oldPanel)
     pass
 
@@ -57,66 +53,66 @@ def loadSave_func(oldPanel):
     savePage = savePageIndex()
     showSaveValue = savePage[0]
     lastSavePageValue = savePage[1]
-    savehandleframepanel.loadSaveInfoHeadPanel()
-    flowReturn = savehandleframepanel.seeSaveListPanel(showSaveValue, lastSavePageValue,True)
+    SaveHandleFramePanel.loadSaveInfoHeadPanel()
+    flowReturn = SaveHandleFramePanel.seeSaveListPanel(showSaveValue, lastSavePageValue,True)
     inputS = inputS + flowReturn
     startId = len(inputS)
-    flowReturn = savehandleframepanel.askForChangeSavePagePanel(startId)
+    flowReturn = SaveHandleFramePanel.askForChangeSavePagePanel(startId)
     inputS = inputS + flowReturn
     yrn = game.askfor_Int(inputS)
-    pycmd.clr_cmd()
+    PyCmd.clr_cmd()
     if yrn == str(startId):
-        savePanelPage = int(cache.panelState['SeeSaveListPanel'])
+        savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel'])
         if savePanelPage == 0:
-            cache.panelState['SeeSaveListPanel'] = cache.maxSavePage
+            CacheContorl.panelState['SeeSaveListPanel'] = CacheContorl.maxSavePage
         else:
-            cache.panelState['SeeSaveListPanel'] = savePanelPage - 1
+            CacheContorl.panelState['SeeSaveListPanel'] = savePanelPage - 1
         loadSave_func(oldPanel)
     elif yrn == str(startId + 1):
         if oldPanel == 'MainFlowPanel':
-            cache.wframeMouse['wFrameRePrint'] = 1
-            cache.panelState['SeeSaveListPanel'] = 0
-            import design.mainflow as mainflow
+            CacheContorl.wframeMouse['wFrameRePrint'] = 1
+            CacheContorl.panelState['SeeSaveListPanel'] = 0
+            import design.StartFlow as mainflow
             mainflow.main_func()
         elif oldPanel == 'MainFramePanel':
-            cache.panelState['SeeSaveListPanel'] = 0
-            import script.flow.MainFrame as mainframe
+            CacheContorl.panelState['SeeSaveListPanel'] = 0
+            import script.flow.Main as mainframe
             mainframe.mainFrame_func()
             pass
     elif yrn == str(startId + 2):
-        savePanelPage = int(cache.panelState['SeeSaveListPanel'])
-        if savePanelPage == cache.maxSavePage:
-            cache.panelState['SeeSaveListPanel'] = 0
+        savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel'])
+        if savePanelPage == CacheContorl.maxSavePage:
+            CacheContorl.panelState['SeeSaveListPanel'] = 0
         else:
-            cache.panelState['SeeSaveListPanel'] = savePanelPage + 1
+            CacheContorl.panelState['SeeSaveListPanel'] = savePanelPage + 1
         loadSave_func(oldPanel)
     else:
         ansReturn = int(yrn)
-        saveId = savehandle.getSavePageSaveId(showSaveValue,ansReturn)
+        saveId = SaveHandle.getSavePageSaveId(showSaveValue,ansReturn)
         askForLoadSave_func(oldPanel,saveId)
     pass
 
 # 存档页计算
 def savePageIndex():
-    maxSaveValue = int(config.max_save)
-    pageSaveValue = int(config.save_page)
+    maxSaveValue = int(GameConfig.max_save)
+    pageSaveValue = int(GameConfig.save_page)
     lastSavePageValue = 0
     if maxSaveValue % pageSaveValue != 0:
         showSaveValue = int(maxSaveValue / pageSaveValue)
         lastSavePageValue = maxSaveValue % pageSaveValue
-        cache.maxSavePage = pageSaveValue
+        CacheContorl.maxSavePage = pageSaveValue
     else:
-        cache.maxSavePage = pageSaveValue - 1
+        CacheContorl.maxSavePage = pageSaveValue - 1
         showSaveValue = maxSaveValue / pageSaveValue
     savePage = [showSaveValue,lastSavePageValue]
     return savePage
 
 # 询问覆盖存档流程
 def askForOverlaySave_func(oldPanel,saveId):
-    cmdList = savehandleframepanel.askForOverlaySavePanel()
+    cmdList = SaveHandleFramePanel.askForOverlaySavePanel()
     yrn = game.askfor_All(cmdList)
     yrn = str(yrn)
-    pycmd.clr_cmd()
+    PyCmd.clr_cmd()
     if yrn == '0':
         confirmationOverlaySave_func(oldPanel,saveId)
     elif yrn == '1':
@@ -127,11 +123,11 @@ def askForOverlaySave_func(oldPanel,saveId):
 
 # 确认覆盖流程
 def confirmationOverlaySave_func(oldPanel,saveId):
-    cmdList = savehandleframepanel.confirmationOverlaySavePanel()
+    cmdList = SaveHandleFramePanel.confirmationOverlaySavePanel()
     yrn = game.askfor_All(cmdList)
-    pycmd.clr_cmd()
+    PyCmd.clr_cmd()
     if yrn == '0':
-        savehandle.establishSave(saveId)
+        SaveHandle.establishSave(saveId)
         establishSave_func(oldPanel)
     else:
         establishSave_func(oldPanel)
@@ -139,9 +135,9 @@ def confirmationOverlaySave_func(oldPanel,saveId):
 
 # 询问读取存档流程
 def askForLoadSave_func(oldPanel,saveId):
-    cmdList = savehandleframepanel.askLoadSavePanel()
+    cmdList = SaveHandleFramePanel.askLoadSavePanel()
     yrn = game.askfor_All(cmdList)
-    pycmd.clr_cmd()
+    PyCmd.clr_cmd()
     if yrn == '0':
         confirmationLoadSave_func(oldPanel,saveId)
     elif yrn == '1':
@@ -152,12 +148,12 @@ def askForLoadSave_func(oldPanel,saveId):
 
 # 确认读取存档流程
 def confirmationLoadSave_func(oldPanel,saveId):
-    cmdList = savehandleframepanel.confirmationLoadSavePanel()
+    cmdList = SaveHandleFramePanel.confirmationLoadSavePanel()
     yrn = game.askfor_All(cmdList)
-    pycmd.clr_cmd()
+    PyCmd.clr_cmd()
     if yrn == '0':
-        savehandle.inputLoadSave(saveId)
-        import script.flow.MainFrame as mainframe
+        SaveHandle.inputLoadSave(saveId)
+        import script.flow.Main as mainframe
         mainframe.mainFrame_func()
     else:
         loadSave_func(oldPanel)
@@ -165,13 +161,13 @@ def confirmationLoadSave_func(oldPanel,saveId):
 
 # 确认删除存档流程
 def confirmationRemoveSave_func(saveId,oldPanel,tooOldPanel):
-    cmdList = savehandleframepanel.confirmationRemoveSavePanel()
+    cmdList = SaveHandleFramePanel.confirmationRemoveSavePanel()
     yrn = game.askfor_All(cmdList)
     if yrn == '0':
-        savehandle.removeSave(saveId)
+        SaveHandle.removeSave(saveId)
     else:
         pass
-    pycmd.clr_cmd()
+    PyCmd.clr_cmd()
     if oldPanel == 'LoadSavePanel':
         loadSave_func(tooOldPanel)
     elif oldPanel == 'EstablishSavePanel':

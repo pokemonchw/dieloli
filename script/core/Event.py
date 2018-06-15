@@ -1,8 +1,6 @@
 import os
 import re
-import core.data
-import core.flow
-import core.pycfg
+from core import GameData
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'
@@ -33,7 +31,7 @@ def sort_event(event_name):
             if type(event_mark)==int:
                 return event_mark
 
-            number=core.data.gamedata()['core_event_sort'][event_name][event_mark]
+            number = GameData.gamedata()['core_event_sort'][event_name][event_mark]
             return number
         except KeyError:
             print('招不到指定的event_key 再core_event_sort 中')
@@ -113,10 +111,10 @@ import importlib
 
 
 def load_event_file(script_path='script'):
-    datapath = core.data.gamepath + script_path
+    datapath = GameData.gamepath + script_path
     for dirpath, dirnames, filenames in os.walk(datapath):
         for name in filenames:
-            prefix = dirpath.replace(core.data.gamepath + '\\', '').replace('\\', '.') + '.'
+            prefix = dirpath.replace(GameData.gamepath + '\\', '').replace('\\', '.') + '.'
             modelname = name.split('.')[0]
             typename = name.split('.')[1]
             if typename == 'py' and re.match('^event_', modelname):

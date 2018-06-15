@@ -1,27 +1,26 @@
-import Panel.SeeMapPanel as seemappanel
-import core.flow as flow
-import design.ObjectMove as objectmove
-import design.MapHandle as maphandle
+from core import FlowHandle
+from design import ObjectMove
+from Panel import SeeMapPanel
 
 def seeMapFlow():
     inputS = []
-    mapCmd = seemappanel.seeMapPanel()
+    mapCmd = SeeMapPanel.seeMapPanel()
     startId1 = len(mapCmd)
     inputS = inputS + mapCmd
-    movePathCmdData = seemappanel.seeMovePathPanel()
+    movePathCmdData = SeeMapPanel.seeMovePathPanel()
     movePathCmd = movePathCmdData['inputS']
     movePathList = movePathCmdData['scenePathList']
-    seeMapCmd = seemappanel.backScenePanel(startId1)
+    seeMapCmd = SeeMapPanel.backScenePanel(startId1)
     inputS = inputS + seeMapCmd + movePathCmd
-    yrn = flow.askfor_All(inputS)
+    yrn = FlowHandle.askfor_All(inputS)
     backButton = str(startId1)
     if yrn in mapCmd:
-        objectmove.playerMove(yrn)
+        ObjectMove.playerMove(yrn)
     elif yrn == backButton:
         import flow.InScene as inscene
         inscene.getInScene_func()
     elif yrn in movePathCmd:
         moveListId = movePathCmd.index(yrn)
         movePath = movePathList[moveListId]
-        objectmove.playerMove(movePath)
+        ObjectMove.playerMove(movePath)
 

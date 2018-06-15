@@ -1,7 +1,5 @@
 from idna import unichr
-import core.GameConfig as config
-import core.TextLoading as textload
-import core.RichText as richtext
+from core import GameConfig,TextLoading,RichText
 
 widths = [
     (126,    1), (159,    0), (687,     1), (710,   0), (711,   1),
@@ -19,7 +17,7 @@ def align(text,just='left',onlyFix = False,columns = 1,textWidth = None):
     text = str(text)
     countIndex = getTextIndex(text)
     if textWidth == None:
-        width = config.text_width
+        width = GameConfig.text_width
         width = int(width / columns)
     else:
         width = int(textWidth)
@@ -43,16 +41,16 @@ def align(text,just='left',onlyFix = False,columns = 1,textWidth = None):
 
 # 文本长度计算
 def getTextIndex(text):
-    textStyleList = richtext.setRichTextPrint(text, 'standard')
+    textStyleList = RichText.setRichTextPrint(text, 'standard')
     textIndex = 0
     stylewidth = 0
-    barlist = textload.getTextData(textload.barListId,'barlist')
-    styleNameList = config.getFontDataList() + textload.getTextData(textload.barListId,'barlist')
+    barlist = TextLoading.getTextData(TextLoading.barListId,'barlist')
+    styleNameList = GameConfig.getFontDataList() + TextLoading.getTextData(TextLoading.barListId,'barlist')
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'
         if styleTextHead in text:
-            if styleNameList[i] in textload.getTextData(textload.barListId,'barlist'):
+            if styleNameList[i] in TextLoading.getTextData(TextLoading.barListId,'barlist'):
                 text = text.replace(styleTextHead, '')
                 text = text.replace(styleTextTail, '')
             else:
@@ -63,7 +61,7 @@ def getTextIndex(text):
     count = len(text)
     for i in range(0,count):
         if textStyleList[i] in barlist:
-            textwidth = textload.getTextData(textload.barListId,textStyleList[i])['width']
+            textwidth = TextLoading.getTextData(TextLoading.barListId,textStyleList[i])['width']
             textIndex = textIndex + int(textwidth)
         else:
             textIndex = textIndex + get_width(ord(text[i]))

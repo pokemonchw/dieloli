@@ -1,66 +1,62 @@
-import core.CacheContorl as cache
-import core.TextLoading as textload
-import core.EraPrint as eprint
-import core.PyCmd as pycmd
-import design.GameTime as gametime
-import design.Ans as ans
+from core import CacheContorl,TextLoading,EraPrint,PyCmd
+from design import GameTime,Ans
 
 # 用于查看当前场景的面板
 def seeScenePanel():
-    sceneData = cache.sceneData.copy()
-    titleText = textload.getTextData(textload.stageWordId,'75')
-    eprint.plt(titleText)
-    timeText = gametime.getDateText()
-    eprint.p(timeText)
-    eprint.p(' ')
-    sceneId = cache.playObject['object']['0']['Position']
+    sceneData = CacheContorl.sceneData.copy()
+    titleText = TextLoading.getTextData(TextLoading.stageWordId,'75')
+    EraPrint.plt(titleText)
+    timeText = GameTime.getDateText()
+    EraPrint.p(timeText)
+    EraPrint.p(' ')
+    sceneId = CacheContorl.playObject['object']['0']['Position']
     sceneName = sceneData['SceneData'][sceneId]['SceneName']
-    sceneInfoHead = textload.getTextData(textload.stageWordId, '76')
+    sceneInfoHead = TextLoading.getTextData(TextLoading.stageWordId, '76')
     sceneInfo = sceneInfoHead + sceneName
-    eprint.p(sceneInfo)
-    eprint.plittleline()
+    EraPrint.p(sceneInfo)
+    EraPrint.plittleline()
 
 # 用于查看当前场景上角色列表的面板
 def seeScenePlayerListPanel():
     inputS = []
-    sceneData = cache.sceneData.copy()
-    seePlayerText = textload.getTextData(textload.messageId,'26')
-    eprint.p(seePlayerText)
-    eprint.p('\n')
-    sceneId = cache.playObject['object']['0']['Position']
+    sceneData = CacheContorl.sceneData.copy()
+    seePlayerText = TextLoading.getTextData(TextLoading.messageId,'26')
+    EraPrint.p(seePlayerText)
+    EraPrint.p('\n')
+    sceneId = CacheContorl.playObject['object']['0']['Position']
     scenePlayerList = sceneData['ScenePlayerData'][sceneId]
     for playerId in scenePlayerList:
         if playerId == '0':
             pass
         else:
-            playerName = cache.playObject['object'][str(playerId)]['Name']
-            pycmd.pcmd(playerName, playerName, None)
+            playerName = CacheContorl.playObject['object'][str(playerId)]['Name']
+            PyCmd.pcmd(playerName, playerName, None)
             inputS.append(playerName)
-            eprint.p(' ')
-    eprint.plittleline()
+            EraPrint.p(' ')
+    EraPrint.plittleline()
     return inputS
 
 # 用于查看对象信息的面板
 def seeObjectInfoPanel():
-    objectInfo = textload.getTextData(textload.stageWordId, '77')
-    eprint.p(objectInfo)
-    objectId = cache.playObject['objectId']
-    objectData = cache.playObject['object'][objectId]
+    objectInfo = TextLoading.getTextData(TextLoading.stageWordId, '77')
+    EraPrint.p(objectInfo)
+    objectId = CacheContorl.playObject['objectId']
+    objectData = CacheContorl.playObject['object'][objectId]
     objectName = objectData['Name']
-    eprint.p(objectName)
-    eprint.p(' ')
-    intimateInfo = textload.getTextData(textload.stageWordId,'16')
-    gracesInfo = textload.getTextData(textload.stageWordId,'17')
+    EraPrint.p(objectName)
+    EraPrint.p(' ')
+    intimateInfo = TextLoading.getTextData(TextLoading.stageWordId,'16')
+    gracesInfo = TextLoading.getTextData(TextLoading.stageWordId,'17')
     objectIntimate = objectData['Intimate']
     objectGraces = objectData['Graces']
     objectIntimateText = intimateInfo + objectIntimate
     objectGracesText = gracesInfo + objectGraces
-    eprint.p(objectIntimateText)
-    eprint.p(' ')
-    eprint.p(objectGracesText)
-    eprint.plittleline()
+    EraPrint.p(objectIntimateText)
+    EraPrint.p(' ')
+    EraPrint.p(objectGracesText)
+    EraPrint.plittleline()
 
 def inSceneButtonPanel():
-    inputs = ans.optionint(cmdList=ans.inscenelist1,cmdColumn=9,askfor=False,cmdSize='center')
-    eprint.plittleline()
+    inputs = Ans.optionint(cmdList=Ans.inscenelist1,cmdColumn=9,askfor=False,cmdSize='center')
+    EraPrint.plittleline()
     return inputs

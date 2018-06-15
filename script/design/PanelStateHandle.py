@@ -1,10 +1,10 @@
-import core.CacheContorl as cache
+from core import CacheContorl
 
 # 改变面板状态
 def panelStateChange(panelId):
-    cachePanelState = cache.panelState[panelId]
+    cachePanelState = CacheContorl.panelState[panelId]
     if cachePanelState == '0':
-        cache.panelState[panelId] = "1"
+        CacheContorl.panelState[panelId] = "1"
     else:
-        cache.panelState[panelId] = "0"
+        CacheContorl.panelState[panelId] = "0"
     pass

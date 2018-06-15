@@ -1,5 +1,5 @@
 import core.TextLoading as textload
-from tkinter import *
+from tkinter import Tk
 
 # 设置菜单
 def openSettingFrame():

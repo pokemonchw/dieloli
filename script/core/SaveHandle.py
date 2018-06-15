@@ -3,13 +3,10 @@ try:
     import cPickle as pickle
 except ImportError:
     import pickle
-import core.EraPrint as eprint
-import core.TextLoading as textload
-import core.CacheContorl as cache
-from core.pycfg import gamepath
-import core.GameConfig as config
-import design.MapHandle as maphandle
-import design.CharacterHandle as characterhandle
+from core import EraPrint,TextLoading,CacheContorl,GameConfig,GamePathConfig
+from design import MapHandle,CharacterHandle
+
+gamepath = GamePathConfig.gamepath
 
 # 获取存档所在路径
 def getSavefilePath(filename):
@@ -30,11 +27,11 @@ def judgeSaveFileExist(saveId):
 
 # 存入存档数据
 def establishSave(saveId):
-    playerData = cache.playObject
-    gameTime = cache.gameTime
-    gameVerson = config.verson
-    scaneData = cache.sceneData
-    maphandle.initScanePlayerData()
+    playerData = CacheContorl.playObject
+    gameTime = CacheContorl.gameTime
+    gameVerson = GameConfig.verson
+    scaneData = CacheContorl.sceneData
+    MapHandle.initScanePlayerData()
     data = {"playerData":playerData,"gameTime":gameTime,"gameVerson":gameVerson,"sceneData":scaneData}
     filepath = getSavefilePath(saveId)
     with open(filepath, 'wb') as f:
@@ -48,22 +45,22 @@ def loadSave(filename):
         with open(filepath, 'rb') as f:
             data=pickle.load(f)
     except FileNotFoundError:
-        eprint.p(textload.getTextData(textload.errorId,'notSaveError'))
+        EraPrint.p(TextLoading.getTextData(TextLoading.errorId,'notSaveError'))
     return data
 
 # 确认存档读取
 def inputLoadSave(saveId):
     saveData = loadSave(saveId)
-    cache.playObject = saveData['playerData']
-    cache.playObject['objectId'] = '0'
-    cache.gameTime = saveData['gameTime']
-    cache.sceneData = saveData['sceneData']
-    characterhandle.initPlayerPosition()
+    CacheContorl.playObject = saveData['playerData']
+    CacheContorl.playObject['objectId'] = '0'
+    CacheContorl.gameTime = saveData['gameTime']
+    CacheContorl.sceneData = saveData['sceneData']
+    CharacterHandle.initPlayerPosition()
     pass
 
 # 获取存档页对应存档id
 def getSavePageSaveId(pageSaveValue,inputId):
-    savePanelPage = int(cache.panelState['SeeSaveListPanel']) + 1
+    savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel']) + 1
     startSaveId = int(pageSaveValue) * (savePanelPage - 1)
     inputId = int(inputId)
     saveId = startSaveId + inputId
@@ -75,5 +72,5 @@ def removeSave(saveId):
     if os.path.isfile(savePath):
         os.remove(savePath)
     else:
-        errorText = textload.getTextData(textload.errorId,'notSaveError')
-        eprint.pl(errorText)
+        errorText = TextLoading.getTextData(TextLoading.errorId,'notSaveError')
+        EraPrint.pl(errorText)
