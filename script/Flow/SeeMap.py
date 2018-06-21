@@ -1,5 +1,5 @@
-from core import FlowHandle
-from design import ObjectMove
+from Core import FlowHandle
+from Design import ObjectMove
 from Panel import SeeMapPanel
 
 def seeMapFlow():
@@ -17,7 +17,7 @@ def seeMapFlow():
     if yrn in mapCmd:
         ObjectMove.playerMove(yrn)
     elif yrn == backButton:
-        import flow.InScene as inscene
+        import Flow.InScene as inscene
         inscene.getInScene_func()
     elif yrn in movePathCmd:
         moveListId = movePathCmd.index(yrn)

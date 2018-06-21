@@ -1,5 +1,5 @@
-from core import GameConfig,game,PyCmd,CacheContorl
-from design import CharacterHandle
+from Core import GameConfig,GameInit,PyCmd,CacheContorl
+from Design import CharacterHandle
 from Panel import SeePlayerListPanel
 
 # 用于查看角色列表的流程
@@ -11,13 +11,13 @@ def seePlayerList_func(oldPanel):
     inputS = inputS + seePlayerListPanelInput
     askForSeePlayerListPanelInput = SeePlayerListPanel.askForSeePlayerListPanel(startId)
     inputS = inputS + askForSeePlayerListPanelInput
-    yrn = game.askfor_All(inputS)
+    yrn = GameInit.askfor_All(inputS)
     yrn = str(yrn)
     playerIdList = CharacterHandle.getCharacterIdList()
     PyCmd.clr_cmd()
     pageId = int(CacheContorl.panelState['SeePlayerListPanel'])
     if yrn in playerIdList:
-        import script.flow.SeePlayerAttr as seeplayerattr
+        import script.Flow.SeePlayerAttr as seeplayerattr
         CacheContorl.playObject['objectId'] = yrn
         seeplayerattr.seeAttrOnEveryTime_func('SeePlayerListPanel',oldPanel)
     elif yrn == str(startId):
@@ -30,7 +30,7 @@ def seePlayerList_func(oldPanel):
             seePlayerList_func(oldPanel)
     elif yrn == str(startId + 1):
         if oldPanel == 'MainFramePanel':
-            import script.flow.Main as mainframe
+            import script.Flow.Main as mainframe
             CacheContorl.playObject['objectId'] = '0'
             mainframe.mainFrame_func()
         else:

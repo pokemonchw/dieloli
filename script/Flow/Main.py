@@ -1,7 +1,7 @@
-from core import CacheContorl,game,PyCmd
-from design import AttrHandle
+from Core import CacheContorl,GameInit,PyCmd
+from Design import AttrHandle
 from Panel import MainFramePanel
-from flow import SeePlayerAttr,SeePlayerList,Shop,ChangeClothes,GameSetting,SaveHandleFrame,InScene
+from Flow import SeePlayerAttr,SeePlayerList,Shop,ChangeClothes,GameSetting,SaveHandleFrame,InScene
 
 # 游戏主页
 def mainFrame_func():
@@ -15,7 +15,7 @@ def askForMainFrame(ansList):
     playerId = CacheContorl.playObject['objectId']
     playerData = AttrHandle.getAttrData(playerId)
     playerName = playerData['Name']
-    ans = game.askfor_All(ansList)
+    ans = GameInit.askfor_All(ansList)
     PyCmd.clr_cmd()
     if ans == playerName:
         mainFrameSeeAttrPanel()

@@ -1,5 +1,5 @@
-from core import TextLoading,EraPrint,CacheContorl,GameConfig,PyCmd,TextHandle
-from design import CharacterHandle,Ans,AttrText
+from Core import TextLoading,EraPrint,CacheContorl,GameConfig,PyCmd,TextHandle
+from Design import CharacterHandle,CmdButtonQueue,AttrText
 
 # 查看角色列表面板
 def seePlayerListPanel(maxPage):
@@ -19,7 +19,7 @@ def seePlayerListPanel(maxPage):
     for i in range(showPageStart,showPageOver + 1):
         playerId = str(i)
         cmdId = i - showPageStart
-        cmdIdText = Ans.idIndex(cmdId)
+        cmdIdText = CmdButtonQueue.idIndex(cmdId)
         cmdText = AttrText.getPlayerAbbreviationsInfo(playerId)
         cmdIdTextIndex = TextHandle.getTextIndex(cmdIdText)
         windowWidth = int(GameConfig.text_width)
@@ -38,5 +38,5 @@ def seePlayerListPanel(maxPage):
 
 # 询问切换角色列表页面面板
 def askForSeePlayerListPanel(startId):
-    yrn = Ans.optionint(Ans.seeplayerlist, 3, 'left', askfor=False, cmdSize='center', startId=startId)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.seeplayerlist, 3, 'left', askfor=False, cmdSize='center', startId=startId)
     return yrn

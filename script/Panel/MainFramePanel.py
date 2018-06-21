@@ -1,5 +1,5 @@
-from core import EraPrint,CacheContorl,TextLoading,PyCmd
-from design import AttrHandle,AttrText,AttrPrint,GameTime,Ans
+from Core import EraPrint,CacheContorl,TextLoading,PyCmd
+from Design import AttrHandle,AttrText,AttrPrint,GameTime,CmdButtonQueue
 
 # 游戏主页流程
 def mainFramePanel():
@@ -25,12 +25,12 @@ def mainFramePanel():
     mainMenuText = TextLoading.getTextData(TextLoading.stageWordId,'68')
     EraPrint.sontitleprint(mainMenuText)
     EraPrint.p('\n')
-    askForMainMenu = Ans.optionint(Ans.mainmenu, 4, 'left', askfor=False, cmdSize='center')
+    askForMainMenu = CmdButtonQueue.optionint(CmdButtonQueue.mainmenu, 4, 'left', askfor=False, cmdSize='center')
     cmdList = cmdList + askForMainMenu
     systemMenuText = TextLoading.getTextData(TextLoading.stageWordId,'69')
     EraPrint.sontitleprint(systemMenuText)
     EraPrint.p('\n')
     systemMenuStartId = len(askForMainMenu)
-    askForSystemMenu = Ans.optionint(Ans.systemmenu, 4, 'left', askfor=False, cmdSize='center', startId=systemMenuStartId)
+    askForSystemMenu = CmdButtonQueue.optionint(CmdButtonQueue.systemmenu, 4, 'left', askfor=False, cmdSize='center', startId=systemMenuStartId)
     cmdList = cmdList + askForSystemMenu
     return cmdList

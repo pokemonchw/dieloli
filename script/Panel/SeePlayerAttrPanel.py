@@ -1,5 +1,5 @@
-from core import CacheContorl,TextLoading,EraPrint,PyCmd
-from design import AttrPrint,AttrHandle,AttrText,Ans
+from Core import CacheContorl,TextLoading,EraPrint,PyCmd
+from Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue
 
 panelStateTextData = TextLoading.getTextData(TextLoading.cmdId,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
@@ -202,15 +202,15 @@ def seeAttrShowHandlePanel():
     elif seeAttrPanelHandleCache == '2':
         inputS.append(ansListData[1])
         inputS.append(ansListData[0])
-    yrn = Ans.optionstr(Ans.seeattrpanelmenu, 2, cmdSize='center', askfor=False, cmdListData=inputS)
+    yrn = CmdButtonQueue.optionstr(CmdButtonQueue.seeattrpanelmenu, 2, cmdSize='center', askfor=False, cmdListData=inputS)
     return yrn
 
 # 查看角色属性时输入面板
 def askForSeeAttr():
-    yrn = Ans.optionint(Ans.seeattronrverytime, 3, cmdSize='center', askfor=False)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.seeattronrverytime, 3, cmdSize='center', askfor=False)
     return yrn
 
 # 创建角色完成时确认角色属性输入面板
 def inputAttrOverPanel():
-    yrn = Ans.optionint(Ans.acknowledgmentAttribute, 1, askfor=False)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.acknowledgmentAttribute, 1, askfor=False)
     return yrn

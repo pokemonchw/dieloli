@@ -12,7 +12,9 @@
     "Graces":"0",
     "Features":{},
     "HitPointMax":"2000",
+    "HitPoint":"2000",
     "ManaPointMax":"2000",
+    "ManaPoint":"2000",
     "SexExperience":{},
     "SexGrade":{},
     "Engraving":{
@@ -24,6 +26,14 @@
     },
     "Clothing":{},
     "SexItem":{},
+    "Item":[],
+    "Height":"0",
+    "Weight":"Ordinary",
+    "Measurements":{
+      "Bust":"0",
+      "Waist":"0",
+      "Hip":"0"
+    },
     "Gold":"0",
     "Position":"0"
   },
@@ -36,6 +46,7 @@
     "Courage":["勇敢","胆小"],
     "Friends":["友善","冷淡","孤僻"],
     "Figure":["巨人","矮人"],
+    "Chest":["爆乳","巨乳","贫乳","绝壁"],
     "Sex":["双性器","无性器"],
     "AnimalInternal":["兽耳","利爪"],
     "AnimalExternal":["吸血","狐臭"],

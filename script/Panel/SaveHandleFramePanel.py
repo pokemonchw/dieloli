@@ -1,5 +1,5 @@
-from core import CacheContorl,GameConfig,PyCmd,TextLoading,EraPrint,TextHandle,SaveHandle
-from design import Ans,GameTime
+from Core import CacheContorl,GameConfig,PyCmd,TextLoading,EraPrint,TextHandle,SaveHandle
+from Design import CmdButtonQueue,GameTime
 
 # 载入存档信息头面板
 def loadSaveInfoHeadPanel():
@@ -28,7 +28,7 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
         overSaveId = int(pageSaveValue) * savePanelPage
         startSaveId = overSaveId - int(pageSaveValue)
     for i in range(0,overSaveId - startSaveId):
-        id = Ans.idIndex(i)
+        id = CmdButtonQueue.idIndex(i)
         saveId = startSaveId + i
         if autoSave == True and SaveHandle.judgeSaveFileExist(saveId) != '1':
             idText = idInfoText + " " + str(saveId) + ":"
@@ -71,7 +71,7 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
     if autoSave == True:
         autoInfoText = TextLoading.getTextData(TextLoading.stageWordId,"73")
         i = pageSaveValue
-        id = Ans.idIndex(i)
+        id = CmdButtonQueue.idIndex(i)
         EraPrint.plittleline()
         if SaveHandle.judgeSaveFileExist('auto') == '1':
             saveData = SaveHandle.loadSave('auto')
@@ -108,7 +108,7 @@ def askForChangeSavePagePanel(startId):
     savePageText = '(' + savePanelPage + '/' + maxSavePanelPage + ')'
     EraPrint.printPageLine(sample='-',string=savePageText)
     EraPrint.p('\n')
-    yrn = Ans.optionint(None, 3, askfor=False, cmdSize='center', startId=startId, cmdListData=cmdList)
+    yrn = CmdButtonQueue.optionint(None, 3, askfor=False, cmdSize='center', startId=startId, cmdListData=cmdList)
     return yrn
 
 # 询问覆盖存档面板
@@ -119,7 +119,7 @@ def askForOverlaySavePanel():
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')
-    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    yrn = CmdButtonQueue.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn
 
 # 确认覆盖面板
@@ -130,7 +130,7 @@ def confirmationOverlaySavePanel():
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')
-    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    yrn = CmdButtonQueue.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn
 
 # 询问读档面板
@@ -141,7 +141,7 @@ def askLoadSavePanel():
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')
-    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    yrn = CmdButtonQueue.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn
 
 # 确认读档面板
@@ -152,7 +152,7 @@ def confirmationLoadSavePanel():
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')
-    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    yrn = CmdButtonQueue.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn
 
 # 确认删除存档面板
@@ -163,5 +163,5 @@ def confirmationRemoveSavePanel():
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')
-    yrn = Ans.optionint(None, 1, askfor=False, cmdListData=cmdList)
+    yrn = CmdButtonQueue.optionint(None, 1, askfor=False, cmdListData=cmdList)
     return yrn

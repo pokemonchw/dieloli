@@ -1,9 +1,9 @@
 # -*- coding: UTF-8 -*-
 import sys
 sys.path.append('script')
-from core import GamePathConfig,game
-from design import StartFlow
+from Core import GamePathConfig,GameInit
+from Design import StartFlow
 
 GamePathConfig.platform = 'win'
 
-game.run(StartFlow.open_func)
+GameInit.run(StartFlow.open_func)

@@ -1,5 +1,5 @@
-from core import CacheContorl,TextLoading,EraPrint,ValueHandle
-from design import MapHandle,Ans
+from Core import CacheContorl,TextLoading,EraPrint,ValueHandle
+from Design import MapHandle,CmdButtonQueue
 
 # 用于绘制地图的面板
 def seeMapPanel():
@@ -34,7 +34,7 @@ def seeMovePathPanel():
             loadSceneData = MapHandle.getSceneDataForMap(mapId, scene)
             sceneName = loadSceneData['SceneName']
             sceneCmd.append(sceneName)
-        yrn = Ans.optionstr(cmdList=None, cmdListData=sceneCmd, cmdColumn=4, askfor=False, cmdSize='center')
+        yrn = CmdButtonQueue.optionstr(cmdList=None, cmdListData=sceneCmd, cmdColumn=4, askfor=False, cmdSize='center')
         inputS = inputS + yrn
     else:
         errorMoveText = TextLoading.getTextData(TextLoading.messageId, '28')
@@ -45,6 +45,6 @@ def seeMovePathPanel():
 # 用于绘制通常按钮面板
 def backScenePanel(startId):
     inputS = []
-    mapCmdList = Ans.optionint(Ans.seemap, askfor=False, startId=startId)
+    mapCmdList = CmdButtonQueue.optionint(CmdButtonQueue.seemap, askfor=False, startId=startId)
     inputS = inputS + mapCmdList
     return inputS

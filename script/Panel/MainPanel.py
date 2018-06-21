@@ -1,6 +1,6 @@
 import time
-from core import EraPrint,FlowHandle,TextLoading,TextHandle,GameConfig,PyCmd
-from design import Ans
+from Core import EraPrint,FlowHandle,TextLoading,TextHandle,GameConfig,PyCmd
+from Design import CmdButtonQueue
 
 # 载入游戏面板
 def loadGamePanel():
@@ -25,5 +25,5 @@ def gameMainPanel():
     EraPrint.pline()
     time.sleep(1)
     PyCmd.focusCmd()
-    menuInt = Ans.optionint(Ans.logomenu)
+    menuInt = CmdButtonQueue.optionint(CmdButtonQueue.logomenu)
     return menuInt

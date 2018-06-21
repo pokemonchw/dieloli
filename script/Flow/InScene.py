@@ -1,7 +1,7 @@
-from core import CacheContorl,game,PyCmd
-from design import MapHandle
+from Core import CacheContorl,GameInit,PyCmd
+from Design import MapHandle
 from Panel import InScenePanel
-from flow import SeePlayerAttr
+from Flow import SeePlayerAttr
 
 # 用于进入场景流程
 def getInScene_func():
@@ -36,13 +36,13 @@ def seeScene_func(judge):
     inSceneCmdList1 = InScenePanel.inSceneButtonPanel()
     inputS = inputS + inSceneCmdList1
     startId1 = len(inSceneCmdList1)
-    yrn = game.askfor_All(inputS)
+    yrn = GameInit.askfor_All(inputS)
     PyCmd.clr_cmd()
     if yrn in scenePlayerNameList:
         CacheContorl.playObject['objectId'] = MapHandle.getPlayerIdByPlayerName(yrn,sceneId)
         seeScene_func(judge)
     elif yrn == '0':
-        import flow.SeeMap as seemap
+        import Flow.SeeMap as seemap
         seemap.seeMapFlow()
     elif yrn == '1':
         SeePlayerAttr.seeAttrOnEveryTime_func('InScenePanel')

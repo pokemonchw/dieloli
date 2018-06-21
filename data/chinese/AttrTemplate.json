@@ -227,5 +227,19 @@
       "Scarce":[1,29],
       "None":[0,0]
     }
-  }
+  },
+  "HeightTem":{
+    "Man":[48.2,52.8],
+    "Woman":[47.7,52.0],
+    "Futa":[47.7,52.0],
+    "Asexual":[48.2,52.8]
+  },
+  "WeightTem":{
+      "Thin":[14.0,18.4],
+      "Ordinary":[18.5,23.9],
+      "Overweight":[24.0,27.9],
+      "Fat":[28.0,34.9],
+      "SevereObesity":[35.0,39.9],
+      "ExtremelySevereObesity":[40.0,50.0]
+    }
 }

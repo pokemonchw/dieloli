@@ -1,8 +1,8 @@
 import random
-from core import CacheContorl,PyCmd,TextLoading,EraPrint,ValueHandle
-from design import AttrCalculation
+from Core import CacheContorl,PyCmd,TextLoading,EraPrint,ValueHandle
+from Design import AttrCalculation
 from Panel import CreatorPlayerPanel
-from flow import SeePlayerAttr
+from Flow import SeePlayerAttr
 
 playerId = '0'
 featuresList = AttrCalculation.getFeaturesList()
@@ -22,7 +22,7 @@ def inputName_func():
     elif flowReturn == 2:
         CacheContorl.wframeMouse['wFrameRePrint'] = 1
         EraPrint.pnextscreen()
-        import design.StartFlow as mainflow
+        import Design.StartFlow as mainflow
         mainflow.main_func()
     pass
 

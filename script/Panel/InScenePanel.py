@@ -1,5 +1,5 @@
-from core import CacheContorl,TextLoading,EraPrint,PyCmd
-from design import GameTime,Ans
+from Core import CacheContorl,TextLoading,EraPrint,PyCmd
+from Design import GameTime,CmdButtonQueue
 
 # 用于查看当前场景的面板
 def seeScenePanel():
@@ -57,6 +57,6 @@ def seeObjectInfoPanel():
     EraPrint.plittleline()
 
 def inSceneButtonPanel():
-    inputs = Ans.optionint(cmdList=Ans.inscenelist1,cmdColumn=9,askfor=False,cmdSize='center')
+    inputs = CmdButtonQueue.optionint(cmdList=CmdButtonQueue.inscenelist1, cmdColumn=9, askfor=False, cmdSize='center')
     EraPrint.plittleline()
     return inputs

@@ -1,5 +1,5 @@
-from  core import CacheContorl,EraPrint,TextLoading,PyCmd,game,TextHandle
-from design import AttrCalculation,Ans
+from  Core import CacheContorl,EraPrint,TextLoading,PyCmd,GameInit,TextHandle
+from Design import AttrCalculation,CmdButtonQueue
 
 # 请求玩家输入姓名面板
 def inputNamePanel():
@@ -9,7 +9,7 @@ def inputNamePanel():
     EraPrint.p('\n')
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '4'))
-    yrn = Ans.optionint(Ans.currencymenu, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1)
     EraPrint.p('\n')
     return yrn
 
@@ -19,7 +19,7 @@ def startInputNamePanel():
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '3'))
     inputState = 0
     while inputState == 0:
-        playerName = game.askfor_str()
+        playerName = GameInit.askfor_str()
         EraPrint.pl(playerName)
         if TextHandle.getTextIndex(playerName) > 10:
             EraPrint.pl(TextLoading.getTextData(TextLoading.errorId, 'inputNameTooLongError'))
@@ -33,7 +33,7 @@ def inputNickNamePanel():
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '6'))
-    yrn = Ans.optionint(Ans.inputnickname, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputnickname, 1)
     EraPrint.p('\n')
     return yrn
 
@@ -43,7 +43,7 @@ def startInputNickNamePanel():
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '5'))
     inputState = 0
     while inputState == 0:
-        playerNickName = game.askfor_str()
+        playerNickName = GameInit.askfor_str()
         EraPrint.pl(playerNickName)
         if TextHandle.getTextIndex(playerNickName) > 10:
             EraPrint.pl(TextLoading.getTextData(TextLoading.errorId, 'inputNickNameTooLongError'))
@@ -60,7 +60,7 @@ def inputSelfNamePanel():
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '14'))
-    yrn = Ans.optionint(Ans.inputselfname, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputselfname, 1)
     EraPrint.p('\n')
     return yrn
 
@@ -70,7 +70,7 @@ def startInputSelfName():
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '15'))
     inputState = 0
     while inputState == 0:
-        playerSelfName = game.askfor_str()
+        playerSelfName = GameInit.askfor_str()
         EraPrint.pl(playerSelfName)
         if TextHandle.getTextIndex(playerSelfName) > 10:
             EraPrint.pl(TextLoading.getTextData(TextLoading.errorId, 'inputSelfNameTooLongError'))
@@ -85,7 +85,7 @@ def inputSexPanel():
     sexId = CacheContorl.playObject['object'][playerId]['Sex']
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '8')[sexId])
-    yrn = Ans.optionint(Ans.currencymenu, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1)
     EraPrint.p('\n')
     return yrn
 
@@ -93,7 +93,7 @@ def inputSexPanel():
 def inputSexChoicePanel():
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '7'))
-    yrn = Ans.optionint(Ans.sexmenu, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.sexmenu, 1)
     return yrn
 
 # 询问玩家是否进行详细设置面板
@@ -103,7 +103,7 @@ def attributeGenerationBranchPanel():
     PyCmd.clr_cmd()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '9'))
-    yrn = Ans.optionint(Ans.currencymenu, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1)
     return yrn
 
 # 详细设置属性1:询问玩家是否是小孩子
@@ -111,7 +111,7 @@ def detailedSetting1Panel():
     EraPrint.p('\n')
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '10'))
-    yrn = Ans.optionint(Ans.detailedsetting1, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting1, 1)
     return yrn
 
 # 详细设置属性2:询问玩家是否具备动物特征
@@ -119,7 +119,7 @@ def detailedSetting2Panel():
     EraPrint.p('\n')
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '11'))
-    yrn = Ans.optionstr(Ans.detailedsetting2, 5, 'center', True)
+    yrn = CmdButtonQueue.optionstr(CmdButtonQueue.detailedsetting2, 5, 'center', True)
     return yrn
 
 # 详细设置属性3:询问玩家是否具备丰富的性经验
@@ -127,7 +127,7 @@ def detailedSetting3Panel():
     EraPrint.p('\n')
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '12'))
-    yrn = Ans.optionint(Ans.detailedsetting3)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting3)
     return yrn
 
 # 详细设置属性4:询问玩家的胆量
@@ -135,7 +135,7 @@ def detailedSetting4Panel():
     EraPrint.p('\n')
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '13'))
-    yrn = Ans.optionint(Ans.detailedsetting4)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting4)
     return yrn
 
 # 详细设置属性5:询问玩家的性格
@@ -143,7 +143,7 @@ def detailedSetting5Panel():
     EraPrint.p('\n')
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '16'))
-    yrn = Ans.optionint(Ans.detailedsetting5)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting5)
     return yrn
 
 # 详细设置属性6:询问玩家的自信
@@ -151,7 +151,7 @@ def detailedSetting6Panel():
     EraPrint.p('\n')
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '17'))
-    yrn = Ans.optionint(Ans.detailedsetting6)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting6)
     return yrn
 
 # 详细设置属性7:询问玩家友善
@@ -159,5 +159,5 @@ def detailedSetting7Panel():
     EraPrint.p('\n')
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '18'))
-    yrn = Ans.optionint(Ans.detailedsetting7)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting7)
     return yrn

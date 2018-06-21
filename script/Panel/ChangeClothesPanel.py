@@ -1,5 +1,5 @@
-from core import EraPrint,TextLoading
-from design import AttrText
+from Core import EraPrint,TextLoading
+from Design import AttrText
 
 # 查看角色已装备服装列表面板
 def seePlayerWearClothes(playerId):
