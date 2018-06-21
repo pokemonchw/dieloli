@@ -3,7 +3,7 @@ import threading
 import queue
 import json
 import sys
-from core import GamePathConfig,MainFrame,GameConfig
+from Core import GamePathConfig,MainFrame,GameConfig
 sys_print = print
 
 sys.setrecursionlimit(100000)

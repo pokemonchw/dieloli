@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
-from core import GameData,FlowHandle,pyio,Event,KeyListionEvent
-from design import MapHandle
+from Core import GameData,FlowHandle,IoInit,Event,KeyListionEvent
+from Design import MapHandle
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'
@@ -12,8 +12,8 @@ _main_flow = None
 # 游戏初始化
 def init(main_flow):
     global def_style
-    pyio.clear_screen()
-    pyio.clearorder()
+    IoInit.clear_screen()
+    IoInit.clearorder()
     FlowHandle.cmd_clear()
     # 载入数据库数据
     GameData.init()
@@ -22,9 +22,9 @@ def init(main_flow):
     # 载入按键监听
     KeyListionEvent.onWFrameListion()
     # 设置背景颜色
-    pyio.set_background(GameData.gamedata()['core_cfg']['background_color'])
+    IoInit.set_background(GameData.gamedata()['core_cfg']['background_color'])
     # 初始化字体
-    pyio.init_style()
+    IoInit.init_style()
     # 初始化地图数据
     MapHandle.initSceneData()
     MapHandle.initMapData()
@@ -52,7 +52,7 @@ def init(main_flow):
 def run(main_func):
     def _init():
         init(main_func)
-    pyio.run(_init)
+    IoInit.run(_init)
 
 # 向控制台输入信息
 def console_log(string):
@@ -62,9 +62,9 @@ def console_log(string):
 # 重启游戏
 def reset():
     global _main_flow
-    pyio.io_clear_cmd()
-    pyio.clear_screen()
-    pyio.clearorder()
+    IoInit.io_clear_cmd()
+    IoInit.clear_screen()
+    IoInit.clearorder()
     init(_main_flow)
 
 # 请求输入命令

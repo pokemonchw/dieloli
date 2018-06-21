@@ -1,4 +1,4 @@
-from core import PyCmd,TextLoading,game,EraPrint,TextHandle,GameConfig,Dictionaries
+from Core import PyCmd,TextLoading,GameInit,EraPrint,TextHandle,GameConfig,Dictionaries
 
 logomenu = "logoMenu"
 currencymenu = "currencyMenu"
@@ -76,7 +76,7 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
             pass
     EraPrint.p('\n')
     if askfor == True:
-        ans = int(game.askfor_Int(inputI))
+        ans = int(GameInit.askfor_Int(inputI))
         return ans
     else:
         return inputI
@@ -115,7 +115,7 @@ def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = T
             inputS.append(cmdTextBak)
     EraPrint.p('\n')
     if askfor == True:
-        ans = game.askfor_All(inputS)
+        ans = GameInit.askfor_All(inputS)
         return ans
     else:
         return inputS
