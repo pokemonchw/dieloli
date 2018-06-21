@@ -1,5 +1,4 @@
-import os
-import re
+import os,re
 from Core import GameData
 
 # 字符串定义###########################################################

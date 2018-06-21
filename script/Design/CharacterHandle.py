@@ -27,13 +27,24 @@ def initCharacterList():
         defaultAttr['Sex'] = characterSex
         AttrCalculation.setSexCache(characterSex)
         defaultAttr['Features'] = CacheContorl.featuresList.copy()
-        if 'Age' in  characterDataKeys:
+        if 'Age' in characterDataKeys:
             ageTem = characterData['Age']
             characterAge = AttrCalculation.getAge(ageTem)
             defaultAttr['Age'] = characterAge
         elif 'Features' in characterDataKeys:
             AttrCalculation.setAddFeatures(characterData['Features'])
             defaultAttr['Features'] = CacheContorl.featuresList.copy()
+        temList = AttrCalculation.getTemList()
+        height = AttrCalculation.getHeight(temList[characterSex], defaultAttr['Age'])
+        defaultAttr['Height'] = height
+        if 'Weight' in characterData:
+            weightTemName = characterData['Weight']
+        else:
+            weightTemName = 'Ordinary'
+        weight = AttrCalculation.getWeight(weightTemName, height['NowHeight'])
+        defaultAttr['Weight'] = weight
+        measurements = AttrCalculation.getMeasurements(temList[characterSex], height['NowHeight'], weightTemName)
+        defaultAttr['Measurements'] = measurements
         for keys in defaultAttr:
             CacheContorl.temporaryObject[keys] = defaultAttr[keys]
         CacheContorl.featuresList = {}

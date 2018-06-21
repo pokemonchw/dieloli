@@ -27,7 +27,13 @@
     "Clothing":{},
     "SexItem":{},
     "Item":[],
-    "Height":"0",
+    "Height":{
+      "NowHeight":0,
+      "GrowthHeight":0,
+      "ExpectAge":0,
+      "DevelopmentAge":0,
+      "ExpectHeight":0
+    },
     "Weight":"Ordinary",
     "Measurements":{
       "Bust":"0",

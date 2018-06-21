@@ -1,9 +1,7 @@
 # -*- coding: UTF-8 -*-
-import threading
-import queue
-import json
-import sys
-from Core import GamePathConfig,MainFrame,GameConfig
+import threading,queue,json,sys
+from Core import MainFrame,GameConfig
+
 sys_print = print
 
 sys.setrecursionlimit(100000)

@@ -55,12 +55,26 @@ def seePlayerMainAttrPanel(playerId):
         playerSan = playerData['San']
         playerSan = TextLoading.getTextData(TextLoading.stageWordId, '10') + playerSan
         attrListString.append(playerSan)
+        playerHeight = playerData['Height']['NowHeight']
+        playerWeight = playerData['Weight']
+        playerMeasurements = playerData['Measurements']
+        playerHeightText = str(round(playerHeight,2))
+        playerWeightText = str(round(playerWeight,2))
+        playerBust = str(round(playerMeasurements['Bust'],2))
+        playerWaist = str(round(playerMeasurements['Waist'],2))
+        playerHip = str(round(playerMeasurements['Hip'],2))
+        playerHeightInfo = TextLoading.getTextData(TextLoading.stageWordId,'80') + playerHeightText
+        attrListString.append(playerHeightInfo)
+        playerWeightInfo = TextLoading.getTextData(TextLoading.stageWordId,'81') + playerWeightText
+        attrListString.append(playerWeightInfo)
+        playerBWHInfo = TextLoading.getTextData(TextLoading.stageWordId,'82') + playerBust + ',' + playerWaist + ',' + playerHip
         playerIntimate = playerData['Intimate']
         playerIntimate = TextLoading.getTextData(TextLoading.stageWordId, '16') + playerIntimate
         attrListString.append(playerIntimate)
         playerGraces = playerData['Graces']
         playerGraces = TextLoading.getTextData(TextLoading.stageWordId, '17') + playerGraces
         attrListString.append(playerGraces)
+        attrListString.append(playerBWHInfo)
         EraPrint.plist(attrListString, 4, 'center')
         EraPrint.p('\n')
         AttrPrint.printHpAndMpBar(playerId)

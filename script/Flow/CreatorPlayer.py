@@ -139,7 +139,14 @@ def detailedSetting_func1():
         CacheContorl.temporaryObject['Features'] = CacheContorl.featuresList.copy()
         playerAgeTemName = AttrCalculation.getAgeTemList()[1]
         playerAge = AttrCalculation.getAge(playerAgeTemName)
+        playerTem = TextLoading.getTextData(TextLoading.temId,'TemList')[playerSex]
+        playerHeigt = AttrCalculation.getHeight(playerTem,playerAge)
+        playerWeight = AttrCalculation.getWeight('Ordinary',playerHeigt['NowHeight'])
+        playerMeasurements = AttrCalculation.getMeasurements(playerTem,playerHeigt['NowHeight'],'Ordinary')
         CacheContorl.temporaryObject['Age'] = playerAge
+        CacheContorl.temporaryObject['Height'] = playerHeigt
+        CacheContorl.temporaryObject['Weight'] = playerWeight
+        CacheContorl.temporaryObject['Measurements'] = playerMeasurements
         detailedSetting_func2()
 
 # 详细设置属性2:询问玩家是否具备动物特征

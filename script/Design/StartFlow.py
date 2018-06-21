@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
-import os
-import time
+import os,time
 from Core import PyCmd,CacheContorl
 from Flow import CreatorPlayer,SaveHandleFrame
 from Panel import MainPanel

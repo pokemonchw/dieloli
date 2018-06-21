@@ -1,9 +1,9 @@
 from Core import CacheContorl
-from Design import ObjectBehavior
+from Design import CharacterHandle
 
 # npc行为总控制
 def initObjectBehavior():
-    npcList = ObjectBehavior.getCharacterIdList()
+    npcList = CharacterHandle.getCharacterIdList()
     for npc in npcList:
         objectStateBehavior(npc)
 

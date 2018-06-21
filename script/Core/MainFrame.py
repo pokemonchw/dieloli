@@ -1,7 +1,5 @@
 # -*- coding: UTF-8 -*-
-import os
-import json
-import uuid
+import os,json,uuid
 from tkinter import ttk,Tk,Text,StringVar,FALSE,Menu,END,N,W,E,S,VERTICAL,font
 from Core import GameConfig,TextLoading,CacheContorl,SettingFrame,TextHandle
 

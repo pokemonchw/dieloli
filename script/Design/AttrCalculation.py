@@ -1,15 +1,13 @@
-import Core.GameData as data
-import os
-import random
-from Core import CacheContorl,ValueHandle,GameConfig,GamePathConfig
+import os,random
+from Core import CacheContorl,ValueHandle,GameConfig,GamePathConfig,TextLoading,GameData
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
 
 templatePath = os.path.join(gamepath,'data',language,'AttrTemplate.json')
-templateData = data._loadjson(templatePath)
+templateData = GameData._loadjson(templatePath)
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
-roleAttrData = data._loadjson(roleAttrPath)
+roleAttrData = GameData._loadjson(roleAttrPath)
 
 # 获取模板列表
 def getTemList():
@@ -65,8 +63,8 @@ def getAttr(temName):
     sexItemList = getSexItem(temName)
     height = getHeight(temName,age)
     weightTemName = temData['Weight']
-    weight = getWeight(weightTemName,height)
-    measurements = getMeasurements(temName,height,weightTemName)
+    weight = getWeight(weightTemName,height['NowHeight'])
+    measurements = getMeasurements(temName,height['NowHeight'],weightTemName)
     gold = getGold()
     attrList = {
         'Age':age,
@@ -95,24 +93,48 @@ def getAge(temName):
     return age
 
 # 获取初始身高
-def getHeight(temName,age):
+def getHeight(temName,age,Features):
     temData = templateData['HeightTem'][temName]
     initialHeight = random.uniform(temData[0],temData[1])
     age = int(age)
+    expectHeightFix = 0
+    figuresData = TextLoading.getTextData(TextLoading.roleId,'Features')['Figure']
+    if Features['Figure'] == figuresData[0]:
+        expectHeightFix = 50
+    elif Features['Figure'] == figuresData[1]:
+        expectHeightFix = -50
     if temName == 'Man' or 'Asexual':
+        expectAge = random.randint(18,22)
         expectHeight = initialHeight / 0.2949
     else:
+        expectAge = random.randint(13,17)
         expectHeight = initialHeight / 0.3109
-    growthHeight = expectHeight / (22 * 365)
-    if age > 22:
+    expectHeight = expectHeight + expectHeightFix
+    developmentAge = random.randint(4,6)
+    growthHeightData = getGrowthHeight(age,expectHeight,developmentAge,expectAge)
+    growthHeight = growthHeightData['GrowthHeight']
+    nowHeight = growthHeightData['NowHeight']
+    if age > expectAge:
         nowHeight = expectHeight
     else:
-        nowHeight = 365 * growthHeight * age
-    return nowHeight
+        nowHeight = 365 * growthHeight * age + nowHeight
+    return {"NowHeight":nowHeight,"GrowthHeight":growthHeight,"ExpectAge":expectAge,"DevelopmentAge":developmentAge,"ExpectHeight":expectHeight}
+
+# 获取每日身高增量
+def getGrowthHeight(nowAge,expectHeight,developmentAge,expectAge):
+    if nowAge > developmentAge:
+        nowHeight = expectHeight / 2
+        judgeAge = expectAge - developmentAge
+        growthHeight = nowHeight / (judgeAge * 365)
+    else:
+        judgeHeight = expectHeight / 2
+        nowHeight = 0
+        growthHeight = judgeHeight / (nowAge * 365)
+    return {'GrowthHeight':growthHeight,'NowHeight':nowHeight}
 
 # 获取体重
 def getWeight(temName,height):
-    temData = templateData['Weight'][temName]
+    temData = templateData['WeightTem'][temName]
     bmi = random.uniform(temData[0],temData[1])
     height = height / 100
     weight = bmi * height * height

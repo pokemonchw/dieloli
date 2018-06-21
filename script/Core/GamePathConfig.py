@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
-import os
-import sys
+import os,sys
 
 if getattr(sys, 'frozen', False):
     # frozen
