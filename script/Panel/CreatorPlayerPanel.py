@@ -161,3 +161,11 @@ def detailedSetting7Panel():
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '18'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting7)
     return yrn
+
+# 详细设置属性8:询问玩家体型
+def detailedSetting8Panel():
+    EraPrint.p('\n')
+    EraPrint.pline()
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '29'))
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting8)
+    return yrn

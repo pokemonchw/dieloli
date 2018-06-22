@@ -61,7 +61,7 @@ def getAttr(temName):
     EngravingList = getEngravingList()
     clothingList = getClothing(temName)
     sexItemList = getSexItem(temName)
-    height = getHeight(temName,age)
+    height = getHeight(temName,age,{})
     weightTemName = temData['Weight']
     weight = getWeight(weightTemName,height['NowHeight'])
     measurements = getMeasurements(temName,height['NowHeight'],weightTemName)
@@ -99,10 +99,13 @@ def getHeight(temName,age,Features):
     age = int(age)
     expectHeightFix = 0
     figuresData = TextLoading.getTextData(TextLoading.roleId,'Features')['Figure']
-    if Features['Figure'] == figuresData[0]:
-        expectHeightFix = 50
-    elif Features['Figure'] == figuresData[1]:
-        expectHeightFix = -50
+    try:
+        if Features['Figure'] == figuresData[0]:
+            expectHeightFix = 50
+        elif Features['Figure'] == figuresData[1]:
+            expectHeightFix = -50
+    except KeyError:
+        expectHeightFix = 0
     if temName == 'Man' or 'Asexual':
         expectAge = random.randint(18,22)
         expectHeight = initialHeight / 0.2949

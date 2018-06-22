@@ -5,6 +5,7 @@ from Flow import SeePlayerAttr
 
 # 用于进入场景流程
 def getInScene_func():
+    PyCmd.clr_cmd()
     sceneData = CacheContorl.sceneData.copy()
     sceneId = CacheContorl.playObject['object']['0']['Position']
     scenePlayerList = sceneData['ScenePlayerData'][sceneId]

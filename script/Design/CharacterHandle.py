@@ -35,7 +35,10 @@ def initCharacterList():
             AttrCalculation.setAddFeatures(characterData['Features'])
             defaultAttr['Features'] = CacheContorl.featuresList.copy()
         temList = AttrCalculation.getTemList()
-        height = AttrCalculation.getHeight(temList[characterSex], defaultAttr['Age'])
+        if 'Features' in characterDataKeys:
+            height = AttrCalculation.getHeight(temList[characterSex], defaultAttr['Age'],characterData['Features'])
+        else:
+            height = AttrCalculation.getHeight(temList[characterSex], defaultAttr['Age'],{})
         defaultAttr['Height'] = height
         if 'Weight' in characterData:
             weightTemName = characterData['Weight']

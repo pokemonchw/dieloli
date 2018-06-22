@@ -140,7 +140,7 @@ def detailedSetting_func1():
         playerAgeTemName = AttrCalculation.getAgeTemList()[1]
         playerAge = AttrCalculation.getAge(playerAgeTemName)
         playerTem = TextLoading.getTextData(TextLoading.temId,'TemList')[playerSex]
-        playerHeigt = AttrCalculation.getHeight(playerTem,playerAge)
+        playerHeigt = AttrCalculation.getHeight(playerTem,playerAge,CacheContorl.temporaryObject['Features'])
         playerWeight = AttrCalculation.getWeight('Ordinary',playerHeigt['NowHeight'])
         playerMeasurements = AttrCalculation.getMeasurements(playerTem,playerHeigt['NowHeight'],'Ordinary')
         CacheContorl.temporaryObject['Age'] = playerAge
@@ -221,4 +221,19 @@ def detailedSetting_func7():
     CacheContorl.featuresList['Friends'] = friendsList[flowReturn]
     CacheContorl.temporaryObject['Features'] = CacheContorl.featuresList.copy()
     PyCmd.clr_cmd()
+    detailedSetting_func8()
+
+# 详细设置属性8:询问玩家体型
+def detailedSetting_func8():
+    flowReturn = CreatorPlayerPanel.detailedSetting8Panel()
+    weightTemData = TextLoading.getTextData(TextLoading.temId,'WeightTem')
+    weightTemList = ValueHandle.dictKeysToList(weightTemData)
+    weightTem = weightTemList[int(flowReturn)]
+    playerHeight = CacheContorl.temporaryObject['Height']
+    playerWeight = AttrCalculation.getWeight(weightTem, playerHeight['NowHeight'])
+    playerSex = CacheContorl.temporaryObject['Sex']
+    playerTem = TextLoading.getTextData(TextLoading.temId, 'TemList')[playerSex]
+    playerMeasurements = AttrCalculation.getMeasurements(playerTem, playerHeight['NowHeight'], weightTem)
+    CacheContorl.temporaryObject['Weight'] = playerWeight
+    CacheContorl.temporaryObject['Measurements'] = playerMeasurements
     SeePlayerAttr.acknowledgmentAttribute_func()

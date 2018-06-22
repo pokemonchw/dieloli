@@ -9,7 +9,6 @@ def open_func():
     MainPanel.loadGamePanel()
     time.sleep(1)
     main_func()
-    pass
 
 # 主界面
 def main_func():

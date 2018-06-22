@@ -64,3 +64,7 @@ textWait = 0
 sceneData = {}
 
 mapData = {}
+
+pathList = []
+
+pathTimeList = []

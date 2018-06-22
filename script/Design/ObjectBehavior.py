@@ -5,8 +5,24 @@ from Design import CharacterHandle
 def initObjectBehavior():
     npcList = CharacterHandle.getCharacterIdList()
     for npc in npcList:
-        objectStateBehavior(npc)
+        objectStateJudge(npc)
 
 # npc状态判断
-def objectStateBehavior(objectId):
+def objectStateJudge(objectId):
     objectData = CacheContorl.playObject['object'][objectId]
+    objectState = objectData['State']
+    if objectState == 'Arder':
+        objectArderBehavior(objectId,objectData)
+
+# 休闲状态行为
+def objectArderBehavior(objectId,objectData):
+    objectAge = objectData['Age']
+    objectAge = int(objectAge)
+    if objectAge <= 18:
+        studentArderBehavior(objectId,objectData)
+    else:
+        pass
+
+# 学生休闲行为
+def studentArderBehavior(objectId,objectData):
+    pass

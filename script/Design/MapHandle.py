@@ -99,13 +99,15 @@ def playerMoveScene(oldSceneId,newSceneId,characterId):
     CacheContorl.sceneData['ScenePlayerData'] = scenePlayerData
 
 # 计算寻路路径
-def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],pathTime = 0,pathList = [],timeList = []):
+def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],pathTime = 0):
+    pathList = CacheContorl.pathList
+    timeList = CacheContorl.pathTimeList
     mapId = int(mapId)
     nowNode = str(nowNode)
     targetNode = str(targetNode)
-    mapData = CacheContorl.mapData['MapData'][mapId]
-    pathEdge = mapData['PathEdge']
-    targetListDict = pathEdge[nowNode]
+    mapData = CacheContorl.mapData['MapData'][mapId].copy()
+    pathEdge = mapData['PathEdge'].copy()
+    targetListDict = pathEdge[nowNode].copy()
     targetList = ValueHandle.dictKeysToList(targetListDict)
     if nowNode == targetNode:
         return 'End'
@@ -131,36 +133,40 @@ def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],
                 else:
                     pathEdgeNow = pathEdge[target].copy()
                     pathEdgeNow.pop(nowNode)
-                    targetNodeInTargetList = pathEdgeNow
+                    targetNodeInTargetList = pathEdgeNow.copy()
                     targetNodeInTargetToList = ValueHandle.dictKeysToList(targetNodeInTargetList)
                     for i in range(0,len(targetNodeInTargetToList)):
                         targetNodeInTarget = targetNodeInTargetToList[i]
                         findPath.append(targetNodeInTarget)
                         findTime.append(targetNodeInTargetList[targetNodeInTarget])
-                        pathData = getPathfinding(mapId,targetNodeInTarget,targetNode,findPath,findTime,pathTime,pathList,timeList)
+                        pathData = getPathfinding(mapId,targetNodeInTarget,targetNode,findPath,findTime,pathTime)
                         if pathData == 'Null':
                             pass
                         elif pathData == 'End':
-                            pass
+                            pathList.append(findPath)
+                            timeList.append(findTime)
                         else:
                             pathList.append(pathData['Path'])
                             timeList.append(pathData['Time'])
-        if len(pathList) > 0:
-            pathId = 0
-            needTime = 'Null'
-            for i in range(0,len(timeList)):
-                nowTime = 0
-                for index in range(0,len(timeList[i])):
-                    if index == 0:
-                        needTime = 0
-                    nowTime = needTime + timeList[i][index]
-                if needTime == 'Null' or nowTime < needTime:
-                    needTime = nowTime
-                    pathId = i
-            pathData = {'Path':pathList[pathId],'Time':timeList[pathId]}
-            return pathData
-        else:
-            return 'Null'
+        CacheContorl.pathTimeList = []
+        CacheContorl.pathList = []
+        return getMinimumPath(pathList,timeList)
+
+def getMinimumPath(pathList,timeList):
+    if len(pathList) > 0:
+        needTimeList = []
+        for i in range(0,len(timeList)):
+            needTimeList.append(getNeedTime(timeList[i]))
+        pathId = needTimeList.index(min(needTimeList))
+        return {'Path': pathList[pathId], 'Time': timeList[pathId]}
+    else:
+        return 'Null'
+
+def getNeedTime(timeGroup):
+    needTime = 0
+    for i in timeGroup:
+        needTime = needTime + i
+    return needTime
 
 # 载入地图下对应场景数据
 def getSceneDataForMap(mapId,mapSceneId):
@@ -211,7 +217,9 @@ def judgeSonMapInMap(mapPath,sonMapPath):
         else:
             mapPathList.append(loadPath)
     if sonMapPath in mapPathList:
-        sonMapId = mapPathList.index(sonMapPath)
+        mapPathText = str(mapPath)
+        sonMapPathText = str(sonMapPath)
+        sonMapId = sonMapPathText.strip(mapPathText)
     else:
         loadSonMapPath = os.path.abspath(os.path.join(sonMapPath, '..'))
         sonMapId = judgeSonMapInMap(mapPath,loadSonMapPath)
