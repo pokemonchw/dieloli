@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os,json,uuid
 from tkinter import ttk,Tk,Text,StringVar,FALSE,Menu,END,N,W,E,S,VERTICAL,font
-from Core import GameConfig,TextLoading,CacheContorl,SettingFrame,TextHandle
+from Core import GameConfig,TextLoading,CacheContorl,SettingFrame,AboutFrame,TextHandle
 
 def closeWindow():
     os._exit(0)
@@ -101,11 +101,14 @@ def quit(*args):
 def setting(*args):
     SettingFrame.openSettingFrame()
 
+def about(*args):
+    AboutFrame.openAboutFrame()
+
 menufile.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuRestart),command=reset)
 menufile.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuQuit),command=quit)
 
 menuother.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuSetting),command=setting)
-menuother.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuAbout))
+menuother.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuAbout),command=about)
 
 input_event_func = None
 send_order_state = False
