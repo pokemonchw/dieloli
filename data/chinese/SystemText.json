@@ -1,5 +1,8 @@
 {
   "Setting":{
     "TitleName":"设置"
+  },
+  "About":{
+    "TitleName":"关于"
   }
 }
