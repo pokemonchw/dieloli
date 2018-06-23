@@ -1,5 +1,5 @@
-from Core import CacheContorl
-from Design import MapHandle,GameTime
+from Core import CacheContorl,TextLoading,EraPrint
+from Design import MapHandle,GameTime,Update
 from Flow import InScene
 
 # 主角移动
@@ -8,10 +8,17 @@ def playerMove(targetScene):
     mapId = MapHandle.getMapIdForScene(playerPosition)
     nowSceneId = MapHandle.getMapSceneIdForSceneId(mapId, playerPosition)
     if nowSceneId == targetScene:
+        Update.gameUpdateFlow()
         InScene.getInScene_func()
     else:
         pathData = MapHandle.getPathfinding(mapId,nowSceneId,targetScene)
         if pathData == 'End':
+            Update.gameUpdateFlow()
+            InScene.getInScene_func()
+        elif pathData == 'Null':
+            nullMessage = TextLoading.getTextData(TextLoading.messageId,'30')
+            EraPrint.p(nullMessage)
+            Update.gameUpdateFlow()
             InScene.getInScene_func()
         else:
             timeList = pathData['Time']

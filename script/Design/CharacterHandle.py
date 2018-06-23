@@ -4,6 +4,7 @@ from Design import AttrCalculation,MapHandle
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
+featuresList = AttrCalculation.getFeaturesList()
 
 # 初始化角色数据
 def initCharacterList():
@@ -19,6 +20,7 @@ def initCharacterList():
         characterData = GameData._loadjson(characterAttrTemPath)
         characterName = characterData['Name']
         characterSex = characterData['Sex']
+        sexList = TextLoading.getTextData(TextLoading.roleId, 'Sex')
         characterSexTem = TextLoading.getTextData(TextLoading.temId,'TemList')[characterSex]
         CacheContorl.playObject['object'][playerId]['Sex'] = characterSex
         characterDataKeys = ValueHandle.dictKeysToList(characterData)
@@ -31,6 +33,16 @@ def initCharacterList():
             ageTem = characterData['Age']
             characterAge = AttrCalculation.getAge(ageTem)
             defaultAttr['Age'] = characterAge
+            if ageTem == 'SchoolAgeChild':
+                if characterSex == sexList[0]:
+                    CacheContorl.featuresList['Age'] = featuresList["Age"][0]
+                elif characterSex == sexList[1]:
+                    CacheContorl.featuresList['Age'] = featuresList["Age"][1]
+                else:
+                    CacheContorl.featuresList['Age'] = featuresList["Age"][2]
+            elif ageTem == 'OldAdult':
+                CacheContorl.featuresList['Age'] = featuresList["Age"][3]
+            defaultAttr['Features'] = CacheContorl.featuresList.copy()
         elif 'Features' in characterDataKeys:
             AttrCalculation.setAddFeatures(characterData['Features'])
             defaultAttr['Features'] = CacheContorl.featuresList.copy()
@@ -67,7 +79,6 @@ def getCharacterIdList():
     playerData = CacheContorl.playObject['object']
     playerList = ValueHandle.dictKeysToList(playerData)
     return playerList
-
 
 # 初始化角色的位置
 def initPlayerPosition():

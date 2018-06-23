@@ -99,7 +99,7 @@ def playerMoveScene(oldSceneId,newSceneId,characterId):
     CacheContorl.sceneData['ScenePlayerData'] = scenePlayerData
 
 # 计算寻路路径
-def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],pathTime = 0):
+def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = []):
     pathList = CacheContorl.pathList
     timeList = CacheContorl.pathTimeList
     mapId = int(mapId)
@@ -118,7 +118,6 @@ def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],
                 pass
             else:
                 targetTime = targetListDict[target]
-                pathTime = pathTime + targetTime
                 findPath = pathNodeList.copy()
                 if findPath == []:
                     findPath = [nowNode]
@@ -139,7 +138,7 @@ def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [],
                         targetNodeInTarget = targetNodeInTargetToList[i]
                         findPath.append(targetNodeInTarget)
                         findTime.append(targetNodeInTargetList[targetNodeInTarget])
-                        pathData = getPathfinding(mapId,targetNodeInTarget,targetNode,findPath,findTime,pathTime)
+                        pathData = getPathfinding(mapId,targetNodeInTarget,targetNode,findPath,findTime)
                         if pathData == 'Null':
                             pass
                         elif pathData == 'End':

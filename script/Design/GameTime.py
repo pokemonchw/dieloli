@@ -161,3 +161,7 @@ def judgeLeapYear():
         else:
             return "0"
     pass
+
+# 获取当前时间段
+def getNowTime():
+    pass

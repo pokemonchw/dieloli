@@ -2,7 +2,7 @@
   "TemList":{"男":"Man","女":"Woman","扶她":"Futa","无性人":"Asexual"},
   "Man":{
     "Sex":"男",
-    "Age":"Usually",
+    "Age":"YoungAdult",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
     "SexExperience":"None",
@@ -11,7 +11,7 @@
   },
   "Woman":{
     "Sex":"女",
-    "Age":"Usually",
+    "Age":"YoungAdult",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
     "SexExperience":"None",
@@ -20,7 +20,7 @@
   },
   "Futa":{
     "Sex":"扶她",
-    "Age":"Usually",
+    "Age":"YoungAdult",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
     "SexExperience":"None",
@@ -29,7 +29,7 @@
   },
   "Asexual":{
     "Sex":"无性人",
-    "Age":"Usually",
+    "Age":"YoungAdult",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
     "SexExperience":"None",
@@ -37,13 +37,25 @@
     "Weight":"Ordinary"
   },
   "AgeTem":{
-    "Usually":{
-      "MaxAge":"28",
-      "MiniAge":"17"
+    "OldAdult":{
+      "MaxAge":"120",
+      "MiniAge":"65"
     },
-    "Young":{
-      "MaxAge":"16",
-      "MiniAge":"10"
+    "MiddleAdult":{
+      "MaxAge":"65",
+      "MiniAge":"40"
+    },
+    "YoungAdult":{
+      "MaxAge":"40",
+      "MiniAge":"18"
+    },
+    "Adolescence":{
+      "MaxAge":"18",
+      "MiniAge":"12"
+    },
+    "SchoolAgeChild":{
+      "MaxAge":"12",
+      "MiniAge":"7"
     }
   },
   "HitPointTem":{

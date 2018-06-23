@@ -126,9 +126,8 @@ def detailedSetting_func1():
     playerSex = CacheContorl.playObject['object']['0']['Sex']
     sexList = TextLoading.getTextData(TextLoading.roleId, 'Sex')
     if flowRetun == 0:
-        PyCmd.clr_cmd()
-        detailedSetting_func2()
-    elif flowRetun == 1:
+        CacheContorl.featuresList['Age'] = featuresList["Age"][3]
+    elif flowRetun == 4:
         if playerSex == sexList[0]:
             CacheContorl.featuresList['Age'] = featuresList["Age"][0]
         elif playerSex == sexList[1]:
@@ -136,18 +135,19 @@ def detailedSetting_func1():
         else:
             CacheContorl.featuresList['Age'] = featuresList["Age"][2]
         PyCmd.clr_cmd()
-        CacheContorl.temporaryObject['Features'] = CacheContorl.featuresList.copy()
-        playerAgeTemName = AttrCalculation.getAgeTemList()[1]
-        playerAge = AttrCalculation.getAge(playerAgeTemName)
-        playerTem = TextLoading.getTextData(TextLoading.temId,'TemList')[playerSex]
-        playerHeigt = AttrCalculation.getHeight(playerTem,playerAge,CacheContorl.temporaryObject['Features'])
-        playerWeight = AttrCalculation.getWeight('Ordinary',playerHeigt['NowHeight'])
-        playerMeasurements = AttrCalculation.getMeasurements(playerTem,playerHeigt['NowHeight'],'Ordinary')
-        CacheContorl.temporaryObject['Age'] = playerAge
-        CacheContorl.temporaryObject['Height'] = playerHeigt
-        CacheContorl.temporaryObject['Weight'] = playerWeight
-        CacheContorl.temporaryObject['Measurements'] = playerMeasurements
-        detailedSetting_func2()
+    CacheContorl.temporaryObject['Features'] = CacheContorl.featuresList.copy()
+    playerAgeTemName = AttrCalculation.getAgeTemList()[flowRetun]
+    playerAge = AttrCalculation.getAge(playerAgeTemName)
+    playerTem = TextLoading.getTextData(TextLoading.temId,'TemList')[playerSex]
+    playerHeigt = AttrCalculation.getHeight(playerTem,playerAge,CacheContorl.temporaryObject['Features'])
+    playerWeight = AttrCalculation.getWeight('Ordinary',playerHeigt['NowHeight'])
+    playerMeasurements = AttrCalculation.getMeasurements(playerTem,playerHeigt['NowHeight'],'Ordinary')
+    CacheContorl.temporaryObject['Age'] = playerAge
+    CacheContorl.temporaryObject['Height'] = playerHeigt
+    CacheContorl.temporaryObject['Weight'] = playerWeight
+    CacheContorl.temporaryObject['Measurements'] = playerMeasurements
+    PyCmd.clr_cmd()
+    detailedSetting_func2()
 
 # 详细设置属性2:询问玩家是否具备动物特征
 def detailedSetting_func2():
