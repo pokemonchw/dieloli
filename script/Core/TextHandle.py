@@ -1,5 +1,5 @@
 from idna import unichr
-from Core import GameConfig,TextLoading,RichText
+from script.Core import GameConfig,TextLoading,RichText
 
 widths = [
     (126,    1), (159,    0), (687,     1), (710,   0), (711,   1),

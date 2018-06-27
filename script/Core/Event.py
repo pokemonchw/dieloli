@@ -1,5 +1,5 @@
 import os,re
-from Core import GameData
+from script.Core import GameData
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'

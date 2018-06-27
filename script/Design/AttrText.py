@@ -1,6 +1,6 @@
 import os
-from Core import TextLoading,GameData,CacheContorl,GameConfig,GamePathConfig
-from Design import ProportionalBar,AttrPrint
+from script.Core import TextLoading,GameData,CacheContorl,GameConfig,GamePathConfig
+from script.Design import ProportionalBar,AttrPrint
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath

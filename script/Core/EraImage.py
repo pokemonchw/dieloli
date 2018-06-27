@@ -1,6 +1,6 @@
 import os
 from tkinter import PhotoImage,END
-from Core import CacheContorl,GamePathConfig,MainFrame
+from script.Core import CacheContorl,GamePathConfig,MainFrame
 
 gamepath = GamePathConfig.gamepath
 textBox = MainFrame.textbox

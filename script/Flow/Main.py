@@ -1,7 +1,7 @@
-from Core import CacheContorl,GameInit,PyCmd
-from Design import AttrHandle
-from Panel import MainFramePanel
-from Flow import SeePlayerAttr,SeePlayerList,Shop,ChangeClothes,GameSetting,SaveHandleFrame,InScene
+from script.Core import CacheContorl,GameInit,PyCmd
+from script.Design import AttrHandle
+from script.Panel import MainFramePanel
+from script.Flow import SeePlayerAttr,SeePlayerList,Shop,ChangeClothes,GameSetting,SaveHandleFrame,InScene
 
 # 游戏主页
 def mainFrame_func():

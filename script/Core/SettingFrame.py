@@ -1,4 +1,4 @@
-import Core.TextLoading as textload
+import script.Core.TextLoading as textload
 from tkinter import Tk
 
 # 设置菜单

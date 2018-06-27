@@ -1,5 +1,5 @@
-from  Core import CacheContorl,EraPrint,TextLoading,PyCmd,GameInit,TextHandle
-from Design import AttrCalculation,CmdButtonQueue
+from script.Core import CacheContorl,EraPrint,TextLoading,PyCmd,GameInit,TextHandle
+from script.Design import AttrCalculation,CmdButtonQueue
 
 # 请求玩家输入姓名面板
 def inputNamePanel():

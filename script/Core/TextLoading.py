@@ -1,5 +1,5 @@
 import os
-from Core import GameConfig,GameData,GamePathConfig
+from script.Core import GameConfig,GameData,GamePathConfig
 
 gamepath = GamePathConfig.gamepath
 

@@ -1,4 +1,4 @@
-from Core import CacheContorl
+from script.Core import CacheContorl
 
 # 转义文本处理
 def handleText(string):

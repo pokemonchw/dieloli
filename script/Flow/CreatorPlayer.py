@@ -1,8 +1,8 @@
 import random
-from Core import CacheContorl,PyCmd,TextLoading,EraPrint,ValueHandle
-from Design import AttrCalculation
-from Panel import CreatorPlayerPanel
-from Flow import SeePlayerAttr
+from script.Core import CacheContorl,PyCmd,TextLoading,EraPrint,ValueHandle
+from script.Design import AttrCalculation
+from script.Panel import CreatorPlayerPanel
+from script.Flow import SeePlayerAttr
 
 playerId = '0'
 featuresList = AttrCalculation.getFeaturesList()

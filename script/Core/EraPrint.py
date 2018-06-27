@@ -1,5 +1,5 @@
 import time
-from Core import GameConfig,TextHandle,FlowHandle,IoInit,CacheContorl,Dictionaries,RichText,TextLoading
+from script.Core import GameConfig,TextHandle,FlowHandle,IoInit,CacheContorl,Dictionaries,RichText,TextLoading
 
 last_char = '\n'
 

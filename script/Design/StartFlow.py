@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 import os,time
-from Core import PyCmd,CacheContorl
-from Flow import CreatorPlayer,SaveHandleFrame
-from Panel import MainPanel
+from script.Core import PyCmd,CacheContorl
+from script.Flow import CreatorPlayer,SaveHandleFrame
+from script.Panel import MainPanel
 
 # 启动游戏界面
 def open_func():

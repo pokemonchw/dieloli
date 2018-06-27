@@ -1,5 +1,5 @@
-from Core import GameConfig,CacheContorl,GameInit,PyCmd,SaveHandle
-from Panel import SaveHandleFramePanel
+from script.Core import GameConfig,CacheContorl,GameInit,PyCmd,SaveHandle
+from script.Panel import SaveHandleFramePanel
 
 # 绘制保存存档页面流程
 def establishSave_func(oldPanel):

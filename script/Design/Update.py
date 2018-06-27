@@ -1,4 +1,4 @@
-from Design import ObjectBehavior
+from script.Design import ObjectBehavior
 
 # 游戏流程刷新
 def gameUpdateFlow():

@@ -1,4 +1,4 @@
-from Core import GameConfig,CacheContorl,TextLoading,Dictionaries
+from script.Core import GameConfig,CacheContorl,TextLoading,Dictionaries
 
 # 富文本计算
 def setRichTextPrint(textMessage,defaultStyle):

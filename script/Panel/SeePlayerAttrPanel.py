@@ -1,5 +1,5 @@
-from Core import CacheContorl,TextLoading,EraPrint,PyCmd
-from Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue
+from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd
+from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue
 
 panelStateTextData = TextLoading.getTextData(TextLoading.cmdId,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]

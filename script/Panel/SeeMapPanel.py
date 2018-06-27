@@ -1,5 +1,5 @@
-from Core import CacheContorl,TextLoading,EraPrint,ValueHandle
-from Design import MapHandle,CmdButtonQueue
+from script.Core import CacheContorl,TextLoading,EraPrint,ValueHandle
+from script.Design import MapHandle,CmdButtonQueue
 
 # 用于绘制地图的面板
 def seeMapPanel():

@@ -1,6 +1,6 @@
 import time
-from Core import EraPrint,FlowHandle,TextLoading,TextHandle,GameConfig,PyCmd
-from Design import CmdButtonQueue
+from script.Core import EraPrint,FlowHandle,TextLoading,TextHandle,GameConfig,PyCmd
+from script.Design import CmdButtonQueue
 
 # 载入游戏面板
 def loadGamePanel():

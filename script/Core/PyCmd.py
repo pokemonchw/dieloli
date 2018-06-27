@@ -1,4 +1,4 @@
-from Core import FlowHandle,MainFrame,Dictionaries,CacheContorl,GameConfig
+from script.Core import FlowHandle,MainFrame,Dictionaries,CacheContorl,GameConfig
 
 #清除命令
 clear_default_flow=FlowHandle.clear_default_flow

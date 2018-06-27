@@ -1,6 +1,6 @@
 import os
-from Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
-from Design import AttrCalculation,MapHandle
+from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
+from script.Design import AttrCalculation,MapHandle
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath

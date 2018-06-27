@@ -1,5 +1,5 @@
 import os
-from Core import GameData,ValueHandle,GamePathConfig
+from script.Core import GameData,ValueHandle,GamePathConfig
 
 gamepath = GamePathConfig.gamepath
 
@@ -45,3 +45,5 @@ max_save = configData()['max_save']
 save_page = configData()['save_page']
 playerlist_show = configData()['playerlist_show']
 text_wait = configData()['text_wait']
+home_url = configData()['home_url']
+licenses_url = configData()['licenses_url']

@@ -1,5 +1,5 @@
-from Core import CacheContorl,GameConfig,PyCmd,TextLoading,EraPrint,TextHandle,SaveHandle
-from Design import CmdButtonQueue,GameTime
+from script.Core import CacheContorl,GameConfig,PyCmd,TextLoading,EraPrint,TextHandle,SaveHandle
+from script.Design import CmdButtonQueue,GameTime
 
 # 载入存档信息头面板
 def loadSaveInfoHeadPanel():

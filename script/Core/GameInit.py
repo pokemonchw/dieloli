@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
-from Core import GameData,FlowHandle,IoInit,Event,KeyListionEvent
-from Design import MapHandle
+from script.Core import GameData,FlowHandle,IoInit,Event,KeyListionEvent
+from script.Design import MapHandle
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'

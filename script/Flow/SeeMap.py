@@ -1,6 +1,6 @@
-from Core import FlowHandle
-from Design import ObjectMove
-from Panel import SeeMapPanel
+from script.Core import FlowHandle
+from script.Design import ObjectMove
+from script.Panel import SeeMapPanel
 
 def seeMapFlow():
     inputS = []

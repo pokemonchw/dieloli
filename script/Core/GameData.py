@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from Core.GamePathConfig import gamepath
+from script.Core.GamePathConfig import gamepath
 import json
 
 try:

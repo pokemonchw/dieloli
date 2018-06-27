@@ -1,5 +1,5 @@
 import os,random
-from Core import CacheContorl,ValueHandle,GameConfig,GamePathConfig,TextLoading,GameData
+from script.Core import CacheContorl,ValueHandle,GameConfig,GamePathConfig,TextLoading,GameData
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import threading,queue,json,sys
-from Core import MainFrame,GameConfig
+from script.Core import MainFrame,GameConfig
 
 sys_print = print
 

@@ -1,5 +1,5 @@
 import os
-from Core import GameConfig,RichText,GameData,EraPrint,PyCmd,CacheContorl,TextHandle,ValueHandle,GamePathConfig
+from script.Core import GameConfig,RichText,GameData,EraPrint,PyCmd,CacheContorl,TextHandle,ValueHandle,GamePathConfig
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath

@@ -1,6 +1,6 @@
-from Core import CacheContorl,TextLoading,EraPrint
-from Design import MapHandle,GameTime,Update
-from Flow import InScene
+from script.Core import CacheContorl,TextLoading,EraPrint
+from script.Design import MapHandle,GameTime,Update
+from script.Flow import InScene
 
 # 主角移动
 def playerMove(targetScene):

@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os,json,uuid
 from tkinter import ttk,Tk,Text,StringVar,FALSE,Menu,END,N,W,E,S,VERTICAL,font
-from Core import GameConfig,TextLoading,CacheContorl,SettingFrame,AboutFrame,TextHandle
+from script.Core import GameConfig,TextLoading,CacheContorl,SettingFrame,AboutFrame,TextHandle
 
 def closeWindow():
     os._exit(0)
@@ -159,8 +159,8 @@ def read_queue():
             _frame_style_def(temp['style_name'],temp['foreground'],temp['background'],temp['font'],
                              temp['fontsize'],temp['bold'],temp['underline'],temp['italic'])
         if 'image' in jsonstr.keys():
-            import Core.EraImage as eraimage
-            eraimage.printImage(jsonstr['image']['imageName'],jsonstr['image']['imagePath'])
+            from script.Core import EraImage
+            EraImage.printImage(jsonstr['image']['imageName'],jsonstr['image']['imagePath'])
 
         for c in jsonstr['content']:
             if c['type']=='text':

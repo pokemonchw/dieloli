@@ -1,4 +1,4 @@
-from Core import MainFrame,PyCmd,CacheContorl
+from script.Core import MainFrame,PyCmd,CacheContorl
 
 wframe = MainFrame.root
 

@@ -1,5 +1,5 @@
-from Core import TextLoading,EraPrint,CacheContorl,GameConfig,PyCmd,TextHandle
-from Design import CharacterHandle,CmdButtonQueue,AttrText
+from script.Core import TextLoading,EraPrint,CacheContorl,GameConfig,PyCmd,TextHandle
+from script.Design import CharacterHandle,CmdButtonQueue,AttrText
 
 # 查看角色列表面板
 def seePlayerListPanel(maxPage):

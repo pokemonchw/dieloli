@@ -1,4 +1,4 @@
-from Core import CacheContorl
+from script.Core import CacheContorl
 
 # 获取角色属性
 def getAttrData(playerId):

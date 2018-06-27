@@ -1,5 +1,5 @@
-from Core import CacheContorl,TextLoading,EraPrint,PyCmd
-from Design import GameTime,CmdButtonQueue
+from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd
+from script.Design import GameTime,CmdButtonQueue
 
 # 用于查看当前场景的面板
 def seeScenePanel():

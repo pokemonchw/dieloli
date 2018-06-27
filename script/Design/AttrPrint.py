@@ -1,5 +1,5 @@
-from Core import TextLoading,EraPrint,CacheContorl
-from Design import AttrHandle,ProportionalBar
+from script.Core import TextLoading,EraPrint,CacheContorl
+from script.Design import AttrHandle,ProportionalBar
 
 # 用于输出角色血条和蓝条的方法（占一行，自动居中）
 def printHpAndMpBar(playerId):

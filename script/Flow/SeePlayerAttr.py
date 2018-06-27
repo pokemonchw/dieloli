@@ -1,6 +1,6 @@
-from Core import EraPrint,CacheContorl,PyCmd,GameInit,ValueHandle,TextLoading
-from Design import PanelStateHandle,GameTime,CharacterHandle,AttrCalculation,MapHandle
-from Panel import SeePlayerAttrPanel
+from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,ValueHandle,TextLoading
+from script.Design import PanelStateHandle,GameTime,CharacterHandle,AttrCalculation,MapHandle
+from script.Panel import SeePlayerAttrPanel
 
 panelList = ['PlayerMainAttrPanel','PlayerEquipmentPanel','PlayerItemPanel','PlayerExperiencePanel',
                    'PlayerLevelPanel','PlayerFeaturesPanel','PlayerEngravingPanel']

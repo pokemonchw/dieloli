@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import time,os
-from Core import CacheContorl,TextLoading,TextHandle,GameConfig,IoInit
+from script.Core import CacheContorl,TextLoading,TextHandle,GameConfig,IoInit
 
 def null_func():
     return

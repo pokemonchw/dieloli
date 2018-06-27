@@ -1,4 +1,4 @@
-from Core import CacheContorl
+from script.Core import CacheContorl
 
 # 改变面板状态
 def panelStateChange(panelId):

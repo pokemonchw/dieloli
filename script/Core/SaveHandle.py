@@ -3,8 +3,8 @@ try:
     import cPickle as pickle
 except ImportError:
     import pickle
-from Core import EraPrint,TextLoading,CacheContorl,GameConfig,GamePathConfig
-from Design import MapHandle,CharacterHandle
+from script.Core import EraPrint,TextLoading,CacheContorl,GameConfig,GamePathConfig
+from script.Design import MapHandle,CharacterHandle
 
 gamepath = GamePathConfig.gamepath
 

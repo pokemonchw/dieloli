@@ -1,4 +1,4 @@
-from Core import CacheContorl,GameConfig,TextLoading
+from script.Core import CacheContorl,GameConfig,TextLoading
 
 # 时间初始化
 def initTime():
