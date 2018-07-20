@@ -13,6 +13,11 @@ DieLoli
 请勿将其用作商业用途 \
 想要参与开发请与开发者联系，联系方式在本md底部
 
+依赖
+----
+python3 \
+tkinter
+
 警告
 ----
 特别注意，在游戏设计中，有可预期的18x内容
@@ -21,5 +26,5 @@ DieLoli
 ----
 e-mail:pokemonchw@gmail.com \
 g+:pokemonchw \
-twitter:pokemonchw \
+mastodon:@BonjourTotoro@sn.angry.im \
 企鹅群:688166358

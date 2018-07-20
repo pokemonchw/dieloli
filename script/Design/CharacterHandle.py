@@ -66,7 +66,6 @@ def initCharacterList():
         CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
         CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
     initPlayerPosition()
-    pass
 
 # 获取角色最大数量
 def getCharacterIndexMax():
@@ -89,7 +88,7 @@ def initPlayerPosition():
         characterDataName = characterList[i]
         characterAttrTemPath = os.path.join(characterListPath, characterDataName, 'AttrTemplate.json')
         characterData = GameData._loadjson(characterAttrTemPath)
-        characterInitPosition = characterData['Position']
+        characterInitPositionDirList = characterData['Position']
+        characterInitPosition = MapHandle.getSceneIdForDirList(characterInitPositionDirList)
         characterPosition = CacheContorl.playObject['object'][playerIdS]['Position']
         MapHandle.playerMoveScene(characterPosition, characterInitPosition, playerIdS)
-    pass

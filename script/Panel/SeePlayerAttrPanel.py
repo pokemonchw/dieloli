@@ -5,7 +5,6 @@ panelStateTextData = TextLoading.getTextData(TextLoading.cmdId,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
 panelStateOffText = panelStateTextData[0]
 
-
 # 初始化查看属性面板状态
 def initShowAttrPanelList():
     CacheContorl.panelState['PlayerMainAttrPanel'] = '1'
@@ -67,14 +66,18 @@ def seePlayerMainAttrPanel(playerId):
         attrListString.append(playerHeightInfo)
         playerWeightInfo = TextLoading.getTextData(TextLoading.stageWordId,'81') + playerWeightText
         attrListString.append(playerWeightInfo)
-        playerBWHInfo = TextLoading.getTextData(TextLoading.stageWordId,'82') + playerBust + ',' + playerWaist + ',' + playerHip
+        playerBustInfo = TextLoading.getTextData(TextLoading.stageWordId,'82') + playerBust
+        playerWaistInfo = TextLoading.getTextData(TextLoading.stageWordId,'83') + playerWaist
+        playerHipInfo = TextLoading.getTextData(TextLoading.stageWordId,'84') + playerHip
         playerIntimate = playerData['Intimate']
         playerIntimate = TextLoading.getTextData(TextLoading.stageWordId, '16') + playerIntimate
         attrListString.append(playerIntimate)
         playerGraces = playerData['Graces']
         playerGraces = TextLoading.getTextData(TextLoading.stageWordId, '17') + playerGraces
         attrListString.append(playerGraces)
-        attrListString.append(playerBWHInfo)
+        attrListString.append(playerBustInfo)
+        attrListString.append(playerWaistInfo)
+        attrListString.append(playerHipInfo)
         EraPrint.plist(attrListString, 4, 'center')
         EraPrint.p('\n')
         AttrPrint.printHpAndMpBar(playerId)

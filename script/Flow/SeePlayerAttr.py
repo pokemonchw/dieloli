@@ -15,7 +15,6 @@ def acknowledgmentAttribute_func():
     flowReturn = SeePlayerAttrPanel.inputAttrOverPanel()
     inputS = ValueHandle.listAppendToList(flowReturn,inputS)
     acknowledgmentAttributeAns(inputS)
-    pass
 
 # 创建角色时用于查看角色属性的流程的事件控制
 def acknowledgmentAttributeAns(inputList):
@@ -33,14 +32,14 @@ def acknowledgmentAttributeAns(inputList):
         SeePlayerAttrPanel.initShowAttrPanelList()
         playerPosition = CacheContorl.playObject['object'][playerId]['Position']
         MapHandle.playerMoveScene('0', playerPosition, playerId)
-        import script.Flow.Main as mainframe
-        mainframe.mainFrame_func()
+        from script.Flow import Main
+        Main.mainFrame_func()
     elif yrn == '1':
         CacheContorl.wframeMouse['wFrameRePrint'] = 1
         EraPrint.pnextscreen()
         SeePlayerAttrPanel.initShowAttrPanelList()
-        import Design.StartFlow as mainflow
-        mainflow.main_func()
+        from script.Design import StartFlow
+        StartFlow.main_func()
     elif yrn in showAttrHandleData:
         index = showAttrHandleData.index(yrn)
         index = str(index)
@@ -82,20 +81,18 @@ def seeAttrOnEveryTime_func(oldPanel,tooOldFlow = None):
             CacheContorl.playObject['objectId'] = playerId
             seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
     elif yrn == '1':
+        from script.Flow import Main,SeePlayerList,InScene
         if oldPanel == 'MainFramePanel':
-            import Flow.Main as mainframe
             SeePlayerAttrPanel.initShowAttrPanelList()
             CacheContorl.playObject['objectId'] = '0'
-            mainframe.mainFrame_func()
+            Main.mainFrame_func()
         elif oldPanel == 'SeePlayerListPanel':
             SeePlayerAttrPanel.initShowAttrPanelList()
-            import Flow.SeePlayerList as seeplayerlist
-            seeplayerlist.seePlayerList_func(tooOldFlow)
+            SeePlayerList.seePlayerList_func(tooOldFlow)
         elif oldPanel == 'InScenePanel':
             SeePlayerAttrPanel.initShowAttrPanelList()
-            import Flow.InScene as inscene
             CacheContorl.playObject['objectId'] = '0'
-            inscene.getInScene_func()
+            InScene.getInScene_func()
     elif yrn == '2':
         if objectId == objectMax:
             objectId = objectIdList[0]
@@ -105,7 +102,6 @@ def seeAttrOnEveryTime_func(oldPanel,tooOldFlow = None):
             objectId = objectIdList[objectIdIndex  + 1]
             CacheContorl.playObject['objectId'] = objectId
             seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
-    pass
 
 # 用于任何时候查看角色属性的流程
 def seeAttrInEveryTime_func():
@@ -119,7 +115,6 @@ def seeAttrInEveryTime_func():
         inputS.append(playerEquipmentPanelAsk)
         playerItemPanelAsk = SeePlayerAttrPanel.seePlayerItemPanel(playerId)
         inputS.append(playerItemPanelAsk)
-        pass
     elif showAttrHandle == '1':
         playerExperiencePanelAsk = SeePlayerAttrPanel.seePlayerExperiencePanel(playerId)
         inputS.append(playerExperiencePanelAsk)

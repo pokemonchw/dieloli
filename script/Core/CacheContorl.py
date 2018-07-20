@@ -13,10 +13,10 @@ cmd_map = {}
 playObject = {}
 
 # 默认属性模板数据读取
-temObjectDefault = TextLoading.getTextData(TextLoading.roleId,'Default')
+temObjectDefault = {}
 
 # 默认属性模板数据备份
-temporaryObjectBak = temObjectDefault.copy()
+temporaryObjectBak = {}
 
 # 素质数据临时缓存
 featuresList = {}
@@ -68,3 +68,12 @@ mapData = {}
 pathList = []
 
 pathTimeList = []
+
+class CacheHandle():
+    def getTemObjectDefault(self):
+        from script.Design import MapHandle
+        temObject = TextLoading.getTextData(TextLoading.roleId, 'Default')
+        temPositionDirList = temObject['Position']
+        temPosition = MapHandle.getSceneIdForDirList(temPositionDirList)
+        temObject['Position'] = temPosition
+        return temObject

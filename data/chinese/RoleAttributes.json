@@ -42,7 +42,7 @@
       "Hip":"0"
     },
     "Gold":"0",
-    "Position":"0"
+    "Position":["0"]
   },
   "Sex":["男","女","扶她","无性人"],
   "Features":{

@@ -72,7 +72,7 @@ def loadSave_func(oldPanel):
         if oldPanel == 'MainFlowPanel':
             CacheContorl.wframeMouse['wFrameRePrint'] = 1
             CacheContorl.panelState['SeeSaveListPanel'] = 0
-            import Design.StartFlow as mainflow
+            import script.Design.StartFlow as mainflow
             mainflow.main_func()
         elif oldPanel == 'MainFramePanel':
             CacheContorl.panelState['SeeSaveListPanel'] = 0

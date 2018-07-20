@@ -1,5 +1,5 @@
-from script.Design import ObjectBehavior
+from script.Design.ObjectBehavior import ObjectBehaviorClass
 
 # 游戏流程刷新
 def gameUpdateFlow():
-    ObjectBehavior.initObjectBehavior()
+    ObjectBehaviorClass().initObjectBehavior()

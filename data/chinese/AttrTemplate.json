@@ -257,5 +257,21 @@
       "Fat":[28.0,34.9],
       "SevereObesity":[35.0,39.9],
       "ExtremelySevereObesity":[40.0,50.0]
-    }
+    },
+  "WeightTemFix":{
+      "Thin":[-5,-14.9],
+      "Ordinary":[-4.9,4.9],
+      "Overweight":[5,14.9],
+      "Fat":[15,24.9],
+      "SevereObesity":[25,34.9],
+      "ExtremelySevereObesity":[35,44.9]
+  },
+  "WaistHipProportionTem":{
+      "Thin":-0.2,
+      "Ordinary":0,
+      "Overweight":0.2,
+      "Fat":0.4,
+      "SevereObesity":0.6,
+      "ExtremelySevereObesity":1.0
+  }
 }

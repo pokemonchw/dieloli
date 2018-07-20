@@ -153,21 +153,17 @@ def getMeasurements(temName,height,weightTem):
         bust = 52.35 / 100 * height
         waist = 41.34 / 100 * height
         hip = 57.78 / 100 * height
-    measurements = {"Bust":bust,"Waist":waist,'Hip':hip}
-    measurementsFix = [-4.9,4.9]
-    if weightTem == 'Thin':
-        measurementsFix = [-5,-14.9]
-    elif weightTem == 'Overweight':
-        measurementsFix = [5,14.9]
-    elif weightTem == 'Fat':
-        measurementsFix = [15,24.9]
-    elif weightTem == 'SevereObesity':
-        measurementsFix = [25,34.9]
-    elif weightTem == 'ExtremelySevereObesity':
-        measurementsFix = [35,44.9]
-    for key in measurements:
-        keyFix = random.uniform(measurementsFix[0],measurementsFix[1])
-        measurements[key] = measurements[key] + keyFix
+    measurementsFix = templateData['WeightTemFix'][weightTem]
+    keyFix = random.uniform(measurementsFix[0], measurementsFix[1])
+    bustHipProportion = bust / hip
+    waistHipProportion = waist / hip
+    waistHipProportionTem = templateData['WaistHipProportionTem'][weightTem]
+    waistHipProportionFix = random.uniform(0,waistHipProportionTem)
+    waistHipProportion = waistHipProportion + waistHipProportionFix
+    bust = bust + keyFix
+    hip = bust / bustHipProportion
+    waist = hip * waistHipProportion
+    measurements = {"Bust": bust, "Waist": waist, 'Hip': hip}
     return measurements
 
 # 获取最大hp值

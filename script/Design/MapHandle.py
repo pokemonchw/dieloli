@@ -121,7 +121,7 @@ def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [])
                 findPath = pathNodeList.copy()
                 if findPath == []:
                     findPath = [nowNode]
-                    findTime = [0]
+                    findTime = [-1]
                 else:
                     findTime = pathTimeList.copy()
                 findPath.append(target)
@@ -196,13 +196,10 @@ def getMapScenePathForScenePath(mapId,scenePath):
         nowPath = getMapScenePathForScenePath(mapId,sceneInPath)
     return nowPath
 
-
 # 获取地图场景id对应的全剧场景id
 def getSceneIdForMapSceneId(mapId,mapSceneId):
     scenePath = getScenePathForMapSceneId(mapId,mapSceneId)
-    sceneData = CacheContorl.sceneData.copy()
-    scenePathData = sceneData['ScenePathData']
-    sceneId = scenePathData.index(scenePath)
+    sceneId = getSceneIdForPath(scenePath)
     return sceneId
 
 # 判断地图在指定地图中的位置
@@ -332,3 +329,18 @@ def getScenePlayerIdList(sceneId):
     for i in scenePlayerDataList:
         scenePlayerIdList.append(i)
     return scenePlayerIdList
+
+# 从路径获取取场景ID
+def getSceneIdForPath(path):
+    sceneData = CacheContorl.sceneData.copy()
+    scenePathData = sceneData['ScenePathData']
+    sceneId = scenePathData.index(path)
+    return sceneId
+
+# 从目录列表获取场景ID
+def getSceneIdForDirList(dirList):
+    scenePath = os.path.join(mapDataDir)
+    for i in dirList:
+        scenePath = os.path.join(scenePath,i)
+    sceneId = getSceneIdForPath(scenePath)
+    return sceneId

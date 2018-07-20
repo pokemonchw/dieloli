@@ -191,4 +191,13 @@ def initCache():
     }
     CacheContorl.maxSavePage = GameConfig.save_page
     CacheContorl.textWait = float(GameConfig.text_wait)
-    pass
+    CacheContorl.temObjectDefault = getTemObjectDefault()
+    CacheContorl.temporaryObjectBak = CacheContorl.temObjectDefault.copy()
+
+def getTemObjectDefault():
+    script = __import__('script.Design.MapHandle')
+    temObject = TextLoading.getTextData(TextLoading.roleId, 'Default')
+    temPositionDirList = temObject['Position']
+    temPosition = script.Design.MapHandle.getSceneIdForDirList(temPositionDirList)
+    temObject['Position'] = temPosition
+    return temObject

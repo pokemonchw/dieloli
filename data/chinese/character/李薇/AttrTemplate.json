@@ -2,6 +2,7 @@
   "Name":"李薇",
   "Sex":"女",
   "Age":"SchoolAgeChild",
-  "Position":"0",
-  "AdvNpc":"1"
+  "Position":["0"],
+  "AdvNpc":"1",
+  "WorkingPlace":["0"]
 }
