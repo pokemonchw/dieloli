@@ -44,6 +44,8 @@ def seeScene_func(judge):
         seeScene_func(judge)
     elif yrn == '0':
         from script.Flow import SeeMap
+        mapId = MapHandle.getMapIdForScene(CacheContorl.playObject['object']['0']['Position'])
+        CacheContorl.nowMapId = mapId
         SeeMap.seeMapFlow()
     elif yrn == '1':
         SeePlayerAttr.seeAttrOnEveryTime_func('InScenePanel')

@@ -71,10 +71,10 @@ def getMapIdForScene(sceneId):
 
 # 从场景路径获取所在地图ID
 def getMapIdForScenePath(scenePath):
-    path = getScenePathForTrue(scenePath)
-    pathData = CacheContorl.sceneData['ScenePathData']
-    sceneId = pathData.index(path)
-    return getMapIdForScene(sceneId)
+    mapPath = getMapForPath(scenePath)
+    mapData = CacheContorl.mapData['MapPathData']
+    mapId = mapData.index(mapPath)
+    return mapId
 
 # 获取地图下所有场景
 def getSceneListForMap(mapId):
@@ -82,6 +82,13 @@ def getSceneListForMap(mapId):
     mapPath = CacheContorl.mapData['MapPathData'][mapId]
     sceneList = GameData.getPathList(mapPath)
     return sceneList
+
+# 从场景ID获取场景路径
+def getScenePathForSceneId(sceneId):
+    sceneId = int(sceneId)
+    sceneData = CacheContorl.sceneData['ScenePathData']
+    scenePath = sceneData[sceneId]
+    return scenePath
 
 # 场景移动
 def playerMoveScene(oldSceneId,newSceneId,characterId):
@@ -151,6 +158,7 @@ def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [])
         CacheContorl.pathList = []
         return getMinimumPath(pathList,timeList)
 
+# 获取最短路径
 def getMinimumPath(pathList,timeList):
     if len(pathList) > 0:
         needTimeList = []
@@ -161,11 +169,99 @@ def getMinimumPath(pathList,timeList):
     else:
         return 'Null'
 
+# 获取路径所需时间
 def getNeedTime(timeGroup):
     needTime = 0
     for i in timeGroup:
         needTime = needTime + i
     return needTime
+
+# 获取地图路径列表
+def getSceneToSceneMapList(nowScenePath,targetScenePath):
+    sceneAffiliation = judgeSceneAffiliation(nowScenePath,targetScenePath)
+    if sceneAffiliation == '0':
+        return '0'
+    elif sceneAffiliation == '1':
+        return getMapHierarchyListForScenePath(nowScenePath,targetScenePath)
+    elif sceneAffiliation == '2':
+        commonMap = getCommonMapForScenePath(nowScenePath,targetScenePath)
+        nowSceneToCommonMap = getMapHierarchyListForScenePath(nowScenePath,commonMap)
+        targetSceneToCommonMap = getMapHierarchyListForScenePath(targetScenePath,commonMap)
+        commonMapToTargetScene = ValueHandle.reverseArrayList(targetSceneToCommonMap)
+        return nowSceneToCommonMap + commonMapToTargetScene[1:]
+
+# 查找节点共同所属地图
+def getCommonMapForScenePath(sceneAPath,sceneBPath):
+    sceneAPathHierarchyList = getMapHierarchyListForScenePath(sceneAPath,mapDataDir)
+    sceneAPathHierarchyList = ValueHandle.reverseArrayList(sceneAPathHierarchyList)
+    sceneBPathHierarchyList = getMapHierarchyListForScenePath(sceneBPath,mapDataDir)
+    sceneBPathHierarchyList = ValueHandle.reverseArrayList(sceneBPathHierarchyList)
+    hierarchy = mapDataDir
+    try:
+        for i in range(0,len(sceneAPathHierarchyList)):
+            if sceneAPathHierarchyList[i] == sceneBPathHierarchyList[i]:
+                hierarchy = sceneAPathHierarchyList[i]
+    except IndexError:
+        pass
+    return hierarchy
+
+# 获取节点所属层级列表
+def getMapHierarchyListForScenePath(nowScenePath,targetScenePath):
+    hierarchyList = []
+    nowPath = None
+    while(True):
+        if nowPath == None:
+            nowPath = os.path.abspath(os.path.join(nowScenePath,'..'))
+        if nowPath != targetScenePath:
+            hierarchyList.append(nowPath)
+            nowPath = os.path.abspath(os.path.join(nowPath,'..'))
+        else:
+            break
+    return hierarchyList
+
+# 判断场景有无所属关系
+def judgeSceneIsAffiliation(nowScenePath,targetScenePath):
+    if judgeSceneAffiliation(nowScenePath,targetScenePath) == '1':
+        return '0'
+    elif judgeSceneAffiliation(targetScenePath,nowScenePath) == '1':
+        return '1'
+    else:
+        return '2'
+
+# 判断场景所属关系
+def judgeSceneAffiliation(nowScenePath,targetScenePath):
+    nowScenePathFile = os.path.join(nowScenePath)
+    targetScenePathFile = os.path.join(targetScenePath)
+    # 判断nowScene是否和targetScene在同一层级
+    if os.path.abspath(os.path.join(nowScenePathFile,'..')) != os.path.abspath(os.path.join(targetScenePathFile,'..')):
+        # 判断nowScene是否是targetScene的下属节点
+        if os.path.abspath(os.path.join(nowScenePathFile,'..')) != targetScenePathFile:
+            # 如果上级节点不是公共节点则递归
+            if os.path.abspath(os.path.join(nowScenePathFile,'..')) != mapDataDir:
+                return judgeSceneAffiliation(os.path.abspath(os.path.join(nowScenePath,'..')),targetScenePathFile)
+            else:
+                return '2'
+        else:
+            return '1'
+    else:
+        return '0'
+
+# 获取场景所在所有直接地图位置
+def getRelationMapListForScenePath(scenePath):
+    nowPath = scenePath
+    nowMapPath = getMapPathForScenePath(nowPath)
+    nowMapId = getMapIdForPath(nowMapPath)
+    mapList = []
+    if os.path.abspath(os.path.join(nowMapPath,'..')) != mapDataDir:
+        nowPathId = getMapSceneIdForScenePath(nowMapId,scenePath)
+        mapList.append(nowMapPath)
+        if nowPathId == '0':
+            return mapList + getRelationMapListForScenePath(nowMapPath)
+        else:
+            return mapList
+    else:
+        mapList.append(nowMapPath)
+        return mapList
 
 # 载入地图下对应场景数据
 def getSceneDataForMap(mapId,mapSceneId):
@@ -179,10 +275,10 @@ def getSceneDataForMap(mapId,mapSceneId):
 # 获取全局场景id对应的地图场景id
 def getMapSceneIdForSceneId(mapId,sceneId):
     sceneId = int(sceneId)
-    scenePath = CacheContorl.sceneData['ScenePathData'][sceneId]
+    scenePath = getScenePathForSceneId(sceneId)
     mapId = int(mapId)
     sceneInPath = getMapScenePathForScenePath(mapId,scenePath)
-    mapPath = CacheContorl.mapData['MapPathData'][mapId]
+    mapPath = getPathForMapId(mapId)
     mapSceneId = judgeSonMapInMap(mapPath, sceneInPath)
     return mapSceneId
 
@@ -196,11 +292,17 @@ def getMapScenePathForScenePath(mapId,scenePath):
         nowPath = getMapScenePathForScenePath(mapId,sceneInPath)
     return nowPath
 
-# 获取地图场景id对应的全剧场景id
+# 获取地图场景id对应的全局场景id
 def getSceneIdForMapSceneId(mapId,mapSceneId):
     scenePath = getScenePathForMapSceneId(mapId,mapSceneId)
     sceneId = getSceneIdForPath(scenePath)
     return sceneId
+
+# 从场景路径获取所在地图路径
+def getMapPathForScenePath(scenePath):
+    mapId = getMapIdForScenePath(scenePath)
+    mapPath = CacheContorl.mapData['MapPathData'][mapId]
+    return mapPath
 
 # 判断地图在指定地图中的位置
 def judgeSonMapInMap(mapPath,sonMapPath):
@@ -213,13 +315,13 @@ def judgeSonMapInMap(mapPath,sonMapPath):
         else:
             mapPathList.append(loadPath)
     if sonMapPath in mapPathList:
-        mapPathText = str(mapPath)
-        sonMapPathText = str(sonMapPath)
-        sonMapId = sonMapPathText.strip(mapPathText)
+        for i in mapDirList:
+            if os.path.join(mapPath,i) == sonMapPath:
+                return i
     else:
         loadSonMapPath = os.path.abspath(os.path.join(sonMapPath, '..'))
         sonMapId = judgeSonMapInMap(mapPath,loadSonMapPath)
-    return sonMapId
+        return sonMapId
 
 # 从对应地图场景id查找场景路径
 def getScenePathForMapSceneId(mapId,mapSceneId):
@@ -336,6 +438,19 @@ def getSceneIdForPath(path):
     scenePathData = sceneData['ScenePathData']
     sceneId = scenePathData.index(path)
     return sceneId
+
+# 从路径获取地图ID
+def getMapIdForPath(path):
+    mapData = CacheContorl.mapData.copy()
+    mapPathData = mapData['MapPathData']
+    mapId = mapPathData.index(path)
+    return mapId
+
+# 从地图ID获取地图路径
+def getPathForMapId(mapId):
+    mapData = CacheContorl.mapData.copy()
+    mapPathData = mapData['MapPathData']
+    return mapPathData[int(mapId)]
 
 # 从目录列表获取场景ID
 def getSceneIdForDirList(dirList):

@@ -1,5 +1,5 @@
-from script.Core import FlowHandle
-from script.Design import ObjectMove
+from script.Core import FlowHandle,CacheContorl
+from script.Design import ObjectMove,MapHandle
 from script.Panel import SeeMapPanel
 
 def seeMapFlow():
@@ -14,13 +14,16 @@ def seeMapFlow():
     inputS = inputS + seeMapCmd + movePathCmd
     yrn = FlowHandle.askfor_All(inputS)
     backButton = str(startId1)
+    mapId = CacheContorl.nowMapId
     if yrn in mapCmd:
-        ObjectMove.playerMove(yrn)
+        nowTargetPath = MapHandle.getScenePathForMapSceneId(mapId,yrn)
+        ObjectMove.playerMove(nowTargetPath)
     elif yrn == backButton:
         import Flow.InScene as inscene
         inscene.getInScene_func()
     elif yrn in movePathCmd:
         moveListId = movePathCmd.index(yrn)
-        movePath = movePathList[moveListId]
-        ObjectMove.playerMove(movePath)
+        moveId = movePathList[moveListId]
+        nowTargetPath = MapHandle.getScenePathForMapSceneId(mapId,moveId)
+        ObjectMove.playerMove(nowTargetPath)
 

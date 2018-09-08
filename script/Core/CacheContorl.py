@@ -69,6 +69,8 @@ pathList = []
 
 pathTimeList = []
 
+nowMapId = 0
+
 class CacheHandle():
     def getTemObjectDefault(self):
         from script.Design import MapHandle

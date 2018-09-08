@@ -1,5 +1,5 @@
-from script.Core import TextLoading,GameConfig
-from tkinter import Label,Tk
+from script.Core import TextLoading, GameConfig
+from tkinter import Label, Tk
 import webbrowser
 
 

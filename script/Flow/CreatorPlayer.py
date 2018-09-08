@@ -22,7 +22,7 @@ def inputName_func():
     elif flowReturn == 2:
         CacheContorl.wframeMouse['wFrameRePrint'] = 1
         EraPrint.pnextscreen()
-        import Design.StartFlow as mainflow
+        import script.Design.StartFlow as mainflow
         mainflow.main_func()
     pass
 
