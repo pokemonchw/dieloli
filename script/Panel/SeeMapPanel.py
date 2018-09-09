@@ -6,8 +6,7 @@ def seeMapPanel():
     inputS = []
     titleText = TextLoading.getTextData(TextLoading.stageWordId, '78')
     EraPrint.plt(titleText)
-    sceneId = CacheContorl.playObject['object']['0']['Position']
-    mapId = MapHandle.getMapIdForScene(sceneId)
+    mapId = CacheContorl.nowMapId
     inputS = inputS + MapHandle.printMap(mapId)
     return inputS
 
@@ -15,7 +14,7 @@ def seeMapPanel():
 def seeMovePathPanel():
     inputS = []
     sceneId = CacheContorl.playObject['object']['0']['Position']
-    mapId = MapHandle.getMapIdForScene(sceneId)
+    mapId = CacheContorl.nowMapId
     mapData = CacheContorl.mapData['MapData'][mapId]
     movePathInfo = TextLoading.getTextData(TextLoading.messageId,'27')
     EraPrint.p(movePathInfo)
@@ -44,7 +43,14 @@ def seeMovePathPanel():
 
 # 用于绘制通常按钮面板
 def backScenePanel(startId):
-    inputS = []
-    mapCmdList = CmdButtonQueue.optionint(CmdButtonQueue.seemap, askfor=False, startId=startId)
-    inputS = inputS + mapCmdList
-    return inputS
+    seeMapCmd = []
+    nowPosition = CacheContorl.playObject['object']['0']['Position']
+    nowPositionMapId = MapHandle.getMapIdForScene(nowPosition)
+    cmdData = TextLoading.getTextData(TextLoading.cmdId,CmdButtonQueue.seemap)
+    seeMapCmd.append(cmdData[0])
+    if str(nowPositionMapId) != '0' and str(CacheContorl.nowMapId) != '0':
+        seeMapCmd.append(cmdData[1])
+    if str(nowPositionMapId) != str(CacheContorl.nowMapId):
+        seeMapCmd.append(cmdData[2])
+    mapCmdList = CmdButtonQueue.optionint(cmdList=None,cmdListData=seeMapCmd,cmdColumn=3,askfor=False,cmdSize='center',startId=startId)
+    return mapCmdList
