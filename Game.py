@@ -6,3 +6,4 @@ from script.Design import StartFlow
 GamePathConfig.platform = 'win'
 
 GameInit.run(StartFlow.open_func)
+

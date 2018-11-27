@@ -40,14 +40,13 @@ systemId = 'system'
 fontListId = 'fontList'
 barListId = 'barList'
 
-textDataList = {
-    "message":getData(messagePath),"cmd":getData(cmdPath),"menu":getData(menuPath),
-    "role":getData(rolePath),"stageWord":getData(stageWordPath),"error":getData(errorPath),
-    "tem":getData(attrTemplatePath),"system":getData(systemTextPath),"fontList":getData(fontConfigPath),
-    "barList":getData(barConfigPath)
-}
-
 # 获取文本数据
 def getTextData(textPath,textId):
+    textDataList = {
+        "message":getData(messagePath),"cmd":getData(cmdPath),"menu":getData(menuPath),
+        "role":getData(rolePath),"stageWord":getData(stageWordPath),"error":getData(errorPath),
+        "tem":getData(attrTemplatePath),"system":getData(systemTextPath),"fontList":getData(fontConfigPath),
+        "barList":getData(barConfigPath)
+    }
     textData = textDataList[textPath]
     return textData[textId]

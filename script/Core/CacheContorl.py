@@ -53,6 +53,9 @@ cmdData = {}
 # 游戏时间
 gameTime = {}
 
+# 时间增量
+subGameTime = 0
+
 # 面板状态
 panelState = {}
 

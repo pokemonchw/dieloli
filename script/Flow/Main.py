@@ -1,7 +1,7 @@
 from script.Core import CacheContorl,GameInit,PyCmd
 from script.Design import AttrHandle
 from script.Panel import MainFramePanel
-from script.Flow import SeePlayerAttr,SeePlayerList,Shop,ChangeClothes,GameSetting,SaveHandleFrame,InScene
+from script.Flow import SeePlayerAttr,SeePlayerList,Shop,ChangeClothes,GameSetting,SaveHandleFrame,InScene,GameHelp
 
 # 游戏主页
 def mainFrame_func():
@@ -30,7 +30,7 @@ def askForMainFrame(ansList):
     elif ans == '4':
         GameSetting.changeGameSetting_func()
     elif ans == '5':
-        pass
+        GameHelp.gameHelp_func()
     elif ans == '6':
         SaveHandleFrame.establishSave_func('MainFramePanel')
     elif ans == '7':
@@ -40,4 +40,3 @@ def askForMainFrame(ansList):
 # 游戏主页查看属性流程
 def mainFrameSeeAttrPanel():
     SeePlayerAttr.seeAttrOnEveryTime_func('MainFramePanel')
-    pass

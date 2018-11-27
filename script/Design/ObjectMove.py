@@ -85,5 +85,5 @@ def identicalMapMove(objectId,mapId,nowMapSceneId,targetMapSceneId):
         nowObjectPosition = MapHandle.getSceneIdForMapSceneId(mapId,nowMapSceneId)
         nowTargetPosition = MapHandle.getSceneIdForMapSceneId(mapId,nowTargetSceneId)
         MapHandle.playerMoveScene(nowObjectPosition,nowTargetPosition,objectId)
-        GameTime.setSubMinute(nowNeedTime)
+        GameTime.subTimeNow(nowNeedTime)
     return movePath
