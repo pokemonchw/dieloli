@@ -7,7 +7,7 @@ def initTime():
     CacheContorl.gameTime['day'] = int(GameConfig.day)
     CacheContorl.gameTime['hour'] = int(GameConfig.hour)
     CacheContorl.gameTime['minute'] = int(GameConfig.minute)
-    setSubMinute(0)
+    subTimeNow()
 
 # 获取时间信息文本
 def getDateText(gameTimeData = None):
