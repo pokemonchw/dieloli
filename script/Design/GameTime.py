@@ -221,5 +221,5 @@ def judgeLeapYear(year):
             return "0"
 
 # 获取当前时间段
-def getNowTime():
+def getNowTimeSlice():
     pass

@@ -1,4 +1,4 @@
-import os
+import os,random
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle
 
@@ -58,6 +58,13 @@ def initCharacterList():
             weightTemName = 'Ordinary'
         weight = AttrCalculation.getWeight(weightTemName, height['NowHeight'])
         defaultAttr['Weight'] = weight
+        schoolClassDataPath = os.path.join(gamepath,'data',language,'SchoolClass.json')
+        schoolClassData = GameData._loadjson(schoolClassDataPath)
+        if defaultAttr['Age'] <= 18 and defaultAttr >= 7:
+            classGrade = str(defaultAttr['Age'] - 7)
+            defaultAttr['Class'] = random.choice(schoolClassData['Class'][classGrade])
+        else:
+            defaultAttr['Office'] = str(random.randint(0,12))
         measurements = AttrCalculation.getMeasurements(temList[characterSex], height['NowHeight'], weightTemName)
         defaultAttr['Measurements'] = measurements
         for keys in defaultAttr:

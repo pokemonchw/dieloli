@@ -41,8 +41,14 @@
       "Waist":"0",
       "Hip":"0"
     },
+    "Move":{
+      "MoveIng":"0",
+      "MoveTime":"0"
+    },
     "Gold":"0",
-    "Position":["0"]
+    "Position":["0"],
+    "Class":[],
+    "Office":"0"
   },
   "Sex":["男","女","扶她","无性人"],
   "Features":{
