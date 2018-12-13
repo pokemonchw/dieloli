@@ -2,7 +2,6 @@ from script.Core import TextLoading, GameConfig
 from tkinter import Label, Tk
 import webbrowser
 
-
 def gohome(event):
     webbrowser.open(r"https://github.com/pokemonchw/dieloli")
 

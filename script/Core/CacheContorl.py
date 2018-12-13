@@ -12,6 +12,9 @@ cmd_map = {}
 # 角色对象数据缓存组
 playObject = {}
 
+# 等待回车
+waitEnter = '0'
+
 # 默认属性模板数据读取
 temObjectDefault = {}
 

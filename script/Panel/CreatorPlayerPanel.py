@@ -9,7 +9,7 @@ def inputNamePanel():
     EraPrint.p('\n')
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '4'))
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1,waitEnter='1')
     EraPrint.p('\n')
     return yrn
 
@@ -33,7 +33,7 @@ def inputNickNamePanel():
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '6'))
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputnickname, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputnickname, 1,waitEnter='1')
     EraPrint.p('\n')
     return yrn
 
@@ -60,7 +60,7 @@ def inputSelfNamePanel():
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '14'))
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputselfname, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputselfname, 1,waitEnter='1')
     EraPrint.p('\n')
     return yrn
 
@@ -85,7 +85,7 @@ def inputSexPanel():
     sexId = CacheContorl.playObject['object'][playerId]['Sex']
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '8')[sexId])
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1,waitEnter='1')
     EraPrint.p('\n')
     return yrn
 

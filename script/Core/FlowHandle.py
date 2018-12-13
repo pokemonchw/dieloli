@@ -15,7 +15,6 @@ def set_default_flow(func, arg=(), kw={}):
     if func==null_func:
         default_flow = null_func
         return
-
     def run_func():
         func(*arg, **kw)
     default_flow = run_func
@@ -101,8 +100,10 @@ def order_deal(flag='order', print_order=True):
                 CacheContorl.flowContorl['restartGame'] = 0
                 reset_func()
                 return
-            if print_order == True and order != '':
+            if print_order == True and order != '' and CacheContorl.waitEnter != '1':
                 IoInit.print('\n' + order + '\n')
+            elif print_order == True and order == '' and CacheContorl.waitEnter == '1':
+                return '0'
 
             if flag == 'str':
                 return order
@@ -126,6 +127,9 @@ def askfor_str(donot_return_null_str=True, print_order=False):
         order = order_deal('str', print_order)
         if donot_return_null_str == True and order != '':
             return order
+        if donot_return_null_str == True and CacheContorl.waitEnter == '1':
+            CacheContorl.waitEnter = '0'
+            return '0'
         elif donot_return_null_str == False:
             return order
 
@@ -136,6 +140,10 @@ def askfor_All(list,print_order=False):
         if order in list:
             IoInit.print(order + '\n')
             return order
+        elif order == '' and CacheContorl.waitEnter == '1':
+            CacheContorl.waitEnter = '0'
+            IoInit.print('0' + '\n')
+            return '0'
         elif order == '':
             continue
         else:
@@ -150,6 +158,10 @@ def askfor_Int(list,print_order=False):
         if order in list:
             IoInit.print(order + '\n')
             return order
+        elif order == '' and CacheContorl.waitEnter == '1':
+            CacheContorl.waitEnter = '0'
+            IoInit.print('0' + '\n')
+            return 0
         elif order == '':
             continue
         else:

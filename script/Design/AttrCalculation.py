@@ -3,7 +3,6 @@ from script.Core import CacheContorl,ValueHandle,GameConfig,GamePathConfig,TextL
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
-
 templatePath = os.path.join(gamepath,'data',language,'AttrTemplate.json')
 templateData = GameData._loadjson(templatePath)
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
