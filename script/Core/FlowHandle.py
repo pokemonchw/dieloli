@@ -102,8 +102,6 @@ def order_deal(flag='order', print_order=True):
                 return
             if print_order == True and order != '' and CacheContorl.waitEnter != '1':
                 IoInit.print('\n' + order + '\n')
-            elif print_order == True and order == '' and CacheContorl.waitEnter == '1':
-                return '0'
 
             if flag == 'str':
                 return order
@@ -127,9 +125,6 @@ def askfor_str(donot_return_null_str=True, print_order=False):
         order = order_deal('str', print_order)
         if donot_return_null_str == True and order != '':
             return order
-        if donot_return_null_str == True and CacheContorl.waitEnter == '1':
-            CacheContorl.waitEnter = '0'
-            return '0'
         elif donot_return_null_str == False:
             return order
 
@@ -140,12 +135,13 @@ def askfor_All(list,print_order=False):
         if order in list:
             IoInit.print(order + '\n')
             return order
-        elif order == '' and CacheContorl.waitEnter == '1':
-            CacheContorl.waitEnter = '0'
-            IoInit.print('0' + '\n')
-            return '0'
         elif order == '':
-            continue
+            if CacheContorl.waitEnter == '1':
+                IoInit.print('0' + '\n')
+                CacheContorl.waitEnter = '0'
+                return '0'
+            else:
+                continue
         else:
             IoInit.print(order + '\n')
             IoInit.print(TextLoading.getTextData(TextLoading.errorId, 'noInputListError') + '\n')
@@ -158,12 +154,13 @@ def askfor_Int(list,print_order=False):
         if order in list:
             IoInit.print(order + '\n')
             return order
-        elif order == '' and CacheContorl.waitEnter == '1':
-            CacheContorl.waitEnter = '0'
-            IoInit.print('0' + '\n')
-            return 0
         elif order == '':
-            continue
+            if CacheContorl.waitEnter == '1':
+                IoInit.print('0' + '\n')
+                CacheContorl.waitEnter = '0'
+                return '0'
+            else:
+                continue
         else:
             IoInit.print(order + '\n')
             IoInit.print(TextLoading.getTextData(TextLoading.errorId, 'noInputListError') + '\n')
