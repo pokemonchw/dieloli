@@ -60,7 +60,8 @@ def initCharacterList():
         defaultAttr['Weight'] = weight
         schoolClassDataPath = os.path.join(gamepath,'data',language,'SchoolClass.json')
         schoolClassData = GameData._loadjson(schoolClassDataPath)
-        if defaultAttr['Age'] <= 18 and defaultAttr >= 7:
+        print(defaultAttr['Age'])
+        if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
             classGrade = str(defaultAttr['Age'] - 7)
             defaultAttr['Class'] = random.choice(schoolClassData['Class'][classGrade])
         else:
