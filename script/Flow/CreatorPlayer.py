@@ -175,10 +175,10 @@ def detailedSetting_func3():
     CacheContorl.temporaryObject['SexExperience'] = playerSexExperienceData
     CacheContorl.temporaryObject['SexGrade'] = AttrCalculation.getSexGrade(playerSexExperienceData)
     PyCmd.clr_cmd()
-    detailedSettind_func4()
+    detailedSetting_func4()
 
 # 详细设置属性4:询问玩家的胆量
-def detailedSettind_func4():
+def detailedSetting_func4():
     flowReturn = CreatorPlayerPanel.detailedSetting4Panel()
     courageList = featuresList['Courage']
     if flowReturn == 0:
