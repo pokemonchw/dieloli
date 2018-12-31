@@ -15,6 +15,7 @@ def set_default_flow(func, arg=(), kw={}):
     if func==null_func:
         default_flow = null_func
         return
+
     def run_func():
         func(*arg, **kw)
     default_flow = run_func
@@ -100,7 +101,7 @@ def order_deal(flag='order', print_order=True):
                 CacheContorl.flowContorl['restartGame'] = 0
                 reset_func()
                 return
-            if print_order == True and order != '' and CacheContorl.waitEnter != '1':
+            if print_order == True and order != '':
                 IoInit.print('\n' + order + '\n')
 
             if flag == 'str':
@@ -136,12 +137,7 @@ def askfor_All(list,print_order=False):
             IoInit.print(order + '\n')
             return order
         elif order == '':
-            if CacheContorl.waitEnter == '1':
-                IoInit.print('0' + '\n')
-                CacheContorl.waitEnter = '0'
-                return '0'
-            else:
-                continue
+            continue
         else:
             IoInit.print(order + '\n')
             IoInit.print(TextLoading.getTextData(TextLoading.errorId, 'noInputListError') + '\n')
@@ -150,17 +146,14 @@ def askfor_All(list,print_order=False):
 def askfor_Int(list,print_order=False):
     while True:
         order = order_deal('str', print_order)
+        if CacheContorl.waitEnter == '1' and order == '':
+            return '0'
         order = TextHandle.fullToHalfText(order)
         if order in list:
             IoInit.print(order + '\n')
             return order
         elif order == '':
-            if CacheContorl.waitEnter == '1':
-                IoInit.print('0' + '\n')
-                CacheContorl.waitEnter = '0'
-                return '0'
-            else:
-                continue
+            continue
         else:
             IoInit.print(order + '\n')
             IoInit.print(TextLoading.getTextData(TextLoading.errorId, 'noInputListError') + '\n')
@@ -202,6 +195,7 @@ def initCache():
     CacheContorl.textWait = float(GameConfig.text_wait)
     CacheContorl.temObjectDefault = getTemObjectDefault()
     CacheContorl.temporaryObjectBak = CacheContorl.temObjectDefault.copy()
+    CacheContorl.randomNpcList = []
 
 def getTemObjectDefault():
     script = __import__('script.Design.MapHandle')

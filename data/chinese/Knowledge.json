@@ -99,6 +99,9 @@
       },
       "Etiquette":{
         "Name":"礼仪"
+      },
+      "Sports":{
+        "Name":"运动"
       }
     }
   },
@@ -223,7 +226,7 @@
       }
     }
   },
-  "":{
+  "Occultism":{
     "Name":"神秘学",
     "Knowledge":{
       "GoldMetallurgy":{

@@ -94,6 +94,7 @@ def inputSexChoicePanel():
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '7'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.sexmenu, 1)
+    EraPrint.p('\n')
     return yrn
 
 # 询问玩家是否进行详细设置面板

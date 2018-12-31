@@ -276,9 +276,8 @@ def setDefaultCache():
             pass
 
 # 设置性别对应特征
-def setSexCache(SexName):
-    SexId = templateData['TemList'][SexName]
-    featuresTemData = roleAttrData['SexFeatures'][SexId]
+def setSexCache(sexName):
+    featuresTemData = roleAttrData['SexFeatures'][sexName]
     cacheList = ['Age', "Chastity", 'Disposition','Courage', 'SelfConfidence', 'Friends', 'Figure',
                  'Sex', 'AnimalInternal', 'AnimalExternal', 'Charm'
                  ]
@@ -310,11 +309,9 @@ def setAddFeatures(featuresData):
 
 # 创建角色默认属性
 def setAttrDefault(playerId):
-    temList = getTemList()
     playerId = str(playerId)
     playerSex = CacheContorl.playObject['object'][playerId]['Sex']
-    temId = temList[playerSex]
-    temData = getAttr(temId)
+    temData = getAttr(playerSex)
     for key in temData:
         CacheContorl.temporaryObject[key] = temData[key]
     CacheContorl.temporaryObject['Features'] = CacheContorl.featuresList.copy()

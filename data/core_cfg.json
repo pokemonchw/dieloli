@@ -22,5 +22,8 @@
     "playerlist_show":"10",
     "text_wait":"0",
     "home_url":"https://github.com/pokemonchw/dieloli",
-    "licenses_url":"http://creativecommons.org/licenses/by-nc-sa/2.0/"
+    "licenses_url":"http://creativecommons.org/licenses/by-nc-sa/2.0/",
+    "random_npc_max":100,
+    "proportion_teacher":10,
+    "proportion_student":90
 }

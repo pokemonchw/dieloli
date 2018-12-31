@@ -4,7 +4,7 @@ from script.Core import TextLoading
 flowContorl = {}
 
 # 主页监听控制流程用变量组
-wframeMouse = {}
+wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesUp': 2, 'wFrameLineState': 2,'wFrameRePrint': 0}
 
 # cmd存储
 cmd_map = {}
@@ -76,6 +76,8 @@ pathList = []
 pathTimeList = []
 
 nowMapId = 0
+
+randomNpcList = []
 
 class CacheHandle():
     def getTemObjectDefault(self):

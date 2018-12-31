@@ -1,4 +1,4 @@
-import os
+import os,random
 from script.Core import TextLoading,GameData,CacheContorl,GameConfig,GamePathConfig
 from script.Design import ProportionalBar,AttrPrint
 
@@ -10,6 +10,9 @@ roleAttrData = GameData._loadjson(roleAttrPath)
 sexData = roleAttrData['Sex']
 equipmentPath = os.path.join(gamepath,'data',language,'Equipment.json')
 equipmentData = GameData._loadjson(equipmentPath)
+boysNameListData = TextLoading.getTextData(TextLoading.nameListId,'Boys')
+girlsNameListData = TextLoading.getTextData(TextLoading.nameListId,'Girls')
+familyNameListData = TextLoading.getTextData(TextLoading.familyNameListId,'FamilyNameList')
 
 #获取性经验文本
 def getSexExperienceText(sexList,sexName):
@@ -55,12 +58,35 @@ def getGradeTextColor(sexGrade):
     sexGrade = '<level' + lowerGrade + '>' + sexGrade + '</level' + lowerGrade + '>'
     return sexGrade
 
+# 按性别随机生成姓名
+def getRandomNameForSex(sexGrade):
+    familyName = random.choice(familyName)
+    sexJudge = 0
+    if sexGrade == 'Man':
+        sexJudge = 1
+    elif sexGrade == 'Woman':
+        sexJudge = 0
+    else:
+        sexJudge = random.randint(0,1)
+    if sexJudge == 0:
+        name = random.choice(girlsNameListData)
+    else:
+        name = random.choice(boysNameListData)
+    return familyName + name
+
+# 获取性别对应文本
+def getSexText(sexId):
+    data = roleAttrData['Sex']
+    sexText = data[sexId]
+    return sexText
+
 # 获取特征文本
 def getFeaturesStr(fList):
     featuresListStr = ''
-    featuresListText = ['Age',"Chastity",'Disposition','Courage','SelfConfidence','Friends','Figure',
-                        'Sex','AnimalInternal','AnimalExternal','Charm'
-                        ]
+    featuresListText = [
+        'Age',"Chastity",'Disposition','Courage','SelfConfidence','Friends','Figure',
+        'Sex','AnimalInternal','AnimalExternal','Charm'
+    ]
     for i in range(0,len(featuresListText)):
         try:
             featureText = fList[featuresListText[i]]

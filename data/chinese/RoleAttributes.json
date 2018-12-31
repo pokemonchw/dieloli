@@ -4,7 +4,7 @@
     "NickName":"你",
     "SelfName":"我",
     "Species":"人类",
-    "Sex":"男",
+    "Sex":"Man",
     "Age":"17",
     "Relationship":"无",
     "San":"50",
@@ -49,9 +49,14 @@
     "Position":["0"],
     "Class":[],
     "Office":"0",
-    "Knowledge":{}
+    "Knowledge":{},
+    "Language":{},
+    "MotherTongue":"Chinese"
   },
-  "Sex":["男","女","扶她","无性人"],
+  "Sex":{
+    "Man":"男","Woman":"女",
+    "Futa":"扶她","Asexual":"无性"
+  },
   "Features":{
     "Age":["正太","萝莉","幼齿","苍老"],
     "Chastity":["处男","处女","纯洁"],

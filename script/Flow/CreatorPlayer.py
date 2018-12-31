@@ -70,9 +70,10 @@ def inputSexConfirm_func():
     sexId = CacheContorl.playObject['object'][playerId]['Sex']
     if flowReturn == 0:
         AttrCalculation.setSexCache(sexId)
-        if sexId == TextLoading.getTextData(TextLoading.roleId, 'Sex')[2]:
+        sexKeysList = list(TextLoading.getTextData(TextLoading.roleId,'Sex'))
+        if sexId == sexKeysList[2]:
             CacheContorl.temporaryObject['Features']['Sex'] = TextLoading.getTextData(TextLoading.roleId, 'Features')['Sex'][0]
-        elif sexId == TextLoading.getTextData(TextLoading.roleId, 'Sex')[3]:
+        elif sexId == sexKeysList[3]:
             CacheContorl.temporaryObject['Features']['Sex'] = TextLoading.getTextData(TextLoading.roleId, 'Features')['Sex'][1]
         PyCmd.clr_cmd()
         attributeGenerationBranch_func()
@@ -86,7 +87,7 @@ def inputSexConfirm_func():
 
 # 玩家确认性别流程
 def inputSexChoice_func():
-    sex = TextLoading.getTextData(TextLoading.roleId, 'Sex')
+    sex = list(TextLoading.getTextData(TextLoading.roleId, 'Sex').keys())
     sexMax = len(sex)
     flowReturn = CreatorPlayerPanel.inputSexChoicePanel()
     if flowReturn in range(0,sexMax):
@@ -124,7 +125,7 @@ def attributeGenerationBranch_func():
 def detailedSetting_func1():
     flowRetun = CreatorPlayerPanel.detailedSetting1Panel()
     playerSex = CacheContorl.playObject['object']['0']['Sex']
-    sexList = TextLoading.getTextData(TextLoading.roleId, 'Sex')
+    sexList = list(TextLoading.getTextData(TextLoading.roleId, 'Sex'))
     if flowRetun == 0:
         CacheContorl.featuresList['Age'] = featuresList["Age"][3]
     elif flowRetun == 4:
@@ -138,7 +139,7 @@ def detailedSetting_func1():
     CacheContorl.temporaryObject['Features'] = CacheContorl.featuresList.copy()
     playerAgeTemName = AttrCalculation.getAgeTemList()[flowRetun]
     playerAge = AttrCalculation.getAge(playerAgeTemName)
-    playerTem = TextLoading.getTextData(TextLoading.temId,'TemList')[playerSex]
+    playerTem = playerSex
     playerHeigt = AttrCalculation.getHeight(playerTem,playerAge,CacheContorl.temporaryObject['Features'])
     playerWeight = AttrCalculation.getWeight('Ordinary',playerHeigt['NowHeight'])
     playerMeasurements = AttrCalculation.getMeasurements(playerTem,playerHeigt['NowHeight'],'Ordinary')
@@ -232,7 +233,7 @@ def detailedSetting_func8():
     playerHeight = CacheContorl.temporaryObject['Height']
     playerWeight = AttrCalculation.getWeight(weightTem, playerHeight['NowHeight'])
     playerSex = CacheContorl.temporaryObject['Sex']
-    playerTem = TextLoading.getTextData(TextLoading.temId, 'TemList')[playerSex]
+    playerTem = playerSex
     playerMeasurements = AttrCalculation.getMeasurements(playerTem, playerHeight['NowHeight'], weightTem)
     CacheContorl.temporaryObject['Weight'] = playerWeight
     CacheContorl.temporaryObject['Measurements'] = playerMeasurements

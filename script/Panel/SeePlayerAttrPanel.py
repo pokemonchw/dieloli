@@ -27,7 +27,8 @@ def seePlayerMainAttrPanel(playerId):
         EraPrint.p('\n')
         attrListString = []
         playerData = AttrHandle.getAttrData(playerId)
-        playerSex = playerData['Sex']
+        playerSexId = playerData['Sex']
+        playerSex = AttrText.getSexText(playerSexId)
         playerAge = playerData['Age']
         playerName = playerData['Name']
         fixPlayerName = TextLoading.getTextData(TextLoading.stageWordId, '13')

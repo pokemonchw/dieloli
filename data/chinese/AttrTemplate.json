@@ -1,7 +1,6 @@
 {
-  "TemList":{"男":"Man","女":"Woman","扶她":"Futa","无性人":"Asexual"},
   "Man":{
-    "Sex":"男",
+    "Sex":"Man",
     "Age":"YoungAdult",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
@@ -10,7 +9,7 @@
     "Weight":"Ordinary"
   },
   "Woman":{
-    "Sex":"女",
+    "Sex":"Woman",
     "Age":"YoungAdult",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
@@ -19,7 +18,7 @@
     "Weight":"Ordinary"
   },
   "Futa":{
-    "Sex":"扶她",
+    "Sex":"Futa",
     "Age":"YoungAdult",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",
@@ -28,7 +27,7 @@
     "Weight":"Ordinary"
   },
   "Asexual":{
-    "Sex":"无性人",
+    "Sex":"Asexual",
     "Age":"YoungAdult",
     "HitPoint":"Ordinary",
     "ManaPoint":"Ordinary",

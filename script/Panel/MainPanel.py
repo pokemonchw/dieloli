@@ -4,9 +4,9 @@ from script.Design import CmdButtonQueue
 
 # 载入游戏面板
 def loadGamePanel():
-    EraPrint.pnextscreen()
-    EraPrint.pnextscreen()
     FlowHandle.initCache()
+    EraPrint.pnextscreen()
+    EraPrint.pnextscreen()
     EraPrint.pobo(1 / 3, TextLoading.getTextData(TextLoading.messageId, '1'))
     EraPrint.p('\n')
 

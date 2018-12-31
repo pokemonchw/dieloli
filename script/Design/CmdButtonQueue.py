@@ -27,8 +27,6 @@ seeplayerwearclothes = "seePlayerWearClothes"
 
 # 用于批量生成id命令
 def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left',startId = '0',cmdListData=None,lastLine = False,waitEnter = '0'):
-    if waitEnter == '1':
-        CacheContorl.waitEnter = '1'
     if cmdListData == None:
         cmdListData = TextLoading.getTextData(TextLoading.cmdId, cmdList).copy()
     inputI = []
@@ -79,6 +77,7 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
             pass
     EraPrint.p('\n')
     if askfor == True:
+        CacheContorl.waitEnter = waitEnter
         ans = int(GameInit.askfor_Int(inputI))
         return ans
     else:

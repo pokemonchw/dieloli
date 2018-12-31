@@ -7,7 +7,7 @@ gamepath = GamePathConfig.gamepath
 featuresList = AttrCalculation.getFeaturesList()
 
 # 初始化角色数据
-def initCharacterList():
+def initCharacterListbak():
     characterListPath = os.path.join(gamepath,'data',language,'character')
     characterList = GameData.getPathList(characterListPath)
     for i in range(0,len(characterList)):
@@ -29,6 +29,15 @@ def initCharacterList():
         defaultAttr['Sex'] = characterSex
         AttrCalculation.setSexCache(characterSex)
         defaultAttr['Features'] = CacheContorl.featuresList.copy()
+        motherTongue = {
+            "Level":5,
+            "Exp":0
+        }
+        if 'MotherTongue' in characterDataKeys:
+            defaultAttr['Language'][characterData['MotherTongue']] = motherTongue
+            defaultAttr['MotherTongue'] = characterData['MotherTongue']
+        else:
+            defaultAttr['Language']['Chinese'] = motherTongue
         if 'Age' in characterDataKeys:
             ageTem = characterData['Age']
             characterAge = AttrCalculation.getAge(ageTem)
@@ -60,7 +69,6 @@ def initCharacterList():
         defaultAttr['Weight'] = weight
         schoolClassDataPath = os.path.join(gamepath,'data',language,'SchoolClass.json')
         schoolClassData = GameData._loadjson(schoolClassDataPath)
-        print(defaultAttr['Age'])
         if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
             classGrade = str(defaultAttr['Age'] - 7)
             defaultAttr['Class'] = random.choice(schoolClassData['Class'][classGrade])
@@ -74,6 +82,21 @@ def initCharacterList():
         CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
         CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
     initPlayerPosition()
+
+# 初始化角色数据
+def initCharacterList():
+    characterListPath = os.path.join(gamepath,'data',language,'character')
+    characterList = GameData.getPathList(characterListPath)
+    randomNpcData = getRandomNpcData()
+
+# 获取随机noc数据
+def getRandomNpcData():
+    if CacheContorl.randomNpcList == []:
+        randomNpcMax = int(GameConfig.random_npc_max)
+        for i in range(0,randomNpcMax):
+            pass
+    else:
+        return CacheContorl.randomNpcList
 
 # 获取角色最大数量
 def getCharacterIndexMax():

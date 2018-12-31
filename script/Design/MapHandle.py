@@ -16,11 +16,19 @@ def printMap(mapId):
     inputCmd = ''
     passList = []
     mapYList = mapText.split('\n')
+    mapXListStyleList = []
+    newMapYList = []
     for mapXList in mapYList:
         mapXListStyle = RichText.setRichTextPrint(mapXList,'standard')
         mapXList = RichText.removeRichCache(mapXList)
+        mapXListStyleList.append(mapXListStyle)
+        newMapYList.append(mapXList)
+    mapXIndex = 0
+    for mapXList in newMapYList:
+        mapXListStyle = mapXListStyleList[mapXIndex]
         mapXFix = TextHandle.align(mapXList,'center',True)
         EraPrint.p(mapXFix)
+        mapXIndex += 1
         for i in range(0, len(mapXList)):
             if str(i) not in passList:
                 if mapXListStyle[i] == 'mapbutton':
