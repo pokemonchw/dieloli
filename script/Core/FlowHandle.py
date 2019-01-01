@@ -15,7 +15,6 @@ def set_default_flow(func, arg=(), kw={}):
     if func==null_func:
         default_flow = null_func
         return
-
     def run_func():
         func(*arg, **kw)
     default_flow = run_func
@@ -146,8 +145,6 @@ def askfor_All(list,print_order=False):
 def askfor_Int(list,print_order=False):
     while True:
         order = order_deal('str', print_order)
-        if CacheContorl.waitEnter == '1' and order == '':
-            return '0'
         order = TextHandle.fullToHalfText(order)
         if order in list:
             IoInit.print(order + '\n')
@@ -196,6 +193,7 @@ def initCache():
     CacheContorl.temObjectDefault = getTemObjectDefault()
     CacheContorl.temporaryObjectBak = CacheContorl.temObjectDefault.copy()
     CacheContorl.randomNpcList = []
+    CacheContorl.npcTemData = []
 
 def getTemObjectDefault():
     script = __import__('script.Design.MapHandle')

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import os,time
-from script.Core import PyCmd,CacheContorl
+from script.Core import PyCmd,CacheContorl,EraPrint
 from script.Flow import CreatorPlayer,SaveHandleFrame
 from script.Panel import MainPanel
 
@@ -14,6 +14,7 @@ def open_func():
 def main_func():
     ans = MainPanel.gameMainPanel()
     if ans == 0:
+        EraPrint.p('\n')
         newgame_func()
     elif ans == 1:
         loadgame_func()

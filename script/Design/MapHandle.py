@@ -463,7 +463,11 @@ def getPathForMapId(mapId):
 # 从目录列表获取场景ID
 def getSceneIdForDirList(dirList):
     scenePath = os.path.join(mapDataDir)
-    for i in dirList:
-        scenePath = os.path.join(scenePath,i)
+    try:
+        for i in dirList:
+            scenePath = os.path.join(scenePath,i)
+    except TypeError:
+        dirList = str(dirList)
+        scenePath = os.path.join(scenePath,dirList)
     sceneId = getSceneIdForPath(scenePath)
     return sceneId

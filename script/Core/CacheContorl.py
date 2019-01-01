@@ -4,16 +4,13 @@ from script.Core import TextLoading
 flowContorl = {}
 
 # 主页监听控制流程用变量组
-wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesUp': 2, 'wFrameLineState': 2,'wFrameRePrint': 0}
+wframeMouse = {}
 
 # cmd存储
 cmd_map = {}
 
 # 角色对象数据缓存组
 playObject = {}
-
-# 等待回车
-waitEnter = '0'
 
 # 默认属性模板数据读取
 temObjectDefault = {}
@@ -26,6 +23,9 @@ featuresList = {}
 
 # 临时角色数据控制对象
 temporaryObject = {}
+
+# npc模板列表
+npcTemData = []
 
 # 输入记录（最大20）
 inputCache = []

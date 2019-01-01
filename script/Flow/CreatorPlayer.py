@@ -42,7 +42,6 @@ def inputNickName_func():
         CacheContorl.temporaryObject['NickName'] = CacheContorl.temporaryObject['Name']
         inputNickName_func()
     elif flowReturn == 3:
-        EraPrint.p('\n')
         PyCmd.clr_cmd()
         inputName_func()
     pass

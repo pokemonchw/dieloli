@@ -20,8 +20,8 @@ stageWordPath = 'StageWord.json'
 errorPath = 'ErrorText.json'
 attrTemplatePath = 'AttrTemplate.json'
 systemTextPath = 'SystemText.json'
-nameListPath = 'NameList.json'
-familyNameListPath = 'FamilyNameList.json'
+nameListPath = 'NameIndex.json'
+familyNameListPath = 'FamilyIndex.json'
 fontConfigPath = os.path.join(gamepath, 'data', 'FontConfig.json')
 barConfigPath = os.path.join(gamepath,'data','BarConfig.json')
 

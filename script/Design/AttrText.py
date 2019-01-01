@@ -13,6 +13,41 @@ equipmentData = GameData._loadjson(equipmentPath)
 boysNameListData = TextLoading.getTextData(TextLoading.nameListId,'Boys')
 girlsNameListData = TextLoading.getTextData(TextLoading.nameListId,'Girls')
 familyNameListData = TextLoading.getTextData(TextLoading.familyNameListId,'FamilyNameList')
+boysNameMax = len(boysNameListData)
+girlsNameMax = len(girlsNameListData)
+sortFamilyIndex = sorted(familyNameListData.items(),key=lambda x:x[1])
+
+def twoBitArrayToDict(array):
+    newDict = {}
+    for i in range(0,len(array)):
+        newDict[array[i][0]] = array[i][1]
+    return newDict
+
+def getReginList(nowData):
+    regionList = {}
+    sortData = sorted(nowData.items(),key=lambda x:x[1])
+    sortData = twoBitArrayToDict(sortData)
+    sortDataKey = list(sortData.keys())
+    regionIndex = 0
+    for i in range(0,len(sortData)):
+        nowKey = sortDataKey[i]
+        regionIndex = regionIndex + sortData[nowKey]
+        regionList[str(regionIndex)] = nowKey
+    return regionList
+
+familyRegionList = getReginList(familyNameListData)
+boysRegionList = getReginList(boysNameListData)
+girlsRegionList = getReginList(girlsNameListData)
+
+def getListKeysIntList(nowList):
+    newList = []
+    for i in nowList:
+        newList.append(int(i))
+    return newList
+
+familyRegionIntList = getListKeysIntList(familyRegionList)
+boysRegionIntList = getListKeysIntList(boysRegionList)
+girlsRegionIntList = getListKeysIntList(girlsRegionList)
 
 #获取性经验文本
 def getSexExperienceText(sexList,sexName):
@@ -60,8 +95,10 @@ def getGradeTextColor(sexGrade):
 
 # 按性别随机生成姓名
 def getRandomNameForSex(sexGrade):
-    familyName = random.choice(familyName)
-    sexJudge = 0
+    familyIndexMax = familyRegionIntList[len(familyRegionIntList) - 1]
+    familyRandom = random.randint(1,familyIndexMax)
+    familyRegion = next(x for x in familyRegionIntList if x > familyRandom)
+    familyName = familyRegionList[str(familyRegion)]
     if sexGrade == 'Man':
         sexJudge = 1
     elif sexGrade == 'Woman':
@@ -69,9 +106,13 @@ def getRandomNameForSex(sexGrade):
     else:
         sexJudge = random.randint(0,1)
     if sexJudge == 0:
-        name = random.choice(girlsNameListData)
+        nameRandom = random.randint(1,girlsNameMax)
+        nameRegion = next(x for x in girlsRegionIntList if x > nameRandom)
+        name = girlsRegionList[str(nameRegion)]
     else:
-        name = random.choice(boysNameListData)
+        nameRandom = random.randint(1,boysNameMax)
+        nameRegion = next(x for x in boysRegionIntList if x > nameRandom)
+        name = boysRegionList[str(nameRegion)]
     return familyName + name
 
 # 获取性别对应文本

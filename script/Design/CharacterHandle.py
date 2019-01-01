@@ -1,30 +1,28 @@
 import os,random
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
-from script.Design import AttrCalculation,MapHandle
+from script.Design import AttrCalculation,MapHandle,AttrText
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
 featuresList = AttrCalculation.getFeaturesList()
+sexList = list(TextLoading.getTextData(TextLoading.roleId, 'Sex'))
+ageTemList = list(TextLoading.getTextData(TextLoading.temId,'AgeTem'))
 
 # 初始化角色数据
-def initCharacterListbak():
-    characterListPath = os.path.join(gamepath,'data',language,'character')
-    characterList = GameData.getPathList(characterListPath)
-    for i in range(0,len(characterList)):
+def initCharacterList():
+    initCharacterTem()
+    characterList = CacheContorl.npcTemData
+    i = 0
+    for character in characterList:
         AttrCalculation.initTemporaryObject()
         playerId = str(i + 1)
+        i += 1
         CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
         AttrCalculation.setDefaultCache()
-        characterDataName = characterList[i]
-        characterAttrTemPath = os.path.join(characterListPath,characterDataName,'AttrTemplate.json')
-        characterData = GameData._loadjson(characterAttrTemPath)
-        characterName = characterData['Name']
-        characterSex = characterData['Sex']
-        sexList = TextLoading.getTextData(TextLoading.roleId, 'Sex')
-        characterSexTem = TextLoading.getTextData(TextLoading.temId,'TemList')[characterSex]
+        characterName = character['Name']
+        characterSex = character['Sex']
         CacheContorl.playObject['object'][playerId]['Sex'] = characterSex
-        characterDataKeys = ValueHandle.dictKeysToList(characterData)
-        defaultAttr = AttrCalculation.getAttr(characterSexTem)
+        defaultAttr = AttrCalculation.getAttr(characterSex)
         defaultAttr['Name'] = characterName
         defaultAttr['Sex'] = characterSex
         AttrCalculation.setSexCache(characterSex)
@@ -33,13 +31,13 @@ def initCharacterListbak():
             "Level":5,
             "Exp":0
         }
-        if 'MotherTongue' in characterDataKeys:
-            defaultAttr['Language'][characterData['MotherTongue']] = motherTongue
-            defaultAttr['MotherTongue'] = characterData['MotherTongue']
+        if 'MotherTongue' in character:
+            defaultAttr['Language'][character['MotherTongue']] = motherTongue
+            defaultAttr['MotherTongue'] = character['MotherTongue']
         else:
             defaultAttr['Language']['Chinese'] = motherTongue
-        if 'Age' in characterDataKeys:
-            ageTem = characterData['Age']
+        if 'Age' in character:
+            ageTem = character['Age']
             characterAge = AttrCalculation.getAge(ageTem)
             defaultAttr['Age'] = characterAge
             if ageTem == 'SchoolAgeChild':
@@ -52,17 +50,17 @@ def initCharacterListbak():
             elif ageTem == 'OldAdult':
                 CacheContorl.featuresList['Age'] = featuresList["Age"][3]
             defaultAttr['Features'] = CacheContorl.featuresList.copy()
-        elif 'Features' in characterDataKeys:
-            AttrCalculation.setAddFeatures(characterData['Features'])
+        elif 'Features' in character:
+            AttrCalculation.setAddFeatures(character['Features'])
             defaultAttr['Features'] = CacheContorl.featuresList.copy()
         temList = AttrCalculation.getTemList()
-        if 'Features' in characterDataKeys:
-            height = AttrCalculation.getHeight(temList[characterSex], defaultAttr['Age'],characterData['Features'])
+        if 'Features' in character:
+            height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],character['Features'])
         else:
-            height = AttrCalculation.getHeight(temList[characterSex], defaultAttr['Age'],{})
+            height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],{})
         defaultAttr['Height'] = height
-        if 'Weight' in characterData:
-            weightTemName = characterData['Weight']
+        if 'Weight' in character:
+            weightTemName = character['Weight']
         else:
             weightTemName = 'Ordinary'
         weight = AttrCalculation.getWeight(weightTemName, height['NowHeight'])
@@ -70,11 +68,14 @@ def initCharacterListbak():
         schoolClassDataPath = os.path.join(gamepath,'data',language,'SchoolClass.json')
         schoolClassData = GameData._loadjson(schoolClassDataPath)
         if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
-            classGrade = str(defaultAttr['Age'] - 7)
+            classGradeMax = len(schoolClassData['Class'].keys())
+            classGrade = str(defaultAttr['Age'] - 6)
+            if int(classGrade) > classGradeMax:
+                classGrade = str(classGradeMax)
             defaultAttr['Class'] = random.choice(schoolClassData['Class'][classGrade])
         else:
             defaultAttr['Office'] = str(random.randint(0,12))
-        measurements = AttrCalculation.getMeasurements(temList[characterSex], height['NowHeight'], weightTemName)
+        measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weightTemName)
         defaultAttr['Measurements'] = measurements
         for keys in defaultAttr:
             CacheContorl.temporaryObject[keys] = defaultAttr[keys]
@@ -84,24 +85,50 @@ def initCharacterListbak():
     initPlayerPosition()
 
 # 初始化角色数据
-def initCharacterList():
+def initCharacterTem():
     characterListPath = os.path.join(gamepath,'data',language,'character')
     characterList = GameData.getPathList(characterListPath)
-    randomNpcData = getRandomNpcData()
+    npcData = getRandomNpcData()
+    for i in characterList:
+        characterAttrTemPath = os.path.join(characterListPath,i,'AttrTemplate.json')
+        characterData = GameData._loadjson(characterAttrTemPath)
+        npcData.append(characterData)
+    CacheContorl.npcTemData = npcData
 
-# 获取随机noc数据
+# 获取随机npc数据
 def getRandomNpcData():
     if CacheContorl.randomNpcList == []:
         randomNpcMax = int(GameConfig.random_npc_max)
+        randomTeacherProportion = int(GameConfig.proportion_teacher)
+        randomStudentProportion = int(GameConfig.proportion_student)
+        randomTeacherMax = round(randomNpcMax * (randomTeacherProportion / 100))
+        randomStudentMax = round(randomNpcMax * (randomStudentProportion / 100))
+        teacherIndex = 0
+        randomNpcMax = randomStudentMax + randomTeacherMax
         for i in range(0,randomNpcMax):
-            pass
-    else:
+            randomNpcSex = random.choice(sexList)
+            randomNpcName = AttrText.getRandomNameForSex(randomNpcSex)
+            if teacherIndex < randomTeacherMax:
+                teacherIndex += 1
+                teacherAgeTem = ageTemList[:2]
+                randomNpcAgeTem = random.choice(teacherAgeTem)
+            else:
+                studentAgeTem = ageTemList[3:]
+                randomNpcAgeTem = random.choice(studentAgeTem)
+            randomNpcNewData = {
+                "Name":randomNpcName,
+                "Sex":randomNpcSex,
+                "Age":randomNpcAgeTem,
+                "Position":["0"],
+                "AdvNpc":"1"
+            }
+            CacheContorl.randomNpcList.append(randomNpcNewData)
         return CacheContorl.randomNpcList
 
 # 获取角色最大数量
 def getCharacterIndexMax():
     playerData = CacheContorl.playObject['object']
-    playerMax = ValueHandle.indexDictKeysMax(playerData) - 1
+    playerMax = len(playerData.keys()) - 1
     return playerMax
 
 # 获取角色id列表
@@ -112,13 +139,10 @@ def getCharacterIdList():
 
 # 初始化角色的位置
 def initPlayerPosition():
-    characterListPath = os.path.join(gamepath, 'data', language, 'character')
-    characterList = GameData.getPathList(characterListPath)
+    characterList = CacheContorl.npcTemData
     for i in range(0, len(characterList)):
         playerIdS = str(i + 1)
-        characterDataName = characterList[i]
-        characterAttrTemPath = os.path.join(characterListPath, characterDataName, 'AttrTemplate.json')
-        characterData = GameData._loadjson(characterAttrTemPath)
+        characterData = characterList[i]
         characterInitPositionDirList = characterData['Position']
         characterInitPosition = MapHandle.getSceneIdForDirList(characterInitPositionDirList)
         characterPosition = CacheContorl.playObject['object'][playerIdS]['Position']
