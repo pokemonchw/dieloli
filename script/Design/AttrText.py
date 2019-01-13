@@ -58,13 +58,14 @@ def getSexExperienceText(sexList,sexName):
     anusExperience = TextLoading.getTextData(TextLoading.stageWordId,'23') + str(sexList['anusExperience'])
     penisExperience = TextLoading.getTextData(TextLoading.stageWordId,'24') + str(sexList['penisExperience'])
     sexExperienceText = []
-    if sexName == sexData[0]:
+    sexList = list(sexData.keys())
+    if sexName == sexList[0]:
         sexExperienceText = [mouthExperience,bosomExperience,anusExperience,penisExperience]
-    elif sexName == sexData[1]:
+    elif sexName == sexList[1]:
         sexExperienceText = [mouthExperience,bosomExperience,vaginaExperience,clitorisExperience,anusExperience]
-    elif sexName == sexData[2]:
+    elif sexName == sexList[2]:
         sexExperienceText = [mouthExperience,bosomExperience,vaginaExperience,clitorisExperience,anusExperience,penisExperience]
-    elif sexName == sexData[3]:
+    elif sexName == sexList[3]:
         sexExperienceText = [mouthExperience,bosomExperience,anusExperience]
     return sexExperienceText
 
@@ -77,13 +78,14 @@ def getSexGradeTextList(sexGradeList,sexName):
     anusText = TextLoading.getTextData(TextLoading.stageWordId,'29') + getGradeTextColor(sexGradeList['anusGrade'])
     penisText = TextLoading.getTextData(TextLoading.stageWordId,'30') + getGradeTextColor(sexGradeList['penisGrade'])
     sexGradeTextList = []
-    if sexName == sexData[0]:
+    sexList = list(sexData.keys())
+    if sexName == sexList[0]:
         sexGradeTextList = [mouthText,bosomText,anusText,penisText]
-    elif sexName == sexData[1]:
+    elif sexName == sexList[1]:
         sexGradeTextList = [mouthText,bosomText,vaginaText,clitorisText,anusText]
-    elif sexName == sexData[2]:
+    elif sexName == sexList[2]:
         sexGradeTextList = [mouthText,bosomText,vaginaText,clitorisText,anusText,penisText]
-    elif sexName == sexData[3]:
+    elif sexName == sexList[3]:
         sexGradeTextList = [mouthText,bosomText,anusText]
     return sexGradeTextList
 
@@ -252,7 +254,9 @@ def getPlayerAbbreviationsInfo(playerId):
     playerName = playerData['Name']
     playerSex = playerData['Sex']
     playerSexInfo = TextLoading.getTextData(TextLoading.stageWordId, '2')
-    playerSexText = playerSexInfo + playerSex
+    playerSexTextData = TextLoading.getTextData(TextLoading.roleId,'Sex')
+    playerSexText = playerSexTextData[playerSex]
+    playerSexText = playerSexInfo + playerSexText
     playerAge = playerData['Age']
     playerAgeInfo = TextLoading.getTextData(TextLoading.stageWordId, '3')
     playerAgeText = playerAgeInfo + str(playerAge)

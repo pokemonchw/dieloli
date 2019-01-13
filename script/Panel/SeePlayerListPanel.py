@@ -11,12 +11,12 @@ def seePlayerListPanel(maxPage):
     maxPage = int(maxPage)
     playerMax = CharacterHandle.getCharacterIndexMax()
     if pageId == maxPage:
-        showPageStart = pageShow * (pageId)
-        showPageOver = showPageStart + (playerMax - showPageStart)
+        showPageStart = pageShow * pageId
+        showPageOver = showPageStart + (playerMax + 1 - showPageStart)
     else:
-        showPageOver = pageShow * pageId
+        showPageOver = pageShow * (pageId + 1)
         showPageStart = showPageOver - pageShow
-    for i in range(showPageStart,showPageOver + 1):
+    for i in range(showPageStart,showPageOver):
         playerId = str(i)
         cmdId = i - showPageStart
         cmdIdText = CmdButtonQueue.idIndex(cmdId)

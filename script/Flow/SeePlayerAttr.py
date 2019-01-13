@@ -1,4 +1,4 @@
-from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,ValueHandle,TextLoading
+from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,ValueHandle,TextLoading,GameConfig
 from script.Design import PanelStateHandle,GameTime,CharacterHandle,AttrCalculation,MapHandle
 from script.Panel import SeePlayerAttrPanel
 
@@ -87,6 +87,9 @@ def seeAttrOnEveryTime_func(oldPanel,tooOldFlow = None):
             CacheContorl.playObject['objectId'] = '0'
             Main.mainFrame_func()
         elif oldPanel == 'SeePlayerListPanel':
+            playerListShow = int(GameConfig.playerlist_show)
+            nowPageId = objectIdIndex / playerListShow
+            CacheContorl.panelState['SeePlayerListPanel'] = nowPageId
             SeePlayerAttrPanel.initShowAttrPanelList()
             SeePlayerList.seePlayerList_func(tooOldFlow)
         elif oldPanel == 'InScenePanel':

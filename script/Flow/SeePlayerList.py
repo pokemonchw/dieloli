@@ -2,6 +2,8 @@ from script.Core import GameConfig,GameInit,PyCmd,CacheContorl
 from script.Design import CharacterHandle
 from script.Panel import SeePlayerListPanel
 
+playerPageShow = int(GameConfig.playerlist_show)
+
 # 用于查看角色列表的流程
 def seePlayerList_func(oldPanel):
     maxPage = getPlayerListPageMax()
@@ -14,13 +16,8 @@ def seePlayerList_func(oldPanel):
     yrn = GameInit.askfor_All(inputS)
     yrn = str(yrn)
     playerIdList = CharacterHandle.getCharacterIdList()
-    PyCmd.clr_cmd()
     pageId = int(CacheContorl.panelState['SeePlayerListPanel'])
-    if yrn in playerIdList:
-        import script.Flow.SeePlayerAttr as seeplayerattr
-        CacheContorl.playObject['objectId'] = yrn
-        seeplayerattr.seeAttrOnEveryTime_func('SeePlayerListPanel',oldPanel)
-    elif yrn == str(startId):
+    if yrn == str(startId):
         if pageId == 0:
             CacheContorl.panelState['SeePlayerListPanel'] = str(maxPage)
             seePlayerList_func(oldPanel)
@@ -32,6 +29,7 @@ def seePlayerList_func(oldPanel):
         if oldPanel == 'MainFramePanel':
             import script.Flow.Main as mainframe
             CacheContorl.playObject['objectId'] = '0'
+            CacheContorl.panelState['SeePlayerListPanel'] = '0'
             mainframe.mainFrame_func()
         else:
             pass
@@ -43,16 +41,18 @@ def seePlayerList_func(oldPanel):
             pageId = str(pageId + 1)
             CacheContorl.panelState['SeePlayerListPanel'] = pageId
             seePlayerList_func(oldPanel)
-    pass
+    elif yrn in playerIdList:
+        yrn = str(int(yrn) + playerPageShow * pageId)
+        import script.Flow.SeePlayerAttr as seeplayerattr
+        CacheContorl.playObject['objectId'] = yrn
+        seeplayerattr.seeAttrOnEveryTime_func('SeePlayerListPanel',oldPanel)
 
 # 角色列表页计算
 def getPlayerListPageMax():
     playerMax = CharacterHandle.getCharacterIndexMax()
-    playerPageShow = int(GameConfig.playerlist_show)
     if playerMax - playerPageShow < 0:
         return 0
     elif playerMax % playerPageShow == 0:
-        return playerMax / playerPageShow
+        return playerMax / playerPageShow - 1
     else:
-        return playerMax / playerPageShow + 1
-    pass
+        return int(playerMax / playerPageShow)

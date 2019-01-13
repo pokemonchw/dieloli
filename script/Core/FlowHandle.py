@@ -31,9 +31,7 @@ cmd_map = CacheContorl.cmd_map
 def default_tail_deal_cmd_func(order):
     return
 
-
 tail_deal_cmd_func = default_tail_deal_cmd_func
-
 
 def set_tail_deal_cmd_func(func):
     global tail_deal_cmd_func
@@ -119,7 +117,6 @@ def order_deal(flag='order', print_order=True):
                     tail_deal_cmd_func(int(order))
                     return
 
-
 def askfor_str(donot_return_null_str=True, print_order=False):
     while True:
         order = order_deal('str', print_order)
@@ -127,7 +124,6 @@ def askfor_str(donot_return_null_str=True, print_order=False):
             return order
         elif donot_return_null_str == False:
             return order
-
 
 def askfor_All(list,print_order=False):
     while True:
