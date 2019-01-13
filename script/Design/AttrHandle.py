@@ -10,4 +10,3 @@ def getAttrData(playerId):
 def setAttrData(playerId,attrId,attr):
     playerId = str(playerId)
     CacheContorl.playObject['object'][playerId][attrId] = attr
-    pass

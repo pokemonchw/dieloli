@@ -50,7 +50,6 @@ def startInputNickNamePanel():
             inputState = 1
             CacheContorl.temporaryObject['NickName'] = playerNickName
     EraPrint.p('\n')
-    pass
 
 # 请求玩家输入自称面板
 def inputSelfNamePanel():

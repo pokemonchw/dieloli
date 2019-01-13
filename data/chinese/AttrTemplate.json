@@ -37,6 +37,12 @@
       "Weight":"Ordinary"
     }
   },
+  "RandomNpcSexWeight":{
+    "Man":49,
+    "Woman":49,
+    "Futa":1,
+    "Asexual":1
+  },
   "AgeTem":{
     "OldAdult":{
       "MaxAge":"120",
@@ -266,6 +272,35 @@
       "Fat":[15,24.9],
       "SevereObesity":[25,34.9],
       "ExtremelySevereObesity":[35,44.9]
+  },
+  "FatWeight":{
+    "Student":{
+      "Thin":23,
+      "Ordinary":45,
+      "Overweight":10,
+      "Fat":14,
+      "SevereObesity":6,
+      "ExtremelySevereObesity":2
+    },
+    "Teacher":{
+      "Thin":10,
+      "Ordinary":28,
+      "Overweight":17,
+      "Fat":37,
+      "SevereObesity":6,
+      "ExtremelySevereObesity":2
+    }
+  },
+  "AgeWeight":{
+    "Student":{
+      "SchoolAgeChild":100,
+      "Adolescence":50
+    },
+    "Teacher":{
+      "YoungAdult":67,
+      "MiddleAdult":26,
+      "OldAdult":7
+    }
   },
   "WaistHipProportionTem":{
       "Thin":-0.2,

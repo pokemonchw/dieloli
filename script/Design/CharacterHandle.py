@@ -101,29 +101,59 @@ def getRandomNpcData():
         randomNpcMax = int(GameConfig.random_npc_max)
         randomTeacherProportion = int(GameConfig.proportion_teacher)
         randomStudentProportion = int(GameConfig.proportion_student)
-        randomTeacherMax = round(randomNpcMax * (randomTeacherProportion / 100))
-        randomStudentMax = round(randomNpcMax * (randomStudentProportion / 100))
-        teacherIndex = 0
-        randomNpcMax = randomStudentMax + randomTeacherMax
+        ageWeightData = {
+            "Teacher":randomTeacherProportion,
+            "Student":randomStudentProportion
+        }
+        ageWeightMax = 0
+        for i in ageWeightData:
+            ageWeightMax += int(ageWeightData[i])
+        ageWeightReginData = ValueHandle.getReginList(ageWeightData)
+        ageWeightReginList = ValueHandle.getListKeysIntList(list(ageWeightReginData.keys()))
         for i in range(0,randomNpcMax):
-            randomNpcSex = random.choice(sexList)
+            nowAgeWeight = random.randint(0,ageWeightMax - 1)
+            nowAgeWeightRegin = next(x for x in ageWeightReginList if x > nowAgeWeight)
+            ageWeightTem = ageWeightReginData[str(nowAgeWeightRegin)]
+            randomNpcSex = getRandNpcSex()
             randomNpcName = AttrText.getRandomNameForSex(randomNpcSex)
-            if teacherIndex < randomTeacherMax:
-                teacherIndex += 1
-                teacherAgeTem = ageTemList[:2]
-                randomNpcAgeTem = random.choice(teacherAgeTem)
-            else:
-                studentAgeTem = ageTemList[3:]
-                randomNpcAgeTem = random.choice(studentAgeTem)
+            randomNpcAgeTem = getRandNpcAgeTem(ageWeightTem)
+            fatTem = getRandNpcFatTem(ageWeightTem)
             randomNpcNewData = {
                 "Name":randomNpcName,
                 "Sex":randomNpcSex,
                 "Age":randomNpcAgeTem,
                 "Position":["0"],
-                "AdvNpc":"1"
+                "AdvNpc":"1",
+                "Weight":fatTem
             }
             CacheContorl.randomNpcList.append(randomNpcNewData)
         return CacheContorl.randomNpcList
+
+sexWeightData = TextLoading.getTextData(TextLoading.temId,'RandomNpcSexWeight')
+sexWeightMax = 0
+for i in sexWeightData:
+    sexWeightMax += int(sexWeightData[i])
+sexWeightReginData = ValueHandle.getReginList(sexWeightData)
+sexWeightReginList = ValueHandle.getListKeysIntList(list(sexWeightReginData.keys()))
+# 按权重随机获取npc性别
+def getRandNpcSex():
+    nowWeight = random.randint(0,sexWeightMax - 1)
+    weightRegin = next(x for x in sexWeightReginList if x > nowWeight)
+    return sexWeightReginData[str(weightRegin)]
+
+fatWeightData = TextLoading.getTextData(TextLoading.temId,'FatWeight')
+# 按权重随机获取npc肥胖模板
+def getRandNpcFatTem(agejudge):
+    nowFatWeightData = fatWeightData[agejudge]
+    nowFatTem = ValueHandle.getRandomForWeight(nowFatWeightData)
+    return nowFatTem
+
+ageTemWeightData = TextLoading.getTextData(TextLoading.temId,'AgeWeight')
+# 按权重获取npc年龄模板
+def getRandNpcAgeTem(agejudge):
+    nowAgeWeightData  = ageTemWeightData[agejudge]
+    nowAgeTem = ValueHandle.getRandomForWeight(nowAgeWeightData)
+    return nowAgeTem
 
 # 获取角色最大数量
 def getCharacterIndexMax():

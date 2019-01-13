@@ -1,5 +1,5 @@
 import os,random
-from script.Core import TextLoading,GameData,CacheContorl,GameConfig,GamePathConfig
+from script.Core import TextLoading,GameData,CacheContorl,GameConfig,GamePathConfig,ValueHandle
 from script.Design import ProportionalBar,AttrPrint
 
 language = GameConfig.language
@@ -17,37 +17,13 @@ boysNameMax = len(boysNameListData)
 girlsNameMax = len(girlsNameListData)
 sortFamilyIndex = sorted(familyNameListData.items(),key=lambda x:x[1])
 
-def twoBitArrayToDict(array):
-    newDict = {}
-    for i in range(0,len(array)):
-        newDict[array[i][0]] = array[i][1]
-    return newDict
+familyRegionList = ValueHandle.getReginList(familyNameListData)
+boysRegionList = ValueHandle.getReginList(boysNameListData)
+girlsRegionList = ValueHandle.getReginList(girlsNameListData)
 
-def getReginList(nowData):
-    regionList = {}
-    sortData = sorted(nowData.items(),key=lambda x:x[1])
-    sortData = twoBitArrayToDict(sortData)
-    sortDataKey = list(sortData.keys())
-    regionIndex = 0
-    for i in range(0,len(sortData)):
-        nowKey = sortDataKey[i]
-        regionIndex = regionIndex + sortData[nowKey]
-        regionList[str(regionIndex)] = nowKey
-    return regionList
-
-familyRegionList = getReginList(familyNameListData)
-boysRegionList = getReginList(boysNameListData)
-girlsRegionList = getReginList(girlsNameListData)
-
-def getListKeysIntList(nowList):
-    newList = []
-    for i in nowList:
-        newList.append(int(i))
-    return newList
-
-familyRegionIntList = getListKeysIntList(familyRegionList)
-boysRegionIntList = getListKeysIntList(boysRegionList)
-girlsRegionIntList = getListKeysIntList(girlsRegionList)
+familyRegionIntList = ValueHandle.getListKeysIntList(familyRegionList)
+boysRegionIntList = ValueHandle.getListKeysIntList(boysRegionList)
+girlsRegionIntList = ValueHandle.getListKeysIntList(girlsRegionList)
 
 #获取性经验文本
 def getSexExperienceText(sexList,sexName):

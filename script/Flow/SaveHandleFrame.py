@@ -27,7 +27,6 @@ def establishSave_func(oldPanel):
             CacheContorl.panelState['SeeSaveListPanel'] = 0
             import script.Flow.Main as mainframe
             mainframe.mainFrame_func()
-            pass
         else:
             pass
     elif yrn == str(startId + 2):
@@ -45,7 +44,6 @@ def establishSave_func(oldPanel):
         else:
             SaveHandle.establishSave(saveId)
             establishSave_func(oldPanel)
-    pass
 
 # 绘制读取存档页面流程
 def loadSave_func(oldPanel):
@@ -90,7 +88,6 @@ def loadSave_func(oldPanel):
         ansReturn = int(yrn)
         saveId = SaveHandle.getSavePageSaveId(showSaveValue,ansReturn)
         askForLoadSave_func(oldPanel,saveId)
-    pass
 
 # 存档页计算
 def savePageIndex():
@@ -119,7 +116,6 @@ def askForOverlaySave_func(oldPanel,saveId):
         confirmationRemoveSave_func(saveId,'EstablishSavePanel',oldPanel)
     elif yrn == '2':
         establishSave_func(oldPanel)
-    pass
 
 # 确认覆盖流程
 def confirmationOverlaySave_func(oldPanel,saveId):
@@ -131,7 +127,6 @@ def confirmationOverlaySave_func(oldPanel,saveId):
         establishSave_func(oldPanel)
     else:
         establishSave_func(oldPanel)
-    pass
 
 # 询问读取存档流程
 def askForLoadSave_func(oldPanel,saveId):
@@ -144,7 +139,6 @@ def askForLoadSave_func(oldPanel,saveId):
         confirmationRemoveSave_func(saveId,'LoadSavePanel',oldPanel)
     elif yrn == '2':
         loadSave_func(oldPanel)
-    pass
 
 # 确认读取存档流程
 def confirmationLoadSave_func(oldPanel,saveId):
@@ -157,7 +151,6 @@ def confirmationLoadSave_func(oldPanel,saveId):
         mainframe.mainFrame_func()
     else:
         loadSave_func(oldPanel)
-    pass
 
 # 确认删除存档流程
 def confirmationRemoveSave_func(saveId,oldPanel,tooOldPanel):
@@ -172,4 +165,3 @@ def confirmationRemoveSave_func(saveId,oldPanel,tooOldPanel):
         loadSave_func(tooOldPanel)
     elif oldPanel == 'EstablishSavePanel':
         establishSave_func(tooOldPanel)
-    pass
