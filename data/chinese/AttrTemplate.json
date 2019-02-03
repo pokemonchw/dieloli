@@ -258,20 +258,38 @@
     "Asexual":[48.2,52.8]
   },
   "WeightTem":{
-      "Thin":[14.0,18.4],
-      "Ordinary":[18.5,23.9],
-      "Overweight":[24.0,27.9],
-      "Fat":[28.0,34.9],
-      "SevereObesity":[35.0,39.9],
-      "ExtremelySevereObesity":[40.0,50.0]
+    "Thin":[14.0,18.4],
+    "Ordinary":[18.5,23.9],
+    "Overweight":[24.0,27.9],
+    "Fat":[28.0,34.9],
+    "SevereObesity":[35.0,39.9],
+    "ExtremelySevereObesity":[40.0,50.0]
+  },
+  "BodyFatTem":{
+    "Man":{
+      "Thin":[5.0,11.9],
+      "Ordinary":[12.0,22.9],
+      "Overweight":[23.0,27.9],
+      "Fat":[28.0,45.9],
+      "SeverObesity":[46.0,55.9],
+      "ExtremelySevereObesity":[56.0,70.0]
     },
+    "Woman":{
+      "Thin":[5.0,21.9],
+      "Ordinary":[22.0,35.9],
+      "Overweight":[36.0,40.9],
+      "Fat":[41.0,45.9],
+      "SeverObesity":[46.0,55.9],
+      "ExtremelySevereObesity":[56.0,70.0]
+    }
+  },
   "WeightTemFix":{
-      "Thin":[-5,-14.9],
-      "Ordinary":[-4.9,4.9],
-      "Overweight":[5,14.9],
-      "Fat":[15,24.9],
-      "SevereObesity":[25,34.9],
-      "ExtremelySevereObesity":[35,44.9]
+    "Thin":[-5,-14.9],
+    "Ordinary":[-4.9,4.9],
+    "Overweight":[5,14.9],
+    "Fat":[15,24.9],
+    "SevereObesity":[25,34.9],
+    "ExtremelySevereObesity":[35,44.9]
   },
   "FatWeight":{
     "Student":{
@@ -289,6 +307,24 @@
       "Fat":37,
       "SevereObesity":6,
       "ExtremelySevereObesity":2
+    }
+  },
+  "BodyFatWeigt":{
+    "Student":{
+      "Thin":2,
+      "Ordinary":6,
+      "Overweight":14,
+      "Fat":10,
+      "SevereObesity":45,
+      "ExtremelySevereObesity":23
+    },
+    "Teacher":{
+      "Thin":2,
+      "Ordinary":6,
+      "Overweight":37,
+      "Fat":17,
+      "SevereObesity":28,
+      "ExtremelySevereObesity":10
     }
   },
   "AgeWeight":{

@@ -1,4 +1,4 @@
-import os,random
+import os,random,threading
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText
 
@@ -8,81 +8,99 @@ featuresList = AttrCalculation.getFeaturesList()
 sexList = list(TextLoading.getTextData(TextLoading.roleId, 'Sex'))
 ageTemList = list(TextLoading.getTextData(TextLoading.temId,'AgeTem'))
 
+initCharacterThreadPool = []
 # 初始化角色数据
 def initCharacterList():
     initCharacterTem()
     characterList = CacheContorl.npcTemData
-    i = 0
+    i = 1
     for character in characterList:
-        AttrCalculation.initTemporaryObject()
-        playerId = str(i + 1)
+        initCharacterThreadPool.append(str(i))
+        initCharacterThread = threading.Thread(target=initCharacter,args=(i,character))
+        initCharacterThread.start()
+        if len(initCharacterThreadPool) >= 19:
+            initCharacterThread.join()
         i += 1
-        CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
-        AttrCalculation.setDefaultCache()
-        characterName = character['Name']
-        characterSex = character['Sex']
-        CacheContorl.playObject['object'][playerId]['Sex'] = characterSex
-        defaultAttr = AttrCalculation.getAttr(characterSex)
-        defaultAttr['Name'] = characterName
-        defaultAttr['Sex'] = characterSex
-        AttrCalculation.setSexCache(characterSex)
+    while(initCharacterThreadPool == []):
+        initPlayerPosition()
+        break;
+
+# 按id生成角色属性
+def initCharacter(nowId,character):
+    AttrCalculation.initTemporaryObject()
+    playerId = str(nowId)
+    CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+    AttrCalculation.setDefaultCache()
+    characterName = character['Name']
+    characterSex = character['Sex']
+    CacheContorl.playObject['object'][playerId]['Sex'] = characterSex
+    defaultAttr = AttrCalculation.getAttr(characterSex)
+    defaultAttr['Name'] = characterName
+    defaultAttr['Sex'] = characterSex
+    AttrCalculation.setSexCache(characterSex)
+    defaultAttr['Features'] = CacheContorl.featuresList.copy()
+    motherTongue = {
+        "Level":5,
+        "Exp":0
+    }
+    if 'MotherTongue' in character:
+        defaultAttr['Language'][character['MotherTongue']] = motherTongue
+        defaultAttr['MotherTongue'] = character['MotherTongue']
+    else:
+        defaultAttr['Language']['Chinese'] = motherTongue
+    if 'Age' in character:
+        ageTem = character['Age']
+        characterAge = AttrCalculation.getAge(ageTem)
+        defaultAttr['Age'] = characterAge
+        characterAgeFeatureHandle(ageTem,characterSex)
         defaultAttr['Features'] = CacheContorl.featuresList.copy()
-        motherTongue = {
-            "Level":5,
-            "Exp":0
-        }
-        if 'MotherTongue' in character:
-            defaultAttr['Language'][character['MotherTongue']] = motherTongue
-            defaultAttr['MotherTongue'] = character['MotherTongue']
+    elif 'Features' in character:
+        AttrCalculation.setAddFeatures(character['Features'])
+        defaultAttr['Features'] = CacheContorl.featuresList.copy()
+    temList = AttrCalculation.getTemList()
+    if 'Features' in character:
+        height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],character['Features'])
+    else:
+        height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],{})
+    defaultAttr['Height'] = height
+    if 'Weight' in character:
+        weightTemName = character['Weight']
+    else:
+        weightTemName = 'Ordinary'
+    bmi = AttrCalculation.getBMI(weightTemName)
+    weight = AttrCalculation.getWeight(bmi, height['NowHeight'])
+    defaultAttr['Weight'] = weight
+    schoolClassDataPath = os.path.join(gamepath,'data',language,'SchoolClass.json')
+    schoolClassData = GameData._loadjson(schoolClassDataPath)
+    if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
+        classGradeMax = len(schoolClassData['Class'].keys())
+        classGrade = str(defaultAttr['Age'] - 6)
+        if int(classGrade) > classGradeMax:
+            classGrade = str(classGradeMax)
+        defaultAttr['Class'] = random.choice(schoolClassData['Class'][classGrade])
+    else:
+        defaultAttr['Office'] = str(random.randint(0,12))
+    measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weightTemName)
+    defaultAttr['Measurements'] = measurements
+    for keys in defaultAttr:
+        CacheContorl.temporaryObject[keys] = defaultAttr[keys]
+    CacheContorl.featuresList = {}
+    CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+    CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
+    initCharacterThreadPool.remove(str(nowId))
+
+# 处理角色年龄特性
+def characterAgeFeatureHandle(ageTem,characterSex):
+    characterAge = AttrCalculation.getAge(ageTem)
+    if ageTem == 'SchoolAgeChild':
+        if characterSex == sexList[0]:
+            CacheContorl.featuresList['Age'] = featuresList["Age"][0]
+        elif characterSex == sexList[1]:
+            CacheContorl.featuresList['Age'] = featuresList["Age"][1]
         else:
-            defaultAttr['Language']['Chinese'] = motherTongue
-        if 'Age' in character:
-            ageTem = character['Age']
-            characterAge = AttrCalculation.getAge(ageTem)
-            defaultAttr['Age'] = characterAge
-            if ageTem == 'SchoolAgeChild':
-                if characterSex == sexList[0]:
-                    CacheContorl.featuresList['Age'] = featuresList["Age"][0]
-                elif characterSex == sexList[1]:
-                    CacheContorl.featuresList['Age'] = featuresList["Age"][1]
-                else:
-                    CacheContorl.featuresList['Age'] = featuresList["Age"][2]
-            elif ageTem == 'OldAdult':
-                CacheContorl.featuresList['Age'] = featuresList["Age"][3]
-            defaultAttr['Features'] = CacheContorl.featuresList.copy()
-        elif 'Features' in character:
-            AttrCalculation.setAddFeatures(character['Features'])
-            defaultAttr['Features'] = CacheContorl.featuresList.copy()
-        temList = AttrCalculation.getTemList()
-        if 'Features' in character:
-            height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],character['Features'])
-        else:
-            height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],{})
-        defaultAttr['Height'] = height
-        if 'Weight' in character:
-            weightTemName = character['Weight']
-        else:
-            weightTemName = 'Ordinary'
-        weight = AttrCalculation.getWeight(weightTemName, height['NowHeight'])
-        defaultAttr['Weight'] = weight
-        schoolClassDataPath = os.path.join(gamepath,'data',language,'SchoolClass.json')
-        schoolClassData = GameData._loadjson(schoolClassDataPath)
-        if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
-            classGradeMax = len(schoolClassData['Class'].keys())
-            classGrade = str(defaultAttr['Age'] - 6)
-            if int(classGrade) > classGradeMax:
-                classGrade = str(classGradeMax)
-            defaultAttr['Class'] = random.choice(schoolClassData['Class'][classGrade])
-        else:
-            defaultAttr['Office'] = str(random.randint(0,12))
-        measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weightTemName)
-        defaultAttr['Measurements'] = measurements
-        for keys in defaultAttr:
-            CacheContorl.temporaryObject[keys] = defaultAttr[keys]
-        CacheContorl.featuresList = {}
-        CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
-        CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
-    initPlayerPosition()
+            CacheContorl.featuresList['Age'] = featuresList["Age"][2]
+    elif ageTem == 'OldAdult':
+        CacheContorl.featuresList['Age'] = featuresList["Age"][3]
 
 # 初始化角色数据
 def initCharacterTem():
@@ -95,21 +113,21 @@ def initCharacterTem():
         npcData.append(characterData)
     CacheContorl.npcTemData = npcData
 
+randomNpcMax = int(GameConfig.random_npc_max)
+randomTeacherProportion = int(GameConfig.proportion_teacher)
+randomStudentProportion = int(GameConfig.proportion_student)
+ageWeightData = {
+    "Teacher":randomTeacherProportion,
+    "Student":randomStudentProportion
+}
+ageWeightReginData = ValueHandle.getReginList(ageWeightData)
+ageWeightReginList = ValueHandle.getListKeysIntList(list(ageWeightReginData.keys()))
 # 获取随机npc数据
 def getRandomNpcData():
     if CacheContorl.randomNpcList == []:
-        randomNpcMax = int(GameConfig.random_npc_max)
-        randomTeacherProportion = int(GameConfig.proportion_teacher)
-        randomStudentProportion = int(GameConfig.proportion_student)
-        ageWeightData = {
-            "Teacher":randomTeacherProportion,
-            "Student":randomStudentProportion
-        }
         ageWeightMax = 0
         for i in ageWeightData:
             ageWeightMax += int(ageWeightData[i])
-        ageWeightReginData = ValueHandle.getReginList(ageWeightData)
-        ageWeightReginList = ValueHandle.getListKeysIntList(list(ageWeightReginData.keys()))
         for i in range(0,randomNpcMax):
             nowAgeWeight = random.randint(0,ageWeightMax - 1)
             nowAgeWeightRegin = next(x for x in ageWeightReginList if x > nowAgeWeight)

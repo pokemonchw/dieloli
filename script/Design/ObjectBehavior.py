@@ -19,10 +19,9 @@ class ObjectBehaviorClass(object):
     def objectOccupationJudge(self,objectId):
         objectData = CacheContorl.playObject['object'][objectId]
         objectName = objectData['Name']
-        objectFile = os.path.join(characterListPath, objectName, 'AttrTemplate.json')
-        objectFileData = GameData._loadjson(objectFile)
+        characterData = CacheContorl.npcTemData[int(objectId) - 1]
         try:
-            objectOccupation = objectFileData['Occupation']
+            objectOccupation = characterData['Occupation']
             templateFile = 'data.' + language + '.OccupationTemplate.' + objectOccupation + 'Behavior'
         except:
             objectAge = int(objectData['Age'])
@@ -32,4 +31,4 @@ class ObjectBehaviorClass(object):
                 objectOccupation = "Teacher"
             templateFile = 'data.' + language + '.OccupationTemplate.' + objectOccupation + 'Behavior'
         template = importlib.import_module(templateFile)
-        template.arderBehavior(objectId, objectData, objectFileData)
+        template.arderBehavior(self,objectId, objectData, characterData)

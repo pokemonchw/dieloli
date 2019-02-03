@@ -35,7 +35,13 @@
       "DevelopmentAge":0,
       "ExpectHeight":0
     },
+    "Weight":{
+      "Bmi":"Ordinary",
+      "BodyFat":"Ordinary",
+      "NowWeight":0
+    },
     "Weight":"Ordinary",
+    "BodyFat":"Ordinary",
     "Measurements":{
       "Bust":"0",
       "Waist":"0",

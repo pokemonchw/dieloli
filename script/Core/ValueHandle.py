@@ -64,3 +64,16 @@ def getRandomForWeight(data):
     nowWeight = random.randint(0,weightMax - 1)
     weightRegin = next(x for x in weightReginList if x > nowWeight)
     return weightReginData[str(weightRegin)]
+
+# 获取列表中第一个比当前值大的值
+def getNextValueForList(nowInt,intList):
+    cutListId = int(len(intList) / 2 - 1)
+    if (len(intList) > 3):
+        if intList[cutListId] > nowInt:
+            nowList = intList[:cutListId + 1]
+            return getNextValueForList(nowInt,nowList)
+        else:
+            nowList = intList[cutListId:]
+            return getNextValueForList(nowInt,nowList)
+    else:
+        return next(x for x in intList if x >= nowInt)

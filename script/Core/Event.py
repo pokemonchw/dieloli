@@ -12,14 +12,12 @@ def def_event(event_name):
         event_dic[event_name] = []
         event_mark_dic[event_name] = {}
 
-
 def bind_event(event_name, event_func, event_mark=None):
     if not event_name in event_dic.keys():
         def_event(event_name)
     event_dic[event_name].append(event_func)
     event_mark_dic[event_name][event_func] = event_mark
     sort_event(event_name)
-
 
 def sort_event(event_name):
     def getkey(event_func):
@@ -61,7 +59,6 @@ def call_event_with_mark(event_name, event_mark, arg=(), kw={}):
     re = func(*arg, **kw)
     return re
 
-
 def call_event_all_results(event_name, arg=(), kw={}):
     if not event_name in event_dic.keys():
         def_event(event_name)
@@ -72,7 +69,6 @@ def call_event_all_results(event_name, arg=(), kw={}):
     for func in event_dic[event_name]:
         re.append(func(*arg, **kw))
     return re
-
 
 def call_event_as_tube(event_name, target=None):
     for func in event_dic[event_name]:
@@ -87,11 +83,9 @@ def return_event_func(event_name,event_mark=None):
             if v==event_mark:
                 return k
 
-
 def del_event(event_name):
     if event_name in event_dic.keys():
         event_dic[event_name] = []
-
 
 def bind_event_deco(event_name, event_mark=None):
     def decorate(func):
@@ -107,7 +101,6 @@ def bind_only_event_deco(event_name, event_mark=None):
     return decorate
 
 import importlib
-
 
 def load_event_file(script_path='script'):
     datapath = GameData.gamepath + script_path

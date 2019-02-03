@@ -12,7 +12,7 @@
     "text_width":"108",
     "text_hight":"32",
     "cursor":"~$",
-    "year":"2018",
+    "year":"2019",
     "month":"5",
     "day":"13",
     "hour":"6",
@@ -23,7 +23,7 @@
     "text_wait":"0",
     "home_url":"https://github.com/pokemonchw/dieloli",
     "licenses_url":"http://creativecommons.org/licenses/by-nc-sa/2.0/",
-    "random_npc_max":100,
-    "proportion_teacher":10,
-    "proportion_student":90
+    "random_npc_max":2000,
+    "proportion_teacher":1,
+    "proportion_student":23
 }

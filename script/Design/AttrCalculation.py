@@ -49,10 +49,6 @@ def getAttr(temName):
     temData = TemList[temName]
     ageTemName = temData["Age"]
     age = getAge(ageTemName)
-    hitPointTemName = temData["HitPoint"]
-    maxHitPoint = getMaxHitPoint(hitPointTemName)
-    manaPointTemName = temData["ManaPoint"]
-    maxManaPoint = getMaxManaPoint(manaPointTemName)
     sexExperienceTemName = temData["SexExperience"]
     sexExperienceList = getSexExperience(sexExperienceTemName)
     sexGradeList = getSexGrade(sexExperienceList)
@@ -61,8 +57,13 @@ def getAttr(temName):
     sexItemList = getSexItem(temName)
     height = getHeight(temName,age,{})
     weightTemName = temData['Weight']
-    weight = getWeight(weightTemName,height['NowHeight'])
+    bmi = getBMI(weightTemName)
+    weight = getWeight(bmi,height['NowHeight'])
     measurements = getMeasurements(temName,height['NowHeight'],weightTemName)
+    hitPointTemName = temData["HitPoint"]
+    maxHitPoint = getMaxHitPoint(hitPointTemName)
+    manaPointTemName = temData["ManaPoint"]
+    maxManaPoint = getMaxManaPoint(manaPointTemName)
     gold = getGold()
     attrList = {
         'Age':age,
@@ -134,10 +135,20 @@ def getGrowthHeight(nowAge,expectHeight,developmentAge,expectAge):
         growthHeight = judgeHeight / (nowAge * 365)
     return {'GrowthHeight':growthHeight,'NowHeight':nowHeight}
 
-# 获取体重
-def getWeight(temName,height):
+# 获取BMI
+def getBMI(temName):
     temData = TextLoading.getTextData(TextLoading.temId,'WeightTem')[temName]
     bmi = random.uniform(temData[0],temData[1])
+    return bmi
+
+# 获取体脂率
+def getBodyFat(temName):
+    temData = TextLoading.getTextData(TextLoading.temId,'BodyFatTem')[temName]
+    bodyFat = random.uniform(temData[0],temData[1])
+    return bodyFat
+
+# 获取体重
+def getWeight(bmi,height):
     height = height / 100
     weight = bmi * height * height
     return weight

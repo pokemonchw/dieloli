@@ -25,14 +25,13 @@ def seeScenePlayerListPanel():
     EraPrint.p('\n')
     sceneId = CacheContorl.playObject['object']['0']['Position']
     scenePlayerList = sceneData['ScenePlayerData'][sceneId]
-    for playerId in scenePlayerList:
-        if playerId == '0':
-            pass
-        else:
-            playerName = CacheContorl.playObject['object'][str(playerId)]['Name']
-            PyCmd.pcmd(playerName, playerName, None)
-            inputS.append(playerName)
-            EraPrint.p(' ')
+    nowScenePlayerList = scenePlayerList.copy()
+    nowScenePlayerList.remove('0')
+    for playerId in nowScenePlayerList:
+        playerName = CacheContorl.playObject['object'][str(playerId)]['Name']
+        PyCmd.pcmd(playerName, playerName, None)
+        inputS.append(playerName)
+        EraPrint.p(' ')
     EraPrint.plittleline()
     return inputS
 
