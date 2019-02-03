@@ -1,4 +1,4 @@
-import os,random,threading
+import os,random,multiprocessing,datetime
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText
 
@@ -8,22 +8,25 @@ featuresList = AttrCalculation.getFeaturesList()
 sexList = list(TextLoading.getTextData(TextLoading.roleId, 'Sex'))
 ageTemList = list(TextLoading.getTextData(TextLoading.temId,'AgeTem'))
 
-initCharacterThreadPool = []
+characterInitList = []
 # 初始化角色数据
 def initCharacterList():
     initCharacterTem()
     characterList = CacheContorl.npcTemData
-    i = 1
+    processesMax = GameConfig.process_pool
+    i = 0
+    characterPool = multiprocessing.Pool(processes=processesMax)
+    time1 = datetime.datetime.now()
     for character in characterList:
-        initCharacterThreadPool.append(str(i))
-        initCharacterThread = threading.Thread(target=initCharacter,args=(i,character))
-        initCharacterThread.start()
-        if len(initCharacterThreadPool) >= 19:
-            initCharacterThread.join()
+        characterPool.apply_async(initCharacter, args=(i,))
         i += 1
-    while(initCharacterThreadPool == []):
+        characterInitList.append(str(i))
+    time2 = datetime.datetime.now()
+    print(time2 - time1)
+    characterPool.close()
+    characterPool.join()
+    while characterInitList == []:
         initPlayerPosition()
-        break;
 
 # 按id生成角色属性
 def initCharacter(nowId,character):
@@ -87,7 +90,7 @@ def initCharacter(nowId,character):
     CacheContorl.featuresList = {}
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
-    initCharacterThreadPool.remove(str(nowId))
+    characterInitList.remove(str(nowId))
 
 # 处理角色年龄特性
 def characterAgeFeatureHandle(ageTem,characterSex):

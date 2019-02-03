@@ -1,4 +1,3 @@
-from idna import unichr
 from script.Core import GameConfig,TextLoading,RichText
 
 widths = [
@@ -86,5 +85,6 @@ def fullToHalfText(ustring):
             inside_code = 32
         elif (inside_code >= 65281 and inside_code <= 65374):
             inside_code -= 65248
-        rstring += unichr(inside_code)
+        aaa = chr(inside_code)
+        rstring += aaa
     return rstring

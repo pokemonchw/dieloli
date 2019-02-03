@@ -36,7 +36,7 @@ def init(main_flow):
 
     _have_run=False
     def run_main_flow():
-        nonlocal  _have_run
+        nonlocal _have_run
         while True:
             if _have_run==False:
                 main_flow()

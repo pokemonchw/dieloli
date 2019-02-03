@@ -25,5 +25,6 @@
     "licenses_url":"http://creativecommons.org/licenses/by-nc-sa/2.0/",
     "random_npc_max":2000,
     "proportion_teacher":1,
-    "proportion_student":23
+    "proportion_student":23,
+    "process_pool":30
 }
