@@ -75,7 +75,8 @@ familyIndexMax = familyRegionIntList[len(familyRegionIntList) - 1]
 # 按性别随机生成姓名
 def getRandomNameForSex(sexGrade):
     familyRandom = random.randint(1,familyIndexMax)
-    familyRegion = next(x for x in familyRegionIntList if x > familyRandom)
+    familyRegionIndex = bisect.bisect_left(familyRegionIntList,familyRandom)
+    familyRegion = familyRegionIntList[familyRegionIndex]
     familyName = familyRegionList[str(familyRegion)]
     if sexGrade == 'Man':
         sexJudge = 1
@@ -85,12 +86,12 @@ def getRandomNameForSex(sexGrade):
         sexJudge = random.randint(0,1)
     if sexJudge == 0:
         nameRandom = random.randint(1,girlsNameMax)
-        nameRegionIndex = bisect.bisect_left(girlsRegionIntList,nameRandom) + 1
+        nameRegionIndex = bisect.bisect_left(girlsRegionIntList,nameRandom)
         nameRegion = girlsRegionIntList[nameRegionIndex]
         name = girlsRegionList[str(nameRegion)]
     else:
-        nameRandom = random.randint(1,girlsNameMax)
-        nameRegionIndex = bisect.bisect_right(boysRegionIntList,nameRandom) + 1
+        nameRandom = random.randint(1,boysNameMax)
+        nameRegionIndex = bisect.bisect_left(boysRegionIntList,nameRandom)
         nameRegion = boysRegionIntList[nameRegionIndex]
         name = boysRegionList[str(nameRegion)]
     return familyName + name

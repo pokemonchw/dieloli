@@ -1,4 +1,4 @@
-import random
+import random,bisect
 
 # 将一个列表中每一个元素逐个追加进另一个列表
 def listAppendToList(ifList,ofList):
@@ -62,18 +62,10 @@ def getRandomForWeight(data):
     weightReginData = getReginList(data)
     weightReginList = getListKeysIntList(list(weightReginData.keys()))
     nowWeight = random.randint(0,weightMax - 1)
-    weightRegin = next(x for x in weightReginList if x > nowWeight)
+    weightRegin = getNextValueForList(nowWeight,weightReginList)
     return weightReginData[str(weightRegin)]
 
 # 获取列表中第一个比当前值大的值
 def getNextValueForList(nowInt,intList):
-    cutListId = int(len(intList) / 2 - 1)
-    if (len(intList) > 3):
-        if intList[cutListId] > nowInt:
-            nowList = intList[:cutListId + 1]
-            return getNextValueForList(nowInt,nowList)
-        else:
-            nowList = intList[cutListId:]
-            return getNextValueForList(nowInt,nowList)
-    else:
-        return next(x for x in intList if x >= nowInt)
+    nowId = bisect.bisect_left(intList,nowInt)
+    return intList[nowId]

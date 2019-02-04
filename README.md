@@ -16,8 +16,7 @@ DieLoli
 依赖
 ----
 python3 \
-tkinter \
-multiprocessing
+tkinter
 
 警告
 ----

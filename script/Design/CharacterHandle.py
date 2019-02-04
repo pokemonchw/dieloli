@@ -1,4 +1,5 @@
-import os,random,multiprocessing,datetime
+import os,random
+from concurrent.futures import thread
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText
 
@@ -8,25 +9,18 @@ featuresList = AttrCalculation.getFeaturesList()
 sexList = list(TextLoading.getTextData(TextLoading.roleId, 'Sex'))
 ageTemList = list(TextLoading.getTextData(TextLoading.temId,'AgeTem'))
 
-characterInitList = []
+initCharacterThreadPool = thread.ThreadPoolExecutor(max_workers=GameConfig.threading_pool_max)
 # 初始化角色数据
 def initCharacterList():
     initCharacterTem()
     characterList = CacheContorl.npcTemData
-    processesMax = GameConfig.process_pool
-    i = 0
-    characterPool = multiprocessing.Pool(processes=processesMax)
-    time1 = datetime.datetime.now()
+    i = 1
     for character in characterList:
-        characterPool.apply_async(initCharacter, args=(i,))
+        initCharacterThreadPool.submit(initCharacter,i,character)
         i += 1
-        characterInitList.append(str(i))
+    initCharacterThreadPool.shutdown()
     time2 = datetime.datetime.now()
-    print(time2 - time1)
-    characterPool.close()
-    characterPool.join()
-    while characterInitList == []:
-        initPlayerPosition()
+    initPlayerPosition()
 
 # 按id生成角色属性
 def initCharacter(nowId,character):
@@ -90,7 +84,6 @@ def initCharacter(nowId,character):
     CacheContorl.featuresList = {}
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
-    characterInitList.remove(str(nowId))
 
 # 处理角色年龄特性
 def characterAgeFeatureHandle(ageTem,characterSex):
@@ -133,7 +126,7 @@ def getRandomNpcData():
             ageWeightMax += int(ageWeightData[i])
         for i in range(0,randomNpcMax):
             nowAgeWeight = random.randint(0,ageWeightMax - 1)
-            nowAgeWeightRegin = next(x for x in ageWeightReginList if x > nowAgeWeight)
+            nowAgeWeightRegin = ValueHandle.getNextValueForList(nowAgeWeight,ageWeightReginList)
             ageWeightTem = ageWeightReginData[str(nowAgeWeightRegin)]
             randomNpcSex = getRandNpcSex()
             randomNpcName = AttrText.getRandomNameForSex(randomNpcSex)
@@ -159,7 +152,7 @@ sexWeightReginList = ValueHandle.getListKeysIntList(list(sexWeightReginData.keys
 # 按权重随机获取npc性别
 def getRandNpcSex():
     nowWeight = random.randint(0,sexWeightMax - 1)
-    weightRegin = next(x for x in sexWeightReginList if x > nowWeight)
+    weightRegin = ValueHandle.getNextValueForList(nowWeight,sexWeightReginList)
     return sexWeightReginData[str(weightRegin)]
 
 fatWeightData = TextLoading.getTextData(TextLoading.temId,'FatWeight')
@@ -188,13 +181,18 @@ def getCharacterIdList():
     playerList = ValueHandle.dictKeysToList(playerData)
     return playerList
 
+characterPositionPool = thread.ThreadPoolExecutor(max_workers = GameConfig.threading_pool_max)
 # 初始化角色的位置
 def initPlayerPosition():
     characterList = CacheContorl.npcTemData
     for i in range(0, len(characterList)):
         playerIdS = str(i + 1)
         characterData = characterList[i]
-        characterInitPositionDirList = characterData['Position']
-        characterInitPosition = MapHandle.getSceneIdForDirList(characterInitPositionDirList)
-        characterPosition = CacheContorl.playObject['object'][playerIdS]['Position']
-        MapHandle.playerMoveScene(characterPosition, characterInitPosition, playerIdS)
+        characterPositionPool.submit(initPlayerPositionNow,characterData,playerIdS)
+    characterPositionPool.shutdown()
+
+def initPlayerPositionNow(characterData,playerIdS):
+    characterInitPositionDirList = characterData['Position']
+    characterInitPosition = MapHandle.getSceneIdForDirList(characterInitPositionDirList)
+    characterPosition = CacheContorl.playObject['object'][playerIdS]['Position']
+    MapHandle.playerMoveScene(characterPosition, characterInitPosition, playerIdS)
