@@ -59,7 +59,9 @@ def getAttr(temName):
     weightTemName = temData['Weight']
     bmi = getBMI(weightTemName)
     weight = getWeight(bmi,height['NowHeight'])
-    measurements = getMeasurements(temName,height['NowHeight'],weightTemName)
+    bodyFatTem = temData['BodyFat']
+    bodyFat = getBodyFat(temName,bodyFatTem)
+    measurements = getMeasurements(temName,height['NowHeight'],weight,bodyFat,bodyFatTem)
     hitPointTemName = temData["HitPoint"]
     maxHitPoint = getMaxHitPoint(hitPointTemName)
     manaPointTemName = temData["ManaPoint"]
@@ -78,6 +80,7 @@ def getAttr(temName):
         'SexItem':sexItemList,
         'Height':height,
         'Weight':weight,
+        'BodyFat':bodyFat,
         'Measurements':measurements,
         'Gold':gold,
         'Language':{}
@@ -142,8 +145,12 @@ def getBMI(temName):
     return bmi
 
 # 获取体脂率
-def getBodyFat(temName):
-    temData = TextLoading.getTextData(TextLoading.temId,'BodyFatTem')[temName]
+def getBodyFat(sex,temName):
+    if sex in ['Man','Asexual']:
+        sexTem = 'Man'
+    else:
+        sexTem = 'Woman'
+    temData = TextLoading.getTextData(TextLoading.temId,'BodyFatTem')[sexTem][temName]
     bodyFat = random.uniform(temData[0],temData[1])
     return bodyFat
 
@@ -154,26 +161,27 @@ def getWeight(bmi,height):
     return weight
 
 # 获取三围
-def getMeasurements(temName,height,weightTem):
+def getMeasurements(temName,height,weight,bodyFat,weightTem):
     if temName == 'Man' or 'Asexual':
         bust = 51.76 / 100 * height
         waist = 42.79 / 100 * height
         hip = 52.07 / 100 * height
+        newWaist = ((bodyFat / 100 * weight) + (weight * 0.082 + 34.89)) / 0.74
     else:
         bust = 52.35 / 100 * height
         waist = 41.34 / 100 * height
         hip = 57.78 / 100 * height
-    measurementsFix = TextLoading.getTextData(TextLoading.temId,'WeightTemFix')[weightTem]
-    keyFix = random.uniform(measurementsFix[0], measurementsFix[1])
+        newWaist = ((bodyFat / 100 * weight) + (weight * 0.082 + 44.74)) / 0.74
+    bustWaistProportion = bust / waist
     bustHipProportion = bust / hip
     waistHipProportion = waist / hip
     waistHipProportionTem = TextLoading.getTextData(TextLoading.temId,'WaistHipProportionTem')[weightTem]
     waistHipProportionFix = random.uniform(0,waistHipProportionTem)
     waistHipProportion = waistHipProportion + waistHipProportionFix
-    bust = bust + keyFix
-    hip = bust / bustHipProportion
-    waist = hip * waistHipProportion
-    measurements = {"Bust": bust, "Waist": waist, 'Hip': hip}
+    newHip = newWaist / waistHipProportion
+    fix = newHip / hip
+    bust = bust * fix
+    measurements = {"Bust": bust, "Waist": newWaist, 'Hip': newHip}
     return measurements
 
 # 获取最大hp值

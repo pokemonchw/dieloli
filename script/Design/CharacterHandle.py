@@ -9,9 +9,9 @@ featuresList = AttrCalculation.getFeaturesList()
 sexList = list(TextLoading.getTextData(TextLoading.roleId, 'Sex'))
 ageTemList = list(TextLoading.getTextData(TextLoading.temId,'AgeTem'))
 
-initCharacterThreadPool = thread.ThreadPoolExecutor(max_workers=GameConfig.threading_pool_max)
 # 初始化角色数据
 def initCharacterList():
+    initCharacterThreadPool = thread.ThreadPoolExecutor(max_workers=GameConfig.threading_pool_max)
     initCharacterTem()
     characterList = CacheContorl.npcTemData
     i = 1
@@ -19,7 +19,6 @@ def initCharacterList():
         initCharacterThreadPool.submit(initCharacter,i,character)
         i += 1
     initCharacterThreadPool.shutdown()
-    time2 = datetime.datetime.now()
     initPlayerPosition()
 
 # 按id生成角色属性
@@ -64,6 +63,10 @@ def initCharacter(nowId,character):
         weightTemName = character['Weight']
     else:
         weightTemName = 'Ordinary'
+    if 'BodyFat' in character:
+        bodyFatTem = character['BodyFat']
+    else:
+        bodyFatTem = weightTemName
     bmi = AttrCalculation.getBMI(weightTemName)
     weight = AttrCalculation.getWeight(bmi, height['NowHeight'])
     defaultAttr['Weight'] = weight
@@ -77,8 +80,9 @@ def initCharacter(nowId,character):
         defaultAttr['Class'] = random.choice(schoolClassData['Class'][classGrade])
     else:
         defaultAttr['Office'] = str(random.randint(0,12))
-    measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weightTemName)
-    defaultAttr['Measurements'] = measurements
+    bodyFat = AttrCalculation.getBodyFat(characterSex,bodyFatTem)
+    measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
+    defaultAttr['Measirements'] = measurements
     for keys in defaultAttr:
         CacheContorl.temporaryObject[keys] = defaultAttr[keys]
     CacheContorl.featuresList = {}
@@ -132,13 +136,15 @@ def getRandomNpcData():
             randomNpcName = AttrText.getRandomNameForSex(randomNpcSex)
             randomNpcAgeTem = getRandNpcAgeTem(ageWeightTem)
             fatTem = getRandNpcFatTem(ageWeightTem)
+            bodyFatTem = getRandNpcBodyFatTem(ageWeightTem,fatTem)
             randomNpcNewData = {
                 "Name":randomNpcName,
                 "Sex":randomNpcSex,
                 "Age":randomNpcAgeTem,
                 "Position":["0"],
                 "AdvNpc":"1",
-                "Weight":fatTem
+                "Weight":fatTem,
+                "BodyFat":bodyFatTem
             }
             CacheContorl.randomNpcList.append(randomNpcNewData)
         return CacheContorl.randomNpcList
@@ -156,11 +162,17 @@ def getRandNpcSex():
     return sexWeightReginData[str(weightRegin)]
 
 fatWeightData = TextLoading.getTextData(TextLoading.temId,'FatWeight')
-# 按权重随机获取npc肥胖模板
+# 按权重随机获取npc体重模板
 def getRandNpcFatTem(agejudge):
     nowFatWeightData = fatWeightData[agejudge]
     nowFatTem = ValueHandle.getRandomForWeight(nowFatWeightData)
     return nowFatTem
+
+bodyFatWeightData = TextLoading.getTextData(TextLoading.temId,'BodyFatWeight')
+# 按权重随机获取npc体脂率模板
+def getRandNpcBodyFatTem(ageJudge,bmiTem):
+    nowBodyFatData = bodyFatWeightData[ageJudge][bmiTem]
+    return ValueHandle.getRandomForWeight(nowBodyFatData)
 
 ageTemWeightData = TextLoading.getTextData(TextLoading.temId,'AgeWeight')
 # 按权重获取npc年龄模板
@@ -181,9 +193,9 @@ def getCharacterIdList():
     playerList = ValueHandle.dictKeysToList(playerData)
     return playerList
 
-characterPositionPool = thread.ThreadPoolExecutor(max_workers = GameConfig.threading_pool_max)
 # 初始化角色的位置
 def initPlayerPosition():
+    characterPositionPool = thread.ThreadPoolExecutor(max_workers = GameConfig.threading_pool_max)
     characterList = CacheContorl.npcTemData
     for i in range(0, len(characterList)):
         playerIdS = str(i + 1)

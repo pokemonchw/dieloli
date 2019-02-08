@@ -7,7 +7,8 @@
       "ManaPoint":"Ordinary",
       "SexExperience":"None",
       "FeaturesTem":"Man",
-      "Weight":"Ordinary"
+      "Weight":"Ordinary",
+      "BodyFat":"Ordinary"
     },
     "Woman":{
       "Sex":"Woman",
@@ -16,7 +17,8 @@
       "ManaPoint":"Ordinary",
       "SexExperience":"None",
       "FeaturesTem":"Woman",
-      "Weight":"Ordinary"
+      "Weight":"Ordinary",
+      "BodyFat":"Ordinary"
     },
     "Futa":{
       "Sex":"Futa",
@@ -25,7 +27,8 @@
       "ManaPoint":"Ordinary",
       "SexExperience":"None",
       "FeaturesTem":"Futa",
-      "Weight":"Ordinary"
+      "Weight":"Ordinary",
+      "BodyFat":"Ordinary"
     },
     "Asexual":{
       "Sex":"Asexual",
@@ -34,7 +37,8 @@
       "ManaPoint":"Ordinary",
       "SexExperience":"None",
       "FeaturesTem":"Asexual",
-      "Weight":"Ordinary"
+      "Weight":"Ordinary",
+      "BodyFat":"Ordinary"
     }
   },
   "RandomNpcSexWeight":{
@@ -271,7 +275,7 @@
       "Ordinary":[12.0,22.9],
       "Overweight":[23.0,27.9],
       "Fat":[28.0,45.9],
-      "SeverObesity":[46.0,55.9],
+      "SevereObesity":[46.0,55.9],
       "ExtremelySevereObesity":[56.0,70.0]
     },
     "Woman":{
@@ -279,17 +283,9 @@
       "Ordinary":[22.0,35.9],
       "Overweight":[36.0,40.9],
       "Fat":[41.0,45.9],
-      "SeverObesity":[46.0,55.9],
+      "SevereObesity":[46.0,55.9],
       "ExtremelySevereObesity":[56.0,70.0]
     }
-  },
-  "WeightTemFix":{
-    "Thin":[-5,-14.9],
-    "Ordinary":[-4.9,4.9],
-    "Overweight":[5,14.9],
-    "Fat":[15,24.9],
-    "SevereObesity":[25,34.9],
-    "ExtremelySevereObesity":[35,44.9]
   },
   "FatWeight":{
     "Student":{
@@ -309,22 +305,106 @@
       "ExtremelySevereObesity":2
     }
   },
-  "BodyFatWeigt":{
+  "BodyFatWeight":{
     "Student":{
-      "Thin":2,
-      "Ordinary":6,
-      "Overweight":14,
-      "Fat":10,
-      "SevereObesity":45,
-      "ExtremelySevereObesity":23
+      "Thin":{
+        "Thin":45,
+        "Ordinary":10,
+        "Overweight":14,
+        "Fat":6,
+        "SevereObesity":23,
+        "ExtremelySevereObesity":2
+      },
+      "Ordinary":{
+        "Thin":23,
+        "Ordinary":45,
+        "Overweight":10,
+        "Fat":14,
+        "SevereObesity":6,
+        "ExtremelySevereObesity":2
+      },
+      "Overweight":{
+        "Thin":2,
+        "Ordinary":23,
+        "Overweight":45,
+        "Fat":10,
+        "SevereObesity":14,
+        "ExtremelySevereObesity":6
+      },
+      "Fat":{
+        "Thin":2,
+        "Ordinary":6,
+        "Overweight":23,
+        "Fat":45,
+        "SevereObesity":10,
+        "ExtremelySevereObesity":14
+      },
+      "SevereObesity":{
+        "Thin":2,
+        "Ordinary":14,
+        "Overweight":6,
+        "Fat":23,
+        "SevereObesity":45,
+        "ExtremelySevereObesity":10
+      },
+      "ExtremelySevereObesity":{
+        "Thin":2,
+        "Ordinary":10,
+        "Overweight":14,
+        "Fat":6,
+        "SevereObesity":23,
+        "ExtremelySevereObesity":45
+      }
     },
     "Teacher":{
-      "Thin":2,
-      "Ordinary":6,
-      "Overweight":37,
-      "Fat":17,
-      "SevereObesity":28,
-      "ExtremelySevereObesity":10
+      "Thin":{
+        "Thin":37,
+        "Ordinary":6,
+        "Overweight":10,
+        "Fat":28,
+        "SevereObesity":17,
+        "ExtremelySevereObesity":2
+      },
+      "Ordinary":{
+        "Thin":17,
+        "Ordinary":37,
+        "Overweight":6,
+        "Fat":10,
+        "SevereObesity":28,
+        "ExtremelySevereObesity":2
+      },
+      "Overweight":{
+        "Thin":2,
+        "Ordinary":17,
+        "Overweight":37,
+        "Fat":6,
+        "SevereObesity":10,
+        "ExtremelySevereObesity":28
+      },
+      "Fat":{
+        "Thin":2,
+        "Ordinary":28,
+        "Overweight":17,
+        "Fat":37,
+        "SevereObesity":6,
+        "ExtremelySevereObesity":10
+      },
+      "SevereObesity":{
+        "Thin":2,
+        "Ordinary":10,
+        "Overweight":28,
+        "Fat":17,
+        "SevereObesity":37,
+        "ExtremelySevereObesity":6
+      },
+      "ExtremelySevereObesity":{
+        "Thin":2,
+        "Ordinary":6,
+        "Overweight":10,
+        "Fat":28,
+        "SevereObesity":17,
+        "ExtremelySevereObesity":37
+      }
     }
   },
   "AgeWeight":{

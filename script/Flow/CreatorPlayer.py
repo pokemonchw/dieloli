@@ -140,11 +140,14 @@ def detailedSetting_func1():
     playerAge = AttrCalculation.getAge(playerAgeTemName)
     playerTem = playerSex
     playerHeigt = AttrCalculation.getHeight(playerTem,playerAge,CacheContorl.temporaryObject['Features'])
-    playerWeight = AttrCalculation.getWeight('Ordinary',playerHeigt['NowHeight'])
-    playerMeasurements = AttrCalculation.getMeasurements(playerTem,playerHeigt['NowHeight'],'Ordinary')
+    playerBmi = AttrCalculation.getBMI('Ordinary')
+    playerWeight = AttrCalculation.getWeight(playerBmi,playerHeigt['NowHeight'])
+    playerBodyFat = AttrCalculation.getBodyFat(playerSex,'Ordinary')
+    playerMeasurements = AttrCalculation.getMeasurements(playerSex,playerHeigt['NowHeight'],playerWeight,playerBodyFat,'Ordinary')
     CacheContorl.temporaryObject['Age'] = playerAge
     CacheContorl.temporaryObject['Height'] = playerHeigt
     CacheContorl.temporaryObject['Weight'] = playerWeight
+    CacheContorl.temporaryObject['BodyFat'] = playerBodyFat
     CacheContorl.temporaryObject['Measurements'] = playerMeasurements
     PyCmd.clr_cmd()
     detailedSetting_func2()
@@ -230,10 +233,13 @@ def detailedSetting_func8():
     weightTemList = ValueHandle.dictKeysToList(weightTemData)
     weightTem = weightTemList[int(flowReturn)]
     playerHeight = CacheContorl.temporaryObject['Height']
-    playerWeight = AttrCalculation.getWeight(weightTem, playerHeight['NowHeight'])
+    playerBmi = AttrCalculation.getBMI(weightTem)
+    playerWeight = AttrCalculation.getWeight(playerBmi, playerHeight['NowHeight'])
     playerSex = CacheContorl.temporaryObject['Sex']
     playerTem = playerSex
-    playerMeasurements = AttrCalculation.getMeasurements(playerTem, playerHeight['NowHeight'], weightTem)
+    playerBodyFat = AttrCalculation.getBodyFat(playerSex,weightTem)
+    playerMeasurements = AttrCalculation.getMeasurements(playerSex, playerHeight['NowHeight'], playerWeight,playerBodyFat,weightTem)
     CacheContorl.temporaryObject['Weight'] = playerWeight
+    CacheContorl.temporaryObject['BodyFat'] = playerBodyFat
     CacheContorl.temporaryObject['Measurements'] = playerMeasurements
     SeePlayerAttr.acknowledgmentAttribute_func()
