@@ -135,7 +135,7 @@ def askfor_All(list,print_order=False):
             continue
         else:
             IoInit.print(order + '\n')
-            IoInit.print(TextLoading.getTextData(TextLoading.errorId, 'noInputListError') + '\n')
+            IoInit.print(TextLoading.getTextData(TextLoading.errorPath, 'noInputListError') + '\n')
             continue
 
 def askfor_Int(list,print_order=False):
@@ -149,7 +149,7 @@ def askfor_Int(list,print_order=False):
             continue
         else:
             IoInit.print(order + '\n')
-            IoInit.print(TextLoading.getTextData(TextLoading.errorId, 'noInputListError') + '\n')
+            IoInit.print(TextLoading.getTextData(TextLoading.errorPath, 'noInputListError') + '\n')
             continue
 
 def askfor_wait():
@@ -194,7 +194,7 @@ def initCache():
 
 def getTemObjectDefault():
     script = __import__('script.Design.MapHandle')
-    temObject = TextLoading.getTextData(TextLoading.roleId, 'Default')
+    temObject = TextLoading.getTextData(TextLoading.rolePath, 'Default')
     temPositionDirList = temObject['Position']
     temPosition = script.Design.MapHandle.getSceneIdForDirList(temPositionDirList)
     temObject['Position'] = temPosition

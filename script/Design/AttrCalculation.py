@@ -8,7 +8,7 @@ roleAttrData = GameData._loadjson(roleAttrPath)
 
 # 获取模板列表
 def getTemList():
-    list = TextLoading.getTextData(TextLoading.temId,'TemList')
+    list = TextLoading.getTextData(TextLoading.attrTemplatePath,'TemList')
     return list
 
 # 获取特征数据
@@ -18,7 +18,7 @@ def getFeaturesList():
 
 # 获取年龄模板
 def getAgeTemList():
-    list = ValueHandle.dictKeysToList(TextLoading.getTextData(TextLoading.temId,'AgeTem'))
+    list = ValueHandle.dictKeysToList(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem'))
     return list
 
 # 获取刻应列表
@@ -28,13 +28,13 @@ def getEngravingList():
 
 # 获取服装模板
 def getClothing(sexId):
-    clothingTem = TextLoading.getTextData(TextLoading.temId,'Equipment')
+    clothingTem = TextLoading.getTextData(TextLoading.attrTemplatePath,'Equipment')
     clothingList = clothingTem[sexId]
     return clothingList
 
 # 获取性道具模板
 def getSexItem(sexid):
-    sexItemTem = TextLoading.getTextData(TextLoading.temId,'SexItem')
+    sexItemTem = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexItem')
     sexItemList = sexItemTem[sexid]
     return sexItemList
 
@@ -45,7 +45,7 @@ def getGold():
 
 # 获取属性
 def getAttr(temName):
-    TemList = TextLoading.getTextData(TextLoading.temId,'TemList')
+    TemList = TextLoading.getTextData(TextLoading.attrTemplatePath,'TemList')
     temData = TemList[temName]
     ageTemName = temData["Age"]
     age = getAge(ageTemName)
@@ -89,7 +89,7 @@ def getAttr(temName):
 
 # 获取年龄信息
 def getAge(temName):
-    temData = TextLoading.getTextData(TextLoading.temId,'AgeTem')[temName]
+    temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem')[temName]
     maxAge = int(temData['MaxAge'])
     miniAge = int(temData['MiniAge'])
     age = random.randint(miniAge,maxAge)
@@ -97,11 +97,11 @@ def getAge(temName):
 
 # 获取初始身高
 def getHeight(temName,age,Features):
-    temData = TextLoading.getTextData(TextLoading.temId,'HeightTem')[temName]
+    temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'HeightTem')[temName]
     initialHeight = random.uniform(temData[0],temData[1])
     age = int(age)
     expectHeightFix = 0
-    figuresData = TextLoading.getTextData(TextLoading.roleId,'Features')['Figure']
+    figuresData = TextLoading.getTextData(TextLoading.rolePath,'Features')['Figure']
     try:
         if Features['Figure'] == figuresData[0]:
             expectHeightFix = 50
@@ -140,7 +140,7 @@ def getGrowthHeight(nowAge,expectHeight,developmentAge,expectAge):
 
 # 获取BMI
 def getBMI(temName):
-    temData = TextLoading.getTextData(TextLoading.temId,'WeightTem')[temName]
+    temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'WeightTem')[temName]
     bmi = random.uniform(temData[0],temData[1])
     return bmi
 
@@ -150,7 +150,7 @@ def getBodyFat(sex,temName):
         sexTem = 'Man'
     else:
         sexTem = 'Woman'
-    temData = TextLoading.getTextData(TextLoading.temId,'BodyFatTem')[sexTem][temName]
+    temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'BodyFatTem')[sexTem][temName]
     bodyFat = random.uniform(temData[0],temData[1])
     return bodyFat
 
@@ -175,7 +175,7 @@ def getMeasurements(temName,height,weight,bodyFat,weightTem):
     bustWaistProportion = bust / waist
     bustHipProportion = bust / hip
     waistHipProportion = waist / hip
-    waistHipProportionTem = TextLoading.getTextData(TextLoading.temId,'WaistHipProportionTem')[weightTem]
+    waistHipProportionTem = TextLoading.getTextData(TextLoading.attrTemplatePath,'WaistHipProportionTem')[weightTem]
     waistHipProportionFix = random.uniform(0,waistHipProportionTem)
     waistHipProportion = waistHipProportion + waistHipProportionFix
     newHip = newWaist / waistHipProportion
@@ -186,7 +186,7 @@ def getMeasurements(temName,height,weight,bodyFat,weightTem):
 
 # 获取最大hp值
 def getMaxHitPoint(temName):
-    temData = TextLoading.getTextData(TextLoading.temId,'HitPointTem')[temName]
+    temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'HitPointTem')[temName]
     maxHitPoint = int(temData['HitPointMax'])
     addValue = random.randint(0,500)
     impairment = random.randint(0,500)
@@ -195,7 +195,7 @@ def getMaxHitPoint(temName):
 
 # 获取最大mp值
 def getMaxManaPoint(temName):
-    temData = TextLoading.getTextData(TextLoading.temId,'ManaPointTem')[temName]
+    temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'ManaPointTem')[temName]
     maxManaPoint = int(temData['ManaPointMax'])
     addValue = random.randint(0,500)
     impairment = random.randint(0,500)
@@ -204,24 +204,24 @@ def getMaxManaPoint(temName):
 
 # 获取性经验数据
 def getSexExperience(temName):
-    temData = TextLoading.getTextData(TextLoading.temId,'SexExperience')[temName]
+    temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperience')[temName]
     mouthExperienceTemName = temData['MouthExperienceTem']
     bosomExperienceTemName = temData['BosomExperienceTem']
     vaginaExperienceTemName = temData['VaginaExperienceTem']
     clitorisExperienceTemName = temData['ClitorisExperienceTem']
     anusExperienceTemName = temData['AnusExperienceTem']
     penisExperienceTemName = temData['PenisExperienceTem']
-    mouthExperienceList = TextLoading.getTextData(TextLoading.temId,'SexExperienceTem')['MouthExperienceTem'][mouthExperienceTemName]
+    mouthExperienceList = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperienceTem')['MouthExperienceTem'][mouthExperienceTemName]
     mouthExperience = random.randint(int(mouthExperienceList[0]),int(mouthExperienceList[1]))
-    bosomExperienceList = TextLoading.getTextData(TextLoading.temId,'SexExperienceTem')['BosomExperienceTem'][bosomExperienceTemName]
+    bosomExperienceList = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperienceTem')['BosomExperienceTem'][bosomExperienceTemName]
     bosomExperience = random.randint(int(bosomExperienceList[0]),int(bosomExperienceList[1]))
-    vaginaExperienceList = TextLoading.getTextData(TextLoading.temId,'SexExperienceTem')['VaginaExperienceTem'][vaginaExperienceTemName]
+    vaginaExperienceList = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperienceTem')['VaginaExperienceTem'][vaginaExperienceTemName]
     vaginaExperience = random.randint(int(vaginaExperienceList[0]),int(vaginaExperienceList[1]))
-    clitorisExperienceList = TextLoading.getTextData(TextLoading.temId,'SexExperienceTem')['ClitorisExperienceTem'][clitorisExperienceTemName]
+    clitorisExperienceList = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperienceTem')['ClitorisExperienceTem'][clitorisExperienceTemName]
     clitorisExperience = random.randint(int(clitorisExperienceList[0]),int(clitorisExperienceList[1]))
-    anusExperienceList = TextLoading.getTextData(TextLoading.temId,'SexExperienceTem')['AnusExperienceTem'][anusExperienceTemName]
+    anusExperienceList = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperienceTem')['AnusExperienceTem'][anusExperienceTemName]
     anusExperience = random.randint(int(anusExperienceList[0]),int(anusExperienceList[1]))
-    penisExperienceList = TextLoading.getTextData(TextLoading.temId,'SexExperienceTem')['PenisExperienceTem'][penisExperienceTemName]
+    penisExperienceList = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperienceTem')['PenisExperienceTem'][penisExperienceTemName]
     penisExperience = random.randint(int(penisExperienceList[0]),int(penisExperienceList[1]))
     sexExperience = {
         'mouthExperience' : mouthExperience,

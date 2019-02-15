@@ -1,4 +1,4 @@
-import os,random
+import os,random,datetime
 from concurrent.futures import thread
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText
@@ -6,8 +6,10 @@ from script.Design import AttrCalculation,MapHandle,AttrText
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
 featuresList = AttrCalculation.getFeaturesList()
-sexList = list(TextLoading.getTextData(TextLoading.roleId, 'Sex'))
-ageTemList = list(TextLoading.getTextData(TextLoading.temId,'AgeTem'))
+sexList = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex'))
+ageTemList = list(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem'))
+characterListPath = os.path.join(gamepath,'data',language,'character')
+characterList = GameData.getPathList(characterListPath)
 
 # 初始化角色数据
 def initCharacterList():
@@ -83,8 +85,7 @@ def initCharacter(nowId,character):
     bodyFat = AttrCalculation.getBodyFat(characterSex,bodyFatTem)
     measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
     defaultAttr['Measirements'] = measurements
-    for keys in defaultAttr:
-        CacheContorl.temporaryObject[keys] = defaultAttr[keys]
+    CacheContorl.temporaryObject.update(defaultAttr)
     CacheContorl.featuresList = {}
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
@@ -104,14 +105,23 @@ def characterAgeFeatureHandle(ageTem,characterSex):
 
 # 初始化角色数据
 def initCharacterTem():
-    characterListPath = os.path.join(gamepath,'data',language,'character')
-    characterList = GameData.getPathList(characterListPath)
     npcData = getRandomNpcData()
+    time_1 = datetime.datetime.now()
+    npcData += [getDirCharacterTem(character) for character in characterList ]
+    '''
     for i in characterList:
         characterAttrTemPath = os.path.join(characterListPath,i,'AttrTemplate.json')
         characterData = GameData._loadjson(characterAttrTemPath)
         npcData.append(characterData)
+    '''
+    time_2 = datetime.datetime.now()
+    print(time_2 - time_1)
     CacheContorl.npcTemData = npcData
+
+# 获取目录中的角色模板
+def getDirCharacterTem(character):
+    characterAttrTemPath = os.path.join(characterListPath,character,'AttrTemplate.json')
+    return GameData._loadjson(characterAttrTemPath)
 
 randomNpcMax = int(GameConfig.random_npc_max)
 randomTeacherProportion = int(GameConfig.proportion_teacher)
@@ -149,7 +159,7 @@ def getRandomNpcData():
             CacheContorl.randomNpcList.append(randomNpcNewData)
         return CacheContorl.randomNpcList
 
-sexWeightData = TextLoading.getTextData(TextLoading.temId,'RandomNpcSexWeight')
+sexWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'RandomNpcSexWeight')
 sexWeightMax = 0
 for i in sexWeightData:
     sexWeightMax += int(sexWeightData[i])
@@ -161,20 +171,20 @@ def getRandNpcSex():
     weightRegin = ValueHandle.getNextValueForList(nowWeight,sexWeightReginList)
     return sexWeightReginData[str(weightRegin)]
 
-fatWeightData = TextLoading.getTextData(TextLoading.temId,'FatWeight')
+fatWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'FatWeight')
 # 按权重随机获取npc体重模板
 def getRandNpcFatTem(agejudge):
     nowFatWeightData = fatWeightData[agejudge]
     nowFatTem = ValueHandle.getRandomForWeight(nowFatWeightData)
     return nowFatTem
 
-bodyFatWeightData = TextLoading.getTextData(TextLoading.temId,'BodyFatWeight')
+bodyFatWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'BodyFatWeight')
 # 按权重随机获取npc体脂率模板
 def getRandNpcBodyFatTem(ageJudge,bmiTem):
     nowBodyFatData = bodyFatWeightData[ageJudge][bmiTem]
     return ValueHandle.getRandomForWeight(nowBodyFatData)
 
-ageTemWeightData = TextLoading.getTextData(TextLoading.temId,'AgeWeight')
+ageTemWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeWeight')
 # 按权重获取npc年龄模板
 def getRandNpcAgeTem(agejudge):
     nowAgeWeightData  = ageTemWeightData[agejudge]

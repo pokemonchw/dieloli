@@ -45,7 +45,7 @@ def loadSave(filename):
         with open(filepath, 'rb') as f:
             data=pickle.load(f)
     except FileNotFoundError:
-        EraPrint.p(TextLoading.getTextData(TextLoading.errorId,'notSaveError'))
+        EraPrint.p(TextLoading.getTextData(TextLoading.errorPath,'notSaveError'))
     return data
 
 # 确认存档读取
@@ -72,5 +72,5 @@ def removeSave(saveId):
     if os.path.isfile(savePath):
         os.remove(savePath)
     else:
-        errorText = TextLoading.getTextData(TextLoading.errorId,'notSaveError')
+        errorText = TextLoading.getTextData(TextLoading.errorPath,'notSaveError')
         EraPrint.pl(errorText)

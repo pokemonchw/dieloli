@@ -3,13 +3,13 @@ from script.Design import CmdButtonQueue,GameTime
 
 # 载入存档信息头面板
 def loadSaveInfoHeadPanel():
-    saveFrameTitle = TextLoading.getTextData(TextLoading.stageWordId, '71')
+    saveFrameTitle = TextLoading.getTextData(TextLoading.stageWordPath, '71')
     EraPrint.plt(saveFrameTitle)
     pass
 
 # 储存存档信息头面板
 def establishSaveInfoHeadPanel():
-    saveFrameTitle = TextLoading.getTextData(TextLoading.stageWordId, '70')
+    saveFrameTitle = TextLoading.getTextData(TextLoading.stageWordPath, '70')
     EraPrint.plt(saveFrameTitle)
     pass
 
@@ -18,9 +18,9 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
     savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel']) + 1
     inputS = []
     idTextList = []
-    idInfoText = TextLoading.getTextData(TextLoading.stageWordId,'72')
+    idInfoText = TextLoading.getTextData(TextLoading.stageWordPath,'72')
     textWidth = int(GameConfig.text_width)
-    saveNoneText = TextLoading.getTextData(TextLoading.messageId,'20')
+    saveNoneText = TextLoading.getTextData(TextLoading.messagePath,'20')
     if savePanelPage == int(GameConfig.save_page) + 1:
         startSaveId = int(pageSaveValue) * (savePanelPage - 1)
         overSaveId = startSaveId + lastSavePageValue
@@ -69,7 +69,7 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
                 inputS.append(id)
                 EraPrint.p('\n')
     if autoSave == True:
-        autoInfoText = TextLoading.getTextData(TextLoading.stageWordId,"73")
+        autoInfoText = TextLoading.getTextData(TextLoading.stageWordPath,"73")
         i = pageSaveValue
         id = CmdButtonQueue.idIndex(i)
         EraPrint.plittleline()
@@ -102,7 +102,7 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
 
 # 询问切换存档页面板
 def askForChangeSavePagePanel(startId):
-    cmdList = TextLoading.getTextData(TextLoading.cmdId,"changeSavePage")
+    cmdList = TextLoading.getTextData(TextLoading.cmdPath,"changeSavePage")
     savePanelPage = str(CacheContorl.panelState['SeeSaveListPanel'])
     maxSavePanelPage = str(CacheContorl.maxSavePage)
     savePageText = '(' + savePanelPage + '/' + maxSavePanelPage + ')'
@@ -114,8 +114,8 @@ def askForChangeSavePagePanel(startId):
 # 询问覆盖存档面板
 def askForOverlaySavePanel():
     EraPrint.p('\n')
-    cmdList = TextLoading.getTextData(TextLoading.cmdId,"overlaySave")
-    messageText = TextLoading.getTextData(TextLoading.messageId,'21')
+    cmdList = TextLoading.getTextData(TextLoading.cmdPath,"overlaySave")
+    messageText = TextLoading.getTextData(TextLoading.messagePath,'21')
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')
@@ -125,8 +125,8 @@ def askForOverlaySavePanel():
 # 确认覆盖面板
 def confirmationOverlaySavePanel():
     EraPrint.p('\n')
-    cmdList = TextLoading.getTextData(TextLoading.cmdId, "confirmationOverlaySave")
-    messageText = TextLoading.getTextData(TextLoading.messageId, '22')
+    cmdList = TextLoading.getTextData(TextLoading.cmdPath, "confirmationOverlaySave")
+    messageText = TextLoading.getTextData(TextLoading.messagePath, '22')
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')
@@ -136,8 +136,8 @@ def confirmationOverlaySavePanel():
 # 询问读档面板
 def askLoadSavePanel():
     EraPrint.p('\n')
-    cmdList = TextLoading.getTextData(TextLoading.cmdId,"loadSaveAsk")
-    messageText = TextLoading.getTextData(TextLoading.messageId,'23')
+    cmdList = TextLoading.getTextData(TextLoading.cmdPath,"loadSaveAsk")
+    messageText = TextLoading.getTextData(TextLoading.messagePath,'23')
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')
@@ -147,8 +147,8 @@ def askLoadSavePanel():
 # 确认读档面板
 def confirmationLoadSavePanel():
     EraPrint.p('\n')
-    cmdList = TextLoading.getTextData(TextLoading.cmdId, "confirmationLoadSave")
-    messageText = TextLoading.getTextData(TextLoading.messageId, '24')
+    cmdList = TextLoading.getTextData(TextLoading.cmdPath, "confirmationLoadSave")
+    messageText = TextLoading.getTextData(TextLoading.messagePath, '24')
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')
@@ -158,8 +158,8 @@ def confirmationLoadSavePanel():
 # 确认删除存档面板
 def confirmationRemoveSavePanel():
     EraPrint.p('\n')
-    cmdList = TextLoading.getTextData(TextLoading.cmdId,"confirmationRemoveSave")
-    messageText = TextLoading.getTextData(TextLoading.messageId, '25')
+    cmdList = TextLoading.getTextData(TextLoading.cmdPath,"confirmationRemoveSave")
+    messageText = TextLoading.getTextData(TextLoading.messagePath, '25')
     EraPrint.pline()
     EraPrint.p(messageText)
     EraPrint.p('\n')

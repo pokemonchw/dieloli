@@ -1,7 +1,7 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd
 from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue
 
-panelStateTextData = TextLoading.getTextData(TextLoading.cmdId,'cmdSwitch')
+panelStateTextData = TextLoading.getTextData(TextLoading.cmdPath,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
 panelStateOffText = panelStateTextData[0]
 
@@ -17,9 +17,9 @@ def initShowAttrPanelList():
 
 # 查看角色主属性面板
 def seePlayerMainAttrPanel(playerId):
-    title1 = TextLoading.getTextData(TextLoading.stageWordId, '1')
+    title1 = TextLoading.getTextData(TextLoading.stageWordPath, '1')
     EraPrint.plt(title1)
-    playeridText = TextLoading.getTextData(TextLoading.stageWordId, '0') + playerId
+    playeridText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + playerId
     EraPrint.p(playeridText)
     panelState = CacheContorl.panelState['PlayerMainAttrPanel']
     if panelState == "0":
@@ -31,29 +31,29 @@ def seePlayerMainAttrPanel(playerId):
         playerSex = AttrText.getSexText(playerSexId)
         playerAge = playerData['Age']
         playerName = playerData['Name']
-        fixPlayerName = TextLoading.getTextData(TextLoading.stageWordId, '13')
+        fixPlayerName = TextLoading.getTextData(TextLoading.stageWordPath, '13')
         playerName = fixPlayerName + playerName
         attrListString.append(playerName)
         playerSelfName = playerData['SelfName']
-        fixPlayerSelfName = TextLoading.getTextData(TextLoading.stageWordId, '11')
+        fixPlayerSelfName = TextLoading.getTextData(TextLoading.stageWordPath, '11')
         playerSelfName = fixPlayerSelfName + playerSelfName
         attrListString.append(playerSelfName)
         playerNickName = playerData['NickName']
-        playerNickName = TextLoading.getTextData(TextLoading.stageWordId, '12') + playerNickName
+        playerNickName = TextLoading.getTextData(TextLoading.stageWordPath, '12') + playerNickName
         attrListString.append(playerNickName)
         relationship = playerData['Relationship']
-        relationship = TextLoading.getTextData(TextLoading.stageWordId, '14') + relationship
+        relationship = TextLoading.getTextData(TextLoading.stageWordPath, '14') + relationship
         attrListString.append(relationship)
         playerSpecies = playerData['Species']
-        playerSpecies = TextLoading.getTextData(TextLoading.stageWordId, '15') + playerSpecies
+        playerSpecies = TextLoading.getTextData(TextLoading.stageWordPath, '15') + playerSpecies
         attrListString.append(playerSpecies)
-        playerSex = TextLoading.getTextData(TextLoading.stageWordId, '2') + playerSex
+        playerSex = TextLoading.getTextData(TextLoading.stageWordPath, '2') + playerSex
         attrListString.append(playerSex)
-        playerAge = TextLoading.getTextData(TextLoading.stageWordId, '3') + str(playerAge)
+        playerAge = TextLoading.getTextData(TextLoading.stageWordPath, '3') + str(playerAge)
         attrListString.append(playerAge)
         EraPrint.p('\n')
         playerSan = playerData['San']
-        playerSan = TextLoading.getTextData(TextLoading.stageWordId, '10') + playerSan
+        playerSan = TextLoading.getTextData(TextLoading.stageWordPath, '10') + playerSan
         attrListString.append(playerSan)
         playerHeight = playerData['Height']['NowHeight']
         playerWeight = playerData['Weight']
@@ -63,18 +63,18 @@ def seePlayerMainAttrPanel(playerId):
         playerBust = str(round(playerMeasurements['Bust'],2))
         playerWaist = str(round(playerMeasurements['Waist'],2))
         playerHip = str(round(playerMeasurements['Hip'],2))
-        playerHeightInfo = TextLoading.getTextData(TextLoading.stageWordId,'80') + playerHeightText
+        playerHeightInfo = TextLoading.getTextData(TextLoading.stageWordPath,'80') + playerHeightText
         attrListString.append(playerHeightInfo)
-        playerWeightInfo = TextLoading.getTextData(TextLoading.stageWordId,'81') + playerWeightText
+        playerWeightInfo = TextLoading.getTextData(TextLoading.stageWordPath,'81') + playerWeightText
         attrListString.append(playerWeightInfo)
-        playerBustInfo = TextLoading.getTextData(TextLoading.stageWordId,'82') + playerBust
-        playerWaistInfo = TextLoading.getTextData(TextLoading.stageWordId,'83') + playerWaist
-        playerHipInfo = TextLoading.getTextData(TextLoading.stageWordId,'84') + playerHip
+        playerBustInfo = TextLoading.getTextData(TextLoading.stageWordPath,'82') + playerBust
+        playerWaistInfo = TextLoading.getTextData(TextLoading.stageWordPath,'83') + playerWaist
+        playerHipInfo = TextLoading.getTextData(TextLoading.stageWordPath,'84') + playerHip
         playerIntimate = playerData['Intimate']
-        playerIntimate = TextLoading.getTextData(TextLoading.stageWordId, '16') + playerIntimate
+        playerIntimate = TextLoading.getTextData(TextLoading.stageWordPath, '16') + playerIntimate
         attrListString.append(playerIntimate)
         playerGraces = playerData['Graces']
-        playerGraces = TextLoading.getTextData(TextLoading.stageWordId, '17') + playerGraces
+        playerGraces = TextLoading.getTextData(TextLoading.stageWordPath, '17') + playerGraces
         attrListString.append(playerGraces)
         attrListString.append(playerBustInfo)
         attrListString.append(playerWaistInfo)
@@ -92,19 +92,19 @@ def seePlayerMainAttrPanel(playerId):
 # 查看角色装备面板
 def seePlayerEquipmentPanel(playerId):
     EraPrint.plittleline()
-    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordId, '37'))
+    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '37'))
     panelState = CacheContorl.panelState['PlayerEquipmentPanel']
     if panelState == "0":
         PyCmd.pcmd(panelStateOffText,'PlayerEquipmentPanel')
         playerData = AttrHandle.getAttrData(playerId)
         EraPrint.p('\n')
-        EraPrint.p(TextLoading.getTextData(TextLoading.stageWordId, '39'))
+        EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '39'))
         EraPrint.p('\n')
         playerClothingList = playerData['Clothing']
         playerClothingText = AttrText.getClothingText(playerClothingList)
         EraPrint.plist(playerClothingText, 4, 'center')
         EraPrint.p('\n')
-        EraPrint.p(TextLoading.getTextData(TextLoading.stageWordId, '40'))
+        EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '40'))
         EraPrint.p('\n')
         playerSexItemList = playerData['SexItem']
         playerSexItemText = AttrText.getSexItemText(playerSexItemList)
@@ -118,7 +118,7 @@ def seePlayerEquipmentPanel(playerId):
 # 查看角色携带道具面板
 def seePlayerItemPanel(playerId):
     EraPrint.plittleline()
-    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordId, '38'))
+    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '38'))
     panelState = CacheContorl.panelState['PlayerItemPanel']
     if panelState == "0":
         PyCmd.pcmd(panelStateOffText, 'PlayerItemPanel')
@@ -133,7 +133,7 @@ def seePlayerItemPanel(playerId):
 # 查看角色经验面板
 def seePlayerExperiencePanel(playerId):
     EraPrint.plittleline()
-    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordId, '18'))
+    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '18'))
     panelState = CacheContorl.panelState['PlayerExperiencePanel']
     if panelState == "0":
         PyCmd.pcmd(panelStateOffText, 'PlayerExperiencePanel')
@@ -152,7 +152,7 @@ def seePlayerExperiencePanel(playerId):
 # 查看角色技能等级
 def seePlayerLevelPanel(playerId):
     EraPrint.plittleline()
-    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordId, '5'))
+    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '5'))
     panelState = CacheContorl.panelState['PlayerLevelPanel']
     if panelState == "0":
         PyCmd.pcmd(panelStateOffText, 'PlayerLevelPanel')
@@ -172,7 +172,7 @@ def seePlayerLevelPanel(playerId):
 # 查看角色特征
 def seePlayerFeaturesPanel(playerId):
     EraPrint.plittleline()
-    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordId, '6'))
+    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '6'))
     panelState = CacheContorl.panelState['PlayerFeaturesPanel']
     if panelState == "0":
         PyCmd.pcmd(panelStateOffText, 'PlayerFeaturesPanel')
@@ -191,7 +191,7 @@ def seePlayerFeaturesPanel(playerId):
 # 查看角色刻印
 def seePlayerEngravingPanel(playerId):
     EraPrint.plittleline()
-    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordId, '7'))
+    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '7'))
     panelState = CacheContorl.panelState['PlayerEngravingPanel']
     if panelState == "0":
         PyCmd.pcmd(panelStateOffText, 'PlayerEngravingPanel')
@@ -208,7 +208,7 @@ def seePlayerEngravingPanel(playerId):
 
 # 查看属性页显示控制
 def seeAttrShowHandlePanel():
-    ansListData = TextLoading.getTextData(TextLoading.cmdId,'seeAttrPanelHandle')
+    ansListData = TextLoading.getTextData(TextLoading.cmdPath,'seeAttrPanelHandle')
     seeAttrPanelHandleCache = CacheContorl.panelState['AttrShowHandlePanel']
     inputS = []
     if seeAttrPanelHandleCache == '0':

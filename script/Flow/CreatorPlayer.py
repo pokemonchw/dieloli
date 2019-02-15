@@ -69,11 +69,11 @@ def inputSexConfirm_func():
     sexId = CacheContorl.playObject['object'][playerId]['Sex']
     if flowReturn == 0:
         AttrCalculation.setSexCache(sexId)
-        sexKeysList = list(TextLoading.getTextData(TextLoading.roleId,'Sex'))
+        sexKeysList = list(TextLoading.getTextData(TextLoading.rolePath,'Sex'))
         if sexId == sexKeysList[2]:
-            CacheContorl.temporaryObject['Features']['Sex'] = TextLoading.getTextData(TextLoading.roleId, 'Features')['Sex'][0]
+            CacheContorl.temporaryObject['Features']['Sex'] = TextLoading.getTextData(TextLoading.rolePath, 'Features')['Sex'][0]
         elif sexId == sexKeysList[3]:
-            CacheContorl.temporaryObject['Features']['Sex'] = TextLoading.getTextData(TextLoading.roleId, 'Features')['Sex'][1]
+            CacheContorl.temporaryObject['Features']['Sex'] = TextLoading.getTextData(TextLoading.rolePath, 'Features')['Sex'][1]
         PyCmd.clr_cmd()
         attributeGenerationBranch_func()
     elif flowReturn == 1:
@@ -86,7 +86,7 @@ def inputSexConfirm_func():
 
 # 玩家确认性别流程
 def inputSexChoice_func():
-    sex = list(TextLoading.getTextData(TextLoading.roleId, 'Sex').keys())
+    sex = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex').keys())
     sexMax = len(sex)
     flowReturn = CreatorPlayerPanel.inputSexChoicePanel()
     if flowReturn in range(0,sexMax):
@@ -124,7 +124,7 @@ def attributeGenerationBranch_func():
 def detailedSetting_func1():
     flowRetun = CreatorPlayerPanel.detailedSetting1Panel()
     playerSex = CacheContorl.playObject['object']['0']['Sex']
-    sexList = list(TextLoading.getTextData(TextLoading.roleId, 'Sex'))
+    sexList = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex'))
     if flowRetun == 0:
         CacheContorl.featuresList['Age'] = featuresList["Age"][3]
     elif flowRetun == 4:
@@ -154,7 +154,7 @@ def detailedSetting_func1():
 
 # 详细设置属性2:询问玩家是否具备动物特征
 def detailedSetting_func2():
-    ansList = TextLoading.getTextData(TextLoading.cmdId, 'detailedSetting2')
+    ansList = TextLoading.getTextData(TextLoading.cmdPath, 'detailedSetting2')
     flowReturn = CreatorPlayerPanel.detailedSetting2Panel()
     if flowReturn == ansList[len(ansList)-1]:
         PyCmd.clr_cmd()
@@ -167,7 +167,7 @@ def detailedSetting_func2():
 # 详细设置属性3:询问玩家是否具备丰富的性经验
 def detailedSetting_func3():
     flowReturn = CreatorPlayerPanel.detailedSetting3Panel()
-    sexTemDataList = ValueHandle.dictKeysToList(TextLoading.getTextData(TextLoading.temId,'SexExperience'))
+    sexTemDataList = ValueHandle.dictKeysToList(TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperience'))
     sexTemDataList = ValueHandle.reverseArrayList(sexTemDataList)
     sexTemName = sexTemDataList[flowReturn]
     if flowReturn != len(sexTemDataList) - 1:
@@ -229,7 +229,7 @@ def detailedSetting_func7():
 # 详细设置属性8:询问玩家体型
 def detailedSetting_func8():
     flowReturn = CreatorPlayerPanel.detailedSetting8Panel()
-    weightTemData = TextLoading.getTextData(TextLoading.temId,'WeightTem')
+    weightTemData = TextLoading.getTextData(TextLoading.attrTemplatePath,'WeightTem')
     weightTemList = ValueHandle.dictKeysToList(weightTemData)
     weightTem = weightTemList[int(flowReturn)]
     playerHeight = CacheContorl.temporaryObject['Height']

@@ -20,7 +20,7 @@ def acknowledgmentAttribute_func():
 def acknowledgmentAttributeAns(inputList):
     playerId = CacheContorl.playObject['objectId']
     yrn = GameInit.askfor_All(inputList)
-    showAttrHandleData = TextLoading.getTextData(TextLoading.cmdId,'seeAttrPanelHandle')
+    showAttrHandleData = TextLoading.getTextData(TextLoading.cmdPath,'seeAttrPanelHandle')
     PyCmd.clr_cmd()
     if yrn in panelList:
         PanelStateHandle.panelStateChange(yrn)
@@ -62,7 +62,7 @@ def seeAttrOnEveryTime_func(oldPanel,tooOldFlow = None):
     inputS = inputS + askSeeAttr
     yrn = GameInit.askfor_All(inputS)
     PyCmd.clr_cmd()
-    showAttrHandleData = TextLoading.getTextData(TextLoading.cmdId, 'seeAttrPanelHandle')
+    showAttrHandleData = TextLoading.getTextData(TextLoading.cmdPath, 'seeAttrPanelHandle')
     objectMax = objectIdList[len(objectIdList) - 1]
     if yrn in showAttrHandleData:
         index = showAttrHandleData.index(yrn)

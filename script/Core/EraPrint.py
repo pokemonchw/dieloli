@@ -8,7 +8,7 @@ def_style = IoInit.style_def
 
 #基本输出
 def p(string, style='standard'):
-    barlist = TextLoading.getTextData(TextLoading.barListId,'barlist')
+    barlist = TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
     styleList = RichText.setRichTextPrint(string, style)
     global last_char
     if len(string) > 0:
@@ -16,7 +16,7 @@ def p(string, style='standard'):
     string = RichText.removeRichCache(string)
     for i in range(0,len(string)):
         if styleList[i] in barlist:
-            styledata = TextLoading.getTextData(TextLoading.barListId,styleList[i])
+            styledata = TextLoading.getTextData(TextLoading.barConfigPath,styleList[i])
             truebar = styledata['truebar']
             nullbar = styledata['nullbar']
             if string[i] == '0':

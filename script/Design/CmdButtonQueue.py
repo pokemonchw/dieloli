@@ -28,7 +28,7 @@ seeplayerwearclothes = "seePlayerWearClothes"
 # 用于批量生成id命令
 def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left',startId = '0',cmdListData=None,lastLine = False):
     if cmdListData == None:
-        cmdListData = TextLoading.getTextData(TextLoading.cmdId, cmdList).copy()
+        cmdListData = TextLoading.getTextData(TextLoading.cmdPath, cmdList).copy()
     inputI = []
     textWidth = GameConfig.text_width
     if lastLine == True:
@@ -85,7 +85,7 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
 # 用于批量生成文本命令
 def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True,cmdListData=None):
     if cmdListData == None:
-        cmdListData = TextLoading.getTextData(TextLoading.cmdId, cmdList).copy()
+        cmdListData = TextLoading.getTextData(TextLoading.cmdPath, cmdList).copy()
     else:
         pass
     inputS = []

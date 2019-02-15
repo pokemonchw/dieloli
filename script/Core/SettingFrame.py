@@ -4,5 +4,5 @@ from tkinter import Tk
 # 设置菜单
 def openSettingFrame():
     root = Tk()
-    titleText = TextLoading.getTextData(TextLoading.systemId,'Setting')['TitleName']
+    titleText = TextLoading.getTextData(TextLoading.systemTextPath,'Setting')['TitleName']
     root.title(titleText)

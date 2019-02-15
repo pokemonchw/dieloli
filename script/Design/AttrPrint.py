@@ -6,11 +6,11 @@ def printHpAndMpBar(playerId):
     playerData = AttrHandle.getAttrData(playerId)
     playerHitPoint = playerData['HitPoint']
     playerMaxHitPoint = playerData['HitPointMax']
-    hitPointText = TextLoading.getTextData(TextLoading.stageWordId, '8')
+    hitPointText = TextLoading.getTextData(TextLoading.stageWordPath, '8')
     hitPointBar = ProportionalBar.getProportionalBar(hitPointText, playerMaxHitPoint, playerHitPoint, 'hpbar')
     playerManaPoint = playerData['ManaPoint']
     playerMaxManaPoint = playerData['ManaPointMax']
-    manaPointText = TextLoading.getTextData(TextLoading.stageWordId, '9')
+    manaPointText = TextLoading.getTextData(TextLoading.stageWordPath, '9')
     manaPointBar = ProportionalBar.getProportionalBar(manaPointText, playerMaxManaPoint, playerManaPoint, 'mpbar')
     hpmpBarList = [hitPointBar, manaPointBar]
     EraPrint.p('\n')
@@ -23,10 +23,10 @@ def getHpAndMpText(playerId):
     playerData = CacheContorl.playObject['object'][playerId]
     playerHitPoint = playerData['HitPoint']
     playerMaxHitPoint = playerData['HitPointMax']
-    hitPointText = TextLoading.getTextData(TextLoading.stageWordId, '8')
+    hitPointText = TextLoading.getTextData(TextLoading.stageWordPath, '8')
     hpText = hitPointText + '(' + str(playerHitPoint) + '/' + str(playerMaxHitPoint) + ')'
     playerManaPoint = playerData['ManaPoint']
     playerMaxManaPoint = playerData['ManaPointMax']
-    manaPointText = TextLoading.getTextData(TextLoading.stageWordId, '9')
+    manaPointText = TextLoading.getTextData(TextLoading.stageWordPath, '9')
     mpText = manaPointText + '(' + str(playerManaPoint) + '/' + str(playerMaxManaPoint) + ')'
     return hpText + ' ' + mpText

@@ -30,7 +30,7 @@ textbox.configure(yscrollcommand=s_vertical.set)
 s_vertical.grid(column=1, row=0, sticky=(N, E, S),rowspan=2)
 
 # 输入框背景容器
-orderFontData = TextLoading.getTextData(TextLoading.fontListId,'order')
+orderFontData = TextLoading.getTextData(TextLoading.fontConfigPath,'order')
 inputBackgroundBox = Text(mainframe,highlightbackground = GameConfig.background_color,background = GameConfig.background_color,bd = 0)
 inputBackgroundBox.grid(column=0, row=1, sticky=(W, E, S))
 
@@ -87,8 +87,8 @@ root['menu'] = menubar
 menufile = Menu(menubar)
 menutest = Menu(menubar)
 menuother = Menu(menubar)
-menubar.add_cascade(menu=menufile, label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuFile))
-menubar.add_cascade(menu=menuother, label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuOther))
+menubar.add_cascade(menu=menufile, label=TextLoading.getTextData(TextLoading.menuPath,TextLoading.menuFile))
+menubar.add_cascade(menu=menuother, label=TextLoading.getTextData(TextLoading.menuPath,TextLoading.menuOther))
 
 def reset(*args):
     CacheContorl.flowContorl['restartGame'] = 1
@@ -104,11 +104,11 @@ def setting(*args):
 def about(*args):
     AboutFrame.openAboutFrame()
 
-menufile.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuRestart),command=reset)
-menufile.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuQuit),command=quit)
+menufile.add_command(label=TextLoading.getTextData(TextLoading.menuPath,TextLoading.menuRestart),command=reset)
+menufile.add_command(label=TextLoading.getTextData(TextLoading.menuPath,TextLoading.menuQuit),command=quit)
 
-menuother.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuSetting),command=setting)
-menuother.add_command(label=TextLoading.getTextData(TextLoading.menuId,TextLoading.menuAbout),command=about)
+menuother.add_command(label=TextLoading.getTextData(TextLoading.menuPath,TextLoading.menuSetting),command=setting)
+menuother.add_command(label=TextLoading.getTextData(TextLoading.menuPath,TextLoading.menuAbout),command=about)
 
 input_event_func = None
 send_order_state = False

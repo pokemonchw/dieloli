@@ -2,7 +2,7 @@ from script.Core import GameConfig,CacheContorl,TextLoading,Dictionaries
 
 # 富文本计算
 def setRichTextPrint(textMessage,defaultStyle):
-    styleNameList = GameConfig.getFontDataList() + TextLoading.getTextData(TextLoading.barListId,'barlist')
+    styleNameList = GameConfig.getFontDataList() + TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
     styleIndex = 0
     styleLastIndex = None
     styleMaxIndex = None
@@ -53,7 +53,7 @@ def setRichTextPrint(textMessage,defaultStyle):
 def removeRichCache(string):
     string = str(string)
     string = Dictionaries.handleText(string)
-    barlist = TextLoading.getTextData(TextLoading.barListId, 'barlist')
+    barlist = TextLoading.getTextData(TextLoading.barConfigPath, 'barlist')
     styleNameList = GameConfig.getFontDataList() + barlist
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'

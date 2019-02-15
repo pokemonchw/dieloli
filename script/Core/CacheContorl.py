@@ -82,7 +82,7 @@ randomNpcList = []
 class CacheHandle():
     def getTemObjectDefault(self):
         from script.Design import MapHandle
-        temObject = TextLoading.getTextData(TextLoading.roleId, 'Default')
+        temObject = TextLoading.getTextData(TextLoading.rolePath, 'Default')
         temPositionDirList = temObject['Position']
         temPosition = MapHandle.getSceneIdForDirList(temPositionDirList)
         temObject['Position'] = temPosition

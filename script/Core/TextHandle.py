@@ -43,13 +43,13 @@ def getTextIndex(text):
     textStyleList = RichText.setRichTextPrint(text, 'standard')
     textIndex = 0
     stylewidth = 0
-    barlist = TextLoading.getTextData(TextLoading.barListId,'barlist')
-    styleNameList = GameConfig.getFontDataList() + TextLoading.getTextData(TextLoading.barListId,'barlist')
+    barlist = TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
+    styleNameList = GameConfig.getFontDataList() + TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'
         styleTextTail = '</' + styleNameList[i] + '>'
         if styleTextHead in text:
-            if styleNameList[i] in TextLoading.getTextData(TextLoading.barListId,'barlist'):
+            if styleNameList[i] in TextLoading.getTextData(TextLoading.barConfigPath,'barlist'):
                 text = text.replace(styleTextHead, '')
                 text = text.replace(styleTextTail, '')
             else:
@@ -60,7 +60,7 @@ def getTextIndex(text):
     count = len(text)
     for i in range(0,count):
         if textStyleList[i] in barlist:
-            textwidth = TextLoading.getTextData(TextLoading.barListId,textStyleList[i])['width']
+            textwidth = TextLoading.getTextData(TextLoading.barConfigPath,textStyleList[i])['width']
             textIndex = textIndex + int(textwidth)
         else:
             textIndex = textIndex + get_width(ord(text[i]))

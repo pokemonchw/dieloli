@@ -7,7 +7,7 @@ def playerMove(targetScene):
     targetSceneId = MapHandle.getSceneIdForPath(targetScene)
     moveNow = objectMove('0',targetSceneId)
     if moveNow == 'Null':
-        nullMessage = TextLoading.getTextData(TextLoading.messageId,'30')
+        nullMessage = TextLoading.getTextData(TextLoading.messagePath,'30')
         EraPrint.p(nullMessage)
         Update.gameUpdateFlow()
         InScene.getInScene_func()

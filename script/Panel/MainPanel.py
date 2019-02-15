@@ -1,5 +1,5 @@
 import time
-from script.Core import EraPrint,FlowHandle,TextLoading,TextHandle,GameConfig,PyCmd
+from script.Core import EraPrint,FlowHandle,TextLoading,TextHandle,GameConfig,PyCmd,GameData
 from script.Design import CmdButtonQueue
 
 # 载入游戏面板
@@ -7,7 +7,7 @@ def loadGamePanel():
     FlowHandle.initCache()
     EraPrint.pnextscreen()
     EraPrint.pnextscreen()
-    EraPrint.pobo(1 / 3, TextLoading.getTextData(TextLoading.messageId, '1'))
+    EraPrint.pobo(1 / 3, TextLoading.getTextData(TextLoading.messagePath, '1'))
     EraPrint.p('\n')
 
 # 游戏主面板
@@ -19,7 +19,7 @@ def gameMainPanel():
     EraPrint.pl(TextHandle.align(GameConfig.verson_time, 'right'))
     EraPrint.p('\n')
     EraPrint.pline()
-    EraPrint.lcp(1 / 3, TextLoading.getTextData(TextLoading.messageId, '2'))
+    EraPrint.lcp(1 / 3, TextLoading.getTextData(TextLoading.messagePath, '2'))
     time.sleep(1)
     EraPrint.p('\n')
     EraPrint.pline()

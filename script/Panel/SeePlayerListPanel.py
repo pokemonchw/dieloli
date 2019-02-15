@@ -3,7 +3,7 @@ from script.Design import CharacterHandle,CmdButtonQueue,AttrText
 
 # 查看角色列表面板
 def seePlayerListPanel(maxPage):
-    titleText = TextLoading.getTextData(TextLoading.stageWordId,'74')
+    titleText = TextLoading.getTextData(TextLoading.stageWordPath,'74')
     EraPrint.plt(titleText)
     inputS = []
     pageId = int(CacheContorl.panelState['SeePlayerListPanel'])

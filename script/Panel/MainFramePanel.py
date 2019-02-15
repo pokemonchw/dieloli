@@ -6,7 +6,7 @@ def mainFramePanel():
     cmdList = []
     playerId = CacheContorl.playObject['objectId']
     playerData = AttrHandle.getAttrData(playerId)
-    titleText = TextLoading.getTextData(TextLoading.stageWordId, '64')
+    titleText = TextLoading.getTextData(TextLoading.stageWordPath, '64')
     EraPrint.plt(titleText)
     dateText = GameTime.getDateText()
     EraPrint.p(dateText)
@@ -22,12 +22,12 @@ def mainFramePanel():
     EraPrint.p(goldText)
     EraPrint.p('\n')
     AttrPrint.printHpAndMpBar(playerId)
-    mainMenuText = TextLoading.getTextData(TextLoading.stageWordId,'68')
+    mainMenuText = TextLoading.getTextData(TextLoading.stageWordPath,'68')
     EraPrint.sontitleprint(mainMenuText)
     EraPrint.p('\n')
     askForMainMenu = CmdButtonQueue.optionint(CmdButtonQueue.mainmenu, 4, 'left', askfor=False, cmdSize='center')
     cmdList = cmdList + askForMainMenu
-    systemMenuText = TextLoading.getTextData(TextLoading.stageWordId,'69')
+    systemMenuText = TextLoading.getTextData(TextLoading.stageWordPath,'69')
     EraPrint.sontitleprint(systemMenuText)
     EraPrint.p('\n')
     systemMenuStartId = len(askForMainMenu)

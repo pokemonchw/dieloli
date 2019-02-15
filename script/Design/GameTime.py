@@ -15,24 +15,24 @@ def getDateText(gameTimeData = None):
         gameTimeData = CacheContorl.gameTime
     else:
         pass
-    dateText = TextLoading.getTextData(TextLoading.stageWordId,'65')
+    dateText = TextLoading.getTextData(TextLoading.stageWordPath,'65')
     gameYear = str(gameTimeData['year'])
     gameMonth = str(gameTimeData['month'])
     gameDay = str(gameTimeData['day'])
     gameHour = str(gameTimeData['hour'])
     gameMinute = str(gameTimeData['minute'])
-    gameYearText = gameYear + TextLoading.getTextData(TextLoading.stageWordId,'59')
-    gameMonthText = gameMonth + TextLoading.getTextData(TextLoading.stageWordId,'60')
-    gameDayText = gameDay + TextLoading.getTextData(TextLoading.stageWordId,'61')
-    gameHourText = gameHour + TextLoading.getTextData(TextLoading.stageWordId,'62')
-    gameMinuteText = gameMinute + TextLoading.getTextData(TextLoading.stageWordId,'63')
+    gameYearText = gameYear + TextLoading.getTextData(TextLoading.stageWordPath,'59')
+    gameMonthText = gameMonth + TextLoading.getTextData(TextLoading.stageWordPath,'60')
+    gameDayText = gameDay + TextLoading.getTextData(TextLoading.stageWordPath,'61')
+    gameHourText = gameHour + TextLoading.getTextData(TextLoading.stageWordPath,'62')
+    gameMinuteText = gameMinute + TextLoading.getTextData(TextLoading.stageWordPath,'63')
     dateText = dateText + gameYearText + gameMonthText + gameDayText + gameHourText + gameMinuteText
     return dateText
 
 # 获取星期文本
 def getWeekDayText():
     weekDay = getWeekDate()
-    weekDateData = TextLoading.getTextData(TextLoading.messageId,'19')
+    weekDateData = TextLoading.getTextData(TextLoading.messagePath,'19')
     return weekDateData[weekDay]
 
 # 时间增量

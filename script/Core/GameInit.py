@@ -15,8 +15,6 @@ def init(main_flow):
     IoInit.clear_screen()
     IoInit.clearorder()
     FlowHandle.cmd_clear()
-    # 载入数据库数据
-    GameData.init()
     # 事件载入
     Event.load_event_file()
     # 载入按键监听

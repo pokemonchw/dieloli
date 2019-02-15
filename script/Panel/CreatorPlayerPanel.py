@@ -7,7 +7,7 @@ def inputNamePanel():
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     AttrCalculation.setDefaultCache()
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '4'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '4'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1)
     EraPrint.p('\n')
     return yrn
@@ -15,13 +15,13 @@ def inputNamePanel():
 # 开始输入姓名
 def startInputNamePanel():
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '3'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '3'))
     inputState = 0
     while inputState == 0:
         playerName = GameInit.askfor_str()
         EraPrint.pl(playerName)
         if TextHandle.getTextIndex(playerName) > 10:
-            EraPrint.pl(TextLoading.getTextData(TextLoading.errorId, 'inputNameTooLongError'))
+            EraPrint.pl(TextLoading.getTextData(TextLoading.errorPath, 'inputNameTooLongError'))
         else:
             inputState = 1
             CacheContorl.temporaryObject['Name'] = playerName
@@ -31,7 +31,7 @@ def inputNickNamePanel():
     playerId = CacheContorl.playObject['objectId']
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '6'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '6'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputnickname, 1)
     EraPrint.p('\n')
     return yrn
@@ -39,13 +39,13 @@ def inputNickNamePanel():
 # 开始输入昵称面板
 def startInputNickNamePanel():
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '5'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '5'))
     inputState = 0
     while inputState == 0:
         playerNickName = GameInit.askfor_str()
         EraPrint.pl(playerNickName)
         if TextHandle.getTextIndex(playerNickName) > 10:
-            EraPrint.pl(TextLoading.getTextData(TextLoading.errorId, 'inputNickNameTooLongError'))
+            EraPrint.pl(TextLoading.getTextData(TextLoading.errorPath, 'inputNickNameTooLongError'))
         else:
             inputState = 1
             CacheContorl.temporaryObject['NickName'] = playerNickName
@@ -57,7 +57,7 @@ def inputSelfNamePanel():
     PyCmd.clr_cmd()
     CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '14'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '14'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputselfname, 1)
     EraPrint.p('\n')
     return yrn
@@ -65,13 +65,13 @@ def inputSelfNamePanel():
 # 开始输入自称
 def startInputSelfName():
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '15'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '15'))
     inputState = 0
     while inputState == 0:
         playerSelfName = GameInit.askfor_str()
         EraPrint.pl(playerSelfName)
         if TextHandle.getTextIndex(playerSelfName) > 10:
-            EraPrint.pl(TextLoading.getTextData(TextLoading.errorId, 'inputSelfNameTooLongError'))
+            EraPrint.pl(TextLoading.getTextData(TextLoading.errorPath, 'inputSelfNameTooLongError'))
         else:
             inputState = 1
             CacheContorl.temporaryObject['SelfName'] = playerSelfName
@@ -82,7 +82,7 @@ def inputSexPanel():
     playerId = CacheContorl.playObject['objectId']
     sexId = CacheContorl.playObject['object'][playerId]['Sex']
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '8')[sexId])
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '8')[sexId])
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1)
     EraPrint.p('\n')
     return yrn
@@ -90,7 +90,7 @@ def inputSexPanel():
 # 玩家确认性别界面
 def inputSexChoicePanel():
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '7'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '7'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.sexmenu, 1)
     EraPrint.p('\n')
     return yrn
@@ -101,7 +101,7 @@ def attributeGenerationBranchPanel():
     AttrCalculation.setAttrDefault(playerId)
     PyCmd.clr_cmd()
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '9'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '9'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1)
     return yrn
 
@@ -109,7 +109,7 @@ def attributeGenerationBranchPanel():
 def detailedSetting1Panel():
     EraPrint.p('\n')
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '10'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '10'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting1, 1)
     return yrn
 
@@ -117,7 +117,7 @@ def detailedSetting1Panel():
 def detailedSetting2Panel():
     EraPrint.p('\n')
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '11'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '11'))
     yrn = CmdButtonQueue.optionstr(CmdButtonQueue.detailedsetting2, 5, 'center', True)
     return yrn
 
@@ -125,7 +125,7 @@ def detailedSetting2Panel():
 def detailedSetting3Panel():
     EraPrint.p('\n')
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '12'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '12'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting3)
     return yrn
 
@@ -133,7 +133,7 @@ def detailedSetting3Panel():
 def detailedSetting4Panel():
     EraPrint.p('\n')
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '13'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '13'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting4)
     return yrn
 
@@ -141,7 +141,7 @@ def detailedSetting4Panel():
 def detailedSetting5Panel():
     EraPrint.p('\n')
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '16'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '16'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting5)
     return yrn
 
@@ -149,7 +149,7 @@ def detailedSetting5Panel():
 def detailedSetting6Panel():
     EraPrint.p('\n')
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '17'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '17'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting6)
     return yrn
 
@@ -157,7 +157,7 @@ def detailedSetting6Panel():
 def detailedSetting7Panel():
     EraPrint.p('\n')
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '18'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '18'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting7)
     return yrn
 
@@ -165,6 +165,6 @@ def detailedSetting7Panel():
 def detailedSetting8Panel():
     EraPrint.p('\n')
     EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messageId, '29'))
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '29'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting8)
     return yrn

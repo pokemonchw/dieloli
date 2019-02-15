@@ -36,18 +36,27 @@ def _loadjson(filepath):
     return jsondata
 
 # 载入路径下所有json文件
-def _loaddir(datapath):
-    for dirpath, dirnames, filenames in os.walk(datapath):
-        for name in filenames:
-            thefilepath = os.path.join(dirpath,name)
-            prefix = dirpath.replace(datapath, '').replace('\\', '.') + '.'
-            if prefix == '.':
-                prefix = ''
-            try:
-                if name.split('.')[1] == 'json':
-                    _gamedata[prefix + name.split('.')[0]] = _loadjson(thefilepath)
-            except IndexError:
-                pass
+def _loaddir(dataPath):
+    _gamedata.update(loadDirNow(dataPath))
+
+def loadDirNow(dataPath):
+    nowData = {}
+    if os.listdir(dataPath):
+        for i in os.listdir(dataPath):
+            nowPath = os.path.join(dataPath,i)
+            if os.path.isfile(nowPath):
+                nowFile = i.split('.')
+                if len(nowFile) > 1:
+                    if nowFile[1] == 'json':
+                        nowData[nowFile[0]] = _loadjson(nowPath)
+                elif nowFile[0] == 'Map':
+                    nowReadFile = open(nowPath,'r')
+                    nowData['MapDraw'] = nowReadFile.read()
+                    nowReadFile.close()
+            else:
+                nowData[i] = loadDirNow(nowPath)
+    return nowData
+
 
 # 获取路径下所有子路径列表
 def getPathList(pathData):

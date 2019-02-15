@@ -11,16 +11,16 @@ def golicense(event):
 # 设置菜单
 def openAboutFrame():
     root = Tk()
-    titleText = TextLoading.getTextData(TextLoading.systemId, 'About')['TitleName']
+    titleText = TextLoading.getTextData(TextLoading.systemTextPath, 'About')['TitleName']
     root.title(titleText)
     gameName = GameConfig.game_name
     name = Label(root, text=gameName)
     name.config(font=("Courier", 20))
     name.pack()
-    link = Label(root, text=TextLoading.getTextData(TextLoading.systemId, 'About')['GoHome'], fg="blue")
+    link = Label(root, text=TextLoading.getTextData(TextLoading.systemTextPath, 'About')['GoHome'], fg="blue")
     link.pack()
     link.bind("<Button-1>", gohome)
-    LICENSE = Label(root, text=TextLoading.getTextData(TextLoading.systemId, 'About')['Licenses'], fg="blue")
+    LICENSE = Label(root, text=TextLoading.getTextData(TextLoading.systemTextPath, 'About')['Licenses'], fg="blue")
     LICENSE.pack()
     LICENSE.bind("<Button-1>", golicense)
 

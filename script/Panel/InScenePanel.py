@@ -4,14 +4,14 @@ from script.Design import GameTime,CmdButtonQueue
 # 用于查看当前场景的面板
 def seeScenePanel():
     sceneData = CacheContorl.sceneData.copy()
-    titleText = TextLoading.getTextData(TextLoading.stageWordId,'75')
+    titleText = TextLoading.getTextData(TextLoading.stageWordPath,'75')
     EraPrint.plt(titleText)
     timeText = GameTime.getDateText()
     EraPrint.p(timeText)
     EraPrint.p(' ')
     sceneId = CacheContorl.playObject['object']['0']['Position']
     sceneName = sceneData['SceneData'][sceneId]['SceneName']
-    sceneInfoHead = TextLoading.getTextData(TextLoading.stageWordId, '76')
+    sceneInfoHead = TextLoading.getTextData(TextLoading.stageWordPath, '76')
     sceneInfo = sceneInfoHead + sceneName
     EraPrint.p(sceneInfo)
     EraPrint.plittleline()
@@ -20,7 +20,7 @@ def seeScenePanel():
 def seeScenePlayerListPanel():
     inputS = []
     sceneData = CacheContorl.sceneData.copy()
-    seePlayerText = TextLoading.getTextData(TextLoading.messageId,'26')
+    seePlayerText = TextLoading.getTextData(TextLoading.messagePath,'26')
     EraPrint.p(seePlayerText)
     EraPrint.p('\n')
     sceneId = CacheContorl.playObject['object']['0']['Position']
@@ -37,15 +37,15 @@ def seeScenePlayerListPanel():
 
 # 用于查看对象信息的面板
 def seeObjectInfoPanel():
-    objectInfo = TextLoading.getTextData(TextLoading.stageWordId, '77')
+    objectInfo = TextLoading.getTextData(TextLoading.stageWordPath, '77')
     EraPrint.p(objectInfo)
     objectId = CacheContorl.playObject['objectId']
     objectData = CacheContorl.playObject['object'][objectId]
     objectName = objectData['Name']
     EraPrint.p(objectName)
     EraPrint.p(' ')
-    intimateInfo = TextLoading.getTextData(TextLoading.stageWordId,'16')
-    gracesInfo = TextLoading.getTextData(TextLoading.stageWordId,'17')
+    intimateInfo = TextLoading.getTextData(TextLoading.stageWordPath,'16')
+    gracesInfo = TextLoading.getTextData(TextLoading.stageWordPath,'17')
     objectIntimate = objectData['Intimate']
     objectGraces = objectData['Graces']
     objectIntimateText = intimateInfo + objectIntimate

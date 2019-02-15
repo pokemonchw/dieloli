@@ -4,7 +4,7 @@ from script.Design import MapHandle,CmdButtonQueue
 # 用于绘制地图的面板
 def seeMapPanel():
     inputS = []
-    titleText = TextLoading.getTextData(TextLoading.stageWordId, '78')
+    titleText = TextLoading.getTextData(TextLoading.stageWordPath, '78')
     EraPrint.plt(titleText)
     mapId = CacheContorl.nowMapId
     inputS = inputS + MapHandle.printMap(mapId)
@@ -16,7 +16,7 @@ def seeMovePathPanel():
     sceneId = CacheContorl.playObject['object']['0']['Position']
     mapId = CacheContorl.nowMapId
     mapData = CacheContorl.mapData['MapData'][mapId]
-    movePathInfo = TextLoading.getTextData(TextLoading.messageId,'27')
+    movePathInfo = TextLoading.getTextData(TextLoading.messagePath,'27')
     EraPrint.p(movePathInfo)
     EraPrint.p('\n')
     pathEdge = mapData['PathEdge']
@@ -36,7 +36,7 @@ def seeMovePathPanel():
         yrn = CmdButtonQueue.optionstr(cmdList=None, cmdListData=sceneCmd, cmdColumn=4, askfor=False, cmdSize='center')
         inputS = inputS + yrn
     else:
-        errorMoveText = TextLoading.getTextData(TextLoading.messageId, '28')
+        errorMoveText = TextLoading.getTextData(TextLoading.messagePath, '28')
         EraPrint.p(errorMoveText)
     EraPrint.pline()
     return {'inputS':inputS,'scenePathList':scenePathList}
@@ -46,7 +46,7 @@ def backScenePanel(startId):
     seeMapCmd = []
     nowPosition = CacheContorl.playObject['object']['0']['Position']
     nowPositionMapId = MapHandle.getMapIdForScene(nowPosition)
-    cmdData = TextLoading.getTextData(TextLoading.cmdId,CmdButtonQueue.seemap)
+    cmdData = TextLoading.getTextData(TextLoading.cmdPath,CmdButtonQueue.seemap)
     seeMapCmd.append(cmdData[0])
     if str(nowPositionMapId) != '0' and str(CacheContorl.nowMapId) != '0':
         seeMapCmd.append(cmdData[1])
