@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
-from script.Core import GameData,FlowHandle,IoInit,Event,KeyListionEvent
-from script.Design import MapHandle
+from script.Core import GameData,FlowHandle,IoInit,Event,KeyListionEvent,GameConfig,CacheContorl
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'
@@ -24,11 +23,10 @@ def init(main_flow):
     # 初始化字体
     IoInit.init_style()
     # 初始化地图数据
-    MapHandle.initSceneData()
-    MapHandle.initMapData()
-
+    CacheContorl.mapData = GameData._gamedata[GameConfig.language]['map']
+    CacheContorl.sceneData = GameData.sceneData
+    CacheContorl.mapData = GameData.mapData
     FlowHandle.reset_func = reset
-
     global _main_flow
     _main_flow = main_flow
 

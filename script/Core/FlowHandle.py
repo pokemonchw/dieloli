@@ -195,7 +195,4 @@ def initCache():
 def getTemObjectDefault():
     script = __import__('script.Design.MapHandle')
     temObject = TextLoading.getTextData(TextLoading.rolePath, 'Default')
-    temPositionDirList = temObject['Position']
-    temPosition = script.Design.MapHandle.getSceneIdForDirList(temPositionDirList)
-    temObject['Position'] = temPosition
     return temObject

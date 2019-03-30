@@ -31,7 +31,7 @@ def acknowledgmentAttributeAns(inputList):
         CharacterHandle.initCharacterList()
         SeePlayerAttrPanel.initShowAttrPanelList()
         playerPosition = CacheContorl.playObject['object'][playerId]['Position']
-        MapHandle.playerMoveScene('0', playerPosition, playerId)
+        MapHandle.playerMoveScene(['0'], playerPosition, playerId)
         from script.Flow import Main
         Main.mainFrame_func()
     elif yrn == '1':

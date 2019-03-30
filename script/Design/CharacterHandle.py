@@ -1,4 +1,4 @@
-import os,random,datetime
+import os,random
 from concurrent.futures import thread
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText
@@ -106,16 +106,7 @@ def characterAgeFeatureHandle(ageTem,characterSex):
 # 初始化角色数据
 def initCharacterTem():
     npcData = getRandomNpcData()
-    time_1 = datetime.datetime.now()
-    npcData += [getDirCharacterTem(character) for character in characterList ]
-    '''
-    for i in characterList:
-        characterAttrTemPath = os.path.join(characterListPath,i,'AttrTemplate.json')
-        characterData = GameData._loadjson(characterAttrTemPath)
-        npcData.append(characterData)
-    '''
-    time_2 = datetime.datetime.now()
-    print(time_2 - time_1)
+    npcData += [getDirCharacterTem(character) for character in characterList]
     CacheContorl.npcTemData = npcData
 
 # 获取目录中的角色模板
@@ -214,7 +205,6 @@ def initPlayerPosition():
     characterPositionPool.shutdown()
 
 def initPlayerPositionNow(characterData,playerIdS):
-    characterInitPositionDirList = characterData['Position']
-    characterInitPosition = MapHandle.getSceneIdForDirList(characterInitPositionDirList)
+    characterInitPosition = characterData['Position']
     characterPosition = CacheContorl.playObject['object'][playerIdS]['Position']
     MapHandle.playerMoveScene(characterPosition, characterInitPosition, playerIdS)

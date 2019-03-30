@@ -39,6 +39,8 @@ def _loadjson(filepath):
 def _loaddir(dataPath):
     _gamedata.update(loadDirNow(dataPath))
 
+sceneData = {}
+mapData = {}
 def loadDirNow(dataPath):
     nowData = {}
     if os.listdir(dataPath):
@@ -48,15 +50,50 @@ def loadDirNow(dataPath):
                 nowFile = i.split('.')
                 if len(nowFile) > 1:
                     if nowFile[1] == 'json':
-                        nowData[nowFile[0]] = _loadjson(nowPath)
+                        if nowFile[0] == 'Scene':
+                            nowSceneData = {}
+                            mapSystemPath = getMapSystemPathForPath(nowPath)
+                            mapSystemPathStr = getMapSystemPathStr(mapSystemPath)
+                            nowSceneData.update(_loadjson(nowPath))
+                            nowSceneData['ScenePlayerData'] = []
+                            nowSceneData['ScenePath'] = mapSystemPath
+                            nowSceneData = {mapSystemPathStr:nowSceneData}
+                            sceneData.update(nowSceneData)
+                        elif nowFile[0] == 'Map':
+                            nowMapData = {}
+                            mapSystemPath = getMapSystemPathForPath(nowPath)
+                            mapSystemPathStr = getMapSystemPathStr(mapSystemPath)
+                            nowMapData.update(_loadjson(nowPath))
+                            nowMapData = {mapSystemPathStr:nowMapData}
+                            mapData.update(nowMapData)
+                        else:
+                            nowData[nowFile[0]] = _loadjson(nowPath)
                 elif nowFile[0] == 'Map':
                     nowReadFile = open(nowPath,'r')
-                    nowData['MapDraw'] = nowReadFile.read()
+                    nowMapData = {}
+                    nowMapData['MapDraw'] = nowReadFile.read()
                     nowReadFile.close()
+                    nowMapSystemPath = getMapSystemPathForPath(nowPath)
+                    nowMapData['MapPath'] = nowMapSystemPath
+                    nowMapSystemPathStr = getMapSystemPathStr(nowMapSystemPath)
+                    mapData[nowMapSystemPathStr].update(nowMapData)
             else:
                 nowData[i] = loadDirNow(nowPath)
     return nowData
 
+# 从路径获取地图系统路径
+def getMapSystemPathForPath(nowPath):
+    currentDir = os.path.dirname(os.path.abspath(nowPath))
+    currentDirStr = str(currentDir)
+    mapStartList = currentDirStr.split('map')
+    currentDirStr = mapStartList[1]
+    mapSystemPath = currentDirStr.split('/')
+    mapSystemPath = mapSystemPath[1:]
+    return mapSystemPath
+
+# 获取地图系统路径字符串
+def getMapSystemPathStr(nowPath):
+    return '/'.join(nowPath)
 
 # 获取路径下所有子路径列表
 def getPathList(pathData):

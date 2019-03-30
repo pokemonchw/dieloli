@@ -1,16 +1,17 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd
-from script.Design import GameTime,CmdButtonQueue
+from script.Design import GameTime,CmdButtonQueue,MapHandle
 
 # 用于查看当前场景的面板
 def seeScenePanel():
-    sceneData = CacheContorl.sceneData.copy()
     titleText = TextLoading.getTextData(TextLoading.stageWordPath,'75')
     EraPrint.plt(titleText)
     timeText = GameTime.getDateText()
     EraPrint.p(timeText)
     EraPrint.p(' ')
-    sceneId = CacheContorl.playObject['object']['0']['Position']
-    sceneName = sceneData['SceneData'][sceneId]['SceneName']
+    scenePath = CacheContorl.playObject['object']['0']['Position']
+    scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
+    sceneData = CacheContorl.sceneData[scenePathStr].copy()
+    sceneName = sceneData['SceneName']
     sceneInfoHead = TextLoading.getTextData(TextLoading.stageWordPath, '76')
     sceneInfo = sceneInfoHead + sceneName
     EraPrint.p(sceneInfo)
@@ -19,18 +20,14 @@ def seeScenePanel():
 # 用于查看当前场景上角色列表的面板
 def seeScenePlayerListPanel():
     inputS = []
-    sceneData = CacheContorl.sceneData.copy()
     seePlayerText = TextLoading.getTextData(TextLoading.messagePath,'26')
     EraPrint.p(seePlayerText)
     EraPrint.p('\n')
-    sceneId = CacheContorl.playObject['object']['0']['Position']
-    scenePlayerList = sceneData['ScenePlayerData'][sceneId]
-    nowScenePlayerList = scenePlayerList.copy()
-    nowScenePlayerList.remove('0')
-    for playerId in nowScenePlayerList:
-        playerName = CacheContorl.playObject['object'][str(playerId)]['Name']
-        PyCmd.pcmd(playerName, playerName, None)
-        inputS.append(playerName)
+    scenePath = CacheContorl.playObject['object']['0']['Position']
+    nameList = MapHandle.getScenePlayerNameList(scenePath,True)
+    for name in nameList:
+        PyCmd.pcmd(name, name, None)
+        inputS.append(name)
         EraPrint.p(' ')
     EraPrint.plittleline()
     return inputS

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import os,time
-from script.Core import PyCmd,CacheContorl,EraPrint
+from script.Core import PyCmd,CacheContorl,EraPrint,GameData
 from script.Flow import CreatorPlayer,SaveHandleFrame
 from script.Panel import MainPanel
 

@@ -17,40 +17,37 @@ def seeMapFlow():
     yrn = FlowHandle.askfor_All(inputS)
     backButton = str(startId1)
     nowPosition = CacheContorl.playObject['object']['0']['Position']
-    nowPositionMapId = MapHandle.getMapIdForScene(nowPosition)
+    nowPositionMap = MapHandle.getMapForPath(nowPosition)
     upMapButton = 'Null'
     downMapButton = 'Null'
-    if str(nowPositionMapId) != '0' and str(CacheContorl.nowMapId) != '0':
+    if nowPositionMap != [] and CacheContorl.nowMap != []:
         upMapButton = str(int(startId1) + 1)
-    if str(nowPositionMapId) != str(CacheContorl.nowMapId):
+    if nowPositionMap != CacheContorl.nowMap:
         if upMapButton == 'Null':
             downMapButton = str(int(startId1) + 1)
         else:
             downMapButton = str(int(startId1) + 2)
-    mapId = CacheContorl.nowMapId
+    nowMap = CacheContorl.nowMap
     if yrn in mapCmd:
-        nowTargetPath = MapHandle.getScenePathForMapSceneId(mapId,yrn)
+        nowTargetPath = MapHandle.getScenePathForMapSceneId(nowMap,yrn)
         ObjectMove.playerMove(nowTargetPath)
     elif yrn == backButton:
-        CacheContorl.nowMapId = '0'
+        CacheContorl.nowMap = []
         import script.Flow.InScene as inscene
         inscene.getInScene_func()
     elif yrn in movePathCmd:
         moveListId = movePathCmd.index(yrn)
         moveId = movePathList[moveListId]
-        nowTargetPath = MapHandle.getScenePathForMapSceneId(mapId,moveId)
+        nowTargetPath = MapHandle.getScenePathForMapSceneId(nowMap,moveId)
         ObjectMove.playerMove(nowTargetPath)
     elif upMapButton != 'Null' and yrn == upMapButton:
-        nowMapPath = MapHandle.getPathForMapId(CacheContorl.nowMapId)
-        upMapId = MapHandle.getMapIdForScenePath(nowMapPath)
-        CacheContorl.nowMapId = upMapId
+        upMapPath = MapHandle.getMapForPath(nowMap)
+        CacheContorl.nowMap = upMapPath
         seeMapFlow()
     elif downMapButton != 'Null' and yrn == downMapButton:
         playerPosition = CacheContorl.playObject['object']['0']['Position']
-        downMapSceneId = MapHandle.getMapSceneIdForSceneId(CacheContorl.nowMapId,playerPosition)
-        nowMapPath = MapHandle.getPathForMapId(CacheContorl.nowMapId)
-        downMapPath = os.path.join(nowMapPath,downMapSceneId)
-        downMapId = MapHandle.getMapIdForPath(downMapPath)
-        CacheContorl.nowMapId = downMapId
+        downMapSceneId = MapHandle.getMapSceneIdForScenePath(CacheContorl.nowMap,playerPosition)
+        downMapPath = nowMap + downMapSceneId
+        CacheContorl.nowMap = downMapPath
         seeMapFlow()
 

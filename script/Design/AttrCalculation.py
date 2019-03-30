@@ -338,7 +338,6 @@ def setAttrDefault(playerId):
 # 初始化角色属性模板
 def initTemporaryObject():
     CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
-    pass
 
 # 确认角色最终属性生成
 def setAttrOver(playerId):

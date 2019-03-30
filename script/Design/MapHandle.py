@@ -1,21 +1,16 @@
-import os
-from script.Core import GameConfig,RichText,GameData,EraPrint,PyCmd,CacheContorl,TextHandle,ValueHandle,GamePathConfig
-
-language = GameConfig.language
-gamepath = GamePathConfig.gamepath
-mapDataDir = os.path.join(gamepath, 'data',language, 'map')
+from script.Core import GameConfig,RichText,GameData,EraPrint,PyCmd,CacheContorl,TextHandle,ValueHandle,GamePathConfig,TextHandle
+import os,dpath,datetime
 
 # 输出地图
-def printMap(mapId):
-    mapText = CacheContorl.mapData['MapTextData'][mapId]
-    playerNowSceneId = CacheContorl.playObject['object']['0']['Position']
-    playerNowSceneId = getMapSceneIdForSceneId(mapId,playerNowSceneId)
-    playerNowSceneId = str(playerNowSceneId)
-    sceneList = getSceneListForMap(mapId)
+def printMap(mapPath):
+    mapDraw = getMapDrawForMapPath(mapPath)
+    playerPosition = CacheContorl.playObject['object']['0']['Position']
+    playerNowSceneId = getSceneIdInMapForScenePathOnMapPath(playerPosition,mapPath)
+    sceneList = getSceneListForMap(mapPath)
     inputS = []
     inputCmd = ''
     passList = []
-    mapYList = mapText.split('\n')
+    mapYList = mapDraw.split('\n')
     mapXListStyleList = []
     newMapYList = []
     for mapXList in mapYList:
@@ -54,73 +49,66 @@ def printMap(mapId):
         EraPrint.p('\n')
     return inputS
 
-# 获取场景所在地图
-def getMapForScene(sceneId):
-    sceneId = int(sceneId)
-    scenePath = CacheContorl.sceneData['ScenePathData'][sceneId]
-    mapPath = getMapForPath(scenePath)
-    return mapPath
+# 从地图路径获取地图图形
+def getMapDrawForMapPath(mapPath):
+    mapData = getMapDataForMapPath(mapPath)
+    return mapData['MapDraw']
+
+# 获取场景在地图上的位置
+def getSceneIdInMapForScenePathOnMapPath(scenePath,mapPath):
+    return scenePath[len(mapPath)]
 
 # 查找场景所在地图
 def getMapForPath(scenePath):
-    mapPath = os.path.abspath(os.path.join(scenePath, '..'))
-    if 'Map' in os.listdir(mapPath):
-        pass
-    else:
-        mapPath = getMapForPath(mapPath)
-    return mapPath
+    mapPath = scenePath[:-1]
+    mapPathStr = getMapSystemPathStrForList(mapPath)
+    if mapPathStr in CacheContorl.mapData:
+        return mapPath
+    return getMapForPath(mapPath)
 
-# 查找场景所在地图ID
-def getMapIdForScene(sceneId):
-    mapPath = getMapForScene(sceneId)
-    mapData = CacheContorl.mapData['MapPathData']
-    mapId = mapData.index(mapPath)
-    return mapId
-
-# 从场景路径获取所在地图ID
-def getMapIdForScenePath(scenePath):
-    mapPath = getMapForPath(scenePath)
-    mapData = CacheContorl.mapData['MapPathData']
-    mapId = mapData.index(mapPath)
-    return mapId
+# 从地图路径获取地图数据
+def getMapDataForMapPath(mapPath):
+    mapData = CacheContorl.mapData.copy()
+    if isinstance(mapPath,list):
+        mapPath = getMapSystemPathStrForList(mapPath)
+    mapData = mapData[mapPath]
+    return mapData
 
 # 获取地图下所有场景
-def getSceneListForMap(mapId):
-    mapId = int(mapId)
-    mapPath = CacheContorl.mapData['MapPathData'][mapId]
-    sceneList = GameData.getPathList(mapPath)
+def getSceneListForMap(mapPath):
+    mapData = getMapDataForMapPath(mapPath)
+    sceneList = list(mapData['PathEdge'].keys())
     return sceneList
 
-# 从场景ID获取场景路径
-def getScenePathForSceneId(sceneId):
-    sceneId = int(sceneId)
-    sceneData = CacheContorl.sceneData['ScenePathData']
-    scenePath = sceneData[sceneId]
-    return scenePath
-
 # 场景移动
-def playerMoveScene(oldSceneId,newSceneId,characterId):
-    scenePlayerData = CacheContorl.sceneData['ScenePlayerData']
-    characterId = str(characterId)
-    oldSceneId = int(oldSceneId)
-    newSceneId = int(newSceneId)
-    if characterId in scenePlayerData[oldSceneId]:
-        scenePlayerData[oldSceneId].remove(characterId)
-    if characterId in scenePlayerData[newSceneId]:
+def playerMoveScene(oldScenePath,newScenePath,characterId):
+    oldScenePathStr = getMapSystemPathStrForList(oldScenePath)
+    newScenePathStr = getMapSystemPathStrForList(newScenePath)
+    oldScenePlayerData = CacheContorl.sceneData[oldScenePathStr]["ScenePlayerData"]
+    newScenePlayerData = CacheContorl.sceneData[newScenePathStr]["ScenePlayerData"]
+    if characterId in oldScenePlayerData:
+        oldScenePlayerData.remove(characterId)
+        CacheContorl.sceneData[oldScenePathStr]["ScenePlayerData"] = oldScenePlayerData
+    if characterId in newScenePlayerData:
         pass
     else:
-        CacheContorl.playObject['object'][characterId]['Position'] = newSceneId
-        scenePlayerData[newSceneId].append(characterId)
-    CacheContorl.sceneData['ScenePlayerData'] = scenePlayerData
+        CacheContorl.playObject['object'][characterId]['Position'] = newScenePath
+        newScenePlayerData.append(characterId)
+        CacheContorl.sceneData[newScenePathStr]["ScenePlayerData"] = newScenePlayerData
+
+def getMapSystemPathStrForList(nowList):
+    if isinstance(nowList,list):
+        return '/'.join(nowList)
+    return nowList
 
 # 计算寻路路径
-def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = []):
+def getPathfinding(mapPath,nowNode,targetNode,pathNodeList = [],pathTimeList = []):
     pathList = CacheContorl.pathList
     timeList = CacheContorl.pathTimeList
-    mapId = int(mapId)
+    mapPathStr = getMapSystemPathStrForList(mapPath)
     nowNode = str(nowNode)
     targetNode = str(targetNode)
-    mapData = CacheContorl.mapData['MapData'][mapId].copy()
+    mapData = CacheContorl.mapData[mapPathStr].copy()
     pathEdge = mapData['PathEdge'].copy()
     targetListDict = pathEdge[nowNode].copy()
     targetList = ValueHandle.dictKeysToList(targetListDict)
@@ -153,7 +141,7 @@ def getPathfinding(mapId,nowNode,targetNode,pathNodeList = [],pathTimeList = [])
                         targetNodeInTarget = targetNodeInTargetToList[i]
                         findPath.append(targetNodeInTarget)
                         findTime.append(targetNodeInTargetList[targetNodeInTarget])
-                        pathData = getPathfinding(mapId,targetNodeInTarget,targetNode,findPath,findTime)
+                        pathData = getPathfinding(mapPath,targetNodeInTarget,targetNode,findPath,findTime)
                         if pathData == 'Null':
                             pass
                         elif pathData == 'End':
@@ -173,9 +161,8 @@ def getMinimumPath(pathList,timeList):
         for i in range(0,len(timeList)):
             needTimeList.append(getNeedTime(timeList[i]))
         pathId = needTimeList.index(min(needTimeList))
-        return {'Path': pathList[pathId], 'Time': timeList[pathId]}
-    else:
-        return 'Null'
+        return {"Path":pathList[pathId],"Time":timeList[pathId]}
+    return 'Null'
 
 # 获取路径所需时间
 def getNeedTime(timeGroup):
@@ -200,18 +187,14 @@ def getSceneToSceneMapList(nowScenePath,targetScenePath):
 
 # 查找节点共同所属地图
 def getCommonMapForScenePath(sceneAPath,sceneBPath):
-    sceneAPathHierarchyList = getMapHierarchyListForScenePath(sceneAPath,mapDataDir)
-    sceneAPathHierarchyList = ValueHandle.reverseArrayList(sceneAPathHierarchyList)
-    sceneBPathHierarchyList = getMapHierarchyListForScenePath(sceneBPath,mapDataDir)
-    sceneBPathHierarchyList = ValueHandle.reverseArrayList(sceneBPathHierarchyList)
-    hierarchy = mapDataDir
-    try:
-        for i in range(0,len(sceneAPathHierarchyList)):
-            if sceneAPathHierarchyList[i] == sceneBPathHierarchyList[i]:
-                hierarchy = sceneAPathHierarchyList[i]
-    except IndexError:
-        pass
-    return hierarchy
+    hierarchy = []
+    if sceneAPath[-1] == [] or sceneBPath[-1] == []:
+        return hierarchy
+    else:
+        for i in range(0,len(sceneAPath)):
+            if sceneAPath[i] == sceneBPath[i]:
+                hierarchy.append(sceneAPath[i])
+        return getMapPathForTrue(hierarchy)
 
 # 获取节点所属层级列表
 def getMapHierarchyListForScenePath(nowScenePath,targetScenePath):
@@ -219,13 +202,22 @@ def getMapHierarchyListForScenePath(nowScenePath,targetScenePath):
     nowPath = None
     while(True):
         if nowPath == None:
-            nowPath = os.path.abspath(os.path.join(nowScenePath,'..'))
+            nowPath = nowScenePath[-1]
         if nowPath != targetScenePath:
             hierarchyList.append(nowPath)
-            nowPath = os.path.abspath(os.path.join(nowPath,'..'))
+            nowPath = nowPath[-1]
         else:
             break
     return hierarchyList
+
+# 获取有效地图路径
+def getMapPathForTrue(mapPath):
+    mapPathStr = getMapSystemPathStrForList(mapPath)
+    if mapPathStr in CacheContorl.mapData:
+        return mapPath
+    else:
+        newMapPath = mapPath[:-1]
+        return getMapPathForTrue(newMapPath)
 
 # 判断场景有无所属关系
 def judgeSceneIsAffiliation(nowScenePath,targetScenePath):
@@ -233,35 +225,27 @@ def judgeSceneIsAffiliation(nowScenePath,targetScenePath):
         return '0'
     elif judgeSceneAffiliation(targetScenePath,nowScenePath) == '1':
         return '1'
-    else:
-        return '2'
+    return '2'
 
 # 判断场景所属关系
 def judgeSceneAffiliation(nowScenePath,targetScenePath):
-    nowScenePathFile = os.path.join(nowScenePath)
-    targetScenePathFile = os.path.join(targetScenePath)
-    # 判断nowScene是否和targetScene在同一层级
-    if os.path.abspath(os.path.join(nowScenePathFile,'..')) != os.path.abspath(os.path.join(targetScenePathFile,'..')):
-        # 判断nowScene是否是targetScene的下属节点
-        if os.path.abspath(os.path.join(nowScenePathFile,'..')) != targetScenePathFile:
-            # 如果上级节点不是公共节点则递归
-            if os.path.abspath(os.path.join(nowScenePathFile,'..')) != mapDataDir:
-                return judgeSceneAffiliation(os.path.abspath(os.path.join(nowScenePath,'..')),targetScenePathFile)
+    if nowScenePath[:-1] != targetScenePath[:-1]:
+        if nowScenePath[:-1] != targetScenePath:
+            if nowScenePath[:-1] != []:
+                return judgeSceneAffiliation(nowScenePath[:-1],targetScenePath)
             else:
                 return '2'
         else:
             return '1'
-    else:
-        return '0'
+    return '0'
 
 # 获取场景所在所有直接地图位置
 def getRelationMapListForScenePath(scenePath):
     nowPath = scenePath
-    nowMapPath = getMapPathForScenePath(nowPath)
-    nowMapId = getMapIdForPath(nowMapPath)
+    nowMapPath = scenePath[:-1]
+    nowPathId = nowPath[-1]
     mapList = []
-    if os.path.abspath(os.path.join(nowMapPath,'..')) != mapDataDir:
-        nowPathId = getMapSceneIdForScenePath(nowMapId,scenePath)
+    if nowMapPath != [] and nowMapPath[:-1] != []:
         mapList.append(nowMapPath)
         if nowPathId == '0':
             return mapList + getRelationMapListForScenePath(nowMapPath)
@@ -272,202 +256,72 @@ def getRelationMapListForScenePath(scenePath):
         return mapList
 
 # 载入地图下对应场景数据
-def getSceneDataForMap(mapId,mapSceneId):
-    mapId = int(mapId)
-    mapSceneId = str(mapSceneId)
-    mapPath = CacheContorl.mapData['MapPathData'][mapId]
-    scenePath = os.path.join(mapPath,mapSceneId)
-    sceneData = getSceneDataForPath(scenePath)
-    return sceneData
-
-# 获取全局场景id对应的地图场景id
-def getMapSceneIdForSceneId(mapId,sceneId):
-    sceneId = int(sceneId)
-    scenePath = getScenePathForSceneId(sceneId)
-    mapId = int(mapId)
-    sceneInPath = getMapScenePathForScenePath(mapId,scenePath)
-    mapPath = getPathForMapId(mapId)
-    mapSceneId = judgeSonMapInMap(mapPath, sceneInPath)
-    return mapSceneId
-
-# 获取从场景路径获取对应地图下路径
-def getMapScenePathForScenePath(mapId,scenePath):
-    mapPath = CacheContorl.mapData['MapPathData'][mapId]
-    sceneInPath = os.path.abspath(os.path.join(scenePath, '..'))
-    if mapPath == sceneInPath:
-        nowPath = scenePath
+def getSceneDataForMap(mapPath,mapSceneId):
+    mapPathStr = getMapSystemPathStrForList(mapPath)
+    if mapPathStr == '':
+        scenePathStr = str(mapSceneId)
     else:
-        nowPath = getMapScenePathForScenePath(mapId,sceneInPath)
-    return nowPath
-
-# 获取地图场景id对应的全局场景id
-def getSceneIdForMapSceneId(mapId,mapSceneId):
-    scenePath = getScenePathForMapSceneId(mapId,mapSceneId)
-    sceneId = getSceneIdForPath(scenePath)
-    return sceneId
-
-# 从场景路径获取所在地图路径
-def getMapPathForScenePath(scenePath):
-    mapId = getMapIdForScenePath(scenePath)
-    mapPath = CacheContorl.mapData['MapPathData'][mapId]
-    return mapPath
-
-# 判断地图在指定地图中的位置
-def judgeSonMapInMap(mapPath,sonMapPath):
-    mapDirList = os.listdir(mapPath)
-    mapPathList = []
-    for i in mapDirList:
-        loadPath = os.path.join(mapPath,i)
-        if os.path.isfile(loadPath):
-            pass
-        else:
-            mapPathList.append(loadPath)
-    if sonMapPath in mapPathList:
-        for i in mapDirList:
-            if os.path.join(mapPath,i) == sonMapPath:
-                return i
-    else:
-        loadSonMapPath = os.path.abspath(os.path.join(sonMapPath, '..'))
-        sonMapId = judgeSonMapInMap(mapPath,loadSonMapPath)
-        return sonMapId
+        scenePathStr = mapPathStr + '/' + str(mapSceneId)
+    scenePath = getScenePathForTrue(scenePathStr)
+    scenePathStr = getMapSystemPathStrForList(scenePath)
+    return CacheContorl.sceneData[scenePathStr]
 
 # 从对应地图场景id查找场景路径
-def getScenePathForMapSceneId(mapId,mapSceneId):
-    mapId = int(mapId)
-    mapSceneId = str(mapSceneId)
-    mapPath = CacheContorl.mapData['MapPathData'][mapId]
-    scenePath = os.path.join(mapPath,mapSceneId)
-    scenePath = getScenePathForTrue(scenePath)
-    return scenePath
+def getScenePathForMapSceneId(mapPath,mapSceneId):
+    newScenePath = mapPath.copy()
+    newScenePath.append(mapSceneId)
+    newScenePath = getScenePathForTrue(newScenePath)
+    return newScenePath
 
 # 从场景路径查找地图场景id
-def getMapSceneIdForScenePath(mapId,scenePath):
-    mapId = int(mapId)
-    mapPath = CacheContorl.mapData['MapPathData'][mapId]
-    sceneId = judgeSonMapInMap(mapPath,scenePath)
-    return sceneId
+def getMapSceneIdForScenePath(mapPath,scenePath):
+    return scenePath[len(mapPath)]
 
 # 获取有效场景路径
 def getScenePathForTrue(scenePath):
-    if 'Scene.json' in os.listdir(scenePath):
-        pass
+    scenePathStr = getMapSystemPathStrForList(scenePath)
+    if scenePathStr in CacheContorl.sceneData:
+        return scenePath
     else:
-        scenePath = os.path.join(scenePath,'0')
-        scenePath = getScenePathForTrue(scenePath)
-    return scenePath
-
-# 从对应路径查找场景数据
-def getSceneDataForPath(scenePath):
-    if 'Scene.json' in os.listdir(scenePath):
-        scenePath = os.path.join(scenePath,'Scene.json')
-        sceneData = GameData._loadjson(scenePath)
-    else:
-        scenePath = os.path.join(scenePath,'0')
-        sceneData = getSceneDataForPath(scenePath)
-    return sceneData
-
-# 载入所有场景数据
-def initSceneData():
-    sceneData = []
-    scenePathData = []
-    scenePlayerData = []
-    for dirpath, dirnames, filenames in os.walk(mapDataDir):
-        for i in range(0,len(filenames)):
-            filename = filenames[i]
-            if filename == 'Scene.json':
-                scenePath = os.path.join(dirpath,filename)
-                scene = GameData._loadjson(scenePath)
-                sceneData.append(scene)
-                scenePathData.append(dirpath)
-                scenePlayerData.append([])
-    CacheContorl.sceneData = {"SceneData":sceneData,"ScenePathData":scenePathData,"ScenePlayerData":scenePlayerData}
-
-# 载入所有地图数据
-def initMapData():
-    mapData = []
-    mapPathData = []
-    mapTextData = []
-    for dirpath, dirnames, filenames in os.walk(mapDataDir):
-        for filename in filenames:
-            if filename == 'Map':
-                mapPath = os.path.join(dirpath,'Map')
-                mapDataPath = os.path.join(dirpath,'Map.json')
-                openMap = open(mapPath)
-                mapText = openMap.read()
-                mapJsonData = GameData._loadjson(mapDataPath)
-                mapData.append(mapJsonData)
-                mapTextData.append(mapText)
-                mapPathData.append(dirpath)
-    CacheContorl.mapData = {"MapData":mapData,"MapPathData":mapPathData,"MapTextData":mapTextData}
-
-# 初始化场景上的角色
-def initScanePlayerData():
-    scenePlayerData = CacheContorl.sceneData['ScenePlayerData']
-    for i in range(0,len(scenePlayerData)):
-        scenePlayerData[i] = []
-    CacheContorl.sceneData['ScenePlayerData'] = scenePlayerData
-
-# 获取场景上所有角色的数据
-def getScenePlayerData(sceneId):
-    playerData = CacheContorl.playObject['object']
-    scenePlayerData = []
-    scenePlayerDataList = CacheContorl.sceneData['ScenePlayerData'][sceneId]
-    for i in scenePlayerDataList:
-        scenePlayerData.append(playerData[i])
-    return scenePlayerData
+        if isinstance(scenePath,str):
+            scenePath = scenePath.split('/')
+        scenePath.append('0')
+        return getScenePathForTrue(scenePath)
 
 # 获取场景上所有角色的姓名列表
-def getScenePlayerNameList(sceneId):
-    scenePlayerData = getScenePlayerData(sceneId)
-    scenePlayerNameList = []
-    for i in scenePlayerData:
-        scenePlayerNameList.append(i['Name'])
-    return scenePlayerNameList
+def getScenePlayerNameList(scenePath,removePlayer = False):
+    scenePathStr = getMapSystemPathStrForList(scenePath)
+    scenePlayerData = CacheContorl.sceneData[scenePathStr]['ScenePlayerData']
+    nowScenePlayerList = scenePlayerData.copy()
+    nameList = []
+    if removePlayer:
+        nowScenePlayerList.remove('0')
+    for playerId in nowScenePlayerList:
+        playerName = CacheContorl.playObject['object'][str(playerId)]['Name']
+        nameList.append(playerName)
+    return nameList
 
 # 获取场景上角色姓名对应角色id
-def getPlayerIdByPlayerName(playerName,sceneId):
-    playerNameList = getScenePlayerNameList(sceneId)
+def getPlayerIdByPlayerName(playerName,scenePath):
+    playerNameList = getScenePlayerNameList(scenePath)
     playerNameIndex = playerNameList.index(playerName)
-    playerIdList = getScenePlayerIdList(sceneId)
-    playerId = playerIdList[playerNameIndex]
-    return playerId
+    playerIdList = getScenePlayerIdList(scenePath)
+    return playerIdList[playerNameIndex]
 
 # 获取场景上所有角色的id列表
-def getScenePlayerIdList(sceneId):
-    scenePlayerDataList = CacheContorl.sceneData['ScenePlayerData'][sceneId]
-    scenePlayerIdList = []
-    for i in scenePlayerDataList:
-        scenePlayerIdList.append(i)
-    return scenePlayerIdList
+def getScenePlayerIdList(scenePath):
+    scenePathStr = getMapSystemPathStrForList(scenePath)
+    scenePlayerData = CacheContorl.sceneData[scenePathStr]['ScenePlayerData']
+    return scenePlayerData
 
 # 从路径获取取场景ID
 def getSceneIdForPath(path):
-    sceneData = CacheContorl.sceneData.copy()
-    scenePathData = sceneData['ScenePathData']
-    sceneId = scenePathData.index(path)
     return sceneId
 
 # 从路径获取地图ID
 def getMapIdForPath(path):
-    mapData = CacheContorl.mapData.copy()
-    mapPathData = mapData['MapPathData']
-    mapId = mapPathData.index(path)
     return mapId
 
 # 从地图ID获取地图路径
 def getPathForMapId(mapId):
-    mapData = CacheContorl.mapData.copy()
-    mapPathData = mapData['MapPathData']
     return mapPathData[int(mapId)]
-
-# 从目录列表获取场景ID
-def getSceneIdForDirList(dirList):
-    scenePath = os.path.join(mapDataDir)
-    try:
-        for i in dirList:
-            scenePath = os.path.join(scenePath,i)
-    except TypeError:
-        dirList = str(dirList)
-        scenePath = os.path.join(scenePath,dirList)
-    sceneId = getSceneIdForPath(scenePath)
-    return sceneId

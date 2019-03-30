@@ -67,23 +67,15 @@ maxSavePage = 0
 
 textWait = 0
 
+mapData = {}
 sceneData = {}
 
-mapData = {}
+scenePlayerData = {}
 
 pathList = []
 
 pathTimeList = []
 
-nowMapId = 0
+nowMap = []
 
 randomNpcList = []
-
-class CacheHandle():
-    def getTemObjectDefault(self):
-        from script.Design import MapHandle
-        temObject = TextLoading.getTextData(TextLoading.rolePath, 'Default')
-        temPositionDirList = temObject['Position']
-        temPosition = MapHandle.getSceneIdForDirList(temPositionDirList)
-        temObject['Position'] = temPosition
-        return temObject
