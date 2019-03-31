@@ -31,8 +31,8 @@ def establishSave(saveId):
     gameTime = CacheContorl.gameTime
     gameVerson = GameConfig.verson
     scaneData = CacheContorl.sceneData
-    MapHandle.initScanePlayerData()
-    data = {"playerData":playerData,"gameTime":gameTime,"gameVerson":gameVerson,"sceneData":scaneData}
+    mapData = CacheContorl.mapData
+    data = {"playerData":playerData,"gameTime":gameTime,"gameVerson":gameVerson,"sceneData":scaneData,"mapData":mapData}
     filepath = getSavefilePath(saveId)
     with open(filepath, 'wb') as f:
         pickle.dump(data,f)
@@ -55,8 +55,8 @@ def inputLoadSave(saveId):
     CacheContorl.playObject['objectId'] = '0'
     CacheContorl.gameTime = saveData['gameTime']
     CacheContorl.sceneData = saveData['sceneData']
+    CacheContorl.mapData = saveData['mapData']
     CharacterHandle.initPlayerPosition()
-    pass
 
 # 获取存档页对应存档id
 def getSavePageSaveId(pageSaveValue,inputId):

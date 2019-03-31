@@ -47,7 +47,7 @@ def seeMapFlow():
     elif downMapButton != 'Null' and yrn == downMapButton:
         playerPosition = CacheContorl.playObject['object']['0']['Position']
         downMapSceneId = MapHandle.getMapSceneIdForScenePath(CacheContorl.nowMap,playerPosition)
-        downMapPath = nowMap + downMapSceneId
+        downMapPath = nowMap.append(downMapSceneId)
         CacheContorl.nowMap = downMapPath
         seeMapFlow()
 

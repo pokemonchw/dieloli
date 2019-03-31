@@ -313,15 +313,3 @@ def getScenePlayerIdList(scenePath):
     scenePathStr = getMapSystemPathStrForList(scenePath)
     scenePlayerData = CacheContorl.sceneData[scenePathStr]['ScenePlayerData']
     return scenePlayerData
-
-# 从路径获取取场景ID
-def getSceneIdForPath(path):
-    return sceneId
-
-# 从路径获取地图ID
-def getMapIdForPath(path):
-    return mapId
-
-# 从地图ID获取地图路径
-def getPathForMapId(mapId):
-    return mapPathData[int(mapId)]
