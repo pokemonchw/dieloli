@@ -4,8 +4,8 @@ from script.Design import AttrHandle,AttrText,AttrPrint,GameTime,CmdButtonQueue
 # 游戏主页流程
 def mainFramePanel():
     cmdList = []
-    playerId = CacheContorl.playObject['objectId']
-    playerData = AttrHandle.getAttrData(playerId)
+    characterId = CacheContorl.characterData['characterId']
+    characterData = AttrHandle.getAttrData(characterId)
     titleText = TextLoading.getTextData(TextLoading.stageWordPath, '64')
     EraPrint.plt(titleText)
     dateText = GameTime.getDateText()
@@ -14,14 +14,14 @@ def mainFramePanel():
     weekDateText = GameTime.getWeekDayText()
     EraPrint.p(weekDateText)
     EraPrint.p(' ')
-    playerName = playerData['Name']
-    PyCmd.pcmd(playerName,playerName,None)
-    cmdList.append(playerName)
+    characterName = characterData['Name']
+    PyCmd.pcmd(characterName,characterName,None)
+    cmdList.append(characterName)
     EraPrint.p(' ')
-    goldText = AttrText.getGoldText(playerId)
+    goldText = AttrText.getGoldText(characterId)
     EraPrint.p(goldText)
     EraPrint.p('\n')
-    AttrPrint.printHpAndMpBar(playerId)
+    AttrPrint.printHpAndMpBar(characterId)
     mainMenuText = TextLoading.getTextData(TextLoading.stageWordPath,'68')
     EraPrint.sontitleprint(mainMenuText)
     EraPrint.p('\n')

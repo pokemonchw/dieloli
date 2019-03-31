@@ -27,12 +27,14 @@ def judgeSaveFileExist(saveId):
 
 # 存入存档数据
 def establishSave(saveId):
-    playerData = CacheContorl.playObject
+    characterData = CacheContorl.characterData
     gameTime = CacheContorl.gameTime
     gameVerson = GameConfig.verson
     scaneData = CacheContorl.sceneData
     mapData = CacheContorl.mapData
-    data = {"playerData":playerData,"gameTime":gameTime,"gameVerson":gameVerson,"sceneData":scaneData,"mapData":mapData}
+    npcTemData = CacheContorl.npcTemData
+    randomNpcList = CacheContorl.randomNpcList
+    data = {"characterData":characterData,"gameTime":gameTime,"gameVerson":gameVerson,"sceneData":scaneData,"mapData":mapData,"npcTemData":npcTemData,"randomNpcList":randomNpcList}
     filepath = getSavefilePath(saveId)
     with open(filepath, 'wb') as f:
         pickle.dump(data,f)
@@ -51,12 +53,14 @@ def loadSave(filename):
 # 确认存档读取
 def inputLoadSave(saveId):
     saveData = loadSave(saveId)
-    CacheContorl.playObject = saveData['playerData']
-    CacheContorl.playObject['objectId'] = '0'
+    CacheContorl.characterData = saveData['characterData']
+    CacheContorl.characterData['characterId'] = '0'
     CacheContorl.gameTime = saveData['gameTime']
     CacheContorl.sceneData = saveData['sceneData']
     CacheContorl.mapData = saveData['mapData']
-    CharacterHandle.initPlayerPosition()
+    CacheContorl.npcTemData = saveData['npcTemData']
+    CacheContorl.randomNpcList = saveData['randomNpcList']
+    CharacterHandle.initCharacterPosition()
 
 # 获取存档页对应存档id
 def getSavePageSaveId(pageSaveValue,inputId):

@@ -1,12 +1,12 @@
 from script.Core import CacheContorl
 
 # 获取角色属性
-def getAttrData(playerId):
-    playerId = str(playerId)
-    attrData = CacheContorl.playObject['object'][playerId]
+def getAttrData(characterId):
+    characterId = str(characterId)
+    attrData = CacheContorl.characterData['character'][characterId]
     return attrData
 
 # 设置角色属性
-def setAttrData(playerId,attrId,attr):
-    playerId = str(playerId)
-    CacheContorl.playObject['object'][playerId][attrId] = attr
+def setAttrData(characterId,attrId,attr):
+    characterId = str(characterId)
+    CacheContorl.characterData['character'][characterId][attrId] = attr

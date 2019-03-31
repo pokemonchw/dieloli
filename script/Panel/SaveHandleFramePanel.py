@@ -43,12 +43,12 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
         saveid = SaveHandle.getSavePageSaveId(pageSaveValue,i)
         if SaveHandle.judgeSaveFileExist(saveid) == '1':
             saveData = SaveHandle.loadSave(saveid)
-            playerData = saveData['playerData']
+            characterData = saveData['characterData']
             gameTimeData = saveData['gameTime']
             gameTimeText = GameTime.getDateText(gameTimeData)
-            playerName = playerData['object']['0']['Name']
+            characterName = characterData['character']['0']['Name']
             saveVerson = saveData['gameVerson']
-            saveText = playerName + ' ' + gameTimeText + ' ' + saveVerson
+            saveText = characterName + ' ' + gameTimeText + ' ' + saveVerson
             idTextIndex = int(TextHandle.getTextIndex(idText))
             fixIdWidth = textWidth - idTextIndex
             saveAlign = TextHandle.align(saveText,'center',textWidth=fixIdWidth)
@@ -75,12 +75,12 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
         EraPrint.plittleline()
         if SaveHandle.judgeSaveFileExist('auto') == '1':
             saveData = SaveHandle.loadSave('auto')
-            playerData = saveData['playerData']
+            characterData = saveData['characterData']
             gameTimeData = saveData['gameTime']
             gameTimeText = GameTime.getDateText(gameTimeData)
             saveVerson = saveData['gameVerson']
-            playerName = playerData['object']['0']['Name']
-            saveText = playerName + ' ' + gameTimeText + ' ' + saveVerson
+            characterName = characterData['character']['0']['Name']
+            saveText = characterName + ' ' + gameTimeText + ' ' + saveVerson
             idText = id + autoInfoText
             idTextIndex = int(TextHandle.getTextIndex(idText))
             fixIdWidth = textWidth - idTextIndex

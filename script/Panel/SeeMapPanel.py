@@ -13,7 +13,7 @@ def seeMapPanel():
 # 用于绘制移动路径按钮的面板
 def seeMovePathPanel():
     inputS = []
-    nowScene = CacheContorl.playObject['object']['0']['Position']
+    nowScene = CacheContorl.characterData['character']['0']['Position']
     nowMap = CacheContorl.nowMap
     nowMapStr = MapHandle.getMapSystemPathStrForList(nowMap)
     mapData = CacheContorl.mapData[nowMapStr]
@@ -45,7 +45,7 @@ def seeMovePathPanel():
 # 用于绘制通常按钮面板
 def backScenePanel(startId):
     seeMapCmd = []
-    nowPosition = CacheContorl.playObject['object']['0']['Position']
+    nowPosition = CacheContorl.characterData['character']['0']['Position']
     nowMap = MapHandle.getMapForPath(nowPosition)
     cmdData = TextLoading.getTextData(TextLoading.cmdPath,CmdButtonQueue.seemap)
     seeMapCmd.append(cmdData[0])

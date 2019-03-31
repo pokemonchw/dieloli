@@ -216,8 +216,8 @@ def getSexItemText(sexItemList):
     return sexItemTextList
 
 # 获取金钱信息文本
-def getGoldText(playerId):
-    goldData = CacheContorl.playObject['object'][playerId]['Gold']
+def getGoldText(characterId):
+    goldData = CacheContorl.characterData['character'][characterId]['Gold']
     goldData = str(goldData)
     moneyText = TextLoading.getTextData(TextLoading.stageWordPath,'66')
     goldText = TextLoading.getTextData(TextLoading.stageWordPath,'67')
@@ -226,25 +226,25 @@ def getGoldText(playerId):
 
 
 # 获取角色缩略信息
-def getPlayerAbbreviationsInfo(playerId):
-    playerData = CacheContorl.playObject['object'][playerId]
-    playerIdInfo = TextLoading.getTextData(TextLoading.stageWordPath, '0')
-    playerIdText = playerIdInfo + playerId
-    playerName = playerData['Name']
-    playerSex = playerData['Sex']
-    playerSexInfo = TextLoading.getTextData(TextLoading.stageWordPath, '2')
-    playerSexTextData = TextLoading.getTextData(TextLoading.rolePath,'Sex')
-    playerSexText = playerSexTextData[playerSex]
-    playerSexText = playerSexInfo + playerSexText
-    playerAge = playerData['Age']
-    playerAgeInfo = TextLoading.getTextData(TextLoading.stageWordPath, '3')
-    playerAgeText = playerAgeInfo + str(playerAge)
-    playerHpAndMpText = AttrPrint.getHpAndMpText(playerId)
-    playerIntimate = playerData['Intimate']
-    playerIntimateInfo = TextLoading.getTextData(TextLoading.stageWordPath, '16')
-    playerIntimateText = playerIntimateInfo + playerIntimate
-    playerGraces = playerData['Graces']
-    playerGracesInfo = TextLoading.getTextData(TextLoading.stageWordPath, '17')
-    playerGracesText = playerGracesInfo + playerGraces
-    abbreviationsInfo = playerIdText + ' ' + playerName + ' ' + playerSexText + ' ' + playerAgeText + ' ' + playerHpAndMpText + ' ' + playerIntimateText + ' ' + playerGracesText
+def getCharacterAbbreviationsInfo(characterId):
+    characterData = CacheContorl.characterData['character'][characterId]
+    characterIdInfo = TextLoading.getTextData(TextLoading.stageWordPath, '0')
+    characterIdText = characterIdInfo + characterId
+    characterName = characterData['Name']
+    characterSex = characterData['Sex']
+    characterSexInfo = TextLoading.getTextData(TextLoading.stageWordPath, '2')
+    characterSexTextData = TextLoading.getTextData(TextLoading.rolePath,'Sex')
+    characterSexText = characterSexTextData[characterSex]
+    characterSexText = characterSexInfo + characterSexText
+    characterAge = characterData['Age']
+    characterAgeInfo = TextLoading.getTextData(TextLoading.stageWordPath, '3')
+    characterAgeText = characterAgeInfo + str(characterAge)
+    characterHpAndMpText = AttrPrint.getHpAndMpText(characterId)
+    characterIntimate = characterData['Intimate']
+    characterIntimateInfo = TextLoading.getTextData(TextLoading.stageWordPath, '16')
+    characterIntimateText = characterIntimateInfo + characterIntimate
+    characterGraces = characterData['Graces']
+    characterGracesInfo = TextLoading.getTextData(TextLoading.stageWordPath, '17')
+    characterGracesText = characterGracesInfo + characterGraces
+    abbreviationsInfo = characterIdText + ' ' + characterName + ' ' + characterSexText + ' ' + characterAgeText + ' ' + characterHpAndMpText + ' ' + characterIntimateText + ' ' + characterGracesText
     return abbreviationsInfo

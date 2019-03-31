@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+# -*- coding: UTF-8 -*-
 import threading,queue,json,sys
 from script.Core import MainFrame,GameConfig
 

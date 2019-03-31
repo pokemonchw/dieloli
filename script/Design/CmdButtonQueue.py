@@ -19,11 +19,11 @@ systemmenu = "systemMenu"
 seeattrpanelmenu = "seeAttrPanelHandle"
 changesavepage = "changeSavePage"
 seeattronrverytime = "seeAttrOnEveryTime"
-seeplayerlist = "seePlayerList"
+seecharacterlist = "seeCharacterList"
 inscenelist1 = "inSceneList1"
 seemap = "seeMap"
 gamehelp = "gameHelp"
-seeplayerwearclothes = "seePlayerWearClothes"
+seecharacterwearclothes = "seeCharacterWearClothes"
 
 # 用于批量生成id命令
 def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left',startId = '0',cmdListData=None,lastLine = False):

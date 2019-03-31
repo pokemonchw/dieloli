@@ -21,17 +21,17 @@ def initCharacterList():
         initCharacterThreadPool.submit(initCharacter,i,character)
         i += 1
     initCharacterThreadPool.shutdown()
-    initPlayerPosition()
+    initCharacterPosition()
 
 # 按id生成角色属性
 def initCharacter(nowId,character):
-    AttrCalculation.initTemporaryObject()
-    playerId = str(nowId)
-    CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+    AttrCalculation.initTemporaryCharacter()
+    characterId = str(nowId)
+    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     AttrCalculation.setDefaultCache()
     characterName = character['Name']
     characterSex = character['Sex']
-    CacheContorl.playObject['object'][playerId]['Sex'] = characterSex
+    CacheContorl.characterData['character'][characterId]['Sex'] = characterSex
     defaultAttr = AttrCalculation.getAttr(characterSex)
     defaultAttr['Name'] = characterName
     defaultAttr['Sex'] = characterSex
@@ -85,14 +85,13 @@ def initCharacter(nowId,character):
     bodyFat = AttrCalculation.getBodyFat(characterSex,bodyFatTem)
     measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
     defaultAttr['Measirements'] = measurements
-    CacheContorl.temporaryObject.update(defaultAttr)
+    CacheContorl.temporaryCharacter.update(defaultAttr)
     CacheContorl.featuresList = {}
-    CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
-    CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
+    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
+    CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
 
 # 处理角色年龄特性
 def characterAgeFeatureHandle(ageTem,characterSex):
-    characterAge = AttrCalculation.getAge(ageTem)
     if ageTem == 'SchoolAgeChild':
         if characterSex == sexList[0]:
             CacheContorl.featuresList['Age'] = featuresList["Age"][0]
@@ -184,27 +183,27 @@ def getRandNpcAgeTem(agejudge):
 
 # 获取角色最大数量
 def getCharacterIndexMax():
-    playerData = CacheContorl.playObject['object']
-    playerMax = len(playerData.keys()) - 1
-    return playerMax
+    characterData = CacheContorl.characterData['character']
+    characterDataMax = len(characterData.keys()) - 1
+    return characterDataMax
 
 # 获取角色id列表
 def getCharacterIdList():
-    playerData = CacheContorl.playObject['object']
-    playerList = ValueHandle.dictKeysToList(playerData)
-    return playerList
+    characterData = CacheContorl.characterData['character']
+    characterList = ValueHandle.dictKeysToList(characterData)
+    return characterList
 
 # 初始化角色的位置
-def initPlayerPosition():
+def initCharacterPosition():
     characterPositionPool = thread.ThreadPoolExecutor(max_workers = GameConfig.threading_pool_max)
     characterList = CacheContorl.npcTemData
     for i in range(0, len(characterList)):
-        playerIdS = str(i + 1)
+        characterIdS = str(i + 1)
         characterData = characterList[i]
-        characterPositionPool.submit(initPlayerPositionNow,characterData,playerIdS)
+        characterPositionPool.submit(initCharacterPositionNow,characterData,characterIdS)
     characterPositionPool.shutdown()
 
-def initPlayerPositionNow(characterData,playerIdS):
+def initCharacterPositionNow(characterData,characterIdS):
     characterInitPosition = characterData['Position']
-    characterPosition = CacheContorl.playObject['object'][playerIdS]['Position']
-    MapHandle.playerMoveScene(characterPosition, characterInitPosition, playerIdS)
+    characterPosition = CacheContorl.characterData['character'][characterIdS]['Position']
+    MapHandle.characterMoveScene(characterPosition, characterInitPosition, characterIdS)

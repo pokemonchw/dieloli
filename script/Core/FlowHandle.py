@@ -164,10 +164,10 @@ def initCache():
     CacheContorl.wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesUp': 2, 'wFrameLineState': 2,
                    'wFrameRePrint': 0}
     CacheContorl.cmd_map = {}
-    CacheContorl.playObject = {'objectId': '', 'object': {}}
+    CacheContorl.characterData = {'characterId': '', 'character': {}}
     CacheContorl.featuresList = {'Age': "", "Chastity": "", 'Disposition': "", 'Courage': "", 'SelfConfidence': "", 'Friends': "",
                     'Figure': "", 'Sex': "", 'AnimalInternal': "", 'AnimalExternal': "", 'Charm': ""}
-    CacheContorl.temporaryObject = {}
+    CacheContorl.temporaryCharacter = {}
     CacheContorl.inputCache = ['']
     CacheContorl.inputPosition = {'position': 0}
     CacheContorl.outputTextStyle = 'standard'
@@ -178,21 +178,20 @@ def initCache():
     CacheContorl.cmdData = {}
     CacheContorl.imageid = 0
     CacheContorl.panelState = {
-        "PlayerMainAttrPanel":"1","PlayerEquipmentPanel":"1",
-        "PlayerItemPanel":"1","PlayerExperiencePanel":"1",
-        "PlayerLevelPanel":"1","PlayerFeaturesPanel":"1",
-        "PlayerEngravingPanel":"1","AttrShowHandlePanel":"0",
-        "SeeSaveListPanel":"0","SeePlayerListPanel":"0",
-        "SeeScenePlayerListPanel":"0"
+        "CharacterMainAttrPanel":"1","CharacterEquipmentPanel":"1",
+        "CharacterItemPanel":"1","CharacterExperiencePanel":"1",
+        "CharacterLevelPanel":"1","CharacterFeaturesPanel":"1",
+        "CharacterEngravingPanel":"1","AttrShowHandlePanel":"0",
+        "SeeSaveListPanel":"0","SeeCharacterListPanel":"0",
+        "SeeSceneCharacterListPanel":"0"
     }
     CacheContorl.maxSavePage = GameConfig.save_page
     CacheContorl.textWait = float(GameConfig.text_wait)
-    CacheContorl.temObjectDefault = getTemObjectDefault()
-    CacheContorl.temporaryObjectBak = CacheContorl.temObjectDefault.copy()
+    CacheContorl.temCharacterDefault = getTemCharacterDefault()
+    CacheContorl.temporaryCharacterBak = CacheContorl.temCharacterDefault.copy()
     CacheContorl.randomNpcList = []
     CacheContorl.npcTemData = []
 
-def getTemObjectDefault():
-    script = __import__('script.Design.MapHandle')
-    temObject = TextLoading.getTextData(TextLoading.rolePath, 'Default')
-    return temObject
+def getTemCharacterDefault():
+    temCharacter = TextLoading.getTextData(TextLoading.rolePath, 'Default')
+    return temCharacter

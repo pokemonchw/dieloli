@@ -8,7 +8,7 @@ def seeScenePanel():
     timeText = GameTime.getDateText()
     EraPrint.p(timeText)
     EraPrint.p(' ')
-    scenePath = CacheContorl.playObject['object']['0']['Position']
+    scenePath = CacheContorl.characterData['character']['0']['Position']
     scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
     sceneData = CacheContorl.sceneData[scenePathStr].copy()
     sceneName = sceneData['SceneName']
@@ -18,13 +18,13 @@ def seeScenePanel():
     EraPrint.plittleline()
 
 # 用于查看当前场景上角色列表的面板
-def seeScenePlayerListPanel():
+def seeSceneCharacterListPanel():
     inputS = []
-    seePlayerText = TextLoading.getTextData(TextLoading.messagePath,'26')
-    EraPrint.p(seePlayerText)
+    seeCharacterText = TextLoading.getTextData(TextLoading.messagePath,'26')
+    EraPrint.p(seeCharacterText)
     EraPrint.p('\n')
-    scenePath = CacheContorl.playObject['object']['0']['Position']
-    nameList = MapHandle.getScenePlayerNameList(scenePath,True)
+    scenePath = CacheContorl.characterData['character']['0']['Position']
+    nameList = MapHandle.getSceneCharacterNameList(scenePath,True)
     for name in nameList:
         PyCmd.pcmd(name, name, None)
         inputS.append(name)
@@ -33,23 +33,23 @@ def seeScenePlayerListPanel():
     return inputS
 
 # 用于查看对象信息的面板
-def seeObjectInfoPanel():
-    objectInfo = TextLoading.getTextData(TextLoading.stageWordPath, '77')
-    EraPrint.p(objectInfo)
-    objectId = CacheContorl.playObject['objectId']
-    objectData = CacheContorl.playObject['object'][objectId]
-    objectName = objectData['Name']
-    EraPrint.p(objectName)
+def seeCharacterInfoPanel():
+    characterInfo = TextLoading.getTextData(TextLoading.stageWordPath, '77')
+    EraPrint.p(characterInfo)
+    characterId = CacheContorl.characterData['characterId']
+    characterData = CacheContorl.characterData['character'][characterId]
+    characterName = characterData['Name']
+    EraPrint.p(characterName)
     EraPrint.p(' ')
     intimateInfo = TextLoading.getTextData(TextLoading.stageWordPath,'16')
     gracesInfo = TextLoading.getTextData(TextLoading.stageWordPath,'17')
-    objectIntimate = objectData['Intimate']
-    objectGraces = objectData['Graces']
-    objectIntimateText = intimateInfo + objectIntimate
-    objectGracesText = gracesInfo + objectGraces
-    EraPrint.p(objectIntimateText)
+    characterIntimate = characterData['Intimate']
+    characterGraces = characterData['Graces']
+    characterIntimateText = intimateInfo + characterIntimate
+    characterGracesText = gracesInfo + characterGraces
+    EraPrint.p(characterIntimateText)
     EraPrint.p(' ')
-    EraPrint.p(objectGracesText)
+    EraPrint.p(characterGracesText)
     EraPrint.plittleline()
 
 def inSceneButtonPanel():

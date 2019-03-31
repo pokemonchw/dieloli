@@ -3,8 +3,8 @@ from script.Design import AttrCalculation,CmdButtonQueue
 
 # 请求玩家输入姓名面板
 def inputNamePanel():
-    playerId = CacheContorl.playObject['objectId']
-    CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+    characterId = CacheContorl.characterData['characterId']
+    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     AttrCalculation.setDefaultCache()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '4'))
@@ -18,18 +18,18 @@ def startInputNamePanel():
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '3'))
     inputState = 0
     while inputState == 0:
-        playerName = GameInit.askfor_str()
-        EraPrint.pl(playerName)
-        if TextHandle.getTextIndex(playerName) > 10:
+        characterName = GameInit.askfor_str()
+        EraPrint.pl(characterName)
+        if TextHandle.getTextIndex(characterName) > 10:
             EraPrint.pl(TextLoading.getTextData(TextLoading.errorPath, 'inputNameTooLongError'))
         else:
             inputState = 1
-            CacheContorl.temporaryObject['Name'] = playerName
+            CacheContorl.temporaryCharacter['Name'] = characterName
 
 # 请求玩家输入昵称面板
 def inputNickNamePanel():
-    playerId = CacheContorl.playObject['objectId']
-    CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+    characterId = CacheContorl.characterData['characterId']
+    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '6'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputnickname, 1)
@@ -42,20 +42,20 @@ def startInputNickNamePanel():
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '5'))
     inputState = 0
     while inputState == 0:
-        playerNickName = GameInit.askfor_str()
-        EraPrint.pl(playerNickName)
-        if TextHandle.getTextIndex(playerNickName) > 10:
+        characterNickName = GameInit.askfor_str()
+        EraPrint.pl(characterNickName)
+        if TextHandle.getTextIndex(characterNickName) > 10:
             EraPrint.pl(TextLoading.getTextData(TextLoading.errorPath, 'inputNickNameTooLongError'))
         else:
             inputState = 1
-            CacheContorl.temporaryObject['NickName'] = playerNickName
+            CacheContorl.temporaryCharacter['NickName'] = characterNickName
     EraPrint.p('\n')
 
 # 请求玩家输入自称面板
 def inputSelfNamePanel():
-    playerId = CacheContorl.playObject['objectId']
+    characterId = CacheContorl.characterData['characterId']
     PyCmd.clr_cmd()
-    CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '14'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputselfname, 1)
@@ -68,19 +68,19 @@ def startInputSelfName():
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '15'))
     inputState = 0
     while inputState == 0:
-        playerSelfName = GameInit.askfor_str()
-        EraPrint.pl(playerSelfName)
-        if TextHandle.getTextIndex(playerSelfName) > 10:
+        characterSelfName = GameInit.askfor_str()
+        EraPrint.pl(characterSelfName)
+        if TextHandle.getTextIndex(characterSelfName) > 10:
             EraPrint.pl(TextLoading.getTextData(TextLoading.errorPath, 'inputSelfNameTooLongError'))
         else:
             inputState = 1
-            CacheContorl.temporaryObject['SelfName'] = playerSelfName
+            CacheContorl.temporaryCharacter['SelfName'] = characterSelfName
     EraPrint.p('\n')
 
 # 请求玩家输入性别面板
 def inputSexPanel():
-    playerId = CacheContorl.playObject['objectId']
-    sexId = CacheContorl.playObject['object'][playerId]['Sex']
+    characterId = CacheContorl.characterData['characterId']
+    sexId = CacheContorl.characterData['character'][characterId]['Sex']
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '8')[sexId])
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu, 1)
@@ -97,8 +97,8 @@ def inputSexChoicePanel():
 
 # 询问玩家是否进行详细设置面板
 def attributeGenerationBranchPanel():
-    playerId = CacheContorl.playObject['objectId']
-    AttrCalculation.setAttrDefault(playerId)
+    characterId = CacheContorl.characterData['characterId']
+    AttrCalculation.setAttrDefault(characterId)
     PyCmd.clr_cmd()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '9'))

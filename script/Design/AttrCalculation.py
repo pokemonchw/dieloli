@@ -311,7 +311,6 @@ def setSexCache(sexName):
 def setAnimalCache(animalName):
     animalData = roleAttrData["AnimalFeatures"][animalName]
     setAddFeatures(animalData)
-    pass
 
 # 设置追加特征
 def setAddFeatures(featuresData):
@@ -327,20 +326,20 @@ def setAddFeatures(featuresData):
     pass
 
 # 创建角色默认属性
-def setAttrDefault(playerId):
-    playerId = str(playerId)
-    playerSex = CacheContorl.playObject['object'][playerId]['Sex']
-    temData = getAttr(playerSex)
+def setAttrDefault(characterId):
+    characterId = str(characterId)
+    characterSex = CacheContorl.characterData['character'][characterId]['Sex']
+    temData = getAttr(characterSex)
     for key in temData:
-        CacheContorl.temporaryObject[key] = temData[key]
-    CacheContorl.temporaryObject['Features'] = CacheContorl.featuresList.copy()
+        CacheContorl.temporaryCharacter[key] = temData[key]
+    CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()
 
 # 初始化角色属性模板
-def initTemporaryObject():
-    CacheContorl.temporaryObject = CacheContorl.temporaryObjectBak.copy()
+def initTemporaryCharacter():
+    CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
 
 # 确认角色最终属性生成
-def setAttrOver(playerId):
-    playerId = str(playerId)
-    CacheContorl.playObject['object'][playerId] = CacheContorl.temporaryObject.copy()
+def setAttrOver(characterId):
+    characterId = str(characterId)
+    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     CacheContorl.featuresList = {}

@@ -55,7 +55,7 @@ def loadDirNow(dataPath):
                             mapSystemPath = getMapSystemPathForPath(nowPath)
                             mapSystemPathStr = getMapSystemPathStr(mapSystemPath)
                             nowSceneData.update(_loadjson(nowPath))
-                            nowSceneData['ScenePlayerData'] = []
+                            nowSceneData['SceneCharacterData'] = []
                             nowSceneData['ScenePath'] = mapSystemPath
                             nowSceneData = {mapSystemPathStr:nowSceneData}
                             sceneData.update(nowSceneData)

@@ -4,8 +4,8 @@ import os,dpath,datetime
 # 输出地图
 def printMap(mapPath):
     mapDraw = getMapDrawForMapPath(mapPath)
-    playerPosition = CacheContorl.playObject['object']['0']['Position']
-    playerNowSceneId = getSceneIdInMapForScenePathOnMapPath(playerPosition,mapPath)
+    characterPosition = CacheContorl.characterData['character']['0']['Position']
+    characterNowSceneId = getSceneIdInMapForScenePathOnMapPath(characterPosition,mapPath)
     sceneList = getSceneListForMap(mapPath)
     inputS = []
     inputCmd = ''
@@ -35,7 +35,7 @@ def printMap(mapPath):
                         else:
                             break
                     if inputCmd in sceneList:
-                        if inputCmd == playerNowSceneId:
+                        if inputCmd == characterNowSceneId:
                             EraPrint.p(inputCmd,'nowmap')
                             inputS.append(None)
                         else:
@@ -81,20 +81,20 @@ def getSceneListForMap(mapPath):
     return sceneList
 
 # 场景移动
-def playerMoveScene(oldScenePath,newScenePath,characterId):
+def characterMoveScene(oldScenePath,newScenePath,characterId):
     oldScenePathStr = getMapSystemPathStrForList(oldScenePath)
     newScenePathStr = getMapSystemPathStrForList(newScenePath)
-    oldScenePlayerData = CacheContorl.sceneData[oldScenePathStr]["ScenePlayerData"]
-    newScenePlayerData = CacheContorl.sceneData[newScenePathStr]["ScenePlayerData"]
-    if characterId in oldScenePlayerData:
-        oldScenePlayerData.remove(characterId)
-        CacheContorl.sceneData[oldScenePathStr]["ScenePlayerData"] = oldScenePlayerData
-    if characterId in newScenePlayerData:
+    oldSceneCharacterData = CacheContorl.sceneData[oldScenePathStr]["SceneCharacterData"]
+    newSceneCharacterData = CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"]
+    if characterId in oldSceneCharacterData:
+        oldSceneCharacterData.remove(characterId)
+        CacheContorl.sceneData[oldScenePathStr]["SceneCharacterData"] = oldSceneCharacterData
+    if characterId in newSceneCharacterData:
         pass
     else:
-        CacheContorl.playObject['object'][characterId]['Position'] = newScenePath
-        newScenePlayerData.append(characterId)
-        CacheContorl.sceneData[newScenePathStr]["ScenePlayerData"] = newScenePlayerData
+        CacheContorl.characterData['character'][characterId]['Position'] = newScenePath
+        newSceneCharacterData.append(characterId)
+        CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"] = newSceneCharacterData
 
 def getMapSystemPathStrForList(nowList):
     if isinstance(nowList,list):
@@ -188,12 +188,17 @@ def getSceneToSceneMapList(nowScenePath,targetScenePath):
 # 查找节点共同所属地图
 def getCommonMapForScenePath(sceneAPath,sceneBPath):
     hierarchy = []
-    if sceneAPath[-1] == [] or sceneBPath[-1] == []:
+    if sceneAPath[:-1] == [] or sceneBPath[:-1] == []:
         return hierarchy
     else:
         for i in range(0,len(sceneAPath)):
-            if sceneAPath[i] == sceneBPath[i]:
-                hierarchy.append(sceneAPath[i])
+            try:
+                if sceneAPath[i] == sceneBPath[i]:
+                    hierarchy.append(sceneAPath[i])
+                else:
+                    break
+            except IndexError:
+                break
         return getMapPathForTrue(hierarchy)
 
 # 获取节点所属层级列表
@@ -289,27 +294,43 @@ def getScenePathForTrue(scenePath):
         return getScenePathForTrue(scenePath)
 
 # 获取场景上所有角色的姓名列表
-def getScenePlayerNameList(scenePath,removePlayer = False):
+def getSceneCharacterNameList(scenePath,removeOwnCharacter = False):
     scenePathStr = getMapSystemPathStrForList(scenePath)
-    scenePlayerData = CacheContorl.sceneData[scenePathStr]['ScenePlayerData']
-    nowScenePlayerList = scenePlayerData.copy()
+    sceneCharacterData = CacheContorl.sceneData[scenePathStr]['SceneCharacterData']
+    nowSceneCharacterList = sceneCharacterData.copy()
     nameList = []
-    if removePlayer:
-        nowScenePlayerList.remove('0')
-    for playerId in nowScenePlayerList:
-        playerName = CacheContorl.playObject['object'][str(playerId)]['Name']
-        nameList.append(playerName)
+    if removeOwnCharacter:
+        nowSceneCharacterList.remove('0')
+    for characterId in nowSceneCharacterList:
+        characterName = CacheContorl.characterData['character'][str(characterId)]['Name']
+        nameList.append(characterName)
     return nameList
 
 # 获取场景上角色姓名对应角色id
-def getPlayerIdByPlayerName(playerName,scenePath):
-    playerNameList = getScenePlayerNameList(scenePath)
-    playerNameIndex = playerNameList.index(playerName)
-    playerIdList = getScenePlayerIdList(scenePath)
-    return playerIdList[playerNameIndex]
+def getCharacterIdByCharacterName(characterName,scenePath):
+    characterNameList = getSceneCharacterNameList(scenePath)
+    characterNameIndex = characterNameList.index(characterName)
+    characterIdList = getSceneCharacterIdList(scenePath)
+    return characterIdList[characterNameIndex]
 
 # 获取场景上所有角色的id列表
-def getScenePlayerIdList(scenePath):
+def getSceneCharacterIdList(scenePath):
     scenePathStr = getMapSystemPathStrForList(scenePath)
-    scenePlayerData = CacheContorl.sceneData[scenePathStr]['ScenePlayerData']
-    return scenePlayerData
+    sceneCharacterData = CacheContorl.sceneData[scenePathStr]['SceneCharacterData']
+    return sceneCharacterData
+
+# 对场景上的角色按好感度进行排序
+def sortSceneCharacterId(scenePath):
+    scenePathStr = getMapSystemPathStrForList(scenePath)
+    newCharacterList = []
+    for character in CacheContorl.sceneData[scenePathStr]['SceneCharacterData']:
+        if newCharacterList == []:
+            newCharacterList.append(character)
+        else:
+            for i in range(0,len(newCharacterList)):
+                if CacheContorl.characterData['character'][newCharacterList[i]]['Intimate'] < CacheContorl.characterData['character'][character]['Intimate']:
+                    newCharacterList.insert(i,character)
+                elif i == len(newCharacterList) - 1:
+                    newCharacterList.append(character)
+    CacheContorl.sceneData[scenePathStr]['SceneCharacterData'] = newCharacterList
+

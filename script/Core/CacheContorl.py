@@ -10,19 +10,19 @@ wframeMouse = {}
 cmd_map = {}
 
 # 角色对象数据缓存组
-playObject = {}
+characterData = {}
 
 # 默认属性模板数据读取
-temObjectDefault = {}
+temCharacterDefault = {}
 
 # 默认属性模板数据备份
-temporaryObjectBak = {}
+temporaryCharacterBak = {}
 
 # 素质数据临时缓存
 featuresList = {}
 
 # 临时角色数据控制对象
-temporaryObject = {}
+temporaryCharacter = {}
 
 # npc模板列表
 npcTemData = []
@@ -69,8 +69,6 @@ textWait = 0
 
 mapData = {}
 sceneData = {}
-
-scenePlayerData = {}
 
 pathList = []
 

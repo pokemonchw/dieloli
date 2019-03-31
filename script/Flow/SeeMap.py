@@ -1,7 +1,6 @@
 from script.Core import FlowHandle,CacheContorl,PyCmd
-from script.Design import ObjectMove,MapHandle
+from script.Design import CharacterMove,MapHandle
 from script.Panel import SeeMapPanel
-import os
 
 def seeMapFlow():
     PyCmd.clr_cmd()
@@ -16,7 +15,7 @@ def seeMapFlow():
     inputS = inputS + seeMapCmd + movePathCmd
     yrn = FlowHandle.askfor_All(inputS)
     backButton = str(startId1)
-    nowPosition = CacheContorl.playObject['object']['0']['Position']
+    nowPosition = CacheContorl.characterData['character']['0']['Position']
     nowPositionMap = MapHandle.getMapForPath(nowPosition)
     upMapButton = 'Null'
     downMapButton = 'Null'
@@ -30,7 +29,7 @@ def seeMapFlow():
     nowMap = CacheContorl.nowMap
     if yrn in mapCmd:
         nowTargetPath = MapHandle.getScenePathForMapSceneId(nowMap,yrn)
-        ObjectMove.playerMove(nowTargetPath)
+        CharacterMove.ownCharcterMove(nowTargetPath)
     elif yrn == backButton:
         CacheContorl.nowMap = []
         import script.Flow.InScene as inscene
@@ -39,14 +38,14 @@ def seeMapFlow():
         moveListId = movePathCmd.index(yrn)
         moveId = movePathList[moveListId]
         nowTargetPath = MapHandle.getScenePathForMapSceneId(nowMap,moveId)
-        ObjectMove.playerMove(nowTargetPath)
+        CharacterMove.ownCharcterMove(nowTargetPath)
     elif upMapButton != 'Null' and yrn == upMapButton:
         upMapPath = MapHandle.getMapForPath(nowMap)
         CacheContorl.nowMap = upMapPath
         seeMapFlow()
     elif downMapButton != 'Null' and yrn == downMapButton:
-        playerPosition = CacheContorl.playObject['object']['0']['Position']
-        downMapSceneId = MapHandle.getMapSceneIdForScenePath(CacheContorl.nowMap,playerPosition)
+        characterPosition = CacheContorl.characterData['character']['0']['Position']
+        downMapSceneId = MapHandle.getMapSceneIdForScenePath(CacheContorl.nowMap,characterPosition)
         downMapPath = nowMap.append(downMapSceneId)
         CacheContorl.nowMap = downMapPath
         seeMapFlow()
