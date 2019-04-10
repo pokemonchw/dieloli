@@ -84,6 +84,8 @@ def seeCharacterMainAttrPanel(characterId):
         AttrPrint.printHpAndMpBar(characterId)
         return 'CharacterMainAttrPanel'
     else:
+        characterName = CacheContorl.characterData['character'][characterId]['Name']
+        EraPrint.p(' ' + characterName + ' ')
         PyCmd.pcmd(panelStateOnText, 'CharacterMainAttrPanel', None)
         EraPrint.p('\n')
         return 'CharacterMainAttrPanel'
@@ -140,7 +142,7 @@ def seeCharacterExperiencePanel(characterId):
         characterData = AttrHandle.getAttrData(characterId)
         EraPrint.p('\n')
         characterSexExperienceList = characterData['SexExperience']
-        characterSex = CacheContorl.characterData['object'][characterId]['Sex']
+        characterSex = CacheContorl.characterData['character'][characterId]['Sex']
         characterSexTextList = AttrText.getSexExperienceText(characterSexExperienceList, characterSex)
         EraPrint.plist(characterSexTextList, 4, 'center')
         return 'CharacterExperiencePanel'
@@ -159,7 +161,7 @@ def seeCharacterLevelPanel(characterId):
         EraPrint.p('\n')
         characterData = AttrHandle.getAttrData(characterId)
         characterSexGradeList = characterData['SexGrade']
-        characterSex = CacheContorl.characterData['object'][characterId]['Sex']
+        characterSex = CacheContorl.characterData['character'][characterId]['Sex']
         characterSexGradeTextList = AttrText.getSexGradeTextList(characterSexGradeList, characterSex)
         EraPrint.plist(characterSexGradeTextList, 4, 'center')
         return 'CharacterLevelPanel'

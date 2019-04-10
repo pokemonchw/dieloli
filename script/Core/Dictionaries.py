@@ -1,13 +1,19 @@
 from script.Core import CacheContorl
 
-# 转义文本处理
+'''
+对文本中的宏进行转义处理
+@string 传入文本对象
+'''
 def handleText(string):
     string = characterName(string)
     string = characterNickName(string)
     string = characterSelfName(string)
     return string
 
-# 转义当前访问对象姓名
+'''
+宏:当前对话角色的名字
+@string 传入文本对象
+'''
 def characterName(string):
     try:
         characterId = CacheContorl.characterData['characterId']
@@ -17,7 +23,10 @@ def characterName(string):
     except KeyError:
         return string
 
-# 转义当前访问对象昵称
+'''
+宏:当前对话角色的昵称
+@string 传入文本对象
+'''
 def characterNickName(string):
     try:
         characterId = CacheContorl.characterData['characterId']
@@ -27,7 +36,10 @@ def characterNickName(string):
     except KeyError:
         return string
 
-# 转义当前访问对象自称
+'''
+宏:当前对话角色的自称
+@string 传入文本对象
+'''
 def characterSelfName(string):
     try:
         characterId = CacheContorl.characterData['characterId']

@@ -1,5 +1,6 @@
-from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd
-from script.Design import GameTime,CmdButtonQueue,MapHandle
+from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
+from script.Design import GameTime,CmdButtonQueue,MapHandle,CharacterHandle
+import math
 
 # 用于查看当前场景的面板
 def seeScenePanel():
@@ -25,12 +26,29 @@ def seeSceneCharacterListPanel():
     EraPrint.p('\n')
     scenePath = CacheContorl.characterData['character']['0']['Position']
     nameList = MapHandle.getSceneCharacterNameList(scenePath,True)
-    for name in nameList:
-        PyCmd.pcmd(name, name, None)
-        inputS.append(name)
-        EraPrint.p(' ')
-    EraPrint.plittleline()
+    nameList = getNowPageNameList(nameList)
+    inputS = CmdButtonQueue.optionstr('',cmdColumn=10,cmdSize='center',askfor=False,cmdListData=nameList)
     return inputS
+
+# 用于切换角色列表页面的面板
+def changeSceneCharacterListPanel():
+    nameListMax = int(GameConfig.in_scene_see_player_max)
+    nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
+    characterMax = CharacterHandle.getCharacterIndexMax()
+    pageMax = math.floor(characterMax / nameListMax)
+    pageText = '(' + str(nowPage) + '/' + str(pageMax) + ')'
+    EraPrint.printPageLine(sample = '-',string = pageText)
+
+# 用于获取当前页面下的名字列表
+def getNowPageNameList(nameList):
+    nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
+    nameListMax = int(GameConfig.in_scene_see_player_max)
+    newNameList = []
+    nowNameStartId = nowPage * nameListMax
+    for i in range(nowNameStartId,nowNameStartId + nameListMax):
+        if i < len(nameList):
+            newNameList.append(nameList[i])
+    return newNameList
 
 # 用于查看对象信息的面板
 def seeCharacterInfoPanel():

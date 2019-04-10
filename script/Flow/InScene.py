@@ -7,6 +7,7 @@ from script.Flow import SeeCharacterAttr
 def getInScene_func():
     PyCmd.clr_cmd()
     scenePath = CacheContorl.characterData['character']['0']['Position']
+    MapHandle.sortSceneCharacterId(scenePath)
     CacheContorl.nowMap = MapHandle.getMapForPath(scenePath)
     scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
     sceneData = CacheContorl.sceneData[scenePathStr].copy()
@@ -27,14 +28,11 @@ def seeScene_func(judge):
     InScenePanel.seeScenePanel()
     if judge  == '0':
         inputS = inputS + InScenePanel.seeSceneCharacterListPanel()
-    else:
-        pass
+    InScenePanel.changeSceneCharacterListPanel()
     scenePath = CacheContorl.characterData['character']['0']['Position']
     sceneCharacterNameList = MapHandle.getSceneCharacterNameList(scenePath)
     if len(sceneCharacterNameList) == 1:
         CacheContorl.characterData['characterId'] = '0'
-    else:
-        pass
     InScenePanel.seeCharacterInfoPanel()
     inSceneCmdList1 = InScenePanel.inSceneButtonPanel()
     inputS = inputS + inSceneCmdList1

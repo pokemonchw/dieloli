@@ -89,9 +89,7 @@ def characterMoveScene(oldScenePath,newScenePath,characterId):
     if characterId in oldSceneCharacterData:
         oldSceneCharacterData.remove(characterId)
         CacheContorl.sceneData[oldScenePathStr]["SceneCharacterData"] = oldSceneCharacterData
-    if characterId in newSceneCharacterData:
-        pass
-    else:
+    if characterId not in newSceneCharacterData:
         CacheContorl.characterData['character'][characterId]['Position'] = newScenePath
         newSceneCharacterData.append(characterId)
         CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"] = newSceneCharacterData

@@ -44,7 +44,8 @@ def seeCharacterList_func(oldPanel):
     elif yrn in characterIdList:
         yrn = str(int(yrn) + characterPageShow * pageId)
         CacheContorl.characterData['characterId'] = yrn
-        SeeCharacterListPanel.seeAttrOnEveryTime_func('SeeCharacterListPanel',oldPanel)
+        from script.Flow import SeeCharacterAttr
+        SeeCharacterAttr.seeAttrOnEveryTime_func('SeeCharacterListPanel',oldPanel)
 
 # 角色列表页计算
 def getCharacterListPageMax():
