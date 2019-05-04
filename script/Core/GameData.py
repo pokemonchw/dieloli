@@ -100,9 +100,7 @@ def getPathList(pathData):
     pathList = []
     for i in os.listdir(pathData):
         path = os.path.join(pathData,i)
-        if os.path.isfile(path):
-            pass
-        else:
+        if os.path.isdir(path):
             pathList.append(i)
     return pathList
 

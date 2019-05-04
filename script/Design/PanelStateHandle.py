@@ -7,4 +7,3 @@ def panelStateChange(panelId):
         CacheContorl.panelState[panelId] = "1"
     else:
         CacheContorl.panelState[panelId] = "0"
-    pass

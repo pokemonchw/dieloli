@@ -18,9 +18,8 @@ def getImageData(imageName,imagePath=''):
         imagePath = os.path.join(gamepath, 'image', imageName + '.png')
     else:
         imagePath = os.path.join(gamepath,'image',imagePath,imageName + '.png')
-    image = PhotoImage(file=imagePath)
-    CacheContorl.imageid = CacheContorl.imageid + 1
-    return image
+    CacheContorl.imageid += 1
+    return PhotoImage(file=imagePath)
 
 '''
 将图片插入输出队列

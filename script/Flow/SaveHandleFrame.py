@@ -27,8 +27,6 @@ def establishSave_func(oldPanel):
             CacheContorl.panelState['SeeSaveListPanel'] = 0
             import script.Flow.Main as mainframe
             mainframe.mainFrame_func()
-        else:
-            pass
     elif yrn == str(startId + 2):
         savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel'])
         if savePanelPage == CacheContorl.maxSavePage:
@@ -76,7 +74,6 @@ def loadSave_func(oldPanel):
             CacheContorl.panelState['SeeSaveListPanel'] = 0
             import script.Flow.Main as mainframe
             mainframe.mainFrame_func()
-            pass
     elif yrn == str(startId + 2):
         savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel'])
         if savePanelPage == CacheContorl.maxSavePage:
@@ -158,8 +155,6 @@ def confirmationRemoveSave_func(saveId,oldPanel,tooOldPanel):
     yrn = GameInit.askfor_All(cmdList)
     if yrn == '0':
         SaveHandle.removeSave(saveId)
-    else:
-        pass
     PyCmd.clr_cmd()
     if oldPanel == 'LoadSavePanel':
         loadSave_func(tooOldPanel)

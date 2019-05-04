@@ -8,40 +8,31 @@ roleAttrData = GameData._loadjson(roleAttrPath)
 
 # 获取模板列表
 def getTemList():
-    list = TextLoading.getTextData(TextLoading.attrTemplatePath,'TemList')
-    return list
+    return TextLoading.getTextData(TextLoading.attrTemplatePath,'TemList')
 
 # 获取特征数据
 def getFeaturesList():
-    list = roleAttrData['Features']
-    return list
+    return roleAttrData['Features']
 
 # 获取年龄模板
 def getAgeTemList():
-    list = ValueHandle.dictKeysToList(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem'))
-    return list
+    return ValueHandle.dictKeysToList(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem'))
 
 # 获取刻应列表
 def getEngravingList():
-    list = roleAttrData['Default']['Engraving']
-    return list
+    return roleAttrData['Default']['Engraving']
 
 # 获取服装模板
 def getClothing(sexId):
-    clothingTem = TextLoading.getTextData(TextLoading.attrTemplatePath,'Equipment')
-    clothingList = clothingTem[sexId]
-    return clothingList
+    return TextLoading.getTextData(TextLoading.attrTemplatePath,'Equipment')[sexId]
 
 # 获取性道具模板
 def getSexItem(sexid):
-    sexItemTem = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexItem')
-    sexItemList = sexItemTem[sexid]
-    return sexItemList
+    return TextLoading.getTextData(TextLoading.attrTemplatePath,'SexItem')[sexid]
 
 # 获取金钱模板
 def getGold():
-    gold = roleAttrData['Default']['Gold']
-    return gold
+    return roleAttrData['Default']['Gold']
 
 # 获取属性
 def getAttr(temName):
@@ -67,7 +58,7 @@ def getAttr(temName):
     manaPointTemName = temData["ManaPoint"]
     maxManaPoint = getMaxManaPoint(manaPointTemName)
     gold = getGold()
-    attrList = {
+    return {
         'Age':age,
         'HitPointMax':maxHitPoint,
         'HitPoint':maxHitPoint,
@@ -85,15 +76,13 @@ def getAttr(temName):
         'Gold':gold,
         'Language':{}
     }
-    return attrList
 
 # 获取年龄信息
 def getAge(temName):
     temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem')[temName]
     maxAge = int(temData['MaxAge'])
     miniAge = int(temData['MiniAge'])
-    age = random.randint(miniAge,maxAge)
-    return age
+    return random.randint(miniAge,maxAge)
 
 # 获取初始身高
 def getHeight(temName,age,Features):
@@ -141,8 +130,7 @@ def getGrowthHeight(nowAge,expectHeight,developmentAge,expectAge):
 # 获取BMI
 def getBMI(temName):
     temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'WeightTem')[temName]
-    bmi = random.uniform(temData[0],temData[1])
-    return bmi
+    return random.uniform(temData[0],temData[1])
 
 # 获取体脂率
 def getBodyFat(sex,temName):
@@ -151,14 +139,12 @@ def getBodyFat(sex,temName):
     else:
         sexTem = 'Woman'
     temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'BodyFatTem')[sexTem][temName]
-    bodyFat = random.uniform(temData[0],temData[1])
-    return bodyFat
+    return random.uniform(temData[0],temData[1])
 
 # 获取体重
 def getWeight(bmi,height):
     height = height / 100
-    weight = bmi * height * height
-    return weight
+    return bmi * height * height
 
 # 获取三围
 def getMeasurements(temName,height,weight,bodyFat,weightTem):
@@ -181,8 +167,7 @@ def getMeasurements(temName,height,weight,bodyFat,weightTem):
     newHip = newWaist / waistHipProportion
     fix = newHip / hip
     bust = bust * fix
-    measurements = {"Bust": bust, "Waist": newWaist, 'Hip': newHip}
-    return measurements
+    return {"Bust": bust, "Waist": newWaist, 'Hip': newHip}
 
 # 获取最大hp值
 def getMaxHitPoint(temName):
@@ -190,8 +175,7 @@ def getMaxHitPoint(temName):
     maxHitPoint = int(temData['HitPointMax'])
     addValue = random.randint(0,500)
     impairment = random.randint(0,500)
-    maxHitPoint = maxHitPoint + addValue - impairment
-    return maxHitPoint
+    return maxHitPoint + addValue - impairment
 
 # 获取最大mp值
 def getMaxManaPoint(temName):
@@ -199,8 +183,7 @@ def getMaxManaPoint(temName):
     maxManaPoint = int(temData['ManaPointMax'])
     addValue = random.randint(0,500)
     impairment = random.randint(0,500)
-    maxManaPoint = maxManaPoint + addValue - impairment
-    return maxManaPoint
+    return maxManaPoint + addValue - impairment
 
 # 获取性经验数据
 def getSexExperience(temName):
@@ -223,7 +206,7 @@ def getSexExperience(temName):
     anusExperience = random.randint(int(anusExperienceList[0]),int(anusExperienceList[1]))
     penisExperienceList = TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperienceTem')['PenisExperienceTem'][penisExperienceTemName]
     penisExperience = random.randint(int(penisExperienceList[0]),int(penisExperienceList[1]))
-    sexExperience = {
+    return {
         'mouthExperience' : mouthExperience,
         'bosomExperience' : bosomExperience,
         'vaginaExperience' : vaginaExperience,
@@ -231,7 +214,6 @@ def getSexExperience(temName):
         'anusExperience' : anusExperience,
         'penisExperience':penisExperience,
     }
-    return sexExperience
 
 # 获取性器官敏感等级
 def getSexGrade(sexExperienceData):
@@ -247,7 +229,7 @@ def getSexGrade(sexExperienceData):
     clitorisGrade = judgeGrade(clitorisExperience)
     anusGrade = judgeGrade(anusExperience)
     penisGrade = judgeGrade(penisExperience)
-    sexGradeList = {
+    return {
         'mouthGrade' : mouthGrade,
         'bosomGrade' : bosomGrade,
         'vaginaGrade' : vaginaGrade,
@@ -255,7 +237,6 @@ def getSexGrade(sexExperienceData):
         'anusGrade' : anusGrade,
         'penisGrade' : penisGrade
     }
-    return sexGradeList
 
 # 计算等级
 def judgeGrade(experience):
@@ -323,7 +304,6 @@ def setAddFeatures(featuresData):
             CacheContorl.featuresList[cacheList[i]] = cacheText
         except KeyError:
             pass
-    pass
 
 # 创建角色默认属性
 def setAttrDefault(characterId):

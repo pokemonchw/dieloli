@@ -55,8 +55,6 @@ def getTextIndex(text):
             else:
                 text = text.replace(styleTextHead, '')
                 text = text.replace(styleTextTail, '')
-        else:
-            pass
     count = len(text)
     for i in range(0,count):
         if textStyleList[i] in barlist:

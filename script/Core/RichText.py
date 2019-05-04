@@ -11,8 +11,6 @@ def setRichTextPrint(textMessage,defaultStyle):
         styleTextHead = '<' + styleNameList[i] + '>'
         if styleTextHead in textMessage:
             styleIndex = 1
-        else:
-            pass
     if styleIndex == 0:
         for i in range(0,len(textMessage)):
             styleList.append(defaultStyle)
@@ -41,9 +39,7 @@ def setRichTextPrint(textMessage,defaultStyle):
                         CacheContorl.textStylePosition['position'] = 0
                         CacheContorl.outputTextStyle = 'standard'
                         CacheContorl.textStyleCache = ['standard']
-                    if i in range(styleLastIndex,styleMaxIndex):
-                        pass
-                    else:
+                    if i not in range(styleLastIndex,styleMaxIndex):
                         styleList.append(CacheContorl.outputTextStyle)
                 else:
                     styleList.append(CacheContorl.outputTextStyle)
@@ -61,6 +57,4 @@ def removeRichCache(string):
         if styleTextHead in string:
             string = string.replace(styleTextHead, '')
             string = string.replace(styleTextTail, '')
-        else:
-            pass
     return string

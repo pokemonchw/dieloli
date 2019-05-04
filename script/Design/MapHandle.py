@@ -115,9 +115,7 @@ def getPathfinding(mapPath,nowNode,targetNode,pathNodeList = [],pathTimeList = [
     else:
         for i in range(0,len(targetList)):
             target = targetList[i]
-            if target in pathNodeList:
-                pass
-            else:
+            if target not in pathNodeList:
                 targetTime = targetListDict[target]
                 findPath = pathNodeList.copy()
                 if findPath == []:
@@ -321,14 +319,10 @@ def getSceneCharacterIdList(scenePath):
 def sortSceneCharacterId(scenePath):
     scenePathStr = getMapSystemPathStrForList(scenePath)
     newCharacterList = []
+    nowSceneCharacterIntimateData = {}
     for character in CacheContorl.sceneData[scenePathStr]['SceneCharacterData']:
-        if newCharacterList == []:
-            newCharacterList.append(character)
-        else:
-            for i in range(0,len(newCharacterList)):
-                if CacheContorl.characterData['character'][newCharacterList[i]]['Intimate'] < CacheContorl.characterData['character'][character]['Intimate']:
-                    newCharacterList.insert(i,character)
-                elif i == len(newCharacterList) - 1:
-                    newCharacterList.append(character)
+        nowSceneCharacterIntimateData[character] = CacheContorl.characterData['character'][character]['Intimate']
+    newSceneCharacterIntimateData = sorted(nowSceneCharacterIntimateData.items(),key=lambda x: x[1],reverse=True)
+    newSceneCharacterIntimateData = ValueHandle.twoBitArrayToDict(newSceneCharacterIntimateData)
+    newCharacterList = list(newSceneCharacterIntimateData.keys())
     CacheContorl.sceneData[scenePathStr]['SceneCharacterData'] = newCharacterList
-

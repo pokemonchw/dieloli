@@ -29,6 +29,6 @@
   "inSceneList1":["移动","查看属性","查看{NickName}的属性"],
   "seeMap":["返回场景","查看上级地图","查看下级地图"],
   "gameHelp":["返回主页"],
-  "seeCharacterWearClothes":["返回主页"]
-  
+  "seeCharacterWearClothes":["返回主页"],
+  "changeSceneCharacterList":["上一页","下一页"]
 }

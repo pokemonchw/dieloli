@@ -39,7 +39,6 @@ def keyUp(event):
             break
         except KeyError:
             CacheContorl.inputPosition['position'] = CacheContorl.inputPosition['position'] + 1
-    pass
 
 #键盘下键事件
 def keyDown(event):
@@ -53,7 +52,6 @@ def keyDown(event):
     elif CacheContorl.inputPosition['position'] == len(CacheContorl.inputCache) - 1:
         CacheContorl.inputPosition['position'] = 0
         MainFrame.order.set('')
-    pass
 
 #逐字输出状态改变
 def setWFrameUp(event):
@@ -66,5 +64,3 @@ def mouseCheckPush(event):
     if CacheContorl.wframeMouse['mouseLeaveCmd'] == 0:
         MainFrame.send_input()
         CacheContorl.wframeMouse['mouseLeaveCmd'] = 1
-    else:
-        pass

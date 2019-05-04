@@ -24,6 +24,7 @@ inscenelist1 = "inSceneList1"
 seemap = "seeMap"
 gamehelp = "gameHelp"
 seecharacterwearclothes = "seeCharacterWearClothes"
+changescenecharacterlist = 'changeSceneCharacterList'
 
 # 用于批量生成id命令
 def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left',startId = '0',cmdListData=None,lastLine = False):
@@ -73,8 +74,6 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
                 cmdTextAndId = cmdTextAndId.rstrip()
                 cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
                 inputI.append(str(returnId))
-        else:
-            pass
     EraPrint.p('\n')
     if askfor == True:
         ans = int(GameInit.askfor_Int(inputI))
@@ -86,8 +85,6 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
 def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True,cmdListData=None):
     if cmdListData == None:
         cmdListData = TextLoading.getTextData(TextLoading.cmdPath, cmdList).copy()
-    else:
-        pass
     inputS = []
     textWidth = GameConfig.text_width
     if lastLine == True:

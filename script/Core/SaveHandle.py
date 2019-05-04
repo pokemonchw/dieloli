@@ -22,8 +22,7 @@ def judgeSaveFileExist(saveId):
     savePath = getSavefilePath(saveId)
     if not os.path.exists(savePath):
         return "0"
-    else:
-        return "1"
+    return "1"
 
 # 存入存档数据
 def establishSave(saveId):

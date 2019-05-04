@@ -35,7 +35,6 @@ def askForMainFrame(ansList):
         SaveHandleFrame.establishSave_func('MainFramePanel')
     elif ans == '7':
         SaveHandleFrame.loadSave_func('MainFramePanel')
-        pass
 
 # 游戏主页查看属性流程
 def mainFrameSeeAttrPanel():

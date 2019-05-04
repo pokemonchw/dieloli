@@ -118,16 +118,12 @@ def send_input(*args):
     global input_event_func
     order = _getorder()
     if len(CacheContorl.inputCache) >= 21:
-        if(order) == '':
-            pass
-        else:
+        if not (order) == '':
             del CacheContorl.inputCache[0]
             CacheContorl.inputCache.append(order)
             CacheContorl.inputPosition['position'] = 0
     else:
-        if (order) == '':
-            pass
-        else:
+        if not (order) == '':
             CacheContorl.inputCache.append(order)
             CacheContorl.inputPosition['position'] = 0
     input_event_func(order)

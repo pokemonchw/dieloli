@@ -5,13 +5,11 @@ from script.Design import CmdButtonQueue,GameTime
 def loadSaveInfoHeadPanel():
     saveFrameTitle = TextLoading.getTextData(TextLoading.stageWordPath, '71')
     EraPrint.plt(saveFrameTitle)
-    pass
 
 # 储存存档信息头面板
 def establishSaveInfoHeadPanel():
     saveFrameTitle = TextLoading.getTextData(TextLoading.stageWordPath, '70')
     EraPrint.plt(saveFrameTitle)
-    pass
 
 # 查看存档页面面板
 def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
@@ -96,8 +94,6 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
             idText = autoInfoText + saveNoneAlign
             EraPrint.p(idText)
             EraPrint.p('\n')
-    else:
-        pass
     return inputS
 
 # 询问切换存档页面板

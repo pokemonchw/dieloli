@@ -31,8 +31,6 @@ def seeCharacterList_func(oldPanel):
             CacheContorl.characterData['characterId'] = '0'
             CacheContorl.panelState['SeeCharacterListPanel'] = '0'
             mainframe.mainFrame_func()
-        else:
-            pass
     elif yrn == str(startId + 2):
         if pageId == maxPage:
             CacheContorl.panelState['SeeCharacterListPanel'] = '0'

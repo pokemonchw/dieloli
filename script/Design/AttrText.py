@@ -114,8 +114,6 @@ def getFeaturesStr(fList):
             featureText = fList[featuresListText[i]]
             if featureText != '':
                 featuresListStr = featuresListStr + '[' + featureText + ']'
-            else:
-                pass
         except KeyError:
             pass
     return featuresListStr

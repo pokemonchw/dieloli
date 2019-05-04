@@ -18,8 +18,7 @@ def characterName(string):
     try:
         characterId = CacheContorl.characterData['characterId']
         charactername = CacheContorl.characterData['character'][characterId]['Name']
-        string = string.replace('{Name}', charactername)
-        return string
+        return string.replace('{Name}', charactername)
     except KeyError:
         return string
 
@@ -31,8 +30,7 @@ def characterNickName(string):
     try:
         characterId = CacheContorl.characterData['characterId']
         charactername = CacheContorl.characterData['character'][characterId]['NickName']
-        string = string.replace('{NickName}', charactername)
-        return string
+        return string.replace('{NickName}', charactername)
     except KeyError:
         return string
 
@@ -44,7 +42,6 @@ def characterSelfName(string):
     try:
         characterId = CacheContorl.characterData['characterId']
         characterselfname = CacheContorl.characterData['character'][characterId]['SelfName']
-        string = string.replace('{SelfName}',characterselfname)
-        return string
+        return string.replace('{SelfName}',characterselfname)
     except KeyError:
         return string

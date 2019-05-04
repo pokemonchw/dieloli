@@ -31,15 +31,12 @@ def p(string, style='standard'):
 # 输出图片
 def pimage(imageName,imagePath=''):
     IoInit.imageprint(imageName, imagePath)
-    pass
 
 # 小标题输出
 def plt(string):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     string = str(string)
     string = Dictionaries.handleText(string)
     global last_char
@@ -55,8 +52,6 @@ def sontitleprint(string):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     string = string
     string = Dictionaries.handleText(string)
     global last_char
@@ -73,8 +68,6 @@ def pl(string='', style='standard'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     global last_char
     if not last_char == '\n':
         p('\n')
@@ -87,8 +80,6 @@ def pline(sample='=', style='standard'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     textWidth = GameConfig.text_width
     pl(sample * textWidth,style)
 
@@ -96,8 +87,6 @@ def plittleline(sample = ':',style = 'standard'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     textWidth = GameConfig.text_width
     pl(sample * textWidth, style)
 
@@ -106,8 +95,6 @@ def printPageLine(sample = ':',string = '',style = 'standard'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     textWidth = int(GameConfig.text_width)
     stringWidth = int(TextHandle.getTextIndex(string))
     fixText = sample * int(textWidth / 2 - stringWidth / 2)
@@ -119,9 +106,6 @@ def pwarn(string, style='warning'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
-    """输出警告"""
     pl(string, style)
     print(string)
 
@@ -130,8 +114,6 @@ def pwait(string, style='standard'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     p(string, style)
     FlowHandle.askfor_wait()
 
@@ -140,8 +122,6 @@ def plwait(string='', style='standard'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     pl(string, style)
     FlowHandle.askfor_wait()
 
@@ -150,8 +130,6 @@ def pobo(sleepTime,string, style='standard'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     CacheContorl.wframeMouse['wFrameUp'] = 0
     styleList = RichText.setRichTextPrint(string,style)
     styleNameList = GameConfig.getFontDataList()
@@ -161,8 +139,6 @@ def pobo(sleepTime,string, style='standard'):
         if styleTextHead in string:
             string = string.replace(styleTextHead,'')
             string = string.replace(styleTextTail, '')
-        else:
-            pass
     index = len(string)
     for i in range(0,index):
         p(string[i],styleList[i])
@@ -181,8 +157,6 @@ def plist(stringList,stringColumn = 1,stringSize = 'left'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     textWidth = GameConfig.text_width
     stringIndex = int(textWidth / stringColumn)
     for i in range(0, len(stringList)):
@@ -210,8 +184,6 @@ def pnextscreen():
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     p('\n' * GameConfig.text_hight)
 
 #多行居中逐字输出
@@ -219,8 +191,6 @@ def lcp(sleepTime,string='',style='standard'):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     CacheContorl.wframeMouse['wFrameLineState'] = 1
     string = str(string)
     stringlist = string.split('\n')
@@ -262,8 +232,6 @@ def lkeyp(string=''):
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
-    else:
-        pass
     CacheContorl.wframeMouse['wFrameMouseNextLine'] = 1
     string = str(string)
     stringlist = string.split('\n')

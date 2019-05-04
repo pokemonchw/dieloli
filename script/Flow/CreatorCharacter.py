@@ -24,7 +24,6 @@ def inputName_func():
         EraPrint.pnextscreen()
         import script.Design.StartFlow as mainflow
         mainflow.main_func()
-    pass
 
 # 请求玩家输入昵称流程
 def inputNickName_func():
@@ -44,7 +43,6 @@ def inputNickName_func():
     elif flowReturn == 3:
         PyCmd.clr_cmd()
         inputName_func()
-    pass
 
 # 请求玩家输入自称流程
 def inputSelfName_func():
@@ -61,7 +59,6 @@ def inputSelfName_func():
         EraPrint.p('\n')
         PyCmd.clr_cmd()
         inputNickName_func()
-    pass
 
 # 请求玩家输入性别流程
 def inputSexConfirm_func():
@@ -171,8 +168,6 @@ def detailedSetting_func3():
     sexTemName = sexTemDataList[flowReturn]
     if flowReturn != len(sexTemDataList) - 1:
         CacheContorl.featuresList['Chastity'] = ''
-    else:
-        pass
     characterSexExperienceData = AttrCalculation.getSexExperience(sexTemName)
     CacheContorl.temporaryCharacter['SexExperience'] = characterSexExperienceData
     CacheContorl.temporaryCharacter['SexGrade'] = AttrCalculation.getSexGrade(characterSexExperienceData)
@@ -185,8 +180,6 @@ def detailedSetting_func4():
     courageList = featuresList['Courage']
     if flowReturn == 0:
         CacheContorl.featuresList['Courage'] = courageList[0]
-    elif flowReturn == 1:
-        pass
     elif flowReturn == 2:
         CacheContorl.featuresList['Courage'] = courageList[1]
     CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()
@@ -199,8 +192,6 @@ def detailedSetting_func5():
     dispositionList = featuresList['Disposition']
     if flowReturn == 0:
         CacheContorl.featuresList['Disposition'] = dispositionList[0]
-    elif flowReturn == 1:
-        pass
     elif flowReturn == 2:
         CacheContorl.featuresList['Disposition'] = dispositionList[1]
     CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()

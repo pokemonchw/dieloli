@@ -13,8 +13,6 @@ def initTime():
 def getDateText(gameTimeData = None):
     if gameTimeData == None:
         gameTimeData = CacheContorl.gameTime
-    else:
-        pass
     dateText = TextLoading.getTextData(TextLoading.stageWordPath,'65')
     gameYear = str(gameTimeData['year'])
     gameMonth = str(gameTimeData['month'])

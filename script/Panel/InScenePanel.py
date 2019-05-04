@@ -37,7 +37,10 @@ def changeSceneCharacterListPanel():
     characterMax = CharacterHandle.getCharacterIndexMax()
     pageMax = math.floor(characterMax / nameListMax)
     pageText = '(' + str(nowPage) + '/' + str(pageMax) + ')'
+    inputS = CmdButtonQueue.optionint(CmdButtonQueue.changescenecharacterlist,cmdColumn=2,askfor=False,cmdSize='center')
     EraPrint.printPageLine(sample = '-',string = pageText)
+    EraPrint.pl()
+    return inputS
 
 # 用于获取当前页面下的名字列表
 def getNowPageNameList(nameList):
@@ -70,7 +73,7 @@ def seeCharacterInfoPanel():
     EraPrint.p(characterGracesText)
     EraPrint.plittleline()
 
-def inSceneButtonPanel():
-    inputs = CmdButtonQueue.optionint(cmdList=CmdButtonQueue.inscenelist1, cmdColumn=9, askfor=False, cmdSize='center')
+def inSceneButtonPanel(startId):
+    inputs = CmdButtonQueue.optionint(cmdList=CmdButtonQueue.inscenelist1, cmdColumn=9, askfor=False, cmdSize='center',startId = startId)
     EraPrint.plittleline()
     return inputs
