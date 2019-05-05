@@ -96,7 +96,7 @@ def characterMoveScene(oldScenePath,newScenePath,characterId):
 
 def getMapSystemPathStrForList(nowList):
     if isinstance(nowList,list):
-        return '/'.join(nowList)
+        return os.sep.join(nowList)
     return nowList
 
 # 计算寻路路径
@@ -262,7 +262,7 @@ def getSceneDataForMap(mapPath,mapSceneId):
     if mapPathStr == '':
         scenePathStr = str(mapSceneId)
     else:
-        scenePathStr = mapPathStr + '/' + str(mapSceneId)
+        scenePathStr = mapPathStr + os.sep + str(mapSceneId)
     scenePath = getScenePathForTrue(scenePathStr)
     scenePathStr = getMapSystemPathStrForList(scenePath)
     return CacheContorl.sceneData[scenePathStr]
@@ -285,7 +285,7 @@ def getScenePathForTrue(scenePath):
         return scenePath
     else:
         if isinstance(scenePath,str):
-            scenePath = scenePath.split('/')
+            scenePath = scenePath.split(os.sep)
         scenePath.append('0')
         return getScenePathForTrue(scenePath)
 
