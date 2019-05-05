@@ -1,4 +1,7 @@
 from script.Core import CacheContorl,GameConfig,TextLoading
+from script.Design import CharacterBehavior
+
+CharacterBehaviorClass = CharacterBehavior.CharacterBehaviorClass()
 
 # 时间初始化
 def initTime():
@@ -65,6 +68,7 @@ def subTimeNow(minute = 0,hour = 0,day = 0,month = 0,year = 0):
         subMinute = subMinute + hour * 60
     subMinute = subMinute + minute
     CacheContorl.subGameTime = subMinute
+    CharacterBehaviorClass.initCharacterBehavior()
     subTime = CacheContorl.gameTime.copy()
     subTime["minute"] = subTime["minute"] + subMinute
     CacheContorl.gameTime = setSubMinute(subTime)

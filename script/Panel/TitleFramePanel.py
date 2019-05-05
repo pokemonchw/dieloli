@@ -1,10 +1,9 @@
 import time
-from script.Core import EraPrint,FlowHandle,TextLoading,TextHandle,GameConfig,PyCmd,GameData
+from script.Core import EraPrint,TextLoading,TextHandle,GameConfig,PyCmd
 from script.Design import CmdButtonQueue
 
 # 载入游戏面板
 def loadGamePanel():
-    FlowHandle.initCache()
     EraPrint.pnextscreen()
     EraPrint.pnextscreen()
     EraPrint.pobo(1 / 3, TextLoading.getTextData(TextLoading.messagePath, '1'))

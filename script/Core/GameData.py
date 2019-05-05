@@ -1,11 +1,6 @@
 # -*- coding: UTF-8 -*-
 from script.Core.GamePathConfig import gamepath
-import json
-
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
+import json,pickle
 
 import os
 
@@ -44,7 +39,6 @@ mapData = {}
 def loadDirNow(dataPath):
     nowData = {}
     if os.listdir(dataPath):
-    # 上面这行可以删掉？
         for i in os.listdir(dataPath):
             nowPath = os.path.join(dataPath,i)
             if os.path.isfile(nowPath):
@@ -71,16 +65,6 @@ def loadDirNow(dataPath):
                             mapData[mapSystemPathStr] = nowMapData
                         else:
                             nowData[nowFile[0]] = _loadjson(nowPath)
-                elif nowFile[0] == 'Map':
-                    pass # 同Map.json一起处理
-                    # nowReadFile = open(nowPath,'r')
-                    # nowMapData = {}
-                    # nowMapData['MapDraw'] = nowReadFile.read()
-                    # nowReadFile.close()
-                    # nowMapSystemPath = getMapSystemPathForPath(nowPath)
-                    # nowMapData['MapPath'] = nowMapSystemPath
-                    # nowMapSystemPathStr = getMapSystemPathStr(nowMapSystemPath)
-                    # mapData[nowMapSystemPathStr].update(nowMapData)
             else:
                 nowData[i] = loadDirNow(nowPath)
     return nowData

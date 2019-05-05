@@ -27,7 +27,10 @@ def seeSceneCharacterListPanel():
     scenePath = CacheContorl.characterData['character']['0']['Position']
     nameList = MapHandle.getSceneCharacterNameList(scenePath,True)
     nameList = getNowPageNameList(nameList)
-    inputS = CmdButtonQueue.optionstr('',cmdColumn=10,cmdSize='center',askfor=False,cmdListData=nameList)
+    characterId = CacheContorl.characterData['characterId']
+    characterData = CacheContorl.characterData['character'][characterId]
+    characterName = characterData['Name']
+    inputS = CmdButtonQueue.optionstr('',cmdColumn=10,cmdSize='center',askfor=False,cmdListData=nameList,nullCmd=characterName)
     return inputS
 
 # 用于切换角色列表页面的面板
@@ -37,7 +40,7 @@ def changeSceneCharacterListPanel():
     characterMax = CharacterHandle.getCharacterIndexMax()
     pageMax = math.floor(characterMax / nameListMax)
     pageText = '(' + str(nowPage) + '/' + str(pageMax) + ')'
-    inputS = CmdButtonQueue.optionint(CmdButtonQueue.changescenecharacterlist,cmdColumn=2,askfor=False,cmdSize='center')
+    inputS = CmdButtonQueue.optionint(CmdButtonQueue.changescenecharacterlist,cmdColumn=5,askfor=False,cmdSize='center')
     EraPrint.printPageLine(sample = '-',string = pageText)
     EraPrint.pl()
     return inputS

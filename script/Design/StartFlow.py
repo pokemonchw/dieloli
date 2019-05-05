@@ -1,37 +1,30 @@
 # -*- coding: UTF-8 -*-
-import os,time
-from script.Core import PyCmd,CacheContorl,EraPrint,GameData
-from script.Flow import CreatorCharacter,SaveHandleFrame
-from script.Panel import MainPanel
+from script.Core import PyCmd,CacheContorl,EraPrint,GameData,FlowHandle
+from script.Flow import CreatorCharacter,SaveHandleFrame,TitleFrame,Main,SeeCharacterAttr,InScene,SeeCharacterList,ChangeClothes,SeeMap,Shop,GameSetting,GameHelp
 
-# 启动游戏界面
-def open_func():
-    MainPanel.loadGamePanel()
-    time.sleep(1)
-    main_func()
+flowData = {
+    "title_frame":TitleFrame.titleFrame_func,
+    "creator_character":CreatorCharacter.inputName_func,
+    "load_save":SaveHandleFrame.loadSave_func,
+    "establish_save":SaveHandleFrame.establishSave_func,
+    "main":Main.mainFrame_func,
+    "see_character_attr":SeeCharacterAttr.seeAttrOnEveryTime_func,
+    "in_scene":InScene.getInScene_func,
+    "see_character_list":SeeCharacterList.seeCharacterList_func,
+    "change_clothes":ChangeClothes.changeCharacterClothes,
+    "see_map":SeeMap.seeMapFlow,
+    "acknowledgment_attribute":SeeCharacterAttr.acknowledgmentAttribute_func,
+    'shop':Shop.shopMainFrame_func,
+    'game_setting':GameSetting.changeGameSetting_func,
+    'game_help':GameHelp.gameHelp_func
+}
 
-# 主界面
-def main_func():
-    ans = MainPanel.gameMainPanel()
-    if ans == 0:
-        EraPrint.p('\n')
-        newgame_func()
-    elif ans == 1:
-        loadgame_func()
-    elif ans == 2:
-        quitgame_func()
-
-# 主界面新建游戏调用
-def newgame_func():
-    PyCmd.clr_cmd()
-    CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
-    CreatorCharacter.inputName_func()
-
-# 主界面读取游戏调用
-def loadgame_func():
-    PyCmd.clr_cmd()
-    SaveHandleFrame.loadSave_func('MainFlowPanel')
-
-# 主界面退出游戏调用
-def quitgame_func():
-    os._exit(0)
+# 游戏主流程
+def startFrame():
+    nowFlowId = ''
+    FlowHandle.initCache()
+    while(True):
+        if nowFlowId != CacheContorl.nowFlowId:
+            nowFlowId = CacheContorl.nowFlowId
+            PyCmd.clr_cmd()
+            flowData[nowFlowId]()

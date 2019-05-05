@@ -2,109 +2,93 @@ from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,ValueHandle,TextLoa
 from script.Design import PanelStateHandle,GameTime,CharacterHandle,AttrCalculation,MapHandle
 from script.Panel import SeeCharacterAttrPanel
 
-panelList = ['CharacterMainAttrPanel','CharacterEquipmentPanel','CharacterItemPanel','CharacterExperiencePanel',
-                   'CharacterLevelPanel','CharacterFeaturesPanel','CharacterEngravingPanel']
+panelList = ['CharacterMainAttrPanel','CharacterEquipmentPanel','CharacterItemPanel','CharacterExperiencePanel','CharacterLevelPanel','CharacterFeaturesPanel','CharacterEngravingPanel']
 
 # 创建角色时用于查看角色属性的流程
 def acknowledgmentAttribute_func():
-    characterId = CacheContorl.characterData['characterId']
-    AttrCalculation.setAttrOver(characterId)
-    inputS = []
-    attrInpurList = seeAttrInEveryTime_func()
-    inputS = ValueHandle.listAppendToList(attrInpurList,inputS)
-    flowReturn = SeeCharacterAttrPanel.inputAttrOverPanel()
-    inputS = ValueHandle.listAppendToList(flowReturn,inputS)
-    acknowledgmentAttributeAns(inputS)
-
-# 创建角色时用于查看角色属性的流程的事件控制
-def acknowledgmentAttributeAns(inputList):
-    characterId = CacheContorl.characterData['characterId']
-    yrn = GameInit.askfor_All(inputList)
-    showAttrHandleData = TextLoading.getTextData(TextLoading.cmdPath,'seeAttrPanelHandle')
-    PyCmd.clr_cmd()
-    if yrn in panelList:
-        PanelStateHandle.panelStateChange(yrn)
-        acknowledgmentAttribute_func()
-    elif yrn == '0':
-        GameTime.initTime()
+    while(True):
+        characterId = CacheContorl.characterData['characterId']
         AttrCalculation.setAttrOver(characterId)
-        CharacterHandle.initCharacterList()
-        SeeCharacterAttrPanel.initShowAttrPanelList()
-        characterPosition = CacheContorl.characterData['character'][characterId]['Position']
-        MapHandle.characterMoveScene(['0'], characterPosition, characterId)
-        from script.Flow import Main
-        Main.mainFrame_func()
-    elif yrn == '1':
-        CacheContorl.wframeMouse['wFrameRePrint'] = 1
-        EraPrint.pnextscreen()
-        SeeCharacterAttrPanel.initShowAttrPanelList()
-        from script.Design import StartFlow
-        StartFlow.main_func()
-    elif yrn in showAttrHandleData:
-        index = showAttrHandleData.index(yrn)
-        index = str(index)
-        CacheContorl.panelState['AttrShowHandlePanel'] = index
-        acknowledgmentAttribute_func()
+        inputS = []
+        attrInpurList = seeAttrInEveryTime_func()
+        inputS = ValueHandle.listAppendToList(attrInpurList,inputS)
+        flowReturn = SeeCharacterAttrPanel.inputAttrOverPanel()
+        inputS = ValueHandle.listAppendToList(flowReturn,inputS)
+        characterId = CacheContorl.characterData['characterId']
+        yrn = GameInit.askfor_All(inputS)
+        showAttrHandleData = TextLoading.getTextData(TextLoading.cmdPath,'seeAttrPanelHandle')
+        PyCmd.clr_cmd()
+        if yrn in panelList:
+            PanelStateHandle.panelStateChange(yrn)
+        elif yrn == '0':
+            GameTime.initTime()
+            AttrCalculation.setAttrOver(characterId)
+            CharacterHandle.initCharacterList()
+            SeeCharacterAttrPanel.initShowAttrPanelList()
+            characterPosition = CacheContorl.characterData['character'][characterId]['Position']
+            MapHandle.characterMoveScene(['0'], characterPosition, characterId)
+            CacheContorl.nowFlowId = 'main'
+            break
+        elif yrn == '1':
+            CacheContorl.wframeMouse['wFrameRePrint'] = 1
+            EraPrint.pnextscreen()
+            SeeCharacterAttrPanel.initShowAttrPanelList()
+            CacheContorl.nowFlowId = 'title_frame'
+            break
+        elif yrn in showAttrHandleData:
+            index = str(showAttrHandleData.index(yrn))
+            CacheContorl.panelState['AttrShowHandlePanel'] = index
 
 # 通用查看角色属性流程
-def seeAttrOnEveryTime_func(oldPanel,tooOldFlow = None):
-    characterId = CacheContorl.characterData['characterId']
-    if oldPanel == 'InScenePanel':
-        sceneId = CacheContorl.characterData['character']['0']['Position']
-        characterIdList = MapHandle.getSceneCharacterIdList(sceneId)
-    else:
-        characterIdList = ValueHandle.dictKeysToList(CacheContorl.characterData['character'])
-    characterIdIndex = characterIdList.index(characterId)
-    inputS = []
-    seeAttrList = seeAttrInEveryTime_func()
-    inputS = inputS + seeAttrList
-    askSeeAttr = SeeCharacterAttrPanel.askForSeeAttr()
-    inputS = inputS + askSeeAttr
-    yrn = GameInit.askfor_All(inputS)
-    PyCmd.clr_cmd()
-    showAttrHandleData = TextLoading.getTextData(TextLoading.cmdPath, 'seeAttrPanelHandle')
-    characterMax = characterIdList[len(characterIdList) - 1]
-    if yrn in showAttrHandleData:
-        index = showAttrHandleData.index(yrn)
-        index = str(index)
-        CacheContorl.panelState['AttrShowHandlePanel'] = index
-        seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
-    elif yrn in panelList:
-        PanelStateHandle.panelStateChange(yrn)
-        seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
-    elif yrn == '0':
-        if characterIdIndex == 0:
-            CacheContorl.characterData['characterId'] = characterMax
-            seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
+def seeAttrOnEveryTime_func():
+    while(True):
+        characterId = CacheContorl.characterData['characterId']
+        if CacheContorl.oldFlowId == 'in_scene':
+            sceneId = CacheContorl.characterData['character']['0']['Position']
+            characterIdList = MapHandle.getSceneCharacterIdList(sceneId)
         else:
-            characterId = characterIdList[characterIdIndex - 1]
-            CacheContorl.characterData['characterId'] = characterId
-            seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
-    elif yrn == '1':
-        from script.Flow import Main,SeeCharacterList,InScene
-        if oldPanel == 'MainFramePanel':
+            characterIdList = ValueHandle.dictKeysToList(CacheContorl.characterData['character'])
+        characterIdIndex = characterIdList.index(characterId)
+        inputS = []
+        seeAttrList = seeAttrInEveryTime_func()
+        inputS = inputS + seeAttrList
+        askSeeAttr = SeeCharacterAttrPanel.askForSeeAttr()
+        inputS = inputS + askSeeAttr
+        yrn = GameInit.askfor_All(inputS)
+        PyCmd.clr_cmd()
+        showAttrHandleData = TextLoading.getTextData(TextLoading.cmdPath, 'seeAttrPanelHandle')
+        characterMax = characterIdList[len(characterIdList) - 1]
+        if yrn in showAttrHandleData:
+            index = showAttrHandleData.index(yrn)
+            index = str(index)
+            CacheContorl.panelState['AttrShowHandlePanel'] = index
+        elif yrn in panelList:
+            PanelStateHandle.panelStateChange(yrn)
+        elif yrn == '0':
+            if characterIdIndex == 0:
+                CacheContorl.characterData['characterId'] = characterMax
+            else:
+                characterId = characterIdList[characterIdIndex - 1]
+                CacheContorl.characterData['characterId'] = characterId
+        elif yrn == '1':
+            from script.Flow import SeeCharacterList
             SeeCharacterAttrPanel.initShowAttrPanelList()
-            CacheContorl.characterData['characterId'] = '0'
-            Main.mainFrame_func()
-        elif oldPanel == 'SeeCharacterListPanel':
-            characterListShow = int(GameConfig.characterlist_show)
-            nowPageId = characterIdIndex / characterListShow
-            CacheContorl.panelState['SeeCharacterListPanel'] = nowPageId
-            SeeCharacterAttrPanel.initShowAttrPanelList()
-            SeeCharacterList.seeCharacterList_func(tooOldFlow)
-        elif oldPanel == 'InScenePanel':
-            SeeCharacterAttrPanel.initShowAttrPanelList()
-            CacheContorl.characterData['characterId'] = '0'
-            InScene.getInScene_func()
-    elif yrn == '2':
-        if characterId == characterMax:
-            characterId = characterIdList[0]
-            CacheContorl.characterData['characterId'] = characterId
-            seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
-        else:
-            characterId = characterIdList[characterIdIndex  + 1]
-            CacheContorl.characterData['characterId'] = characterId
-            seeAttrOnEveryTime_func(oldPanel,tooOldFlow)
+            if CacheContorl.oldFlowId == 'main':
+                CacheContorl.characterData['characterId'] = '0'
+            elif CacheContorl.oldFlowId == 'see_character_list':
+                characterListShow = int(GameConfig.characterlist_show)
+                nowPageId = characterIdIndex / characterListShow
+                CacheContorl.panelState['SeeCharacterListPanel'] = nowPageId
+            CacheContorl.nowFlowId = CacheContorl.oldFlowId
+            CacheContorl.oldFlowId = CacheContorl.tooOldFlowId
+            break
+        elif yrn == '2':
+            if characterId == characterMax:
+                characterId = characterIdList[0]
+                CacheContorl.characterData['characterId'] = characterId
+            else:
+                characterId = characterIdList[characterIdIndex  + 1]
+                CacheContorl.characterData['characterId'] = characterId
 
 # 用于任何时候查看角色属性的流程
 def seeAttrInEveryTime_func():

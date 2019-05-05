@@ -6,6 +6,6 @@ GameData.init()
 def gameStart():
     from script.Design import StartFlow
     from script.Core import GameInit
-    GameInit.run(StartFlow.open_func)
+    GameInit.run(StartFlow.startFrame)
 
 gameStart()

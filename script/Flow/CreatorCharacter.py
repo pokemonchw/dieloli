@@ -20,10 +20,8 @@ def inputName_func():
         PyCmd.clr_cmd()
         inputName_func()
     elif flowReturn == 2:
-        CacheContorl.wframeMouse['wFrameRePrint'] = 1
         EraPrint.pnextscreen()
-        import script.Design.StartFlow as mainflow
-        mainflow.main_func()
+        CacheContorl.nowFlowId = 'title_frame'
 
 # 请求玩家输入昵称流程
 def inputNickName_func():
@@ -111,7 +109,7 @@ def attributeGenerationBranch_func():
         detailedSetting_func1()
     elif flowReturn == 1:
         PyCmd.clr_cmd()
-        SeeCharacterAttr.acknowledgmentAttribute_func()
+        CacheContorl.nowFlowId = 'acknowledgment_attribute'
     elif flowReturn == 2:
         PyCmd.clr_cmd()
         inputSexConfirm_func()
@@ -231,4 +229,4 @@ def detailedSetting_func8():
     CacheContorl.temporaryCharacter['Weight'] = characterWeight
     CacheContorl.temporaryCharacter['BodyFat'] = characterBodyFat
     CacheContorl.temporaryCharacter['Measurements'] = characterMeasurements
-    SeeCharacterAttr.acknowledgmentAttribute_func()
+    CacheContorl.nowFlowId = 'acknowledgment_attribute'

@@ -35,6 +35,9 @@
   "nowmap":{
     "foreground":"#292421"
   },
+  "nullcmd":{
+    "foreground":"#292421"
+  },
   "hp":{
     "foreground":"#E71B64"
   },

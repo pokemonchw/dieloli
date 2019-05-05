@@ -191,6 +191,9 @@ def initCache():
     CacheContorl.temporaryCharacterBak = CacheContorl.temCharacterDefault.copy()
     CacheContorl.randomNpcList = []
     CacheContorl.npcTemData = []
+    CacheContorl.nowFlowId = 'title_frame'
+    CacheContorl.oldFlowId = ''
+    CacheContorl.tooOldFlowId = ''
 
 def getTemCharacterDefault():
     temCharacter = TextLoading.getTextData(TextLoading.rolePath, 'Default')

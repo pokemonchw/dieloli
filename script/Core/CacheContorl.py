@@ -65,6 +65,11 @@ panelState = {}
 # 存档页面最大数量
 maxSavePage = 0
 
+# 现在所处的流程
+nowFlowId = ''
+oldFlowId = ''
+tooOldFlowId = ''
+
 textWait = 0
 
 mapData = {}

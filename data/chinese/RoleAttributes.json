@@ -42,10 +42,7 @@
       "Waist":"0",
       "Hip":"0"
     },
-    "Move":{
-      "MoveIng":"0",
-      "MoveTime":"0"
-    },
+    "Behavior":{},
     "Gold":"0",
     "Position":["0"],
     "Class":[],

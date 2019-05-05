@@ -82,7 +82,7 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
         return inputI
 
 # 用于批量生成文本命令
-def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True,cmdListData=None):
+def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True,cmdListData=None,nullCmd = ''):
     if cmdListData == None:
         cmdListData = TextLoading.getTextData(TextLoading.cmdPath, cmdList).copy()
     inputS = []
@@ -94,23 +94,31 @@ def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = T
         if len(cmdListData) < cmdColumn:
             cmdColumn = len(cmdListData)
     cmdIndex = int(textWidth / cmdColumn)
+    nowNullCmd = nullCmd
     for i in range(0,len(cmdListData)):
+        nowNullCmd = True
+        if nullCmd == cmdListData[i]:
+            nowNullCmd = False
         cmdTextBak = Dictionaries.handleText(cmdListData[i])
         cmdText = '[' + cmdTextBak + ']'
         if i == 0:
-            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize)
-            inputS.append(cmdListData[i])
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd=nowNullCmd)
+            if nowNullCmd:
+                inputS.append(cmdListData[i])
         elif i / cmdColumn >= 1 and i % cmdColumn == 0:
             EraPrint.p('\n')
-            cmdSizePrint(cmdText, cmdTextBak, None, cmdIndex, cmdSize)
-            inputS.append(cmdTextBak)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd=nowNullCmd)
+            if nowNullCmd:
+                inputS.append(cmdTextBak)
         elif i == len(cmdListData) - 1 and lastLine == True:
             EraPrint.p('\n')
-            cmdSizePrint(cmdText, cmdTextBak, None, cmdIndex, cmdSize)
-            inputS.append(cmdTextBak)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd=nowNullCmd)
+            if nowNullCmd:
+                inputS.append(cmdTextBak)
         else:
-            cmdSizePrint(cmdText, cmdTextBak, None, cmdIndex, cmdSize)
-            inputS.append(cmdTextBak)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd=nowNullCmd)
+            if nowNullCmd:
+                inputS.append(cmdTextBak)
     EraPrint.p('\n')
     if askfor == True:
         ans = GameInit.askfor_All(inputS)
@@ -135,20 +143,31 @@ def idIndex(id):
         return idS
 
 # 命令对齐
-def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'left'):
+def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'left',nowNullCmd=True):
+    if nowNullCmd == False:
+        cmdText = '<nullcmd>' + cmdText + '</nullcmd>'
     if cmdSize == 'left':
         cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (textWidth - cmdWidth)
-        PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        if nowNullCmd:
+            PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        else:
+            EraPrint.p(cmdText)
         EraPrint.p(cmdTextFix)
     elif cmdSize == 'center':
         cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (int(textWidth/2) - int(cmdWidth/2))
         EraPrint.p(cmdTextFix)
-        PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        if nowNullCmd:
+            PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        else:
+            EraPrint.p(cmdText)
         EraPrint.p(cmdTextFix)
     elif cmdSize == 'right':
         cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (textWidth - cmdWidth)
+        if nowNullCmd:
+            PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+        else:
+            EraPrint.p(cmdText)
         EraPrint.p(cmdTextFix)
-        PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)

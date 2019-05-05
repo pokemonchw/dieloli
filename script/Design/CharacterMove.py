@@ -10,10 +10,10 @@ def ownCharcterMove(targetScene):
         nullMessage = TextLoading.getTextData(TextLoading.messagePath,'30')
         EraPrint.p(nullMessage)
         Update.gameUpdateFlow()
-        InScene.getInScene_func()
+        CacheContorl.nowFlowId = 'in_scene'
     elif moveNow == 'End':
         Update.gameUpdateFlow()
-        InScene.getInScene_func()
+        CacheContorl.nowFlowId = 'in_scene'
     else:
         ownCharcterMove(targetScene)
 
