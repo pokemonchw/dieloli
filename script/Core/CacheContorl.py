@@ -70,6 +70,8 @@ nowFlowId = ''
 oldFlowId = ''
 tooOldFlowId = ''
 
+oldCharacterId = '0'
+
 textWait = 0
 
 mapData = {}

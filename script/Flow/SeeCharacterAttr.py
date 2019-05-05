@@ -36,8 +36,7 @@ def acknowledgmentAttribute_func():
             CacheContorl.nowFlowId = 'title_frame'
             break
         elif yrn in showAttrHandleData:
-            index = str(showAttrHandleData.index(yrn))
-            CacheContorl.panelState['AttrShowHandlePanel'] = index
+            CacheContorl.panelState['AttrShowHandlePanel'] = str(showAttrHandleData.index(yrn))
 
 # 通用查看角色属性流程
 def seeAttrOnEveryTime_func():

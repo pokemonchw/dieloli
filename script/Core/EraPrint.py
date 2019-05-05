@@ -8,6 +8,7 @@ def_style = IoInit.style_def
 
 #基本输出
 def p(string, style='standard'):
+    string = str(string)
     barlist = TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
     styleList = RichText.setRichTextPrint(string, style)
     global last_char

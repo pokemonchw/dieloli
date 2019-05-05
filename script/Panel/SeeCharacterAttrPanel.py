@@ -90,7 +90,6 @@ def seeCharacterMainAttrPanel(characterId):
         EraPrint.p('\n')
         return 'CharacterMainAttrPanel'
 
-
 # 查看角色装备面板
 def seeCharacterEquipmentPanel(characterId):
     EraPrint.plittleline()
