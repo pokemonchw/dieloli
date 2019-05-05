@@ -6,4 +6,4 @@ def gameHelp_func():
     inputS = GameHelpPanel.gameHelpPanel()
     yrn = FlowHandle.askfor_All(inputS)
     if yrn == '0':
-        CacheContorl.nowMap = 'main'
+        CacheContorl.nowFlowId = 'main'

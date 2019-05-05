@@ -26,6 +26,7 @@ def seeScenePanel():
         switch = panelStateOffText
     sceneCharacterList = sceneData['SceneCharacterData']
     if len(sceneCharacterList) > 1:
+        EraPrint.p(' ')
         PyCmd.pcmd(switch,'SeeSceneCharacterListPage')
     EraPrint.plittleline()
 
@@ -38,7 +39,7 @@ def seeSceneCharacterListPanel():
     scenePath = CacheContorl.characterData['character']['0']['Position']
     nameList = MapHandle.getSceneCharacterNameList(scenePath,True)
     nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
-    characterMax = CharacterHandle.getCharacterIndexMax()
+    characterMax = len(nameList)
     nameListMax = int(GameConfig.in_scene_see_player_max)
     pageMax = math.floor(characterMax / nameListMax)
     pageText = '(' + str(nowPage) + '/' + str(pageMax) + ')'
@@ -105,5 +106,4 @@ def jumpCharacterListPagePanel():
 
 def inSceneButtonPanel(startId):
     inputs = CmdButtonQueue.optionint(cmdList=CmdButtonQueue.inscenelist1, cmdColumn=9, askfor=False, cmdSize='center',startId = startId)
-    EraPrint.plittleline()
     return inputs

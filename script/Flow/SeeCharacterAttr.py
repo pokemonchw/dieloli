@@ -1,6 +1,7 @@
 from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,ValueHandle,TextLoading,GameConfig
 from script.Design import PanelStateHandle,GameTime,CharacterHandle,AttrCalculation,MapHandle
 from script.Panel import SeeCharacterAttrPanel
+import math
 
 panelList = ['CharacterMainAttrPanel','CharacterEquipmentPanel','CharacterItemPanel','CharacterExperiencePanel','CharacterLevelPanel','CharacterFeaturesPanel','CharacterEngravingPanel']
 
@@ -78,6 +79,17 @@ def seeAttrOnEveryTime_func():
                 characterListShow = int(GameConfig.characterlist_show)
                 nowPageId = characterIdIndex / characterListShow
                 CacheContorl.panelState['SeeCharacterListPanel'] = nowPageId
+            elif CacheContorl.oldFlowId == 'in_scene':
+                scenePath = CacheContorl.characterData['character']['0']['Position']
+                nameList = MapHandle.getSceneCharacterNameList(scenePath,True)
+                nowCharacterName = CacheContorl.characterData['character'][CacheContorl.characterData['characterId']]['Name']
+                try:
+                    nowCharacterIndex = nameList.index(nowCharacterName)
+                except ValueError:
+                    nowCharacterIndex = 0
+                nameListMax = int(GameConfig.in_scene_see_player_max)
+                nowSceneCharacterListPage = math.floor(nowCharacterIndex / nameListMax)
+                CacheContorl.panelState['SeeSceneCharacterListPanel'] = nowSceneCharacterListPage
             CacheContorl.nowFlowId = CacheContorl.oldFlowId
             CacheContorl.oldFlowId = CacheContorl.tooOldFlowId
             break
