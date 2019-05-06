@@ -1,5 +1,5 @@
 import os,importlib
-from script.Core import CacheContorl,GamePathConfig,GameConfig,GameData
+from script.Core import CacheContorl,GamePathConfig,GameConfig
 from script.Design import CharacterHandle
 
 gamePath = GamePathConfig.gamepath

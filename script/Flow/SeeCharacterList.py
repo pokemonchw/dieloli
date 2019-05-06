@@ -1,4 +1,4 @@
-from script.Core import GameConfig,GameInit,PyCmd,CacheContorl
+from script.Core import GameConfig,GameInit,CacheContorl
 from script.Design import CharacterHandle
 from script.Panel import SeeCharacterListPanel
 

@@ -2,7 +2,6 @@ import random
 from script.Core import CacheContorl,PyCmd,TextLoading,EraPrint,ValueHandle
 from script.Design import AttrCalculation
 from script.Panel import CreatorCharacterPanel
-from script.Flow import SeeCharacterAttr
 
 characterId = '0'
 featuresList = AttrCalculation.getFeaturesList()
@@ -161,7 +160,7 @@ def detailedSetting_func2():
 # 详细设置属性3:询问玩家是否具备丰富的性经验
 def detailedSetting_func3():
     flowReturn = CreatorCharacterPanel.detailedSetting3Panel()
-    sexTemDataList = ValueHandle.dictKeysToList(TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperience'))
+    sexTemDataList = list(TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperience').keys())
     sexTemDataList = ValueHandle.reverseArrayList(sexTemDataList)
     sexTemName = sexTemDataList[flowReturn]
     if flowReturn != len(sexTemDataList) - 1:
@@ -218,7 +217,7 @@ def detailedSetting_func7():
 def detailedSetting_func8():
     flowReturn = CreatorCharacterPanel.detailedSetting8Panel()
     weightTemData = TextLoading.getTextData(TextLoading.attrTemplatePath,'WeightTem')
-    weightTemList = ValueHandle.dictKeysToList(weightTemData)
+    weightTemList = list(weightTemData.keys())
     weightTem = weightTemList[int(flowReturn)]
     characterHeight = CacheContorl.temporaryCharacter['Height']
     characterBmi = AttrCalculation.getBMI(weightTem)

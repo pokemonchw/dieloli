@@ -1,5 +1,5 @@
 import os,random
-from script.Core import CacheContorl,ValueHandle,GameConfig,GamePathConfig,TextLoading,GameData
+from script.Core import CacheContorl,GameConfig,GamePathConfig,TextLoading,GameData
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
@@ -16,7 +16,7 @@ def getFeaturesList():
 
 # 获取年龄模板
 def getAgeTemList():
-    return ValueHandle.dictKeysToList(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem'))
+    return list(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem').keys())
 
 # 获取刻应列表
 def getEngravingList():

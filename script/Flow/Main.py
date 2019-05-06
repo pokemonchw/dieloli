@@ -1,7 +1,6 @@
 from script.Core import CacheContorl,GameInit,PyCmd
 from script.Design import AttrHandle
 from script.Panel import MainFramePanel
-from script.Flow import SeeCharacterAttr,SeeCharacterList,Shop,ChangeClothes,GameSetting,SaveHandleFrame,InScene,GameHelp
 
 mainFrameGotoData = {
     "0":'in_scene',

@@ -1,4 +1,4 @@
-from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,ValueHandle,TextLoading,GameConfig
+from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,TextLoading,GameConfig
 from script.Design import PanelStateHandle,GameTime,CharacterHandle,AttrCalculation,MapHandle
 from script.Panel import SeeCharacterAttrPanel
 import math
@@ -12,9 +12,9 @@ def acknowledgmentAttribute_func():
         AttrCalculation.setAttrOver(characterId)
         inputS = []
         attrInpurList = seeAttrInEveryTime_func()
-        inputS = ValueHandle.listAppendToList(attrInpurList,inputS)
+        inputS = attrInpurList + inputS
         flowReturn = SeeCharacterAttrPanel.inputAttrOverPanel()
-        inputS = ValueHandle.listAppendToList(flowReturn,inputS)
+        inputS = flowReturn + inputS
         characterId = CacheContorl.characterData['characterId']
         yrn = GameInit.askfor_All(inputS)
         showAttrHandleData = TextLoading.getTextData(TextLoading.cmdPath,'seeAttrPanelHandle')
@@ -47,7 +47,7 @@ def seeAttrOnEveryTime_func():
             sceneId = CacheContorl.characterData['character']['0']['Position']
             characterIdList = MapHandle.getSceneCharacterIdList(sceneId)
         else:
-            characterIdList = ValueHandle.dictKeysToList(CacheContorl.characterData['character'])
+            characterIdList = list(CacheContorl.characterData['character'].keys())
         characterIdIndex = characterIdList.index(characterId)
         inputS = []
         seeAttrList = seeAttrInEveryTime_func()
@@ -125,5 +125,5 @@ def seeAttrInEveryTime_func():
         inputS.append(characterEngravingPanelAsk)
     EraPrint.pline()
     seeAttrPanelHandleAsk = SeeCharacterAttrPanel.seeAttrShowHandlePanel()
-    inputS = ValueHandle.listAppendToList(seeAttrPanelHandleAsk,inputS)
+    inputS = seeAttrPanelHandleAsk + inputS
     return inputS

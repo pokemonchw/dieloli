@@ -1,4 +1,4 @@
-from script.Core import PyCmd,TextLoading,GameInit,EraPrint,TextHandle,GameConfig,Dictionaries,CacheContorl
+from script.Core import PyCmd,TextLoading,GameInit,EraPrint,TextHandle,GameConfig,Dictionaries
 
 logomenu = "logoMenu"
 currencymenu = "currencyMenu"

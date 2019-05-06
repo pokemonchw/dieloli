@@ -1,7 +1,6 @@
 from script.Core import CacheContorl,GameInit,PyCmd,GameConfig
 from script.Design import MapHandle,CharacterHandle,PanelStateHandle
 from script.Panel import InScenePanel
-from script.Flow import SeeCharacterAttr
 import math,datetime
 
 # 用于进入场景流程

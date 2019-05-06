@@ -1,10 +1,6 @@
-import os
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
+import os,pickle
 from script.Core import EraPrint,TextLoading,CacheContorl,GameConfig,GamePathConfig
-from script.Design import MapHandle,CharacterHandle
+from script.Design import CharacterHandle
 
 gamepath = GamePathConfig.gamepath
 

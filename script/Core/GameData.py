@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from script.Core.GamePathConfig import gamepath
-import json,pickle
+import json
 
 import os
 

@@ -1,5 +1,5 @@
 import os
-from script.Core import GameData,ValueHandle,GamePathConfig
+from script.Core import GameData,GamePathConfig
 
 gamepath = GamePathConfig.gamepath
 
@@ -19,7 +19,7 @@ def getFontData(listId):
 def getFontDataList():
     FontPath = os.path.join(gamepath, 'data', 'FontConfig.json')
     FontData = GameData._loadjson(FontPath)
-    fontList = ValueHandle.dictKeysToList(FontData)
+    fontList = list(FontData.keys())
     return fontList
 
 #配置数据定义

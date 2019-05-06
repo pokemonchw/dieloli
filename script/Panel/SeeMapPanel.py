@@ -1,4 +1,4 @@
-from script.Core import CacheContorl,TextLoading,EraPrint,ValueHandle
+from script.Core import CacheContorl,TextLoading,EraPrint
 from script.Design import MapHandle,CmdButtonQueue
 
 # 用于绘制地图的面板
@@ -23,7 +23,7 @@ def seeMovePathPanel():
     pathEdge = mapData['PathEdge']
     mapSceneId = str(MapHandle.getMapSceneIdForScenePath(nowMap, nowScene))
     scenePath = pathEdge[mapSceneId]
-    scenePathList = ValueHandle.dictKeysToList(scenePath)
+    scenePathList = list(scenePath.keys())
     try:
         scenePathList.remove(mapSceneId)
     except ValueError:

@@ -1,5 +1,5 @@
-from script.Core import GameConfig,RichText,GameData,EraPrint,PyCmd,CacheContorl,TextHandle,ValueHandle,GamePathConfig,TextHandle
-import os,dpath
+from script.Core import RichText,EraPrint,PyCmd,CacheContorl,ValueHandle,TextHandle
+import os
 
 # 输出地图
 def printMap(mapPath):
@@ -109,7 +109,7 @@ def getPathfinding(mapPath,nowNode,targetNode,pathNodeList = [],pathTimeList = [
     mapData = CacheContorl.mapData[mapPathStr].copy()
     pathEdge = mapData['PathEdge'].copy()
     targetListDict = pathEdge[nowNode].copy()
-    targetList = ValueHandle.dictKeysToList(targetListDict)
+    targetList = list(targetListDict.keys())
     if nowNode == targetNode:
         return 'End'
     else:
@@ -132,7 +132,7 @@ def getPathfinding(mapPath,nowNode,targetNode,pathNodeList = [],pathTimeList = [
                     pathEdgeNow = pathEdge[target].copy()
                     pathEdgeNow.pop(nowNode)
                     targetNodeInTargetList = pathEdgeNow.copy()
-                    targetNodeInTargetToList = ValueHandle.dictKeysToList(targetNodeInTargetList)
+                    targetNodeInTargetToList = list(targetNodeInTargetList.keys())
                     for i in range(0,len(targetNodeInTargetToList)):
                         targetNodeInTarget = targetNodeInTargetToList[i]
                         findPath.append(targetNodeInTarget)

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from script.Core import PyCmd,CacheContorl,EraPrint,GameData,FlowHandle
+from script.Core import PyCmd,CacheContorl,FlowHandle
 from script.Flow import CreatorCharacter,SaveHandleFrame,TitleFrame,Main,SeeCharacterAttr,InScene,SeeCharacterList,ChangeClothes,SeeMap,Shop,GameSetting,GameHelp
 
 flowData = {

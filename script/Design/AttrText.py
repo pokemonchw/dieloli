@@ -1,4 +1,4 @@
-import os,random,datetime,bisect
+import os,random,bisect
 from script.Core import TextLoading,GameData,CacheContorl,GameConfig,GamePathConfig,ValueHandle
 from script.Design import ProportionalBar,AttrPrint
 

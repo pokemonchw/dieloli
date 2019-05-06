@@ -1,7 +1,5 @@
 from script.Core import CacheContorl,TextLoading,EraPrint
 from script.Design import MapHandle,GameTime,Update
-from script.Flow import InScene
-import datetime
 
 # 主角移动
 def ownCharcterMove(targetScene):

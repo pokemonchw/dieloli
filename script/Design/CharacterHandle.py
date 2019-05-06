@@ -190,7 +190,7 @@ def getCharacterIndexMax():
 # 获取角色id列表
 def getCharacterIdList():
     characterData = CacheContorl.characterData['character']
-    characterList = ValueHandle.dictKeysToList(characterData)
+    characterList = list(characterData.keys())
     return characterList
 
 # 初始化角色的位置
