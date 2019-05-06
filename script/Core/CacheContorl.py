@@ -83,3 +83,7 @@ pathTimeList = []
 nowMap = []
 
 randomNpcList = []
+
+occupationCharacterData = {}
+
+placeData = {}

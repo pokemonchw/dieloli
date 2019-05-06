@@ -1,3 +1,5 @@
 {
-  "SceneName":"小学部6年级办公室"
+  "SceneName":"小学部6年级办公室",
+  "InOutDoor":"In",
+  "SceneTag":"Office_6"
 }

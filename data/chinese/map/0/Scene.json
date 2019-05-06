@@ -1,3 +1,5 @@
 {
-  "SceneName":"学校大门"
+  "SceneName":"学校大门",
+  "InOutDoor":"Out",
+  "SceneTag":"Door"
 }

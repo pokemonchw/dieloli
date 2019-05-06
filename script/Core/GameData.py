@@ -28,11 +28,16 @@ def loadDirNow(dataPath):
                             nowSceneData = {}
                             mapSystemPath = getMapSystemPathForPath(nowPath)
                             mapSystemPathStr = getMapSystemPathStr(mapSystemPath)
-                            nowSceneData.update(JsonHandle._loadjson(nowPath))
+                            loadSceneData = JsonHandle._loadjson(nowPath)
+                            nowSceneData.update(loadSceneData)
                             nowSceneData['SceneCharacterData'] = []
                             nowSceneData['ScenePath'] = mapSystemPath
                             nowSceneData = {mapSystemPathStr:nowSceneData}
                             sceneData.update(nowSceneData)
+                            nowSceneTag = loadSceneData['SceneTag']
+                            if nowSceneTag not in CacheContorl.placeData:
+                                CacheContorl.placeData[nowSceneTag] = []
+                            CacheContorl.placeData[nowSceneTag].append(mapSystemPathStr)
                         elif nowFile[0] == 'Map':
                             nowMapData = {}
                             mapSystemPath = getMapSystemPathForPath(nowPath)

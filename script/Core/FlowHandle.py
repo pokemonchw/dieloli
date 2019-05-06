@@ -105,7 +105,6 @@ def order_deal(flag='order', print_order=True):
                 return order
 
             if flag == 'console':
-                # TODO add_console_method
                 exec(order)
 
             if flag == 'order' and order.isdigit():
@@ -194,6 +193,7 @@ def initCache():
     CacheContorl.nowFlowId = 'title_frame'
     CacheContorl.oldFlowId = ''
     CacheContorl.tooOldFlowId = ''
+    CacheContorl.occupationCharacterData = {}
 
 def getTemCharacterDefault():
     temCharacter = TextLoading.getTextData(TextLoading.rolePath, 'Default')

@@ -1,5 +1,4 @@
-import os,random
-from concurrent.futures import thread
+import os,random,datetime
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig,JsonHandle
 from script.Design import AttrCalculation,MapHandle,AttrText
 
@@ -13,14 +12,12 @@ characterList = GameData.getPathList(characterListPath)
 
 # 初始化角色数据
 def initCharacterList():
-    initCharacterThreadPool = thread.ThreadPoolExecutor(max_workers=GameConfig.threading_pool_max)
     initCharacterTem()
     characterList = CacheContorl.npcTemData
     i = 1
     for character in characterList:
-        initCharacterThreadPool.submit(initCharacter,i,character)
+        initCharacter(i,character)
         i += 1
-    initCharacterThreadPool.shutdown()
     initCharacterPosition()
 
 # 按id生成角色属性
@@ -72,16 +69,12 @@ def initCharacter(nowId,character):
     bmi = AttrCalculation.getBMI(weightTemName)
     weight = AttrCalculation.getWeight(bmi, height['NowHeight'])
     defaultAttr['Weight'] = weight
-    schoolClassDataPath = os.path.join(gamepath,'data',language,'SchoolClass.json')
-    schoolClassData = JsonHandle._loadjson(schoolClassDataPath)
     if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
-        classGradeMax = len(schoolClassData['Class'].keys())
+        classGradeMax = 6
         classGrade = str(defaultAttr['Age'] - 6)
         if int(classGrade) > classGradeMax:
             classGrade = str(classGradeMax)
-        defaultAttr['Class'] = random.choice(schoolClassData['Class'][classGrade])
-    else:
-        defaultAttr['Office'] = str(random.randint(0,12))
+        defaultAttr['Class'] = random.choice(CacheContorl.placeData["Classroom_" + classGrade])
     bodyFat = AttrCalculation.getBodyFat(characterSex,bodyFatTem)
     measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
     defaultAttr['Measirements'] = measurements
@@ -195,13 +188,11 @@ def getCharacterIdList():
 
 # 初始化角色的位置
 def initCharacterPosition():
-    characterPositionPool = thread.ThreadPoolExecutor(max_workers = GameConfig.threading_pool_max)
     characterList = CacheContorl.npcTemData
     for i in range(0, len(characterList)):
         characterIdS = str(i + 1)
         characterData = characterList[i]
-        characterPositionPool.submit(initCharacterPositionNow,characterData,characterIdS)
-    characterPositionPool.shutdown()
+        initCharacterPositionNow(characterData,characterIdS)
 
 def initCharacterPositionNow(characterData,characterIdS):
     characterInitPosition = characterData['Position']

@@ -1,3 +1,5 @@
 {
-  "SceneName":"小学部1年级3班"
+  "SceneName":"小学部1年级3班",
+  "InOutDoor":"In",
+  "SceneTag":"Classroom"
 }

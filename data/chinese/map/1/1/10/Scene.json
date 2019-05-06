@@ -1,3 +1,5 @@
 {
-  "SceneName":"主教学楼2F右厕所"
+  "SceneName":"主教学楼2F右厕所",
+  "InOutDoor":"In",
+  "SceneTag":"Toilet"
 }

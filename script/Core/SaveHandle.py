@@ -28,12 +28,13 @@ def establishSave(saveId):
     npcTemData = CacheContorl.npcTemData
     randomNpcList = CacheContorl.randomNpcList
     gameVerson = GameConfig.verson
+    occupationCharacterData = CacheContorl.occupationCharacterData
     saveVerson = {
         "gameVerson":gameVerson,
         "gameTime":gameTime,
         "characterName":characterData['character']['0']['Name']
     }
-    data = {"1":characterData,"2":gameTime,"0":saveVerson,"3":scaneData,"4":mapData,"5":npcTemData,"6":randomNpcList}
+    data = {"1":characterData,"2":gameTime,"0":saveVerson,"3":scaneData,"4":mapData,"5":npcTemData,"6":randomNpcList,'7':occupationCharacterData}
     for dataId in data:
         writeSaveData(saveId,dataId,data[dataId])
 
@@ -57,7 +58,7 @@ def writeSaveData(saveId,dataId,writeData):
 def loadSave(saveId):
     savePath = getSaveDirPath(saveId)
     data = {}
-    fileList = ['1','2','3','4','5','6']
+    fileList = ['1','2','3','4','5','6','7']
     for fileName in fileList:
         filePath = os.path.join(savePath,fileName)
         with open(filePath, 'rb') as f:
@@ -74,6 +75,7 @@ def inputLoadSave(saveId):
     CacheContorl.mapData = saveData['4']
     CacheContorl.npcTemData = saveData['5']
     CacheContorl.randomNpcList = saveData['6']
+    CacheContorl.occupationCharacterData = saveData['7']
     CharacterHandle.initCharacterPosition()
 
 # 获取存档页对应存档id
