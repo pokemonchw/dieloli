@@ -1,5 +1,5 @@
 from script.Core import GameConfig,RichText,GameData,EraPrint,PyCmd,CacheContorl,TextHandle,ValueHandle,GamePathConfig,TextHandle
-import os,dpath,datetime
+import os,dpath
 
 # 输出地图
 def printMap(mapPath):
@@ -22,7 +22,7 @@ def printMap(mapPath):
     for mapXList in newMapYList:
         mapXListStyle = mapXListStyleList[mapXIndex]
         mapXFix = TextHandle.align(mapXList,'center',True)
-        EraPrint.p(mapXFix)
+        EraPrint.p(mapXFix,richTextJudge=False)
         mapXIndex += 1
         for i in range(0, len(mapXList)):
             if str(i) not in passList:
@@ -36,16 +36,16 @@ def printMap(mapPath):
                             break
                     if inputCmd in sceneList:
                         if inputCmd == characterNowSceneId:
-                            EraPrint.p(inputCmd,'nowmap')
+                            EraPrint.p(inputCmd,'nowmap',richTextJudge=False)
                             inputS.append(None)
                         else:
                             PyCmd.pcmd(inputCmd, inputCmd, None)
                             inputS.append(inputCmd)
                     else:
-                        EraPrint.p(inputCmd,'standard')
+                        EraPrint.p(inputCmd,richTextJudge=False)
                     inputCmd = ''
                 else:
-                    EraPrint.p(mapXList[i], mapXListStyle[i])
+                    EraPrint.p(mapXList[i], mapXListStyle[i],richTextJudge=False)
         EraPrint.p('\n')
     return inputS
 

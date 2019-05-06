@@ -7,27 +7,30 @@ last_char = '\n'
 def_style = IoInit.style_def
 
 #基本输出
-def p(string, style='standard'):
+def p(string, style='standard',richTextJudge=True):
     string = str(string)
-    barlist = TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
-    styleList = RichText.setRichTextPrint(string, style)
-    global last_char
-    if len(string) > 0:
-        last_char = string[-1:]
-    string = RichText.removeRichCache(string)
-    for i in range(0,len(string)):
-        if styleList[i] in barlist:
-            styledata = TextLoading.getTextData(TextLoading.barConfigPath,styleList[i])
-            truebar = styledata['truebar']
-            nullbar = styledata['nullbar']
-            if string[i] == '0':
-                pimage(nullbar, 'bar')
-            elif string[i] == '1':
-                pimage(truebar, 'bar')
+    if richTextJudge:
+        barlist = TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
+        styleList = RichText.setRichTextPrint(string, style)
+        global last_char
+        if len(string) > 0:
+            last_char = string[-1:]
+        string = RichText.removeRichCache(string)
+        for i in range(0,len(string)):
+            if styleList[i] in barlist:
+                styledata = TextLoading.getTextData(TextLoading.barConfigPath,styleList[i])
+                truebar = styledata['truebar']
+                nullbar = styledata['nullbar']
+                if string[i] == '0':
+                    pimage(nullbar, 'bar')
+                elif string[i] == '1':
+                    pimage(truebar, 'bar')
+                else:
+                    IoInit.print(string[i], styleList[i])
             else:
                 IoInit.print(string[i], styleList[i])
-        else:
-            IoInit.print(string[i], styleList[i])
+    else:
+        IoInit.print(string,style)
 
 # 输出图片
 def pimage(imageName,imagePath=''):

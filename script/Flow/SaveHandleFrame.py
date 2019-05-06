@@ -110,21 +110,17 @@ def confirmationOverlaySave_func(saveId):
     PyCmd.clr_cmd()
     if yrn == '0':
         SaveHandle.establishSave(saveId)
-    return
 
 # 询问读取存档流程
 def askForLoadSave_func(saveId):
     cmdList = SaveHandleFramePanel.askLoadSavePanel()
     yrn = GameInit.askfor_All(cmdList)
     PyCmd.clr_cmd()
-    returnJudge = False
     if yrn == '0':
-        returnJudge = True
-        confirmationLoadSave_func(saveId)
+        return confirmationLoadSave_func(saveId)
     elif yrn == '1':
-        returnJudge = True
         confirmationRemoveSave_func(saveId)
-    return returnJudge
+    return False
 
 # 确认读取存档流程
 def confirmationLoadSave_func(saveId):
@@ -134,6 +130,8 @@ def confirmationLoadSave_func(saveId):
     if yrn == '0':
         SaveHandle.inputLoadSave(saveId)
         CacheContorl.nowFlowId = 'main'
+        return True
+    return False
 
 # 确认删除存档流程
 def confirmationRemoveSave_func(saveId):
