@@ -6,28 +6,34 @@ gamePath = GamePathConfig.gamepath
 language = GameConfig.language
 characterListPath = os.path.join(gamePath,'data',language,'character')
 
-class CharacterBehaviorClass(object):
+behaviorTemTextData = {
+    "Student":'script.Behavior.Student',
+    "Teacher":'script.Behavior.Teacher'
+}
 
-    # npc行为总控制
-    def initCharacterBehavior(self):
-        npcList = CharacterHandle.getCharacterIdList()
-        npcList.remove('0')
-        for npc in npcList:
-            self.characterOccupationJudge(npc)
+behaviorTemData = {
+    "Student":importlib.import_module(behaviorTemTextData['Student']),
+    "Teacher":importlib.import_module(behaviorTemTextData['Teacher'])
+}
 
-    # npc职业判断
-    def characterOccupationJudge(self,characterId):
-        characterData = CacheContorl.characterData['character'][characterId]
-        characterTemData = CacheContorl.npcTemData[int(characterId) - 1]
-        try:
-            characterOccupation = characterTemData['Occupation']
-            templateFile = 'data.' + language + '.OccupationTemplate.' + characterOccupation + 'Behavior'
-        except:
-            characterAge = int(characterData['Age'])
-            if characterAge <= 18:
-                characterOccupation = "Student"
-            else:
-                characterOccupation = "Teacher"
-            templateFile = 'data.' + language + '.OccupationTemplate.' + characterOccupation + 'Behavior'
-        template = importlib.import_module(templateFile)
-        template.arderBehavior(self,characterId, characterData, characterTemData)
+# npc行为总控制
+def initCharacterBehavior():
+    npcList = CharacterHandle.getCharacterIdList()
+    npcList.remove('0')
+    for npc in npcList:
+        characterOccupationJudge(npc)
+
+# npc职业判断
+def characterOccupationJudge(characterId):
+    characterData = CacheContorl.characterData['character'][characterId]
+    characterTemData = CacheContorl.npcTemData[int(characterId) - 1]
+    if 'Occupation' in characterTemData and characterTemData['Occupation'] in behaviorTemData:
+        characterOccupation = characterTemData['Occupation']
+    else:
+        characterAge = int(characterData['Age'])
+        if characterAge <= 18:
+            characterOccupation = "Student"
+        else:
+            characterOccupation = "Teacher"
+    template = behaviorTemData[characterOccupation]
+    template.behaviorInit(characterId)

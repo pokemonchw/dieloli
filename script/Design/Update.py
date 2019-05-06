@@ -1,5 +1,5 @@
-from script.Design.CharacterBehavior import CharacterBehaviorClass
+from script.Design import CharacterBehavior
 
 # 游戏流程刷新
 def gameUpdateFlow():
-    CharacterBehaviorClass().initCharacterBehavior()
+    CharacterBehavior.initCharacterBehavior()

@@ -60,7 +60,7 @@ def loadSave(saveId):
     fileList = ['1','2','3','4','5','6']
     for fileName in fileList:
         filePath = os.path.join(savePath,fileName)
-        with open(filepath, 'rb') as f:
+        with open(filePath, 'rb') as f:
             data[fileName]=pickle.load(f)
     return data
 
