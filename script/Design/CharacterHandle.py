@@ -1,6 +1,6 @@
 import os,random
 from concurrent.futures import thread
-from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
+from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig,JsonHandle
 from script.Design import AttrCalculation,MapHandle,AttrText
 
 language = GameConfig.language
@@ -73,7 +73,7 @@ def initCharacter(nowId,character):
     weight = AttrCalculation.getWeight(bmi, height['NowHeight'])
     defaultAttr['Weight'] = weight
     schoolClassDataPath = os.path.join(gamepath,'data',language,'SchoolClass.json')
-    schoolClassData = GameData._loadjson(schoolClassDataPath)
+    schoolClassData = JsonHandle._loadjson(schoolClassDataPath)
     if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
         classGradeMax = len(schoolClassData['Class'].keys())
         classGrade = str(defaultAttr['Age'] - 6)
@@ -111,7 +111,7 @@ def initCharacterTem():
 # 获取目录中的角色模板
 def getDirCharacterTem(character):
     characterAttrTemPath = os.path.join(characterListPath,character,'AttrTemplate.json')
-    return GameData._loadjson(characterAttrTemPath)
+    return JsonHandle._loadjson(characterAttrTemPath)
 
 randomNpcMax = int(GameConfig.random_npc_max)
 randomTeacherProportion = int(GameConfig.proportion_teacher)

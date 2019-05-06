@@ -99,73 +99,13 @@ def getMapSystemPathStrForList(nowList):
         return os.sep.join(nowList)
     return nowList
 
-# 计算寻路路径
-def getPathfinding(mapPath,nowNode,targetNode,pathNodeList = [],pathTimeList = []):
-    pathList = CacheContorl.pathList
-    timeList = CacheContorl.pathTimeList
+# 查询路径
+def getPathfinding(mapPath,nowNode,targetNode):
     mapPathStr = getMapSystemPathStrForList(mapPath)
-    nowNode = str(nowNode)
-    targetNode = str(targetNode)
-    mapData = CacheContorl.mapData[mapPathStr].copy()
-    pathEdge = mapData['PathEdge'].copy()
-    targetListDict = pathEdge[nowNode].copy()
-    targetList = list(targetListDict.keys())
     if nowNode == targetNode:
         return 'End'
     else:
-        for i in range(0,len(targetList)):
-            target = targetList[i]
-            if target not in pathNodeList:
-                targetTime = targetListDict[target]
-                findPath = pathNodeList.copy()
-                if findPath == []:
-                    findPath = [nowNode]
-                    findTime = [-1]
-                else:
-                    findTime = pathTimeList.copy()
-                findPath.append(target)
-                findTime.append(targetTime)
-                if target == targetNode:
-                    pathList.append(findPath)
-                    timeList.append(findTime)
-                else:
-                    pathEdgeNow = pathEdge[target].copy()
-                    pathEdgeNow.pop(nowNode)
-                    targetNodeInTargetList = pathEdgeNow.copy()
-                    targetNodeInTargetToList = list(targetNodeInTargetList.keys())
-                    for i in range(0,len(targetNodeInTargetToList)):
-                        targetNodeInTarget = targetNodeInTargetToList[i]
-                        findPath.append(targetNodeInTarget)
-                        findTime.append(targetNodeInTargetList[targetNodeInTarget])
-                        pathData = getPathfinding(mapPath,targetNodeInTarget,targetNode,findPath,findTime)
-                        if pathData == 'Null':
-                            pass
-                        elif pathData == 'End':
-                            pathList.append(findPath)
-                            timeList.append(findTime)
-                        else:
-                            pathList.append(pathData['Path'])
-                            timeList.append(pathData['Time'])
-        CacheContorl.pathTimeList = []
-        CacheContorl.pathList = []
-        return getMinimumPath(pathList,timeList)
-
-# 获取最短路径
-def getMinimumPath(pathList,timeList):
-    if len(pathList) > 0:
-        needTimeList = []
-        for i in range(0,len(timeList)):
-            needTimeList.append(getNeedTime(timeList[i]))
-        pathId = needTimeList.index(min(needTimeList))
-        return {"Path":pathList[pathId],"Time":timeList[pathId]}
-    return 'Null'
-
-# 获取路径所需时间
-def getNeedTime(timeGroup):
-    needTime = 0
-    for i in timeGroup:
-        needTime = needTime + i
-    return needTime
+        return CacheContorl.mapData[mapPathStr]['SortedPath'][nowNode][str(targetNode)]
 
 # 获取地图路径列表
 def getSceneToSceneMapList(nowScenePath,targetScenePath):
@@ -318,7 +258,6 @@ def getSceneCharacterIdList(scenePath):
 # 对场景上的角色按好感度进行排序
 def sortSceneCharacterId(scenePath):
     scenePathStr = getMapSystemPathStrForList(scenePath)
-    newCharacterList = []
     nowSceneCharacterIntimateData = {}
     for character in CacheContorl.sceneData[scenePathStr]['SceneCharacterData']:
         nowSceneCharacterIntimateData[character] = CacheContorl.characterData['character'][character]['Intimate']

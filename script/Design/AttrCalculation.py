@@ -1,10 +1,10 @@
 import os,random
-from script.Core import CacheContorl,GameConfig,GamePathConfig,TextLoading,GameData
+from script.Core import CacheContorl,GameConfig,GamePathConfig,TextLoading,GameData,JsonHandle
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
-roleAttrData = GameData._loadjson(roleAttrPath)
+roleAttrData = JsonHandle._loadjson(roleAttrPath)
 
 # 获取模板列表
 def getTemList():

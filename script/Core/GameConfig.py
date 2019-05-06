@@ -1,24 +1,24 @@
 import os
-from script.Core import GameData,GamePathConfig
+from script.Core import GameData,GamePathConfig,JsonHandle
 
 gamepath = GamePathConfig.gamepath
 
 # 读取配置数据
 def loadConfigData():
     configPath = os.path.join(gamepath,'data','core_cfg.json')
-    configData = GameData._loadjson(configPath)
+    configData = JsonHandle._loadjson(configPath)
     return configData
 
 # 读取字体样式配置数据
 def getFontData(listId):
     FontPath = os.path.join(gamepath,'data','FontConfig.json')
-    FontData = GameData._loadjson(FontPath)
+    FontData = JsonHandle._loadjson(FontPath)
     return FontData[listId]
 
 # 读取字体样式配置列表
 def getFontDataList():
     FontPath = os.path.join(gamepath, 'data', 'FontConfig.json')
-    FontData = GameData._loadjson(FontPath)
+    FontData = JsonHandle._loadjson(FontPath)
     fontList = list(FontData.keys())
     return fontList
 

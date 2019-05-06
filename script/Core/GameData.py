@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 from script.Core.GamePathConfig import gamepath
-import json
-
+from script.Core import JsonHandle,CacheContorl
 import os
 
 _gamedata = {}
@@ -9,26 +8,6 @@ _gamedata = {}
 # 初始化游戏数据
 def gamedata():
     return _gamedata
-
-# 判断文件编码是否为utf-8
-def is_utf8bom(pathfile):
-    if b'\xef\xbb\xbf' == open(pathfile, mode='rb').read(3):
-        return True
-    return False
-
-# 载入json文件
-def _loadjson(filepath):
-    if is_utf8bom(filepath):
-        ec='utf-8-sig'
-    else:
-        ec='utf-8'
-    with open(filepath, 'r', encoding=ec) as f:
-        try:
-            jsondata = json.loads(f.read())
-        except json.decoder.JSONDecodeError:
-            print(filepath + '  无法读取，文件可能不符合json格式')
-            jsondata = []
-    return jsondata
 
 # 载入路径下所有json文件
 def _loaddir(dataPath):
@@ -49,7 +28,7 @@ def loadDirNow(dataPath):
                             nowSceneData = {}
                             mapSystemPath = getMapSystemPathForPath(nowPath)
                             mapSystemPathStr = getMapSystemPathStr(mapSystemPath)
-                            nowSceneData.update(_loadjson(nowPath))
+                            nowSceneData.update(JsonHandle._loadjson(nowPath))
                             nowSceneData['SceneCharacterData'] = []
                             nowSceneData['ScenePath'] = mapSystemPath
                             nowSceneData = {mapSystemPathStr:nowSceneData}
@@ -61,13 +40,93 @@ def loadDirNow(dataPath):
                             with open(os.path.join(dataPath,"Map"), 'r') as nowReadFile:
                                 nowMapData['MapDraw'] = nowReadFile.read()
                             mapSystemPathStr = getMapSystemPathStr(mapSystemPath)
-                            nowMapData.update(_loadjson(nowPath))
+                            nowMapData.update(JsonHandle._loadjson(nowPath))
+                            sortedPathData = getSortedMapPathData(nowMapData['PathEdge'])
+                            nowMapData['SortedPath'] = sortedPathData
                             mapData[mapSystemPathStr] = nowMapData
                         else:
-                            nowData[nowFile[0]] = _loadjson(nowPath)
+                            nowData[nowFile[0]] = JsonHandle._loadjson(nowPath)
             else:
                 nowData[i] = loadDirNow(nowPath)
     return nowData
+
+# 获取地图下各节点到目标节点最短路径数据
+def getSortedMapPathData(mapData):
+    sortedPathData = {}
+    for node in mapData.keys():
+        newData = {
+            node:{}
+        }
+        for target in mapData.keys():
+            if target != node:
+                newData[node].update({target:getSortedPath(mapData,node,target)})
+        sortedPathData.update(newData)
+    return sortedPathData
+
+# 计算寻路路径
+def getSortedPath(pathEdge,nowNode,targetNode,pathNodeList=[],pathTimeList=[]):
+    pathList = CacheContorl.pathList
+    timeList = CacheContorl.pathTimeList
+    nowNode = str(nowNode)
+    targetNode = str(targetNode)
+    targetListDict = pathEdge[nowNode].copy()
+    targetList = list(targetListDict.keys())
+    if nowNode == targetNode:
+        return 'End'
+    else:
+        for i in range(0,len(targetList)):
+            target = targetList[i]
+            if target not in pathNodeList:
+                targetTime = targetListDict[target]
+                findPath = pathNodeList.copy()
+                if findPath == []:
+                    findPath = [nowNode]
+                    findTime = [-1]
+                else:
+                    findTime = pathTimeList.copy()
+                findPath.append(target)
+                findTime.append(targetTime)
+                if target == targetNode:
+                    pathList.append(findPath)
+                    timeList.append(findTime)
+                else:
+                    pathEdgeNow = pathEdge[target].copy()
+                    pathEdgeNow.pop(nowNode)
+                    targetNodeInTargetList = pathEdgeNow.copy()
+                    targetNodeInTargetToList = list(targetNodeInTargetList.keys())
+                    for i in range(0,len(targetNodeInTargetToList)):
+                        targetNodeInTarget = targetNodeInTargetToList[i]
+                        findPath.append(targetNodeInTarget)
+                        findTime.append(targetNodeInTargetList[targetNodeInTarget])
+                        pathData = getSortedPath(pathEdge,targetNodeInTarget,targetNode,findPath,findTime)
+                        if pathData == 'Null':
+                            pass
+                        elif pathData == 'End':
+                            pathList.append(findPath)
+                            timeList.append(findTime)
+                        else:
+                            pathList.append(pathData['Path'])
+                            timeList.append(pathData['Time'])
+        CacheContorl.pathTimeList = []
+        CacheContorl.pathList = []
+        return getMinimumPath(pathList,timeList)
+
+# 获取最短路径
+def getMinimumPath(pathList,timeList):
+    if len(pathList) > 0:
+        needTimeList = []
+        for i in range(0,len(timeList)):
+            needTimeList.append(getNeedTime(timeList[i]))
+        pathId = needTimeList.index(min(needTimeList))
+        return {"Path":pathList[pathId],"Time":timeList[pathId]}
+    return 'Null'
+
+# 获取路径所需时间
+def getNeedTime(timeGroup):
+    needTime = 0
+    for i in timeGroup:
+        needTime = needTime + i
+    return needTime
 
 # 从路径获取地图系统路径
 def getMapSystemPathForPath(nowPath):

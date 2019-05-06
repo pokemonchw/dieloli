@@ -1,15 +1,15 @@
 import os,random,bisect
-from script.Core import TextLoading,GameData,CacheContorl,GameConfig,GamePathConfig,ValueHandle
+from script.Core import TextLoading,CacheContorl,GameConfig,GamePathConfig,ValueHandle,JsonHandle
 from script.Design import ProportionalBar,AttrPrint
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
 
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
-roleAttrData = GameData._loadjson(roleAttrPath)
+roleAttrData = JsonHandle._loadjson(roleAttrPath)
 sexData = roleAttrData['Sex']
 equipmentPath = os.path.join(gamepath,'data',language,'Equipment.json')
-equipmentData = GameData._loadjson(equipmentPath)
+equipmentData = JsonHandle._loadjson(equipmentPath)
 boysNameListData = TextLoading.getTextData(TextLoading.nameListPath,'Boys')
 girlsNameListData = TextLoading.getTextData(TextLoading.nameListPath,'Girls')
 familyNameListData = TextLoading.getTextData(TextLoading.familyNameListPath,'FamilyNameList')
