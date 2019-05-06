@@ -5,13 +5,12 @@ from script.Behavior import Default
 behaviorList = ['arder']
 
 # 职业行为总控制
-def behaviorInit(charact
+def behaviorInit(characterId):
     characterState = CacheContorl.characterData['character'][characterId]['state']
     if characterState in behaviorList:
         eval(characterState + 'Behavior')(characterId)
     else:
         eval('Default.' + characterState + 'Behavior')(characterId)
-Id):
 
 #休闲状态行为
 def arderBehavior(characterId):
