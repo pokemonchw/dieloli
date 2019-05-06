@@ -322,7 +322,7 @@ def sortSceneCharacterId(scenePath):
     nowSceneCharacterIntimateData = {}
     for character in CacheContorl.sceneData[scenePathStr]['SceneCharacterData']:
         nowSceneCharacterIntimateData[character] = CacheContorl.characterData['character'][character]['Intimate']
-    newSceneCharacterIntimateData = sorted(nowSceneCharacterIntimateData.items(),key=lambda x: x[1],reverse=True)
+    newSceneCharacterIntimateData = sorted(nowSceneCharacterIntimateData.items(),key=lambda x: (x[1],-int(x[0])),reverse=True)
     newSceneCharacterIntimateData = ValueHandle.twoBitArrayToDict(newSceneCharacterIntimateData)
     newCharacterList = list(newSceneCharacterIntimateData.keys())
     CacheContorl.sceneData[scenePathStr]['SceneCharacterData'] = newCharacterList
