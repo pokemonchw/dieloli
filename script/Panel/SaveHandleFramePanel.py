@@ -38,14 +38,13 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
         id = str(i)
         idText = idTextList[i]
         EraPrint.plittleline()
-        saveid = SaveHandle.getSavePageSaveId(pageSaveValue,i)
-        if SaveHandle.judgeSaveFileExist(saveid) == '1':
-            saveData = SaveHandle.loadSave(saveid)
-            characterData = saveData['characterData']
-            gameTimeData = saveData['gameTime']
+        saveId = SaveHandle.getSavePageSaveId(pageSaveValue,i)
+        if SaveHandle.judgeSaveFileExist(saveId) == '1':
+            saveInfoHead = SaveHandle.loadSaveInfoHead(saveId)
+            gameTimeData = saveInfoHead['gameTime']
             gameTimeText = GameTime.getDateText(gameTimeData)
-            characterName = characterData['character']['0']['Name']
-            saveVerson = saveData['gameVerson']
+            characterName = saveInfoHead['characterName']
+            saveVerson = saveInfoHead['gameVerson']
             saveText = characterName + ' ' + gameTimeText + ' ' + saveVerson
             idTextIndex = int(TextHandle.getTextIndex(idText))
             fixIdWidth = textWidth - idTextIndex
@@ -72,12 +71,11 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
         id = CmdButtonQueue.idIndex(i)
         EraPrint.plittleline()
         if SaveHandle.judgeSaveFileExist('auto') == '1':
-            saveData = SaveHandle.loadSave('auto')
-            characterData = saveData['characterData']
-            gameTimeData = saveData['gameTime']
+            saveInfoHead = SaveHandle.loadSaveInfoHead(auto)
+            gameTimeData = saveInfoHead['gameTime']
             gameTimeText = GameTime.getDateText(gameTimeData)
-            saveVerson = saveData['gameVerson']
-            characterName = characterData['character']['0']['Name']
+            characterName = saveInfoHead['characterName']
+            saveVerson = saveInfoHead['gameVerson']
             saveText = characterName + ' ' + gameTimeText + ' ' + saveVerson
             idText = id + autoInfoText
             idTextIndex = int(TextHandle.getTextIndex(idText))

@@ -1,21 +1,20 @@
-import os,pickle
+import os,pickle,shutil
 from script.Core import EraPrint,TextLoading,CacheContorl,GameConfig,GamePathConfig
 from script.Design import CharacterHandle
 
 gamepath = GamePathConfig.gamepath
 
 # 获取存档所在路径
-def getSavefilePath(filename):
-    filename = str(filename)
+def getSaveDirPath(saveId):
+    saveId = str(saveId)
     savepath = os.path.join(gamepath,'save')
     if not os.path.exists(savepath):
         os.makedirs(savepath)
-    filepath = os.path.join(savepath,filename + '.save')
-    return filepath
+    return os.path.join(savepath,saveId)
 
 # 判断存档是否存在
 def judgeSaveFileExist(saveId):
-    savePath = getSavefilePath(saveId)
+    savePath = getSaveDirPath(saveId)
     if not os.path.exists(savePath):
         return "0"
     return "1"
@@ -24,37 +23,57 @@ def judgeSaveFileExist(saveId):
 def establishSave(saveId):
     characterData = CacheContorl.characterData
     gameTime = CacheContorl.gameTime
-    gameVerson = GameConfig.verson
     scaneData = CacheContorl.sceneData
     mapData = CacheContorl.mapData
     npcTemData = CacheContorl.npcTemData
     randomNpcList = CacheContorl.randomNpcList
-    data = {"characterData":characterData,"gameTime":gameTime,"gameVerson":gameVerson,"sceneData":scaneData,"mapData":mapData,"npcTemData":npcTemData,"randomNpcList":randomNpcList}
-    filepath = getSavefilePath(saveId)
-    with open(filepath, 'wb') as f:
-        pickle.dump(data,f)
+    gameVerson = GameConfig.verson
+    saveVerson = {
+        "gameVerson":gameVerson,
+        "gameTime":gameTime,
+        "characterName":characterData['character']['0']['Name']
+    }
+    data = {"1":characterData,"2":gameTime,"0":saveVerson,"3":scaneData,"4":mapData,"5":npcTemData,"6":randomNpcList}
+    for dataId in data:
+        writeSaveData(saveId,dataId,data[dataId])
+
+# 载入存档信息头
+def loadSaveInfoHead(saveId):
+    savePath = getSaveDirPath(saveId)
+    filePath = os.path.join(savePath,'0')
+    with open(filePath,'rb') as f:
+        return pickle.load(f)
+
+# 写入存档数据
+def writeSaveData(saveId,dataId,writeData):
+    savePath = getSaveDirPath(saveId)
+    filePath = os.path.join(savePath,dataId)
+    if judgeSaveFileExist(saveId) == '0':
+        os.makedirs(savePath)
+    with open(filePath,'wb') as f:
+        pickle.dump(writeData,f)
 
 # 读取存档数据
-def loadSave(filename):
-    filepath = getSavefilePath(filename)
+def loadSave(saveId):
+    savePath = getSaveDirPath(saveId)
     data = {}
-    try:
+    fileList = ['1','2','3','4','5','6']
+    for fileName in fileList:
+        filePath = os.path.join(savePath,fileName)
         with open(filepath, 'rb') as f:
-            data=pickle.load(f)
-    except FileNotFoundError:
-        EraPrint.p(TextLoading.getTextData(TextLoading.errorPath,'notSaveError'))
+            data[fileName]=pickle.load(f)
     return data
 
 # 确认存档读取
 def inputLoadSave(saveId):
     saveData = loadSave(saveId)
-    CacheContorl.characterData = saveData['characterData']
+    CacheContorl.characterData = saveData['1']
     CacheContorl.characterData['characterId'] = '0'
-    CacheContorl.gameTime = saveData['gameTime']
-    CacheContorl.sceneData = saveData['sceneData']
-    CacheContorl.mapData = saveData['mapData']
-    CacheContorl.npcTemData = saveData['npcTemData']
-    CacheContorl.randomNpcList = saveData['randomNpcList']
+    CacheContorl.gameTime = saveData['2']
+    CacheContorl.sceneData = saveData['3']
+    CacheContorl.mapData = saveData['4']
+    CacheContorl.npcTemData = saveData['5']
+    CacheContorl.randomNpcList = saveData['6']
     CharacterHandle.initCharacterPosition()
 
 # 获取存档页对应存档id
@@ -67,9 +86,9 @@ def getSavePageSaveId(pageSaveValue,inputId):
 
 # 删除存档
 def removeSave(saveId):
-    savePath = getSavefilePath(saveId)
-    if os.path.isfile(savePath):
-        os.remove(savePath)
+    savePath = getSaveDirPath(saveId)
+    if os.path.isdir(savePath):
+        shutil.rmtree(savePath)
     else:
         errorText = TextLoading.getTextData(TextLoading.errorPath,'notSaveError')
         EraPrint.pl(errorText)
