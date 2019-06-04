@@ -21,7 +21,7 @@ def characterMove(characterId,targetScene):
     characterId = str(characterId)
     nowPosition = CacheContorl.characterData['character'][characterId]['Position']
     sceneHierarchy = MapHandle.judgeSceneAffiliation(nowPosition,targetScene)
-    if sceneHierarchy == '0':
+    if sceneHierarchy == 'common':
         mapPath = MapHandle.getCommonMapForScenePath(nowPosition,targetScene)
         nowMapSceneId = MapHandle.getMapSceneIdForScenePath(mapPath,nowPosition)
         targetMapSceneId = MapHandle.getMapSceneIdForScenePath(mapPath,targetScene)
@@ -35,17 +35,18 @@ def differenceMapMove(characterId,targetScene):
     nowPosition = CacheContorl.characterData['character'][characterId]['Position']
     isAffiliation = MapHandle.judgeSceneIsAffiliation(nowPosition,targetScene)
     nowTruePosition = MapHandle.getScenePathForTrue(nowPosition)
-    if isAffiliation == '0':
+    mapDoorData = MapHandle.getMapDoorDataForScenePath(MapHandle.getMapSystemPathStrForList(nowTruePosition))
+    if isAffiliation == 'subordinate':
         nowTrueAffiliation = MapHandle.judgeSceneIsAffiliation(nowTruePosition,targetScene)
-        if nowTrueAffiliation == '0':
+        if nowTrueAffiliation == 'subordinate':
             nowTrueMap = MapHandle.getMapForPath(nowTruePosition)
             nowMapSceneId = MapHandle.getMapSceneIdForScenePath(nowTrueMap,nowPosition)
             return identicalMapMove(characterId,nowTrueMap,nowMapSceneId,'0')
-        elif nowTrueAffiliation == '1':
+        elif nowTrueAffiliation == 'superior':
             nowMap = MapHandle.getMapForPath(targetScene)
             nowMapSceneId = MapHandle.getMapSceneIdForScenePath(nowMap,nowPosition)
             return identicalMapMove(characterId,nowMap,nowMapSceneId,'0')
-    elif isAffiliation == '1':
+    elif isAffiliation == 'superior':
         nowMap = MapHandle.getMapForPath(nowPosition)
         nowTargetMapSceneId = MapHandle.getMapSceneIdForScenePath(nowMap,targetScene)
         return identicalMapMove(characterId,nowMap,'0',nowTargetMapSceneId)

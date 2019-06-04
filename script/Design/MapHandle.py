@@ -4,22 +4,23 @@ import os
 # 输出地图
 def printMap(mapPath):
     mapDraw = getMapDrawForMapPath(mapPath)
+    mapDraw = r'' + mapDraw
     characterPosition = CacheContorl.characterData['character']['0']['Position']
     characterNowSceneId = getSceneIdInMapForScenePathOnMapPath(characterPosition,mapPath)
     sceneList = getSceneListForMap(mapPath)
     inputS = []
     inputCmd = ''
-    passList = []
     mapYList = mapDraw.split('\n')
     mapXListStyleList = []
     newMapYList = []
     for mapXList in mapYList:
         mapXListStyle = RichText.setRichTextPrint(mapXList,'standard')
-        mapXList = RichText.removeRichCache(mapXList)
+        newMapXList = RichText.removeRichCache(mapXList)
         mapXListStyleList.append(mapXListStyle)
-        newMapYList.append(mapXList)
+        newMapYList.append(newMapXList)
     mapXIndex = 0
     for mapXList in newMapYList:
+        passList = []
         mapXListStyle = mapXListStyleList[mapXIndex]
         mapXFix = TextHandle.align(mapXList,'center',True)
         EraPrint.p(mapXFix,richTextJudge=False)
@@ -110,11 +111,11 @@ def getPathfinding(mapPath,nowNode,targetNode):
 # 获取地图路径列表
 def getSceneToSceneMapList(nowScenePath,targetScenePath):
     sceneAffiliation = judgeSceneAffiliation(nowScenePath,targetScenePath)
-    if sceneAffiliation == '0':
-        return '0'
-    elif sceneAffiliation == '1':
+    if sceneAffiliation == 'common':
+        return 'common'
+    elif sceneAffiliation == 'subordinate':
         return getMapHierarchyListForScenePath(nowScenePath,targetScenePath)
-    elif sceneAffiliation == '2':
+    elif sceneAffiliation == 'nobelonged':
         commonMap = getCommonMapForScenePath(nowScenePath,targetScenePath)
         nowSceneToCommonMap = getMapHierarchyListForScenePath(nowScenePath,commonMap)
         targetSceneToCommonMap = getMapHierarchyListForScenePath(targetScenePath,commonMap)
@@ -162,11 +163,11 @@ def getMapPathForTrue(mapPath):
 
 # 判断场景有无所属关系
 def judgeSceneIsAffiliation(nowScenePath,targetScenePath):
-    if judgeSceneAffiliation(nowScenePath,targetScenePath) == '1':
-        return '0'
-    elif judgeSceneAffiliation(targetScenePath,nowScenePath) == '1':
-        return '1'
-    return '2'
+    if judgeSceneAffiliation(nowScenePath,targetScenePath) == 'subordinate':
+        return 'subordinate'    #0
+    elif judgeSceneAffiliation(targetScenePath,nowScenePath) == 'subordinate':
+        return 'superior'   #1
+    return 'common' #2
 
 # 判断场景所属关系
 def judgeSceneAffiliation(nowScenePath,targetScenePath):
@@ -175,10 +176,10 @@ def judgeSceneAffiliation(nowScenePath,targetScenePath):
             if nowScenePath[:-1] != []:
                 return judgeSceneAffiliation(nowScenePath[:-1],targetScenePath)
             else:
-                return '2'
+                return 'nobelonged'  #2
         else:
-            return '1'
-    return '0'
+            return 'subordinate'  #1
+    return 'common'  #0
 
 # 获取场景所在所有直接地图位置
 def getRelationMapListForScenePath(scenePath):
@@ -228,6 +229,19 @@ def getScenePathForTrue(scenePath):
             scenePath = scenePath.split(os.sep)
         scenePath.append('0')
         return getScenePathForTrue(scenePath)
+
+# 从场景路径获取地图门数据
+def getMapDoorDataForScenePath(scenePath):
+    mapPath = getMapForPath(scenePath)
+    return getMapDoorData(mapPath)
+
+# 获取地图门数据
+def getMapDoorData(mapPath):
+    mapData = CacheContorl.mapData[mapPath]
+    if "MapDoor" in  mapData:
+        return mapData["MapDoor"]
+    else:
+        return {}
 
 # 获取场景上所有角色的姓名列表
 def getSceneCharacterNameList(scenePath,removeOwnCharacter = False):

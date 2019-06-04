@@ -16,6 +16,7 @@ def p(string, style='standard',richTextJudge=True):
         if len(string) > 0:
             last_char = string[-1:]
         string = RichText.removeRichCache(string)
+        string = r'' + string
         for i in range(0,len(string)):
             if styleList[i] in barlist:
                 styledata = TextLoading.getTextData(TextLoading.barConfigPath,styleList[i])
