@@ -1,12 +1,18 @@
-from script.Core import CacheContorl,TextLoading,EraPrint
+from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd
 from script.Design import MapHandle,CmdButtonQueue
+
+panelStateTextData = TextLoading.getTextData(TextLoading.cmdPath,'cmdSwitch')
+panelStateOnText = panelStateTextData[1]
+panelStateOffText = panelStateTextData[0]
 
 # 用于绘制地图的面板
 def seeMapPanel():
     inputS = []
     titleText = TextLoading.getTextData(TextLoading.stageWordPath, '78')
-    EraPrint.plt(titleText)
     nowMap = CacheContorl.nowMap
+    nowMapMapSystemStr = MapHandle.getMapSystemPathStrForList(nowMap)
+    mapName = CacheContorl.mapData[nowMapMapSystemStr]['MapName']
+    EraPrint.plt(titleText + ': ' + mapName + ' ')
     inputS = inputS + MapHandle.printMap(nowMap)
     return inputS
 
@@ -41,6 +47,27 @@ def seeMovePathPanel():
         EraPrint.p(errorMoveText)
     EraPrint.pline()
     return {'inputS':inputS,'scenePathList':scenePathList}
+
+# 用于绘制场景名字列表面板
+def showSceneNameListPanel():
+    titleText = TextLoading.getTextData(TextLoading.stageWordPath,'86')
+    EraPrint.p(titleText)
+    panelState = CacheContorl.panelState['SeeSceneNameListPanel']
+    if panelState == '0':
+        PyCmd.pcmd(panelStateOffText,"SeeSceneNameListPanel")
+        EraPrint.p('\n')
+        nowMap = CacheContorl.nowMap
+        nowMapMapSystemStr = MapHandle.getMapSystemPathStrForList(nowMap)
+        sceneNameData = MapHandle.getSceneNameListForMapPath(nowMapMapSystemStr)
+        sceneNameList = []
+        for scene in sceneNameData:
+            sceneNameList.append(scene + ':' + sceneNameData[scene])
+        EraPrint.plist(sceneNameList,5,'center')
+    else:
+        PyCmd.pcmd(panelStateOnText,'SeeSceneNameListPanel')
+        EraPrint.p('\n')
+    EraPrint.plittleline()
+    return 'SeeSceneNameListPanel'
 
 # 用于绘制通常按钮面板
 def backScenePanel(startId):

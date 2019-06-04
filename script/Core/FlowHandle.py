@@ -48,6 +48,7 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
         cmd_map[cmd_number] = null_func
         return
 
+
     def run_func():
         cmd_func(*arg, **kw)
     cmd_map[cmd_number] = run_func
@@ -182,7 +183,8 @@ def initCache():
         "CharacterLevelPanel":"1","CharacterFeaturesPanel":"1",
         "CharacterEngravingPanel":"1","AttrShowHandlePanel":"0",
         "SeeSaveListPanel":"0","SeeCharacterListPanel":"0",
-        "SeeSceneCharacterListPanel":"0","SeeSceneCharacterListPage":"0"
+        "SeeSceneCharacterListPanel":"0","SeeSceneCharacterListPage":"0",
+        "SeeSceneNameListPanel":"1"
     }
     CacheContorl.maxSavePage = GameConfig.save_page
     CacheContorl.textWait = float(GameConfig.text_wait)

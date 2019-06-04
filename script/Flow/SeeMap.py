@@ -1,5 +1,5 @@
 from script.Core import FlowHandle,CacheContorl,PyCmd
-from script.Design import CharacterMove,MapHandle
+from script.Design import CharacterMove,MapHandle,PanelStateHandle
 from script.Panel import SeeMapPanel
 
 def seeMapFlow():
@@ -12,8 +12,9 @@ def seeMapFlow():
         movePathCmdData = SeeMapPanel.seeMovePathPanel()
         movePathCmd = movePathCmdData['inputS']
         movePathList = movePathCmdData['scenePathList']
+        showSceneNameListCmd = SeeMapPanel.showSceneNameListPanel()
         seeMapCmd = SeeMapPanel.backScenePanel(startId1)
-        inputS = inputS + seeMapCmd + movePathCmd
+        inputS = inputS + seeMapCmd + movePathCmd + [showSceneNameListCmd]
         yrn = FlowHandle.askfor_All(inputS)
         backButton = str(startId1)
         nowPosition = CacheContorl.characterData['character']['0']['Position']
@@ -50,4 +51,5 @@ def seeMapFlow():
             downMapSceneId = MapHandle.getMapSceneIdForScenePath(CacheContorl.nowMap,characterPosition)
             nowMap.append(downMapSceneId)
             CacheContorl.nowMap = nowMap
-
+        elif yrn == showSceneNameListCmd:
+            PanelStateHandle.panelStateChange(showSceneNameListCmd)

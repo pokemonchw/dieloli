@@ -81,6 +81,17 @@ def getSceneListForMap(mapPath):
     sceneList = list(mapData['PathEdge'].keys())
     return sceneList
 
+# 获取地图下所有场景的名字
+def getSceneNameListForMapPath(mapPath):
+    sceneList = getSceneListForMap(mapPath)
+    sceneNameData = {}
+    for scene in sceneList:
+        loadSceneData = getSceneDataForMap(mapPath,scene)
+        sceneName = loadSceneData['SceneName']
+        sceneNameData[scene] = sceneName
+    return sceneNameData
+
+
 # 场景移动
 def characterMoveScene(oldScenePath,newScenePath,characterId):
     oldScenePathStr = getMapSystemPathStrForList(oldScenePath)
@@ -95,6 +106,7 @@ def characterMoveScene(oldScenePath,newScenePath,characterId):
         newSceneCharacterData.append(characterId)
         CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"] = newSceneCharacterData
 
+# 从地图路径列表获取地图系统路径
 def getMapSystemPathStrForList(nowList):
     if isinstance(nowList,list):
         return os.sep.join(nowList)

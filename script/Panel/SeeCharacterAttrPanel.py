@@ -110,11 +110,10 @@ def seeCharacterEquipmentPanel(characterId):
         characterSexItemList = characterData['SexItem']
         characterSexItemText = AttrText.getSexItemText(characterSexItemList)
         EraPrint.plist(characterSexItemText, 5, 'center')
-        return 'CharacterEquipmentPanel'
     else:
         PyCmd.pcmd(panelStateOnText, 'CharacterEquipmentPanel', None)
         EraPrint.p('\n')
-        return 'CharacterEquipmentPanel'
+    return 'CharacterEquipmentPanel'
 
 # 查看角色携带道具面板
 def seeCharacterItemPanel(characterId):
@@ -124,12 +123,10 @@ def seeCharacterItemPanel(characterId):
     if panelState == "0":
         PyCmd.pcmd(panelStateOffText, 'CharacterItemPanel')
         EraPrint.p('\n')
-        return 'CharacterItemPanel'
     else:
         PyCmd.pcmd(panelStateOnText, 'CharacterItemPanel')
         EraPrint.p('\n')
-        return 'CharacterItemPanel'
-    pass
+    return 'CharacterItemPanel'
 
 # 查看角色经验面板
 def seeCharacterExperiencePanel(characterId):
@@ -144,11 +141,10 @@ def seeCharacterExperiencePanel(characterId):
         characterSex = CacheContorl.characterData['character'][characterId]['Sex']
         characterSexTextList = AttrText.getSexExperienceText(characterSexExperienceList, characterSex)
         EraPrint.plist(characterSexTextList, 4, 'center')
-        return 'CharacterExperiencePanel'
     else:
         PyCmd.pcmd(panelStateOnText, 'CharacterExperiencePanel')
         EraPrint.p('\n')
-        return 'CharacterExperiencePanel'
+    return 'CharacterExperiencePanel'
 
 # 查看角色技能等级
 def seeCharacterLevelPanel(characterId):
@@ -163,12 +159,10 @@ def seeCharacterLevelPanel(characterId):
         characterSex = CacheContorl.characterData['character'][characterId]['Sex']
         characterSexGradeTextList = AttrText.getSexGradeTextList(characterSexGradeList, characterSex)
         EraPrint.plist(characterSexGradeTextList, 4, 'center')
-        return 'CharacterLevelPanel'
     else:
         PyCmd.pcmd(panelStateOnText, 'CharacterLevelPanel')
         EraPrint.p('\n')
-        return 'CharacterLevelPanel'
-    pass
+    return 'CharacterLevelPanel'
 
 # 查看角色特征
 def seeCharacterFeaturesPanel(characterId):
@@ -182,12 +176,10 @@ def seeCharacterFeaturesPanel(characterId):
         characterFeatures = characterData['Features']
         characterFeaturesStr = AttrText.getFeaturesStr(characterFeatures)
         EraPrint.p(characterFeaturesStr)
-        return 'CharacterFeaturesPanel'
     else:
         PyCmd.pcmd(panelStateOnText, 'CharacterFeaturesPanel')
         EraPrint.p('\n')
-        return 'CharacterFeaturesPanel'
-    pass
+    return 'CharacterFeaturesPanel'
 
 # 查看角色刻印
 def seeCharacterEngravingPanel(characterId):
@@ -201,11 +193,10 @@ def seeCharacterEngravingPanel(characterId):
         characterEngraving = characterData['Engraving']
         characterEngravingText = AttrText.getEngravingText(characterEngraving)
         EraPrint.plist(characterEngravingText, 3, 'center')
-        return 'CharacterEngravingPanel'
     else:
         PyCmd.pcmd(panelStateOnText, 'CharacterEngravingPanel')
         EraPrint.p('\n')
-        return 'CharacterEngravingPanel'
+    return 'CharacterEngravingPanel'
 
 # 查看属性页显示控制
 def seeAttrShowHandlePanel():
