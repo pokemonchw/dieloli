@@ -36,22 +36,21 @@ def differenceMapMove(characterId,targetScene):
     isAffiliation = MapHandle.judgeSceneIsAffiliation(nowPosition,targetScene)
     nowTruePosition = MapHandle.getScenePathForTrue(nowPosition)
     mapDoorData = MapHandle.getMapDoorDataForScenePath(MapHandle.getMapSystemPathStrForList(nowTruePosition))
+    doorScene = '0'
+    nowTrueMap = MapHandle.getMapForPath(nowTruePosition)
+    nowTrueMapMapSystemStr = MapHandle.getMapSystemPathStrForList(nowTrueMap)
     if isAffiliation == 'subordinate':
         nowTrueAffiliation = MapHandle.judgeSceneIsAffiliation(nowTruePosition,targetScene)
         if nowTrueAffiliation == 'subordinate':
-            nowTrueMap = MapHandle.getMapForPath(nowTruePosition)
+            if mapDoorData != {}:
+                doorScene = mapDoorData[nowTrueMapMapSystemStr]['Door']
             nowMapSceneId = MapHandle.getMapSceneIdForScenePath(nowTrueMap,nowPosition)
-            return identicalMapMove(characterId,nowTrueMap,nowMapSceneId,'0')
+            return identicalMapMove(characterId,nowTrueMap,nowMapSceneId,doorScene)
         elif nowTrueAffiliation == 'superior':
             nowMap = MapHandle.getMapForPath(targetScene)
             nowMapSceneId = MapHandle.getMapSceneIdForScenePath(nowMap,nowPosition)
-            return identicalMapMove(characterId,nowMap,nowMapSceneId,'0')
-    elif isAffiliation == 'superior':
-        nowMap = MapHandle.getMapForPath(nowPosition)
-        nowTargetMapSceneId = MapHandle.getMapSceneIdForScenePath(nowMap,targetScene)
-        return identicalMapMove(characterId,nowMap,'0',nowTargetMapSceneId)
+            return identicalMapMove(characterId,nowMap,nowMapSceneId,doorScene)
     else:
-        nowTrueMap = MapHandle.getMapForPath(nowTruePosition)
         if nowTrueMap == []:
             nowTargetMapSceneId = MapHandle.getMapSceneIdForScenePath([],targetScene)
             nowMapSceneId = MapHandle.getMapSceneIdForScenePath([],nowTruePosition)
@@ -66,14 +65,14 @@ def differenceMapMove(characterId,targetScene):
                 nowMapSceneId = MapHandle.getMapSceneIdForScenePath(commonMap,nowTruePosition)
             elif realMapInMap == commonMap:
                 nowMapSceneId = MapHandle.getMapSceneIdForScenePath(commonMap,nowSceneRealMap)
-            identicalMapMove(characterId,commonMap,nowMapSceneId,targetMapSceneId)
+            return identicalMapMove(characterId,commonMap,nowMapSceneId,targetMapSceneId)
 
 # 相同地图移动
 def identicalMapMove(characterId,nowMap,nowMapSceneId,targetMapSceneId):
     movePath = MapHandle.getPathfinding(nowMap,nowMapSceneId,targetMapSceneId)
     if movePath != 'End' and movePath != 'Null':
-        nowTargetSceneId = movePath['Path'][1]
-        nowNeedTime = movePath['Time'][1]
+        nowTargetSceneId = movePath['Path'][0]
+        nowNeedTime = movePath['Time'][0]
         nowCharacterPosition = MapHandle.getScenePathForMapSceneId(nowMap,nowMapSceneId)
         nowTargetPosition = MapHandle.getScenePathForMapSceneId(nowMap,nowTargetSceneId)
         MapHandle.characterMoveScene(nowCharacterPosition,nowTargetPosition,characterId)

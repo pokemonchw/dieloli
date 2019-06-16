@@ -29,6 +29,8 @@ npcTemData = []
 # 输入记录（最大20）
 inputCache = []
 
+nowInitMapId = ''
+
 # 回溯输入记录用定位
 inputPosition = {}
 
@@ -75,10 +77,6 @@ textWait = 0
 
 mapData = {}
 sceneData = {}
-
-pathList = []
-
-pathTimeList = []
 
 nowMap = []
 

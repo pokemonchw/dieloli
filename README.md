@@ -16,7 +16,7 @@ DieLoli
 依赖
 ----
 python3 \
-tkinter
+  tkinter,dijkstar
 
 警告
 ----

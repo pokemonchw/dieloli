@@ -173,7 +173,7 @@ def getMapPathForTrue(mapPath):
         newMapPath = mapPath[:-1]
         return getMapPathForTrue(newMapPath)
 
-# 判断场景有无所属关系
+# 判断场景所属关系
 def judgeSceneIsAffiliation(nowScenePath,targetScenePath):
     if judgeSceneAffiliation(nowScenePath,targetScenePath) == 'subordinate':
         return 'subordinate'    #0
@@ -181,7 +181,7 @@ def judgeSceneIsAffiliation(nowScenePath,targetScenePath):
         return 'superior'   #1
     return 'common' #2
 
-# 判断场景所属关系
+# 判断场景有无所属关系
 def judgeSceneAffiliation(nowScenePath,targetScenePath):
     if nowScenePath[:-1] != targetScenePath[:-1]:
         if nowScenePath[:-1] != targetScenePath:
