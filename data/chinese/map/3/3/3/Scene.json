@@ -1,5 +1,5 @@
 {
-  "SceneName":"未命名房间.3",
-  "InOutDoor":"Out",
-  "SceneTag":"Room"
+  "SceneName":"右厕所",
+  "InOutDoor":"In",
+  "SceneTag":"Toilet"
 }
