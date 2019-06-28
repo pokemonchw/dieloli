@@ -65,6 +65,9 @@ def differenceMapMove(characterId,targetScene):
                 nowMapSceneId = MapHandle.getMapSceneIdForScenePath(commonMap,nowTruePosition)
             elif realMapInMap == commonMap:
                 nowMapSceneId = MapHandle.getMapSceneIdForScenePath(commonMap,nowSceneRealMap)
+            else:
+                nowMapSceneId =MapHandle.getMapSceneIdForScenePath(nowTrueMap,nowTruePosition)
+                targetMapSceneId = '0'
             return identicalMapMove(characterId,commonMap,nowMapSceneId,targetMapSceneId)
 
 # 相同地图移动
