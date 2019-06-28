@@ -1,52 +1,44 @@
 from script.Core import RichText,EraPrint,PyCmd,CacheContorl,ValueHandle,TextHandle
-import os
+import os,datetime
 
 # 输出地图
 def printMap(mapPath):
     mapDraw = getMapDrawForMapPath(mapPath)
-    mapDraw = r'' + mapDraw
     characterPosition = CacheContorl.characterData['character']['0']['Position']
     characterNowSceneId = getSceneIdInMapForScenePathOnMapPath(characterPosition,mapPath)
-    sceneList = getSceneListForMap(mapPath)
     inputS = []
-    inputCmd = ''
-    mapYList = mapDraw.split('\n')
-    mapXListStyleList = []
-    newMapYList = []
-    for mapXList in mapYList:
-        mapXListStyle = RichText.setRichTextPrint(mapXList,'standard')
-        newMapXList = RichText.removeRichCache(mapXList)
-        mapXListStyleList.append(mapXListStyle)
-        newMapYList.append(newMapXList)
-    mapXIndex = 0
-    for mapXList in newMapYList:
-        passList = []
-        mapXListStyle = mapXListStyleList[mapXIndex]
-        mapXFix = TextHandle.align(mapXList,'center',True)
-        EraPrint.p(mapXFix,richTextJudge=False)
-        mapXIndex += 1
-        for i in range(0, len(mapXList)):
-            if str(i) not in passList:
-                if mapXListStyle[i] == 'mapbutton':
-                    inputCmd = inputCmd + mapXList[i]
-                    for n in range(i + 1,len(mapXList)):
-                        if mapXListStyle[n] == 'mapbutton':
-                            inputCmd = inputCmd + mapXList[n]
-                            passList.append(str(n))
-                        else:
-                            break
-                    if inputCmd in sceneList:
-                        if inputCmd == characterNowSceneId:
-                            EraPrint.p(inputCmd,'nowmap',richTextJudge=False)
-                            inputS.append(None)
-                        else:
-                            PyCmd.pcmd(inputCmd, inputCmd, None)
-                            inputS.append(inputCmd)
+    mapYList = mapDraw['Draw']
+    mapXCmdListData = mapDraw['Cmd']
+    mapXCmdIdListData = mapDraw['CmdId']
+    for mapXListId in range(len(mapYList)):
+        mapXList = mapYList[mapXListId]
+        nowCmdList = mapXCmdListData[mapXListId]
+        nowCmdIdList = mapXCmdIdListData[mapXListId]
+        cmdListStr = ''.join(nowCmdList)
+        EraPrint.p(TextHandle.align(mapXList + cmdListStr,'center',True),richTextJudge=False)
+        i = 0
+        while i in range(len(mapXList)):
+            if nowCmdIdList != []:
+                while i == nowCmdIdList[0]:
+                    if nowCmdList[0] == characterNowSceneId:
+                        EraPrint.p(nowCmdList[0],'nowmap',richTextJudge=False)
+                        inputS.append(None)
                     else:
-                        EraPrint.p(inputCmd,richTextJudge=False)
-                    inputCmd = ''
+                        PyCmd.pcmd(nowCmdList[0], nowCmdList[0], None)
+                        inputS.append(nowCmdList[0])
+                    nowCmdList = nowCmdList[1:]
+                    nowCmdIdList = nowCmdIdList[1:]
+                    if nowCmdList == []:
+                        break
+                if nowCmdIdList != []:
+                    EraPrint.p(mapXList[i:nowCmdIdList[0]])
+                    i = nowCmdIdList[0]
                 else:
-                    EraPrint.p(mapXList[i], mapXListStyle[i],richTextJudge=False)
+                    EraPrint.p(mapXList[i:])
+                    i = len(mapXList)
+            else:
+                EraPrint.p(mapXList[i:])
+                i = len(mapXList)
         EraPrint.p('\n')
     return inputS
 

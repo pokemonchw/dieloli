@@ -44,7 +44,8 @@ def loadDirNow(dataPath):
                             mapSystemPath = getMapSystemPathForPath(nowPath)
                             nowMapData['MapPath'] = mapSystemPath
                             with open(os.path.join(dataPath,"Map"), 'r') as nowReadFile:
-                                nowMapData['MapDraw'] = nowReadFile.read()
+                                drawData = nowReadFile.read()
+                                nowMapData['MapDraw'] = getPrintMapData(drawData)
                             mapSystemPathStr = getMapSystemPathStr(mapSystemPath)
                             nowMapData.update(JsonHandle._loadjson(nowPath))
                             CacheContorl.nowInitMapId = mapSystemPathStr
@@ -89,6 +90,43 @@ def getMapSystemPathForPath(nowPath):
 # 获取地图系统路径字符串
 def getMapSystemPathStr(nowPath):
     return os.sep.join(nowPath)
+
+# 获取地图绘制数据
+def getPrintMapData(mapDraw):
+    mapYList = mapDraw.split('\n')
+    newMapYList = []
+    mapXListCmdData = {}
+    mapXFixList = []
+    mapXCmdIdData = {}
+    for mapXListId in range(len(mapYList)):
+        setMapButton = False
+        mapXList = mapYList[mapXListId]
+        mapXListCmdList = []
+        cmdIdList = []
+        newXList = ''
+        nowCmd = ''
+        nowCmdId = 0
+        i = 0
+        while i in range(len(mapXList)):
+            if setMapButton == False and mapXList[i:i+11] != '<mapbutton>':
+                newXList += mapXList[i]
+            elif setMapButton == False and mapXList[i:i+11] == '<mapbutton>':
+                i += 10
+                setMapButton = True
+            elif setMapButton == True and mapXList[i:i+12] != '</mapbutton>':
+                nowCmd += mapXList[i]
+            else:
+                setMapButton = False
+                mapXListCmdList.append(nowCmd)
+                cmdIdList.append(len(newXList))
+                nowCmd = ''
+                nowCmdId = i + 12
+                i += 11
+            i += 1
+        mapXListCmdData[mapXListId] = mapXListCmdList
+        newMapYList.append(newXList)
+        mapXCmdIdData[mapXListId] = cmdIdList
+    return {"Draw":newMapYList,"Cmd":mapXListCmdData,"CmdId":mapXCmdIdData}
 
 # 获取路径下所有子路径列表
 def getPathList(pathData):
