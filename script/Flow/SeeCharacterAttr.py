@@ -2,6 +2,7 @@ from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,TextLoading,GameCon
 from script.Design import PanelStateHandle,GameTime,CharacterHandle,AttrCalculation,MapHandle
 from script.Panel import SeeCharacterAttrPanel
 import math
+from script.Flow import GameStartFlow
 
 panelList = ['CharacterMainAttrPanel','CharacterEquipmentPanel','CharacterItemPanel','CharacterExperiencePanel','CharacterLevelPanel','CharacterFeaturesPanel','CharacterEngravingPanel']
 
@@ -22,13 +23,7 @@ def acknowledgmentAttribute_func():
         if yrn in panelList:
             PanelStateHandle.panelStateChange(yrn)
         elif yrn == '0':
-            GameTime.initTime()
-            AttrCalculation.setAttrOver(characterId)
-            CharacterHandle.initCharacterList()
-            SeeCharacterAttrPanel.initShowAttrPanelList()
-            characterPosition = CacheContorl.characterData['character'][characterId]['Position']
-            MapHandle.characterMoveScene(['0'], characterPosition, characterId)
-            CacheContorl.nowFlowId = 'main'
+            GameStartFlow.initGameStart()
             break
         elif yrn == '1':
             CacheContorl.wframeMouse['wFrameRePrint'] = 1

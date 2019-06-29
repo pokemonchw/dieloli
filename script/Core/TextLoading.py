@@ -24,6 +24,8 @@ nameListPath = 'NameIndex'
 familyNameListPath = 'FamilyIndex'
 fontConfigPath = 'FontConfig'
 barConfigPath = 'BarConfig'
+phaseCourse = 'PhaseCourse'
+course = 'Course'
 
 # 获取文本数据
 def getTextData(textPathId,textId):

@@ -71,6 +71,9 @@ nowFlowId = ''
 oldFlowId = ''
 tooOldFlowId = ''
 
+# 课时数据
+courseData = {}
+
 oldCharacterId = '0'
 
 textWait = 0

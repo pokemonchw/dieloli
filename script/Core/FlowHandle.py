@@ -162,6 +162,7 @@ def askfor_wait():
 def initCache():
     CacheContorl.flowContorl = {'restartGame': 0, 'quitGame': 0}
     CacheContorl.wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesUp': 2, 'wFrameLineState': 2,
+  "97":"初中三年级",
                    'wFrameRePrint': 0}
     CacheContorl.cmd_map = {}
     CacheContorl.characterData = {'characterId': '', 'character': {}}
@@ -196,6 +197,7 @@ def initCache():
     CacheContorl.oldFlowId = ''
     CacheContorl.tooOldFlowId = ''
     CacheContorl.occupationCharacterData = {}
+    CacheContorl.courseData = {}
 
 def getTemCharacterDefault():
     temCharacter = TextLoading.getTextData(TextLoading.rolePath, 'Default')

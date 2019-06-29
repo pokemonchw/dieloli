@@ -70,7 +70,7 @@ def initCharacter(nowId,character):
     weight = AttrCalculation.getWeight(bmi, height['NowHeight'])
     defaultAttr['Weight'] = weight
     if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
-        classGradeMax = 6
+        classGradeMax = 12
         classGrade = str(defaultAttr['Age'] - 6)
         if int(classGrade) > classGradeMax:
             classGrade = str(classGradeMax)
