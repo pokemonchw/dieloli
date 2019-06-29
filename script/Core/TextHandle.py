@@ -1,4 +1,5 @@
 from script.Core import GameConfig,TextLoading,RichText
+from script.lib import align
 
 widths = [
     (126, 1),(159, 0),(687, 1),(710, 0),(711, 1),
@@ -55,8 +56,7 @@ def getTextIndex(text):
             else:
                 text = text.replace(styleTextHead, '')
                 text = text.replace(styleTextTail, '')
-    count = len(text)
-    for i in range(0,count):
+    for i in range(len(text)):
         if textStyleList[i] in barlist:
             textwidth = TextLoading.getTextData(TextLoading.barConfigPath,textStyleList[i])['width']
             textIndex = textIndex + int(textwidth)
@@ -65,14 +65,17 @@ def getTextIndex(text):
     return textIndex + stylewidth
 
 # 计算字符宽度
-def get_width( o ):
-    global widths
+def get_width(o):
     if o == 0xe or o == 0xf:
-        return 0
-    for num, wid in widths:
-        if o <= num:
-            return wid
-    return 1
+        width = 0
+    elif o <= 1114109:
+        for num, wid in widths:
+            if o <= num:
+                width = wid
+                break
+    else:
+        width = 1
+    return width
 
 # 全角字符转半角
 def fullToHalfText(ustring):

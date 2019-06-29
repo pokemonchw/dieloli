@@ -160,9 +160,9 @@ def pobo(sleepTime,string, style='standard'):
 # 列表输出
 def plist(stringList,stringColumn = 1,stringSize = 'left'):
     textWait = CacheContorl.textWait
+    textWidth = GameConfig.text_width
     if textWait != 0:
         time.sleep(textWait)
-    textWidth = GameConfig.text_width
     stringIndex = int(textWidth / stringColumn)
     for i in range(0, len(stringList)):
         stringText = stringList[i]
@@ -173,8 +173,13 @@ def plist(stringList,stringColumn = 1,stringSize = 'left'):
         elif stringSize == 'center':
             stringTextFix = ' ' * int((stringIndex - stringIdIndex) / 2)
             stringText = stringTextFix + stringText + stringTextFix
+            nowTextIndex = TextHandle.getTextIndex(stringText)
+            if stringTextFix != '' and nowTextIndex < stringIndex:
+                stringText += ' ' * (stringIndex - nowTextIndex)
+            elif stringTextFix != '' and nowTextIndex > stringIndex:
+                stringText = stringText[-1]
         elif stringSize == 'right':
-            stringTextFix = ' ' * (stringIndex - stringIdIndex)
+            stringTextFix = '_' * (stringIndex - stringIdIndex)
             stringText = stringTextFix + stringText
         if i == 0:
             p(stringText)
