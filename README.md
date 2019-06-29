@@ -16,7 +16,12 @@ DieLoli
 依赖
 ----
 python3 \
-  tkinter,dijkstar
+  dijkstar,wcwidth \
+建议通过::
+
+    pip install requirements.txt
+
+进行安装
 
 警告
 ----

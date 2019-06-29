@@ -1,16 +1,5 @@
 from script.Core import GameConfig,TextLoading,RichText
-from script.lib import align
-
-widths = [
-    (126, 1),(159, 0),(687, 1),(710, 0),(711, 1),
-    (727, 0),(733, 1),(879, 0),(1154, 1),(1161, 0),
-    (4347, 1),(4447, 2),(7467, 1),(7521, 0),(8369, 1),
-    (8426, 0),(9000, 1),(9002, 2),(11021, 1),(12350, 2),
-    (12351, 1),(12438, 2),(12442, 0),(19893, 2),(19967, 1),
-    (55203, 2),(63743, 1),(64106, 2),(65039, 1),(65059, 0),
-    (65131, 2),(65279, 1),(65376, 2),(65500, 1),(65510, 2),
-    (120831, 1),(262141, 2),(1114109, 1),
-]
+from wcwidth import wcswidth
 
 #文本对齐
 def align(text,just='left',onlyFix = False,columns = 1,textWidth = None):
@@ -61,21 +50,8 @@ def getTextIndex(text):
             textwidth = TextLoading.getTextData(TextLoading.barConfigPath,textStyleList[i])['width']
             textIndex = textIndex + int(textwidth)
         else:
-            textIndex = textIndex + get_width(ord(text[i]))
+            textIndex += wcswidth(text[i])
     return textIndex + stylewidth
-
-# 计算字符宽度
-def get_width(o):
-    if o == 0xe or o == 0xf:
-        width = 0
-    elif o <= 1114109:
-        for num, wid in widths:
-            if o <= num:
-                width = wid
-                break
-    else:
-        width = 1
-    return width
 
 # 全角字符转半角
 def fullToHalfText(ustring):

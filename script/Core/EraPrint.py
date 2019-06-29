@@ -179,7 +179,7 @@ def plist(stringList,stringColumn = 1,stringSize = 'left'):
             elif stringTextFix != '' and nowTextIndex > stringIndex:
                 stringText = stringText[-1]
         elif stringSize == 'right':
-            stringTextFix = '_' * (stringIndex - stringIdIndex)
+            stringTextFix = ' ' * (stringIndex - stringIdIndex)
             stringText = stringTextFix + stringText
         if i == 0:
             p(stringText)
