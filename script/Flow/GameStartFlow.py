@@ -1,4 +1,4 @@
-from script.Design import GameTime,AttrCalculation,CharacterHandle,MapHandle,Course
+from script.Design import GameTime,AttrCalculation,CharacterHandle,MapHandle,Course,Interest
 from script.Core import CacheContorl
 from script.Panel import SeeCharacterAttrPanel
 
@@ -6,9 +6,11 @@ from script.Panel import SeeCharacterAttrPanel
 def initGameStart():
     GameTime.initTime()
     AttrCalculation.setAttrOver('0')
+    Course.initPhaseCourseHour()
     CharacterHandle.initCharacterList()
+    Interest.initCharacterInterest()
+    Course.initCharacterKnowledge()
     SeeCharacterAttrPanel.initShowAttrPanelList()
-    Course.initCourse()
     characterPosition = CacheContorl.characterData['character']['0']['Position']
     MapHandle.characterMoveScene(['0'],characterPosition,'0')
     CacheContorl.nowFlowId = 'main'

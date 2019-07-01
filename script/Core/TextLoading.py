@@ -26,6 +26,8 @@ fontConfigPath = 'FontConfig'
 barConfigPath = 'BarConfig'
 phaseCourse = 'PhaseCourse'
 course = 'Course'
+knowledge = 'Knowledge'
+languageSkillsPath = 'LanguageSkills'
 
 # 获取文本数据
 def getTextData(textPathId,textId):
@@ -33,3 +35,7 @@ def getTextData(textPathId,textId):
         return GameData._gamedata[textPathId][textId]
     else:
         return GameData._gamedata[language][textPathId][textId]
+
+# 获取游戏数据
+def getGameData(textPathId):
+    return GameData._gamedata[language][textPathId]

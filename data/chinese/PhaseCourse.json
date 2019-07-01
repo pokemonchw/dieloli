@@ -87,12 +87,12 @@
 			"InformationTechnology": 5,
 			"Art": 3,
 			"Music": 3,
-			"Sport": 6,
+			"Sports": 6,
 			"Moral": 8,
 			"HealthEducation": 3,
-			"Histry": 8,
+			"History": 8,
 			"Biology": 8,
-			"Geogrphy": 8
+			"Geography": 8
 		},
 		{
 			"LanguageLiterature": 17,
@@ -101,12 +101,12 @@
 			"InformationTechnology": 6,
 			"Art": 3,
 			"Music": 3,
-			"Sport": 5,
+			"Sports": 5,
 			"Moral": 8,
 			"HealthEducation": 3,
-			"Histry": 8,
+			"History": 8,
 			"Biology": 8,
-			"Geogrphy": 8
+			"Geography": 8
 		},
 		{
 			"LanguageLiterature": 17,
@@ -115,12 +115,12 @@
 			"InformationTechnology": 6,
 			"Art": 3,
 			"Music": 3,
-			"Sport": 5,
+			"Sports": 5,
 			"Moral": 8,
 			"HealthEducation": 1,
-			"Histry": 8,
+			"History": 8,
 			"Biology": 8,
-			"Geogrphy": 8
+			"Geography": 8
 		}
 	],
 	"SeniorHighSchool": [
@@ -131,12 +131,12 @@
 			"InformationTechnology": 5,
 			"Art": 3,
 			"Music": 3,
-			"Sport": 6,
+			"Sports": 6,
 			"Moral": 8,
 			"HealthEducation": 3,
-			"Histry": 8,
+			"History": 8,
 			"Biology": 8,
-			"Geogrphy": 8
+			"Geography": 8
 	  },
 	  {
 			"LanguageLiterature": 17,
@@ -145,12 +145,12 @@
 			"InformationTechnology": 6,
 			"Art": 3,
 			"Music": 3,
-			"Sport": 5,
+			"Sports": 5,
 			"Moral": 8,
 			"HealthEducation": 3,
-			"Histry": 8,
+			"History": 8,
 			"Biology": 8,
-			"Geogrphy": 8
+			"Geography": 8
 	  },
 	  {
 			"LanguageLiterature": 17,
@@ -159,12 +159,12 @@
 			"InformationTechnology": 6,
 			"Art": 3,
 			"Music": 3,
-			"Sport": 5,
+			"Sports": 5,
 			"Moral": 8,
 			"HealthEducation": 1,
-			"Histry": 8,
+			"History": 8,
 			"Biology": 8,
-			"Geogrphy": 8
+			"Geography": 8
 	  }
 	]
 }

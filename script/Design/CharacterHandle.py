@@ -34,15 +34,11 @@ def initCharacter(nowId,character):
     defaultAttr['Sex'] = characterSex
     AttrCalculation.setSexCache(characterSex)
     defaultAttr['Features'] = CacheContorl.featuresList.copy()
-    motherTongue = {
-        "Level":5,
-        "Exp":0
-    }
     if 'MotherTongue' in character:
-        defaultAttr['Language'][character['MotherTongue']] = motherTongue
+        defaultAttr['Language'][character['MotherTongue']] = 10000
         defaultAttr['MotherTongue'] = character['MotherTongue']
     else:
-        defaultAttr['Language']['Chinese'] = motherTongue
+        defaultAttr['Language']['Chinese'] = 10000
     if 'Age' in character:
         ageTem = character['Age']
         characterAge = AttrCalculation.getAge(ageTem)
@@ -72,8 +68,6 @@ def initCharacter(nowId,character):
     if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
         classGradeMax = 12
         classGrade = str(defaultAttr['Age'] - 6)
-        if int(classGrade) > classGradeMax:
-            classGrade = str(classGradeMax)
         defaultAttr['Class'] = random.choice(CacheContorl.placeData["Classroom_" + classGrade])
     bodyFat = AttrCalculation.getBodyFat(characterSex,bodyFatTem)
     measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
