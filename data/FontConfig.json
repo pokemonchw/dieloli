@@ -3,7 +3,7 @@
     "foreground":"#C8C8C8",
     "background":"#000000",
     "font":"Inconsolata",
-    "fontSize":"14",
+    "fontSize":"13",
     "bold":"0",
     "underline":"0",
     "italic":"0"
@@ -13,7 +13,7 @@
     "background":"#000000",
     "selectbackground":"grey",
     "font":"Inconsolata",
-    "fontSize":"14",
+    "fontSize":"12",
     "bold":"0",
     "underline":"0",
     "italic":"0"

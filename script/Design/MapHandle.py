@@ -83,7 +83,6 @@ def getSceneNameListForMapPath(mapPath):
         sceneNameData[scene] = sceneName
     return sceneNameData
 
-
 # 场景移动
 def characterMoveScene(oldScenePath,newScenePath,characterId):
     oldScenePathStr = getMapSystemPathStrForList(oldScenePath)

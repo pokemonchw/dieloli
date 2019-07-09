@@ -1,2 +1,3 @@
-Dijkstar==2.4.0
 wcwidth==0.1.7
+numpy==1.16.4
+Dijkstar==2.4.0

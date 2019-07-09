@@ -72,6 +72,7 @@ def initCharacter(nowId,character):
     bodyFat = AttrCalculation.getBodyFat(characterSex,bodyFatTem)
     measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
     defaultAttr['Measirements'] = measurements
+    defaultAttr['Knowledge'] = {}
     CacheContorl.temporaryCharacter.update(defaultAttr)
     CacheContorl.featuresList = {}
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
@@ -116,7 +117,7 @@ def getRandomNpcData():
         for i in ageWeightData:
             ageWeightMax += int(ageWeightData[i])
         for i in range(0,randomNpcMax):
-            nowAgeWeight = random.randint(0,ageWeightMax - 1)
+            nowAgeWeight = random.randint(-1,ageWeightMax - 1)
             nowAgeWeightRegin = ValueHandle.getNextValueForList(nowAgeWeight,ageWeightReginList)
             ageWeightTem = ageWeightReginData[str(nowAgeWeightRegin)]
             randomNpcSex = getRandNpcSex()

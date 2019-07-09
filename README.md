@@ -16,7 +16,7 @@ DieLoli
 依赖
 ----
 python3 \
-  dijkstar,wcwidth \
+  dijkstar,wcwidth,numpy \
 建议通过::
 
     pip install requirements.txt

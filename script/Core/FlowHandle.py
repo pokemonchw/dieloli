@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-import time,os
+import time,os,copy
 from script.Core import CacheContorl,TextLoading,TextHandle,GameConfig,IoInit
 
 def null_func():
@@ -200,5 +200,5 @@ def initCache():
     CacheContorl.courseData = {}
 
 def getTemCharacterDefault():
-    temCharacter = TextLoading.getTextData(TextLoading.rolePath, 'Default')
+    temCharacter = copy.deepcopy(TextLoading.getTextData(TextLoading.rolePath, 'Default'))
     return temCharacter

@@ -1,12 +1,5 @@
 import random,bisect
 
-# 倒序排列表单
-def reverseArrayList(list):
-    ofList = []
-    for i in reversed(list):
-        ofList.append(i)
-    return ofList
-
 # 二维数组转字典
 def twoBitArrayToDict(array):
     newDict = {}
