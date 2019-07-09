@@ -1,5 +1,5 @@
 from script.Core import TextLoading,ValueHandle,CacheContorl
-import math,datetime
+import math,datetime,random
 
 # 初始化各班级课时和任课老师
 def initPhaseCourseHour():
@@ -64,35 +64,49 @@ def initPhaseCourseHourExperience():
 
 # 初始化角色知识等级
 def initCharacterKnowledge():
-    courseData = TextLoading.getGameData(TextLoading.course)
-    phaseExperienceData = CacheContorl.courseData['PhaseExperience']
     for i in CacheContorl.characterData['character']:
         character = CacheContorl.characterData['character'][i]
         characterInterestData = character['Interest']
         characterAge = character['Age']
+        classGrade = 11
         if characterAge <= 18 and characterAge >= 7:
-            classGradeMax = 11
             classGrade = characterAge - 7
-            for garde in range(classGrade):
-                experienceData = phaseExperienceData[garde]
-                for knowledge in experienceData:
-                    if knowledge == 'Language':
-                        for skill in experienceData[knowledge]:
-                            skillExperience = experienceData[knowledge][skill]
-                            skillInterest = character['Interest'][skill]
-                            skillExperience *= skillInterest
-                            if skill in character['Language']:
-                                character['Language'][skill] += skillExperience
-                            else:
-                                character['Language'][skill] = skillExperience
-                    else:
-                        character['Knowledge'].setdefault(knowledge,{})
-                        for skill in experienceData[knowledge]:
-                            skillExperience = experienceData[knowledge][skill]
-                            skillInterest = character['Interest'][skill]
-                            skillExperience *= skillInterest
-                            if skill in character['Knowledge'][knowledge]:
-                                character['Knowledge'][knowledge][skill] += skillExperience
-                            else:
-                                character['Knowledge'][knowledge][skill] = skillExperience
+        initExperienceForGrade(classGrade,character)
         CacheContorl.characterData['character'][i] = character
+        if characterAge > 18:
+            initTeacherKnowledge(character)
+
+def initTeacherKnowledge(character):
+    characterAge = character['Age']
+    studyYear = characterAge - 18
+    for knowledge in character['Knowledge']:
+        for skill in character['Knowledge'][knowledge]:
+            character['Knowledge'][knowledge][skill] += character['Knowledge'][knowledge][skill] / 12 * studyYear * random.uniform(0.25,0.75)
+    for language in character['Language']:
+        character['Knowledge'][knowledge][skill] += character['Language'][language] / 12 * studyYear * random.uniform(0.25,0.75)
+
+courseData = TextLoading.getGameData(TextLoading.course)
+def initExperienceForGrade(classGrade,character):
+    phaseExperienceData = CacheContorl.courseData['PhaseExperience']
+    for garde in range(classGrade):
+        experienceData = phaseExperienceData[garde]
+        for knowledge in experienceData:
+            if knowledge == 'Language':
+                for skill in experienceData[knowledge]:
+                    skillExperience = experienceData[knowledge][skill]
+                    skillInterest = character['Interest'][skill]
+                    skillExperience *= skillInterest
+                    if skill in character['Language']:
+                        character['Language'][skill] += skillExperience
+                    else:
+                        character['Language'][skill] = skillExperience
+            else:
+                character['Knowledge'].setdefault(knowledge,{})
+                for skill in experienceData[knowledge]:
+                    skillExperience = experienceData[knowledge][skill]
+                    skillInterest = character['Interest'][skill]
+                    skillExperience *= skillInterest
+                    if skill in character['Knowledge'][knowledge]:
+                        character['Knowledge'][knowledge][skill] += skillExperience
+                    else:
+                        character['Knowledge'][knowledge][skill] = skillExperience
