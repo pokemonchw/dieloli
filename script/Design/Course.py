@@ -1,5 +1,5 @@
 from script.Core import TextLoading,ValueHandle,CacheContorl
-import math,random
+import math,random,bisect
 
 # 初始化各班级课时
 def initPhaseCourseHour():
@@ -57,41 +57,76 @@ def initPhaseCourseHour():
 # 初始化各班级任课老师
 def initClassTeacher():
     teacherIndex = len(CacheContorl.teacherCourseExperience[list(CacheContorl.teacherCourseExperience.keys())[0]].keys())
-    courseMax = 0
+    courseMaxA = 0
+    courseMaxB = 0
+    viceCourseIndexB = 0
     CacheContorl.courseData['ClassTeacher'] = {}
     for phase in CacheContorl.courseData['ClassHour']:
-        courseMax += len(CacheContorl.courseData['ClassHour'][phase].keys()) * 3
-    if teacherIndex >= courseMax:
+        courseMaxA += len(CacheContorl.courseData['ClassHour'][phase].keys()) * 3
+        for course in CacheContorl.courseData['ClassHour'][phase]:
+            if CacheContorl.courseData['ClassHour'][phase][course] > 7:
+                courseMaxB += 3
+            else:
+                courseMaxB += 1
+                viceCourseIndexB += 1.5
+    if teacherIndex >= courseMaxA:
         courseDistributionA()
+    elif teacherIndex >= courseMaxB:
+        courseDistributionB()
 
-# 课时分配流程A
-def courseDistributionA():
-    teacherData = {}
+# 课时AB主课分配流程
+def courseABMainDistribution():
     for phase in range(12,0,-1):
         classList = CacheContorl.placeData['Classroom_' + str(phase)]
         CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)] = {}
         for classroom in classList:
             CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom] = {}
             for course in CacheContorl.courseData['ClassHour'][phase - 1]:
-                if CacheContorl.courseData['ClassHour'][phase-1][course] > 7:
+                if CacheContorl.courseData['ClassHour'][phase - 1][course] > 7:
                     CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course] = []
                     for teacher in CacheContorl.teacherCourseExperience[course]:
                         if teacher not in teacherData:
                             teacherData[teacher] = 0
                             CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course].append(teacher)
                             break
+
+teacherData = {}
+# 课时分配流程A
+def courseDistributionA():
+    courseABMainDistribution()
     for phase in range(1,13):
         classList = CacheContorl.placeData['Classroom_' + str(phase)]
         CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)] = {}
         for classroom in classList:
             CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom] = {}
             for course in CacheContorl.courseData['ClassHour'][phase - 1]:
-                if CacheContorl.courseData['ClassHour'][phase-1][course] <= 7:
+                if CacheContorl.courseData['ClassHour'][phase - 1][course] <= 7:
                     CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course] = []
                     for teacher in CacheContorl.teacherCourseExperience[course]:
                         if teacher not in teacherData:
                             teacherData[teacher] = 0
                             CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course].append(teacher)
+                            break
+
+# 课时分配流程B
+def courseDistributionB():
+    courseABMainDistribution()
+    for phase in range(1,13):
+        classList = CacheContorl.placeData['Classroom_' + str(phase)]
+        CacheContorl.courseData['ClassTeacher']['CLassroom_' + str(phase)] = {}
+        teacherCourseIndex = 0
+        for course in CacheContorl.courseData['ClassHour'][phase - 1]:
+            for classroom in classList:
+                CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom] = {}
+                if CacheContorl.courseData['ClassHour'][phase - 1][course] <= 7:
+                    CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course] = []
+                    for teacher in CacheContorl.teacherCourseExperience[course]:
+                        if teacher not in teacherData:
+                            CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course].append(teacher)
+                            teacherCourseIndex += 1
+                            if teacherCourseIndex == 2:
+                                teacherCourseIndex = 0
+                                teacherData[teacher] = 0
                             break
 
 courseKnowledgeData = TextLoading.getGameData(TextLoading.course)
