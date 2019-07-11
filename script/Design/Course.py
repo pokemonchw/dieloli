@@ -1,7 +1,7 @@
 from script.Core import TextLoading,ValueHandle,CacheContorl
-import math,datetime,random
+import math,random
 
-# 初始化各班级课时和任课老师
+# 初始化各班级课时
 def initPhaseCourseHour():
     phaseCourseTime = TextLoading.getTextData(TextLoading.phaseCourse,'CourseTime')
     primaryWeight = TextLoading.getTextData(TextLoading.phaseCourse,'PrimarySchool')
@@ -38,15 +38,66 @@ def initPhaseCourseHour():
                 elif nowClassHourMax < classHourMax:
                     classHourData[course] += 1
                     nowClassHourMax += 1
+        while 1:
+            moreHour = 0
+            for course in classHourData:
+                if moreHour > 0 and classHourData[course] < 14:
+                    classHourData[course] += 1
+                    moreHour -=1
+                elif moreHour >0 and classHourData[course] > 14:
+                    moreHour += (classHourData[course] - 14)
+                    classHourData[course] -= (classHourData[course] - 14)
+            if moreHour == 0:
+                break
         allClassHourData[phaseIndex] = classHourData
         phaseIndex += 1
     CacheContorl.courseData['ClassHour'] = allClassHourData
     initPhaseCourseHourExperience()
 
+# 初始化各班级任课老师
+def initClassTeacher():
+    teacherIndex = len(CacheContorl.teacherCourseExperience[list(CacheContorl.teacherCourseExperience.keys())[0]].keys())
+    courseMax = 0
+    CacheContorl.courseData['ClassTeacher'] = {}
+    for phase in CacheContorl.courseData['ClassHour']:
+        courseMax += len(CacheContorl.courseData['ClassHour'][phase].keys()) * 3
+    if teacherIndex >= courseMax:
+        courseDistributionA()
+
+# 课时分配流程A
+def courseDistributionA():
+    teacherData = {}
+    for phase in range(12,0,-1):
+        classList = CacheContorl.placeData['Classroom_' + str(phase)]
+        CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)] = {}
+        for classroom in classList:
+            CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom] = {}
+            for course in CacheContorl.courseData['ClassHour'][phase - 1]:
+                if CacheContorl.courseData['ClassHour'][phase-1][course] > 7:
+                    CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course] = []
+                    for teacher in CacheContorl.teacherCourseExperience[course]:
+                        if teacher not in teacherData:
+                            teacherData[teacher] = 0
+                            CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course].append(teacher)
+                            break
+    for phase in range(1,13):
+        classList = CacheContorl.placeData['Classroom_' + str(phase)]
+        CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)] = {}
+        for classroom in classList:
+            CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom] = {}
+            for course in CacheContorl.courseData['ClassHour'][phase - 1]:
+                if CacheContorl.courseData['ClassHour'][phase-1][course] <= 7:
+                    CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course] = []
+                    for teacher in CacheContorl.teacherCourseExperience[course]:
+                        if teacher not in teacherData:
+                            teacherData[teacher] = 0
+                            CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course].append(teacher)
+                            break
+
+courseKnowledgeData = TextLoading.getGameData(TextLoading.course)
 # 初始化每年级科目课时经验标准量
 def initPhaseCourseHourExperience():
     phaseExperience = {}
-    courseKnowledgeData = TextLoading.getGameData(TextLoading.course)
     for phase in CacheContorl.courseData['ClassHour']:
         phaseExperience[phase] = {}
         for course in CacheContorl.courseData['ClassHour'][phase]:
@@ -75,6 +126,17 @@ def initCharacterKnowledge():
         CacheContorl.characterData['character'][i] = character
         if characterAge > 18:
             initTeacherKnowledge(character)
+            for course in courseKnowledgeData:
+                if course not in CacheContorl.teacherCourseExperience:
+                    CacheContorl.teacherCourseExperience.setdefault(course,{})
+                nowCourseExperience = 0
+                for knowledge in courseKnowledgeData[course]['Knowledge']:
+                    for skill in courseKnowledgeData[course]['Knowledge'][knowledge]:
+                        if knowledge == 'Language':
+                            nowCourseExperience += character['Language'][skill]
+                        else:
+                            nowCourseExperience += character['Knowledge'][knowledge][skill]
+                CacheContorl.teacherCourseExperience[course][i] = nowCourseExperience
 
 def initTeacherKnowledge(character):
     characterAge = character['Age']

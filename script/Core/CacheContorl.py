@@ -73,6 +73,8 @@ tooOldFlowId = ''
 
 # 课时数据
 courseData = {}
+# 教师科目经验
+teacherCourseExperience = {}
 
 oldCharacterId = '0'
 
