@@ -106,10 +106,11 @@ ENV/
 /图表1.dia.autosave
 /image/bar/engravingemptybar_null.png~
 /save/0.save
-/.idea
 /bin/Game
 /uml/主页角色显示流程.dia
 /uml/主页角色显示流程.dia~
 /uml/课时分配.dia
 /uml/课时分配流程A.dia
 /test/Main.py
+
+.idea/
