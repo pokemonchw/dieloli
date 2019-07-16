@@ -1,5 +1,6 @@
 import os
-from tkinter import PhotoImage,END
+from tkinter import END
+from PIL.ImageTk import PhotoImage
 from script.Core import CacheContorl,GamePathConfig,MainFrame
 
 gamepath = GamePathConfig.gamepath
