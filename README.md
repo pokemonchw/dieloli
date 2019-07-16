@@ -19,7 +19,7 @@ python3 \
   dijkstar,wcwidth,numpy \
 建议通过::
 
-    pip install requirements.txt
+    pip install -r requirements.txt
 
 进行安装
 
