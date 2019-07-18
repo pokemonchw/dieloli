@@ -133,13 +133,13 @@ def idIndex(id):
         return idS
     elif id - 10 >= 0:
         if id == 0:
-            idS = "[00" + str(id) + "] "
+            idS = "[  " + str(id) + "] "
             return idS
         else:
-            idS = "[0" + str(id) + "] "
+            idS = "[ " + str(id) + "] "
             return idS
     else:
-        idS = "[00" + str(id) + "] "
+        idS = "[  " + str(id) + "] "
         return idS
 
 # 命令对齐
