@@ -1,4 +1,4 @@
-import random,bisect
+import random,bisect,numpy,datetime
 
 # 二维数组转字典
 def twoBitArrayToDict(array):
@@ -20,20 +20,11 @@ def getReginList(nowData):
         regionList[str(regionIndex)] = nowKey
     return regionList
 
-# 将str类型存储的数字list转换为int类型的list
-def getListKeysIntList(nowList):
-    newList = []
-    for i in nowList:
-        newList.append(int(i))
-    return newList
-
 # 按权重获取随机对象
 def getRandomForWeight(data):
-    weightMax = 0
-    for i in data:
-        weightMax += int(data[i])
+    weightMax = sum(data.values())
     weightReginData = getReginList(data)
-    weightReginList = getListKeysIntList(list(weightReginData.keys()))
+    weightReginList = list(map(int,weightReginData.keys()))
     nowWeight = random.randint(0,weightMax - 1)
     weightRegin = getNextValueForList(nowWeight,weightReginList)
     return weightReginData[str(weightRegin)]

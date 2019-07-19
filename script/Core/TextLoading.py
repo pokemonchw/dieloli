@@ -26,6 +26,7 @@ fontConfigPath = 'FontConfig'
 barConfigPath = 'BarConfig'
 phaseCourse = 'PhaseCourse'
 course = 'Course'
+courseSession = 'CourseSession'
 knowledge = 'Knowledge'
 languageSkillsPath = 'LanguageSkills'
 

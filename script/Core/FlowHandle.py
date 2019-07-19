@@ -101,13 +101,12 @@ def order_deal(flag='order', print_order=True):
                 return
             if print_order == True and order != '':
                 IoInit.print('\n' + order + '\n')
-
             if flag == 'str':
+                if order.isdigit():
+                    order = str(int(order))
                 return order
-
             if flag == 'console':
                 exec(order)
-
             if flag == 'order' and order.isdigit():
                 if _cmd_valid(int(order)):
                     _cmd_deal(int(order))
@@ -161,9 +160,7 @@ def askfor_wait():
 
 def initCache():
     CacheContorl.flowContorl = {'restartGame': 0, 'quitGame': 0}
-    CacheContorl.wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesUp': 2, 'wFrameLineState': 2,
-  "97":"初中三年级",
-                   'wFrameRePrint': 0}
+    CacheContorl.wframeMouse = {'wFrameUp': 2, 'mouseRight': 0, 'mouseLeaveCmd': 1, 'wFrameLinesUp': 2, 'wFrameLineState': 2,'wFrameRePrint': 0}
     CacheContorl.cmd_map = {}
     CacheContorl.characterData = {'characterId': '', 'character': {}}
     CacheContorl.featuresList = {'Age': "", "Chastity": "", 'Disposition': "", 'Courage': "", 'SelfConfidence': "", 'Friends': "",

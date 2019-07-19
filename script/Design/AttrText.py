@@ -21,9 +21,9 @@ familyRegionList = ValueHandle.getReginList(familyNameListData)
 boysRegionList = ValueHandle.getReginList(boysNameListData)
 girlsRegionList = ValueHandle.getReginList(girlsNameListData)
 
-familyRegionIntList = ValueHandle.getListKeysIntList(familyRegionList)
-boysRegionIntList = ValueHandle.getListKeysIntList(boysRegionList)
-girlsRegionIntList = ValueHandle.getListKeysIntList(girlsRegionList)
+familyRegionIntList = list(map(int,familyRegionList))
+boysRegionIntList = list(map(int,boysRegionList))
+girlsRegionIntList = list(map(int,girlsRegionList))
 
 #获取性经验文本
 def getSexExperienceText(sexList,sexName):

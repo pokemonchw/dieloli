@@ -1,8 +1,8 @@
 {
 	"CourseTime": {
-		"PrimarySchool": 36,
+		"PrimarySchool": 35,
 		"JuniorMiddleSchool": 48,
-		"SeniorHighSchool": 69
+		"SeniorHighSchool": 63
 	},
 	"PrimarySchool": [{
 			"LanguageLiterature": 40,

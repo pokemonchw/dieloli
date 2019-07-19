@@ -109,7 +109,7 @@ ageWeightData = {
     "Student":randomStudentProportion
 }
 ageWeightReginData = ValueHandle.getReginList(ageWeightData)
-ageWeightReginList = ValueHandle.getListKeysIntList(list(ageWeightReginData.keys()))
+ageWeightReginList = list(map(int,ageWeightReginData.keys()))
 # 获取随机npc数据
 def getRandomNpcData():
     if CacheContorl.randomNpcList == []:
@@ -142,7 +142,7 @@ sexWeightMax = 0
 for i in sexWeightData:
     sexWeightMax += int(sexWeightData[i])
 sexWeightReginData = ValueHandle.getReginList(sexWeightData)
-sexWeightReginList = ValueHandle.getListKeysIntList(list(sexWeightReginData.keys()))
+sexWeightReginList = list(map(int,sexWeightReginData.keys()))
 # 按权重随机获取npc性别
 def getRandNpcSex():
     nowWeight = random.randint(0,sexWeightMax - 1)

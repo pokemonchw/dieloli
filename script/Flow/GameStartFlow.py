@@ -12,6 +12,7 @@ def initGameStart():
     Interest.initCharacterInterest()
     Course.initCharacterKnowledge()
     Course.initClassTeacher()
+    Course.initClassTimeTable()
     SeeCharacterAttrPanel.initShowAttrPanelList()
     characterPosition = CacheContorl.characterData['character']['0']['Position']
     MapHandle.characterMoveScene(['0'],characterPosition,'0')

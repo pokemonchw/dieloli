@@ -19,7 +19,7 @@ def initPhaseCourseHour():
         classHourMax = 0
         if phaseIndex <= 5:
             classHourMax = phaseCourseTime['PrimarySchool']
-        elif phaseIndex <= 7:
+        elif phaseIndex <= 8:
             classHourMax = phaseCourseTime['JuniorMiddleSchool']
         else:
             classHourMax = phaseCourseTime['SeniorHighSchool']
@@ -53,6 +53,30 @@ def initPhaseCourseHour():
         phaseIndex += 1
     CacheContorl.courseData['ClassHour'] = allClassHourData
     initPhaseCourseHourExperience()
+
+# 初始化各班级课程表
+def initClassTimeTable():
+    phaseCourseTime = TextLoading.getTextData(TextLoading.phaseCourse,'CourseTime')
+    courseSession = TextLoading.getGameData(TextLoading.courseSession)
+    classTeacherData = CacheContorl.courseData['ClassTeacher']
+    teacherTimeTable = {}
+    classTimeTable = {}
+    for phase in CacheContorl.courseData['ClassHour']:
+        classTime = {}
+        classTimeTable[phase] = {}
+        if phase <= 5:
+            classTime = courseSession['PrimarySchool']
+            classHourMax = phaseCourseTime['PrimarySchool']
+        elif phase <= 7:
+            classTime = courseSession['JuniorMiddleSchool']
+            classHourMax = phaseCourseTime['JuniorMiddleSchool']
+        else:
+            classTime = courseSession['SeniorHighSchool']
+            classHourMax = phaseCourseTime['SeniorHighSchool']
+        classHour = CacheContorl.courseData['ClassHour'][phase]
+        for classroom in classTeacherData['Classroom_' + str(phase + 1)]:
+            classTimeTable[phase][classroom] = {}
+            pass
 
 # 初始化各班级任课老师
 def initClassTeacher():
