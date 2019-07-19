@@ -14,10 +14,6 @@ def initPhaseCourseHour():
         phaseWeightRegin = ValueHandle.getReginList(phase)
         weightMax = 0
         weightMax = sum(map(int,phaseWeightRegin.keys()))
-        '''
-        for regin in phaseWeightRegin:
-            weightMax += int(regin)
-        '''
         classHourData = {}
         classHourMax = 0
         if phaseIndex <= 5:
@@ -80,7 +76,7 @@ def initClassTimeTable():
             classDay = 8
         classHour = CacheContorl.courseData['ClassHour'][phase]
         classHourIndex = {}
-        for course in classHour:
+        for course in reversed(list(classHour.keys())):
             classHourIndex.setdefault(course,0)
             while classHourIndex[course] < classHour[course]:
                 for day in range(1,classDay):
