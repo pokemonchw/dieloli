@@ -47,8 +47,6 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
     if cmd_func==null_func:
         cmd_map[cmd_number] = null_func
         return
-
-
     def run_func():
         cmd_func(*arg, **kw)
     cmd_map[cmd_number] = run_func
@@ -70,15 +68,12 @@ def cmd_clear(*number):
         cmd_map.clear()
         IoInit.io_clear_cmd()
 
-
 def _cmd_deal(order_number):
     cmd_map[int(order_number)]()
-
 
 def _cmd_valid(order_number):
     re=(order_number in cmd_map.keys()) and (cmd_map[int(order_number)] != null_func)
     return re
-
 
 __skip_flag__ = False
 reset_func = None

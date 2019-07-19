@@ -11,10 +11,13 @@ def initPhaseCourseHour():
     allClassHourData = {}
     phaseIndex = 0
     for phase in nowWeightList:
-        weightMax = 0
         phaseWeightRegin = ValueHandle.getReginList(phase)
+        weightMax = 0
+        weightMax = sum(map(int,phaseWeightRegin.keys()))
+        '''
         for regin in phaseWeightRegin:
             weightMax += int(regin)
+        '''
         classHourData = {}
         classHourMax = 0
         if phaseIndex <= 5:
@@ -25,9 +28,7 @@ def initPhaseCourseHour():
             classHourMax = phaseCourseTime['SeniorHighSchool']
         for regin in phaseWeightRegin:
             classHourData[phaseWeightRegin[regin]] = math.ceil(classHourMax * (int(regin) / weightMax))
-        nowClassHourMax = 0
-        for course in classHourData:
-            nowClassHourMax += classHourData[course]
+        nowClassHourMax = sum(classHourData.values())
         while nowClassHourMax != classHourMax:
             for course in classHourData:
                 if nowClassHourMax == classHourMax:
@@ -64,19 +65,51 @@ def initClassTimeTable():
     for phase in CacheContorl.courseData['ClassHour']:
         classTime = {}
         classTimeTable[phase] = {}
+        classDay = 0
         if phase <= 5:
             classTime = courseSession['PrimarySchool']
             classHourMax = phaseCourseTime['PrimarySchool']
+            classDay = 6
         elif phase <= 7:
             classTime = courseSession['JuniorMiddleSchool']
             classHourMax = phaseCourseTime['JuniorMiddleSchool']
+            classDay = 7
         else:
             classTime = courseSession['SeniorHighSchool']
             classHourMax = phaseCourseTime['SeniorHighSchool']
+            classDay = 8
         classHour = CacheContorl.courseData['ClassHour'][phase]
-        for classroom in classTeacherData['Classroom_' + str(phase + 1)]:
-            classTimeTable[phase][classroom] = {}
-            pass
+        classHourIndex = {}
+        for course in classHour:
+            classHourIndex.setdefault(course,0)
+            while classHourIndex[course] < classHour[course]:
+                for day in range(1,classDay):
+                    oldDay = day - 1
+                    if oldDay == 0:
+                        oldDay = classDay - 1
+                    classTimeTable[phase].setdefault(day,{})
+                    classTimeTable[phase].setdefault(oldDay,{})
+                    for i in range(1,len(classTime.keys())):
+                        time = list(classTime.keys())[i]
+                        if time not in classTimeTable[phase][oldDay] and time not in classTimeTable[phase][day]:
+                            classTimeTable[phase][day][time] = course
+                            classHourIndex[course] += 1
+                            break
+                        elif time not in classTimeTable[phase][day]:
+                            if course != classTimeTable[phase][oldDay][time]:
+                                classTimeTable[phase][day][time] = course
+                                classHourIndex[course] += 1
+                                break
+                            elif i == len(classTime) - 1:
+                                classTimeTable[phase][day][time] = course
+                                classHourIndex[course] += 1
+                                break
+                            elif all([k in classTimeTable[phase][day] for k in list(classTime.keys())[i+1:]]):
+                                classTimeTable[phase][day][time] = course
+                                classHourIndex[course] += 1
+                                break
+                    if classHourIndex[course] >= classHour[course]:
+                        break
 
 # 初始化各班级任课老师
 def initClassTeacher():
