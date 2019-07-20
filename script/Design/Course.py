@@ -55,8 +55,6 @@ def initPhaseCourseHour():
 def initClassTimeTable():
     phaseCourseTime = TextLoading.getTextData(TextLoading.phaseCourse,'CourseTime')
     courseSession = TextLoading.getGameData(TextLoading.courseSession)
-    classTeacherData = CacheContorl.courseData['ClassTeacher']
-    teacherTimeTable = {}
     classTimeTable = {}
     for phase in CacheContorl.courseData['ClassHour']:
         classTime = {}
@@ -106,6 +104,7 @@ def initClassTimeTable():
                                 break
                     if classHourIndex[course] >= classHour[course]:
                         break
+    CacheContorl.courseData['ClassTimeTable'] = classTimeTable
 
 # 初始化各班级任课老师
 def initClassTeacher():
