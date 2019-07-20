@@ -48,9 +48,20 @@ def subTimeNow(minute=0,hour=0,day=0,month=0,year=0):
 
 # 获取新日期
 def getSubDate(minute=0,hour=0,day=0,month=0,year=0):
-    oldDate = "{0}-{1}-{2},{3}:{4}".format(CacheContorl.gameTime['year'],CacheContorl.gameTime['month'],CacheContorl.gameTime['day'],CacheContorl.gameTime['hour'],CacheContorl.gameTime['minute'])
-    oldDate = datetime.datetime.strptime(oldDate,"%Y-%m-%d,%H:%M")
-    newDate = oldDate + relativedelta.relativedelta(years=year, months=month, days=day, hours=hour, minutes=minute)
+    oldDate = datetime.datetime(
+        CacheContorl.gameTime['year'],
+        CacheContorl.gameTime['month'],
+        CacheContorl.gameTime['day'],
+        CacheContorl.gameTime['hour']
+        CacheContorl.gameTime['minute']
+    )
+    newDate = oldDate + relativedelta.relativedelta(
+        years=year,
+        months=month,
+        days=day,
+        hours=hour,
+        minutes=minute
+    )
     return newDate
 
 def getWeekDate():
