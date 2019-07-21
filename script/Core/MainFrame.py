@@ -279,7 +279,7 @@ def _io_clear_cmd(*cmd_numbers):
                     textbox.tag_remove(tag_name, index_first, index_last)
                 textbox.tag_add('standard', index_first, index_last)
                 textbox.tag_delete(cmd_tag_map[num])
-                cmd_tag_map.pop(num)
+                del cmd_tag_map[num]
     else:
         for num in cmd_tag_map.keys():
             index_first = textbox.tag_ranges(cmd_tag_map[num])[0]

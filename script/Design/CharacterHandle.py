@@ -7,17 +7,19 @@ gamepath = GamePathConfig.gamepath
 featuresList = AttrCalculation.getFeaturesList()
 sexList = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex'))
 ageTemList = list(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem'))
-characterListPath = os.path.join(gamepath,'data',language,'character')
-characterList = GameData.getPathList(characterListPath)
+characterList = list(GameData._gamedata[language]['character'].keys())
 
 # 初始化角色数据
 def initCharacterList():
+    time1 = datetime.datetime.now()
     initCharacterTem()
-    characterList = CacheContorl.npcTemData
+    time2 = datetime.datetime.now()
+    print(time2-time1)
     i = 1
-    for character in characterList:
+    for character in CacheContorl.npcTemData:
         initCharacter(i,character)
         i += 1
+    initCharacterDormitory()
     initCharacterPosition()
 
 # 按id生成角色属性
@@ -93,13 +95,13 @@ def characterAgeFeatureHandle(ageTem,characterSex):
 # 初始化角色数据
 def initCharacterTem():
     npcData = getRandomNpcData()
-    npcData += [getDirCharacterTem(character) for character in characterList]
+    nowCharacterList = characterList.copy()
+    npcData += [getDirCharacterTem(character) for character in nowCharacterList]
     CacheContorl.npcTemData = npcData
 
 # 获取目录中的角色模板
 def getDirCharacterTem(character):
-    characterAttrTemPath = os.path.join(characterListPath,character,'AttrTemplate.json')
-    return JsonHandle._loadjson(characterAttrTemPath)
+    return TextLoading.getCharacterData(character)['AttrTemplate']
 
 randomNpcMax = int(GameConfig.random_npc_max)
 randomTeacherProportion = int(GameConfig.proportion_teacher)
@@ -178,18 +180,14 @@ def getCharacterIndexMax():
 # 获取角色id列表
 def getCharacterIdList():
     characterData = CacheContorl.characterData['character']
-    characterList = list(characterData.keys())
-    return characterList
+    return list(characterData.keys())
+
+# 分配角色宿舍
+def initCharacterDormitory():
+    pass
 
 # 初始化角色的位置
 def initCharacterPosition():
-    characterList = CacheContorl.npcTemData
-    for i in range(0, len(characterList)):
-        characterIdS = str(i + 1)
-        characterData = characterList[i]
-        initCharacterPositionNow(characterData,characterIdS)
-
-def initCharacterPositionNow(characterData,characterIdS):
-    characterInitPosition = characterData['Position']
-    characterPosition = CacheContorl.characterData['character'][characterIdS]['Position']
-    MapHandle.characterMoveScene(characterPosition, characterInitPosition, characterIdS)
+    for character in CacheContorl.characterData['character']:
+        characterPosition = CacheContorl.characterData['character'][character]['Position']
+        MapHandle.characterMoveScene(characterPosition,'0',character)

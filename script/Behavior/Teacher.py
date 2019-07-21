@@ -2,8 +2,6 @@ from script.Core import CacheContorl
 from script.Design import GameTime
 from script.Behavior import Default
 
-behaviorList = ['arder']
-
 # 职业行为总控制
 def behaviorInit(characterId):
     characterState = CacheContorl.characterData['character'][characterId]['State']
@@ -19,3 +17,8 @@ def arderBehavior(characterId):
         nowTimeSlice = GameTime.getNowTimeSlice()
     else:
         pass
+
+behaviorList = {
+    "arder":arderBehavior
+}
+

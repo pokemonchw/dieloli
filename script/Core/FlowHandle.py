@@ -62,7 +62,7 @@ def cmd_clear(*number):
     set_tail_deal_cmd_func(default_tail_deal_cmd_func)
     if number:
         for num in number:
-            cmd_map.pop(num)
+            del cmd_map[num]
             IoInit.io_clear_cmd(num)
     else:
         cmd_map.clear()

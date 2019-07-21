@@ -8,3 +8,8 @@ def arderBehavior(characterId):
         nowTimeSlice = GameTime.getNowTimeSlice()
     else:
         pass
+
+behaviorList = {
+    "arder":arderBehavior
+}
+

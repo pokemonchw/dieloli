@@ -6,11 +6,13 @@ from script.Core import CacheContorl
 '''
 def handleText(string):
     characterId = CacheContorl.characterData['characterId']
-    characterName = CacheContorl.characterData['character'][characterId]['Name']
-    characterNickName = CacheContorl.characterData['character'][characterId]['NickName']
-    characterSelfName = CacheContorl.characterData['character'][characterId]['SelfName']
-    return string.format(
-        Name=characterName,
-        NickName=characterNickName,
-        SelfName=characterSelfName
-    )
+    if characterId != '':
+        characterName = CacheContorl.characterData['character'][characterId]['Name']
+        characterNickName = CacheContorl.characterData['character'][characterId]['NickName']
+        characterSelfName = CacheContorl.characterData['character'][characterId]['SelfName']
+        return string.format(
+            Name=characterName,
+            NickName=characterNickName,
+            SelfName=characterSelfName
+        )
+    return string

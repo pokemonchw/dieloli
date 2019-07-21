@@ -90,11 +90,11 @@ def characterMoveScene(oldScenePath,newScenePath,characterId):
     oldSceneCharacterData = CacheContorl.sceneData[oldScenePathStr]["SceneCharacterData"]
     newSceneCharacterData = CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"]
     if characterId in oldSceneCharacterData:
-        oldSceneCharacterData.remove(characterId)
+        del oldSceneCharacterData[characterId]
         CacheContorl.sceneData[oldScenePathStr]["SceneCharacterData"] = oldSceneCharacterData
     if characterId not in newSceneCharacterData:
         CacheContorl.characterData['character'][characterId]['Position'] = newScenePath
-        newSceneCharacterData.append(characterId)
+        newSceneCharacterData[characterId] = 0
         CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"] = newSceneCharacterData
 
 # 从地图路径列表获取地图系统路径

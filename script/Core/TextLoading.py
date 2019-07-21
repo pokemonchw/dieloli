@@ -40,3 +40,7 @@ def getTextData(textPathId,textId):
 # 获取游戏数据
 def getGameData(textPathId):
     return GameData._gamedata[language][textPathId]
+
+# 获取角色数据
+def getCharacterData(characterName):
+    return GameData._gamedata[language]['character'][characterName]

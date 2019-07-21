@@ -52,7 +52,7 @@ def getSubDate(minute=0,hour=0,day=0,month=0,year=0):
         CacheContorl.gameTime['year'],
         CacheContorl.gameTime['month'],
         CacheContorl.gameTime['day'],
-        CacheContorl.gameTime['hour']
+        CacheContorl.gameTime['hour'],
         CacheContorl.gameTime['minute']
     )
     newDate = oldDate + relativedelta.relativedelta(

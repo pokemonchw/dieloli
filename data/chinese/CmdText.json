@@ -30,5 +30,6 @@
   "seeMap":["返回场景","查看上级地图","查看下级地图"],
   "gameHelp":["返回主页"],
   "seeCharacterWearClothes":["返回主页"],
+  "changeCharacterClother":["更换","返回","查看"],
   "changeSceneCharacterList":["首页","上一页","跳转","下一页","末页"]
 }
