@@ -11,10 +11,7 @@ characterList = list(GameData._gamedata[language]['character'].keys())
 
 # 初始化角色数据
 def initCharacterList():
-    time1 = datetime.datetime.now()
     initCharacterTem()
-    time2 = datetime.datetime.now()
-    print(time2-time1)
     i = 1
     for character in CacheContorl.npcTemData:
         initCharacter(i,character)
@@ -184,7 +181,10 @@ def getCharacterIdList():
 
 # 分配角色宿舍
 def initCharacterDormitory():
-    pass
+    characterData = {}
+    for character in CacheContorl.characterData['character']:
+        characterData[character] = CacheContorl.characterData['character'][character]['Age']
+    characterData = [k[0] for k in sorted(characterData.items(),key=lambda x:x[1])]
 
 # 初始化角色的位置
 def initCharacterPosition():
