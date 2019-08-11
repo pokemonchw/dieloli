@@ -4,6 +4,7 @@
       "Man":{
         "Shenyi":{
           "Name":"深衣",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{
               "Bellyband":0
@@ -33,6 +34,7 @@
         },
         "Zhizhui":{
           "Name":"直綴",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{
               "Bellyband":0
@@ -62,6 +64,7 @@
         },
         "Duanda":{
           "Name":"短打",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{
               "Bellyband":0
@@ -92,6 +95,7 @@
         },
         "QuiltedJacket":{
           "Name":"绗缝夹克",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -114,6 +118,7 @@
         },
         "CasualJacket":{
           "Name":"休闲夹克",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -136,6 +141,7 @@
         },
         "LapelJacket":{
           "Name":"翻领夹克",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -158,6 +164,7 @@
         },
         "SafariJacket":{
           "Name":"猎装夹克",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -181,6 +188,7 @@
         },
         "DownJacket":{
           "Name":"羽绒夹克",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -206,6 +214,7 @@
       "Woman":{
         "Cheongsam":{
           "Name":"旗袍",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{
               "Bellyband":0
@@ -233,6 +242,7 @@
         },
         "Ruqun":{
           "Name":"襦裙",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{
               "Bellyband":0
@@ -265,6 +275,7 @@
         },
         "Zhaoshan":{
           "Name":"罩衫",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -287,6 +298,7 @@
         },
         "CostumeSkirts":{
           "Name":"直身裙",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{
@@ -312,6 +324,7 @@
         },
         "ALineDress":{
           "Name":"A字连衣裙",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{
@@ -337,6 +350,7 @@
         },
         "HalterneckDress":{
           "Name":"露背裙",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{
@@ -362,6 +376,7 @@
         },
         "SlingDress":{
           "Name":"吊带连衣裙",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{
@@ -387,6 +402,7 @@
         },
         "DenimDress":{
           "Name":"牛仔连衣裙",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{
@@ -412,6 +428,7 @@
         },
         "LaceDress":{
           "Name":"蕾丝连衣裙",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{
@@ -437,6 +454,7 @@
         },
         "ChiffonDress":{
           "Name":"雪纺连衣裙",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{
@@ -462,6 +480,7 @@
         },
         "Dirndl":{
           "Name":"紧腰宽裙",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{
@@ -487,6 +506,7 @@
         },
         "Komon":{
           "Name":"小纹和服",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -513,6 +533,7 @@
         },
         "Irotomesode":{
           "Name":"色无地",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -539,6 +560,7 @@
         },
         "Tsukesage":{
           "Name":"付下和服",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -565,6 +587,7 @@
         },
         "Homongi":{
           "Name":"访问和服",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -617,6 +640,7 @@
         },
         "Tomesode":{
           "Name":"留袖和服",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -643,6 +667,7 @@
         },
         "Hakama":{
           "Name":"袴",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -672,6 +697,7 @@
       "Neutral":{
         "DownFilledCoat":{
           "Name":"羽绒服",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -694,6 +720,7 @@
         },
         "Windbreaker":{
           "Name":"风衣",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -716,6 +743,7 @@
         },
         "Raincoat":{
           "Name":"雨衣",
+          "tag":"Rain",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -740,6 +768,7 @@
         },
         "Yukata":{
           "Name":"和式浴衣",
+          "tag":"Bathrobe",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -764,6 +793,7 @@
         },
         "Shiromuku":{
           "Name":"白无垢",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -790,6 +820,7 @@
         },
         "Mofuku":{
           "Name":"和式丧服",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -816,6 +847,7 @@
         },
         "Sari":{
           "Name":"纱丽",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -835,6 +867,55 @@
             "Underpants":"Usually"
           },
           "Describe":"是一种用丝绸为主要材料制作而成的衣服，一般长5.5米，宽1.25米，两侧有滚边，上面有刺绣。通常围在长及足踝的衬裙上，从腰部围到脚跟成筒裙状，然后将末端下摆披搭在左肩或右肩．"
+        },
+        "OnePieceSwimsuit":{
+          "Name":"连体泳装",
+          "tag":"Swim",
+          "Collocation":{
+            "Underwear":{},
+            "Bra":{},
+            "Pants":{},
+            "Skirt":{},
+            "Shoes":{},
+            "Socks":{},
+            "Underpants":{}
+          },
+          "CollocationalRestriction":{
+            "Bra":"None",
+            "Pants":"None",
+            "Skirt":"None",
+            "Shoes":"None",
+            "Socks":"None",
+            "Underwear":"None",
+            "Underpants":"None"
+          },
+          "Describe":"连体泳装是一种通常给女性及伪娘穿着的泳装，为紧身设计，对皮肤具有良好的遮蔽性（不过目前也有很多连体泳装为低胸和露背设计）．．"
+        },
+        "TubularSwimsuit":{
+          "Name":"筒式泳装",
+          "tag":"Swim",
+          "Collocation":{
+            "Coat":{},
+            "Bra":{},
+            "Pants":{},
+            "Skirt":{},
+            "Shoes":{},
+            "Socks":{},
+            "Underpants":{
+              "WomenTriangleSwimmingTrunks":0,
+              "WomenQuadrangleSwimmingTrunks":1
+            }
+          },
+          "CollocationalRestriction":{
+            "Bra":"None",
+            "Pants":"None",
+            "Skirt":"None",
+            "Shoes":"None",
+            "Socks":"None",
+            "Underwear":"None",
+            "Underpants":"Must"
+          },
+          "Describe":"筒式泳装显得较为别致，它的衣身呈筒状，加上吊带，有的吊带是可拆卸的。这种泳装能降低胸部和臀部的透明度，高裁的底边可以使腿部线条显得长一些．"
         }
       }
     },
@@ -842,6 +923,7 @@
       "Man":{
         "Shirt":{
           "Name":"男式衬衫",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -866,6 +948,7 @@
       "Woman":{
         "Blouse":{
           "Name":"女式衬衫",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -890,6 +973,7 @@
       "Neutral":{
         "TShirt":{
           "Name":"T恤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -912,6 +996,7 @@
         },
         "Underwaist":{
           "Name":"背心",
+          "tag":"Daily",
           "Collocation":{
             "Bra":{},
             "Pants":{},
@@ -937,6 +1022,7 @@
       "Man":{
         "ConePants":{
           "Name":"锥型裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -961,6 +1047,7 @@
       "Woman":{
         "HaremPants":{
           "Name":"哈伦裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -983,6 +1070,7 @@
         },
         "Pantskirt":{
           "Name":"裙裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1005,6 +1093,7 @@
         },
         "FlaredTrousers":{
           "Name":"喇叭裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1027,6 +1116,7 @@
         },
         "TenthsPants":{
           "Name":"九分裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1049,6 +1139,7 @@
         },
         "ThreePants":{
           "Name":"三分裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1071,6 +1162,7 @@
         },
         "Leggings":{
           "Name":"女式紧身裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1095,6 +1187,7 @@
       "Neutral":{
         "Rompers":{
           "Name":"背带裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1117,6 +1210,7 @@
         },
         "PalazzoPants":{
           "Name":"阔腿裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1139,6 +1233,7 @@
         },
         "CargoPants":{
           "Name":"工装裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1161,6 +1256,7 @@
         },
         "CashmerePants":{
           "Name":"羊绒裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1183,6 +1279,7 @@
         },
         "Jeans":{
           "Name":"牛仔裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1205,6 +1302,7 @@
         },
         "SuitPants":{
           "Name":"西裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1227,6 +1325,7 @@
         },
         "CroppedTrousers":{
           "Name":"七分裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1249,6 +1348,7 @@
         },
         "FifthPants":{
           "Name":"五分裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1271,6 +1371,7 @@
         },
         "StraightJeans":{
           "Name":"直筒裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1293,6 +1394,7 @@
         },
         "OpenSeatPants":{
           "Name":"开裆裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1320,6 +1422,7 @@
       "Woman":{
         "ALineSkirt":{
           "Name":"A字裙",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1341,7 +1444,8 @@
           "Describe":"字母A的形状，包裹在腰部，然后下摆展开。非常简单的款式．"
         },
         "AsymmetricalSkirt":{
-          "Name":"不对称款型的裙子",
+          "Name":"不对称裙",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1364,6 +1468,7 @@
         },
         "BellShapedSkirt":{
           "Name":"铃铛裙",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1386,6 +1491,7 @@
         },
         "BubbleSkirt":{
           "Name":"泡泡裙",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1408,6 +1514,7 @@
         },
         "DenimSkirt":{
           "Name":"牛仔裙",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1435,6 +1542,7 @@
       "Man":{
         "OxfordShoes":{
           "Name":"牛津鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1457,6 +1565,7 @@
         },
         "Loafer":{
           "Name":"乐福鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1481,6 +1590,7 @@
       "Woman":{
         "WedgeHeel":{
           "Name":"坡跟高跟鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1503,6 +1613,7 @@
         },
         "PuppyHeel":{
           "Name":"矮方跟女鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1525,6 +1636,7 @@
         },
         "ConeHeel":{
           "Name":"锥形跟女鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1547,6 +1659,7 @@
         },
         "CageHeel":{
           "Name":"笼式跟女鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1569,6 +1682,7 @@
         },
         "CommaHeel":{
           "Name":"逗号跟高跟鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1591,6 +1705,7 @@
         },
         "StilettoHeel":{
           "Name":"细高跟女鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1615,6 +1730,7 @@
       "Neutral":{
         "Clog":{
           "Name":"木屐",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{
               "Shenyi":0,
@@ -1651,6 +1767,7 @@
         },
         "MonkShoes":{
           "Name":"僧侣鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1673,6 +1790,7 @@
         },
         "Derbies":{
           "Name":"德比鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1695,6 +1813,7 @@
         },
         "ChelseaBoots":{
           "Name":"切尔西靴",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1717,6 +1836,7 @@
         },
         "DesertBoot":{
           "Name":"沙漠靴",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1739,6 +1859,7 @@
         },
         "JungleBoots":{
           "Name":"丛林靴",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1761,6 +1882,7 @@
         },
         "FlightBoots":{
           "Name":"飞行靴",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1783,6 +1905,7 @@
         },
         "ClothShoes":{
           "Name":"布鞋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1805,6 +1928,7 @@
         },
         "RainBoot":{
           "Name":"雨靴",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1832,6 +1956,7 @@
       "Woman":{
         "PantyHose":{
           "Name":"连裤袜",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1856,6 +1981,7 @@
       "Neutral":{
         "BoatSocks":{
           "Name":"船袜",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1878,6 +2004,7 @@
         },
         "CloudSocks":{
           "Name":"云袜",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{
               "Shenyi":0,
@@ -1905,6 +2032,7 @@
         },
         "Sox":{
           "Name":"短袜",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1927,6 +2055,7 @@
         },
         "MidStockings":{
           "Name":"中筒袜",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1949,6 +2078,7 @@
         },
         "Stockings":{
           "Name":"长筒袜",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1971,6 +2101,7 @@
         },
         "Tabi":{
           "Name":"足袋",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -1999,6 +2130,7 @@
       "Man":{
         "BraBro":{
           "Name":"男式胸罩",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Pants":{},
@@ -2023,6 +2155,7 @@
       "Woman":{
         "StraplessBrassiere":{
           "Name":"无肩带胸罩",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Pants":{},
@@ -2045,6 +2178,7 @@
         },
         "SeamlessBra":{
           "Name":"无缝胸罩",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Pants":{},
@@ -2067,6 +2201,7 @@
         },
         "FrontClosure":{
           "Name":"前扣胸罩",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Pants":{},
@@ -2089,6 +2224,7 @@
         },
         "LongLineBra":{
           "Name":"长束型文胸",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Pants":{},
@@ -2111,6 +2247,7 @@
         },
         "WrapChest":{
           "Name":"裹胸布",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Pants":{},
@@ -2130,11 +2267,38 @@
             "Underpants":"Usually"
           },
           "Describe":"缠胸布原本指的是旧式女性为了保持乳房不下坠，或者为了劳动方便，又或者为了避免战争时刀剑伤以至于大出血．而使用布条绑缚自己胸部．"
+        },
+        "Trikini":{
+          "Name":"三点式泳衣",
+          "tag":"Swim",
+          "Collocation":{
+            "Coat":{},
+            "Pants":{},
+            "Skirt":{},
+            "Shoes":{},
+            "Socks":{},
+            "Underwear":{}
+            "Underpants":{
+              "WomenTriangleSwimmingTrunks":0.
+              "WomenQuadrangleSwimmingTrunks":1
+            }
+          },
+          "CollocationalRestriction":{
+            "Coat":"None",
+            "Pants":"None",
+            "Skirt":"None",
+            "Shoes":"None",
+            "Socks":"None",
+            "Underwear":"None",
+            "Underpants":"Must"
+          },
+          "Describe":"性感暴露的女式泳衣．"
         }
       },
       "Neutral":{
         "NippleCover":{
           "Name":"乳贴",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Pants":{},
@@ -2157,6 +2321,7 @@
         },
         "Bellyband":{
           "Name":"肚兜",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Pants":{},
@@ -2180,10 +2345,58 @@
       }
     },
     "Underpants":{
-      "Man":{},
+      "Man":{
+        "ManTriangleSwimmingTrunks":{
+          "Name":"男式三角泳裤",
+          "tag":"Swim",
+          "Collocation":{
+            "Coat":{},
+            "Bra":{},
+            "Pants":{},
+            "Skirt":{},
+            "Shoes":{},
+            "Socks":{},
+            "Underwear":{}
+          },
+          "CollocationalRestriction":{
+            "Coat":"None",
+            "Bra":"None",
+            "Pants":"None",
+            "Skirt":"None",
+            "Shoes":"None",
+            "Socks":"None",
+            "Underwear":"None"
+          },
+          "Describe":"性感的三角泳裤，有凸显肌肉线条的作用．"
+        },
+        "ManQuadrangleSwimmingTrunks":{
+          "Name":"男式四角泳裤",
+          "tag":"Swim",
+          "Collocation":{
+            "Coat":{},
+            "Bra":{},
+            "Pants":{},
+            "Skirt":{},
+            "Shoes":{},
+            "Socks":{},
+            "Underwear":{}
+          },
+          "CollocationalRestriction":{
+            "Coat":"None",
+            "Bra":"None",
+            "Pants":"None",
+            "Skirt":"None",
+            "Shoes":"None",
+            "Socks":"None",
+            "Underwear":"None"
+          },
+          "Describe":"以舒适为主要考虑的男式泳裤．"
+        }
+      },
       "Woman":{
         "TBack":{
           "Name":"丁字裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -2199,12 +2412,13 @@
             "Skirt":"Usually",
             "Shoes":"Usually",
             "Socks":"Usually",
-            "Underwear":"Usually",
+            "Underwear":"Usually"
           },
           "Describe":"通常此型的内裤是视场合而穿着的，比如穿比较贴身的紧身长裤时搭配，可以避免内裤的线条破坏了臀形的表现，但易导致臀部下垂．"
         },
         "CString":{
           "Name":"C字裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -2226,6 +2440,7 @@
         },
         "PentagonalPants":{
           "Name":"五角裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -2244,11 +2459,66 @@
             "Underwear":"Usually"
           },
           "Describe":"五角形内裤的设计重点在于底线的弹性有防止臀部下垂、提升臀线的作用, 适合臀部曲线下垂及平板的女性．"
+        },
+        "WomenTriangleSwimmingTrunks":{
+          "Name":"女式三角泳裤",
+          "tag":"Swim",
+          "Collocation":{
+            "Coat":{
+              "TubularSwimsuit":0
+            },
+            "Bra":{
+              "Trikini":0
+            },
+            "Pants":{},
+            "Skirt":{},
+            "Shoes":{},
+            "Socks":{},
+            "Underwear":{}
+          },
+          "CollocationalRestriction":{
+            "Coat":"MustOr",
+            "Bra":"MustOr",
+            "Pants":"None",
+            "Skirt":"None",
+            "Shoes":"None",
+            "Socks":"None",
+            "Underwear":"None"
+          },
+          "Describe":"性感的女式三角泳裤，用料特别稀少的被称为比基尼．"
+        },
+        "WomenQuadrangleSwimmingTrunks":{
+          "Name":"女式四角泳裤",
+          "tag":"Swim",
+          "Collocation":{
+            "Coat":{
+              "TubularSwimsuit":0
+            },
+            "Bra":{
+              "Trikini"
+            },
+            "Pants":{},
+            "Skirt":{},
+            "Shoes":{},
+            "Socks":{},
+            "Underwear":{}
+          },
+          "CollocationalRestriction":{
+            "Coat":"MustOr",
+            "Bra":"MustOr",
+            "Pants":"None",
+            "Skirt":"None",
+            "Shoes":"None",
+            "Socks":"None",
+            "Underwear":"None"
+          },
+          "Describe":"以舒适为主要考虑的女式泳裤．"
         }
       },
       "Neutral":{
         "Briefs":{
           "Name":"三角裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
@@ -2270,6 +2540,7 @@
         },
         "Boxer":{
           "Name":"四角裤",
+          "tag":"Daily",
           "Collocation":{
             "Coat":{},
             "Bra":{},
