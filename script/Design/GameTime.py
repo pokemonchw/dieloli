@@ -1,10 +1,11 @@
 from script.Core import CacheContorl,GameConfig,TextLoading
-from script.Design import Update
 from dateutil import relativedelta
 import datetime
 
-# 时间初始化
 def initTime():
+    '''
+    初始化游戏时间
+    '''
     CacheContorl.gameTime  = {
         "year":GameConfig.year,
         "month":GameConfig.month,
@@ -13,8 +14,12 @@ def initTime():
         "minute":GameConfig.minute
     }
 
-# 获取时间信息文本
 def getDateText(gameTimeData = None):
+    '''
+    获取时间信息描述文本
+    Keyword arguments:
+    gameTimeData -- 时间数据，若为None，则获取当前CacheContorl.gameTime
+    '''
     if gameTimeData == None:
         gameTimeData = CacheContorl.gameTime
     dateText = TextLoading.getTextData(TextLoading.stageWordPath,'65')
@@ -31,14 +36,24 @@ def getDateText(gameTimeData = None):
     dateText = dateText + gameYearText + gameMonthText + gameDayText + gameHourText + gameMinuteText
     return dateText
 
-# 获取星期文本
 def getWeekDayText():
+    '''
+    获取星期描述文本
+    '''
     weekDay = getWeekDate()
     weekDateData = TextLoading.getTextData(TextLoading.messagePath,'19')
     return weekDateData[int(weekDay)]
 
-# 时间增量
 def subTimeNow(minute=0,hour=0,day=0,month=0,year=0):
+    '''
+    增加当前游戏时间
+    Keyword arguments:
+    minute -- 增加的分钟
+    hour -- 增加的小时
+    day -- 增加的天数
+    month -- 增加的月数
+    year -- 增加的年数
+    '''
     newDate = getSubDate(minute,hour,day,month,year)
     CacheContorl.gameTime['year'] = str(newDate.year)
     CacheContorl.gameTime['month'] = str(newDate.month)
@@ -46,15 +61,25 @@ def subTimeNow(minute=0,hour=0,day=0,month=0,year=0):
     CacheContorl.gameTime['hour'] = str(newDate.hour)
     CacheContorl.gameTime['minute'] = str(newDate.minute)
 
-# 获取新日期
-def getSubDate(minute=0,hour=0,day=0,month=0,year=0):
-    oldDate = datetime.datetime(
-        CacheContorl.gameTime['year'],
-        CacheContorl.gameTime['month'],
-        CacheContorl.gameTime['day'],
-        CacheContorl.gameTime['hour'],
-        CacheContorl.gameTime['minute']
-    )
+def getSubDate(minute=0,hour=0,day=0,month=0,year=0,oldDate=None):
+    '''
+    获取旧日期增加指定时间后得到的新日期
+    Keyword arguments:
+    minute -- 增加分钟
+    hour -- 增加小时
+    day -- 增加天数
+    month -- 增加月数
+    year -- 增加年数
+    oldDate -- 旧日期，若为None，则获取当前游戏时间
+    '''
+    if oldDate == None:
+        oldDate = datetime.datetime(
+            CacheContorl.gameTime['year'],
+            CacheContorl.gameTime['month'],
+            CacheContorl.gameTime['day'],
+            CacheContorl.gameTime['hour'],
+            CacheContorl.gameTime['minute']
+        )
     newDate = oldDate + relativedelta.relativedelta(
         years=year,
         months=month,
@@ -65,8 +90,13 @@ def getSubDate(minute=0,hour=0,day=0,month=0,year=0):
     return newDate
 
 def getWeekDate():
+    '''
+    获取当前游戏日期星期数
+    '''
     return datetime.datetime(int(CacheContorl.gameTime['year']),int(CacheContorl.gameTime['month']),int(CacheContorl.gameTime['day'])).strftime("%w")
 
-# 获取当前时间段
 def getNowTimeSlice():
+    '''
+    获取当前时间段
+    '''
     pass

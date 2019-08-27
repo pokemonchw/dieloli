@@ -3,6 +3,9 @@ from script.Design import CharacterMove,MapHandle,PanelStateHandle
 from script.Panel import SeeMapPanel
 
 def seeMapFlow():
+    '''
+    地图查看流程
+    '''
     while(True):
         PyCmd.clr_cmd()
         inputS = []

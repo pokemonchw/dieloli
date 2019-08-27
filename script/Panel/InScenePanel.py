@@ -6,8 +6,10 @@ panelStateTextData = TextLoading.getTextData(TextLoading.cmdPath,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
 panelStateOffText = panelStateTextData[0]
 
-# 用于查看当前场景的面板
 def seeScenePanel():
+    '''
+    当前场景信息面板
+    '''
     titleText = TextLoading.getTextData(TextLoading.stageWordPath,'75')
     EraPrint.plt(titleText)
     timeText = GameTime.getDateText()
@@ -30,19 +32,16 @@ def seeScenePanel():
         PyCmd.pcmd(switch,'SeeSceneCharacterListPage')
     EraPrint.plittleline()
 
-# 用于查看当前场景上角色列表的面板
 def seeSceneCharacterListPanel():
+    '''
+    当前场景角色列表面板
+    '''
     inputS = []
     seeCharacterText = TextLoading.getTextData(TextLoading.messagePath,'26')
     EraPrint.p(seeCharacterText)
     EraPrint.p('\n')
     scenePath = CacheContorl.characterData['character']['0']['Position']
     nameList = MapHandle.getSceneCharacterNameList(scenePath,True)
-    nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
-    characterMax = len(nameList)
-    nameListMax = int(GameConfig.in_scene_see_player_max)
-    pageMax = math.floor(characterMax / nameListMax)
-    pageText = '(' + str(nowPage) + '/' + str(pageMax) + ')'
     nameList = getNowPageNameList(nameList)
     characterId = CacheContorl.characterData['characterId']
     characterData = CacheContorl.characterData['character'][characterId]
@@ -50,8 +49,10 @@ def seeSceneCharacterListPanel():
     inputS = CmdButtonQueue.optionstr('',cmdColumn=10,cmdSize='center',askfor=False,cmdListData=nameList,nullCmd=characterName)
     return inputS
 
-# 用于切换角色列表页面的面板
 def changeSceneCharacterListPanel():
+    '''
+    当前场景角色列表页切换控制面板
+    '''
     nameListMax = int(GameConfig.in_scene_see_player_max)
     nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
     characterMax = CharacterHandle.getCharacterIndexMax()
@@ -64,6 +65,11 @@ def changeSceneCharacterListPanel():
 
 # 用于获取当前页面下的名字列表
 def getNowPageNameList(nameList):
+    '''
+    获取当前角色列表页面角色姓名列表
+    Keyword arguments:
+    nameList -- 当前场景下角色列表
+    '''
     nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
     nameListMax = int(GameConfig.in_scene_see_player_max)
     newNameList = []
@@ -73,8 +79,10 @@ def getNowPageNameList(nameList):
             newNameList.append(nameList[i])
     return newNameList
 
-# 用于查看对象信息的面板
 def seeCharacterInfoPanel():
+    '''
+    查看当前互动对象信息面板
+    '''
     characterInfo = TextLoading.getTextData(TextLoading.stageWordPath, '77')
     EraPrint.p(characterInfo)
     characterId = CacheContorl.characterData['characterId']
@@ -94,9 +102,11 @@ def seeCharacterInfoPanel():
     EraPrint.plittleline()
 
 def jumpCharacterListPagePanel():
+    '''
+    角色列表页面跳转控制面板
+    '''
     messageText = TextLoading.getTextData(TextLoading.messagePath,'32')
     nameListMax = int(GameConfig.in_scene_see_player_max)
-    nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
     characterMax = CharacterHandle.getCharacterIndexMax()
     pageMax = math.floor(characterMax / nameListMax)
     EraPrint.p('\n' + messageText + '(0-' + str(pageMax) + ')')
@@ -105,5 +115,10 @@ def jumpCharacterListPagePanel():
     return ans
 
 def inSceneButtonPanel(startId):
+    '''
+    场景页面基础控制菜单面板
+    Keyword arguments:
+    startId -- 基础控制菜单命令起始Id
+    '''
     inputs = CmdButtonQueue.optionint(cmdList=CmdButtonQueue.inscenelist1, cmdColumn=9, askfor=False, cmdSize='center',startId = startId)
     return inputs

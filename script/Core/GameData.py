@@ -6,17 +6,28 @@ import os
 
 _gamedata = {}
 
-# 初始化游戏数据
 def gamedata():
+    '''
+    获取游戏数据
+    '''
     return _gamedata
 
-# 载入路径下所有json文件
 def _loaddir(dataPath):
+    '''
+    将路径下的游戏数据传入_gamedata
+    Keyword arguments:
+    datapath -- 要载入数据的路径
+    '''
     _gamedata.update(loadDirNow(dataPath))
 
 sceneData = {}
 mapData = {}
 def loadDirNow(dataPath):
+    '''
+    获取路径下的游戏数据
+    Keyword arguments:
+    datapath -- 要载入数据的路径
+    '''
     nowData = {}
     if os.listdir(dataPath):
         for i in os.listdir(dataPath):
@@ -58,8 +69,12 @@ def loadDirNow(dataPath):
                 nowData[i] = loadDirNow(nowPath)
     return nowData
 
-# 获取地图下各节点到目标节点最短路径数据
 def getSortedMapPathData(mapData):
+    '''
+    获取地图下各节点到目标节点的最短路径数据
+    Keyword arguments:
+    mapData -- 地图节点数据
+    '''
     graph = Graph()
     sortedPathData = {}
     for node in mapData.keys():
@@ -77,8 +92,12 @@ def getSortedMapPathData(mapData):
         sortedPathData.update(newData)
     return sortedPathData
 
-# 从路径获取地图系统路径
 def getMapSystemPathForPath(nowPath):
+    '''
+    从地图文件路径获取游戏地图系统路径
+    Keyword arguments:
+    nowPath -- 地图文件路径
+    '''
     currentDir = os.path.dirname(os.path.abspath(nowPath))
     currentDirStr = str(currentDir)
     mapStartList = currentDirStr.split('map')
@@ -87,16 +106,21 @@ def getMapSystemPathForPath(nowPath):
     mapSystemPath = mapSystemPath[1:]
     return mapSystemPath
 
-# 获取地图系统路径字符串
 def getMapSystemPathStr(nowPath):
+    '''
+    将游戏地图系统路径转换为字符串
+    '''
     return os.sep.join(nowPath)
 
-# 获取地图绘制数据
 def getPrintMapData(mapDraw):
+    '''
+    获取绘制地图的富文本和按钮数据
+    Keyword arguments:
+    mapDraw -- 绘制地图的原始数据
+    '''
     mapYList = mapDraw.split('\n')
     newMapYList = []
     mapXListCmdData = {}
-    mapXFixList = []
     mapXCmdIdData = {}
     for mapXListId in range(len(mapYList)):
         setMapButton = False
@@ -105,7 +129,6 @@ def getPrintMapData(mapDraw):
         cmdIdList = []
         newXList = ''
         nowCmd = ''
-        nowCmdId = 0
         i = 0
         while i in range(len(mapXList)):
             if setMapButton == False and mapXList[i:i+11] != '<mapbutton>':
@@ -120,7 +143,6 @@ def getPrintMapData(mapDraw):
                 mapXListCmdList.append(nowCmd)
                 cmdIdList.append(len(newXList))
                 nowCmd = ''
-                nowCmdId = i + 12
                 i += 11
             i += 1
         mapXListCmdData[mapXListId] = mapXListCmdList
@@ -128,16 +150,19 @@ def getPrintMapData(mapDraw):
         mapXCmdIdData[mapXListId] = cmdIdList
     return {"Draw":newMapYList,"Cmd":mapXListCmdData,"CmdId":mapXCmdIdData}
 
-# 获取路径下所有子路径列表
-def getPathList(pathData):
-    pathList = []
-    for i in os.listdir(pathData):
-        path = os.path.join(pathData,i)
-        if os.path.isdir(path):
-            pathList.append(i)
-    return pathList
+def getPathList(rootPath):
+    '''
+    获取路径下所有子目录列表
+    Keyword arguments:
+    rootPath -- 要获取的目录所在根路径
+    '''
+    return [name for name in os.listdir(rootPath)
+            if os.path.isdir(os.path.join(rootPath,name))
+           ]
 
-# 游戏初始化
 def init():
+    '''
+    初始化游戏数据
+    '''
     datapath = os.path.join(gamepath,'data')
     _loaddir(datapath)

@@ -5,8 +5,10 @@ panelStateTextData = TextLoading.getTextData(TextLoading.cmdPath,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
 panelStateOffText = panelStateTextData[0]
 
-# 用于绘制地图的面板
 def seeMapPanel():
+    '''
+    地图绘制面板
+    '''
     inputS = []
     titleText = TextLoading.getTextData(TextLoading.stageWordPath, '78')
     nowMap = CacheContorl.nowMap
@@ -16,8 +18,10 @@ def seeMapPanel():
     inputS = inputS + MapHandle.printMap(nowMap)
     return inputS
 
-# 用于绘制移动路径按钮的面板
 def seeMovePathPanel():
+    '''
+    当前场景可直接通往的移动路径绘制面板
+    '''
     inputS = []
     nowScene = CacheContorl.characterData['character']['0']['Position']
     nowMap = CacheContorl.nowMap
@@ -48,8 +52,10 @@ def seeMovePathPanel():
     EraPrint.pline()
     return {'inputS':inputS,'scenePathList':scenePathList}
 
-# 用于绘制场景名字列表面板
 def showSceneNameListPanel():
+    '''
+    地图下场景名称绘制面板
+    '''
     titleText = TextLoading.getTextData(TextLoading.stageWordPath,'86')
     EraPrint.p(titleText)
     panelState = CacheContorl.panelState['SeeSceneNameListPanel']
@@ -69,8 +75,12 @@ def showSceneNameListPanel():
     EraPrint.plittleline()
     return 'SeeSceneNameListPanel'
 
-# 用于绘制通常按钮面板
 def backScenePanel(startId):
+    '''
+    查看场景页面基础命令绘制面板
+    Keyword arguments:
+    startId -- 面板命令起始id
+    '''
     seeMapCmd = []
     nowPosition = CacheContorl.characterData['character']['0']['Position']
     nowMap = MapHandle.getMapForPath(nowPosition)

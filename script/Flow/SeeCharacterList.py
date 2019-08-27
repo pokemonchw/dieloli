@@ -4,8 +4,10 @@ from script.Panel import SeeCharacterListPanel
 
 characterPageShow = int(GameConfig.characterlist_show)
 
-# 用于查看角色列表的流程
 def seeCharacterList_func():
+    '''
+    用于查看角色列表的流程
+    '''
     while(True):
         maxPage = getCharacterListPageMax()
         inputS = []
@@ -43,8 +45,10 @@ def seeCharacterList_func():
             CacheContorl.oldFlowId = 'see_character_list'
             break
 
-# 角色列表页计算
 def getCharacterListPageMax():
+    '''
+    计算角色列表总页数，公式为角色总数/每页显示角色数
+    '''
     characterMax = CharacterHandle.getCharacterIndexMax()
     if characterMax - characterPageShow < 0:
         return 0

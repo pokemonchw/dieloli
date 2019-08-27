@@ -6,8 +6,13 @@ from script.Panel import CreatorCharacterPanel
 characterId = '0'
 featuresList = AttrCalculation.getFeaturesList()
 
-# 请求玩家输入姓名流程
 def inputName_func():
+    '''
+    请求玩家输入姓名流程
+    输入0:进入请求玩家输入昵称流程(玩家姓名为默认或输入姓名流程结果)
+    输入1:进入输入姓名流程
+    输入2:返回标题菜单
+    '''
     CacheContorl.characterData['characterId'] = characterId
     flowReturn = CreatorCharacterPanel.inputNamePanel()
     if flowReturn == 0:
@@ -22,8 +27,14 @@ def inputName_func():
         EraPrint.pnextscreen()
         CacheContorl.nowFlowId = 'title_frame'
 
-# 请求玩家输入昵称流程
 def inputNickName_func():
+    '''
+    请求玩家输入昵称流程
+    输入0:进入请求玩家输入自称流程(玩家昵称为默认或输入玩家昵称流程结果)
+    输入1:进入输入昵称流程
+    输入2:使用玩家姓名作为昵称
+    输入3:返回请求输入姓名流程
+    '''
     flowReturn = CreatorCharacterPanel.inputNickNamePanel()
     if flowReturn == 0:
         PyCmd.clr_cmd()
@@ -41,8 +52,13 @@ def inputNickName_func():
         PyCmd.clr_cmd()
         inputName_func()
 
-# 请求玩家输入自称流程
 def inputSelfName_func():
+    '''
+    请求玩家输入自称流程
+    输入0:进入请求玩家输入性别流程(玩家自称为默认，或输入自称流程结果)
+    输入1:进入输入自称流程
+    输入2:返回请求输入昵称流程
+    '''
     flowReturn = CreatorCharacterPanel.inputSelfNamePanel()
     if flowReturn == 0:
         PyCmd.clr_cmd()
@@ -57,8 +73,13 @@ def inputSelfName_func():
         PyCmd.clr_cmd()
         inputNickName_func()
 
-# 请求玩家输入性别流程
 def inputSexConfirm_func():
+    '''
+    请求玩家输入性别流程
+    输入0:进入询问是否进行详细设置流程(玩家性别为默认，或请求选择性别流程结果)
+    输入1:进入选择性别流程
+    输入2:返回请求输入自称流程
+    '''
     flowReturn = CreatorCharacterPanel.inputSexPanel()
     sexId = CacheContorl.characterData['character'][characterId]['Sex']
     if flowReturn == 0:
@@ -75,10 +96,15 @@ def inputSexConfirm_func():
         inputSexChoice_func()
     elif flowReturn == 2:
         PyCmd.clr_cmd()
-        inputNickName_func()
+        inputSelfName_func()
 
-# 玩家确认性别流程
 def inputSexChoice_func():
+    '''
+    玩家选择性别流程
+    输入0-3:选择对应性别(Man/Woman/Futa/Asexual)
+    输入4:随机选择一个性别
+    输入5:返回请求输入性别流程
+    '''
     sex = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex').keys())
     sexMax = len(sex)
     flowReturn = CreatorCharacterPanel.inputSexChoicePanel()
@@ -100,8 +126,13 @@ def inputSexChoice_func():
         PyCmd.clr_cmd()
         inputSexConfirm_func()
 
-# 询问玩家是否需要详细设置属性流程
 def attributeGenerationBranch_func():
+    '''
+    询问玩家是否需要详细设置属性流程
+    输入0:进入询问玩家年龄段流程
+    输入1:进入属性最终确认流程(使用基础模板生成玩家属性)
+    输入2:返回请求输入性别流程
+    '''
     flowReturn = CreatorCharacterPanel.attributeGenerationBranchPanel()
     if flowReturn == 0:
         PyCmd.clr_cmd()
@@ -113,8 +144,10 @@ def attributeGenerationBranch_func():
         PyCmd.clr_cmd()
         inputSexConfirm_func()
 
-# 详细设置属性1:询问玩家是否是小孩子
 def detailedSetting_func1():
+    '''
+    询问玩家年龄模板流程
+    '''
     flowRetun = CreatorCharacterPanel.detailedSetting1Panel()
     characterSex = CacheContorl.characterData['character']['0']['Sex']
     sexList = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex'))
@@ -145,8 +178,10 @@ def detailedSetting_func1():
     PyCmd.clr_cmd()
     detailedSetting_func2()
 
-# 详细设置属性2:询问玩家是否具备动物特征
 def detailedSetting_func2():
+    '''
+    询问玩家动物特征流程
+    '''
     ansList = TextLoading.getTextData(TextLoading.cmdPath, 'detailedSetting2')
     flowReturn = CreatorCharacterPanel.detailedSetting2Panel()
     if flowReturn == ansList[len(ansList)-1]:
@@ -157,8 +192,10 @@ def detailedSetting_func2():
         AttrCalculation.setAnimalCache(flowReturn)
         detailedSetting_func3()
 
-# 详细设置属性3:询问玩家是否具备丰富的性经验
 def detailedSetting_func3():
+    '''
+    询问玩家性经验程度流程
+    '''
     flowReturn = CreatorCharacterPanel.detailedSetting3Panel()
     sexTemDataList = list(TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperience').keys())
     sexTemDataList = ValueHandle.reverseArrayList(sexTemDataList)
@@ -171,8 +208,10 @@ def detailedSetting_func3():
     PyCmd.clr_cmd()
     detailedSetting_func4()
 
-# 详细设置属性4:询问玩家的胆量
 def detailedSetting_func4():
+    '''
+    询问玩家勇气程度流程
+    '''
     flowReturn = CreatorCharacterPanel.detailedSetting4Panel()
     courageList = featuresList['Courage']
     if flowReturn == 0:
@@ -183,8 +222,10 @@ def detailedSetting_func4():
     PyCmd.clr_cmd()
     detailedSetting_func5()
 
-# 详细设置属性5:询问玩家的性格
 def detailedSetting_func5():
+    '''
+    询问玩家开朗程度流程
+    '''
     flowReturn = CreatorCharacterPanel.detailedSetting5Panel()
     dispositionList = featuresList['Disposition']
     if flowReturn == 0:
@@ -195,8 +236,10 @@ def detailedSetting_func5():
     PyCmd.clr_cmd()
     detailedSetting_func6()
 
-# 详细设置属性6:询问玩家的自信
 def detailedSetting_func6():
+    '''
+    询问玩家自信程度流程
+    '''
     flowReturn = CreatorCharacterPanel.detailedSetting6Panel()
     selfConfidenceList = featuresList['SelfConfidence']
     CacheContorl.featuresList['SelfConfidence'] = selfConfidenceList[flowReturn]
@@ -204,8 +247,10 @@ def detailedSetting_func6():
     PyCmd.clr_cmd()
     detailedSetting_func7()
 
-# 详细设置属性7:询问玩家友善
 def detailedSetting_func7():
+    '''
+    询问玩家友善程度流程
+    '''
     flowReturn = CreatorCharacterPanel.detailedSetting7Panel()
     friendsList = featuresList['Friends']
     CacheContorl.featuresList['Friends'] = friendsList[flowReturn]
@@ -213,8 +258,10 @@ def detailedSetting_func7():
     PyCmd.clr_cmd()
     detailedSetting_func8()
 
-# 详细设置属性8:询问玩家体型
 def detailedSetting_func8():
+    '''
+    询问玩家肥胖程度流程
+    '''
     flowReturn = CreatorCharacterPanel.detailedSetting8Panel()
     weightTemData = TextLoading.getTextData(TextLoading.attrTemplatePath,'WeightTem')
     weightTemList = list(weightTemData.keys())

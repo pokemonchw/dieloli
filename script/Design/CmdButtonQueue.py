@@ -26,8 +26,31 @@ gamehelp = "gameHelp"
 seecharacterwearclothes = "seeCharacterWearClothes"
 changescenecharacterlist = 'changeSceneCharacterList'
 
-# 用于批量生成id命令
-def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = True,cmdSize = 'left',startId = '0',cmdListData=None,lastLine = False):
+def optionint(
+        cmdList,
+        cmdColumn = 1,
+        idSize = 'left',
+        idSwitch = True,
+        askfor = True,
+        cmdSize = 'left',
+        startId = '0',
+        cmdListData=None,
+        lastLine = False):
+    '''
+    批量绘制带id命令列表
+    例:
+    [000]开始游戏
+    Keyword arguments:
+    cmdList -- 命令列表id，当cmdListData为None时，根据此id调用cmdList内的命令数据
+    cmdColumn -- 每行命令列数 (default 1)
+    idSize -- id文本位置(left/center/right) (default 'left')
+    idSwitch -- id显示开关 (default True)
+    askfor -- 绘制完成时等待玩家输入的开关 (default True)
+    cmdSize -- 命令文本在当前列的对齐方式(left/center/right) (default 'left')
+    startId -- 命令列表的起始id (default '0')
+    cmdListData -- 命令列表数据 (default None)
+    lastLine -- 最后一个命令换行绘制 (default False)
+    '''
     if cmdListData == None:
         cmdListData = TextLoading.getTextData(TextLoading.cmdPath, cmdList).copy()
     inputI = []
@@ -81,8 +104,26 @@ def optionint(cmdList,cmdColumn = 1,idSize = 'left',idSwitch = True,askfor = Tru
     else:
         return inputI
 
-# 用于批量生成文本命令
-def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = True,cmdListData=None,nullCmd = ''):
+def optionstr(
+        cmdList,
+        cmdColumn = 1,
+        cmdSize = 'left',
+        lastLine = False,
+        askfor = True,
+        cmdListData=None,
+        nullCmd = ''):
+    '''
+    绘制无id的文本命令列表
+    例:
+    [长寿的青蛙]
+    Keyword arguments:
+    cmdList -- 命令列表id，当cmdListData为None时，根据此id调用cmdList内的命令数据
+    cmdColumn -- 每行命令列数 (default 1)
+    cmdSize -- 命令文本在当前列的对齐方式(left/center/right) (default 'left')
+    lastLine -- 最后一个命令换行绘制 (default False)
+    cmdListData -- 命令列表数据 (default None)
+    nullCmd -- 在列表中按纯文本绘制，并不加入监听列表的命令文本
+    '''
     if cmdListData == None:
         cmdListData = TextLoading.getTextData(TextLoading.cmdPath, cmdList).copy()
     inputS = []
@@ -102,21 +143,21 @@ def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = T
         cmdTextBak = Dictionaries.handleText(cmdListData[i])
         cmdText = '[' + cmdTextBak + ']'
         if i == 0:
-            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd=nowNullCmd)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,noNullCmd=nowNullCmd)
             if nowNullCmd:
                 inputS.append(cmdListData[i])
         elif i / cmdColumn >= 1 and i % cmdColumn == 0:
             EraPrint.p('\n')
-            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd=nowNullCmd)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,noNullCmd=nowNullCmd)
             if nowNullCmd:
                 inputS.append(cmdTextBak)
         elif i == len(cmdListData) - 1 and lastLine == True:
             EraPrint.p('\n')
-            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd=nowNullCmd)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,noNullCmd=nowNullCmd)
             if nowNullCmd:
                 inputS.append(cmdTextBak)
         else:
-            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd=nowNullCmd)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,noNullCmd=nowNullCmd)
             if nowNullCmd:
                 inputS.append(cmdTextBak)
     EraPrint.p('\n')
@@ -126,8 +167,12 @@ def optionstr(cmdList,cmdColumn = 1,cmdSize = 'left',lastLine = False,askfor = T
     else:
         return inputS
 
-# 生成id文本
 def idIndex(id):
+    '''
+    生成命令id文本
+    Keyword arguments:
+    id -- 命令id
+    '''
     if id -100 >= 0:
         idS = "[" + str(id) + "] "
         return idS
@@ -142,14 +187,23 @@ def idIndex(id):
         idS = "[00" + str(id) + "] "
         return idS
 
-# 命令对齐
-def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'left',nowNullCmd=True):
-    if nowNullCmd == False:
+def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'left',noNullCmd=True):
+    '''
+    计算命令对齐方式，补全文本并绘制
+    Keyword arguments:
+    cmdText -- 命令文本
+    cmdTextBak -- 命令被触发时返回的文本
+    cmdEvent -- 命令绑定的事件 (default None)
+    textWidth -- 文本对齐时补全空间宽度
+    cmdSize -- 命令对齐方式(left/center/right) (default 'left')
+    noNullCmd -- 绘制命令而非null命令样式的文本 (default False)
+    '''
+    if noNullCmd == False:
         cmdText = '<nullcmd>' + cmdText + '</nullcmd>'
     if cmdSize == 'left':
         cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (textWidth - cmdWidth)
-        if nowNullCmd:
+        if noNullCmd:
             PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
         else:
             EraPrint.p(cmdText)
@@ -158,7 +212,7 @@ def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'lef
         cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (int(textWidth/2) - int(cmdWidth/2))
         EraPrint.p(cmdTextFix)
-        if nowNullCmd:
+        if noNullCmd:
             PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
         else:
             EraPrint.p(cmdText)
@@ -166,7 +220,7 @@ def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'lef
     elif cmdSize == 'right':
         cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (textWidth - cmdWidth)
-        if nowNullCmd:
+        if noNullCmd:
             PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
         else:
             EraPrint.p(cmdText)

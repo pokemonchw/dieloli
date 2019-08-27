@@ -1,5 +1,12 @@
-# 通用用计算比例条的函数
 def getProportionalBar(valueName,maxValue,value,barid):
+    '''
+    通用用于计算比例条的函数
+    Keyword arguments:
+    valueName -- 比例条名字
+    maxValue -- 最大数值
+    value -- 当前数值
+    barid -- 用于填充比例条的图形id
+    '''
     proportion = int(int(value)/int(maxValue)* 20)
     trueBar = "1"
     nullBar = "0"
@@ -9,8 +16,15 @@ def getProportionalBar(valueName,maxValue,value,barid):
     proportionBar = str(valueName) + '[' + proportionBar + ']' + '(' + str(value) + '/' + str(maxValue) + ')'
     return proportionBar
 
-# 通用用于计数条的函数
 def getCountBar(valueName,maxValue,value,barid):
+    '''
+    通用用于计算计数条的函数
+    Keyword arguments:
+    valueName -- 比例条名字
+    maxValue -- 最大数值
+    value -- 当前数值
+    barid -- 用于填充比例条的图形id
+    '''
     trueBar = "1"
     nullBar = "0"
     countBar = trueBar * int(value)

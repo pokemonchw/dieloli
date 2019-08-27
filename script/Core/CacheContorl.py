@@ -6,7 +6,7 @@ flowContorl = {}
 wframeMouse = {}
 
 # cmd存储
-cmd_map = {}
+cmdMap = {}
 
 # 角色对象数据缓存组
 characterData = {}
@@ -46,10 +46,10 @@ textStyleCache = []
 # 富文本精确样式记录
 textOneByOneRichCache = {}
 
-lastcursor = [0]
+lastCursor = [0]
 
 # 图片id
-imageid = 0
+imageId = 0
 
 # cmd数据
 cmdData = {}

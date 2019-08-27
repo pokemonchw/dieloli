@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from script.Core import GameData,FlowHandle,IoInit,Event,KeyListionEvent,GameConfig,CacheContorl
+from script.Core import GameData,FlowHandle,IoInit,KeyListionEvent,GameConfig,CacheContorl
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC='no_event_func'
@@ -8,14 +8,16 @@ NO_EVENT_FUNC='no_event_func'
 # 初始化函数
 _main_flow = None
 
-# 游戏初始化
 def init(main_flow):
+    '''
+    游戏流程初始化
+    Keyword argument:
+    main_flow -- 游戏主流程
+    '''
     global def_style
     IoInit.clear_screen()
     IoInit.clearorder()
     FlowHandle.cmd_clear()
-    # 事件载入
-    Event.load_event_file()
     # 载入按键监听
     KeyListionEvent.onWFrameListion()
     # 设置背景颜色
@@ -44,19 +46,29 @@ def init(main_flow):
 
     run_main_flow()
 
-# 运行函数
 def run(main_func):
+    '''
+    执行游戏主流程
+    Keyword arguments:
+    main_func -- 游戏主流程
+    '''
     def _init():
         init(main_func)
     IoInit.run(_init)
 
-# 向控制台输入信息
 def console_log(string):
+    '''
+    向后台打印日志
+    Keyword arguments:
+    string -- 游戏日志信息
+    '''
     print('game log:')
     print(string + '\n')
 
-# 重启游戏
 def reset():
+    '''
+    重启游戏
+    '''
     global _main_flow
     IoInit.io_clear_cmd()
     IoInit.clear_screen()

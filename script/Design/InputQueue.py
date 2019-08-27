@@ -1,7 +1,12 @@
 from script.Core import GameInit,EraPrint,TextLoading
 
-# 等待玩家输入ab之间的数
 def waitInput(intA,intB):
+    '''
+    等待玩家输入ab之间的一个数
+    Keyword arguments:
+    intA -- 输入边界A
+    intB -- 输入边界B
+    '''
     while(True):
         ans = GameInit.askfor_str()
         if ans.isdecimal():

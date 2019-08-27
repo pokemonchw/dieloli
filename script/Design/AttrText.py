@@ -13,8 +13,6 @@ equipmentData = JsonHandle._loadjson(equipmentPath)
 boysNameListData = TextLoading.getTextData(TextLoading.nameListPath,'Boys')
 girlsNameListData = TextLoading.getTextData(TextLoading.nameListPath,'Girls')
 familyNameListData = TextLoading.getTextData(TextLoading.familyNameListPath,'FamilyNameList')
-boysNameMax = len(boysNameListData)
-girlsNameMax = len(girlsNameListData)
 sortFamilyIndex = sorted(familyNameListData.items(),key=lambda x:x[1])
 
 familyRegionList = ValueHandle.getReginList(familyNameListData)
@@ -25,8 +23,13 @@ familyRegionIntList = list(map(int,familyRegionList))
 boysRegionIntList = list(map(int,boysRegionList))
 girlsRegionIntList = list(map(int,girlsRegionList))
 
-#获取性经验文本
 def getSexExperienceText(sexList,sexName):
+    '''
+    获取性经验描述文本
+    Keyword arguments:
+    sexList -- 性经验数据列表
+    sexName -- 性别
+    '''
     mouthExperience = TextLoading.getTextData(TextLoading.stageWordPath,'19') + str(sexList['mouthExperience'])
     bosomExperience = TextLoading.getTextData(TextLoading.stageWordPath,'20') + str(sexList['bosomExperience'])
     vaginaExperience = TextLoading.getTextData(TextLoading.stageWordPath,'21') + str(sexList['vaginaExperience'])
@@ -45,14 +48,19 @@ def getSexExperienceText(sexList,sexName):
         sexExperienceText = [mouthExperience,bosomExperience,anusExperience]
     return sexExperienceText
 
-#获取性等级文本
 def getSexGradeTextList(sexGradeList,sexName):
-    mouthText = TextLoading.getTextData(TextLoading.stageWordPath,'25') + getGradeTextColor(sexGradeList['mouthGrade'])
-    bosomText = TextLoading.getTextData(TextLoading.stageWordPath,'26') + getGradeTextColor(sexGradeList['bosomGrade'])
-    vaginaText = TextLoading.getTextData(TextLoading.stageWordPath,'27') + getGradeTextColor(sexGradeList['vaginaGrade'])
-    clitorisText = TextLoading.getTextData(TextLoading.stageWordPath,'28') + getGradeTextColor(sexGradeList['clitorisGrade'])
-    anusText = TextLoading.getTextData(TextLoading.stageWordPath,'29') + getGradeTextColor(sexGradeList['anusGrade'])
-    penisText = TextLoading.getTextData(TextLoading.stageWordPath,'30') + getGradeTextColor(sexGradeList['penisGrade'])
+    '''
+    获取性等级描述文本
+    Keyword arguments:
+    sexGradeList -- 性等级列表
+    sexName -- 性别
+    '''
+    mouthText = TextLoading.getTextData(TextLoading.stageWordPath,'25') + getLevelTextColor(sexGradeList['mouthGrade'])
+    bosomText = TextLoading.getTextData(TextLoading.stageWordPath,'26') + getLevelTextColor(sexGradeList['bosomGrade'])
+    vaginaText = TextLoading.getTextData(TextLoading.stageWordPath,'27') + getLevelTextColor(sexGradeList['vaginaGrade'])
+    clitorisText = TextLoading.getTextData(TextLoading.stageWordPath,'28') + getLevelTextColor(sexGradeList['clitorisGrade'])
+    anusText = TextLoading.getTextData(TextLoading.stageWordPath,'29') + getLevelTextColor(sexGradeList['anusGrade'])
+    penisText = TextLoading.getTextData(TextLoading.stageWordPath,'30') + getLevelTextColor(sexGradeList['penisGrade'])
     sexGradeTextList = []
     sexList = list(sexData.keys())
     if sexName == sexList[0]:
@@ -66,14 +74,23 @@ def getSexGradeTextList(sexGradeList,sexName):
     return sexGradeTextList
 
 # 处理等级富文本
-def getGradeTextColor(sexGrade):
-    lowerGrade = sexGrade.lower()
-    sexGrade = '<level' + lowerGrade + '>' + sexGrade + '</level' + lowerGrade + '>'
-    return sexGrade
+def getLevelTextColor(level):
+    '''
+    对等级文本进行富文本处理
+    Keyword arguments:
+    level -- 等级
+    '''
+    lowerLevel = level.lower()
+    level = '<level' + lowerLevel + '>' + level + '</level' + lowerLevel + '>'
+    return level
 
 familyIndexMax = familyRegionIntList[len(familyRegionIntList) - 1]
-# 按性别随机生成姓名
 def getRandomNameForSex(sexGrade):
+    '''
+    按性别随机生成姓名
+    Keyword arguments:
+    sexGrade -- 性别
+    '''
     familyRandom = random.randint(1,familyIndexMax)
     familyRegionIndex = bisect.bisect_left(familyRegionIntList,familyRandom)
     familyRegion = familyRegionIntList[familyRegionIndex]
@@ -85,41 +102,51 @@ def getRandomNameForSex(sexGrade):
     else:
         sexJudge = random.randint(0,1)
     if sexJudge == 0:
-        nameRandom = random.randint(1,girlsNameMax)
+        nameRandom = random.randint(1,girlsRegionIntList[-1])
         nameRegionIndex = bisect.bisect_left(girlsRegionIntList,nameRandom)
         nameRegion = girlsRegionIntList[nameRegionIndex]
         name = girlsRegionList[str(nameRegion)]
     else:
-        nameRandom = random.randint(1,boysNameMax)
+        nameRandom = random.randint(1,boysRegionIntList[-1])
         nameRegionIndex = bisect.bisect_left(boysRegionIntList,nameRandom)
         nameRegion = boysRegionIntList[nameRegionIndex]
         name = boysRegionList[str(nameRegion)]
     return familyName + name
 
-# 获取性别对应文本
 def getSexText(sexId):
+    '''
+    获取性别对应文本
+    Keyword arguments:
+    sexId -- 性别
+    '''
     data = roleAttrData['Sex']
     sexText = data[sexId]
     return sexText
 
-# 获取特征文本
 def getFeaturesStr(fList):
+    '''
+    获取特征描述文本
+    Keyword arguments:
+    fList -- 特征数据
+    '''
     featuresListStr = ''
     featuresListText = [
         'Age',"Chastity",'Disposition','Courage','SelfConfidence','Friends','Figure',
         'Sex','AnimalInternal','AnimalExternal','Charm'
     ]
-    for i in range(0,len(featuresListText)):
-        try:
-            featureText = fList[featuresListText[i]]
+    for feature in featuresListText:
+        if feature in fList:
+            featureText = fList[feature]
             if featureText != '':
-                featuresListStr = featuresListStr + '[' + featureText + ']'
-        except KeyError:
-            pass
+                featuresListStr.join('['.join(featureText).join(']'))
     return featuresListStr
 
-# 获取刻印文本
 def getEngravingText(eList):
+    '''
+    获取刻印描述文本
+    Keyword arguments:
+    eList -- 刻印数据
+    '''
     painLevel = eList["Pain"]
     happyLevel = eList["Happy"]
     yieldLevel = eList["Yield"]
@@ -141,8 +168,12 @@ def getEngravingText(eList):
         levelBarList.append(ProportionalBar.getCountBar(levelTextList[i], 3, levelList[i], 'engravingemptybar'))
     return levelBarList
 
-# 获取服装列表文本
 def getClothingText(clothingList):
+    '''
+    获取服装描述文本
+    Keyword arguments:
+    clothingList -- 服装数据
+    '''
     coatid = int(clothingList["Coat"])
     pantsid = int(clothingList["Pants"])
     shoesid = int(clothingList["Shoes"])
@@ -174,8 +205,12 @@ def getClothingText(clothingList):
     ]
     return clothingTextList
 
-# 获取性道具文本
 def getSexItemText(sexItemList):
+    '''
+    获取性道具描述文本
+    Keyword arguments:
+    sexItemList -- 性道具数据
+    '''
     headid = sexItemList["Head"]
     eyeid = sexItemList["Eye"]
     earid = sexItemList["Ear"]
@@ -213,8 +248,12 @@ def getSexItemText(sexItemList):
     ]
     return sexItemTextList
 
-# 获取金钱信息文本
 def getGoldText(characterId):
+    '''
+    获取指定角色的金钱信息描述文本
+    Keyword arguments:
+    characterId -- 角色id
+    '''
     goldData = CacheContorl.characterData['character'][characterId]['Gold']
     goldData = str(goldData)
     moneyText = TextLoading.getTextData(TextLoading.stageWordPath,'66')
@@ -223,8 +262,12 @@ def getGoldText(characterId):
     return goldText
 
 
-# 获取角色缩略信息
 def getCharacterAbbreviationsInfo(characterId):
+    '''
+    按角色id获取角色缩略信息文本
+    Keyword arguments:
+    characterId -- 角色id
+    '''
     characterData = CacheContorl.characterData['character'][characterId]
     characterIdInfo = TextLoading.getTextData(TextLoading.stageWordPath, '0')
     characterIdText = characterIdInfo + characterId

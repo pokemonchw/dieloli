@@ -19,8 +19,10 @@ flowData = {
     'game_help':GameHelp.gameHelp_func
 }
 
-# 游戏主流程
 def startFrame():
+    '''
+    游戏主流程
+    '''
     nowFlowId = ''
     FlowHandle.initCache()
     while(True):

@@ -1,3 +1,4 @@
-# 查看商店主页
 def shopMainFrame_func():
-    pass
+    '''
+    查看商店主页流程
+    '''

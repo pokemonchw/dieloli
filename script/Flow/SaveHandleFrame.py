@@ -1,8 +1,10 @@
 from script.Core import GameConfig,CacheContorl,GameInit,PyCmd,SaveHandle
 from script.Panel import SaveHandleFramePanel
 
-# 绘制保存存档页面流程
 def establishSave_func():
+    '''
+    绘制保存存档界面流程
+    '''
     while(True):
         inputS = []
         savePage = savePageIndex()
@@ -40,8 +42,10 @@ def establishSave_func():
             else:
                 SaveHandle.establishSave(saveId)
 
-# 绘制读取存档页面流程
 def loadSave_func():
+    '''
+    绘制读取存档界面流程
+    '''
     while(True):
         inputS = []
         savePage = savePageIndex()
@@ -77,8 +81,13 @@ def loadSave_func():
             if askForLoadSave_func(saveId):
                 break
 
-# 存档页计算
 def savePageIndex():
+    '''
+    用于计算存档页面单页存档显示数量
+    return:
+    savePage[0] -- 存档页面单页显示数量
+    savePage[1] -- 最大存档数不能被存档页数整除时，额外存档页存档数量
+    '''
     maxSaveValue = int(GameConfig.max_save)
     pageSaveValue = int(GameConfig.save_page)
     lastSavePageValue = 0
@@ -92,8 +101,14 @@ def savePageIndex():
     savePage = [showSaveValue,lastSavePageValue]
     return savePage
 
-# 询问覆盖存档流程
 def askForOverlaySave_func(saveId):
+    '''
+    存档处理询问流程
+    玩家输入0:进入覆盖存档询问流程
+    玩家输入1:进入删除存档询问流程
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     cmdList = SaveHandleFramePanel.askForOverlaySavePanel()
     yrn = GameInit.askfor_All(cmdList)
     yrn = str(yrn)
@@ -103,16 +118,27 @@ def askForOverlaySave_func(saveId):
     elif yrn == '1':
         confirmationRemoveSave_func(saveId)
 
-# 确认覆盖流程
 def confirmationOverlaySave_func(saveId):
+    '''
+    覆盖存档询问流程
+    玩家输入0:对存档进行覆盖
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     cmdList = SaveHandleFramePanel.confirmationOverlaySavePanel()
     yrn = GameInit.askfor_All(cmdList)
     PyCmd.clr_cmd()
     if yrn == '0':
         SaveHandle.establishSave(saveId)
 
-# 询问读取存档流程
 def askForLoadSave_func(saveId):
+    '''
+    读档处理询问流程
+    玩家输入0:进入读取存档询问流程
+    玩家输入1:进入删除存档询问流程
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     cmdList = SaveHandleFramePanel.askLoadSavePanel()
     yrn = GameInit.askfor_All(cmdList)
     PyCmd.clr_cmd()
@@ -122,8 +148,13 @@ def askForLoadSave_func(saveId):
         confirmationRemoveSave_func(saveId)
     return False
 
-# 确认读取存档流程
 def confirmationLoadSave_func(saveId):
+    '''
+    读取存档询问流程
+    玩家输入0:读取指定存档
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     cmdList = SaveHandleFramePanel.confirmationLoadSavePanel()
     yrn = GameInit.askfor_All(cmdList)
     PyCmd.clr_cmd()
@@ -133,8 +164,13 @@ def confirmationLoadSave_func(saveId):
         return True
     return False
 
-# 确认删除存档流程
 def confirmationRemoveSave_func(saveId):
+    '''
+    覆盖存档询问流程
+    玩家输入0:删除指定存档
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     cmdList = SaveHandleFramePanel.confirmationRemoveSavePanel()
     yrn = GameInit.askfor_All(cmdList)
     if yrn == '0':

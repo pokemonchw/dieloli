@@ -1,8 +1,11 @@
 from script.Core import CacheContorl,TextLoading
-import numpy,datetime,random
+import numpy
+import random
 
-# 初始化角色兴趣值
 def initCharacterInterest():
+    '''
+    初始化全部角色兴趣/精力/天赋数值分配
+    '''
     interestList = []
     languageSkills = TextLoading.getGameData(TextLoading.languageSkillsPath)
     interestList += list(languageSkills.keys())
@@ -12,7 +15,6 @@ def initCharacterInterest():
         interestList += list(knowledgeList['Knowledge'].keys())
     interestAverage = 100 / len(interestList)
     for character in CacheContorl.characterData['character']:
-        time1 = datetime.datetime.now()
         nowInterestValueMax = 100
         nowInterestList = interestList.copy()
         numpy.random.shuffle(nowInterestList)
@@ -24,4 +26,3 @@ def initCharacterInterest():
                 CacheContorl.characterData['character'][character]['Interest'][interest] = nowInterValue / interestAverage
             else:
                 CacheContorl.characterData['character'][character]['Interest'][interest] = nowInterestValueMax
-        time4 = datetime.datetime.now()

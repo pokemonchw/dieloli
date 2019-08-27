@@ -1,5 +1,7 @@
 from script.Design import CharacterBehavior
 
-# 游戏流程刷新
 def gameUpdateFlow():
+    '''
+    游戏流程刷新
+    '''
     CharacterBehavior.initCharacterBehavior()

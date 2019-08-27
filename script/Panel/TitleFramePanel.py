@@ -2,15 +2,19 @@ import time
 from script.Core import EraPrint,TextLoading,TextHandle,GameConfig,PyCmd
 from script.Design import CmdButtonQueue
 
-# 载入游戏面板
 def loadGamePanel():
+    '''
+    载入游戏动画绘制
+    '''
     EraPrint.pnextscreen()
     EraPrint.pnextscreen()
     EraPrint.pobo(1 / 3, TextLoading.getTextData(TextLoading.messagePath, '1'))
     EraPrint.p('\n')
 
-# 游戏主面板
 def gameMainPanel():
+    '''
+    游戏标题界面主面板
+    '''
     EraPrint.pline()
     EraPrint.pl(TextHandle.align(GameConfig.game_name, 'center'))
     EraPrint.pl(TextHandle.align(GameConfig.author, 'right'))

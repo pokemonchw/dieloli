@@ -1,14 +1,21 @@
-import random,bisect,numpy,datetime
+import random
+import bisect
 
-# 二维数组转字典
-def twoBitArrayToDict(array):
-    newDict = {}
-    for i in range(0,len(array)):
-        newDict[array[i][0]] = array[i][1]
+def twoBitArrayToDict(array,judge=0):
+    '''
+    将二维数组转换为字典
+    Keyword arguments:
+    array -- 要转换的二维数组
+    '''
+    newDict = dict((x, y) for x, y in array)
     return newDict
 
-# 按dict中每个key的Value进行排列,并算得权重域列表
-def getReginList(nowData):
+def getReginList(nowData,judge=0):
+    '''
+    按dict中每个value的值对key进行排序，并计算权重区域列表
+    Keyword arguments:
+    nowData -- 需要进行计算权重的dict数据
+    '''
     regionList = {}
     sortData = sorted(nowData.items(),key=lambda x:x[1])
     sortData = twoBitArrayToDict(sortData)
@@ -20,8 +27,12 @@ def getReginList(nowData):
         regionList[str(regionIndex)] = nowKey
     return regionList
 
-# 按权重获取随机对象
 def getRandomForWeight(data):
+    '''
+    按权重随机获取dict中的一个key
+    Keyword arguments:
+    data -- 需要随机获取key的dict数据
+    '''
     weightMax = sum(data.values())
     weightReginData = getReginList(data)
     weightReginList = list(map(int,weightReginData.keys()))
@@ -29,7 +40,12 @@ def getRandomForWeight(data):
     weightRegin = getNextValueForList(nowWeight,weightReginList)
     return weightReginData[str(weightRegin)]
 
-# 获取列表中第一个比当前值大的值
 def getNextValueForList(nowInt,intList):
+    '''
+    获取列表中第一个比指定值大的数
+    Keyword arguments:
+    nowInt -- 作为获取参考的指定数值
+    intList -- 用于取值的列表
+    '''
     nowId = bisect.bisect_left(intList,nowInt)
-    return intList[nowId]
+    return intList[nowId - 1]

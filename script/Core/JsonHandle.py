@@ -1,13 +1,21 @@
 import json
 
-# 判断文件编码是否为utf-8
-def is_utf8bom(pathfile):
-    if b'\xef\xbb\xbf' == open(pathfile, mode='rb').read(3):
+def is_utf8bom(filepath):
+    '''
+    判断文件编码是否为utf-8
+    Keyword arguments:
+    filepath -- 文件路径
+    '''
+    if b'\xef\xbb\xbf' == open(filepath, mode='rb').read(3):
         return True
     return False
 
-# 载入json文件
 def _loadjson(filepath):
+    '''
+    载入json文件
+    Keyword arguments:
+    filepath -- 文件路径
+    '''
     if is_utf8bom(filepath):
         ec='utf-8-sig'
     else:

@@ -1,10 +1,12 @@
 from script.Core import CacheContorl,GameInit,PyCmd,GameConfig
 from script.Design import MapHandle,CharacterHandle,PanelStateHandle
 from script.Panel import InScenePanel
-import math,datetime
+import math
 
-# 用于进入场景流程
 def getInScene_func():
+    '''
+    用于进入场景界面的流程
+    '''
     PyCmd.clr_cmd()
     scenePath = CacheContorl.characterData['character']['0']['Position']
     MapHandle.sortSceneCharacterId(scenePath)
@@ -28,11 +30,14 @@ def getInScene_func():
     else:
         seeScene_func('1')
 
-# 用于查看当前场景的流程
 def seeScene_func(judge):
+    '''
+    用于查看当前场景界面的流程
+    Keyword argument:
+    judge -- 判断是否绘制角色列表界面的开关
+    '''
     while(True):
         inputS = []
-        time1 = datetime.datetime.now()
         InScenePanel.seeScenePanel()
         scenePath = CacheContorl.characterData['character']['0']['Position']
         sceneCharacterNameList = MapHandle.getSceneCharacterNameList(scenePath)

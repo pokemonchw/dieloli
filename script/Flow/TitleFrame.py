@@ -3,6 +3,9 @@ from script.Core import PyCmd,CacheContorl
 import os
 
 def titleFrame_func():
+    '''
+    标题界面绘制流程
+    '''
     TitleFramePanel.loadGamePanel()
     CacheContorl.wframeMouse['wFrameRePrint'] = 1
     ans = TitleFramePanel.gameMainPanel()

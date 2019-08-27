@@ -1,10 +1,11 @@
 from script.Design import GameTime,AttrCalculation,CharacterHandle,MapHandle,Course,Interest
 from script.Core import CacheContorl
 from script.Panel import SeeCharacterAttrPanel
-import datetime
 
-# 用于结束角色创建正式开始游戏的初始化流程
 def initGameStart():
+    '''
+    用于结束角色创建正式开始游戏的初始化流程
+    '''
     GameTime.initTime()
     AttrCalculation.setAttrOver('0')
     Course.initPhaseCourseHour()

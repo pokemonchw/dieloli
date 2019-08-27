@@ -1,13 +1,15 @@
 from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,TextLoading,GameConfig
-from script.Design import PanelStateHandle,GameTime,CharacterHandle,AttrCalculation,MapHandle
+from script.Design import PanelStateHandle,AttrCalculation,MapHandle
 from script.Panel import SeeCharacterAttrPanel
 import math
 from script.Flow import GameStartFlow
 
 panelList = ['CharacterMainAttrPanel','CharacterEquipmentPanel','CharacterItemPanel','CharacterExperiencePanel','CharacterLevelPanel','CharacterFeaturesPanel','CharacterEngravingPanel']
 
-# 创建角色时用于查看角色属性的流程
 def acknowledgmentAttribute_func():
+    '''
+    创建角色时用于查看角色属性的流程
+    '''
     while(True):
         characterId = CacheContorl.characterData['characterId']
         AttrCalculation.setAttrOver(characterId)
@@ -34,8 +36,10 @@ def acknowledgmentAttribute_func():
         elif yrn in showAttrHandleData:
             CacheContorl.panelState['AttrShowHandlePanel'] = str(showAttrHandleData.index(yrn))
 
-# 通用查看角色属性流程
 def seeAttrOnEveryTime_func():
+    '''
+    通用用于查看角色属性的流程
+    '''
     while(True):
         characterId = CacheContorl.characterData['characterId']
         if CacheContorl.oldFlowId == 'in_scene':
@@ -96,8 +100,10 @@ def seeAttrOnEveryTime_func():
                 characterId = characterIdList[characterIdIndex  + 1]
                 CacheContorl.characterData['characterId'] = characterId
 
-# 用于任何时候查看角色属性的流程
 def seeAttrInEveryTime_func():
+    '''
+    用于在任何时候查看角色属性的流程
+    '''
     characterId = CacheContorl.characterData['characterId']
     showAttrHandle = CacheContorl.panelState['AttrShowHandlePanel']
     inputS = []

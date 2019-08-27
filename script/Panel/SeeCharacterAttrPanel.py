@@ -5,8 +5,10 @@ panelStateTextData = TextLoading.getTextData(TextLoading.cmdPath,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
 panelStateOffText = panelStateTextData[0]
 
-# 初始化查看属性面板状态
 def initShowAttrPanelList():
+    '''
+    初始化查看属性面板状态
+    '''
     CacheContorl.panelState['CharacterMainAttrPanel'] = '1'
     CacheContorl.panelState['CharacterEquipmentPanel'] = '1'
     CacheContorl.panelState['CharacterItemPanel'] = '1'
@@ -15,8 +17,12 @@ def initShowAttrPanelList():
     CacheContorl.panelState['CharacterFeaturesPanel'] = '1'
     CacheContorl.panelState['CharacterEngravingPanel'] = '1'
 
-# 查看角色主属性面板
 def seeCharacterMainAttrPanel(characterId):
+    '''
+    查看角色主属性面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
     title1 = TextLoading.getTextData(TextLoading.stageWordPath, '1')
     EraPrint.plt(title1)
     characteridText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId
@@ -90,8 +96,12 @@ def seeCharacterMainAttrPanel(characterId):
         EraPrint.p('\n')
         return 'CharacterMainAttrPanel'
 
-# 查看角色装备面板
 def seeCharacterEquipmentPanel(characterId):
+    '''
+    查看角色装备面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
     EraPrint.plittleline()
     EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '37'))
     panelState = CacheContorl.panelState['CharacterEquipmentPanel']
@@ -115,8 +125,12 @@ def seeCharacterEquipmentPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterEquipmentPanel'
 
-# 查看角色携带道具面板
 def seeCharacterItemPanel(characterId):
+    '''
+    查看角色携带道具面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
     EraPrint.plittleline()
     EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '38'))
     panelState = CacheContorl.panelState['CharacterItemPanel']
@@ -128,8 +142,12 @@ def seeCharacterItemPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterItemPanel'
 
-# 查看角色经验面板
 def seeCharacterExperiencePanel(characterId):
+    '''
+    查看角色经验面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
     EraPrint.plittleline()
     EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '18'))
     panelState = CacheContorl.panelState['CharacterExperiencePanel']
@@ -146,8 +164,12 @@ def seeCharacterExperiencePanel(characterId):
         EraPrint.p('\n')
     return 'CharacterExperiencePanel'
 
-# 查看角色技能等级
 def seeCharacterLevelPanel(characterId):
+    '''
+    查看角色技能等级面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
     EraPrint.plittleline()
     EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '5'))
     panelState = CacheContorl.panelState['CharacterLevelPanel']
@@ -164,8 +186,12 @@ def seeCharacterLevelPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterLevelPanel'
 
-# 查看角色特征
 def seeCharacterFeaturesPanel(characterId):
+    '''
+    查看角色特征面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
     EraPrint.plittleline()
     EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '6'))
     panelState = CacheContorl.panelState['CharacterFeaturesPanel']
@@ -181,8 +207,12 @@ def seeCharacterFeaturesPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterFeaturesPanel'
 
-# 查看角色刻印
 def seeCharacterEngravingPanel(characterId):
+    '''
+    查看角色刻印面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
     EraPrint.plittleline()
     EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '7'))
     panelState = CacheContorl.panelState['CharacterEngravingPanel']
@@ -198,8 +228,10 @@ def seeCharacterEngravingPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterEngravingPanel'
 
-# 查看属性页显示控制
 def seeAttrShowHandlePanel():
+    '''
+    查看属性页显示控制
+    '''
     ansListData = TextLoading.getTextData(TextLoading.cmdPath,'seeAttrPanelHandle')
     seeAttrPanelHandleCache = CacheContorl.panelState['AttrShowHandlePanel']
     inputS = []
@@ -215,12 +247,16 @@ def seeAttrShowHandlePanel():
     yrn = CmdButtonQueue.optionstr(CmdButtonQueue.seeattrpanelmenu, 2, cmdSize='center', askfor=False, cmdListData=inputS)
     return yrn
 
-# 查看角色属性时输入面板
 def askForSeeAttr():
+    '''
+    查看角色属性时输入处理面板
+    '''
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.seeattronrverytime, 3, cmdSize='center', askfor=False)
     return yrn
 
-# 创建角色完成时确认角色属性输入面板
 def inputAttrOverPanel():
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.acknowledgmentAttribute, 1, askfor=False)
+    '''
+    创建角色完成时确认角色属性输入处理面板
+    '''
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.acknowledgmentAttribute, askfor=False)
     return yrn

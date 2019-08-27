@@ -3,6 +3,9 @@ from script.Design import CmdButtonQueue
 
 # 查看帮助信息面板
 def gameHelpPanel():
+    '''
+    查看帮助信息面板
+    '''
     PyCmd.clr_cmd()
     titleInfo = TextLoading.getTextData(TextLoading.stageWordPath,'85')
     EraPrint.plt(titleInfo)

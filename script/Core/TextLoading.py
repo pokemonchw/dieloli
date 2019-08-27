@@ -1,4 +1,3 @@
-import os
 from script.Core import GameConfig,GameData,GamePathConfig
 
 gamepath = GamePathConfig.gamepath
@@ -30,17 +29,30 @@ courseSession = 'CourseSession'
 knowledge = 'Knowledge'
 languageSkillsPath = 'LanguageSkills'
 
-# 获取文本数据
 def getTextData(textPathId,textId):
+    '''
+    按文件id和文本id读取指定文本数据
+    Keyword arguments:
+    textPathId -- 文件id
+    textId -- 文件下的文本id
+    '''
     if textPathId in ['FontConfig','BarConfig']:
         return GameData._gamedata[textPathId][textId]
     else:
         return GameData._gamedata[language][textPathId][textId]
 
-# 获取游戏数据
 def getGameData(textPathId):
+    '''
+    按文件id读取文件数据
+    Keyword arguments:
+    textPathId -- 文件id
+    '''
     return GameData._gamedata[language][textPathId]
 
-# 获取角色数据
 def getCharacterData(characterName):
+    '''
+    按角色名获取预设的角色模板数据
+    Keyword arguments:
+    characterName -- 角色名
+    '''
     return GameData._gamedata[language]['character'][characterName]

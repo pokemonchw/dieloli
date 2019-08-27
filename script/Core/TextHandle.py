@@ -1,8 +1,16 @@
 from script.Core import GameConfig,TextLoading,RichText
 from wcwidth import wcswidth
 
-#文本对齐
 def align(text,just='left',onlyFix = False,columns = 1,textWidth = None):
+    '''
+    文本对齐处理函数
+    Keyword arguments:
+    text -- 需要进行对齐处理的文本
+    just -- 文本的对齐方式(right/center/left) (default 'left')
+    onlyFix -- 只返回对齐所需要的补全文本 (default False)
+    columns -- 将行宽平分指定列后，再进行对齐补全 (default 1)
+    textWidth -- 指定行宽，为None时将使用GameConfig中的配置 (default None)
+    '''
     text = str(text)
     countIndex = getTextIndex(text)
     if textWidth == None:
@@ -28,8 +36,12 @@ def align(text,just='left',onlyFix = False,columns = 1,textWidth = None):
         else:
             return " " * int(widthI - countI) + text + " " * int(widthI - countI - 2)
 
-# 文本长度计算
 def getTextIndex(text):
+    '''
+    计算文本最终显示的真实长度
+    Keyword arguments:
+    text -- 要进行长度计算的文本
+    '''
     textStyleList = RichText.setRichTextPrint(text, 'standard')
     textIndex = 0
     stylewidth = 0
@@ -53,8 +65,12 @@ def getTextIndex(text):
             textIndex += wcswidth(text[i])
     return textIndex + stylewidth
 
-# 全角字符转半角
 def fullToHalfText(ustring):
+    '''
+    将全角字符串转换为半角
+    Keyword arguments:
+    ustring -- 要转换的全角字符串
+    '''
     rstring = ""
     for uchar in ustring:
         inside_code=ord(uchar)

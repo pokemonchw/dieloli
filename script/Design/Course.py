@@ -1,8 +1,10 @@
 from script.Core import TextLoading,ValueHandle,CacheContorl
-import math,random,bisect
+import math,random
 
-# 初始化各班级课时
 def initPhaseCourseHour():
+    '''
+    初始化各班级课时
+    '''
     phaseCourseTime = TextLoading.getTextData(TextLoading.phaseCourse,'CourseTime')
     primaryWeight = TextLoading.getTextData(TextLoading.phaseCourse,'PrimarySchool')
     juniorMiddleWeight = TextLoading.getTextData(TextLoading.phaseCourse,'JuniorMiddleSchool')
@@ -11,7 +13,7 @@ def initPhaseCourseHour():
     allClassHourData = {}
     phaseIndex = 0
     for phase in nowWeightList:
-        phaseWeightRegin = ValueHandle.getReginList(phase)
+        phaseWeightRegin = ValueHandle.getReginList(phase,judge=1)
         weightMax = 0
         weightMax = sum(map(int,phaseWeightRegin.keys()))
         classHourData = {}
@@ -51,9 +53,10 @@ def initPhaseCourseHour():
     CacheContorl.courseData['ClassHour'] = allClassHourData
     initPhaseCourseHourExperience()
 
-# 初始化各班级课程表
 def initClassTimeTable():
-    phaseCourseTime = TextLoading.getTextData(TextLoading.phaseCourse,'CourseTime')
+    '''
+    初始化各班级课程表
+    '''
     courseSession = TextLoading.getGameData(TextLoading.courseSession)
     classTimeTable = {}
     for phase in CacheContorl.courseData['ClassHour']:
@@ -62,15 +65,12 @@ def initClassTimeTable():
         classDay = 0
         if phase <= 5:
             classTime = courseSession['PrimarySchool']
-            classHourMax = phaseCourseTime['PrimarySchool']
             classDay = 6
         elif phase <= 7:
             classTime = courseSession['JuniorMiddleSchool']
-            classHourMax = phaseCourseTime['JuniorMiddleSchool']
             classDay = 7
         else:
             classTime = courseSession['SeniorHighSchool']
-            classHourMax = phaseCourseTime['SeniorHighSchool']
             classDay = 8
         classHour = CacheContorl.courseData['ClassHour'][phase]
         classHourIndex = {}
@@ -106,8 +106,10 @@ def initClassTimeTable():
                         break
     CacheContorl.courseData['ClassTimeTable'] = classTimeTable
 
-# 初始化各班级任课老师
 def initClassTeacher():
+    '''
+    初始化各班级任课老师
+    '''
     teacherIndex = len(CacheContorl.teacherCourseExperience[list(CacheContorl.teacherCourseExperience.keys())[0]].keys())
     courseMaxA = 0
     courseMaxB = 0
@@ -126,8 +128,10 @@ def initClassTeacher():
     elif teacherIndex >= courseMaxB:
         courseDistributionB()
 
-# 课时AB主课分配流程
 def courseABMainDistribution():
+    '''
+    课时分配流程AB通用主课时分配流程
+    '''
     for phase in range(12,0,-1):
         classList = CacheContorl.placeData['Classroom_' + str(phase)]
         CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)] = {}
@@ -143,8 +147,10 @@ def courseABMainDistribution():
                             break
 
 teacherData = {}
-# 课时分配流程A
 def courseDistributionA():
+    '''
+    课时分配流程A
+    '''
     courseABMainDistribution()
     for phase in range(1,13):
         classList = CacheContorl.placeData['Classroom_' + str(phase)]
@@ -160,8 +166,10 @@ def courseDistributionA():
                             CacheContorl.courseData['ClassTeacher']['Classroom_' + str(phase)][classroom][course].append(teacher)
                             break
 
-# 课时分配流程B
 def courseDistributionB():
+    '''
+    课时分配流程B
+    '''
     courseABMainDistribution()
     for phase in range(1,13):
         classList = CacheContorl.placeData['Classroom_' + str(phase)]
@@ -182,8 +190,10 @@ def courseDistributionB():
                             break
 
 courseKnowledgeData = TextLoading.getGameData(TextLoading.course)
-# 初始化每年级科目课时经验标准量
 def initPhaseCourseHourExperience():
+    '''
+    按年级计算各科目课时经验标准量
+    '''
     phaseExperience = {}
     for phase in CacheContorl.courseData['ClassHour']:
         phaseExperience[phase] = {}
@@ -200,19 +210,20 @@ def initPhaseCourseHourExperience():
                         phaseExperience[phase][knowledge][skill] = skillExperience
     CacheContorl.courseData['PhaseExperience'] = phaseExperience
 
-# 初始化角色知识等级
 def initCharacterKnowledge():
+    '''
+    初始化所有角色知识等级
+    '''
     for i in CacheContorl.characterData['character']:
         character = CacheContorl.characterData['character'][i]
-        characterInterestData = character['Interest']
         characterAge = character['Age']
         classGrade = 11
         if characterAge <= 18 and characterAge >= 7:
             classGrade = characterAge - 7
-        initExperienceForGrade(classGrade,character)
+        character = initExperienceForGrade(classGrade,character)
         CacheContorl.characterData['character'][i] = character
         if characterAge > 18:
-            initTeacherKnowledge(character)
+            character = initTeacherKnowledge(character)
             for course in courseKnowledgeData:
                 if course not in CacheContorl.teacherCourseExperience:
                     CacheContorl.teacherCourseExperience.setdefault(course,{})
@@ -226,6 +237,9 @@ def initCharacterKnowledge():
                 CacheContorl.teacherCourseExperience[course][i] = nowCourseExperience
 
 def initTeacherKnowledge(character):
+    '''
+    按年龄修正教师知识等级
+    '''
     characterAge = character['Age']
     studyYear = characterAge - 18
     for knowledge in character['Knowledge']:
@@ -233,9 +247,13 @@ def initTeacherKnowledge(character):
             character['Knowledge'][knowledge][skill] += character['Knowledge'][knowledge][skill] / 12 * studyYear * random.uniform(0.25,0.75)
     for language in character['Language']:
         character['Knowledge'][knowledge][skill] += character['Language'][language] / 12 * studyYear * random.uniform(0.25,0.75)
+    return character
 
 courseData = TextLoading.getGameData(TextLoading.course)
 def initExperienceForGrade(classGrade,character):
+    '''
+    按年级生成角色初始经验数据
+    '''
     phaseExperienceData = CacheContorl.courseData['PhaseExperience']
     for garde in range(classGrade):
         experienceData = phaseExperienceData[garde]
@@ -250,7 +268,8 @@ def initExperienceForGrade(classGrade,character):
                     else:
                         character['Language'][skill] = skillExperience
             else:
-                character['Knowledge'].setdefault(knowledge,{})
+                if knowledge not in character['Knowledge']:
+                    character['Knowledge'].setdefault(knowledge,{})
                 for skill in experienceData[knowledge]:
                     skillExperience = experienceData[knowledge][skill]
                     skillInterest = character['Interest'][skill]
@@ -259,3 +278,5 @@ def initExperienceForGrade(classGrade,character):
                         character['Knowledge'][knowledge][skill] += skillExperience
                     else:
                         character['Knowledge'][knowledge][skill] = skillExperience
+    return character
+

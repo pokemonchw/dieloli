@@ -1,5 +1,7 @@
 # -*- coding: UTF-8 -*-
-import time,os,copy
+import time
+import os
+import copy
 from script.Core import CacheContorl,TextLoading,TextHandle,GameConfig,IoInit
 
 def null_func():
@@ -26,7 +28,7 @@ def clear_default_flow():
     global default_flow, null_func
     set_default_flow(null_func)
 
-cmd_map = CacheContorl.cmd_map
+cmd_map = CacheContorl.cmdMap
 
 def default_tail_deal_cmd_func(order):
     return
@@ -95,7 +97,7 @@ def order_deal(flag='order', print_order=True):
                 reset_func()
                 return
             if print_order == True and order != '':
-                IoInit.print('\n' + order + '\n')
+                IoInit.eraPrint('\n' + order + '\n')
             if flag == 'str':
                 if order.isdigit():
                     order = str(int(order))
@@ -123,13 +125,13 @@ def askfor_All(list,print_order=False):
     while True:
         order = order_deal('str', print_order)
         if order in list:
-            IoInit.print(order + '\n')
+            IoInit.eraPrint(order + '\n')
             return order
         elif order == '':
             continue
         else:
-            IoInit.print(order + '\n')
-            IoInit.print(TextLoading.getTextData(TextLoading.errorPath, 'noInputListError') + '\n')
+            IoInit.eraPrint(order + '\n')
+            IoInit.eraPrint(TextLoading.getTextData(TextLoading.errorPath, 'noInputListError') + '\n')
             continue
 
 def askfor_Int(list,print_order=False):
@@ -137,13 +139,13 @@ def askfor_Int(list,print_order=False):
         order = order_deal('str', print_order)
         order = TextHandle.fullToHalfText(order)
         if order in list:
-            IoInit.print(order + '\n')
+            IoInit.eraPrint(order + '\n')
             return order
         elif order == '':
             continue
         else:
-            IoInit.print(order + '\n')
-            IoInit.print(TextLoading.getTextData(TextLoading.errorPath, 'noInputListError') + '\n')
+            IoInit.eraPrint(order + '\n')
+            IoInit.eraPrint(TextLoading.getTextData(TextLoading.errorPath, 'noInputListError') + '\n')
             continue
 
 def askfor_wait():

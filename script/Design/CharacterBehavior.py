@@ -16,15 +16,21 @@ behaviorTemData = {
     "Teacher":importlib.import_module(behaviorTemTextData['Teacher'])
 }
 
-# npc行为总控制
 def initCharacterBehavior():
+    '''
+    角色行为树总控制
+    '''
     npcList = CharacterHandle.getCharacterIdList()
     npcList.remove('0')
     for npc in npcList:
         characterOccupationJudge(npc)
 
-# npc职业判断
 def characterOccupationJudge(characterId):
+    '''
+    判断角色职业并指定对应行为树
+    Keyword arguments:
+    characterId -- 角色id
+    '''
     characterData = CacheContorl.characterData['character'][characterId]
     characterTemData = CacheContorl.npcTemData[int(characterId) - 1]
     if 'Occupation' in characterTemData and characterTemData['Occupation'] in behaviorTemData:

@@ -6,8 +6,14 @@ last_char = '\n'
 #默认输出样式
 def_style = IoInit.style_def
 
-#基本输出
 def p(string, style='standard',richTextJudge=True):
+    '''
+    游戏基础的文本绘制实现
+    Keyword arguments:
+    string -- 需要绘制的文本
+    style -- 文本的默认样式 (default 'standard')
+    richTextJudge -- 启用富文本的开关 (default True)
+    '''
     string = str(string)
     if richTextJudge:
         barlist = TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
@@ -27,18 +33,30 @@ def p(string, style='standard',richTextJudge=True):
                 elif string[i] == '1':
                     pimage(truebar, 'bar')
                 else:
-                    IoInit.print(string[i], styleList[i])
+                    IoInit.eraPrint(string[i], styleList[i])
             else:
-                IoInit.print(string[i], styleList[i])
+                IoInit.eraPrint(string[i], styleList[i])
     else:
-        IoInit.print(string,style)
+        IoInit.eraPrint(string,style)
 
-# 输出图片
 def pimage(imageName,imagePath=''):
+    '''
+    图片绘制在EraPrint中的封装
+    Keyword arguments:
+    imageName -- 图片id
+    imagePath -- 图片所在路径 (default '')
+    '''
     IoInit.imageprint(imageName, imagePath)
 
-# 小标题输出
 def plt(string):
+    '''
+    按预订样式"littletitle(小标题)"绘制文本
+    示例:
+    ====▢小标题▢====
+    文本将用=补全至与行同宽
+    Keyword arguments:
+    string -- 小标题文本
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
@@ -52,8 +70,15 @@ def plt(string):
     lineWidth = int(int(width)/2 - int(textWidth)/2 - 2)
     pl('='*lineWidth + '<littletitle>▢' + string + '▢</littletitle>' + '='*lineWidth)
 
-# 子标题输出
 def sontitleprint(string):
+    '''
+    按预订样式"sontitle(子标题)"绘制文本
+    示例：
+    ::::子标题::::
+    文本将用=补全至与行同宽
+    Keyword arguments:
+    string -- 子标题文本
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
@@ -68,8 +93,13 @@ def sontitleprint(string):
     lineWidthFix = int(int(width)/4 - int(textWidth))
     pl(':' * lineWidthFix + '<sontitle>' + string + '</sontitle>' + ':' * lineWidth * 3)
 
-#输出一行
 def pl(string='', style='standard'):
+    '''
+    绘制文本并换行
+    Keyword arguments:
+    string -- 要绘制的文本
+    style -- 文本的默认样式 (default 'standard')
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
@@ -80,23 +110,33 @@ def pl(string='', style='standard'):
     if not last_char == '\n':
         p('\n')
 
-#输出分割线
 def pline(sample='=', style='standard'):
+    '''
+    绘制一行指定文本
+    Keyword arguments:
+    string -- 要绘制的文本 (default '=')
+    style -- 文本的默认样式 (default 'standard')
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     textWidth = GameConfig.text_width
     pl(sample * textWidth,style)
 
-def plittleline(sample = ':',style = 'standard'):
-    textWait = CacheContorl.textWait
-    if textWait != 0:
-        time.sleep(textWait)
-    textWidth = GameConfig.text_width
-    pl(sample * textWidth, style)
+def plittleline():
+    '''
+    绘制标题线，字符为':'
+    '''
+    pline(':')
 
-# 输出页数线
 def printPageLine(sample = ':',string = '',style = 'standard'):
+    '''
+    绘制页数线
+    Keyword arguments:
+    sample -- 填充线样式 (default ':')
+    string -- 页数字符串 (default '')
+    style -- 页数线默认样式 (default 'standard')
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
@@ -106,16 +146,26 @@ def printPageLine(sample = ':',string = '',style = 'standard'):
     stringText = fixText + string + fixText
     p(stringText,style)
 
-#输出警告
 def pwarn(string, style='warning'):
+    '''
+    绘制警告信息(将同时在终端打印)
+    Keyword arguments:
+    string -- 警告信息文本
+    style -- 警告信息的默认样式 (default 'warning')
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     pl(string, style)
     print(string)
 
-#输出并等待
 def pwait(string, style='standard'):
+    '''
+    绘制文本并等待玩家按下回车或鼠标左键
+    Keyword arguments:
+    string -- 要绘制的文本
+    style -- 绘制文本的默认样式 (default 'standard')
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
@@ -124,6 +174,12 @@ def pwait(string, style='standard'):
 
 #输出一行并等待
 def plwait(string='', style='standard'):
+    '''
+    绘制文本换行并等待玩家按下回车或鼠标左键
+    Keyword arguments:
+    string -- 要绘制的文本 (default '')
+    style -- 绘制文本的默认样式 (default 'standard')
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
@@ -132,6 +188,13 @@ def plwait(string='', style='standard'):
 
 #逐字输出
 def pobo(sleepTime,string, style='standard'):
+    '''
+    逐字绘制文本
+    Keyword arguments:
+    sleepTime -- 逐字绘制时，绘制间隔时间
+    string -- 需要逐字绘制的文本
+    style -- 绘制文本的默认样式 (default 'standard')
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
@@ -157,8 +220,14 @@ def pobo(sleepTime,string, style='standard'):
                 CacheContorl.wframeMouse['wFrameLinesUp'] = 2
             break
 
-# 列表输出
 def plist(stringList,stringColumn = 1,stringSize = 'left'):
+    '''
+    绘制字符串列表
+    Keyword arguments:
+    stringList -- 要进行绘制的字符串列表
+    stringColum -- 每行的绘制数量(列宽由行宽平分为行数而来) (default 1)
+    stringSize -- 每列在列宽中的对齐方式(left/center/right) (default 'left')
+    '''
     textWait = CacheContorl.textWait
     textWidth = GameConfig.text_width
     if textWait != 0:
@@ -189,15 +258,23 @@ def plist(stringList,stringColumn = 1,stringSize = 'left'):
         else:
             p(stringText)
 
-#切换下一屏
 def pnextscreen():
+    '''
+    绘制一整屏空行
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
     p('\n' * GameConfig.text_hight)
 
-#多行居中逐字输出
 def lcp(sleepTime,string='',style='standard'):
+    '''
+    将多行文本以居中的对齐方式进行逐字绘制
+    Keyword arguments:
+    sleepTime -- 逐字的间隔时间
+    string -- 需要逐字绘制的文本
+    style -- 文本的默认样式
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)
@@ -239,6 +316,11 @@ def lcp(sleepTime,string='',style='standard'):
 
 #多行回车逐行输出
 def lkeyp(string=''):
+    '''
+    绘制多行文本，并在绘制时，当玩家输入回车，才绘制下一行
+    Keyword arguments:
+    string -- 要绘制的文本
+    '''
     textWait = CacheContorl.textWait
     if textWait != 0:
         time.sleep(textWait)

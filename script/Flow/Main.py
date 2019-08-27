@@ -13,8 +13,10 @@ mainFrameGotoData = {
     "7":'load_save',
 }
 
-# 游戏主页
 def mainFrame_func():
+    '''
+    游戏主页控制流程
+    '''
     inputS = []
     flowReturn = MainFramePanel.mainFramePanel()
     inputS = inputS + flowReturn

@@ -1,7 +1,12 @@
 from script.Core import GameConfig,CacheContorl,TextLoading,Dictionaries
 
-# 富文本计算
 def setRichTextPrint(textMessage,defaultStyle):
+    '''
+    获取文本的富文本样式列表
+    Keyword arguments:
+    textMessage -- 原始文本
+    defaultStyle -- 无富文本样式时的默认样式
+    '''
     styleNameList = GameConfig.getFontDataList() + TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
     styleIndex = 0
     styleLastIndex = None
@@ -45,8 +50,12 @@ def setRichTextPrint(textMessage,defaultStyle):
                     styleList.append(CacheContorl.outputTextStyle)
     return styleList
 
-# 移除富文本标签
 def removeRichCache(string):
+    '''
+    移除文本中的富文本标签
+    Keyword arguments:
+    string -- 原始文本
+    '''
     string = str(string)
     string = Dictionaries.handleText(string)
     barlist = TextLoading.getTextData(TextLoading.barConfigPath, 'barlist')

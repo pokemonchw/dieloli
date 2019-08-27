@@ -1,26 +1,40 @@
-import os,pickle,shutil
+import os
+import pickle
+import shutil
 from script.Core import EraPrint,TextLoading,CacheContorl,GameConfig,GamePathConfig
 from script.Design import CharacterHandle
 
 gamepath = GamePathConfig.gamepath
 
-# 获取存档所在路径
 def getSaveDirPath(saveId):
+    '''
+    按存档id获取存档所在系统路径
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     saveId = str(saveId)
     savepath = os.path.join(gamepath,'save')
     if not os.path.exists(savepath):
         os.makedirs(savepath)
     return os.path.join(savepath,saveId)
 
-# 判断存档是否存在
 def judgeSaveFileExist(saveId):
+    '''
+    判断存档id对应的存档是否存在
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     savePath = getSaveDirPath(saveId)
     if not os.path.exists(savePath):
         return "0"
     return "1"
 
-# 存入存档数据
 def establishSave(saveId):
+    '''
+    将游戏数据存入指定id的存档内
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     characterData = CacheContorl.characterData
     gameTime = CacheContorl.gameTime
     scaneData = CacheContorl.sceneData
@@ -38,15 +52,25 @@ def establishSave(saveId):
     for dataId in data:
         writeSaveData(saveId,dataId,data[dataId])
 
-# 载入存档信息头
 def loadSaveInfoHead(saveId):
+    '''
+    获取存档的头部信息
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     savePath = getSaveDirPath(saveId)
     filePath = os.path.join(savePath,'0')
     with open(filePath,'rb') as f:
         return pickle.load(f)
 
-# 写入存档数据
 def writeSaveData(saveId,dataId,writeData):
+    '''
+    将存档数据写入文件
+    Keyword arguments:
+    saveId -- 存档id
+    dataId -- 要写入的数据在存档下的文件id
+    writeData -- 要写入的数据
+    '''
     savePath = getSaveDirPath(saveId)
     filePath = os.path.join(savePath,dataId)
     if judgeSaveFileExist(saveId) == '0':
@@ -54,8 +78,12 @@ def writeSaveData(saveId,dataId,writeData):
     with open(filePath,'wb') as f:
         pickle.dump(writeData,f)
 
-# 读取存档数据
 def loadSave(saveId):
+    '''
+    按存档id读取存档数据
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     savePath = getSaveDirPath(saveId)
     data = {}
     fileList = ['1','2','3','4','5','6','7']
@@ -65,8 +93,12 @@ def loadSave(saveId):
             data[fileName]=pickle.load(f)
     return data
 
-# 确认存档读取
 def inputLoadSave(saveId):
+    '''
+    载入存档存档id对应数据，覆盖当前游戏内存
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     saveData = loadSave(saveId)
     CacheContorl.characterData = saveData['1']
     CacheContorl.characterData['characterId'] = '0'
@@ -78,16 +110,25 @@ def inputLoadSave(saveId):
     CacheContorl.occupationCharacterData = saveData['7']
     CharacterHandle.initCharacterPosition()
 
-# 获取存档页对应存档id
 def getSavePageSaveId(pageSaveValue,inputId):
+    '''
+    按存档页计算，当前页面输入数值对应存档id
+    Keyword arguments:
+    pageSaveValue -- 存档页Id
+    inputId -- 当前输入数值
+    '''
     savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel']) + 1
     startSaveId = int(pageSaveValue) * (savePanelPage - 1)
     inputId = int(inputId)
     saveId = startSaveId + inputId
     return saveId
 
-# 删除存档
 def removeSave(saveId):
+    '''
+    删除存档id对应存档
+    Keyword arguments:
+    saveId -- 存档id
+    '''
     savePath = getSaveDirPath(saveId)
     if os.path.isdir(savePath):
         shutil.rmtree(savePath)

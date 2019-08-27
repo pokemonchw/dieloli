@@ -2,8 +2,10 @@ from script.Core import MainFrame,PyCmd,CacheContorl
 
 wframe = MainFrame.root
 
-#按键监听绑定预设
 def onWFrameListion():
+    '''
+    对按键事件进行绑定
+    '''
     wframe.bind('<ButtonPress-1>', mouseLeftCheck)
     wframe.bind('<ButtonPress-3>',mouseRightCheck)
     wframe.bind('<Return>', MainFrame.send_input)
@@ -11,24 +13,36 @@ def onWFrameListion():
     wframe.bind('<Up>',keyUp)
     wframe.bind('<Down>',keyDown)
 
-#鼠标左键事件
 def mouseLeftCheck(event):
+    '''
+    鼠标左键事件处理
+    Keyword arguments:
+    event -- 鼠标事件
+    '''
     if CacheContorl.wframeMouse['wFrameUp'] ==0:
-        setWFrameUp(event)
+        setWFrameUp()
     else:
-        mouseCheckPush(event)
+        mouseCheckPush()
 
-#鼠标右键事件
 def mouseRightCheck(event):
+    '''
+    鼠标右键事件处理
+    Keyword arguments:
+    event -- 鼠标事件
+    '''
     CacheContorl.wframeMouse['mouseRight'] = 1
     CacheContorl.textWait = 0
     if CacheContorl.wframeMouse['wFrameUp'] ==0:
-        setWFrameUp(event)
+        setWFrameUp()
     else:
-        mouseCheckPush(event)
+        mouseCheckPush()
 
-#键盘上键事件
 def keyUp(event):
+    '''
+    键盘上键事件处理
+    Keyword arguments:
+    event -- 键盘事件
+    '''
     while CacheContorl.inputPosition['position'] == 0:
         CacheContorl.inputPosition['position'] = len(CacheContorl.inputCache)
     while CacheContorl.inputPosition['position'] <= 21 and CacheContorl.inputPosition['position'] > 1:
@@ -40,8 +54,12 @@ def keyUp(event):
         except KeyError:
             CacheContorl.inputPosition['position'] = CacheContorl.inputPosition['position'] + 1
 
-#键盘下键事件
 def keyDown(event):
+    '''
+    键盘下键事件处理
+    Keyword arguments:
+    event -- 键盘事件
+    '''
     if CacheContorl.inputPosition['position'] > 0 and CacheContorl.inputPosition['position'] < len(CacheContorl.inputCache) - 1:
         try:
             CacheContorl.inputPosition['position'] = CacheContorl.inputPosition['position'] + 1
@@ -53,13 +71,17 @@ def keyDown(event):
         CacheContorl.inputPosition['position'] = 0
         MainFrame.order.set('')
 
-#逐字输出状态改变
-def setWFrameUp(event):
+def setWFrameUp():
+    '''
+    修正逐字输出状态为nowait
+    '''
     CacheContorl.wframeMouse['wFrameUp'] = 1
     CacheContorl.wframeMouse['wFrameLinesUp'] = 1
 
-#鼠标点击状态
-def mouseCheckPush(event):
+def mouseCheckPush():
+    '''
+    更正鼠标点击状态数据映射
+    '''
     PyCmd.focusCmd()
     if CacheContorl.wframeMouse['mouseLeaveCmd'] == 0:
         MainFrame.send_input()

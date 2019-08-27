@@ -1,8 +1,10 @@
 from script.Core import EraPrint,CacheContorl,TextLoading,PyCmd
 from script.Design import AttrHandle,AttrText,AttrPrint,GameTime,CmdButtonQueue
 
-# 游戏主页流程
 def mainFramePanel():
+    '''
+    游戏主菜单
+    '''
     cmdList = []
     characterId = CacheContorl.characterData['characterId']
     characterData = AttrHandle.getAttrData(characterId)

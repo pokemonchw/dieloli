@@ -1,8 +1,12 @@
 from script.Core import TextLoading,EraPrint,CacheContorl
 from script.Design import AttrHandle,ProportionalBar
 
-# 用于输出角色血条和蓝条的方法（占一行，自动居中）
 def printHpAndMpBar(characterId):
+    '''
+    绘制角色的hp和mp(有比例图)，自动居中处理，结尾换行
+    Keyword arguments:
+    characterId -- 角色id
+    '''
     characterData = AttrHandle.getAttrData(characterId)
     characterHitPoint = characterData['HitPoint']
     characterMaxHitPoint = characterData['HitPointMax']
@@ -17,8 +21,12 @@ def printHpAndMpBar(characterId):
     EraPrint.plist(hpmpBarList, 2, 'center')
     EraPrint.p('\n')
 
-# 用于获取角色血条蓝条（无比例图）的方法
 def getHpAndMpText(characterId):
+    '''
+    获取角色的hp和mp文本
+    Keyword arguments:
+    characterId -- 角色id
+    '''
     characterId = str(characterId)
     characterData = CacheContorl.characterData['character'][characterId]
     characterHitPoint = characterData['HitPoint']

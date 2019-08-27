@@ -1,8 +1,12 @@
 from script.Core import TextLoading,EraPrint,CacheContorl,GameConfig,PyCmd,TextHandle
 from script.Design import CharacterHandle,CmdButtonQueue,AttrText
 
-# 查看角色列表面板
 def seeCharacterListPanel(maxPage):
+    '''
+    查看角色列表面板
+    Keyword arguments:
+    maxPage -- 最大角色列表页数
+    '''
     titleText = TextLoading.getTextData(TextLoading.stageWordPath,'74')
     EraPrint.plt(titleText)
     inputS = []
@@ -36,7 +40,11 @@ def seeCharacterListPanel(maxPage):
     EraPrint.p('\n')
     return inputS
 
-# 询问切换角色列表页面面板
 def askForSeeCharacterListPanel(startId):
+    '''
+    切换角色列表页面处理面板
+    Keyword arguments:
+    startId -- 面板命令起始id
+    '''
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.seecharacterlist, 3, 'left', askfor=False, cmdSize='center', startId=startId)
     return yrn

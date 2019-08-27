@@ -1,5 +1,5 @@
-import os,random,datetime
-from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig,JsonHandle
+import random
+from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText
 
 language = GameConfig.language
@@ -9,8 +9,10 @@ sexList = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex'))
 ageTemList = list(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem'))
 characterList = list(GameData._gamedata[language]['character'].keys())
 
-# 初始化角色数据
 def initCharacterList():
+    '''
+    初始生成所有npc数据
+    '''
     initCharacterTem()
     i = 1
     for character in CacheContorl.npcTemData:
@@ -19,8 +21,13 @@ def initCharacterList():
     initCharacterDormitory()
     initCharacterPosition()
 
-# 按id生成角色属性
 def initCharacter(nowId,character):
+    '''
+    按id生成角色属性
+    Keyword arguments:
+    nowId -- 角色id
+    character -- 角色生成模板数据
+    '''
     AttrCalculation.initTemporaryCharacter()
     characterId = str(nowId)
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
@@ -47,7 +54,6 @@ def initCharacter(nowId,character):
     elif 'Features' in character:
         AttrCalculation.setAddFeatures(character['Features'])
         defaultAttr['Features'] = CacheContorl.featuresList.copy()
-    temList = AttrCalculation.getTemList()
     if 'Features' in character:
         height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],character['Features'])
     else:
@@ -65,7 +71,6 @@ def initCharacter(nowId,character):
     weight = AttrCalculation.getWeight(bmi, height['NowHeight'])
     defaultAttr['Weight'] = weight
     if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
-        classGradeMax = 12
         classGrade = str(defaultAttr['Age'] - 6)
         defaultAttr['Class'] = random.choice(CacheContorl.placeData["Classroom_" + classGrade])
     bodyFat = AttrCalculation.getBodyFat(characterSex,bodyFatTem)
@@ -77,8 +82,13 @@ def initCharacter(nowId,character):
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
 
-# 处理角色年龄特性
 def characterAgeFeatureHandle(ageTem,characterSex):
+    '''
+    按年龄模板生成角色特性数据
+    Keyword arguments:
+    ageTem -- 年龄模板
+    characterSex -- 角色性别
+    '''
     if ageTem == 'SchoolAgeChild':
         if characterSex == sexList[0]:
             CacheContorl.featuresList['Age'] = featuresList["Age"][0]
@@ -89,15 +99,19 @@ def characterAgeFeatureHandle(ageTem,characterSex):
     elif ageTem == 'OldAdult':
         CacheContorl.featuresList['Age'] = featuresList["Age"][3]
 
-# 初始化角色数据
 def initCharacterTem():
+    '''
+    初始化角色模板数据
+    '''
     npcData = getRandomNpcData()
     nowCharacterList = characterList.copy()
     npcData += [getDirCharacterTem(character) for character in nowCharacterList]
     CacheContorl.npcTemData = npcData
 
-# 获取目录中的角色模板
 def getDirCharacterTem(character):
+    '''
+    获取预设角色模板数据
+    '''
     return TextLoading.getCharacterData(character)['AttrTemplate']
 
 randomNpcMax = int(GameConfig.random_npc_max)
@@ -109,8 +123,10 @@ ageWeightData = {
 }
 ageWeightReginData = ValueHandle.getReginList(ageWeightData)
 ageWeightReginList = list(map(int,ageWeightReginData.keys()))
-# 获取随机npc数据
 def getRandomNpcData():
+    '''
+    生成所有随机npc的数据模板
+    '''
     if CacheContorl.randomNpcList == []:
         ageWeightMax = 0
         for i in ageWeightData:
@@ -142,52 +158,75 @@ for i in sexWeightData:
     sexWeightMax += int(sexWeightData[i])
 sexWeightReginData = ValueHandle.getReginList(sexWeightData)
 sexWeightReginList = list(map(int,sexWeightReginData.keys()))
-# 按权重随机获取npc性别
 def getRandNpcSex():
+    '''
+    随机获取npc性别
+    '''
     nowWeight = random.randint(0,sexWeightMax - 1)
     weightRegin = ValueHandle.getNextValueForList(nowWeight,sexWeightReginList)
     return sexWeightReginData[str(weightRegin)]
 
 fatWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'FatWeight')
-# 按权重随机获取npc体重模板
 def getRandNpcFatTem(agejudge):
+    '''
+    按人群年龄段体重分布比例随机生成体重模板
+    Keyword arguments:
+    agejudge -- 年龄段
+    '''
     nowFatWeightData = fatWeightData[agejudge]
     nowFatTem = ValueHandle.getRandomForWeight(nowFatWeightData)
     return nowFatTem
 
 bodyFatWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'BodyFatWeight')
-# 按权重随机获取npc体脂率模板
 def getRandNpcBodyFatTem(ageJudge,bmiTem):
+    '''
+    按年龄段体脂率分布比例随机生成体脂率模板
+    Keyword arguments:
+    ageJudge -- 年龄段
+    bmiTem -- bmi模板
+    '''
     nowBodyFatData = bodyFatWeightData[ageJudge][bmiTem]
     return ValueHandle.getRandomForWeight(nowBodyFatData)
 
 ageTemWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeWeight')
-# 按权重获取npc年龄模板
 def getRandNpcAgeTem(agejudge):
+    '''
+    按年龄断随机生成npc年龄
+    Keyword arguments:
+    ageJudge -- 年龄段
+    '''
     nowAgeWeightData  = ageTemWeightData[agejudge]
     nowAgeTem = ValueHandle.getRandomForWeight(nowAgeWeightData)
     return nowAgeTem
 
-# 获取角色最大数量
 def getCharacterIndexMax():
+    '''
+    获取角色数量
+    '''
     characterData = CacheContorl.characterData['character']
     characterDataMax = len(characterData.keys()) - 1
     return characterDataMax
 
-# 获取角色id列表
 def getCharacterIdList():
+    '''
+    获取角色id列表
+    '''
     characterData = CacheContorl.characterData['character']
     return list(characterData.keys())
 
-# 分配角色宿舍
 def initCharacterDormitory():
+    '''
+    分配角色宿舍
+    '''
     characterData = {}
     for character in CacheContorl.characterData['character']:
         characterData[character] = CacheContorl.characterData['character'][character]['Age']
     characterData = [k[0] for k in sorted(characterData.items(),key=lambda x:x[1])]
 
-# 初始化角色的位置
 def initCharacterPosition():
+    '''
+    初始化角色位置
+    '''
     for character in CacheContorl.characterData['character']:
         characterPosition = CacheContorl.characterData['character'][character]['Position']
         MapHandle.characterMoveScene(characterPosition,'0',character)

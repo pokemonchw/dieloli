@@ -1,9 +1,9 @@
 # -*- coding: UTF-8 -*-
-# -*- coding: UTF-8 -*-
-import threading,queue,json,sys
+import threading
+import queue
+import json
+import sys
 from script.Core import MainFrame,GameConfig
-
-sys_print = print
 
 sys.setrecursionlimit(100000)
 
@@ -84,7 +84,7 @@ def style_json(style_name, foreground, background, font, fontsize, bold, underli
 # #######################################################################
 # 输出格式化
 
-def print(string, style='standard'):
+def eraPrint(string, style='standard'):
     jsonstr = new_json()
     jsonstr['content'].append(text_json(string, style))
     putQ(json.dumps(jsonstr, ensure_ascii=False))
@@ -135,8 +135,10 @@ def io_clear_cmd(*cmd_numbers):
 def style_def():
     pass
 
-# 初始化样式
 def init_style():
+    '''
+    富文本样式初始化
+    '''
     global style_def
     def new_style_def(style_name, foreground, background, font, fontsize,bold, underline, italic):
         frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic)
