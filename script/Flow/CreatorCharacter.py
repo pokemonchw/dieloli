@@ -198,7 +198,7 @@ def detailedSetting_func3():
     '''
     flowReturn = CreatorCharacterPanel.detailedSetting3Panel()
     sexTemDataList = list(TextLoading.getTextData(TextLoading.attrTemplatePath,'SexExperience').keys())
-    sexTemDataList = ValueHandle.reverseArrayList(sexTemDataList)
+    sexTemDataList.reverse()
     sexTemName = sexTemDataList[flowReturn]
     if flowReturn != len(sexTemDataList) - 1:
         CacheContorl.featuresList['Chastity'] = ''

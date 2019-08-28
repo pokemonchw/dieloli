@@ -222,9 +222,16 @@ def initCharacterDormitory():
     for character in CacheContorl.characterData['character']:
         characterData[character] = CacheContorl.characterData['character'][character]['Age']
     characterData = [k[0] for k in sorted(characterData.items(),key=lambda x:x[1])]
-    #manStudentDormitoryList = CacheContorl.placeData['']
-    #womanStudentDormitoryList = CacheContorl.placeData['']
-    #teacherDormitoryList = CacheContorl.placeData['']
+    teacherDormitory = CacheContorl.placeData['TeacherDormitory']
+    maleDormitory = {}
+    femaleDormitory = {}
+    for key in CacheContorl.placeData:
+        if 'FemaleDormitory' in key:
+            femaleDormitory[key] = CacheContorl.placeData[key]
+        elif 'MaleDormitory' in key:
+            maleDormitory[key] = CacheContorl.placeData[key]
+    basement = CacheContorl.placeData['Basement']
+
 
 def initCharacterPosition():
     '''
