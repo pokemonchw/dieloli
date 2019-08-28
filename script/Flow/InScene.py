@@ -9,9 +9,9 @@ def getInScene_func():
     '''
     PyCmd.clr_cmd()
     scenePath = CacheContorl.characterData['character']['0']['Position']
-    MapHandle.sortSceneCharacterId(scenePath)
-    CacheContorl.nowMap = MapHandle.getMapForPath(scenePath)
     scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
+    MapHandle.sortSceneCharacterId(scenePathStr)
+    CacheContorl.nowMap = MapHandle.getMapForPath(scenePath)
     sceneData = CacheContorl.sceneData[scenePathStr].copy()
     sceneCharacterList = sceneData['SceneCharacterData']
     if '0' not in sceneCharacterList:
@@ -19,18 +19,18 @@ def getInScene_func():
         sceneCharacterList = sceneCharacterList + characterIdList
         CacheContorl.sceneData[scenePathStr]['SceneCharacterData'] = sceneCharacterList
     if len(sceneCharacterList) > 1 and CacheContorl.characterData['characterId'] == '0':
-        nowNameList = MapHandle.getSceneCharacterNameList(scenePath)
+        nowNameList = MapHandle.getSceneCharacterNameList(scenePathStr)
         nowNameList.remove(CacheContorl.characterData['character']['0']['Name'])
-        CacheContorl.characterData['characterId'] = MapHandle.getCharacterIdByCharacterName(nowNameList[0],scenePath)
+        CacheContorl.characterData['characterId'] = MapHandle.getCharacterIdByCharacterName(nowNameList[0],scenePathStr)
         if CacheContorl.oldCharacterId != '0':
             CacheContorl.characterData['characterId'] = CacheContorl.oldCharacterId
             CacheContorl.oldCharacterId = '0'
     if len(sceneCharacterList) > 1:
-        seeScene_func('0')
+        seeScene_func(True)
     else:
-        seeScene_func('1')
+        seeScene_func(False)
 
-def seeScene_func(judge):
+def seeScene_func(judge:bool):
     '''
     用于查看当前场景界面的流程
     Keyword argument:
@@ -40,11 +40,12 @@ def seeScene_func(judge):
         inputS = []
         InScenePanel.seeScenePanel()
         scenePath = CacheContorl.characterData['character']['0']['Position']
-        sceneCharacterNameList = MapHandle.getSceneCharacterNameList(scenePath)
+        scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
+        sceneCharacterNameList = MapHandle.getSceneCharacterNameList(scenePathStr)
         if len(sceneCharacterNameList) == 1:
             CacheContorl.characterData['characterId'] = '0'
         inSceneCmdList1 = []
-        if judge == '0':
+        if judge:
             if CacheContorl.panelState['SeeSceneCharacterListPage'] == '0':
                 inputS = inputS + InScenePanel.seeSceneCharacterListPanel()
                 inSceneCmdList1 = InScenePanel.changeSceneCharacterListPanel()
@@ -60,8 +61,8 @@ def seeScene_func(judge):
         characterMax = CharacterHandle.getCharacterIndexMax() - 1
         pageMax = math.floor(characterMax / nameListMax)
         if yrn in sceneCharacterNameList:
-            CacheContorl.characterData['characterId'] = MapHandle.getCharacterIdByCharacterName(yrn,scenePath)
-        elif judge == '0' and yrn not in inSceneCmdList2 and yrn != 'SeeSceneCharacterListPage':
+            CacheContorl.characterData['characterId'] = MapHandle.getCharacterIdByCharacterName(yrn,scenePathStr)
+        elif judge and yrn not in inSceneCmdList2 and yrn != 'SeeSceneCharacterListPage':
             if yrn == inSceneCmdList1[0]:
                 CacheContorl.panelState['SeeSceneCharacterListPanel'] = 0
             elif yrn == inSceneCmdList1[1]:

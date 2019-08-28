@@ -220,10 +220,10 @@ def initCharacterKnowledge():
         classGrade = 11
         if characterAge <= 18 and characterAge >= 7:
             classGrade = characterAge - 7
-        character = initExperienceForGrade(classGrade,character)
+        initExperienceForGrade(classGrade,character)
         CacheContorl.characterData['character'][i] = character
         if characterAge > 18:
-            character = initTeacherKnowledge(character)
+            initTeacherKnowledge(character)
             for course in courseKnowledgeData:
                 if course not in CacheContorl.teacherCourseExperience:
                     CacheContorl.teacherCourseExperience.setdefault(course,{})
@@ -236,7 +236,7 @@ def initCharacterKnowledge():
                             nowCourseExperience += character['Knowledge'][knowledge][skill]
                 CacheContorl.teacherCourseExperience[course][i] = nowCourseExperience
 
-def initTeacherKnowledge(character):
+def initTeacherKnowledge(character:dict) -> dict:
     '''
     按年龄修正教师知识等级
     '''
@@ -247,10 +247,9 @@ def initTeacherKnowledge(character):
             character['Knowledge'][knowledge][skill] += character['Knowledge'][knowledge][skill] / 12 * studyYear * random.uniform(0.25,0.75)
     for language in character['Language']:
         character['Knowledge'][knowledge][skill] += character['Language'][language] / 12 * studyYear * random.uniform(0.25,0.75)
-    return character
 
 courseData = TextLoading.getGameData(TextLoading.course)
-def initExperienceForGrade(classGrade,character):
+def initExperienceForGrade(classGrade:str,character:dict):
     '''
     按年级生成角色初始经验数据
     '''
@@ -278,5 +277,4 @@ def initExperienceForGrade(classGrade,character):
                         character['Knowledge'][knowledge][skill] += skillExperience
                     else:
                         character['Knowledge'][knowledge][skill] = skillExperience
-    return character
 

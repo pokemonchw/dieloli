@@ -8,7 +8,7 @@ NO_EVENT_FUNC='no_event_func'
 # 初始化函数
 _main_flow = None
 
-def init(main_flow):
+def init(main_flow:'function'):
     '''
     游戏流程初始化
     Keyword argument:
@@ -46,7 +46,7 @@ def init(main_flow):
 
     run_main_flow()
 
-def run(main_func):
+def run(main_func:'function'):
     '''
     执行游戏主流程
     Keyword arguments:
@@ -56,7 +56,7 @@ def run(main_func):
         init(main_func)
     IoInit.run(_init)
 
-def console_log(string):
+def console_log(string:str):
     '''
     向后台打印日志
     Keyword arguments:

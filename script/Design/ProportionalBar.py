@@ -1,4 +1,4 @@
-def getProportionalBar(valueName,maxValue,value,barid):
+def getProportionalBar(valueName:str,maxValue:int,value:int,barid:str) -> str:
     '''
     通用用于计算比例条的函数
     Keyword arguments:
@@ -16,7 +16,7 @@ def getProportionalBar(valueName,maxValue,value,barid):
     proportionBar = str(valueName) + '[' + proportionBar + ']' + '(' + str(value) + '/' + str(maxValue) + ')'
     return proportionBar
 
-def getCountBar(valueName,maxValue,value,barid):
+def getCountBar(valueName:str,maxValue:int,value:int,barid:str) -> str:
     '''
     通用用于计算计数条的函数
     Keyword arguments:

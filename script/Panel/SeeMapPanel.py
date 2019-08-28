@@ -5,7 +5,7 @@ panelStateTextData = TextLoading.getTextData(TextLoading.cmdPath,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
 panelStateOffText = panelStateTextData[0]
 
-def seeMapPanel():
+def seeMapPanel() -> list:
     '''
     地图绘制面板
     '''
@@ -18,7 +18,7 @@ def seeMapPanel():
     inputS = inputS + MapHandle.printMap(nowMap)
     return inputS
 
-def seeMovePathPanel():
+def seeMovePathPanel() -> dict:
     '''
     当前场景可直接通往的移动路径绘制面板
     '''
@@ -41,7 +41,8 @@ def seeMovePathPanel():
     if len(scenePathList) > 0:
         sceneCmd = []
         for scene in scenePathList:
-            loadSceneData = MapHandle.getSceneDataForMap(nowMap, scene)
+            nowMapStr = MapHandle.getMapSystemPathStrForList(nowMap)
+            loadSceneData = MapHandle.getSceneDataForMap(nowMapStr, scene)
             sceneName = loadSceneData['SceneName']
             sceneCmd.append(sceneName)
         yrn = CmdButtonQueue.optionstr(cmdList=None, cmdListData=sceneCmd, cmdColumn=4, askfor=False, cmdSize='center')
@@ -52,7 +53,7 @@ def seeMovePathPanel():
     EraPrint.pline()
     return {'inputS':inputS,'scenePathList':scenePathList}
 
-def showSceneNameListPanel():
+def showSceneNameListPanel() -> str:
     '''
     地图下场景名称绘制面板
     '''
@@ -75,7 +76,7 @@ def showSceneNameListPanel():
     EraPrint.plittleline()
     return 'SeeSceneNameListPanel'
 
-def backScenePanel(startId):
+def backScenePanel(startId:str) -> list:
     '''
     查看场景页面基础命令绘制面板
     Keyword arguments:

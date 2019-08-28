@@ -25,7 +25,7 @@ def initCharacterBehavior():
     for npc in npcList:
         characterOccupationJudge(npc)
 
-def characterOccupationJudge(characterId):
+def characterOccupationJudge(characterId:str):
     '''
     判断角色职业并指定对应行为树
     Keyword arguments:

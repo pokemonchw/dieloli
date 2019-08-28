@@ -1,6 +1,6 @@
 from script.Core import CacheContorl
 
-def panelStateChange(panelId):
+def panelStateChange(panelId:str):
     '''
     改变面板状态，若该面板当前状态为0，则更改为1，或者反过来
     Keyword arguments:

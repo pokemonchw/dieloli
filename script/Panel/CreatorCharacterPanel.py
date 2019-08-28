@@ -1,7 +1,7 @@
 from script.Core import CacheContorl,EraPrint,TextLoading,PyCmd,GameInit,TextHandle
 from script.Design import AttrCalculation,CmdButtonQueue
 
-def inputNamePanel():
+def inputNamePanel() -> str:
     '''
     请求玩家输入姓名面板
     '''
@@ -30,7 +30,7 @@ def startInputNamePanel():
             inputState = 1
             CacheContorl.temporaryCharacter['Name'] = characterName
 
-def inputNickNamePanel():
+def inputNickNamePanel() -> str:
     '''
     请求玩家输入昵称面板
     '''
@@ -59,7 +59,7 @@ def startInputNickNamePanel():
             CacheContorl.temporaryCharacter['NickName'] = characterNickName
     EraPrint.p('\n')
 
-def inputSelfNamePanel():
+def inputSelfNamePanel() -> str:
     '''
     请求玩家输入自称面板
     '''
@@ -89,7 +89,7 @@ def startInputSelfName():
             CacheContorl.temporaryCharacter['SelfName'] = characterSelfName
     EraPrint.p('\n')
 
-def inputSexPanel():
+def inputSexPanel() -> str:
     '''
     请求玩家选择性别面板
     '''
@@ -101,7 +101,7 @@ def inputSexPanel():
     EraPrint.p('\n')
     return yrn
 
-def inputSexChoicePanel():
+def inputSexChoicePanel() -> str:
     '''
     玩家性别选择面板
     '''
@@ -111,7 +111,7 @@ def inputSexChoicePanel():
     EraPrint.p('\n')
     return yrn
 
-def attributeGenerationBranchPanel():
+def attributeGenerationBranchPanel() -> str:
     '''
     玩家确认进行详细设置面板
     '''
@@ -123,7 +123,7 @@ def attributeGenerationBranchPanel():
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu)
     return yrn
 
-def detailedSetting1Panel():
+def detailedSetting1Panel() -> str:
     '''
     询问玩家年龄模板面板
     '''
@@ -133,7 +133,7 @@ def detailedSetting1Panel():
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting1)
     return yrn
 
-def detailedSetting2Panel():
+def detailedSetting2Panel() -> str:
     '''
     询问玩家动物特征面板
     '''
@@ -143,7 +143,7 @@ def detailedSetting2Panel():
     yrn = CmdButtonQueue.optionstr(CmdButtonQueue.detailedsetting2, 5, 'center', True)
     return yrn
 
-def detailedSetting3Panel():
+def detailedSetting3Panel() -> str:
     '''
     询问玩家性经验程度面板
     '''
@@ -153,7 +153,7 @@ def detailedSetting3Panel():
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting3)
     return yrn
 
-def detailedSetting4Panel():
+def detailedSetting4Panel() -> str:
     '''
     询问玩家勇气程度面板
     '''
@@ -163,7 +163,7 @@ def detailedSetting4Panel():
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting4)
     return yrn
 
-def detailedSetting5Panel():
+def detailedSetting5Panel() -> str:
     '''
     询问玩家开朗程度面板
     '''
@@ -173,7 +173,7 @@ def detailedSetting5Panel():
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting5)
     return yrn
 
-def detailedSetting6Panel():
+def detailedSetting6Panel() -> str:
     '''
     询问玩家自信程度面板
     '''
@@ -183,7 +183,7 @@ def detailedSetting6Panel():
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting6)
     return yrn
 
-def detailedSetting7Panel():
+def detailedSetting7Panel() -> str:
     '''
     询问玩家友善程度面板
     '''
@@ -194,7 +194,7 @@ def detailedSetting7Panel():
     return yrn
 
 # 详细设置属性8:询问玩家体型
-def detailedSetting8Panel():
+def detailedSetting8Panel() -> str:
     '''
     询问玩家肥胖程度面板
     '''

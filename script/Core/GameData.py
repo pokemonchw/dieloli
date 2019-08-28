@@ -6,13 +6,13 @@ import os
 
 _gamedata = {}
 
-def gamedata():
+def gamedata() -> dict:
     '''
     获取游戏数据
     '''
     return _gamedata
 
-def _loaddir(dataPath):
+def _loaddir(dataPath:str):
     '''
     将路径下的游戏数据传入_gamedata
     Keyword arguments:
@@ -22,7 +22,7 @@ def _loaddir(dataPath):
 
 sceneData = {}
 mapData = {}
-def loadDirNow(dataPath):
+def loadDirNow(dataPath:str):
     '''
     获取路径下的游戏数据
     Keyword arguments:
@@ -69,7 +69,7 @@ def loadDirNow(dataPath):
                 nowData[i] = loadDirNow(nowPath)
     return nowData
 
-def getSortedMapPathData(mapData):
+def getSortedMapPathData(mapData:dict) -> dict:
     '''
     获取地图下各节点到目标节点的最短路径数据
     Keyword arguments:
@@ -92,7 +92,7 @@ def getSortedMapPathData(mapData):
         sortedPathData.update(newData)
     return sortedPathData
 
-def getMapSystemPathForPath(nowPath):
+def getMapSystemPathForPath(nowPath:str) -> list:
     '''
     从地图文件路径获取游戏地图系统路径
     Keyword arguments:
@@ -106,13 +106,13 @@ def getMapSystemPathForPath(nowPath):
     mapSystemPath = mapSystemPath[1:]
     return mapSystemPath
 
-def getMapSystemPathStr(nowPath):
+def getMapSystemPathStr(nowPath:list) -> str:
     '''
     将游戏地图系统路径转换为字符串
     '''
     return os.sep.join(nowPath)
 
-def getPrintMapData(mapDraw):
+def getPrintMapData(mapDraw:str) -> dict:
     '''
     获取绘制地图的富文本和按钮数据
     Keyword arguments:
@@ -150,7 +150,7 @@ def getPrintMapData(mapDraw):
         mapXCmdIdData[mapXListId] = cmdIdList
     return {"Draw":newMapYList,"Cmd":mapXListCmdData,"CmdId":mapXCmdIdData}
 
-def getPathList(rootPath):
+def getPathList(rootPath:str) -> list:
     '''
     获取路径下所有子目录列表
     Keyword arguments:

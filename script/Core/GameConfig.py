@@ -3,7 +3,7 @@ from script.Core import GameData,GamePathConfig,JsonHandle
 
 gamepath = GamePathConfig.gamepath
 
-def loadConfigData():
+def loadConfigData() -> dict:
     '''
     读取游戏配置数据
     '''
@@ -11,15 +11,17 @@ def loadConfigData():
     configData = JsonHandle._loadjson(configPath)
     return configData
 
-def getFontData(listId):
+def getFontData(fontId:str) -> dict:
     '''
     读取游戏字体样式配置数据
+    Keyword arguments:
+    listId -- 字体样式
     '''
     FontPath = os.path.join(gamepath,'data','FontConfig.json')
     FontData = JsonHandle._loadjson(FontPath)
-    return FontData[listId]
+    return FontData[fontId]
 
-def getFontDataList():
+def getFontDataList() -> list:
     '''
     读取游戏字体样式配置列表
     '''

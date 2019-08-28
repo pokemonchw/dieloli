@@ -1,7 +1,7 @@
 from script.Core import TextLoading,EraPrint,CacheContorl,GameConfig,PyCmd,TextHandle
 from script.Design import CharacterHandle,CmdButtonQueue,AttrText
 
-def seeCharacterListPanel(maxPage):
+def seeCharacterListPanel(maxPage:int) -> list:
     '''
     查看角色列表面板
     Keyword arguments:
@@ -12,7 +12,6 @@ def seeCharacterListPanel(maxPage):
     inputS = []
     pageId = int(CacheContorl.panelState['SeeCharacterListPanel'])
     pageShow = int(GameConfig.characterlist_show)
-    maxPage = int(maxPage)
     characterMax = CharacterHandle.getCharacterIndexMax()
     if pageId == maxPage:
         showPageStart = pageShow * pageId
@@ -40,7 +39,7 @@ def seeCharacterListPanel(maxPage):
     EraPrint.p('\n')
     return inputS
 
-def askForSeeCharacterListPanel(startId):
+def askForSeeCharacterListPanel(startId:str) -> list:
     '''
     切换角色列表页面处理面板
     Keyword arguments:

@@ -1,6 +1,6 @@
 from script.Core import GameConfig,CacheContorl,TextLoading,Dictionaries
 
-def setRichTextPrint(textMessage,defaultStyle):
+def setRichTextPrint(textMessage:str,defaultStyle:str) -> list:
     '''
     获取文本的富文本样式列表
     Keyword arguments:
@@ -50,7 +50,7 @@ def setRichTextPrint(textMessage,defaultStyle):
                     styleList.append(CacheContorl.outputTextStyle)
     return styleList
 
-def removeRichCache(string):
+def removeRichCache(string:str) -> str:
     '''
     移除文本中的富文本标签
     Keyword arguments:

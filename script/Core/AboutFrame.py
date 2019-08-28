@@ -1,8 +1,8 @@
 from script.Core import TextLoading, GameConfig
-from tkinter import Label, Tk
+from tkinter import Label, Tk, Event
 import webbrowser
 
-def gohome(event):
+def gohome(event:Event):
     '''
     通过浏览器打开到游戏主页的链接
     Keyword arguments:
@@ -10,7 +10,7 @@ def gohome(event):
     '''
     webbrowser.open(r"https://github.com/pokemonchw/dieloli")
 
-def golicense(event):
+def golicense(event:Event):
     '''
     通过浏览器打开协议链接
     keyword arguments:

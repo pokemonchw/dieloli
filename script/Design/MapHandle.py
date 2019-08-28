@@ -1,13 +1,14 @@
 from script.Core import EraPrint,PyCmd,CacheContorl,ValueHandle,TextHandle
 import os
 
-def printMap(mapPath):
+def printMap(mapPath:list) -> list:
     '''
     按地图路径绘制地图
     Ketword arguments:
     mapPath -- 地图路径
     '''
-    mapDraw = getMapDrawForMapPath(mapPath)
+    mapPathStr = getMapSystemPathStrForList(mapPath)
+    mapDraw = getMapDrawForMapPath(mapPathStr)
     characterPosition = CacheContorl.characterData['character']['0']['Position']
     characterNowSceneId = getSceneIdInMapForScenePathOnMapPath(characterPosition,mapPath)
     inputS = []
@@ -46,16 +47,16 @@ def printMap(mapPath):
         EraPrint.p('\n')
     return inputS
 
-def getMapDrawForMapPath(mapPath):
+def getMapDrawForMapPath(mapPathStr:str) -> str:
     '''
     从地图路径获取地图绘制数据
     Keyword arguments:
     mapPath -- 地图路径
     '''
-    mapData = getMapDataForMapPath(mapPath)
+    mapData = getMapDataForMapPath(mapPathStr)
     return mapData['MapDraw']
 
-def getSceneIdInMapForScenePathOnMapPath(scenePath,mapPath):
+def getSceneIdInMapForScenePathOnMapPath(scenePath:list,mapPath:list) -> list:
     '''
     获取场景在地图上的相对位置
     Keyword arguments:
@@ -64,7 +65,7 @@ def getSceneIdInMapForScenePathOnMapPath(scenePath,mapPath):
     '''
     return scenePath[len(mapPath)]
 
-def getMapForPath(scenePath):
+def getMapForPath(scenePath:list) -> list:
     '''
     查找场景所在地图路径
     Keyword arguments:
@@ -76,43 +77,39 @@ def getMapForPath(scenePath):
         return mapPath
     return getMapForPath(mapPath)
 
-def getMapDataForMapPath(mapPath):
+def getMapDataForMapPath(mapPathStr:str) ->dict:
     '''
     从地图路径获取地图数据
     Keyword arguments:
     mapPath -- 地图路径
     '''
-    mapData = CacheContorl.mapData.copy()
-    if isinstance(mapPath,list):
-        mapPath = getMapSystemPathStrForList(mapPath)
-    mapData = mapData[mapPath]
-    return mapData
+    return CacheContorl.mapData[mapPathStr].copy()
 
-def getSceneListForMap(mapPath):
+def getSceneListForMap(mapPathStr:str) -> list:
     '''
     获取地图下所有场景
     Keyword arguments:
     mapPath -- 地图路径
     '''
-    mapData = getMapDataForMapPath(mapPath)
+    mapData = getMapDataForMapPath(mapPathStr)
     sceneList = list(mapData['PathEdge'].keys())
     return sceneList
 
-def getSceneNameListForMapPath(mapPath):
+def getSceneNameListForMapPath(mapPathStr:str):
     '''
     获取地图下所有场景的名字
     Keyword arguments:
     mapPath -- 地图路径
     '''
-    sceneList = getSceneListForMap(mapPath)
+    sceneList = getSceneListForMap(mapPathStr)
     sceneNameData = {}
     for scene in sceneList:
-        loadSceneData = getSceneDataForMap(mapPath,scene)
+        loadSceneData = getSceneDataForMap(mapPathStr,scene)
         sceneName = loadSceneData['SceneName']
         sceneNameData[scene] = sceneName
     return sceneNameData
 
-def characterMoveScene(oldScenePath,newScenePath,characterId):
+def characterMoveScene(oldScenePath:list,newScenePath:list,characterId:str):
     '''
     将角色移动至新场景
     Keyword arguments:
@@ -122,17 +119,13 @@ def characterMoveScene(oldScenePath,newScenePath,characterId):
     '''
     oldScenePathStr = getMapSystemPathStrForList(oldScenePath)
     newScenePathStr = getMapSystemPathStrForList(newScenePath)
-    oldSceneCharacterData = CacheContorl.sceneData[oldScenePathStr]["SceneCharacterData"]
-    newSceneCharacterData = CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"]
-    if characterId in oldSceneCharacterData:
-        del oldSceneCharacterData[characterId]
-        CacheContorl.sceneData[oldScenePathStr]["SceneCharacterData"] = oldSceneCharacterData
-    if characterId not in newSceneCharacterData:
+    if characterId in CacheContorl.sceneData[oldScenePathStr]['SceneCharacterData']:
+        del CacheContorl.sceneData[oldScenePathStr]["SceneCharacterData"][characterId]
+    if characterId not in CacheContorl.sceneData[newScenePathStr]['SceneCharacterData']:
         CacheContorl.characterData['character'][characterId]['Position'] = newScenePath
-        newSceneCharacterData[characterId] = 0
-        CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"] = newSceneCharacterData
+        CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"][characterId] = 0
 
-def getMapSystemPathStrForList(nowList):
+def getMapSystemPathStrForList(nowList:list):
     '''
     将地图路径列表数据转换为字符串
     Keyword arguments:
@@ -142,7 +135,7 @@ def getMapSystemPathStrForList(nowList):
         return os.sep.join(nowList)
     return nowList
 
-def getPathfinding(mapPath,nowNode,targetNode):
+def getPathfinding(mapPathStr:str,nowNode:str,targetNode:str) -> 'str_End,list':
     '''
     查询寻路路径
     Keyword arguments:
@@ -150,13 +143,12 @@ def getPathfinding(mapPath,nowNode,targetNode):
     nowNode -- 当前节点相对位置
     targetNode -- 目标节点相对位置
     '''
-    mapPathStr = getMapSystemPathStrForList(mapPath)
     if nowNode == targetNode:
         return 'End'
     else:
-        return CacheContorl.mapData[mapPathStr]['SortedPath'][nowNode][str(targetNode)]
+        return CacheContorl.mapData[mapPathStr]['SortedPath'][nowNode][targetNode]
 
-def getSceneToSceneMapList(nowScenePath,targetScenePath):
+def getSceneToSceneMapList(nowScenePath:list,targetScenePath:list) -> 'str_common,list':
     '''
     获取场景到场景之间需要经过的地图列表
     如果两个场景属于同一地图并在同一层级，则返回common
@@ -176,7 +168,7 @@ def getSceneToSceneMapList(nowScenePath,targetScenePath):
         commonMapToTargetScene = ValueHandle.reverseArrayList(targetSceneToCommonMap)
         return nowSceneToCommonMap + commonMapToTargetScene[1:]
 
-def getCommonMapForScenePath(sceneAPath,sceneBPath):
+def getCommonMapForScenePath(sceneAPath:list,sceneBPath:list) -> list:
     '''
     查找场景共同所属地图
     Keyword arguments:
@@ -197,7 +189,7 @@ def getCommonMapForScenePath(sceneAPath,sceneBPath):
                 break
         return getMapPathForTrue(hierarchy)
 
-def getMapHierarchyListForScenePath(nowScenePath,targetScenePath):
+def getMapHierarchyListForScenePath(nowScenePath:list,targetScenePath:list) -> list:
     '''
     查找当前场景到目标场景之间的层级列表(仅当当前场景属于目标场景的子场景时可用)
     Keyword arguments:
@@ -216,7 +208,7 @@ def getMapHierarchyListForScenePath(nowScenePath,targetScenePath):
             break
     return hierarchyList
 
-def getMapPathForTrue(mapPath):
+def getMapPathForTrue(mapPath:list) -> list:
     '''
     判断地图路径是否是有效的地图路径，若不是，则查找上层路径，直到找到有效地图路径并返回
     Keyword arguments:
@@ -229,7 +221,7 @@ def getMapPathForTrue(mapPath):
         newMapPath = mapPath[:-1]
         return getMapPathForTrue(newMapPath)
 
-def judgeSceneIsAffiliation(nowScenePath,targetScenePath):
+def judgeSceneIsAffiliation(nowScenePath:list,targetScenePath:list) -> str:
     '''
     获取场景所属关系
     当前场景属于目标场景的子场景 -> 返回'subordinate'
@@ -245,7 +237,7 @@ def judgeSceneIsAffiliation(nowScenePath,targetScenePath):
         return 'superior'
     return 'common'
 
-def judgeSceneAffiliation(nowScenePath,targetScenePath):
+def judgeSceneAffiliation(nowScenePath:list,targetScenePath:list) -> str:
     '''
     判断场景有无所属关系
     当前场景属于目标场景的子场景 -> 返回'subordinate'
@@ -260,12 +252,12 @@ def judgeSceneAffiliation(nowScenePath,targetScenePath):
             if nowScenePath[:-1] != []:
                 return judgeSceneAffiliation(nowScenePath[:-1],targetScenePath)
             else:
-                return 'nobelonged'  #2
+                return 'nobelonged'
         else:
-            return 'subordinate'  #1
-    return 'common'  #0
+            return 'subordinate'
+    return 'common'
 
-def getRelationMapListForScenePath(scenePath):
+def getRelationMapListForScenePath(scenePath:list) -> list:
     '''
     获取场景所在所有直接地图(当前场景id为0，所在地图在上层地图相对位置也为0，视为直接地图)位置
     Keyword arguments:
@@ -285,23 +277,23 @@ def getRelationMapListForScenePath(scenePath):
         mapList.append(nowMapPath)
         return mapList
 
-def getSceneDataForMap(mapPath,mapSceneId):
+def getSceneDataForMap(mapPathStr:str,mapSceneId:str) -> dict:
     '''
     载入地图下对应场景数据
     Keyword arguments:
     mapPath -- 地图路径
     mapSceneId -- 场景相对位置
     '''
-    mapPathStr = getMapSystemPathStrForList(mapPath)
     if mapPathStr == '':
-        scenePathStr = str(mapSceneId)
+        scenePathStr = mapSceneId
     else:
         scenePathStr = mapPathStr + os.sep + str(mapSceneId)
+    scenePath = getMapSystemPathForStr(scenePathStr)
     scenePath = getScenePathForTrue(scenePathStr)
     scenePathStr = getMapSystemPathStrForList(scenePath)
     return CacheContorl.sceneData[scenePathStr]
 
-def getScenePathForMapSceneId(mapPath,mapSceneId):
+def getScenePathForMapSceneId(mapPath:list,mapSceneId:str) -> list:
     '''
     从场景在地图中的相对位置获取场景路径
     Keyword arguments:
@@ -313,7 +305,14 @@ def getScenePathForMapSceneId(mapPath,mapSceneId):
     newScenePath = getScenePathForTrue(newScenePath)
     return newScenePath
 
-def getMapSceneIdForScenePath(mapPath,scenePath):
+def getMapSystemPathForStr(pathStr:str) -> list:
+    '''
+    将地图系统路径文本转换为地图系统路径
+    '''
+    pathStr.split(os.sep)
+    return pathStr
+
+def getMapSceneIdForScenePath(mapPath:list,scenePath:list) -> str:
     '''
     从场景路径查找场景在地图中的相对位置
     Keyword arguments:
@@ -322,7 +321,7 @@ def getMapSceneIdForScenePath(mapPath,scenePath):
     '''
     return scenePath[len(mapPath)]
 
-def getScenePathForTrue(scenePath):
+def getScenePathForTrue(scenePath:list) -> list:
     '''
     获取场景的有效路径(当前路径下若不存在场景数据，则获取当前路径下相对位置为0的路径)
     Keyword arguments:
@@ -337,37 +336,37 @@ def getScenePathForTrue(scenePath):
         scenePath.append('0')
         return getScenePathForTrue(scenePath)
 
-def getMapDoorDataForScenePath(scenePath):
+def getMapDoorDataForScenePath(scenePath:list) -> dict:
     '''
     从场景路径获取当前地图到其他地图的门数据
     Keyword arguments:
     scenePath -- 场景路径
     '''
     mapPath = getMapForPath(scenePath)
-    return getMapDoorData(mapPath)
+    mapPathStr = getMapSystemPathStrForList(mapPath)
+    return getMapDoorData(mapPathStr)
 
-def getMapDoorData(mapPath):
+def getMapDoorData(mapPathStr:str) -> dict:
     '''
     获取地图下通往其他地图的门数据
     Keyword arguments:
     mapPath -- 地图路径
     '''
-    mapData = CacheContorl.mapData[mapPath]
+    mapData = CacheContorl.mapData[mapPathStr]
     if "MapDoor" in  mapData:
         return mapData["MapDoor"]
     else:
         return {}
 
-def getSceneCharacterNameList(scenePath,removeOwnCharacter = False):
+def getSceneCharacterNameList(scenePathStr:str,removeOwnCharacter = False) -> list:
     '''
     获取场景上所有角色的姓名列表
     Keyword arguments:
     scenePath -- 场景路径
     removeOwnCharacter -- 从姓名列表中移除主角 (default False)
     '''
-    scenePathStr = getMapSystemPathStrForList(scenePath)
     sceneCharacterData = CacheContorl.sceneData[scenePathStr]['SceneCharacterData']
-    nowSceneCharacterList = sceneCharacterData.copy()
+    nowSceneCharacterList = list(sceneCharacterData.keys())
     nameList = []
     if removeOwnCharacter:
         nowSceneCharacterList.remove('0')
@@ -376,39 +375,35 @@ def getSceneCharacterNameList(scenePath,removeOwnCharacter = False):
         nameList.append(characterName)
     return nameList
 
-def getCharacterIdByCharacterName(characterName,scenePath):
+def getCharacterIdByCharacterName(characterName:str,scenePathStr:str) -> str:
     '''
     获取场景上角色姓名对应的角色id
     Keyword arguments:
     characterName -- 角色姓名
     scenePath -- 场景路径
     '''
-    characterNameList = getSceneCharacterNameList(scenePath)
+    characterNameList = getSceneCharacterNameList(scenePathStr)
     characterNameIndex = characterNameList.index(characterName)
-    characterIdList = getSceneCharacterIdList(scenePath)
+    characterIdList = getSceneCharacterIdList(scenePathStr)
     return characterIdList[characterNameIndex]
 
-def getSceneCharacterIdList(scenePath):
+def getSceneCharacterIdList(scenePathStr:str) -> list:
     '''
     获取场景上所有角色的id列表
     Keyword arguments:
     scenePath -- 场景路径
     '''
-    scenePathStr = getMapSystemPathStrForList(scenePath)
-    sceneCharacterData = CacheContorl.sceneData[scenePathStr]['SceneCharacterData']
-    return sceneCharacterData
+    return list(CacheContorl.sceneData[scenePathStr]['SceneCharacterData'].keys())
 
-def sortSceneCharacterId(scenePath):
+def sortSceneCharacterId(scenePathStr:str):
     '''
     对场景上的角色按好感度进行排序
     Keyword arguments:
     scenePath -- 场景路径
     '''
-    scenePathStr = getMapSystemPathStrForList(scenePath)
     nowSceneCharacterIntimateData = {}
     for character in CacheContorl.sceneData[scenePathStr]['SceneCharacterData']:
         nowSceneCharacterIntimateData[character] = CacheContorl.characterData['character'][character]['Intimate']
     newSceneCharacterIntimateData = sorted(nowSceneCharacterIntimateData.items(),key=lambda x: (x[1],-int(x[0])),reverse=True)
     newSceneCharacterIntimateData = ValueHandle.twoBitArrayToDict(newSceneCharacterIntimateData)
-    newCharacterList = list(newSceneCharacterIntimateData.keys())
-    CacheContorl.sceneData[scenePathStr]['SceneCharacterData'] = newCharacterList
+    CacheContorl.sceneData[scenePathStr]['SceneCharacterData'] = newSceneCharacterIntimateData

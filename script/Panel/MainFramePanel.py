@@ -1,7 +1,7 @@
 from script.Core import EraPrint,CacheContorl,TextLoading,PyCmd
 from script.Design import AttrHandle,AttrText,AttrPrint,GameTime,CmdButtonQueue
 
-def mainFramePanel():
+def mainFramePanel() -> list:
     '''
     游戏主菜单
     '''

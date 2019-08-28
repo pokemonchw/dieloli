@@ -1,7 +1,7 @@
 import random
 import bisect
 
-def twoBitArrayToDict(array,judge=0):
+def twoBitArrayToDict(array:tuple,judge=0) -> dict:
     '''
     将二维数组转换为字典
     Keyword arguments:
@@ -10,7 +10,7 @@ def twoBitArrayToDict(array,judge=0):
     newDict = dict((x, y) for x, y in array)
     return newDict
 
-def getReginList(nowData,judge=0):
+def getReginList(nowData:dict,judge=0) -> dict:
     '''
     按dict中每个value的值对key进行排序，并计算权重区域列表
     Keyword arguments:
@@ -27,7 +27,7 @@ def getReginList(nowData,judge=0):
         regionList[str(regionIndex)] = nowKey
     return regionList
 
-def getRandomForWeight(data):
+def getRandomForWeight(data:dict) -> 'dataKey':
     '''
     按权重随机获取dict中的一个key
     Keyword arguments:
@@ -40,7 +40,7 @@ def getRandomForWeight(data):
     weightRegin = getNextValueForList(nowWeight,weightReginList)
     return weightReginData[str(weightRegin)]
 
-def getNextValueForList(nowInt,intList):
+def getNextValueForList(nowInt:int,intList:list) -> int:
     '''
     获取列表中第一个比指定值大的数
     Keyword arguments:

@@ -7,31 +7,31 @@ gamepath = GamePathConfig.gamepath
 roleAttrPath = os.path.join(gamepath,'data',language,'RoleAttributes.json')
 roleAttrData = JsonHandle._loadjson(roleAttrPath)
 
-def getTemList():
+def getTemList() -> dict:
     '''
     获取人物生成模板
     '''
     return TextLoading.getTextData(TextLoading.attrTemplatePath,'TemList')
 
-def getFeaturesList():
+def getFeaturesList() -> dict:
     '''
     获取特征模板
     '''
     return roleAttrData['Features']
 
-def getAgeTemList():
+def getAgeTemList() -> list:
     '''
     获取年龄模板
     '''
     return list(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem').keys())
 
-def getEngravingList():
+def getEngravingList() -> dict:
     '''
     获取刻印列表
     '''
     return roleAttrData['Default']['Engraving']
 
-def getClothing(sexId):
+def getClothing(sexId:str) -> dict:
     '''
     按性别id获取服装模板
     Keyword arguments:
@@ -39,7 +39,7 @@ def getClothing(sexId):
     '''
     return TextLoading.getTextData(TextLoading.attrTemplatePath,'Equipment')[sexId]
 
-def getSexItem(sexId):
+def getSexItem(sexId:str) -> dict:
     '''
     按性别id获取性道具模板
     Keyword arguments:
@@ -47,13 +47,13 @@ def getSexItem(sexId):
     '''
     return TextLoading.getTextData(TextLoading.attrTemplatePath,'SexItem')[sexId]
 
-def getGold():
+def getGold() -> int:
     '''
     获取默认金钱数据
     '''
     return roleAttrData['Default']['Gold']
 
-def getAttr(temName):
+def getAttr(temName:str) -> dict:
     '''
     按人物生成模板id生成人物属性
     Keyword arguments:
@@ -100,7 +100,7 @@ def getAttr(temName):
         'Language':{}
     }
 
-def getAge(temName):
+def getAge(temName:str) -> int:
     '''
     按年龄模板id随机生成年龄数据
     Keyword arguments:
@@ -111,7 +111,7 @@ def getAge(temName):
     miniAge = int(temData['MiniAge'])
     return random.randint(miniAge,maxAge)
 
-def getHeight(temName,age,Features):
+def getHeight(temName:str,age:int,Features:dict) -> dict:
     '''
     按模板和年龄计算身高
     Keyword arguments:
@@ -148,7 +148,7 @@ def getHeight(temName,age,Features):
         nowHeight = 365 * growthHeight * age + nowHeight
     return {"NowHeight":nowHeight,"GrowthHeight":growthHeight,"ExpectAge":expectAge,"DevelopmentAge":developmentAge,"ExpectHeight":expectHeight}
 
-def getGrowthHeight(nowAge,expectHeight,developmentAge,expectAge):
+def getGrowthHeight(nowAge:int,expectHeight:float,developmentAge:int,expectAge:int) -> dict:
     '''
     计算每日身高增长量
     Keyword arguments:
@@ -167,7 +167,7 @@ def getGrowthHeight(nowAge,expectHeight,developmentAge,expectAge):
         growthHeight = judgeHeight / (nowAge * 365)
     return {'GrowthHeight':growthHeight,'NowHeight':nowHeight}
 
-def getBMI(temName):
+def getBMI(temName:str) -> dict:
     '''
     按体重比例模板生成BMI
     Keyword arguments:
@@ -176,7 +176,7 @@ def getBMI(temName):
     temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'WeightTem')[temName]
     return random.uniform(temData[0],temData[1])
 
-def getBodyFat(sex,temName):
+def getBodyFat(sex:str,temName:str) -> float:
     '''
     按性别和体脂率模板生成体脂率
     Keyword arguments:
@@ -190,7 +190,7 @@ def getBodyFat(sex,temName):
     temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'BodyFatTem')[sexTem][temName]
     return random.uniform(temData[0],temData[1])
 
-def getWeight(bmi,height):
+def getWeight(bmi:float,height:float) -> float:
     '''
     按bmi和身高计算体重
     Keyword arguments:
@@ -200,7 +200,7 @@ def getWeight(bmi,height):
     height = height / 100
     return bmi * height * height
 
-def getMeasurements(temName,height,weight,bodyFat,weightTem):
+def getMeasurements(temName:str,height:float,weight:float,bodyFat:float,weightTem:str) -> dict:
     '''
     计算角色三围
     Keyword arguments:
@@ -229,7 +229,7 @@ def getMeasurements(temName,height,weight,bodyFat,weightTem):
     bust = bust * fix
     return {"Bust": bust, "Waist": newWaist, 'Hip': newHip}
 
-def getMaxHitPoint(temName):
+def getMaxHitPoint(temName:str) -> int:
     '''
     获取最大hp值
     Keyword arguments:
@@ -241,7 +241,7 @@ def getMaxHitPoint(temName):
     impairment = random.randint(0,500)
     return maxHitPoint + addValue - impairment
 
-def getMaxManaPoint(temName):
+def getMaxManaPoint(temName:str) -> int:
     '''
     获取最大mp值
     Keyword arguments:
@@ -253,7 +253,7 @@ def getMaxManaPoint(temName):
     impairment = random.randint(0,500)
     return maxManaPoint + addValue - impairment
 
-def getSexExperience(temName):
+def getSexExperience(temName:str) -> dict:
     '''
     按模板生成角色初始性经验
     Keyword arguments:
@@ -287,7 +287,7 @@ def getSexExperience(temName):
         'penisExperience':penisExperience,
     }
 
-def getSexGrade(sexExperienceData):
+def getSexGrade(sexExperienceData:dict) -> dict:
     '''
     按性经验数据计算性经验等级
     Keyword arguments:
@@ -315,13 +315,12 @@ def getSexGrade(sexExperienceData):
     }
 
 # 计算等级
-def judgeGrade(experience):
+def judgeGrade(experience:int) -> float:
     '''
     按经验数值评定等级
     Keyword arguments:
     experience -- 经验数值
     '''
-    experience = int(experience)
     grade = ''
     if experience < 50:
         grade = 'G'
@@ -355,7 +354,7 @@ def setDefaultCache():
         if feature in featuresTemData:
             CacheContorl.featuresList[feature] = featuresTemData[feature]
 
-def setSexCache(sexName):
+def setSexCache(sexName:str):
     '''
     生成性别对应特征数据并放入CacheContorl.featuresList
     Keyword arguments:
@@ -369,7 +368,7 @@ def setSexCache(sexName):
         if feature in featuresTemData:
             CacheContorl.featuresList[feature] = featuresTemData[feature]
 
-def setAnimalCache(animalName):
+def setAnimalCache(animalName:str):
     '''
     按动物类型追加特征数据
     Keyword arguments:
@@ -378,7 +377,7 @@ def setAnimalCache(animalName):
     animalData = roleAttrData["AnimalFeatures"][animalName]
     setAddFeatures(animalData)
 
-def setAddFeatures(featuresData):
+def setAddFeatures(featuresData:dict):
     '''
     追加特征存入CacheContorl.featuresList
     Keyword arguments:
@@ -391,13 +390,12 @@ def setAddFeatures(featuresData):
         if feature in featuresData:
             CacheContorl.featuresList[feature] = featuresData[feature]
 
-def setAttrDefault(characterId):
+def setAttrDefault(characterId:str):
     '''
     为指定id角色生成默认属性
     Keyword arguments:
     characterId -- 角色id
     '''
-    characterId = str(characterId)
     characterSex = CacheContorl.characterData['character'][characterId]['Sex']
     temData = getAttr(characterSex)
     for key in temData:
@@ -410,12 +408,11 @@ def initTemporaryCharacter():
     '''
     CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
 
-def setAttrOver(characterId):
+def setAttrOver(characterId:str):
     '''
     将临时缓存内的数据覆盖入指定id的角色数据内
     Keyword arguments:
     characterId -- 角色id
     '''
-    characterId = str(characterId)
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     CacheContorl.featuresList = {}

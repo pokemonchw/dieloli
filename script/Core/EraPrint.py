@@ -6,7 +6,7 @@ last_char = '\n'
 #默认输出样式
 def_style = IoInit.style_def
 
-def p(string, style='standard',richTextJudge=True):
+def p(string:str, style='standard',richTextJudge=True):
     '''
     游戏基础的文本绘制实现
     Keyword arguments:
@@ -14,7 +14,6 @@ def p(string, style='standard',richTextJudge=True):
     style -- 文本的默认样式 (default 'standard')
     richTextJudge -- 启用富文本的开关 (default True)
     '''
-    string = str(string)
     if richTextJudge:
         barlist = TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
         styleList = RichText.setRichTextPrint(string, style)
@@ -39,7 +38,7 @@ def p(string, style='standard',richTextJudge=True):
     else:
         IoInit.eraPrint(string,style)
 
-def pimage(imageName,imagePath=''):
+def pimage(imageName:str,imagePath=''):
     '''
     图片绘制在EraPrint中的封装
     Keyword arguments:
@@ -48,7 +47,7 @@ def pimage(imageName,imagePath=''):
     '''
     IoInit.imageprint(imageName, imagePath)
 
-def plt(string):
+def plt(string:str):
     '''
     按预订样式"littletitle(小标题)"绘制文本
     示例:
@@ -70,7 +69,7 @@ def plt(string):
     lineWidth = int(int(width)/2 - int(textWidth)/2 - 2)
     pl('='*lineWidth + '<littletitle>▢' + string + '▢</littletitle>' + '='*lineWidth)
 
-def sontitleprint(string):
+def sontitleprint(string:str):
     '''
     按预订样式"sontitle(子标题)"绘制文本
     示例：
@@ -146,7 +145,7 @@ def printPageLine(sample = ':',string = '',style = 'standard'):
     stringText = fixText + string + fixText
     p(stringText,style)
 
-def pwarn(string, style='warning'):
+def pwarn(string:str, style='warning'):
     '''
     绘制警告信息(将同时在终端打印)
     Keyword arguments:
@@ -159,7 +158,7 @@ def pwarn(string, style='warning'):
     pl(string, style)
     print(string)
 
-def pwait(string, style='standard'):
+def pwait(string:str, style='standard'):
     '''
     绘制文本并等待玩家按下回车或鼠标左键
     Keyword arguments:
@@ -172,7 +171,6 @@ def pwait(string, style='standard'):
     p(string, style)
     FlowHandle.askfor_wait()
 
-#输出一行并等待
 def plwait(string='', style='standard'):
     '''
     绘制文本换行并等待玩家按下回车或鼠标左键
@@ -186,8 +184,7 @@ def plwait(string='', style='standard'):
     pl(string, style)
     FlowHandle.askfor_wait()
 
-#逐字输出
-def pobo(sleepTime,string, style='standard'):
+def pobo(sleepTime:float,string:str, style='standard'):
     '''
     逐字绘制文本
     Keyword arguments:
@@ -220,7 +217,7 @@ def pobo(sleepTime,string, style='standard'):
                 CacheContorl.wframeMouse['wFrameLinesUp'] = 2
             break
 
-def plist(stringList,stringColumn = 1,stringSize = 'left'):
+def plist(stringList:list,stringColumn=1,stringSize='left'):
     '''
     绘制字符串列表
     Keyword arguments:
@@ -267,7 +264,7 @@ def pnextscreen():
         time.sleep(textWait)
     p('\n' * GameConfig.text_hight)
 
-def lcp(sleepTime,string='',style='standard'):
+def lcp(sleepTime:float,string='',style='standard'):
     '''
     将多行文本以居中的对齐方式进行逐字绘制
     Keyword arguments:

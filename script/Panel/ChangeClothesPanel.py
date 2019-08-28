@@ -1,8 +1,7 @@
 from script.Core import EraPrint,TextLoading
 from script.Design import AttrText,CmdButtonQueue
 
-# 查看角色已装备服装列表面板
-def seeCharacterWearClothes(characterId):
+def seeCharacterWearClothes(characterId:str):
     '''
     查看角色已穿戴服装列表面板
     Keyword arguments:
@@ -13,7 +12,7 @@ def seeCharacterWearClothes(characterId):
     characterInfo = AttrText.getCharacterAbbreviationsInfo(characterId)
     EraPrint.p(characterInfo)
 
-def seeCharacterWearClothesCmd():
+def seeCharacterWearClothesCmd() -> str:
     '''
     用于控制查看角色已装备服装列表面板的命令菜单
     '''

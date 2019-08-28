@@ -1,7 +1,7 @@
 from script.Core import TextLoading,EraPrint,CacheContorl
 from script.Design import AttrHandle,ProportionalBar
 
-def printHpAndMpBar(characterId):
+def printHpAndMpBar(characterId:str):
     '''
     绘制角色的hp和mp(有比例图)，自动居中处理，结尾换行
     Keyword arguments:
@@ -21,7 +21,7 @@ def printHpAndMpBar(characterId):
     EraPrint.plist(hpmpBarList, 2, 'center')
     EraPrint.p('\n')
 
-def getHpAndMpText(characterId):
+def getHpAndMpText(characterId:str) -> str:
     '''
     获取角色的hp和mp文本
     Keyword arguments:

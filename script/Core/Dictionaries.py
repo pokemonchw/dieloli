@@ -1,6 +1,6 @@
 from script.Core import CacheContorl
 
-def handleText(string):
+def handleText(string:str) -> str:
     '''
     对文本中的宏进行转义处理
     Keyword arguments:

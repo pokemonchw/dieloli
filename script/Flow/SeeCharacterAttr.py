@@ -43,8 +43,9 @@ def seeAttrOnEveryTime_func():
     while(True):
         characterId = CacheContorl.characterData['characterId']
         if CacheContorl.oldFlowId == 'in_scene':
-            sceneId = CacheContorl.characterData['character']['0']['Position']
-            characterIdList = MapHandle.getSceneCharacterIdList(sceneId)
+            nowScene = CacheContorl.characterData['character']['0']['Position']
+            nowSceneStr = MapHandle.getMapSystemPathStrForList(nowScene)
+            characterIdList = MapHandle.getSceneCharacterIdList(nowSceneStr)
         else:
             characterIdList = list(CacheContorl.characterData['character'].keys())
         characterIdIndex = characterIdList.index(characterId)
@@ -80,7 +81,8 @@ def seeAttrOnEveryTime_func():
                 CacheContorl.panelState['SeeCharacterListPanel'] = nowPageId
             elif CacheContorl.oldFlowId == 'in_scene':
                 scenePath = CacheContorl.characterData['character']['0']['Position']
-                nameList = MapHandle.getSceneCharacterNameList(scenePath,True)
+                scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
+                nameList = MapHandle.getSceneCharacterNameList(scenePathStr,True)
                 nowCharacterName = CacheContorl.characterData['character'][CacheContorl.characterData['characterId']]['Name']
                 try:
                     nowCharacterIndex = nameList.index(nowCharacterName)

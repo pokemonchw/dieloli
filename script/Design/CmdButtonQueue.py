@@ -27,7 +27,7 @@ seecharacterwearclothes = "seeCharacterWearClothes"
 changescenecharacterlist = 'changeSceneCharacterList'
 
 def optionint(
-        cmdList,
+    cmdList:list,
         cmdColumn = 1,
         idSize = 'left',
         idSwitch = True,
@@ -35,7 +35,7 @@ def optionint(
         cmdSize = 'left',
         startId = '0',
         cmdListData=None,
-        lastLine = False):
+        lastLine = False) -> list:
     '''
     批量绘制带id命令列表
     例:
@@ -105,13 +105,13 @@ def optionint(
         return inputI
 
 def optionstr(
-        cmdList,
+    cmdList:str,
         cmdColumn = 1,
         cmdSize = 'left',
         lastLine = False,
         askfor = True,
         cmdListData=None,
-        nullCmd = ''):
+        nullCmd = '') -> list:
     '''
     绘制无id的文本命令列表
     例:

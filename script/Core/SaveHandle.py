@@ -6,19 +6,18 @@ from script.Design import CharacterHandle
 
 gamepath = GamePathConfig.gamepath
 
-def getSaveDirPath(saveId):
+def getSaveDirPath(saveId:str) -> str:
     '''
     按存档id获取存档所在系统路径
     Keyword arguments:
     saveId -- 存档id
     '''
-    saveId = str(saveId)
     savepath = os.path.join(gamepath,'save')
     if not os.path.exists(savepath):
         os.makedirs(savepath)
     return os.path.join(savepath,saveId)
 
-def judgeSaveFileExist(saveId):
+def judgeSaveFileExist(saveId:str) -> str:
     '''
     判断存档id对应的存档是否存在
     Keyword arguments:
@@ -26,10 +25,10 @@ def judgeSaveFileExist(saveId):
     '''
     savePath = getSaveDirPath(saveId)
     if not os.path.exists(savePath):
-        return "0"
-    return "1"
+        return False
+    return True
 
-def establishSave(saveId):
+def establishSave(saveId:str):
     '''
     将游戏数据存入指定id的存档内
     Keyword arguments:
@@ -52,7 +51,7 @@ def establishSave(saveId):
     for dataId in data:
         writeSaveData(saveId,dataId,data[dataId])
 
-def loadSaveInfoHead(saveId):
+def loadSaveInfoHead(saveId:str) -> dict:
     '''
     获取存档的头部信息
     Keyword arguments:
@@ -63,7 +62,7 @@ def loadSaveInfoHead(saveId):
     with open(filePath,'rb') as f:
         return pickle.load(f)
 
-def writeSaveData(saveId,dataId,writeData):
+def writeSaveData(saveId:str,dataId:str,writeData:dict):
     '''
     将存档数据写入文件
     Keyword arguments:
@@ -73,12 +72,12 @@ def writeSaveData(saveId,dataId,writeData):
     '''
     savePath = getSaveDirPath(saveId)
     filePath = os.path.join(savePath,dataId)
-    if judgeSaveFileExist(saveId) == '0':
+    if judgeSaveFileExist(saveId) == False:
         os.makedirs(savePath)
     with open(filePath,'wb') as f:
         pickle.dump(writeData,f)
 
-def loadSave(saveId):
+def loadSave(saveId:str) -> dict:
     '''
     按存档id读取存档数据
     Keyword arguments:
@@ -93,7 +92,7 @@ def loadSave(saveId):
             data[fileName]=pickle.load(f)
     return data
 
-def inputLoadSave(saveId):
+def inputLoadSave(saveId:str):
     '''
     载入存档存档id对应数据，覆盖当前游戏内存
     Keyword arguments:
@@ -110,7 +109,7 @@ def inputLoadSave(saveId):
     CacheContorl.occupationCharacterData = saveData['7']
     CharacterHandle.initCharacterPosition()
 
-def getSavePageSaveId(pageSaveValue,inputId):
+def getSavePageSaveId(pageSaveValue:int,inputId:int) -> int:
     '''
     按存档页计算，当前页面输入数值对应存档id
     Keyword arguments:
@@ -118,12 +117,11 @@ def getSavePageSaveId(pageSaveValue,inputId):
     inputId -- 当前输入数值
     '''
     savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel']) + 1
-    startSaveId = int(pageSaveValue) * (savePanelPage - 1)
-    inputId = int(inputId)
+    startSaveId = pageSaveValue * (savePanelPage - 1)
     saveId = startSaveId + inputId
     return saveId
 
-def removeSave(saveId):
+def removeSave(saveId:str):
     '''
     删除存档id对应存档
     Keyword arguments:

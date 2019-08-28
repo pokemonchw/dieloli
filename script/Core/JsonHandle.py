@@ -1,6 +1,6 @@
 import json
 
-def is_utf8bom(filepath):
+def is_utf8bom(filepath:str) -> bool:
     '''
     判断文件编码是否为utf-8
     Keyword arguments:
@@ -10,7 +10,7 @@ def is_utf8bom(filepath):
         return True
     return False
 
-def _loadjson(filepath):
+def _loadjson(filepath:str) -> dict:
     '''
     载入json文件
     Keyword arguments:

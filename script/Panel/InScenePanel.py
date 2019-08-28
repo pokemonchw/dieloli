@@ -32,7 +32,7 @@ def seeScenePanel():
         PyCmd.pcmd(switch,'SeeSceneCharacterListPage')
     EraPrint.plittleline()
 
-def seeSceneCharacterListPanel():
+def seeSceneCharacterListPanel() -> list:
     '''
     当前场景角色列表面板
     '''
@@ -41,7 +41,8 @@ def seeSceneCharacterListPanel():
     EraPrint.p(seeCharacterText)
     EraPrint.p('\n')
     scenePath = CacheContorl.characterData['character']['0']['Position']
-    nameList = MapHandle.getSceneCharacterNameList(scenePath,True)
+    scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
+    nameList = MapHandle.getSceneCharacterNameList(scenePathStr,True)
     nameList = getNowPageNameList(nameList)
     characterId = CacheContorl.characterData['characterId']
     characterData = CacheContorl.characterData['character'][characterId]
@@ -49,7 +50,7 @@ def seeSceneCharacterListPanel():
     inputS = CmdButtonQueue.optionstr('',cmdColumn=10,cmdSize='center',askfor=False,cmdListData=nameList,nullCmd=characterName)
     return inputS
 
-def changeSceneCharacterListPanel():
+def changeSceneCharacterListPanel() -> list:
     '''
     当前场景角色列表页切换控制面板
     '''
@@ -64,7 +65,7 @@ def changeSceneCharacterListPanel():
     return inputS
 
 # 用于获取当前页面下的名字列表
-def getNowPageNameList(nameList):
+def getNowPageNameList(nameList:list) -> list:
     '''
     获取当前角色列表页面角色姓名列表
     Keyword arguments:
@@ -101,7 +102,7 @@ def seeCharacterInfoPanel():
     EraPrint.p(characterGracesText)
     EraPrint.plittleline()
 
-def jumpCharacterListPagePanel():
+def jumpCharacterListPagePanel() -> str:
     '''
     角色列表页面跳转控制面板
     '''
@@ -114,7 +115,7 @@ def jumpCharacterListPagePanel():
     EraPrint.p(ans)
     return ans
 
-def inSceneButtonPanel(startId):
+def inSceneButtonPanel(startId:int) -> list:
     '''
     场景页面基础控制菜单面板
     Keyword arguments:

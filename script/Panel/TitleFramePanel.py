@@ -11,7 +11,7 @@ def loadGamePanel():
     EraPrint.pobo(1 / 3, TextLoading.getTextData(TextLoading.messagePath, '1'))
     EraPrint.p('\n')
 
-def gameMainPanel():
+def gameMainPanel() -> int:
     '''
     游戏标题界面主面板
     '''

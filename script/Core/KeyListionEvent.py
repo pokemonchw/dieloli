@@ -1,4 +1,5 @@
 from script.Core import MainFrame,PyCmd,CacheContorl
+from tkinter import Event
 
 wframe = MainFrame.root
 
@@ -13,7 +14,7 @@ def onWFrameListion():
     wframe.bind('<Up>',keyUp)
     wframe.bind('<Down>',keyDown)
 
-def mouseLeftCheck(event):
+def mouseLeftCheck(event:Event):
     '''
     鼠标左键事件处理
     Keyword arguments:
@@ -24,7 +25,7 @@ def mouseLeftCheck(event):
     else:
         mouseCheckPush()
 
-def mouseRightCheck(event):
+def mouseRightCheck(event:Event):
     '''
     鼠标右键事件处理
     Keyword arguments:
@@ -37,7 +38,7 @@ def mouseRightCheck(event):
     else:
         mouseCheckPush()
 
-def keyUp(event):
+def keyUp(event:Event):
     '''
     键盘上键事件处理
     Keyword arguments:
@@ -54,7 +55,7 @@ def keyUp(event):
         except KeyError:
             CacheContorl.inputPosition['position'] = CacheContorl.inputPosition['position'] + 1
 
-def keyDown(event):
+def keyDown(event:Event):
     '''
     键盘下键事件处理
     Keyword arguments:

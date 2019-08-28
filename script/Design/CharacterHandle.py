@@ -21,7 +21,7 @@ def initCharacterList():
     initCharacterDormitory()
     initCharacterPosition()
 
-def initCharacter(nowId,character):
+def initCharacter(nowId:str,character:dict):
     '''
     按id生成角色属性
     Keyword arguments:
@@ -82,7 +82,7 @@ def initCharacter(nowId,character):
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
 
-def characterAgeFeatureHandle(ageTem,characterSex):
+def characterAgeFeatureHandle(ageTem:str,characterSex:str):
     '''
     按年龄模板生成角色特性数据
     Keyword arguments:
@@ -108,7 +108,7 @@ def initCharacterTem():
     npcData += [getDirCharacterTem(character) for character in nowCharacterList]
     CacheContorl.npcTemData = npcData
 
-def getDirCharacterTem(character):
+def getDirCharacterTem(character:str) -> dict:
     '''
     获取预设角色模板数据
     '''
@@ -123,7 +123,7 @@ ageWeightData = {
 }
 ageWeightReginData = ValueHandle.getReginList(ageWeightData)
 ageWeightReginList = list(map(int,ageWeightReginData.keys()))
-def getRandomNpcData():
+def getRandomNpcData() -> list:
     '''
     生成所有随机npc的数据模板
     '''
@@ -158,7 +158,7 @@ for i in sexWeightData:
     sexWeightMax += int(sexWeightData[i])
 sexWeightReginData = ValueHandle.getReginList(sexWeightData)
 sexWeightReginList = list(map(int,sexWeightReginData.keys()))
-def getRandNpcSex():
+def getRandNpcSex() -> str:
     '''
     随机获取npc性别
     '''
@@ -167,7 +167,7 @@ def getRandNpcSex():
     return sexWeightReginData[str(weightRegin)]
 
 fatWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'FatWeight')
-def getRandNpcFatTem(agejudge):
+def getRandNpcFatTem(agejudge:str) -> str:
     '''
     按人群年龄段体重分布比例随机生成体重模板
     Keyword arguments:
@@ -178,7 +178,7 @@ def getRandNpcFatTem(agejudge):
     return nowFatTem
 
 bodyFatWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'BodyFatWeight')
-def getRandNpcBodyFatTem(ageJudge,bmiTem):
+def getRandNpcBodyFatTem(ageJudge:str,bmiTem:str) -> str:
     '''
     按年龄段体脂率分布比例随机生成体脂率模板
     Keyword arguments:
@@ -189,7 +189,7 @@ def getRandNpcBodyFatTem(ageJudge,bmiTem):
     return ValueHandle.getRandomForWeight(nowBodyFatData)
 
 ageTemWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeWeight')
-def getRandNpcAgeTem(agejudge):
+def getRandNpcAgeTem(agejudge:str) -> int:
     '''
     按年龄断随机生成npc年龄
     Keyword arguments:
@@ -199,7 +199,7 @@ def getRandNpcAgeTem(agejudge):
     nowAgeTem = ValueHandle.getRandomForWeight(nowAgeWeightData)
     return nowAgeTem
 
-def getCharacterIndexMax():
+def getCharacterIndexMax() -> int:
     '''
     获取角色数量
     '''
@@ -207,7 +207,7 @@ def getCharacterIndexMax():
     characterDataMax = len(characterData.keys()) - 1
     return characterDataMax
 
-def getCharacterIdList():
+def getCharacterIdList() -> list:
     '''
     获取角色id列表
     '''
@@ -222,6 +222,9 @@ def initCharacterDormitory():
     for character in CacheContorl.characterData['character']:
         characterData[character] = CacheContorl.characterData['character'][character]['Age']
     characterData = [k[0] for k in sorted(characterData.items(),key=lambda x:x[1])]
+    #manStudentDormitoryList = CacheContorl.placeData['']
+    #womanStudentDormitoryList = CacheContorl.placeData['']
+    #teacherDormitoryList = CacheContorl.placeData['']
 
 def initCharacterPosition():
     '''
@@ -229,4 +232,4 @@ def initCharacterPosition():
     '''
     for character in CacheContorl.characterData['character']:
         characterPosition = CacheContorl.characterData['character'][character]['Position']
-        MapHandle.characterMoveScene(characterPosition,'0',character)
+        MapHandle.characterMoveScene(characterPosition,['0'],character)

@@ -2,7 +2,7 @@ from script.Core import TextLoading,EraPrint,PyCmd
 from script.Design import CmdButtonQueue
 
 # 查看帮助信息面板
-def gameHelpPanel():
+def gameHelpPanel() -> str:
     '''
     查看帮助信息面板
     '''

@@ -15,7 +15,7 @@ def establishSaveInfoHeadPanel():
     saveFrameTitle = TextLoading.getTextData(TextLoading.stageWordPath, '70')
     EraPrint.plt(saveFrameTitle)
 
-def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
+def seeSaveListPanel(pageSaveValue:int,lastSavePageValue:int,autoSave = False) -> list:
     '''
     查看存档页面面板
     Keyword arguments:
@@ -104,7 +104,7 @@ def seeSaveListPanel(pageSaveValue,lastSavePageValue,autoSave = False):
             EraPrint.p('\n')
     return inputS
 
-def askForChangeSavePagePanel(startId):
+def askForChangeSavePagePanel(startId:str) -> list:
     '''
     询问切换存档页面面板
     Keyword arguments:
@@ -119,7 +119,7 @@ def askForChangeSavePagePanel(startId):
     yrn = CmdButtonQueue.optionint(None, 3, askfor=False, cmdSize='center', startId=startId, cmdListData=cmdList)
     return yrn
 
-def askForOverlaySavePanel():
+def askForOverlaySavePanel() -> list:
     '''
     询问覆盖存档面板
     '''
@@ -132,7 +132,7 @@ def askForOverlaySavePanel():
     yrn = CmdButtonQueue.optionint(None, askfor=False, cmdListData=cmdList)
     return yrn
 
-def confirmationOverlaySavePanel():
+def confirmationOverlaySavePanel() -> list:
     '''
     确认覆盖存档面板
     '''
@@ -145,7 +145,7 @@ def confirmationOverlaySavePanel():
     yrn = CmdButtonQueue.optionint(None, askfor=False, cmdListData=cmdList)
     return yrn
 
-def askLoadSavePanel():
+def askLoadSavePanel() -> list:
     '''
     询问读取存档面板
     '''
@@ -158,7 +158,7 @@ def askLoadSavePanel():
     yrn = CmdButtonQueue.optionint(None, askfor=False, cmdListData=cmdList)
     return yrn
 
-def confirmationLoadSavePanel():
+def confirmationLoadSavePanel() -> list:
     '''
     确认读取存档面板
     '''
@@ -171,7 +171,7 @@ def confirmationLoadSavePanel():
     yrn = CmdButtonQueue.optionint(None, askfor=False, cmdListData=cmdList)
     return yrn
 
-def confirmationRemoveSavePanel():
+def confirmationRemoveSavePanel() -> list:
     '''
     确认删除存档面板
     '''

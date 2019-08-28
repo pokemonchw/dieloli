@@ -17,7 +17,7 @@ def initShowAttrPanelList():
     CacheContorl.panelState['CharacterFeaturesPanel'] = '1'
     CacheContorl.panelState['CharacterEngravingPanel'] = '1'
 
-def seeCharacterMainAttrPanel(characterId):
+def seeCharacterMainAttrPanel(characterId:str) -> str:
     '''
     查看角色主属性面板
     Keyword arguments:
@@ -96,7 +96,7 @@ def seeCharacterMainAttrPanel(characterId):
         EraPrint.p('\n')
         return 'CharacterMainAttrPanel'
 
-def seeCharacterEquipmentPanel(characterId):
+def seeCharacterEquipmentPanel(characterId:str) -> str:
     '''
     查看角色装备面板
     Keyword arguments:
@@ -125,7 +125,7 @@ def seeCharacterEquipmentPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterEquipmentPanel'
 
-def seeCharacterItemPanel(characterId):
+def seeCharacterItemPanel(characterId:str) -> str:
     '''
     查看角色携带道具面板
     Keyword arguments:
@@ -142,7 +142,7 @@ def seeCharacterItemPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterItemPanel'
 
-def seeCharacterExperiencePanel(characterId):
+def seeCharacterExperiencePanel(characterId:str) -> str:
     '''
     查看角色经验面板
     Keyword arguments:
@@ -164,7 +164,7 @@ def seeCharacterExperiencePanel(characterId):
         EraPrint.p('\n')
     return 'CharacterExperiencePanel'
 
-def seeCharacterLevelPanel(characterId):
+def seeCharacterLevelPanel(characterId:str) -> str:
     '''
     查看角色技能等级面板
     Keyword arguments:
@@ -186,7 +186,7 @@ def seeCharacterLevelPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterLevelPanel'
 
-def seeCharacterFeaturesPanel(characterId):
+def seeCharacterFeaturesPanel(characterId:str) -> str:
     '''
     查看角色特征面板
     Keyword arguments:
@@ -207,7 +207,7 @@ def seeCharacterFeaturesPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterFeaturesPanel'
 
-def seeCharacterEngravingPanel(characterId):
+def seeCharacterEngravingPanel(characterId:str) -> str:
     '''
     查看角色刻印面板
     Keyword arguments:
@@ -228,7 +228,7 @@ def seeCharacterEngravingPanel(characterId):
         EraPrint.p('\n')
     return 'CharacterEngravingPanel'
 
-def seeAttrShowHandlePanel():
+def seeAttrShowHandlePanel() -> list:
     '''
     查看属性页显示控制
     '''
@@ -247,7 +247,7 @@ def seeAttrShowHandlePanel():
     yrn = CmdButtonQueue.optionstr(CmdButtonQueue.seeattrpanelmenu, 2, cmdSize='center', askfor=False, cmdListData=inputS)
     return yrn
 
-def askForSeeAttr():
+def askForSeeAttr() -> list:
     '''
     查看角色属性时输入处理面板
     '''

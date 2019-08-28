@@ -1,7 +1,7 @@
 from script.Core import GameConfig,TextLoading,RichText
 from wcwidth import wcswidth
 
-def align(text,just='left',onlyFix = False,columns = 1,textWidth = None):
+def align(text:str,just='left',onlyFix = False,columns = 1,textWidth = None) -> str:
     '''
     文本对齐处理函数
     Keyword arguments:
@@ -36,7 +36,7 @@ def align(text,just='left',onlyFix = False,columns = 1,textWidth = None):
         else:
             return " " * int(widthI - countI) + text + " " * int(widthI - countI - 2)
 
-def getTextIndex(text):
+def getTextIndex(text:str) -> int:
     '''
     计算文本最终显示的真实长度
     Keyword arguments:
@@ -65,7 +65,7 @@ def getTextIndex(text):
             textIndex += wcswidth(text[i])
     return textIndex + stylewidth
 
-def fullToHalfText(ustring):
+def fullToHalfText(ustring:str) -> str:
     '''
     将全角字符串转换为半角
     Keyword arguments:

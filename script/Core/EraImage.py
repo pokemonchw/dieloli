@@ -9,7 +9,7 @@ imageData = {}
 imageTextData = {}
 imageLock = 0
 
-def getImageData(imageName,imagePath=''):
+def getImageData(imageName:str,imagePath='') -> PhotoImage:
     '''
     按路径读取图片数据并创建PhotoImage对象
     Keyword arguments:
@@ -23,7 +23,7 @@ def getImageData(imageName,imagePath=''):
     CacheContorl.imageid += 1
     return PhotoImage(file=imagePath)
 
-def printImage(imageName,imagePath=''):
+def printImage(imageName:str,imagePath=''):
     '''
     绘制图片的内部实现，按图片id将图片加入绘制队列
     Keyword arguments:

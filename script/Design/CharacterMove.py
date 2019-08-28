@@ -2,11 +2,11 @@ from script.Core import CacheContorl,TextLoading,EraPrint
 from script.Design import MapHandle,GameTime,Update
 
 # 主角移动
-def ownCharcterMove(targetScene):
+def ownCharcterMove(targetScene:list):
     '''
     主角寻路至目标场景
     Keyword arguments:
-    targetScene -- 寻路目标场景(当前地图层级下的相对坐标)
+    targetScene -- 寻路目标场景(在地图系统下的绝对坐标)
     '''
     moveNow = characterMove('0',targetScene)
     if moveNow == 'Null':
@@ -20,14 +20,13 @@ def ownCharcterMove(targetScene):
     else:
         ownCharcterMove(targetScene)
 
-def characterMove(characterId,targetScene):
+def characterMove(characterId:str,targetScene:list) -> 'MoveEnd:str_Null,str_End,list':
     '''
     通用角色移动控制
     Keyword arguments:
     characterId -- 角色id
-    targetScene -- 寻路目标场景(当前地图层级下的相对坐标)
+    targetScene -- 寻路目标场景(在地图系统下的绝对坐标)
     '''
-    characterId = str(characterId)
     nowPosition = CacheContorl.characterData['character'][characterId]['Position']
     sceneHierarchy = MapHandle.judgeSceneAffiliation(nowPosition,targetScene)
     if sceneHierarchy == 'common':
@@ -39,12 +38,12 @@ def characterMove(characterId,targetScene):
         moveEnd = differenceMapMove(characterId,targetScene)
     return moveEnd
 
-def differenceMapMove(characterId,targetScene):
+def differenceMapMove(characterId:str,targetScene:list) -> 'MoveEnd:str_Null,str_End,list':
     '''
     角色跨地图层级移动
     Keyword arguments:
     characterId -- 角色id
-    targetScene -- 目标场景的真实场景坐标
+    targetScene -- 寻路目标场景(在地图系统下的绝对坐标)
     '''
     nowPosition = CacheContorl.characterData['character'][characterId]['Position']
     isAffiliation = MapHandle.judgeSceneIsAffiliation(nowPosition,targetScene)
@@ -84,7 +83,7 @@ def differenceMapMove(characterId,targetScene):
                 targetMapSceneId = '0'
             return identicalMapMove(characterId,commonMap,nowMapSceneId,targetMapSceneId)
 
-def identicalMapMove(characterId,nowMap,nowMapSceneId,targetMapSceneId):
+def identicalMapMove(characterId:str,nowMap:list,nowMapSceneId:str,targetMapSceneId:str) -> 'MoveEnd:str_Null,str_End,list':
     '''
     角色在相同地图层级内移动
     Keyword arguments:
@@ -93,7 +92,8 @@ def identicalMapMove(characterId,nowMap,nowMapSceneId,targetMapSceneId):
     nowMapSceneId -- 当前角色所在场景(当前地图层级下的相对坐标)
     targetMapSceneId -- 寻路目标场景(当前地图层级下的相对坐标)
     '''
-    movePath = MapHandle.getPathfinding(nowMap,nowMapSceneId,targetMapSceneId)
+    nowMapStr = MapHandle.getMapSystemPathStrForList(nowMap)
+    movePath = MapHandle.getPathfinding(nowMapStr,nowMapSceneId,targetMapSceneId)
     if movePath != 'End' and movePath != 'Null':
         nowTargetSceneId = movePath['Path'][0]
         nowNeedTime = movePath['Time'][0]

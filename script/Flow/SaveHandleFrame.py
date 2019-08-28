@@ -101,7 +101,7 @@ def savePageIndex():
     savePage = [showSaveValue,lastSavePageValue]
     return savePage
 
-def askForOverlaySave_func(saveId):
+def askForOverlaySave_func(saveId:str):
     '''
     存档处理询问流程
     玩家输入0:进入覆盖存档询问流程
@@ -118,7 +118,7 @@ def askForOverlaySave_func(saveId):
     elif yrn == '1':
         confirmationRemoveSave_func(saveId)
 
-def confirmationOverlaySave_func(saveId):
+def confirmationOverlaySave_func(saveId:str):
     '''
     覆盖存档询问流程
     玩家输入0:对存档进行覆盖
@@ -131,7 +131,7 @@ def confirmationOverlaySave_func(saveId):
     if yrn == '0':
         SaveHandle.establishSave(saveId)
 
-def askForLoadSave_func(saveId):
+def askForLoadSave_func(saveId:str):
     '''
     读档处理询问流程
     玩家输入0:进入读取存档询问流程
@@ -148,7 +148,7 @@ def askForLoadSave_func(saveId):
         confirmationRemoveSave_func(saveId)
     return False
 
-def confirmationLoadSave_func(saveId):
+def confirmationLoadSave_func(saveId:str):
     '''
     读取存档询问流程
     玩家输入0:读取指定存档
@@ -164,7 +164,7 @@ def confirmationLoadSave_func(saveId):
         return True
     return False
 
-def confirmationRemoveSave_func(saveId):
+def confirmationRemoveSave_func(saveId:str):
     '''
     覆盖存档询问流程
     玩家输入0:删除指定存档

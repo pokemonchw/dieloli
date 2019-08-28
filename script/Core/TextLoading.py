@@ -29,7 +29,7 @@ courseSession = 'CourseSession'
 knowledge = 'Knowledge'
 languageSkillsPath = 'LanguageSkills'
 
-def getTextData(textPathId,textId):
+def getTextData(textPathId:str,textId:str) -> str:
     '''
     按文件id和文本id读取指定文本数据
     Keyword arguments:
@@ -41,7 +41,7 @@ def getTextData(textPathId,textId):
     else:
         return GameData._gamedata[language][textPathId][textId]
 
-def getGameData(textPathId):
+def getGameData(textPathId:str) -> dict:
     '''
     按文件id读取文件数据
     Keyword arguments:
@@ -49,7 +49,7 @@ def getGameData(textPathId):
     '''
     return GameData._gamedata[language][textPathId]
 
-def getCharacterData(characterName):
+def getCharacterData(characterName:str) -> dict:
     '''
     按角色名获取预设的角色模板数据
     Keyword arguments:
