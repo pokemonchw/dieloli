@@ -12,13 +12,10 @@ def ownCharcterMove(targetScene:list):
     if moveNow == 'Null':
         nullMessage = TextLoading.getTextData(TextLoading.messagePath,'30')
         EraPrint.p(nullMessage)
-        Update.gameUpdateFlow()
-        CacheContorl.nowFlowId = 'in_scene'
-    elif moveNow == 'End':
-        Update.gameUpdateFlow()
-        CacheContorl.nowFlowId = 'in_scene'
-    else:
+    elif CacheContorl.characterData['character']['0']['Position'] != targetScene:
         ownCharcterMove(targetScene)
+    Update.gameUpdateFlow()
+    CacheContorl.nowFlowId = 'in_scene'
 
 def characterMove(characterId:str,targetScene:list) -> 'MoveEnd:str_Null,str_End,list':
     '''
