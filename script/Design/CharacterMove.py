@@ -15,6 +15,7 @@ def ownCharcterMove(targetScene:list):
     elif CacheContorl.characterData['character']['0']['Position'] != targetScene:
         ownCharcterMove(targetScene)
     Update.gameUpdateFlow()
+    CacheContorl.characterData['characterId'] = '0'
     CacheContorl.nowFlowId = 'in_scene'
 
 def characterMove(characterId:str,targetScene:list) -> 'MoveEnd:str_Null,str_End,list':
