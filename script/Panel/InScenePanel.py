@@ -56,7 +56,10 @@ def changeSceneCharacterListPanel() -> list:
     '''
     nameListMax = int(GameConfig.in_scene_see_player_max)
     nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
-    characterMax = CharacterHandle.getCharacterIndexMax()
+    scenePath = CacheContorl.characterData['character']['0']['Position']
+    scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
+    sceneCharacterNameList = MapHandle.getSceneCharacterNameList(scenePathStr)
+    characterMax = len(sceneCharacterNameList)
     pageMax = math.floor(characterMax / nameListMax)
     pageText = '(' + str(nowPage) + '/' + str(pageMax) + ')'
     inputS = CmdButtonQueue.optionint(CmdButtonQueue.changescenecharacterlist,cmdColumn=5,askfor=False,cmdSize='center')

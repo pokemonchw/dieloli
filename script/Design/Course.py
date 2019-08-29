@@ -13,7 +13,7 @@ def initPhaseCourseHour():
     allClassHourData = {}
     phaseIndex = 0
     for phase in nowWeightList:
-        phaseWeightRegin = ValueHandle.getReginList(phase,judge=1)
+        phaseWeightRegin = ValueHandle.getReginList(phase)
         weightMax = 0
         weightMax = sum(map(int,phaseWeightRegin.keys()))
         classHourData = {}

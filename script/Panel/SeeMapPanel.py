@@ -34,10 +34,8 @@ def seeMovePathPanel() -> dict:
     mapSceneId = str(MapHandle.getMapSceneIdForScenePath(nowMap, nowScene))
     scenePath = pathEdge[mapSceneId]
     scenePathList = list(scenePath.keys())
-    try:
-        scenePathList.remove(mapSceneId)
-    except ValueError:
-        pass
+    if mapSceneId in scenePathList:
+        remove(mapSceneId)
     if len(scenePathList) > 0:
         sceneCmd = []
         for scene in scenePathList:

@@ -1,7 +1,7 @@
 import random
 import bisect
 
-def twoBitArrayToDict(array:tuple,judge=0) -> dict:
+def twoBitArrayToDict(array:tuple) -> dict:
     '''
     将二维数组转换为字典
     Keyword arguments:
@@ -10,7 +10,7 @@ def twoBitArrayToDict(array:tuple,judge=0) -> dict:
     newDict = dict((x, y) for x, y in array)
     return newDict
 
-def getReginList(nowData:dict,judge=0) -> dict:
+def getReginList(nowData:dict) -> dict:
     '''
     按dict中每个value的值对key进行排序，并计算权重区域列表
     Keyword arguments:
@@ -48,4 +48,4 @@ def getNextValueForList(nowInt:int,intList:list) -> int:
     intList -- 用于取值的列表
     '''
     nowId = bisect.bisect_left(intList,nowInt)
-    return intList[nowId - 1]
+    return intList[nowId]

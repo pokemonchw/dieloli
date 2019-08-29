@@ -309,8 +309,7 @@ def getMapSystemPathForStr(pathStr:str) -> list:
     '''
     将地图系统路径文本转换为地图系统路径
     '''
-    pathStr.split(os.sep)
-    return pathStr
+    return pathStr.split(os.sep)
 
 def getMapSceneIdForScenePath(mapPath:list,scenePath:list) -> str:
     '''

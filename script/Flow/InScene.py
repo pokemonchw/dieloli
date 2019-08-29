@@ -42,27 +42,33 @@ def seeScene_func(judge:bool):
         scenePath = CacheContorl.characterData['character']['0']['Position']
         scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
         sceneCharacterNameList = MapHandle.getSceneCharacterNameList(scenePathStr)
+        nameListMax = int(GameConfig.in_scene_see_player_max)
+        changePageJudge = False
         if len(sceneCharacterNameList) == 1:
             CacheContorl.characterData['characterId'] = '0'
         inSceneCmdList1 = []
         if judge:
             if CacheContorl.panelState['SeeSceneCharacterListPage'] == '0':
                 inputS = inputS + InScenePanel.seeSceneCharacterListPanel()
-                inSceneCmdList1 = InScenePanel.changeSceneCharacterListPanel()
+                if len(sceneCharacterNameList) > nameListMax:
+                    inSceneCmdList1 = InScenePanel.changeSceneCharacterListPanel()
+                    changePageJudge = True
             inputS.append('SeeSceneCharacterListPage')
         startId1 = len(inSceneCmdList1)
         InScenePanel.seeCharacterInfoPanel()
         inSceneCmdList2 = InScenePanel.inSceneButtonPanel(startId1)
-        inputS = inputS + inSceneCmdList1 + inSceneCmdList2
+        if changePageJudge:
+            inputS += inSceneCmdList1 + inSceneCmdList2
+        else:
+            inputS += inSceneCmdList2
         yrn = GameInit.askfor_All(inputS)
         PyCmd.clr_cmd()
         nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
-        nameListMax = int(GameConfig.in_scene_see_player_max)
         characterMax = CharacterHandle.getCharacterIndexMax() - 1
         pageMax = math.floor(characterMax / nameListMax)
         if yrn in sceneCharacterNameList:
             CacheContorl.characterData['characterId'] = MapHandle.getCharacterIdByCharacterName(yrn,scenePathStr)
-        elif judge and yrn not in inSceneCmdList2 and yrn != 'SeeSceneCharacterListPage':
+        elif judge and yrn not in inSceneCmdList2 and yrn != 'SeeSceneCharacterListPage' and changePageJudge:
             if yrn == inSceneCmdList1[0]:
                 CacheContorl.panelState['SeeSceneCharacterListPanel'] = 0
             elif yrn == inSceneCmdList1[1]:

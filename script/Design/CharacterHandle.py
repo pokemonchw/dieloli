@@ -1,4 +1,5 @@
 import random
+import math
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText
 
@@ -217,12 +218,30 @@ def getCharacterIdList() -> list:
 def initCharacterDormitory():
     '''
     分配角色宿舍
+    小于18岁，男生分配到男生宿舍，女生分配到女生宿舍，按宿舍楼层和角色年龄，从下往上，从小到大分配，其他性别分配到地下室，大于18岁，教师宿舍混居
     '''
     characterData = {}
+    characterSexData = {
+        "Man":[],
+        "Woman":[],
+        "Other":[],
+        "Teacher":[]
+    }
     for character in CacheContorl.characterData['character']:
         characterData[character] = CacheContorl.characterData['character'][character]['Age']
+        if characterData[character] < 18:
+            if CacheContorl.characterData['character'][character]['Sex'] in ['Man','Woman']:
+                characterSexData[CacheContorl.characterData['character'][character]['Sex']].append(character)
+            else:
+                characterSexData['Other'].append(character)
+        else:
+            characterSexData['Teacher'].append(character)
+    manMax = len(characterSexData['Man'])
+    womanMax = len(characterSexData['Woman'])
+    otherMax = len(characterSexData['Other'])
+    teacherMax = len(characterSexData['Teacher'])
     characterData = [k[0] for k in sorted(characterData.items(),key=lambda x:x[1])]
-    teacherDormitory = CacheContorl.placeData['TeacherDormitory']
+    teacherDormitory = {x:0 for x in CacheContorl.placeData['TeacherDormitory']}
     maleDormitory = {}
     femaleDormitory = {}
     for key in CacheContorl.placeData:
@@ -230,8 +249,41 @@ def initCharacterDormitory():
             femaleDormitory[key] = CacheContorl.placeData[key]
         elif 'MaleDormitory' in key:
             maleDormitory[key] = CacheContorl.placeData[key]
-    basement = CacheContorl.placeData['Basement']
-
+    maleDormitory = {x:0 for j in [k[1] for k in sorted(maleDormitory.items(),key=lambda x:x[0])] for x in j}
+    femaleDormitory = {x:0 for j in [k[1] for k in sorted(femaleDormitory.items(),key=lambda x:x[0])] for x in j}
+    basement = {x:0 for x in CacheContorl.placeData['Basement']}
+    maleDormitoryMax = len(maleDormitory.keys())
+    femaleDormitoryMax = len(femaleDormitory.keys())
+    teacherDormitoryMax = len(teacherDormitory)
+    basementMax = len(basement)
+    singleRoomMan = math.ceil(manMax / maleDormitoryMax)
+    singleRoomWoman = math.ceil(womanMax / femaleDormitoryMax)
+    singleRoomBasement = math.ceil(otherMax / basementMax)
+    singleRoomTeacher = math.ceil(teacherMax / teacherDormitoryMax)
+    for character in characterSexData['Man']:
+        nowRoom = list(maleDormitory.keys())[0]
+        CacheContorl.characterData['character'][character]['Dormitory'] = nowRoom
+        maleDormitory[nowRoom] += 1
+        if maleDormitory[nowRoom] >= singleRoomMan:
+            del maleDormitory[nowRoom]
+    for character in characterSexData['Woman']:
+        nowRoom = list(femaleDormitory.keys())[0]
+        CacheContorl.characterData['character'][character]['Dormitory'] = nowRoom
+        femaleDormitory[nowRoom] += 1
+        if femaleDormitory[nowRoom] >= singleRoomWoman:
+            del femaleDormitory[nowRoom]
+    for character in characterSexData['Other']:
+        nowRoom = list(basement.keys())[0]
+        CacheContorl.characterData['character'][character]['Dormitory'] = nowRoom
+        basement[nowRoom] += 1
+        if basement[nowRoom] >= singleRoomBasement:
+            del basement[nowRoom]
+    for character in characterSexData['Teacher']:
+        nowRoom = list(teacherDormitory.keys())[0]
+        CacheContorl.characterData['character'][character]['Dormitory'] = nowRoom
+        teacherDormitory[nowRoom] += 1
+        if teacherDormitory[nowRoom] >= singleRoomTeacher:
+            del teacherDormitory[nowRoom]
 
 def initCharacterPosition():
     '''
@@ -239,4 +291,6 @@ def initCharacterPosition():
     '''
     for character in CacheContorl.characterData['character']:
         characterPosition = CacheContorl.characterData['character'][character]['Position']
-        MapHandle.characterMoveScene(characterPosition,['0'],character)
+        characterDormitory = CacheContorl.characterData['character'][character]['Dormitory']
+        characterDormitory = MapHandle.getMapSystemPathForStr(characterDormitory)
+        MapHandle.characterMoveScene(characterPosition,characterDormitory,character)
