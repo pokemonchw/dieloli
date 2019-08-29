@@ -40,6 +40,9 @@ outputTextStyle = ''
 # 富文本回溯样式记录用定位
 textStylePosition = {}
 
+# 存储服装类型数据
+clothingTypeData = {}
+
 # 富文本样式记录
 textStyleCache = []
 

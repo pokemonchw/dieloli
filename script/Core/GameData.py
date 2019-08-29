@@ -65,6 +65,8 @@ def loadDirNow(dataPath:str):
                             mapData[mapSystemPathStr] = nowMapData
                         else:
                             nowData[nowFile[0]] = JsonHandle._loadjson(nowPath)
+                            if nowFile[0] = 'Equipment':
+                                initClothingData(nowData[nowFile[0]]['Clothing'])
             else:
                 nowData[i] = loadDirNow(nowPath)
     return nowData
@@ -159,6 +161,25 @@ def getPathList(rootPath:str) -> list:
     return [name for name in os.listdir(rootPath)
             if os.path.isdir(os.path.join(rootPath,name))
            ]
+
+def initClothingData(originalClothingData):
+    '''
+    初始化服装类型数据
+    '''
+    clothingTypeData = {x:getOriginalClothing(j,k,originalClothingData[j][k][x]) for j in originalClothingData for k in originalClothingData[j] for x in originalClothingData[j][k]}
+    CacheContorl.clothingTypeData = clothingTypeData
+
+def getOriginalClothing(clothingType,clothingSex,nowClothingData):
+    '''
+    生成无分类的原始服装数据
+    Keyword arguments:
+    clothingType -- 服装类型
+    clothingSex -- 服装性别倾向
+    clothingData -- 原始服装数据
+    '''
+    nowClothingData['Type'] = clothingType
+    nowClothingData['Sex'] = clothingSex
+    return nowClothingData
 
 def init():
     '''
