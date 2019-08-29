@@ -65,7 +65,7 @@ def loadDirNow(dataPath:str):
                             mapData[mapSystemPathStr] = nowMapData
                         else:
                             nowData[nowFile[0]] = JsonHandle._loadjson(nowPath)
-                            if nowFile[0] = 'Equipment':
+                            if nowFile[0] == 'Equipment':
                                 initClothingData(nowData[nowFile[0]]['Clothing'])
             else:
                 nowData[i] = loadDirNow(nowPath)

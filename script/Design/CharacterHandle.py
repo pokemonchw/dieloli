@@ -1,5 +1,6 @@
 import random
 import math
+import datetime
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText
 
@@ -222,26 +223,28 @@ def initCharacterDormitory():
     '''
     characterData = {}
     characterSexData = {
-        "Man":[],
-        "Woman":[],
-        "Other":[],
-        "Teacher":[]
+        "Man":{},
+        "Woman":{},
+        "Other":{},
+        "Teacher":{}
     }
     for character in CacheContorl.characterData['character']:
-        characterData[character] = CacheContorl.characterData['character'][character]['Age']
-        if characterData[character] < 18:
+        if CacheContorl.characterData['character'][character]['Age'] < 18:
             if CacheContorl.characterData['character'][character]['Sex'] in ['Man','Woman']:
-                characterSexData[CacheContorl.characterData['character'][character]['Sex']].append(character)
+                characterSexData[CacheContorl.characterData['character'][character]['Sex']][character] = CacheContorl.characterData['character'][character]['Age']
             else:
-                characterSexData['Other'].append(character)
+                characterSexData['Other'][character] = CacheContorl.characterData['character'][character]['Age']
         else:
-            characterSexData['Teacher'].append(character)
+            characterSexData['Teacher'][character] = CacheContorl.characterData['character'][character]['Age']
     manMax = len(characterSexData['Man'])
     womanMax = len(characterSexData['Woman'])
     otherMax = len(characterSexData['Other'])
     teacherMax = len(characterSexData['Teacher'])
-    characterData = [k[0] for k in sorted(characterData.items(),key=lambda x:x[1])]
-    teacherDormitory = {x:0 for x in CacheContorl.placeData['TeacherDormitory']}
+    characterSexData['Man'] = [k[0] for k in sorted(characterSexData['Man'].items(),key=lambda x:x[1])]
+    characterSexData['Woman'] = [k[0] for k in sorted(characterSexData['Woman'].items(),key=lambda x:x[1])]
+    characterSexData['Other'] = [k[0] for k in sorted(characterSexData['Other'].items(),key=lambda x:x[1])]
+    characterSexData['Teacher'] = [k[0] for k in sorted(characterSexData['Teacher'].items(),key=lambda x:x[1])]
+    teacherDormitory = {x:0 for x in sorted(CacheContorl.placeData['TeacherDormitory'],key=lambda x:x[0])}
     maleDormitory = {}
     femaleDormitory = {}
     for key in CacheContorl.placeData:
