@@ -1,5 +1,29 @@
 {
-	"Clothing": {
+	"Suit":{
+    "Uniform":{
+      "Man":{
+        "Coat":"",
+        "Underwear":"Shirt",
+        "Pants":"ConePants",
+        "Skirt":"",
+        "Shoes":"ClothShoes",
+        "Socks":"Neutral",
+        "Bra":"",
+        "Underpants":"Boxer"
+      },
+      "Woman":{
+        "Coat":"",
+        "Underwear":"Shirt",
+        "Pants":"FlaredTrousers",
+        "Skirt":"",
+        "Shoes":"ClothShoes",
+        "Socks":"Neutral",
+        "Bra":"FrontClosure",
+        "Underpants":"PentagonalPants"
+      }
+    }
+  },
+  "Clothing": {
 		"Coat": {
 			"Man": {
 				"Shenyi": {
