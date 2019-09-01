@@ -7,7 +7,7 @@
         "Pants":"ConePants",
         "Skirt":"",
         "Shoes":"ClothShoes",
-        "Socks":"Neutral",
+        "Socks":"BoatSocks",
         "Bra":"",
         "Underpants":"Boxer"
       },
@@ -17,9 +17,29 @@
         "Pants":"FlaredTrousers",
         "Skirt":"",
         "Shoes":"ClothShoes",
-        "Socks":"Neutral",
+        "Socks":"BoatSocks",
         "Bra":"FrontClosure",
         "Underpants":"PentagonalPants"
+      },
+      "Futa":{
+        "Coat":"",
+        "Underwear":"Shirt",
+        "Pants":"ConePants",
+        "Skirt":"",
+        "Shoes":"ClothShoes",
+        "Socks":"BoatSocks",
+        "Bra":"FrontClosure",
+        "Underpants":"Boxer"
+      },
+      "Asexual":{
+        "Coat":"",
+        "Underwear":"Shirt",
+        "Pants":"ConePants",
+        "Skirt":"",
+        "Shoes":"ClothShoes",
+        "Socks":"BoatSocks",
+        "Bra":"",
+        "Underpants":"Boxer"
       }
     }
   },

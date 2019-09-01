@@ -25,7 +25,16 @@
       "Fear":"0",
       "Resistance":"0"
     },
-    "Clothing":{},
+    "Clothing":{
+      "Coat":{},
+      "Underwear":{},
+      "Pants":{},
+      "Skirt":{},
+      "Shoes":{},
+      "Socks":{},
+      "Bra":{},
+      "Underpants":{}
+    },
     "SexItem":{},
     "Item":[],
     "Height":{

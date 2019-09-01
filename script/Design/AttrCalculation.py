@@ -31,14 +31,6 @@ def getEngravingList() -> dict:
     '''
     return roleAttrData['Default']['Engraving']
 
-def getClothing(sexId:str) -> dict:
-    '''
-    按性别id获取服装模板
-    Keyword arguments:
-    sexId -- 指定性别id
-    '''
-    return TextLoading.getTextData(TextLoading.attrTemplatePath,'Equipment')[sexId]
-
 def getSexItem(sexId:str) -> dict:
     '''
     按性别id获取性道具模板
@@ -67,7 +59,6 @@ def getAttr(temName:str) -> dict:
     sexExperienceList = getSexExperience(sexExperienceTemName)
     sexGradeList = getSexGrade(sexExperienceList)
     EngravingList = getEngravingList()
-    clothingList = getClothing(temName)
     sexItemList = getSexItem(temName)
     height = getHeight(temName,age,{})
     weightTemName = temData['Weight']
@@ -90,13 +81,22 @@ def getAttr(temName:str) -> dict:
         'SexExperience':sexExperienceList,
         'SexGrade':sexGradeList,
         'Engraving':EngravingList,
-        'Clothing':clothingList,
         'SexItem':sexItemList,
         'Height':height,
         'Weight':weight,
         'BodyFat':bodyFat,
         'Measurements':measurements,
         'Gold':gold,
+        'Clothing':{
+            'Coat':{},
+            'Underwear':{},
+            'Pants':{},
+            'Skirt':{},
+            'Shoes':{},
+            'Socks':{},
+            'Bra':{},
+            'Underpants':{}
+        },
         'Language':{}
     }
 

@@ -112,7 +112,7 @@ def seeCharacterEquipmentPanel(characterId:str) -> str:
         EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '39'))
         EraPrint.p('\n')
         characterClothingList = characterData['Clothing']
-        characterClothingText = AttrText.getClothingText(characterClothingList)
+        characterClothingText = AttrText.getClothingText(characterClothingData)
         EraPrint.plist(characterClothingText, 4, 'center')
         EraPrint.p('\n')
         EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '40'))

@@ -1,5 +1,6 @@
 from script.Core import CacheContorl,TextLoading
 import random
+import math
 
 def creatorSuit(suitName:str,sex:str) -> dict:
     '''
@@ -9,7 +10,7 @@ def creatorSuit(suitName:str,sex:str) -> dict:
     sex -- 性别模板
     '''
     suitData = TextLoading.getTextData(TextLoading.equipmentPath,'Suit')[suitName][sex]
-    newSuitData = {clothing:creatorClothing(clothing) for clothing in suitData if suitData[clothing] != ''}
+    newSuitData = {clothing:creatorClothing(suitData[clothing]) for clothing in suitData if suitData[clothing] != ''}
     return newSuitData
 
 def creatorClothing(clothingName:str) -> dict:
@@ -38,7 +39,7 @@ def setClothintEvaluationText(clothingData:dict):
     '''
     clothingAttrData = [clothingData['Sexy'],clothingData['Handsome'],clothingData['Elegant'],clothingData['Fresh'],clothingData['Sweet']]
     clothingAttrMax = sum(clothingAttrData)
-    clothingEvaluationText = clothingEvaluationTextList[sound(clothingAttrMax / 480)]
+    clothingEvaluationText = clothingEvaluationTextList[math.floor(clothingAttrMax / 480)]
     clothingTagText = clothingTagList[clothingAttrData.index(max(clothingAttrData)) - 1]
     clothingData['Evaluation'] = clothingEvaluationText
     clothingData['Tag'] = clothingTagText

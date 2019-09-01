@@ -1,8 +1,8 @@
 import random
 import math
-import datetime
+import uuid
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
-from script.Design import AttrCalculation,MapHandle,AttrText
+from script.Design import AttrCalculation,MapHandle,AttrText,Clothing
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
@@ -23,7 +23,7 @@ def initCharacterList():
     initCharacterDormitory()
     initCharacterPosition()
 
-def initCharacter(nowId:str,character:dict):
+def initCharacter(nowId:int,character:dict):
     '''
     按id生成角色属性
     Keyword arguments:
@@ -79,6 +79,13 @@ def initCharacter(nowId:str,character:dict):
     measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
     defaultAttr['Measirements'] = measurements
     defaultAttr['Knowledge'] = {}
+    if 'Clothing' in character:
+        clothingTem = character['Clothing']
+    else:
+        clothingTem = 'Uniform'
+    defaultClothingData = Clothing.creatorSuit(clothingTem,characterSex)
+    for clothing in defaultClothingData:
+        defaultAttr['Clothing'][clothing][uuid.uuid1()] = defaultClothingData[clothing]
     CacheContorl.temporaryCharacter.update(defaultAttr)
     CacheContorl.featuresList = {}
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
