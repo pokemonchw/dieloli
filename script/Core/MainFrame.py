@@ -93,17 +93,29 @@ menubar.add_cascade(menu=menufile, label=TextLoading.getTextData(TextLoading.men
 menubar.add_cascade(menu=menuother, label=TextLoading.getTextData(TextLoading.menuPath,TextLoading.menuOther))
 
 def reset(*args):
+    '''
+    重置游戏
+    '''
     CacheContorl.flowContorl['restartGame'] = 1
     send_input()
 
 def quit(*args):
+    '''
+    退出游戏
+    '''
     CacheContorl.flowContorl['quitGame'] = 1
     send_input()
 
 def setting(*args):
+    '''
+    打开设置面板
+    '''
     SettingFrame.openSettingFrame()
 
 def about(*args):
+    '''
+    打开关于面板
+    '''
     AboutFrame.openAboutFrame()
 
 menufile.add_command(label=TextLoading.getTextData(TextLoading.menuPath,TextLoading.menuRestart),command=reset)
@@ -117,6 +129,9 @@ send_order_state = False
 # when false, send 'skip'; when true, send cmd
 
 def send_input(*args):
+    '''
+    发送一条指令
+    '''
     global input_event_func
     order = _getorder()
     if len(CacheContorl.inputCache) >= 21:
@@ -136,6 +151,9 @@ def send_input(*args):
 _flowthread = None
 
 def read_queue():
+    '''
+    从队列中获取在前端显示的信息
+    '''
     while not _queue.empty():
         quenestr = _queue.get()
         jsonstr = json.loads(quenestr)
@@ -168,13 +186,24 @@ def read_queue():
     root.after(10, read_queue)
 
 def _run():
+    '''
+    启动屏幕
+    '''
     root.after(10, read_queue)
     root.mainloop()
 
 def seeend():
+    '''
+    输出END信息
+    '''
     textbox.see(END)
 
 def set_background(color):
+    '''
+    设置背景颜色
+    Keyword arguments:
+    color -- 背景颜色
+    '''
     textbox.config(insertbackground=color)
     textbox.configure(background=color, selectbackground="red")
 
@@ -186,10 +215,20 @@ def set_background(color):
 _queue = None
 
 def bind_return(func):
+    '''
+    绑定输入处理函数
+    Keyword arguments:
+    func -- 输入处理函数
+    '''
     global input_event_func
     input_event_func = func
 
 def bind_queue(q):
+    '''
+    绑定信息队列
+    Keyword arguments:
+    q -- 消息队列
+    '''
     global _queue
     _queue = q
 
@@ -199,18 +238,45 @@ def bind_queue(q):
 sysprint = print
 
 def _print(string,style=('standard',)):
+    '''
+    输出文本
+    Keyword arguments:
+    string -- 字符串
+    style -- 样式序列
+    '''
     textbox.insert(END,string,style)
     seeend()
 
 def _printCmd(string,style=('standard',)):
+    '''
+    输出文本
+    Keyword arguments:
+    string -- 字符串
+    style -- 样式序列
+    '''
     textbox.insert('end', string, style)
     seeend()
 
 def _clear_screen():
+    '''
+    清屏
+    '''
     _io_clear_cmd()
     textbox.delete('1.0', END)
 
 def _frame_style_def(style_name, foreground, background, font, fontsize, bold, underline, italic):
+    '''
+    定义样式
+    Keyword arguments:
+    style_name -- 样式名称
+    foreground -- 前景色/字体颜色
+    background -- 背景色
+    font -- 字体
+    fontsize -- 字号
+    bold -- 加粗
+    underline -- 下划线
+    italic -- 斜体
+    '''
     font_list = []
     font_list.append(font)
     font_list.append(fontsize)
@@ -226,12 +292,21 @@ def _frame_style_def(style_name, foreground, background, font, fontsize, bold, u
 # 输入处理函数
 
 def _getorder():
+    '''
+    获取命令框中的内容
+    '''
     return order.get()
 
 def setorder(orderstr):
+    '''
+    设置命令框中内容
+    '''
     order.set(orderstr)
 
 def _clearorder():
+    '''
+    清空命令框
+    '''
     order.set('')
 
 # ############################################################
@@ -240,6 +315,14 @@ cmd_tag_map = {}
 
 # 命令生成函数
 def _io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutton'):
+    '''
+    打印一条指令
+    Keyword arguments:
+    cmd_str -- 命令文本
+    cmd_number -- 命令数字
+    normal_style -- 正常显示样式
+    on_style -- 鼠标在其上时显示样式
+    '''
     global cmd_tag_map
     cmd_tagname = str(uuid.uuid1())
     textbox.tag_configure(cmd_tagname)
@@ -248,17 +331,26 @@ def _io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutt
     cmd_tag_map[cmd_number] = cmd_tagname
 
     def send_cmd(*args):
+        '''
+        发送命令
+        '''
         global send_order_state
         send_order_state=True
         order.set(cmd_number)
         send_input(order)
 
     def enter_func(*args):
+        '''
+        鼠标进入改变命令样式
+        '''
         textbox.tag_remove(normal_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
         textbox.tag_add(on_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
         CacheContorl.wframeMouse['mouseLeaveCmd'] = 0
 
     def leave_func(*args):
+        '''
+        鼠标离开还原命令样式
+        '''
         textbox.tag_add(normal_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
         textbox.tag_remove(on_style, textbox.tag_ranges(cmd_tagname)[0], textbox.tag_ranges(cmd_tagname)[1])
         CacheContorl.wframeMouse['mouseLeaveCmd'] = 1
@@ -271,6 +363,11 @@ def _io_print_cmd(cmd_str, cmd_number, normal_style='standard', on_style='onbutt
 
 # 清除命令函数
 def _io_clear_cmd(*cmd_numbers):
+    '''
+    清除命令
+    Keyword arguments:
+    cmd_number -- 命令数字，不输入则清楚当前已有的全部命令
+    '''
     global cmd_tag_map
     if cmd_numbers:
         for num in cmd_numbers:
