@@ -17,8 +17,7 @@ def getReginList(nowData:dict) -> dict:
     nowData -- 需要进行计算权重的dict数据
     '''
     regionList = {}
-    sortData = sorted(nowData.items(),key=lambda x:x[1])
-    sortData = twoBitArrayToDict(sortData)
+    sortData = sortedDictForValues(nowData)
     sortDataKey = list(sortData.keys())
     regionIndex = 0
     for i in range(0,len(sortData)):
@@ -26,6 +25,15 @@ def getReginList(nowData:dict) -> dict:
         regionIndex = regionIndex + sortData[nowKey]
         regionList[str(regionIndex)] = nowKey
     return regionList
+
+def sortedDictForValues(oldDict):
+    '''
+    按dict中每个value的值对key进行排序生成新dict
+    Keyword arguments:
+    oldDict -- 需要进行排序的数据
+    '''
+    sortData = twoBitArrayToDict(sorted(oldDict.items(),key=lambda x:x[1]))
+    return {x[0]:x[1] for x in sortData}
 
 def getRandomForWeight(data:dict) -> 'dataKey':
     '''

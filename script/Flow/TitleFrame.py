@@ -1,6 +1,5 @@
 from script.Panel import TitleFramePanel
 from script.Core import PyCmd,CacheContorl
-from script.Design import Clothing
 import os
 
 def titleFrame_func():
