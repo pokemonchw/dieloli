@@ -1,5 +1,5 @@
 from script.Core import CacheContorl,GameInit,PyCmd
-from script.Design import AttrHandle
+from script.Design import AttrHandle,Clothing
 from script.Panel import MainFramePanel
 
 mainFrameGotoData = {
@@ -29,4 +29,6 @@ def mainFrame_func():
     if ans == characterName:
         CacheContorl.nowFlowId = 'see_character_attr'
     else:
+        if ans == '0':
+            Clothing.initCharcterClothintPutOn()
         CacheContorl.nowFlowId = mainFrameGotoData[ans]

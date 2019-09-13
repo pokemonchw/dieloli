@@ -33,7 +33,7 @@ def sortedDictForValues(oldDict):
     oldDict -- 需要进行排序的数据
     '''
     sortData = twoBitArrayToDict(sorted(oldDict.items(),key=lambda x:x[1]))
-    return {x[0]:x[1] for x in sortData}
+    return sortData
 
 def getRandomForWeight(data:dict) -> 'dataKey':
     '''

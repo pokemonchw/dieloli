@@ -32,94 +32,182 @@ def creatorClothing(clothingName:str) -> dict:
     clothingData.update(CacheContorl.clothingTypeData[clothingName])
     return clothingData
 
-def chracterPutOnClothing(characterId:str):
+def characterPutOnClothing(characterId:str):
     '''
     角色自动选择并穿戴服装
     Keyword arguments:
     characterId -- 角色id
     '''
-    putOnData = {}
     collocationData = {}
+    characterClothingData = CacheContorl.characterData['character'][characterId]['Clothing']
+    clothingsNameData = getClothingNameData(characterClothingData)
+    clothingsPriceData = getClothingPriceData(characterClothingData)
+    for clothingType in clothingsNameData:
+        clothingTypeData = clothingsNameData[clothingType]
+        for clothingName in clothingTypeData:
+            clothingNameData = clothingTypeData[clothingName]
+            clothingId = list(clothingNameData.keys())[-1]
+            clothingData = characterClothingData[clothingType][clothingId]
+            nowCollocationData = getClothingCollocationData(clothingData,clothingType,clothingsNameData,clothingsPriceData,characterClothingData)
+            if nowCollocationData != 'None':
+                nowCollocationData[clothingType] = clothingId
+                nowCollocationData['Price'] += clothingsPriceData[clothingType][clothingId]
+                collocationData[clothingId] = nowCollocationData
+    collocationPriceData = {collocation:collocationData[collocation]['Price'] for collocation in collocationData}
+    collocationPriceData = ValueHandle.sortedDictForValues(collocationPriceData)
+    print(CacheContorl.characterData['character'][characterId])
+    CacheContorl.characterData['character'][characterId]['PutOn'] = collocationData[list(collocationPriceData.keys())[-1]]
+
+def getClothingNameData(clothingsData:dict) -> dict:
+    '''
+    按服装的具体名称对服装进行分类
+    Keyword arguments:
+    clothingsData -- 要分类的所有服装数据
+    '''
     clothingNameData = {}
-    characterClothingData = CacheContorl.characterData['character'][characterId]['creatorClothing']
-    for nowClothingType in characterClothingData:
-        for clothing in nowClothingData[nowClothingType]:
-            if nowClothingData[nowCollocationalType][clothing]['Name'] not in clothingNameData:
-                clothingNameData.setdefault(nowClothingData[nowCollocationalType][clothing]['Name'],{clothing:characterClothingData[nowClothingType][clothing]['Price'] + characterClothingData[nowClothingType][clothing]['Cleanliness']})
+    for clothingType in clothingsData:
+        clothingTypeData = clothingsData[clothingType]
+        clothingNameData.setdefault(clothingType,{})
+        for clothing in clothingTypeData:
+            clothingData = clothingTypeData[clothing]
+            clothingName = clothingData['Name']
+            clothingNameData[clothingType].setdefault(clothingName,{})
+            clothingNameData[clothingType][clothingName][clothing] = clothingData['Price'] + clothingData['Cleanliness']
+        clothingNameData[clothingType] = {clothingName:ValueHandle.sortedDictForValues(clothingNameData[clothingType][clothingName]) for clothingName in clothingNameData[clothingType]}
+    return clothingNameData
+
+def getClothingPriceData(clothingsData:dict) -> dict:
+    '''
+    为每个类型的服装进行排序
+    Keyword arguments:
+    clothingsData -- 要排序的所有服装数据
+    '''
+    return {clothingType:{clothing:clothingsData[clothingType][clothing]['Price'] + clothingsData[clothingType][clothing]['Cleanliness'] for clothing in clothingsData[clothingType]} for clothingType in clothingsData}
+
+def getClothingCollocationData(nowClothingData:dict,nowClothingType:str,clothingNameData:dict,clothingPriceData:dict,clothingData:dict):
+    '''
+    获取服装的当前搭配数据
+    Keyword arguments:
+    nowClothingData -- 当前服装原始数据
+    nowClothingType -- 服装类型
+    clothingNameData -- 按服装具体名字分类并按价值排序后的所有要搭配的服装数据
+    clothingPriceData -- 按服装类型分类并按价值排序后的所有要搭配的服装数据
+    clothingData -- 所有要查询的服装数据
+    '''
+    collocationData = {'Price':0}
+    clothingCollocationTypeData = nowClothingData['CollocationalRestriction']
+    for collocationType in clothingCollocationTypeData:
+        collocationData[collocationType] = ''
+        nowRestrict = clothingCollocationTypeData[collocationType]
+        if nowRestrict == 'Precedence':
+            clothingNowTypePrecedenceList = nowClothingData['Collocation'][collocationType]
+            precedenceCollocation = getAppointNamesClothingTop(list(clothingNowTypePrecedenceList.keys()),clothingNameData[collocationType])
+            if precedenceCollocation != 'None':
+                collocationData[collocationType] = precedenceCollocation
+                collocationData['Price'] += clothingPriceData[collocationType][precedenceCollocation]
             else:
-                clothingNameData[nowClothingData[nowCollocationalType][clothing]['Name']][clothing] = characterClothingData[nowClothingType][clothing]['Price'] + characterClothingData[nowClothingType][clothing]['Cleanliness']
-        characterClothingData[nowClothingType] = {n:ValueHandle.sortedDictForValues(characterClothingData[nowClothingType][n]) for n in characterClothingData[nowClothingType]}
-    clothingPriceData = {t:{c:characterClothingData[t][c]['Price'] + characterClothingData[t][c]['Cleanliness'] for c in characterClothingData[t]} for t in characterClothingData}
-    for clothingType in clothingNameData:
-        for clothingName in clothingNameData[clothingType]:
-            nowClothingId = list(clothingNameData[clothingType][clothingName].keys())[-1]
-            nowClothingData = characterClothingData[clothingType][clothingId]
-            clothingCollocationTypeData = clothingData['CollocationalRestriction']
-            collocationData[nowClothingId] = {}
-            collocationData[nowClothingId]['Price']  = 0
-            for nowCollocationalType in clothingCollocationTypeData:
-                nowCollocationalRestrict = clothingCollocationTypeData[nowCollocationalType]
-                if nowCollocationalRestrict == 'Precedence':
-                    collocationData[nowClothingId][nowCollocationalType] = ''
-                    precedenceList = {}
-                    for precedenceClothing in characterClothingData[nowClothingType][nowClothingId]['Collocation'][nowCollocationalType]:
-                        if precedenceClothing in characterClothingData and characterData[precedenceClothing] != {}:
-                            precedenceList[precedenceClothing] = list(clothingNameData[nowCollocationalType][characterClothingData[nowClothingType][nowClothingId]['Collocation'][nowCollocationalType]].keys())[-1]
-                    if precedenceList == {}:
-                        for tooTooClothing in clothingPriceData[nowCollocationalType]:
-                            if characterClothingData[nowCollocationalType][tooTooClothing]['CollocationalRestrict'][clothingType] == 'Usually':
-                                collocationData[nowClothingId][nowCollocationalType] = tooTooClothing
-                                collocationData[nowClothingId]['Price'] += clothingPriceData[tooTooClothing]
-                                break
-                            elif characterClothingData[nowCollocationalType][tooTooClothing]['CollocationalRestrict'][clothingType] == 'Must':
-                                if clothingName in characterClothingData[nowCollocationalType][tooTooClothing]['Collocation'][nowClothingType]:
-                                    collocationData[nowClothingId][nowCollocationalType] = tooTooClothing
-                                    collocationData[nowClothingId]['Price'] += clothingPriceData[tooTooClothing]
-                                    break
-                        if collocationData[nowClothingId][nowCollocationalType] == '':
-                            collocationData[nowClothingId] = 'None'
-                            break
-                    else:
-                        precedenceList = ValueHandle.sortedDictForValues(precedenceList)
-                        collocationData[nowClothingId][nowCollocationalType] = list(precedenceList.keys())[-1]
-                elif nowCollocationalRestrict == 'Usually':
-                    for tooTooClothing in clothingPriceData[nowCollocationalType]:
-                        if characterClothingData[nowCollocationalType][tooTooClothing]['CollocationalRestrict'][clothingType] == 'Usually':
-                            collocationData[nowClothingId][nowCollocationalType] = tooTooClothing
-                            collocationData[nowClothingId]['Price'] += clothingPriceData[tooTooClothing]
-                            break
-                        elif characterClothingData[nowCollocationalType][tooTooClothing]['CollocationalRestrict'][clothingType] == 'Must':
-                            if clothingName in characterClothingData[nowCollocationalType][tooTooClothing]['Collocation'][nowClothingType]:
-                                collocationData[nowClothingId][nowCollocationalType] = tooTooClothing
-                                collocationData[nowClothingId]['Price'] += clothingPriceData[tooTooClothing]
-                                break
-                    if collocationData[nowClothingId][nowCollocationalType] == '':
-                        collocationData[nowClothingId] = 'None'
-                        break
-                elif nowCollocationalRestrict == 'None':
-                    collocationData[nowClothingId][nowCollocationalType] = 'None'
-                elif nowCollocationalRestrict == 'Ornone':
-                    precedenceList = {}
-                    for precedenceClothing in characterClothingData[nowClothingType][nowClothingId]['Collocation'][nowCollocationalType]:
-                        if precedenceClothing in characterClothingData and characterData[precedenceClothing] != {}:
-                            precedenceList[precedenceClothing] = list(clothingNameData[nowCollocationalType][characterClothingData[nowClothingType][nowClothingId]['Collocation'][nowCollocationalType]].keys())[-1]
-                    if precedenceList == {}:
-                        collocationData[nowClothingId][nowCollocationalType] = 'None'
-                    else:
-                        precedenceList = ValueHandle.sortedDictForValues(precedenceList)
-                        collocationData[nowClothingId][nowCollocationalType] = list(precedenceList.keys())[-1]
-                        collocationData[nowClothingId]['Price'] += clothingPriceData[list(precedenceList.keys())[-1]]
-                elif nowCollocationalRestrict == 'Must':
-                    precedenceList = {}
-                    for precedenceClothing in characterClothingData[nowClothingType][nowClothingId]['Collocation'][nowCollocationalType]:
-                        if precedenceClothing in characterClothingData and characterData[precedenceClothing] != {}:
-                            precedenceList[precedenceClothing] = list(clothingNameData[nowCollocationalType][characterClothingData[nowClothingType][nowClothingId]['Collocation'][nowCollocationalType]].keys())[-1]
-                    if precedenceList == {}:
-                        collocationData[nowClothingId] = 'None'
-                    else:
-                        precedenceList = ValueHandle.sortedDictForValues(precedenceList)
-                        collocationData[nowClothingId][nowCollocationalType] = list(precedenceList.keys())[-1]
-                        collocationData[nowClothingId]['Price'] += clothingPriceData[list(precedenceList.keys())[-1]]
+                usuallyCollocation = getAppointTypeClothingTop(nowClothingData,nowClothingType,clothingData,clothingPriceData,collocationType,collocationData)
+                if usuallyCollocation != 'None':
+                    collocationData[collocationType] = usuallyCollocation
+                    collocationData['Price'] += clothingPriceData[collocationType][usuallyCollocation]
+                else:
+                    collocationData = "None"
+                    break
+        elif nowRestrict == 'Usually':
+            usuallyCollocation = getAppointTypeClothingTop(nowClothingData,nowClothingType,clothingData,clothingPriceData,collocationType,collocationData)
+            if usuallyCollocation != 'None':
+                collocationData[collocationType] = usuallyCollocation
+                collocationData['Price'] += clothingPriceData[collocationType][usuallyCollocation]
+            else:
+                collocationData[collocationType] = ''
+        elif nowRestrict == 'Must' or 'Ornone':
+            clothingNowTypePrecedenceList = nowClothingData['Collocation'][collocationType]
+            precedenceCollocation = getAppointNamesClothingTop(list(clothingNowTypePrecedenceList.keys()),clothingNameData[collocationType])
+            if precedenceCollocation != 'None':
+                collocationData[collocationType] = precedenceCollocation
+                collocationData['Price'] += clothingPriceData[collocationType][precedenceCollocation]
+            else:
+                collocationData = 'None'
+                break
+    return collocationData
+
+def getAppointNamesClothingTop(appointNameList:list,clothingTypeNameData:dict) -> str:
+    '''
+    获取指定服装类型数据下指定名称的服装中价值最高的服装
+    Keyword arguments:
+    appointNameList -- 要获取的服装名字列表
+    clothingTypeNameData -- 以名字为分类的已排序的要查询的服装数据
+    '''
+    clothingData = {}
+    for appoint in appointNameList:
+        if appoint in clothingTypeNameData:
+            nowAppointClothing = list(clothingTypeNameData[appoint].keys())[-1]
+            clothingData[nowAppointClothing] = clothingTypeNameData[appoint][nowAppointClothing]
+    if clothingData != {}:
+        return list(ValueHandle.sortedDictForValues(clothingData).keys())[-1]
+    return 'None'
+
+def getAppointTypeClothingTop(nowClothingData:str,nowClothingType:str,clothingData:dict,clothingPriceData,newClothingType:str,collocationData:dict) -> str:
+    '''
+    获取指定类型下的可搭配的衣服中数值最高的衣服
+    Keyword arguments:
+    nowClothingName -- 当前服装名字
+    nowClothingType -- 当前服装类型
+    clothingData -- 要查询的所有服装数据
+    clothingPriceData -- 已按价值排序的各类型服装数据
+    newClothingType -- 要查询的服装类型
+    collocationData -- 已有的穿戴数据
+    '''
+    clothingTypeData = clothingPriceData[newClothingType]
+    clothingTypeDataList = list(clothingTypeData.keys())
+    if clothingTypeDataList != []:
+        clothingTypeDataList.reverse()
+    for newClothing in clothingTypeDataList:
+        newClothingData = clothingData[newClothingType][newClothing]
+        returnJudge = True
+        if judgeClothingCollocation(nowClothingData,nowClothingType,newClothingData,newClothingType) == False:
+            continue
+        for collocationType in collocationData:
+            if collocationType == 'Price':
+                continue
+            nowCollocationId = collocationData[collocationType]
+            if nowCollocationId == '':
+                continue
+            nowCollocationData = clothingData[collocationType][nowCollocationId]
+            if judgeClothingCollocation(nowCollocationData,collocationType,newClothingData,newClothingType) == False:
+                returnJudge = False
+                break
+        if returnJudge == False:
+            continue
+        return newClothing
+    return 'None'
+
+def judgeClothingCollocation(oldClothingData:dict,oldClothingType:str,newClothingData:dict,newClothingType:str) -> bool:
+    '''
+    判断两件服装是否能够进行搭配
+    Keyword arguments:
+    oldClothingData -- 旧服装数据
+    oldClothingType -- 旧服装类型
+    newClothingData -- 新服装数据
+    newClothingType -- 新服装类型
+    '''
+    oldClothingDataRestrictData = oldClothingData['CollocationalRestriction']
+    newClothingDataRestrictData = newClothingData['CollocationalRestriction']
+    oldJudge = oldClothingDataRestrictData[newClothingType]
+    newJudge = newClothingDataRestrictData[oldClothingType]
+    if oldJudge in {'Must':0,'Ornone':1}:
+        oldCollocationTypeData = oldClothingData['Collocation'][newClothingType]
+        if newClothingData['Name'] not in oldCollocationTypeData:
+            return False
+    elif oldJudge == 'None':
+        return False
+    if newJudge in {'Must':0,'Ornone':1}:
+        newCollocationTypeData = newClothingData['Collocation'][oldClothingType]
+        if oldClothingData['Name'] not in newCollocationTypeData:
+            return False
+    elif newJudge == 'None':
+        return False
+    return True
 
 clothingEvaluationTextList = [TextLoading.getTextData(TextLoading.stageWordPath,str(k)) for k in range(102,112)]
 clothingTagList = [TextLoading.getTextData(TextLoading.stageWordPath,str(k)) for k in range(112,117)]
@@ -135,3 +223,10 @@ def setClothintEvaluationText(clothingData:dict):
     clothingTagText = clothingTagList[clothingAttrData.index(max(clothingAttrData)) - 1]
     clothingData['Evaluation'] = clothingEvaluationText
     clothingData['Tag'] = clothingTagText
+
+def initCharcterClothintPutOn():
+    '''
+    为主角外所有角色穿戴衣服
+    '''
+    for character in CacheContorl.characterData['character']:
+        characterPutOnClothing(character)

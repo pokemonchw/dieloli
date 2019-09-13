@@ -1,6 +1,7 @@
-from script.Design import GameTime,AttrCalculation,CharacterHandle,MapHandle,Course,Interest
+from script.Design import GameTime,AttrCalculation,CharacterHandle,MapHandle,Course,Interest,Clothing
 from script.Core import CacheContorl
 from script.Panel import SeeCharacterAttrPanel
+import uuid
 
 def initGameStart():
     '''
@@ -10,6 +11,9 @@ def initGameStart():
     AttrCalculation.setAttrOver('0')
     Course.initPhaseCourseHour()
     CharacterHandle.initCharacterList()
+    characterSuit = Clothing.creatorSuit('Uniform',CacheContorl.characterData['character']['0']['Sex'])
+    for clothing in characterSuit:
+        CacheContorl.characterData['character']['0']['Clothing'][clothing][uuid.uuid1()] = characterSuit[clothing]
     Interest.initCharacterInterest()
     Course.initCharacterKnowledge()
     Course.initClassTeacher()
