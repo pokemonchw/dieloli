@@ -38,7 +38,7 @@ def seeSaveListPanel(pageSaveValue:int,lastSavePageValue:int,autoSave = False) -
     for i in range(0,overSaveId - startSaveId):
         id = CmdButtonQueue.idIndex(i)
         saveId = startSaveId + i
-        if autoSave == True and SaveHandle.judgeSaveFileExist(saveId) != '1':
+        if autoSave == True and SaveHandle.judgeSaveFileExist(str(saveId)) == False:
             idText = idInfoText + " " + str(saveId) + ":"
             idTextList.append(idText)
         else:
@@ -48,8 +48,8 @@ def seeSaveListPanel(pageSaveValue:int,lastSavePageValue:int,autoSave = False) -
         id = str(i)
         idText = idTextList[i]
         EraPrint.plittleline()
-        saveId = SaveHandle.getSavePageSaveId(pageSaveValue,i)
-        if SaveHandle.judgeSaveFileExist(saveId) == '1':
+        saveId = str(SaveHandle.getSavePageSaveId(pageSaveValue,i))
+        if SaveHandle.judgeSaveFileExist(saveId):
             saveInfoHead = SaveHandle.loadSaveInfoHead(saveId)
             gameTimeData = saveInfoHead['gameTime']
             gameTimeText = GameTime.getDateText(gameTimeData)
@@ -80,7 +80,7 @@ def seeSaveListPanel(pageSaveValue:int,lastSavePageValue:int,autoSave = False) -
         i = pageSaveValue
         id = CmdButtonQueue.idIndex(i)
         EraPrint.plittleline()
-        if SaveHandle.judgeSaveFileExist('auto') == '1':
+        if SaveHandle.judgeSaveFileExist('auto'):
             saveInfoHead = SaveHandle.loadSaveInfoHead('auto')
             gameTimeData = saveInfoHead['gameTime']
             gameTimeText = GameTime.getDateText(gameTimeData)

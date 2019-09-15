@@ -36,8 +36,8 @@ def establishSave_func():
                 CacheContorl.panelState['SeeSaveListPanel'] = savePanelPage + 1
         else:
             ansReturn = int(yrn)
-            saveId = SaveHandle.getSavePageSaveId(showSaveValue,ansReturn)
-            if SaveHandle.judgeSaveFileExist(saveId) == '1':
+            saveId = str(SaveHandle.getSavePageSaveId(showSaveValue,ansReturn))
+            if SaveHandle.judgeSaveFileExist(saveId):
                 askForOverlaySave_func(saveId)
             else:
                 SaveHandle.establishSave(saveId)
@@ -78,7 +78,7 @@ def loadSave_func():
         else:
             ansReturn = int(yrn)
             saveId = SaveHandle.getSavePageSaveId(showSaveValue,ansReturn)
-            if askForLoadSave_func(saveId):
+            if askForLoadSave_func(str(saveId)):
                 break
 
 def savePageIndex():

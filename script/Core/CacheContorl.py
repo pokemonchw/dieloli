@@ -1,9 +1,15 @@
+import concurrent.futures
 
 # 流程用变量组
 flowContorl = {}
 
 # 主页监听控制流程用变量组
 wframeMouse = {}
+
+# 进程池
+processPool = concurrent.futures.ProcessPoolExecutor()
+# 线程池
+threadPool = concurrent.futures.ThreadPoolExecutor()
 
 # cmd存储
 cmdMap = {}

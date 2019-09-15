@@ -2,10 +2,19 @@
 import os
 import json
 import uuid
+import psutil
+import signal
 from tkinter import ttk,Tk,Text,StringVar,FALSE,Menu,END,N,W,E,S,VERTICAL,font
 from script.Core import GameConfig,TextLoading,CacheContorl,SettingFrame,AboutFrame,TextHandle
 
 def closeWindow():
+    '''
+    关闭游戏，会终止当前进程和所有子进程
+    '''
+    parent = psutil.Process(os.getpid())
+    children = parent.children(recursive=True)
+    for process in children:
+        process.send_signal(signal.SIGTERM)
     os._exit(0)
 
 # 显示主框架

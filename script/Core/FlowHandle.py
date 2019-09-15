@@ -159,7 +159,6 @@ def order_deal(flag='order', print_order=True):
             order = IoInit.getorder()
             if CacheContorl.flowContorl['quitGame']:
                 os._exit(0)
-                return
             if CacheContorl.flowContorl['restartGame'] == 1:
                 CacheContorl.flowContorl['restartGame'] = 0
                 reset_func()

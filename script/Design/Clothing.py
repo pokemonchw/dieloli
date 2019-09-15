@@ -1,6 +1,9 @@
 from script.Core import CacheContorl,TextLoading,ValueHandle
 import random
 import math
+import os
+import datetime
+import multiprocessing
 
 def creatorSuit(suitName:str,sex:str) -> dict:
     '''
@@ -37,6 +40,7 @@ def characterPutOnClothing(characterId:str):
     角色自动选择并穿戴服装
     Keyword arguments:
     characterId -- 角色id
+    putOnData -- 与主进程共享的dict
     '''
     collocationData = {}
     characterClothingData = CacheContorl.characterData['character'][characterId]['Clothing']
@@ -55,8 +59,7 @@ def characterPutOnClothing(characterId:str):
                 collocationData[clothingId] = nowCollocationData
     collocationPriceData = {collocation:collocationData[collocation]['Price'] for collocation in collocationData}
     collocationPriceData = ValueHandle.sortedDictForValues(collocationPriceData)
-    print(CacheContorl.characterData['character'][characterId])
-    CacheContorl.characterData['character'][characterId]['PutOn'] = collocationData[list(collocationPriceData.keys())[-1]]
+    CacheContorl.characterData['character'][characterId]['PutOn'] = collocationPriceData
 
 def getClothingNameData(clothingsData:dict) -> dict:
     '''
@@ -224,9 +227,11 @@ def setClothintEvaluationText(clothingData:dict):
     clothingData['Evaluation'] = clothingEvaluationText
     clothingData['Tag'] = clothingTagText
 
-def initCharcterClothintPutOn():
+def initCharcterClothintPutOn(playerPass=False):
     '''
     为主角外所有角色穿戴衣服
     '''
     for character in CacheContorl.characterData['character']:
+        if playerPass and character == '0':
+            continue
         characterPutOnClothing(character)

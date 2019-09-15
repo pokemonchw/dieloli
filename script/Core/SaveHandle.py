@@ -17,7 +17,7 @@ def getSaveDirPath(saveId:str) -> str:
         os.makedirs(savepath)
     return os.path.join(savepath,saveId)
 
-def judgeSaveFileExist(saveId:str) -> str:
+def judgeSaveFileExist(saveId:str) -> bool:
     '''
     判断存档id对应的存档是否存在
     Keyword arguments:
@@ -119,7 +119,7 @@ def getSavePageSaveId(pageSaveValue:int,inputId:int) -> int:
     savePanelPage = int(CacheContorl.panelState['SeeSaveListPanel']) + 1
     startSaveId = pageSaveValue * (savePanelPage - 1)
     saveId = startSaveId + inputId
-    return saveId
+    return int(saveId)
 
 def removeSave(saveId:str):
     '''

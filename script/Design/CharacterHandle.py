@@ -89,6 +89,7 @@ def initCharacter(nowId:int,character:dict):
     CacheContorl.temporaryCharacter.update(defaultAttr)
     CacheContorl.featuresList = {}
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
+    Clothing.characterPutOnClothing(characterId)
     CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
 
 def characterAgeFeatureHandle(ageTem:str,characterSex:str):
@@ -238,7 +239,8 @@ def initCharacterDormitory():
     for character in CacheContorl.characterData['character']:
         if CacheContorl.characterData['character'][character]['Age'] < 18:
             if CacheContorl.characterData['character'][character]['Sex'] in ['Man','Woman']:
-                characterSexData[CacheContorl.characterData['character'][character]['Sex']][character] = CacheContorl.characterData['character'][character]['Age']
+                nowSex = CacheContorl.characterData['character'][character]['Sex']
+                characterSexData[nowSex][character] = CacheContorl.characterData['character'][character]['Age']
             else:
                 characterSexData['Other'][character] = CacheContorl.characterData['character'][character]['Age']
         else:
