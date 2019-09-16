@@ -34,7 +34,7 @@ def optionint(
         idSwitch = True,
         askfor = True,
         cmdSize = 'left',
-        startId = '0',
+        startId = 0,
         cmdListData=None,
         lastLine = False) -> list:
     '''
@@ -48,7 +48,7 @@ def optionint(
     idSwitch -- id显示开关 (default True)
     askfor -- 绘制完成时等待玩家输入的开关 (default True)
     cmdSize -- 命令文本在当前列的对齐方式(left/center/right) (default 'left')
-    startId -- 命令列表的起始id (default '0')
+    startId -- 命令列表的起始id (default 0)
     cmdListData -- 命令列表数据 (default None)
     lastLine -- 最后一个命令换行绘制 (default False)
     '''
@@ -67,7 +67,6 @@ def optionint(
         cmdColumn = len(cmdListData) + 1
     for i in range(0,len(cmdListData)):
         cmdText = Dictionaries.handleText(cmdListData[i])
-        startId = int(startId)
         returnId = i + startId
         if idSwitch == True:
             id = idIndex(returnId)

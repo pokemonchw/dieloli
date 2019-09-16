@@ -5,6 +5,26 @@ import os
 import datetime
 import multiprocessing
 
+clothingTagTextList = {
+    "Sexy":TextLoading.getTextData(TextLoading.stageWordPath,'118'),
+    "Handsome":TextLoading.getTextData(TextLoading.stageWordPath,'119'),
+    "Elegant":TextLoading.getTextData(TextLoading.stageWordPath,'120'),
+    "Fresh":TextLoading.getTextData(TextLoading.stageWordPath,'121'),
+    "Sweet":TextLoading.getTextData(TextLoading.stageWordPath,'122'),
+    "Warm":TextLoading.getTextData(TextLoading.stageWordPath,'123'),
+    "Cleanliness":TextLoading.getTextData(TextLoading.stageWordPath,'124'),
+}
+clothingTypeTextList = {
+    "Coat":TextLoading.getTextData(TextLoading.stageWordPath,'41'),
+    "Underwear":TextLoading.getTextData(TextLoading.stageWordPath,'42'),
+    "Pants":TextLoading.getTextData(TextLoading.stageWordPath,'43'),
+    "Skirt":TextLoading.getTextData(TextLoading.stageWordPath,'44'),
+    "Shoes":TextLoading.getTextData(TextLoading.stageWordPath,'45'),
+    "Socks":TextLoading.getTextData(TextLoading.stageWordPath,'46'),
+    "Bra":TextLoading.getTextData(TextLoading.stageWordPath,'47'),
+    "Underpants":TextLoading.getTextData(TextLoading.stageWordPath,'48'),
+}
+
 def creatorSuit(suitName:str,sex:str) -> dict:
     '''
     创建套装
@@ -58,8 +78,8 @@ def characterPutOnClothing(characterId:str):
                 nowCollocationData['Price'] += clothingsPriceData[clothingType][clothingId]
                 collocationData[clothingId] = nowCollocationData
     collocationPriceData = {collocation:collocationData[collocation]['Price'] for collocation in collocationData}
-    collocationPriceData = ValueHandle.sortedDictForValues(collocationPriceData)
-    CacheContorl.characterData['character'][characterId]['PutOn'] = collocationPriceData
+    collocationId = list(ValueHandle.sortedDictForValues(collocationPriceData).keys())[-1]
+    CacheContorl.characterData['character'][characterId]['PutOn'] = collocationData[collocationId]
 
 def getClothingNameData(clothingsData:dict) -> dict:
     '''
@@ -99,8 +119,10 @@ def getClothingCollocationData(nowClothingData:dict,nowClothingType:str,clothing
     '''
     collocationData = {'Price':0}
     clothingCollocationTypeData = nowClothingData['CollocationalRestriction']
-    for collocationType in clothingCollocationTypeData:
+    for collocationType in clothingData:
         collocationData[collocationType] = ''
+        if collocationType not in clothingCollocationTypeData:
+            continue
         nowRestrict = clothingCollocationTypeData[collocationType]
         if nowRestrict == 'Precedence':
             clothingNowTypePrecedenceList = nowClothingData['Collocation'][collocationType]
@@ -223,7 +245,7 @@ def setClothintEvaluationText(clothingData:dict):
     clothingAttrData = [clothingData['Sexy'],clothingData['Handsome'],clothingData['Elegant'],clothingData['Fresh'],clothingData['Sweet']]
     clothingAttrMax = sum(clothingAttrData)
     clothingEvaluationText = clothingEvaluationTextList[math.floor(clothingData['Price'] / 480)]
-    clothingTagText = clothingTagList[clothingAttrData.index(max(clothingAttrData)) - 1]
+    clothingTagText = clothingTagList[clothingAttrData.index(max(clothingAttrData))]
     clothingData['Evaluation'] = clothingEvaluationText
     clothingData['Tag'] = clothingTagText
 

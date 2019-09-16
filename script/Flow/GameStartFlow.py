@@ -14,6 +14,7 @@ def initGameStart():
     characterSuit = Clothing.creatorSuit('Uniform',CacheContorl.characterData['character']['0']['Sex'])
     for clothing in characterSuit:
         CacheContorl.characterData['character']['0']['Clothing'][clothing][uuid.uuid1()] = characterSuit[clothing]
+    Clothing.characterPutOnClothing('0')
     Interest.initCharacterInterest()
     Course.initCharacterKnowledge()
     Course.initClassTeacher()

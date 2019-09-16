@@ -27,5 +27,6 @@
     "proportion_teacher":1,
     "proportion_student":23,
     "threading_pool_max":20,
-    "insceneseeplayer_max":20
+    "insceneseeplayer_max":20,
+    "seecharacterclothes_max":10
 }
