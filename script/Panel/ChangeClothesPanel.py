@@ -1,5 +1,6 @@
 from script.Core import EraPrint,TextLoading,CacheContorl,PyCmd,TextHandle,GameConfig
 from script.Design import AttrText,CmdButtonQueue,Clothing
+import datetime
 
 def seeCharacterWearClothesInfo(characterId:str):
     '''
@@ -31,7 +32,7 @@ def seeCharacterWearClothes(characterId:str,changeButton:bool):
             clothingTextData[clothingType] = 'None'
         else:
             clothingData = characterClothingData[clothingType][clothingId]
-            clothingText = Clothing.clothingTypeTextList[clothingType] + clothingData['Evaluation'] + clothingData['Tag'] + clothingData['Name']
+            clothingText = Clothing.clothingTypeTextList[clothingType] + ':' + clothingData['Evaluation'] + clothingData['Tag'] + clothingData['Name']
             clothingTextData[clothingText] = {}
             for tag in Clothing.clothingTagTextList:
                 tagText = Clothing.clothingTagTextList[tag] + str(clothingData[tag])
@@ -46,7 +47,7 @@ def seeCharacterWearClothes(characterId:str,changeButton:bool):
         drawText = ''
         EraPrint.plittleline()
         if clothingTextData[clothingText] == 'None':
-            drawText = Clothing.clothingTypeTextList[clothingText] + TextLoading.getTextData(TextLoading.stageWordPath,'117')
+            drawText = Clothing.clothingTypeTextList[clothingText] + ':' + TextLoading.getTextData(TextLoading.stageWordPath,'117')
         else:
             nowClothingTextIndex = TextHandle.getTextIndex(clothingText)
             drawText += clothingText + ' '
@@ -129,9 +130,10 @@ def seeCharacterClothesPanel(characterId:str,clothingType:str,maxPage:int):
                 drawText += ' ' + tagText
         idInfo = CmdButtonQueue.idIndex(i)
         cmdText = idInfo + drawText
+        inputS.append(str(i))
         PyCmd.pcmd(cmdText,i,None)
         i += 1
-        inputS.append(i)
+    EraPrint.p('\n')
     pageText = '(' + str(nowPageId) + '/' + str(maxPage) + ')'
     EraPrint.printPageLine(sample='-',string=pageText)
     EraPrint.p('\n')
@@ -153,5 +155,33 @@ def seeCharacterWearClothesCmd(startId:int) -> str:
     用于控制查看角色服装列表面板的命令菜单
     '''
     EraPrint.pline()
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.seecharacterwearclothes,idSize='center',askfor=False,startId=startId)
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.seecharacterwearclothes,cmdSize='center',askfor=False,startId=startId)
     return yrn
+
+def seeCharacterClothesCmd(startId:int,nowClothingType:str) -> str:
+    '''
+    用于控制查看角色服装列表面板的命令菜单
+    Keyword arguments:
+    startId -- cmd命令的初始Id
+    nowClothingType -- 当前列表的服装类型
+    '''
+    EraPrint.pline()
+    clothingTypeList = list(Clothing.clothingTypeTextList.keys())
+    cmdList = TextLoading.getTextData(TextLoading.cmdPath,CmdButtonQueue.seecharacterclothes)
+    nowClothingTypeIndex = clothingTypeList.index(nowClothingType)
+    upTypeId = nowClothingTypeIndex - 1
+    if nowClothingTypeIndex == 0:
+        upTypeId = len(clothingTypeList) - 1
+    nextTypeId = nowClothingTypeIndex + 1
+    if nowClothingTypeIndex == len(clothingTypeList) - 1:
+        nextTypeId = 0
+    upTypeText = [Clothing.clothingTypeTextList[clothingTypeList[upTypeId]]]
+    nextTypeText = [Clothing.clothingTypeTextList[clothingTypeList[nextTypeId]]]
+    cmdList = upTypeText + cmdList + nextTypeText
+    yrn = CmdButtonQueue.optionint(None,5,cmdSize='center',askfor=False,startId=startId,cmdListData=cmdList)
+    return yrn
+
+def askSeeClothingInfoPanel():
+    EraPrint.pline()
+    titileMessage = TextLoading.getTextData(TextLoading.messagePath,'35')
+    return CmdButtonQueue.optionint(CmdButtonQueue.askseeclothinginfopanel)

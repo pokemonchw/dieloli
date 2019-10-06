@@ -26,6 +26,8 @@ seemap = "seeMap"
 gamehelp = "gameHelp"
 seecharacterwearclothes = "seeCharacterWearClothes"
 changescenecharacterlist = 'changeSceneCharacterList'
+seecharacterclothes = 'seeCharacterClothes'
+askseeclothinginfopanel = 'askSeeClothingInfoPanel'
 
 def optionint(
     cmdList:list,

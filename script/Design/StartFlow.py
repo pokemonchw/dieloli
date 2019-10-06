@@ -23,10 +23,8 @@ def startFrame():
     '''
     游戏主流程
     '''
-    nowFlowId = ''
     FlowHandle.initCache()
     while(True):
-        if nowFlowId != CacheContorl.nowFlowId:
-            nowFlowId = CacheContorl.nowFlowId
-            PyCmd.clr_cmd()
-            flowData[nowFlowId]()
+        nowFlowId = CacheContorl.nowFlowId
+        PyCmd.clr_cmd()
+        flowData[nowFlowId]()
