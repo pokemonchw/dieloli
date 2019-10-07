@@ -62,12 +62,15 @@ def showSceneNameListPanel() -> str:
         PyCmd.pcmd(panelStateOffText,"SeeSceneNameListPanel")
         EraPrint.p('\n')
         nowMap = CacheContorl.nowMap
+        nowPosition = CacheContorl.characterData['character']['0']['Position']
+        nowScene = MapHandle.getSceneIdInMapForScenePathOnMapPath(nowPosition,nowMap)
         nowMapMapSystemStr = MapHandle.getMapSystemPathStrForList(nowMap)
         sceneNameData = MapHandle.getSceneNameListForMapPath(nowMapMapSystemStr)
-        sceneNameList = []
+        sceneNameList = {}
+        nullScene = nowScene
         for scene in sceneNameData:
-            sceneNameList.append(scene + ':' + sceneNameData[scene])
-        EraPrint.plist(sceneNameList,5,'center')
+            sceneNameList[scene] = scene + ':' + sceneNameData[scene]
+        CmdButtonQueue.optionstr(None,4,'center',False,False,list(sceneNameList.values()),nullScene,list(sceneNameList.keys()))
     else:
         PyCmd.pcmd(panelStateOnText,'SeeSceneNameListPanel')
         EraPrint.p('\n')

@@ -113,8 +113,9 @@ def optionstr(
         cmdSize = 'left',
         lastLine = False,
         askfor = True,
-        cmdListData=None,
-        nullCmd = '') -> list:
+        cmdListData = None,
+        nullCmd = '',
+        returnData = None) -> list:
     '''
     绘制无id的文本命令列表
     例:
@@ -126,6 +127,7 @@ def optionstr(
     lastLine -- 最后一个命令换行绘制 (default False)
     cmdListData -- 命令列表数据 (default None)
     nullCmd -- 在列表中按纯文本绘制，并不加入监听列表的命令文本
+    returnData -- 命令返回数据 (default None)
     '''
     if cmdListData == None:
         cmdListData = TextLoading.getTextData(TextLoading.cmdPath, cmdList).copy()
@@ -141,10 +143,16 @@ def optionstr(
     nowNullCmd = nullCmd
     for i in range(0,len(cmdListData)):
         nowNullCmd = True
-        if nullCmd == cmdListData[i]:
-            nowNullCmd = False
-        cmdTextBak = Dictionaries.handleText(cmdListData[i])
-        cmdText = '[' + cmdTextBak + ']'
+        if returnData == None:
+            if nullCmd == cmdListData[i]:
+                nowNullCmd = False
+            cmdTextBak = Dictionaries.handleText(cmdListData[i])
+            cmdText = '[' + cmdTextBak + ']'
+        else:
+            if nullCmd == returnData[i]:
+                nowNullCmd = False
+            cmdTextBak = returnData[i]
+            cmdText = '[' + cmdListData[i] + ']'
         if i == 0:
             cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,noNullCmd=nowNullCmd)
             if nowNullCmd:
