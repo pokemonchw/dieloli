@@ -30,6 +30,7 @@ python3 \
 联系方式
 ----
 e-mail:pokemonchw@gmail.com \
-g+:pokemonchw \
-mastodon:@BonjourTotoro@sn.angry.im \
+twitter:@nekoharuyayuzu \
+mastodon:@nekoharuya@pawoo.net \
+telegram:[推送频道](https://t.me/die_loli) \
 企鹅群:688166358
