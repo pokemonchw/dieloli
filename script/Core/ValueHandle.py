@@ -57,3 +57,13 @@ def getNextValueForList(nowInt:int,intList:list) -> int:
     '''
     nowId = bisect.bisect_left(intList,nowInt)
     return intList[nowId]
+
+def getOldValueForList(nowInt:int,intList:list) -> int:
+    '''
+    获取列表中第一个比指定值小的数
+    Keyword arguments:
+    nowInt -- 作为获取参考的指定数值
+    intList -- 用于取值的列表
+    '''
+    nowId = bisect.bisect_right(intList,nowInt)
+    return intList[nowId - 1]

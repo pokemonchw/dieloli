@@ -79,6 +79,12 @@ def initCharacter(nowId:int,character:dict):
     measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
     defaultAttr['Measirements'] = measurements
     defaultAttr['Knowledge'] = {}
+    if "SexExperience" in character:
+        sexExperienceTem = character['SexExperience']
+    else:
+        sexExperienceTem = getRandNpcSexExperienceTem(defaultAttr['Age'],defaultAttr['Sex'])
+    defaultAttr['SexExperience'] = AttrCalculation.getSexExperience(sexExperienceTem)
+    defaultAttr['SexGrade'] = AttrCalculation.getSexGrade(defaultAttr['SexExperience'])
     if 'Clothing' in character:
         clothingTem = character['Clothing']
     else:
@@ -186,6 +192,24 @@ def getRandNpcFatTem(agejudge:str) -> str:
     nowFatWeightData = fatWeightData[agejudge]
     nowFatTem = ValueHandle.getRandomForWeight(nowFatWeightData)
     return nowFatTem
+
+def getRandNpcSexExperienceTem(age:int,sex:str) -> str:
+    '''
+    按年龄范围随机获取性经验模板
+    Keyword arguments:
+    age -- 年龄
+    sex -- 性别
+    '''
+    ageJudgeSexExperienceTemData = TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeJudgeSexExperienceTem')
+    if sex == 'Asexual':
+        sex = 'Woman'
+    if sex == 'Futa':
+        sex = 'Man'
+    nowTemData = ageJudgeSexExperienceTemData[sex]
+    ageRegionList = [int(i) for i in nowTemData.keys()]
+    ageRegion = str(ValueHandle.getOldValueForList(age,ageRegionList))
+    ageRegionData = nowTemData[ageRegion]
+    return ValueHandle.getRandomForWeight(ageRegionData)
 
 bodyFatWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'BodyFatWeight')
 def getRandNpcBodyFatTem(ageJudge:str,bmiTem:str) -> str:

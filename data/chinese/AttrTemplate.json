@@ -55,7 +55,7 @@
     "MiddleAdult":{
       "MaxAge":"65",
       "MiniAge":"40"
-    },
+   },
     "YoungAdult":{
       "MaxAge":"40",
       "MiniAge":"18"
@@ -211,6 +211,132 @@
       "Ordinary":[30,50],
       "Scarce":[1,29],
       "None":[0,0]
+    }
+  },
+  "AgeJudgeSexExperienceTem":{
+    "Man":{
+      "7":{
+        "Abundant":1,
+        "Ordinary":3,
+        "Scarce":6,
+        "None":90
+      },
+      "12":{
+        "Abundant":5,
+        "Ordinary":10,
+        "Scarce":20,
+        "None":65
+      },
+      "17":{
+        "Abundant":6,
+        "Ordinary":20,
+        "Scarce":40,
+        "None":34
+      },
+      "22":{
+        "Abundant":7,
+        "Ordinary":22,
+        "Scarce":45,
+        "None":26
+      },
+      "27":{
+        "Abundant":10,
+        "Ordinary":30,
+        "Scarce":40,
+        "None":20
+      },
+      "32":{
+        "Abundant":12,
+        "Ordinary":50,
+        "Scarce":33,
+        "None":5
+      },
+      "37":{
+        "Abundant":14,
+        "Ordinary":60,
+        "Scarce":25,
+        "None":1
+      },
+      "42":{
+        "Abundant":20,
+        "Ordinary":70,
+        "Scarce":9,
+        "None":1
+      }
+    },
+    "Woman":{
+      "7":{
+        "Abundant":1,
+        "Ordinary":2,
+        "Scarce":3,
+        "None":94
+      },
+      "12":{
+        "Abundant":2,
+        "Ordinary":3,
+        "Scarce":4,
+        "None":91
+      },
+      "17":{
+        "Abundant":3,
+        "Ordinary":4,
+        "Scarce":5,
+        "None":88
+      },
+      "22":{
+        "Abundant":4,
+        "Ordinary":5,
+        "Scarce":6,
+        "None":85
+      },
+      "27":{
+        "Abundant":4,
+        "Ordinary":7,
+        "Scarce":10,
+        "None":79
+      },
+      "32":{
+        "Abundant":5,
+        "Ordinary":14,
+        "Scarce":20,
+        "None":61
+      },
+      "37":{
+        "Abundant":10,
+        "Ordinary":28,
+        "Scarce":40,
+        "None":22
+      },
+      "42":{
+        "Abundant":15,
+        "Ordinary":35,
+        "Scarce":45,
+        "None":5
+      },
+      "47":{
+        "Abundant":20,
+        "Ordinary":50,
+        "Scarce":29,
+        "None":1
+      },
+      "52":{
+        "Abundant":25,
+        "Ordinary":65,
+        "Scarce":9,
+        "None":1
+      },
+      "57":{
+        "Abundant":40,
+        "Ordinary":55,
+        "Scarce":4,
+        "None":1
+      },
+      "62":{
+        "Abundant":49,
+        "Ordinary":49,
+        "Scarce":1,
+        "None":1
+      }
     }
   },
   "HeightTem":{
