@@ -1,6 +1,5 @@
 from script.Core import EraPrint,TextLoading,CacheContorl,PyCmd,TextHandle,GameConfig
 from script.Design import AttrText,CmdButtonQueue,Clothing
-import datetime
 
 def seeCharacterWearClothesInfo(characterId:str):
     '''
@@ -101,10 +100,13 @@ def seeCharacterClothesPanel(characterId:str,clothingType:str,maxPage:int):
         return []
     if nowPageEndId > len(characterClothingData.keys()):
         nowPageEndId = len(characterClothingData.keys())
+    passId = None
     for i in range(nowPageStartId,nowPageEndId):
         clothingId = list(characterClothingData.keys())[i]
+        if clothingId == CacheContorl.characterData['character'][characterId]['PutOn'][clothingType]:
+            passId = i - nowPageStartId
         clothingData = characterClothingData[clothingId]
-        clothingText = clothingData['Eevaluation'] = clothingData['Tag'] + clothingData['Name']
+        clothingText = clothingData['Evaluation'] + clothingData['Tag'] + clothingData['Name']
         clothingTextData[clothingText] = {}
         for tag in Clothing.clothingTagTextList:
             tagText = Clothing.clothingTagTextList[tag] + str(clothingData[tag])
@@ -128,6 +130,8 @@ def seeCharacterClothesPanel(characterId:str,clothingType:str,maxPage:int):
                 drawText += ' ' + tagText + ' ' * (tagTextIndex - nowTagTextIndex)
             else:
                 drawText += ' ' + tagText
+        if i == passId:
+            drawText += ' ' + TextLoading.getTextData(TextLoading.stageWordPath,'125')
         idInfo = CmdButtonQueue.idIndex(i)
         cmdText = idInfo + drawText
         inputS.append(str(i))
@@ -181,7 +185,64 @@ def seeCharacterClothesCmd(startId:int,nowClothingType:str) -> str:
     yrn = CmdButtonQueue.optionint(None,5,cmdSize='center',askfor=False,startId=startId,cmdListData=cmdList)
     return yrn
 
-def askSeeClothingInfoPanel():
+def askSeeClothingInfoPanel(wearClothingJudge:bool) -> str:
+    '''
+    用于询问查看或穿戴服装的面板
+    Keyword arguments:
+    wearClothingJudge -- 当前服装穿戴状态
+    '''
+    EraPrint.p('\n')
     EraPrint.pline()
     titileMessage = TextLoading.getTextData(TextLoading.messagePath,'35')
-    return CmdButtonQueue.optionint(CmdButtonQueue.askseeclothinginfopanel)
+    cmdData = TextLoading.getTextData(TextLoading.cmdPath,CmdButtonQueue.askseeclothinginfopanel).copy()
+    if wearClothingJudge:
+        del cmdData['0']
+    else:
+        del cmdData['1']
+    cmdList = list(cmdData.values())
+    return CmdButtonQueue.optionint(None,cmdListData=cmdList)
+
+def seeClothingInfoPanel(characterId:str,clothingType:str,clothingId:str,wearClothingJudge:bool):
+    '''
+    查看服装详细信息面板
+    Keyword arguments:
+    characterId -- 角色id
+    clothingType -- 服装类型
+    clothingId -- 服装id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath,'126'))
+    clothingData = CacheContorl.characterData['character'][characterId]['Clothing'][clothingType][clothingId]
+    infoList = []
+    clothingName = clothingData['Name']
+    if wearClothingJudge:
+        clothingName += ' ' + TextLoading.getTextData(TextLoading.stageWordPath,'125')
+    infoList.append(TextLoading.getTextData(TextLoading.stageWordPath,'128') + clothingName)
+    clothingTypeText = Clothing.clothingTypeTextList[clothingType]
+    infoList.append(TextLoading.getTextData(TextLoading.stageWordPath,'129') + clothingTypeText)
+    evaluationText = TextLoading.getTextData(TextLoading.stageWordPath,'131') + clothingData['Evaluation']
+    infoList.append(evaluationText)
+    EraPrint.plist(infoList,3,'center')
+    EraPrint.sontitleprint(TextLoading.getTextData(TextLoading.stageWordPath,'130'))
+    tagTextList = []
+    for tag in Clothing.clothingTagTextList:
+        tagText = Clothing.clothingTagTextList[tag]
+        tagText += str(clothingData[tag])
+        tagTextList.append(tagText)
+    EraPrint.plist(tagTextList,4,'center')
+    EraPrint.sontitleprint(TextLoading.getTextData(TextLoading.stageWordPath,'127'))
+    EraPrint.p(clothingData['Describe'])
+
+def seeClothingInfoAskPanel(wearClothingJudge:bool) -> str:
+    '''
+    查看服装详细信息的控制面板
+    Keyword arguments:
+    wearClothingJudge -- 服装穿戴状态
+    '''
+    EraPrint.pline()
+    cmdData = TextLoading.getTextData(TextLoading.cmdPath,CmdButtonQueue.seeclothinginfoaskpanel).copy()
+    if wearClothingJudge:
+        del cmdData['1']
+    else:
+        del cmdData['2']
+    cmdList = list(cmdData.values())
+    return CmdButtonQueue.optionint(None,4,cmdSize='center',cmdListData=cmdList)

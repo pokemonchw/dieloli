@@ -1,5 +1,6 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd
 from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue
+from script.Panel import ChangeClothesPanel
 
 panelStateTextData = TextLoading.getTextData(TextLoading.cmdPath,'cmdSwitch')
 panelStateOnText = panelStateTextData[1]
@@ -108,18 +109,7 @@ def seeCharacterEquipmentPanel(characterId:str) -> str:
     if panelState == "0":
         PyCmd.pcmd(panelStateOffText,'CharacterEquipmentPanel')
         characterData = AttrHandle.getAttrData(characterId)
-        EraPrint.p('\n')
-        EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '39'))
-        EraPrint.p('\n')
-        characterClothingList = characterData['Clothing']
-        characterClothingText = AttrText.getClothingText(characterClothingData)
-        EraPrint.plist(characterClothingText, 4, 'center')
-        EraPrint.p('\n')
-        EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '40'))
-        EraPrint.p('\n')
-        characterSexItemList = characterData['SexItem']
-        characterSexItemText = AttrText.getSexItemText(characterSexItemList)
-        EraPrint.plist(characterSexItemText, 5, 'center')
+        ChangeClothesPanel.seeCharacterWearClothes(characterId,False)
     else:
         PyCmd.pcmd(panelStateOnText, 'CharacterEquipmentPanel', None)
         EraPrint.p('\n')

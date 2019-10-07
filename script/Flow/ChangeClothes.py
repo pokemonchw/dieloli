@@ -66,16 +66,61 @@ def seeCharacterClothesList(clothingType:str):
             clothingType = nextType
         else:
             clothingId = list(CacheContorl.characterData['character'][characterId]['Clothing'][clothingType].keys())[yrn]
-            askSeeClothingInfo(clothingType,clothingId)
+            askSeeClothingInfo(clothingType,clothingId,characterId)
 
-def askSeeClothingInfo(clothingType:str,clothingId:str):
+def askSeeClothingInfo(clothingType:str,clothingId:str,characterId:str):
     '''
     确认查看服装详细信息流程
     Keyword arguments:
     clothingType -- 服装类型
     clothingId -- 服装id
+    characterId -- 角色id
     '''
-    yrn = int(ChangeClothesPanel.askSeeClothingInfoPanel())
+    wearClothingJudge = False
+    if clothingId == CacheContorl.characterData['character'][characterId]['PutOn'][clothingType]:
+        wearClothingJudge = True
+    yrn = int(ChangeClothesPanel.askSeeClothingInfoPanel(wearClothingJudge))
+    if yrn == 0:
+        if wearClothingJudge:
+            CacheContorl.characterData['character'][characterId]['PutOn'][clothingType] = ''
+        else:
+            CacheContorl.characterData['character'][characterId]['PutOn'][clothingType] = clothingId
+    elif yrn == 1:
+        seeClothingInfo(characterId,clothingType,clothingId)
+
+def seeClothingInfo(characterId:str,clothingType:str,clothingId:str):
+    '''
+    查看服装详细信息的流程
+    Keyword arguments:
+    characterId -- 角色id
+    clothingType -- 服装类型
+    clothingId -- 服装id
+    '''
+    clothingList = list(CacheContorl.characterData['character'][characterId]['Clothing'][clothingType].keys())
+    while True:
+        wearClothingJudge = False
+        if clothingId == CacheContorl.characterData['character'][characterId]['PutOn'][clothingType]:
+            wearClothingJudge = True
+        nowClothingIndex = clothingList.index(clothingId)
+        ChangeClothesPanel.seeClothingInfoPanel(characterId,clothingType,clothingId,wearClothingJudge)
+        yrn = int(ChangeClothesPanel.seeClothingInfoAskPanel(wearClothingJudge))
+        if yrn == 0:
+            if nowClothingIndex == 0:
+                clothingId = clothingList[-1]
+            else:
+                clothingId = clothingList[nowClothingIndex - 1]
+        elif yrn == 1:
+            if wearClothingJudge:
+                CacheContorl.characterData['character'][characterId]['PutOn'][clothingType] = ''
+            else:
+                CacheContorl.characterData['character'][characterId]['PutOn'][clothingType] = clothingId
+        elif yrn == 2:
+            break
+        elif yrn == 3:
+            if clothingId == clothingList[-1]:
+                clothingId = clothingList[0]
+            else:
+                clothingId = clothingList[nowClothingIndex + 1]
 
 def getCharacterClothesPageMax(characterId:str,clothingType:str):
     '''
