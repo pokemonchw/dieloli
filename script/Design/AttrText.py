@@ -123,51 +123,6 @@ def getSexText(sexId:str) -> str:
     sexText = data[sexId]
     return sexText
 
-def getFeaturesStr(fList:dict) -> str:
-    '''
-    获取特征描述文本
-    Keyword arguments:
-    fList -- 特征数据
-    '''
-    featuresListStr = ''
-    featuresListText = [
-        'Age',"Chastity",'Disposition','Courage','SelfConfidence','Friends','Figure',
-        'Sex','AnimalInternal','AnimalExternal','Charm'
-    ]
-    for feature in featuresListText:
-        if feature in fList:
-            featureText = fList[feature]
-            if featureText != '':
-                featuresListStr.join('['.join(featureText).join(']'))
-    return featuresListStr
-
-def getEngravingText(eList:dict) -> list:
-    '''
-    获取刻印描述文本
-    Keyword arguments:
-    eList -- 刻印数据
-    '''
-    painLevel = eList["Pain"]
-    happyLevel = eList["Happy"]
-    yieldLevel = eList["Yield"]
-    fearLevel = eList["Fear"]
-    resistanceLevel = eList["Resistance"]
-    painLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'31')
-    happyLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'32')
-    yieldLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'33')
-    fearLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'34')
-    resistanceLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'35')
-    LVText = TextLoading.getTextData(TextLoading.stageWordPath,'36')
-    levelList = [painLevel,happyLevel,yieldLevel,fearLevel,resistanceLevel]
-    levelFixList = [painLevelFix,happyLevelFix,yieldLevelFix,fearLevelFix,resistanceLevelFix]
-    levelTextList = []
-    levelBarList = []
-    for i in range(0,len(levelList)):
-        levelTextList.append(levelFixList[i] + LVText + levelList[i])
-    for i in range(0,len(levelList)):
-        levelBarList.append(ProportionalBar.getCountBar(levelTextList[i], 3, levelList[i], 'engravingemptybar'))
-    return levelBarList
-
 def getClothingText(clothingList:dict) -> list:
     '''
     获取服装描述文本
@@ -205,49 +160,6 @@ def getClothingText(clothingList:dict) -> list:
     ]
     return clothingTextList
 
-def getSexItemText(sexItemList:dict) -> list:
-    '''
-    获取性道具描述文本
-    Keyword arguments:
-    sexItemList -- 性道具数据
-    '''
-    headid = sexItemList["Head"]
-    eyeid = sexItemList["Eye"]
-    earid = sexItemList["Ear"]
-    mouthid = sexItemList["Mouth"]
-    finesseid = sexItemList["Finesse"]
-    fingerid = sexItemList["Finger"]
-    chestid = sexItemList["Chest"]
-    privatesid = sexItemList["Privates"]
-    anusid = sexItemList["Anus"]
-    otherid = sexItemList["Other"]
-    sexItemData = equipmentData["SexItem"]
-    headText = sexItemData["Head"][headid]
-    eyeText = sexItemData["Eye"][eyeid]
-    earText = sexItemData["Ear"][earid]
-    mouthText = sexItemData["Mouth"][mouthid]
-    finesseText = sexItemData["Finesse"][finesseid]
-    fingerText = sexItemData["Finger"][fingerid]
-    chestText = sexItemData["Chest"][chestid]
-    privatesText = sexItemData["Privates"][privatesid]
-    anusText = sexItemData["Anus"][anusid]
-    otherText = sexItemData["Other"][otherid]
-    headText = TextLoading.getTextData(TextLoading.stageWordPath,"49") + headText
-    eyeText = TextLoading.getTextData(TextLoading.stageWordPath,"50") + eyeText
-    earText = TextLoading.getTextData(TextLoading.stageWordPath,"51") + earText
-    mouthText = TextLoading.getTextData(TextLoading.stageWordPath,"52") + mouthText
-    finesseText = TextLoading.getTextData(TextLoading.stageWordPath,"53") + finesseText
-    fingerText = TextLoading.getTextData(TextLoading.stageWordPath,"54") + fingerText
-    chestText = TextLoading.getTextData(TextLoading.stageWordPath,"55") + chestText
-    privatesText = TextLoading.getTextData(TextLoading.stageWordPath,"56") + privatesText
-    anusText = TextLoading.getTextData(TextLoading.stageWordPath,"57") + anusText
-    otherText = TextLoading.getTextData(TextLoading.stageWordPath,"58") + otherText
-    sexItemTextList = [
-        headText,eyeText,earText,mouthText,finesseText,
-        fingerText,chestText,privatesText,anusText,otherText
-    ]
-    return sexItemTextList
-
 def getGoldText(characterId:str) -> str:
     '''
     获取指定角色的金钱信息描述文本
@@ -261,6 +173,24 @@ def getGoldText(characterId:str) -> str:
     goldText = goldText + goldData + moneyText
     return goldText
 
+def getStateText(characterId:str) -> str:
+    '''
+    按角色Id获取状态描述信息
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    state = CacheContorl.characterData['character'][characterId]['State']
+    stateText = TextLoading.getTextData(TextLoading.stageWordPath,'132')[state]
+    return TextLoading.getTextData(TextLoading.stageWordPath,'133') + stateText
+
+def getStatureText(characterId:str) -> list:
+    '''
+    按角色Id获取身材描述信息
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    characterData = CacheContorl.characterData['character'][characterId]
+    return ''
 
 def getCharacterAbbreviationsInfo(characterId:str) -> str:
     '''

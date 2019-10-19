@@ -7,7 +7,7 @@ def setRichTextPrint(textMessage:str,defaultStyle:str) -> list:
     textMessage -- 原始文本
     defaultStyle -- 无富文本样式时的默认样式
     '''
-    styleNameList = GameConfig.getFontDataList() + TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
+    styleNameList = GameConfig.getFontDataList() + list(TextLoading.getGameData(TextLoading.barConfigPath).keys())
     styleIndex = 0
     styleLastIndex = None
     styleMaxIndex = None
@@ -58,7 +58,7 @@ def removeRichCache(string:str) -> str:
     '''
     string = str(string)
     string = Dictionaries.handleText(string)
-    barlist = TextLoading.getTextData(TextLoading.barConfigPath, 'barlist')
+    barlist = list(TextLoading.getGameData(TextLoading.barConfigPath).keys())
     styleNameList = GameConfig.getFontDataList() + barlist
     for i in range(0, len(styleNameList)):
         styleTextHead = '<' + styleNameList[i] + '>'

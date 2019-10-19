@@ -5,9 +5,6 @@ import json
 import sys
 from script.Core import MainFrame,GameConfig
 
-# 防止系统爆栈，设置较多的栈深度
-sys.setrecursionlimit(100000)
-
 input_evnet = threading.Event()
 _send_queue = queue.Queue()
 _order_queue = queue.Queue()

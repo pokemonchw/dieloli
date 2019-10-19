@@ -1,5 +1,10 @@
-from script.Core import TextLoading,EraPrint,CacheContorl
+from script.Core import TextLoading,EraPrint,CacheContorl,GameConfig
 from script.Design import AttrHandle,ProportionalBar
+
+pointTextData = {
+    "HitPoint":TextLoading.getTextData(TextLoading.stageWordPath,'8'),
+    "ManaPoint":TextLoading.getTextData(TextLoading.stageWordPath,'9')
+}
 
 def printHpAndMpBar(characterId:str):
     '''
@@ -7,19 +12,25 @@ def printHpAndMpBar(characterId:str):
     Keyword arguments:
     characterId -- 角色id
     '''
-    characterData = AttrHandle.getAttrData(characterId)
-    characterHitPoint = characterData['HitPoint']
-    characterMaxHitPoint = characterData['HitPointMax']
-    hitPointText = TextLoading.getTextData(TextLoading.stageWordPath, '8')
-    hitPointBar = ProportionalBar.getProportionalBar(hitPointText, characterMaxHitPoint, characterHitPoint, 'hpbar')
-    characterManaPoint = characterData['ManaPoint']
-    characterMaxManaPoint = characterData['ManaPointMax']
-    manaPointText = TextLoading.getTextData(TextLoading.stageWordPath, '9')
-    manaPointBar = ProportionalBar.getProportionalBar(manaPointText, characterMaxManaPoint, characterManaPoint, 'mpbar')
-    hpmpBarList = [hitPointBar, manaPointBar]
+    hpBar = getHpOrMpBar(characterId,'HitPoint',GameConfig.text_width / 2 - 4)
+    mpBar = getHpOrMpBar(characterId,'ManaPoint',GameConfig.text_width / 2 - 4)
     EraPrint.p('\n')
-    EraPrint.plist(hpmpBarList, 2, 'center')
+    EraPrint.plist([hpBar,mpBar], 2, 'center')
     EraPrint.p('\n')
+
+def getHpOrMpBar(characterId:str,barId:str,textWidth:int):
+    '''
+    获取角色的hp或mp比例图，按给定宽度居中
+    Keyword arguments:
+    characterId -- 角色Id
+    barId -- 绘制的比例条类型(hp/mp)
+    textWidth -- 比例条总宽度
+    '''
+    characterData = CacheContorl.characterData['character'][characterId]
+    characterPoint = characterData[barId]
+    characterMaxPoint = characterData[barId + 'Max']
+    pointText = pointTextData[barId]
+    return ProportionalBar.getProportionalBar(pointText,characterMaxPoint,characterPoint,barId + 'bar',textWidth)
 
 def getHpAndMpText(characterId:str) -> str:
     '''

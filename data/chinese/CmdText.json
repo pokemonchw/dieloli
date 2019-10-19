@@ -18,7 +18,7 @@
   "cmdSwitch":["-","+"],
   "mainMenu":["起床","查看属性","更换服装","迷之商店"],
   "systemMenu":["系统设置","查看帮助","储存游戏","读取存档"],
-  "seeAttrPanelHandle":["查看装备和道具","查看经验和能力","查看素质和刻印"],
+  "seeAttrPanelHandle":{"MainAttr":"主属性","Equipment":"服装","Item":"道具","SexExperience":"性经验","Knowledge":"技能","Language":"语言","Features":"素质","SocialContact":"社交"},
   "changeSavePage":["上一页","返回","下一页"],
   "overlaySave":["覆盖","删除","返回"],
   "confirmationOverlaySave":["确定","再考虑下"],

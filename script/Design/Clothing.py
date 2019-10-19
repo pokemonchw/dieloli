@@ -244,7 +244,7 @@ def setClothintEvaluationText(clothingData:dict):
     '''
     clothingAttrData = [clothingData['Sexy'],clothingData['Handsome'],clothingData['Elegant'],clothingData['Fresh'],clothingData['Sweet']]
     clothingAttrMax = sum(clothingAttrData)
-    clothingEvaluationText = clothingEvaluationTextList[math.floor(clothingData['Price'] / 480)]
+    clothingEvaluationText = clothingEvaluationTextList[math.floor(clothingData['Price'] / 480) - 1]
     clothingTagText = clothingTagList[clothingAttrData.index(max(clothingAttrData))]
     clothingData['Evaluation'] = clothingEvaluationText
     clothingData['Tag'] = clothingTagText

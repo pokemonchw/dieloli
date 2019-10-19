@@ -37,5 +37,4 @@ def openAboutFrame():
     LICENSE = Label(root,text=licenseInfo,fg="blue")
     LICENSE.pack()
     LICENSE.bind("<Button-1>", golicense)
-
     root.mainloop()

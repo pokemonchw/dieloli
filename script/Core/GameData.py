@@ -26,7 +26,7 @@ def loadDirNow(dataPath:str):
     '''
     获取路径下的游戏数据
     Keyword arguments:
-    datapath -- 要载入数据的路径
+    dataPath -- 要载入数据的路径
     '''
     nowData = {}
     if os.listdir(dataPath):

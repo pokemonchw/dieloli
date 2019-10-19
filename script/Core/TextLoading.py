@@ -48,7 +48,10 @@ def getGameData(textPathId:str) -> dict:
     Keyword arguments:
     textPathId -- 文件id
     '''
-    return GameData._gamedata[language][textPathId]
+    if textPathId in ['FontConfig','BarConfig']:
+        return GameData._gamedata[textPathId]
+    else:
+        return GameData._gamedata[language][textPathId]
 
 def getCharacterData(characterName:str) -> dict:
     '''

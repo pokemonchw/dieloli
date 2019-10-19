@@ -15,7 +15,7 @@ def p(string:str, style='standard',richTextJudge=True):
     richTextJudge -- 启用富文本的开关 (default True)
     '''
     if richTextJudge:
-        barlist = TextLoading.getTextData(TextLoading.barConfigPath,'barlist')
+        barlist = list(TextLoading.getGameData(TextLoading.barConfigPath).keys())
         styleList = RichText.setRichTextPrint(string, style)
         global last_char
         if len(string) > 0:
@@ -51,7 +51,7 @@ def plt(string:str):
     '''
     按预订样式"littletitle(小标题)"绘制文本
     示例:
-    ====▢小标题▢====
+    ====口小标题口====
     文本将用=补全至与行同宽
     Keyword arguments:
     string -- 小标题文本
@@ -67,7 +67,7 @@ def plt(string:str):
     width = GameConfig.text_width
     textWidth = TextHandle.getTextIndex(string)
     lineWidth = int(int(width)/2 - int(textWidth)/2 - 2)
-    pl('='*lineWidth + '<littletitle>▢' + string + '▢</littletitle>' + '='*lineWidth)
+    pl('='*lineWidth + '<littletitle>口' + string + '口</littletitle>' + '='*lineWidth)
 
 def sontitleprint(string:str):
     '''
@@ -247,6 +247,11 @@ def plist(stringList:list,stringColumn=1,stringSize='left'):
         elif stringSize == 'right':
             stringTextFix = ' ' * (stringIndex - stringIdIndex)
             stringText = stringTextFix + stringText
+        stringTextIndex = TextHandle.getTextIndex(stringText)
+        if stringTextIndex > stringIndex:
+            stringText = stringText[:stringIndex]
+        elif stringTextIndex < stringIndex:
+            stringText = ' ' * (stringIndex - stringTextIndex) + stringText
         if i == 0:
             p(stringText)
         elif i / stringColumn >= 1 and i % stringColumn == 0:

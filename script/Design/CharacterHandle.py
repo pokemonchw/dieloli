@@ -85,6 +85,8 @@ def initCharacter(nowId:int,character:dict):
         sexExperienceTem = getRandNpcSexExperienceTem(defaultAttr['Age'],defaultAttr['Sex'])
     defaultAttr['SexExperience'] = AttrCalculation.getSexExperience(sexExperienceTem)
     defaultAttr['SexGrade'] = AttrCalculation.getSexGrade(defaultAttr['SexExperience'])
+    if sexExperienceTem != 'None':
+        defaultAttr['Features']['Chastity'] = ''
     if 'Clothing' in character:
         clothingTem = character['Clothing']
     else:

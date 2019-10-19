@@ -1,4 +1,6 @@
-def getProportionalBar(valueName:str,maxValue:int,value:int,barid:str) -> str:
+from script.Core import GameConfig,TextHandle
+
+def getProportionalBar(valueName:str,maxValue:int,value:int,barid:str,textWidth=0) -> str:
     '''
     通用用于计算比例条的函数
     Keyword arguments:
@@ -6,12 +8,16 @@ def getProportionalBar(valueName:str,maxValue:int,value:int,barid:str) -> str:
     maxValue -- 最大数值
     value -- 当前数值
     barid -- 用于填充比例条的图形id
+    textWidth -- 进度条区域宽度 (default 0)
     '''
-    proportion = int(int(value)/int(maxValue)* 20)
+    if textWidth == 0:
+        textWidth = GameConfig.text_width
+    barWidth = textWidth - TextHandle.getTextIndex(valueName) - 5 - TextHandle.getTextIndex(str(maxValue)) - TextHandle.getTextIndex(str(value))
+    proportion = int(int(value)/int(maxValue)* barWidth)
     trueBar = "1"
     nullBar = "0"
     proportionBar = trueBar * proportion
-    fixProportionBar =  nullBar * (20 - proportion)
+    fixProportionBar =  nullBar * int(barWidth - proportion)
     proportionBar = '<' + barid + '>' + proportionBar + fixProportionBar + '</' + barid + '>'
     proportionBar = str(valueName) + '[' + proportionBar + ']' + '(' + str(value) + '/' + str(maxValue) + ')'
     return proportionBar

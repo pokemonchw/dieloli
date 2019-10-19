@@ -50,8 +50,7 @@ def seeAttrOnEveryTime_func():
             characterIdList = list(CacheContorl.characterData['character'].keys())
         characterIdIndex = characterIdList.index(characterId)
         inputS = []
-        seeAttrList = seeAttrInEveryTime_func()
-        inputS = inputS + seeAttrList
+        seeAttrInEveryTime_func()
         askSeeAttr = SeeCharacterAttrPanel.askForSeeAttr()
         inputS = inputS + askSeeAttr
         yrn = GameInit.askfor_All(inputS)
@@ -108,25 +107,5 @@ def seeAttrInEveryTime_func():
     '''
     characterId = CacheContorl.characterData['characterId']
     showAttrHandle = CacheContorl.panelState['AttrShowHandlePanel']
-    inputS = []
-    characterMainAttrPanelAsk = SeeCharacterAttrPanel.seeCharacterMainAttrPanel(characterId)
-    inputS.append(characterMainAttrPanelAsk)
-    if showAttrHandle == '0':
-        characterEquipmentPanelAsk = SeeCharacterAttrPanel.seeCharacterEquipmentPanel(characterId)
-        inputS.append(characterEquipmentPanelAsk)
-        characterItemPanelAsk = SeeCharacterAttrPanel.seeCharacterItemPanel(characterId)
-        inputS.append(characterItemPanelAsk)
-    elif showAttrHandle == '1':
-        characterExperiencePanelAsk = SeeCharacterAttrPanel.seeCharacterExperiencePanel(characterId)
-        inputS.append(characterExperiencePanelAsk)
-        characterLevelPanelAsk = SeeCharacterAttrPanel.seeCharacterLevelPanel(characterId)
-        inputS.append(characterLevelPanelAsk)
-    elif showAttrHandle == '2':
-        characterFeaturesPanelAsk = SeeCharacterAttrPanel.seeCharacterFeaturesPanel(characterId)
-        inputS.append(characterFeaturesPanelAsk)
-        characterEngravingPanelAsk = SeeCharacterAttrPanel.seeCharacterEngravingPanel(characterId)
-        inputS.append(characterEngravingPanelAsk)
-    EraPrint.pline()
-    seeAttrPanelHandleAsk = SeeCharacterAttrPanel.seeAttrShowHandlePanel()
-    inputS = seeAttrPanelHandleAsk + inputS
-    return inputS
+    nowAttrPanel = CacheContorl.panelState['AttrShowHandlePanel']
+    SeeCharacterAttrPanel.panelData[nowAttrPanel](characterId)

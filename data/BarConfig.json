@@ -1,11 +1,10 @@
 {
-  "barlist":["hpbar","mpbar","engravingemptybar"],
-  "hpbar":{
+  "HitPointbar":{
     "width":"1",
     "truebar":"hpbar_true",
     "nullbar":"hpbar_null"
   },
-  "mpbar":{
+  "ManaPointbar":{
     "width":"1",
     "truebar":"mpbar_true",
     "nullbar":"mpbar_null"
