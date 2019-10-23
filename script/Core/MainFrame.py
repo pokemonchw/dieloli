@@ -7,6 +7,7 @@ import signal
 from tkinter import ttk,Tk,Text,StringVar,FALSE,Menu,END,N,W,E,S,VERTICAL,font
 from script.Core import GameConfig,TextLoading,CacheContorl,SettingFrame,AboutFrame,TextHandle
 
+
 def closeWindow():
     '''
     关闭游戏，会终止当前进程和所有子进程
@@ -20,6 +21,103 @@ def closeWindow():
 # 显示主框架
 gameName = GameConfig.game_name
 root = Tk()
+
+def check_font():
+	font_dict = {a:0 for a in font.families()}
+	if 'Inconsolata' not in font_dict: #判断用户的操作系统类型
+		if sys.platform == 'win32': 
+			import ctypes
+			from ctypes import wintypes
+
+			try:
+				import winreg
+			except ImportError:
+				import _winreg as winreg
+			user32 = ctypes.WinDLL('user32', use_last_error=True)
+			gdi32 = ctypes.WinDLL('gdi32', use_last_error=True)
+
+			FONTS_REG_PATH = r'Software\Microsoft\Windows NT\CurrentVersion\Fonts'
+
+			HWND_BROADCAST   = 0xFFFF
+			SMTO_ABORTIFHUNG = 0x0002
+			WM_FONTCHANGE    = 0x001D
+			GFRI_DESCRIPTION = 1
+			GFRI_ISTRUETYPE  = 3
+
+			if not hasattr(wintypes, 'LPDWORD'):
+				wintypes.LPDWORD = ctypes.POINTER(wintypes.DWORD)
+
+			user32.SendMessageTimeoutW.restype = wintypes.LPVOID
+			user32.SendMessageTimeoutW.argtypes = (
+				wintypes.HWND,   # hWnd
+				wintypes.UINT,   # Msg
+				wintypes.LPVOID, # wParam
+				wintypes.LPVOID, # lParam
+				wintypes.UINT,   # fuFlags
+				wintypes.UINT,   # uTimeout
+				wintypes.LPVOID) # lpdwResult
+
+			gdi32.AddFontResourceW.argtypes = (
+				wintypes.LPCWSTR,) # lpszFilename
+
+			# http://www.undocprint.org/winspool/getfontresourceinfo
+			gdi32.GetFontResourceInfoW.argtypes = (
+				wintypes.LPCWSTR, # lpszFilename
+				wintypes.LPDWORD, # cbBuffer
+				wintypes.LPVOID,  # lpBuffer
+				wintypes.DWORD)   # dwQueryType
+				
+				
+			def install_font(src_path): #srcpath是字体路径
+				# copy the font to the Windows Fonts folder
+				dst_path = os.path.join(os.environ['SystemRoot'], 'Fonts',
+										os.path.basename(src_path))
+				shutil.copy(src_path, dst_path)
+				# load the font in the current session
+				if not gdi32.AddFontResourceW(dst_path):
+					os.remove(dst_path)
+					raise WindowsError('AddFontResource failed to load "%s"' % src_path)
+				# notify running programs
+				user32.SendMessageTimeoutW(HWND_BROADCAST, WM_FONTCHANGE, 0, 0,
+										   SMTO_ABORTIFHUNG, 1000, None)
+				# store the fontname/filename in the registry
+				filename = os.path.basename(dst_path)
+				fontname = os.path.splitext(filename)[0]
+				# try to get the font's real name
+				cb = wintypes.DWORD()
+				if gdi32.GetFontResourceInfoW(filename, ctypes.byref(cb), None,
+											  GFRI_DESCRIPTION):
+					buf = (ctypes.c_wchar * cb.value)()
+					if gdi32.GetFontResourceInfoW(filename, ctypes.byref(cb), buf,
+												  GFRI_DESCRIPTION):
+						fontname = buf.value
+				is_truetype = wintypes.BOOL()
+				cb.value = ctypes.sizeof(is_truetype)
+				gdi32.GetFontResourceInfoW(filename, ctypes.byref(cb),
+					ctypes.byref(is_truetype), GFRI_ISTRUETYPE)
+				if is_truetype:
+					fontname += ' (TrueType)'
+				with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, FONTS_REG_PATH, 0,
+									winreg.KEY_SET_VALUE) as key:
+					winreg.SetValueEx(key, fontname, 0, winreg.REG_SZ, filename)
+			#安装字体
+			install_font(r'.\..\..\data\font\Inconsolata-Bold.ttf')
+			install_font(r'.\..\..\data\font\Inconsolata-Regular.ttf')
+			return True #安装完之后返回True
+			
+		else:
+			from shutil import copyfile #为文件复制做准备
+			if not os.path.isdir(os.path.join(os.path.expandvars('$HOME'), 'Font'): #用户目录下没有Font就新建一个
+				font_path = os.path.join(os.path.expandvars('$HOME'), 'Font')
+				os.mkdir(font_path)
+				#复制文件到/home/Font下
+				copyfile(r'./../../data/font/Inconsolata-Bold.ttf',font_path + r'/Inconsolata-Bold.ttf')
+				copyfile(r'./../../data/font/Inconsolata-Regular.ttf',font_path + r'/Inconsolata-Regular.ttf')
+				return True #安装完之后返回True
+
+#运行函数检查字体,True就不重建，否则重建一个Tk,这部分没有写。。
+check_font()
+	
 root.title(gameName)
 root.geometry(GameConfig.window_width + 'x' + GameConfig.window_hight + '+0+0')
 root.columnconfigure(0, weight=1)
