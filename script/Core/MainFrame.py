@@ -107,7 +107,7 @@ def check_font():
 			
 		else:
 			from shutil import copyfile #为文件复制做准备
-			if not os.path.isdir(os.path.join(os.path.expandvars('$HOME'), 'Font'): #用户目录下没有Font就新建一个
+			if not os.path.isdir(os.path.join(os.path.expandvars('$HOME'), 'Font')): #用户目录下没有Font就新建一个
 				font_path = os.path.join(os.path.expandvars('$HOME'), 'Font')
 				os.mkdir(font_path)
 				#复制文件到/home/Font下
