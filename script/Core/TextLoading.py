@@ -29,6 +29,7 @@ courseSession = 'CourseSession'
 knowledge = 'Knowledge'
 languageSkillsPath = 'LanguageSkills'
 equipmentPath = 'Equipment'
+statureDescriptionPath = 'StatureDescription'
 
 def getTextData(textPathId:str,textId:str) -> str:
     '''
