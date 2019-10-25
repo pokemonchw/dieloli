@@ -27,80 +27,76 @@ root = Tk()
 boldFontPath = os.path.join(GamePathConfig.gamepath,'data','font','Inconsolata-Bold.ttf')
 regularFontPath = os.path.join(GamePathConfig.gamepath,'data','font','Inconsolata-Bold.ttf')
 def checkFont():
-	'''
-	函数在游戏启动前运行，检查用户是否安装字体，若没有安装则自动安装相应字体
-	'''
-	fontDict = {a:0 for a in font.families()}
-	if 'Inconsolata' not in fontDict: #判断用户的操作系统类型
-		if sys.platform == 'win32':
-			def installFont(srcPath): #srcpath是字体路径
-				'''
-				字体安装函数，接受一个参数(字体路径)来安装需要的字体
-				'''
-				import ctypes
-				from ctypes import wintypes
-				user32 = ctypes.WinDLL('user32', use_last_error=True)
-				gdi32 = ctypes.WinDLL('gdi32', use_last_error=True)
-                fontRegPath = os.path.join(os.environ['WINDIR'], 'Fonts')
-				hwndBroadCast   = 0xFFFF
-				smtoAbortIfHung = 0x0002
-				wmFontChange    = 0x001D
-				gfriDescription = 1
-				gfriIsTrueType  = 3
-				if not hasattr(wintypes, 'LPDWORD'):
-					wintypes.LPDWORD = ctypes.POINTER(wintypes.DWORD)
-				user32.SendMessageTimeoutW.restype = wintypes.LPVOID
-				user32.SendMessageTimeoutW.argtypes = (
-					wintypes.HWND,   # hWnd
-					wintypes.UINT,   # Msg
-					wintypes.LPVOID, # wParam
-					wintypes.LPVOID, # lParam
-					wintypes.UINT,   # fuFlags
-					wintypes.UINT,   # uTimeout
-					wintypes.LPVOID) # lpdwResult
-
-				gdi32.AddFontResourceW.argtypes = (
-					wintypes.LPCWSTR,) # lpszFilename
-
-				gdi32.GetFontResourceInfoW.argtypes = (
-					wintypes.LPCWSTR, # lpszFilename
-					wintypes.LPDWORD, # cbBuffer
-					wintypes.LPVOID,  # lpBuffer
-					wintypes.DWORD)   # dwQueryType
-				dstPath = os.path.join(os.environ['SystemRoot'], 'Fonts',
-										os.path.basename(srcPath))
-				shutil.copy(srcPath, dstPath)
-				if not gdi32.AddFontResourceW(dstPath):
-					os.remove(dstPath)
-					raise WindowsError('AddFontResource failed to load "%s"' % srcPath)
-				user32.SendMessageTimeoutW(hwndBroadCast, wmFontChange, 0, 0,
+    '''
+    函数在游戏启动前运行，检查用户是否安装字体，若没有安装则自动安装相应字体
+    '''
+    fontDict = {a:0 for a in font.families()}
+    if 'Inconsolata' not in fontDict: #判断用户的操作系统类型
+        if sys.platform == 'win32':
+            def installFont(srcPath): #srcpath是字体路径
+                '''
+                字体安装函数，接受一个参数(字体路径)来安装需要的字体
+                '''
+                import ctypes
+                from ctypes import wintypes
+                user32 = ctypes.WinDLL('user32', use_last_error=True)
+                gdi32 = ctypes.WinDLL('gdi32', use_last_error=True)
+                hwndBroadCast   = 0xFFFF
+                smtoAbortIfHung = 0x0002
+                wmFontChange    = 0x001D
+                gfriDescription = 1
+                gfriIsTrueType  = 3
+                if not hasattr(wintypes, 'LPDWORD'):
+                    wintypes.LPDWORD = ctypes.POINTER(wintypes.DWORD)
+                user32.SendMessageTimeoutW.restype = wintypes.LPVOID
+                user32.SendMessageTimeoutW.argtypes = (
+                    wintypes.HWND,   # hWnd
+                    wintypes.UINT,   # Msg
+                    wintypes.LPVOID, # wParam
+                    wintypes.LPVOID, # lParam
+                    wintypes.UINT,   # fuFlags
+                    wintypes.UINT,   # uTimeout
+                    wintypes.LPVOID) # lpdwResult
+                gdi32.AddFontResourceW.argtypes = (
+                    wintypes.LPCWSTR,) # lpszFilename
+                gdi32.GetFontResourceInfoW.argtypes = (
+                    wintypes.LPCWSTR, # lpszFilename
+                    wintypes.LPDWORD, # cbBuffer
+                    wintypes.LPVOID,  # lpBuffer
+                    wintypes.DWORD)   # dwQueryType
+                dstPath = os.path.join(os.environ['SystemRoot'], 'Fonts',os.path.basename(srcPath))
+                shutil.copy(srcPath, dstPath)
+                if not gdi32.AddFontResourceW(dstPath):
+                    os.remove(dstPath)
+                    raise WindowsError('AddFontResource failed to load "%s"' % srcPath)
+                user32.SendMessageTimeoutW(hwndBroadCast, wmFontChange, 0, 0,
                                smtoAbortIfHung, 1000, None)
-				fileName = os.path.basename(dstPath)
-				fontName = os.path.splitext(fileName)[0]
-				cb = wintypes.DWORD()
-				if gdi32.GetFontResourceInfoW(fileName, ctypes.byref(cb), None,
+                fileName = os.path.basename(dstPath)
+                fontName = os.path.splitext(fileName)[0]
+                cb = wintypes.DWORD()
+                if gdi32.GetFontResourceInfoW(fileName, ctypes.byref(cb), None,
                                   gfriDescription):
-					buf = (ctypes.c_wchar * cb.value)()
-					if gdi32.GetFontResourceInfoW(fileName, ctypes.byref(cb), buf,
+                    buf = (ctypes.c_wchar * cb.value)()
+                    if gdi32.GetFontResourceInfoW(fileName, ctypes.byref(cb), buf,
                                    gfriDescription):
-						fontName = buf.value
-				is_truetype = wintypes.BOOL()
-				cb.value = ctypes.sizeof(is_truetype)
-				gdi32.GetFontResourceInfoW(fileName, ctypes.byref(cb),
-					ctypes.byref(is_truetype), gfriIsTrueType)
-				if is_truetype:
-					fontName += ' (TrueType)'
-				with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, fontsRegPath, 0,
-									winreg.KEY_SET_VALUE) as key:
-					winreg.SetValueEx(key, fontName, 0, winreg.REG_SZ, fileName)
-			installFont(boldFontPath)
-			installFont(regularFontPath)
-		else:
-			if not os.path.isdir(os.path.join(os.path.expandvars('$HOME'), 'Font')):
-				fontPath = os.path.join(os.path.expandvars('$HOME'), 'Font')
-				os.mkdir(fontPath)
-				shutil.copyfile(boldFontPath,os.path.join(fontPath,'Inconsolata-Bold.ttf'))
-				shutil.copyfile(regularFontPath,os.path.join(fontPath,'Inconsolata-Regular.ttf'))
+                        fontName = buf.value
+                is_truetype = wintypes.BOOL()
+                cb.value = ctypes.sizeof(is_truetype)
+                gdi32.GetFontResourceInfoW(fileName, ctypes.byref(cb),
+                    ctypes.byref(is_truetype), gfriIsTrueType)
+                if is_truetype:
+                    fontName += ' (TrueType)'
+                with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, fontsRegPath, 0,
+                                    winreg.KEY_SET_VALUE) as key:
+                    winreg.SetValueEx(key, fontName, 0, winreg.REG_SZ, fileName)
+            installFont(boldFontPath)
+            installFont(regularFontPath)
+        else:
+            if not os.path.isdir(os.path.join(os.path.expandvars('$HOME'), 'Font')):
+                fontPath = os.path.join(os.path.expandvars('$HOME'), 'Font')
+                os.mkdir(fontPath)
+                shutil.copyfile(boldFontPath,os.path.join(fontPath,'Inconsolata-Bold.ttf'))
+                shutil.copyfile(regularFontPath,os.path.join(fontPath,'Inconsolata-Regular.ttf'))
         root = Tk()
 
 checkFont()
