@@ -16,6 +16,7 @@ def p(string:str, style='standard',richTextJudge=True):
     '''
     if richTextJudge:
         barlist = list(TextLoading.getGameData(TextLoading.barConfigPath).keys())
+        string = Dictionaries.handleText(string)
         styleList = RichText.setRichTextPrint(string, style)
         global last_char
         if len(string) > 0:

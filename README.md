@@ -16,12 +16,19 @@ DieLoli
 依赖
 ----
 python3 \
-  dijkstar,wcwidth,numpy \
+
 建议通过::
 
     pip install -r requirements.txt
 
 进行安装
+
+字体
+----
+本游戏界面设计依赖Inconsolata字体，若系统未安装此字体将会fullback到系统默认字体，不能保证能否达到设计效果 \
+字体相关配置可以通过data/FontConfig.json更改 \
+本游戏不提供Inconsolata相关字体文件 \
+请自行下载并安装:[Inconsolata](https://github.com/google/fonts/tree/master/ofl/inconsolata)
 
 警告
 ----

@@ -7,23 +7,22 @@ def setRichTextPrint(textMessage:str,defaultStyle:str) -> list:
     textMessage -- 原始文本
     defaultStyle -- 无富文本样式时的默认样式
     '''
-    styleNameList = GameConfig.getFontDataList() + list(TextLoading.getGameData(TextLoading.barConfigPath).keys())
+    styleNameList = {key:0 for key in GameConfig.getFontDataList() + list(TextLoading.getGameData(TextLoading.barConfigPath).keys())}
     styleIndex = 0
     styleLastIndex = None
     styleMaxIndex = None
     styleList = []
-    for i in range(0,len(styleNameList)):
-        styleTextHead = '<' + styleNameList[i] + '>'
+    for key in styleNameList:
+        styleTextHead = '<' + key + '>'
         if styleTextHead in textMessage:
             styleIndex = 1
     if styleIndex == 0:
-        for i in range(0,len(textMessage)):
-            styleList.append(defaultStyle)
+        styleList = [defaultStyle] * len(textMessage)
     else:
         for i in range(0,len(textMessage)):
-            if textMessage[i] == '<':
-                inputTextStyleSize = textMessage.find('>',i) + 1
-                inputTextStyle = textMessage[i + 1:inputTextStyleSize - 1]
+            inputTextStyleSize = textMessage.find('>',i) + 1
+            inputTextStyle = textMessage[i + 1:inputTextStyleSize - 1]
+            if textMessage[i] == '<' and inputTextStyle in styleNameList:
                 styleLastIndex = i
                 styleMaxIndex = inputTextStyleSize
                 if inputTextStyle[0] == '/':
