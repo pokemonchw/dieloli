@@ -2,7 +2,7 @@ from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
 from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue
 from script.Panel import ChangeClothesPanel
 
-def SeeCharacterMainAttrPanel(characterId:str):
+def seeCharacterMainAttrPanel(characterId:str):
     '''
     查看角色主属性面板
     Keyword arguments:
@@ -64,7 +64,7 @@ def inputAttrOverPanel():
     return yrn
 
 panelData = {
-    "MainAttr":SeeCharacterMainAttrPanel,
+    "MainAttr":seeCharacterMainAttrPanel,
     "Equipment":seeCharacterEquipmentPanel,
     "Item":"",
     "SexExperience":"",

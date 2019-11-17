@@ -14,8 +14,7 @@ def acknowledgmentAttribute_func():
         characterId = CacheContorl.characterData['characterId']
         AttrCalculation.setAttrOver(characterId)
         inputS = []
-        attrInpurList = seeAttrInEveryTime_func()
-        inputS = attrInpurList + inputS
+        seeAttrInEveryTime_func()
         flowReturn = SeeCharacterAttrPanel.inputAttrOverPanel()
         inputS = flowReturn + inputS
         characterId = CacheContorl.characterData['characterId']
