@@ -4,7 +4,8 @@ import json
 import uuid
 import psutil
 import signal
-from tkinter import ttk,Tk,Text,StringVar,FALSE,Menu,END,N,W,E,S,VERTICAL,font
+import threading
+from tkinter import ttk,Tk,Text,StringVar,FALSE,Menu,END,N,W,E,S,VERTICAL,font,PhotoImage,Entry
 from script.Core import GameConfig,TextLoading,CacheContorl,SettingFrame,AboutFrame,TextHandle,GamePathConfig
 
 
@@ -54,43 +55,10 @@ inputBackgroundBoxCursor.insert('end',cursorText)
 inputBackgroundBoxCursor.config(foreground=orderFontData['foreground'])
 
 # 输入栏
-estyle = ttk.Style()
-estyle.element_create("plain.field", "from", "clam")
-estyle.layout(
-    "EntryStyle.TEntry",
-    [(
-        'Entry.plain.field',{
-            'children':[(
-                'Entry.background',{
-                    'children':[(
-                        'Entry.padding',{
-                            'children':[(
-                                'Entry.textarea',{
-                                    'sticky':'nswe'
-                                }
-                            )],
-                            'sticky':'nswe'
-                        }
-                    )],
-                    'sticky':'nswe'
-                }
-            )],
-            'border':'0',
-            'sticky':'nswe'
-        }
-    )]
-)
-estyle.configure("EntryStyle.TEntry",
-                 background=orderFontData['background'],
-                 foreground=orderFontData['foreground'],
-                 selectbackground = orderFontData['selectbackground']
-                 )
 order = StringVar()
 orderFont = font.Font(family = orderFontData['font'],size = orderFontData['fontSize'])
-inputboxWidth = int(GameConfig.textbox_width) - cursorWidth
-inputbox = ttk.Entry(inputBackgroundBox, style = 'EntryStyle.TEntry',textvariable=order,font = orderFont,width = inputboxWidth)
+inputbox = Entry(inputBackgroundBox, borderwidth=0,insertborderwidth=0,selectborderwidth=0, highlightthickness=0,bg=orderFontData["background"],foreground=orderFontData["foreground"],selectbackground=orderFontData["selectbackground"], textvariable=order, font=orderFont, width=GameConfig.inputbox_width)
 inputbox.grid(column=1, row=0, sticky=(N, E, S))
-
 
 # 构建菜单栏
 root.option_add('*tearOff', FALSE)

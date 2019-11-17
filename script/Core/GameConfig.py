@@ -44,6 +44,7 @@ textbox_width = configData['textbox_width']
 textbox_hight = configData['textbox_hight']
 text_width = int(configData['text_width'])
 text_hight = int(configData['text_hight'])
+inputbox_width = int(configData['inputbox_width'])
 cursor = configData['cursor']
 year = configData["year"]
 month = configData["month"]
