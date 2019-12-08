@@ -113,6 +113,23 @@ def getRandomNameForSex(sexGrade:str) -> str:
         name = boysRegionList[str(nameRegion)]
     return familyName + name
 
+def getSeeAttrPanelHeadCharacterInfo(characterId:str) -> str:
+    '''
+    获取查看角色属性面板头部角色缩略信息文本
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    characterData = CacheContorl.characterData['character'][characterId]
+    characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId
+    name = characterData['Name']
+    nickName = characterData['NickName']
+    characterName = TextLoading.getTextData(TextLoading.stageWordPath,'13') + name
+    characterNickName = TextLoading.getTextData(TextLoading.stageWordPath,'12') + nickName
+    sex = characterData['Sex']
+    sexText = TextLoading.getTextData(TextLoading.stageWordPath, '2') + getSexText(sex)
+    nameText = characterIdText + ' ' + characterName + ' ' + characterNickName + ' ' + sexText
+    return nameText
+
 def getSexText(sexId:str) -> str:
     '''
     获取性别对应文本

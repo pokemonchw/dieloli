@@ -60,16 +60,74 @@ def seeCharacterMainAttrPanel(characterId:str):
     EraPrint.plist([characterBustInfo,characterWaistInfo,characterHipInfo],3,'center')
     EraPrint.pline('.')
 
-def seeCharacterEquipmentPanel(characterId:str) -> str:
+def seeCharacterStatusHeadPanel(characterId:str) -> str:
+    '''
+    查看角色状态面板头部面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '135'))
+    EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    seeCharacterStatusPanel(characterId)
+
+def seeCharacterStatusPanel(characterId:str):
+    '''
+    查看角色状态面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    statusTextData = TextLoading.getTextData(TextLoading.stageWordPath, '134')
+    characterData = CacheContorl.characterData['character'][characterId]
+    statusData = characterData['Status']
+    for stateType in statusData:
+        EraPrint.sontitleprint(statusTextData[stateType])
+        nowStatusData = statusData[stateType].copy()
+        if stateType == 'SexFeel':
+            if characterData['Sex'] == 'Man':
+                del nowStatusData['VaginaDelight']
+                del nowStatusData['ClitorisDelight']
+                del nowStatusData['VaginaLubrication']
+            elif characterData['Sex'] == 'Woman':
+                del nowStatusData['PenisDelight']
+            elif characterData['Sex'] == 'Asexual':
+                del nowStatusData['VaginaDelight']
+                del nowStatusData['ClitorisDelight']
+                del nowStatusData['VaginaLubrication']
+                del nowStatusData['PenisDelight']
+        nowStatusTextList = [statusTextData[state] + ':' + str(nowStatusData[state]) for state in nowStatusData]
+        EraPrint.plist(nowStatusTextList,4,'center')
+    EraPrint.pl()
+
+def seeCharacterHPAndMPInSence(characterId:str):
+    '''
+    在场景中显示角色的HP和MP
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    if characterId == '0':
+        AttrPrint.printHpAndMpBar(characterId)
+    else:
+        characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + '0' + ':' + CacheContorl.characterData['character']['0']['Name']
+        targetIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId + ':' + CacheContorl.characterData['character'][characterId]['Name']
+        EraPrint.plist([characterIdText,targetIdText],2,'center')
+        EraPrint.pl()
+        playerBar = AttrPrint.getHpOrMpBar('0','HitPoint',GameConfig.text_width / 2 - 4)
+        targetBar = AttrPrint.getHpOrMpBar(characterId,'HitPoint',GameConfig.text_width / 2 - 4)
+        EraPrint.plist([playerBar,targetBar],2,'center')
+        EraPrint.pl()
+        playerBar = AttrPrint.getHpOrMpBar('0','ManaPoint',GameConfig.text_width / 2 - 4)
+        targetBar = AttrPrint.getHpOrMpBar(characterId,'ManaPoint',GameConfig.text_width / 2 - 4)
+        EraPrint.plist([playerBar,targetBar],2,'center')
+        EraPrint.pl()
+
+def seeCharacterEquipmentPanel(characterId:str):
     '''
     查看角色装备面板
     Keyword arguments:
     characterId -- 角色Id
     '''
-    EraPrint.plittleline()
-    EraPrint.p(TextLoading.getTextData(TextLoading.stageWordPath, '37'))
-    PyCmd.pcmd(panelStateOffText,'CharacterEquipmentPanel')
-    characterData = AttrHandle.getAttrData(characterId)
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '37'))
+    EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     ChangeClothesPanel.seeCharacterWearClothes(characterId,False)
 
 def askForSeeAttr() -> list:
@@ -81,9 +139,9 @@ def askForSeeAttr() -> list:
     nowPanelId = CacheContorl.panelState['AttrShowHandlePanel']
     nullCmd = askData[nowPanelId]
     askList = list(askData.values())
-    CmdButtonQueue.optionstr(None,3,'center',False,False,askList,nullCmd)
+    CmdButtonQueue.optionstr(None,5,'center',False,False,askList,nowPanelId,list(askData.keys()))
     del askData[nowPanelId]
-    return list(askData.values())
+    return list(askData.keys())
 
 def askForSeeAttrCmd() -> list:
     '''
@@ -100,11 +158,69 @@ def inputAttrOverPanel():
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.acknowledgmentAttribute, askfor=False)
     return yrn
 
+def seeCharacterItemPanel(characterId:str) -> list:
+    '''
+    用于查看角色背包道具列表的面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '40'))
+    EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    EraPrint.pline('.')
+    if len(CacheContorl.characterData['character'][characterId]['Item']) == 0:
+        EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath,'36'))
+    else:
+        pass
+
+def seeCharacterWearItemPanelForPlayer(characterId:str) -> list:
+    '''
+    用于场景中查看穿戴道具列表的控制面板
+    Keyword arguments:
+    characterId -- 角色Id
+    changeButton -- 将角色穿戴道具列表绘制成按钮的开关
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '38'))
+    EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    EraPrint.pline('.')
+    if characterId == '0':
+        return seeCharacterWearItemPanel(characterId,True)
+    else:
+        return seeCharacterWearItemPanel(characterId,False)
+
+def seeCharacterWearItemPanel(characterId:str,changeButton:bool) -> list:
+    '''
+    用于查看角色穿戴道具列表的面板
+    Keyword arguments:
+    characterId -- 角色Id
+    changeButton -- 将角色穿戴道具列表绘制成按钮的开关
+    '''
+    wearItemInfoTextData = TextLoading.getTextData(TextLoading.stageWordPath,'49')
+    wearData = CacheContorl.characterData['character'][characterId]['WearItem']['Wear']
+    wearItemTextData = {}
+    itemData = CacheContorl.characterData['character'][characterId]['WearItem']['Item']
+    wearItemButtonList = []
+    inputS = []
+    for wearType in wearData:
+        wearId = wearData[wearType]
+        if wearId == '':
+            wearItemButtonList.append(wearItemInfoTextData[wearType] + ':' + TextLoading.getTextData(TextLoading.stageWordPath,'117'))
+        else:
+            wearItemButtonList.append(wearItemInfoTextData[wearType] + ':' + itemData[wearType][wearId]['Name'])
+            wearItemTextData[wearType] = itemData[wearType][wearId]['Name']
+    if changeButton:
+        inputS = [str(i) for i in range(len(wearItemTextData))]
+        CmdButtonQueue.optionint(None,4,'left',True,False,'center',0,wearItemButtonList,)
+    else:
+        EraPrint.plist(wearItemButtonList,4,'center')
+    return inputS
+
+
 panelData = {
     "MainAttr":seeCharacterMainAttrPanel,
     "Equipment":seeCharacterEquipmentPanel,
-    "Status":"",
-    "Item":"",
+    "Status":seeCharacterStatusHeadPanel,
+    "Item":seeCharacterItemPanel,
+    "WearItem":seeCharacterWearItemPanelForPlayer,
     "SexExperience":"",
     "Knowledge":"",
     "Language":"",

@@ -1,6 +1,6 @@
 from script.Core import CacheContorl,GameInit,PyCmd,GameConfig
 from script.Design import MapHandle,CharacterHandle,PanelStateHandle
-from script.Panel import InScenePanel
+from script.Panel import InScenePanel,SeeCharacterAttrPanel
 import math
 
 def getInScene_func():
@@ -56,6 +56,8 @@ def seeScene_func(judge:bool):
             inputS.append('SeeSceneCharacterListPage')
         startId1 = len(inSceneCmdList1)
         InScenePanel.seeCharacterInfoPanel()
+        SeeCharacterAttrPanel.seeCharacterHPAndMPInSence(CacheContorl.characterData['characterId'])
+        SeeCharacterAttrPanel.seeCharacterStatusPanel(CacheContorl.characterData['characterId'])
         inSceneCmdList2 = InScenePanel.inSceneButtonPanel(startId1)
         if changePageJudge:
             inputS += inSceneCmdList1 + inSceneCmdList2

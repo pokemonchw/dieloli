@@ -1,5 +1,5 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
-from script.Design import GameTime,CmdButtonQueue,MapHandle,CharacterHandle,InputQueue
+from script.Design import GameTime,CmdButtonQueue,MapHandle,CharacterHandle,InputQueue,AttrText
 import math
 
 panelStateTextData = TextLoading.getTextData(TextLoading.cmdPath,'cmdSwitch')
@@ -94,6 +94,10 @@ def seeCharacterInfoPanel():
     characterName = characterData['Name']
     EraPrint.p(characterName)
     EraPrint.p(' ')
+    sex = characterData['Sex']
+    sexText = TextLoading.getTextData(TextLoading.stageWordPath, '2') + AttrText.getSexText(sex)
+    EraPrint.p(sexText)
+    EraPrint.p(' ')
     intimateInfo = TextLoading.getTextData(TextLoading.stageWordPath,'16')
     gracesInfo = TextLoading.getTextData(TextLoading.stageWordPath,'17')
     characterIntimate = characterData['Intimate']
@@ -103,6 +107,9 @@ def seeCharacterInfoPanel():
     EraPrint.p(characterIntimateText)
     EraPrint.p(' ')
     EraPrint.p(characterGracesText)
+    stateText = AttrText.getStateText(characterId)
+    EraPrint.p(' ')
+    EraPrint.p(stateText)
     EraPrint.plittleline()
 
 def jumpCharacterListPagePanel() -> str:
@@ -124,5 +131,6 @@ def inSceneButtonPanel(startId:int) -> list:
     Keyword arguments:
     startId -- 基础控制菜单命令起始Id
     '''
+    EraPrint.pline()
     inputs = CmdButtonQueue.optionint(cmdList=CmdButtonQueue.inscenelist1, cmdColumn=9, askfor=False, cmdSize='center',startId = startId)
     return inputs

@@ -19,7 +19,6 @@ def seeCharacterWearClothes(characterId:str,changeButton:bool):
     characterId -- 角色id
     changeButton -- 将服装列表绘制成按钮的开关
     '''
-    EraPrint.p('\n')
     characterClothingData = CacheContorl.characterData['character'][characterId]['Clothing']
     characterPutOnList = CacheContorl.characterData['character'][characterId]['PutOn']
     clothingTextData = {}

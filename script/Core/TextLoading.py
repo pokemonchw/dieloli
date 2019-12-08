@@ -30,6 +30,8 @@ knowledge = 'Knowledge'
 languageSkillsPath = 'LanguageSkills'
 equipmentPath = 'Equipment'
 statureDescriptionPath = 'StatureDescription'
+characterStatePath = 'CharacterState'
+wearItemPath = 'WearItem'
 
 def getTextData(textPathId:str,textId:str) -> str:
     '''

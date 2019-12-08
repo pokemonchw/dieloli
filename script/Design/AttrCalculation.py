@@ -59,7 +59,6 @@ def getAttr(temName:str) -> dict:
     sexExperienceList = getSexExperience(sexExperienceTemName)
     sexGradeList = getSexGrade(sexExperienceList)
     EngravingList = getEngravingList()
-    sexItemList = getSexItem(temName)
     height = getHeight(temName,age,{})
     weightTemName = temData['Weight']
     bmi = getBMI(weightTemName)
@@ -72,6 +71,13 @@ def getAttr(temName:str) -> dict:
     manaPointTemName = temData["ManaPoint"]
     maxManaPoint = getMaxManaPoint(manaPointTemName)
     gold = getGold()
+    statusData = TextLoading.getGameData(TextLoading.characterStatePath)
+    wearItemData = {key:{} for key in TextLoading.getGameData(TextLoading.wearItemPath)}
+    wearItemDataTwo = {key:'' for key in TextLoading.getGameData(TextLoading.wearItemPath)}
+    wearItem = {
+        "Wear":wearItemDataTwo,
+        "Item":wearItemData,
+    }
     return {
         'Age':age,
         'HitPointMax':maxHitPoint,
@@ -81,13 +87,15 @@ def getAttr(temName:str) -> dict:
         'SexExperience':sexExperienceList,
         'SexGrade':sexGradeList,
         'Engraving':EngravingList,
-        'SexItem':sexItemList,
         'Height':height,
         'Weight':weight,
         'BodyFat':bodyFat,
         'Measurements':measurements,
         'Gold':gold,
         'BodyFat':bodyFat,
+        'Status':statusData,
+        'WearItem':wearItem,
+        'Item':{},
         'Clothing':{
             'Coat':{},
             'Underwear':{},

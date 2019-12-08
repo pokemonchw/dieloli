@@ -60,11 +60,7 @@ def seeAttrOnEveryTime_func():
         showAttrHandleData = TextLoading.getTextData(TextLoading.cmdPath, 'seeAttrPanelHandle')
         characterMax = characterIdList[len(characterIdList) - 1]
         if yrn in showAttrHandleData:
-            index = showAttrHandleData.index(yrn)
-            index = str(index)
-            CacheContorl.panelState['AttrShowHandlePanel'] = index
-        elif yrn in panelList:
-            PanelStateHandle.panelStateChange(yrn)
+            CacheContorl.panelState['AttrShowHandlePanel'] = yrn
         elif yrn == '0':
             if characterIdIndex == 0:
                 CacheContorl.characterData['characterId'] = characterMax
@@ -90,6 +86,7 @@ def seeAttrOnEveryTime_func():
                 nameListMax = int(GameConfig.in_scene_see_player_max)
                 nowSceneCharacterListPage = math.floor(nowCharacterIndex / nameListMax)
                 CacheContorl.panelState['SeeSceneCharacterListPanel'] = nowSceneCharacterListPage
+            CacheContorl.panelState['AttrShowHandlePanel'] = 'MainAttr'
             CacheContorl.nowFlowId = CacheContorl.oldFlowId
             CacheContorl.oldFlowId = CacheContorl.tooOldFlowId
             break
@@ -106,6 +103,5 @@ def seeAttrInEveryTime_func():
     用于在任何时候查看角色属性的流程
     '''
     characterId = CacheContorl.characterData['characterId']
-    showAttrHandle = CacheContorl.panelState['AttrShowHandlePanel']
     nowAttrPanel = CacheContorl.panelState['AttrShowHandlePanel']
     SeeCharacterAttrPanel.panelData[nowAttrPanel](characterId)
