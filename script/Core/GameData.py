@@ -67,9 +67,19 @@ def loadDirNow(dataPath:str):
                             nowData[nowFile[0]] = JsonHandle._loadjson(nowPath)
                             if nowFile[0] == 'Equipment':
                                 initClothingData(nowData[nowFile[0]]['Clothing'])
+                            elif nowFile[0] == 'StatureDescription':
+                                initStatureDescription(nowData[nowFile[0]]['Priority'])
             else:
                 nowData[i] = loadDirNow(nowPath)
     return nowData
+
+def initStatureDescription(sdData):
+    '''
+    初始化身材描述文本权重数据
+    Keyword arguments:
+    sdData -- 身材描述文本数据
+    '''
+    CacheContorl.statureDescritionPrioritionData = {priority:{i:len(sdData[priority][i]['Condition']) for i in range(len(sdData[priority]))} for priority in range(len(sdData))}
 
 def getSortedMapPathData(mapData:dict) -> dict:
     '''

@@ -1,14 +1,14 @@
 {
-  "Priority":{
-    "10":[
+  "Priority":[
+    [
       {
         "Condition":{
           "SelfSex":"Man",
           "TargetSex":"Man",
           "AgeJudge":"Similar",
-          "SelfAge":"7",
-          "HeightDifference":"Similar",
-          "StatureDifference":"Similar",
+          "SelfAgeTem":"SchoolAgeChild",
+          "AverageHeight":"Similar",
+          "AverageStature":"Similar",
           "Target":"Other"
         },
         "Description":"这是一个与{NickName}同龄的小孩子，身材和体型都比较接近．"
@@ -16,26 +16,18 @@
       {
         "Condition":{
           "SelfSex":"Man",
-          "AgeJudge":"7",
-          "HeightDifference":"Low",
+          "AgeTem":"SchoolAgeChild",
+          "AverageHeight":"Low",
           "Target":"Self"
         },
-        "Description":"{NickName}的身材即使是在同龄的小孩子中，也属于比较矮小的类型．"
+        "Description":"{NickName}的身材即使是在同龄人中，也属于比较矮小的类型．"
       }
     ],
-    "9":[],
-    "8":[],
-    "7":[],
-    "6":[],
-    "5":[],
-    "4":[],
-    "3":[],
-    "2":[],
-    "1":[
+    [
       {
         "Condition":{},
         "Description":"与同龄人没什么区别，平平无奇．"
       }
     ]
-  }
+  ]
 }

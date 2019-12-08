@@ -30,6 +30,35 @@ def seeCharacterMainAttrPanel(characterId:str):
     statureText = AttrText.getStatureText(characterId)
     EraPrint.pl(statureText)
     EraPrint.plittleline()
+    characterSpecies = characterData['Species']
+    characterSpecies = TextLoading.getTextData(TextLoading.stageWordPath, '15') + characterSpecies
+    characterAge = characterData['Age']
+    characterAge = TextLoading.getTextData(TextLoading.stageWordPath, '3') + str(characterAge)
+    EraPrint.plist([characterSpecies,characterAge],2,'center')
+    EraPrint.pline('.')
+    characterIntimate = characterData['Intimate']
+    characterIntimate = TextLoading.getTextData(TextLoading.stageWordPath, '16') + characterIntimate
+    characterGraces = characterData['Graces']
+    characterGraces = TextLoading.getTextData(TextLoading.stageWordPath, '17') + characterGraces
+    EraPrint.plist([characterIntimate,characterGraces],2,'center')
+    EraPrint.pline('.')
+    characterHeight = characterData['Height']['NowHeight']
+    characterWeight = characterData['Weight']
+    characterHeightText = str(round(characterHeight,2))
+    characterWeightText = str(round(characterWeight,2))
+    characterHeightInfo = TextLoading.getTextData(TextLoading.stageWordPath,'80') + characterHeightText
+    characterWeightInfo = TextLoading.getTextData(TextLoading.stageWordPath,'81') + characterWeightText
+    EraPrint.plist([characterHeightInfo,characterWeightInfo],2,'center')
+    EraPrint.pline('.')
+    characterMeasurements = characterData['Measurements']
+    characterBust = str(round(characterMeasurements['Bust'],2))
+    characterWaist = str(round(characterMeasurements['Waist'],2))
+    characterHip = str(round(characterMeasurements['Hip'],2))
+    characterBustInfo = TextLoading.getTextData(TextLoading.stageWordPath,'82') + characterBust
+    characterWaistInfo = TextLoading.getTextData(TextLoading.stageWordPath,'83') + characterWaist
+    characterHipInfo = TextLoading.getTextData(TextLoading.stageWordPath,'84') + characterHip
+    EraPrint.plist([characterBustInfo,characterWaistInfo,characterHipInfo],3,'center')
+    EraPrint.pline('.')
 
 def seeCharacterEquipmentPanel(characterId:str) -> str:
     '''
@@ -52,9 +81,17 @@ def askForSeeAttr() -> list:
     nowPanelId = CacheContorl.panelState['AttrShowHandlePanel']
     nullCmd = askData[nowPanelId]
     askList = list(askData.values())
-    CmdButtonQueue.optionstr(None,4,'center',False,False,askList,nullCmd)
+    CmdButtonQueue.optionstr(None,3,'center',False,False,askList,nullCmd)
     del askData[nowPanelId]
     return list(askData.values())
+
+def askForSeeAttrCmd() -> list:
+    '''
+    查看属性页显示控制
+    '''
+    EraPrint.pline('~')
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.seeattronrverytime, 3, cmdSize='center', askfor=False)
+    return yrn
 
 def inputAttrOverPanel():
     '''
@@ -66,10 +103,12 @@ def inputAttrOverPanel():
 panelData = {
     "MainAttr":seeCharacterMainAttrPanel,
     "Equipment":seeCharacterEquipmentPanel,
+    "Status":"",
     "Item":"",
     "SexExperience":"",
     "Knowledge":"",
     "Language":"",
-    "Features":""
+    "Features":"",
+    "SocialContact":""
 }
 

@@ -6,11 +6,6 @@ flowContorl = {}
 # 主页监听控制流程用变量组
 wframeMouse = {}
 
-# 进程池
-processPool = concurrent.futures.ProcessPoolExecutor()
-# 线程池
-threadPool = concurrent.futures.ThreadPoolExecutor()
-
 # cmd存储
 cmdMap = {}
 
@@ -82,10 +77,29 @@ tooOldFlowId = ''
 
 # 课时数据
 courseData = {}
+
 # 教师科目经验
 teacherCourseExperience = {}
 
 oldCharacterId = '0'
+
+# 各年龄段总人数
+TotalNumberOfPeopleOfAllAges = {}
+
+# 各年龄段总体脂率
+TotalBodyFatByage = {}
+
+# 各年龄段平均体脂率
+AverageBodyFatByage = {}
+
+# 各年龄段总身高
+TotalHeightByage = {}
+
+# 各年龄段平均身高
+AverageHeightByage = {}
+
+# 身材描述文本权重数据
+statureDescritionPrioritionData = {}
 
 textWait = 0
 

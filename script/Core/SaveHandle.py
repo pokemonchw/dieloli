@@ -42,12 +42,17 @@ def establishSave(saveId:str):
     randomNpcList = CacheContorl.randomNpcList
     gameVerson = GameConfig.verson
     occupationCharacterData = CacheContorl.occupationCharacterData
+    totalBodyFatByage = CacheContorl.TotalBodyFatByage
+    averageBodyFatbyage = CacheContorl.AverageBodyFatByage
+    totalNumberOfPeopleOfAllAges = CacheContorl.TotalNumberOfPeopleOfAllAges
+    totalHeightByage = CacheContorl.TotalHeightByage
+    averageHeightByage = CacheContorl.AverageHeightByage
     saveVerson = {
         "gameVerson":gameVerson,
         "gameTime":gameTime,
         "characterName":characterData['character']['0']['Name']
     }
-    data = {"1":characterData,"2":gameTime,"0":saveVerson,"3":scaneData,"4":mapData,"5":npcTemData,"6":randomNpcList,'7':occupationCharacterData}
+    data = {"1":characterData,"2":gameTime,"0":saveVerson,"3":scaneData,"4":mapData,"5":npcTemData,"6":randomNpcList,"7":occupationCharacterData,"8":totalBodyFatByage,"9":averageBodyFatbyage,"10":totalNumberOfPeopleOfAllAges,"11":totalHeightByage,"12":averageHeightByage}
     for dataId in data:
         writeSaveData(saveId,dataId,data[dataId])
 
@@ -85,7 +90,7 @@ def loadSave(saveId:str) -> dict:
     '''
     savePath = getSaveDirPath(saveId)
     data = {}
-    fileList = ['1','2','3','4','5','6','7']
+    fileList = ['1','2','3','4','5','6','7','8','9','10','11','12']
     for fileName in fileList:
         filePath = os.path.join(savePath,fileName)
         with open(filePath, 'rb') as f:
@@ -107,6 +112,11 @@ def inputLoadSave(saveId:str):
     CacheContorl.npcTemData = saveData['5']
     CacheContorl.randomNpcList = saveData['6']
     CacheContorl.occupationCharacterData = saveData['7']
+    CacheContorl.TotalBodyFatByage = saveData['8']
+    CacheContorl.AverageBodyFatByage = saveData['9']
+    CacheContorl.TotalNumberOfPeopleOfAllAges = saveData['10']
+    CacheContorl.TotalHeightByage = saveData['11']
+    CacheContorl.AverageHeightByage = saveData['12']
     CharacterHandle.initCharacterPosition()
 
 def getSavePageSaveId(pageSaveValue:int,inputId:int) -> int:

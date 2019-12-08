@@ -20,8 +20,32 @@ def initCharacterList():
     for character in CacheContorl.npcTemData:
         initCharacter(i,character)
         i += 1
-    initCharacterDormitory()
-    initCharacterPosition()
+    indexCharacterAverageValue()
+    calculateTheAverageValueOfEachAttributeOfEachAgeGroup()
+
+def calculateTheAverageValueOfEachAttributeOfEachAgeGroup():
+    '''
+    计算各年龄段各项属性平均值
+    '''
+    CacheContorl.AverageBodyFatByage = {sex:{ageTem:CacheContorl.TotalBodyFatByage[sex][ageTem] / CacheContorl.TotalNumberOfPeopleOfAllAges[sex][ageTem] for ageTem in CacheContorl.TotalBodyFatByage[sex]} for sex in CacheContorl.TotalBodyFatByage}
+    CacheContorl.AverageHeightByage = {sex:{ageTem:CacheContorl.TotalHeightByage[sex][ageTem] / CacheContorl.TotalNumberOfPeopleOfAllAges[sex][ageTem] for ageTem in CacheContorl.TotalHeightByage[sex]} for sex in CacheContorl.TotalHeightByage}
+
+def indexCharacterAverageValue():
+    '''
+    统计各年龄段所有角色各属性总值
+    '''
+    for character in CacheContorl.characterData['character']:
+        characterData = CacheContorl.characterData['character'][character]
+        ageTem = AttrCalculation.judgeAgeGroup(characterData['Age'])
+        CacheContorl.TotalHeightByage.setdefault(ageTem,{})
+        CacheContorl.TotalHeightByage[ageTem].setdefault(characterData['Sex'],0)
+        CacheContorl.TotalHeightByage[ageTem][characterData['Sex']] += characterData['Height']['NowHeight']
+        CacheContorl.TotalNumberOfPeopleOfAllAges.setdefault(ageTem,{})
+        CacheContorl.TotalNumberOfPeopleOfAllAges[ageTem].setdefault(characterData['Sex'],0)
+        CacheContorl.TotalNumberOfPeopleOfAllAges[ageTem][characterData['Sex']] += 1
+        CacheContorl.TotalBodyFatByage.setdefault(ageTem,{})
+        CacheContorl.TotalBodyFatByage[ageTem].setdefault(characterData['Sex'],0)
+        CacheContorl.TotalBodyFatByage[ageTem][characterData['Sex']] += characterData['BodyFat']
 
 def initCharacter(nowId:int,character:dict):
     '''
@@ -76,6 +100,7 @@ def initCharacter(nowId:int,character:dict):
         classGrade = str(defaultAttr['Age'] - 6)
         defaultAttr['Class'] = random.choice(CacheContorl.placeData["Classroom_" + classGrade])
     bodyFat = AttrCalculation.getBodyFat(characterSex,bodyFatTem)
+    defaultAttr['BodyFat'] = bodyFat
     measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
     defaultAttr['Measirements'] = measurements
     defaultAttr['Knowledge'] = {}

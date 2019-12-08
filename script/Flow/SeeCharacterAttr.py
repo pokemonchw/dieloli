@@ -1,5 +1,5 @@
 from script.Core import EraPrint,CacheContorl,PyCmd,GameInit,TextLoading,GameConfig
-from script.Design import PanelStateHandle,AttrCalculation,MapHandle
+from script.Design import PanelStateHandle,AttrCalculation,MapHandle,CharacterHandle
 from script.Panel import SeeCharacterAttrPanel
 import math
 from script.Flow import GameStartFlow
@@ -13,6 +13,7 @@ def acknowledgmentAttribute_func():
     while(True):
         characterId = CacheContorl.characterData['characterId']
         AttrCalculation.setAttrOver(characterId)
+        CharacterHandle.initCharacterList()
         inputS = []
         seeAttrInEveryTime_func()
         flowReturn = SeeCharacterAttrPanel.inputAttrOverPanel()
@@ -51,7 +52,9 @@ def seeAttrOnEveryTime_func():
         inputS = []
         seeAttrInEveryTime_func()
         askSeeAttr = SeeCharacterAttrPanel.askForSeeAttr()
-        inputS = inputS + askSeeAttr
+        inputS += askSeeAttr
+        inputs1 = SeeCharacterAttrPanel.askForSeeAttrCmd()
+        inputS += inputs1
         yrn = GameInit.askfor_All(inputS)
         PyCmd.clr_cmd()
         showAttrHandleData = TextLoading.getTextData(TextLoading.cmdPath, 'seeAttrPanelHandle')
@@ -69,8 +72,6 @@ def seeAttrOnEveryTime_func():
                 characterId = characterIdList[characterIdIndex - 1]
                 CacheContorl.characterData['characterId'] = characterId
         elif yrn == '1':
-            from script.Flow import SeeCharacterList
-            SeeCharacterAttrPanel.initShowAttrPanelList()
             if CacheContorl.oldFlowId == 'main':
                 CacheContorl.characterData['characterId'] = '0'
             elif CacheContorl.oldFlowId == 'see_character_list':

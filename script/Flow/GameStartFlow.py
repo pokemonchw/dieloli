@@ -8,9 +8,9 @@ def initGameStart():
     用于结束角色创建正式开始游戏的初始化流程
     '''
     GameTime.initTime()
-    AttrCalculation.setAttrOver('0')
+    CharacterHandle.initCharacterDormitory()
+    CharacterHandle.initCharacterPosition()
     Course.initPhaseCourseHour()
-    CharacterHandle.initCharacterList()
     characterSuit = Clothing.creatorSuit('Uniform',CacheContorl.characterData['character']['0']['Sex'])
     for clothing in characterSuit:
         CacheContorl.characterData['character']['0']['Clothing'][clothing][uuid.uuid1()] = characterSuit[clothing]

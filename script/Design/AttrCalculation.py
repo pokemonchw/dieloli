@@ -87,6 +87,7 @@ def getAttr(temName:str) -> dict:
         'BodyFat':bodyFat,
         'Measurements':measurements,
         'Gold':gold,
+        'BodyFat':bodyFat,
         'Clothing':{
             'Coat':{},
             'Underwear':{},
@@ -341,6 +342,18 @@ def judgeGrade(experience:int) -> float:
     elif experience >= 10000:
         grade = 'EX'
     return grade
+
+def judgeAgeGroup(age:int):
+    '''
+    判断所属年龄段
+    Keyword arguments:
+    age -- 年龄
+    '''
+    ageGroup = TextLoading.getGameData(TextLoading.attrTemplatePath)['AgeTem']
+    for ageTem in ageGroup:
+        if int(age) >= int(ageGroup[ageTem]['MiniAge']) and int(age) < int(ageGroup[ageTem]['MaxAge']):
+            return ageTem
+    return 'YoundAdult'
 
 def setDefaultCache():
     '''

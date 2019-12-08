@@ -1,6 +1,6 @@
 import os,random,bisect
 from script.Core import TextLoading,CacheContorl,GameConfig,GamePathConfig,ValueHandle,JsonHandle
-from script.Design import ProportionalBar,AttrPrint
+from script.Design import ProportionalBar,AttrPrint,AttrCalculation
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
@@ -183,14 +183,226 @@ def getStateText(characterId:str) -> str:
     stateText = TextLoading.getTextData(TextLoading.stageWordPath,'132')[state]
     return TextLoading.getTextData(TextLoading.stageWordPath,'133') + stateText
 
+def judgeCharacterStature(characterId):
+    '''
+    校验身材信息
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    characterData = CacheContorl.characterData['character'][characterId]
+    selfSex = CacheContorl.characterData['character']['0']['Sex']
+    targetSex = characterData['Sex']
+    ageJudge = 'Similar'
+    selfAge = CacheContorl.characterData['character']['0']['Age']
+    targetAge = characterData['Age']
+    ageDisparity = selfAge - targetAge
+    if ageDisparity < -2 and ageDisparity >= -5:
+        ageJudge = 'SlightlyHigh'
+    elif ageDisparity < -5 and ageDisparity >= -15:
+        ageJudge = 'High'
+    elif ageDisparity < -15 and ageDisparity >= -30:
+        ageJudge = 'VeryHigh'
+    elif ageDisparity < -30 and ageDisparity >= -60:
+        ageJudge = 'SuperHigh'
+    elif ageDisparity < -60:
+        ageJudge = 'ExtremelyHigh'
+    elif ageDisparity > 2 and ageDisparity <= 5:
+        ageJudge = 'SlightlyLow'
+    elif ageDisparity >5 and ageDisparity <= 15:
+        ageJudge = 'Low'
+    elif ageDisparity > 15 and ageDisparity <= 30:
+        ageJudge = 'VeryLow'
+    elif ageDisparity > 30 and ageDisparity <= 60:
+        ageJudge = 'SuperLow'
+    elif ageDisparity > 60:
+        ageJudge = 'ExtremelyLow'
+    bodyFat = characterData['BodyFat']
+    ageTem = AttrCalculation.judgeAgeGroup(targetAge)
+    averageBodyFat = CacheContorl.AverageBodyFatByage[ageTem][targetSex]
+    bodyFatJudge = 'Similar'
+    if bodyFat < averageBodyFat * 1.15 and bodyFat >= averageBodyFat * 1.05:
+        bodyFatJudge = 'SlilghtlyHeight'
+    elif bodyFat < averageBodyFat * 1.25 and bodyFat >= averageBodyFat * 1.15:
+        bodyFatJudge = 'Height'
+    elif bodyFat < averageBodyFat * 1.35 and bodyFat >= averageBodyFat * 1.25:
+        bodyFatJudge = 'VeryHeight'
+    elif bodyFat < averageBodyFat * 1.45 and bodyFat >= averageBodyFat * 1.35:
+        bodyFatJudge = 'SuperHeight'
+    elif bodyFat > averageBodyFat * 1.45:
+        bodyFatJudge = 'ExtremelyHeight'
+    elif bodyFat < averageBodyFat * 0.95 and bodyFat >= averageBodyFat * 0.85:
+        bodyFatJudge = 'SlilghtlyLow'
+    elif bodyFat < averageBodyFat * 0.85 and bodyFat >= averageBodyFat * 0.75:
+        bodyFatJudge = 'Low'
+    elif bodyFat < averageBodyFat * 0.75 and bodyFat >= averageBodyFat * 0.65:
+        bodyFatJudge = 'VeryLow'
+    elif bodyFat < averageBodyFat * 0.65 and bodyFat >= averageBodyFat * 0.55:
+        bodyFatJudge = 'SuperLow'
+    elif bodyFat < averageBodyFat * 0.55:
+        bodyFatJudge = 'ExtremelyLow'
+    averageHeight = CacheContorl.AverageHeightByage[ageTem][targetSex]
+    height = characterData['Height']['NowHeight']
+    heightJudge = 'Similar'
+    if height < averageHeight * 1.15 and height >= averageHeight * 1.05:
+        heightJudge = 'SlilghtlyHeight'
+    elif height < averageHeight * 1.25 and height >= averageHeight * 1.15:
+        heightJudge = 'Height'
+    elif height < averageHeight * 1.35 and height >= averageHeight * 1.25:
+        heightJudge = 'VeryHeight'
+    elif height < averageHeight * 1.45 and height >= averageHeight * 1.35:
+        heightJudge = 'SuperHeight'
+    elif height > averageHeight * 1.45:
+        heightJudge = 'ExtremelyHeight'
+    elif height < averageHeight * 0.95 and height >= averageHeight * 0.85:
+        heightJudge = 'SlilghtlyLow'
+    elif height < averageHeight * 0.85 and height >= averageHeight * 0.75:
+        heightJudge = 'Low'
+    elif height < averageHeight * 0.75 and height >= averageHeight * 0.65:
+        heightJudge = 'VeryLow'
+    elif height < averageHeight * 0.65 and height >= averageHeight * 0.55:
+        heightJudge = 'SuperLow'
+    elif height < averageHeight:
+        heightJudge = 'ExtremelyLow'
+    playerBodyFat = characterData['BodyFat']
+    playerBodyFatJudge = 'Similar'
+    if bodyFat < playerBodyFat * 1.15 and bodyFat >= playerBodyFat * 1.05:
+        playerBodyFatJudge = 'SlilghtlyHeight'
+    elif bodyFat < playerBodyFat * 1.25 and bodyFat >= playerBodyFat * 1.15:
+        playerBodyFatJudge = 'Height'
+    elif bodyFat < playerBodyFat * 1.35 and bodyFat >= playerBodyFat * 1.25:
+        playerBodyFatJudge = 'VeryHeight'
+    elif bodyFat < playerBodyFat * 1.45 and bodyFat >= playerBodyFat * 1.35:
+        playerBodyFatJudge = 'SuperHeight'
+    elif bodyFat > playerBodyFat * 1.45:
+        playerBodyFatJudge = 'ExtremelyHeight'
+    elif bodyFat < playerBodyFat * 0.95 and bodyFat >= playerBodyFat * 0.85:
+        playerBodyFatJudge = 'SlilghtlyLow'
+    elif bodyFat < playerBodyFat * 0.85 and bodyFat >= playerBodyFat * 0.75:
+        playerBodyFatJudge = 'Low'
+    elif bodyFat < playerBodyFat * 0.75 and bodyFat >= playerBodyFat * 0.65:
+        playerBodyFatJudge = 'VeryLow'
+    elif bodyFat < playerBodyFat * 0.65 and bodyFat >= playerBodyFat * 0.55:
+        playerBodyFatJudge = 'SuperLow'
+    elif bodyFat < playerBodyFat * 0.55:
+        playerBodyFatJudge = 'ExtremelyLow'
+    playerHeight = CacheContorl.characterData['character']['0']['Height']['NowHeight']
+    playerHeightJudge = 'Similar'
+    if height < playerHeight * 1.15 and height >= playerHeight * 1.05:
+        playerHeightJudge = 'SlilghtlyHeight'
+    elif height < playerHeight * 1.25 and height >= playerHeight * 1.15:
+        playerHeightJudge = 'Height'
+    elif height < playerHeight * 1.35 and height >= playerHeight * 1.25:
+        playerHeightJudge = 'VeryHeight'
+    elif height < playerHeight * 1.45 and height >= playerHeight * 1.35:
+        playerHeightJudge = 'SuperHeight'
+    elif height > playerHeight * 1.45:
+        playerHeightJudge = 'ExtremelyHeight'
+    elif height < playerHeight * 0.95 and height >= playerHeight * 0.85:
+        playerHeightJudge = 'SlilghtlyLow'
+    elif height < playerHeight * 0.85 and height >= playerHeight * 0.75:
+        playerHeightJudge = 'Low'
+    elif height < playerHeight * 0.75 and height >= playerHeight * 0.65:
+        playerHeightJudge = 'VeryLow'
+    elif height < playerHeight * 0.65 and height >= playerHeight * 0.55:
+        playerHeightJudge = 'SuperLow'
+    elif height < playerHeight * 0.55:
+        playerHeightJudge = 'ExtremelyLow'
+    playerSex = CacheContorl.characterData['character']['0']['Sex']
+    playerAge = CacheContorl.characterData['character']['0']['Age']
+    playerAgeTem = AttrCalculation.judgeAgeGroup(CacheContorl.characterData['character']['0']['Age'])
+    averageBodyFat = CacheContorl.AverageBodyFatByage[playerAgeTem][playerSex]
+    averageHeight = CacheContorl.AverageHeightByage[playerAgeTem][playerSex]
+    playerAverageBodyFatJudge = 'Similar'
+    if playerBodyFat < averageBodyFat * 1.15 and playerBodyFat >= averageBodyFat * 1.05:
+        playerAverageBodyFatJudge = 'SlilghtlyHeight'
+    elif playerBodyFat < averageBodyFat * 1.25 and playerBodyFat >= averageBodyFat * 1.15:
+        playerAverageBodyFatJudge = 'Height'
+    elif playerBodyFat < averageBodyFat * 1.35 and playerBodyFat >= averageBodyFat * 1.25:
+        playerAverageBodyFatJudge = 'VeryHeight'
+    elif playerBodyFat < averageBodyFat * 1.45 and playerBodyFat >= averageBodyFat * 1.35:
+        playerAverageBodyFatJudge = 'SuperHeight'
+    elif playerBodyFat > averageBodyFat * 1.45:
+        playerAverageBodyFatJudge = 'ExtremelyHeight'
+    elif playerBodyFat < averageBodyFat * 0.95 and playerBodyFat >= averageBodyFat * 0.85:
+        playerAverageBodyFatJudge = 'SlilghtlyLow'
+    elif playerBodyFat < averageBodyFat * 0.85 and playerBodyFat >= averageBodyFat * 0.75:
+        playerAverageBodyFatJudge = 'Low'
+    elif playerBodyFat < averageBodyFat * 0.75 and playerBodyFat >= averageBodyFat * 0.65:
+        playerAverageBodyFatJudge = 'VeryLow'
+    elif playerBodyFat < averageBodyFat * 0.65 and playerBodyFat >= averageBodyFat * 0.55:
+        playerAverageBodyFatJudge = 'SuperLow'
+    elif playerBodyFat < averageBodyFat * 0.55:
+        playerAverageBodyFatJudge = 'ExtremelyLow'
+    playerAverageHeightJudge = 'Similar'
+    if playerHeight < averageHeight * 1.15 and playerHeight >= averageHeight * 1.05:
+        playerAverageHeightJudge = 'SlilghtlyHeight'
+    elif playerHeight < averageHeight * 1.25 and playerHeight >= averageHeight * 1.15:
+        playerAverageHeightJudge = 'Height'
+    elif playerHeight < averageHeight * 1.35 and playerHeight >= averageHeight * 1.25:
+        playerAverageHeightJudge = 'VeryHeight'
+    elif playerHeight < averageHeight * 1.45 and playerHeight >= averageHeight * 1.35:
+        playerAverageHeightJudge = 'SuperHeight'
+    elif playerHeight > averageHeight * 1.45:
+        playerAverageHeightJudge = 'ExtremelyHeight'
+    elif playerHeight < averageHeight * 0.95 and playerHeight >= averageHeight * 0.85:
+        playerAverageHeightJudge = 'SlilghtlyLow'
+    elif playerHeight < averageHeight * 0.85 and playerHeight >= averageHeight * 0.75:
+        playerAverageHeightJudge = 'Low'
+    elif playerHeight < averageHeight * 0.75 and playerHeight >= averageHeight * 0.65:
+        playerAverageHeightJudge = 'VeryLow'
+    elif playerHeight < averageHeight * 0.65 and playerHeight >= averageHeight * 0.55:
+        playerAverageHeightJudge = 'SuperLow'
+    elif playerHeight < averageHeight * 0.55:
+        playerAverageHeightJudge = 'ExtremelyLow'
+    targetJudge = 'Target'
+    if characterId == '0':
+        targetJudge = 'Self'
+    return {
+        "SelfSex":playerSex,
+        "TargetSex":characterData['Sex'],
+        "AgeJudge":ageJudge,
+        "AgeTem":ageTem,
+        "SelfAgeTem":playerAgeTem,
+        "SelfAge":playerAge,
+        "TargetAge":targetAge,
+        "AverageHeight":heightJudge,
+        "AverageStature":bodyFatJudge,
+        "RelativeHeight":playerHeightJudge,
+        "RelativeStature":playerBodyFatJudge,
+        "PlayerAverageHeight":playerAverageHeightJudge,
+        "PlayerAverageStature":playerAverageBodyFatJudge,
+        "Target":targetJudge
+    }
+
 def getStatureText(characterId:str) -> list:
     '''
     按角色Id获取身材描述信息
     Keyword arguments:
     characterId -- 角色Id
     '''
-    characterData = CacheContorl.characterData['character'][characterId]
+    statureJudge = judgeCharacterStature(characterId)
+    for priority in CacheContorl.statureDescritionPrioritionData:
+        for descript in CacheContorl.statureDescritionPrioritionData[priority]:
+            if judgeStatureDescription(statureJudge,TextLoading.getGameData(TextLoading.statureDescriptionPath)['Priority'][priority][descript]['Condition']):
+                return TextLoading.getGameData(TextLoading.statureDescriptionPath)['Priority'][priority][descript]['Description']
     return ''
+
+def judgeStatureDescription(statureJudge,descriptionData):
+    '''
+    角色的身材信息
+    Keyword arguments:
+    statureJudge -- 身材校验信息
+    descriptionData -- 身材描述数据
+    '''
+    for judge in descriptionData:
+        if judge == 'SelfAge' and statureJudge['SelfAge'] < descriptionData[judge]:
+            return False
+        elif judge == 'TargetAge' and statureJudge['TargetAge'] < descriptionData[judge]:
+            return False
+        else:
+            if descriptionData[judge] != statureJudge[judge]:
+                return False
+    return True
 
 def getCharacterAbbreviationsInfo(characterId:str) -> str:
     '''
