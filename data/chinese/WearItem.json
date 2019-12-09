@@ -1,15 +1,18 @@
 {
-  "Head":{},
-  "Eye":{},
-  "Ear":{},
-  "Nose":{},
-  "Mouth":{},
-  "Finesse":{},
-  "Finger":{},
-  "Chest":{},
-  "Privates":{},
-  "Anus":{},
-  "Leg":{},
-  "Foot":{},
-  "Other":{}
+  "Wear":{
+    "Head":{},
+    "Eye":{},
+    "Ear":{},
+    "Nose":{},
+    "Mouth":{},
+    "Finesse":{},
+    "Finger":{},
+    "Chest":{},
+    "Privates":{},
+    "Anus":{},
+    "Leg":{},
+    "Foot":{},
+    "Other":{}
+  },
+  "Item":{}
 }

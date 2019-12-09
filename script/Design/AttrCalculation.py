@@ -72,11 +72,10 @@ def getAttr(temName:str) -> dict:
     maxManaPoint = getMaxManaPoint(manaPointTemName)
     gold = getGold()
     statusData = TextLoading.getGameData(TextLoading.characterStatePath)
-    wearItemData = {key:{} for key in TextLoading.getGameData(TextLoading.wearItemPath)}
-    wearItemDataTwo = {key:'' for key in TextLoading.getGameData(TextLoading.wearItemPath)}
+    wearItemData = {key:'' for key in TextLoading.getGameData(TextLoading.wearItemPath)}
     wearItem = {
-        "Wear":wearItemDataTwo,
-        "Item":wearItemData,
+        "Wear":wearItemData,
+        "Item":{},
     }
     return {
         'Age':age,
