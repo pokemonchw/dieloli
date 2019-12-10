@@ -39,7 +39,7 @@
   "37":" 服装 ",
   "38":" 道具 ",
   "39":"衣着:",
-  "40":" 穿戴道具 ",
+  "40":" 可穿戴道具 ",
   "41":"外套",
   "42":"上衣",
   "43":"裤子",
@@ -49,6 +49,7 @@
   "47":"胸罩",
   "48":"内裤",
   "49":{"Head":"头","Eye":"眼","Ear":"耳","Nose":"鼻","Mouth":"嘴","Finesse":"腕","Finger":"指","Chest":"胸","Privates":"性","Anus":"肛","Leg":"腿","Foot":"脚","Other":"它"},
+  "50":"数量:",
   "59":"年",
   "60":"月",
   "61":"日",
@@ -125,5 +126,6 @@
   "132":{"arder":"闲置"},
   "133":"状态:",
   "134":{"SexFeel":"性感受","MouthDelight":"嘴部快感","BosomDelight":"胸部快感","VaginaDelight":"阴道快感","ClitorisDelight":"阴蒂快感","AnusDelight":"肛门快感","PenisDelight":"阴茎快感","VaginaLubrication":"阴道润滑","AnusLubrication":"肛门润滑","PsychologicalFeeling":"心灵感受","Happy":"快乐","Pain":"痛苦","Desire":"渴望","Fear":"恐惧","Antipathy":"反感","Shame":"羞耻","Depressed":"抑郁","Pride":"傲慢","Envy":"嫉妒","Warth":"暴怒","Sloth":"懒惰","Greed":"贪婪","Gluttony":"暴食","Lust":"色欲","BodyFeeling":"身体感受","Warm":"温暖","Ache":"疼痛","Dizzy":"眩晕","Tired":"疲惫","Enchanted":"迷醉","Hunger":"饥饿","Thirsty":"口渴"},
-  "135":" 状态 "
+  "135":" 状态 ",
+  "136":"数量:"
 }

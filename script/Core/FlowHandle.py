@@ -267,7 +267,8 @@ def initCache():
         "SeeSaveListPanel":"0","SeeCharacterListPanel":"0",
         "SeeSceneCharacterListPanel":"0","SeeSceneCharacterListPage":"0",
         "SeeSceneNameListPanel":"1","SeeCharacterClothesPanel":"0",
-        "AttrShowHandlePanel":"MainAttr","SeeCharacterWearItemListPanel":"0"
+        "AttrShowHandlePanel":"MainAttr","SeeCharacterWearItemListPanel":"0",
+        "SeeCharacterItemListPanel":"0"
     }
     CacheContorl.maxSavePage = GameConfig.save_page
     CacheContorl.textWait = float(GameConfig.text_wait)

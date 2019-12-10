@@ -158,20 +158,6 @@ def inputAttrOverPanel():
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.acknowledgmentAttribute, askfor=False)
     return yrn
 
-def seeCharacterItemPanel(characterId:str) -> list:
-    '''
-    用于查看角色背包道具列表的面板
-    Keyword arguments:
-    characterId -- 角色Id
-    '''
-    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '40'))
-    EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
-    EraPrint.pline('.')
-    if len(CacheContorl.characterData['character'][characterId]['Item']) == 0:
-        EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath,'36'))
-    else:
-        pass
-
 panelData = {
     "MainAttr":seeCharacterMainAttrPanel,
     "Equipment":seeCharacterEquipmentPanel,
