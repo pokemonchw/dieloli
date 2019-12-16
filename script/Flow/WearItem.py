@@ -1,4 +1,4 @@
-from script.Core import CacheContorl,GameConfig
+from script.Core import CacheContorl,GameConfig,FlowHandle,PyCmd
 from script.Panel import WearItemPanel
 
 def sceneSeeCharacterWearItem(characterId:str):
@@ -8,7 +8,35 @@ def sceneSeeCharacterWearItem(characterId:str):
     characterId -- 角色Id
     '''
     while 1:
-        inputS = WearItemPanel.seeCharacterWearItemPanelForPlayer(characterId)
+        WearItemPanel.seeCharacterWearItemPanelForPlayer(characterId)
+
+def wearCharacterItem():
+    '''
+    查看并更换角色穿戴道具流程
+    '''
+    characterId = CacheContorl.characterData['characterId']
+    while 1:
+        inputs = WearItemPanel.seeCharacterWearItemPanelForPlayer(characterId)
+        startId = len(inputs)
+        inputs += WearItemPanel.seeCharacterWearItemCmdPanel(startId)
+        yrn = FlowHandle.askfor_All(inputs)
+        PyCmd.clr_cmd()
+        if yrn == str(startId):
+            CacheContorl.nowFlowId == 'main'
+        else:
+            wearItemInfoTextData = TextLoading.getTextData(TextLoading.stageWordPath,'49')
+            changeWearItem(list(wearItemInfoTextData.keys())[int(yrn)])
+
+def changeWearItem(itemType:str):
+    '''
+    更换角色穿戴道具流程
+    Keyword arguments:
+    itemType -- 道具类型
+    '''
+    characterId = CacheContorl.characterData['characterId']
+    itemData = CacheContorl.characterData['character'][characterId]
+    maxPage = getCharacterWearItemPageMax(characterId)
+    inputS = WearItemPanel.seeCharacterWearItemListPanel(characterId,itemType,maxPage)
 
 def getCharacterWearItemPageMax(characterId:str):
     '''

@@ -104,4 +104,4 @@ def seeAttrInEveryTime_func():
     '''
     characterId = CacheContorl.characterData['characterId']
     nowAttrPanel = CacheContorl.panelState['AttrShowHandlePanel']
-    SeeCharacterAttrPanel.panelData[nowAttrPanel](characterId)
+    return SeeCharacterAttrPanel.panelData[nowAttrPanel](characterId)

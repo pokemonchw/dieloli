@@ -1,5 +1,5 @@
-from script.Core import TextLoading,CacheContorl,CmdButtonQueue,EraPrint,GameConfig
-from script.Design import AttrText
+from script.Core import TextLoading,CacheContorl,EraPrint,GameConfig
+from script.Design import AttrText,CmdButtonQueue
 
 def seeCharacterWearItemPanelForPlayer(characterId:str) -> list:
     '''
@@ -43,7 +43,7 @@ def seeCharacterWearItemPanel(characterId:str,changeButton:bool) -> list:
         EraPrint.plist(wearItemButtonList,4,'center')
     return inputS
 
-def seeCharacterWearItemListPanel(characterId:str,itemType:str,maxPage:int):
+def seeCharacterWearItemListPanel(characterId:str,itemType:str,maxPage:int) -> list:
     '''
     用于查看角色可穿戴道具列表的面板
     Keyword arguments:
@@ -62,3 +62,13 @@ def seeCharacterWearItemListPanel(characterId:str,itemType:str,maxPage:int):
         return []
     if nowPageEndId > len(characterWearItemData.keys()):
         nowPageEndId = len(characterWearItemData.keys())
+
+def seeCharacterWearItemCmdPanel(startId:int) -> list:
+    '''
+    查看角色已穿戴道具列表的控制面板
+    Keyword arguments:
+    startId -- 命令起始Id
+    '''
+    EraPrint.pline()
+    yrn = CmdButtonQueue.optionint(CmdButtonQueue.seecharacterwearclothes,cmdSize='center',askfor=False,startId=startId)
+    return yrn

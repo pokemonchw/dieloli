@@ -6,11 +6,13 @@ mainFrameGotoData = {
     "0":'in_scene',
     "1":'see_character_list',
     "2":'change_clothes',
-    "3":'shop',
-    "4":'game_setting',
-    "5":'game_help',
-    "6":'establish_save',
-    "7":'load_save',
+    "3":'wear_item',
+    "4":'open_bag',
+    "5":'shop',
+    "6":'game_setting',
+    "7":'game_help',
+    "8":'establish_save',
+    "9":'load_save',
 }
 
 def mainFrame_func():

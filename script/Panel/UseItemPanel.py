@@ -1,15 +1,17 @@
-from script.Core import TextLoading,CacheContorl,CmdButtonQueue,PyCmd,EraPrint
-from script.Design import AttrText
+from script.Core import TextLoading,CacheContorl,PyCmd,EraPrint
+from script.Design import AttrText,CmdButtonQueue
 
 def seeCharacterItemPanel(characterId:str) -> list:
     '''
-    用于查看角色背包道具列表的面板
+    查看角色背包道具列表面板
     Keyword arguments:
     characterId -- 角色Id
     '''
-    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '40'))
     EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     EraPrint.pline('.')
+    if characterId != '0':
+        EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath,'37'))
+        return []
     characterItemData = CacheContorl.characterData['character'][characterId]['Item']
     if len(characterItemData) == 0:
         EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath,'36'))

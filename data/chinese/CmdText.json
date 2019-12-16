@@ -16,7 +16,7 @@
   "detailedSetting9":["重度洁癖，无法忍受肉体的污秽","干干净净，香喷喷的最好了","一般般，不引人注目就行","有点异味也不是不可以接受","一两个月不洗澡也是家常便饭"],
   "acknowledgmentAttribute":["这样就可以了","请给{SelfName}一个重头再来的机会"],
   "cmdSwitch":["-","+"],
-  "mainMenu":["起床","查看属性","更换服装","迷之商店"],
+  "mainMenu":["睁眼起床","查看属性","更换服装","穿戴道具","打开背包","迷之商店"],
   "systemMenu":["系统设置","查看帮助","储存游戏","读取存档"],
   "seeAttrPanelHandle":{"MainAttr":"属性","Status":"状态","Equipment":"服装","Item":"道具","WearItem":"穿戴","SexExperience":"经验","Knowledge":"技能","Language":"语言","Features":"素质","SocialContact":"社交"},
   "changeSavePage":["上一页","返回","下一页"],

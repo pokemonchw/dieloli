@@ -1,6 +1,6 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
 from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue
-from script.Panel import ChangeClothesPanel
+from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel
 
 def seeCharacterMainAttrPanel(characterId:str):
     '''
@@ -130,6 +130,26 @@ def seeCharacterEquipmentPanel(characterId:str):
     EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     ChangeClothesPanel.seeCharacterWearClothes(characterId,False)
 
+def seeCharacterItemPanel(characterId:str):
+    '''
+    查看角色道具面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '38'))
+    EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    UseItemPanel.seeCharacterItemPanel(characterId)
+
+def seeCharacterWearItemPanel(characterId:str):
+    '''
+    查看角色穿戴道具面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '40'))
+    EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    WearItemPanel.seeCharacterWearItemPanel(characterId,False)
+
 def askForSeeAttr() -> list:
     '''
     查看角色属性时输入处理面板
@@ -163,7 +183,7 @@ panelData = {
     "Equipment":seeCharacterEquipmentPanel,
     "Status":seeCharacterStatusHeadPanel,
     "Item":seeCharacterItemPanel,
-    "WearItem":seeCharacterWearItemPanelForPlayer,
+    "WearItem":seeCharacterWearItemPanel,
     "SexExperience":"",
     "Knowledge":"",
     "Language":"",

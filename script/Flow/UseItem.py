@@ -9,6 +9,13 @@ def sceneSeeCharacterItem(characterId:str):
     while 1:
         pass
 
+def openCharacterBag():
+    '''
+    打开主角背包查看道具列表流程
+    '''
+    while 1:
+        pass
+
 def getCharacterItemPageMax(characterId:str):
     '''
     计算角色道具列表页数
