@@ -8,7 +8,7 @@ def seeCharacterWearItemPanelForPlayer(characterId:str) -> list:
     characterId -- 角色Id
     changeButton -- 将角色穿戴道具列表绘制成按钮的开关
     '''
-    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '38'))
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '40'))
     EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     EraPrint.pline('.')
     if characterId == '0':
@@ -37,7 +37,7 @@ def seeCharacterWearItemPanel(characterId:str,changeButton:bool) -> list:
             wearItemButtonList.append(wearItemInfoTextData[wearType] + ':' + itemData[wearType][wearId]['Name'])
             wearItemTextData[wearType] = itemData[wearType][wearId]['Name']
     if changeButton:
-        inputS = [str(i) for i in range(len(wearItemTextData))]
+        inputS = [str(i) for i in range(len(itemData))]
         CmdButtonQueue.optionint(None,4,'left',True,False,'center',0,wearItemButtonList,)
     else:
         EraPrint.plist(wearItemButtonList,4,'center')
@@ -58,7 +58,7 @@ def seeCharacterWearItemListPanel(characterId:str,itemType:str,maxPage:int) -> l
     nowPageStartId = nowPageId * nowPageMax
     nowPageEndId = nowPageStartId + nowPageMax
     if characterWearItemData == {}:
-        EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath,'34'))
+        EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath,'38'))
         return []
     if nowPageEndId > len(characterWearItemData.keys()):
         nowPageEndId = len(characterWearItemData.keys())
