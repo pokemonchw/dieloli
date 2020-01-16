@@ -8,7 +8,11 @@ def sceneSeeCharacterWearItem(characterId:str):
     characterId -- 角色Id
     '''
     while 1:
-        WearItemPanel.seeCharacterWearItemPanelForPlayer(characterId)
+        nowInputS = WearItemPanel.seeCharacterWearItemPanelForPlayer(characterId)
+        nowYrn = FlowHandle.askfor_All(nowInputS)
+        if nowYrn == nowInputS[:-1]:
+            CacheContorl.nowFlowId == 'main'
+            break
 
 def wearCharacterItem():
     '''
@@ -30,6 +34,8 @@ def wearCharacterItem():
             if nowYrn == nowInputS[:-1]:
                 CacheContorl.nowFlowId == 'main'
                 break
+            else:
+                changeWearItem(list(wearItemInfoTextData.keys())[int(nowYrn)])
 
 def changeWearItem(itemType:str):
     '''
@@ -41,7 +47,11 @@ def changeWearItem(itemType:str):
     itemData = CacheContorl.characterData['character'][characterId]
     maxPage = getCharacterWearItemPageMax(characterId)
     inputS = WearItemPanel.seeCharacterWearItemListPanel(characterId,itemType,maxPage)
-    return inputS
+    yrn = FlowHandle.askfor_All(inputS)
+    if yrn == inputS[:-1]:
+        break
+    else:
+        CacheContorl.characterData['character'][characterId]['WearItem']['Wear'][itemType] = list(CacheContorl.characterData['character'][characterId]["Wear"]['Item'][itemType].keys())[int(yrn)]
 
 def getCharacterWearItemPageMax(characterId:str):
     '''
