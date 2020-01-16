@@ -29,6 +29,7 @@ changescenecharacterlist = 'changeSceneCharacterList'
 seecharacterclothes = 'seeCharacterClothes'
 askseeclothinginfopanel = 'askSeeClothingInfoPanel'
 seeclothinginfoaskpanel = 'seeClothingInfoAskPanel'
+seeknowledgeaskpanle = 'seeKnowledgeAskPanel'
 
 def optionint(
     cmdList:list,

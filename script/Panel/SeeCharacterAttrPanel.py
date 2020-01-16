@@ -1,6 +1,6 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
 from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue
-from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel
+from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel,SeeKnowledgePanel,SexExperiencePanel,LanguagePanel
 
 def seeCharacterMainAttrPanel(characterId:str):
     '''
@@ -150,6 +150,36 @@ def seeCharacterWearItemPanel(characterId:str):
     EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     WearItemPanel.seeCharacterWearItemPanel(characterId,False)
 
+def seeCharacterKnowledgePanel(characterId:str):
+    '''
+    查看角色知识信息面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath,'137'))
+    EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    SeeKnowledgePanel.seeCharacterKnowledgePanel(characterId)
+
+def seeCharacterSexExperiencePanel(characterId:str):
+    '''
+    查看角色性经验面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath,'138'))
+    EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    SexExperiencePanel.seeCharacterSexExperiencePanel(characterId)
+
+def seeCharacterLanguagePanel(characterId:str):
+    '''
+    查看角色语言能力面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath,'139'))
+    EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    LanguagePanel.seeCharacterLanguagePanel(characterId)
+
 def askForSeeAttr() -> list:
     '''
     查看角色属性时输入处理面板
@@ -184,9 +214,9 @@ panelData = {
     "Status":seeCharacterStatusHeadPanel,
     "Item":seeCharacterItemPanel,
     "WearItem":seeCharacterWearItemPanel,
-    "SexExperience":"",
-    "Knowledge":"",
-    "Language":"",
+    "SexExperience":seeCharacterSexExperiencePanel,
+    "Knowledge":seeCharacterKnowledgePanel,
+    "Language":seeCharacterLanguagePanel,
     "Features":"",
     "SocialContact":""
 }

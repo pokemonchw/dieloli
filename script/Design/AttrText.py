@@ -140,6 +140,33 @@ def getSexText(sexId:str) -> str:
     sexText = data[sexId]
     return sexText
 
+def getEngravingText(eList:dict) -> list:
+    '''
+    获取刻印描述文本
+    Keyword arguments:
+    eList -- 刻印数据
+    '''
+    painLevel = eList["Pain"]
+    happyLevel = eList["Happy"]
+    yieldLevel = eList["Yield"]
+    fearLevel = eList["Fear"]
+    resistanceLevel = eList["Resistance"]
+    painLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'31')
+    happyLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'32')
+    yieldLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'33')
+    fearLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'34')
+    resistanceLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'35')
+    LVText = TextLoading.getTextData(TextLoading.stageWordPath,'36')
+    levelList = [painLevel,happyLevel,yieldLevel,fearLevel,resistanceLevel]
+    levelFixList = [painLevelFix,happyLevelFix,yieldLevelFix,fearLevelFix,resistanceLevelFix]
+    levelTextList = []
+    levelBarList = []
+    for i in range(0,len(levelList)):
+        levelTextList.append(levelFixList[i] + LVText + levelList[i])
+    for i in range(0,len(levelList)):
+        levelBarList.append(ProportionalBar.getCountBar(levelTextList[i], 3, levelList[i], 'engravingemptybar'))
+    return levelBarList
+
 def getClothingText(clothingList:dict) -> list:
     '''
     获取服装描述文本
@@ -189,6 +216,14 @@ def getGoldText(characterId:str) -> str:
     goldText = TextLoading.getTextData(TextLoading.stageWordPath,'67')
     goldText = goldText + goldData + moneyText
     return goldText
+
+def getLevelColorText(exp):
+    '''
+    计算经验对应等级并获取富文本
+    Keyword arguments:
+    exp -- 经验
+    '''
+    return getLevelTextColor(AttrCalculation.judgeGrade(exp))
 
 def getStateText(characterId:str) -> str:
     '''

@@ -35,7 +35,8 @@ def wearCharacterItem():
                 CacheContorl.nowFlowId == 'main'
                 break
             else:
-                changeWearItem(list(wearItemInfoTextData.keys())[int(nowYrn)])
+                if changeWearItem(list(wearItemInfoTextData.keys())[int(nowYrn)]):
+                    break
 
 def changeWearItem(itemType:str):
     '''
@@ -49,7 +50,7 @@ def changeWearItem(itemType:str):
     inputS = WearItemPanel.seeCharacterWearItemListPanel(characterId,itemType,maxPage)
     yrn = FlowHandle.askfor_All(inputS)
     if yrn == inputS[:-1]:
-        break
+        return True
     else:
         CacheContorl.characterData['character'][characterId]['WearItem']['Wear'][itemType] = list(CacheContorl.characterData['character'][characterId]["Wear"]['Item'][itemType].keys())[int(yrn)]
 
