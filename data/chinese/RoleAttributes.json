@@ -65,20 +65,6 @@
     "Man":"男","Woman":"女",
     "Futa":"扶她","Asexual":"无性"
   },
-  "Features":{
-    "Age":["正太","萝莉","幼齿","苍老"],
-    "Chastity":["处男","处女","纯洁"],
-    "Disposition":["外向","内向"],
-    "SelfConfidence":["自负","自信","自卑"],
-    "Courage":["勇敢","胆小"],
-    "Friends":["友善","冷淡","孤僻"],
-    "Figure":["巨人","矮人"],
-    "Chest":["爆乳","巨乳","贫乳","绝壁"],
-    "Sex":["双性器","无性器"],
-    "AnimalInternal":["兽耳","利爪"],
-    "AnimalExternal":["吸血","狐臭"],
-    "Charm":["魅力","迷之魅力"]
-  },
   "Species":["人类"],
   "Relationship":["无","恋慕","爱慕","厌恶","仇恨"],
   "defaultFeatures":{
