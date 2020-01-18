@@ -353,6 +353,20 @@
     "SevereObesity":[35.0,39.9],
     "ExtremelySevereObesity":[40.0,50.0]
   },
+  "ChestWeightTem":{
+    "Precipice":1,
+    "PoorBreast":19,
+    "Ordinary":60,
+    "BigBoobs":15,
+    "BreastedBoobs":5
+  },
+  "ChestTem":{
+    "Precipice":[0.1,10],
+    "PoorBreast":[10,12.5],
+    "Ordinary":[12.5,15],
+    "BigBoobs":[15,17.5],
+    "BreastedBoobs":[17.5,20]
+  },
   "BodyFatTem":{
     "Man":{
       "Thin":[5.0,11.9],

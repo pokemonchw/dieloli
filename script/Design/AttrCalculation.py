@@ -388,28 +388,6 @@ def setSexCache(sexName:str):
         if feature in featuresTemData:
             CacheContorl.featuresList[feature] = featuresTemData[feature]
 
-def setAnimalCache(animalName:str):
-    '''
-    按动物类型追加特征数据
-    Keyword arguments:
-    animalName -- 动物名字
-    '''
-    animalData = roleAttrData["AnimalFeatures"][animalName]
-    setAddFeatures(animalData)
-
-def setAddFeatures(featuresData:dict):
-    '''
-    追加特征存入CacheContorl.featuresList
-    Keyword arguments:
-    featuresData -- 追加的特征数据
-    '''
-    cacheList = ['Age', "Chastity", 'Disposition', "Courage", 'SelfConfidence', 'Friends', 'Figure',
-                 'Sex', 'AnimalInternal', 'AnimalExternal', 'Charm'
-                 ]
-    for feature in cacheList:
-        if feature in featuresData:
-            CacheContorl.featuresList[feature] = featuresData[feature]
-
 def setAttrDefault(characterId:str):
     '''
     为指定id角色生成默认属性

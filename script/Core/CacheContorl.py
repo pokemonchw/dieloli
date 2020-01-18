@@ -18,9 +18,6 @@ temCharacterDefault = {}
 # 默认属性模板数据备份
 temporaryCharacterBak = {}
 
-# 素质数据临时缓存
-featuresList = {}
-
 # 临时角色数据控制对象
 temporaryCharacter = {}
 
