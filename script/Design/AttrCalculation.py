@@ -1,6 +1,8 @@
 import os
 import random
+import time
 from script.Core import CacheContorl,GameConfig,GamePathConfig,TextLoading,JsonHandle
+from script.Design import GameTime
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
@@ -55,6 +57,7 @@ def getAttr(temName:str) -> dict:
     temData = TemList[temName]
     ageTemName = temData["Age"]
     age = getAge(ageTemName)
+    birthday = getRandNpcBirthDay(age)
     sexExperienceTemName = temData["SexExperience"]
     sexExperienceList = getSexExperience(sexExperienceTemName)
     sexGradeList = getSexGrade(sexExperienceList)
@@ -79,6 +82,7 @@ def getAttr(temName:str) -> dict:
     }
     return {
         'Age':age,
+        'Birthday':birthday,
         'HitPointMax':maxHitPoint,
         'HitPoint':maxHitPoint,
         'ManaPointMax':maxManaPoint,
@@ -155,6 +159,47 @@ def getHeight(temName:str,age:int,Features:dict) -> dict:
     else:
         nowHeight = 365 * growthHeight * age + nowHeight
     return {"NowHeight":nowHeight,"GrowthHeight":growthHeight,"ExpectAge":expectAge,"DevelopmentAge":developmentAge,"ExpectHeight":expectHeight}
+
+def getChest(chestTem:str,birthday:dict):
+    '''
+    按罩杯模板生成人物最终罩杯，并按人物年龄计算当前罩杯
+    Keyword arguments:
+    chestTem -- 罩杯模板
+    age -- 角色年龄
+    '''
+    targetChest = getRandNpcChest(chestTem)
+    overAge = random.randint(14,18)
+    overYear = birthday['year'] + overAge
+    date = GameTime.getRandDayForYear(overYear)
+
+def getRandNpcChest(chestTem:str) -> int:
+    '''
+    随机获取模板对应罩杯
+    Keyword arguments:
+    chestTem -- 罩杯模板
+    '''
+    chestScope = TextLoading.getTextData(TextLoading.attrTemplatePath,'ChestTem')[chestTem]
+    return random.uniform(chestScope[0],chestScope[1])
+
+def getRandNpcBirthDay(age:int):
+    '''
+    随机生成npc生日
+    Keyword arguments:
+    age -- 年龄
+    '''
+    nowYear = int(CacheContorl.gameTime['year'])
+    nowMonth = int(CacheContorl.gameTime['month'])
+    nowDay = int(CacheContorl.gameTime['day'])
+    birthYear = nowYear - age
+    date = time.localtime(GameTime.getRandDayForYear(birthYear))
+    birthday = {
+        "year":date[0],
+        "month":date[1],
+        "day":date[2]
+    }
+    if nowMonth < birthday['month'] || (nowMonth == birthday['month'] && nowDay < birthday['day']):
+        birthday['year'] -= 1
+    return birthday
 
 def getGrowthHeight(nowAge:int,expectHeight:float,developmentAge:int,expectAge:int) -> dict:
     '''

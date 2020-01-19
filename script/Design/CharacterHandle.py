@@ -227,15 +227,6 @@ def getRandNpcChestTem() -> str:
     '''
     return ValueHandle.getRandomForWeight(chestTemWeightData)
 
-def getRandNpcChest(chestTem:str) -> int:
-    '''
-    随机获取模板对应罩杯
-    Keyword arguments:
-    chestTem -- 罩杯模板
-    '''
-    chestScope = TextLoading.getTextData(TextLoading.attrTemplatePath,'ChestTem')[chestTem]
-    return random.uniform(chestScope[0],chestScope[1])
-
 def getRandNpcSexExperienceTem(age:int,sex:str) -> str:
     '''
     按年龄范围随机获取性经验模板

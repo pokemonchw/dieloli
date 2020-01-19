@@ -1,6 +1,7 @@
 from script.Core import CacheContorl,GameConfig,TextLoading
 from dateutil import relativedelta
 import datetime
+import time
 
 def initTime():
     '''
@@ -94,6 +95,43 @@ def getWeekDate() -> datetime.datetime:
     获取当前游戏日期星期数
     '''
     return datetime.datetime(int(CacheContorl.gameTime['year']),int(CacheContorl.gameTime['month']),int(CacheContorl.gameTime['day'])).strftime("%w")
+
+def getRandDayForYear(year:int) -> "time.time" :
+    '''
+    随机获取指定年份中一天的日期
+    Keyword arguments:
+    year -- 年份
+    Return arguments:
+    time.time -- 随机日期
+    '''
+    a1 = (year,1,1,0,0,0,0,0,0)
+    a2 = (year,12,31,23,59,59,0,0,0)
+    start = time.mktime(a1)
+    end = time.mktime(a2)
+    return getRandDayForDate(start,end)
+
+def getRandDayForDate(startDate:"time.time",endDate:"time.time") -> "time.time":
+    '''
+    随机获取两个日期中的日期
+    Keyword arguments:
+    startDate -- 开始日期
+    endDate -- 结束日期
+    Return arguments:
+    time.localtime -- 随机日期
+    '''
+    t = random.randint(start,end)
+    return time.mktime(time.localtime(t))
+
+def countDayForDateToDate(startDate:"datetime.datetime",endDate:"datetime.datetime") -> int:
+    '''
+    计算两个时间之间经过的天数
+    Keyword arguments:
+    startDate -- 开始时间
+    endDate -- 结束时间
+    Return arguments:
+    int -- 经过天数
+    '''
+    return (startDate - endDate).days
 
 def getNowTimeSlice():
     '''
