@@ -1,4 +1,4 @@
-from script.Design import GameTime,AttrCalculation,CharacterHandle,MapHandle,Course,Interest,Clothing,Nature
+from script.Design import AttrCalculation,CharacterHandle,MapHandle,Course,Interest,Clothing,Nature
 from script.Core import CacheContorl
 from script.Panel import SeeCharacterAttrPanel
 import uuid
@@ -7,7 +7,6 @@ def initGameStart():
     '''
     用于结束角色创建正式开始游戏的初始化流程
     '''
-    GameTime.initTime()
     CharacterHandle.initCharacterDormitory()
     CharacterHandle.initCharacterPosition()
     Course.initPhaseCourseHour()

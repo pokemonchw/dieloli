@@ -1,6 +1,6 @@
 import os,random,bisect
 from script.Core import TextLoading,CacheContorl,GameConfig,GamePathConfig,ValueHandle,JsonHandle
-from script.Design import ProportionalBar,AttrPrint,AttrCalculation
+from script.Design import ProportionalBar,AttrPrint,AttrCalculation,MapHandle
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
@@ -483,3 +483,23 @@ def getCharacterAbbreviationsInfo(characterId:str) -> str:
     characterGracesText = characterGracesInfo + characterGraces
     abbreviationsInfo = characterIdText + ' ' + characterName + ' ' + characterSexText + ' ' + characterAgeText + ' ' + characterHpAndMpText + ' ' + characterIntimateText + ' ' + characterGracesText
     return abbreviationsInfo
+
+def getCharacterDormitoryPathText(characterId:str) -> str:
+    '''
+    获取角色宿舍路径描述信息
+    Keyword arguments:
+    characterId -- 角色Id
+    Return arguments:
+    mapPathStr -- 宿舍路径描述文本
+    '''
+    dormitory = CacheContorl.characterData['character'][characterId]['Dormitory']
+    dormitoryPath = MapHandle.getMapSystemPathForStr(dormitory)
+    mapList = MapHandle.getMapHierarchyListForScenePath(dormitoryPath,[])
+    mapPathText = TextLoading.getTextData(TextLoading.stageWordPath,'143')
+    mapList.reverse()
+    for nowMap in mapList:
+        nowMapMapSystemStr = MapHandle.getMapSystemPathStrForList(nowMap)
+        mapName = CacheContorl.mapData[nowMapMapSystemStr]['MapName']
+        mapPathText += mapName + '-'
+    mapPathText += CacheContorl.sceneData[dormitory]['SceneName']
+    return mapPathText

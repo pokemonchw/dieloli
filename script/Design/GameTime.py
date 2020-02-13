@@ -107,7 +107,7 @@ def getRandDayForYear(year:int) -> "time.time" :
     Return arguments:
     time.time -- 随机日期
     '''
-    a1 = (year,1,1,0,0,0,0,0,0)
+    a1 = (year,1,1,0,0,0,-1,-1,-1)
     a2 = (year,12,31,23,59,59,0,0,0)
     start = time.mktime(a1)
     end = time.mktime(a2)
@@ -133,10 +133,11 @@ def systemTimeToGameTime(systemTime:"time.time"):
     Return arguments:
     gameTime -- 游戏时间数据
     '''
+    systemTime = time.localtime(systemTime)
     return {
         'year':systemTime.tm_year,
         'month':systemTime.tm_mon,
-        'day':systemTime.tm_day
+        'day':systemTime.tm_mday
     }
 
 def gameTimeToDatetime(gameTime:dict) -> datetime.datetime:

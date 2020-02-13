@@ -1,5 +1,5 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
-from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue
+from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue,AttrCalculation
 from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel,SeeKnowledgePanel,SexExperiencePanel,LanguagePanel
 
 def seeCharacterMainAttrPanel(characterId:str):
@@ -29,18 +29,27 @@ def seeCharacterMainAttrPanel(characterId:str):
     EraPrint.plittleline()
     statureText = AttrText.getStatureText(characterId)
     EraPrint.pl(statureText)
+    EraPrint.pline('.')
+    EraPrint.pl(AttrText.getCharacterDormitoryPathText(characterId))
     EraPrint.plittleline()
     characterSpecies = characterData['Species']
     characterSpecies = TextLoading.getTextData(TextLoading.stageWordPath, '15') + characterSpecies
     characterAge = characterData['Age']
     characterAge = TextLoading.getTextData(TextLoading.stageWordPath, '3') + str(characterAge)
-    EraPrint.plist([characterSpecies,characterAge],2,'center')
+    birthday = characterData['Birthday']
+    birthdayText = TextLoading.getTextData(TextLoading.stageWordPath,'140') + str(birthday['month']) + TextLoading.getTextData(TextLoading.stageWordPath,'60') + str(birthday['day']) + TextLoading.getTextData(TextLoading.stageWordPath,'61')
+    EraPrint.plist([characterSpecies,characterAge,birthdayText],3,'center')
     EraPrint.pline('.')
     characterIntimate = characterData['Intimate']
     characterIntimate = TextLoading.getTextData(TextLoading.stageWordPath, '16') + characterIntimate
     characterGraces = characterData['Graces']
     characterGraces = TextLoading.getTextData(TextLoading.stageWordPath, '17') + characterGraces
     EraPrint.plist([characterIntimate,characterGraces],2,'center')
+    EraPrint.pline('.')
+    characterChest = characterData['Chest']['NowChest']
+    chestGroup = AttrCalculation.judgeChestGroup(characterChest)
+    chestText = TextLoading.getTextData(TextLoading.stageWordPath,'141') + TextLoading.getTextData(TextLoading.stageWordPath,'142')[chestGroup]
+    EraPrint.plist([chestText],1,'center')
     EraPrint.pline('.')
     characterHeight = characterData['Height']['NowHeight']
     characterWeight = characterData['Weight']

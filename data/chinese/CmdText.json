@@ -12,7 +12,7 @@
   "cmdSwitch":["-","+"],
   "mainMenu":["睁眼起床","查看属性","更换服装","穿戴道具","打开背包","迷之商店"],
   "systemMenu":["系统设置","查看帮助","储存游戏","读取存档"],
-  "seeAttrPanelHandle":{"MainAttr":"属性","Status":"状态","Equipment":"服装","Item":"道具","WearItem":"穿戴","SexExperience":"经验","Knowledge":"技能","Language":"语言","Features":"素质","SocialContact":"社交"},
+  "seeAttrPanelHandle":{"MainAttr":"属性","Status":"状态","Equipment":"服装","Item":"道具","WearItem":"穿戴","SexExperience":"经验","Knowledge":"技能","Language":"语言","Nature":"性格","SocialContact":"社交"},
   "changeSavePage":["上一页","返回","下一页"],
   "overlaySave":["覆盖","删除","返回"],
   "confirmationOverlaySave":["确定","再考虑下"],

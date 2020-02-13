@@ -195,15 +195,17 @@ def getMapHierarchyListForScenePath(nowScenePath:list,targetScenePath:list) -> l
     Keyword arguments:
     nowScenePath -- 当前场景路径
     targetScenePath -- 目标场景路径
+    Return arguments:
+    hierarchyList -- 当前场景路径到目标场景路径之间的层级列表
     '''
     hierarchyList = []
     nowPath = None
     while(True):
         if nowPath == None:
-            nowPath = nowScenePath[-1]
+            nowPath = nowScenePath[:-1]
         if nowPath != targetScenePath:
             hierarchyList.append(nowPath)
-            nowPath = nowPath[-1]
+            nowPath = nowPath[:-1]
         else:
             break
     return hierarchyList

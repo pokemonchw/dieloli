@@ -1,7 +1,7 @@
 import os
 import random
 import time
-from script.Core import CacheContorl,GameConfig,GamePathConfig,TextLoading,JsonHandle
+from script.Core import CacheContorl,GameConfig,GamePathConfig,TextLoading,JsonHandle,ValueHandle
 from script.Design import GameTime
 
 language = GameConfig.language
@@ -80,6 +80,11 @@ def getAttr(temName:str) -> dict:
         "Wear":wearItemData,
         "Item":{},
     }
+    if temName == "Man" or temName == 'Asexual':
+        chestTem = 'Precipice'
+    else:
+        chestTem = getRandNpcChestTem()
+    chest = getChest(chestTem,birthday)
     return {
         'Age':age,
         'Birthday':birthday,
@@ -99,6 +104,7 @@ def getAttr(temName:str) -> dict:
         'Status':statusData,
         'WearItem':wearItem,
         'Item':{},
+        'Chest':chest,
         'Clothing':{
             'Coat':{},
             'Underwear':{},
@@ -177,6 +183,13 @@ def getChest(chestTem:str,birthday:dict):
         "NowChest":nowChest,
         "SubChest":subChest
     }
+
+chestTemWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'ChestWeightTem')
+def getRandNpcChestTem() -> str:
+    '''
+    随机获取npc罩杯模板
+    '''
+    return ValueHandle.getRandomForWeight(chestTemWeightData)
 
 def getRandNpcChest(chestTem:str) -> int:
     '''
@@ -411,6 +424,17 @@ def judgeAgeGroup(age:int):
         if int(age) >= int(ageGroup[ageTem]['MiniAge']) and int(age) < int(ageGroup[ageTem]['MaxAge']):
             return ageTem
     return 'YoundAdult'
+
+def judgeChestGroup(chest:int):
+    '''
+    判断胸围差所属罩杯
+    Keyword arguments:
+    chest -- 胸围差
+    '''
+    chestGroup = TextLoading.getGameData(TextLoading.attrTemplatePath)['ChestTem']
+    for chestTem in chestGroup:
+        if int(chest) >= int(chestGroup[chestTem][0]) and int(chest) < chestGroup[chestTem][1]:
+            return chestTem
 
 def setAttrDefault(characterId:str):
     '''

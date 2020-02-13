@@ -1,6 +1,6 @@
 import random
 from script.Core import CacheContorl,PyCmd,TextLoading,EraPrint,ValueHandle
-from script.Design import AttrCalculation
+from script.Design import AttrCalculation,GameTime
 from script.Panel import CreatorCharacterPanel
 
 characterId = '0'
@@ -12,6 +12,7 @@ def inputName_func():
     输入1:进入输入姓名流程
     输入2:返回标题菜单
     '''
+    GameTime.initTime()
     CacheContorl.characterData['characterId'] = characterId
     flowReturn = CreatorCharacterPanel.inputNamePanel()
     if flowReturn == 0:
@@ -158,7 +159,7 @@ def detailedSetting_func1():
     CacheContorl.temporaryCharacter['BodyFat'] = characterBodyFat
     CacheContorl.temporaryCharacter['Measurements'] = characterMeasurements
     PyCmd.clr_cmd()
-    detailedSetting_func2()
+    detailedSetting_func3()
 
 def detailedSetting_func3():
     '''

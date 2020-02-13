@@ -71,6 +71,7 @@ def initCharacter(nowId:int,character:dict):
         ageTem = character['Age']
         characterAge = AttrCalculation.getAge(ageTem)
         defaultAttr['Age'] = characterAge
+        defaultAttr['Birthday'] = AttrCalculation.getRandNpcBirthDay(characterAge)
     height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],{})
     defaultAttr['Height'] = height
     if 'Weight' in character:
@@ -105,11 +106,9 @@ def initCharacter(nowId:int,character:dict):
     defaultClothingData = Clothing.creatorSuit(clothingTem,characterSex)
     for clothing in defaultClothingData:
         defaultAttr['Clothing'][clothing][uuid.uuid1()] = defaultClothingData[clothing]
-    if defaultAttr['Sex'] == "Man" or defaultAttr == 'Asexual':
-        chestTem = 'Precipice'
-    else:
-        chestTem = getRandNpcChestTem()
-    chest = AttrCalculation.getChest(chestTem,defaultAttr['Birthday'])
+    if 'Chest' in character:
+        chest = AttrCalculation.getChest(chestTem,defaultAttr['Birthday'])
+        defaultAttr['Chest'] = chest
     CacheContorl.temporaryCharacter.update(defaultAttr)
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     Clothing.characterPutOnClothing(characterId)
@@ -193,13 +192,6 @@ def getRandNpcFatTem(agejudge:str) -> str:
     nowFatWeightData = fatWeightData[agejudge]
     nowFatTem = ValueHandle.getRandomForWeight(nowFatWeightData)
     return nowFatTem
-
-chestTemWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'ChestWeightTem')
-def getRandNpcChestTem() -> str:
-    '''
-    随机获取npc罩杯模板
-    '''
-    return ValueHandle.getRandomForWeight(chestTemWeightData)
 
 def getRandNpcSexExperienceTem(age:int,sex:str) -> str:
     '''
