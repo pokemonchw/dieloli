@@ -1,4 +1,4 @@
-from script.Design import GameTime,AttrCalculation,CharacterHandle,MapHandle,Course,Interest,Clothing
+from script.Design import GameTime,AttrCalculation,CharacterHandle,MapHandle,Course,Interest,Clothing,Nature
 from script.Core import CacheContorl
 from script.Panel import SeeCharacterAttrPanel
 import uuid
@@ -14,6 +14,7 @@ def initGameStart():
     characterSuit = Clothing.creatorSuit('Uniform',CacheContorl.characterData['character']['0']['Sex'])
     for clothing in characterSuit:
         CacheContorl.characterData['character']['0']['Clothing'][clothing][uuid.uuid1()] = characterSuit[clothing]
+    Nature.initCharacterNature('0')
     Clothing.characterPutOnClothing('0')
     Interest.initCharacterInterest()
     Course.initCharacterKnowledge()

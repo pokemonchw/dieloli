@@ -30,7 +30,6 @@ def acknowledgmentAttribute_func():
         elif yrn == '1':
             CacheContorl.wframeMouse['wFrameRePrint'] = 1
             EraPrint.pnextscreen()
-            SeeCharacterAttrPanel.initShowAttrPanelList()
             CacheContorl.nowFlowId = 'title_frame'
             break
         elif yrn in showAttrHandleData:

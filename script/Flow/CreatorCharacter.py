@@ -4,7 +4,6 @@ from script.Design import AttrCalculation
 from script.Panel import CreatorCharacterPanel
 
 characterId = '0'
-featuresList = AttrCalculation.getFeaturesList()
 
 def inputName_func():
     '''
@@ -83,12 +82,6 @@ def inputSexConfirm_func():
     flowReturn = CreatorCharacterPanel.inputSexPanel()
     sexId = CacheContorl.characterData['character'][characterId]['Sex']
     if flowReturn == 0:
-        AttrCalculation.setSexCache(sexId)
-        sexKeysList = list(TextLoading.getTextData(TextLoading.rolePath,'Sex'))
-        if sexId == sexKeysList[2]:
-            CacheContorl.temporaryCharacter['Features']['Sex'] = TextLoading.getTextData(TextLoading.rolePath, 'Features')['Sex'][0]
-        elif sexId == sexKeysList[3]:
-            CacheContorl.temporaryCharacter['Features']['Sex'] = TextLoading.getTextData(TextLoading.rolePath, 'Features')['Sex'][1]
         PyCmd.clr_cmd()
         attributeGenerationBranch_func()
     elif flowReturn == 1:
@@ -151,17 +144,6 @@ def detailedSetting_func1():
     flowRetun = CreatorCharacterPanel.detailedSetting1Panel()
     characterSex = CacheContorl.characterData['character']['0']['Sex']
     sexList = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex'))
-    if flowRetun == 0:
-        CacheContorl.featuresList['Age'] = featuresList["Age"][3]
-    elif flowRetun == 4:
-        if characterSex == sexList[0]:
-            CacheContorl.featuresList['Age'] = featuresList["Age"][0]
-        elif characterSex == sexList[1]:
-            CacheContorl.featuresList['Age'] = featuresList["Age"][1]
-        else:
-            CacheContorl.featuresList['Age'] = featuresList["Age"][2]
-        PyCmd.clr_cmd()
-    CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()
     characterAgeTemName = AttrCalculation.getAgeTemList()[flowRetun]
     characterAge = AttrCalculation.getAge(characterAgeTemName)
     characterTem = characterSex
@@ -178,20 +160,6 @@ def detailedSetting_func1():
     PyCmd.clr_cmd()
     detailedSetting_func2()
 
-def detailedSetting_func2():
-    '''
-    询问玩家动物特征流程
-    '''
-    ansList = TextLoading.getTextData(TextLoading.cmdPath, 'detailedSetting2')
-    flowReturn = CreatorCharacterPanel.detailedSetting2Panel()
-    if flowReturn == ansList[len(ansList)-1]:
-        PyCmd.clr_cmd()
-        detailedSetting_func3()
-    else:
-        PyCmd.clr_cmd()
-        AttrCalculation.setAnimalCache(flowReturn)
-        detailedSetting_func3()
-
 def detailedSetting_func3():
     '''
     询问玩家性经验程度流程
@@ -205,56 +173,6 @@ def detailedSetting_func3():
     characterSexExperienceData = AttrCalculation.getSexExperience(sexTemName)
     CacheContorl.temporaryCharacter['SexExperience'] = characterSexExperienceData
     CacheContorl.temporaryCharacter['SexGrade'] = AttrCalculation.getSexGrade(characterSexExperienceData)
-    PyCmd.clr_cmd()
-    detailedSetting_func4()
-
-def detailedSetting_func4():
-    '''
-    询问玩家勇气程度流程
-    '''
-    flowReturn = CreatorCharacterPanel.detailedSetting4Panel()
-    courageList = featuresList['Courage']
-    if flowReturn == 0:
-        CacheContorl.featuresList['Courage'] = courageList[0]
-    elif flowReturn == 2:
-        CacheContorl.featuresList['Courage'] = courageList[1]
-    CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()
-    PyCmd.clr_cmd()
-    detailedSetting_func5()
-
-def detailedSetting_func5():
-    '''
-    询问玩家开朗程度流程
-    '''
-    flowReturn = CreatorCharacterPanel.detailedSetting5Panel()
-    dispositionList = featuresList['Disposition']
-    if flowReturn == 0:
-        CacheContorl.featuresList['Disposition'] = dispositionList[0]
-    elif flowReturn == 2:
-        CacheContorl.featuresList['Disposition'] = dispositionList[1]
-    CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()
-    PyCmd.clr_cmd()
-    detailedSetting_func6()
-
-def detailedSetting_func6():
-    '''
-    询问玩家自信程度流程
-    '''
-    flowReturn = CreatorCharacterPanel.detailedSetting6Panel()
-    selfConfidenceList = featuresList['SelfConfidence']
-    CacheContorl.featuresList['SelfConfidence'] = selfConfidenceList[flowReturn]
-    CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()
-    PyCmd.clr_cmd()
-    detailedSetting_func7()
-
-def detailedSetting_func7():
-    '''
-    询问玩家友善程度流程
-    '''
-    flowReturn = CreatorCharacterPanel.detailedSetting7Panel()
-    friendsList = featuresList['Friends']
-    CacheContorl.featuresList['Friends'] = friendsList[flowReturn]
-    CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()
     PyCmd.clr_cmd()
     detailedSetting_func8()
 

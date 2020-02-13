@@ -32,6 +32,7 @@ equipmentPath = 'Equipment'
 statureDescriptionPath = 'StatureDescription'
 characterStatePath = 'CharacterState'
 wearItemPath = 'WearItem'
+naturePath = 'Nature'
 
 def getTextData(textPathId:str,textId:str) -> str:
     '''

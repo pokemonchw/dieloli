@@ -134,22 +134,12 @@ def getHeight(temName:str,age:int,Features:dict) -> dict:
     temData = TextLoading.getTextData(TextLoading.attrTemplatePath,'HeightTem')[temName]
     initialHeight = random.uniform(temData[0],temData[1])
     age = int(age)
-    expectHeightFix = 0
-    figuresData = TextLoading.getTextData(TextLoading.rolePath,'Features')['Figure']
-    try:
-        if Features['Figure'] == figuresData[0]:
-            expectHeightFix = 50
-        elif Features['Figure'] == figuresData[1]:
-            expectHeightFix = -50
-    except KeyError:
-        expectHeightFix = 0
     if temName == 'Man' or 'Asexual':
         expectAge = random.randint(18,22)
         expectHeight = initialHeight / 0.2949
     else:
         expectAge = random.randint(13,17)
         expectHeight = initialHeight / 0.3109
-    expectHeight = expectHeight + expectHeightFix
     developmentAge = random.randint(4,6)
     growthHeightData = getGrowthHeight(age,expectHeight,developmentAge,expectAge)
     growthHeight = growthHeightData['GrowthHeight']
@@ -170,7 +160,23 @@ def getChest(chestTem:str,birthday:dict):
     targetChest = getRandNpcChest(chestTem)
     overAge = random.randint(14,18)
     overYear = birthday['year'] + overAge
-    date = GameTime.getRandDayForYear(overYear)
+    endDate = GameTime.getRandDayForYear(overYear)
+    endDate = GameTime.systemTimeToGameTime(endDate)
+    endDate = GameTime.gameTimeToDatetime(endDate)
+    nowDate = CacheContorl.gameTime.copy()
+    nowDate = GameTime.gameTimeToDatetime(nowDate)
+    startDate = GameTime.gameTimeToDatetime(birthday)
+    endDay = GameTime.countDayForDateToDate(startDate,endDate)
+    nowDay = GameTime.countDayForDateToDate(startDate,nowDate)
+    subChest = targetChest / endDay
+    nowChest = subChest * nowDay
+    if nowChest > subChest:
+        nowChest = targetChest
+    return {
+        "TargetChest":targetChest,
+        "NowChest":nowChest,
+        "SubChest":subChest
+    }
 
 def getRandNpcChest(chestTem:str) -> int:
     '''
@@ -197,7 +203,7 @@ def getRandNpcBirthDay(age:int):
         "month":date[1],
         "day":date[2]
     }
-    if nowMonth < birthday['month'] || (nowMonth == birthday['month'] && nowDay < birthday['day']):
+    if nowMonth < birthday['month'] or (nowMonth == birthday['month'] and nowDay < birthday['day']):
         birthday['year'] -= 1
     return birthday
 
@@ -367,7 +373,6 @@ def getSexGrade(sexExperienceData:dict) -> dict:
         'penisGrade' : penisGrade
     }
 
-# 计算等级
 def judgeGrade(experience:int) -> float:
     '''
     按经验数值评定等级
@@ -407,32 +412,6 @@ def judgeAgeGroup(age:int):
             return ageTem
     return 'YoundAdult'
 
-def setDefaultCache():
-    '''
-    生成默认特征数据并放入CacheContorl.featuresList
-    '''
-    featuresTemData = roleAttrData['defaultFeatures']
-    cacheList = ['Age', "Chastity", 'Disposition', 'Courage', 'SelfConfidence', 'Friends', 'Figure',
-                 'Sex', 'AnimalInternal', 'AnimalExternal', 'Charm'
-                 ]
-    for feature in cacheList:
-        if feature in featuresTemData:
-            CacheContorl.featuresList[feature] = featuresTemData[feature]
-
-def setSexCache(sexName:str):
-    '''
-    生成性别对应特征数据并放入CacheContorl.featuresList
-    Keyword arguments:
-    sexName -- 性别id
-    '''
-    featuresTemData = roleAttrData['SexFeatures'][sexName]
-    cacheList = ['Age', "Chastity", 'Disposition','Courage', 'SelfConfidence', 'Friends', 'Figure',
-                 'Sex', 'AnimalInternal', 'AnimalExternal', 'Charm'
-                 ]
-    for feature in cacheList:
-        if feature in featuresTemData:
-            CacheContorl.featuresList[feature] = featuresTemData[feature]
-
 def setAttrDefault(characterId:str):
     '''
     为指定id角色生成默认属性
@@ -458,4 +437,3 @@ def setAttrOver(characterId:str):
     characterId -- 角色id
     '''
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
-    CacheContorl.featuresList = {}

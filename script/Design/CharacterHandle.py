@@ -2,11 +2,10 @@ import random
 import math
 import uuid
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
-from script.Design import AttrCalculation,MapHandle,AttrText,Clothing
+from script.Design import AttrCalculation,MapHandle,AttrText,Clothing,Nature
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
-featuresList = AttrCalculation.getFeaturesList()
 sexList = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex'))
 ageTemList = list(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem'))
 characterList = list(GameData._gamedata[language]['character'].keys())
@@ -57,15 +56,12 @@ def initCharacter(nowId:int,character:dict):
     AttrCalculation.initTemporaryCharacter()
     characterId = str(nowId)
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
-    AttrCalculation.setDefaultCache()
     characterName = character['Name']
     characterSex = character['Sex']
     CacheContorl.characterData['character'][characterId]['Sex'] = characterSex
     defaultAttr = AttrCalculation.getAttr(characterSex)
     defaultAttr['Name'] = characterName
     defaultAttr['Sex'] = characterSex
-    AttrCalculation.setSexCache(characterSex)
-    defaultAttr['Features'] = CacheContorl.featuresList.copy()
     if 'MotherTongue' in character:
         defaultAttr['Language'][character['MotherTongue']] = 10000
         defaultAttr['MotherTongue'] = character['MotherTongue']
@@ -75,15 +71,7 @@ def initCharacter(nowId:int,character:dict):
         ageTem = character['Age']
         characterAge = AttrCalculation.getAge(ageTem)
         defaultAttr['Age'] = characterAge
-        characterAgeFeatureHandle(ageTem,characterSex)
-        defaultAttr['Features'] = CacheContorl.featuresList.copy()
-    elif 'Features' in character:
-        AttrCalculation.setAddFeatures(character['Features'])
-        defaultAttr['Features'] = CacheContorl.featuresList.copy()
-    if 'Features' in character:
-        height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],character['Features'])
-    else:
-        height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],{})
+    height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],{})
     defaultAttr['Height'] = height
     if 'Weight' in character:
         weightTemName = character['Weight']
@@ -110,8 +98,6 @@ def initCharacter(nowId:int,character:dict):
         sexExperienceTem = getRandNpcSexExperienceTem(defaultAttr['Age'],defaultAttr['Sex'])
     defaultAttr['SexExperience'] = AttrCalculation.getSexExperience(sexExperienceTem)
     defaultAttr['SexGrade'] = AttrCalculation.getSexGrade(defaultAttr['SexExperience'])
-    if sexExperienceTem != 'None':
-        defaultAttr['Features']['Chastity'] = ''
     if 'Clothing' in character:
         clothingTem = character['Clothing']
     else:
@@ -119,28 +105,16 @@ def initCharacter(nowId:int,character:dict):
     defaultClothingData = Clothing.creatorSuit(clothingTem,characterSex)
     for clothing in defaultClothingData:
         defaultAttr['Clothing'][clothing][uuid.uuid1()] = defaultClothingData[clothing]
+    if defaultAttr['Sex'] == "Man" or defaultAttr == 'Asexual':
+        chestTem = 'Precipice'
+    else:
+        chestTem = getRandNpcChestTem()
+    chest = AttrCalculation.getChest(chestTem,defaultAttr['Birthday'])
     CacheContorl.temporaryCharacter.update(defaultAttr)
-    CacheContorl.featuresList = {}
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     Clothing.characterPutOnClothing(characterId)
+    Nature.initCharacterNature(characterId)
     CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
-
-def characterAgeFeatureHandle(ageTem:str,characterSex:str):
-    '''
-    按年龄模板生成角色特性数据
-    Keyword arguments:
-    ageTem -- 年龄模板
-    characterSex -- 角色性别
-    '''
-    if ageTem == 'SchoolAgeChild':
-        if characterSex == sexList[0]:
-            CacheContorl.featuresList['Age'] = featuresList["Age"][0]
-        elif characterSex == sexList[1]:
-            CacheContorl.featuresList['Age'] = featuresList["Age"][1]
-        else:
-            CacheContorl.featuresList['Age'] = featuresList["Age"][2]
-    elif ageTem == 'OldAdult':
-        CacheContorl.featuresList['Age'] = featuresList["Age"][3]
 
 def initCharacterTem():
     '''

@@ -7,7 +7,6 @@ def inputNamePanel() -> str:
     '''
     characterId = CacheContorl.characterData['characterId']
     CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
-    AttrCalculation.setDefaultCache()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '4'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu)
@@ -133,16 +132,6 @@ def detailedSetting1Panel() -> str:
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting1)
     return yrn
 
-def detailedSetting2Panel() -> str:
-    '''
-    询问玩家动物特征面板
-    '''
-    EraPrint.p('\n')
-    EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '11'))
-    yrn = CmdButtonQueue.optionstr(CmdButtonQueue.detailedsetting2, 5, 'center', True)
-    return yrn
-
 def detailedSetting3Panel() -> str:
     '''
     询问玩家性经验程度面板
@@ -153,47 +142,6 @@ def detailedSetting3Panel() -> str:
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting3)
     return yrn
 
-def detailedSetting4Panel() -> str:
-    '''
-    询问玩家勇气程度面板
-    '''
-    EraPrint.p('\n')
-    EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '13'))
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting4)
-    return yrn
-
-def detailedSetting5Panel() -> str:
-    '''
-    询问玩家开朗程度面板
-    '''
-    EraPrint.p('\n')
-    EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '16'))
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting5)
-    return yrn
-
-def detailedSetting6Panel() -> str:
-    '''
-    询问玩家自信程度面板
-    '''
-    EraPrint.p('\n')
-    EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '17'))
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting6)
-    return yrn
-
-def detailedSetting7Panel() -> str:
-    '''
-    询问玩家友善程度面板
-    '''
-    EraPrint.p('\n')
-    EraPrint.pline()
-    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '18'))
-    yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting7)
-    return yrn
-
-# 详细设置属性8:询问玩家体型
 def detailedSetting8Panel() -> str:
     '''
     询问玩家肥胖程度面板

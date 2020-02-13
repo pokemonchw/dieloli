@@ -2,6 +2,7 @@ from script.Core import CacheContorl,GameConfig,TextLoading
 from dateutil import relativedelta
 import datetime
 import time
+import random
 
 def initTime():
     '''
@@ -90,11 +91,13 @@ def getSubDate(minute=0,hour=0,day=0,month=0,year=0,oldDate=None) -> datetime.da
     )
     return newDate
 
-def getWeekDate() -> datetime.datetime:
+def getWeekDate() -> int:
     '''
-    获取当前游戏日期星期数
+    计算当前游戏时间属于周几
+    Return arguments:
+    weekDay -- 当前星期数
     '''
-    return datetime.datetime(int(CacheContorl.gameTime['year']),int(CacheContorl.gameTime['month']),int(CacheContorl.gameTime['day'])).strftime("%w")
+    return gameTimeToDatetime(CacheContorl.gameTime).strftime("%w")
 
 def getRandDayForYear(year:int) -> "time.time" :
     '''
@@ -119,8 +122,32 @@ def getRandDayForDate(startDate:"time.time",endDate:"time.time") -> "time.time":
     Return arguments:
     time.localtime -- 随机日期
     '''
-    t = random.randint(start,end)
+    t = random.randint(startDate,endDate)
     return time.mktime(time.localtime(t))
+
+def systemTimeToGameTime(systemTime:"time.time"):
+    '''
+    系统时间戳转换为游戏时间数据
+    Keyword arguments:
+    systemTime -- 系统时间戳
+    Return arguments:
+    gameTime -- 游戏时间数据
+    '''
+    return {
+        'year':systemTime.tm_year,
+        'month':systemTime.tm_mon,
+        'day':systemTime.tm_day
+    }
+
+def gameTimeToDatetime(gameTime:dict) -> datetime.datetime:
+    '''
+    游戏时间数据转换为系统日期
+    Keyword arguments:
+    gameTime -- 游戏时间数据
+    Return arguments:
+    datetime -- 系统日期
+    '''
+    return datetime.datetime(int(gameTime['year']),int(gameTime['month']),int(gameTime['day']))
 
 def countDayForDateToDate(startDate:"datetime.datetime",endDate:"datetime.datetime") -> int:
     '''
