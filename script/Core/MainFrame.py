@@ -160,7 +160,7 @@ def read_queue():
             if c['type']=='text':
                 _print(c['text'], style=tuple(c['style']))
             if c['type'] == 'cmd':
-                _io_print_cmd(c['text'],c['num'])
+                _io_print_cmd(c['text'],c['num'],c['normal_style'],c['on_style'])
     root.after(10, read_queue)
 
 def _run():

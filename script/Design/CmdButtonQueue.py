@@ -25,6 +25,7 @@ askseeclothinginfopanel = 'askSeeClothingInfoPanel'
 seeclothinginfoaskpanel = 'seeClothingInfoAskPanel'
 seeknowledgeaskpanle = 'seeKnowledgeAskPanel'
 entercharacternaturepanel = 'enterCharacterNature'
+instructheadpanel = 'instructHeadPanel'
 
 def optionint(
     cmdList:list,
@@ -35,7 +36,9 @@ def optionint(
         cmdSize = 'left',
         startId = 0,
         cmdListData=None,
-        lastLine = False) -> list:
+        lastLine = False,
+        normalStyleData = {},
+        onStyleData = {}) -> list:
     '''
     批量绘制带id命令列表
     例:
@@ -50,6 +53,8 @@ def optionint(
     startId -- 命令列表的起始id (default 0)
     cmdListData -- 命令列表数据 (default None)
     lastLine -- 最后一个命令换行绘制 (default False)
+    normalStyleData -- 按钮对应通常样式列表
+    onStyleData -- 按钮对应按下时样式列表
     '''
     if cmdListData == None:
         cmdListData = TextLoading.getTextData(TextLoading.cmdPath, cmdList).copy()
@@ -73,6 +78,12 @@ def optionint(
             id = ''
         cmdTextAndId = id + cmdText
         cmdTextAndIdIndex = TextHandle.getTextIndex(cmdTextAndId)
+        normalStyle = 'standard'
+        onStyle = 'onbutton'
+        if cmdListData[i] in normalStyleData:
+            normalStyle = normalStyleData[cmdListData[i]]
+        if cmdListData[i] in onStyleData:
+            onStyle = onStyleData[cmdListData[i]]
         if cmdTextAndIdIndex < cmdIndex:
             if idSize == 'right':
                 cmdTextAndId = cmdText + id
@@ -80,21 +91,21 @@ def optionint(
                 cmdTextAndId = id + cmdText
             if i == 0:
                 cmdTextAndId = cmdTextAndId.rstrip()
-                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
+                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize,True,normalStyle,onStyle)
                 inputI.append(str(returnId))
             elif i / cmdColumn >= 1 and i % cmdColumn == 0:
                 EraPrint.p('\n')
                 cmdTextAndId = cmdTextAndId.rstrip()
-                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
+                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize,True,normalStyle,onStyle)
                 inputI.append(str(returnId))
             elif i == len(cmdListData) and lastLine == True:
                 EraPrint.p('\n')
                 cmdTextAndId = cmdTextAndId.rstrip()
-                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
+                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize,True,normalStyle,onStyle)
                 inputI.append(str(returnId))
             else:
                 cmdTextAndId = cmdTextAndId.rstrip()
-                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize)
+                cmdSizePrint(cmdTextAndId, returnId, None, cmdIndex, cmdSize,True,normalStyle,onStyle)
                 inputI.append(str(returnId))
     EraPrint.p('\n')
     if askfor == True:
@@ -111,7 +122,9 @@ def optionstr(
         askfor = True,
         cmdListData = None,
         nullCmd = '',
-        returnData = None) -> list:
+        returnData = None,
+        normalStyleData = {},
+        onStyleData = {}) -> list:
     '''
     绘制无id的文本命令列表
     例:
@@ -124,6 +137,8 @@ def optionstr(
     cmdListData -- 命令列表数据 (default None)
     nullCmd -- 在列表中按纯文本绘制，并不加入监听列表的命令文本
     returnData -- 命令返回数据 (default None)
+    normalStyleData -- 按钮通常样式列表
+    onStyleData -- 按钮被按下时样式列表
     '''
     if cmdListData == None:
         cmdListData = TextLoading.getTextData(TextLoading.cmdPath, cmdList).copy()
@@ -138,6 +153,12 @@ def optionstr(
     cmdIndex = int(textWidth / cmdColumn)
     nowNullCmd = nullCmd
     for i in range(0,len(cmdListData)):
+        normalStyle = 'standard'
+        onStyle = 'onbutton'
+        if cmdListData[i] in normalStyleData:
+            normalStyle = normalStyleData[cmdListData[i]]
+        if cmdListData[i] in onStyleData:
+            onStyle = onStyleData[cmdListData[i]]
         nowNullCmd = True
         if returnData == None:
             if nullCmd == cmdListData[i]:
@@ -150,21 +171,21 @@ def optionstr(
             cmdTextBak = returnData[i]
             cmdText = '[' + cmdListData[i] + ']'
         if i == 0:
-            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,noNullCmd=nowNullCmd)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd,normalStyle,onStyle)
             if nowNullCmd:
-                inputS.append(cmdListData[i])
+                inputS.append(cmdTextBak)
         elif i / cmdColumn >= 1 and i % cmdColumn == 0:
             EraPrint.p('\n')
-            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,noNullCmd=nowNullCmd)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd,normalStyle,onStyle)
             if nowNullCmd:
                 inputS.append(cmdTextBak)
         elif i == len(cmdListData) - 1 and lastLine == True:
             EraPrint.p('\n')
-            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,noNullCmd=nowNullCmd)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd,normalStyle,onStyle)
             if nowNullCmd:
                 inputS.append(cmdTextBak)
         else:
-            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,noNullCmd=nowNullCmd)
+            cmdSizePrint(cmdText,cmdTextBak,None,cmdIndex,cmdSize,nowNullCmd,normalStyle,onStyle)
             if nowNullCmd:
                 inputS.append(cmdTextBak)
     EraPrint.p('\n')
@@ -194,7 +215,7 @@ def idIndex(id):
         idS = "[00" + str(id) + "] "
         return idS
 
-def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'left',noNullCmd=True):
+def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'left',noNullCmd=True,normalStyle='standard',onStyle='onbutton'):
     '''
     计算命令对齐方式，补全文本并绘制
     Keyword arguments:
@@ -204,6 +225,8 @@ def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'lef
     textWidth -- 文本对齐时补全空间宽度
     cmdSize -- 命令对齐方式(left/center/right) (default 'left')
     noNullCmd -- 绘制命令而非null命令样式的文本 (default False)
+    normalStyle -- 按钮通常样式 (default 'standard')
+    onStyle -- 按钮被按下时样式 (default 'onbutton')
     '''
     if noNullCmd == False:
         cmdText = '<nullcmd>' + cmdText + '</nullcmd>'
@@ -211,7 +234,7 @@ def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'lef
         cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (textWidth - cmdWidth)
         if noNullCmd:
-            PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+            PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent,normal_style=normalStyle,on_style=onStyle)
         else:
             EraPrint.p(cmdText)
         EraPrint.p(cmdTextFix)
@@ -220,7 +243,7 @@ def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'lef
         cmdTextFix = ' ' * (int(textWidth/2) - int(cmdWidth/2))
         EraPrint.p(cmdTextFix)
         if noNullCmd:
-            PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+            PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent,normal_style=normalStyle,on_style=onStyle)
         else:
             EraPrint.p(cmdText)
         EraPrint.p(cmdTextFix)
@@ -228,7 +251,7 @@ def cmdSizePrint(cmdText,cmdTextBak,cmdEvent = None,textWidth = 0,cmdSize = 'lef
         cmdWidth = TextHandle.getTextIndex(cmdText)
         cmdTextFix = ' ' * (textWidth - cmdWidth)
         if noNullCmd:
-            PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent)
+            PyCmd.pcmd(cmdText, cmdTextBak, cmdEvent,normal_style=normalStyle,on_style=onStyle)
         else:
             EraPrint.p(cmdText)
         EraPrint.p(cmdTextFix)

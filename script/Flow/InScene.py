@@ -1,6 +1,6 @@
 from script.Core import CacheContorl,GameInit,PyCmd,GameConfig
 from script.Design import MapHandle,CharacterHandle,PanelStateHandle
-from script.Panel import InScenePanel,SeeCharacterAttrPanel
+from script.Panel import InScenePanel,SeeCharacterAttrPanel,InstructPanel
 import math
 
 def getInScene_func():
@@ -58,11 +58,12 @@ def seeScene_func(judge:bool):
         InScenePanel.seeCharacterInfoPanel()
         SeeCharacterAttrPanel.seeCharacterHPAndMPInSence(CacheContorl.characterData['characterId'])
         SeeCharacterAttrPanel.seeCharacterStatusPanel(CacheContorl.characterData['characterId'])
+        instructHead = InstructPanel.seeInstructHeadPanel()
         inSceneCmdList2 = InScenePanel.inSceneButtonPanel(startId1)
         if changePageJudge:
-            inputS += inSceneCmdList1 + inSceneCmdList2
+            inputS += inSceneCmdList1 + instructHead + inSceneCmdList2
         else:
-            inputS += inSceneCmdList2
+            inputS += instructHead + inSceneCmdList2
         yrn = GameInit.askfor_All(inputS)
         PyCmd.clr_cmd()
         nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
@@ -101,3 +102,8 @@ def seeScene_func(judge:bool):
             break
         elif yrn == 'SeeSceneCharacterListPage':
             PanelStateHandle.panelStateChange(yrn)
+        elif yrn in instructHead:
+            if CacheContorl.instructFilter[yrn] == 1:
+                CacheContorl.instructFilter[yrn] = 0
+            else:
+                CacheContorl.instructFilter[yrn] = 1

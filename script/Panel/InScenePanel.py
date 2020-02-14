@@ -17,8 +17,15 @@ def seeScenePanel():
     EraPrint.p(' ')
     scenePath = CacheContorl.characterData['character']['0']['Position']
     scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
+    mapList = MapHandle.getMapHierarchyListForScenePath(scenePath,[])
+    mapPathText = ''
+    mapList.reverse()
+    for nowMap in mapList:
+        nowMapMapSystemStr = MapHandle.getMapSystemPathStrForList(nowMap)
+        mapName = CacheContorl.mapData[nowMapMapSystemStr]['MapName']
+        mapPathText += mapName + '-'
     sceneData = CacheContorl.sceneData[scenePathStr].copy()
-    sceneName = sceneData['SceneName']
+    sceneName = mapPathText + sceneData['SceneName']
     sceneInfoHead = TextLoading.getTextData(TextLoading.stageWordPath, '76')
     sceneInfo = sceneInfoHead + sceneName
     EraPrint.p(sceneInfo)

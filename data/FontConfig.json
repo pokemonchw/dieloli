@@ -19,7 +19,13 @@
     "italic":"0"
   },
   "onbutton":{
-    "foreground":"#A40018"
+    "foreground":"#292421"
+  },
+  "selectmenu":{
+    "foreground":"#292421"
+  },
+  "onselectmenu":{
+    "foreground":"#C8C8C8"
   },
   "mapbutton":{},
   "warning":{

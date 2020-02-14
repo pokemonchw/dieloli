@@ -32,6 +32,8 @@ nowInitMapId = ''
 # 回溯输入记录用定位
 inputPosition = {}
 
+instructFilter = {}
+
 # 富文本记录输出样式临时缓存
 outputTextStyle = ''
 
