@@ -1,6 +1,6 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
 from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue,AttrCalculation
-from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel,SeeKnowledgePanel,SexExperiencePanel,LanguagePanel,SeeNaturePanel
+from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel,SeeKnowledgePanel,SexExperiencePanel,LanguagePanel,SeeNaturePanel,SeeSocialContactPanel
 
 def seeCharacterMainAttrPanel(characterId:str):
     '''
@@ -105,7 +105,10 @@ def seeCharacterStatusPanel(characterId:str):
                 del nowStatusData['VaginaLubrication']
                 del nowStatusData['PenisDelight']
         nowStatusTextList = [statusTextData[state] + ':' + str(nowStatusData[state]) for state in nowStatusData]
-        EraPrint.plist(nowStatusTextList,4,'center')
+        size = 7
+        if len(nowStatusTextList) < size:
+            size = len(nowStatusTextList)
+        EraPrint.plist(nowStatusTextList,size,'center')
     EraPrint.pl()
 
 def seeCharacterHPAndMPInSence(characterId:str):
@@ -200,6 +203,16 @@ def seeCharacterNaturePanel(characterId:str):
     EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     SeeNaturePanel.seeCharacterNaturePanel(characterId)
 
+def seeCharacterSocialContactPanel(characterId:str):
+    '''
+    查看角色社交面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath,'145'))
+    EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    SeeSocialContactPanel.seeCharacterSocialContactPanel(characterId)
+
 def askForSeeAttr() -> list:
     '''
     查看角色属性时输入处理面板
@@ -238,6 +251,6 @@ panelData = {
     "Knowledge":seeCharacterKnowledgePanel,
     "Language":seeCharacterLanguagePanel,
     "Nature":seeCharacterNaturePanel,
-    "SocialContact":""
+    "SocialContact":seeCharacterSocialContactPanel
 }
 

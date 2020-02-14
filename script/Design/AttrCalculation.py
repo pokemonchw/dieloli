@@ -85,6 +85,7 @@ def getAttr(temName:str) -> dict:
     else:
         chestTem = getRandNpcChestTem()
     chest = getChest(chestTem,birthday)
+    socialContact = {social:{} for social in TextLoading.getTextData(TextLoading.stageWordPath,'144')}
     return {
         'Age':age,
         'Birthday':birthday,
@@ -105,6 +106,7 @@ def getAttr(temName:str) -> dict:
         'WearItem':wearItem,
         'Item':{},
         'Chest':chest,
+        'SocialContact':socialContact,
         'Clothing':{
             'Coat':{},
             'Underwear':{},
@@ -444,8 +446,7 @@ def setAttrDefault(characterId:str):
     '''
     characterSex = CacheContorl.characterData['character'][characterId]['Sex']
     temData = getAttr(characterSex)
-    for key in temData:
-        CacheContorl.temporaryCharacter[key] = temData[key]
+    CacheContorl.temporaryCharacter.update(temData)
     CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()
 
 def initTemporaryCharacter():
