@@ -151,3 +151,20 @@ def detailedSetting8Panel() -> str:
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '29'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.detailedsetting8)
     return yrn
+
+def enterCharacterNatureHead():
+    '''
+    用于确认角色性格的头部面板
+    '''
+    EraPrint.p('\n')
+    EraPrint.pline()
+    EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '39'))
+
+def enterCharacterNatureEnd() -> list:
+    '''
+    用户确认角色性格的尾部面板
+    Return arguments:
+    list -- 按钮列表
+    '''
+    EraPrint.pline()
+    return CmdButtonQueue.optionint(CmdButtonQueue.entercharacternaturepanel,1,'left',True,False)

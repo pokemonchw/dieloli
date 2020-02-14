@@ -24,6 +24,7 @@ seecharacterclothes = 'seeCharacterClothes'
 askseeclothinginfopanel = 'askSeeClothingInfoPanel'
 seeclothinginfoaskpanel = 'seeClothingInfoAskPanel'
 seeknowledgeaskpanle = 'seeKnowledgeAskPanel'
+entercharacternaturepanel = 'enterCharacterNature'
 
 def optionint(
     cmdList:list,

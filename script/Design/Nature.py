@@ -8,5 +8,5 @@ def initCharacterNature(characterId:str):
     characterId -- 角色Id
     '''
     natureList = TextLoading.getGameData(TextLoading.naturePath)
-    natureData = {aDimension:{bDimension:random.uniform(0,100) for bDimension in natureList[aDimension]} for aDimension in natureList}
+    natureData = {bDimension:random.uniform(0,100) for aDimension in natureList for bDimension in natureList[aDimension]['Factor']}
     CacheContorl.characterData['character'][characterId]['Nature'] = natureData

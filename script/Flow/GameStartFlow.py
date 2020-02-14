@@ -13,12 +13,13 @@ def initGameStart():
     characterSuit = Clothing.creatorSuit('Uniform',CacheContorl.characterData['character']['0']['Sex'])
     for clothing in characterSuit:
         CacheContorl.characterData['character']['0']['Clothing'][clothing][uuid.uuid1()] = characterSuit[clothing]
-    Nature.initCharacterNature('0')
     Clothing.characterPutOnClothing('0')
     Interest.initCharacterInterest()
     Course.initCharacterKnowledge()
     Course.initClassTeacher()
     Course.initClassTimeTable()
+    if 'Nature' not in CacheContorl.characterData['character']['0']:
+        Nature.initCharacterNature('0')
     characterPosition = CacheContorl.characterData['character']['0']['Position']
     MapHandle.characterMoveScene(['0'],characterPosition,'0')
     CacheContorl.nowFlowId = 'main'

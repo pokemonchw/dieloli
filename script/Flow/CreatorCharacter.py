@@ -1,7 +1,7 @@
 import random
-from script.Core import CacheContorl,PyCmd,TextLoading,EraPrint,ValueHandle
-from script.Design import AttrCalculation,GameTime
-from script.Panel import CreatorCharacterPanel
+from script.Core import CacheContorl,PyCmd,TextLoading,EraPrint,ValueHandle,GameInit
+from script.Design import AttrCalculation,GameTime,Nature
+from script.Panel import CreatorCharacterPanel,SeeNaturePanel
 
 characterId = '0'
 
@@ -194,4 +194,26 @@ def detailedSetting_func8():
     CacheContorl.temporaryCharacter['Weight'] = characterWeight
     CacheContorl.temporaryCharacter['BodyFat'] = characterBodyFat
     CacheContorl.temporaryCharacter['Measurements'] = characterMeasurements
-    CacheContorl.nowFlowId = 'acknowledgment_attribute'
+    enterCharacterNature_func()
+
+def enterCharacterNature_func():
+    '''
+    请求玩家确认性格流程
+    '''
+    Nature.initCharacterNature('0')
+    while 1:
+        PyCmd.clr_cmd()
+        CreatorCharacterPanel.enterCharacterNatureHead()
+        inputS = SeeNaturePanel.seeCharacterNatureChangePanel(characterId)
+        inputS += CreatorCharacterPanel.enterCharacterNatureEnd()
+        yrn = GameInit.askfor_All(inputS)
+        if yrn in CacheContorl.characterData['character']['0']['Nature']:
+            if CacheContorl.characterData['character']['0']['Nature'][yrn] < 50:
+                CacheContorl.characterData['character']['0']['Nature'][yrn] = random.uniform(50,100)
+            else:
+                CacheContorl.characterData['character']['0']['Nature'][yrn] = random.uniform(0,50)
+        elif int(yrn) == 0:
+            CacheContorl.nowFlowId = 'acknowledgment_attribute'
+            break
+        elif int(yrn) == 1:
+            Nature.initCharacterNature('0')

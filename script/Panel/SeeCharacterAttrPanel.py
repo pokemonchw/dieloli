@@ -1,6 +1,6 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
 from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue,AttrCalculation
-from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel,SeeKnowledgePanel,SexExperiencePanel,LanguagePanel
+from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel,SeeKnowledgePanel,SexExperiencePanel,LanguagePanel,SeeNaturePanel
 
 def seeCharacterMainAttrPanel(characterId:str):
     '''
@@ -30,8 +30,9 @@ def seeCharacterMainAttrPanel(characterId:str):
     statureText = AttrText.getStatureText(characterId)
     EraPrint.pl(statureText)
     EraPrint.pline('.')
-    EraPrint.pl(AttrText.getCharacterDormitoryPathText(characterId))
-    EraPrint.plittleline()
+    if 'Dormitory' in characterData:
+        EraPrint.pl(AttrText.getCharacterDormitoryPathText(characterId))
+        EraPrint.plittleline()
     characterSpecies = characterData['Species']
     characterSpecies = TextLoading.getTextData(TextLoading.stageWordPath, '15') + characterSpecies
     characterAge = characterData['Age']
@@ -189,6 +190,16 @@ def seeCharacterLanguagePanel(characterId:str):
     EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     LanguagePanel.seeCharacterLanguagePanel(characterId)
 
+def seeCharacterNaturePanel(characterId:str):
+    '''
+    查看角色性格面板
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath,'139'))
+    EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
+    SeeNaturePanel.seeCharacterNaturePanel(characterId)
+
 def askForSeeAttr() -> list:
     '''
     查看角色属性时输入处理面板
@@ -226,7 +237,7 @@ panelData = {
     "SexExperience":seeCharacterSexExperiencePanel,
     "Knowledge":seeCharacterKnowledgePanel,
     "Language":seeCharacterLanguagePanel,
-    "Features":"",
+    "Nature":seeCharacterNaturePanel,
     "SocialContact":""
 }
 

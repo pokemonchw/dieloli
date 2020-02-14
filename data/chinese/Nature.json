@@ -76,7 +76,7 @@
   "Emotionality":{
     "Name":"情绪性",
     "Factor":{
-      "Tolerance":{
+      "Patience":{
         "Good":"耐性",
         "Bad":"浮躁"
       },

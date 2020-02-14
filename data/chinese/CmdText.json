@@ -29,5 +29,6 @@
   "changeSceneCharacterList":["首页","上一页","跳转","下一页","末页"],
   "seeCharacterClothes":["上一页","返回","下一页"],
   "askSeeClothingInfoPanel":{"0":"穿戴","1":"脱下","2":"查看","3":"返回"},
-  "seeClothingInfoAskPanel":{"0":"上一件","1":"穿戴","2":"脱下","3":"返回","4":"下一件"}
+  "seeClothingInfoAskPanel":{"0":"上一件","1":"穿戴","2":"脱下","3":"返回","4":"下一件"},
+  "enterCharacterNature":["确认","随机"]
 }

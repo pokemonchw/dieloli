@@ -1,7 +1,7 @@
 from script.Core import CacheContorl,TextLoading,EraPrint
 from script.Design import AttrText
 
-def seeCharacterKnowledgePanel(characterId):
+def seeCharacterKnowledgePanel(characterId:str):
     '''
     查看角色技能信息面板
     Keyword arguments:
