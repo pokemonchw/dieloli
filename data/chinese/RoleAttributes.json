@@ -66,43 +66,5 @@
     "Futa":"扶她","Asexual":"无性"
   },
   "Species":["人类"],
-  "Relationship":["无","恋慕","爱慕","厌恶","仇恨"],
-  "defaultFeatures":{
-    "SelfConfidence":"自信",
-    "Friends":"冷淡"
-  },
-  "SexFeatures":{
-    "Man":{
-      "Chastity":"处男"
-    },
-    "Woman":{
-      "Chastity":"处女"
-    },
-    "Futa":{
-      "Chastity":"纯洁",
-      "Sex":"双性器"
-    },
-    "Asexual":{
-      "Chastity":"纯洁",
-      "Sex":"无性器"
-    }
-  },
-  "AnimalFeatures":{
-    "可爱的猫咪":{
-      "AnimalInternal":"兽耳",
-      "Charm":"魅力"
-    },
-    "吸血的蝙蝠":{
-      "AnimalExternal":"吸血"
-    },
-    "迷人的狐狸":{
-      "AnimalInternal":"兽耳",
-      "AnimalExternal":"狐臭",
-      "Charm":"迷之魅力"
-    },
-    "勇猛的狮子":{
-      "Courage":"勇敢",
-      "AnimalInternal":"利爪"
-    }
-  }
+  "Relationship":["无","恋慕","爱慕","厌恶","仇恨"]
 }
