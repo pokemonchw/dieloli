@@ -144,13 +144,11 @@ def getRandomNpcData() -> list:
     生成所有随机npc的数据模板
     '''
     if CacheContorl.randomNpcList == []:
-        ageWeightMax = 0
-        for i in ageWeightData:
-            ageWeightMax += int(ageWeightData[i])
+        ageWeightMax = sum([int(ageWeightData[ageWeight]) for ageWeight in ageWeightData])
         for i in range(0,randomNpcMax):
             nowAgeWeight = random.randint(-1,ageWeightMax - 1)
             nowAgeWeightRegin = ValueHandle.getNextValueForList(nowAgeWeight,ageWeightReginList)
-            ageWeightTem = ageWeightReginData[str(nowAgeWeightRegin)]
+            ageWeightTem = ageWeightReginData[nowAgeWeightRegin]
             randomNpcSex = getRandNpcSex()
             randomNpcName = AttrText.getRandomNameForSex(randomNpcSex)
             randomNpcAgeTem = getRandNpcAgeTem(ageWeightTem)
@@ -169,9 +167,7 @@ def getRandomNpcData() -> list:
         return CacheContorl.randomNpcList
 
 sexWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'RandomNpcSexWeight')
-sexWeightMax = 0
-for i in sexWeightData:
-    sexWeightMax += int(sexWeightData[i])
+sexWeightMax = sum([int(sexWeightData[weight]) for weight in sexWeightData])
 sexWeightReginData = ValueHandle.getReginList(sexWeightData)
 sexWeightReginList = list(map(int,sexWeightReginData.keys()))
 def getRandNpcSex() -> str:
@@ -180,7 +176,7 @@ def getRandNpcSex() -> str:
     '''
     nowWeight = random.randint(0,sexWeightMax - 1)
     weightRegin = ValueHandle.getNextValueForList(nowWeight,sexWeightReginList)
-    return sexWeightReginData[str(weightRegin)]
+    return sexWeightReginData[weightRegin]
 
 fatWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'FatWeight')
 def getRandNpcFatTem(agejudge:str) -> str:

@@ -94,7 +94,7 @@ def getRandomNameForSex(sexGrade:str) -> str:
     familyRandom = random.randint(1,familyIndexMax)
     familyRegionIndex = bisect.bisect_left(familyRegionIntList,familyRandom)
     familyRegion = familyRegionIntList[familyRegionIndex]
-    familyName = familyRegionList[str(familyRegion)]
+    familyName = familyRegionList[familyRegion]
     if sexGrade == 'Man':
         sexJudge = 1
     elif sexGrade == 'Woman':
@@ -105,12 +105,12 @@ def getRandomNameForSex(sexGrade:str) -> str:
         nameRandom = random.randint(1,girlsRegionIntList[-1])
         nameRegionIndex = bisect.bisect_left(girlsRegionIntList,nameRandom)
         nameRegion = girlsRegionIntList[nameRegionIndex]
-        name = girlsRegionList[str(nameRegion)]
+        name = girlsRegionList[nameRegion]
     else:
         nameRandom = random.randint(1,boysRegionIntList[-1])
         nameRegionIndex = bisect.bisect_left(boysRegionIntList,nameRandom)
         nameRegion = boysRegionIntList[nameRegionIndex]
-        name = boysRegionList[str(nameRegion)]
+        name = boysRegionList[nameRegion]
     return familyName + name
 
 def getSeeAttrPanelHeadCharacterInfo(characterId:str) -> str:

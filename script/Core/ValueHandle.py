@@ -1,5 +1,6 @@
 import random
 import bisect
+import itertools
 
 def twoBitArrayToDict(array:tuple) -> dict:
     '''
@@ -16,15 +17,8 @@ def getReginList(nowData:dict) -> dict:
     Keyword arguments:
     nowData -- 需要进行计算权重的dict数据
     '''
-    regionList = {}
     sortData = sortedDictForValues(nowData)
-    sortDataKey = list(sortData.keys())
-    regionIndex = 0
-    for i in range(0,len(sortData)):
-        nowKey = sortDataKey[i]
-        regionIndex = regionIndex + sortData[nowKey]
-        regionList[str(regionIndex)] = nowKey
-    return regionList
+    return dict(zip(itertools.accumulate(sortData.values()),sortData.keys()))
 
 def sortedDictForValues(oldDict):
     '''
@@ -46,7 +40,7 @@ def getRandomForWeight(data:dict) -> 'dataKey':
     weightReginList = list(map(int,weightReginData.keys()))
     nowWeight = random.randint(0,weightMax - 1)
     weightRegin = getNextValueForList(nowWeight,weightReginList)
-    return weightReginData[str(weightRegin)]
+    return weightReginData[weightRegin]
 
 def getNextValueForList(nowInt:int,intList:list) -> int:
     '''
