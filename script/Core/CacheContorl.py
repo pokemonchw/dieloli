@@ -18,9 +18,6 @@ temCharacterDefault = {}
 # 默认属性模板数据备份
 temporaryCharacterBak = {}
 
-# 临时角色数据控制对象
-temporaryCharacter = {}
-
 # npc模板列表
 npcTemData = []
 
@@ -36,6 +33,13 @@ instructFilter = {}
 
 # 富文本记录输出样式临时缓存
 outputTextStyle = ''
+
+familyRegionList = []
+boysRegionList = []
+girlsRegionList = []
+familyRegionIntList = []
+boysRegionIntList = []
+girlsRegionIntList = []
 
 # 富文本回溯样式记录用定位
 textStylePosition = {}

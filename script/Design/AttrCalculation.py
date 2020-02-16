@@ -453,7 +453,7 @@ def initTemporaryCharacter():
     '''
     初始化角色模板
     '''
-    CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
+    return CacheContorl.temporaryCharacterBak.copy()
 
 def setAttrOver(characterId:str):
     '''

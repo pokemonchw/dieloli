@@ -23,6 +23,7 @@ def _loadjson(filepath:str) -> dict:
     with open(filepath, 'r', encoding=ec) as f:
         try:
             jsondata = json.loads(f.read())
+            f.close()
         except json.decoder.JSONDecodeError:
             print(filepath + '  无法读取，文件可能不符合json格式')
             jsondata = []

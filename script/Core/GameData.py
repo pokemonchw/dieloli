@@ -1,25 +1,11 @@
 # -*- coding: UTF-8 -*-
 from script.Core.GamePathConfig import gamepath
-from script.Core import JsonHandle,CacheContorl
+from script.Core import JsonHandle,CacheContorl,ValueHandle
 from dijkstar import Graph,find_path
 import os
+import pickle
 
-_gamedata = {}
-
-def gamedata() -> dict:
-    '''
-    获取游戏数据
-    '''
-    return _gamedata
-
-def _loaddir(dataPath:str):
-    '''
-    将路径下的游戏数据传入_gamedata
-    Keyword arguments:
-    datapath -- 要载入数据的路径
-    '''
-    _gamedata.update(loadDirNow(dataPath))
-
+gamedata = {}
 sceneData = {}
 mapData = {}
 def loadDirNow(dataPath:str):
@@ -64,11 +50,19 @@ def loadDirNow(dataPath:str):
                             nowMapData['SortedPath'] = sortedPathData
                             mapData[mapSystemPathStr] = nowMapData
                         else:
-                            nowData[nowFile[0]] = JsonHandle._loadjson(nowPath)
-                            if nowFile[0] == 'Equipment':
-                                initClothingData(nowData[nowFile[0]]['Clothing'])
-                            elif nowFile[0] == 'StatureDescription':
-                                initStatureDescription(nowData[nowFile[0]]['Priority'])
+                            if nowFile[0] == "NameIndex":
+                                data = JsonHandle._loadjson(nowPath)
+                                initNameRegion(data['Boys'],0)
+                                initNameRegion(data['Girls'],1)
+                            elif nowFile[0] == "FamilyIndex":
+                                data = JsonHandle._loadjson(nowPath)
+                                initNameRegion(data['FamilyNameList'],2)
+                            else:
+                                nowData[nowFile[0]] = JsonHandle._loadjson(nowPath)
+                                if nowFile[0] == 'Equipment':
+                                    initClothingData(nowData[nowFile[0]]['Clothing'])
+                                elif nowFile[0] == 'StatureDescription':
+                                    initStatureDescription(nowData[nowFile[0]]['Priority'])
             else:
                 nowData[i] = loadDirNow(nowPath)
     return nowData
@@ -80,6 +74,24 @@ def initStatureDescription(sdData):
     sdData -- 身材描述文本数据
     '''
     CacheContorl.statureDescritionPrioritionData = {priority:{i:len(sdData[priority][i]['Condition']) for i in range(len(sdData[priority]))} for priority in range(len(sdData))}
+
+def initNameRegion(nameData:dict,manJudge:int):
+    '''
+    初始化性别名字随机权重
+    Keyword arguments:
+    nameData -- 名字数据
+    manJudge -- 类型校验(0:男,1:女,2:姓)
+    '''
+    regionList = ValueHandle.getReginList(nameData)
+    if manJudge == 0:
+        CacheContorl.boysRegionList = regionList
+        CacheContorl.boysRegionIntList = list(map(int,regionList))
+    elif manJudge == 1:
+        CacheContorl.girlsRegionList = regionList
+        CacheContorl.girlsRegionIntList = list(map(int,regionList))
+    else:
+        CacheContorl.familyRegionList = regionList
+        CacheContorl.familyRegionIntList = list(map(int,regionList))
 
 def getSortedMapPathData(mapData:dict) -> dict:
     '''
@@ -195,5 +207,38 @@ def init():
     '''
     初始化游戏数据
     '''
-    datapath = os.path.join(gamepath,'data')
-    _loaddir(datapath)
+    datapath = os.path.join(gamepath,'data.json')
+    if os.path.exists(datapath):
+        f = open(datapath,'rb')
+        data = pickle.load(f)
+        gamedata.update(data['gamedata'])
+        CacheContorl.placeData = data['placedata']
+        CacheContorl.statureDescritionPrioritionData = data['staturedata']
+        CacheContorl.clothingTypeData = data['clothingdata']
+        sceneData.update(data['scenedata'])
+        mapData.update(data['mapdata'])
+        CacheContorl.boysRegionIntList = data['boysregiondata']
+        CacheContorl.girlsRegionIntList = data['girlsregiondata']
+        CacheContorl.familyRegionIntList = data['familyregiondata']
+        CacheContorl.boysRegionList = data['boysdata']
+        CacheContorl.girlsRegionList = data['girlsdata']
+        CacheContorl.familyRegionList = data['familydata']
+    else:
+        datadir = os.path.join(gamepath,'data')
+        f = open(datapath,'wb')
+        gamedata.update(loadDirNow(datadir))
+        nowData = {
+            "gamedata":gamedata,
+            "placedata":CacheContorl.placeData,
+            "staturedata":CacheContorl.statureDescritionPrioritionData,
+            "clothingdata":CacheContorl.clothingTypeData,
+            "scenedata":sceneData,
+            "mapdata":mapData,
+            "boysregiondata":CacheContorl.boysRegionIntList,
+            "girlsregiondata":CacheContorl.girlsRegionIntList,
+            "familyregiondata":CacheContorl.familyRegionIntList,
+            "boysdata":CacheContorl.boysRegionList,
+            "girlsdata":CacheContorl.girlsRegionList,
+            "familydata":CacheContorl.familyRegionList
+        }
+        pickle.dump(nowData,f)

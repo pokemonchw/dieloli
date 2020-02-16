@@ -42,9 +42,9 @@ def getTextData(textPathId:str,textId:str) -> str:
     textId -- 文件下的文本id
     '''
     if textPathId in ['FontConfig','BarConfig']:
-        return GameData._gamedata[textPathId][textId]
+        return GameData.gamedata[textPathId][textId]
     else:
-        return GameData._gamedata[language][textPathId][textId]
+        return GameData.gamedata[language][textPathId][textId]
 
 def getGameData(textPathId:str) -> dict:
     '''
@@ -53,9 +53,9 @@ def getGameData(textPathId:str) -> dict:
     textPathId -- 文件id
     '''
     if textPathId in ['FontConfig','BarConfig']:
-        return GameData._gamedata[textPathId]
+        return GameData.gamedata[textPathId]
     else:
-        return GameData._gamedata[language][textPathId]
+        return GameData.gamedata[language][textPathId]
 
 def getCharacterData(characterName:str) -> dict:
     '''
@@ -63,4 +63,4 @@ def getCharacterData(characterName:str) -> dict:
     Keyword arguments:
     characterName -- 角色名
     '''
-    return GameData._gamedata[language]['character'][characterName]
+    return GameData.gamedata[language]['character'][characterName]

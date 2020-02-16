@@ -1,6 +1,7 @@
 import random
 import math
 import uuid
+import time
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText,Clothing,Nature
 
@@ -8,17 +9,20 @@ language = GameConfig.language
 gamepath = GamePathConfig.gamepath
 sexList = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex'))
 ageTemList = list(TextLoading.getTextData(TextLoading.attrTemplatePath,'AgeTem'))
-characterList = list(GameData._gamedata[language]['character'].keys())
+characterList = list(GameData.gamedata[language]['character'].keys())
 
 def initCharacterList():
     '''
     初始生成所有npc数据
     '''
     initCharacterTem()
+    t1 = time.time()
     i = 1
     for character in CacheContorl.npcTemData:
-        initCharacter(i,character)
+        initCharacter((i,character))
         i += 1
+    t2 = time.time()
+    print(t2-t1)
     indexCharacterAverageValue()
     calculateTheAverageValueOfEachAttributeOfEachAgeGroup()
 
@@ -46,16 +50,17 @@ def indexCharacterAverageValue():
         CacheContorl.TotalBodyFatByage[ageTem].setdefault(characterData['Sex'],0)
         CacheContorl.TotalBodyFatByage[ageTem][characterData['Sex']] += characterData['BodyFat']
 
-def initCharacter(nowId:int,character:dict):
+def initCharacter(*args):
     '''
     按id生成角色属性
     Keyword arguments:
     nowId -- 角色id
     character -- 角色生成模板数据
     '''
-    AttrCalculation.initTemporaryCharacter()
-    characterId = str(nowId)
-    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
+    args = args[0]
+    characterId = str(args[0])
+    character = args[1]
+    CacheContorl.characterData['character'][characterId] = AttrCalculation.initTemporaryCharacter()
     characterName = character['Name']
     characterSex = character['Sex']
     CacheContorl.characterData['character'][characterId]['Sex'] = characterSex
@@ -109,11 +114,9 @@ def initCharacter(nowId:int,character:dict):
     if 'Chest' in character:
         chest = AttrCalculation.getChest(chestTem,defaultAttr['Birthday'])
         defaultAttr['Chest'] = chest
-    CacheContorl.temporaryCharacter.update(defaultAttr)
-    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
+    CacheContorl.characterData['character'][characterId].update(defaultAttr)
     Clothing.characterPutOnClothing(characterId)
     Nature.initCharacterNature(characterId)
-    CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
 
 def initCharacterTem():
     '''

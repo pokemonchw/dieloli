@@ -21,11 +21,11 @@ def init(main_flow:'function'):
     # 载入按键监听
     KeyListionEvent.onWFrameListion()
     # 设置背景颜色
-    IoInit.set_background(GameData.gamedata()['core_cfg']['background_color'])
+    IoInit.set_background(GameData.gamedata['core_cfg']['background_color'])
     # 初始化字体
     IoInit.init_style()
     # 初始化地图数据
-    CacheContorl.mapData = GameData._gamedata[GameConfig.language]['map']
+    CacheContorl.mapData = GameData.gamedata[GameConfig.language]['map']
     CacheContorl.sceneData = GameData.sceneData
     CacheContorl.mapData = GameData.mapData
     FlowHandle.reset_func = reset
@@ -92,4 +92,4 @@ set_deal_cmd_func = FlowHandle.set_tail_deal_cmd_func
 set_deal_cmd_func_deco = FlowHandle.deco_set_tail_deal_cmd_func
 
 # 返回主数据集合
-data = GameData.gamedata()
+data = GameData.gamedata

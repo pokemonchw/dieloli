@@ -10,18 +10,6 @@ roleAttrData = JsonHandle._loadjson(roleAttrPath)
 sexData = roleAttrData['Sex']
 equipmentPath = os.path.join(gamepath,'data',language,'Equipment.json')
 equipmentData = JsonHandle._loadjson(equipmentPath)
-boysNameListData = TextLoading.getTextData(TextLoading.nameListPath,'Boys')
-girlsNameListData = TextLoading.getTextData(TextLoading.nameListPath,'Girls')
-familyNameListData = TextLoading.getTextData(TextLoading.familyNameListPath,'FamilyNameList')
-sortFamilyIndex = sorted(familyNameListData.items(),key=lambda x:x[1])
-
-familyRegionList = ValueHandle.getReginList(familyNameListData)
-boysRegionList = ValueHandle.getReginList(boysNameListData)
-girlsRegionList = ValueHandle.getReginList(girlsNameListData)
-
-familyRegionIntList = list(map(int,familyRegionList))
-boysRegionIntList = list(map(int,boysRegionList))
-girlsRegionIntList = list(map(int,girlsRegionList))
 
 def getSexExperienceText(sexExperienceData:dict,sexName:str) -> list:
     '''
@@ -84,17 +72,19 @@ def getLevelTextColor(level:str) -> str:
     level = '<level' + lowerLevel + '>' + level + '</level' + lowerLevel + '>'
     return level
 
-familyIndexMax = familyRegionIntList[len(familyRegionIntList) - 1]
 def getRandomNameForSex(sexGrade:str) -> str:
     '''
     按性别随机生成姓名
     Keyword arguments:
     sexGrade -- 性别
     '''
-    familyRandom = random.randint(1,familyIndexMax)
-    familyRegionIndex = bisect.bisect_left(familyRegionIntList,familyRandom)
-    familyRegion = familyRegionIntList[familyRegionIndex]
-    familyName = familyRegionList[familyRegion]
+    try:
+        familyRandom = random.randint(1,CacheContorl.familyRegionIntList[-1])
+    except Exception as e:
+        print(CacheContorl.familyRegionIntList,e)
+    familyRegionIndex = bisect.bisect_left(CacheContorl.familyRegionIntList,familyRandom)
+    familyRegion = CacheContorl.familyRegionIntList[familyRegionIndex]
+    familyName = CacheContorl.familyRegionList[familyRegion]
     if sexGrade == 'Man':
         sexJudge = 1
     elif sexGrade == 'Woman':
@@ -102,15 +92,15 @@ def getRandomNameForSex(sexGrade:str) -> str:
     else:
         sexJudge = random.randint(0,1)
     if sexJudge == 0:
-        nameRandom = random.randint(1,girlsRegionIntList[-1])
-        nameRegionIndex = bisect.bisect_left(girlsRegionIntList,nameRandom)
-        nameRegion = girlsRegionIntList[nameRegionIndex]
-        name = girlsRegionList[nameRegion]
+        nameRandom = random.randint(1,CacheContorl.girlsRegionIntList[-1])
+        nameRegionIndex = bisect.bisect_left(CacheContorl.girlsRegionIntList,nameRandom)
+        nameRegion = CacheContorl.girlsRegionIntList[nameRegionIndex]
+        name = CacheContorl.girlsRegionList[nameRegion]
     else:
-        nameRandom = random.randint(1,boysRegionIntList[-1])
-        nameRegionIndex = bisect.bisect_left(boysRegionIntList,nameRandom)
-        nameRegion = boysRegionIntList[nameRegionIndex]
-        name = boysRegionList[nameRegion]
+        nameRandom = random.randint(1,CacheContorl.boysRegionIntList[-2])
+        nameRegionIndex = bisect.bisect_left(CacheContorl.boysRegionIntList,nameRandom)
+        nameRegion = CacheContorl.boysRegionIntList[nameRegionIndex]
+        name = CacheContorl.boysRegionList[nameRegion]
     return familyName + name
 
 def getSeeAttrPanelHeadCharacterInfo(characterId:str) -> str:
