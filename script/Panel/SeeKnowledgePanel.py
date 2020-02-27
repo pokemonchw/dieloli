@@ -8,7 +8,7 @@ def seeCharacterKnowledgePanel(characterId:str):
     characterId -- 角色Id
     '''
     knowledgeTextData = TextLoading.getGameData(TextLoading.knowledge)
-    characterKnowledge = CacheContorl.characterData['character'][characterId]['Knowledge']
+    characterKnowledge = CacheContorl.characterData['character'][characterId].Knowledge
     for knowledge in knowledgeTextData:
         EraPrint.sontitleprint(knowledgeTextData[knowledge]['Name'])
         if knowledge in characterKnowledge:

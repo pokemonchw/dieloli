@@ -2,7 +2,7 @@ import os
 import random
 import time
 from script.Core import CacheContorl,GameConfig,GamePathConfig,TextLoading,JsonHandle,ValueHandle
-from script.Design import GameTime
+from script.Design import GameTime,Character
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
@@ -55,70 +55,19 @@ def getAttr(temName:str) -> dict:
     '''
     TemList = TextLoading.getTextData(TextLoading.attrTemplatePath,'TemList')
     temData = TemList[temName]
-    ageTemName = temData["Age"]
-    age = getAge(ageTemName)
-    birthday = getRandNpcBirthDay(age)
-    sexExperienceTemName = temData["SexExperience"]
-    sexExperienceList = getSexExperience(sexExperienceTemName)
-    sexGradeList = getSexGrade(sexExperienceList)
-    EngravingList = getEngravingList()
-    height = getHeight(temName,age,{})
-    weightTemName = temData['Weight']
-    bmi = getBMI(weightTemName)
-    weight = getWeight(bmi,height['NowHeight'])
-    bodyFatTem = temData['BodyFat']
-    bodyFat = getBodyFat(temName,bodyFatTem)
-    measurements = getMeasurements(temName,height['NowHeight'],weight,bodyFat,bodyFatTem)
-    hitPointTemName = temData["HitPoint"]
-    maxHitPoint = getMaxHitPoint(hitPointTemName)
-    manaPointTemName = temData["ManaPoint"]
-    maxManaPoint = getMaxManaPoint(manaPointTemName)
-    gold = getGold()
-    statusData = TextLoading.getGameData(TextLoading.characterStatePath)
-    wearItemData = {key:'' for key in TextLoading.getGameData(TextLoading.wearItemPath)['Wear']}
-    wearItem = {
-        "Wear":wearItemData,
-        "Item":{},
-    }
+    character = Character.Character()
+    character.Age = getAge(temData['Age'])
+    character.SexExperienceTem = temData['SexExperience']
+    character.WeigtTem = temData['Weight']
+    character.BodyFatTem = temData['BodyFat']
+    character.HitPointTem = temData["HitPoint"]
+    character.ManaPointTem = temData["ManaPoint"]
     if temName == "Man" or temName == 'Asexual':
-        chestTem = 'Precipice'
+        character.ChestTem = 'Precipice'
     else:
-        chestTem = getRandNpcChestTem()
-    chest = getChest(chestTem,birthday)
-    socialContact = {social:{} for social in TextLoading.getTextData(TextLoading.stageWordPath,'144')}
-    return {
-        'Age':age,
-        'Birthday':birthday,
-        'HitPointMax':maxHitPoint,
-        'HitPoint':maxHitPoint,
-        'ManaPointMax':maxManaPoint,
-        'ManaPoint':maxManaPoint,
-        'SexExperience':sexExperienceList,
-        'SexGrade':sexGradeList,
-        'Engraving':EngravingList,
-        'Height':height,
-        'Weight':weight,
-        'BodyFat':bodyFat,
-        'Measurements':measurements,
-        'Gold':gold,
-        'BodyFat':bodyFat,
-        'Status':statusData,
-        'WearItem':wearItem,
-        'Item':{},
-        'Chest':chest,
-        'SocialContact':socialContact,
-        'Clothing':{
-            'Coat':{},
-            'Underwear':{},
-            'Pants':{},
-            'Skirt':{},
-            'Shoes':{},
-            'Socks':{},
-            'Bra':{},
-            'Underpants':{}
-        },
-        'Language':{}
-    }
+        character.ChestTem = getRandNpcChestTem()
+    character.initAttr()
+    return character
 
 def getAge(temName:str) -> int:
     '''
@@ -444,21 +393,6 @@ def setAttrDefault(characterId:str):
     Keyword arguments:
     characterId -- 角色id
     '''
-    characterSex = CacheContorl.characterData['character'][characterId]['Sex']
+    characterSex = CacheContorl.characterData['character'][characterId].Sex
     temData = getAttr(characterSex)
     CacheContorl.temporaryCharacter.update(temData)
-    CacheContorl.temporaryCharacter['Features'] = CacheContorl.featuresList.copy()
-
-def initTemporaryCharacter():
-    '''
-    初始化角色模板
-    '''
-    return CacheContorl.temporaryCharacterBak.copy()
-
-def setAttrOver(characterId:str):
-    '''
-    将临时缓存内的数据覆盖入指定id的角色数据内
-    Keyword arguments:
-    characterId -- 角色id
-    '''
-    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()

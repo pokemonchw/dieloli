@@ -216,7 +216,7 @@ def initCharacterKnowledge():
     '''
     for i in CacheContorl.characterData['character']:
         character = CacheContorl.characterData['character'][i]
-        characterAge = character['Age']
+        characterAge = character.Age
         classGrade = 11
         if characterAge <= 18 and characterAge >= 7:
             classGrade = characterAge - 7
@@ -231,25 +231,25 @@ def initCharacterKnowledge():
                 for knowledge in courseKnowledgeData[course]['Knowledge']:
                     for skill in courseKnowledgeData[course]['Knowledge'][knowledge]:
                         if knowledge == 'Language':
-                            nowCourseExperience += character['Language'][skill]
+                            nowCourseExperience += character.Language[skill]
                         else:
-                            nowCourseExperience += character['Knowledge'][knowledge][skill]
+                            nowCourseExperience += character.Knowledge[knowledge][skill]
                 CacheContorl.teacherCourseExperience[course][i] = nowCourseExperience
 
-def initTeacherKnowledge(character:dict) -> dict:
+def initTeacherKnowledge(character) -> dict:
     '''
     按年龄修正教师知识等级
     '''
-    characterAge = character['Age']
+    characterAge = character.Age
     studyYear = characterAge - 18
-    for knowledge in character['Knowledge']:
-        for skill in character['Knowledge'][knowledge]:
-            character['Knowledge'][knowledge][skill] += character['Knowledge'][knowledge][skill] / 12 * studyYear * random.uniform(0.25,0.75)
-    for language in character['Language']:
-        character['Knowledge'][knowledge][skill] += character['Language'][language] / 12 * studyYear * random.uniform(0.25,0.75)
+    for knowledge in character.Knowledge:
+        for skill in character.Knowledge[knowledge]:
+            character.Knowledge[knowledge][skill] += character.Knowledge[knowledge][skill] / 12 * studyYear * random.uniform(0.25,0.75)
+    for language in character.Language:
+        character.Knowledge[knowledge][skill] += character.Language[language] / 12 * studyYear * random.uniform(0.25,0.75)
 
 courseData = TextLoading.getGameData(TextLoading.course)
-def initExperienceForGrade(classGrade:str,character:dict):
+def initExperienceForGrade(classGrade:str,character):
     '''
     按年级生成角色初始经验数据
     '''
@@ -260,21 +260,21 @@ def initExperienceForGrade(classGrade:str,character:dict):
             if knowledge == 'Language':
                 for skill in experienceData[knowledge]:
                     skillExperience = experienceData[knowledge][skill]
-                    skillInterest = character['Interest'][skill]
+                    skillInterest = character.Interest[skill]
                     skillExperience *= skillInterest
-                    if skill in character['Language']:
-                        character['Language'][skill] += skillExperience
+                    if skill in character.Language:
+                        character.Language[skill] += skillExperience
                     else:
-                        character['Language'][skill] = skillExperience
+                        character.Language[skill] = skillExperience
             else:
-                if knowledge not in character['Knowledge']:
-                    character['Knowledge'].setdefault(knowledge,{})
+                if knowledge not in character.Knowledge:
+                    character.Knowledge.setdefault(knowledge,{})
                 for skill in experienceData[knowledge]:
                     skillExperience = experienceData[knowledge][skill]
-                    skillInterest = character['Interest'][skill]
+                    skillInterest = character.Interest[skill]
                     skillExperience *= skillInterest
-                    if skill in character['Knowledge'][knowledge]:
-                        character['Knowledge'][knowledge][skill] += skillExperience
+                    if skill in character.Knowledge[knowledge]:
+                        character.Knowledge[knowledge][skill] += skillExperience
                     else:
-                        character['Knowledge'][knowledge][skill] = skillExperience
+                        character.Knowledge[knowledge][skill] = skillExperience
 

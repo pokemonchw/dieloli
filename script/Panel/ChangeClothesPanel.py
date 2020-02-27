@@ -19,8 +19,8 @@ def seeCharacterWearClothes(characterId:str,changeButton:bool):
     characterId -- 角色id
     changeButton -- 将服装列表绘制成按钮的开关
     '''
-    characterClothingData = CacheContorl.characterData['character'][characterId]['Clothing']
-    characterPutOnList = CacheContorl.characterData['character'][characterId]['PutOn']
+    characterClothingData = CacheContorl.characterData['character'][characterId].Clothing
+    characterPutOnList = CacheContorl.characterData['character'][characterId].PutOn
     clothingTextData = {}
     tagTextIndex = 0
     for i in range(len(Clothing.clothingTypeTextList.keys())):
@@ -85,8 +85,8 @@ def seeCharacterClothesPanel(characterId:str,clothingType:str,maxPage:int):
     maxPage -- 服装列表最大页数
     '''
     EraPrint.p('\n')
-    characterClothingData = CacheContorl.characterData['character'][characterId]['Clothing'][clothingType]
-    characterPutOnList = CacheContorl.characterData['character'][characterId]['PutOn']
+    characterClothingData = CacheContorl.characterData['character'][characterId].Clothing[clothingType]
+    characterPutOnList = CacheContorl.characterData['character'][characterId].PutOn
     clothingTextData = {}
     tagTextIndex = 0
     nowPageId = int(CacheContorl.panelState["SeeCharacterClothesPanel"])
@@ -102,7 +102,7 @@ def seeCharacterClothesPanel(characterId:str,clothingType:str,maxPage:int):
     passId = None
     for i in range(nowPageStartId,nowPageEndId):
         clothingId = list(characterClothingData.keys())[i]
-        if clothingId == CacheContorl.characterData['character'][characterId]['PutOn'][clothingType]:
+        if clothingId == CacheContorl.characterData['character'][characterId].PutOn[clothingType]:
             passId = i - nowPageStartId
         clothingData = characterClothingData[clothingId]
         clothingText = clothingData['Evaluation'] + clothingData['Tag'] + clothingData['Name']
@@ -210,7 +210,7 @@ def seeClothingInfoPanel(characterId:str,clothingType:str,clothingId:str,wearClo
     clothingId -- 服装id
     '''
     EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath,'126'))
-    clothingData = CacheContorl.characterData['character'][characterId]['Clothing'][clothingType][clothingId]
+    clothingData = CacheContorl.characterData['character'][characterId].Clothing[clothingType][clothingId]
     infoList = []
     clothingName = clothingData['Name']
     if wearClothingJudge:

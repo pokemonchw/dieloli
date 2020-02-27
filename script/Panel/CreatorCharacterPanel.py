@@ -5,8 +5,6 @@ def inputNamePanel() -> str:
     '''
     请求玩家输入姓名面板
     '''
-    characterId = CacheContorl.characterData['characterId']
-    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '4'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu)
@@ -33,8 +31,6 @@ def inputNickNamePanel() -> str:
     '''
     请求玩家输入昵称面板
     '''
-    characterId = CacheContorl.characterData['characterId']
-    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '6'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputnickname)
@@ -62,9 +58,7 @@ def inputSelfNamePanel() -> str:
     '''
     请求玩家输入自称面板
     '''
-    characterId = CacheContorl.characterData['characterId']
     PyCmd.clr_cmd()
-    CacheContorl.characterData['character'][characterId] = CacheContorl.temporaryCharacter.copy()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '14'))
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.inputselfname)
@@ -93,7 +87,7 @@ def inputSexPanel() -> str:
     请求玩家选择性别面板
     '''
     characterId = CacheContorl.characterData['characterId']
-    sexId = CacheContorl.characterData['character'][characterId]['Sex']
+    sexId = CacheContorl.characterData['character'][characterId].Sex
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '8')[sexId])
     yrn = CmdButtonQueue.optionint(CmdButtonQueue.currencymenu)
@@ -114,8 +108,6 @@ def attributeGenerationBranchPanel() -> str:
     '''
     玩家确认进行详细设置面板
     '''
-    characterId = CacheContorl.characterData['characterId']
-    AttrCalculation.setAttrDefault(characterId)
     PyCmd.clr_cmd()
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '9'))

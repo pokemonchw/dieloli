@@ -8,7 +8,7 @@ def seeCharacterSocialContactPanel(characterId:str):
     characterId -- 角色Id
     '''
     socialContactTextData = TextLoading.getTextData(TextLoading.stageWordPath,'144')
-    characterSocialContact = CacheContorl.characterData['character'][characterId]['SocialContact']
+    characterSocialContact = CacheContorl.characterData['character'][characterId].SocialContact
     for social in socialContactTextData:
         EraPrint.sontitleprint(socialContactTextData[social])
         if characterSocialContact[social] == {}:
@@ -17,5 +17,5 @@ def seeCharacterSocialContactPanel(characterId:str):
             size = 10
             if len(characterSocialContact[social]) < 10:
                 size = len(characterSocialContact[social])
-            nameList = [CacheContorl.characterData['character'][characterId]['Name'] for characterId in characterSocialContact[social]]
+            nameList = [CacheContorl.characterData['character'][characterId].Name for characterId in characterSocialContact[social]]
             EraPrint.plist(nameList,size,'center')

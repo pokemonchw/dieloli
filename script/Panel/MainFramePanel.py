@@ -1,5 +1,5 @@
 from script.Core import EraPrint,CacheContorl,TextLoading,PyCmd
-from script.Design import AttrHandle,AttrText,AttrPrint,GameTime,CmdButtonQueue
+from script.Design import AttrText,AttrPrint,GameTime,CmdButtonQueue
 
 def mainFramePanel() -> list:
     '''
@@ -7,7 +7,7 @@ def mainFramePanel() -> list:
     '''
     cmdList = []
     characterId = CacheContorl.characterData['characterId']
-    characterData = AttrHandle.getAttrData(characterId)
+    characterData = CacheContorl.characterData['character'][characterId]
     titleText = TextLoading.getTextData(TextLoading.stageWordPath, '64')
     EraPrint.plt(titleText)
     dateText = GameTime.getDateText()
@@ -16,7 +16,7 @@ def mainFramePanel() -> list:
     weekDateText = GameTime.getWeekDayText()
     EraPrint.p(weekDateText)
     EraPrint.p(' ')
-    characterName = characterData['Name']
+    characterName = characterData.Name
     PyCmd.pcmd(characterName,characterName,None)
     cmdList.append(characterName)
     EraPrint.p(' ')

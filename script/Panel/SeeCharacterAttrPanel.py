@@ -1,5 +1,5 @@
 from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
-from script.Design import AttrPrint,AttrHandle,AttrText,CmdButtonQueue,AttrCalculation
+from script.Design import AttrPrint,AttrText,CmdButtonQueue,AttrCalculation
 from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel,SeeKnowledgePanel,SexExperiencePanel,LanguagePanel,SeeNaturePanel,SeeSocialContactPanel
 
 def seeCharacterMainAttrPanel(characterId:str):
@@ -12,11 +12,11 @@ def seeCharacterMainAttrPanel(characterId:str):
     EraPrint.plt(title1)
     characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId
     characterData = CacheContorl.characterData['character'][characterId]
-    name = characterData['Name']
-    nickName = characterData['NickName']
+    name = characterData.Name
+    nickName = characterData.NickName
     characterName = TextLoading.getTextData(TextLoading.stageWordPath,'13') + name
     characterNickName = TextLoading.getTextData(TextLoading.stageWordPath,'12') + nickName
-    sex = characterData['Sex']
+    sex = characterData.Sex
     sexText = TextLoading.getTextData(TextLoading.stageWordPath, '2') + AttrText.getSexText(sex)
     nameText = characterIdText + ' ' + characterName + ' ' + characterNickName + ' ' + sexText
     hpBar = AttrPrint.getHpOrMpBar(characterId,'HitPoint',GameConfig.text_width / 2 - 4)
@@ -30,37 +30,36 @@ def seeCharacterMainAttrPanel(characterId:str):
     statureText = AttrText.getStatureText(characterId)
     EraPrint.pl(statureText)
     EraPrint.pline('.')
-    if 'Dormitory' in characterData:
-        EraPrint.pl(AttrText.getCharacterDormitoryPathText(characterId))
-        EraPrint.plittleline()
-    characterSpecies = characterData['Species']
+    EraPrint.pl(AttrText.getCharacterDormitoryPathText(characterId))
+    EraPrint.plittleline()
+    characterSpecies = characterData.Species
     characterSpecies = TextLoading.getTextData(TextLoading.stageWordPath, '15') + characterSpecies
-    characterAge = characterData['Age']
+    characterAge = characterData.Age
     characterAge = TextLoading.getTextData(TextLoading.stageWordPath, '3') + str(characterAge)
-    birthday = characterData['Birthday']
+    birthday = characterData.Birthday
     birthdayText = TextLoading.getTextData(TextLoading.stageWordPath,'140') + str(birthday['month']) + TextLoading.getTextData(TextLoading.stageWordPath,'60') + str(birthday['day']) + TextLoading.getTextData(TextLoading.stageWordPath,'61')
     EraPrint.plist([characterSpecies,characterAge,birthdayText],3,'center')
     EraPrint.pline('.')
-    characterIntimate = characterData['Intimate']
-    characterIntimate = TextLoading.getTextData(TextLoading.stageWordPath, '16') + characterIntimate
-    characterGraces = characterData['Graces']
-    characterGraces = TextLoading.getTextData(TextLoading.stageWordPath, '17') + characterGraces
+    characterIntimate = characterData.Intimate
+    characterIntimate = TextLoading.getTextData(TextLoading.stageWordPath, '16') + str(characterIntimate)
+    characterGraces = characterData.Graces
+    characterGraces = TextLoading.getTextData(TextLoading.stageWordPath, '17') + str(characterGraces)
     EraPrint.plist([characterIntimate,characterGraces],2,'center')
     EraPrint.pline('.')
-    characterChest = characterData['Chest']['NowChest']
+    characterChest = characterData.Chest['NowChest']
     chestGroup = AttrCalculation.judgeChestGroup(characterChest)
     chestText = TextLoading.getTextData(TextLoading.stageWordPath,'141') + TextLoading.getTextData(TextLoading.stageWordPath,'142')[chestGroup]
     EraPrint.plist([chestText],1,'center')
     EraPrint.pline('.')
-    characterHeight = characterData['Height']['NowHeight']
-    characterWeight = characterData['Weight']
+    characterHeight = characterData.Height['NowHeight']
+    characterWeight = characterData.Weight
     characterHeightText = str(round(characterHeight,2))
     characterWeightText = str(round(characterWeight,2))
     characterHeightInfo = TextLoading.getTextData(TextLoading.stageWordPath,'80') + characterHeightText
     characterWeightInfo = TextLoading.getTextData(TextLoading.stageWordPath,'81') + characterWeightText
     EraPrint.plist([characterHeightInfo,characterWeightInfo],2,'center')
     EraPrint.pline('.')
-    characterMeasurements = characterData['Measurements']
+    characterMeasurements = characterData.Measurements
     characterBust = str(round(characterMeasurements['Bust'],2))
     characterWaist = str(round(characterMeasurements['Waist'],2))
     characterHip = str(round(characterMeasurements['Hip'],2))
@@ -88,18 +87,18 @@ def seeCharacterStatusPanel(characterId:str):
     '''
     statusTextData = TextLoading.getTextData(TextLoading.stageWordPath, '134')
     characterData = CacheContorl.characterData['character'][characterId]
-    statusData = characterData['Status']
+    statusData = characterData.Status
     for stateType in statusData:
         EraPrint.sontitleprint(statusTextData[stateType])
         nowStatusData = statusData[stateType].copy()
         if stateType == 'SexFeel':
-            if characterData['Sex'] == 'Man':
+            if characterData.Sex == 'Man':
                 del nowStatusData['VaginaDelight']
                 del nowStatusData['ClitorisDelight']
                 del nowStatusData['VaginaLubrication']
-            elif characterData['Sex'] == 'Woman':
+            elif characterData.Sex == 'Woman':
                 del nowStatusData['PenisDelight']
-            elif characterData['Sex'] == 'Asexual':
+            elif characterData.Sex == 'Asexual':
                 del nowStatusData['VaginaDelight']
                 del nowStatusData['ClitorisDelight']
                 del nowStatusData['VaginaLubrication']
@@ -120,8 +119,8 @@ def seeCharacterHPAndMPInSence(characterId:str):
     if characterId == '0':
         AttrPrint.printHpAndMpBar(characterId)
     else:
-        characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + '0' + ':' + CacheContorl.characterData['character']['0']['Name']
-        targetIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId + ':' + CacheContorl.characterData['character'][characterId]['Name']
+        characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + '0' + ':' + CacheContorl.characterData['character']['0'].Name
+        targetIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId + ':' + CacheContorl.characterData['character'][characterId].Name
         EraPrint.plist([characterIdText,targetIdText],2,'center')
         EraPrint.pl()
         playerBar = AttrPrint.getHpOrMpBar('0','HitPoint',GameConfig.text_width / 2 - 4)

@@ -45,14 +45,13 @@ def changeWearItem(itemType:str):
     itemType -- 道具类型
     '''
     characterId = CacheContorl.characterData['characterId']
-    itemData = CacheContorl.characterData['character'][characterId]
     maxPage = getCharacterWearItemPageMax(characterId)
     inputS = WearItemPanel.seeCharacterWearItemListPanel(characterId,itemType,maxPage)
     yrn = FlowHandle.askfor_All(inputS)
     if yrn == inputS[:-1]:
         return True
     else:
-        CacheContorl.characterData['character'][characterId]['WearItem']['Wear'][itemType] = list(CacheContorl.characterData['character'][characterId]["Wear"]['Item'][itemType].keys())[int(yrn)]
+        CacheContorl.characterData['character'][characterId].WearItem['Wear'][itemType] = list(CacheContorl.characterData['character'][characterId].WearItem['Item'][itemType].keys())[int(yrn)]
 
 def getCharacterWearItemPageMax(characterId:str):
     '''
@@ -60,7 +59,7 @@ def getCharacterWearItemPageMax(characterId:str):
     Keyword arguments:
     characterId -- 角色Id
     '''
-    wearItemMax = len(CacheContorl.characterData['character'][characterId]['WearItem']['Item'])
+    wearItemMax = len(CacheContorl.characterData['character'][characterId].WearItem['Item'])
     pageIndex = GameConfig.see_character_wearitem_max
     if wearItemMax - pageIndex < 0:
         return 0

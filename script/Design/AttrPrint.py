@@ -1,5 +1,5 @@
 from script.Core import TextLoading,EraPrint,CacheContorl,GameConfig
-from script.Design import AttrHandle,ProportionalBar
+from script.Design import ProportionalBar
 
 pointTextData = {
     "HitPoint":TextLoading.getTextData(TextLoading.stageWordPath,'8'),
@@ -27,8 +27,12 @@ def getHpOrMpBar(characterId:str,barId:str,textWidth:int):
     textWidth -- 比例条总宽度
     '''
     characterData = CacheContorl.characterData['character'][characterId]
-    characterPoint = characterData[barId]
-    characterMaxPoint = characterData[barId + 'Max']
+    if barId == 'HitPoint':
+        characterPoint = characterData.HitPoint
+        characterMaxPoint = characterData.HitPointMax
+    else:
+        characterPoint = characterData.ManaPoint
+        characterMaxPoint = characterData.ManaPointMax
     pointText = pointTextData[barId]
     return ProportionalBar.getProportionalBar(pointText,characterMaxPoint,characterPoint,barId + 'bar',textWidth)
 
@@ -40,12 +44,12 @@ def getHpAndMpText(characterId:str) -> str:
     '''
     characterId = str(characterId)
     characterData = CacheContorl.characterData['character'][characterId]
-    characterHitPoint = characterData['HitPoint']
-    characterMaxHitPoint = characterData['HitPointMax']
+    characterHitPoint = characterData.HitPoint
+    characterMaxHitPoint = characterData.HitPointMax
     hitPointText = TextLoading.getTextData(TextLoading.stageWordPath, '8')
     hpText = hitPointText + '(' + str(characterHitPoint) + '/' + str(characterMaxHitPoint) + ')'
-    characterManaPoint = characterData['ManaPoint']
-    characterMaxManaPoint = characterData['ManaPointMax']
+    characterManaPoint = characterData.ManaPoint
+    characterMaxManaPoint = characterData.ManaPointMax
     manaPointText = TextLoading.getTextData(TextLoading.stageWordPath, '9')
     mpText = manaPointText + '(' + str(characterManaPoint) + '/' + str(characterMaxManaPoint) + ')'
     return hpText + ' ' + mpText

@@ -22,7 +22,7 @@ def getCharacterItemPageMax(characterId:str):
     Keyword arguments:
     characterId -- 角色Id
     '''
-    itemMax = len(CacheContorl.characterData['character'][characterId]['Item'])
+    itemMax = len(CacheContorl.characterData['character'][characterId].Item)
     pageIndex - GameConfig.see_character_item_max
     if itemMax - pageIndex < 0:
         return 0

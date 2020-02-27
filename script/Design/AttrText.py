@@ -78,10 +78,7 @@ def getRandomNameForSex(sexGrade:str) -> str:
     Keyword arguments:
     sexGrade -- 性别
     '''
-    try:
-        familyRandom = random.randint(1,CacheContorl.familyRegionIntList[-1])
-    except Exception as e:
-        print(CacheContorl.familyRegionIntList,e)
+    familyRandom = random.randint(1,CacheContorl.familyRegionIntList[-1])
     familyRegionIndex = bisect.bisect_left(CacheContorl.familyRegionIntList,familyRandom)
     familyRegion = CacheContorl.familyRegionIntList[familyRegionIndex]
     familyName = CacheContorl.familyRegionList[familyRegion]
@@ -111,11 +108,11 @@ def getSeeAttrPanelHeadCharacterInfo(characterId:str) -> str:
     '''
     characterData = CacheContorl.characterData['character'][characterId]
     characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId
-    name = characterData['Name']
-    nickName = characterData['NickName']
+    name = characterData.Name
+    nickName = characterData.NickName
     characterName = TextLoading.getTextData(TextLoading.stageWordPath,'13') + name
     characterNickName = TextLoading.getTextData(TextLoading.stageWordPath,'12') + nickName
-    sex = characterData['Sex']
+    sex = characterData.Sex
     sexText = TextLoading.getTextData(TextLoading.stageWordPath, '2') + getSexText(sex)
     nameText = characterIdText + ' ' + characterName + ' ' + characterNickName + ' ' + sexText
     return nameText
@@ -126,9 +123,7 @@ def getSexText(sexId:str) -> str:
     Keyword arguments:
     sexId -- 性别
     '''
-    data = roleAttrData['Sex']
-    sexText = data[sexId]
-    return sexText
+    return roleAttrData['Sex'][sexId]
 
 def getEngravingText(eList:dict) -> list:
     '''
@@ -136,11 +131,11 @@ def getEngravingText(eList:dict) -> list:
     Keyword arguments:
     eList -- 刻印数据
     '''
-    painLevel = eList["Pain"]
-    happyLevel = eList["Happy"]
-    yieldLevel = eList["Yield"]
-    fearLevel = eList["Fear"]
-    resistanceLevel = eList["Resistance"]
+    painLevel = str(eList["Pain"])
+    happyLevel = str(eList["Happy"])
+    yieldLevel = str(eList["Yield"])
+    fearLevel = str(eList["Fear"])
+    resistanceLevel = str(eList["Resistance"])
     painLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'31')
     happyLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'32')
     yieldLevelFix = TextLoading.getTextData(TextLoading.stageWordPath,'33')
@@ -200,7 +195,7 @@ def getGoldText(characterId:str) -> str:
     Keyword arguments:
     characterId -- 角色id
     '''
-    goldData = CacheContorl.characterData['character'][characterId]['Gold']
+    goldData = CacheContorl.characterData['character'][characterId].Gold
     goldData = str(goldData)
     moneyText = TextLoading.getTextData(TextLoading.stageWordPath,'66')
     goldText = TextLoading.getTextData(TextLoading.stageWordPath,'67')
@@ -221,7 +216,7 @@ def getStateText(characterId:str) -> str:
     Keyword arguments:
     characterId -- 角色Id
     '''
-    state = CacheContorl.characterData['character'][characterId]['State']
+    state = CacheContorl.characterData['character'][characterId].State
     stateText = TextLoading.getTextData(TextLoading.stageWordPath,'132')[state]
     return TextLoading.getTextData(TextLoading.stageWordPath,'133') + stateText
 
@@ -232,11 +227,11 @@ def judgeCharacterStature(characterId):
     characterId -- 角色Id
     '''
     characterData = CacheContorl.characterData['character'][characterId]
-    selfSex = CacheContorl.characterData['character']['0']['Sex']
-    targetSex = characterData['Sex']
+    selfSex = CacheContorl.characterData['character']['0'].Sex
+    targetSex = characterData.Sex
     ageJudge = 'Similar'
-    selfAge = CacheContorl.characterData['character']['0']['Age']
-    targetAge = characterData['Age']
+    selfAge = CacheContorl.characterData['character']['0'].Age
+    targetAge = characterData.Age
     ageDisparity = selfAge - targetAge
     if ageDisparity < -2 and ageDisparity >= -5:
         ageJudge = 'SlightlyHigh'
@@ -258,7 +253,7 @@ def judgeCharacterStature(characterId):
         ageJudge = 'SuperLow'
     elif ageDisparity > 60:
         ageJudge = 'ExtremelyLow'
-    bodyFat = characterData['BodyFat']
+    bodyFat = characterData.BodyFat
     ageTem = AttrCalculation.judgeAgeGroup(targetAge)
     averageBodyFat = CacheContorl.AverageBodyFatByage[ageTem][targetSex]
     bodyFatJudge = 'Similar'
@@ -283,7 +278,7 @@ def judgeCharacterStature(characterId):
     elif bodyFat < averageBodyFat * 0.55:
         bodyFatJudge = 'ExtremelyLow'
     averageHeight = CacheContorl.AverageHeightByage[ageTem][targetSex]
-    height = characterData['Height']['NowHeight']
+    height = characterData.Height['NowHeight']
     heightJudge = 'Similar'
     if height < averageHeight * 1.15 and height >= averageHeight * 1.05:
         heightJudge = 'SlilghtlyHeight'
@@ -305,7 +300,7 @@ def judgeCharacterStature(characterId):
         heightJudge = 'SuperLow'
     elif height < averageHeight:
         heightJudge = 'ExtremelyLow'
-    playerBodyFat = characterData['BodyFat']
+    playerBodyFat = characterData.BodyFat
     playerBodyFatJudge = 'Similar'
     if bodyFat < playerBodyFat * 1.15 and bodyFat >= playerBodyFat * 1.05:
         playerBodyFatJudge = 'SlilghtlyHeight'
@@ -327,7 +322,7 @@ def judgeCharacterStature(characterId):
         playerBodyFatJudge = 'SuperLow'
     elif bodyFat < playerBodyFat * 0.55:
         playerBodyFatJudge = 'ExtremelyLow'
-    playerHeight = CacheContorl.characterData['character']['0']['Height']['NowHeight']
+    playerHeight = CacheContorl.characterData['character']['0'].Height['NowHeight']
     playerHeightJudge = 'Similar'
     if height < playerHeight * 1.15 and height >= playerHeight * 1.05:
         playerHeightJudge = 'SlilghtlyHeight'
@@ -349,9 +344,9 @@ def judgeCharacterStature(characterId):
         playerHeightJudge = 'SuperLow'
     elif height < playerHeight * 0.55:
         playerHeightJudge = 'ExtremelyLow'
-    playerSex = CacheContorl.characterData['character']['0']['Sex']
-    playerAge = CacheContorl.characterData['character']['0']['Age']
-    playerAgeTem = AttrCalculation.judgeAgeGroup(CacheContorl.characterData['character']['0']['Age'])
+    playerSex = CacheContorl.characterData['character']['0'].Sex
+    playerAge = CacheContorl.characterData['character']['0'].Age
+    playerAgeTem = AttrCalculation.judgeAgeGroup(CacheContorl.characterData['character']['0'].Age)
     averageBodyFat = CacheContorl.AverageBodyFatByage[playerAgeTem][playerSex]
     averageHeight = CacheContorl.AverageHeightByage[playerAgeTem][playerSex]
     playerAverageBodyFatJudge = 'Similar'
@@ -401,7 +396,7 @@ def judgeCharacterStature(characterId):
         targetJudge = 'Self'
     return {
         "SelfSex":playerSex,
-        "TargetSex":characterData['Sex'],
+        "TargetSex":characterData.Sex,
         "AgeJudge":ageJudge,
         "AgeTem":ageTem,
         "SelfAgeTem":playerAgeTem,
@@ -455,22 +450,22 @@ def getCharacterAbbreviationsInfo(characterId:str) -> str:
     characterData = CacheContorl.characterData['character'][characterId]
     characterIdInfo = TextLoading.getTextData(TextLoading.stageWordPath, '0')
     characterIdText = characterIdInfo + characterId
-    characterName = characterData['Name']
-    characterSex = characterData['Sex']
+    characterName = characterData.Name
+    characterSex = characterData.Sex
     characterSexInfo = TextLoading.getTextData(TextLoading.stageWordPath, '2')
     characterSexTextData = TextLoading.getTextData(TextLoading.rolePath,'Sex')
     characterSexText = characterSexTextData[characterSex]
     characterSexText = characterSexInfo + characterSexText
-    characterAge = characterData['Age']
+    characterAge = characterData.Age
     characterAgeInfo = TextLoading.getTextData(TextLoading.stageWordPath, '3')
     characterAgeText = characterAgeInfo + str(characterAge)
     characterHpAndMpText = AttrPrint.getHpAndMpText(characterId)
-    characterIntimate = characterData['Intimate']
+    characterIntimate = characterData.Intimate
     characterIntimateInfo = TextLoading.getTextData(TextLoading.stageWordPath, '16')
-    characterIntimateText = characterIntimateInfo + characterIntimate
-    characterGraces = characterData['Graces']
+    characterIntimateText = characterIntimateInfo + str(characterIntimate)
+    characterGraces = characterData.Graces
     characterGracesInfo = TextLoading.getTextData(TextLoading.stageWordPath, '17')
-    characterGracesText = characterGracesInfo + characterGraces
+    characterGracesText = characterGracesInfo + str(characterGraces)
     abbreviationsInfo = characterIdText + ' ' + characterName + ' ' + characterSexText + ' ' + characterAgeText + ' ' + characterHpAndMpText + ' ' + characterIntimateText + ' ' + characterGracesText
     return abbreviationsInfo
 
@@ -482,7 +477,7 @@ def getCharacterDormitoryPathText(characterId:str) -> str:
     Return arguments:
     mapPathStr -- 宿舍路径描述文本
     '''
-    dormitory = CacheContorl.characterData['character'][characterId]['Dormitory']
+    dormitory = CacheContorl.characterData['character'][characterId].Dormitory
     dormitoryPath = MapHandle.getMapSystemPathForStr(dormitory)
     mapList = MapHandle.getMapHierarchyListForScenePath(dormitoryPath,[])
     mapPathText = TextLoading.getTextData(TextLoading.stageWordPath,'143')

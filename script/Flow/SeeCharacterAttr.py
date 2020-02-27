@@ -12,7 +12,6 @@ def acknowledgmentAttribute_func():
     '''
     while(True):
         characterId = CacheContorl.characterData['characterId']
-        AttrCalculation.setAttrOver(characterId)
         CharacterHandle.initCharacterList()
         inputS = []
         seeAttrInEveryTime_func()
@@ -42,7 +41,7 @@ def seeAttrOnEveryTime_func():
     while(True):
         characterId = CacheContorl.characterData['characterId']
         if CacheContorl.oldFlowId == 'in_scene':
-            nowScene = CacheContorl.characterData['character']['0']['Position']
+            nowScene = CacheContorl.characterData['character']['0'].Position
             nowSceneStr = MapHandle.getMapSystemPathStrForList(nowScene)
             characterIdList = MapHandle.getSceneCharacterIdList(nowSceneStr)
         else:
@@ -74,10 +73,10 @@ def seeAttrOnEveryTime_func():
                 nowPageId = characterIdIndex / characterListShow
                 CacheContorl.panelState['SeeCharacterListPanel'] = nowPageId
             elif CacheContorl.oldFlowId == 'in_scene':
-                scenePath = CacheContorl.characterData['character']['0']['Position']
+                scenePath = CacheContorl.characterData['character']['0'].Position
                 scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
                 nameList = MapHandle.getSceneCharacterNameList(scenePathStr,True)
-                nowCharacterName = CacheContorl.characterData['character'][CacheContorl.characterData['characterId']]['Name']
+                nowCharacterName = CacheContorl.characterData['character'][CacheContorl.characterData['characterId']].Name
                 try:
                     nowCharacterIndex = nameList.index(nowCharacterName)
                 except ValueError:

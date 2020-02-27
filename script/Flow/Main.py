@@ -1,5 +1,5 @@
 from script.Core import CacheContorl,GameInit,PyCmd
-from script.Design import AttrHandle,Clothing
+from script.Design import Clothing
 from script.Panel import MainFramePanel
 
 mainFrameGotoData = {
@@ -23,8 +23,8 @@ def mainFrame_func():
     flowReturn = MainFramePanel.mainFramePanel()
     inputS = inputS + flowReturn
     characterId = CacheContorl.characterData['characterId']
-    characterData = AttrHandle.getAttrData(characterId)
-    characterName = characterData['Name']
+    characterData = CacheContorl.characterData['character'][characterId]
+    characterName = characterData.Name
     ans = GameInit.askfor_All(inputS)
     PyCmd.clr_cmd()
     CacheContorl.oldFlowId = 'main'

@@ -29,7 +29,7 @@ def seeCharacter(characterId:str,judge:bool) -> list:
     list -- 按钮列表
     '''
     natureTextData = TextLoading.getGameData(TextLoading.naturePath)
-    characterNature = CacheContorl.characterData['character'][characterId]['Nature']
+    characterNature = CacheContorl.characterData['character'][characterId].Nature
     cmdList = []
     for nature in natureTextData:
         natureText = natureTextData[nature]['Name']

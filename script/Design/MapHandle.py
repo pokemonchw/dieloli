@@ -9,7 +9,7 @@ def printMap(mapPath:list) -> list:
     '''
     mapPathStr = getMapSystemPathStrForList(mapPath)
     mapDraw = getMapDrawForMapPath(mapPathStr)
-    characterPosition = CacheContorl.characterData['character']['0']['Position']
+    characterPosition = CacheContorl.characterData['character']['0'].Position
     characterNowSceneId = getSceneIdInMapForScenePathOnMapPath(characterPosition,mapPath)
     inputS = []
     mapYList = mapDraw['Draw']
@@ -122,7 +122,7 @@ def characterMoveScene(oldScenePath:list,newScenePath:list,characterId:str):
     if characterId in CacheContorl.sceneData[oldScenePathStr]['SceneCharacterData']:
         del CacheContorl.sceneData[oldScenePathStr]["SceneCharacterData"][characterId]
     if characterId not in CacheContorl.sceneData[newScenePathStr]['SceneCharacterData']:
-        CacheContorl.characterData['character'][characterId]['Position'] = newScenePath
+        CacheContorl.characterData['character'][characterId].Position = newScenePath
         CacheContorl.sceneData[newScenePathStr]["SceneCharacterData"][characterId] = 0
 
 def getMapSystemPathStrForList(nowList:list):
@@ -372,7 +372,7 @@ def getSceneCharacterNameList(scenePathStr:str,removeOwnCharacter = False) -> li
     if removeOwnCharacter:
         nowSceneCharacterList.remove('0')
     for characterId in nowSceneCharacterList:
-        characterName = CacheContorl.characterData['character'][str(characterId)]['Name']
+        characterName = CacheContorl.characterData['character'][str(characterId)].Name
         nameList.append(characterName)
     return nameList
 
@@ -404,7 +404,7 @@ def sortSceneCharacterId(scenePathStr:str):
     '''
     nowSceneCharacterIntimateData = {}
     for character in CacheContorl.sceneData[scenePathStr]['SceneCharacterData']:
-        nowSceneCharacterIntimateData[character] = CacheContorl.characterData['character'][character]['Intimate']
+        nowSceneCharacterIntimateData[character] = CacheContorl.characterData['character'][character].Intimate
     newSceneCharacterIntimateData = sorted(nowSceneCharacterIntimateData.items(),key=lambda x: (x[1],-int(x[0])),reverse=True)
     newSceneCharacterIntimateData = ValueHandle.twoBitArrayToDict(newSceneCharacterIntimateData)
     CacheContorl.sceneData[scenePathStr]['SceneCharacterData'] = newSceneCharacterIntimateData

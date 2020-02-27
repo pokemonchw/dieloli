@@ -36,7 +36,7 @@ def characterOccupationJudge(characterId:str):
     if 'Occupation' in characterTemData and characterTemData['Occupation'] in behaviorTemData:
         characterOccupation = characterTemData['Occupation']
     else:
-        characterAge = int(characterData['Age'])
+        characterAge = int(characterData.Age)
         if characterAge <= 18:
             characterOccupation = "Student"
         else:

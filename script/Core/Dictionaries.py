@@ -8,9 +8,9 @@ def handleText(string:str) -> str:
     '''
     characterId = CacheContorl.characterData['characterId']
     if characterId != '':
-        characterName = CacheContorl.characterData['character'][characterId]['Name']
-        characterNickName = CacheContorl.characterData['character'][characterId]['NickName']
-        characterSelfName = CacheContorl.characterData['character'][characterId]['SelfName']
+        characterName = CacheContorl.characterData['character'][characterId].Name
+        characterNickName = CacheContorl.characterData['character'][characterId].NickName
+        characterSelfName = CacheContorl.characterData['character'][characterId].SelfName
         return string.format(
             Name=characterName,
             NickName=characterNickName,

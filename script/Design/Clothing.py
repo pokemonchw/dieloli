@@ -55,35 +55,9 @@ def creatorClothing(clothingName:str) -> dict:
     clothingData.update(CacheContorl.clothingTypeData[clothingName])
     return clothingData
 
-def characterPutOnClothing(characterId:str):
-    '''
-    角色自动选择并穿戴服装
-    Keyword arguments:
-    characterId -- 角色id
-    putOnData -- 与主进程共享的dict
-    '''
-    collocationData = {}
-    characterClothingData = CacheContorl.characterData['character'][characterId]['Clothing']
-    clothingsNameData = getClothingNameData(characterClothingData)
-    clothingsPriceData = getClothingPriceData(characterClothingData)
-    for clothingType in clothingsNameData:
-        clothingTypeData = clothingsNameData[clothingType]
-        for clothingName in clothingTypeData:
-            clothingNameData = clothingTypeData[clothingName]
-            clothingId = list(clothingNameData.keys())[-1]
-            clothingData = characterClothingData[clothingType][clothingId]
-            nowCollocationData = getClothingCollocationData(clothingData,clothingType,clothingsNameData,clothingsPriceData,characterClothingData)
-            if nowCollocationData != 'None':
-                nowCollocationData[clothingType] = clothingId
-                nowCollocationData['Price'] += clothingsPriceData[clothingType][clothingId]
-                collocationData[clothingId] = nowCollocationData
-    collocationPriceData = {collocation:collocationData[collocation]['Price'] for collocation in collocationData}
-    collocationId = list(ValueHandle.sortedDictForValues(collocationPriceData).keys())[-1]
-    CacheContorl.characterData['character'][characterId]['PutOn'] = collocationData[collocationId]
-
 def getClothingNameData(clothingsData:dict) -> dict:
     '''
-    按服装的具体名称对服装进行分类
+    按服装的具体名称对服装进行分类，获取同类下各服装的价值数据
     Keyword arguments:
     clothingsData -- 要分类的所有服装数据
     '''
@@ -163,11 +137,7 @@ def getAppointNamesClothingTop(appointNameList:list,clothingTypeNameData:dict) -
     appointNameList -- 要获取的服装名字列表
     clothingTypeNameData -- 以名字为分类的已排序的要查询的服装数据
     '''
-    clothingData = {}
-    for appoint in appointNameList:
-        if appoint in clothingTypeNameData:
-            nowAppointClothing = list(clothingTypeNameData[appoint].keys())[-1]
-            clothingData[nowAppointClothing] = clothingTypeNameData[appoint][nowAppointClothing]
+    clothingData = {list(clothingTypeNameData[appoint].keys())[-1]:clothingTypeNameData[appoint][list(clothingTypeNameData[appoint].keys())[-1]] for appoint in appointNameList if appoint in clothingTypeNameData}
     if clothingData != {}:
         return list(ValueHandle.sortedDictForValues(clothingData).keys())[-1]
     return 'None'
@@ -251,9 +221,36 @@ def setClothintEvaluationText(clothingData:dict):
 
 def initCharcterClothintPutOn(playerPass=False):
     '''
-    为主角外所有角色穿戴衣服
+    为所有角色穿戴衣服
+    Keyword arguments:
+    playerPass -- 跳过主角校验 (default:False)
     '''
     for character in CacheContorl.characterData['character']:
         if playerPass and character == '0':
             continue
-        characterPutOnClothing(character)
+        putOn(character)
+
+def putOn(characterId:str):
+    '''
+    角色自动选择并穿戴服装
+    Keyword arguments:
+    characterId -- 角色服装数据
+    '''
+    characterClothingData = CacheContorl.characterData['character'][characterId].Clothing
+    collocationData = {}
+    clothingsNameData = getClothingNameData(characterClothingData)
+    clothingsPriceData = getClothingPriceData(characterClothingData)
+    for clothingType in clothingsNameData:
+        clothingTypeData = clothingsNameData[clothingType]
+        for clothingName in clothingTypeData:
+            clothingNameData = clothingTypeData[clothingName]
+            clothingId = list(clothingNameData.keys())[-1]
+            clothingData = characterClothingData[clothingType][clothingId]
+            nowCollocationData = getClothingCollocationData(clothingData,clothingType,clothingsNameData,clothingsPriceData,characterClothingData)
+            if nowCollocationData != 'None':
+                nowCollocationData[clothingType] = clothingId
+                nowCollocationData['Price'] += clothingsPriceData[clothingType][clothingId]
+                collocationData[clothingId] = nowCollocationData
+    collocationPriceData = {collocation:collocationData[collocation]['Price'] for collocation in collocationData}
+    collocationId = list(ValueHandle.sortedDictForValues(collocationPriceData).keys())[-1]
+    CacheContorl.characterData['character'][characterId].PutOn = collocationData[collocationId]

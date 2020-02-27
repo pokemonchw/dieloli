@@ -12,7 +12,7 @@ def seeCharacterItemPanel(characterId:str) -> list:
     if characterId != '0':
         EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath,'37'))
         return []
-    characterItemData = CacheContorl.characterData['character'][characterId]['Item']
+    characterItemData = CacheContorl.characterData['character'][characterId].Item
     if len(characterItemData) == 0:
         EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath,'36'))
         return []
@@ -50,6 +50,6 @@ def seeCharacterItemInfoPanel(characterId:str,itemId:str):
     EraPrint.plt(titleText)
     EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     EraPrint.pline('.')
-    itemData = CacheContorl.characterData['character'][characterId]['Item'][itemId]
+    itemData = CacheContorl.characterData['character'][characterId].Item[itemId]
     EraPrint.pl(TextLoading.getTextData(TextLoading.stageWordPath,128) + itemData['ItemName'])
     EraPrint.pl(TextLoading.getTextData(TextLoading.stageWordPath,'131') + itemData['ItemInfo'])

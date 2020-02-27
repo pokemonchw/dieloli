@@ -24,9 +24,9 @@ def seeCharacterWearItemPanel(characterId:str,changeButton:bool) -> list:
     changeButton -- 将角色穿戴道具列表绘制成按钮的开关
     '''
     wearItemInfoTextData = TextLoading.getTextData(TextLoading.stageWordPath,'49')
-    wearData = CacheContorl.characterData['character'][characterId]['WearItem']['Wear']
+    wearData = CacheContorl.characterData['character'][characterId].WearItem['Wear']
     wearItemTextData = {}
-    itemData = CacheContorl.characterData['character'][characterId]['WearItem']['Item']
+    itemData = CacheContorl.characterData['character'][characterId].WearItem['Item']
     wearItemButtonList = []
     inputS = []
     for wearType in wearData:
@@ -52,7 +52,7 @@ def seeCharacterWearItemListPanel(characterId:str,itemType:str,maxPage:int) -> l
     maxPage -- 道具列表最大页数
     '''
     EraPrint.pl()
-    characterWearItemData = CacheContorl.characterData['character'][characterId]['WearItem']['Item'][itemType]
+    characterWearItemData = CacheContorl.characterData['character'][characterId].WearItem['Item'][itemType]
     nowPageId = int(CacheContorl.panelState["SeeCharacterWearItemListPanel"])
     nowPageMax = GameConfig.see_character_wearitem_max
     nowPageStartId = nowPageId * nowPageMax

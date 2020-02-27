@@ -2,8 +2,9 @@ import random
 import math
 import uuid
 import time
+import itertools
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
-from script.Design import AttrCalculation,MapHandle,AttrText,Clothing,Nature
+from script.Design import AttrCalculation,MapHandle,AttrText,Clothing,Nature,Character
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
@@ -15,14 +16,16 @@ def initCharacterList():
     '''
     初始生成所有npc数据
     '''
-    initCharacterTem()
     t1 = time.time()
-    i = 1
-    for character in CacheContorl.npcTemData:
-        initCharacter((i,character))
-        i += 1
-    t2 = time.time()
-    print(t2-t1)
+    initCharacterTem()
+    idList = iter([str(i+1) for i in range(len(CacheContorl.npcTemData))])
+    npcDataIter = iter(CacheContorl.npcTemData)
+    while(1):
+        try:
+            initCharacter(next(idList),next(npcDataIter))
+        except StopIteration:
+            break
+    Clothing.initCharcterClothintPutOn()
     indexCharacterAverageValue()
     calculateTheAverageValueOfEachAttributeOfEachAgeGroup()
 
@@ -39,84 +42,39 @@ def indexCharacterAverageValue():
     '''
     for character in CacheContorl.characterData['character']:
         characterData = CacheContorl.characterData['character'][character]
-        ageTem = AttrCalculation.judgeAgeGroup(characterData['Age'])
+        ageTem = AttrCalculation.judgeAgeGroup(characterData.Age)
         CacheContorl.TotalHeightByage.setdefault(ageTem,{})
-        CacheContorl.TotalHeightByage[ageTem].setdefault(characterData['Sex'],0)
-        CacheContorl.TotalHeightByage[ageTem][characterData['Sex']] += characterData['Height']['NowHeight']
+        CacheContorl.TotalHeightByage[ageTem].setdefault(characterData.Sex,0)
+        CacheContorl.TotalHeightByage[ageTem][characterData.Sex] += characterData.Height['NowHeight']
         CacheContorl.TotalNumberOfPeopleOfAllAges.setdefault(ageTem,{})
-        CacheContorl.TotalNumberOfPeopleOfAllAges[ageTem].setdefault(characterData['Sex'],0)
-        CacheContorl.TotalNumberOfPeopleOfAllAges[ageTem][characterData['Sex']] += 1
+        CacheContorl.TotalNumberOfPeopleOfAllAges[ageTem].setdefault(characterData.Sex,0)
+        CacheContorl.TotalNumberOfPeopleOfAllAges[ageTem][characterData.Sex] += 1
         CacheContorl.TotalBodyFatByage.setdefault(ageTem,{})
-        CacheContorl.TotalBodyFatByage[ageTem].setdefault(characterData['Sex'],0)
-        CacheContorl.TotalBodyFatByage[ageTem][characterData['Sex']] += characterData['BodyFat']
+        CacheContorl.TotalBodyFatByage[ageTem].setdefault(characterData.Sex,0)
+        CacheContorl.TotalBodyFatByage[ageTem][characterData.Sex] += characterData.BodyFat
 
-def initCharacter(*args):
+def initCharacter(characterId:str,character:dict):
     '''
     按id生成角色属性
     Keyword arguments:
-    nowId -- 角色id
+    characterId -- 角色id
     character -- 角色生成模板数据
     '''
-    args = args[0]
-    characterId = str(args[0])
-    character = args[1]
-    CacheContorl.characterData['character'][characterId] = AttrCalculation.initTemporaryCharacter()
-    characterName = character['Name']
-    characterSex = character['Sex']
-    CacheContorl.characterData['character'][characterId]['Sex'] = characterSex
-    defaultAttr = AttrCalculation.getAttr(characterSex)
-    defaultAttr['Name'] = characterName
-    defaultAttr['Sex'] = characterSex
+    nowCharacter = Character.Character()
+    nowCharacter.Name = character['Name']
+    nowCharacter.Sex = character['Sex']
     if 'MotherTongue' in character:
-        defaultAttr['Language'][character['MotherTongue']] = 10000
-        defaultAttr['MotherTongue'] = character['MotherTongue']
-    else:
-        defaultAttr['Language']['Chinese'] = 10000
+        nowCharacter.MotherTongue = character['MotherTongue']
     if 'Age' in character:
-        ageTem = character['Age']
-        characterAge = AttrCalculation.getAge(ageTem)
-        defaultAttr['Age'] = characterAge
-        defaultAttr['Birthday'] = AttrCalculation.getRandNpcBirthDay(characterAge)
-    height = AttrCalculation.getHeight(characterSex, defaultAttr['Age'],{})
-    defaultAttr['Height'] = height
+        nowCharacter.Age = AttrCalculation.getAge(character['Age'])
     if 'Weight' in character:
-        weightTemName = character['Weight']
-    else:
-        weightTemName = 'Ordinary'
+        nowCharacter.WeigtTem = character['Weight']
     if 'BodyFat' in character:
-        bodyFatTem = character['BodyFat']
+        nowCharacter.BodyFatTem = character['BodyFat']
     else:
-        bodyFatTem = weightTemName
-    bmi = AttrCalculation.getBMI(weightTemName)
-    weight = AttrCalculation.getWeight(bmi, height['NowHeight'])
-    defaultAttr['Weight'] = weight
-    if defaultAttr['Age'] <= 18 and defaultAttr['Age'] >= 7:
-        classGrade = str(defaultAttr['Age'] - 6)
-        defaultAttr['Class'] = random.choice(CacheContorl.placeData["Classroom_" + classGrade])
-    bodyFat = AttrCalculation.getBodyFat(characterSex,bodyFatTem)
-    defaultAttr['BodyFat'] = bodyFat
-    measurements = AttrCalculation.getMeasurements(characterSex, height['NowHeight'], weight,bodyFat,bodyFatTem)
-    defaultAttr['Measirements'] = measurements
-    defaultAttr['Knowledge'] = {}
-    if "SexExperience" in character:
-        sexExperienceTem = character['SexExperience']
-    else:
-        sexExperienceTem = getRandNpcSexExperienceTem(defaultAttr['Age'],defaultAttr['Sex'])
-    defaultAttr['SexExperience'] = AttrCalculation.getSexExperience(sexExperienceTem)
-    defaultAttr['SexGrade'] = AttrCalculation.getSexGrade(defaultAttr['SexExperience'])
-    if 'Clothing' in character:
-        clothingTem = character['Clothing']
-    else:
-        clothingTem = 'Uniform'
-    defaultClothingData = Clothing.creatorSuit(clothingTem,characterSex)
-    for clothing in defaultClothingData:
-        defaultAttr['Clothing'][clothing][uuid.uuid1()] = defaultClothingData[clothing]
-    if 'Chest' in character:
-        chest = AttrCalculation.getChest(chestTem,defaultAttr['Birthday'])
-        defaultAttr['Chest'] = chest
-    CacheContorl.characterData['character'][characterId].update(defaultAttr)
-    Clothing.characterPutOnClothing(characterId)
-    Nature.initCharacterNature(characterId)
+        nowCharacter.BodyFatTem = nowCharacter.WeigtTem
+    nowCharacter.initAttr()
+    CacheContorl.characterData['character'][characterId] = nowCharacter
 
 def initCharacterTem():
     '''
@@ -142,32 +100,37 @@ ageWeightData = {
 }
 ageWeightReginData = ValueHandle.getReginList(ageWeightData)
 ageWeightReginList = list(map(int,ageWeightReginData.keys()))
+ageWeightMax = sum([int(ageWeightData[ageWeight]) for ageWeight in ageWeightData])
 def getRandomNpcData() -> list:
     '''
     生成所有随机npc的数据模板
     '''
     if CacheContorl.randomNpcList == []:
-        ageWeightMax = sum([int(ageWeightData[ageWeight]) for ageWeight in ageWeightData])
-        for i in range(0,randomNpcMax):
-            nowAgeWeight = random.randint(-1,ageWeightMax - 1)
-            nowAgeWeightRegin = ValueHandle.getNextValueForList(nowAgeWeight,ageWeightReginList)
-            ageWeightTem = ageWeightReginData[nowAgeWeightRegin]
-            randomNpcSex = getRandNpcSex()
-            randomNpcName = AttrText.getRandomNameForSex(randomNpcSex)
-            randomNpcAgeTem = getRandNpcAgeTem(ageWeightTem)
-            fatTem = getRandNpcFatTem(ageWeightTem)
-            bodyFatTem = getRandNpcBodyFatTem(ageWeightTem,fatTem)
-            randomNpcNewData = {
-                "Name":randomNpcName,
-                "Sex":randomNpcSex,
-                "Age":randomNpcAgeTem,
-                "Position":["0"],
-                "AdvNpc":"1",
-                "Weight":fatTem,
-                "BodyFat":bodyFatTem
-            }
-            CacheContorl.randomNpcList.append(randomNpcNewData)
+        list(map(createRandomNpc,range(randomNpcMax)))
         return CacheContorl.randomNpcList
+
+def createRandomNpc(id) -> dict:
+    '''
+    生成随机npc数据模板
+    '''
+    nowAgeWeight = random.randint(-1,ageWeightMax - 1)
+    nowAgeWeightRegin = ValueHandle.getNextValueForList(nowAgeWeight,ageWeightReginList)
+    ageWeightTem = ageWeightReginData[nowAgeWeightRegin]
+    randomNpcSex = getRandNpcSex()
+    randomNpcName = AttrText.getRandomNameForSex(randomNpcSex)
+    randomNpcAgeTem = getRandNpcAgeTem(ageWeightTem)
+    fatTem = getRandNpcFatTem(ageWeightTem)
+    bodyFatTem = getRandNpcBodyFatTem(ageWeightTem,fatTem)
+    randomNpcNewData = {
+        "Name":randomNpcName,
+        "Sex":randomNpcSex,
+        "Age":randomNpcAgeTem,
+        "Position":["0"],
+        "AdvNpc":"1",
+        "Weight":fatTem,
+        "BodyFat":bodyFatTem
+    }
+    CacheContorl.randomNpcList.append(randomNpcNewData)
 
 sexWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'RandomNpcSexWeight')
 sexWeightMax = sum([int(sexWeightData[weight]) for weight in sexWeightData])
@@ -236,16 +199,13 @@ def getCharacterIndexMax() -> int:
     '''
     获取角色数量
     '''
-    characterData = CacheContorl.characterData['character']
-    characterDataMax = len(characterData.keys()) - 1
-    return characterDataMax
+    return len(CacheContorl.characterData['character']) - 1
 
 def getCharacterIdList() -> list:
     '''
     获取角色id列表
     '''
-    characterData = CacheContorl.characterData['character']
-    return list(characterData.keys())
+    return list(CacheContorl.characterData['character'].keys())
 
 def initCharacterDormitory():
     '''
@@ -254,20 +214,11 @@ def initCharacterDormitory():
     '''
     characterData = {}
     characterSexData = {
-        "Man":{},
-        "Woman":{},
-        "Other":{},
-        "Teacher":{}
+        "Man":{character:CacheContorl.characterData['character'][character].Age for character in CacheContorl.characterData['character'] if CacheContorl.characterData['character'][character].Age < 18 and CacheContorl.characterData['character'][character].Sex == 'Man'},
+        "Woman":{character:CacheContorl.characterData['character'][character].Age for character in CacheContorl.characterData['character'] if CacheContorl.characterData['character'][character].Age < 18 and CacheContorl.characterData['character'][character].Sex == 'Woan'},
+        "Other":{character:CacheContorl.characterData['character'][character].Age for character in CacheContorl.characterData['character'] if CacheContorl.characterData['character'][character].Age < 18 and CacheContorl.characterData['character'][character].Sex not in {"Man":0,"Woman":1}},
+        "Teacher":{character:CacheContorl.characterData['character'][character].Age for character in CacheContorl.characterData['character'] if CacheContorl.characterData['character'][character].Age >= 18}
     }
-    for character in CacheContorl.characterData['character']:
-        if CacheContorl.characterData['character'][character]['Age'] < 18:
-            if CacheContorl.characterData['character'][character]['Sex'] in ['Man','Woman']:
-                nowSex = CacheContorl.characterData['character'][character]['Sex']
-                characterSexData[nowSex][character] = CacheContorl.characterData['character'][character]['Age']
-            else:
-                characterSexData['Other'][character] = CacheContorl.characterData['character'][character]['Age']
-        else:
-            characterSexData['Teacher'][character] = CacheContorl.characterData['character'][character]['Age']
     manMax = len(characterSexData['Man'])
     womanMax = len(characterSexData['Woman'])
     otherMax = len(characterSexData['Other'])
@@ -297,25 +248,25 @@ def initCharacterDormitory():
     singleRoomTeacher = math.ceil(teacherMax / teacherDormitoryMax)
     for character in characterSexData['Man']:
         nowRoom = list(maleDormitory.keys())[0]
-        CacheContorl.characterData['character'][character]['Dormitory'] = nowRoom
+        CacheContorl.characterData['character'][character].Dormitory = nowRoom
         maleDormitory[nowRoom] += 1
         if maleDormitory[nowRoom] >= singleRoomMan:
             del maleDormitory[nowRoom]
     for character in characterSexData['Woman']:
         nowRoom = list(femaleDormitory.keys())[0]
-        CacheContorl.characterData['character'][character]['Dormitory'] = nowRoom
+        CacheContorl.characterData['character'][character].Dormitory = nowRoom
         femaleDormitory[nowRoom] += 1
         if femaleDormitory[nowRoom] >= singleRoomWoman:
             del femaleDormitory[nowRoom]
     for character in characterSexData['Other']:
         nowRoom = list(basement.keys())[0]
-        CacheContorl.characterData['character'][character]['Dormitory'] = nowRoom
+        CacheContorl.characterData['character'][character].Dormitory = nowRoom
         basement[nowRoom] += 1
         if basement[nowRoom] >= singleRoomBasement:
             del basement[nowRoom]
     for character in characterSexData['Teacher']:
         nowRoom = list(teacherDormitory.keys())[0]
-        CacheContorl.characterData['character'][character]['Dormitory'] = nowRoom
+        CacheContorl.characterData['character'][character].Dormitory = nowRoom
         teacherDormitory[nowRoom] += 1
         if teacherDormitory[nowRoom] >= singleRoomTeacher:
             del teacherDormitory[nowRoom]
@@ -325,7 +276,7 @@ def initCharacterPosition():
     初始化角色位置
     '''
     for character in CacheContorl.characterData['character']:
-        characterPosition = CacheContorl.characterData['character'][character]['Position']
-        characterDormitory = CacheContorl.characterData['character'][character]['Dormitory']
+        characterPosition = CacheContorl.characterData['character'][character].Position
+        characterDormitory = CacheContorl.characterData['character'][character].Dormitory
         characterDormitory = MapHandle.getMapSystemPathForStr(characterDormitory)
         MapHandle.characterMoveScene(characterPosition,characterDormitory,character)

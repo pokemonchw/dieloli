@@ -12,7 +12,7 @@ def ownCharcterMove(targetScene:list):
     if moveNow == 'Null':
         nullMessage = TextLoading.getTextData(TextLoading.messagePath,'30')
         EraPrint.p(nullMessage)
-    elif CacheContorl.characterData['character']['0']['Position'] != targetScene:
+    elif CacheContorl.characterData['character']['0'].Position != targetScene:
         ownCharcterMove(targetScene)
     Update.gameUpdateFlow()
     CacheContorl.characterData['characterId'] = '0'
@@ -25,7 +25,7 @@ def characterMove(characterId:str,targetScene:list) -> 'MoveEnd:str_Null,str_End
     characterId -- 角色id
     targetScene -- 寻路目标场景(在地图系统下的绝对坐标)
     '''
-    nowPosition = CacheContorl.characterData['character'][characterId]['Position']
+    nowPosition = CacheContorl.characterData['character'][characterId].Position
     sceneHierarchy = MapHandle.judgeSceneAffiliation(nowPosition,targetScene)
     if sceneHierarchy == 'common':
         mapPath = MapHandle.getCommonMapForScenePath(nowPosition,targetScene)
@@ -43,7 +43,7 @@ def differenceMapMove(characterId:str,targetScene:list) -> 'MoveEnd:str_Null,str
     characterId -- 角色id
     targetScene -- 寻路目标场景(在地图系统下的绝对坐标)
     '''
-    nowPosition = CacheContorl.characterData['character'][characterId]['Position']
+    nowPosition = CacheContorl.characterData['character'][characterId].Position
     isAffiliation = MapHandle.judgeSceneIsAffiliation(nowPosition,targetScene)
     nowTruePosition = MapHandle.getScenePathForTrue(nowPosition)
     mapDoorData = MapHandle.getMapDoorDataForScenePath(MapHandle.getMapSystemPathStrForList(nowTruePosition))

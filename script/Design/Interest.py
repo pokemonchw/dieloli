@@ -1,5 +1,6 @@
 from script.Core import CacheContorl,TextLoading
 import random
+import numpy
 
 def initCharacterInterest():
     '''
@@ -16,12 +17,12 @@ def initCharacterInterest():
     for character in CacheContorl.characterData['character']:
         nowInterestValueMax = 100
         nowInterestList = interestList.copy()
-        #numpy.random.shuffle(nowInterestList)
+        numpy.random.shuffle(nowInterestList)
         for interest in nowInterestList:
             if interest != nowInterestList[-1]:
                 nowInterestAverage = nowInterestValueMax / len(nowInterestList)
                 nowInterValue = nowInterestAverage * random.uniform(0.75,1.25)
                 nowInterestValueMax -= nowInterValue
-                CacheContorl.characterData['character'][character]['Interest'][interest] = nowInterValue / interestAverage
+                CacheContorl.characterData['character'][character].Interest[interest] = nowInterValue / interestAverage
             else:
-                CacheContorl.characterData['character'][character]['Interest'][interest] = nowInterestValueMax
+                CacheContorl.characterData['character'][character].Interest[interest] = nowInterestValueMax
