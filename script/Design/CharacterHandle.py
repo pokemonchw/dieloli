@@ -215,7 +215,7 @@ def initCharacterDormitory():
     characterData = {}
     characterSexData = {
         "Man":{character:CacheContorl.characterData['character'][character].Age for character in CacheContorl.characterData['character'] if CacheContorl.characterData['character'][character].Age < 18 and CacheContorl.characterData['character'][character].Sex == 'Man'},
-        "Woman":{character:CacheContorl.characterData['character'][character].Age for character in CacheContorl.characterData['character'] if CacheContorl.characterData['character'][character].Age < 18 and CacheContorl.characterData['character'][character].Sex == 'Woan'},
+        "Woman":{character:CacheContorl.characterData['character'][character].Age for character in CacheContorl.characterData['character'] if CacheContorl.characterData['character'][character].Age < 18 and CacheContorl.characterData['character'][character].Sex == 'Woman'},
         "Other":{character:CacheContorl.characterData['character'][character].Age for character in CacheContorl.characterData['character'] if CacheContorl.characterData['character'][character].Age < 18 and CacheContorl.characterData['character'][character].Sex not in {"Man":0,"Woman":1}},
         "Teacher":{character:CacheContorl.characterData['character'][character].Age for character in CacheContorl.characterData['character'] if CacheContorl.characterData['character'][character].Age >= 18}
     }
@@ -228,13 +228,8 @@ def initCharacterDormitory():
     characterSexData['Other'] = [k[0] for k in sorted(characterSexData['Other'].items(),key=lambda x:x[1])]
     characterSexData['Teacher'] = [k[0] for k in sorted(characterSexData['Teacher'].items(),key=lambda x:x[1])]
     teacherDormitory = {x:0 for x in sorted(CacheContorl.placeData['TeacherDormitory'],key=lambda x:x[0])}
-    maleDormitory = {}
-    femaleDormitory = {}
-    for key in CacheContorl.placeData:
-        if 'FemaleDormitory' in key:
-            femaleDormitory[key] = CacheContorl.placeData[key]
-        elif 'MaleDormitory' in key:
-            maleDormitory[key] = CacheContorl.placeData[key]
+    maleDormitory = {key:CacheContorl.placeData[key] for key in CacheContorl.placeData if 'MaleDormitory' in key}
+    femaleDormitory = {key:CacheContorl.placeData[key] for key in CacheContorl.placeData if 'FemaleDormitory' in key}
     maleDormitory = {x:0 for j in [k[1] for k in sorted(maleDormitory.items(),key=lambda x:x[0])] for x in j}
     femaleDormitory = {x:0 for j in [k[1] for k in sorted(femaleDormitory.items(),key=lambda x:x[0])] for x in j}
     basement = {x:0 for x in CacheContorl.placeData['Basement']}
@@ -246,6 +241,7 @@ def initCharacterDormitory():
     singleRoomWoman = math.ceil(womanMax / femaleDormitoryMax)
     singleRoomBasement = math.ceil(otherMax / basementMax)
     singleRoomTeacher = math.ceil(teacherMax / teacherDormitoryMax)
+    manList = characterSexData['Man'].copy()
     for character in characterSexData['Man']:
         nowRoom = list(maleDormitory.keys())[0]
         CacheContorl.characterData['character'][character].Dormitory = nowRoom
