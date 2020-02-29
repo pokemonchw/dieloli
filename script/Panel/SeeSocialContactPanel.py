@@ -1,7 +1,7 @@
 from script.Core import CacheContorl,TextLoading,EraPrint
 from script.Design import AttrText
 
-def seeCharacterSocialContactPanel(characterId:str):
+def seeCharacterSocialContactPanel(characterId:int):
     '''
     查看角色社交信息面板
     Keyword arguments:

@@ -20,7 +20,7 @@ def seeMapFlow():
         inputS = inputS + seeMapCmd + movePathCmd + [showSceneNameListCmd]
         yrn = FlowHandle.askfor_All(inputS)
         backButton = str(startId1)
-        nowPosition = CacheContorl.characterData['character']['0'].Position
+        nowPosition = CacheContorl.characterData['character'][0].Position
         nowPositionMap = MapHandle.getMapForPath(nowPosition)
         upMapButton = 'Null'
         downMapButton = 'Null'
@@ -50,7 +50,7 @@ def seeMapFlow():
             upMapPath = MapHandle.getMapForPath(nowMap)
             CacheContorl.nowMap = upMapPath
         elif downMapButton != 'Null' and yrn == downMapButton:
-            characterPosition = CacheContorl.characterData['character']['0'].Position
+            characterPosition = CacheContorl.characterData['character'][0].Position
             downMapSceneId = MapHandle.getMapSceneIdForScenePath(CacheContorl.nowMap,characterPosition)
             nowMap.append(downMapSceneId)
             CacheContorl.nowMap = nowMap

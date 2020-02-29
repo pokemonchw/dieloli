@@ -1,7 +1,7 @@
 from script.Core import CacheContorl,TextLoading,EraPrint
 from script.Design import AttrText
 
-def seeCharacterSexExperiencePanel(characterId:str):
+def seeCharacterSexExperiencePanel(characterId:int):
     '''
     查看角色性经验面板
     Keyword arguments:

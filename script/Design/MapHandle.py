@@ -9,7 +9,7 @@ def printMap(mapPath:list) -> list:
     '''
     mapPathStr = getMapSystemPathStrForList(mapPath)
     mapDraw = getMapDrawForMapPath(mapPathStr)
-    characterPosition = CacheContorl.characterData['character']['0'].Position
+    characterPosition = CacheContorl.characterData['character'][0].Position
     characterNowSceneId = getSceneIdInMapForScenePathOnMapPath(characterPosition,mapPath)
     inputS = []
     mapYList = mapDraw['Draw']
@@ -109,7 +109,7 @@ def getSceneNameListForMapPath(mapPathStr:str):
         sceneNameData[scene] = sceneName
     return sceneNameData
 
-def characterMoveScene(oldScenePath:list,newScenePath:list,characterId:str):
+def characterMoveScene(oldScenePath:list,newScenePath:list,characterId:int):
     '''
     将角色移动至新场景
     Keyword arguments:
@@ -370,9 +370,9 @@ def getSceneCharacterNameList(scenePathStr:str,removeOwnCharacter = False) -> li
     nowSceneCharacterList = list(sceneCharacterData.keys())
     nameList = []
     if removeOwnCharacter:
-        nowSceneCharacterList.remove('0')
+        nowSceneCharacterList.remove(0)
     for characterId in nowSceneCharacterList:
-        characterName = CacheContorl.characterData['character'][str(characterId)].Name
+        characterName = CacheContorl.characterData['character'][characterId].Name
         nameList.append(characterName)
     return nameList
 

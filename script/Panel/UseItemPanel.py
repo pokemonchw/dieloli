@@ -1,7 +1,7 @@
 from script.Core import TextLoading,CacheContorl,PyCmd,EraPrint
 from script.Design import AttrText,CmdButtonQueue
 
-def seeCharacterItemPanel(characterId:str) -> list:
+def seeCharacterItemPanel(characterId:int) -> list:
     '''
     查看角色背包道具列表面板
     Keyword arguments:

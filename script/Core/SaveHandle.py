@@ -50,7 +50,7 @@ def establishSave(saveId:str):
     saveVerson = {
         "gameVerson":gameVerson,
         "gameTime":gameTime,
-        "characterName":characterData['character']['0'].Name
+        "characterName":characterData['character'][0].Name
     }
     data = {"1":characterData,"2":gameTime,"0":saveVerson,"3":scaneData,"4":mapData,"5":npcTemData,"6":randomNpcList,"7":occupationCharacterData,"8":totalBodyFatByage,"9":averageBodyFatbyage,"10":totalNumberOfPeopleOfAllAges,"11":totalHeightByage,"12":averageHeightByage}
     for dataId in data:
@@ -105,7 +105,7 @@ def inputLoadSave(saveId:str):
     '''
     saveData = loadSave(saveId)
     CacheContorl.characterData = saveData['1']
-    CacheContorl.characterData['characterId'] = '0'
+    CacheContorl.characterData['characterId'] = 0
     CacheContorl.gameTime = saveData['2']
     CacheContorl.sceneData = saveData['3']
     CacheContorl.mapData = saveData['4']

@@ -41,7 +41,7 @@ def seeAttrOnEveryTime_func():
     while(True):
         characterId = CacheContorl.characterData['characterId']
         if CacheContorl.oldFlowId == 'in_scene':
-            nowScene = CacheContorl.characterData['character']['0'].Position
+            nowScene = CacheContorl.characterData['character'][0].Position
             nowSceneStr = MapHandle.getMapSystemPathStrForList(nowScene)
             characterIdList = MapHandle.getSceneCharacterIdList(nowSceneStr)
         else:
@@ -67,13 +67,13 @@ def seeAttrOnEveryTime_func():
                 CacheContorl.characterData['characterId'] = characterId
         elif yrn == '1':
             if CacheContorl.oldFlowId == 'main':
-                CacheContorl.characterData['characterId'] = '0'
+                CacheContorl.characterData['characterId'] = 0
             elif CacheContorl.oldFlowId == 'see_character_list':
                 characterListShow = int(GameConfig.characterlist_show)
                 nowPageId = characterIdIndex / characterListShow
                 CacheContorl.panelState['SeeCharacterListPanel'] = nowPageId
             elif CacheContorl.oldFlowId == 'in_scene':
-                scenePath = CacheContorl.characterData['character']['0'].Position
+                scenePath = CacheContorl.characterData['character'][0].Position
                 scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
                 nameList = MapHandle.getSceneCharacterNameList(scenePathStr,True)
                 nowCharacterName = CacheContorl.characterData['character'][CacheContorl.characterData['characterId']].Name

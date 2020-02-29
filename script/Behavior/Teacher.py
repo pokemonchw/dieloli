@@ -4,7 +4,7 @@ from script.Behavior import Default
 
 # 职业行为总控制
 def behaviorInit(characterId):
-    characterState = CacheContorl.characterData['character'][characterId]['State']
+    characterState = CacheContorl.characterData['character'][characterId].State
     if characterState in behaviorList:
         eval(characterState + 'Behavior')(characterId)
     else:

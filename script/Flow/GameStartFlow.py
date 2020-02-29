@@ -14,6 +14,6 @@ def initGameStart():
     Course.initCharacterKnowledge()
     Course.initClassTeacher()
     Course.initClassTimeTable()
-    characterPosition = CacheContorl.characterData['character']['0'].Position
-    MapHandle.characterMoveScene(['0'],characterPosition,'0')
+    characterPosition = CacheContorl.characterData['character'][0].Position
+    MapHandle.characterMoveScene(['0'],characterPosition,0)
     CacheContorl.nowFlowId = 'main'

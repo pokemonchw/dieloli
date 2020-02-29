@@ -19,7 +19,7 @@ def pcmd(cmd_str, cmd_id, cmd_func=FlowHandle.null_func, arg=(), kw={}, normal_s
     on_style -- 鼠标在其上的时候命令显示样式
     '''
     cmd_str = Dictionaries.handleText(cmd_str)
-    cmd_id = Dictionaries.handleText(str(cmd_id))
+    cmd_id = Dictionaries.handleText(f'{cmd_id}')
     CacheContorl.textWait = float(GameConfig.text_wait)
     global last_char
     if len(cmd_str) > 0:

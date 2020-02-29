@@ -11,8 +11,8 @@ def inputName_func():
     输入2:返回标题菜单
     '''
     GameTime.initTime()
-    CacheContorl.characterData['characterId'] = '0'
-    CacheContorl.characterData['character']['0'] = Character.Character()
+    CacheContorl.characterData['characterId'] = 0
+    CacheContorl.characterData['character'][0] = Character.Character()
     flowReturn = CreatorCharacterPanel.inputNamePanel()
     if flowReturn == 0:
         PyCmd.clr_cmd()
@@ -45,7 +45,7 @@ def inputNickName_func():
         inputNickName_func()
     elif flowReturn == 2:
         PyCmd.clr_cmd()
-        CacheContorl.characterData['character']['0'].NickName = CacheContorl.characterData['character']['0'].Name
+        CacheContorl.characterData['character'][0].NickName = CacheContorl.characterData['character'][0].Name
         inputNickName_func()
     elif flowReturn == 3:
         PyCmd.clr_cmd()
@@ -80,7 +80,7 @@ def inputSexConfirm_func():
     输入2:返回请求输入自称流程
     '''
     flowReturn = CreatorCharacterPanel.inputSexPanel()
-    sexId = CacheContorl.characterData['character']['0'].Sex
+    sexId = CacheContorl.characterData['character'][0].Sex
     if flowReturn == 0:
         PyCmd.clr_cmd()
         attributeGenerationBranch_func()
@@ -103,13 +103,13 @@ def inputSexChoice_func():
     flowReturn = CreatorCharacterPanel.inputSexChoicePanel()
     if flowReturn in range(0,sexMax):
         sexAtr = sex[flowReturn]
-        CacheContorl.characterData['character']['0'].Sex = sexAtr
+        CacheContorl.characterData['character'][0].Sex = sexAtr
         PyCmd.clr_cmd()
         inputSexConfirm_func()
     elif flowReturn == 4:
         rand = random.randint(0, len(sex) - 1)
         sexAtr = sex[rand]
-        CacheContorl.characterData.characterData['character']['0'].Sex = sexAtr
+        CacheContorl.characterData.characterData['character'][0].Sex = sexAtr
         PyCmd.clr_cmd()
         inputSexConfirm_func()
     elif flowReturn == 5:
@@ -130,7 +130,7 @@ def attributeGenerationBranch_func():
         detailedSetting_func1()
     elif flowReturn == 1:
         PyCmd.clr_cmd()
-        CacheContorl.characterData['character']['0'].initAttr()
+        CacheContorl.characterData['character'][0].initAttr()
         CacheContorl.nowFlowId = 'acknowledgment_attribute'
     elif flowReturn == 2:
         PyCmd.clr_cmd()
@@ -141,10 +141,10 @@ def detailedSetting_func1():
     询问玩家年龄模板流程
     '''
     flowRetun = CreatorCharacterPanel.detailedSetting1Panel()
-    characterSex = CacheContorl.characterData['character']['0'].Sex
+    characterSex = CacheContorl.characterData['character'][0].Sex
     sexList = list(TextLoading.getTextData(TextLoading.rolePath, 'Sex'))
     characterAgeTemName = AttrCalculation.getAgeTemList()[flowRetun]
-    CacheContorl.characterData['character']['0'].Age = AttrCalculation.getAge(characterAgeTemName)
+    CacheContorl.characterData['character'][0].Age = AttrCalculation.getAge(characterAgeTemName)
     PyCmd.clr_cmd()
     detailedSetting_func3()
 
@@ -157,7 +157,7 @@ def detailedSetting_func3():
     sexTemDataList.reverse()
     sexTemName = sexTemDataList[flowReturn]
     characterSexExperienceData = AttrCalculation.getSexExperience(sexTemName)
-    CacheContorl.characterData['character']['0'].SexExperienceTem = sexTemName
+    CacheContorl.characterData['character'][0].SexExperienceTem = sexTemName
     PyCmd.clr_cmd()
     detailedSetting_func8()
 
@@ -169,29 +169,29 @@ def detailedSetting_func8():
     weightTemData = TextLoading.getTextData(TextLoading.attrTemplatePath,'WeightTem')
     weightTemList = list(weightTemData.keys())
     weightTem = weightTemList[int(flowReturn)]
-    CacheContorl.characterData['character']['0'].WeigtTem = weightTem
-    CacheContorl.characterData['character']['0'].BodyFatTem = weightTem
+    CacheContorl.characterData['character'][0].WeigtTem = weightTem
+    CacheContorl.characterData['character'][0].BodyFatTem = weightTem
     enterCharacterNature_func()
 
 def enterCharacterNature_func():
     '''
     请求玩家确认性格流程
     '''
-    CacheContorl.characterData['character']['0'].initAttr()
+    CacheContorl.characterData['character'][0].initAttr()
     while 1:
         PyCmd.clr_cmd()
         CreatorCharacterPanel.enterCharacterNatureHead()
-        inputS = SeeNaturePanel.seeCharacterNatureChangePanel('0')
+        inputS = SeeNaturePanel.seeCharacterNatureChangePanel(0)
         inputS += CreatorCharacterPanel.enterCharacterNatureEnd()
         yrn = GameInit.askfor_All(inputS)
-        if yrn in CacheContorl.characterData['character']['0'].Nature:
-            if CacheContorl.characterData['character']['0'].Nature[yrn] < 50:
-                CacheContorl.characterData['character']['0'].Nature[yrn] = random.uniform(50,100)
+        if yrn in CacheContorl.characterData['character'][0].Nature:
+            if CacheContorl.characterData['character'][0].Nature[yrn] < 50:
+                CacheContorl.characterData['character'][0].Nature[yrn] = random.uniform(50,100)
             else:
-                CacheContorl.characterData['character']['0'].Nature[yrn] = random.uniform(0,50)
+                CacheContorl.characterData['character'][0].Nature[yrn] = random.uniform(0,50)
         elif int(yrn) == 0:
-            CacheContorl.characterData['character']['0'].initAttr()
+            CacheContorl.characterData['character'][0].initAttr()
             CacheContorl.nowFlowId = 'acknowledgment_attribute'
             break
         elif int(yrn) == 1:
-            Nature.initCharacterNature('0')
+            Nature.initCharacterNature(0)

@@ -56,7 +56,6 @@ def removeRichCache(string:str) -> str:
     Keyword arguments:
     string -- 原始文本
     '''
-    string = str(string)
     string = Dictionaries.handleText(string)
     barlist = list(TextLoading.getGameData(TextLoading.barConfigPath).keys())
     styleNameList = GameConfig.getFontDataList() + barlist

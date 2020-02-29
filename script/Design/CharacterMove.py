@@ -8,14 +8,14 @@ def ownCharcterMove(targetScene:list):
     Keyword arguments:
     targetScene -- 寻路目标场景(在地图系统下的绝对坐标)
     '''
-    moveNow = characterMove('0',targetScene)
+    moveNow = characterMove(0,targetScene)
     if moveNow == 'Null':
         nullMessage = TextLoading.getTextData(TextLoading.messagePath,'30')
         EraPrint.p(nullMessage)
-    elif CacheContorl.characterData['character']['0'].Position != targetScene:
+    elif CacheContorl.characterData['character'][0].Position != targetScene:
         ownCharcterMove(targetScene)
     Update.gameUpdateFlow()
-    CacheContorl.characterData['characterId'] = '0'
+    CacheContorl.characterData['characterId'] = 0
     CacheContorl.nowFlowId = 'in_scene'
 
 def characterMove(characterId:str,targetScene:list) -> 'MoveEnd:str_Null,str_End,list':

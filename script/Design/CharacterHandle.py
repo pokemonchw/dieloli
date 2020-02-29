@@ -3,6 +3,7 @@ import math
 import uuid
 import time
 import itertools
+import numpy
 from script.Core import CacheContorl,ValueHandle,GameData,TextLoading,GamePathConfig,GameConfig
 from script.Design import AttrCalculation,MapHandle,AttrText,Clothing,Nature,Character
 
@@ -16,16 +17,14 @@ def initCharacterList():
     '''
     初始生成所有npc数据
     '''
-    t1 = time.time()
     initCharacterTem()
-    idList = iter([str(i+1) for i in range(len(CacheContorl.npcTemData))])
+    idList = iter([i+1 for i in range(len(CacheContorl.npcTemData))])
     npcDataIter = iter(CacheContorl.npcTemData)
     while(1):
         try:
             initCharacter(next(idList),next(npcDataIter))
         except StopIteration:
             break
-    Clothing.initCharcterClothintPutOn()
     indexCharacterAverageValue()
     calculateTheAverageValueOfEachAttributeOfEachAgeGroup()
 
@@ -53,7 +52,7 @@ def indexCharacterAverageValue():
         CacheContorl.TotalBodyFatByage[ageTem].setdefault(characterData.Sex,0)
         CacheContorl.TotalBodyFatByage[ageTem][characterData.Sex] += characterData.BodyFat
 
-def initCharacter(characterId:str,character:dict):
+def initCharacter(characterId:int,character:dict):
     '''
     按id生成角色属性
     Keyword arguments:
@@ -83,9 +82,10 @@ def initCharacterTem():
     npcData = getRandomNpcData()
     nowCharacterList = characterList.copy()
     npcData += [getDirCharacterTem(character) for character in nowCharacterList]
+    numpy.random.shuffle(npcData)
     CacheContorl.npcTemData = npcData
 
-def getDirCharacterTem(character:str) -> dict:
+def getDirCharacterTem(character:int) -> dict:
     '''
     获取预设角色模板数据
     '''
@@ -194,18 +194,6 @@ def getRandNpcAgeTem(agejudge:str) -> int:
     nowAgeWeightData  = ageTemWeightData[agejudge]
     nowAgeTem = ValueHandle.getRandomForWeight(nowAgeWeightData)
     return nowAgeTem
-
-def getCharacterIndexMax() -> int:
-    '''
-    获取角色数量
-    '''
-    return len(CacheContorl.characterData['character']) - 1
-
-def getCharacterIdList() -> list:
-    '''
-    获取角色id列表
-    '''
-    return list(CacheContorl.characterData['character'].keys())
 
 def initCharacterDormitory():
     '''

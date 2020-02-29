@@ -84,7 +84,7 @@ courseData = {}
 # 教师科目经验
 teacherCourseExperience = {}
 
-oldCharacterId = '0'
+oldCharacterId = 0
 
 # 各年龄段总人数
 TotalNumberOfPeopleOfAllAges = {}

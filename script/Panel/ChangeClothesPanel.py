@@ -63,8 +63,8 @@ def seeCharacterWearClothes(characterId:str,changeButton:bool):
             PyCmd.pcmd(cmdText,i,None)
         else:
             EraPrint.p(drawText)
+        inputS.append(f'{i}')
         i += 1
-        inputS.append(str(i))
         EraPrint.p('\n')
     return inputS
 
@@ -133,7 +133,7 @@ def seeCharacterClothesPanel(characterId:str,clothingType:str,maxPage:int):
             drawText += ' ' + TextLoading.getTextData(TextLoading.stageWordPath,'125')
         idInfo = CmdButtonQueue.idIndex(i)
         cmdText = idInfo + drawText
-        inputS.append(str(i))
+        inputS.append(f'{i}')
         PyCmd.pcmd(cmdText,i,None)
         i += 1
     EraPrint.p('\n')

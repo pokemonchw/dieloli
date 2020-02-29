@@ -15,7 +15,7 @@ def seeScenePanel():
     timeText = GameTime.getDateText()
     EraPrint.p(timeText)
     EraPrint.p(' ')
-    scenePath = CacheContorl.characterData['character']['0'].Position
+    scenePath = CacheContorl.characterData['character'][0].Position
     scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
     mapList = MapHandle.getMapHierarchyListForScenePath(scenePath,[])
     mapPathText = ''
@@ -47,7 +47,7 @@ def seeSceneCharacterListPanel() -> list:
     seeCharacterText = TextLoading.getTextData(TextLoading.messagePath,'26')
     EraPrint.p(seeCharacterText)
     EraPrint.p('\n')
-    scenePath = CacheContorl.characterData['character']['0'].Position
+    scenePath = CacheContorl.characterData['character'][0].Position
     scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
     nameList = MapHandle.getSceneCharacterNameList(scenePathStr,True)
     nameList = getNowPageNameList(nameList)
@@ -63,7 +63,7 @@ def changeSceneCharacterListPanel() -> list:
     '''
     nameListMax = int(GameConfig.in_scene_see_player_max)
     nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
-    scenePath = CacheContorl.characterData['character']['0'].Position
+    scenePath = CacheContorl.characterData['character'][0].Position
     scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
     sceneCharacterNameList = MapHandle.getSceneCharacterNameList(scenePathStr)
     characterMax = len(sceneCharacterNameList)
@@ -107,10 +107,8 @@ def seeCharacterInfoPanel():
     EraPrint.p(' ')
     intimateInfo = TextLoading.getTextData(TextLoading.stageWordPath,'16')
     gracesInfo = TextLoading.getTextData(TextLoading.stageWordPath,'17')
-    characterIntimate = characterData.Intimate
-    characterGraces = characterData.Graces
-    characterIntimateText = intimateInfo + characterIntimate
-    characterGracesText = gracesInfo + characterGraces
+    characterIntimateText = intimateInfo + f'{characterData.Intimate}'
+    characterGracesText = gracesInfo + f'{characterData.Graces}'
     EraPrint.p(characterIntimateText)
     EraPrint.p(' ')
     EraPrint.p(characterGracesText)

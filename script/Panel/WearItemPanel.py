@@ -1,7 +1,7 @@
 from script.Core import TextLoading,CacheContorl,EraPrint,GameConfig
 from script.Design import AttrText,CmdButtonQueue
 
-def seeCharacterWearItemPanelForPlayer(characterId:str) -> list:
+def seeCharacterWearItemPanelForPlayer(characterId:int) -> list:
     '''
     用于场景中查看穿戴道具列表的控制面板
     Keyword arguments:
@@ -11,12 +11,12 @@ def seeCharacterWearItemPanelForPlayer(characterId:str) -> list:
     EraPrint.plt(TextLoading.getTextData(TextLoading.stageWordPath, '40'))
     EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     EraPrint.pline('.')
-    if characterId == '0':
+    if characterId == 0:
         return seeCharacterWearItemPanel(characterId,True)
     else:
         return seeCharacterWearItemPanel(characterId,False)
 
-def seeCharacterWearItemPanel(characterId:str,changeButton:bool) -> list:
+def seeCharacterWearItemPanel(characterId:int,changeButton:bool) -> list:
     '''
     用于查看角色穿戴道具列表的面板
     Keyword arguments:
@@ -37,13 +37,13 @@ def seeCharacterWearItemPanel(characterId:str,changeButton:bool) -> list:
             wearItemButtonList.append(wearItemInfoTextData[wearType] + ':' + itemData[wearType][wearId]['Name'])
             wearItemTextData[wearType] = itemData[wearType][wearId]['Name']
     if changeButton:
-        inputS = [str(i) for i in range(len(itemData))]
+        inputS = [str(i) for i in range(len(wearData))]
         CmdButtonQueue.optionint(None,4,'left',True,False,'center',0,wearItemButtonList,)
     else:
         EraPrint.plist(wearItemButtonList,4,'center')
     return inputS
 
-def seeCharacterWearItemListPanel(characterId:str,itemType:str,maxPage:int) -> list:
+def seeCharacterWearItemListPanel(characterId:int,itemType:str,maxPage:int) -> list:
     '''
     用于查看角色可穿戴道具列表的面板
     Keyword arguments:

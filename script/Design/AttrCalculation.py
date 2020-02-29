@@ -2,7 +2,7 @@ import os
 import random
 import time
 from script.Core import CacheContorl,GameConfig,GamePathConfig,TextLoading,JsonHandle,ValueHandle
-from script.Design import GameTime,Character
+from script.Design import GameTime
 
 language = GameConfig.language
 gamepath = GamePathConfig.gamepath
@@ -46,28 +46,6 @@ def getGold() -> int:
     获取默认金钱数据
     '''
     return roleAttrData['Default']['Gold']
-
-def getAttr(temName:str) -> dict:
-    '''
-    按人物生成模板id生成人物属性
-    Keyword arguments:
-    temName -- 人物生成模板id
-    '''
-    TemList = TextLoading.getTextData(TextLoading.attrTemplatePath,'TemList')
-    temData = TemList[temName]
-    character = Character.Character()
-    character.Age = getAge(temData['Age'])
-    character.SexExperienceTem = temData['SexExperience']
-    character.WeigtTem = temData['Weight']
-    character.BodyFatTem = temData['BodyFat']
-    character.HitPointTem = temData["HitPoint"]
-    character.ManaPointTem = temData["ManaPoint"]
-    if temName == "Man" or temName == 'Asexual':
-        character.ChestTem = 'Precipice'
-    else:
-        character.ChestTem = getRandNpcChestTem()
-    character.initAttr()
-    return character
 
 def getAge(temName:str) -> int:
     '''

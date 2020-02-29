@@ -18,12 +18,12 @@ def getSexExperienceText(sexExperienceData:dict,sexName:str) -> list:
     sexExperienceData -- 性经验数据列表
     sexName -- 性别
     '''
-    mouthExperience = TextLoading.getTextData(TextLoading.stageWordPath,'19') + str(sexExperienceData['mouthExperience'])
-    bosomExperience = TextLoading.getTextData(TextLoading.stageWordPath,'20') + str(sexExperienceData['bosomExperience'])
-    vaginaExperience = TextLoading.getTextData(TextLoading.stageWordPath,'21') + str(sexExperienceData['vaginaExperience'])
-    clitorisExperience = TextLoading.getTextData(TextLoading.stageWordPath,'22') + str(sexExperienceData['clitorisExperience'])
-    anusExperience = TextLoading.getTextData(TextLoading.stageWordPath,'23') + str(sexExperienceData['anusExperience'])
-    penisExperience = TextLoading.getTextData(TextLoading.stageWordPath,'24') + str(sexExperienceData['penisExperience'])
+    mouthExperience = TextLoading.getTextData(TextLoading.stageWordPath,'19') + f"{sexExperienceData['mouthExperience']}"
+    bosomExperience = TextLoading.getTextData(TextLoading.stageWordPath,'20') + f"{sexExperienceData['bosomExperience']}"
+    vaginaExperience = TextLoading.getTextData(TextLoading.stageWordPath,'21') + f"{sexExperienceData['vaginaExperience']}"
+    clitorisExperience = TextLoading.getTextData(TextLoading.stageWordPath,'22') + f"{sexExperienceData['clitorisExperience']}"
+    anusExperience = TextLoading.getTextData(TextLoading.stageWordPath,'23') + f"{sexExperienceData['anusExperience']}"
+    penisExperience = TextLoading.getTextData(TextLoading.stageWordPath,'24') + f"{sexExperienceData['penisExperience']}"
     sexExperienceText = []
     sexList = list(sexData.keys())
     if sexName == sexList[0]:
@@ -69,8 +69,7 @@ def getLevelTextColor(level:str) -> str:
     level -- 等级
     '''
     lowerLevel = level.lower()
-    level = '<level' + lowerLevel + '>' + level + '</level' + lowerLevel + '>'
-    return level
+    return f'<level{lowerLevel}>{level}</level{lowerLevel}>'
 
 def getRandomNameForSex(sexGrade:str) -> str:
     '''
@@ -100,14 +99,14 @@ def getRandomNameForSex(sexGrade:str) -> str:
         name = CacheContorl.boysRegionList[nameRegion]
     return familyName + name
 
-def getSeeAttrPanelHeadCharacterInfo(characterId:str) -> str:
+def getSeeAttrPanelHeadCharacterInfo(characterId:int) -> str:
     '''
     获取查看角色属性面板头部角色缩略信息文本
     Keyword arguments:
     characterId -- 角色Id
     '''
     characterData = CacheContorl.characterData['character'][characterId]
-    characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId
+    characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + f'{characterId}'
     name = characterData.Name
     nickName = characterData.NickName
     characterName = TextLoading.getTextData(TextLoading.stageWordPath,'13') + name
@@ -144,12 +143,8 @@ def getEngravingText(eList:dict) -> list:
     LVText = TextLoading.getTextData(TextLoading.stageWordPath,'36')
     levelList = [painLevel,happyLevel,yieldLevel,fearLevel,resistanceLevel]
     levelFixList = [painLevelFix,happyLevelFix,yieldLevelFix,fearLevelFix,resistanceLevelFix]
-    levelTextList = []
-    levelBarList = []
-    for i in range(0,len(levelList)):
-        levelTextList.append(levelFixList[i] + LVText + levelList[i])
-    for i in range(0,len(levelList)):
-        levelBarList.append(ProportionalBar.getCountBar(levelTextList[i], 3, levelList[i], 'engravingemptybar'))
+    levelTextList = [f'{levelFixList[i]}{LVText}{levelList[i]}' for i in range(len(levelList))]
+    levelBarList = [f"{ProportionalBar.getCountBar(levelTextList[i],3,levelList[i],'engravingemptybar')}" for i in range(len(levelList))]
     return levelBarList
 
 def getClothingText(clothingList:dict) -> list:
@@ -227,10 +222,10 @@ def judgeCharacterStature(characterId):
     characterId -- 角色Id
     '''
     characterData = CacheContorl.characterData['character'][characterId]
-    selfSex = CacheContorl.characterData['character']['0'].Sex
+    selfSex = CacheContorl.characterData['character'][0].Sex
     targetSex = characterData.Sex
     ageJudge = 'Similar'
-    selfAge = CacheContorl.characterData['character']['0'].Age
+    selfAge = CacheContorl.characterData['character'][0].Age
     targetAge = characterData.Age
     ageDisparity = selfAge - targetAge
     if ageDisparity < -2 and ageDisparity >= -5:
@@ -322,7 +317,7 @@ def judgeCharacterStature(characterId):
         playerBodyFatJudge = 'SuperLow'
     elif bodyFat < playerBodyFat * 0.55:
         playerBodyFatJudge = 'ExtremelyLow'
-    playerHeight = CacheContorl.characterData['character']['0'].Height['NowHeight']
+    playerHeight = CacheContorl.characterData['character'][0].Height['NowHeight']
     playerHeightJudge = 'Similar'
     if height < playerHeight * 1.15 and height >= playerHeight * 1.05:
         playerHeightJudge = 'SlilghtlyHeight'
@@ -344,9 +339,9 @@ def judgeCharacterStature(characterId):
         playerHeightJudge = 'SuperLow'
     elif height < playerHeight * 0.55:
         playerHeightJudge = 'ExtremelyLow'
-    playerSex = CacheContorl.characterData['character']['0'].Sex
-    playerAge = CacheContorl.characterData['character']['0'].Age
-    playerAgeTem = AttrCalculation.judgeAgeGroup(CacheContorl.characterData['character']['0'].Age)
+    playerSex = CacheContorl.characterData['character'][0].Sex
+    playerAge = CacheContorl.characterData['character'][0].Age
+    playerAgeTem = AttrCalculation.judgeAgeGroup(CacheContorl.characterData['character'][0].Age)
     averageBodyFat = CacheContorl.AverageBodyFatByage[playerAgeTem][playerSex]
     averageHeight = CacheContorl.AverageHeightByage[playerAgeTem][playerSex]
     playerAverageBodyFatJudge = 'Similar'
@@ -392,7 +387,7 @@ def judgeCharacterStature(characterId):
     elif playerHeight < averageHeight * 0.55:
         playerAverageHeightJudge = 'ExtremelyLow'
     targetJudge = 'Target'
-    if characterId == '0':
+    if characterId == 0:
         targetJudge = 'Self'
     return {
         "SelfSex":playerSex,
@@ -441,7 +436,7 @@ def judgeStatureDescription(statureJudge,descriptionData):
                 return False
     return True
 
-def getCharacterAbbreviationsInfo(characterId:str) -> str:
+def getCharacterAbbreviationsInfo(characterId:int) -> str:
     '''
     按角色id获取角色缩略信息文本
     Keyword arguments:
@@ -449,7 +444,7 @@ def getCharacterAbbreviationsInfo(characterId:str) -> str:
     '''
     characterData = CacheContorl.characterData['character'][characterId]
     characterIdInfo = TextLoading.getTextData(TextLoading.stageWordPath, '0')
-    characterIdText = characterIdInfo + characterId
+    characterIdText = f"{characterIdInfo}{characterId}"
     characterName = characterData.Name
     characterSex = characterData.Sex
     characterSexInfo = TextLoading.getTextData(TextLoading.stageWordPath, '2')

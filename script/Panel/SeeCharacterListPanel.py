@@ -12,7 +12,7 @@ def seeCharacterListPanel(maxPage:int) -> list:
     inputS = []
     pageId = int(CacheContorl.panelState['SeeCharacterListPanel'])
     pageShow = int(GameConfig.characterlist_show)
-    characterMax = CharacterHandle.getCharacterIndexMax()
+    characterMax = len(CacheContorl.characterData['character']) - 1
     if pageId == maxPage:
         showPageStart = pageShow * pageId
         showPageOver = showPageStart + (characterMax + 1 - showPageStart)
@@ -20,10 +20,9 @@ def seeCharacterListPanel(maxPage:int) -> list:
         showPageOver = pageShow * (pageId + 1)
         showPageStart = showPageOver - pageShow
     for i in range(showPageStart,showPageOver):
-        characterId = str(i)
         cmdId = i - showPageStart
         cmdIdText = CmdButtonQueue.idIndex(cmdId)
-        cmdText = AttrText.getCharacterAbbreviationsInfo(characterId)
+        cmdText = AttrText.getCharacterAbbreviationsInfo(i)
         cmdIdTextIndex = TextHandle.getTextIndex(cmdIdText)
         windowWidth = int(GameConfig.text_width)
         textWidth = windowWidth - cmdIdTextIndex

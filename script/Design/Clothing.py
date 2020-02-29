@@ -219,38 +219,13 @@ def setClothintEvaluationText(clothingData:dict):
     clothingData['Evaluation'] = clothingEvaluationText
     clothingData['Tag'] = clothingTagText
 
-def initCharcterClothintPutOn(playerPass=False):
+def initCharacterClothingPutOn(playerPass=True):
     '''
-    为所有角色穿戴衣服
+    为所有角色穿衣服
     Keyword arguments:
-    playerPass -- 跳过主角校验 (default:False)
+    playerPass -- 跳过主角 (default:True)
     '''
     for character in CacheContorl.characterData['character']:
-        if playerPass and character == '0':
+        if playerPass and character == 0:
             continue
-        putOn(character)
-
-def putOn(characterId:str):
-    '''
-    角色自动选择并穿戴服装
-    Keyword arguments:
-    characterId -- 角色服装数据
-    '''
-    characterClothingData = CacheContorl.characterData['character'][characterId].Clothing
-    collocationData = {}
-    clothingsNameData = getClothingNameData(characterClothingData)
-    clothingsPriceData = getClothingPriceData(characterClothingData)
-    for clothingType in clothingsNameData:
-        clothingTypeData = clothingsNameData[clothingType]
-        for clothingName in clothingTypeData:
-            clothingNameData = clothingTypeData[clothingName]
-            clothingId = list(clothingNameData.keys())[-1]
-            clothingData = characterClothingData[clothingType][clothingId]
-            nowCollocationData = getClothingCollocationData(clothingData,clothingType,clothingsNameData,clothingsPriceData,characterClothingData)
-            if nowCollocationData != 'None':
-                nowCollocationData[clothingType] = clothingId
-                nowCollocationData['Price'] += clothingsPriceData[clothingType][clothingId]
-                collocationData[clothingId] = nowCollocationData
-    collocationPriceData = {collocation:collocationData[collocation]['Price'] for collocation in collocationData}
-    collocationId = list(ValueHandle.sortedDictForValues(collocationPriceData).keys())[-1]
-    CacheContorl.characterData['character'][characterId].PutOn = collocationData[collocationId]
+        CacheContorl.characterData['character'][character].putOn()

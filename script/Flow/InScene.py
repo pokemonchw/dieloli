@@ -8,23 +8,23 @@ def getInScene_func():
     用于进入场景界面的流程
     '''
     PyCmd.clr_cmd()
-    scenePath = CacheContorl.characterData['character']['0'].Position
+    scenePath = CacheContorl.characterData['character'][0].Position
     scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
     MapHandle.sortSceneCharacterId(scenePathStr)
     CacheContorl.nowMap = MapHandle.getMapForPath(scenePath)
     sceneData = CacheContorl.sceneData[scenePathStr].copy()
     sceneCharacterList = sceneData['SceneCharacterData']
-    if '0' not in sceneCharacterList:
-        characterIdList = ['0']
+    if 0 not in sceneCharacterList:
+        characterIdList = [0]
         sceneCharacterList = sceneCharacterList + characterIdList
         CacheContorl.sceneData[scenePathStr]['SceneCharacterData'] = sceneCharacterList
-    if len(sceneCharacterList) > 1 and CacheContorl.characterData['characterId'] == '0':
+    if len(sceneCharacterList) > 1 and CacheContorl.characterData['characterId'] == 0:
         nowNameList = MapHandle.getSceneCharacterNameList(scenePathStr)
-        nowNameList.remove(CacheContorl.characterData['character']['0'].Name)
+        nowNameList.remove(CacheContorl.characterData['character'][0].Name)
         CacheContorl.characterData['characterId'] = MapHandle.getCharacterIdByCharacterName(nowNameList[0],scenePathStr)
-        if CacheContorl.oldCharacterId != '0':
+        if CacheContorl.oldCharacterId != 0:
             CacheContorl.characterData['characterId'] = CacheContorl.oldCharacterId
-            CacheContorl.oldCharacterId = '0'
+            CacheContorl.oldCharacterId = 0
     if len(sceneCharacterList) > 1:
         seeScene_func(True)
     else:
@@ -39,13 +39,13 @@ def seeScene_func(judge:bool):
     while(True):
         inputS = []
         InScenePanel.seeScenePanel()
-        scenePath = CacheContorl.characterData['character']['0'].Position
+        scenePath = CacheContorl.characterData['character'][0].Position
         scenePathStr = MapHandle.getMapSystemPathStrForList(scenePath)
         sceneCharacterNameList = MapHandle.getSceneCharacterNameList(scenePathStr)
         nameListMax = int(GameConfig.in_scene_see_player_max)
         changePageJudge = False
         if len(sceneCharacterNameList) == 1:
-            CacheContorl.characterData['characterId'] = '0'
+            CacheContorl.characterData['characterId'] = 0
         inSceneCmdList1 = []
         if judge:
             if CacheContorl.panelState['SeeSceneCharacterListPage'] == '0':
@@ -67,7 +67,7 @@ def seeScene_func(judge:bool):
         yrn = GameInit.askfor_All(inputS)
         PyCmd.clr_cmd()
         nowPage = int(CacheContorl.panelState['SeeSceneCharacterListPanel'])
-        characterMax = CharacterHandle.getCharacterIndexMax() - 1
+        characterMax = len(CacheContorl.characterData['character']) - 1
         pageMax = math.floor(characterMax / nameListMax)
         if yrn in sceneCharacterNameList:
             CacheContorl.characterData['characterId'] = MapHandle.getCharacterIdByCharacterName(yrn,scenePathStr)
@@ -90,13 +90,13 @@ def seeScene_func(judge:bool):
                 CacheContorl.panelState['SeeSceneCharacterListPanel'] = pageMax
         elif yrn == inSceneCmdList2[0]:
             CacheContorl.nowFlowId = 'see_map'
-            nowMap = MapHandle.getMapForPath(CacheContorl.characterData['character']['0'].Position)
+            nowMap = MapHandle.getMapForPath(CacheContorl.characterData['character'][0].Position)
             CacheContorl.nowMap = nowMap
             break
         elif yrn in [inSceneCmdList2[1],inSceneCmdList2[2]]:
             if yrn == inSceneCmdList2[2]:
                 CacheContorl.oldCharacterId = CacheContorl.characterData['characterId']
-                CacheContorl.characterData['characterId'] = '0'
+                CacheContorl.characterData['characterId'] = 0
             CacheContorl.nowFlowId = 'see_character_attr'
             CacheContorl.oldFlowId = 'in_scene'
             break

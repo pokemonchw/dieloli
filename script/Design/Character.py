@@ -102,6 +102,7 @@ class Character(object):
         }
         self.SocialContact = {social:{} for social in TextLoading.getTextData(TextLoading.stageWordPath,'144')}
         self.initClass()
+        self.putOn()
 
     def initClass(self):
         '''
@@ -110,3 +111,28 @@ class Character(object):
         if self.Age <= 18 and self.Age >= 7:
             classGrade = str(self.Age - 6)
             self.Class = random.choice(CacheContorl.placeData['Classroom_' + classGrade])
+
+    def putOn(self):
+        '''
+        角色自动选择并穿戴服装
+        Keyword arguments:
+        characterId -- 角色服装数据
+        '''
+        characterClothingData = self.Clothing
+        collocationData = {}
+        clothingsNameData = Clothing.getClothingNameData(characterClothingData)
+        clothingsPriceData = Clothing.getClothingPriceData(characterClothingData)
+        for clothingType in clothingsNameData:
+            clothingTypeData = clothingsNameData[clothingType]
+            for clothingName in clothingTypeData:
+                clothingNameData = clothingTypeData[clothingName]
+                clothingId = list(clothingNameData.keys())[-1]
+                clothingData = characterClothingData[clothingType][clothingId]
+                nowCollocationData = Clothing.getClothingCollocationData(clothingData,clothingType,clothingsNameData,clothingsPriceData,characterClothingData)
+                if nowCollocationData != 'None':
+                    nowCollocationData[clothingType] = clothingId
+                    nowCollocationData['Price'] += clothingsPriceData[clothingType][clothingId]
+                    collocationData[clothingId] = nowCollocationData
+        collocationPriceData = {collocation:collocationData[collocation]['Price'] for collocation in collocationData}
+        collocationId = list(ValueHandle.sortedDictForValues(collocationPriceData).keys())[-1]
+        self.PutOn = collocationData[collocationId]

@@ -18,7 +18,7 @@ def seeCharacterList_func():
         inputS = inputS + askForSeeCharacterListPanelInput
         yrn = GameInit.askfor_All(inputS)
         yrn = str(yrn)
-        characterIdList = CharacterHandle.getCharacterIdList()
+        characterIdList = CacheContorl.characterData['character'].keys()
         pageId = int(CacheContorl.panelState['SeeCharacterListPanel'])
         if yrn == str(startId):
             if pageId == 0:
@@ -27,7 +27,7 @@ def seeCharacterList_func():
                 pageId = str(pageId - 1)
                 CacheContorl.panelState['SeeCharacterListPanel'] = pageId
         elif yrn == str(startId + 1):
-            CacheContorl.characterData['characterId'] = '0'
+            CacheContorl.characterData['characterId'] = 0
             CacheContorl.panelState['SeeCharacterListPanel'] = '0'
             CacheContorl.nowFlowId = CacheContorl.oldFlowId
             break
@@ -37,8 +37,8 @@ def seeCharacterList_func():
             else:
                 pageId = str(pageId + 1)
                 CacheContorl.panelState['SeeCharacterListPanel'] = pageId
-        elif yrn in characterIdList:
-            yrn = str(int(yrn) + characterPageShow * pageId)
+        elif int(yrn) + characterPageShow * pageId in characterIdList:
+            yrn = int(yrn) + characterPageShow * pageId
             CacheContorl.characterData['characterId'] = yrn
             CacheContorl.nowFlowId = 'see_character_attr'
             CacheContorl.tooOldFlowId = CacheContorl.oldFlowId
@@ -49,7 +49,7 @@ def getCharacterListPageMax():
     '''
     计算角色列表总页数，公式为角色总数/每页显示角色数
     '''
-    characterMax = CharacterHandle.getCharacterIndexMax()
+    characterMax = len(CacheContorl.characterData['character']) - 1
     if characterMax - characterPageShow < 0:
         return 0
     elif characterMax % characterPageShow == 0:

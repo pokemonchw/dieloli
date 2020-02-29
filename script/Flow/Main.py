@@ -32,5 +32,5 @@ def mainFrame_func():
         CacheContorl.nowFlowId = 'see_character_attr'
     else:
         if ans == '0':
-            Clothing.initCharcterClothintPutOn()
+            Clothing.initCharacterClothingPutOn()
         CacheContorl.nowFlowId = mainFrameGotoData[ans]

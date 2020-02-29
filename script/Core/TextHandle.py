@@ -11,7 +11,6 @@ def align(text:str,just='left',onlyFix = False,columns = 1,textWidth = None) -> 
     columns -- 将行宽平分指定列后，再进行对齐补全 (default 1)
     textWidth -- 指定行宽，为None时将使用GameConfig中的配置 (default None)
     '''
-    text = str(text)
     countIndex = getTextIndex(text)
     if textWidth == None:
         width = GameConfig.text_width

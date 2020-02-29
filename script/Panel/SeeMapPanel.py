@@ -23,7 +23,7 @@ def seeMovePathPanel() -> dict:
     当前场景可直接通往的移动路径绘制面板
     '''
     inputS = []
-    nowScene = CacheContorl.characterData['character']['0'].Position
+    nowScene = CacheContorl.characterData['character'][0].Position
     nowMap = CacheContorl.nowMap
     nowMapStr = MapHandle.getMapSystemPathStrForList(nowMap)
     mapData = CacheContorl.mapData[nowMapStr]
@@ -62,7 +62,7 @@ def showSceneNameListPanel() -> str:
         PyCmd.pcmd(panelStateOffText,"SeeSceneNameListPanel")
         EraPrint.p('\n')
         nowMap = CacheContorl.nowMap
-        nowPosition = CacheContorl.characterData['character']['0'].Position
+        nowPosition = CacheContorl.characterData['character'][0].Position
         nowScene = MapHandle.getSceneIdInMapForScenePathOnMapPath(nowPosition,nowMap)
         nowMapMapSystemStr = MapHandle.getMapSystemPathStrForList(nowMap)
         sceneNameData = MapHandle.getSceneNameListForMapPath(nowMapMapSystemStr)
@@ -84,7 +84,7 @@ def backScenePanel(startId:str) -> list:
     startId -- 面板命令起始id
     '''
     seeMapCmd = []
-    nowPosition = CacheContorl.characterData['character']['0'].Position
+    nowPosition = CacheContorl.characterData['character'][0].Position
     nowMap = MapHandle.getMapForPath(nowPosition)
     cmdData = TextLoading.getTextData(TextLoading.cmdPath,CmdButtonQueue.seemap)
     seeMapCmd.append(cmdData[0])

@@ -42,7 +42,6 @@ def getHpAndMpText(characterId:str) -> str:
     Keyword arguments:
     characterId -- 角色id
     '''
-    characterId = str(characterId)
     characterData = CacheContorl.characterData['character'][characterId]
     characterHitPoint = characterData.HitPoint
     characterMaxHitPoint = characterData.HitPointMax

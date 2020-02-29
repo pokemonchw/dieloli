@@ -2,7 +2,7 @@ from script.Core import CacheContorl,TextLoading,EraPrint,PyCmd,GameConfig
 from script.Design import AttrPrint,AttrText,CmdButtonQueue,AttrCalculation
 from script.Panel import ChangeClothesPanel,UseItemPanel,WearItemPanel,SeeKnowledgePanel,SexExperiencePanel,LanguagePanel,SeeNaturePanel,SeeSocialContactPanel
 
-def seeCharacterMainAttrPanel(characterId:str):
+def seeCharacterMainAttrPanel(characterId:int):
     '''
     查看角色主属性面板
     Keyword arguments:
@@ -10,7 +10,7 @@ def seeCharacterMainAttrPanel(characterId:str):
     '''
     title1 = TextLoading.getTextData(TextLoading.stageWordPath, '1')
     EraPrint.plt(title1)
-    characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId
+    characterIdText = f"{TextLoading.getTextData(TextLoading.stageWordPath, '0')}{characterId}"
     characterData = CacheContorl.characterData['character'][characterId]
     name = characterData.Name
     nickName = characterData.NickName
@@ -32,18 +32,13 @@ def seeCharacterMainAttrPanel(characterId:str):
     EraPrint.pline('.')
     EraPrint.pl(AttrText.getCharacterDormitoryPathText(characterId))
     EraPrint.plittleline()
-    characterSpecies = characterData.Species
-    characterSpecies = TextLoading.getTextData(TextLoading.stageWordPath, '15') + characterSpecies
-    characterAge = characterData.Age
-    characterAge = TextLoading.getTextData(TextLoading.stageWordPath, '3') + str(characterAge)
-    birthday = characterData.Birthday
-    birthdayText = TextLoading.getTextData(TextLoading.stageWordPath,'140') + str(birthday['month']) + TextLoading.getTextData(TextLoading.stageWordPath,'60') + str(birthday['day']) + TextLoading.getTextData(TextLoading.stageWordPath,'61')
+    characterSpecies = f"{TextLoading.getTextData(TextLoading.stageWordPath, '15')}{characterData.Species}"
+    characterAge = f"{TextLoading.getTextData(TextLoading.stageWordPath, '3')}{characterData.Age}"
+    birthdayText = f"{TextLoading.getTextData(TextLoading.stageWordPath,'140')}{characterData.Birthday['month']}{TextLoading.getTextData(TextLoading.stageWordPath,'60')}{characterData.Birthday['day']}{TextLoading.getTextData(TextLoading.stageWordPath,'61')}"
     EraPrint.plist([characterSpecies,characterAge,birthdayText],3,'center')
     EraPrint.pline('.')
-    characterIntimate = characterData.Intimate
-    characterIntimate = TextLoading.getTextData(TextLoading.stageWordPath, '16') + str(characterIntimate)
-    characterGraces = characterData.Graces
-    characterGraces = TextLoading.getTextData(TextLoading.stageWordPath, '17') + str(characterGraces)
+    characterIntimate = f"{TextLoading.getTextData(TextLoading.stageWordPath, '16')}{characterData.Intimate}"
+    characterGraces = f"{TextLoading.getTextData(TextLoading.stageWordPath, '17')}{characterData.Graces}"
     EraPrint.plist([characterIntimate,characterGraces],2,'center')
     EraPrint.pline('.')
     characterChest = characterData.Chest['NowChest']
@@ -110,29 +105,29 @@ def seeCharacterStatusPanel(characterId:str):
         EraPrint.plist(nowStatusTextList,size,'center')
     EraPrint.pl()
 
-def seeCharacterHPAndMPInSence(characterId:str):
+def seeCharacterHPAndMPInSence(characterId:int):
     '''
     在场景中显示角色的HP和MP
     Keyword arguments:
     characterId -- 角色Id
     '''
-    if characterId == '0':
+    if characterId == 0:
         AttrPrint.printHpAndMpBar(characterId)
     else:
-        characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + '0' + ':' + CacheContorl.characterData['character']['0'].Name
-        targetIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + characterId + ':' + CacheContorl.characterData['character'][characterId].Name
+        characterIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + '0' + ':' + CacheContorl.characterData['character'][0].Name
+        targetIdText = TextLoading.getTextData(TextLoading.stageWordPath, '0') + f'{characterId}' + ':' + CacheContorl.characterData['character'][characterId].Name
         EraPrint.plist([characterIdText,targetIdText],2,'center')
         EraPrint.pl()
-        playerBar = AttrPrint.getHpOrMpBar('0','HitPoint',GameConfig.text_width / 2 - 4)
+        playerBar = AttrPrint.getHpOrMpBar(0,'HitPoint',GameConfig.text_width / 2 - 4)
         targetBar = AttrPrint.getHpOrMpBar(characterId,'HitPoint',GameConfig.text_width / 2 - 4)
         EraPrint.plist([playerBar,targetBar],2,'center')
         EraPrint.pl()
-        playerBar = AttrPrint.getHpOrMpBar('0','ManaPoint',GameConfig.text_width / 2 - 4)
+        playerBar = AttrPrint.getHpOrMpBar(0,'ManaPoint',GameConfig.text_width / 2 - 4)
         targetBar = AttrPrint.getHpOrMpBar(characterId,'ManaPoint',GameConfig.text_width / 2 - 4)
         EraPrint.plist([playerBar,targetBar],2,'center')
         EraPrint.pl()
 
-def seeCharacterEquipmentPanel(characterId:str):
+def seeCharacterEquipmentPanel(characterId:int):
     '''
     查看角色装备面板
     Keyword arguments:
@@ -142,7 +137,7 @@ def seeCharacterEquipmentPanel(characterId:str):
     EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     ChangeClothesPanel.seeCharacterWearClothes(characterId,False)
 
-def seeCharacterItemPanel(characterId:str):
+def seeCharacterItemPanel(characterId:int):
     '''
     查看角色道具面板
     Keyword arguments:
@@ -152,7 +147,7 @@ def seeCharacterItemPanel(characterId:str):
     EraPrint.p(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     UseItemPanel.seeCharacterItemPanel(characterId)
 
-def seeCharacterWearItemPanel(characterId:str):
+def seeCharacterWearItemPanel(characterId:int):
     '''
     查看角色穿戴道具面板
     Keyword arguments:
@@ -162,7 +157,7 @@ def seeCharacterWearItemPanel(characterId:str):
     EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     WearItemPanel.seeCharacterWearItemPanel(characterId,False)
 
-def seeCharacterKnowledgePanel(characterId:str):
+def seeCharacterKnowledgePanel(characterId:int):
     '''
     查看角色知识信息面板
     Keyword arguments:
@@ -172,7 +167,7 @@ def seeCharacterKnowledgePanel(characterId:str):
     EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     SeeKnowledgePanel.seeCharacterKnowledgePanel(characterId)
 
-def seeCharacterSexExperiencePanel(characterId:str):
+def seeCharacterSexExperiencePanel(characterId:int):
     '''
     查看角色性经验面板
     Keyword arguments:
@@ -182,7 +177,7 @@ def seeCharacterSexExperiencePanel(characterId:str):
     EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     SexExperiencePanel.seeCharacterSexExperiencePanel(characterId)
 
-def seeCharacterLanguagePanel(characterId:str):
+def seeCharacterLanguagePanel(characterId:int):
     '''
     查看角色语言能力面板
     Keyword arguments:
@@ -192,7 +187,7 @@ def seeCharacterLanguagePanel(characterId:str):
     EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     LanguagePanel.seeCharacterLanguagePanel(characterId)
 
-def seeCharacterNaturePanel(characterId:str):
+def seeCharacterNaturePanel(characterId:int):
     '''
     查看角色性格面板
     Keyword arguments:
@@ -202,7 +197,7 @@ def seeCharacterNaturePanel(characterId:str):
     EraPrint.pl(AttrText.getSeeAttrPanelHeadCharacterInfo(characterId))
     SeeNaturePanel.seeCharacterNaturePanel(characterId)
 
-def seeCharacterSocialContactPanel(characterId:str):
+def seeCharacterSocialContactPanel(characterId:int):
     '''
     查看角色社交面板
     Keyword arguments:
