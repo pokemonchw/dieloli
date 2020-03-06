@@ -107,10 +107,8 @@ def getRandDayForYear(year:int) -> "time.time" :
     Return arguments:
     time.time -- 随机日期
     '''
-    a1 = (year,1,1,0,0,0,-1,-1,-1)
-    a2 = (year,12,31,23,59,59,0,0,0)
-    start = time.mktime(a1)
-    end = time.mktime(a2)
+    start = time.mktime(datetime.datetime(year,1,1,0,0,0,0).utctimetuple())
+    end = time.mktime(datetime.datetime(year,12,31,23,59,59).utctimetuple())
     return getRandDayForDate(start,end)
 
 def getRandDayForDate(startDate:"time.time",endDate:"time.time") -> "time.time":
