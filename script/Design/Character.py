@@ -90,8 +90,8 @@ class Character(object):
         self.Nature = Nature.getRandomNature()
         self.Status = TextLoading.getGameData(TextLoading.characterStatePath)
         self.WearItem = {
-            "Wear":{key:'' for key in TextLoading.getGameData(TextLoading.wearItemPath)['Wear']},
-            "Item":{}
+            "Wear":{key:{} for key in TextLoading.getGameData(TextLoading.wearItemPath)['Wear']},
+            "Item":{},
         }
         self.Engraving = {
             "Pain":0,

@@ -17,6 +17,7 @@ def initCharacterList():
     '''
     初始生成所有npc数据
     '''
+    t1 = time.time()
     initCharacterTem()
     idList = iter([i+1 for i in range(len(CacheContorl.npcTemData))])
     npcDataIter = iter(CacheContorl.npcTemData)
@@ -27,6 +28,8 @@ def initCharacterList():
             break
     indexCharacterAverageValue()
     calculateTheAverageValueOfEachAttributeOfEachAgeGroup()
+    t2 = time.time()
+    print(t2-t1)
 
 def calculateTheAverageValueOfEachAttributeOfEachAgeGroup():
     '''

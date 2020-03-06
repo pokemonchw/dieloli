@@ -8,8 +8,7 @@ def twoBitArrayToDict(array:tuple) -> dict:
     Keyword arguments:
     array -- 要转换的二维数组
     '''
-    newDict = dict((x, y) for x, y in array)
-    return newDict
+    return {x:y for x, y in array}
 
 def getReginList(nowData:dict) -> dict:
     '''
@@ -20,14 +19,13 @@ def getReginList(nowData:dict) -> dict:
     sortData = sortedDictForValues(nowData)
     return dict(zip(itertools.accumulate(sortData.values()),sortData.keys()))
 
-def sortedDictForValues(oldDict):
+def sortedDictForValues(oldDict:dict) -> dict:
     '''
     按dict中每个value的值对key进行排序生成新dict
     Keyword arguments:
     oldDict -- 需要进行排序的数据
     '''
-    sortData = twoBitArrayToDict(sorted(oldDict.items(),key=lambda x:x[1]))
-    return sortData
+    return twoBitArrayToDict(sorted(oldDict.items(),key=lambda x:x[1]))
 
 def getRandomForWeight(data:dict) -> 'dataKey':
     '''
@@ -37,7 +35,7 @@ def getRandomForWeight(data:dict) -> 'dataKey':
     '''
     weightMax = sum(data.values())
     weightReginData = getReginList(data)
-    weightReginList = list(map(int,weightReginData.keys()))
+    weightReginList = [int(i) for i in weightReginData.keys()]
     nowWeight = random.randint(0,weightMax - 1)
     weightRegin = getNextValueForList(nowWeight,weightReginList)
     return weightReginData[weightRegin]

@@ -63,17 +63,27 @@ def loadDirNow(dataPath:str):
                                     initClothingData(nowData[nowFile[0]]['Clothing'])
                                 elif nowFile[0] == 'StatureDescription':
                                     initStatureDescription(nowData[nowFile[0]]['Priority'])
+                                elif nowFile[0] == 'WearItem':
+                                    initWearItemTypeData(nowData[nowFile[0]]['Item'])
             else:
                 nowData[i] = loadDirNow(nowPath)
     return nowData
 
-def initStatureDescription(sdData):
+def initStatureDescription(sdData:dict):
     '''
     初始化身材描述文本权重数据
     Keyword arguments:
     sdData -- 身材描述文本数据
     '''
     CacheContorl.statureDescritionPrioritionData = {priority:{i:len(sdData[priority][i]['Condition']) for i in range(len(sdData[priority]))} for priority in range(len(sdData))}
+
+def initWearItemTypeData(wiData:dict):
+    '''
+    初始化可穿戴道具类型数据
+    Keyword argumenys:
+    wiData -- 可穿戴道具数据
+    '''
+    CacheContorl.wearItemTypeData = {wear:{item:1 for item in wiData if wear in wiData[item]['Wear']} for item in wiData for wear in wiData[item]['Wear']}
 
 def initNameRegion(nameData:dict,manJudge:int):
     '''
@@ -180,9 +190,7 @@ def getPathList(rootPath:str) -> list:
     Keyword arguments:
     rootPath -- 要获取的目录所在根路径
     '''
-    return [name for name in os.listdir(rootPath)
-            if os.path.isdir(os.path.join(rootPath,name))
-           ]
+    return [name for name in os.listdir(rootPath) if os.path.isdir(os.path.join(rootPath,name))]
 
 def initClothingData(originalClothingData):
     '''
@@ -223,6 +231,7 @@ def init():
         CacheContorl.boysRegionList = data['boysdata']
         CacheContorl.girlsRegionList = data['girlsdata']
         CacheContorl.familyRegionList = data['familydata']
+        CacheContorl.wearItemTypeData = data['weardata']
     else:
         datadir = os.path.join(gamepath,'data')
         f = open(datapath,'wb')
@@ -239,6 +248,7 @@ def init():
             "familyregiondata":CacheContorl.familyRegionIntList,
             "boysdata":CacheContorl.boysRegionList,
             "girlsdata":CacheContorl.girlsRegionList,
-            "familydata":CacheContorl.familyRegionList
+            "familydata":CacheContorl.familyRegionList,
+            'weardata':CacheContorl.wearItemTypeData
         }
         pickle.dump(nowData,f)

@@ -272,8 +272,6 @@ def initCache():
     }
     CacheContorl.maxSavePage = GameConfig.save_page
     CacheContorl.textWait = float(GameConfig.text_wait)
-    CacheContorl.temCharacterDefault = getTemCharacterDefault()
-    CacheContorl.temporaryCharacterBak = CacheContorl.temCharacterDefault.copy()
     CacheContorl.randomNpcList = []
     CacheContorl.npcTemData = []
     CacheContorl.nowFlowId = 'title_frame'
@@ -281,10 +279,3 @@ def initCache():
     CacheContorl.tooOldFlowId = ''
     CacheContorl.occupationCharacterData = {}
     CacheContorl.courseData = {}
-
-def getTemCharacterDefault():
-    '''
-    获取角色基础信息
-    '''
-    temCharacter = copy.deepcopy(TextLoading.getTextData(TextLoading.rolePath, 'Default'))
-    return temCharacter

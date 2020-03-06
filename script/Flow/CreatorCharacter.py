@@ -194,4 +194,4 @@ def enterCharacterNature_func():
             CacheContorl.nowFlowId = 'acknowledgment_attribute'
             break
         elif int(yrn) == 1:
-            Nature.initCharacterNature(0)
+            CacheContorl.characterData['character'][0].Nature = Nature.getRandomNature()

@@ -116,3 +116,6 @@ randomNpcList = []
 occupationCharacterData = {}
 
 placeData = {}
+
+# 可穿戴道具类型数据
+wearItemTypeData = {}

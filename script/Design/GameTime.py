@@ -161,7 +161,9 @@ def countDayForDateToDate(startDate:"datetime.datetime",endDate:"datetime.dateti
     '''
     return (startDate - endDate).days
 
-def getNowTimeSlice():
+def getNowTimeSlice(characterId:int):
     '''
     获取当前时间段
+    Keyword arguments:
+    characterId -- 角色Id
     '''

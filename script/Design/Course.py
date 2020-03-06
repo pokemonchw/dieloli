@@ -24,8 +24,7 @@ def initPhaseCourseHour():
             classHourMax = phaseCourseTime['JuniorMiddleSchool']
         else:
             classHourMax = phaseCourseTime['SeniorHighSchool']
-        for regin in phaseWeightRegin:
-            classHourData[phaseWeightRegin[regin]] = math.ceil(classHourMax * (int(regin) / weightMax))
+        classHourData = {phaseWeightRegin[region]:math.ceil(classHourMax * (int(region) / weightMax)) for region in phaseWeightRegin}
         nowClassHourMax = sum(classHourData.values())
         while nowClassHourMax != classHourMax:
             for course in classHourData:

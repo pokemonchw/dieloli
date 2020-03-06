@@ -30,11 +30,14 @@ def seeCharacterWearItemPanel(characterId:int,changeButton:bool) -> list:
     wearItemButtonList = []
     inputS = []
     for wearType in wearData:
-        wearId = wearData[wearType]
-        if wearId == '':
+        nowWearData = wearData[wearType]
+        if nowWearData == {}:
             wearItemButtonList.append(wearItemInfoTextData[wearType] + ':' + TextLoading.getTextData(TextLoading.stageWordPath,'117'))
         else:
-            wearItemButtonList.append(wearItemInfoTextData[wearType] + ':' + itemData[wearType][wearId]['Name'])
+            wearText = ''
+            for wearId in nowWearData:
+                wearText += '[' + itemData[wearType][wearId]['Name'] + ']'
+            wearItemButtonList.append(wearItemInfoTextData[wearType] + ':' + wearText)
             wearItemTextData[wearType] = itemData[wearType][wearId]['Name']
     if changeButton:
         inputS = [str(i) for i in range(len(wearData))]
@@ -52,12 +55,12 @@ def seeCharacterWearItemListPanel(characterId:int,itemType:str,maxPage:int) -> l
     maxPage -- 道具列表最大页数
     '''
     EraPrint.pl()
-    characterWearItemData = CacheContorl.characterData['character'][characterId].WearItem['Item'][itemType]
+    characterWearItemData = [item for item in CacheContorl.characterData['character'][characterId].WearItem['Item'] if item in CacheContorl.wearItemTypeData[itemType]]
     nowPageId = int(CacheContorl.panelState["SeeCharacterWearItemListPanel"])
     nowPageMax = GameConfig.see_character_wearitem_max
     nowPageStartId = nowPageId * nowPageMax
     nowPageEndId = nowPageStartId + nowPageMax
-    if characterWearItemData == {}:
+    if characterWearItemData == []:
         EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath,'38'))
         return []
     if nowPageEndId > len(characterWearItemData.keys()):

@@ -11,7 +11,7 @@ def sceneSeeCharacterWearItem(characterId:str):
         nowInputS = WearItemPanel.seeCharacterWearItemPanelForPlayer(characterId)
         nowYrn = FlowHandle.askfor_All(nowInputS)
         if nowYrn == nowInputS[:-1]:
-            CacheContorl.nowFlowId == 'main'
+            CacheContorl.nowFlowId = 'main'
             break
 
 def wearCharacterItem():
@@ -19,26 +19,20 @@ def wearCharacterItem():
     查看并更换角色穿戴道具流程
     '''
     characterId = CacheContorl.characterData['characterId']
-    inputs = WearItemPanel.seeCharacterWearItemPanelForPlayer(characterId)
-    startId = len(inputs)
-    inputs += WearItemPanel.seeCharacterWearItemCmdPanel(startId)
-    yrn = FlowHandle.askfor_All(inputs)
-    PyCmd.clr_cmd()
-    if yrn == str(startId):
-        CacheContorl.nowFlowId == 'main'
-    else:
-        wearItemInfoTextData = TextLoading.getTextData(TextLoading.stageWordPath,'49')
-        while(1):
-            nowInputS = changeWearItem(list(wearItemInfoTextData.keys())[int(yrn)])
-            nowYrn = int(FlowHandle.askfor_All(nowInputS))
-            if nowYrn == nowInputS[:-1]:
-                CacheContorl.nowFlowId == 'main'
-                break
-            else:
-                if changeWearItem(list(wearItemInfoTextData.keys())[int(nowYrn)]):
-                    break
+    while 1:
+        inputs = WearItemPanel.seeCharacterWearItemPanelForPlayer(characterId)
+        startId = len(inputs)
+        inputs += WearItemPanel.seeCharacterWearItemCmdPanel(startId)
+        yrn = FlowHandle.askfor_All(inputs)
+        PyCmd.clr_cmd()
+        if yrn == str(len(inputs) - 1):
+            CacheContorl.nowFlowId = 'main'
+            break
+        else:
+            wearItemInfoTextData = TextLoading.getTextData(TextLoading.stageWordPath,'49')
+            changeWearItem(list(wearItemInfoTextData.keys())[int(yrn)])
 
-def changeWearItem(itemType:str):
+def changeWearItem(itemType:str) -> bool:
     '''
     更换角色穿戴道具流程
     Keyword arguments:
@@ -47,9 +41,11 @@ def changeWearItem(itemType:str):
     characterId = CacheContorl.characterData['characterId']
     maxPage = getCharacterWearItemPageMax(characterId)
     inputS = WearItemPanel.seeCharacterWearItemListPanel(characterId,itemType,maxPage)
+    if inputS == []:
+        return
     yrn = FlowHandle.askfor_All(inputS)
     if yrn == inputS[:-1]:
-        return True
+        return
     else:
         CacheContorl.characterData['character'][characterId].WearItem['Wear'][itemType] = list(CacheContorl.characterData['character'][characterId].WearItem['Item'][itemType].keys())[int(yrn)]
 
