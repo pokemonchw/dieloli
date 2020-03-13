@@ -97,9 +97,9 @@ def getWeekDate() -> int:
     Return arguments:
     weekDay -- 当前星期数
     '''
-    return gameTimeToDatetime(CacheContorl.gameTime).strftime("%w")
+    return timetupleTodatetime(gameTimeToDatetime(CacheContorl.gameTime)).strftime("%w")
 
-def getRandDayForYear(year:int) -> "time.time" :
+def getRandDayForYear(year:int) -> datetime.datetime.timetuple :
     '''
     随机获取指定年份中一天的日期
     Keyword arguments:
@@ -107,11 +107,21 @@ def getRandDayForYear(year:int) -> "time.time" :
     Return arguments:
     time.time -- 随机日期
     '''
-    start = time.mktime(datetime.datetime(year,1,1,0,0,0,0).utctimetuple())
-    end = time.mktime(datetime.datetime(year,12,31,23,59,59).utctimetuple())
+    start = datetime.datetime(year,1,1,0,0,0,0).timestamp()
+    end = datetime.datetime(year,12,31,23,59,59).timestamp()
     return getRandDayForDate(start,end)
 
-def getRandDayForDate(startDate:"time.time",endDate:"time.time") -> "time.time":
+def timetupleTodatetime(t:datetime.datetime.timetuple) -> datetime.datetime:
+    '''
+    将timetulp类型数据转换为datetime类型
+    Keyword arguments:
+    t -- timetulp类型数据
+    Return arguments:
+    d -- datetime类型数据
+    '''
+    return datetime.datetime(t.tm_year,t.tm_mon,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec)
+
+def getRandDayForDate(startDate:float,endDate:float) -> datetime.datetime.timetuple:
     '''
     随机获取两个日期中的日期
     Keyword arguments:
@@ -120,10 +130,10 @@ def getRandDayForDate(startDate:"time.time",endDate:"time.time") -> "time.time":
     Return arguments:
     time.localtime -- 随机日期
     '''
-    t = random.randint(startDate,endDate)
-    return time.mktime(time.localtime(t))
+    t = random.uniform(startDate,endDate)
+    return datetime.datetime.fromtimestamp(t).timetuple()
 
-def systemTimeToGameTime(systemTime:"time.time"):
+def systemTimeToGameTime(systemTime:datetime.datetime.timetuple):
     '''
     系统时间戳转换为游戏时间数据
     Keyword arguments:
@@ -131,14 +141,13 @@ def systemTimeToGameTime(systemTime:"time.time"):
     Return arguments:
     gameTime -- 游戏时间数据
     '''
-    systemTime = time.localtime(systemTime)
     return {
         'year':systemTime.tm_year,
         'month':systemTime.tm_mon,
         'day':systemTime.tm_mday
     }
 
-def gameTimeToDatetime(gameTime:dict) -> datetime.datetime:
+def gameTimeToDatetime(gameTime:dict) -> datetime.datetime.timetuple:
     '''
     游戏时间数据转换为系统日期
     Keyword arguments:
@@ -146,9 +155,9 @@ def gameTimeToDatetime(gameTime:dict) -> datetime.datetime:
     Return arguments:
     datetime -- 系统日期
     '''
-    return datetime.datetime(int(gameTime['year']),int(gameTime['month']),int(gameTime['day']))
+    return datetime.datetime(int(gameTime['year']),int(gameTime['month']),int(gameTime['day'])).timetuple()
 
-def countDayForDateToDate(startDate:"datetime.datetime",endDate:"datetime.datetime") -> int:
+def countDayForDateToDate(startDate:datetime.datetime.timetuple,endDate:datetime.datetime.timetuple) -> int:
     '''
     计算两个时间之间经过的天数
     Keyword arguments:
@@ -157,7 +166,9 @@ def countDayForDateToDate(startDate:"datetime.datetime",endDate:"datetime.dateti
     Return arguments:
     int -- 经过天数
     '''
-    return (startDate - endDate).days
+    startDay = timetupleTodatetime(startDate)
+    endDay = timetupleTodatetime(endDate)
+    return (startDay - endDay).days
 
 def getNowTimeSlice(characterId:int):
     '''

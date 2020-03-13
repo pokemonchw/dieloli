@@ -2,8 +2,8 @@
   "standard":{
     "foreground":"#C8C8C8",
     "background":"#000000",
-    "font":"Inconsolata",
-    "fontSize":"15",
+    "font":"Sarasa Mono SC",
+    "fontSize":"18",
     "bold":"0",
     "underline":"0",
     "italic":"0"
@@ -12,7 +12,7 @@
     "foreground":"#C8C8C8",
     "background":"#000000",
     "selectbackground":"grey",
-    "font":"Inconsolata",
+    "font":"Sarasa Mono SC",
     "fontSize":"14",
     "bold":"0",
     "underline":"0",

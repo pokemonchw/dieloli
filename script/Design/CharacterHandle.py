@@ -75,6 +75,8 @@ def initCharacter(characterId:int,character:dict):
         nowCharacter.BodyFatTem = character['BodyFat']
     else:
         nowCharacter.BodyFatTem = nowCharacter.WeigtTem
+    if 'Chest' in character:
+        nowCharacter.ChestTem = character['Chest']
     nowCharacter.initAttr()
     CacheContorl.characterData['character'][characterId] = nowCharacter
 
@@ -82,7 +84,8 @@ def initCharacterTem():
     '''
     初始化角色模板数据
     '''
-    npcData = getRandomNpcData()
+    initRandomNpcData()
+    npcData = CacheContorl.randomNpcList
     nowCharacterList = characterList.copy()
     npcData += [getDirCharacterTem(character) for character in nowCharacterList]
     numpy.random.shuffle(npcData)
@@ -104,13 +107,12 @@ ageWeightData = {
 ageWeightReginData = ValueHandle.getReginList(ageWeightData)
 ageWeightReginList = list(map(int,ageWeightReginData.keys()))
 ageWeightMax = sum([int(ageWeightData[ageWeight]) for ageWeight in ageWeightData])
-def getRandomNpcData() -> list:
+def initRandomNpcData() -> list:
     '''
     生成所有随机npc的数据模板
     '''
-    if CacheContorl.randomNpcList == []:
-        list(map(createRandomNpc,range(randomNpcMax)))
-        return CacheContorl.randomNpcList
+    for i in range(randomNpcMax):
+        createRandomNpc(i)
 
 def createRandomNpc(id) -> dict:
     '''
@@ -133,6 +135,10 @@ def createRandomNpc(id) -> dict:
         "Weight":fatTem,
         "BodyFat":bodyFatTem
     }
+    if randomNpcSex in {"Woman":1,"Futa":1}:
+        randomNpcNewData['Chest'] = AttrCalculation.getRandNpcChestTem()
+    else:
+        randomNpcNewData['Chest'] = 'Precipice'
     CacheContorl.randomNpcList.append(randomNpcNewData)
 
 sexWeightData = TextLoading.getTextData(TextLoading.attrTemplatePath,'RandomNpcSexWeight')

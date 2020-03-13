@@ -96,8 +96,6 @@ def getChest(chestTem:str,birthday:dict):
     overAge = random.randint(14,18)
     overYear = birthday['year'] + overAge
     endDate = GameTime.getRandDayForYear(overYear)
-    endDate = GameTime.systemTimeToGameTime(endDate)
-    endDate = GameTime.gameTimeToDatetime(endDate)
     nowDate = CacheContorl.gameTime.copy()
     nowDate = GameTime.gameTimeToDatetime(nowDate)
     startDate = GameTime.gameTimeToDatetime(birthday)
@@ -139,11 +137,11 @@ def getRandNpcBirthDay(age:int):
     nowMonth = int(CacheContorl.gameTime['month'])
     nowDay = int(CacheContorl.gameTime['day'])
     birthYear = nowYear - age
-    date = time.localtime(GameTime.getRandDayForYear(birthYear))
+    date = GameTime.getRandDayForYear(birthYear)
     birthday = {
-        "year":date[0],
-        "month":date[1],
-        "day":date[2]
+        "year":date.tm_year,
+        "month":date.tm_mon,
+        "day":date.tm_mday
     }
     if nowMonth < birthday['month'] or (nowMonth == birthday['month'] and nowDay < birthday['day']):
         birthday['year'] -= 1
