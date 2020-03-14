@@ -17,15 +17,14 @@ def startInputNamePanel():
     '''
     EraPrint.pline()
     EraPrint.pl(TextLoading.getTextData(TextLoading.messagePath, '3'))
-    inputState = 0
-    while inputState == 0:
+    while 1:
         characterName = GameInit.askfor_str()
         EraPrint.pl(characterName)
         if TextHandle.getTextIndex(characterName) > 10:
             EraPrint.pl(TextLoading.getTextData(TextLoading.errorPath, 'inputNameTooLongError'))
         else:
-            inputState = 1
-            CacheContorl.temporaryCharacter['Name'] = characterName
+            CacheContorl.characterData['character'][0].Name = characterName
+            break
 
 def inputNickNamePanel() -> str:
     '''
@@ -51,7 +50,7 @@ def startInputNickNamePanel():
             EraPrint.pl(TextLoading.getTextData(TextLoading.errorPath, 'inputNickNameTooLongError'))
         else:
             inputState = 1
-            CacheContorl.temporaryCharacter['NickName'] = characterNickName
+            CacheContorl.characterData['character'][0].NickName = characterNickName
     EraPrint.p('\n')
 
 def inputSelfNamePanel() -> str:
@@ -79,7 +78,7 @@ def startInputSelfName():
             EraPrint.pl(TextLoading.getTextData(TextLoading.errorPath, 'inputSelfNameTooLongError'))
         else:
             inputState = 1
-            CacheContorl.temporaryCharacter['SelfName'] = characterSelfName
+            CacheContorl.characterData['character'][0].SelfName = characterSelfName
     EraPrint.p('\n')
 
 def inputSexPanel() -> str:

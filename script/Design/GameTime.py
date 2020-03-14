@@ -99,7 +99,7 @@ def getWeekDate() -> int:
     '''
     return timetupleTodatetime(gameTimeToDatetime(CacheContorl.gameTime)).strftime("%w")
 
-def getRandDayForYear(year:int) -> datetime.datetime.timetuple :
+def getRandDayForYear(year:int) -> datetime.datetime :
     '''
     随机获取指定年份中一天的日期
     Keyword arguments:
@@ -107,8 +107,8 @@ def getRandDayForYear(year:int) -> datetime.datetime.timetuple :
     Return arguments:
     time.time -- 随机日期
     '''
-    start = datetime.datetime(year,1,1,0,0,0,0).timestamp()
-    end = datetime.datetime(year,12,31,23,59,59).timestamp()
+    start = datetime.datetime(year,1,1,0,0,0,0)
+    end = datetime.datetime(year,12,31,23,59,59)
     return getRandDayForDate(start,end)
 
 def timetupleTodatetime(t:datetime.datetime.timetuple) -> datetime.datetime:
@@ -121,7 +121,7 @@ def timetupleTodatetime(t:datetime.datetime.timetuple) -> datetime.datetime:
     '''
     return datetime.datetime(t.tm_year,t.tm_mon,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec)
 
-def getRandDayForDate(startDate:float,endDate:float) -> datetime.datetime.timetuple:
+def getRandDayForDate(startDate:datetime.datetime,endDate:datetime.datetime) -> datetime.datetime:
     '''
     随机获取两个日期中的日期
     Keyword arguments:
@@ -130,8 +130,9 @@ def getRandDayForDate(startDate:float,endDate:float) -> datetime.datetime.timetu
     Return arguments:
     time.localtime -- 随机日期
     '''
-    t = random.uniform(startDate,endDate)
-    return datetime.datetime.fromtimestamp(t).timetuple()
+    subDay = (endDate - startDate).days
+    subDay = random.randint(0,subDay)
+    return getSubDate(day=subDay,oldDate=startDate)
 
 def systemTimeToGameTime(systemTime:datetime.datetime.timetuple):
     '''

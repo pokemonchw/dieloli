@@ -13,16 +13,21 @@ def inputName_func():
     GameTime.initTime()
     CacheContorl.characterData['characterId'] = 0
     CacheContorl.characterData['character'][0] = Character.Character()
-    flowReturn = CreatorCharacterPanel.inputNamePanel()
+    flowReturn = 0
+    while 1:
+        flowReturn = CreatorCharacterPanel.inputNamePanel()
+        if flowReturn == 0:
+            PyCmd.clr_cmd()
+            break
+        elif flowReturn == 1:
+            PyCmd.clr_cmd()
+            CreatorCharacterPanel.startInputNamePanel()
+            PyCmd.clr_cmd()
+        else:
+            break
     if flowReturn == 0:
-        PyCmd.clr_cmd()
         inputNickName_func()
-    elif flowReturn == 1:
-        PyCmd.clr_cmd()
-        CreatorCharacterPanel.startInputNamePanel()
-        PyCmd.clr_cmd()
-        inputName_func()
-    elif flowReturn == 2:
+    else:
         EraPrint.pnextscreen()
         CacheContorl.nowFlowId = 'title_frame'
 
@@ -109,7 +114,7 @@ def inputSexChoice_func():
     elif flowReturn == 4:
         rand = random.randint(0, len(sex) - 1)
         sexAtr = sex[rand]
-        CacheContorl.characterData.characterData['character'][0].Sex = sexAtr
+        CacheContorl.characterData['character'][0].Sex = sexAtr
         PyCmd.clr_cmd()
         inputSexConfirm_func()
     elif flowReturn == 5:
