@@ -111,6 +111,7 @@ def initRandomNpcData() -> list:
     '''
     生成所有随机npc的数据模板
     '''
+    CacheContorl.randomNpcList = []
     for i in range(randomNpcMax):
         createRandomNpc(i)
 
