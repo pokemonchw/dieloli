@@ -11,7 +11,6 @@ def titleFrame_func():
     ans = TitleFramePanel.gameMainPanel()
     PyCmd.clr_cmd()
     if ans == 0:
-        CacheContorl.temporaryCharacter = CacheContorl.temporaryCharacterBak.copy()
         CacheContorl.nowFlowId = 'creator_character'
     elif ans == 1:
         CacheContorl.oldFlowId = 'title_frame'

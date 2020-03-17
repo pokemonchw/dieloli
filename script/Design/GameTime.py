@@ -3,6 +3,7 @@ from dateutil import relativedelta
 import datetime
 import time
 import random
+import bisect
 
 def initTime():
     '''
@@ -177,3 +178,76 @@ def getNowTimeSlice(characterId:int):
     Keyword arguments:
     characterId -- 角色Id
     '''
+    if CacheContorl.gameTime['Month'] in range(1,7) or CacheContorl.gameTime['Month'] in range(9,13):
+        courseTimeJudge = judgeCourseTime(characterId)
+
+def judgeCourseTime(characterId:int) -> bool:
+    '''
+    校验当前时间是否是上课时间
+    Keyword arguments:
+    characterId -- 角色Id
+    '''
+    nowWeekDay = getWeekDate()
+    characterAge = CacheContorl.characterData['character'][characterId].Age
+    if characterAge in range(7,19):
+        phase = characterAge - 7
+        if phase <= 5 and nowWeekDay < 5:
+            return CacheContorl.courseTimeStatus['PrimarySchool']['InCourse']
+        elif phase <= 11 and nowWeekDay < 6:
+            return CacheContorl.courseTimeStatus['JuniorMiddleSchool']['InCourse']
+        else:
+            return CacheContorl.courseTimeStatus['SeniorHighSchool']['InCourse']
+
+def initSchoolCourseTimeStatus():
+    '''
+    按当前时间计算各学校上课状态(当前时间是否是上课时间,计算还有多久上课,多久下课)
+    '''
+    courseStatus = {
+        "InCourse":0,
+        "ToCourse":0,
+        "EndCourse":0
+    }
+    CacheContorl.courseTimeStatus['PrimarySchool'] = courseStatus.copy()
+    CacheContorl.courseTimeStatus['JuniorMiddleSchool'] = courseStatus.copy()
+    CacheContorl.courseTimeStatus['SeniorHighSchool'] = courseStatus.copy()
+    if CacheContorl.gameTime['Month'] in range(1,7) or CacheContorl.gameTime['Month'] in range(9,13):
+        CacheContorl.courseTimeStatus['SeniorHighSchool'] = judgeSeniorCourseTime('SeniorHighSchool')
+        nowWeek = getWeekDate()
+        if nowWeek < 6:
+            CacheContorl.courseTimeStatus['JuniorMiddleSchool'] = judgeJuniorCourseTime('JuniorMiddleSchool')
+        if nowWeek < 5:
+            CacheContorl.courseTimeStatus['PrimarySchool'] = judgePrimaryCourseTime('PrimarySchool')
+
+def judgeSchoolCourseTime(schoolId:str) -> dict:
+    '''
+    校验当前时间是否是学校上课时间
+    Keyword arguments:
+    schoolId -- 学校Id
+    '''
+    courseStatus = {
+        "InCourse":0,
+        "ToCourse":0,
+        "EndCourse":0
+    }
+    courseTimeData = TextLoading.getTextData(TextLoading.courseSession,schoolId)
+    nowTime = CacheContorl.gameTime['Hour'] * 100 + CacheContorl.gameTime['Minute']
+    endTimeData = {courseTimeData[i][1]:i for i in range(len(courseTimeData))}
+    nowTimeIndex = bisect.bisect_left(endTimeData.keys(),nowTime)
+    if nowTimeIndex >= len(endTimeData):
+        return courseStatus
+    startTime = courseTimeData[nowTimeIndex][0]
+    endTime = courseTimeData[nowTimeIndex][1]
+    elif nowTime < startTime:
+        if startTime / 100 != nowTime / 100:
+            indexTime = (startTime / 100 - nowTime / 100) * 60
+            courseStatus['ToCourse'] == startTime - (startTime / 100 - nowTime / 100) * 100 + indexTime - nowTime
+        else:
+            courseStatus['ToCourse'] == startTime - nowTime
+    else:
+        courseStatus['InCourse'] = 1
+        if endTime / 100 != nowTime / 100:
+            indexTime = (endTime / 100 - nowTime / 100) * 60
+            courseStatus['EndCourse'] == endTime - (endTime / 100 - nowTime / 100) * 100 + indexTime - nowTime
+        else:
+            courseStatus['EndCourse'] == endTime - nowTime
+    return courseStatus

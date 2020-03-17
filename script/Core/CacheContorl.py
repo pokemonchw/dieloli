@@ -12,12 +12,6 @@ cmdMap = {}
 # 角色对象数据缓存组
 characterData = {}
 
-# 默认属性模板数据读取
-temCharacterDefault = {}
-
-# 默认属性模板数据备份
-temporaryCharacterBak = {}
-
 # npc模板列表
 npcTemData = []
 
@@ -119,3 +113,6 @@ placeData = {}
 
 # 可穿戴道具类型数据
 wearItemTypeData = {}
+
+# 当前上课时间状态
+courseTimeStatus = {}

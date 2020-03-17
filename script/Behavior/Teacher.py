@@ -6,17 +6,15 @@ from script.Behavior import Default
 def behaviorInit(characterId):
     characterState = CacheContorl.characterData['character'][characterId].State
     if characterState in behaviorList:
-        eval(characterState + 'Behavior')(characterId)
+        behaviorList[characterState](characterId)
     else:
-        eval('Default.' + characterState + 'Behavior')(characterId)
+        Default.behaviorList[characterState](characterId)
 
 #休闲状态行为
 def arderBehavior(characterId):
     nowWeekDay = GameTime.getWeekDate()
     if nowWeekDay in range(1,5):
         nowTimeSlice = GameTime.getNowTimeSlice()
-    else:
-        pass
 
 behaviorList = {
     "arder":arderBehavior
