@@ -237,7 +237,7 @@ def judgeSchoolCourseTime(schoolId:str) -> dict:
         return courseStatus
     startTime = courseTimeData[nowTimeIndex][0]
     endTime = courseTimeData[nowTimeIndex][1]
-    elif nowTime < startTime:
+    if nowTime < startTime:
         if startTime / 100 != nowTime / 100:
             indexTime = (startTime / 100 - nowTime / 100) * 60
             courseStatus['ToCourse'] == startTime - (startTime / 100 - nowTime / 100) * 100 + indexTime - nowTime
