@@ -1,5 +1,5 @@
 from script.Core import TextLoading,ValueHandle,CacheContorl
-import math,random
+import math,random,time
 
 def initPhaseCourseHour():
     '''
@@ -36,8 +36,8 @@ def initPhaseCourseHour():
                 elif nowClassHourMax < classHourMax:
                     classHourData[course] += 1
                     nowClassHourMax += 1
+        moreHour = 0
         while 1:
-            moreHour = 0
             for course in classHourData:
                 if moreHour > 0 and classHourData[course] < 14:
                     classHourData[course] += 1
@@ -78,31 +78,38 @@ def initClassTimeTable():
             while classHourIndex[course] < classHour[course]:
                 for day in range(1,classDay):
                     oldDay = day - 1
-                    if oldDay == 0:
+                    if oldDay < 0:
                         oldDay = classDay - 1
                     classTimeTable[phase].setdefault(day,{})
                     classTimeTable[phase].setdefault(oldDay,{})
-                    for i in range(1,len(classTime.keys())):
-                        time = list(classTime.keys())[i]
-                        if time not in classTimeTable[phase][oldDay] and time not in classTimeTable[phase][day]:
-                            classTimeTable[phase][day][time] = course
+                    for i in range(1,len(classTime)):
+                        if i not in classTimeTable[phase][oldDay] and i not in classTimeTable[phase][day]:
+                            classTimeTable[phase][day][i] = course
                             classHourIndex[course] += 1
                             break
-                        elif time not in classTimeTable[phase][day]:
-                            if course != classTimeTable[phase][oldDay][time]:
-                                classTimeTable[phase][day][time] = course
+                        elif i not in classTimeTable[phase][day]:
+                            if course != classTimeTable[phase][oldDay][i]:
+                                classTimeTable[phase][day][i] = course
                                 classHourIndex[course] += 1
                                 break
                             elif i == len(classTime) - 1:
-                                classTimeTable[phase][day][time] = course
+                                classTimeTable[phase][day][i] = course
                                 classHourIndex[course] += 1
                                 break
-                            elif all([k in classTimeTable[phase][day] for k in list(classTime.keys())[i+1:]]):
-                                classTimeTable[phase][day][time] = course
+                            elif all([k in classTimeTable[phase][day] for k in range(len(classTime[i+1:]))]):
+                                classTimeTable[phase][day][i] = course
                                 classHourIndex[course] += 1
                                 break
                     if classHourIndex[course] >= classHour[course]:
                         break
+        print(classHourIndex)
+        print(classTime)
+    for phase in classTimeTable:
+        print(phase)
+        for day in classTimeTable[phase]:
+            print('  ',day)
+            for index in classTimeTable[phase][day]:
+                print('    ',index,classTimeTable[phase][day][index])
     CacheContorl.courseData['ClassTimeTable'] = classTimeTable
 
 def initClassTeacher():
