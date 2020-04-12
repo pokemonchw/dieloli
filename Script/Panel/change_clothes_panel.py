@@ -94,7 +94,7 @@ def see_character_wear_clothes(character_id: str, change_button: bool):
             era_print.normal_print(draw_text)
         input_s.append(f"{i}")
         i += 1
-        era_print.normal_print('\n')
+        era_print.normal_print("\n")
     return input_s
 
 

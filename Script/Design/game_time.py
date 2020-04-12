@@ -120,9 +120,11 @@ def get_week_date() -> int:
     Return arguments:
     week_day -- 当前星期数
     """
-    return int(timetuple_to_datetime(
-        game_time_to_time_tuple(cache_contorl.game_time)
-    ).strftime("%w"))
+    return int(
+        timetuple_to_datetime(
+            game_time_to_time_tuple(cache_contorl.game_time)
+        ).strftime("%w")
+    )
 
 
 def get_rand_day_for_year(year: int) -> datetime.datetime:
@@ -265,6 +267,7 @@ def init_school_course_time_status():
             cache_contorl.course_time_status[
                 "PrimarySchool"
             ] = judge_school_course_time("PrimarySchool")
+
 
 def judge_school_course_time(school_id: str) -> dict:
     """

@@ -1,6 +1,7 @@
 from Script.Core import text_loading, cache_contorl, py_cmd, era_print
 from Script.Design import attr_text, cmd_button_queue
 
+
 def see_character_item_panel(character_id: int) -> list:
     """
     查看角色背包道具列表面板

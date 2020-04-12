@@ -3,6 +3,7 @@ from Script.Core import cache_contorl, game_init, py_cmd, game_config
 from Script.Design import map_handle, character_handle, panel_state_handle
 from Script.Panel import in_scene_panel, see_character_attr_panel, instruct_panel
 
+
 def get_in_scene_func():
     """
     用于进入场景界面的流程

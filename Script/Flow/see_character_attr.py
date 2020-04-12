@@ -52,6 +52,7 @@ def acknowledgment_attribute_func():
             cache_contorl.now_flow_id = "title_frame"
             break
 
+
 def see_attr_on_every_time_func():
     """
     通用用于查看角色属性的流程

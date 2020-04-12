@@ -20,6 +20,7 @@ def see_map_panel() -> list:
     input_s = input_s + map_handle.print_map(now_map)
     return input_s
 
+
 def see_move_path_panel() -> dict:
     """
     当前场景可直接通往的移动路径绘制面板
@@ -30,7 +31,7 @@ def see_move_path_panel() -> dict:
     now_map_str = map_handle.get_map_system_path_str_for_list(now_map)
     map_data = cache_contorl.map_data[now_map_str]
     move_path_info = text_loading.get_text_data(text_loading.MESSAGE_PATH, "27")
-    era_print.normal_print('\n')
+    era_print.normal_print("\n")
     era_print.line_feed_print(move_path_info)
     path_edge = map_data["PathEdge"]
     map_scene_id = str(map_handle.get_map_scene_id_for_scene_path(now_map, now_scene))

@@ -40,7 +40,7 @@ def see_character_list_panel(max_page: int) -> list:
         era_print.little_line_print()
         py_cmd.pcmd(cmd_text, cmd_id, None)
         input_s.append(cmd_id)
-        era_print.normal_print('\n')
+        era_print.normal_print("\n")
     page_text = "(" + str(page_id) + "/" + str(max_page) + ")"
     era_print.page_line_print(sample="-", string=page_text)
     era_print.line_feed_print()

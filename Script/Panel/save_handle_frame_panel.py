@@ -192,9 +192,7 @@ def confirmation_load_save_panel() -> list:
     确认读取存档面板
     """
     era_print.line_feed_print()
-    cmd_list = text_loading.get_text_data(
-        text_loading.CMD_PATH, "confirmationLoadSave"
-    )
+    cmd_list = text_loading.get_text_data(text_loading.CMD_PATH, "confirmationLoadSave")
     message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "24")
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
