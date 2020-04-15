@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from collections import Callable
 from Script.Core import (
     game_data,
     flow_handle,
@@ -16,7 +17,7 @@ NO_EVENT_FUNC = "no_event_func"
 _main_flow = None
 
 
-def init(main_flow: "function"):
+def init(main_flow: Callable):
     """
     游戏流程初始化
     Keyword argument:
@@ -45,18 +46,18 @@ def init(main_flow: "function"):
     def run_main_flow():
         nonlocal _have_run
         while True:
-            if _have_run == False:
+            if not _have_run:
                 main_flow()
                 _have_run = True
             askfor_order()
             flow_handle.call_default_flow()
-            if flow_handle.exit_flag == True:
+            if flow_handle.exit_flag:
                 break
 
     run_main_flow()
 
 
-def run(main_func: "function"):
+def run(main_func: Callable):
     """
     执行游戏主流程
     Keyword arguments:

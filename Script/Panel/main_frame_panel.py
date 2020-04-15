@@ -24,14 +24,18 @@ def main_frame_panel() -> list:
     gold_text = attr_text.get_gold_text(character_id)
     era_print.line_feed_print(gold_text)
     attr_print.print_hp_and_mp_bar(character_id)
-    main_menu_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "68")
+    main_menu_text = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "68"
+    )
     era_print.son_title_print(main_menu_text)
     era_print.line_feed_print("\n")
     ask_for_main_menu = cmd_button_queue.option_int(
         cmd_button_queue.MAIN_MENU, 3, "left", askfor=False, cmd_size="center"
     )
     cmd_list = cmd_list + ask_for_main_menu
-    system_menu_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "69")
+    system_menu_text = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "69"
+    )
     era_print.son_title_print(system_menu_text)
     era_print.line_feed_print()
     system_menu_start_id = len(ask_for_main_menu)

@@ -1,8 +1,6 @@
 import datetime
-import time
 import random
 import bisect
-import pysnooper
 from dateutil import relativedelta
 from Script.Core import cache_contorl, game_config, text_loading
 
@@ -26,7 +24,7 @@ def get_date_text(game_time_data=None) -> str:
     Keyword arguments:
     game_timeData -- 时间数据，若为None，则获取当前游戏时间
     """
-    if game_time_data == None:
+    if game_time_data is None:
         game_time_data = cache_contorl.game_time
     date_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "65")
     game_year = str(game_time_data["year"])
@@ -65,11 +63,15 @@ def get_week_day_text() -> str:
     获取星期描述文本
     """
     week_day = get_week_date()
-    week_date_data = text_loading.get_text_data(text_loading.MESSAGE_PATH, "19")
+    week_date_data = text_loading.get_text_data(
+        text_loading.MESSAGE_PATH, "19"
+    )
     return week_date_data[int(week_day)]
 
 
-def sub_time_now(minute=0, hour=0, day=0, month=0, year=0) -> datetime.datetime:
+def sub_time_now(
+    minute=0, hour=0, day=0, month=0, year=0
+) -> datetime.datetime:
     """
     增加当前游戏时间
     Keyword arguments:
@@ -100,7 +102,7 @@ def get_sub_date(
     year -- 增加年数
     old_date -- 旧日期，若为None，则获取当前游戏时间
     """
-    if old_date == None:
+    if old_date is None:
         old_date = datetime.datetime(
             int(cache_contorl.game_time["year"]),
             int(cache_contorl.game_time["month"]),
@@ -198,7 +200,8 @@ def game_time_to_time_tuple(game_time: dict) -> datetime.datetime.timetuple:
 
 
 def count_day_for_time_tuple(
-    start_date: datetime.datetime.timetuple, end_date: datetime.datetime.timetuple
+    start_date: datetime.datetime.timetuple,
+    end_date: datetime.datetime.timetuple,
 ) -> int:
     """
     计算两个时间之间经过的天数
@@ -219,9 +222,9 @@ def get_now_time_slice(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    if cache_contorl.game_time["month"] in range(1, 7) or cache_contorl.game_time[
-        "month"
-    ] in range(9, 13):
+    if cache_contorl.game_time["month"] in range(
+        1, 7
+    ) or cache_contorl.game_time["month"] in range(9, 13):
         course_time_judge = judge_course_time(character_id)
 
 
@@ -236,28 +239,35 @@ def judge_course_time(character_id: int) -> bool:
     if character_age in range(7, 19):
         phase = character_age - 7
         if phase <= 5 and now_week_day < 5:
-            return cache_contorl.course_time_status["PrimarySchool"]["InCourse"]
+            return cache_contorl.course_time_status["PrimarySchool"][
+                "InCourse"
+            ]
         elif phase <= 11 and now_week_day < 6:
-            return cache_contorl.course_time_status["JuniorMiddleSchool"]["InCourse"]
+            return cache_contorl.course_time_status["JuniorMiddleSchool"][
+                "InCourse"
+            ]
         else:
-            return cache_contorl.course_time_status["SeniorHighSchool"]["InCourse"]
+            return cache_contorl.course_time_status["SeniorHighSchool"][
+                "InCourse"
+            ]
 
 
-@pysnooper.snoop()
 def init_school_course_time_status():
     """
     按当前时间计算各学校上课状态(当前时间是否是上课时间,计算还有多久上课,多久下课)
     """
     course_status = {"InCourse": 0, "ToCourse": 0, "EndCourse": 0}
     cache_contorl.course_time_status["PrimarySchool"] = course_status.copy()
-    cache_contorl.course_time_status["JuniorMiddleSchool"] = course_status.copy()
+    cache_contorl.course_time_status[
+        "JuniorMiddleSchool"
+    ] = course_status.copy()
     cache_contorl.course_time_status["SeniorHighSchool"] = course_status.copy()
-    if cache_contorl.game_time["month"] in range(1, 7) or cache_contorl.game_time[
-        "month"
-    ] in range(9, 13):
-        cache_contorl.course_time_status["SeniorHighSchool"] = judge_school_course_time(
+    if cache_contorl.game_time["month"] in range(
+        1, 7
+    ) or cache_contorl.game_time["month"] in range(9, 13):
+        cache_contorl.course_time_status[
             "SeniorHighSchool"
-        )
+        ] = judge_school_course_time("SeniorHighSchool")
         now_week = get_week_date()
         if now_week < 6:
             cache_contorl.course_time_status[
@@ -279,8 +289,13 @@ def judge_school_course_time(school_id: str) -> dict:
     course_time_data = text_loading.get_text_data(
         text_loading.COURSE_SESSION_PATH, school_id
     )
-    now_time = cache_contorl.game_time["hour"] * 100 + cache_contorl.game_time["minute"]
-    end_time_data = {course_time_data[i][1]: i for i in range(len(course_time_data))}
+    now_time = (
+        cache_contorl.game_time["hour"] * 100
+        + cache_contorl.game_time["minute"]
+    )
+    end_time_data = {
+        course_time_data[i][1]: i for i in range(len(course_time_data))
+    }
     now_time_index = bisect.bisect_left(list(end_time_data.keys()), now_time)
     if now_time_index >= len(end_time_data):
         return course_status

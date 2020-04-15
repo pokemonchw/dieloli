@@ -1,5 +1,11 @@
 import time
-from Script.Core import era_print, text_loading, text_handle, game_config, py_cmd
+from Script.Core import (
+    era_print,
+    text_loading,
+    text_handle,
+    game_config,
+    py_cmd,
+)
 from Script.Design import cmd_button_queue
 
 
@@ -20,10 +26,14 @@ def game_main_panel() -> int:
     游戏标题界面主面板
     """
     era_print.restart_line_print()
-    era_print.line_feed_print(text_handle.align(game_config.game_name, "center"))
+    era_print.line_feed_print(
+        text_handle.align(game_config.game_name, "center")
+    )
     era_print.line_feed_print(text_handle.align(game_config.author, "right"))
     era_print.line_feed_print(text_handle.align(game_config.verson, "right"))
-    era_print.line_feed_print(text_handle.align(game_config.verson_time, "right"))
+    era_print.line_feed_print(
+        text_handle.align(game_config.verson_time, "right")
+    )
     era_print.line_feed_print()
     era_print.restart_line_print()
     era_print.lines_center_print(

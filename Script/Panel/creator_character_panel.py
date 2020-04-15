@@ -6,7 +6,7 @@ from Script.Core import (
     game_init,
     text_handle,
 )
-from Script.Design import attr_calculation, cmd_button_queue
+from Script.Design import cmd_button_queue
 
 
 def input_name_panel() -> str:
@@ -69,7 +69,9 @@ def start_input_nick_name_panel():
                 )
             )
         else:
-            cache_contorl.character_data["character"][0].nick_name = character_nick_name
+            cache_contorl.character_data["character"][
+                0
+            ].nick_name = character_nick_name
             break
 
 
@@ -103,7 +105,9 @@ def start_input_self_name():
                 )
             )
         else:
-            cache_contorl.character_data["character"][0].self_name = character_self_name
+            cache_contorl.character_data["character"][
+                0
+            ].self_name = character_self_name
             break
 
 

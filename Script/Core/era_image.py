@@ -20,7 +20,9 @@ def get_image_data(image_name: str, image_path="") -> PhotoImage:
     if image_path == "":
         image_path = os.path.join(game_path, "image", image_name + ".png")
     else:
-        image_path = os.path.join(game_path, "image", image_path, image_name + ".png")
+        image_path = os.path.join(
+            game_path, "image", image_path, image_name + ".png"
+        )
     cache_contorl.image_id += 1
     return PhotoImage(file=image_path)
 
@@ -32,5 +34,7 @@ def print_image(image_name: str, image_path=""):
     image_name -- 图片名字
     image_path -- 图片路径 (default '')
     """
-    image_data[str(cache_contorl.image_id)] = get_image_data(image_name, image_path)
+    image_data[str(cache_contorl.image_id)] = get_image_data(
+        image_name, image_path
+    )
     textbox.image_create(END, image=image_data[str(cache_contorl.image_id)])

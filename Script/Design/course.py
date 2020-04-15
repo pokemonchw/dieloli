@@ -1,4 +1,5 @@
-import math, random, time
+import math
+import random
 from Script.Core import text_loading, value_handle, cache_contorl
 from Script.Design.character import Character
 
@@ -19,7 +20,9 @@ def init_phase_course_hour():
     senior_high_weight = text_loading.get_text_data(
         text_loading.PHASE_COURSE_PATH, "SeniorHighSchool"
     )
-    now_weight_list = primary_weight + junior_middle_weight + senior_high_weight
+    now_weight_list = (
+        primary_weight + junior_middle_weight + senior_high_weight
+    )
     all_class_hour_data = {}
     phase_index = 0
     for phase in now_weight_list:
@@ -46,7 +49,8 @@ def init_phase_course_hour():
                 if now_class_hour_max == class_hour_max:
                     break
                 elif (
-                    class_hour_data[course] > 1 and now_class_hour_max > class_hour_max
+                    class_hour_data[course] > 1
+                    and now_class_hour_max > class_hour_max
                 ):
                     class_hour_data[course] -= 1
                     now_class_hour_max -= 1
@@ -74,7 +78,9 @@ def init_class_time_table():
     """
     初始化各班级课程表
     """
-    course_session = text_loading.get_game_data(text_loading.COURSE_SESSION_PATH)
+    course_session = text_loading.get_game_data(
+        text_loading.COURSE_SESSION_PATH
+    )
     class_time_table = {}
     for phase in cache_contorl.course_data["ClassHour"]:
         class_time = {}
@@ -145,7 +151,9 @@ def init_class_teacher():
     vice_course_index_b = 0
     cache_contorl.course_data["ClassTeacher"] = {}
     for phase in cache_contorl.course_data["ClassHour"]:
-        course_max_a += len(cache_contorl.course_data["ClassHour"][phase].keys()) * 3
+        course_max_a += (
+            len(cache_contorl.course_data["ClassHour"][phase].keys()) * 3
+        )
         for course in cache_contorl.course_data["ClassHour"][phase]:
             if cache_contorl.course_data["ClassHour"][phase][course] > 7:
                 course_max_b += 3
@@ -164,17 +172,24 @@ def course_abmain_distribution():
     """
     for phase in range(12, 0, -1):
         class_list = cache_contorl.place_data["Classroom_" + str(phase)]
-        cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)] = {}
+        cache_contorl.course_data["ClassTeacher"][
+            "Classroom_" + str(phase)
+        ] = {}
         for classroom in class_list:
-            cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)][
-                classroom
-            ] = {}
+            cache_contorl.course_data["ClassTeacher"][
+                "Classroom_" + str(phase)
+            ][classroom] = {}
             for course in cache_contorl.course_data["ClassHour"][phase - 1]:
-                if cache_contorl.course_data["ClassHour"][phase - 1][course] > 7:
+                if (
+                    cache_contorl.course_data["ClassHour"][phase - 1][course]
+                    > 7
+                ):
                     cache_contorl.course_data["ClassTeacher"][
                         "Classroom_" + str(phase)
                     ][classroom][course] = []
-                    for teacher in cache_contorl.teacher_course_experience[course]:
+                    for teacher in cache_contorl.teacher_course_experience[
+                        course
+                    ]:
                         if teacher not in teacher_data:
                             teacher_data[teacher] = 0
                             cache_contorl.course_data["ClassTeacher"][
@@ -193,17 +208,24 @@ def course_distribution_a():
     course_abmain_distribution()
     for phase in range(1, 13):
         class_list = cache_contorl.place_data["Classroom_" + str(phase)]
-        cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)] = {}
+        cache_contorl.course_data["ClassTeacher"][
+            "Classroom_" + str(phase)
+        ] = {}
         for classroom in class_list:
-            cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)][
-                classroom
-            ] = {}
+            cache_contorl.course_data["ClassTeacher"][
+                "Classroom_" + str(phase)
+            ][classroom] = {}
             for course in cache_contorl.course_data["ClassHour"][phase - 1]:
-                if cache_contorl.course_data["ClassHour"][phase - 1][course] <= 7:
+                if (
+                    cache_contorl.course_data["ClassHour"][phase - 1][course]
+                    <= 7
+                ):
                     cache_contorl.course_data["ClassTeacher"][
                         "Classroom_" + str(phase)
                     ][classroom][course] = []
-                    for teacher in cache_contorl.teacher_course_experience[course]:
+                    for teacher in cache_contorl.teacher_course_experience[
+                        course
+                    ]:
                         if teacher not in teacher_data:
                             teacher_data[teacher] = 0
                             cache_contorl.course_data["ClassTeacher"][
@@ -219,18 +241,25 @@ def course_distribution_b():
     course_abmain_distribution()
     for phase in range(1, 13):
         class_list = cache_contorl.place_data["Classroom_" + str(phase)]
-        cache_contorl.course_data["ClassTeacher"]["CLassroom_" + str(phase)] = {}
+        cache_contorl.course_data["ClassTeacher"][
+            "CLassroom_" + str(phase)
+        ] = {}
         teacher_course_index = 0
         for course in cache_contorl.course_data["ClassHour"][phase - 1]:
             for classroom in class_list:
-                cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)][
-                    classroom
-                ] = {}
-                if cache_contorl.course_data["ClassHour"][phase - 1][course] <= 7:
+                cache_contorl.course_data["ClassTeacher"][
+                    "Classroom_" + str(phase)
+                ][classroom] = {}
+                if (
+                    cache_contorl.course_data["ClassHour"][phase - 1][course]
+                    <= 7
+                ):
                     cache_contorl.course_data["ClassTeacher"][
                         "Classroom_" + str(phase)
                     ][classroom][course] = []
-                    for teacher in cache_contorl.teacher_course_experience[course]:
+                    for teacher in cache_contorl.teacher_course_experience[
+                        course
+                    ]:
                         if teacher not in teacher_data:
                             cache_contorl.course_data["ClassTeacher"][
                                 "Classroom_" + str(phase)
@@ -257,16 +286,24 @@ def init_phase_course_hour_experience():
             for knowledge in course_knowledge_data[course]["Knowledge"]:
                 if knowledge not in phase_experience[phase]:
                     phase_experience[phase][knowledge] = {}
-                for skill in course_knowledge_data[course]["Knowledge"][knowledge]:
+                for skill in course_knowledge_data[course]["Knowledge"][
+                    knowledge
+                ]:
                     skill_experience = (
-                        course_knowledge_data[course]["Knowledge"][knowledge][skill]
+                        course_knowledge_data[course]["Knowledge"][knowledge][
+                            skill
+                        ]
                         * course_hour
                         * 38
                     )
                     if skill in phase_experience[phase][knowledge]:
-                        phase_experience[phase][knowledge][skill] += skill_experience
+                        phase_experience[phase][knowledge][
+                            skill
+                        ] += skill_experience
                     else:
-                        phase_experience[phase][knowledge][skill] = skill_experience
+                        phase_experience[phase][knowledge][
+                            skill
+                        ] = skill_experience
     cache_contorl.course_data["PhaseExperience"] = phase_experience
 
 
@@ -286,16 +323,20 @@ def init_character_knowledge():
             init_teacher_knowledge(character)
             for course in course_knowledge_data:
                 if course not in cache_contorl.teacher_course_experience:
-                    cache_contorl.teacher_course_experience.setdefault(course, {})
+                    cache_contorl.teacher_course_experience.setdefault(
+                        course, {}
+                    )
                 now_course_experience = 0
                 for knowledge in course_knowledge_data[course]["Knowledge"]:
-                    for skill in course_knowledge_data[course]["Knowledge"][knowledge]:
+                    for skill in course_knowledge_data[course]["Knowledge"][
+                        knowledge
+                    ]:
                         if knowledge == "Language":
                             now_course_experience += character.language[skill]
                         else:
-                            now_course_experience += character.knowledge[knowledge][
-                                skill
-                            ]
+                            now_course_experience += character.knowledge[
+                                knowledge
+                            ][skill]
                 cache_contorl.teacher_course_experience[course][
                     i
                 ] = now_course_experience
@@ -318,7 +359,10 @@ def init_teacher_knowledge(character: Character) -> dict:
             )
     for language in character.language:
         character.knowledge[knowledge][skill] += (
-            character.language[language] / 12 * study_year * random.uniform(0.25, 0.75)
+            character.language[language]
+            / 12
+            * study_year
+            * random.uniform(0.25, 0.75)
         )
 
 
@@ -350,6 +394,10 @@ def init_experience_for_grade(class_grade: str, character):
                     skill_interest = character.interest[skill]
                     skill_experience *= skill_interest
                     if skill in character.knowledge[knowledge]:
-                        character.knowledge[knowledge][skill] += skill_experience
+                        character.knowledge[knowledge][
+                            skill
+                        ] += skill_experience
                     else:
-                        character.knowledge[knowledge][skill] = skill_experience
+                        character.knowledge[knowledge][
+                            skill
+                        ] = skill_experience

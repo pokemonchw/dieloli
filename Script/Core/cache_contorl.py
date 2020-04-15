@@ -1,5 +1,3 @@
-import concurrent.futures
-
 # 流程用变量组
 flow_contorl = {}
 

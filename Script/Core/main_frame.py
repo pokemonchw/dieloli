@@ -4,7 +4,6 @@ import json
 import uuid
 import psutil
 import signal
-import threading
 from tkinter import (
     ttk,
     Tk,
@@ -19,7 +18,6 @@ from tkinter import (
     S,
     VERTICAL,
     font,
-    PhotoImage,
     Entry,
 )
 from Script.Core import (
@@ -29,7 +27,6 @@ from Script.Core import (
     setting_frame,
     about_frame,
     text_handle,
-    game_path_config,
 )
 
 
@@ -48,7 +45,9 @@ def close_window():
 game_name = game_config.game_name
 root = Tk()
 root.title(game_name)
-root.geometry(game_config.window_width + "x" + game_config.window_hight + "+0+0")
+root.geometry(
+    game_config.window_width + "x" + game_config.window_hight + "+0+0"
+)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 root.protocol("WM_DELETE_WINDOW", close_window)
@@ -73,7 +72,9 @@ textbox.configure(yscrollcommand=s_vertical.set)
 s_vertical.grid(column=1, row=0, sticky=(N, E, S), rowspan=2)
 
 # 输入框背景容器
-order_font_data = text_loading.get_text_data(text_loading.FONT_CONFIG_PATH, "order")
+order_font_data = text_loading.get_text_data(
+    text_loading.FONT_CONFIG_PATH, "order"
+)
 input_background_box = Text(
     main_frame,
     highlightbackground=game_config.background_color,
@@ -98,7 +99,9 @@ input_background_box_cursor.config(foreground=order_font_data["foreground"])
 
 # 输入栏
 order = StringVar()
-order_font = font.Font(family=order_font_data["font"], size=order_font_data["fontSize"])
+order_font = font.Font(
+    family=order_font_data["font"], size=order_font_data["fontSize"]
+)
 inputbox = Entry(
     input_background_box,
     borderwidth=0,
@@ -123,11 +126,15 @@ menu_test = Menu(menu_bar)
 menu_other = Menu(menu_bar)
 menu_bar.add_cascade(
     menu=menu_file,
-    label=text_loading.get_text_data(text_loading.MENU_PATH, text_loading.MENU_FILE),
+    label=text_loading.get_text_data(
+        text_loading.MENU_PATH, text_loading.MENU_FILE
+    ),
 )
 menu_bar.add_cascade(
     menu=menu_other,
-    label=text_loading.get_text_data(text_loading.MENU_PATH, text_loading.MENU_OTHER),
+    label=text_loading.get_text_data(
+        text_loading.MENU_PATH, text_loading.MENU_OTHER
+    ),
 )
 
 
@@ -162,20 +169,28 @@ def about(*args):
 
 
 menu_file.add_command(
-    label=text_loading.get_text_data(text_loading.MENU_PATH, text_loading.MENU_RESTART),
+    label=text_loading.get_text_data(
+        text_loading.MENU_PATH, text_loading.MENU_RESTART
+    ),
     command=reset,
 )
 menu_file.add_command(
-    label=text_loading.get_text_data(text_loading.MENU_PATH, text_loading.MENU_QUIT),
+    label=text_loading.get_text_data(
+        text_loading.MENU_PATH, text_loading.MENU_QUIT
+    ),
     command=quit,
 )
 
 menu_other.add_command(
-    label=text_loading.get_text_data(text_loading.MENU_PATH, text_loading.MENU_SETTING),
+    label=text_loading.get_text_data(
+        text_loading.MENU_PATH, text_loading.MENU_SETTING
+    ),
     command=setting,
 )
 menu_other.add_command(
-    label=text_loading.get_text_data(text_loading.MENU_PATH, text_loading.MENU_ABBOUT),
+    label=text_loading.get_text_data(
+        text_loading.MENU_PATH, text_loading.MENU_ABBOUT
+    ),
     command=about,
 )
 
@@ -216,7 +231,10 @@ def read_queue():
         quene_str = main_queue.get()
         json_data = json.loads(quene_str)
 
-        if "clear_cmd" in json_data.keys() and json_data["clear_cmd"] == "true":
+        if (
+            "clear_cmd" in json_data.keys()
+            and json_data["clear_cmd"] == "true"
+        ):
             clear_screen()
         if (
             "clearorder_cmd" in json_data.keys()
@@ -247,14 +265,17 @@ def read_queue():
             from Script.Core import era_image
 
             era_image.print_image(
-                json_data["image"]["image_name"], json_data["image"]["image_path"]
+                json_data["image"]["image_name"],
+                json_data["image"]["image_path"],
             )
 
         for c in json_data["content"]:
             if c["type"] == "text":
                 now_print(c["text"], style=tuple(c["style"]))
             if c["type"] == "cmd":
-                io_print_cmd(c["text"], c["num"], c["normal_style"], c["on_style"])
+                io_print_cmd(
+                    c["text"], c["num"], c["normal_style"], c["on_style"]
+                )
     root.after(10, read_queue)
 
 
@@ -379,7 +400,10 @@ def frame_style_def(
     if italic == "1":
         font_list.append("italic")
     textbox.tag_configure(
-        style_name, foreground=foreground, background=background, font=tuple(font_list)
+        style_name,
+        foreground=foreground,
+        background=background,
+        font=tuple(font_list),
     )
 
 
@@ -411,6 +435,7 @@ def clear_order():
 # ############################################################
 
 cmd_tag_map = {}
+
 
 # 命令生成函数
 def io_print_cmd(
@@ -501,7 +526,9 @@ def io_clear_cmd(*cmd_numbers: list):
             index_first = textbox.tag_ranges(cmd_tag_map[num])[0]
             index_lskip_one_waitast = textbox.tag_ranges(cmd_tag_map[num])[1]
             for tag_name in textbox.tag_names(index_first):
-                textbox.tag_remove(tag_name, index_first, index_lskip_one_waitast)
+                textbox.tag_remove(
+                    tag_name, index_first, index_lskip_one_waitast
+                )
             textbox.tag_add("standard", index_first, index_lskip_one_waitast)
             textbox.tag_delete(cmd_tag_map[num])
         cmd_tag_map.clear()

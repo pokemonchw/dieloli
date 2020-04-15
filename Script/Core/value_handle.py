@@ -19,7 +19,9 @@ def get_region_list(now_data: dict) -> dict:
     now_data -- 需要进行计算权重的dict数据
     """
     sort_data = sorted_dict_for_values(now_data)
-    return dict(zip(itertools.accumulate(sort_data.values()), sort_data.keys()))
+    return dict(
+        zip(itertools.accumulate(sort_data.values()), sort_data.keys())
+    )
 
 
 def sorted_dict_for_values(old_dict: dict) -> dict:
@@ -31,7 +33,7 @@ def sorted_dict_for_values(old_dict: dict) -> dict:
     return two_bit_array_to_dict(sorted(old_dict.items(), key=lambda x: x[1]))
 
 
-def get_random_for_weight(data: dict) -> "data_key":
+def get_random_for_weight(data: dict) -> dict.keys:
     """
     按权重随机获取dict中的一个key
     Keyword arguments:

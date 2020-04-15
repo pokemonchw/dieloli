@@ -1,5 +1,4 @@
 from Script.Core import cache_contorl, text_loading, era_print
-from Script.Design import attr_text
 
 
 def see_character_social_contact_panel(character_id: int):

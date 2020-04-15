@@ -1,5 +1,4 @@
 from Script.Core import game_config, game_init, cache_contorl
-from Script.Design import character_handle
 from Script.Panel import see_character_list_panel
 
 character_page_show = int(game_config.character_list_show)
@@ -27,7 +26,9 @@ def see_character_list_func():
         page_id = int(cache_contorl.panel_state["SeeCharacterListPanel"])
         if yrn == str(start_id):
             if page_id == 0:
-                cache_contorl.panel_state["SeeCharacterListPanel"] = str(max_page)
+                cache_contorl.panel_state["SeeCharacterListPanel"] = str(
+                    max_page
+                )
             else:
                 page_id = str(page_id - 1)
                 cache_contorl.panel_state["SeeCharacterListPanel"] = page_id

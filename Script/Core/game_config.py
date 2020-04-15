@@ -1,5 +1,5 @@
 import os
-from Script.Core import game_data, game_path_config, json_handle
+from Script.Core import game_path_config, json_handle
 
 game_path = game_path_config.game_path
 

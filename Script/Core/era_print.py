@@ -25,7 +25,9 @@ def normal_print(string: str, style="standard", rich_text_judge=True):
     rich_text_judge -- 启用富文本的开关 (default True)
     """
     if rich_text_judge:
-        bar_list = list(text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys())
+        bar_list = list(
+            text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys()
+        )
         string = dictionaries.handle_text(string)
         style_list = rich_text.set_rich_text_print(string, style)
         global last_char
@@ -290,7 +292,9 @@ def list_print(string_list: list, string_column=1, string_size="left"):
         if string_text_index > string_index:
             string_text = string_text[:string_index]
         elif string_text_index < string_index:
-            string_text = " " * (string_index - string_text_index) + string_text
+            string_text = (
+                " " * (string_index - string_text_index) + string_text
+            )
         if i == 0:
             normal_print(string_text)
         elif i / string_column >= 1 and i % string_column == 0:
@@ -353,7 +357,8 @@ def lines_center_print(sleep_time: float, string="", style="standard"):
                 cache_contorl.wframe_mouse["w_frame_lines_up"] = 2
                 for index_i_up in range(index_i_up, len(string_list)):
                     restart_line_print(
-                        text_handle.align(string_list[index_i_up], "center"), style
+                        text_handle.align(string_list[index_i_up], "center"),
+                        style,
                     )
                 cache_contorl.wframe_mouse["w_frame_line_state"] = 2
                 break

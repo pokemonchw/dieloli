@@ -1,4 +1,4 @@
-from Script.Core import cache_contorl, flow_handle
+from Script.Core import cache_contorl, game_config
 from Script.Panel import use_item_panel
 
 
@@ -27,8 +27,10 @@ def get_character_item_page_max(character_id: str):
     Keyword arguments:
     character_id -- 角色Id
     """
-    item_max = len(cache_contorl.character_data["character"][character_id].item)
-    page_index - game_config.see_character_item_max
+    item_max = len(
+        cache_contorl.character_data["character"][character_id].item
+    )
+    page_index = game_config.see_character_item_max
     if item_max - page_index < 0:
         return 0
     elif item_max % page_index == 0:

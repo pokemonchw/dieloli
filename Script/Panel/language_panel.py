@@ -8,7 +8,9 @@ def see_character_language_panel(character_id: str):
     Keyword arguments:
     character_id -- 角色Id
     """
-    language_text_data = text_loading.get_game_data(text_loading.LANGUAGE_SKILLS_PATH)
+    language_text_data = text_loading.get_game_data(
+        text_loading.LANGUAGE_SKILLS_PATH
+    )
     character_language = cache_contorl.character_data["character"][
         character_id
     ].language

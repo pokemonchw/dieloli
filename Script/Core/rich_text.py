@@ -8,7 +8,6 @@ def set_rich_text_print(text_message: str, default_style: str) -> list:
     text_message -- 原始文本
     default_style -- 无富文本样式时的默认样式
     """
-    print_judge = False
     style_name_list = {
         key: 0
         for key in game_config.get_font_data_list()
@@ -55,7 +54,7 @@ def set_rich_text_print(text_message: str, default_style: str) -> list:
                         cache_contorl.text_style_position["position"]
                     ]
             else:
-                if style_last_index != None:
+                if style_last_index is not None:
                     if i == len(text_message):
                         cache_contorl.text_style_position["position"] = 0
                         cache_contorl.output_text_style = "standard"
@@ -74,7 +73,9 @@ def remove_rich_cache(string: str) -> str:
     string -- 原始文本
     """
     string = dictionaries.handle_text(string)
-    bar_list = list(text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys())
+    bar_list = list(
+        text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys()
+    )
     style_name_list = game_config.get_font_data_list() + bar_list
     for i in range(0, len(style_name_list)):
         style_text_head = "<" + style_name_list[i] + ">"

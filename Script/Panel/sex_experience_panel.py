@@ -23,5 +23,7 @@ def see_character_sex_experience_panel(character_id: int):
         text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "7")
     )
     character_engraving = character_data.engraving
-    character_engraving_text = attr_text.get_engraving_text(character_engraving)
+    character_engraving_text = attr_text.get_engraving_text(
+        character_engraving
+    )
     era_print.list_print(character_engraving_text, 3, "center")

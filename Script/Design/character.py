@@ -1,6 +1,5 @@
 import random
 import uuid
-import time
 from Script.Core import cache_contorl, text_loading, value_handle
 from Script.Design import attr_calculation, clothing, nature
 
@@ -77,7 +76,9 @@ class Character:
         self.end_age = attr_calculation.get_end_age(self.sex)
         self.height = attr_calculation.get_height(self.sex, self.age, {})
         bmi = attr_calculation.get_bmi(self.weigt_tem)
-        self.weight = attr_calculation.get_weight(bmi, self.height["NowHeight"])
+        self.weight = attr_calculation.get_weight(
+            bmi, self.height["NowHeight"]
+        )
         self.bodyfat = attr_calculation.get_bodyfat(self.sex, self.bodyfat_tem)
         self.measurements = attr_calculation.get_measurements(
             self.sex,
@@ -90,7 +91,9 @@ class Character:
             self.sex_experience_tem
         )
         self.sex_grade = attr_calculation.get_sex_grade(self.sex_experience)
-        default_clothing_data = clothing.creator_suit(self.clothing_tem, self.sex)
+        default_clothing_data = clothing.creator_suit(
+            self.clothing_tem, self.sex
+        )
         self.clothing = {
             clothing: {uuid.uuid1(): default_clothing_data[clothing]}
             if clothing in default_clothing_data
@@ -98,22 +101,34 @@ class Character:
             for clothing in self.clothing
         }
         self.chest = attr_calculation.get_chest(self.chest_tem, self.birthday)
-        self.hit_point_max = attr_calculation.get_max_hit_point(self.hit_point_tem)
+        self.hit_point_max = attr_calculation.get_max_hit_point(
+            self.hit_point_tem
+        )
         self.hit_point = self.hit_point_max
-        self.mana_point_max = attr_calculation.get_max_mana_point(self.mana_point_tem)
+        self.mana_point_max = attr_calculation.get_max_mana_point(
+            self.mana_point_tem
+        )
         self.mana_point = self.mana_point_max
         self.nature = nature.get_random_nature()
-        self.status = text_loading.get_game_data(text_loading.CHARACTER_STATE_PATH)
+        self.status = text_loading.get_game_data(
+            text_loading.CHARACTER_STATE_PATH
+        )
         self.wear_item = {
             "Wear": {
                 key: {}
-                for key in text_loading.get_game_data(text_loading.WEAR_ITEM_PATH)[
-                    "Wear"
-                ]
+                for key in text_loading.get_game_data(
+                    text_loading.WEAR_ITEM_PATH
+                )["Wear"]
             },
             "Item": {},
         }
-        self.engraving = {"Pain": 0, "Happy": 0, "Yield": 0, "Fear": 0, "Resistance": 0}
+        self.engraving = {
+            "Pain": 0,
+            "Happy": 0,
+            "Yield": 0,
+            "Fear": 0,
+            "Resistance": 0,
+        }
         self.social_contact = {
             social: {}
             for social in text_loading.get_text_data(
@@ -141,14 +156,20 @@ class Character:
         """
         character_clothing_data = self.clothing
         collocation_data = {}
-        clothings_name_data = clothing.get_clothing_name_data(character_clothing_data)
-        clothings_price_data = clothing.get_clothing_price_data(character_clothing_data)
+        clothings_name_data = clothing.get_clothing_name_data(
+            character_clothing_data
+        )
+        clothings_price_data = clothing.get_clothing_price_data(
+            character_clothing_data
+        )
         for clothing_type in clothings_name_data:
             clothing_type_data = clothings_name_data[clothing_type]
             for clothing_name in clothing_type_data:
                 clothing_name_data = clothing_type_data[clothing_name]
                 clothing_id = list(clothing_name_data.keys())[-1]
-                clothing_data = character_clothing_data[clothing_type][clothing_id]
+                clothing_data = character_clothing_data[clothing_type][
+                    clothing_id
+                ]
                 now_collocation_data = clothing.get_clothing_collocation_data(
                     clothing_data,
                     clothing_type,

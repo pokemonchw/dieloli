@@ -1,5 +1,5 @@
 import random
-from Script.Core import text_loading, cache_contorl
+from Script.Core import text_loading
 
 
 def get_random_nature():

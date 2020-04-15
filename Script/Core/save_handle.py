@@ -102,7 +102,7 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
     """
     save_path = get_save_dir_path(save_id)
     file_path = os.path.join(save_path, data_id)
-    if judge_save_file_exist(save_id) == False:
+    if not judge_save_file_exist(save_id):
         os.makedirs(save_path)
     with open(file_path, "wb") as f:
         pickle.dump(write_data, f)

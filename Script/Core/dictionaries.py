@@ -1,7 +1,7 @@
 from Script.Core import cache_contorl
 
 
-def handle_text(string: str) -> str:
+def handle_text(text: str) -> str:
     """
     对文本中的宏进行转义处理
     Keyword arguments:
@@ -9,16 +9,18 @@ def handle_text(string: str) -> str:
     """
     character_id = cache_contorl.character_data["character_id"]
     if character_id != "":
-        character_name = cache_contorl.character_data["character"][character_id].name
+        character_name = cache_contorl.character_data["character"][
+            character_id
+        ].name
         character_nick_name = cache_contorl.character_data["character"][
             character_id
         ].nick_name
         character_self_name = cache_contorl.character_data["character"][
             character_id
         ].self_name
-        return string.format(
+        return text.format(
             Name=character_name,
             NickName=character_nick_name,
             SelfName=character_self_name,
         )
-    return string
+    return text

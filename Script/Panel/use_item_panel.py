@@ -1,4 +1,10 @@
-from Script.Core import text_loading, cache_contorl, py_cmd, era_print
+from Script.Core import (
+    text_loading,
+    cache_contorl,
+    py_cmd,
+    era_print,
+    game_config,
+)
 from Script.Design import attr_text, cmd_button_queue
 
 
@@ -17,7 +23,9 @@ def see_character_item_panel(character_id: int) -> list:
             text_loading.get_text_data(text_loading.MESSAGE_PATH, "37")
         )
         return []
-    character_item_data = cache_contorl.character_data["character"][character_id].item
+    character_item_data = cache_contorl.character_data["character"][
+        character_id
+    ].item
     if len(character_item_data) == 0:
         era_print.line_feed_print(
             text_loading.get_text_data(text_loading.MESSAGE_PATH, "36")
@@ -42,10 +50,10 @@ def see_character_item_panel(character_id: int) -> list:
         )
         if character_id == "0":
             id_info = cmd_button_queue.id_index(index)
-            cmd_text = id_info + draw_text
+            cmd_text = id_info + item_text
             py_cmd.pcmd(cmd_text, index, None)
         else:
-            era_print.normal_print(draw_text)
+            era_print.normal_print(item_text)
         index += 1
         input_s.append(str(index))
         era_print.line_feed_print()
@@ -65,7 +73,9 @@ def see_character_item_info_panel(character_id: str, item_id: str):
         attr_text.get_see_attr_panel_head_character_info(character_id)
     )
     era_print.restart_line_print(".")
-    item_data = cache_contorl.character_data["character"][character_id].item[item_id]
+    item_data = cache_contorl.character_data["character"][character_id].item[
+        item_id
+    ]
     era_print.line_feed_print(
         text_loading.get_text_data(text_loading.STAGE_WORD_PATH, 128)
         + item_data["ItemName"]

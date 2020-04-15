@@ -1,5 +1,10 @@
-from Script.Core import cache_contorl, text_loading, era_print, py_cmd, game_config
-from Script.Design import attr_print, attr_text, cmd_button_queue, attr_calculation
+from Script.Core import cache_contorl, text_loading, era_print, game_config
+from Script.Design import (
+    attr_print,
+    attr_text,
+    cmd_button_queue,
+    attr_calculation,
+)
 from Script.Panel import (
     change_clothes_panel,
     use_item_panel,
@@ -20,9 +25,7 @@ def see_character_main_attr_panel(character_id: int):
     """
     title_1 = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "1")
     era_print.little_title_print(title_1)
-    character_id_text = (
-        f"{text_loading.get_text_data(text_loading.STAGE_WORD_PATH, '0')}{character_id}"
-    )
+    character_id_text = f"{text_loading.get_text_data(text_loading.STAGE_WORD_PATH, '0')}{character_id}"
     character_data = cache_contorl.character_data["character"][character_id]
     name = character_data.name
     nick_name = character_data.nick_name
@@ -30,7 +33,8 @@ def see_character_main_attr_panel(character_id: int):
         text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "13") + name
     )
     character_nick_name = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "12") + nick_name
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "12")
+        + nick_name
     )
     sex = character_data.sex
     sex_text = text_loading.get_text_data(
@@ -60,12 +64,16 @@ def see_character_main_attr_panel(character_id: int):
     stature_text = attr_text.get_stature_text(character_id)
     era_print.line_feed_print(stature_text)
     era_print.restart_line_print(".")
-    era_print.line_feed_print(attr_text.get_character_dormitory_path_text(character_id))
+    era_print.line_feed_print(
+        attr_text.get_character_dormitory_path_text(character_id)
+    )
     era_print.little_line_print()
     character_species = f"{text_loading.get_text_data(text_loading.STAGE_WORD_PATH, '15')}{character_data.species}"
     character_age = f"{text_loading.get_text_data(text_loading.STAGE_WORD_PATH, '3')}{character_data.age}"
     birthday_text = f"{text_loading.get_text_data(text_loading.STAGE_WORD_PATH,'140')}{character_data.birthday['month']}{text_loading.get_text_data(text_loading.STAGE_WORD_PATH,'60')}{character_data.birthday['day']}{text_loading.get_text_data(text_loading.STAGE_WORD_PATH,'61')}"
-    era_print.list_print([character_species, character_age, birthday_text], 3, "center")
+    era_print.list_print(
+        [character_species, character_age, birthday_text], 3, "center"
+    )
     era_print.restart_line_print(".")
     character_intimate = f"{text_loading.get_text_data(text_loading.STAGE_WORD_PATH, '16')}{character_data.intimate}"
     character_graces = f"{text_loading.get_text_data(text_loading.STAGE_WORD_PATH, '17')}{character_data.graces}"
@@ -75,7 +83,9 @@ def see_character_main_attr_panel(character_id: int):
     chest_group = attr_calculation.judge_chest_group(character_chest)
     chest_text = (
         text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "141")
-        + text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "142")[chest_group]
+        + text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "142")[
+            chest_group
+        ]
     )
     era_print.list_print([chest_text], 1, "center")
     era_print.restart_line_print(".")
@@ -91,23 +101,30 @@ def see_character_main_attr_panel(character_id: int):
         text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "81")
         + character_weight_text
     )
-    era_print.list_print([character_height_info, character_weight_info], 2, "center")
+    era_print.list_print(
+        [character_height_info, character_weight_info], 2, "center"
+    )
     era_print.restart_line_print(".")
     character_measurements = character_data.measurements
     character_bust = str(round(character_measurements["Bust"], 2))
     character_waist = str(round(character_measurements["Waist"], 2))
     character_hip = str(round(character_measurements["Hip"], 2))
     character_bust_info = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "82") + character_bust
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "82")
+        + character_bust
     )
     character_waist_info = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "83") + character_waist
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "83")
+        + character_waist
     )
     character_hip_info = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "84") + character_hip
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "84")
+        + character_hip
     )
     era_print.list_print(
-        [character_bust_info, character_waist_info, character_hip_info], 3, "center"
+        [character_bust_info, character_waist_info, character_hip_info],
+        3,
+        "center",
     )
     era_print.restart_line_print(".")
 
@@ -133,7 +150,9 @@ def see_character_status_panel(character_id: str):
     Keyword arguments:
     character_id -- 角色Id
     """
-    status_text_data = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "134")
+    status_text_data = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "134"
+    )
     character_data = cache_contorl.character_data["character"][character_id]
     status_data = character_data.status
     for state_type in status_data:
@@ -329,10 +348,16 @@ def ask_for_see_attr() -> list:
         text_loading.CMD_PATH, cmd_button_queue.SEE_ATTR_PANEL_HANDLE
     ).copy()
     now_panel_id = cache_contorl.panel_state["AttrShowHandlePanel"]
-    null_cmd = ask_data[now_panel_id]
     ask_list = list(ask_data.values())
     cmd_button_queue.option_str(
-        None, 5, "center", False, False, ask_list, now_panel_id, list(ask_data.keys())
+        None,
+        5,
+        "center",
+        False,
+        False,
+        ask_list,
+        now_panel_id,
+        list(ask_data.keys()),
     )
     del ask_data[now_panel_id]
     return list(ask_data.keys())
@@ -344,7 +369,10 @@ def ask_for_see_attr_cmd() -> list:
     """
     era_print.restart_line_print("~")
     yrn = cmd_button_queue.option_int(
-        cmd_button_queue.SEE_ATTR_ON_EVERY_TIME, 3, cmd_size="center", askfor=False
+        cmd_button_queue.SEE_ATTR_ON_EVERY_TIME,
+        3,
+        cmd_size="center",
+        askfor=False,
     )
     return yrn
 

@@ -14,7 +14,9 @@ def load_save_info_head_panel():
     """
     载入存档信息头面板
     """
-    save_frame_title = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "71")
+    save_frame_title = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "71"
+    )
     era_print.little_title_print(save_frame_title)
 
 
@@ -22,7 +24,9 @@ def establish_save_info_head_panel():
     """
     存储存档信息头面板
     """
-    save_frame_title = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "70")
+    save_frame_title = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "70"
+    )
     era_print.little_title_print(save_frame_title)
 
 
@@ -39,9 +43,13 @@ def see_save_list_panel(
     save_panel_page = int(cache_contorl.panel_state["SeeSaveListPanel"]) + 1
     input_s = []
     id_text_list = []
-    id_info_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "72")
+    id_info_text = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "72"
+    )
     text_width = int(game_config.text_width)
-    save_none_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "20")
+    save_none_text = text_loading.get_text_data(
+        text_loading.MESSAGE_PATH, "20"
+    )
     if save_panel_page == int(game_config.save_page) + 1:
         start_save_id = int(page_save_value) * (save_panel_page - 1)
         over_save_id = start_save_id + last_save_page_value
@@ -68,10 +76,14 @@ def see_save_list_panel(
             game_time_text = game_time.get_date_text(game_time_data)
             character_name = save_info_head["character_name"]
             save_verson = save_info_head["game_verson"]
-            save_text = character_name + " " + game_time_text + " " + save_verson
+            save_text = (
+                character_name + " " + game_time_text + " " + save_verson
+            )
             id_text_index = int(text_handle.get_text_index(id_text))
             fix_id_width = text_width - id_text_index
-            save_align = text_handle.align(save_text, "center", text_width=fix_id_width)
+            save_align = text_handle.align(
+                save_text, "center", text_width=fix_id_width
+            )
             id_text = id_text + save_align
             py_cmd.pcmd(id_text, id, None)
             input_s.append(id)
@@ -82,14 +94,16 @@ def see_save_list_panel(
                 save_none_text, "center", text_width=fix_id_width
             )
             id_text = id_text + save_none_align
-            if auto_save == True:
+            if auto_save:
                 era_print.normal_print(id_text)
             else:
                 py_cmd.pcmd(id_text, id, None)
                 input_s.append(id)
         era_print.line_feed_print()
-    if auto_save == True:
-        auto_info_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "73")
+    if auto_save:
+        auto_info_text = text_loading.get_text_data(
+            text_loading.STAGE_WORD_PATH, "73"
+        )
         i = page_save_value
         id = cmd_button_queue.id_index(i)
         era_print.little_line_print()
@@ -99,10 +113,12 @@ def see_save_list_panel(
             game_time_text = game_time.get_date_text(game_time_data)
             character_name = save_info_head["character_name"]
             save_verson = save_info_head["game_verson"]
-            save_text = character_name + " " + game_timeText + " " + save_verson
+            save_text = (
+                character_name + " " + game_time_text + " " + save_verson
+            )
             id_text = id + auto_info_text
             id_text_index = int(text_handle.get_text_index(id_text))
-            fix_id_width = text_width - id_textIndex
+            fix_id_width = text_width - id_text_index
             save_text_align = text_handle.align(
                 save_text, "center", text_width=fix_id_width
             )
@@ -128,7 +144,9 @@ def ask_for_change_save_page_panel(start_id: str) -> list:
     Keyword arguments:
     start_id -- 面板命令的起始id
     """
-    cmd_list = text_loading.get_text_data(text_loading.CMD_PATH, "changeSavePage")
+    cmd_list = text_loading.get_text_data(
+        text_loading.CMD_PATH, "changeSavePage"
+    )
     save_panel_page = str(cache_contorl.panel_state["SeeSaveListPanel"])
     max_save_panel_page = str(cache_contorl.max_save_page)
     save_page_text = "(" + save_panel_page + "/" + max_save_panel_page + ")"
@@ -150,12 +168,16 @@ def ask_for_overlay_save_panel() -> list:
     询问覆盖存档面板
     """
     era_print.line_feed_print()
-    cmd_list = text_loading.get_text_data(text_loading.CMD_PATH, "overlay_save")
+    cmd_list = text_loading.get_text_data(
+        text_loading.CMD_PATH, "overlay_save"
+    )
     message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "21")
     era_print.restart_line_print()
     era_print.normal_print(message_text)
     era_print.line_feed_print()
-    yrn = cmd_button_queue.option_int(None, askfor=False, cmd_list_data=cmd_list)
+    yrn = cmd_button_queue.option_int(
+        None, askfor=False, cmd_list_data=cmd_list
+    )
     return yrn
 
 
@@ -170,7 +192,9 @@ def confirmation_overlay_save_panel() -> list:
     message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "22")
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
-    yrn = cmd_button_queue.option_int(None, askfor=False, cmd_list_data=cmd_list)
+    yrn = cmd_button_queue.option_int(
+        None, askfor=False, cmd_list_data=cmd_list
+    )
     return yrn
 
 
@@ -183,7 +207,9 @@ def ask_load_save_panel() -> list:
     message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "23")
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
-    yrn = cmd_button_queue.option_int(None, askfor=False, cmd_list_data=cmd_list)
+    yrn = cmd_button_queue.option_int(
+        None, askfor=False, cmd_list_data=cmd_list
+    )
     return yrn
 
 
@@ -192,11 +218,15 @@ def confirmation_load_save_panel() -> list:
     确认读取存档面板
     """
     era_print.line_feed_print()
-    cmd_list = text_loading.get_text_data(text_loading.CMD_PATH, "confirmationLoadSave")
+    cmd_list = text_loading.get_text_data(
+        text_loading.CMD_PATH, "confirmationLoadSave"
+    )
     message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "24")
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
-    yrn = cmd_button_queue.option_int(None, askfor=False, cmd_list_data=cmd_list)
+    yrn = cmd_button_queue.option_int(
+        None, askfor=False, cmd_list_data=cmd_list
+    )
     return yrn
 
 
@@ -211,5 +241,7 @@ def confirmation_remove_save_panel() -> list:
     message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "25")
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
-    yrn = cmd_button_queue.option_int(None, askfor=False, cmd_list_data=cmd_list)
+    yrn = cmd_button_queue.option_int(
+        None, askfor=False, cmd_list_data=cmd_list
+    )
     return yrn

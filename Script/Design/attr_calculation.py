@@ -1,6 +1,5 @@
 import os
 import random
-import time
 from Script.Core import (
     cache_contorl,
     game_config,
@@ -13,7 +12,9 @@ from Script.Design import game_time
 
 language = game_config.language
 game_path = game_path_config.game_path
-role_attr_path = os.path.join(game_path, "data", language, "RoleAttributes.json")
+role_attr_path = os.path.join(
+    game_path, "data", language, "RoleAttributes.json"
+)
 role_attr_data = json_handle.load_json(role_attr_path)
 
 
@@ -21,7 +22,9 @@ def get_tem_list() -> dict:
     """
     获取人物生成模板
     """
-    return text_loading.get_text_data(text_loading.ATTR_TEMPLATE_PATH, "TemList")
+    return text_loading.get_text_data(
+        text_loading.ATTR_TEMPLATE_PATH, "TemList"
+    )
 
 
 def get_features_list() -> dict:
@@ -36,7 +39,9 @@ def get_age_tem_list() -> list:
     获取年龄模板
     """
     return list(
-        text_loading.get_text_data(text_loading.ATTR_TEMPLATE_PATH, "AgeTem").keys()
+        text_loading.get_text_data(
+            text_loading.ATTR_TEMPLATE_PATH, "AgeTem"
+        ).keys()
     )
 
 
@@ -53,9 +58,9 @@ def get_sex_item(sex_id: str) -> dict:
     Keyword arguments:
     sex_id -- 指定性别id
     """
-    return text_loading.get_text_data(text_loading.ATTR_TEMPLATE_PATH, "SexItem")[
-        sex_id
-    ]
+    return text_loading.get_text_data(
+        text_loading.ATTR_TEMPLATE_PATH, "SexItem"
+    )[sex_id]
 
 
 def get_gold() -> int:
@@ -71,9 +76,9 @@ def get_age(tem_name: str) -> int:
     Keyword arguments:
     tem_name -- 年龄模板id
     """
-    tem_data = text_loading.get_text_data(text_loading.ATTR_TEMPLATE_PATH, "AgeTem")[
-        tem_name
-    ]
+    tem_data = text_loading.get_text_data(
+        text_loading.ATTR_TEMPLATE_PATH, "AgeTem"
+    )[tem_name]
     max_age = int(tem_data["MaxAge"])
     mini_age = int(tem_data["MiniAge"])
     return random.randint(mini_age, max_age)
@@ -99,9 +104,9 @@ def get_height(tem_name: str, age: int, features: dict) -> dict:
     age -- 人物年龄
     Features -- 人物特性数据
     """
-    tem_data = text_loading.get_text_data(text_loading.ATTR_TEMPLATE_PATH, "HeightTem")[
-        tem_name
-    ]
+    tem_data = text_loading.get_text_data(
+        text_loading.ATTR_TEMPLATE_PATH, "HeightTem"
+    )[tem_name]
     initial_height = random.uniform(tem_data[0], tem_data[1])
     if tem_name == "Man" or "Asexual":
         expect_age = random.randint(18, 22)
@@ -148,7 +153,11 @@ def get_chest(chest_tem: str, birthday: dict):
     now_chest = sub_chest * now_day
     if now_chest > sub_chest:
         now_chest = target_chest
-    return {"TargetChest": target_chest, "NowChest": now_chest, "SubChest": sub_chest}
+    return {
+        "TargetChest": target_chest,
+        "NowChest": now_chest,
+        "SubChest": sub_chest,
+    }
 
 
 chest_tem_weight_data = text_loading.get_text_data(
@@ -222,9 +231,9 @@ def get_bmi(tem_name: str) -> dict:
     Keyword arguments:
     tem_name -- 体重比例模板id
     """
-    tem_data = text_loading.get_text_data(text_loading.ATTR_TEMPLATE_PATH, "WeightTem")[
-        tem_name
-    ]
+    tem_data = text_loading.get_text_data(
+        text_loading.ATTR_TEMPLATE_PATH, "WeightTem"
+    )[tem_name]
     return random.uniform(tem_data[0], tem_data[1])
 
 
@@ -257,7 +266,11 @@ def get_weight(bmi: float, height: float) -> float:
 
 
 def get_measurements(
-    tem_name: str, height: float, weight: float, bodyfat: float, weight_tem: str
+    tem_name: str,
+    height: float,
+    weight: float,
+    bodyfat: float,
+    weight_tem: str,
 ) -> dict:
     """
     计算角色三围
@@ -272,12 +285,16 @@ def get_measurements(
         bust = 51.76 / 100 * height
         waist = 42.79 / 100 * height
         hip = 52.07 / 100 * height
-        new_waist = ((bodyfat / 100 * weight) + (weight * 0.082 + 34.89)) / 0.74
+        new_waist = (
+            (bodyfat / 100 * weight) + (weight * 0.082 + 34.89)
+        ) / 0.74
     else:
         bust = 52.35 / 100 * height
         waist = 41.34 / 100 * height
         hip = 57.78 / 100 * height
-        new_waist = ((bodyfat / 100 * weight) + (weight * 0.082 + 44.74)) / 0.74
+        new_waist = (
+            (bodyfat / 100 * weight) + (weight * 0.082 + 44.74)
+        ) / 0.74
     waist_hip_proportion = waist / hip
     waist_hip_proportion_tem = text_loading.get_text_data(
         text_loading.ATTR_TEMPLATE_PATH, "WaistHipProportionTem"
@@ -460,7 +477,9 @@ def judge_age_group(age: int):
     Keyword arguments:
     age -- 年龄
     """
-    age_group = text_loading.get_game_data(text_loading.ATTR_TEMPLATE_PATH)["AgeTem"]
+    age_group = text_loading.get_game_data(text_loading.ATTR_TEMPLATE_PATH)[
+        "AgeTem"
+    ]
     for age_tem in age_group:
         if int(age) >= int(age_group[age_tem]["MiniAge"]) and int(age) < int(
             age_group[age_tem]["MaxAge"]

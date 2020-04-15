@@ -1,7 +1,11 @@
 import math
 from Script.Core import cache_contorl, game_init, py_cmd, game_config
-from Script.Design import map_handle, character_handle, panel_state_handle
-from Script.Panel import in_scene_panel, see_character_attr_panel, instruct_panel
+from Script.Design import map_handle, panel_state_handle
+from Script.Panel import (
+    in_scene_panel,
+    see_character_attr_panel,
+    instruct_panel,
+)
 
 
 def get_in_scene_func():
@@ -25,7 +29,9 @@ def get_in_scene_func():
         len(scene_character_list) > 1
         and cache_contorl.character_data["character_id"] == 0
     ):
-        now_name_list = map_handle.get_scene_character_name_list(scene_path_str)
+        now_name_list = map_handle.get_scene_character_name_list(
+            scene_path_str
+        )
         now_name_list.remove(cache_contorl.character_data["character"][0].name)
         cache_contorl.character_data[
             "character_id"
@@ -53,7 +59,9 @@ def see_scene_func(judge: bool):
         input_s = []
         in_scene_panel.see_scene_panel()
         scene_path = cache_contorl.character_data["character"][0].position
-        scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
+        scene_path_str = map_handle.get_map_system_path_str_for_list(
+            scene_path
+        )
         scene_character_name_list = map_handle.get_scene_character_name_list(
             scene_path_str
         )
@@ -64,7 +72,9 @@ def see_scene_func(judge: bool):
         in_scene_cmd_list_1 = []
         if judge:
             if cache_contorl.panel_state["SeeSceneCharacterListPage"] == "0":
-                input_s = input_s + in_scene_panel.see_scene_character_list_panel()
+                input_s = (
+                    input_s + in_scene_panel.see_scene_character_list_panel()
+                )
                 if len(scene_character_name_list) > name_list_max:
                     in_scene_cmd_list_1 = (
                         in_scene_panel.change_scene_character_list_panel()
@@ -82,7 +92,9 @@ def see_scene_func(judge: bool):
         instruct_head = instruct_panel.see_instruct_head_panel()
         in_scene_cmd_list_2 = in_scene_panel.in_scene_button_panel(start_id_1)
         if change_page_judge:
-            input_s += in_scene_cmd_list_1 + instruct_head + in_scene_cmd_list_2
+            input_s += (
+                in_scene_cmd_list_1 + instruct_head + in_scene_cmd_list_2
+            )
         else:
             input_s += instruct_head + in_scene_cmd_list_2
         yrn = game_init.askfor_all(input_s)
@@ -93,7 +105,9 @@ def see_scene_func(judge: bool):
         if yrn in scene_character_name_list:
             cache_contorl.character_data[
                 "character_id"
-            ] = map_handle.get_character_id_by_character_name(yrn, scene_path_str)
+            ] = map_handle.get_character_id_by_character_name(
+                yrn, scene_path_str
+            )
         elif (
             judge
             and yrn not in in_scene_cmd_list_2
@@ -104,7 +118,9 @@ def see_scene_func(judge: bool):
                 cache_contorl.panel_state["SeeSceneCharacterListPanel"] = 0
             elif yrn == in_scene_cmd_list_1[1]:
                 if int(now_page) == 0:
-                    cache_contorl.panel_state["SeeSceneCharacterListPanel"] = page_max
+                    cache_contorl.panel_state[
+                        "SeeSceneCharacterListPanel"
+                    ] = page_max
                 else:
                     cache_contorl.panel_state["SeeSceneCharacterListPanel"] = (
                         int(now_page) - 1
@@ -121,7 +137,9 @@ def see_scene_func(judge: bool):
                         int(now_page) + 1
                     )
             elif yrn == in_scene_cmd_list_1[4]:
-                cache_contorl.panel_state["SeeSceneCharacterListPanel"] = page_max
+                cache_contorl.panel_state[
+                    "SeeSceneCharacterListPanel"
+                ] = page_max
         elif yrn == in_scene_cmd_list_2[0]:
             cache_contorl.now_flow_id = "see_map"
             now_map = map_handle.get_map_for_path(

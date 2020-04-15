@@ -66,13 +66,13 @@ def option_int(
     normal_style_data -- 按钮对应通常样式列表
     on_style_data -- 按钮对应按下时样式列表
     """
-    if cmd_list_data == None:
+    if cmd_list_data is None:
         cmd_list_data = text_loading.get_text_data(
             text_loading.CMD_PATH, cmd_list
         ).copy()
     input_i = []
     text_width = game_config.text_width
-    if last_line == True:
+    if last_line:
         if len(cmd_list_data) < cmd_column:
             cmd_column = len(cmd_list_data)
     else:
@@ -84,7 +84,7 @@ def option_int(
     for i in range(0, len(cmd_list_data)):
         cmd_text = dictionaries.handle_text(cmd_list_data[i])
         return_id = i + start_id
-        if id_switch == True:
+        if id_switch:
             id = id_index(return_id)
         else:
             id = ""
@@ -128,7 +128,7 @@ def option_int(
                     on_style,
                 )
                 input_i.append(str(return_id))
-            elif i == len(cmd_list_data) and last_line == True:
+            elif i == len(cmd_list_data) and last_line:
                 era_print.line_feed_print()
                 cmd_text_and_id = cmd_text_and_id.rstrip()
                 cmd_size_print(
@@ -156,7 +156,7 @@ def option_int(
                 )
                 input_i.append(str(return_id))
     era_print.line_feed_print()
-    if askfor == True:
+    if askfor:
         ans = int(game_init.askfor_int(input_i))
         return ans
     else:
@@ -190,13 +190,13 @@ def option_str(
     normal_style_data -- 按钮通常样式列表
     on_style_data -- 按钮被按下时样式列表
     """
-    if cmd_list_data == None:
+    if cmd_list_data is None:
         cmd_list_data = text_loading.get_text_data(
             text_loading.CMD_PATH, cmd_list
         ).copy()
     input_s = []
     text_width = game_config.text_width
-    if last_line == True:
+    if last_line:
         if len(cmd_list_data) - 1 < cmd_column:
             cmd_column = len(cmd_list_data) - 1
     else:
@@ -212,7 +212,7 @@ def option_str(
         if cmd_list_data[i] in on_style_data:
             on_style = on_style_data[cmd_list_data[i]]
         now_null_cmd = True
-        if return_data == None:
+        if return_data is None:
             if null_cmd == cmd_list_data[i]:
                 now_null_cmd = False
             cmd_text_bak = dictionaries.handle_text(cmd_list_data[i])
@@ -249,7 +249,7 @@ def option_str(
             )
             if now_null_cmd:
                 input_s.append(cmd_text_bak)
-        elif i == len(cmd_list_data) - 1 and last_line == True:
+        elif i == len(cmd_list_data) - 1 and last_line:
             era_print.line_feed_print()
             cmd_size_print(
                 cmd_text,
@@ -277,7 +277,7 @@ def option_str(
             if now_null_cmd:
                 input_s.append(cmd_text_bak)
     era_print.line_feed_print()
-    if askfor == True:
+    if askfor:
         ans = game_init.askfor_all(input_s)
         return ans
     else:
@@ -327,7 +327,7 @@ def cmd_size_print(
     normal_style -- 按钮通常样式 (default 'standard')
     on_style -- 按钮被按下时样式 (default 'onbutton')
     """
-    if no_null_cmd == False:
+    if not no_null_cmd:
         cmd_text = "<nullcmd>" + cmd_text + "</nullcmd>"
     if cmd_size == "left":
         cmd_width = text_handle.get_text_index(cmd_text)

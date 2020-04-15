@@ -6,7 +6,7 @@ from Script.Core import (
     py_cmd,
     text_handle,
 )
-from Script.Design import character_handle, cmd_button_queue, attr_text
+from Script.Design import cmd_button_queue, attr_text
 
 
 def see_character_list_panel(max_page: int) -> list:
@@ -23,7 +23,9 @@ def see_character_list_panel(max_page: int) -> list:
     character_max = len(cache_contorl.character_data["character"]) - 1
     if page_id == max_page:
         show_page_start = page_show * page_id
-        show_page_over = show_page_start + (character_max + 1 - show_page_start)
+        show_page_over = show_page_start + (
+            character_max + 1 - show_page_start
+        )
     else:
         show_page_over = page_show * (page_id + 1)
         show_page_start = show_page_over - page_show

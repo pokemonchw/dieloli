@@ -4,7 +4,6 @@ from Script.Core import (
     py_cmd,
     text_loading,
     era_print,
-    value_handle,
     game_init,
 )
 from Script.Design import attr_calculation, game_time, nature, character
@@ -98,7 +97,6 @@ def input_sex_confirm_func():
     输入2:返回请求输入自称流程
     """
     flow_return = creator_character_panel.input_sex_panel()
-    sex_id = cache_contorl.character_data["character"][0].sex
     if flow_return == 0:
         py_cmd.clr_cmd()
         attribute_generation_branch_func()
@@ -117,7 +115,9 @@ def input_sex_choice_func():
     输入4:随机选择一个性别
     输入5:返回请求输入性别流程
     """
-    sex = list(text_loading.get_text_data(text_loading.ROLE_PATH, "Sex").keys())
+    sex = list(
+        text_loading.get_text_data(text_loading.ROLE_PATH, "Sex").keys()
+    )
     sex_max = len(sex)
     flow_return = creator_character_panel.input_sex_choice_panel()
     if flow_return in range(0, sex_max):
@@ -162,12 +162,10 @@ def detailed_setting_func_1():
     询问玩家年龄模板流程
     """
     flow_retun = creator_character_panel.detailed_setting_1_panel()
-    character_sex = cache_contorl.character_data["character"][0].sex
-    sex_list = list(text_loading.get_text_data(text_loading.ROLE_PATH, "Sex"))
     character_age_tem_name = attr_calculation.get_age_tem_list()[flow_retun]
-    cache_contorl.character_data["character"][0].age = attr_calculation.get_age(
-        character_age_tem_name
-    )
+    cache_contorl.character_data["character"][
+        0
+    ].age = attr_calculation.get_age(character_age_tem_name)
     py_cmd.clr_cmd()
     detailed_setting_func_3()
 
@@ -184,8 +182,9 @@ def detailed_setting_func_3():
     )
     sex_tem_data_list.reverse()
     sex_tem_name = sex_tem_data_list[flow_return]
-    character_sex_experience_data = attr_calculation.get_sex_experience(sex_tem_name)
-    cache_contorl.character_data["character"][0].sex_experience_tem = sex_tem_name
+    cache_contorl.character_data["character"][
+        0
+    ].sex_experience_tem = sex_tem_name
     py_cmd.clr_cmd()
     detailed_setting_func_8()
 
