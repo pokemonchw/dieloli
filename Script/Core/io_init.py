@@ -2,7 +2,6 @@
 import threading
 import queue
 import json
-import sys
 from Script.Core import main_frame, game_config
 
 input_evnet = threading.Event()
@@ -81,7 +80,7 @@ def new_json():
     return flow_json
 
 
-def text_json(string: str, style: str):
+def text_json(string: str, style: tuple or str):
     """
     定义一个文本json
     Keyword arguments:
@@ -91,14 +90,19 @@ def text_json(string: str, style: str):
     re = {}
     re["type"] = "text"
     re["text"] = string
-    if type(style) == tuple:
+    if isinstance(style, tuple):
         re["style"] = style
-    if type(style) == type(""):
+    if isinstance(style, str):
         re["style"] = (style,)
     return re
 
 
-def cmd_json(cmd_str: str, cmd_num: int, normal_style: str, on_style: str):
+def cmd_json(
+    cmd_str: str,
+    cmd_num: int,
+    normal_style: tuple or str,
+    on_style: tuple or str,
+):
     """
     定义一个命令json
     Keyword arguments:
@@ -111,13 +115,13 @@ def cmd_json(cmd_str: str, cmd_num: int, normal_style: str, on_style: str):
     re["type"] = "cmd"
     re["text"] = cmd_str
     re["num"] = cmd_num
-    if type(normal_style) == tuple:
+    if isinstance(normal_style, tuple):
         re["normal_style"] = normal_style
-    if type(normal_style) == type(""):
+    if isinstance(normal_style, str):
         re["normal_style"] = (normal_style,)
-    if type(on_style) == tuple:
+    if isinstance(on_style, tuple):
         re["on_style"] = on_style
-    if type(on_style) == type(""):
+    if isinstance(on_style, str):
         re["on_style"] = (on_style,)
     return re
 
@@ -218,7 +222,14 @@ def frame_style_def(
     """
     json_str = new_json()
     json_str["set_style"] = style_json(
-        style_name, foreground, background, font, fontsize, bold, underline, italic
+        style_name,
+        foreground,
+        background,
+        font,
+        fontsize,
+        bold,
+        underline,
+        italic,
     )
     put_queue(json.dumps(json_str, ensure_ascii=False))
 
@@ -258,7 +269,9 @@ def io_print_cmd(
     on_style -- 鼠标在其上时显示样式
     """
     json_str = new_json()
-    json_str["content"].append(cmd_json(cmd_str, cmd_number, normal_style, on_style))
+    json_str["content"].append(
+        cmd_json(cmd_str, cmd_number, normal_style, on_style)
+    )
     put_queue(json.dumps(json_str, ensure_ascii=False))
 
 
@@ -288,10 +301,24 @@ def init_style():
     global style_def
 
     def new_style_def(
-        style_name, foreground, background, font, fontsize, bold, underline, italic
+        style_name,
+        foreground,
+        background,
+        font,
+        fontsize,
+        bold,
+        underline,
+        italic,
     ):
         frame_style_def(
-            style_name, foreground, background, font, fontsize, bold, underline, italic
+            style_name,
+            foreground,
+            background,
+            font,
+            fontsize,
+            bold,
+            underline,
+            italic,
         )
 
     style_def = new_style_def

@@ -8,7 +8,6 @@ from Script.Core import (
 )
 from Script.Design import (
     panel_state_handle,
-    attr_calculation,
     map_handle,
     character_handle,
 )
@@ -32,13 +31,11 @@ def acknowledgment_attribute_func():
     创建角色时用于查看角色属性的流程
     """
     while True:
-        character_id = cache_contorl.character_data["character_id"]
         character_handle.init_character_list()
         input_s = []
         see_attr_in_every_time_func()
         flow_return = see_character_attr_panel.input_attr_over_panel()
         input_s = flow_return + input_s
-        character_id = cache_contorl.character_data["character_id"]
         yrn = game_init.askfor_int(input_s)
         py_cmd.clr_cmd()
         if yrn in panel_list:
@@ -61,10 +58,16 @@ def see_attr_on_every_time_func():
         character_id = cache_contorl.character_data["character_id"]
         if cache_contorl.old_flow_id == "in_scene":
             now_scene = cache_contorl.character_data["character"][0].position
-            now_scene_str = map_handle.get_map_system_path_str_for_list(now_scene)
-            character_id_list = map_handle.get_scene_character_id_list(now_scene_str)
+            now_scene_str = map_handle.get_map_system_path_str_for_list(
+                now_scene
+            )
+            character_id_list = map_handle.get_scene_character_id_list(
+                now_scene_str
+            )
         else:
-            character_id_list = list(cache_contorl.character_data["character"].keys())
+            character_id_list = list(
+                cache_contorl.character_data["character"].keys()
+            )
         character_id_index = character_id_list.index(character_id)
         input_s = []
         see_attr_in_every_time_func()
@@ -92,10 +95,16 @@ def see_attr_on_every_time_func():
             elif cache_contorl.old_flow_id == "see_character_list":
                 character_list_show = int(game_config.character_list_show)
                 now_page_id = character_id_index / character_list_show
-                cache_contorl.panel_state["SeeCharacterListPanel"] = now_page_id
+                cache_contorl.panel_state[
+                    "SeeCharacterListPanel"
+                ] = now_page_id
             elif cache_contorl.old_flow_id == "in_scene":
-                scene_path = cache_contorl.character_data["character"][0].position
-                scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
+                scene_path = cache_contorl.character_data["character"][
+                    0
+                ].position
+                scene_path_str = map_handle.get_map_system_path_str_for_list(
+                    scene_path
+                )
                 name_list = map_handle.get_scene_character_name_list(
                     scene_path_str, True
                 )

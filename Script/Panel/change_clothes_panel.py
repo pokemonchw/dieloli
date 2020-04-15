@@ -71,18 +71,24 @@ def see_character_wear_clothes(character_id: str, change_button: bool):
             draw_text = (
                 clothing.clothing_type_text_list[clothing_text]
                 + ":"
-                + text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "117")
+                + text_loading.get_text_data(
+                    text_loading.STAGE_WORD_PATH, "117"
+                )
             )
         else:
             now_clothing_text_index = text_handle.get_text_index(clothing_text)
             draw_text += clothing_text + " "
             if now_clothing_text_index < long_clothing_text_index:
-                draw_text += " " * (long_clothing_text_index - now_clothing_text_index)
+                draw_text += " " * (
+                    long_clothing_text_index - now_clothing_text_index
+                )
             for tag_text in clothing_text_data[clothing_text]:
                 now_tag_text_index = text_handle.get_text_index(tag_text)
                 if now_tag_text_index < tag_text_index:
                     draw_text += (
-                        " " + tag_text + " " * (tag_text_index - now_tag_text_index)
+                        " "
+                        + tag_text
+                        + " " * (tag_text_index - now_tag_text_index)
                     )
                 else:
                     draw_text += " " + tag_text
@@ -112,7 +118,9 @@ def see_character_wear_clothes_cmd(start_id: int) -> str:
     return yrn
 
 
-def see_character_clothes_panel(character_id: str, clothing_type: str, max_page: int):
+def see_character_clothes_panel(
+    character_id: str, clothing_type: str, max_page: int
+):
     """
     用于查看角色服装列表的面板
     Keyword arguments:
@@ -124,9 +132,6 @@ def see_character_clothes_panel(character_id: str, clothing_type: str, max_page:
     character_clothing_data = cache_contorl.character_data["character"][
         character_id
     ].clothing[clothing_type]
-    character_put_on_list = cache_contorl.character_data["character"][
-        character_id
-    ].put_on
     clothing_text_data = {}
     tag_text_index = 0
     now_page_id = int(cache_contorl.panel_state["SeeCharacterClothesPanel"])
@@ -153,11 +158,15 @@ def see_character_clothes_panel(character_id: str, clothing_type: str, max_page:
             pass_id = i - now_page_start_id
         clothing_data = character_clothing_data[clothing_id]
         clothing_text = (
-            clothing_data["Evaluation"] + clothing_data["Tag"] + clothing_data["Name"]
+            clothing_data["Evaluation"]
+            + clothing_data["Tag"]
+            + clothing_data["Name"]
         )
         clothing_text_data[clothing_text] = {}
         for tag in clothing.clothing_tag_text_list:
-            tag_text = clothing.clothing_tag_text_list[tag] + str(clothing_data[tag])
+            tag_text = clothing.clothing_tag_text_list[tag] + str(
+                clothing_data[tag]
+            )
             clothing_text_data[clothing_text][tag_text] = 0
             now_tag_text_index = text_handle.get_text_index(tag_text)
             if now_tag_text_index == now_tag_text_index:
@@ -173,12 +182,16 @@ def see_character_clothes_panel(character_id: str, clothing_type: str, max_page:
         now_clothing_text_index = text_handle.get_text_index(clothing_text)
         draw_text += clothing_text + " "
         if now_clothing_text_index < long_clothing_text_index:
-            draw_text += " " * (long_clothing_text_index - now_clothing_text_index)
+            draw_text += " " * (
+                long_clothing_text_index - now_clothing_text_index
+            )
         for tag_text in clothing_text_data[clothing_text]:
             now_tag_text_index = text_handle.get_text_index(tag_text)
             if now_tag_text_index < tag_text_index:
                 draw_text += (
-                    " " + tag_text + " " * (tag_text_index - now_tag_text_index)
+                    " "
+                    + tag_text
+                    + " " * (tag_text_index - now_tag_text_index)
                 )
             else:
                 draw_text += " " + tag_text
@@ -205,24 +218,12 @@ def see_character_clothes_info(character_id: str):
     Keyword arguments:
     character_id -- 角色id
     """
-    scene_info = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "101")
+    scene_info = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "101"
+    )
     era_print.little_title_print(scene_info)
     character_info = attr_text.get_character_abbreviations_info(character_id)
     era_print.normal_print(character_info)
-
-
-def see_character_wear_clothes_cmd(start_id: int) -> str:
-    """
-    用于控制查看角色服装列表面板的命令菜单
-    """
-    era_print.line_feed_print()
-    yrn = cmd_button_queue.option_int(
-        cmd_button_queue.SEE_CHARACTER_WEAR_CHOTHES,
-        cmd_size="center",
-        askfor=False,
-        start_id=start_id,
-    )
-    return yrn
 
 
 def see_character_clothes_cmd(start_id: int, now_clothing_type: str) -> str:
@@ -244,7 +245,9 @@ def see_character_clothes_cmd(start_id: int, now_clothing_type: str) -> str:
     next_type_id = now_clothing_type_index + 1
     if now_clothing_type_index == len(clothing_type_list) - 1:
         next_type_id = 0
-    up_type_text = [clothing.clothing_type_text_list[clothing_type_list[up_type_id]]]
+    up_type_text = [
+        clothing.clothing_type_text_list[clothing_type_list[up_type_id]]
+    ]
     next_type_text = [
         clothing.clothing_type_text_list[clothing_type_list[next_type_id]]
     ]
@@ -267,7 +270,6 @@ def ask_see_clothing_info_panel(wear_clothing_judge: bool) -> str:
     wear_clothing_judge -- 当前服装穿戴状态
     """
     era_print.line_feed_print()
-    titile_message = text_loading.get_text_data(text_loading.MESSAGE_PATH, "35")
     cmd_data = text_loading.get_text_data(
         text_loading.CMD_PATH, cmd_button_queue.ASK_SEE_CLOTHING_INFO_PANEL
     ).copy()
@@ -280,7 +282,10 @@ def ask_see_clothing_info_panel(wear_clothing_judge: bool) -> str:
 
 
 def see_clothing_info_panel(
-    character_id: str, clothing_type: str, clothing_id: str, wear_clothing_judge: bool
+    character_id: str,
+    clothing_type: str,
+    clothing_id: str,
+    wear_clothing_judge: bool,
 ):
     """
     查看服装详细信息面板
@@ -292,9 +297,9 @@ def see_clothing_info_panel(
     era_print.little_title_print(
         text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "126")
     )
-    clothing_data = cache_contorl.character_data["character"][character_id].clothing[
-        clothing_type
-    ][clothing_id]
+    clothing_data = cache_contorl.character_data["character"][
+        character_id
+    ].clothing[clothing_type][clothing_id]
     info_list = []
     clothing_name = clothing_data["Name"]
     if wear_clothing_judge:
@@ -302,7 +307,8 @@ def see_clothing_info_panel(
             text_loading.STAGE_WORD_PATH, "125"
         )
     info_list.append(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "128") + clothing_name
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "128")
+        + clothing_name
     )
     clothing_type_text = clothing.clothing_type_text_list[clothing_type]
     info_list.append(

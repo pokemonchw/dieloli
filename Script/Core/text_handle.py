@@ -2,7 +2,9 @@ from wcwidth import wcswidth
 from Script.Core import game_config, text_loading, rich_text
 
 
-def align(text: str, just="left", only_fix=False, columns=1, text_width=None) -> str:
+def align(
+    text: str, just="left", only_fix=False, columns=1, text_width=None
+) -> str:
     """
     文本对齐处理函数
     Keyword arguments:
@@ -13,7 +15,7 @@ def align(text: str, just="left", only_fix=False, columns=1, text_width=None) ->
     text_width -- 指定行宽，为None时将使用game_config中的配置 (default None)
     """
     count_index = get_text_index(text)
-    if text_width == None:
+    if text_width is None:
         width = game_config.text_width
         width = int(width / columns)
     else:
@@ -35,7 +37,9 @@ def align(text: str, just="left", only_fix=False, columns=1, text_width=None) ->
             return " " * int(width_i - count_i)
         else:
             return (
-                " " * int(width_i - count_i) + text + " " * int(width_i - count_i - 2)
+                " " * int(width_i - count_i)
+                + text
+                + " " * int(width_i - count_i - 2)
             )
 
 
@@ -48,7 +52,9 @@ def get_text_index(text: str) -> int:
     text_style_list = rich_text.set_rich_text_print(text, "standard")
     text_index = 0
     style_width = 0
-    bar_list = list(text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys())
+    bar_list = list(
+        text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys()
+    )
     style_name_list = game_config.get_font_data_list() + bar_list
     for i in range(0, len(style_name_list)):
         style_text_head = "<" + style_name_list[i] + ">"

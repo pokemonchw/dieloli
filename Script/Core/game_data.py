@@ -26,7 +26,9 @@ def load_dir_now(data_path: str):
                     if now_file[1] == "json":
                         if now_file[0] == "Scene":
                             now_scene_data = {}
-                            map_system_path = get_map_system_path_for_path(now_path)
+                            map_system_path = get_map_system_path_for_path(
+                                now_path
+                            )
                             map_system_path_str = get_map_system_path_str(
                                 map_system_path
                             )
@@ -34,7 +36,9 @@ def load_dir_now(data_path: str):
                             now_scene_data.update(load_scene_data)
                             now_scene_data["SceneCharacterData"] = {}
                             now_scene_data["ScenePath"] = map_system_path
-                            now_scene_data = {map_system_path_str: now_scene_data}
+                            now_scene_data = {
+                                map_system_path_str: now_scene_data
+                            }
                             scene_data.update(now_scene_data)
                             now_scene_tag = load_scene_data["SceneTag"]
                             if now_scene_tag not in cache_contorl.place_data:
@@ -44,17 +48,23 @@ def load_dir_now(data_path: str):
                             )
                         elif now_file[0] == "Map":
                             now_map_data = {}
-                            map_system_path = get_map_system_path_for_path(now_path)
+                            map_system_path = get_map_system_path_for_path(
+                                now_path
+                            )
                             now_map_data["MapPath"] = map_system_path
                             with open(
                                 os.path.join(data_path, "Map"), "r"
                             ) as now_read_file:
                                 draw_data = now_read_file.read()
-                                now_map_data["MapDraw"] = get_print_map_data(draw_data)
+                                now_map_data["MapDraw"] = get_print_map_data(
+                                    draw_data
+                                )
                             map_system_path_str = get_map_system_path_str(
                                 map_system_path
                             )
-                            now_map_data.update(json_handle.load_json(now_path))
+                            now_map_data.update(
+                                json_handle.load_json(now_path)
+                            )
                             cache_contorl.now_init_map_id = map_system_path_str
                             sorted_path_data = get_sorted_map_path_data(
                                 now_map_data["PathEdge"]
@@ -70,7 +80,9 @@ def load_dir_now(data_path: str):
                                 data = json_handle.load_json(now_path)
                                 init_name_region(data["FamilyNameList"], 2)
                             else:
-                                now_data[now_file[0]] = json_handle.load_json(now_path)
+                                now_data[now_file[0]] = json_handle.load_json(
+                                    now_path
+                                )
                                 if now_file[0] == "Equipment":
                                     init_clothing_data(
                                         now_data[now_file[0]]["Clothing"]
@@ -111,7 +123,9 @@ def init_wear_item_type_data(wear_item_data: dict):
     """
     cache_contorl.wear_item_type_data = {
         wear: {
-            item: 1 for item in wear_item_data if wear in wear_item_data[item]["Wear"]
+            item: 1
+            for item in wear_item_data
+            if wear in wear_item_data[item]["Wear"]
         }
         for item in wear_item_data
         for wear in wear_item_data[item]["Wear"]
@@ -153,7 +167,9 @@ def get_sorted_map_path_data(map_data: dict) -> dict:
         new_data = {node: {}}
         for target in map_data.keys():
             if target != node:
-                find_path_data = find_path(graph, node, target, cost_func=cost_func)
+                find_path_data = find_path(
+                    graph, node, target, cost_func=cost_func
+                )
                 new_data[node].update(
                     {
                         target: {
@@ -207,12 +223,14 @@ def get_print_map_data(map_draw: str) -> dict:
         now_cmd = ""
         i = 0
         while i in range(len(map_x_list)):
-            if set_map_button == False and map_x_list[i : i + 11] != "<mapbutton>":
+            if not set_map_button and map_x_list[i : i + 11] != "<mapbutton>":
                 new_x_list += map_x_list[i]
-            elif set_map_button == False and map_x_list[i : i + 11] == "<mapbutton>":
+            elif (
+                not set_map_button and map_x_list[i : i + 11] == "<mapbutton>"
+            ):
                 i += 10
                 set_map_button = True
-            elif set_map_button == True and map_x_list[i : i + 12] != "</mapbutton>":
+            elif set_map_button and map_x_list[i : i + 12] != "</mapbutton>":
                 now_cmd += map_x_list[i]
             else:
                 set_map_button = False

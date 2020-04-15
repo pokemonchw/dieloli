@@ -12,7 +12,9 @@ def change_character_clothes():
         character_id
     ].clothing
     change_clothes_panel.see_character_wear_clothes_info(character_id)
-    cmd_list_1 = change_clothes_panel.see_character_wear_clothes(character_id, True)
+    cmd_list_1 = change_clothes_panel.see_character_wear_clothes(
+        character_id, True
+    )
     start_id = len(character_clothing_data.keys())
     input_s = change_clothes_panel.see_character_wear_clothes_cmd(start_id)
     input_s = cmd_list_1 + input_s
@@ -55,12 +57,16 @@ def see_character_clothes_list(clothing_type: str):
         yrn = flow_handle.askfor_all(input_s)
         yrn = int(yrn)
         py_cmd.clr_cmd()
-        now_page_id = int(cache_contorl.panel_state["SeeCharacterClothesPanel"])
+        now_page_id = int(
+            cache_contorl.panel_state["SeeCharacterClothesPanel"]
+        )
         if yrn == start_id:
             clothing_type = up_type
         elif yrn == start_id + 1:
             if now_page_id == 0:
-                cache_contorl.panel_state["SeeCharacterClothesPanel"] = str(page_max)
+                cache_contorl.panel_state["SeeCharacterClothesPanel"] = str(
+                    page_max
+                )
             else:
                 cache_contorl.panel_state["SeeCharacterClothesPanel"] = str(
                     now_page_id - 1
@@ -85,7 +91,9 @@ def see_character_clothes_list(clothing_type: str):
             ask_see_clothing_info(clothing_type, clothing_id, character_id)
 
 
-def ask_see_clothing_info(clothing_type: str, clothing_id: str, character_id: str):
+def ask_see_clothing_info(
+    clothing_type: str, clothing_id: str, character_id: str
+):
     """
     确认查看服装详细信息流程
     Keyword arguments:
@@ -96,10 +104,14 @@ def ask_see_clothing_info(clothing_type: str, clothing_id: str, character_id: st
     wear_clothing_judge = False
     if (
         clothing_id
-        == cache_contorl.character_data["character"][character_id].put_on[clothing_type]
+        == cache_contorl.character_data["character"][character_id].put_on[
+            clothing_type
+        ]
     ):
         wear_clothing_judge = True
-    yrn = int(change_clothes_panel.ask_see_clothing_info_panel(wear_clothing_judge))
+    yrn = int(
+        change_clothes_panel.ask_see_clothing_info_panel(wear_clothing_judge)
+    )
     if yrn == 0:
         if wear_clothing_judge:
             cache_contorl.character_data["character"][character_id].put_on[
@@ -139,7 +151,11 @@ def see_clothing_info(character_id: str, clothing_type: str, clothing_id: str):
         change_clothes_panel.see_clothing_info_panel(
             character_id, clothing_type, clothing_id, wear_clothing_judge
         )
-        yrn = int(change_clothes_panel.see_clothing_info_ask_panel(wear_clothing_judge))
+        yrn = int(
+            change_clothes_panel.see_clothing_info_ask_panel(
+                wear_clothing_judge
+            )
+        )
         if yrn == 0:
             if now_clothing_index == 0:
                 clothing_id = clothing_list[-1]

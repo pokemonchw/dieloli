@@ -1,6 +1,5 @@
-import os, importlib
+import os
 from Script.Core import cache_contorl, game_path_config, game_config
-from Script.Design import character_handle
 from Script.Behavior import student, teacher
 
 game_path = game_path_config.game_path

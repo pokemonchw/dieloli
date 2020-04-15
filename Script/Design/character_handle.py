@@ -1,8 +1,5 @@
 import random
 import math
-import uuid
-import time
-import itertools
 import numpy
 from Script.Core import (
     cache_contorl,
@@ -16,8 +13,6 @@ from Script.Design import (
     attr_calculation,
     map_handle,
     attr_text,
-    clothing,
-    nature,
     character,
 )
 
@@ -72,15 +67,21 @@ def index_character_average_value():
     """
     统计各年龄段所有角色各属性总值
     """
-    for character in cache_contorl.character_data["character"]:
-        character_data = cache_contorl.character_data["character"][character]
+    for character_id in cache_contorl.character_data["character"]:
+        character_data = cache_contorl.character_data["character"][
+            character_id
+        ]
         age_tem = attr_calculation.judge_age_group(character_data.age)
         cache_contorl.total_height_by_age.setdefault(age_tem, {})
-        cache_contorl.total_height_by_age[age_tem].setdefault(character_data.sex, 0)
+        cache_contorl.total_height_by_age[age_tem].setdefault(
+            character_data.sex, 0
+        )
         cache_contorl.total_height_by_age[age_tem][
             character_data.sex
         ] += character_data.height["NowHeight"]
-        cache_contorl.total_number_of_people_of_all_ages.setdefault(age_tem, {})
+        cache_contorl.total_number_of_people_of_all_ages.setdefault(
+            age_tem, {}
+        )
         cache_contorl.total_number_of_people_of_all_ages[age_tem].setdefault(
             character_data.sex, 0
         )
@@ -88,7 +89,9 @@ def index_character_average_value():
             character_data.sex
         ] += 1
         cache_contorl.total_bodyfat_by_age.setdefault(age_tem, {})
-        cache_contorl.total_bodyfat_by_age[age_tem].setdefault(character_data.sex, 0)
+        cache_contorl.total_bodyfat_by_age[age_tem].setdefault(
+            character_data.sex, 0
+        )
         cache_contorl.total_bodyfat_by_age[age_tem][
             character_data.sex
         ] += character_data.bodyfat
@@ -127,7 +130,9 @@ def init_character_tem():
     init_random_npc_data()
     npc_data = cache_contorl.random_npc_list
     now_characterList = character_list.copy()
-    npc_data += [get_dir_character_tem(character) for character in now_characterList]
+    npc_data += [
+        get_dir_character_tem(character) for character in now_characterList
+    ]
     numpy.random.shuffle(npc_data)
     cache_contorl.npc_tem_data = npc_data
 
@@ -186,7 +191,9 @@ def create_random_npc(id) -> dict:
         "BodyFat": body_fat_tem,
     }
     if random_npc_sex in {"Woman": 1, "Futa": 1}:
-        random_npc_new_data["Chest"] = attr_calculation.get_rand_npc_chest_tem()
+        random_npc_new_data[
+            "Chest"
+        ] = attr_calculation.get_rand_npc_chest_tem()
     else:
         random_npc_new_data["Chest"] = "Precipice"
     cache_contorl.random_npc_list.append(random_npc_new_data)
@@ -195,7 +202,9 @@ def create_random_npc(id) -> dict:
 sex_weight_data = text_loading.get_text_data(
     text_loading.ATTR_TEMPLATE_PATH, "RandomNpcSexWeight"
 )
-sex_weight_max = sum([int(sex_weight_data[weight]) for weight in sex_weight_data])
+sex_weight_max = sum(
+    [int(sex_weight_data[weight]) for weight in sex_weight_data]
+)
 sex_weight_regin_data = value_handle.get_region_list(sex_weight_data)
 sex_weight_regin_list = list(map(int, sex_weight_regin_data.keys()))
 
@@ -285,31 +294,41 @@ def init_character_dormitory():
     分配角色宿舍
     小于18岁，男生分配到男生宿舍，女生分配到女生宿舍，按宿舍楼层和角色年龄，从下往上，从小到大分配，其他性别分配到地下室，大于18岁，教师宿舍混居
     """
-    character_data = {}
     character_sex_data = {
         "Man": {
-            character_id: cache_contorl.character_data["character"][character_id].age
+            character_id: cache_contorl.character_data["character"][
+                character_id
+            ].age
             for character_id in cache_contorl.character_data["character"]
             if cache_contorl.character_data["character"][character_id].age < 18
-            and cache_contorl.character_data["character"][character_id].sex == "Man"
+            and cache_contorl.character_data["character"][character_id].sex
+            == "Man"
         },
         "Woman": {
-            character_id: cache_contorl.character_data["character"][character_id].age
+            character_id: cache_contorl.character_data["character"][
+                character_id
+            ].age
             for character_id in cache_contorl.character_data["character"]
             if cache_contorl.character_data["character"][character_id].age < 18
-            and cache_contorl.character_data["character"][character_id].sex == "Woman"
+            and cache_contorl.character_data["character"][character_id].sex
+            == "Woman"
         },
         "Other": {
-            character_id: cache_contorl.character_data["character"][character_id].age
+            character_id: cache_contorl.character_data["character"][
+                character_id
+            ].age
             for character_id in cache_contorl.character_data["character"]
             if cache_contorl.character_data["character"][character_id].age < 18
             and cache_contorl.character_data["character"][character_id].sex
             not in {"Man": 0, "Woman": 1}
         },
         "Teacher": {
-            character_id: cache_contorl.character_data["character"][character_id].age
+            character_id: cache_contorl.character_data["character"][
+                character_id
+            ].age
             for character_id in cache_contorl.character_data["character"]
-            if cache_contorl.character_data["character"][character_id].age >= 18
+            if cache_contorl.character_data["character"][character_id].age
+            >= 18
         },
     }
     man_max = len(character_sex_data["Man"])
@@ -317,16 +336,26 @@ def init_character_dormitory():
     other_max = len(character_sex_data["Other"])
     teacher_max = len(character_sex_data["Teacher"])
     character_sex_data["Man"] = [
-        k[0] for k in sorted(character_sex_data["Man"].items(), key=lambda x: x[1])
+        k[0]
+        for k in sorted(character_sex_data["Man"].items(), key=lambda x: x[1])
     ]
     character_sex_data["Woman"] = [
-        k[0] for k in sorted(character_sex_data["Woman"].items(), key=lambda x: x[1])
+        k[0]
+        for k in sorted(
+            character_sex_data["Woman"].items(), key=lambda x: x[1]
+        )
     ]
     character_sex_data["Other"] = [
-        k[0] for k in sorted(character_sex_data["Other"].items(), key=lambda x: x[1])
+        k[0]
+        for k in sorted(
+            character_sex_data["Other"].items(), key=lambda x: x[1]
+        )
     ]
     character_sex_data["Teacher"] = [
-        k[0] for k in sorted(character_sex_data["Teacher"].items(), key=lambda x: x[1])
+        k[0]
+        for k in sorted(
+            character_sex_data["Teacher"].items(), key=lambda x: x[1]
+        )
     ]
     teacher_dormitory = {
         x: 0
@@ -346,12 +375,16 @@ def init_character_dormitory():
     }
     male_dormitory = {
         x: 0
-        for j in [k[1] for k in sorted(male_dormitory.items(), key=lambda x: x[0])]
+        for j in [
+            k[1] for k in sorted(male_dormitory.items(), key=lambda x: x[0])
+        ]
         for x in j
     }
     female_dormitory = {
         x: 0
-        for j in [k[1] for k in sorted(female_dormitory.items(), key=lambda x: x[0])]
+        for j in [
+            k[1] for k in sorted(female_dormitory.items(), key=lambda x: x[0])
+        ]
         for x in j
     }
     basement = {x: 0 for x in cache_contorl.place_data["Basement"]}
@@ -363,28 +396,35 @@ def init_character_dormitory():
     single_room_woman = math.ceil(woman_max / female_dormitoryMax)
     single_room_basement = math.ceil(other_max / basement_max)
     single_room_teacher = math.ceil(teacher_max / teacher_dormitoryMax)
-    man_list = character_sex_data["Man"].copy()
-    for character in character_sex_data["Man"]:
+    for character_id in character_sex_data["Man"]:
         now_room = list(male_dormitory.keys())[0]
-        cache_contorl.character_data["character"][character].dormitory = now_room
+        cache_contorl.character_data["character"][
+            character_id
+        ].dormitory = now_room
         male_dormitory[now_room] += 1
         if male_dormitory[now_room] >= single_room_man:
             del male_dormitory[now_room]
-    for character in character_sex_data["Woman"]:
+    for character_id in character_sex_data["Woman"]:
         now_room = list(female_dormitory.keys())[0]
-        cache_contorl.character_data["character"][character].dormitory = now_room
+        cache_contorl.character_data["character"][
+            character_id
+        ].dormitory = now_room
         female_dormitory[now_room] += 1
         if female_dormitory[now_room] >= single_room_woman:
             del female_dormitory[now_room]
-    for character in character_sex_data["Other"]:
+    for character_id in character_sex_data["Other"]:
         now_room = list(basement.keys())[0]
-        cache_contorl.character_data["character"][character].dormitory = now_room
+        cache_contorl.character_data["character"][
+            character_id
+        ].dormitory = now_room
         basement[now_room] += 1
         if basement[now_room] >= single_room_basement:
             del basement[now_room]
-    for character in character_sex_data["Teacher"]:
+    for character_id in character_sex_data["Teacher"]:
         now_room = list(teacher_dormitory.keys())[0]
-        cache_contorl.character_data["character"][character].dormitory = now_room
+        cache_contorl.character_data["character"][
+            character_id
+        ].dormitory = now_room
         teacher_dormitory[now_room] += 1
         if teacher_dormitory[now_room] >= single_room_teacher:
             del teacher_dormitory[now_room]
@@ -394,16 +434,16 @@ def init_character_position():
     """
     初始化角色位置
     """
-    for character in cache_contorl.character_data["character"]:
+    for character_id in cache_contorl.character_data["character"]:
         character_position = cache_contorl.character_data["character"][
-            character
+            character_id
         ].position
         character_dormitory = cache_contorl.character_data["character"][
-            character
+            character_id
         ].dormitory
         character_dormitory = map_handle.get_map_system_path_for_str(
             character_dormitory
         )
         map_handle.character_move_scene(
-            character_position, character_dormitory, character
+            character_position, character_dormitory, character_id
         )

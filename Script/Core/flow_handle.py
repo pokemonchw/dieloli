@@ -1,8 +1,13 @@
 # -*- coding: UTF-8 -*-
 import time
 import os
-import copy
-from Script.Core import cache_contorl, text_loading, text_handle, game_config, io_init
+from Script.Core import (
+    cache_contorl,
+    text_loading,
+    text_handle,
+    game_config,
+    io_init,
+)
 
 
 def null_func():
@@ -162,13 +167,16 @@ def _cmd_valid(order_number):
     Keyword arguments:
     order_number -- 对应命令数字
     """
-    re = (order_number in cmd_map.keys()) and (cmd_map[int(order_number)] != null_func)
+    re = (order_number in cmd_map.keys()) and (
+        cmd_map[int(order_number)] != null_func
+    )
     return re
 
 
 __skip_flag__ = False
 reset_func = None
 exit_flag = False
+
 
 # 处理输入
 def order_deal(flag="order", print_order=True):
@@ -190,7 +198,7 @@ def order_deal(flag="order", print_order=True):
                 cache_contorl.flow_contorl["restart_game"] = 0
                 reset_func()
                 return
-            if print_order == True and order != "":
+            if print_order and order != "":
                 io_init.era_print("\n" + order + "\n")
             if flag == "str":
                 if order.isdigit():
@@ -217,9 +225,9 @@ def askfor_str(donot_return_null_str=True, print_order=False):
     """
     while True:
         order = order_deal("str", print_order)
-        if donot_return_null_str == True and order != "":
+        if donot_return_null_str and order != "":
             return order
-        elif donot_return_null_str == False:
+        elif not donot_return_null_str:
             return order
 
 
@@ -279,7 +287,7 @@ def askfor_wait():
     用于情求一个暂停动作，任何如数都可以继续
     """
     global __skip_flag__
-    while __skip_flag__ == False:
+    while not __skip_flag__:
         re = askfor_str(donot_return_null_str=False)
         if re == "":
             break
@@ -305,8 +313,17 @@ def init_cache():
     cache_contorl.output_text_style = "standard"
     cache_contorl.text_style_position = {"position": 0}
     cache_contorl.text_style_cache = ["standard"]
-    cache_contorl.text_one_by_one_rich_cache = {"text_list": [], "style_list": []}
-    cache_contorl.game_time = {"year": 0, "month": 0, "day": 0, "hour": 0, "minute": 0}
+    cache_contorl.text_one_by_one_rich_cache = {
+        "text_list": [],
+        "style_list": [],
+    }
+    cache_contorl.game_time = {
+        "year": 0,
+        "month": 0,
+        "day": 0,
+        "hour": 0,
+        "minute": 0,
+    }
     cache_contorl.cmd_data = {}
     cache_contorl.image_id = 0
     cache_contorl.panel_state = {

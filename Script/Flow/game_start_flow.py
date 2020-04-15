@@ -1,15 +1,10 @@
 from Script.Design import (
-    attr_calculation,
     character_handle,
     map_handle,
     course,
     interest,
-    clothing,
-    nature,
 )
 from Script.Core import cache_contorl
-from Script.Panel import see_character_attr_panel
-import uuid
 
 
 def init_game_start():

@@ -22,7 +22,9 @@ def see_character_wear_item_panel_for_player(character_id: int) -> list:
         return see_character_wear_item_panel(character_id, False)
 
 
-def see_character_wear_item_panel(character_id: int, change_button: bool) -> list:
+def see_character_wear_item_panel(
+    character_id: int, change_button: bool
+) -> list:
     """
     用于查看角色穿戴道具列表的面板
     Keyword arguments:
@@ -32,13 +34,13 @@ def see_character_wear_item_panel(character_id: int, change_button: bool) -> lis
     wear_item_info_text_data = text_loading.get_text_data(
         text_loading.STAGE_WORD_PATH, "49"
     )
-    wear_data = cache_contorl.character_data["character"][character_id].wear_item[
-        "Wear"
-    ]
+    wear_data = cache_contorl.character_data["character"][
+        character_id
+    ].wear_item["Wear"]
     wear_item_text_data = {}
-    item_data = cache_contorl.character_data["character"][character_id].wear_item[
-        "Item"
-    ]
+    item_data = cache_contorl.character_data["character"][
+        character_id
+    ].wear_item["Item"]
     wear_item_button_list = []
     input_s = []
     for wear_type in wear_data:
@@ -47,7 +49,9 @@ def see_character_wear_item_panel(character_id: int, change_button: bool) -> lis
             wear_item_button_list.append(
                 wear_item_info_text_data[wear_type]
                 + ":"
-                + text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "117")
+                + text_loading.get_text_data(
+                    text_loading.STAGE_WORD_PATH, "117"
+                )
             )
         else:
             wear_text = ""
@@ -56,7 +60,9 @@ def see_character_wear_item_panel(character_id: int, change_button: bool) -> lis
             wear_item_button_list.append(
                 wear_item_info_text_data[wear_type] + ":" + wear_text
             )
-            wear_item_text_data[wear_type] = item_data[wear_type][wear_id]["Name"]
+            wear_item_text_data[wear_type] = item_data[wear_type][wear_id][
+                "Name"
+            ]
     if change_button:
         input_s = [str(i) for i in range(len(wear_data))]
         cmd_button_queue.option_int(
@@ -80,12 +86,14 @@ def see_character_wear_item_list_panel(
     era_print.line_feed_print()
     character_wear_item_data = [
         item
-        for item in cache_contorl.character_data["character"][character_id].wear_item[
-            "Item"
-        ]
+        for item in cache_contorl.character_data["character"][
+            character_id
+        ].wear_item["Item"]
         if item in cache_contorl.wear_item_type_data[item_type]
     ]
-    now_page_id = int(cache_contorl.panel_state["SeeCharacterWearItemListPanel"])
+    now_page_id = int(
+        cache_contorl.panel_state["SeeCharacterWearItemListPanel"]
+    )
     now_page_max = game_config.see_character_wearitem_max
     now_page_start_id = now_page_id * now_page_max
     now_page_end_id = now_page_start_id + now_page_max

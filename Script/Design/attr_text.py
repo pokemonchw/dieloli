@@ -1,21 +1,31 @@
-import os, random, bisect
+import os
+import random
+import bisect
 from Script.Core import (
     text_loading,
     cache_contorl,
     game_config,
     game_path_config,
-    value_handle,
     json_handle,
 )
-from Script.Design import proportional_bar, attr_print, attr_calculation, map_handle
+from Script.Design import (
+    proportional_bar,
+    attr_print,
+    attr_calculation,
+    map_handle,
+)
 
 language = game_config.language
 game_path = game_path_config.game_path
 
-ROLE_ATTR_FILE_PATH = os.path.join(game_path, "data", language, "RoleAttributes.json")
+ROLE_ATTR_FILE_PATH = os.path.join(
+    game_path, "data", language, "RoleAttributes.json"
+)
 role_attr_data = json_handle.load_json(ROLE_ATTR_FILE_PATH)
 sex_data = role_attr_data["Sex"]
-EQUIPMENT_FILE_PATH = os.path.join(game_path, "data", language, "Equipment.json")
+EQUIPMENT_FILE_PATH = os.path.join(
+    game_path, "data", language, "Equipment.json"
+)
 equipment_data = json_handle.load_json(EQUIPMENT_FILE_PATH)
 
 
@@ -77,7 +87,11 @@ def get_sex_experience_text(sex_experience_data: dict, sex_name: str) -> list:
             penis_experience,
         ]
     elif sex_name == sex_list[3]:
-        sex_experience_text = [mouth_experience, bosom_experience, anus_experience]
+        sex_experience_text = [
+            mouth_experience,
+            bosom_experience,
+            anus_experience,
+        ]
     return sex_experience_text
 
 
@@ -118,7 +132,7 @@ def get_sex_grade_text_list(sex_grade_data: dict, sex_name: str) -> list:
             clitoris_text,
             anus_text,
         ]
-    elif sex_name == sex_2ist[2]:
+    elif sex_name == sex_list[2]:
         sex_grade_text_list = [
             mouth_text,
             bosom_text,
@@ -162,7 +176,9 @@ def get_random_name_for_sex(sex_grade: str) -> str:
     else:
         sex_judge = random.randint(0, 1)
     if sex_judge == 0:
-        name_random = random.randint(1, cache_contorl.girls_region_int_list[-1])
+        name_random = random.randint(
+            1, cache_contorl.girls_region_int_list[-1]
+        )
         name_region_index = bisect.bisect_left(
             cache_contorl.girls_region_int_list, name_random
         )
@@ -195,7 +211,8 @@ def get_see_attr_panel_head_character_info(character_id: int) -> str:
         text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "13") + name
     )
     character_nick_name = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "12") + nick_name
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "12")
+        + nick_name
     )
     sex = character_data.sex
     sex_text = text_loading.get_text_data(
@@ -233,15 +250,29 @@ def get_engraving_text(engraving_list: dict) -> list:
     yield_level = str(engraving_list["Yield"])
     fear_level = str(engraving_list["Fear"])
     resistance_level = str(engraving_list["Resistance"])
-    pain_level_fix = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "31")
-    happy_level_fix = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "32")
-    yield_level_fix = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "33")
-    fear_level_fix = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "34")
+    pain_level_fix = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "31"
+    )
+    happy_level_fix = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "32"
+    )
+    yield_level_fix = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "33"
+    )
+    fear_level_fix = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "34"
+    )
     resistance_level_fix = text_loading.get_text_data(
         text_loading.STAGE_WORD_PATH, "35"
     )
     level_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "36")
-    level_list = [pain_level, happy_level, yield_level, fear_level, resistance_level]
+    level_list = [
+        pain_level,
+        happy_level,
+        yield_level,
+        fear_level,
+        resistance_level,
+    ]
     level_fix_list = [
         pain_level_fix,
         happy_level_fix,
@@ -284,26 +315,36 @@ def get_clothing_text(clothing_list: dict) -> list:
     underpants_text = clothing_data["Underpants"][underpants_id]
     leggings_text = clothing_data["Leggings"][leggings_id]
     coat_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "41") + coat_text
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "41")
+        + coat_text
     )
     pants_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "42") + pants_text
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "42")
+        + pants_text
     )
     shoes_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "43") + shoes_text
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "43")
+        + shoes_text
     )
     socks_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "44") + socks_text
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "44")
+        + socks_text
     )
     underwear_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "45") + underwear_text
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "45")
+        + underwear_text
     )
-    bra_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "46") + bra_text
+    bra_text = (
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "46")
+        + bra_text
+    )
     underpants_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "47") + underpants_text
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "47")
+        + underpants_text
     )
     leggings_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "48") + leggings_text
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "48")
+        + leggings_text
     )
     clothing_text_list = [
         coat_text,
@@ -348,8 +389,13 @@ def get_state_text(character_id: str) -> str:
     character_id -- 角色Id
     """
     state = cache_contorl.character_data["character"][character_id].state
-    state_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "132")[state]
-    return text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "133") + state_text
+    state_text = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "132"
+    )[state]
+    return (
+        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "133")
+        + state_text
+    )
 
 
 def judge_character_stature(character_id):
@@ -359,7 +405,6 @@ def judge_character_stature(character_id):
     character_id -- 角色Id
     """
     character_data = cache_contorl.character_data["character"][character_id]
-    self_sex = cache_contorl.character_data["character"][0].sex
     target_sex = character_data.sex
     age_judge = "Similar"
     self_age = cache_contorl.character_data["character"][0].age
@@ -391,21 +436,35 @@ def judge_character_stature(character_id):
     bodyfat_judge = "Similar"
     if bodyfat < average_bodyfat * 1.15 and bodyfat >= average_bodyfat * 1.05:
         bodyfat_judge = "SlilghtlyHeight"
-    elif bodyfat < average_bodyfat * 1.25 and bodyfat >= average_bodyfat * 1.15:
+    elif (
+        bodyfat < average_bodyfat * 1.25 and bodyfat >= average_bodyfat * 1.15
+    ):
         bodyfat_judge = "Height"
-    elif bodyfat < average_bodyfat * 1.35 and bodyfat >= average_bodyfat * 1.25:
+    elif (
+        bodyfat < average_bodyfat * 1.35 and bodyfat >= average_bodyfat * 1.25
+    ):
         bodyfat_judge = "VeryHeight"
-    elif bodyfat < average_bodyfat * 1.45 and bodyfat >= average_bodyfat * 1.35:
+    elif (
+        bodyfat < average_bodyfat * 1.45 and bodyfat >= average_bodyfat * 1.35
+    ):
         bodyfat_judge = "SuperHeight"
     elif bodyfat > average_bodyfat * 1.45:
         bodyfat_judge = "ExtremelyHeight"
-    elif bodyfat < average_bodyfat * 0.95 and bodyfat >= average_bodyfat * 0.85:
+    elif (
+        bodyfat < average_bodyfat * 0.95 and bodyfat >= average_bodyfat * 0.85
+    ):
         bodyfat_judge = "SlilghtlyLow"
-    elif bodyfat < average_bodyfat * 0.85 and bodyfat >= average_bodyfat * 0.75:
+    elif (
+        bodyfat < average_bodyfat * 0.85 and bodyfat >= average_bodyfat * 0.75
+    ):
         bodyfat_judge = "Low"
-    elif bodyfat < average_bodyfat * 0.75 and bodyfat >= average_bodyfat * 0.65:
+    elif (
+        bodyfat < average_bodyfat * 0.75 and bodyfat >= average_bodyfat * 0.65
+    ):
         bodyfat_judge = "VeryLow"
-    elif bodyfat < average_bodyfat * 0.65 and bodyfat >= average_bodyfat * 0.55:
+    elif (
+        bodyfat < average_bodyfat * 0.65 and bodyfat >= average_bodyfat * 0.55
+    ):
         bodyfat_judge = "SuperLow"
     elif bodyfat < average_bodyfat * 0.55:
         bodyfat_judge = "ExtremelyLow"
@@ -454,7 +513,9 @@ def judge_character_stature(character_id):
         player_bodyfat_judge = "SuperLow"
     elif bodyfat < player_bodyfat * 0.55:
         player_bodyfat_judge = "ExtremelyLow"
-    player_height = cache_contorl.character_data["character"][0].height["NowHeight"]
+    player_height = cache_contorl.character_data["character"][0].height[
+        "NowHeight"
+    ]
     player_height_judge = "Similar"
     if height < player_height * 1.15 and height >= player_height * 1.05:
         player_height_judge = "SlilghtlyHeight"
@@ -481,8 +542,12 @@ def judge_character_stature(character_id):
     player_age_tem = attr_calculation.judge_age_group(
         cache_contorl.character_data["character"][0].age
     )
-    average_bodyfat = cache_contorl.average_bodyfat_by_age[player_age_tem][player_sex]
-    average_height = cache_contorl.average_height_by_age[player_age_tem][player_sex]
+    average_bodyfat = cache_contorl.average_bodyfat_by_age[player_age_tem][
+        player_sex
+    ]
+    average_height = cache_contorl.average_height_by_age[player_age_tem][
+        player_sex
+    ]
     player_average_bodyfat_judge = "Similar"
     if (
         player_bodyfat < average_bodyfat * 1.15
@@ -529,36 +594,46 @@ def judge_character_stature(character_id):
     elif player_bodyfat < average_bodyfat * 0.55:
         player_average_bodyfat_judge = "ExtremelyLow"
     player_average_height_judge = "Similar"
-    if player_height < average_height * 1.15 and player_height >= average_height * 1.05:
+    if (
+        player_height < average_height * 1.15
+        and player_height >= average_height * 1.05
+    ):
         player_average_height_judge = "SlilghtlyHeight"
     elif (
-        player_height < average_height * 1.25 and player_height >= average_height * 1.15
+        player_height < average_height * 1.25
+        and player_height >= average_height * 1.15
     ):
         player_average_height_judge = "Height"
     elif (
-        player_height < average_height * 1.35 and player_height >= average_height * 1.25
+        player_height < average_height * 1.35
+        and player_height >= average_height * 1.25
     ):
         player_average_height_judge = "VeryHeight"
     elif (
-        player_height < average_height * 1.45 and player_height >= average_height * 1.35
+        player_height < average_height * 1.45
+        and player_height >= average_height * 1.35
     ):
         player_average_height_judge = "SuperHeight"
     elif player_height > average_height * 1.45:
         player_average_height_judge = "ExtremelyHeight"
     elif (
-        player_height < average_height * 0.95 and player_height >= average_height * 0.85
+        player_height < average_height * 0.95
+        and player_height >= average_height * 0.85
     ):
         player_average_height_judge = "SlilghtlyLow"
     elif (
-        player_height < average_height * 0.85 and player_height >= average_height * 0.75
+        player_height < average_height * 0.85
+        and player_height >= average_height * 0.75
     ):
         player_average_height_judge = "Low"
     elif (
-        player_height < average_height * 0.75 and player_height >= average_height * 0.65
+        player_height < average_height * 0.75
+        and player_height >= average_height * 0.65
     ):
         player_average_height_judge = "VeryLow"
     elif (
-        player_height < average_height * 0.65 and player_height >= average_height * 0.55
+        player_height < average_height * 0.65
+        and player_height >= average_height * 0.55
     ):
         player_average_height_judge = "SuperLow"
     elif player_height < average_height * 0.55:
@@ -592,12 +667,14 @@ def get_stature_text(character_id: str) -> list:
     """
     stature_judge = judge_character_stature(character_id)
     for priority in cache_contorl.stature_descrition_priorition_data:
-        for descript in cache_contorl.stature_descrition_priorition_data[priority]:
+        for descript in cache_contorl.stature_descrition_priorition_data[
+            priority
+        ]:
             if judge_stature_description(
                 stature_judge,
-                text_loading.get_game_data(text_loading.STATURE_DESCRIPTION_PATH)[
-                    "Priority"
-                ][priority][descript]["Condition"],
+                text_loading.get_game_data(
+                    text_loading.STATURE_DESCRIPTION_PATH
+                )["Priority"][priority][descript]["Condition"],
             ):
                 return text_loading.get_game_data(
                     text_loading.STATURE_DESCRIPTION_PATH
@@ -613,7 +690,10 @@ def judge_stature_description(stature_judge, description_data):
     description_data -- 身材描述数据
     """
     for judge in description_data:
-        if judge == "SelfAge" and stature_judge["SelfAge"] < description_data[judge]:
+        if (
+            judge == "SelfAge"
+            and stature_judge["SelfAge"] < description_data[judge]
+        ):
             return False
         elif (
             judge == "TargetAge"
@@ -633,16 +713,24 @@ def get_character_abbreviations_info(character_id: int) -> str:
     character_id -- 角色id
     """
     character_data = cache_contorl.character_data["character"][character_id]
-    character_id_info = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "0")
+    character_id_info = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "0"
+    )
     character_id_text = f"{character_id_info}{character_id}"
     character_name = character_data.name
     character_sex = character_data.sex
-    character_sex_info = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "2")
-    character_sex_text_data = text_loading.get_text_data(text_loading.ROLE_PATH, "Sex")
+    character_sex_info = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "2"
+    )
+    character_sex_text_data = text_loading.get_text_data(
+        text_loading.ROLE_PATH, "Sex"
+    )
     character_sex_text = character_sex_text_data[character_sex]
     character_sex_text = character_sex_info + character_sex_text
     character_age = character_data.age
-    character_age_info = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "3")
+    character_age_info = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "3"
+    )
     character_age_text = character_age_info + str(character_age)
     character_hp_and_mp_text = attr_print.get_hp_and_mp_text(character_id)
     character_intimate = character_data.intimate
@@ -681,13 +769,21 @@ def get_character_dormitory_path_text(character_id: str) -> str:
     Return arguments:
     map_path_str -- 宿舍路径描述文本
     """
-    dormitory = cache_contorl.character_data["character"][character_id].dormitory
+    dormitory = cache_contorl.character_data["character"][
+        character_id
+    ].dormitory
     dormitory_path = map_handle.get_map_system_path_for_str(dormitory)
-    map_list = map_handle.get_map_hierarchy_list_for_scene_path(dormitory_path, [])
-    map_path_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "143")
+    map_list = map_handle.get_map_hierarchy_list_for_scene_path(
+        dormitory_path, []
+    )
+    map_path_text = text_loading.get_text_data(
+        text_loading.STAGE_WORD_PATH, "143"
+    )
     map_list.reverse()
     for now_map in map_list:
-        now_map_map_system_str = map_handle.get_map_system_path_str_for_list(now_map)
+        now_map_map_system_str = map_handle.get_map_system_path_str_for_list(
+            now_map
+        )
         map_name = cache_contorl.map_data[now_map_map_system_str]["MapName"]
         map_path_text += map_name + "-"
     map_path_text += cache_contorl.scene_data[dormitory]["SceneName"]

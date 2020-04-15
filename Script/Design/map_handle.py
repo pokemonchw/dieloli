@@ -1,5 +1,11 @@
 import os
-from Script.Core import era_print, py_cmd, cache_contorl, value_handle, text_handle
+from Script.Core import (
+    era_print,
+    py_cmd,
+    cache_contorl,
+    value_handle,
+    text_handle,
+)
 
 
 def print_map(map_path: list) -> list:
@@ -126,7 +132,9 @@ def get_scene_name_list_for_map_path(map_path_str: str):
     return scene_name_data
 
 
-def character_move_scene(old_scene_path: list, new_scene_path: list, character_id: int):
+def character_move_scene(
+    old_scene_path: list, new_scene_path: list, character_id: int
+):
     """
     将角色移动至新场景
     Keyword arguments:
@@ -145,7 +153,9 @@ def character_move_scene(old_scene_path: list, new_scene_path: list, character_i
         ]
     if (
         character_id
-        not in cache_contorl.scene_data[new_scene_path_str]["SceneCharacterData"]
+        not in cache_contorl.scene_data[new_scene_path_str][
+            "SceneCharacterData"
+        ]
     ):
         cache_contorl.character_data["character"][
             character_id
@@ -168,37 +178,51 @@ def get_map_system_path_str_for_list(now_list: list):
 
 def get_path_finding(
     map_path_str: str, now_node: str, target_node: str
-) -> "str__end,list":
+) -> str or list:
     """
     查询寻路路径
     Keyword arguments:
     map_path -- 地图路径
     now_node -- 当前节点相对位置
     target_node -- 目标节点相对位置
+    Return arguments:
+    str:end -- 寻路路径终点
+    lisr -- 寻路路径
     """
     if now_node == target_node:
         return "End"
     else:
-        return cache_contorl.map_data[map_path_str]["SortedPath"][now_node][target_node]
+        return cache_contorl.map_data[map_path_str]["SortedPath"][now_node][
+            target_node
+        ]
 
 
 def get_scene_to_scene_map_list(
     now_scene_path: list, target_scene_path: list
-) -> "str_common,list":
+) -> str or list:
     """
     获取场景到场景之间需要经过的地图列表
     如果两个场景属于同一地图并在同一层级，则返回common
     Keyword arguments:
     now_scene_path -- 当前场景路径
     target_scene_path -- 目标场景路径
+    Return arguments:
+    str:common -- 两个场景在同一层级
+    list -- 场景层级路径列表
     """
-    scene_affiliation = judge_scene_affiliation(now_scene_path, target_scene_path)
+    scene_affiliation = judge_scene_affiliation(
+        now_scene_path, target_scene_path
+    )
     if scene_affiliation == "common":
         return "common"
     elif scene_affiliation == "subordinate":
-        return get_map_hierarchy_list_for_scene_path(now_scene_path, target_scene_path)
+        return get_map_hierarchy_list_for_scene_path(
+            now_scene_path, target_scene_path
+        )
     elif scene_affiliation == "nobelonged":
-        common_map = get_common_map_for_scene_path(now_scene_path, target_scene_path)
+        common_map = get_common_map_for_scene_path(
+            now_scene_path, target_scene_path
+        )
         now_scene_to_common_map = get_map_hierarchy_list_for_scene_path(
             now_scene_path, common_map
         )
@@ -208,10 +232,12 @@ def get_scene_to_scene_map_list(
         common_map_to_target_scene = value_handle.reverse_array_list(
             target_scene_to_common_map
         )
-        return now_scene_to_common_map + common_mapToTargetScene[1:]
+        return now_scene_to_common_map + common_map_to_target_scene[1:]
 
 
-def get_common_map_for_scene_path(scene_a_path: list, scene_b_path: list) -> list:
+def get_common_map_for_scene_path(
+    scene_a_path: list, scene_b_path: list
+) -> list:
     """
     查找场景共同所属地图
     Keyword arguments:
@@ -247,7 +273,7 @@ def get_map_hierarchy_list_for_scene_path(
     hierarchy_list = []
     now_path = None
     while True:
-        if now_path == None:
+        if now_path is None:
             now_path = now_scene_path[:-1]
         if now_path != target_scene_path:
             hierarchy_list.append(now_path)
@@ -271,7 +297,9 @@ def get_map_path_for_true(map_path: list) -> list:
         return get_map_path_for_true(new_map_path)
 
 
-def judge_scene_is_affiliation(now_scene_path: list, target_scene_path: list) -> str:
+def judge_scene_is_affiliation(
+    now_scene_path: list, target_scene_path: list
+) -> str:
     """
     获取场景所属关系
     当前场景属于目标场景的子场景 -> 返回'subordinate'
@@ -281,14 +309,22 @@ def judge_scene_is_affiliation(now_scene_path: list, target_scene_path: list) ->
     now_scene_path -- 当前场景路径
     target_scene_path -- 目标场景路径
     """
-    if judge_scene_affiliation(now_scene_path, target_scene_path) == "subordinate":
+    if (
+        judge_scene_affiliation(now_scene_path, target_scene_path)
+        == "subordinate"
+    ):
         return "subordinate"
-    elif judge_scene_affiliation(target_scene_path, now_scene_path) == "subordinate":
+    elif (
+        judge_scene_affiliation(target_scene_path, now_scene_path)
+        == "subordinate"
+    ):
         return "superior"
     return "common"
 
 
-def judge_scene_affiliation(now_scene_path: list, target_scene_path: list) -> str:
+def judge_scene_affiliation(
+    now_scene_path: list, target_scene_path: list
+) -> str:
     """
     判断场景有无所属关系
     当前场景属于目标场景的子场景 -> 返回'subordinate'
@@ -301,7 +337,9 @@ def judge_scene_affiliation(now_scene_path: list, target_scene_path: list) -> st
     if now_scene_path[:-1] != target_scene_path[:-1]:
         if now_scene_path[:-1] != target_scene_path:
             if now_scene_path[:-1] != []:
-                return judge_scene_affiliation(now_scene_path[:-1], target_scene_path)
+                return judge_scene_affiliation(
+                    now_scene_path[:-1], target_scene_path
+                )
             else:
                 return "nobelonged"
         else:
@@ -322,7 +360,9 @@ def get_relation_map_list_for_scene_path(scene_path: list) -> list:
     if now_map_path != [] and now_map_path[:-1] != []:
         map_list.append(now_map_path)
         if now_pathId == "0":
-            return map_list + get_relation_map_list_for_scene_path(now_map_path)
+            return map_list + get_relation_map_list_for_scene_path(
+                now_map_path
+            )
         else:
             return map_list
     else:
@@ -434,12 +474,16 @@ def get_scene_character_name_list(
     if remove_own_character:
         now_scene_character_list.remove(0)
     for character_id in now_scene_character_list:
-        character_name = cache_contorl.character_data["character"][character_id].name
+        character_name = cache_contorl.character_data["character"][
+            character_id
+        ].name
         name_list.append(character_name)
     return name_list
 
 
-def get_character_id_by_character_name(character_name: str, scene_path_str: str) -> str:
+def get_character_id_by_character_name(
+    character_name: str, scene_path_str: str
+) -> str:
     """
     获取场景上角色姓名对应的角色id
     Keyword arguments:
@@ -458,7 +502,9 @@ def get_scene_character_id_list(scene_path_str: str) -> list:
     Keyword arguments:
     scene_path -- 场景路径
     """
-    return list(cache_contorl.scene_data[scene_path_str]["SceneCharacterData"].keys())
+    return list(
+        cache_contorl.scene_data[scene_path_str]["SceneCharacterData"].keys()
+    )
 
 
 def sort_scene_character_id(scene_path_str: str):
@@ -468,10 +514,12 @@ def sort_scene_character_id(scene_path_str: str):
     scene_path -- 场景路径
     """
     now_scene_character_intimate_data = {}
-    for character in cache_contorl.scene_data[scene_path_str]["SceneCharacterData"]:
-        now_scene_character_intimate_data[character] = cache_contorl.character_data[
-            "character"
-        ][character].intimate
+    for character in cache_contorl.scene_data[scene_path_str][
+        "SceneCharacterData"
+    ]:
+        now_scene_character_intimate_data[
+            character
+        ] = cache_contorl.character_data["character"][character].intimate
     new_scene_character_intimate_data = sorted(
         now_scene_character_intimate_data.items(),
         key=lambda x: (x[1], -int(x[0])),

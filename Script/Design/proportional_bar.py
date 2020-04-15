@@ -28,7 +28,14 @@ def get_proportional_bar(
     proportion_bar = true_bar * proportion
     fix_proportion_bar = null_bar * int(bar_width - proportion)
     proportion_bar = (
-        "<" + bar_id + ">" + proportion_bar + fix_proportion_bar + "</" + bar_id + ">"
+        "<"
+        + bar_id
+        + ">"
+        + proportion_bar
+        + fix_proportion_bar
+        + "</"
+        + bar_id
+        + ">"
     )
     proportion_bar = (
         str(value_name)
@@ -44,7 +51,9 @@ def get_proportional_bar(
     return proportion_bar
 
 
-def get_count_bar(value_name: str, max_value: int, value: int, bar_id: str) -> str:
+def get_count_bar(
+    value_name: str, max_value: int, value: int, bar_id: str
+) -> str:
     """
     通用用于计算计数条的函数
     Keyword arguments:
@@ -57,6 +66,8 @@ def get_count_bar(value_name: str, max_value: int, value: int, bar_id: str) -> s
     null_bar = "0"
     count_bar = true_bar * int(value)
     fix_count_bar = null_bar * (int(max_value) - int(value))
-    count_bar = "<" + bar_id + ">" + count_bar + fix_count_bar + "</" + bar_id + ">"
+    count_bar = (
+        "<" + bar_id + ">" + count_bar + fix_count_bar + "</" + bar_id + ">"
+    )
     count_bar = str(value_name) + "[" + count_bar + "]"
     return count_bar

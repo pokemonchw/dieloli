@@ -1,4 +1,4 @@
-from Script.Core import cache_contorl, text_loading, era_print, py_cmd
+from Script.Core import cache_contorl, text_loading, era_print
 from Script.Design import cmd_button_queue
 
 
@@ -15,7 +15,9 @@ def see_instruct_head_panel() -> list:
         text_loading.CMD_PATH, cmd_button_queue.INSTRUCT_HEAD_PANEL
     )
     if cache_contorl.instruct_filter == {}:
-        cache_contorl.instruct_filter = {instruct: 0 for instruct in instruct_data}
+        cache_contorl.instruct_filter = {
+            instruct: 0 for instruct in instruct_data
+        }
         cache_contorl.instruct_filter["Dialogue"] = 1
     style_data = {
         instruct_data[instruct]: "selectmenu"

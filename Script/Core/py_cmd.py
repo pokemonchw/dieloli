@@ -11,6 +11,7 @@ clear_default_flow = flow_handle.clear_default_flow
 # 绑定或重新绑定一个命令
 bind_cmd = flow_handle.bind_cmd
 
+
 # 输出命令
 def pcmd(
     cmd_str: str,
@@ -38,7 +39,9 @@ def pcmd(
     global last_char
     if len(cmd_str) > 0:
         last_char = cmd_str[-1:]
-    flow_handle.print_cmd(cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style)
+    flow_handle.print_cmd(
+        cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style
+    )
 
 
 # 获得一个没有用过的命令编号
@@ -62,7 +65,7 @@ def clr_cmd(*number, clr_default_flow=True):
     number -- 清楚绑定命令数字
     clr_default_flow -- 是否同时清楚默认处理函数
     """
-    if clr_default_flow == True:
+    if clr_default_flow:
         clear_default_flow()
     if number:
         flow_handle.cmd_clear(number)

@@ -1,8 +1,9 @@
-import pysnooper
-from Script.Core import cache_contorl, text_loading, era_print, py_cmd, text_handle
+from Script.Core import cache_contorl, text_loading, era_print, py_cmd
 from Script.Design import map_handle, cmd_button_queue
 
-panel_state_text_data = text_loading.get_text_data(text_loading.CMD_PATH, "cmdSwitch")
+panel_state_text_data = text_loading.get_text_data(
+    text_loading.CMD_PATH, "cmdSwitch"
+)
 panel_state_on_text = panel_state_text_data[1]
 panel_state_off_text = panel_state_text_data[0]
 
@@ -14,7 +15,9 @@ def see_map_panel() -> list:
     input_s = []
     title_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "78")
     now_map = cache_contorl.now_map
-    now_map_map_system_str = map_handle.get_map_system_path_str_for_list(now_map)
+    now_map_map_system_str = map_handle.get_map_system_path_str_for_list(
+        now_map
+    )
     map_name = cache_contorl.map_data[now_map_map_system_str]["MapName"]
     era_print.little_title_print(title_text + ": " + map_name + " ")
     input_s = input_s + map_handle.print_map(now_map)
@@ -30,20 +33,26 @@ def see_move_path_panel() -> dict:
     now_map = cache_contorl.now_map
     now_map_str = map_handle.get_map_system_path_str_for_list(now_map)
     map_data = cache_contorl.map_data[now_map_str]
-    move_path_info = text_loading.get_text_data(text_loading.MESSAGE_PATH, "27")
+    move_path_info = text_loading.get_text_data(
+        text_loading.MESSAGE_PATH, "27"
+    )
     era_print.normal_print("\n")
     era_print.line_feed_print(move_path_info)
     path_edge = map_data["PathEdge"]
-    map_scene_id = str(map_handle.get_map_scene_id_for_scene_path(now_map, now_scene))
-    scene_path = path_edge[map_scene_id]
+    map_scene_id = str(
+        map_handle.get_map_scene_id_for_scene_path(now_map, now_scene)
+    )
+    scene_path = path_edge[map_scene_id].copy()
+    if map_scene_id in scene_path:
+        del scene_path[map_scene_id]
     scene_path_list = list(scene_path.keys())
-    if map_scene_id in scene_path_list:
-        remove(map_scene_id)
     if len(scene_path_list) > 0:
         scene_cmd = []
         for scene in scene_path_list:
             now_map_str = map_handle.get_map_system_path_str_for_list(now_map)
-            load_scene_data = map_handle.get_scene_data_for_map(now_map_str, scene)
+            load_scene_data = map_handle.get_scene_data_for_map(
+                now_map_str, scene
+            )
             scene_name = load_scene_data["SceneName"]
             scene_cmd.append(scene_name)
         yrn = cmd_button_queue.option_str(
@@ -55,7 +64,9 @@ def see_move_path_panel() -> dict:
         )
         input_s = input_s + yrn
     else:
-        error_move_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "28")
+        error_move_text = text_loading.get_text_data(
+            text_loading.MESSAGE_PATH, "28"
+        )
         era_print.normal_print(error_move_text)
     era_print.restart_line_print()
     return {"input_s": input_s, "scene_path_list": scene_path_list}
@@ -76,7 +87,9 @@ def show_scene_name_list_panel() -> str:
         now_scene = map_handle.get_scene_id_in_map_for_scene_path_on_map_path(
             now_position, now_map
         )
-        now_map_map_system_str = map_handle.get_map_system_path_str_for_list(now_map)
+        now_map_map_system_str = map_handle.get_map_system_path_str_for_list(
+            now_map
+        )
         scene_name_data = map_handle.get_scene_name_list_for_map_path(
             now_map_map_system_str
         )
