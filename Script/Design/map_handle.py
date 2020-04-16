@@ -178,7 +178,7 @@ def get_map_system_path_str_for_list(now_list: list):
 
 def get_path_finding(
     map_path_str: str, now_node: str, target_node: str
-) -> str or list:
+) -> (str, list):
     """
     查询寻路路径
     Keyword arguments:
@@ -190,16 +190,19 @@ def get_path_finding(
     lisr -- 寻路路径
     """
     if now_node == target_node:
-        return "End"
+        return "End", []
     else:
-        return cache_contorl.map_data[map_path_str]["SortedPath"][now_node][
-            target_node
-        ]
+        return (
+            "",
+            cache_contorl.map_data[map_path_str]["SortedPath"][now_node][
+                target_node
+            ],
+        )
 
 
 def get_scene_to_scene_map_list(
     now_scene_path: list, target_scene_path: list
-) -> str or list:
+) -> (str, list):
     """
     获取场景到场景之间需要经过的地图列表
     如果两个场景属于同一地图并在同一层级，则返回common
@@ -214,10 +217,13 @@ def get_scene_to_scene_map_list(
         now_scene_path, target_scene_path
     )
     if scene_affiliation == "common":
-        return "common"
+        return "common", []
     elif scene_affiliation == "subordinate":
-        return get_map_hierarchy_list_for_scene_path(
-            now_scene_path, target_scene_path
+        return (
+            "",
+            get_map_hierarchy_list_for_scene_path(
+                now_scene_path, target_scene_path
+            ),
         )
     elif scene_affiliation == "nobelonged":
         common_map = get_common_map_for_scene_path(
@@ -232,7 +238,7 @@ def get_scene_to_scene_map_list(
         common_map_to_target_scene = value_handle.reverse_array_list(
             target_scene_to_common_map
         )
-        return now_scene_to_common_map + common_map_to_target_scene[1:]
+        return "", now_scene_to_common_map + common_map_to_target_scene[1:]
 
 
 def get_common_map_for_scene_path(
