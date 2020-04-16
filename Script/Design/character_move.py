@@ -9,7 +9,7 @@ def own_charcter_move(target_scene: list):
     Keyword arguments:
     target_scene -- 寻路目标场景(在地图系统下的绝对坐标)
     """
-    move_now = character_move(0, target_scene)
+    move_now = character_move(0, target_scene)[0]
     if move_now == "Null":
         null_message = text_loading.get_text_data(
             text_loading.MESSAGE_PATH, "30"
@@ -22,7 +22,7 @@ def own_charcter_move(target_scene: list):
     cache_contorl.now_flow_id = "in_scene"
 
 
-def character_move(character_id: str, target_scene: list) -> str or list:
+def character_move(character_id: str, target_scene: list) -> (str, list):
     """
     通用角色移动控制
     Keyword arguments:
@@ -49,15 +49,15 @@ def character_move(character_id: str, target_scene: list) -> str or list:
         target_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
             map_path, target_scene
         )
-        move_end = identical_map_move(
+        move_end, move_path = identical_map_move(
             character_id, map_path, now_map_scene_id, target_map_scene_id
         )
     else:
-        move_end = difference_map_move(character_id, target_scene)
-    return move_end
+        move_end, move_path = difference_map_move(character_id, target_scene)
+    return move_end, move_path
 
 
-def difference_map_move(character_id: str, target_scene: list) -> str or list:
+def difference_map_move(character_id: str, target_scene: list) -> (str, list):
     """
     角色跨地图层级移动
     Keyword arguments:
@@ -150,7 +150,7 @@ def identical_map_move(
     now_map: list,
     now_map_scene_id: str,
     target_map_scene_id: str,
-) -> str or list:
+) -> (str, list):
     """
     角色在相同地图层级内移动
     Keyword arguments:
@@ -164,10 +164,10 @@ def identical_map_move(
     list -- 路径
     """
     now_map_str = map_handle.get_map_system_path_str_for_list(now_map)
-    move_path = map_handle.get_path_finding(
+    move_end, move_path = map_handle.get_path_finding(
         now_map_str, now_map_scene_id, target_map_scene_id
     )
-    if move_path != "End" and move_path != "Null":
+    if move_path != []:
         now_target_scene_id = move_path["Path"][0]
         now_need_time = move_path["Time"][0]
         now_character_position = map_handle.get_scene_path_for_map_scene_id(
@@ -180,4 +180,4 @@ def identical_map_move(
             now_character_position, now_target_position, character_id
         )
         game_time.sub_time_now(now_need_time)
-    return move_path
+    return move_end, move_path
