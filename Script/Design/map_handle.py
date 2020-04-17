@@ -172,9 +172,7 @@ def get_map_system_path_str_for_list(now_list: list):
     Keyword arguments:
     now_list -- 地图路径列表数据
     """
-    if isinstance(now_list, list):
-        return os.sep.join(now_list)
-    return now_list
+    return os.sep.join(now_list)
 
 
 def get_path_finding(
@@ -389,7 +387,7 @@ def get_scene_data_for_map(map_path_str: str, map_scene_id: str) -> dict:
     else:
         scene_path_str = map_path_str + os.sep + str(map_scene_id)
     scene_path = get_map_system_path_for_str(scene_path_str)
-    scene_path = get_scene_path_for_true(scene_path_str)
+    scene_path = get_scene_path_for_true(scene_path)
     scene_path_str = get_map_system_path_str_for_list(scene_path)
     return cache_contorl.scene_data[scene_path_str]
 
@@ -434,8 +432,6 @@ def get_scene_path_for_true(scene_path: list) -> list:
     if scene_path_str in cache_contorl.scene_data:
         return scene_path
     else:
-        if isinstance(scene_path, str):
-            scene_path = scene_path.split(os.sep)
         scene_path.append("0")
         return get_scene_path_for_true(scene_path)
 

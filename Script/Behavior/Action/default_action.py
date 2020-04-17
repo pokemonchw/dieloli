@@ -29,17 +29,50 @@ def move_action(character_id: int, target_path: list):
                 0,
                 character_data.behavior["StartTime"],
             )
-            if game_time.judge_date_big_or_small(
+            time_judge = game_time.judge_date_big_or_small(
                 end_time, cache_contorl.game_time
-            ):
-                pass
-        (
-            move_status,
-            _,
-            now_target_position,
-            now_need_time,
-        ) = character_move.character_move(character_id, target_path)
-        if move_status == "Null":
-            pass
+            )
+            if time_judge == 0:
+                map_handle.character_move_scene(
+                    character_data.position,
+                    character_data.behavior["MoveTarget"],
+                    character_id,
+                )
+                character_data.behavior["StartTime"] = end_time
+            elif time_judge == 1:
+                need_time = (
+                    game_time.timetuple_to_datetime(end_time)
+                    - game_time.game_time_to_time_tuple(
+                        cache_contorl.game_time
+                    )
+                ).minutes
+                character_data.behavior["Duration"] = need_time
+                character_data.behavior[
+                    "BehaviorId"
+                ] = constant.Behavior.SHARE_BLANKLY
+                character_data.state = constant.CharacterStatus.STATUS_ARDER
+            else:
+                map_handle.character_move_scene(
+                    character_data.position,
+                    character_data.behavior["MoveTarget"],
+                    character_id,
+                )
+                character_data.behavior["StartTime"] = end_time
         else:
-            pass
+            (
+                move_status,
+                _,
+                now_target_position,
+                now_need_time,
+            ) = character_move.character_move(character_id, target_path)
+            if move_status != "Null":
+                character_data.behavior["MoveTarget"] = now_target_position
+                character_data.behavior["StartTime"] = cache_contorl.game_time
+                character_data.behavior["Duration"] = now_need_time
+            else:
+                character_data.behavior["StartTime"] = cache_contorl.game_time
+                character_data.state = constant.CharacterStatus.STATUS_ARDER
+                character_data.behavior[
+                    "BehaviorId"
+                ] = constant.Behavior.SHARE_BLANKLY
+    cache_contorl.character_data["character"][character_id] = character_data

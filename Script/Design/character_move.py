@@ -19,7 +19,9 @@ def own_charcter_move(target_scene: list):
         era_print.normal_print(null_message)
     else:
         map_handle.character_move_scene(
-            cache_contorl.character_data['character'][0].position, now_target_position, 0
+            cache_contorl.character_data["character"][0].position,
+            now_target_position,
+            0,
         )
         game_time.sub_time_now(now_need_time)
         if (

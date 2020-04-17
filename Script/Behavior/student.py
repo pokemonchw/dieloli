@@ -29,7 +29,7 @@ def arder_behavior(character_id: int):
     now_time_slice = game_time.get_now_time_slice(character_id)
     if now_time_slice["InCourse"]:
         if character_data.position != character_data.classroom:
-            pass
+            default_action.move_action(character_id, character_data.classroom)
 
 
 behavior_list = {constant.CharacterStatus.STATUS_ARDER: arder_behavior}
