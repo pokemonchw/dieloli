@@ -7,6 +7,7 @@ from Script.Core import (
     text_loading,
     json_handle,
     value_handle,
+    constant,
 )
 from Script.Design import game_time
 
@@ -23,7 +24,7 @@ def get_tem_list() -> dict:
     获取人物生成模板
     """
     return text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "TemList"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "TemList"
     )
 
 
@@ -40,7 +41,7 @@ def get_age_tem_list() -> list:
     """
     return list(
         text_loading.get_text_data(
-            text_loading.ATTR_TEMPLATE_PATH, "AgeTem"
+            constant.FilePath.ATTR_TEMPLATE_PATH, "AgeTem"
         ).keys()
     )
 
@@ -59,7 +60,7 @@ def get_sex_item(sex_id: str) -> dict:
     sex_id -- 指定性别id
     """
     return text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "SexItem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "SexItem"
     )[sex_id]
 
 
@@ -77,7 +78,7 @@ def get_age(tem_name: str) -> int:
     tem_name -- 年龄模板id
     """
     tem_data = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "AgeTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "AgeTem"
     )[tem_name]
     max_age = int(tem_data["MaxAge"])
     mini_age = int(tem_data["MiniAge"])
@@ -91,7 +92,7 @@ def get_end_age(sex: str) -> int:
     sex -- 性别
     """
     tem_value = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "EndAgeTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "EndAgeTem"
     )[sex]
     return random.randint(int(tem_value * 0.5), int(tem_value * 1.5))
 
@@ -105,7 +106,7 @@ def get_height(tem_name: str, age: int, features: dict) -> dict:
     Features -- 人物特性数据
     """
     tem_data = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "HeightTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "HeightTem"
     )[tem_name]
     initial_height = random.uniform(tem_data[0], tem_data[1])
     if tem_name == "Man" or "Asexual":
@@ -161,7 +162,7 @@ def get_chest(chest_tem: str, birthday: dict):
 
 
 chest_tem_weight_data = text_loading.get_text_data(
-    text_loading.ATTR_TEMPLATE_PATH, "ChestWeightTem"
+    constant.FilePath.ATTR_TEMPLATE_PATH, "ChestWeightTem"
 )
 
 
@@ -179,7 +180,7 @@ def get_rand_npc_chest(chest_tem: str) -> int:
     chest_tem -- 罩杯模板
     """
     chest_scope = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "ChestTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "ChestTem"
     )[chest_tem]
     return random.uniform(chest_scope[0], chest_scope[1])
 
@@ -232,7 +233,7 @@ def get_bmi(tem_name: str) -> dict:
     tem_name -- 体重比例模板id
     """
     tem_data = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "WeightTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "WeightTem"
     )[tem_name]
     return random.uniform(tem_data[0], tem_data[1])
 
@@ -249,7 +250,7 @@ def get_bodyfat(sex: str, tem_name: str) -> float:
     else:
         sex_tem = "Woman"
     tem_data = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "BodyFatTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "BodyFatTem"
     )[sex_tem][tem_name]
     return random.uniform(tem_data[0], tem_data[1])
 
@@ -297,7 +298,7 @@ def get_measurements(
         ) / 0.74
     waist_hip_proportion = waist / hip
     waist_hip_proportion_tem = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "WaistHipProportionTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "WaistHipProportionTem"
     )[weight_tem]
     waist_hip_proportion_fix = random.uniform(0, waist_hip_proportion_tem)
     waist_hip_proportion = waist_hip_proportion + waist_hip_proportion_fix
@@ -314,7 +315,7 @@ def get_max_hit_point(tem_name: str) -> int:
     tem_name -- hp模板
     """
     tem_data = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "HitPointTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "HitPointTem"
     )[tem_name]
     max_hit_point = int(tem_data["HitPointMax"])
     add_value = random.randint(0, 500)
@@ -329,7 +330,7 @@ def get_max_mana_point(tem_name: str) -> int:
     tem_name -- mp模板
     """
     tem_data = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "ManaPointTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "ManaPointTem"
     )[tem_name]
     max_mana_point = int(tem_data["ManaPointMax"])
     add_value = random.randint(0, 500)
@@ -361,7 +362,7 @@ def get_sex_experience(tem_name: str) -> dict:
     tem_name -- 性经验模板
     """
     tem_data = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "SexExperience"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperience"
     )[tem_name]
     mouth_experience_tem_name = tem_data["MouthExperienceTem"]
     bosom_experience_tem_name = tem_data["BosomExperienceTem"]
@@ -370,37 +371,37 @@ def get_sex_experience(tem_name: str) -> dict:
     anus_experience_tem_name = tem_data["AnusExperienceTem"]
     penis_experience_tem_name = tem_data["PenisExperienceTem"]
     mouth_experience_list = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "SexExperienceTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
     )["MouthExperienceTem"][mouth_experience_tem_name]
     mouth_experience = random.randint(
         int(mouth_experience_list[0]), int(mouth_experience_list[1])
     )
     bosom_experience_list = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "SexExperienceTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
     )["BosomExperienceTem"][bosom_experience_tem_name]
     bosom_experience = random.randint(
         int(bosom_experience_list[0]), int(bosom_experience_list[1])
     )
     vagina_experience_list = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "SexExperienceTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
     )["VaginaExperienceTem"][vagina_experience_tem_name]
     vagina_experience = random.randint(
         int(vagina_experience_list[0]), int(vagina_experience_list[1])
     )
     clitoris_experience_list = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "SexExperienceTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
     )["ClitorisExperienceTem"][clitoris_experience_tem_name]
     clitoris_experience = random.randint(
         int(clitoris_experience_list[0]), int(clitoris_experience_list[1])
     )
     anus_experience_list = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "SexExperienceTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
     )["AnusExperienceTem"][anus_experience_tem_name]
     anus_experience = random.randint(
         int(anus_experience_list[0]), int(anus_experience_list[1])
     )
     penis_experience_list = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "SexExperienceTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
     )["PenisExperienceTem"][penis_experience_tem_name]
     penis_experience = random.randint(
         int(penis_experience_list[0]), int(penis_experience_list[1])
@@ -477,9 +478,9 @@ def judge_age_group(age: int):
     Keyword arguments:
     age -- 年龄
     """
-    age_group = text_loading.get_game_data(text_loading.ATTR_TEMPLATE_PATH)[
-        "AgeTem"
-    ]
+    age_group = text_loading.get_game_data(
+        constant.FilePath.ATTR_TEMPLATE_PATH
+    )["AgeTem"]
     for age_tem in age_group:
         if int(age) >= int(age_group[age_tem]["MiniAge"]) and int(age) < int(
             age_group[age_tem]["MaxAge"]
@@ -494,9 +495,9 @@ def judge_chest_group(chest: int):
     Keyword arguments:
     chest -- 胸围差
     """
-    chest_group = text_loading.get_game_data(text_loading.ATTR_TEMPLATE_PATH)[
-        "ChestTem"
-    ]
+    chest_group = text_loading.get_game_data(
+        constant.FilePath.ATTR_TEMPLATE_PATH
+    )["ChestTem"]
     for chest_tem in chest_group:
         if (
             int(chest) >= int(chest_group[chest_tem][0])

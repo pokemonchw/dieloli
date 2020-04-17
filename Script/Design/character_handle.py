@@ -8,6 +8,7 @@ from Script.Core import (
     text_loading,
     game_path_config,
     game_config,
+    constant,
 )
 from Script.Design import (
     attr_calculation,
@@ -18,9 +19,9 @@ from Script.Design import (
 
 language = game_config.language
 game_path = game_path_config.game_path
-sex_list = list(text_loading.get_text_data(text_loading.ROLE_PATH, "Sex"))
+sex_list = list(text_loading.get_text_data(constant.FilePath.ROLE_PATH, "Sex"))
 age_tem_list = list(
-    text_loading.get_text_data(text_loading.ATTR_TEMPLATE_PATH, "AgeTem")
+    text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "AgeTem")
 )
 character_list = list(game_data.game_data[language]["character"].keys())
 
@@ -32,11 +33,8 @@ def init_character_list():
     init_character_tem()
     id_list = iter([i + 1 for i in range(len(cache_contorl.npc_tem_data))])
     npc_data_iter = iter(cache_contorl.npc_tem_data)
-    while 1:
-        try:
-            init_character(next(id_list), next(npc_data_iter))
-        except StopIteration:
-            break
+    for now_id, now_npc_data in zip(id_list, npc_data_iter):
+        init_character(now_id, now_npc_data)
     index_character_average_value()
     calculate_the_average_value_of_each_attribute_of_each_age_group()
 
@@ -200,7 +198,7 @@ def create_random_npc(id) -> dict:
 
 
 sex_weight_data = text_loading.get_text_data(
-    text_loading.ATTR_TEMPLATE_PATH, "RandomNpcSexWeight"
+    constant.FilePath.ATTR_TEMPLATE_PATH, "RandomNpcSexWeight"
 )
 sex_weight_max = sum(
     [int(sex_weight_data[weight]) for weight in sex_weight_data]
@@ -221,7 +219,7 @@ def get_rand_npc_sex() -> str:
 
 
 fat_weight_data = text_loading.get_text_data(
-    text_loading.ATTR_TEMPLATE_PATH, "FatWeight"
+    constant.FilePath.ATTR_TEMPLATE_PATH, "FatWeight"
 )
 
 
@@ -244,7 +242,7 @@ def get_rand_npc_sexExperienceTem(age: int, sex: str) -> str:
     sex -- 性别
     """
     age_judge_sex_experience_tem_data = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "AgeJudgeSexExperienceTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "AgeJudgeSexExperienceTem"
     )
     if sex == "Asexual":
         sex = "Woman"
@@ -258,7 +256,7 @@ def get_rand_npc_sexExperienceTem(age: int, sex: str) -> str:
 
 
 body_fat_weight_data = text_loading.get_text_data(
-    text_loading.ATTR_TEMPLATE_PATH, "BodyFatWeight"
+    constant.FilePath.ATTR_TEMPLATE_PATH, "BodyFatWeight"
 )
 
 
@@ -274,7 +272,7 @@ def get_rand_npc_body_fat_tem(age_judge: str, bmi_tem: str) -> str:
 
 
 age_tem_weight_data = text_loading.get_text_data(
-    text_loading.ATTR_TEMPLATE_PATH, "AgeWeight"
+    constant.FilePath.ATTR_TEMPLATE_PATH, "AgeWeight"
 )
 
 

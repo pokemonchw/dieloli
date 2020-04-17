@@ -1,4 +1,4 @@
-from Script.Core import cache_contorl, text_loading, era_print
+from Script.Core import cache_contorl, text_loading, era_print, constant
 from Script.Design import cmd_button_queue
 
 
@@ -31,7 +31,9 @@ def see_character(character_id: str, judge: bool) -> list:
     Return arguments:
     list -- 按钮列表
     """
-    nature_text_data = text_loading.get_game_data(text_loading.NATURE_PATH)
+    nature_text_data = text_loading.get_game_data(
+        constant.FilePath.NATURE_PATH
+    )
     character_nature = cache_contorl.character_data["character"][
         character_id
     ].nature

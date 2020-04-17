@@ -1,4 +1,10 @@
-from Script.Core import game_config, cache_contorl, text_loading, dictionaries
+from Script.Core import (
+    game_config,
+    cache_contorl,
+    text_loading,
+    dictionaries,
+    constant,
+)
 
 
 def set_rich_text_print(text_message: str, default_style: str) -> list:
@@ -11,7 +17,11 @@ def set_rich_text_print(text_message: str, default_style: str) -> list:
     style_name_list = {
         key: 0
         for key in game_config.get_font_data_list()
-        + list(text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys())
+        + list(
+            text_loading.get_game_data(
+                constant.FilePath.BAR_CONFIG_PATH
+            ).keys()
+        )
     }
     style_index = 0
     style_last_index = None
@@ -74,7 +84,7 @@ def remove_rich_cache(string: str) -> str:
     """
     string = dictionaries.handle_text(string)
     bar_list = list(
-        text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys()
+        text_loading.get_game_data(constant.FilePath.BAR_CONFIG_PATH).keys()
     )
     style_name_list = game_config.get_font_data_list() + bar_list
     for i in range(0, len(style_name_list)):

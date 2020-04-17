@@ -1,8 +1,14 @@
-from Script.Core import cache_contorl, text_loading, era_print, py_cmd
+from Script.Core import (
+    cache_contorl,
+    text_loading,
+    era_print,
+    py_cmd,
+    constant,
+)
 from Script.Design import map_handle, cmd_button_queue
 
 panel_state_text_data = text_loading.get_text_data(
-    text_loading.CMD_PATH, "cmdSwitch"
+    constant.FilePath.CMD_PATH, "cmdSwitch"
 )
 panel_state_on_text = panel_state_text_data[1]
 panel_state_off_text = panel_state_text_data[0]
@@ -13,7 +19,9 @@ def see_map_panel() -> list:
     地图绘制面板
     """
     input_s = []
-    title_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "78")
+    title_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "78"
+    )
     now_map = cache_contorl.now_map
     now_map_map_system_str = map_handle.get_map_system_path_str_for_list(
         now_map
@@ -34,7 +42,7 @@ def see_move_path_panel() -> dict:
     now_map_str = map_handle.get_map_system_path_str_for_list(now_map)
     map_data = cache_contorl.map_data[now_map_str]
     move_path_info = text_loading.get_text_data(
-        text_loading.MESSAGE_PATH, "27"
+        constant.FilePath.MESSAGE_PATH, "27"
     )
     era_print.normal_print("\n")
     era_print.line_feed_print(move_path_info)
@@ -65,7 +73,7 @@ def see_move_path_panel() -> dict:
         input_s = input_s + yrn
     else:
         error_move_text = text_loading.get_text_data(
-            text_loading.MESSAGE_PATH, "28"
+            constant.FilePath.MESSAGE_PATH, "28"
         )
         era_print.normal_print(error_move_text)
     era_print.restart_line_print()
@@ -76,7 +84,9 @@ def show_scene_name_list_panel() -> str:
     """
     地图下场景名称绘制面板
     """
-    title_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "86")
+    title_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "86"
+    )
     era_print.normal_print(title_text)
     panel_state = cache_contorl.panel_state["SeeSceneNameListPanel"]
     if panel_state == "0":
@@ -124,7 +134,7 @@ def back_scene_panel(start_id: str) -> list:
     now_position = cache_contorl.character_data["character"][0].position
     now_map = map_handle.get_map_for_path(now_position)
     cmd_data = text_loading.get_text_data(
-        text_loading.CMD_PATH, cmd_button_queue.SEE_MAP
+        constant.FilePath.CMD_PATH, constant.CmdMenu.SEE_MAP
     )
     see_map_cmd.append(cmd_data[0])
     if now_map != [] and cache_contorl.now_map != []:

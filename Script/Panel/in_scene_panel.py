@@ -4,6 +4,7 @@ from Script.Core import (
     era_print,
     py_cmd,
     game_config,
+    constant,
 )
 from Script.Design import (
     game_time,
@@ -16,7 +17,7 @@ from Script.Design import (
 import math
 
 panel_state_text_data = text_loading.get_text_data(
-    text_loading.CMD_PATH, "cmdSwitch"
+    constant.FilePath.CMD_PATH, "cmdSwitch"
 )
 panel_state_on_text = panel_state_text_data[1]
 panel_state_off_text = panel_state_text_data[0]
@@ -26,7 +27,9 @@ def see_scene_panel():
     """
     当前场景信息面板
     """
-    title_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "75")
+    title_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "75"
+    )
     era_print.little_title_print(title_text)
     time_text = game_time.get_date_text()
     era_print.normal_print(time_text)
@@ -45,7 +48,7 @@ def see_scene_panel():
     scene_data = cache_contorl.scene_data[scene_path_str].copy()
     scene_name = map_path_text + scene_data["SceneName"]
     scene_info_head = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "76"
+        constant.FilePath.STAGE_WORD_PATH, "76"
     )
     scene_info = scene_info_head + scene_name
     era_print.normal_print(scene_info)
@@ -66,7 +69,7 @@ def see_scene_character_list_panel() -> list:
     """
     input_s = []
     see_character_text = text_loading.get_text_data(
-        text_loading.MESSAGE_PATH, "26"
+        constant.FilePath.MESSAGE_PATH, "26"
     )
     era_print.normal_print(see_character_text)
     era_print.line_feed_print()
@@ -103,7 +106,7 @@ def change_scene_character_list_panel() -> list:
     page_max = math.floor(character_max / name_list_max)
     page_text = "(" + str(now_page) + "/" + str(page_max) + ")"
     input_s = cmd_button_queue.option_int(
-        cmd_button_queue.CHANGE_SCENE_CHARACTER_LIST,
+        constant.CmdMenu.CHANGE_SCENE_CHARACTER_LIST,
         cmd_column=5,
         askfor=False,
         cmd_size="center",
@@ -135,7 +138,7 @@ def see_character_info_panel():
     查看当前互动对象信息面板
     """
     character_info = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "77"
+        constant.FilePath.STAGE_WORD_PATH, "77"
     )
     era_print.normal_print(character_info)
     character_id = cache_contorl.character_data["character_id"]
@@ -145,15 +148,15 @@ def see_character_info_panel():
     era_print.normal_print(" ")
     sex = character_data.sex
     sex_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "2"
+        constant.FilePath.STAGE_WORD_PATH, "2"
     ) + attr_text.get_sex_text(sex)
     era_print.normal_print(sex_text)
     era_print.normal_print(" ")
     intimate_info = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "16"
+        constant.FilePath.STAGE_WORD_PATH, "16"
     )
     graces_info = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "17"
+        constant.FilePath.STAGE_WORD_PATH, "17"
     )
     character_intimate_text = intimate_info + f"{character_data.intimate}"
     character_graces_text = graces_info + f"{character_data.graces}"
@@ -170,7 +173,9 @@ def jump_character_list_page_panel() -> str:
     """
     角色列表页面跳转控制面板
     """
-    message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "32")
+    message_text = text_loading.get_text_data(
+        constant.FilePath.MESSAGE_PATH, "32"
+    )
     name_list_max = int(game_config.in_scene_see_player_max)
     character_max = character_handle.get_character_index_max()
     page_max = math.floor(character_max / name_list_max)
@@ -188,7 +193,7 @@ def in_scene_button_panel(start_id: int) -> list:
     """
     era_print.line_feed_print()
     input_s = cmd_button_queue.option_int(
-        cmd_list=cmd_button_queue.in_SCENE_LIST1,
+        cmd_list=constant.CmdMenu.IN_SCENE_LIST1,
         cmd_column=9,
         askfor=False,
         cmd_size="center",

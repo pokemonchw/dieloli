@@ -1,6 +1,6 @@
 import math
 import random
-from Script.Core import text_loading, value_handle, cache_contorl
+from Script.Core import text_loading, value_handle, cache_contorl, constant
 from Script.Design.character import Character
 
 
@@ -9,16 +9,16 @@ def init_phase_course_hour():
     初始化各班级课时
     """
     phase_course_time = text_loading.get_text_data(
-        text_loading.PHASE_COURSE_PATH, "CourseTime"
+        constant.FilePath.PHASE_COURSE_PATH, "CourseTime"
     )
     primary_weight = text_loading.get_text_data(
-        text_loading.PHASE_COURSE_PATH, "PrimarySchool"
+        constant.FilePath.PHASE_COURSE_PATH, "PrimarySchool"
     )
     junior_middle_weight = text_loading.get_text_data(
-        text_loading.PHASE_COURSE_PATH, "JuniorMiddleSchool"
+        constant.FilePath.PHASE_COURSE_PATH, "JuniorMiddleSchool"
     )
     senior_high_weight = text_loading.get_text_data(
-        text_loading.PHASE_COURSE_PATH, "SeniorHighSchool"
+        constant.FilePath.PHASE_COURSE_PATH, "SeniorHighSchool"
     )
     now_weight_list = (
         primary_weight + junior_middle_weight + senior_high_weight
@@ -79,7 +79,7 @@ def init_class_time_table():
     初始化各班级课程表
     """
     course_session = text_loading.get_game_data(
-        text_loading.COURSE_SESSION_PATH
+        constant.FilePath.COURSE_SESSION_PATH
     )
     class_time_table = {}
     for phase in cache_contorl.course_data["ClassHour"]:
@@ -271,7 +271,9 @@ def course_distribution_b():
                             break
 
 
-course_knowledge_data = text_loading.get_game_data(text_loading.COURSE_PATH)
+course_knowledge_data = text_loading.get_game_data(
+    constant.FilePath.COURSE_PATH
+)
 
 
 def init_phase_course_hour_experience():
@@ -366,10 +368,10 @@ def init_teacher_knowledge(character: Character) -> dict:
         )
 
 
-course_data = text_loading.get_game_data(text_loading.COURSE_PATH)
+course_data = text_loading.get_game_data(constant.FilePath.COURSE_PATH)
 
 
-def init_experience_for_grade(class_grade: str, character):
+def init_experience_for_grade(class_grade: str, character: Character):
     """
     按年级生成角色初始经验数据
     """
@@ -401,3 +403,15 @@ def init_experience_for_grade(class_grade: str, character):
                         character.knowledge[knowledge][
                             skill
                         ] = skill_experience
+
+
+def calculation_character_learning_experience(
+    character_id: int, skill: str, elapsed_time: int
+):
+    """
+    计算角色花费指定时间学习指定技能的结果
+    Keyword arguments:
+    character_id -- 角色id
+    skill -- 技能id
+    elapsed_time -- 经过时间(单位分钟)
+    """

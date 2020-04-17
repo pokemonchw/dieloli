@@ -6,34 +6,8 @@ from Script.Core import (
     text_handle,
     game_config,
     dictionaries,
+    constant,
 )
-
-LOGO_MENU = "logoMenu"
-CURRENCY_MENU = "currencyMenu"
-SEX_MENU = "sexMenu"
-INPUT_NICK_NAME = "inputNickName"
-INPUT_SELF_NEME = "inputSelfName"
-DETAILED_SETTING1 = "detailedSetting1"
-DETAILED_SETTING3 = "detailedSetting3"
-DETAILED_SETTING8 = "detailedSetting8"
-ACKNOWLEDGEMENT_ATTRIBUTE = "acknowledgmentAttribute"
-MAIN_MENU = "mainMenu"
-SYSTEM_MENU = "systemMenu"
-SEE_ATTR_PANEL_HANDLE = "seeAttrPanelHandle"
-CHANGE_SAVE_PAGE = "changeSavePage"
-SEE_ATTR_ON_EVERY_TIME = "seeAttrOnEveryTime"
-SEE_CHARACTER_LIST = "seeCharacterList"
-in_SCENE_LIST1 = "inSceneList1"
-SEE_MAP = "seeMap"
-GAME_HELP = "gameHelp"
-SEE_CHARACTER_WEAR_CHOTHES = "seeCharacterWearClothes"
-CHANGE_SCENE_CHARACTER_LIST = "changeSceneCharacterList"
-SEE_CHARACYTER_CLOTHES = "seeCharacterClothes"
-ASK_SEE_CLOTHING_INFO_PANEL = "askSeeClothingInfoPanel"
-SEE_CLOTHING_INFO_ASK_PANEL = "seeClothingInfoAskPanel"
-SEE_KNOWLEDGE_ASK_PANEL = "seeKnowledgeAskPanel"
-ENTER_CHARACTER_NATURE = "enterCharacterNature"
-INSTRUCT_HEAD_PANEL = "instructHeadPanel"
 
 
 def option_int(
@@ -68,7 +42,7 @@ def option_int(
     """
     if cmd_list_data is None:
         cmd_list_data = text_loading.get_text_data(
-            text_loading.CMD_PATH, cmd_list
+            constant.FilePath.CMD_PATH, cmd_list
         ).copy()
     input_i = []
     text_width = game_config.text_width
@@ -192,7 +166,7 @@ def option_str(
     """
     if cmd_list_data is None:
         cmd_list_data = text_loading.get_text_data(
-            text_loading.CMD_PATH, cmd_list
+            constant.FilePath.CMD_PATH, cmd_list
         ).copy()
     input_s = []
     text_width = game_config.text_width

@@ -19,6 +19,7 @@ def get_in_scene_func():
     cache_contorl.now_map = map_handle.get_map_for_path(scene_path)
     scene_data = cache_contorl.scene_data[scene_path_str].copy()
     scene_character_list = scene_data["SceneCharacterData"]
+    print(cache_contorl.character_data["character"][0].dormitory is scene_path)
     if 0 not in scene_character_list:
         character_id_list = [0]
         scene_character_list = scene_character_list + character_id_list

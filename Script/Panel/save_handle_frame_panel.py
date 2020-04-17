@@ -6,6 +6,7 @@ from Script.Core import (
     era_print,
     text_handle,
     save_handle,
+    constant,
 )
 from Script.Design import cmd_button_queue, game_time
 
@@ -15,7 +16,7 @@ def load_save_info_head_panel():
     载入存档信息头面板
     """
     save_frame_title = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "71"
+        constant.FilePath.STAGE_WORD_PATH, "71"
     )
     era_print.little_title_print(save_frame_title)
 
@@ -25,7 +26,7 @@ def establish_save_info_head_panel():
     存储存档信息头面板
     """
     save_frame_title = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "70"
+        constant.FilePath.STAGE_WORD_PATH, "70"
     )
     era_print.little_title_print(save_frame_title)
 
@@ -44,11 +45,11 @@ def see_save_list_panel(
     input_s = []
     id_text_list = []
     id_info_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "72"
+        constant.FilePath.STAGE_WORD_PATH, "72"
     )
     text_width = int(game_config.text_width)
     save_none_text = text_loading.get_text_data(
-        text_loading.MESSAGE_PATH, "20"
+        constant.FilePath.MESSAGE_PATH, "20"
     )
     if save_panel_page == int(game_config.save_page) + 1:
         start_save_id = int(page_save_value) * (save_panel_page - 1)
@@ -102,7 +103,7 @@ def see_save_list_panel(
         era_print.line_feed_print()
     if auto_save:
         auto_info_text = text_loading.get_text_data(
-            text_loading.STAGE_WORD_PATH, "73"
+            constant.FilePath.STAGE_WORD_PATH, "73"
         )
         i = page_save_value
         id = cmd_button_queue.id_index(i)
@@ -145,7 +146,7 @@ def ask_for_change_save_page_panel(start_id: str) -> list:
     start_id -- 面板命令的起始id
     """
     cmd_list = text_loading.get_text_data(
-        text_loading.CMD_PATH, "changeSavePage"
+        constant.FilePath.CMD_PATH, "changeSavePage"
     )
     save_panel_page = str(cache_contorl.panel_state["SeeSaveListPanel"])
     max_save_panel_page = str(cache_contorl.max_save_page)
@@ -169,9 +170,11 @@ def ask_for_overlay_save_panel() -> list:
     """
     era_print.line_feed_print()
     cmd_list = text_loading.get_text_data(
-        text_loading.CMD_PATH, "overlay_save"
+        constant.FilePath.CMD_PATH, "overlay_save"
     )
-    message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "21")
+    message_text = text_loading.get_text_data(
+        constant.FilePath.MESSAGE_PATH, "21"
+    )
     era_print.restart_line_print()
     era_print.normal_print(message_text)
     era_print.line_feed_print()
@@ -187,9 +190,11 @@ def confirmation_overlay_save_panel() -> list:
     """
     era_print.line_feed_print()
     cmd_list = text_loading.get_text_data(
-        text_loading.CMD_PATH, "confirmation_overlay_save"
+        constant.FilePath.CMD_PATH, "confirmation_overlay_save"
     )
-    message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "22")
+    message_text = text_loading.get_text_data(
+        constant.FilePath.MESSAGE_PATH, "22"
+    )
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
     yrn = cmd_button_queue.option_int(
@@ -203,8 +208,12 @@ def ask_load_save_panel() -> list:
     询问读取存档面板
     """
     era_print.line_feed_print()
-    cmd_list = text_loading.get_text_data(text_loading.CMD_PATH, "loadSaveAsk")
-    message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "23")
+    cmd_list = text_loading.get_text_data(
+        constant.FilePath.CMD_PATH, "loadSaveAsk"
+    )
+    message_text = text_loading.get_text_data(
+        constant.FilePath.MESSAGE_PATH, "23"
+    )
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
     yrn = cmd_button_queue.option_int(
@@ -219,9 +228,11 @@ def confirmation_load_save_panel() -> list:
     """
     era_print.line_feed_print()
     cmd_list = text_loading.get_text_data(
-        text_loading.CMD_PATH, "confirmationLoadSave"
+        constant.FilePath.CMD_PATH, "confirmationLoadSave"
     )
-    message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "24")
+    message_text = text_loading.get_text_data(
+        constant.FilePath.MESSAGE_PATH, "24"
+    )
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
     yrn = cmd_button_queue.option_int(
@@ -236,9 +247,11 @@ def confirmation_remove_save_panel() -> list:
     """
     era_print.line_feed_print()
     cmd_list = text_loading.get_text_data(
-        text_loading.CMD_PATH, "confirmationRemoveSave"
+        constant.FilePath.CMD_PATH, "confirmationRemoveSave"
     )
-    message_text = text_loading.get_text_data(text_loading.MESSAGE_PATH, "25")
+    message_text = text_loading.get_text_data(
+        constant.FilePath.MESSAGE_PATH, "25"
+    )
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
     yrn = cmd_button_queue.option_int(

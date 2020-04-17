@@ -1,4 +1,4 @@
-from Script.Core import cache_contorl, text_loading, era_print
+from Script.Core import cache_contorl, text_loading, era_print, constant
 from Script.Design import cmd_button_queue
 
 
@@ -9,10 +9,10 @@ def see_instruct_head_panel() -> list:
     list -- 绘制的按钮列表
     """
     era_print.little_title_print(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "146")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "146")
     )
     instruct_data = text_loading.get_text_data(
-        text_loading.CMD_PATH, cmd_button_queue.INSTRUCT_HEAD_PANEL
+        constant.FilePath.CMD_PATH, constant.CmdMenu.INSTRUCT_HEAD_PANEL
     )
     if cache_contorl.instruct_filter == {}:
         cache_contorl.instruct_filter = {
@@ -30,7 +30,7 @@ def see_instruct_head_panel() -> list:
         if cache_contorl.instruct_filter[instruct] == 0
     }
     era_print.normal_print(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "147")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "147")
     )
     return cmd_button_queue.option_str(
         None,

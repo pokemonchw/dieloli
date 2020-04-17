@@ -4,6 +4,7 @@ from Script.Core import (
     py_cmd,
     era_print,
     game_config,
+    constant,
 )
 from Script.Design import attr_text, cmd_button_queue
 
@@ -20,7 +21,7 @@ def see_character_item_panel(character_id: int) -> list:
     era_print.restart_line_print(".")
     if character_id != 0:
         era_print.line_feed_print(
-            text_loading.get_text_data(text_loading.MESSAGE_PATH, "37")
+            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "37")
         )
         return []
     character_item_data = cache_contorl.character_data["character"][
@@ -28,7 +29,7 @@ def see_character_item_panel(character_id: int) -> list:
     ].item
     if len(character_item_data) == 0:
         era_print.line_feed_print(
-            text_loading.get_text_data(text_loading.MESSAGE_PATH, "36")
+            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "36")
         )
         return []
     now_page_id = int(cache_contorl.panel_state["SeeCharacterItemListPanel"])
@@ -45,7 +46,9 @@ def see_character_item_panel(character_id: int) -> list:
         item_text = (
             item_data["ItemName"]
             + " "
-            + text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "136")
+            + text_loading.get_text_data(
+                constant.FilePath.STAGE_WORD_PATH, "136"
+            )
             + str(item_data["ItemNum"])
         )
         if character_id == "0":
@@ -67,7 +70,9 @@ def see_character_item_info_panel(character_id: str, item_id: str):
     character_id -- 角色Id
     item_id -- 道具Id
     """
-    title_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "38")
+    title_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "38"
+    )
     era_print.little_title_print(title_text)
     era_print.normal_print(
         attr_text.get_see_attr_panel_head_character_info(character_id)
@@ -77,10 +82,10 @@ def see_character_item_info_panel(character_id: str, item_id: str):
         item_id
     ]
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, 128)
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, 128)
         + item_data["ItemName"]
     )
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "131")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "131")
         + item_data["ItemInfo"]
     )

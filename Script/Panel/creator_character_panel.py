@@ -5,6 +5,7 @@ from Script.Core import (
     py_cmd,
     game_init,
     text_handle,
+    constant,
 )
 from Script.Design import cmd_button_queue
 
@@ -14,9 +15,9 @@ def input_name_panel() -> str:
     请求玩家输入姓名面板
     """
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "4")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "4")
     )
-    yrn = cmd_button_queue.option_int(cmd_button_queue.CURRENCY_MENU)
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.CURRENCY_MENU)
     return yrn
 
 
@@ -25,7 +26,7 @@ def start_input_name_panel():
     玩家姓名输入处理面板
     """
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "3")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "3")
     )
     while 1:
         character_name = game_init.askfor_str()
@@ -33,7 +34,7 @@ def start_input_name_panel():
         if text_handle.get_text_index(character_name) > 10:
             era_print.line_feed_print(
                 text_loading.get_text_data(
-                    text_loading.ERROR_PATH, "inputNameTooLongError"
+                    constant.FilePath.ERROR_PATH, "inputNameTooLongError"
                 )
             )
         else:
@@ -46,9 +47,9 @@ def input_nick_name_panel() -> str:
     请求玩家输入昵称面板
     """
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "6")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "6")
     )
-    yrn = cmd_button_queue.option_int(cmd_button_queue.INPUT_NICK_NAME)
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.INPUT_NICK_NAME)
     return yrn
 
 
@@ -57,7 +58,7 @@ def start_input_nick_name_panel():
     玩家昵称输入处理面板
     """
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "5")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "5")
     )
     while 1:
         character_nick_name = game_init.askfor_str()
@@ -65,7 +66,7 @@ def start_input_nick_name_panel():
         if text_handle.get_text_index(character_nick_name) > 10:
             era_print.line_feed_print(
                 text_loading.get_text_data(
-                    text_loading.ERROR_PATH, "inputNickNameTooLongError"
+                    constant.FilePath.ERROR_PATH, "inputNickNameTooLongError"
                 )
             )
         else:
@@ -81,9 +82,9 @@ def input_self_name_panel() -> str:
     """
     py_cmd.clr_cmd()
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "14")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "14")
     )
-    yrn = cmd_button_queue.option_int(cmd_button_queue.INPUT_SELF_NEME)
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.INPUT_SELF_NEME)
     return yrn
 
 
@@ -93,7 +94,7 @@ def start_input_self_name():
     """
     era_print.line_feed_print()
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "15")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "15")
     )
     while 1:
         character_self_name = game_init.askfor_str()
@@ -101,7 +102,7 @@ def start_input_self_name():
         if text_handle.get_text_index(character_self_name) > 10:
             era_print.line_feed_print(
                 text_loading.get_text_data(
-                    text_loading.ERROR_PATH, "inputSelfNameTooLongError"
+                    constant.FilePath.ERROR_PATH, "inputSelfNameTooLongError"
                 )
             )
         else:
@@ -118,9 +119,9 @@ def input_sex_panel() -> str:
     character_id = cache_contorl.character_data["character_id"]
     sex_id = cache_contorl.character_data["character"][character_id].sex
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "8")[sex_id]
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "8")[sex_id]
     )
-    yrn = cmd_button_queue.option_int(cmd_button_queue.CURRENCY_MENU)
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.CURRENCY_MENU)
     return yrn
 
 
@@ -129,9 +130,9 @@ def input_sex_choice_panel() -> str:
     玩家性别选择面板
     """
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "7")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "7")
     )
-    yrn = cmd_button_queue.option_int(cmd_button_queue.SEX_MENU)
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.SEX_MENU)
     return yrn
 
 
@@ -141,9 +142,9 @@ def attribute_generation_branch_panel() -> str:
     """
     py_cmd.clr_cmd()
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "9")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "9")
     )
-    yrn = cmd_button_queue.option_int(cmd_button_queue.CURRENCY_MENU)
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.CURRENCY_MENU)
     return yrn
 
 
@@ -152,9 +153,9 @@ def detailed_setting_1_panel() -> str:
     询问玩家年龄模板面板
     """
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "10")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "10")
     )
-    yrn = cmd_button_queue.option_int(cmd_button_queue.DETAILED_SETTING1)
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.DETAILED_SETTING1)
     return yrn
 
 
@@ -163,9 +164,9 @@ def detailed_setting_3_panel() -> str:
     询问玩家性经验程度面板
     """
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "12")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "12")
     )
-    yrn = cmd_button_queue.option_int(cmd_button_queue.DETAILED_SETTING3)
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.DETAILED_SETTING3)
     return yrn
 
 
@@ -174,9 +175,9 @@ def detailed_setting_8_panel() -> str:
     询问玩家肥胖程度面板
     """
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "29")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "29")
     )
-    yrn = cmd_button_queue.option_int(cmd_button_queue.DETAILED_SETTING8)
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.DETAILED_SETTING8)
     return yrn
 
 
@@ -185,7 +186,7 @@ def enter_character_nature_head():
     用于确认角色性格的头部面板
     """
     era_print.line_feed_print(
-        text_loading.get_text_data(text_loading.MESSAGE_PATH, "39")
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "39")
     )
 
 
@@ -197,5 +198,5 @@ def enter_character_nature_end() -> list:
     """
     era_print.line_feed_print()
     return cmd_button_queue.option_int(
-        cmd_button_queue.ENTER_CHARACTER_NATURE, 1, "left", True, False
+        constant.CmdMenu.ENTER_CHARACTER_NATURE, 1, "left", True, False
     )

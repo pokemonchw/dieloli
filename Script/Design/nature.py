@@ -1,12 +1,12 @@
 import random
-from Script.Core import text_loading
+from Script.Core import text_loading, constant
 
 
 def get_random_nature():
     """
     初始化角色性格
     """
-    nature_list = text_loading.get_game_data(text_loading.NATURE_PATH)
+    nature_list = text_loading.get_game_data(constant.FilePath.NATURE_PATH)
     nature_data = {
         b_dimension: random.uniform(0, 100)
         for a_dimension in nature_list

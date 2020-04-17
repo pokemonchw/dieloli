@@ -5,6 +5,7 @@ from Script.Core import (
     game_init,
     text_loading,
     game_config,
+    constant,
 )
 from Script.Design import (
     panel_state_handle,
@@ -78,7 +79,7 @@ def see_attr_on_every_time_func():
         yrn = game_init.askfor_all(input_s)
         py_cmd.clr_cmd()
         show_attr_handle_data = text_loading.get_text_data(
-            text_loading.CMD_PATH, "seeAttrPanelHandle"
+            constant.FilePath.CMD_PATH, "seeAttrPanelHandle"
         )
         character_max = character_id_list[len(character_id_list) - 1]
         if yrn in show_attr_handle_data:

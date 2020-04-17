@@ -1,4 +1,4 @@
-from Script.Core import cache_contorl, text_loading, era_print
+from Script.Core import cache_contorl, text_loading, era_print, constant
 from Script.Design import attr_text
 
 
@@ -9,7 +9,7 @@ def see_character_knowledge_panel(character_id: str):
     character_id -- 角色Id
     """
     knowledge_text_data = text_loading.get_game_data(
-        text_loading.KNOWLEDGE_PATH
+        constant.FilePath.KNOWLEDGE_PATH
     )
     character_knowledge = cache_contorl.character_data["character"][
         character_id

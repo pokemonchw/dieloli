@@ -1,11 +1,12 @@
-from Script.Core import cache_contorl
+from Script.Core import cache_contorl, constant
 from Script.Design import game_time
 from Script.Behavior import default
+from Script.Behavior.Action import default_action
 
 
-# 职业行为总控制
 def behavior_init(character_id: int):
     """
+    职业行为总控制
     Keyword arguments:
     character_id -- 角色id
     """
@@ -18,15 +19,17 @@ def behavior_init(character_id: int):
         default.behavior_list[character_state](character_id)
 
 
-# 休闲状态行为
 def arder_behavior(character_id: int):
     """
+    休闲状态行为
     Keyword arguments:
     character_id -- 角色id
     """
-    now_week_day = game_time.get_week_date()
-    if now_week_day in range(1, 5):
-        now_time_slice = game_time.get_now_time_slice()
+    character_data = cache_contorl.character_data["character"][character_id]
+    now_time_slice = game_time.get_now_time_slice(character_id)
+    if now_time_slice["InCourse"]:
+        if character_data.position != character_data.classroom:
+            pass
 
 
-behavior_list = {"arder": arder_behavior}
+behavior_list = {constant.CharacterStatus.STATUS_ARDER: arder_behavior}
