@@ -1,6 +1,6 @@
 import random
 import uuid
-from Script.Core import cache_contorl, text_loading, value_handle
+from Script.Core import cache_contorl, text_loading, value_handle, constant
 from Script.Design import attr_calculation, clothing, nature
 
 
@@ -24,7 +24,7 @@ class Character:
         self.learning_ability = (1,)
         self.sex_experience = {}
         self.sex_grade = {}
-        self.state = "arder"
+        self.state = 0
         self.engraving = {}
         self.clothing = {
             "Coat": {},
@@ -41,7 +41,12 @@ class Character:
         self.height = {}
         self.weight = {}
         self.measurements = {}
-        self.behavior = {}
+        self.behavior = {
+            "StartTime": {},
+            "Duration": 0,
+            "BehaviorId": 0,
+            "MoveTarget": [],
+        }
         self.gold = 0
         self.position = ["0"]
         self.classroom = []
@@ -111,13 +116,13 @@ class Character:
         self.mana_point = self.mana_point_max
         self.nature = nature.get_random_nature()
         self.status = text_loading.get_game_data(
-            text_loading.CHARACTER_STATE_PATH
+            constant.FilePath.CHARACTER_STATE_PATH
         )
         self.wear_item = {
             "Wear": {
                 key: {}
                 for key in text_loading.get_game_data(
-                    text_loading.WEAR_ITEM_PATH
+                    constant.FilePath.WEAR_ITEM_PATH
                 )["Wear"]
             },
             "Item": {},
@@ -132,7 +137,7 @@ class Character:
         self.social_contact = {
             social: {}
             for social in text_loading.get_text_data(
-                text_loading.STAGE_WORD_PATH, "144"
+                constant.FilePath.STAGE_WORD_PATH, "144"
             )
         }
         self.init_class()

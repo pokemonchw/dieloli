@@ -7,6 +7,7 @@ from Script.Core import (
     text_handle,
     game_config,
     io_init,
+    constant,
 )
 
 
@@ -249,7 +250,7 @@ def askfor_all(list, print_order=False):
             io_init.era_print(order + "\n")
             io_init.era_print(
                 text_loading.get_text_data(
-                    text_loading.ERROR_PATH, "no_input_list_error"
+                    constant.FilePath.ERROR_PATH, "noInputListError"
                 )
                 + "\n"
             )
@@ -275,7 +276,7 @@ def askfor_int(list, print_order=False):
             io_init.era_print(order + "\n")
             io_init.era_print(
                 text_loading.get_text_data(
-                    text_loading.ERROR_PATH, "no_input_list_error"
+                    constant.FilePath.ERROR_PATH, "noInputListError"
                 )
                 + "\n"
             )

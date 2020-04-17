@@ -4,6 +4,7 @@ from Script.Core import (
     text_loading,
     text_handle,
     game_config,
+    constant,
     py_cmd,
 )
 from Script.Design import cmd_button_queue
@@ -16,7 +17,7 @@ def load_game_panel():
     era_print.next_screen_print()
     era_print.next_screen_print()
     era_print.one_by_one_print(
-        1 / 3, text_loading.get_text_data(text_loading.MESSAGE_PATH, "1")
+        1 / 3, text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "1")
     )
     era_print.line_feed_print()
 
@@ -37,12 +38,12 @@ def game_main_panel() -> int:
     era_print.line_feed_print()
     era_print.restart_line_print()
     era_print.lines_center_print(
-        1 / 3, text_loading.get_text_data(text_loading.MESSAGE_PATH, "2")
+        1 / 3, text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "2")
     )
     time.sleep(1)
     era_print.line_feed_print()
     era_print.restart_line_print()
     time.sleep(1)
     py_cmd.focus_cmd()
-    menu_int = cmd_button_queue.option_int(cmd_button_queue.LOGO_MENU)
+    menu_int = cmd_button_queue.option_int(constant.CmdMenu.LOGO_MENU)
     return menu_int

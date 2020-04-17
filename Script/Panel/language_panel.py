@@ -1,4 +1,4 @@
-from Script.Core import cache_contorl, text_loading, era_print
+from Script.Core import cache_contorl, text_loading, era_print, constant
 from Script.Design import attr_text
 
 
@@ -9,7 +9,7 @@ def see_character_language_panel(character_id: str):
     character_id -- 角色Id
     """
     language_text_data = text_loading.get_game_data(
-        text_loading.LANGUAGE_SKILLS_PATH
+        constant.FilePath.LANGUAGE_SKILLS_PATH
     )
     character_language = cache_contorl.character_data["character"][
         character_id

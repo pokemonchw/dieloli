@@ -5,6 +5,7 @@ from Script.Core import (
     game_config,
     py_cmd,
     text_handle,
+    constant,
 )
 from Script.Design import cmd_button_queue, attr_text
 
@@ -15,7 +16,9 @@ def see_character_list_panel(max_page: int) -> list:
     Keyword arguments:
     max_page -- 最大角色列表页数
     """
-    title_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "74")
+    title_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "74"
+    )
     era_print.little_title_print(title_text)
     input_s = []
     page_id = int(cache_contorl.panel_state["SeeCharacterListPanel"])
@@ -56,7 +59,7 @@ def ask_for_see_character_list_panel(start_id: str) -> list:
     start_id -- 面板命令起始id
     """
     yrn = cmd_button_queue.option_int(
-        cmd_button_queue.SEE_CHARACTER_LIST,
+        constant.CmdMenu.SEE_CHARACTER_LIST,
         3,
         "left",
         askfor=False,

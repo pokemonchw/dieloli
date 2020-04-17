@@ -27,6 +27,7 @@ from Script.Core import (
     setting_frame,
     about_frame,
     text_handle,
+    constant,
 )
 
 
@@ -73,7 +74,7 @@ s_vertical.grid(column=1, row=0, sticky=(N, E, S), rowspan=2)
 
 # 输入框背景容器
 order_font_data = text_loading.get_text_data(
-    text_loading.FONT_CONFIG_PATH, "order"
+    constant.FilePath.FONT_CONFIG_PATH, "order"
 )
 input_background_box = Text(
     main_frame,
@@ -127,13 +128,13 @@ menu_other = Menu(menu_bar)
 menu_bar.add_cascade(
     menu=menu_file,
     label=text_loading.get_text_data(
-        text_loading.MENU_PATH, text_loading.MENU_FILE
+        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_FILE
     ),
 )
 menu_bar.add_cascade(
     menu=menu_other,
     label=text_loading.get_text_data(
-        text_loading.MENU_PATH, text_loading.MENU_OTHER
+        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_OTHER
     ),
 )
 
@@ -170,26 +171,26 @@ def about(*args):
 
 menu_file.add_command(
     label=text_loading.get_text_data(
-        text_loading.MENU_PATH, text_loading.MENU_RESTART
+        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_RESTART
     ),
     command=reset,
 )
 menu_file.add_command(
     label=text_loading.get_text_data(
-        text_loading.MENU_PATH, text_loading.MENU_QUIT
+        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_QUIT
     ),
     command=quit,
 )
 
 menu_other.add_command(
     label=text_loading.get_text_data(
-        text_loading.MENU_PATH, text_loading.MENU_SETTING
+        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_SETTING
     ),
     command=setting,
 )
 menu_other.add_command(
     label=text_loading.get_text_data(
-        text_loading.MENU_PATH, text_loading.MENU_ABBOUT
+        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_ABBOUT
     ),
     command=about,
 )

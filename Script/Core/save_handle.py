@@ -48,7 +48,6 @@ def establish_save(save_id: str):
     npc_tem_data = cache_contorl.npc_tem_data
     random_npc_list = cache_contorl.random_npc_list
     game_verson = game_config.verson
-    occupation_character_data = cache_contorl.occupation_character_data
     total_bodyfat_by_age = cache_contorl.total_bodyfat_by_age
     average_bodyfat_by_age = cache_contorl.average_bodyfat_by_age
     total_number_of_people_of_all_ages = (
@@ -69,12 +68,11 @@ def establish_save(save_id: str):
         "4": map_data,
         "5": npc_tem_data,
         "6": random_npc_list,
-        "7": occupation_character_data,
-        "8": total_bodyfat_by_age,
-        "9": average_bodyfat_by_age,
-        "10": total_number_of_people_of_all_ages,
-        "11": total_height_by_age,
-        "12": average_height_by_age,
+        "7": total_bodyfat_by_age,
+        "8": average_bodyfat_by_age,
+        "9": total_number_of_people_of_all_ages,
+        "10": total_height_by_age,
+        "11": average_height_by_age,
     }
     for data_id in data:
         write_save_data(save_id, data_id, data[data_id])
@@ -116,7 +114,7 @@ def load_save(save_id: str) -> dict:
     """
     save_path = get_save_dir_path(save_id)
     data = {}
-    file_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    file_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
     for file_name in file_list:
         file_path = os.path.join(save_path, file_name)
         with open(file_path, "rb") as f:
@@ -138,12 +136,11 @@ def input_load_save(save_id: str):
     cache_contorl.map_data = save_data["4"]
     cache_contorl.npc_tem_data = save_data["5"]
     cache_contorl.random_npc_list = save_data["6"]
-    cache_contorl.occupation_character_data = save_data["7"]
-    cache_contorl.total_bodyfat_by_age = save_data["8"]
-    cache_contorl.average_bodyfat_by_age = save_data["9"]
-    cache_contorl.total_number_of_people_of_all_ages = save_data["10"]
-    cache_contorl.total_height_by_age = save_data["11"]
-    cache_contorl.average_height_by_age = save_data["12"]
+    cache_contorl.total_bodyfat_by_age = save_data["7"]
+    cache_contorl.average_bodyfat_by_age = save_data["8"]
+    cache_contorl.total_number_of_people_of_all_ages = save_data["9"]
+    cache_contorl.total_height_by_age = save_data["10"]
+    cache_contorl.average_height_by_age = save_data["11"]
     character_handle.init_character_position()
 
 

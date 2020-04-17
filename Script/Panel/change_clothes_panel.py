@@ -5,6 +5,7 @@ from Script.Core import (
     py_cmd,
     text_handle,
     game_config,
+    constant,
 )
 from Script.Design import attr_text, cmd_button_queue, clothing
 
@@ -15,7 +16,9 @@ def see_character_wear_clothes_info(character_id: str):
     Keyword arguments:
     character_id -- 角色id
     """
-    scene_info = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "79")
+    scene_info = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "79"
+    )
     era_print.little_title_print(scene_info)
     character_info = attr_text.get_character_abbreviations_info(character_id)
     era_print.normal_print(character_info)
@@ -72,7 +75,7 @@ def see_character_wear_clothes(character_id: str, change_button: bool):
                 clothing.clothing_type_text_list[clothing_text]
                 + ":"
                 + text_loading.get_text_data(
-                    text_loading.STAGE_WORD_PATH, "117"
+                    constant.FilePath.STAGE_WORD_PATH, "117"
                 )
             )
         else:
@@ -110,7 +113,7 @@ def see_character_wear_clothes_cmd(start_id: int) -> str:
     """
     era_print.list_print()()
     yrn = cmd_button_queue.optionint(
-        cmd_button_queue.SEE_CHARACYTER_CLOTHES,
+        constant.CmdMenu.SEE_CHARACYTER_CLOTHES,
         id_size="center",
         askfor=False,
         start_id=start_id,
@@ -140,7 +143,7 @@ def see_character_clothes_panel(
     now_page_end_id = now_page_start_id + now_page_max
     if character_clothing_data == {}:
         era_print.normal_print(
-            text_loading.get_text_data(text_loading.MESSAGE_PATH, "34")
+            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "34")
         )
         era_print.line_feed_print()
         return []
@@ -197,7 +200,7 @@ def see_character_clothes_panel(
                 draw_text += " " + tag_text
         if i == pass_id:
             draw_text += " " + text_loading.get_text_data(
-                text_loading.STAGE_WORD_PATH, "125"
+                constant.FilePath.STAGE_WORD_PATH, "125"
             )
         id_info = cmd_button_queue.id_index(i)
         cmd_text = id_info + draw_text
@@ -219,7 +222,7 @@ def see_character_clothes_info(character_id: str):
     character_id -- 角色id
     """
     scene_info = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "101"
+        constant.FilePath.STAGE_WORD_PATH, "101"
     )
     era_print.little_title_print(scene_info)
     character_info = attr_text.get_character_abbreviations_info(character_id)
@@ -236,7 +239,7 @@ def see_character_clothes_cmd(start_id: int, now_clothing_type: str) -> str:
     era_print.line_feed_print()
     clothing_type_list = list(clothing.clothing_type_text_list.keys())
     cmd_list = text_loading.get_text_data(
-        text_loading.CMD_PATH, cmd_button_queue.SEE_CHARACYTER_CLOTHES
+        constant.FilePath.CMD_PATH, cmd_button_queue.SEE_CHARACYTER_CLOTHES
     )
     now_clothing_type_index = clothing_type_list.index(now_clothing_type)
     up_type_id = now_clothing_type_index - 1
@@ -271,7 +274,8 @@ def ask_see_clothing_info_panel(wear_clothing_judge: bool) -> str:
     """
     era_print.line_feed_print()
     cmd_data = text_loading.get_text_data(
-        text_loading.CMD_PATH, cmd_button_queue.ASK_SEE_CLOTHING_INFO_PANEL
+        constant.FilePath.CMD_PATH,
+        constant.CmdMenu.ASK_SEE_CLOTHING_INFO_PANEL,
     ).copy()
     if wear_clothing_judge:
         del cmd_data["0"]
@@ -295,7 +299,7 @@ def see_clothing_info_panel(
     clothing_id -- 服装id
     """
     era_print.little_title_print(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "126")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "126")
     )
     clothing_data = cache_contorl.character_data["character"][
         character_id
@@ -304,25 +308,25 @@ def see_clothing_info_panel(
     clothing_name = clothing_data["Name"]
     if wear_clothing_judge:
         clothing_name += " " + text_loading.get_text_data(
-            text_loading.STAGE_WORD_PATH, "125"
+            constant.FilePath.STAGE_WORD_PATH, "125"
         )
     info_list.append(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "128")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "128")
         + clothing_name
     )
     clothing_type_text = clothing.clothing_type_text_list[clothing_type]
     info_list.append(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "129")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "129")
         + clothing_type_text
     )
     evaluation_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "131")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "131")
         + clothing_data["Evaluation"]
     )
     info_list.append(evaluation_text)
     era_print.list_print(info_list, 3, "center")
     era_print.son_title_print(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "130")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "130")
     )
     tag_text_list = []
     for tag in clothing.clothing_tag_text_list:
@@ -331,7 +335,7 @@ def see_clothing_info_panel(
         tag_text_list.append(tag_text)
     era_print.list_print(tag_text_list, 4, "center")
     era_print.son_title_print(
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "127")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "127")
     )
     era_print.normal_print(clothing_data["Describe"])
 
@@ -344,7 +348,8 @@ def see_clothing_info_ask_panel(wear_clothing_judge: bool) -> str:
     """
     era_print.line_feed_print()
     cmd_data = text_loading.get_text_data(
-        text_loading.CMD_PATH, cmd_button_queue.SEE_CLOTHING_INFO_ASK_PANEL
+        constant.FilePath.CMD_PATH,
+        constant.CmdMenu.SEE_CLOTHING_INFO_ASK_PANEL,
     ).copy()
     if wear_clothing_judge:
         del cmd_data["1"]

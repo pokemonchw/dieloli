@@ -1,5 +1,5 @@
 from wcwidth import wcswidth
-from Script.Core import game_config, text_loading, rich_text
+from Script.Core import game_config, text_loading, rich_text, constant
 
 
 def align(
@@ -53,7 +53,7 @@ def get_text_index(text: str) -> int:
     text_index = 0
     style_width = 0
     bar_list = list(
-        text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys()
+        text_loading.get_game_data(constant.FilePath.BAR_CONFIG_PATH).keys()
     )
     style_name_list = game_config.get_font_data_list() + bar_list
     for i in range(0, len(style_name_list)):
@@ -69,7 +69,7 @@ def get_text_index(text: str) -> int:
     for i in range(len(text)):
         if text_style_list[i] in bar_list:
             text_width = text_loading.get_text_data(
-                text_loading.BAR_CONFIG_PATH, text_style_list[i]
+                constant.FilePath.BAR_CONFIG_PATH, text_style_list[i]
             )["width"]
             text_index = text_index + int(text_width)
         else:

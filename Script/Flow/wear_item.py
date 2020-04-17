@@ -4,6 +4,7 @@ from Script.Core import (
     flow_handle,
     py_cmd,
     text_loading,
+    constant,
 )
 from Script.Panel import wear_item_panel
 
@@ -42,7 +43,7 @@ def wear_character_item():
             break
         else:
             wear_item_info_text_data = text_loading.get_text_data(
-                text_loading.STAGE_WORD_PATH, "49"
+                constant.FilePath.STAGE_WORD_PATH, "49"
             )
             change_wear_item(list(wear_item_info_text_data.keys())[int(yrn)])
 

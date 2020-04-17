@@ -1,4 +1,4 @@
-from Script.Core import game_init, era_print, text_loading
+from Script.Core import game_init, era_print, text_loading, constant
 
 
 def wait_input(int_a: int, int_b: int) -> str:
@@ -17,7 +17,7 @@ def wait_input(int_a: int, int_b: int) -> str:
         era_print.line_feed_print(ans)
         era_print.line_feed_print(
             text_loading.get_text_data(
-                text_loading.ERROR_PATH, "input_null_error"
+                constant.FilePath.ERROR_PATH, "input_null_error"
             )
             + "\n"
         )

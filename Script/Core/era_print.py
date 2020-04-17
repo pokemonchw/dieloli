@@ -8,6 +8,7 @@ from Script.Core import (
     dictionaries,
     rich_text,
     text_loading,
+    constant,
 )
 
 last_char = "\n"
@@ -26,7 +27,9 @@ def normal_print(string: str, style="standard", rich_text_judge=True):
     """
     if rich_text_judge:
         bar_list = list(
-            text_loading.get_game_data(text_loading.BAR_CONFIG_PATH).keys()
+            text_loading.get_game_data(
+                constant.FilePath.BAR_CONFIG_PATH
+            ).keys()
         )
         string = dictionaries.handle_text(string)
         style_list = rich_text.set_rich_text_print(string, style)
@@ -38,7 +41,7 @@ def normal_print(string: str, style="standard", rich_text_judge=True):
         for i in range(0, len(string)):
             if style_list[i] in bar_list:
                 style_data = text_loading.get_text_data(
-                    text_loading.BAR_CONFIG_PATH, style_list[i]
+                    constant.FilePath.BAR_CONFIG_PATH, style_list[i]
                 )
                 true_bar = style_data["truebar"]
                 null_bar = style_data["nullbar"]

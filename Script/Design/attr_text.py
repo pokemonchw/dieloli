@@ -7,6 +7,7 @@ from Script.Core import (
     game_config,
     game_path_config,
     json_handle,
+    constant,
 )
 from Script.Design import (
     proportional_bar,
@@ -37,27 +38,27 @@ def get_sex_experience_text(sex_experience_data: dict, sex_name: str) -> list:
     sex_name -- 性别
     """
     mouth_experience = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "19")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "19")
         + f"{sex_experience_data['mouth_experience']}"
     )
     bosom_experience = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "20")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "20")
         + f"{sex_experience_data['bosom_experience']}"
     )
     vagina_experience = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "21")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "21")
         + f"{sex_experience_data['vagina_experience']}"
     )
     clitoris_experience = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "22")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "22")
         + f"{sex_experience_data['clitoris_experience']}"
     )
     anus_experience = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "23")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "23")
         + f"{sex_experience_data['anus_experience']}"
     )
     penis_experience = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "24")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "24")
         + f"{sex_experience_data['penis_experience']}"
     )
     sex_experience_text = []
@@ -103,22 +104,22 @@ def get_sex_grade_text_list(sex_grade_data: dict, sex_name: str) -> list:
     sex_name -- 性别
     """
     mouth_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "25"
+        constant.FilePath.STAGE_WORD_PATH, "25"
     ) + get_level_text_color(sex_grade_data["mouth_grade"])
     bosom_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "26"
+        constant.FilePath.STAGE_WORD_PATH, "26"
     ) + get_level_text_color(sex_grade_data["bosom_grade"])
     vagina_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "27"
+        constant.FilePath.STAGE_WORD_PATH, "27"
     ) + get_level_text_color(sex_grade_data["vagina_grade"])
     clitoris_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "28"
+        constant.FilePath.STAGE_WORD_PATH, "28"
     ) + get_level_text_color(sex_grade_data["clitoris_grade"])
     anus_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "29"
+        constant.FilePath.STAGE_WORD_PATH, "29"
     ) + get_level_text_color(sex_grade_data["anus_grade"])
     penis_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "30"
+        constant.FilePath.STAGE_WORD_PATH, "30"
     ) + get_level_text_color(sex_grade_data["penis_grade"])
     sex_grade_text_list = []
     sex_list = list(sex_data.keys())
@@ -202,21 +203,22 @@ def get_see_attr_panel_head_character_info(character_id: int) -> str:
     """
     character_data = cache_contorl.character_data["character"][character_id]
     character_id_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "0")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "0")
         + f"{character_id}"
     )
     name = character_data.name
     nick_name = character_data.nick_name
     character_name = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "13") + name
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "13")
+        + name
     )
     character_nick_name = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "12")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "12")
         + nick_name
     )
     sex = character_data.sex
     sex_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "2"
+        constant.FilePath.STAGE_WORD_PATH, "2"
     ) + get_sex_text(sex)
     name_text = (
         character_id_text
@@ -251,21 +253,23 @@ def get_engraving_text(engraving_list: dict) -> list:
     fear_level = str(engraving_list["Fear"])
     resistance_level = str(engraving_list["Resistance"])
     pain_level_fix = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "31"
+        constant.FilePath.STAGE_WORD_PATH, "31"
     )
     happy_level_fix = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "32"
+        constant.FilePath.STAGE_WORD_PATH, "32"
     )
     yield_level_fix = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "33"
+        constant.FilePath.STAGE_WORD_PATH, "33"
     )
     fear_level_fix = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "34"
+        constant.FilePath.STAGE_WORD_PATH, "34"
     )
     resistance_level_fix = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "35"
+        constant.FilePath.STAGE_WORD_PATH, "35"
     )
-    level_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "36")
+    level_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "36"
+    )
     level_list = [
         pain_level,
         happy_level,
@@ -315,35 +319,35 @@ def get_clothing_text(clothing_list: dict) -> list:
     underpants_text = clothing_data["Underpants"][underpants_id]
     leggings_text = clothing_data["Leggings"][leggings_id]
     coat_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "41")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "41")
         + coat_text
     )
     pants_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "42")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "42")
         + pants_text
     )
     shoes_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "43")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "43")
         + shoes_text
     )
     socks_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "44")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "44")
         + socks_text
     )
     underwear_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "45")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "45")
         + underwear_text
     )
     bra_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "46")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "46")
         + bra_text
     )
     underpants_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "47")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "47")
         + underpants_text
     )
     leggings_text = (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "48")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "48")
         + leggings_text
     )
     clothing_text_list = [
@@ -367,8 +371,12 @@ def get_gold_text(character_id: str) -> str:
     """
     gold_data = cache_contorl.character_data["character"][character_id].gold
     gold_data = str(gold_data)
-    money_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "66")
-    gold_text = text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "67")
+    money_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "66"
+    )
+    gold_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "67"
+    )
     gold_text = gold_text + gold_data + money_text
     return gold_text
 
@@ -388,12 +396,12 @@ def get_state_text(character_id: str) -> str:
     Keyword arguments:
     character_id -- 角色Id
     """
-    state = cache_contorl.character_data["character"][character_id].state
+    state = str(cache_contorl.character_data["character"][character_id].state)
     state_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "132"
+        constant.FilePath.STAGE_WORD_PATH, "132"
     )[state]
     return (
-        text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "133")
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "133")
         + state_text
     )
 
@@ -673,11 +681,11 @@ def get_stature_text(character_id: str) -> list:
             if judge_stature_description(
                 stature_judge,
                 text_loading.get_game_data(
-                    text_loading.STATURE_DESCRIPTION_PATH
+                    constant.FilePath.STATURE_DESCRIPTION_PATH
                 )["Priority"][priority][descript]["Condition"],
             ):
                 return text_loading.get_game_data(
-                    text_loading.STATURE_DESCRIPTION_PATH
+                    constant.FilePath.STATURE_DESCRIPTION_PATH
                 )["Priority"][priority][descript]["Description"]
     return ""
 
@@ -714,33 +722,33 @@ def get_character_abbreviations_info(character_id: int) -> str:
     """
     character_data = cache_contorl.character_data["character"][character_id]
     character_id_info = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "0"
+        constant.FilePath.STAGE_WORD_PATH, "0"
     )
     character_id_text = f"{character_id_info}{character_id}"
     character_name = character_data.name
     character_sex = character_data.sex
     character_sex_info = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "2"
+        constant.FilePath.STAGE_WORD_PATH, "2"
     )
     character_sex_text_data = text_loading.get_text_data(
-        text_loading.ROLE_PATH, "Sex"
+        constant.FilePath.ROLE_PATH, "Sex"
     )
     character_sex_text = character_sex_text_data[character_sex]
     character_sex_text = character_sex_info + character_sex_text
     character_age = character_data.age
     character_age_info = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "3"
+        constant.FilePath.STAGE_WORD_PATH, "3"
     )
     character_age_text = character_age_info + str(character_age)
     character_hp_and_mp_text = attr_print.get_hp_and_mp_text(character_id)
     character_intimate = character_data.intimate
     character_intimate_info = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "16"
+        constant.FilePath.STAGE_WORD_PATH, "16"
     )
     character_intimate_text = character_intimate_info + str(character_intimate)
     character_graces = character_data.graces
     character_graces_info = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "17"
+        constant.FilePath.STAGE_WORD_PATH, "17"
     )
     character_graces_text = character_graces_info + str(character_graces)
     abbreviations_info = (
@@ -777,7 +785,7 @@ def get_character_dormitory_path_text(character_id: str) -> str:
         dormitory_path, []
     )
     map_path_text = text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "143"
+        constant.FilePath.STAGE_WORD_PATH, "143"
     )
     map_list.reverse()
     for now_map in map_list:

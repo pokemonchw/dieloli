@@ -5,6 +5,7 @@ from Script.Core import (
     text_loading,
     era_print,
     game_init,
+    constant,
 )
 from Script.Design import attr_calculation, game_time, nature, character
 from Script.Panel import creator_character_panel, see_nature_panel
@@ -116,7 +117,7 @@ def input_sex_choice_func():
     输入5:返回请求输入性别流程
     """
     sex = list(
-        text_loading.get_text_data(text_loading.ROLE_PATH, "Sex").keys()
+        text_loading.get_text_data(constant.FilePath.ROLE_PATH, "Sex").keys()
     )
     sex_max = len(sex)
     flow_return = creator_character_panel.input_sex_choice_panel()
@@ -177,7 +178,7 @@ def detailed_setting_func_3():
     flow_return = creator_character_panel.detailed_setting_3_panel()
     sex_tem_data_list = list(
         text_loading.get_text_data(
-            text_loading.ATTR_TEMPLATE_PATH, "SexExperience"
+            constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperience"
         ).keys()
     )
     sex_tem_data_list.reverse()
@@ -195,7 +196,7 @@ def detailed_setting_func_8():
     """
     flow_return = creator_character_panel.detailed_setting_8_panel()
     weight_tem_data = text_loading.get_text_data(
-        text_loading.ATTR_TEMPLATE_PATH, "WeightTem"
+        constant.FilePath.ATTR_TEMPLATE_PATH, "WeightTem"
     )
     weight_tem_list = list(weight_tem_data.keys())
     weight_tem = weight_tem_list[int(flow_return)]

@@ -1,32 +1,52 @@
 import random
 import math
-from Script.Core import cache_contorl, text_loading, value_handle
+from Script.Core import cache_contorl, text_loading, value_handle, constant
 
 clothing_tag_text_list = {
-    "Sexy": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "118"),
-    "Handsome": text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "119"
+    "Sexy": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "118"
     ),
-    "Elegant": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "120"),
-    "Fresh": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "121"),
-    "Sweet": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "122"),
-    "Warm": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "123"),
+    "Handsome": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "119"
+    ),
+    "Elegant": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "120"
+    ),
+    "Fresh": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "121"
+    ),
+    "Sweet": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "122"
+    ),
+    "Warm": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "123"
+    ),
     "Cleanliness": text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "124"
+        constant.FilePath.STAGE_WORD_PATH, "124"
     ),
 }
 clothing_type_text_list = {
-    "Coat": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "41"),
-    "Underwear": text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "42"
+    "Coat": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "41"
     ),
-    "Pants": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "43"),
-    "Skirt": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "44"),
-    "Shoes": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "45"),
-    "Socks": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "46"),
-    "Bra": text_loading.get_text_data(text_loading.STAGE_WORD_PATH, "47"),
+    "Underwear": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "42"
+    ),
+    "Pants": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "43"
+    ),
+    "Skirt": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "44"
+    ),
+    "Shoes": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "45"
+    ),
+    "Socks": text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "46"
+    ),
+    "Bra": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "47"),
     "Underpants": text_loading.get_text_data(
-        text_loading.STAGE_WORD_PATH, "48"
+        constant.FilePath.STAGE_WORD_PATH, "48"
     ),
 }
 
@@ -39,7 +59,7 @@ def creator_suit(suit_name: str, sex: str) -> dict:
     sex -- 性别模板
     """
     suit_data = text_loading.get_text_data(
-        text_loading.EQUIPMENT_PATH, "Suit"
+        constant.FilePath.EQUIPMENT_PATH, "Suit"
     )[suit_name][sex]
     new_suit_data = {
         clothing: creator_clothing(suit_data[clothing])
@@ -323,11 +343,11 @@ def judge_clothing_collocation(
 
 
 clothing_evaluation_text_list = [
-    text_loading.get_text_data(text_loading.STAGE_WORD_PATH, str(k))
+    text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, str(k))
     for k in range(102, 112)
 ]
 clothing_tagList = [
-    text_loading.get_text_data(text_loading.STAGE_WORD_PATH, str(k))
+    text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, str(k))
     for k in range(112, 117)
 ]
 
