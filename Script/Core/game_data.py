@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os
 import pickle
+import platform
 from dijkstar import Graph, find_path
 from Script.Core.game_path_config import game_path
 from Script.Core import json_handle, cache_contorl, value_handle
@@ -290,6 +291,33 @@ def get_original_clothing(
     return now_clothing_data
 
 
+def init_data_json():
+    """
+    初始化游戏数据文件
+    """
+    data_dir = os.path.join(game_path, "data")
+    data_path = os.path.join(game_path, "data.json")
+    f = open(data_path, "wb")
+    game_data.update(load_dir_now(data_dir))
+    now_data = {
+        "gamedata": game_data,
+        "placedata": cache_contorl.place_data,
+        "staturedata": cache_contorl.stature_descrition_priorition_data,
+        "clothingdata": cache_contorl.clothing_type_data,
+        "scenedata": scene_data,
+        "mapdata": map_data,
+        "boysregiondata": cache_contorl.boys_region_int_list,
+        "girlsregiondata": cache_contorl.girls_region_int_list,
+        "familyregiondata": cache_contorl.family_region_int_list,
+        "boysdata": cache_contorl.boys_region_list,
+        "girlsdata": cache_contorl.girls_region_list,
+        "familydata": cache_contorl.family_region_list,
+        "weardata": cache_contorl.wear_item_type_data,
+        "system": platform.system(),
+    }
+    pickle.dump(now_data, f)
+
+
 def init():
     """
     初始化游戏数据
@@ -298,36 +326,23 @@ def init():
     if os.path.exists(data_path):
         f = open(data_path, "rb")
         data = pickle.load(f)
-        game_data.update(data["gamedata"])
-        cache_contorl.place_data = data["placedata"]
-        cache_contorl.stature_descrition_priorition_data = data["staturedata"]
-        cache_contorl.clothing_type_data = data["clothingdata"]
-        scene_data.update(data["scenedata"])
-        map_data.update(data["mapdata"])
-        cache_contorl.boys_region_int_list = data["boysregiondata"]
-        cache_contorl.girls_region_int_list = data["girlsregiondata"]
-        cache_contorl.family_region_int_list = data["familyregiondata"]
-        cache_contorl.boys_region_list = data["boysdata"]
-        cache_contorl.girls_region_list = data["girlsdata"]
-        cache_contorl.family_region_list = data["familydata"]
-        cache_contorl.wear_item_type_data = data["weardata"]
+        if "system" in data and data["system"] == platform.system():
+            game_data.update(data["gamedata"])
+            cache_contorl.place_data = data["placedata"]
+            cache_contorl.stature_descrition_priorition_data = data[
+                "staturedata"
+            ]
+            cache_contorl.clothing_type_data = data["clothingdata"]
+            scene_data.update(data["scenedata"])
+            map_data.update(data["mapdata"])
+            cache_contorl.boys_region_int_list = data["boysregiondata"]
+            cache_contorl.girls_region_int_list = data["girlsregiondata"]
+            cache_contorl.family_region_int_list = data["familyregiondata"]
+            cache_contorl.boys_region_list = data["boysdata"]
+            cache_contorl.girls_region_list = data["girlsdata"]
+            cache_contorl.family_region_list = data["familydata"]
+            cache_contorl.wear_item_type_data = data["weardata"]
+        else:
+            init_data_json()
     else:
-        data_dir = os.path.join(game_path, "data")
-        f = open(data_path, "wb")
-        game_data.update(load_dir_now(data_dir))
-        now_data = {
-            "gamedata": game_data,
-            "placedata": cache_contorl.place_data,
-            "staturedata": cache_contorl.stature_descrition_priorition_data,
-            "clothingdata": cache_contorl.clothing_type_data,
-            "scenedata": scene_data,
-            "mapdata": map_data,
-            "boysregiondata": cache_contorl.boys_region_int_list,
-            "girlsregiondata": cache_contorl.girls_region_int_list,
-            "familyregiondata": cache_contorl.family_region_int_list,
-            "boysdata": cache_contorl.boys_region_list,
-            "girlsdata": cache_contorl.girls_region_list,
-            "familydata": cache_contorl.family_region_list,
-            "weardata": cache_contorl.wear_item_type_data,
-        }
-        pickle.dump(now_data, f)
+        init_data_json()
