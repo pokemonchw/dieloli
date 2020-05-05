@@ -8,7 +8,7 @@ from Script.Core import game_data
 try:
     options, _ = getopt.getopt(sys.argv[1:], "d:", ["debug="])
     key, value = options[0]
-    if key in ("-d", "--debug") and value[1] == "1":
+    if key in ("-d", "--debug") and value == "1":
         game_data.init(1)
     else:
         game_data.init(0)
