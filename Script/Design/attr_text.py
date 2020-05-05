@@ -147,7 +147,6 @@ def get_sex_grade_text_list(sex_grade_data: dict, sex_name: str) -> list:
     return sex_grade_text_list
 
 
-# 处理等级富文本
 def get_level_text_color(level: str) -> str:
     """
     对等级文本进行富文本处理

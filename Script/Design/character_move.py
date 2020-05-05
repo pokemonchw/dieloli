@@ -2,7 +2,6 @@ from Script.Core import cache_contorl, text_loading, era_print, constant
 from Script.Design import map_handle, game_time, update
 
 
-# 主角移动
 def own_charcter_move(target_scene: list):
     """
     主角寻路至目标场景
