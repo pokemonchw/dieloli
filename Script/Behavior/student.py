@@ -35,4 +35,5 @@ def arder_behavior(character_id: int):
     elif now_time_slice["TimeSlice"] == constant.TimeSlice.TIME_BREAKFAST:
         pass
 
+
 behavior_list = {constant.CharacterStatus.STATUS_ARDER: arder_behavior}
