@@ -292,9 +292,9 @@ def get_original_clothing(
 
 
 def init_data_json():
-    '''
+    """
     初始化游戏数据文件
-    '''
+    """
     data_dir = os.path.join(game_path, "data")
     data_path = os.path.join(game_path, "data.json")
     f = open(data_path, "wb")
@@ -313,7 +313,7 @@ def init_data_json():
         "girlsdata": cache_contorl.girls_region_list,
         "familydata": cache_contorl.family_region_list,
         "weardata": cache_contorl.wear_item_type_data,
-        "system":platform.system()
+        "system": platform.system(),
     }
     pickle.dump(now_data, f)
 
@@ -326,10 +326,12 @@ def init():
     if os.path.exists(data_path):
         f = open(data_path, "rb")
         data = pickle.load(f)
-        if "system" in data and data['system'] == platform.system():
+        if "system" in data and data["system"] == platform.system():
             game_data.update(data["gamedata"])
             cache_contorl.place_data = data["placedata"]
-            cache_contorl.stature_descrition_priorition_data = data["staturedata"]
+            cache_contorl.stature_descrition_priorition_data = data[
+                "staturedata"
+            ]
             cache_contorl.clothing_type_data = data["clothingdata"]
             scene_data.update(data["scenedata"])
             map_data.update(data["mapdata"])
