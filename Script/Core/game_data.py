@@ -318,12 +318,14 @@ def init_data_json():
     pickle.dump(now_data, f)
 
 
-def init():
+def init(debug: bool):
     """
     初始化游戏数据
+    Keyword arguments:
+    debug -- debug模式开关
     """
     data_path = os.path.join(game_path, "data.json")
-    if os.path.exists(data_path):
+    if os.path.exists(data_path) and not debug:
         f = open(data_path, "rb")
         data = pickle.load(f)
         if "system" in data and data["system"] == platform.system():
