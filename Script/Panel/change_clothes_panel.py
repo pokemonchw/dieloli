@@ -111,9 +111,9 @@ def see_character_wear_clothes_cmd(start_id: int) -> str:
     """
     用于控制查看角色已装备服装列表面板的命令菜单
     """
-    era_print.list_print()()
-    yrn = cmd_button_queue.optionint(
-        constant.CmdMenu.SEE_CHARACYTER_CLOTHES,
+    era_print.little_line_print()
+    yrn = cmd_button_queue.option_int(
+        constant.CmdMenu.SEE_CHARACTER_WEAR_CHOTHES,
         id_size="center",
         askfor=False,
         start_id=start_id,
@@ -239,7 +239,7 @@ def see_character_clothes_cmd(start_id: int, now_clothing_type: str) -> str:
     era_print.line_feed_print()
     clothing_type_list = list(clothing.clothing_type_text_list.keys())
     cmd_list = text_loading.get_text_data(
-        constant.FilePath.CMD_PATH, cmd_button_queue.SEE_CHARACYTER_CLOTHES
+        constant.FilePath.CMD_PATH, constant.CmdMenu.SEE_CHARACYTER_CLOTHES
     )
     now_clothing_type_index = clothing_type_list.index(now_clothing_type)
     up_type_id = now_clothing_type_index - 1

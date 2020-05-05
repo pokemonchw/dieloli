@@ -218,16 +218,23 @@ def count_day_for_time_tuple(
     return (start_day - end_day).days
 
 
-def judge_date_big_or_small(time_a: dict, time_b: dict) -> bool:
+def judge_date_big_or_small(time_a: dict, time_b: dict) -> int:
     """
     比较当前时间是否大于或等于旧时间
     Keyword arguments:
     time_a -- 当前时间
     time_b -- 旧时间
+    Return arguments:
+    0 -- 小于
+    1 -- 大于
+    2 -- 等于
     """
     time_a = timetuple_to_datetime(game_time_to_time_tuple(time_a))
     time_b = timetuple_to_datetime(game_time_to_time_tuple(time_b))
-    return (time_a - time_b).minutes >= 0
+    if (time_a - time_b).minutes > 0:
+        return 2
+    else:
+        return (time_a - time_b).minutes < 0
 
 
 def get_now_time_slice(character_id: int) -> dict:

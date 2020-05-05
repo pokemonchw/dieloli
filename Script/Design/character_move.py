@@ -2,7 +2,6 @@ from Script.Core import cache_contorl, text_loading, era_print, constant
 from Script.Design import map_handle, game_time, update
 
 
-# 主角移动
 def own_charcter_move(target_scene: list):
     """
     主角寻路至目标场景
@@ -19,7 +18,9 @@ def own_charcter_move(target_scene: list):
         era_print.normal_print(null_message)
     else:
         map_handle.character_move_scene(
-            cache_contorl.character_data['character'][0].position, now_target_position, 0
+            cache_contorl.character_data["character"][0].position,
+            now_target_position,
+            0,
         )
         game_time.sub_time_now(now_need_time)
         if (
