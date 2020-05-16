@@ -5,6 +5,7 @@ import getopt
 import sys
 from Script.Core import game_data
 
+
 try:
     options, _ = getopt.getopt(sys.argv[1:], "d:", ["debug="])
     key, value = options[0]

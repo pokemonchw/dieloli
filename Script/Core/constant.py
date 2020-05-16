@@ -45,6 +45,8 @@ class FilePath:
     """ 可穿戴道具数据配置路径 """
     NATURE_PATH = "Nature"
     """ 人格维度相关数据配置路径 """
+    INSTRUCT_PATH = "Instruct"
+    """ 指令显示需求数据配置路径 """
 
 
 class WindowMenu:
@@ -119,6 +121,8 @@ class CmdMenu:
     """ 确认属性面板控制菜单 """
     INSTRUCT_HEAD_PANEL = "instructHeadPanel"
     """ 操作指令过滤面板菜单 """
+    INSTRUCT_PANEL = "instructPanel"
+    """ 操作指令菜单 """
 
 
 class TimeSlice:

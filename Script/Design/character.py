@@ -37,7 +37,7 @@ class Character:
             "Underpants": {},
         }
         self.sex_item = {}
-        self.item = []
+        self.item = {}
         self.height = {}
         self.weight = {}
         self.measurements = {}
@@ -71,6 +71,7 @@ class Character:
         self.hit_point_tem = "Ordinary"
         self.mana_point_tem = "Ordinary"
         self.social_contact = {}
+        self.occupation = ""
 
     def init_attr(self):
         """
@@ -142,6 +143,11 @@ class Character:
         }
         self.init_class()
         self.put_on_clothing()
+        if self.occupation == "":
+            if self.age <= 18:
+                self.occupation = "Student"
+            else:
+                self.occupation = "Teacher"
 
     def init_class(self):
         """

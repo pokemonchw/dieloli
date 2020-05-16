@@ -91,9 +91,11 @@ def see_scene_character_list_panel() -> list:
     return input_s
 
 
-def change_scene_character_list_panel() -> list:
+def change_scene_character_list_panel(start_id: int) -> list:
     """
     当前场景角色列表页切换控制面板
+    Keyword arguments:
+    start_id -- 指令的起始id
     """
     name_list_max = int(game_config.in_scene_see_player_max)
     now_page = int(cache_contorl.panel_state["SeeSceneCharacterListPanel"])
@@ -110,6 +112,7 @@ def change_scene_character_list_panel() -> list:
         cmd_column=5,
         askfor=False,
         cmd_size="center",
+        start_id=start_id,
     )
     era_print.page_line_print(sample="-", string=page_text)
     era_print.line_feed_print()

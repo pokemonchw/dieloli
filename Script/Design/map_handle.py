@@ -38,6 +38,7 @@ def print_map(map_path: list) -> list:
         while i in range(len(map_x_list)):
             if now_cmd_id_list != []:
                 while i == now_cmd_id_list[0]:
+                    print(i, now_cmd_list[0], character_now_scene_id)
                     if now_cmd_list[0] == character_now_scene_id:
                         era_print.normal_print(
                             now_cmd_list[0], "nowmap", rich_text_judge=False
@@ -166,7 +167,7 @@ def character_move_scene(
         ] = 0
 
 
-def get_map_system_path_str_for_list(now_list: list):
+def get_map_system_path_str_for_list(now_list: list) -> str:
     """
     将地图路径列表数据转换为字符串
     Keyword arguments:

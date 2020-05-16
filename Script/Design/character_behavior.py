@@ -26,17 +26,5 @@ def character_occupation_judge(character_id: int):
     character_id -- 角色id
     """
     character_data = cache_contorl.character_data["character"][character_id]
-    character_tem_data = cache_contorl.npc_tem_data[character_id - 1]
-    if (
-        "Occupation" in character_tem_data
-        and character_tem_data["Occupation"] in behavior_tem_data
-    ):
-        character_occupation = character_tem_data["Occupation"]
-    else:
-        character_age = int(character_data.age)
-        if character_age <= 18:
-            character_occupation = "Student"
-        else:
-            character_occupation = "Teacher"
-    template = behavior_tem_data[character_occupation]
+    template = behavior_tem_data[character_data.occupation]
     template.behavior_init(character_id)

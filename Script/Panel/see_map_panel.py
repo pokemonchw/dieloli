@@ -47,8 +47,8 @@ def see_move_path_panel() -> dict:
     era_print.normal_print("\n")
     era_print.line_feed_print(move_path_info)
     path_edge = map_data["PathEdge"]
-    map_scene_id = str(
-        map_handle.get_map_scene_id_for_scene_path(now_map, now_scene)
+    map_scene_id = map_handle.get_map_scene_id_for_scene_path(
+        now_map, now_scene
     )
     scene_path = path_edge[map_scene_id].copy()
     if map_scene_id in scene_path:

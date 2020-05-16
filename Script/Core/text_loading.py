@@ -6,7 +6,7 @@ game_path = game_path_config.game_path
 LANGUAGE = game_config.language
 
 
-def get_text_data(text_path_id: str, text_id: str) -> str:
+def get_text_data(text_path_id: str, text_id: str) -> str or dict:
     """
     按文件id和文本id读取指定文本数据
     Keyword arguments:

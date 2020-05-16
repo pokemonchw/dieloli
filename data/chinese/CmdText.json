@@ -31,7 +31,7 @@
   "askSeeClothingInfoPanel":{"0":"穿戴","1":"脱下","2":"查看","3":"返回"},
   "seeClothingInfoAskPanel":{"0":"上一件","1":"穿戴","2":"脱下","3":"返回","4":"下一件"},
   "enterCharacterNature":["确认","随机"],
-  "instructHeadPanel":{"Dialogue":"对话","Active":"主动","Passive":"被动","Perform":"表演","Obscenity":"猥亵","Amusement":"娱乐","Battle":"战斗","Study":"学习"},
+  "instructHeadPanel":{"Dialogue":"对话","Active":"主动","Passive":"被动","Perform":"表演","Obscenity":"猥亵","Amusement":"娱乐","Battle":"战斗","Study":"学习","Rest":"休息"},
   "instructPanel":{
     "Dialogue":{
       "Gossip":"闲聊",
@@ -63,19 +63,21 @@
       "Paint":"作画",
       "PoetryRecital":"念诗",
       "Sing":"唱歌",
-      "PlayMusic":"奏乐",
-      "PlaySing":"弹唱",
+      "PlayGuitar":"弹吉他",
+      "PlayHarmonica":"吹口琴",
+      "PlayBambooFlute":"吹竹笛",
       "Dance":"跳舞"
     },
     "Play":{
-      "PlayBall":"打球",
-      "PlayGame":"打电动",
+      "PlayBasketball":"打篮球",
+      "PlayFootball":"踢足球",
+      "PlayTableTennis":"打乒乓球",
       "Swim":"游泳",
       "Rpg":"过家家"
     },
     "Battle":{
-      "UnarmedCombat":"徒手格斗",
-      "CloseCombat":"近战",
+      "UnarmedCombat":"徒手攻击",
+      "CloseCombat":"近身攻击",
       "Shooting":"射击",
       "Dodge":"闪避"
     },
@@ -100,6 +102,12 @@
       "CloseCombatTraining":"近战训练",
       "ShootingTraining":"射击训练",
       "DodgeTraining":"闪避训练"
+    },
+    "Rest":{
+      "Rest":"休息",
+      "Doze":"打盹",
+      "Siesta":"午睡",
+      "Sleep":"睡觉"
     }
   }
 }

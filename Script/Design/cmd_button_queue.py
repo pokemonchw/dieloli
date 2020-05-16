@@ -148,6 +148,7 @@ def option_str(
     return_data=None,
     normal_style_data={},
     on_style_data={},
+    fix_cmd=True,
 ) -> list:
     """
     绘制无id的文本命令列表
@@ -190,12 +191,18 @@ def option_str(
             if null_cmd == cmd_list_data[i]:
                 now_null_cmd = False
             cmd_text_bak = dictionaries.handle_text(cmd_list_data[i])
-            cmd_text = "[" + cmd_text_bak + "]"
+            if fix_cmd:
+                cmd_text = "[" + cmd_text_bak + "]"
+            else:
+                cmd_text = cmd_text_bak
         else:
             if null_cmd == return_data[i]:
                 now_null_cmd = False
             cmd_text_bak = return_data[i]
-            cmd_text = "[" + cmd_list_data[i] + "]"
+            if fix_cmd:
+                cmd_text = "[" + cmd_list_data[i] + "]"
+            else:
+                cmd_text = cmd_list_data[i]
         if i == 0:
             cmd_size_print(
                 cmd_text,
@@ -264,11 +271,11 @@ def id_index(id):
     Keyword arguments:
     id -- 命令id
     """
-    if id - 100 >= 0:
+    if int(id) - 100 >= 0:
         id_s = "[" + str(id) + "] "
         return id_s
-    elif id - 10 >= 0:
-        if id == 0:
+    elif int(id) - 10 >= 0:
+        if int(id) == 0:
             id_s = "[00" + str(id) + "] "
             return id_s
         else:
