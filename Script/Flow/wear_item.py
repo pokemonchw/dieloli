@@ -65,9 +65,9 @@ def change_wear_item(item_type: str) -> bool:
     if yrn == input_s[:-1]:
         return
     else:
-        cache_contorl.character_data[character_id].wear_item[
-            "Wear"
-        ][item_type] = list(
+        cache_contorl.character_data[character_id].wear_item["Wear"][
+            item_type
+        ] = list(
             cache_contorl.character_data[character_id]
             .wear_item["Item"][item_type]
             .keys()
@@ -83,9 +83,7 @@ def get_character_wear_item_page_max(character_id: str):
     character_id -- 角色Id
     """
     wear_item_max = len(
-        cache_contorl.character_data[character_id].wear_item[
-            "Item"
-        ]
+        cache_contorl.character_data[character_id].wear_item["Item"]
     )
     page_index = game_config.see_character_wearitem_max
     if wear_item_max - page_index < 0:

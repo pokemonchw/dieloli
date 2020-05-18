@@ -27,9 +27,7 @@ def get_character_item_page_max(character_id: str):
     Keyword arguments:
     character_id -- 角色Id
     """
-    item_max = len(
-        cache_contorl.character_data[character_id].item
-    )
+    item_max = len(cache_contorl.character_data[character_id].item)
     page_index = game_config.see_character_item_max
     if item_max - page_index < 0:
         return 0

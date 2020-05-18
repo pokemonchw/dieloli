@@ -1,6 +1,12 @@
 import math
 from Script.Core import cache_contorl, game_init, py_cmd, game_config
-from Script.Design import map_handle, panel_state_handle, handle_instruct
+from Script.Design import (
+    map_handle,
+    panel_state_handle,
+    handle_instruct,
+    talk_cache,
+    talk,
+)
 from Script.Panel import (
     in_scene_panel,
     see_character_attr_panel,
@@ -25,10 +31,7 @@ def get_in_scene_func():
         cache_contorl.scene_data[scene_path_str][
             "SceneCharacterData"
         ] = scene_character_list
-    if (
-        len(scene_character_list) > 1
-        and cache_contorl.now_character_id == 0
-    ):
+    if len(scene_character_list) > 1 and cache_contorl.now_character_id == 0:
         now_name_list = map_handle.get_scene_character_name_list(
             scene_path_str
         )
@@ -52,6 +55,10 @@ def see_scene_func(judge: bool):
     judge -- 判断是否绘制角色列表界面的开关
     """
     while True:
+        talk_cache.me = cache_contorl.character_data[0]
+        talk_cache.tg = cache_contorl.character_data[
+            cache_contorl.now_character_id
+        ]
         input_s = []
         in_scene_panel.see_scene_panel()
         scene_path = cache_contorl.character_data[0].position
@@ -102,12 +109,13 @@ def see_scene_func(judge: bool):
         character_max = len(cache_contorl.character_data) - 1
         page_max = math.floor(character_max / name_list_max)
         if yrn in scene_character_name_list:
-            cache_contorl.character_data[
-                "character_id"
-            ] = map_handle.get_character_id_by_character_name(
+            cache_contorl.now_character_id = map_handle.get_character_id_by_character_name(
                 yrn, scene_path_str
             )
         elif yrn in instruct_cmd:
+            talk.handle_instruct_talk(
+                instruct_panel.instruct_id_cmd_data[int(yrn)]
+            )
             handle_instruct.handle_instruct_data[
                 instruct_panel.instruct_id_cmd_data[int(yrn)]
             ]()
@@ -152,9 +160,7 @@ def see_scene_func(judge: bool):
             break
         elif yrn in [in_scene_cmd_list_2[1], in_scene_cmd_list_2[2]]:
             if yrn == in_scene_cmd_list_2[2]:
-                cache_contorl.old_character_id = cache_contorl.character_data[
-                    "character_id"
-                ]
+                cache_contorl.old_character_id = cache_contorl.now_character_id
                 cache_contorl.now_character_id = 0
             cache_contorl.now_flow_id = "see_character_attr"
             cache_contorl.old_flow_id = "in_scene"

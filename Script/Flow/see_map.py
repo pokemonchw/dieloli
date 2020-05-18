@@ -55,9 +55,7 @@ def see_map_flow():
             up_map_path = map_handle.get_map_for_path(now_map)
             cache_contorl.now_map = up_map_path
         elif down_map_button != "Null" and yrn == down_map_button:
-            character_position = cache_contorl.character_data[
-                0
-            ].position
+            character_position = cache_contorl.character_data[0].position
             down_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
                 cache_contorl.now_map, character_position
             )

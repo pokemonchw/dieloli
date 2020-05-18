@@ -34,9 +34,7 @@ def see_character_wear_clothes(character_id: str, change_button: bool):
     character_clothing_data = cache_contorl.character_data[
         character_id
     ].clothing
-    character_put_on_list = cache_contorl.character_data[
-        character_id
-    ].put_on
+    character_put_on_list = cache_contorl.character_data[character_id].put_on
     clothing_text_data = {}
     tag_text_index = 0
     for i in range(len(clothing.clothing_type_text_list.keys())):
@@ -154,9 +152,7 @@ def see_character_clothes_panel(
         clothing_id = list(character_clothing_data.keys())[i]
         if (
             clothing_id
-            == cache_contorl.character_data[character_id].put_on[
-                clothing_type
-            ]
+            == cache_contorl.character_data[character_id].put_on[clothing_type]
         ):
             pass_id = i - now_page_start_id
         clothing_data = character_clothing_data[clothing_id]
@@ -301,9 +297,9 @@ def see_clothing_info_panel(
     era_print.little_title_print(
         text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "126")
     )
-    clothing_data = cache_contorl.character_data[
-        character_id
-    ].clothing[clothing_type][clothing_id]
+    clothing_data = cache_contorl.character_data[character_id].clothing[
+        clothing_type
+    ][clothing_id]
     info_list = []
     clothing_name = clothing_data["Name"]
     if wear_clothing_judge:

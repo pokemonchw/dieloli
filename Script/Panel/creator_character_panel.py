@@ -70,9 +70,7 @@ def start_input_nick_name_panel():
                 )
             )
         else:
-            cache_contorl.character_data[
-                0
-            ].nick_name = character_nick_name
+            cache_contorl.character_data[0].nick_name = character_nick_name
             break
 
 
@@ -106,9 +104,7 @@ def start_input_self_name():
                 )
             )
         else:
-            cache_contorl.character_data[
-                0
-            ].self_name = character_self_name
+            cache_contorl.character_data[0].self_name = character_self_name
             break
 
 

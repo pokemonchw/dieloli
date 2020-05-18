@@ -104,9 +104,7 @@ def ask_see_clothing_info(
     wear_clothing_judge = False
     if (
         clothing_id
-        == cache_contorl.character_data[character_id].put_on[
-            clothing_type
-        ]
+        == cache_contorl.character_data[character_id].put_on[clothing_type]
     ):
         wear_clothing_judge = True
     yrn = int(
@@ -142,9 +140,7 @@ def see_clothing_info(character_id: str, clothing_type: str, clothing_id: str):
         wear_clothing_judge = False
         if (
             clothing_id
-            == cache_contorl.character_data[character_id].put_on[
-                clothing_type
-            ]
+            == cache_contorl.character_data[character_id].put_on[clothing_type]
         ):
             wear_clothing_judge = True
         now_clothing_index = clothing_list.index(clothing_id)

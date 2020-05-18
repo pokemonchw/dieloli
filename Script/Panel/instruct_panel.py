@@ -124,9 +124,7 @@ def judge_instract_available(instract: str) -> bool:
         now_judge = 1
         for item in cache_contorl.character_data[0].item:
             if (
-                cache_contorl.character_data[0].item[item][
-                    "ItemTag"
-                ]
+                cache_contorl.character_data[0].item[item]["ItemTag"]
                 == config_data["ItemTag"]
             ):
                 now_judge = 0
@@ -159,9 +157,7 @@ def judge_instract_available(instract: str) -> bool:
             return 0
     if "TargetSex" in config_data:
         if (
-            cache_contorl.character_data[
-                cache_contorl.now_character_id
-            ].sex
+            cache_contorl.character_data[cache_contorl.now_character_id].sex
             not in config_data["TargetSex"]
         ):
             return 0

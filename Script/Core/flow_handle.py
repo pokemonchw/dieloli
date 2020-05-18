@@ -180,17 +180,20 @@ exit_flag = False
 
 
 # 处理输入
-def order_deal(flag="order", print_order=True):
+def order_deal(flag="order", print_order=True, donot_return_null_str=True):
     """
     处理命令函数
     Keyword arguments:
     flag -- 类型，默认为order，如果为console，这回执行输入得到的内容
     print_order -- 是否将输入的order输出到屏幕上
+    donot_return_null_str -- 不接受输入空字符串
     """
     global __skip_flag__
     __skip_flag__ = False
     while True:
         time.sleep(0.01)
+        if not donot_return_null_str and cache_contorl.wframe_mouse.w_frame_up:
+            return ""
         while not io_init._order_queue.empty():
             order = io_init.get_order()
             if cache_contorl.flow_contorl.quit_game:
@@ -221,11 +224,14 @@ def askfor_str(donot_return_null_str=True, print_order=False):
     """
     用于请求一个字符串为结果的输入
     Keyword arguments:
-    donot_return_null_str -- 空字符串输入是否被接受
+    donot_return_null_str -- 不接受输入空字符串
     print_order -- 是否将输入的order输出到屏幕上
     """
     while True:
-        order = order_deal("str", print_order)
+        if not donot_return_null_str and cache_contorl.wframe_mouse.w_frame_up:
+            cache_contorl.wframe_mouse.w_frame_up = 0
+            return ""
+        order = order_deal("str", print_order, donot_return_null_str)
         if donot_return_null_str and order != "":
             return order
         elif not donot_return_null_str:
@@ -287,8 +293,7 @@ def askfor_wait():
     """
     用于情求一个暂停动作，任何如数都可以继续
     """
-    global __skip_flag__
-    while not __skip_flag__:
+    while not cache_contorl.wframe_mouse.w_frame_up:
         re = askfor_str(donot_return_null_str=False)
         if re == "":
             break

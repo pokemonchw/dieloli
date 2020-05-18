@@ -158,9 +158,7 @@ def character_move_scene(
             "SceneCharacterData"
         ]
     ):
-        cache_contorl.character_data[
-            character_id
-        ].position = new_scene_path
+        cache_contorl.character_data[character_id].position = new_scene_path
         cache_contorl.scene_data[new_scene_path_str]["SceneCharacterData"][
             character_id
         ] = 0
@@ -477,9 +475,7 @@ def get_scene_character_name_list(
     if remove_own_character:
         now_scene_character_list.remove(0)
     for character_id in now_scene_character_list:
-        character_name = cache_contorl.character_data[
-            character_id
-        ].name
+        character_name = cache_contorl.character_data[character_id].name
         name_list.append(character_name)
     return name_list
 

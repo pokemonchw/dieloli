@@ -165,9 +165,9 @@ def detailed_setting_func_1():
     """
     flow_retun = creator_character_panel.detailed_setting_1_panel()
     character_age_tem_name = attr_calculation.get_age_tem_list()[flow_retun]
-    cache_contorl.character_data[
-        0
-    ].age = attr_calculation.get_age(character_age_tem_name)
+    cache_contorl.character_data[0].age = attr_calculation.get_age(
+        character_age_tem_name
+    )
     py_cmd.clr_cmd()
     detailed_setting_func_3()
 
@@ -184,9 +184,7 @@ def detailed_setting_func_3():
     )
     sex_tem_data_list.reverse()
     sex_tem_name = sex_tem_data_list[flow_return]
-    cache_contorl.character_data[
-        0
-    ].sex_experience_tem = sex_tem_name
+    cache_contorl.character_data[0].sex_experience_tem = sex_tem_name
     py_cmd.clr_cmd()
     detailed_setting_func_8()
 
@@ -219,18 +217,16 @@ def enter_character_nature_func():
         yrn = game_init.askfor_all(input_s)
         if yrn in cache_contorl.character_data[0].nature:
             if cache_contorl.character_data[0].nature[yrn] < 50:
-                cache_contorl.character_data[0].nature[
-                    yrn
-                ] = random.uniform(50, 100)
+                cache_contorl.character_data[0].nature[yrn] = random.uniform(
+                    50, 100
+                )
             else:
-                cache_contorl.character_data[0].nature[
-                    yrn
-                ] = random.uniform(0, 50)
+                cache_contorl.character_data[0].nature[yrn] = random.uniform(
+                    0, 50
+                )
         elif int(yrn) == 0:
             character.init_attr(cache_contorl.character_data[0])
             cache_contorl.now_flow_id = "acknowledgment_attribute"
             break
         elif int(yrn) == 1:
-            cache_contorl.character_data[
-                0
-            ].nature = nature.get_random_nature()
+            cache_contorl.character_data[0].nature = nature.get_random_nature()

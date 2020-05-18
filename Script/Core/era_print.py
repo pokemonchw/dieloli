@@ -210,7 +210,6 @@ def wait_print(string: str, style="standard"):
     if text_wait != 0:
         time.sleep(text_wait)
     normal_print(string, style)
-    flow_handle.ask_for_wait()
 
 
 def line_feed_wait_print(string="", style="standard"):
@@ -221,10 +220,11 @@ def line_feed_wait_print(string="", style="standard"):
     style -- 绘制文本的默认样式 (default 'standard')
     """
     text_wait = cache_contorl.text_wait
-    if text_wait != 0:
+    if text_wait:
         time.sleep(text_wait)
-    line_feed_print(string, style)
-    flow_handle.ask_for_wait()
+    normal_print(string, style)
+    cache_contorl.wframe_mouse.w_frame_up = 0
+    flow_handle.askfor_wait()
 
 
 def one_by_one_print(sleep_time: float, string: str, style="standard"):

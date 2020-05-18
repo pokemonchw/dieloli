@@ -67,9 +67,7 @@ def index_character_average_value():
     统计各年龄段所有角色各属性总值
     """
     for character_id in cache_contorl.character_data:
-        character_data = cache_contorl.character_data[
-            character_id
-        ]
+        character_data = cache_contorl.character_data[character_id]
         age_tem = attr_calculation.judge_age_group(character_data.age)
         cache_contorl.total_height_by_age.setdefault(age_tem, {})
         cache_contorl.total_height_by_age[age_tem].setdefault(
@@ -312,39 +310,28 @@ def init_character_dormitory():
     """
     character_sex_data = {
         "Man": {
-            character_id: cache_contorl.character_data[
-                character_id
-            ].age
+            character_id: cache_contorl.character_data[character_id].age
             for character_id in cache_contorl.character_data
             if cache_contorl.character_data[character_id].age < 18
-            and cache_contorl.character_data[character_id].sex
-            == "Man"
+            and cache_contorl.character_data[character_id].sex == "Man"
         },
         "Woman": {
-            character_id: cache_contorl.character_data[
-                character_id
-            ].age
+            character_id: cache_contorl.character_data[character_id].age
             for character_id in cache_contorl.character_data
             if cache_contorl.character_data[character_id].age < 18
-            and cache_contorl.character_data[character_id].sex
-            == "Woman"
+            and cache_contorl.character_data[character_id].sex == "Woman"
         },
         "Other": {
-            character_id: cache_contorl.character_data[
-                character_id
-            ].age
+            character_id: cache_contorl.character_data[character_id].age
             for character_id in cache_contorl.character_data
             if cache_contorl.character_data[character_id].age < 18
             and cache_contorl.character_data[character_id].sex
             not in {"Man": 0, "Woman": 1}
         },
         "Teacher": {
-            character_id: cache_contorl.character_data[
-                character_id
-            ].age
+            character_id: cache_contorl.character_data[character_id].age
             for character_id in cache_contorl.character_data
-            if cache_contorl.character_data[character_id].age
-            >= 18
+            if cache_contorl.character_data[character_id].age >= 18
         },
     }
     man_max = len(character_sex_data["Man"])
@@ -414,33 +401,25 @@ def init_character_dormitory():
     single_room_teacher = math.ceil(teacher_max / teacher_dormitoryMax)
     for character_id in character_sex_data["Man"]:
         now_room = list(male_dormitory.keys())[0]
-        cache_contorl.character_data[
-            character_id
-        ].dormitory = now_room
+        cache_contorl.character_data[character_id].dormitory = now_room
         male_dormitory[now_room] += 1
         if male_dormitory[now_room] >= single_room_man:
             del male_dormitory[now_room]
     for character_id in character_sex_data["Woman"]:
         now_room = list(female_dormitory.keys())[0]
-        cache_contorl.character_data[
-            character_id
-        ].dormitory = now_room
+        cache_contorl.character_data[character_id].dormitory = now_room
         female_dormitory[now_room] += 1
         if female_dormitory[now_room] >= single_room_woman:
             del female_dormitory[now_room]
     for character_id in character_sex_data["Other"]:
         now_room = list(basement.keys())[0]
-        cache_contorl.character_data[
-            character_id
-        ].dormitory = now_room
+        cache_contorl.character_data[character_id].dormitory = now_room
         basement[now_room] += 1
         if basement[now_room] >= single_room_basement:
             del basement[now_room]
     for character_id in character_sex_data["Teacher"]:
         now_room = list(teacher_dormitory.keys())[0]
-        cache_contorl.character_data[
-            character_id
-        ].dormitory = now_room
+        cache_contorl.character_data[character_id].dormitory = now_room
         teacher_dormitory[now_room] += 1
         if teacher_dormitory[now_room] >= single_room_teacher:
             del teacher_dormitory[now_room]

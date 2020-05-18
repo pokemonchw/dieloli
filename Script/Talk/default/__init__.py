@@ -1,1 +1,1 @@
-from Script.Talk.default import default
+from Script.Talk.default import *

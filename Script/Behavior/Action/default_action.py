@@ -41,7 +41,9 @@ def move_action(character_id: int, target_path: list):
                     character_data.behavior["MoveTarget"],
                     character_id,
                 )
-                character_data.behavior["StartTime"] = game_time.datetime_to_game_tim(end_time)
+                character_data.behavior[
+                    "StartTime"
+                ] = game_time.datetime_to_game_tim(end_time)
             elif time_judge == 1:
                 need_time = (
                     game_time.timetuple_to_datetime(end_time)
@@ -60,7 +62,9 @@ def move_action(character_id: int, target_path: list):
                     character_data.behavior["MoveTarget"],
                     character_id,
                 )
-                character_data.behavior["StartTime"] = game_time.datetime_to_game_time(end_time)
+                character_data.behavior[
+                    "StartTime"
+                ] = game_time.datetime_to_game_time(end_time)
         else:
             (
                 move_status,

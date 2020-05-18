@@ -18,15 +18,10 @@ def own_charcter_move(target_scene: list):
         era_print.normal_print(null_message)
     else:
         map_handle.character_move_scene(
-            cache_contorl.character_data[0].position,
-            now_target_position,
-            0,
+            cache_contorl.character_data[0].position, now_target_position, 0,
         )
         game_time.sub_time_now(now_need_time)
-        if (
-            cache_contorl.character_data[0].position
-            != target_scene
-        ):
+        if cache_contorl.character_data[0].position != target_scene:
             own_charcter_move(target_scene)
     update.game_update_flow()
     cache_contorl.now_character_id = 0
@@ -48,9 +43,7 @@ def character_move(
     list -- 本次移动到的位置
     int -- 本次移动花费的时间
     """
-    now_position = cache_contorl.character_data[
-        character_id
-    ].position
+    now_position = cache_contorl.character_data[character_id].position
     scene_hierarchy = map_handle.judge_scene_affiliation(
         now_position, target_scene
     )
@@ -85,9 +78,7 @@ def difference_map_move(
     list -- 本次移动到的位置
     int -- 本次移动花费的时间
     """
-    now_position = cache_contorl.character_data[
-        character_id
-    ].position
+    now_position = cache_contorl.character_data[character_id].position
     is_affiliation = map_handle.judge_scene_is_affiliation(
         now_position, target_scene
     )

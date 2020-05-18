@@ -20,18 +20,14 @@ def handle_rest():
     ):
         cache_contorl.character_data[
             0
-        ].hit_point = cache_contorl.character_data[
-            0
-        ].hit_point_max
+        ].hit_point = cache_contorl.character_data[0].hit_point_max
     if (
         cache_contorl.character_data[0].mana_point
         > cache_contorl.character_data[0].mana_point_max
     ):
         cache_contorl.character_data[
             0
-        ].mana_point = cache_contorl.character_data[
-            0
-        ].mana_point_max
+        ].mana_point = cache_contorl.character_data[0].mana_point_max
     game_time.sub_time_now(10)
     update.game_update_flow()
 

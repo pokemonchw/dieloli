@@ -9,9 +9,7 @@ def behavior_init(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_state = cache_contorl.character_data[
-        character_id
-    ].state
+    character_state = cache_contorl.character_data[character_id].state
     if character_state in behavior_list:
         behavior_list[character_state](character_id)
     else:

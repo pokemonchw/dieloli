@@ -1,7 +1,7 @@
 import random
 import bisect
 import itertools
-from typing import Dict,List
+from typing import Dict, List
 
 
 def two_bit_array_to_dict(array: tuple) -> dict:
@@ -13,7 +13,7 @@ def two_bit_array_to_dict(array: tuple) -> dict:
     return {x: y for x, y in array}
 
 
-def get_region_list(now_data:Dict[any,int]) -> dict:
+def get_region_list(now_data: Dict[any, int]) -> dict:
     """
     按dict中每个value的值对key进行排序，并计算权重区域列表
     Keyword arguments:
@@ -25,7 +25,7 @@ def get_region_list(now_data:Dict[any,int]) -> dict:
     )
 
 
-def sorted_dict_for_values(old_dict:Dict[any,int]) -> dict:
+def sorted_dict_for_values(old_dict: Dict[any, int]) -> dict:
     """
     按dict中每个value的值对key进行排序生成新dict
     Keyword arguments:
@@ -34,7 +34,7 @@ def sorted_dict_for_values(old_dict:Dict[any,int]) -> dict:
     return two_bit_array_to_dict(sorted(old_dict.items(), key=lambda x: x[1]))
 
 
-def get_random_for_weight(data:Dict[any,int]) -> any:
+def get_random_for_weight(data: Dict[any, int]) -> any:
     """
     按权重随机获取dict中的一个key
     Keyword arguments:

@@ -520,9 +520,7 @@ def judge_character_stature(character_id):
         player_bodyfat_judge = "SuperLow"
     elif bodyfat < player_bodyfat * 0.55:
         player_bodyfat_judge = "ExtremelyLow"
-    player_height = cache_contorl.character_data[0].height[
-        "NowHeight"
-    ]
+    player_height = cache_contorl.character_data[0].height["NowHeight"]
     player_height_judge = "Similar"
     if height < player_height * 1.15 and height >= player_height * 1.05:
         player_height_judge = "SlilghtlyHeight"
@@ -776,9 +774,7 @@ def get_character_dormitory_path_text(character_id: str) -> str:
     Return arguments:
     map_path_str -- 宿舍路径描述文本
     """
-    dormitory = cache_contorl.character_data[
-        character_id
-    ].dormitory
+    dormitory = cache_contorl.character_data[character_id].dormitory
     dormitory_path = map_handle.get_map_system_path_for_str(dormitory)
     map_list = map_handle.get_map_hierarchy_list_for_scene_path(
         dormitory_path, []

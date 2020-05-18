@@ -66,9 +66,7 @@ def see_attr_on_every_time_func():
                 now_scene_str
             )
         else:
-            character_id_list = list(
-                cache_contorl.character_data.keys()
-            )
+            character_id_list = list(cache_contorl.character_data.keys())
         character_id_index = character_id_list.index(character_id)
         input_s = []
         see_attr_in_every_time_func()
@@ -100,9 +98,7 @@ def see_attr_on_every_time_func():
                     "SeeCharacterListPanel"
                 ] = now_page_id
             elif cache_contorl.old_flow_id == "in_scene":
-                scene_path = cache_contorl.character_data[
-                    0
-                ].position
+                scene_path = cache_contorl.character_data[0].position
                 scene_path_str = map_handle.get_map_system_path_str_for_list(
                     scene_path
                 )

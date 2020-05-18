@@ -3,33 +3,35 @@ from typing import List
 
 class FlowContorl:
     """ 流程控制用结构体 """
-    restart_game:bool = 0
-    """ 重启游戏 """
-    quit_game:bool = 0
-    """ 退出游戏 """
 
+    restart_game: bool = 0
+    """ 重启游戏 """
+    quit_game: bool = 0
+    """ 退出游戏 """
 
 
 class WFrameMouse:
     """ 鼠标状态结构体 """
-    w_frame_up:int = 2
+
+    w_frame_up: int = 2
     """ 逐字输出状态 """
-    mouse_right:int = 0
+    mouse_right: int = 0
     """ 鼠标右键按下 """
-    w_frame_lines_up:int = 2
+    w_frame_lines_up: int = 2
     """ 逐行输出状态 """
-    mouse_leave_cmd:int = 1
+    mouse_leave_cmd: int = 1
     """ 鼠标左键事件 """
-    w_frame_re_print:int = 0
+    w_frame_re_print: int = 0
     """ 再次载入游戏界面 """
-    w_frame_lines_state:int = 2
+    w_frame_lines_state: int = 2
     """ 逐行输出状态 """
-    w_frame_mouse_next_line:int = 0
+    w_frame_mouse_next_line: int = 0
     """ 等待玩家确认后逐行 """
 
 
 class NpcTem:
     """ npc模板用结构体对象 """
+
     def __init__(self):
         self.Name: str = ""
         """ npc名字 """
@@ -43,15 +45,17 @@ class NpcTem:
         """ 剧情npc校验 """
         self.Weight: str = ""
         """ 体重模板 """
-        self.BodyFat:str = ""
+        self.BodyFat: str = ""
         """ 体脂率模板 """
         self.Chest: str = ""
         """ 罩杯模板 """
-        self.MotherTongue:str = ""
+        self.MotherTongue: str = ""
         """ 母语 """
+
 
 class Character:
     """ 角色数据结构体 """
+
     def __init__(self):
         self.name = "主人公"
         """ 角色名字 """
@@ -163,3 +167,24 @@ class Character:
         """ 角色社交关系数据 """
         self.occupation = ""
         """ 角色职业ID """
+
+
+class TalkObject:
+    """
+    口上对象
+    """
+
+    def __init__(self, occupation: str, instruct: str, func: callable):
+        """
+        构造口上对象
+        Keyword arguments:
+        occupation -- 口上所属的职业
+        instruct -- 口上对应的命令id
+        func -- 生成口上的执行函数
+        """
+        self.occupation = occupation
+        """ 口上所属的职业 """
+        self.instruct = instruct
+        """ 口上对应的命令id """
+        self.func = func
+        """ 生成口上的执行函数 """
