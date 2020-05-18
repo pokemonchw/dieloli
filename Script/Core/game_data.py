@@ -2,6 +2,7 @@
 import os
 import pickle
 import platform
+from typing import Dict,List
 from dijkstar import Graph, find_path
 from Script.Core.game_path_config import game_path
 from Script.Core import json_handle, cache_contorl, value_handle
@@ -133,7 +134,7 @@ def init_wear_item_type_data(wear_item_data: dict):
     }
 
 
-def init_name_region(name_data: dict, man_judge: int):
+def init_name_region(name_data: Dict[str,int], man_judge: int):
     """
     初始化性别名字随机权重
     Keyword arguments:
@@ -198,7 +199,7 @@ def get_map_system_path_for_path(now_path: str) -> list:
     return map_system_path
 
 
-def get_map_system_path_str(now_path: list) -> str:
+def get_map_system_path_str(now_path: List[str]) -> str:
     """
     将游戏地图系统路径转换为字符串
     """

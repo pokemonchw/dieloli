@@ -29,7 +29,7 @@ def wear_character_item():
     """
     查看并更换角色穿戴道具流程
     """
-    character_id = cache_contorl.character_data["character_id"]
+    character_id = cache_contorl.now_character_id
     while 1:
         input_s = wear_item_panel.see_character_wear_item_panel_for_player(
             character_id
@@ -54,7 +54,7 @@ def change_wear_item(item_type: str) -> bool:
     Keyword arguments:
     item_type -- 道具类型
     """
-    character_id = cache_contorl.character_data["character_id"]
+    character_id = cache_contorl.now_character_id
     max_page = get_character_wear_item_page_max(character_id)
     input_s = wear_item_panel.see_character_wear_item_list_panel(
         character_id, item_type, max_page
@@ -65,10 +65,10 @@ def change_wear_item(item_type: str) -> bool:
     if yrn == input_s[:-1]:
         return
     else:
-        cache_contorl.character_data["character"][character_id].wear_item[
+        cache_contorl.character_data[character_id].wear_item[
             "Wear"
         ][item_type] = list(
-            cache_contorl.character_data["character"][character_id]
+            cache_contorl.character_data[character_id]
             .wear_item["Item"][item_type]
             .keys()
         )[
@@ -83,7 +83,7 @@ def get_character_wear_item_page_max(character_id: str):
     character_id -- 角色Id
     """
     wear_item_max = len(
-        cache_contorl.character_data["character"][character_id].wear_item[
+        cache_contorl.character_data[character_id].wear_item[
             "Item"
         ]
     )

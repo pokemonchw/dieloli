@@ -1,7 +1,7 @@
 import math
 import random
 from Script.Core import text_loading, value_handle, cache_contorl, constant
-from Script.Design.character import Character
+from Script.Core.game_type import Character
 
 
 def init_phase_course_hour():
@@ -313,14 +313,14 @@ def init_character_knowledge():
     """
     初始化所有角色知识等级
     """
-    for i in cache_contorl.character_data["character"]:
-        character = cache_contorl.character_data["character"][i]
+    for i in cache_contorl.character_data:
+        character = cache_contorl.character_data[i]
         character_age = character.age
         class_grade = 11
         if character_age <= 18 and character_age >= 7:
             class_grade = character_age - 7
         init_experience_for_grade(class_grade, character)
-        cache_contorl.character_data["character"][i] = character
+        cache_contorl.character_data[i] = character
         if character_age > 18:
             init_teacher_knowledge(character)
             for course in course_knowledge_data:

@@ -22,7 +22,7 @@ def mouse_left_check(event: Event):
     Keyword arguments:
     event -- 鼠标事件
     """
-    if cache_contorl.wframe_mouse["w_frame_up"] == 0:
+    if not cache_contorl.wframe_mouse.w_frame_up:
         set_wframe_up()
     else:
         mouse_check_push()
@@ -34,9 +34,9 @@ def mouse_right_check(event: Event):
     Keyword arguments:
     event -- 鼠标事件
     """
-    cache_contorl.wframe_mouse["mouse_right"] = 1
+    cache_contorl.wframe_mouse.mouse_right = 1
     cache_contorl.text_wait = 0
-    if cache_contorl.wframe_mouse["w_frame_up"] == 0:
+    if not cache_contorl.wframe_mouse.w_frame_up == 0:
         set_wframe_up()
     else:
         mouse_check_push()
@@ -102,8 +102,8 @@ def set_wframe_up():
     """
     修正逐字输出状态为nowait
     """
-    cache_contorl.wframe_mouse["w_frame_up"] = 1
-    cache_contorl.wframe_mouse["w_frame_lines_up"] = 1
+    cache_contorl.wframe_mouse.w_frame_up = 1
+    cache_contorl.wframe_mouse.w_frame_lines_up = 1
 
 
 def mouse_check_push():
@@ -111,6 +111,6 @@ def mouse_check_push():
     更正鼠标点击状态数据映射
     """
     py_cmd.focus_cmd()
-    if cache_contorl.wframe_mouse["mouse_leave_cmd"] == 0:
+    if not cache_contorl.wframe_mouse.mouse_leave_cmd == 0:
         main_frame.send_input()
-        cache_contorl.wframe_mouse["mouse_leave_cmd"] = 1
+        cache_contorl.wframe_mouse.mouse_leave_cmd = 1

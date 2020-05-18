@@ -38,7 +38,7 @@ def start_input_name_panel():
                 )
             )
         else:
-            cache_contorl.character_data["character"][0].name = character_name
+            cache_contorl.character_data[0].name = character_name
             break
 
 
@@ -70,7 +70,7 @@ def start_input_nick_name_panel():
                 )
             )
         else:
-            cache_contorl.character_data["character"][
+            cache_contorl.character_data[
                 0
             ].nick_name = character_nick_name
             break
@@ -106,7 +106,7 @@ def start_input_self_name():
                 )
             )
         else:
-            cache_contorl.character_data["character"][
+            cache_contorl.character_data[
                 0
             ].self_name = character_self_name
             break
@@ -116,8 +116,7 @@ def input_sex_panel() -> str:
     """
     请求玩家选择性别面板
     """
-    character_id = cache_contorl.character_data["character_id"]
-    sex_id = cache_contorl.character_data["character"][character_id].sex
+    sex_id = cache_contorl.character_data[0].sex
     era_print.line_feed_print(
         text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "8")[sex_id]
     )

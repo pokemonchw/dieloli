@@ -11,7 +11,7 @@ def see_character_knowledge_panel(character_id: str):
     knowledge_text_data = text_loading.get_game_data(
         constant.FilePath.KNOWLEDGE_PATH
     )
-    character_knowledge = cache_contorl.character_data["character"][
+    character_knowledge = cache_contorl.character_data[
         character_id
     ].knowledge
     for knowledge in knowledge_text_data:

@@ -9,7 +9,7 @@ def move_action(character_id: int, target_path: list):
     character_id -- 角色id
     target_path -- 目标地点
     """
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     character_data.behavior[
         "BehaviorId"
     ] = constant.CharacterStatus.STATUS_MOVE
@@ -27,10 +27,13 @@ def move_action(character_id: int, target_path: list):
                 0,
                 0,
                 0,
-                character_data.behavior["StartTime"],
+                game_time.game_time_to_datetime(
+                    character_data.behavior["StartTime"]
+                ),
             )
             time_judge = game_time.judge_date_big_or_small(
-                end_time, cache_contorl.game_time
+                game_time.datetime_to_game_time(end_time),
+                cache_contorl.game_time,
             )
             if time_judge == 0:
                 map_handle.character_move_scene(
@@ -38,7 +41,7 @@ def move_action(character_id: int, target_path: list):
                     character_data.behavior["MoveTarget"],
                     character_id,
                 )
-                character_data.behavior["StartTime"] = end_time
+                character_data.behavior["StartTime"] = game_time.datetime_to_game_tim(end_time)
             elif time_judge == 1:
                 need_time = (
                     game_time.timetuple_to_datetime(end_time)
@@ -57,7 +60,7 @@ def move_action(character_id: int, target_path: list):
                     character_data.behavior["MoveTarget"],
                     character_id,
                 )
-                character_data.behavior["StartTime"] = end_time
+                character_data.behavior["StartTime"] = game_time.datetime_to_game_time(end_time)
         else:
             (
                 move_status,
@@ -75,4 +78,4 @@ def move_action(character_id: int, target_path: list):
                 character_data.behavior[
                     "BehaviorId"
                 ] = constant.Behavior.SHARE_BLANKLY
-    cache_contorl.character_data["character"][character_id] = character_data
+    cache_contorl.character_data[character_id] = character_data

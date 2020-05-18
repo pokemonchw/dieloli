@@ -171,7 +171,7 @@ def ask_for_overlay_save_panel() -> list:
     """
     era_print.line_feed_print()
     cmd_list = text_loading.get_text_data(
-        constant.FilePath.CMD_PATH, "overlay_save"
+        constant.FilePath.CMD_PATH, "overlaySave"
     )
     message_text = text_loading.get_text_data(
         constant.FilePath.MESSAGE_PATH, "21"
@@ -191,7 +191,7 @@ def confirmation_overlay_save_panel() -> list:
     """
     era_print.line_feed_print()
     cmd_list = text_loading.get_text_data(
-        constant.FilePath.CMD_PATH, "confirmation_overlay_save"
+        constant.FilePath.CMD_PATH, "confirmationOverlaySave"
     )
     message_text = text_loading.get_text_data(
         constant.FilePath.MESSAGE_PATH, "22"

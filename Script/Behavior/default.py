@@ -8,7 +8,7 @@ def arder_behavior(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     now_time_slice = game_time.get_now_time_slice(character_id)
 
 

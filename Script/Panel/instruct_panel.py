@@ -74,7 +74,7 @@ def instract_list_panel() -> list:
         instruct
         for instruct_type in instruct_data
         if instruct_type in cache_contorl.instruct_filter
-        and cache_contorl.instruct_filter[instruct_type] == 1
+        and cache_contorl.instruct_filter[instruct_type]
         for instruct in instruct_data[instruct_type]
         if judge_instract_available(instruct)
     ]
@@ -82,15 +82,16 @@ def instract_list_panel() -> list:
         str(instruct_cmd_id_data[instruct]) for instruct in instruct_list
     ]
     cmd_data = [
-        cmd_button_queue.id_index(return_data[i])
+        "      "
+        + cmd_button_queue.id_index(return_data[i])
         + instruct_text_data[instruct_list[i]]
         for i in range(len(instruct_list))
     ]
     if len(return_data) > 0:
         cmd_button_queue.option_str(
             None,
-            4,
-            "center",
+            5,
+            "left",
             False,
             False,
             cmd_data,
@@ -117,13 +118,13 @@ def judge_instract_available(instract: str) -> bool:
     if len(config_data) == 0:
         return 1
     if "MustTarget" in config_data and config_data["MustTarget"]:
-        if not cache_contorl.character_data["character_id"]:
+        if not cache_contorl.now_character_id:
             return 0
     if "ItemTag" in config_data:
         now_judge = 1
-        for item in cache_contorl.character_data["character"][0].item:
+        for item in cache_contorl.character_data[0].item:
             if (
-                cache_contorl.character_data["character"][0].item[item][
+                cache_contorl.character_data[0].item[item][
                     "ItemTag"
                 ]
                 == config_data["ItemTag"]
@@ -134,7 +135,7 @@ def judge_instract_available(instract: str) -> bool:
             return 0
     if "Item" in config_data:
         now_judge = 1
-        for item in cache_contorl.character_data["character"][0].item:
+        for item in cache_contorl.character_data[0].item:
             if item == config_data["Item"]:
                 now_judge = 0
                 break
@@ -143,31 +144,31 @@ def judge_instract_available(instract: str) -> bool:
     if "SceneTag" in config_data:
         scene_data = cache_contorl.scene_data[
             map_handle.get_map_system_path_str_for_list(
-                cache_contorl.character_data["character"][0].Position
+                cache_contorl.character_data[0].position
             )
         ]
         if scene_data["SceneTag"] != config_data["SceneTag"]:
             return 0
     if "TargetClothingTag" in config_data:
         if (
-            cache_contorl.character_data["character"][
-                cache_contorl.character_data["character_id"]
+            cache_contorl.character_data[
+                cache_contorl.now_character_id
             ].put_on[config_data["TargetClothingTag"]]
             == ""
         ):
             return 0
     if "TargetSex" in config_data:
         if (
-            cache_contorl.character_data["character"][
-                cache_contorl.character_data["character_id"]
+            cache_contorl.character_data[
+                cache_contorl.now_character_id
             ].sex
             not in config_data["TargetSex"]
         ):
             return 0
     if "TargetUnderwear" in config_data:
         if (
-            cache_contorl.character_data["character"][
-                cache_contorl.character_data["character_id"]
+            cache_contorl.character_data[
+                cache_contorl.now_character_id
             ].put_on["Underwear"]
             != ""
         ):
@@ -185,7 +186,7 @@ def judge_instract_available(instract: str) -> bool:
     if "Occupation" in config_data:
         if (
             config_data["Occupation"]
-            != cache_contorl.character_data["character"][0].occupation
+            != cache_contorl.character_data[0].occupation
         ):
             return 0
     return 1

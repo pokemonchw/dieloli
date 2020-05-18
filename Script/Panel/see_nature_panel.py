@@ -34,7 +34,7 @@ def see_character(character_id: str, judge: bool) -> list:
     nature_text_data = text_loading.get_game_data(
         constant.FilePath.NATURE_PATH
     )
-    character_nature = cache_contorl.character_data["character"][
+    character_nature = cache_contorl.character_data[
         character_id
     ].nature
     cmd_list = []

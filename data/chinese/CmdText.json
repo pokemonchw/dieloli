@@ -31,7 +31,7 @@
   "askSeeClothingInfoPanel":{"0":"穿戴","1":"脱下","2":"查看","3":"返回"},
   "seeClothingInfoAskPanel":{"0":"上一件","1":"穿戴","2":"脱下","3":"返回","4":"下一件"},
   "enterCharacterNature":["确认","随机"],
-  "instructHeadPanel":{"Dialogue":"对话","Active":"主动","Passive":"被动","Perform":"表演","Obscenity":"猥亵","Amusement":"娱乐","Battle":"战斗","Study":"学习","Rest":"休息"},
+  "instructHeadPanel":{"Dialogue":"对话","Active":"主动","Passive":"被动","Perform":"表演","Obscenity":"猥亵","Play":"娱乐","Battle":"战斗","Study":"学习","Rest":"休息"},
   "instructPanel":{
     "Dialogue":{
       "Gossip":"闲聊",

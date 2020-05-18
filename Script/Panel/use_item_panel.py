@@ -24,7 +24,7 @@ def see_character_item_panel(character_id: int) -> list:
             text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "37")
         )
         return []
-    character_item_data = cache_contorl.character_data["character"][
+    character_item_data = cache_contorl.character_data[
         character_id
     ].item
     if len(character_item_data) == 0:
@@ -78,7 +78,7 @@ def see_character_item_info_panel(character_id: str, item_id: str):
         attr_text.get_see_attr_panel_head_character_info(character_id)
     )
     era_print.restart_line_print(".")
-    item_data = cache_contorl.character_data["character"][character_id].item[
+    item_data = cache_contorl.character_data[character_id].item[
         item_id
     ]
     era_print.line_feed_print(

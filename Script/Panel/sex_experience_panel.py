@@ -12,9 +12,9 @@ def see_character_sex_experience_panel(character_id: int):
     era_print.line_feed_print(
         text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "5")
     )
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     character_sex_grade_list = character_data.sex_grade
-    character_sex = cache_contorl.character_data["character"][character_id].sex
+    character_sex = cache_contorl.character_data[character_id].sex
     character_sex_grade_text_list = attr_text.get_sex_grade_text_list(
         character_sex_grade_list, character_sex
     )

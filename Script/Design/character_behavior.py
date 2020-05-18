@@ -13,7 +13,7 @@ def init_character_behavior():
     """
     角色行为树总控制
     """
-    for npc in cache_contorl.character_data["character"]:
+    for npc in cache_contorl.character_data:
         if npc == 0:
             continue
         character_occupation_judge(npc)
@@ -25,6 +25,6 @@ def character_occupation_judge(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     template = behavior_tem_data[character_data.occupation]
     template.behavior_init(character_id)

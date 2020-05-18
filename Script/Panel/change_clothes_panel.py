@@ -31,10 +31,10 @@ def see_character_wear_clothes(character_id: str, change_button: bool):
     character_id -- 角色id
     change_button -- 将服装列表绘制成按钮的开关
     """
-    character_clothing_data = cache_contorl.character_data["character"][
+    character_clothing_data = cache_contorl.character_data[
         character_id
     ].clothing
-    character_put_on_list = cache_contorl.character_data["character"][
+    character_put_on_list = cache_contorl.character_data[
         character_id
     ].put_on
     clothing_text_data = {}
@@ -132,7 +132,7 @@ def see_character_clothes_panel(
     max_page -- 服装列表最大页数
     """
     era_print.line_feed_print()
-    character_clothing_data = cache_contorl.character_data["character"][
+    character_clothing_data = cache_contorl.character_data[
         character_id
     ].clothing[clothing_type]
     clothing_text_data = {}
@@ -154,7 +154,7 @@ def see_character_clothes_panel(
         clothing_id = list(character_clothing_data.keys())[i]
         if (
             clothing_id
-            == cache_contorl.character_data["character"][character_id].put_on[
+            == cache_contorl.character_data[character_id].put_on[
                 clothing_type
             ]
         ):
@@ -301,7 +301,7 @@ def see_clothing_info_panel(
     era_print.little_title_print(
         text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "126")
     )
-    clothing_data = cache_contorl.character_data["character"][
+    clothing_data = cache_contorl.character_data[
         character_id
     ].clothing[clothing_type][clothing_id]
     info_list = []

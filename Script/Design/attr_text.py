@@ -200,7 +200,7 @@ def get_see_attr_panel_head_character_info(character_id: int) -> str:
     Keyword arguments:
     character_id -- 角色Id
     """
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     character_id_text = (
         text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "0")
         + f"{character_id}"
@@ -368,7 +368,7 @@ def get_gold_text(character_id: str) -> str:
     Keyword arguments:
     character_id -- 角色id
     """
-    gold_data = cache_contorl.character_data["character"][character_id].gold
+    gold_data = cache_contorl.character_data[character_id].gold
     gold_data = str(gold_data)
     money_text = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "66"
@@ -395,7 +395,7 @@ def get_state_text(character_id: str) -> str:
     Keyword arguments:
     character_id -- 角色Id
     """
-    state = str(cache_contorl.character_data["character"][character_id].state)
+    state = str(cache_contorl.character_data[character_id].state)
     state_text = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "132"
     )[state]
@@ -411,10 +411,10 @@ def judge_character_stature(character_id):
     Keyword arguments:
     character_id -- 角色Id
     """
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     target_sex = character_data.sex
     age_judge = "Similar"
-    self_age = cache_contorl.character_data["character"][0].age
+    self_age = cache_contorl.character_data[0].age
     target_age = character_data.age
     age_disparity = self_age - target_age
     if age_disparity < -2 and age_disparity >= -5:
@@ -520,7 +520,7 @@ def judge_character_stature(character_id):
         player_bodyfat_judge = "SuperLow"
     elif bodyfat < player_bodyfat * 0.55:
         player_bodyfat_judge = "ExtremelyLow"
-    player_height = cache_contorl.character_data["character"][0].height[
+    player_height = cache_contorl.character_data[0].height[
         "NowHeight"
     ]
     player_height_judge = "Similar"
@@ -544,10 +544,10 @@ def judge_character_stature(character_id):
         player_height_judge = "SuperLow"
     elif height < player_height * 0.55:
         player_height_judge = "ExtremelyLow"
-    player_sex = cache_contorl.character_data["character"][0].sex
-    player_age = cache_contorl.character_data["character"][0].age
+    player_sex = cache_contorl.character_data[0].sex
+    player_age = cache_contorl.character_data[0].age
     player_age_tem = attr_calculation.judge_age_group(
-        cache_contorl.character_data["character"][0].age
+        cache_contorl.character_data[0].age
     )
     average_bodyfat = cache_contorl.average_bodyfat_by_age[player_age_tem][
         player_sex
@@ -719,7 +719,7 @@ def get_character_abbreviations_info(character_id: int) -> str:
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     character_id_info = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "0"
     )
@@ -776,7 +776,7 @@ def get_character_dormitory_path_text(character_id: str) -> str:
     Return arguments:
     map_path_str -- 宿舍路径描述文本
     """
-    dormitory = cache_contorl.character_data["character"][
+    dormitory = cache_contorl.character_data[
         character_id
     ].dormitory
     dormitory_path = map_handle.get_map_system_path_for_str(dormitory)

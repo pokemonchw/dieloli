@@ -1,36 +1,42 @@
-flow_contorl = {}
+from typing import TYPE_CHECKING,List,Dict
+from Script.Core import game_type
+
+
+flow_contorl = game_type.FlowContorl()
 """ 流程用变量组 """
-wframe_mouse = {}
+wframe_mouse = game_type.WFrameMouse()
 """ 主页监听控制流程用变量组 """
-cmd_map = {}
+cmd_map:Dict[int,callable] = {}
 """ cmd存储 """
-character_data = {}
+character_data:Dict[int,game_type.Character] = {}
 """ 角色对象数据缓存组 """
-npc_tem_data = []
+now_character_id:int = 0
+""" 当前正在交互的角色id """
+npc_tem_data:List[game_type.NpcTem] = []
 """ npc模板列表 """
-input_cache = []
+input_cache:List[str] = []
 """ 玩家指令输入记录（最大20）"""
-now_init_map_id = ""
+now_init_map_id:str = ""
 """ 寻路算法用,当前节点所属的地图的id """
-input_position = {}
+input_position:int = 0
 """ 回溯输入记录用定位 """
-instruct_filter = {}
+instruct_filter:Dict[str,int] = {}
 """ 玩家操作指令面板指令过滤状态数据 """
-output_text_style = ""
+output_text_style:str = ""
 """ 富文本记录输出样式临时缓存 """
-family_region_list = []
+family_region_list:Dict[int,str] = {}
 """ 姓氏区间数据 """
-boys_region_list = []
+boys_region_list:Dict[int,str] = {}
 """ 男孩名字区间数据 """
-girls_region_list = []
+girls_region_list:Dict[int,str] = {}
 """ 女孩名字区间数据 """
-family_region_int_list = []
+family_region_int_list:List[int] = []
 """ 姓氏权重区间数据 """
-boys_region_int_list = []
+boys_region_int_list:List[int] = []
 """ 男孩名字权重区间数据 """
-girls_region_int_list = []
+girls_region_int_list:List[int] = []
 """ 女孩名字权重区间数据 """
-text_style_position = {}
+text_style_position:int = 0
 """ 富文本回溯样式记录用定位 """
 clothing_type_data = {}
 """ 存储服装类型数据 """
@@ -88,3 +94,5 @@ wear_item_type_data = {}
 """ 可穿戴道具类型数据 """
 course_time_status = {}
 """ 当前上课时间状态 """
+talk_data = {}
+""" 所有的口上数据 """

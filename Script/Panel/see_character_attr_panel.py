@@ -34,7 +34,7 @@ def see_character_main_attr_panel(character_id: int):
     )
     era_print.little_title_print(title_1)
     character_id_text = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '0')}{character_id}"
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     name = character_data.name
     nick_name = character_data.nick_name
     character_name = (
@@ -162,7 +162,7 @@ def see_character_status_panel(character_id: str):
     status_text_data = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "134"
     )
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     status_data = character_data.status
     for state_type in status_data:
         era_print.son_title_print(status_text_data[state_type])
@@ -203,13 +203,13 @@ def see_character_hp_and_mp_in_sence(character_id: int):
             text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "0")
             + "0"
             + ":"
-            + cache_contorl.character_data["character"][0].name
+            + cache_contorl.character_data[0].name
         )
         target_id_text = (
             text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "0")
             + f"{character_id}"
             + ":"
-            + cache_contorl.character_data["character"][character_id].name
+            + cache_contorl.character_data[character_id].name
         )
         era_print.list_print([character_id_text, target_id_text], 2, "center")
         era_print.line_feed_print()

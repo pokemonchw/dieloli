@@ -1,10 +1,39 @@
-from Script.Core import text_loading, era_print, constant
+from Script.Core import text_loading, era_print, constant, cache_contorl
+from Script.Design import game_time, update
 
 
 def handle_unknown_instruct():
     era_print.line_feed_print(
         text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "42")
     )
+
+
+def handle_rest():
+    """
+    处理休息指令
+    """
+    cache_contorl.character_data[0].hit_point += 50
+    cache_contorl.character_data[0].mana_point += 100
+    if (
+        cache_contorl.character_data[0].hit_point
+        > cache_contorl.character_data[0].hit_point_max
+    ):
+        cache_contorl.character_data[
+            0
+        ].hit_point = cache_contorl.character_data[
+            0
+        ].hit_point_max
+    if (
+        cache_contorl.character_data[0].mana_point
+        > cache_contorl.character_data[0].mana_point_max
+    ):
+        cache_contorl.character_data[
+            0
+        ].mana_point = cache_contorl.character_data[
+            0
+        ].mana_point_max
+    game_time.sub_time_now(10)
+    update.game_update_flow()
 
 
 handle_instruct_data = {
@@ -61,7 +90,7 @@ handle_instruct_data = {
     "CombatTraining": handle_unknown_instruct,
     "ShootingTraining": handle_unknown_instruct,
     "DodgeTraining": handle_unknown_instruct,
-    "Rest": handle_unknown_instruct,
+    "Rest": handle_rest,
     "Doze": handle_unknown_instruct,
     "Siesta": handle_unknown_instruct,
     "Sleep": handle_unknown_instruct,

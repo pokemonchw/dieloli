@@ -11,7 +11,7 @@ def see_character_language_panel(character_id: str):
     language_text_data = text_loading.get_game_data(
         constant.FilePath.LANGUAGE_SKILLS_PATH
     )
-    character_language = cache_contorl.character_data["character"][
+    character_language = cache_contorl.character_data[
         character_id
     ].language
     info_list = [

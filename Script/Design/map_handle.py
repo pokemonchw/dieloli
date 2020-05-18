@@ -17,7 +17,7 @@ def print_map(map_path: list) -> list:
     """
     map_path_str = get_map_system_path_str_for_list(map_path)
     map_draw = get_map_draw_for_map_path(map_path_str)
-    character_position = cache_contorl.character_data["character"][0].position
+    character_position = cache_contorl.character_data[0].position
     character_now_scene_id = get_scene_id_in_map_for_scene_path_on_map_path(
         character_position, map_path
     )
@@ -38,7 +38,6 @@ def print_map(map_path: list) -> list:
         while i in range(len(map_x_list)):
             if now_cmd_id_list != []:
                 while i == now_cmd_id_list[0]:
-                    print(i, now_cmd_list[0], character_now_scene_id)
                     if now_cmd_list[0] == character_now_scene_id:
                         era_print.normal_print(
                             now_cmd_list[0], "nowmap", rich_text_judge=False
@@ -159,7 +158,7 @@ def character_move_scene(
             "SceneCharacterData"
         ]
     ):
-        cache_contorl.character_data["character"][
+        cache_contorl.character_data[
             character_id
         ].position = new_scene_path
         cache_contorl.scene_data[new_scene_path_str]["SceneCharacterData"][
@@ -478,7 +477,7 @@ def get_scene_character_name_list(
     if remove_own_character:
         now_scene_character_list.remove(0)
     for character_id in now_scene_character_list:
-        character_name = cache_contorl.character_data["character"][
+        character_name = cache_contorl.character_data[
             character_id
         ].name
         name_list.append(character_name)
@@ -523,7 +522,7 @@ def sort_scene_character_id(scene_path_str: str):
     ]:
         now_scene_character_intimate_data[
             character
-        ] = cache_contorl.character_data["character"][character].intimate
+        ] = cache_contorl.character_data[character].intimate
     new_scene_character_intimate_data = sorted(
         now_scene_character_intimate_data.items(),
         key=lambda x: (x[1], -int(x[0])),

@@ -143,7 +143,7 @@ def reset(*args):
     """
     重置游戏
     """
-    cache_contorl.flow_contorl["restart_game"] = 1
+    cache_contorl.flow_contorl.restart_game = 1
     send_input()
 
 
@@ -151,7 +151,7 @@ def quit(*args):
     """
     退出游戏
     """
-    cache_contorl.flow_contorl["quit_game"] = 1
+    cache_contorl.flow_contorl.quit_game = 1
     send_input()
 
 
@@ -480,7 +480,7 @@ def io_print_cmd(
             textbox.tag_ranges(cmd_tag_name)[0],
             textbox.tag_ranges(cmd_tag_name)[1],
         )
-        cache_contorl.wframe_mouse["mouse_leave_cmd"] = 0
+        cache_contorl.wframe_mouse.mouse_leave_cmd = 0
 
     def leave_func(*args):
         """
@@ -496,7 +496,7 @@ def io_print_cmd(
             textbox.tag_ranges(cmd_tag_name)[0],
             textbox.tag_ranges(cmd_tag_name)[1],
         )
-        cache_contorl.wframe_mouse["mouse_leave_cmd"] = 1
+        cache_contorl.wframe_mouse.mouse_leave_cmd = 1
 
     textbox.tag_bind(cmd_tag_name, "<1>", send_cmd)
     textbox.tag_bind(cmd_tag_name, "<Enter>", enter_func)

@@ -1,5 +1,5 @@
 from Script.Core import cache_contorl, constant
-from Script.Design import game_time
+from Script.Design import game_time, map_handle
 from Script.Behavior import default
 from Script.Behavior.Action import default_action, student_action
 
@@ -10,7 +10,7 @@ def behavior_init(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_state = cache_contorl.character_data["character"][
+    character_state = cache_contorl.character_data[
         character_id
     ].state
     if character_state in behavior_list:
@@ -25,11 +25,16 @@ def arder_behavior(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     now_time_slice = game_time.get_now_time_slice(character_id)
     if now_time_slice["InCourse"]:
         if character_data.position != character_data.classroom:
-            default_action.move_action(character_id, character_data.classroom)
+            default_action.move_action(
+                character_id,
+                map_handle.get_map_system_path_for_str(
+                    character_data.classroom
+                ),
+            )
         else:
             student_action.attend_class(character_id)
     elif now_time_slice["TimeSlice"] == constant.TimeSlice.TIME_BREAKFAST:

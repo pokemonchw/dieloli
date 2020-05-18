@@ -40,11 +40,11 @@ def see_character_wear_item_panel(
     wear_item_info_text_data = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "49"
     )
-    wear_data = cache_contorl.character_data["character"][
+    wear_data = cache_contorl.character_data[
         character_id
     ].wear_item["Wear"]
     wear_item_text_data = {}
-    item_data = cache_contorl.character_data["character"][
+    item_data = cache_contorl.character_data[
         character_id
     ].wear_item["Item"]
     wear_item_button_list = []
@@ -92,7 +92,7 @@ def see_character_wear_item_list_panel(
     era_print.line_feed_print()
     character_wear_item_data = [
         item
-        for item in cache_contorl.character_data["character"][
+        for item in cache_contorl.character_data[
             character_id
         ].wear_item["Item"]
         if item in cache_contorl.wear_item_type_data[item_type]

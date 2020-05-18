@@ -92,7 +92,12 @@ def sub_time_now(
 
 
 def get_sub_date(
-    minute=0, hour=0, day=0, month=0, year=0, old_date=None
+    minute=0,
+    hour=0,
+    day=0,
+    month=0,
+    year=0,
+    old_date: datetime.datetime = None,
 ) -> datetime.datetime:
     """
     获取旧日期增加指定时间后得到的新日期
@@ -185,20 +190,60 @@ def system_time_to_game_time(system_time: datetime.datetime.timetuple):
         "year": system_time.tm_year,
         "month": system_time.tm_mon,
         "day": system_time.tm_mday,
+        "hour": system_time.tm_hour,
+        "minute": system_time.tm_min,
     }
 
 
 def game_time_to_time_tuple(game_time: dict) -> datetime.datetime.timetuple:
     """
-    游戏时间数据转换为系统日期
+    游戏时间数据转换为系统日期tuple结构体
     Keyword arguments:
     game_time -- 游戏时间数据
     Return arguments:
-    datetime -- 系统日期
+    datetime.datetime.timetuple -- 系统日期tuple结构体
     """
     return datetime.datetime(
-        int(game_time["year"]), int(game_time["month"]), int(game_time["day"])
+        int(game_time["year"]),
+        int(game_time["month"]),
+        int(game_time["day"]),
+        int(game_time["hour"]),
+        int(game_time["minute"]),
     ).timetuple()
+
+
+def game_time_to_datetime(game_time: dict) -> datetime.datetime:
+    """
+    游戏时间数据转换为系统日期数据
+    Keyword arguments:
+    game_time -- 游戏时间数据
+    Return arguments:
+    datetime.datetime -- 系统日期
+    """
+    return datetime.datetime(
+        int(game_time["year"]),
+        int(game_time["month"]),
+        int(game_time["day"]),
+        int(game_time["hour"]),
+        int(game_time["minute"]),
+    )
+
+
+def datetime_to_game_time(now_date: datetime.datetime) -> dict:
+    """
+    系统日期数据转换为游戏时间数据
+    Keyword arguments:
+    now_date -- 系统日期数据
+    Return arguments:
+    dict -- 游戏时间数据
+    """
+    return {
+        "year": now_date.year,
+        "month": now_date.month,
+        "day": now_date.day,
+        "hour": now_date.hour,
+        "minute": now_date.minute,
+    }
 
 
 def count_day_for_time_tuple(
@@ -231,10 +276,10 @@ def judge_date_big_or_small(time_a: dict, time_b: dict) -> int:
     """
     time_a = timetuple_to_datetime(game_time_to_time_tuple(time_a))
     time_b = timetuple_to_datetime(game_time_to_time_tuple(time_b))
-    if (time_a - time_b).minutes > 0:
+    if (time_a - time_b).seconds > 0:
         return 2
     else:
-        return (time_a - time_b).minutes < 0
+        return (time_a - time_b).seconds < 0
 
 
 def get_now_time_slice(character_id: int) -> dict:
@@ -245,7 +290,7 @@ def get_now_time_slice(character_id: int) -> dict:
     Return arguments:
     dict -- 当前时间段数据
     """
-    character_age = cache_contorl.character_data["character"][character_id].age
+    character_age = cache_contorl.character_data[character_id].age
     if character_age in range(7, 19):
         phase = character_age - 7
         if phase <= 5:

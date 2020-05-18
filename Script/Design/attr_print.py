@@ -42,7 +42,7 @@ def get_hp_or_mp_bar(character_id: str, bar_id: str, text_width: int):
     bar_id -- 绘制的比例条类型(hp/mp)
     text_width -- 比例条总宽度
     """
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     if bar_id == "HitPoint":
         character_point = character_data.hit_point
         character_max_point = character_data.hit_point_max
@@ -65,7 +65,7 @@ def get_hp_and_mp_text(character_id: str) -> str:
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_data = cache_contorl.character_data[character_id]
     character_hit_point = character_data.hit_point
     character_max_hit_point = character_data.hit_point_max
     hit_point_text = text_loading.get_text_data(

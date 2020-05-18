@@ -1,6 +1,7 @@
 import random
 import math
 from Script.Core import cache_contorl, text_loading, value_handle, constant
+from Script.Design import character
 
 clothing_tag_text_list = {
     "Sexy": text_loading.get_text_data(
@@ -381,7 +382,7 @@ def init_character_clothing_put_on(player_pass=True):
     Keyword arguments:
     player_pass -- 跳过主角 (default:True)
     """
-    for character in cache_contorl.character_data["character"]:
-        if player_pass and character == 0:
+    for character_id in cache_contorl.character_data:
+        if player_pass and character_id == 0:
             continue
-        cache_contorl.character_data["character"][character].put_on_clothing()
+        character.put_on_clothing(cache_contorl.character_data[character_id])

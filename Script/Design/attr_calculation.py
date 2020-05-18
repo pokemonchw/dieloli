@@ -53,17 +53,6 @@ def get_engraving_list() -> dict:
     return role_attr_data["Default"]["Engraving"]
 
 
-def get_sex_item(sex_id: str) -> dict:
-    """
-    按性别id获取性道具模板
-    Keyword arguments:
-    sex_id -- 指定性别id
-    """
-    return text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "SexItem"
-    )[sex_id]
-
-
 def get_gold() -> int:
     """
     获取默认金钱数据
@@ -97,13 +86,12 @@ def get_end_age(sex: str) -> int:
     return random.randint(int(tem_value * 0.5), int(tem_value * 1.5))
 
 
-def get_height(tem_name: str, age: int, features: dict) -> dict:
+def get_height(tem_name: str, age: int) -> dict:
     """
     按模板和年龄计算身高
     Keyword arguments:
     tem_name -- 人物生成模板
     age -- 人物年龄
-    Features -- 人物特性数据
     """
     tem_data = text_loading.get_text_data(
         constant.FilePath.ATTR_TEMPLATE_PATH, "HeightTem"
@@ -196,7 +184,13 @@ def get_rand_npc_birthday(age: int):
     now_day = int(cache_contorl.game_time["day"])
     birth_year = now_year - age
     date = game_time.get_rand_day_for_year(birth_year)
-    birthday = {"year": date.year, "month": date.month, "day": date.day}
+    birthday = {
+        "year": date.year,
+        "month": date.month,
+        "day": date.day,
+        "hour": date.hour,
+        "minute": date.minute,
+    }
     if now_month < birthday["month"] or (
         now_month == birthday["month"] and now_day < birthday["day"]
     ):

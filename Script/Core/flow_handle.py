@@ -193,10 +193,10 @@ def order_deal(flag="order", print_order=True):
         time.sleep(0.01)
         while not io_init._order_queue.empty():
             order = io_init.get_order()
-            if cache_contorl.flow_contorl["quit_game"]:
+            if cache_contorl.flow_contorl.quit_game:
                 os._exit(0)
-            if cache_contorl.flow_contorl["restart_game"] == 1:
-                cache_contorl.flow_contorl["restart_game"] = 0
+            if cache_contorl.flow_contorl.restart_game == 1:
+                cache_contorl.flow_contorl.restart_game = 0
                 reset_func()
                 return
             if print_order and order != "":
@@ -298,21 +298,12 @@ def init_cache():
     """
     缓存初始化
     """
-    cache_contorl.flow_contorl = {"restart_game": 0, "quit_game": 0}
-    cache_contorl.wframe_mouse = {
-        "w_frame_up": 2,
-        "mouse_right": 0,
-        "mouse_leave_cmd": 1,
-        "w_frame_lines_up": 2,
-        "w_frame_line_state": 2,
-        "w_frame_re_print": 0,
-    }
     cache_contorl.cmd_map = {}
-    cache_contorl.character_data = {"character_id": "", "character": {}}
+    cache_contorl.character_data = {}
     cache_contorl.input_cache = [""]
     cache_contorl.input_position = {"position": 0}
     cache_contorl.output_text_style = "standard"
-    cache_contorl.text_style_position = {"position": 0}
+    cache_contorl.text_style_position = 0
     cache_contorl.text_style_cache = ["standard"]
     cache_contorl.text_one_by_one_rich_cache = {
         "text_list": [],

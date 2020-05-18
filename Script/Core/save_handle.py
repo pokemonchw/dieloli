@@ -58,7 +58,7 @@ def establish_save(save_id: str):
     save_verson = {
         "game_verson": game_verson,
         "game_time": game_time,
-        "character_name": character_data["character"][0].name,
+        "character_name": character_data[0].name,
     }
     data = {
         "1": character_data,
@@ -130,7 +130,7 @@ def input_load_save(save_id: str):
     """
     save_data = load_save(save_id)
     cache_contorl.character_data = save_data["1"]
-    cache_contorl.character_data["character_id"] = 0
+    cache_contorl.now_character_id = 0
     cache_contorl.game_time = save_data["2"]
     cache_contorl.scene_data = save_data["3"]
     cache_contorl.map_data = save_data["4"]

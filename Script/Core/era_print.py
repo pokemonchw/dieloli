@@ -238,7 +238,7 @@ def one_by_one_print(sleep_time: float, string: str, style="standard"):
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    cache_contorl.wframe_mouse["w_frame_up"] = 0
+    cache_contorl.wframe_mouse.w_frame_up = 0
     style_list = rich_text.set_rich_text_print(string, style)
     style_name_list = game_config.get_font_data_list()
     for i in range(0, len(style_name_list)):
@@ -251,13 +251,13 @@ def one_by_one_print(sleep_time: float, string: str, style="standard"):
     for i in range(0, index):
         normal_print(string[i], style_list[i])
         time.sleep(sleep_time)
-        if cache_contorl.wframe_mouse["w_frame_up"] == 1:
+        if cache_contorl.wframe_mouse.w_frame_up:
             index_i = i + 1
-            cache_contorl.wframe_mouse["w_frame_up"] = 2
+            cache_contorl.wframe_mouse.w_frame_up = 2
             for index_i in range(index_i, index):
                 normal_print(string[index_i], style_list[index_i])
-            if cache_contorl.wframe_mouse["w_frame_line_state"] == 2:
-                cache_contorl.wframe_mouse["w_frame_lines_up"] = 2
+            if cache_contorl.wframe_mouse.w_frame_lines_state == 2:
+                cache_contorl.wframe_mouse.w_frame_lines_up = 2
             break
 
 
@@ -328,7 +328,7 @@ def lines_center_print(sleep_time: float, string="", style="standard"):
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    cache_contorl.wframe_mouse["w_frame_line_state"] = 1
+    cache_contorl.wframe_mouse.w_frame_lines_state = 1
     string = str(string)
     string_list = string.split("\n")
     width = game_config.text_width
@@ -347,7 +347,7 @@ def lines_center_print(sleep_time: float, string="", style="standard"):
         width_i = int(width) / 2
         count_index = text_handle.get_text_index(string_center_list[i])
         count_i = int(count_index) / 2
-        if cache_contorl.wframe_mouse["w_frame_re_print"] == 1:
+        if cache_contorl.wframe_mouse.w_frame_re_print:
             normal_print("\n")
             normal_print(" " * int((width_i - count_i)))
             normal_print(string_list[i])
@@ -355,17 +355,17 @@ def lines_center_print(sleep_time: float, string="", style="standard"):
             normal_print(" " * int((width_i - count_i)))
             one_by_one_print(sleep_time, string_list[i])
             normal_print("\n")
-            if cache_contorl.wframe_mouse["w_frame_lines_up"] == 1:
+            if cache_contorl.wframe_mouse.w_frame_lines_up:
                 index_i_up = i + 1
-                cache_contorl.wframe_mouse["w_frame_lines_up"] = 2
+                cache_contorl.wframe_mouse.w_frame_lines_up = 2
                 for index_i_up in range(index_i_up, len(string_list)):
                     restart_line_print(
                         text_handle.align(string_list[index_i_up], "center"),
                         style,
                     )
-                cache_contorl.wframe_mouse["w_frame_line_state"] = 2
+                cache_contorl.wframe_mouse.w_frame_lines_state = 2
                 break
-    cache_contorl.wframe_mouse["w_frame_re_print"] = 0
+    cache_contorl.wframe_mouse.w_frame_re_print = 0
 
 
 # 多行回车逐行输出
@@ -378,8 +378,8 @@ def multiple_line_return_print(string=""):
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    cache_contorl.wframe_mouse["w_frame_mouse_next_line"] = 1
+    cache_contorl.wframe_mouse.w_frame_mouse_next_line = 1
     string_list = string.split("\n")
     for i in range(0, len(string_list)):
         line_feed_wait_print(string_list[i])
-    cache_contorl.wframe_mouse["w_frame_mouse_next_line"] = 0
+    cache_contorl.wframe_mouse.w_frame_mouse_next_line = 0

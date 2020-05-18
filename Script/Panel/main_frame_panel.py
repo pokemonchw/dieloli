@@ -13,8 +13,8 @@ def main_frame_panel() -> list:
     游戏主菜单
     """
     cmd_list = []
-    character_id = cache_contorl.character_data["character_id"]
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_id = cache_contorl.now_character_id
+    character_data = cache_contorl.character_data[character_id]
     title_text = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "64"
     )

@@ -137,6 +137,8 @@
   },
   "Masturbation":{
   },
+  "ReadBook":{
+  },
   "SelfStudy":{
   },
   "AttendLectures":{
@@ -151,6 +153,10 @@
     "Occupation":"Teacher"
   },
   "CombatTraining":{
+  },
+  "CloseCombatTraining":{
+  },
+  "DodgeTraining":{
   },
   "ShootingTraining":{
     "ItemTag":"Shooting"
