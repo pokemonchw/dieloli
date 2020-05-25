@@ -102,3 +102,7 @@ behavior_tem_data: dict = {}
 """ 角色行为控制器数据 """
 settle_behavior_data: dict = {}
 """ 角色行为结算处理器 """
+over_behavior_character: Dict[int, int] = {}
+""" 本次update中已结束结算的npc """
+teacher_class_time_table: Dict[str : Dict[int : Dict[int:int]]] = {}
+""" 各班级各老师上课时间表 """

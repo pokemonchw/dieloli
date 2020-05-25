@@ -11,10 +11,17 @@ def init_character_behavior():
     """
     角色行为树总控制
     """
-    for npc in cache_contorl.character_data:
-        if npc == 0:
-            continue
-        character_occupation_judge(npc)
+    while 1:
+        if (
+            len(cache_contorl.over_behavior_character)
+            == len(cache_contorl.character_data) - 1
+        ):
+            break
+        for npc in cache_contorl.character_data:
+            if npc == 0 or npc in cache_contorl.over_behavior_character:
+                continue
+            character_occupation_judge(npc)
+    cache_contorl.over_behavior_character = {}
 
 
 def add_behavior(occupation: str, status: int):
@@ -52,6 +59,7 @@ def character_occupation_judge(character_id: int):
             occupation = "Student"
     if character_data.state not in cache_contorl.behavior_tem_data[occupation]:
         occupation = "Default"
-    cache_contorl.behavior_tem_data[occupation][character_data.state](
+    if cache_contorl.behavior_tem_data[occupation][character_data.state](
         character_id
-    )
+    ):
+        cache_contorl.over_behavior_character[character_id] = 0

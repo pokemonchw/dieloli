@@ -164,6 +164,31 @@ def init_class_teacher():
         course_distribution_a()
     elif teacher_index >= course_max_b:
         course_distribution_b()
+    teacher_table = {}
+    for phase in cache_contorl.course_data["ClassTimeTable"]:
+        class_time_table = cache_contorl.course_data["ClassTimeTable"][phase]
+        class_list = cache_contorl.place_data["Classroom_" + str(phase)]
+        for day in cache_contorl.course_data["ClassTimeTable"][phase]:
+            for classroom in class_list:
+                for i in cache_contorl.course_data["ClassTimeTable"][day]:
+                    now_course = cache_contorl.course_data["ClassTimeTable"][
+                        day
+                    ][i]
+                    for now_teacher in cache_contorl.course_data[
+                        "ClassTeacher"
+                    ]["Classroom_" + str(phase)][classroom][now_course]:
+                        teacher_table.setdefault(now_teacher, 0)
+                        if teacher_table[now_teacher] < 14:
+                            teacher_table[now_teacher] += 1
+                            cache_contorl.teacher_class_time_table.setdefault(
+                                classroom, {}
+                            )
+                            cache_contorl.teacher_class_time_table[
+                                classroom
+                            ].setdefault(day, {})
+                            cache_contorl.teacher_class_time_table[classroom][
+                                day
+                            ][i] = teacher
 
 
 def course_abmain_distribution():

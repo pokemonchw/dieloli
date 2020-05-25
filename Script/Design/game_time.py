@@ -290,7 +290,8 @@ def get_now_time_slice(character_id: int) -> dict:
     Return arguments:
     dict -- 当前时间段数据
     """
-    character_age = cache_contorl.character_data[character_id].age
+    character_data = cache_contorl.character_data[character_id]
+    character_age = character_data.age
     if character_age in range(7, 19):
         phase = character_age - 7
         if phase <= 5:
@@ -298,6 +299,8 @@ def get_now_time_slice(character_id: int) -> dict:
         elif phase <= 11:
             return cache_contorl.course_time_status["JuniorMiddleSchool"]
         return cache_contorl.course_time_status["SeniorHighSchool"]
+    else:
+        classroom_data = cache_contorl.scene_data[character_data.classroom]
 
 
 def init_school_course_time_status():
@@ -354,6 +357,7 @@ def judge_school_course_time(school_id: str) -> dict:
     dict:{
         "InCourse":int 当前是否是上课时间
         "ToCourse":int 当前距离下节课开始所需的时间
+        "CourseIndex":int 当前属于的几节课
         "EndCourse":int 当前距离下课时间所需的时间
         "TimeSlice":int 当前时间所属时间段
     }
@@ -361,6 +365,7 @@ def judge_school_course_time(school_id: str) -> dict:
     course_status = {
         "InCourse": 0,
         "ToCourse": 0,
+        "CourseIndex": 0,
         "EndCourse": 0,
         "TimeSlice": 0,
     }
@@ -375,6 +380,7 @@ def judge_school_course_time(school_id: str) -> dict:
         course_time_data[i][1]: i for i in range(len(course_time_data))
     }
     now_time_index = bisect.bisect_left(list(end_time_data.keys()), now_time)
+    course_status["CourseIndex"] = now_time_index
     if now_time_index >= len(end_time_data):
         course_status["TimeSlice"] = TIME_SLEEP
         return course_status
@@ -417,6 +423,7 @@ def judge_holiday_time() -> dict:
     dict:{
         "InCourse":int 当前是否是上课时间
         "ToCourse":int 当前距离下节课开始所需的时间
+        "CourseIndex":int 当前属于的几节课
         "EndCourse":int 当前距离下课时间所需的时间
         "TimeSlice":int 当前时间所属时间段
     }
@@ -424,6 +431,7 @@ def judge_holiday_time() -> dict:
     course_status = {
         "InCourse": 0,
         "ToCourse": 0,
+        "CourseIndex": 0,
         "EndCourse": 0,
         "TimeSlice": 0,
     }

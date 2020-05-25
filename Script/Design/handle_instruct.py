@@ -78,5 +78,6 @@ def handle_rest():
         target_character.behavior["StartTime"] = cache_contorl.game_time
         target_character.behavior["Duration"] = 10
         target_character.behavior["BehaviorId"] = constant.Behavior.REST
+    update.game_update_flow()
     game_time.sub_time_now(10)
     update.game_update_flow()
