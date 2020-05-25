@@ -7,7 +7,7 @@ from Script.Core import game_data
 
 
 try:
-    options, _ = getopt.getopt(sys.argv[1], "d:", ["debug"])
+    options, _ = getopt.getopt(sys.argv[1], "d", ["debug"])
     key, value = options[0]
     if key in ("-d", "--debug"):
         game_data.init(1)
@@ -19,5 +19,6 @@ except:
 from Script.Design import start_flow
 from Script.Core import game_init
 import Script.Talk.default.default
+import Script.Behavior
 
 game_init.run(start_flow.start_frame)

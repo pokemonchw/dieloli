@@ -1,5 +1,6 @@
 import os
 import random
+from typing import Dict, List
 from Script.Core import (
     cache_contorl,
     game_config,

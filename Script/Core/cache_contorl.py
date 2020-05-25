@@ -2,9 +2,9 @@ from typing import TYPE_CHECKING, List, Dict
 from Script.Core import game_type
 
 
-flow_contorl = game_type.FlowContorl()
+flow_contorl: game_type.FlowContorl = game_type.FlowContorl()
 """ 流程用变量组 """
-wframe_mouse = game_type.WFrameMouse()
+wframe_mouse: game_type.WFrameMouse = game_type.WFrameMouse()
 """ 主页监听控制流程用变量组 """
 cmd_map: Dict[int, callable] = {}
 """ cmd存储 """
@@ -38,61 +38,65 @@ girls_region_int_list: List[int] = []
 """ 女孩名字权重区间数据 """
 text_style_position: int = 0
 """ 富文本回溯样式记录用定位 """
-clothing_type_data = {}
+clothing_type_data: dict = {}
 """ 存储服装类型数据 """
-text_style_cache = []
+text_style_cache: List[str] = []
 """ 富文本样式记录 """
-text_one_by_one_rich_cache = {}
+text_one_by_one_rich_cache: dict = {}
 """ 富文本精确样式记录 """
-image_id = 0
+image_id: int = 0
 """ 图片id """
-cmd_data = {}
+cmd_data: dict = {}
 """ cmd数据 """
-game_time = None
+game_time: dict = None
 """ 游戏时间 """
-panel_state = {}
+panel_state: Dict[str, int] = {}
 """ 面板状态 """
-max_save_page = 0
+max_save_page: int = 0
 """ 存档页面最大数量 """
-now_flow_id = ""
+now_flow_id: str = ""
 """ 当前游戏控制流程id """
-old_flow_id = ""
+old_flow_id: str = ""
 """ 上次游戏控制流程id """
-too_old_flow_id = ""
+too_old_flow_id: str = ""
 """ 上上次游戏控制流程id """
-course_data = {}
+course_data: dict = {}
 """ 各个年级各科目课时数据 """
-teacher_course_experience = {}
+teacher_course_experience: dict = {}
 """ 教师科目经验 """
-old_character_id = 0
+old_character_id: int = 0
 """ 离开场景面板前在场景中查看的角色id """
-total_number_of_people_of_all_ages = {}
+total_number_of_people_of_all_ages: Dict[str, int] = {}
 """ 各年龄段总人数 """
-total_bodyfat_by_age = {}
+total_bodyfat_by_age: dict = {}
 """ 各年龄段总体脂率 """
-average_bodyfat_by_age = {}
+average_bodyfat_by_age: dict = {}
 """ 各年龄段平均体脂率 """
-total_height_by_age = {}
+total_height_by_age: dict = {}
 """ 各年龄段总身高 """
-average_height_by_age = {}
+average_height_by_age: dict = {}
 """ 各年龄段平均身高 """
-stature_descrition_priorition_data = {}
+stature_descrition_priorition_data: dict = {}
 """ 身材描述文本权重数据 """
-text_wait = 0
+text_wait: int = 0
 """ 绘制文本输出等待时间 """
-map_data = {}
+map_data: dict = {}
 """ 游戏地图数据 """
-scene_data = {}
+scene_data: dict = {}
 """ 游戏场景数据 """
-now_map = []
+now_map: List[str] = []
 """ 查看地图时当前所查看的地图的坐标 """
-random_npc_list = []
+random_npc_list: List[game_type.NpcTem] = []
 """ 随机npc数据 """
-place_data = {}
+place_data: dict = {}
 """ 按房间类型分类的场景列表 """
-wear_item_type_data = {}
+wear_item_type_data: dict = {}
 """ 可穿戴道具类型数据 """
-course_time_status = {}
+course_time_status: dict = {}
 """ 当前上课时间状态 """
-talk_data = {}
+talk_data: dict = {}
 """ 所有的口上数据 """
+status_up_text: dict = {}
+""" 显示给玩家的角色状态变化文本 """
+behavior_tem_data: dict = {}
+""" 角色行为控制器数据 """

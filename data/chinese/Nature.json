@@ -42,7 +42,6 @@
   "BehaviorStyles":{
     "Name":"行事风格",
     "Factor":{
-      "Rigorous":{
         "Good":"严谨",
         "Bad":"松散"
       },

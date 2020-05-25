@@ -1,3 +1,7 @@
+from Script.Core import cache_contorl, constant
+
+
+@character_behavior.add_behavior("Student",constant.CharacterStatus.STATUS_ATTEND_CLASS)
 def attend_class(character_id: int):
     """
     上课行为执行

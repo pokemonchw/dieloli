@@ -155,6 +155,10 @@ class CharacterStatus:
     """ 休闲状态 """
     STATUS_MOVE = 1
     """ 移动状态 """
+    STATUS_REST = 2
+    """ 休息状态 """
+    STATUS_ATTEND_CLASS = 3
+    """ 上课状态 """
 
 
 class Behavior:
@@ -163,3 +167,8 @@ class Behavior:
     SHARE_BLANKLY = 0
     """ 发呆 """
     MOVE = 1
+    """ 移动 """
+    REST = 2
+    """ 休息 """
+    ATTEND_CLASS = 3
+    """ 上课 """

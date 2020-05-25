@@ -1,16 +1,12 @@
 from typing import List
 from Script.Design import talk, talk_cache
+from Script.Core import constant
 
 
-"""
-默认口上模板
-"""
-
-
-@talk.add_talk("default", "Rest")
+@talk.add_talk("default", constant.Behavior.REST)
 def talk_rest() -> List[str]:
     """
-    生成休息时口上
+    生成休息口上
     """
     if talk_cache.me == talk_cache.tg:
         return [
@@ -39,3 +35,19 @@ def talk_rest() -> List[str]:
             + "肩上小小的休息了一会儿"
         ]
     return ["与" + talk_cache.tg.name + "一起休息了一会儿"]
+
+
+@talk.add_talk("default",constant.Behavior.MOVE)
+def talk_move() -> List[str]:
+    """
+    生成移动时口上
+    """
+    if talk_cache.tg.position != talk_cache.me.position:
+        return [
+            talk_cache.tg.name + "来到了" + talk_cache.scene
+        ]
+    else:
+        return [
+            talk_cache.tg.name + "朝着" + talk_cache.scene + "离开了",
+            talk_cache.tg.name + "去了" + talk_cache.scene
+        ]

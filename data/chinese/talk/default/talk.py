@@ -1,6 +1,0 @@
-Name = ""
-""" 玩家名字 """
-TargetName = ""
-""" 当前选中目标名字 """
-TargetMoveSceneName = ""
-""" 当前选中目标移动至的场景名字 """

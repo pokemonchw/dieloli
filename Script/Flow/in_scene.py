@@ -113,12 +113,9 @@ def see_scene_func(judge: bool):
                 yrn, scene_path_str
             )
         elif yrn in instruct_cmd:
-            talk.handle_instruct_talk(
+            handle_instruct.handle_instruct(
                 instruct_panel.instruct_id_cmd_data[int(yrn)]
             )
-            handle_instruct.handle_instruct_data[
-                instruct_panel.instruct_id_cmd_data[int(yrn)]
-            ]()
         elif (
             judge
             and yrn not in in_scene_cmd_list_2
