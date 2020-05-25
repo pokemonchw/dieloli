@@ -339,7 +339,7 @@ def judge_scene_affiliation(
     """
     if now_scene_path[:-1] != target_scene_path[:-1]:
         if now_scene_path[:-1] != target_scene_path:
-            if now_scene_path[:-1] != []:
+            if now_scene_path[:-1] != [] and target_scene_path[:-1] != []:
                 return judge_scene_affiliation(
                     now_scene_path[:-1], target_scene_path
                 )

@@ -14,7 +14,7 @@ def handle_instruct(instruct: str):
     instruct -- 指令id
     """
     if instruct in handle_instruct_data:
-        handle_instruct_data[instruct](instruct)
+        handle_instruct_data[instruct]()
 
 
 def add_instruct(instruct: str):

@@ -18,7 +18,8 @@ except:
 
 from Script.Design import start_flow
 from Script.Core import game_init
-import Script.Talk.default.default
+import Script.Talk
 import Script.Behavior
+import Script.Settle
 
 game_init.run(start_flow.start_frame)

@@ -1,1 +1,1 @@
-from Script.Behavior import *
+from Script.Behavior import default, student, teacher

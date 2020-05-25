@@ -8,9 +8,12 @@ def own_charcter_move(target_scene: list):
     Keyword arguments:
     target_scene -- 寻路目标场景(在地图系统下的绝对坐标)
     """
-    move_now, _, now_target_position, now_need_time = character_move(
-        0, target_scene
-    )
+    (
+        move_now,
+        now_path_list,
+        now_target_position,
+        now_need_time,
+    ) = character_move(0, target_scene)
     if move_now == "Null":
         null_message = text_loading.get_text_data(
             constant.FilePath.MESSAGE_PATH, "30"
@@ -146,6 +149,7 @@ def difference_map_move(
                 now_true_map, now_true_position
             )
             target_map_scene_id = "0"
+            common_map = now_scene_real_map
         return identical_map_move(
             character_id, common_map, now_map_scene_id, target_map_scene_id
         )

@@ -121,7 +121,7 @@ class Character:
         """ 角色所持金钱数据 """
         self.position: List[str] = ["0"]
         """ 角色当前坐标数据 """
-        self.classroom: List[str] = []
+        self.classroom: str = ""
         """ 角色所属班级坐标 """
         self.officeroom: List[str] = ["0"]
         """ 角色所属办公室坐标 """

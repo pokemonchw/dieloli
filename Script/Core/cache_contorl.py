@@ -100,3 +100,5 @@ status_up_text: dict = {}
 """ 显示给玩家的角色状态变化文本 """
 behavior_tem_data: dict = {}
 """ 角色行为控制器数据 """
+settle_behavior_data: dict = {}
+""" 角色行为结算处理器 """
