@@ -2,6 +2,7 @@ import math
 import random
 from Script.Core import text_loading, value_handle, cache_contorl, constant
 from Script.Core.game_type import Character
+from Script.Design import map_handle
 
 
 def init_phase_course_hour():
@@ -182,6 +183,8 @@ def init_teacher_table():
                     for now_teacher in cache_contorl.course_data[
                         "ClassTeacher"
                     ]["Classroom_" + str(phase + 1)][classroom][now_course]:
+                        if now_teacher not in teacher_table:
+                            cache_contorl.character_data[now_teacher].officeroom = map_handle.get_map_system_path_str_for_list(cache_contorl.place_data["Office_"+str(phase+1)])
                         teacher_table.setdefault(now_teacher, 0)
                         if teacher_table[now_teacher] < 14:
                             teacher_table[now_teacher] += 1

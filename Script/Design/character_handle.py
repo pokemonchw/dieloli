@@ -110,6 +110,11 @@ def init_character(character_id: int, character_tem: game_type.NpcTem):
         now_character.age = attr_calculation.get_age(character_tem.Age)
     if character_tem.Weight != "":
         now_character.weigt_tem = character_tem.Weight
+    if character_tem.SexExperienceTem != "":
+        if character_tem.SexExperienceTem != "Rand":
+            now_character.sex_experience_tem = character_tem.SexExperienceTem
+        else:
+            now_character.sex_experience_tem = get_rand_npc_sex_experience_tem(now_character.age,now_character.sex)
     if character_tem.BodyFat:
         now_character.bodyfat_tem = character_tem.BodyFat
     else:
@@ -206,6 +211,7 @@ def create_random_npc(id) -> dict:
     random_npc_new_data.AdvNpc = 0
     random_npc_new_data.Weight = fat_tem
     random_npc_new_data.BodyFat = body_fat_tem
+    random_npc_new_data.SexExperienceTem = "Rand"
     if random_npc_sex in {"Woman": 1, "Futa": 1}:
         random_npc_new_data.Chest = attr_calculation.get_rand_npc_chest_tem()
     else:
@@ -250,7 +256,7 @@ def get_rand_npc_fat_tem(age_judge: str) -> str:
     return now_fat_tem
 
 
-def get_rand_npc_sexExperienceTem(age: int, sex: str) -> str:
+def get_rand_npc_sex_experience_tem(age: int, sex: str) -> str:
     """
     按年龄范围随机获取性经验模板
     Keyword arguments:

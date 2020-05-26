@@ -183,39 +183,39 @@
   },
   "SexExperienceTem":{
     "MouthExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "BosomExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "VaginaExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "ClitorisExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "AnusExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "PenisExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     }
   },

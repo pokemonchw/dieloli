@@ -853,7 +853,7 @@ def get_character_officeroom_path_text(character_id: int) -> str:
                 "MapName"
             ]
             map_path_text += map_name + "-"
-        map_path_text += cache_contorl.scene_data[dormitory]["SceneName"]
+        map_path_text += cache_contorl.scene_data[officeroom]["SceneName"]
     else:
         map_path_text += text_loading.get_text_data(
             constant.FilePath.STAGE_WORD_PATH, "150"

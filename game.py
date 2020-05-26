@@ -7,8 +7,8 @@ from Script.Core import game_data
 
 
 try:
-    options, _ = getopt.getopt(sys.argv[1:], "-d")
-    key, value = options[0]
+    options = getopt.getopt(sys.argv[1:], "-d")[0]
+    key = options[0][0]
     if key == "-d":
         game_data.init(1)
     else:

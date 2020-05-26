@@ -51,6 +51,8 @@ class NpcTem:
         """ 罩杯模板 """
         self.MotherTongue: str = ""
         """ 母语 """
+        self.SexExperienceTem:str = ""
+        """ 性经验模板 """
 
 
 class Character:
