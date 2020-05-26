@@ -766,7 +766,7 @@ def get_character_abbreviations_info(character_id: int) -> str:
     return abbreviations_info
 
 
-def get_character_dormitory_path_text(character_id: str) -> str:
+def get_character_dormitory_path_text(character_id: int) -> str:
     """
     获取角色宿舍路径描述信息
     Keyword arguments:
@@ -790,4 +790,72 @@ def get_character_dormitory_path_text(character_id: str) -> str:
         map_name = cache_contorl.map_data[now_map_map_system_str]["MapName"]
         map_path_text += map_name + "-"
     map_path_text += cache_contorl.scene_data[dormitory]["SceneName"]
+    return map_path_text
+
+
+def get_character_classroom_path_text(character_id: int) -> str:
+    """
+    获取角色教室路径描述信息
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    str -- 教室路径描述文本
+    """
+    classroom = cache_contorl.character_data[character_id].classroom
+    map_path_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "148"
+    )
+    if classroom != "":
+        classroom_path = map_handle.get_map_system_path_for_str(classroom)
+        map_list = map_handle.get_map_hierarchy_list_for_scene_path(
+            classroom_path, []
+        )
+        map_list.reverse()
+        for now_map in map_list:
+            now_map_map_system_str = map_handle.get_map_system_path_str_for_list(
+                now_map
+            )
+            map_name = cache_contorl.map_data[now_map_map_system_str][
+                "MapName"
+            ]
+            map_path_text += map_name + "-"
+        map_path_text += cache_contorl.scene_data[classroom]["SceneName"]
+    else:
+        map_path_text += text_loading.get_text_data(
+            constant.FilePath.STAGE_WORD_PATH, "150"
+        )
+    return map_path_text
+
+
+def get_character_officeroom_path_text(character_id: int) -> str:
+    """
+    获取角色教室路径描述信息
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    str -- 教室路径描述文本
+    """
+    officeroom = cache_contorl.character_data[character_id].officeroom
+    map_path_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "149"
+    )
+    if officeroom != "":
+        officeroom_path = map_handle.get_map_system_path_for_str(officeroom)
+        map_list = map_handle.get_map_hierarchy_list_for_scene_path(
+            officeroom_path, []
+        )
+        map_list.reverse()
+        for now_map in map_list:
+            now_map_map_system_str = map_handle.get_map_system_path_str_for_list(
+                now_map
+            )
+            map_name = cache_contorl.map_data[now_map_map_system_str][
+                "MapName"
+            ]
+            map_path_text += map_name + "-"
+        map_path_text += cache_contorl.scene_data[dormitory]["SceneName"]
+    else:
+        map_path_text += text_loading.get_text_data(
+            constant.FilePath.STAGE_WORD_PATH, "150"
+        )
     return map_path_text

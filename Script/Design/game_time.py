@@ -294,13 +294,15 @@ def get_now_time_slice(character_id: int) -> dict:
     character_age = character_data.age
     if character_age in range(7, 19):
         phase = character_age - 7
-        if phase <= 5:
-            return cache_contorl.course_time_status["PrimarySchool"]
-        elif phase <= 11:
-            return cache_contorl.course_time_status["JuniorMiddleSchool"]
-        return cache_contorl.course_time_status["SeniorHighSchool"]
+    elif character_id in cache_contorl.teacher_phase_table:
+        phase = cache_contorl.teacher_phase_table[character_id]
     else:
-        classroom_data = cache_contorl.scene_data[character_data.classroom]
+        phase = 12
+    if phase <= 5:
+        return cache_contorl.course_time_status["PrimarySchool"]
+    elif phase <= 11:
+        return cache_contorl.course_time_status["JuniorMiddleSchool"]
+    return cache_contorl.course_time_status["SeniorHighSchool"]
 
 
 def init_school_course_time_status():
@@ -313,6 +315,7 @@ def init_school_course_time_status():
         "JuniorMiddleSchool"
     ] = course_status.copy()
     cache_contorl.course_time_status["SeniorHighSchool"] = course_status.copy()
+    cache_contorl.teacher_phase_table = {}
     if cache_contorl.game_time["month"] in range(
         1, 7
     ) or cache_contorl.game_time["month"] in range(9, 13):
@@ -324,6 +327,35 @@ def init_school_course_time_status():
             cache_contorl.course_time_status[
                 "JuniorMiddleSchool"
             ] = judge_school_course_time("JuniorMiddleSchool")
+            if cache_contorl.course_time_status["JuniorMiddleSchool"][
+                "InCourse"
+            ]:
+                for teacher in cache_contorl.teacher_course_experience[
+                    list(cache_contorl.teacher_course_experience.keys())[0]
+                ].keys():
+                    for phase in range(6, 9):
+                        if (
+                            teacher
+                            in cache_contorl.teacher_class_time_table[
+                                now_week
+                            ][phase][
+                                cache_contorl.course_time_status[
+                                    "JuniorMiddleSchool"
+                                ]["CourseIndex"]
+                            ]
+                        ):
+                            cache_contorl.character_data[
+                                teacher
+                            ].classroom = cache_contorl.teacher_class_time_table[
+                                now_week
+                            ][
+                                phase
+                            ][
+                                cache_contorl.course_time_status[
+                                    "JuniorMiddleSchool"
+                                ]
+                            ]
+                            cache_contorl.teacher_phase_table[teacher] = phase
         else:
             cache_contorl.course_time_status[
                 "JuniorMiddleSchool"
@@ -332,10 +364,64 @@ def init_school_course_time_status():
             cache_contorl.course_time_status[
                 "PrimarySchool"
             ] = judge_school_course_time("PrimarySchool")
+            if cache_contorl.course_time_status["PrimarySchool"]["InCourse"]:
+                for teacher in cache_contorl.teacher_course_experience[
+                    list(cache_contorl.teacher_course_experience.keys())[0]
+                ].keys():
+                    for phase in range(6):
+                        if (
+                            teacher
+                            in cache_contorl.teacher_class_time_table[
+                                now_week
+                            ][phase][
+                                cache_contorl.course_time_status[
+                                    "PrimarySchool"
+                                ]["CourseIndex"]
+                            ]
+                        ):
+                            cache_contorl.character_data[
+                                teacher
+                            ].classroom = cache_contorl.teacher_class_time_table[
+                                now_week
+                            ][
+                                phase
+                            ][
+                                cache_contorl.course_time_status[
+                                    "PrimarySchool"
+                                ]
+                            ]
+                            cache_contorl.teacher_phase_table[teacher] = phase
         else:
             cache_contorl.course_time_status[
                 "PrimarySchool"
             ] = judge_holiday_time()
+        if cache_contorl.course_time_status["SeniorHighSchool"]["InCourse"]:
+            for teacher in cache_contorl.teacher_course_experience[
+                list(cache_contorl.teacher_course_experience.keys())[0]
+            ].keys():
+                for phase in range(9, 12):
+                    if (
+                        teacher
+                        in cache_contorl.teacher_class_time_table[now_week][
+                            phase
+                        ][
+                            cache_contorl.course_time_status[
+                                "SeniorHighSchool"
+                            ]["CourseIndex"]
+                        ]
+                    ):
+                        cache_contorl.character_data[
+                            teacher
+                        ].classroom = cache_contorl.teacher_class_time_table[
+                            now_week
+                        ][
+                            phase
+                        ][
+                            cache_contorl.course_time_status[
+                                "SeniorHighSchool"
+                            ]
+                        ]
+                        cache_contorl.teacher_phase_table[teacher] = phase
     else:
         cache_contorl.course_time_status[
             "PrimarySchool"
@@ -346,6 +432,11 @@ def init_school_course_time_status():
         cache_contorl.course_time_status[
             "SeniorHighSchool"
         ] = judge_holiday_time()
+    for teacher in cache_contorl.teacher_course_experience[
+        list(cache_contorl.teacher_course_experience.keys())[0]
+    ].keys():
+        if teacher not in cache_contorl.teacher_phase_table:
+            cache_contorl.character_data[teacher].classroom = ""
 
 
 def judge_school_course_time(school_id: str) -> dict:

@@ -123,10 +123,8 @@ class Character:
         """ 角色当前坐标数据 """
         self.classroom: str = ""
         """ 角色所属班级坐标 """
-        self.officeroom: List[str] = ["0"]
+        self.officeroom: List[str] = ""
         """ 角色所属办公室坐标 """
-        self.course_table: Dict[int, Dict[int, str]] = {}
-        """ 教室角色课程表数据 """
         self.knowledge: Dict[str, int] = {}
         """ 角色知识技能等级数据 """
         self.language: Dict[str, int] = {}

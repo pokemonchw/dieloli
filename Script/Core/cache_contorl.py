@@ -104,5 +104,10 @@ settle_behavior_data: dict = {}
 """ 角色行为结算处理器 """
 over_behavior_character: Dict[int, int] = {}
 """ 本次update中已结束结算的npc """
-teacher_class_time_table: Dict[str : Dict[int : Dict[int:int]]] = {}
-""" 各班级各老师上课时间表 """
+teacher_class_time_table: Dict[int, Dict[int, Dict[int, Dict[str, str]]]] = {}
+"""
+各班级各老师上课时间表
+周几:上课时间:教师id:教室id:科目
+"""
+teacher_phase_table: Dict[int, int] = {}
+""" 各老师所在年级 """

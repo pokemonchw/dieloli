@@ -73,8 +73,14 @@ def see_character_main_attr_panel(character_id: int):
     stature_text = attr_text.get_stature_text(character_id)
     era_print.line_feed_print(stature_text)
     era_print.restart_line_print(".")
-    era_print.line_feed_print(
-        attr_text.get_character_dormitory_path_text(character_id)
+    era_print.list_print(
+        [
+            attr_text.get_character_dormitory_path_text(character_id),
+            attr_text.get_character_classroom_path_text(character_id),
+            attr_text.get_character_officeroom_path_text(character_id),
+        ],
+        3,
+        "center",
     )
     era_print.little_line_print()
     character_species = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '15')}{character_data.species}"
