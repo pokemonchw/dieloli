@@ -134,7 +134,7 @@ def get_chest(chest_tem: str, birthday: dict):
     over_age = random.randint(14, 18)
     over_year = birthday["year"] + over_age
     end_date = game_time.get_rand_day_for_year(over_year).timetuple()
-    now_date = cache_contorl.game_time.copy()
+    now_date = cache_contorl.game_time
     now_date = game_time.game_time_to_time_tuple(now_date)
     start_date = game_time.game_time_to_time_tuple(birthday)
     end_day = game_time.count_day_for_time_tuple(start_date, end_date)

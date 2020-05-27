@@ -35,6 +35,8 @@ def settle_rest(character_id: int):
             character_data.mana_point - character_data.mana_point_max
         )
         character_data.mana_point = character_data.mana_point_max
+    character_data.status["BodyFeeling"]["Hunger"] += add_time * 0.02
+    character_data.status["BodyFeeling"]["Thirsty"] += add_time * 0.02
     cache_contorl.status_up_text.setdefault(character_id, {})
     cache_contorl.status_up_text[character_id]["HitPoint"] = add_hit_point
     cache_contorl.status_up_text[character_id]["ManaPoint"] = add_mana_point
@@ -69,3 +71,5 @@ def settle_move(character_id: int):
         character_data.behavior["MoveTarget"],
         character_id,
     )
+    character_data.status["BodyFeeling"]["Hunger"] += character_data.behavior["Duration"] * 0.02
+    character_data.status["BodyFeeling"]["Thirsty"] += character_data.behavior["Duration"] * 0.02

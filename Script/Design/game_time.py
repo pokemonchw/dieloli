@@ -276,10 +276,10 @@ def judge_date_big_or_small(time_a: dict, time_b: dict) -> int:
     """
     time_a = timetuple_to_datetime(game_time_to_time_tuple(time_a))
     time_b = timetuple_to_datetime(game_time_to_time_tuple(time_b))
-    if (time_a - time_b).seconds > 0:
+    if time_a == time_b:
         return 2
     else:
-        return (time_a - time_b).seconds < 0
+        return time_b < time_a
 
 
 def get_now_time_slice(character_id: int) -> dict:
@@ -329,7 +329,7 @@ def init_school_course_time_status():
             ] = judge_school_course_time("JuniorMiddleSchool")
             if cache_contorl.course_time_status["JuniorMiddleSchool"][
                 "InCourse"
-            ]:
+            ] and cache_contorl.course_time_status["JuniorMiddleSchool"]["CourseIndex"]:
                 for teacher in cache_contorl.teacher_course_experience[
                     list(cache_contorl.teacher_course_experience.keys())[0]
                 ].keys():
@@ -364,7 +364,7 @@ def init_school_course_time_status():
             cache_contorl.course_time_status[
                 "PrimarySchool"
             ] = judge_school_course_time("PrimarySchool")
-            if cache_contorl.course_time_status["PrimarySchool"]["InCourse"]:
+            if cache_contorl.course_time_status["PrimarySchool"]["InCourse"] and cache_contorl.course_time_status["PrimarySchool"]["CourseIndex"]:
                 for teacher in cache_contorl.teacher_course_experience[
                     list(cache_contorl.teacher_course_experience.keys())[0]
                 ].keys():
@@ -395,7 +395,7 @@ def init_school_course_time_status():
             cache_contorl.course_time_status[
                 "PrimarySchool"
             ] = judge_holiday_time()
-        if cache_contorl.course_time_status["SeniorHighSchool"]["InCourse"]:
+        if cache_contorl.course_time_status["SeniorHighSchool"]["InCourse"] and cache_contorl.course_time_status["SeniorHighSchool"]["CourseIndex"]:
             for teacher in cache_contorl.teacher_course_experience[
                 list(cache_contorl.teacher_course_experience.keys())[0]
             ].keys():

@@ -1,9 +1,11 @@
+import copy
 from Script.Core import cache_contorl, constant
 from Script.Design import (
     game_time,
     character_behavior,
     map_handle,
     character_move,
+    character
 )
 
 
@@ -19,11 +21,11 @@ def arder_behavior(character_id: int):
     character_data = cache_contorl.character_data[character_id]
     now_time_slice = game_time.get_now_time_slice(character_id)
     if now_time_slice["InCourse"]:
-        character_data.behavior["StartTime"] = cache_contorl.game_time
+        character.init_character_behavior_start_time(character_id)
         if character_data.position != map_handle.get_map_system_path_for_str(
             character_data.classroom
         ):
-            _, _, move_path, move_time = character_move(
+            _, _, move_path, move_time = character_move.character_move(
                 character_id,
                 map_handle.get_map_system_path_for_str(
                     character_data.classroom

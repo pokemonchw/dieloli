@@ -1,4 +1,4 @@
-from Script.Design import game_time, character_behavior, settle_behavior
+from Script.Design import game_time, character_behavior, settle_behavior, character
 from Script.Core import constant, cache_contorl
 
 
@@ -43,14 +43,13 @@ def rest_behavior(character_id: int) -> bool:
         settle_behavior.handle_settle_behavior(character_id)
         character_data.behavior["BehaviorId"] = constant.Behavior.SHARE_BLANKLY
         character_data.state = constant.CharacterStatus.STATUS_ARDER
-    else:
-        return 1
     if time_judge == 1:
         character_data.behavior["StartTime"] = end_time
     elif time_judge == 2:
-        character_data.behavior["StartTime"] = now_time
+        character.init_character_behavior_start_time(character_id)
         return 1
-    return 0
+    else:
+        return 1
 
 
 @character_behavior.add_behavior(
