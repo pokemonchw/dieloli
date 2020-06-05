@@ -155,7 +155,7 @@ class Character:
         """ 角色罩杯数据 """
         self.nature = {}
         """ 角色性格数据 """
-        self.status: Dict[str, int] = {}
+        self.status: Dict[str, Dict[str, int]] = {}
         """ 角色状态数据 """
         self.put_on: dict = {}
         """ 角色已穿戴服装数据 """

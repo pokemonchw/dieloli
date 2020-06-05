@@ -43,5 +43,13 @@ def arder_behavior(character_id: int):
             character_data.behavior["MoveTarget"] = []
             character_data.state = constant.CharacterStatus.STATUS_ATTEND_CLASS
     elif now_time_slice["TimeSlice"] == constant.TimeSlice.TIME_BREAKFAST:
-        pass
+        if character_data.status["BodyFeeling"]["Hunger"] > 16:
+            now_scene_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+            now_scene_data = cache_contorl.scene_data[now_scene_str]
+            if now_scene_data["SceneTag"] == "Cafeteria":
+                pass
+            elif now_scene_data["SceneTag"] == "Restaurant":
+                pass
+            else:
+                pass
     return 1
