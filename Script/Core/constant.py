@@ -47,6 +47,10 @@ class FilePath:
     """ 人格维度相关数据配置路径 """
     INSTRUCT_PATH = "Instruct"
     """ 指令显示需求数据配置路径 """
+    FOOD_PATH = "Food"
+    """ 食材配置路径 """
+    RECIPES_PATH = "Recipes"
+    """ 菜谱配置路径 """
 
 
 class WindowMenu:
