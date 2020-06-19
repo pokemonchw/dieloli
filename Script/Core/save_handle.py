@@ -55,6 +55,7 @@ def establish_save(save_id: str):
     )
     total_height_by_age = cache_contorl.total_height_by_age
     average_height_by_age = cache_contorl.average_height_by_age
+    recipe_data = cache_contorl.recipe_data
     save_verson = {
         "game_verson": game_verson,
         "game_time": game_time,
@@ -73,6 +74,7 @@ def establish_save(save_id: str):
         "9": total_number_of_people_of_all_ages,
         "10": total_height_by_age,
         "11": average_height_by_age,
+        "12":recipe_data,
     }
     for data_id in data:
         write_save_data(save_id, data_id, data[data_id])
@@ -114,7 +116,7 @@ def load_save(save_id: str) -> dict:
     """
     save_path = get_save_dir_path(save_id)
     data = {}
-    file_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
+    file_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11","12"]
     for file_name in file_list:
         file_path = os.path.join(save_path, file_name)
         with open(file_path, "rb") as f:
@@ -141,6 +143,7 @@ def input_load_save(save_id: str):
     cache_contorl.total_number_of_people_of_all_ages = save_data["9"]
     cache_contorl.total_height_by_age = save_data["10"]
     cache_contorl.average_height_by_age = save_data["11"]
+    cache_contorl.recipe_data = save_data["12"]
     character_handle.init_character_position()
 
 

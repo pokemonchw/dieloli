@@ -169,3 +169,35 @@ class Character:
         """ 角色社交关系数据 """
         self.occupation: str = ""
         """ 角色职业ID """
+
+class Food:
+    """ 食物数据结构体 """
+
+    def __init__(self):
+        self.id: str = ""
+        """ 食物配置表id """
+        self.quality: int = 0
+        """ 食物品质 """
+        self.weight: int = 0
+        """ 食物重量 """
+        self.feel: dict = {}
+        """ 食物效果 """
+        self.maker: str = ""
+        """ 食物制作者 """
+        self.recipe:int = -1
+        """ 食谱id """
+
+class Recipes:
+    """ 菜谱数据结构体 """
+
+    def __init__(self):
+        self.name:str = ""
+        """ 菜谱名字 """
+        self.time:int = 0
+        """ 标准烹饪时间 """
+        self.base:list = []
+        """ 烹饪所使用的主食材 """
+        self.ingredients: list = []
+        """ 烹饪所使用的辅食材 """
+        self.seasoning:list = []
+        """ 烹饪所使用的调料 """

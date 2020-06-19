@@ -625,5 +625,13 @@
       "Hunger":5.31,
       "Thirsty":0.07
     }
+  },
+  "KitchenWaste":{
+    "Name":"厨余",
+    "Cook":0,
+    "Eat":0,
+    "Seasoning":0,
+    "Feel":{
+    }
   }
 }
