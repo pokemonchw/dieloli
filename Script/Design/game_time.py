@@ -327,9 +327,14 @@ def init_school_course_time_status():
             cache_contorl.course_time_status[
                 "JuniorMiddleSchool"
             ] = judge_school_course_time("JuniorMiddleSchool")
-            if cache_contorl.course_time_status["JuniorMiddleSchool"][
-                "InCourse"
-            ] and cache_contorl.course_time_status["JuniorMiddleSchool"]["CourseIndex"]:
+            if (
+                cache_contorl.course_time_status["JuniorMiddleSchool"][
+                    "InCourse"
+                ]
+                and cache_contorl.course_time_status["JuniorMiddleSchool"][
+                    "CourseIndex"
+                ]
+            ):
                 for teacher in cache_contorl.teacher_course_experience[
                     list(cache_contorl.teacher_course_experience.keys())[0]
                 ].keys():
@@ -364,7 +369,12 @@ def init_school_course_time_status():
             cache_contorl.course_time_status[
                 "PrimarySchool"
             ] = judge_school_course_time("PrimarySchool")
-            if cache_contorl.course_time_status["PrimarySchool"]["InCourse"] and cache_contorl.course_time_status["PrimarySchool"]["CourseIndex"]:
+            if (
+                cache_contorl.course_time_status["PrimarySchool"]["InCourse"]
+                and cache_contorl.course_time_status["PrimarySchool"][
+                    "CourseIndex"
+                ]
+            ):
                 for teacher in cache_contorl.teacher_course_experience[
                     list(cache_contorl.teacher_course_experience.keys())[0]
                 ].keys():
@@ -395,7 +405,12 @@ def init_school_course_time_status():
             cache_contorl.course_time_status[
                 "PrimarySchool"
             ] = judge_holiday_time()
-        if cache_contorl.course_time_status["SeniorHighSchool"]["InCourse"] and cache_contorl.course_time_status["SeniorHighSchool"]["CourseIndex"]:
+        if (
+            cache_contorl.course_time_status["SeniorHighSchool"]["InCourse"]
+            and cache_contorl.course_time_status["SeniorHighSchool"][
+                "CourseIndex"
+            ]
+        ):
             for teacher in cache_contorl.teacher_course_experience[
                 list(cache_contorl.teacher_course_experience.keys())[0]
             ].keys():

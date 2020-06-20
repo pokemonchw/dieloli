@@ -6,7 +6,7 @@ from Script.Design import (
     character_behavior,
     character_move,
     map_handle,
-    character
+    character,
 )
 
 

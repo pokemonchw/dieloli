@@ -71,5 +71,9 @@ def settle_move(character_id: int):
         character_data.behavior["MoveTarget"],
         character_id,
     )
-    character_data.status["BodyFeeling"]["Hunger"] += character_data.behavior["Duration"] * 0.02
-    character_data.status["BodyFeeling"]["Thirsty"] += character_data.behavior["Duration"] * 0.02
+    character_data.status["BodyFeeling"]["Hunger"] += (
+        character_data.behavior["Duration"] * 0.02
+    )
+    character_data.status["BodyFeeling"]["Thirsty"] += (
+        character_data.behavior["Duration"] * 0.02
+    )

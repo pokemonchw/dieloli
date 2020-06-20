@@ -1,6 +1,6 @@
 from functools import wraps
 from Script.Core import text_loading, era_print, constant, cache_contorl
-from Script.Design import game_time, update,character
+from Script.Design import game_time, update, character
 
 
 handle_instruct_data = {}
@@ -73,7 +73,9 @@ def handle_rest():
         == constant.Behavior.SHARE_BLANKLY
     ):
         target_character.state = constant.CharacterStatus.STATUS_REST
-        character.init_character_behavior_start_time(cache_contorl.now_character_id)
+        character.init_character_behavior_start_time(
+            cache_contorl.now_character_id
+        )
         target_character.behavior["Duration"] = 10
         target_character.behavior["BehaviorId"] = constant.Behavior.REST
     update.game_update_flow()

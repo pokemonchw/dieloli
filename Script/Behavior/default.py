@@ -1,4 +1,9 @@
-from Script.Design import game_time, character_behavior, settle_behavior, character
+from Script.Design import (
+    game_time,
+    character_behavior,
+    settle_behavior,
+    character,
+)
 from Script.Core import constant, cache_contorl
 
 

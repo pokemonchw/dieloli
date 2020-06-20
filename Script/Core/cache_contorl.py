@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING, List, Dict
+from uuid import UUID
 from Script.Core import game_type
 
 
@@ -111,7 +112,10 @@ teacher_class_time_table: Dict[int, Dict[int, Dict[int, Dict[str, str]]]] = {}
 """
 teacher_phase_table: Dict[int, int] = {}
 """ 各老师所在年级 """
-recipe_data: Dict[int,game_type.Recipes] = {}
+recipe_data: Dict[int, game_type.Recipes] = {}
 """ 菜谱数据 """
-restaurant_data:Dict[str,List[game_type.Food]] = {}
-""" 食堂内贩卖的食物数据 """
+restaurant_data: Dict[str, Dict[UUID, game_type.Food]] = {}
+"""
+食堂内贩卖的食物数据
+食物名字:食物唯一id:食物对象
+"""

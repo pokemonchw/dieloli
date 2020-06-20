@@ -39,7 +39,7 @@ def init_character_list():
     for now_id, now_npc_data in zip(id_list, npc_data_iter):
         init_character(now_id, now_npc_data)
     t2 = time.time()
-    print(t2-t1)
+    print(t2 - t1)
     index_character_average_value()
     calculate_the_average_value_of_each_attribute_of_each_age_group()
 
@@ -118,7 +118,9 @@ def init_character(character_id: int, character_tem: game_type.NpcTem):
         if character_tem.SexExperienceTem != "Rand":
             now_character.sex_experience_tem = character_tem.SexExperienceTem
         else:
-            now_character.sex_experience_tem = get_rand_npc_sex_experience_tem(now_character.age,now_character.sex)
+            now_character.sex_experience_tem = get_rand_npc_sex_experience_tem(
+                now_character.age, now_character.sex
+            )
     if character_tem.BodyFat:
         now_character.bodyfat_tem = character_tem.BodyFat
     else:

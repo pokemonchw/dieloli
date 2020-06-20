@@ -154,15 +154,25 @@ def put_on_clothing(character_data: game_type.Character):
     character_data.put_on = collocation_data[collocation_id]
 
 
-def init_character_behavior_start_time(character_id:int):
+def init_character_behavior_start_time(character_id: int):
     """
     将角色的行动开始时间同步为当前游戏时间
     Keyword arguments:
     character_id -- 角色id
     """
     character_data = cache_contorl.character_data[character_id]
-    character_data.behavior["StartTime"]["year"] = cache_contorl.game_time["year"]
-    character_data.behavior["StartTime"]["month"] = cache_contorl.game_time["month"]
-    character_data.behavior["StartTime"]["day"] = cache_contorl.game_time["day"]
-    character_data.behavior["StartTime"]["hour"] = cache_contorl.game_time["hour"]
-    character_data.behavior["StartTime"]["minute"] = cache_contorl.game_time["minute"]
+    character_data.behavior["StartTime"]["year"] = cache_contorl.game_time[
+        "year"
+    ]
+    character_data.behavior["StartTime"]["month"] = cache_contorl.game_time[
+        "month"
+    ]
+    character_data.behavior["StartTime"]["day"] = cache_contorl.game_time[
+        "day"
+    ]
+    character_data.behavior["StartTime"]["hour"] = cache_contorl.game_time[
+        "hour"
+    ]
+    character_data.behavior["StartTime"]["minute"] = cache_contorl.game_time[
+        "minute"
+    ]

@@ -1,3 +1,4 @@
+from uuid import UUID
 from typing import List, Dict
 
 
@@ -51,7 +52,7 @@ class NpcTem:
         """ 罩杯模板 """
         self.MotherTongue: str = ""
         """ 母语 """
-        self.SexExperienceTem:str = ""
+        self.SexExperienceTem: str = ""
         """ 性经验模板 """
 
 
@@ -170,12 +171,15 @@ class Character:
         self.occupation: str = ""
         """ 角色职业ID """
 
+
 class Food:
     """ 食物数据结构体 """
 
     def __init__(self):
         self.id: str = ""
         """ 食物配置表id """
+        self.uid: UUID = None
+        """ 食物对象的唯一id """
         self.quality: int = 0
         """ 食物品质 """
         self.weight: int = 0
@@ -184,20 +188,21 @@ class Food:
         """ 食物效果 """
         self.maker: str = ""
         """ 食物制作者 """
-        self.recipe:int = -1
+        self.recipe: int = -1
         """ 食谱id """
+
 
 class Recipes:
     """ 菜谱数据结构体 """
 
     def __init__(self):
-        self.name:str = ""
+        self.name: str = ""
         """ 菜谱名字 """
-        self.time:int = 0
+        self.time: int = 0
         """ 标准烹饪时间 """
-        self.base:list = []
+        self.base: list = []
         """ 烹饪所使用的主食材 """
         self.ingredients: list = []
         """ 烹饪所使用的辅食材 """
-        self.seasoning:list = []
+        self.seasoning: list = []
         """ 烹饪所使用的调料 """
