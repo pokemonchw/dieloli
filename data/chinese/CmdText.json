@@ -37,7 +37,10 @@
       "Gossip":"闲聊",
       "Praise":"夸赞",
       "Vilify":"辱骂",
-      "Deception":"欺骗"
+      "Deception":"欺骗",
+      "Eat":"饮食",
+      "Buy":"购物",
+      "BuyFood":"购买食物"
     },
     "Active":{
       "StrokeHead":"摸头",

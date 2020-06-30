@@ -185,4 +185,7 @@ def judge_instract_available(instract: str) -> bool:
             != cache_contorl.character_data[0].occupation
         ):
             return 0
+    if "Food" in config_data:
+        if not len(cache_contorl.character_data[0].food_bag):
+            return 0
     return 1

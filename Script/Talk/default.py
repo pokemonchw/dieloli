@@ -43,9 +43,26 @@ def talk_move() -> List[str]:
     生成移动时口上
     """
     if talk_cache.tg.position != talk_cache.me.position:
-        return [talk_cache.tg.name + "来到了" + talk_cache.scene]
+        return [
+            talk_cache.tg.name + "来到了" + talk_cache.scene,
+            talk_cache.tg.name + "走了过来"
+        ]
     else:
         return [
             talk_cache.tg.name + "朝着" + talk_cache.scene + "离开了",
             talk_cache.tg.name + "去了" + talk_cache.scene,
+            talk_cache.tg.name + "走向了" + talk_cache.scene,
+        ]
+
+
+@talk.add_talk("default",constant.Behavior.EAT)
+def talk_eat() -> List[str]:
+    if talk_cache.me == talk_cache.tg:
+        return [
+            talk_cache.me.nick_name + "吃掉了" + talk_cache.tg_eat,
+            talk_cache.me.nick_name + "将" + talk_cache.tg_eat + "吃掉了",
+        ]
+    else:
+        return [
+            talk_cache.tg.name + "吃掉了" + talk_cache.tg_eat
         ]

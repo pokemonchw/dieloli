@@ -1,4 +1,5 @@
 import copy
+import random
 from Script.Core import cache_contorl, constant
 from Script.Design import (
     game_time,
@@ -25,23 +26,9 @@ def arder_behavior(character_id: int):
         if character_data.position != map_handle.get_map_system_path_for_str(
             character_data.classroom
         ):
-            _, _, move_path, move_time = character_move.character_move(
-                character_id,
-                map_handle.get_map_system_path_for_str(
-                    character_data.classroom
-                ),
-            )
-            character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
-            character_data.behavior["MoveTarget"] = move_path
-            character_data.behavior["Duration"] = move_time
-            character_data.state = constant.CharacterStatus.STATUS_MOVE
+            character.character_move_to_classroom(character_id)
         else:
-            character_data.behavior[
-                "BehaviorId"
-            ] = constant.Behavior.ATTEND_CLASS
-            character_data.behavior["Duration"] = now_time_slice["EndCourse"]
-            character_data.behavior["MoveTarget"] = []
-            character_data.state = constant.CharacterStatus.STATUS_ATTEND_CLASS
+            character.character_attend_class(character_id)
     elif now_time_slice["TimeSlice"] == constant.TimeSlice.TIME_BREAKFAST:
         if character_data.status["BodyFeeling"]["Hunger"] > 16:
             now_scene_str = map_handle.get_map_system_path_str_for_list(
@@ -49,9 +36,33 @@ def arder_behavior(character_id: int):
             )
             now_scene_data = cache_contorl.scene_data[now_scene_str]
             if now_scene_data["SceneTag"] == "Cafeteria":
-                pass
-            elif now_scene_data["SceneTag"] == "Restaurant":
-                pass
+                if not len(character_data.food_bag):
+                    character.character_buy_rand_food_at_restaurant(character_id)
+                else:
+                    character.character_move_to_rand_restaurant(character_id)
+            elif not len(character_data.food_bag):
+                if now_time_slice["ToCourse"] >= 13:
+                    character.character_move_to_rand_cafeteria(character_id)
+                else:
+                    if now_scene_str == character_data.classroom:
+                        character.character_rest_to_time(character_id,now_time_slice["ToCourse"])
+                    else:
+                        character.character_move_to_classroom(character_id)
             else:
-                pass
+                if now_time_slice["ToCourse"] >= 13:
+                    if now_scene_data["SceneTag"] == "Restaurant":
+                        character.character_eat_rand_food(character_id)
+                    else:
+                        character.character_move_to_rand_restaurant(character_id)
+                else:
+                    if now_scene_str == character_data.classroom:
+                        character.character_rest_to_time(character_id,now_time_slice["ToCourse"])
+                    else:
+                        character.character_move_to_classroom(character_id)
+        else:
+            if now_time_slice["ToCourse"] <= 13:
+                if now_scene_str == character_data.classroom:
+                    character.character_rest_to_time(character_id,now_time_slice["ToCourse"])
+                else:
+                    character.character_move_to_classroom(character_id)
     return 1

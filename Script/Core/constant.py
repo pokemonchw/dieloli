@@ -163,6 +163,8 @@ class CharacterStatus:
     """ 休息状态 """
     STATUS_ATTEND_CLASS = 3
     """ 上课状态 """
+    STATUS_EAT = 4
+    """ 进食状态 """
 
 
 class Behavior:
@@ -176,3 +178,5 @@ class Behavior:
     """ 休息 """
     ATTEND_CLASS = 3
     """ 上课 """
+    EAT = 4
+    """ 进食 """

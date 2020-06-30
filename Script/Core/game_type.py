@@ -118,6 +118,7 @@ class Character:
             "Duration": 0,
             "BehaviorId": 0,
             "MoveTarget": [],
+            "EatFood":None
         }
         """ 角色当前行为状态数据 """
         self.gold: int = 0
@@ -170,6 +171,8 @@ class Character:
         """ 角色社交关系数据 """
         self.occupation: str = ""
         """ 角色职业ID """
+        self.food_bag: Dict[UUID,Food] = {}
+        """ 角色持有的食物数据 """
 
 
 class Food:
@@ -190,6 +193,12 @@ class Food:
         """ 食物制作者 """
         self.recipe: int = -1
         """ 食谱id """
+        self.cook: bool = False
+        """ 可烹饪 """
+        self.eat: bool = False
+        """ 可食用 """
+        self.seasoning: bool = False
+        """ 可作为调料 """
 
 
 class Recipes:

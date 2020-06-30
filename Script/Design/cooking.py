@@ -75,8 +75,14 @@ def create_food(
         for feel in food_config["Feel"]:
             food.feel.setdefault(feel, 0)
             food.feel[feel] += food_config["Feel"][feel] / 100 * food.weight
+        food.cook = food_config["Cook"]
+        food.eat = food_config["Eat"]
+        food.seasoning = food_config["Seasoning"]
     else:
         food.feel = food_feel
+        food.eat = 1
+        food.cook = 0
+        food.seasoning = 0
     food.maker = food_maker
     food.recipe = food_recipe
     return food
@@ -120,7 +126,7 @@ def cook(
     feel_data = {}
     quality_data = text_loading.get_text_data(
         constant.FilePath.ATTR_TEMPLATE_PATH, "FoodQualityWeight"
-    )[cook_level]
+    )[str(cook_level)]
     now_quality = int(value_handle.get_random_for_weight(quality_data))
     now_weight = 0
     for food in recipe.base:
@@ -203,7 +209,8 @@ def init_restaurant_data():
             ):
                 food_judge = False
                 break
-            now_food_id = cache_contorl.restaurant_data[food_id].keys()[0]
+            food_id_list = list(cache_contorl.restaurant_data[food_id].keys())
+            now_food_id = food_id_list[0]
             now_food = cache_contorl.restaurant_data[food_id][now_food_id]
             food_list[now_food.id] = now_food
         if not food_judge:
@@ -214,7 +221,8 @@ def init_restaurant_data():
             ):
                 food_judge = False
                 break
-            now_food_id = cache_contorl.restaurant_data[food_id].keys()[0]
+            food_id_list = list(cache_contorl.restaurant_data[food_id].keys())
+            now_food_id = food_id_list[0]
             now_food = cache_contorl.restaurant_data[food_id][now_food_id]
             food_list[now_food.id] = now_food
         if not food_judge:
@@ -225,7 +233,8 @@ def init_restaurant_data():
             ):
                 food_judge = False
                 break
-            now_food_id = cache_contorl.restaurant_data[food_id].keys()[0]
+            food_id_list = list(cache_contorl.restaurant_data[food_id].keys())
+            now_food_id = food_id_list[0]
             now_food = cache_contorl.restaurant_data[food_id][now_food_id]
             food_list[now_food.id] = now_food
         if not food_judge:

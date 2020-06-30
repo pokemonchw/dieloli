@@ -172,5 +172,14 @@
   },
   "Sleep":{
     "TimeSlice":6
+  },
+  "Eat":{
+    "Food":true
+  },
+  "Buy":{
+    "SceneTag":"Shop"
+  },
+  "BuyFood":{
+    "SceneTag":"Cafeteria"
   }
 }

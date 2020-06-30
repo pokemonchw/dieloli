@@ -5,7 +5,7 @@ from Script.Design import (
     game_time,
     map_handle,
 )
-from Script.Core import constant, cache_contorl
+from Script.Core import constant, cache_contorl,game_type
 
 
 @settle_behavior.add_settle_behavior(constant.Behavior.REST)
@@ -41,6 +41,14 @@ def settle_rest(character_id: int):
     cache_contorl.status_up_text[character_id]["HitPoint"] = add_hit_point
     cache_contorl.status_up_text[character_id]["ManaPoint"] = add_mana_point
     if character_id == cache_contorl.now_character_id and character_id:
+        talk_cache.tg = character_data
+        talk_cache.me = cache_contorl.character_data[0]
+        scene_path_str = map_handle.get_map_system_path_str_for_list(
+            character_data.behavior["MoveTarget"]
+        )
+        scene_data = cache_contorl.scene_data[scene_path_str]
+        talk_cache.scene = scene_data["SceneName"]
+        talk_cache.scene_tag = scene_data["SceneTag"]
         talk.handle_talk(constant.Behavior.REST)
 
 
@@ -77,3 +85,36 @@ def settle_move(character_id: int):
     character_data.status["BodyFeeling"]["Thirsty"] += (
         character_data.behavior["Duration"] * 0.02
     )
+
+
+@settle_behavior.add_settle_behavior(constant.Behavior.EAT)
+def settle_eat(character_id: int):
+    """
+    结算角色进食行为
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data = cache_contorl.character_data[character_id]
+    if character_data.behavior["EatFood"] != None:
+        food:game_type.Food = character_data.behavior["EatFood"]
+        for feel in food.feel:
+            if feel in character_data.status["BodyFeeling"]:
+                if feel in ("Hunger","Thirsty"):
+                    character_data.status["BodyFeeling"][feel] -= food.feel[feel]
+                else:
+                    character_data.status["BodyFeeling"][feel] += food.feel[feel]
+            elif feel in character_data.status["SexFeel"]:
+                character_data.status["SexFeel"][feel] += food.feel[feel]
+            elif feel in character_data.status["PsychologicalFeeling"]:
+                character_data.status["PsychologicalFeeling"][feel] += food.feel[feel]
+        if character_id == cache_contorl.now_character_id:
+            talk_cache.tg = character_data
+            talk_cache.me = cache_contorl.character_data[0]
+            scene_path_str = map_handle.get_map_system_path_str_for_list(
+                character_data.behavior["MoveTarget"]
+            )
+            scene_data = cache_contorl.scene_data[scene_path_str]
+            talk_cache.scene = scene_data["SceneName"]
+            talk_cache.scene_tag = scene_data["SceneTag"]
+            talk.handle_talk(constant.Behavior.EAT)
+        del character_data.food_bag[food.id]
