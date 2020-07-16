@@ -129,6 +129,8 @@ class CmdMenu:
     """ 操作指令菜单 """
     BUY_FOOD_HEAD_PANEL = "buyFoodHeadPanel"
     """ 购买食物商店顶部面板 """
+    BUY_FOOD_NOW_PANEL = "buyFoodNowPanel"
+    """ 购买食物确认面板 """
 
 
 class TimeSlice:

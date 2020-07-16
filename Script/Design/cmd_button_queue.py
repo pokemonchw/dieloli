@@ -11,7 +11,7 @@ from Script.Core import (
 
 
 def option_int(
-    cmd_list: list,
+    cmd_list: str,
     cmd_column=1,
     id_size="left",
     id_switch=True,

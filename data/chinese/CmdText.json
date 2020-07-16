@@ -113,5 +113,6 @@
       "Sleep":"睡觉"
     }
   },
-  "buyFoodHeadPanel":{"StapleFood":"主食","Snacks":"零食","Drink":"饮品","Fruit":"水果","FoodIngredients":"食材","Seasoning":"调料"}
+  "buyFoodHeadPanel":{"StapleFood":"主食","Snacks":"零食","Drink":"饮品","Fruit":"水果","FoodIngredients":"食材","Seasoning":"调料"},
+  "buyFoodNowPanel":["买整份","买100克","取消"]
 }

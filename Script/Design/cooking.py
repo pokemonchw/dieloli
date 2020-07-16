@@ -89,6 +89,34 @@ def create_food(
     return food
 
 
+def separate_weight_food(old_food:Food,weight:int) -> Food:
+    """
+    从指定食物中分离出指定重量的食物并创建新食物对象
+    Keyword arguments:
+    old_food -- 原本的食物对象
+    Return arguments:
+    Food -- 分离得到的食物对象
+    """
+    new_food = Food()
+    if old_food.weight < weight:
+        weight = old_food.weight
+    new_food.cook = old_food.cook
+    new_food.eat = old_food.eat
+    new_food.fruit = old_food.fruit
+    new_food.id = old_food.id
+    new_food.uid = uuid.uuid4()
+    new_food.maker = old_food.maker
+    new_food.quality = old_food.quality
+    new_food.recipe = old_food.recipe
+    new_food.seasoning = old_food.seasoning
+    new_food.weight = weight
+    for feel in old_food.feel:
+        now_feel_num = old_food.feel[feel] / old_food.weight * weight
+        new_food.feel[feel] = now_feel_num
+        old_food.feel[feel] -= now_feel_num
+    return new_food
+
+
 def create_rand_food(food_id: str, food_weight=-1, food_quality=-1) -> Food:
     """
     创建随机食材
@@ -177,9 +205,9 @@ def cook(
             break
         for feel in now_food.feel:
             feel_data.setdefault(feel, 0)
-            feel_data[feel] += (
-                now_food.feel[feel] / now_food.weight * rand_weight
-            )
+            now_feel_num = now_food.feel[feel] / now_food.weight * rand_weight
+            feel_data[feel] += now_feel_num
+            now_food.feel[feel] -= now_feel_num
         now_food.weight -= rand_weight
         now_weight += rand_weight
     if not cook_judge:
@@ -256,32 +284,26 @@ def init_restaurant_data():
             break
 
 
-def get_restaurant_food_list_buy_food_type(food_type: str) -> list:
+def get_restaurant_food_type_list_buy_food_type(food_type: str) -> dict:
     """
     获取餐馆内指定类型的食物列表
     Keyword arguments:
     food_type -- 食物类型
     Return arguments:
-    list -- 食物列表
+    dict -- 食物列表 食物id:食物名字
     """
-    food_list = []
+    food_list = {}
     for food_id in cache_contorl.restaurant_data:
         if food_type == "StapleFood":
             if isinstance(food_id, int):
-                for food_uid in cache_contorl.restaurant_data[food_id]:
-                    food_list.append(
-                        cache_contorl.restaurant_data[food_id][food_uid]
-                    )
+                food_list[food_id] = cache_contorl.recipe_data[food_id].name
         elif food_type == "Snacks":
             if isinstance(food_id, str):
                 food_config = text_loading.get_text_data(
                     constant.FilePath.FOOD_PATH, food_id
                 )
                 if food_config["Eat"]:
-                    for food_uid in cache_contorl.restaurant_data[food_id]:
-                        food_list.append(
-                            cache_contorl.restaurant_data[food_id][food_uid]
-                        )
+                    food_list[food_id] = food_config["Name"]
         elif food_type == "Drink":
             if isinstance(food_id, str):
                 food_config = text_loading.get_text_data(
@@ -291,11 +313,9 @@ def get_restaurant_food_list_buy_food_type(food_type: str) -> list:
                     "Thirsty" in food_config["Feel"]
                     and not food_config["Fruit"]
                     and food_config["Eat"]
+                    and ("Hunger" not in food_config["Feel"] or food_config["Feel"]["Thirsty"] > food_config["Feel"]["Hunger"])
                 ):
-                    for food_uid in cache_contorl.restaurant_data[food_id]:
-                        food_list.append(
-                            cache_contorl.restaurant_data[food_id][food_uid]
-                        )
+                    food_list[food_id] = food_config["Name"]
             else:
                 now_food_uid = list(
                     cache_contorl.restaurant_data[food_id].keys()
@@ -305,38 +325,26 @@ def get_restaurant_food_list_buy_food_type(food_type: str) -> list:
                     "Hunger" not in now_food.feel
                     or now_food.feel["Thirsty"] > now_food.feel["Hunger"]
                 ):
-                    for food_uid in cache_contorl.restaurant_data[food_id]:
-                        food_list.append(
-                            cache_contorl.restaurant_data[food_id][food_uid]
-                        )
+                    food_list[food_id] = cache_contorl.recipe_data[food_id].name
         elif food_type == "Fruit":
             if isinstance(food_id, str):
                 food_config = text_loading.get_text_data(
                     constant.FilePath.FOOD_PATH, food_id
                 )
                 if food_config["Fruit"]:
-                    for food_uid in cache_contorl.restaurant_data[food_id]:
-                        food_list.append(
-                            cache_contorl.restaurant_data[food_id][food_uid]
-                        )
+                    food_list[food_id] = food_config["Name"]
         elif food_type == "FoodIngredients":
             if isinstance(food_id, str):
                 food_config = text_loading.get_text_data(
                     constant.FilePath.FOOD_PATH, food_id
                 )
                 if food_config["Cook"]:
-                    for food_uid in cache_contorl.restaurant_data[food_id]:
-                        food_list.append(
-                            cache_contorl.restaurant_data[food_id][food_uid]
-                        )
+                    food_list[food_id] = food_config["Name"]
         elif food_type == "Seasoning":
             if isinstance(food_id, str):
                 food_config = text_loading.get_text_data(
                     constant.FilePath.FOOD_PATH, food_id
                 )
                 if food_config["Seasoning"]:
-                    for food_uid in cache_contorl.restaurant_data[food_id]:
-                        food_list.append(
-                            cache_contorl.restaurant_data[food_id][food_uid]
-                        )
+                    food_list[food_id] = food_config["Name"]
     return food_list
