@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-from collections import Callable
 from Script.Core import (
     game_data,
     flow_handle,
@@ -17,7 +16,7 @@ NO_EVENT_FUNC = "no_event_func"
 _main_flow = None
 
 
-def init(main_flow: Callable):
+def init(main_flow: object):
     """
     游戏流程初始化
     Keyword argument:
@@ -57,7 +56,7 @@ def init(main_flow: Callable):
     run_main_flow()
 
 
-def run(main_func: Callable):
+def run(main_func: object):
     """
     执行游戏主流程
     Keyword arguments:

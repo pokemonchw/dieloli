@@ -47,7 +47,7 @@ def create_food(
     food_id: str,
     food_quality: int,
     food_weight: int,
-    food_feel: {},
+    food_feel={},
     food_maker="",
     food_recipe=-1,
 ) -> Food:
@@ -78,6 +78,7 @@ def create_food(
         food.cook = food_config["Cook"]
         food.eat = food_config["Eat"]
         food.seasoning = food_config["Seasoning"]
+        food.fruit = food_config["Fruit"]
     else:
         food.feel = food_feel
         food.eat = 1
@@ -101,11 +102,11 @@ def create_rand_food(food_id: str, food_weight=-1, food_quality=-1) -> Food:
     if food_weight == -1:
         food_weight = random.randint(1, 1000000)
     if food_quality == -1:
-        food_quality = random.randint(1, 5)
+        food_quality = random.randint(0, 4)
     food_data = text_loading.get_game_data(constant.FilePath.FOOD_PATH)[
         food_id
     ]
-    return create_food(food_id, food_quality, food_weight, food_data["Feel"])
+    return create_food(food_id, food_quality, food_weight)
 
 
 def cook(
@@ -253,3 +254,89 @@ def init_restaurant_data():
         cook_index += 1
         if cook_index == max_people:
             break
+
+
+def get_restaurant_food_list_buy_food_type(food_type: str) -> list:
+    """
+    获取餐馆内指定类型的食物列表
+    Keyword arguments:
+    food_type -- 食物类型
+    Return arguments:
+    list -- 食物列表
+    """
+    food_list = []
+    for food_id in cache_contorl.restaurant_data:
+        if food_type == "StapleFood":
+            if isinstance(food_id, int):
+                for food_uid in cache_contorl.restaurant_data[food_id]:
+                    food_list.append(
+                        cache_contorl.restaurant_data[food_id][food_uid]
+                    )
+        elif food_type == "Snacks":
+            if isinstance(food_id, str):
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_id
+                )
+                if food_config["Eat"]:
+                    for food_uid in cache_contorl.restaurant_data[food_id]:
+                        food_list.append(
+                            cache_contorl.restaurant_data[food_id][food_uid]
+                        )
+        elif food_type == "Drink":
+            if isinstance(food_id, str):
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_id
+                )
+                if (
+                    "Thirsty" in food_config["Feel"]
+                    and not food_config["Fruit"]
+                    and food_config["Eat"]
+                ):
+                    for food_uid in cache_contorl.restaurant_data[food_id]:
+                        food_list.append(
+                            cache_contorl.restaurant_data[food_id][food_uid]
+                        )
+            else:
+                now_food_uid = list(
+                    cache_contorl.restaurant_data[food_id].keys()
+                )[0]
+                now_food = cache_contorl.restaurant_data[food_id][now_food_uid]
+                if "Thirsty" in now_food.feel and (
+                    "Hunger" not in now_food.feel
+                    or now_food.feel["Thirsty"] > now_food.feel["Hunger"]
+                ):
+                    for food_uid in cache_contorl.restaurant_data[food_id]:
+                        food_list.append(
+                            cache_contorl.restaurant_data[food_id][food_uid]
+                        )
+        elif food_type == "Fruit":
+            if isinstance(food_id, str):
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_id
+                )
+                if food_config["Fruit"]:
+                    for food_uid in cache_contorl.restaurant_data[food_id]:
+                        food_list.append(
+                            cache_contorl.restaurant_data[food_id][food_uid]
+                        )
+        elif food_type == "FoodIngredients":
+            if isinstance(food_id, str):
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_id
+                )
+                if food_config["Cook"]:
+                    for food_uid in cache_contorl.restaurant_data[food_id]:
+                        food_list.append(
+                            cache_contorl.restaurant_data[food_id][food_uid]
+                        )
+        elif food_type == "Seasoning":
+            if isinstance(food_id, str):
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_id
+                )
+                if food_config["Seasoning"]:
+                    for food_uid in cache_contorl.restaurant_data[food_id]:
+                        food_list.append(
+                            cache_contorl.restaurant_data[food_id][food_uid]
+                        )
+    return food_list

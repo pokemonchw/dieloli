@@ -30,14 +30,16 @@ def arder_behavior(character_id: int):
         else:
             character.character_attend_class(character_id)
     elif now_time_slice["TimeSlice"] == constant.TimeSlice.TIME_BREAKFAST:
+        now_scene_str = map_handle.get_map_system_path_str_for_list(
+            character_data.position
+        )
         if character_data.status["BodyFeeling"]["Hunger"] > 16:
-            now_scene_str = map_handle.get_map_system_path_str_for_list(
-                character_data.position
-            )
             now_scene_data = cache_contorl.scene_data[now_scene_str]
             if now_scene_data["SceneTag"] == "Cafeteria":
                 if not len(character_data.food_bag):
-                    character.character_buy_rand_food_at_restaurant(character_id)
+                    character.character_buy_rand_food_at_restaurant(
+                        character_id
+                    )
                 else:
                     character.character_move_to_rand_restaurant(character_id)
             elif not len(character_data.food_bag):
@@ -45,7 +47,9 @@ def arder_behavior(character_id: int):
                     character.character_move_to_rand_cafeteria(character_id)
                 else:
                     if now_scene_str == character_data.classroom:
-                        character.character_rest_to_time(character_id,now_time_slice["ToCourse"])
+                        character.character_rest_to_time(
+                            character_id, now_time_slice["ToCourse"]
+                        )
                     else:
                         character.character_move_to_classroom(character_id)
             else:
@@ -53,16 +57,22 @@ def arder_behavior(character_id: int):
                     if now_scene_data["SceneTag"] == "Restaurant":
                         character.character_eat_rand_food(character_id)
                     else:
-                        character.character_move_to_rand_restaurant(character_id)
+                        character.character_move_to_rand_restaurant(
+                            character_id
+                        )
                 else:
                     if now_scene_str == character_data.classroom:
-                        character.character_rest_to_time(character_id,now_time_slice["ToCourse"])
+                        character.character_rest_to_time(
+                            character_id, now_time_slice["ToCourse"]
+                        )
                     else:
                         character.character_move_to_classroom(character_id)
         else:
             if now_time_slice["ToCourse"] <= 13:
                 if now_scene_str == character_data.classroom:
-                    character.character_rest_to_time(character_id,now_time_slice["ToCourse"])
+                    character.character_rest_to_time(
+                        character_id, now_time_slice["ToCourse"]
+                    )
                 else:
                     character.character_move_to_classroom(character_id)
     return 1

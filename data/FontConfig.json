@@ -18,6 +18,15 @@
     "underline":"0",
     "italic":"0"
   },
+  "title":{
+    "foreground":"#C8C8C8",
+    "background":"#000000",
+    "font":"baotuxiaobaiti",
+    "fontSize":"50",
+    "bold":"0",
+    "underline":"0",
+    "italic":"0"
+  },
   "onbutton":{
     "foreground":"#292421"
   },

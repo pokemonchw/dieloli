@@ -7,7 +7,7 @@ flow_contorl: game_type.FlowContorl = game_type.FlowContorl()
 """ 流程用变量组 """
 wframe_mouse: game_type.WFrameMouse = game_type.WFrameMouse()
 """ 主页监听控制流程用变量组 """
-cmd_map: Dict[int, callable] = {}
+cmd_map: Dict[int, object] = {}
 """ cmd存储 """
 character_data: Dict[int, game_type.Character] = {}
 """ 角色对象数据缓存组 """

@@ -45,7 +45,7 @@ def see_scene_panel():
         )
         map_name = cache_contorl.map_data[now_map_map_system_str]["MapName"]
         map_path_text += map_name + "-"
-    scene_data = cache_contorl.scene_data[scene_path_str].copy()
+    scene_data = cache_contorl.scene_data[scene_path_str]
     scene_name = map_path_text + scene_data["SceneName"]
     scene_info_head = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "76"

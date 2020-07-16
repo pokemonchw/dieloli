@@ -20,6 +20,7 @@ from tkinter import (
     font,
     Entry,
 )
+from Script.Core.game_path_config import game_path
 from Script.Core import (
     game_config,
     text_loading,

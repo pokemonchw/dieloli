@@ -31,5 +31,6 @@
     "insceneseeplayer_max":20,
     "seecharacterclothes_max":10,
     "seecharacterwearitem_max":10,
-    "seecharacteritem_max":10
+    "seecharacteritem_max":10,
+    "food_shop_item_max":10
 }

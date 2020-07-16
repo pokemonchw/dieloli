@@ -175,7 +175,9 @@ def see_clothing_info(character_id: str, clothing_type: str, clothing_id: str):
                 clothing_id = clothing_list[now_clothing_index + 1]
 
 
-def get_character_clothes_page_max(character_id: str, clothing_type: str):
+def get_character_clothes_page_max(
+    character_id: str, clothing_type: str
+) -> int:
     """
     计算角色某类型服装列表页数
     Keyword arguments:
@@ -188,9 +190,8 @@ def get_character_clothes_page_max(character_id: str, clothing_type: str):
         .keys()
     )
     page_index = game_config.see_character_clothes_max
-    if clothing_max - page_index < 0:
+    if clothing_max < page_index:
         return 0
-    elif clothing_max % page_index == 0:
+    elif not clothing_max % page_index:
         return clothing_max / page_index - 1
-    else:
-        return int(clothing_max / page_index)
+    return int(clothing_max / page_index)

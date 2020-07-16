@@ -1,6 +1,7 @@
 from functools import wraps
 from Script.Core import text_loading, era_print, constant, cache_contorl
 from Script.Design import game_time, update, character
+from Script.Flow import buy_food
 
 
 handle_instruct_data = {}
@@ -81,3 +82,11 @@ def handle_rest():
     update.game_update_flow()
     game_time.sub_time_now(10)
     update.game_update_flow()
+
+
+@add_instruct("BuyFood")
+def handle_buy_food():
+    """
+    处理购买食物指令
+    """
+    buy_food.buy_food()

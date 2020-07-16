@@ -10,7 +10,7 @@ from Script.Core import (
 from Script.Design import attr_text, cmd_button_queue, clothing
 
 
-def see_character_wear_clothes_info(character_id: str):
+def see_character_wear_clothes_info(character_id: int):
     """
     查看角色已穿戴服装列表顶部面板
     Keyword arguments:
@@ -24,7 +24,7 @@ def see_character_wear_clothes_info(character_id: str):
     era_print.normal_print(character_info)
 
 
-def see_character_wear_clothes(character_id: str, change_button: bool):
+def see_character_wear_clothes(character_id: int, change_button: bool):
     """
     查看角色穿戴服装列表面板
     Keyword arguments:
@@ -121,13 +121,15 @@ def see_character_wear_clothes_cmd(start_id: int) -> str:
 
 def see_character_clothes_panel(
     character_id: str, clothing_type: str, max_page: int
-):
+) -> list:
     """
     用于查看角色服装列表的面板
     Keyword arguments:
     character_id -- 角色id
     clothing_type -- 服装类型
     max_page -- 服装列表最大页数
+    Rerurn arguments:
+    list -- 监听的按钮列表
     """
     era_print.line_feed_print()
     character_clothing_data = cache_contorl.character_data[
