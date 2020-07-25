@@ -119,9 +119,9 @@ restaurant_data: Dict[str, Dict[UUID, game_type.Food]] = {}
 食堂内贩卖的食物数据
 食物名字:食物唯一id:食物对象
 """
-handle_premise_data:Dict[str,callable] = {}
+handle_premise_data: Dict[str, callable] = {}
 """ 前提处理数据 """
-handle_target_data: Dict[str,callable] = {}
+handle_target_data: Dict[str, callable] = {}
 """ 目标类型数据 """
 premise_target_table: Dict[str, set] = {}
 """

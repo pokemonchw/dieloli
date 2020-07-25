@@ -45,11 +45,9 @@ def handle_eat_break_fast_in_restaurant(character_id: int):
 
 
 @add_target(
-    "GoCafeteria",
-    {"Hunger","NotHaveFood"},
-    {"InCafeteria"},
+    "GoCafeteria", {"Hunger", "NotHaveFood"}, {"InCafeteria"},
 )
-def handle_go_cafeteria(character_id:int):
+def handle_go_cafeteria(character_id: int):
     """
     控制角色前往随机取餐区
     Keyword arguments:
@@ -59,11 +57,9 @@ def handle_go_cafeteria(character_id:int):
 
 
 @add_target(
-    "BuyFood",
-    {"Hunger","InCafeteria","NotHaveFood"},
-    {"HaveFood"},
+    "BuyFood", {"Hunger", "InCafeteria", "NotHaveFood"}, {"HaveFood"},
 )
-def handle_buy_food(character_id:int):
+def handle_buy_food(character_id: int):
     """
     控制角色购买食物
     Keyword arguments:

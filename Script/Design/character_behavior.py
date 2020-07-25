@@ -1,8 +1,14 @@
 import os
 import random
 from functools import wraps
-from Script.Core import cache_contorl, game_path_config, game_config,game_type,constant
-from Script.Design import settle_behavior,game_time,character
+from Script.Core import (
+    cache_contorl,
+    game_path_config,
+    game_config,
+    game_type,
+    constant,
+)
+from Script.Design import settle_behavior, game_time, character
 
 game_path = game_path_config.game_path
 language = game_config.language
@@ -20,10 +26,21 @@ def init_character_behavior():
         ):
             break
         for character_id in cache_contorl.character_data:
-            if character_id == 0 or character_id in cache_contorl.over_behavior_character:
+            if (
+                character_id == 0
+                or character_id in cache_contorl.over_behavior_character
+            ):
                 continue
-            if cache_contorl.character_data[character_id].state == constant.CharacterStatus.STATUS_ARDER:
-                if cache_contorl.character_data[character_id].behavior["StartTime"] == {}:
+            if (
+                cache_contorl.character_data[character_id].state
+                == constant.CharacterStatus.STATUS_ARDER
+            ):
+                if (
+                    cache_contorl.character_data[character_id].behavior[
+                        "StartTime"
+                    ]
+                    == {}
+                ):
                     character.init_character_behavior_start_time(character_id)
                 character_target_judge(character_id)
             else:
@@ -33,18 +50,24 @@ def init_character_behavior():
     cache_contorl.over_behavior_character = {}
 
 
-def character_target_judge(character_id:int):
+def character_target_judge(character_id: int):
     """
     查询角色可用目标活动并执行
     Keyword arguments:
     character_id -- 角色id
     """
-    target,_,judge = search_target(character_id,list(cache_contorl.handle_target_data.keys()))
+    target, _, judge = search_target(
+        character_id, list(cache_contorl.handle_target_data.keys())
+    )
     if judge:
         cache_contorl.handle_target_data[target](character_id)
     else:
-        start_time = cache_contorl.character_data[character_id].behavior["StartTime"]
-        now_judge = game_time.judge_date_big_or_small(start_time,cache_contorl.game_time)
+        start_time = cache_contorl.character_data[character_id].behavior[
+            "StartTime"
+        ]
+        now_judge = game_time.judge_date_big_or_small(
+            start_time, cache_contorl.game_time
+        )
         if now_judge:
             cache_contorl.over_behavior_character[character_id] = 1
         else:
@@ -54,10 +77,12 @@ def character_target_judge(character_id:int):
                     old_date=game_time.game_time_to_datetime(start_time),
                 )
             )
-            cache_contorl.character_data[character_id].behavior["StartTime"] = next_time
+            cache_contorl.character_data[character_id].behavior[
+                "StartTime"
+            ] = next_time
 
 
-def judge_character_status(character_id:int) -> bool:
+def judge_character_status(character_id: int) -> bool:
     """
     校验并结算角色状态
     Keyword arguments:
@@ -88,7 +113,7 @@ def judge_character_status(character_id:int) -> bool:
     return 1
 
 
-def search_target(character_id:int,target_list:list) -> (str,int,bool):
+def search_target(character_id: int, target_list: list) -> (str, int, bool):
     """
     查找可用目标
     Keyword arguments:
@@ -107,16 +132,22 @@ def search_target(character_id:int,target_list:list) -> (str,int,bool):
         now_target_data = {}
         premise_judge = 1
         for premise in target_premise_list:
-            premise_judge = cache_contorl.handle_premise_data[premise](character_id)
+            premise_judge = cache_contorl.handle_premise_data[premise](
+                character_id
+            )
             if premise_judge:
                 now_weiget += premise_judge
             else:
                 premise_judge = 0
                 if premise in cache_contorl.effect_target_table:
-                    now_target_list = cache_contorl.effect_target_table[premise]
-                    now_target,now_target_weight,now_judge = search_target(character_id,now_target_list)
+                    now_target_list = cache_contorl.effect_target_table[
+                        premise
+                    ]
+                    now_target, now_target_weight, now_judge = search_target(
+                        character_id, now_target_list
+                    )
                     if now_judge:
-                        now_target_data.setdefault(now_target_weight,set())
+                        now_target_data.setdefault(now_target_weight, set())
                         now_target_data[now_target_weight].add(now_target)
                     else:
                         now_target_pass_judge = 1
@@ -127,13 +158,15 @@ def search_target(character_id:int,target_list:list) -> (str,int,bool):
         if now_target_pass_judge:
             continue
         if premise_judge:
-            target_data.setdefault(now_weiget,set())
+            target_data.setdefault(now_weiget, set())
             target_data[now_weiget].add(target)
         else:
             now_max_weight = max(list(now_target_data))
-            target_data.setdefault(now_max_weight,set())
-            target_data[now_max_weight].add(random.choice(list(now_target_data[now_max_weight])))
+            target_data.setdefault(now_max_weight, set())
+            target_data[now_max_weight].add(
+                random.choice(list(now_target_data[now_max_weight]))
+            )
     if len(target_data) > 0:
         max_weight = max(list(target_data.keys()))
-        return random.choice(list(target_data[max_weight])),max_weight,1
-    return "",0,0
+        return random.choice(list(target_data[max_weight])), max_weight, 1
+    return "", 0, 0
