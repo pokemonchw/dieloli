@@ -18,10 +18,9 @@ else:
     game_data.init(0)
 
 
-from Script.Design import start_flow
+from Script.Design import start_flow,handle_target,handle_premise
 from Script.Core import game_init
 import Script.Talk
-import Script.Behavior
 import Script.Settle
 
 game_init.run(start_flow.start_frame)

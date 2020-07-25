@@ -22,7 +22,7 @@ def init_character_behavior():
         for character_id in cache_contorl.character_data:
             if character_id == 0 or character_id in cache_contorl.over_behavior_character:
                 continue
-            if cache_contorl.character_data[character_id].state = constant.CharacterStatus.STATUS_ARDER:
+            if cache_contorl.character_data[character_id].state == constant.CharacterStatus.STATUS_ARDER:
                 if cache_contorl.character_data[character_id].behavior["StartTime"] == {}:
                     character.init_character_behavior_start_time(character_id)
                 character_target_judge(character_id)
@@ -42,6 +42,19 @@ def character_target_judge(character_id:int):
     target,_,judge = search_target(character_id,list(cache_contorl.handle_target_data.keys()))
     if judge:
         cache_contorl.handle_target_data[target](character_id)
+    else:
+        start_time = cache_contorl.character_data[character_id].behavior["StartTime"]
+        now_judge = game_time.judge_date_big_or_small(start_time,cache_contorl.game_time)
+        if now_judge:
+            cache_contorl.over_behavior_character[character_id] = 1
+        else:
+            next_time = game_time.datetime_to_game_time(
+                game_time.get_sub_date(
+                    minute=1,
+                    old_date=game_time.game_time_to_datetime(start_time),
+                )
+            )
+            cache_contorl.character_data[character_id].behavior["StartTime"] = next_time
 
 
 def judge_character_status(character_id:int) -> bool:
@@ -99,11 +112,15 @@ def search_target(character_id:int,target_list:list) -> (str,int,bool):
                 now_weiget += premise_judge
             else:
                 premise_judge = 0
-                now_target_list = cache_contorl.effect_target_table[premise]
-                now_target,now_target_weight,now_judge = search_target(character_id,now_target_list)
-                if now_judge:
-                    now_target_data.setdefault(now_target_weight,set())
-                    now_target_data[now_target_weight].add(now_target)
+                if premise in cache_contorl.effect_target_table:
+                    now_target_list = cache_contorl.effect_target_table[premise]
+                    now_target,now_target_weight,now_judge = search_target(character_id,now_target_list)
+                    if now_judge:
+                        now_target_data.setdefault(now_target_weight,set())
+                        now_target_data[now_target_weight].add(now_target)
+                    else:
+                        now_target_pass_judge = 1
+                        break
                 else:
                     now_target_pass_judge = 1
                     break

@@ -1,6 +1,6 @@
 import math
 from functools import wraps
-from Script.Core import cache_contorl
+from Script.Core import cache_contorl,constant
 from Script.Design import map_handle, game_time
 
 
@@ -18,7 +18,7 @@ def add_premise(premise: str) -> callable:
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        cache_contorl.handle_instruct_data[instruct] = return_wrapper
+        cache_contorl.handle_premise_data[premise] = return_wrapper
         return return_wrapper
 
     return decoraror

@@ -32,8 +32,8 @@ def add_target(target: str, premise_list: set, effect_list: set) -> callable:
 
 @add_target(
     "EatBreakFastInRestaurant",
-    set("InRestaurant", "InBreakfastTime", "Hunger", "HaveFood"),
-    set(),
+    {"InRestaurant", "InBreakfastTime", "Hunger", "HaveFood"},
+    {},
 )
 def handle_eat_break_fast_in_restaurant(character_id: int):
     """
@@ -46,8 +46,8 @@ def handle_eat_break_fast_in_restaurant(character_id: int):
 
 @add_target(
     "GoCafeteria",
-    set("Hunger","NotHaveFood"),
-    set("InCafeteria"),
+    {"Hunger","NotHaveFood"},
+    {"InCafeteria"},
 )
 def handle_go_cafeteria(character_id:int):
     """
@@ -60,8 +60,8 @@ def handle_go_cafeteria(character_id:int):
 
 @add_target(
     "BuyFood",
-    set("Hunger","InCafeteria","NotHaveFood"),
-    set("HaveFood"),
+    {"Hunger","InCafeteria","NotHaveFood"},
+    {"HaveFood"},
 )
 def handle_buy_food(character_id:int):
     """
