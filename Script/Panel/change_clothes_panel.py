@@ -206,7 +206,7 @@ def see_character_clothes_panel(
         py_cmd.pcmd(cmd_text, i, None)
         era_print.line_feed_print()
         i += 1
-    era_print.line_feed_print()
+    era_print.normal_print("\n")
     page_text = "(" + str(now_page_id) + "/" + str(max_page) + ")"
     era_print.page_line_print(sample="-", string=page_text)
     era_print.line_feed_print()

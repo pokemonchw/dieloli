@@ -88,7 +88,6 @@ def see_save_list_panel(
             id_text = id_text + save_align
             py_cmd.pcmd(id_text, id, None)
             input_s.append(id)
-            era_print.normal_print("\n")
         else:
             id_text_index = int(text_handle.get_text_index(id_text))
             fix_id_width = text_width - id_text_index
@@ -101,7 +100,7 @@ def see_save_list_panel(
             else:
                 py_cmd.pcmd(id_text, id, None)
                 input_s.append(id)
-        era_print.line_feed_print()
+        era_print.normal_print("\n")
     if auto_save:
         auto_info_text = text_loading.get_text_data(
             constant.FilePath.STAGE_WORD_PATH, "73"

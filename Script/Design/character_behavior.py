@@ -22,7 +22,7 @@ def init_character_behavior():
     while 1:
         if (
             len(cache_contorl.over_behavior_character)
-            == len(cache_contorl.character_data) - 1
+            >= len(cache_contorl.character_data) - 1
         ):
             break
         for character_id in cache_contorl.character_data:
@@ -45,7 +45,7 @@ def init_character_behavior():
                 character_target_judge(character_id)
             else:
                 status_judge = judge_character_status(character_id)
-                if status_judge == 0:
+                if status_judge:
                     cache_contorl.over_behavior_character[character_id] = 1
     cache_contorl.over_behavior_character = {}
 
@@ -57,7 +57,7 @@ def character_target_judge(character_id: int):
     character_id -- 角色id
     """
     target, _, judge = search_target(
-        character_id, list(cache_contorl.handle_target_data.keys())
+        character_id, list(cache_contorl.handle_target_data.keys()),set()
     )
     if judge:
         cache_contorl.handle_target_data[target](character_id)
@@ -113,12 +113,13 @@ def judge_character_status(character_id: int) -> bool:
     return 1
 
 
-def search_target(character_id: int, target_list: list) -> (str, int, bool):
+def search_target(character_id: int, target_list: list,null_target:set) -> (str, int, bool):
     """
     查找可用目标
     Keyword arguments:
     character_id -- 角色id
     target_list -- 检索的目标列表
+    null_target -- 被排除的目标
     Return arguments:
     目标id
     int -- 目标权重
@@ -126,6 +127,8 @@ def search_target(character_id: int, target_list: list) -> (str, int, bool):
     """
     target_data = {}
     for target in target_list:
+        if target in null_target:
+            continue
         target_premise_list = cache_contorl.premise_target_table[target]
         now_weiget = 0
         now_target_pass_judge = 0
@@ -144,7 +147,7 @@ def search_target(character_id: int, target_list: list) -> (str, int, bool):
                         premise
                     ]
                     now_target, now_target_weight, now_judge = search_target(
-                        character_id, now_target_list
+                        character_id, now_target_list,null_target
                     )
                     if now_judge:
                         now_target_data.setdefault(now_target_weight, set())
@@ -156,6 +159,7 @@ def search_target(character_id: int, target_list: list) -> (str, int, bool):
                     now_target_pass_judge = 1
                     break
         if now_target_pass_judge:
+            null_target.add(target)
             continue
         if premise_judge:
             target_data.setdefault(now_weiget, set())

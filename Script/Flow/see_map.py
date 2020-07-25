@@ -21,7 +21,6 @@ def see_map_flow():
         input_s += see_map_cmd + move_path_cmd + [show_scene_name_list_cmd]
         yrn = flow_handle.askfor_all(input_s)
         back_button = str(start_id_1)
-        print(start_id_1)
         now_position = cache_contorl.character_data[0].position
         now_position_map = map_handle.get_map_for_path(now_position)
         up_map_button = "Null"
