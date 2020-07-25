@@ -3,12 +3,14 @@ from functools import wraps
 from Script.Core import cache_contorl, era_print
 
 
-def add_talk(occupation: str, behavior_id: int):
+def add_talk(occupation: str, behavior_id: int) -> callable:
     """
     添加口上
     Keyword arguments:
     occupation -- 口上所属的职业
     behavior_id -- 口上对应的行为id
+    Return arguments:
+    callable -- 口上处理函数对象
     """
 
     def decorator(func):

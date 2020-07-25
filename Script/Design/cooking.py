@@ -89,7 +89,7 @@ def create_food(
     return food
 
 
-def separate_weight_food(old_food:Food,weight:int) -> Food:
+def separate_weight_food(old_food: Food, weight: int) -> Food:
     """
     从指定食物中分离出指定重量的食物并创建新食物对象
     Keyword arguments:
@@ -313,7 +313,11 @@ def get_restaurant_food_type_list_buy_food_type(food_type: str) -> dict:
                     "Thirsty" in food_config["Feel"]
                     and not food_config["Fruit"]
                     and food_config["Eat"]
-                    and ("Hunger" not in food_config["Feel"] or food_config["Feel"]["Thirsty"] > food_config["Feel"]["Hunger"])
+                    and (
+                        "Hunger" not in food_config["Feel"]
+                        or food_config["Feel"]["Thirsty"]
+                        > food_config["Feel"]["Hunger"]
+                    )
                 ):
                     food_list[food_id] = food_config["Name"]
             else:
@@ -325,7 +329,9 @@ def get_restaurant_food_type_list_buy_food_type(food_type: str) -> dict:
                     "Hunger" not in now_food.feel
                     or now_food.feel["Thirsty"] > now_food.feel["Hunger"]
                 ):
-                    food_list[food_id] = cache_contorl.recipe_data[food_id].name
+                    food_list[food_id] = cache_contorl.recipe_data[
+                        food_id
+                    ].name
         elif food_type == "Fruit":
             if isinstance(food_id, str):
                 food_config = text_loading.get_text_data(

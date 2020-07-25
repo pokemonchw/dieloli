@@ -1,5 +1,5 @@
 ------------
-|    1     |
+|    <mapbutton>1</mapbutton>     |
 ------------
-| 2 |  | 3 |
------0------
+| <mapbutton>2</mapbutton> |  | <mapbutton>3</mapbuttn> |
+-----<mapbutton>0</mapbutton>------

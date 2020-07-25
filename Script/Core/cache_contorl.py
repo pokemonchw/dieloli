@@ -119,3 +119,17 @@ restaurant_data: Dict[str, Dict[UUID, game_type.Food]] = {}
 食堂内贩卖的食物数据
 食物名字:食物唯一id:食物对象
 """
+handle_premise_data:Dict[str,callable] = {}
+""" 前提处理数据 """
+handle_target_data: Dict[str,callable] = {}
+""" 目标类型数据 """
+premise_target_table: Dict[str, set] = {}
+"""
+目标对应的所需前提集合
+目标id:前提集合
+"""
+effect_target_table: Dict[str, set] = {}
+"""
+效果对应所需目标集合
+效果id:目标集合
+"""

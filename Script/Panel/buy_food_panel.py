@@ -6,7 +6,7 @@ from Script.Core import (
     game_config,
     py_cmd,
     text_handle,
-    game_type
+    game_type,
 )
 from Script.Design import map_handle, cmd_button_queue, cooking
 
@@ -48,7 +48,7 @@ def see_food_shop_head_cmd(now_panel: str) -> list:
     return input_s
 
 
-def see_food_shop_list(type_list:dict) -> list:
+def see_food_shop_list(type_list: dict) -> list:
     """
     用于查看餐馆出售食物种类的面板
     Keyword arguments:
@@ -57,9 +57,7 @@ def see_food_shop_list(type_list:dict) -> list:
     list -- 　监听的按钮列表
     """
     era_print.restart_line_print("+")
-    now_page_id = int(
-        cache_contorl.panel_state["SeeFoodShopListByFoodPanel"]
-    )
+    now_page_id = int(cache_contorl.panel_state["SeeFoodShopListByFoodPanel"])
     now_page_max = game_config.food_shop_type_max
     now_page_start_id = now_page_id * now_page_max
     now_page_end_id = now_page_start_id + now_page_max
@@ -73,14 +71,16 @@ def see_food_shop_list(type_list:dict) -> list:
         now_page_end_id = len(type_list)
     text_list = []
     tag_text_index = 0
-    for i in range(now_page_start_id,now_page_end_id):
+    for i in range(now_page_start_id, now_page_end_id):
         food_name = type_list[list(type_list.keys())[i]]
         text_list.append(food_name)
         tag_text_index += 1
-    return cmd_button_queue.option_int("",4,"left",1,0,"center",0,text_list)
+    return cmd_button_queue.option_int(
+        "", 4, "left", 1, 0, "center", 0, text_list
+    )
 
 
-def see_food_shop_list_by_food_type(max_page: int,food_list:list) -> list:
+def see_food_shop_list_by_food_type(max_page: int, food_list: list) -> list:
     """
     用于查看餐馆出售食物列表的面板
     Keyword arguments:
@@ -166,7 +166,9 @@ def see_food_shop_list_by_food_type(max_page: int,food_list:list) -> list:
     return input_s
 
 
-def see_food_shop_tail_cmd(start_id: int, max_page: int,type_judge:bool) -> list:
+def see_food_shop_tail_cmd(
+    start_id: int, max_page: int, type_judge: bool
+) -> list:
     """
     食物商店底部控制面板
     Keyword arguments:
@@ -176,9 +178,7 @@ def see_food_shop_tail_cmd(start_id: int, max_page: int,type_judge:bool) -> list
     Return arguments:
     list -- 监听的按钮列表
     """
-    now_page_id = int(
-        cache_contorl.panel_state["SeeFoodShopListByFoodPanel"]
-    )
+    now_page_id = int(cache_contorl.panel_state["SeeFoodShopListByFoodPanel"])
     if type_judge:
         now_page_id = int(
             cache_contorl.panel_state["SeeFoodShopListByFoodTypePanel"]
@@ -200,7 +200,7 @@ def see_food_shop_tail_cmd(start_id: int, max_page: int,type_judge:bool) -> list
     return yrn
 
 
-def buy_food_now_panel(now_food:game_type.Food) -> list:
+def buy_food_now_panel(now_food: game_type.Food) -> list:
     """
     玩家确认购买面板
     Keyword arguments:
@@ -210,10 +210,16 @@ def buy_food_now_panel(now_food:game_type.Food) -> list:
     """
     now_text = ""
     if now_food.recipe == -1:
-        food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH,now_food.id)
-        now_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "43").format(FoodName=food_config["Name"])
+        food_config = text_loading.get_text_data(
+            constant.FilePath.FOOD_PATH, now_food.id
+        )
+        now_text = text_loading.get_text_data(
+            constant.FilePath.MESSAGE_PATH, "43"
+        ).format(FoodName=food_config["Name"])
     else:
         food_recipe = cache_contorl.recipe_data[now_food.recipe]
-        now_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "43").format(FoodName=food_recipe.name)
+        now_text = text_loading.get_text_data(
+            constant.FilePath.MESSAGE_PATH, "43"
+        ).format(FoodName=food_recipe.name)
     era_print.line_feed_print(now_text)
     return cmd_button_queue.option_int(constant.CmdMenu.BUY_FOOD_NOW_PANEL)

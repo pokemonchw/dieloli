@@ -226,7 +226,6 @@ def character_move_to_rand_cafeteria(character_id: int):
     character_data.behavior["MoveTarget"] = move_path
     character_data.behavior["Duration"] = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
-    init_character_behavior_start_time(character_id)
 
 
 def character_move_to_rand_restaurant(character_id: int):
@@ -247,7 +246,6 @@ def character_move_to_rand_restaurant(character_id: int):
     character_data.behavior["MoveTarget"] = move_path
     character_data.behavior["Duration"] = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
-    init_character_behavior_start_time(character_id)
 
 
 def character_rest_to_time(character_id: int, need_time: int):
@@ -261,7 +259,6 @@ def character_rest_to_time(character_id: int, need_time: int):
     character_data.behavior["Duration"] = need_time
     character_data.behavior["BehaviorId"] = constant.Behavior.REST
     character_data.state = constant.CharacterStatus.STATUS_REST
-    init_character_behavior_start_time(character_id)
 
 
 def character_buy_rand_food_at_restaurant(character_id: int):
@@ -298,4 +295,3 @@ def character_eat_rand_food(character_id: int):
     ]
     character_data.behavior["Duration"] = 10
     character_data.state = constant.CharacterStatus.STATUS_EAT
-    init_character_behavior_start_time(character_id)

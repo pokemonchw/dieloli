@@ -1,6 +1,8 @@
 import os
+import random
 from functools import wraps
-from Script.Core import cache_contorl, game_path_config, game_config
+from Script.Core import cache_contorl, game_path_config, game_config,game_type,constant
+from Script.Design import settle_behavior,game_time,character
 
 game_path = game_path_config.game_path
 language = game_config.language
@@ -17,49 +19,104 @@ def init_character_behavior():
             == len(cache_contorl.character_data) - 1
         ):
             break
-        for npc in cache_contorl.character_data:
-            if npc == 0 or npc in cache_contorl.over_behavior_character:
+        for character_id in cache_contorl.character_data:
+            if character_id == 0 or character_id in cache_contorl.over_behavior_character:
                 continue
-            character_occupation_judge(npc)
+            if cache_contorl.character_data[character_id].state = constant.CharacterStatus.STATUS_ARDER:
+                if cache_contorl.character_data[character_id].behavior["StartTime"] == {}:
+                    character.init_character_behavior_start_time(character_id)
+                character_target_judge(character_id)
+            else:
+                status_judge = judge_character_status(character_id)
+                if status_judge == 0:
+                    cache_contorl.over_behavior_character[character_id] = 1
     cache_contorl.over_behavior_character = {}
 
 
-def add_behavior(occupation: str, status: int):
+def character_target_judge(character_id:int):
     """
-    添加角色行为控制器
-    Keyword arguments:
-    occupation -- 职业
-    status -- 状态id
-    """
-
-    def decoraror(func):
-        @wraps(func)
-        def return_wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
-
-        cache_contorl.behavior_tem_data.setdefault(occupation, {})
-        cache_contorl.behavior_tem_data[occupation][status] = return_wrapper
-        return return_wrapper
-
-    return decoraror
-
-
-def character_occupation_judge(character_id: int):
-    """
-    判断角色职业并指定对应行为树
+    查询角色可用目标活动并执行
     Keyword arguments:
     character_id -- 角色id
     """
+    target,_,judge = search_target(character_id,list(cache_contorl.handle_target_data.keys()))
+    if judge:
+        cache_contorl.handle_target_data[target](character_id)
+
+
+def judge_character_status(character_id:int) -> bool:
+    """
+    校验并结算角色状态
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    bool -- 本次update时间切片内活动是否已完成
+    """
     character_data = cache_contorl.character_data[character_id]
-    occupation = character_data.occupation
-    if occupation not in cache_contorl.behavior_tem_data:
-        if character_data.age > 18:
-            occupation = "Teacher"
+    start_time = character_data.behavior["StartTime"]
+    end_time = game_time.datetime_to_game_time(
+        game_time.get_sub_date(
+            minute=character_data.behavior["Duration"],
+            old_date=game_time.game_time_to_datetime(start_time),
+        )
+    )
+    now_time = cache_contorl.game_time
+    time_judge = game_time.judge_date_big_or_small(now_time, end_time)
+    if time_judge:
+        settle_behavior.handle_settle_behavior(character_id)
+        character_data.behavior["BehaviorId"] = constant.Behavior.SHARE_BLANKLY
+        character_data.state = constant.CharacterStatus.STATUS_ARDER
+    if time_judge == 1:
+        character_data.behavior["StartTime"] = end_time
+        return 0
+    elif time_judge == 2:
+        character.init_character_behavior_start_time(character_id)
+        return 0
+    return 1
+
+
+def search_target(character_id:int,target_list:list) -> (str,int,bool):
+    """
+    查找可用目标
+    Keyword arguments:
+    character_id -- 角色id
+    target_list -- 检索的目标列表
+    Return arguments:
+    目标id
+    int -- 目标权重
+    bool -- 前提是否能够被满足
+    """
+    target_data = {}
+    for target in target_list:
+        target_premise_list = cache_contorl.premise_target_table[target]
+        now_weiget = 0
+        now_target_pass_judge = 0
+        now_target_data = {}
+        premise_judge = 1
+        for premise in target_premise_list:
+            premise_judge = cache_contorl.handle_premise_data[premise](character_id)
+            if premise_judge:
+                now_weiget += premise_judge
+            else:
+                premise_judge = 0
+                now_target_list = cache_contorl.effect_target_table[premise]
+                now_target,now_target_weight,now_judge = search_target(character_id,now_target_list)
+                if now_judge:
+                    now_target_data.setdefault(now_target_weight,set())
+                    now_target_data[now_target_weight].add(now_target)
+                else:
+                    now_target_pass_judge = 1
+                    break
+        if now_target_pass_judge:
+            continue
+        if premise_judge:
+            target_data.setdefault(now_weiget,set())
+            target_data[now_weiget].add(target)
         else:
-            occupation = "Student"
-    if character_data.state not in cache_contorl.behavior_tem_data[occupation]:
-        occupation = "Default"
-    if cache_contorl.behavior_tem_data[occupation][character_data.state](
-        character_id
-    ):
-        cache_contorl.over_behavior_character[character_id] = 0
+            now_max_weight = max(list(now_target_data))
+            target_data.setdefault(now_max_weight,set())
+            target_data[now_max_weight].add(random.choice(list(now_target_data[now_max_weight])))
+    if len(target_data) > 0:
+        max_weight = max(list(target_data.keys()))
+        return random.choice(list(target_data[max_weight])),max_weight,1
+    return "",0,0
