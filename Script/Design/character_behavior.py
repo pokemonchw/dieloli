@@ -58,7 +58,7 @@ def character_target_judge(character_id: int):
     character_id -- 角色id
     """
     target, _, judge = search_target(
-        character_id, list(cache_contorl.handle_target_data.keys()),set()
+        character_id, list(cache_contorl.handle_target_data.keys()), set()
     )
     if judge:
         cache_contorl.handle_target_data[target](character_id)
@@ -114,7 +114,9 @@ def judge_character_status(character_id: int) -> bool:
     return 1
 
 
-def search_target(character_id: int, target_list: list,null_target:set) -> (str, int, bool):
+def search_target(
+    character_id: int, target_list: list, null_target: set
+) -> (str, int, bool):
     """
     查找可用目标
     Keyword arguments:
@@ -148,7 +150,7 @@ def search_target(character_id: int, target_list: list,null_target:set) -> (str,
                         premise
                     ]
                     now_target, now_target_weight, now_judge = search_target(
-                        character_id, now_target_list,null_target
+                        character_id, now_target_list, null_target
                     )
                     if now_judge:
                         now_target_data.setdefault(now_target_weight, set())

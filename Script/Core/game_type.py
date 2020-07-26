@@ -173,9 +173,9 @@ class Character:
         """ 角色职业ID """
         self.food_bag: Dict[UUID, Food] = {}
         """ 角色持有的食物数据 """
-        self.course:CourseTimeSlice = CourseTimeSlice()
+        self.course: CourseTimeSlice = CourseTimeSlice()
         """ 上课时间和状态数据 """
-        self.target_character_id:int = 0
+        self.target_character_id: int = 0
         """ 角色当前交互对象id """
 
 
@@ -227,17 +227,17 @@ class CourseTimeSlice:
     """ 上课时间和状态数据结构体 """
 
     def __init__(self):
-        self.in_course:bool = 0
+        self.in_course: bool = 0
         """ 当前时间是否是上课时间 """
-        self.to_course:int = 0
+        self.to_course: int = 0
         """ 当前距离下节课开始所需的时间 """
-        self.course_index:int = 0
+        self.course_index: int = 0
         """ 当前属于第几节课 """
-        self.end_course:int = 0
+        self.end_course: int = 0
         """ 当前距离下课时间所需的时间 """
-        self.course_id:str = ""
+        self.course_id: str = ""
         """ 课目id """
-        self.school_id:str = ""
+        self.school_id: str = ""
         """ 学校id """
-        self.phase:int = 0
+        self.phase: int = 0
         """ 年级编号 """

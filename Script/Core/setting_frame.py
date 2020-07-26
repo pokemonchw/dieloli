@@ -1,5 +1,5 @@
 from tkinter import Tk
-from Script.Core import text_loading,constant
+from Script.Core import text_loading, constant
 
 
 def open_setting_frame():

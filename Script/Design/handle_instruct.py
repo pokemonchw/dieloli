@@ -53,14 +53,9 @@ def handle_rest():
     character.init_character_behavior_start_time(0)
     character_data = cache_contorl.character_data[0]
     character_data.behavior["Duration"] = 10
-    character_data.behavior[
-        "BehaviorId"
-    ] = constant.Behavior.REST
+    character_data.behavior["BehaviorId"] = constant.Behavior.REST
     character_data.state = constant.CharacterStatus.STATUS_REST
-    if (
-        character_data.hit_point
-        > character_data.hit_point_max
-    ):
+    if character_data.hit_point > character_data.hit_point_max:
         character_data.hit_point = character_data.hit_point_max
     target_character = cache_contorl.character_data[
         character_data.target_character_id

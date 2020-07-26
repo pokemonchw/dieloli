@@ -85,7 +85,10 @@ def handle_in_breakfast_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    if character_data.course.course_index <= 2 and not character_data.course.in_course:
+    if (
+        character_data.course.course_index <= 2
+        and not character_data.course.in_course
+    ):
         return 1
     return 0
 
@@ -138,7 +141,7 @@ def handle_not_have_food(character_id: int) -> int:
 
 
 @add_premise("HaveTarget")
-def handle_have_target(character_id:int) -> int:
+def handle_have_target(character_id: int) -> int:
     """
     校验角色是否有交互对象
     Keyword arguments:
@@ -153,7 +156,7 @@ def handle_have_target(character_id:int) -> int:
 
 
 @add_premise("HaveItemByTagDraw")
-def handle_have_item_by_tag_draw(character_id:int) -> int:
+def handle_have_item_by_tag_draw(character_id: int) -> int:
     """
     校验角色是否拥有绘画类道具
     Keyword arguments:
@@ -169,7 +172,7 @@ def handle_have_item_by_tag_draw(character_id:int) -> int:
 
 
 @add_premise("HaveItemByTagShooting")
-def handle_have_item_by_tag_shooting(character_id:int) -> int:
+def handle_have_item_by_tag_shooting(character_id: int) -> int:
     """
     校验角色是否拥有射击类道具
     Keyword arguments:
@@ -185,7 +188,7 @@ def handle_have_item_by_tag_shooting(character_id:int) -> int:
 
 
 @add_premise("HaveGuitar")
-def handle_have_guitar(character_id:int) -> int:
+def handle_have_guitar(character_id: int) -> int:
     """
     校验角色是否拥有吉他
     Keyword arguments:
@@ -201,7 +204,7 @@ def handle_have_guitar(character_id:int) -> int:
 
 
 @add_premise("HaveHarmonica")
-def handle_have_harmonica(character_id:int) -> int:
+def handle_have_harmonica(character_id: int) -> int:
     """
     校验角色是否拥有口琴
     Keyword arguments:
@@ -217,7 +220,7 @@ def handle_have_harmonica(character_id:int) -> int:
 
 
 @add_premise("HaveBamBooFlute")
-def handle_have_bamboogflute(character_id:int) -> int:
+def handle_have_bamboogflute(character_id: int) -> int:
     """
     校验角色是否拥有竹笛
     Keyword arguments:
@@ -233,7 +236,7 @@ def handle_have_bamboogflute(character_id:int) -> int:
 
 
 @add_premise("HaveBasketBall")
-def handle_have_basketball(character_id:int) -> int:
+def handle_have_basketball(character_id: int) -> int:
     """
     校验角色是否拥有篮球
     Keyword arguments:
@@ -249,7 +252,7 @@ def handle_have_basketball(character_id:int) -> int:
 
 
 @add_premise("HaveFootBall")
-def handle_have_football(character_id:int) -> int:
+def handle_have_football(character_id: int) -> int:
     """
     校验角色是否拥有足球
     Keyword arguments:
@@ -265,7 +268,7 @@ def handle_have_football(character_id:int) -> int:
 
 
 @add_premise("HaveTableTennis")
-def handle_have_tabletennis(character_id:int) -> int:
+def handle_have_tabletennis(character_id: int) -> int:
     """
     校验角色是否拥有乒乓球
     Keyword arguments:
@@ -281,7 +284,7 @@ def handle_have_tabletennis(character_id:int) -> int:
 
 
 @add_premise("InSwimmingPool")
-def handle_in_swimming_pool(character_id:int) -> int:
+def handle_in_swimming_pool(character_id: int) -> int:
     """
     校验角色是否在游泳池中
     Keyword arguments:
@@ -299,7 +302,7 @@ def handle_in_swimming_pool(character_id:int) -> int:
 
 
 @add_premise("InClassroom")
-def handle_in_classroom(character_id:int) -> int:
+def handle_in_classroom(character_id: int) -> int:
     """
     校验角色是否处于教室中
     Keyword arguments:
@@ -317,7 +320,7 @@ def handle_in_classroom(character_id:int) -> int:
 
 
 @add_premise("IsStudent")
-def handle_is_student(character_id:int) -> int:
+def handle_is_student(character_id: int) -> int:
     """
     校验角色是否是学生
     Keyword arguments:
@@ -332,7 +335,7 @@ def handle_is_student(character_id:int) -> int:
 
 
 @add_premise("IsTeacher")
-def handle_is_teacher(character_id:int) -> int:
+def handle_is_teacher(character_id: int) -> int:
     """
     校验角色是否是老师
     Keyword arguments:
@@ -347,7 +350,7 @@ def handle_is_teacher(character_id:int) -> int:
 
 
 @add_premise("InShop")
-def handle_in_shop(character_id:int) -> int:
+def handle_in_shop(character_id: int) -> int:
     """
     校验角色是否在商店中
     Keyword arguments:
@@ -365,7 +368,7 @@ def handle_in_shop(character_id:int) -> int:
 
 
 @add_premise("InSleepTime")
-def handle_in_sleep_time(character_id:int) -> int:
+def handle_in_sleep_time(character_id: int) -> int:
     """
     校验角色当前是否处于睡觉时间
     Keyword arguments:
@@ -381,7 +384,7 @@ def handle_in_sleep_time(character_id:int) -> int:
 
 
 @add_premise("InSiestaTime")
-def handle_in_siesta_time(character_id:int) -> int:
+def handle_in_siesta_time(character_id: int) -> int:
     """
     校验角色是否处于午休时间
     Keyword arguments:
@@ -397,7 +400,7 @@ def handle_in_siesta_time(character_id:int) -> int:
 
 
 @add_premise("TargetIsFutaOrWoman")
-def handle_target_is_futa_or_woman(character_id:int) -> int:
+def handle_target_is_futa_or_woman(character_id: int) -> int:
     """
     校验角色的目标对象性别是否为女性或扶她
     Keyword arguments:
@@ -406,14 +409,16 @@ def handle_target_is_futa_or_woman(character_id:int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[character_data.target_character_id]
-    if target_data.sex in {"Futa","Woman"}:
+    target_data = cache_contorl.character_data[
+        character_data.target_character_id
+    ]
+    if target_data.sex in {"Futa", "Woman"}:
         return 1
     return 0
 
 
 @add_premise("TargetIsFutaOrMan")
-def handle_target_is_futa_or_man(character_id:int) -> int:
+def handle_target_is_futa_or_man(character_id: int) -> int:
     """
     校验角色的目标对象性别是否为男性或扶她
     Keyword arguments:
@@ -422,14 +427,16 @@ def handle_target_is_futa_or_man(character_id:int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[character_data.target_character_id]
-    if target_data.sex in {"Man","Woman"}:
+    target_data = cache_contorl.character_data[
+        character_data.target_character_id
+    ]
+    if target_data.sex in {"Man", "Woman"}:
         return 1
     return 0
 
 
 @add_premise("TargetNotPutUnderwear")
-def handle_target_not_put_underwear(character_id:int) -> int:
+def handle_target_not_put_underwear(character_id: int) -> int:
     """
     校验角色的目标对象是否没穿上衣
     Keyword arguments:
@@ -438,14 +445,16 @@ def handle_target_not_put_underwear(character_id:int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[character_data.target_character_id]
+    target_data = cache_contorl.character_data[
+        character_data.target_character_id
+    ]
     if target_data.put_on["Underwear"] == "":
         return 1
     return 0
 
 
 @add_premise("TargetPutOnSkirt")
-def handle_target_put_on_skirt(character_id:int) -> int:
+def handle_target_put_on_skirt(character_id: int) -> int:
     """
     校验角色的目标对象是否穿着短裙
     Keyword arguments:
@@ -454,7 +463,9 @@ def handle_target_put_on_skirt(character_id:int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[character_data.target_character_id]
+    target_data = cache_contorl.character_data[
+        character_data.target_character_id
+    ]
     if target_data.put_on["Skirt"] == "":
         return 0
     return 1
