@@ -8,9 +8,12 @@ def own_charcter_move(target_scene: list):
     Keyword arguments:
     target_scene -- 寻路目标场景(在地图系统下的绝对坐标)
     """
-    move_now, _, now_target_position, now_need_time = character_move(
-        0, target_scene
-    )
+    (
+        move_now,
+        now_path_list,
+        now_target_position,
+        now_need_time,
+    ) = character_move(0, target_scene)
     if move_now == "Null":
         null_message = text_loading.get_text_data(
             constant.FilePath.MESSAGE_PATH, "30"
@@ -18,18 +21,13 @@ def own_charcter_move(target_scene: list):
         era_print.normal_print(null_message)
     else:
         map_handle.character_move_scene(
-            cache_contorl.character_data["character"][0].position,
-            now_target_position,
-            0,
+            cache_contorl.character_data[0].position, now_target_position, 0,
         )
         game_time.sub_time_now(now_need_time)
-        if (
-            cache_contorl.character_data["character"][0].position
-            != target_scene
-        ):
+        if cache_contorl.character_data[0].position != target_scene:
             own_charcter_move(target_scene)
     update.game_update_flow()
-    cache_contorl.character_data["character_id"] = 0
+    cache_contorl.character_data[0].target_character_id = 0
     cache_contorl.now_flow_id = "in_scene"
 
 
@@ -48,9 +46,7 @@ def character_move(
     list -- 本次移动到的位置
     int -- 本次移动花费的时间
     """
-    now_position = cache_contorl.character_data["character"][
-        character_id
-    ].position
+    now_position = cache_contorl.character_data[character_id].position
     scene_hierarchy = map_handle.judge_scene_affiliation(
         now_position, target_scene
     )
@@ -85,9 +81,7 @@ def difference_map_move(
     list -- 本次移动到的位置
     int -- 本次移动花费的时间
     """
-    now_position = cache_contorl.character_data["character"][
-        character_id
-    ].position
+    now_position = cache_contorl.character_data[character_id].position
     is_affiliation = map_handle.judge_scene_is_affiliation(
         now_position, target_scene
     )
@@ -155,6 +149,7 @@ def difference_map_move(
                 now_true_map, now_true_position
             )
             target_map_scene_id = "0"
+            common_map = now_scene_real_map
         return identical_map_move(
             character_id, common_map, now_map_scene_id, target_map_scene_id
         )

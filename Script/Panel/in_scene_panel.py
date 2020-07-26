@@ -34,7 +34,7 @@ def see_scene_panel():
     time_text = game_time.get_date_text()
     era_print.normal_print(time_text)
     era_print.normal_print(" ")
-    scene_path = cache_contorl.character_data["character"][0].position
+    scene_path = cache_contorl.character_data[0].position
     scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
     map_list = map_handle.get_map_hierarchy_list_for_scene_path(scene_path, [])
     map_path_text = ""
@@ -45,7 +45,7 @@ def see_scene_panel():
         )
         map_name = cache_contorl.map_data[now_map_map_system_str]["MapName"]
         map_path_text += map_name + "-"
-    scene_data = cache_contorl.scene_data[scene_path_str].copy()
+    scene_data = cache_contorl.scene_data[scene_path_str]
     scene_name = map_path_text + scene_data["SceneName"]
     scene_info_head = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "76"
@@ -68,36 +68,39 @@ def see_scene_character_list_panel() -> list:
     当前场景角色列表面板
     """
     input_s = []
-    see_character_text = text_loading.get_text_data(
-        constant.FilePath.MESSAGE_PATH, "26"
-    )
-    era_print.normal_print(see_character_text)
-    era_print.line_feed_print()
-    scene_path = cache_contorl.character_data["character"][0].position
+    scene_path = cache_contorl.character_data[0].position
     scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
     name_list = map_handle.get_scene_character_name_list(scene_path_str, True)
     name_list = get_now_page_name_list(name_list)
-    character_id = cache_contorl.character_data["character_id"]
-    character_data = cache_contorl.character_data["character"][character_id]
-    character_name = character_data.name
-    input_s = cmd_button_queue.option_str(
-        "",
-        cmd_column=10,
-        cmd_size="center",
-        askfor=False,
-        cmd_list_data=name_list,
-        null_cmd=character_name,
-    )
+    if len(name_list) > 0:
+        see_character_text = text_loading.get_text_data(
+            constant.FilePath.MESSAGE_PATH, "26"
+        )
+        era_print.normal_print(see_character_text)
+        era_print.line_feed_print()
+        character_id = cache_contorl.character_data[0].target_character_id
+        character_data = cache_contorl.character_data[character_id]
+        character_name = character_data.name
+        input_s = cmd_button_queue.option_str(
+            "",
+            cmd_column=10,
+            cmd_size="center",
+            askfor=False,
+            cmd_list_data=name_list,
+            null_cmd=character_name,
+        )
     return input_s
 
 
-def change_scene_character_list_panel() -> list:
+def change_scene_character_list_panel(start_id: int) -> list:
     """
     当前场景角色列表页切换控制面板
+    Keyword arguments:
+    start_id -- 指令的起始id
     """
     name_list_max = int(game_config.in_scene_see_player_max)
     now_page = int(cache_contorl.panel_state["SeeSceneCharacterListPanel"])
-    scene_path = cache_contorl.character_data["character"][0].position
+    scene_path = cache_contorl.character_data[0].position
     scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
     scene_character_name_list = map_handle.get_scene_character_name_list(
         scene_path_str
@@ -110,6 +113,7 @@ def change_scene_character_list_panel() -> list:
         cmd_column=5,
         askfor=False,
         cmd_size="center",
+        start_id=start_id,
     )
     era_print.page_line_print(sample="-", string=page_text)
     era_print.line_feed_print()
@@ -141,8 +145,8 @@ def see_character_info_panel():
         constant.FilePath.STAGE_WORD_PATH, "77"
     )
     era_print.normal_print(character_info)
-    character_id = cache_contorl.character_data["character_id"]
-    character_data = cache_contorl.character_data["character"][character_id]
+    character_id = cache_contorl.character_data[0].target_character_id
+    character_data = cache_contorl.character_data[character_id]
     character_name = character_data.name
     era_print.normal_print(character_name)
     era_print.normal_print(" ")
@@ -192,6 +196,7 @@ def in_scene_button_panel(start_id: int) -> list:
     start_id -- 基础控制菜单命令起始Id
     """
     era_print.line_feed_print()
+    era_print.restart_line_print(":")
     input_s = cmd_button_queue.option_int(
         cmd_list=constant.CmdMenu.IN_SCENE_LIST1,
         cmd_column=9,

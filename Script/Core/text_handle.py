@@ -13,6 +13,8 @@ def align(
     only_fix -- 只返回对齐所需要的补全文本 (default False)
     columns -- 将行宽平分指定列后，再进行对齐补全 (default 1)
     text_width -- 指定行宽，为None时将使用game_config中的配置 (default None)
+    Return arguments:
+    str -- 对齐后的文本
     """
     count_index = get_text_index(text)
     if text_width is None:

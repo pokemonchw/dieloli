@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-from collections import Callable
 from Script.Core import (
     game_data,
     flow_handle,
@@ -17,7 +16,7 @@ NO_EVENT_FUNC = "no_event_func"
 _main_flow = None
 
 
-def init(main_flow: Callable):
+def init(main_flow: object):
     """
     游戏流程初始化
     Keyword argument:
@@ -37,7 +36,6 @@ def init(main_flow: Callable):
     cache_contorl.map_data = game_data.game_data[game_config.language]["map"]
     cache_contorl.scene_data = game_data.scene_data
     cache_contorl.map_data = game_data.map_data
-    flow_handle.reset_func = reset
     global _main_flow
     _main_flow = main_flow
 
@@ -57,7 +55,7 @@ def init(main_flow: Callable):
     run_main_flow()
 
 
-def run(main_func: Callable):
+def run(main_func: object):
     """
     执行游戏主流程
     Keyword arguments:
@@ -78,17 +76,6 @@ def console_log(string: str):
     """
     print("game log:")
     print(string + "\n")
-
-
-def reset():
-    """
-    重启游戏
-    """
-    global _main_flow
-    io_init.io_clear_cmd()
-    io_init.clear_screen()
-    io_init.clear_order()
-    init(_main_flow)
 
 
 # 请求输入命令

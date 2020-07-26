@@ -7,15 +7,13 @@ def handle_text(text: str) -> str:
     Keyword arguments:
     string -- 需要进行转义处理的文本
     """
-    character_id = cache_contorl.character_data["character_id"]
-    if character_id != "":
-        character_name = cache_contorl.character_data["character"][
-            character_id
-        ].name
-        character_nick_name = cache_contorl.character_data["character"][
+    if len(cache_contorl.character_data) > 0:
+        character_id = cache_contorl.character_data[0].target_character_id
+        character_name = cache_contorl.character_data[character_id].name
+        character_nick_name = cache_contorl.character_data[
             character_id
         ].nick_name
-        character_self_name = cache_contorl.character_data["character"][
+        character_self_name = cache_contorl.character_data[
             character_id
         ].self_name
         return text.format(

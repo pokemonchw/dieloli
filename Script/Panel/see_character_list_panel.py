@@ -23,7 +23,7 @@ def see_character_list_panel(max_page: int) -> list:
     input_s = []
     page_id = int(cache_contorl.panel_state["SeeCharacterListPanel"])
     page_show = int(game_config.character_list_show)
-    character_max = len(cache_contorl.character_data["character"]) - 1
+    character_max = len(cache_contorl.character_data) - 1
     if page_id == max_page:
         show_page_start = page_show * page_id
         show_page_over = show_page_start + (

@@ -19,7 +19,7 @@ def init_character_interest():
         knowledge_list = knowledge_data[knowledge_tag]
         interest_list += list(knowledge_list["Knowledge"].keys())
     interest_average = 100 / len(interest_list)
-    for character in cache_contorl.character_data["character"]:
+    for character in cache_contorl.character_data:
         now_interest_value_max = 100
         now_interest_list = interest_list.copy()
         numpy.random.shuffle(now_interest_list)
@@ -32,10 +32,10 @@ def init_character_interest():
                     0.75, 1.25
                 )
                 now_interest_value_max -= now_inter_value
-                cache_contorl.character_data["character"][character].interest[
-                    interest
-                ] = (now_inter_value / interest_average)
+                cache_contorl.character_data[character].interest[interest] = (
+                    now_inter_value / interest_average
+                )
             else:
-                cache_contorl.character_data["character"][character].interest[
+                cache_contorl.character_data[character].interest[
                     interest
                 ] = now_interest_value_max

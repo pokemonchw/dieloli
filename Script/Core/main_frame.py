@@ -20,6 +20,7 @@ from tkinter import (
     font,
     Entry,
 )
+from Script.Core.game_path_config import game_path
 from Script.Core import (
     game_config,
     text_loading,
@@ -139,19 +140,11 @@ menu_bar.add_cascade(
 )
 
 
-def reset(*args):
-    """
-    重置游戏
-    """
-    cache_contorl.flow_contorl["restart_game"] = 1
-    send_input()
-
-
 def quit(*args):
     """
     退出游戏
     """
-    cache_contorl.flow_contorl["quit_game"] = 1
+    cache_contorl.flow_contorl.quit_game = 1
     send_input()
 
 
@@ -169,12 +162,6 @@ def about(*args):
     about_frame.open_about_frame()
 
 
-menu_file.add_command(
-    label=text_loading.get_text_data(
-        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_RESTART
-    ),
-    command=reset,
-)
 menu_file.add_command(
     label=text_loading.get_text_data(
         constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_QUIT
@@ -480,7 +467,7 @@ def io_print_cmd(
             textbox.tag_ranges(cmd_tag_name)[0],
             textbox.tag_ranges(cmd_tag_name)[1],
         )
-        cache_contorl.wframe_mouse["mouse_leave_cmd"] = 0
+        cache_contorl.wframe_mouse.mouse_leave_cmd = 0
 
     def leave_func(*args):
         """
@@ -496,7 +483,7 @@ def io_print_cmd(
             textbox.tag_ranges(cmd_tag_name)[0],
             textbox.tag_ranges(cmd_tag_name)[1],
         )
-        cache_contorl.wframe_mouse["mouse_leave_cmd"] = 1
+        cache_contorl.wframe_mouse.mouse_leave_cmd = 1
 
     textbox.tag_bind(cmd_tag_name, "<1>", send_cmd)
     textbox.tag_bind(cmd_tag_name, "<Enter>", enter_func)

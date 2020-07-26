@@ -37,7 +37,7 @@ def _get_input_event():
     return input_evnet
 
 
-def run(open_func):
+def run(open_func: object):
     """
     运行游戏
     Keyword arguments:

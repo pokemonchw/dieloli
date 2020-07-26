@@ -183,39 +183,39 @@
   },
   "SexExperienceTem":{
     "MouthExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "BosomExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "VaginaExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "ClitorisExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "AnusExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     },
     "PenisExperienceTem":{
-      "Abundant":[51,100],
-      "Ordinary":[30,50],
-      "Scarce":[1,29],
+      "Abundant":[5000,10000],
+      "Ordinary":[500,4999],
+      "Scarce":[1,499],
       "None":[0,0]
     }
   },
@@ -529,5 +529,49 @@
       "Fat":0.4,
       "SevereObesity":0.6,
       "ExtremelySevereObesity":1.0
+  },
+  "FoodQualityWeight":{
+    "0":{
+      "0":90,
+      "1":4,
+      "2":3,
+      "3":2,
+      "4":1
+    },
+    "1":{
+      "0":82,
+      "1":6,
+      "2":5,
+      "3":4,
+      "4":3
+    },
+    "2":{
+      "0":74,
+      "1":8,
+      "2":7,
+      "3":6,
+      "4":5
+    },
+    "3":{
+      "0":66,
+      "1":10,
+      "2":9,
+      "3":8,
+      "4":7
+    },
+    "4":{
+      "0":58,
+      "1":12,
+      "2":11,
+      "3":10,
+      "4":9
+    },
+    "5":{
+      "0":50,
+      "1":14,
+      "2":13,
+      "3":12,
+      "4":11
+    }
   }
 }

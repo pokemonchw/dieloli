@@ -4,18 +4,23 @@
 import getopt
 import sys
 from Script.Core import game_data
+import freetype
 
-try:
-    options, _ = getopt.getopt(sys.argv[1:], "d:", ["debug="])
-    key, value = options[0]
-    if key in ("-d", "--debug") and value == "1":
+
+options = getopt.getopt(sys.argv[1:], "-d")[0]
+if len(options):
+    key = options[0][0]
+    if key == "-d":
         game_data.init(1)
     else:
         game_data.init(0)
-except:
+else:
     game_data.init(0)
 
-from Script.Design import start_flow
+
+from Script.Design import start_flow, handle_target, handle_premise
 from Script.Core import game_init
+import Script.Talk
+import Script.Settle
 
 game_init.run(start_flow.start_frame)

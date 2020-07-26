@@ -44,29 +44,29 @@ def set_rich_text_print(text_message: str, default_style: str) -> list:
                 style_last_index = i
                 style_max_index = input_text_style_size
                 if input_text_style[0] == "/":
-                    if cache_contorl.text_style_position["position"] == 1:
+                    if cache_contorl.text_style_position == 1:
                         cache_contorl.output_text_style = "standard"
-                        cache_contorl.text_style_position["position"] = 0
+                        cache_contorl.text_style_position = 0
                         cache_contorl.text_style_cache = ["standard"]
                     else:
-                        cache_contorl.text_style_position["position"] = (
-                            cache_contorl.text_style_position["position"] - 1
+                        cache_contorl.text_style_position = (
+                            cache_contorl.text_style_position - 1
                         )
                         cache_contorl.output_text_style = cache_contorl.text_style_cache[
-                            cache_contorl.text_style_position["position"]
+                            cache_contorl.text_style_position
                         ]
                 else:
-                    cache_contorl.text_style_position["position"] = len(
+                    cache_contorl.text_style_position = len(
                         cache_contorl.text_style_cache
                     )
                     cache_contorl.text_style_cache.append(input_text_style)
                     cache_contorl.output_text_style = cache_contorl.text_style_cache[
-                        cache_contorl.text_style_position["position"]
+                        cache_contorl.text_style_position
                     ]
             else:
                 if style_last_index is not None:
                     if i == len(text_message):
-                        cache_contorl.text_style_position["position"] = 0
+                        cache_contorl.text_style_position = 0
                         cache_contorl.output_text_style = "standard"
                         cache_contorl.text_style_cache = ["standard"]
                     if i not in range(style_last_index, style_max_index):

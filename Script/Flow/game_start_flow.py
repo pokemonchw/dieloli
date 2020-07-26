@@ -3,6 +3,7 @@ from Script.Design import (
     map_handle,
     course,
     interest,
+    cooking,
 )
 from Script.Core import cache_contorl
 
@@ -18,6 +19,9 @@ def init_game_start():
     course.init_character_knowledge()
     course.init_class_teacher()
     course.init_class_time_table()
-    character_position = cache_contorl.character_data["character"][0].position
+    course.init_teacher_table()
+    cooking.init_recipes()
+    cooking.init_restaurant_data()
+    character_position = cache_contorl.character_data[0].position
     map_handle.character_move_scene(["0"], character_position, 0)
     cache_contorl.now_flow_id = "main"

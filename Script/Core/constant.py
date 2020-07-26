@@ -45,13 +45,17 @@ class FilePath:
     """ 可穿戴道具数据配置路径 """
     NATURE_PATH = "Nature"
     """ 人格维度相关数据配置路径 """
+    INSTRUCT_PATH = "Instruct"
+    """ 指令显示需求数据配置路径 """
+    FOOD_PATH = "Food"
+    """ 食材配置路径 """
+    RECIPES_PATH = "Recipes"
+    """ 菜谱配置路径 """
 
 
 class WindowMenu:
     """ 窗体菜单栏文本id """
 
-    MENU_RESTART = "1"
-    """ 重启 """
     MENU_QUIT = "2"
     """ 退出 """
     MENU_SETTING = "3"
@@ -119,6 +123,12 @@ class CmdMenu:
     """ 确认属性面板控制菜单 """
     INSTRUCT_HEAD_PANEL = "instructHeadPanel"
     """ 操作指令过滤面板菜单 """
+    INSTRUCT_PANEL = "instructPanel"
+    """ 操作指令菜单 """
+    BUY_FOOD_HEAD_PANEL = "buyFoodHeadPanel"
+    """ 购买食物商店顶部面板 """
+    BUY_FOOD_NOW_PANEL = "buyFoodNowPanel"
+    """ 购买食物确认面板 """
 
 
 class TimeSlice:
@@ -151,6 +161,12 @@ class CharacterStatus:
     """ 休闲状态 """
     STATUS_MOVE = 1
     """ 移动状态 """
+    STATUS_REST = 2
+    """ 休息状态 """
+    STATUS_ATTEND_CLASS = 3
+    """ 上课状态 """
+    STATUS_EAT = 4
+    """ 进食状态 """
 
 
 class Behavior:
@@ -159,3 +175,10 @@ class Behavior:
     SHARE_BLANKLY = 0
     """ 发呆 """
     MOVE = 1
+    """ 移动 """
+    REST = 2
+    """ 休息 """
+    ATTEND_CLASS = 3
+    """ 上课 """
+    EAT = 4
+    """ 进食 """

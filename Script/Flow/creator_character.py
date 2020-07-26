@@ -9,6 +9,7 @@ from Script.Core import (
 )
 from Script.Design import attr_calculation, game_time, nature, character
 from Script.Panel import creator_character_panel, see_nature_panel
+from Script.Core import game_type
 
 
 def input_name_func():
@@ -19,8 +20,7 @@ def input_name_func():
     输入2:返回标题菜单
     """
     game_time.init_time()
-    cache_contorl.character_data["character_id"] = 0
-    cache_contorl.character_data["character"][0] = character.Character()
+    cache_contorl.character_data[0] = game_type.Character()
     flow_return = 0
     while 1:
         flow_return = creator_character_panel.input_name_panel()
@@ -59,9 +59,9 @@ def input_nick_name_func():
         input_nick_name_func()
     elif flow_return == 2:
         py_cmd.clr_cmd()
-        cache_contorl.character_data["character"][
+        cache_contorl.character_data[
             0
-        ].nick_name = cache_contorl.character_data["character"][0].name
+        ].nick_name = cache_contorl.character_data[0].name
         input_nick_name_func()
     elif flow_return == 3:
         py_cmd.clr_cmd()
@@ -123,13 +123,13 @@ def input_sex_choice_func():
     flow_return = creator_character_panel.input_sex_choice_panel()
     if flow_return in range(0, sex_max):
         sex_atr = sex[flow_return]
-        cache_contorl.character_data["character"][0].sex = sex_atr
+        cache_contorl.character_data[0].sex = sex_atr
         py_cmd.clr_cmd()
         input_sex_confirm_func()
     elif flow_return == 4:
         rand = random.randint(0, len(sex) - 1)
         sex_atr = sex[rand]
-        cache_contorl.character_data["character"][0].sex = sex_atr
+        cache_contorl.character_data[0].sex = sex_atr
         py_cmd.clr_cmd()
         input_sex_confirm_func()
     elif flow_return == 5:
@@ -151,7 +151,7 @@ def attribute_generation_branch_func():
         detailed_setting_func_1()
     elif flow_return == 1:
         py_cmd.clr_cmd()
-        cache_contorl.character_data["character"][0].init_attr()
+        character.init_attr(cache_contorl.character_data[0])
         cache_contorl.now_flow_id = "acknowledgment_attribute"
     elif flow_return == 2:
         py_cmd.clr_cmd()
@@ -164,9 +164,9 @@ def detailed_setting_func_1():
     """
     flow_retun = creator_character_panel.detailed_setting_1_panel()
     character_age_tem_name = attr_calculation.get_age_tem_list()[flow_retun]
-    cache_contorl.character_data["character"][
-        0
-    ].age = attr_calculation.get_age(character_age_tem_name)
+    cache_contorl.character_data[0].age = attr_calculation.get_age(
+        character_age_tem_name
+    )
     py_cmd.clr_cmd()
     detailed_setting_func_3()
 
@@ -183,9 +183,7 @@ def detailed_setting_func_3():
     )
     sex_tem_data_list.reverse()
     sex_tem_name = sex_tem_data_list[flow_return]
-    cache_contorl.character_data["character"][
-        0
-    ].sex_experience_tem = sex_tem_name
+    cache_contorl.character_data[0].sex_experience_tem = sex_tem_name
     py_cmd.clr_cmd()
     detailed_setting_func_8()
 
@@ -200,8 +198,8 @@ def detailed_setting_func_8():
     )
     weight_tem_list = list(weight_tem_data.keys())
     weight_tem = weight_tem_list[int(flow_return)]
-    cache_contorl.character_data["character"][0].weigt_tem = weight_tem
-    cache_contorl.character_data["character"][0].bodyfat_tem = weight_tem
+    cache_contorl.character_data[0].weigt_tem = weight_tem
+    cache_contorl.character_data[0].bodyfat_tem = weight_tem
     enter_character_nature_func()
 
 
@@ -209,27 +207,25 @@ def enter_character_nature_func():
     """
     请求玩家确认性格流程
     """
-    cache_contorl.character_data["character"][0].init_attr()
+    character.init_attr(cache_contorl.character_data[0])
     while 1:
         py_cmd.clr_cmd()
         creator_character_panel.enter_character_nature_head()
         input_s = see_nature_panel.see_character_nature_change_panel(0)
         input_s += creator_character_panel.enter_character_nature_end()
         yrn = game_init.askfor_all(input_s)
-        if yrn in cache_contorl.character_data["character"][0].nature:
-            if cache_contorl.character_data["character"][0].nature[yrn] < 50:
-                cache_contorl.character_data["character"][0].nature[
-                    yrn
-                ] = random.uniform(50, 100)
+        if yrn in cache_contorl.character_data[0].nature:
+            if cache_contorl.character_data[0].nature[yrn] < 50:
+                cache_contorl.character_data[0].nature[yrn] = random.uniform(
+                    50, 100
+                )
             else:
-                cache_contorl.character_data["character"][0].nature[
-                    yrn
-                ] = random.uniform(0, 50)
+                cache_contorl.character_data[0].nature[yrn] = random.uniform(
+                    0, 50
+                )
         elif int(yrn) == 0:
-            cache_contorl.character_data["character"][0].init_attr()
+            character.init_attr(cache_contorl.character_data[0])
             cache_contorl.now_flow_id = "acknowledgment_attribute"
             break
         elif int(yrn) == 1:
-            cache_contorl.character_data["character"][
-                0
-            ].nature = nature.get_random_nature()
+            cache_contorl.character_data[0].nature = nature.get_random_nature()

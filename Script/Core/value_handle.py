@@ -1,6 +1,7 @@
 import random
 import bisect
 import itertools
+from typing import Dict, List
 
 
 def two_bit_array_to_dict(array: tuple) -> dict:
@@ -12,7 +13,7 @@ def two_bit_array_to_dict(array: tuple) -> dict:
     return {x: y for x, y in array}
 
 
-def get_region_list(now_data: dict) -> dict:
+def get_region_list(now_data: Dict[any, int]) -> dict:
     """
     按dict中每个value的值对key进行排序，并计算权重区域列表
     Keyword arguments:
@@ -24,7 +25,7 @@ def get_region_list(now_data: dict) -> dict:
     )
 
 
-def sorted_dict_for_values(old_dict: dict) -> dict:
+def sorted_dict_for_values(old_dict: Dict[any, int]) -> dict:
     """
     按dict中每个value的值对key进行排序生成新dict
     Keyword arguments:
@@ -33,7 +34,7 @@ def sorted_dict_for_values(old_dict: dict) -> dict:
     return two_bit_array_to_dict(sorted(old_dict.items(), key=lambda x: x[1]))
 
 
-def get_random_for_weight(data: dict) -> dict.keys:
+def get_random_for_weight(data: Dict[any, int]) -> any:
     """
     按权重随机获取dict中的一个key
     Keyword arguments:
@@ -47,7 +48,7 @@ def get_random_for_weight(data: dict) -> dict.keys:
     return weight_region_data[weight_region]
 
 
-def get_next_value_for_list(now_int: int, int_list: list) -> int:
+def get_next_value_for_list(now_int: int, int_list: List[int]) -> int:
     """
     获取列表中第一个比指定值大的数
     Keyword arguments:
@@ -58,7 +59,7 @@ def get_next_value_for_list(now_int: int, int_list: list) -> int:
     return int_list[now_id]
 
 
-def get_old_value_for_list(now_int: int, int_list: list) -> int:
+def get_old_value_for_list(now_int: int, int_list: List[int]) -> int:
     """
     获取列表中第一个比指定值小的数
     Keyword arguments:

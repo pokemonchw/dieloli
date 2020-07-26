@@ -8,7 +8,7 @@ def title_frame_func():
     标题界面绘制流程
     """
     title_frame_panel.load_game_panel()
-    cache_contorl.wframe_mouse["w_frame_re_print"] = 1
+    cache_contorl.wframe_mouse.w_frame_re_print = 1
     ans = title_frame_panel.game_main_panel()
     py_cmd.clr_cmd()
     if ans == 0:

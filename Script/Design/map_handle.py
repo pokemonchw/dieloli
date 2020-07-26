@@ -17,7 +17,7 @@ def print_map(map_path: list) -> list:
     """
     map_path_str = get_map_system_path_str_for_list(map_path)
     map_draw = get_map_draw_for_map_path(map_path_str)
-    character_position = cache_contorl.character_data["character"][0].position
+    character_position = cache_contorl.character_data[0].position
     character_now_scene_id = get_scene_id_in_map_for_scene_path_on_map_path(
         character_position, map_path
     )
@@ -158,15 +158,13 @@ def character_move_scene(
             "SceneCharacterData"
         ]
     ):
-        cache_contorl.character_data["character"][
-            character_id
-        ].position = new_scene_path
+        cache_contorl.character_data[character_id].position = new_scene_path
         cache_contorl.scene_data[new_scene_path_str]["SceneCharacterData"][
             character_id
         ] = 0
 
 
-def get_map_system_path_str_for_list(now_list: list):
+def get_map_system_path_str_for_list(now_list: list) -> str:
     """
     将地图路径列表数据转换为字符串
     Keyword arguments:
@@ -341,7 +339,7 @@ def judge_scene_affiliation(
     """
     if now_scene_path[:-1] != target_scene_path[:-1]:
         if now_scene_path[:-1] != target_scene_path:
-            if now_scene_path[:-1] != []:
+            if now_scene_path[:-1] != [] and target_scene_path[:-1] != []:
                 return judge_scene_affiliation(
                     now_scene_path[:-1], target_scene_path
                 )
@@ -477,9 +475,7 @@ def get_scene_character_name_list(
     if remove_own_character:
         now_scene_character_list.remove(0)
     for character_id in now_scene_character_list:
-        character_name = cache_contorl.character_data["character"][
-            character_id
-        ].name
+        character_name = cache_contorl.character_data[character_id].name
         name_list.append(character_name)
     return name_list
 
@@ -522,7 +518,7 @@ def sort_scene_character_id(scene_path_str: str):
     ]:
         now_scene_character_intimate_data[
             character
-        ] = cache_contorl.character_data["character"][character].intimate
+        ] = cache_contorl.character_data[character].intimate
     new_scene_character_intimate_data = sorted(
         now_scene_character_intimate_data.items(),
         key=lambda x: (x[1], -int(x[0])),

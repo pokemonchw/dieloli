@@ -37,7 +37,7 @@ def see_move_path_panel() -> dict:
     当前场景可直接通往的移动路径绘制面板
     """
     input_s = []
-    now_scene = cache_contorl.character_data["character"][0].position
+    now_scene = cache_contorl.character_data[0].position
     now_map = cache_contorl.now_map
     now_map_str = map_handle.get_map_system_path_str_for_list(now_map)
     map_data = cache_contorl.map_data[now_map_str]
@@ -47,8 +47,8 @@ def see_move_path_panel() -> dict:
     era_print.normal_print("\n")
     era_print.line_feed_print(move_path_info)
     path_edge = map_data["PathEdge"]
-    map_scene_id = str(
-        map_handle.get_map_scene_id_for_scene_path(now_map, now_scene)
+    map_scene_id = map_handle.get_map_scene_id_for_scene_path(
+        now_map, now_scene
     )
     scene_path = path_edge[map_scene_id].copy()
     if map_scene_id in scene_path:
@@ -93,7 +93,7 @@ def show_scene_name_list_panel() -> str:
         py_cmd.pcmd(panel_state_off_text, "SeeSceneNameListPanel")
         era_print.line_feed_print()
         now_map = cache_contorl.now_map
-        now_position = cache_contorl.character_data["character"][0].position
+        now_position = cache_contorl.character_data[0].position
         now_scene = map_handle.get_scene_id_in_map_for_scene_path_on_map_path(
             now_position, now_map
         )
@@ -131,7 +131,7 @@ def back_scene_panel(start_id: str) -> list:
     start_id -- 面板命令起始id
     """
     see_map_cmd = []
-    now_position = cache_contorl.character_data["character"][0].position
+    now_position = cache_contorl.character_data[0].position
     now_map = map_handle.get_map_for_path(now_position)
     cmd_data = text_loading.get_text_data(
         constant.FilePath.CMD_PATH, constant.CmdMenu.SEE_MAP

@@ -10,7 +10,7 @@ def see_character_social_contact_panel(character_id: int):
     social_contact_text_data = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "144"
     )
-    character_social_contact = cache_contorl.character_data["character"][
+    character_social_contact = cache_contorl.character_data[
         character_id
     ].social_contact
     for social in social_contact_text_data:
@@ -26,7 +26,7 @@ def see_character_social_contact_panel(character_id: int):
             if len(character_social_contact[social]) < 10:
                 size = len(character_social_contact[social])
             name_list = [
-                cache_contorl.character_data["character"][character_id].name
+                cache_contorl.character_data[character_id].name
                 for character_id in character_social_contact[social]
             ]
             era_print.list_print(name_list, size, "center")

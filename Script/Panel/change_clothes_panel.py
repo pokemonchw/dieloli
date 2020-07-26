@@ -10,7 +10,7 @@ from Script.Core import (
 from Script.Design import attr_text, cmd_button_queue, clothing
 
 
-def see_character_wear_clothes_info(character_id: str):
+def see_character_wear_clothes_info(character_id: int):
     """
     查看角色已穿戴服装列表顶部面板
     Keyword arguments:
@@ -24,19 +24,17 @@ def see_character_wear_clothes_info(character_id: str):
     era_print.normal_print(character_info)
 
 
-def see_character_wear_clothes(character_id: str, change_button: bool):
+def see_character_wear_clothes(character_id: int, change_button: bool):
     """
     查看角色穿戴服装列表面板
     Keyword arguments:
     character_id -- 角色id
     change_button -- 将服装列表绘制成按钮的开关
     """
-    character_clothing_data = cache_contorl.character_data["character"][
+    character_clothing_data = cache_contorl.character_data[
         character_id
     ].clothing
-    character_put_on_list = cache_contorl.character_data["character"][
-        character_id
-    ].put_on
+    character_put_on_list = cache_contorl.character_data[character_id].put_on
     clothing_text_data = {}
     tag_text_index = 0
     for i in range(len(clothing.clothing_type_text_list.keys())):
@@ -123,16 +121,18 @@ def see_character_wear_clothes_cmd(start_id: int) -> str:
 
 def see_character_clothes_panel(
     character_id: str, clothing_type: str, max_page: int
-):
+) -> list:
     """
     用于查看角色服装列表的面板
     Keyword arguments:
     character_id -- 角色id
     clothing_type -- 服装类型
     max_page -- 服装列表最大页数
+    Rerurn arguments:
+    list -- 监听的按钮列表
     """
     era_print.line_feed_print()
-    character_clothing_data = cache_contorl.character_data["character"][
+    character_clothing_data = cache_contorl.character_data[
         character_id
     ].clothing[clothing_type]
     clothing_text_data = {}
@@ -154,9 +154,7 @@ def see_character_clothes_panel(
         clothing_id = list(character_clothing_data.keys())[i]
         if (
             clothing_id
-            == cache_contorl.character_data["character"][character_id].put_on[
-                clothing_type
-            ]
+            == cache_contorl.character_data[character_id].put_on[clothing_type]
         ):
             pass_id = i - now_page_start_id
         clothing_data = character_clothing_data[clothing_id]
@@ -208,7 +206,7 @@ def see_character_clothes_panel(
         py_cmd.pcmd(cmd_text, i, None)
         era_print.line_feed_print()
         i += 1
-    era_print.line_feed_print()
+    era_print.normal_print("\n")
     page_text = "(" + str(now_page_id) + "/" + str(max_page) + ")"
     era_print.page_line_print(sample="-", string=page_text)
     era_print.line_feed_print()
@@ -301,9 +299,9 @@ def see_clothing_info_panel(
     era_print.little_title_print(
         text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "126")
     )
-    clothing_data = cache_contorl.character_data["character"][
-        character_id
-    ].clothing[clothing_type][clothing_id]
+    clothing_data = cache_contorl.character_data[character_id].clothing[
+        clothing_type
+    ][clothing_id]
     info_list = []
     clothing_name = clothing_data["Name"]
     if wear_clothing_judge:

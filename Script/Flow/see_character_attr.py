@@ -45,7 +45,7 @@ def acknowledgment_attribute_func():
             game_start_flow.init_game_start()
             break
         elif yrn == "1":
-            cache_contorl.wframe_mouse["w_frame_re_print"] = 1
+            cache_contorl.wframe_mouse.w_frame_re_print = 1
             era_print.next_screen_print()
             cache_contorl.now_flow_id = "title_frame"
             break
@@ -56,9 +56,9 @@ def see_attr_on_every_time_func():
     通用用于查看角色属性的流程
     """
     while True:
-        character_id = cache_contorl.character_data["character_id"]
+        character_id = cache_contorl.character_data[0].target_character_id
         if cache_contorl.old_flow_id == "in_scene":
-            now_scene = cache_contorl.character_data["character"][0].position
+            now_scene = cache_contorl.character_data[0].position
             now_scene_str = map_handle.get_map_system_path_str_for_list(
                 now_scene
             )
@@ -66,9 +66,7 @@ def see_attr_on_every_time_func():
                 now_scene_str
             )
         else:
-            character_id_list = list(
-                cache_contorl.character_data["character"].keys()
-            )
+            character_id_list = list(cache_contorl.character_data.keys())
         character_id_index = character_id_list.index(character_id)
         input_s = []
         see_attr_in_every_time_func()
@@ -86,13 +84,13 @@ def see_attr_on_every_time_func():
             cache_contorl.panel_state["AttrShowHandlePanel"] = yrn
         elif yrn == "0":
             if character_id_index == 0:
-                cache_contorl.character_data["character_id"] = character_max
+                cache_contorl.character_data[0].target_character_id = character_max
             else:
                 character_id = character_id_list[character_id_index - 1]
-                cache_contorl.character_data["character_id"] = character_id
+                cache_contorl.character_data[0].target_character_id = character_id
         elif yrn == "1":
             if cache_contorl.old_flow_id == "main":
-                cache_contorl.character_data["character_id"] = 0
+                cache_contorl.character_data[0].target_character_id = 0
             elif cache_contorl.old_flow_id == "see_character_list":
                 character_list_show = int(game_config.character_list_show)
                 now_page_id = character_id_index / character_list_show
@@ -100,17 +98,15 @@ def see_attr_on_every_time_func():
                     "SeeCharacterListPanel"
                 ] = now_page_id
             elif cache_contorl.old_flow_id == "in_scene":
-                scene_path = cache_contorl.character_data["character"][
-                    0
-                ].position
+                scene_path = cache_contorl.character_data[0].position
                 scene_path_str = map_handle.get_map_system_path_str_for_list(
                     scene_path
                 )
                 name_list = map_handle.get_scene_character_name_list(
                     scene_path_str, True
                 )
-                now_character_name = cache_contorl.character_data["character"][
-                    cache_contorl.character_data["character_id"]
+                now_character_name = cache_contorl.character_data[
+                    cache_contorl.character_data[0].target_character_id
                 ].name
                 try:
                     now_character_index = name_list.index(now_character_name)
@@ -130,16 +126,16 @@ def see_attr_on_every_time_func():
         elif yrn == "2":
             if character_id == character_max:
                 character_id = character_id_list[0]
-                cache_contorl.character_data["character_id"] = character_id
+                cache_contorl.character_data[0].target_character_id = character_id
             else:
                 character_id = character_id_list[character_id_index + 1]
-                cache_contorl.character_data["character_id"] = character_id
+                cache_contorl.character_data[0].target_character_id = character_id
 
 
 def see_attr_in_every_time_func():
     """
     用于在任何时候查看角色属性的流程
     """
-    character_id = cache_contorl.character_data["character_id"]
+    character_id = cache_contorl.character_data[0].target_character_id
     now_attr_panel = cache_contorl.panel_state["AttrShowHandlePanel"]
     return see_character_attr_panel.panel_data[now_attr_panel](character_id)

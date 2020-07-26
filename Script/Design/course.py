@@ -1,7 +1,8 @@
 import math
 import random
 from Script.Core import text_loading, value_handle, cache_contorl, constant
-from Script.Design.character import Character
+from Script.Core.game_type import Character
+from Script.Design import map_handle
 
 
 def init_phase_course_hour():
@@ -149,7 +150,6 @@ def init_class_teacher():
     course_max_a = 0
     course_max_b = 0
     vice_course_index_b = 0
-    cache_contorl.course_data["ClassTeacher"] = {}
     for phase in cache_contorl.course_data["ClassHour"]:
         course_max_a += (
             len(cache_contorl.course_data["ClassHour"][phase].keys()) * 3
@@ -166,19 +166,62 @@ def init_class_teacher():
         course_distribution_b()
 
 
+def init_teacher_table():
+    """ 初始化教师上课时间数据 """
+    teacher_table = {}
+    for phase in cache_contorl.course_data["ClassTimeTable"]:
+        class_time_table = cache_contorl.course_data["ClassTimeTable"][phase]
+        class_list = cache_contorl.place_data["Classroom_" + str(phase + 1)]
+        for day in cache_contorl.course_data["ClassTimeTable"][phase]:
+            for classroom in class_list:
+                for i in cache_contorl.course_data["ClassTimeTable"][phase][
+                    day
+                ]:
+                    now_course = cache_contorl.course_data["ClassTimeTable"][
+                        phase
+                    ][day][i]
+                    for now_teacher in cache_contorl.course_data[
+                        "ClassTeacher"
+                    ]["Classroom_" + str(phase + 1)][classroom][now_course]:
+                        if now_teacher not in teacher_table:
+                            cache_contorl.character_data[
+                                now_teacher
+                            ].officeroom = map_handle.get_map_system_path_str_for_list(
+                                cache_contorl.place_data[
+                                    "Office_" + str(phase + 1)
+                                ]
+                            )
+                        teacher_table.setdefault(now_teacher, 0)
+                        if teacher_table[now_teacher] < 14:
+                            teacher_table[now_teacher] += 1
+                            cache_contorl.teacher_class_time_table.setdefault(
+                                day, {}
+                            )
+                            cache_contorl.teacher_class_time_table[
+                                day
+                            ].setdefault(phase, {})
+                            cache_contorl.teacher_class_time_table[day][
+                                phase
+                            ].setdefault(i, {})
+                            cache_contorl.teacher_class_time_table[day][phase][
+                                i
+                            ][now_teacher] = {classroom: now_course}
+
+
 def course_abmain_distribution():
     """
     课时分配流程AB通用主课时分配流程
     """
     for phase in range(12, 0, -1):
         class_list = cache_contorl.place_data["Classroom_" + str(phase)]
+        cache_contorl.course_data.setdefault("ClassTeacher", {})
         cache_contorl.course_data["ClassTeacher"][
             "Classroom_" + str(phase)
         ] = {}
         for classroom in class_list:
             cache_contorl.course_data["ClassTeacher"][
                 "Classroom_" + str(phase)
-            ][classroom] = {}
+            ].setdefault(classroom, {})
             for course in cache_contorl.course_data["ClassHour"][phase - 1]:
                 if (
                     cache_contorl.course_data["ClassHour"][phase - 1][course]
@@ -186,7 +229,7 @@ def course_abmain_distribution():
                 ):
                     cache_contorl.course_data["ClassTeacher"][
                         "Classroom_" + str(phase)
-                    ][classroom][course] = []
+                    ][classroom].setdefault(course, [])
                     for teacher in cache_contorl.teacher_course_experience[
                         course
                     ]:
@@ -214,7 +257,7 @@ def course_distribution_a():
         for classroom in class_list:
             cache_contorl.course_data["ClassTeacher"][
                 "Classroom_" + str(phase)
-            ][classroom] = {}
+            ].setdefault(classroom, {})
             for course in cache_contorl.course_data["ClassHour"][phase - 1]:
                 if (
                     cache_contorl.course_data["ClassHour"][phase - 1][course]
@@ -222,7 +265,7 @@ def course_distribution_a():
                 ):
                     cache_contorl.course_data["ClassTeacher"][
                         "Classroom_" + str(phase)
-                    ][classroom][course] = []
+                    ][classroom].setdefault(course, [])
                     for teacher in cache_contorl.teacher_course_experience[
                         course
                     ]:
@@ -249,14 +292,14 @@ def course_distribution_b():
             for classroom in class_list:
                 cache_contorl.course_data["ClassTeacher"][
                     "Classroom_" + str(phase)
-                ][classroom] = {}
+                ].setdefault(classroom, {})
                 if (
                     cache_contorl.course_data["ClassHour"][phase - 1][course]
                     <= 7
                 ):
                     cache_contorl.course_data["ClassTeacher"][
                         "Classroom_" + str(phase)
-                    ][classroom][course] = []
+                    ][classroom].setdefault(course, [])
                     for teacher in cache_contorl.teacher_course_experience[
                         course
                     ]:
@@ -313,14 +356,14 @@ def init_character_knowledge():
     """
     初始化所有角色知识等级
     """
-    for i in cache_contorl.character_data["character"]:
-        character = cache_contorl.character_data["character"][i]
+    for i in cache_contorl.character_data:
+        character = cache_contorl.character_data[i]
         character_age = character.age
         class_grade = 11
         if character_age <= 18 and character_age >= 7:
             class_grade = character_age - 7
         init_experience_for_grade(class_grade, character)
-        cache_contorl.character_data["character"][i] = character
+        cache_contorl.character_data[i] = character
         if character_age > 18:
             init_teacher_knowledge(character)
             for course in course_knowledge_data:
