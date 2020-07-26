@@ -40,7 +40,10 @@ def settle_rest(character_id: int):
     cache_contorl.status_up_text.setdefault(character_id, {})
     cache_contorl.status_up_text[character_id]["HitPoint"] = add_hit_point
     cache_contorl.status_up_text[character_id]["ManaPoint"] = add_mana_point
-    if character_id == cache_contorl.character_data[0].target_character_id and character_id:
+    if (
+        character_id == cache_contorl.character_data[0].target_character_id
+        and character_id
+    ):
         talk_cache.tg = character_data
         talk_cache.me = cache_contorl.character_data[0]
         talk.handle_talk(constant.Behavior.REST)

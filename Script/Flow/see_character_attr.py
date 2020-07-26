@@ -84,10 +84,14 @@ def see_attr_on_every_time_func():
             cache_contorl.panel_state["AttrShowHandlePanel"] = yrn
         elif yrn == "0":
             if character_id_index == 0:
-                cache_contorl.character_data[0].target_character_id = character_max
+                cache_contorl.character_data[
+                    0
+                ].target_character_id = character_max
             else:
                 character_id = character_id_list[character_id_index - 1]
-                cache_contorl.character_data[0].target_character_id = character_id
+                cache_contorl.character_data[
+                    0
+                ].target_character_id = character_id
         elif yrn == "1":
             if cache_contorl.old_flow_id == "main":
                 cache_contorl.character_data[0].target_character_id = 0
@@ -126,10 +130,14 @@ def see_attr_on_every_time_func():
         elif yrn == "2":
             if character_id == character_max:
                 character_id = character_id_list[0]
-                cache_contorl.character_data[0].target_character_id = character_id
+                cache_contorl.character_data[
+                    0
+                ].target_character_id = character_id
             else:
                 character_id = character_id_list[character_id_index + 1]
-                cache_contorl.character_data[0].target_character_id = character_id
+                cache_contorl.character_data[
+                    0
+                ].target_character_id = character_id
 
 
 def see_attr_in_every_time_func():

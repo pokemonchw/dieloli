@@ -19,7 +19,9 @@ def get_in_scene_func():
     用于进入场景界面的流程
     """
     py_cmd.clr_cmd()
-    cache_contorl.character_data[0].behavior["StartTime"] = cache_contorl.game_time
+    cache_contorl.character_data[0].behavior[
+        "StartTime"
+    ] = cache_contorl.game_time
     scene_path = cache_contorl.character_data[0].position
     scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
     map_handle.sort_scene_character_id(scene_path_str)
@@ -32,16 +34,23 @@ def get_in_scene_func():
         cache_contorl.scene_data[scene_path_str][
             "SceneCharacterData"
         ] = scene_character_list
-    if len(scene_character_list) > 1 and not cache_contorl.character_data[0].target_character_id:
+    if (
+        len(scene_character_list) > 1
+        and not cache_contorl.character_data[0].target_character_id
+    ):
         now_name_list = map_handle.get_scene_character_name_list(
             scene_path_str
         )
         now_name_list.remove(cache_contorl.character_data[0].name)
-        cache_contorl.character_data[0].target_character_id = map_handle.get_character_id_by_character_name(
+        cache_contorl.character_data[
+            0
+        ].target_character_id = map_handle.get_character_id_by_character_name(
             now_name_list[0], scene_path_str
         )
         if cache_contorl.old_character_id != 0:
-            cache_contorl.character_data[0].target_character_id = cache_contorl.old_character_id
+            cache_contorl.character_data[
+                0
+            ].target_character_id = cache_contorl.old_character_id
             cache_contorl.old_character_id = 0
     if len(scene_character_list) > 1:
         see_scene_func(True)
@@ -110,7 +119,9 @@ def see_scene_func(judge: bool):
         character_max = len(cache_contorl.character_data) - 1
         page_max = math.floor(character_max / name_list_max)
         if yrn in scene_character_name_list:
-            cache_contorl.character_data[0].target_character_id = map_handle.get_character_id_by_character_name(
+            cache_contorl.character_data[
+                0
+            ].target_character_id = map_handle.get_character_id_by_character_name(
                 yrn, scene_path_str
             )
         elif yrn in instruct_cmd:
@@ -158,7 +169,9 @@ def see_scene_func(judge: bool):
             break
         elif yrn in [in_scene_cmd_list_2[1], in_scene_cmd_list_2[2]]:
             if yrn == in_scene_cmd_list_2[2]:
-                cache_contorl.old_character_id = cache_contorl.character_data[0].target_character_id
+                cache_contorl.old_character_id = cache_contorl.character_data[
+                    0
+                ].target_character_id
                 cache_contorl.character_data[0].target_character_id = 0
             cache_contorl.now_flow_id = "see_character_attr"
             cache_contorl.old_flow_id = "in_scene"
