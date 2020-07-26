@@ -2,7 +2,7 @@ import datetime
 import random
 import bisect
 from dateutil import relativedelta
-from Script.Core import cache_contorl, game_config, text_loading, constant
+from Script.Core import cache_contorl, game_config, text_loading, constant,game_type
 
 
 def init_time():
@@ -282,263 +282,168 @@ def judge_date_big_or_small(time_a: dict, time_b: dict) -> int:
         return time_b < time_a
 
 
-def get_now_time_slice(character_id: int) -> dict:
+def init_now_course_time_slice(character_id: int):
     """
-    获取当前时间段
+    初始化角色当前上课时间状态
     Keyword arguments:
     character_id -- 角色Id
-    Return arguments:
-    dict -- 当前时间段数据
     """
     character_data = cache_contorl.character_data[character_id]
     character_age = character_data.age
+    teacher_id = -1
     if character_age in range(7, 19):
         phase = character_age - 7
     elif character_id in cache_contorl.teacher_phase_table:
         phase = cache_contorl.teacher_phase_table[character_id]
+        teacher_id = character_id
     else:
         phase = 12
     if phase <= 5:
-        return cache_contorl.course_time_status["PrimarySchool"]
+        character_data.course = init_primary_school_course_time_status(character_data.behavior["StartTime"],teacher_id)
     elif phase <= 11:
-        return cache_contorl.course_time_status["JuniorMiddleSchool"]
-    return cache_contorl.course_time_status["SeniorHighSchool"]
+        character_data.course = init_junior_middle_school_course_time_status(character_data.behavior["StartTime"],teacher_id)
+    character_data.course = init_senior_high_school_course_time_status(character_data.behavior["StartTime"],teacher_id)
+    character_data.course.phase = phase
 
 
-def init_school_course_time_status():
+def init_primary_school_course_time_status(time_data:dict,teacher_id=-1) -> game_type.CourseTimeSlice:
     """
-    按当前时间计算各学校上课状态(当前时间是否是上课时间,计算还有多久上课,多久下课)
+    计算小学指定时间上课状态
+    Keyword arguments:
+    time_data -- 时间数据
+    teacher_id -- 教师id，不为-1时校验指定教师的上课班级
+    Return arguments:
+    game_type.CourseTimeSlice -- 上课时间状态数据
     """
-    course_status = {"InCourse": 0, "ToCourse": 0, "EndCourse": 0}
-    cache_contorl.course_time_status["PrimarySchool"] = course_status.copy()
-    cache_contorl.course_time_status[
-        "JuniorMiddleSchool"
-    ] = course_status.copy()
-    cache_contorl.course_time_status["SeniorHighSchool"] = course_status.copy()
-    cache_contorl.teacher_phase_table = {}
-    if cache_contorl.game_time["month"] in range(
-        1, 7
-    ) or cache_contorl.game_time["month"] in range(9, 13):
-        cache_contorl.course_time_status[
-            "SeniorHighSchool"
-        ] = judge_school_course_time("SeniorHighSchool")
-        now_week = get_week_date()
-        if now_week < 6:
-            cache_contorl.course_time_status[
-                "JuniorMiddleSchool"
-            ] = judge_school_course_time("JuniorMiddleSchool")
-            if (
-                cache_contorl.course_time_status["JuniorMiddleSchool"][
-                    "InCourse"
-                ]
-                and cache_contorl.course_time_status["JuniorMiddleSchool"][
-                    "CourseIndex"
-                ]
-            ):
-                for teacher in cache_contorl.teacher_course_experience[
-                    list(cache_contorl.teacher_course_experience.keys())[0]
-                ].keys():
-                    for phase in range(6, 9):
-                        if (
-                            teacher
-                            in cache_contorl.teacher_class_time_table[
-                                now_week
-                            ][phase][
-                                cache_contorl.course_time_status[
-                                    "JuniorMiddleSchool"
-                                ]["CourseIndex"]
-                            ]
-                        ):
-                            cache_contorl.character_data[
-                                teacher
-                            ].classroom = cache_contorl.teacher_class_time_table[
-                                now_week
-                            ][
-                                phase
-                            ][
-                                cache_contorl.course_time_status[
-                                    "JuniorMiddleSchool"
-                                ]
-                            ]
-                            cache_contorl.teacher_phase_table[teacher] = phase
-        else:
-            cache_contorl.course_time_status[
-                "JuniorMiddleSchool"
-            ] = judge_holiday_time()
-        if now_week < 5:
-            cache_contorl.course_time_status[
-                "PrimarySchool"
-            ] = judge_school_course_time("PrimarySchool")
-            if (
-                cache_contorl.course_time_status["PrimarySchool"]["InCourse"]
-                and cache_contorl.course_time_status["PrimarySchool"][
-                    "CourseIndex"
-                ]
-            ):
-                for teacher in cache_contorl.teacher_course_experience[
-                    list(cache_contorl.teacher_course_experience.keys())[0]
-                ].keys():
-                    for phase in range(6):
-                        if (
-                            teacher
-                            in cache_contorl.teacher_class_time_table[
-                                now_week
-                            ][phase][
-                                cache_contorl.course_time_status[
-                                    "PrimarySchool"
-                                ]["CourseIndex"]
-                            ]
-                        ):
-                            cache_contorl.character_data[
-                                teacher
-                            ].classroom = cache_contorl.teacher_class_time_table[
-                                now_week
-                            ][
-                                phase
-                            ][
-                                cache_contorl.course_time_status[
-                                    "PrimarySchool"
-                                ]
-                            ]
-                            cache_contorl.teacher_phase_table[teacher] = phase
-        else:
-            cache_contorl.course_time_status[
-                "PrimarySchool"
-            ] = judge_holiday_time()
-        if (
-            cache_contorl.course_time_status["SeniorHighSchool"]["InCourse"]
-            and cache_contorl.course_time_status["SeniorHighSchool"][
-                "CourseIndex"
-            ]
-        ):
-            for teacher in cache_contorl.teacher_course_experience[
-                list(cache_contorl.teacher_course_experience.keys())[0]
-            ].keys():
-                for phase in range(9, 12):
-                    if (
-                        teacher
-                        in cache_contorl.teacher_class_time_table[now_week][
-                            phase
-                        ][
-                            cache_contorl.course_time_status[
-                                "SeniorHighSchool"
-                            ]["CourseIndex"]
-                        ]
-                    ):
-                        cache_contorl.character_data[
-                            teacher
-                        ].classroom = cache_contorl.teacher_class_time_table[
-                            now_week
-                        ][
-                            phase
-                        ][
-                            cache_contorl.course_time_status[
-                                "SeniorHighSchool"
-                            ]
-                        ]
-                        cache_contorl.teacher_phase_table[teacher] = phase
+    now_time_status = game_type.CourseTimeSlice()
+    now_time_status = judge_school_course_time("PrimarySchool",time_data)
+    now_time_status.school_id = "PrimarySchool"
+    if time_data["month"] in range(1,7) or time_data["month"] in range(9,13):
+        now_week = int(
+            timetuple_to_datetime(
+                game_time_to_time_tuple(cache_contorl.game_time)
+            ).strftime("%w")
+        )
+        if now_week >= 5:
+            now_time_status.end_course = 0
+            now_time_status.in_course = 0
+            now_time_status.to_course = 0
+        elif teacher_id > -1 and  teacher_id in  cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index]:
+                classroom = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][teacher_id].keys()[0]
+                now_time_status.course_id = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][teacher_id][classroom]
+                cache_contorl.character_data[teacher_id].classroom = classroom
     else:
-        cache_contorl.course_time_status[
-            "PrimarySchool"
-        ] = judge_holiday_time()
-        cache_contorl.course_time_status[
-            "JuniorMiddleSchool"
-        ] = judge_holiday_time()
-        cache_contorl.course_time_status[
-            "SeniorHighSchool"
-        ] = judge_holiday_time()
-    for teacher in cache_contorl.teacher_course_experience[
-        list(cache_contorl.teacher_course_experience.keys())[0]
-    ].keys():
-        if teacher not in cache_contorl.teacher_phase_table:
-            cache_contorl.character_data[teacher].classroom = ""
+            now_time_status.end_course = 0
+            now_time_status.in_course = 0
+            now_time_status.to_course = 0
+    return now_time_status
 
 
-def judge_school_course_time(school_id: str) -> dict:
+def init_junior_middle_school_course_time_status(time_data:dict,teacher_id=-1) -> game_type.CourseTimeSlice:
     """
-    校验当前时间是否是学校上课时间
+    计算初中指定时间上课状态
+    Keyword arguments:
+    time_date -- 时间数据
+    teacher_id -- 教师id，不为-1时校验指定教师的上课班级
+    Return arguments:
+    game_type.CourseTimeSlice -- 上课时间状态数据
+    """
+    now_time_status = game_type.CourseTimeSlice()
+    now_time_status = judge_school_course_time("JuniorMiddleSchool",time_data)
+    now_time_status.school_id = "JuniorMiddleSchool"
+    if time_data["month"] in range(1,7) or time_data["month"] in range(9,13):
+        now_week = int(
+            timetuple_to_datetime(
+                game_time_to_time_tuple(cache_contorl.game_time)
+            ).strftime("%w")
+        )
+        if now_week >= 6:
+            now_time_status.end_course = 0
+            now_time_status.in_course = 0
+            now_time_status.to_course = 0
+        elif teacher_id > -1 and teacher_id in  cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index]:
+                classroom = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][teacher_id].keys()[0]
+                now_time_status.course_id = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][teacher_id][classroom]
+                cache_contorl.character_data[teacher_id].classroom = classroom
+    else:
+            now_time_status.end_course = 0
+            now_time_status.in_course = 0
+            now_time_status.to_course = 0
+    return now_time_status
+
+
+def init_senior_high_school_course_time_status(time_data:dict,teacher_id=-1) -> game_type.CourseTimeSlice:
+    """
+    计算高中指定时间上课状态
+    Keyword arguments:
+    time_data -- 时间数据
+    teacher_id -- 教师id，不为-1时校验指定教师的上课班级
+    Return arguments:
+    game_type.CourseTimeSlice -- 上课时间状态数据
+    """
+    now_time_status = game_type.CourseTimeSlice()
+    now_time_status = judge_school_course_time("SeniorHighSchool",time_data)
+    now_time_status.school_id = "SeniorHighSchool"
+    if time_data["month"] in range(1,7) or time_data["month"] in range(9,13):
+        if teacher_id > -1 and  teacher_id in  cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index]:
+                classroom = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][teacher_id].keys()[0]
+                now_time_status.course_id = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][teacher_id][classroom]
+                cache_contorl.character_data[teacher_id].classroom = classroom
+    else:
+        now_time_status.end_course = 0
+        now_time_status.in_course = 0
+        now_time_status.to_course = 0
+    return now_time_status
+
+
+def judge_school_course_time(school_id: str,time_data:dict) -> game_type.CourseTimeSlice:
+    """
+    校验指定学校指定时间上课状态
     Keyword arguments:
     school_id -- 学校Id
+    time_data -- 时间数据
     Return arguments:
-    dict:{
-        "InCourse":int 当前是否是上课时间
-        "ToCourse":int 当前距离下节课开始所需的时间
-        "CourseIndex":int 当前属于的几节课
-        "EndCourse":int 当前距离下课时间所需的时间
-        "TimeSlice":int 当前时间所属时间段
-    }
+    game_type,CourseTimeSlice -- 上课时间和状态数据
     """
-    course_status = {
-        "InCourse": 0,
-        "ToCourse": 0,
-        "CourseIndex": 0,
-        "EndCourse": 0,
-        "TimeSlice": 0,
-    }
+    course_status = game_type.CourseTimeSlice()
     course_time_data = text_loading.get_text_data(
         constant.FilePath.COURSE_SESSION_PATH, school_id
     )
     now_time = (
-        cache_contorl.game_time["hour"] * 100
-        + cache_contorl.game_time["minute"]
+        int(time_data["hour"]) * 100
+        + int(time_data["minute"])
     )
     end_time_data = {
         course_time_data[i][1]: i for i in range(len(course_time_data))
     }
     now_time_index = bisect.bisect_left(list(end_time_data.keys()), now_time)
-    course_status["CourseIndex"] = now_time_index
+    course_status.course_index = now_time_index
     if now_time_index >= len(end_time_data):
-        course_status["TimeSlice"] = TIME_SLEEP
         return course_status
     start_time = course_time_data[now_time_index][0]
     end_time = course_time_data[now_time_index][1]
     if now_time < start_time:
         if start_time / 100 != now_time / 100:
             index_time = (start_time / 100 - now_time / 100) * 60
-            course_status["ToCourse"] = (
+            course_status.to_course = (
                 start_time
                 - (start_time / 100 - now_time / 100) * 100
                 + index_time
                 - now_time
             )
         else:
-            course_status["ToCourse"] = start_time - now_time
-        course_status["TimeSlice"] = constant.TimeSlice.TIME_BREAKFAST
+            course_status.to_course = start_time - now_time
     else:
-        course_status["InCourse"] = 1
+        course_status.in_course = 1
         if end_time / 100 != now_time / 100:
             index_time = (end_time / 100 - now_time / 100) * 60
-            course_status["EndCourse"] = (
+            course_status.end_course = (
                 end_time
                 - (end_time / 100 - now_time / 100) * 100
                 + index_time
                 - now_time
             )
         else:
-            course_status["EndCourse"] = end_time - now_time
-        course_status["TimeSlice"] = constant.TimeSlice.TIME_IN_CLASS
-        if now_time < course_time_data[0][1]:
-            course_status["TimeSlice"] = constant.TimeSlice.TIME_EARLY_READING
+            course_status.end_course = end_time - now_time
     return course_status
 
-
-def judge_holiday_time() -> dict:
-    """
-    校验生成放假中当前时间
-    Return arguments:
-    dict:{
-        "InCourse":int 当前是否是上课时间
-        "ToCourse":int 当前距离下节课开始所需的时间
-        "CourseIndex":int 当前属于的几节课
-        "EndCourse":int 当前距离下课时间所需的时间
-        "TimeSlice":int 当前时间所属时间段
-    }
-    """
-    course_status = {
-        "InCourse": 0,
-        "ToCourse": 0,
-        "CourseIndex": 0,
-        "EndCourse": 0,
-        "TimeSlice": 0,
-    }
-    return course_status

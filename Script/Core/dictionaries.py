@@ -8,7 +8,7 @@ def handle_text(text: str) -> str:
     string -- 需要进行转义处理的文本
     """
     if len(cache_contorl.character_data) > 0:
-        character_id = cache_contorl.now_character_id
+        character_id = cache_contorl.character_data[0].target_character_id
         character_name = cache_contorl.character_data[character_id].name
         character_nick_name = cache_contorl.character_data[
             character_id

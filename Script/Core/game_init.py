@@ -36,7 +36,6 @@ def init(main_flow: object):
     cache_contorl.map_data = game_data.game_data[game_config.language]["map"]
     cache_contorl.scene_data = game_data.scene_data
     cache_contorl.map_data = game_data.map_data
-    flow_handle.reset_func = reset
     global _main_flow
     _main_flow = main_flow
 
@@ -77,17 +76,6 @@ def console_log(string: str):
     """
     print("game log:")
     print(string + "\n")
-
-
-def reset():
-    """
-    重启游戏
-    """
-    global _main_flow
-    io_init.io_clear_cmd()
-    io_init.clear_screen()
-    io_init.clear_order()
-    init(_main_flow)
 
 
 # 请求输入命令

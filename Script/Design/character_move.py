@@ -27,7 +27,7 @@ def own_charcter_move(target_scene: list):
         if cache_contorl.character_data[0].position != target_scene:
             own_charcter_move(target_scene)
     update.game_update_flow()
-    cache_contorl.now_character_id = 0
+    cache_contorl.character_data[0].target_character_id = 0
     cache_contorl.now_flow_id = "in_scene"
 
 

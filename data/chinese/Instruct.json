@@ -1,139 +1,139 @@
 {
   "Gossip":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Praise":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Vilify":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Deception":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "StrokeHead":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "StrokeFace":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "PinchFace":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "PatShoulder":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "AroundShoulder":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "AroundWaist":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Handshake":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "JoinHands":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Embrace":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Kiss":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "KneePillow":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "PillowShoulder":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "AskStrokeHead":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "AskStrokeFace":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "AskKiss":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "AskEmbrace":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Paint":{
-    "ItemTag":"Draw"
+    "HaveItemByTagDraw":true
   },
   "PoetryRecital":{
   },
   "Sing":{
   },
   "PlayGuitar":{
-    "Item":"Guitar"
+    "HaveGuitar":true
   },
   "PlayHarmonica":{
-    "Item":"Harmonica"
+    "HaveHarmonica":true
   },
   "PlayBambooFlute":{
-    "Item":"BambooFlute"
+    "HaveBambooFlute":true
   },
   "Dance":{
   },
   "PlayBasketball":{
-    "Item":"Basketball"
+    "HaveBasketball":true
   },
   "PlayFootball":{
-    "Item":"Football"
+    "HaveFootball":true
   },
   "PlayTableTennis":{
-    "Item":"TableTennis"
+    "HaveTableTennis":true
   },
   "Swim":{
-    "SceneTag":"SwimmingPool"
+    "InSwimmingPool":true
   },
   "Rpg":{
   },
   "UnarmedCombat":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "CloseCombat":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Shooting":{
-    "MustTarget":true,
-    "ItemTag":"Shooting"
+    "HaveTarget":true,
+    "HaveItemByTagShooting":true
   },
   "Dodge":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Peeping":{
-    "MustTarget":true,
-    "TargetClotingTag":"Skirt"
+    "HaveTarget":true,
+    "TargetPutOnSkirt":true
   },
   "LoveStroke":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "StrokeBosom":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "StrokeClitoris":{
-    "MustTarget":true,
-    "TargetSex":{"Fura":0,"Woman":0}
+    "HaveTarget":true,
+    "TargetIsFutaOrWoman":true
   },
   "StrokePenis":{
-    "MustTarget":true,
-    "TargetSex":{"Man":0,"Futa":0}
+    "HaveTarget":true,
+    "TargetIsFutaOrMan":true
   },
   "StrokeAnus":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "StrokeThigh":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "LickingBosom":{
-    "MustTarget":true,
-    "TargetUnderwear":false
+    "HaveTarget":true,
+    "TargetNotPutUnderwear":true
   },
   "LickingFoot":{
-    "MustTarget":true
+    "HaveTarget":true
   },
   "Masturbation":{
   },
@@ -142,15 +142,15 @@
   "SelfStudy":{
   },
   "AttendLectures":{
-    "SceneTag":"Classroom",
-    "TimeSlice":0,
-    "Occupation":"Student"
+    "InClassroom":true,
+    "InBreakfastTime":true,
+    "IsStudent":true
   },
   "Teaching":{
-    "MustTarget":true,
-    "SceneTag":"Classroom",
-    "TimeSlice":0,
-    "Occupation":"Teacher"
+    "HaveTarget":true,
+    "InClassroom":true,
+    "InBreakfastTime":true,
+    "IsTeacher":true
   },
   "CombatTraining":{
   },
@@ -159,7 +159,7 @@
   "DodgeTraining":{
   },
   "ShootingTraining":{
-    "ItemTag":"Shooting"
+    "HaveItemByTagShooting":true
   },
   "Dodge":{
   },
@@ -168,18 +168,18 @@
   "Doze":{
   },
   "Siesta":{
-    "TimeSlice":4
+    "InSiestaTime":true
   },
   "Sleep":{
-    "TimeSlice":6
+    "InSleepTime":true
   },
   "Eat":{
-    "Food":true
+    "HaveFood":true
   },
   "Buy":{
-    "SceneTag":"Shop"
+    "InShop":true
   },
   "BuyFood":{
-    "SceneTag":"Cafeteria"
+    "InCafeteria":true
   }
 }

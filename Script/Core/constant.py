@@ -56,8 +56,6 @@ class FilePath:
 class WindowMenu:
     """ 窗体菜单栏文本id """
 
-    MENU_RESTART = "1"
-    """ 重启 """
     MENU_QUIT = "2"
     """ 退出 """
     MENU_SETTING = "3"

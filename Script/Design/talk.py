@@ -32,7 +32,7 @@ def handle_talk(behavior_id: int):
     behavior_id -- 行为id
     """
     now_target_character = cache_contorl.character_data[
-        cache_contorl.now_character_id
+        cache_contorl.character_data[0].target_character_id
     ]
     if (
         now_target_character.occupation in cache_contorl.talk_data

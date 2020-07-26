@@ -78,7 +78,7 @@ def see_scene_character_list_panel() -> list:
         )
         era_print.normal_print(see_character_text)
         era_print.line_feed_print()
-        character_id = cache_contorl.now_character_id
+        character_id = cache_contorl.character_data[0].target_character_id
         character_data = cache_contorl.character_data[character_id]
         character_name = character_data.name
         input_s = cmd_button_queue.option_str(
@@ -145,7 +145,7 @@ def see_character_info_panel():
         constant.FilePath.STAGE_WORD_PATH, "77"
     )
     era_print.normal_print(character_info)
-    character_id = cache_contorl.now_character_id
+    character_id = cache_contorl.character_data[0].target_character_id
     character_data = cache_contorl.character_data[character_id]
     character_name = character_data.name
     era_print.normal_print(character_name)

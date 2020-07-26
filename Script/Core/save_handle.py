@@ -132,7 +132,6 @@ def input_load_save(save_id: str):
     """
     save_data = load_save(save_id)
     cache_contorl.character_data = save_data["1"]
-    cache_contorl.now_character_id = 0
     cache_contorl.game_time = save_data["2"]
     cache_contorl.scene_data = save_data["3"]
     cache_contorl.map_data = save_data["4"]

@@ -115,77 +115,7 @@ def judge_instract_available(instract: str) -> bool:
     config_data = text_loading.get_game_data(constant.FilePath.INSTRUCT_PATH)[
         instract
     ]
-    if len(config_data) == 0:
-        return 1
-    if "MustTarget" in config_data and config_data["MustTarget"]:
-        if not cache_contorl.now_character_id:
-            return 0
-    if "ItemTag" in config_data:
-        now_judge = 1
-        for item in cache_contorl.character_data[0].item:
-            if (
-                cache_contorl.character_data[0].item[item]["ItemTag"]
-                == config_data["ItemTag"]
-            ):
-                now_judge = 0
-                break
-        if now_judge:
-            return 0
-    if "Item" in config_data:
-        now_judge = 1
-        for item in cache_contorl.character_data[0].item:
-            if item == config_data["Item"]:
-                now_judge = 0
-                break
-        if now_judge:
-            return 0
-    if "SceneTag" in config_data:
-        scene_data = cache_contorl.scene_data[
-            map_handle.get_map_system_path_str_for_list(
-                cache_contorl.character_data[0].position
-            )
-        ]
-        if scene_data["SceneTag"] != config_data["SceneTag"]:
-            return 0
-    if "TargetClothingTag" in config_data:
-        if (
-            cache_contorl.character_data[
-                cache_contorl.now_character_id
-            ].put_on[config_data["TargetClothingTag"]]
-            == ""
-        ):
-            return 0
-    if "TargetSex" in config_data:
-        if (
-            cache_contorl.character_data[cache_contorl.now_character_id].sex
-            not in config_data["TargetSex"]
-        ):
-            return 0
-    if "TargetUnderwear" in config_data:
-        if (
-            cache_contorl.character_data[
-                cache_contorl.now_character_id
-            ].put_on["Underwear"]
-            != ""
-        ):
-            if not config_data["TargetUnderwear"]:
-                return 0
-        else:
-            if config_data["TargetUnderwear"]:
-                return 0
-    if "TimeSlice" in config_data:
-        if (
-            config_data["TimeSlice"]
-            != game_time.get_now_time_slice(0)["TimeSlice"]
-        ):
-            return 0
-    if "Occupation" in config_data:
-        if (
-            config_data["Occupation"]
-            != cache_contorl.character_data[0].occupation
-        ):
-            return 0
-    if "Food" in config_data:
-        if not len(cache_contorl.character_data[0].food_bag):
+    for premise in config_data:
+        if not cache_contorl.handle_premise_data[premise](0):
             return 0
     return 1

@@ -20,7 +20,6 @@ def input_name_func():
     输入2:返回标题菜单
     """
     game_time.init_time()
-    cache_contorl.now_character_id = 0
     cache_contorl.character_data[0] = game_type.Character()
     flow_return = 0
     while 1:

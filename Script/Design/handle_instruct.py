@@ -51,22 +51,19 @@ def handle_rest():
     处理休息指令
     """
     character.init_character_behavior_start_time(0)
-    cache_contorl.character_data[0].behavior["Duration"] = 10
-    cache_contorl.character_data[0].behavior[
+    character_data = cache_contorl.character_data[0]
+    character_data.behavior["Duration"] = 10
+    character_data.behavior[
         "BehaviorId"
     ] = constant.Behavior.REST
-    cache_contorl.character_data[
-        0
-    ].state = constant.CharacterStatus.STATUS_REST
+    character_data.state = constant.CharacterStatus.STATUS_REST
     if (
-        cache_contorl.character_data[0].hit_point
-        > cache_contorl.character_data[0].hit_point_max
+        character_data.hit_point
+        > character_data.hit_point_max
     ):
-        cache_contorl.character_data[
-            0
-        ].hit_point = cache_contorl.character_data[0].hit_point_max
+        character_data.hit_point = character_data.hit_point_max
     target_character = cache_contorl.character_data[
-        cache_contorl.now_character_id
+        character_data.target_character_id
     ]
     if (
         target_character.state == constant.CharacterStatus.STATUS_ARDER
@@ -75,7 +72,7 @@ def handle_rest():
     ):
         target_character.state = constant.CharacterStatus.STATUS_REST
         character.init_character_behavior_start_time(
-            cache_contorl.now_character_id
+            character_data.target_character_id
         )
         target_character.behavior["Duration"] = 10
         target_character.behavior["BehaviorId"] = constant.Behavior.REST

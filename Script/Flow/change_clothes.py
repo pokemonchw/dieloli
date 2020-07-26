@@ -7,7 +7,7 @@ def change_character_clothes():
     """
     更换角色服装流程
     """
-    character_id = cache_contorl.now_character_id
+    character_id = cache_contorl.character_data[0].target_character_id
     character_clothing_data = cache_contorl.character_data[
         character_id
     ].clothing
@@ -44,7 +44,7 @@ def see_character_clothes_list(clothing_type: str):
             next_type_id = 0
         up_type = clothing_type_list[up_type_id]
         next_type = clothing_type_list[next_type_id]
-        character_id = cache_contorl.now_character_id
+        character_id = cache_contorl.character_data[0].target_character_id
         change_clothes_panel.see_character_clothes_info(character_id)
         page_max = get_character_clothes_page_max(character_id, clothing_type)
         input_s = change_clothes_panel.see_character_clothes_panel(

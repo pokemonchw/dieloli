@@ -1,5 +1,5 @@
 from tkinter import Tk
-from Script.Core import text_loading
+from Script.Core import text_loading,constant
 
 
 def open_setting_frame():
@@ -8,6 +8,6 @@ def open_setting_frame():
     """
     root = Tk()
     title_text = text_loading.get_text_data(
-        text_loading.system_text_path, "Setting"
+        constant.FilePath.SYSTEM_TEXT_PATH, "Setting"
     )["TitleName"]
     root.title(title_text)

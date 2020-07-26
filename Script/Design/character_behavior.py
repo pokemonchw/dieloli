@@ -32,16 +32,17 @@ def init_character_behavior():
             ):
                 continue
             if (
+                cache_contorl.character_data[character_id].behavior[
+                    "StartTime"
+                ]
+                == {}
+            ):
+                character.init_character_behavior_start_time(character_id)
+            game_time.init_now_course_time_slice(character_id)
+            if (
                 cache_contorl.character_data[character_id].state
                 == constant.CharacterStatus.STATUS_ARDER
             ):
-                if (
-                    cache_contorl.character_data[character_id].behavior[
-                        "StartTime"
-                    ]
-                    == {}
-                ):
-                    character.init_character_behavior_start_time(character_id)
                 character_target_judge(character_id)
             else:
                 status_judge = judge_character_status(character_id)

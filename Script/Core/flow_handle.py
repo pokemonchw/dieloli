@@ -175,7 +175,6 @@ def _cmd_valid(order_number):
 
 
 __skip_flag__ = False
-reset_func = None
 exit_flag = False
 
 
@@ -198,10 +197,6 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
             order = io_init.get_order()
             if cache_contorl.flow_contorl.quit_game:
                 os._exit(0)
-            if cache_contorl.flow_contorl.restart_game == 1:
-                cache_contorl.flow_contorl.restart_game = 0
-                reset_func()
-                return
             if print_order and order != "":
                 io_init.era_print("\n" + order + "\n")
             if flag == "str":

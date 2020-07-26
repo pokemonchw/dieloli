@@ -140,14 +140,6 @@ menu_bar.add_cascade(
 )
 
 
-def reset(*args):
-    """
-    重置游戏
-    """
-    cache_contorl.flow_contorl.restart_game = 1
-    send_input()
-
-
 def quit(*args):
     """
     退出游戏
@@ -170,12 +162,6 @@ def about(*args):
     about_frame.open_about_frame()
 
 
-menu_file.add_command(
-    label=text_loading.get_text_data(
-        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_RESTART
-    ),
-    command=reset,
-)
 menu_file.add_command(
     label=text_loading.get_text_data(
         constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_QUIT

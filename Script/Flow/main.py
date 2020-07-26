@@ -20,7 +20,7 @@ def main_frame_func():
     input_s = []
     flow_return = main_frame_panel.main_frame_panel()
     input_s = input_s + flow_return
-    character_id = cache_contorl.now_character_id
+    character_id = cache_contorl.character_data[0].target_character_id
     character_data = cache_contorl.character_data[character_id]
     character_name = character_data.name
     ans = game_init.askfor_all(input_s)

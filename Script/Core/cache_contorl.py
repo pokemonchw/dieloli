@@ -11,8 +11,6 @@ cmd_map: Dict[int, object] = {}
 """ cmd存储 """
 character_data: Dict[int, game_type.Character] = {}
 """ 角色对象数据缓存组 """
-now_character_id: int = 0
-""" 当前正在交互的角色id """
 npc_tem_data: List[game_type.NpcTem] = []
 """ npc模板列表 """
 input_cache: List[str] = []

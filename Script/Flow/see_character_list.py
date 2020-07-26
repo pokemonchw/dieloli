@@ -33,7 +33,7 @@ def see_character_list_func():
                 page_id = str(page_id - 1)
                 cache_contorl.panel_state["SeeCharacterListPanel"] = page_id
         elif yrn == str(start_id + 1):
-            cache_contorl.now_character_id = 0
+            cache_contorl.character_data[0].target_character_id = 0
             cache_contorl.panel_state["SeeCharacterListPanel"] = "0"
             cache_contorl.now_flow_id = cache_contorl.old_flow_id
             break
@@ -45,7 +45,7 @@ def see_character_list_func():
                 cache_contorl.panel_state["SeeCharacterListPanel"] = page_id
         elif int(yrn) + character_page_show * page_id in character_id_list:
             yrn = int(yrn) + character_page_show * page_id
-            cache_contorl.now_character_id = yrn
+            cache_contorl.character_data[0].target_character_id = yrn
             cache_contorl.now_flow_id = "see_character_attr"
             cache_contorl.too_old_flow_id = cache_contorl.old_flow_id
             cache_contorl.old_flow_id = "see_character_list"
