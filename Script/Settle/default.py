@@ -94,23 +94,23 @@ def settle_eat(character_id: int):
     character_data = cache_contorl.character_data[character_id]
     if character_data.behavior["EatFood"] != None:
         food: game_type.Food = character_data.behavior["EatFood"]
+        eat_weight = 100
+        if food.weight < eat_weight:
+            eat_weight = food.weight
         for feel in food.feel:
+            now_feel_value = food.feel[feel]
+            now_feel_value = now_feel_value / food.weight
+            now_feel_value *= eat_weight
             if feel in character_data.status["BodyFeeling"]:
                 if feel in ("Hunger", "Thirsty"):
-                    character_data.status["BodyFeeling"][feel] -= food.feel[
-                        feel
-                    ]
+                    character_data.status["BodyFeeling"][feel] -= now_feel_value
                 else:
-                    character_data.status["BodyFeeling"][feel] += food.feel[
-                        feel
-                    ]
+                    character_data.status["BodyFeeling"][feel] += now_feel_value
             elif feel in character_data.status["SexFeel"]:
-                character_data.status["SexFeel"][feel] += food.feel[feel]
+                character_data.status["SexFeel"][feel] += now_feel_value
             elif feel in character_data.status["PsychologicalFeeling"]:
-                character_data.status["PsychologicalFeeling"][
-                    feel
-                ] += food.feel[feel]
-        if character_id == cache_contorl.character_data[0].target_character_id:
+                character_data.status["PsychologicalFeeling"][feel] += now_feel_value
+        if character_id == cache_contorl.character_data[0].target_character_id and character_id:
             talk_cache.tg = character_data
             talk_cache.me = cache_contorl.character_data[0]
             scene_path_str = map_handle.get_map_system_path_str_for_list(
@@ -120,4 +120,6 @@ def settle_eat(character_id: int):
             talk_cache.scene = scene_data["SceneName"]
             talk_cache.scene_tag = scene_data["SceneTag"]
             talk.handle_talk(constant.Behavior.EAT)
-        del character_data.food_bag[food.id]
+        food.weight -= eat_weight
+        if food.weight <= 0:
+            del character_data.food_bag[food.uid]

@@ -93,6 +93,21 @@ def handle_in_breakfast_time(character_id: int) -> int:
     return 0
 
 
+@add_premise("InLunchTime")
+def handle_in_lunch_time(character_id: int) -> int:
+    """
+    校验当前是否处于午餐时间段
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    if character_data.course.course_index >= 4 and character_data.course.course_index <= 6:
+        return 1
+    return 0
+
+
 @add_premise("Hunger")
 def handle_hunger(character_id: int) -> int:
     """

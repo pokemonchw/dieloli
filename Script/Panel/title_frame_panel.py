@@ -6,6 +6,7 @@ from Script.Core import (
     game_config,
     constant,
     py_cmd,
+    cache_contorl,
 )
 from Script.Design import cmd_button_queue
 

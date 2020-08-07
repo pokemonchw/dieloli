@@ -54,7 +54,7 @@ def see_food_shop_list(type_list: dict) -> list:
     Keyword arguments:
     type_list -- 种类列表
     Return arguments:
-    list -- 　监听的按钮列表
+    list -- 监听的按钮列表
     """
     era_print.restart_line_print("+")
     now_page_id = int(cache_contorl.panel_state["SeeFoodShopListByFoodPanel"])
@@ -63,18 +63,16 @@ def see_food_shop_list(type_list: dict) -> list:
     now_page_end_id = now_page_start_id + now_page_max
     if not len(type_list):
         era_print.normal_print(
-            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "34")
+            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "45")
         )
         era_print.line_feed_print()
         return []
     if now_page_end_id > len(type_list):
         now_page_end_id = len(type_list)
     text_list = []
-    tag_text_index = 0
     for i in range(now_page_start_id, now_page_end_id):
         food_name = type_list[list(type_list.keys())[i]]
         text_list.append(food_name)
-        tag_text_index += 1
     return cmd_button_queue.option_int(
         "", 4, "left", 1, 0, "center", 0, text_list
     )
@@ -200,9 +198,9 @@ def see_food_shop_tail_cmd(
     return yrn
 
 
-def buy_food_now_panel(now_food: game_type.Food) -> list:
+def buy_food_now_panel(now_food: game_type.Food) -> int:
     """
-    玩家确认购买面板
+    玩家确认购买食物面板
     Keyword arguments:
     now_food -- 食物对象
     Return arguments:

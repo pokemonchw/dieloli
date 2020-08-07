@@ -299,7 +299,6 @@ def init_cache():
     缓存初始化
     """
     cache_contorl.cmd_map = {}
-    cache_contorl.character_data = {}
     cache_contorl.input_cache = [""]
     cache_contorl.input_position = {"position": 0}
     cache_contorl.output_text_style = "standard"
@@ -330,6 +329,8 @@ def init_cache():
         "SeeCharacterItemListPanel": "0",
         "SeeFoodShopListByFoodTypePanel": 0,
         "SeeFoodShopListByFoodPanel": 0,
+        "SeeFoodBagListByFoodPanel":0,
+        "SeeFoodBagListByFoodTypePanel":0,
     }
     cache_contorl.max_save_page = game_config.save_page
     cache_contorl.text_wait = float(game_config.text_wait)
@@ -338,5 +339,4 @@ def init_cache():
     cache_contorl.now_flow_id = "title_frame"
     cache_contorl.old_flow_id = ""
     cache_contorl.too_old_flow_id = ""
-    cache_contorl.occupation__character_data = {}
     cache_contorl.course_data = {}

@@ -8,7 +8,7 @@ from Script.Core import (
     game_type,
     constant,
 )
-from Script.Design import settle_behavior, game_time, character
+from Script.Design import settle_behavior, game_time, character,handle_premise
 
 game_path = game_path_config.game_path
 language = game_config.language
@@ -21,33 +21,44 @@ def init_character_behavior():
     while 1:
         if (
             len(cache_contorl.over_behavior_character)
-            >= len(cache_contorl.character_data) - 1
+            >= len(cache_contorl.character_data)
         ):
             break
         for character_id in cache_contorl.character_data:
-            if (
-                character_id == 0
-                or character_id in cache_contorl.over_behavior_character
-            ):
-                continue
-            if (
-                cache_contorl.character_data[character_id].behavior[
-                    "StartTime"
-                ]
-                == {}
-            ):
-                character.init_character_behavior_start_time(character_id)
-            game_time.init_now_course_time_slice(character_id)
-            if (
-                cache_contorl.character_data[character_id].state
-                == constant.CharacterStatus.STATUS_ARDER
-            ):
-                character_target_judge(character_id)
-            else:
-                status_judge = judge_character_status(character_id)
-                if status_judge:
-                    cache_contorl.over_behavior_character[character_id] = 1
+            character_behavior(character_id)
     cache_contorl.over_behavior_character = {}
+
+
+def character_behavior(character_id:int):
+    """
+    角色行为控制
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    if (
+        character_id in cache_contorl.over_behavior_character
+    ):
+        return
+    if (
+        cache_contorl.character_data[character_id].behavior[
+            "StartTime"
+        ]
+        == {}
+    ):
+        character.init_character_behavior_start_time(character_id)
+    game_time.init_now_course_time_slice(character_id)
+    if (
+        cache_contorl.character_data[character_id].state
+        == constant.CharacterStatus.STATUS_ARDER
+    ):
+        if character_id:
+            character_target_judge(character_id)
+        else:
+            cache_contorl.over_behavior_character[0] = 1
+    else:
+        status_judge = judge_character_status(character_id)
+        if status_judge:
+            cache_contorl.over_behavior_character[character_id] = 1
 
 
 def character_target_judge(character_id: int):
@@ -82,7 +93,7 @@ def character_target_judge(character_id: int):
             ] = next_time
 
 
-def judge_character_status(character_id: int) -> bool:
+def judge_character_status(character_id: int) -> int:
     """
     校验并结算角色状态
     Keyword arguments:
@@ -137,10 +148,8 @@ def search_target(
         now_target_data = {}
         premise_judge = 1
         for premise in target_premise_list:
-            premise_judge = cache_contorl.handle_premise_data[premise](
-                character_id
-            )
-            if premise_judge:
+            premise_judge = handle_premise.handle_premise(premise,character_id)
+            if premise_judge > 0:
                 now_weiget += premise_judge
             else:
                 premise_judge = 0

@@ -1,8 +1,10 @@
-from typing import TYPE_CHECKING, List, Dict
+from typing import List, Dict
 from uuid import UUID
 from Script.Core import game_type
 
 
+game_data = {}
+""" 游戏预设配置数据 """
 flow_contorl: game_type.FlowContorl = game_type.FlowContorl()
 """ 流程用变量组 """
 wframe_mouse: game_type.WFrameMouse = game_type.WFrameMouse()

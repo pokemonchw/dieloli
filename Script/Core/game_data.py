@@ -7,10 +7,6 @@ from dijkstar import Graph, find_path
 from Script.Core.game_path_config import game_path
 from Script.Core import json_handle, cache_contorl, value_handle
 
-game_data = {}
-scene_data = {}
-map_data = {}
-
 
 def load_dir_now(data_path: str):
     """
@@ -41,7 +37,7 @@ def load_dir_now(data_path: str):
                             now_scene_data = {
                                 map_system_path_str: now_scene_data
                             }
-                            scene_data.update(now_scene_data)
+                            cache_contorl.scene_data.update(now_scene_data)
                             now_scene_tag = load_scene_data["SceneTag"]
                             if now_scene_tag not in cache_contorl.place_data:
                                 cache_contorl.place_data[now_scene_tag] = []
@@ -72,7 +68,7 @@ def load_dir_now(data_path: str):
                                 now_map_data["PathEdge"]
                             )
                             now_map_data["SortedPath"] = sorted_path_data
-                            map_data[map_system_path_str] = now_map_data
+                            cache_contorl.map_data[map_system_path_str] = now_map_data
                         else:
                             if now_file[0] == "NameIndex":
                                 data = json_handle.load_json(now_path)
@@ -281,13 +277,13 @@ def init_data_json():
     data_dir = os.path.join(game_path, "data")
     data_path = os.path.join(game_path, "data.json")
     f = open(data_path, "wb")
-    game_data.update(load_dir_now(data_dir))
+    cache_contorl.game_data.update(load_dir_now(data_dir))
     now_data = {
-        "gamedata": game_data,
+        "gamedata": cache_contorl.game_data,
         "placedata": cache_contorl.place_data,
         "clothingdata": cache_contorl.clothing_type_data,
-        "scenedata": scene_data,
-        "mapdata": map_data,
+        "scenedata": cache_contorl.scene_data,
+        "mapdata": cache_contorl.map_data,
         "boysregiondata": cache_contorl.boys_region_int_list,
         "girlsregiondata": cache_contorl.girls_region_int_list,
         "familyregiondata": cache_contorl.family_region_int_list,
@@ -311,11 +307,11 @@ def init(debug: bool):
         f = open(data_path, "rb")
         data = pickle.load(f)
         if "system" in data and data["system"] == platform.system():
-            game_data.update(data["gamedata"])
+            cache_contorl.game_data.update(data["gamedata"])
             cache_contorl.place_data = data["placedata"]
             cache_contorl.clothing_type_data = data["clothingdata"]
-            scene_data.update(data["scenedata"])
-            map_data.update(data["mapdata"])
+            cache_contorl.scene_data.update(data["scenedata"])
+            cache_contorl.map_data.update(data["mapdata"])
             cache_contorl.boys_region_int_list = data["boysregiondata"]
             cache_contorl.girls_region_int_list = data["girlsregiondata"]
             cache_contorl.family_region_int_list = data["familyregiondata"]

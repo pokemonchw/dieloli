@@ -45,6 +45,20 @@ def handle_eat_break_fast_in_restaurant(character_id: int):
 
 
 @add_target(
+    "EatLunchInRestaurant",
+    {"InRestaurant","InLunchTime","Hunger","HaveFood"},
+    {},
+)
+def handle_eat_lunch_in_restaruant(character_id: int):
+    """
+    控制角色在餐厅吃午餐
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character.character_eat_rand_food(character_id)
+
+
+@add_target(
     "GoCafeteria", {"Hunger", "NotHaveFood"}, {"InCafeteria"},
 )
 def handle_go_cafeteria(character_id: int):
@@ -53,6 +67,21 @@ def handle_go_cafeteria(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
+    character.character_move_to_rand_cafeteria(character_id)
+
+
+@add_target(
+    "GoRestaurant",
+    {"Hunger","HaveFood"},
+    {"InRestaurant"},
+)
+def handle_go_restaturant(character_id: int):
+    """
+    控制角色前往随机就餐区
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    print(character_id)
     character.character_move_to_rand_restaurant(character_id)
 
 

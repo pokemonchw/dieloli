@@ -60,6 +60,8 @@ class Character:
     """ 角色数据结构体 """
 
     def __init__(self):
+        self.id:int = 0
+        """ 角色id """
         self.name: str = "主人公"
         """ 角色名字 """
         self.nick_name: str = "你"

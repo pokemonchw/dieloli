@@ -7,15 +7,16 @@ from Script.Core import (
     constant,
     game_type,
 )
-from Script.Design import attr_calculation, clothing, nature
+from Script.Design import attr_calculation, clothing, nature,map_handle,character_move
 
 
-def init_attr(character_data: game_type.Character):
+def init_attr(character_id:int):
     """
     初始化角色属性
     Keyword arguments:
-    character_data -- 角色对象
+    character_id -- 角色id
     """
+    character_data = cache_contorl.character_data[character_id]
     character_data.language[character_data.mother_tongue] = 10000
     character_data.birthday = attr_calculation.get_rand_npc_birthday(
         character_data.age
@@ -161,6 +162,7 @@ def init_character_behavior_start_time(character_id: int):
     character_id -- 角色id
     """
     character_data = cache_contorl.character_data[character_id]
+    character_data.behavior["StartTime"] = {}
     character_data.behavior["StartTime"]["year"] = cache_contorl.game_time[
         "year"
     ]
@@ -293,5 +295,5 @@ def character_eat_rand_food(character_id: int):
     character_data.behavior["EatFood"] = character_data.food_bag[
         random.choice(list(character_data.food_bag.keys()))
     ]
-    character_data.behavior["Duration"] = 10
+    character_data.behavior["Duration"] = 1
     character_data.state = constant.CharacterStatus.STATUS_EAT

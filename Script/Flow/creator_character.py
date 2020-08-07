@@ -151,7 +151,7 @@ def attribute_generation_branch_func():
         detailed_setting_func_1()
     elif flow_return == 1:
         py_cmd.clr_cmd()
-        character.init_attr(cache_contorl.character_data[0])
+        character.init_attr(0)
         cache_contorl.now_flow_id = "acknowledgment_attribute"
     elif flow_return == 2:
         py_cmd.clr_cmd()
@@ -207,7 +207,7 @@ def enter_character_nature_func():
     """
     请求玩家确认性格流程
     """
-    character.init_attr(cache_contorl.character_data[0])
+    character.init_attr(0)
     while 1:
         py_cmd.clr_cmd()
         creator_character_panel.enter_character_nature_head()
@@ -224,7 +224,7 @@ def enter_character_nature_func():
                     0, 50
                 )
         elif int(yrn) == 0:
-            character.init_attr(cache_contorl.character_data[0])
+            character.init_attr(0)
             cache_contorl.now_flow_id = "acknowledgment_attribute"
             break
         elif int(yrn) == 1:

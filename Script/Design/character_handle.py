@@ -25,7 +25,7 @@ sex_list = list(text_loading.get_text_data(constant.FilePath.ROLE_PATH, "Sex"))
 age_tem_list = list(
     text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "AgeTem")
 )
-character_list = list(game_data.game_data[language]["character"].keys())
+character_list = list(cache_contorl.game_data[language]["character"].keys())
 
 
 def init_character_list():
@@ -103,6 +103,7 @@ def init_character(character_id: int, character_tem: game_type.NpcTem):
     character_tem -- 角色生成模板数据
     """
     now_character = game_type.Character()
+    now_character.id = character_id
     now_character.name = character_tem.Name
     now_character.sex = character_tem.Sex
     if character_tem.MotherTongue != "":
@@ -124,8 +125,8 @@ def init_character(character_id: int, character_tem: game_type.NpcTem):
         now_character.bodyfat_tem = now_character.weigt_tem
     if character_tem.Chest:
         now_character.chest_tem = character_tem.Chest
-    character.init_attr(now_character)
     cache_contorl.character_data[character_id] = now_character
+    character.init_attr(character_id)
 
 
 def init_character_tem():

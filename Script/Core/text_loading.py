@@ -1,4 +1,4 @@
-from Script.Core import game_config, game_data, game_path_config, constant
+from Script.Core import game_config, game_path_config, constant,cache_contorl
 
 game_path = game_path_config.game_path
 
@@ -14,9 +14,9 @@ def get_text_data(text_path_id: str, text_id: str) -> str or dict:
     text_id -- 文件下的文本id
     """
     if text_path_id in ["FontConfig", "BarConfig"]:
-        return game_data.game_data[text_path_id][text_id]
+        return cache_contorl.game_data[text_path_id][text_id]
     else:
-        return game_data.game_data[LANGUAGE][text_path_id][text_id]
+        return cache_contorl.game_data[LANGUAGE][text_path_id][text_id]
 
 
 def get_game_data(text_path_id: str) -> dict:
@@ -29,9 +29,9 @@ def get_game_data(text_path_id: str) -> dict:
         constant.FilePath.FONT_CONFIG_PATH,
         constant.FilePath.BAR_CONFIG_PATH,
     ]:
-        return game_data.game_data[text_path_id]
+        return cache_contorl.game_data[text_path_id]
     else:
-        return game_data.game_data[LANGUAGE][text_path_id]
+        return cache_contorl.game_data[LANGUAGE][text_path_id]
 
 
 def get_character_data(character_name: str) -> dict:
@@ -40,4 +40,4 @@ def get_character_data(character_name: str) -> dict:
     Keyword arguments:
     character_name -- 角色名
     """
-    return game_data.game_data[LANGUAGE]["character"][character_name]
+    return cache_contorl.game_data[LANGUAGE]["character"][character_name]
