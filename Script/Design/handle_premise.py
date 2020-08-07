@@ -1,7 +1,7 @@
 import math
 from functools import wraps
 from Script.Core import cache_contorl, constant
-from Script.Design import map_handle, game_time
+from Script.Design import map_handle, game_time, attr_calculation
 
 
 def add_premise(premise: str) -> callable:
@@ -33,8 +33,8 @@ def handle_premise(premise: str, character_id: int) -> int:
     Return arguments:
     int -- 前提权重加成
     """
-    if premise in handle_premise_data:
-        return handle_premise_data[premise](character_id)
+    if premise in cache_contorl.handle_premise_data:
+        return cache_contorl.handle_premise_data[premise](character_id)
     else:
         return 0
 
@@ -153,6 +153,21 @@ def handle_have_target(character_id: int) -> int:
     if character_data.target_character_id == character_id:
         return 0
     return 1
+
+
+@add_premise("TargetNoPlayer")
+def handle_target_no_player(character_id: int) -> int:
+    """
+    校验角色目标对像是否不是玩家
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    if character_data.target_character_id > 0:
+        return 1
+    return 0
 
 
 @add_premise("HaveItemByTagDraw")
@@ -431,6 +446,129 @@ def handle_target_is_futa_or_man(character_id: int) -> int:
         character_data.target_character_id
     ]
     if target_data.sex in {"Man", "Woman"}:
+        return 1
+    return 0
+
+
+@add_premise("IsMan")
+def handle_is_man(character_id:int) -> int:
+    """
+    校验角色是否是男性
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    if character_data.sex == "Man":
+        return 1
+    return 0
+
+
+@add_premise("TargetSameSex")
+def handle_target_same_sex(character_id: int) -> int:
+    """
+    校验角色目标对像是否与自己性别相同
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    target_data = cache_contorl.character_data[
+        character_data.target_character_id
+    ]
+    if target_data.sex == character_data.sex:
+        return 1
+    return 0
+
+
+@add_premise("TargetAgeSimilar")
+def handle_target_age_similar(character_id: int) -> int:
+    """
+    校验角色目标对像是否与自己年龄相差不大
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    target_data = cache_contorl.character_data[
+        character_data.target_character_id
+    ]
+    if character_data.age >= target_data.age - 2 and character_data.age <= target_data.age + 2:
+        return 1
+    return 0
+
+
+@add_premise("TargetAverageHeightSimilar")
+def handle_target_average_height_similar(character_id: int) -> int:
+    """
+    校验角色目标身高是否与平均身高相差不大
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    target_data = cache_contorl.character_data[
+        character_data.target_character_id
+    ]
+    age_tem = attr_calculation.judge_age_group(target_data.age)
+    average_height = cache_contorl.average_height_by_age[age_tem][target_data.sex]
+    if target_data.height["NowHeight"] >= average_height * 0.95 and target_data.height["NowHeight"] <= average_height * 1.05:
+        return 1
+    return 0
+
+@add_premise("TargetAverageHeightLow")
+def handle_target_average_height_low(character_id: int) -> int:
+    """
+    校验角色目标的身高是否低于平均身高
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    target_data = cache_contorl.character_data[
+        character_data.target_character_id
+    ]
+    age_tem = attr_calculation.judge_age_group(target_data.age)
+    average_height = cache_contorl.average_height_by_age[age_tem][target_data.sex]
+    if target_data.height["NowHeight"] <= average_height * 0.95:
+        return 1
+    return 0
+
+@add_premise("TargetIsPlayer")
+def handle_is_player(character_id: int) -> int:
+    """
+    校验角色目标是否是玩家
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    if character_data.target_character_id == 0:
+        return 1
+    return 0
+
+@add_premise("TargetAverageStatureSimilar")
+def handle_target_average_stature_similar(character_id: int) -> int:
+    """
+    校验角色目体型高是否与平均体型相差不大
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    target_data = cache_contorl.character_data[
+        character_data.target_character_id
+    ]
+    age_tem = attr_calculation.judge_age_group(target_data.age)
+    average_bodyfat = cache_contorl.average_bodyfat_by_age[age_tem][target_data.sex]
+    if target_data.bodyfat >= average_bodyfat * 0.95 and target_data.bodyfat <= average_bodyfat * 1.05:
         return 1
     return 0
 

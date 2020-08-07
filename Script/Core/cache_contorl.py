@@ -75,8 +75,6 @@ total_height_by_age: dict = {}
 """ 各年龄段总身高 """
 average_height_by_age: dict = {}
 """ 各年龄段平均身高 """
-stature_descrition_priorition_data: dict = {}
-""" 身材描述文本权重数据 """
 text_wait: int = 0
 """ 绘制文本输出等待时间 """
 map_data: dict = {}

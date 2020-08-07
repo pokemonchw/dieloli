@@ -14,7 +14,6 @@ game_path = game_path_config.game_path
 language = game_config.language
 character_list_path = os.path.join(game_path, "data", language, "character")
 
-
 def init_character_behavior():
     """
     角色行为树总控制
@@ -173,7 +172,7 @@ def search_target(
             target_data[now_max_weight].add(
                 random.choice(list(now_target_data[now_max_weight]))
             )
-    if len(target_data) > 0:
+    if len(target_data):
         max_weight = max(list(target_data.keys()))
         return random.choice(list(target_data[max_weight])), max_weight, 1
     return "", 0, 0

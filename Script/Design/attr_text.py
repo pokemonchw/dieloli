@@ -14,6 +14,7 @@ from Script.Design import (
     attr_print,
     attr_calculation,
     map_handle,
+    handle_premise,
 )
 
 language = game_config.language
@@ -405,310 +406,32 @@ def get_state_text(character_id: str) -> str:
     )
 
 
-def judge_character_stature(character_id):
-    """
-    校验身材信息
-    Keyword arguments:
-    character_id -- 角色Id
-    """
-    character_data = cache_contorl.character_data[character_id]
-    target_sex = character_data.sex
-    age_judge = "Similar"
-    self_age = cache_contorl.character_data[0].age
-    target_age = character_data.age
-    age_disparity = self_age - target_age
-    if age_disparity < -2 and age_disparity >= -5:
-        age_judge = "SlightlyHigh"
-    elif age_disparity < -5 and age_disparity >= -15:
-        age_judge = "High"
-    elif age_disparity < -15 and age_disparity >= -30:
-        age_judge = "VeryHigh"
-    elif age_disparity < -30 and age_disparity >= -60:
-        age_judge = "SuperHigh"
-    elif age_disparity < -60:
-        age_judge = "ExtremelyHigh"
-    elif age_disparity > 2 and age_disparity <= 5:
-        age_judge = "SlightlyLow"
-    elif age_disparity > 5 and age_disparity <= 15:
-        age_judge = "Low"
-    elif age_disparity > 15 and age_disparity <= 30:
-        age_judge = "VeryLow"
-    elif age_disparity > 30 and age_disparity <= 60:
-        age_judge = "SuperLow"
-    elif age_disparity > 60:
-        age_judge = "ExtremelyLow"
-    bodyfat = character_data.bodyfat
-    age_tem = attr_calculation.judge_age_group(target_age)
-    average_bodyfat = cache_contorl.average_bodyfat_by_age[age_tem][target_sex]
-    bodyfat_judge = "Similar"
-    if bodyfat < average_bodyfat * 1.15 and bodyfat >= average_bodyfat * 1.05:
-        bodyfat_judge = "SlilghtlyHeight"
-    elif (
-        bodyfat < average_bodyfat * 1.25 and bodyfat >= average_bodyfat * 1.15
-    ):
-        bodyfat_judge = "Height"
-    elif (
-        bodyfat < average_bodyfat * 1.35 and bodyfat >= average_bodyfat * 1.25
-    ):
-        bodyfat_judge = "VeryHeight"
-    elif (
-        bodyfat < average_bodyfat * 1.45 and bodyfat >= average_bodyfat * 1.35
-    ):
-        bodyfat_judge = "SuperHeight"
-    elif bodyfat > average_bodyfat * 1.45:
-        bodyfat_judge = "ExtremelyHeight"
-    elif (
-        bodyfat < average_bodyfat * 0.95 and bodyfat >= average_bodyfat * 0.85
-    ):
-        bodyfat_judge = "SlilghtlyLow"
-    elif (
-        bodyfat < average_bodyfat * 0.85 and bodyfat >= average_bodyfat * 0.75
-    ):
-        bodyfat_judge = "Low"
-    elif (
-        bodyfat < average_bodyfat * 0.75 and bodyfat >= average_bodyfat * 0.65
-    ):
-        bodyfat_judge = "VeryLow"
-    elif (
-        bodyfat < average_bodyfat * 0.65 and bodyfat >= average_bodyfat * 0.55
-    ):
-        bodyfat_judge = "SuperLow"
-    elif bodyfat < average_bodyfat * 0.55:
-        bodyfat_judge = "ExtremelyLow"
-    average_height = cache_contorl.average_height_by_age[age_tem][target_sex]
-    height = character_data.height["NowHeight"]
-    height_judge = "Similar"
-    if height < average_height * 1.15 and height >= average_height * 1.05:
-        height_judge = "SlilghtlyHeight"
-    elif height < average_height * 1.25 and height >= average_height * 1.15:
-        height_judge = "Height"
-    elif height < average_height * 1.35 and height >= average_height * 1.25:
-        height_judge = "VeryHeight"
-    elif height < average_height * 1.45 and height >= average_height * 1.35:
-        height_judge = "SuperHeight"
-    elif height > average_height * 1.45:
-        height_judge = "ExtremelyHeight"
-    elif height < average_height * 0.95 and height >= average_height * 0.85:
-        height_judge = "SlilghtlyLow"
-    elif height < average_height * 0.85 and height >= average_height * 0.75:
-        height_judge = "Low"
-    elif height < average_height * 0.75 and height >= average_height * 0.65:
-        height_judge = "VeryLow"
-    elif height < average_height * 0.65 and height >= average_height * 0.55:
-        height_judge = "SuperLow"
-    elif height < average_height:
-        height_judge = "ExtremelyLow"
-    player_bodyfat = character_data.bodyfat
-    player_bodyfat_judge = "Similar"
-    if bodyfat < player_bodyfat * 1.15 and bodyfat >= player_bodyfat * 1.05:
-        player_bodyfat_judge = "SlilghtlyHeight"
-    elif bodyfat < player_bodyfat * 1.25 and bodyfat >= player_bodyfat * 1.15:
-        player_bodyfat_judge = "Height"
-    elif bodyfat < player_bodyfat * 1.35 and bodyfat >= player_bodyfat * 1.25:
-        player_bodyfat_judge = "VeryHeight"
-    elif bodyfat < player_bodyfat * 1.45 and bodyfat >= player_bodyfat * 1.35:
-        player_bodyfat_judge = "SuperHeight"
-    elif bodyfat > player_bodyfat * 1.45:
-        player_bodyfat_judge = "ExtremelyHeight"
-    elif bodyfat < player_bodyfat * 0.95 and bodyfat >= player_bodyfat * 0.85:
-        player_bodyfat_judge = "SlilghtlyLow"
-    elif bodyfat < player_bodyfat * 0.85 and bodyfat >= player_bodyfat * 0.75:
-        player_bodyfat_judge = "Low"
-    elif bodyfat < player_bodyfat * 0.75 and bodyfat >= player_bodyfat * 0.65:
-        player_bodyfat_judge = "VeryLow"
-    elif bodyfat < player_bodyfat * 0.65 and bodyfat >= player_bodyfat * 0.55:
-        player_bodyfat_judge = "SuperLow"
-    elif bodyfat < player_bodyfat * 0.55:
-        player_bodyfat_judge = "ExtremelyLow"
-    player_height = cache_contorl.character_data[0].height["NowHeight"]
-    player_height_judge = "Similar"
-    if height < player_height * 1.15 and height >= player_height * 1.05:
-        player_height_judge = "SlilghtlyHeight"
-    elif height < player_height * 1.25 and height >= player_height * 1.15:
-        player_height_judge = "Height"
-    elif height < player_height * 1.35 and height >= player_height * 1.25:
-        player_height_judge = "VeryHeight"
-    elif height < player_height * 1.45 and height >= player_height * 1.35:
-        player_height_judge = "SuperHeight"
-    elif height > player_height * 1.45:
-        player_height_judge = "ExtremelyHeight"
-    elif height < player_height * 0.95 and height >= player_height * 0.85:
-        player_height_judge = "SlilghtlyLow"
-    elif height < player_height * 0.85 and height >= player_height * 0.75:
-        player_height_judge = "Low"
-    elif height < player_height * 0.75 and height >= player_height * 0.65:
-        player_height_judge = "VeryLow"
-    elif height < player_height * 0.65 and height >= player_height * 0.55:
-        player_height_judge = "SuperLow"
-    elif height < player_height * 0.55:
-        player_height_judge = "ExtremelyLow"
-    player_sex = cache_contorl.character_data[0].sex
-    player_age = cache_contorl.character_data[0].age
-    player_age_tem = attr_calculation.judge_age_group(
-        cache_contorl.character_data[0].age
-    )
-    average_bodyfat = cache_contorl.average_bodyfat_by_age[player_age_tem][
-        player_sex
-    ]
-    average_height = cache_contorl.average_height_by_age[player_age_tem][
-        player_sex
-    ]
-    player_average_bodyfat_judge = "Similar"
-    if (
-        player_bodyfat < average_bodyfat * 1.15
-        and player_bodyfat >= average_bodyfat * 1.05
-    ):
-        player_average_bodyfat_judge = "SlilghtlyHeight"
-    elif (
-        player_bodyfat < average_bodyfat * 1.25
-        and player_bodyfat >= average_bodyfat * 1.15
-    ):
-        player_average_bodyfat_judge = "Height"
-    elif (
-        player_bodyfat < average_bodyfat * 1.35
-        and player_bodyfat >= average_bodyfat * 1.25
-    ):
-        player_average_bodyfat_judge = "VeryHeight"
-    elif (
-        player_bodyfat < average_bodyfat * 1.45
-        and player_bodyfat >= average_bodyfat * 1.35
-    ):
-        player_average_bodyfat_judge = "SuperHeight"
-    elif player_bodyfat > average_bodyfat * 1.45:
-        player_average_bodyfat_judge = "ExtremelyHeight"
-    elif (
-        player_bodyfat < average_bodyfat * 0.95
-        and player_bodyfat >= average_bodyfat * 0.85
-    ):
-        player_average_bodyfat_judge = "SlilghtlyLow"
-    elif (
-        player_bodyfat < average_bodyfat * 0.85
-        and player_bodyfat >= average_bodyfat * 0.75
-    ):
-        player_average_bodyfat_judge = "Low"
-    elif (
-        player_bodyfat < average_bodyfat * 0.75
-        and player_bodyfat >= average_bodyfat * 0.65
-    ):
-        player_average_bodyfat_judge = "VeryLow"
-    elif (
-        player_bodyfat < average_bodyfat * 0.65
-        and player_bodyfat >= average_bodyfat * 0.55
-    ):
-        player_average_bodyfat_judge = "SuperLow"
-    elif player_bodyfat < average_bodyfat * 0.55:
-        player_average_bodyfat_judge = "ExtremelyLow"
-    player_average_height_judge = "Similar"
-    if (
-        player_height < average_height * 1.15
-        and player_height >= average_height * 1.05
-    ):
-        player_average_height_judge = "SlilghtlyHeight"
-    elif (
-        player_height < average_height * 1.25
-        and player_height >= average_height * 1.15
-    ):
-        player_average_height_judge = "Height"
-    elif (
-        player_height < average_height * 1.35
-        and player_height >= average_height * 1.25
-    ):
-        player_average_height_judge = "VeryHeight"
-    elif (
-        player_height < average_height * 1.45
-        and player_height >= average_height * 1.35
-    ):
-        player_average_height_judge = "SuperHeight"
-    elif player_height > average_height * 1.45:
-        player_average_height_judge = "ExtremelyHeight"
-    elif (
-        player_height < average_height * 0.95
-        and player_height >= average_height * 0.85
-    ):
-        player_average_height_judge = "SlilghtlyLow"
-    elif (
-        player_height < average_height * 0.85
-        and player_height >= average_height * 0.75
-    ):
-        player_average_height_judge = "Low"
-    elif (
-        player_height < average_height * 0.75
-        and player_height >= average_height * 0.65
-    ):
-        player_average_height_judge = "VeryLow"
-    elif (
-        player_height < average_height * 0.65
-        and player_height >= average_height * 0.55
-    ):
-        player_average_height_judge = "SuperLow"
-    elif player_height < average_height * 0.55:
-        player_average_height_judge = "ExtremelyLow"
-    target_judge = "Target"
-    if character_id == 0:
-        target_judge = "Self"
-    return {
-        "SelfSex": player_sex,
-        "TargetSex": character_data.sex,
-        "AgeJudge": age_judge,
-        "AgeTem": age_tem,
-        "SelfAgeTem": player_age_tem,
-        "SelfAge": player_age,
-        "TargetAge": target_age,
-        "AverageHeight": height_judge,
-        "AverageStature": bodyfat_judge,
-        "RelativeHeight": player_height_judge,
-        "RelativeStature": player_bodyfat_judge,
-        "PlayerAverageHeight": player_average_height_judge,
-        "PlayerAverageStature": player_average_bodyfat_judge,
-        "Target": target_judge,
-    }
-
-
-def get_stature_text(character_id: str) -> list:
+def get_stature_text(character_id: str) -> str:
     """
     按角色Id获取身材描述信息
     Keyword arguments:
     character_id -- 角色Id
     """
-    stature_judge = judge_character_stature(character_id)
-    for priority in cache_contorl.stature_descrition_priorition_data:
-        for descript in cache_contorl.stature_descrition_priorition_data[
-            priority
-        ]:
-            if judge_stature_description(
-                stature_judge,
-                text_loading.get_game_data(
-                    constant.FilePath.STATURE_DESCRIPTION_PATH
-                )["Priority"][priority][descript]["Condition"],
-            ):
-                return text_loading.get_game_data(
-                    constant.FilePath.STATURE_DESCRIPTION_PATH
-                )["Priority"][priority][descript]["Description"]
-    return ""
-
-
-def judge_stature_description(stature_judge, description_data):
-    """
-    角色的身材信息
-    Keyword arguments:
-    stature_judge -- 身材校验信息
-    description_data -- 身材描述数据
-    """
-    for judge in description_data:
-        if (
-            judge == "SelfAge"
-            and stature_judge["SelfAge"] < description_data[judge]
-        ):
-            return False
-        elif (
-            judge == "TargetAge"
-            and stature_judge["TargetAge"] < description_data[judge]
-        ):
-            return False
+    descript_data = {}
+    for descript in text_loading.get_game_data(constant.FilePath.STATURE_DESCRIPTION_PATH)["Priority"]:
+        now_weight = 0
+        if "Premise" in descript:
+            for premise in descript["Premise"]:
+                now_add_weight = handle_premise.handle_premise(premise,character_id)
+                if now_add_weight:
+                    now_weight += now_add_weight
+                else:
+                    now_weight = 0
+                    break
         else:
-            if description_data[judge] != stature_judge[judge]:
-                return False
-    return True
+            now_weight = 1
+        if now_weight:
+            descript_data.setdefault(now_weight,set())
+            descript_data[now_weight].add(descript["Description"])
+    if len(descript_data):
+        max_weight = max(list(descript_data.keys()))
+        return random.choice(list(descript_data[max_weight]))
+    return ""
 
 
 def get_character_abbreviations_info(character_id: int) -> str:

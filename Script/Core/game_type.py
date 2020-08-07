@@ -145,7 +145,7 @@ class Character:
         """ 角色体重模板 """
         self.bodyfat_tem: str = "Ordinary"
         """ 角色体脂率模板 """
-        self.bodyfat: dict = {}
+        self.bodyfat: int = 0
         """ 角色体脂率数据 """
         self.sex_experience_tem: str = "None"
         """ 角色性经验模板 """

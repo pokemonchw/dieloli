@@ -1,3 +1,4 @@
+import timeit
 from functools import wraps
 from Script.Core import text_loading, era_print, constant, cache_contorl
 from Script.Design import game_time, update, character
@@ -71,9 +72,11 @@ def handle_rest():
         )
         target_character.behavior["Duration"] = 10
         target_character.behavior["BehaviorId"] = constant.Behavior.REST
-    update.game_update_flow()
+    t1 = timeit.timeit(update.game_update_flow,number=1)
+    print(t1)
     game_time.sub_time_now(10)
-    update.game_update_flow()
+    t2 = timeit.timeit(update.game_update_flow,number=1)
+    print(t2)
 
 
 @add_instruct("BuyFood")

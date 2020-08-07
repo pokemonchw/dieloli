@@ -89,10 +89,6 @@ def load_dir_now(data_path: str):
                                     init_clothing_data(
                                         now_data[now_file[0]]["Clothing"]
                                     )
-                                elif now_file[0] == "StatureDescription":
-                                    init_stature_description(
-                                        now_data[now_file[0]]["Priority"]
-                                    )
                                 elif now_file[0] == "WearItem":
                                     init_wear_item_type_data(
                                         now_data[now_file[0]]["Item"]
@@ -101,20 +97,6 @@ def load_dir_now(data_path: str):
                 now_data[i] = load_dir_now(now_path)
     return now_data
 
-
-def init_stature_description(stature_descrition_data: dict):
-    """
-    初始化身材描述文本权重数据
-    Keyword arguments:
-    sd_data -- 身材描述文本数据
-    """
-    cache_contorl.stature_descrition_priorition_data = {
-        priority: {
-            i: len(stature_descrition_data[priority][i]["Condition"])
-            for i in range(len(stature_descrition_data[priority]))
-        }
-        for priority in range(len(stature_descrition_data))
-    }
 
 
 def init_wear_item_type_data(wear_item_data: dict):
@@ -303,7 +285,6 @@ def init_data_json():
     now_data = {
         "gamedata": game_data,
         "placedata": cache_contorl.place_data,
-        "staturedata": cache_contorl.stature_descrition_priorition_data,
         "clothingdata": cache_contorl.clothing_type_data,
         "scenedata": scene_data,
         "mapdata": map_data,
@@ -332,9 +313,6 @@ def init(debug: bool):
         if "system" in data and data["system"] == platform.system():
             game_data.update(data["gamedata"])
             cache_contorl.place_data = data["placedata"]
-            cache_contorl.stature_descrition_priorition_data = data[
-                "staturedata"
-            ]
             cache_contorl.clothing_type_data = data["clothingdata"]
             scene_data.update(data["scenedata"])
             map_data.update(data["mapdata"])
