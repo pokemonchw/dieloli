@@ -346,12 +346,15 @@ def judge_scene_affiliation(
             if now_scene_path[i] != target_scene_path[i]:
                 judge = 0
                 break
-        else:
+        if i > len(target_scene_path) - 1:
+            break
+        if target_scene_path[i] != now_scene_path[i]:
+            judge = 0
             break
     if judge:
         return "subordinate"
-    now_father = now_scene_path[-1:]
-    target_father = target_scene_path[-1:]
+    now_father = now_scene_path[:-1]
+    target_father = target_scene_path[:-1]
     if now_father == target_father:
         return "common"
     return "nobelonged"
