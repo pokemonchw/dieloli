@@ -1,4 +1,4 @@
-from Script.Core import game_config, game_path_config, constant,cache_contorl
+from Script.Core import game_config, game_path_config, constant, cache_contorl
 
 game_path = game_path_config.game_path
 

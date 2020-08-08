@@ -28,7 +28,9 @@ def init(main_flow: object):
     # 载入按键监听
     key_listion_event.on_wframe_listion()
     # 设置背景颜色
-    io_init.set_background(cache_contorl.game_data["core_cfg"]["background_color"])
+    io_init.set_background(
+        cache_contorl.game_data["core_cfg"]["background_color"]
+    )
     # 初始化字体
     io_init.init_style()
     # 初始化地图数据

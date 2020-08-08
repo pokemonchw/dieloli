@@ -60,7 +60,7 @@ class Character:
     """ 角色数据结构体 """
 
     def __init__(self):
-        self.id:int = 0
+        self.id: int = 0
         """ 角色id """
         self.name: str = "主人公"
         """ 角色名字 """
@@ -121,9 +121,9 @@ class Character:
             "BehaviorId": 0,
             "MoveTarget": [],
             "EatFood": None,
-            "MoveSrc":[],
-            "FoodName":"",
-            "FoodQuality":0
+            "MoveSrc": [],
+            "FoodName": "",
+            "FoodQuality": 0,
         }
         """ 角色当前行为状态数据 """
         self.gold: int = 0
@@ -173,12 +173,12 @@ class Character:
         self.mana_point_tem: str = "Ordinary"
         """ 角色MP模板 """
         self.social_contact: dict = {
-            "Adore":{},
-            "Admire":{},
-            "Subside":{},
-            "Depend":{},
-            "Trust":{},
-            "Friendly":{},
+            "Adore": {},
+            "Admire": {},
+            "Subside": {},
+            "Depend": {},
+            "Trust": {},
+            "Friendly": {},
         }
         """ 角色社交关系数据 关系id:角色id:亲密度 """
         self.occupation: str = ""

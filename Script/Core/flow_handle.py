@@ -329,8 +329,8 @@ def init_cache():
         "SeeCharacterItemListPanel": "0",
         "SeeFoodShopListByFoodTypePanel": 0,
         "SeeFoodShopListByFoodPanel": 0,
-        "SeeFoodBagListByFoodPanel":0,
-        "SeeFoodBagListByFoodTypePanel":0,
+        "SeeFoodBagListByFoodPanel": 0,
+        "SeeFoodBagListByFoodTypePanel": 0,
     }
     cache_contorl.max_save_page = game_config.save_page
     cache_contorl.text_wait = float(game_config.text_wait)

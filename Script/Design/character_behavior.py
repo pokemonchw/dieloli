@@ -8,20 +8,26 @@ from Script.Core import (
     game_type,
     constant,
 )
-from Script.Design import settle_behavior, game_time, character,handle_premise,talk
+from Script.Design import (
+    settle_behavior,
+    game_time,
+    character,
+    handle_premise,
+    talk,
+)
 
 game_path = game_path_config.game_path
 language = game_config.language
 character_list_path = os.path.join(game_path, "data", language, "character")
+
 
 def init_character_behavior():
     """
     角色行为树总控制
     """
     while 1:
-        if (
-            len(cache_contorl.over_behavior_character)
-            >= len(cache_contorl.character_data)
+        if len(cache_contorl.over_behavior_character) >= len(
+            cache_contorl.character_data
         ):
             break
         for character_id in cache_contorl.character_data:
@@ -29,22 +35,15 @@ def init_character_behavior():
     cache_contorl.over_behavior_character = {}
 
 
-def character_behavior(character_id:int):
+def character_behavior(character_id: int):
     """
     角色行为控制
     Keyword arguments:
     character_id -- 角色id
     """
-    if (
-        character_id in cache_contorl.over_behavior_character
-    ):
+    if character_id in cache_contorl.over_behavior_character:
         return
-    if (
-        cache_contorl.character_data[character_id].behavior[
-            "StartTime"
-        ]
-        == {}
-    ):
+    if cache_contorl.character_data[character_id].behavior["StartTime"] == {}:
         character.init_character_behavior_start_time(character_id)
     game_time.init_now_course_time_slice(character_id)
     if (
@@ -149,7 +148,9 @@ def search_target(
         now_target_data = {}
         premise_judge = 1
         for premise in target_premise_list:
-            premise_judge = handle_premise.handle_premise(premise,character_id)
+            premise_judge = handle_premise.handle_premise(
+                premise, character_id
+            )
             if premise_judge > 0:
                 now_weiget += premise_judge
             else:

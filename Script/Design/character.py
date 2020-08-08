@@ -7,10 +7,16 @@ from Script.Core import (
     constant,
     game_type,
 )
-from Script.Design import attr_calculation, clothing, nature,map_handle,character_move
+from Script.Design import (
+    attr_calculation,
+    clothing,
+    nature,
+    map_handle,
+    character_move,
+)
 
 
-def init_attr(character_id:int):
+def init_attr(character_id: int):
     """
     初始化角色属性
     Keyword arguments:

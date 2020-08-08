@@ -2,7 +2,7 @@ import timeit
 from functools import wraps
 from Script.Core import text_loading, era_print, constant, cache_contorl
 from Script.Design import game_time, update, character
-from Script.Flow import buy_food,eat_food
+from Script.Flow import buy_food, eat_food
 
 
 handle_instruct_data = {}
@@ -84,13 +84,14 @@ def handle_buy_food():
     """
     buy_food.buy_food()
 
+
 @add_instruct("Eat")
 def handle_eat():
     """
     处理进食指令
     """
     character.init_character_behavior_start_time(0)
-    judge,now_food = eat_food.eat_food()
+    judge, now_food = eat_food.eat_food()
     if judge:
         character_data = cache_contorl.character_data[0]
         character_data.behavior["BehaviorId"] = constant.Behavior.EAT
@@ -100,4 +101,3 @@ def handle_eat():
     update.game_update_flow()
     game_time.sub_time_now(1)
     update.game_update_flow()
-

@@ -1,5 +1,5 @@
 from Script.Core import cache_contorl, text_loading, era_print, constant
-from Script.Design import map_handle, game_time, update,character
+from Script.Design import map_handle, game_time, update, character
 
 
 def own_charcter_move(target_scene: list):
@@ -11,7 +11,12 @@ def own_charcter_move(target_scene: list):
     while 1:
         character_data = cache_contorl.character_data[0]
         if character_data.position != target_scene:
-            move_now,now_path_list,now_target_position,now_need_time = character_move(0,target_scene)
+            (
+                move_now,
+                now_path_list,
+                now_target_position,
+                now_need_time,
+            ) = character_move(0, target_scene)
             if move_now == "Null":
                 null_message = text_loading.get_text_data(
                     constant.FilePath.MESSAGE_PATH, "30"
@@ -85,35 +90,59 @@ def difference_map_move(
     character_data = cache_contorl.character_data[character_id]
     now_position = character_data.position
     is_affiliation = map_handle.judge_scene_affiliation(
-        now_position,target_scene
+        now_position, target_scene
     )
     now_true_position = map_handle.get_scene_path_for_true(now_position)
     now_true_map = map_handle.get_map_for_path(now_true_position)
     if is_affiliation == "subordinate":
-        now_true_affiliation = map_handle.judge_scene_is_affiliation(now_true_position, target_scene)
+        now_true_affiliation = map_handle.judge_scene_is_affiliation(
+            now_true_position, target_scene
+        )
         if now_true_affiliation == "subordinate":
-            now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(now_true_map, now_true_position)
-            return identical_map_move(character_id, now_true_map, now_map_scene_id, "0")
+            now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
+                now_true_map, now_true_position
+            )
+            return identical_map_move(
+                character_id, now_true_map, now_map_scene_id, "0"
+            )
         now_map = map_handle.get_map_for_path(target_scene)
-        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(now_map, now_position)
+        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
+            now_map, now_position
+        )
         return identical_map_move(character_id, now_map, now_map_scene_id, "0")
-    relation_map_list = map_handle.get_relation_map_list_for_scene_path(now_true_position)
+    relation_map_list = map_handle.get_relation_map_list_for_scene_path(
+        now_true_position
+    )
     now_scene_real_map = relation_map_list[-1]
-    now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(now_scene_real_map,now_true_position)
-    common_map = map_handle.get_common_map_for_scene_path(now_true_position, target_scene)
+    now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
+        now_scene_real_map, now_true_position
+    )
+    common_map = map_handle.get_common_map_for_scene_path(
+        now_true_position, target_scene
+    )
     if now_scene_real_map != common_map:
         if now_map_scene_id == "0":
             now_true_position = now_scene_real_map.copy()
-            relation_map_list = map_handle.get_relation_map_list_for_scene_path(now_true_position)
+            relation_map_list = map_handle.get_relation_map_list_for_scene_path(
+                now_true_position
+            )
             now_scene_real_map = relation_map_list[-1]
+    target_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
+        common_map, target_scene
+    )
     if now_scene_real_map == common_map:
-        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(common_map, now_true_position)
+        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
+            common_map, now_true_position
+        )
     else:
-        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
+        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
+            now_scene_real_map, now_true_position
+        )
         target_map_scene_id = "0"
         common_map = now_scene_real_map
-    target_map_scene_id = map_handle.get_map_scene_id_for_scene_path(common_map, target_scene)
-    return identical_map_move(character_id, common_map, now_map_scene_id, target_map_scene_id)
+    return identical_map_move(
+        character_id, common_map, now_map_scene_id, target_map_scene_id
+    )
 
 
 def identical_map_move(

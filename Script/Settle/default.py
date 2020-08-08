@@ -5,7 +5,7 @@ from Script.Design import (
     game_time,
     map_handle,
 )
-from Script.Core import constant, cache_contorl, game_type,text_loading
+from Script.Core import constant, cache_contorl, game_type, text_loading
 
 
 @settle_behavior.add_settle_behavior(constant.Behavior.REST)
@@ -82,17 +82,25 @@ def settle_eat(character_id: int):
             now_feel_value *= eat_weight
             if feel in character_data.status["BodyFeeling"]:
                 if feel in ("Hunger", "Thirsty"):
-                    character_data.status["BodyFeeling"][feel] -= now_feel_value
+                    character_data.status["BodyFeeling"][
+                        feel
+                    ] -= now_feel_value
                 else:
-                    character_data.status["BodyFeeling"][feel] += now_feel_value
+                    character_data.status["BodyFeeling"][
+                        feel
+                    ] += now_feel_value
             elif feel in character_data.status["SexFeel"]:
                 character_data.status["SexFeel"][feel] += now_feel_value
             elif feel in character_data.status["PsychologicalFeeling"]:
-                character_data.status["PsychologicalFeeling"][feel] += now_feel_value
+                character_data.status["PsychologicalFeeling"][
+                    feel
+                ] += now_feel_value
         food.weight -= eat_weight
         food_name = ""
         if food.recipe == -1:
-            food_config = text_loading.get_game_data(constant.FilePath.FOOD_PATH,food.id)
+            food_config = text_loading.get_game_data(
+                constant.FilePath.FOOD_PATH, food.id
+            )
             food_name = food_config["Name"]
         else:
             food_name = cache_contorl.recipe_data[food.recipe].name

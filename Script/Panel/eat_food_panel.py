@@ -1,11 +1,23 @@
-from Script.Core import text_loading,constant,era_print,cache_contorl,game_type,game_config,text_handle,py_cmd
+from Script.Core import (
+    text_loading,
+    constant,
+    era_print,
+    cache_contorl,
+    game_type,
+    game_config,
+    text_handle,
+    py_cmd,
+)
 from Script.Design import cmd_button_queue
+
 
 def see_food_bag_head():
     """
     查看食物背包食物列表顶部面板
     """
-    title = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,"157")
+    title = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "157"
+    )
     era_print.little_title_print(title)
 
 
@@ -56,15 +68,15 @@ def see_food_bag_list(food_name_list: list) -> list:
     if now_page_end_id > len(food_name_list):
         now_page_end_id = len(food_name_list)
     text_list = []
-    for i in range(now_page_start_id,now_page_end_id):
+    for i in range(now_page_start_id, now_page_end_id):
         food_name = list(food_name_list.keys())[i]
         text_list.append(food_name)
     return cmd_button_queue.option_int(
-        "",4,"left",1,0,"center",0,text_list
+        "", 4, "left", 1, 0, "center", 0, text_list
     )
 
 
-def see_food_bag_list_by_food_uid(max_page:int,food_list:list) -> list:
+def see_food_bag_list_by_food_uid(max_page: int, food_list: list) -> list:
     """
     用于查看背包中食物的面板
     Keyword arguments:
@@ -75,7 +87,9 @@ def see_food_bag_list_by_food_uid(max_page:int,food_list:list) -> list:
     """
     era_print.restart_line_print("+")
     tag_text_index = 0
-    now_page_id = int(cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"])
+    now_page_id = int(
+        cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"]
+    )
     now_page_max = game_config.food_shop_item_max
     now_page_start_id = now_page_id * now_page_max
     now_page_end_id = now_page_start_id + now_page_max
@@ -90,7 +104,7 @@ def see_food_bag_list_by_food_uid(max_page:int,food_list:list) -> list:
     input_s = []
     text_list = []
     fix_text = ""
-    for i in range(now_page_start_id,now_page_end_id):
+    for i in range(now_page_start_id, now_page_end_id):
         now_food = food_list[i]
         if now_food.recipe == -1:
             food_config = text_loading.get_text_data(
@@ -149,7 +163,9 @@ def see_food_bag_list_by_food_uid(max_page:int,food_list:list) -> list:
     return input_s
 
 
-def see_food_bag_tail_cmd(start_id:int,max_page:int,type_judge:bool) -> list:
+def see_food_bag_tail_cmd(
+    start_id: int, max_page: int, type_judge: bool
+) -> list:
     """
     食物背包底部控制面板
     Keyword arguments:
@@ -161,7 +177,9 @@ def see_food_bag_tail_cmd(start_id:int,max_page:int,type_judge:bool) -> list:
     """
     now_page_id = int(cache_contorl.panel_state["SeeFoodBagListByFoodPanel"])
     if type_judge:
-        now_page_id = int(cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"])
+        now_page_id = int(
+            cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"]
+        )
     page_text = f"({now_page_id}/{max_page})"
     era_print.page_line_print("-", page_text)
     era_print.normal_print("\n")
@@ -179,7 +197,7 @@ def see_food_bag_tail_cmd(start_id:int,max_page:int,type_judge:bool) -> list:
     return yrn
 
 
-def eat_food_now_panel(now_food:game_type.Food) -> list:
+def eat_food_now_panel(now_food: game_type.Food) -> list:
     """
     玩家确认进食面板
     Keyword arguments:

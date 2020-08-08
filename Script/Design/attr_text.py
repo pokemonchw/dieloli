@@ -413,11 +413,15 @@ def get_stature_text(character_id: str) -> str:
     character_id -- 角色Id
     """
     descript_data = {}
-    for descript in text_loading.get_game_data(constant.FilePath.STATURE_DESCRIPTION_PATH)["Priority"]:
+    for descript in text_loading.get_game_data(
+        constant.FilePath.STATURE_DESCRIPTION_PATH
+    )["Priority"]:
         now_weight = 0
         if "Premise" in descript:
             for premise in descript["Premise"]:
-                now_add_weight = handle_premise.handle_premise(premise,character_id)
+                now_add_weight = handle_premise.handle_premise(
+                    premise, character_id
+                )
                 if now_add_weight:
                     now_weight += now_add_weight
                 else:
@@ -426,7 +430,7 @@ def get_stature_text(character_id: str) -> str:
         else:
             now_weight = 1
         if now_weight:
-            descript_data.setdefault(now_weight,set())
+            descript_data.setdefault(now_weight, set())
             descript_data[now_weight].add(descript["Description"])
     if len(descript_data):
         max_weight = max(list(descript_data.keys()))

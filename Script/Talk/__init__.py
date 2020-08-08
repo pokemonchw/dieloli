@@ -1,1 +1,1 @@
-from Script.Talk import rest,move,eat
+from Script.Talk import rest, move, eat

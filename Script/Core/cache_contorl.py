@@ -93,7 +93,7 @@ wear_item_type_data: dict = {}
 """ 可穿戴道具类型数据 """
 course_time_status: dict = {}
 """ 当前上课时间状态 """
-talk_data: Dict[int,Dict[int,callable]] = {}
+talk_data: Dict[int, Dict[int, callable]] = {}
 """
 行为对应的口上数据
 行为id:口上id:口上对象
@@ -134,7 +134,7 @@ effect_target_table: Dict[str, set] = {}
 效果对应所需目标集合
 效果id:目标集合
 """
-premise_talk_table: Dict[str,Dict[int,set]] = {}
+premise_talk_table: Dict[str, Dict[int, set]] = {}
 """
 口上对应的所需前提集合
 行为id:口上id:前提集合

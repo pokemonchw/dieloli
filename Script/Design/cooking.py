@@ -285,7 +285,9 @@ def init_restaurant_data():
             break
 
 
-def get_character_food_bag_type_list_buy_food_type(character_id:int,food_type:str) -> dict:
+def get_character_food_bag_type_list_buy_food_type(
+    character_id: int, food_type: str
+) -> dict:
     """
     获取角色背包内指定类型的食物种类
     Keyword arguments:
@@ -297,54 +299,75 @@ def get_character_food_bag_type_list_buy_food_type(character_id:int,food_type:st
     food_list = {}
     character_data = cache_contorl.character_data[character_id]
     for food_uid in character_data.food_bag:
-        food_data:Food = character_data.food_bag[food_uid]
+        food_data: Food = character_data.food_bag[food_uid]
         if food_type == "StapleFood":
             if food_data.recipe != -1:
                 food_name = cache_contorl.recipe_data[food_data.recipe].name
-                food_list.setdefault(food_name,set())
+                food_list.setdefault(food_name, set())
                 food_list[food_name].add(food_uid)
         elif food_type == "Snacks":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH,food_data.id)
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_data.id
+                )
                 if food_config["Eat"]:
                     food_name = food_config["Name"]
-                    food_list.setdefault(food_name,set())
+                    food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == "Drink":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH,food_data.id)
-                if "Thirsty" in food_config["Feel"] and not food_config["Fruit"] and food_config["Eat"] and ("Hunger" not in food_config["Feel"] or food_config["Feel"]["Thirsty"] > food_config["Feel"]["Hunger"]):
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_data.id
+                )
+                if (
+                    "Thirsty" in food_config["Feel"]
+                    and not food_config["Fruit"]
+                    and food_config["Eat"]
+                    and (
+                        "Hunger" not in food_config["Feel"]
+                        or food_config["Feel"]["Thirsty"]
+                        > food_config["Feel"]["Hunger"]
+                    )
+                ):
                     food_name = food_config["Name"]
-                    food_list.setdefault(food_name,set())
+                    food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
             else:
                 if "Thirsty" in food_data.feel and (
                     "Hunger" not in food_data.feel
                     or food_data.feel["Thirsty"] > food_data.feel["Hunger"]
                 ):
-                    food_name = cache_contorl.recipe_data[food_data.recipe].name
-                    food_list.setdefault(food_name,set())
+                    food_name = cache_contorl.recipe_data[
+                        food_data.recipe
+                    ].name
+                    food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == "Fruit":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH,food_data.id)
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_data.id
+                )
                 if food_config["Fruit"]:
                     food_name = food_config["Name"]
-                    food_list.setdefault(food_name,set())
+                    food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == "FoodIngredients":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH,food_data.id)
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_data.id
+                )
                 if food_config["Cook"]:
                     food_name = food_config["Name"]
-                    food_list.setdefault(food_name,set())
+                    food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == "Seasoning":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH,food_data.id)
+                food_config = text_loading.get_text_data(
+                    constant.FilePath.FOOD_PATH, food_data.id
+                )
                 if food_config["Seasoning"]:
                     food_name = food_config["Name"]
-                    food_list.setdefault(food_name,set())
+                    food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
     return food_list
 

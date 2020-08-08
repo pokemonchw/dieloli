@@ -103,7 +103,10 @@ def handle_in_lunch_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    if character_data.course.course_index >= 4 and character_data.course.course_index <= 6:
+    if (
+        character_data.course.course_index >= 4
+        and character_data.course.course_index <= 6
+    ):
         return 1
     return 0
 
@@ -466,7 +469,7 @@ def handle_target_is_futa_or_man(character_id: int) -> int:
 
 
 @add_premise("IsMan")
-def handle_is_man(character_id:int) -> int:
+def handle_is_man(character_id: int) -> int:
     """
     校验角色是否是男性
     Keyword arguments:
@@ -481,7 +484,7 @@ def handle_is_man(character_id:int) -> int:
 
 
 @add_premise("IsWoman")
-def handle_is_woman(character_id:int) -> int:
+def handle_is_woman(character_id: int) -> int:
     """
     校验角色是否是女性
     Keyword arguments:
@@ -526,7 +529,10 @@ def handle_target_age_similar(character_id: int) -> int:
     target_data = cache_contorl.character_data[
         character_data.target_character_id
     ]
-    if character_data.age >= target_data.age - 2 and character_data.age <= target_data.age + 2:
+    if (
+        character_data.age >= target_data.age - 2
+        and character_data.age <= target_data.age + 2
+    ):
         return 1
     return 0
 
@@ -545,10 +551,16 @@ def handle_target_average_height_similar(character_id: int) -> int:
         character_data.target_character_id
     ]
     age_tem = attr_calculation.judge_age_group(target_data.age)
-    average_height = cache_contorl.average_height_by_age[age_tem][target_data.sex]
-    if target_data.height["NowHeight"] >= average_height * 0.95 and target_data.height["NowHeight"] <= average_height * 1.05:
+    average_height = cache_contorl.average_height_by_age[age_tem][
+        target_data.sex
+    ]
+    if (
+        target_data.height["NowHeight"] >= average_height * 0.95
+        and target_data.height["NowHeight"] <= average_height * 1.05
+    ):
         return 1
     return 0
+
 
 @add_premise("TargetAverageHeightLow")
 def handle_target_average_height_low(character_id: int) -> int:
@@ -564,10 +576,13 @@ def handle_target_average_height_low(character_id: int) -> int:
         character_data.target_character_id
     ]
     age_tem = attr_calculation.judge_age_group(target_data.age)
-    average_height = cache_contorl.average_height_by_age[age_tem][target_data.sex]
+    average_height = cache_contorl.average_height_by_age[age_tem][
+        target_data.sex
+    ]
     if target_data.height["NowHeight"] <= average_height * 0.95:
         return 1
     return 0
+
 
 @add_premise("TargetIsPlayer")
 def handle_is_player(character_id: int) -> int:
@@ -583,6 +598,7 @@ def handle_is_player(character_id: int) -> int:
         return 1
     return 0
 
+
 @add_premise("TargetAverageStatureSimilar")
 def handle_target_average_stature_similar(character_id: int) -> int:
     """
@@ -597,8 +613,13 @@ def handle_target_average_stature_similar(character_id: int) -> int:
         character_data.target_character_id
     ]
     age_tem = attr_calculation.judge_age_group(target_data.age)
-    average_bodyfat = cache_contorl.average_bodyfat_by_age[age_tem][target_data.sex]
-    if target_data.bodyfat >= average_bodyfat * 0.95 and target_data.bodyfat <= average_bodyfat * 1.05:
+    average_bodyfat = cache_contorl.average_bodyfat_by_age[age_tem][
+        target_data.sex
+    ]
+    if (
+        target_data.bodyfat >= average_bodyfat * 0.95
+        and target_data.bodyfat <= average_bodyfat * 1.05
+    ):
         return 1
     return 0
 
@@ -640,7 +661,7 @@ def handle_target_put_on_skirt(character_id: int) -> int:
 
 
 @add_premise("IsPlayer")
-def handle_is_player(character_id:int) -> int:
+def handle_is_player(character_id: int) -> int:
     """
     校验是否是玩家角色
     Keyword arguments:
@@ -654,7 +675,7 @@ def handle_is_player(character_id:int) -> int:
 
 
 @add_premise("NoPlayer")
-def handle_no_player(character_id:int) -> int:
+def handle_no_player(character_id: int) -> int:
     """
     校验是否不是玩家角色
     Keyword arguments:
@@ -668,7 +689,7 @@ def handle_no_player(character_id:int) -> int:
 
 
 @add_premise("InPlayerScene")
-def handle_in_player_scene(character_id:int) -> int:
+def handle_in_player_scene(character_id: int) -> int:
     """
     校验角色是否与玩家处于同场景中
     Keyword arguments:
@@ -683,7 +704,7 @@ def handle_in_player_scene(character_id:int) -> int:
 
 
 @add_premise("LeavePlayerScene")
-def handle_leave_player_scene(character_id:int) -> int:
+def handle_leave_player_scene(character_id: int) -> int:
     """
     校验角色是否是从玩家场景离开
     Keyword arguments:
@@ -692,13 +713,16 @@ def handle_leave_player_scene(character_id:int) -> int:
     int -- 权重
     """
     now_character_data = cache_contorl.character_data[character_id]
-    if now_character_data.behavior["MoveSrc"] == cache_contorl.character_data[0].position:
+    if (
+        now_character_data.behavior["MoveSrc"]
+        == cache_contorl.character_data[0].position
+    ):
         return 1
     return 0
 
 
 @add_premise("TargetIsAdore")
-def handle_target_is_adore(character_id:int) -> int:
+def handle_target_is_adore(character_id: int) -> int:
     """
     校验角色当前目标是否是自己的爱慕对象
     Keyword arguments:
@@ -712,8 +736,9 @@ def handle_target_is_adore(character_id:int) -> int:
         return 1
     return 0
 
+
 @add_premise("TargetIsAdmire")
-def handle_target_is_admire(character_id:int) -> int:
+def handle_target_is_admire(character_id: int) -> int:
     """
     校验角色当前的目标是否是自己的恋慕对象
     Keyword arguments:
@@ -729,7 +754,7 @@ def handle_target_is_admire(character_id:int) -> int:
 
 
 @add_premise("PlayerIsAdore")
-def handle_player_is_adore(character_id:int) -> int:
+def handle_player_is_adore(character_id: int) -> int:
     """
     校验玩家是否是当前角色的爱慕对象
     Keyword arguments:
@@ -744,7 +769,7 @@ def handle_player_is_adore(character_id:int) -> int:
 
 
 @add_premise("EatSpringFood")
-def handle_eat_spring_food(character_id:int) -> int:
+def handle_eat_spring_food(character_id: int) -> int:
     """
     校验角色是否正在食用春药品质的食物
     Keyword arguments:

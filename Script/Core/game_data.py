@@ -68,7 +68,9 @@ def load_dir_now(data_path: str):
                                 now_map_data["PathEdge"]
                             )
                             now_map_data["SortedPath"] = sorted_path_data
-                            cache_contorl.map_data[map_system_path_str] = now_map_data
+                            cache_contorl.map_data[
+                                map_system_path_str
+                            ] = now_map_data
                         else:
                             if now_file[0] == "NameIndex":
                                 data = json_handle.load_json(now_path)
@@ -92,7 +94,6 @@ def load_dir_now(data_path: str):
             else:
                 now_data[i] = load_dir_now(now_path)
     return now_data
-
 
 
 def init_wear_item_type_data(wear_item_data: dict):

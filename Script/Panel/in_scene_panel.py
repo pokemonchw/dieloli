@@ -120,7 +120,6 @@ def change_scene_character_list_panel(start_id: int) -> list:
     return input_s
 
 
-# 用于获取当前页面下的名字列表
 def get_now_page_name_list(name_list: list) -> list:
     """
     获取当前角色列表页面角色姓名列表

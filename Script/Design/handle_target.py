@@ -46,7 +46,7 @@ def handle_eat_break_fast_in_restaurant(character_id: int):
 
 @add_target(
     "EatLunchInRestaurant",
-    {"InRestaurant","InLunchTime","Hunger","HaveFood"},
+    {"InRestaurant", "InLunchTime", "Hunger", "HaveFood"},
     {},
 )
 def handle_eat_lunch_in_restaruant(character_id: int):
@@ -71,9 +71,7 @@ def handle_go_cafeteria(character_id: int):
 
 
 @add_target(
-    "GoRestaurant",
-    {"Hunger","HaveFood"},
-    {"InRestaurant"},
+    "GoRestaurant", {"Hunger", "HaveFood"}, {"InRestaurant"},
 )
 def handle_go_restaturant(character_id: int):
     """
