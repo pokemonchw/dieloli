@@ -480,6 +480,21 @@ def handle_is_man(character_id:int) -> int:
     return 0
 
 
+@add_premise("IsWoman")
+def handle_is_woman(character_id:int) -> int:
+    """
+    校验角色是否是女性
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    if character_data.sex == "Woman":
+        return 1
+    return 0
+
+
 @add_premise("TargetSameSex")
 def handle_target_same_sex(character_id: int) -> int:
     """
@@ -622,3 +637,122 @@ def handle_target_put_on_skirt(character_id: int) -> int:
     if target_data.put_on["Skirt"] == "":
         return 0
     return 1
+
+
+@add_premise("IsPlayer")
+def handle_is_player(character_id:int) -> int:
+    """
+    校验是否是玩家角色
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    if not character_id:
+        return 1
+    return 0
+
+
+@add_premise("NoPlayer")
+def handle_no_player(character_id:int) -> int:
+    """
+    校验是否不是玩家角色
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    if character_id:
+        return 1
+    return 0
+
+
+@add_premise("InPlayerScene")
+def handle_in_player_scene(character_id:int) -> int:
+    """
+    校验角色是否与玩家处于同场景中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    now_character_data = cache_contorl.character_data[character_id]
+    if now_character_data.position == cache_contorl.character_data[0].position:
+        return 1
+    return 0
+
+
+@add_premise("LeavePlayerScene")
+def handle_leave_player_scene(character_id:int) -> int:
+    """
+    校验角色是否是从玩家场景离开
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    now_character_data = cache_contorl.character_data[character_id]
+    if now_character_data.behavior["MoveSrc"] == cache_contorl.character_data[0].position:
+        return 1
+    return 0
+
+
+@add_premise("TargetIsAdore")
+def handle_target_is_adore(character_id:int) -> int:
+    """
+    校验角色当前目标是否是自己的爱慕对象
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    target_id = character_data.target_character_id
+    if target_id in character_data.social_contact["Adore"]:
+        return 1
+    return 0
+
+@add_premise("TargetIsAdmire")
+def handle_target_is_admire(character_id:int) -> int:
+    """
+    校验角色当前的目标是否是自己的恋慕对象
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    target_id = character_data.target_character_id
+    if target_id in character_data.social_contact["Admire"]:
+        return 1
+    return 0
+
+
+@add_premise("PlayerIsAdore")
+def handle_player_is_adore(character_id:int) -> int:
+    """
+    校验玩家是否是当前角色的爱慕对象
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    if 0 in character_data.social_contact["Adore"]:
+        return 1
+    return 0
+
+
+@add_premise("EatSpringFood")
+def handle_eat_spring_food(character_id:int) -> int:
+    """
+    校验角色是否正在食用春药品质的食物
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    if character_data.behavior["FoodQuality"] == 4:
+        return 1
+    return 0

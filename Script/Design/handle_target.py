@@ -81,7 +81,6 @@ def handle_go_restaturant(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    print(character_id)
     character.character_move_to_rand_restaurant(character_id)
 
 

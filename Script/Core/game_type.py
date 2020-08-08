@@ -121,6 +121,9 @@ class Character:
             "BehaviorId": 0,
             "MoveTarget": [],
             "EatFood": None,
+            "MoveSrc":[],
+            "FoodName":"",
+            "FoodQuality":0
         }
         """ 角色当前行为状态数据 """
         self.gold: int = 0
@@ -169,8 +172,15 @@ class Character:
         """ 角色HP模板 """
         self.mana_point_tem: str = "Ordinary"
         """ 角色MP模板 """
-        self.social_contact: dict = {}
-        """ 角色社交关系数据 """
+        self.social_contact: dict = {
+            "Adore":{},
+            "Admire":{},
+            "Subside":{},
+            "Depend":{},
+            "Trust":{},
+            "Friendly":{},
+        }
+        """ 角色社交关系数据 关系id:角色id:亲密度 """
         self.occupation: str = ""
         """ 角色职业ID """
         self.food_bag: Dict[UUID, Food] = {}

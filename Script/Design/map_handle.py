@@ -162,6 +162,7 @@ def character_move_scene(
         cache_contorl.scene_data[new_scene_path_str]["SceneCharacterData"][
             character_id
         ] = 0
+    cache_contorl.character_data[character_id].behavior["MoveSrc"] = old_scene_path
 
 
 def get_map_system_path_str_for_list(now_list: list) -> str:

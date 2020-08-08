@@ -186,7 +186,7 @@ def see_character_status_panel(character_id: str):
                 del now_status_data["VaginaLubrication"]
                 del now_status_data["PenisDelight"]
         now_status_text_list = [
-            status_text_data[state] + ":" + str(now_status_data[state])
+            status_text_data[state] + ":" + str(round(now_status_data[state],2))
             for state in now_status_data
         ]
         size = 7

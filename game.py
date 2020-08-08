@@ -4,7 +4,6 @@
 import getopt
 import sys
 from Script.Core import game_data
-import freetype
 
 
 options = getopt.getopt(sys.argv[1:], "-d")[0]

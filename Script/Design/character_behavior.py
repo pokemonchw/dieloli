@@ -8,7 +8,7 @@ from Script.Core import (
     game_type,
     constant,
 )
-from Script.Design import settle_behavior, game_time, character,handle_premise
+from Script.Design import settle_behavior, game_time, character,handle_premise,talk
 
 game_path = game_path_config.game_path
 language = game_config.language
@@ -113,6 +113,7 @@ def judge_character_status(character_id: int) -> int:
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
     if time_judge:
         settle_behavior.handle_settle_behavior(character_id)
+        talk.handle_talk(character_id)
         character_data.behavior["BehaviorId"] = constant.Behavior.SHARE_BLANKLY
         character_data.state = constant.CharacterStatus.STATUS_ARDER
     if time_judge == 1:
