@@ -1,5 +1,6 @@
 import random
 import uuid
+import datetime
 from Script.Core import (
     cache_contorl,
     text_loading,
@@ -168,22 +169,15 @@ def init_character_behavior_start_time(character_id: int):
     character_id -- 角色id
     """
     character_data = cache_contorl.character_data[character_id]
-    character_data.behavior["StartTime"] = {}
-    character_data.behavior["StartTime"]["year"] = cache_contorl.game_time[
-        "year"
-    ]
-    character_data.behavior["StartTime"]["month"] = cache_contorl.game_time[
-        "month"
-    ]
-    character_data.behavior["StartTime"]["day"] = cache_contorl.game_time[
-        "day"
-    ]
-    character_data.behavior["StartTime"]["hour"] = cache_contorl.game_time[
-        "hour"
-    ]
-    character_data.behavior["StartTime"]["minute"] = cache_contorl.game_time[
-        "minute"
-    ]
+    game_time = cache_contorl.game_time
+    start_time = datetime.datetime(
+        game_time.year,
+        game_time.month,
+        game_time.day,
+        game_time.hour,
+        game_time.minute,
+    )
+    character_data.behavior["StartTime"] = start_time
 
 
 def character_move_to_classroom(character_id: int):

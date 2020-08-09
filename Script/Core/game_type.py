@@ -1,5 +1,6 @@
 from uuid import UUID
 from typing import List, Dict
+import datetime
 
 
 class FlowContorl:
@@ -116,7 +117,7 @@ class Character:
         self.measurements: dict = {}
         """ 角色的三围数据 """
         self.behavior: dict = {
-            "StartTime": {},
+            "StartTime": None,
             "Duration": 0,
             "BehaviorId": 0,
             "MoveTarget": [],
@@ -144,7 +145,7 @@ class Character:
         """ 角色天赋数据 """
         self.dormitory: str = "0"
         """ 角色宿舍坐标 """
-        self.birthday: dict = {}
+        self.birthday: datetime.datetime = datetime.datetime(1, 1, 1)
         """ 角色生日数据 """
         self.weigt_tem: str = "Ordinary"
         """ 角色体重模板 """

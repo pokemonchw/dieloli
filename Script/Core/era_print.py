@@ -222,7 +222,7 @@ def line_feed_wait_print(string="", style="standard"):
     text_wait = cache_contorl.text_wait
     if text_wait:
         time.sleep(text_wait)
-    normal_print(string, style)
+    line_feed_print(string, style)
     cache_contorl.wframe_mouse.w_frame_up = 0
     flow_handle.askfor_wait()
 

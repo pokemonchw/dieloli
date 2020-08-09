@@ -308,13 +308,6 @@ def init_cache():
         "text_list": [],
         "style_list": [],
     }
-    cache_contorl.game_time = {
-        "year": 0,
-        "month": 0,
-        "day": 0,
-        "hour": 0,
-        "minute": 0,
-    }
     cache_contorl.cmd_data = {}
     cache_contorl.image_id = 0
     cache_contorl.panel_state = {

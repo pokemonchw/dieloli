@@ -85,7 +85,7 @@ def see_character_main_attr_panel(character_id: int):
     era_print.little_line_print()
     character_species = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '15')}{character_data.species}"
     character_age = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '3')}{character_data.age}"
-    birthday_text = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'140')}{character_data.birthday['month']}{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'60')}{character_data.birthday['day']}{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'61')}"
+    birthday_text = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'140')}{character_data.birthday.month}{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'60')}{character_data.birthday.day}{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'61')}"
     era_print.list_print(
         [character_species, character_age, birthday_text], 3, "center"
     )

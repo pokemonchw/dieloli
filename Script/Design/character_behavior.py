@@ -1,5 +1,6 @@
 import os
 import random
+import time
 from functools import wraps
 from Script.Core import (
     cache_contorl,
@@ -25,6 +26,7 @@ def init_character_behavior():
     """
     角色行为树总控制
     """
+    t1 = time.time()
     while 1:
         if len(cache_contorl.over_behavior_character) >= len(
             cache_contorl.character_data
@@ -32,6 +34,8 @@ def init_character_behavior():
             break
         for character_id in cache_contorl.character_data:
             character_behavior(character_id)
+    t2 = time.time()
+    print(t2 - t1)
     cache_contorl.over_behavior_character = {}
 
 
@@ -43,7 +47,10 @@ def character_behavior(character_id: int):
     """
     if character_id in cache_contorl.over_behavior_character:
         return
-    if cache_contorl.character_data[character_id].behavior["StartTime"] == {}:
+    if (
+        cache_contorl.character_data[character_id].behavior["StartTime"]
+        == None
+    ):
         character.init_character_behavior_start_time(character_id)
     game_time.init_now_course_time_slice(character_id)
     if (
@@ -81,12 +88,7 @@ def character_target_judge(character_id: int):
         if now_judge:
             cache_contorl.over_behavior_character[character_id] = 1
         else:
-            next_time = game_time.datetime_to_game_time(
-                game_time.get_sub_date(
-                    minute=1,
-                    old_date=game_time.game_time_to_datetime(start_time),
-                )
-            )
+            next_time = game_time.get_sub_date(minute=1, old_date=start_time)
             cache_contorl.character_data[character_id].behavior[
                 "StartTime"
             ] = next_time
@@ -102,11 +104,8 @@ def judge_character_status(character_id: int) -> int:
     """
     character_data = cache_contorl.character_data[character_id]
     start_time = character_data.behavior["StartTime"]
-    end_time = game_time.datetime_to_game_time(
-        game_time.get_sub_date(
-            minute=character_data.behavior["Duration"],
-            old_date=game_time.game_time_to_datetime(start_time),
-        )
+    end_time = game_time.get_sub_date(
+        minute=character_data.behavior["Duration"], old_date=start_time
     )
     now_time = cache_contorl.game_time
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)

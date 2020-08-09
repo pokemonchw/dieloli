@@ -15,16 +15,17 @@ def init_time():
     """
     初始化游戏时间
     """
-    cache_contorl.game_time = {
-        "year": game_config.year,
-        "month": game_config.month,
-        "day": game_config.day,
-        "hour": game_config.hour,
-        "minute": game_config.minute,
-    }
+    game_time = datetime.datetime(
+        game_config.year,
+        game_config.month,
+        game_config.day,
+        game_config.hour,
+        game_config.minute,
+    )
+    cache_contorl.game_time = game_time
 
 
-def get_date_text(game_time_data=None) -> str:
+def get_date_text(game_time_data: datetime.datetime = None) -> str:
     """
     获取时间信息描述文本
     Keyword arguments:
@@ -35,11 +36,11 @@ def get_date_text(game_time_data=None) -> str:
     date_text = text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "65"
     )
-    game_year = str(game_time_data["year"])
-    game_month = str(game_time_data["month"])
-    game_day = str(game_time_data["day"])
-    game_hour = str(game_time_data["hour"])
-    game_minute = str(game_time_data["minute"])
+    game_year = str(game_time_data.year)
+    game_month = str(game_time_data.month)
+    game_day = str(game_time_data.day)
+    game_hour = str(game_time_data.hour)
+    game_minute = str(game_time_data.minute)
     game_year_text = game_year + text_loading.get_text_data(
         constant.FilePath.STAGE_WORD_PATH, "59"
     )
@@ -70,11 +71,11 @@ def get_week_day_text() -> str:
     """
     获取星期描述文本
     """
-    week_day = get_week_date()
+    week_day = cache_contorl.game_time.weekday()
     week_date_data = text_loading.get_text_data(
         constant.FilePath.MESSAGE_PATH, "19"
     )
-    return week_date_data[int(week_day)]
+    return week_date_data[week_day]
 
 
 def sub_time_now(
@@ -90,11 +91,7 @@ def sub_time_now(
     year -- 增加的年数
     """
     new_date = get_sub_date(minute, hour, day, month, year)
-    cache_contorl.game_time["year"] = new_date.year
-    cache_contorl.game_time["month"] = new_date.month
-    cache_contorl.game_time["day"] = new_date.day
-    cache_contorl.game_time["hour"] = new_date.hour
-    cache_contorl.game_time["minute"] = new_date.minute
+    cache_contorl.game_time = new_date
 
 
 def get_sub_date(
@@ -116,30 +113,11 @@ def get_sub_date(
     old_date -- 旧日期，若为None，则获取当前游戏时间
     """
     if old_date is None:
-        old_date = datetime.datetime(
-            int(cache_contorl.game_time["year"]),
-            int(cache_contorl.game_time["month"]),
-            int(cache_contorl.game_time["day"]),
-            int(cache_contorl.game_time["hour"]),
-            int(cache_contorl.game_time["minute"]),
-        )
+        old_date = cache_contorl.game_time
     new_date = old_date + relativedelta.relativedelta(
         years=year, months=month, days=day, hours=hour, minutes=minute
     )
     return new_date
-
-
-def get_week_date() -> int:
-    """
-    计算当前游戏时间属于周几
-    Return arguments:
-    week_day -- 当前星期数
-    """
-    return int(
-        timetuple_to_datetime(
-            game_time_to_time_tuple(cache_contorl.game_time)
-        ).strftime("%w")
-    )
 
 
 def get_rand_day_for_year(year: int) -> datetime.datetime:
@@ -184,77 +162,8 @@ def get_rand_day_for_date(
     return get_sub_date(day=sub_day, old_date=start_date)
 
 
-def system_time_to_game_time(system_time: datetime.datetime.timetuple):
-    """
-    系统时间戳转换为游戏时间数据
-    Keyword arguments:
-    system_time -- 系统时间戳
-    Return arguments:
-    game_time -- 游戏时间数据
-    """
-    return {
-        "year": system_time.tm_year,
-        "month": system_time.tm_mon,
-        "day": system_time.tm_mday,
-        "hour": system_time.tm_hour,
-        "minute": system_time.tm_min,
-    }
-
-
-def game_time_to_time_tuple(game_time: dict) -> datetime.datetime.timetuple:
-    """
-    游戏时间数据转换为系统日期tuple结构体
-    Keyword arguments:
-    game_time -- 游戏时间数据
-    Return arguments:
-    datetime.datetime.timetuple -- 系统日期tuple结构体
-    """
-    return datetime.datetime(
-        int(game_time["year"]),
-        int(game_time["month"]),
-        int(game_time["day"]),
-        int(game_time["hour"]),
-        int(game_time["minute"]),
-    ).timetuple()
-
-
-def game_time_to_datetime(game_time: dict) -> datetime.datetime:
-    """
-    游戏时间数据转换为系统日期数据
-    Keyword arguments:
-    game_time -- 游戏时间数据
-    Return arguments:
-    datetime.datetime -- 系统日期
-    """
-    return datetime.datetime(
-        int(game_time["year"]),
-        int(game_time["month"]),
-        int(game_time["day"]),
-        int(game_time["hour"]),
-        int(game_time["minute"]),
-    )
-
-
-def datetime_to_game_time(now_date: datetime.datetime) -> dict:
-    """
-    系统日期数据转换为游戏时间数据
-    Keyword arguments:
-    now_date -- 系统日期数据
-    Return arguments:
-    dict -- 游戏时间数据
-    """
-    return {
-        "year": now_date.year,
-        "month": now_date.month,
-        "day": now_date.day,
-        "hour": now_date.hour,
-        "minute": now_date.minute,
-    }
-
-
-def count_day_for_time_tuple(
-    start_date: datetime.datetime.timetuple,
-    end_date: datetime.datetime.timetuple,
+def count_day_for_datetime(
+    start_date: datetime.datetime, end_date: datetime.datetime,
 ) -> int:
     """
     计算两个时间之间经过的天数
@@ -264,12 +173,12 @@ def count_day_for_time_tuple(
     Return arguments:
     int -- 经过天数
     """
-    start_day = timetuple_to_datetime(start_date)
-    end_day = timetuple_to_datetime(end_date)
-    return (start_day - end_day).days
+    return (start_date - end_date).days
 
 
-def judge_date_big_or_small(time_a: dict, time_b: dict) -> int:
+def judge_date_big_or_small(
+    time_a: datetime.datetime, time_b: datetime.datetime
+) -> int:
     """
     比较当前时间是否大于或等于旧时间
     Keyword arguments:
@@ -280,8 +189,6 @@ def judge_date_big_or_small(time_a: dict, time_b: dict) -> int:
     1 -- 大于
     2 -- 等于
     """
-    time_a = timetuple_to_datetime(game_time_to_time_tuple(time_a))
-    time_b = timetuple_to_datetime(game_time_to_time_tuple(time_b))
     if time_a == time_b:
         return 2
     else:
@@ -312,14 +219,15 @@ def init_now_course_time_slice(character_id: int):
         character_data.course = init_junior_middle_school_course_time_status(
             character_data.behavior["StartTime"], teacher_id
         )
-    character_data.course = init_senior_high_school_course_time_status(
-        character_data.behavior["StartTime"], teacher_id
-    )
+    else:
+        character_data.course = init_senior_high_school_course_time_status(
+            character_data.behavior["StartTime"], teacher_id
+        )
     character_data.course.phase = phase
 
 
 def init_primary_school_course_time_status(
-    time_data: dict, teacher_id=-1
+    time_data: datetime.datetime, teacher_id=-1
 ) -> game_type.CourseTimeSlice:
     """
     计算小学指定时间上课状态
@@ -329,15 +237,10 @@ def init_primary_school_course_time_status(
     Return arguments:
     game_type.CourseTimeSlice -- 上课时间状态数据
     """
-    now_time_status = game_type.CourseTimeSlice()
     now_time_status = judge_school_course_time("PrimarySchool", time_data)
     now_time_status.school_id = "PrimarySchool"
-    if time_data["month"] in range(1, 7) or time_data["month"] in range(9, 13):
-        now_week = int(
-            timetuple_to_datetime(
-                game_time_to_time_tuple(cache_contorl.game_time)
-            ).strftime("%w")
-        )
+    if time_data.month in range(1, 7) or time_data.month in range(9, 13):
+        now_week = time_data.weekday()
         if now_week >= 5:
             now_time_status.end_course = 0
             now_time_status.in_course = 0
@@ -364,7 +267,7 @@ def init_primary_school_course_time_status(
 
 
 def init_junior_middle_school_course_time_status(
-    time_data: dict, teacher_id=-1
+    time_data: datetime.datetime, teacher_id=-1
 ) -> game_type.CourseTimeSlice:
     """
     计算初中指定时间上课状态
@@ -374,15 +277,10 @@ def init_junior_middle_school_course_time_status(
     Return arguments:
     game_type.CourseTimeSlice -- 上课时间状态数据
     """
-    now_time_status = game_type.CourseTimeSlice()
     now_time_status = judge_school_course_time("JuniorMiddleSchool", time_data)
     now_time_status.school_id = "JuniorMiddleSchool"
-    if time_data["month"] in range(1, 7) or time_data["month"] in range(9, 13):
-        now_week = int(
-            timetuple_to_datetime(
-                game_time_to_time_tuple(cache_contorl.game_time)
-            ).strftime("%w")
-        )
+    if time_data.month in range(1, 7) or time_data.month in range(9, 13):
+        now_week = time_data.weekday()
         if now_week >= 6:
             now_time_status.end_course = 0
             now_time_status.in_course = 0
@@ -409,7 +307,7 @@ def init_junior_middle_school_course_time_status(
 
 
 def init_senior_high_school_course_time_status(
-    time_data: dict, teacher_id=-1
+    time_data: datetime.datetime, teacher_id=-1
 ) -> game_type.CourseTimeSlice:
     """
     计算高中指定时间上课状态
@@ -419,10 +317,9 @@ def init_senior_high_school_course_time_status(
     Return arguments:
     game_type.CourseTimeSlice -- 上课时间状态数据
     """
-    now_time_status = game_type.CourseTimeSlice()
     now_time_status = judge_school_course_time("SeniorHighSchool", time_data)
     now_time_status.school_id = "SeniorHighSchool"
-    if time_data["month"] in range(1, 7) or time_data["month"] in range(9, 13):
+    if time_data.month in range(1, 7) or time_data.month in range(9, 13):
         if (
             teacher_id > -1
             and teacher_id
@@ -445,7 +342,7 @@ def init_senior_high_school_course_time_status(
 
 
 def judge_school_course_time(
-    school_id: str, time_data: dict
+    school_id: str, time_data: datetime.datetime
 ) -> game_type.CourseTimeSlice:
     """
     校验指定学校指定时间上课状态
@@ -459,7 +356,7 @@ def judge_school_course_time(
     course_time_data = text_loading.get_text_data(
         constant.FilePath.COURSE_SESSION_PATH, school_id
     )
-    now_time = int(time_data["hour"]) * 100 + int(time_data["minute"])
+    now_time = time_data.hour * 100 + time_data.minute
     end_time_data = {
         course_time_data[i][1]: i for i in range(len(course_time_data))
     }

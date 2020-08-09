@@ -1,3 +1,4 @@
+import datetime
 from typing import List, Dict
 from uuid import UUID
 from Script.Core import game_type
@@ -49,7 +50,7 @@ image_id: int = 0
 """ 图片id """
 cmd_data: dict = {}
 """ cmd数据 """
-game_time: dict = None
+game_time: datetime.datetime = datetime.datetime(1, 1, 1)
 """ 游戏时间 """
 panel_state: Dict[str, int] = {}
 """ 面板状态 """

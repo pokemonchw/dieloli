@@ -16,10 +16,8 @@ def settle_rest(character_id: int):
     character_id -- 角色id
     """
     character_data = cache_contorl.character_data[character_id]
-    start_time = game_time.game_time_to_datetime(
-        character_data.behavior["StartTime"]
-    )
-    now_time = game_time.game_time_to_datetime(cache_contorl.game_time)
+    start_time = character_data.behavior["StartTime"]
+    now_time = cache_contorl.game_time
     add_time = int((now_time - start_time).seconds / 60)
     add_hit_point = add_time * 5
     add_mana_point = add_time * 10
@@ -85,6 +83,8 @@ def settle_eat(character_id: int):
                     character_data.status["BodyFeeling"][
                         feel
                     ] -= now_feel_value
+                    if character_data.status["BodyFeeling"][feel] < 0:
+                        character_data.status["BodyFeeling"][feel] = 0
                 else:
                     character_data.status["BodyFeeling"][
                         feel

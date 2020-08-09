@@ -1,4 +1,5 @@
 import math
+import datetime
 from functools import wraps
 from Script.Core import cache_contorl, constant
 from Script.Design import map_handle, game_time, attr_calculation
@@ -410,8 +411,8 @@ def handle_in_sleep_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    now_time = character_data.behavior["StartTime"]
-    if int(now_time["hour"]) >= 22 or int(now_time["hour"]) <= 4:
+    now_time: datetime.datetime = character_data.behavior["StartTime"]
+    if now_time.hour >= 22 or now_time.hour <= 4:
         return 1
     return 0
 
@@ -426,8 +427,8 @@ def handle_in_siesta_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    now_time = character_data.behavior["StartTime"]
-    if int(now_time["hour"]) >= 12 or int(now_time["hour"]) <= 15:
+    now_time: datetime.datetime = character_data.behavior["StartTime"]
+    if now_time.hour >= 12 or now_time.hour <= 15:
         return 1
     return 0
 

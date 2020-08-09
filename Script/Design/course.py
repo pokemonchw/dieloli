@@ -89,19 +89,19 @@ def init_class_time_table():
         class_day = 0
         if phase <= 5:
             class_time = course_session["PrimarySchool"]
-            class_day = 6
+            class_day = 5
         elif phase <= 7:
             class_time = course_session["JuniorMiddleSchool"]
-            class_day = 7
+            class_day = 6
         else:
             class_time = course_session["SeniorHighSchool"]
-            class_day = 8
+            class_day = 7
         class_hour = cache_contorl.course_data["ClassHour"][phase]
         class_hour_index = {}
         for course in reversed(list(class_hour.keys())):
             class_hour_index.setdefault(course, 0)
             while class_hour_index[course] < class_hour[course]:
-                for day in range(1, class_day):
+                for day in range(0, class_day):
                     old_day = day - 1
                     if old_day < 0:
                         old_day = class_day - 1
@@ -446,15 +446,3 @@ def init_experience_for_grade(class_grade: str, character: Character):
                         character.knowledge[knowledge][
                             skill
                         ] = skill_experience
-
-
-def calculation_character_learning_experience(
-    character_id: int, skill: str, elapsed_time: int
-):
-    """
-    计算角色花费指定时间学习指定技能的结果
-    Keyword arguments:
-    character_id -- 角色id
-    skill -- 技能id
-    elapsed_time -- 经过时间(单位分钟)
-    """
