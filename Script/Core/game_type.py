@@ -43,7 +43,7 @@ class NpcTem:
         """ npc年龄模板 """
         self.Position: List[int] = []
         """ npc出生位置(已废弃) """
-        self.AdvNpc: bool = 0
+        self.AdvNpc: int = 0
         """ 剧情npc校验 """
         self.Weight: str = ""
         """ 体重模板 """
@@ -190,6 +190,8 @@ class Character:
         """ 上课时间和状态数据 """
         self.target_character_id: int = 0
         """ 角色当前交互对象id """
+        self.adv:int = 0
+        """ 剧情npc校验 """
 
 
 class Food:
