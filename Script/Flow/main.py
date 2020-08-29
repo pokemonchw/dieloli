@@ -31,5 +31,5 @@ def main_frame_func():
     else:
         if ans == "0":
             clothing.init_character_clothing_put_on()
-            update.game_update_flow()
+            update.game_update_flow(0)
         cache_contorl.now_flow_id = main_frame_goto_data[ans]

@@ -1,0 +1,5 @@
+cid,name,tag,collocation_type,describe
+模板id,服装名字,服装用途标签,搭配池类型,描述
+int,str,int,int,str
+0,1,0,0,1
+服装模板,,,,

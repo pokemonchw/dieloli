@@ -59,12 +59,8 @@ def see_attr_on_every_time_func():
         character_id = cache_contorl.character_data[0].target_character_id
         if cache_contorl.old_flow_id == "in_scene":
             now_scene = cache_contorl.character_data[0].position
-            now_scene_str = map_handle.get_map_system_path_str_for_list(
-                now_scene
-            )
-            character_id_list = map_handle.get_scene_character_id_list(
-                now_scene_str
-            )
+            now_scene_str = map_handle.get_map_system_path_str_for_list(now_scene)
+            character_id_list = map_handle.get_scene_character_id_list(now_scene_str)
         else:
             character_id_list = list(cache_contorl.character_data.keys())
         character_id_index = character_id_list.index(character_id)
@@ -76,39 +72,27 @@ def see_attr_on_every_time_func():
         input_s += inputs_1
         yrn = game_init.askfor_all(input_s)
         py_cmd.clr_cmd()
-        show_attr_handle_data = text_loading.get_text_data(
-            constant.FilePath.CMD_PATH, "seeAttrPanelHandle"
-        )
+        show_attr_handle_data = text_loading.get_text_data(constant.FilePath.CMD_PATH, "seeAttrPanelHandle")
         character_max = character_id_list[len(character_id_list) - 1]
         if yrn in show_attr_handle_data:
             cache_contorl.panel_state["AttrShowHandlePanel"] = yrn
         elif yrn == "0":
             if character_id_index == 0:
-                cache_contorl.character_data[
-                    0
-                ].target_character_id = character_max
+                cache_contorl.character_data[0].target_character_id = character_max
             else:
                 character_id = character_id_list[character_id_index - 1]
-                cache_contorl.character_data[
-                    0
-                ].target_character_id = character_id
+                cache_contorl.character_data[0].target_character_id = character_id
         elif yrn == "1":
             if cache_contorl.old_flow_id == "main":
                 cache_contorl.character_data[0].target_character_id = 0
             elif cache_contorl.old_flow_id == "see_character_list":
                 character_list_show = int(game_config.character_list_show)
                 now_page_id = character_id_index / character_list_show
-                cache_contorl.panel_state[
-                    "SeeCharacterListPanel"
-                ] = now_page_id
+                cache_contorl.panel_state["SeeCharacterListPanel"] = now_page_id
             elif cache_contorl.old_flow_id == "in_scene":
                 scene_path = cache_contorl.character_data[0].position
-                scene_path_str = map_handle.get_map_system_path_str_for_list(
-                    scene_path
-                )
-                name_list = map_handle.get_scene_character_name_list(
-                    scene_path_str, True
-                )
+                scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
+                name_list = map_handle.get_scene_character_name_list(scene_path_str, True)
                 now_character_name = cache_contorl.character_data[
                     cache_contorl.character_data[0].target_character_id
                 ].name
@@ -117,12 +101,8 @@ def see_attr_on_every_time_func():
                 except ValueError:
                     now_character_index = 0
                 name_list_max = int(game_config.in_scene_see_player_max)
-                now_scene_character_list_page = math.floor(
-                    now_character_index / name_list_max
-                )
-                cache_contorl.panel_state[
-                    "SeeSceneCharacterListPanel"
-                ] = now_scene_character_list_page
+                now_scene_character_list_page = math.floor(now_character_index / name_list_max)
+                cache_contorl.panel_state["SeeSceneCharacterListPanel"] = now_scene_character_list_page
             cache_contorl.panel_state["AttrShowHandlePanel"] = "MainAttr"
             cache_contorl.now_flow_id = cache_contorl.old_flow_id
             cache_contorl.old_flow_id = cache_contorl.too_old_flow_id
@@ -130,14 +110,10 @@ def see_attr_on_every_time_func():
         elif yrn == "2":
             if character_id == character_max:
                 character_id = character_id_list[0]
-                cache_contorl.character_data[
-                    0
-                ].target_character_id = character_id
+                cache_contorl.character_data[0].target_character_id = character_id
             else:
                 character_id = character_id_list[character_id_index + 1]
-                cache_contorl.character_data[
-                    0
-                ].target_character_id = character_id
+                cache_contorl.character_data[0].target_character_id = character_id
 
 
 def see_attr_in_every_time_func():

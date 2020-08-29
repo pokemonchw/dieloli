@@ -11,18 +11,12 @@ def buy_food():
     while 1:
         buy_food_panel.see_food_shop_head()
         head_buttons = buy_food_panel.see_food_shop_head_cmd(now_panel)
-        food_list = cooking.get_restaurant_food_type_list_buy_food_type(
-            now_panel
-        )
+        food_list = cooking.get_restaurant_food_type_list_buy_food_type(now_panel)
         max_page = get_food_shop_page_max(len(food_list), 1)
-        now_page_id = int(
-            cache_contorl.panel_state["SeeFoodShopListByFoodPanel"]
-        )
+        now_page_id = int(cache_contorl.panel_state["SeeFoodShopListByFoodPanel"])
         food_buttons = buy_food_panel.see_food_shop_list(food_list)
         start_id = len(food_buttons)
-        tail_buttons = buy_food_panel.see_food_shop_tail_cmd(
-            start_id, max_page, 0
-        )
+        tail_buttons = buy_food_panel.see_food_shop_tail_cmd(start_id, max_page, 0)
         ask_for_list = head_buttons + food_buttons + tail_buttons
         yrn = flow_handle.askfor_all(ask_for_list)
         if yrn in head_buttons:
@@ -36,9 +30,7 @@ def buy_food():
             buy_food_by_type(now_type)
         elif int(yrn) == start_id:
             if now_page_id == 0:
-                cache_contorl.panel_state[
-                    "SeeFoodShopListByFoodPanel"
-                ] = max_page
+                cache_contorl.panel_state["SeeFoodShopListByFoodPanel"] = max_page
             else:
                 cache_contorl.panel_state["SeeFoodShopListByFoodPanel"] -= 1
         elif int(yrn) == start_id + 1:
@@ -61,16 +53,10 @@ def buy_food_by_type(food_id: str):
         buy_food_panel.see_food_shop_head()
         food_list = list(cache_contorl.restaurant_data[food_id].values())
         max_page = get_food_shop_page_max(len(food_list), 0)
-        now_page_id = int(
-            cache_contorl.panel_state["SeeFoodShopListByFoodTypePanel"]
-        )
-        food_buttons = buy_food_panel.see_food_shop_list_by_food_type(
-            max_page, food_list
-        )
+        now_page_id = int(cache_contorl.panel_state["SeeFoodShopListByFoodTypePanel"])
+        food_buttons = buy_food_panel.see_food_shop_list_by_food_type(max_page, food_list)
         start_id = len(food_buttons)
-        tail_buttons = buy_food_panel.see_food_shop_tail_cmd(
-            start_id, max_page, 1
-        )
+        tail_buttons = buy_food_panel.see_food_shop_tail_cmd(start_id, max_page, 1)
         askfor_list = food_buttons + tail_buttons
         yrn = int(flow_handle.askfor_all(askfor_list))
         if yrn < start_id:
@@ -81,13 +67,9 @@ def buy_food_by_type(food_id: str):
             buy_food_now(now_food, food_id)
         elif yrn == start_id:
             if now_page_id == 0:
-                cache_contorl.panel_state[
-                    "SeeFoodShopListByFoodTypePanel"
-                ] = max_page
+                cache_contorl.panel_state["SeeFoodShopListByFoodTypePanel"] = max_page
             else:
-                cache_contorl.panel_state[
-                    "SeeFoodShopListByFoodTypePanel"
-                ] -= 1
+                cache_contorl.panel_state["SeeFoodShopListByFoodTypePanel"] -= 1
         elif yrn == start_id + 1:
             cache_contorl.panel_state["SeeFoodShopListByFoodTypePanel"] = 0
             break
@@ -95,9 +77,7 @@ def buy_food_by_type(food_id: str):
             if now_page_id == max_page:
                 cache_contorl.panel_state["SeeFoodShopListByFoodTypePanel"] = 0
             else:
-                cache_contorl.panel_state[
-                    "SeeFoodShopListByFoodTypePanel"
-                ] += 1
+                cache_contorl.panel_state["SeeFoodShopListByFoodTypePanel"] += 1
 
 
 def buy_food_now(now_food: game_type.Food, food_id: str):

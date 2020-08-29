@@ -20,9 +20,7 @@ def init_recipes():
         cache_contorl.recipe_data[len(cache_contorl.recipe_data)] = recipe
 
 
-def create_recipe(
-    name: str, time: int, base: list, ingredients: list, seasoning: list
-) -> Recipes:
+def create_recipe(name: str, time: int, base: list, ingredients: list, seasoning: list) -> Recipes:
     """
     创建菜谱对象
     Keyword arguments:
@@ -44,12 +42,7 @@ def create_recipe(
 
 
 def create_food(
-    food_id: str,
-    food_quality: int,
-    food_weight: int,
-    food_feel={},
-    food_maker="",
-    food_recipe=-1,
+    food_id: str, food_quality: int, food_weight: int, food_feel={}, food_maker="", food_recipe=-1,
 ) -> Food:
     """
     创建食物对象
@@ -69,9 +62,7 @@ def create_food(
     food.quality = food_quality
     food.weight = food_weight
     if food_id != "" and food_feel == {}:
-        food_config = text_loading.get_text_data(
-            constant.FilePath.FOOD_PATH, food_id
-        )
+        food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_id)
         for feel in food_config["Feel"]:
             food.feel.setdefault(feel, 0)
             food.feel[feel] += food_config["Feel"][feel] / 100 * food.weight
@@ -132,15 +123,11 @@ def create_rand_food(food_id: str, food_weight=-1, food_quality=-1) -> Food:
         food_weight = random.randint(1, 1000000)
     if food_quality == -1:
         food_quality = random.randint(0, 4)
-    food_data = text_loading.get_game_data(constant.FilePath.FOOD_PATH)[
-        food_id
-    ]
+    food_data = text_loading.get_game_data(constant.FilePath.FOOD_PATH)[food_id]
     return create_food(food_id, food_quality, food_weight)
 
 
-def cook(
-    food_data: Dict[str, Food], recipe_id: int, cook_level: str, maker: str
-) -> Food:
+def cook(food_data: Dict[str, Food], recipe_id: int, cook_level: str, maker: str) -> Food:
     """
     按食谱烹饪食物
     Keyword arguments:
@@ -154,9 +141,9 @@ def cook(
     recipe = cache_contorl.recipe_data[recipe_id]
     cook_judge = True
     feel_data = {}
-    quality_data = text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "FoodQualityWeight"
-    )[str(cook_level)]
+    quality_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "FoodQualityWeight")[
+        str(cook_level)
+    ]
     now_quality = int(value_handle.get_random_for_weight(quality_data))
     now_weight = 0
     for food in recipe.base:
@@ -170,9 +157,7 @@ def cook(
             break
         for feel in now_food.feel:
             feel_data.setdefault(feel, 0)
-            feel_data[feel] += (
-                now_food.feel[feel] / now_food.weight * rand_weight
-            )
+            feel_data[feel] += now_food.feel[feel] / now_food.weight * rand_weight
         now_food.weight -= rand_weight
         now_weight += rand_weight
     if not cook_judge:
@@ -188,9 +173,7 @@ def cook(
             break
         for feel in now_food.feel:
             feel_data.setdefault(feel, 0)
-            feel_data[feel] += (
-                now_food.feel[feel] / now_food.weight * rand_weight
-            )
+            feel_data[feel] += now_food.feel[feel] / now_food.weight * rand_weight
         now_food.weight -= rand_weight
         now_weight += rand_weight
     if not cook_judge:
@@ -213,9 +196,7 @@ def cook(
         now_weight += rand_weight
     if not cook_judge:
         return create_food("KitchenWaste", now_quality, now_weight, [])
-    return create_food(
-        "", now_quality, now_weight, feel_data, maker, recipe_id
-    )
+    return create_food("", now_quality, now_weight, feel_data, maker, recipe_id)
 
 
 def init_restaurant_data():
@@ -277,17 +258,13 @@ def init_restaurant_data():
             if now_food.weight <= 0:
                 del cache_contorl.restaurant_data[now_food.id][now_food.uid]
             else:
-                cache_contorl.restaurant_data[now_food.id][
-                    now_food.uid
-                ] = now_food
+                cache_contorl.restaurant_data[now_food.id][now_food.uid] = now_food
         cook_index += 1
         if cook_index == max_people:
             break
 
 
-def get_character_food_bag_type_list_buy_food_type(
-    character_id: int, food_type: str
-) -> dict:
+def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type: str) -> dict:
     """
     获取角色背包内指定类型的食物种类
     Keyword arguments:
@@ -307,26 +284,21 @@ def get_character_food_bag_type_list_buy_food_type(
                 food_list[food_name].add(food_uid)
         elif food_type == "Snacks":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_data.id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_data.id)
                 if food_config["Eat"]:
                     food_name = food_config["Name"]
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == "Drink":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_data.id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_data.id)
                 if (
                     "Thirsty" in food_config["Feel"]
                     and not food_config["Fruit"]
                     and food_config["Eat"]
                     and (
                         "Hunger" not in food_config["Feel"]
-                        or food_config["Feel"]["Thirsty"]
-                        > food_config["Feel"]["Hunger"]
+                        or food_config["Feel"]["Thirsty"] > food_config["Feel"]["Hunger"]
                     )
                 ):
                     food_name = food_config["Name"]
@@ -334,37 +306,28 @@ def get_character_food_bag_type_list_buy_food_type(
                     food_list[food_name].add(food_uid)
             else:
                 if "Thirsty" in food_data.feel and (
-                    "Hunger" not in food_data.feel
-                    or food_data.feel["Thirsty"] > food_data.feel["Hunger"]
+                    "Hunger" not in food_data.feel or food_data.feel["Thirsty"] > food_data.feel["Hunger"]
                 ):
-                    food_name = cache_contorl.recipe_data[
-                        food_data.recipe
-                    ].name
+                    food_name = cache_contorl.recipe_data[food_data.recipe].name
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == "Fruit":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_data.id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_data.id)
                 if food_config["Fruit"]:
                     food_name = food_config["Name"]
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == "FoodIngredients":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_data.id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_data.id)
                 if food_config["Cook"]:
                     food_name = food_config["Name"]
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == "Seasoning":
             if food_data.recipe == -1:
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_data.id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_data.id)
                 if food_config["Seasoning"]:
                     food_name = food_config["Name"]
                     food_list.setdefault(food_name, set())
@@ -387,58 +350,42 @@ def get_restaurant_food_type_list_buy_food_type(food_type: str) -> dict:
                 food_list[food_id] = cache_contorl.recipe_data[food_id].name
         elif food_type == "Snacks":
             if isinstance(food_id, str):
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_id)
                 if food_config["Eat"]:
                     food_list[food_id] = food_config["Name"]
         elif food_type == "Drink":
             if isinstance(food_id, str):
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_id)
                 if (
                     "Thirsty" in food_config["Feel"]
                     and not food_config["Fruit"]
                     and food_config["Eat"]
                     and (
                         "Hunger" not in food_config["Feel"]
-                        or food_config["Feel"]["Thirsty"]
-                        > food_config["Feel"]["Hunger"]
+                        or food_config["Feel"]["Thirsty"] > food_config["Feel"]["Hunger"]
                     )
                 ):
                     food_list[food_id] = food_config["Name"]
             else:
-                now_food_uid = list(
-                    cache_contorl.restaurant_data[food_id].keys()
-                )[0]
+                now_food_uid = list(cache_contorl.restaurant_data[food_id].keys())[0]
                 now_food = cache_contorl.restaurant_data[food_id][now_food_uid]
                 if "Thirsty" in now_food.feel and (
-                    "Hunger" not in now_food.feel
-                    or now_food.feel["Thirsty"] > now_food.feel["Hunger"]
+                    "Hunger" not in now_food.feel or now_food.feel["Thirsty"] > now_food.feel["Hunger"]
                 ):
-                    food_list[food_id] = cache_contorl.recipe_data[
-                        food_id
-                    ].name
+                    food_list[food_id] = cache_contorl.recipe_data[food_id].name
         elif food_type == "Fruit":
             if isinstance(food_id, str):
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_id)
                 if food_config["Fruit"]:
                     food_list[food_id] = food_config["Name"]
         elif food_type == "FoodIngredients":
             if isinstance(food_id, str):
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_id)
                 if food_config["Cook"]:
                     food_list[food_id] = food_config["Name"]
         elif food_type == "Seasoning":
             if isinstance(food_id, str):
-                food_config = text_loading.get_text_data(
-                    constant.FilePath.FOOD_PATH, food_id
-                )
+                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_id)
                 if food_config["Seasoning"]:
                     food_list[food_id] = food_config["Name"]
     return food_list

@@ -29,44 +29,26 @@ def see_character_main_attr_panel(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    title_1 = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "1"
-    )
+    title_1 = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "1")
     era_print.little_title_print(title_1)
-    character_id_text = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '0')}{character_id}"
+    character_id_text = (
+        f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '0')}{character_id}"
+    )
     character_data = cache_contorl.character_data[character_id]
     name = character_data.name
     nick_name = character_data.nick_name
-    character_name = (
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "13")
-        + name
-    )
-    character_nick_name = (
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "12")
-        + nick_name
-    )
+    character_name = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "13") + name
+    character_nick_name = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "12") + nick_name
     sex = character_data.sex
-    sex_text = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "2"
-    ) + attr_text.get_sex_text(sex)
-    name_text = (
-        character_id_text
-        + " "
-        + character_name
-        + " "
-        + character_nick_name
-        + " "
-        + sex_text
+    sex_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "2") + attr_text.get_sex_text(
+        sex
     )
-    hp_bar = attr_print.get_hp_or_mp_bar(
-        character_id, "HitPoint", game_config.text_width / 2 - 4
-    )
+    name_text = character_id_text + " " + character_name + " " + character_nick_name + " " + sex_text
+    hp_bar = attr_print.get_hp_or_mp_bar(character_id, "HitPoint", game_config.text_width / 2 - 4)
     era_print.list_print([name_text, hp_bar], 2, "center")
     era_print.line_feed_print()
     state_text = attr_text.get_state_text(character_id)
-    mp_bar = attr_print.get_hp_or_mp_bar(
-        character_id, "ManaPoint", game_config.text_width / 2 - 4
-    )
+    mp_bar = attr_print.get_hp_or_mp_bar(character_id, "ManaPoint", game_config.text_width / 2 - 4)
     era_print.list_print([state_text, mp_bar], 2, "center")
     era_print.line_feed_print()
     era_print.little_line_print()
@@ -83,24 +65,28 @@ def see_character_main_attr_panel(character_id: int):
         "center",
     )
     era_print.little_line_print()
-    character_species = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '15')}{character_data.species}"
-    character_age = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '3')}{character_data.age}"
-    birthday_text = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'140')}{character_data.birthday.month}{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'60')}{character_data.birthday.day}{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'61')}"
-    era_print.list_print(
-        [character_species, character_age, birthday_text], 3, "center"
+    character_species = (
+        f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '15')}{character_data.species}"
     )
+    character_age = (
+        f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '3')}{character_data.age}"
+    )
+    birthday_text = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'140')}{character_data.birthday.month}{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'60')}{character_data.birthday.day}{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH,'61')}"
+    era_print.list_print([character_species, character_age, birthday_text], 3, "center")
     era_print.restart_line_print(".")
-    character_intimate = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '16')}{character_data.intimate}"
-    character_graces = f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '17')}{character_data.graces}"
+    character_intimate = (
+        f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '16')}{character_data.intimate}"
+    )
+    character_graces = (
+        f"{text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, '17')}{character_data.graces}"
+    )
     era_print.list_print([character_intimate, character_graces], 2, "center")
     era_print.restart_line_print(".")
     character_chest = character_data.chest["NowChest"]
     chest_group = attr_calculation.judge_chest_group(character_chest)
     chest_text = (
         text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "141")
-        + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "142")[
-            chest_group
-        ]
+        + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "142")[chest_group]
     )
     era_print.list_print([chest_text], 1, "center")
     era_print.restart_line_print(".")
@@ -109,37 +95,26 @@ def see_character_main_attr_panel(character_id: int):
     character_height_text = str(round(character_height, 2))
     character_weight_text = str(round(character_weight, 2))
     character_height_info = (
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "80")
-        + character_height_text
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "80") + character_height_text
     )
     character_weight_info = (
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "81")
-        + character_weight_text
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "81") + character_weight_text
     )
-    era_print.list_print(
-        [character_height_info, character_weight_info], 2, "center"
-    )
+    era_print.list_print([character_height_info, character_weight_info], 2, "center")
     era_print.restart_line_print(".")
     character_measurements = character_data.measurements
     character_bust = str(round(character_measurements["Bust"], 2))
     character_waist = str(round(character_measurements["Waist"], 2))
     character_hip = str(round(character_measurements["Hip"], 2))
     character_bust_info = (
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "82")
-        + character_bust
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "82") + character_bust
     )
     character_waist_info = (
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "83")
-        + character_waist
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "83") + character_waist
     )
-    character_hip_info = (
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "84")
-        + character_hip
-    )
+    character_hip_info = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "84") + character_hip
     era_print.list_print(
-        [character_bust_info, character_waist_info, character_hip_info],
-        3,
-        "center",
+        [character_bust_info, character_waist_info, character_hip_info], 3, "center",
     )
     era_print.restart_line_print(".")
 
@@ -150,12 +125,8 @@ def see_character_status_head_panel(character_id: str) -> str:
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "135")
-    )
-    era_print.line_feed_print(
-        attr_text.get_see_attr_panel_head_character_info(character_id)
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "135"))
+    era_print.line_feed_print(attr_text.get_see_attr_panel_head_character_info(character_id))
     see_character_status_panel(character_id)
 
 
@@ -165,9 +136,7 @@ def see_character_status_panel(character_id: str):
     Keyword arguments:
     character_id -- 角色Id
     """
-    status_text_data = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "134"
-    )
+    status_text_data = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "134")
     character_data = cache_contorl.character_data[character_id]
     status_data = character_data.status
     for state_type in status_data:
@@ -186,9 +155,7 @@ def see_character_status_panel(character_id: str):
                 del now_status_data["VaginaLubrication"]
                 del now_status_data["PenisDelight"]
         now_status_text_list = [
-            status_text_data[state]
-            + ":"
-            + str(round(now_status_data[state], 2))
+            status_text_data[state] + ":" + str(round(now_status_data[state], 2))
             for state in now_status_data
         ]
         size = 7
@@ -221,20 +188,12 @@ def see_character_hp_and_mp_in_sence(character_id: int):
         )
         era_print.list_print([character_id_text, target_id_text], 2, "center")
         era_print.line_feed_print()
-        player_bar = attr_print.get_hp_or_mp_bar(
-            0, "HitPoint", game_config.text_width / 2 - 4
-        )
-        target_bar = attr_print.get_hp_or_mp_bar(
-            character_id, "HitPoint", game_config.text_width / 2 - 4
-        )
+        player_bar = attr_print.get_hp_or_mp_bar(0, "HitPoint", game_config.text_width / 2 - 4)
+        target_bar = attr_print.get_hp_or_mp_bar(character_id, "HitPoint", game_config.text_width / 2 - 4)
         era_print.list_print([player_bar, target_bar], 2, "center")
         era_print.line_feed_print()
-        player_bar = attr_print.get_hp_or_mp_bar(
-            0, "ManaPoint", game_config.text_width / 2 - 4
-        )
-        target_bar = attr_print.get_hp_or_mp_bar(
-            character_id, "ManaPoint", game_config.text_width / 2 - 4
-        )
+        player_bar = attr_print.get_hp_or_mp_bar(0, "ManaPoint", game_config.text_width / 2 - 4)
+        target_bar = attr_print.get_hp_or_mp_bar(character_id, "ManaPoint", game_config.text_width / 2 - 4)
         era_print.list_print([player_bar, target_bar], 2, "center")
         era_print.line_feed_print()
 
@@ -245,12 +204,8 @@ def see_character_equipment_panel(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "37")
-    )
-    era_print.normal_print(
-        attr_text.get_see_attr_panel_head_character_info(character_id)
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "37"))
+    era_print.normal_print(attr_text.get_see_attr_panel_head_character_info(character_id))
     change_clothes_panel.see_character_wear_clothes(character_id, False)
 
 
@@ -260,9 +215,7 @@ def see_character_item_panel(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "38")
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "38"))
     use_item_panel.see_character_item_panel(character_id)
 
 
@@ -272,12 +225,8 @@ def see_character_wear_item_panel(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "40")
-    )
-    era_print.line_feed_print(
-        attr_text.get_see_attr_panel_head_character_info(character_id)
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "40"))
+    era_print.line_feed_print(attr_text.get_see_attr_panel_head_character_info(character_id))
     wear_item_panel.see_character_wear_item_panel(character_id, False)
 
 
@@ -287,12 +236,8 @@ def see_character_knowledge_panel(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "137")
-    )
-    era_print.line_feed_print(
-        attr_text.get_see_attr_panel_head_character_info(character_id)
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "137"))
+    era_print.line_feed_print(attr_text.get_see_attr_panel_head_character_info(character_id))
     see_knowledge_panel.see_character_knowledge_panel(character_id)
 
 
@@ -302,12 +247,8 @@ def see_character_sex_experience_panel(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "138")
-    )
-    era_print.line_feed_print(
-        attr_text.get_see_attr_panel_head_character_info(character_id)
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "138"))
+    era_print.line_feed_print(attr_text.get_see_attr_panel_head_character_info(character_id))
     sex_experience_panel.see_character_sex_experience_panel(character_id)
 
 
@@ -317,12 +258,8 @@ def see_character_language_panel(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "139")
-    )
-    era_print.line_feed_print(
-        attr_text.get_see_attr_panel_head_character_info(character_id)
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "139"))
+    era_print.line_feed_print(attr_text.get_see_attr_panel_head_character_info(character_id))
     language_panel.see_character_language_panel(character_id)
 
 
@@ -332,12 +269,8 @@ def see_character_nature_panel(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "139")
-    )
-    era_print.line_feed_print(
-        attr_text.get_see_attr_panel_head_character_info(character_id)
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "139"))
+    era_print.line_feed_print(attr_text.get_see_attr_panel_head_character_info(character_id))
     see_nature_panel.see_character_nature_panel(character_id)
 
 
@@ -347,12 +280,8 @@ def see_character_social_contact_panel(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "145")
-    )
-    era_print.line_feed_print(
-        attr_text.get_see_attr_panel_head_character_info(character_id)
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "145"))
+    era_print.line_feed_print(attr_text.get_see_attr_panel_head_character_info(character_id))
     see_social_contact_panel.see_character_social_contact_panel(character_id)
 
 
@@ -367,14 +296,7 @@ def ask_for_see_attr() -> list:
     now_panel_id = cache_contorl.panel_state["AttrShowHandlePanel"]
     ask_list = list(ask_data.values())
     cmd_button_queue.option_str(
-        None,
-        5,
-        "center",
-        False,
-        False,
-        ask_list,
-        now_panel_id,
-        list(ask_data.keys()),
+        None, 5, "center", False, False, ask_list, now_panel_id, list(ask_data.keys()),
     )
     del ask_data[now_panel_id]
     return list(ask_data.keys())
@@ -386,10 +308,7 @@ def ask_for_see_attr_cmd() -> list:
     """
     era_print.restart_line_print("~")
     yrn = cmd_button_queue.option_int(
-        constant.CmdMenu.SEE_ATTR_ON_EVERY_TIME,
-        3,
-        cmd_size="center",
-        askfor=False,
+        constant.CmdMenu.SEE_ATTR_ON_EVERY_TIME, 3, cmd_size="center", askfor=False,
     )
     return yrn
 
@@ -398,9 +317,7 @@ def input_attr_over_panel():
     """
     创建角色完成时确认角色属性输入处理面板
     """
-    yrn = cmd_button_queue.option_int(
-        constant.CmdMenu.ACKNOWLEDGEMENT_ATTRIBUTE, askfor=False
-    )
+    yrn = cmd_button_queue.option_int(constant.CmdMenu.ACKNOWLEDGEMENT_ATTRIBUTE, askfor=False)
     return yrn
 
 

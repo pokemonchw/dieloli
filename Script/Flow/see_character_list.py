@@ -11,9 +11,7 @@ def see_character_list_func():
     while True:
         max_page = get_character_list_page_max()
         input_s = []
-        see_character_list_panel_input = see_character_list_panel.see_character_list_panel(
-            max_page
-        )
+        see_character_list_panel_input = see_character_list_panel.see_character_list_panel(max_page)
         start_id = len(see_character_list_panel_input)
         input_s = input_s + see_character_list_panel_input
         ask_for_see_character_list_panel_input = see_character_list_panel.ask_for_see_character_list_panel(
@@ -26,9 +24,7 @@ def see_character_list_func():
         page_id = int(cache_contorl.panel_state["SeeCharacterListPanel"])
         if yrn == str(start_id):
             if page_id == 0:
-                cache_contorl.panel_state["SeeCharacterListPanel"] = str(
-                    max_page
-                )
+                cache_contorl.panel_state["SeeCharacterListPanel"] = str(max_page)
             else:
                 page_id = str(page_id - 1)
                 cache_contorl.panel_state["SeeCharacterListPanel"] = page_id

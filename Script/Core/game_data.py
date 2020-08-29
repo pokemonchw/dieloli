@@ -24,53 +24,31 @@ def load_dir_now(data_path: str):
                     if now_file[1] == "json":
                         if now_file[0] == "Scene":
                             now_scene_data = {}
-                            map_system_path = get_map_system_path_for_path(
-                                now_path
-                            )
-                            map_system_path_str = get_map_system_path_str(
-                                map_system_path
-                            )
+                            map_system_path = get_map_system_path_for_path(now_path)
+                            map_system_path_str = get_map_system_path_str(map_system_path)
                             load_scene_data = json_handle.load_json(now_path)
                             now_scene_data.update(load_scene_data)
                             now_scene_data["SceneCharacterData"] = {}
                             now_scene_data["ScenePath"] = map_system_path
-                            now_scene_data = {
-                                map_system_path_str: now_scene_data
-                            }
+                            now_scene_data = {map_system_path_str: now_scene_data}
                             cache_contorl.scene_data.update(now_scene_data)
                             now_scene_tag = load_scene_data["SceneTag"]
                             if now_scene_tag not in cache_contorl.place_data:
                                 cache_contorl.place_data[now_scene_tag] = []
-                            cache_contorl.place_data[now_scene_tag].append(
-                                map_system_path_str
-                            )
+                            cache_contorl.place_data[now_scene_tag].append(map_system_path_str)
                         elif now_file[0] == "Map":
                             now_map_data = {}
-                            map_system_path = get_map_system_path_for_path(
-                                now_path
-                            )
+                            map_system_path = get_map_system_path_for_path(now_path)
                             now_map_data["MapPath"] = map_system_path
-                            with open(
-                                os.path.join(data_path, "Map"), "r"
-                            ) as now_read_file:
+                            with open(os.path.join(data_path, "Map"), "r") as now_read_file:
                                 draw_data = now_read_file.read()
-                                now_map_data["MapDraw"] = get_print_map_data(
-                                    draw_data
-                                )
-                            map_system_path_str = get_map_system_path_str(
-                                map_system_path
-                            )
-                            now_map_data.update(
-                                json_handle.load_json(now_path)
-                            )
+                                now_map_data["MapDraw"] = get_print_map_data(draw_data)
+                            map_system_path_str = get_map_system_path_str(map_system_path)
+                            now_map_data.update(json_handle.load_json(now_path))
                             cache_contorl.now_init_map_id = map_system_path_str
-                            sorted_path_data = get_sorted_map_path_data(
-                                now_map_data["PathEdge"]
-                            )
+                            sorted_path_data = get_sorted_map_path_data(now_map_data["PathEdge"])
                             now_map_data["SortedPath"] = sorted_path_data
-                            cache_contorl.map_data[
-                                map_system_path_str
-                            ] = now_map_data
+                            cache_contorl.map_data[map_system_path_str] = now_map_data
                         else:
                             if now_file[0] == "NameIndex":
                                 data = json_handle.load_json(now_path)
@@ -80,17 +58,11 @@ def load_dir_now(data_path: str):
                                 data = json_handle.load_json(now_path)
                                 init_name_region(data["FamilyNameList"], 2)
                             else:
-                                now_data[now_file[0]] = json_handle.load_json(
-                                    now_path
-                                )
+                                now_data[now_file[0]] = json_handle.load_json(now_path)
                                 if now_file[0] == "Equipment":
-                                    init_clothing_data(
-                                        now_data[now_file[0]]["Clothing"]
-                                    )
+                                    init_clothing_data(now_data[now_file[0]]["Clothing"])
                                 elif now_file[0] == "WearItem":
-                                    init_wear_item_type_data(
-                                        now_data[now_file[0]]["Item"]
-                                    )
+                                    init_wear_item_type_data(now_data[now_file[0]]["Item"])
             else:
                 now_data[i] = load_dir_now(now_path)
     return now_data
@@ -103,11 +75,7 @@ def init_wear_item_type_data(wear_item_data: dict):
     wear_item_data -- 可穿戴道具数据
     """
     cache_contorl.wear_item_type_data = {
-        wear: {
-            item: 1
-            for item in wear_item_data
-            if wear in wear_item_data[item]["Wear"]
-        }
+        wear: {item: 1 for item in wear_item_data if wear in wear_item_data[item]["Wear"]}
         for item in wear_item_data
         for wear in wear_item_data[item]["Wear"]
     }
@@ -148,16 +116,9 @@ def get_sorted_map_path_data(map_data: dict) -> dict:
         new_data = {node: {}}
         for target in map_data.keys():
             if target != node:
-                find_path_data = find_path(
-                    graph, node, target, cost_func=cost_func
-                )
+                find_path_data = find_path(graph, node, target, cost_func=cost_func)
                 new_data[node].update(
-                    {
-                        target: {
-                            "Path": find_path_data.nodes[1:],
-                            "Time": find_path_data.costs,
-                        }
-                    }
+                    {target: {"Path": find_path_data.nodes[1:], "Time": find_path_data.costs,}}
                 )
         sorted_path_data.update(new_data)
     return sorted_path_data
@@ -206,9 +167,7 @@ def get_print_map_data(map_draw: str) -> dict:
         while i in range(len(map_x_list)):
             if not set_map_button and map_x_list[i : i + 11] != "<mapbutton>":
                 new_x_list += map_x_list[i]
-            elif (
-                not set_map_button and map_x_list[i : i + 11] == "<mapbutton>"
-            ):
+            elif not set_map_button and map_x_list[i : i + 11] == "<mapbutton>":
                 i += 10
                 set_map_button = True
             elif set_map_button and map_x_list[i : i + 12] != "</mapbutton>":
@@ -236,11 +195,7 @@ def get_path_list(root_path: str) -> list:
     Keyword arguments:
     root_path -- 要获取的目录所在根路径
     """
-    return [
-        name
-        for name in os.listdir(root_path)
-        if os.path.isdir(os.path.join(root_path, name))
-    ]
+    return [name for name in os.listdir(root_path) if os.path.isdir(os.path.join(root_path, name))]
 
 
 def init_clothing_data(original_clothing_data: dict):
@@ -256,9 +211,7 @@ def init_clothing_data(original_clothing_data: dict):
     cache_contorl.clothing_type_data = clothing_type_data
 
 
-def get_original_clothing(
-    clothing_type: str, clothing_sex: str, now_clothing_data: dict
-):
+def get_original_clothing(clothing_type: str, clothing_sex: str, now_clothing_data: dict):
     """
     生成无分类的原始服装数据
     Keyword arguments:

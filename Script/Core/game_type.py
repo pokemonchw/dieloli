@@ -49,7 +49,7 @@ class NpcTem:
         """ 体重模板 """
         self.BodyFat: str = ""
         """ 体脂率模板 """
-        self.Chest: str = ""
+        self.Chest: int = 0
         """ 罩杯模板 """
         self.MotherTongue: str = ""
         """ 母语 """
@@ -190,7 +190,7 @@ class Character:
         """ 上课时间和状态数据 """
         self.target_character_id: int = 0
         """ 角色当前交互对象id """
-        self.adv:int = 0
+        self.adv: int = 0
         """ 剧情npc校验 """
 
 
@@ -256,3 +256,74 @@ class CourseTimeSlice:
         """ 学校id """
         self.phase: int = 0
         """ 年级编号 """
+
+
+class NormalConfig:
+    """ 通用配置 """
+
+    game_name: str
+    """ 游戏名 """
+    verson:str
+    """ 游戏版本号 """
+    author:str
+    """ 作者名 """
+    verson_time:str
+    """ 版本时间 """
+    background:str
+    """ 背景色 """
+    language:str
+    """ 语言 """
+    window_width:int
+    """ 窗体宽度 """
+    window_hight:int
+    """ 窗体高度 """
+    textbox_width:int
+    """ 文本框字符宽度 """
+    textbox_hight:int
+    """ 文本框字符高度 """
+    text_width:int
+    """ 绘制用单行文本宽度 """
+    text_hight:int
+    """ 绘制用单屏行数 """
+    inputbox_width:int
+    """ 输入框宽度 """
+    year:int
+    """ 游戏时间开始年份 """
+    month:int
+    """ 游戏时间开始月份 """
+    day:int
+    """ 游戏时间开始日期 """
+    hour:int
+    """ 游戏时间开始小时数 """
+    minute:int
+    """ 游戏时间开始分钟数 """
+    max_save:int
+    """ 游戏存档数量上限 """
+    save_page:int
+    """ 存档显示页面单页存档数 """
+    characterlist_show:int
+    """ 角色列表单页显示角色数 """
+    text_wait:int
+    """ 步进文本等待时间 """
+    home_url:str
+    """ 开发者主页链接 """
+    licenses_url:str
+    """ 知识产权共享协议链接 """
+    random_npc_max:int
+    """ 最大随机npc数量 """
+    proportion_teacher:int
+    """ 生成教师权重 """
+    proportion_student:int
+    """ 生成学生权重 """
+    insceneseeplayer_max:int
+    """ 场景单页显示角色数上限 """
+    seecharacterclothes_max:int
+    """ 角色服装列表单页显示服装数上限 """
+    seecharacterwearitem_max:int
+    """ 角色可穿戴道具列表单页显示上限 """
+    seecharacteritem_max:int
+    """ 角色背包单页显示道具数上限 """
+    food_shop_item_max:int
+    """ 食物商店单页显示道具数上限 """
+    food_shop_type_max:int
+    """ 食物商店单页显示食物种类数上限 """

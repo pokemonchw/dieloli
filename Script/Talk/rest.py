@@ -49,9 +49,7 @@ def talk_rest_3() -> List[str]:
     ]
 
 
-@talk.add_talk(
-    constant.Behavior.REST, 4, {"NoPlayer", "TargetIsAdore", "TargetIsPlayer"}
-)
+@talk.add_talk(constant.Behavior.REST, 4, {"NoPlayer", "TargetIsAdore", "TargetIsPlayer"})
 def talk_rest_4() -> List[str]:
     """
     npc爱慕玩家并与玩家一起休息时的口上
@@ -65,9 +63,7 @@ def talk_rest_4() -> List[str]:
     return [talk_1, talk_2]
 
 
-@talk.add_talk(
-    constant.Behavior.REST, 5, {"NoPlayer", "TargetIsAdmire", "TargetIsPlayer"}
-)
+@talk.add_talk(constant.Behavior.REST, 5, {"NoPlayer", "TargetIsAdmire", "TargetIsPlayer"})
 def talk_rest_5() -> List[str]:
     """
     npc恋幕玩家并与玩家一起休息时的口上

@@ -26,13 +26,10 @@ def normal_print(string: str, style="standard", rich_text_judge=True):
     rich_text_judge -- 启用富文本的开关 (default True)
     """
     if rich_text_judge:
-        bar_list = list(
-            text_loading.get_game_data(
-                constant.FilePath.BAR_CONFIG_PATH
-            ).keys()
-        )
+        bar_list = list(text_loading.get_game_data(constant.FilePath.BAR_CONFIG_PATH).keys())
         string = dictionaries.handle_text(string)
-        style_list = rich_text.set_rich_text_print(string, style)
+        string.__repr__
+        style_list = rich_text.get_rich_text_print(string, style)
         global last_char
         if len(string) > 0:
             last_char = string[-1:]
@@ -40,9 +37,7 @@ def normal_print(string: str, style="standard", rich_text_judge=True):
         string = r"" + string
         for i in range(0, len(string)):
             if style_list[i] in bar_list:
-                style_data = text_loading.get_text_data(
-                    constant.FilePath.BAR_CONFIG_PATH, style_list[i]
-                )
+                style_data = text_loading.get_text_data(constant.FilePath.BAR_CONFIG_PATH, style_list[i])
                 true_bar = style_data["truebar"]
                 null_bar = style_data["nullbar"]
                 if string[i] == "0":
@@ -87,13 +82,7 @@ def little_title_print(string: str):
     width = game_config.text_width
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 2 - int(text_width) / 2 - 2)
-    line_feed_print(
-        "=" * line_width
-        + "<littletitle>口"
-        + string
-        + "口</littletitle>"
-        + "=" * line_width
-    )
+    line_feed_print("=" * line_width + "<littletitle>口" + string + "口</littletitle>" + "=" * line_width)
 
 
 def son_title_print(string: str):
@@ -117,13 +106,7 @@ def son_title_print(string: str):
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 4)
     line_width_fix = int(int(width) / 4 - int(text_width))
-    line_feed_print(
-        ":" * line_width_fix
-        + "<sontitle>"
-        + string
-        + "</sontitle>"
-        + ":" * line_width * 3
-    )
+    line_feed_print(":" * line_width_fix + "<sontitle>" + string + "</sontitle>" + ":" * line_width * 3)
 
 
 def line_feed_print(string="", style="standard"):
@@ -239,7 +222,7 @@ def one_by_one_print(sleep_time: float, string: str, style="standard"):
     if text_wait != 0:
         time.sleep(text_wait)
     cache_contorl.wframe_mouse.w_frame_up = 0
-    style_list = rich_text.set_rich_text_print(string, style)
+    style_list = rich_text.get_rich_text_print(string, style)
     style_name_list = game_config.get_font_data_list()
     for i in range(0, len(style_name_list)):
         style_text_head = "<" + style_name_list[i] + ">"
@@ -295,9 +278,7 @@ def list_print(string_list: list, string_column=1, string_size="left"):
         if string_text_index > string_index:
             string_text = string_text[:string_index]
         elif string_text_index < string_index:
-            string_text = (
-                " " * (string_index - string_text_index) + string_text
-            )
+            string_text = " " * (string_index - string_text_index) + string_text
         if i == 0:
             normal_print(string_text)
         elif i / string_column >= 1 and i % string_column == 0:
@@ -360,8 +341,7 @@ def lines_center_print(sleep_time: float, string="", style="standard"):
                 cache_contorl.wframe_mouse.w_frame_lines_up = 2
                 for index_i_up in range(index_i_up, len(string_list)):
                     restart_line_print(
-                        text_handle.align(string_list[index_i_up], "center"),
-                        style,
+                        text_handle.align(string_list[index_i_up], "center"), style,
                     )
                 cache_contorl.wframe_mouse.w_frame_lines_state = 2
                 break

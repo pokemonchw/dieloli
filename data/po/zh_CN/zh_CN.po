@@ -1,0 +1,54 @@
+msgid "外套"
+msgstr "外套"
+
+msgid "上衣"
+msgstr "上衣"
+
+msgid "裤子"
+msgstr "裤子"
+
+msgid "裙子"
+msgstr "裙子"
+
+msgid "鞋子"
+msgstr "鞋子"
+
+msgid "袜子"
+msgstr "袜子"
+
+msgid "胸罩"
+msgstr "胸罩"
+
+msgid "内裤"
+msgstr "内裤"
+
+msgid "男"
+msgstr "男"
+
+msgid "女"
+msgstr "女"
+
+msgid "扶她"
+msgstr "扶她"
+
+msgid "无性"
+msgstr "无性"
+
+msgid "嘴"
+msgstr "嘴"
+
+msgid "胸"
+msgstr "胸"
+
+msgid "阴蒂"
+msgstr "阴蒂"
+
+msgid "阴茎"
+msgstr "阴茎"
+
+msgid "阴道"
+msgstr "阴道"
+
+msgid "肛门"
+msgstr "肛门"
+

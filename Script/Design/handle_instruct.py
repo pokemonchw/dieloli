@@ -41,9 +41,7 @@ def handle_unknown_instruct():
     """
     处理未定义指令
     """
-    era_print.line_feed_print(
-        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "42")
-    )
+    era_print.line_feed_print(text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "42"))
 
 
 @add_instruct("Rest")
@@ -58,23 +56,16 @@ def handle_rest():
     character_data.state = constant.CharacterStatus.STATUS_REST
     if character_data.hit_point > character_data.hit_point_max:
         character_data.hit_point = character_data.hit_point_max
-    target_character = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
+    target_character = cache_contorl.character_data[character_data.target_character_id]
     if (
         target_character.state == constant.CharacterStatus.STATUS_ARDER
-        and target_character.behavior["BehaviorId"]
-        == constant.Behavior.SHARE_BLANKLY
+        and target_character.behavior["BehaviorId"] == constant.Behavior.SHARE_BLANKLY
     ):
         target_character.state = constant.CharacterStatus.STATUS_REST
-        character.init_character_behavior_start_time(
-            character_data.target_character_id
-        )
+        character.init_character_behavior_start_time(character_data.target_character_id)
         target_character.behavior["Duration"] = 10
         target_character.behavior["BehaviorId"] = constant.Behavior.REST
-    update.game_update_flow()
-    game_time.sub_time_now(10)
-    update.game_update_flow()
+    update.game_update_flow(10)
 
 
 @add_instruct("BuyFood")
@@ -98,6 +89,4 @@ def handle_eat():
         character_data.behavior["EatFood"] = now_food
         character_data.behavior["Duration"] = 1
         character_data.state = constant.CharacterStatus.STATUS_EAT
-    update.game_update_flow()
-    game_time.sub_time_now(1)
-    update.game_update_flow()
+    update.game_update_flow(1)

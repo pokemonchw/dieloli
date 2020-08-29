@@ -16,9 +16,7 @@ def see_character_list_panel(max_page: int) -> list:
     Keyword arguments:
     max_page -- 最大角色列表页数
     """
-    title_text = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "74"
-    )
+    title_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "74")
     era_print.little_title_print(title_text)
     input_s = []
     page_id = int(cache_contorl.panel_state["SeeCharacterListPanel"])
@@ -26,9 +24,7 @@ def see_character_list_panel(max_page: int) -> list:
     character_max = len(cache_contorl.character_data) - 1
     if page_id == max_page:
         show_page_start = page_show * page_id
-        show_page_over = show_page_start + (
-            character_max + 1 - show_page_start
-        )
+        show_page_over = show_page_start + (character_max + 1 - show_page_start)
     else:
         show_page_over = page_show * (page_id + 1)
         show_page_start = show_page_over - page_show
@@ -59,11 +55,6 @@ def ask_for_see_character_list_panel(start_id: str) -> list:
     start_id -- 面板命令起始id
     """
     yrn = cmd_button_queue.option_int(
-        constant.CmdMenu.SEE_CHARACTER_LIST,
-        3,
-        "left",
-        askfor=False,
-        cmd_size="center",
-        start_id=start_id,
+        constant.CmdMenu.SEE_CHARACTER_LIST, 3, "left", askfor=False, cmd_size="center", start_id=start_id,
     )
     return yrn

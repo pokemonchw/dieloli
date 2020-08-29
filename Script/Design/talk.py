@@ -4,7 +4,7 @@ from Script.Core import cache_contorl, era_print
 from Script.Design import map_handle
 
 
-def add_talk(behavior_id: int, talk_id: int, premise_list: set,adv=0) -> callable:
+def add_talk(behavior_id: int, talk_id: int, premise_list: set, adv=0) -> callable:
     """
     添加口上
     Keyword arguments:
@@ -20,11 +20,12 @@ def add_talk(behavior_id: int, talk_id: int, premise_list: set,adv=0) -> callabl
         @wraps(func)
         def return_wrapper(*args, **kwargs):
             return random.choice(func(*args, **kwargs))
-        cache_contorl.adv_talk_data.setdefault(adv,{})
-        cache_contorl.adv_talk_data[adv].setdefault(behavior_id,{})
+
+        cache_contorl.adv_talk_data.setdefault(adv, {})
+        cache_contorl.adv_talk_data[adv].setdefault(behavior_id, {})
         cache_contorl.adv_talk_data[adv][behavior_id][talk_id] = return_wrapper
-        cache_contorl.premise_talk_table.setdefault(adv,{})
-        cache_contorl.premise_talk_table[adv].setdefault(behavior_id,{})
+        cache_contorl.premise_talk_table.setdefault(adv, {})
+        cache_contorl.premise_talk_table[adv].setdefault(behavior_id, {})
         cache_contorl.premise_talk_table[adv][behavior_id][talk_id] = premise_list
         return return_wrapper
 
@@ -32,10 +33,6 @@ def add_talk(behavior_id: int, talk_id: int, premise_list: set,adv=0) -> callabl
 
 
 def handle_talk(character_id):
-    pass
-
-
-def handle_talk_bak(character_id: int):
     """
     处理行为结算对话
     Keyword arguments:
@@ -48,12 +45,8 @@ def handle_talk_bak(character_id: int):
     if behavior_id in cache_contorl.adv_talk_data[0]:
         for talk_id in cache_contorl.adv_talk_data[0][behavior_id]:
             now_weight = 1
-            for premise in cache_contorl.premise_talk_table[0][behavior_id][
-                talk_id
-            ]:
-                now_add_weight = cache_contorl.handle_premise_data[premise](
-                    character_id
-                )
+            for premise in cache_contorl.premise_talk_table[0][behavior_id][talk_id]:
+                now_add_weight = cache_contorl.handle_premise_data[premise](character_id)
                 if now_add_weight:
                     now_weight += now_add_weight
                 else:
@@ -76,7 +69,7 @@ def handle_talk_bak(character_id: int):
                         now_weight = 0
                         break
                 if now_weight:
-                    now_adv_talk.setdefault(now_weight,set())
+                    now_adv_talk.setdefault(now_weight, set())
                     now_adv_talk[now_weight].add(talk_id)
     now_talk = None
     adv_weight = 0
@@ -93,15 +86,11 @@ def handle_talk_bak(character_id: int):
     if now_talk != None:
         now_talk_text: str = now_talk()
         scene_path = cache_contorl.character_data[0].position
-        scene_path_str = map_handle.get_map_system_path_str_for_list(
-            scene_path
-        )
+        scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
         scene_data = cache_contorl.scene_data[scene_path_str]
         scene_name = scene_data["SceneName"]
         player_data = cache_contorl.character_data[0]
-        target_data = cache_contorl.character_data[
-            character_data.target_character_id
-        ]
+        target_data = cache_contorl.character_data[character_data.target_character_id]
         now_talk_text = now_talk_text.format(
             NickName=character_data.nick_name,
             FoodName=character_data.behavior["FoodName"],

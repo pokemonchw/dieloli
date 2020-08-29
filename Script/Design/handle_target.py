@@ -31,9 +31,7 @@ def add_target(target: str, premise_list: set, effect_list: set) -> callable:
 
 
 @add_target(
-    "EatBreakFastInRestaurant",
-    {"InRestaurant", "InBreakfastTime", "Hunger", "HaveFood"},
-    {},
+    "EatBreakFastInRestaurant", {"InRestaurant", "InBreakfastTime", "Hunger", "HaveFood"}, {},
 )
 def handle_eat_break_fast_in_restaurant(character_id: int):
     """
@@ -45,15 +43,23 @@ def handle_eat_break_fast_in_restaurant(character_id: int):
 
 
 @add_target(
-    "EatLunchInRestaurant",
-    {"InRestaurant", "InLunchTime", "Hunger", "HaveFood"},
-    {},
+    "EatLunchInRestaurant", {"InRestaurant", "InLunchTime", "Hunger", "HaveFood"}, {},
 )
 def handle_eat_lunch_in_restaruant(character_id: int):
     """
     控制角色在餐厅吃午餐
     Keyword arguments:
     character_id -- 角色id
+    """
+    character.character_eat_rand_food(character_id)
+
+
+@add_target(
+    "EatDinnerInRestaurant", {"InRestaurant", "InDinnerTime", "Hunger", "HaveFood"}, {},
+)
+def handle_eat_dinner_in_restaurant(character_id: int):
+    """
+    控制角色在餐厅吃晚餐
     """
     character.character_eat_rand_food(character_id)
 

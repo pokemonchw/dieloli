@@ -1,28 +1,20 @@
 from Script.Core import (
-    game_config,
     cache_contorl,
     text_loading,
     dictionaries,
     constant,
 )
+from Script.Config import game_config
 
 
-def set_rich_text_print(text_message: str, default_style: str) -> list:
+def get_rich_text_print(text_message: str, default_style: str) -> list:
     """
     获取文本的富文本样式列表
     Keyword arguments:
     text_message -- 原始文本
     default_style -- 无富文本样式时的默认样式
     """
-    style_name_list = {
-        key: 0
-        for key in game_config.get_font_data_list()
-        + list(
-            text_loading.get_game_data(
-                constant.FilePath.BAR_CONFIG_PATH
-            ).keys()
-        )
-    }
+    style_name_list = game_config.config_bar_data
     style_index = 0
     style_last_index = None
     style_max_index = None

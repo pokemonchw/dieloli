@@ -34,9 +34,7 @@ def see_map_flow():
                 down_map_button = str(int(start_id_1) + 2)
         now_map = cache_contorl.now_map.copy()
         if yrn in map_cmd:
-            now_target_path = map_handle.get_scene_path_for_map_scene_id(
-                now_map, yrn
-            )
+            now_target_path = map_handle.get_scene_path_for_map_scene_id(now_map, yrn)
             character_move.own_charcter_move(now_target_path)
             break
         elif yrn == back_button:
@@ -46,9 +44,7 @@ def see_map_flow():
         elif yrn in move_path_cmd:
             move_list_id = move_path_cmd.index(yrn)
             move_id = move_path_list[move_list_id]
-            now_target_path = map_handle.get_scene_path_for_map_scene_id(
-                now_map, move_id
-            )
+            now_target_path = map_handle.get_scene_path_for_map_scene_id(now_map, move_id)
             character_move.own_charcter_move(now_target_path)
             break
         elif up_map_button != "Null" and yrn == up_map_button:

@@ -8,16 +8,12 @@ def see_instruct_head_panel() -> list:
     Return arguments:
     list -- 绘制的按钮列表
     """
-    era_print.little_title_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "146")
-    )
+    era_print.little_title_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "146"))
     instruct_data = text_loading.get_text_data(
         constant.FilePath.CMD_PATH, constant.CmdMenu.INSTRUCT_HEAD_PANEL
     )
     if cache_contorl.instruct_filter == {}:
-        cache_contorl.instruct_filter = {
-            instruct: 0 for instruct in instruct_data
-        }
+        cache_contorl.instruct_filter = {instruct: 0 for instruct in instruct_data}
         cache_contorl.instruct_filter["Dialogue"] = 1
     style_data = {
         instruct_data[instruct]: "selectmenu"
@@ -29,9 +25,7 @@ def see_instruct_head_panel() -> list:
         for instruct in instruct_data
         if cache_contorl.instruct_filter[instruct] == 0
     }
-    era_print.line_feed_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "147")
-    )
+    era_print.line_feed_print(text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "147"))
     return cmd_button_queue.option_str(
         None,
         len(instruct_data),
@@ -46,22 +40,14 @@ def see_instruct_head_panel() -> list:
     )
 
 
-instruct_data = text_loading.get_text_data(
-    constant.FilePath.CMD_PATH, constant.CmdMenu.INSTRUCT_PANEL
-)
+instruct_data = text_loading.get_text_data(constant.FilePath.CMD_PATH, constant.CmdMenu.INSTRUCT_PANEL)
 instruct_text_data = {
     instruct: instruct_data[instruct_type][instruct]
     for instruct_type in instruct_data
     for instruct in instruct_data[instruct_type]
 }
-instruct_cmd_id_data = {
-    list(instruct_text_data.keys())[i]: i
-    for i in range(len(instruct_text_data))
-}
-instruct_id_cmd_data = {
-    instruct_cmd_id_data[instruct]: instruct
-    for instruct in instruct_cmd_id_data
-}
+instruct_cmd_id_data = {list(instruct_text_data.keys())[i]: i for i in range(len(instruct_text_data))}
+instruct_id_cmd_data = {instruct_cmd_id_data[instruct]: instruct for instruct in instruct_cmd_id_data}
 
 
 def instract_list_panel() -> list:
@@ -73,33 +59,18 @@ def instract_list_panel() -> list:
     instruct_list = [
         instruct
         for instruct_type in instruct_data
-        if instruct_type in cache_contorl.instruct_filter
-        and cache_contorl.instruct_filter[instruct_type]
+        if instruct_type in cache_contorl.instruct_filter and cache_contorl.instruct_filter[instruct_type]
         for instruct in instruct_data[instruct_type]
         if judge_instract_available(instruct)
     ]
-    return_data = [
-        str(instruct_cmd_id_data[instruct]) for instruct in instruct_list
-    ]
+    return_data = [str(instruct_cmd_id_data[instruct]) for instruct in instruct_list]
     cmd_data = [
-        "      "
-        + cmd_button_queue.id_index(return_data[i])
-        + instruct_text_data[instruct_list[i]]
+        "      " + cmd_button_queue.id_index(return_data[i]) + instruct_text_data[instruct_list[i]]
         for i in range(len(instruct_list))
     ]
     if len(return_data) > 0:
         cmd_button_queue.option_str(
-            None,
-            5,
-            "left",
-            False,
-            False,
-            cmd_data,
-            "",
-            return_data,
-            {},
-            {},
-            False,
+            None, 5, "left", False, False, cmd_data, "", return_data, {}, {}, False,
         )
     return return_data
 
@@ -112,9 +83,7 @@ def judge_instract_available(instract: str) -> bool:
     Return arguments:
     bool -- 可用性校验
     """
-    config_data = text_loading.get_game_data(constant.FilePath.INSTRUCT_PATH)[
-        instract
-    ]
+    config_data = text_loading.get_game_data(constant.FilePath.INSTRUCT_PATH)[instract]
     for premise in config_data:
         if not cache_contorl.handle_premise_data[premise](0):
             return 0

@@ -4,51 +4,23 @@ from Script.Core import cache_contorl, text_loading, value_handle, constant
 from Script.Design import character
 
 clothing_tag_text_list = {
-    "Sexy": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "118"
-    ),
-    "Handsome": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "119"
-    ),
-    "Elegant": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "120"
-    ),
-    "Fresh": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "121"
-    ),
-    "Sweet": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "122"
-    ),
-    "Warm": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "123"
-    ),
-    "Cleanliness": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "124"
-    ),
+    "Sexy": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "118"),
+    "Handsome": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "119"),
+    "Elegant": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "120"),
+    "Fresh": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "121"),
+    "Sweet": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "122"),
+    "Warm": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "123"),
+    "Cleanliness": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "124"),
 }
 clothing_type_text_list = {
-    "Coat": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "41"
-    ),
-    "Underwear": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "42"
-    ),
-    "Pants": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "43"
-    ),
-    "Skirt": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "44"
-    ),
-    "Shoes": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "45"
-    ),
-    "Socks": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "46"
-    ),
+    "Coat": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "41"),
+    "Underwear": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "42"),
+    "Pants": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "43"),
+    "Skirt": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "44"),
+    "Shoes": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "45"),
+    "Socks": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "46"),
     "Bra": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "47"),
-    "Underpants": text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "48"
-    ),
+    "Underpants": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "48"),
 }
 
 
@@ -59,9 +31,7 @@ def creator_suit(suit_name: str, sex: str) -> dict:
     suit_name -- 套装模板
     sex -- 性别模板
     """
-    suit_data = text_loading.get_text_data(
-        constant.FilePath.EQUIPMENT_PATH, "Suit"
-    )[suit_name][sex]
+    suit_data = text_loading.get_text_data(constant.FilePath.EQUIPMENT_PATH, "Suit")[suit_name][sex]
     new_suit_data = {
         clothing: creator_clothing(suit_data[clothing])
         for clothing in suit_data
@@ -149,27 +119,20 @@ def get_clothing_collocation_data(
     clothing_data -- 所有要查询的服装数据
     """
     collocation_data = {"Price": 0}
-    clothing_collocation_type_data = now_clothing_data[
-        "CollocationalRestriction"
-    ]
+    clothing_collocation_type_data = now_clothing_data["CollocationalRestriction"]
     for collocation_type in clothing_data:
         collocation_data[collocation_type] = ""
         if collocation_type not in clothing_collocation_type_data:
             continue
         now_restrict = clothing_collocation_type_data[collocation_type]
         if now_restrict == "Precedence":
-            clothing_now_type_precedence_list = now_clothing_data[
-                "Collocation"
-            ][collocation_type]
+            clothing_now_type_precedence_list = now_clothing_data["Collocation"][collocation_type]
             precedence_collocation = get_appoint_names_clothing_top(
-                list(clothing_now_type_precedence_list.keys()),
-                clothing_name_data[collocation_type],
+                list(clothing_now_type_precedence_list.keys()), clothing_name_data[collocation_type],
             )
             if precedence_collocation != "None":
                 collocation_data[collocation_type] = precedence_collocation
-                collocation_data["Price"] += clothing_price_data[
-                    collocation_type
-                ][precedence_collocation]
+                collocation_data["Price"] += clothing_price_data[collocation_type][precedence_collocation]
             else:
                 usually_collocation = get_appoint_type_clothing_top(
                     now_clothing_data,
@@ -181,9 +144,7 @@ def get_clothing_collocation_data(
                 )
                 if usually_collocation != "None":
                     collocation_data[collocation_type] = usually_collocation
-                    collocation_data["Price"] += clothing_price_data[
-                        collocation_type
-                    ][usually_collocation]
+                    collocation_data["Price"] += clothing_price_data[collocation_type][usually_collocation]
                 else:
                     collocation_data = "None"
                     break
@@ -198,33 +159,24 @@ def get_clothing_collocation_data(
             )
             if usually_collocation != "None":
                 collocation_data[collocation_type] = usually_collocation
-                collocation_data["Price"] += clothing_price_data[
-                    collocation_type
-                ][usually_collocation]
+                collocation_data["Price"] += clothing_price_data[collocation_type][usually_collocation]
             else:
                 collocation_data[collocation_type] = ""
         elif now_restrict == "Must" or "Ornone":
-            clothing_now_type_precedence_list = now_clothing_data[
-                "Collocation"
-            ][collocation_type]
+            clothing_now_type_precedence_list = now_clothing_data["Collocation"][collocation_type]
             precedence_collocation = get_appoint_names_clothing_top(
-                list(clothing_now_type_precedence_list.keys()),
-                clothing_name_data[collocation_type],
+                list(clothing_now_type_precedence_list.keys()), clothing_name_data[collocation_type],
             )
             if precedence_collocation != "None":
                 collocation_data[collocation_type] = precedence_collocation
-                collocation_data["Price"] += clothing_price_data[
-                    collocation_type
-                ][precedence_collocation]
+                collocation_data["Price"] += clothing_price_data[collocation_type][precedence_collocation]
             else:
                 collocation_data = "None"
                 break
     return collocation_data
 
 
-def get_appoint_names_clothing_top(
-    appoint_name_list: list, clothing_type_name_data: dict
-) -> str:
+def get_appoint_names_clothing_top(appoint_name_list: list, clothing_type_name_data: dict) -> str:
     """
     获取指定服装类型数据下指定名称的服装中价值最高的服装
     Keyword arguments:
@@ -232,18 +184,14 @@ def get_appoint_names_clothing_top(
     clothing_typeNameData -- 以名字为分类的已排序的要查询的服装数据
     """
     clothing_data = {
-        list(clothing_type_name_data[appoint].keys())[
-            -1
-        ]: clothing_type_name_data[appoint][
+        list(clothing_type_name_data[appoint].keys())[-1]: clothing_type_name_data[appoint][
             list(clothing_type_name_data[appoint].keys())[-1]
         ]
         for appoint in appoint_name_list
         if appoint in clothing_type_name_data
     }
     if clothing_data != {}:
-        return list(value_handle.sorted_dict_for_values(clothing_data).keys())[
-            -1
-        ]
+        return list(value_handle.sorted_dict_for_values(clothing_data).keys())[-1]
     return "None"
 
 
@@ -273,10 +221,7 @@ def get_appoint_type_clothing_top(
         new_clothing_data = clothing_data[new_clothing_type][new_clothing]
         return_judge = True
         if not judge_clothing_collocation(
-            now_clothing_data,
-            now_clothing_type,
-            new_clothing_data,
-            new_clothing_type,
+            now_clothing_data, now_clothing_type, new_clothing_data, new_clothing_type,
         ):
             continue
         for collocation_type in collocation_data:
@@ -285,14 +230,9 @@ def get_appoint_type_clothing_top(
             now_collocation_id = collocation_data[collocation_type]
             if now_collocation_id == "":
                 continue
-            now_collocation_data = clothing_data[collocation_type][
-                now_collocation_id
-            ]
+            now_collocation_data = clothing_data[collocation_type][now_collocation_id]
             if not judge_clothing_collocation(
-                now_collocation_data,
-                collocation_type,
-                new_clothing_data,
-                new_clothing_type,
+                now_collocation_data, collocation_type, new_clothing_data, new_clothing_type,
             ):
                 return_judge = False
                 break
@@ -303,10 +243,7 @@ def get_appoint_type_clothing_top(
 
 
 def judge_clothing_collocation(
-    old_clothing_data: dict,
-    old_clothing_type: str,
-    new_clothing_data: dict,
-    new_clothing_type: str,
+    old_clothing_data: dict, old_clothing_type: str, new_clothing_data: dict, new_clothing_type: str,
 ) -> bool:
     """
     判断两件服装是否能够进行搭配
@@ -316,26 +253,18 @@ def judge_clothing_collocation(
     new_clothing_data -- 新服装数据
     new_clothing_type -- 新服装类型
     """
-    old_clothing_data_restrict_data = old_clothing_data[
-        "CollocationalRestriction"
-    ]
-    new_clothing_data_restrict_data = new_clothing_data[
-        "CollocationalRestriction"
-    ]
+    old_clothing_data_restrict_data = old_clothing_data["CollocationalRestriction"]
+    new_clothing_data_restrict_data = new_clothing_data["CollocationalRestriction"]
     old_judge = old_clothing_data_restrict_data[new_clothing_type]
     new_judge = new_clothing_data_restrict_data[old_clothing_type]
     if old_judge in {"Must": 0, "Ornone": 1}:
-        old_collocation_type_data = old_clothing_data["Collocation"][
-            new_clothing_type
-        ]
+        old_collocation_type_data = old_clothing_data["Collocation"][new_clothing_type]
         if new_clothing_data["Name"] not in old_collocation_type_data:
             return False
     elif old_judge == "None":
         return False
     if new_judge in {"Must": 0, "Ornone": 1}:
-        new_collocation_type_data = new_clothing_data["Collocation"][
-            old_clothing_type
-        ]
+        new_collocation_type_data = new_clothing_data["Collocation"][old_clothing_type]
         if old_clothing_data["Name"] not in new_collocation_type_data:
             return False
     elif new_judge == "None":
@@ -344,12 +273,10 @@ def judge_clothing_collocation(
 
 
 clothing_evaluation_text_list = [
-    text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, str(k))
-    for k in range(102, 112)
+    text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, str(k)) for k in range(102, 112)
 ]
 clothing_tagList = [
-    text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, str(k))
-    for k in range(112, 117)
+    text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, str(k)) for k in range(112, 117)
 ]
 
 
@@ -366,12 +293,8 @@ def set_clothint_evaluation_text(clothing_data: dict):
         clothing_data["Fresh"],
         clothing_data["Sweet"],
     ]
-    clothing_evaluation_text = clothing_evaluation_text_list[
-        math.floor(clothing_data["Price"] / 480) - 1
-    ]
-    clothing_tag_text = clothing_tagList[
-        clothing_attr_data.index(max(clothing_attr_data))
-    ]
+    clothing_evaluation_text = clothing_evaluation_text_list[math.floor(clothing_data["Price"] / 480) - 1]
+    clothing_tag_text = clothing_tagList[clothing_attr_data.index(max(clothing_attr_data))]
     clothing_data["Evaluation"] = clothing_evaluation_text
     clothing_data["Tag"] = clothing_tag_text
 

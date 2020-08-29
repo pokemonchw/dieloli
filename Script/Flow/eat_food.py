@@ -14,18 +14,12 @@ def eat_food() -> (bool, game_type.Food):
     while 1:
         eat_food_panel.see_food_bag_head()
         head_buttons = eat_food_panel.see_food_bag_head_cmd(now_panel)
-        food_list = cooking.get_character_food_bag_type_list_buy_food_type(
-            0, now_panel
-        )
+        food_list = cooking.get_character_food_bag_type_list_buy_food_type(0, now_panel)
         max_page = get_food_bag_page_max(len(food_list), 1)
-        now_page_id = int(
-            cache_contorl.panel_state["SeeFoodBagListByFoodPanel"]
-        )
+        now_page_id = int(cache_contorl.panel_state["SeeFoodBagListByFoodPanel"])
         food_buttons = eat_food_panel.see_food_bag_list(food_list)
         start_id = len(food_buttons)
-        tail_buttons = eat_food_panel.see_food_bag_tail_cmd(
-            start_id, max_page, 0
-        )
+        tail_buttons = eat_food_panel.see_food_bag_tail_cmd(start_id, max_page, 0)
         ask_for_list = head_buttons + food_buttons + tail_buttons
         yrn = flow_handle.askfor_all(ask_for_list)
         if yrn in head_buttons:
@@ -41,9 +35,7 @@ def eat_food() -> (bool, game_type.Food):
                 return 1, now_food_data
         elif int(yrn) == start_id:
             if now_page_id == 0:
-                cache_contorl.panel_state[
-                    "SeeFoodBagListByFoodPanel"
-                ] = max_page
+                cache_contorl.panel_state["SeeFoodBagListByFoodPanel"] = max_page
             else:
                 cache_contorl.panel_state["SeeFoodBagListByFoodPanel"] -= 1
         elif int(yrn) == start_id + 1:
@@ -71,16 +63,10 @@ def eat_food_by_type(food_list: set) -> (bool, game_type.Food):
     while 1:
         eat_food_panel.see_food_bag_head()
         max_page = get_food_bag_page_max(len(food_data), 0)
-        now_page_id = int(
-            cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"]
-        )
-        food_buttons = eat_food_panel.see_food_bag_list_by_food_uid(
-            max_page, food_data
-        )
+        now_page_id = int(cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"])
+        food_buttons = eat_food_panel.see_food_bag_list_by_food_uid(max_page, food_data)
         start_id = len(food_buttons)
-        tail_buttons = eat_food_panel.see_food_bag_tail_cmd(
-            start_id, max_page, 1
-        )
+        tail_buttons = eat_food_panel.see_food_bag_tail_cmd(start_id, max_page, 1)
         askfor_list = food_buttons + tail_buttons
         yrn = int(flow_handle.askfor_all(askfor_list))
         if yrn < start_id:
@@ -92,9 +78,7 @@ def eat_food_by_type(food_list: set) -> (bool, game_type.Food):
                 return 1, now_food
         elif yrn == start_id:
             if now_page_id == 0:
-                cache_contorl.panel_state[
-                    "SeeFoodBagListByFoodTypePanel"
-                ] = max_page
+                cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"] = max_page
             else:
                 cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"] -= 1
         elif yrn == start_id + 1:

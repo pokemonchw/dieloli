@@ -47,9 +47,7 @@ def talk_move_3() -> List[str]:
 
 
 @talk.add_talk(
-    constant.Behavior.MOVE,
-    4,
-    {"NoPlayer", "InPlayerScene", "PlayerIsAdore", "IsWoman", "IsStudent"},
+    constant.Behavior.MOVE, 4, {"NoPlayer", "InPlayerScene", "PlayerIsAdore", "IsWoman", "IsStudent"},
 )
 def talk_move_4() -> List[str]:
     """

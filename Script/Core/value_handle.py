@@ -20,9 +20,7 @@ def get_region_list(now_data: Dict[any, int]) -> dict:
     now_data -- 需要进行计算权重的dict数据
     """
     sort_data = sorted_dict_for_values(now_data)
-    return dict(
-        zip(itertools.accumulate(sort_data.values()), sort_data.keys())
-    )
+    return dict(zip(itertools.accumulate(sort_data.values()), sort_data.keys()))
 
 
 def sorted_dict_for_values(old_dict: Dict[any, int]) -> dict:

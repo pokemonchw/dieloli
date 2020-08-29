@@ -26,23 +26,17 @@ def open_about_frame():
     打开设置菜单
     """
     root = Tk()
-    title_text = text_loading.get_text_data(
-        constant.FilePath.SYSTEM_TEXT_PATH, "About"
-    )["TitleName"]
+    title_text = text_loading.get_text_data(constant.FilePath.SYSTEM_TEXT_PATH, "About")["TitleName"]
     root.title(title_text)
     game_name = game_config.game_name
     name = Label(root, text=game_name)
     name.config(font=("Courier", 20))
     name.pack()
-    link_info = text_loading.get_text_data(
-        constant.FilePath.SYSTEM_TEXT_PATH, "About"
-    )["GoHome"]
+    link_info = text_loading.get_text_data(constant.FilePath.SYSTEM_TEXT_PATH, "About")["GoHome"]
     link = Label(root, text=link_info, fg="blue")
     link.pack()
     link.bind("<Button-1>", go_home)
-    license_info = text_loading.get_text_data(
-        constant.FilePath.SYSTEM_TEXT_PATH, "About"
-    )["Licenses"]
+    license_info = text_loading.get_text_data(constant.FilePath.SYSTEM_TEXT_PATH, "About")["Licenses"]
     licenese = Label(root, text=license_info, fg="blue")
     licenese.pack()
     licenese.bind("<Button-1>", go_license)

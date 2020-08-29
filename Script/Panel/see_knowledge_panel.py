@@ -8,9 +8,7 @@ def see_character_knowledge_panel(character_id: str):
     Keyword arguments:
     character_id -- 角色Id
     """
-    knowledge_text_data = text_loading.get_game_data(
-        constant.FilePath.KNOWLEDGE_PATH
-    )
+    knowledge_text_data = text_loading.get_game_data(constant.FilePath.KNOWLEDGE_PATH)
     character_knowledge = cache_contorl.character_data[character_id].knowledge
     for knowledge in knowledge_text_data:
         era_print.son_title_print(knowledge_text_data[knowledge]["Name"])
@@ -18,9 +16,7 @@ def see_character_knowledge_panel(character_id: str):
             info_list = [
                 knowledge_text_data[knowledge]["Knowledge"][skill]["Name"]
                 + ":"
-                + attr_text.get_level_color_text(
-                    character_knowledge[knowledge][skill]
-                )
+                + attr_text.get_level_color_text(character_knowledge[knowledge][skill])
                 for skill in character_knowledge[knowledge]
             ]
             era_print.list_print(info_list, 6, "center")

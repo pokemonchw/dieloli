@@ -60,13 +60,7 @@ def PythonSysPath(**kwargs):
     # The concurrent.futures module is part of the standard library on Python 3.
     interpreter_path = kwargs["interpreter_path"]
     major_version = int(
-        subprocess.check_output(
-            [
-                interpreter_path,
-                "-c",
-                "import sys; print( sys.version_info[ 0 ] )",
-            ]
-        )
+        subprocess.check_output([interpreter_path, "-c", "import sys; print( sys.version_info[ 0 ] )",])
         .rstrip()
         .decode("utf8")
     )
@@ -75,8 +69,7 @@ def PythonSysPath(**kwargs):
 
     sys_path[0:0] = dependencies
     sys_path.insert(
-        GetStandardLibraryIndexInSysPath(sys_path) + 1,
-        p.join(DIR_OF_THIRD_PARTY, "python-future", "src"),
+        GetStandardLibraryIndexInSysPath(sys_path) + 1, p.join(DIR_OF_THIRD_PARTY, "python-future", "src"),
     )
 
     return sys_path

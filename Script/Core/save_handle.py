@@ -50,9 +50,7 @@ def establish_save(save_id: str):
     game_verson = game_config.verson
     total_bodyfat_by_age = cache_contorl.total_bodyfat_by_age
     average_bodyfat_by_age = cache_contorl.average_bodyfat_by_age
-    total_number_of_people_of_all_ages = (
-        cache_contorl.total_number_of_people_of_all_ages
-    )
+    total_number_of_people_of_all_ages = cache_contorl.total_number_of_people_of_all_ages
     total_height_by_age = cache_contorl.total_height_by_age
     average_height_by_age = cache_contorl.average_height_by_age
     recipe_data = cache_contorl.recipe_data
@@ -169,7 +167,5 @@ def remove_save(save_id: str):
     if os.path.isdir(save_path):
         shutil.rmtree(save_path)
     else:
-        error_text = text_loading.get_text_data(
-            text_loading.error_path, "not_save_error"
-        )
+        error_text = text_loading.get_text_data(text_loading.error_path, "not_save_error")
         era_print.line_feed_print(error_text)

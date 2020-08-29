@@ -56,12 +56,8 @@ panel_state: Dict[str, int] = {}
 """ 面板状态 """
 max_save_page: int = 0
 """ 存档页面最大数量 """
-now_flow_id: str = ""
-""" 当前游戏控制流程id """
-old_flow_id: str = ""
-""" 上次游戏控制流程id """
-too_old_flow_id: str = ""
-""" 上上次游戏控制流程id """
+now_panel_id:str = ""
+""" 当前游面板id """
 course_data: dict = {}
 """ 各个年级各科目课时数据 """
 teacher_course_experience: dict = {}
@@ -94,7 +90,7 @@ wear_item_type_data: dict = {}
 """ 可穿戴道具类型数据 """
 course_time_status: dict = {}
 """ 当前上课时间状态 """
-adv_talk_data: Dict[int,Dict[int,Dict[int,callable]]] = {}
+adv_talk_data: Dict[int, Dict[int, Dict[int, callable]]] = {}
 """
 角色行为对应口上数据
 advid:行为id:口上id:口上对象
@@ -135,8 +131,13 @@ effect_target_table: Dict[str, set] = {}
 效果对应所需目标集合
 效果id:目标集合
 """
-premise_talk_table: Dict[int,Dict[int, Dict[int, set]]] = {}
+premise_talk_table: Dict[int, Dict[int, Dict[int, set]]] = {}
 """
 口上对应的所需前提集合
 advid:行为id:口上id:前提集合
+"""
+panel_data:Dict[str,callable] = {}
+"""
+面板id对应的面板绘制函数集合
+面板id:面板绘制函数对象
 """

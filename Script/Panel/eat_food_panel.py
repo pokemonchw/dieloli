@@ -15,9 +15,7 @@ def see_food_bag_head():
     """
     查看食物背包食物列表顶部面板
     """
-    title = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "157"
-    )
+    title = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "157")
     era_print.little_title_print(title)
 
 
@@ -35,13 +33,7 @@ def see_food_bag_head_cmd(now_panel: str) -> list:
     cmd_list = list(button_data.keys())
     return_list = list(button_data.values())
     input_s = cmd_button_queue.option_str(
-        "",
-        6,
-        "center",
-        askfor=False,
-        cmd_list_data=return_list,
-        null_cmd=now_panel,
-        return_data=cmd_list,
+        "", 6, "center", askfor=False, cmd_list_data=return_list, null_cmd=now_panel, return_data=cmd_list,
     )
     return input_s
 
@@ -60,9 +52,7 @@ def see_food_bag_list(food_name_list: list) -> list:
     now_page_start_id = now_page_id * now_page_max
     now_page_end_id = now_page_start_id + now_page_max
     if not len(food_name_list):
-        era_print.normal_print(
-            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "45")
-        )
+        era_print.normal_print(text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "45"))
         era_print.line_feed_print()
         return []
     if now_page_end_id > len(food_name_list):
@@ -71,9 +61,7 @@ def see_food_bag_list(food_name_list: list) -> list:
     for i in range(now_page_start_id, now_page_end_id):
         food_name = list(food_name_list.keys())[i]
         text_list.append(food_name)
-    return cmd_button_queue.option_int(
-        "", 4, "left", 1, 0, "center", 0, text_list
-    )
+    return cmd_button_queue.option_int("", 4, "left", 1, 0, "center", 0, text_list)
 
 
 def see_food_bag_list_by_food_uid(max_page: int, food_list: list) -> list:
@@ -87,16 +75,12 @@ def see_food_bag_list_by_food_uid(max_page: int, food_list: list) -> list:
     """
     era_print.restart_line_print("+")
     tag_text_index = 0
-    now_page_id = int(
-        cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"]
-    )
+    now_page_id = int(cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"])
     now_page_max = game_config.food_shop_item_max
     now_page_start_id = now_page_id * now_page_max
     now_page_end_id = now_page_start_id + now_page_max
     if not len(food_list):
-        era_print.normal_print(
-            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "34")
-        )
+        era_print.normal_print(text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "34"))
         era_print.line_feed_print()
         return []
     if now_page_end_id > len(food_list):
@@ -107,44 +91,30 @@ def see_food_bag_list_by_food_uid(max_page: int, food_list: list) -> list:
     for i in range(now_page_start_id, now_page_end_id):
         now_food = food_list[i]
         if now_food.recipe == -1:
-            food_config = text_loading.get_text_data(
-                constant.FilePath.FOOD_PATH, now_food.id
-            )
+            food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, now_food.id)
             food_name = food_config["Name"]
         else:
             food_name = cache_contorl.recipe_data[now_food.recipe].name
         now_index = cmd_button_queue.id_index(tag_text_index)
         food_text = now_index + " " + food_name
-        food_text += " " + text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "154"
-        )
+        food_text += " " + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "154")
         if "Hunger" in now_food.feel:
             food_text += str(round(now_food.feel["Hunger"], 2))
         else:
             food_text += "0"
-        food_text += " " + text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "153"
-        )
+        food_text += " " + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "153")
         if "Thirsty" in now_food.feel:
             food_text += str(round(now_food.feel["Thirsty"], 2))
         else:
             food_text += "0"
         food_text += (
             " "
-            + text_loading.get_text_data(
-                constant.FilePath.STAGE_WORD_PATH, "155"
-            )
+            + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "155")
             + str(now_food.weight)
         )
-        food_text += text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "156"
-        )
-        food_text += " " + text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "152"
-        )
-        food_text += text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "151"
-        )[now_food.quality]
+        food_text += text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "156")
+        food_text += " " + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "152")
+        food_text += text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "151")[now_food.quality]
         text_list.append(food_text)
         now_fix_text = text_handle.align(food_text, "center", True)
         if fix_text == "":
@@ -163,9 +133,7 @@ def see_food_bag_list_by_food_uid(max_page: int, food_list: list) -> list:
     return input_s
 
 
-def see_food_bag_tail_cmd(
-    start_id: int, max_page: int, type_judge: bool
-) -> list:
+def see_food_bag_tail_cmd(start_id: int, max_page: int, type_judge: bool) -> list:
     """
     食物背包底部控制面板
     Keyword arguments:
@@ -177,22 +145,13 @@ def see_food_bag_tail_cmd(
     """
     now_page_id = int(cache_contorl.panel_state["SeeFoodBagListByFoodPanel"])
     if type_judge:
-        now_page_id = int(
-            cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"]
-        )
+        now_page_id = int(cache_contorl.panel_state["SeeFoodBagListByFoodTypePanel"])
     page_text = f"({now_page_id}/{max_page})"
     era_print.page_line_print("-", page_text)
     era_print.normal_print("\n")
-    cmd_list = text_loading.get_text_data(
-        constant.FilePath.CMD_PATH, "changeSavePage"
-    )
+    cmd_list = text_loading.get_text_data(constant.FilePath.CMD_PATH, "changeSavePage")
     yrn = cmd_button_queue.option_int(
-        None,
-        3,
-        askfor=False,
-        cmd_size="center",
-        start_id=start_id,
-        cmd_list_data=cmd_list,
+        None, 3, askfor=False, cmd_size="center", start_id=start_id, cmd_list_data=cmd_list,
     )
     return yrn
 
@@ -207,16 +166,14 @@ def eat_food_now_panel(now_food: game_type.Food) -> list:
     """
     now_text = ""
     if now_food.recipe == -1:
-        food_config = text_loading.get_text_data(
-            constant.FilePath.FOOD_PATH, now_food.id
+        food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, now_food.id)
+        now_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "44").format(
+            FoodName=food_config["Name"]
         )
-        now_text = text_loading.get_text_data(
-            constant.FilePath.MESSAGE_PATH, "44"
-        ).format(FoodName=food_config["Name"])
     else:
         food_recipe = cache_contorl.recipe_data[now_food.recipe]
-        now_text = text_loading.get_text_data(
-            constant.FilePath.MESSAGE_PATH, "44"
-        ).format(FoodName=food_recipe.name)
+        now_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "44").format(
+            FoodName=food_recipe.name
+        )
     era_print.line_feed_print(now_text)
     return cmd_button_queue.option_int(constant.CmdMenu.EAT_FOOD_NOW_PANEL)

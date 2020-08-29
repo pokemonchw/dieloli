@@ -113,13 +113,7 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
 
 
 def print_cmd(
-    cmd_str,
-    cmd_number,
-    cmd_func=null_func,
-    arg=(),
-    kw={},
-    normal_style="standard",
-    on_style="onbutton",
+    cmd_str, cmd_number, cmd_func=null_func, arg=(), kw={}, normal_style="standard", on_style="onbutton",
 ):
     """
     输出命令数字
@@ -168,9 +162,7 @@ def _cmd_valid(order_number):
     Keyword arguments:
     order_number -- 对应命令数字
     """
-    re = (order_number in cmd_map.keys()) and (
-        cmd_map[int(order_number)] != null_func
-    )
+    re = (order_number in cmd_map.keys()) and (cmd_map[int(order_number)] != null_func)
     return re
 
 
@@ -250,10 +242,7 @@ def askfor_all(list, print_order=False):
         else:
             io_init.era_print(order + "\n")
             io_init.era_print(
-                text_loading.get_text_data(
-                    constant.FilePath.ERROR_PATH, "noInputListError"
-                )
-                + "\n"
+                text_loading.get_text_data(constant.FilePath.ERROR_PATH, "noInputListError") + "\n"
             )
             continue
 
@@ -276,10 +265,7 @@ def askfor_int(list, print_order=False):
         else:
             io_init.era_print(order + "\n")
             io_init.era_print(
-                text_loading.get_text_data(
-                    constant.FilePath.ERROR_PATH, "noInputListError"
-                )
-                + "\n"
+                text_loading.get_text_data(constant.FilePath.ERROR_PATH, "noInputListError") + "\n"
             )
             continue
 

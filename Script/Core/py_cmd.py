@@ -15,7 +15,7 @@ bind_cmd = flow_handle.bind_cmd
 # 输出命令
 def pcmd(
     cmd_str: str,
-    cmd_id: int,
+    cmd_id: str,
     cmd_func=flow_handle.null_func,
     arg=(),
     kw={},
@@ -26,7 +26,7 @@ def pcmd(
     打印一条指令
     Keyword arguments:
     cmd_str -- 命令对应文字
-    cmd_id -- 命令数字
+    cmd_id -- 命令响应文本
     cmd_func -- 命令函数
     arg -- 传给命令函数的顺序参数
     kw -- 传给命令函数的字典参数
@@ -39,9 +39,7 @@ def pcmd(
     global last_char
     if len(cmd_str) > 0:
         last_char = cmd_str[-1:]
-    flow_handle.print_cmd(
-        cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style
-    )
+    flow_handle.print_cmd(cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style)
 
 
 # 获得一个没有用过的命令编号

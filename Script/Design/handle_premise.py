@@ -86,10 +86,7 @@ def handle_in_breakfast_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    if (
-        character_data.course.course_index <= 2
-        and not character_data.course.in_course
-    ):
+    if character_data.course.course_index <= 2 and not character_data.course.in_course:
         return 1
     return 0
 
@@ -104,10 +101,22 @@ def handle_in_lunch_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    if (
-        character_data.course.course_index >= 4
-        and character_data.course.course_index <= 6
-    ):
+    if character_data.course.course_index >= 4 and character_data.course.course_index <= 6:
+        return 1
+    return 0
+
+
+@add_premise("InDinnerTime")
+def handle_in_dinner_time(character_id: int) -> int:
+    """
+    校验当前是否处于晚餐时间段
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache_contorl.character_data[character_id]
+    if character_data.course.course_index >= 7:
         return 1
     return 0
 
@@ -443,9 +452,7 @@ def handle_target_is_futa_or_woman(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
+    target_data = cache_contorl.character_data[character_data.target_character_id]
     if target_data.sex in {"Futa", "Woman"}:
         return 1
     return 0
@@ -461,9 +468,7 @@ def handle_target_is_futa_or_man(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
+    target_data = cache_contorl.character_data[character_data.target_character_id]
     if target_data.sex in {"Man", "Woman"}:
         return 1
     return 0
@@ -509,9 +514,7 @@ def handle_target_same_sex(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
+    target_data = cache_contorl.character_data[character_data.target_character_id]
     if target_data.sex == character_data.sex:
         return 1
     return 0
@@ -527,13 +530,8 @@ def handle_target_age_similar(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
-    if (
-        character_data.age >= target_data.age - 2
-        and character_data.age <= target_data.age + 2
-    ):
+    target_data = cache_contorl.character_data[character_data.target_character_id]
+    if character_data.age >= target_data.age - 2 and character_data.age <= target_data.age + 2:
         return 1
     return 0
 
@@ -548,13 +546,9 @@ def handle_target_average_height_similar(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
+    target_data = cache_contorl.character_data[character_data.target_character_id]
     age_tem = attr_calculation.judge_age_group(target_data.age)
-    average_height = cache_contorl.average_height_by_age[age_tem][
-        target_data.sex
-    ]
+    average_height = cache_contorl.average_height_by_age[age_tem][target_data.sex]
     if (
         target_data.height["NowHeight"] >= average_height * 0.95
         and target_data.height["NowHeight"] <= average_height * 1.05
@@ -573,13 +567,9 @@ def handle_target_average_height_low(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
+    target_data = cache_contorl.character_data[character_data.target_character_id]
     age_tem = attr_calculation.judge_age_group(target_data.age)
-    average_height = cache_contorl.average_height_by_age[age_tem][
-        target_data.sex
-    ]
+    average_height = cache_contorl.average_height_by_age[age_tem][target_data.sex]
     if target_data.height["NowHeight"] <= average_height * 0.95:
         return 1
     return 0
@@ -610,17 +600,10 @@ def handle_target_average_stature_similar(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
+    target_data = cache_contorl.character_data[character_data.target_character_id]
     age_tem = attr_calculation.judge_age_group(target_data.age)
-    average_bodyfat = cache_contorl.average_bodyfat_by_age[age_tem][
-        target_data.sex
-    ]
-    if (
-        target_data.bodyfat >= average_bodyfat * 0.95
-        and target_data.bodyfat <= average_bodyfat * 1.05
-    ):
+    average_bodyfat = cache_contorl.average_bodyfat_by_age[age_tem][target_data.sex]
+    if target_data.bodyfat >= average_bodyfat * 0.95 and target_data.bodyfat <= average_bodyfat * 1.05:
         return 1
     return 0
 
@@ -635,9 +618,7 @@ def handle_target_not_put_underwear(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
+    target_data = cache_contorl.character_data[character_data.target_character_id]
     if target_data.put_on["Underwear"] == "":
         return 1
     return 0
@@ -653,9 +634,7 @@ def handle_target_put_on_skirt(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    target_data = cache_contorl.character_data[
-        character_data.target_character_id
-    ]
+    target_data = cache_contorl.character_data[character_data.target_character_id]
     if target_data.put_on["Skirt"] == "":
         return 0
     return 1
@@ -714,10 +693,7 @@ def handle_leave_player_scene(character_id: int) -> int:
     int -- 权重
     """
     now_character_data = cache_contorl.character_data[character_id]
-    if (
-        now_character_data.behavior["MoveSrc"]
-        == cache_contorl.character_data[0].position
-    ):
+    if now_character_data.behavior["MoveSrc"] == cache_contorl.character_data[0].position:
         return 1
     return 0
 

@@ -15,9 +15,7 @@ def main_frame_panel() -> list:
     cmd_list = []
     character_id = cache_contorl.character_data[0].target_character_id
     character_data = cache_contorl.character_data[character_id]
-    title_text = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "64"
-    )
+    title_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "64")
     era_print.little_title_print(title_text)
     date_text = game_time.get_date_text()
     era_print.normal_print(date_text)
@@ -32,18 +30,14 @@ def main_frame_panel() -> list:
     gold_text = attr_text.get_gold_text(character_id)
     era_print.line_feed_print(gold_text)
     attr_print.print_hp_and_mp_bar(character_id)
-    main_menu_text = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "68"
-    )
+    main_menu_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "68")
     era_print.son_title_print(main_menu_text)
     era_print.line_feed_print("\n")
     ask_for_main_menu = cmd_button_queue.option_int(
         constant.CmdMenu.MAIN_MENU, 3, "left", askfor=False, cmd_size="center"
     )
     cmd_list = cmd_list + ask_for_main_menu
-    system_menu_text = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "69"
-    )
+    system_menu_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "69")
     era_print.son_title_print(system_menu_text)
     era_print.line_feed_print()
     system_menu_start_id = len(ask_for_main_menu)

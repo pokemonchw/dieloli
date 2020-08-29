@@ -9,9 +9,9 @@ def handle_settle_behavior(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    cache_contorl.settle_behavior_data[
-        cache_contorl.character_data[character_id].behavior["BehaviorId"]
-    ](character_id)
+    cache_contorl.settle_behavior_data[cache_contorl.character_data[character_id].behavior["BehaviorId"]](
+        character_id
+    )
 
 
 def add_settle_behavior(behavior_id: int):

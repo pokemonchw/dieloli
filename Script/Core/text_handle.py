@@ -1,10 +1,9 @@
 from wcwidth import wcswidth
-from Script.Core import game_config, text_loading, rich_text, constant
+from Script.Core import text_loading, rich_text, constant
+from Script.Config import game_config
 
 
-def align(
-    text: str, just="left", only_fix=False, columns=1, text_width=None
-) -> str:
+def align(text: str, just="left", only_fix=False, columns=1, text_width=None) -> str:
     """
     文本对齐处理函数
     Keyword arguments:
@@ -18,7 +17,7 @@ def align(
     """
     count_index = get_text_index(text)
     if text_width is None:
-        width = game_config.text_width
+        width = game_config.config_normal.text_width
         width = int(width / columns)
     else:
         width = int(text_width)
@@ -38,11 +37,7 @@ def align(
         if only_fix:
             return " " * int(width_i - count_i)
         else:
-            return (
-                " " * int(width_i - count_i)
-                + text
-                + " " * int(width_i - count_i - 2)
-            )
+            return " " * int(width_i - count_i) + text + " " * int(width_i - count_i - 2)
 
 
 def get_text_index(text: str) -> int:
@@ -51,13 +46,10 @@ def get_text_index(text: str) -> int:
     Keyword arguments:
     text -- 要进行长度计算的文本
     """
-    text_style_list = rich_text.set_rich_text_print(text, "standard")
+    text_style_list = rich_text.get_rich_text_print(text, "standard")
     text_index = 0
     style_width = 0
-    bar_list = list(
-        text_loading.get_game_data(constant.FilePath.BAR_CONFIG_PATH).keys()
-    )
-    style_name_list = game_config.get_font_data_list() + bar_list
+    style_name_list = list(game_config.config_font_data.keys())
     for i in range(0, len(style_name_list)):
         style_text_head = "<" + style_name_list[i] + ">"
         style_text_tail = "</" + style_name_list[i] + ">"
@@ -69,13 +61,7 @@ def get_text_index(text: str) -> int:
                 text = text.replace(style_text_head, "")
                 text = text.replace(style_text_tail, "")
     for i in range(len(text)):
-        if text_style_list[i] in bar_list:
-            text_width = text_loading.get_text_data(
-                constant.FilePath.BAR_CONFIG_PATH, text_style_list[i]
-            )["width"]
-            text_index = text_index + int(text_width)
-        else:
-            text_index += wcswidth(text[i])
+        text_index += wcswidth(text[i])
     return text_index + style_width
 
 
