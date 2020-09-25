@@ -4,23 +4,23 @@ from Script.Core import cache_contorl, text_loading, value_handle, constant
 from Script.Design import character
 
 clothing_tag_text_list = {
-    "Sexy": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "118"),
-    "Handsome": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "119"),
-    "Elegant": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "120"),
-    "Fresh": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "121"),
-    "Sweet": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "122"),
-    "Warm": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "123"),
-    "Cleanliness": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "124"),
+    "Sexy": "性感",
+    "Handsome": "帅气",
+    "Elegant": "典雅",
+    "Fresh": "清新",
+    "Sweet": "可爱",
+    "Warm": "保暖",
+    "Cleanliness": "清洁",
 }
 clothing_type_text_list = {
-    "Coat": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "41"),
-    "Underwear": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "42"),
-    "Pants": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "43"),
-    "Skirt": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "44"),
-    "Shoes": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "45"),
-    "Socks": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "46"),
-    "Bra": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "47"),
-    "Underpants": text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "48"),
+    "Coat": "外套",
+    "Underwear": "上衣",
+    "Pants": "裤子",
+    "Skirt": "裙子",
+    "Shoes": "鞋子",
+    "Socks": "袜子",
+    "Bra": "胸罩",
+    "Underpants": "内裤",
 }
 
 
