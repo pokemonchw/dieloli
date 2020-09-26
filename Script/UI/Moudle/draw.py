@@ -1,7 +1,8 @@
 from typing import List
-from Script.Core import era_print,text_handle,io_init,rich_text,text_loading,constant,py_cmd,flow_handle
+from Script.Core import era_print,text_handle,io_init,rich_text,constant,py_cmd,flow_handle
+from Script.Config import game_config
 
-bar_list = set(text_loading.get_game_data(constant.FilePath.BAR_CONFIG_PATH).keys())
+bar_list = set(game_config.config_bar_data.keys())
 
 
 class NormalDraw:
@@ -89,16 +90,16 @@ class BarDraw:
             if self.max_width > 1:
                 proportion = int(value / max_value * self.max_width)
             fix_bar = self.max_width - proportion
-            style_data = text_loading.get_text_data(constant.FilePath.BAR_CONFIG_PATH, bar_id)
+            style_data = game_config.config_bar[game_config.config_bar_data[bar_id]]
             for i in range(proportion):
                 now_draw = ImageDraw()
-                now_draw.image_name = style_data["truebar"]
-                now_draw.width = style_data["width"]
+                now_draw.image_name = style_data.ture_bar
+                now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
             for i in range(fix_bar):
                 now_draw = ImageDraw()
-                now_draw.image_name = style_data["nullbar"]
-                now_draw.width = style_data["width"]
+                now_draw.image_name = style_data.null_bar
+                now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
 
     def draw(self):

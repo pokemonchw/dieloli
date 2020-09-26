@@ -97,17 +97,11 @@ class Character:
         """ 角色当前状态 """
         self.engraving: Dict[str, int] = {}
         """ 角色的刻印数据 """
-        self.clothing: dict = {
-            "Coat": {},
-            "Underwear": {},
-            "Pants": {},
-            "Skirt": {},
-            "Shoes": {},
-            "Socks": {},
-            "Bra": {},
-            "Underpants": {},
-        }
-        """ 角色拥有的服装数据 """
+        self.clothing: Dict[int,Dict[UUID,Clothing]] = {}
+        """
+        角色拥有的服装数据
+        服装穿戴位置:服装唯一id:服装数据
+        """
         self.item: dict = {}
         """ 角色拥有的道具数据 """
         self.height: dict = {}
@@ -327,3 +321,33 @@ class NormalConfig:
     """ 食物商店单页显示道具数上限 """
     food_shop_type_max:int
     """ 食物商店单页显示食物种类数上限 """
+
+
+class Clothing:
+    """ 服装数据结构体 """
+
+    def __init__(self):
+        self.uid:UUID = ""
+        """ 服装对象的唯一id """
+        self.tem_id:int = 0
+        """ 服装配表id """
+        self.sexy:int = 0
+        """ 服装性感属性 """
+        self.handsome:int = 0
+        """ 服装帅气属性 """
+        self.elegant:int = 0
+        """ 服装典雅属性 """
+        self.fresh:int = 0
+        """ 服装清新属性 """
+        self.sweet:int = 0
+        """ 服装可爱属性 """
+        self.warm:int = 0
+        """ 服装保暖属性 """
+        self.cleanliness:int = 0
+        """ 服装清洁属性 """
+        self.price:int = 0
+        """ 服装价值属性 """
+        self.evaluation:str = ""
+        """ 服装评价文本 """
+        self.wear:int = 0
+        """ 穿戴部位 """

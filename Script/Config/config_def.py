@@ -37,6 +37,19 @@ class Organ:
     """ 名字 """
 
 
+class ClothingSuit:
+    """ 套装配置数据 """
+
+    cid: int
+    """ 套装id """
+    clothing_id: int
+    """ 服装id """
+    suit_type: int
+    """ 套装编号 """
+    sex: int
+    """ 性别限制 """
+
+
 class AgeJudgeSexExperienceTem:
     """ 不同性别不同年龄段对应生成不同性经验模板的权重 """
 
@@ -61,6 +74,15 @@ class HitPointTem:
     """ 最大值 """
 
 
+class CharacterStateType:
+    """ 角色状态类型 """
+
+    cid: int
+    """ 类型id """
+    name: str
+    """ 类型名 """
+
+
 class WeightTem:
     """ 体重模板对应体重范围 """
 
@@ -70,6 +92,15 @@ class WeightTem:
     """ 最小值 """
     max_value: float
     """ 最大值 """
+
+
+class ClothingTag:
+    """ 服装属性标签 """
+
+    cid: int
+    """ 标签id """
+    name: str
+    """ 标签名 """
 
 
 class ChestTem:
@@ -140,6 +171,15 @@ class EndAgeTem:
     """ 平均寿命 """
 
 
+class ClothingEvaluate:
+    """ 服装评价描述 """
+
+    cid: int
+    """ 评价id """
+    name: str
+    """ 评价名 """
+
+
 class ClothingTem:
     """ 服装模板 """
 
@@ -168,6 +208,17 @@ class FoodQualityWeight:
     """ 食物品质 """
     weight: int
     """ 权重 """
+
+
+class Book:
+    """ 书籍配置表 """
+
+    cid: int
+    """ 书本id """
+    name: str
+    """ 名字 """
+    info: str
+    """ 介绍 """
 
 
 class RandomNpcSexWeight:
@@ -266,6 +317,17 @@ class ClothingUseType:
     """ 用途id """
     name: str
     """ 用途名字 """
+
+
+class CharacterState:
+    """ 角色状态属性表 """
+
+    cid: int
+    """ 配表id """
+    name: str
+    """ 状态名字 """
+    type: int
+    """ 状态类型 """
 
 
 class BodyFatTem:

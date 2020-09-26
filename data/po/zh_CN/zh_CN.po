@@ -28,6 +28,69 @@ msgstr "阴道"
 msgid "肛门"
 msgstr "肛门"
 
+msgid "性感受"
+msgstr "性感受"
+
+msgid "心灵感受"
+msgstr "心灵感受"
+
+msgid "肉体感受"
+msgstr "肉体感受"
+
+msgid "性感"
+msgstr "性感"
+
+msgid "帅气"
+msgstr "帅气"
+
+msgid "典雅"
+msgstr "典雅"
+
+msgid "清新"
+msgstr "清新"
+
+msgid "可爱"
+msgstr "可爱"
+
+msgid "保暖"
+msgstr "保暖"
+
+msgid "清洁"
+msgstr "清洁"
+
+msgid "价值"
+msgstr "价值"
+
+msgid "破旧的"
+msgstr "破旧的"
+
+msgid "令人介怀的"
+msgstr "令人介怀的"
+
+msgid "感觉不错的"
+msgstr "感觉不错的"
+
+msgid "引人注目的"
+msgstr "引人注目的"
+
+msgid "令人狂热的"
+msgstr "令人狂热的"
+
+msgid "华丽绝伦的"
+msgstr "华丽绝伦的"
+
+msgid "皇室御用的"
+msgstr "皇室御用的"
+
+msgid "艺术般的"
+msgstr "艺术般的"
+
+msgid "神圣的"
+msgstr "神圣的"
+
+msgid "世界第一的"
+msgstr "世界第一的"
+
 msgid "深衣"
 msgstr "深衣"
 
@@ -646,6 +709,18 @@ msgstr "四角裤"
 msgid "四角裤，或称平口裤，是一种男装内裤，也有女用类型．其设计源自拳击手所穿的短裤，多以棉料等材质制成，最大的特质为宽松透气．"
 msgstr "四角裤，或称平口裤，是一种男装内裤，也有女用类型．其设计源自拳击手所穿的短裤，多以棉料等材质制成，最大的特质为宽松透气．"
 
+msgid "小学一年级语文课本"
+msgstr "小学一年级语文课本"
+
+msgid "小学一年级语文课使用的标准学习教材"
+msgstr "小学一年级语文课使用的标准学习教材"
+
+msgid "小学一年级数学课本"
+msgstr "小学一年级数学课本"
+
+msgid "小学一年级数学课使用的标准学习教材"
+msgstr "小学一年级数学课使用的标准学习教材"
+
 msgid "外套"
 msgstr "外套"
 
@@ -690,4 +765,91 @@ msgstr "表演"
 
 msgid "情趣"
 msgstr "情趣"
+
+msgid "嘴部快感"
+msgstr "嘴部快感"
+
+msgid "胸部快感"
+msgstr "胸部快感"
+
+msgid "阴道快感"
+msgstr "阴道快感"
+
+msgid "阴蒂快感"
+msgstr "阴蒂快感"
+
+msgid "肛门快感"
+msgstr "肛门快感"
+
+msgid "阴茎快感"
+msgstr "阴茎快感"
+
+msgid "阴道润滑"
+msgstr "阴道润滑"
+
+msgid "肛门润滑"
+msgstr "肛门润滑"
+
+msgid "快乐"
+msgstr "快乐"
+
+msgid "痛苦"
+msgstr "痛苦"
+
+msgid "渴望"
+msgstr "渴望"
+
+msgid "恐惧"
+msgstr "恐惧"
+
+msgid "反感"
+msgstr "反感"
+
+msgid "羞耻"
+msgstr "羞耻"
+
+msgid "抑郁"
+msgstr "抑郁"
+
+msgid "傲慢"
+msgstr "傲慢"
+
+msgid "嫉妒"
+msgstr "嫉妒"
+
+msgid "暴怒"
+msgstr "暴怒"
+
+msgid "懒惰"
+msgstr "懒惰"
+
+msgid "贪婪"
+msgstr "贪婪"
+
+msgid "暴食"
+msgstr "暴食"
+
+msgid "色欲"
+msgstr "色欲"
+
+msgid "温暖"
+msgstr "温暖"
+
+msgid "疼痛"
+msgstr "疼痛"
+
+msgid "眩晕"
+msgstr "眩晕"
+
+msgid "疲惫"
+msgstr "疲惫"
+
+msgid "迷醉"
+msgstr "迷醉"
+
+msgid "饥饿"
+msgstr "饥饿"
+
+msgid "口渴"
+msgstr "口渴"
 

@@ -1,5 +1,5 @@
 from wcwidth import wcswidth
-from Script.Core import text_loading, rich_text, constant
+from Script.Core import rich_text, constant
 from Script.Config import game_config
 
 

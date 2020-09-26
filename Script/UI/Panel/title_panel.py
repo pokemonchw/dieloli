@@ -6,7 +6,7 @@ from Script.Design import handle_panel
 config_normal = game_config.config_normal
 
 @handle_panel.add_panel("title")
-def title_panel:
+def title_panel():
     """ 绘制游戏标题菜单 """
     width = config_normal.text_width
     draw.LineDraw("=").draw()

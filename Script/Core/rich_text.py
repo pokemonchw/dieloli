@@ -1,6 +1,5 @@
 from Script.Core import (
     cache_contorl,
-    text_loading,
     dictionaries,
     constant,
 )
@@ -75,10 +74,7 @@ def remove_rich_cache(string: str) -> str:
     string -- 原始文本
     """
     string = dictionaries.handle_text(string)
-    bar_list = list(
-        text_loading.get_game_data(constant.FilePath.BAR_CONFIG_PATH).keys()
-    )
-    style_name_list = game_config.get_font_data_list() + bar_list
+    style_name_list = game_config.get_font_data_list()
     for i in range(0, len(style_name_list)):
         style_text_head = "<" + style_name_list[i] + ">"
         style_text_tail = "</" + style_name_list[i] + ">"

@@ -1,3 +1,4 @@
+from functools import wraps
 from Script.Core import cache_contorl
 
 def add_panel(panel:str) -> callable:

@@ -3,12 +3,11 @@ import time
 import os
 from Script.Core import (
     cache_contorl,
-    text_loading,
     text_handle,
-    game_config,
     io_init,
     constant,
 )
+from Script.Config import game_config
 
 
 def null_func():
@@ -242,7 +241,7 @@ def askfor_all(list, print_order=False):
         else:
             io_init.era_print(order + "\n")
             io_init.era_print(
-                text_loading.get_text_data(constant.FilePath.ERROR_PATH, "noInputListError") + "\n"
+                "您输入的选项无效，请重试\n"
             )
             continue
 
@@ -311,8 +310,8 @@ def init_cache():
         "SeeFoodBagListByFoodPanel": 0,
         "SeeFoodBagListByFoodTypePanel": 0,
     }
-    cache_contorl.max_save_page = game_config.save_page
-    cache_contorl.text_wait = float(game_config.text_wait)
+    cache_contorl.max_save_page = game_config.config_normal.save_page
+    cache_contorl.text_wait = float(game_config.config_normal.text_wait)
     cache_contorl.random_npc_list = []
     cache_contorl.npc_tem_data = []
     cache_contorl.now_flow_id = "title_frame"

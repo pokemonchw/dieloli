@@ -3,9 +3,9 @@ from Script.Core import (
     flow_handle,
     io_init,
     key_listion_event,
-    game_config,
     cache_contorl,
 )
+from Script.Config import game_config
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC = "no_event_func"
@@ -28,7 +28,7 @@ def init(main_flow: object):
     # 载入按键监听
     key_listion_event.on_wframe_listion()
     # 设置背景颜色
-    io_init.set_background(cache_contorl.game_data["core_cfg"]["background_color"])
+    io_init.set_background(game_config.config_normal.background)
     # 初始化字体
     io_init.init_style()
     # 初始化地图数据

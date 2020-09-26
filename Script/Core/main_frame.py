@@ -21,11 +21,7 @@ from tkinter import (
     Entry,
 )
 from Script.Core import (
-    game_config,
-    text_loading,
     cache_contorl,
-    setting_frame,
-    about_frame,
     text_handle,
     constant,
 )

@@ -1,6 +1,6 @@
 import os
 import configparser
-from typing import Dict
+from typing import Dict,List
 from Script.Config import config_def
 from Script.Core import game_type,json_handle
 
@@ -12,7 +12,7 @@ config_data = {}
 """ 原始json数据 """
 config_age_judge_sex_experience_tem:Dict[int,config_def.AgeJudgeSexExperienceTem] = {}
 """ 不同性别不同年龄段对应生成不同性经验模板的权重 """
-config_age_judge_sex_experience_tem_data:Dict[int,Dict[int,Dict[int,int]]]
+config_age_judge_sex_experience_tem_data:Dict[int,Dict[int,Dict[int,int]]] = {}
 """
 不同性别不同年龄段对应生成不同性经验模板的配置数据
 性别:年龄段:性经验模板:权重
@@ -32,23 +32,47 @@ config_body_fat_tem_data:Dict[int,Dict[int,int]] = {}
 性别划分的体脂率模板对应范围数据
 性别:体脂率范围:体脂率范围配置id
 """
+config_book:Dict[int,config_def.Book] = {}
+""" 书籍配表数据 """
+config_character_statue:Dict[int,config_def.CharacterState] = {}
+""" 角色状态属性配表数据 """
+config_character_statue_type:Dict[int,config_def.CharacterStateType] = {}
+""" 角色状态类型配表数据 """
 config_chest:Dict[int,config_def.ChestTem] = {}
 """ 罩杯配置数据 """
-config_clothing_collocational:[int,config_def.ClothingCollocational] = {}
-""" 服装搭配模板配置数据 """
-config_clothing_tem:[int,config_def.ClothingTem]
+config_clothing_collocational:Dict[int,config_def.ClothingCollocational] = {}
+""" 服装搭配模板配置 """
+config_clothing_collocational_data:Dict[int,Dict[int,List[config_def.ClothingCollocational]]] = {}
+"""
+服装搭配模板配置数据
+服装id:搭配位置:搭配配置列表
+"""
+config_clothing_evaluate:Dict[int,config_def.ClothingEvaluate] = {}
+""" 服装评价配置数据 """
+config_clothing_evaluate_list:List[str] = []
+""" 服装评价配置列表 """
+config_clothing_suit:Dict[int,config_def.ClothingSuit] = {}
+""" 衣服套装配置列表 """
+config_clothing_suit_data:Dict[int,Dict[int,set]] = {}
+"""
+衣服套装搭配数据
+套装编号:性别id:服装集合
+"""
+config_clothing_tag:Dict[int,config_def.ClothingTag] = {}
+""" 服装属性标签配置数据 """
+config_clothing_tem:Dict[int,config_def.ClothingTem] = {}
 """ 服装模板配置数据 """
-config_clothing_type:[int,config_def.ClothingType]
+config_clothing_type:Dict[int,config_def.ClothingType] = {}
 """ 衣服种类配置数据 """
-config_clothing_use_type:[int,config_def.ClothingUseType]
+config_clothing_use_type:Dict[int,config_def.ClothingUseType] = {}
 """ 衣服用途配置数据 """
-config_end_age_tem[int,config_def.EndAgeTem] = {}
+config_end_age_tem:Dict[int,config_def.EndAgeTem] = {}
 """ 最终年龄范围配置模板 """
 config_font:Dict[int,config_def.FontConfig] = {}
 """ 字体配置数据 """
 config_font_data:Dict[str,int] = {}
 """ 字体名字对应字体id """
-config_food_quality_weight:Dict[int,config_def.FoodQualityWeight]
+config_food_quality_weight:Dict[int,config_def.FoodQualityWeight] = {}
 """ 烹饪技能等级制造食物品质权重配置 """
 config_food_quality_weight_data:Dict[int,Dict[int,int]] = {}
 """
@@ -61,15 +85,15 @@ config_manapoint_tem:Dict[int,config_def.ManaPointTem] = {}
 """ MP模板对应平均值 """
 config_organ:Dict[int,config_def.Organ] = {}
 """ 器官种类配置 """
-config_random_sex_weight[int,config_def.RandomNpcSexWeight] = {}
+config_random_sex_weight:Dict[int,config_def.RandomNpcSexWeight] = {}
 """ 生成随机npc时性别权重配置数据 """
-config_sex_experience[int,config_def.SexExperience] = {}
+config_sex_experience:Dict[int,config_def.SexExperience] = {}
 """ 性经验丰富程度模板对应器官性经验模板 """
-config_sex_experience_tem[int,config_def.SexExperienceTem] = {}
+config_sex_experience_tem:Dict[int,config_def.SexExperienceTem] = {}
 """ 器官类型性经验丰富程度对应经验范围 """
-config_sex_tem[int,config_def.SexTem] = {}
+config_sex_tem:Dict[int,config_def.SexTem] = {}
 """ 性别对应描述和性别器官模板 """
-config_weight_tem[int,config_def.WeightTem] = {}
+config_weight_tem:Dict[int,config_def.WeightTem] = {}
 """ 体重模板对应体重范围 """
 
 
@@ -137,6 +161,30 @@ def load_body_fat_tem():
         config_body_fat_tem_data[now_tem.sex_type][now_tem.sub_type] = now_tem.cid
 
 
+def load_book_data():
+    """ 载入数据配置数据 """
+    for tem_data in config_data["Book"]["data"]:
+        now_tem = config_def.Book()
+        now_tem.__dict__ = tem_data
+        config_book[now_tem.cid] = now_tem
+
+
+def load_character_statue_data():
+    """ 载入角色状态属性配表数据 """
+    for tem_data in config_data["CharacterState"]["data"]:
+        now_tem = config_def.CharacterState()
+        now_tem.__dict__ = tem_data
+        config_character_statue[now_tem.cid] = now_tem
+
+
+def load_character_statue_type_data():
+    """ 载入角色状态类型配表数据 """
+    for tem_data in config_data["CharacterStateType"]["data"]:
+        now_tem = config_def.CharacterStateType()
+        now_tem.__dict__ = tem_data
+        config_character_statue_type[now_tem.cid] = now_tem
+
+
 def load_chest_tem_data():
     """ 载入罩杯配置数据 """
     for chest_data in config_data["ChestTem"]["data"]:
@@ -151,6 +199,37 @@ def load_clothing_collocational():
         now_collocational = config_def.ClothingCollocational()
         now_collocational.__dict__ = tem_data
         config_clothing_collocational[now_collocational.cid] = now_collocational
+        config_clothing_collocational_data.setdefault(now_collocational.clothing_tem_type,{})
+        config_clothing_collocational_data[now_collocational.clothing_tem_type].setdefault(now_collocational.clothing_tem,[])
+        config_clothing_collocational_data[now_collocational.clothing_tem_type][now_collocational.clothing_tem].append(now_collocational)
+
+
+def load_clothing_evaluate():
+    """ 载入服装评价配置数据 """
+    for tem_data in config_data["ClothingEvaluate"]["data"]:
+        now_tem = config_def.ClothingEvaluate()
+        now_tem.__dict__ = tem_data
+        config_clothing_evaluate[now_tem.cid] = now_tem
+        config_clothing_evaluate_list.append(now_tem.name)
+
+
+def load_clothing_suit():
+    """ 载入衣服套装配置数据 """
+    for tem_data in config_data["ClothingSuit"]["data"]:
+        now_tem = config_def.ClothingSuit()
+        now_tem.__dict__ = tem_data
+        config_clothing_suit[now_tem.cid] = now_tem
+        config_clothing_suit_data.setdefault(now_tem.suit_type,{})
+        config_clothing_suit_data[now_tem.suit_type].setdefault(now_tem.sex,set())
+        config_clothing_suit_data[now_tem.suit_type][now_tem.sex].add(now_tem.clothing_id)
+
+
+def load_clothing_tag():
+    """ 载入服装属性标签配置数据 """
+    for tem_data in config_data["ClothingTag"]["data"]:
+        now_tem = config_def.ClothingTag()
+        now_tem.__dict__ = tem_data
+        config_clothing_tag[now_tem.cid] = now_tem
 
 
 def load_clothing_tem():
@@ -277,8 +356,14 @@ def init():
     load_attr_tem()
     load_bar_data()
     load_body_fat_tem()
+    load_book_data()
+    load_character_statue_data()
+    load_character_statue_type_data()
     load_chest_tem_data()
     load_clothing_collocational()
+    load_clothing_evaluate()
+    load_clothing_suit()
+    load_clothing_tag()
     load_clothing_tem()
     load_clothing_type()
     load_clothing_use_type()

@@ -3,7 +3,6 @@ import uuid
 import datetime
 from Script.Core import (
     cache_contorl,
-    text_loading,
     value_handle,
     constant,
     game_type,
@@ -42,7 +41,7 @@ def init_attr(character_id: int):
     character_data.sex_grade = attr_calculation.get_sex_grade(character_data.sex_experience)
     default_clothing_data = clothing.creator_suit(character_data.clothing_tem, character_data.sex)
     character_data.clothing = {
-        clothing: {uuid.uuid1(): default_clothing_data[clothing]}
+        clothing: {uuid.uuid4(): default_clothing_data[clothing]}
         if clothing in default_clothing_data
         else {}
         for clothing in character_data.clothing
