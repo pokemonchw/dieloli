@@ -48,6 +48,13 @@ config_font:Dict[int,config_def.FontConfig] = {}
 """ 字体配置数据 """
 config_font_data:Dict[str,int] = {}
 """ 字体名字对应字体id """
+config_food_quality_weight:Dict[int,config_def.FoodQualityWeight]
+""" 烹饪技能等级制造食物品质权重配置 """
+config_food_quality_weight_data:Dict[int,Dict[int,int]] = {}
+"""
+烹饪技能等级制造食物品质权重表
+技能等级:食物品质:权重
+"""
 config_hitpoint_tem:Dict[int,config_def.HitPointTem] = {}
 """ HP模板对应平均值 """
 config_manapoint_tem:Dict[int,config_def.ManaPointTem] = {}
@@ -187,6 +194,16 @@ def load_font_data():
         config_font_data[now_font.name] = now_font.cid
 
 
+def load_food_quality_weight():
+    """ 载入烹饪技能等级制造食物品质权重配置数据 """
+    for tem_data in config_data["FoodQualityWeight"]["data"]:
+        now_tem = config_def.FoodQualityWeight()
+        now_tem.__dict__ = tem_data
+        config_food_quality_weight[now_tem.cid] = now_tem
+        config_food_quality_weight_data.setdefault(now_tem.level,{})
+        config_food_quality_weight_data[now_tem.level][now_tem.quality] = now_tem.weight
+
+
 def load_hitpoint_tem():
     """ 载入hp模板对应平均值配置数据 """
     for tem_data in config_data["HitPointTem"]["data"]:
@@ -267,6 +284,7 @@ def init():
     load_clothing_use_type()
     load_end_age_tem()
     load_font_data()
+    load_food_quality_weight()
     load_hitpoint_tem()
     load_manapoint_tem()
     load_organ_data()
