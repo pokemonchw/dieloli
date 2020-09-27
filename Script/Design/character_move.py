@@ -1,4 +1,4 @@
-from Script.Core import cache_contorl, text_loading, era_print, constant
+from Script.Core import cache_contorl, era_print, constant
 from Script.Design import map_handle, game_time, update, character
 
 
@@ -13,7 +13,7 @@ def own_charcter_move(target_scene: list):
         if character_data.position != target_scene:
             (move_now, now_path_list, now_target_position, now_need_time,) = character_move(0, target_scene)
             if move_now == "Null":
-                null_message = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "30")
+                null_message = "该地点不可达"
                 era_print.normal_print(null_message)
                 break
             character_data.behavior["BehaviorId"] = constant.Behavior.MOVE

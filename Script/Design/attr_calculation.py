@@ -5,10 +5,10 @@ from typing import Dict, List
 from Script.Core import (
     cache_contorl,
     game_path_config,
-    text_loading,
     json_handle,
     value_handle,
     constant,
+    game_type,
 )
 from Script.Design import game_time
 from Script.Config import game_config
@@ -21,38 +21,38 @@ def get_age_tem_list() -> list:
     return list(game_config.config_age_tem.keys())
 
 
-def get_age(tem_name: str) -> int:
+def get_age(tem_name: int) -> int:
     """
     按年龄模板id随机生成年龄数据
     Keyword arguments:
     tem_name -- 年龄模板id
     """
-    tem_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "AgeTem")[tem_name]
-    max_age = int(tem_data["MaxAge"])
-    mini_age = int(tem_data["MiniAge"])
+    tem_data = game_config.config_age_tem[tem_name]
+    max_age = tem_data.max_age
+    mini_age = tem_data.min_age
     return random.randint(mini_age, max_age)
 
 
-def get_end_age(sex: str) -> int:
+def get_end_age(sex: int) -> int:
     """
     按照性别模板随机生成预期寿命
     Keyword arguments:
     sex -- 性别
     """
-    tem_value = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "EndAgeTem")[sex]
+    tem_value = game_config.config_end_age_tem_sex_data[sex]
     return random.randint(int(tem_value * 0.5), int(tem_value * 1.5))
 
 
-def get_height(tem_name: str, age: int) -> dict:
+def get_height(tem_name: int, age: int) -> dict:
     """
     按模板和年龄计算身高
     Keyword arguments:
-    tem_name -- 人物生成模板
+    tem_name -- 人物生成模板(性别id)
     age -- 人物年龄
     """
-    tem_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "HeightTem")[tem_name]
-    initial_height = random.uniform(tem_data[0], tem_data[1])
-    if tem_name == "Man" or "Asexual":
+    tem_data = game_config.config_height_tem_sex_data[tem_name]
+    initial_height = random.uniform(tem_data.min_value, tem_data.max_value)
+    if tem_name in {0,3}:
         expect_age = random.randint(18, 22)
         expect_height = initial_height / 0.2949
     else:
@@ -66,13 +66,13 @@ def get_height(tem_name: str, age: int) -> dict:
         now_height = expect_height
     else:
         now_height = 365 * growth_height * age + now_height
-    return {
-        "NowHeight": now_height,
-        "GrowthHeight": growth_height,
-        "ExpectAge": expect_age,
-        "DevelopmentAge": development_age,
-        "ExpectHeight": expect_height,
-    }
+    height_data = game_type.Height()
+    height_data.now_height = now_height
+    height_data.growth_height = growth_height
+    height_data.expect_age = expect_age
+    height_data.development_age = development_age
+    height_data.expect_height = expect_height
+    return height_data
 
 
 def get_chest(chest_tem: str, birthday: datetime.datetime):

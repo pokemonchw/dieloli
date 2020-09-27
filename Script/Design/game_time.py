@@ -4,11 +4,10 @@ import bisect
 from dateutil import relativedelta
 from Script.Core import (
     cache_contorl,
-    game_config,
-    text_loading,
     constant,
     game_type,
 )
+from Script.Config import game_config
 
 
 def init_time():
@@ -16,7 +15,7 @@ def init_time():
     初始化游戏时间
     """
     game_time = datetime.datetime(
-        game_config.year, game_config.month, game_config.day, game_config.hour, game_config.minute,
+        game_config.year, game_config.config_normal.month, game_config.config_normal.day, game_config.config_normal.hour, game_config.config_normal.minute,
     )
     cache_contorl.game_time = game_time
 
@@ -29,21 +28,7 @@ def get_date_text(game_time_data: datetime.datetime = None) -> str:
     """
     if game_time_data is None:
         game_time_data = cache_contorl.game_time
-    date_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "65")
-    game_year = str(game_time_data.year)
-    game_month = str(game_time_data.month)
-    game_day = str(game_time_data.day)
-    game_hour = str(game_time_data.hour)
-    game_minute = str(game_time_data.minute)
-    game_year_text = game_year + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "59")
-    game_month_text = game_month + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "60")
-    game_day_text = game_day + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "61")
-    game_hour_text = game_hour + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "62")
-    game_minute_text = game_minute + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "63")
-    date_text = (
-        date_text + game_year_text + game_month_text + game_day_text + game_hour_text + game_minute_text
-    )
-    return date_text
+    return f"时间:{game_time_data.year}年{game_time_data.month}月{game_time_data.day}日{game_time_data.hour}点{game_time_data.minute}分"
 
 
 def get_week_day_text() -> str:
@@ -51,8 +36,8 @@ def get_week_day_text() -> str:
     获取星期描述文本
     """
     week_day = cache_contorl.game_time.weekday()
-    week_date_data = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "19")
-    return week_date_data[week_day]
+    week_date_data = game_config.config_week_day[week_day]
+    return week_date_data.name
 
 
 def sub_time_now(minute=0, hour=0, day=0, month=0, year=0) -> datetime.datetime:

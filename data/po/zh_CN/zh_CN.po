@@ -61,6 +61,156 @@ msgstr "清洁"
 msgid "价值"
 msgstr "价值"
 
+msgid "外向"
+msgstr "外向"
+
+msgid "内向"
+msgstr "内向"
+
+msgid "善良"
+msgstr "善良"
+
+msgid "邪恶"
+msgstr "邪恶"
+
+msgid "实诚"
+msgstr "实诚"
+
+msgid "懒散"
+msgstr "懒散"
+
+msgid "刚毅"
+msgstr "刚毅"
+
+msgid "柔寡"
+msgstr "柔寡"
+
+msgid "爽朗"
+msgstr "爽朗"
+
+msgid "忧郁"
+msgstr "忧郁"
+
+msgid "热忱"
+msgstr "热忱"
+
+msgid "冷傲"
+msgstr "冷傲"
+
+msgid "自负"
+msgstr "自负"
+
+msgid "自谦"
+msgstr "自谦"
+
+msgid "活跃"
+msgstr "活跃"
+
+msgid "低调"
+msgstr "低调"
+
+msgid "合群"
+msgstr "合群"
+
+msgid "孤僻"
+msgstr "孤僻"
+
+msgid "乐观"
+msgstr "乐观"
+
+msgid "悲观"
+msgstr "悲观"
+
+msgid "守信"
+msgstr "守信"
+
+msgid "狡诈"
+msgstr "狡诈"
+
+msgid "无私"
+msgstr "无私"
+
+msgid "自私"
+msgstr "自私"
+
+msgid "重情"
+msgstr "重情"
+
+msgid "薄情"
+msgstr "薄情"
+
+msgid "严谨"
+msgstr "严谨"
+
+msgid "松散"
+msgstr "松散"
+
+msgid "自律"
+msgstr "自律"
+
+msgid "放纵"
+msgstr "放纵"
+
+msgid "沉稳"
+msgstr "沉稳"
+
+msgid "稚拙"
+msgstr "稚拙"
+
+msgid "决断"
+msgstr "决断"
+
+msgid "犹豫"
+msgstr "犹豫"
+
+msgid "坚韧"
+msgstr "坚韧"
+
+msgid "脆弱"
+msgstr "脆弱"
+
+msgid "机敏"
+msgstr "机敏"
+
+msgid "迟钝"
+msgstr "迟钝"
+
+msgid "耐性"
+msgstr "耐性"
+
+msgid "浮躁"
+msgstr "浮躁"
+
+msgid "爽直"
+msgstr "爽直"
+
+msgid "阴险"
+msgstr "阴险"
+
+msgid "宽和"
+msgstr "宽和"
+
+msgid "狭隘"
+msgstr "狭隘"
+
+msgid "热情"
+msgstr "热情"
+
+msgid "冷漠"
+msgstr "冷漠"
+
+msgid "自信"
+msgstr "自信"
+
+msgid "自卑"
+msgstr "自卑"
+
+msgid "淡泊"
+msgstr "淡泊"
+
+msgid "热衷"
+msgstr "热衷"
+
 msgid "破旧的"
 msgstr "破旧的"
 
@@ -852,4 +1002,25 @@ msgstr "饥饿"
 
 msgid "口渴"
 msgstr "口渴"
+
+msgid "周一"
+msgstr "周一"
+
+msgid "周二"
+msgstr "周二"
+
+msgid "周三"
+msgstr "周三"
+
+msgid "周四"
+msgstr "周四"
+
+msgid "周五"
+msgstr "周五"
+
+msgid "周六"
+msgstr "周六"
+
+msgid "周日"
+msgstr "周日"
 

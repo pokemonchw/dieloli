@@ -68,6 +68,8 @@ config_clothing_use_type:Dict[int,config_def.ClothingUseType] = {}
 """ 衣服用途配置数据 """
 config_end_age_tem:Dict[int,config_def.EndAgeTem] = {}
 """ 最终年龄范围配置模板 """
+config_end_age_tem_sex_data:Dict[int,int] = {}
+""" 各性别最终年龄范围配置数据 """
 config_font:Dict[int,config_def.FontConfig] = {}
 """ 字体配置数据 """
 config_font_data:Dict[str,int] = {}
@@ -79,10 +81,18 @@ config_food_quality_weight_data:Dict[int,Dict[int,int]] = {}
 烹饪技能等级制造食物品质权重表
 技能等级:食物品质:权重
 """
+config_height_tem:Dict[int,config_def.HeightTem] = {}
+""" 身高预期值模板 """
+config_height_tem_sex_data:Dict[int,config_def.HeightTem] = {}
+""" 性别对应身高预期值模板 """
 config_hitpoint_tem:Dict[int,config_def.HitPointTem] = {}
 """ HP模板对应平均值 """
 config_manapoint_tem:Dict[int,config_def.ManaPointTem] = {}
 """ MP模板对应平均值 """
+config_nature:Dict[int,config_def.Nature] = {}
+""" 性格配置数据 """
+config_nature_tag:Dict[int,config_def.NatureTag] = {}
+""" 性格标签配置数据 """
 config_organ:Dict[int,config_def.Organ] = {}
 """ 器官种类配置 """
 config_random_sex_weight:Dict[int,config_def.RandomNpcSexWeight] = {}
@@ -93,6 +103,8 @@ config_sex_experience_tem:Dict[int,config_def.SexExperienceTem] = {}
 """ 器官类型性经验丰富程度对应经验范围 """
 config_sex_tem:Dict[int,config_def.SexTem] = {}
 """ 性别对应描述和性别器官模板 """
+config_week_day:Dict[int,config_def.WeekDay] = {}
+""" 星期描述文本配置数据 """
 config_weight_tem:Dict[int,config_def.WeightTem] = {}
 """ 体重模板对应体重范围 """
 
@@ -262,6 +274,7 @@ def load_end_age_tem():
         now_tem = config_def.EndAgeTem()
         now_tem.__dict__ = tem_data
         config_end_age_tem[now_tem.cid] = now_tem
+        config_end_age_tem_sex_data[now_tem.sex] = now_tem.end_age
 
 
 def load_font_data():
@@ -283,6 +296,15 @@ def load_food_quality_weight():
         config_food_quality_weight_data[now_tem.level][now_tem.quality] = now_tem.weight
 
 
+def load_height_tem():
+    """ 载入身高预期值模板 """
+    for tem_data in config_data["HeightTem"]["data"]:
+        now_tem = config_def.HeightTem()
+        now_tem.__dict__ = tem_data
+        config_height_tem[now_tem.cid] = now_tem
+        config_height_tem_sex_data[now_tem.sex] = now_tem
+
+
 def load_hitpoint_tem():
     """ 载入hp模板对应平均值配置数据 """
     for tem_data in config_data["HitPointTem"]["data"]:
@@ -297,6 +319,22 @@ def load_manapoint_tem():
         now_tem = config_def.ManaPointTem()
         now_tem.__dict__ = tem_data
         config_manapoint_tem[now_tem.cid] = now_tem
+
+
+def load_nature():
+    """ 载入性格配置数据 """
+    for tem_data in config_data["Nature"]["data"]:
+        now_tem = config_def.Nature()
+        now_tem.__dict__ = tem_data
+        config_nature[now_tem.cid] = now_tem
+
+
+def load_nature_tag():
+    """ 载入性格标签配置数据 """
+    for tem_data in config_data["NatureTag"]["data"]:
+        now_tem = config_def.NatureTag()
+        now_tem.__dict__ = tem_data
+        config_nature_tag[now_tem.cid] = now_tem
 
 
 def load_organ_data():
@@ -339,6 +377,14 @@ def load_sex_tem():
         config_sex_tem[now_tem.cid] = now_tem
 
 
+def load_week_day():
+    """ 载入星期描述文本配置数据 """
+    for tem_data in config_data["WeekDay"]["data"]:
+        now_tem = config_def.WeekDay()
+        now_tem.__dict__ = tem_data
+        config_week_day[now_tem.cid] = now_tem
+
+
 def load_weight_tem():
     """ 载入体重木板对应体重范围 """
     for tem_data in config_data["WeightTem"]["data"]:
@@ -370,11 +416,15 @@ def init():
     load_end_age_tem()
     load_font_data()
     load_food_quality_weight()
+    load_height_tem()
     load_hitpoint_tem()
     load_manapoint_tem()
+    load_nature()
+    load_nature_tag()
     load_organ_data()
     load_random_sex_weight()
     load_sex_experience()
     load_sex_experience_tem()
     load_sex_tem()
+    load_week_day()
     load_weight_tem()

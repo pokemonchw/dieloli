@@ -5,7 +5,6 @@ from functools import wraps
 from Script.Core import (
     cache_contorl,
     game_path_config,
-    game_config,
     game_type,
     constant,
 )
@@ -18,7 +17,6 @@ from Script.Design import (
 )
 
 game_path = game_path_config.game_path
-language = game_config.language
 character_list_path = os.path.join(game_path, "data", language, "character")
 
 

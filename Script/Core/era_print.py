@@ -1,15 +1,14 @@
 import time
 from Script.Core import (
-    game_config,
     text_handle,
     flow_handle,
     io_init,
     cache_contorl,
     dictionaries,
     rich_text,
-    text_loading,
     constant,
 )
+from Script.Config import game_config
 
 last_char = "\n"
 
@@ -26,7 +25,6 @@ def normal_print(string: str, style="standard", rich_text_judge=True):
     rich_text_judge -- 启用富文本的开关 (default True)
     """
     if rich_text_judge:
-        bar_list = list(text_loading.get_game_data(constant.FilePath.BAR_CONFIG_PATH).keys())
         string = dictionaries.handle_text(string)
         string.__repr__
         style_list = rich_text.get_rich_text_print(string, style)
@@ -36,18 +34,7 @@ def normal_print(string: str, style="standard", rich_text_judge=True):
         string = rich_text.remove_rich_cache(string)
         string = r"" + string
         for i in range(0, len(string)):
-            if style_list[i] in bar_list:
-                style_data = text_loading.get_text_data(constant.FilePath.BAR_CONFIG_PATH, style_list[i])
-                true_bar = style_data["truebar"]
-                null_bar = style_data["nullbar"]
-                if string[i] == "0":
-                    image_print(null_bar, "bar")
-                elif string[i] == "1":
-                    image_print(true_bar, "bar")
-                else:
-                    io_init.era_print(string[i], style_list[i])
-            else:
-                io_init.era_print(string[i], style_list[i])
+            io_init.era_print(string[i], style_list[i])
     else:
         io_init.era_print(string, style)
 
@@ -79,7 +66,7 @@ def little_title_print(string: str):
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
-    width = game_config.text_width
+    width = game_config.config_normal.text_width
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 2 - int(text_width) / 2 - 2)
     line_feed_print("=" * line_width + "<littletitle>口" + string + "口</littletitle>" + "=" * line_width)
@@ -102,7 +89,7 @@ def son_title_print(string: str):
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
-    width = game_config.text_width
+    width = game_config.config_normal.text_width
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 4)
     line_width_fix = int(int(width) / 4 - int(text_width))
@@ -139,7 +126,7 @@ def restart_line_print(sample="=", style="standard"):
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    text_width = game_config.text_width
+    text_width = game_config.config_normal.text_width
     line_feed_print(sample * text_width, style)
 
 
@@ -161,7 +148,7 @@ def page_line_print(sample=":", string="", style="standard"):
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    text_width = int(game_config.text_width)
+    text_width = int(game_config.config_normal.text_width)
     string_width = int(text_handle.get_text_index(string))
     fix_text = sample * int(text_width / 2 - string_width / 2)
     string_text = fix_text + string + fix_text
@@ -223,7 +210,7 @@ def one_by_one_print(sleep_time: float, string: str, style="standard"):
         time.sleep(text_wait)
     cache_contorl.wframe_mouse.w_frame_up = 0
     style_list = rich_text.get_rich_text_print(string, style)
-    style_name_list = game_config.get_font_data_list()
+    style_name_list = list(game_config.config_font_data.keys())
     for i in range(0, len(style_name_list)):
         style_text_head = "<" + style_name_list[i] + ">"
         style_text_tail = "</" + style_name_list[i] + ">"
@@ -253,7 +240,7 @@ def list_print(string_list: list, string_column=1, string_size="left"):
     string_size -- 每列在列宽中的对齐方式(left/center/right) (default 'left')
     """
     text_wait = cache_contorl.text_wait
-    text_width = game_config.text_width
+    text_width = game_config.config_normal.text_width
     if text_wait != 0:
         time.sleep(text_wait)
     string_index = int(text_width / string_column)
@@ -295,7 +282,7 @@ def next_screen_print():
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    normal_print("\n" * game_config.text_hight)
+    normal_print("\n" * game_config.config_normal.text_hight)
 
 
 def lines_center_print(sleep_time: float, string="", style="standard"):
@@ -312,8 +299,8 @@ def lines_center_print(sleep_time: float, string="", style="standard"):
     cache_contorl.wframe_mouse.w_frame_lines_state = 1
     string = str(string)
     string_list = string.split("\n")
-    width = game_config.text_width
-    style_name_list = game_config.get_font_data_list()
+    width = game_config.config_normal.text_width
+    style_name_list = list(game_config.config_font.keys())
     string_center_list = ""
     for i in range(0, len(style_name_list)):
         style_text_head = "<" + style_name_list[i] + ">"

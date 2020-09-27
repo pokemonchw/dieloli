@@ -104,22 +104,13 @@ class Character:
         """
         self.item: dict = {}
         """ 角色拥有的道具数据 """
-        self.height: dict = {}
+        self.height: Height = Height()
         """ 角色的身高数据 """
         self.weight: dict = {}
         """ 角色的体重数据 """
         self.measurements: dict = {}
         """ 角色的三围数据 """
-        self.behavior: dict = {
-            "StartTime": None,
-            "Duration": 0,
-            "BehaviorId": 0,
-            "MoveTarget": [],
-            "EatFood": None,
-            "MoveSrc": [],
-            "FoodName": "",
-            "FoodQuality": 0,
-        }
+        self.behavior: Behavior = Behavior()
         """ 角色当前行为状态数据 """
         self.gold: int = 0
         """ 角色所持金钱数据 """
@@ -351,3 +342,39 @@ class Clothing:
         """ 服装评价文本 """
         self.wear:int = 0
         """ 穿戴部位 """
+
+
+class Height:
+    """ 身高数据结构体 """
+
+    def __init__(self):
+        self.now_height:int = 0
+        """ 当前身高 """
+        self.growth_height:int = 0
+        """ 每日身高增量 """
+        self.expect_age:int = 0
+        """ 预期结束身高增长年龄 """
+        self.development_age:int = 0
+        """ 预期发育期结束时间 """
+        self.expect_height:int = 0
+        """ 预期的最终身高 """
+
+
+class Behavior:
+    """ 角色行为状态数据 """
+
+    def __init__(self):
+        self.start_time: datetime.datetime = None
+        """ 行为开始时间 """
+        self.duration:int = 0
+        """ 行为持续时间(单位分钟) """
+        self.behavior_id:int = 0
+        """ 行为id """
+        self.move_target:List[str] = []
+        """ 移动行为目标坐标 """
+        self.eat_foor:Food = None
+        """ 进食行为消耗的食物对象 """
+        self.food_name:str = ""
+        """ 前提结算用:进食行为消耗的食物名字 """
+        self.food_quality:int = 0
+        """ 前提结算用:进食行为消耗的食物品质 """

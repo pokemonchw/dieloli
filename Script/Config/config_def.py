@@ -160,6 +160,43 @@ class ClothingCollocational:
     """ 备注 """
 
 
+class HeightTem:
+    """ 身高预期权值模板 """
+
+    cid: int
+    """ 模板id """
+    sex: int
+    """ 性别id """
+    max_value: float
+    """ 最大值 """
+    min_value: float
+    """ 最小值 """
+
+
+class NatureTag:
+    """ 性格倾向标签 """
+
+    cid: int
+    """ 性格标签id """
+    good: str
+    """ 正面倾向 """
+    bad: str
+    """ 负面倾向 """
+
+
+class Nature:
+    """ 性格倾向配置 """
+
+    cid: int
+    """ 性格id """
+    type: int
+    """ 类型 """
+    good: str
+    """ 正面倾向 """
+    bad: str
+    """ 负面倾向 """
+
+
 class EndAgeTem:
     """ 性别对应平均寿命 """
 
@@ -328,6 +365,15 @@ class CharacterState:
     """ 状态名字 """
     type: int
     """ 状态类型 """
+
+
+class WeekDay:
+    """ 星期描述配置 """
+
+    cid: int
+    """ 周id """
+    name: str
+    """ 描述 """
 
 
 class BodyFatTem:
