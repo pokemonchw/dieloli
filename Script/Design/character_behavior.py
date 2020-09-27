@@ -17,8 +17,6 @@ from Script.Design import (
 )
 
 game_path = game_path_config.game_path
-character_list_path = os.path.join(game_path, "data", language, "character")
-
 
 def init_character_behavior():
     """

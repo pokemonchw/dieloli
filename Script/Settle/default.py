@@ -5,7 +5,7 @@ from Script.Design import (
     game_time,
     map_handle,
 )
-from Script.Core import constant, cache_contorl, game_type, text_loading
+from Script.Core import constant, cache_contorl, game_type
 
 
 @settle_behavior.add_settle_behavior(constant.Behavior.REST)

@@ -125,13 +125,14 @@ class TitleAndRightInfoListPanel:
         width -- 标题宽度
         """
         self.width = width
+        line = draw.LineDraw("=",width)
         self.draw_list.append(line)
         title = draw.CenterDraw()
         title.max_width = self.width
         title.text = title_text
         self.draw_list.append(title)
         for info_text in info_list:
-            info = draw.LeftDraw()
+            info = draw.RightDraw()
             info.max_width = width
             info.text = info_text
             self.draw_list.append(info)
@@ -139,10 +140,9 @@ class TitleAndRightInfoListPanel:
 
     def draw(self):
         """ 绘制面板 """
-        io_init.era_print("\n")
         for value in self.draw_list:
             value.draw()
-        io_init.era_print("\n")
+            io_init.era_print("\n")
 
 
 def id_index(now_id:int) -> str:
