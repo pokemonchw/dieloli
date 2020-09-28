@@ -1,10 +1,11 @@
 import random
 from functools import wraps
+from types import FunctionType
 from Script.Core import cache_contorl, era_print
 from Script.Design import map_handle
 
 
-def add_talk(behavior_id: int, talk_id: int, premise_list: set, adv=0) -> callable:
+def add_talk(behavior_id: int, talk_id: int, premise_list: set, adv=0) -> FunctionType:
     """
     添加口上
     Keyword arguments:
@@ -13,7 +14,7 @@ def add_talk(behavior_id: int, talk_id: int, premise_list: set, adv=0) -> callab
     premise_list -- 口上前提集合
     adv -- advid,不为0时为id对应自定义角色限定口上
     Return arguments:
-    callable -- 口上处理函数对象
+    FunctionType -- 口上处理函数对象
     """
 
     def decorator(func):

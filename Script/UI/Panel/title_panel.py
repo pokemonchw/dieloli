@@ -2,10 +2,11 @@ import gettext
 from Script.Config import game_config
 from Script.UI.Moudle import panel,draw
 from Script.Design import handle_panel
+from Script.Core import constant
 
 config_normal = game_config.config_normal
 
-@handle_panel.add_panel("title")
+@handle_panel.add_panel(constant.Panel.TITLE)
 def title_panel():
     """ 绘制游戏标题菜单 """
     width = config_normal.text_width

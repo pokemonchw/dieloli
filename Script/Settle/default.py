@@ -6,6 +6,7 @@ from Script.Design import (
     map_handle,
 )
 from Script.Core import constant, cache_contorl, game_type
+from Script.Config import game_config
 
 
 @settle_behavior.add_settle_behavior(constant.Behavior.REST)
@@ -43,7 +44,7 @@ def settle_move(character_id: int):
     """
     character_data = cache_contorl.character_data[character_id]
     map_handle.character_move_scene(
-        character_data.position, character_data.behavior["MoveTarget"], character_id,
+        character_data.position, character_data.behavior.move_target, character_id,
     )
 
 
@@ -55,8 +56,8 @@ def settle_eat(character_id: int):
     character_id -- 角色id
     """
     character_data = cache_contorl.character_data[character_id]
-    if character_data.behavior["EatFood"] != None:
-        food: game_type.Food = character_data.behavior["EatFood"]
+    if character_data.behavior.eat_food != None:
+        food: game_type.Food = character_data.behavior.eat_food
         eat_weight = 100
         if food.weight < eat_weight:
             eat_weight = food.weight

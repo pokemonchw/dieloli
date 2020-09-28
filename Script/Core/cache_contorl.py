@@ -1,5 +1,6 @@
 import datetime
 from typing import List, Dict
+from types import FunctionType
 from uuid import UUID
 from Script.Core import game_type
 
@@ -90,7 +91,7 @@ wear_item_type_data: dict = {}
 """ 可穿戴道具类型数据 """
 course_time_status: dict = {}
 """ 当前上课时间状态 """
-adv_talk_data: Dict[int, Dict[int, Dict[int, callable]]] = {}
+adv_talk_data: Dict[int, Dict[int, Dict[int, FunctionType]]] = {}
 """
 角色行为对应口上数据
 advid:行为id:口上id:口上对象
@@ -117,9 +118,9 @@ restaurant_data: Dict[str, Dict[UUID, game_type.Food]] = {}
 食堂内贩卖的食物数据
 食物名字:食物唯一id:食物对象
 """
-handle_premise_data: Dict[str, callable] = {}
+handle_premise_data: Dict[str, FunctionType] = {}
 """ 前提处理数据 """
-handle_target_data: Dict[str, callable] = {}
+handle_target_data: Dict[str, FunctionType] = {}
 """ 目标类型数据 """
 premise_target_table: Dict[str, set] = {}
 """
@@ -136,7 +137,7 @@ premise_talk_table: Dict[int, Dict[int, Dict[int, set]]] = {}
 口上对应的所需前提集合
 advid:行为id:口上id:前提集合
 """
-panel_data:Dict[str,callable] = {}
+panel_data:Dict[int,FunctionType] = {}
 """
 面板id对应的面板绘制函数集合
 面板id:面板绘制函数对象

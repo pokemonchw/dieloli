@@ -61,6 +61,204 @@ msgstr "清洁"
 msgid "价值"
 msgstr "价值"
 
+msgid "苹果"
+msgstr "苹果"
+
+msgid "梨子"
+msgstr "梨子"
+
+msgid "橘子"
+msgstr "橘子"
+
+msgid "桃子"
+msgstr "桃子"
+
+msgid "菠萝"
+msgstr "菠萝"
+
+msgid "柚子"
+msgstr "柚子"
+
+msgid "猕猴桃"
+msgstr "猕猴桃"
+
+msgid "生排骨"
+msgstr "生排骨"
+
+msgid "生姜"
+msgstr "生姜"
+
+msgid "葱"
+msgstr "葱"
+
+msgid "面包"
+msgstr "面包"
+
+msgid "芹菜"
+msgstr "芹菜"
+
+msgid "黄瓜"
+msgstr "黄瓜"
+
+msgid "萵苣"
+msgstr "萵苣"
+
+msgid "玄参"
+msgstr "玄参"
+
+msgid "西红柿"
+msgstr "西红柿"
+
+msgid "巧克力"
+msgstr "巧克力"
+
+msgid "香菜"
+msgstr "香菜"
+
+msgid "孜然"
+msgstr "孜然"
+
+msgid "花椒"
+msgstr "花椒"
+
+msgid "盐"
+msgstr "盐"
+
+msgid "干辣椒"
+msgstr "干辣椒"
+
+msgid "橄榄油"
+msgstr "橄榄油"
+
+msgid "胡椒"
+msgstr "胡椒"
+
+msgid "酱油"
+msgstr "酱油"
+
+msgid "蔗糖"
+msgstr "蔗糖"
+
+msgid "鱼板"
+msgstr "鱼板"
+
+msgid "韭菜"
+msgstr "韭菜"
+
+msgid "罗非鱼"
+msgstr "罗非鱼"
+
+msgid "青椒"
+msgstr "青椒"
+
+msgid "红椒"
+msgstr "红椒"
+
+msgid "淀粉"
+msgstr "淀粉"
+
+msgid "料酒"
+msgstr "料酒"
+
+msgid "醋"
+msgstr "醋"
+
+msgid "水"
+msgstr "水"
+
+msgid "柠檬汁"
+msgstr "柠檬汁"
+
+msgid "芝麻油"
+msgstr "芝麻油"
+
+msgid "绿豆粉"
+msgstr "绿豆粉"
+
+msgid "香菇"
+msgstr "香菇"
+
+msgid "猪肉"
+msgstr "猪肉"
+
+msgid "胡萝卜"
+msgstr "胡萝卜"
+
+msgid "卷心菜"
+msgstr "卷心菜"
+
+msgid "猪油"
+msgstr "猪油"
+
+msgid "冰糖"
+msgstr "冰糖"
+
+msgid "鸡肉"
+msgstr "鸡肉"
+
+msgid "鸡翅"
+msgstr "鸡翅"
+
+msgid "鸭脖"
+msgstr "鸭脖"
+
+msgid "鸭胗"
+msgstr "鸭胗"
+
+msgid "鸭头"
+msgstr "鸭头"
+
+msgid "蒜"
+msgstr "蒜"
+
+msgid "八角"
+msgstr "八角"
+
+msgid "月桂叶"
+msgstr "月桂叶"
+
+msgid "桂皮"
+msgstr "桂皮"
+
+msgid "莲藕"
+msgstr "莲藕"
+
+msgid "面粉"
+msgstr "面粉"
+
+msgid "鸡蛋"
+msgstr "鸡蛋"
+
+msgid "大米"
+msgstr "大米"
+
+msgid "蜂蜜"
+msgstr "蜂蜜"
+
+msgid "蚝油"
+msgstr "蚝油"
+
+msgid "牛奶"
+msgstr "牛奶"
+
+msgid "调和油"
+msgstr "调和油"
+
+msgid "黄油"
+msgstr "黄油"
+
+msgid "鸡蛋豆腐"
+msgstr "鸡蛋豆腐"
+
+msgid "罗勒叶"
+msgstr "罗勒叶"
+
+msgid "芝麻油"
+msgstr "芝麻油"
+
+msgid "厨余"
+msgstr "厨余"
+
 msgid "外向"
 msgstr "外向"
 

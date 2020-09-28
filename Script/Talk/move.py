@@ -3,7 +3,7 @@ from Script.Core import constant
 from Script.Design import talk
 
 
-@talk.add_talk(constant.Behavior.MOVE, 1, {"IsPlayer"})
+@talk.add_talk(constant.Behavior.MOVE, 1, {constant.Premise.IS_PLAYER})
 def talk_move_1() -> List[str]:
     """
     玩家限定的基础移动口上
@@ -17,7 +17,7 @@ def talk_move_1() -> List[str]:
     ]
 
 
-@talk.add_talk(constant.Behavior.MOVE, 2, {"NoPlayer", "InPlayerScene"})
+@talk.add_talk(constant.Behavior.MOVE, 2, {constant.Premise.NO_PLAYER, constant.Premise.IN_PLAYER_SCENE})
 def talk_move_2() -> List[str]:
     """
     npc移动至玩家所在场景时的基础口上
@@ -31,7 +31,7 @@ def talk_move_2() -> List[str]:
     ]
 
 
-@talk.add_talk(constant.Behavior.MOVE, 3, {"NoPlayer", "LeavePlayerScene"})
+@talk.add_talk(constant.Behavior.MOVE, 3, {constant.Premise.NO_PLAYER, constant.Premise.LEAVE_PLAYER_SCENE})
 def talk_move_3() -> List[str]:
     """
     npc离开玩家所在场景时的基础口上
@@ -47,7 +47,7 @@ def talk_move_3() -> List[str]:
 
 
 @talk.add_talk(
-    constant.Behavior.MOVE, 4, {"NoPlayer", "InPlayerScene", "PlayerIsAdore", "IsWoman", "IsStudent"},
+    constant.Behavior.MOVE, 4, {constant.Premise.NO_PLAYER, constant.Premise.IN_PLAYER_SCENE, constant.Premise.PLAYER_IS_ADORE, constant.Premise.IS_WOMAN, constant.Premise.IS_STUDENT},
 )
 def talk_move_4() -> List[str]:
     """

@@ -3,7 +3,7 @@ from Script.Core import constant
 from Script.Design import talk
 
 
-@talk.add_talk(constant.Behavior.EAT, 1, {"IsPlayer"})
+@talk.add_talk(constant.Behavior.EAT, 1, {constant.Premise.IS_PLAYER})
 def talk_eat_1() -> List[str]:
     """
     玩家限定的基础进食口上
@@ -17,7 +17,7 @@ def talk_eat_1() -> List[str]:
     ]
 
 
-@talk.add_talk(constant.Behavior.EAT, 2, {"IsPlayer", "EatSpringFood"})
+@talk.add_talk(constant.Behavior.EAT, 2, {constant.Premise.IS_PLAYER, constant.Premise.EAT_SPRING_FOOD})
 def talk_eat_2() -> List[str]:
     """
     玩家食用春药品质的食物时的口上
@@ -30,7 +30,7 @@ def talk_eat_2() -> List[str]:
     return [talk_1]
 
 
-@talk.add_talk(constant.Behavior.EAT, 3, {"NoPlayer", "InPlayerScene"})
+@talk.add_talk(constant.Behavior.EAT, 3, {constant.Premise.NO_PLAYER, constant.Premise.IN_PLAYER_SCENE})
 def talk_eat_3() -> List[str]:
     """
     npc食用食物时的基础口上

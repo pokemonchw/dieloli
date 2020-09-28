@@ -37,6 +37,19 @@ class Organ:
     """ 名字 """
 
 
+class FoodFeel:
+    """ 食材效果配置数据 """
+
+    cid: int
+    """ 表id """
+    food_id: int
+    """ 所属食材id """
+    feel_id: int
+    """ 效果id """
+    feel_value: float
+    """ 效果数值 """
+
+
 class ClothingSuit:
     """ 套装配置数据 """
 
@@ -141,6 +154,23 @@ class FontConfig:
     """ 选中时背景色 """
     info: str
     """ 备注 """
+
+
+class Food:
+    """ 食材配置数据 """
+
+    cid: int
+    """ 食材id """
+    name: str
+    """ 食材名字 """
+    cook: bool
+    """ 可烹饪 """
+    eat: bool
+    """ 可食用 """
+    seasoning: bool
+    """ 可作为调料 """
+    fruit: bool
+    """ 是水果 """
 
 
 class ClothingCollocational:

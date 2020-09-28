@@ -148,8 +148,8 @@ class Character:
         """ 角色罩杯数据 """
         self.nature = {}
         """ 角色性格数据 """
-        self.status: Dict[str, Dict[str, int]] = {}
-        """ 角色状态数据 """
+        self.status: Dict[int, Dict[int, int]] = {}
+        """ 角色状态数据 状态类型:状态id:状态数值 """
         self.put_on: dict = {}
         """ 角色已穿戴服装数据 """
         self.wear_item: dict = {}
@@ -372,7 +372,7 @@ class Behavior:
         """ 行为id """
         self.move_target:List[str] = []
         """ 移动行为目标坐标 """
-        self.eat_foor:Food = None
+        self.eat_food:Food = None
         """ 进食行为消耗的食物对象 """
         self.food_name:str = ""
         """ 前提结算用:进食行为消耗的食物名字 """

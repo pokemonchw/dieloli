@@ -74,6 +74,10 @@ config_font:Dict[int,config_def.FontConfig] = {}
 """ 字体配置数据 """
 config_font_data:Dict[str,int] = {}
 """ 字体名字对应字体id """
+config_food:Dict[int,config_def.Food] = {}
+""" 食材配置数据 """
+config_food_feel:Dict[int,config_def.FoodFeel] = {}
+""" 食材效果配置数据 """
 config_food_quality_weight:Dict[int,config_def.FoodQualityWeight] = {}
 """ 烹饪技能等级制造食物品质权重配置 """
 config_food_quality_weight_data:Dict[int,Dict[int,int]] = {}
@@ -286,6 +290,22 @@ def load_font_data():
         config_font_data[now_font.name] = now_font.cid
 
 
+def load_food_data():
+    """ 载入食材配置数据 """
+    for tem_data in config_data["Food"]["data"]:
+        now_tem = config_def.Food()
+        now_tem.__dict__ = tem_data
+        config_food[now_tem.cid] = now_tem
+
+
+def load_food_feel_data():
+    """ 载入食材效果配置数据 """
+    for tem_data in config_data["FoodFeel"]["data"]:
+        now_tem = config_def.FoodFeel()
+        now_tem.__dict__ = tem_data
+        config_food_feel[now_tem.cid] = now_tem
+
+
 def load_food_quality_weight():
     """ 载入烹饪技能等级制造食物品质权重配置数据 """
     for tem_data in config_data["FoodQualityWeight"]["data"]:
@@ -415,6 +435,8 @@ def init():
     load_clothing_use_type()
     load_end_age_tem()
     load_font_data()
+    load_food_data()
+    load_food_feel_data()
     load_food_quality_weight()
     load_height_tem()
     load_hitpoint_tem()
