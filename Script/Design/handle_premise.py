@@ -41,7 +41,7 @@ def handle_premise(premise: int, character_id: int) -> int:
         return 0
 
 
-@add_premise(constant.Premise.IN_CAFETRIA)
+@add_premise(constant.Premise.IN_CAFETERIA)
 def handle_in_cafeteria(character_id: int) -> int:
     """
     校验角色是否处于取餐区中

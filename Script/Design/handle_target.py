@@ -66,7 +66,7 @@ def handle_eat_dinner_in_restaurant(character_id: int):
 
 
 @add_target(
-    "GoCafeteria", {constant.Premise.HUNGERU, constant.Premise.NOT_HAVE_FOOD}, {constant.Premise.IN_CAFETERIA},
+    "GoCafeteria", {constant.Premise.HUNGER, constant.Premise.NOT_HAVE_FOOD}, {constant.Premise.IN_CAFETERIA},
 )
 def handle_go_cafeteria(character_id: int):
     """

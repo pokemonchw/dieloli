@@ -3,7 +3,7 @@ from Script.Core import constant
 from Script.Design import talk
 
 
-@talk.add_talk(constant.Behavior.REST, 1, {constant.Premise.IN_PLAYER})
+@talk.add_talk(constant.Behavior.REST, 1, {constant.Premise.IS_PLAYER})
 def talk_rest_1() -> List[str]:
     """
     玩家限定的基础休息口上
