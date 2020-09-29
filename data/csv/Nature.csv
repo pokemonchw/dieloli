@@ -1,4 +1,4 @@
-cid,type,good,bad
+cid,nature_type,good,bad
 性格id,类型,正面倾向,负面倾向
 int,int,str,str
 0,0,1,1

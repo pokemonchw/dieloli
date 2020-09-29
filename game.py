@@ -2,10 +2,16 @@
 # -*- coding: UTF-8 -*-
 import getopt
 import sys
+import gettext
+import os
+from Script.Core import text_handle
 from Script.Config import game_config
 
+_ = text_handle._
+""" 翻译api """
+
 if sys.version_info < (3,8,5):
-    print("python3版本过旧(低于python3.8.5),请升级")
+    print(_("python3版本过旧(低于python3.8.5),请升级"))
     exit(0)
 
 

@@ -1,14 +1,18 @@
 # -*- coding: UTF-8 -*-
 import time
 import os
+from types import FunctionType
 from Script.Core import (
     cache_contorl,
     text_handle,
     io_init,
     constant,
+    get_text,
 )
 from Script.Config import game_config
 
+_:FunctionType = get_text._
+""" 翻译api """
 
 def null_func():
     """
@@ -241,7 +245,7 @@ def askfor_all(list, print_order=False):
         else:
             io_init.era_print(order + "\n")
             io_init.era_print(
-                "您输入的选项无效，请重试\n"
+                _("您输入的选项无效，请重试\n")
             )
             continue
 
@@ -264,7 +268,7 @@ def askfor_int(list, print_order=False):
         else:
             io_init.era_print(order + "\n")
             io_init.era_print(
-                text_loading.get_text_data(constant.FilePath.ERROR_PATH, "noInputListError") + "\n"
+                _("您输入的选项无效，请重试\n")
             )
             continue
 

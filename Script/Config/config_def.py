@@ -219,7 +219,7 @@ class Nature:
 
     cid: int
     """ 性格id """
-    type: int
+    nature_type: int
     """ 类型 """
     good: str
     """ 正面倾向 """
@@ -353,6 +353,15 @@ class AttrTem:
     """ 体脂率模板id """
 
 
+class RecipesFormulaType:
+    """ 菜谱配方类型 """
+
+    cid: int
+    """ 表id """
+    name: str
+    """ 菜谱配方名字 """
+
+
 class SexExperienceTem:
     """ 器官类型性经验丰富程度对应经验范围 """
 
@@ -386,6 +395,19 @@ class ClothingUseType:
     """ 用途名字 """
 
 
+class RecipesFormula:
+    """ 菜谱配方配置 """
+
+    cid: int
+    """ 配方id """
+    recipe_id: int
+    """ 所属菜谱id """
+    formula_type: int
+    """ 配方类型 """
+    food_id: int
+    """ 食材id """
+
+
 class CharacterState:
     """ 角色状态属性表 """
 
@@ -395,6 +417,15 @@ class CharacterState:
     """ 状态名字 """
     type: int
     """ 状态类型 """
+
+
+class Recipes:
+    """ 菜谱配置 """
+
+    cid: int
+    """ 菜谱id """
+    name: str
+    """ 菜谱名字 """
 
 
 class WeekDay:

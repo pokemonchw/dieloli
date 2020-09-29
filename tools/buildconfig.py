@@ -5,7 +5,7 @@ import json
 config_dir = os.path.join("..","data","csv")
 config_data = {}
 config_def_str = ""
-config_po = ""
+config_po = "\n"
 
 def build_csv_config(file_path:str,file_name:str):
     with open(file_path,encoding="utf-8") as now_file:
@@ -54,7 +54,7 @@ def build_csv_config(file_path:str,file_name:str):
                 elif now_type == "float":
                     row[k] = float(row[k])
                 if get_text_data[k]:
-                    build_config_po(row[k])
+                    build_config_po(row[k],file_id,k,row["cid"])
             config_data[file_id]["data"].append(row)
         config_data[file_id]["gettext"] = get_text_data
         build_config_def(file_id,now_type_data,now_docstring_data,class_text)
@@ -70,8 +70,9 @@ def build_config_def(class_name:str,value_type:dict,docstring:dict,class_text:st
         config_def_str += "    " + '""" ' + docstring[k] + ' """'
 
 
-def build_config_po(message:str):
+def build_config_po(message:str,message_class:str,message_type:str,message_id:str):
     global config_po
+    config_po += f'#: class:{message_class} id:{message_id} type:{message_type}\n'
     config_po += f'msgid "{message}"\n'
     config_po += f'msgstr "{message}"\n\n'
 
@@ -87,9 +88,12 @@ for i in file_list:
     build_csv_config(now_file,i)
     index += 1
 
-po_path = os.path.join("..","data","po","zh_CN","zh_CN.po")
+po_path = os.path.join("..","data","po","zh_CN","LC_MESSAGES","zh_CN.po")
+os.remove(po_path)
+os.system('find ../ -name "*.py" >POTFILES && xgettext -n --files-from=POTFILES -o ' + po_path)
+os.remove("POTFILES")
 
-with open(po_path,"w") as po_file:
+with open(po_path,"a") as po_file:
     po_file.write(config_po)
 
 config_path = os.path.join("..","Script","Config","config_def.py")
