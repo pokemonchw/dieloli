@@ -7,7 +7,7 @@ from Script.Core import (
     constant,
     game_type,
 )
-from Script.Config import game_config
+from Script.Config import normal_config
 
 
 def init_time():
@@ -15,7 +15,7 @@ def init_time():
     初始化游戏时间
     """
     game_time = datetime.datetime(
-        game_config.year, game_config.config_normal.month, game_config.config_normal.day, game_config.config_normal.hour, game_config.config_normal.minute,
+        normal_config.config_normal.year, normal_config.config_normal.month, normal_config.config_normal.day, normal_config.config_normal.hour, normal_config.config_normal.minute,
     )
     cache_contorl.game_time = game_time
 

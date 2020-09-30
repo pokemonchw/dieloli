@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-29 18:00+0800\n"
+"POT-Creation-Date: 2020-09-30 11:40+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../game.py:14
+#: ../game.py:18
 msgid "python3版本过旧(低于python3.8.5),请升级"
 msgstr ""
 
@@ -898,16 +898,16 @@ msgid "男式衬衫"
 msgstr "男式衬衫"
 
 #: class:ClothingTem id:35 type:describe
-msgid "贴身穿着的单衣．"
-msgstr "贴身穿着的单衣．"
+msgid "男式的贴身穿着的单衣．"
+msgstr "男式的贴身穿着的单衣．"
 
 #: class:ClothingTem id:36 type:name
 msgid "女式衬衫"
 msgstr "女式衬衫"
 
 #: class:ClothingTem id:36 type:describe
-msgid "贴身穿着的单衣．"
-msgstr "贴身穿着的单衣．"
+msgid "女式的贴身穿着的单衣．"
+msgstr "女式的贴身穿着的单衣．"
 
 #: class:ClothingTem id:37 type:name
 msgid "T恤"
@@ -1290,8 +1290,8 @@ msgid "足袋"
 msgstr "足袋"
 
 #: class:ClothingTem id:84 type:describe
-msgid "无论图案的大小，反复印染的纹样的和服．"
-msgstr "无论图案的大小，反复印染的纹样的和服．"
+msgid "一种分趾的袜子．"
+msgstr "一种分趾的袜子．"
 
 #: class:ClothingTem id:85 type:name
 msgid "男式胸罩"
@@ -1500,10 +1500,6 @@ msgstr "内裤"
 #: class:ClothingUseType id:0 type:name
 msgid "便服"
 msgstr "便服"
-
-#: class:ClothingUseType id:1 type:name
-msgid "雨衣"
-msgstr "雨衣"
 
 #: class:ClothingUseType id:2 type:name
 msgid "浴衣"

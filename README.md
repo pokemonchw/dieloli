@@ -58,13 +58,18 @@ python3 \
 本游戏不提供Sarasa Mono SC相关字体文件 \
 请自行下载并安装:[Sarasa Mono SC](https://github.com/be5invis/Sarasa-Gothic)
 
+本地化
+----
+本项目使用gettext进行本地化设置 \
+请于 data/po 目录下创建对应语言目录 \
+切换语言请编辑config.ini中的language项 \
+协作翻译方案待定
+
 警告
 ----
 在游戏设计中，有一定的色情，暴力，宗教，等内容，在进行游戏前请确认自己的三观足够健全到不会随意被动摇和影响
 
 联系方式
 ----
-e-mail:pokemonchw@gmail.com \
-twitter:@nekoharuyayuzu \
-telegram:[推送频道](https://t.me/die_loli) \
-企鹅群:688166358
+e-mail:admin@byayoi.org \
+twitter:@nekoharuyayuzu

@@ -4,10 +4,9 @@ from typing import Dict,List
 from Script.Config import config_def
 from Script.Core import game_type,json_handle,get_text
 
+
 data_path = os.path.join("data","data.json")
 """ 原始json数据文件路径 """
-config_normal = game_type.NormalConfig()
-""" 游戏通用配置数据 """
 config_data = {}
 """ 原始json数据 """
 config_age_judge_sex_experience_tem:Dict[int,config_def.AgeJudgeSexExperienceTem] = {}
@@ -124,18 +123,6 @@ config_weight_tem:Dict[int,config_def.WeightTem] = {}
 """ 体重模板对应体重范围 """
 
 
-def init_normal_config():
-    """ 初始化游戏通用配置数据 """
-    ini_config = configparser.ConfigParser()
-    ini_config.read("config.ini")
-    ini_data = ini_config["game"]
-    for k in ini_data.keys():
-        try:
-            config_normal.__dict__[k] = int(ini_data[k])
-        except:
-            config_normal.__dict__[k] = ini_data[k]
-
-
 def load_data_json():
     """ 载入data.json内配置数据 """
     global config_data
@@ -149,8 +136,10 @@ def translate_data(data:dict):
     Keyword arguments:
     data -- 待翻译的字典数据
     """
+    if "get_text" not in data:
+        return
     for key in data["data"]:
-        if get_text_data["get_text"][key]:
+        if data["get_text"][key]:
             data[key] = get_text._(data[key])
 
 
@@ -173,7 +162,7 @@ def load_age_tem():
     translate_data(now_data)
     for tem_data in now_data["data"]:
         now_tem = config_def.AgeTem()
-        now_tem.__dict__ = age_tem
+        now_tem.__dict__ = tem_data
         config_age_tem[now_tem.cid] = now_tem
 
 
@@ -183,7 +172,7 @@ def load_attr_tem():
     translate_data(now_data)
     for tem_data in now_data["data"]:
         now_tem = config_def.AttrTem()
-        now_tem.__dict__ = attr_tem
+        now_tem.__dict__ = tem_data
         config_attr_tem[now_tem.cid] = now_tem
 
 
@@ -193,7 +182,7 @@ def load_bar_data():
     translate_data(now_data)
     for tem_data in now_data["data"]:
         now_bar = config_def.BarConfig()
-        now_bar.__dict__ = bar_data
+        now_bar.__dict__ = tem_data
         config_bar[now_bar.cid] = now_bar
         config_bar_data[now_bar.name] = now_bar.cid
 
@@ -244,9 +233,9 @@ def load_chest_tem_data():
     """ 载入罩杯配置数据 """
     now_data = config_data["ChestTem"]
     translate_data(now_data)
-    for chest_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_chest = config_def.ChestTem()
-        now_chest.__dict__ = chest_data
+        now_chest.__dict__ = tem_data
         config_chest[now_chest.cid] = now_chest
 
 
@@ -311,9 +300,9 @@ def load_clothing_type():
     """ 载入衣服种类配置数据 """
     now_data = config_data["ClothingType"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_type = config_def.ClothingType()
-        now_type.__dict__ = type_data
+        now_type.__dict__ = tem_data
         config_clothing_type[now_type.cid] = now_type
 
 
@@ -321,9 +310,9 @@ def load_clothing_use_type():
     """ 载入衣服用途配置数据 """
     now_data = config_data["ClothingUseType"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_type = config_def.ClothingUseType()
-        now_type.__dict__ = type_data
+        now_type.__dict__ = tem_data
         config_clothing_use_type[now_type.cid] = now_type
 
 
@@ -331,7 +320,7 @@ def load_end_age_tem():
     """ 载入最终年龄范围配置模板 """
     now_data = config_data["EndAgeTem"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.EndAgeTem()
         now_tem.__dict__ = tem_data
         config_end_age_tem[now_tem.cid] = now_tem
@@ -342,9 +331,9 @@ def load_font_data():
     """ 载入字体配置数据 """
     now_data = config_data["FontConfig"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_font = config_def.FontConfig()
-        now_font.__dict__ = font_data
+        now_font.__dict__ = tem_data
         config_font[now_font.cid] = now_font
         config_font_data[now_font.name] = now_font.cid
 
@@ -353,7 +342,7 @@ def load_food_data():
     """ 载入食材配置数据 """
     now_data = config_data["Food"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.Food()
         now_tem.__dict__ = tem_data
         config_food[now_tem.cid] = now_tem
@@ -363,7 +352,7 @@ def load_food_feel_data():
     """ 载入食材效果配置数据 """
     now_data = config_data["FoodFeel"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.FoodFeel()
         now_tem.__dict__ = tem_data
         config_food_feel[now_tem.cid] = now_tem
@@ -375,7 +364,7 @@ def load_food_quality_weight():
     """ 载入烹饪技能等级制造食物品质权重配置数据 """
     now_data = config_data["FoodQualityWeight"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.FoodQualityWeight()
         now_tem.__dict__ = tem_data
         config_food_quality_weight[now_tem.cid] = now_tem
@@ -387,7 +376,7 @@ def load_height_tem():
     """ 载入身高预期值模板 """
     now_data = config_data["HeightTem"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.HeightTem()
         now_tem.__dict__ = tem_data
         config_height_tem[now_tem.cid] = now_tem
@@ -398,7 +387,7 @@ def load_hitpoint_tem():
     """ 载入hp模板对应平均值配置数据 """
     now_data = config_data["HitPointTem"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.HitPointTem()
         now_tem.__dict__ = tem_data
         config_hitpoint_tem[now_tem.cid] = now_tem
@@ -408,7 +397,7 @@ def load_manapoint_tem():
     """ 载入mp模板对应平均值配置数据 """
     now_data = config_data["ManaPointTem"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.ManaPointTem()
         now_tem.__dict__ = tem_data
         config_manapoint_tem[now_tem.cid] = now_tem
@@ -418,7 +407,7 @@ def load_nature():
     """ 载入性格配置数据 """
     now_data = config_data["Nature"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.Nature()
         now_tem.__dict__ = tem_data
         config_nature[now_tem.cid] = now_tem
@@ -428,7 +417,7 @@ def load_nature_tag():
     """ 载入性格标签配置数据 """
     now_data = config_data["NatureTag"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.NatureTag()
         now_tem.__dict__ = tem_data
         config_nature_tag[now_tem.cid] = now_tem
@@ -438,7 +427,7 @@ def load_organ_data():
     """ 载入器官种类配置 """
     now_data = config_data["Organ"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.Organ()
         now_tem.__dict__ = tem_data
         config_organ[now_tem.cid] = now_tem
@@ -448,7 +437,7 @@ def load_random_sex_weight():
     """ 载入生成随机npc时性别权重配置数据 """
     now_data = config_data["RandomNpcSexWeight"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.RandomNpcSexWeight()
         now_tem.__dict__ = tem_data
         config_random_sex_weight[now_tem.cid] = now_tem
@@ -458,7 +447,7 @@ def load_recipes():
     """ 载入菜谱配置数据 """
     now_data = config_data["Recipes"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.Recipes()
         now_tem.__dict__ = tem_data
         config_recipes[now_tem.cid] = now_tem
@@ -468,7 +457,7 @@ def load_recipes_formula():
     """ 载入菜谱配方配置 """
     now_data = config_data["RecipesFormula"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.RecipesFormula()
         now_tem.__dict__ = tem_data
         config_recipes_formula[now_tem.cid] = now_tem
@@ -478,7 +467,7 @@ def load_recipes_formula_type():
     """ 载入菜谱配方材料类型配置数据 """
     now_data = config_data["RecipesFormulaType"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.RecipesFormulaType()
         now_tem.__dict__ = tem_data
         config_recipes_formula_type[now_tem.cid] = now_tem
@@ -488,7 +477,7 @@ def load_sex_experience():
     """ 载入性经验丰富模板对应器官性经验模板配置数据 """
     now_data = config_data["SexExperience"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.SexExperience()
         now_tem.__dict__ = tem_data
         config_sex_experience[now_tem.cid] = now_tem
@@ -498,7 +487,7 @@ def load_sex_experience_tem():
     """ 载入器官类型性经验丰富程度对应经验范围 """
     now_data = config_data["SexExperienceTem"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.SexExperienceTem()
         now_tem.__dict__ = tem_data
         config_sex_experience_tem[now_tem.cid] = now_tem
@@ -508,7 +497,7 @@ def load_sex_tem():
     """ 载入性别对应描述和性别器官模板数据 """
     now_data = config_data["SexTem"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.SexTem()
         now_tem.__dict__ = tem_data
         config_sex_tem[now_tem.cid] = now_tem
@@ -518,7 +507,7 @@ def load_week_day():
     """ 载入星期描述文本配置数据 """
     now_data = config_data["WeekDay"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.WeekDay()
         now_tem.__dict__ = tem_data
         config_week_day[now_tem.cid] = now_tem
@@ -528,7 +517,7 @@ def load_weight_tem():
     """ 载入体重模板对应体重范围 """
     now_data = config_data["WeightTem"]
     translate_data(now_data)
-    for type_data in now_data["data"]:
+    for tem_data in now_data["data"]:
         now_tem = config_def.WeightTem()
         now_tem.__dict__ = tem_data
         config_weight_tem[now_tem.cid] = now_tem

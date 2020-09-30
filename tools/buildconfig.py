@@ -6,6 +6,7 @@ config_dir = os.path.join("..","data","csv")
 config_data = {}
 config_def_str = ""
 config_po = "\n"
+msgData = set()
 
 def build_csv_config(file_path:str,file_name:str):
     with open(file_path,encoding="utf-8") as now_file:
@@ -72,9 +73,11 @@ def build_config_def(class_name:str,value_type:dict,docstring:dict,class_text:st
 
 def build_config_po(message:str,message_class:str,message_type:str,message_id:str):
     global config_po
-    config_po += f'#: class:{message_class} id:{message_id} type:{message_type}\n'
-    config_po += f'msgid "{message}"\n'
-    config_po += f'msgstr "{message}"\n\n'
+    if message not in msgData:
+        config_po += f'#: class:{message_class} id:{message_id} type:{message_type}\n'
+        config_po += f'msgid "{message}"\n'
+        config_po += f'msgstr "{message}"\n\n'
+        msgData.add(message)
 
 
 file_list = os.listdir(config_dir)
@@ -88,10 +91,14 @@ for i in file_list:
     build_csv_config(now_file,i)
     index += 1
 
-po_path = os.path.join("..","data","po","zh_CN","LC_MESSAGES","zh_CN.po")
-os.remove(po_path)
+po_dir = os.path.join("..","data","po","zh_CN","LC_MESSAGES")
+po_path = os.path.join(po_dir,"dieloli.po")
+mo_path = os.path.join(po_dir,"dieloli.mo")
+if os.path.exists(po_path):
+    os.remove(po_path)
 os.system('find ../ -name "*.py" >POTFILES && xgettext -n --files-from=POTFILES -o ' + po_path)
 os.remove("POTFILES")
+os.system("msgfmt "+po_path + " -o " + mo_path)
 
 with open(po_path,"a") as po_file:
     po_file.write(config_po)

@@ -8,7 +8,7 @@ from Script.Core import (
     rich_text,
     constant,
 )
-from Script.Config import game_config
+from Script.Config import game_config,normal_config
 
 last_char = "\n"
 
@@ -66,7 +66,7 @@ def little_title_print(string: str):
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
-    width = game_config.config_normal.text_width
+    width = normal_config.config_normal.text_width
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 2 - int(text_width) / 2 - 2)
     line_feed_print("=" * line_width + "<littletitle>口" + string + "口</littletitle>" + "=" * line_width)
@@ -89,7 +89,7 @@ def son_title_print(string: str):
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
-    width = game_config.config_normal.text_width
+    width = normal_config.config_normal.text_width
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 4)
     line_width_fix = int(int(width) / 4 - int(text_width))
@@ -126,7 +126,7 @@ def restart_line_print(sample="=", style="standard"):
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    text_width = game_config.config_normal.text_width
+    text_width = normal_config.config_normal.text_width
     line_feed_print(sample * text_width, style)
 
 
@@ -148,7 +148,7 @@ def page_line_print(sample=":", string="", style="standard"):
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    text_width = int(game_config.config_normal.text_width)
+    text_width = int(normal_config.config_normal.text_width)
     string_width = int(text_handle.get_text_index(string))
     fix_text = sample * int(text_width / 2 - string_width / 2)
     string_text = fix_text + string + fix_text
@@ -282,7 +282,7 @@ def next_screen_print():
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    normal_print("\n" * game_config.config_normal.text_hight)
+    normal_print("\n" * normal_config.config_normal.text_hight)
 
 
 def lines_center_print(sleep_time: float, string="", style="standard"):

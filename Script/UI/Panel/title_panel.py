@@ -1,10 +1,10 @@
 import gettext
-from Script.Config import game_config
+from Script.Config import normal_config
 from Script.UI.Moudle import panel,draw
 from Script.Design import handle_panel
 from Script.Core import constant
 
-config_normal = game_config.config_normal
+config_normal = normal_config.config_normal
 
 @handle_panel.add_panel(constant.Panel.TITLE)
 def title_panel():
