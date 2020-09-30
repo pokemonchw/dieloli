@@ -235,7 +235,7 @@ def askfor_all(list, print_order=False):
     list -- 用于判断的列表内容
     print_order -- 是否将输入的order输出到屏幕上
     """
-    while True:
+    while 1:
         order = order_deal("str", print_order)
         if order in list:
             io_init.era_print(order + "\n")
@@ -289,7 +289,7 @@ def init_cache():
     """
     cache_contorl.cmd_map = {}
     cache_contorl.input_cache = [""]
-    cache_contorl.input_position = {"position": 0}
+    cache_contorl.input_position = 0
     cache_contorl.output_text_style = "standard"
     cache_contorl.text_style_position = 0
     cache_contorl.text_style_cache = ["standard"]

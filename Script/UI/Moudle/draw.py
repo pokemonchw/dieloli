@@ -8,14 +8,15 @@ bar_list = set(game_config.config_bar_data.keys())
 class NormalDraw:
     """ 通用文本绘制类型 """
 
+    style:str = "standard"
+    """ 文本的样式 """
+
     def __init__(self):
         """ 初始化绘制对象 """
         self.max_width:int = 0
         """ 当前最大可绘制宽度 """
         self.text = ""
         """ 当前要绘制的文本 """
-        self.style = "standard"
-        """ 文本的样式 """
 
     def __len__(self) -> int:
         """
@@ -180,9 +181,9 @@ class Button:
         normal_style -- 按钮默认样式
         on_mouse_style -- 鼠标悬停时样式
         """
-        self.text:str = ""
+        self.text:str = text
         """ 按钮文本 """
-        self.return_text:str = ""
+        self.return_text:str = return_text
         """ 点击按钮响应文本 """
         self.normal_style = normal_style
         """ 按钮默认样式 """
@@ -258,7 +259,7 @@ class LineDraw:
 
 
 class CenterDraw(NormalDraw):
-    """ 剧中绘制文本 """
+    """ 居中绘制文本 """
 
     def draw(self):
         """ 绘制文本 """

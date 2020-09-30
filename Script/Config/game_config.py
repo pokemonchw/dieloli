@@ -526,7 +526,6 @@ def load_weight_tem():
 def init():
     """ 初始化游戏配置数据 """
     load_data_json()
-    init_normal_config()
     load_age_judge_sex_experience_tem_data()
     load_age_tem()
     load_attr_tem()

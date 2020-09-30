@@ -25,7 +25,7 @@ from Script.Core import (
     text_handle,
     constant,
 )
-from Script.Config import game_config
+from Script.Config import normal_config,game_config
 
 
 def close_window():
@@ -40,10 +40,10 @@ def close_window():
 
 
 # 显示主框架
-game_name = game_config.config_normal.game_name
+game_name = normal_config.config_normal.game_name
 root = Tk()
 root.title(game_name)
-root.geometry(str(game_config.config_normal.window_width) + "x" + str(game_config.config_normal.window_hight) + "+0+0")
+root.geometry(str(normal_config.config_normal.window_width) + "x" + str(normal_config.config_normal.window_hight) + "+0+0")
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 root.protocol("WM_DELETE_WINDOW", close_window)
@@ -55,9 +55,9 @@ main_frame.rowconfigure(0, weight=1)
 # 显示窗口
 textbox = Text(
     main_frame,
-    width=game_config.config_normal.textbox_width,
-    height=game_config.config_normal.textbox_hight,
-    highlightbackground=game_config.config_normal.background,
+    width=normal_config.config_normal.textbox_width,
+    height=normal_config.config_normal.textbox_hight,
+    highlightbackground=normal_config.config_normal.background,
     bd=0,
 )
 textbox.grid(column=0, row=0, sticky=(N, W, E, S))
@@ -74,8 +74,8 @@ for k in game_config.config_font[0].__dict__:
         order_font_data.__dict__[k] = game_config.config_font[0].__dict__[k]
 input_background_box = Text(
     main_frame,
-    highlightbackground=game_config.config_normal.background,
-    background=game_config.config_normal.background,
+    highlightbackground=normal_config.config_normal.background,
+    background=normal_config.config_normal.background,
     bd=0,
 )
 input_background_box.grid(column=0, row=1, sticky=(W, E, S))
@@ -108,7 +108,7 @@ inputbox = Entry(
     selectbackground=order_font_data.selectbackground,
     textvariable=order,
     font=order_font,
-    width=game_config.config_normal.inputbox_width,
+    width=normal_config.config_normal.inputbox_width,
 )
 inputbox.grid(column=1, row=0, sticky=(N, E, S))
 
@@ -128,11 +128,11 @@ def send_input(*args):
         if not (order) == "":
             del cache_contorl.input_cache[0]
             cache_contorl.input_cache.append(order)
-            cache_contorl.input_position["position"] = 0
+            cache_contorl.input_position = 0
     else:
         if not (order) == "":
             cache_contorl.input_cache.append(order)
-            cache_contorl.input_position["position"] = 0
+            cache_contorl.input_position = 0
     input_event_func(order)
     clear_order()
 

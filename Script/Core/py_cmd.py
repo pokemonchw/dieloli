@@ -4,7 +4,7 @@ from Script.Core import (
     dictionaries,
     cache_contorl,
 )
-from Script.Config import game_config
+from Script.Config import game_config,normal_config
 
 # 清除命令
 clear_default_flow = flow_handle.clear_default_flow
@@ -35,7 +35,7 @@ def pcmd(
     """
     cmd_str = dictionaries.handle_text(cmd_str)
     cmd_id = dictionaries.handle_text(f"{cmd_id}")
-    cache_contorl.text_wait = float(game_config.config_normal.text_wait)
+    cache_contorl.text_wait = float(normal_config.config_normal.text_wait)
     global last_char
     if len(cmd_str) > 0:
         last_char = cmd_str[-1:]

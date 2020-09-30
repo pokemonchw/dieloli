@@ -48,16 +48,16 @@ def key_up(event: Event):
     Keyword arguments:
     event -- 键盘事件
     """
-    while cache_contorl.input_position["position"] == 0:
-        cache_contorl.input_position["position"] = len(cache_contorl.input_cache)
-    while cache_contorl.input_position["position"] <= 21 and cache_contorl.input_position["position"] > 1:
-        cache_contorl.input_position["position"] = cache_contorl.input_position["position"] - 1
-        inpot_id = cache_contorl.input_position["position"]
+    while cache_contorl.input_position == 0:
+        cache_contorl.input_position = len(cache_contorl.input_cache)
+    while cache_contorl.input_position <= 21 and cache_contorl.input_position > 1:
+        cache_contorl.input_position -= 1
+        inpot_id = cache_contorl.input_position
         try:
             main_frame.order.set(cache_contorl.input_cache[inpot_id])
             break
         except KeyError:
-            cache_contorl.input_position["position"] = cache_contorl.input_position["position"] + 1
+            cache_contorl.input_position += 1
 
 
 def key_down(event: Event):
@@ -67,17 +67,17 @@ def key_down(event: Event):
     event -- 键盘事件
     """
     if (
-        cache_contorl.input_position["position"] > 0
-        and cache_contorl.input_position["position"] < len(cache_contorl.input_cache) - 1
+        cache_contorl.input_position > 0
+        and cache_contorl.input_position < len(cache_contorl.input_cache) - 1
     ):
         try:
-            cache_contorl.input_position["position"] = cache_contorl.input_position["position"] + 1
-            input_id = cache_contorl.input_position["position"]
+            cache_contorl.input_position += 1
+            input_id = cache_contorl.input_position
             main_frame.order.set(cache_contorl.input_cache[input_id])
         except KeyError:
-            cache_contorl.input_position["position"] = cache_contorl.input_position["position"] - 1
-    elif cache_contorl.input_position["position"] == len(cache_contorl.input_cache) - 1:
-        cache_contorl.input_position["position"] = 0
+            cache_contorl.input_position -= 1
+    elif cache_contorl.input_position == len(cache_contorl.input_cache) - 1:
+        cache_contorl.input_position = 0
         main_frame.order.set("")
 
 

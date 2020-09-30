@@ -74,7 +74,7 @@ def remove_rich_cache(string: str) -> str:
     string -- 原始文本
     """
     string = dictionaries.handle_text(string)
-    style_name_list = game_config.get_font_data_list()
+    style_name_list = list(game_config.config_font_data.keys())
     for i in range(0, len(style_name_list)):
         style_text_head = "<" + style_name_list[i] + ">"
         style_text_tail = "</" + style_name_list[i] + ">"

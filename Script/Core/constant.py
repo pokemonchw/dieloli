@@ -190,6 +190,8 @@ class Panel:
 
     TITLE = 0
     """ 标题面板 """
+    CREATOR_CHARACTER = 1
+    """ 创建角色面板 """
 
 
 class Premise:

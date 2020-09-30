@@ -1,6 +1,7 @@
-from typing import List
+from typing import List,Dict
 from Script.UI.Moudle import draw
 from Script.Core import io_init
+from Script.Config import normal_config
 
 
 class SingleColumnButton:
@@ -10,8 +11,11 @@ class SingleColumnButton:
         """ 初始化绘制对象 """
         self.button_list:List[draw.Button] = []
         """ 绘制的按钮列表 """
-        self.return_list = set()
-        """ 按钮返回的响应列表 """
+        self.return_list:Dict[str,str] = {}
+        """
+        按钮返回的响应列表
+        按钮返回值:按钮文本
+        """
         self.max_width = 0
         """ 绘制的最大宽度 """
         self.max_height = 0
@@ -29,8 +33,9 @@ class SingleColumnButton:
         for i in range(len(button_list)):
             if i <= self.max_height:
                 draw_button = draw.Button(button_list[i],return_list[i],normal_style,onbutton_style)
+                draw_button.max_width = self.max_width
                 self.button_list.append(draw_button)
-            self.return_list.add(return_list[i])
+            self.return_list[return_list[i]] = button_list[i]
 
     def get_width(self) -> int:
         """
@@ -77,20 +82,23 @@ class OneMessageAndSingleColumnButton:
         return_list = []
         for i in range(len(button_list)):
             now_id = id_index(i+start_id)
-            now_id_text = now_id + button_list
+            now_id_text = now_id + button_list[i]
             new_button_list.append(now_id_text)
             now_i_str = str(start_id+i)
             return_list.append(now_i_str)
         self.message = draw.RichTextDraw()
         self.message.set_text(message)
         self.button_panel = SingleColumnButton()
+        self.button_panel.max_width = normal_config.config_normal.text_width
+        self.button_panel.max_height = len(return_list)
         self.button_panel.set(new_button_list,return_list)
+        self.button_panel.return_list = dict(zip(return_list,button_list))
 
-    def get_return_list(self) -> set:
+    def get_return_list(self) -> Dict[str,str]:
         """
         获取按钮响应的id集合
         Return arguments:
-        set -- 按钮响应的id集合
+        Dict[str,str] -- 按钮响应的id集合 按钮id:按钮文本
         """
         return self.button_panel.return_list
 
@@ -99,7 +107,6 @@ class OneMessageAndSingleColumnButton:
         self.message.draw()
         io_init.era_print("\n")
         self.button_panel.draw()
-        io_init.era_print("\n")
 
 
 class TitleAndRightInfoListPanel:
@@ -143,6 +150,15 @@ class TitleAndRightInfoListPanel:
         for value in self.draw_list:
             value.draw()
             io_init.era_print("\n")
+
+
+class ClearScreenPanel:
+    """ 绘制一屏长度的空行 """
+
+    def draw(self):
+        """ 绘制面板 """
+        panel = "\n"*50
+        io_init.era_print(panel)
 
 
 def id_index(now_id:int) -> str:

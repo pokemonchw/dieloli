@@ -76,7 +76,7 @@ def build_config_po(message:str,message_class:str,message_type:str,message_id:st
     if message not in msgData:
         config_po += f'#: class:{message_class} id:{message_id} type:{message_type}\n'
         config_po += f'msgid "{message}"\n'
-        config_po += f'msgstr "{message}"\n\n'
+        config_po += f'msgstr ""\n\n'
         msgData.add(message)
 
 
