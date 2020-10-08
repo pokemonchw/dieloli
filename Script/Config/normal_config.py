@@ -18,4 +18,3 @@ def init_normal_config():
             config_normal.__dict__[k] = int(ini_data[k])
         except:
             config_normal.__dict__[k] = ini_data[k]
-

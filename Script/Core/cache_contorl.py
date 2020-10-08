@@ -77,16 +77,16 @@ average_height_by_age: dict = {}
 """ 各年龄段平均身高 """
 text_wait: int = 0
 """ 绘制文本输出等待时间 """
-map_data: dict = {}
-""" 游戏地图数据 """
-scene_data: dict = {}
-""" 游戏场景数据 """
+map_data: Dict[str,game_type.Map] = {}
+""" 游戏地图数据 地图路径:地图数据 """
+scene_data: Dict[str,game_type.Scene] = {}
+""" 游戏场景数据 场景路径:场景数据 """
 now_map: List[str] = []
 """ 查看地图时当前所查看的地图的坐标 """
 random_npc_list: List[game_type.NpcTem] = []
 """ 随机npc数据 """
-place_data: dict = {}
-""" 按房间类型分类的场景列表 """
+place_data: Dict[str,List[str]] = {}
+""" 按房间类型分类的场景列表 场景标签:场景路径列表 """
 wear_item_type_data: dict = {}
 """ 可穿戴道具类型数据 """
 course_time_status: dict = {}

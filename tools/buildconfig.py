@@ -80,6 +80,34 @@ def build_config_po(message:str,message_class:str,message_type:str,message_id:st
         msgData.add(message)
 
 
+def build_scene_config(data_path):
+    global config_po
+    for i in os.listdir(data_path):
+        now_path = os.path.join(data_path,i)
+        if os.path.isfile(now_path):
+            if i == "Scene.json":
+                with open(now_path,"r",encoding="utf-8") as now_file:
+                    scene_data = json.loads(now_file.read())
+                    scene_name = scene_data["SceneName"]
+                    if scene_name not in msgData:
+                        config_po += f'#: Scene:{now_path}\n'
+                        config_po += f'msgid "{scene_name}"\n'
+                        config_po += 'msgstr ""\n\n'
+                        msgData.add(scene_name)
+            elif i == "Map.json":
+                with open(now_path,"r",encoding="utf-8") as now_file:
+                    map_data = json.loads(now_file.read())
+                    map_name = map_data["MapName"]
+                    if map_name not in msgData:
+                        config_po += f'#: Map:{now_path}\n'
+                        config_po += f'msgid "{map_name}"\n'
+                        config_po += 'msgstr ""\n\n'
+                        msgData.add(map_name)
+        else:
+            build_scene_config(now_path)
+
+
+
 file_list = os.listdir(config_dir)
 index = 0
 for i in file_list:
@@ -90,6 +118,9 @@ for i in file_list:
     now_file = os.path.join(config_dir,i)
     build_csv_config(now_file,i)
     index += 1
+
+map_path = os.path.join("..","data","map")
+build_scene_config(map_path)
 
 po_dir = os.path.join("..","data","po","zh_CN","LC_MESSAGES")
 po_path = os.path.join(po_dir,"dieloli.po")

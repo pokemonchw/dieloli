@@ -146,7 +146,7 @@ def get_map_system_path_str(now_path: List[str]) -> str:
     return os.sep.join(now_path)
 
 
-def get_print_map_data(map_draw: str) -> dict:
+def get_print_map_data(map_draw: str) -> Dict:
     """
     获取绘制地图的富文本和按钮数据
     Keyword arguments:
