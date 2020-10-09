@@ -1,7 +1,7 @@
 import os
-from typing import Dict
+from typing import Dict,List
 from dijkstar import Graph, find_path
-from Script.Core import game_type,json_handle,cache_contorl,get_text
+from Script.Core import game_type,json_handle,cache_contorl,get_text,text_handle
 
 
 map_data_path = os.path.join("data","map")
@@ -27,7 +27,7 @@ def load_dir_now(data_path:str):
                     if now_file[0] == "Scene":
                         now_scene_data = game_type.Scene()
                         now_scene_data.scene_path = get_map_system_path_str(get_map_system_path_for_path(now_path))
-                        load_scene_data = json_handle.load_json(now_file)
+                        load_scene_data = json_handle.load_json(now_path)
                         now_scene_data.scene_name = get_text._(load_scene_data["SceneName"])
                         now_scene_data.in_door = (load_scene_data["InOutDoor"] == "In")
                         now_scene_data.scene_tag = load_scene_data["SceneTag"]
@@ -37,20 +37,24 @@ def load_dir_now(data_path:str):
                     elif now_file[0] == "Map":
                         now_map_data = game_type.Map()
                         now_map_data.map_path = get_map_system_path_str(get_map_system_path_for_path(now_path))
-                        with open(os.path.join(data_path,"Map","r")) as now_read_file:
+                        with open(os.path.join(data_path,"Map"),"r") as now_read_file:
                             draw_data = now_read_file.read()
                             now_map_data.map_draw = get_print_map_data(draw_data)
-                        load_map_data = json_handle.load_json(now_file)
-                        now_map_data.map_name = load_map_data["MapName"]
+                        load_map_data = json_handle.load_json(now_path)
+                        now_map_data.map_name = get_text._(load_map_data["MapName"])
                         now_map_data.path_edge = load_map_data["PathEdge"]
                         now_map_data.sorted_path = get_sorted_map_path_data(now_map_data.path_edge)
                         cache_contorl.map_data[now_map_data.map_path] = now_map_data
+        else:
+            load_dir_now(now_path)
 
-def get_map_system_path_for_path(now_path: str) -> list:
+def get_map_system_path_for_path(now_path: str) -> List[str]:
     """
     从地图文件路径获取游戏地图系统路径
     Keyword arguments:
     now_path -- 地图文件路径
+    Return arguments:
+    List[str] -- 游戏地图路径
     """
     current_dir = os.path.dirname(os.path.abspath(now_path))
     current_dir_str = str(current_dir)
@@ -63,6 +67,10 @@ def get_map_system_path_for_path(now_path: str) -> list:
 def get_map_system_path_str(now_path: List[str]) -> str:
     """
     将游戏地图系统路径转换为字符串
+    Keyword arguments:
+    now_path -- 游戏地图路径
+    Return arguments:
+    str -- 地图路径字符串
     """
     return os.sep.join(now_path)
 
@@ -79,8 +87,7 @@ def get_print_map_data(map_draw: str) -> game_type.MapDraw:
     for map_x_list_id in range(len(map_y_list)):
         set_map_button = False
         map_x_list = map_y_list[map_x_list_id]
-        map_x_list_cmd_list = []
-        cmd_id_list = []
+        now_draw_list = game_type.MapDrawLine()
         new_x_list = ""
         now_cmd = ""
         i = 0
@@ -89,19 +96,31 @@ def get_print_map_data(map_draw: str) -> game_type.MapDraw:
                 new_x_list += map_x_list[i]
             elif not set_map_button and map_x_list[i : i + 11] == "<mapbutton>":
                 i += 10
-                set_map_button = True
+                set_map_button = 1
+                if len(new_x_list):
+                    now_draw = game_type.MapDrawText()
+                    now_draw.text = new_x_list
+                    now_draw_list.draw_list.append(now_draw)
+                    now_draw_list.width += text_handle.get_text_index(new_x_list)
+                    new_x_list = ""
             elif set_map_button and map_x_list[i : i + 12] != "</mapbutton>":
                 now_cmd += map_x_list[i]
             else:
-                set_map_button = False
-                map_x_list_cmd_list.append(now_cmd)
-                cmd_id_list.append(len(new_x_list))
+                set_map_button = 0
+                now_draw = game_type.MapDrawText()
+                now_draw.text = now_cmd
+                now_draw.is_button = 1
+                now_draw_list.draw_list.append(now_draw)
+                now_draw_list.width += text_handle.get_text_index(now_cmd)
                 now_cmd = ""
                 i += 11
             i += 1
-        map_draw_data.draw_text.append(new_x_list)
-        map_draw_data.cmd[map_x_list_id] = map_x_list_cmd_list
-        map_draw_data.cmd_id[map_x_list_id] = cmd_id_list
+        if len(new_x_list):
+            now_draw = game_type.MapDrawText()
+            now_draw.text = new_x_list
+            now_draw_list.draw_list.append(now_draw)
+            now_draw_list.width += text_handle.get_text_index(new_x_list)
+        map_draw_data.draw_text.append(now_draw_list)
     return map_draw_data
 
 def get_sorted_map_path_data(map_data: Dict[str, Dict[str, int]]) -> Dict[str, Dict[str, game_type.TargetPath]]:

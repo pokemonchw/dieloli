@@ -43,7 +43,7 @@ Memory: \
 
 依赖
 ----
-python3 \
+python3.8.6
 
 建议通过::
 

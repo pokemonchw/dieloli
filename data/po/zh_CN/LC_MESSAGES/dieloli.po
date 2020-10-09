@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-08 20:46+0800\n"
+"POT-Creation-Date: 2020-10-09 16:08+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../game.py:19
+#: ../game.py:18
 msgid "python3版本过旧(低于python3.8.6),请升级"
 msgstr ""
 
@@ -81,6 +81,78 @@ msgstr ""
 msgid "肛门"
 msgstr ""
 
+#: class:Course id:0 type:name
+msgid "语言文学"
+msgstr ""
+
+#: class:Course id:1 type:name
+msgid "数学"
+msgstr ""
+
+#: class:Course id:2 type:name
+msgid "英语"
+msgstr ""
+
+#: class:Course id:3 type:name
+msgid "信息技术"
+msgstr ""
+
+#: class:Course id:4 type:name
+msgid "美术"
+msgstr ""
+
+#: class:Course id:5 type:name
+msgid "音乐"
+msgstr ""
+
+#: class:Course id:6 type:name
+msgid "体育"
+msgstr ""
+
+#: class:Course id:7 type:name
+msgid "思想品德"
+msgstr ""
+
+#: class:Course id:8 type:name
+msgid "健康教育"
+msgstr ""
+
+#: class:Course id:9 type:name
+msgid "自然"
+msgstr ""
+
+#: class:Course id:10 type:name
+msgid "社会"
+msgstr ""
+
+#: class:Course id:11 type:name
+msgid "历史"
+msgstr ""
+
+#: class:Course id:12 type:name
+msgid "生物"
+msgstr ""
+
+#: class:Course id:13 type:name
+msgid "地理"
+msgstr ""
+
+#: class:Course id:14 type:name
+msgid "物理"
+msgstr ""
+
+#: class:Course id:15 type:name
+msgid "化学"
+msgstr ""
+
+#: class:Course id:16 type:name
+msgid "舞蹈"
+msgstr ""
+
+#: class:Course id:17 type:name
+msgid "游泳"
+msgstr ""
+
 #: class:CharacterStateType id:0 type:name
 msgid "性感受"
 msgstr ""
@@ -123,6 +195,98 @@ msgstr ""
 
 #: class:ClothingTag id:7 type:name
 msgid "价值"
+msgstr ""
+
+#: class:Language id:0 type:name
+msgid "汉语"
+msgstr ""
+
+#: class:Language id:0 type:info
+msgid "联合国6种工作语言之一，你的母语，在这个国度，每个达到学龄的儿童都已经基本掌握的语言。"
+msgstr ""
+
+#: class:Language id:1 type:info
+msgid "联合国6种工作语言之一，人类通用语，每个自然人都应该掌握的语言。"
+msgstr ""
+
+#: class:Language id:2 type:name
+msgid "法语"
+msgstr ""
+
+#: class:Language id:2 type:info
+msgid "联合国6种工作语言之一，被广泛在国际性社交和外交活动中应用。"
+msgstr ""
+
+#: class:Language id:3 type:name
+msgid "西班牙语"
+msgstr ""
+
+#: class:Language id:3 type:info
+msgid "联合国6种工作语言之一，被称为和上帝沟通的语言。"
+msgstr ""
+
+#: class:Language id:4 type:name
+msgid "阿拉伯语"
+msgstr ""
+
+#: class:Language id:4 type:info
+msgid "联合国6种工作语言之一，伊斯兰教宗教语言，主要通行于西亚和北非地区。"
+msgstr ""
+
+#: class:Language id:5 type:name
+msgid "俄语"
+msgstr ""
+
+#: class:Language id:5 type:info
+msgid "联合国6种工作语言之一，主要为前苏联成员国家使用。"
+msgstr ""
+
+#: class:Language id:6 type:name
+msgid "日语"
+msgstr ""
+
+#: class:Language id:6 type:info
+msgid "由日本先进的电子产品和汽车工业，以及发达的动漫产业，而在世界范围内广泛传播的语言。"
+msgstr ""
+
+#: class:Language id:7 type:name
+msgid "印地语"
+msgstr ""
+
+#: class:Language id:7 type:info
+msgid "印度官方语言之一，印度斯坦人的文学语言。"
+msgstr ""
+
+#: class:Language id:8 type:name
+msgid "古拉丁语"
+msgstr ""
+
+#: class:Language id:8 type:info
+msgid "古罗马奥古斯都皇帝时代所使用的语言。"
+msgstr ""
+
+#: class:Language id:9 type:name
+msgid "拉丁语"
+msgstr ""
+
+#: class:Language id:9 type:info
+msgid "死语之一，曾随基督教和古罗马帝国的扩张而成为欧洲通用语。"
+msgstr ""
+
+#: class:Language id:10 type:name
+msgid "古汉语"
+msgstr ""
+
+#: class:Language id:10 type:info
+msgid "死语之一，中国古代被称为雅言的官方语言，中国先秦时期洛阳方言为基础而来。"
+msgstr ""
+
+#: class:Language id:11 type:name
+msgid "上古汉语"
+msgstr ""
+
+#: class:Language id:11 type:info
+msgid "死语之一，中国商周时期所使用的，以象形文字（甲骨文）为基础的语言。"
 msgstr ""
 
 #: class:Food id:0 type:name
@@ -627,6 +791,294 @@ msgstr ""
 
 #: class:ClothingEvaluate id:9 type:name
 msgid "世界第一的"
+msgstr ""
+
+#: class:Knowledge id:0 type:name
+msgid "伦理"
+msgstr ""
+
+#: class:Knowledge id:1 type:name
+msgid "道德"
+msgstr ""
+
+#: class:Knowledge id:2 type:name
+msgid "文学"
+msgstr ""
+
+#: class:Knowledge id:3 type:name
+msgid "诗歌"
+msgstr ""
+
+#: class:Knowledge id:5 type:name
+msgid "艺术"
+msgstr ""
+
+#: class:Knowledge id:6 type:name
+msgid "乐理"
+msgstr ""
+
+#: class:Knowledge id:7 type:name
+msgid "宗教"
+msgstr ""
+
+#: class:Knowledge id:8 type:name
+msgid "信仰"
+msgstr ""
+
+#: class:Knowledge id:9 type:name
+msgid "性爱"
+msgstr ""
+
+#: class:Knowledge id:10 type:name
+msgid "计算机"
+msgstr ""
+
+#: class:Knowledge id:11 type:name
+msgid "表演"
+msgstr ""
+
+#: class:Knowledge id:12 type:name
+msgid "口才"
+msgstr ""
+
+#: class:Knowledge id:13 type:name
+msgid "绘画"
+msgstr ""
+
+#: class:Knowledge id:14 type:name
+msgid "拍摄"
+msgstr ""
+
+#: class:Knowledge id:15 type:name
+msgid "演唱"
+msgstr ""
+
+#: class:Knowledge id:16 type:name
+msgid "作曲"
+msgstr ""
+
+#: class:Knowledge id:17 type:name
+msgid "厨艺"
+msgstr ""
+
+#: class:Knowledge id:19 type:name
+msgid "裁缝"
+msgstr ""
+
+#: class:Knowledge id:20 type:name
+msgid "战术"
+msgstr ""
+
+#: class:Knowledge id:22 type:name
+msgid "制造"
+msgstr ""
+
+#: class:Knowledge id:23 type:name
+msgid "急救"
+msgstr ""
+
+#: class:Knowledge id:24 type:name
+msgid "解剖"
+msgstr ""
+
+#: class:Knowledge id:25 type:name
+msgid "演奏"
+msgstr ""
+
+#: class:Knowledge id:26 type:name
+msgid "编程"
+msgstr ""
+
+#: class:Knowledge id:27 type:name
+msgid "黑客"
+msgstr ""
+
+#: class:Knowledge id:28 type:name
+msgid "写作"
+msgstr ""
+
+#: class:Knowledge id:29 type:name
+msgid "交易"
+msgstr ""
+
+#: class:Knowledge id:30 type:name
+msgid "礼仪"
+msgstr ""
+
+#: class:Knowledge id:31 type:name
+msgid "运动"
+msgstr ""
+
+#: class:Knowledge id:32 type:name
+msgid "徒手格斗"
+msgstr ""
+
+#: class:Knowledge id:33 type:name
+msgid "刺击武器"
+msgstr ""
+
+#: class:Knowledge id:34 type:name
+msgid "弓术"
+msgstr ""
+
+#: class:Knowledge id:35 type:name
+msgid "斩击武器"
+msgstr ""
+
+#: class:Knowledge id:36 type:name
+msgid "射击"
+msgstr ""
+
+#: class:Knowledge id:37 type:name
+msgid "闪避"
+msgstr ""
+
+#: class:Knowledge id:38 type:name
+msgid "近战"
+msgstr ""
+
+#: class:Knowledge id:39 type:name
+msgid "重武器"
+msgstr ""
+
+#: class:Knowledge id:40 type:name
+msgid "钝击武器"
+msgstr ""
+
+#: class:Knowledge id:41 type:name
+msgid "冲锋枪"
+msgstr ""
+
+#: class:Knowledge id:42 type:name
+msgid "手枪"
+msgstr ""
+
+#: class:Knowledge id:43 type:name
+msgid "霰弹枪"
+msgstr ""
+
+#: class:Knowledge id:44 type:name
+msgid "步枪"
+msgstr ""
+
+#: class:Knowledge id:45 type:name
+msgid "火焰喷射器"
+msgstr ""
+
+#: class:Knowledge id:46 type:name
+msgid "机械学"
+msgstr ""
+
+#: class:Knowledge id:47 type:name
+msgid "电子学"
+msgstr ""
+
+#: class:Knowledge id:48 type:name
+msgid "计算机学"
+msgstr ""
+
+#: class:Knowledge id:49 type:name
+msgid "密码学"
+msgstr ""
+
+#: class:Knowledge id:51 type:name
+msgid "生物学"
+msgstr ""
+
+#: class:Knowledge id:53 type:name
+msgid "天文学"
+msgstr ""
+
+#: class:Knowledge id:54 type:name
+msgid "物理学"
+msgstr ""
+
+#: class:Knowledge id:55 type:name
+msgid "地理学"
+msgstr ""
+
+#: class:Knowledge id:56 type:name
+msgid "地质学"
+msgstr ""
+
+#: class:Knowledge id:57 type:name
+msgid "生态学"
+msgstr ""
+
+#: class:Knowledge id:58 type:name
+msgid "动物学"
+msgstr ""
+
+#: class:Knowledge id:59 type:name
+msgid "植物学"
+msgstr ""
+
+#: class:Knowledge id:60 type:name
+msgid "昆虫学"
+msgstr ""
+
+#: class:Knowledge id:61 type:name
+msgid "微生物学"
+msgstr ""
+
+#: class:Knowledge id:62 type:name
+msgid "病毒学"
+msgstr ""
+
+#: class:Knowledge id:63 type:name
+msgid "细菌学"
+msgstr ""
+
+#: class:Knowledge id:64 type:name
+msgid "真菌学"
+msgstr ""
+
+#: class:Knowledge id:65 type:name
+msgid "药学"
+msgstr ""
+
+#: class:Knowledge id:66 type:name
+msgid "气象学"
+msgstr ""
+
+#: class:Knowledge id:67 type:name
+msgid "法学"
+msgstr ""
+
+#: class:Knowledge id:68 type:name
+msgid "语言学"
+msgstr ""
+
+#: class:Knowledge id:69 type:name
+msgid "炼金学"
+msgstr ""
+
+#: class:Knowledge id:70 type:name
+msgid "通灵学"
+msgstr ""
+
+#: class:Knowledge id:71 type:name
+msgid "灵数学"
+msgstr ""
+
+#: class:Knowledge id:72 type:name
+msgid "占卜学"
+msgstr ""
+
+#: class:Knowledge id:73 type:name
+msgid "预言学"
+msgstr ""
+
+#: class:Knowledge id:75 type:name
+msgid "占星学"
+msgstr ""
+
+#: class:Knowledge id:76 type:name
+msgid "恶魔学"
+msgstr ""
+
+#: class:Knowledge id:77 type:name
+msgid "仪式学"
 msgstr ""
 
 #: class:ClothingTem id:0 type:name
@@ -1481,6 +1933,38 @@ msgstr ""
 msgid "调料"
 msgstr ""
 
+#: class:School id:0 type:name
+msgid "小学"
+msgstr ""
+
+#: class:School id:1 type:name
+msgid "初中"
+msgstr ""
+
+#: class:School id:2 type:name
+msgid "高中"
+msgstr ""
+
+#: class:KnowledgeType id:0 type:name
+msgid "人文"
+msgstr ""
+
+#: class:KnowledgeType id:1 type:name
+msgid "技巧"
+msgstr ""
+
+#: class:KnowledgeType id:2 type:name
+msgid "战斗"
+msgstr ""
+
+#: class:KnowledgeType id:3 type:name
+msgid "科学"
+msgstr ""
+
+#: class:KnowledgeType id:4 type:name
+msgid "神秘学"
+msgstr ""
+
 #: class:ClothingType id:0 type:name
 msgid "外套"
 msgstr ""
@@ -1527,10 +2011,6 @@ msgstr ""
 
 #: class:ClothingUseType id:4 type:name
 msgid "制服"
-msgstr ""
-
-#: class:ClothingUseType id:5 type:name
-msgid "表演"
 msgstr ""
 
 #: class:ClothingUseType id:6 type:name

@@ -122,9 +122,12 @@ class Character:
         """ 角色所属办公室坐标 """
         self.knowledge: Dict[str, int] = {}
         """ 角色知识技能等级数据 """
-        self.language: Dict[str, int] = {}
-        """ 角色语言技能等级数据 """
-        self.mother_tongue: str = "Chinese"
+        self.language: Dict[int, int] = {}
+        """
+        角色语言技能等级数据
+        语言id:经验
+        """
+        self.mother_tongue: int = 0
         """ 角色母语 """
         self.interest: Dict[str, int] = {}
         """ 角色天赋数据 """
@@ -148,8 +151,8 @@ class Character:
         """ 角色罩杯数据 """
         self.nature = {}
         """ 角色性格数据 """
-        self.status: Dict[int, Dict[int, int]] = {}
-        """ 角色状态数据 状态类型:状态id:状态数值 """
+        self.status: Dict[int, int] = {}
+        """ 角色状态数据 状态id:状态数值 """
         self.put_on: dict = {}
         """ 角色已穿戴服装数据 """
         self.wear_item: dict = {}
@@ -158,15 +161,8 @@ class Character:
         """ 角色HP模板 """
         self.mana_point_tem: str = "Ordinary"
         """ 角色MP模板 """
-        self.social_contact: dict = {
-            "Adore": {},
-            "Admire": {},
-            "Subside": {},
-            "Depend": {},
-            "Trust": {},
-            "Friendly": {},
-        }
-        """ 角色社交关系数据 关系id:角色id:亲密度 """
+        self.social_contact: Dict[int,SocialContact] = {}
+        """ 角色社交关系数据 关系类型:关系数据 """
         self.occupation: str = ""
         """ 角色职业ID """
         self.food_bag: Dict[UUID, Food] = {}
@@ -177,6 +173,16 @@ class Character:
         """ 角色当前交互对象id """
         self.adv: int = 0
         """ 剧情npc校验 """
+
+
+class SocialContact:
+    """ 社交关系结构体 """
+
+    def __init__(self):
+        self.type:int = 0
+        """ 关系类型 """
+        self.character_list:Dict[int,int] = {}
+        """ 对象列表 对象id:亲密度 """
 
 
 class Food:
@@ -406,18 +412,28 @@ class MapDraw:
     """ 地图绘制数据 """
 
     def __init__(self):
-        self.draw_text:List[str] = []
-        """ 每行绘制的文本列表 """
-        self.cmd:Dict[int,List[str]] = {}
-        """
-        每行绘制的按钮列表
-        行号:按钮文本列表
-        """
-        self.cmd_id:Dict[int,Dict[int,int]] = {}
-        """
-        每行绘制按钮的位置
-        行号:绘制位置:按钮编号
-        """
+        self.draw_text:List[MapDrawLine] = []
+        """ 绘制行对象列表 """
+
+
+class MapDrawLine:
+    """ 地图绘制行数据 """
+
+    def __init__(self):
+        self.width:int = 0
+        """ 总行宽 """
+        self.draw_list:List[MapDrawText] = []
+        """ 绘制的对象列表 """
+
+
+class MapDrawText:
+    """ 地图绘制文本数据 """
+
+    def __init__(self):
+        self.text:str = ""
+        """ 要绘制的文本 """
+        self.is_button:bool = 0
+        """ 是否是场景按钮 """
 
 
 class TargetPath:

@@ -33,10 +33,12 @@ config_body_fat_tem_data:Dict[int,Dict[int,int]] = {}
 """
 config_book:Dict[int,config_def.Book] = {}
 """ 书籍配表数据 """
-config_character_statue:Dict[int,config_def.CharacterState] = {}
+config_character_state:Dict[int,config_def.CharacterState] = {}
 """ 角色状态属性配表数据 """
-config_character_statue_type:Dict[int,config_def.CharacterStateType] = {}
+config_character_state_type:Dict[int,config_def.CharacterStateType] = {}
 """ 角色状态类型配表数据 """
+config_character_state_type_data:Dict[int,set] = {}
+""" 角色状态类型下状态属性集合 类型id:属性集合 """
 config_chest:Dict[int,config_def.ChestTem] = {}
 """ 罩杯配置数据 """
 config_clothing_collocational:Dict[int,config_def.ClothingCollocational] = {}
@@ -65,6 +67,20 @@ config_clothing_type:Dict[int,config_def.ClothingType] = {}
 """ 衣服种类配置数据 """
 config_clothing_use_type:Dict[int,config_def.ClothingUseType] = {}
 """ 衣服用途配置数据 """
+config_course:Dict[int,config_def.Course] = {}
+""" 课程配置数据 """
+config_course_skill_experience:Dict[int,config_def.CourseSkillExperience] = {}
+""" 课程获取技能经验配置 """
+config_course_knowledge_experience_data:Dict[int,Dict[int,float]] = {}
+"""
+课程获取知识技能经验配置数据
+课程id:技能id:经验数量
+"""
+config_course_language_experience_data:Dict[int,Dict[int,float]] = {}
+"""
+课程获取语言技能经验配置数据
+课程id:技能id:经验数量
+"""
 config_end_age_tem:Dict[int,config_def.EndAgeTem] = {}
 """ 最终年龄范围配置模板 """
 config_end_age_tem_sex_data:Dict[int,int] = {}
@@ -95,6 +111,22 @@ config_height_tem_sex_data:Dict[int,config_def.HeightTem] = {}
 """ 性别对应身高预期值模板 """
 config_hitpoint_tem:Dict[int,config_def.HitPointTem] = {}
 """ HP模板对应平均值 """
+config_knowledge:Dict[int,config_def.Knowledge] = {}
+""" 知识技能配置 """
+config_knowledge_type:Dict[int,config_def.KnowledgeType] = {}
+""" 知识技能类型配置 """
+config_knowledge_type_data:Dict[int,set] = {}
+"""
+知识技能类型配置数据
+类型id:类型下技能集合
+"""
+config_language:Dict[int,config_def.Language] = {}
+""" 语言技能配置数据 """
+config_language_family_data:Dict[int,set] = {}
+"""
+语言技能谱系配置数据
+谱系id:语言id集合
+"""
 config_manapoint_tem:Dict[int,config_def.ManaPointTem] = {}
 """ MP模板对应平均值 """
 config_nature:Dict[int,config_def.Nature] = {}
@@ -111,6 +143,15 @@ config_recipes_formula:Dict[int,config_def.RecipesFormula] = {}
 """ 菜谱配方配置 """
 config_recipes_formula_type:Dict[int,config_def.RecipesFormulaType] = {}
 """ 菜谱配方材料类型配置 """
+config_school:Dict[int,config_def.School] = {}
+""" 学校配置数据 """
+config_school_session:Dict[int,config_def.SchoolSession] = {}
+""" 学校上课时间配置 """
+config_school_session_data:Dict[int,Dict[int,List[int]]] = {}
+"""
+学校上课时间配置数据
+学校id:课时编号:[开始时间,结束时间]
+"""
 config_sex_experience:Dict[int,config_def.SexExperience] = {}
 """ 性经验丰富程度模板对应器官性经验模板 """
 config_sex_experience_tem:Dict[int,config_def.SexExperienceTem] = {}
@@ -209,24 +250,26 @@ def load_book_data():
         config_book[now_tem.cid] = now_tem
 
 
-def load_character_statue_data():
+def load_character_state_data():
     """ 载入角色状态属性配表数据 """
     now_data = config_data["CharacterState"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
         now_tem = config_def.CharacterState()
         now_tem.__dict__ = tem_data
-        config_character_statue[now_tem.cid] = now_tem
+        config_character_state[now_tem.cid] = now_tem
+        config_character_state_type_data.setdefault(now_tem.type,set())
+        config_character_state_type_data[now_tem.type].add(now_tem.cid)
 
 
-def load_character_statue_type_data():
+def load_character_state_type_data():
     """ 载入角色状态类型配表数据 """
     now_data = config_data["CharacterStateType"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
         now_tem = config_def.CharacterStateType()
         now_tem.__dict__ = tem_data
-        config_character_statue_type[now_tem.cid] = now_tem
+        config_character_state_type[now_tem.cid] = now_tem
 
 
 def load_chest_tem_data():
@@ -316,6 +359,32 @@ def load_clothing_use_type():
         config_clothing_use_type[now_type.cid] = now_type
 
 
+def load_course():
+    """ 载入课程配置数据 """
+    now_data = config_data["Course"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Course()
+        now_tem.__dict__ = tem_data
+        config_course[now_tem.cid] = now_tem
+
+
+def load_course_skill_experience():
+    """ 载入课程获取技能经验配置数据 """
+    now_data = config_data["CourseSkillExperience"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.CourseSkillExperience()
+        now_tem.__dict__ = tem_data
+        config_course_skill_experience[now_tem.cid] = now_tem
+        if now_tem.skill_type:
+            config_course_language_experience_data.setdefault(now_tem.course,{})
+            config_course_language_experience_data[now_tem.course][now_tem.skill] = now_tem.experience
+        else:
+            config_course_knowledge_experience_data.setdefault(now_tem.course,{})
+            config_course_knowledge_experience_data[now_tem.course][now_tem.skill] = now_tem.experience
+
+
 def load_end_age_tem():
     """ 载入最终年龄范围配置模板 """
     now_data = config_data["EndAgeTem"]
@@ -391,6 +460,40 @@ def load_hitpoint_tem():
         now_tem = config_def.HitPointTem()
         now_tem.__dict__ = tem_data
         config_hitpoint_tem[now_tem.cid] = now_tem
+
+
+def load_knowledge():
+    """ 载入知识技能配置数据 """
+    now_data = config_data["Knowledge"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Knowledge()
+        now_tem.__dict__ = tem_data
+        config_knowledge[now_tem.cid] = now_tem
+        config_knowledge_type_data.setdefault(now_tem.type,set())
+        config_knowledge_type_data[now_tem.type].add(now_tem.cid)
+
+
+def load_knowledge_type():
+    """ 载入知识技能类型配置数据 """
+    now_data = config_data["KnowledgeType"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.KnowledgeType()
+        now_tem.__dict__ = tem_data
+        config_knowledge_type[now_tem.cid] = now_tem
+
+
+def load_language_tem():
+    """ 载入语言技能配置数据 """
+    now_data = config_data["Language"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Language()
+        now_tem.__dict__ = tem_data
+        config_language[now_tem.cid] = now_tem
+        config_language_family_data.setdefault(now_tem.family,set())
+        config_language_family_data[now_tem.family].add(now_tem.cid)
 
 
 def load_manapoint_tem():
@@ -473,6 +576,28 @@ def load_recipes_formula_type():
         config_recipes_formula_type[now_tem.cid] = now_tem
 
 
+def load_school():
+    """ 载入学校配置数据 """
+    now_data = config_data["School"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.School()
+        now_tem.__dict__ = tem_data
+        config_school[now_tem.cid] = now_tem
+
+
+def load_school_session():
+    """ 载入学校上课时间配置 """
+    now_data = config_data["SchoolSession"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.SchoolSession()
+        now_tem.__dict__ = tem_data
+        config_school_session[now_tem.cid] = now_tem
+        config_school_session_data.setdefault(now_tem.school_id,{})
+        config_school_session_data[now_tem.school_id][now_tem.session] = [now_tem.start_time,now_tem.end_time]
+
+
 def load_sex_experience():
     """ 载入性经验丰富模板对应器官性经验模板配置数据 """
     now_data = config_data["SexExperience"]
@@ -532,8 +657,8 @@ def init():
     load_bar_data()
     load_body_fat_tem()
     load_book_data()
-    load_character_statue_data()
-    load_character_statue_type_data()
+    load_character_state_data()
+    load_character_state_type_data()
     load_chest_tem_data()
     load_clothing_collocational()
     load_clothing_evaluate()
@@ -542,6 +667,8 @@ def init():
     load_clothing_tem()
     load_clothing_type()
     load_clothing_use_type()
+    load_course()
+    load_course_skill_experience()
     load_end_age_tem()
     load_font_data()
     load_food_data()
@@ -549,6 +676,9 @@ def init():
     load_food_quality_weight()
     load_height_tem()
     load_hitpoint_tem()
+    load_knowledge()
+    load_knowledge_type()
+    load_language_tem()
     load_manapoint_tem()
     load_nature()
     load_nature_tag()
@@ -557,6 +687,8 @@ def init():
     load_recipes()
     load_recipes_formula()
     load_recipes_formula_type()
+    load_school()
+    load_school_session()
     load_sex_experience()
     load_sex_experience_tem()
     load_sex_tem()

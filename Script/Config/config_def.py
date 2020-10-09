@@ -87,6 +87,15 @@ class HitPointTem:
     """ 最大值 """
 
 
+class Course:
+    """ 课程配置数据 """
+
+    cid: int
+    """ 课程id """
+    name: str
+    """ 名字 """
+
+
 class CharacterStateType:
     """ 角色状态类型 """
 
@@ -127,6 +136,21 @@ class ChestTem:
     """ 最大值 """
     weight: int
     """ 权重 """
+
+
+class Language:
+    """ 语言配置信息 """
+
+    cid: int
+    """ 语言id """
+    name: str
+    """ 名字 """
+    difficulty: int
+    """ 学习难度 """
+    family: int
+    """ 语族 """
+    info: str
+    """ 描述 """
 
 
 class FontConfig:
@@ -203,6 +227,21 @@ class HeightTem:
     """ 最小值 """
 
 
+class CourseSkillExperience:
+    """ 课程获取技能经验配置 """
+
+    cid: int
+    """ 配置id """
+    course: int
+    """ 课程类型 """
+    skill_type: int
+    """ 技能类型0:知识1语言 """
+    skill: int
+    """ 技能id """
+    experience: float
+    """ 经验 """
+
+
 class NatureTag:
     """ 性格倾向标签 """
 
@@ -245,6 +284,17 @@ class ClothingEvaluate:
     """ 评价id """
     name: str
     """ 评价名 """
+
+
+class Knowledge:
+    """ 技能配置信息 """
+
+    cid: int
+    """ 技能id """
+    name: str
+    """ 名字 """
+    type: int
+    """ 类型 """
 
 
 class ClothingTem:
@@ -375,6 +425,45 @@ class SexExperienceTem:
     """ 最大经验 """
     min_exp: int
     """ 最小经验 """
+
+
+class School:
+    """ 学校配置 """
+
+    cid: int
+    """ 学校id """
+    name: str
+    """ 名字 """
+    day: int
+    """ 每周上课天数 """
+    最小年龄: int
+    """ min_age """
+    最大年龄: int
+    """ max_age """
+
+
+class KnowledgeType:
+    """ 技能类型配置信息 """
+
+    cid: int
+    """ 技能类型id """
+    name: str
+    """ 名字 """
+
+
+class SchoolSession:
+    """ 各学校上课时间配置 """
+
+    cid: int
+    """ 配表id """
+    school_id: int
+    """ 学校id """
+    session: int
+    """ 当天课时编号 """
+    start_time: int
+    """ 开始时间 """
+    end_time: int
+    """ 结束时间 """
 
 
 class ClothingType:
