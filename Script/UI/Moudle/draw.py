@@ -117,58 +117,6 @@ class BarDraw:
         return len(self.draw_list)
 
 
-class RichTextDraw(NormalDraw):
-    """ 富文本绘制 """
-
-    def __init__(self):
-        """ 初始化绘制对象 """
-        self.original_text:str = ""
-        """ 原始文本 """
-        self.style_list:List[str] = []
-        """ 文本样式列表 """
-        self.draw_list:List[NormalDraw] = []
-        """ 绘制对象列表 """
-
-    def draw(self):
-        """ 绘制文本 """
-        for text in self.draw_list:
-            text.draw()
-
-    def set_text(self,origin_text:str):
-        """
-        设置原始文本
-        Keyword arguments:
-        origin_text -- 原始文本
-        """
-        self.style_list = rich_text.get_rich_text_print(origin_text,self.style)
-        self.text = rich_text.remove_rich_cache(origin_text)
-        now_index = 0
-        now_width = 0
-        while 1:
-            if now_index >= len(self.text):
-                break
-            now_text = self.text[now_index]
-            goto_index = now_index + 1
-            if now_index < len(self.text) - 1:
-                for i in range(now_index+1,len(self.text)):
-                    if self.style_list[i] != style_list[now_index]:
-                        break
-                    now_text += self.text[i]
-                    goto_index = i + 1
-                new_draw = NormalDraw()
-                new_draw.style = style_list[now_index]
-                new_draw.text = now_text
-                text_width = text_handle.get_text_index(now_text)
-                if now_width + text_width > self.max_width:
-                    if self.max_width - now_width > 0:
-                        new_draw.max_width = self.max_width - now_width
-                else:
-                    new_draw.max_width = text_width
-                    now_width += text_width
-                self.draw_list.append(new_draw)
-                now_index = goto_index
-
-
 class Button:
     """ 按钮绘制 """
 

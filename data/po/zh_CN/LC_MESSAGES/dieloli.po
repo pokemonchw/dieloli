@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-09 16:08+0800\n"
+"POT-Creation-Date: 2020-10-09 17:37+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,19 @@ msgstr ""
 
 #: ../Script/Core/flow_handle.py:248 ../Script/Core/flow_handle.py:271
 msgid "您输入的选项无效，请重试\n"
+msgstr ""
+
+#: ../Script/UI/Moudle/panel.py:155
+#, python-brace-format
+msgid "输入的字符超长，最大{self.input_max}个英文字符，请重试。"
+msgstr ""
+
+#: ../Script/UI/Panel/creator_character_panel.py:14
+msgid "请问能告诉我你的名字吗？"
+msgstr ""
+
+#: ../Script/UI/Panel/creator_character_panel.py:19
+msgid "角色名不能为纯数字，请重新输入"
 msgstr ""
 
 #: ../Script/UI/Panel/title_panel.py:26

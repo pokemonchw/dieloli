@@ -1,3 +1,4 @@
 from Script.UI.Panel import (
-    title_panel
+    title_panel,
+    creator_character_panel
 )

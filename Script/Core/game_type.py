@@ -67,11 +67,7 @@ class Character:
         """ 角色名字 """
         self.nick_name: str = "你"
         """ 他人对角色的称呼 """
-        self.self_name: str = "我"
-        """ 角色的自称 """
-        self.species: str = "人类"
-        """ 角色的种族 """
-        self.sex: str = "Man"
+        self.sex: int = 0
         """ 角色性别 """
         self.age: int = 17
         """ 角色年龄 """

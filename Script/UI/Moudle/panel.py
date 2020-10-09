@@ -1,7 +1,12 @@
 from typing import List,Dict
+from types import FunctionType
 from Script.UI.Moudle import draw
-from Script.Core import io_init
+from Script.Core import io_init,flow_handle,text_handle,get_text
 from Script.Config import normal_config
+
+
+_:FunctionType = get_text._
+""" 翻译api """
 
 
 class SingleColumnButton:
@@ -65,7 +70,7 @@ class OneMessageAndSingleColumnButton:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.message = draw.RichTextDraw
+        self.message:draw.RichTextDraw = None
         """ 消息 """
         self.button_panel:SingleColumnButton = None
         """ 按钮监听列表 """
@@ -86,10 +91,12 @@ class OneMessageAndSingleColumnButton:
             new_button_list.append(now_id_text)
             now_i_str = str(start_id+i)
             return_list.append(now_i_str)
-        self.message = draw.RichTextDraw()
-        self.message.set_text(message)
+        width = normal_config.config_normal.text_width
+        self.message = draw.NormalDraw()
+        self.message.text = message
+        self.message.max_width = width
         self.button_panel = SingleColumnButton()
-        self.button_panel.max_width = normal_config.config_normal.text_width
+        self.button_panel.max_width = width
         self.button_panel.max_height = len(return_list)
         self.button_panel.set(new_button_list,return_list)
         self.button_panel.return_list = dict(zip(return_list,button_list))
@@ -107,6 +114,47 @@ class OneMessageAndSingleColumnButton:
         self.message.draw()
         io_init.era_print("\n")
         self.button_panel.draw()
+
+
+class AskForOneMessage:
+    """ 标准单条消息+等待玩家输入任意字符面板 """
+
+    def __init__(self):
+        """ 初始化绘制对象 """
+        self.message:draw.RichTextDraw = None
+        """ 消息 """
+        self.input_max:int = 0
+        """ 玩家输入文本的最大长度 """
+
+    def set(self,message:str,input_max:int):
+        """
+        设置要绘制的消息和允许玩家输入的长度
+        Keyword arguments:
+        message -- 绘制的消息
+        input_max -- 允许玩家输入的最大长度
+        """
+        self.message = draw.NormalDraw()
+        self.message.text = message
+        self.message.max_width = normal_config.config_normal.text_width
+        self.input_max = input_max
+
+    def draw(self) -> str:
+        """
+        绘制面板
+        Return arguments:
+        str -- 玩家输入的字符
+        """
+        return_text = ""
+        while 1:
+            io_init.era_print("\n")
+            self.message.draw()
+            return_text = flow_handle.askfor_str(1,1)
+            text_index = text_handle.get_text_index(return_text)
+            if text_index <= self.input_max:
+                break
+            io_init.era_print(_(f"输入的字符超长，最大{self.input_max}个英文字符，请重试。"))
+            io_init.era_print("\n")
+        return return_text
 
 
 class TitleAndRightInfoListPanel:

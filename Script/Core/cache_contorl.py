@@ -57,7 +57,7 @@ panel_state: Dict[str, int] = {}
 """ 面板状态 """
 max_save_page: int = 0
 """ 存档页面最大数量 """
-now_panel_id:str = ""
+now_panel_id:int = 0
 """ 当前游面板id """
 course_data: dict = {}
 """ 各个年级各科目课时数据 """

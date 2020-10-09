@@ -3,7 +3,7 @@ from types import FunctionType
 from Script.Config import normal_config
 from Script.UI.Moudle import panel,draw
 from Script.Design import handle_panel
-from Script.Core import constant,get_text,flow_handle
+from Script.Core import constant,get_text,flow_handle,cache_contorl
 
 config_normal = normal_config.config_normal
 _:FunctionType = get_text._
@@ -40,5 +40,7 @@ def title_panel():
     return_list = button_panel.get_return_list()
     ans = flow_handle.askfor_all(return_list.keys())
     now_key = return_list[ans]
-    if now_key == now_list[2]:
+    if now_key == now_list[0]:
+        cache_contorl.now_panel_id = constant.Panel.CREATOR_CHARACTER
+    elif now_key == now_list[2]:
         os._exit(0)
