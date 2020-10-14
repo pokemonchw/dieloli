@@ -131,13 +131,13 @@ class Character:
         """ 角色宿舍坐标 """
         self.birthday: datetime.datetime = datetime.datetime(1, 1, 1)
         """ 角色生日数据 """
-        self.weigt_tem: str = "Ordinary"
+        self.weigt_tem: int = 1
         """ 角色体重模板 """
-        self.bodyfat_tem: str = "Ordinary"
+        self.bodyfat_tem: int = 1
         """ 角色体脂率模板 """
         self.bodyfat: int = 0
         """ 角色体脂率数据 """
-        self.sex_experience_tem: str = "None"
+        self.sex_experience_tem: int = 0
         """ 角色性经验模板 """
         self.clothing_tem: str = "Uniform"
         """ 角色生成服装模板 """
@@ -145,7 +145,7 @@ class Character:
         """ 角色罩杯模板 """
         self.chest: dict = {}
         """ 角色罩杯数据 """
-        self.nature = {}
+        self.nature:Dict[int,int] = {}
         """ 角色性格数据 """
         self.status: Dict[int, int] = {}
         """ 角色状态数据 状态id:状态数值 """

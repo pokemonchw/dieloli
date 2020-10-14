@@ -1,4 +1,6 @@
 import random
+from functools import wraps
+from typing import Dict
 from types import FunctionType
 from Script.Core import get_text,constant,game_type,cache_contorl,flow_handle
 from Script.Design import handle_panel
@@ -109,3 +111,101 @@ def input_setting_panel() -> bool:
     if int(ans):
         return ans
     return 0
+
+setting_panel_data:Dict[int,FunctionType] = {}
+""" 设置详细信息面板数据 """
+
+def add_setting_panel(now_id:int) -> FunctionType:
+    """
+    添加创建角色时设置详细信息面板
+    Keyword arguments:
+    now_id -- 面板id
+    Return arguments:
+    FunctionType -- 面板对象处理函数
+    """
+
+    def decoraror(func):
+        @wraps(func)
+        def return_wrapper(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        setting_panel_data[now_id] = return_wrapper
+        return return_wrapper
+
+    return decoraror
+
+@add_setting_panel(0)
+def setting_age_tem_panel():
+    """ 设置年龄模板 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"{character_data.nick_name}是一个小孩子吗？")
+    ask_list = [
+        _("嘎呜～嘎呜～"),
+        _("才，才不是小孩子！"),
+        _("已经成年了哦～"),
+        _("我也想回到小时候呢～"),
+        _("你说什么？我听不清～")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message,width)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.sex = int(ans)
+
+@add_setting_panel(1)
+def setting_weight_panel():
+    """ 设置体重模板 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"{character_data.nick_name}对自己的体重有自信吗？")
+    ask_list = [
+        _("很轻，就像一张纸一样，风一吹就能飘起来。"),
+        _("普普通通，健康的身材。"),
+        _("略沉，不过从外表不怎么能够看得出来。"),
+        _("肉眼可辨的比别人要胖很多。"),
+        _("人类的极限，看上去像是相扑选手一样。")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message,width)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.weigt_tem = int(ans)
+
+@add_setting_panel(2)
+def setting_sex_experience_panel():
+    """ 设置性经验模板 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"{character_data.nick_name}是否有过性经验呢？")
+    ask_list = [
+        _("性经验什么的完全没有过，你在问什么呢！变态！"),
+        _("只有极少的性经验哦，说是纯情也不为过。"),
+        _("大概只是普通的程度吧？不多也不少的样子。"),
+        _("经验非常丰富，特别有技巧哦，哼哼。")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message,width)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.sex_experience_tem = int(ans)
+
+@add_setting_panel(3)
+def setting_nature_0_panel():
+    """ 设置性格倾向:活跃 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"{character_data.nick_name}是否是一个有话就说，从来不憋在心里的人呢？")
+    ask_list = [
+        _("是"),
+        _("不是")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message,width)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[0] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel(4)
+def setting_nature_1_panel():
+    """ 设置性格倾向:合群 """
