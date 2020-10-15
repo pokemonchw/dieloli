@@ -146,7 +146,6 @@ class AskForOneMessage:
         """
         return_text = ""
         while 1:
-            io_init.era_print("\n")
             self.message.draw()
             return_text = flow_handle.askfor_str(1,1)
             text_index = text_handle.get_text_index(return_text)

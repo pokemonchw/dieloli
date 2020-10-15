@@ -4,7 +4,6 @@ from Script.Core import (
     flow_handle,
     io_init,
     cache_contorl,
-    dictionaries,
     rich_text,
     constant,
 )
@@ -25,7 +24,6 @@ def normal_print(string: str, style="standard", rich_text_judge=True):
     rich_text_judge -- 启用富文本的开关 (default True)
     """
     if rich_text_judge:
-        string = dictionaries.handle_text(string)
         string.__repr__
         style_list = rich_text.get_rich_text_print(string, style)
         global last_char
@@ -62,7 +60,6 @@ def little_title_print(string: str):
     if text_wait != 0:
         time.sleep(text_wait)
     string = str(string)
-    string = dictionaries.handle_text(string)
     global last_char
     if len(string) > 0:
         last_char = string[-1:]
@@ -84,8 +81,6 @@ def son_title_print(string: str):
     text_wait = cache_contorl.text_wait
     if text_wait != 0:
         time.sleep(text_wait)
-    string = string
-    string = dictionaries.handle_text(string)
     global last_char
     if len(string) > 0:
         last_char = string[-1:]

@@ -203,7 +203,7 @@ class LineDraw:
         """ 绘制线条 """
         text_index = text_handle.get_text_index(self.text)
         text_num = self.width / text_index
-        io_init.era_print(self.text*int(text_num),self.style)
+        io_init.era_print(self.text*int(text_num)+"\n",self.style)
 
 
 class CenterDraw(NormalDraw):

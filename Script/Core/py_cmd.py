@@ -1,7 +1,6 @@
 from Script.Core import (
     flow_handle,
     main_frame,
-    dictionaries,
     cache_contorl,
 )
 from Script.Config import game_config,normal_config
@@ -33,8 +32,6 @@ def pcmd(
     normal_style -- 正常状态下命令显示样式
     on_style -- 鼠标在其上的时候命令显示样式
     """
-    cmd_str = dictionaries.handle_text(cmd_str)
-    cmd_id = dictionaries.handle_text(f"{cmd_id}")
     cache_contorl.text_wait = float(normal_config.config_normal.text_wait)
     global last_char
     if len(cmd_str) > 0:

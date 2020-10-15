@@ -1,6 +1,7 @@
 import random
+import numpy
 from functools import wraps
-from typing import Dict
+from typing import List
 from types import FunctionType
 from Script.Core import get_text,constant,game_type,cache_contorl,flow_handle
 from Script.Design import handle_panel
@@ -41,7 +42,7 @@ def input_name_panel() -> bool:
     create_judge = 0
     while 1:
         now_name = ask_name_panel.draw()
-        if now_name.isalnum():
+        if now_name.isdigit():
             not_num_error.draw()
             continue
         character_data.name = now_name
@@ -65,7 +66,7 @@ def input_nick_name_panel() -> bool:
     not_num_error.text = _("角色昵称不能为纯数字，请重新输入")
     while 1:
         nick_name = ask_nick_name_panel.draw()
-        if int(nick_name):
+        if nick_name.isdigit():
             not_num_error.draw()
             continue
         character_data.nick_name = nick_name
@@ -82,8 +83,10 @@ def input_sex_panel() -> bool:
     character_data = cache_contorl.character_data[0]
     sex_list = [game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
     button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(sex_list,_(f"那么{character_data.nick_name}的性别是？"),width)
+    button_panel.set(sex_list,_(f"那么{character_data.nick_name}的性别是？"))
     return_list = button_panel.get_return_list()
+    line_feed_draw.draw()
+    line.draw()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
     now_id = int(ans)
@@ -104,22 +107,32 @@ def input_setting_panel() -> bool:
     character_data = cache_contorl.character_data[0]
     ask_list = [_("是"),_("否")]
     button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list,_(f"是否需要设置详细属性呢？将会随机抽取十道题目供{character_data.nick_name}进行选择。"),width)
+    button_panel.set(ask_list,_(f"是否需要设置详细属性呢？将会随机抽取十道题目供{character_data.nick_name}进行选择。"))
     return_list = button_panel.get_return_list()
+    line_feed_draw.draw()
+    line.draw()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
     if int(ans):
-        return ans
-    return 0
+        return 0
+    return input_setting_now()
 
-setting_panel_data:Dict[int,FunctionType] = {}
+def input_setting_now() -> bool:
+    """ 启动详细信息设置 """
+    panel_list = numpy.random.choice(setting_panel_data,10)
+    for panel in panel_list:
+        line_feed_draw.draw()
+        line.draw()
+        panel()
+    return 1
+
+
+setting_panel_data:List[FunctionType] = []
 """ 设置详细信息面板数据 """
 
-def add_setting_panel(now_id:int) -> FunctionType:
+def add_setting_panel() -> FunctionType:
     """
     添加创建角色时设置详细信息面板
-    Keyword arguments:
-    now_id -- 面板id
     Return arguments:
     FunctionType -- 面板对象处理函数
     """
@@ -129,12 +142,12 @@ def add_setting_panel(now_id:int) -> FunctionType:
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        setting_panel_data[now_id] = return_wrapper
+        setting_panel_data.append(return_wrapper)
         return return_wrapper
 
     return decoraror
 
-@add_setting_panel(0)
+@add_setting_panel()
 def setting_age_tem_panel():
     """ 设置年龄模板 """
     character_data = cache_contorl.character_data[0]
@@ -147,13 +160,13 @@ def setting_age_tem_panel():
         _("你说什么？我听不清～")
     ]
     button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list,message,width)
+    button_panel.set(ask_list,message)
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
     character_data.sex = int(ans)
 
-@add_setting_panel(1)
+@add_setting_panel()
 def setting_weight_panel():
     """ 设置体重模板 """
     character_data = cache_contorl.character_data[0]
@@ -166,13 +179,13 @@ def setting_weight_panel():
         _("人类的极限，看上去像是相扑选手一样。")
     ]
     button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list,message,width)
+    button_panel.set(ask_list,message)
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
     character_data.weigt_tem = int(ans)
 
-@add_setting_panel(2)
+@add_setting_panel()
 def setting_sex_experience_panel():
     """ 设置性经验模板 """
     character_data = cache_contorl.character_data[0]
@@ -184,13 +197,13 @@ def setting_sex_experience_panel():
         _("经验非常丰富，特别有技巧哦，哼哼。")
     ]
     button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list,message,width)
+    button_panel.set(ask_list,message)
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
     character_data.sex_experience_tem = int(ans)
 
-@add_setting_panel(3)
+@add_setting_panel()
 def setting_nature_0_panel():
     """ 设置性格倾向:活跃 """
     character_data = cache_contorl.character_data[0]
@@ -200,12 +213,217 @@ def setting_nature_0_panel():
         _("不是")
     ]
     button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list,message,width)
+    button_panel.set(ask_list,message)
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
     character_data.nature[0] = random.randint(0,100) - int(ans) * 50
 
-@add_setting_panel(4)
+@add_setting_panel()
 def setting_nature_1_panel():
     """ 设置性格倾向:合群 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"{character_data.nick_name}在参加聚会时，会很自然的融入进人群里吗？")
+    ask_list = [
+        _("会"),
+        _("不会")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[1] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_2_panel():
+    """ 设置性格倾向:乐观 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"{character_data.nick_name}有憧憬过未来的人生吗？")
+    ask_list = [
+        _("有"),
+        _("没有")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[2] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_3_panel():
+    """ 设置性格倾向:守信 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"承诺过的事情就一定要做到？")
+    ask_list = [
+        _("会"),
+        _("视情况而定")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[3] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_4_panel():
+    """ 设置性格区间:无私 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"考虑问题时会顾及到别人的利益吗？")
+    ask_list = [
+        _("会"),
+        _("不会")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[4] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_5_panel():
+    """ 设置性格区间:重情 """
+    character_data = cache_contorl.character_data[0]
+    message = _("关心别人的时候会让自己感到快乐？")
+    ask_list = [
+        _("会"),
+        _("不会")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[5] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_6_panel():
+    """ 设置性格区间:严谨 """
+    character_data = cache_contorl.character_data[0]
+    message = _("对于自己的任务，会一丝不苟的去完成吗？")
+    ask_list = [
+        _("会"),
+        _("不会")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[6] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_7_panel():
+    """ 设置性格区间:自律 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"{character_data.nick_name}是一个即使不会被发现，也绝不弄虚作假的人吗？")
+    ask_list = [
+        _("当然"),
+        _("不是")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[7] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_8_panel():
+    """ 设置性格区间:沉稳 """
+    character_data = cache_contorl.character_data[0]
+    message = _("即使在一些很随便的场合，也会表现得很严肃对吗？")
+    ask_list = [
+        _("会"),
+        _("不会")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[8] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_9_panel():
+    """ 设置性格区间:决断 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"{character_data.nick_name}总是很轻率的做出了决定对吗？")
+    ask_list = [
+        _("是"),
+        _("不是")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[9] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_10_panel():
+    """ 设置性格区间:坚韧 """
+    character_data = cache_contorl.character_data[0]
+    message = _("不会轻易的放弃自己的理想？")
+    ask_list = [
+        _("是"),
+        _("不是")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[10] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_11_panel():
+    """ 设置性格区间:机敏 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"喜欢多与对{character_data.nick_name}有利的人交往对吗？")
+    ask_list = [
+        _("是"),
+        _("不是")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[11] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_12_panel():
+    """ 设置性格区间:耐性 """
+    character_data = cache_contorl.character_data[0]
+    message = _("对工作会倾注全部的热情？")
+    ask_list = [
+        _("是"),
+        _("不是")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[12] = random.randint(0,100) - int(ans) * 50
+
+@add_setting_panel()
+def setting_nature_13_panel():
+    """ 设置性格区间:爽直 """
+    character_data = cache_contorl.character_data[0]
+    message = _(f"{character_data.nick_name}是一个心直口快，想到什么说什么的人对吗？")
+    ask_list = [
+        _("是"),
+        _("不是")
+    ]
+    button_panel = panel.OneMessageAndSingleColumnButton()
+    button_panel.set(ask_list,message)
+    return_list = button_panel.get_return_list()
+    button_panel.draw()
+    ans = flow_handle.askfor_all(return_list.keys())
+    character_data.nature[13] = random.randint(0,100) - int(ans) * 50
+

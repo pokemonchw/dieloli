@@ -5,7 +5,6 @@ from Script.Core import (
     era_print,
     text_handle,
     game_config,
-    dictionaries,
     constant,
 )
 
@@ -54,7 +53,7 @@ def option_int(
     if len(cmd_list_data) + 1 < cmd_column:
         cmd_column = len(cmd_list_data) + 1
     for i in range(0, len(cmd_list_data)):
-        cmd_text = dictionaries.handle_text(cmd_list_data[i])
+        cmd_text = cmd_list_data[i]
         return_id = i + start_id
         if id_switch:
             id = id_index(return_id)
@@ -158,7 +157,7 @@ def option_str(
         if return_data is None:
             if null_cmd == cmd_list_data[i]:
                 now_null_cmd = False
-            cmd_text_bak = dictionaries.handle_text(cmd_list_data[i])
+            cmd_text_bak = cmd_list_data[i]
             if fix_cmd:
                 cmd_text = "[" + cmd_text_bak + "]"
             else:
