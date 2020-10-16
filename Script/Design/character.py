@@ -14,6 +14,7 @@ from Script.Design import (
     map_handle,
     character_move,
 )
+from Script.Config import game_config
 
 
 def init_attr(character_id: int):
@@ -28,11 +29,11 @@ def init_attr(character_id: int):
     character_data.end_age = attr_calculation.get_end_age(character_data.sex)
     character_data.height = attr_calculation.get_height(character_data.sex, character_data.age)
     bmi = attr_calculation.get_bmi(character_data.weigt_tem)
-    character_data.weight = attr_calculation.get_weight(bmi, character_data.height["NowHeight"])
+    character_data.weight = attr_calculation.get_weight(bmi, character_data.height.now_height)
     character_data.bodyfat = attr_calculation.get_bodyfat(character_data.sex, character_data.bodyfat_tem)
     character_data.measurements = attr_calculation.get_measurements(
         character_data.sex,
-        character_data.height["NowHeight"],
+        character_data.height.now_height,
         character_data.weight,
         character_data.bodyfat,
         character_data.bodyfat_tem,
@@ -41,39 +42,22 @@ def init_attr(character_id: int):
     character_data.sex_grade = attr_calculation.get_sex_grade(character_data.sex_experience)
     default_clothing_data = clothing.creator_suit(character_data.clothing_tem, character_data.sex)
     character_data.clothing = {
-        clothing: {uuid.uuid4(): default_clothing_data[clothing]}
-        if clothing in default_clothing_data
-        else {}
-        for clothing in character_data.clothing
+        clothing: {default_clothing_data[clothing].uid: default_clothing_data[clothing]}
+        for clothing in default_clothing_data
     }
     character_data.chest = attr_calculation.get_chest(character_data.chest_tem, character_data.birthday)
     character_data.hit_point_max = attr_calculation.get_max_hit_point(character_data.hit_point_tem)
     character_data.hit_point = character_data.hit_point_max
     character_data.mana_point_max = attr_calculation.get_max_mana_point(character_data.mana_point_tem)
     character_data.mana_point = character_data.mana_point_max
-    character_data.nature = nature.get_random_nature()
+    new_nature = nature.get_random_nature()
+    for nature_id in new_nature:
+        if nature_id not in character_data.nature:
+            character_data[nature_id] = new_nature[nature_id]
     character_data.status = text_loading.get_game_data(constant.FilePath.CHARACTER_STATE_PATH)
-    character_data.wear_item = {
-        "Wear": {key: {} for key in text_loading.get_game_data(constant.FilePath.WEAR_ITEM_PATH)["Wear"]},
-        "Item": {},
-    }
-    character_data.engraving = {
-        "Pain": 0,
-        "Happy": 0,
-        "Yield": 0,
-        "Fear": 0,
-        "Resistance": 0,
-    }
-    character_data.social_contact = {
-        social: {} for social in text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "144")
-    }
+    character_data.social_contact = {social:set() for social in game_config.config_social_type}
     init_class(character_data)
     put_on_clothing(character_data)
-    if character_data.occupation == "":
-        if character_data.age <= 18:
-            character_data.occupation = "Student"
-        else:
-            character_data.occupation = "Teacher"
 
 
 def init_class(character_data: game_type.Character):

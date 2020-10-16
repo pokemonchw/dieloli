@@ -139,11 +139,11 @@ class Character:
         """ 角色体脂率数据 """
         self.sex_experience_tem: int = 0
         """ 角色性经验模板 """
-        self.clothing_tem: str = "Uniform"
+        self.clothing_tem: int = 0
         """ 角色生成服装模板 """
-        self.chest_tem: str = "Ordinary"
+        self.chest_tem: int = 0
         """ 角色罩杯模板 """
-        self.chest: dict = {}
+        self.chest: Chest = Chest()
         """ 角色罩杯数据 """
         self.nature:Dict[int,int] = {}
         """ 角色性格数据 """
@@ -151,16 +151,12 @@ class Character:
         """ 角色状态数据 状态id:状态数值 """
         self.put_on: dict = {}
         """ 角色已穿戴服装数据 """
-        self.wear_item: dict = {}
-        """ 角色持有可穿戴道具数据 """
-        self.hit_point_tem: str = "Ordinary"
+        self.hit_point_tem: int = 1
         """ 角色HP模板 """
-        self.mana_point_tem: str = "Ordinary"
+        self.mana_point_tem: int = 1
         """ 角色MP模板 """
         self.social_contact: Dict[int,SocialContact] = {}
         """ 角色社交关系数据 关系类型:关系数据 """
-        self.occupation: str = ""
-        """ 角色职业ID """
         self.food_bag: Dict[UUID, Food] = {}
         """ 角色持有的食物数据 """
         self.course: CourseTimeSlice = CourseTimeSlice()
@@ -169,6 +165,18 @@ class Character:
         """ 角色当前交互对象id """
         self.adv: int = 0
         """ 剧情npc校验 """
+
+
+class Chest:
+    """ 胸围差数据结构体 """
+
+    def __init__(self):
+        self.target_chest:int = 0
+        """ 预期最终胸围差 """
+        self.now_chest:int = 0
+        """ 当前胸围差 """
+        self.sub_chest:int = 0
+        """ 每日胸围差增量 """
 
 
 class SocialContact:

@@ -75,12 +75,14 @@ def get_height(tem_name: int, age: int) -> dict:
     return height_data
 
 
-def get_chest(chest_tem: str, birthday: datetime.datetime):
+def get_chest(chest_tem: int, birthday: datetime.datetime) -> game_type.Chest:
     """
-    按罩杯模板生成人物最终罩杯，并按人物年龄计算当前罩杯
+    按罩杯模板生成人物最终胸围差，并按人物年龄计算当前胸围差
     Keyword arguments:
     chest_tem -- 罩杯模板
     birthday -- 出生日期
+    Return arguments:
+    game_type.Chest -- 胸围数据
     """
     target_chest = get_rand_npc_chest(chest_tem)
     over_age = random.randint(14, 18)
@@ -93,11 +95,11 @@ def get_chest(chest_tem: str, birthday: datetime.datetime):
     now_chest = sub_chest * now_day
     if now_chest > sub_chest:
         now_chest = target_chest
-    return {
-        "TargetChest": target_chest,
-        "NowChest": now_chest,
-        "SubChest": sub_chest,
-    }
+    chest = game_type.Chest()
+    chest.now_chest = now_chest
+    chest.sub_chest = sub_chest
+    chest.target_chest = target_chest
+    return chest
 
 
 chest_tem_weight_data = {k:game_config.config_chest[k].weight for k in game_config.config_chest}
@@ -226,27 +228,31 @@ def get_measurements(tem_name: str, height: float, weight: float, bodyfat: float
     return {"Bust": bust, "Waist": new_waist, "Hip": new_hip}
 
 
-def get_max_hit_point(tem_name: str) -> int:
+def get_max_hit_point(tem_id: int) -> int:
     """
     获取最大hp值
     Keyword arguments:
-    tem_name -- hp模板
+    tem_id -- hp模板id
+    Return arguments:
+    int -- 最大hp值
     """
-    tem_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "HitPointTem")[tem_name]
-    max_hit_point = int(tem_data["HitPointMax"])
+    tem_data = game_config.config_hitpoint_tem[tem_id]
+    max_hit_point = tem_data.max_value
     add_value = random.randint(0, 500)
     impairment = random.randint(0, 500)
     return max_hit_point + add_value - impairment
 
 
-def get_max_mana_point(tem_name: str) -> int:
+def get_max_mana_point(tem_id: int) -> int:
     """
     获取最大mp值
     Keyword arguments:
-    tem_name -- mp模板
+    tem_id -- mp模板
+    Return arguments:
+    int -- 最大mp值
     """
-    tem_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "ManaPointTem")[tem_name]
-    max_mana_point = int(tem_data["ManaPointMax"])
+    tem_data = game_config.config_manapoint_tem[tem_id]
+    max_mana_point = tem_data.max_value
     add_value = random.randint(0, 500)
     impairment = random.randint(0, 500)
     return max_mana_point + add_value - impairment

@@ -4,7 +4,7 @@ from functools import wraps
 from typing import List
 from types import FunctionType
 from Script.Core import get_text,constant,game_type,cache_contorl,flow_handle
-from Script.Design import handle_panel
+from Script.Design import handle_panel,character
 from Script.UI.Moudle import panel,draw
 from Script.Config import normal_config,game_config
 
@@ -24,6 +24,8 @@ def creator_character_panel():
     cache_contorl.character_data[0] = game_type.Character()
     while 1:
         if input_name_panel():
+            character.init_attr(0)
+            cache_contorl.now_panel_id = constant.Panel.SEE_CHARACTER_INFO
             break
 
 def input_name_panel() -> bool:

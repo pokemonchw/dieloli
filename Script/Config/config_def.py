@@ -197,6 +197,15 @@ class Food:
     """ 是水果 """
 
 
+class SocialType:
+    """ 关系类型配置 """
+
+    cid: int
+    """ 关系id """
+    name: str
+    """ 名字 """
+
+
 class ClothingCollocational:
     """ 搭配模板 """
 

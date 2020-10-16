@@ -158,6 +158,8 @@ config_sex_experience_tem:Dict[int,config_def.SexExperienceTem] = {}
 """ 器官类型性经验丰富程度对应经验范围 """
 config_sex_tem:Dict[int,config_def.SexTem] = {}
 """ 性别对应描述和性别器官模板 """
+config_social_type:Dict[int,config_def.SocialType] = {}
+""" 关系类型配置数据 """
 config_week_day:Dict[int,config_def.WeekDay] = {}
 """ 星期描述文本配置数据 """
 config_weight_tem:Dict[int,config_def.WeightTem] = {}
@@ -628,6 +630,16 @@ def load_sex_tem():
         config_sex_tem[now_tem.cid] = now_tem
 
 
+def load_social_type():
+    """ 载入社交关系配置数据 """
+    now_data = config_data["SocialType"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.SocialType()
+        now_tem.__dict__ = tem_data
+        config_social_type[now_tem.cid] = now_tem
+
+
 def load_week_day():
     """ 载入星期描述文本配置数据 """
     now_data = config_data["WeekDay"]
@@ -692,5 +704,6 @@ def init():
     load_sex_experience()
     load_sex_experience_tem()
     load_sex_tem()
+    load_social_type()
     load_week_day()
     load_weight_tem()
