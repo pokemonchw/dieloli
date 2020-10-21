@@ -79,13 +79,17 @@ class BarDraw:
         """ 比例条最大长度 """
         self.bar_id = ""
         """ 比例条类型id """
-        self.bar_text = ""
-        """ 比例条原始文本 """
         self.draw_list:List[ImageDraw] = []
         """ 比例条绘制对象列表 """
 
     def set(self,bar_id:str,max_value:int,value:int):
-        """ 设置比例条数据 """
+        """
+        设置比例条数据
+        Keyword arguments:
+        bar_id -- 比例条id
+        max_value -- 最大数值
+        value -- 当前数值
+        """
         if self.max_width > 0:
             proportion = 0
             if self.max_width > 1:
@@ -115,6 +119,46 @@ class BarDraw:
         int -- 比例条长度
         """
         return len(self.draw_list)
+
+
+class InfoBarDraw:
+    """ 带有文本和数值描述的比例条 例: 生命:[图片](2000/2000) """
+
+    def __init__(self):
+        """ 初始化绘制对象 """
+        self.max_width = 0
+        """ 比例条最大长度 """
+        self.bar_id = ""
+        """ 比例条类型id """
+        self.text = ""
+        """ 比例条描述文本 """
+        self.draw_list:List[ImageDraw] = []
+        """ 比例条绘制对象列表 """
+
+    def set(self,bar_id:str,max_value:int,value:int,text:str):
+        """
+        设置比例条数据
+        Keyword arguments:
+        bar_id -- 比例条id
+        max_value -- 最大数值
+        value -- 当前数值
+        text -- 描述文本
+        """
+        info_draw = NormalDraw()
+        info_draw.max_width = self.max_width / 3
+        info_draw.text = f"{text}["
+        value_draw = NormalDraw()
+        value_draw.max_width = self.max_width / 3
+        value_draw.text = f"(]{value}/{max_value})"
+        bar_draw = BarDraw()
+        bar_draw.max_width = self.max_width - len(info_draw) - len(value_draw)
+        bar_draw.set(self.bar_id,max_value,value)
+        self.draw_list = [info_draw,BarDraw,value_draw]
+
+    def draw(self):
+        """ 绘制比例条 """
+        for bar in self.draw_list:
+            bar.draw()
 
 
 class Button:

@@ -192,8 +192,6 @@ class Panel:
     """ 标题面板 """
     CREATOR_CHARACTER = 1
     """ 创建角色面板 """
-    SEE_CHARACTER_INFO = 2
-    """ 查看角色属性面板 """
 
 
 class Premise:
