@@ -9,12 +9,18 @@ def init_phase_course_hour():
     """
     初始化各班级课时
     """
-    phase_course_time = text_loading.get_text_data(constant.FilePath.PHASE_COURSE_PATH, "CourseTime")
-    primary_weight = text_loading.get_text_data(constant.FilePath.PHASE_COURSE_PATH, "PrimarySchool")
+    phase_course_time = text_loading.get_text_data(
+        constant.FilePath.PHASE_COURSE_PATH, "CourseTime"
+    )
+    primary_weight = text_loading.get_text_data(
+        constant.FilePath.PHASE_COURSE_PATH, "PrimarySchool"
+    )
     junior_middle_weight = text_loading.get_text_data(
         constant.FilePath.PHASE_COURSE_PATH, "JuniorMiddleSchool"
     )
-    senior_high_weight = text_loading.get_text_data(constant.FilePath.PHASE_COURSE_PATH, "SeniorHighSchool")
+    senior_high_weight = text_loading.get_text_data(
+        constant.FilePath.PHASE_COURSE_PATH, "SeniorHighSchool"
+    )
     now_weight_list = primary_weight + junior_middle_weight + senior_high_weight
     all_class_hour_data = {}
     phase_index = 0
@@ -31,7 +37,9 @@ def init_phase_course_hour():
         else:
             class_hour_max = phase_course_time["SeniorHighSchool"]
         class_hour_data = {
-            phase_weight_regin[region]: math.ceil(class_hour_max * (int(region) / weight_max))
+            phase_weight_regin[region]: math.ceil(
+                class_hour_max * (int(region) / weight_max)
+            )
             for region in phase_weight_regin
         }
         now_class_hour_max = sum(class_hour_data.values())
@@ -39,7 +47,9 @@ def init_phase_course_hour():
             for course in class_hour_data:
                 if now_class_hour_max == class_hour_max:
                     break
-                elif class_hour_data[course] > 1 and now_class_hour_max > class_hour_max:
+                elif (
+                    class_hour_data[course] > 1 and now_class_hour_max > class_hour_max
+                ):
                     class_hour_data[course] -= 1
                     now_class_hour_max -= 1
                 elif now_class_hour_max < class_hour_max:
@@ -110,7 +120,10 @@ def init_class_time_table():
                                 class_hour_index[course] += 1
                                 break
                             elif all(
-                                [k in class_time_table[phase][day] for k in range(len(class_time[i + 1 :]))]
+                                [
+                                    k in class_time_table[phase][day]
+                                    for k in range(len(class_time[i + 1 :]))
+                                ]
                             ):
                                 class_time_table[phase][day][i] = course
                                 class_hour_index[course] += 1
@@ -155,7 +168,9 @@ def init_teacher_table():
         for day in cache_contorl.course_data["ClassTimeTable"][phase]:
             for classroom in class_list:
                 for i in cache_contorl.course_data["ClassTimeTable"][phase][day]:
-                    now_course = cache_contorl.course_data["ClassTimeTable"][phase][day][i]
+                    now_course = cache_contorl.course_data["ClassTimeTable"][phase][
+                        day
+                    ][i]
                     for now_teacher in cache_contorl.course_data["ClassTeacher"][
                         "Classroom_" + str(phase + 1)
                     ][classroom][now_course]:
@@ -169,11 +184,15 @@ def init_teacher_table():
                         if teacher_table[now_teacher] < 14:
                             teacher_table[now_teacher] += 1
                             cache_contorl.teacher_class_time_table.setdefault(day, {})
-                            cache_contorl.teacher_class_time_table[day].setdefault(phase, {})
-                            cache_contorl.teacher_class_time_table[day][phase].setdefault(i, {})
-                            cache_contorl.teacher_class_time_table[day][phase][i][now_teacher] = {
-                                classroom: now_course
-                            }
+                            cache_contorl.teacher_class_time_table[day].setdefault(
+                                phase, {}
+                            )
+                            cache_contorl.teacher_class_time_table[day][
+                                phase
+                            ].setdefault(i, {})
+                            cache_contorl.teacher_class_time_table[day][phase][i][
+                                now_teacher
+                            ] = {classroom: now_course}
 
 
 def course_abmain_distribution():
@@ -185,18 +204,20 @@ def course_abmain_distribution():
         cache_contorl.course_data.setdefault("ClassTeacher", {})
         cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)] = {}
         for classroom in class_list:
-            cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)].setdefault(classroom, {})
+            cache_contorl.course_data["ClassTeacher"][
+                "Classroom_" + str(phase)
+            ].setdefault(classroom, {})
             for course in cache_contorl.course_data["ClassHour"][phase - 1]:
                 if cache_contorl.course_data["ClassHour"][phase - 1][course] > 7:
-                    cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)][
-                        classroom
-                    ].setdefault(course, [])
+                    cache_contorl.course_data["ClassTeacher"][
+                        "Classroom_" + str(phase)
+                    ][classroom].setdefault(course, [])
                     for teacher in cache_contorl.teacher_course_experience[course]:
                         if teacher not in teacher_data:
                             teacher_data[teacher] = 0
-                            cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)][classroom][
-                                course
-                            ].append(teacher)
+                            cache_contorl.course_data["ClassTeacher"][
+                                "Classroom_" + str(phase)
+                            ][classroom][course].append(teacher)
                             break
 
 
@@ -212,18 +233,20 @@ def course_distribution_a():
         class_list = cache_contorl.place_data["Classroom_" + str(phase)]
         cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)] = {}
         for classroom in class_list:
-            cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)].setdefault(classroom, {})
+            cache_contorl.course_data["ClassTeacher"][
+                "Classroom_" + str(phase)
+            ].setdefault(classroom, {})
             for course in cache_contorl.course_data["ClassHour"][phase - 1]:
                 if cache_contorl.course_data["ClassHour"][phase - 1][course] <= 7:
-                    cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)][
-                        classroom
-                    ].setdefault(course, [])
+                    cache_contorl.course_data["ClassTeacher"][
+                        "Classroom_" + str(phase)
+                    ][classroom].setdefault(course, [])
                     for teacher in cache_contorl.teacher_course_experience[course]:
                         if teacher not in teacher_data:
                             teacher_data[teacher] = 0
-                            cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)][classroom][
-                                course
-                            ].append(teacher)
+                            cache_contorl.course_data["ClassTeacher"][
+                                "Classroom_" + str(phase)
+                            ][classroom][course].append(teacher)
                             break
 
 
@@ -238,18 +261,18 @@ def course_distribution_b():
         teacher_course_index = 0
         for course in cache_contorl.course_data["ClassHour"][phase - 1]:
             for classroom in class_list:
-                cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)].setdefault(
-                    classroom, {}
-                )
+                cache_contorl.course_data["ClassTeacher"][
+                    "Classroom_" + str(phase)
+                ].setdefault(classroom, {})
                 if cache_contorl.course_data["ClassHour"][phase - 1][course] <= 7:
-                    cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)][
-                        classroom
-                    ].setdefault(course, [])
+                    cache_contorl.course_data["ClassTeacher"][
+                        "Classroom_" + str(phase)
+                    ][classroom].setdefault(course, [])
                     for teacher in cache_contorl.teacher_course_experience[course]:
                         if teacher not in teacher_data:
-                            cache_contorl.course_data["ClassTeacher"]["Classroom_" + str(phase)][classroom][
-                                course
-                            ].append(teacher)
+                            cache_contorl.course_data["ClassTeacher"][
+                                "Classroom_" + str(phase)
+                            ][classroom][course].append(teacher)
                             teacher_course_index += 1
                             if teacher_course_index == 2:
                                 teacher_course_index = 0
@@ -274,7 +297,9 @@ def init_phase_course_hour_experience():
                     phase_experience[phase][knowledge] = {}
                 for skill in course_knowledge_data[course]["Knowledge"][knowledge]:
                     skill_experience = (
-                        course_knowledge_data[course]["Knowledge"][knowledge][skill] * course_hour * 38
+                        course_knowledge_data[course]["Knowledge"][knowledge][skill]
+                        * course_hour
+                        * 38
                     )
                     if skill in phase_experience[phase][knowledge]:
                         phase_experience[phase][knowledge][skill] += skill_experience
@@ -306,8 +331,12 @@ def init_character_knowledge():
                         if knowledge == "Language":
                             now_course_experience += character.language[skill]
                         else:
-                            now_course_experience += character.knowledge[knowledge][skill]
-                cache_contorl.teacher_course_experience[course][i] = now_course_experience
+                            now_course_experience += character.knowledge[knowledge][
+                                skill
+                            ]
+                cache_contorl.teacher_course_experience[course][
+                    i
+                ] = now_course_experience
 
 
 def init_teacher_knowledge(character: Character) -> dict:
@@ -320,7 +349,10 @@ def init_teacher_knowledge(character: Character) -> dict:
     for knowledge in character.knowledge:
         for skill in character.knowledge[knowledge]:
             character.knowledge[knowledge][skill] += (
-                character.knowledge[knowledge][skill] / 12 * study_year * random.uniform(0.25, 0.75)
+                character.knowledge[knowledge][skill]
+                / 12
+                * study_year
+                * random.uniform(0.25, 0.75)
             )
     for language in character.language:
         character.knowledge[knowledge][skill] += (

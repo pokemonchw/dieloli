@@ -1,10 +1,10 @@
 import os
 import configparser
-from typing import Dict,List
+from typing import Dict, List
 from Script.Core import game_type
 
 
-config_normal:game_type.NormalConfig = game_type.NormalConfig()
+config_normal: game_type.NormalConfig = game_type.NormalConfig()
 """ 游戏通用配置数据 """
 
 

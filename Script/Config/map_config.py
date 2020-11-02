@@ -1,52 +1,68 @@
 import os
-from typing import Dict,List
+from typing import Dict, List
 from dijkstar import Graph, find_path
-from Script.Core import game_type,json_handle,cache_contorl,get_text,text_handle
+from Script.Core import game_type, json_handle, cache_contorl, get_text, text_handle
 
 
-map_data_path = os.path.join("data","map")
+map_data_path = os.path.join("data", "map")
 """ 地图配置数据路径 """
+
 
 def init_map_data():
     """ 载入地图和场景数据 """
     load_dir_now(map_data_path)
 
 
-def load_dir_now(data_path:str):
+def load_dir_now(data_path: str):
     """
     获取路径下的地图数据
     Keyword arguments:
     data_path -- 地图路径
     """
     for i in os.listdir(data_path):
-        now_path = os.path.join(data_path,i)
+        now_path = os.path.join(data_path, i)
         if os.path.isfile(now_path):
             now_file = i.split(".")
             if len(now_file) > 1:
                 if now_file[1] == "json":
                     if now_file[0] == "Scene":
                         now_scene_data = game_type.Scene()
-                        now_scene_data.scene_path = get_map_system_path_str(get_map_system_path_for_path(now_path))
+                        now_scene_data.scene_path = get_map_system_path_str(
+                            get_map_system_path_for_path(now_path)
+                        )
                         load_scene_data = json_handle.load_json(now_path)
-                        now_scene_data.scene_name = get_text._(load_scene_data["SceneName"])
-                        now_scene_data.in_door = (load_scene_data["InOutDoor"] == "In")
+                        now_scene_data.scene_name = get_text._(
+                            load_scene_data["SceneName"]
+                        )
+                        now_scene_data.in_door = load_scene_data["InOutDoor"] == "In"
                         now_scene_data.scene_tag = load_scene_data["SceneTag"]
-                        cache_contorl.scene_data[now_scene_data.scene_path] = now_scene_data
-                        cache_contorl.place_data.setdefault(now_scene_data.scene_tag,[])
-                        cache_contorl.place_data[now_scene_data.scene_tag].append(now_scene_data.scene_path)
+                        cache_contorl.scene_data[
+                            now_scene_data.scene_path
+                        ] = now_scene_data
+                        cache_contorl.place_data.setdefault(
+                            now_scene_data.scene_tag, []
+                        )
+                        cache_contorl.place_data[now_scene_data.scene_tag].append(
+                            now_scene_data.scene_path
+                        )
                     elif now_file[0] == "Map":
                         now_map_data = game_type.Map()
-                        now_map_data.map_path = get_map_system_path_str(get_map_system_path_for_path(now_path))
-                        with open(os.path.join(data_path,"Map"),"r") as now_read_file:
+                        now_map_data.map_path = get_map_system_path_str(
+                            get_map_system_path_for_path(now_path)
+                        )
+                        with open(os.path.join(data_path, "Map"), "r") as now_read_file:
                             draw_data = now_read_file.read()
                             now_map_data.map_draw = get_print_map_data(draw_data)
                         load_map_data = json_handle.load_json(now_path)
                         now_map_data.map_name = get_text._(load_map_data["MapName"])
                         now_map_data.path_edge = load_map_data["PathEdge"]
-                        now_map_data.sorted_path = get_sorted_map_path_data(now_map_data.path_edge)
+                        now_map_data.sorted_path = get_sorted_map_path_data(
+                            now_map_data.path_edge
+                        )
                         cache_contorl.map_data[now_map_data.map_path] = now_map_data
         else:
             load_dir_now(now_path)
+
 
 def get_map_system_path_for_path(now_path: str) -> List[str]:
     """
@@ -64,6 +80,7 @@ def get_map_system_path_for_path(now_path: str) -> List[str]:
     map_system_path = map_system_path[1:]
     return map_system_path
 
+
 def get_map_system_path_str(now_path: List[str]) -> str:
     """
     将游戏地图系统路径转换为字符串
@@ -73,6 +90,7 @@ def get_map_system_path_str(now_path: List[str]) -> str:
     str -- 地图路径字符串
     """
     return os.sep.join(now_path)
+
 
 def get_print_map_data(map_draw: str) -> game_type.MapDraw:
     """
@@ -123,7 +141,10 @@ def get_print_map_data(map_draw: str) -> game_type.MapDraw:
         map_draw_data.draw_text.append(now_draw_list)
     return map_draw_data
 
-def get_sorted_map_path_data(map_data: Dict[str, Dict[str, int]]) -> Dict[str, Dict[str, game_type.TargetPath]]:
+
+def get_sorted_map_path_data(
+    map_data: Dict[str, Dict[str, int]]
+) -> Dict[str, Dict[str, game_type.TargetPath]]:
     """
     获取地图下各节点到目标节点的最短路径数据
     Keyword arguments:
@@ -145,6 +166,6 @@ def get_sorted_map_path_data(map_data: Dict[str, Dict[str, int]]) -> Dict[str, D
                 target_path = game_type.TargetPath()
                 target_path.path = find_path_data.nodes[1:]
                 target_path.time = find_path_data.costs
-                new_data[node][target] =  target_path
+                new_data[node][target] = target_path
         sorted_path_data.update(new_data)
     return sorted_path_data

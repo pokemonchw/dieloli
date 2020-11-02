@@ -38,7 +38,8 @@ def see_character(character_id: str, judge: bool) -> list:
         nature_text = nature_text_data[nature]["Name"]
         if "Good" in nature_text:
             now_nature_values = [
-                character_nature[son_nature] for son_nature in nature_text_data[nature]["Factor"]
+                character_nature[son_nature]
+                for son_nature in nature_text_data[nature]["Factor"]
             ]
             now_nature_value = sum(now_nature_values)
             now_nature_max = len(now_nature_values) * 100
@@ -48,14 +49,23 @@ def see_character(character_id: str, judge: bool) -> list:
                 nature_text = nature_text["Good"]
         era_print.son_title_print(nature_text)
         info_list = [
-            nature_text_data[nature]["Factor"][son_nature][judge_nature_good(character_nature[son_nature])]
+            nature_text_data[nature]["Factor"][son_nature][
+                judge_nature_good(character_nature[son_nature])
+            ]
             for son_nature in nature_text_data[nature]["Factor"]
         ]
         if judge:
             now_son_list = [son for son in nature_text_data[nature]["Factor"]]
             cmd_list += now_son_list
             cmd_button_queue.option_str(
-                None, len(now_son_list), "center", False, False, info_list, "", now_son_list,
+                None,
+                len(now_son_list),
+                "center",
+                False,
+                False,
+                info_list,
+                "",
+                now_son_list,
             )
         else:
             era_print.list_print(info_list, len(info_list), "center")

@@ -85,7 +85,7 @@ class Character:
         """ 角色最大MP """
         self.mana_point: int = 0
         """ 角色当前MP """
-        self.sex_experience: Dict[str, int] = {}
+        self.sex_experience: Dict[int, int] = {}
         """ 角色的性经验数据 """
         self.sex_grade: Dict[str, str] = {}
         """ 角色的性等级描述数据 """
@@ -93,7 +93,7 @@ class Character:
         """ 角色当前状态 """
         self.engraving: Dict[str, int] = {}
         """ 角色的刻印数据 """
-        self.clothing: Dict[int,Dict[UUID,Clothing]] = {}
+        self.clothing: Dict[int, Dict[UUID, Clothing]] = {}
         """
         角色拥有的服装数据
         服装穿戴位置:服装唯一id:服装数据
@@ -104,7 +104,7 @@ class Character:
         """ 角色的身高数据 """
         self.weight: dict = {}
         """ 角色的体重数据 """
-        self.measurements: dict = {}
+        self.measurements: Measurements = Measurements()
         """ 角色的三围数据 """
         self.behavior: Behavior = Behavior()
         """ 角色当前行为状态数据 """
@@ -145,7 +145,7 @@ class Character:
         """ 角色罩杯模板 """
         self.chest: Chest = Chest()
         """ 角色罩杯数据 """
-        self.nature:Dict[int,int] = {}
+        self.nature: Dict[int, int] = {}
         """ 角色性格数据 """
         self.status: Dict[int, int] = {}
         """ 角色状态数据 状态id:状态数值 """
@@ -155,7 +155,7 @@ class Character:
         """ 角色HP模板 """
         self.mana_point_tem: int = 1
         """ 角色MP模板 """
-        self.social_contact: Dict[int,SocialContact] = {}
+        self.social_contact: Dict[int, SocialContact] = {}
         """ 角色社交关系数据 关系类型:关系数据 """
         self.food_bag: Dict[UUID, Food] = {}
         """ 角色持有的食物数据 """
@@ -167,15 +167,27 @@ class Character:
         """ 剧情npc校验 """
 
 
+class Measurements:
+    """ 三围数据结构体 """
+
+    def __init__(self):
+        self.bust: float = 0
+        """ 胸围 """
+        self.waist: float = 0
+        """ 腰围 """
+        self.hip: float = 0
+        """ 臀围 """
+
+
 class Chest:
     """ 胸围差数据结构体 """
 
     def __init__(self):
-        self.target_chest:int = 0
+        self.target_chest: int = 0
         """ 预期最终胸围差 """
-        self.now_chest:int = 0
+        self.now_chest: int = 0
         """ 当前胸围差 """
-        self.sub_chest:int = 0
+        self.sub_chest: int = 0
         """ 每日胸围差增量 """
 
 
@@ -183,9 +195,9 @@ class SocialContact:
     """ 社交关系结构体 """
 
     def __init__(self):
-        self.type:int = 0
+        self.type: int = 0
         """ 关系类型 """
-        self.character_list:Dict[int,int] = {}
+        self.character_list: Dict[int, int] = {}
         """ 对象列表 对象id:亲密度 """
 
 
@@ -258,69 +270,69 @@ class NormalConfig:
 
     game_name: str
     """ 游戏名 """
-    verson:str
+    verson: str
     """ 游戏版本号 """
-    author:str
+    author: str
     """ 作者名 """
-    verson_time:str
+    verson_time: str
     """ 版本时间 """
-    background:str
+    background: str
     """ 背景色 """
-    language:str
+    language: str
     """ 语言 """
-    window_width:int
+    window_width: int
     """ 窗体宽度 """
-    window_hight:int
+    window_hight: int
     """ 窗体高度 """
-    textbox_width:int
+    textbox_width: int
     """ 文本框字符宽度 """
-    textbox_hight:int
+    textbox_hight: int
     """ 文本框字符高度 """
-    text_width:int
+    text_width: int
     """ 绘制用单行文本宽度 """
-    text_hight:int
+    text_hight: int
     """ 绘制用单屏行数 """
-    inputbox_width:int
+    inputbox_width: int
     """ 输入框宽度 """
-    year:int
+    year: int
     """ 游戏时间开始年份 """
-    month:int
+    month: int
     """ 游戏时间开始月份 """
-    day:int
+    day: int
     """ 游戏时间开始日期 """
-    hour:int
+    hour: int
     """ 游戏时间开始小时数 """
-    minute:int
+    minute: int
     """ 游戏时间开始分钟数 """
-    max_save:int
+    max_save: int
     """ 游戏存档数量上限 """
-    save_page:int
+    save_page: int
     """ 存档显示页面单页存档数 """
-    characterlist_show:int
+    characterlist_show: int
     """ 角色列表单页显示角色数 """
-    text_wait:int
+    text_wait: int
     """ 步进文本等待时间 """
-    home_url:str
+    home_url: str
     """ 开发者主页链接 """
-    licenses_url:str
+    licenses_url: str
     """ 知识产权共享协议链接 """
-    random_npc_max:int
+    random_npc_max: int
     """ 最大随机npc数量 """
-    proportion_teacher:int
+    proportion_teacher: int
     """ 生成教师权重 """
-    proportion_student:int
+    proportion_student: int
     """ 生成学生权重 """
-    insceneseeplayer_max:int
+    insceneseeplayer_max: int
     """ 场景单页显示角色数上限 """
-    seecharacterclothes_max:int
+    seecharacterclothes_max: int
     """ 角色服装列表单页显示服装数上限 """
-    seecharacterwearitem_max:int
+    seecharacterwearitem_max: int
     """ 角色可穿戴道具列表单页显示上限 """
-    seecharacteritem_max:int
+    seecharacteritem_max: int
     """ 角色背包单页显示道具数上限 """
-    food_shop_item_max:int
+    food_shop_item_max: int
     """ 食物商店单页显示道具数上限 """
-    food_shop_type_max:int
+    food_shop_type_max: int
     """ 食物商店单页显示食物种类数上限 """
 
 
@@ -328,29 +340,29 @@ class Clothing:
     """ 服装数据结构体 """
 
     def __init__(self):
-        self.uid:UUID = ""
+        self.uid: UUID = ""
         """ 服装对象的唯一id """
-        self.tem_id:int = 0
+        self.tem_id: int = 0
         """ 服装配表id """
-        self.sexy:int = 0
+        self.sexy: int = 0
         """ 服装性感属性 """
-        self.handsome:int = 0
+        self.handsome: int = 0
         """ 服装帅气属性 """
-        self.elegant:int = 0
+        self.elegant: int = 0
         """ 服装典雅属性 """
-        self.fresh:int = 0
+        self.fresh: int = 0
         """ 服装清新属性 """
-        self.sweet:int = 0
+        self.sweet: int = 0
         """ 服装可爱属性 """
-        self.warm:int = 0
+        self.warm: int = 0
         """ 服装保暖属性 """
-        self.cleanliness:int = 0
+        self.cleanliness: int = 0
         """ 服装清洁属性 """
-        self.price:int = 0
+        self.price: int = 0
         """ 服装价值属性 """
-        self.evaluation:str = ""
+        self.evaluation: str = ""
         """ 服装评价文本 """
-        self.wear:int = 0
+        self.wear: int = 0
         """ 穿戴部位 """
 
 
@@ -358,15 +370,15 @@ class Height:
     """ 身高数据结构体 """
 
     def __init__(self):
-        self.now_height:int = 0
+        self.now_height: int = 0
         """ 当前身高 """
-        self.growth_height:int = 0
+        self.growth_height: int = 0
         """ 每日身高增量 """
-        self.expect_age:int = 0
+        self.expect_age: int = 0
         """ 预期结束身高增长年龄 """
-        self.development_age:int = 0
+        self.development_age: int = 0
         """ 预期发育期结束时间 """
-        self.expect_height:int = 0
+        self.expect_height: int = 0
         """ 预期的最终身高 """
 
 
@@ -376,17 +388,17 @@ class Behavior:
     def __init__(self):
         self.start_time: datetime.datetime = None
         """ 行为开始时间 """
-        self.duration:int = 0
+        self.duration: int = 0
         """ 行为持续时间(单位分钟) """
-        self.behavior_id:int = 0
+        self.behavior_id: int = 0
         """ 行为id """
-        self.move_target:List[str] = []
+        self.move_target: List[str] = []
         """ 移动行为目标坐标 """
-        self.eat_food:Food = None
+        self.eat_food: Food = None
         """ 进食行为消耗的食物对象 """
-        self.food_name:str = ""
+        self.food_name: str = ""
         """ 前提结算用:进食行为消耗的食物名字 """
-        self.food_quality:int = 0
+        self.food_quality: int = 0
         """ 前提结算用:进食行为消耗的食物品质 """
 
 
@@ -394,18 +406,18 @@ class Map:
     """ 地图数据 """
 
     def __init__(self):
-        self.map_path:str = ""
+        self.map_path: str = ""
         """ 地图路径 """
-        self.map_name:str = ""
+        self.map_name: str = ""
         """ 地图名字 """
-        self.path_edge:Dict[str,Dict[str,int]] = {}
+        self.path_edge: Dict[str, Dict[str, int]] = {}
         """
         地图下场景通行路径
         场景id:可直达场景id:移动所需时间
         """
-        self.map_draw:MapDraw = ""
+        self.map_draw: MapDraw = ""
         """ 地图绘制数据 """
-        self.sorted_path:Dict[str,Dict[str,TargetPath]] = {}
+        self.sorted_path: Dict[str, Dict[str, TargetPath]] = {}
         """
         地图下场景间寻路路径
         当前节点:目标节点:路径对象
@@ -416,7 +428,7 @@ class MapDraw:
     """ 地图绘制数据 """
 
     def __init__(self):
-        self.draw_text:List[MapDrawLine] = []
+        self.draw_text: List[MapDrawLine] = []
         """ 绘制行对象列表 """
 
 
@@ -424,9 +436,9 @@ class MapDrawLine:
     """ 地图绘制行数据 """
 
     def __init__(self):
-        self.width:int = 0
+        self.width: int = 0
         """ 总行宽 """
-        self.draw_list:List[MapDrawText] = []
+        self.draw_list: List[MapDrawText] = []
         """ 绘制的对象列表 """
 
 
@@ -434,9 +446,9 @@ class MapDrawText:
     """ 地图绘制文本数据 """
 
     def __init__(self):
-        self.text:str = ""
+        self.text: str = ""
         """ 要绘制的文本 """
-        self.is_button:bool = 0
+        self.is_button: bool = 0
         """ 是否是场景按钮 """
 
 
@@ -444,9 +456,9 @@ class TargetPath:
     """ 寻路目标路径数据 """
 
     def __init__(self):
-        self.path:List[str] = []
+        self.path: List[str] = []
         """ 寻路路径节点列表 """
-        self.time:List[int] = []
+        self.time: List[int] = []
         """ 移动所需时间列表 """
 
 
@@ -454,13 +466,13 @@ class Scene:
     """ 场景数据 """
 
     def __init__(self):
-        self.scene_path:str = ""
+        self.scene_path: str = ""
         """ 场景路径 """
-        self.scene_name:str = ""
+        self.scene_name: str = ""
         """ 场景名字 """
-        self.in_door:bool = 0
+        self.in_door: bool = 0
         """ 在室内 """
-        self.scene_tag:str = ""
+        self.scene_tag: str = ""
         """ 场景标签 """
-        self.character_list:set = set()
+        self.character_list: set = set()
         """ 场景内角色列表 """

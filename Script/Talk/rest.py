@@ -19,7 +19,11 @@ def talk_rest_1() -> List[str]:
     ]
 
 
-@talk.add_talk(constant.Behavior.REST, 2, {constant.Premise.NO_PLAYER, constant.Premise.IN_PLAYER_SCENE})
+@talk.add_talk(
+    constant.Behavior.REST,
+    2,
+    {constant.Premise.NO_PLAYER, constant.Premise.IN_PLAYER_SCENE},
+)
 def talk_rest_2() -> List[str]:
     """
     npc和玩家处于同一场景时的基础休息口上
@@ -35,7 +39,11 @@ def talk_rest_2() -> List[str]:
     ]
 
 
-@talk.add_talk(constant.Behavior.REST, 3, {constant.Premise.IS_PLAYER, constant.Premise.HAVE_TARGET})
+@talk.add_talk(
+    constant.Behavior.REST,
+    3,
+    {constant.Premise.IS_PLAYER, constant.Premise.HAVE_TARGET},
+)
 def talk_rest_3() -> List[str]:
     """
     玩家和npc一起休息时的基础口上
@@ -49,7 +57,15 @@ def talk_rest_3() -> List[str]:
     ]
 
 
-@talk.add_talk(constant.Behavior.REST, 4, {constant.Premise.NO_PLAYER, constant.Premise.TARGET_IS_ADORE, constant.Premise.TARGET_IS_PLAYER})
+@talk.add_talk(
+    constant.Behavior.REST,
+    4,
+    {
+        constant.Premise.NO_PLAYER,
+        constant.Premise.TARGET_IS_ADORE,
+        constant.Premise.TARGET_IS_PLAYER,
+    },
+)
 def talk_rest_4() -> List[str]:
     """
     npc爱慕玩家并与玩家一起休息时的口上
@@ -63,7 +79,15 @@ def talk_rest_4() -> List[str]:
     return [talk_1, talk_2]
 
 
-@talk.add_talk(constant.Behavior.REST, 5, {constant.Premise.NO_PLAYER,constant.Premise.TARGET_IS_ADMIRE, constant.Premise.TARGET_IS_PLAYER})
+@talk.add_talk(
+    constant.Behavior.REST,
+    5,
+    {
+        constant.Premise.NO_PLAYER,
+        constant.Premise.TARGET_IS_ADMIRE,
+        constant.Premise.TARGET_IS_PLAYER,
+    },
+)
 def talk_rest_5() -> List[str]:
     """
     npc恋幕玩家并与玩家一起休息时的口上

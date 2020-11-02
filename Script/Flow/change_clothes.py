@@ -43,9 +43,13 @@ def see_character_clothes_list(clothing_type: str):
         character_id = cache_contorl.character_data[0].target_character_id
         change_clothes_panel.see_character_clothes_info(character_id)
         page_max = get_character_clothes_page_max(character_id, clothing_type)
-        input_s = change_clothes_panel.see_character_clothes_panel(character_id, clothing_type, page_max)
+        input_s = change_clothes_panel.see_character_clothes_panel(
+            character_id, clothing_type, page_max
+        )
         start_id = len(input_s)
-        input_s += change_clothes_panel.see_character_clothes_cmd(start_id, clothing_type)
+        input_s += change_clothes_panel.see_character_clothes_cmd(
+            start_id, clothing_type
+        )
         yrn = flow_handle.askfor_all(input_s)
         yrn = int(yrn)
         py_cmd.clr_cmd()
@@ -56,20 +60,26 @@ def see_character_clothes_list(clothing_type: str):
             if now_page_id == 0:
                 cache_contorl.panel_state["SeeCharacterClothesPanel"] = str(page_max)
             else:
-                cache_contorl.panel_state["SeeCharacterClothesPanel"] = str(now_page_id - 1)
+                cache_contorl.panel_state["SeeCharacterClothesPanel"] = str(
+                    now_page_id - 1
+                )
         elif yrn == start_id + 2:
             break
         elif yrn == start_id + 3:
             if now_page_id == page_max:
                 cache_contorl.panel_state["SeeCharacterClothesPanel"] = "0"
             else:
-                cache_contorl.panel_state["SeeCharacterClothesPanel"] = str(now_page_id + 1)
+                cache_contorl.panel_state["SeeCharacterClothesPanel"] = str(
+                    now_page_id + 1
+                )
         elif yrn == start_id + 4:
             clothing_type = next_type
         else:
-            clothing_id = list(cache_contorl.character_data[character_id].clothing[clothing_type].keys())[
-                yrn
-            ]
+            clothing_id = list(
+                cache_contorl.character_data[character_id]
+                .clothing[clothing_type]
+                .keys()
+            )[yrn]
             ask_see_clothing_info(clothing_type, clothing_id, character_id)
 
 
@@ -89,7 +99,9 @@ def ask_see_clothing_info(clothing_type: str, clothing_id: str, character_id: st
         if wear_clothing_judge:
             cache_contorl.character_data[character_id].put_on[clothing_type] = ""
         else:
-            cache_contorl.character_data[character_id].put_on[clothing_type] = clothing_id
+            cache_contorl.character_data[character_id].put_on[
+                clothing_type
+            ] = clothing_id
     elif yrn == 1:
         see_clothing_info(character_id, clothing_type, clothing_id)
 
@@ -102,10 +114,15 @@ def see_clothing_info(character_id: str, clothing_type: str, clothing_id: str):
     clothing_type -- 服装类型
     clothing_id -- 服装id
     """
-    clothing_list = list(cache_contorl.character_data[character_id].clothing[clothing_type].keys())
+    clothing_list = list(
+        cache_contorl.character_data[character_id].clothing[clothing_type].keys()
+    )
     while True:
         wear_clothing_judge = False
-        if clothing_id == cache_contorl.character_data[character_id].put_on[clothing_type]:
+        if (
+            clothing_id
+            == cache_contorl.character_data[character_id].put_on[clothing_type]
+        ):
             wear_clothing_judge = True
         now_clothing_index = clothing_list.index(clothing_id)
         change_clothes_panel.see_clothing_info_panel(
@@ -121,7 +138,9 @@ def see_clothing_info(character_id: str, clothing_type: str, clothing_id: str):
             if wear_clothing_judge:
                 cache_contorl.character_data[character_id].put_on[clothing_type] = ""
             else:
-                cache_contorl.character_data[character_id].put_on[clothing_type] = clothing_id
+                cache_contorl.character_data[character_id].put_on[
+                    clothing_type
+                ] = clothing_id
         elif yrn == 2:
             break
         elif yrn == 3:
@@ -138,7 +157,9 @@ def get_character_clothes_page_max(character_id: str, clothing_type: str) -> int
     character_id -- 角色Id
     clothing_type -- 服装类型
     """
-    clothing_max = len(cache_contorl.character_data[character_id].clothing[clothing_type].keys())
+    clothing_max = len(
+        cache_contorl.character_data[character_id].clothing[clothing_type].keys()
+    )
     page_index = game_config.see_character_clothes_max
     if clothing_max < page_index:
         return 0

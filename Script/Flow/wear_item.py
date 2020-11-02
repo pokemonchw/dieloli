@@ -16,7 +16,9 @@ def scene_see_character_wear_item(character_id: int):
     character_id -- 角色Id
     """
     while 1:
-        now_input_s = wear_item_panel.see_character_wear_item_panel_for_player(character_id)
+        now_input_s = wear_item_panel.see_character_wear_item_panel_for_player(
+            character_id
+        )
         now_yrn = flow_handle.askfor_all(now_input_s)
         if now_yrn == now_input_s[:-1]:
             cache_contorl.now_flow_id = "main"
@@ -38,7 +40,9 @@ def wear_character_item():
             cache_contorl.now_flow_id = "main"
             break
         else:
-            wear_item_info_text_data = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "49")
+            wear_item_info_text_data = text_loading.get_text_data(
+                constant.FilePath.STAGE_WORD_PATH, "49"
+            )
             change_wear_item(list(wear_item_info_text_data.keys())[int(yrn)])
 
 
@@ -50,7 +54,9 @@ def change_wear_item(item_type: str) -> bool:
     """
     character_id = cache_contorl.character_data[0].target_character_id
     max_page = get_character_wear_item_page_max(character_id)
-    input_s = wear_item_panel.see_character_wear_item_list_panel(character_id, item_type, max_page)
+    input_s = wear_item_panel.see_character_wear_item_list_panel(
+        character_id, item_type, max_page
+    )
     if input_s == []:
         return
     yrn = flow_handle.askfor_all(input_s)
@@ -58,7 +64,9 @@ def change_wear_item(item_type: str) -> bool:
         return
     else:
         cache_contorl.character_data[character_id].wear_item["Wear"][item_type] = list(
-            cache_contorl.character_data[character_id].wear_item["Item"][item_type].keys()
+            cache_contorl.character_data[character_id]
+            .wear_item["Item"][item_type]
+            .keys()
         )[int(yrn)]
 
 

@@ -42,9 +42,11 @@ def get_rich_text_print(text_message: str, default_style: str) -> list:
                         cache_contorl.text_style_position = (
                             cache_contorl.text_style_position - 1
                         )
-                        cache_contorl.output_text_style = cache_contorl.text_style_cache[
-                            cache_contorl.text_style_position
-                        ]
+                        cache_contorl.output_text_style = (
+                            cache_contorl.text_style_cache[
+                                cache_contorl.text_style_position
+                            ]
+                        )
                 else:
                     cache_contorl.text_style_position = len(
                         cache_contorl.text_style_cache

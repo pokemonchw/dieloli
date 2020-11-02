@@ -15,14 +15,20 @@ def see_character_item_panel(character_id: int) -> list:
     Keyword arguments:
     character_id -- 角色Id
     """
-    era_print.normal_print(attr_text.get_see_attr_panel_head_character_info(character_id))
+    era_print.normal_print(
+        attr_text.get_see_attr_panel_head_character_info(character_id)
+    )
     era_print.restart_line_print(".")
     if character_id != 0:
-        era_print.line_feed_print(text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "37"))
+        era_print.line_feed_print(
+            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "37")
+        )
         return []
     character_item_data = cache_contorl.character_data[character_id].item
     if len(character_item_data) == 0:
-        era_print.line_feed_print(text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "36"))
+        era_print.line_feed_print(
+            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "36")
+        )
         return []
     now_page_id = int(cache_contorl.panel_state["SeeCharacterItemListPanel"])
     now_page_max = game_config.see_character_item_max
@@ -62,12 +68,16 @@ def see_character_item_info_panel(character_id: str, item_id: str):
     """
     title_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "38")
     era_print.little_title_print(title_text)
-    era_print.normal_print(attr_text.get_see_attr_panel_head_character_info(character_id))
+    era_print.normal_print(
+        attr_text.get_see_attr_panel_head_character_info(character_id)
+    )
     era_print.restart_line_print(".")
     item_data = cache_contorl.character_data[character_id].item[item_id]
     era_print.line_feed_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, 128) + item_data["ItemName"]
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, 128)
+        + item_data["ItemName"]
     )
     era_print.line_feed_print(
-        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "131") + item_data["ItemInfo"]
+        text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "131")
+        + item_data["ItemInfo"]
     )

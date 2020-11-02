@@ -18,7 +18,9 @@ def establish_save_func():
         show_save_value = save_page[0]
         last_save_page_value = save_page[1]
         save_handle_frame_panel.establish_save_info_head_panel()
-        flow_return = save_handle_frame_panel.see_save_list_panel(show_save_value, last_save_page_value)
+        flow_return = save_handle_frame_panel.see_save_list_panel(
+            show_save_value, last_save_page_value
+        )
         input_s = input_s + flow_return
         start_id = len(input_s)
         flow_return = save_handle_frame_panel.ask_for_change_save_page_panel(start_id)
@@ -28,7 +30,9 @@ def establish_save_func():
         if yrn == str(start_id):
             save_panel_page = int(cache_contorl.panel_state["SeeSaveListPanel"])
             if save_panel_page == 0:
-                cache_contorl.panel_state["SeeSaveListPanel"] = cache_contorl.max_save_page
+                cache_contorl.panel_state[
+                    "SeeSaveListPanel"
+                ] = cache_contorl.max_save_page
             else:
                 cache_contorl.panel_state["SeeSaveListPanel"] = save_panel_page - 1
         elif yrn == str(start_id + 1):
@@ -43,7 +47,9 @@ def establish_save_func():
                 cache_contorl.panel_state["SeeSaveListPanel"] = save_panel_page + 1
         else:
             ans_return = int(yrn)
-            save_id = str(save_handle.get_save_page_save_id(show_save_value, ans_return))
+            save_id = str(
+                save_handle.get_save_page_save_id(show_save_value, ans_return)
+            )
             if save_handle.judge_save_file_exist(save_id):
                 ask_for_overlay_save_func(save_id)
             else:
@@ -72,7 +78,9 @@ def load_save_func():
         if yrn == str(start_id):
             save_panel_page = int(cache_contorl.panel_state["SeeSaveListPanel"])
             if save_panel_page == 0:
-                cache_contorl.panel_state["SeeSaveListPanel"] = cache_contorl.max_save_page
+                cache_contorl.panel_state[
+                    "SeeSaveListPanel"
+                ] = cache_contorl.max_save_page
             else:
                 cache_contorl.panel_state["SeeSaveListPanel"] = save_panel_page - 1
         elif yrn == str(start_id + 1):

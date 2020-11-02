@@ -57,7 +57,7 @@ panel_state: Dict[str, int] = {}
 """ 面板状态 """
 max_save_page: int = 0
 """ 存档页面最大数量 """
-now_panel_id:int = 0
+now_panel_id: int = 0
 """ 当前游面板id """
 course_data: dict = {}
 """ 各个年级各科目课时数据 """
@@ -77,15 +77,15 @@ average_height_by_age: dict = {}
 """ 各年龄段平均身高 """
 text_wait: int = 0
 """ 绘制文本输出等待时间 """
-map_data: Dict[str,game_type.Map] = {}
+map_data: Dict[str, game_type.Map] = {}
 """ 游戏地图数据 地图路径:地图数据 """
-scene_data: Dict[str,game_type.Scene] = {}
+scene_data: Dict[str, game_type.Scene] = {}
 """ 游戏场景数据 场景路径:场景数据 """
 now_map: List[str] = []
 """ 查看地图时当前所查看的地图的坐标 """
 random_npc_list: List[game_type.NpcTem] = []
 """ 随机npc数据 """
-place_data: Dict[str,List[str]] = {}
+place_data: Dict[str, List[str]] = {}
 """ 按房间类型分类的场景列表 场景标签:场景路径列表 """
 wear_item_type_data: dict = {}
 """ 可穿戴道具类型数据 """
@@ -137,7 +137,7 @@ premise_talk_table: Dict[int, Dict[int, Dict[int, set]]] = {}
 口上对应的所需前提集合
 advid:行为id:口上id:前提集合
 """
-panel_data:Dict[int,FunctionType] = {}
+panel_data: Dict[int, FunctionType] = {}
 """
 面板id对应的面板绘制函数集合
 面板id:面板绘制函数对象

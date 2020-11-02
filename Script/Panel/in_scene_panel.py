@@ -16,7 +16,9 @@ from Script.Design import (
 )
 import math
 
-panel_state_text_data = text_loading.get_text_data(constant.FilePath.CMD_PATH, "cmdSwitch")
+panel_state_text_data = text_loading.get_text_data(
+    constant.FilePath.CMD_PATH, "cmdSwitch"
+)
 panel_state_on_text = panel_state_text_data[1]
 panel_state_off_text = panel_state_text_data[0]
 
@@ -41,7 +43,9 @@ def see_scene_panel():
         map_path_text += map_name + "-"
     scene_data = cache_contorl.scene_data[scene_path_str]
     scene_name = map_path_text + scene_data["SceneName"]
-    scene_info_head = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "76")
+    scene_info_head = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "76"
+    )
     scene_info = scene_info_head + scene_name
     era_print.normal_print(scene_info)
     panel_state = cache_contorl.panel_state["SeeSceneCharacterListPage"]
@@ -65,7 +69,9 @@ def see_scene_character_list_panel() -> list:
     name_list = map_handle.get_scene_character_name_list(scene_path_str, True)
     name_list = get_now_page_name_list(name_list)
     if len(name_list) > 0:
-        see_character_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "26")
+        see_character_text = text_loading.get_text_data(
+            constant.FilePath.MESSAGE_PATH, "26"
+        )
         era_print.normal_print(see_character_text)
         era_print.line_feed_print()
         character_id = cache_contorl.character_data[0].target_character_id
@@ -136,9 +142,9 @@ def see_character_info_panel():
     era_print.normal_print(character_name)
     era_print.normal_print(" ")
     sex = character_data.sex
-    sex_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "2") + attr_text.get_sex_text(
-        sex
-    )
+    sex_text = text_loading.get_text_data(
+        constant.FilePath.STAGE_WORD_PATH, "2"
+    ) + attr_text.get_sex_text(sex)
     era_print.normal_print(sex_text)
     era_print.normal_print(" ")
     intimate_info = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "16")

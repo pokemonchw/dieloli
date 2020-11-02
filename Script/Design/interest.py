@@ -28,4 +28,6 @@ def init_character_interest():
                     now_inter_value / interest_average
                 )
             else:
-                cache_contorl.character_data[character].interest[interest] = now_interest_value_max
+                cache_contorl.character_data[character].interest[
+                    interest
+                ] = now_interest_value_max

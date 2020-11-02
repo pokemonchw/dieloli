@@ -41,7 +41,9 @@ def handle_unknown_instruct():
     """
     处理未定义指令
     """
-    era_print.line_feed_print(text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "42"))
+    era_print.line_feed_print(
+        text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "42")
+    )
 
 
 @add_instruct("Rest")

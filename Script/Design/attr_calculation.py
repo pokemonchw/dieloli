@@ -52,14 +52,16 @@ def get_height(tem_name: int, age: int) -> dict:
     """
     tem_data = game_config.config_height_tem_sex_data[tem_name]
     initial_height = random.uniform(tem_data.min_value, tem_data.max_value)
-    if tem_name in {0,3}:
+    if tem_name in {0, 3}:
         expect_age = random.randint(18, 22)
         expect_height = initial_height / 0.2949
     else:
         expect_age = random.randint(13, 17)
         expect_height = initial_height / 0.3109
     development_age = random.randint(4, 6)
-    growth_height_data = get_growth_height(age, expect_height, development_age, expect_age)
+    growth_height_data = get_growth_height(
+        age, expect_height, development_age, expect_age
+    )
     growth_height = growth_height_data["GrowthHeight"]
     now_height = growth_height_data["NowHeight"]
     if age > expect_age:
@@ -102,7 +104,9 @@ def get_chest(chest_tem: int, birthday: datetime.datetime) -> game_type.Chest:
     return chest
 
 
-chest_tem_weight_data = {k:game_config.config_chest[k].weight for k in game_config.config_chest}
+chest_tem_weight_data = {
+    k: game_config.config_chest[k].weight for k in game_config.config_chest
+}
 
 
 def get_rand_npc_chest_tem() -> int:
@@ -133,12 +137,16 @@ def get_rand_npc_birthday(age: int):
     now_day = cache_contorl.game_time.day
     birth_year = now_year - age
     birthday = game_time.get_rand_day_for_year(birth_year)
-    if now_month < birthday.month or (now_month == birthday.month and now_day < birthday.day):
+    if now_month < birthday.month or (
+        now_month == birthday.month and now_day < birthday.day
+    ):
         birthday = game_time.get_sub_date(year=-1, old_date=birthday)
     return birthday
 
 
-def get_growth_height(now_age: int, expect_height: float, development_age: int, expect_age: int) -> dict:
+def get_growth_height(
+    now_age: int, expect_height: float, development_age: int, expect_age: int
+) -> dict:
     """
     计算每日身高增长量
     Keyword arguments:
@@ -158,31 +166,31 @@ def get_growth_height(now_age: int, expect_height: float, development_age: int, 
     return {"GrowthHeight": growth_height, "NowHeight": now_height}
 
 
-def get_bmi(tem_name: str) -> dict:
+def get_bmi(tem_name: int) -> float:
     """
     按体重比例模板生成BMI
     Keyword arguments:
     tem_name -- 体重比例模板id
+    Return arguments:
+    int -- bmi值
     """
-    tem_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "WeightTem")[tem_name]
-    return random.uniform(tem_data[0], tem_data[1])
+    tem_data = game_config.config_weight_tem[tem_name]
+    return random.uniform(tem_data.min_value, tem_data.max_value)
 
 
-def get_bodyfat(sex: str, tem_name: str) -> float:
+def get_body_fat(sex: int, tem_name: int) -> float:
     """
     按性别和体脂率模板生成体脂率
     Keyword arguments:
     sex -- 性别
     tem_name -- 体脂率模板id
+    Return arguments:
+    float -- 体脂率
     """
-    if sex in ["Man", "Asexual"]:
-        sex_tem = "Man"
-    else:
-        sex_tem = "Woman"
-    tem_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "BodyFatTem")[sex_tem][
-        tem_name
-    ]
-    return random.uniform(tem_data[0], tem_data[1])
+    sex_tem = sex in (0, 3)
+    tem_data_id = game_config.config_body_fat_tem_data[sex][tem_name]
+    tem_data = game_config.config_body_fat_tem[tem_data_id]
+    return random.uniform(tem_data.min_value, tem_data.max_value)
 
 
 def get_weight(bmi: float, height: float) -> float:
@@ -196,7 +204,13 @@ def get_weight(bmi: float, height: float) -> float:
     return bmi * height * height
 
 
-def get_measurements(tem_name: str, height: float, weight: float, bodyfat: float, weight_tem: str,) -> dict:
+def get_measurements(
+    tem_name: int,
+    height: float,
+    weight: float,
+    bodyfat: float,
+    weight_tem: int,
+) -> dict:
     """
     计算角色三围
     Keyword arguments:
@@ -217,15 +231,17 @@ def get_measurements(tem_name: str, height: float, weight: float, bodyfat: float
         hip = 57.78 / 100 * height
         new_waist = ((bodyfat / 100 * weight) + (weight * 0.082 + 44.74)) / 0.74
     waist_hip_proportion = waist / hip
-    waist_hip_proportion_tem = text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "WaistHipProportionTem"
-    )[weight_tem]
+    waist_hip_proportion_tem = game_config.config_waist_hip_proportion[weight_tem].value
     waist_hip_proportion_fix = random.uniform(0, waist_hip_proportion_tem)
     waist_hip_proportion = waist_hip_proportion + waist_hip_proportion_fix
     new_hip = new_waist / waist_hip_proportion
     fix = new_hip / hip
     bust = bust * fix
-    return {"Bust": bust, "Waist": new_waist, "Hip": new_hip}
+    measurements = game_type.Measurements()
+    measurements.bust = bust
+    measurements.waist = waist
+    measurements.hip = hip
+    return measurements
 
 
 def get_max_hit_point(tem_id: int) -> int:
@@ -275,79 +291,31 @@ def get_init_learn_abllity(age: int, end_age: int):
         return 0 - (age - forget_age) / (end_age - forget_age)
 
 
-def get_sex_experience(tem_name: str) -> dict:
+def get_sex_experience(tem_name: int, sex: int) -> dict:
     """
     按模板生成角色初始性经验
     Keyword arguments:
-    tem_name -- 性经验模板
+    tem_name -- 性经验丰富程度模板
+    sex -- 性别id
+    Return arguments:
+    dict -- 性经验数据
     """
-    tem_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperience")[tem_name]
-    mouth_experience_tem_name = tem_data["MouthExperienceTem"]
-    bosom_experience_tem_name = tem_data["BosomExperienceTem"]
-    vagina_experience_tem_name = tem_data["VaginaExperienceTem"]
-    clitoris_experience_tem_name = tem_data["ClitorisExperienceTem"]
-    anus_experience_tem_name = tem_data["AnusExperienceTem"]
-    penis_experience_tem_name = tem_data["PenisExperienceTem"]
-    mouth_experience_list = text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
-    )["MouthExperienceTem"][mouth_experience_tem_name]
-    mouth_experience = random.randint(int(mouth_experience_list[0]), int(mouth_experience_list[1]))
-    bosom_experience_list = text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
-    )["BosomExperienceTem"][bosom_experience_tem_name]
-    bosom_experience = random.randint(int(bosom_experience_list[0]), int(bosom_experience_list[1]))
-    vagina_experience_list = text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
-    )["VaginaExperienceTem"][vagina_experience_tem_name]
-    vagina_experience = random.randint(int(vagina_experience_list[0]), int(vagina_experience_list[1]))
-    clitoris_experience_list = text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
-    )["ClitorisExperienceTem"][clitoris_experience_tem_name]
-    clitoris_experience = random.randint(int(clitoris_experience_list[0]), int(clitoris_experience_list[1]))
-    anus_experience_list = text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
-    )["AnusExperienceTem"][anus_experience_tem_name]
-    anus_experience = random.randint(int(anus_experience_list[0]), int(anus_experience_list[1]))
-    penis_experience_list = text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "SexExperienceTem"
-    )["PenisExperienceTem"][penis_experience_tem_name]
-    penis_experience = random.randint(int(penis_experience_list[0]), int(penis_experience_list[1]))
-    return {
-        "mouth_experience": mouth_experience,
-        "bosom_experience": bosom_experience,
-        "vagina_experience": vagina_experience,
-        "clitoris_experience": clitoris_experience,
-        "anus_experience": anus_experience,
-        "penis_experience": penis_experience,
-    }
-
-
-def get_sex_grade(sex_experience_data: dict) -> dict:
-    """
-    按性经验数据计算性经验等级
-    Keyword arguments:
-    sex_experience_data -- 性经验数据
-    """
-    mouth_experience = sex_experience_data["mouth_experience"]
-    bosom_experience = sex_experience_data["bosom_experience"]
-    vagina_experience = sex_experience_data["vagina_experience"]
-    clitoris_experience = sex_experience_data["clitoris_experience"]
-    anus_experience = sex_experience_data["anus_experience"]
-    penis_experience = sex_experience_data["penis_experience"]
-    mouth_grade = judge_grade(mouth_experience)
-    bosom_grade = judge_grade(bosom_experience)
-    vagina_grade = judge_grade(vagina_experience)
-    clitoris_grade = judge_grade(clitoris_experience)
-    anus_grade = judge_grade(anus_experience)
-    penis_grade = judge_grade(penis_experience)
-    return {
-        "mouth_grade": mouth_grade,
-        "bosom_grade": bosom_grade,
-        "vagina_grade": vagina_grade,
-        "clitoris_grade": clitoris_grade,
-        "anus_grade": anus_grade,
-        "penis_grade": penis_grade,
-    }
+    sex_tem = sex in {0, 3}
+    sex_experience_data = {}
+    for organ in (
+        game_config.config_organ_data[sex_tem] | game_config.config_organ_data[2]
+    ):
+        sex_experience_tem_id = game_config.config_sex_experience_data[tem_name][organ]
+        organ_sex_experience_tem_id = game_config.config_sex_experience_tem_data[organ][
+            sex_experience_tem_id
+        ]
+        organ_sex_experience_tem = game_config.config_sex_experience_tem[
+            organ_sex_experience_tem_id
+        ]
+        sex_experience_data[organ] = random.uniform(
+            organ_sex_experience_tem.min_exp, organ_sex_experience_tem.max_exp
+        )
+    return sex_experience_data
 
 
 def judge_grade(experience: int) -> float:
@@ -378,26 +346,31 @@ def judge_grade(experience: int) -> float:
     return grade
 
 
-def judge_age_group(age: int):
+def judge_age_group(age: int) -> int:
     """
     判断所属年龄段
     Keyword arguments:
     age -- 年龄
+    Return arguments:
+    int -- 年龄段
     """
-    age_group = text_loading.get_game_data(constant.FilePath.ATTR_TEMPLATE_PATH)["AgeTem"]
-    for age_tem in age_group:
-        if int(age) >= int(age_group[age_tem]["MiniAge"]) and int(age) < int(age_group[age_tem]["MaxAge"]):
-            return age_tem
-    return "YoundAdult"
+    for age_tem_id in game_config.config_age_tem:
+        age_tem = game_config.config_age_tem[age_tem_id]
+        if age >= age_tem.min_age and age < age_tem.max_age:
+            return age_tem_id
+    return 0
 
 
-def judge_chest_group(chest: int):
+def judge_chest_group(chest: int) -> int:
     """
     判断胸围差所属罩杯
     Keyword arguments:
     chest -- 胸围差
+    Return arguments:
+    int -- 罩杯id
     """
-    chest_group = text_loading.get_game_data(constant.FilePath.ATTR_TEMPLATE_PATH)["ChestTem"]
-    for chest_tem in chest_group:
-        if int(chest) >= int(chest_group[chest_tem][0]) and int(chest) < chest_group[chest_tem][1]:
-            return chest_tem
+    for chest_tem_id in game_config.config_chest:
+        chest_tem = game_config.config_chest[chest_tem_id]
+        if chest >= chest_tem.min_value and chest < chest_tem.max_value:
+            return chest_tem_id
+    return 0

@@ -15,7 +15,11 @@ def init_time():
     初始化游戏时间
     """
     game_time = datetime.datetime(
-        normal_config.config_normal.year, normal_config.config_normal.month, normal_config.config_normal.day, normal_config.config_normal.hour, normal_config.config_normal.minute,
+        normal_config.config_normal.year,
+        normal_config.config_normal.month,
+        normal_config.config_normal.day,
+        normal_config.config_normal.hour,
+        normal_config.config_normal.minute,
     )
     cache_contorl.game_time = game_time
 
@@ -55,7 +59,12 @@ def sub_time_now(minute=0, hour=0, day=0, month=0, year=0) -> datetime.datetime:
 
 
 def get_sub_date(
-    minute=0, hour=0, day=0, month=0, year=0, old_date: datetime.datetime = None,
+    minute=0,
+    hour=0,
+    day=0,
+    month=0,
+    year=0,
+    old_date: datetime.datetime = None,
 ) -> datetime.datetime:
     """
     获取旧日期增加指定时间后得到的新日期
@@ -96,10 +105,14 @@ def timetuple_to_datetime(t: datetime.datetime.timetuple) -> datetime.datetime:
     Return arguments:
     d -- datetime类型数据
     """
-    return datetime.datetime(t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec)
+    return datetime.datetime(
+        t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec
+    )
 
 
-def get_rand_day_for_date(start_date: datetime.datetime, end_date: datetime.datetime) -> datetime.datetime:
+def get_rand_day_for_date(
+    start_date: datetime.datetime, end_date: datetime.datetime
+) -> datetime.datetime:
     """
     随机获取两个日期中的日期
     Keyword arguments:
@@ -113,7 +126,10 @@ def get_rand_day_for_date(start_date: datetime.datetime, end_date: datetime.date
     return get_sub_date(day=sub_day, old_date=start_date)
 
 
-def count_day_for_datetime(start_date: datetime.datetime, end_date: datetime.datetime,) -> int:
+def count_day_for_datetime(
+    start_date: datetime.datetime,
+    end_date: datetime.datetime,
+) -> int:
     """
     计算两个时间之间经过的天数
     Keyword arguments:
@@ -125,7 +141,9 @@ def count_day_for_datetime(start_date: datetime.datetime, end_date: datetime.dat
     return (start_date - end_date).days
 
 
-def judge_date_big_or_small(time_a: datetime.datetime, time_b: datetime.datetime) -> int:
+def judge_date_big_or_small(
+    time_a: datetime.datetime, time_b: datetime.datetime
+) -> int:
     """
     比较当前时间是否大于或等于旧时间
     Keyword arguments:
@@ -194,14 +212,17 @@ def init_primary_school_course_time_status(
             now_time_status.to_course = 0
         elif (
             teacher_id > -1
-            and teacher_id in cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index]
-        ):
-            classroom = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][
-                teacher_id
-            ].keys()[0]
-            now_time_status.course_id = cache_contorl.teacher_class_time_table[now_week][
+            and teacher_id
+            in cache_contorl.teacher_class_time_table[now_week][
                 now_time_status.course_index
-            ][teacher_id][classroom]
+            ]
+        ):
+            classroom = cache_contorl.teacher_class_time_table[now_week][
+                now_time_status.course_index
+            ][teacher_id].keys()[0]
+            now_time_status.course_id = cache_contorl.teacher_class_time_table[
+                now_week
+            ][now_time_status.course_index][teacher_id][classroom]
             cache_contorl.character_data[teacher_id].classroom = classroom
     else:
         now_time_status.end_course = 0
@@ -231,14 +252,17 @@ def init_junior_middle_school_course_time_status(
             now_time_status.to_course = 0
         elif (
             teacher_id > -1
-            and teacher_id in cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index]
-        ):
-            classroom = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][
-                teacher_id
-            ].keys()[0]
-            now_time_status.course_id = cache_contorl.teacher_class_time_table[now_week][
+            and teacher_id
+            in cache_contorl.teacher_class_time_table[now_week][
                 now_time_status.course_index
-            ][teacher_id][classroom]
+            ]
+        ):
+            classroom = cache_contorl.teacher_class_time_table[now_week][
+                now_time_status.course_index
+            ][teacher_id].keys()[0]
+            now_time_status.course_id = cache_contorl.teacher_class_time_table[
+                now_week
+            ][now_time_status.course_index][teacher_id][classroom]
             cache_contorl.character_data[teacher_id].classroom = classroom
     else:
         now_time_status.end_course = 0
@@ -263,14 +287,17 @@ def init_senior_high_school_course_time_status(
     if time_data.month in range(1, 7) or time_data.month in range(9, 13):
         if (
             teacher_id > -1
-            and teacher_id in cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index]
-        ):
-            classroom = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][
-                teacher_id
-            ].keys()[0]
-            now_time_status.course_id = cache_contorl.teacher_class_time_table[now_week][
+            and teacher_id
+            in cache_contorl.teacher_class_time_table[now_week][
                 now_time_status.course_index
-            ][teacher_id][classroom]
+            ]
+        ):
+            classroom = cache_contorl.teacher_class_time_table[now_week][
+                now_time_status.course_index
+            ][teacher_id].keys()[0]
+            now_time_status.course_id = cache_contorl.teacher_class_time_table[
+                now_week
+            ][now_time_status.course_index][teacher_id][classroom]
             cache_contorl.character_data[teacher_id].classroom = classroom
     else:
         now_time_status.end_course = 0
@@ -279,7 +306,9 @@ def init_senior_high_school_course_time_status(
     return now_time_status
 
 
-def judge_school_course_time(school_id: str, time_data: datetime.datetime) -> game_type.CourseTimeSlice:
+def judge_school_course_time(
+    school_id: str, time_data: datetime.datetime
+) -> game_type.CourseTimeSlice:
     """
     校验指定学校指定时间上课状态
     Keyword arguments:
@@ -289,7 +318,9 @@ def judge_school_course_time(school_id: str, time_data: datetime.datetime) -> ga
     game_type,CourseTimeSlice -- 上课时间和状态数据
     """
     course_status = game_type.CourseTimeSlice()
-    course_time_data = text_loading.get_text_data(constant.FilePath.COURSE_SESSION_PATH, school_id)
+    course_time_data = text_loading.get_text_data(
+        constant.FilePath.COURSE_SESSION_PATH, school_id
+    )
     now_time = time_data.hour * 100 + time_data.minute
     end_time_data = {course_time_data[i][1]: i for i in range(len(course_time_data))}
     now_time_index = bisect.bisect_left(list(end_time_data.keys()), now_time)
@@ -302,7 +333,10 @@ def judge_school_course_time(school_id: str, time_data: datetime.datetime) -> ga
         if start_time / 100 != now_time / 100:
             index_time = (start_time / 100 - now_time / 100) * 60
             course_status.to_course = (
-                start_time - (start_time / 100 - now_time / 100) * 100 + index_time - now_time
+                start_time
+                - (start_time / 100 - now_time / 100) * 100
+                + index_time
+                - now_time
             )
         else:
             course_status.to_course = start_time - now_time
@@ -311,7 +345,10 @@ def judge_school_course_time(school_id: str, time_data: datetime.datetime) -> ga
         if end_time / 100 != now_time / 100:
             index_time = (end_time / 100 - now_time / 100) * 60
             course_status.end_course = (
-                end_time - (end_time / 100 - now_time / 100) * 100 + index_time - now_time
+                end_time
+                - (end_time / 100 - now_time / 100) * 100
+                + index_time
+                - now_time
             )
         else:
             course_status.end_course = end_time - now_time

@@ -1,5 +1,13 @@
 from typing import List
-from Script.Core import era_print,text_handle,io_init,rich_text,constant,py_cmd,flow_handle
+from Script.Core import (
+    era_print,
+    text_handle,
+    io_init,
+    rich_text,
+    constant,
+    py_cmd,
+    flow_handle,
+)
 from Script.Config import game_config
 
 bar_list = set(game_config.config_bar_data.keys())
@@ -8,12 +16,12 @@ bar_list = set(game_config.config_bar_data.keys())
 class NormalDraw:
     """ 通用文本绘制类型 """
 
-    style:str = "standard"
+    style: str = "standard"
     """ 文本的样式 """
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.max_width:int = 0
+        self.max_width: int = 0
         """ 当前最大可绘制宽度 """
         self.text = ""
         """ 当前要绘制的文本 """
@@ -35,19 +43,23 @@ class NormalDraw:
             now_text = ""
             if self.max_width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.max_width:
+                    if (
+                        text_handle.get_text_index(now_text)
+                        + text_handle.get_text_index(i)
+                        < self.max_width
+                    ):
                         now_text += i
                     break
                 now_text[len(now_text) - 1] = "~"
-            io_init.era_print(now_text,self.style)
+            io_init.era_print(now_text, self.style)
         else:
-            io_init.era_print(self.text,self.style)
+            io_init.era_print(self.text, self.style)
 
 
 class ImageDraw:
     """ 图片绘制 """
 
-    def __init__(self,image_name:str,image_path=""):
+    def __init__(self, image_name: str, image_path=""):
         """
         初始化绘制对象
         Keyword arguments:
@@ -79,10 +91,10 @@ class BarDraw:
         """ 比例条最大长度 """
         self.bar_id = ""
         """ 比例条类型id """
-        self.draw_list:List[ImageDraw] = []
+        self.draw_list: List[ImageDraw] = []
         """ 比例条绘制对象列表 """
 
-    def set(self,bar_id:str,max_value:int,value:int):
+    def set(self, bar_id: str, max_value: int, value: int):
         """
         设置比例条数据
         Keyword arguments:
@@ -94,16 +106,14 @@ class BarDraw:
             proportion = 0
             if self.max_width > 1:
                 proportion = int(value / max_value * self.max_width)
-            fix_bar = self.max_width - proportion
+            fix_bar = int(self.max_width - proportion)
             style_data = game_config.config_bar[game_config.config_bar_data[bar_id]]
             for i in range(proportion):
-                now_draw = ImageDraw()
-                now_draw.image_name = style_data.ture_bar
+                now_draw = ImageDraw(style_data.ture_bar, "bar")
                 now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
             for i in range(fix_bar):
-                now_draw = ImageDraw()
-                now_draw.image_name = style_data.null_bar
+                now_draw = ImageDraw(style_data.null_bar, "bar")
                 now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
 
@@ -126,16 +136,18 @@ class InfoBarDraw:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.max_width = 0
+        self.max_width: int = 0
         """ 比例条最大长度 """
-        self.bar_id = ""
+        self.bar_id: str = ""
         """ 比例条类型id """
-        self.text = ""
+        self.text: str = ""
         """ 比例条描述文本 """
-        self.draw_list:List[ImageDraw] = []
+        self.draw_list: List[ImageDraw] = []
         """ 比例条绘制对象列表 """
+        self.scale: float = 1
+        """ 比例条绘制区域占比 """
 
-    def set(self,bar_id:str,max_value:int,value:int,text:str):
+    def set(self, bar_id: str, max_value: int, value: int, text: str):
         """
         设置比例条数据
         Keyword arguments:
@@ -144,16 +156,22 @@ class InfoBarDraw:
         value -- 当前数值
         text -- 描述文本
         """
+        now_max_width = self.max_width * self.scale
         info_draw = NormalDraw()
-        info_draw.max_width = self.max_width / 3
+        info_draw.max_width = now_max_width / 3
         info_draw.text = f"{text}["
         value_draw = NormalDraw()
-        value_draw.max_width = self.max_width / 3
+        value_draw.max_width = now_max_width / 3
         value_draw.text = f"(]{value}/{max_value})"
+        self.bar_id = bar_id
         bar_draw = BarDraw()
-        bar_draw.max_width = self.max_width - len(info_draw) - len(value_draw)
-        bar_draw.set(self.bar_id,max_value,value)
-        self.draw_list = [info_draw,BarDraw,value_draw]
+        bar_draw.max_width = now_max_width - len(info_draw) - len(value_draw)
+        bar_draw.set(self.bar_id, max_value, value)
+        fix_width = int((self.max_width - now_max_width) / 2)
+        fix_draw = NormalDraw()
+        fix_draw.text = " " * fix_width
+        fix_draw.max_width = fix_width
+        self.draw_list = [fix_draw, info_draw, bar_draw, value_draw, fix_draw]
 
     def draw(self):
         """ 绘制比例条 """
@@ -164,7 +182,13 @@ class InfoBarDraw:
 class Button:
     """ 按钮绘制 """
 
-    def __init__(self,text:str,return_text:str,normal_style="standard",on_mouse_style="onbutton"):
+    def __init__(
+        self,
+        text: str,
+        return_text: str,
+        normal_style="standard",
+        on_mouse_style="onbutton",
+    ):
         """
         初始化绘制对象
         Keyword arguments:
@@ -173,9 +197,9 @@ class Button:
         normal_style -- 按钮默认样式
         on_mouse_style -- 鼠标悬停时样式
         """
-        self.text:str = text
+        self.text: str = text
         """ 按钮文本 """
-        self.return_text:str = return_text
+        self.return_text: str = return_text
         """ 点击按钮响应文本 """
         self.normal_style = normal_style
         """ 按钮默认样式 """
@@ -192,7 +216,7 @@ class Button:
         """
         return text_handle.get_text_index(self.text)
 
-    def __lt__(self,other):
+    def __lt__(self, other):
         """
         比较两个button对象的文本长度
         Keyword arguments:
@@ -208,19 +232,33 @@ class Button:
             now_text = ""
             if self.max_width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.max_width:
+                    if (
+                        text_handle.get_text_index(now_text)
+                        + text_handle.get_text_index(i)
+                        < self.max_width
+                    ):
                         now_text += i
                     break
                 now_text[len(now_text) - 1] = "~"
-            py_cmd.pcmd(now_text,self.return_text,normal_style=self.normal_style,on_style=self.on_mouse_style)
+            py_cmd.pcmd(
+                now_text,
+                self.return_text,
+                normal_style=self.normal_style,
+                on_style=self.on_mouse_style,
+            )
         else:
-            py_cmd.pcmd(self.text,self.return_text,normal_style=self.normal_style,on_style=self.on_mouse_style)
+            py_cmd.pcmd(
+                self.text,
+                self.return_text,
+                normal_style=self.normal_style,
+                on_style=self.on_mouse_style,
+            )
 
 
 class LineDraw:
     """ 绘制线条文本 """
 
-    def __init__(self,text:str,width:int,style="standard"):
+    def __init__(self, text: str, width: int, style="standard"):
         """
         初始化绘制对象
         Keyword arguments:
@@ -247,7 +285,7 @@ class LineDraw:
         """ 绘制线条 """
         text_index = text_handle.get_text_index(self.text)
         text_num = self.width / text_index
-        io_init.era_print(self.text*int(text_num)+"\n",self.style)
+        io_init.era_print(self.text * int(text_num) + "\n", self.style)
 
 
 class CenterDraw(NormalDraw):
@@ -259,18 +297,22 @@ class CenterDraw(NormalDraw):
             now_text = ""
             if self.max_width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.max_width:
+                    if (
+                        text_handle.get_text_index(now_text)
+                        + text_handle.get_text_index(i)
+                        < self.max_width
+                    ):
                         now_text += i
                     break
                 now_text[len(now_text) - 1] = "~"
-            io_init.era_print(now_text,self.style)
+            io_init.era_print(now_text, self.style)
         elif len(self) > self.max_width - 1:
             now_text = " " + self.text
         elif len(self) > self.max_width - 2:
             now_text = " " + self.text + " "
         else:
-            now_text = text_handle.align(self.text,"center",0,1,self.max_width)
-        io_init.era_print(now_text,self.style)
+            now_text = text_handle.align(self.text, "center", 0, 1, self.max_width)
+        io_init.era_print(now_text, self.style)
 
 
 class RightDraw(NormalDraw):
@@ -282,12 +324,16 @@ class RightDraw(NormalDraw):
             now_text = ""
             if self.max_width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.max_width:
+                    if (
+                        text_handle.get_text_index(now_text)
+                        + text_handle.get_text_index(i)
+                        < self.max_width
+                    ):
                         now_text += i
                     break
                 now_text[len(now_text) - 1] = "~"
         elif len(self) > self.max_width - 2:
             now_text = " " + self.text
         else:
-            now_text = text_handle.align(self.text,"right",0,1,self.max_width)
-        io_init.era_print(now_text,self.style)
+            now_text = text_handle.align(self.text, "right", 0, 1, self.max_width)
+        io_init.era_print(now_text, self.style)

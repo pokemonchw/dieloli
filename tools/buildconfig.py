@@ -2,24 +2,22 @@ import csv
 import os
 import json
 
-config_dir = os.path.join("..","data","csv")
+config_dir = os.path.join("..", "data", "csv")
 config_data = {}
 config_def_str = ""
 config_po = "\n"
 msgData = set()
 
-def build_csv_config(file_path:str,file_name:str):
-    with open(file_path,encoding="utf-8") as now_file:
+
+def build_csv_config(file_path: str, file_name: str):
+    with open(file_path, encoding="utf-8") as now_file:
         now_read = csv.DictReader(now_file)
         now_docstring_data = {}
         now_type_data = {}
         get_text_data = {}
         file_id = file_name.split(".")[0]
         i = 0
-        config_data[file_id] = {
-            "data":[],
-            "gettext":{}
-        }
+        config_data[file_id] = {"data": [], "gettext": {}}
         class_text = ""
         for row in now_read:
             if not i:
@@ -55,13 +53,15 @@ def build_csv_config(file_path:str,file_name:str):
                 elif now_type == "float":
                     row[k] = float(row[k])
                 if get_text_data[k]:
-                    build_config_po(row[k],file_id,k,row["cid"])
+                    build_config_po(row[k], file_id, k, row["cid"])
             config_data[file_id]["data"].append(row)
         config_data[file_id]["gettext"] = get_text_data
-        build_config_def(file_id,now_type_data,now_docstring_data,class_text)
+        build_config_def(file_id, now_type_data, now_docstring_data, class_text)
 
 
-def build_config_def(class_name:str,value_type:dict,docstring:dict,class_text:str):
+def build_config_def(
+    class_name: str, value_type: dict, docstring: dict, class_text: str
+):
     global config_def_str
     config_def_str += ""
     config_def_str += "class " + class_name + ":"
@@ -71,10 +71,12 @@ def build_config_def(class_name:str,value_type:dict,docstring:dict,class_text:st
         config_def_str += "    " + '""" ' + docstring[k] + ' """'
 
 
-def build_config_po(message:str,message_class:str,message_type:str,message_id:str):
+def build_config_po(
+    message: str, message_class: str, message_type: str, message_id: str
+):
     global config_po
     if message not in msgData:
-        config_po += f'#: class:{message_class} id:{message_id} type:{message_type}\n'
+        config_po += f"#: class:{message_class} id:{message_id} type:{message_type}\n"
         config_po += f'msgid "{message}"\n'
         config_po += f'msgstr ""\n\n'
         msgData.add(message)
@@ -83,29 +85,28 @@ def build_config_po(message:str,message_class:str,message_type:str,message_id:st
 def build_scene_config(data_path):
     global config_po
     for i in os.listdir(data_path):
-        now_path = os.path.join(data_path,i)
+        now_path = os.path.join(data_path, i)
         if os.path.isfile(now_path):
             if i == "Scene.json":
-                with open(now_path,"r",encoding="utf-8") as now_file:
+                with open(now_path, "r", encoding="utf-8") as now_file:
                     scene_data = json.loads(now_file.read())
                     scene_name = scene_data["SceneName"]
                     if scene_name not in msgData:
-                        config_po += f'#: Scene:{now_path}\n'
+                        config_po += f"#: Scene:{now_path}\n"
                         config_po += f'msgid "{scene_name}"\n'
                         config_po += 'msgstr ""\n\n'
                         msgData.add(scene_name)
             elif i == "Map.json":
-                with open(now_path,"r",encoding="utf-8") as now_file:
+                with open(now_path, "r", encoding="utf-8") as now_file:
                     map_data = json.loads(now_file.read())
                     map_name = map_data["MapName"]
                     if map_name not in msgData:
-                        config_po += f'#: Map:{now_path}\n'
+                        config_po += f"#: Map:{now_path}\n"
                         config_po += f'msgid "{map_name}"\n'
                         config_po += 'msgstr ""\n\n'
                         msgData.add(map_name)
         else:
             build_scene_config(now_path)
-
 
 
 file_list = os.listdir(config_dir)
@@ -115,30 +116,32 @@ for i in file_list:
         continue
     if index:
         config_def_str += "\n\n\n"
-    now_file = os.path.join(config_dir,i)
-    build_csv_config(now_file,i)
+    now_file = os.path.join(config_dir, i)
+    build_csv_config(now_file, i)
     index += 1
 
-map_path = os.path.join("..","data","map")
+map_path = os.path.join("..", "data", "map")
 build_scene_config(map_path)
 
-po_dir = os.path.join("..","data","po","zh_CN","LC_MESSAGES")
-po_path = os.path.join(po_dir,"dieloli.po")
-mo_path = os.path.join(po_dir,"dieloli.mo")
+po_dir = os.path.join("..", "data", "po", "zh_CN", "LC_MESSAGES")
+po_path = os.path.join(po_dir, "dieloli.po")
+mo_path = os.path.join(po_dir, "dieloli.mo")
 if os.path.exists(po_path):
     os.remove(po_path)
-os.system('find ../ -name "*.py" >POTFILES && xgettext -n --files-from=POTFILES -o ' + po_path)
+os.system(
+    'find ../ -name "*.py" >POTFILES && xgettext -n --files-from=POTFILES -o ' + po_path
+)
 os.remove("POTFILES")
-os.system("msgfmt "+po_path + " -o " + mo_path)
+os.system("msgfmt " + po_path + " -o " + mo_path)
 
-with open(po_path,"a") as po_file:
+with open(po_path, "a") as po_file:
     po_file.write(config_po)
 
-config_path = os.path.join("..","Script","Config","config_def.py")
-config_def_str += '\n'
-with open(config_path,"w") as config_file:
+config_path = os.path.join("..", "Script", "Config", "config_def.py")
+config_def_str += "\n"
+with open(config_path, "w") as config_file:
     config_file.write(config_def_str)
 
-config_data_path = os.path.join("..","data","data.json")
-with open(config_data_path,"w") as config_data_file:
-    json.dump(config_data,config_data_file,ensure_ascii=0)
+config_data_path = os.path.join("..", "data", "data.json")
+with open(config_data_path, "w") as config_data_file:
+    json.dump(config_data, config_data_file, ensure_ascii=0)

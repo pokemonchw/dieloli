@@ -25,7 +25,7 @@ from Script.Core import (
     text_handle,
     constant,
 )
-from Script.Config import normal_config,game_config
+from Script.Config import normal_config, game_config
 
 
 def close_window():
@@ -43,7 +43,12 @@ def close_window():
 game_name = normal_config.config_normal.game_name
 root = Tk()
 root.title(game_name)
-root.geometry(str(normal_config.config_normal.window_width) + "x" + str(normal_config.config_normal.window_hight) + "+0+0")
+root.geometry(
+    str(normal_config.config_normal.window_width)
+    + "x"
+    + str(normal_config.config_normal.window_hight)
+    + "+0+0"
+)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 root.protocol("WM_DELETE_WINDOW", close_window)
@@ -152,7 +157,10 @@ def read_queue():
 
         if "clear_cmd" in json_data.keys() and json_data["clear_cmd"] == "true":
             clear_screen()
-        if "clearorder_cmd" in json_data.keys() and json_data["clearorder_cmd"] == "true":
+        if (
+            "clearorder_cmd" in json_data.keys()
+            and json_data["clearorder_cmd"] == "true"
+        ):
             clear_order()
         if "clearcmd_cmd" in json_data.keys():
             cmd_nums = json_data["clearcmd_cmd"]
@@ -178,7 +186,8 @@ def read_queue():
             from Script.Core import era_image
 
             era_image.print_image(
-                json_data["image"]["image_name"], json_data["image"]["image_path"],
+                json_data["image"]["image_name"],
+                json_data["image"]["image_path"],
             )
 
         for c in json_data["content"]:
@@ -310,7 +319,10 @@ def frame_style_def(
     if italic == "1":
         font_list.append("italic")
     textbox.tag_configure(
-        style_name, foreground=foreground, background=background, font=tuple(font_list),
+        style_name,
+        foreground=foreground,
+        background=background,
+        font=tuple(font_list),
     )
 
 
@@ -345,7 +357,9 @@ cmd_tag_map = {}
 
 
 # 命令生成函数
-def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"):
+def io_print_cmd(
+    cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"
+):
     """
     打印一条指令
     Keyword arguments:
@@ -375,10 +389,14 @@ def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_styl
         鼠标进入改变命令样式
         """
         textbox.tag_remove(
-            normal_style, textbox.tag_ranges(cmd_tag_name)[0], textbox.tag_ranges(cmd_tag_name)[1],
+            normal_style,
+            textbox.tag_ranges(cmd_tag_name)[0],
+            textbox.tag_ranges(cmd_tag_name)[1],
         )
         textbox.tag_add(
-            on_style, textbox.tag_ranges(cmd_tag_name)[0], textbox.tag_ranges(cmd_tag_name)[1],
+            on_style,
+            textbox.tag_ranges(cmd_tag_name)[0],
+            textbox.tag_ranges(cmd_tag_name)[1],
         )
         cache_contorl.wframe_mouse.mouse_leave_cmd = 0
 
@@ -387,10 +405,14 @@ def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_styl
         鼠标离开还原命令样式
         """
         textbox.tag_add(
-            normal_style, textbox.tag_ranges(cmd_tag_name)[0], textbox.tag_ranges(cmd_tag_name)[1],
+            normal_style,
+            textbox.tag_ranges(cmd_tag_name)[0],
+            textbox.tag_ranges(cmd_tag_name)[1],
         )
         textbox.tag_remove(
-            on_style, textbox.tag_ranges(cmd_tag_name)[0], textbox.tag_ranges(cmd_tag_name)[1],
+            on_style,
+            textbox.tag_ranges(cmd_tag_name)[0],
+            textbox.tag_ranges(cmd_tag_name)[1],
         )
         cache_contorl.wframe_mouse.mouse_leave_cmd = 1
 

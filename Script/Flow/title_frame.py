@@ -18,5 +18,3 @@ def title_frame_func():
         cache_contorl.now_flow_id = "load_save"
     elif ans == 2:
         os._exit(0)
-
-

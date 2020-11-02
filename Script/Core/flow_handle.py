@@ -11,8 +11,9 @@ from Script.Core import (
 )
 from Script.Config import game_config
 
-_:FunctionType = get_text._
+_: FunctionType = get_text._
 """ 翻译api """
+
 
 def null_func():
     """
@@ -116,7 +117,13 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
 
 
 def print_cmd(
-    cmd_str, cmd_number, cmd_func=null_func, arg=(), kw={}, normal_style="standard", on_style="onbutton",
+    cmd_str,
+    cmd_number,
+    cmd_func=null_func,
+    arg=(),
+    kw={},
+    normal_style="standard",
+    on_style="onbutton",
 ):
     """
     输出命令数字
@@ -244,9 +251,7 @@ def askfor_all(list, print_order=False):
             continue
         else:
             io_init.era_print(order + "\n")
-            io_init.era_print(
-                _("您输入的选项无效，请重试\n")
-            )
+            io_init.era_print(_("您输入的选项无效，请重试\n"))
             continue
 
 
@@ -267,9 +272,7 @@ def askfor_int(list, print_order=False):
             continue
         else:
             io_init.era_print(order + "\n")
-            io_init.era_print(
-                _("您输入的选项无效，请重试\n")
-            )
+            io_init.era_print(_("您输入的选项无效，请重试\n"))
             continue
 
 

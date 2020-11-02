@@ -9,7 +9,7 @@ normal_config.init_normal_config()
 
 
 from Script.Core import get_text
-from Script.Config import game_config,map_config,name_config
+from Script.Config import game_config, map_config, name_config
 
 _: FunctionType = get_text._
 """ 翻译api """
@@ -24,10 +24,11 @@ map_config.init_map_data()
 name_config.init_name_data()
 
 
-from Script.Design import start_flow, handle_target, handle_premise
+from Script.Design import start_flow, handle_target, handle_premise, game_time
 from Script.Core import game_init
 import Script.Talk
 import Script.Settle
-import Script.UI.Panel
+import Script.UI.Flow
 
+game_time.init_time()
 game_init.run(start_flow.start_frame)

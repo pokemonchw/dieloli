@@ -1,13 +1,14 @@
 import os
 from types import FunctionType
 from Script.Config import normal_config
-from Script.UI.Moudle import panel,draw
+from Script.UI.Moudle import panel, draw
 from Script.Design import handle_panel
-from Script.Core import constant,get_text,flow_handle,cache_contorl
+from Script.Core import constant, get_text, flow_handle, cache_contorl
 
 config_normal = normal_config.config_normal
-_:FunctionType = get_text._
+_: FunctionType = get_text._
 """ 翻译api """
+
 
 @handle_panel.add_panel(constant.Panel.TITLE)
 def title_panel():
@@ -17,8 +18,8 @@ def title_panel():
     width = config_normal.text_width
     title_info = panel.TitleAndRightInfoListPanel()
     game_name = config_normal.game_name
-    info_list = [config_normal.author,config_normal.verson,config_normal.verson_time]
-    title_info.set(config_normal.game_name,info_list,width)
+    info_list = [config_normal.author, config_normal.verson, config_normal.verson_time]
+    title_info.set(config_normal.game_name, info_list, width)
     title_info.draw()
     lineFeed = draw.NormalDraw()
     lineFeed.max_width = 1
@@ -31,11 +32,11 @@ def title_panel():
     info_draw.draw()
     lineFeed.draw()
     lineFeed.draw()
-    line = draw.LineDraw("=",width)
+    line = draw.LineDraw("=", width)
     line.draw()
-    now_list = [_("开始游戏"),_("读取存档"),_("退出游戏")]
+    now_list = [_("开始游戏"), _("读取存档"), _("退出游戏")]
     button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(now_list,"",0)
+    button_panel.set(now_list, "", 0)
     button_panel.draw()
     return_list = button_panel.get_return_list()
     ans = flow_handle.askfor_all(return_list.keys())

@@ -1,11 +1,11 @@
-from typing import List,Dict
+from typing import List, Dict
 from types import FunctionType
 from Script.UI.Moudle import draw
-from Script.Core import io_init,flow_handle,text_handle,get_text
+from Script.Core import io_init, flow_handle, text_handle, get_text
 from Script.Config import normal_config
 
 
-_:FunctionType = get_text._
+_: FunctionType = get_text._
 """ 翻译api """
 
 
@@ -14,9 +14,9 @@ class SingleColumnButton:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.button_list:List[draw.Button] = []
+        self.button_list: List[draw.Button] = []
         """ 绘制的按钮列表 """
-        self.return_list:Dict[str,str] = {}
+        self.return_list: Dict[str, str] = {}
         """
         按钮返回的响应列表
         按钮返回值:按钮文本
@@ -26,7 +26,13 @@ class SingleColumnButton:
         self.max_height = 0
         """ 绘制的最大高度 """
 
-    def set(self,button_list:List[str],return_list:List[str],normal_style="standard",onbutton_style="onbutton"):
+    def set(
+        self,
+        button_list: List[str],
+        return_list: List[str],
+        normal_style="standard",
+        onbutton_style="onbutton",
+    ):
         """
         设置按钮和返回列表
         Keyword arguments:
@@ -37,7 +43,9 @@ class SingleColumnButton:
         """
         for i in range(len(button_list)):
             if i <= self.max_height:
-                draw_button = draw.Button(button_list[i],return_list[i],normal_style,onbutton_style)
+                draw_button = draw.Button(
+                    button_list[i], return_list[i], normal_style, onbutton_style
+                )
                 draw_button.max_width = self.max_width
                 self.button_list.append(draw_button)
             self.return_list[return_list[i]] = button_list[i]
@@ -70,12 +78,12 @@ class OneMessageAndSingleColumnButton:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.message:draw.RichTextDraw = None
+        self.message: draw.RichTextDraw = None
         """ 消息 """
-        self.button_panel:SingleColumnButton = None
+        self.button_panel: SingleColumnButton = None
         """ 按钮监听列表 """
 
-    def set(self,button_list:List[str],message:str,start_id=0):
+    def set(self, button_list: List[str], message: str, start_id=0):
         """
         设置要绘制的信息
         Keyword arguments:
@@ -86,10 +94,10 @@ class OneMessageAndSingleColumnButton:
         new_button_list = []
         return_list = []
         for i in range(len(button_list)):
-            now_id = id_index(i+start_id)
+            now_id = id_index(i + start_id)
             now_id_text = now_id + button_list[i]
             new_button_list.append(now_id_text)
-            now_i_str = str(start_id+i)
+            now_i_str = str(start_id + i)
             return_list.append(now_i_str)
         width = normal_config.config_normal.text_width
         self.message = draw.NormalDraw()
@@ -98,10 +106,10 @@ class OneMessageAndSingleColumnButton:
         self.button_panel = SingleColumnButton()
         self.button_panel.max_width = width
         self.button_panel.max_height = len(return_list)
-        self.button_panel.set(new_button_list,return_list)
-        self.button_panel.return_list = dict(zip(return_list,button_list))
+        self.button_panel.set(new_button_list, return_list)
+        self.button_panel.return_list = dict(zip(return_list, button_list))
 
-    def get_return_list(self) -> Dict[str,str]:
+    def get_return_list(self) -> Dict[str, str]:
         """
         获取按钮响应的id集合
         Return arguments:
@@ -121,12 +129,12 @@ class AskForOneMessage:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.message:draw.RichTextDraw = None
+        self.message: draw.RichTextDraw = None
         """ 消息 """
-        self.input_max:int = 0
+        self.input_max: int = 0
         """ 玩家输入文本的最大长度 """
 
-    def set(self,message:str,input_max:int):
+    def set(self, message: str, input_max: int):
         """
         设置要绘制的消息和允许玩家输入的长度
         Keyword arguments:
@@ -147,7 +155,7 @@ class AskForOneMessage:
         return_text = ""
         while 1:
             self.message.draw()
-            return_text = flow_handle.askfor_str(1,1)
+            return_text = flow_handle.askfor_str(1, 1)
             text_index = text_handle.get_text_index(return_text)
             if text_index <= self.input_max:
                 break
@@ -165,12 +173,12 @@ class TitleAndRightInfoListPanel:
         """ 文本标题 """
         self.width = 0
         """ 面板宽度 """
-        self.info_list:List[str] = []
+        self.info_list: List[str] = []
         """ 信息列表 """
-        self.draw_list:List[draw.NormalDraw] = []
+        self.draw_list: List[draw.NormalDraw] = []
         """ 绘制列表 """
 
-    def set(self,title_text:str,info_list:List[str],width:int):
+    def set(self, title_text: str, info_list: List[str], width: int):
         """
         设置绘制信息
         Keyword arguments:
@@ -179,7 +187,7 @@ class TitleAndRightInfoListPanel:
         width -- 标题宽度
         """
         self.width = width
-        line = draw.LineDraw("=",width)
+        line = draw.LineDraw("=", width)
         self.draw_list.append(line)
         title = draw.CenterDraw()
         title.max_width = self.width
@@ -204,11 +212,11 @@ class ClearScreenPanel:
 
     def draw(self):
         """ 绘制面板 """
-        panel = "\n"*50
+        panel = "\n" * 50
         io_init.era_print(panel)
 
 
-def id_index(now_id:int) -> str:
+def id_index(now_id: int) -> str:
     """
     生成命令id文本
     Keyword arguments:

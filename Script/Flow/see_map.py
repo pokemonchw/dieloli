@@ -44,7 +44,9 @@ def see_map_flow():
         elif yrn in move_path_cmd:
             move_list_id = move_path_cmd.index(yrn)
             move_id = move_path_list[move_list_id]
-            now_target_path = map_handle.get_scene_path_for_map_scene_id(now_map, move_id)
+            now_target_path = map_handle.get_scene_path_for_map_scene_id(
+                now_map, move_id
+            )
             character_move.own_charcter_move(now_target_path)
             break
         elif up_map_button != "Null" and yrn == up_map_button:

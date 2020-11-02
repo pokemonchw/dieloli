@@ -7,7 +7,7 @@ from Script.Core import (
     rich_text,
     constant,
 )
-from Script.Config import game_config,normal_config
+from Script.Config import game_config, normal_config
 
 last_char = "\n"
 
@@ -66,7 +66,13 @@ def little_title_print(string: str):
     width = normal_config.config_normal.text_width
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 2 - int(text_width) / 2 - 2)
-    line_feed_print("=" * line_width + "<littletitle>口" + string + "口</littletitle>" + "=" * line_width)
+    line_feed_print(
+        "=" * line_width
+        + "<littletitle>口"
+        + string
+        + "口</littletitle>"
+        + "=" * line_width
+    )
 
 
 def son_title_print(string: str):
@@ -88,7 +94,13 @@ def son_title_print(string: str):
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 4)
     line_width_fix = int(int(width) / 4 - int(text_width))
-    line_feed_print(":" * line_width_fix + "<sontitle>" + string + "</sontitle>" + ":" * line_width * 3)
+    line_feed_print(
+        ":" * line_width_fix
+        + "<sontitle>"
+        + string
+        + "</sontitle>"
+        + ":" * line_width * 3
+    )
 
 
 def line_feed_print(string="", style="standard"):
@@ -323,7 +335,8 @@ def lines_center_print(sleep_time: float, string="", style="standard"):
                 cache_contorl.wframe_mouse.w_frame_lines_up = 2
                 for index_i_up in range(index_i_up, len(string_list)):
                     restart_line_print(
-                        text_handle.align(string_list[index_i_up], "center"), style,
+                        text_handle.align(string_list[index_i_up], "center"),
+                        style,
                     )
                 cache_contorl.wframe_mouse.w_frame_lines_state = 2
                 break

@@ -1,7 +1,7 @@
 from functools import wraps
 from typing import Dict
 from types import FunctionType
-from Script.Core import cache_contorl, game_type,constant
+from Script.Core import cache_contorl, game_type, constant
 from Script.Design import character
 
 
@@ -32,7 +32,14 @@ def add_target(target: str, premise_list: set, effect_list: set) -> FunctionType
 
 
 @add_target(
-    "EatBreakFastInRestaurant", {constant.Premise.IN_RESTAURANT, constant.Premise.IN_BREAKFAST_TIME, constant.Premise.HUNGER, constant.Premise.HAVE_FOOD}, {},
+    "EatBreakFastInRestaurant",
+    {
+        constant.Premise.IN_RESTAURANT,
+        constant.Premise.IN_BREAKFAST_TIME,
+        constant.Premise.HUNGER,
+        constant.Premise.HAVE_FOOD,
+    },
+    {},
 )
 def handle_eat_break_fast_in_restaurant(character_id: int):
     """
@@ -44,7 +51,14 @@ def handle_eat_break_fast_in_restaurant(character_id: int):
 
 
 @add_target(
-    "EatLunchInRestaurant", {constant.Premise.IN_RESTAURANT, constant.Premise.IN_LUNCH_TIME, constant.Premise.HUNGER, constant.Premise.HAVE_FOOD}, {},
+    "EatLunchInRestaurant",
+    {
+        constant.Premise.IN_RESTAURANT,
+        constant.Premise.IN_LUNCH_TIME,
+        constant.Premise.HUNGER,
+        constant.Premise.HAVE_FOOD,
+    },
+    {},
 )
 def handle_eat_lunch_in_restaruant(character_id: int):
     """
@@ -56,7 +70,14 @@ def handle_eat_lunch_in_restaruant(character_id: int):
 
 
 @add_target(
-    "EatDinnerInRestaurant", {constant.Premise.IN_RESTAURANT, constant.Premise.IN_DINNER_TIME, constant.Premise.HUNGER, constant.Premise.HAVE_FOOD}, {},
+    "EatDinnerInRestaurant",
+    {
+        constant.Premise.IN_RESTAURANT,
+        constant.Premise.IN_DINNER_TIME,
+        constant.Premise.HUNGER,
+        constant.Premise.HAVE_FOOD,
+    },
+    {},
 )
 def handle_eat_dinner_in_restaurant(character_id: int):
     """
@@ -66,7 +87,9 @@ def handle_eat_dinner_in_restaurant(character_id: int):
 
 
 @add_target(
-    "GoCafeteria", {constant.Premise.HUNGER, constant.Premise.NOT_HAVE_FOOD}, {constant.Premise.IN_CAFETERIA},
+    "GoCafeteria",
+    {constant.Premise.HUNGER, constant.Premise.NOT_HAVE_FOOD},
+    {constant.Premise.IN_CAFETERIA},
 )
 def handle_go_cafeteria(character_id: int):
     """
@@ -78,7 +101,9 @@ def handle_go_cafeteria(character_id: int):
 
 
 @add_target(
-    "GoRestaurant", {constant.Premise.HUNGER, constant.Premise.HAVE_FOOD}, {constant.Premise.IN_RESTAURANT},
+    "GoRestaurant",
+    {constant.Premise.HUNGER, constant.Premise.HAVE_FOOD},
+    {constant.Premise.IN_RESTAURANT},
 )
 def handle_go_restaturant(character_id: int):
     """
@@ -90,7 +115,13 @@ def handle_go_restaturant(character_id: int):
 
 
 @add_target(
-    "BuyFood", {constant.Premise.HUNGER, constant.Premise.IN_CAFETERIA, constant.Premise.NOT_HAVE_FOOD}, {constant.Premise.HAVE_FOOD},
+    "BuyFood",
+    {
+        constant.Premise.HUNGER,
+        constant.Premise.IN_CAFETERIA,
+        constant.Premise.NOT_HAVE_FOOD,
+    },
+    {constant.Premise.HAVE_FOOD},
 )
 def handle_buy_food(character_id: int):
     """

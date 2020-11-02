@@ -16,6 +16,7 @@ def wait_input(int_a: int, int_b: int) -> str:
                 break
         era_print.line_feed_print(ans)
         era_print.line_feed_print(
-            text_loading.get_text_data(constant.FilePath.ERROR_PATH, "input_null_error") + "\n"
+            text_loading.get_text_data(constant.FilePath.ERROR_PATH, "input_null_error")
+            + "\n"
         )
     return ans

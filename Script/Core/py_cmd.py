@@ -3,7 +3,7 @@ from Script.Core import (
     main_frame,
     cache_contorl,
 )
-from Script.Config import game_config,normal_config
+from Script.Config import game_config, normal_config
 
 # 清除命令
 clear_default_flow = flow_handle.clear_default_flow

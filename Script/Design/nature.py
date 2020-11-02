@@ -4,7 +4,7 @@ from Script.Core import constant
 from Script.Config import game_config
 
 
-def get_random_nature() -> Dict[int,Dict[int,int]]:
+def get_random_nature() -> Dict[int, Dict[int, int]]:
     """
     随机生成角色性格
     Return arguments:
@@ -13,6 +13,6 @@ def get_random_nature() -> Dict[int,Dict[int,int]]:
     nature_data = {}
     for k in game_config.config_nature:
         nature = game_config.config_nature[k]
-        nature_data.setdefault(nature.type,())
-        nature_data[nature.type][nature.cid] = random.uniform(0,100)
+        nature_data.setdefault(nature.nature_type, {})
+        nature_data[nature.nature_type][nature.cid] = random.uniform(0, 100)
     return nature_data

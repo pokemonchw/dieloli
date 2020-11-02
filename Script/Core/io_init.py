@@ -99,7 +99,10 @@ def text_json(string: str, style: tuple or str):
 
 
 def cmd_json(
-    cmd_str: str, cmd_num: int, normal_style: tuple or str, on_style: tuple or str,
+    cmd_str: str,
+    cmd_num: int,
+    normal_style: tuple or str,
+    on_style: tuple or str,
 ):
     """
     定义一个命令json
@@ -220,7 +223,14 @@ def frame_style_def(
     """
     json_str = new_json()
     json_str["set_style"] = style_json(
-        style_name, foreground, background, font, fontsize, bold, underline, italic,
+        style_name,
+        foreground,
+        background,
+        font,
+        fontsize,
+        bold,
+        underline,
+        italic,
     )
     put_queue(json.dumps(json_str, ensure_ascii=False))
 
@@ -248,7 +258,9 @@ def clear_order():
 # ############################################################
 
 # 命令生成函数
-def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"):
+def io_print_cmd(
+    cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"
+):
     """
     打印一条指令
     Keyword arguments:
@@ -288,10 +300,24 @@ def init_style():
     global style_def
 
     def new_style_def(
-        style_name, foreground, background, font, fontsize, bold, underline, italic,
+        style_name,
+        foreground,
+        background,
+        font,
+        fontsize,
+        bold,
+        underline,
+        italic,
     ):
         frame_style_def(
-            style_name, foreground, background, font, fontsize, bold, underline, italic,
+            style_name,
+            foreground,
+            background,
+            font,
+            fontsize,
+            bold,
+            underline,
+            italic,
         )
 
     style_def = new_style_def

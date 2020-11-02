@@ -11,11 +11,13 @@ def see_character_list_func():
     while True:
         max_page = get_character_list_page_max()
         input_s = []
-        see_character_list_panel_input = see_character_list_panel.see_character_list_panel(max_page)
+        see_character_list_panel_input = (
+            see_character_list_panel.see_character_list_panel(max_page)
+        )
         start_id = len(see_character_list_panel_input)
         input_s = input_s + see_character_list_panel_input
-        ask_for_see_character_list_panel_input = see_character_list_panel.ask_for_see_character_list_panel(
-            start_id
+        ask_for_see_character_list_panel_input = (
+            see_character_list_panel.ask_for_see_character_list_panel(start_id)
         )
         input_s = input_s + ask_for_see_character_list_panel_input
         yrn = game_init.askfor_all(input_s)

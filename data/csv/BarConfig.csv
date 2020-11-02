@@ -3,6 +3,6 @@ cid,name,ture_bar,null_bar,width
 int,str,str,str,int
 0,0,0,0,0
 比例条名字对应的状态图片和绘制宽度,,,,
-0,HitPointbar,hpbar_ture,hpbar_null,1
-1,ManaPointbar,mpbar_ture,mpbar_null,1
+0,HitPointbar,hpbar_true,hpbar_null,1
+1,ManaPointbar,mpbar_true,mpbar_null,1
 2,engravingemptybar,engravingemptybar_true,engravingemptybar_null,2

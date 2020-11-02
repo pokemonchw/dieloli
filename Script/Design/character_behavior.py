@@ -18,13 +18,16 @@ from Script.Design import (
 
 game_path = game_path_config.game_path
 
+
 def init_character_behavior():
     """
     角色行为树总控制
     """
     t1 = time.time()
     while 1:
-        if len(cache_contorl.over_behavior_character) >= len(cache_contorl.character_data):
+        if len(cache_contorl.over_behavior_character) >= len(
+            cache_contorl.character_data
+        ):
             break
         for character_id in cache_contorl.character_data:
             character_behavior(character_id)
@@ -44,7 +47,10 @@ def character_behavior(character_id: int):
     if cache_contorl.character_data[character_id].behavior["StartTime"] == None:
         character.init_character_behavior_start_time(character_id)
     game_time.init_now_course_time_slice(character_id)
-    if cache_contorl.character_data[character_id].state == constant.CharacterStatus.STATUS_ARDER:
+    if (
+        cache_contorl.character_data[character_id].state
+        == constant.CharacterStatus.STATUS_ARDER
+    ):
         if character_id:
             character_target_judge(character_id)
         else:
@@ -61,12 +67,16 @@ def character_target_judge(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    target, _, judge = search_target(character_id, list(cache_contorl.handle_target_data.keys()), set())
+    target, _, judge = search_target(
+        character_id, list(cache_contorl.handle_target_data.keys()), set()
+    )
     if judge:
         cache_contorl.handle_target_data[target](character_id)
     else:
         start_time = cache_contorl.character_data[character_id].behavior["StartTime"]
-        now_judge = game_time.judge_date_big_or_small(start_time, cache_contorl.game_time)
+        now_judge = game_time.judge_date_big_or_small(
+            start_time, cache_contorl.game_time
+        )
         if now_judge:
             cache_contorl.over_behavior_character[character_id] = 1
         else:
@@ -84,7 +94,9 @@ def judge_character_status(character_id: int) -> int:
     """
     character_data = cache_contorl.character_data[character_id]
     start_time = character_data.behavior["StartTime"]
-    end_time = game_time.get_sub_date(minute=character_data.behavior["Duration"], old_date=start_time)
+    end_time = game_time.get_sub_date(
+        minute=character_data.behavior["Duration"], old_date=start_time
+    )
     now_time = cache_contorl.game_time
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
     add_time = (end_time.timestamp() - start_time.timestamp()) / 60
@@ -104,7 +116,9 @@ def judge_character_status(character_id: int) -> int:
     return 1
 
 
-def search_target(character_id: int, target_list: list, null_target: set) -> (str, int, bool):
+def search_target(
+    character_id: int, target_list: list, null_target: set
+) -> (str, int, bool):
     """
     查找可用目标
     Keyword arguments:
@@ -154,7 +168,9 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
         else:
             now_max_weight = max(list(now_target_data))
             target_data.setdefault(now_max_weight, set())
-            target_data[now_max_weight].add(random.choice(list(now_target_data[now_max_weight])))
+            target_data[now_max_weight].add(
+                random.choice(list(now_target_data[now_max_weight]))
+            )
     if len(target_data):
         max_weight = max(list(target_data.keys()))
         return random.choice(list(target_data[max_weight])), max_weight, 1

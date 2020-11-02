@@ -1,5 +1,5 @@
 cid,sex_exp_type,organ_id,exp_tem
-表id,经验类型,器官id,经验模板
+表id,性经验丰富程度大类,器官id,经验模板
 int,int,int,int
 0,0,0,0
 性经验丰富程度模板对应器官性经验模板,,,

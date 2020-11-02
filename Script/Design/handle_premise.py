@@ -102,7 +102,10 @@ def handle_in_lunch_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    if character_data.course.course_index >= 4 and character_data.course.course_index <= 6:
+    if (
+        character_data.course.course_index >= 4
+        and character_data.course.course_index <= 6
+    ):
         return 1
     return 0
 
@@ -532,7 +535,10 @@ def handle_target_age_similar(character_id: int) -> int:
     """
     character_data = cache_contorl.character_data[character_id]
     target_data = cache_contorl.character_data[character_data.target_character_id]
-    if character_data.age >= target_data.age - 2 and character_data.age <= target_data.age + 2:
+    if (
+        character_data.age >= target_data.age - 2
+        and character_data.age <= target_data.age + 2
+    ):
         return 1
     return 0
 
@@ -604,7 +610,10 @@ def handle_target_average_stature_similar(character_id: int) -> int:
     target_data = cache_contorl.character_data[character_data.target_character_id]
     age_tem = attr_calculation.judge_age_group(target_data.age)
     average_bodyfat = cache_contorl.average_bodyfat_by_age[age_tem][target_data.sex]
-    if target_data.bodyfat >= average_bodyfat * 0.95 and target_data.bodyfat <= average_bodyfat * 1.05:
+    if (
+        target_data.bodyfat >= average_bodyfat * 0.95
+        and target_data.bodyfat <= average_bodyfat * 1.05
+    ):
         return 1
     return 0
 
@@ -694,7 +703,10 @@ def handle_leave_player_scene(character_id: int) -> int:
     int -- 权重
     """
     now_character_data = cache_contorl.character_data[character_id]
-    if now_character_data.behavior["MoveSrc"] == cache_contorl.character_data[0].position:
+    if (
+        now_character_data.behavior["MoveSrc"]
+        == cache_contorl.character_data[0].position
+    ):
         return 1
     return 0
 

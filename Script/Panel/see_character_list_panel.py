@@ -55,6 +55,11 @@ def ask_for_see_character_list_panel(start_id: str) -> list:
     start_id -- 面板命令起始id
     """
     yrn = cmd_button_queue.option_int(
-        constant.CmdMenu.SEE_CHARACTER_LIST, 3, "left", askfor=False, cmd_size="center", start_id=start_id,
+        constant.CmdMenu.SEE_CHARACTER_LIST,
+        3,
+        "left",
+        askfor=False,
+        cmd_size="center",
+        start_id=start_id,
     )
     return yrn

@@ -40,7 +40,9 @@ def option_int(
     on_style_data -- 按钮对应按下时样式列表
     """
     if cmd_list_data is None:
-        cmd_list_data = text_loading.get_text_data(constant.FilePath.CMD_PATH, cmd_list).copy()
+        cmd_list_data = text_loading.get_text_data(
+            constant.FilePath.CMD_PATH, cmd_list
+        ).copy()
     input_i = []
     text_width = game_config.text_width
     if last_line:
@@ -75,27 +77,55 @@ def option_int(
             if i == 0:
                 cmd_text_and_id = cmd_text_and_id.rstrip()
                 cmd_size_print(
-                    cmd_text_and_id, return_id, None, cmd_index, cmd_size, True, normal_style, on_style,
+                    cmd_text_and_id,
+                    return_id,
+                    None,
+                    cmd_index,
+                    cmd_size,
+                    True,
+                    normal_style,
+                    on_style,
                 )
                 input_i.append(str(return_id))
             elif i / cmd_column >= 1 and i % cmd_column == 0:
                 era_print.line_feed_print()
                 cmd_text_and_id = cmd_text_and_id.rstrip()
                 cmd_size_print(
-                    cmd_text_and_id, return_id, None, cmd_index, cmd_size, True, normal_style, on_style,
+                    cmd_text_and_id,
+                    return_id,
+                    None,
+                    cmd_index,
+                    cmd_size,
+                    True,
+                    normal_style,
+                    on_style,
                 )
                 input_i.append(str(return_id))
             elif i == len(cmd_list_data) and last_line:
                 era_print.line_feed_print()
                 cmd_text_and_id = cmd_text_and_id.rstrip()
                 cmd_size_print(
-                    cmd_text_and_id, return_id, None, cmd_index, cmd_size, True, normal_style, on_style,
+                    cmd_text_and_id,
+                    return_id,
+                    None,
+                    cmd_index,
+                    cmd_size,
+                    True,
+                    normal_style,
+                    on_style,
                 )
                 input_i.append(str(return_id))
             else:
                 cmd_text_and_id = cmd_text_and_id.rstrip()
                 cmd_size_print(
-                    cmd_text_and_id, return_id, None, cmd_index, cmd_size, True, normal_style, on_style,
+                    cmd_text_and_id,
+                    return_id,
+                    None,
+                    cmd_index,
+                    cmd_size,
+                    True,
+                    normal_style,
+                    on_style,
                 )
                 input_i.append(str(return_id))
     era_print.line_feed_print()
@@ -135,7 +165,9 @@ def option_str(
     on_style_data -- 按钮被按下时样式列表
     """
     if cmd_list_data is None:
-        cmd_list_data = text_loading.get_text_data(constant.FilePath.CMD_PATH, cmd_list).copy()
+        cmd_list_data = text_loading.get_text_data(
+            constant.FilePath.CMD_PATH, cmd_list
+        ).copy()
     input_s = []
     text_width = game_config.text_width
     if last_line:
@@ -172,27 +204,55 @@ def option_str(
                 cmd_text = cmd_list_data[i]
         if i == 0:
             cmd_size_print(
-                cmd_text, cmd_text_bak, None, cmd_index, cmd_size, now_null_cmd, normal_style, on_style,
+                cmd_text,
+                cmd_text_bak,
+                None,
+                cmd_index,
+                cmd_size,
+                now_null_cmd,
+                normal_style,
+                on_style,
             )
             if now_null_cmd:
                 input_s.append(cmd_text_bak)
         elif i / cmd_column >= 1 and i % cmd_column == 0:
             era_print.line_feed_print()
             cmd_size_print(
-                cmd_text, cmd_text_bak, None, cmd_index, cmd_size, now_null_cmd, normal_style, on_style,
+                cmd_text,
+                cmd_text_bak,
+                None,
+                cmd_index,
+                cmd_size,
+                now_null_cmd,
+                normal_style,
+                on_style,
             )
             if now_null_cmd:
                 input_s.append(cmd_text_bak)
         elif i == len(cmd_list_data) - 1 and last_line:
             era_print.line_feed_print()
             cmd_size_print(
-                cmd_text, cmd_text_bak, None, cmd_index, cmd_size, now_null_cmd, normal_style, on_style,
+                cmd_text,
+                cmd_text_bak,
+                None,
+                cmd_index,
+                cmd_size,
+                now_null_cmd,
+                normal_style,
+                on_style,
             )
             if now_null_cmd:
                 input_s.append(cmd_text_bak)
         else:
             cmd_size_print(
-                cmd_text, cmd_text_bak, None, cmd_index, cmd_size, now_null_cmd, normal_style, on_style,
+                cmd_text,
+                cmd_text_bak,
+                None,
+                cmd_index,
+                cmd_size,
+                now_null_cmd,
+                normal_style,
+                on_style,
             )
             if now_null_cmd:
                 input_s.append(cmd_text_bak)
@@ -254,7 +314,11 @@ def cmd_size_print(
         cmd_text_fix = " " * (text_width - cmd_width)
         if no_null_cmd:
             py_cmd.pcmd(
-                cmd_text, cmd_text_bak, cmd_event, normal_style=normal_style, on_style=on_style,
+                cmd_text,
+                cmd_text_bak,
+                cmd_event,
+                normal_style=normal_style,
+                on_style=on_style,
             )
         else:
             era_print.normal_print(cmd_text)
@@ -265,7 +329,11 @@ def cmd_size_print(
         era_print.normal_print(cmd_text_fix)
         if no_null_cmd:
             py_cmd.pcmd(
-                cmd_text, cmd_text_bak, cmd_event, normal_style=normal_style, on_style=on_style,
+                cmd_text,
+                cmd_text_bak,
+                cmd_event,
+                normal_style=normal_style,
+                on_style=on_style,
             )
         else:
             era_print.normal_print(cmd_text)
@@ -275,7 +343,11 @@ def cmd_size_print(
         cmd_text_fix = " " * (text_width - cmd_width)
         if no_null_cmd:
             py_cmd.pcmd(
-                cmd_text, cmd_text_bak, cmd_event, normal_style=normal_style, on_style=on_style,
+                cmd_text,
+                cmd_text_bak,
+                cmd_event,
+                normal_style=normal_style,
+                on_style=on_style,
             )
         else:
             era_print.normal_print(cmd_text)

@@ -384,7 +384,7 @@ class SexExperience:
     cid: int
     """ 表id """
     sex_exp_type: int
-    """ 经验类型 """
+    """ 性经验丰富程度大类 """
     organ_id: int
     """ 器官id """
     exp_tem: int
@@ -506,6 +506,17 @@ class RecipesFormula:
     """ 食材id """
 
 
+class WaistHipProportion:
+    """ 不同肥胖程度腰臀比例差值配置 """
+
+    cid: int
+    """ 比例id """
+    weitht_tem: int
+    """ 肥胖程度模板id """
+    value: float
+    """ 差值比 """
+
+
 class CharacterState:
     """ 角色状态属性表 """
 
@@ -515,6 +526,15 @@ class CharacterState:
     """ 状态名字 """
     type: int
     """ 状态类型 """
+
+
+class Status:
+    """ 状态描述配置 """
+
+    cid: int
+    """ 状态id """
+    name: str
+    """ 描述 """
 
 
 class Recipes:

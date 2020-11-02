@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-16 11:24+0800\n"
+"POT-Creation-Date: 2020-11-02 18:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,253 +21,272 @@ msgstr ""
 msgid "python3版本过旧(低于python3.8.6),请升级"
 msgstr ""
 
-#: ../Script/Core/flow_handle.py:248 ../Script/Core/flow_handle.py:271
+#: ../Script/Core/flow_handle.py:254 ../Script/Core/flow_handle.py:275
 msgid "您输入的选项无效，请重试\n"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:154
+#: ../Script/UI/Moudle/panel.py:162
 #, python-brace-format
 msgid "输入的字符超长，最大{self.input_max}个英文字符，请重试。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:39
+#: ../Script/UI/Flow/title_flow.py:27
+msgid "人类是可以被驯化的"
+msgstr ""
+
+#: ../Script/UI/Flow/title_flow.py:37
+msgid "开始游戏"
+msgstr ""
+
+#: ../Script/UI/Flow/title_flow.py:37
+msgid "读取存档"
+msgstr ""
+
+#: ../Script/UI/Flow/title_flow.py:37
+msgid "退出游戏"
+msgstr ""
+
+#: ../Script/UI/Flow/creator_character_flow.py:50
 msgid "请问能告诉我你的名字吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:43
+#: ../Script/UI/Flow/creator_character_flow.py:54
 msgid "角色名不能为纯数字，请重新输入"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:64
+#: ../Script/UI/Flow/creator_character_flow.py:76
 #, python-brace-format
 msgid "该怎么称呼{character_data.name}好呢？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:68
+#: ../Script/UI/Flow/creator_character_flow.py:80
 msgid "角色昵称不能为纯数字，请重新输入"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:86
+#: ../Script/UI/Flow/creator_character_flow.py:102
 msgid "随机"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:88
+#: ../Script/UI/Flow/creator_character_flow.py:104
 #, python-brace-format
 msgid "那么{character_data.nick_name}的性别是？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:110
-#: ../Script/UI/Panel/creator_character_panel.py:214
-#: ../Script/UI/Panel/creator_character_panel.py:358
-#: ../Script/UI/Panel/creator_character_panel.py:374
-#: ../Script/UI/Panel/creator_character_panel.py:390
-#: ../Script/UI/Panel/creator_character_panel.py:406
-#: ../Script/UI/Panel/creator_character_panel.py:422
+#: ../Script/UI/Flow/creator_character_flow.py:126
+#: ../Script/UI/Flow/creator_character_flow.py:237
+#: ../Script/UI/Flow/creator_character_flow.py:363
+#: ../Script/UI/Flow/creator_character_flow.py:377
+#: ../Script/UI/Flow/creator_character_flow.py:391
+#: ../Script/UI/Flow/creator_character_flow.py:405
+#: ../Script/UI/Flow/creator_character_flow.py:419
 msgid "是"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:110
+#: ../Script/UI/Flow/creator_character_flow.py:126
 msgid "否"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:112
+#: ../Script/UI/Flow/creator_character_flow.py:129
 #, python-brace-format
 msgid ""
 "是否需要设置详细属性呢？将会随机抽取十道题目供{character_data.nick_name}进行"
 "选择。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:156
+#: ../Script/UI/Flow/creator_character_flow.py:177
 #, python-brace-format
 msgid "{character_data.nick_name}是一个小孩子吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:158
+#: ../Script/UI/Flow/creator_character_flow.py:179
 msgid "嘎呜～嘎呜～"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:159
+#: ../Script/UI/Flow/creator_character_flow.py:180
 msgid "才，才不是小孩子！"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:160
+#: ../Script/UI/Flow/creator_character_flow.py:181
 msgid "已经成年了哦～"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:161
+#: ../Script/UI/Flow/creator_character_flow.py:182
 msgid "我也想回到小时候呢～"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:162
+#: ../Script/UI/Flow/creator_character_flow.py:183
 msgid "你说什么？我听不清～"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:175
+#: ../Script/UI/Flow/creator_character_flow.py:197
 #, python-brace-format
 msgid "{character_data.nick_name}对自己的体重有自信吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:177
+#: ../Script/UI/Flow/creator_character_flow.py:199
 msgid "很轻，就像一张纸一样，风一吹就能飘起来。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:178
+#: ../Script/UI/Flow/creator_character_flow.py:200
 msgid "普普通通，健康的身材。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:179
+#: ../Script/UI/Flow/creator_character_flow.py:201
 msgid "略沉，不过从外表不怎么能够看得出来。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:180
+#: ../Script/UI/Flow/creator_character_flow.py:202
 msgid "肉眼可辨的比别人要胖很多。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:181
+#: ../Script/UI/Flow/creator_character_flow.py:203
 msgid "人类的极限，看上去像是相扑选手一样。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:194
+#: ../Script/UI/Flow/creator_character_flow.py:217
 #, python-brace-format
 msgid "{character_data.nick_name}是否有过性经验呢？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:196
+#: ../Script/UI/Flow/creator_character_flow.py:219
 msgid "性经验什么的完全没有过，你在问什么呢！变态！"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:197
+#: ../Script/UI/Flow/creator_character_flow.py:220
 msgid "只有极少的性经验哦，说是纯情也不为过。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:198
+#: ../Script/UI/Flow/creator_character_flow.py:221
 msgid "大概只是普通的程度吧？不多也不少的样子。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:199
+#: ../Script/UI/Flow/creator_character_flow.py:222
 msgid "经验非常丰富，特别有技巧哦，哼哼。"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:212
+#: ../Script/UI/Flow/creator_character_flow.py:236
 #, python-brace-format
 msgid "{character_data.nick_name}是否是一个有话就说，从来不憋在心里的人呢？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:215
-#: ../Script/UI/Panel/creator_character_panel.py:327
-#: ../Script/UI/Panel/creator_character_panel.py:359
-#: ../Script/UI/Panel/creator_character_panel.py:375
-#: ../Script/UI/Panel/creator_character_panel.py:391
-#: ../Script/UI/Panel/creator_character_panel.py:407
-#: ../Script/UI/Panel/creator_character_panel.py:423
+#: ../Script/UI/Flow/creator_character_flow.py:237
+#: ../Script/UI/Flow/creator_character_flow.py:335
+#: ../Script/UI/Flow/creator_character_flow.py:363
+#: ../Script/UI/Flow/creator_character_flow.py:377
+#: ../Script/UI/Flow/creator_character_flow.py:391
+#: ../Script/UI/Flow/creator_character_flow.py:405
+#: ../Script/UI/Flow/creator_character_flow.py:419
 msgid "不是"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:228
+#: ../Script/UI/Flow/creator_character_flow.py:250
 #, python-brace-format
 msgid "{character_data.nick_name}在参加聚会时，会很自然的融入进人群里吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:230
-#: ../Script/UI/Panel/creator_character_panel.py:262
-#: ../Script/UI/Panel/creator_character_panel.py:278
-#: ../Script/UI/Panel/creator_character_panel.py:294
-#: ../Script/UI/Panel/creator_character_panel.py:310
-#: ../Script/UI/Panel/creator_character_panel.py:342
+#: ../Script/UI/Flow/creator_character_flow.py:251
+#: ../Script/UI/Flow/creator_character_flow.py:279
+#: ../Script/UI/Flow/creator_character_flow.py:293
+#: ../Script/UI/Flow/creator_character_flow.py:307
+#: ../Script/UI/Flow/creator_character_flow.py:321
+#: ../Script/UI/Flow/creator_character_flow.py:349
 msgid "会"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:231
-#: ../Script/UI/Panel/creator_character_panel.py:279
-#: ../Script/UI/Panel/creator_character_panel.py:295
-#: ../Script/UI/Panel/creator_character_panel.py:311
-#: ../Script/UI/Panel/creator_character_panel.py:343
+#: ../Script/UI/Flow/creator_character_flow.py:251
+#: ../Script/UI/Flow/creator_character_flow.py:293
+#: ../Script/UI/Flow/creator_character_flow.py:307
+#: ../Script/UI/Flow/creator_character_flow.py:321
+#: ../Script/UI/Flow/creator_character_flow.py:349
 msgid "不会"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:244
+#: ../Script/UI/Flow/creator_character_flow.py:264
 #, python-brace-format
 msgid "{character_data.nick_name}有憧憬过未来的人生吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:246
+#: ../Script/UI/Flow/creator_character_flow.py:265
 msgid "有"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:247
+#: ../Script/UI/Flow/creator_character_flow.py:265
 msgid "没有"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:260
+#: ../Script/UI/Flow/creator_character_flow.py:278
 msgid "承诺过的事情就一定要做到？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:263
+#: ../Script/UI/Flow/creator_character_flow.py:279
 msgid "视情况而定"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:276
+#: ../Script/UI/Flow/creator_character_flow.py:292
 msgid "考虑问题时会顾及到别人的利益吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:292
+#: ../Script/UI/Flow/creator_character_flow.py:306
 msgid "关心别人的时候会让自己感到快乐？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:308
+#: ../Script/UI/Flow/creator_character_flow.py:320
 msgid "对于自己的任务，会一丝不苟的去完成吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:324
+#: ../Script/UI/Flow/creator_character_flow.py:334
 #, python-brace-format
 msgid "{character_data.nick_name}是一个即使不会被发现，也绝不弄虚作假的人吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:326
+#: ../Script/UI/Flow/creator_character_flow.py:335
 msgid "当然"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:340
+#: ../Script/UI/Flow/creator_character_flow.py:348
 msgid "即使在一些很随便的场合，也会表现得很严肃对吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:356
+#: ../Script/UI/Flow/creator_character_flow.py:362
 #, python-brace-format
 msgid "{character_data.nick_name}总是很轻率的做出了决定对吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:372
+#: ../Script/UI/Flow/creator_character_flow.py:376
 msgid "不会轻易的放弃自己的理想？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:388
+#: ../Script/UI/Flow/creator_character_flow.py:390
 #, python-brace-format
 msgid "喜欢多与对{character_data.nick_name}有利的人交往对吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:404
+#: ../Script/UI/Flow/creator_character_flow.py:404
 msgid "对工作会倾注全部的热情？"
 msgstr ""
 
-#: ../Script/UI/Panel/creator_character_panel.py:420
+#: ../Script/UI/Flow/creator_character_flow.py:418
 #, python-brace-format
 msgid "{character_data.nick_name}是一个心直口快，想到什么说什么的人对吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/title_panel.py:26
-msgid "人类是可以被驯化的"
+#: ../Script/UI/Panel/see_character_info_panel.py:59
+#, python-brace-format
+msgid ""
+"No.{character_id} 姓名:{character_data.name} 称呼:{character_data.nick_name}"
 msgstr ""
 
-#: ../Script/UI/Panel/title_panel.py:36
-msgid "开始游戏"
+#: ../Script/UI/Panel/see_character_info_panel.py:65
+msgid "体力"
 msgstr ""
 
-#: ../Script/UI/Panel/title_panel.py:36
-msgid "读取存档"
+#: ../Script/UI/Panel/see_character_info_panel.py:68
+msgid "气力"
 msgstr ""
 
-#: ../Script/UI/Panel/title_panel.py:36
-msgid "退出游戏"
+#: ../Script/UI/Panel/see_character_info_panel.py:72
+#, python-brace-format
+msgid "状态:{status_text}"
 msgstr ""
 
 #: class:SexTem id:0 type:name
@@ -2384,6 +2403,26 @@ msgstr ""
 
 #: class:CharacterState id:28 type:name
 msgid "口渴"
+msgstr ""
+
+#: class:Status id:0 type:name
+msgid "发呆"
+msgstr ""
+
+#: class:Status id:1 type:name
+msgid "移动"
+msgstr ""
+
+#: class:Status id:2 type:name
+msgid "休息"
+msgstr ""
+
+#: class:Status id:3 type:name
+msgid "上课"
+msgstr ""
+
+#: class:Status id:4 type:name
+msgid "进食"
 msgstr ""
 
 #: class:Recipes id:0 type:name
