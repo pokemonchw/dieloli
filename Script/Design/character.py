@@ -1,7 +1,6 @@
 import random
 import uuid
 import datetime
-import pysnooper
 from Script.Core import (
     cache_contorl,
     value_handle,
@@ -18,7 +17,6 @@ from Script.Design import (
 from Script.Config import game_config
 
 
-@pysnooper.snoop()
 def init_attr(character_id: int):
     """
     初始化角色属性

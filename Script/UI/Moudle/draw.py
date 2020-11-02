@@ -285,7 +285,77 @@ class LineDraw:
         """ 绘制线条 """
         text_index = text_handle.get_text_index(self.text)
         text_num = self.width / text_index
-        io_init.era_print(self.text * int(text_num) + "\n", self.style)
+        now_draw = NormalDraw()
+        now_draw.max_width = self.width
+        now_draw.text = self.text * int(text_num) + "\n"
+        now_draw.style = self.style
+        now_draw.draw()
+
+
+class TitleLineDraw:
+    """ 绘制标题线文本 """
+
+    def __init__(
+        self,
+        title: str,
+        width: int,
+        line: str = "=",
+        frame="口",
+        style="standard",
+        title_style="littletitle",
+        frame_style="littletitle",
+    ):
+        """
+        初始化绘制对象
+        Keyword arguments:
+        text -- 标题
+        width -- 标题线线条宽度
+        line -- 用于绘制线条的文本
+        frame -- 用于绘制标题边框的文本
+        style -- 线条样式
+        title_style -- 标题样式
+        frame_style -- 标题边框样式
+        """
+        self.title = title
+        """ 标题 """
+        self.width = width
+        """ 线条宽度 """
+        self.line = line
+        """ 用于绘制线条的文本 """
+        self.frame = frame
+        """ 用于绘制标题边框的文本 """
+        self.style = style
+        """ 线条默认样式 """
+        self.title_style = title_style
+        """ 标题样式 """
+        self.frame_style = frame_style
+        """ 标题边框样式 """
+
+    def draw(self):
+        """ 绘制线条 """
+        title_draw = NormalDraw()
+        title_draw.max_width = self.width
+        title_draw.style = self.title_style
+        title_draw.text = f" {self.title} "
+        fix_width = self.width - len(title_draw)
+        if fix_width < 0:
+            fix_width = 0
+        frame_width = int(fix_width / 2)
+        frame_draw = NormalDraw()
+        frame_draw.max_width = frame_width
+        frame_draw.style = self.frame_style
+        frame_draw.text = self.frame
+        line_width = int(fix_width / 2 - len(frame_draw))
+        if line_width < 0:
+            line_width = 0
+        line_draw = NormalDraw()
+        line_draw.max_width = line_width
+        line_draw.style = self.style
+        line_draw.text = self.line * line_width
+        print(len(line_draw) * 2 + len(frame_draw) * 2 + len(title_draw))
+        for text in [line_draw, frame_draw, title_draw, frame_draw, line_draw]:
+            text.draw()
+        io_init.era_print("\n")
 
 
 class CenterDraw(NormalDraw):
@@ -312,6 +382,10 @@ class CenterDraw(NormalDraw):
             now_text = " " + self.text + " "
         else:
             now_text = text_handle.align(self.text, "center", 0, 1, self.max_width)
+        if len(self) < self.max_width:
+            now_text += " " * (
+                int(self.max_width) - text_handle.get_text_index(now_text)
+            )
         io_init.era_print(now_text, self.style)
 
 

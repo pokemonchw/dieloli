@@ -54,6 +54,8 @@ class CharacterInfoHead:
         """
         self.character_id = character_id
         """ 要绘制的角色id """
+        self.max_width = width
+        """ 当前最大可绘制宽度 """
         character_data = cache_contorl.character_data[character_id]
         message = _(
             f"No.{character_id} 姓名:{character_data.name} 称呼:{character_data.nick_name}"
@@ -92,6 +94,8 @@ class CharacterInfoHead:
         line_feed = draw.NormalDraw()
         line_feed.text = "\n"
         line_feed.max_width = 1
+        title_draw = draw.TitleLineDraw(_("人物属性"), self.max_width)
+        title_draw.draw()
         for draw_tuple in self.draw_list:
             for label in draw_tuple:
                 label.draw()

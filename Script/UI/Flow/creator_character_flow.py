@@ -33,7 +33,7 @@ def creator_character_panel():
 
 def confirm_character_attr_panel():
     """ 确认角色属性面板 """
-    line.draw()
+    line_feed_draw.draw()
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
     now_attr_panel.draw()
 
