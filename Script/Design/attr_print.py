@@ -61,23 +61,9 @@ def get_hp_and_mp_text(character_id: str) -> str:
     character_hit_point = character_data.hit_point
     character_max_hit_point = character_data.hit_point_max
     hit_point_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "8")
-    hp_text = (
-        hit_point_text
-        + "("
-        + str(character_hit_point)
-        + "/"
-        + str(character_max_hit_point)
-        + ")"
-    )
+    hp_text = hit_point_text + "(" + str(character_hit_point) + "/" + str(character_max_hit_point) + ")"
     character_mana_point = character_data.mana_point
     character_max_mana_point = character_data.mana_point_max
     mana_point_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "9")
-    mp_text = (
-        mana_point_text
-        + "("
-        + str(character_mana_point)
-        + "/"
-        + str(character_max_mana_point)
-        + ")"
-    )
+    mp_text = mana_point_text + "(" + str(character_mana_point) + "/" + str(character_max_mana_point) + ")"
     return hp_text + " " + mp_text

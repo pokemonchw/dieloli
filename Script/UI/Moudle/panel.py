@@ -43,9 +43,7 @@ class SingleColumnButton:
         """
         for i in range(len(button_list)):
             if i <= self.max_height:
-                draw_button = draw.Button(
-                    button_list[i], return_list[i], normal_style, onbutton_style
-                )
+                draw_button = draw.Button(button_list[i], return_list[i], normal_style, onbutton_style)
                 draw_button.max_width = self.max_width
                 self.button_list.append(draw_button)
             self.return_list[return_list[i]] = button_list[i]

@@ -81,9 +81,7 @@ def settle_eat(character_id: int):
         food.weight -= eat_weight
         food_name = ""
         if food.recipe == -1:
-            food_config = text_loading.get_game_data(
-                constant.FilePath.FOOD_PATH, food.id
-            )
+            food_config = text_loading.get_game_data(constant.FilePath.FOOD_PATH, food.id)
             food_name = food_config["Name"]
         else:
             food_name = cache_contorl.recipe_data[food.recipe].name

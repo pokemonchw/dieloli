@@ -37,9 +37,7 @@ def main_frame_panel() -> list:
         constant.CmdMenu.MAIN_MENU, 3, "left", askfor=False, cmd_size="center"
     )
     cmd_list = cmd_list + ask_for_main_menu
-    system_menu_text = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "69"
-    )
+    system_menu_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "69")
     era_print.son_title_print(system_menu_text)
     era_print.line_feed_print()
     system_menu_start_id = len(ask_for_main_menu)

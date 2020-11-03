@@ -157,10 +157,7 @@ def read_queue():
 
         if "clear_cmd" in json_data.keys() and json_data["clear_cmd"] == "true":
             clear_screen()
-        if (
-            "clearorder_cmd" in json_data.keys()
-            and json_data["clearorder_cmd"] == "true"
-        ):
+        if "clearorder_cmd" in json_data.keys() and json_data["clearorder_cmd"] == "true":
             clear_order()
         if "clearcmd_cmd" in json_data.keys():
             cmd_nums = json_data["clearcmd_cmd"]
@@ -357,9 +354,7 @@ cmd_tag_map = {}
 
 
 # 命令生成函数
-def io_print_cmd(
-    cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"
-):
+def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"):
     """
     打印一条指令
     Keyword arguments:

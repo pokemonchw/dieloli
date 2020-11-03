@@ -28,8 +28,7 @@ def get_rich_text_print(text_message: str, default_style: str) -> list:
             input_text_style_size = text_message.find(">", i) + 1
             input_text_style = text_message[i + 1 : input_text_style_size - 1]
             if text_message[i] == "<" and (
-                (input_text_style in style_name_list)
-                or (input_text_style[1:] in style_name_list)
+                (input_text_style in style_name_list) or (input_text_style[1:] in style_name_list)
             ):
                 style_last_index = i
                 style_max_index = input_text_style_size
@@ -39,18 +38,12 @@ def get_rich_text_print(text_message: str, default_style: str) -> list:
                         cache_contorl.text_style_position = 0
                         cache_contorl.text_style_cache = ["standard"]
                     else:
-                        cache_contorl.text_style_position = (
-                            cache_contorl.text_style_position - 1
-                        )
-                        cache_contorl.output_text_style = (
-                            cache_contorl.text_style_cache[
-                                cache_contorl.text_style_position
-                            ]
-                        )
+                        cache_contorl.text_style_position = cache_contorl.text_style_position - 1
+                        cache_contorl.output_text_style = cache_contorl.text_style_cache[
+                            cache_contorl.text_style_position
+                        ]
                 else:
-                    cache_contorl.text_style_position = len(
-                        cache_contorl.text_style_cache
-                    )
+                    cache_contorl.text_style_position = len(cache_contorl.text_style_cache)
                     cache_contorl.text_style_cache.append(input_text_style)
                     cache_contorl.output_text_style = cache_contorl.text_style_cache[
                         cache_contorl.text_style_position

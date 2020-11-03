@@ -258,9 +258,7 @@ def clear_order():
 # ############################################################
 
 # 命令生成函数
-def io_print_cmd(
-    cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"
-):
+def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"):
     """
     打印一条指令
     Keyword arguments:

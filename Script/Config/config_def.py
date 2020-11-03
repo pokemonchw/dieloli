@@ -197,6 +197,17 @@ class Food:
     """ 是水果 """
 
 
+class StatureDescriptionPremise:
+    """ 身材描述文本依赖前提配置 """
+
+    cid: int
+    """ 配表id """
+    stature_type: int
+    """ 描述文本id """
+    premise: int
+    """ 前提id """
+
+
 class SocialType:
     """ 关系类型配置 """
 
@@ -260,6 +271,15 @@ class NatureTag:
     """ 正面倾向 """
     bad: str
     """ 负面倾向 """
+
+
+class StatureDescriptionText:
+    """ 角色身材描述文本 """
+
+    cid: int
+    """ 描述文本id """
+    text: str
+    """ 文本 """
 
 
 class Nature:
@@ -391,6 +411,19 @@ class SexExperience:
     """ 经验模板 """
 
 
+class OccupationBodyFatRegion:
+    """ 学生和老师各自肥胖率配置 """
+
+    cid: int
+    """ 区间id """
+    occupation: str
+    """ 职业 """
+    bodyfat_type: int
+    """ 体脂率类型 """
+    region: int
+    """ 权重区间 """
+
+
 class AttrTem:
     """ 性别对应的角色各项基础属性模板 """
 
@@ -449,6 +482,19 @@ class School:
     """ min_age """
     最大年龄: int
     """ max_age """
+
+
+class OccupationAgeRegion:
+    """ 学生和老师的年龄段生成权重区间配置 """
+
+    cid: int
+    """ 区间id """
+    occupation: str
+    """ 职业 """
+    age_region: int
+    """ 年龄段 """
+    region: int
+    """ 权重区间 """
 
 
 class KnowledgeType:

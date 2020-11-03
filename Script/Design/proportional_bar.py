@@ -1,9 +1,7 @@
 from Script.Core import game_config, text_handle
 
 
-def get_proportional_bar(
-    value_name: str, max_value: int, value: int, bar_id: str, text_width=0
-) -> str:
+def get_proportional_bar(value_name: str, max_value: int, value: int, bar_id: str, text_width=0) -> str:
     """
     通用用于计算比例条的函数
     Keyword arguments:
@@ -27,19 +25,9 @@ def get_proportional_bar(
     null_bar = "0"
     proportion_bar = true_bar * proportion
     fix_proportion_bar = null_bar * int(bar_width - proportion)
+    proportion_bar = "<" + bar_id + ">" + proportion_bar + fix_proportion_bar + "</" + bar_id + ">"
     proportion_bar = (
-        "<" + bar_id + ">" + proportion_bar + fix_proportion_bar + "</" + bar_id + ">"
-    )
-    proportion_bar = (
-        str(value_name)
-        + "["
-        + proportion_bar
-        + "]"
-        + "("
-        + str(value)
-        + "/"
-        + str(max_value)
-        + ")"
+        str(value_name) + "[" + proportion_bar + "]" + "(" + str(value) + "/" + str(max_value) + ")"
     )
     return proportion_bar
 

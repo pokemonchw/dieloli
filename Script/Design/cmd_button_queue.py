@@ -40,9 +40,7 @@ def option_int(
     on_style_data -- 按钮对应按下时样式列表
     """
     if cmd_list_data is None:
-        cmd_list_data = text_loading.get_text_data(
-            constant.FilePath.CMD_PATH, cmd_list
-        ).copy()
+        cmd_list_data = text_loading.get_text_data(constant.FilePath.CMD_PATH, cmd_list).copy()
     input_i = []
     text_width = game_config.text_width
     if last_line:
@@ -165,9 +163,7 @@ def option_str(
     on_style_data -- 按钮被按下时样式列表
     """
     if cmd_list_data is None:
-        cmd_list_data = text_loading.get_text_data(
-            constant.FilePath.CMD_PATH, cmd_list
-        ).copy()
+        cmd_list_data = text_loading.get_text_data(constant.FilePath.CMD_PATH, cmd_list).copy()
     input_s = []
     text_width = game_config.text_width
     if last_line:

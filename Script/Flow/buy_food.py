@@ -54,9 +54,7 @@ def buy_food_by_type(food_id: str):
         food_list = list(cache_contorl.restaurant_data[food_id].values())
         max_page = get_food_shop_page_max(len(food_list), 0)
         now_page_id = int(cache_contorl.panel_state["SeeFoodShopListByFoodTypePanel"])
-        food_buttons = buy_food_panel.see_food_shop_list_by_food_type(
-            max_page, food_list
-        )
+        food_buttons = buy_food_panel.see_food_shop_list_by_food_type(max_page, food_list)
         start_id = len(food_buttons)
         tail_buttons = buy_food_panel.see_food_shop_tail_cmd(start_id, max_page, 1)
         askfor_list = food_buttons + tail_buttons

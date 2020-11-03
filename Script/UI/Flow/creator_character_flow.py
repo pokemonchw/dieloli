@@ -4,7 +4,7 @@ from functools import wraps
 from typing import List
 from types import FunctionType
 from Script.Core import get_text, constant, game_type, cache_contorl, flow_handle
-from Script.Design import handle_panel, character
+from Script.Design import handle_panel, character,character_handle
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
 from Script.Config import normal_config, game_config
@@ -27,6 +27,7 @@ def creator_character_panel():
     while 1:
         if input_name_panel():
             character.init_attr(0)
+            character_handle.init_character_list()
             confirm_character_attr_panel()
             break
 
@@ -96,9 +97,7 @@ def input_sex_panel() -> bool:
     """
     create_judge = 0
     character_data = cache_contorl.character_data[0]
-    sex_list = [
-        game_config.config_sex_tem[x].name for x in game_config.config_sex_tem
-    ] + [_("随机")]
+    sex_list = [game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(sex_list, _(f"那么{character_data.nick_name}的性别是？"))
     return_list = button_panel.get_return_list()
@@ -124,9 +123,7 @@ def input_setting_panel() -> bool:
     character_data = cache_contorl.character_data[0]
     ask_list = [_("是"), _("否")]
     button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(
-        ask_list, _(f"是否需要设置详细属性呢？将会随机抽取十道题目供{character_data.nick_name}进行选择。")
-    )
+    button_panel.set(ask_list, _(f"是否需要设置详细属性呢？将会随机抽取十道题目供{character_data.nick_name}进行选择。"))
     return_list = button_panel.get_return_list()
     line_feed_draw.draw()
     line.draw()

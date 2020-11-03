@@ -8,7 +8,6 @@ from Script.Core import (
     game_data,
     text_loading,
     game_path_config,
-    game_config,
     constant,
     game_type,
 )
@@ -18,14 +17,7 @@ from Script.Design import (
     attr_text,
     character,
 )
-
-language = game_config.language
-game_path = game_path_config.game_path
-sex_list = list(text_loading.get_text_data(constant.FilePath.ROLE_PATH, "Sex"))
-age_tem_list = list(
-    text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "AgeTem")
-)
-character_list = list(cache_contorl.game_data[language]["character"].keys())
+from Script.Config import game_config,normal_config
 
 
 def init_character_list():
@@ -72,21 +64,13 @@ def index_character_average_value():
         age_tem = attr_calculation.judge_age_group(character_data.age)
         cache_contorl.total_height_by_age.setdefault(age_tem, {})
         cache_contorl.total_height_by_age[age_tem].setdefault(character_data.sex, 0)
-        cache_contorl.total_height_by_age[age_tem][
-            character_data.sex
-        ] += character_data.height["NowHeight"]
+        cache_contorl.total_height_by_age[age_tem][character_data.sex] += character_data.height.now_height
         cache_contorl.total_number_of_people_of_all_ages.setdefault(age_tem, {})
-        cache_contorl.total_number_of_people_of_all_ages[age_tem].setdefault(
-            character_data.sex, 0
-        )
-        cache_contorl.total_number_of_people_of_all_ages[age_tem][
-            character_data.sex
-        ] += 1
+        cache_contorl.total_number_of_people_of_all_ages[age_tem].setdefault(character_data.sex, 0)
+        cache_contorl.total_number_of_people_of_all_ages[age_tem][character_data.sex] += 1
         cache_contorl.total_bodyfat_by_age.setdefault(age_tem, {})
         cache_contorl.total_bodyfat_by_age[age_tem].setdefault(character_data.sex, 0)
-        cache_contorl.total_bodyfat_by_age[age_tem][
-            character_data.sex
-        ] += character_data.bodyfat
+        cache_contorl.total_bodyfat_by_age[age_tem][character_data.sex] += character_data.bodyfat
 
 
 def init_character(character_id: int, character_tem: game_type.NpcTem):
@@ -130,51 +114,20 @@ def init_character_tem():
     """
     init_random_npc_data()
     npc_data = cache_contorl.random_npc_list
-    now_characterList = character_list.copy()
-    npc_data += [get_dir_character_tem(character) for character in now_characterList]
     numpy.random.shuffle(npc_data)
     cache_contorl.npc_tem_data = npc_data
 
 
-def get_dir_character_tem(character: int) -> game_type.NpcTem:
-    """
-    获取预设角色模板数据
-    """
-    dir_data = text_loading.get_character_data(character)["AttrTemplate"]
-    new_npc_data = game_type.NpcTem()
-    if "Name" in dir_data:
-        new_npc_data.Name = dir_data["Name"]
-    if "Sex" in dir_data:
-        new_npc_data.Sex = dir_data["Sex"]
-    if "Age" in dir_data:
-        new_npc_data.Age = dir_data["Age"]
-    if "Position" in dir_data:
-        new_npc_data.Position = dir_data["Position"]
-    if "AdvNpc" in dir_data:
-        new_npc_data.AdvNpc = dir_data["AdvNpc"]
-    if "Weight" in dir_data:
-        new_npc_data.Weight = dir_data["Weight"]
-    if "BodyFat" in dir_data:
-        new_npc_data.BodyFat = dir_data["BodyFat"]
-    if "Chest" in dir_data:
-        new_npc_data.Chest = dir_data["Chest"]
-    if "MotherTongue" in dir_data:
-        new_npc_data.MotherTongue = dir_data["MotherTongue"]
-    return new_npc_data
-
-
-random_npc_max = int(game_config.random_npc_max)
-random_teacher_proportion = int(game_config.proportion_teacher)
-random_student_proportion = int(game_config.proportion_student)
+random_npc_max = normal_config.config_normal.random_npc_max
+random_teacher_proportion = normal_config.config_normal.proportion_teacher
+random_student_proportion = normal_config.config_normal.proportion_student)
 age_weight_data = {
-    "Teacher": random_teacher_proportion,
-    "Student": random_student_proportion,
+    "1": random_teacher_proportion,
+    "0": random_student_proportion,
 }
 age_weight_regin_data = value_handle.get_region_list(age_weight_data)
 age_weight_regin_list = list(map(int, age_weight_regin_data.keys()))
-age_weight_max = sum(
-    [int(age_weight_data[age_weight]) for age_weight in age_weight_data]
-)
+age_weight_max = sum([int(age_weight_data[age_weight]) for age_weight in age_weight_data])
 
 
 def init_random_npc_data() -> list:
@@ -191,9 +144,7 @@ def create_random_npc(id) -> dict:
     生成随机npc数据模板
     """
     now_age_weight = random.randint(-1, age_weight_max - 1)
-    now_age_weight_regin = value_handle.get_next_value_for_list(
-        now_age_weight, age_weight_regin_list
-    )
+    now_age_weight_regin = value_handle.get_next_value_for_list(now_age_weight, age_weight_regin_list)
     age_weight_tem = age_weight_regin_data[now_age_weight_regin]
     random_npc_sex = get_rand_npc_sex()
     random_npc_name = attr_text.get_random_name_for_sex(random_npc_sex)
@@ -209,16 +160,14 @@ def create_random_npc(id) -> dict:
     random_npc_new_data.Weight = fat_tem
     random_npc_new_data.BodyFat = body_fat_tem
     random_npc_new_data.SexExperienceTem = "Rand"
-    if random_npc_sex in {"Woman": 1, "Futa": 1}:
+    if random_npc_sex in {1,2}:
         random_npc_new_data.Chest = attr_calculation.get_rand_npc_chest_tem()
     else:
         random_npc_new_data.Chest = 0
     cache_contorl.random_npc_list.append(random_npc_new_data)
 
 
-sex_weight_data = text_loading.get_text_data(
-    constant.FilePath.ATTR_TEMPLATE_PATH, "RandomNpcSexWeight"
-)
+sex_weight_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "RandomNpcSexWeight")
 sex_weight_max = sum([int(sex_weight_data[weight]) for weight in sex_weight_data])
 sex_weight_regin_data = value_handle.get_region_list(sex_weight_data)
 sex_weight_regin_list = list(map(int, sex_weight_regin_data.keys()))
@@ -229,15 +178,11 @@ def get_rand_npc_sex() -> str:
     随机获取npc性别
     """
     now_weight = random.randint(0, sex_weight_max - 1)
-    weight_regin = value_handle.get_next_value_for_list(
-        now_weight, sex_weight_regin_list
-    )
+    weight_regin = value_handle.get_next_value_for_list(now_weight, sex_weight_regin_list)
     return sex_weight_regin_data[weight_regin]
 
 
-fat_weight_data = text_loading.get_text_data(
-    constant.FilePath.ATTR_TEMPLATE_PATH, "FatWeight"
-)
+fat_weight_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "FatWeight")
 
 
 def get_rand_npc_fat_tem(age_judge: str) -> str:
@@ -247,7 +192,7 @@ def get_rand_npc_fat_tem(age_judge: str) -> str:
     agejudge -- 年龄段
     """
     now_fat_weight_data = fat_weight_data[age_judge]
-    now_fat_tem = value_handle.get_random_for_weight(now_fat_weight_data)
+    now_fat_tem = value_handle.get_random_for_weight(fat_weight_data)
     return now_fat_tem
 
 
@@ -272,9 +217,7 @@ def get_rand_npc_sex_experience_tem(age: int, sex: str) -> str:
     return value_handle.get_random_for_weight(age_regionData)
 
 
-body_fat_weight_data = text_loading.get_text_data(
-    constant.FilePath.ATTR_TEMPLATE_PATH, "BodyFatWeight"
-)
+body_fat_weight_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "BodyFatWeight")
 
 
 def get_rand_npc_body_fat_tem(age_judge: str, bmi_tem: str) -> str:
@@ -288,9 +231,7 @@ def get_rand_npc_body_fat_tem(age_judge: str, bmi_tem: str) -> str:
     return value_handle.get_random_for_weight(now_body_fat_data)
 
 
-age_tem_weight_data = text_loading.get_text_data(
-    constant.FilePath.ATTR_TEMPLATE_PATH, "AgeWeight"
-)
+age_tem_weight_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "AgeWeight")
 
 
 def get_rand_npc_age_tem(age_judge: str) -> int:
@@ -326,8 +267,7 @@ def init_character_dormitory():
             character_id: cache_contorl.character_data[character_id].age
             for character_id in cache_contorl.character_data
             if cache_contorl.character_data[character_id].age < 18
-            and cache_contorl.character_data[character_id].sex
-            not in {"Man": 0, "Woman": 1}
+            and cache_contorl.character_data[character_id].sex not in {"Man": 0, "Woman": 1}
         },
         "Teacher": {
             character_id: cache_contorl.character_data[character_id].age
@@ -352,30 +292,19 @@ def init_character_dormitory():
         k[0] for k in sorted(character_sex_data["Teacher"].items(), key=lambda x: x[1])
     ]
     teacher_dormitory = {
-        x: 0
-        for x in sorted(
-            cache_contorl.place_data["TeacherDormitory"], key=lambda x: x[0]
-        )
+        x: 0 for x in sorted(cache_contorl.place_data["TeacherDormitory"], key=lambda x: x[0])
     }
     male_dormitory = {
-        key: cache_contorl.place_data[key]
-        for key in cache_contorl.place_data
-        if "MaleDormitory" in key
+        key: cache_contorl.place_data[key] for key in cache_contorl.place_data if "MaleDormitory" in key
     }
     female_dormitory = {
-        key: cache_contorl.place_data[key]
-        for key in cache_contorl.place_data
-        if "FemaleDormitory" in key
+        key: cache_contorl.place_data[key] for key in cache_contorl.place_data if "FemaleDormitory" in key
     }
     male_dormitory = {
-        x: 0
-        for j in [k[1] for k in sorted(male_dormitory.items(), key=lambda x: x[0])]
-        for x in j
+        x: 0 for j in [k[1] for k in sorted(male_dormitory.items(), key=lambda x: x[0])] for x in j
     }
     female_dormitory = {
-        x: 0
-        for j in [k[1] for k in sorted(female_dormitory.items(), key=lambda x: x[0])]
-        for x in j
+        x: 0 for j in [k[1] for k in sorted(female_dormitory.items(), key=lambda x: x[0])] for x in j
     }
     basement = {x: 0 for x in cache_contorl.place_data["Basement"]}
     male_dormitoryMax = len(male_dormitory.keys())
@@ -419,9 +348,5 @@ def init_character_position():
     for character_id in cache_contorl.character_data:
         character_position = cache_contorl.character_data[character_id].position
         character_dormitory = cache_contorl.character_data[character_id].dormitory
-        character_dormitory = map_handle.get_map_system_path_for_str(
-            character_dormitory
-        )
-        map_handle.character_move_scene(
-            character_position, character_dormitory, character_id
-        )
+        character_dormitory = map_handle.get_map_system_path_for_str(character_dormitory)
+        map_handle.character_move_scene(character_position, character_dormitory, character_id)

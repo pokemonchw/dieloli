@@ -44,8 +44,7 @@ class NormalDraw:
             if self.max_width > 0:
                 for i in self.text:
                     if (
-                        text_handle.get_text_index(now_text)
-                        + text_handle.get_text_index(i)
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
                         < self.max_width
                     ):
                         now_text += i
@@ -233,8 +232,7 @@ class Button:
             if self.max_width > 0:
                 for i in self.text:
                     if (
-                        text_handle.get_text_index(now_text)
-                        + text_handle.get_text_index(i)
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
                         < self.max_width
                     ):
                         now_text += i
@@ -368,8 +366,7 @@ class CenterDraw(NormalDraw):
             if self.max_width > 0:
                 for i in self.text:
                     if (
-                        text_handle.get_text_index(now_text)
-                        + text_handle.get_text_index(i)
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
                         < self.max_width
                     ):
                         now_text += i
@@ -383,9 +380,7 @@ class CenterDraw(NormalDraw):
         else:
             now_text = text_handle.align(self.text, "center", 0, 1, self.max_width)
         if len(self) < self.max_width:
-            now_text += " " * (
-                int(self.max_width) - text_handle.get_text_index(now_text)
-            )
+            now_text += " " * (int(self.max_width) - text_handle.get_text_index(now_text))
         io_init.era_print(now_text, self.style)
 
 
@@ -399,8 +394,7 @@ class RightDraw(NormalDraw):
             if self.max_width > 0:
                 for i in self.text:
                     if (
-                        text_handle.get_text_index(now_text)
-                        + text_handle.get_text_index(i)
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
                         < self.max_width
                     ):
                         now_text += i

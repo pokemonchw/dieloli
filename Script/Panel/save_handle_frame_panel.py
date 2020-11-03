@@ -15,9 +15,7 @@ def load_save_info_head_panel():
     """
     载入存档信息头面板
     """
-    save_frame_title = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "71"
-    )
+    save_frame_title = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "71")
     era_print.little_title_print(save_frame_title)
 
 
@@ -25,15 +23,11 @@ def establish_save_info_head_panel():
     """
     存储存档信息头面板
     """
-    save_frame_title = text_loading.get_text_data(
-        constant.FilePath.STAGE_WORD_PATH, "70"
-    )
+    save_frame_title = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "70")
     era_print.little_title_print(save_frame_title)
 
 
-def see_save_list_panel(
-    page_save_value: int, last_save_page_value: int, auto_save=False
-) -> list:
+def see_save_list_panel(page_save_value: int, last_save_page_value: int, auto_save=False) -> list:
     """
     查看存档页面面板
     Keyword arguments:
@@ -83,9 +77,7 @@ def see_save_list_panel(
         else:
             id_text_index = int(text_handle.get_text_index(id_text))
             fix_id_width = text_width - id_text_index
-            save_none_align = text_handle.align(
-                save_none_text, "center", text_width=fix_id_width
-            )
+            save_none_align = text_handle.align(save_none_text, "center", text_width=fix_id_width)
             id_text = id_text + save_none_align
             if auto_save:
                 era_print.normal_print(id_text)
@@ -94,9 +86,7 @@ def see_save_list_panel(
                 input_s.append(id)
         era_print.normal_print("\n")
     if auto_save:
-        auto_info_text = text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "73"
-        )
+        auto_info_text = text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "73")
         i = page_save_value
         id = cmd_button_queue.id_index(i)
         era_print.little_line_print()
@@ -110,9 +100,7 @@ def see_save_list_panel(
             id_text = id + auto_info_text
             id_text_index = int(text_handle.get_text_index(id_text))
             fix_id_width = text_width - id_text_index
-            save_text_align = text_handle.align(
-                save_text, "center", text_width=fix_id_width
-            )
+            save_text_align = text_handle.align(save_text, "center", text_width=fix_id_width)
             id_text = id_text + save_text_align
             py_cmd.pcmd(id_text, id, None)
             input_s.append(id)
@@ -120,9 +108,7 @@ def see_save_list_panel(
         else:
             id_text_index = int(text_handle.get_text_index(auto_info_text))
             fix_id_width = text_width - id_text_index
-            save_none_align = text_handle.align(
-                save_none_text, "center", text_width=fix_id_width
-            )
+            save_none_align = text_handle.align(save_none_text, "center", text_width=fix_id_width)
             id_text = auto_info_text + save_none_align
             era_print.normal_print(id_text)
             era_print.line_feed_print()
@@ -171,9 +157,7 @@ def confirmation_overlay_save_panel() -> list:
     确认覆盖存档面板
     """
     era_print.line_feed_print()
-    cmd_list = text_loading.get_text_data(
-        constant.FilePath.CMD_PATH, "confirmationOverlaySave"
-    )
+    cmd_list = text_loading.get_text_data(constant.FilePath.CMD_PATH, "confirmationOverlaySave")
     message_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "22")
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
@@ -199,9 +183,7 @@ def confirmation_load_save_panel() -> list:
     确认读取存档面板
     """
     era_print.line_feed_print()
-    cmd_list = text_loading.get_text_data(
-        constant.FilePath.CMD_PATH, "confirmationLoadSave"
-    )
+    cmd_list = text_loading.get_text_data(constant.FilePath.CMD_PATH, "confirmationLoadSave")
     message_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "24")
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)
@@ -214,9 +196,7 @@ def confirmation_remove_save_panel() -> list:
     确认删除存档面板
     """
     era_print.line_feed_print()
-    cmd_list = text_loading.get_text_data(
-        constant.FilePath.CMD_PATH, "confirmationRemoveSave"
-    )
+    cmd_list = text_loading.get_text_data(constant.FilePath.CMD_PATH, "confirmationRemoveSave")
     message_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "25")
     era_print.restart_line_print()
     era_print.line_feed_print(message_text)

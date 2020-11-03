@@ -66,13 +66,7 @@ def little_title_print(string: str):
     width = normal_config.config_normal.text_width
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 2 - int(text_width) / 2 - 2)
-    line_feed_print(
-        "=" * line_width
-        + "<littletitle>口"
-        + string
-        + "口</littletitle>"
-        + "=" * line_width
-    )
+    line_feed_print("=" * line_width + "<littletitle>口" + string + "口</littletitle>" + "=" * line_width)
 
 
 def son_title_print(string: str):
@@ -94,13 +88,7 @@ def son_title_print(string: str):
     text_width = text_handle.get_text_index(string)
     line_width = int(int(width) / 4)
     line_width_fix = int(int(width) / 4 - int(text_width))
-    line_feed_print(
-        ":" * line_width_fix
-        + "<sontitle>"
-        + string
-        + "</sontitle>"
-        + ":" * line_width * 3
-    )
+    line_feed_print(":" * line_width_fix + "<sontitle>" + string + "</sontitle>" + ":" * line_width * 3)
 
 
 def line_feed_print(string="", style="standard"):

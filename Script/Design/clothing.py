@@ -141,9 +141,7 @@ def get_clothing_collocation_data(
             )
             if usually_collocation != "None":
                 collocation_data[collocation_type] = usually_collocation
-                collocation_data["Price"] += clothing_price_data[collocation_type][
-                    usually_collocation
-                ]
+                collocation_data["Price"] += clothing_price_data[collocation_type][usually_collocation]
             else:
                 collocation_data[collocation_type] = ""
         else:
@@ -152,20 +150,17 @@ def get_clothing_collocation_data(
             now_collocation_data = now_collocation_list[0]
             if now_collocation_data.collocational == 1:
                 precedence_list = [
-                    now_add_clothing_data.tem_id
-                    for now_add_clothing_data in now_collocation_list
+                    now_add_clothing_data.tem_id for now_add_clothing_data in now_collocation_list
                 ]
                 now_clothing_name_data = clothing_name_data[clothing_type]
                 precedence_collocation = get_appoint_names_clothing_top(
                     precedence_list, now_clothing_name_data
                 )
                 if precedence_collocation != "None":
-                    collocation_data[
-                        now_collocation_data.clothing_type
-                    ] = precedence_collocation
-                    collocation_data["Price"] += clothing_price_data[
-                        now_collocation_data.clothing_type
-                    ][precedence_collocation]
+                    collocation_data[now_collocation_data.clothing_type] = precedence_collocation
+                    collocation_data["Price"] += clothing_price_data[now_collocation_data.clothing_type][
+                        precedence_collocation
+                    ]
                 else:
                     usually_collocation = get_appoint_type_clothing_top(
                         now_clothing_data,
@@ -175,28 +170,25 @@ def get_clothing_collocation_data(
                     )
                     if usually_collocation != "None":
                         collocation_data[collocation_type] = usually_collocation
-                        collocation_data["Price"] += clothing_price_data[
-                            collocation_type
-                        ][usually_collocation]
+                        collocation_data["Price"] += clothing_price_data[collocation_type][
+                            usually_collocation
+                        ]
                     else:
                         collocation_data = "None"
                         break
             elif now_collocation_data.collocational in {3, 4, 5}:
                 precedence_list = [
-                    now_add_clothing_data.tem_id
-                    for now_add_clothing_data in now_collocation_list
+                    now_add_clothing_data.tem_id for now_add_clothing_data in now_collocation_list
                 ]
                 now_clothing_name_data = clothing_name_data[clothing_type]
                 precedence_collocation = get_appoint_names_clothing_top(
                     precedence_list, now_clothing_name_data
                 )
                 if precedence_collocation != "None":
-                    collocation_data[
-                        now_collocation_data.clothing_type
-                    ] = precedence_collocation
-                    collocation_data["Price"] += clothing_price_data[
-                        now_collocation_data.clothing_type
-                    ][precedence_collocation]
+                    collocation_data[now_collocation_data.clothing_type] = precedence_collocation
+                    collocation_data["Price"] += clothing_price_data[now_collocation_data.clothing_type][
+                        precedence_collocation
+                    ]
                 else:
                     collocation_data = "None"
                     break
@@ -215,9 +207,9 @@ def get_appoint_names_clothing_top(
     Return arguments
     """
     clothing_data = {
-        list(clothing_type_name_data[appoint].keys())[-1]: clothing_type_name_data[
-            appoint
-        ][list(clothing_type_name_data[appoint].keys())[-1]]
+        list(clothing_type_name_data[appoint].keys())[-1]: clothing_type_name_data[appoint][
+            list(clothing_type_name_data[appoint].keys())[-1]
+        ]
         for appoint in appoint_name_list
         if appoint in clothing_type_name_data
     }
@@ -284,14 +276,14 @@ def judge_clothing_collocation(
     """
     old_clothing_data_restrict_data = {}
     if old_clothing_data.tem_id in game_config.config_clothing_collocational_data:
-        old_clothing_data_restrict_data = (
-            game_config.config_clothing_collocational_data[old_clothing_data.tem_id]
-        )
+        old_clothing_data_restrict_data = game_config.config_clothing_collocational_data[
+            old_clothing_data.tem_id
+        ]
     new_clothing_data_restrict_data = {}
     if new_clothing_data.tem_id in game_config.config_clothing_collocational_data:
-        new_clothing_data_restrict_data = (
-            game_config.config_clothing_collocational_data[new_clothing_data.tem_id]
-        )
+        new_clothing_data_restrict_data = game_config.config_clothing_collocational_data[
+            new_clothing_data.tem_id
+        ]
     if new_clothing_data.wear in old_clothing_data_restrict_data:
         old_judge = old_clothing_data_restrict_data[new_clothing_data.wear][0]
         if old_judge.collocational == 2:

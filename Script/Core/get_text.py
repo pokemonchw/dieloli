@@ -12,9 +12,7 @@ def getLocStrings() -> FunctionType:
     FunctionType -- 翻译处理函数对象
     """
     po_data = os.path.join("data", "po")
-    return gettext.translation(
-        "dieloli", po_data, [normal_config.config_normal.language, "zh_CN"]
-    ).gettext
+    return gettext.translation("dieloli", po_data, [normal_config.config_normal.language, "zh_CN"]).gettext
 
 
 _: FunctionType = getLocStrings()

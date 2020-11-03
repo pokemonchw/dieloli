@@ -50,21 +50,13 @@ def character_move(character_id: str, target_scene: list) -> (str, list, list, i
     scene_hierarchy = map_handle.judge_scene_affiliation(now_position, target_scene)
     if scene_hierarchy == "common":
         map_path = map_handle.get_common_map_for_scene_path(now_position, target_scene)
-        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
-            map_path, now_position
-        )
-        target_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
-            map_path, target_scene
-        )
-        return identical_map_move(
-            character_id, map_path, now_map_scene_id, target_map_scene_id
-        )
+        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(map_path, now_position)
+        target_map_scene_id = map_handle.get_map_scene_id_for_scene_path(map_path, target_scene)
+        return identical_map_move(character_id, map_path, now_map_scene_id, target_map_scene_id)
     return difference_map_move(character_id, target_scene)
 
 
-def difference_map_move(
-    character_id: str, target_scene: list
-) -> (str, list, list, int):
+def difference_map_move(character_id: str, target_scene: list) -> (str, list, list, int):
     """
     角色跨地图层级移动
     Keyword arguments:
@@ -83,52 +75,30 @@ def difference_map_move(
     now_true_position = map_handle.get_scene_path_for_true(now_position)
     now_true_map = map_handle.get_map_for_path(now_true_position)
     if is_affiliation == "subordinate":
-        now_true_affiliation = map_handle.judge_scene_is_affiliation(
-            now_true_position, target_scene
-        )
+        now_true_affiliation = map_handle.judge_scene_is_affiliation(now_true_position, target_scene)
         if now_true_affiliation == "subordinate":
-            now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
-                now_true_map, now_true_position
-            )
+            now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(now_true_map, now_true_position)
             return identical_map_move(character_id, now_true_map, now_map_scene_id, "0")
         now_map = map_handle.get_map_for_path(target_scene)
-        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
-            now_map, now_position
-        )
+        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(now_map, now_position)
         return identical_map_move(character_id, now_map, now_map_scene_id, "0")
-    relation_map_list = map_handle.get_relation_map_list_for_scene_path(
-        now_true_position
-    )
+    relation_map_list = map_handle.get_relation_map_list_for_scene_path(now_true_position)
     now_scene_real_map = relation_map_list[-1]
-    now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
-        now_scene_real_map, now_true_position
-    )
-    common_map = map_handle.get_common_map_for_scene_path(
-        now_true_position, target_scene
-    )
+    now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
+    common_map = map_handle.get_common_map_for_scene_path(now_true_position, target_scene)
     if now_scene_real_map != common_map:
         if now_map_scene_id == "0":
             now_true_position = now_scene_real_map.copy()
-            relation_map_list = map_handle.get_relation_map_list_for_scene_path(
-                now_true_position
-            )
+            relation_map_list = map_handle.get_relation_map_list_for_scene_path(now_true_position)
             now_scene_real_map = relation_map_list[-1]
-    target_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
-        common_map, target_scene
-    )
+    target_map_scene_id = map_handle.get_map_scene_id_for_scene_path(common_map, target_scene)
     if now_scene_real_map == common_map:
-        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
-            common_map, now_true_position
-        )
+        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(common_map, now_true_position)
     else:
-        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
-            now_scene_real_map, now_true_position
-        )
+        now_map_scene_id = map_handle.get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
         target_map_scene_id = "0"
         common_map = now_scene_real_map
-    return identical_map_move(
-        character_id, common_map, now_map_scene_id, target_map_scene_id
-    )
+    return identical_map_move(character_id, common_map, now_map_scene_id, target_map_scene_id)
 
 
 def identical_map_move(
@@ -152,18 +122,12 @@ def identical_map_move(
     int -- 本次移动花费的时间
     """
     now_map_str = map_handle.get_map_system_path_str_for_list(now_map)
-    move_end, move_path = map_handle.get_path_finding(
-        now_map_str, now_map_scene_id, target_map_scene_id
-    )
+    move_end, move_path = map_handle.get_path_finding(now_map_str, now_map_scene_id, target_map_scene_id)
     now_target_position = []
     now_need_time = 0
     if move_path != []:
         now_target_scene_id = move_path["Path"][0]
         now_need_time = move_path["Time"][0]
-        now_character_position = map_handle.get_scene_path_for_map_scene_id(
-            now_map, now_map_scene_id
-        )
-        now_target_position = map_handle.get_scene_path_for_map_scene_id(
-            now_map, now_target_scene_id
-        )
+        now_character_position = map_handle.get_scene_path_for_map_scene_id(now_map, now_map_scene_id)
+        now_target_position = map_handle.get_scene_path_for_map_scene_id(now_map, now_target_scene_id)
     return move_end, move_path, now_target_position, now_need_time

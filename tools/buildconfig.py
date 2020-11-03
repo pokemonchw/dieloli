@@ -59,9 +59,7 @@ def build_csv_config(file_path: str, file_name: str):
         build_config_def(file_id, now_type_data, now_docstring_data, class_text)
 
 
-def build_config_def(
-    class_name: str, value_type: dict, docstring: dict, class_text: str
-):
+def build_config_def(class_name: str, value_type: dict, docstring: dict, class_text: str):
     global config_def_str
     config_def_str += ""
     config_def_str += "class " + class_name + ":"
@@ -71,9 +69,7 @@ def build_config_def(
         config_def_str += "    " + '""" ' + docstring[k] + ' """'
 
 
-def build_config_po(
-    message: str, message_class: str, message_type: str, message_id: str
-):
+def build_config_po(message: str, message_class: str, message_type: str, message_id: str):
     global config_po
     if message not in msgData:
         config_po += f"#: class:{message_class} id:{message_id} type:{message_type}\n"
@@ -128,9 +124,7 @@ po_path = os.path.join(po_dir, "dieloli.po")
 mo_path = os.path.join(po_dir, "dieloli.mo")
 if os.path.exists(po_path):
     os.remove(po_path)
-os.system(
-    'find ../ -name "*.py" >POTFILES && xgettext -n --files-from=POTFILES -o ' + po_path
-)
+os.system('find ../ -name "*.py" >POTFILES && xgettext -n --files-from=POTFILES -o ' + po_path)
 os.remove("POTFILES")
 os.system("msgfmt " + po_path + " -o " + mo_path)
 

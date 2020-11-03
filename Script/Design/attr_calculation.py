@@ -59,9 +59,7 @@ def get_height(tem_name: int, age: int) -> dict:
         expect_age = random.randint(13, 17)
         expect_height = initial_height / 0.3109
     development_age = random.randint(4, 6)
-    growth_height_data = get_growth_height(
-        age, expect_height, development_age, expect_age
-    )
+    growth_height_data = get_growth_height(age, expect_height, development_age, expect_age)
     growth_height = growth_height_data["GrowthHeight"]
     now_height = growth_height_data["NowHeight"]
     if age > expect_age:
@@ -104,9 +102,7 @@ def get_chest(chest_tem: int, birthday: datetime.datetime) -> game_type.Chest:
     return chest
 
 
-chest_tem_weight_data = {
-    k: game_config.config_chest[k].weight for k in game_config.config_chest
-}
+chest_tem_weight_data = {k: game_config.config_chest[k].weight for k in game_config.config_chest}
 
 
 def get_rand_npc_chest_tem() -> int:
@@ -137,16 +133,12 @@ def get_rand_npc_birthday(age: int):
     now_day = cache_contorl.game_time.day
     birth_year = now_year - age
     birthday = game_time.get_rand_day_for_year(birth_year)
-    if now_month < birthday.month or (
-        now_month == birthday.month and now_day < birthday.day
-    ):
+    if now_month < birthday.month or (now_month == birthday.month and now_day < birthday.day):
         birthday = game_time.get_sub_date(year=-1, old_date=birthday)
     return birthday
 
 
-def get_growth_height(
-    now_age: int, expect_height: float, development_age: int, expect_age: int
-) -> dict:
+def get_growth_height(now_age: int, expect_height: float, development_age: int, expect_age: int) -> dict:
     """
     计算每日身高增长量
     Keyword arguments:
@@ -302,16 +294,12 @@ def get_sex_experience(tem_name: int, sex: int) -> dict:
     """
     sex_tem = sex in {0, 3}
     sex_experience_data = {}
-    for organ in (
-        game_config.config_organ_data[sex_tem] | game_config.config_organ_data[2]
-    ):
+    for organ in game_config.config_organ_data[sex_tem] | game_config.config_organ_data[2]:
         sex_experience_tem_id = game_config.config_sex_experience_data[tem_name][organ]
         organ_sex_experience_tem_id = game_config.config_sex_experience_tem_data[organ][
             sex_experience_tem_id
         ]
-        organ_sex_experience_tem = game_config.config_sex_experience_tem[
-            organ_sex_experience_tem_id
-        ]
+        organ_sex_experience_tem = game_config.config_sex_experience_tem[organ_sex_experience_tem_id]
         sex_experience_data[organ] = random.uniform(
             organ_sex_experience_tem.min_exp, organ_sex_experience_tem.max_exp
         )

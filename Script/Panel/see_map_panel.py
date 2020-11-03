@@ -7,9 +7,7 @@ from Script.Core import (
 )
 from Script.Design import map_handle, cmd_button_queue
 
-panel_state_text_data = text_loading.get_text_data(
-    constant.FilePath.CMD_PATH, "cmdSwitch"
-)
+panel_state_text_data = text_loading.get_text_data(constant.FilePath.CMD_PATH, "cmdSwitch")
 panel_state_on_text = panel_state_text_data[1]
 panel_state_off_text = panel_state_text_data[0]
 
@@ -62,9 +60,7 @@ def see_move_path_panel() -> dict:
         )
         input_s = input_s + yrn
     else:
-        error_move_text = text_loading.get_text_data(
-            constant.FilePath.MESSAGE_PATH, "28"
-        )
+        error_move_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "28")
         era_print.normal_print(error_move_text)
     era_print.restart_line_print()
     return {"input_s": input_s, "scene_path_list": scene_path_list}
@@ -82,13 +78,9 @@ def show_scene_name_list_panel() -> str:
         era_print.line_feed_print()
         now_map = cache_contorl.now_map
         now_position = cache_contorl.character_data[0].position
-        now_scene = map_handle.get_scene_id_in_map_for_scene_path_on_map_path(
-            now_position, now_map
-        )
+        now_scene = map_handle.get_scene_id_in_map_for_scene_path_on_map_path(now_position, now_map)
         now_map_map_system_str = map_handle.get_map_system_path_str_for_list(now_map)
-        scene_name_data = map_handle.get_scene_name_list_for_map_path(
-            now_map_map_system_str
-        )
+        scene_name_data = map_handle.get_scene_name_list_for_map_path(now_map_map_system_str)
         scene_name_list = {}
         null_scene = now_scene
         for scene in scene_name_data:
@@ -119,9 +111,7 @@ def back_scene_panel(start_id: str) -> list:
     see_map_cmd = []
     now_position = cache_contorl.character_data[0].position
     now_map = map_handle.get_map_for_path(now_position)
-    cmd_data = text_loading.get_text_data(
-        constant.FilePath.CMD_PATH, constant.CmdMenu.SEE_MAP
-    )
+    cmd_data = text_loading.get_text_data(constant.FilePath.CMD_PATH, constant.CmdMenu.SEE_MAP)
     see_map_cmd.append(cmd_data[0])
     if now_map != [] and cache_contorl.now_map != []:
         see_map_cmd.append(cmd_data[1])

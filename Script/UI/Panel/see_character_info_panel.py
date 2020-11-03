@@ -3,6 +3,7 @@ from types import FunctionType
 from Script.UI.Moudle import draw
 from Script.Core import cache_contorl, get_text
 from Script.Config import game_config
+from Script.Design import attr_text
 
 panel_info_data = {}
 
@@ -34,7 +35,8 @@ class SeeCharacterInfoPanel:
         self.character_id = character_id
         """ 要绘制的角色id """
         head_draw = CharacterInfoHead(character_id, width)
-        self.draw_list: List[draw.NormalDraw] = [head_draw]
+        stature_draw = CharacterStatureText(character_id,width)
+        self.draw_list: List[draw.NormalDraw] = [head_draw,stature_draw]
         """ 绘制的面板列表 """
 
     def draw(self):
@@ -57,9 +59,7 @@ class CharacterInfoHead:
         self.max_width = width
         """ 当前最大可绘制宽度 """
         character_data = cache_contorl.character_data[character_id]
-        message = _(
-            f"No.{character_id} 姓名:{character_data.name} 称呼:{character_data.nick_name}"
-        )
+        message = _(f"No.{character_id} 姓名:{character_data.name} 称呼:{character_data.nick_name}")
         message_draw = draw.CenterDraw()
         message_draw.max_width = width / 2
         message_draw.text = message
@@ -100,3 +100,40 @@ class CharacterInfoHead:
             for label in draw_tuple:
                 label.draw()
             line_feed.draw()
+
+
+class CharacterStatureText:
+    """ 身材描述信息面板 """
+
+    def __init__(self, character_id: int, width: int):
+        """
+        初始化绘制对象
+        Keyword arguments:
+        character_id -- 角色id
+        width -- 最大宽度
+        """
+        self.character_id = character_id
+        """ 要绘制的角色id """
+        self.max_width = width
+        """ 当前最大可绘制宽度 """
+        player_data = cache_contorl.character_data[0]
+        description = attr_text.get_stature_text(character_id)
+        description = description.format(
+            Name=player_data.name,
+            NickName=player_data.nick_name,
+        )
+        self.description = description
+        """ 身材描述文本 """
+
+    def draw(self):
+        """ 绘制面板 """
+        line = draw.LineDraw(":",self.max_width)
+        line.draw()
+        info_draw = draw.CenterDraw()
+        info_draw.text = self.description
+        info_draw.max_width = self.max_width
+        info_draw.draw()
+        line_feed = draw.NormalDraw()
+        line_feed.text = "\n"
+        line_feed.max_width = 1
+        line_feed.draw()

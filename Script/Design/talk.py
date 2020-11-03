@@ -47,9 +47,7 @@ def handle_talk(character_id):
         for talk_id in cache_contorl.adv_talk_data[0][behavior_id]:
             now_weight = 1
             for premise in cache_contorl.premise_talk_table[0][behavior_id][talk_id]:
-                now_add_weight = cache_contorl.handle_premise_data[premise](
-                    character_id
-                )
+                now_add_weight = cache_contorl.handle_premise_data[premise](character_id)
                 if now_add_weight:
                     now_weight += now_add_weight
                 else:
@@ -64,12 +62,8 @@ def handle_talk(character_id):
         if behavior_id in adv_talk_data:
             for talk_id in adv_talk_data[behavior_id]:
                 now_weight = 1
-                for premise in cache_contorl.premise_talk_table[character_data.adv][
-                    behavior_id
-                ][talk_id]:
-                    now_add_weight = cache_contorl.handle_premise_data[premise](
-                        character_id
-                    )
+                for premise in cache_contorl.premise_talk_table[character_data.adv][behavior_id][talk_id]:
+                    now_add_weight = cache_contorl.handle_premise_data[premise](character_id)
                     if now_add_weight:
                         now_weight += now_add_weight
                     else:
@@ -84,9 +78,7 @@ def handle_talk(character_id):
     if len(now_adv_talk):
         adv_weight = max(list(now_adv_talk.keys()))
         now_talk_id = random.choice(list(now_adv_talk[adv_weight]))
-        now_talk = cache_contorl.adv_talk_data[character_data.adv][behavior_id][
-            now_talk_id
-        ]
+        now_talk = cache_contorl.adv_talk_data[character_data.adv][behavior_id][now_talk_id]
     if len(now_talk_data):
         talk_weight = max(list(now_talk_data.keys()))
         if talk_weight > adv_weight:

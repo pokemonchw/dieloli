@@ -58,9 +58,7 @@ def see_food_bag_list(food_name_list: list) -> list:
     now_page_start_id = now_page_id * now_page_max
     now_page_end_id = now_page_start_id + now_page_max
     if not len(food_name_list):
-        era_print.normal_print(
-            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "45")
-        )
+        era_print.normal_print(text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "45"))
         era_print.line_feed_print()
         return []
     if now_page_end_id > len(food_name_list):
@@ -88,9 +86,7 @@ def see_food_bag_list_by_food_uid(max_page: int, food_list: list) -> list:
     now_page_start_id = now_page_id * now_page_max
     now_page_end_id = now_page_start_id + now_page_max
     if not len(food_list):
-        era_print.normal_print(
-            text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "34")
-        )
+        era_print.normal_print(text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "34"))
         era_print.line_feed_print()
         return []
     if now_page_end_id > len(food_list):
@@ -101,24 +97,18 @@ def see_food_bag_list_by_food_uid(max_page: int, food_list: list) -> list:
     for i in range(now_page_start_id, now_page_end_id):
         now_food = food_list[i]
         if now_food.recipe == -1:
-            food_config = text_loading.get_text_data(
-                constant.FilePath.FOOD_PATH, now_food.id
-            )
+            food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, now_food.id)
             food_name = food_config["Name"]
         else:
             food_name = cache_contorl.recipe_data[now_food.recipe].name
         now_index = cmd_button_queue.id_index(tag_text_index)
         food_text = now_index + " " + food_name
-        food_text += " " + text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "154"
-        )
+        food_text += " " + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "154")
         if "Hunger" in now_food.feel:
             food_text += str(round(now_food.feel["Hunger"], 2))
         else:
             food_text += "0"
-        food_text += " " + text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "153"
-        )
+        food_text += " " + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "153")
         if "Thirsty" in now_food.feel:
             food_text += str(round(now_food.feel["Thirsty"], 2))
         else:
@@ -128,15 +118,9 @@ def see_food_bag_list_by_food_uid(max_page: int, food_list: list) -> list:
             + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "155")
             + str(now_food.weight)
         )
-        food_text += text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "156"
-        )
-        food_text += " " + text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "152"
-        )
-        food_text += text_loading.get_text_data(
-            constant.FilePath.STAGE_WORD_PATH, "151"
-        )[now_food.quality]
+        food_text += text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "156")
+        food_text += " " + text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "152")
+        food_text += text_loading.get_text_data(constant.FilePath.STAGE_WORD_PATH, "151")[now_food.quality]
         text_list.append(food_text)
         now_fix_text = text_handle.align(food_text, "center", True)
         if fix_text == "":
@@ -193,16 +177,14 @@ def eat_food_now_panel(now_food: game_type.Food) -> list:
     """
     now_text = ""
     if now_food.recipe == -1:
-        food_config = text_loading.get_text_data(
-            constant.FilePath.FOOD_PATH, now_food.id
+        food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, now_food.id)
+        now_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "44").format(
+            FoodName=food_config["Name"]
         )
-        now_text = text_loading.get_text_data(
-            constant.FilePath.MESSAGE_PATH, "44"
-        ).format(FoodName=food_config["Name"])
     else:
         food_recipe = cache_contorl.recipe_data[now_food.recipe]
-        now_text = text_loading.get_text_data(
-            constant.FilePath.MESSAGE_PATH, "44"
-        ).format(FoodName=food_recipe.name)
+        now_text = text_loading.get_text_data(constant.FilePath.MESSAGE_PATH, "44").format(
+            FoodName=food_recipe.name
+        )
     era_print.line_feed_print(now_text)
     return cmd_button_queue.option_int(constant.CmdMenu.EAT_FOOD_NOW_PANEL)
