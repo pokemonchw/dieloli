@@ -111,6 +111,13 @@ config_height_tem_sex_data: Dict[int, config_def.HeightTem] = {}
 """ 性别对应身高预期值模板 """
 config_hitpoint_tem: Dict[int, config_def.HitPointTem] = {}
 """ HP模板对应平均值 """
+config_item: Dict[int,config_def.Item] = {}
+""" 道具配置数据 """
+config_item_tag_data: Dict[str,Set] = {}
+"""
+道具标签配置数据
+标签:道具id集合
+"""
 config_knowledge: Dict[int, config_def.Knowledge] = {}
 """ 知识技能配置 """
 config_knowledge_type: Dict[int, config_def.KnowledgeType] = {}
@@ -518,6 +525,18 @@ def load_hitpoint_tem():
         config_hitpoint_tem[now_tem.cid] = now_tem
 
 
+def load_item():
+    """ 载入道具配置数据 """
+    now_data = config_data["Item"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Item()
+        now_tem.__dict__ = tem_data
+        config_item[now_tem.cid] = now_tem
+        config_item_tag_data.setdefault(now_tem.tag,set())
+        config_item_tag_data[now_tem.tag].add(now_tem.cid)
+
+
 def load_knowledge():
     """ 载入知识技能配置数据 """
     now_data = config_data["Knowledge"]
@@ -818,6 +837,7 @@ def init():
     load_food_quality_weight()
     load_height_tem()
     load_hitpoint_tem()
+    load_item()
     load_knowledge()
     load_knowledge_type()
     load_language_tem()

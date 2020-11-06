@@ -1,5 +1,5 @@
 from uuid import UUID
-from typing import List, Dict
+from typing import List, Dict, Set
 import datetime
 
 
@@ -98,8 +98,8 @@ class Character:
         角色拥有的服装数据
         服装穿戴位置:服装唯一id:服装数据
         """
-        self.item: dict = {}
-        """ 角色拥有的道具数据 """
+        self.item: Set = set()
+        """ 角色拥有的道具id集合 """
         self.height: Height = Height()
         """ 角色的身高数据 """
         self.weight: dict = {}
@@ -125,8 +125,10 @@ class Character:
         """
         self.mother_tongue: int = 0
         """ 角色母语 """
-        self.interest: Dict[str, int] = {}
+        self.knowledge_interest: Dict[int, int] = {}
         """ 角色天赋数据 """
+        self.language_interest: Dict[int,int] = {}
+        """ 角色语言天赋数据 """
         self.dormitory: str = "0"
         """ 角色宿舍坐标 """
         self.birthday: datetime.datetime = datetime.datetime(1, 1, 1)
@@ -149,8 +151,11 @@ class Character:
         """ 角色性格数据 """
         self.status: Dict[int, int] = {}
         """ 角色状态数据 状态id:状态数值 """
-        self.put_on: dict = {}
-        """ 角色已穿戴服装数据 """
+        self.put_on: Dict[int,UUID] = {}
+        """
+        角色已穿戴服装数据
+        穿着类型:服装id
+        """
         self.hit_point_tem: int = 1
         """ 角色HP模板 """
         self.mana_point_tem: int = 1
@@ -394,6 +399,8 @@ class Behavior:
         """ 行为id """
         self.move_target: List[str] = []
         """ 移动行为目标坐标 """
+        self.move_src: List[str] = []
+        """ 移动行为的出发坐标 """
         self.eat_food: Food = None
         """ 进食行为消耗的食物对象 """
         self.food_name: str = ""

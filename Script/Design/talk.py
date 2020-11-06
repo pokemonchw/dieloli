@@ -40,7 +40,7 @@ def handle_talk(character_id):
     character_id -- 角色id
     """
     character_data = cache_contorl.character_data[character_id]
-    behavior_id = character_data.behavior["BehaviorId"]
+    behavior_id = character_data.behavior.behavior_id
     era_print.line_feed_print()
     now_talk_data = {}
     if behavior_id in cache_contorl.adv_talk_data[0]:
@@ -89,12 +89,12 @@ def handle_talk(character_id):
         scene_path = cache_contorl.character_data[0].position
         scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
         scene_data = cache_contorl.scene_data[scene_path_str]
-        scene_name = scene_data["SceneName"]
+        scene_name = scene_data.scene_name
         player_data = cache_contorl.character_data[0]
         target_data = cache_contorl.character_data[character_data.target_character_id]
         now_talk_text = now_talk_text.format(
             NickName=character_data.nick_name,
-            FoodName=character_data.behavior["FoodName"],
+            FoodName=character_data.behavior.food_name,
             Name=character_data.name,
             SceneName=scene_name,
             PlayerNickName=player_data.nick_name,

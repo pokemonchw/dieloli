@@ -4,6 +4,7 @@ from functools import wraps
 from types import FunctionType
 from Script.Core import cache_contorl, constant
 from Script.Design import map_handle, game_time, attr_calculation
+from Script.Config import game_config
 
 
 def add_premise(premise: int) -> FunctionType:
@@ -54,7 +55,7 @@ def handle_in_cafeteria(character_id: int) -> int:
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
     now_scene_data = cache_contorl.scene_data[now_scene_str]
-    if now_scene_data["SceneTag"] == "Cafeteria":
+    if now_scene_data.scene_tag == "Cafeteria":
         return 1
     return 0
 
@@ -72,7 +73,7 @@ def handle_in_restaurant(character_id: int) -> int:
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
     now_scene_data = cache_contorl.scene_data[now_scene_str]
-    if now_scene_data["SceneTag"] == "Restaurant":
+    if now_scene_data.scene_tag == "Restaurant":
         return 1
     return 0
 
@@ -132,7 +133,7 @@ def handle_hunger(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    return math.floor(character_data.status["BodyFeeling"]["Hunger"] / 10)
+    return math.floor(character_data.status[27] / 10)
 
 
 @add_premise(constant.Premise.HAVE_FOOD)
@@ -209,8 +210,8 @@ def handle_have_item_by_tag_draw(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    for item in character_data.item:
-        if character_data.item[item]["ItemTag"] == "Draw":
+    for item_id in game_config.config_item_tag_data["Draw"]:
+        if item_id in character_data.item:
             return 1
     return 0
 
@@ -225,8 +226,8 @@ def handle_have_item_by_tag_shooting(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    for item in character_data.item:
-        if character_data.item[item]["ItemTag"] == "Shooting":
+    for item_id in game_config.config_item_tag_data["Shooting"]:
+        if item_id in character_data.item:
             return 1
     return 0
 
@@ -241,8 +242,7 @@ def handle_have_guitar(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    for item in character_data.item:
-        if item == "Guitar":
+    if 4 in character_data.item:
             return 1
     return 0
 
@@ -257,8 +257,7 @@ def handle_have_harmonica(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    for item in character_data.item:
-        if item == "Harmonica":
+    if 5 in character_data.item:
             return 1
     return 0
 
@@ -273,8 +272,7 @@ def handle_have_bamboogflute(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    for item in character_data.item:
-        if item == "BamBooFlute":
+    if 6 in character_data.item:
             return 1
     return 0
 
@@ -289,8 +287,7 @@ def handle_have_basketball(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    for item in character_data.item:
-        if item == "BasketBall":
+    if 0 in character_data.item:
             return 1
     return 0
 
@@ -305,8 +302,7 @@ def handle_have_football(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    for item in character_data.item:
-        if item == "FootBall":
+    if 1 in character_data.item:
             return 1
     return 0
 
@@ -321,8 +317,7 @@ def handle_have_tabletennis(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    for item in character_data.item:
-        if item == "TableTennis":
+    if 2 in character_data.item:
             return 1
     return 0
 
@@ -340,7 +335,7 @@ def handle_in_swimming_pool(character_id: int) -> int:
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
     now_scene_data = cache_contorl.scene_data[now_scene_str]
-    if now_scene_data["SceneTag"] == "SwimmingPool":
+    if now_scene_data.scene_tag == "SwimmingPool":
         return 1
     return 0
 
@@ -358,7 +353,7 @@ def handle_in_classroom(character_id: int) -> int:
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
     now_scene_data = cache_contorl.scene_data[now_scene_str]
-    if now_scene_data["SceneTag"] == "Classroom":
+    if now_scene_data.scene_tag == "Classroom":
         return 1
     return 0
 
@@ -406,7 +401,7 @@ def handle_in_shop(character_id: int) -> int:
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
     now_scene_data = cache_contorl.scene_data[now_scene_str]
-    if now_scene_data["SceneTag"] == "Shop":
+    if now_scene_data.scene_tag == "Shop":
         return 1
     return 0
 
@@ -421,7 +416,7 @@ def handle_in_sleep_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    now_time: datetime.datetime = character_data.behavior["StartTime"]
+    now_time: datetime.datetime = character_data.behavior.start_time
     if now_time.hour >= 22 or now_time.hour <= 4:
         return 1
     return 0
@@ -437,7 +432,7 @@ def handle_in_siesta_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    now_time: datetime.datetime = character_data.behavior["StartTime"]
+    now_time: datetime.datetime = character_data.behavior.start_time
     if now_time.hour >= 12 or now_time.hour <= 15:
         return 1
     return 0
@@ -454,7 +449,7 @@ def handle_target_is_futa_or_woman(character_id: int) -> int:
     """
     character_data = cache_contorl.character_data[character_id]
     target_data = cache_contorl.character_data[character_data.target_character_id]
-    if target_data.sex in {"Futa", "Woman"}:
+    if target_data.sex in {1, 2}:
         return 1
     return 0
 
@@ -470,7 +465,7 @@ def handle_target_is_futa_or_man(character_id: int) -> int:
     """
     character_data = cache_contorl.character_data[character_id]
     target_data = cache_contorl.character_data[character_data.target_character_id]
-    if target_data.sex in {"Man", "Woman"}:
+    if target_data.sex in {0, 1}:
         return 1
     return 0
 
@@ -485,7 +480,7 @@ def handle_is_man(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    if character_data.sex == "Man":
+    if not character_data.sex:
         return 1
     return 0
 
@@ -500,7 +495,7 @@ def handle_is_woman(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    if character_data.sex == "Woman":
+    if character_data.sex == 1:
         return 1
     return 0
 
@@ -551,8 +546,8 @@ def handle_target_average_height_similar(character_id: int) -> int:
     age_tem = attr_calculation.judge_age_group(target_data.age)
     average_height = cache_contorl.average_height_by_age[age_tem][target_data.sex]
     if (
-        target_data.height["NowHeight"] >= average_height * 0.95
-        and target_data.height["NowHeight"] <= average_height * 1.05
+        target_data.height.now_height >= average_height * 0.95
+        and target_data.height.now_height <= average_height * 1.05
     ):
         return 1
     return 0
@@ -571,7 +566,7 @@ def handle_target_average_height_low(character_id: int) -> int:
     target_data = cache_contorl.character_data[character_data.target_character_id]
     age_tem = attr_calculation.judge_age_group(target_data.age)
     average_height = cache_contorl.average_height_by_age[age_tem][target_data.sex]
-    if target_data.height["NowHeight"] <= average_height * 0.95:
+    if target_data.height.now_height <= average_height * 0.95:
         return 1
     return 0
 
@@ -621,7 +616,7 @@ def handle_target_not_put_underwear(character_id: int) -> int:
     """
     character_data = cache_contorl.character_data[character_id]
     target_data = cache_contorl.character_data[character_data.target_character_id]
-    if target_data.put_on["Underwear"] == "":
+    if (1 not in target_data.put_on) or (target_data.put_on[1] == ""):
         return 1
     return 0
 
@@ -637,7 +632,7 @@ def handle_target_put_on_skirt(character_id: int) -> int:
     """
     character_data = cache_contorl.character_data[character_id]
     target_data = cache_contorl.character_data[character_data.target_character_id]
-    if target_data.put_on["Skirt"] == "":
+    if (3 not in target_data.put_on) or (target_data.put_on[3] == ""):
         return 0
     return 1
 
@@ -695,7 +690,7 @@ def handle_leave_player_scene(character_id: int) -> int:
     int -- 权重
     """
     now_character_data = cache_contorl.character_data[character_id]
-    if now_character_data.behavior["MoveSrc"] == cache_contorl.character_data[0].position:
+    if now_character_data.behavior.move_src == cache_contorl.character_data[0].position:
         return 1
     return 0
 
@@ -711,7 +706,7 @@ def handle_target_is_adore(character_id: int) -> int:
     """
     character_data = cache_contorl.character_data[character_id]
     target_id = character_data.target_character_id
-    if target_id in character_data.social_contact["Adore"]:
+    if target_id in character_data.social_contact[5]:
         return 1
     return 0
 
@@ -727,7 +722,7 @@ def handle_target_is_admire(character_id: int) -> int:
     """
     character_data = cache_contorl.character_data[character_id]
     target_id = character_data.target_character_id
-    if target_id in character_data.social_contact["Admire"]:
+    if target_id in character_data.social_contact[4]:
         return 1
     return 0
 
@@ -742,7 +737,7 @@ def handle_player_is_adore(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    if 0 in character_data.social_contact["Adore"]:
+    if 0 in character_data.social_contact[5]:
         return 1
     return 0
 
@@ -757,6 +752,6 @@ def handle_eat_spring_food(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache_contorl.character_data[character_id]
-    if character_data.behavior["FoodQuality"] == 4:
+    if character_data.behavior.food_quality == 4:
         return 1
     return 0

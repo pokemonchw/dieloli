@@ -172,15 +172,15 @@ def init_now_course_time_slice(character_id: int):
         phase = 12
     if phase <= 5:
         character_data.course = init_primary_school_course_time_status(
-            character_data.behavior["StartTime"], teacher_id
+            character_data.behavior.start_time, teacher_id
         )
     elif phase <= 11:
         character_data.course = init_junior_middle_school_course_time_status(
-            character_data.behavior["StartTime"], teacher_id
+            character_data.behavior.start_time, teacher_id
         )
     else:
         character_data.course = init_senior_high_school_course_time_status(
-            character_data.behavior["StartTime"], teacher_id
+            character_data.behavior.start_time, teacher_id
         )
     character_data.course.phase = phase
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-06 15:09+0800\n"
+"POT-Creation-Date: 2020-11-06 17:22+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -270,27 +270,45 @@ msgstr ""
 msgid "{character_data.nick_name}是一个心直口快，想到什么说什么的人对吗？"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:62
+#: ../Script/UI/Panel/see_character_info_panel.py:63
 #, python-brace-format
 msgid ""
 "No.{character_id} 姓名:{character_data.name} 称呼:{character_data.nick_name}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:72
+#: ../Script/UI/Panel/see_character_info_panel.py:73
 msgid "体力"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:80
+#: ../Script/UI/Panel/see_character_info_panel.py:81
 msgid "气力"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:85
+#: ../Script/UI/Panel/see_character_info_panel.py:86
 #, python-brace-format
 msgid "状态:{status_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:97
+#: ../Script/UI/Panel/see_character_info_panel.py:98
 msgid "人物属性"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:162
+#, python-brace-format
+msgid "宿舍位置:{dormitory_text}"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:164
+msgid "教室位置:"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:170
+#: ../Script/UI/Panel/see_character_info_panel.py:180
+msgid "暂无"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:175
+msgid "办公室位置:"
 msgstr ""
 
 #: class:SexTem id:0 type:name
@@ -2419,6 +2437,70 @@ msgstr ""
 
 #: class:CharacterState id:28 type:name
 msgid "口渴"
+msgstr ""
+
+#: class:Item id:0 type:name
+msgid "篮球"
+msgstr ""
+
+#: class:Item id:0 type:info
+msgid "正圆形，使用皮，橡胶或合成物质等材质制成外皮的球类"
+msgstr ""
+
+#: class:Item id:1 type:name
+msgid "足球"
+msgstr ""
+
+#: class:Item id:1 type:info
+msgid "基于此种球的比赛是全世界最流行的运动项目"
+msgstr ""
+
+#: class:Item id:2 type:name
+msgid "乒乓球"
+msgstr ""
+
+#: class:Item id:2 type:info
+msgid "由网球发展而来，因用木板敲击会发出乒乒乓乓的声音而得名"
+msgstr ""
+
+#: class:Item id:3 type:name
+msgid "便携画具"
+msgstr ""
+
+#: class:Item id:3 type:info
+msgid "便于携带的全套绘画工具，以能够随时随地作画为目的而设计"
+msgstr ""
+
+#: class:Item id:4 type:name
+msgid "吉他"
+msgstr ""
+
+#: class:Item id:4 type:info
+msgid "备受喜爱的乐器，在过去，一边弹着吉他一边唱歌的街头歌手很受女孩们欢迎"
+msgstr ""
+
+#: class:Item id:5 type:name
+msgid "口琴"
+msgstr ""
+
+#: class:Item id:5 type:info
+msgid "用嘴吹气或吸气，使金属簧片发声的多簧片乐器"
+msgstr ""
+
+#: class:Item id:6 type:name
+msgid "竹笛"
+msgstr ""
+
+#: class:Item id:6 type:info
+msgid "广为流传的吹奏乐器，由天然竹材制成"
+msgstr ""
+
+#: class:Item id:7 type:name
+msgid "弓箭"
+msgstr ""
+
+#: class:Item id:7 type:info
+msgid "传统而古老的的射击武器，需要掌握一定的技巧才能够进行有效的攻击"
 msgstr ""
 
 #: class:Status id:0 type:name

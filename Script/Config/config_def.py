@@ -580,6 +580,19 @@ class CharacterState:
     """ 状态类型 """
 
 
+class Item:
+    """ 道具配置数据 """
+
+    cid: int
+    """ 道具id """
+    name: str
+    """ 道具名 """
+    tag: str
+    """ 标签 """
+    info: str
+    """ 描述 """
+
+
 class Status:
     """ 状态描述配置 """
 

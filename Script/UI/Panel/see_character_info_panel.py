@@ -3,7 +3,7 @@ from types import FunctionType
 from Script.UI.Moudle import draw
 from Script.Core import cache_contorl, get_text
 from Script.Config import game_config
-from Script.Design import attr_text
+from Script.Design import attr_text,map_handle
 
 panel_info_data = {}
 
@@ -36,7 +36,8 @@ class SeeCharacterInfoPanel:
         """ 要绘制的角色id """
         head_draw = CharacterInfoHead(character_id, width)
         stature_draw = CharacterStatureText(character_id,width)
-        self.draw_list: List[draw.NormalDraw] = [head_draw,stature_draw]
+        room_draw = CharacterRoomText(character_id,width)
+        self.draw_list: List[draw.NormalDraw] = [head_draw,stature_draw,room_draw]
         """ 绘制的面板列表 """
 
     def draw(self):
@@ -133,6 +134,62 @@ class CharacterStatureText:
         info_draw.text = self.description
         info_draw.max_width = self.max_width
         info_draw.draw()
+        line_feed = draw.NormalDraw()
+        line_feed.text = "\n"
+        line_feed.max_width = 1
+        line_feed.draw()
+
+class CharacterRoomText:
+    """ 角色宿舍/教室和办公室地址显示面板 """
+
+    def __init__(self,character_id: int,width: int):
+        """
+        初始化绘制对象
+        Keyword arguments:
+        character_id -- 角色id
+        width -- 最大宽度
+        """
+        self.character_id = character_id
+        """ 要绘制的角色id """
+        self.max_width = width
+        """ 当前最大可绘制宽度 """
+        character_data = cache_contorl.character_data[self.character_id]
+        dormitory = character_data.dormitory
+        dormitory_path = map_handle.get_map_system_path_for_str(dormitory)
+        dormitory_text = attr_text.get_scene_path_text(dormitory_path)
+        dormitory_draw = draw.CenterDraw()
+        dormitory_draw.max_width = width / 3
+        dormitory_draw.text = _(f"宿舍位置:{dormitory_text}")
+        classroom = character_data.classroom
+        now_classroom_text = _("教室位置:")
+        if classroom != "":
+            classroom_path = map_handle.get_map_system_path_for_str(classroom)
+            classroom_text = attr_text.get_scene_path_text(classroom_path)
+            now_classroom_text += classroom_text
+        else:
+            now_classroom_text += _("暂无")
+        classroom_draw = draw.CenterDraw()
+        classroom_draw.max_width = width / 3
+        classroom_draw.text = now_classroom_text
+        officeroom = character_data.officeroom
+        now_officeroom_text = _("办公室位置:")
+        if len(officeroom):
+            officeroom_text = attr_text.get_scene_path_text(officeroom)
+            now_officeroom_text += officeroom_text
+        else:
+            now_officeroom_text += _("暂无")
+        officeroom_draw = draw.CenterDraw()
+        officeroom_draw.max_width = width / 3
+        officeroom_draw.text = now_officeroom_text
+        self.draw_list:List[draw.NormalDraw] = [dormitory_draw,classroom_draw,officeroom_draw]
+        """ 绘制的文本列表 """
+
+    def draw(self):
+        """ 绘制面板 """
+        line = draw.LineDraw(".",self.max_width)
+        line.draw()
+        for now_draw in self.draw_list:
+            now_draw.draw()
         line_feed = draw.NormalDraw()
         line_feed.text = "\n"
         line_feed.max_width = 1

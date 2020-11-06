@@ -1,11 +1,13 @@
 import random
 import bisect
+from typing import List
 from Script.Core import (
     cache_contorl,
     constant,
 )
 from Script.Design import (
     handle_premise,
+    map_handle
 )
 from Script.Config import game_config
 
@@ -68,3 +70,22 @@ def get_stature_text(character_id: int) -> str:
         max_weight = max(descript_data.keys())
         return random.choice(list(descript_data[max_weight]))
     return ""
+
+def get_scene_path_text(scene_path:List[str]) -> str:
+    """
+    从场景路径获取场景地址描述文本
+    例:主教学楼-1F-101室
+    Keyword arguments:
+    scene_path -- 场景路径
+    Return arguments:
+    str -- 场景地址描述文本
+    """
+    map_list = map_handle.get_map_hierarchy_list_for_scene_path(scene_path,[])
+    map_list.reverse()
+    scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
+    scene_path_text = ""
+    for now_map in map_list:
+            now_map_map_system_str = map_handle.get_map_system_path_str_for_list(now_map)
+            map_name = cache_contorl.map_data[now_map_map_system_str].map_name
+            scene_path_text += map_name + "-"
+    return scene_path_text + cache_contorl.scene_data[scene_path_str].scene_name

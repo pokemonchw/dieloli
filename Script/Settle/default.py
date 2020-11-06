@@ -17,7 +17,7 @@ def settle_rest(character_id: int):
     character_id -- 角色id
     """
     character_data = cache_contorl.character_data[character_id]
-    start_time = character_data.behavior["StartTime"]
+    start_time = character_data.behavior.start_time
     now_time = cache_contorl.game_time
     add_time = int((now_time - start_time).seconds / 60)
     add_hit_point = add_time * 5
@@ -67,25 +67,21 @@ def settle_eat(character_id: int):
             now_feel_value = food.feel[feel]
             now_feel_value = now_feel_value / food.weight
             now_feel_value *= eat_weight
-            if feel in character_data.status["BodyFeeling"]:
-                if feel in ("Hunger", "Thirsty"):
-                    character_data.status["BodyFeeling"][feel] -= now_feel_value
-                    if character_data.status["BodyFeeling"][feel] < 0:
-                        character_data.status["BodyFeeling"][feel] = 0
+            if feel in character_data.status:
+                if feel in {27, 28}:
+                    character_data.status[feel] -= now_feel_value
+                    if character_data.status[feel] < 0:
+                        character_data.status[feel] = 0
                 else:
-                    character_data.status["BodyFeeling"][feel] += now_feel_value
-            elif feel in character_data.status["SexFeel"]:
-                character_data.status["SexFeel"][feel] += now_feel_value
-            elif feel in character_data.status["PsychologicalFeeling"]:
-                character_data.status["PsychologicalFeeling"][feel] += now_feel_value
+                    character_data.status[feel] += now_feel_value
         food.weight -= eat_weight
         food_name = ""
         if food.recipe == -1:
-            food_config = text_loading.get_game_data(constant.FilePath.FOOD_PATH, food.id)
-            food_name = food_config["Name"]
+            food_config = game_config.config_food[food.id]
+            food_name = food_config.name
         else:
             food_name = cache_contorl.recipe_data[food.recipe].name
-        character_data.behavior["FoodName"] = food_name
-        character_data.behavior["FoodQuality"] = food.quality
+        character_data.behavior.food_name = food_name
+        character_data.behavior.food_quality = food.quality
         if food.weight <= 0:
             del character_data.food_bag[food.uid]

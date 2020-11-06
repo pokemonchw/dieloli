@@ -51,20 +51,20 @@ def handle_rest():
     """
     character.init_character_behavior_start_time(0)
     character_data = cache_contorl.character_data[0]
-    character_data.behavior["Duration"] = 10
-    character_data.behavior["BehaviorId"] = constant.Behavior.REST
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.REST
     character_data.state = constant.CharacterStatus.STATUS_REST
     if character_data.hit_point > character_data.hit_point_max:
         character_data.hit_point = character_data.hit_point_max
     target_character = cache_contorl.character_data[character_data.target_character_id]
     if (
         target_character.state == constant.CharacterStatus.STATUS_ARDER
-        and target_character.behavior["BehaviorId"] == constant.Behavior.SHARE_BLANKLY
+        and target_character.behavior.behavior_id == constant.Behavior.SHARE_BLANKLY
     ):
         target_character.state = constant.CharacterStatus.STATUS_REST
         character.init_character_behavior_start_time(character_data.target_character_id)
-        target_character.behavior["Duration"] = 10
-        target_character.behavior["BehaviorId"] = constant.Behavior.REST
+        target_character.behavior.duration = 10
+        target_character.behavior.behavior_id = constant.Behavior.REST
     update.game_update_flow(10)
 
 
@@ -85,8 +85,8 @@ def handle_eat():
     judge, now_food = eat_food.eat_food()
     if judge:
         character_data = cache_contorl.character_data[0]
-        character_data.behavior["BehaviorId"] = constant.Behavior.EAT
-        character_data.behavior["EatFood"] = now_food
-        character_data.behavior["Duration"] = 1
+        character_data.behavior.behavior_id = constant.Behavior.EAT
+        character_data.behavior.eat_food = now_food
+        character_data.behavior.duration = 1
         character_data.state = constant.CharacterStatus.STATUS_EAT
     update.game_update_flow(1)
