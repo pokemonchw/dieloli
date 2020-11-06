@@ -5,8 +5,6 @@ import time
 from Script.Core import (
     cache_contorl,
     value_handle,
-    game_data,
-    text_loading,
     game_path_config,
     constant,
     game_type,
@@ -31,6 +29,8 @@ def init_character_list():
         init_character(now_id, now_npc_data)
     index_character_average_value()
     calculate_the_average_value_of_each_attribute_of_each_age_group()
+    for character_id in cache_contorl.character_data:
+        now_character = cache_contorl.character_data[character_id]
 
 
 def calculate_the_average_value_of_each_attribute_of_each_age_group():
@@ -120,10 +120,10 @@ def init_character_tem():
 
 random_npc_max = normal_config.config_normal.random_npc_max
 random_teacher_proportion = normal_config.config_normal.proportion_teacher
-random_student_proportion = normal_config.config_normal.proportion_student)
+random_student_proportion = normal_config.config_normal.proportion_student
 age_weight_data = {
-    "1": random_teacher_proportion,
-    "0": random_student_proportion,
+    "teacher": random_teacher_proportion,
+    "student": random_student_proportion,
 }
 age_weight_regin_data = value_handle.get_region_list(age_weight_data)
 age_weight_regin_list = list(map(int, age_weight_regin_data.keys()))
@@ -167,80 +167,80 @@ def create_random_npc(id) -> dict:
     cache_contorl.random_npc_list.append(random_npc_new_data)
 
 
-sex_weight_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "RandomNpcSexWeight")
-sex_weight_max = sum([int(sex_weight_data[weight]) for weight in sex_weight_data])
+sex_weight_data = game_config.config_random_npc_sex_region
+sex_weight_max = sum([sex_weight_data[weight] for weight in sex_weight_data])
 sex_weight_regin_data = value_handle.get_region_list(sex_weight_data)
 sex_weight_regin_list = list(map(int, sex_weight_regin_data.keys()))
 
 
-def get_rand_npc_sex() -> str:
+def get_rand_npc_sex() -> int:
     """
     随机获取npc性别
+    Return arguments:
+    int -- 性别id
     """
     now_weight = random.randint(0, sex_weight_max - 1)
     weight_regin = value_handle.get_next_value_for_list(now_weight, sex_weight_regin_list)
     return sex_weight_regin_data[weight_regin]
 
 
-fat_weight_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "FatWeight")
-
-
-def get_rand_npc_fat_tem(age_judge: str) -> str:
+def get_rand_npc_fat_tem(age_judge: str) -> int:
     """
-    按人群年龄段体重分布比例随机生成体重模板
+    按人群年龄段体重分布比例随机生成重模板
     Keyword arguments:
-    agejudge -- 年龄段
+    age_judge -- 职业(student:学生,teacher:老师)
+    Return arguments:
+    int -- 体重模板id
     """
-    now_fat_weight_data = fat_weight_data[age_judge]
-    now_fat_tem = value_handle.get_random_for_weight(fat_weight_data)
+    now_fat_weight_data = game_config.config_occupation_bmi_region_data[age_judge]
+    now_fat_tem = value_handle.get_random_for_weight(now_fat_weight_data)
     return now_fat_tem
 
 
-def get_rand_npc_sex_experience_tem(age: int, sex: str) -> str:
+def get_rand_npc_sex_experience_tem(age: int, sex: int) -> int:
     """
     按年龄范围随机获取性经验模板
     Keyword arguments:
     age -- 年龄
     sex -- 性别
+    Return arguments:
+    int -- 性经验模板id
     """
-    age_judge_sex_experience_tem_data = text_loading.get_text_data(
-        constant.FilePath.ATTR_TEMPLATE_PATH, "AgeJudgeSexExperienceTem"
-    )
-    if sex == "Asexual":
-        sex = "Woman"
-    if sex == "Futa":
-        sex = "Man"
+    age_judge_sex_experience_tem_data = game_config.config_age_judge_sex_experience_tem_data
+    if sex == 3:
+        sex = 1
+    if sex == 2:
+        sex = 0
     now_tem_data = age_judge_sex_experience_tem_data[sex]
     age_region_list = [int(i) for i in now_tem_data.keys()]
-    age_region = str(value_handle.get_old_value_for_list(age, age_region_list))
-    age_regionData = now_tem_data[age_region]
-    return value_handle.get_random_for_weight(age_regionData)
+    age_region = value_handle.get_old_value_for_list(age, age_region_list)
+    age_region_data = now_tem_data[age_region]
+    return value_handle.get_random_for_weight(age_region_data)
 
 
-body_fat_weight_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "BodyFatWeight")
+body_fat_weight_data = game_config.config_occupation_bodyfat_region_data
 
 
 def get_rand_npc_body_fat_tem(age_judge: str, bmi_tem: str) -> str:
     """
-    按年龄段体脂率分布比例随机生成体脂率模板
+    按职业和体重随机生成体脂率模板
     Keyword arguments:
-    age_judge -- 年龄段
+    age_judge -- 职业(student:学生,teacher:老师)
     bmi_tem -- bmi模板
     """
-    now_body_fat_data = body_fat_weight_data[age_judge][bmi_tem]
+    now_body_fat_data = game_config.config_occupation_bodyfat_region_data[age_judge][bmi_tem]
     return value_handle.get_random_for_weight(now_body_fat_data)
-
-
-age_tem_weight_data = text_loading.get_text_data(constant.FilePath.ATTR_TEMPLATE_PATH, "AgeWeight")
 
 
 def get_rand_npc_age_tem(age_judge: str) -> int:
     """
-    按年龄断随机生成npc年龄
+    按职业断随机生成npc年龄段id
     Keyword arguments:
-    age_judge -- 年龄段
+    age_judge -- 职业(student:学生,teacher:老师)
+    Return arguments:
+    int -- 年龄段id
     """
-    now_age_weight_data = age_tem_weight_data[age_judge]
+    now_age_weight_data = game_config.config_occupation_age_region_data[age_judge]
     now_age_tem = value_handle.get_random_for_weight(now_age_weight_data)
     return now_age_tem
 
@@ -255,19 +255,19 @@ def init_character_dormitory():
             character_id: cache_contorl.character_data[character_id].age
             for character_id in cache_contorl.character_data
             if cache_contorl.character_data[character_id].age < 18
-            and cache_contorl.character_data[character_id].sex == "Man"
+            and cache_contorl.character_data[character_id].sex == 0
         },
         "Woman": {
             character_id: cache_contorl.character_data[character_id].age
             for character_id in cache_contorl.character_data
             if cache_contorl.character_data[character_id].age < 18
-            and cache_contorl.character_data[character_id].sex == "Woman"
+            and cache_contorl.character_data[character_id].sex == 1
         },
         "Other": {
             character_id: cache_contorl.character_data[character_id].age
             for character_id in cache_contorl.character_data
             if cache_contorl.character_data[character_id].age < 18
-            and cache_contorl.character_data[character_id].sex not in {"Man": 0, "Woman": 1}
+            and cache_contorl.character_data[character_id].sex not in {0,1}
         },
         "Teacher": {
             character_id: cache_contorl.character_data[character_id].age

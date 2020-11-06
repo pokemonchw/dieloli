@@ -9,6 +9,8 @@ class SexTem:
     """ 是否有男性器官 """
     has_woman_organ: bool
     """ 是否有女性器官 """
+    region: int
+    """ 随机npc生成性别权重 """
 
 
 class BarConfig:
@@ -94,6 +96,19 @@ class Course:
     """ 课程id """
     name: str
     """ 名字 """
+
+
+class OccupationBMIRegion:
+    """ 学生和老师各自肥胖率配置 """
+
+    cid: int
+    """ 区间id """
+    occupation: str
+    """ 职业 """
+    bmi_type: int
+    """ bmi类型 """
+    region: int
+    """ 权重区间 """
 
 
 class CharacterStateType:
@@ -367,17 +382,6 @@ class Book:
     """ 介绍 """
 
 
-class RandomNpcSexWeight:
-    """ 生成随机npc时性别权重 """
-
-    cid: int
-    """ 模板id """
-    sex: int
-    """ 性别id """
-    weight: int
-    """ 权重 """
-
-
 class ManaPointTem:
     """ mp模板对应平均值 """
 
@@ -412,14 +416,16 @@ class SexExperience:
 
 
 class OccupationBodyFatRegion:
-    """ 学生和老师各自肥胖率配置 """
+    """ 年龄段下体重对应各体脂率范围权重 """
 
     cid: int
-    """ 区间id """
+    """ 模板id """
     occupation: str
     """ 职业 """
+    bmi_id: int
+    """ 体重模板 """
     bodyfat_type: int
-    """ 体脂率类型 """
+    """ 体脂率模板 """
     region: int
     """ 权重区间 """
 

@@ -63,9 +63,9 @@ class Character:
     def __init__(self):
         self.id: int = 0
         """ 角色id """
-        self.name: str = "主人公"
+        self.name: str = ""
         """ 角色名字 """
-        self.nick_name: str = "你"
+        self.nick_name: str = ""
         """ 他人对角色的称呼 """
         self.sex: int = 0
         """ 角色性别 """

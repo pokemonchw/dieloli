@@ -180,7 +180,7 @@ def get_body_fat(sex: int, tem_name: int) -> float:
     float -- 体脂率
     """
     sex_tem = sex in (0, 3)
-    tem_data_id = game_config.config_body_fat_tem_data[sex][tem_name]
+    tem_data_id = game_config.config_body_fat_tem_data[sex_tem][tem_name]
     tem_data = game_config.config_body_fat_tem[tem_data_id]
     return random.uniform(tem_data.min_value, tem_data.max_value)
 

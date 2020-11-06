@@ -140,12 +140,19 @@ config_occupation_age_region_data: Dict[str,Dict[int,int]] = {}
 学生和老师各自年龄段生成概率配置
 职业id:年龄段:权重
 """
+config_occupation_bmi_region: Dict[int,config_def.OccupationBMIRegion] = {}
+""" 学生和老师各自bmi范围权重配置 """
+config_occupation_bmi_region_data: Dict[str,Dict[int,int]] = {}
+"""
+学生和老师各自bmi范围权重配置数据
+职业id:bmi模板id:权重区间
+"""
 config_occupation_bodyfat_region: Dict[int,config_def.OccupationBodyFatRegion] = {}
-""" 学生和老师各自肥胖率配置 """
-config_occupation_bodyfat_region_data: Dict[str,Dict[int,int]] = {}
+""" 学生和老师各自体脂率范围配置 """
+config_occupation_bodyfat_region_data: Dict[str,Dict[int,Dict[int,int]]] = {}
 """
 学生和老师各自肥胖率配置数据
-职业id:体脂率模板:权重区间
+职业id:体重范围:体脂率范围:权重区间
 """
 config_organ: Dict[int, config_def.Organ] = {}
 """ 器官种类配置 """
@@ -154,8 +161,6 @@ config_organ_data: Dict[int, Set] = {}
 性别对应器官列表配置数据
 性别 0:女 1:男 2: 通用
 """
-config_random_sex_weight: Dict[int, config_def.RandomNpcSexWeight] = {}
-""" 生成随机npc时性别权重配置数据 """
 config_recipes: Dict[int, config_def.Recipes] = {}
 """ 菜谱配置 """
 config_recipes_formula: Dict[int, config_def.RecipesFormula] = {}
@@ -187,6 +192,11 @@ config_sex_experience_tem_data: Dict[int, Dict[int, int]] = {}
 """
 config_sex_tem: Dict[int, config_def.SexTem] = {}
 """ 性别对应描述和性别器官模板 """
+config_random_npc_sex_region: Dict[int,int] = {}
+"""
+生成随机npc时性别权重
+性别:权重
+"""
 config_social_type: Dict[int, config_def.SocialType] = {}
 """ 关系类型配置数据 """
 config_stature_description_premise: Dict[int, config_def.StatureDescriptionPremise] = {}
@@ -584,8 +594,20 @@ def load_occupation_age_region():
         config_occupation_age_region_data[now_tem.occupation][now_tem.age_region] = now_tem.region
 
 
+def load_occupation_bmi_region():
+    """ 载入学生和老师各自bmi范围权重配置 """
+    now_data = config_data["OccupationBMIRegion"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.OccupationBMIRegion()
+        now_tem.__dict__ = tem_data
+        config_occupation_bmi_region[now_tem.cid] = now_tem
+        config_occupation_bmi_region_data.setdefault(now_tem.occupation,{})
+        config_occupation_bmi_region_data[now_tem.occupation][now_tem.bmi_type] = now_tem.region
+
+
 def load_occupation_bodyfat_region():
-    """ 载入学生和老师各自肥胖率配置数据 """
+    """ 载入学生和老师各自体致率配置数据 """
     now_data = config_data["OccupationBodyFatRegion"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -593,7 +615,8 @@ def load_occupation_bodyfat_region():
         now_tem.__dict__ = tem_data
         config_occupation_bodyfat_region[now_tem.cid] = now_tem
         config_occupation_bodyfat_region_data.setdefault(now_tem.occupation,{})
-        config_occupation_bodyfat_region_data[now_tem.occupation][now_tem.bodyfat_type] = now_tem.region
+        config_occupation_bodyfat_region_data[now_tem.occupation].setdefault(now_tem.bmi_id,{})
+        config_occupation_bodyfat_region_data[now_tem.occupation][now_tem.bmi_id][now_tem.bodyfat_type] = now_tem.region
 
 
 def load_organ_data():
@@ -606,16 +629,6 @@ def load_organ_data():
         config_organ[now_tem.cid] = now_tem
         config_organ_data.setdefault(now_tem.organ_type, set())
         config_organ_data[now_tem.organ_type].add(now_tem.cid)
-
-
-def load_random_sex_weight():
-    """ 载入生成随机npc时性别权重配置数据 """
-    now_data = config_data["RandomNpcSexWeight"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.RandomNpcSexWeight()
-        now_tem.__dict__ = tem_data
-        config_random_sex_weight[now_tem.cid] = now_tem
 
 
 def load_recipes():
@@ -702,6 +715,7 @@ def load_sex_tem():
         now_tem = config_def.SexTem()
         now_tem.__dict__ = tem_data
         config_sex_tem[now_tem.cid] = now_tem
+        config_random_npc_sex_region[now_tem.cid] = now_tem.region
 
 
 def load_social_type():
@@ -811,9 +825,9 @@ def init():
     load_nature()
     load_nature_tag()
     load_occupation_age_region()
+    load_occupation_bmi_region()
     load_occupation_bodyfat_region()
     load_organ_data()
-    load_random_sex_weight()
     load_recipes()
     load_recipes_formula()
     load_recipes_formula_type()
