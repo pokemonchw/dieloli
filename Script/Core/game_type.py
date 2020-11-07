@@ -102,7 +102,7 @@ class Character:
         """ 角色拥有的道具id集合 """
         self.height: Height = Height()
         """ 角色的身高数据 """
-        self.weight: dict = {}
+        self.weight: float = 0
         """ 角色的体重数据 """
         self.measurements: Measurements = Measurements()
         """ 角色的三围数据 """
@@ -129,7 +129,7 @@ class Character:
         """ 角色天赋数据 """
         self.language_interest: Dict[int,int] = {}
         """ 角色语言天赋数据 """
-        self.dormitory: str = "0"
+        self.dormitory: str = ""
         """ 角色宿舍坐标 """
         self.birthday: datetime.datetime = datetime.datetime(1, 1, 1)
         """ 角色生日数据 """
@@ -375,15 +375,15 @@ class Height:
     """ 身高数据结构体 """
 
     def __init__(self):
-        self.now_height: int = 0
+        self.now_height: float = 0
         """ 当前身高 """
-        self.growth_height: int = 0
+        self.growth_height: float = 0
         """ 每日身高增量 """
         self.expect_age: int = 0
         """ 预期结束身高增长年龄 """
         self.development_age: int = 0
         """ 预期发育期结束时间 """
-        self.expect_height: int = 0
+        self.expect_height: float = 0
         """ 预期的最终身高 """
 
 
@@ -422,7 +422,7 @@ class Map:
         地图下场景通行路径
         场景id:可直达场景id:移动所需时间
         """
-        self.map_draw: MapDraw = ""
+        self.map_draw: MapDraw = MapDraw()
         """ 地图绘制数据 """
         self.sorted_path: Dict[str, Dict[str, TargetPath]] = {}
         """

@@ -1,4 +1,4 @@
-from Script.Core import cache_contorl, era_print, constant
+from Script.Core import cache_contorl, constant
 from Script.Design import map_handle, game_time, update, character
 
 
@@ -18,8 +18,6 @@ def own_charcter_move(target_scene: list):
                 now_need_time,
             ) = character_move(0, target_scene)
             if move_now == "Null":
-                null_message = "该地点不可达"
-                era_print.normal_print(null_message)
                 break
             character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
             character_data.behavior["MoveTarget"] = now_target_position

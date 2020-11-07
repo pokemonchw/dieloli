@@ -1,62 +1,12 @@
 import os
 import time
 from Script.Core import (
-    era_print,
     py_cmd,
     cache_contorl,
     value_handle,
     text_handle,
+    game_type
 )
-
-
-def print_map(map_path: list) -> list:
-    """
-    按地图路径绘制地图
-    Ketword arguments:
-    map_path -- 地图路径
-    """
-    map_path_str = get_map_system_path_str_for_list(map_path)
-    map_draw = get_map_draw_for_map_path(map_path_str)
-    character_position = cache_contorl.character_data[0].position
-    character_now_scene_id = get_scene_id_in_map_for_scene_path_on_map_path(character_position, map_path)
-    input_s = []
-    map_y_list = map_draw["Draw"]
-    map_x_cmd_list_data = map_draw["Cmd"]
-    map_x_cmd_id_list_data = map_draw["CmdId"]
-    for map_x_list_id in range(len(map_y_list)):
-        map_x_list = map_y_list[map_x_list_id]
-        now_cmd_list = map_x_cmd_list_data[map_x_list_id]
-        now_cmd_id_list = map_x_cmd_id_list_data[map_x_list_id]
-        cmd_list_str = "".join(now_cmd_list)
-        era_print.normal_print(
-            text_handle.align(map_x_list + cmd_list_str, "center", True),
-            rich_text_judge=False,
-        )
-        i = 0
-        while i in range(len(map_x_list)):
-            if now_cmd_id_list != []:
-                while i == now_cmd_id_list[0]:
-                    if now_cmd_list[0] == character_now_scene_id:
-                        era_print.normal_print(now_cmd_list[0], "nowmap", rich_text_judge=False)
-                        input_s.append(None)
-                    else:
-                        py_cmd.pcmd(now_cmd_list[0], now_cmd_list[0], None)
-                        input_s.append(now_cmd_list[0])
-                    now_cmd_list = now_cmd_list[1:]
-                    now_cmd_id_list = now_cmd_id_list[1:]
-                    if now_cmd_list == []:
-                        break
-                if now_cmd_id_list != []:
-                    era_print.normal_print(map_x_list[i : now_cmd_id_list[0]])
-                    i = now_cmd_id_list[0]
-                else:
-                    era_print.normal_print(map_x_list[i:])
-                    i = len(map_x_list)
-            else:
-                era_print.normal_print(map_x_list[i:])
-                i = len(map_x_list)
-        era_print.line_feed_print()
-    return input_s
 
 
 def get_map_draw_for_map_path(map_path_str: str) -> str:
@@ -66,7 +16,7 @@ def get_map_draw_for_map_path(map_path_str: str) -> str:
     map_path -- 地图路径
     """
     map_data = get_map_data_for_map_path(map_path_str)
-    return map_data["MapDraw"]
+    return map_data.map_draw
 
 
 def get_scene_id_in_map_for_scene_path_on_map_path(scene_path: list, map_path: list) -> list:
@@ -92,13 +42,15 @@ def get_map_for_path(scene_path: list) -> list:
     return get_map_for_path(map_path)
 
 
-def get_map_data_for_map_path(map_path_str: str) -> dict:
+def get_map_data_for_map_path(map_path_str: str) -> game_type.Map:
     """
     从地图路径获取地图数据
     Keyword arguments:
     map_path -- 地图路径
+    Return arguments:
+    game_type.Map -- 地图数据
     """
-    return cache_contorl.map_data[map_path_str].copy()
+    return cache_contorl.map_data[map_path_str]
 
 
 def get_scene_list_for_map(map_path_str: str) -> list:

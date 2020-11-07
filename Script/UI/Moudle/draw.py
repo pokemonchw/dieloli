@@ -1,6 +1,5 @@
 from typing import List
 from Script.Core import (
-    era_print,
     text_handle,
     io_init,
     rich_text,
@@ -350,7 +349,6 @@ class TitleLineDraw:
         line_draw.max_width = line_width
         line_draw.style = self.style
         line_draw.text = self.line * line_width
-        print(len(line_draw) * 2 + len(frame_draw) * 2 + len(title_draw))
         for text in [line_draw, frame_draw, title_draw, frame_draw, line_draw]:
             text.draw()
         io_init.era_print("\n")

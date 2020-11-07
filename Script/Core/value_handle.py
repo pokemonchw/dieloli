@@ -63,6 +63,24 @@ def get_old_value_for_list(now_int: int, int_list: List[int]) -> int:
     Keyword arguments:
     now_int -- 作为获取参考的指定数值
     int_list -- 用于取值的列表
+    Return arguments:
+    int -- 查询到的值
     """
     now_id = bisect.bisect_right(int_list, now_int)
     return int_list[now_id - 1]
+
+
+def list_of_groups(init_list:list, children_list_len:int) -> List[list]:
+    """
+    将列表分割为指定长度的列表集合
+    Keyword arguments:
+    init_list -- 原始列表
+    children_list_len -- 指定长度
+    Return arguments:
+    List[list] -- 新列表
+    """
+    list_of_groups = zip(*(iter(init_list),) *children_list_len)
+    end_list = [list(i) for i in list_of_groups]
+    count = len(init_list) % children_list_len
+    end_list.append(init_list[-count:]) if count !=0 else end_list
+    return end_list

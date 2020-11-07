@@ -151,6 +151,8 @@ class ChestTem:
     """ 最大值 """
     weight: int
     """ 权重 """
+    info: str
+    """ 描述 """
 
 
 class Language:

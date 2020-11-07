@@ -212,7 +212,7 @@ def get_measurements(
     bodyfat -- 体脂率
     weight_tem -- 体重比例模板
     """
-    if tem_name == "Man" or "Asexual":
+    if tem_name in {0,3}:
         bust = 51.76 / 100 * height
         waist = 42.79 / 100 * height
         hip = 52.07 / 100 * height
@@ -349,7 +349,7 @@ def judge_age_group(age: int) -> int:
     return 0
 
 
-def judge_chest_group(chest: int) -> int:
+def judge_chest_group(chest: float) -> int:
     """
     判断胸围差所属罩杯
     Keyword arguments:

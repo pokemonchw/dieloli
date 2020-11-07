@@ -353,7 +353,7 @@ def handle_in_classroom(character_id: int) -> int:
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
     now_scene_data = cache_contorl.scene_data[now_scene_str]
-    if now_scene_data.scene_tag == "Classroom":
+    if now_scene_data.scene_tag.startswith("Classroom"):
         return 1
     return 0
 

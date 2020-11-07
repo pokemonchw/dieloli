@@ -1,7 +1,7 @@
 import random
 from functools import wraps
 from types import FunctionType
-from Script.Core import cache_contorl, era_print
+from Script.Core import cache_contorl
 from Script.Design import map_handle
 
 
@@ -41,7 +41,6 @@ def handle_talk(character_id):
     """
     character_data = cache_contorl.character_data[character_id]
     behavior_id = character_data.behavior.behavior_id
-    era_print.line_feed_print()
     now_talk_data = {}
     if behavior_id in cache_contorl.adv_talk_data[0]:
         for talk_id in cache_contorl.adv_talk_data[0][behavior_id]:
@@ -100,5 +99,3 @@ def handle_talk(character_id):
             PlayerNickName=player_data.nick_name,
             TargetName=target_data.name,
         )
-        era_print.multiple_line_return_print(now_talk_text)
-        era_print.line_feed_print()
