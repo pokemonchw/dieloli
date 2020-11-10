@@ -199,11 +199,11 @@ class Button:
         """ 按钮文本 """
         self.return_text: str = return_text
         """ 点击按钮响应文本 """
-        self.normal_style = normal_style
+        self.normal_style: str = normal_style
         """ 按钮默认样式 """
-        self.on_mouse_style = on_mouse_style
+        self.on_mouse_style: str = on_mouse_style
         """ 鼠标悬停时样式 """
-        self.max_width = 0
+        self.max_width: int = 0
         """ 按钮文本的最大宽度 """
 
     def __len__(self) -> int:
@@ -235,6 +235,7 @@ class Button:
                         < self.max_width
                     ):
                         now_text += i
+                        continue
                     break
                 now_text[len(now_text) - 1] = "~"
             py_cmd.pcmd(
@@ -250,6 +251,62 @@ class Button:
                 normal_style=self.normal_style,
                 on_style=self.on_mouse_style,
             )
+
+
+class CenterButton:
+    """ 居中按钮绘制 """
+
+    def __init__(self,text:str,return_text:str,width:int,fix_text=" ",normal_style="standard",on_mouse_style="onbutton"):
+        """
+        初始化绘制对象
+        Keyword arguments:
+        text -- 按钮原始文本
+        return_text -- 点击按钮响应文本
+        width -- 按钮最大绘制宽度
+        fix_text -- 对齐用补全文本
+        normal_style -- 按钮默认样式
+        on_mouse_style -- 鼠标悬停时样式
+        """
+        self.text: str = text
+        """ 按钮文本 """
+        self.return_text: str = return_text
+        """ 点击按钮响应文本 """
+        self.fix_text: str = fix_text
+        """ 对齐用补全文本 """
+        self.normal_style: str = normal_style
+        """ 按钮默认样式 """
+        self.on_mouse_style: str = on_mouse_style
+        """ 鼠标悬停时样式 """
+        self.max_width: str = width
+        """ 按钮文本的最大宽度 """
+
+    def __len__(self) -> int:
+        """
+        获取按钮文本长度
+        Return arguments:
+        int -- 文本长度
+        """
+        return self.max_width
+
+    def __it__(self,other:Button):
+        """
+        比较两个button对象的文本长度
+        Keyword arguments:
+        other -- 要比较的button对象
+        Return arguments:
+        bool -- 大小校验
+        """
+        return self.max_width < other.max_width
+
+    def draw(self):
+        """ 绘制按钮 """
+        if self.max_width < text_handle.get_text_index(self.text):
+            now_text = ""
+            if self.max_width > 0:
+                for i in self.text:
+                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.max_width:
+                        now_text += i
+                    break
 
 
 class LineDraw:

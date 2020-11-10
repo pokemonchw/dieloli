@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-07 15:27+0800\n"
+"POT-Creation-Date: 2020-11-10 18:28+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -275,84 +275,120 @@ msgstr ""
 msgid "属性"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:93
+#: ../Script/UI/Panel/see_character_info_panel.py:40
+msgid "状态"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:41
+msgid "服装"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:42
+msgid "道具"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:43
+msgid "穿戴"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:44
+msgid "经验"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:45
+msgid "技能"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:46
+msgid "语言"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:47
+msgid "性格"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:48
+msgid "社交"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:125
 #, python-brace-format
 msgid ""
 "No.{character_id} 姓名:{character_data.name} 称呼:{character_data.nick_name}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:103
+#: ../Script/UI/Panel/see_character_info_panel.py:135
 msgid "体力"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:111
+#: ../Script/UI/Panel/see_character_info_panel.py:143
 msgid "气力"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:116
+#: ../Script/UI/Panel/see_character_info_panel.py:148
 #, python-brace-format
 msgid "状态:{status_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:128
+#: ../Script/UI/Panel/see_character_info_panel.py:160
 msgid "人物属性"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:190
-#: ../Script/UI/Panel/see_character_info_panel.py:203
-#: ../Script/UI/Panel/see_character_info_panel.py:212
+#: ../Script/UI/Panel/see_character_info_panel.py:222
+#: ../Script/UI/Panel/see_character_info_panel.py:235
+#: ../Script/UI/Panel/see_character_info_panel.py:244
 msgid "暂无"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:194
+#: ../Script/UI/Panel/see_character_info_panel.py:226
 #, python-brace-format
 msgid "宿舍位置:{dormitory_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:197
+#: ../Script/UI/Panel/see_character_info_panel.py:229
 msgid "教室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:207
+#: ../Script/UI/Panel/see_character_info_panel.py:239
 msgid "办公室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:240
+#: ../Script/UI/Panel/see_character_info_panel.py:272
 #, python-brace-format
 msgid "年龄:{character_data.age}岁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:241
+#: ../Script/UI/Panel/see_character_info_panel.py:273
 #, python-brace-format
 msgid "生日:{character_data.birthday.month}月{character_data.birthday.day}日"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:269
+#: ../Script/UI/Panel/see_character_info_panel.py:301
 #, python-brace-format
 msgid "身高:{now_height}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:271
+#: ../Script/UI/Panel/see_character_info_panel.py:303
 #, python-brace-format
 msgid "体重:{now_weight}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:274
+#: ../Script/UI/Panel/see_character_info_panel.py:306
 #, python-brace-format
 msgid "罩杯:{now_chest_tem.info}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:308
+#: ../Script/UI/Panel/see_character_info_panel.py:340
 #, python-brace-format
 msgid "胸围:{now_bust}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:309
+#: ../Script/UI/Panel/see_character_info_panel.py:341
 #, python-brace-format
 msgid "腰围:{now_waist}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:310
+#: ../Script/UI/Panel/see_character_info_panel.py:342
 #, python-brace-format
 msgid "臀围:{now_hip}"
 msgstr ""

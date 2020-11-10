@@ -4,7 +4,8 @@ from types import FunctionType
 from uuid import UUID
 from Script.Core import game_type
 
-
+character_bak:Dict[int,game_type.Character] = {}
+character_bak_bak:Dict[int,game_type.Character] = {}
 game_data = {}
 """ 游戏预设配置数据 """
 flow_contorl: game_type.FlowContorl = game_type.FlowContorl()

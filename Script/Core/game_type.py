@@ -1,6 +1,7 @@
 from uuid import UUID
 from typing import List, Dict, Set
 import datetime
+from recordclass import RecordClass
 
 
 class FlowContorl:
@@ -56,120 +57,6 @@ class NpcTem:
         self.SexExperienceTem: str = ""
         """ 性经验模板 """
 
-
-class Character:
-    """ 角色数据结构体 """
-
-    def __init__(self):
-        self.id: int = 0
-        """ 角色id """
-        self.name: str = ""
-        """ 角色名字 """
-        self.nick_name: str = ""
-        """ 他人对角色的称呼 """
-        self.sex: int = 0
-        """ 角色性别 """
-        self.age: int = 17
-        """ 角色年龄 """
-        self.end_age: int = 74
-        """ 角色预期寿命 """
-        self.intimate: int = 0
-        """ 角色与玩家的亲密度 """
-        self.graces: int = 0
-        """ 角色的魅力值 """
-        self.hit_point_max: int = 0
-        """ 角色最大HP """
-        self.hit_point: int = 0
-        """ 角色当前HP """
-        self.mana_point_max: int = 0
-        """ 角色最大MP """
-        self.mana_point: int = 0
-        """ 角色当前MP """
-        self.sex_experience: Dict[int, int] = {}
-        """ 角色的性经验数据 """
-        self.sex_grade: Dict[str, str] = {}
-        """ 角色的性等级描述数据 """
-        self.state: int = 0
-        """ 角色当前状态 """
-        self.engraving: Dict[str, int] = {}
-        """ 角色的刻印数据 """
-        self.clothing: Dict[int, Dict[UUID, Clothing]] = {}
-        """
-        角色拥有的服装数据
-        服装穿戴位置:服装唯一id:服装数据
-        """
-        self.item: Set = set()
-        """ 角色拥有的道具id集合 """
-        self.height: Height = Height()
-        """ 角色的身高数据 """
-        self.weight: float = 0
-        """ 角色的体重数据 """
-        self.measurements: Measurements = Measurements()
-        """ 角色的三围数据 """
-        self.behavior: Behavior = Behavior()
-        """ 角色当前行为状态数据 """
-        self.gold: int = 0
-        """ 角色所持金钱数据 """
-        self.position: List[str] = ["0"]
-        """ 角色当前坐标数据 """
-        self.classroom: str = ""
-        """ 角色所属班级坐标 """
-        self.officeroom: List[str] = ""
-        """ 角色所属办公室坐标 """
-        self.knowledge: Dict[str, int] = {}
-        """ 角色知识技能等级数据 """
-        self.language: Dict[int, int] = {}
-        """
-        角色语言技能等级数据
-        语言id:经验
-        """
-        self.mother_tongue: int = 0
-        """ 角色母语 """
-        self.knowledge_interest: Dict[int, int] = {}
-        """ 角色天赋数据 """
-        self.language_interest: Dict[int,int] = {}
-        """ 角色语言天赋数据 """
-        self.dormitory: str = ""
-        """ 角色宿舍坐标 """
-        self.birthday: datetime.datetime = datetime.datetime(1, 1, 1)
-        """ 角色生日数据 """
-        self.weigt_tem: int = 1
-        """ 角色体重模板 """
-        self.bodyfat_tem: int = 1
-        """ 角色体脂率模板 """
-        self.bodyfat: int = 0
-        """ 角色体脂率数据 """
-        self.sex_experience_tem: int = 0
-        """ 角色性经验模板 """
-        self.clothing_tem: int = 0
-        """ 角色生成服装模板 """
-        self.chest_tem: int = 0
-        """ 角色罩杯模板 """
-        self.chest: Chest = Chest()
-        """ 角色罩杯数据 """
-        self.nature: Dict[int, int] = {}
-        """ 角色性格数据 """
-        self.status: Dict[int, int] = {}
-        """ 角色状态数据 状态id:状态数值 """
-        self.put_on: Dict[int,UUID] = {}
-        """
-        角色已穿戴服装数据
-        穿着类型:服装id
-        """
-        self.hit_point_tem: int = 1
-        """ 角色HP模板 """
-        self.mana_point_tem: int = 1
-        """ 角色MP模板 """
-        self.social_contact: Dict[int, SocialContact] = {}
-        """ 角色社交关系数据 关系类型:关系数据 """
-        self.food_bag: Dict[UUID, Food] = {}
-        """ 角色持有的食物数据 """
-        self.course: CourseTimeSlice = CourseTimeSlice()
-        """ 上课时间和状态数据 """
-        self.target_character_id: int = 0
-        """ 角色当前交互对象id """
-        self.adv: int = 0
-        """ 剧情npc校验 """
 
 
 class Measurements:
@@ -483,3 +370,118 @@ class Scene:
         """ 场景标签 """
         self.character_list: set = set()
         """ 场景内角色列表 """
+
+
+class Character(RecordClass):
+    """ 角色数据结构体 """
+
+    id: int = 0
+    """ 角色id """
+    name: str = ""
+    """ 角色名字 """
+    nick_name: str = ""
+    """ 他人对角色的称呼 """
+    sex: int = 0
+    """ 角色性别 """
+    age: int = 17
+    """ 角色年龄 """
+    end_age: int = 74
+    """ 角色预期寿命 """
+    intimate: int = 0
+    """ 角色与玩家的亲密度 """
+    graces: int = 0
+    """ 角色的魅力值 """
+    hit_point_max: int = 0
+    """ 角色最大HP """
+    hit_point: int = 0
+    """ 角色当前HP """
+    mana_point_max: int = 0
+    """ 角色最大MP """
+    mana_point: int = 0
+    """ 角色当前MP """
+    sex_experience: Dict[int, int] = {}
+    """ 角色的性经验数据 """
+    sex_grade: Dict[str, str] = {}
+    """ 角色的性等级描述数据 """
+    state: int = 0
+    """ 角色当前状态 """
+    engraving: Dict[str, int] = {}
+    """ 角色的刻印数据 """
+    clothing: Dict[int, Dict[UUID, Clothing]] = {}
+    """
+    角色拥有的服装数据
+    服装穿戴位置:服装唯一id:服装数据
+    """
+    item: Set = set()
+    """ 角色拥有的道具id集合 """
+    height: Height = Height()
+    """ 角色的身高数据 """
+    weight: float = 0
+    """ 角色的体重数据 """
+    measurements: Measurements = Measurements()
+    """ 角色的三围数据 """
+    behavior: Behavior = Behavior()
+    """ 角色当前行为状态数据 """
+    gold: int = 0
+    """ 角色所持金钱数据 """
+    position: List[str] = ["0"]
+    """ 角色当前坐标数据 """
+    classroom: str = ""
+    """ 角色所属班级坐标 """
+    officeroom: List[str] = ""
+    """ 角色所属办公室坐标 """
+    knowledge: Dict[str, int] = {}
+    """ 角色知识技能等级数据 """
+    language: Dict[int, int] = {}
+    """
+    角色语言技能等级数据
+    语言id:经验
+    """
+    mother_tongue: int = 0
+    """ 角色母语 """
+    knowledge_interest: Dict[int, int] = {}
+    """ 角色天赋数据 """
+    language_interest: Dict[int,int] = {}
+    """ 角色语言天赋数据 """
+    dormitory: str = ""
+    """ 角色宿舍坐标 """
+    birthday: datetime.datetime = datetime.datetime(1, 1, 1)
+    """ 角色生日数据 """
+    weigt_tem: int = 1
+    """ 角色体重模板 """
+    bodyfat_tem: int = 1
+    """ 角色体脂率模板 """
+    bodyfat: int = 0
+    """ 角色体脂率数据 """
+    sex_experience_tem: int = 0
+    """ 角色性经验模板 """
+    clothing_tem: int = 0
+    """ 角色生成服装模板 """
+    chest_tem: int = 0
+    """ 角色罩杯模板 """
+    chest: Chest = Chest()
+    """ 角色罩杯数据 """
+    nature: Dict[int, int] = {}
+    """ 角色性格数据 """
+    status: Dict[int, int] = {}
+    """ 角色状态数据 状态id:状态数值 """
+    put_on: Dict[int,UUID] = {}
+    """
+    角色已穿戴服装数据
+    穿着类型:服装id
+    """
+    hit_point_tem: int = 1
+    """ 角色HP模板 """
+    mana_point_tem: int = 1
+    """ 角色MP模板 """
+    social_contact: Dict[int, SocialContact] = {}
+    social_contact: Dict[int, SocialContact] = {}
+    """ 角色社交关系数据 关系类型:关系数据 """
+    food_bag: Dict[UUID, Food] = {}
+    """ 角色持有的食物数据 """
+    course: CourseTimeSlice = CourseTimeSlice()
+    """ 上课时间和状态数据 """
+    target_character_id: int = 0
+    """ 角色当前交互对象id """
+    adv: int = 0
+    """ 剧情npc校验 """

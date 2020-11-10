@@ -246,6 +246,24 @@ class CenterDrawTextListPanel:
             io_init.era_print("\n")
 
 
+class CenterDrawButtonListPanel:
+    """ 绘制一个按钮列表并居中每个元素 """
+
+    def __init__(self):
+        """ 初始化绘制对象 """
+        self.width = 0
+        """ 面板宽度 """
+        self.column = 0
+        """ 每行最大元素数 """
+        self.draw_list: List[List[draw.Button]]
+        """ 绘制按钮列表 """
+        self.return_list: Dict[str,str] = {}
+        """
+        按钮返回的响应列表
+        按钮返回值:响应文本
+        """
+
+
 class ClearScreenPanel:
     """ 绘制一屏长度的空行 """
 

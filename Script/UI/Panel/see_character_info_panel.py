@@ -36,7 +36,16 @@ class SeeCharacterInfoPanel:
         """ 要绘制的角色id """
         main_attr_draw = SeeCharacterMainAttrPanel(character_id,width)
         self.draw_data = {
-            _("属性"):main_attr_draw
+            _("属性"):main_attr_draw,
+            _("状态"):None,
+            _("服装"):None,
+            _("道具"):None,
+            _("穿戴"):None,
+            _("经验"):None,
+            _("技能"):None,
+            _("语言"):None,
+            _("性格"):None,
+            _("社交"):None
         }
         """ 按钮文本对应属性面板 """
 

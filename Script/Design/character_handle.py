@@ -2,6 +2,8 @@ import random
 import math
 import numpy
 import time
+import sys
+import time
 from Script.Core import (
     cache_contorl,
     value_handle,
@@ -29,8 +31,6 @@ def init_character_list():
         init_character(now_id, now_npc_data)
     index_character_average_value()
     calculate_the_average_value_of_each_attribute_of_each_age_group()
-    for character_id in cache_contorl.character_data:
-        now_character = cache_contorl.character_data[character_id]
 
 
 def calculate_the_average_value_of_each_attribute_of_each_age_group():
