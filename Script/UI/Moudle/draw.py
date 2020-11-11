@@ -300,13 +300,32 @@ class CenterButton:
 
     def draw(self):
         """ 绘制按钮 """
+        print(self.max_width)
         if self.max_width < text_handle.get_text_index(self.text):
             now_text = ""
+            print(text_handle.get_text_index(self.text))
+            print(self.text)
             if self.max_width > 0:
                 for i in self.text:
                     if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.max_width:
                         now_text += i
                     break
+                now_text[len(now_text) - 1] = "~"
+        else:
+            now_index = text_handle.get_text_index(self.text)
+            now_text = self.text
+            if now_index == self.max_width - 1:
+                now_text = " " + now_text
+            elif now_index == self.max_width - 2:
+                now_text = " " + now_text + " "
+            else:
+                now_text = text_handle.align(now_text,"center",0,1,self.max_width)
+        py_cmd.pcmd(
+            now_text,
+            self.return_text,
+            normal_style=self.normal_style,
+            on_style=self.on_mouse_style,
+        )
 
 
 class LineDraw:

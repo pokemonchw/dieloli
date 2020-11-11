@@ -61,7 +61,6 @@ def build_csv_config(file_path: str, file_name: str):
 
 def build_config_def(class_name: str, value_type: dict, docstring: dict, class_text: str):
     global config_def_str
-    config_def_str += ""
     config_def_str += "class " + class_name + ":"
     config_def_str += '\n    """ ' + class_text + ' """\n'
     for k in value_type:

@@ -34,9 +34,19 @@ def creator_character_panel():
 
 def confirm_character_attr_panel():
     """ 确认角色属性面板 """
-    line_feed_draw.draw()
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
-    now_attr_panel.draw()
+    while 1:
+        line_feed_draw.draw()
+        now_attr_panel.draw()
+        line.draw()
+        now_handle_panel = panel.CenterDrawButtonListPanel()
+        now_handle_panel.set(list(now_attr_panel.draw_data.keys()),list(now_attr_panel.draw_data.keys()),width,5,now_attr_panel.now_panel)
+        now_handle_panel.draw()
+        ask_list = []
+        ask_list.extend(now_handle_panel.return_list.keys())
+        yrn = flow_handle.askfor_all(ask_list)
+        if yrn in now_handle_panel.return_list:
+            now_attr_panel.now_panel = now_handle_panel.return_list[yrn]
 
 
 def input_name_panel() -> bool:

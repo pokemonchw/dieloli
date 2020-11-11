@@ -21,13 +21,6 @@ class SeeCharacterInfoPanel:
         character_id -- 角色id
         width -- 绘制宽度
         """
-        self.button_list: List[draw.Button] = []
-        """ 控制切换属性页的按钮列表 """
-        self.return_list: Dict[str, str] = {}
-        """
-        切换属性页按钮的响应列表
-        按钮返回值:按钮文本
-        """
         self.max_width = width
         """ 绘制的最大宽度 """
         self.now_panel = _("属性")

@@ -255,13 +255,51 @@ class CenterDrawButtonListPanel:
         """ 面板宽度 """
         self.column = 0
         """ 每行最大元素数 """
-        self.draw_list: List[List[draw.Button]]
+        self.draw_list: List[List[draw.Button]] = []
         """ 绘制按钮列表 """
         self.return_list: Dict[str,str] = {}
         """
         按钮返回的响应列表
         按钮返回值:响应文本
         """
+
+    def set(self,text_list:List[str],return_list:List[str],width:int,column:int,null_text:str=""):
+        """
+        设置绘制信息
+        Keyword arguments:
+        text_list -- 按钮文本列表
+        return_list -- 按钮返回列表
+        width -- 绘制宽度
+        column -- 每行最大元素数
+        null_text -- 不作为按钮绘制的文本
+        """
+        self.width = width
+        self.column = column
+        new_text_list = value_handle.list_of_groups(text_list,column)
+        index = 0
+        for now_text_list in new_text_list:
+            now_width = int(width / len(now_text_list))
+            now_list = []
+            for now_text in now_text_list:
+                if now_text != null_text:
+                    now_button = draw.CenterButton(now_text,return_list[index],now_width)
+                    now_list.append(now_button)
+                    self.return_list[return_list[index]] = text_list[index]
+                else:
+                    now_info_draw = draw.CenterDraw()
+                    now_info_draw.max_width = now_width
+                    now_info_draw.text = now_text
+                    now_info_draw.style = "onbutton"
+                    now_list.append(now_info_draw)
+                index += 1
+            self.draw_list.append(now_list)
+
+    def draw(self):
+        """ 绘制面板 """
+        for now_list in self.draw_list:
+            for value in now_list:
+                value.draw()
+            io_init.era_print("\n")
 
 
 class ClearScreenPanel:
