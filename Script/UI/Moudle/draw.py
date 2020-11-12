@@ -48,7 +48,7 @@ class NormalDraw:
                     ):
                         now_text += i
                     break
-                now_text[len(now_text) - 1] = "~"
+                now_text = now_text[:-2] + "~"
             io_init.era_print(now_text, self.style)
         else:
             io_init.era_print(self.text, self.style)
@@ -154,12 +154,12 @@ class InfoBarDraw:
         value -- 当前数值
         text -- 描述文本
         """
-        now_max_width = self.max_width * self.scale
+        now_max_width = int(self.max_width * self.scale)
         info_draw = NormalDraw()
-        info_draw.max_width = now_max_width / 3
+        info_draw.max_width = int(now_max_width / 3)
         info_draw.text = f"{text}["
         value_draw = NormalDraw()
-        value_draw.max_width = now_max_width / 3
+        value_draw.max_width = int(now_max_width / 3)
         value_draw.text = f"(]{value}/{max_value})"
         self.bar_id = bar_id
         bar_draw = BarDraw()
@@ -237,7 +237,7 @@ class Button:
                         now_text += i
                         continue
                     break
-                now_text[len(now_text) - 1] = "~"
+                now_text = now_text[:-2] + "~"
             py_cmd.pcmd(
                 now_text,
                 self.return_text,
@@ -310,7 +310,7 @@ class CenterButton:
                     if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.max_width:
                         now_text += i
                     break
-                now_text[len(now_text) - 1] = "~"
+                now_text = now_text[:-2] + "~"
         else:
             now_index = text_handle.get_text_index(self.text)
             now_text = self.text
@@ -430,11 +430,57 @@ class TitleLineDraw:
         io_init.era_print("\n")
 
 
+class LittleTitleLineDraw:
+    """ 绘制小标题线文本 """
+
+    def __init__(self,title: str,width: int,line:str="=",style="standard",title_style="sontitle"):
+        """
+        初始化绘制对象
+        Keyword arguments:
+        title -- 标题
+        width -- 标题线线条宽度
+        line -- 用于绘制线条的文本
+        style -- 线条样式
+        title_style -- 标题样式
+        """
+        self.title = title
+        """ 标题 """
+        self.width = width
+        """ 线条宽度 """
+        self.line = line
+        """ 用于绘制线条的文本 """
+        self.style = style
+        """ 线条默认样式 """
+        self.title_style = title_style
+        """ 标题样式 """
+
+    def draw(self):
+        """ 绘制线条 """
+        title_draw = NormalDraw()
+        title_draw.max_width = self.width
+        title_draw.text = self.title
+        title_draw.style = self.title_style
+        line_a_width = int(self.width / 4) - len(title_draw)
+        if line_a_width < 0:
+            line_a_width = 0
+        line_a = NormalDraw()
+        line_a.max_width = line_a_width
+        line_a.style = self.style
+        line_a.text = self.line * line_a_width
+        line_b = NormalDraw()
+        line_b.max_width = self.width - len(title_draw) - len(line_a)
+        line_b.style = self.style
+        line_b.text = self.line * line_b.max_width
+        for value in [line_a,title_draw,line_b]:
+            value.draw()
+        io_init.era_print("\n")
+
 class CenterDraw(NormalDraw):
     """ 居中绘制文本 """
 
     def draw(self):
         """ 绘制文本 """
+        self.max_width = int(self.max_width)
         if len(self) > self.max_width:
             now_text = ""
             if self.max_width > 0:
@@ -445,7 +491,7 @@ class CenterDraw(NormalDraw):
                     ):
                         now_text += i
                     break
-                now_text[len(now_text) - 1] = "~"
+                now_text = now_text[:-2] + "~"
             io_init.era_print(now_text, self.style)
         elif len(self) > self.max_width - 1:
             now_text = " " + self.text
@@ -473,7 +519,7 @@ class RightDraw(NormalDraw):
                     ):
                         now_text += i
                     break
-                now_text[len(now_text) - 1] = "~"
+                now_text = now_text[:-2] + "~"
         elif len(self) > self.max_width - 2:
             now_text = " " + self.text
         else:

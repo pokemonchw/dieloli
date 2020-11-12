@@ -40,13 +40,13 @@ def confirm_character_attr_panel():
         now_attr_panel.draw()
         line.draw()
         now_handle_panel = panel.CenterDrawButtonListPanel()
-        now_handle_panel.set(list(now_attr_panel.draw_data.keys()),list(now_attr_panel.draw_data.keys()),width,5,now_attr_panel.now_panel)
+        now_handle_panel.set([f"[{text}]" for text in now_attr_panel.draw_data.keys()],list(now_attr_panel.draw_data.keys()),width,5,f"[{now_attr_panel.now_panel}]")
         now_handle_panel.draw()
         ask_list = []
         ask_list.extend(now_handle_panel.return_list.keys())
         yrn = flow_handle.askfor_all(ask_list)
         if yrn in now_handle_panel.return_list:
-            now_attr_panel.now_panel = now_handle_panel.return_list[yrn]
+            now_attr_panel.now_panel = yrn
 
 
 def input_name_panel() -> bool:

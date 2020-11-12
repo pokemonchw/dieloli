@@ -59,8 +59,6 @@ config_clothing_suit_data: Dict[int, Dict[int, Set]] = {}
 衣服套装搭配数据
 套装编号:性别id:服装集合
 """
-config_clothing_tag: Dict[int, config_def.ClothingTag] = {}
-""" 服装属性标签配置数据 """
 config_clothing_tem: Dict[int, config_def.ClothingTem] = {}
 """ 服装模板配置数据 """
 config_clothing_type: Dict[int, config_def.ClothingType] = {}
@@ -380,16 +378,6 @@ def load_clothing_suit():
         config_clothing_suit_data.setdefault(now_tem.suit_type, {})
         config_clothing_suit_data[now_tem.suit_type].setdefault(now_tem.sex, set())
         config_clothing_suit_data[now_tem.suit_type][now_tem.sex].add(now_tem.clothing_id)
-
-
-def load_clothing_tag():
-    """ 载入服装属性标签配置数据 """
-    now_data = config_data["ClothingTag"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.ClothingTag()
-        now_tem.__dict__ = tem_data
-        config_clothing_tag[now_tem.cid] = now_tem
 
 
 def load_clothing_tem():
@@ -824,7 +812,6 @@ def init():
     load_clothing_collocational()
     load_clothing_evaluate()
     load_clothing_suit()
-    load_clothing_tag()
     load_clothing_tem()
     load_clothing_type()
     load_clothing_use_type()

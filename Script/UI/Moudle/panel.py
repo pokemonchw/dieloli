@@ -92,7 +92,7 @@ class OneMessageAndSingleColumnButton:
         new_button_list = []
         return_list = []
         for i in range(len(button_list)):
-            now_id = id_index(i + start_id)
+            now_id = text_handle.id_index(i + start_id)
             now_id_text = now_id + button_list[i]
             new_button_list.append(now_id_text)
             now_i_str = str(start_id + i)
@@ -309,20 +309,3 @@ class ClearScreenPanel:
         """ 绘制面板 """
         panel = "\n" * 50
         io_init.era_print(panel)
-
-
-def id_index(now_id: int) -> str:
-    """
-    生成命令id文本
-    Keyword arguments:
-    now_id -- 命令id
-    Return arguments:
-    str -- id文本
-    """
-    if now_id >= 100:
-        return f"[{now_id}]"
-    elif now_id >= 10:
-        if now_id:
-            return f"[0{now_id}]"
-        return "[000]"
-    return f"[00{now_id}]"

@@ -131,15 +131,6 @@ class WeightTem:
     """ 最大值 """
 
 
-class ClothingTag:
-    """ 服装属性标签 """
-
-    cid: int
-    """ 标签id """
-    name: str
-    """ 标签名 """
-
-
 class ChestTem:
     """ 罩杯对应范围和生成权重 """
 
