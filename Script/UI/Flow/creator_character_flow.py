@@ -34,6 +34,8 @@ def creator_character_panel():
 
 def confirm_character_attr_panel():
     """ 确认角色属性面板 """
+    for item_id in game_config.config_item:
+        cache_contorl.character_data[0].item.add(item_id)
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
     while 1:
         line_feed_draw.draw()
@@ -44,6 +46,12 @@ def confirm_character_attr_panel():
         now_handle_panel.draw()
         ask_list = []
         ask_list.extend(now_handle_panel.return_list.keys())
+        item_panel_ask_list = []
+        if now_attr_panel.now_panel == _("道具"):
+            ask_list.extend(now_attr_panel.draw_data[now_attr_panel.now_panel].item_button_list.keys())
+            ask_list.extend(now_attr_panel.draw_data[now_attr_panel.now_panel].old_page_return)
+            ask_list.extend(now_attr_panel.draw_data[now_attr_panel.now_panel].next_page_return)
+        print(ask_list)
         yrn = flow_handle.askfor_all(ask_list)
         if yrn in now_handle_panel.return_list:
             now_attr_panel.now_panel = yrn

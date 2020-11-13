@@ -55,15 +55,15 @@ class NormalDraw:
 
 
 class ImageDraw:
-    """ 图片绘制 """
+    """
+    图片绘制
+    Keyword arguments:
+    image_name -- 图片id
+    image_path -- 图片所在路径 (default '')
+    """
 
     def __init__(self, image_name: str, image_path=""):
-        """
-        初始化绘制对象
-        Keyword arguments:
-        image_name -- 图片id
-        image_path -- 图片所在路径 (default '')
-        """
+        """ 初始化绘制对象 """
         self.image_name = image_name
         """ 图片id """
         self.image_path = image_path
@@ -178,7 +178,14 @@ class InfoBarDraw:
 
 
 class Button:
-    """ 按钮绘制 """
+    """
+    按钮绘制
+    Keyword arguments:
+    text -- 按钮文本
+    return_text -- 点击按钮响应文本
+    normal_style -- 按钮默认样式
+    on_mouse_style -- 鼠标悬停时样式
+    """
 
     def __init__(
         self,
@@ -187,14 +194,7 @@ class Button:
         normal_style="standard",
         on_mouse_style="onbutton",
     ):
-        """
-        初始化绘制对象
-        Keyword arguments:
-        text -- 按钮文本
-        return_text -- 点击按钮响应文本
-        normal_style -- 按钮默认样式
-        on_mouse_style -- 鼠标悬停时样式
-        """
+        """ 初始化绘制对象 """
         self.text: str = text
         """ 按钮文本 """
         self.return_text: str = return_text
@@ -254,19 +254,19 @@ class Button:
 
 
 class CenterButton:
-    """ 居中按钮绘制 """
+    """
+    居中按钮绘制
+    Keyword arguments:
+    text -- 按钮原始文本
+    return_text -- 点击按钮响应文本
+    width -- 按钮最大绘制宽度
+    fix_text -- 对齐用补全文本
+    normal_style -- 按钮默认样式
+    on_mouse_style -- 鼠标悬停时样式
+    """
 
     def __init__(self,text:str,return_text:str,width:int,fix_text=" ",normal_style="standard",on_mouse_style="onbutton"):
-        """
-        初始化绘制对象
-        Keyword arguments:
-        text -- 按钮原始文本
-        return_text -- 点击按钮响应文本
-        width -- 按钮最大绘制宽度
-        fix_text -- 对齐用补全文本
-        normal_style -- 按钮默认样式
-        on_mouse_style -- 鼠标悬停时样式
-        """
+        """ 初始化绘制对象 """
         self.text: str = text
         """ 按钮文本 """
         self.return_text: str = return_text
@@ -300,11 +300,8 @@ class CenterButton:
 
     def draw(self):
         """ 绘制按钮 """
-        print(self.max_width)
         if self.max_width < text_handle.get_text_index(self.text):
             now_text = ""
-            print(text_handle.get_text_index(self.text))
-            print(self.text)
             if self.max_width > 0:
                 for i in self.text:
                     if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.max_width:
@@ -329,16 +326,16 @@ class CenterButton:
 
 
 class LineDraw:
-    """ 绘制线条文本 """
+    """
+    绘制线条文本
+    Keyword arguments:
+    text -- 用于绘制线条的文本
+    width -- 线条宽度
+    style -- 当前默认文本样式
+    """
 
     def __init__(self, text: str, width: int, style="standard"):
-        """
-        初始化绘制对象
-        Keyword arguments:
-        text -- 用于绘制线条的文本
-        width -- 线条宽度
-        style -- 当前默认文本样式
-        """
+        """ 初始化绘制对象 """
         self.text = text
         """ 用于绘制线条的文本 """
         self.style = style
@@ -366,7 +363,17 @@ class LineDraw:
 
 
 class TitleLineDraw:
-    """ 绘制标题线文本 """
+    """
+    绘制标题线文本
+    Keyword arguments:
+    text -- 标题
+    width -- 标题线线条宽度
+    line -- 用于绘制线条的文本
+    frame -- 用于绘制标题边框的文本
+    style -- 线条样式
+    title_style -- 标题样式
+    frame_style -- 标题边框样式
+    """
 
     def __init__(
         self,
@@ -378,17 +385,7 @@ class TitleLineDraw:
         title_style="littletitle",
         frame_style="littletitle",
     ):
-        """
-        初始化绘制对象
-        Keyword arguments:
-        text -- 标题
-        width -- 标题线线条宽度
-        line -- 用于绘制线条的文本
-        frame -- 用于绘制标题边框的文本
-        style -- 线条样式
-        title_style -- 标题样式
-        frame_style -- 标题边框样式
-        """
+        """ 初始化绘制对象 """
         self.title = title
         """ 标题 """
         self.width = width
@@ -431,18 +428,18 @@ class TitleLineDraw:
 
 
 class LittleTitleLineDraw:
-    """ 绘制小标题线文本 """
+    """
+    绘制小标题线文本
+    Keyword arguments:
+    title -- 标题
+    width -- 标题线线条宽度
+    line -- 用于绘制线条的文本
+    style -- 线条样式
+    title_style -- 标题样式
+    """
 
     def __init__(self,title: str,width: int,line:str="=",style="standard",title_style="sontitle"):
-        """
-        初始化绘制对象
-        Keyword arguments:
-        title -- 标题
-        width -- 标题线线条宽度
-        line -- 用于绘制线条的文本
-        style -- 线条样式
-        title_style -- 标题样式
-        """
+        """ 初始化绘制对象 """
         self.title = title
         """ 标题 """
         self.width = width

@@ -309,3 +309,164 @@ class ClearScreenPanel:
         """ 绘制面板 """
         panel = "\n" * 50
         io_init.era_print(panel)
+
+
+class PageHandleDrawType:
+    """
+    鸭子类型,用于定义分页绘制对象面板所需接口,text中传入文本或数据,并将最终要显示的文本传入draw_text中,供面板处理
+    Keyword arguments:
+    text -- 绘制的文本id
+    width -- 最大宽度
+    is_button -- 绘制按钮
+    num_button -- 绘制数字按钮
+    butoon_id -- 数字按钮的id
+    """
+
+    def __init__(self,text:str,width:int,is_button:bool,num_button:bool,button_id:int):
+        """ 初始化绘制对象 """
+        self.text:str = text
+        """ 未处理的绘制的文本id """
+        self.draw_text:str = ""
+        """ 最终绘制的文本 """
+        self.width:int = width
+        """ 最大宽度 """
+        self.is_button:bool = is_button
+        """ 绘制按钮 """
+        self.num_button:bool = num_button
+        """ 绘制数字按钮 """
+        self.button_id:bool = button_id
+        """ 数字按钮的id """
+        self.button_return:str = ""
+        """ 按钮返回值 """
+
+    def draw(self):
+        """ 绘制对象 """
+
+
+class PageHandlePanel:
+    """
+    标准分页绘制对象面板
+    Keyword arguments:
+    text_list -- 绘制的文本列表
+    draw_type -- 文本的绘制类型
+    limit -- 每页长度
+    column -- 每行个数
+    width -- 每行最大宽度
+    is_button -- 将列表元素绘制成按钮
+    num_button -- 将列表元素绘制成数字按钮
+    button_start_id -- 数字按钮的开始id
+    row_septal_lines -- 每行之间的间隔线,为空则不绘制
+    col_septal_lines -- 每列之间的间隔线,为空则不绘制
+    """
+
+    def __init__(self,text_list:List[str],draw_type:type,limit:int,column:int,width:int,is_button:bool=False,num_button:bool=False,button_start_id:int=0,row_septal_lines:str="",col_septal_lines:str=""):
+        """ 初始化绘制对象 """
+        self.text_list:List[str] = text_list
+        """ 绘制的文本列表 """
+        self.draw_type:type = PageHandleDrawType
+        """ 文本对象的绘制类型 """
+        self.now_page:int = 0
+        """ 当前页数 """
+        self.limit:int = limit
+        """ 每页长度 """
+        self.column:int = column
+        """ 每行个数 """
+        self.width:int = width
+        """ 每行最大宽度 """
+        self.row_septal_lines:str = row_septal_lines
+        """ 每行之间的间隔线,为空则不绘制 """
+        self.col_septal_lines:str = col_septal_lines
+        """ 每列之间的间隔线,为空则不绘制 """
+        self.return_list:Dict[str,str] = {}
+        """ 按钮返回的id列表 """
+        self.next_page_return:str = ""
+        """ 切换下一页的按钮返回 """
+        self.old_page_return:str = ""
+        """ 切换上一页的按钮返回 """
+        self.is_button:bool = is_button
+        """ 将列表元素绘制成按钮 """
+        self.num_button:bool = num_button
+        """ 将列表元素绘制成数字按钮 """
+        self.button_start_id:int = button_start_id
+        """ 数字按钮的开始id """
+        self.draw_type = draw_type
+
+    def draw(self):
+        """ 绘制面板 """
+        start_id = self.now_page * self.limit
+        total_page = int(len(self.text_list) / self.limit)
+        if start_id >= len(self.text_list):
+            self.now_page = total_page
+            start_id = self.now_page * self.limit
+        now_page_list = []
+        for i in range(start_id,len(self.text_list)):
+            if len(now_page_list) - 1 > self.limit:
+                break
+            now_page_list.append(self.text_list[i])
+        draw_text_group = value_handle.list_of_groups(now_page_list,self.column)
+        draw_list:List[draw.NormalDraw] = []
+        index = self.button_start_id
+        line_feed = draw.NormalDraw()
+        line_feed.text = "\n"
+        line_feed.max_width = 1
+        index = 0
+        for draw_text_list in draw_text_group:
+            if self.row_septal_lines != "":
+                line_draw = draw.LineDraw(self.row_septal_lines,self.width)
+                draw_list.append(line_draw)
+            now_width = self.width
+            if self.col_septal_lines != "":
+                col_index = len(draw_text_list) + 1
+                col_width = text_handle.get_text_index(self.col_septal_lines)
+                now_width -= col_width * col_index
+            value_width = int(now_width / len(draw_text_list))
+            col_fix_draw = draw.NormalDraw()
+            col_fix_draw.text = self.col_septal_lines
+            col_fix_draw.max_width = 1
+            draw_list.append(col_fix_draw)
+            for value in draw_text_list:
+                value_draw = self.draw_type(value,value_width,self.is_button,self.num_button,index)
+                value_draw.draw_text = text_handle.align(value_draw.draw_text,"center",0,1,value_width)
+                if self.num_button:
+                    self.return_list[str(index)] = value
+                else:
+                    self.return_list[value_draw.button_return] = value
+                index += 1
+                draw_list.append(value_draw)
+                draw_list.append(col_fix_draw)
+            draw_list.append(line_feed)
+        page_change_start_id = 0
+        if self.num_button:
+            page_change_start_id = index + 1
+        old_page_index_text = text_handle.id_index(page_change_start_id)
+        old_page_button = draw.CenterButton(_(f"{old_page_index_text} 上一页"),str(page_change_start_id),int(self.width / 3))
+        self.old_page_return = str(page_change_start_id)
+        draw_list.append(old_page_button)
+        page_text = f"({self.now_page}/{total_page})"
+        page_draw = draw.CenterDraw()
+        page_draw.max_width = int(self.width / 3)
+        page_draw.text = page_text
+        draw_list.append(page_draw)
+        next_page_index_text = text_handle.id_index(page_change_start_id)
+        next_page_button = draw.CenterButton(_(f"{next_page_index_text} 下一页"),str(page_change_start_id + 1),int(self.width / 3))
+        self.next_page_return = str(page_change_start_id + 1)
+        draw_list.append(next_page_button)
+        draw_list.append(line_feed)
+        for value in draw_list:
+            value.draw()
+
+    def next_page(self):
+        """ 将面板切换至下一页 """
+        total_page = int(len(self.text_list) / self.limit)
+        if self.now_page >= total_page:
+            self.now_page = 0
+        else:
+            self.now_page += 1
+
+    def old_page(self):
+        """ 将面板切换至上一页 """
+        total_page = int(len(self.text_list) / self.limit)
+        if self.now_page <= 0:
+            self.now_page = total_page
+        else:
+            self.now_page -= 1
