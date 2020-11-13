@@ -1,7 +1,13 @@
 from typing import Dict
-from Script.Core import cache_contorl, text_handle
+from types import FunctionType
+from Script.Core import cache_contorl, text_handle,get_text
 from Script.UI.Moudle import panel,draw
 from Script.Config import game_config
+
+
+_: FunctionType = get_text._
+""" 翻译api """
+
 
 class SeeCharacterItemBagPanel:
     """
@@ -25,23 +31,17 @@ class SeeCharacterItemBagPanel:
         """ 切换下一页的按钮返回 """
         character_data = cache_contorl.character_data[character_id]
         item_list = list(character_data.item)
-        item_panel = panel.PageHandlePanel(item_list,ItemNameDraw,20,4,width,1,1,0,"","|")
+        item_panel = panel.PageHandlePanel(item_list,ItemNameDraw,20,7,width,1,1,0,"","|")
         self.handle_panel = item_panel
         """ 页面控制对象 """
 
     def draw(self):
+        title_draw = draw.TitleLineDraw(_("人物道具"), self.width)
+        title_draw.draw()
         self.handle_panel.draw()
         self.item_button_list = self.handle_panel.return_list
         self.old_page_return = self.handle_panel.old_page_return
         self.next_page_return = self.handle_panel.next_page_return
-
-    def old_page(self):
-        """ 切换上一页 """
-        self.handle_panel.old_page()
-
-    def next_page(self):
-        """ 切换下一页 """
-        self.handle_panel.next_page()
 
 
 class ItemNameDraw:

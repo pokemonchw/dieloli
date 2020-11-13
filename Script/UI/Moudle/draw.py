@@ -1,4 +1,5 @@
 from typing import List
+from types import FunctionType
 from Script.Core import (
     text_handle,
     io_init,
@@ -263,9 +264,10 @@ class CenterButton:
     fix_text -- 对齐用补全文本
     normal_style -- 按钮默认样式
     on_mouse_style -- 鼠标悬停时样式
+    cmd_func -- 按钮响应事件函数
     """
 
-    def __init__(self,text:str,return_text:str,width:int,fix_text=" ",normal_style="standard",on_mouse_style="onbutton"):
+    def __init__(self,text:str,return_text:str,width:int,fix_text=" ",normal_style="standard",on_mouse_style="onbutton",cmd_func:FunctionType=None):
         """ 初始化绘制对象 """
         self.text: str = text
         """ 按钮文本 """
@@ -279,6 +281,8 @@ class CenterButton:
         """ 鼠标悬停时样式 """
         self.max_width: str = width
         """ 按钮文本的最大宽度 """
+        self.cmd_func:FunctionType = cmd_func
+        """ 按钮响应事件函数 """
 
     def __len__(self) -> int:
         """
@@ -322,6 +326,7 @@ class CenterButton:
             self.return_text,
             normal_style=self.normal_style,
             on_style=self.on_mouse_style,
+            cmd_func=self.cmd_func,
         )
 
 

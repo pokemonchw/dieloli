@@ -47,14 +47,20 @@ def confirm_character_attr_panel():
         ask_list = []
         ask_list.extend(now_handle_panel.return_list.keys())
         item_panel_ask_list = []
+        item_old_page_id = ""
+        item_next_page_id = ""
         if now_attr_panel.now_panel == _("道具"):
             ask_list.extend(now_attr_panel.draw_data[now_attr_panel.now_panel].item_button_list.keys())
-            ask_list.extend(now_attr_panel.draw_data[now_attr_panel.now_panel].old_page_return)
-            ask_list.extend(now_attr_panel.draw_data[now_attr_panel.now_panel].next_page_return)
-        print(ask_list)
+            item_next_page_id = now_attr_panel.draw_data[now_attr_panel.now_panel].next_page_return
+            item_old_page_id = now_attr_panel.draw_data[now_attr_panel.now_panel].old_page_return
+            ask_list.append(item_next_page_id)
+            ask_list.append(item_old_page_id)
         yrn = flow_handle.askfor_all(ask_list)
         if yrn in now_handle_panel.return_list:
             now_attr_panel.now_panel = yrn
+        elif now_attr_panel.now_panel == _("道具"):
+            if yrn in now_attr_panel.draw_data[now_attr_panel.now_panel].item_button_list:
+                pass
 
 
 def input_name_panel() -> bool:

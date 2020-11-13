@@ -109,6 +109,9 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
     if cmd_func == null_func:
         cmd_map[cmd_number] = null_func
         return
+    elif cmd_func == None:
+        cmd_map[cmd_number] = null_func
+        return
 
     def run_func():
         cmd_func(*arg, **kw)
@@ -163,7 +166,7 @@ def _cmd_deal(order_number):
     Keyword arguments:
     order_number -- 对应命令数字
     """
-    cmd_map[int(order_number)]()
+    cmd_map[order_number]()
 
 
 def _cmd_valid(order_number):
@@ -172,8 +175,7 @@ def _cmd_valid(order_number):
     Keyword arguments:
     order_number -- 对应命令数字
     """
-    re = (order_number in cmd_map.keys()) and (cmd_map[int(order_number)] != null_func)
-    return re
+    return (order_number in cmd_map) and (cmd_map[order_number] != null_func and cmd_map[order_number] != None)
 
 
 __skip_flag__ = False
@@ -202,14 +204,17 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
             if print_order and order != "":
                 io_init.era_print("\n" + order + "\n")
             if flag == "str":
+                if _cmd_valid(order):
+                    _cmd_deal(order)
+                    return order
                 if order.isdigit():
                     order = str(int(order))
                 return order
             if flag == "console":
                 exec(order)
-            if flag == "order" and order.isdigit():
-                if _cmd_valid(int(order)):
-                    _cmd_deal(int(order))
+            if flag == "order":
+                if _cmd_valid(order):
+                    _cmd_deal(order)
                     return
                 else:
                     global tail_deal_cmd_func
