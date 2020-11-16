@@ -28,6 +28,8 @@ class SeeCharacterPutOnClothingListPanel:
         """ 绘制的角色id """
         self.width:int = width
         """ 最大绘制宽度 """
+        self.return_list:List[str] = []
+        """ 当前面板监听的按钮列表 """
 
     def draw(self):
         """ 绘制面板 """

@@ -257,13 +257,13 @@ class CenterDrawButtonListPanel:
         """ 每行最大元素数 """
         self.draw_list: List[List[draw.Button]] = []
         """ 绘制按钮列表 """
-        self.return_list: Dict[str,str] = {}
+        self.return_list: List[str] = []
         """
         按钮返回的响应列表
         按钮返回值:响应文本
         """
 
-    def set(self,text_list:List[str],return_list:List[str],width:int,column:int,null_text:str=""):
+    def set(self,text_list:List[str],return_list:List[str],width:int,column:int,null_text:str="",cmd_func:FunctionType=None):
         """
         设置绘制信息
         Keyword arguments:
@@ -272,19 +272,21 @@ class CenterDrawButtonListPanel:
         width -- 绘制宽度
         column -- 每行最大元素数
         null_text -- 不作为按钮绘制的文本
+        cmd_func -- 列表元素按钮绑定函数
         """
         self.width = width
         self.column = column
         new_text_list = value_handle.list_of_groups(text_list,column)
         index = 0
+        self.return_list = return_list
+        self.draw_list: List[List[draw.Button]] = []
         for now_text_list in new_text_list:
             now_width = int(width / len(now_text_list))
             now_list = []
             for now_text in now_text_list:
                 if now_text != null_text:
-                    now_button = draw.CenterButton(now_text,return_list[index],now_width)
+                    now_button = draw.CenterButton(now_text,return_list[index],now_width,cmd_func=cmd_func,args=(return_list[index]))
                     now_list.append(now_button)
-                    self.return_list[return_list[index]] = text_list[index]
                 else:
                     now_info_draw = draw.CenterDraw()
                     now_info_draw.max_width = now_width
@@ -377,7 +379,7 @@ class PageHandlePanel:
         """ 每行之间的间隔线,为空则不绘制 """
         self.col_septal_lines:str = col_septal_lines
         """ 每列之间的间隔线,为空则不绘制 """
-        self.return_list:Dict[str,str] = {}
+        self.return_list:List[str] = []
         """ 按钮返回的id列表 """
         self.next_page_return:str = ""
         """ 切换下一页的按钮返回 """
@@ -428,9 +430,9 @@ class PageHandlePanel:
                 value_draw = self.draw_type(value,value_width,self.is_button,self.num_button,index)
                 value_draw.draw_text = text_handle.align(value_draw.draw_text,"center",0,1,value_width)
                 if self.num_button:
-                    self.return_list[str(index)] = value
+                    self.return_list.append(str(index))
                 else:
-                    self.return_list[value_draw.button_return] = value
+                    self.return_list.append(value_draw.button_return)
                 index += 1
                 draw_list.append(value_draw)
                 draw_list.append(col_fix_draw)
@@ -442,7 +444,7 @@ class PageHandlePanel:
             page_change_start_id = index + 1
         old_page_index_text = text_handle.id_index(page_change_start_id)
         old_page_button = draw.CenterButton(_(f"{old_page_index_text} 上一页"),str(page_change_start_id),int(self.width / 3),cmd_func=self.old_page)
-        self.old_page_return = str(page_change_start_id)
+        self.return_list.append(str(page_change_start_id))
         draw_list.append(old_page_button)
         page_text = f"({self.now_page}/{total_page})"
         page_draw = draw.CenterDraw()
@@ -451,7 +453,7 @@ class PageHandlePanel:
         draw_list.append(page_draw)
         next_page_index_text = text_handle.id_index(page_change_start_id + 1)
         next_page_button = draw.CenterButton(_(f"{next_page_index_text} 下一页"),str(page_change_start_id + 1),int(self.width / 3),cmd_func=self.next_page)
-        self.next_page_return = str(page_change_start_id + 1)
+        self.return_list.append(str(page_change_start_id + 1))
         draw_list.append(next_page_button)
         draw_list.append(line_feed)
         for value in draw_list:

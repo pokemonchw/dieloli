@@ -204,9 +204,6 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
             if print_order and order != "":
                 io_init.era_print("\n" + order + "\n")
             if flag == "str":
-                if _cmd_valid(order):
-                    _cmd_deal(order)
-                    return order
                 if order.isdigit():
                     order = str(int(order))
                 return order
@@ -240,17 +237,19 @@ def askfor_str(donot_return_null_str=True, print_order=False):
             return order
 
 
-def askfor_all(list, print_order=False):
+def askfor_all(input_list:list, print_order=False):
     """
     用于请求一个位于列表中的输入，如果输入没有在列表中，则告知用户出错。
     Keyword arguments:
-    list -- 用于判断的列表内容
+    input_list -- 用于判断的列表内容
     print_order -- 是否将输入的order输出到屏幕上
     """
     while 1:
         order = order_deal("str", print_order)
-        if order in list:
+        if order in input_list:
             io_init.era_print(order + "\n")
+            if _cmd_valid(order):
+                _cmd_deal(order)
             return order
         elif order == "":
             continue
@@ -282,9 +281,8 @@ def askfor_int(list, print_order=False):
 
 
 def askfor_wait():
-    """
-    用于情求一个暂停动作，任何如数都可以继续
-    """
+    """ 用于请求一个暂停动作，输入任何数都可以继续 """
+    cache_contorl.wframe_mouse.w_frame_up = 0
     while not cache_contorl.wframe_mouse.w_frame_up:
         re = askfor_str(donot_return_null_str=False)
         if re == "":
@@ -292,9 +290,7 @@ def askfor_wait():
 
 
 def init_cache():
-    """
-    缓存初始化
-    """
+    """ 缓存初始化 """
     cache_contorl.cmd_map = {}
     cache_contorl.input_cache = [""]
     cache_contorl.input_position = 0
@@ -307,21 +303,6 @@ def init_cache():
     }
     cache_contorl.cmd_data = {}
     cache_contorl.image_id = 0
-    cache_contorl.panel_state = {
-        "SeeSaveListPanel": "0",
-        "SeeCharacterListPanel": "0",
-        "SeeSceneCharacterListPanel": "0",
-        "SeeSceneCharacterListPage": "0",
-        "SeeSceneNameListPanel": "1",
-        "SeeCharacterClothesPanel": "0",
-        "AttrShowHandlePanel": "MainAttr",
-        "SeeCharacterWearItemListPanel": "0",
-        "SeeCharacterItemListPanel": "0",
-        "SeeFoodShopListByFoodTypePanel": 0,
-        "SeeFoodShopListByFoodPanel": 0,
-        "SeeFoodBagListByFoodPanel": 0,
-        "SeeFoodBagListByFoodTypePanel": 0,
-    }
     cache_contorl.max_save_page = game_config.config_normal.save_page
     cache_contorl.text_wait = float(game_config.config_normal.text_wait)
     cache_contorl.random_npc_list = []

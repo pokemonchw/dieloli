@@ -28,12 +28,14 @@ class SeeCharacterInfoPanel:
 
     def __init__(self, character_id: int, width: int):
         """ 初始化绘制对象 """
-        self.max_width = width
+        self.max_width:str = width
         """ 绘制的最大宽度 """
-        self.now_panel = _("属性")
+        self.now_panel:str = _("属性")
         """ 当前的属性页id """
-        self.character_id = character_id
+        self.character_id:int = character_id
         """ 要绘制的角色id """
+        self.return_list:List[str] = []
+        """ 当前面板监听的按钮列表 """
         main_attr_draw = SeeCharacterMainAttrPanel(character_id,width)
         see_status_draw = SeeCharacterStatusPanel(character_id,width,5)
         see_clothing_draw = see_clothing_info_panel.SeeCharacterPutOnClothingListPanel(character_id,width)
@@ -43,18 +45,33 @@ class SeeCharacterInfoPanel:
             _("状态"):see_status_draw,
             _("服装"):see_clothing_draw,
             _("道具"):see_item_draw,
-            _("穿戴"):None,
-            _("经验"):None,
             _("技能"):None,
             _("语言"):None,
             _("性格"):None,
             _("社交"):None
         }
         """ 按钮文本对应属性面板 """
+        self.handle_panel = panel.CenterDrawButtonListPanel()
+        """ 属性列表的控制面板 """
+        self.handle_panel.set([f"[{text}]" for text in self.draw_data.keys()],list(self.draw_data.keys()),width,4,f"[{self.now_panel}]",self.change_panel)
+
+    def change_panel(self,panel_id:str):
+        """
+        切换当前面板
+        Keyword arguments:
+        panel_id -- 要切换的面板id
+        """
+        self.now_panel = panel_id
+        self.handle_panel.set([f"[{text}]" for text in self.draw_data.keys()],list(self.draw_data.keys()),self.max_width,4,f"[{self.now_panel}]",self.change_panel)
 
     def draw(self):
         """ 绘制面板 """
         self.draw_data[self.now_panel].draw()
+        self.return_list.extend(self.draw_data[self.now_panel].return_list)
+        line = draw.LineDraw("=", self.max_width)
+        line.draw()
+        self.handle_panel.draw()
+        self.return_list.extend(self.handle_panel.return_list)
 
 
 class SeeCharacterMainAttrPanel:
@@ -82,6 +99,8 @@ class SeeCharacterMainAttrPanel:
             measurement_draw
         ]
         """ 绘制的面板列表 """
+        self.return_list:List[str] = []
+        """ 当前面板监听的按钮列表 """
 
     def draw(self):
         """ 绘制面板 """
@@ -108,6 +127,8 @@ class SeeCharacterStatusPanel:
         """ 每行状态最大个数 """
         self.draw_list:List[draw.NormalDraw] = []
         """ 绘制的文本列表 """
+        self.return_list:List[str] = []
+        """ 当前面板监听的按钮列表 """
         character_data = cache_contorl.character_data[character_id]
         for status_type in game_config.config_character_state_type_data:
             type_data = game_config.config_character_state_type[status_type]
@@ -388,3 +409,30 @@ class CharacterMeasurementsText:
         info_draw = panel.CenterDrawTextListPanel()
         info_draw.set(self.info_list,self.max_width,3)
         info_draw.draw()
+
+class CharacterSexExperienceText:
+    """
+    角色性经验信息面板
+    Keyword arguments:
+    character_id -- 角色id
+    width -- 最大宽度
+    """
+
+    def __init__(self,character_id:int,width:int):
+        """ 初始化绘制对象 """
+        self.character_id = character_id
+        """ 绘制的角色id """
+        self.max_width = width
+        """ 当前最大可绘制宽度 """
+        character_data = cache_contorl.character_data[self.character_id]
+        self.experience_text_data = {
+            0:_("嘴部开发度:"),
+            1:_("胸部开发度:"),
+            2:_("阴蒂开发度:"),
+            3:_("阴茎开发度:"),
+            4:_("阴道开发度:"),
+            5:_("肛门开发度:")
+        }
+        """ 性器官开发度描述 """
+        self.draw_list:List[draw.NormalDraw()] = []
+        """ 绘制对象列表 """

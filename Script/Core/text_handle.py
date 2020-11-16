@@ -55,12 +55,8 @@ def get_text_index(text: str) -> int:
         style_text_head = "<" + style_name_list[i] + ">"
         style_text_tail = "</" + style_name_list[i] + ">"
         if style_text_head in text:
-            if style_name_list[i] in bar_list:
-                text = text.replace(style_text_head, "")
-                text = text.replace(style_text_tail, "")
-            else:
-                text = text.replace(style_text_head, "")
-                text = text.replace(style_text_tail, "")
+            text = text.replace(style_text_head, "")
+            text = text.replace(style_text_tail, "")
     for i in range(len(text)):
         text_index += wcswidth(text[i])
     return text_index + style_width

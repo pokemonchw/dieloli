@@ -55,6 +55,28 @@ class NormalDraw:
             io_init.era_print(self.text, self.style)
 
 
+class WaitDraw(NormalDraw):
+    """ 绘制并等待玩家鼠标左右键或输入回车 """
+
+    def draw(self):
+        """ 绘制文本 """
+        if self.__len__() > self.max_width:
+            now_text = ""
+            if self.max_width > 0:
+                for i in self.text:
+                    if (
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                        < self.max_width
+                    ):
+                        now_text += i
+                    break
+                now_text = now_text[:-2] + "~"
+            io_init.era_print(now_text, self.style)
+        else:
+            io_init.era_print(self.text, self.style)
+        flow_handle.askfor_wait()
+
+
 class ImageDraw:
     """
     图片绘制
@@ -186,6 +208,8 @@ class Button:
     return_text -- 点击按钮响应文本
     normal_style -- 按钮默认样式
     on_mouse_style -- 鼠标悬停时样式
+    cmd_func -- 按钮响应事件函数
+    args -- 传给事件响应函数的参数列表
     """
 
     def __init__(
@@ -194,6 +218,8 @@ class Button:
         return_text: str,
         normal_style="standard",
         on_mouse_style="onbutton",
+        cmd_func=None,
+        args=(),
     ):
         """ 初始化绘制对象 """
         self.text: str = text
@@ -206,6 +232,10 @@ class Button:
         """ 鼠标悬停时样式 """
         self.max_width: int = 0
         """ 按钮文本的最大宽度 """
+        self.cmd_func:FunctionType = cmd_func
+        """ 按钮响应事件函数 """
+        self.args = args
+        """ 传给事件响应函数的参数列表 """
 
     def __len__(self) -> int:
         """
@@ -251,6 +281,8 @@ class Button:
                 self.return_text,
                 normal_style=self.normal_style,
                 on_style=self.on_mouse_style,
+                cmd_func=self.cmd_func,
+                arg=self.args,
             )
 
 
@@ -265,9 +297,10 @@ class CenterButton:
     normal_style -- 按钮默认样式
     on_mouse_style -- 鼠标悬停时样式
     cmd_func -- 按钮响应事件函数
+    args -- 传给事件响应函数的参数列表
     """
 
-    def __init__(self,text:str,return_text:str,width:int,fix_text=" ",normal_style="standard",on_mouse_style="onbutton",cmd_func:FunctionType=None):
+    def __init__(self,text:str,return_text:str,width:int,fix_text=" ",normal_style="standard",on_mouse_style="onbutton",cmd_func:FunctionType=None,args=()):
         """ 初始化绘制对象 """
         self.text: str = text
         """ 按钮文本 """
@@ -283,6 +316,8 @@ class CenterButton:
         """ 按钮文本的最大宽度 """
         self.cmd_func:FunctionType = cmd_func
         """ 按钮响应事件函数 """
+        self.args = args
+        """ 传给事件响应函数的参数列表 """
 
     def __len__(self) -> int:
         """
@@ -327,6 +362,7 @@ class CenterButton:
             normal_style=self.normal_style,
             on_style=self.on_mouse_style,
             cmd_func=self.cmd_func,
+            arg=self.args,
         )
 
 
@@ -527,3 +563,46 @@ class RightDraw(NormalDraw):
         else:
             now_text = text_handle.align(self.text, "right", 0, 1, self.max_width)
         io_init.era_print(now_text, self.style)
+
+
+class ExpLevelDraw:
+    """
+    将经验数字转换为对应评级文本
+    Keyword arguments:
+    exp -- 经验值
+    """
+
+    def __init__(self,exp:int):
+        """ 初始化绘制对象 """
+        self.exp = exp
+        """ 要转换的经验值 """
+        grade = ""
+        if experience < 50:
+            grade = "G"
+        elif experience < 100:
+            grade = "F"
+        elif experience < 200:
+            grade = "E"
+        elif experience < 500:
+            grade = "D"
+        elif experience < 1000:
+            grade = "C"
+        elif experience < 2000:
+            grade = "B"
+        elif experience < 5000:
+            grade = "A"
+        elif experience < 10000:
+            grade = "S"
+        elif experience >= 10000:
+            grade = "EX"
+        style = f"level{grade.lower()}"
+        now_draw = NormalDraw()
+        now_draw.max_width = 1
+        now_draw.style = style
+        now_draw.text = grade
+        self.grade_draw = now_draw
+        """ 生成的等级绘制对象 """
+
+    def draw(self):
+        """ 绘制文本 """
+        self.grade_draw.draw()
