@@ -1,4 +1,5 @@
-from typing import List, Dict
+import itertools
+from typing import List, Dict,Tuple
 from types import FunctionType
 from Script.UI.Moudle import draw
 from Script.Core import io_init, flow_handle, text_handle, get_text,value_handle
@@ -21,7 +22,7 @@ class SingleColumnButton:
         按钮返回的响应列表
         按钮返回值:按钮文本
         """
-        self.max_width = 0
+        self.width = 0
         """ 绘制的最大宽度 """
         self.max_height = 0
         """ 绘制的最大高度 """
@@ -44,7 +45,7 @@ class SingleColumnButton:
         for i in range(len(button_list)):
             if i <= self.max_height:
                 draw_button = draw.Button(button_list[i], return_list[i], normal_style, onbutton_style)
-                draw_button.max_width = self.max_width
+                draw_button.width = self.width
                 self.button_list.append(draw_button)
             self.return_list[return_list[i]] = button_list[i]
 
@@ -100,9 +101,9 @@ class OneMessageAndSingleColumnButton:
         width = normal_config.config_normal.text_width
         self.message = draw.NormalDraw()
         self.message.text = message
-        self.message.max_width = width
+        self.message.width = width
         self.button_panel = SingleColumnButton()
-        self.button_panel.max_width = width
+        self.button_panel.width = width
         self.button_panel.max_height = len(return_list)
         self.button_panel.set(new_button_list, return_list)
         self.button_panel.return_list = dict(zip(return_list, button_list))
@@ -141,7 +142,7 @@ class AskForOneMessage:
         """
         self.message = draw.NormalDraw()
         self.message.text = message
-        self.message.max_width = normal_config.config_normal.text_width
+        self.message.width = normal_config.config_normal.text_width
         self.input_max = input_max
 
     def draw(self) -> str:
@@ -188,12 +189,12 @@ class TitleAndRightInfoListPanel:
         line = draw.LineDraw("=", width)
         self.draw_list.append(line)
         title = draw.CenterDraw()
-        title.max_width = self.width
+        title.width = self.width
         title.text = title_text
         self.draw_list.append(title)
         for info_text in info_list:
             info = draw.RightDraw()
-            info.max_width = width
+            info.width = width
             info.text = info_text
             self.draw_list.append(info)
         self.draw_list.append(line)
@@ -210,9 +211,9 @@ class CenterDrawTextListPanel:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.width = 0
+        self.width:int = 0
         """ 面板宽度 """
-        self.column = 0
+        self.column:int = 0
         """ 每行最大元素数 """
         self.draw_list: List[List[draw.CenterDraw]] = []
         """ 绘制列表 """
@@ -233,7 +234,7 @@ class CenterDrawTextListPanel:
             now_list = []
             for now_info in now_info_list:
                 now_info_draw = draw.CenterDraw()
-                now_info_draw.max_width = now_width
+                now_info_draw.width = now_width
                 now_info_draw.text = now_info
                 now_list.append(now_info_draw)
             self.draw_list.append(now_list)
@@ -243,6 +244,35 @@ class CenterDrawTextListPanel:
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()
+            io_init.era_print("\n")
+
+
+class VerticalDrawTextListGroup:
+    """
+    竖列并排绘制多个文本对象列表
+    Keyword arguments:
+    width -- 最大绘制宽度
+    """
+
+    def __init__(self,width:int):
+        """ 初始化绘制对象 """
+        self.width:int = width
+        """ 当前最大绘制宽度 """
+        self.draw_list:List[List[draw.NormalDraw]] = []
+        """ 绘制的对象列表 """
+
+    def draw(self):
+        """ 绘制对象 """
+        new_group = itertools.zip_longest(*self.draw_list)
+        for draw_list in new_group:
+            now_width = int(self.width / len(draw_list))
+            for value in draw_list:
+                if value != None:
+                    value.draw()
+                else:
+                    now_draw = draw.NormalDraw()
+                    now_draw.text = " " * now_width
+                    now_draw.draw()
             io_init.era_print("\n")
 
 
@@ -289,7 +319,7 @@ class CenterDrawButtonListPanel:
                     now_list.append(now_button)
                 else:
                     now_info_draw = draw.CenterDraw()
-                    now_info_draw.max_width = now_width
+                    now_info_draw.width = now_width
                     now_info_draw.text = now_text
                     now_info_draw.style = "onbutton"
                     now_list.append(now_info_draw)
@@ -298,6 +328,7 @@ class CenterDrawButtonListPanel:
 
     def draw(self):
         """ 绘制面板 """
+        now_draw = VerticalDrawTextListGroup(self.width)
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()
@@ -410,7 +441,7 @@ class PageHandlePanel:
         index = self.button_start_id
         line_feed = draw.NormalDraw()
         line_feed.text = "\n"
-        line_feed.max_width = 1
+        line_feed.width = 1
         index = 0
         for draw_text_list in draw_text_group:
             if self.row_septal_lines != "":
@@ -424,7 +455,7 @@ class PageHandlePanel:
             value_width = int(now_width / len(draw_text_list))
             col_fix_draw = draw.NormalDraw()
             col_fix_draw.text = self.col_septal_lines
-            col_fix_draw.max_width = 1
+            col_fix_draw.width = 1
             draw_list.append(col_fix_draw)
             for value in draw_text_list:
                 value_draw = self.draw_type(value,value_width,self.is_button,self.num_button,index)
@@ -448,7 +479,7 @@ class PageHandlePanel:
         draw_list.append(old_page_button)
         page_text = f"({self.now_page}/{total_page})"
         page_draw = draw.CenterDraw()
-        page_draw.max_width = int(self.width / 3)
+        page_draw.width = int(self.width / 3)
         page_draw.text = page_text
         draw_list.append(page_draw)
         next_page_index_text = text_handle.id_index(page_change_start_id + 1)

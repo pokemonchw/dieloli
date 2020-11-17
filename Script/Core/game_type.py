@@ -430,7 +430,7 @@ class Character(RecordClass):
     """ 角色所属班级坐标 """
     officeroom: List[str] = ""
     """ 角色所属办公室坐标 """
-    knowledge: Dict[str, int] = {}
+    knowledge: Dict[int, int] = {}
     """ 角色知识技能等级数据 """
     language: Dict[int, int] = {}
     """

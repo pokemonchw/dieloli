@@ -87,7 +87,7 @@ class ItemNameDraw:
         else:
             now_draw = draw.NormalDraw()
             now_draw.text = self.draw_text
-        now_draw.max_width = self.width
+        now_draw.width = self.width
         now_draw.draw()
 
     def draw_item_info(self):
@@ -117,9 +117,9 @@ class ItemInfoDraw:
         item_config = game_config.config_item[self.cid]
         item_draw = draw.WaitDraw()
         item_draw.text = f"{item_config.name}:{item_config.info}"
-        item_draw.max_width = self.width
+        item_draw.width = self.width
         item_draw.draw()
         line_feed = draw.NormalDraw()
         line_feed.text = "\n"
-        line_feed.max_width = 1
+        line_feed.width = 1
         line_feed.draw()

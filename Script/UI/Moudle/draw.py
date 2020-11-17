@@ -21,7 +21,7 @@ class NormalDraw:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.max_width: int = 0
+        self.width: int = 0
         """ 当前最大可绘制宽度 """
         self.text = ""
         """ 当前要绘制的文本 """
@@ -33,19 +33,19 @@ class NormalDraw:
         int -- 文本长度
         """
         text_index = text_handle.get_text_index(self.text)
-        if text_index > self.max_width:
-            return self.max_width
+        if text_index > self.width:
+            return self.width
         return text_index
 
     def draw(self):
         """ 绘制文本 """
-        if self.__len__() > self.max_width:
+        if self.__len__() > self.width:
             now_text = ""
-            if self.max_width > 0:
+            if self.width > 0:
                 for i in self.text:
                     if (
                         text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.max_width
+                        < self.width
                     ):
                         now_text += i
                     break
@@ -60,13 +60,13 @@ class WaitDraw(NormalDraw):
 
     def draw(self):
         """ 绘制文本 """
-        if self.__len__() > self.max_width:
+        if self.__len__() > self.width:
             now_text = ""
-            if self.max_width > 0:
+            if self.width > 0:
                 for i in self.text:
                     if (
                         text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.max_width
+                        < self.width
                     ):
                         now_text += i
                     break
@@ -108,7 +108,7 @@ class BarDraw:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.max_width = 0
+        self.width = 0
         """ 比例条最大长度 """
         self.bar_id = ""
         """ 比例条类型id """
@@ -123,11 +123,11 @@ class BarDraw:
         max_value -- 最大数值
         value -- 当前数值
         """
-        if self.max_width > 0:
+        if self.width > 0:
             proportion = 0
-            if self.max_width > 1:
-                proportion = int(value / max_value * self.max_width)
-            fix_bar = int(self.max_width - proportion)
+            if self.width > 1:
+                proportion = int(value / max_value * self.width)
+            fix_bar = int(self.width - proportion)
             style_data = game_config.config_bar[game_config.config_bar_data[bar_id]]
             for i in range(proportion):
                 now_draw = ImageDraw(style_data.ture_bar, "bar")
@@ -157,7 +157,7 @@ class InfoBarDraw:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.max_width: int = 0
+        self.width: int = 0
         """ 比例条最大长度 """
         self.bar_id: str = ""
         """ 比例条类型id """
@@ -177,21 +177,21 @@ class InfoBarDraw:
         value -- 当前数值
         text -- 描述文本
         """
-        now_max_width = int(self.max_width * self.scale)
+        now_max_width = int(self.width * self.scale)
         info_draw = NormalDraw()
-        info_draw.max_width = int(now_max_width / 3)
+        info_draw.width = int(now_max_width / 3)
         info_draw.text = f"{text}["
         value_draw = NormalDraw()
-        value_draw.max_width = int(now_max_width / 3)
-        value_draw.text = f"(]{value}/{max_value})"
+        value_draw.width = int(now_max_width / 3)
+        value_draw.text = f"]({value}/{max_value})"
         self.bar_id = bar_id
         bar_draw = BarDraw()
-        bar_draw.max_width = now_max_width - len(info_draw) - len(value_draw)
+        bar_draw.width = now_max_width - len(info_draw) - len(value_draw)
         bar_draw.set(self.bar_id, max_value, value)
-        fix_width = int((self.max_width - now_max_width) / 2)
+        fix_width = int((self.width - now_max_width) / 2)
         fix_draw = NormalDraw()
         fix_draw.text = " " * fix_width
-        fix_draw.max_width = fix_width
+        fix_draw.width = fix_width
         self.draw_list = [fix_draw, info_draw, bar_draw, value_draw, fix_draw]
 
     def draw(self):
@@ -230,7 +230,7 @@ class Button:
         """ 按钮默认样式 """
         self.on_mouse_style: str = on_mouse_style
         """ 鼠标悬停时样式 """
-        self.max_width: int = 0
+        self.width: int = 0
         """ 按钮文本的最大宽度 """
         self.cmd_func:FunctionType = cmd_func
         """ 按钮响应事件函数 """
@@ -257,13 +257,13 @@ class Button:
 
     def draw(self):
         """ 绘制按钮 """
-        if self.max_width < len(self):
+        if self.width < len(self):
             now_text = ""
-            if self.max_width > 0:
+            if self.width > 0:
                 for i in self.text:
                     if (
                         text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.max_width
+                        < self.width
                     ):
                         now_text += i
                         continue
@@ -312,7 +312,7 @@ class CenterButton:
         """ 按钮默认样式 """
         self.on_mouse_style: str = on_mouse_style
         """ 鼠标悬停时样式 """
-        self.max_width: str = width
+        self.width: int = width
         """ 按钮文本的最大宽度 """
         self.cmd_func:FunctionType = cmd_func
         """ 按钮响应事件函数 """
@@ -325,7 +325,7 @@ class CenterButton:
         Return arguments:
         int -- 文本长度
         """
-        return self.max_width
+        return self.width
 
     def __it__(self,other:Button):
         """
@@ -335,27 +335,27 @@ class CenterButton:
         Return arguments:
         bool -- 大小校验
         """
-        return self.max_width < other.max_width
+        return self.width < other.width
 
     def draw(self):
         """ 绘制按钮 """
-        if self.max_width < text_handle.get_text_index(self.text):
+        if self.width < text_handle.get_text_index(self.text):
             now_text = ""
-            if self.max_width > 0:
+            if self.width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.max_width:
+                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
         else:
             now_index = text_handle.get_text_index(self.text)
             now_text = self.text
-            if now_index == self.max_width - 1:
+            if now_index == self.width - 1:
                 now_text = " " + now_text
-            elif now_index == self.max_width - 2:
+            elif now_index == self.width - 2:
                 now_text = " " + now_text + " "
             else:
-                now_text = text_handle.align(now_text,"center",0,1,self.max_width)
+                now_text = text_handle.align(now_text,"center",0,1,self.width)
         py_cmd.pcmd(
             now_text,
             self.return_text,
@@ -397,7 +397,7 @@ class LineDraw:
         text_index = text_handle.get_text_index(self.text)
         text_num = self.width / text_index
         now_draw = NormalDraw()
-        now_draw.max_width = self.width
+        now_draw.width = self.width
         now_draw.text = self.text * int(text_num) + "\n"
         now_draw.style = self.style
         now_draw.draw()
@@ -445,7 +445,7 @@ class TitleLineDraw:
     def draw(self):
         """ 绘制线条 """
         title_draw = NormalDraw()
-        title_draw.max_width = self.width
+        title_draw.width = self.width
         title_draw.style = self.title_style
         title_draw.text = f" {self.title} "
         fix_width = self.width - len(title_draw)
@@ -453,14 +453,14 @@ class TitleLineDraw:
             fix_width = 0
         frame_width = int(fix_width / 2)
         frame_draw = NormalDraw()
-        frame_draw.max_width = frame_width
+        frame_draw.width = frame_width
         frame_draw.style = self.frame_style
         frame_draw.text = self.frame
         line_width = int(fix_width / 2 - len(frame_draw))
         if line_width < 0:
             line_width = 0
         line_draw = NormalDraw()
-        line_draw.max_width = line_width
+        line_draw.width = line_width
         line_draw.style = self.style
         line_draw.text = self.line * line_width
         for text in [line_draw, frame_draw, title_draw, frame_draw, line_draw]:
@@ -495,20 +495,20 @@ class LittleTitleLineDraw:
     def draw(self):
         """ 绘制线条 """
         title_draw = NormalDraw()
-        title_draw.max_width = self.width
+        title_draw.width = self.width
         title_draw.text = self.title
         title_draw.style = self.title_style
         line_a_width = int(self.width / 4) - len(title_draw)
         if line_a_width < 0:
             line_a_width = 0
         line_a = NormalDraw()
-        line_a.max_width = line_a_width
+        line_a.width = line_a_width
         line_a.style = self.style
         line_a.text = self.line * line_a_width
         line_b = NormalDraw()
-        line_b.max_width = self.width - len(title_draw) - len(line_a)
+        line_b.width = self.width - len(title_draw) - len(line_a)
         line_b.style = self.style
-        line_b.text = self.line * line_b.max_width
+        line_b.text = self.line * line_b.width
         for value in [line_a,title_draw,line_b]:
             value.draw()
         io_init.era_print("\n")
@@ -516,30 +516,74 @@ class LittleTitleLineDraw:
 class CenterDraw(NormalDraw):
     """ 居中绘制文本 """
 
+    def __gt__(self,other) -> bool:
+        return len(self) > len(other)
+
     def draw(self):
         """ 绘制文本 """
-        self.max_width = int(self.max_width)
-        if len(self) > self.max_width:
+        self.width = int(self.width)
+        if len(self) > self.width:
             now_text = ""
-            if self.max_width > 0:
+            if self.width > 0:
                 for i in self.text:
                     if (
                         text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.max_width
+                        < self.width
                     ):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
             io_init.era_print(now_text, self.style)
-        elif len(self) > self.max_width - 1:
+        elif len(self) > self.width - 1:
             now_text = " " + self.text
-        elif len(self) > self.max_width - 2:
+        elif len(self) > self.width - 2:
             now_text = " " + self.text + " "
         else:
-            now_text = text_handle.align(self.text, "center", 0, 1, self.max_width)
-        if len(self) < self.max_width:
-            now_text += " " * (int(self.max_width) - text_handle.get_text_index(now_text))
+            now_text = text_handle.align(self.text, "center", 0, 1, self.width)
+        if len(self) < self.width:
+            now_text += " " * (int(self.width) - text_handle.get_text_index(now_text))
         io_init.era_print(now_text, self.style)
+
+
+
+class CenterMergeDraw:
+    """
+    将绘制列表合并在一起并居中绘制
+    Keyword arguments:
+    width -- 最大宽度
+    """
+
+    def __init__(self,width:int):
+        """ 初始化绘制对象 """
+        self.width:int = width
+        """ 最大宽度 """
+        self.draw_list:List[NormalDraw] = []
+        """ 绘制列表 """
+
+    def __len__(self) -> int:
+        """ 获取当前绘制对象宽度 """
+        return self.width
+
+    def __gt__(self,other) -> int:
+        return len(self) > len(other)
+
+    def draw(self):
+        """ 绘制列表 """
+        now_width = 0
+        for value in self.draw_list:
+            now_width += len(value)
+        now_text = " " * now_width
+        fix_text = text_handle.align(now_text,"center",1,1,self.width)
+        fix_draw = NormalDraw()
+        fix_draw.text = fix_text
+        fix_draw.width = len(fix_text)
+        fix_draw.draw()
+        for value in self.draw_list:
+            value.draw()
+        now_width = fix_draw.width * 2 + now_width
+        if now_width < self.width:
+            fix_draw.text += (self.width - now_width) * " "
+        fix_draw.draw()
 
 
 class RightDraw(NormalDraw):
@@ -547,21 +591,21 @@ class RightDraw(NormalDraw):
 
     def draw(self):
         """ 绘制文本 """
-        if len(self) > self.max_width:
+        if len(self) > self.width:
             now_text = ""
-            if self.max_width > 0:
+            if self.width:
                 for i in self.text:
                     if (
                         text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.max_width
+                        < self.width
                     ):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
-        elif len(self) > self.max_width - 2:
+        elif len(self) > self.width - 2:
             now_text = " " + self.text
         else:
-            now_text = text_handle.align(self.text, "right", 0, 1, self.max_width)
+            now_text = text_handle.align(self.text, "right", 0, 1, self.width)
         io_init.era_print(now_text, self.style)
 
 
@@ -569,13 +613,11 @@ class ExpLevelDraw:
     """
     将经验数字转换为对应评级文本
     Keyword arguments:
-    exp -- 经验值
+    experience -- 经验值
     """
 
-    def __init__(self,exp:int):
+    def __init__(self,experience:int):
         """ 初始化绘制对象 """
-        self.exp = exp
-        """ 要转换的经验值 """
         grade = ""
         if experience < 50:
             grade = "G"
@@ -597,11 +639,19 @@ class ExpLevelDraw:
             grade = "EX"
         style = f"level{grade.lower()}"
         now_draw = NormalDraw()
-        now_draw.max_width = 1
+        now_draw.width = 1
         now_draw.style = style
         now_draw.text = grade
         self.grade_draw = now_draw
         """ 生成的等级绘制对象 """
+
+    def __len__(self) -> int:
+        """
+        获取等级文本长度
+        Return arguments:
+        int -- 等级文本长度
+        """
+        return len(self.grade_draw)
 
     def draw(self):
         """ 绘制文本 """

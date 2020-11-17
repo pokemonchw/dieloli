@@ -11,7 +11,7 @@ _: FunctionType = get_text._
 line_feed = draw.NormalDraw()
 """ 换行绘制对象 """
 line_feed.text = "\n"
-line_feed.max_width = 1
+line_feed.width = 1
 
 
 class SeeCharacterPutOnClothingListPanel:
@@ -50,7 +50,7 @@ class SeeCharacterPutOnClothingListPanel:
             else:
                 now_draw = draw.NormalDraw()
                 now_draw.text = _("未穿戴")
-                now_draw.max_width = self.width
+                now_draw.width = self.width
             draw_list.append(now_draw)
             draw_list.append(line_feed)
         for value in draw_list:
@@ -138,5 +138,5 @@ class ClothingInfoDrawPanel:
         else:
             now_draw = draw.NormalDraw()
             now_draw.text = now_text
-        now_draw.max_width = self.width
+        now_draw.width = self.width
         now_draw.draw()

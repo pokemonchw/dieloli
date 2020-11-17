@@ -22,13 +22,13 @@ def title_panel():
     title_info.set(config_normal.game_name, info_list, width)
     title_info.draw()
     lineFeed = draw.NormalDraw()
-    lineFeed.max_width = 1
+    lineFeed.width = 1
     lineFeed.text = "\n"
     info = _("人类是可以被驯化的")
     lineFeed.draw()
     info_draw = draw.CenterDraw()
     info_draw.text = info
-    info_draw.max_width = width
+    info_draw.width = width
     info_draw.draw()
     lineFeed.draw()
     lineFeed.draw()

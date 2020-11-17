@@ -47,7 +47,6 @@ def get_text_index(text: str) -> int:
     Keyword arguments:
     text -- 要进行长度计算的文本
     """
-    text_style_list = rich_text.get_rich_text_print(text, "standard")
     text_index = 0
     style_width = 0
     style_name_list = list(game_config.config_font_data.keys())
