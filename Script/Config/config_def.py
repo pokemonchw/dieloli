@@ -477,10 +477,10 @@ class School:
     """ 名字 """
     day: int
     """ 每周上课天数 """
-    最小年龄: int
-    """ min_age """
-    最大年龄: int
-    """ max_age """
+    min_age: int
+    """ 最小年龄 """
+    max_age: int
+    """ 最大年龄 """
 
 
 class OccupationAgeRegion:
@@ -494,6 +494,19 @@ class OccupationAgeRegion:
     """ 年龄段 """
     region: int
     """ 权重区间 """
+
+
+class SchoolPhaseCourse:
+    """ 各学校各年级教学科目配置 """
+
+    cid: int
+    """ 配表id """
+    school: int
+    """ 学校id """
+    phase: int
+    """ 年级 """
+    course: int
+    """ 课程id """
 
 
 class KnowledgeType:
@@ -602,6 +615,8 @@ class Recipes:
     """ 菜谱id """
     name: str
     """ 菜谱名字 """
+    time: int
+    """ 烹饪时间 """
 
 
 class WeekDay:

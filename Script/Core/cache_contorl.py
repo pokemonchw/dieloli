@@ -4,8 +4,6 @@ from types import FunctionType
 from uuid import UUID
 from Script.Core import game_type
 
-character_bak:Dict[int,game_type.Character] = {}
-character_bak_bak:Dict[int,game_type.Character] = {}
 game_data = {}
 """ 游戏预设配置数据 """
 flow_contorl: game_type.FlowContorl = game_type.FlowContorl()
@@ -60,10 +58,36 @@ max_save_page: int = 0
 """ 存档页面最大数量 """
 now_panel_id: int = 0
 """ 当前游面板id """
-course_data: dict = {}
-""" 各个年级各科目课时数据 """
-teacher_course_experience: dict = {}
-""" 教师科目经验 """
+course_data: Dict[int,Dict[int,Dict[int,int]]] = {}
+"""
+各个学校各年级各科目课时数据
+学校id:年级:科目id:每周课时
+"""
+course_time_table_data:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
+"""
+各个学校各年级课程表数据
+学校id:年级:周几:第几节课:科目id
+"""
+course_school_phase_knowledge_experience:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
+"""
+各个学校各学年各技能理论增长经验总量
+学校id:年级:课程:技能:经验
+"""
+course_school_phase_language_experience:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
+"""
+各个学校各学年各语言理论增长经验总量
+学校id:年级:课程:语言:经验
+"""
+teacher_course_experience: Dict[int,Dict[int,int]] = {}
+"""
+教师科目经验
+科目id:教师id:经验
+"""
+classroom_teacher_data:Dict[str,Dict[str,Dict[int,Set]]] = {}
+"""
+各班级各科目教师配置数据
+年级房间标签(Classroom_n):教室路径:科目id:教师集合
+"""
 old_character_id: int = 0
 """ 离开场景面板前在场景中查看的角色id """
 total_number_of_people_of_all_ages: Dict[str, int] = {}
@@ -105,10 +129,10 @@ settle_behavior_data: dict = {}
 """ 角色行为结算处理器 """
 over_behavior_character: Dict[int, int] = {}
 """ 本次update中已结束结算的npc """
-teacher_class_time_table: Dict[int, Dict[int, Dict[int, Dict[str, str]]]] = {}
+teacher_class_time_table: Dict[int, Dict[int, Dict[int, Dict[int, Dict[int,Dict[str,int]]]]]] = {}
 """
 各班级各老师上课时间表
-周几:上课时间:教师id:教室id:科目
+周几:学校id:年级id:上课时间:教师id:教室id:科目
 """
 teacher_phase_table: Dict[int, int] = {}
 """ 各老师所在年级 """

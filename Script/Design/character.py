@@ -57,7 +57,6 @@ def init_attr(character_id: int):
             character_data.nature[nature_id] = new_nature[nature_id]
     character_data.social_contact = {social: set() for social in game_config.config_social_type}
     init_class(character_data)
-    put_on_clothing(character_data)
 
 
 def init_class(character_data: game_type.Character):
@@ -68,39 +67,6 @@ def init_class(character_data: game_type.Character):
     if character_data.age <= 18 and character_data.age >= 7:
         class_grade = str(character_data.age - 6)
         character_data.classroom = random.choice(cache_contorl.place_data["Classroom_" + class_grade])
-
-
-def put_on_clothing(character_data: game_type.Character):
-    """
-    角色自动选择并穿戴服装
-    Keyword arguments:
-    character_data -- 角色对象
-    """
-    character_clothing_data = character_data.clothing
-    collocation_data = {}
-    clothings_name_data = clothing.get_clothing_name_data(character_clothing_data)
-    clothings_price_data = clothing.get_clothing_price_data(character_clothing_data)
-    for clothing_type in clothings_name_data:
-        clothing_type_data = clothings_name_data[clothing_type]
-        for clothing_name in clothing_type_data:
-            clothing_name_data = clothing_type_data[clothing_name]
-            clothing_id = list(clothing_name_data.keys())[-1]
-            clothing_data = character_clothing_data[clothing_type][clothing_id]
-            now_collocation_data = clothing.get_clothing_collocation_data(
-                clothing_data,
-                clothings_name_data,
-                clothings_price_data,
-                character_clothing_data,
-            )
-            if now_collocation_data != "None":
-                now_collocation_data[clothing_type] = clothing_id
-                now_collocation_data["Price"] += clothings_price_data[clothing_type][clothing_id]
-                collocation_data[clothing_id] = now_collocation_data
-    collocation_price_data = {
-        collocation: collocation_data[collocation]["Price"] for collocation in collocation_data
-    }
-    collocation_id = list(value_handle.sorted_dict_for_values(collocation_price_data).keys())[-1]
-    character_data.put_on = collocation_data[collocation_id]
 
 
 def init_character_behavior_start_time(character_id: int):

@@ -8,6 +8,7 @@ from Script.Design import handle_panel, character,character_handle
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
 from Script.Config import normal_config, game_config
+from Script.Flow import game_start_flow
 
 _: FunctionType = get_text._
 """ 翻译api """
@@ -28,6 +29,7 @@ def creator_character_panel():
         if input_name_panel():
             character.init_attr(0)
             character_handle.init_character_list()
+            game_start_flow.init_game_start()
             confirm_character_attr_panel()
             break
 

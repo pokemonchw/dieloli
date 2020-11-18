@@ -1,5 +1,5 @@
 from Script.Core import cache_contorl, constant
-from Script.Design import map_handle, game_time, update, character
+from Script.Design import map_handle, update, character
 
 
 def own_charcter_move(target_scene: list):
@@ -126,6 +126,5 @@ def identical_map_move(
     if move_path != []:
         now_target_scene_id = move_path["Path"][0]
         now_need_time = move_path["Time"][0]
-        now_character_position = map_handle.get_scene_path_for_map_scene_id(now_map, now_map_scene_id)
         now_target_position = map_handle.get_scene_path_for_map_scene_id(now_map, now_target_scene_id)
     return move_end, move_path, now_target_position, now_need_time

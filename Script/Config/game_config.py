@@ -172,8 +172,17 @@ config_recipes_formula: Dict[int, config_def.RecipesFormula] = {}
 """ 菜谱配方配置 """
 config_recipes_formula_type: Dict[int, config_def.RecipesFormulaType] = {}
 """ 菜谱配方材料类型配置 """
+config_recipes_formula_data: Dict[int,Dict[int,Set]] = {}
+""" 菜谱配方材料配置数据 """
 config_school: Dict[int, config_def.School] = {}
 """ 学校配置数据 """
+config_school_phase_course: Dict[int,config_def.SchoolPhaseCourse] = {}
+""" 各学校各年级科目配置 """
+config_school_phase_course_data:Dict[int,Dict[int,Set]] = {}
+"""
+各学校各年级科目配置数据
+学校id:年级id:科目集合
+"""
 config_school_session: Dict[int, config_def.SchoolSession] = {}
 """ 学校上课时间配置 """
 config_school_session_data: Dict[int, Dict[int, int]] = {}
@@ -656,6 +665,9 @@ def load_recipes_formula():
         now_tem = config_def.RecipesFormula()
         now_tem.__dict__ = tem_data
         config_recipes_formula[now_tem.cid] = now_tem
+        config_recipes_formula_data.setdefault(now_tem.recipe_id,{})
+        config_recipes_formula_data[now_tem.recipe_id].setdefault(now_tem.formula_type,set())
+        config_recipes_formula_data[now_tem.recipe_id][now_tem.formula_type].add(now_tem.food_id)
 
 
 def load_recipes_formula_type():
@@ -676,6 +688,19 @@ def load_school():
         now_tem = config_def.School()
         now_tem.__dict__ = tem_data
         config_school[now_tem.cid] = now_tem
+
+
+def load_school_phase_course():
+    """ 载入各学校各年级课程科目配置数据 """
+    now_data = config_data["SchoolPhaseCourse"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.SchoolPhaseCourse()
+        now_tem.__dict__ = tem_data
+        config_school_phase_course[now_tem.cid] = now_tem
+        config_school_phase_course_data.setdefault(now_tem.school,{})
+        config_school_phase_course_data[now_tem.school].setdefault(now_tem.phase,set())
+        config_school_phase_course_data[now_tem.school][now_tem.phase].add(now_tem.course)
 
 
 def load_school_session():
@@ -839,6 +864,7 @@ def init():
     load_recipes_formula()
     load_recipes_formula_type()
     load_school()
+    load_school_phase_course()
     load_school_session()
     load_sex_experience()
     load_sex_experience_tem()

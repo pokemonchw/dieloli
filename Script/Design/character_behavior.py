@@ -1,6 +1,5 @@
 import os
 import random
-import time
 from functools import wraps
 from Script.Core import (
     cache_contorl,
@@ -23,14 +22,11 @@ def init_character_behavior():
     """
     角色行为树总控制
     """
-    t1 = time.time()
     while 1:
         if len(cache_contorl.over_behavior_character) >= len(cache_contorl.character_data):
             break
         for character_id in cache_contorl.character_data:
             character_behavior(character_id)
-    t2 = time.time()
-    print(t2 - t1)
     cache_contorl.over_behavior_character = {}
 
 
