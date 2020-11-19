@@ -24,6 +24,7 @@ def init_character_list():
     """
     初始生成所有npc数据
     """
+    t1 = time.time()
     init_character_tem()
     id_list = iter([i + 1 for i in range(len(cache_contorl.npc_tem_data))])
     npc_data_iter = iter(cache_contorl.npc_tem_data)
@@ -31,6 +32,8 @@ def init_character_list():
         init_character(now_id, now_npc_data)
     index_character_average_value()
     calculate_the_average_value_of_each_attribute_of_each_age_group()
+    t2 = time.time()
+    print(t2-t1)
 
 
 def calculate_the_average_value_of_each_attribute_of_each_age_group():

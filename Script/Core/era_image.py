@@ -10,7 +10,7 @@ image_text_data = {}
 image_lock = 0
 
 
-def get_image_data(image_name: str, image_path="") -> PhotoImage:
+def get_image_data(image_name: str, image_path:str="") -> PhotoImage:
     """
     按路径读取图片数据并创建PhotoImage对象
     Keyword arguments:
@@ -25,7 +25,7 @@ def get_image_data(image_name: str, image_path="") -> PhotoImage:
     return PhotoImage(file=image_path)
 
 
-def print_image(image_name: str, image_path=""):
+def print_image(image_name: str, image_path:str=""):
     """
     绘制图片的内部实现，按图片id将图片加入绘制队列
     Keyword arguments:

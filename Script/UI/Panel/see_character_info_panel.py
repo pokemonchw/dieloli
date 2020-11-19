@@ -44,6 +44,7 @@ class SeeCharacterInfoPanel:
         see_item_draw = see_item_info_panel.SeeCharacterItemBagPanel(character_id,width)
         see_knowledge_draw = SeeCharacterKnowledgePanel(character_id,width)
         see_language_draw = SeeCharacterLanguagePanel(character_id,width)
+        see_nature_draw = SeeCharacterNaturePanel(character_id,width)
         self.draw_data = {
             _("属性"):main_attr_draw,
             _("状态"):see_status_draw,
@@ -51,7 +52,7 @@ class SeeCharacterInfoPanel:
             _("道具"):see_item_draw,
             _("技能"):see_knowledge_draw,
             _("语言"):see_language_draw,
-            _("性格"):None,
+            _("性格"):see_nature_draw,
             _("社交"):None
         }
         """ 按钮文本对应属性面板 """
@@ -635,10 +636,72 @@ class LanguageInfoDraw:
         py_cmd.clr_cmd()
         language_config = game_config.config_language[self.cid]
         language_draw = draw.WaitDraw()
-        language_draw.text = f"{language_config.name}:{language_config.info}"
+        language_draw.text = f"{language_config.name}:{language_config.info}\n"
         language_draw.width = self.width
         language_draw.draw()
-        line_feed = draw.NormalDraw()
-        line_feed.text = "\n"
-        line_feed.width = 1
-        line_feed.draw()
+
+
+class SeeCharacterNaturePanel:
+    """
+    显示角色性格面板对象
+    Keyword arguments:
+    character_id -- 角色id
+    width -- 绘制宽度
+    """
+
+    def __init__(self,character_id:int,width:int):
+        """ 初始化绘制对象 """
+        self.character_id:int = character_id
+        """ 要绘制的角色id """
+        self.width:int = width
+        """ 面板最大宽度 """
+        self.draw_list:List[draw.NormalDraw] = []
+        """ 绘制的文本列表 """
+        self.return_list:List[str] = []
+        """ 当前面板监听的按钮列表 """
+        character_data = cache_contorl.character_data[character_id]
+        for nature_type in game_config.config_nature_tag:
+            type_config = game_config.config_nature_tag[nature_type]
+            nature_set = game_config.config_nature_tag_data[nature_type]
+            type_value = 0
+            nature_draw_list = []
+            nature_group = value_handle.list_of_groups(list(nature_set),1)
+            for nature_list in nature_group:
+                for nature_id in nature_list:
+                    nature_config = game_config.config_nature[nature_id]
+                    nature_value = 0
+                    if nature_id in character_data.nature:
+                        nature_value = character_data.nature[nature_id]
+                    type_value += nature_value
+                    good_judge = False
+                    if nature_value >= 50:
+                        good_judge = True
+                    nature_draw = draw.CenterDraw()
+                    if good_judge:
+                        nature_draw.text = nature_config.good
+                    else:
+                        nature_draw.text = nature_config.bad
+                    nature_draw.width = int(self.width / len(nature_group))
+                    nature_draw_list.append(nature_draw)
+            judge_value = len(nature_set) * 100 / 2
+            nature_type_text = ""
+            if type_value >= judge_value:
+                nature_type_text = type_config.good
+            else:
+                nature_type_text = type_config.bad
+            nature_draw = draw.LittleTitleLineDraw(nature_type_text,self.width,":")
+            self.draw_list.append(nature_draw)
+            self.draw_list.append(nature_draw_list)
+
+    def draw(self):
+        """ 绘制对象 """
+        title_draw = draw.TitleLineDraw(_("人物性格"),self.width)
+        title_draw.draw()
+        for value in self.draw_list:
+            if isinstance(value,list):
+                now_draw = panel.VerticalDrawTextListGroup(self.width)
+                now_group = value_handle.list_of_groups(value,1)
+                now_draw.draw_list = now_group
+                now_draw.draw()
+            else:
+                value.draw()

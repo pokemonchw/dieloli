@@ -131,6 +131,8 @@ config_nature: Dict[int, config_def.Nature] = {}
 """ 性格配置数据 """
 config_nature_tag: Dict[int, config_def.NatureTag] = {}
 """ 性格标签配置数据 """
+config_nature_tag_data:Dict[int,Set] = {}
+""" 性格标签下性格id配置数据 """
 config_occupation_age_region: Dict[int,config_def.OccupationAgeRegion] = {}
 """ 学生和老师各自年龄段生成概率配置 """
 config_occupation_age_region_data: Dict[str,Dict[int,int]] = {}
@@ -562,6 +564,8 @@ def load_nature():
         now_tem = config_def.Nature()
         now_tem.__dict__ = tem_data
         config_nature[now_tem.cid] = now_tem
+        config_nature_tag_data.setdefault(now_tem.nature_type,set())
+        config_nature_tag_data[now_tem.nature_type].add(now_tem.cid)
 
 
 def load_nature_tag():
