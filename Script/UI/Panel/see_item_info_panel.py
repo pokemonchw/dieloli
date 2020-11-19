@@ -63,7 +63,7 @@ class ItemNameDraw:
         """ 绘制按钮 """
         self.num_button:bool = num_button
         """ 绘制数字按钮 """
-        self.button_id:bool = button_id
+        self.button_id:int = button_id
         """ 数字按钮的id """
         self.button_return:str = str(button_id)
         """ 按钮返回值 """

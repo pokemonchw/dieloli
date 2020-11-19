@@ -60,7 +60,7 @@ def get_scene_list_for_map(map_path_str: str) -> list:
     map_path -- 地图路径
     """
     map_data = get_map_data_for_map_path(map_path_str)
-    scene_list = list(map_data["PathEdge"].keys())
+    scene_list = list(map_data.path_edge.keys())
     return scene_list
 
 
@@ -74,7 +74,7 @@ def get_scene_name_list_for_map_path(map_path_str: str):
     scene_name_data = {}
     for scene in scene_list:
         load_scene_data = get_scene_data_for_map(map_path_str, scene)
-        scene_name = load_scene_data["SceneName"]
+        scene_name = load_scene_data.scene_name
         scene_name_data[scene] = scene_name
     return scene_name_data
 
@@ -89,12 +89,12 @@ def character_move_scene(old_scene_path: list, new_scene_path: list, character_i
     """
     old_scene_path_str = get_map_system_path_str_for_list(old_scene_path)
     new_scene_path_str = get_map_system_path_str_for_list(new_scene_path)
-    if character_id in cache_contorl.scene_data[old_scene_path_str]["SceneCharacterData"]:
-        del cache_contorl.scene_data[old_scene_path_str]["SceneCharacterData"][character_id]
-    if character_id not in cache_contorl.scene_data[new_scene_path_str]["SceneCharacterData"]:
+    if character_id in cache_contorl.scene_data[old_scene_path_str].character_list:
+        cache_contorl.scene_data[old_scene_path_str].character_list.remove(character_id)
+    if character_id not in cache_contorl.scene_data[new_scene_path_str].character_list:
         cache_contorl.character_data[character_id].position = new_scene_path
-        cache_contorl.scene_data[new_scene_path_str]["SceneCharacterData"][character_id] = 0
-    cache_contorl.character_data[character_id].behavior["MoveSrc"] = old_scene_path
+        cache_contorl.scene_data[new_scene_path_str].character_list.add(character_id)
+    cache_contorl.character_data[character_id].behavior.move_src = old_scene_path
 
 
 def get_map_system_path_str_for_list(now_list: list) -> str:
@@ -122,7 +122,7 @@ def get_path_finding(map_path_str: str, now_node: str, target_node: str) -> (str
     else:
         return (
             "",
-            cache_contorl.map_data[map_path_str]["SortedPath"][now_node][target_node],
+            cache_contorl.map_data[map_path_str].sorted_path[now_node][target_node],
         )
 
 
@@ -279,7 +279,7 @@ def get_relation_map_list_for_scene_path(scene_path: list) -> list:
         return map_list
 
 
-def get_scene_data_for_map(map_path_str: str, map_scene_id: str) -> dict:
+def get_scene_data_for_map(map_path_str: str, map_scene_id: str) -> game_type.Scene:
     """
     载入地图下对应场景数据
     Keyword arguments:
@@ -371,8 +371,8 @@ def get_scene_character_name_list(scene_path_str: str, remove_own_character=Fals
     scene_path -- 场景路径
     remove_own_character -- 从姓名列表中移除主角 (default False)
     """
-    scene_character_data = cache_contorl.scene_data[scene_path_str]["SceneCharacterData"]
-    now_scene_character_list = list(scene_character_data.keys())
+    scene_character_data = cache_contorl.scene_data[scene_path_str].character_list
+    now_scene_character_list = list(scene_character_data)
     name_list = []
     if remove_own_character:
         now_scene_character_list.remove(0)
@@ -401,7 +401,7 @@ def get_scene_character_id_list(scene_path_str: str) -> list:
     Keyword arguments:
     scene_path -- 场景路径
     """
-    return list(cache_contorl.scene_data[scene_path_str]["SceneCharacterData"].keys())
+    return list(cache_contorl.scene_data[scene_path_str].character_list)
 
 
 def sort_scene_character_id(scene_path_str: str):
@@ -411,7 +411,7 @@ def sort_scene_character_id(scene_path_str: str):
     scene_path -- 场景路径
     """
     now_scene_character_intimate_data = {}
-    for character in cache_contorl.scene_data[scene_path_str]["SceneCharacterData"]:
+    for character in cache_contorl.scene_data[scene_path_str].character_list:
         now_scene_character_intimate_data[character] = cache_contorl.character_data[character].intimate
     new_scene_character_intimate_data = sorted(
         now_scene_character_intimate_data.items(),
@@ -421,4 +421,4 @@ def sort_scene_character_id(scene_path_str: str):
     new_scene_character_intimate_data = value_handle.two_bit_array_to_dict(
         new_scene_character_intimate_data
     )
-    cache_contorl.scene_data[scene_path_str]["SceneCharacterData"] = new_scene_character_intimate_data
+    cache_contorl.scene_data[scene_path_str].character_list = set(new_scene_character_intimate_data)

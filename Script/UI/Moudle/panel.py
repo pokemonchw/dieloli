@@ -247,6 +247,38 @@ class CenterDrawTextListPanel:
             io_init.era_print("\n")
 
 
+class DrawTextListPanel:
+    """ 绘制一个对象列表 """
+
+    def __init__(self):
+        """ 初始化绘制对象 """
+        self.width:int = 0
+        """ 面板宽度 """
+        self.column:int = 0
+        """ 每行最大元素数 """
+        self.draw_list:List[List[draw.NormalDraw]] = []
+        """ 绘制列表 """
+
+    def set(self,info_list:List[draw.NormalDraw],width:int,column:int):
+        """
+        设置绘制信息
+        Keyword arguments:
+        info_list -- 绘制对象列表
+        width -- 绘制宽度
+        column -- 每行最大元素数
+        """
+        self.width = width
+        self.column = column
+        self.draw_list = value_handle.list_of_groups(info_list,column)
+
+    def draw(self):
+        """ 绘制面板 """
+        for now_list in self.draw_list:
+            for value in now_list:
+                value.draw()
+            io_init.era_print("\n")
+
+
 class VerticalDrawTextListGroup:
     """
     竖列并排绘制多个文本对象列表

@@ -41,13 +41,6 @@ config_character_state_type_data: Dict[int, Set] = {}
 """ 角色状态类型下状态属性集合 类型id:属性集合 """
 config_chest: Dict[int, config_def.ChestTem] = {}
 """ 罩杯配置数据 """
-config_clothing_collocational: Dict[int, config_def.ClothingCollocational] = {}
-""" 服装搭配模板配置 """
-config_clothing_collocational_data: Dict[int, Dict[int, List[config_def.ClothingCollocational]]] = {}
-"""
-服装搭配模板配置数据
-服装id:搭配位置:搭配配置列表
-"""
 config_clothing_evaluate: Dict[int, config_def.ClothingEvaluate] = {}
 """ 服装评价配置数据 """
 config_clothing_evaluate_list: List[str] = []
@@ -346,23 +339,6 @@ def load_chest_tem_data():
         now_chest = config_def.ChestTem()
         now_chest.__dict__ = tem_data
         config_chest[now_chest.cid] = now_chest
-
-
-def load_clothing_collocational():
-    """ 载入服装搭配模板配置数据 """
-    now_data = config_data["ClothingCollocational"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_collocational = config_def.ClothingCollocational()
-        now_collocational.__dict__ = tem_data
-        config_clothing_collocational[now_collocational.cid] = now_collocational
-        config_clothing_collocational_data.setdefault(now_collocational.clothing_tem_type, {})
-        config_clothing_collocational_data[now_collocational.clothing_tem_type].setdefault(
-            now_collocational.clothing_tem, []
-        )
-        config_clothing_collocational_data[now_collocational.clothing_tem_type][
-            now_collocational.clothing_tem
-        ].append(now_collocational)
 
 
 def load_clothing_evaluate():
@@ -834,7 +810,6 @@ def init():
     load_character_state_data()
     load_character_state_type_data()
     load_chest_tem_data()
-    load_clothing_collocational()
     load_clothing_evaluate()
     load_clothing_suit()
     load_clothing_tem()

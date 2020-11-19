@@ -3,8 +3,8 @@ from typing import Dict, Tuple, List
 from types import FunctionType
 from Script.UI.Moudle import draw,panel
 from Script.UI.Panel import see_clothing_info_panel,see_item_info_panel
-from Script.Core import cache_contorl, get_text, value_handle, game_type, text_handle
-from Script.Config import game_config
+from Script.Core import cache_contorl, get_text, value_handle, game_type, text_handle, py_cmd
+from Script.Config import game_config,normal_config
 from Script.Design import attr_text,map_handle,attr_calculation
 
 panel_info_data = {}
@@ -16,6 +16,8 @@ line_feed = draw.NormalDraw()
 """ 换行绘制对象 """
 line_feed.text = "\n"
 line_feed.width = 1
+window_width = normal_config.config_normal.text_width
+""" 屏幕宽度 """
 
 
 class SeeCharacterInfoPanel:
@@ -41,13 +43,14 @@ class SeeCharacterInfoPanel:
         see_clothing_draw = see_clothing_info_panel.SeeCharacterPutOnClothingListPanel(character_id,width)
         see_item_draw = see_item_info_panel.SeeCharacterItemBagPanel(character_id,width)
         see_knowledge_draw = SeeCharacterKnowledgePanel(character_id,width)
+        see_language_draw = SeeCharacterLanguagePanel(character_id,width)
         self.draw_data = {
             _("属性"):main_attr_draw,
             _("状态"):see_status_draw,
             _("服装"):see_clothing_draw,
             _("道具"):see_item_draw,
             _("技能"):see_knowledge_draw,
-            _("语言"):None,
+            _("语言"):see_language_draw,
             _("性格"):None,
             _("社交"):None
         }
@@ -517,3 +520,125 @@ class SeeCharacterKnowledgePanel:
                 now_draw.draw()
             else:
                 value.draw()
+
+class SeeCharacterLanguagePanel:
+    """
+    查看角色语言面板
+    Keyword arguments:
+    character_id -- 角色id
+    width -- 绘制宽度
+    """
+
+    def __init__(self,character_id:int,width:int):
+        """ 初始化绘制对象 """
+        self.character_id:int = character_id
+        """ 要绘制的角色id """
+        self.width:int = width
+        """ 面板最大宽度 """
+        self.return_list:List[str] = []
+        """ 当前面板监听的按钮列表 """
+        character_data = cache_contorl.character_data[character_id]
+        language_list = list(game_config.config_language.keys())
+        language_text_list = []
+        for language in language_list:
+            now_exp = 0
+            if language in character_data.language:
+                now_exp = character_data.language[language]
+            language_text_list.append((language,now_exp))
+        self.handle_panel = panel.PageHandlePanel(language_text_list,LanguageNameDraw,20,6,width,1,1,0,"")
+        """ 页面控制对象 """
+
+    def draw(self):
+        title_draw = draw.TitleLineDraw(_("人物语言"), self.width)
+        title_draw.draw()
+        self.handle_panel.draw()
+        self.return_list.extend(self.handle_panel.return_list)
+
+
+class LanguageNameDraw:
+    """
+    按语言id绘制语言名
+    Keyword arguments:
+    text -- 语言的配置数据 tuple[语言id,经验]
+    width -- 最大宽度
+    is_button -- 绘制按钮
+    num_button -- 绘制数字按钮
+    button_id -- 数字按钮的id
+    """
+    def __init__(self,text:str,width:int,is_button:bool,num_button:bool,button_id:int):
+        """ 初始化绘制对象 """
+        self.language_id:int = text[0]
+        """ 语言id """
+        self.language_exp:int = text[1]
+        """ 语言经验 """
+        self.draw_text:str = ""
+        """ 语言名绘制文本 """
+        self.width:int = width
+        """ 最大宽度 """
+        self.is_button:bool = is_button
+        """ 绘制按钮 """
+        self.num_button:bool = num_button
+        """ 绘制数字按钮 """
+        self.button_id:int = button_id
+        """ 数字按钮的id """
+        self.button_return:str = str(button_id)
+        """ 按钮返回值 """
+        self.draw_list:List[draw.NormalDraw] = []
+        """ 绘制的对象列表 """
+        language_config = game_config.config_language[self.language_id]
+        language_name = language_config.name
+        name_draw = draw.NormalDraw()
+        if is_button:
+            button_text = ""
+            if num_button:
+                index_text = text_handle.id_index(button_id)
+                button_text = f"{index_text} {language_name}:"
+                name_draw = draw.Button(button_text,self.button_return,cmd_func=self.see_language_info)
+            else:
+                button_text = f"{language_name}:"
+                name_draw = draw.Button(button_text,language_name,cmd_func=self.see_language_info)
+                self.button_return = language_name
+        else:
+            name_draw.text = f"{language_name}:"
+        level_draw = draw.ExpLevelDraw(self.language_exp)
+        name_draw.width = self.width - len(level_draw)
+        self.draw_list = [name_draw,level_draw]
+
+    def draw(self):
+        """ 绘制对象 """
+        now_draw = draw.CenterMergeDraw(self.width)
+        now_draw.draw_list = self.draw_list
+        now_draw.draw()
+
+    def see_language_info(self):
+        """ 绘制语言描述信息 """
+        now_draw = LanguageInfoDraw(self.language_id,window_width)
+        now_draw.draw()
+
+class LanguageInfoDraw:
+    """
+    按语言id绘制语言数据
+    Keyword arguments:
+    cid -- 语言id
+    width -- 最大绘制宽度
+    """
+
+    def __init__(self,cid:int,width:int):
+        """ 绘制语言信息 """
+        self.cid:int = int(cid)
+        """ 语言的配表id """
+        self.width:int = width
+        """ 最大宽度 """
+
+    def draw(self):
+        """ 绘制道具信息 """
+        py_cmd.clr_cmd()
+        language_config = game_config.config_language[self.cid]
+        language_draw = draw.WaitDraw()
+        language_draw.text = f"{language_config.name}:{language_config.info}"
+        language_draw.width = self.width
+        language_draw.draw()
+        line_feed = draw.NormalDraw()
+        line_feed.text = "\n"
+        line_feed.width = 1
+        line_feed.draw()

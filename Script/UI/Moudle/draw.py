@@ -639,7 +639,7 @@ class ExpLevelDraw:
             grade = "EX"
         style = f"level{grade.lower()}"
         now_draw = NormalDraw()
-        now_draw.width = 1
+        now_draw.width = len(grade)
         now_draw.style = style
         now_draw.text = grade
         self.grade_draw = now_draw

@@ -225,23 +225,6 @@ class SocialType:
     """ 名字 """
 
 
-class ClothingCollocational:
-    """ 搭配模板 """
-
-    cid: int
-    """ 模板id """
-    clothing_tem_type: int
-    """ 搭配所属服装种类 """
-    clothing_type: int
-    """ 当前服装类型 """
-    clothing_tem: int
-    """ 当前服装种类 """
-    collocational: int
-    """ 搭配限制0:不限制1:优先2:禁用3:仅穿或不穿4:必须5:必须为所有此项之一 """
-    info: str
-    """ 备注 """
-
-
 class HeightTem:
     """ 身高预期权值模板 """
 

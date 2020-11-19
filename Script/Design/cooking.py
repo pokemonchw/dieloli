@@ -79,10 +79,11 @@ def create_food(
     food.weight = food_weight
     if food_id != "" and food_feel == {}:
         food_config = game_config.config_food[food_id]
-        food_feel_data = game_config.config_food_feel_data[food_id]
-        for feel in food_feel_data:
-            food.feel.setdefault(feel, 0)
-            food.feel[feel] += food_feel_data[feel] / 100 * food.weight
+        if food_id in game_config.config_food_feel_data:
+            food_feel_data = game_config.config_food_feel_data[food_id]
+            for feel in food_feel_data:
+                food.feel.setdefault(feel, 0)
+                food.feel[feel] += food_feel_data[feel] / 100 * food.weight
         food.cook = food_config.cook
         food.eat = food_config.eat
         food.seasoning = food_config.seasoning
@@ -217,7 +218,7 @@ def init_restaurant_data():
     """ 初始化餐馆内的食物数据 """
     cache_contorl.restaurant_data = {}
     max_people = len(cache_contorl.character_data)
-    food_config_data = text_loading.get_game_data(constant.FilePath.FOOD_PATH)
+    food_config_data = game_config.config_food
     for food_id in food_config_data:
         food = create_rand_food(food_id, max_people * 100)
         cache_contorl.restaurant_data.setdefault(food_id, {})
