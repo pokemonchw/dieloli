@@ -30,14 +30,18 @@ def creator_character_panel():
             character.init_attr(0)
             character_handle.init_character_list()
             game_start_flow.init_game_start()
-            confirm_character_attr_panel()
-            break
+            if confirm_character_attr_panel():
+                break
 
 
 def confirm_character_attr_panel():
     """ 确认角色属性面板 """
     for item_id in game_config.config_item:
         cache_contorl.character_data[0].item.add(item_id)
+    for social_type in game_config.config_social_type:
+        cache_contorl.character_data[0].social_contact[social_type] = game_type.SocialContact()
+        for i in range(social_type * 10 +1,(social_type + 1) * 10 + 1):
+            cache_contorl.character_data[0].social_contact[social_type].character_list[i] = 1000
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
     while 1:
         line_feed_draw.draw()

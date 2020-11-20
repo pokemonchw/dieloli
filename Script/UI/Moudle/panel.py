@@ -458,8 +458,9 @@ class PageHandlePanel:
 
     def draw(self):
         """ 绘制面板 """
+        self.return_list = []
         start_id = self.now_page * self.limit
-        total_page = int(len(self.text_list) / self.limit)
+        total_page = int((len(self.text_list) - 1) / self.limit)
         if start_id >= len(self.text_list):
             self.now_page = total_page
             start_id = self.now_page * self.limit
@@ -474,7 +475,6 @@ class PageHandlePanel:
         line_feed = draw.NormalDraw()
         line_feed.text = "\n"
         line_feed.width = 1
-        index = 0
         for draw_text_list in draw_text_group:
             if self.row_septal_lines != "":
                 line_draw = draw.LineDraw(self.row_septal_lines,self.width)
@@ -500,25 +500,26 @@ class PageHandlePanel:
                 draw_list.append(value_draw)
                 draw_list.append(col_fix_draw)
             draw_list.append(line_feed)
-        now_line = draw.LineDraw("-",self.width)
-        draw_list.append(now_line)
-        page_change_start_id = 0
-        if self.num_button:
-            page_change_start_id = index + 1
-        old_page_index_text = text_handle.id_index(page_change_start_id)
-        old_page_button = draw.CenterButton(_(f"{old_page_index_text} 上一页"),str(page_change_start_id),int(self.width / 3),cmd_func=self.old_page)
-        self.return_list.append(str(page_change_start_id))
-        draw_list.append(old_page_button)
-        page_text = f"({self.now_page}/{total_page})"
-        page_draw = draw.CenterDraw()
-        page_draw.width = int(self.width / 3)
-        page_draw.text = page_text
-        draw_list.append(page_draw)
-        next_page_index_text = text_handle.id_index(page_change_start_id + 1)
-        next_page_button = draw.CenterButton(_(f"{next_page_index_text} 下一页"),str(page_change_start_id + 1),int(self.width / 3),cmd_func=self.next_page)
-        self.return_list.append(str(page_change_start_id + 1))
-        draw_list.append(next_page_button)
-        draw_list.append(line_feed)
+        if total_page:
+            now_line = draw.LineDraw("-",self.width)
+            draw_list.append(now_line)
+            page_change_start_id = 0
+            if self.num_button:
+                page_change_start_id = index
+            old_page_index_text = text_handle.id_index(page_change_start_id)
+            old_page_button = draw.CenterButton(_(f"{old_page_index_text} 上一页"),str(page_change_start_id),int(self.width / 3),cmd_func=self.old_page)
+            self.return_list.append(str(page_change_start_id))
+            draw_list.append(old_page_button)
+            page_text = f"({self.now_page}/{total_page})"
+            page_draw = draw.CenterDraw()
+            page_draw.width = int(self.width / 3)
+            page_draw.text = page_text
+            draw_list.append(page_draw)
+            next_page_index_text = text_handle.id_index(page_change_start_id + 1)
+            next_page_button = draw.CenterButton(_(f"{next_page_index_text} 下一页"),str(page_change_start_id + 1),int(self.width / 3),cmd_func=self.next_page)
+            self.return_list.append(str(page_change_start_id + 1))
+            draw_list.append(next_page_button)
+            draw_list.append(line_feed)
         for value in draw_list:
             value.draw()
 

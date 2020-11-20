@@ -55,7 +55,6 @@ def init_attr(character_id: int):
     for nature_id in new_nature:
         if nature_id not in character_data.nature:
             character_data.nature[nature_id] = new_nature[nature_id]
-    character_data.social_contact = {social: set() for social in game_config.config_social_type}
     init_class(character_data)
 
 
