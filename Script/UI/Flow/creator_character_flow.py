@@ -1,5 +1,4 @@
 import random
-import numpy
 from functools import wraps
 from typing import List
 from types import FunctionType
@@ -151,7 +150,7 @@ def input_setting_panel() -> bool:
 
 def input_setting_now() -> bool:
     """ 启动详细信息设置 """
-    panel_list = numpy.random.choice(setting_panel_data, 10)
+    panel_list = random.sample(setting_panel_data, 10)
     for panel in panel_list:
         line_feed_draw.draw()
         line.draw()
