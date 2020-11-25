@@ -394,6 +394,7 @@ def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_styl
             textbox.tag_ranges(cmd_tag_name)[0],
             textbox.tag_ranges(cmd_tag_name)[1],
         )
+        textbox.configure(cursor="hand1")
         cache_contorl.wframe_mouse.mouse_leave_cmd = 0
 
     def leave_func(*args):
@@ -410,6 +411,7 @@ def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_styl
             textbox.tag_ranges(cmd_tag_name)[0],
             textbox.tag_ranges(cmd_tag_name)[1],
         )
+        textbox.configure(cursor="")
         cache_contorl.wframe_mouse.mouse_leave_cmd = 1
 
     textbox.tag_bind(cmd_tag_name, "<1>", send_cmd)
