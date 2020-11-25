@@ -64,6 +64,7 @@ textbox = Text(
     height=normal_config.config_normal.textbox_hight,
     highlightbackground=normal_config.config_normal.background,
     bd=0,
+    cursor=""
 )
 textbox.grid(column=0, row=0, sticky=(N, W, E, S))
 
