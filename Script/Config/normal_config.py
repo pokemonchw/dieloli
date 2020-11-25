@@ -11,7 +11,7 @@ config_normal: game_type.NormalConfig = game_type.NormalConfig()
 def init_normal_config():
     """ 初始化游戏通用配置数据 """
     ini_config = configparser.ConfigParser()
-    ini_config.read("config.ini")
+    ini_config.read("config.ini", encoding='utf8')
     ini_data = ini_config["game"]
     for k in ini_data.keys():
         try:

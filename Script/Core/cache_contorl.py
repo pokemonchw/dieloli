@@ -167,3 +167,5 @@ panel_data: Dict[int, FunctionType] = {}
 面板id对应的面板绘制函数集合
 面板id:面板绘制函数对象
 """
+npc_name_data:Set = set()
+""" 已有的npc姓名集合 """

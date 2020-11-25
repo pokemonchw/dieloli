@@ -73,6 +73,7 @@ class SeeCharacterInfoPanel:
     def draw(self):
         """ 绘制面板 """
         self.draw_data[self.now_panel].draw()
+        self.return_list = []
         self.return_list.extend(self.draw_data[self.now_panel].return_list)
         line = draw.LineDraw("=", self.width)
         line.draw()
@@ -554,7 +555,7 @@ class SeeCharacterLanguagePanel:
         title_draw = draw.TitleLineDraw(_("人物语言"), self.width)
         title_draw.draw()
         self.handle_panel.draw()
-        self.return_list.extend(self.handle_panel.return_list)
+        self.return_list = self.handle_panel.return_list
 
 
 class LanguageNameDraw:
@@ -732,7 +733,6 @@ class SeeCharacterSocialContact:
             type_draw = draw.LittleTitleLineDraw(type_config.name,self.width,":")
             self.draw_list.append(type_draw)
             now_draw = draw.CenterDraw()
-            print(character_data.social_contact)
             if social_type in character_data.social_contact and len(character_data.social_contact[social_type].character_list):
                 character_list = list(character_data.social_contact[social_type].character_list.keys())
                 now_draw = panel.PageHandlePanel(character_list,SeeCharacterSocialName,10,5,self.width,1,1,0)

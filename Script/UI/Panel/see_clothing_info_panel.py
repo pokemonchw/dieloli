@@ -37,6 +37,7 @@ class SeeCharacterPutOnClothingListPanel:
         title_draw = draw.TitleLineDraw(_("人物服装"), self.width)
         title_draw.draw()
         draw_list = []
+        self.return_list = []
         id_width = 0
         for clothing_type in game_config.config_clothing_type:
             type_data = game_config.config_clothing_type[clothing_type]

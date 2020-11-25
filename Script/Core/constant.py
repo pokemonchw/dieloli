@@ -58,6 +58,8 @@ class Panel:
     """ 标题面板 """
     CREATOR_CHARACTER = 1
     """ 创建角色面板 """
+    GET_UP = 2
+    """ 起床面板 """
 
 
 class Premise:

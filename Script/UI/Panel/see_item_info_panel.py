@@ -36,6 +36,7 @@ class SeeCharacterItemBagPanel:
     def draw(self):
         title_draw = draw.TitleLineDraw(_("人物道具"), self.width)
         title_draw.draw()
+        self.return_list = []
         self.handle_panel.draw()
         self.return_list.extend(self.handle_panel.return_list)
 

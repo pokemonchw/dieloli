@@ -25,13 +25,14 @@ line = draw.LineDraw("=", width)
 def creator_character_panel():
     """ 创建角色面板 """
     cache_contorl.character_data[0] = game_type.Character()
+    character_handle.init_character_list()
     while 1:
         if input_name_panel():
             character.init_attr(0)
-            character_handle.init_character_list()
             game_start_flow.init_game_start()
             if confirm_character_attr_panel():
                 break
+    cache_contorl.now_panel_id = constant.Panel.GET_UP
 
 
 def confirm_character_attr_panel():
@@ -43,15 +44,34 @@ def confirm_character_attr_panel():
         for i in range(social_type * 10 +1,(social_type + 1) * 10 + 1):
             cache_contorl.character_data[0].social_contact[social_type].character_list[i] = 1000
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
+    askfor_panel = panel.OneMessageAndSingleColumnButton()
     while 1:
         line_feed_draw.draw()
         now_attr_panel.draw()
         ask_list = []
         ask_list.extend(now_attr_panel.return_list)
+        now_line = draw.LineDraw("~",width)
+        now_line.draw()
+        askfor_list =[_("就这样开始新的人生吧"),_("重头再来一次")]
+        start_id = 0
+        now_id_judge = 0
+        now_id_list = []
+        for now_id in ask_list:
+            if now_id.isdigit():
+                now_id_judge = 1
+                now_id_list.append(int(now_id))
+        if now_id_judge:
+            start_id = max(now_id_list) + 1
+        askfor_panel.set(askfor_list,_("就这样了可以吗?"),start_id)
+        askfor_panel.draw()
+        askfor_panel_return_list = askfor_panel.get_return_list()
+        ask_list.extend(askfor_panel_return_list.keys())
         item_panel_ask_list = []
         item_old_page_id = ""
         item_next_page_id = ""
         yrn = flow_handle.askfor_all(ask_list)
+        if yrn in askfor_panel_return_list:
+            return askfor_panel_return_list[yrn] == askfor_list[0]
 
 
 def input_name_panel() -> bool:
@@ -66,12 +86,22 @@ def input_name_panel() -> bool:
     line_feed_draw.draw()
     line.draw()
     not_num_error = draw.NormalDraw()
-    not_num_error.text = _("角色名不能为纯数字，请重新输入")
+    not_num_error.text = _("角色名不能为纯数字，请重新输入\n")
+    not_system_error = draw.NormalDraw()
+    not_system_error.text = _("角色名不能为系统保留字，请重新输入\n")
+    not_name_error = draw.NormalDraw()
+    not_name_error.text = _("已有角色使用该姓名，请重新输入\n")
     create_judge = 0
     while 1:
         now_name = ask_name_panel.draw()
         if now_name.isdigit():
             not_num_error.draw()
+            continue
+        if now_name in get_text.translation_values or now_name in get_text.translation._catalog:
+            not_system_error.draw()
+            continue
+        if now_name in cache_contorl.npc_name_data:
+            not_name_error.draw()
             continue
         character_data.name = now_name
         create_judge = input_nick_name_panel()
@@ -93,10 +123,15 @@ def input_nick_name_panel() -> bool:
     line.draw()
     not_num_error = draw.NormalDraw()
     not_num_error.text = _("角色昵称不能为纯数字，请重新输入")
+    not_system_error = draw.NormalDraw()
+    not_system_error.text = _("角色昵称不能为系统保留字，请重新输入")
     while 1:
         nick_name = ask_nick_name_panel.draw()
         if nick_name.isdigit():
             not_num_error.draw()
+            continue
+        if nick_name in get_text.translation_values or nick_name in get_text.translation._catalog:
+            not_system_error.draw()
             continue
         character_data.nick_name = nick_name
         create_judge = input_sex_panel()
@@ -151,7 +186,7 @@ def input_setting_panel() -> bool:
 
 def input_setting_now() -> bool:
     """ 启动详细信息设置 """
-    panel_list = numpy.random.choice(setting_panel_data, 10)
+    panel_list = random.sample(setting_panel_data, 10)
     for panel in panel_list:
         line_feed_draw.draw()
         line.draw()
