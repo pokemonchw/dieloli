@@ -7,7 +7,7 @@ from Script.Core import (
     constant,
     game_type,
 )
-from Script.Config import normal_config
+from Script.Config import normal_config,game_config
 
 
 def init_time():

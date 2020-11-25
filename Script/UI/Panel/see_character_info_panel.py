@@ -717,6 +717,7 @@ class SeeCharacterSocialContact:
     character_id -- 角色id
     width -- 绘制宽度
     """
+
     def __init__(self,character_id:int,width:int):
         """ 初始化绘制对象 """
         self.character_id:int = character_id
@@ -846,3 +847,57 @@ class SeeCharacterInfoOnSocialPanel:
             if yrn == back_draw.return_text:
                 break
 
+class SeeCharacterInfoOnGetUpPanel:
+    """
+    在起床界面查看角色属性
+    Keyword arguments:
+    character_id -- 角色id
+    width -- 最大宽度
+    """
+
+    def __init__(self,character_id:int,width:int):
+        """ 初始化绘制对象 """
+        self.character_id:int = character_id
+        """ 要绘制的角色id """
+        self.width:int = width
+        """ 面板最大宽度 """
+        self.return_list:List[str] = []
+        """ 当前面板监听的按钮列表 """
+
+    def draw(self):
+        """ 绘制面板 """
+        old_button_draw = draw.CenterButton(_("[上一人]"),_("上一人"),self.width / 3,cmd_func=self.old_character)
+        next_button_draw = draw.CenterButton(_("[下一人]"),_("下一人"),self.width / 3,cmd_func=self.next_character)
+        back_draw = draw.CenterButton(_("[返回]"),_("返回"),self.width / 3)
+        now_panel_id = _("属性")
+        while 1:
+            self.return_list = []
+            line_feed.draw()
+            now_character_panel = SeeCharacterInfoPanel(self.character_id,self.width)
+            now_character_panel.change_panel(now_panel_id)
+            now_character_panel.draw()
+            old_button_draw.draw()
+            back_draw.draw()
+            next_button_draw.draw()
+            self.return_list.extend(now_character_panel.return_list)
+            self.return_list.append(old_button_draw.return_text)
+            self.return_list.append(back_draw.return_text)
+            self.return_list.append(next_button_draw.return_text)
+            yrn = flow_handle.askfor_all(self.return_list)
+            py_cmd.clr_cmd()
+            if yrn == back_draw.return_text:
+                break
+            else:
+                now_panel_id = yrn
+
+    def old_character(self):
+        """ 切换显示上一人 """
+        self.character_id -= 1
+        if self.character_id < 0:
+            self.character_id = len(cache_contorl.character_data) - 1
+
+    def next_character(self):
+        """ 切换显示下一人 """
+        self.character_id += 1
+        if self.character_id >= len(cache_contorl.character_data):
+            self.character_id = 0

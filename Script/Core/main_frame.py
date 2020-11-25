@@ -378,6 +378,7 @@ def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_styl
         global send_order_state
         send_order_state = True
         order.set(cmd_number)
+        textbox.configure(cursor="")
         send_input(order)
 
     def enter_func(*args):

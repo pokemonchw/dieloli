@@ -375,7 +375,7 @@ class Character:
     """ 角色数据结构体 """
 
     def __init__(self):
-        self.id: int = 0
+        self.cid: int = 0
         """ 角色id """
         self.name: str = ""
         """ 角色名字 """
