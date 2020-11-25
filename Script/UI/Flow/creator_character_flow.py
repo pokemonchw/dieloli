@@ -1,10 +1,9 @@
 import random
-import numpy
 from functools import wraps
 from typing import List
 from types import FunctionType
 from Script.Core import get_text, constant, game_type, cache_contorl, flow_handle
-from Script.Design import handle_panel, character,character_handle
+from Script.Design import handle_panel, character, character_handle
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
 from Script.Config import normal_config, game_config
@@ -39,8 +38,9 @@ def confirm_character_attr_panel():
     for item_id in game_config.config_item:
         cache_contorl.character_data[0].item.add(item_id)
     for social_type in game_config.config_social_type:
-        cache_contorl.character_data[0].social_contact[social_type] = game_type.SocialContact()
-        for i in range(social_type * 10 +1,(social_type + 1) * 10 + 1):
+        cache_contorl.character_data[0].social_contact[social_type] = game_type.SocialContact(
+        )
+        for i in range(social_type * 10 + 1, (social_type + 1) * 10 + 1):
             cache_contorl.character_data[0].social_contact[social_type].character_list[i] = 1000
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
     while 1:
@@ -112,7 +112,8 @@ def input_sex_panel() -> bool:
     """
     create_judge = 0
     character_data = cache_contorl.character_data[0]
-    sex_list = [game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
+    sex_list = [
+        game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(sex_list, _(f"那么{character_data.nick_name}的性别是？"))
     return_list = button_panel.get_return_list()
@@ -138,7 +139,8 @@ def input_setting_panel() -> bool:
     character_data = cache_contorl.character_data[0]
     ask_list = [_("是"), _("否")]
     button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, _(f"是否需要设置详细属性呢？将会随机抽取十道题目供{character_data.nick_name}进行选择。"))
+    button_panel.set(ask_list, _(
+        f"是否需要设置详细属性呢？将会随机抽取十道题目供{character_data.nick_name}进行选择。"))
     return_list = button_panel.get_return_list()
     line_feed_draw.draw()
     line.draw()
@@ -151,7 +153,7 @@ def input_setting_panel() -> bool:
 
 def input_setting_now() -> bool:
     """ 启动详细信息设置 """
-    panel_list = numpy.random.choice(setting_panel_data, 10)
+    panel_list = random.sample(setting_panel_data, 10)
     for panel in panel_list:
         line_feed_draw.draw()
         line.draw()
