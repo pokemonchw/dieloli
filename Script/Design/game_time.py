@@ -199,8 +199,8 @@ def init_primary_school_course_time_status(
     Return arguments:
     game_type.CourseTimeSlice -- 上课时间状态数据
     """
-    now_time_status = judge_school_course_time("PrimarySchool", time_data)
-    now_time_status.school_id = "PrimarySchool"
+    now_time_status = judge_school_course_time(0, time_data)
+    now_time_status.school_id = 0
     if time_data.month in range(1, 7) or time_data.month in range(9, 13):
         now_week = time_data.weekday()
         if now_week >= 5:
@@ -236,8 +236,8 @@ def init_junior_middle_school_course_time_status(
     Return arguments:
     game_type.CourseTimeSlice -- 上课时间状态数据
     """
-    now_time_status = judge_school_course_time("JuniorMiddleSchool", time_data)
-    now_time_status.school_id = "JuniorMiddleSchool"
+    now_time_status = judge_school_course_time(1, time_data)
+    now_time_status.school_id = 1
     if time_data.month in range(1, 7) or time_data.month in range(9, 13):
         now_week = time_data.weekday()
         if now_week >= 6:
@@ -273,8 +273,8 @@ def init_senior_high_school_course_time_status(
     Return arguments:
     game_type.CourseTimeSlice -- 上课时间状态数据
     """
-    now_time_status = judge_school_course_time("SeniorHighSchool", time_data)
-    now_time_status.school_id = "SeniorHighSchool"
+    now_time_status = judge_school_course_time(2, time_data)
+    now_time_status.school_id = 2
     if time_data.month in range(1, 7) or time_data.month in range(9, 13):
         if (
             teacher_id > -1
@@ -294,7 +294,7 @@ def init_senior_high_school_course_time_status(
     return now_time_status
 
 
-def judge_school_course_time(school_id: str, time_data: datetime.datetime) -> game_type.CourseTimeSlice:
+def judge_school_course_time(school_id: int, time_data: datetime.datetime) -> game_type.CourseTimeSlice:
     """
     校验指定学校指定时间上课状态
     Keyword arguments:
@@ -304,9 +304,9 @@ def judge_school_course_time(school_id: str, time_data: datetime.datetime) -> ga
     game_type,CourseTimeSlice -- 上课时间和状态数据
     """
     course_status = game_type.CourseTimeSlice()
-    course_time_data = text_loading.get_text_data(constant.FilePath.COURSE_SESSION_PATH, school_id)
+    course_time_data = game_config.config_school_session_data[school_id]
     now_time = time_data.hour * 100 + time_data.minute
-    end_time_data = {course_time_data[i][1]: i for i in range(len(course_time_data))}
+    end_time_data = {game_config.config_school_session[course_time_data[i]].end_time: i for i in range(len(course_time_data))}
     now_time_index = bisect.bisect_left(list(end_time_data.keys()), now_time)
     course_status.course_index = now_time_index
     if now_time_index >= len(end_time_data):
