@@ -2,12 +2,16 @@ from types import FunctionType
 from Script.UI.Moudle import draw
 from Script.UI.Panel import see_character_info_panel
 from Script.Design import game_time
-from Script.Core import get_text, cache_contorl, flow_handle, py_cmd
+from Script.Core import get_text, cache_contorl, flow_handle, py_cmd, text_handle
 from Script.Config import game_config
 import time
 
 _: FunctionType = get_text._
 """ 翻译api """
+line_feed = draw.NormalDraw()
+""" 换行绘制对象 """
+line_feed.text = "\n"
+line_feed.width = 1
 
 class GetUpPanel:
     """
@@ -55,6 +59,13 @@ class GetUpPanel:
                 solar_period_draw.style = "solarperiod"
                 now_draw.draw_list.append(solar_period_draw)
                 now_width += len(solar_period_draw)
+            sun_time = game_time.get_sun_time(cache_contorl.game_time)
+            sun_time_config = game_config.config_sun_time[sun_time]
+            sun_time_draw = draw.NormalDraw()
+            sun_time_draw.text = f"{sun_time_config.name} "
+            sun_time_draw.width = self.width - now_width
+            now_draw.draw_list.append(sun_time_draw)
+            now_width += len(sun_time_draw)
             name_draw = draw.Button(character_data.name,character_data.name,cmd_func=self.see_character)
             name_draw.width = self.width - now_width
             now_draw.draw_list.append(name_draw)
@@ -64,10 +75,22 @@ class GetUpPanel:
             gold_draw.text = f" 现金:{character_data.gold}$"
             now_draw.draw_list.append(gold_draw)
             now_draw.draw()
-            yrn = flow_handle.askfor_all([name_draw.return_text])
+            line_feed.draw()
+            get_up_button = draw.CenterButton(_("[000]睁眼起床"),"0",self.width / 2)
+            get_up_button.draw()
+            see_character_list_button = draw.CenterButton(_("[001]查看属性"),"1",self.width/2,cmd_func=self.see_character_list)
+            return_list = []
+            return_list.append(name_draw.return_text)
+            return_list.append(get_up_button.return_text)
+            return_list.append(see_character_list_button.return_text)
+            yrn = flow_handle.askfor_all(return_list)
 
     def see_character(self):
         """ 绘制角色属性 """
         py_cmd.clr_cmd()
         attr_panel = see_character_info_panel.SeeCharacterInfoOnGetUpPanel(self.character_id,self.width)
         attr_panel.draw()
+
+    def see_character_list(self):
+        """ 绘制角色列表 """
+        py_cmd.clr_cmd()

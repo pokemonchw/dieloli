@@ -169,3 +169,7 @@ panel_data: Dict[int, FunctionType] = {}
 """
 npc_name_data:Set = set()
 """ 已有的npc姓名集合 """
+school_longitude:float = 0
+""" 学校经度 """
+school_latitude:float = 0
+""" 学校纬度 """

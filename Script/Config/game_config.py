@@ -203,6 +203,8 @@ config_sex_experience_tem_data: Dict[int, Dict[int, int]] = {}
 """
 config_sex_tem: Dict[int, config_def.SexTem] = {}
 """ 性别对应描述和性别器官模板 """
+config_sun_time: Dict[int, config_def.SunTime] = {}
+""" 太阳时间配置 """
 config_random_npc_sex_region: Dict[int,int] = {}
 """
 生成随机npc时性别权重
@@ -796,6 +798,16 @@ def load_status():
         config_status[now_tem.cid] = now_tem
 
 
+def load_sun_time():
+    """ 载入太阳时间配置 """
+    now_data = config_data["SunTime"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.SunTime()
+        now_tem.__dict__ = tem_data
+        config_sun_time[now_tem.cid] = now_tem
+
+
 def load_waist_hip_proportion():
     """ 载入不同肥胖程度腰臀比例差值配置 """
     now_data = config_data["WaistHipProportion"]
@@ -878,6 +890,7 @@ def init():
     load_stature_description_premise()
     load_stature_description_text()
     load_status()
+    load_sun_time()
     load_waist_hip_proportion()
     load_week_day()
     load_weight_tem()

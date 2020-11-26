@@ -28,6 +28,15 @@ class BarConfig:
     """ 图片绘制宽度 """
 
 
+class Moon:
+    """ 月相配置 """
+
+    cid: int
+    """ 月相id """
+    name: str
+    """ 月相名 """
+
+
 class Organ:
     """ 器官对应性别限定和文字描述 """
 
@@ -87,6 +96,15 @@ class HitPointTem:
     """ 模板id """
     max_value: int
     """ 最大值 """
+
+
+class SunTime:
+    """ 太阳时间配置 """
+
+    cid: int
+    """ 太阳时间id """
+    name: str
+    """ 太阳时间名 """
 
 
 class Course:

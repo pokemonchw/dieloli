@@ -47,6 +47,8 @@ def game_start():
     cooking.init_restaurant_data()
     character_position = cache_contorl.character_data[0].position
     map_handle.character_move_scene(["0"], character_position, 0)
+    cache_contorl.school_longitude = random.uniform(120.52,122.12)
+    cache_contorl.school_latitude = random.uniform(30.4,31.53)
 
 
 def confirm_character_attr_panel():

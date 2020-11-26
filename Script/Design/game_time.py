@@ -416,3 +416,43 @@ def judge_datetime_solar_period(now_time:datetime.datetime) -> (bool,int):
     if new_time.year == now_time.year and new_time.month == now_time.month and new_time.day == now_time.day:
         return 1,solar_period
     return 0,0
+
+def get_sun_time(now_time:datetime.datetime) -> int:
+    """
+    根据时间获取太阳位置id
+    Keyword arguments:
+    now_time -- 时间
+    Return arguments:
+    int -- 太阳位置id
+    """
+    gatech = ephem.Observer()
+    gatech.long, gatech.lat = str(cache_contorl.school_longitude),str(cache_contorl.school_latitude)
+    now_add_time = round(cache_contorl.school_longitude)
+    gatech.date = get_sub_date(hour=-now_add_time)
+    sun = ephem.Sun()
+    sun.compute(gatech)
+    now_az = sun.az * 57.2957795
+    if now_az >= 225 and now_az < 255:
+        return 0
+    elif now_az >= 255 and now_az < 285:
+        return 1
+    elif now_az >= 285 and now_az < 315:
+        return 2
+    elif now_az >= 315 and now_az < 345:
+        return 3
+    elif now_az >= 345 or now_az < 15:
+        return 4
+    elif now_az >= 15 and now_az < 45:
+        return 5
+    elif now_az >= 45 and now_az < 75:
+        return 6
+    elif now_az >= 75 and now_az < 105:
+        return 7
+    elif now_az >= 105 and now_az < 135:
+        return 8
+    elif now_az >= 135 and now_az < 165:
+        return 9
+    elif now_az >= 165 and now_az < 195:
+        return 10
+    else:
+        return 11

@@ -87,10 +87,4 @@ def id_index(now_id: int) -> str:
     Return arguments:
     str -- id文本
     """
-    if now_id >= 100:
-        return f"[{now_id}]"
-    elif now_id >= 10:
-        if now_id:
-            return f"[0{now_id}]"
-        return "[000]"
-    return f"[00{now_id}]"
+    return f"[{str(now_id).zfill(3)}]"
