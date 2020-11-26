@@ -185,6 +185,8 @@ config_school_session_data: Dict[int, Dict[int, int]] = {}
 学校上课时间配置数据
 学校id:课时编号:配表id
 """
+config_season:Dict[int,config_def.Season] = {}
+""" 季节配置数据 """
 config_sex_experience: Dict[int, config_def.SexExperience] = {}
 """ 性经验丰富程度模板对应器官性经验模板 """
 config_sex_experience_data: Dict[int, Dict[int, int]] = {}
@@ -208,6 +210,8 @@ config_random_npc_sex_region: Dict[int,int] = {}
 """
 config_social_type: Dict[int, config_def.SocialType] = {}
 """ 关系类型配置数据 """
+config_solar_period:Dict[int,config_def.SolarPeriod] = {}
+""" 节气配置数据 """
 config_stature_description_premise: Dict[int, config_def.StatureDescriptionPremise] = {}
 """ 身材描述文本前提配置 """
 config_stature_description_premise_data: Dict[int, Set] = {}
@@ -695,6 +699,16 @@ def load_school_session():
         config_school_session_data[now_tem.school_id][now_tem.session] = now_tem.cid
 
 
+def load_season():
+    """ 载入季节配置 """
+    now_data = config_data["Season"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Season()
+        now_tem.__dict__ = tem_data
+        config_season[now_tem.cid] = now_tem
+
+
 def load_sex_experience():
     """ 载入性经验丰富模板对应器官性经验模板配置数据 """
     now_data = config_data["SexExperience"]
@@ -738,6 +752,16 @@ def load_social_type():
         now_tem = config_def.SocialType()
         now_tem.__dict__ = tem_data
         config_social_type[now_tem.cid] = now_tem
+
+
+def load_solar_period():
+    """ 载入节气配置 """
+    now_data = config_data["SolarPeriod"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.SolarPeriod()
+        now_tem.__dict__ = tem_data
+        config_solar_period[now_tem.cid] = now_tem
 
 
 def load_stature_description_premise():
@@ -845,10 +869,12 @@ def init():
     load_school()
     load_school_phase_course()
     load_school_session()
+    load_season()
     load_sex_experience()
     load_sex_experience_tem()
     load_sex_tem()
     load_social_type()
+    load_solar_period()
     load_stature_description_premise()
     load_stature_description_text()
     load_status()

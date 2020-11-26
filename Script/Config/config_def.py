@@ -391,6 +391,15 @@ class SexExperience:
     """ 经验模板 """
 
 
+class Season:
+    """ 季节配置 """
+
+    cid: int
+    """ 季节id """
+    name: str
+    """ 季节名 """
+
+
 class OccupationBodyFatRegion:
     """ 年龄段下体重对应各体脂率范围权重 """
 
@@ -464,6 +473,17 @@ class School:
     """ 最小年龄 """
     max_age: int
     """ 最大年龄 """
+
+
+class SolarPeriod:
+    """ 节气配置 """
+
+    cid: int
+    """ 节气id """
+    name: str
+    """ 节气名 """
+    season: int
+    """ 所属季节id """
 
 
 class OccupationAgeRegion:

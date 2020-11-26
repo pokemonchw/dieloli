@@ -3,11 +3,10 @@ from functools import wraps
 from typing import List
 from types import FunctionType
 from Script.Core import get_text, constant, game_type, cache_contorl, flow_handle
-from Script.Design import handle_panel, character, character_handle
+from Script.Design import handle_panel, character, character_handle, course,cooking,map_handle,interest
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
 from Script.Config import normal_config, game_config
-from Script.Flow import game_start_flow
 
 _: FunctionType = get_text._
 """ 翻译api """
@@ -28,10 +27,26 @@ def creator_character_panel():
     while 1:
         if input_name_panel():
             character.init_attr(0)
-            game_start_flow.init_game_start()
+            game_start()
             if confirm_character_attr_panel():
                 break
     cache_contorl.now_panel_id = constant.Panel.GET_UP
+
+
+def game_start():
+    """ 初始化游戏数据 """
+    character_handle.init_character_dormitory()
+    character_handle.init_character_position()
+    course.init_phase_course_hour()
+    interest.init_character_interest()
+    course.init_character_knowledge()
+    course.init_class_teacher()
+    course.init_class_time_table()
+    course.init_teacher_table()
+    cooking.init_recipes()
+    cooking.init_restaurant_data()
+    character_position = cache_contorl.character_data[0].position
+    map_handle.character_move_scene(["0"], character_position, 0)
 
 
 def confirm_character_attr_panel():

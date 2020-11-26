@@ -1,6 +1,9 @@
 import datetime
 import random
+import math
 import bisect
+import ephem
+from types import FunctionType
 from dateutil import relativedelta
 from Script.Core import (
     cache_contorl,
@@ -328,3 +331,88 @@ def judge_school_course_time(school_id: str, time_data: datetime.datetime) -> ga
         else:
             course_status.end_course = end_time - now_time
     return course_status
+
+def ecliptic_lon(now_time:datetime.datetime) -> float:
+    """
+    根据日期计算黄经
+    now_time -- 日期
+    Return arguments:
+    float -- 黄经
+    """
+    s=ephem.Sun(now_time)
+    equ=ephem.Equatorial(s.ra,s.dec,epoch=now_time)
+    e=ephem.Ecliptic(equ)
+    return e.lon
+
+def get_solar_period(now_time:datetime.datetime) -> int:
+    """
+    根据日期计算对应节气id
+    Keyword arguments:
+    now_time -- 日期
+    Return arguments:
+    int -- 节气id
+    """
+    e=ecliptic_lon(now_time)
+    n=int(e*180.0/math.pi/15)
+    return n
+
+def get_old_solar_period_time(now_time:datetime.datetime) -> (datetime.datetime,int):
+    """
+    根据日期计算上个节气的开始日期
+    Keyword arguments:
+    now_time -- 日期
+    Return arguments:
+    new_time -- 节气日期
+    """
+    s1=get_solar_period(now_time)
+    s0=s1
+    dt=1
+    new_time = now_time
+    while True:
+        new_time = get_sub_date(day=-dt,old_date=new_time)
+        s=get_solar_period(new_time)
+        if s0!=s:
+            s0=s
+            dt=-dt/2
+        if s!=s1 and abs(dt) < 1:
+            break
+    return new_time,s0
+
+def get_next_solar_period_time(now_time:datetime.datetime) -> (datetime.datetime,int):
+    """
+    根据日期计算下个节气的开始日期
+    Keyword arguments:
+    now_time -- 日期
+    Return arguments:
+    new_time -- 节气日期
+    """
+    s1=get_solar_period(now_time)
+    s0=s1
+    dt=1
+    new_time = now_time
+    while True:
+        new_time = get_sub_date(day=dt,old_date=new_time)
+        s=get_solar_period(new_time)
+        if s0!=s:
+            s0=s
+            dt=-dt/2
+        if s!=s1 and abs(dt) < 1:
+            break
+    return new_time,s0
+
+def judge_datetime_solar_period(now_time:datetime.datetime) -> (bool,int):
+    """
+    校验日期是否是节气以及获取节气id
+    Keyword arguments:
+    now_time -- 日期
+    Return arguments:
+    bool -- 校验结果
+    int -- 节气id
+    """
+    new_time,solar_period = get_old_solar_period_time(now_time)
+    if new_time.year == now_time.year and new_time.month == now_time.month and new_time.day == now_time.day:
+        return 1,solar_period
+    new_time,solar_period = get_next_solar_period_time(now_time)
+    if new_time.year == now_time.year and new_time.month == now_time.month and new_time.day == now_time.day:
+        return 1,solar_period
+    return 0,0
