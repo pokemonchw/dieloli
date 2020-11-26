@@ -303,7 +303,7 @@ def setting_nature_0_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[0] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[0] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -317,7 +317,7 @@ def setting_nature_1_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[1] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[1] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -331,7 +331,7 @@ def setting_nature_2_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[2] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[2] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -345,7 +345,7 @@ def setting_nature_3_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[3] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[3] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -359,7 +359,7 @@ def setting_nature_4_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[4] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[4] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -373,7 +373,7 @@ def setting_nature_5_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[5] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[5] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -387,7 +387,7 @@ def setting_nature_6_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[6] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[6] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -401,7 +401,7 @@ def setting_nature_7_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[7] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[7] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -415,7 +415,7 @@ def setting_nature_8_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[8] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[8] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -429,7 +429,7 @@ def setting_nature_9_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[9] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[9] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -443,7 +443,7 @@ def setting_nature_10_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[10] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[10] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -457,7 +457,7 @@ def setting_nature_11_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[11] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[11] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -471,7 +471,7 @@ def setting_nature_12_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[12] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[12] = abs(random.randint(0, 100) - int(ans) * 50)
 
 
 @add_setting_panel()
@@ -485,4 +485,4 @@ def setting_nature_13_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[13] = random.randint(0, 100) - int(ans) * 50
+    character_data.nature[13] = abs(random.randint(0, 100) - int(ans) * 50)
