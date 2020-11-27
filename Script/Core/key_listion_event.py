@@ -1,8 +1,11 @@
 from tkinter import Event
-from Script.Core import main_frame, py_cmd, cache_contorl
+from Script.Core import main_frame, py_cmd,game_type,cache_contorl
 
 wframe = main_frame.root
 
+
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 def on_wframe_listion():
     """
@@ -22,7 +25,7 @@ def mouse_left_check(event: Event):
     Keyword arguments:
     event -- 鼠标事件
     """
-    if not cache_contorl.wframe_mouse.w_frame_up:
+    if not cache.wframe_mouse.w_frame_up:
         set_wframe_up()
     else:
         mouse_check_push()
@@ -34,9 +37,9 @@ def mouse_right_check(event: Event):
     Keyword arguments:
     event -- 鼠标事件
     """
-    cache_contorl.wframe_mouse.mouse_right = 1
-    cache_contorl.text_wait = 0
-    if not cache_contorl.wframe_mouse.w_frame_up == 0:
+    cache.wframe_mouse.mouse_right = 1
+    cache.text_wait = 0
+    if not cache.wframe_mouse.w_frame_up == 0:
         set_wframe_up()
     else:
         mouse_check_push()
@@ -48,16 +51,16 @@ def key_up(event: Event):
     Keyword arguments:
     event -- 键盘事件
     """
-    while cache_contorl.input_position == 0:
-        cache_contorl.input_position = len(cache_contorl.input_cache)
-    while cache_contorl.input_position <= 21 and cache_contorl.input_position > 1:
-        cache_contorl.input_position -= 1
-        inpot_id = cache_contorl.input_position
+    while cache.input_position == 0:
+        cache.input_position = len(cache.input_cache)
+    while cache.input_position <= 21 and cache.input_position > 1:
+        cache.input_position -= 1
+        inpot_id = cache.input_position
         try:
-            main_frame.order.set(cache_contorl.input_cache[inpot_id])
+            main_frame.order.set(cache.input_cache[inpot_id])
             break
         except KeyError:
-            cache_contorl.input_position += 1
+            cache.input_position += 1
 
 
 def key_down(event: Event):
@@ -67,17 +70,17 @@ def key_down(event: Event):
     event -- 键盘事件
     """
     if (
-        cache_contorl.input_position > 0
-        and cache_contorl.input_position < len(cache_contorl.input_cache) - 1
+        cache.input_position > 0
+        and cache.input_position < len(cache.input_cache) - 1
     ):
         try:
-            cache_contorl.input_position += 1
-            input_id = cache_contorl.input_position
-            main_frame.order.set(cache_contorl.input_cache[input_id])
+            cache.input_position += 1
+            input_id = cache.input_position
+            main_frame.order.set(cache.input_cache[input_id])
         except KeyError:
-            cache_contorl.input_position -= 1
-    elif cache_contorl.input_position == len(cache_contorl.input_cache) - 1:
-        cache_contorl.input_position = 0
+            cache.input_position -= 1
+    elif cache.input_position == len(cache.input_cache) - 1:
+        cache.input_position = 0
         main_frame.order.set("")
 
 
@@ -85,8 +88,8 @@ def set_wframe_up():
     """
     修正逐字输出状态为nowait
     """
-    cache_contorl.wframe_mouse.w_frame_up = 1
-    cache_contorl.wframe_mouse.w_frame_lines_up = 1
+    cache.wframe_mouse.w_frame_up = 1
+    cache.wframe_mouse.w_frame_lines_up = 1
 
 
 def mouse_check_push():
@@ -94,6 +97,6 @@ def mouse_check_push():
     更正鼠标点击状态数据映射
     """
     py_cmd.focus_cmd()
-    if not cache_contorl.wframe_mouse.mouse_leave_cmd == 0:
+    if not cache.wframe_mouse.mouse_leave_cmd == 0:
         main_frame.send_input()
-        cache_contorl.wframe_mouse.mouse_leave_cmd = 1
+        cache.wframe_mouse.mouse_leave_cmd = 1

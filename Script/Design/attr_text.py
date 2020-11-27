@@ -4,6 +4,7 @@ from typing import List
 from Script.Core import (
     cache_contorl,
     constant,
+    game_type,
 )
 from Script.Design import (
     handle_premise,
@@ -11,6 +12,8 @@ from Script.Design import (
 )
 from Script.Config import game_config
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 def get_random_name_for_sex(sex_grade: str) -> str:
     """
@@ -19,10 +22,10 @@ def get_random_name_for_sex(sex_grade: str) -> str:
     sex_grade -- 性别
     """
     while 1:
-        family_random = random.randint(1, cache_contorl.family_region_int_list[-1])
-        family_region_index = bisect.bisect_left(cache_contorl.family_region_int_list, family_random)
-        family_region = cache_contorl.family_region_int_list[family_region_index]
-        family_name = cache_contorl.family_region_list[family_region]
+        family_random = random.randint(1, cache.family_region_int_list[-1])
+        family_region_index = bisect.bisect_left(cache.family_region_int_list, family_random)
+        family_region = cache.family_region_int_list[family_region_index]
+        family_name = cache.family_region_list[family_region]
         if sex_grade == "Man":
             sex_judge = 1
         elif sex_grade == "Woman":
@@ -30,18 +33,18 @@ def get_random_name_for_sex(sex_grade: str) -> str:
         else:
             sex_judge = random.randint(0, 1)
         if sex_judge == 0:
-            name_random = random.randint(1, cache_contorl.girls_region_int_list[-1])
-            name_region_index = bisect.bisect_left(cache_contorl.girls_region_int_list, name_random)
-            name_region = cache_contorl.girls_region_int_list[name_region_index]
-            name = cache_contorl.girls_region_list[name_region]
+            name_random = random.randint(1, cache.girls_region_int_list[-1])
+            name_region_index = bisect.bisect_left(cache.girls_region_int_list, name_random)
+            name_region = cache.girls_region_int_list[name_region_index]
+            name = cache.girls_region_list[name_region]
         else:
-            name_random = random.randint(1, cache_contorl.boys_region_int_list[-2])
-            name_region_index = bisect.bisect_left(cache_contorl.boys_region_int_list, name_random)
-            name_region = cache_contorl.boys_region_int_list[name_region_index]
-            name = cache_contorl.boys_region_list[name_region]
+            name_random = random.randint(1, cache.boys_region_int_list[-2])
+            name_region_index = bisect.bisect_left(cache.boys_region_int_list, name_random)
+            name_region = cache.boys_region_int_list[name_region_index]
+            name = cache.boys_region_list[name_region]
         now_name = f"{family_name}{name}"
-        if now_name not in cache_contorl.npc_name_data:
-            cache_contorl.npc_name_data.add(now_name)
+        if now_name not in cache.npc_name_data:
+            cache.npc_name_data.add(now_name)
             return family_name + name
 
 
@@ -90,6 +93,6 @@ def get_scene_path_text(scene_path:List[str]) -> str:
     scene_path_text = ""
     for now_map in map_list:
             now_map_map_system_str = map_handle.get_map_system_path_str_for_list(now_map)
-            map_name = cache_contorl.map_data[now_map_map_system_str].map_name
+            map_name = cache.map_data[now_map_map_system_str].map_name
             scene_path_text += map_name + "-"
-    return scene_path_text + cache_contorl.scene_data[scene_path_str].scene_name
+    return scene_path_text + cache.scene_data[scene_path_str].scene_name

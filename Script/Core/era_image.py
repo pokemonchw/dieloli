@@ -1,13 +1,15 @@
 import os
 from tkinter import END
 from PIL.ImageTk import PhotoImage
-from Script.Core import cache_contorl, game_path_config, main_frame
+from Script.Core import game_path_config, main_frame,game_type,cache_contorl
 
 game_path = game_path_config.game_path
 textbox = main_frame.textbox
 image_data = {}
 image_text_data = {}
 image_lock = 0
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 
 def get_image_data(image_name: str, image_path:str="") -> PhotoImage:
@@ -17,11 +19,12 @@ def get_image_data(image_name: str, image_path:str="") -> PhotoImage:
     image_name -- 图片名字
     image_path -- 图片路径 (default '')
     """
+    global cache_contorl
     if image_path == "":
         image_path = os.path.join(game_path, "image", image_name + ".png")
     else:
         image_path = os.path.join(game_path, "image", image_path, image_name + ".png")
-    cache_contorl.image_id += 1
+    cache.image_id += 1
     return PhotoImage(file=image_path)
 
 
@@ -32,5 +35,5 @@ def print_image(image_name: str, image_path:str=""):
     image_name -- 图片名字
     image_path -- 图片路径 (default '')
     """
-    image_data[str(cache_contorl.image_id)] = get_image_data(image_name, image_path)
-    textbox.image_create(END, image=image_data[str(cache_contorl.image_id)])
+    image_data[str(cache.image_id)] = get_image_data(image_name, image_path)
+    textbox.image_create(END, image=image_data[str(cache.image_id)])

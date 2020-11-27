@@ -1,5 +1,8 @@
 # -*- coding: UTF-8 -*-
-from Script.Core import py_cmd, cache_contorl, constant
+from Script.Core import py_cmd, cache_contorl, constant,game_type
+
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 
 def start_frame():
@@ -8,4 +11,4 @@ def start_frame():
     """
     while True:
         py_cmd.clr_cmd()
-        cache_contorl.panel_data[cache_contorl.now_panel_id]()
+        cache.panel_data[cache.now_panel_id]()

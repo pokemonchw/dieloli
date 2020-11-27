@@ -27,3 +27,4 @@ int,str,str,str,str,int,bool,bool,bool,str,str
 21,sontitle,#00ff00,,,,,,,,子标题字体
 22,solarperiod,#003e54,,,,,,,,节气字体
 23,season,#f0ffff,,,,,,,,季节字体
+24,moon,#d6ecf0,,,,,,,,月相

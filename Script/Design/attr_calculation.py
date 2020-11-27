@@ -13,6 +13,8 @@ from Script.Core import (
 from Script.Design import game_time
 from Script.Config import game_config
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏内缓存数据 """
 
 def get_age_tem_list() -> list:
     """
@@ -88,7 +90,7 @@ def get_chest(chest_tem: int, birthday: datetime.datetime) -> game_type.Chest:
     over_age = random.randint(14, 18)
     over_year = birthday.year + over_age
     end_date = game_time.get_rand_day_for_year(over_year)
-    now_date = cache_contorl.game_time
+    now_date = cache.game_time
     end_day = game_time.count_day_for_datetime(birthday, end_date)
     now_day = game_time.count_day_for_datetime(birthday, now_date)
     sub_chest = target_chest / end_day
@@ -128,9 +130,9 @@ def get_rand_npc_birthday(age: int):
     Keyword arguments:
     age -- 年龄
     """
-    now_year = cache_contorl.game_time.year
-    now_month = cache_contorl.game_time.month
-    now_day = cache_contorl.game_time.day
+    now_year = cache.game_time.year
+    now_month = cache.game_time.month
+    now_day = cache.game_time.day
     birth_year = now_year - age
     birthday = game_time.get_rand_day_for_year(birth_year)
     if now_month < birthday.month or (now_month == birthday.month and now_day < birthday.day):

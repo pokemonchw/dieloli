@@ -1,9 +1,12 @@
 from Script.Core import (
     cache_contorl,
     constant,
+    game_type,
 )
 from Script.Config import game_config
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 def get_rich_text_print(text_message: str, default_style: str) -> list:
     """
@@ -33,31 +36,31 @@ def get_rich_text_print(text_message: str, default_style: str) -> list:
                 style_last_index = i
                 style_max_index = input_text_style_size
                 if input_text_style[0] == "/":
-                    if cache_contorl.text_style_position == 1:
-                        cache_contorl.output_text_style = "standard"
-                        cache_contorl.text_style_position = 0
-                        cache_contorl.text_style_cache = ["standard"]
+                    if cache.text_style_position == 1:
+                        cache.output_text_style = "standard"
+                        cache.text_style_position = 0
+                        cache.text_style_cache = ["standard"]
                     else:
-                        cache_contorl.text_style_position = cache_contorl.text_style_position - 1
-                        cache_contorl.output_text_style = cache_contorl.text_style_cache[
-                            cache_contorl.text_style_position
+                        cache.text_style_position = cache.text_style_position - 1
+                        cache.output_text_style = cache.text_style_cache[
+                            cache.text_style_position
                         ]
                 else:
-                    cache_contorl.text_style_position = len(cache_contorl.text_style_cache)
-                    cache_contorl.text_style_cache.append(input_text_style)
-                    cache_contorl.output_text_style = cache_contorl.text_style_cache[
-                        cache_contorl.text_style_position
+                    cache.text_style_position = len(cache.text_style_cache)
+                    cache.text_style_cache.append(input_text_style)
+                    cache.output_text_style = cache.text_style_cache[
+                        cache.text_style_position
                     ]
             else:
                 if style_last_index is not None:
                     if i == len(text_message):
-                        cache_contorl.text_style_position = 0
-                        cache_contorl.output_text_style = "standard"
-                        cache_contorl.text_style_cache = ["standard"]
+                        cache.text_style_position = 0
+                        cache.output_text_style = "standard"
+                        cache.text_style_cache = ["standard"]
                     if i not in range(style_last_index, style_max_index):
-                        style_list.append(cache_contorl.output_text_style)
+                        style_list.append(cache.output_text_style)
                 else:
-                    style_list.append(cache_contorl.output_text_style)
+                    style_list.append(cache.output_text_style)
     return style_list
 
 

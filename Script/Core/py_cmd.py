@@ -2,6 +2,7 @@ from Script.Core import (
     flow_handle,
     main_frame,
     cache_contorl,
+    game_type,
 )
 from Script.Config import game_config, normal_config
 
@@ -10,6 +11,8 @@ clear_default_flow = flow_handle.clear_default_flow
 # 绑定或重新绑定一个命令
 bind_cmd = flow_handle.bind_cmd
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 # 输出命令
 def pcmd(
@@ -32,7 +35,7 @@ def pcmd(
     normal_style -- 正常状态下命令显示样式
     on_style -- 鼠标在其上的时候命令显示样式
     """
-    cache_contorl.text_wait = float(normal_config.config_normal.text_wait)
+    cache.text_wait = float(normal_config.config_normal.text_wait)
     global last_char
     if len(cmd_str) > 0:
         last_char = cmd_str[-1:]

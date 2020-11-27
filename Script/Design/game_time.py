@@ -3,15 +3,15 @@ import random
 import math
 import bisect
 import ephem
-from types import FunctionType
 from dateutil import relativedelta
 from Script.Core import (
     cache_contorl,
-    constant,
     game_type,
 )
 from Script.Config import normal_config,game_config
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 def init_time():
     """
@@ -24,7 +24,7 @@ def init_time():
         normal_config.config_normal.hour,
         normal_config.config_normal.minute,
     )
-    cache_contorl.game_time = game_time
+    cache.game_time = game_time
 
 
 def get_date_text(game_time_data: datetime.datetime = None) -> str:
@@ -34,7 +34,7 @@ def get_date_text(game_time_data: datetime.datetime = None) -> str:
     game_timeData -- 时间数据，若为None，则获取当前游戏时间
     """
     if game_time_data is None:
-        game_time_data = cache_contorl.game_time
+        game_time_data = cache.game_time
     return f"时间:{game_time_data.year}年{game_time_data.month}月{game_time_data.day}日{game_time_data.hour}点{game_time_data.minute}分"
 
 
@@ -42,7 +42,7 @@ def get_week_day_text() -> str:
     """
     获取星期描述文本
     """
-    week_day = cache_contorl.game_time.weekday()
+    week_day = cache.game_time.weekday()
     week_date_data = game_config.config_week_day[week_day]
     return week_date_data.name
 
@@ -58,7 +58,7 @@ def sub_time_now(minute=0, hour=0, day=0, month=0, year=0) -> datetime.datetime:
     year -- 增加的年数
     """
     new_date = get_sub_date(minute, hour, day, month, year)
-    cache_contorl.game_time = new_date
+    cache.game_time = new_date
 
 
 def get_sub_date(
@@ -80,7 +80,7 @@ def get_sub_date(
     old_date -- 旧日期，若为None，则获取当前游戏时间
     """
     if old_date is None:
-        old_date = cache_contorl.game_time
+        old_date = cache.game_time
     new_date = old_date + relativedelta.relativedelta(
         years=year, months=month, days=day, hours=hour, minutes=minute
     )
@@ -163,13 +163,13 @@ def init_now_course_time_slice(character_id: int):
     Keyword arguments:
     character_id -- 角色Id
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     character_age = character_data.age
     teacher_id = -1
     if character_age in range(7, 19):
         phase = character_age - 7
-    elif character_id in cache_contorl.teacher_phase_table:
-        phase = cache_contorl.teacher_phase_table[character_id]
+    elif character_id in cache.teacher_phase_table:
+        phase = cache.teacher_phase_table[character_id]
         teacher_id = character_id
     else:
         phase = 12
@@ -209,15 +209,15 @@ def init_primary_school_course_time_status(
             now_time_status.to_course = 0
         elif (
             teacher_id > -1
-            and teacher_id in cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index]
+            and teacher_id in cache.teacher_class_time_table[now_week][now_time_status.course_index]
         ):
-            classroom = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][
+            classroom = cache.teacher_class_time_table[now_week][now_time_status.course_index][
                 teacher_id
             ].keys()[0]
-            now_time_status.course_id = cache_contorl.teacher_class_time_table[now_week][
+            now_time_status.course_id = cache.teacher_class_time_table[now_week][
                 now_time_status.course_index
             ][teacher_id][classroom]
-            cache_contorl.character_data[teacher_id].classroom = classroom
+            cache.character_data[teacher_id].classroom = classroom
     else:
         now_time_status.end_course = 0
         now_time_status.in_course = 0
@@ -246,15 +246,15 @@ def init_junior_middle_school_course_time_status(
             now_time_status.to_course = 0
         elif (
             teacher_id > -1
-            and teacher_id in cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index]
+            and teacher_id in cache.teacher_class_time_table[now_week][now_time_status.course_index]
         ):
-            classroom = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][
+            classroom = cache.teacher_class_time_table[now_week][now_time_status.course_index][
                 teacher_id
             ].keys()[0]
-            now_time_status.course_id = cache_contorl.teacher_class_time_table[now_week][
+            now_time_status.course_id = cache.teacher_class_time_table[now_week][
                 now_time_status.course_index
             ][teacher_id][classroom]
-            cache_contorl.character_data[teacher_id].classroom = classroom
+            cache.character_data[teacher_id].classroom = classroom
     else:
         now_time_status.end_course = 0
         now_time_status.in_course = 0
@@ -278,15 +278,15 @@ def init_senior_high_school_course_time_status(
     if time_data.month in range(1, 7) or time_data.month in range(9, 13):
         if (
             teacher_id > -1
-            and teacher_id in cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index]
+            and teacher_id in cache.teacher_class_time_table[now_week][now_time_status.course_index]
         ):
-            classroom = cache_contorl.teacher_class_time_table[now_week][now_time_status.course_index][
+            classroom = cache.teacher_class_time_table[now_week][now_time_status.course_index][
                 teacher_id
             ].keys()[0]
-            now_time_status.course_id = cache_contorl.teacher_class_time_table[now_week][
+            now_time_status.course_id = cache.teacher_class_time_table[now_week][
                 now_time_status.course_index
             ][teacher_id][classroom]
-            cache_contorl.character_data[teacher_id].classroom = classroom
+            cache.character_data[teacher_id].classroom = classroom
     else:
         now_time_status.end_course = 0
         now_time_status.in_course = 0
@@ -426,33 +426,59 @@ def get_sun_time(now_time:datetime.datetime) -> int:
     int -- 太阳位置id
     """
     gatech = ephem.Observer()
-    gatech.long, gatech.lat = str(cache_contorl.school_longitude),str(cache_contorl.school_latitude)
-    now_add_time = round(cache_contorl.school_longitude)
-    gatech.date = get_sub_date(hour=-now_add_time)
+    gatech.long, gatech.lat = str(cache.school_longitude),str(cache.school_latitude)
+    now_add_time = round(cache.school_longitude/15)
+    gatech.date = get_sub_date(hour=-now_add_time,old_date=now_time)
     sun = ephem.Sun()
     sun.compute(gatech)
     now_az = sun.az * 57.2957795
     if now_az >= 225 and now_az < 255:
-        return 0
-    elif now_az >= 255 and now_az < 285:
-        return 1
-    elif now_az >= 285 and now_az < 315:
-        return 2
-    elif now_az >= 315 and now_az < 345:
-        return 3
-    elif now_az >= 345 or now_az < 15:
-        return 4
-    elif now_az >= 15 and now_az < 45:
-        return 5
-    elif now_az >= 45 and now_az < 75:
-        return 6
-    elif now_az >= 75 and now_az < 105:
-        return 7
-    elif now_az >= 105 and now_az < 135:
         return 8
-    elif now_az >= 135 and now_az < 165:
+    elif now_az >= 255 and now_az < 285:
         return 9
-    elif now_az >= 165 and now_az < 195:
+    elif now_az >= 285 and now_az < 315:
         return 10
-    else:
+    elif now_az >= 315 and now_az < 345:
         return 11
+    elif now_az >= 345 or now_az < 15:
+        return 0
+    elif now_az >= 15 and now_az < 45:
+        return 1
+    elif now_az >= 45 and now_az < 75:
+        return 2
+    elif now_az >= 75 and now_az < 105:
+        return 3
+    elif now_az >= 105 and now_az < 135:
+        return 4
+    elif now_az >= 135 and now_az < 165:
+        return 5
+    elif now_az >= 165 and now_az < 195:
+        return 6
+    return 7
+
+def get_moon_phase(now_time:datetime.datetime) -> int:
+    """
+    根据时间获取月相配置id
+    Keyword arguments:
+    now_time -- 时间
+    Return arguments:
+    int -- 月相配置id
+    """
+    gatech = ephem.Observer()
+    gatech.long, gatech.lat = str(cache.school_longitude),str(cache.school_latitude)
+    now_add_time = round(cache.school_longitude / 15)
+    new_time = get_sub_date(hour=-now_add_time,old_date=now_time)
+    gatech.date = new_time
+    moon = ephem.Moon()
+    moon.compute(gatech)
+    now_phase = moon.phase
+    new_time = get_sub_date(day=1,old_date=new_time)
+    gatech.date = new_time
+    next_moon = ephem.Moon()
+    next_moon.compute(gatech)
+    next_phase = next_moon.phase
+    now_type = next_phase > now_phase
+    for phase in game_config.config_moon_data[now_type]:
+        phase_config = game_config.config_moon[phase]
+        if now_phase > phase_config.min_phase and now_phase <= phase_config.max_phase:
+            return phase_config.cid

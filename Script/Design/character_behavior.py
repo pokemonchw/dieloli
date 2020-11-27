@@ -16,18 +16,19 @@ from Script.Design import (
 )
 
 game_path = game_path_config.game_path
-
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 def init_character_behavior():
     """
     角色行为树总控制
     """
     while 1:
-        if len(cache_contorl.over_behavior_character) >= len(cache_contorl.character_data):
+        if len(cache.over_behavior_character) >= len(cache.character_data):
             break
-        for character_id in cache_contorl.character_data:
+        for character_id in cache.character_data:
             character_behavior(character_id)
-    cache_contorl.over_behavior_character = {}
+    cache.over_behavior_character = {}
 
 
 def character_behavior(character_id: int):
@@ -36,20 +37,20 @@ def character_behavior(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    if character_id in cache_contorl.over_behavior_character:
+    if character_id in cache.over_behavior_character:
         return
-    if cache_contorl.character_data[character_id].behavior["StartTime"] == None:
+    if cache.character_data[character_id].behavior["StartTime"] == None:
         character.init_character_behavior_start_time(character_id)
     game_time.init_now_course_time_slice(character_id)
-    if cache_contorl.character_data[character_id].state == constant.CharacterStatus.STATUS_ARDER:
+    if cache.character_data[character_id].state == constant.CharacterStatus.STATUS_ARDER:
         if character_id:
             character_target_judge(character_id)
         else:
-            cache_contorl.over_behavior_character[0] = 1
+            cache.over_behavior_character[0] = 1
     else:
         status_judge = judge_character_status(character_id)
         if status_judge:
-            cache_contorl.over_behavior_character[character_id] = 1
+            cache.over_behavior_character[character_id] = 1
 
 
 def character_target_judge(character_id: int):
@@ -58,17 +59,17 @@ def character_target_judge(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    target, _, judge = search_target(character_id, list(cache_contorl.handle_target_data.keys()), set())
+    target, _, judge = search_target(character_id, list(cache.handle_target_data.keys()), set())
     if judge:
-        cache_contorl.handle_target_data[target](character_id)
+        cache.handle_target_data[target](character_id)
     else:
-        start_time = cache_contorl.character_data[character_id].behavior["StartTime"]
-        now_judge = game_time.judge_date_big_or_small(start_time, cache_contorl.game_time)
+        start_time = cache.character_data[character_id].behavior["StartTime"]
+        now_judge = game_time.judge_date_big_or_small(start_time, cache.game_time)
         if now_judge:
-            cache_contorl.over_behavior_character[character_id] = 1
+            cache.over_behavior_character[character_id] = 1
         else:
             next_time = game_time.get_sub_date(minute=1, old_date=start_time)
-            cache_contorl.character_data[character_id].behavior["StartTime"] = next_time
+            cache.character_data[character_id].behavior["StartTime"] = next_time
 
 
 def judge_character_status(character_id: int) -> int:
@@ -79,10 +80,10 @@ def judge_character_status(character_id: int) -> int:
     Return arguments:
     bool -- 本次update时间切片内活动是否已完成
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     start_time = character_data.behavior["StartTime"]
     end_time = game_time.get_sub_date(minute=character_data.behavior["Duration"], old_date=start_time)
-    now_time = cache_contorl.game_time
+    now_time = cache.game_time
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
     add_time = (end_time.timestamp() - start_time.timestamp()) / 60
     character_data.status["BodyFeeling"]["Hunger"] += add_time * 0.02
@@ -117,7 +118,7 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
     for target in target_list:
         if target in null_target:
             continue
-        target_premise_list = cache_contorl.premise_target_table[target]
+        target_premise_list = cache.premise_target_table[target]
         now_weiget = 0
         now_target_pass_judge = 0
         now_target_data = {}
@@ -128,8 +129,8 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
                 now_weiget += premise_judge
             else:
                 premise_judge = 0
-                if premise in cache_contorl.effect_target_table:
-                    now_target_list = cache_contorl.effect_target_table[premise]
+                if premise in cache.effect_target_table:
+                    now_target_list = cache.effect_target_table[premise]
                     now_target, now_target_weight, now_judge = search_target(
                         character_id, now_target_list, null_target
                     )

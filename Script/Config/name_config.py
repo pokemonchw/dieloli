@@ -1,8 +1,9 @@
 import os
 from typing import Dict
-from Script.Core import json_handle,cache_contorl,value_handle
+from Script.Core import json_handle,value_handle,cache_contorl,game_type
 
-
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 name_json_path = os.path.join("data", "NameIndex.json")
 """ 原始名字数据文件路径 """
 family_json_path = os.path.join("data", "FamilyIndex.json")
@@ -44,11 +45,11 @@ def init_name_region(name_data: Dict[str, int], man_judge: int):
     """
     region_list = value_handle.get_region_list(name_data)
     if man_judge == 0:
-        cache_contorl.boys_region_list = region_list
-        cache_contorl.boys_region_int_list = list(map(int, region_list))
+        cache.boys_region_list = region_list
+        cache.boys_region_int_list = list(map(int, region_list))
     elif man_judge == 1:
-        cache_contorl.girls_region_list = region_list
-        cache_contorl.girls_region_int_list = list(map(int, region_list))
+        cache.girls_region_list = region_list
+        cache.girls_region_int_list = list(map(int, region_list))
     else:
-        cache_contorl.family_region_list = region_list
-        cache_contorl.family_region_int_list = list(map(int, region_list))
+        cache.family_region_list = region_list
+        cache.family_region_int_list = list(map(int, region_list))

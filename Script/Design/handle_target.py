@@ -4,6 +4,8 @@ from types import FunctionType
 from Script.Core import cache_contorl, game_type, constant
 from Script.Design import character
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 def add_target(target: str, premise_list: set, effect_list: set) -> FunctionType:
     """
@@ -21,11 +23,11 @@ def add_target(target: str, premise_list: set, effect_list: set) -> FunctionType
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        cache_contorl.handle_target_data[target] = return_wrapper
-        cache_contorl.premise_target_table[target] = premise_list
+        cache.handle_target_data[target] = return_wrapper
+        cache.premise_target_table[target] = premise_list
         for effect in effect_list:
-            cache_contorl.effect_target_table.setdefault(effect, set())
-            cache_contorl.effect_target_table[effect].add(target)
+            cache.effect_target_table.setdefault(effect, set())
+            cache.effect_target_table[effect].add(target)
         return return_wrapper
 
     return decoraror

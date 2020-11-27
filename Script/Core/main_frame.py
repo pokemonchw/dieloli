@@ -9,8 +9,6 @@ from tkinter import (
     Tk,
     Text,
     StringVar,
-    FALSE,
-    Menu,
     END,
     N,
     W,
@@ -21,12 +19,14 @@ from tkinter import (
     Entry,
 )
 from Script.Core import (
-    cache_contorl,
     text_handle,
-    constant,
+    game_type,
+    cache_contorl,
 )
 from Script.Config import normal_config, game_config
 
+cache: game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 def close_window():
     """
@@ -130,15 +130,15 @@ def send_input(*args):
     """
     global input_event_func
     order = get_order()
-    if len(cache_contorl.input_cache) >= 21:
+    if len(cache.input_cache) >= 21:
         if not (order) == "":
-            del cache_contorl.input_cache[0]
-            cache_contorl.input_cache.append(order)
-            cache_contorl.input_position = 0
+            del cache.input_cache[0]
+            cache.input_cache.append(order)
+            cache.input_position = 0
     else:
         if not (order) == "":
-            cache_contorl.input_cache.append(order)
-            cache_contorl.input_position = 0
+            cache.input_cache.append(order)
+            cache.input_position = 0
     input_event_func(order)
     clear_order()
 
@@ -396,7 +396,7 @@ def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_styl
             textbox.tag_ranges(cmd_tag_name)[1],
         )
         textbox.configure(cursor="hand1")
-        cache_contorl.wframe_mouse.mouse_leave_cmd = 0
+        cache.wframe_mouse.mouse_leave_cmd = 0
 
     def leave_func(*args):
         """
@@ -413,7 +413,7 @@ def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_styl
             textbox.tag_ranges(cmd_tag_name)[1],
         )
         textbox.configure(cursor="")
-        cache_contorl.wframe_mouse.mouse_leave_cmd = 1
+        cache.wframe_mouse.mouse_leave_cmd = 1
 
     textbox.tag_bind(cmd_tag_name, "<1>", send_cmd)
     textbox.tag_bind(cmd_tag_name, "<Enter>", enter_func)

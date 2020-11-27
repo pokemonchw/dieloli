@@ -1,9 +1,8 @@
 import random
 import math
 import uuid
-from typing import List, Dict
-from Script.Core import cache_contorl, value_handle, game_type
-from Script.Design import character
+from typing import Dict
+from Script.Core import game_type
 from Script.Config import game_config
 
 

@@ -8,6 +8,8 @@ from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
 from Script.Config import normal_config, game_config
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
 width = normal_config.config_normal.text_width
@@ -22,7 +24,7 @@ line = draw.LineDraw("=", width)
 @handle_panel.add_panel(constant.Panel.CREATOR_CHARACTER)
 def creator_character_panel():
     """ 创建角色面板 """
-    cache_contorl.character_data[0] = game_type.Character()
+    cache.character_data[0] = game_type.Character()
     character_handle.init_character_list()
     while 1:
         if input_name_panel():
@@ -30,7 +32,7 @@ def creator_character_panel():
             game_start()
             if confirm_character_attr_panel():
                 break
-    cache_contorl.now_panel_id = constant.Panel.GET_UP
+    cache.now_panel_id = constant.Panel.GET_UP
 
 
 def game_start():
@@ -45,21 +47,21 @@ def game_start():
     course.init_teacher_table()
     cooking.init_recipes()
     cooking.init_restaurant_data()
-    character_position = cache_contorl.character_data[0].position
+    character_position = cache.character_data[0].position
     map_handle.character_move_scene(["0"], character_position, 0)
-    cache_contorl.school_longitude = random.uniform(120.52,122.12)
-    cache_contorl.school_latitude = random.uniform(30.4,31.53)
+    cache.school_longitude = random.uniform(120.9,122.12)
+    cache.school_latitude = random.uniform(30.7,31.53)
 
 
 def confirm_character_attr_panel():
     """ 确认角色属性面板 """
     for item_id in game_config.config_item:
-        cache_contorl.character_data[0].item.add(item_id)
+        cache.character_data[0].item.add(item_id)
     for social_type in game_config.config_social_type:
-        cache_contorl.character_data[0].social_contact[social_type] = game_type.SocialContact(
+        cache.character_data[0].social_contact[social_type] = game_type.SocialContact(
         )
         for i in range(social_type * 10 + 1, (social_type + 1) * 10 + 1):
-            cache_contorl.character_data[0].social_contact[social_type].character_list[i] = 1000
+            cache.character_data[0].social_contact[social_type].character_list[i] = 1000
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
     askfor_panel = panel.OneMessageAndSingleColumnButton()
     while 1:
@@ -97,7 +99,7 @@ def input_name_panel() -> bool:
     Return arguments:
     bool -- 完成角色创建校验
     """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     ask_name_panel = panel.AskForOneMessage()
     ask_name_panel.set(_("请问能告诉我你的名字吗？"), 10)
     line_feed_draw.draw()
@@ -117,7 +119,7 @@ def input_name_panel() -> bool:
         if now_name in get_text.translation_values or now_name in get_text.translation._catalog:
             not_system_error.draw()
             continue
-        if now_name in cache_contorl.npc_name_data:
+        if now_name in cache.npc_name_data:
             not_name_error.draw()
             continue
         character_data.name = now_name
@@ -133,7 +135,7 @@ def input_nick_name_panel() -> bool:
     bool -- 完成角色创建校验
     """
     create_judge = 0
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     ask_nick_name_panel = panel.AskForOneMessage()
     ask_nick_name_panel.set(_(f"该怎么称呼{character_data.name}好呢？"), 10)
     line_feed_draw.draw()
@@ -163,7 +165,7 @@ def input_sex_panel() -> bool:
     bool -- 完成角色创建校验
     """
     create_judge = 0
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     sex_list = [
         game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -188,7 +190,7 @@ def input_setting_panel() -> bool:
     bool -- 完成角色创建流程
     """
     create_judge = 0
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     ask_list = [_("是"), _("否")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(ask_list, _(
@@ -238,7 +240,7 @@ def add_setting_panel() -> FunctionType:
 @add_setting_panel()
 def setting_age_tem_panel():
     """ 设置年龄模板 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"{character_data.nick_name}是一个小孩子吗？")
     ask_list = [
         _("嘎呜～嘎呜～"),
@@ -258,7 +260,7 @@ def setting_age_tem_panel():
 @add_setting_panel()
 def setting_weight_panel():
     """ 设置体重模板 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"{character_data.nick_name}对自己的体重有自信吗？")
     ask_list = [
         _("很轻，就像一张纸一样，风一吹就能飘起来。"),
@@ -278,7 +280,7 @@ def setting_weight_panel():
 @add_setting_panel()
 def setting_sex_experience_panel():
     """ 设置性经验模板 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"{character_data.nick_name}是否有过性经验呢？")
     ask_list = [
         _("性经验什么的完全没有过，你在问什么呢！变态！"),
@@ -297,7 +299,7 @@ def setting_sex_experience_panel():
 @add_setting_panel()
 def setting_nature_0_panel():
     """ 设置性格倾向:活跃 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"{character_data.nick_name}是否是一个有话就说，从来不憋在心里的人呢？")
     ask_list = [_("是"), _("不是")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -311,7 +313,7 @@ def setting_nature_0_panel():
 @add_setting_panel()
 def setting_nature_1_panel():
     """ 设置性格倾向:合群 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"{character_data.nick_name}在参加聚会时，会很自然的融入进人群里吗？")
     ask_list = [_("会"), _("不会")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -325,7 +327,7 @@ def setting_nature_1_panel():
 @add_setting_panel()
 def setting_nature_2_panel():
     """ 设置性格倾向:乐观 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"{character_data.nick_name}有憧憬过未来的人生吗？")
     ask_list = [_("有"), _("没有")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -339,7 +341,7 @@ def setting_nature_2_panel():
 @add_setting_panel()
 def setting_nature_3_panel():
     """ 设置性格倾向:守信 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"承诺过的事情就一定要做到？")
     ask_list = [_("会"), _("视情况而定")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -353,7 +355,7 @@ def setting_nature_3_panel():
 @add_setting_panel()
 def setting_nature_4_panel():
     """ 设置性格区间:无私 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"考虑问题时会顾及到别人的利益吗？")
     ask_list = [_("会"), _("不会")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -367,7 +369,7 @@ def setting_nature_4_panel():
 @add_setting_panel()
 def setting_nature_5_panel():
     """ 设置性格区间:重情 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _("关心别人的时候会让自己感到快乐？")
     ask_list = [_("会"), _("不会")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -381,7 +383,7 @@ def setting_nature_5_panel():
 @add_setting_panel()
 def setting_nature_6_panel():
     """ 设置性格区间:严谨 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _("对于自己的任务，会一丝不苟的去完成吗？")
     ask_list = [_("会"), _("不会")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -395,7 +397,7 @@ def setting_nature_6_panel():
 @add_setting_panel()
 def setting_nature_7_panel():
     """ 设置性格区间:自律 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"{character_data.nick_name}是一个即使不会被发现，也绝不弄虚作假的人吗？")
     ask_list = [_("当然"), _("不是")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -409,7 +411,7 @@ def setting_nature_7_panel():
 @add_setting_panel()
 def setting_nature_8_panel():
     """ 设置性格区间:沉稳 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _("即使在一些很随便的场合，也会表现得很严肃对吗？")
     ask_list = [_("会"), _("不会")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -423,7 +425,7 @@ def setting_nature_8_panel():
 @add_setting_panel()
 def setting_nature_9_panel():
     """ 设置性格区间:决断 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"{character_data.nick_name}总是很轻率的做出了决定对吗？")
     ask_list = [_("是"), _("不是")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -437,7 +439,7 @@ def setting_nature_9_panel():
 @add_setting_panel()
 def setting_nature_10_panel():
     """ 设置性格区间:坚韧 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _("不会轻易的放弃自己的理想？")
     ask_list = [_("是"), _("不是")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -451,7 +453,7 @@ def setting_nature_10_panel():
 @add_setting_panel()
 def setting_nature_11_panel():
     """ 设置性格区间:机敏 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"喜欢多与对{character_data.nick_name}有利的人交往对吗？")
     ask_list = [_("是"), _("不是")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -465,7 +467,7 @@ def setting_nature_11_panel():
 @add_setting_panel()
 def setting_nature_12_panel():
     """ 设置性格区间:耐性 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _("对工作会倾注全部的热情？")
     ask_list = [_("是"), _("不是")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -479,7 +481,7 @@ def setting_nature_12_panel():
 @add_setting_panel()
 def setting_nature_13_panel():
     """ 设置性格区间:爽直 """
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     message = _(f"{character_data.nick_name}是一个心直口快，想到什么说什么的人对吗？")
     ask_list = [_("是"), _("不是")]
     button_panel = panel.OneMessageAndSingleColumnButton()

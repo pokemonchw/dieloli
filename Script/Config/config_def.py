@@ -29,12 +29,18 @@ class BarConfig:
 
 
 class Moon:
-    """ 月相配置 """
+    """ 月相配置(明日更满为正反之为负) """
 
     cid: int
     """ 月相id """
     name: str
-    """ 月相名 """
+    """ 月相 """
+    type: int
+    """ 月相类型 """
+    min_phase: float
+    """ 最小亮度 """
+    max_phase: float
+    """ 最大亮度 """
 
 
 class Organ:

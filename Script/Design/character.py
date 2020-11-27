@@ -17,13 +17,17 @@ from Script.Design import (
 from Script.Config import game_config
 
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
+
+
 def init_attr(character_id: int):
     """
     初始化角色属性
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     character_data.language[character_data.mother_tongue] = 10000
     character_data.birthday = attr_calculation.get_rand_npc_birthday(character_data.age)
     character_data.end_age = attr_calculation.get_end_age(character_data.sex)
@@ -65,7 +69,7 @@ def init_class(character_data: game_type.Character):
     """
     if character_data.age <= 18 and character_data.age >= 7:
         class_grade = str(character_data.age - 6)
-        character_data.classroom = random.choice(cache_contorl.place_data["Classroom_" + class_grade])
+        character_data.classroom = random.choice(cache.place_data["Classroom_" + class_grade])
 
 
 def init_character_behavior_start_time(character_id: int):
@@ -74,8 +78,8 @@ def init_character_behavior_start_time(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data[character_id]
-    game_time = cache_contorl.game_time
+    character_data = cache.character_data[character_id]
+    game_time = cache.game_time
     start_time = datetime.datetime(
         game_time.year,
         game_time.month,
@@ -92,7 +96,7 @@ def character_move_to_classroom(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     _, _, move_path, move_time = character_move.character_move(
         character_id,
         map_handle.get_map_system_path_for_str(character_data.classroom),
@@ -109,7 +113,7 @@ def character_attend_class(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     character_data.behavior["BehaviorId"] = constant.Behavior.ATTEND_CLASS
     character_data.behavior["Duration"] = now_time_slice["EndCourse"]
     character_data.behavior["MoveTarget"] = []
@@ -123,9 +127,9 @@ def character_move_to_rand_cafeteria(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     to_cafeteria = map_handle.get_map_system_path_for_str(
-        random.choice(cache_contorl.place_data["Cafeteria"])
+        random.choice(cache.place_data["Cafeteria"])
     )
     _, _, move_path, move_time = character_move.character_move(character_id, to_cafeteria)
     character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
@@ -140,9 +144,9 @@ def character_move_to_rand_restaurant(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     to_restaurant = map_handle.get_map_system_path_for_str(
-        random.choice(cache_contorl.place_data["Restaurant"])
+        random.choice(cache.place_data["Restaurant"])
     )
     _, _, move_path, move_time = character_move.character_move(
         character_id,
@@ -161,7 +165,7 @@ def character_rest_to_time(character_id: int, need_time: int):
     character_id -- 角色id
     need_time -- 休息时长(分钟)
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     character_data.behavior["Duration"] = need_time
     character_data.behavior["BehaviorId"] = constant.Behavior.REST
     character_data.state = constant.CharacterStatus.STATUS_REST
@@ -173,18 +177,18 @@ def character_buy_rand_food_at_restaurant(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     food_list = [
         food_id
-        for food_id in cache_contorl.restaurant_data
-        if isinstance(food_id, int) and len(cache_contorl.restaurant_data[food_id])
+        for food_id in cache.restaurant_data
+        if isinstance(food_id, int) and len(cache.restaurant_data[food_id])
     ]
     now_food_id = random.choice(food_list)
-    now_food = cache_contorl.restaurant_data[now_food_id][
-        random.choice(list(cache_contorl.restaurant_data[now_food_id].keys()))
+    now_food = cache.restaurant_data[now_food_id][
+        random.choice(list(cache.restaurant_data[now_food_id].keys()))
     ]
     character_data.food_bag[now_food.uid] = now_food
-    del cache_contorl.restaurant_data[now_food_id][now_food.uid]
+    del cache.restaurant_data[now_food_id][now_food.uid]
 
 
 def character_eat_rand_food(character_id: int):
@@ -193,7 +197,7 @@ def character_eat_rand_food(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     character_data.behavior["BehaviorId"] = constant.Behavior.EAT
     character_data.behavior["EatFood"] = character_data.food_bag[
         random.choice(list(character_data.food_bag.keys()))

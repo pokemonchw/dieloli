@@ -1,6 +1,8 @@
-from Script.Core import cache_contorl, constant
+from Script.Core import cache_contorl, constant,game_type
 from Script.Design import map_handle, update, character
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 def own_charcter_move(target_scene: list):
     """
@@ -9,7 +11,7 @@ def own_charcter_move(target_scene: list):
     target_scene -- 寻路目标场景(在地图系统下的绝对坐标)
     """
     while 1:
-        character_data = cache_contorl.character_data[0]
+        character_data = cache.character_data[0]
         if character_data.position != target_scene:
             (
                 move_now,
@@ -27,8 +29,8 @@ def own_charcter_move(target_scene: list):
             update.game_update_flow(now_need_time)
         else:
             break
-    cache_contorl.character_data[0].target_character_id = 0
-    cache_contorl.now_flow_id = "in_scene"
+    cache.character_data[0].target_character_id = 0
+    cache.now_flow_id = "in_scene"
 
 
 def character_move(character_id: str, target_scene: list) -> (str, list, list, int):
@@ -44,7 +46,7 @@ def character_move(character_id: str, target_scene: list) -> (str, list, list, i
     list -- 本次移动到的位置
     int -- 本次移动花费的时间
     """
-    now_position = cache_contorl.character_data[character_id].position
+    now_position = cache.character_data[character_id].position
     scene_hierarchy = map_handle.judge_scene_affiliation(now_position, target_scene)
     if scene_hierarchy == "common":
         map_path = map_handle.get_common_map_for_scene_path(now_position, target_scene)
@@ -67,7 +69,7 @@ def difference_map_move(character_id: str, target_scene: list) -> (str, list, li
     list -- 本次移动到的位置
     int -- 本次移动花费的时间
     """
-    character_data = cache_contorl.character_data[character_id]
+    character_data = cache.character_data[character_id]
     now_position = character_data.position
     is_affiliation = map_handle.judge_scene_affiliation(now_position, target_scene)
     now_true_position = map_handle.get_scene_path_for_true(now_position)

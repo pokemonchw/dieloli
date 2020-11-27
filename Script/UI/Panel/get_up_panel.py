@@ -1,11 +1,13 @@
 from types import FunctionType
-from Script.UI.Moudle import draw
-from Script.UI.Panel import see_character_info_panel
+from Script.UI.Moudle import draw,panel
+from Script.UI.Panel import see_character_info_panel,game_info_panel
 from Script.Design import game_time
-from Script.Core import get_text, cache_contorl, flow_handle, py_cmd, text_handle
+from Script.Core import get_text, cache_contorl, flow_handle, py_cmd, text_handle,game_type
 from Script.Config import game_config
 import time
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
 line_feed = draw.NormalDraw()
@@ -31,66 +33,53 @@ class GetUpPanel:
     def draw(self):
         """ 绘制面板 """
         while 1:
-            title_draw = draw.TitleLineDraw(_("主页"), self.width)
-            character_data = cache_contorl.character_data[self.character_id]
-            title_draw.draw()
-            now_width = 0
-            now_draw = draw.CenterMergeDraw(self.width)
-            date_draw = draw.NormalDraw()
-            date_draw.width = self.width
-            date_draw.text = f"{game_time.get_date_text()} {game_time.get_week_day_text()} "
-            now_draw.draw_list.append(date_draw)
-            now_width += len(date_draw)
-            solar_period = game_time.get_solar_period(cache_contorl.game_time)
-            season = game_config.config_solar_period[solar_period].season
-            season_config = game_config.config_season[season]
-            season_draw = draw.NormalDraw()
-            season_draw.text = f"{season_config.name} "
-            season_draw.style = "season"
-            season_draw.width = self.width - now_width
-            now_draw.draw_list.append(season_draw)
-            now_width += len(season_draw)
-            judge,solar_period = game_time.judge_datetime_solar_period(cache_contorl.game_time)
-            if judge:
-                solar_period_config = game_config.config_solar_period[solar_period]
-                solar_period_draw = draw.NormalDraw()
-                solar_period_draw.text = f"{solar_period_config.name} "
-                solar_period_draw.width = self.width - now_width
-                solar_period_draw.style = "solarperiod"
-                now_draw.draw_list.append(solar_period_draw)
-                now_width += len(solar_period_draw)
-            sun_time = game_time.get_sun_time(cache_contorl.game_time)
-            sun_time_config = game_config.config_sun_time[sun_time]
-            sun_time_draw = draw.NormalDraw()
-            sun_time_draw.text = f"{sun_time_config.name} "
-            sun_time_draw.width = self.width - now_width
-            now_draw.draw_list.append(sun_time_draw)
-            now_width += len(sun_time_draw)
-            name_draw = draw.Button(character_data.name,character_data.name,cmd_func=self.see_character)
-            name_draw.width = self.width - now_width
-            now_draw.draw_list.append(name_draw)
-            now_width += len(name_draw)
-            gold_draw = draw.NormalDraw()
-            gold_draw.width = self.width - now_width
-            gold_draw.text = f" 现金:{character_data.gold}$"
-            now_draw.draw_list.append(gold_draw)
-            now_draw.draw()
             line_feed.draw()
+            title_draw = draw.TitleLineDraw(_("主页"), self.width)
+            character_data = cache.character_data[self.character_id]
+            title_draw.draw()
+            game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
+            game_time_draw.now_draw.width = len(game_time_draw)
+            game_time_draw.draw()
+            line_feed.draw()
+            line_feed.draw()
+            player_info_draw = see_character_info_panel.CharacterInfoHead(0,self.width)
+            player_info_draw.draw_title = 0
+            player_info_draw.draw()
+            line_feed.draw()
+            game_menu_titie = draw.LittleTitleLineDraw(_("游戏菜单"),self.width)
+            game_menu_titie.draw()
             get_up_button = draw.CenterButton(_("[000]睁眼起床"),"0",self.width / 2)
             get_up_button.draw()
             see_character_list_button = draw.CenterButton(_("[001]查看属性"),"1",self.width/2,cmd_func=self.see_character_list)
+            see_character_list_button.draw()
+            line_feed.draw()
+            system_menu_titie = draw.LittleTitleLineDraw(_("系统菜单"),self.width)
+            system_menu_titie.draw()
+            save_button = draw.CenterButton(_("[002]保存游戏"),"2",self.width / 2)
+            save_button.draw()
+            load_save_button = draw.CenterButton(_("[003]载入游戏"),"3",self.width/2)
+            load_save_button.draw()
             return_list = []
-            return_list.append(name_draw.return_text)
             return_list.append(get_up_button.return_text)
             return_list.append(see_character_list_button.return_text)
             yrn = flow_handle.askfor_all(return_list)
 
-    def see_character(self):
-        """ 绘制角色属性 """
-        py_cmd.clr_cmd()
-        attr_panel = see_character_info_panel.SeeCharacterInfoOnGetUpPanel(self.character_id,self.width)
-        attr_panel.draw()
-
     def see_character_list(self):
         """ 绘制角色列表 """
         py_cmd.clr_cmd()
+        line_feed.draw()
+        title_draw = draw.TitleLineDraw(_("角色列表"),self.width)
+        handle_panel = panel.PageHandlePanel(list(cache.character_data.keys()),see_character_info_panel.GetUpCharacterInfoDraw,9,1,self.width,1,1,0,"-")
+        while 1:
+            title_draw.draw()
+            self.return_list = []
+            handle_panel.draw()
+            self.return_list.extend(handle_panel.return_list)
+            back_draw = draw.CenterButton(_("[返回]"),_("返回"),self.width)
+            back_draw.draw()
+            self.return_list.append(back_draw.return_text)
+            yrn = flow_handle.askfor_all(self.return_list)
+            py_cmd.clr_cmd()
+            if yrn == back_draw.return_text:
+                break
+

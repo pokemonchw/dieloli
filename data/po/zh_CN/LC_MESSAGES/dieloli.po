@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 20:42+0800\n"
+"POT-Creation-Date: 2020-11-27 13:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -567,11 +567,11 @@ msgstr ""
 msgid "主页"
 msgstr ""
 
-#: ../Script/UI/Panel/get_up_panel.py:72
+#: ../Script/UI/Panel/get_up_panel.py:51
 msgid "[000]睁眼起床"
 msgstr ""
 
-#: ../Script/UI/Panel/get_up_panel.py:74
+#: ../Script/UI/Panel/get_up_panel.py:53
 msgid "[001]查看属性"
 msgstr ""
 
@@ -592,35 +592,99 @@ msgid "无性"
 msgstr ""
 
 #: class:Moon id:0 type:name
-msgid "新月"
+msgid "晦"
 msgstr ""
 
 #: class:Moon id:1 type:name
-msgid "峨眉月"
+msgid "朔月"
+msgstr ""
+
+#: class:Moon id:1 type:name
+msgid "新月"
 msgstr ""
 
 #: class:Moon id:2 type:name
-msgid "上弦月"
+msgid "既朔月"
 msgstr ""
 
 #: class:Moon id:3 type:name
-msgid "盈凸月"
+msgid "三日月"
 msgstr ""
 
 #: class:Moon id:4 type:name
-msgid "满月"
+msgid "蛾眉月"
 msgstr ""
 
 #: class:Moon id:5 type:name
-msgid "亏凸月"
+msgid "夕月"
 msgstr ""
 
 #: class:Moon id:6 type:name
-msgid "下弦月"
+msgid "上弦月"
 msgstr ""
 
 #: class:Moon id:7 type:name
+msgid "九夜月"
+msgstr ""
+
+#: class:Moon id:8 type:name
+msgid "宵月"
+msgstr ""
+
+#: class:Moon id:9 type:name
+msgid "十三日月"
+msgstr ""
+
+#: class:Moon id:10 type:name
+msgid "小望月"
+msgstr ""
+
+#: class:Moon id:11 type:name
+msgid "满月"
+msgstr ""
+
+#: class:Moon id:13 type:name
+msgid "既望月"
+msgstr ""
+
+#: class:Moon id:14 type:name
+msgid "立待月"
+msgstr ""
+
+#: class:Moon id:15 type:name
+msgid "居待月"
+msgstr ""
+
+#: class:Moon id:16 type:name
+msgid "寝待月"
+msgstr ""
+
+#: class:Moon id:17 type:name
+msgid "更待月"
+msgstr ""
+
+#: class:Moon id:18 type:name
+msgid "亏凸月"
+msgstr ""
+
+#: class:Moon id:19 type:name
+msgid "弓张月"
+msgstr ""
+
+#: class:Moon id:20 type:name
+msgid "有明月"
+msgstr ""
+
+#: class:Moon id:21 type:name
+msgid "蛾眉残月"
+msgstr ""
+
+#: class:Moon id:22 type:name
 msgid "残月"
+msgstr ""
+
+#: class:Moon id:23 type:name
+msgid "晓月"
 msgstr ""
 
 #: class:Organ id:0 type:name

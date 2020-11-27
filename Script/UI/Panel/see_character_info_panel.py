@@ -9,6 +9,8 @@ from Script.Design import attr_text,map_handle,attr_calculation
 
 panel_info_data = {}
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
 
@@ -138,7 +140,7 @@ class SeeCharacterStatusPanel:
         """ 绘制的文本列表 """
         self.return_list:List[str] = []
         """ 当前面板监听的按钮列表 """
-        character_data = cache_contorl.character_data[character_id]
+        character_data = cache.character_data[character_id]
         for status_type in game_config.config_character_state_type_data:
             type_data = game_config.config_character_state_type[status_type]
             type_line = draw.LittleTitleLineDraw(type_data.name,width,":")
@@ -190,11 +192,13 @@ class CharacterInfoHead:
 
     def __init__(self, character_id: int, width: int):
         """ 初始化绘制对象 """
-        self.character_id = character_id
+        self.character_id:int = character_id
         """ 要绘制的角色id """
-        self.width = width
+        self.width:int = width
         """ 当前最大可绘制宽度 """
-        character_data = cache_contorl.character_data[character_id]
+        self.draw_title:bool = True
+        """ 是否绘制面板标题 """
+        character_data = cache.character_data[character_id]
         sex_text = game_config.config_sex_tem[character_data.sex].name
         message = _(f"No.{character_id} 姓名:{character_data.name} 称呼:{character_data.nick_name} 性别:{sex_text}")
         message_draw = draw.CenterDraw()
@@ -228,8 +232,9 @@ class CharacterInfoHead:
 
     def draw(self):
         """ 绘制面板 """
-        title_draw = draw.TitleLineDraw(_("人物属性"), self.width)
-        title_draw.draw()
+        if self.draw_title:
+            title_draw = draw.TitleLineDraw(_("人物属性"), self.width)
+            title_draw.draw()
         for draw_tuple in self.draw_list:
             for label in draw_tuple:
                 label.draw()
@@ -250,7 +255,7 @@ class CharacterStatureText:
         """ 要绘制的角色id """
         self.width = width
         """ 当前最大可绘制宽度 """
-        player_data = cache_contorl.character_data[0]
+        player_data = cache.character_data[0]
         description = attr_text.get_stature_text(character_id)
         description = description.format(
             Name=player_data.name,
@@ -283,7 +288,7 @@ class CharacterRoomText:
         """ 要绘制的角色id """
         self.width = width
         """ 当前最大可绘制宽度 """
-        character_data = cache_contorl.character_data[self.character_id]
+        character_data = cache.character_data[self.character_id]
         dormitory = character_data.dormitory
         dormitory_text = ""
         if dormitory == "":
@@ -336,7 +341,7 @@ class CharacterBirthdayText:
         """ 要绘制的角色id """
         self.width = width
         """ 当前最大可绘制宽度 """
-        character_data = cache_contorl.character_data[self.character_id]
+        character_data = cache.character_data[self.character_id]
         age_text = _(f"年龄:{character_data.age}岁")
         birthday_text = _(f"生日:{character_data.birthday.month}月{character_data.birthday.day}日")
         self.info_list = [age_text,birthday_text]
@@ -364,7 +369,7 @@ class CharacterStatureInfoText:
         """ 要绘制的角色id """
         self.width = width
         """ 当前最大可绘制宽度 """
-        character_data = cache_contorl.character_data[self.character_id]
+        character_data = cache.character_data[self.character_id]
         now_height = round(character_data.height.now_height,2)
         now_height_text = _(f"身高:{now_height}")
         now_weight = round(character_data.weight,2)
@@ -398,7 +403,7 @@ class CharacterMeasurementsText:
         """ 要绘制的角色id """
         self.width = width
         """ 当前最大可绘制宽度 """
-        character_data = cache_contorl.character_data[self.character_id]
+        character_data = cache.character_data[self.character_id]
         character_data.measurements.bust
         character_data.measurements.hip
         character_data.measurements.waist
@@ -433,7 +438,7 @@ class CharacterSexExperienceText:
         """ 绘制的角色id """
         self.width = width
         """ 当前最大可绘制宽度 """
-        character_data = cache_contorl.character_data[self.character_id]
+        character_data = cache.character_data[self.character_id]
         self.experience_text_data = {
             0:_("嘴部开发度:"),
             1:_("胸部开发度:"),
@@ -486,7 +491,7 @@ class SeeCharacterKnowledgePanel:
         """ 绘制的文本列表 """
         self.return_list:List[str] = []
         """ 当前面板监听的按钮列表 """
-        character_data = cache_contorl.character_data[character_id]
+        character_data = cache.character_data[character_id]
         for skill_type in game_config.config_knowledge_type_data:
             skill_set = game_config.config_knowledge_type_data[skill_type]
             type_config = game_config.config_knowledge_type[skill_type]
@@ -540,7 +545,7 @@ class SeeCharacterLanguagePanel:
         """ 面板最大宽度 """
         self.return_list:List[str] = []
         """ 当前面板监听的按钮列表 """
-        character_data = cache_contorl.character_data[character_id]
+        character_data = cache.character_data[character_id]
         language_list = list(game_config.config_language.keys())
         language_text_list = []
         for language in language_list:
@@ -663,7 +668,7 @@ class SeeCharacterNaturePanel:
         """ 绘制的文本列表 """
         self.return_list:List[str] = []
         """ 当前面板监听的按钮列表 """
-        character_data = cache_contorl.character_data[character_id]
+        character_data = cache.character_data[character_id]
         for nature_type in game_config.config_nature_tag:
             type_config = game_config.config_nature_tag[nature_type]
             nature_set = game_config.config_nature_tag_data[nature_type]
@@ -728,7 +733,7 @@ class SeeCharacterSocialContact:
         """ 绘制的文本列表 """
         self.return_list:List[str] = []
         """ 当前面板监听的按钮列表 """
-        character_data = cache_contorl.character_data[self.character_id]
+        character_data = cache.character_data[self.character_id]
         for social_type in game_config.config_social_type:
             type_config = game_config.config_social_type[social_type]
             type_draw = draw.LittleTitleLineDraw(type_config.name,self.width,":")
@@ -784,7 +789,7 @@ class SeeCharacterSocialName:
         """ 数字按钮的id """
         self.button_return:str = str(button_id)
         """ 按钮返回值 """
-        character_data = cache_contorl.character_data[self.character_id]
+        character_data = cache.character_data[self.character_id]
         character_name = character_data.name
         name_draw = draw.NormalDraw()
         if is_button:
@@ -894,10 +899,76 @@ class SeeCharacterInfoOnGetUpPanel:
         """ 切换显示上一人 """
         self.character_id -= 1
         if self.character_id < 0:
-            self.character_id = len(cache_contorl.character_data) - 1
+            self.character_id = len(cache.character_data) - 1
 
     def next_character(self):
         """ 切换显示下一人 """
         self.character_id += 1
-        if self.character_id >= len(cache_contorl.character_data):
+        if self.character_id >= len(cache.character_data):
             self.character_id = 0
+
+class GetUpCharacterInfoDraw:
+    """
+    起床面板按角色id绘制角色缩略信息
+    Keyword arguments:
+    text -- 角色id
+    width -- 最大宽度
+    is_button -- 绘制按钮
+    num_button -- 绘制数字按钮
+    button_id -- 数字按钮的id
+    """
+
+    def __init__(self,text:str,width:int,is_button:bool,num_button:bool,button_id:int):
+        """ 初始化绘制对象 """
+        self.text:int = int(text)
+        """ 角色id """
+        self.draw_text:str = ""
+        """ 角色缩略信息绘制文本 """
+        self.width:int = width
+        """ 最大宽度 """
+        self.is_button:bool = is_button
+        """ 绘制按钮 """
+        self.num_button:bool = num_button
+        """ 绘制数字按钮 """
+        self.button_id:int = button_id
+        """ 数字按钮的id """
+        self.button_return:str = str(button_id)
+        """ 按钮返回值 """
+        character_data = cache.character_data[self.text]
+        character_name = character_data.name
+        id_text = f"No.{self.text}"
+        sex_config = game_config.config_sex_tem[character_data.sex]
+        sex_text = _(f"性别:{sex_config.name}")
+        age_text = _(f"年龄:{character_data.age}岁")
+        hit_point_text = _(f"体力:({character_data.hit_point}/{character_data.hit_point_max})")
+        mana_point_text = _(f"气力:({character_data.mana_point}/{character_data.mana_point_max})")
+        now_text = f"{id_text} {character_name} {sex_text} {age_text} {hit_point_text} {mana_point_text}"
+        if is_button:
+            if num_button:
+                index_text = text_handle.id_index(self.button_id)
+                now_text_width = self.width - len(index_text)
+                new_text = text_handle.align(now_text,"center",text_width=now_text_width)
+                self.draw_text = f"{index_text}{new_text}"
+                self.button_return = str(button_id)
+            else:
+                new_text = text_handle.align(now_text,"center",text_width=self.width)
+                self.draw_text = new_text
+                self.button_return = character_name
+        else:
+            new_text = text_handle.align(now_text,"center",text_width=self.width)
+            self.draw_text = new_text
+
+    def draw(self):
+        """ 绘制对象 """
+        if self.is_button:
+            now_draw = draw.Button(self.draw_text,self.button_return,cmd_func=self.draw_character_info)
+        else:
+            now_draw = draw.NormalDraw()
+            now_draw.text = self.draw_text
+        now_draw.width = self.width
+        now_draw.draw()
+
+    def draw_character_info(self):
+        """ 绘制角色信息 """
+        now_draw = SeeCharacterInfoOnGetUpPanel(self.text,window_width)
+        now_draw.draw()

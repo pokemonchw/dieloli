@@ -3,7 +3,6 @@ from Script.Core import (
     flow_handle,
     io_init,
     key_listion_event,
-    cache_contorl,
 )
 from Script.Config import normal_config
 

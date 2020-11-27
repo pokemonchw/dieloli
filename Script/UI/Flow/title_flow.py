@@ -3,12 +3,13 @@ from types import FunctionType
 from Script.Config import normal_config
 from Script.UI.Moudle import panel, draw
 from Script.Design import handle_panel
-from Script.Core import constant, get_text, flow_handle, cache_contorl
+from Script.Core import constant, get_text, flow_handle, cache_contorl,game_type
 
 config_normal = normal_config.config_normal
 _: FunctionType = get_text._
 """ 翻译api """
-
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 @handle_panel.add_panel(constant.Panel.TITLE)
 def title_panel():
@@ -42,6 +43,6 @@ def title_panel():
     ans = flow_handle.askfor_all(return_list.keys())
     now_key = return_list[ans]
     if now_key == now_list[0]:
-        cache_contorl.now_panel_id = constant.Panel.CREATOR_CHARACTER
+        cache.now_panel_id = constant.Panel.CREATOR_CHARACTER
     elif now_key == now_list[2]:
         os._exit(0)

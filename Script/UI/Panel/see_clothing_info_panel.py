@@ -5,6 +5,8 @@ from Script.Core import cache_contorl, game_type, text_handle, get_text
 from Script.Config import game_config
 from Script.UI.Moudle import draw
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
 
@@ -33,7 +35,7 @@ class SeeCharacterPutOnClothingListPanel:
 
     def draw(self):
         """ 绘制面板 """
-        character_data = cache_contorl.character_data[self.character_id]
+        character_data = cache.character_data[self.character_id]
         title_draw = draw.TitleLineDraw(_("人物服装"), self.width)
         title_draw.draw()
         draw_list = []
@@ -74,7 +76,7 @@ class ClothingInfoDrawPanel:
 
     def __init__(self,character_id:int,clothing_type:int,clothing_id:UUID,width:int,draw_button:bool=False,button_id:int=0):
         """ 初始化绘制对象 """
-        character_data = cache_contorl.character_data[character_id]
+        character_data = cache.character_data[character_id]
         self.clothing_data:game_type.Clothing = character_data.clothing[clothing_type][clothing_id]
         """ 当前服装数据 """
         self.width:int = width

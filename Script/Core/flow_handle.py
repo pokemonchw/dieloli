@@ -3,14 +3,16 @@ import time
 import os
 from types import FunctionType
 from Script.Core import (
-    cache_contorl,
     text_handle,
     io_init,
-    constant,
     get_text,
+    game_type,
+    cache_contorl,
 )
 from Script.Config import game_config
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
 
@@ -62,7 +64,7 @@ def clear_default_flow():
     set_default_flow(null_func)
 
 
-cmd_map = cache_contorl.cmd_map
+cmd_map = cache.cmd_map
 
 
 def default_tail_deal_cmd_func(order):
@@ -195,11 +197,11 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
     __skip_flag__ = False
     while True:
         time.sleep(0.01)
-        if not donot_return_null_str and cache_contorl.wframe_mouse.w_frame_up:
+        if not donot_return_null_str and cache.wframe_mouse.w_frame_up:
             return ""
         while not io_init._order_queue.empty():
             order = io_init.get_order()
-            if cache_contorl.flow_contorl.quit_game:
+            if cache.flow_contorl.quit_game:
                 os._exit(0)
             if print_order and order != "":
                 io_init.era_print("\n" + order + "\n")
@@ -227,8 +229,8 @@ def askfor_str(donot_return_null_str=True, print_order=False):
     print_order -- 是否将输入的order输出到屏幕上
     """
     while True:
-        if not donot_return_null_str and cache_contorl.wframe_mouse.w_frame_up:
-            cache_contorl.wframe_mouse.w_frame_up = 0
+        if not donot_return_null_str and cache.wframe_mouse.w_frame_up:
+            cache.wframe_mouse.w_frame_up = 0
             return ""
         order = order_deal("str", print_order, donot_return_null_str)
         if donot_return_null_str and order != "":
@@ -282,32 +284,8 @@ def askfor_int(list, print_order=False):
 
 def askfor_wait():
     """ 用于请求一个暂停动作，输入任何数都可以继续 """
-    cache_contorl.wframe_mouse.w_frame_up = 0
-    while not cache_contorl.wframe_mouse.w_frame_up:
+    cache.wframe_mouse.w_frame_up = 0
+    while not cache.wframe_mouse.w_frame_up:
         re = askfor_str(donot_return_null_str=False)
         if re == "":
             break
-
-
-def init_cache():
-    """ 缓存初始化 """
-    cache_contorl.cmd_map = {}
-    cache_contorl.input_cache = [""]
-    cache_contorl.input_position = 0
-    cache_contorl.output_text_style = "standard"
-    cache_contorl.text_style_position = 0
-    cache_contorl.text_style_cache = ["standard"]
-    cache_contorl.text_one_by_one_rich_cache = {
-        "text_list": [],
-        "style_list": [],
-    }
-    cache_contorl.cmd_data = {}
-    cache_contorl.image_id = 0
-    cache_contorl.max_save_page = game_config.config_normal.save_page
-    cache_contorl.text_wait = float(game_config.config_normal.text_wait)
-    cache_contorl.random_npc_list = []
-    cache_contorl.npc_tem_data = []
-    cache_contorl.now_flow_id = "title_frame"
-    cache_contorl.old_flow_id = ""
-    cache_contorl.too_old_flow_id = ""
-    cache_contorl.course_data = {}

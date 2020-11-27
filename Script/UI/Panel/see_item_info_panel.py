@@ -1,10 +1,12 @@
 from typing import Dict
 from types import FunctionType
-from Script.Core import cache_contorl, text_handle,get_text,py_cmd
+from Script.Core import cache_contorl, text_handle,get_text,py_cmd,game_type
 from Script.UI.Moudle import panel,draw
 from Script.Config import game_config,normal_config
 
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
 window_width = normal_config.config_normal.text_width
@@ -27,7 +29,7 @@ class SeeCharacterItemBagPanel:
         """ 最大绘制宽度 """
         self.return_list:List[str] = []
         """ 当前面板监听的按钮列表 """
-        character_data = cache_contorl.character_data[character_id]
+        character_data = cache.character_data[character_id]
         item_list = list(character_data.item)
         item_panel = panel.PageHandlePanel(item_list,ItemNameDraw,20,7,width,1,1,0,"","|")
         self.handle_panel = item_panel

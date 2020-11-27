@@ -1,10 +1,12 @@
 import timeit
 from functools import wraps
-from Script.Core import text_loading, era_print, constant, cache_contorl
+from Script.Core import text_loading, era_print, constant, cache_contorl,game_type
 from Script.Design import game_time, update, character
 from Script.Flow import buy_food, eat_food
 
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 handle_instruct_data = {}
 """ 指令处理数据 """
 
@@ -50,13 +52,13 @@ def handle_rest():
     处理休息指令
     """
     character.init_character_behavior_start_time(0)
-    character_data = cache_contorl.character_data[0]
+    character_data = cache.character_data[0]
     character_data.behavior.duration = 10
     character_data.behavior.behavior_id = constant.Behavior.REST
     character_data.state = constant.CharacterStatus.STATUS_REST
     if character_data.hit_point > character_data.hit_point_max:
         character_data.hit_point = character_data.hit_point_max
-    target_character = cache_contorl.character_data[character_data.target_character_id]
+    target_character = cache.character_data[character_data.target_character_id]
     if (
         target_character.state == constant.CharacterStatus.STATUS_ARDER
         and target_character.behavior.behavior_id == constant.Behavior.SHARE_BLANKLY
@@ -84,7 +86,7 @@ def handle_eat():
     character.init_character_behavior_start_time(0)
     judge, now_food = eat_food.eat_food()
     if judge:
-        character_data = cache_contorl.character_data[0]
+        character_data = cache.character_data[0]
         character_data.behavior.behavior_id = constant.Behavior.EAT
         character_data.behavior.eat_food = now_food
         character_data.behavior.duration = 1

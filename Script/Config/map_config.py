@@ -1,9 +1,10 @@
 import os
 from typing import Dict, List
 from dijkstar import Graph, find_path
-from Script.Core import game_type, json_handle, cache_contorl, get_text, text_handle
+from Script.Core import game_type, json_handle, get_text, text_handle,cache_contorl
 
-
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 map_data_path = os.path.join("data", "map")
 """ 地图配置数据路径 """
 
@@ -34,9 +35,9 @@ def load_dir_now(data_path: str):
                         now_scene_data.scene_name = get_text._(load_scene_data["SceneName"])
                         now_scene_data.in_door = load_scene_data["InOutDoor"] == "In"
                         now_scene_data.scene_tag = load_scene_data["SceneTag"]
-                        cache_contorl.scene_data[now_scene_data.scene_path] = now_scene_data
-                        cache_contorl.place_data.setdefault(now_scene_data.scene_tag, [])
-                        cache_contorl.place_data[now_scene_data.scene_tag].append(now_scene_data.scene_path)
+                        cache.scene_data[now_scene_data.scene_path] = now_scene_data
+                        cache.place_data.setdefault(now_scene_data.scene_tag, [])
+                        cache.place_data[now_scene_data.scene_tag].append(now_scene_data.scene_path)
                     elif now_file[0] == "Map":
                         now_map_data = game_type.Map()
                         now_map_data.map_path = get_map_system_path_str(
@@ -49,7 +50,7 @@ def load_dir_now(data_path: str):
                         now_map_data.map_name = get_text._(load_map_data["MapName"])
                         now_map_data.path_edge = load_map_data["PathEdge"]
                         now_map_data.sorted_path = get_sorted_map_path_data(now_map_data.path_edge)
-                        cache_contorl.map_data[now_map_data.map_path] = now_map_data
+                        cache.map_data[now_map_data.map_path] = now_map_data
         else:
             load_dir_now(now_path)
 

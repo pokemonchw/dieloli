@@ -1,7 +1,9 @@
 from functools import wraps
 from types import FunctionType
-from Script.Core import cache_contorl
+from Script.Core import cache_contorl,game_type
 
+cache:game_type.Cache = cache_contorl.cache
+""" 游戏缓存数据 """
 
 def add_panel(panel: int) -> FunctionType:
     """
@@ -17,7 +19,7 @@ def add_panel(panel: int) -> FunctionType:
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        cache_contorl.panel_data[panel] = return_wrapper
+        cache.panel_data[panel] = return_wrapper
         return return_wrapper
 
     return decoraror
