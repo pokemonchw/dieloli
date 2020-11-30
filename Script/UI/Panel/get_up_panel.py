@@ -1,6 +1,6 @@
 from types import FunctionType
 from Script.UI.Moudle import draw,panel
-from Script.UI.Panel import see_character_info_panel,game_info_panel
+from Script.UI.Panel import see_character_info_panel,game_info_panel,see_save_info_panel
 from Script.Design import game_time
 from Script.Core import get_text, cache_contorl, flow_handle, py_cmd, text_handle,game_type
 from Script.Config import game_config
@@ -48,20 +48,13 @@ class GetUpPanel:
             line_feed.draw()
             game_menu_titie = draw.LittleTitleLineDraw(_("游戏菜单"),self.width)
             game_menu_titie.draw()
-            get_up_button = draw.CenterButton(_("[000]睁眼起床"),"0",self.width / 2)
+            get_up_button = draw.CenterButton(_("[000]睁眼起床"),"0",self.width / 3)
             get_up_button.draw()
-            see_character_list_button = draw.CenterButton(_("[001]查看属性"),"1",self.width/2,cmd_func=self.see_character_list)
+            see_character_list_button = draw.CenterButton(_("[001]查看属性"),"1",self.width/3,cmd_func=self.see_character_list)
             see_character_list_button.draw()
-            line_feed.draw()
-            system_menu_titie = draw.LittleTitleLineDraw(_("系统菜单"),self.width)
-            system_menu_titie.draw()
-            save_button = draw.CenterButton(_("[002]保存游戏"),"2",self.width / 2)
+            save_button = draw.CenterButton(_("[002]读写存档"),"2",self.width / 2,cmd_func=self.see_save_handle)
             save_button.draw()
-            load_save_button = draw.CenterButton(_("[003]载入游戏"),"3",self.width/2)
-            load_save_button.draw()
-            return_list = []
-            return_list.append(get_up_button.return_text)
-            return_list.append(see_character_list_button.return_text)
+            return_list = [get_up_button.return_text,see_character_list_button.return_text,save_button.return_text]
             yrn = flow_handle.askfor_all(return_list)
 
     def see_character_list(self):
@@ -82,4 +75,9 @@ class GetUpPanel:
             py_cmd.clr_cmd()
             if yrn == back_draw.return_text:
                 break
+
+    def see_save_handle(self):
+        """ 处理读写存档 """
+        now_panel = see_save_info_panel.SeeSaveListPanel(self.width,1)
+        now_panel.draw()
 

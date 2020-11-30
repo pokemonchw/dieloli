@@ -1,9 +1,8 @@
 import os
 import pickle
 import shutil
+import datetime
 from Script.Core import (
-    era_print,
-    text_loading,
     cache_contorl,
     game_path_config,
     game_type,
@@ -48,6 +47,7 @@ def establish_save(save_id: str):
         "game_verson": normal_config.config_normal.verson,
         "game_time": cache.game_time,
         "character_name": cache.character_data[0].name,
+        "save_time":datetime.datetime.now()
     }
     data = {
         "1": cache,
@@ -66,7 +66,7 @@ def load_save_info_head(save_id: str) -> dict:
     save_path = get_save_dir_path(save_id)
     file_path = os.path.join(save_path, "0")
     with open(file_path, "rb") as f:
-        return pickle.load(f)
+        return pickle.loads(f.read())
 
 
 def write_save_data(save_id: str, data_id: str, write_data: dict):
@@ -81,8 +81,8 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
     file_path = os.path.join(save_path, data_id)
     if not judge_save_file_exist(save_id):
         os.makedirs(save_path)
-    with open(file_path, "wb") as f:
-        pickle.dump(write_data, f)
+    with open(file_path, "wb+") as f:
+        f.write(pickle.dumps(write_data))
 
 
 def load_save(save_id: str) -> game_type.Cache:
@@ -94,11 +94,9 @@ def load_save(save_id: str) -> game_type.Cache:
     game_type.Cache -- 游戏缓存数据
     """
     save_path = get_save_dir_path(save_id)
-    data:game_type.Cache = None
     file_path = os.path.join(save_path, "1")
-    with open(file_path, "rb") as f:
-        data = pickle.load(f)
-    return data
+    with open(file_path, "rb+") as f:
+        return pickle.loads(f.read())
 
 
 def input_load_save(save_id: str):
@@ -107,7 +105,7 @@ def input_load_save(save_id: str):
     Keyword arguments:
     save_id -- 存档id
     """
-    cache_contorl.cache = load_save(save_id)
+    cache = load_save(save_id)
     character_handle.init_character_position()
 
 

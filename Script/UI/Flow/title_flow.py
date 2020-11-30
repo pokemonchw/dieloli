@@ -2,6 +2,7 @@ import os
 from types import FunctionType
 from Script.Config import normal_config
 from Script.UI.Moudle import panel, draw
+from Script.UI.Panel import see_save_info_panel
 from Script.Design import handle_panel
 from Script.Core import constant, get_text, flow_handle, cache_contorl,game_type
 
@@ -44,5 +45,8 @@ def title_panel():
     now_key = return_list[ans]
     if now_key == now_list[0]:
         cache.now_panel_id = constant.Panel.CREATOR_CHARACTER
+    elif now_key == now_list[1]:
+        now_panel = see_save_info_panel.SeeSaveListPanel(width,0)
+        now_panel.draw()
     elif now_key == now_list[2]:
         os._exit(0)

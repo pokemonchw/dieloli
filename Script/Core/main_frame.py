@@ -441,10 +441,12 @@ def io_clear_cmd(*cmd_numbers: list):
                 del cmd_tag_map[num]
     else:
         for num in cmd_tag_map.keys():
-            index_first = textbox.tag_ranges(cmd_tag_map[num])[0]
-            index_lskip_one_waitast = textbox.tag_ranges(cmd_tag_map[num])[1]
-            for tag_name in textbox.tag_names(index_first):
-                textbox.tag_remove(tag_name, index_first, index_lskip_one_waitast)
-            textbox.tag_add("standard", index_first, index_lskip_one_waitast)
+            tag_tuple = textbox.tag_ranges(cmd_tag_map[num])
+            if len(tag_tuple):
+                index_first = tag_tuple[0]
+                index_lskip_one_waitast = tag_tuple[1]
+                for tag_name in textbox.tag_names(index_first):
+                    textbox.tag_remove(tag_name, index_first, index_lskip_one_waitast)
+                textbox.tag_add("standard", index_first, index_lskip_one_waitast)
             textbox.tag_delete(cmd_tag_map[num])
         cmd_tag_map.clear()

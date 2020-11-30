@@ -158,7 +158,7 @@ class AskForOneMessage:
             text_index = text_handle.get_text_index(return_text)
             if text_index <= self.input_max:
                 break
-            io_init.era_print(_(f"输入的字符超长，最大{self.input_max}个英文字符，请重试。"))
+            io_init.era_print(_("输入的字符超长，最大{input_max}个英文字符，请重试。").format(input_max=self.input_max))
             io_init.era_print("\n")
         return return_text
 
@@ -476,7 +476,7 @@ class PageHandlePanel:
         line_feed.text = "\n"
         line_feed.width = 1
         for draw_text_list in draw_text_group:
-            if self.row_septal_lines != "":
+            if self.row_septal_lines != "" and index:
                 line_draw = draw.LineDraw(self.row_septal_lines,self.width)
                 draw_list.append(line_draw)
             now_width = self.width
@@ -507,7 +507,7 @@ class PageHandlePanel:
             if self.num_button:
                 page_change_start_id = index
             old_page_index_text = text_handle.id_index(page_change_start_id)
-            old_page_button = draw.CenterButton(_(f"{old_page_index_text} 上一页"),str(page_change_start_id),int(self.width / 3),cmd_func=self.old_page)
+            old_page_button = draw.CenterButton(_("{old_page_index_text} 上一页").format(old_page_index_text=old_page_index_text),str(page_change_start_id),int(self.width / 3),cmd_func=self.old_page)
             self.return_list.append(str(page_change_start_id))
             draw_list.append(old_page_button)
             page_text = f"({self.now_page}/{total_page})"
@@ -516,7 +516,7 @@ class PageHandlePanel:
             page_draw.text = page_text
             draw_list.append(page_draw)
             next_page_index_text = text_handle.id_index(page_change_start_id + 1)
-            next_page_button = draw.CenterButton(_(f"{next_page_index_text} 下一页"),str(page_change_start_id + 1),int(self.width / 3),cmd_func=self.next_page)
+            next_page_button = draw.CenterButton(_("{next_page_index_text} 下一页").format(next_page_index_text=next_page_index_text),str(page_change_start_id + 1),int(self.width / 3),cmd_func=self.next_page)
             self.return_list.append(str(page_change_start_id + 1))
             draw_list.append(next_page_button)
             draw_list.append(line_feed)
@@ -526,7 +526,7 @@ class PageHandlePanel:
     def next_page(self):
         """ 将面板切换至下一页 """
         total_page = int(len(self.text_list) / self.limit)
-        if self.now_page >= total_page:
+        if self.now_page >= total_page -1:
             self.now_page = 0
         else:
             self.now_page += 1

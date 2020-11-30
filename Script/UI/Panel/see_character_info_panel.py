@@ -200,7 +200,7 @@ class CharacterInfoHead:
         """ 是否绘制面板标题 """
         character_data = cache.character_data[character_id]
         sex_text = game_config.config_sex_tem[character_data.sex].name
-        message = _(f"No.{character_id} 姓名:{character_data.name} 称呼:{character_data.nick_name} 性别:{sex_text}")
+        message = _("No.{character_id} 姓名:{character_name} 称呼:{character_nick_name} 性别:{sex_text}").format(character_id=character_id,character_name=character_data.name,character_nick_name=character_data.nick_name,sex_text=sex_text)
         message_draw = draw.CenterDraw()
         message_draw.width = width / 2
         message_draw.text = message
@@ -223,7 +223,7 @@ class CharacterInfoHead:
         status_text = game_config.config_status[character_data.state].name
         status_draw = draw.CenterDraw()
         status_draw.width = width / 2
-        status_draw.text = _(f"状态:{status_text}")
+        status_draw.text = _("状态:{status_text}").format(status_text=status_text)
         self.draw_list: List[Tuple[draw.NormalDraw, draw.NormalDraw]] = [
             (message_draw, hp_draw),
             (status_draw, mp_draw),
@@ -296,7 +296,7 @@ class CharacterRoomText:
         else:
             dormitory_path = map_handle.get_map_system_path_for_str(dormitory)
             dormitory_text = attr_text.get_scene_path_text(dormitory_path)
-        self.dormitory_text = _(f"宿舍位置:{dormitory_text}")
+        self.dormitory_text = _("宿舍位置:") + dormitory_text
         """ 宿舍位置文本 """
         classroom = character_data.classroom
         now_classroom_text = _("教室位置:")
@@ -342,8 +342,8 @@ class CharacterBirthdayText:
         self.width = width
         """ 当前最大可绘制宽度 """
         character_data = cache.character_data[self.character_id]
-        age_text = _(f"年龄:{character_data.age}岁")
-        birthday_text = _(f"生日:{character_data.birthday.month}月{character_data.birthday.day}日")
+        age_text = _("年龄:{character_age}岁").format(character_age=character_data.age)
+        birthday_text = _("生日:{birthday_month}月{birthday_day}日").format(birthday_month=character_data.birthday.month,birthday_day=character_data.birthday.day)
         self.info_list = [age_text,birthday_text]
         """ 绘制的文本列表 """
 
@@ -370,13 +370,13 @@ class CharacterStatureInfoText:
         self.width = width
         """ 当前最大可绘制宽度 """
         character_data = cache.character_data[self.character_id]
-        now_height = round(character_data.height.now_height,2)
-        now_height_text = _(f"身高:{now_height}")
-        now_weight = round(character_data.weight,2)
-        now_weight_text = _(f"体重:{now_weight}")
+        now_height = str(round(character_data.height.now_height,2))
+        now_height_text = _("身高") + now_height
+        now_weight = str(round(character_data.weight,2))
+        now_weight_text = _("体重") + now_weight
         now_chest_tem_id = attr_calculation.judge_chest_group(character_data.chest.now_chest)
         now_chest_tem = game_config.config_chest[now_chest_tem_id]
-        now_chest_text = _(f"罩杯:{now_chest_tem.info}")
+        now_chest_text = _("罩杯:") + now_chest_tem.info
         self.info_list = [now_height_text,now_chest_text,now_weight_text]
         """ 绘制的文本列表 """
 
@@ -407,12 +407,12 @@ class CharacterMeasurementsText:
         character_data.measurements.bust
         character_data.measurements.hip
         character_data.measurements.waist
-        now_bust = round(character_data.measurements.bust,2)
-        now_hip = round(character_data.measurements.hip,2)
-        now_waist = round(character_data.measurements.waist,2)
-        now_bust_text = _(f"胸围:{now_bust}")
-        now_waist_text = _(f"腰围:{now_waist}")
-        now_hip_text = _(f"臀围:{now_hip}")
+        now_bust = str(round(character_data.measurements.bust,2))
+        now_hip = str(round(character_data.measurements.hip,2))
+        now_waist = str(round(character_data.measurements.waist,2))
+        now_bust_text = _("胸围:") + now_bust
+        now_waist_text = _("腰围:") + now_waist
+        now_hip_text = _("臀围") + now_hip
         self.info_list = [now_bust_text,now_waist_text,now_hip_text]
         """ 绘制的文本列表 """
 
