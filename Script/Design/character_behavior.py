@@ -2,7 +2,7 @@ import os
 import random
 from functools import wraps
 from Script.Core import (
-    cache_contorl,
+    cache_control,
     game_path_config,
     game_type,
     constant,
@@ -16,7 +16,7 @@ from Script.Design import (
 )
 
 game_path = game_path_config.game_path
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def init_character_behavior():

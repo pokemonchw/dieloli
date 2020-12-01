@@ -1,10 +1,10 @@
 import random
 from functools import wraps
 from types import FunctionType
-from Script.Core import cache_contorl,game_type
+from Script.Core import cache_control,game_type
 from Script.Design import map_handle
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def add_talk(behavior_id: int, talk_id: int, premise_list: set, adv=0) -> FunctionType:

@@ -2,7 +2,7 @@ import random
 import bisect
 from typing import List
 from Script.Core import (
-    cache_contorl,
+    cache_control,
     constant,
     game_type,
 )
@@ -12,7 +12,7 @@ from Script.Design import (
 )
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def get_random_name_for_sex(sex_grade: str) -> str:

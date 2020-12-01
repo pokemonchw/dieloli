@@ -528,6 +528,16 @@ class Cache:
     """ 退出存档面板 """
     wframe_mouse: WFrameMouse = WFrameMouse()
     """ 主页监听控制流程用变量组 """
+    premise_target_table: Dict[str, set] = {}
+    """
+    目标对应的所需前提集合
+    目标id:前提集合
+    """
+    adv_talk_data: Dict[int, Dict[int, Dict[int, FunctionType]]] = {}
+    """
+    角色行为对应口上数据
+    advid:行为id:口上id:口上对象
+    """
 
     def __init__(self):
         """ 游戏预设配置数据 """
@@ -619,11 +629,6 @@ class Cache:
         """ 可穿戴道具类型数据 """
         self.course_time_status: dict = {}
         """ 当前上课时间状态 """
-        self.adv_talk_data: Dict[int, Dict[int, Dict[int, FunctionType]]] = {}
-        """
-        角色行为对应口上数据
-        advid:行为id:口上id:口上对象
-        """
         self.status_up_text: dict = {}
         """ 显示给玩家的角色状态变化文本 """
         self.behavior_tem_data: dict = {}
@@ -645,11 +650,6 @@ class Cache:
         """
         食堂内贩卖的食物数据
         食物名字:食物唯一id:食物对象
-        """
-        self.premise_target_table: Dict[str, set] = {}
-        """
-        目标对应的所需前提集合
-        目标id:前提集合
         """
         self.npc_name_data:Set = set()
         """ 已有的npc姓名集合 """

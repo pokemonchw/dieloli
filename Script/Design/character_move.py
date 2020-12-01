@@ -1,7 +1,7 @@
-from Script.Core import cache_contorl, constant,game_type
+from Script.Core import cache_control, constant,game_type
 from Script.Design import map_handle, update, character
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def own_charcter_move(target_scene: list):

@@ -2,11 +2,11 @@ import math
 import datetime
 from functools import wraps
 from types import FunctionType
-from Script.Core import cache_contorl, constant,game_type
+from Script.Core import cache_control, constant,game_type
 from Script.Design import map_handle, game_time, attr_calculation
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def add_premise(premise: int) -> FunctionType:

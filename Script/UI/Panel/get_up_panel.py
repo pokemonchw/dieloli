@@ -52,7 +52,7 @@ class GetUpPanel:
             get_up_button.draw()
             see_character_list_button = draw.CenterButton(_("[001]查看属性"),"1",self.width/3,cmd_func=self.see_character_list)
             see_character_list_button.draw()
-            save_button = draw.CenterButton(_("[002]读写存档"),"2",self.width / 2,cmd_func=self.see_save_handle)
+            save_button = draw.CenterButton(_("[002]读写存档"),"2",self.width / 3,cmd_func=self.see_save_handle)
             save_button.draw()
             return_list = [get_up_button.return_text,see_character_list_button.return_text,save_button.return_text]
             yrn = flow_handle.askfor_all(return_list)

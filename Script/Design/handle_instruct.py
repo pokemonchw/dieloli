@@ -1,11 +1,11 @@
 import timeit
 from functools import wraps
-from Script.Core import text_loading, era_print, constant, cache_contorl,game_type
+from Script.Core import text_loading, era_print, constant, cache_control,game_type
 from Script.Design import game_time, update, character
 from Script.Flow import buy_food, eat_food
 
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 handle_instruct_data = {}
 """ 指令处理数据 """

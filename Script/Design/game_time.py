@@ -5,12 +5,12 @@ import bisect
 import ephem
 from dateutil import relativedelta
 from Script.Core import (
-    cache_contorl,
+    cache_control,
     game_type,
 )
 from Script.Config import normal_config,game_config
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def init_time():

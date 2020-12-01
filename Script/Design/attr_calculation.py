@@ -3,7 +3,7 @@ import random
 import datetime
 from typing import Dict, List
 from Script.Core import (
-    cache_contorl,
+    cache_control,
     game_path_config,
     json_handle,
     value_handle,
@@ -13,7 +13,7 @@ from Script.Core import (
 from Script.Design import game_time
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏内缓存数据 """
 
 def get_age_tem_list() -> list:

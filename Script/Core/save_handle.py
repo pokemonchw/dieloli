@@ -83,9 +83,6 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
         os.makedirs(save_path)
     with open(file_path, "wb") as f:
         pickle.dump(write_data,f)
-    if isinstance(write_data,game_type.Cache):
-        with open(file_path,"rb") as f:
-            data = pickle.load(f)
 
 
 def load_save(save_id: str) -> game_type.Cache:
@@ -108,9 +105,7 @@ def input_load_save(save_id: str):
     Keyword arguments:
     save_id -- 存档id
     """
-    cache_contorl.cache.__dict__ = {}
-    data = load_save(save_id)
-    cache_contorl.cache.__dict__ = data.__dict__
+    cache_contorl.cache.__dict__ = load_save(save_id).__dict__
     character_handle.init_character_position()
 
 
