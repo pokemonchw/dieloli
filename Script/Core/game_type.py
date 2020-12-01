@@ -487,30 +487,22 @@ class Character:
         """ 剧情npc校验 """
 
 class Cache:
-
     """ 游戏缓存数据结构体 """
-    game_data = {}
-    """ 游戏预设配置数据 """
-    flow_contorl: FlowContorl = FlowContorl()
-    """ 流程用变量组 """
-    wframe_mouse: WFrameMouse = WFrameMouse()
-    """ 主页监听控制流程用变量组 """
-    cmd_map: Dict[int, object] = {}
-    """ cmd存储 """
-    character_data: Dict[int, Character] = {}
-    """ 角色对象数据缓存组 """
-    npc_tem_data: List[NpcTem] = []
-    """ npc模板列表 """
-    input_cache: List[str] = []
-    """ 玩家指令输入记录（最大20）"""
-    now_init_map_id: str = ""
-    """ 寻路算法用,当前节点所属的地图的id """
-    input_position: int = 0
-    """ 回溯输入记录用定位 """
-    instruct_filter: Dict[str, int] = {}
-    """ 玩家操作指令面板指令过滤状态数据 """
-    output_text_style: str = ""
-    """ 富文本记录输出样式临时缓存 """
+
+    handle_premise_data: Dict[str, FunctionType] = {}
+    """ 前提处理数据 """
+    handle_target_data: Dict[str, FunctionType] = {}
+    """ 目标类型数据 """
+    effect_target_table: Dict[str, set] = {}
+    """
+    效果对应所需目标集合
+    效果id:目标集合
+    """
+    premise_talk_table: Dict[int, Dict[int, Dict[int, set]]] = {}
+    """
+    口上对应的所需前提集合
+    advid:行为id:口上id:前提集合
+    """
     family_region_list: Dict[int, str] = {}
     """ 姓氏区间数据 """
     boys_region_list: Dict[int, str] = {}
@@ -523,138 +515,145 @@ class Cache:
     """ 男孩名字权重区间数据 """
     girls_region_int_list: List[int] = []
     """ 女孩名字权重区间数据 """
-    text_style_position: int = 0
-    """ 富文本回溯样式记录用定位 """
-    clothing_type_data: dict = {}
-    """ 存储服装类型数据 """
-    text_style_cache: List[str] = []
-    """ 富文本样式记录 """
-    text_one_by_one_rich_cache: dict = {}
-    """ 富文本精确样式记录 """
-    image_id: int = 0
-    """ 图片id """
-    cmd_data: dict = {}
-    """ cmd数据 """
-    game_time: datetime.datetime = datetime.datetime(1, 1, 1)
-    """ 游戏时间 """
-    panel_state: Dict[str, int] = {}
-    """ 面板状态 """
-    max_save_page: int = 0
-    """ 存档页面最大数量 """
-    now_panel_id: int = 0
-    """ 当前游面板id """
-    course_data: Dict[int,Dict[int,Dict[int,int]]] = {}
-    """
-    各个学校各年级各科目课时数据
-    学校id:年级:科目id:每周课时
-    """
-    course_time_table_data:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
-    """
-    各个学校各年级课程表数据
-    学校id:年级:周几:第几节课:科目id
-    """
-    course_school_phase_knowledge_experience:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
-    """
-    各个学校各学年各技能理论增长经验总量
-    学校id:年级:课程:技能:经验
-    """
-    course_school_phase_language_experience:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
-    """
-    各个学校各学年各语言理论增长经验总量
-    学校id:年级:课程:语言:经验
-    """
-    teacher_course_experience: Dict[int,Dict[int,int]] = {}
-    """
-    教师科目经验
-    科目id:教师id:经验
-    """
-    classroom_teacher_data:Dict[str,Dict[str,Dict[int,Set]]] = {}
-    """
-    各班级各科目教师配置数据
-    年级房间标签(Classroom_n):教室路径:科目id:教师集合
-    """
-    old_character_id: int = 0
-    """ 离开场景面板前在场景中查看的角色id """
-    total_number_of_people_of_all_ages: Dict[str, int] = {}
-    """ 各年龄段总人数 """
-    total_bodyfat_by_age: dict = {}
-    """ 各年龄段总体脂率 """
-    average_bodyfat_by_age: dict = {}
-    """ 各年龄段平均体脂率 """
-    total_height_by_age: dict = {}
-    """ 各年龄段总身高 """
-    average_height_by_age: dict = {}
-    """ 各年龄段平均身高 """
-    text_wait: int = 0
-    """ 绘制文本输出等待时间 """
-    map_data: Dict[str, Map] = {}
-    """ 游戏地图数据 地图路径:地图数据 """
-    scene_data: Dict[str, Scene] = {}
-    """ 游戏场景数据 场景路径:场景数据 """
-    now_map: List[str] = []
-    """ 查看地图时当前所查看的地图的坐标 """
-    random_npc_list: List[NpcTem] = []
-    """ 随机npc数据 """
-    place_data: Dict[str, List[str]] = {}
-    """ 按房间类型分类的场景列表 场景标签:场景路径列表 """
-    wear_item_type_data: dict = {}
-    """ 可穿戴道具类型数据 """
-    course_time_status: dict = {}
-    """ 当前上课时间状态 """
-    adv_talk_data: Dict[int, Dict[int, Dict[int, FunctionType]]] = {}
-    """
-    角色行为对应口上数据
-    advid:行为id:口上id:口上对象
-    """
-    status_up_text: dict = {}
-    """ 显示给玩家的角色状态变化文本 """
-    behavior_tem_data: dict = {}
-    """ 角色行为控制器数据 """
-    settle_behavior_data: dict = {}
-    """ 角色行为结算处理器 """
-    over_behavior_character: Dict[int, int] = {}
-    """ 本次update中已结束结算的npc """
-    teacher_class_time_table: Dict[int, Dict[int, Dict[int, Dict[int, Dict[int,Dict[str,int]]]]]] = {}
-    """
-    各班级各老师上课时间表
-    周几:学校id:年级id:上课时间:教师id:教室id:科目
-    """
-    teacher_phase_table: Dict[int, int] = {}
-    """ 各老师所在年级 """
-    recipe_data: Dict[int, Recipes] = {}
-    """ 菜谱数据 """
-    restaurant_data: Dict[str, Dict[UUID, Food]] = {}
-    """
-    食堂内贩卖的食物数据
-    食物名字:食物唯一id:食物对象
-    """
-    handle_premise_data: Dict[str, FunctionType] = {}
-    """ 前提处理数据 """
-    handle_target_data: Dict[str, FunctionType] = {}
-    """ 目标类型数据 """
-    premise_target_table: Dict[str, set] = {}
-    """
-    目标对应的所需前提集合
-    目标id:前提集合
-    """
-    effect_target_table: Dict[str, set] = {}
-    """
-    效果对应所需目标集合
-    效果id:目标集合
-    """
-    premise_talk_table: Dict[int, Dict[int, Dict[int, set]]] = {}
-    """
-    口上对应的所需前提集合
-    advid:行为id:口上id:前提集合
-    """
     panel_data: Dict[int, FunctionType] = {}
     """
     面板id对应的面板绘制函数集合
     面板id:面板绘制函数对象
     """
-    npc_name_data:Set = set()
-    """ 已有的npc姓名集合 """
-    school_longitude:float = 0
-    """ 学校经度 """
-    school_latitude:float = 0
-    """ 学校纬度 """
+    flow_contorl: FlowContorl = FlowContorl()
+    """ 流程用变量组 """
+    place_data: Dict[str, List[str]] = {}
+    """ 按房间类型分类的场景列表 场景标签:场景路径列表 """
+    back_save_panel:bool = 0
+    """ 退出存档面板 """
+    wframe_mouse: WFrameMouse = WFrameMouse()
+    """ 主页监听控制流程用变量组 """
+
+    def __init__(self):
+        """ 游戏预设配置数据 """
+        self.cmd_map: Dict[int, object] = {}
+        """ cmd存储 """
+        self.character_data: Dict[int, Character] = {}
+        """ 角色对象数据缓存组 """
+        self.npc_tem_data: List[NpcTem] = []
+        """ npc模板列表 """
+        self.input_cache: List[str] = []
+        """ 玩家指令输入记录（最大20）"""
+        self.now_init_map_id: str = ""
+        """ 寻路算法用,当前节点所属的地图的id """
+        self.input_position: int = 0
+        """ 回溯输入记录用定位 """
+        self.instruct_filter: Dict[str, int] = {}
+        """ 玩家操作指令面板指令过滤状态数据 """
+        self.output_text_style: str = ""
+        """ 富文本记录输出样式临时缓存 """
+        self.text_style_position: int = 0
+        """ 富文本回溯样式记录用定位 """
+        self.clothing_type_data: dict = {}
+        """ 存储服装类型数据 """
+        self.text_style_cache: List[str] = []
+        """ 富文本样式记录 """
+        self.text_one_by_one_rich_cache: dict = {}
+        """ 富文本精确样式记录 """
+        self.image_id: int = 0
+        """ 图片id """
+        self.cmd_data: dict = {}
+        """ cmd数据 """
+        self.game_time: datetime.datetime = datetime.datetime(1, 1, 1)
+        """ 游戏时间 """
+        self.now_panel_id: int = 0
+        """ 当前游面板id """
+        self.course_data: Dict[int,Dict[int,Dict[int,int]]] = {}
+        """
+        各个学校各年级各科目课时数据
+        学校id:年级:科目id:每周课时
+        """
+        self.course_time_table_data:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
+        """
+        各个学校各年级课程表数据
+        学校id:年级:周几:第几节课:科目id
+        """
+        self.course_school_phase_knowledge_experience:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
+        """
+        各个学校各学年各技能理论增长经验总量
+        学校id:年级:课程:技能:经验
+        """
+        self.course_school_phase_language_experience:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
+        """
+        各个学校各学年各语言理论增长经验总量
+        学校id:年级:课程:语言:经验
+        """
+        self.teacher_course_experience: Dict[int,Dict[int,int]] = {}
+        """
+        教师科目经验
+        科目id:教师id:经验
+        """
+        self.classroom_teacher_data:Dict[str,Dict[str,Dict[int,Set]]] = {}
+        """
+        各班级各科目教师配置数据
+        年级房间标签(Classroom_n):教室路径:科目id:教师集合
+        """
+        self.old_character_id: int = 0
+        """ 离开场景面板前在场景中查看的角色id """
+        self.total_number_of_people_of_all_ages: Dict[str, int] = {}
+        """ 各年龄段总人数 """
+        self.total_bodyfat_by_age: dict = {}
+        """ 各年龄段总体脂率 """
+        self.average_bodyfat_by_age: dict = {}
+        """ 各年龄段平均体脂率 """
+        self.total_height_by_age: dict = {}
+        """ 各年龄段总身高 """
+        self.average_height_by_age: dict = {}
+        """ 各年龄段平均身高 """
+        self.text_wait: int = 0
+        """ 绘制文本输出等待时间 """
+        self.map_data: Dict[str, Map] = {}
+        """ 游戏地图数据 地图路径:地图数据 """
+        self.scene_data: Dict[str, Scene] = {}
+        """ 游戏场景数据 场景路径:场景数据 """
+        self.now_map: List[str] = []
+        """ 查看地图时当前所查看的地图的坐标 """
+        self.random_npc_list: List[NpcTem] = []
+        """ 随机npc数据 """
+        self.wear_item_type_data: dict = {}
+        """ 可穿戴道具类型数据 """
+        self.course_time_status: dict = {}
+        """ 当前上课时间状态 """
+        self.adv_talk_data: Dict[int, Dict[int, Dict[int, FunctionType]]] = {}
+        """
+        角色行为对应口上数据
+        advid:行为id:口上id:口上对象
+        """
+        self.status_up_text: dict = {}
+        """ 显示给玩家的角色状态变化文本 """
+        self.behavior_tem_data: dict = {}
+        """ 角色行为控制器数据 """
+        self.settle_behavior_data: dict = {}
+        """ 角色行为结算处理器 """
+        self.over_behavior_character: Dict[int, int] = {}
+        """ 本次update中已结束结算的npc """
+        self.teacher_class_time_table: Dict[int, Dict[int, Dict[int, Dict[int, Dict[int,Dict[str,int]]]]]] = {}
+        """
+        各班级各老师上课时间表
+        周几:学校id:年级id:上课时间:教师id:教室id:科目
+        """
+        self.teacher_phase_table: Dict[int, int] = {}
+        """ 各老师所在年级 """
+        self.recipe_data: Dict[int, Recipes] = {}
+        """ 菜谱数据 """
+        self.restaurant_data: Dict[str, Dict[UUID, Food]] = {}
+        """
+        食堂内贩卖的食物数据
+        食物名字:食物唯一id:食物对象
+        """
+        self.premise_target_table: Dict[str, set] = {}
+        """
+        目标对应的所需前提集合
+        目标id:前提集合
+        """
+        self.npc_name_data:Set = set()
+        """ 已有的npc姓名集合 """
+        self.school_longitude:float = 0
+        """ 学校经度 """
+        self.school_latitude:float = 0
+        """ 学校纬度 """

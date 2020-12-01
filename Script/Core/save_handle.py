@@ -66,7 +66,7 @@ def load_save_info_head(save_id: str) -> dict:
     save_path = get_save_dir_path(save_id)
     file_path = os.path.join(save_path, "0")
     with open(file_path, "rb") as f:
-        return pickle.loads(f.read())
+        return pickle.load(f)
 
 
 def write_save_data(save_id: str, data_id: str, write_data: dict):
@@ -81,8 +81,11 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
     file_path = os.path.join(save_path, data_id)
     if not judge_save_file_exist(save_id):
         os.makedirs(save_path)
-    with open(file_path, "wb+") as f:
-        f.write(pickle.dumps(write_data))
+    with open(file_path, "wb") as f:
+        pickle.dump(write_data,f)
+    if isinstance(write_data,game_type.Cache):
+        with open(file_path,"rb") as f:
+            data = pickle.load(f)
 
 
 def load_save(save_id: str) -> game_type.Cache:
@@ -95,8 +98,8 @@ def load_save(save_id: str) -> game_type.Cache:
     """
     save_path = get_save_dir_path(save_id)
     file_path = os.path.join(save_path, "1")
-    with open(file_path, "rb+") as f:
-        return pickle.loads(f.read())
+    with open(file_path, "rb") as f:
+        return pickle.load(f)
 
 
 def input_load_save(save_id: str):
@@ -105,7 +108,9 @@ def input_load_save(save_id: str):
     Keyword arguments:
     save_id -- 存档id
     """
-    cache = load_save(save_id)
+    cache_contorl.cache.__dict__ = {}
+    data = load_save(save_id)
+    cache_contorl.cache.__dict__ = data.__dict__
     character_handle.init_character_position()
 
 

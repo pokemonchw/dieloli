@@ -35,6 +35,9 @@ class SeeSaveListPanel:
     def draw(self):
         """ 绘制对象 """
         while 1:
+            if cache.back_save_panel:
+                cache.back_save_panel = 0
+                break
             title_draw = draw.TitleLineDraw(_("存档列表"),self.width)
             title_draw.draw()
             self.return_list = []
@@ -149,6 +152,7 @@ class SaveInfoDraw:
         """ 载入存档 """
         save_handle.input_load_save(str(self.text))
         cache.now_panel_id = constant.Panel.GET_UP
+        cache.back_save_panel = 1
 
     def delete_save(self):
         """ 删除存档 """
