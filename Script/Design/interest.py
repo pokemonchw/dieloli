@@ -1,9 +1,9 @@
 import random
 import numpy
-from Script.Core import cache_contorl, constant, game_type
+from Script.Core import cache_control, constant, game_type
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def init_character_interest():

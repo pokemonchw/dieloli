@@ -4,12 +4,12 @@ from Script.Config import normal_config
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_save_info_panel
 from Script.Design import handle_panel
-from Script.Core import constant, get_text, flow_handle, cache_contorl,game_type
+from Script.Core import constant, get_text, flow_handle, cache_control,game_type
 
 config_normal = normal_config.config_normal
 _: FunctionType = get_text._
 """ 翻译api """
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 @handle_panel.add_panel(constant.Panel.TITLE)

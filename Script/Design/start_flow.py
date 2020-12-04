@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
-from Script.Core import py_cmd, cache_contorl, constant,game_type
+from Script.Core import py_cmd, cache_control, constant,game_type
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 

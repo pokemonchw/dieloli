@@ -1,10 +1,10 @@
 from tkinter import Event
-from Script.Core import main_frame, py_cmd,game_type,cache_contorl
+from Script.Core import main_frame, py_cmd,game_type,cache_control
 
 wframe = main_frame.root
 
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def on_wframe_listion():

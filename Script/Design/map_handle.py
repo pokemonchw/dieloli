@@ -2,13 +2,13 @@ import os
 import time
 from Script.Core import (
     py_cmd,
-    cache_contorl,
+    cache_control,
     value_handle,
     text_handle,
     game_type
 )
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def get_map_draw_for_map_path(map_path_str: str) -> str:

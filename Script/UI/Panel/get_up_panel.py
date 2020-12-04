@@ -2,11 +2,11 @@ from types import FunctionType
 from Script.UI.Moudle import draw,panel
 from Script.UI.Panel import see_character_info_panel,game_info_panel,see_save_info_panel
 from Script.Design import game_time
-from Script.Core import get_text, cache_contorl, flow_handle, py_cmd, text_handle,game_type
+from Script.Core import get_text, cache_control, flow_handle, py_cmd, text_handle,game_type
 from Script.Config import game_config
 import time
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
@@ -62,10 +62,11 @@ class GetUpPanel:
         py_cmd.clr_cmd()
         line_feed.draw()
         title_draw = draw.TitleLineDraw(_("角色列表"),self.width)
-        handle_panel = panel.PageHandlePanel(list(cache.character_data.keys()),see_character_info_panel.GetUpCharacterInfoDraw,9,1,self.width,1,1,0,"-")
+        handle_panel = panel.PageHandlePanel(list(cache.character_data.keys()),see_character_info_panel.GetUpCharacterInfoDraw,10,1,self.width,1,1,0,"-")
         while 1:
             title_draw.draw()
             self.return_list = []
+            handle_panel.update()
             handle_panel.draw()
             self.return_list.extend(handle_panel.return_list)
             back_draw = draw.CenterButton(_("[返回]"),_("返回"),self.width)

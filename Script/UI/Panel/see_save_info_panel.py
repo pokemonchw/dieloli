@@ -1,10 +1,10 @@
 import datetime
 from types import FunctionType
-from Script.Core import cache_contorl, get_text, save_handle, text_handle,constant,flow_handle,game_type,py_cmd
+from Script.Core import cache_control, get_text, save_handle, text_handle,constant,flow_handle,game_type,py_cmd
 from Script.Config import normal_config
 from Script.UI.Moudle import panel, draw
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
@@ -41,6 +41,7 @@ class SeeSaveListPanel:
             title_draw = draw.TitleLineDraw(_("存档列表"),self.width)
             title_draw.draw()
             self.return_list = []
+            self.handle_panel.update()
             self.handle_panel.draw()
             self.return_list.extend(self.handle_panel.return_list)
             back_draw = draw.CenterButton(_("[返回]"),_("返回"),self.width)
@@ -119,6 +120,7 @@ class SaveInfoDraw:
     def draw_save_handle(self):
         """ 处理读写存档 """
         py_cmd.clr_cmd()
+        line_feed.draw()
         if self.save_exist_judge:
             now_ask_list = []
             now_id = 0
@@ -142,6 +144,7 @@ class SaveInfoDraw:
             now_id += 1
             back_button = draw.Button(text_handle.id_index(now_id)+_("返回"),str(now_id))
             back_button.draw()
+            line_feed.draw()
             now_ask_list.append(str(now_id))
             flow_handle.askfor_all(now_ask_list)
             py_cmd.clr_cmd()

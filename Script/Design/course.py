@@ -1,13 +1,13 @@
 import math
 import random
 import pysnooper
-from Script.Core import value_handle, cache_contorl, constant, game_type
+from Script.Core import value_handle, cache_control, constant, game_type
 from Script.Core.game_type import Character
 from Script.Design import map_handle
 from Script.Config import game_config
 
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 

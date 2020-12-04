@@ -455,9 +455,11 @@ class PageHandlePanel:
         self.button_start_id:int = button_start_id
         """ 数字按钮的开始id """
         self.draw_type = draw_type
+        self.draw_list:List[draw.NormalDraw] = []
+        """ 绘制的对象列表 """
 
-    def draw(self):
-        """ 绘制面板 """
+    def update(self):
+        """ 更新绘制对象 """
         self.return_list = []
         start_id = self.now_page * self.limit
         total_page = int((len(self.text_list) - 1) / self.limit)
@@ -466,7 +468,7 @@ class PageHandlePanel:
             start_id = self.now_page * self.limit
         now_page_list = []
         for i in range(start_id,len(self.text_list)):
-            if len(now_page_list) - 1 > self.limit:
+            if len(now_page_list) >= self.limit:
                 break
             now_page_list.append(self.text_list[i])
         draw_text_group = value_handle.list_of_groups(now_page_list,self.column)
@@ -520,7 +522,11 @@ class PageHandlePanel:
             self.return_list.append(str(page_change_start_id + 1))
             draw_list.append(next_page_button)
             draw_list.append(line_feed)
-        for value in draw_list:
+        self.draw_list = draw_list
+
+    def draw(self):
+        """ 绘制面板 """
+        for value in self.draw_list:
             value.draw()
 
     def next_page(self):
@@ -538,3 +544,17 @@ class PageHandlePanel:
             self.now_page = total_page
         else:
             self.now_page -= 1
+
+class ClothingPageHandlePanel(PageHandlePanel):
+    """ 服装缩略信息分页绘制对象面板 """
+
+    def update_button(self):
+        """ 更新绘制宽度 """
+        id_width = 0
+        for value in self.draw_list:
+            if "id_width" in value.__dict__:
+                if value.id_width > id_width:
+                    id_width = value.id_width
+        for value in self.draw_list:
+            if "id_width" in value.__dict__:
+                value.id_width = id_width

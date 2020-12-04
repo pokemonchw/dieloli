@@ -2,10 +2,10 @@ import random
 import uuid
 from typing import Dict
 from Script.Core.game_type import Recipes, Food
-from Script.Core import constant, cache_contorl, value_handle,game_type
+from Script.Core import constant, cache_control, value_handle,game_type
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def init_recipes():

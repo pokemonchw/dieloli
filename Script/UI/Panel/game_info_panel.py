@@ -1,9 +1,9 @@
 from Script.UI.Moudle import draw
 from Script.Design import game_time
-from Script.Core import get_text, cache_contorl, flow_handle, py_cmd, text_handle,game_type
+from Script.Core import get_text, cache_control, flow_handle, py_cmd, text_handle,game_type
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 class GameTimeInfoPanel:

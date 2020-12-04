@@ -1,11 +1,11 @@
 from typing import Dict
 from types import FunctionType
-from Script.Core import cache_contorl, text_handle,get_text,py_cmd,game_type
+from Script.Core import cache_control, text_handle,get_text,py_cmd,game_type
 from Script.UI.Moudle import panel,draw
 from Script.Config import game_config,normal_config
 
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
@@ -40,6 +40,7 @@ class SeeCharacterItemBagPanel:
         title_draw = draw.TitleLineDraw(_("人物道具"), self.width)
         title_draw.draw()
         self.return_list = []
+        self.handle_panel.update()
         self.handle_panel.draw()
         self.return_list.extend(self.handle_panel.return_list)
 

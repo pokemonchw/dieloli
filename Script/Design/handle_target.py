@@ -1,10 +1,10 @@
 from functools import wraps
 from typing import Dict
 from types import FunctionType
-from Script.Core import cache_contorl, game_type, constant
+from Script.Core import cache_control, game_type, constant
 from Script.Design import character
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def add_target(target: str, premise_list: set, effect_list: set) -> FunctionType:

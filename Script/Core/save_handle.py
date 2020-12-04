@@ -3,7 +3,7 @@ import pickle
 import shutil
 import datetime
 from Script.Core import (
-    cache_contorl,
+    cache_control,
     game_path_config,
     game_type,
 )
@@ -11,7 +11,7 @@ from Script.Design import character_handle
 from Script.Config import normal_config
 
 game_path = game_path_config.game_path
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
@@ -105,7 +105,7 @@ def input_load_save(save_id: str):
     Keyword arguments:
     save_id -- 存档id
     """
-    cache_contorl.cache.__dict__ = load_save(save_id).__dict__
+    cache.__dict__ = load_save(save_id).__dict__
     character_handle.init_character_position()
 
 

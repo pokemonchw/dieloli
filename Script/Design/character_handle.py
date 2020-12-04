@@ -4,7 +4,7 @@ import numpy
 import sys
 import time
 from Script.Core import (
-    cache_contorl,
+    cache_control,
     value_handle,
     game_path_config,
     constant,
@@ -19,7 +19,7 @@ from Script.Design import (
 from Script.Config import game_config,normal_config
 
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 

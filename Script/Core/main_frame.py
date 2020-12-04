@@ -21,11 +21,11 @@ from tkinter import (
 from Script.Core import (
     text_handle,
     game_type,
-    cache_contorl,
+    cache_control,
 )
 from Script.Config import normal_config, game_config
 
-cache: game_type.Cache = cache_contorl.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 def close_window():

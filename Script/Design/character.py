@@ -2,7 +2,7 @@ import random
 import uuid
 import datetime
 from Script.Core import (
-    cache_contorl,
+    cache_control,
     value_handle,
     constant,
     game_type,
@@ -17,7 +17,7 @@ from Script.Design import (
 from Script.Config import game_config
 
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 

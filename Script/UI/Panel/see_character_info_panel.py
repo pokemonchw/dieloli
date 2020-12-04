@@ -3,13 +3,13 @@ from typing import Dict, Tuple, List
 from types import FunctionType
 from Script.UI.Moudle import draw,panel
 from Script.UI.Panel import see_clothing_info_panel,see_item_info_panel
-from Script.Core import cache_contorl, get_text, value_handle, game_type, text_handle, py_cmd,flow_handle
+from Script.Core import cache_control, get_text, value_handle, game_type, text_handle, py_cmd,flow_handle
 from Script.Config import game_config,normal_config
 from Script.Design import attr_text,map_handle,attr_calculation
 
 panel_info_data = {}
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
@@ -559,6 +559,7 @@ class SeeCharacterLanguagePanel:
     def draw(self):
         title_draw = draw.TitleLineDraw(_("人物语言"), self.width)
         title_draw.draw()
+        self.handle_panel.update()
         self.handle_panel.draw()
         self.return_list = self.handle_panel.return_list
 
@@ -892,7 +893,7 @@ class SeeCharacterInfoOnGetUpPanel:
             py_cmd.clr_cmd()
             if yrn == back_draw.return_text:
                 break
-            else:
+            elif yrn in now_character_panel.draw_data:
                 now_panel_id = yrn
 
     def old_character(self):
@@ -918,9 +919,9 @@ class GetUpCharacterInfoDraw:
     button_id -- 数字按钮的id
     """
 
-    def __init__(self,text:str,width:int,is_button:bool,num_button:bool,button_id:int):
+    def __init__(self,text:int,width:int,is_button:bool,num_button:bool,button_id:int):
         """ 初始化绘制对象 """
-        self.text:int = int(text)
+        self.text:int = text
         """ 角色id """
         self.draw_text:str = ""
         """ 角色缩略信息绘制文本 """

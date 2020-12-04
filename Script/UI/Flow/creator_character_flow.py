@@ -1,14 +1,15 @@
 import random
+import time
 from functools import wraps
 from typing import List
 from types import FunctionType
-from Script.Core import get_text, constant, game_type, cache_contorl, flow_handle
+from Script.Core import get_text, constant, game_type, cache_control, flow_handle
 from Script.Design import handle_panel, character, character_handle, course,cooking,map_handle,interest
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
 from Script.Config import normal_config, game_config
 
-cache:game_type.Cache = cache_contorl.cache
+cache:game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
