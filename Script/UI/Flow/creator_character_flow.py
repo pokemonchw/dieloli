@@ -42,10 +42,6 @@ def creator_character_panel():
             game_start()
             if confirm_character_attr_panel():
                 break
-    for cid in game_config.config_clothing_tem:
-        now_clothing = clothing.creator_clothing(cid)
-        cache.character_data[0].clothing.setdefault(now_clothing.wear, {})
-        cache.character_data[0].clothing[now_clothing.wear][now_clothing.uid] = now_clothing
     cache.now_panel_id = constant.Panel.GET_UP
 
 
@@ -69,12 +65,6 @@ def game_start():
 
 def confirm_character_attr_panel():
     """ 确认角色属性面板 """
-    for item_id in game_config.config_item:
-        cache.character_data[0].item.add(item_id)
-    for social_type in game_config.config_social_type:
-        cache.character_data[0].social_contact[social_type] = game_type.SocialContact()
-        for i in range(social_type * 10 + 1, (social_type + 1) * 10 + 1):
-            cache.character_data[0].social_contact[social_type].character_list[i] = 1000
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
     askfor_panel = panel.OneMessageAndSingleColumnButton()
     while 1:

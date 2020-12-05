@@ -774,7 +774,7 @@ class SeeCharacterSocialContact:
             ):
                 character_list = list(character_data.social_contact[social_type].character_list.keys())
                 now_draw = panel.PageHandlePanel(
-                    character_list, SeeCharacterSocialName, 10, 5, self.width, 1, 1, 0
+                    character_list, SeeCharacterInfoByNameDraw, 10, 5, self.width, 1, 1, 0
                 )
             else:
                 now_draw.text = _("空无一人")
@@ -797,9 +797,9 @@ class SeeCharacterSocialContact:
                 value.draw()
 
 
-class SeeCharacterSocialName:
+class SeeCharacterInfoByNameDraw:
     """
-    角色社交关系中的角色名称绘制对象
+    点击后可查看角色属性的角色名字按钮对象
     Keyword arguments:
     text -- 角色id
     width -- 最大宽度
@@ -857,6 +857,21 @@ class SeeCharacterSocialName:
         now_draw.draw()
 
 
+class SeeCharacterInfoByNameDrawInScene(SeeCharacterInfoByNameDraw):
+    """ 场景中点击后可查看角色属性的角色名字按钮对象 """
+
+    def see_social_character(self):
+        """ 绘制角色信息 """
+        character_data = cache.character_data[self.character_id]
+        scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+        scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+        character_list = list(scene_data.character_list)
+        character_list.remove(0)
+        now_draw = SeeCharacterInfoOnSocialPanel(self.character_id, window_width)
+        now_draw.now_draw = SeeCharacterInfoHandleInScene(self.character_id, window_width, character_list)
+        now_draw.draw()
+
+
 class SeeCharacterInfoOnSocialPanel:
     """
     在社交面板里查看角色属性
@@ -873,7 +888,9 @@ class SeeCharacterInfoOnSocialPanel:
         """ 面板最大宽度 """
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
-        self.now_draw: SeeCharacterInfoPanel = SeeCharacterInfoPanel(character_id, width)
+        self.now_draw: SeeCharacterInfoPanel = SeeCharacterInfoHandle(
+            character_id, width, list(cache.character_data.keys())
+        )
         """ 角色属性面板 """
 
     def draw(self):
@@ -893,15 +910,16 @@ class SeeCharacterInfoOnSocialPanel:
                 break
 
 
-class SeeCharacterInfoOnGetUpPanel:
+class SeeCharacterInfoHandle:
     """
-    在起床界面查看角色属性
+    带切换控制的查看角色属性面板
     Keyword arguments:
     character_id -- 角色id
     width -- 最大宽度
+    character_list -- 角色id列表
     """
 
-    def __init__(self, character_id: int, width: int):
+    def __init__(self, character_id: int, width: int, character_list: List[int]):
         """ 初始化绘制对象 """
         self.character_id: int = character_id
         """ 要绘制的角色id """
@@ -909,6 +927,8 @@ class SeeCharacterInfoOnGetUpPanel:
         """ 面板最大宽度 """
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
+        self.character_list: List[int] = character_list
+        """ 当前面板所属的角色id列表 """
 
     def draw(self):
         """ 绘制面板 """
@@ -942,15 +962,15 @@ class SeeCharacterInfoOnGetUpPanel:
 
     def old_character(self):
         """ 切换显示上一人 """
-        self.character_id -= 1
-        if self.character_id < 0:
-            self.character_id = len(cache.character_data) - 1
+        now_index = self.character_list.index(self.character_id)
+        self.character_id = self.character_list[now_index - 1]
 
     def next_character(self):
         """ 切换显示下一人 """
-        self.character_id += 1
-        if self.character_id >= len(cache.character_data):
-            self.character_id = 0
+        now_index = self.character_list.index(self.character_id) + 1
+        if now_index > len(self.character_list) - 1:
+            now_index = 0
+        self.character_id = self.character_list[now_index]
 
 
 class GetUpCharacterInfoDraw:
@@ -1016,5 +1036,34 @@ class GetUpCharacterInfoDraw:
 
     def draw_character_info(self):
         """ 绘制角色信息 """
-        now_draw = SeeCharacterInfoOnGetUpPanel(self.text, window_width)
+        now_draw = SeeCharacterInfoHandle(self.text, window_width, list(cache.character_data.keys()))
         now_draw.draw()
+
+
+class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
+    """ 在场景中带切换控制的查看角色属性面板 """
+
+    def old_character(self):
+        """ 切换显示上一人 """
+        if len(self.character_list):
+            if self.character_id:
+                now_index = self.character_list.index(self.character_id)
+                if now_index:
+                    now_index -= 1
+                    self.character_id = self.character_list[now_index]
+                else:
+                    self.character_id = 0
+            else:
+                self.character_id = self.character_list[len(self.character_list) - 1]
+
+    def next_character(self):
+        """ 切换显示上一人 """
+        if len(self.character_list):
+            if self.character_id:
+                now_index = self.character_list.index(self.character_id)
+                if now_index == len(self.character_list) - 1:
+                    self.character_id = 0
+                else:
+                    self.character_id = self.character_list[now_index + 1]
+            else:
+                self.character_id = self.character_list[0]

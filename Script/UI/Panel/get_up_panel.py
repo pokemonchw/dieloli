@@ -2,7 +2,7 @@ from types import FunctionType
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import see_character_info_panel, game_info_panel, see_save_info_panel
 from Script.Design import game_time
-from Script.Core import get_text, cache_control, flow_handle, py_cmd, text_handle, game_type
+from Script.Core import get_text, cache_control, flow_handle, py_cmd, text_handle, game_type, constant
 from Script.Config import game_config
 import time
 
@@ -20,23 +20,20 @@ class GetUpPanel:
     """
     用于查看角色起床界面面板对象
     Keyword arguments:
-    character_id -- 角色id
     width -- 绘制宽度
     """
 
-    def __init__(self, character_id: int, width: int):
+    def __init__(self, width: int):
         """ 初始化绘制对象 """
         self.width: int = width
         """ 绘制的最大宽度 """
-        self.character_id: int = character_id
-        """ 要绘制的角色id """
 
     def draw(self):
         """ 绘制面板 """
         while 1:
             line_feed.draw()
             title_draw = draw.TitleLineDraw(_("主页"), self.width)
-            character_data = cache.character_data[self.character_id]
+            character_data = cache.character_data[0]
             title_draw.draw()
             game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
             game_time_draw.now_draw.width = len(game_time_draw)
@@ -66,6 +63,9 @@ class GetUpPanel:
                 save_button.return_text,
             ]
             yrn = flow_handle.askfor_all(return_list)
+            if yrn == "0":
+                cache.now_panel_id = constant.Panel.IN_SCENE
+                break
 
     def see_character_list(self):
         """ 绘制角色列表 """
