@@ -1,8 +1,8 @@
 import os
 from typing import Dict
-from Script.Core import json_handle,value_handle,cache_control,game_type
+from Script.Core import json_handle, value_handle, cache_control, game_type
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 name_json_path = os.path.join("data", "NameIndex.json")
 """ 原始名字数据文件路径 """
@@ -31,10 +31,11 @@ def init_name_data():
     global woman_name_data
     global family_data
     name_data = json_handle.load_json(name_json_path)
-    init_name_region(name_data["Boys"],0)
-    init_name_region(name_data["Girls"],1)
+    init_name_region(name_data["Boys"], 0)
+    init_name_region(name_data["Girls"], 1)
     family_data = json_handle.load_json(family_json_path)["FamilyNameList"]
-    init_name_region(family_data,2)
+    init_name_region(family_data, 2)
+
 
 def init_name_region(name_data: Dict[str, int], man_judge: int):
     """

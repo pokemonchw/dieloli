@@ -2,12 +2,13 @@ import math
 import datetime
 from functools import wraps
 from types import FunctionType
-from Script.Core import cache_control, constant,game_type
+from Script.Core import cache_control, constant, game_type
 from Script.Design import map_handle, game_time, attr_calculation
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 def add_premise(premise: int) -> FunctionType:
     """
@@ -245,7 +246,7 @@ def handle_have_guitar(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     if 4 in character_data.item:
-            return 1
+        return 1
     return 0
 
 
@@ -260,7 +261,7 @@ def handle_have_harmonica(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     if 5 in character_data.item:
-            return 1
+        return 1
     return 0
 
 
@@ -275,7 +276,7 @@ def handle_have_bamboogflute(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     if 6 in character_data.item:
-            return 1
+        return 1
     return 0
 
 
@@ -290,7 +291,7 @@ def handle_have_basketball(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     if 0 in character_data.item:
-            return 1
+        return 1
     return 0
 
 
@@ -305,7 +306,7 @@ def handle_have_football(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     if 1 in character_data.item:
-            return 1
+        return 1
     return 0
 
 
@@ -320,7 +321,7 @@ def handle_have_tabletennis(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     if 2 in character_data.item:
-            return 1
+        return 1
     return 0
 
 

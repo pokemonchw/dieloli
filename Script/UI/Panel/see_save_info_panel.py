@@ -1,10 +1,19 @@
 import datetime
 from types import FunctionType
-from Script.Core import cache_control, get_text, save_handle, text_handle,constant,flow_handle,game_type,py_cmd
+from Script.Core import (
+    cache_control,
+    get_text,
+    save_handle,
+    text_handle,
+    constant,
+    flow_handle,
+    game_type,
+    py_cmd,
+)
 from Script.Config import normal_config
 from Script.UI.Moudle import panel, draw
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
@@ -15,6 +24,7 @@ line_feed = draw.NormalDraw()
 line_feed.text = "\n"
 line_feed.width = 1
 
+
 class SeeSaveListPanel:
     """
     查看存档列表面板
@@ -22,14 +32,16 @@ class SeeSaveListPanel:
     write_save -- 是否存储存档
     """
 
-    def __init__(self,width:int,write_save:bool):
+    def __init__(self, width: int, write_save: bool):
         """ 初始化绘制对象 """
-        self.width:int = width
+        self.width: int = width
         """ 最大绘制宽度 """
-        self.return_list:List[str] = []
+        self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
-        now_list = [(i,write_save) for i in range(normal_config.config_normal.max_save)]
-        self.handle_panel = panel.PageHandlePanel(now_list,SaveInfoDraw,normal_config.config_normal.save_page,1,width,1,1,0,"=-=")
+        now_list = [(i, write_save) for i in range(normal_config.config_normal.max_save)]
+        self.handle_panel = panel.PageHandlePanel(
+            now_list, SaveInfoDraw, normal_config.config_normal.save_page, 1, width, 1, 1, 0, "=-="
+        )
         """ 页面控制对象 """
 
     def draw(self):
@@ -38,13 +50,14 @@ class SeeSaveListPanel:
             if cache.back_save_panel:
                 cache.back_save_panel = 0
                 break
-            title_draw = draw.TitleLineDraw(_("存档列表"),self.width)
+            line_feed.draw()
+            title_draw = draw.TitleLineDraw(_("存档列表"), self.width)
             title_draw.draw()
             self.return_list = []
             self.handle_panel.update()
             self.handle_panel.draw()
             self.return_list.extend(self.handle_panel.return_list)
-            back_draw = draw.CenterButton(_("[返回]"),_("返回"),self.width)
+            back_draw = draw.CenterButton(_("[返回]"), _("返回"), self.width)
             back_draw.draw()
             self.return_list.append(back_draw.return_text)
             yrn = flow_handle.askfor_all(self.return_list)
@@ -64,21 +77,21 @@ class SaveInfoDraw:
     button_id -- 数字按钮的id
     """
 
-    def __init__(self,text:str,width:int,is_button:bool,num_button:bool,button_id:int):
+    def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
         """ 初始化绘制对象 """
-        self.text:str = str(text[0])
+        self.text: str = str(text[0])
         """ 存档id """
-        self.write_save:bool = text[1]
+        self.write_save: bool = text[1]
         """ 是否存储存档 """
-        self.draw_text:str = ""
+        self.draw_text: str = ""
         """ 存档信息绘制文本 """
-        self.width:int = width
+        self.width: int = width
         """ 最大宽度 """
-        self.is_button:bool = is_button
+        self.is_button: bool = is_button
         """ 绘制按钮 """
-        self.is_num_button:bool = num_button
+        self.is_num_button: bool = num_button
         """ 绘制数字按钮 """
-        self.button_id:int = button_id
+        self.button_id: int = button_id
         """ 数字按钮的id """
         self.button_return: str = str(button_id)
         """ 按钮返回值 """
@@ -87,8 +100,8 @@ class SaveInfoDraw:
         save_name = _("空存档位")
         if self.save_exist_judge:
             save_head = save_handle.load_save_info_head(self.text)
-            game_time:datetime.datetime = save_head["game_time"]
-            save_time:datetime.datetime = save_head["save_time"]
+            game_time: datetime.datetime = save_head["game_time"]
+            save_time: datetime.datetime = save_head["save_time"]
             game_time_text = _("游戏时间:") + game_time.strftime("%Y-%m-%d %H:%M")
             save_time_text = _("存档时间:") + save_time.strftime("%Y-%m-%d %H:%M")
             save_name = f"No.{self.text} {save_head['game_verson']} {game_time_text} {save_head['character_name']} {save_time_text}"
@@ -96,21 +109,21 @@ class SaveInfoDraw:
             if num_button:
                 index_text = text_handle.id_index(button_id)
                 now_text_width = self.width - len(index_text)
-                new_text = text_handle.align(save_name,"center",text_width=now_text_width)
+                new_text = text_handle.align(save_name, "center", text_width=now_text_width)
                 self.draw_text = f"{index_text}{new_text}"
                 self.button_return = str(button_id)
             else:
-                new_text = text_handle.align(save_name,"center",text_width=self.width)
+                new_text = text_handle.align(save_name, "center", text_width=self.width)
                 self.draw_text = new_text
                 self.button_return = save_name
         else:
-            new_text = text_handle.align(save_name,"center",text_width=self.width)
+            new_text = text_handle.align(save_name, "center", text_width=self.width)
             self.draw_text = new_text
 
     def draw(self):
         """ 绘制对象 """
         if self.is_button and (self.save_exist_judge or self.write_save):
-            now_draw = draw.Button(self.draw_text,self.button_return,cmd_func=self.draw_save_handle)
+            now_draw = draw.Button(self.draw_text, self.button_return, cmd_func=self.draw_save_handle)
         else:
             now_draw = draw.NormalDraw()
             now_draw.text = self.draw_text
@@ -124,25 +137,36 @@ class SaveInfoDraw:
         if self.save_exist_judge:
             now_ask_list = []
             now_id = 0
-            load_save_button = draw.Button(text_handle.id_index(now_id)+_("读取"),str(now_id),cmd_func=self.load_save)
+            load_save_button = draw.Button(
+                text_handle.id_index(now_id) + _("读取"), str(now_id), cmd_func=self.load_save
+            )
             load_save_button.width = self.width
             load_save_button.draw()
             line_feed.draw()
             now_ask_list.append(str(now_id))
             now_id += 1
             if self.write_save:
-                re_write_save_button = draw.Button(text_handle.id_index(now_id)+_("覆盖"),str(now_id),cmd_func=save_handle.establish_save,args=(self.text,))
+                re_write_save_button = draw.Button(
+                    text_handle.id_index(now_id) + _("覆盖"),
+                    str(now_id),
+                    cmd_func=save_handle.establish_save,
+                    args=(self.text,),
+                )
                 re_write_save_button.width = self.width
                 re_write_save_button.draw()
                 now_ask_list.append(str(now_id))
                 line_feed.draw()
                 now_id += 1
-            delete_save_button = draw.Button(text_handle.id_index(now_id)+_("删除"),str(now_id),cmd_func=self.delete_save)
+            delete_save_button = draw.Button(
+                text_handle.id_index(now_id) + _("删除"), str(now_id), cmd_func=self.delete_save
+            )
             delete_save_button.width = self.width
             delete_save_button.draw()
             now_ask_list.append(str(now_id))
             now_id += 1
-            back_button = draw.Button(text_handle.id_index(now_id)+_("返回"),str(now_id))
+            line_feed.draw()
+            back_button = draw.Button(text_handle.id_index(now_id) + _("返回"), str(now_id))
+            back_button.width = self.width
             back_button.draw()
             line_feed.draw()
             now_ask_list.append(str(now_id))

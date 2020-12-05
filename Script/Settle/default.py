@@ -8,8 +8,9 @@ from Script.Design import (
 from Script.Core import constant, cache_control, game_type
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 @settle_behavior.add_settle_behavior(constant.Behavior.REST)
 def settle_rest(character_id: int):

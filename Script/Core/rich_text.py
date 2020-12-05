@@ -5,8 +5,9 @@ from Script.Core import (
 )
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 def get_rich_text_print(text_message: str, default_style: str) -> list:
     """
@@ -42,15 +43,11 @@ def get_rich_text_print(text_message: str, default_style: str) -> list:
                         cache.text_style_cache = ["standard"]
                     else:
                         cache.text_style_position = cache.text_style_position - 1
-                        cache.output_text_style = cache.text_style_cache[
-                            cache.text_style_position
-                        ]
+                        cache.output_text_style = cache.text_style_cache[cache.text_style_position]
                 else:
                     cache.text_style_position = len(cache.text_style_cache)
                     cache.text_style_cache.append(input_text_style)
-                    cache.output_text_style = cache.text_style_cache[
-                        cache.text_style_position
-                    ]
+                    cache.output_text_style = cache.text_style_cache[cache.text_style_position]
             else:
                 if style_last_index is not None:
                     if i == len(text_message):

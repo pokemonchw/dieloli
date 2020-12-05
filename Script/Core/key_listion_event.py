@@ -1,11 +1,12 @@
 from tkinter import Event
-from Script.Core import main_frame, py_cmd,game_type,cache_control
+from Script.Core import main_frame, py_cmd, game_type, cache_control
 
 wframe = main_frame.root
 
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 def on_wframe_listion():
     """
@@ -69,10 +70,7 @@ def key_down(event: Event):
     Keyword arguments:
     event -- 键盘事件
     """
-    if (
-        cache.input_position > 0
-        and cache.input_position < len(cache.input_cache) - 1
-    ):
+    if cache.input_position > 0 and cache.input_position < len(cache.input_cache) - 1:
         try:
             cache.input_position += 1
             input_id = cache.input_position

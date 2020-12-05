@@ -1,8 +1,9 @@
 import itertools
-from typing import List, Dict,Tuple
+import math
+from typing import List, Dict, Tuple
 from types import FunctionType
 from Script.UI.Moudle import draw
-from Script.Core import io_init, flow_handle, text_handle, get_text,value_handle
+from Script.Core import io_init, flow_handle, text_handle, get_text, value_handle
 from Script.Config import normal_config
 
 
@@ -211,14 +212,14 @@ class CenterDrawTextListPanel:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.width:int = 0
+        self.width: int = 0
         """ 面板宽度 """
-        self.column:int = 0
+        self.column: int = 0
         """ 每行最大元素数 """
         self.draw_list: List[List[draw.CenterDraw]] = []
         """ 绘制列表 """
 
-    def set(self,info_list: List[str],width: int,column: int):
+    def set(self, info_list: List[str], width: int, column: int):
         """
         设置绘制信息
         Keyword arguments:
@@ -228,7 +229,7 @@ class CenterDrawTextListPanel:
         """
         self.width = width
         self.column = column
-        new_info_list = value_handle.list_of_groups(info_list,column)
+        new_info_list = value_handle.list_of_groups(info_list, column)
         for now_info_list in new_info_list:
             now_width = int(width / len(now_info_list))
             now_list = []
@@ -252,14 +253,14 @@ class DrawTextListPanel:
 
     def __init__(self):
         """ 初始化绘制对象 """
-        self.width:int = 0
+        self.width: int = 0
         """ 面板宽度 """
-        self.column:int = 0
+        self.column: int = 0
         """ 每行最大元素数 """
-        self.draw_list:List[List[draw.NormalDraw]] = []
+        self.draw_list: List[List[draw.NormalDraw]] = []
         """ 绘制列表 """
 
-    def set(self,info_list:List[draw.NormalDraw],width:int,column:int):
+    def set(self, info_list: List[draw.NormalDraw], width: int, column: int):
         """
         设置绘制信息
         Keyword arguments:
@@ -269,7 +270,7 @@ class DrawTextListPanel:
         """
         self.width = width
         self.column = column
-        self.draw_list = value_handle.list_of_groups(info_list,column)
+        self.draw_list = value_handle.list_of_groups(info_list, column)
 
     def draw(self):
         """ 绘制面板 """
@@ -286,11 +287,11 @@ class VerticalDrawTextListGroup:
     width -- 最大绘制宽度
     """
 
-    def __init__(self,width:int):
+    def __init__(self, width: int):
         """ 初始化绘制对象 """
-        self.width:int = width
+        self.width: int = width
         """ 当前最大绘制宽度 """
-        self.draw_list:List[List[draw.NormalDraw]] = []
+        self.draw_list: List[List[draw.NormalDraw]] = []
         """ 绘制的对象列表 """
 
     def draw(self):
@@ -325,7 +326,15 @@ class CenterDrawButtonListPanel:
         按钮返回值:响应文本
         """
 
-    def set(self,text_list:List[str],return_list:List[str],width:int,column:int,null_text:str="",cmd_func:FunctionType=None):
+    def set(
+        self,
+        text_list: List[str],
+        return_list: List[str],
+        width: int,
+        column: int,
+        null_text: str = "",
+        cmd_func: FunctionType = None,
+    ):
         """
         设置绘制信息
         Keyword arguments:
@@ -338,7 +347,7 @@ class CenterDrawButtonListPanel:
         """
         self.width = width
         self.column = column
-        new_text_list = value_handle.list_of_groups(text_list,column)
+        new_text_list = value_handle.list_of_groups(text_list, column)
         index = 0
         self.return_list = return_list
         self.draw_list: List[List[draw.Button]] = []
@@ -347,7 +356,13 @@ class CenterDrawButtonListPanel:
             now_list = []
             for now_text in now_text_list:
                 if now_text != null_text:
-                    now_button = draw.CenterButton(now_text,return_list[index],now_width,cmd_func=cmd_func,args=(return_list[index]))
+                    now_button = draw.CenterButton(
+                        now_text,
+                        return_list[index],
+                        now_width,
+                        cmd_func=cmd_func,
+                        args=(return_list[index]),
+                    )
                     now_list.append(now_button)
                 else:
                     now_info_draw = draw.CenterDraw()
@@ -387,21 +402,21 @@ class PageHandleDrawType:
     butoon_id -- 数字按钮的id
     """
 
-    def __init__(self,text:str,width:int,is_button:bool,num_button:bool,button_id:int):
+    def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
         """ 初始化绘制对象 """
-        self.text:str = text
+        self.text: str = text
         """ 未处理的绘制的文本id """
-        self.draw_text:str = ""
+        self.draw_text: str = ""
         """ 最终绘制的文本 """
-        self.width:int = width
+        self.width: int = width
         """ 最大宽度 """
-        self.is_button:bool = is_button
+        self.is_button: bool = is_button
         """ 绘制按钮 """
-        self.num_button:bool = num_button
+        self.num_button: bool = num_button
         """ 绘制数字按钮 """
-        self.button_id:bool = button_id
+        self.button_id: bool = button_id
         """ 数字按钮的id """
-        self.button_return:str = ""
+        self.button_return: str = ""
         """ 按钮返回值 """
 
     def draw(self):
@@ -424,38 +439,50 @@ class PageHandlePanel:
     col_septal_lines -- 每列之间的间隔线,为空则不绘制
     """
 
-    def __init__(self,text_list:List[str],draw_type:type,limit:int,column:int,width:int,is_button:bool=False,num_button:bool=False,button_start_id:int=0,row_septal_lines:str="",col_septal_lines:str=""):
+    def __init__(
+        self,
+        text_list: List[str],
+        draw_type: type,
+        limit: int,
+        column: int,
+        width: int,
+        is_button: bool = False,
+        num_button: bool = False,
+        button_start_id: int = 0,
+        row_septal_lines: str = "",
+        col_septal_lines: str = "",
+    ):
         """ 初始化绘制对象 """
-        self.text_list:List[str] = text_list
+        self.text_list: List[str] = text_list
         """ 绘制的文本列表 """
-        self.draw_type:type = PageHandleDrawType
+        self.draw_type: type = PageHandleDrawType
         """ 文本对象的绘制类型 """
-        self.now_page:int = 0
+        self.now_page: int = 0
         """ 当前页数 """
-        self.limit:int = limit
+        self.limit: int = limit
         """ 每页长度 """
-        self.column:int = column
+        self.column: int = column
         """ 每行个数 """
-        self.width:int = width
+        self.width: int = width
         """ 每行最大宽度 """
-        self.row_septal_lines:str = row_septal_lines
+        self.row_septal_lines: str = row_septal_lines
         """ 每行之间的间隔线,为空则不绘制 """
-        self.col_septal_lines:str = col_septal_lines
+        self.col_septal_lines: str = col_septal_lines
         """ 每列之间的间隔线,为空则不绘制 """
-        self.return_list:List[str] = []
+        self.return_list: List[str] = []
         """ 按钮返回的id列表 """
-        self.next_page_return:str = ""
+        self.next_page_return: str = ""
         """ 切换下一页的按钮返回 """
-        self.old_page_return:str = ""
+        self.old_page_return: str = ""
         """ 切换上一页的按钮返回 """
-        self.is_button:bool = is_button
+        self.is_button: bool = is_button
         """ 将列表元素绘制成按钮 """
-        self.num_button:bool = num_button
+        self.num_button: bool = num_button
         """ 将列表元素绘制成数字按钮 """
-        self.button_start_id:int = button_start_id
+        self.button_start_id: int = button_start_id
         """ 数字按钮的开始id """
         self.draw_type = draw_type
-        self.draw_list:List[draw.NormalDraw] = []
+        self.draw_list: List[draw.NormalDraw] = []
         """ 绘制的对象列表 """
 
     def update(self):
@@ -467,19 +494,19 @@ class PageHandlePanel:
             self.now_page = total_page
             start_id = self.now_page * self.limit
         now_page_list = []
-        for i in range(start_id,len(self.text_list)):
+        for i in range(start_id, len(self.text_list)):
             if len(now_page_list) >= self.limit:
                 break
             now_page_list.append(self.text_list[i])
-        draw_text_group = value_handle.list_of_groups(now_page_list,self.column)
-        draw_list:List[draw.NormalDraw] = []
+        draw_text_group = value_handle.list_of_groups(now_page_list, self.column)
+        draw_list: List[draw.NormalDraw] = []
         index = self.button_start_id
         line_feed = draw.NormalDraw()
         line_feed.text = "\n"
         line_feed.width = 1
         for draw_text_list in draw_text_group:
             if self.row_septal_lines != "" and index:
-                line_draw = draw.LineDraw(self.row_septal_lines,self.width)
+                line_draw = draw.LineDraw(self.row_septal_lines, self.width)
                 draw_list.append(line_draw)
             now_width = self.width
             if self.col_septal_lines != "":
@@ -492,8 +519,8 @@ class PageHandlePanel:
             col_fix_draw.width = 1
             draw_list.append(col_fix_draw)
             for value in draw_text_list:
-                value_draw = self.draw_type(value,value_width,self.is_button,self.num_button,index)
-                value_draw.draw_text = text_handle.align(value_draw.draw_text,"center",0,1,value_width)
+                value_draw = self.draw_type(value, value_width, self.is_button, self.num_button, index)
+                value_draw.draw_text = text_handle.align(value_draw.draw_text, "center", 0, 1, value_width)
                 if self.num_button:
                     self.return_list.append(str(index))
                 else:
@@ -503,13 +530,18 @@ class PageHandlePanel:
                 draw_list.append(col_fix_draw)
             draw_list.append(line_feed)
         if total_page:
-            now_line = draw.LineDraw("-",self.width)
+            now_line = draw.LineDraw("-", self.width)
             draw_list.append(now_line)
             page_change_start_id = 0
             if self.num_button:
                 page_change_start_id = index
             old_page_index_text = text_handle.id_index(page_change_start_id)
-            old_page_button = draw.CenterButton(_("{old_page_index_text} 上一页").format(old_page_index_text=old_page_index_text),str(page_change_start_id),int(self.width / 3),cmd_func=self.old_page)
+            old_page_button = draw.CenterButton(
+                _("{old_page_index_text} 上一页").format(old_page_index_text=old_page_index_text),
+                str(page_change_start_id),
+                int(self.width / 3),
+                cmd_func=self.old_page,
+            )
             self.return_list.append(str(page_change_start_id))
             draw_list.append(old_page_button)
             page_text = f"({self.now_page}/{total_page})"
@@ -518,7 +550,12 @@ class PageHandlePanel:
             page_draw.text = page_text
             draw_list.append(page_draw)
             next_page_index_text = text_handle.id_index(page_change_start_id + 1)
-            next_page_button = draw.CenterButton(_("{next_page_index_text} 下一页").format(next_page_index_text=next_page_index_text),str(page_change_start_id + 1),int(self.width / 3),cmd_func=self.next_page)
+            next_page_button = draw.CenterButton(
+                _("{next_page_index_text} 下一页").format(next_page_index_text=next_page_index_text),
+                str(page_change_start_id + 1),
+                int(self.width / 3),
+                cmd_func=self.next_page,
+            )
             self.return_list.append(str(page_change_start_id + 1))
             draw_list.append(next_page_button)
             draw_list.append(line_feed)
@@ -531,19 +568,20 @@ class PageHandlePanel:
 
     def next_page(self):
         """ 将面板切换至下一页 """
-        total_page = int(len(self.text_list) / self.limit)
-        if self.now_page >= total_page -1:
+        total_page = math.ceil(len(self.text_list) / self.limit)
+        if self.now_page >= total_page - 1:
             self.now_page = 0
         else:
             self.now_page += 1
 
     def old_page(self):
         """ 将面板切换至上一页 """
-        total_page = int(len(self.text_list) / self.limit)
+        total_page = math.ceil(len(self.text_list) / self.limit)
         if self.now_page <= 0:
             self.now_page = total_page
         else:
             self.now_page -= 1
+
 
 class ClothingPageHandlePanel(PageHandlePanel):
     """ 服装缩略信息分页绘制对象面板 """

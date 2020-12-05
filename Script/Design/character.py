@@ -17,7 +17,7 @@ from Script.Design import (
 from Script.Config import game_config
 
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
@@ -128,9 +128,7 @@ def character_move_to_rand_cafeteria(character_id: int):
     character_id -- 角色id
     """
     character_data = cache.character_data[character_id]
-    to_cafeteria = map_handle.get_map_system_path_for_str(
-        random.choice(cache.place_data["Cafeteria"])
-    )
+    to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["Cafeteria"]))
     _, _, move_path, move_time = character_move.character_move(character_id, to_cafeteria)
     character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
     character_data.behavior["MoveTarget"] = move_path
@@ -145,9 +143,7 @@ def character_move_to_rand_restaurant(character_id: int):
     character_id -- 角色id
     """
     character_data = cache.character_data[character_id]
-    to_restaurant = map_handle.get_map_system_path_for_str(
-        random.choice(cache.place_data["Restaurant"])
-    )
+    to_restaurant = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["Restaurant"]))
     _, _, move_path, move_time = character_move.character_move(
         character_id,
         map_handle.get_map_system_path_for_str(character_data.classroom),

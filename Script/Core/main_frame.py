@@ -28,6 +28,7 @@ from Script.Config import normal_config, game_config
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
+
 def close_window():
     """
     关闭游戏，会终止当前进程和所有子进程
@@ -64,7 +65,7 @@ textbox = Text(
     height=normal_config.config_normal.textbox_hight,
     highlightbackground=normal_config.config_normal.background,
     bd=0,
-    cursor=""
+    cursor="",
 )
 textbox.grid(column=0, row=0, sticky=(N, W, E, S))
 

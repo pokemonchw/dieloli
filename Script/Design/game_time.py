@@ -8,10 +8,11 @@ from Script.Core import (
     cache_control,
     game_type,
 )
-from Script.Config import normal_config,game_config
+from Script.Config import normal_config, game_config
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 def init_time():
     """
@@ -306,7 +307,10 @@ def judge_school_course_time(school_id: int, time_data: datetime.datetime) -> ga
     course_status = game_type.CourseTimeSlice()
     course_time_data = game_config.config_school_session_data[school_id]
     now_time = time_data.hour * 100 + time_data.minute
-    end_time_data = {game_config.config_school_session[course_time_data[i]].end_time: i for i in range(len(course_time_data))}
+    end_time_data = {
+        game_config.config_school_session[course_time_data[i]].end_time: i
+        for i in range(len(course_time_data))
+    }
     now_time_index = bisect.bisect_left(list(end_time_data.keys()), now_time)
     course_status.course_index = now_time_index
     if now_time_index >= len(end_time_data):
@@ -332,19 +336,21 @@ def judge_school_course_time(school_id: int, time_data: datetime.datetime) -> ga
             course_status.end_course = end_time - now_time
     return course_status
 
-def ecliptic_lon(now_time:datetime.datetime) -> float:
+
+def ecliptic_lon(now_time: datetime.datetime) -> float:
     """
     根据日期计算黄经
     now_time -- 日期
     Return arguments:
     float -- 黄经
     """
-    s=ephem.Sun(now_time)
-    equ=ephem.Equatorial(s.ra,s.dec,epoch=now_time)
-    e=ephem.Ecliptic(equ)
+    s = ephem.Sun(now_time)
+    equ = ephem.Equatorial(s.ra, s.dec, epoch=now_time)
+    e = ephem.Ecliptic(equ)
     return e.lon
 
-def get_solar_period(now_time:datetime.datetime) -> int:
+
+def get_solar_period(now_time: datetime.datetime) -> int:
     """
     根据日期计算对应节气id
     Keyword arguments:
@@ -352,11 +358,12 @@ def get_solar_period(now_time:datetime.datetime) -> int:
     Return arguments:
     int -- 节气id
     """
-    e=ecliptic_lon(now_time)
-    n=int(e*180.0/math.pi/15)
+    e = ecliptic_lon(now_time)
+    n = int(e * 180.0 / math.pi / 15)
     return n
 
-def get_old_solar_period_time(now_time:datetime.datetime) -> (datetime.datetime,int):
+
+def get_old_solar_period_time(now_time: datetime.datetime) -> (datetime.datetime, int):
     """
     根据日期计算上个节气的开始日期
     Keyword arguments:
@@ -364,21 +371,22 @@ def get_old_solar_period_time(now_time:datetime.datetime) -> (datetime.datetime,
     Return arguments:
     new_time -- 节气日期
     """
-    s1=get_solar_period(now_time)
-    s0=s1
-    dt=1
+    s1 = get_solar_period(now_time)
+    s0 = s1
+    dt = 1
     new_time = now_time
     while True:
-        new_time = get_sub_date(day=-dt,old_date=new_time)
-        s=get_solar_period(new_time)
-        if s0!=s:
-            s0=s
-            dt=-dt/2
-        if s!=s1 and abs(dt) < 1:
+        new_time = get_sub_date(day=-dt, old_date=new_time)
+        s = get_solar_period(new_time)
+        if s0 != s:
+            s0 = s
+            dt = -dt / 2
+        if s != s1 and abs(dt) < 1:
             break
-    return new_time,s0
+    return new_time, s0
 
-def get_next_solar_period_time(now_time:datetime.datetime) -> (datetime.datetime,int):
+
+def get_next_solar_period_time(now_time: datetime.datetime) -> (datetime.datetime, int):
     """
     根据日期计算下个节气的开始日期
     Keyword arguments:
@@ -386,21 +394,22 @@ def get_next_solar_period_time(now_time:datetime.datetime) -> (datetime.datetime
     Return arguments:
     new_time -- 节气日期
     """
-    s1=get_solar_period(now_time)
-    s0=s1
-    dt=1
+    s1 = get_solar_period(now_time)
+    s0 = s1
+    dt = 1
     new_time = now_time
     while True:
-        new_time = get_sub_date(day=dt,old_date=new_time)
-        s=get_solar_period(new_time)
-        if s0!=s:
-            s0=s
-            dt=-dt/2
-        if s!=s1 and abs(dt) < 1:
+        new_time = get_sub_date(day=dt, old_date=new_time)
+        s = get_solar_period(new_time)
+        if s0 != s:
+            s0 = s
+            dt = -dt / 2
+        if s != s1 and abs(dt) < 1:
             break
-    return new_time,s0
+    return new_time, s0
 
-def judge_datetime_solar_period(now_time:datetime.datetime) -> (bool,int):
+
+def judge_datetime_solar_period(now_time: datetime.datetime) -> (bool, int):
     """
     校验日期是否是节气以及获取节气id
     Keyword arguments:
@@ -409,15 +418,16 @@ def judge_datetime_solar_period(now_time:datetime.datetime) -> (bool,int):
     bool -- 校验结果
     int -- 节气id
     """
-    new_time,solar_period = get_old_solar_period_time(now_time)
+    new_time, solar_period = get_old_solar_period_time(now_time)
     if new_time.year == now_time.year and new_time.month == now_time.month and new_time.day == now_time.day:
-        return 1,solar_period
-    new_time,solar_period = get_next_solar_period_time(now_time)
+        return 1, solar_period
+    new_time, solar_period = get_next_solar_period_time(now_time)
     if new_time.year == now_time.year and new_time.month == now_time.month and new_time.day == now_time.day:
-        return 1,solar_period
-    return 0,0
+        return 1, solar_period
+    return 0, 0
 
-def get_sun_time(now_time:datetime.datetime) -> int:
+
+def get_sun_time(now_time: datetime.datetime) -> int:
     """
     根据时间获取太阳位置id
     Keyword arguments:
@@ -426,9 +436,9 @@ def get_sun_time(now_time:datetime.datetime) -> int:
     int -- 太阳位置id
     """
     gatech = ephem.Observer()
-    gatech.long, gatech.lat = str(cache.school_longitude),str(cache.school_latitude)
-    now_add_time = round(cache.school_longitude/15)
-    gatech.date = get_sub_date(hour=-now_add_time,old_date=now_time)
+    gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
+    now_add_time = round(cache.school_longitude / 15)
+    gatech.date = get_sub_date(hour=-now_add_time, old_date=now_time)
     sun = ephem.Sun()
     sun.compute(gatech)
     now_az = sun.az * 57.2957795
@@ -456,7 +466,8 @@ def get_sun_time(now_time:datetime.datetime) -> int:
         return 6
     return 7
 
-def get_moon_phase(now_time:datetime.datetime) -> int:
+
+def get_moon_phase(now_time: datetime.datetime) -> int:
     """
     根据时间获取月相配置id
     Keyword arguments:
@@ -465,14 +476,14 @@ def get_moon_phase(now_time:datetime.datetime) -> int:
     int -- 月相配置id
     """
     gatech = ephem.Observer()
-    gatech.long, gatech.lat = str(cache.school_longitude),str(cache.school_latitude)
+    gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
     now_add_time = round(cache.school_longitude / 15)
-    new_time = get_sub_date(hour=-now_add_time,old_date=now_time)
+    new_time = get_sub_date(hour=-now_add_time, old_date=now_time)
     gatech.date = new_time
     moon = ephem.Moon()
     moon.compute(gatech)
     now_phase = moon.phase
-    new_time = get_sub_date(day=1,old_date=new_time)
+    new_time = get_sub_date(day=1, old_date=new_time)
     gatech.date = new_time
     next_moon = ephem.Moon()
     next_moon.compute(gatech)

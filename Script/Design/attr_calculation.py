@@ -13,8 +13,9 @@ from Script.Core import (
 from Script.Design import game_time
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏内缓存数据 """
+
 
 def get_age_tem_list() -> list:
     """
@@ -214,7 +215,7 @@ def get_measurements(
     bodyfat -- 体脂率
     weight_tem -- 体重比例模板
     """
-    if tem_name in {0,3}:
+    if tem_name in {0, 3}:
         bust = 51.76 / 100 * height
         waist = 42.79 / 100 * height
         hip = 52.07 / 100 * height

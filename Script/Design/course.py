@@ -7,7 +7,7 @@ from Script.Design import map_handle
 from Script.Config import game_config
 
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
@@ -27,7 +27,7 @@ def init_phase_course_hour():
                 if not len(now_course_set):
                     break
                 now_course_id = random.choice(list(now_course_set))
-                now_course_value = random.randint(1,14)
+                now_course_value = random.randint(1, 14)
                 if now_course_value <= now_session_max:
                     now_session_max -= now_course_value
                     now_phase_course_data[now_course_id] = now_course_value
@@ -48,7 +48,7 @@ def init_phase_course_hour():
                     elif more_hour < session_max:
                         now_phase_course_data[course] += 1
                         more_hour += 1
-            cache.course_data.setdefault(school_id,{})
+            cache.course_data.setdefault(school_id, {})
             cache.course_data[school_id][phase] = now_phase_course_data
     init_phase_course_hour_experience()
 
@@ -72,14 +72,17 @@ def init_class_time_table():
             for course in reversed(class_hour.keys()):
                 class_hour_index[course] = 0
                 while class_hour_index[course] < class_hour[course]:
-                    for day in range(0,class_day):
+                    for day in range(0, class_day):
                         old_day = day - 1
                         if old_day < 0:
                             old_day = class_day - 1
-                        class_time_table[school_id][phase].setdefault(day,{})
-                        class_time_table[school_id][phase].setdefault(old_day,{})
-                        for i in range(1,len(course_session)):
-                            if i not in class_time_table[school_id][phase][old_day] and i not in class_time_table[school_id][phase][day]:
+                        class_time_table[school_id][phase].setdefault(day, {})
+                        class_time_table[school_id][phase].setdefault(old_day, {})
+                        for i in range(1, len(course_session)):
+                            if (
+                                i not in class_time_table[school_id][phase][old_day]
+                                and i not in class_time_table[school_id][phase][day]
+                            ):
                                 class_time_table[school_id][phase][day][i] = course
                                 class_hour_index[course] += 1
                                 break
@@ -92,7 +95,13 @@ def init_class_time_table():
                                     class_time_table[school_id][phase][day][i] = course
                                     class_hour_index[course] += 1
                                     break
-                                elif all([k in class_time_table[school_id][phase][day] for k in range(i,len(course_session)) if k != i]):
+                                elif all(
+                                    [
+                                        k in class_time_table[school_id][phase][day]
+                                        for k in range(i, len(course_session))
+                                        if k != i
+                                    ]
+                                ):
                                     class_time_table[school_id][phase][day][i] = course
                                     class_hour_index[course] += 1
                                     break
@@ -101,7 +110,7 @@ def init_class_time_table():
     cache.course_time_table_data = class_time_table
 
 
-def get_character_school_phase(character_id:int) -> (int,int):
+def get_character_school_phase(character_id: int) -> (int, int):
     """
     获取角色所属的学校和年级
     Keyword arguments:
@@ -114,8 +123,8 @@ def get_character_school_phase(character_id:int) -> (int,int):
     for school_id in game_config.config_school:
         school_config = game_config.config_school[school_id]
         if character_data.age >= school_config.min_age and character_data.age <= school_config.max_age:
-            return school_id,character_data.age - school_config.min_age
-    return 0,0
+            return school_id, character_data.age - school_config.min_age
+    return 0, 0
 
 
 def init_class_teacher():
@@ -123,9 +132,7 @@ def init_class_teacher():
     初始化各班级任课老师
     """
     teacher_index = len(
-        cache.teacher_course_experience[
-            list(cache.teacher_course_experience.keys())[0]
-        ].keys()
+        cache.teacher_course_experience[list(cache.teacher_course_experience.keys())[0]].keys()
     )
     course_max_a = 0
     course_max_b = 0
@@ -164,20 +171,29 @@ def init_teacher_table():
                         continue
                     for i in class_time_table[day]:
                         now_course = class_time_table[day][i]
-                        if now_course not in cache.classroom_teacher_data[f"Classroom_{phase_room_id}"][classroom]:
+                        if (
+                            now_course
+                            not in cache.classroom_teacher_data[f"Classroom_{phase_room_id}"][classroom]
+                        ):
                             continue
-                        for now_teacher in cache.classroom_teacher_data[f"Classroom_{phase_room_id}"][classroom][now_course]:
+                        for now_teacher in cache.classroom_teacher_data[f"Classroom_{phase_room_id}"][
+                            classroom
+                        ][now_course]:
                             if now_teacher not in teacher_table:
-                                cache.character_data[now_teacher].officeroom = map_handle.get_map_system_path_str_for_list(cache.place_data[f"Office_{phase_room_id}"])
+                                cache.character_data[
+                                    now_teacher
+                                ].officeroom = map_handle.get_map_system_path_str_for_list(
+                                    cache.place_data[f"Office_{phase_room_id}"]
+                                )
                             teacher_table.setdefault(now_teacher, 0)
                             if teacher_table[now_teacher] < 14:
                                 teacher_table[now_teacher] += 1
-                                cache.teacher_class_time_table.setdefault(day,{})
-                                cache.teacher_class_time_table[day].setdefault(school_id,{})
-                                cache.teacher_class_time_table[day][school_id].setdefault(phase,{})
-                                cache.teacher_class_time_table[day][school_id][phase].setdefault(i,{})
+                                cache.teacher_class_time_table.setdefault(day, {})
+                                cache.teacher_class_time_table[day].setdefault(school_id, {})
+                                cache.teacher_class_time_table[day][school_id].setdefault(phase, {})
+                                cache.teacher_class_time_table[day][school_id][phase].setdefault(i, {})
                                 cache.teacher_class_time_table[day][school_id][phase][i][now_teacher] = {
-                                    classroom:now_course
+                                    classroom: now_course
                                 }
 
 
@@ -200,9 +216,9 @@ def course_abmain_distribution():
             cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(classroom, {})
             for course in cache.course_data[school_id][school_phase]:
                 if cache.course_data[school_id][school_phase][course] > 7:
-                    cache.classroom_teacher_data["Classroom_" + str(phase)][
-                        classroom
-                    ].setdefault(course, [])
+                    cache.classroom_teacher_data["Classroom_" + str(phase)][classroom].setdefault(
+                        course, []
+                    )
                     for teacher in cache.teacher_course_experience[course]:
                         if teacher not in teacher_data:
                             teacher_data[teacher] = 0
@@ -233,9 +249,9 @@ def course_distribution_a():
             cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(classroom, {})
             for course in cache.course_data[school_id][school_phase]:
                 if cache.course_data[school_id][school_phase][course] <= 7:
-                    cache.classroom_teacher_data["Classroom_" + str(phase)][
-                        classroom
-                    ].setdefault(course, [])
+                    cache.classroom_teacher_data["Classroom_" + str(phase)][classroom].setdefault(
+                        course, []
+                    )
                     for teacher in cache.teacher_course_experience[course]:
                         if teacher not in teacher_data:
                             teacher_data[teacher] = 0
@@ -262,13 +278,11 @@ def course_distribution_b():
         teacher_course_index = 0
         for course in cache.course_data[school_id][school_phase]:
             for classroom in classroom_list:
-                cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(
-                    classroom, {}
-                )
+                cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(classroom, {})
                 if cache.course_data[school_id][school_phase][course] <= 7:
-                    cache.classroom_teacher_data["Classroom_" + str(phase)][
-                        classroom
-                    ].setdefault(course, [])
+                    cache.classroom_teacher_data["Classroom_" + str(phase)][classroom].setdefault(
+                        course, []
+                    )
                     for teacher in cache.teacher_course_experience[course]:
                         if teacher not in teacher_data:
                             cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][
@@ -298,15 +312,15 @@ def init_phase_course_hour_experience():
                     knowledge_experience_data = game_config.config_course_knowledge_experience_data[course]
                     for knowledge in knowledge_experience_data:
                         experience = knowledge_experience_data[knowledge] * course_hour * 38
-                        phase_knownledge_experience[school_id][phase].setdefault(course,{})
-                        phase_knownledge_experience[school_id][phase][course].setdefault(knowledge,0)
+                        phase_knownledge_experience[school_id][phase].setdefault(course, {})
+                        phase_knownledge_experience[school_id][phase][course].setdefault(knowledge, 0)
                         phase_knownledge_experience[school_id][phase][course][knowledge] += experience
                 if course in game_config.config_course_language_experience_data:
                     language_experience_data = game_config.config_course_language_experience_data[course]
                     for language in language_experience_data:
                         experience = language_experience_data[language] * course_hour * 38
-                        phase_language_experience[school_id][phase].setdefault(course,{})
-                        phase_language_experience[school_id][phase][course].setdefault(language,0)
+                        phase_language_experience[school_id][phase].setdefault(course, {})
+                        phase_language_experience[school_id][phase][course].setdefault(language, 0)
                         phase_language_experience[school_id][phase][course][language] += experience
     cache.course_school_phase_knowledge_experience = phase_knownledge_experience
     cache.course_school_phase_language_experience = phase_language_experience
@@ -324,20 +338,20 @@ def init_character_knowledge():
             for course in game_config.config_course_knowledge_experience_data:
                 if course not in cache.teacher_course_experience:
                     cache.teacher_course_experience.setdefault(course, {})
-                cache.teacher_course_experience[course].setdefault(i,0)
+                cache.teacher_course_experience[course].setdefault(i, 0)
                 for knowledge in game_config.config_course_knowledge_experience_data[course]:
                     if knowledge in character_data.knowledge:
                         cache.teacher_course_experience[course][i] += character_data.knowledge[knowledge]
             for course in game_config.config_course_language_experience_data:
                 if course not in cache.teacher_course_experience:
-                    cache.teacher_course_experience.setdefault(course,{})
-                cache.teacher_course_experience[course].setdefault(i,0)
+                    cache.teacher_course_experience.setdefault(course, {})
+                cache.teacher_course_experience[course].setdefault(i, 0)
                 for language in game_config.config_course_language_experience_data[course]:
                     if language in character_data.language:
                         cache.teacher_course_experience[course][i] += character_data.language[language]
 
 
-def init_teacher_knowledge(character_id:int):
+def init_teacher_knowledge(character_id: int):
     """
     按年龄修正教师知识等级
     Keyword arguments:
@@ -355,23 +369,23 @@ def init_teacher_knowledge(character_id:int):
         )
 
 
-def init_experience_for_grade(character_id:int):
+def init_experience_for_grade(character_id: int):
     """
     按年级生成角色初始经验数据
     Keyword arguments:
     character_id -- 角色id
     """
     character_data = cache.character_data[character_id]
-    character_school_id,character_phase = get_character_school_phase(character_id)
+    character_school_id, character_phase = get_character_school_phase(character_id)
     knowledge_experience_data = cache.course_school_phase_knowledge_experience
     language_experience_data = cache.course_school_phase_language_experience
     if character_data.age > 18:
         character_school_id = 2
         character_phase = 2
-    for school_id in range(0,character_school_id):
+    for school_id in range(0, character_school_id):
         if school_id in knowledge_experience_data:
             school_knowledge_experience_data = knowledge_experience_data[school_id]
-            for phase in range(0,character_phase):
+            for phase in range(0, character_phase):
                 if phase not in school_knowledge_experience_data:
                     continue
                 phase_knownledge_experience_data = school_knowledge_experience_data[phase]
@@ -381,11 +395,11 @@ def init_experience_for_grade(character_id:int):
                         knowledge_experience = course_knowledge_experience_data[knowledge]
                         knowledge_interest = character_data.knowledge_interest[knowledge]
                         knowledge_experience *= knowledge_interest
-                        character_data.knowledge.setdefault(knowledge,0)
+                        character_data.knowledge.setdefault(knowledge, 0)
                         character_data.knowledge[knowledge] += knowledge_experience
         if school_id in language_experience_data:
             school_language_experience_data = language_experience_data[school_id]
-            for phase in range(0,character_phase):
+            for phase in range(0, character_phase):
                 if phase not in school_language_experience_data:
                     continue
                 phase_language_experience_data = school_language_experience_data[phase]
@@ -395,5 +409,5 @@ def init_experience_for_grade(character_id:int):
                         language_experience = course_language_experience_data[language]
                         language_interest = character_data.language_interest[language]
                         language_experience *= language_interest
-                        character_data.language.setdefault(language,0)
+                        character_data.language.setdefault(language, 0)
                         character_data.language[language] += language_experience

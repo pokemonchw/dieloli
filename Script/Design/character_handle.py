@@ -16,10 +16,10 @@ from Script.Design import (
     attr_text,
     character,
 )
-from Script.Config import game_config,normal_config
+from Script.Config import game_config, normal_config
 
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
@@ -163,7 +163,7 @@ def create_random_npc(id) -> dict:
     random_npc_new_data.Weight = fat_tem
     random_npc_new_data.BodyFat = body_fat_tem
     random_npc_new_data.SexExperienceTem = "Rand"
-    if random_npc_sex in {1,2}:
+    if random_npc_sex in {1, 2}:
         random_npc_new_data.Chest = attr_calculation.get_rand_npc_chest_tem()
     else:
         random_npc_new_data.Chest = 0
@@ -257,20 +257,18 @@ def init_character_dormitory():
         "Man": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
-            if cache.character_data[character_id].age < 18
-            and cache.character_data[character_id].sex == 0
+            if cache.character_data[character_id].age < 18 and cache.character_data[character_id].sex == 0
         },
         "Woman": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
-            if cache.character_data[character_id].age < 18
-            and cache.character_data[character_id].sex == 1
+            if cache.character_data[character_id].age < 18 and cache.character_data[character_id].sex == 1
         },
         "Other": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
             if cache.character_data[character_id].age < 18
-            and cache.character_data[character_id].sex not in {0,1}
+            and cache.character_data[character_id].sex not in {0, 1}
         },
         "Teacher": {
             character_id: cache.character_data[character_id].age
@@ -294,15 +292,9 @@ def init_character_dormitory():
     character_sex_data["Teacher"] = [
         k[0] for k in sorted(character_sex_data["Teacher"].items(), key=lambda x: x[1])
     ]
-    teacher_dormitory = {
-        x: 0 for x in sorted(cache.place_data["TeacherDormitory"], key=lambda x: x[0])
-    }
-    male_dormitory = {
-        key: cache.place_data[key] for key in cache.place_data if "MaleDormitory" in key
-    }
-    female_dormitory = {
-        key: cache.place_data[key] for key in cache.place_data if "FemaleDormitory" in key
-    }
+    teacher_dormitory = {x: 0 for x in sorted(cache.place_data["TeacherDormitory"], key=lambda x: x[0])}
+    male_dormitory = {key: cache.place_data[key] for key in cache.place_data if "MaleDormitory" in key}
+    female_dormitory = {key: cache.place_data[key] for key in cache.place_data if "FemaleDormitory" in key}
     male_dormitory = {
         x: 0 for j in [k[1] for k in sorted(male_dormitory.items(), key=lambda x: x[0])] for x in j
     }

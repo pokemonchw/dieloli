@@ -3,7 +3,7 @@
 import sys
 from types import FunctionType
 from Script.Config import normal_config
-from Script.Core import game_type,cache_control
+from Script.Core import game_type, cache_control
 
 cache_control.cache = game_type.Cache()
 normal_config.init_normal_config()

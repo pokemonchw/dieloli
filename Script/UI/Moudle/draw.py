@@ -43,10 +43,7 @@ class NormalDraw:
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if (
-                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.width
-                    ):
+                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -64,10 +61,7 @@ class WaitDraw(NormalDraw):
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if (
-                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.width
-                    ):
+                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -232,7 +226,7 @@ class Button:
         """ 鼠标悬停时样式 """
         self.width: int = 0
         """ 按钮文本的最大宽度 """
-        self.cmd_func:FunctionType = cmd_func
+        self.cmd_func: FunctionType = cmd_func
         """ 按钮响应事件函数 """
         self.args = args
         """ 传给事件响应函数的参数列表 """
@@ -261,10 +255,7 @@ class Button:
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if (
-                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.width
-                    ):
+                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
                         now_text += i
                         continue
                     break
@@ -300,7 +291,17 @@ class CenterButton:
     args -- 传给事件响应函数的参数列表
     """
 
-    def __init__(self,text:str,return_text:str,width:int,fix_text=" ",normal_style="standard",on_mouse_style="onbutton",cmd_func:FunctionType=None,args=()):
+    def __init__(
+        self,
+        text: str,
+        return_text: str,
+        width: int,
+        fix_text=" ",
+        normal_style="standard",
+        on_mouse_style="onbutton",
+        cmd_func: FunctionType = None,
+        args=(),
+    ):
         """ 初始化绘制对象 """
         self.text: str = text
         """ 按钮文本 """
@@ -314,7 +315,7 @@ class CenterButton:
         """ 鼠标悬停时样式 """
         self.width: int = width
         """ 按钮文本的最大宽度 """
-        self.cmd_func:FunctionType = cmd_func
+        self.cmd_func: FunctionType = cmd_func
         """ 按钮响应事件函数 """
         self.args = args
         """ 传给事件响应函数的参数列表 """
@@ -327,7 +328,7 @@ class CenterButton:
         """
         return self.width
 
-    def __it__(self,other:Button):
+    def __it__(self, other: Button):
         """
         比较两个button对象的文本长度
         Keyword arguments:
@@ -355,7 +356,7 @@ class CenterButton:
             elif now_index == self.width - 2:
                 now_text = " " + now_text + " "
             else:
-                now_text = text_handle.align(now_text,"center",0,1,self.width)
+                now_text = text_handle.align(now_text, "center", 0, 1, self.width)
         py_cmd.pcmd(
             now_text,
             self.return_text,
@@ -479,7 +480,7 @@ class LittleTitleLineDraw:
     title_style -- 标题样式
     """
 
-    def __init__(self,title: str,width: int,line:str="=",style="standard",title_style="sontitle"):
+    def __init__(self, title: str, width: int, line: str = "=", style="standard", title_style="sontitle"):
         """ 初始化绘制对象 """
         self.title = title
         """ 标题 """
@@ -509,14 +510,15 @@ class LittleTitleLineDraw:
         line_b.width = self.width - len(title_draw) - len(line_a)
         line_b.style = self.style
         line_b.text = self.line * line_b.width
-        for value in [line_a,title_draw,line_b]:
+        for value in [line_a, title_draw, line_b]:
             value.draw()
         io_init.era_print("\n")
+
 
 class CenterDraw(NormalDraw):
     """ 居中绘制文本 """
 
-    def __gt__(self,other) -> bool:
+    def __gt__(self, other) -> bool:
         return len(self) > len(other)
 
     def draw(self):
@@ -526,10 +528,7 @@ class CenterDraw(NormalDraw):
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if (
-                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.width
-                    ):
+                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -545,7 +544,6 @@ class CenterDraw(NormalDraw):
         io_init.era_print(now_text, self.style)
 
 
-
 class CenterMergeDraw:
     """
     将绘制列表合并在一起并居中绘制
@@ -553,18 +551,18 @@ class CenterMergeDraw:
     width -- 最大宽度
     """
 
-    def __init__(self,width:int):
+    def __init__(self, width: int):
         """ 初始化绘制对象 """
-        self.width:int = width
+        self.width: int = width
         """ 最大宽度 """
-        self.draw_list:List[NormalDraw] = []
+        self.draw_list: List[NormalDraw] = []
         """ 绘制列表 """
 
     def __len__(self) -> int:
         """ 获取当前绘制对象宽度 """
         return self.width
 
-    def __gt__(self,other) -> int:
+    def __gt__(self, other) -> int:
         return len(self) > len(other)
 
     def draw(self):
@@ -573,7 +571,7 @@ class CenterMergeDraw:
         for value in self.draw_list:
             now_width += len(value)
         now_text = " " * now_width
-        fix_text = text_handle.align(now_text,"center",1,1,self.width)
+        fix_text = text_handle.align(now_text, "center", 1, 1, self.width)
         fix_draw = NormalDraw()
         fix_draw.text = fix_text
         fix_draw.width = len(fix_text)
@@ -595,10 +593,7 @@ class RightDraw(NormalDraw):
             now_text = ""
             if self.width:
                 for i in self.text:
-                    if (
-                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.width
-                    ):
+                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -616,7 +611,7 @@ class ExpLevelDraw:
     experience -- 经验值
     """
 
-    def __init__(self,experience:int):
+    def __init__(self, experience: int):
         """ 初始化绘制对象 """
         grade = ""
         if experience < 50:

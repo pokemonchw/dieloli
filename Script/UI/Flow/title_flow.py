@@ -4,13 +4,14 @@ from Script.Config import normal_config
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_save_info_panel
 from Script.Design import handle_panel
-from Script.Core import constant, get_text, flow_handle, cache_control,game_type
+from Script.Core import constant, get_text, flow_handle, cache_control, game_type, py_cmd
 
 config_normal = normal_config.config_normal
 _: FunctionType = get_text._
 """ 翻译api """
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 @handle_panel.add_panel(constant.Panel.TITLE)
 def title_panel():
@@ -42,11 +43,12 @@ def title_panel():
     button_panel.draw()
     return_list = button_panel.get_return_list()
     ans = flow_handle.askfor_all(return_list.keys())
+    py_cmd.clr_cmd()
     now_key = return_list[ans]
     if now_key == now_list[0]:
         cache.now_panel_id = constant.Panel.CREATOR_CHARACTER
     elif now_key == now_list[1]:
-        now_panel = see_save_info_panel.SeeSaveListPanel(width,0)
+        now_panel = see_save_info_panel.SeeSaveListPanel(width, 0)
         now_panel.draw()
     elif now_key == now_list[2]:
         os._exit(0)

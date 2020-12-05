@@ -1,10 +1,11 @@
 from Script.UI.Moudle import draw
 from Script.Design import game_time
-from Script.Core import get_text, cache_control, flow_handle, py_cmd, text_handle,game_type
+from Script.Core import get_text, cache_control, flow_handle, py_cmd, text_handle, game_type
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 class GameTimeInfoPanel:
     """
@@ -13,7 +14,7 @@ class GameTimeInfoPanel:
     width -- 最大宽度
     """
 
-    def __init__(self,width:int):
+    def __init__(self, width: int):
         """ 初始化绘制对象 """
         self.width = width
         """ 面板的最大宽度 """
@@ -33,7 +34,7 @@ class GameTimeInfoPanel:
         season_draw.width = self.width - now_width
         now_draw.draw_list.append(season_draw)
         now_width += len(season_draw)
-        judge,solar_period = game_time.judge_datetime_solar_period(cache.game_time)
+        judge, solar_period = game_time.judge_datetime_solar_period(cache.game_time)
         if judge:
             solar_period_config = game_config.config_solar_period[solar_period]
             solar_period_draw = draw.NormalDraw()
@@ -60,7 +61,7 @@ class GameTimeInfoPanel:
             now_width += len(moon_phase_draw)
         self.width = now_width
         now_draw.width = self.width
-        self.now_draw:draw.NormalDraw = now_draw
+        self.now_draw: draw.NormalDraw = now_draw
         """ 当前面板绘制对象 """
 
     def __len__(self):

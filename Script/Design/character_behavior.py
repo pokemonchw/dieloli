@@ -16,8 +16,9 @@ from Script.Design import (
 )
 
 game_path = game_path_config.game_path
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 def init_character_behavior():
     """

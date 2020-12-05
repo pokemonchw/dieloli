@@ -1,9 +1,9 @@
 import os
 from typing import Dict, List
 from dijkstar import Graph, find_path
-from Script.Core import game_type, json_handle, get_text, text_handle,cache_control
+from Script.Core import game_type, json_handle, get_text, text_handle, cache_control
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 map_data_path = os.path.join("data", "map")
 """ 地图配置数据路径 """

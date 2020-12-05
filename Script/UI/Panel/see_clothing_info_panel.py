@@ -1,11 +1,11 @@
 from uuid import UUID
 from types import FunctionType
-from typing import List,Tuple
+from typing import List, Tuple
 from Script.Core import cache_control, game_type, text_handle, get_text, flow_handle, py_cmd
 from Script.Config import game_config
-from Script.UI.Moudle import draw,panel
+from Script.UI.Moudle import draw, panel
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
@@ -24,13 +24,13 @@ class SeeCharacterPutOnClothingListPanel:
     width -- 绘制宽度
     """
 
-    def __init__(self,character_id:int,width:int):
+    def __init__(self, character_id: int, width: int):
         """ 初始化绘制对象 """
-        self.character_id:int = character_id
+        self.character_id: int = character_id
         """ 绘制的角色id """
-        self.width:int = width
+        self.width: int = width
         """ 最大绘制宽度 """
-        self.return_list:List[str] = []
+        self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
 
     def draw(self):
@@ -43,10 +43,19 @@ class SeeCharacterPutOnClothingListPanel:
         id_width = 0
         for clothing_type in game_config.config_clothing_type:
             type_data = game_config.config_clothing_type[clothing_type]
-            type_draw = draw.LittleTitleLineDraw(type_data.name,self.width,":")
+            type_draw = draw.LittleTitleLineDraw(type_data.name, self.width, ":")
             draw_list.append(type_draw)
-            if clothing_type in character_data.put_on and isinstance(character_data.put_on[clothing_type],UUID):
-                now_draw = ClothingInfoDrawPanel(self.character_id,clothing_type,character_data.put_on[clothing_type],self.width,1,len(self.return_list))
+            if clothing_type in character_data.put_on and isinstance(
+                character_data.put_on[clothing_type], UUID
+            ):
+                now_draw = ClothingInfoDrawPanel(
+                    self.character_id,
+                    clothing_type,
+                    character_data.put_on[clothing_type],
+                    self.width,
+                    1,
+                    len(self.return_list),
+                )
                 self.return_list.append(str(len(self.return_list)))
                 now_id_width = text_handle.get_text_index(now_draw.text_list[0])
                 if now_id_width > id_width:
@@ -57,9 +66,11 @@ class SeeCharacterPutOnClothingListPanel:
                     now_id = len(self.return_list)
                     now_id_text = text_handle.id_index(now_id)
                     now_width = self.width - len(now_id_text)
-                    now_text = text_handle.align(now_text,"center",text_width=now_width)
+                    now_text = text_handle.align(now_text, "center", text_width=now_width)
                     now_text = f"{now_id_text}{now_text}"
-                    now_draw = draw.Button(now_text,str(now_id),cmd_func=self.see_clothing_list,args=(clothing_type,))
+                    now_draw = draw.Button(
+                        now_text, str(now_id), cmd_func=self.see_clothing_list, args=(clothing_type,)
+                    )
                     self.return_list.append(str(now_id))
                 else:
                     now_draw = draw.CenterDraw()
@@ -72,13 +83,13 @@ class SeeCharacterPutOnClothingListPanel:
                 value.id_width = id_width
             value.draw()
 
-    def see_clothing_list(self,clothing_type:int):
+    def see_clothing_list(self, clothing_type: int):
         """
         查看换装列表
         Keyword arguments:
         clothing_type -- 查看的服装类型
         """
-        now_draw = WearClothingListPanel(clothing_type,self.width)
+        now_draw = WearClothingListPanel(clothing_type, self.width)
         now_draw.draw()
 
 
@@ -90,11 +101,11 @@ class ClothingDescribeDraw:
     width -- 绘制宽度
     """
 
-    def __init__(self,clothing_id:int,width:int):
+    def __init__(self, clothing_id: int, width: int):
         """ 初始化绘制对象 """
-        self.clothing_id:int = clothing_id
+        self.clothing_id: int = clothing_id
         """ 服装id """
-        self.width:int = width
+        self.width: int = width
         """ 绘制宽度 """
 
     def draw(self):
@@ -119,43 +130,43 @@ class ClothingInfoDrawPanel:
     button_id -- 绘制按钮时的id
     """
 
-    def __init__(self,character_id:int,clothing_type:int,clothing_id:UUID,width:int,draw_button:bool=False,button_id:int=0):
+    def __init__(
+        self,
+        character_id: int,
+        clothing_type: int,
+        clothing_id: UUID,
+        width: int,
+        draw_button: bool = False,
+        button_id: int = 0,
+    ):
         """ 初始化绘制对象 """
-        self.character_id:int = character_id
+        self.character_id: int = character_id
         """ 服装所属的角色id """
         character_data = cache.character_data[character_id]
-        self.clothing_data:game_type.Clothing = character_data.clothing[clothing_type][clothing_id]
+        self.clothing_data: game_type.Clothing = character_data.clothing[clothing_type][clothing_id]
         """ 当前服装数据 """
-        self.width:int = width
+        self.width: int = width
         """ 最大绘制宽度 """
-        self.draw_button:bool = draw_button
+        self.draw_button: bool = draw_button
         """ 是否按按钮绘制 """
-        self.button_id:int = button_id
+        self.button_id: int = button_id
         """ 绘制按钮时的id """
-        self.id_width:int = 0
+        self.id_width: int = 0
         """ 绘制时计算用的id宽度 """
         now_id_text = ""
         if self.draw_button:
             now_id_text = text_handle.id_index(self.button_id)
         fix_width = self.width - len(now_id_text)
         value_dict = {
-            _("可爱"):self.clothing_data.sweet,
-            _("性感"):self.clothing_data.sexy,
-            _("帅气"):self.clothing_data.handsome,
-            _("清新"):self.clothing_data.fresh,
-            _("典雅"):self.clothing_data.elegant,
-            _("清洁"):self.clothing_data.cleanliness,
-            _("保暖"):self.clothing_data.warm,
+            _("可爱"): self.clothing_data.sweet,
+            _("性感"): self.clothing_data.sexy,
+            _("帅气"): self.clothing_data.handsome,
+            _("清新"): self.clothing_data.fresh,
+            _("典雅"): self.clothing_data.elegant,
+            _("清洁"): self.clothing_data.cleanliness,
+            _("保暖"): self.clothing_data.warm,
         }
-        describe_list = [
-            _("可爱的"),
-            _("性感的"),
-            _("帅气的"),
-            _("清新的"),
-            _("典雅的"),
-            _("清洁的"),
-            _("保暖的")
-        ]
+        describe_list = [_("可爱的"), _("性感的"), _("帅气的"), _("清新的"), _("典雅的"), _("清洁的"), _("保暖的")]
         value_list = list(value_dict.values())
         describe_id = value_list.index(max(value_list))
         describe = describe_list[describe_id]
@@ -174,17 +185,17 @@ class ClothingInfoDrawPanel:
             id_text = f"{now_id_text} {clothing_name}"
         else:
             id_text = clothing_name
-        self.text_list:List[str] = [id_text,value_text]
+        self.text_list: List[str] = [id_text, value_text]
         """ 绘制的文本列表 """
 
     def draw(self):
-        self.text_list[1] = text_handle.align(self.text_list[1],"center",0,1,self.width-self.id_width)
+        self.text_list[1] = text_handle.align(self.text_list[1], "center", 0, 1, self.width - self.id_width)
         text_width = text_handle.get_text_index(self.text_list[0])
         if text_width < self.id_width:
             self.text_list[0] += " " * (self.id_width - text_width)
         now_text = f"{self.text_list[0]}{self.text_list[1]}"
         if self.draw_button:
-            now_draw = draw.Button(now_text,str(self.button_id),cmd_func=self.see_clothing_info)
+            now_draw = draw.Button(now_text, str(self.button_id), cmd_func=self.see_clothing_info)
         else:
             now_draw = draw.NormalDraw()
             now_draw.text = now_text
@@ -194,12 +205,13 @@ class ClothingInfoDrawPanel:
     def see_clothing_info(self):
         """ 查看服装信息 """
         py_cmd.clr_cmd()
-        now_draw = ClothingDescribeDraw(self.clothing_data.tem_id,self.width)
+        now_draw = ClothingDescribeDraw(self.clothing_data.tem_id, self.width)
         now_draw.width = self.width
         now_draw.draw()
         if not self.character_id:
-            wear_draw = WearClothingListPanel(clothing_config.clothing_type,self.width)
+            wear_draw = WearClothingListPanel(self.clothing_data.wear, self.width)
             wear_draw.draw()
+
 
 class WearClothingListPanel:
     """
@@ -209,23 +221,26 @@ class WearClothingListPanel:
     width -- 绘制宽度
     """
 
-    def __init__(self,clothing_type:int,width:int):
+    def __init__(self, clothing_type: int, width: int):
         """ 初始化绘制对象 """
-        character_data:game_type.Character = cache.character_data[0]
-        self.width:int = width
+        character_data: game_type.Character = cache.character_data[0]
+        self.width: int = width
         """ 绘制宽度 """
-        self.handle_panel:panel.ClothingPageHandlePanel = None
+        self.handle_panel: panel.ClothingPageHandlePanel = None
         """ 页面控制对象 """
         if clothing_type in character_data.clothing:
             clothing_list = character_data.clothing[clothing_type].keys()
-            now_list = [(i,clothing_type) for i in clothing_list]
-            self.handle_panel = panel.ClothingPageHandlePanel(now_list,ChangeClothingDraw,10,1,width,1,1)
+            now_list = [(i, clothing_type) for i in clothing_list]
+            self.handle_panel = panel.ClothingPageHandlePanel(
+                now_list, ChangeClothingDraw, 10, 1, width, 1, 1
+            )
 
     def draw(self):
         """ 绘制对象 """
         py_cmd.clr_cmd()
         if self.handle_panel != None:
             while 1:
+                line_feed.draw()
                 title_draw = draw.TitleLineDraw(_("更衣室"), self.width)
                 title_draw.draw()
                 self.return_list = []
@@ -233,7 +248,7 @@ class WearClothingListPanel:
                 self.handle_panel.update_button()
                 self.handle_panel.draw()
                 self.return_list.extend(self.handle_panel.return_list)
-                back_draw = draw.CenterButton(_("[返回]"),_("返回"),self.width)
+                back_draw = draw.CenterButton(_("[返回]"), _("返回"), self.width)
                 back_draw.draw()
                 self.return_list.append(back_draw.return_text)
                 yrn = flow_handle.askfor_all(self.return_list)
@@ -260,52 +275,50 @@ class ChangeClothingDraw:
     button_id -- 数字按钮的id
     """
 
-    def __init__(self,text:Tuple,width:int,is_button:bool,num_button:bool,button_id:int):
+    def __init__(self, text: Tuple, width: int, is_button: bool, num_button: bool, button_id: int):
         """ 初始化绘制对象 """
-        self.text:UUID = text[0]
+        self.text: UUID = text[0]
         """ 服装id """
-        self.clothing_type:int = text[1]
+        self.clothing_type: int = text[1]
         """ 服装类型 """
-        self.width:int = width
+        self.width: int = width
         """ 绘制宽度 """
-        self.draw_text:str = ""
+        self.draw_text: str = ""
         """ 服装缩略信息绘制文本 """
-        self.is_button:bool = is_button
+        self.is_button: bool = is_button
         """ 绘制按钮 """
-        self.num_button:bool = num_button
+        self.num_button: bool = num_button
         """ 绘制数字按钮 """
-        self.button_id:int = button_id
+        self.button_id: int = button_id
         """ 数字按钮的id """
-        self.button_return:str = str(button_id)
+        self.button_return: str = str(button_id)
         """ 按钮返回值 """
-        character_data:game_type.Character = cache.character_data[0]
+        character_data: game_type.Character = cache.character_data[0]
         now_id_text = ""
         now_id_text = text_handle.id_index(self.button_id)
         fix_width = self.width - len(now_id_text)
-        self.clothing_data:game_type.Clothing = character_data.clothing[self.clothing_type][self.text]
+        self.clothing_data: game_type.Clothing = character_data.clothing[self.clothing_type][self.text]
         value_dict = {
-            _("可爱"):self.clothing_data.sweet,
-            _("性感"):self.clothing_data.sexy,
-            _("帅气"):self.clothing_data.handsome,
-            _("清新"):self.clothing_data.fresh,
-            _("典雅"):self.clothing_data.elegant,
-            _("清洁"):self.clothing_data.cleanliness,
-            _("保暖"):self.clothing_data.warm,
+            _("可爱"): self.clothing_data.sweet,
+            _("性感"): self.clothing_data.sexy,
+            _("帅气"): self.clothing_data.handsome,
+            _("清新"): self.clothing_data.fresh,
+            _("典雅"): self.clothing_data.elegant,
+            _("清洁"): self.clothing_data.cleanliness,
+            _("保暖"): self.clothing_data.warm,
         }
-        describe_list = [
-            _("可爱的"),
-            _("性感的"),
-            _("帅气的"),
-            _("清新的"),
-            _("典雅的"),
-            _("清洁的"),
-            _("保暖的")
-        ]
+        describe_list = [_("可爱的"), _("性感的"), _("帅气的"), _("清新的"), _("典雅的"), _("清洁的"), _("保暖的")]
         value_list = list(value_dict.values())
         describe_id = value_list.index(max(value_list))
         describe = describe_list[describe_id]
+        wear_text = ""
+        if (
+            self.clothing_type in character_data.put_on
+            and character_data.put_on[self.clothing_type] == self.clothing_data.uid
+        ):
+            wear_text = _("(已穿戴)")
         clothing_config = game_config.config_clothing_tem[self.clothing_data.tem_id]
-        clothing_name = f"{self.clothing_data.evaluation}{describe}{clothing_config.name}"
+        clothing_name = f"{self.clothing_data.evaluation}{describe}{clothing_config.name}{wear_text}"
         fix_width -= text_handle.get_text_index(clothing_name)
         value_text = ""
         for value_id in value_dict:
@@ -316,26 +329,29 @@ class ChangeClothingDraw:
         value_text += "|"
         id_text = ""
         id_text = f"{now_id_text} {clothing_name}"
-        self.text_list:List[str] = [id_text,value_text]
+        self.text_list: List[str] = [id_text, value_text]
         """ 绘制的文本列表 """
-        self.id_width:int = text_handle.get_text_index(id_text)
+        self.id_width: int = text_handle.get_text_index(id_text)
         """ id部分的绘制宽度 """
         self.draw_text = " " * self.width
 
     def draw(self):
         """ 绘制对象 """
-        self.text_list[1] = text_handle.align(self.text_list[1],"center",text_width=self.width-self.id_width)
+        self.text_list[1] = text_handle.align(
+            self.text_list[1], "center", text_width=self.width - self.id_width
+        )
         text_width = text_handle.get_text_index(self.text_list[0])
         self.text_list[0] += " " * (self.id_width - text_width)
         now_text = f"{self.text_list[0]}{self.text_list[1]}"
         now_text = now_text.rstrip()
-        now_text = text_handle.align(now_text,"center",text_width=self.width)
-        now_draw = draw.Button(now_text,str(self.button_id),cmd_func=self.change_clothing)
+        now_text = text_handle.align(now_text, "center", text_width=self.width)
+        now_draw = draw.Button(now_text, str(self.button_id), cmd_func=self.change_clothing)
         now_draw.width = self.width
         now_draw.draw()
 
     def change_clothing(self):
         """ 更换角色服装 """
         py_cmd.clr_cmd()
-        info_draw = ClothingDescribeDraw(self.clothing_data.tem_id,self.width)
+        info_draw = ClothingDescribeDraw(self.clothing_data.tem_id, self.width)
         info_draw.draw()
+        cache.character_data[0].put_on[self.clothing_type] = self.clothing_data.uid

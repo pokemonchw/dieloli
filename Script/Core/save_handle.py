@@ -11,7 +11,7 @@ from Script.Design import character_handle
 from Script.Config import normal_config
 
 game_path = game_path_config.game_path
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
@@ -47,7 +47,7 @@ def establish_save(save_id: str):
         "game_verson": normal_config.config_normal.verson,
         "game_time": cache.game_time,
         "character_name": cache.character_data[0].name,
-        "save_time":datetime.datetime.now()
+        "save_time": datetime.datetime.now(),
     }
     data = {
         "1": cache,
@@ -82,7 +82,7 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
     if not judge_save_file_exist(save_id):
         os.makedirs(save_path)
     with open(file_path, "wb") as f:
-        pickle.dump(write_data,f)
+        pickle.dump(write_data, f)
 
 
 def load_save(save_id: str) -> game_type.Cache:

@@ -58,7 +58,6 @@ class NpcTem:
         """ 性经验模板 """
 
 
-
 class Measurements:
     """ 三围数据结构体 """
 
@@ -442,7 +441,7 @@ class Character:
         """ 角色母语 """
         self.knowledge_interest: Dict[int, int] = {}
         """ 角色天赋数据 """
-        self.language_interest: Dict[int,int] = {}
+        self.language_interest: Dict[int, int] = {}
         """ 角色语言天赋数据 """
         self.dormitory: str = ""
         """ 角色宿舍坐标 """
@@ -466,7 +465,7 @@ class Character:
         """ 角色性格数据 """
         self.status: Dict[int, int] = {}
         """ 角色状态数据 状态id:状态数值 """
-        self.put_on: Dict[int,UUID] = {}
+        self.put_on: Dict[int, UUID] = {}
         """
         角色已穿戴服装数据
         穿着类型:服装id
@@ -485,6 +484,7 @@ class Character:
         """ 角色当前交互对象id """
         self.adv: int = 0
         """ 剧情npc校验 """
+
 
 class Cache:
     """ 游戏缓存数据结构体 """
@@ -524,7 +524,7 @@ class Cache:
     """ 流程用变量组 """
     place_data: Dict[str, List[str]] = {}
     """ 按房间类型分类的场景列表 场景标签:场景路径列表 """
-    back_save_panel:bool = 0
+    back_save_panel: bool = 0
     """ 退出存档面板 """
     wframe_mouse: WFrameMouse = WFrameMouse()
     """ 主页监听控制流程用变量组 """
@@ -538,11 +538,11 @@ class Cache:
     角色行为对应口上数据
     advid:行为id:口上id:口上对象
     """
+    cmd_map: Dict[int, object] = {}
+    """ cmd存储 """
 
     def __init__(self):
         """ 游戏预设配置数据 """
-        self.cmd_map: Dict[int, object] = {}
-        """ cmd存储 """
         self.character_data: Dict[int, Character] = {}
         """ 角色对象数据缓存组 """
         self.npc_tem_data: List[NpcTem] = []
@@ -573,32 +573,32 @@ class Cache:
         """ 游戏时间 """
         self.now_panel_id: int = 0
         """ 当前游面板id """
-        self.course_data: Dict[int,Dict[int,Dict[int,int]]] = {}
+        self.course_data: Dict[int, Dict[int, Dict[int, int]]] = {}
         """
         各个学校各年级各科目课时数据
         学校id:年级:科目id:每周课时
         """
-        self.course_time_table_data:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
+        self.course_time_table_data: Dict[int, Dict[int, Dict[int, Dict[int, int]]]] = {}
         """
         各个学校各年级课程表数据
         学校id:年级:周几:第几节课:科目id
         """
-        self.course_school_phase_knowledge_experience:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
+        self.course_school_phase_knowledge_experience: Dict[int, Dict[int, Dict[int, Dict[int, int]]]] = {}
         """
         各个学校各学年各技能理论增长经验总量
         学校id:年级:课程:技能:经验
         """
-        self.course_school_phase_language_experience:Dict[int,Dict[int,Dict[int,Dict[int,int]]]] = {}
+        self.course_school_phase_language_experience: Dict[int, Dict[int, Dict[int, Dict[int, int]]]] = {}
         """
         各个学校各学年各语言理论增长经验总量
         学校id:年级:课程:语言:经验
         """
-        self.teacher_course_experience: Dict[int,Dict[int,int]] = {}
+        self.teacher_course_experience: Dict[int, Dict[int, int]] = {}
         """
         教师科目经验
         科目id:教师id:经验
         """
-        self.classroom_teacher_data:Dict[str,Dict[str,Dict[int,Set]]] = {}
+        self.classroom_teacher_data: Dict[str, Dict[str, Dict[int, Set]]] = {}
         """
         各班级各科目教师配置数据
         年级房间标签(Classroom_n):教室路径:科目id:教师集合
@@ -637,7 +637,9 @@ class Cache:
         """ 角色行为结算处理器 """
         self.over_behavior_character: Dict[int, int] = {}
         """ 本次update中已结束结算的npc """
-        self.teacher_class_time_table: Dict[int, Dict[int, Dict[int, Dict[int, Dict[int,Dict[str,int]]]]]] = {}
+        self.teacher_class_time_table: Dict[
+            int, Dict[int, Dict[int, Dict[int, Dict[int, Dict[str, int]]]]]
+        ] = {}
         """
         各班级各老师上课时间表
         周几:学校id:年级id:上课时间:教师id:教室id:科目
@@ -651,9 +653,9 @@ class Cache:
         食堂内贩卖的食物数据
         食物名字:食物唯一id:食物对象
         """
-        self.npc_name_data:Set = set()
+        self.npc_name_data: Set = set()
         """ 已有的npc姓名集合 """
-        self.school_longitude:float = 0
+        self.school_longitude: float = 0
         """ 学校经度 """
-        self.school_latitude:float = 0
+        self.school_latitude: float = 0
         """ 学校纬度 """

@@ -102,9 +102,9 @@ config_height_tem_sex_data: Dict[int, config_def.HeightTem] = {}
 """ 性别对应身高预期值模板 """
 config_hitpoint_tem: Dict[int, config_def.HitPointTem] = {}
 """ HP模板对应平均值 """
-config_item: Dict[int,config_def.Item] = {}
+config_item: Dict[int, config_def.Item] = {}
 """ 道具配置数据 """
-config_item_tag_data: Dict[str,Set] = {}
+config_item_tag_data: Dict[str, Set] = {}
 """
 道具标签配置数据
 标签:道具id集合
@@ -127,33 +127,33 @@ config_language_family_data: Dict[int, Set] = {}
 """
 config_manapoint_tem: Dict[int, config_def.ManaPointTem] = {}
 """ MP模板对应平均值 """
-config_moon:Dict[int,config_def.Moon] = {}
+config_moon: Dict[int, config_def.Moon] = {}
 """ 月相配置 """
-config_moon_data: Dict[int,Set] = {}
+config_moon_data: Dict[int, Set] = {}
 """ 月相类型对应配置id集合 """
 config_nature: Dict[int, config_def.Nature] = {}
 """ 性格配置数据 """
 config_nature_tag: Dict[int, config_def.NatureTag] = {}
 """ 性格标签配置数据 """
-config_nature_tag_data:Dict[int,Set] = {}
+config_nature_tag_data: Dict[int, Set] = {}
 """ 性格标签下性格id配置数据 """
-config_occupation_age_region: Dict[int,config_def.OccupationAgeRegion] = {}
+config_occupation_age_region: Dict[int, config_def.OccupationAgeRegion] = {}
 """ 学生和老师各自年龄段生成概率配置 """
-config_occupation_age_region_data: Dict[str,Dict[int,int]] = {}
+config_occupation_age_region_data: Dict[str, Dict[int, int]] = {}
 """
 学生和老师各自年龄段生成概率配置
 职业id:年龄段:权重
 """
-config_occupation_bmi_region: Dict[int,config_def.OccupationBMIRegion] = {}
+config_occupation_bmi_region: Dict[int, config_def.OccupationBMIRegion] = {}
 """ 学生和老师各自bmi范围权重配置 """
-config_occupation_bmi_region_data: Dict[str,Dict[int,int]] = {}
+config_occupation_bmi_region_data: Dict[str, Dict[int, int]] = {}
 """
 学生和老师各自bmi范围权重配置数据
 职业id:bmi模板id:权重区间
 """
-config_occupation_bodyfat_region: Dict[int,config_def.OccupationBodyFatRegion] = {}
+config_occupation_bodyfat_region: Dict[int, config_def.OccupationBodyFatRegion] = {}
 """ 学生和老师各自体脂率范围配置 """
-config_occupation_bodyfat_region_data: Dict[str,Dict[int,Dict[int,int]]] = {}
+config_occupation_bodyfat_region_data: Dict[str, Dict[int, Dict[int, int]]] = {}
 """
 学生和老师各自肥胖率配置数据
 职业id:体重范围:体脂率范围:权重区间
@@ -171,13 +171,13 @@ config_recipes_formula: Dict[int, config_def.RecipesFormula] = {}
 """ 菜谱配方配置 """
 config_recipes_formula_type: Dict[int, config_def.RecipesFormulaType] = {}
 """ 菜谱配方材料类型配置 """
-config_recipes_formula_data: Dict[int,Dict[int,Set]] = {}
+config_recipes_formula_data: Dict[int, Dict[int, Set]] = {}
 """ 菜谱配方材料配置数据 """
 config_school: Dict[int, config_def.School] = {}
 """ 学校配置数据 """
-config_school_phase_course: Dict[int,config_def.SchoolPhaseCourse] = {}
+config_school_phase_course: Dict[int, config_def.SchoolPhaseCourse] = {}
 """ 各学校各年级科目配置 """
-config_school_phase_course_data:Dict[int,Dict[int,Set]] = {}
+config_school_phase_course_data: Dict[int, Dict[int, Set]] = {}
 """
 各学校各年级科目配置数据
 学校id:年级id:科目集合
@@ -189,7 +189,7 @@ config_school_session_data: Dict[int, Dict[int, int]] = {}
 学校上课时间配置数据
 学校id:课时编号:配表id
 """
-config_season:Dict[int,config_def.Season] = {}
+config_season: Dict[int, config_def.Season] = {}
 """ 季节配置数据 """
 config_sex_experience: Dict[int, config_def.SexExperience] = {}
 """ 性经验丰富程度模板对应器官性经验模板 """
@@ -209,14 +209,14 @@ config_sex_tem: Dict[int, config_def.SexTem] = {}
 """ 性别对应描述和性别器官模板 """
 config_sun_time: Dict[int, config_def.SunTime] = {}
 """ 太阳时间配置 """
-config_random_npc_sex_region: Dict[int,int] = {}
+config_random_npc_sex_region: Dict[int, int] = {}
 """
 生成随机npc时性别权重
 性别:权重
 """
 config_social_type: Dict[int, config_def.SocialType] = {}
 """ 关系类型配置数据 """
-config_solar_period:Dict[int,config_def.SolarPeriod] = {}
+config_solar_period: Dict[int, config_def.SolarPeriod] = {}
 """ 节气配置数据 """
 config_stature_description_premise: Dict[int, config_def.StatureDescriptionPremise] = {}
 """ 身材描述文本前提配置 """
@@ -518,7 +518,7 @@ def load_item():
         now_tem = config_def.Item()
         now_tem.__dict__ = tem_data
         config_item[now_tem.cid] = now_tem
-        config_item_tag_data.setdefault(now_tem.tag,set())
+        config_item_tag_data.setdefault(now_tem.tag, set())
         config_item_tag_data[now_tem.tag].add(now_tem.cid)
 
 
@@ -574,7 +574,7 @@ def load_moon():
         now_tem = config_def.Moon()
         now_tem.__dict__ = tem_data
         config_moon[now_tem.cid] = now_tem
-        config_moon_data.setdefault(now_tem.type,set())
+        config_moon_data.setdefault(now_tem.type, set())
         config_moon_data[now_tem.type].add(now_tem.cid)
 
 
@@ -586,7 +586,7 @@ def load_nature():
         now_tem = config_def.Nature()
         now_tem.__dict__ = tem_data
         config_nature[now_tem.cid] = now_tem
-        config_nature_tag_data.setdefault(now_tem.nature_type,set())
+        config_nature_tag_data.setdefault(now_tem.nature_type, set())
         config_nature_tag_data[now_tem.nature_type].add(now_tem.cid)
 
 
@@ -608,7 +608,7 @@ def load_occupation_age_region():
         now_tem = config_def.OccupationAgeRegion()
         now_tem.__dict__ = tem_data
         config_occupation_age_region[now_tem.cid] = now_tem
-        config_occupation_age_region_data.setdefault(now_tem.occupation,{})
+        config_occupation_age_region_data.setdefault(now_tem.occupation, {})
         config_occupation_age_region_data[now_tem.occupation][now_tem.age_region] = now_tem.region
 
 
@@ -620,7 +620,7 @@ def load_occupation_bmi_region():
         now_tem = config_def.OccupationBMIRegion()
         now_tem.__dict__ = tem_data
         config_occupation_bmi_region[now_tem.cid] = now_tem
-        config_occupation_bmi_region_data.setdefault(now_tem.occupation,{})
+        config_occupation_bmi_region_data.setdefault(now_tem.occupation, {})
         config_occupation_bmi_region_data[now_tem.occupation][now_tem.bmi_type] = now_tem.region
 
 
@@ -632,9 +632,11 @@ def load_occupation_bodyfat_region():
         now_tem = config_def.OccupationBodyFatRegion()
         now_tem.__dict__ = tem_data
         config_occupation_bodyfat_region[now_tem.cid] = now_tem
-        config_occupation_bodyfat_region_data.setdefault(now_tem.occupation,{})
-        config_occupation_bodyfat_region_data[now_tem.occupation].setdefault(now_tem.bmi_id,{})
-        config_occupation_bodyfat_region_data[now_tem.occupation][now_tem.bmi_id][now_tem.bodyfat_type] = now_tem.region
+        config_occupation_bodyfat_region_data.setdefault(now_tem.occupation, {})
+        config_occupation_bodyfat_region_data[now_tem.occupation].setdefault(now_tem.bmi_id, {})
+        config_occupation_bodyfat_region_data[now_tem.occupation][now_tem.bmi_id][
+            now_tem.bodyfat_type
+        ] = now_tem.region
 
 
 def load_organ_data():
@@ -667,8 +669,8 @@ def load_recipes_formula():
         now_tem = config_def.RecipesFormula()
         now_tem.__dict__ = tem_data
         config_recipes_formula[now_tem.cid] = now_tem
-        config_recipes_formula_data.setdefault(now_tem.recipe_id,{})
-        config_recipes_formula_data[now_tem.recipe_id].setdefault(now_tem.formula_type,set())
+        config_recipes_formula_data.setdefault(now_tem.recipe_id, {})
+        config_recipes_formula_data[now_tem.recipe_id].setdefault(now_tem.formula_type, set())
         config_recipes_formula_data[now_tem.recipe_id][now_tem.formula_type].add(now_tem.food_id)
 
 
@@ -700,8 +702,8 @@ def load_school_phase_course():
         now_tem = config_def.SchoolPhaseCourse()
         now_tem.__dict__ = tem_data
         config_school_phase_course[now_tem.cid] = now_tem
-        config_school_phase_course_data.setdefault(now_tem.school,{})
-        config_school_phase_course_data[now_tem.school].setdefault(now_tem.phase,set())
+        config_school_phase_course_data.setdefault(now_tem.school, {})
+        config_school_phase_course_data[now_tem.school].setdefault(now_tem.phase, set())
         config_school_phase_course_data[now_tem.school][now_tem.phase].add(now_tem.course)
 
 

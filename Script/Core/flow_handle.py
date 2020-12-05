@@ -11,7 +11,7 @@ from Script.Core import (
 )
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
@@ -177,7 +177,9 @@ def _cmd_valid(order_number):
     Keyword arguments:
     order_number -- 对应命令数字
     """
-    return (order_number in cmd_map) and (cmd_map[order_number] != null_func and cmd_map[order_number] != None)
+    return (order_number in cmd_map) and (
+        cmd_map[order_number] != null_func and cmd_map[order_number] != None
+    )
 
 
 __skip_flag__ = False
@@ -239,7 +241,7 @@ def askfor_str(donot_return_null_str=True, print_order=False):
             return order
 
 
-def askfor_all(input_list:list, print_order=False):
+def askfor_all(input_list: list, print_order=False):
     """
     用于请求一个位于列表中的输入，如果输入没有在列表中，则告知用户出错。
     Keyword arguments:

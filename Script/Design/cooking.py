@@ -2,11 +2,12 @@ import random
 import uuid
 from typing import Dict
 from Script.Core.game_type import Recipes, Food
-from Script.Core import constant, cache_control, value_handle,game_type
+from Script.Core import constant, cache_control, value_handle, game_type
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 def init_recipes():
     """ 初始化菜谱数据 """
@@ -232,9 +233,7 @@ def init_restaurant_data():
         recipes = cache.recipe_data[recipes_id]
         food_judge = True
         for food_id in recipes.base:
-            if food_id not in cache.restaurant_data or not len(
-                cache.restaurant_data[food_id]
-            ):
+            if food_id not in cache.restaurant_data or not len(cache.restaurant_data[food_id]):
                 food_judge = False
                 break
             food_id_list = list(cache.restaurant_data[food_id].keys())
@@ -244,9 +243,7 @@ def init_restaurant_data():
         if not food_judge:
             continue
         for food_id in recipes.ingredients:
-            if food_id not in cache.restaurant_data or not len(
-                cache.restaurant_data[food_id]
-            ):
+            if food_id not in cache.restaurant_data or not len(cache.restaurant_data[food_id]):
                 food_judge = False
                 break
             food_id_list = list(cache.restaurant_data[food_id].keys())
@@ -256,9 +253,7 @@ def init_restaurant_data():
         if not food_judge:
             continue
         for food_id in recipes.seasoning:
-            if food_id not in cache.restaurant_data or not len(
-                cache.restaurant_data[food_id]
-            ):
+            if food_id not in cache.restaurant_data or not len(cache.restaurant_data[food_id]):
                 food_judge = False
                 break
             food_id_list = list(cache.restaurant_data[food_id].keys())
@@ -314,10 +309,7 @@ def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type:
                     28 in food_feel_data
                     and not food_config.fruit
                     and food_config.eat
-                    and (
-                        27 not in food_feel_data
-                        or food_feel_data[28] > food_feel_data[27]
-                    )
+                    and (27 not in food_feel_data or food_feel_data[28] > food_feel_data[27])
                 ):
                     food_name = food_config.name
                     food_list.setdefault(food_name, set())
@@ -376,10 +368,7 @@ def get_restaurant_food_type_list_buy_food_type(food_type: str) -> dict:
                     28 in food_feel_data
                     and not food_config.fruit
                     and food_config.eat
-                    and (
-                        27 not in food_feel_data
-                        or food_feel_data[28] > food_feel_data[27]
-                    )
+                    and (27 not in food_feel_data or food_feel_data[28] > food_feel_data[27])
                 ):
                     food_list[food_id] = food_config.name
             else:

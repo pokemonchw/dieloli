@@ -11,7 +11,7 @@ clear_default_flow = flow_handle.clear_default_flow
 # 绑定或重新绑定一个命令
 bind_cmd = flow_handle.bind_cmd
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 # 输出命令

@@ -3,8 +3,9 @@ import numpy
 from Script.Core import cache_control, constant, game_type
 from Script.Config import game_config
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 def init_character_interest():
     """
@@ -29,7 +30,9 @@ def init_character_interest():
                     now_inter_value / knowledge_average
                 )
             else:
-                cache.character_data[character].knowledge_interest[knowledge] = now_knowledge_value_max / knowledge_average
+                cache.character_data[character].knowledge_interest[knowledge] = (
+                    now_knowledge_value_max / knowledge_average
+                )
         for language in language_skills:
             if language != language_skills[-1]:
                 now_interest_average = now_language_value_max / len(language_skills)
@@ -39,4 +42,6 @@ def init_character_interest():
                     now_inter_value / language_average
                 )
             else:
-                cache.character_data[character].language_interest[language] = now_language_value_max / language_average
+                cache.character_data[character].language_interest[language] = (
+                    now_language_value_max / language_average
+                )

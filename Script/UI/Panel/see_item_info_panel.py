@@ -1,11 +1,11 @@
 from typing import Dict
 from types import FunctionType
-from Script.Core import cache_control, text_handle,get_text,py_cmd,game_type
-from Script.UI.Moudle import panel,draw
-from Script.Config import game_config,normal_config
+from Script.Core import cache_control, text_handle, get_text, py_cmd, game_type
+from Script.UI.Moudle import panel, draw
+from Script.Config import game_config, normal_config
 
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
@@ -21,17 +21,17 @@ class SeeCharacterItemBagPanel:
     width -- 绘制宽度
     """
 
-    def __init__(self,character_id:int,width:int):
+    def __init__(self, character_id: int, width: int):
         """ 初始化绘制对象 """
-        self.character_id:int = character_id
+        self.character_id: int = character_id
         """ 绘制的角色id """
-        self.width:int = width
+        self.width: int = width
         """ 最大绘制宽度 """
-        self.return_list:List[str] = []
+        self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
         character_data = cache.character_data[character_id]
         item_list = list(character_data.item)
-        item_panel = panel.PageHandlePanel(item_list,ItemNameDraw,20,7,width,1,1,0,"","|")
+        item_panel = panel.PageHandlePanel(item_list, ItemNameDraw, 20, 7, width, 1, 1, 0, "", "|")
         self.handle_panel = item_panel
         """ 页面控制对象 """
 
@@ -56,21 +56,21 @@ class ItemNameDraw:
     butoon_id -- 数字按钮的id
     """
 
-    def __init__(self,text:str,width:int,is_button:bool,num_button:bool,button_id:int):
+    def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
         """ 初始化绘制对象 """
-        self.text:int = int(text)
+        self.text: int = int(text)
         """ 道具的配表id """
-        self.draw_text:str = ""
+        self.draw_text: str = ""
         """ 道具名绘制文本 """
-        self.width:int = width
+        self.width: int = width
         """ 最大宽度 """
-        self.is_button:bool = is_button
+        self.is_button: bool = is_button
         """ 绘制按钮 """
-        self.num_button:bool = num_button
+        self.num_button: bool = num_button
         """ 绘制数字按钮 """
-        self.button_id:int = button_id
+        self.button_id: int = button_id
         """ 数字按钮的id """
-        self.button_return:str = str(button_id)
+        self.button_return: str = str(button_id)
         """ 按钮返回值 """
         item_config = game_config.config_item[self.text]
         item_name = item_config.name
@@ -88,7 +88,7 @@ class ItemNameDraw:
     def draw(self):
         """ 绘制道具 """
         if self.is_button:
-            now_draw = draw.Button(self.draw_text,self.button_return,cmd_func=self.draw_item_info)
+            now_draw = draw.Button(self.draw_text, self.button_return, cmd_func=self.draw_item_info)
         else:
             now_draw = draw.NormalDraw()
             now_draw.text = self.draw_text
@@ -97,7 +97,7 @@ class ItemNameDraw:
 
     def draw_item_info(self):
         """ 绘制道具信息 """
-        now_draw = ItemInfoDraw(self.text,window_width)
+        now_draw = ItemInfoDraw(self.text, window_width)
         now_draw.draw()
 
 
@@ -109,11 +109,11 @@ class ItemInfoDraw:
     width -- 最大绘制宽度
     """
 
-    def __init__(self,cid:int,width:int):
+    def __init__(self, cid: int, width: int):
         """ 初始化绘制对象 """
-        self.cid:int = int(cid)
+        self.cid: int = int(cid)
         """ 道具的配表id """
-        self.width:int = width
+        self.width: int = width
         """ 最大宽度 """
 
     def draw(self):

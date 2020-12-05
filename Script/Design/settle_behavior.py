@@ -2,8 +2,9 @@ from functools import wraps
 from Script.Core import cache_control, constant, game_type
 from Script.Design import game_time, talk, map_handle, talk_cache
 
-cache:game_type.Cache = cache_control.cache
+cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+
 
 def handle_settle_behavior(character_id: int):
     """
@@ -11,9 +12,7 @@ def handle_settle_behavior(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    cache.settle_behavior_data[cache.character_data[character_id].behavior.behavior_id](
-        character_id
-    )
+    cache.settle_behavior_data[cache.character_data[character_id].behavior.behavior_id](character_id)
 
 
 def add_settle_behavior(behavior_id: int):
