@@ -51,10 +51,11 @@ class InScenePanel:
             5,
             self.width,
             1,
-            1,
             0,
+            null_button_text=character_data.target_character_id,
         )
         while 1:
+            character_handle_panel.null_button_text = character_data.target_character_id
             line_feed.draw()
             title_draw.draw()
             game_time_draw.draw()
@@ -67,4 +68,5 @@ class InScenePanel:
                 character_handle_panel.update()
                 character_handle_panel.draw()
                 ask_list.extend(character_handle_panel.return_list)
+            target_id = character_data.target_character_id
             flow_handle.askfor_all(ask_list)

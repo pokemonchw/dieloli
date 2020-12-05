@@ -437,6 +437,7 @@ class PageHandlePanel:
     button_start_id -- 数字按钮的开始id
     row_septal_lines -- 每行之间的间隔线,为空则不绘制
     col_septal_lines -- 每列之间的间隔线,为空则不绘制
+    null_button_text -- 不作为按钮绘制的文本
     """
 
     def __init__(
@@ -451,6 +452,7 @@ class PageHandlePanel:
         button_start_id: int = 0,
         row_septal_lines: str = "",
         col_septal_lines: str = "",
+        null_button_text: str = "",
     ):
         """ 初始化绘制对象 """
         self.text_list: List[str] = text_list
@@ -484,6 +486,8 @@ class PageHandlePanel:
         self.draw_type = draw_type
         self.draw_list: List[draw.NormalDraw] = []
         """ 绘制的对象列表 """
+        self.null_button_text: str = null_button_text
+        """ 不作为按钮绘制的文本 """
 
     def update(self):
         """ 更新绘制对象 """
@@ -519,7 +523,10 @@ class PageHandlePanel:
             col_fix_draw.width = 1
             draw_list.append(col_fix_draw)
             for value in draw_text_list:
-                value_draw = self.draw_type(value, value_width, self.is_button, self.num_button, index)
+                is_button = 1
+                if value == self.null_button_text:
+                    is_button = 0
+                value_draw = self.draw_type(value, value_width, is_button, self.num_button, index)
                 value_draw.draw_text = text_handle.align(value_draw.draw_text, "center", 0, 1, value_width)
                 if self.num_button:
                     self.return_list.append(str(index))

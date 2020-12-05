@@ -832,15 +832,18 @@ class SeeCharacterInfoByNameDraw:
                 index_text = text_handle.id_index(button_id)
                 button_text = f"{index_text} {character_name}"
                 name_draw = draw.CenterButton(
-                    button_text, self.button_return, self.width, cmd_func=self.see_social_character
+                    button_text, self.button_return, self.width, cmd_func=self.see_character
                 )
             else:
-                button_text = character_name
+                button_text = f"[{character_name}]"
                 name_draw = draw.CenterButton(
-                    button_text, character_name, self.width, cmd_func=self.see_social_character
+                    button_text, character_name, self.width, cmd_func=self.see_character
                 )
+                self.button_return = character_name
             self.draw_text = button_text
         else:
+            character_name = f"[{character_name}]"
+            character_name = text_handle.align(character_name, "center", 0, 1, self.width)
             name_draw.text = character_name
             self.draw_text = character_name
         name_draw.width = self.width
@@ -851,25 +854,25 @@ class SeeCharacterInfoByNameDraw:
         """ 绘制对象 """
         self.now_draw.draw()
 
-    def see_social_character(self):
-        """ 绘制社交角色信息 """
+    def see_character(self):
+        """ 绘制角色信息 """
         now_draw = SeeCharacterInfoOnSocialPanel(self.character_id, window_width)
         now_draw.draw()
 
 
 class SeeCharacterInfoByNameDrawInScene(SeeCharacterInfoByNameDraw):
-    """ 场景中点击后可查看角色属性的角色名字按钮对象 """
+    """ 场景中点击后切换目标角色的角色名字按钮对象 """
 
-    def see_social_character(self):
-        """ 绘制角色信息 """
-        character_data = cache.character_data[self.character_id]
-        scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
-        scene_data: game_type.Scene = cache.scene_data[scene_path_str]
-        character_list = list(scene_data.character_list)
-        character_list.remove(0)
-        now_draw = SeeCharacterInfoOnSocialPanel(self.character_id, window_width)
-        now_draw.now_draw = SeeCharacterInfoHandleInScene(self.character_id, window_width, character_list)
-        now_draw.draw()
+    def draw(self):
+        """ 绘制对象 """
+        if isinstance(self.now_draw, draw.NormalDraw):
+            self.now_draw.style = "onbutton"
+        self.now_draw.draw()
+
+    def see_character(self):
+        """ 切换目标角色 """
+        cache.character_data[0].target_character_id = self.character_id
+        py_cmd.clr_cmd()
 
 
 class SeeCharacterInfoOnSocialPanel:
