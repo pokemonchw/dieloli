@@ -248,6 +248,47 @@ class CenterDrawTextListPanel:
             io_init.era_print("\n")
 
 
+class LeftDrawTextListPanel:
+    """ 绘制一个列表并左对齐每个元素 """
+
+    def __init__(self):
+        """ 初始化绘制对象 """
+        self.width: int = 0
+        """ 面板宽度 """
+        self.column: int = 0
+        """ 每行最大元素数 """
+        self.draw_list: List[List[draw.LeftDraw]] = []
+        """ 绘制列表 """
+
+    def set(self, info_list: List[str], width: int, column: int):
+        """
+        设置绘制信息
+        Keyword arguments:
+        info_list -- 信息列表
+        width -- 绘制宽度
+        column -- 每行最大元素数
+        """
+        self.width = width
+        self.column = column
+        new_info_list = value_handle.list_of_groups(info_list, column)
+        for now_info_list in new_info_list:
+            now_width = int(width / len(now_info_list))
+            now_list = []
+            for now_info in now_info_list:
+                now_info_draw = draw.LeftDraw()
+                now_info_draw.width = now_width
+                now_info_draw.text = now_info
+                now_list.append(now_info_draw)
+            self.draw_list.append(now_list)
+
+    def draw(self):
+        """ 绘制面板 """
+        for now_list in self.draw_list:
+            for value in now_list:
+                value.draw()
+            io_init.era_print("\n")
+
+
 class DrawTextListPanel:
     """ 绘制一个对象列表 """
 

@@ -499,6 +499,8 @@ class LittleTitleLineDraw:
         """ 线条默认样式 """
         self.title_style = title_style
         """ 标题样式 """
+        self.line_feed:bool = True
+        """ 线尾换行 """
 
     def draw(self):
         """ 绘制线条 """
@@ -516,10 +518,11 @@ class LittleTitleLineDraw:
         line_b = NormalDraw()
         line_b.width = self.width - len(title_draw) - len(line_a)
         line_b.style = self.style
-        line_b.text = self.line * line_b.width
+        line_b.text = self.line * int(line_b.width)
         for value in [line_a, title_draw, line_b]:
             value.draw()
-        io_init.era_print("\n")
+        if self.line_feed:
+            io_init.era_print("\n")
 
 
 class CenterDraw(NormalDraw):
@@ -608,6 +611,26 @@ class RightDraw(NormalDraw):
             now_text = " " + self.text
         else:
             now_text = text_handle.align(self.text, "right", 0, 1, self.width)
+        io_init.era_print(now_text, self.style)
+
+
+class LeftDraw(NormalDraw):
+    """ 右对齐绘制文本 """
+
+    def draw(self):
+        """ 绘制文本 """
+        if len(self) > self.width:
+            now_text = ""
+            if self.width:
+                for i in self.text:
+                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                        now_text += i
+                    break
+                now_text = now_text[:-2] + "~"
+        elif len(self) > self.width - 2:
+            now_text = " " + self.text
+        else:
+            now_text = text_handle.align(self.text, "left", 0, 1, self.width)
         io_init.era_print(now_text, self.style)
 
 

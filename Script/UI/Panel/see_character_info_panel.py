@@ -142,7 +142,7 @@ class SeeCharacterStatusPanel:
     column -- 每行状态最大个数
     """
 
-    def __init__(self, character_id: int, width: int, column: int):
+    def __init__(self, character_id: int, width: int, column: int,center_status:bool=True):
         """ 初始化绘制对象 """
         self.character_id = character_id
         """ 要绘制的角色id """
@@ -154,6 +154,8 @@ class SeeCharacterStatusPanel:
         """ 绘制的文本列表 """
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
+        self.center_status:bool = center_status
+        """ 居中绘制状态文本 """
         character_data = cache.character_data[character_id]
         for status_type in game_config.config_character_state_type_data:
             type_data = game_config.config_character_state_type[status_type]
@@ -179,7 +181,10 @@ class SeeCharacterStatusPanel:
                 status_value = round(status_value)
                 now_text = f"{status_text}:{status_value}"
                 status_text_list.append(now_text)
-            now_draw = panel.CenterDrawTextListPanel()
+            if self.center_status:
+                now_draw = panel.CenterDrawTextListPanel()
+            else:
+                now_draw = panel.LeftDrawTextListPanel()
             now_draw.set(status_text_list, self.width, self.column)
             self.draw_list.extend(now_draw.draw_list)
 
@@ -225,6 +230,7 @@ class CharacterInfoHead:
         message_draw.text = message
         hp_draw = draw.InfoBarDraw()
         hp_draw.width = width / 2
+        hp_draw.scale = 0.8
         hp_draw.set(
             "HitPointbar",
             character_data.hit_point_max,
@@ -233,6 +239,7 @@ class CharacterInfoHead:
         )
         mp_draw = draw.InfoBarDraw()
         mp_draw.width = width / 2
+        mp_draw.scale = 0.8
         mp_draw.set(
             "ManaPointbar",
             character_data.mana_point_max,

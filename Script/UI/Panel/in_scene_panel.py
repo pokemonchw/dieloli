@@ -74,31 +74,48 @@ class InScenePanel:
                 ask_list.extend(character_handle_panel.return_list)
             character_info_draw_list = []
             if character_data.target_character_id:
-                character_head_draw = see_character_info_panel.CharacterInfoHead(character_data.cid,self.width / 2)
-                target_head_draw = see_character_info_panel.CharacterInfoHead(character_data.target_character_id,self.width/2)
+                character_head_draw = see_character_info_panel.CharacterInfoHead(character_data.cid,self.width)
+                target_head_draw = see_character_info_panel.CharacterInfoHead(character_data.target_character_id,self.width)
                 character_head_draw_list = [y for x in character_head_draw.draw_list for y in x]
                 character_head_draw_list[0].text += " " + character_head_draw_list[2].text
                 del character_head_draw_list[2]
-                for value in character_head_draw_list:
-                    if not isinstance(value,draw.InfoBarDraw):
-                        value.text = text_handle.align(value.text,"center",0,1,self.width / 2)
                 target_head_draw_list = [y for x in target_head_draw.draw_list for y in x]
                 target_head_draw_list[0].text += " " + target_head_draw_list[2].text
                 del target_head_draw_list[2]
-                for value in target_head_draw_list:
-                    if not isinstance(value,draw.InfoBarDraw):
-                        value.text = text_handle.align(value.text,"center",0,1,self.width / 2)
                 character_info_draw_list = list(zip(character_head_draw_list,target_head_draw_list))
             else:
                 character_head_draw = see_character_info_panel.CharacterInfoHead(character_data.cid,self.width)
                 character_info_draw_list = character_head_draw.draw_list
             for value_tuple in character_info_draw_list:
                 for value in value_tuple:
-                    if isinstance(value,draw.InfoBarDraw):
-                        value.scale = 0.8
-                        value.width = self.width / 2
-                        value.set(value.bar_id,value.max_value,value.value,value.text)
                     value.draw()
+                line_feed.draw()
+            character_status_draw_list = []
+            if character_data.target_character_id:
+                character_status_draw = see_character_info_panel.SeeCharacterStatusPanel(character_data.cid,self.width / 2,3,0)
+                target_status_draw = see_character_info_panel.SeeCharacterStatusPanel(character_data.target_character_id,self.width/2-1,3,0)
+                character_status_draw_list = list(zip(character_status_draw.draw_list,target_status_draw.draw_list))
+            for label in character_status_draw_list:
+                if isinstance(label,tuple):
+                    index = 0
+                    for value in label:
+                        if isinstance(value,list):
+                            for value_draw in value:
+                                value_draw.draw()
+                        else:
+                            value.line_feed = 0
+                            value.draw()
+                        if not index:
+                            fix_draw = draw.NormalDraw()
+                            fix_draw.width = 4
+                            fix_draw.text = "|"
+                            fix_draw.draw()
+                            index = 1
+                elif isinstance(label,list):
+                    for value in label:
+                        value.draw()
+                else:
+                    label.draw()
                 line_feed.draw()
             target_id = character_data.target_character_id
             flow_handle.askfor_all(ask_list)

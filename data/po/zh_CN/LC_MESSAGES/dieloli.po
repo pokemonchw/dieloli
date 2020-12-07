@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 11:53+0800\n"
+"POT-Creation-Date: 2020-12-07 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -396,7 +396,7 @@ msgstr ""
 
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
 #: ../Script/UI/Panel/see_save_info_panel.py:60
-#: ../Script/UI/Panel/see_save_info_panel.py:168
+#: ../Script/UI/Panel/see_save_info_panel.py:169
 #: ../Script/UI/Panel/see_character_info_panel.py:904
 #: ../Script/UI/Panel/see_character_info_panel.py:944
 #: ../Script/UI/Panel/get_up_panel.py:92
@@ -431,27 +431,27 @@ msgstr ""
 msgid "存档列表"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:100
+#: ../Script/UI/Panel/see_save_info_panel.py:101
 msgid "空存档位"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:105
+#: ../Script/UI/Panel/see_save_info_panel.py:106
 msgid "游戏时间:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:106
+#: ../Script/UI/Panel/see_save_info_panel.py:107
 msgid "存档时间:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:141
+#: ../Script/UI/Panel/see_save_info_panel.py:142
 msgid "读取"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:150
+#: ../Script/UI/Panel/see_save_info_panel.py:151
 msgid "覆盖"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:161
+#: ../Script/UI/Panel/see_save_info_panel.py:162
 msgid "删除"
 msgstr ""
 
