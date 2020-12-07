@@ -161,6 +161,10 @@ class InfoBarDraw:
         """ 比例条绘制对象列表 """
         self.scale: float = 1
         """ 比例条绘制区域占比 """
+        self.max_value:int = 0
+        """ 最大数值 """
+        self.value:int = 0
+        """ 当前数值 """
 
     def set(self, bar_id: str, max_value: int, value: int, text: str):
         """
@@ -171,6 +175,9 @@ class InfoBarDraw:
         value -- 当前数值
         text -- 描述文本
         """
+        self.text = text
+        self.max_value = max_value
+        self.value = value
         now_max_width = int(self.width * self.scale)
         info_draw = NormalDraw()
         info_draw.width = int(now_max_width / 3)

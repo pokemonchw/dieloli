@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-30 17:30+0800\n"
+"POT-Creation-Date: 2020-12-07 11:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,285 +21,285 @@ msgstr ""
 msgid "python3版本过旧(低于python3.8.6),请升级"
 msgstr ""
 
-#: ../Script/Core/flow_handle.py:260 ../Script/Core/flow_handle.py:281
+#: ../Script/Core/flow_handle.py:262 ../Script/Core/flow_handle.py:283
 msgid "您输入的选项无效，请重试\n"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:161
+#: ../Script/UI/Moudle/panel.py:162
 #, python-brace-format
 msgid "输入的字符超长，最大{input_max}个英文字符，请重试。"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:510
+#: ../Script/UI/Moudle/panel.py:547
 #, python-brace-format
 msgid "{old_page_index_text} 上一页"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:519
+#: ../Script/UI/Moudle/panel.py:561
 #, python-brace-format
 msgid "{next_page_index_text} 下一页"
 msgstr ""
 
-#: ../Script/UI/Flow/title_flow.py:29
+#: ../Script/UI/Flow/title_flow.py:30
 msgid "人类是可以被驯化的"
 msgstr ""
 
-#: ../Script/UI/Flow/title_flow.py:39
+#: ../Script/UI/Flow/title_flow.py:40
 msgid "开始游戏"
 msgstr ""
 
-#: ../Script/UI/Flow/title_flow.py:39
+#: ../Script/UI/Flow/title_flow.py:40
 msgid "读取存档"
 msgstr ""
 
-#: ../Script/UI/Flow/title_flow.py:39
+#: ../Script/UI/Flow/title_flow.py:40
 msgid "退出游戏"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:74
+#: ../Script/UI/Flow/creator_character_flow.py:77
 msgid "就这样开始新的人生吧"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:74
+#: ../Script/UI/Flow/creator_character_flow.py:77
 msgid "重头再来一次"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:84
+#: ../Script/UI/Flow/creator_character_flow.py:87
 msgid "就这样了可以吗?"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:104
+#: ../Script/UI/Flow/creator_character_flow.py:107
 msgid "请问能告诉我你的名字吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:108
+#: ../Script/UI/Flow/creator_character_flow.py:111
 msgid "角色名不能为纯数字，请重新输入\n"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:110
+#: ../Script/UI/Flow/creator_character_flow.py:113
 msgid "角色名不能为系统保留字，请重新输入\n"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:112
+#: ../Script/UI/Flow/creator_character_flow.py:115
 msgid "已有角色使用该姓名，请重新输入\n"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:140
-#: ../Script/UI/Flow/creator_character_flow.py:141
+#: ../Script/UI/Flow/creator_character_flow.py:143
+#: ../Script/UI/Flow/creator_character_flow.py:144
 #, python-brace-format
 msgid "该怎么称呼{character_name}好呢？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:145
+#: ../Script/UI/Flow/creator_character_flow.py:148
 msgid "角色昵称不能为纯数字，请重新输入"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:147
+#: ../Script/UI/Flow/creator_character_flow.py:150
 msgid "角色昵称不能为系统保留字，请重新输入"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:171
+#: ../Script/UI/Flow/creator_character_flow.py:173
 msgid "随机"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:173
+#: ../Script/UI/Flow/creator_character_flow.py:176
 #, python-brace-format
 msgid "那么{character_nick_name}的性别是？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:195
-#: ../Script/UI/Flow/creator_character_flow.py:305
-#: ../Script/UI/Flow/creator_character_flow.py:431
+#: ../Script/UI/Flow/creator_character_flow.py:199
+#: ../Script/UI/Flow/creator_character_flow.py:315
 #: ../Script/UI/Flow/creator_character_flow.py:445
 #: ../Script/UI/Flow/creator_character_flow.py:459
 #: ../Script/UI/Flow/creator_character_flow.py:473
 #: ../Script/UI/Flow/creator_character_flow.py:487
+#: ../Script/UI/Flow/creator_character_flow.py:503
 msgid "是"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:195
+#: ../Script/UI/Flow/creator_character_flow.py:199
 msgid "否"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:198
+#: ../Script/UI/Flow/creator_character_flow.py:203
 #, python-brace-format
 msgid ""
 "是否需要设置详细属性呢？将会随机抽取十道题目供{character_nick_name}进行选择。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:245
+#: ../Script/UI/Flow/creator_character_flow.py:253
 #, python-brace-format
 msgid "{character_nick_name}是一个小孩子吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:247
+#: ../Script/UI/Flow/creator_character_flow.py:255
 msgid "嘎呜～嘎呜～"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:248
+#: ../Script/UI/Flow/creator_character_flow.py:256
 msgid "才，才不是小孩子！"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:249
+#: ../Script/UI/Flow/creator_character_flow.py:257
 msgid "已经成年了哦～"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:250
+#: ../Script/UI/Flow/creator_character_flow.py:258
 msgid "我也想回到小时候呢～"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:251
+#: ../Script/UI/Flow/creator_character_flow.py:259
 msgid "你说什么？我听不清～"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:265
+#: ../Script/UI/Flow/creator_character_flow.py:273
 #, python-brace-format
 msgid "{character_nick_name}对自己的体重有自信吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:267
+#: ../Script/UI/Flow/creator_character_flow.py:275
 msgid "很轻，就像一张纸一样，风一吹就能飘起来。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:268
+#: ../Script/UI/Flow/creator_character_flow.py:276
 msgid "普普通通，健康的身材。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:269
+#: ../Script/UI/Flow/creator_character_flow.py:277
 msgid "略沉，不过从外表不怎么能够看得出来。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:270
+#: ../Script/UI/Flow/creator_character_flow.py:278
 msgid "肉眼可辨的比别人要胖很多。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:271
+#: ../Script/UI/Flow/creator_character_flow.py:279
 msgid "人类的极限，看上去像是相扑选手一样。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:285
+#: ../Script/UI/Flow/creator_character_flow.py:293
 #, python-brace-format
 msgid "{character_nick_name}是否有过性经验呢？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:287
+#: ../Script/UI/Flow/creator_character_flow.py:295
 msgid "性经验什么的完全没有过，你在问什么呢！变态！"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:288
+#: ../Script/UI/Flow/creator_character_flow.py:296
 msgid "只有极少的性经验哦，说是纯情也不为过。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:289
+#: ../Script/UI/Flow/creator_character_flow.py:297
 msgid "大概只是普通的程度吧？不多也不少的样子。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:290
+#: ../Script/UI/Flow/creator_character_flow.py:298
 msgid "经验非常丰富，特别有技巧哦，哼哼。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:304
+#: ../Script/UI/Flow/creator_character_flow.py:312
 #, python-brace-format
 msgid "{character_nick_name}是否是一个有话就说，从来不憋在心里的人呢？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:305
-#: ../Script/UI/Flow/creator_character_flow.py:403
-#: ../Script/UI/Flow/creator_character_flow.py:431
+#: ../Script/UI/Flow/creator_character_flow.py:315
+#: ../Script/UI/Flow/creator_character_flow.py:417
 #: ../Script/UI/Flow/creator_character_flow.py:445
 #: ../Script/UI/Flow/creator_character_flow.py:459
 #: ../Script/UI/Flow/creator_character_flow.py:473
 #: ../Script/UI/Flow/creator_character_flow.py:487
+#: ../Script/UI/Flow/creator_character_flow.py:503
 msgid "不是"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:318
+#: ../Script/UI/Flow/creator_character_flow.py:328
 #, python-brace-format
 msgid "{character_nick_name}在参加聚会时，会很自然的融入进人群里吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:319
-#: ../Script/UI/Flow/creator_character_flow.py:347
-#: ../Script/UI/Flow/creator_character_flow.py:361
-#: ../Script/UI/Flow/creator_character_flow.py:375
-#: ../Script/UI/Flow/creator_character_flow.py:389
-#: ../Script/UI/Flow/creator_character_flow.py:417
+#: ../Script/UI/Flow/creator_character_flow.py:331
+#: ../Script/UI/Flow/creator_character_flow.py:359
+#: ../Script/UI/Flow/creator_character_flow.py:373
+#: ../Script/UI/Flow/creator_character_flow.py:387
+#: ../Script/UI/Flow/creator_character_flow.py:401
+#: ../Script/UI/Flow/creator_character_flow.py:431
 msgid "会"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:319
-#: ../Script/UI/Flow/creator_character_flow.py:361
-#: ../Script/UI/Flow/creator_character_flow.py:375
-#: ../Script/UI/Flow/creator_character_flow.py:389
-#: ../Script/UI/Flow/creator_character_flow.py:417
+#: ../Script/UI/Flow/creator_character_flow.py:331
+#: ../Script/UI/Flow/creator_character_flow.py:373
+#: ../Script/UI/Flow/creator_character_flow.py:387
+#: ../Script/UI/Flow/creator_character_flow.py:401
+#: ../Script/UI/Flow/creator_character_flow.py:431
 msgid "不会"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:332
+#: ../Script/UI/Flow/creator_character_flow.py:344
 #, python-brace-format
 msgid "{character_nick_name}有憧憬过未来的人生吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:333
+#: ../Script/UI/Flow/creator_character_flow.py:345
 msgid "有"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:333
+#: ../Script/UI/Flow/creator_character_flow.py:345
 msgid "没有"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:346
+#: ../Script/UI/Flow/creator_character_flow.py:358
 msgid "承诺过的事情就一定要做到？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:347
+#: ../Script/UI/Flow/creator_character_flow.py:359
 msgid "视情况而定"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:360
+#: ../Script/UI/Flow/creator_character_flow.py:372
 msgid "考虑问题时会顾及到别人的利益吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:374
+#: ../Script/UI/Flow/creator_character_flow.py:386
 msgid "关心别人的时候会让自己感到快乐？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:388
+#: ../Script/UI/Flow/creator_character_flow.py:400
 msgid "对于自己的任务，会一丝不苟的去完成吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:402
+#: ../Script/UI/Flow/creator_character_flow.py:414
 #, python-brace-format
 msgid "{character_nick_name}是一个即使不会被发现，也绝不弄虚作假的人吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:403
+#: ../Script/UI/Flow/creator_character_flow.py:417
 msgid "当然"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:416
+#: ../Script/UI/Flow/creator_character_flow.py:430
 msgid "即使在一些很随便的场合，也会表现得很严肃对吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:430
+#: ../Script/UI/Flow/creator_character_flow.py:444
 #, python-brace-format
 msgid "{character_nick_name}总是很轻率的做出了决定对吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:444
+#: ../Script/UI/Flow/creator_character_flow.py:458
 msgid "不会轻易的放弃自己的理想？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:458
+#: ../Script/UI/Flow/creator_character_flow.py:472
 #, python-brace-format
 msgid "喜欢多与对{character_nick_name}有利的人交往对吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:472
+#: ../Script/UI/Flow/creator_character_flow.py:486
 msgid "对工作会倾注全部的热情？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:486
+#: ../Script/UI/Flow/creator_character_flow.py:500
 #, python-brace-format
 msgid "{character_nick_name}是一个心直口快，想到什么说什么的人对吗？"
 msgstr ""
@@ -308,118 +308,156 @@ msgstr ""
 msgid "人物服装"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:55
+#: ../Script/UI/Panel/see_clothing_info_panel.py:64
 msgid "未穿戴"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:95
+#: ../Script/UI/Panel/see_clothing_info_panel.py:161
+#: ../Script/UI/Panel/see_clothing_info_panel.py:302
 msgid "可爱"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:96
+#: ../Script/UI/Panel/see_clothing_info_panel.py:162
+#: ../Script/UI/Panel/see_clothing_info_panel.py:303
 msgid "性感"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:97
+#: ../Script/UI/Panel/see_clothing_info_panel.py:163
+#: ../Script/UI/Panel/see_clothing_info_panel.py:304
 msgid "帅气"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:98
+#: ../Script/UI/Panel/see_clothing_info_panel.py:164
+#: ../Script/UI/Panel/see_clothing_info_panel.py:305
 msgid "清新"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:99
+#: ../Script/UI/Panel/see_clothing_info_panel.py:165
+#: ../Script/UI/Panel/see_clothing_info_panel.py:306
 msgid "典雅"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:100
+#: ../Script/UI/Panel/see_clothing_info_panel.py:166
+#: ../Script/UI/Panel/see_clothing_info_panel.py:307
 msgid "清洁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:101
+#: ../Script/UI/Panel/see_clothing_info_panel.py:167
+#: ../Script/UI/Panel/see_clothing_info_panel.py:308
 msgid "保暖"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:104
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
 msgid "可爱的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:105
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
 msgid "性感的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:106
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
 msgid "帅气的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:107
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
 msgid "清新的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:108
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
 msgid "典雅的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:109
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
 msgid "清洁的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:110
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
 msgid "保暖的"
+msgstr ""
+
+#: ../Script/UI/Panel/see_clothing_info_panel.py:244
+msgid "更衣室"
+msgstr ""
+
+#: ../Script/UI/Panel/see_clothing_info_panel.py:251
+#: ../Script/UI/Panel/see_save_info_panel.py:60
+#: ../Script/UI/Panel/see_character_info_panel.py:904
+#: ../Script/UI/Panel/see_character_info_panel.py:944
+#: ../Script/UI/Panel/get_up_panel.py:92
+msgid "[返回]"
+msgstr ""
+
+#: ../Script/UI/Panel/see_clothing_info_panel.py:251
+#: ../Script/UI/Panel/see_save_info_panel.py:60
+#: ../Script/UI/Panel/see_save_info_panel.py:168
+#: ../Script/UI/Panel/see_character_info_panel.py:904
+#: ../Script/UI/Panel/see_character_info_panel.py:944
+#: ../Script/UI/Panel/get_up_panel.py:92
+msgid "返回"
+msgstr ""
+
+#: ../Script/UI/Panel/see_clothing_info_panel.py:259
+msgid "空无一物"
+msgstr ""
+
+#: ../Script/UI/Panel/see_clothing_info_panel.py:319
+msgid "(已穿戴)"
 msgstr ""
 
 #: ../Script/UI/Panel/see_item_info_panel.py:40
 msgid "人物道具"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:38
+#: ../Script/UI/Panel/in_scene_panel.py:31
+msgid "场景"
+msgstr ""
+
+#: ../Script/UI/Panel/in_scene_panel.py:42
+msgid "当前位置:"
+msgstr ""
+
+#: ../Script/UI/Panel/in_scene_panel.py:47
+msgid "你在这里遇到了:"
+msgstr ""
+
+#: ../Script/UI/Panel/see_save_info_panel.py:54
 msgid "存档列表"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:43
-#: ../Script/UI/Panel/see_character_info_panel.py:844
-#: ../Script/UI/Panel/see_character_info_panel.py:876
-#: ../Script/UI/Panel/get_up_panel.py:78
-msgid "[返回]"
-msgstr ""
-
-#: ../Script/UI/Panel/see_save_info_panel.py:43
-#: ../Script/UI/Panel/see_save_info_panel.py:139
-#: ../Script/UI/Panel/see_character_info_panel.py:844
-#: ../Script/UI/Panel/see_character_info_panel.py:876
-#: ../Script/UI/Panel/get_up_panel.py:78
-msgid "返回"
-msgstr ""
-
-#: ../Script/UI/Panel/see_save_info_panel.py:83
+#: ../Script/UI/Panel/see_save_info_panel.py:100
 msgid "空存档位"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:88
-#, python-brace-format
-msgid "游戏时间:{game_year}年{game_month}月{game_day}日"
+#: ../Script/UI/Panel/see_save_info_panel.py:105
+msgid "游戏时间:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:89
-#, python-brace-format
-msgid "存档时间:{save_year}年{save_month}月{save_day}日"
+#: ../Script/UI/Panel/see_save_info_panel.py:106
+msgid "存档时间:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:121
+#: ../Script/UI/Panel/see_save_info_panel.py:141
 msgid "读取"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:128
+#: ../Script/UI/Panel/see_save_info_panel.py:150
 msgid "覆盖"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:134
+#: ../Script/UI/Panel/see_save_info_panel.py:161
 msgid "删除"
 msgstr ""
 
 #: ../Script/UI/Panel/see_character_info_panel.py:37
 #: ../Script/UI/Panel/see_character_info_panel.py:52
-#: ../Script/UI/Panel/see_character_info_panel.py:877
+#: ../Script/UI/Panel/see_character_info_panel.py:945
 msgid "属性"
 msgstr ""
 
@@ -451,195 +489,187 @@ msgstr ""
 msgid "社交"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:174
+#: ../Script/UI/Panel/see_character_info_panel.py:188
 msgid "人物状态"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:203
+#: ../Script/UI/Panel/see_character_info_panel.py:217
 #, python-brace-format
 msgid ""
 "No.{character_id} 姓名:{character_name} 称呼:{character_nick_name} 性别:"
 "{sex_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:213
+#: ../Script/UI/Panel/see_character_info_panel.py:232
 msgid "体力"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:221
+#: ../Script/UI/Panel/see_character_info_panel.py:240
 msgid "气力"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:226
+#: ../Script/UI/Panel/see_character_info_panel.py:245
 #, python-brace-format
 msgid "状态:{status_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:236
+#: ../Script/UI/Panel/see_character_info_panel.py:255
 msgid "人物属性"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:295
-#: ../Script/UI/Panel/see_character_info_panel.py:308
-#: ../Script/UI/Panel/see_character_info_panel.py:317
+#: ../Script/UI/Panel/see_character_info_panel.py:315
+#: ../Script/UI/Panel/see_character_info_panel.py:328
+#: ../Script/UI/Panel/see_character_info_panel.py:337
 msgid "暂无"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:299
+#: ../Script/UI/Panel/see_character_info_panel.py:319
 msgid "宿舍位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:302
+#: ../Script/UI/Panel/see_character_info_panel.py:322
 msgid "教室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:312
+#: ../Script/UI/Panel/see_character_info_panel.py:332
 msgid "办公室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:345
+#: ../Script/UI/Panel/see_character_info_panel.py:365
 #, python-brace-format
 msgid "年龄:{character_age}岁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:346
+#: ../Script/UI/Panel/see_character_info_panel.py:366
 #, python-brace-format
 msgid "生日:{birthday_month}月{birthday_day}日"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:374
+#: ../Script/UI/Panel/see_character_info_panel.py:397
 msgid "身高"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:376
+#: ../Script/UI/Panel/see_character_info_panel.py:399
 msgid "体重"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:379
+#: ../Script/UI/Panel/see_character_info_panel.py:402
 msgid "罩杯:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:413
+#: ../Script/UI/Panel/see_character_info_panel.py:436
 msgid "胸围:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:414
+#: ../Script/UI/Panel/see_character_info_panel.py:437
 msgid "腰围:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:415
+#: ../Script/UI/Panel/see_character_info_panel.py:438
 msgid "臀围"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:443
+#: ../Script/UI/Panel/see_character_info_panel.py:467
 msgid "嘴部开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:444
+#: ../Script/UI/Panel/see_character_info_panel.py:468
 msgid "胸部开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:445
+#: ../Script/UI/Panel/see_character_info_panel.py:469
 msgid "阴蒂开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:446
+#: ../Script/UI/Panel/see_character_info_panel.py:470
 msgid "阴茎开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:447
+#: ../Script/UI/Panel/see_character_info_panel.py:471
 msgid "阴道开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:448
+#: ../Script/UI/Panel/see_character_info_panel.py:472
 msgid "肛门开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:521
+#: ../Script/UI/Panel/see_character_info_panel.py:545
 msgid "人物技能"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:560
+#: ../Script/UI/Panel/see_character_info_panel.py:587
 msgid "人物语言"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:707
+#: ../Script/UI/Panel/see_character_info_panel.py:736
 msgid "人物性格"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:746
+#: ../Script/UI/Panel/see_character_info_panel.py:780
 msgid "空无一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:751
+#: ../Script/UI/Panel/see_character_info_panel.py:785
 msgid "人物社交"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:874
+#: ../Script/UI/Panel/see_character_info_panel.py:939
 msgid "[上一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:874
+#: ../Script/UI/Panel/see_character_info_panel.py:939
 msgid "上一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:875
+#: ../Script/UI/Panel/see_character_info_panel.py:942
 msgid "[下一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:875
+#: ../Script/UI/Panel/see_character_info_panel.py:942
 msgid "下一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:941
+#: ../Script/UI/Panel/see_character_info_panel.py:1010
 #, python-brace-format
 msgid "性别:{sex_config.name}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:942
+#: ../Script/UI/Panel/see_character_info_panel.py:1011
 #, python-brace-format
 msgid "年龄:{character_data.age}岁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:943
+#: ../Script/UI/Panel/see_character_info_panel.py:1012
 #, python-brace-format
 msgid "体力:({character_data.hit_point}/{character_data.hit_point_max})"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:944
+#: ../Script/UI/Panel/see_character_info_panel.py:1013
 #, python-brace-format
 msgid "气力:({character_data.mana_point}/{character_data.mana_point_max})"
 msgstr ""
 
-#: ../Script/UI/Panel/get_up_panel.py:37
+#: ../Script/UI/Panel/get_up_panel.py:35
 msgid "主页"
 msgstr ""
 
-#: ../Script/UI/Panel/get_up_panel.py:49
+#: ../Script/UI/Panel/get_up_panel.py:47
 msgid "游戏菜单"
 msgstr ""
 
-#: ../Script/UI/Panel/get_up_panel.py:51
+#: ../Script/UI/Panel/get_up_panel.py:49
 msgid "[000]睁眼起床"
 msgstr ""
 
-#: ../Script/UI/Panel/get_up_panel.py:53
+#: ../Script/UI/Panel/get_up_panel.py:52
 msgid "[001]查看属性"
 msgstr ""
 
 #: ../Script/UI/Panel/get_up_panel.py:56
-msgid "系统菜单"
+msgid "[002]读写存档"
 msgstr ""
 
-#: ../Script/UI/Panel/get_up_panel.py:58
-msgid "[002]保存游戏"
-msgstr ""
-
-#: ../Script/UI/Panel/get_up_panel.py:60
-msgid "[003]载入游戏"
-msgstr ""
-
-#: ../Script/UI/Panel/get_up_panel.py:71
+#: ../Script/UI/Panel/get_up_panel.py:74
 msgid "角色列表"
 msgstr ""
 

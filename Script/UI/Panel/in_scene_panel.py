@@ -1,7 +1,7 @@
 from types import FunctionType
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import game_info_panel, see_character_info_panel
-from Script.Core import get_text, cache_control, game_type, flow_handle
+from Script.Core import get_text, cache_control, game_type, flow_handle, text_handle,value_handle
 from Script.Design import attr_text, map_handle
 
 cache: game_type.Cache = cache_control.cache
@@ -32,6 +32,10 @@ class InScenePanel:
         character_data: game_type.Character = cache.character_data[0]
         scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
         scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+        if not character_data.target_character_id and len(scene_data.character_list):
+            character_list = list(scene_data.character_list)
+            character_list.remove(0)
+            character_data.target_character_id = character_list[0]
         game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
         game_time_draw.now_draw.width = len(game_time_draw)
         position_text = attr_text.get_scene_path_text(character_data.position)
@@ -68,5 +72,33 @@ class InScenePanel:
                 character_handle_panel.update()
                 character_handle_panel.draw()
                 ask_list.extend(character_handle_panel.return_list)
+            character_info_draw_list = []
+            if character_data.target_character_id:
+                character_head_draw = see_character_info_panel.CharacterInfoHead(character_data.cid,self.width / 2)
+                target_head_draw = see_character_info_panel.CharacterInfoHead(character_data.target_character_id,self.width/2)
+                character_head_draw_list = [y for x in character_head_draw.draw_list for y in x]
+                character_head_draw_list[0].text += " " + character_head_draw_list[2].text
+                del character_head_draw_list[2]
+                for value in character_head_draw_list:
+                    if not isinstance(value,draw.InfoBarDraw):
+                        value.text = text_handle.align(value.text,"center",0,1,self.width / 2)
+                target_head_draw_list = [y for x in target_head_draw.draw_list for y in x]
+                target_head_draw_list[0].text += " " + target_head_draw_list[2].text
+                del target_head_draw_list[2]
+                for value in target_head_draw_list:
+                    if not isinstance(value,draw.InfoBarDraw):
+                        value.text = text_handle.align(value.text,"center",0,1,self.width / 2)
+                character_info_draw_list = list(zip(character_head_draw_list,target_head_draw_list))
+            else:
+                character_head_draw = see_character_info_panel.CharacterInfoHead(character_data.cid,self.width)
+                character_info_draw_list = character_head_draw.draw_list
+            for value_tuple in character_info_draw_list:
+                for value in value_tuple:
+                    if isinstance(value,draw.InfoBarDraw):
+                        value.scale = 0.8
+                        value.width = self.width / 2
+                        value.set(value.bar_id,value.max_value,value.value,value.text)
+                    value.draw()
+                line_feed.draw()
             target_id = character_data.target_character_id
             flow_handle.askfor_all(ask_list)
