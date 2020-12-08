@@ -357,13 +357,9 @@ class CenterButton:
                 now_text = now_text[:-2] + "~"
         else:
             now_index = text_handle.get_text_index(self.text)
-            now_text = self.text
-            if now_index == self.width - 1:
-                now_text = " " + now_text
-            elif now_index == self.width - 2:
-                now_text = " " + now_text + " "
-            else:
-                now_text = text_handle.align(now_text, "center", 0, 1, self.width)
+            now_text = text_handle.align(self.text, "center", 0, 1, self.width)
+            now_width = self.width - text_handle.get_text_index(now_text)
+            now_text = " " * int(now_width) + now_text
         py_cmd.pcmd(
             now_text,
             self.return_text,

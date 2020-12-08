@@ -157,3 +157,36 @@ class Premise:
     """ 玩家是爱慕对象 """
     EAT_SPRING_FOOD = 43
     """ 食用了春药品质的食物 """
+
+
+class InstructType:
+    """ 指令类型 """
+
+    DIALOGUE = 0
+    """ 对话 """
+    ACTIVE = 1
+    """ 主动 """
+    PASSIVE = 2
+    """ 被动 """
+    PERFORM = 3
+    """ 表演 """
+    OBSCENITY = 4
+    """ 猥亵 """
+    PLAY = 5
+    """ 娱乐 """
+    BATTLE = 6
+    """ 战斗 """
+    STUDY = 7
+    """ 学习 """
+    REST = 8
+    """ 休息 """
+
+class Instruct:
+    """ 指令id """
+
+    REST = 0
+    """ 休息 """
+    BUY_FOOD = 1
+    """ 购买食物 """
+    EAT = 2
+    """ 进食 """

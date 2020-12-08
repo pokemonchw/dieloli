@@ -102,6 +102,8 @@ config_height_tem_sex_data: Dict[int, config_def.HeightTem] = {}
 """ 性别对应身高预期值模板 """
 config_hitpoint_tem: Dict[int, config_def.HitPointTem] = {}
 """ HP模板对应平均值 """
+config_instruct_type: Dict[int,config_def.InstructType] = {}
+""" 指令类型配置 """
 config_item: Dict[int, config_def.Item] = {}
 """ 道具配置数据 """
 config_item_tag_data: Dict[str, Set] = {}
@@ -510,6 +512,16 @@ def load_hitpoint_tem():
         config_hitpoint_tem[now_tem.cid] = now_tem
 
 
+def load_instruct_type():
+    """ 载入指令类型配置数据 """
+    now_data = config_data["InstructType"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.InstructType()
+        now_tem.__dict__ = tem_data
+        config_instruct_type[now_tem.cid] = now_tem
+
+
 def load_item():
     """ 载入道具配置数据 """
     now_data = config_data["Item"]
@@ -882,6 +894,7 @@ def init():
     load_food_quality_weight()
     load_height_tem()
     load_hitpoint_tem()
+    load_instruct_type()
     load_item()
     load_knowledge()
     load_knowledge_type()

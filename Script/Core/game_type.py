@@ -493,12 +493,20 @@ class Cache:
     """ 前提处理数据 """
     handle_target_data: Dict[str, FunctionType] = {}
     """ 目标类型数据 """
-    effect_target_table: Dict[str, set] = {}
+    handle_instruct_data:Dict[int,FunctionType] = {}
+    """ 指令处理数据 """
+    handle_instruct_name_data:Dict[int,str] = {}
+    """ 指令对应文本 """
+    instruct_type_data:Dict[int,Set] = {}
+    """ 指令类型拥有的指令集合 """
+    instruct_premise_data:Dict[int,Set] = {}
+    """ 指令显示的所需前提集合 """
+    effect_target_table: Dict[str, Set] = {}
     """
     效果对应所需目标集合
     效果id:目标集合
     """
-    premise_talk_table: Dict[int, Dict[int, Dict[int, set]]] = {}
+    premise_talk_table: Dict[int, Dict[int, Dict[int, Set]]] = {}
     """
     口上对应的所需前提集合
     advid:行为id:口上id:前提集合
@@ -553,8 +561,8 @@ class Cache:
         """ 寻路算法用,当前节点所属的地图的id """
         self.input_position: int = 0
         """ 回溯输入记录用定位 """
-        self.instruct_filter: Dict[str, int] = {}
-        """ 玩家操作指令面板指令过滤状态数据 """
+        self.instruct_filter: Dict[int, bool] = {}
+        """ 玩家操作指令面板指令过滤状态数据 指令类型:是否展示"""
         self.output_text_style: str = ""
         """ 富文本记录输出样式临时缓存 """
         self.text_style_position: int = 0

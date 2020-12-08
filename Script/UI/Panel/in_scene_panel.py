@@ -1,8 +1,10 @@
+from typing import List
 from types import FunctionType
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import game_info_panel, see_character_info_panel
 from Script.Core import get_text, cache_control, game_type, flow_handle, text_handle,value_handle
-from Script.Design import attr_text, map_handle
+from Script.Design import attr_text, map_handle,handle_instruct,handle_premise
+from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -58,6 +60,7 @@ class InScenePanel:
             0,
             null_button_text=character_data.target_character_id,
         )
+        see_instruct_panel = SeeInstructPanel(self.width)
         while 1:
             character_handle_panel.null_button_text = character_data.target_character_id
             line_feed.draw()
@@ -72,6 +75,8 @@ class InScenePanel:
                 character_handle_panel.update()
                 character_handle_panel.draw()
                 ask_list.extend(character_handle_panel.return_list)
+                line_draw = draw.LineDraw("-.-",self.width)
+                line_draw.draw()
             character_info_draw_list = []
             if character_data.target_character_id:
                 character_head_draw = see_character_info_panel.CharacterInfoHead(character_data.cid,self.width)
@@ -107,7 +112,7 @@ class InScenePanel:
                             value.draw()
                         if not index:
                             fix_draw = draw.NormalDraw()
-                            fix_draw.width = 4
+                            fix_draw.width = 1
                             fix_draw.text = "|"
                             fix_draw.draw()
                             index = 1
@@ -117,5 +122,94 @@ class InScenePanel:
                 else:
                     label.draw()
                 line_feed.draw()
+            see_instruct_panel.draw()
+            ask_list.extend(see_instruct_panel.return_list)
             target_id = character_data.target_character_id
             flow_handle.askfor_all(ask_list)
+
+
+class SeeInstructPanel:
+    """
+    查看操作菜单面板
+    Keywor arguments:
+    width -- 绘制宽度
+    """
+
+    def __init__(self,width:int):
+        """ 初始化绘制对象 """
+        self.width:int = width
+        """ 最大绘制宽度 """
+        self.return_list:List[str] = []
+        """ 监听的按钮列表 """
+        if cache.instruct_filter == {}:
+            for instruct_type in game_config.config_instruct_type:
+                cache.instruct_filter[instruct_type] = 0
+            cache.instruct_filter[0] = 1
+
+    def draw(self):
+        """ 绘制操作菜单面板 """
+        self.return_list = []
+        line = draw.LineDraw("-.-",self.width)
+        line.draw()
+        fix_draw = draw.NormalDraw()
+        fix_width = int((self.width - int(self.width / len(cache.instruct_filter)) * len(cache.instruct_filter))/2)
+        fix_draw.width = fix_width
+        fix_draw.text = " " * fix_width
+        fix_draw.draw()
+        for now_type in cache.instruct_filter:
+            now_config = game_config.config_instruct_type[now_type]
+            if cache.instruct_filter[now_type]:
+                now_button = draw.CenterButton(f"[{now_config.name}]",now_config.name,self.width/len(cache.instruct_filter),cmd_func=self.change_filter,args=(now_type,))
+            else:
+                now_button = draw.CenterButton(f"[{now_config.name}]",now_config.name,self.width/len(cache.instruct_filter)," ","onbutton","standard",self.change_filter,(now_type,))
+            now_button.width = int(self.width / len(cache.instruct_filter))
+            self.return_list.append(now_button.return_text)
+            now_button.draw()
+        line_feed.draw()
+        now_instruct_list = []
+        for now_type in cache.instruct_filter:
+            if cache.instruct_filter[now_type] and now_type in cache.instruct_type_data:
+                for instruct in cache.instruct_type_data[now_type]:
+                    premise_judge = 0
+                    if instruct in cache.instruct_premise_data:
+                        for premise in cache.instruct_premise_data[instruct]:
+                            if not handle_premise.handle_premise(premise,0):
+                                premise_judge = 1
+                                break
+                    if premise_judge:
+                        continue
+                    now_instruct_list.append(instruct)
+        now_instruct_list.sort()
+        instruct_group = value_handle.list_of_groups(now_instruct_list,3)
+        now_draw_list = []
+        for instruct_list in instruct_group:
+            for instruct_id in instruct_list:
+                instruct_name = cache.handle_instruct_name_data[instruct_id]
+                id_text = text_handle.id_index(instruct_id)
+                now_text = f"{id_text}{instruct_name}"
+                now_draw = draw.CenterButton(now_text,str(instruct_id),int(self.width/len(instruct_group)),cmd_func=self.handle_instruct,args=(instruct_id,))
+                now_draw_list.append(now_draw)
+        now_draw = panel.VerticalDrawTextListGroup(self.width)
+        now_group = value_handle.list_of_groups(now_draw_list,3)
+        now_draw.draw_list = now_group
+        now_draw.draw()
+        line_feed.draw()
+
+    def change_filter(self,now_type:int):
+        """
+        更改指令类型过滤状态
+        Keyword arguments:
+        now_type -- 指令类型
+        """
+        if cache.instruct_filter[now_type]:
+            cache.instruct_filter[now_type] = 0
+        else:
+            cache.instruct_filter[now_type] = 1
+
+    def handle_instruct(self,instruct_id:int):
+        """
+        处理玩家操作指令
+        Keyword arguments:
+        instruct_id -- 指令id
+        """
+        handle_instruct.handle_instruct(instruct_id)

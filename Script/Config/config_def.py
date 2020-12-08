@@ -626,6 +626,15 @@ class Item:
     """ 描述 """
 
 
+class InstructType:
+    """ 指令类型配置 """
+
+    cid: int
+    """ 指令类型id """
+    name: str
+    """ 名字 """
+
+
 class Status:
     """ 状态描述配置 """
 
