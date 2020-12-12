@@ -66,6 +66,8 @@ class Panel:
     """ 查看地图面板 """
     FOOD_SHOP = 5
     """ 食物商店面板 """
+    FOOD_BAG = 6
+    """ 食物背包面板 """
 
 
 class Premise:

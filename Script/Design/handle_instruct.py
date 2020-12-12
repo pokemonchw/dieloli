@@ -78,20 +78,10 @@ def handle_buy_food():
     cache.now_panel_id = constant.Panel.FOOD_SHOP
 
 
-@add_instruct(constant.Instruct.EAT, constant.InstructType.ACTIVE, _("进食"), {})
+@add_instruct(constant.Instruct.EAT, constant.InstructType.ACTIVE, _("进食"), {constant.Premise.HAVE_FOOD})
 def handle_eat():
     """ 处理进食指令 """
-    character.init_character_behavior_start_time(0)
-    """
-    judge, now_food = eat_food.eat_food()
-    if judge:
-        character_data = cache.character_data[0]
-        character_data.behavior.behavior_id = constant.Behavior.EAT
-        character_data.behavior.eat_food = now_food
-        character_data.behavior.duration = 1
-        character_data.state = constant.CharacterStatus.STATUS_EAT
-    update.game_update_flow(1)
-    """
+    cache.now_panel_id = constant.Panel.FOOD_BAG
 
 
 @add_instruct(constant.Instruct.MOVE, constant.InstructType.ACTIVE, _("移动"), {})

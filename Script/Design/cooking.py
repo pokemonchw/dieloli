@@ -1,7 +1,7 @@
 import random
 import uuid
 from types import FunctionType
-from typing import Dict
+from typing import Dict, Set
 from Script.Core.game_type import Recipes, Food
 from Script.Core import constant, cache_control, value_handle, game_type, get_text
 from Script.Config import game_config
@@ -280,20 +280,19 @@ def init_restaurant_data():
     print(cache.restaurant_data.keys())
 
 
-def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type: str) -> dict:
+def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type: str) -> Dict[str, Set]:
     """
     获取角色背包内指定类型的食物种类
     Keyword arguments:
     character_id -- 角色id
     food_type -- 食物类型
     Return arguments:
-    dict -- 食物列表 食物名字:食物uid集合
+    Dict -- 食物名字数据 食物名字:uid集合
     """
     food_list = {}
     character_data = cache.character_data[character_id]
     for food_uid in character_data.food_bag:
         food_data: Food = character_data.food_bag[food_uid]
-        food_config = game_config.config_food[food_data.id]
         if food_data.id in game_config.config_food_feel_data:
             food_feel_data = game_config.config_food_feel_data[food_data.id]
         else:

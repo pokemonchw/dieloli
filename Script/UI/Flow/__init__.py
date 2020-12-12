@@ -5,4 +5,5 @@ from Script.UI.Flow import (
     see_map_flow,
     title_flow,
     food_shop_flow,
+    food_bag_flow,
 )

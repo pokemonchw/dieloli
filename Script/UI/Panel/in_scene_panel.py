@@ -114,6 +114,11 @@ class InScenePanel:
                 character_status_draw_list = list(
                     zip(character_status_draw.draw_list, target_status_draw.draw_list)
                 )
+            else:
+                character_status_draw = see_character_info_panel.SeeCharacterStatusPanel(
+                    character_data.cid, self.width, 5
+                )
+                character_status_draw_list = character_status_draw.draw_list
             for label in character_status_draw_list:
                 if isinstance(label, tuple):
                     index = 0
@@ -130,12 +135,13 @@ class InScenePanel:
                             fix_draw.text = "|"
                             fix_draw.draw()
                             index = 1
+                    line_feed.draw()
                 elif isinstance(label, list):
                     for value in label:
                         value.draw()
+                    line_feed.draw()
                 else:
                     label.draw()
-                line_feed.draw()
             see_instruct_panel.draw()
             ask_list.extend(see_instruct_panel.return_list)
             target_id = character_data.target_character_id

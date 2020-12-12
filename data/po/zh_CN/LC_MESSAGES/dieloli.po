@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-08 13:52+0800\n"
+"POT-Creation-Date: 2020-12-12 18:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,186 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../game.py:19
-msgid "python3版本过旧(低于python3.8.6),请升级"
+msgid "python3版本过旧(低于python3.9.0),请升级"
+msgstr ""
+
+#: ../Script/Talk/rest.py:18
+#, python-brace-format
+msgid "{NickName}小小的休息了一会儿"
+msgstr ""
+
+#: ../Script/Talk/rest.py:19
+#, python-brace-format
+msgid "{NickName}长长的呼了一口气"
+msgstr ""
+
+#: ../Script/Talk/rest.py:20
+#, python-brace-format
+msgid "{NickName}打了个盹"
+msgstr ""
+
+#: ../Script/Talk/rest.py:21
+#, python-brace-format
+msgid "{NickName}伸了个懒腰"
+msgstr ""
+
+#: ../Script/Talk/rest.py:22
+#, python-brace-format
+msgid "{NickName}咪起眼睛休息了一会儿"
+msgstr ""
+
+#: ../Script/Talk/rest.py:38
+#, python-brace-format
+msgid "{Name}小小的休息了一会儿"
+msgstr ""
+
+#: ../Script/Talk/rest.py:39
+#, python-brace-format
+msgid "{Name}长长的呼了一口气"
+msgstr ""
+
+#: ../Script/Talk/rest.py:40
+#, python-brace-format
+msgid "{Name}打了个盹"
+msgstr ""
+
+#: ../Script/Talk/rest.py:41
+#, python-brace-format
+msgid "{Name}咪起眼睛休息了一会儿"
+msgstr ""
+
+#: ../Script/Talk/rest.py:42
+#, python-brace-format
+msgid "{Name}伸了个懒腰"
+msgstr ""
+
+#: ../Script/Talk/rest.py:58
+#, python-brace-format
+msgid "{NickName}和{TargetName}一起休息了一会儿"
+msgstr ""
+
+#: ../Script/Talk/rest.py:59
+#, python-brace-format
+msgid "与{TargetName}一起休息了一会儿"
+msgstr ""
+
+#: ../Script/Talk/rest.py:60
+msgid "一起打了个盹"
+msgstr ""
+
+#: ../Script/Talk/rest.py:79
+#, python-brace-format
+msgid ""
+"{Name}将头靠在{PlayerNickName}肩上\n"
+"{PlayerNickName}露出微笑,轻轻揽住了{Name}的腰"
+msgstr ""
+
+#: ../Script/Talk/rest.py:80
+#, python-brace-format
+msgid ""
+"{PlayerNickName}从背后抱住了{Name}\n"
+"两人一起休息了一会儿"
+msgstr ""
+
+#: ../Script/Talk/rest.py:99
+#, python-brace-format
+msgid "{Name}将头靠在{PlayerNickName}肩上小小的休息了一会儿"
+msgstr ""
+
+#: ../Script/Talk/eat.py:18
+#, python-brace-format
+msgid "{NickName}吃掉了{FoodName}"
+msgstr ""
+
+#: ../Script/Talk/eat.py:19
+#, python-brace-format
+msgid "{NickName}将{FoodName}吃掉了"
+msgstr ""
+
+#: ../Script/Talk/eat.py:20
+#, python-brace-format
+msgid "{NickName}吃了一些{FoodName}"
+msgstr ""
+
+#: ../Script/Talk/eat.py:35
+#, python-brace-format
+msgid ""
+"{NickName}吃了一些{FoodName}\n"
+"如春药一般的绝赞美味!\n"
+"{NickName}沉浸在了食物带来的快乐之中"
+msgstr ""
+
+#: ../Script/Talk/eat.py:51
+#, python-brace-format
+msgid "{Name}吃了一些{FoodName}"
+msgstr ""
+
+#: ../Script/Talk/eat.py:52
+#, python-brace-format
+msgid "{Name}将{FoodName}吃掉了"
+msgstr ""
+
+#: ../Script/Talk/eat.py:53
+#, python-brace-format
+msgid "{Name}吃掉了{FoodName}"
+msgstr ""
+
+#: ../Script/Talk/move.py:18
+#, python-brace-format
+msgid "{NickName}来到了{SceneName}"
+msgstr ""
+
+#: ../Script/Talk/move.py:19
+#, python-brace-format
+msgid "{NickName}移动到了{SceneName}"
+msgstr ""
+
+#: ../Script/Talk/move.py:20
+#, python-brace-format
+msgid "{NickName}走到了{SceneName}"
+msgstr ""
+
+#: ../Script/Talk/move.py:36
+#, python-brace-format
+msgid "{Name}来到了{SceneName}"
+msgstr ""
+
+#: ../Script/Talk/move.py:37
+#, python-brace-format
+msgid "{Name}走了过来"
+msgstr ""
+
+#: ../Script/Talk/move.py:38
+#, python-brace-format
+msgid "{Name}冲着{PlayerNickName}打了个招呼"
+msgstr ""
+
+#: ../Script/Talk/move.py:54
+#, python-brace-format
+msgid "{Name}朝着{SceneName}离开了"
+msgstr ""
+
+#: ../Script/Talk/move.py:55
+#, python-brace-format
+msgid "{Name}走向了{SceneName}"
+msgstr ""
+
+#: ../Script/Talk/move.py:56
+#, python-brace-format
+msgid "{Name}去了{SceneName}"
+msgstr ""
+
+#: ../Script/Talk/move.py:57
+#, python-brace-format
+msgid "{Name}前往了{SceneName}"
+msgstr ""
+
+#: ../Script/Talk/move.py:79
+#, python-brace-format
+msgid ""
+"{Name}来到了{SceneName}\n"
+"她看见{PlayerNickName}的第一时间便扑了过来\n"
+"{Name}紧紧的抱住了{PlayerNickName},小脸不停的蹭着{PlayerNickName}的胸"
 msgstr ""
 
 #: ../Script/Core/flow_handle.py:262 ../Script/Core/flow_handle.py:283
@@ -30,12 +209,12 @@ msgstr ""
 msgid "输入的字符超长，最大{input_max}个英文字符，请重试。"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:602
+#: ../Script/UI/Moudle/panel.py:595
 #, python-brace-format
 msgid "{old_page_index_text} 上一页"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:616
+#: ../Script/UI/Moudle/panel.py:609
 #, python-brace-format
 msgid "{next_page_index_text} 下一页"
 msgstr ""
@@ -387,7 +566,11 @@ msgid "更衣室"
 msgstr ""
 
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
+#: ../Script/UI/Panel/food_shop_panel.py:73
+#: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
+#: ../Script/UI/Panel/food_bag_panel.py:70
+#: ../Script/UI/Panel/food_bag_panel.py:163
 #: ../Script/UI/Panel/see_character_info_panel.py:911
 #: ../Script/UI/Panel/see_character_info_panel.py:951
 #: ../Script/UI/Panel/get_up_panel.py:92
@@ -395,10 +578,15 @@ msgid "[返回]"
 msgstr ""
 
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
+#: ../Script/UI/Panel/food_shop_panel.py:73
+#: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
 #: ../Script/UI/Panel/see_save_info_panel.py:169
+#: ../Script/UI/Panel/food_bag_panel.py:70
+#: ../Script/UI/Panel/food_bag_panel.py:163
 #: ../Script/UI/Panel/see_character_info_panel.py:911
 #: ../Script/UI/Panel/see_character_info_panel.py:951
+#: ../Script/UI/Panel/see_map_panel.py:160
 #: ../Script/UI/Panel/get_up_panel.py:92
 msgid "返回"
 msgstr ""
@@ -415,15 +603,105 @@ msgstr ""
 msgid "人物道具"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:31
+#: ../Script/UI/Panel/food_shop_panel.py:32
+#: ../Script/UI/Panel/food_shop_panel.py:43
+#: ../Script/UI/Panel/food_bag_panel.py:28
+#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:300
+#: ../Script/Design/cooking.py:361
+msgid "主食"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:43
+#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:305
+#: ../Script/Design/cooking.py:366
+msgid "零食"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:43
+#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:312
+#: ../Script/Design/cooking.py:373
+msgid "饮品"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:43
+#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:330
+#: ../Script/Design/cooking.py:394
+msgid "水果"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:43
+#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:336
+msgid "食材"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:43
+#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:342
+msgid "调料"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:203
+#: ../Script/UI/Panel/food_bag_panel.py:197
+msgid "垃圾"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:203
+#: ../Script/UI/Panel/food_bag_panel.py:197
+msgid "饲料"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:203
+#: ../Script/UI/Panel/food_bag_panel.py:197
+msgid "粮食"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:203
+#: ../Script/UI/Panel/food_bag_panel.py:197
+msgid "美味"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:203
+#: ../Script/UI/Panel/food_bag_panel.py:197
+msgid "春药"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:211
+#: ../Script/UI/Panel/food_bag_panel.py:205
+msgid "热量:"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:216
+#: ../Script/UI/Panel/food_bag_panel.py:210
+msgid "水份:"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:225
+#: ../Script/UI/Panel/food_bag_panel.py:218
+msgid "重量:"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:227
+#: ../Script/UI/Panel/food_bag_panel.py:220
+msgid "克"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:229
+#: ../Script/UI/Panel/food_bag_panel.py:222
+msgid "品质:"
+msgstr ""
+
+#: ../Script/UI/Panel/food_shop_panel.py:232
+msgid "售价:"
+msgstr ""
+
+#: ../Script/UI/Panel/in_scene_panel.py:33
 msgid "场景"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:42
+#: ../Script/UI/Panel/in_scene_panel.py:44
 msgid "当前位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:47
+#: ../Script/UI/Panel/in_scene_panel.py:49
 msgid "你在这里遇到了:"
 msgstr ""
 
@@ -453,6 +731,10 @@ msgstr ""
 
 #: ../Script/UI/Panel/see_save_info_panel.py:162
 msgid "删除"
+msgstr ""
+
+#: ../Script/UI/Panel/food_bag_panel.py:35
+msgid "食物背包"
 msgstr ""
 
 #: ../Script/UI/Panel/see_character_info_panel.py:37
@@ -649,6 +931,26 @@ msgstr ""
 msgid "气力:({character_data.mana_point}/{character_data.mana_point_max})"
 msgstr ""
 
+#: ../Script/UI/Panel/see_map_panel.py:49
+msgid "移动:"
+msgstr ""
+
+#: ../Script/UI/Panel/see_map_panel.py:92
+msgid "你可以从这里前往:\n"
+msgstr ""
+
+#: ../Script/UI/Panel/see_map_panel.py:118
+msgid "场景名列表:\n"
+msgstr ""
+
+#: ../Script/UI/Panel/see_map_panel.py:147
+msgid "查看上级地图"
+msgstr ""
+
+#: ../Script/UI/Panel/see_map_panel.py:168
+msgid "查看下级地图"
+msgstr ""
+
 #: ../Script/UI/Panel/get_up_panel.py:35
 msgid "主页"
 msgstr ""
@@ -671,6 +973,30 @@ msgstr ""
 
 #: ../Script/UI/Panel/get_up_panel.py:74
 msgid "角色列表"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:51
+msgid "休息"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:74
+msgid "购买食物"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:81
+msgid "进食"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:87
+msgid "移动"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:94
+msgid "查看属性"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:100
+msgid "查看自身属性"
 msgstr ""
 
 #: class:SexTem id:0 type:name

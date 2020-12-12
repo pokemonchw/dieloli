@@ -233,14 +233,7 @@ class CenterDrawTextListPanel:
         for now_info_list in new_info_list:
             now_width = int(width / column)
             now_list = []
-            index = 0
-            now_sub_width = 0
             for now_info in now_info_list:
-                if index == len(now_info_list) - 1:
-                    now_width = self.width - now_sub_width
-                else:
-                    index += 1
-                    now_sub_width += now_width
                 now_info_draw = draw.CenterDraw()
                 now_info_draw.width = now_width
                 now_info_draw.text = now_info
