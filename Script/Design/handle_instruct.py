@@ -3,14 +3,16 @@ from typing import Set
 from types import FunctionType
 from Script.Core import constant, cache_control, game_type, get_text
 from Script.Design import update, character
-
-# from Script.Flow import buy_food, eat_food
+from Script.UI.Panel import see_character_info_panel
+from Script.Config import normal_config
 
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
+width: int = normal_config.config_normal.text_width
+""" 屏幕宽度 """
 
 
 def handle_instruct(instruct: int):
@@ -95,8 +97,14 @@ def handle_move():
 )
 def handle_see_attr():
     """ 查看属性 """
+    now_draw = see_character_info_panel.SeeCharacterInfoInScenePanel(
+        cache.character_data[0].target_character_id, width
+    )
+    now_draw.draw()
 
 
 @add_instruct(constant.Instruct.SEE_OWNER_ATTR, constant.InstructType.ACTIVE, _("查看自身属性"), {})
 def handle_see_owner_attr():
     """ 查看自身属性 """
+    now_draw = see_character_info_panel.SeeCharacterInfoInScenePanel(0, width)
+    now_draw.draw()

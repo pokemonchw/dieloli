@@ -2,7 +2,16 @@ from typing import List
 from types import FunctionType
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import game_info_panel, see_character_info_panel
-from Script.Core import get_text, cache_control, game_type, flow_handle, text_handle, value_handle, constant
+from Script.Core import (
+    get_text,
+    cache_control,
+    game_type,
+    flow_handle,
+    text_handle,
+    value_handle,
+    constant,
+    py_cmd,
+)
 from Script.Design import attr_text, map_handle, handle_instruct, handle_premise
 from Script.Config import game_config
 
@@ -146,6 +155,7 @@ class InScenePanel:
             ask_list.extend(see_instruct_panel.return_list)
             target_id = character_data.target_character_id
             flow_handle.askfor_all(ask_list)
+            py_cmd.clr_cmd()
 
 
 class SeeInstructPanel:
@@ -239,7 +249,6 @@ class SeeInstructPanel:
         now_group = value_handle.list_of_groups(now_draw_list, 3)
         now_draw.draw_list = now_group
         now_draw.draw()
-        line_feed.draw()
 
     def change_filter(self, now_type: int):
         """
@@ -258,4 +267,6 @@ class SeeInstructPanel:
         Keyword arguments:
         instruct_id -- 指令id
         """
+        py_cmd.clr_cmd()
+        line_feed.draw()
         handle_instruct.handle_instruct(instruct_id)

@@ -710,6 +710,7 @@ def handle_target_is_adore(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     target_id = character_data.target_character_id
+    character_data.social_contact.setdefault(5, set())
     if target_id in character_data.social_contact[5]:
         return 1
     return 0
@@ -726,6 +727,7 @@ def handle_target_is_admire(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     target_id = character_data.target_character_id
+    character_data.social_contact.setdefault(4, set())
     if target_id in character_data.social_contact[4]:
         return 1
     return 0
@@ -741,6 +743,7 @@ def handle_player_is_adore(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    character_data.social_contact.setdefault(5, set())
     if 0 in character_data.social_contact[5]:
         return 1
     return 0

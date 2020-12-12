@@ -3,7 +3,16 @@ from typing import Dict, Tuple, List
 from types import FunctionType
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import see_clothing_info_panel, see_item_info_panel
-from Script.Core import cache_control, get_text, value_handle, game_type, text_handle, py_cmd, flow_handle
+from Script.Core import (
+    cache_control,
+    get_text,
+    value_handle,
+    game_type,
+    text_handle,
+    py_cmd,
+    flow_handle,
+    constant,
+)
 from Script.Config import game_config, normal_config
 from Script.Design import attr_text, map_handle, attr_calculation
 
@@ -863,6 +872,7 @@ class SeeCharacterInfoByNameDraw:
 
     def see_character(self):
         """ 绘制角色信息 """
+        py_cmd.clr_cmd()
         now_draw = SeeCharacterInfoOnSocialPanel(self.character_id, window_width)
         now_draw.draw()
 
@@ -952,7 +962,6 @@ class SeeCharacterInfoHandle:
         now_panel_id = _("属性")
         while 1:
             self.return_list = []
-            line_feed.draw()
             now_character_panel = SeeCharacterInfoPanel(self.character_id, self.width)
             now_character_panel.change_panel(now_panel_id)
             now_character_panel.draw()
@@ -1046,6 +1055,8 @@ class GetUpCharacterInfoDraw:
 
     def draw_character_info(self):
         """ 绘制角色信息 """
+        line_feed.draw()
+        py_cmd.clr_cmd()
         now_draw = SeeCharacterInfoHandle(self.text, window_width, list(cache.character_data.keys()))
         now_draw.draw()
 
@@ -1077,3 +1088,31 @@ class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
                     self.character_id = self.character_list[now_index + 1]
             else:
                 self.character_id = self.character_list[0]
+
+
+class SeeCharacterInfoInScenePanel:
+    """
+    在场景中查看角色属性的控制对象
+    Keyword arguments:
+    target_id -- 目标id
+    width -- 绘制宽度
+    """
+
+    def __init__(self, target_id: int, width: int):
+        """ 初始化绘制对象 """
+        self.target_id: int = target_id
+        """ 查看属性的目标 """
+        self.width: int = width
+        """ 绘制宽度 """
+        position = cache.character_data[0].position
+        position_str = map_handle.get_map_system_path_str_for_list(position)
+        scene_data: game_type.Scene = cache.scene_data[position_str]
+        now_list = list(scene_data.character_list)
+        now_list.remove(0)
+        self.handle_panel = SeeCharacterInfoHandleInScene(target_id, width, now_list)
+        """ 绘制控制面板 """
+
+    def draw(self):
+        """ 绘制对象 """
+        self.handle_panel.draw()
+        cache.now_panel_id = constant.Panel.IN_SCENE
