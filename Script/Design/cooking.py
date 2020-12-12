@@ -1,12 +1,15 @@
 import random
 import uuid
+from types import FunctionType
 from typing import Dict
 from Script.Core.game_type import Recipes, Food
-from Script.Core import constant, cache_control, value_handle, game_type
+from Script.Core import constant, cache_control, value_handle, game_type, get_text
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 def init_recipes():
@@ -263,8 +266,8 @@ def init_restaurant_data():
         if not food_judge:
             continue
         new_food = cook(food_list, recipes_id, 5, "")
-        cache.restaurant_data.setdefault(recipes_id, {})
-        cache.restaurant_data[recipes_id][new_food.uid] = new_food
+        cache.restaurant_data.setdefault(str(recipes_id), {})
+        cache.restaurant_data[str(recipes_id)][new_food.uid] = new_food
         for food_id in food_list:
             now_food = food_list[food_id]
             if now_food.weight <= 0:
@@ -274,6 +277,7 @@ def init_restaurant_data():
         cook_index += 1
         if cook_index == max_people:
             break
+    print(cache.restaurant_data.keys())
 
 
 def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type: str) -> dict:
@@ -290,20 +294,23 @@ def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type:
     for food_uid in character_data.food_bag:
         food_data: Food = character_data.food_bag[food_uid]
         food_config = game_config.config_food[food_data.id]
-        food_feel_data = game_config.config_food_feel_data[food_data.id]
-        if food_type == "StapleFood":
+        if food_data.id in game_config.config_food_feel_data:
+            food_feel_data = game_config.config_food_feel_data[food_data.id]
+        else:
+            food_feel_data = {}
+        if food_type == _("主食"):
             if food_data.recipe != -1:
                 food_name = cache.recipe_data[food_data.recipe].name
                 food_list.setdefault(food_name, set())
                 food_list[food_name].add(food_uid)
-        elif food_type == "Snacks":
+        elif food_type == _("零食"):
             if food_data.recipe == -1:
                 food_config = game_config.config_food[food_data.id]
                 if food_config.eat:
                     food_name = food_config.name
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
-        elif food_type == "Drink":
+        elif food_type == _("饮品"):
             if food_data.recipe == -1:
                 if (
                     28 in food_feel_data
@@ -321,19 +328,19 @@ def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type:
                     food_name = cache.recipe_data[food_data.recipe].name
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
-        elif food_type == "Fruit":
+        elif food_type == _("水果"):
             if food_data.recipe == -1:
                 if food_config.fruit:
                     food_name = food_config.name
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
-        elif food_type == "FoodIngredients":
+        elif food_type == _("食材"):
             if food_data.recipe == -1:
                 if food_config.cook:
                     food_name = food_config.name
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
-        elif food_type == "Seasoning":
+        elif food_type == _("调料"):
             if food_data.recipe == -1:
                 if food_config.seasoning:
                     food_name = food_config.name
@@ -342,7 +349,7 @@ def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type:
     return food_list
 
 
-def get_restaurant_food_type_list_buy_food_type(food_type: str) -> dict:
+def get_restaurant_food_type_list_buy_food_type(food_type: str) -> Dict[uuid.UUID, str]:
     """
     获取餐馆内指定类型的食物种类
     Keyword arguments:
@@ -352,45 +359,58 @@ def get_restaurant_food_type_list_buy_food_type(food_type: str) -> dict:
     """
     food_list = {}
     for food_id in cache.restaurant_data:
-        if food_type == "StapleFood":
-            if isinstance(food_id, int):
-                food_list[food_id] = cache.recipe_data[food_id].name
-        elif food_type == "Snacks":
-            if isinstance(food_id, str):
+        if food_type == _("主食"):
+            now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
+            now_food: game_type.Food = cache.restaurant_data[food_id][now_food_uid]
+            if now_food.recipe != -1:
+                food_list[food_id] = cache.recipe_data[int(food_id)].name
+        elif food_type == _("零食"):
+            now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
+            now_food: game_type.Food = cache.restaurant_data[food_id][now_food_uid]
+            if now_food.recipe == -1:
                 food_config = game_config.config_food[food_id]
                 if food_config.eat:
                     food_list[food_id] = food_config.name
-        elif food_type == "Drink":
-            if isinstance(food_id, str):
+        elif food_type == _("饮品"):
+            now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
+            now_food: game_type.Food = cache.restaurant_data[food_id][now_food_uid]
+            if now_food.recipe == -1:
                 food_config = game_config.config_food[food_id]
-                food_feel_data = game_config.config_food_feel_data[food_id]
-                if (
-                    28 in food_feel_data
-                    and not food_config.fruit
-                    and food_config.eat
-                    and (27 not in food_feel_data or food_feel_data[28] > food_feel_data[27])
-                ):
-                    food_list[food_id] = food_config.name
+                if food_id in game_config.config_food_feel_data:
+                    food_feel_data = game_config.config_food_feel_data[food_id]
+                    if (
+                        28 in food_feel_data
+                        and not food_config.fruit
+                        and food_config.eat
+                        and (27 not in food_feel_data or food_feel_data[28] > food_feel_data[27])
+                    ):
+                        food_list[food_id] = food_config.name
             else:
                 now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
                 now_food = cache.restaurant_data[food_id][now_food_uid]
-                if "Thirsty" in now_food.feel and (
-                    "Hunger" not in now_food.feel or now_food.feel["Thirsty"] > now_food.feel["Hunger"]
+                if 27 in now_food.feel and (
+                    28 not in now_food.feel or now_food.feel[27] > now_food.feel[28]
                 ):
-                    food_list[food_id] = cache.recipe_data[food_id].name
-        elif food_type == "Fruit":
-            if isinstance(food_id, str):
-                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_id)
-                if food_config["Fruit"]:
-                    food_list[food_id] = food_config["Name"]
-        elif food_type == "FoodIngredients":
-            if isinstance(food_id, str):
-                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_id)
-                if food_config["Cook"]:
-                    food_list[food_id] = food_config["Name"]
-        elif food_type == "Seasoning":
-            if isinstance(food_id, str):
-                food_config = text_loading.get_text_data(constant.FilePath.FOOD_PATH, food_id)
-                if food_config["Seasoning"]:
-                    food_list[food_id] = food_config["Name"]
+                    food_list[food_id] = cache.recipe_data[int(food_id)].name
+        elif food_type == _("水果"):
+            now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
+            now_food: game_type.Food = cache.restaurant_data[food_id][now_food_uid]
+            if now_food.recipe == -1:
+                food_config = game_config.config_food[now_food.id]
+                if food_config.fruit:
+                    food_list[food_id] = food_config.name
+        elif food_type == "食材":
+            now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
+            now_food: game_type.Food = cache.restaurant_data[food_id][now_food_uid]
+            if now_food.recipe == -1:
+                food_config = game_config.config_food[now_food.id]
+                if food_config.cook:
+                    food_list[food_id] = food_config.name
+        elif food_type == "调料":
+            now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
+            now_food: game_type.Food = cache.restaurant_data[food_id][now_food_uid]
+            if now_food.recipe == -1:
+                food_config = game_config.config_food[now_food.id]
+                if food_config.seasoning:
+                    food_list[food_id] = food_config.name
     return food_list

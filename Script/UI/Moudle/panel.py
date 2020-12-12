@@ -572,7 +572,7 @@ class PageHandlePanel:
                 col_index = len(draw_text_list) + 1
                 col_width = text_handle.get_text_index(self.col_septal_lines)
                 now_width -= col_width * col_index
-            value_width = int(now_width / len(draw_text_list))
+            value_width = int(now_width / self.column)
             col_fix_draw = draw.NormalDraw()
             col_fix_draw.text = self.col_septal_lines
             col_fix_draw.width = 1

@@ -75,7 +75,7 @@ def handle_rest():
 )
 def handle_buy_food():
     """ 处理购买食物指令 """
-    # buy_food.buy_food()
+    cache.now_panel_id = constant.Panel.FOOD_SHOP
 
 
 @add_instruct(constant.Instruct.EAT, constant.InstructType.ACTIVE, _("进食"), {})

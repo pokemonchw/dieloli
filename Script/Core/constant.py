@@ -64,6 +64,8 @@ class Panel:
     """ 场景互动面板 """
     SEE_MAP = 4
     """ 查看地图面板 """
+    FOOD_SHOP = 5
+    """ 食物商店面板 """
 
 
 class Premise:
