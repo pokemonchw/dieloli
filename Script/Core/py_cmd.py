@@ -1,21 +1,23 @@
 from Script.Core import (
     flow_handle,
     main_frame,
-    dictionaries,
-    cache_contorl,
-    game_config,
+    cache_control,
+    game_type,
 )
+from Script.Config import game_config, normal_config
 
 # 清除命令
 clear_default_flow = flow_handle.clear_default_flow
 # 绑定或重新绑定一个命令
 bind_cmd = flow_handle.bind_cmd
 
+cache: game_type.Cache = cache_control.cache
+""" 游戏缓存数据 """
 
 # 输出命令
 def pcmd(
     cmd_str: str,
-    cmd_id: int,
+    cmd_id: str,
     cmd_func=flow_handle.null_func,
     arg=(),
     kw={},
@@ -26,22 +28,18 @@ def pcmd(
     打印一条指令
     Keyword arguments:
     cmd_str -- 命令对应文字
-    cmd_id -- 命令数字
+    cmd_id -- 命令响应文本
     cmd_func -- 命令函数
     arg -- 传给命令函数的顺序参数
     kw -- 传给命令函数的字典参数
     normal_style -- 正常状态下命令显示样式
     on_style -- 鼠标在其上的时候命令显示样式
     """
-    cmd_str = dictionaries.handle_text(cmd_str)
-    cmd_id = dictionaries.handle_text(f"{cmd_id}")
-    cache_contorl.text_wait = float(game_config.text_wait)
+    cache.text_wait = float(normal_config.config_normal.text_wait)
     global last_char
     if len(cmd_str) > 0:
         last_char = cmd_str[-1:]
-    flow_handle.print_cmd(
-        cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style
-    )
+    flow_handle.print_cmd(cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style)
 
 
 # 获得一个没有用过的命令编号

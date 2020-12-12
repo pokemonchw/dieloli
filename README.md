@@ -24,7 +24,8 @@ DieLoli
 Repo说明
 ----
 日常开发备份在instability分支中进行,pr也请提交至此分支 \
-master分支在开发完成前作为设计展示分支使用
+master分支在开发完成前作为设计展示分支使用 \
+代码风格化通常使用black自动完成，行宽为108
 
 请求
 ----
@@ -43,7 +44,7 @@ Memory: \
 
 依赖
 ----
-python3 \
+python3.9.0
 
 建议通过::
 
@@ -53,10 +54,17 @@ python3 \
 
 字体
 ----
-本游戏界面设计依赖Sarasa Mono SC字体，若系统未安装此字体将会fullback到系统默认字体，不能保证能否达到设计效果 \
+本游戏界面设计依赖Sarasa Mono SC字体，若系统未安装此字体将会fallback到系统默认字体，不能保证能否达到设计效果 \
 字体相关配置可以通过data/FontConfig.json更改 \
 本游戏不提供Sarasa Mono SC相关字体文件 \
 请自行下载并安装:[Sarasa Mono SC](https://github.com/be5invis/Sarasa-Gothic)
+
+本地化
+----
+本项目使用gettext进行本地化设置 \
+请于 data/po 目录下创建对应语言目录 \
+切换语言请编辑config.ini中的language项 \
+协作翻译方案待定
 
 警告
 ----
@@ -64,7 +72,5 @@ python3 \
 
 联系方式
 ----
-e-mail:pokemonchw@gmail.com \
-twitter:@nekoharuyayuzu \
-telegram:[推送频道](https://t.me/die_loli) \
-企鹅群:688166358
+e-mail:admin@byayoi.org \
+twitter:@nekoharuyayuzu

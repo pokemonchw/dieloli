@@ -1,8 +1,0 @@
-{
-  "inputNameTooLongError":"您输入的名字过长，请重试（最大10个字节，约五个汉字）",
-  "inputNickNameTooLongError":"您输入的称呼过长，请重试（最大10个字节，约五个汉字）",
-  "inputSelfNameTooLongError":"您输入的自称过长，请重试（最大10个字节，约五个汉字）",
-  "noInputListError":"您输入的选项无效，请重试",
-  "notSaveError":"错误：存档文件不存在，请重试",
-  "inputNullError":"输入错误,请重试"
-}

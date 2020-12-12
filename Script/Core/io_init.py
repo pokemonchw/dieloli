@@ -2,7 +2,8 @@
 import threading
 import queue
 import json
-from Script.Core import main_frame, game_config
+from Script.Core import main_frame
+from Script.Config import game_config
 
 input_evnet = threading.Event()
 _send_queue = queue.Queue()
@@ -257,9 +258,7 @@ def clear_order():
 # ############################################################
 
 # 命令生成函数
-def io_print_cmd(
-    cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"
-):
+def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"):
     """
     打印一条指令
     Keyword arguments:
@@ -269,9 +268,7 @@ def io_print_cmd(
     on_style -- 鼠标在其上时显示样式
     """
     json_str = new_json()
-    json_str["content"].append(
-        cmd_json(cmd_str, cmd_number, normal_style, on_style)
-    )
+    json_str["content"].append(cmd_json(cmd_str, cmd_number, normal_style, on_style))
     put_queue(json.dumps(json_str, ensure_ascii=False))
 
 
@@ -322,41 +319,20 @@ def init_style():
         )
 
     style_def = new_style_def
-    style_list = game_config.get_font_data_list()
-    standard_data = game_config.get_font_data("standard")
-    style_data_list = [
-        "foreground",
-        "background",
-        "font",
-        "fontSize",
-        "bold",
-        "underline",
-        "italic",
-    ]
-    def_style_list = {}
-    for i in range(0, len(style_list)):
-        style_name = style_list[i]
-        style_data = game_config.get_font_data(style_name)
-        for index in range(0, len(style_data_list)):
-            if style_data_list[index] in style_data:
-                style_data_value = style_data[style_data_list[index]]
-            else:
-                style_data_value = standard_data[style_data_list[index]]
-            def_style_list[style_data_list[index]] = style_data_value
-        style_foreground = def_style_list["foreground"]
-        style_background = def_style_list["background"]
-        style_font = def_style_list["font"]
-        style_font_size = def_style_list["fontSize"]
-        style_bold = def_style_list["bold"]
-        style_under_line = def_style_list["underline"]
-        style_italic = def_style_list["italic"]
+    style_list = game_config.config_font
+    standard_data = style_list[0]
+    for style_id in style_list:
+        style = style_list[style_id]
+        for k in standard_data.__dict__:
+            if k not in style.__dict__:
+                style.__dict__[k] = standard_data.__dict__[k]
         style_def(
-            style_name,
-            style_foreground,
-            style_background,
-            style_font,
-            style_font_size,
-            style_bold,
-            style_under_line,
-            style_italic,
+            style.name,
+            style.foreground,
+            style.background,
+            style.font,
+            style.font_size,
+            style.bold,
+            style.underline,
+            style.italic,
         )

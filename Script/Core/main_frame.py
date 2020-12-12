@@ -9,8 +9,6 @@ from tkinter import (
     Tk,
     Text,
     StringVar,
-    FALSE,
-    Menu,
     END,
     N,
     W,
@@ -20,16 +18,15 @@ from tkinter import (
     font,
     Entry,
 )
-from Script.Core.game_path_config import game_path
 from Script.Core import (
-    game_config,
-    text_loading,
-    cache_contorl,
-    setting_frame,
-    about_frame,
     text_handle,
-    constant,
+    game_type,
+    cache_control,
 )
+from Script.Config import normal_config, game_config
+
+cache: game_type.Cache = cache_control.cache
+""" 游戏缓存数据 """
 
 
 def close_window():
@@ -44,11 +41,14 @@ def close_window():
 
 
 # 显示主框架
-game_name = game_config.game_name
+game_name = normal_config.config_normal.game_name
 root = Tk()
 root.title(game_name)
 root.geometry(
-    game_config.window_width + "x" + game_config.window_hight + "+0+0"
+    str(normal_config.config_normal.window_width)
+    + "x"
+    + str(normal_config.config_normal.window_hight)
+    + "+0+0"
 )
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
@@ -61,10 +61,11 @@ main_frame.rowconfigure(0, weight=1)
 # 显示窗口
 textbox = Text(
     main_frame,
-    width=game_config.textbox_width,
-    height=game_config.textbox_hight,
-    highlightbackground=game_config.background_color,
+    width=normal_config.config_normal.textbox_width,
+    height=normal_config.config_normal.textbox_hight,
+    highlightbackground=normal_config.config_normal.background,
     bd=0,
+    cursor="",
 )
 textbox.grid(column=0, row=0, sticky=(N, W, E, S))
 
@@ -74,113 +75,50 @@ textbox.configure(yscrollcommand=s_vertical.set)
 s_vertical.grid(column=1, row=0, sticky=(N, E, S), rowspan=2)
 
 # 输入框背景容器
-order_font_data = text_loading.get_text_data(
-    constant.FilePath.FONT_CONFIG_PATH, "order"
-)
+order_font_data = game_config.config_font[1]
+for k in game_config.config_font[0].__dict__:
+    if k not in order_font_data.__dict__:
+        order_font_data.__dict__[k] = game_config.config_font[0].__dict__[k]
 input_background_box = Text(
     main_frame,
-    highlightbackground=game_config.background_color,
-    background=game_config.background_color,
+    highlightbackground=normal_config.config_normal.background,
+    background=normal_config.config_normal.background,
     bd=0,
 )
 input_background_box.grid(column=0, row=1, sticky=(W, E, S))
 
-cursor_text = game_config.cursor
+cursor_text = "~$"
 cursor_width = text_handle.get_text_index(cursor_text)
 input_background_box_cursor = Text(
     input_background_box,
     width=cursor_width,
     height=1,
-    highlightbackground=order_font_data["background"],
-    background=order_font_data["background"],
+    highlightbackground=order_font_data.background,
+    background=order_font_data.background,
     bd=0,
 )
 input_background_box_cursor.grid(column=0, row=0, sticky=(W, E, S))
 input_background_box_cursor.insert("end", cursor_text)
-input_background_box_cursor.config(foreground=order_font_data["foreground"])
+input_background_box_cursor.config(foreground=order_font_data.foreground)
 
 # 输入栏
 order = StringVar()
-order_font = font.Font(
-    family=order_font_data["font"], size=order_font_data["fontSize"]
-)
+order_font = font.Font(family=order_font_data.font, size=order_font_data.font_size)
 inputbox = Entry(
     input_background_box,
     borderwidth=0,
     insertborderwidth=0,
     selectborderwidth=0,
     highlightthickness=0,
-    bg=order_font_data["background"],
-    foreground=order_font_data["foreground"],
-    selectbackground=order_font_data["selectbackground"],
+    bg=order_font_data.background,
+    foreground=order_font_data.foreground,
+    selectbackground=order_font_data.selectbackground,
     textvariable=order,
     font=order_font,
-    width=game_config.inputbox_width,
+    width=normal_config.config_normal.inputbox_width,
 )
 inputbox.grid(column=1, row=0, sticky=(N, E, S))
 
-# 构建菜单栏
-root.option_add("*tear_off", FALSE)
-menu_bar = Menu(root)
-root["menu"] = menu_bar
-menu_file = Menu(menu_bar)
-menu_test = Menu(menu_bar)
-menu_other = Menu(menu_bar)
-menu_bar.add_cascade(
-    menu=menu_file,
-    label=text_loading.get_text_data(
-        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_FILE
-    ),
-)
-menu_bar.add_cascade(
-    menu=menu_other,
-    label=text_loading.get_text_data(
-        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_OTHER
-    ),
-)
-
-
-def quit(*args):
-    """
-    退出游戏
-    """
-    cache_contorl.flow_contorl.quit_game = 1
-    send_input()
-
-
-def setting(*args):
-    """
-    打开设置面板
-    """
-    setting_frame.open_setting_frame()
-
-
-def about(*args):
-    """
-    打开关于面板
-    """
-    about_frame.open_about_frame()
-
-
-menu_file.add_command(
-    label=text_loading.get_text_data(
-        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_QUIT
-    ),
-    command=quit,
-)
-
-menu_other.add_command(
-    label=text_loading.get_text_data(
-        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_SETTING
-    ),
-    command=setting,
-)
-menu_other.add_command(
-    label=text_loading.get_text_data(
-        constant.FilePath.MENU_PATH, constant.WindowMenu.MENU_ABBOUT
-    ),
-    command=about,
-)
 
 input_event_func = None
 send_order_state = False
@@ -193,15 +131,15 @@ def send_input(*args):
     """
     global input_event_func
     order = get_order()
-    if len(cache_contorl.input_cache) >= 21:
+    if len(cache.input_cache) >= 21:
         if not (order) == "":
-            del cache_contorl.input_cache[0]
-            cache_contorl.input_cache.append(order)
-            cache_contorl.input_position["position"] = 0
+            del cache.input_cache[0]
+            cache.input_cache.append(order)
+            cache.input_position = 0
     else:
         if not (order) == "":
-            cache_contorl.input_cache.append(order)
-            cache_contorl.input_position["position"] = 0
+            cache.input_cache.append(order)
+            cache.input_position = 0
     input_event_func(order)
     clear_order()
 
@@ -219,15 +157,9 @@ def read_queue():
         quene_str = main_queue.get()
         json_data = json.loads(quene_str)
 
-        if (
-            "clear_cmd" in json_data.keys()
-            and json_data["clear_cmd"] == "true"
-        ):
+        if "clear_cmd" in json_data.keys() and json_data["clear_cmd"] == "true":
             clear_screen()
-        if (
-            "clearorder_cmd" in json_data.keys()
-            and json_data["clearorder_cmd"] == "true"
-        ):
+        if "clearorder_cmd" in json_data.keys() and json_data["clearorder_cmd"] == "true":
             clear_order()
         if "clearcmd_cmd" in json_data.keys():
             cmd_nums = json_data["clearcmd_cmd"]
@@ -261,9 +193,7 @@ def read_queue():
             if c["type"] == "text":
                 now_print(c["text"], style=tuple(c["style"]))
             if c["type"] == "cmd":
-                io_print_cmd(
-                    c["text"], c["num"], c["normal_style"], c["on_style"]
-                )
+                io_print_cmd(c["text"], c["num"], c["normal_style"], c["on_style"])
     root.after(10, read_queue)
 
 
@@ -426,9 +356,7 @@ cmd_tag_map = {}
 
 
 # 命令生成函数
-def io_print_cmd(
-    cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"
-):
+def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"):
     """
     打印一条指令
     Keyword arguments:
@@ -451,6 +379,7 @@ def io_print_cmd(
         global send_order_state
         send_order_state = True
         order.set(cmd_number)
+        textbox.configure(cursor="")
         send_input(order)
 
     def enter_func(*args):
@@ -467,7 +396,8 @@ def io_print_cmd(
             textbox.tag_ranges(cmd_tag_name)[0],
             textbox.tag_ranges(cmd_tag_name)[1],
         )
-        cache_contorl.wframe_mouse.mouse_leave_cmd = 0
+        textbox.configure(cursor="hand1")
+        cache.wframe_mouse.mouse_leave_cmd = 0
 
     def leave_func(*args):
         """
@@ -483,7 +413,8 @@ def io_print_cmd(
             textbox.tag_ranges(cmd_tag_name)[0],
             textbox.tag_ranges(cmd_tag_name)[1],
         )
-        cache_contorl.wframe_mouse.mouse_leave_cmd = 1
+        textbox.configure(cursor="")
+        cache.wframe_mouse.mouse_leave_cmd = 1
 
     textbox.tag_bind(cmd_tag_name, "<1>", send_cmd)
     textbox.tag_bind(cmd_tag_name, "<Enter>", enter_func)
@@ -511,12 +442,12 @@ def io_clear_cmd(*cmd_numbers: list):
                 del cmd_tag_map[num]
     else:
         for num in cmd_tag_map.keys():
-            index_first = textbox.tag_ranges(cmd_tag_map[num])[0]
-            index_lskip_one_waitast = textbox.tag_ranges(cmd_tag_map[num])[1]
-            for tag_name in textbox.tag_names(index_first):
-                textbox.tag_remove(
-                    tag_name, index_first, index_lskip_one_waitast
-                )
-            textbox.tag_add("standard", index_first, index_lskip_one_waitast)
+            tag_tuple = textbox.tag_ranges(cmd_tag_map[num])
+            if len(tag_tuple):
+                index_first = tag_tuple[0]
+                index_lskip_one_waitast = tag_tuple[1]
+                for tag_name in textbox.tag_names(index_first):
+                    textbox.tag_remove(tag_name, index_first, index_lskip_one_waitast)
+                textbox.tag_add("standard", index_first, index_lskip_one_waitast)
             textbox.tag_delete(cmd_tag_map[num])
         cmd_tag_map.clear()

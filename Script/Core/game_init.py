@@ -1,12 +1,10 @@
 # -*- coding: UTF-8 -*-
 from Script.Core import (
-    game_data,
     flow_handle,
     io_init,
     key_listion_event,
-    game_config,
-    cache_contorl,
 )
+from Script.Config import normal_config
 
 # 字符串定义###########################################################
 NO_EVENT_FUNC = "no_event_func"
@@ -29,13 +27,10 @@ def init(main_flow: object):
     # 载入按键监听
     key_listion_event.on_wframe_listion()
     # 设置背景颜色
-    io_init.set_background(game_data.game_data["core_cfg"]["background_color"])
+    io_init.set_background(normal_config.config_normal.background)
     # 初始化字体
     io_init.init_style()
     # 初始化地图数据
-    cache_contorl.map_data = game_data.game_data[game_config.language]["map"]
-    cache_contorl.scene_data = game_data.scene_data
-    cache_contorl.map_data = game_data.map_data
     global _main_flow
     _main_flow = main_flow
 
@@ -93,6 +88,3 @@ set_deal_cmd_func = flow_handle.set_tail_deal_cmd_func
 
 # 设置尾命令处理函数装饰器
 set_deal_cmd_func_deco = flow_handle.deco_set_tail_deal_cmd_func
-
-# 返回主数据集合
-data = game_data.game_data

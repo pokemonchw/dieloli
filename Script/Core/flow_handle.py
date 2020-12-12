@@ -1,14 +1,20 @@
 # -*- coding: UTF-8 -*-
 import time
 import os
+from types import FunctionType
 from Script.Core import (
-    cache_contorl,
-    text_loading,
     text_handle,
-    game_config,
     io_init,
-    constant,
+    get_text,
+    game_type,
+    cache_control,
 )
+from Script.Config import game_config
+
+cache: game_type.Cache = cache_control.cache
+""" 游戏缓存数据 """
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 def null_func():
@@ -58,7 +64,7 @@ def clear_default_flow():
     set_default_flow(null_func)
 
 
-cmd_map = cache_contorl.cmd_map
+cmd_map = cache.cmd_map
 
 
 def default_tail_deal_cmd_func(order):
@@ -103,6 +109,9 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
     if not isinstance(arg, tuple):
         arg = (arg,)
     if cmd_func == null_func:
+        cmd_map[cmd_number] = null_func
+        return
+    elif cmd_func == None:
         cmd_map[cmd_number] = null_func
         return
 
@@ -159,7 +168,7 @@ def _cmd_deal(order_number):
     Keyword arguments:
     order_number -- 对应命令数字
     """
-    cmd_map[int(order_number)]()
+    cmd_map[order_number]()
 
 
 def _cmd_valid(order_number):
@@ -168,10 +177,9 @@ def _cmd_valid(order_number):
     Keyword arguments:
     order_number -- 对应命令数字
     """
-    re = (order_number in cmd_map.keys()) and (
-        cmd_map[int(order_number)] != null_func
+    return (order_number in cmd_map) and (
+        cmd_map[order_number] != null_func and cmd_map[order_number] != None
     )
-    return re
 
 
 __skip_flag__ = False
@@ -191,11 +199,11 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
     __skip_flag__ = False
     while True:
         time.sleep(0.01)
-        if not donot_return_null_str and cache_contorl.wframe_mouse.w_frame_up:
+        if not donot_return_null_str and cache.wframe_mouse.w_frame_up:
             return ""
         while not io_init._order_queue.empty():
             order = io_init.get_order()
-            if cache_contorl.flow_contorl.quit_game:
+            if cache.flow_contorl.quit_game:
                 os._exit(0)
             if print_order and order != "":
                 io_init.era_print("\n" + order + "\n")
@@ -205,9 +213,9 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
                 return order
             if flag == "console":
                 exec(order)
-            if flag == "order" and order.isdigit():
-                if _cmd_valid(int(order)):
-                    _cmd_deal(int(order))
+            if flag == "order":
+                if _cmd_valid(order):
+                    _cmd_deal(order)
                     return
                 else:
                     global tail_deal_cmd_func
@@ -223,8 +231,8 @@ def askfor_str(donot_return_null_str=True, print_order=False):
     print_order -- 是否将输入的order输出到屏幕上
     """
     while True:
-        if not donot_return_null_str and cache_contorl.wframe_mouse.w_frame_up:
-            cache_contorl.wframe_mouse.w_frame_up = 0
+        if not donot_return_null_str and cache.wframe_mouse.w_frame_up:
+            cache.wframe_mouse.w_frame_up = 0
             return ""
         order = order_deal("str", print_order, donot_return_null_str)
         if donot_return_null_str and order != "":
@@ -233,28 +241,25 @@ def askfor_str(donot_return_null_str=True, print_order=False):
             return order
 
 
-def askfor_all(list, print_order=False):
+def askfor_all(input_list: list, print_order=False):
     """
     用于请求一个位于列表中的输入，如果输入没有在列表中，则告知用户出错。
     Keyword arguments:
-    list -- 用于判断的列表内容
+    input_list -- 用于判断的列表内容
     print_order -- 是否将输入的order输出到屏幕上
     """
-    while True:
+    while 1:
         order = order_deal("str", print_order)
-        if order in list:
+        if order in input_list:
             io_init.era_print(order + "\n")
+            if _cmd_valid(order):
+                _cmd_deal(order)
             return order
         elif order == "":
             continue
         else:
             io_init.era_print(order + "\n")
-            io_init.era_print(
-                text_loading.get_text_data(
-                    constant.FilePath.ERROR_PATH, "noInputListError"
-                )
-                + "\n"
-            )
+            io_init.era_print(_("您输入的选项无效，请重试\n"))
             continue
 
 
@@ -275,68 +280,14 @@ def askfor_int(list, print_order=False):
             continue
         else:
             io_init.era_print(order + "\n")
-            io_init.era_print(
-                text_loading.get_text_data(
-                    constant.FilePath.ERROR_PATH, "noInputListError"
-                )
-                + "\n"
-            )
+            io_init.era_print(_("您输入的选项无效，请重试\n"))
             continue
 
 
 def askfor_wait():
-    """
-    用于情求一个暂停动作，任何如数都可以继续
-    """
-    while not cache_contorl.wframe_mouse.w_frame_up:
+    """ 用于请求一个暂停动作，输入任何数都可以继续 """
+    cache.wframe_mouse.w_frame_up = 0
+    while not cache.wframe_mouse.w_frame_up:
         re = askfor_str(donot_return_null_str=False)
         if re == "":
             break
-
-
-def init_cache():
-    """
-    缓存初始化
-    """
-    cache_contorl.cmd_map = {}
-    cache_contorl.character_data = {}
-    cache_contorl.input_cache = [""]
-    cache_contorl.input_position = {"position": 0}
-    cache_contorl.output_text_style = "standard"
-    cache_contorl.text_style_position = 0
-    cache_contorl.text_style_cache = ["standard"]
-    cache_contorl.text_one_by_one_rich_cache = {
-        "text_list": [],
-        "style_list": [],
-    }
-    cache_contorl.game_time = {
-        "year": 0,
-        "month": 0,
-        "day": 0,
-        "hour": 0,
-        "minute": 0,
-    }
-    cache_contorl.cmd_data = {}
-    cache_contorl.image_id = 0
-    cache_contorl.panel_state = {
-        "SeeSaveListPanel": "0",
-        "SeeCharacterListPanel": "0",
-        "SeeSceneCharacterListPanel": "0",
-        "SeeSceneCharacterListPage": "0",
-        "SeeSceneNameListPanel": "1",
-        "SeeCharacterClothesPanel": "0",
-        "AttrShowHandlePanel": "MainAttr",
-        "SeeCharacterWearItemListPanel": "0",
-        "SeeCharacterItemListPanel": "0",
-        "SeeFoodShopListByFoodTypePanel": 0,
-        "SeeFoodShopListByFoodPanel": 0,
-    }
-    cache_contorl.max_save_page = game_config.save_page
-    cache_contorl.text_wait = float(game_config.text_wait)
-    cache_contorl.random_npc_list = []
-    cache_contorl.npc_tem_data = []
-    cache_contorl.now_flow_id = "title_frame"
-    cache_contorl.old_flow_id = ""
-    cache_contorl.too_old_flow_id = ""
-    cache_contorl.occupation__character_data = {}
-    cache_contorl.course_data = {}
