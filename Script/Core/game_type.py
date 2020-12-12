@@ -493,13 +493,13 @@ class Cache:
     """ 前提处理数据 """
     handle_target_data: Dict[str, FunctionType] = {}
     """ 目标类型数据 """
-    handle_instruct_data:Dict[int,FunctionType] = {}
+    handle_instruct_data: Dict[int, FunctionType] = {}
     """ 指令处理数据 """
-    handle_instruct_name_data:Dict[int,str] = {}
+    handle_instruct_name_data: Dict[int, str] = {}
     """ 指令对应文本 """
-    instruct_type_data:Dict[int,Set] = {}
+    instruct_type_data: Dict[int, Set] = {}
     """ 指令类型拥有的指令集合 """
-    instruct_premise_data:Dict[int,Set] = {}
+    instruct_premise_data: Dict[int, Set] = {}
     """ 指令显示的所需前提集合 """
     effect_target_table: Dict[str, Set] = {}
     """
@@ -629,8 +629,6 @@ class Cache:
         """ 游戏地图数据 地图路径:地图数据 """
         self.scene_data: Dict[str, Scene] = {}
         """ 游戏场景数据 场景路径:场景数据 """
-        self.now_map: List[str] = []
-        """ 查看地图时当前所查看的地图的坐标 """
         self.random_npc_list: List[NpcTem] = []
         """ 随机npc数据 """
         self.wear_item_type_data: dict = {}

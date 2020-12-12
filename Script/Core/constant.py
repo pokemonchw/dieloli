@@ -62,6 +62,8 @@ class Panel:
     """ 起床面板 """
     IN_SCENE = 3
     """ 场景互动面板 """
+    SEE_MAP = 4
+    """ 查看地图面板 """
 
 
 class Premise:
@@ -181,6 +183,7 @@ class InstructType:
     REST = 8
     """ 休息 """
 
+
 class Instruct:
     """ 指令id """
 
@@ -190,3 +193,9 @@ class Instruct:
     """ 购买食物 """
     EAT = 2
     """ 进食 """
+    MOVE = 3
+    """ 移动 """
+    SEE_ATTR = 4
+    """ 查看属性 """
+    SEE_OWNER_ATTR = 5
+    """ 查看自身属性 """

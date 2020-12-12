@@ -3,6 +3,7 @@ from typing import Set
 from types import FunctionType
 from Script.Core import constant, cache_control, game_type, get_text
 from Script.Design import update, character
+
 # from Script.Flow import buy_food, eat_food
 
 
@@ -12,7 +13,7 @@ _: FunctionType = get_text._
 """ 翻译api """
 
 
-def handle_instruct(instruct:int):
+def handle_instruct(instruct: int):
     """
     处理执行指令
     Keyword arguments:
@@ -22,7 +23,7 @@ def handle_instruct(instruct:int):
         cache.handle_instruct_data[instruct]()
 
 
-def add_instruct(instruct_id:int,instruct_type:int,name:str,premise_set:Set):
+def add_instruct(instruct_id: int, instruct_type: int, name: str, premise_set: Set):
     """
     添加指令处理
     Keyword arguments:
@@ -39,7 +40,7 @@ def add_instruct(instruct_id:int,instruct_type:int,name:str,premise_set:Set):
 
         cache.handle_instruct_data[instruct_id] = return_wrapper
         cache.instruct_premise_data[instruct_id] = premise_set
-        cache.instruct_type_data.setdefault(instruct_type,set())
+        cache.instruct_type_data.setdefault(instruct_type, set())
         cache.instruct_type_data[instruct_type].add(instruct_id)
         cache.handle_instruct_name_data[instruct_id] = name
         return return_wrapper
@@ -47,7 +48,7 @@ def add_instruct(instruct_id:int,instruct_type:int,name:str,premise_set:Set):
     return decorator
 
 
-@add_instruct(constant.Instruct.REST,constant.InstructType.REST,_("休息"),{})
+@add_instruct(constant.Instruct.REST, constant.InstructType.REST, _("休息"), {})
 def handle_rest():
     """ 处理休息指令 """
     character.init_character_behavior_start_time(0)
@@ -69,14 +70,15 @@ def handle_rest():
     update.game_update_flow(10)
 
 
-
-@add_instruct(constant.Instruct.BUY_FOOD,constant.InstructType.ACTIVE,_("购买食物"),{constant.Premise.IN_CAFETERIA})
+@add_instruct(
+    constant.Instruct.BUY_FOOD, constant.InstructType.ACTIVE, _("购买食物"), {constant.Premise.IN_CAFETERIA}
+)
 def handle_buy_food():
     """ 处理购买食物指令 """
-    #buy_food.buy_food()
+    # buy_food.buy_food()
 
 
-@add_instruct(constant.Instruct.EAT,constant.InstructType.ACTIVE,_("进食"),{})
+@add_instruct(constant.Instruct.EAT, constant.InstructType.ACTIVE, _("进食"), {})
 def handle_eat():
     """ 处理进食指令 """
     character.init_character_behavior_start_time(0)
@@ -90,3 +92,21 @@ def handle_eat():
         character_data.state = constant.CharacterStatus.STATUS_EAT
     update.game_update_flow(1)
     """
+
+
+@add_instruct(constant.Instruct.MOVE, constant.InstructType.ACTIVE, _("移动"), {})
+def handle_move():
+    """ 处理移动指令 """
+    cache.now_panel_id = constant.Panel.SEE_MAP
+
+
+@add_instruct(
+    constant.Instruct.SEE_ATTR, constant.InstructType.ACTIVE, _("查看属性"), {constant.Premise.HAVE_TARGET}
+)
+def handle_see_attr():
+    """ 查看属性 """
+
+
+@add_instruct(constant.Instruct.SEE_OWNER_ATTR, constant.InstructType.ACTIVE, _("查看自身属性"), {})
+def handle_see_owner_attr():
+    """ 查看自身属性 """

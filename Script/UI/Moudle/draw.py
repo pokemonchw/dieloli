@@ -161,9 +161,9 @@ class InfoBarDraw:
         """ 比例条绘制对象列表 """
         self.scale: float = 1
         """ 比例条绘制区域占比 """
-        self.max_value:int = 0
+        self.max_value: int = 0
         """ 最大数值 """
-        self.value:int = 0
+        self.value: int = 0
         """ 当前数值 """
 
     def set(self, bar_id: str, max_value: int, value: int, text: str):
@@ -370,6 +370,45 @@ class CenterButton:
         )
 
 
+class LeftButton(CenterButton):
+    """
+    左对齐按钮绘制
+    Keyword arguments:
+    text -- 按钮原始文本
+    return_text -- 点击按钮响应文本
+    width -- 按钮最大绘制宽度
+    fix_text -- 对齐用补全文本
+    normal_style -- 按钮默认样式
+    on_mouse_style -- 鼠标悬停时样式
+    cmd_func -- 按钮响应事件函数
+    args -- 传给事件响应函数的参数列表
+    """
+
+    def draw(self):
+        """ 绘制按钮 """
+        if self.width < text_handle.get_text_index(self.text):
+            now_text = ""
+            if self.width > 0:
+                for i in self.text:
+                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                        now_text += i
+                    break
+                now_text = now_text[:-2] + "~"
+        else:
+            now_index = text_handle.get_text_index(self.text)
+            now_text = text_handle.align(self.text, "left", 0, 1, self.width)
+            now_width = self.width - text_handle.get_text_index(now_text)
+            now_text = " " * int(now_width) + now_text
+        py_cmd.pcmd(
+            now_text,
+            self.return_text,
+            normal_style=self.normal_style,
+            on_style=self.on_mouse_style,
+            cmd_func=self.cmd_func,
+            arg=self.args,
+        )
+
+
 class LineDraw:
     """
     绘制线条文本
@@ -495,7 +534,7 @@ class LittleTitleLineDraw:
         """ 线条默认样式 """
         self.title_style = title_style
         """ 标题样式 """
-        self.line_feed:bool = True
+        self.line_feed: bool = True
         """ 线尾换行 """
 
     def draw(self):

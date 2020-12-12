@@ -142,7 +142,7 @@ class SeeCharacterStatusPanel:
     column -- 每行状态最大个数
     """
 
-    def __init__(self, character_id: int, width: int, column: int,center_status:bool=True):
+    def __init__(self, character_id: int, width: int, column: int, center_status: bool = True):
         """ 初始化绘制对象 """
         self.character_id = character_id
         """ 要绘制的角色id """
@@ -154,7 +154,7 @@ class SeeCharacterStatusPanel:
         """ 绘制的文本列表 """
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
-        self.center_status:bool = center_status
+        self.center_status: bool = center_status
         """ 居中绘制状态文本 """
         character_data = cache.character_data[character_id]
         for status_type in game_config.config_character_state_type_data:

@@ -103,7 +103,7 @@ def get_map_system_path_str_for_list(now_list: list) -> str:
     return os.sep.join(now_list)
 
 
-def get_path_finding(map_path_str: str, now_node: str, target_node: str) -> (str, list):
+def get_path_finding(map_path_str: str, now_node: str, target_node: str) -> (str, game_type.TargetPath):
     """
     查询寻路路径
     Keyword arguments:
@@ -112,10 +112,10 @@ def get_path_finding(map_path_str: str, now_node: str, target_node: str) -> (str
     target_node -- 目标节点相对位置
     Return arguments:
     str:end -- 寻路路径终点
-    lisr -- 寻路路径
+    game_type.TargetPath -- 寻路路径
     """
     if now_node == target_node:
-        return "End", []
+        return "End", game_type.TargetPath()
     else:
         return (
             "",
@@ -282,6 +282,8 @@ def get_scene_data_for_map(map_path_str: str, map_scene_id: str) -> game_type.Sc
     Keyword arguments:
     map_path -- 地图路径
     map_scene_id -- 场景相对位置
+    Return arguments:
+    game_type.Scene -- 场景数据
     """
     if map_path_str == "":
         scene_path_str = map_scene_id

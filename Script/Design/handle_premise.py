@@ -136,6 +136,7 @@ def handle_hunger(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    character_data.status.setdefault(27, 0)
     return math.floor(character_data.status[27] / 10)
 
 

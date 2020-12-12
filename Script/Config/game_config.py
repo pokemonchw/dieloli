@@ -102,7 +102,7 @@ config_height_tem_sex_data: Dict[int, config_def.HeightTem] = {}
 """ 性别对应身高预期值模板 """
 config_hitpoint_tem: Dict[int, config_def.HitPointTem] = {}
 """ HP模板对应平均值 """
-config_instruct_type: Dict[int,config_def.InstructType] = {}
+config_instruct_type: Dict[int, config_def.InstructType] = {}
 """ 指令类型配置 """
 config_item: Dict[int, config_def.Item] = {}
 """ 道具配置数据 """

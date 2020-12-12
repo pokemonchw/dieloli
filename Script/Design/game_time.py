@@ -315,8 +315,10 @@ def judge_school_course_time(school_id: int, time_data: datetime.datetime) -> ga
     course_status.course_index = now_time_index
     if now_time_index >= len(end_time_data):
         return course_status
-    start_time = course_time_data[now_time_index][0]
-    end_time = course_time_data[now_time_index][1]
+    course_time_id = game_config.config_school_session_data[school_id][now_time_index]
+    course_time_config = game_config.config_school_session[course_time_id]
+    start_time = course_time_config.start_time
+    end_time = course_time_config.end_time
     if now_time < start_time:
         if start_time / 100 != now_time / 100:
             index_time = (start_time / 100 - now_time / 100) * 60

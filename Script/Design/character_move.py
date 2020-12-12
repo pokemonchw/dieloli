@@ -12,7 +12,7 @@ def own_charcter_move(target_scene: list):
     target_scene -- 寻路目标场景(在地图系统下的绝对坐标)
     """
     while 1:
-        character_data = cache.character_data[0]
+        character_data: game_type.Character = cache.character_data[0]
         if character_data.position != target_scene:
             (
                 move_now,
@@ -22,16 +22,16 @@ def own_charcter_move(target_scene: list):
             ) = character_move(0, target_scene)
             if move_now == "Null":
                 break
-            character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
-            character_data.behavior["MoveTarget"] = now_target_position
-            character_data.behavior["Duration"] = now_need_time
+            character_data.behavior.behavior_id = constant.Behavior.MOVE
+            character_data.behavior.move_target = now_target_position
+            character_data.behavior.duration = now_need_time
             character_data.state = constant.CharacterStatus.STATUS_MOVE
             character.init_character_behavior_start_time(0)
             update.game_update_flow(now_need_time)
         else:
             break
     cache.character_data[0].target_character_id = 0
-    cache.now_flow_id = "in_scene"
+    cache.now_panel_id = constant.Panel.IN_SCENE
 
 
 def character_move(character_id: str, target_scene: list) -> (str, list, list, int):
@@ -127,7 +127,7 @@ def identical_map_move(
     now_target_position = []
     now_need_time = 0
     if move_path != []:
-        now_target_scene_id = move_path["Path"][0]
-        now_need_time = move_path["Time"][0]
+        now_target_scene_id = move_path.path[0]
+        now_need_time = move_path.time[0]
         now_target_position = map_handle.get_scene_path_for_map_scene_id(now_map, now_target_scene_id)
     return move_end, move_path, now_target_position, now_need_time

@@ -95,3 +95,23 @@ def get_scene_path_text(scene_path: List[str]) -> str:
         map_name = cache.map_data[now_map_map_system_str].map_name
         scene_path_text += map_name + "-"
     return scene_path_text + cache.scene_data[scene_path_str].scene_name
+
+
+def get_map_path_text(map_path: List[str]) -> str:
+    """
+    从地图路径获取地图地址描述文本
+    例:主教学楼-1F
+    Keyword arguments:
+    map_path -- 地图路径
+    Return arguments:
+    str -- 地图地址描述文本
+    """
+    map_list = map_handle.get_map_hierarchy_list_for_scene_path(map_path, [])
+    map_list.reverse()
+    map_list.append(map_path)
+    now_path_text = ""
+    for now_map in map_list:
+        now_map_map_system_str = map_handle.get_map_system_path_str_for_list(now_map)
+        map_name = cache.map_data[now_map_map_system_str].map_name
+        now_path_text += map_name + "-"
+    return now_path_text.rstrip("-")
