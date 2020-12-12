@@ -198,6 +198,7 @@ class SeeMapPanel:
         scene_path -- 目标场景路径
         """
         py_cmd.clr_cmd()
+        line_feed.draw()
         character_move.own_charcter_move(scene_path)
 
 

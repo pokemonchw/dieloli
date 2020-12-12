@@ -1,6 +1,5 @@
 import math
 import random
-import pysnooper
 from Script.Core import value_handle, cache_control, constant, game_type
 from Script.Core.game_type import Character
 from Script.Design import map_handle
