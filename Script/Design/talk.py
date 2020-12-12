@@ -3,6 +3,8 @@ from functools import wraps
 from types import FunctionType
 from Script.Core import cache_control, game_type
 from Script.Design import map_handle
+from Script.UI.Moudle import draw
+from Script.Config import normal_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -102,3 +104,7 @@ def handle_talk(character_id):
             PlayerNickName=player_data.nick_name,
             TargetName=target_data.name,
         )
+        now_draw = draw.WaitDraw()
+        now_draw.text = now_talk_text + "\n"
+        now_draw.width = normal_config.config_normal.text_width
+        now_draw.draw()

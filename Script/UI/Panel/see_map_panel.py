@@ -1,7 +1,16 @@
 from typing import List
 from types import FunctionType
 from Script.UI.Moudle import draw
-from Script.Core import get_text, cache_control, game_type, flow_handle, value_handle, text_handle, constant
+from Script.Core import (
+    get_text,
+    cache_control,
+    game_type,
+    flow_handle,
+    value_handle,
+    text_handle,
+    constant,
+    py_cmd,
+)
 from Script.Design import map_handle, attr_text, character_move
 
 _: FunctionType = get_text._
@@ -164,17 +173,20 @@ class SeeMapPanel:
                 return_list.append(down_button.return_text)
             line_feed.draw()
             yrn = flow_handle.askfor_all(return_list)
+            py_cmd.clr_cmd()
             if yrn == back_button.return_text:
                 cache.now_panel_id = constant.Panel.IN_SCENE
                 break
 
     def up_map(self):
         """ 将当前地图切换为上级地图 """
+        py_cmd.clr_cmd()
         up_map_path = map_handle.get_map_for_path(self.now_map)
         self.now_map = up_map_path
 
     def down_map(self):
         """ 将当前地图切换为下级地图 """
+        py_cmd.clr_cmd()
         character_position = cache.character_data[0].position
         down_map_scene_id = map_handle.get_map_scene_id_for_scene_path(self.now_map, character_position)
         self.now_map.append(down_map_scene_id)
@@ -185,6 +197,7 @@ class SeeMapPanel:
         Keyword arguments:
         scene_path -- 目标场景路径
         """
+        py_cmd.clr_cmd()
         character_move.own_charcter_move(scene_path)
 
 

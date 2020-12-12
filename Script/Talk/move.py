@@ -1,6 +1,10 @@
 from typing import List
-from Script.Core import constant
+from types import FunctionType
+from Script.Core import constant, get_text
 from Script.Design import talk
+
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 @talk.add_talk(constant.Behavior.MOVE, 1, {constant.Premise.IS_PLAYER})
@@ -11,9 +15,9 @@ def talk_move_1() -> List[str]:
     list -- 返回的口上列表
     """
     return [
-        "{NickName}来到了{SceneName}",
-        "{NickName}移动到了{SceneName}",
-        "{NickName}走到了{SceneName}",
+        _("{NickName}来到了{SceneName}"),
+        _("{NickName}移动到了{SceneName}"),
+        _("{NickName}走到了{SceneName}"),
     ]
 
 
@@ -29,9 +33,9 @@ def talk_move_2() -> List[str]:
     list -- 返回的口上列表
     """
     return [
-        "{Name}来到了{SceneName}",
-        "{Name}走了过来",
-        "{Name}冲着{PlayerNickName}打了个招呼",
+        _("{Name}来到了{SceneName}"),
+        _("{Name}走了过来"),
+        _("{Name}冲着{PlayerNickName}打了个招呼"),
     ]
 
 
@@ -47,10 +51,10 @@ def talk_move_3() -> List[str]:
     list -- 返回的口上列表
     """
     return [
-        "{Name}朝着{SceneName}离开了",
-        "{Name}走向了{SceneName}",
-        "{Name}去了{SceneName}",
-        "{Name}前往了{SceneName}",
+        _("{Name}朝着{SceneName}离开了"),
+        _("{Name}走向了{SceneName}"),
+        _("{Name}去了{SceneName}"),
+        _("{Name}前往了{SceneName}"),
     ]
 
 
@@ -71,7 +75,7 @@ def talk_move_4() -> List[str]:
     Return arguments:
     list -- 返回的口上列表
     """
-    talk_1 = "{Name}来到了{SceneName}\n"
-    talk_1 += "她看见{PlayerNickName}的第一时间便扑了过来\n"
-    talk_1 += "{Name}紧紧的抱住了{PlayerNickName},小脸不停的蹭着{PlayerNickName}的胸"
+    talk_1 = _(
+        "{Name}来到了{SceneName}\n她看见{PlayerNickName}的第一时间便扑了过来\n{Name}紧紧的抱住了{PlayerNickName},小脸不停的蹭着{PlayerNickName}的胸"
+    )
     return [talk_1]

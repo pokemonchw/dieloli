@@ -1,6 +1,10 @@
 from typing import List
-from Script.Core import constant
+from types import FunctionType
+from Script.Core import constant, get_text
 from Script.Design import talk
+
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 @talk.add_talk(constant.Behavior.EAT, 1, {constant.Premise.IS_PLAYER})
@@ -11,9 +15,9 @@ def talk_eat_1() -> List[str]:
     list -- 返回的口上列表
     """
     return [
-        "{NickName}吃掉了{FoodName}",
-        "{NickName}将{FoodName}吃掉了",
-        "{NickName}吃了一些{FoodName}",
+        _("{NickName}吃掉了{FoodName}"),
+        _("{NickName}将{FoodName}吃掉了"),
+        _("{NickName}吃了一些{FoodName}"),
     ]
 
 
@@ -28,9 +32,7 @@ def talk_eat_2() -> List[str]:
     Return arguments:
     list -- 返回的口上列表
     """
-    talk_1 = "{NickName}吃了一些{FoodName}\n"
-    talk_1 += "如春药一般的绝赞美味!\n"
-    talk_1 += "{NickName}沉浸在了食物带来的快乐之中"
+    talk_1 = _("{NickName}吃了一些{FoodName}\n如春药一般的绝赞美味!\n{NickName}沉浸在了食物带来的快乐之中")
     return [talk_1]
 
 
@@ -46,7 +48,7 @@ def talk_eat_3() -> List[str]:
     list -- 返回的口上列表
     """
     return [
-        "{Name}吃了一些{FoodName}",
-        "{Name}将{FoodName}吃掉了",
-        "{Name}吃掉了{FoodName}",
+        _("{Name}吃了一些{FoodName}"),
+        _("{Name}将{FoodName}吃掉了"),
+        _("{Name}吃掉了{FoodName}"),
     ]

@@ -1,6 +1,10 @@
 from typing import List
-from Script.Core import constant
+from types import FunctionType
+from Script.Core import constant, get_text
 from Script.Design import talk
+
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 @talk.add_talk(constant.Behavior.REST, 1, {constant.Premise.IS_PLAYER})
@@ -11,11 +15,11 @@ def talk_rest_1() -> List[str]:
     list -- 返回的口上列表
     """
     return [
-        "{NickName}小小的休息了一会儿",
-        "{NickName}长长的呼了一口气",
-        "{NickName}打了个盹",
-        "{NickName}伸了个懒腰",
-        "{NickName}咪起眼睛休息了一会儿",
+        _("{NickName}小小的休息了一会儿"),
+        _("{NickName}长长的呼了一口气"),
+        _("{NickName}打了个盹"),
+        _("{NickName}伸了个懒腰"),
+        _("{NickName}咪起眼睛休息了一会儿"),
     ]
 
 
@@ -31,11 +35,11 @@ def talk_rest_2() -> List[str]:
     list -- 返回的口上列表
     """
     return [
-        "{Name}小小的休息了一会儿",
-        "{Name}长长的呼了一口气",
-        "{Name}打了个盹",
-        "{Name}咪起眼睛休息了一会儿",
-        "{Name}伸了个懒腰",
+        _("{Name}小小的休息了一会儿"),
+        _("{Name}长长的呼了一口气"),
+        _("{Name}打了个盹"),
+        _("{Name}咪起眼睛休息了一会儿"),
+        _("{Name}伸了个懒腰"),
     ]
 
 
@@ -51,9 +55,9 @@ def talk_rest_3() -> List[str]:
     list -- 返回的口上列表
     """
     return [
-        "{NickName}和{TargetName}一起休息了一会儿",
-        "与{TargetName}一起休息了一会儿",
-        "一起打了个盹",
+        _("{NickName}和{TargetName}一起休息了一会儿"),
+        _("与{TargetName}一起休息了一会儿"),
+        _("一起打了个盹"),
     ]
 
 
@@ -72,10 +76,8 @@ def talk_rest_4() -> List[str]:
     Return arguments:
     list -- 返回的口上列表
     """
-    talk_1 = "{Name}将头靠在{PlayerNickName}肩上\n"
-    talk_1 += "{PlayerNickName}露出微笑,轻轻揽住了{Name}的腰"
-    talk_2 = "{PlayerNickName}从背后抱住了{Name}\n"
-    talk_2 += "两人一起休息了一会儿"
+    talk_1 = _("{Name}将头靠在{PlayerNickName}肩上\n{PlayerNickName}露出微笑,轻轻揽住了{Name}的腰")
+    talk_2 = _("{PlayerNickName}从背后抱住了{Name}\n两人一起休息了一会儿")
     return [talk_1, talk_2]
 
 
@@ -94,5 +96,5 @@ def talk_rest_5() -> List[str]:
     Return arguments:
     list -- 返回的口上列表
     """
-    talk_1 = "{Name}将头靠在{PlayerNickName}肩上小小的休息了一会儿"
+    talk_1 = _("{Name}将头靠在{PlayerNickName}肩上小小的休息了一会儿")
     return [talk_1]

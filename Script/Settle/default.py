@@ -1,7 +1,6 @@
 from Script.Design import (
     settle_behavior,
     talk,
-    talk_cache,
     game_time,
     map_handle,
 )

@@ -1,6 +1,6 @@
 from functools import wraps
 from Script.Core import cache_control, constant, game_type
-from Script.Design import game_time, talk, map_handle, talk_cache
+from Script.Design import game_time, talk, map_handle
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
