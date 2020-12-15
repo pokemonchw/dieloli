@@ -71,6 +71,7 @@ class InScenePanel:
         )
         see_instruct_panel = SeeInstructPanel(self.width)
         while 1:
+            cache.wframe_mouse.w_frame_skip_wait_mouse = 0
             if cache.now_panel_id != constant.Panel.IN_SCENE:
                 break
             character_handle_panel.null_button_text = character_data.target_character_id

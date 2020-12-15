@@ -30,6 +30,8 @@ class WFrameMouse:
     """ 逐行输出状态 """
     w_frame_mouse_next_line: int = 0
     """ 等待玩家确认后逐行 """
+    w_frame_skip_wait_mouse: int = 0
+    """ 跳过等待输入后继续输出文本 """
 
 
 class NpcTem:

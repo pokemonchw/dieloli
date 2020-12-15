@@ -199,31 +199,5 @@ class SeeMapPanel:
         """
         py_cmd.clr_cmd()
         line_feed.draw()
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 0
         character_move.own_charcter_move(scene_path)
-
-
-class SceneNameMoveButton:
-    """
-    场景名绘制通行按钮对象
-    Keyword arguments:
-    text -- 场景文本路径
-    width -- 最大宽度
-    is_button -- 绘制按钮
-    num_button -- 绘制数字按钮
-    button_id -- 数字按钮的id
-    """
-
-    def __init__(self, text: tuple, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
-        self.scene_path: str = text[0]
-        """ 场景的文本路径 """
-        self.map_path: str = text[1]
-        """ 场景所在地图文本路径 """
-        self.draw_text: str = ""
-        """ 场景名绘制文本 """
-        self.width: int = width
-        """ 最大宽度 """
-        self.is_button: bool = is_button
-        """ 绘制按钮 """
-        self.num_button: bool = num_button
-        """ 绘制数字按钮 """

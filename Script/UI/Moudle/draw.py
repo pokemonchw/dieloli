@@ -1,3 +1,4 @@
+import time
 from typing import List
 from types import FunctionType
 from Script.Core import (
@@ -7,10 +8,14 @@ from Script.Core import (
     constant,
     py_cmd,
     flow_handle,
+    cache_control,
+    game_type,
 )
 from Script.Config import game_config
 
 bar_list = set(game_config.config_bar_data.keys())
+cache: game_type.Cache = cache_control.cache
+""" 游戏缓存数据 """
 
 
 class NormalDraw:
@@ -68,7 +73,38 @@ class WaitDraw(NormalDraw):
             io_init.era_print(now_text, self.style)
         else:
             io_init.era_print(self.text, self.style)
-        flow_handle.askfor_wait()
+        if not cache.wframe_mouse.w_frame_skip_wait_mouse:
+            flow_handle.askfor_wait()
+        else:
+            time.sleep(0.01)
+
+
+class LineFeedWaitDraw(NormalDraw):
+    """ 每次换行时等待玩家左右键输入或输入回车 """
+
+    def draw(self):
+        """ 绘制文本 """
+        text_list = self.text.split("\n")
+        for text in text_list:
+            if self.__len__() > self.width:
+                now_text = ""
+                if self.width > 0:
+                    for i in self.text:
+                        if (
+                            text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                            < self.width
+                        ):
+                            now_text += i
+                        break
+                    now_text = now_text[:-2] + "~"
+                io_init.era_print(now_text, self.style)
+            else:
+                io_init.era_print(self.text, self.style)
+            if not cache.wframe_mouse.w_frame_skip_wait_mouse:
+                flow_handle.askfor_wait()
+            else:
+                time.sleep(0.01)
+            io_init.era_print("\n")
 
 
 class ImageDraw:

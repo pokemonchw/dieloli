@@ -40,7 +40,8 @@ def mouse_right_check(event: Event):
     """
     cache.wframe_mouse.mouse_right = 1
     cache.text_wait = 0
-    if not cache.wframe_mouse.w_frame_up == 0:
+    cache.wframe_mouse.w_frame_skip_wait_mouse = 1
+    if not cache.wframe_mouse.w_frame_up:
         set_wframe_up()
     else:
         mouse_check_push()

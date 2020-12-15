@@ -104,7 +104,7 @@ def handle_talk(character_id):
             PlayerNickName=player_data.nick_name,
             TargetName=target_data.name,
         )
-        now_draw = draw.WaitDraw()
-        now_draw.text = now_talk_text + "\n"
+        now_draw = draw.LineFeedWaitDraw()
+        now_draw.text = now_talk_text
         now_draw.width = normal_config.config_normal.text_width
         now_draw.draw()
