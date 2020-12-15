@@ -35,7 +35,7 @@ def add_instruct(instruct_id: int, instruct_type: int, name: str, premise_set: S
     premise_set -- 指令所需前提集合
     """
 
-    def decorator(func):
+    def decorator(func: FunctionType):
         @wraps(func)
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)

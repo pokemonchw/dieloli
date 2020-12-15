@@ -228,6 +228,18 @@ config_stature_description_text: Dict[int, config_def.StatureDescriptionText] = 
 """ 身材描述文本配置数据 """
 config_status: Dict[int, config_def.Status] = {}
 """ 角色状态类型配置数据 """
+config_target: Dict[int, config_def.Target] = {}
+""" 目标配置数据 """
+config_target_effect: Dict[int, config_def.TargetEffect] = {}
+""" 目标效果配置 """
+config_target_effect_data: Dict[int, Set] = {}
+""" 目标效果配置数据 """
+config_effect_target_data: Dict[int, Set] = {}
+""" 能达成效果的目标集合 """
+config_target_premise: Dict[int, config_def.TargetPremise] = {}
+""" 目标前提配置 """
+config_target_premise_data: Dict[int, Set] = {}
+""" 目标前提配置数据 """
 config_waist_hip_proportion: Dict[int, config_def.WaistHipProportion] = {}
 """ 不同肥胖程度腰臀比例差值配置 """
 config_week_day: Dict[int, config_def.WeekDay] = {}
@@ -838,6 +850,42 @@ def load_sun_time():
         config_sun_time[now_tem.cid] = now_tem
 
 
+def load_target():
+    """ 载入目标配置 """
+    now_data = config_data["Target"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Target()
+        now_tem.__dict__ = tem_data
+        config_target[now_tem.cid] = now_tem
+
+
+def load_target_effect():
+    """ 载入目标效果配置 """
+    now_data = config_data["TargetEffect"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.TargetEffect()
+        now_tem.__dict__ = tem_data
+        config_target_effect[now_tem.cid] = now_tem
+        config_target_effect_data.setdefault(now_tem.target_id, set())
+        config_target_effect_data[now_tem.target_id].add(now_tem.effect_id)
+        config_effect_target_data.setdefault(now_tem.effect_id, set())
+        config_effect_target_data[now_tem.effect_id].add(now_tem.target_id)
+
+
+def load_target_premise():
+    """ 载入目标效果配置 """
+    now_data = config_data["TargetPremise"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.TargetPremise()
+        now_tem.__dict__ = tem_data
+        config_target_premise[now_tem.cid] = now_tem
+        config_target_premise_data.setdefault(now_tem.target_id, set())
+        config_target_premise_data[now_tem.target_id].add(now_tem.premise_id)
+
+
 def load_waist_hip_proportion():
     """ 载入不同肥胖程度腰臀比例差值配置 """
     now_data = config_data["WaistHipProportion"]
@@ -923,6 +971,9 @@ def init():
     load_stature_description_text()
     load_status()
     load_sun_time()
+    load_target()
+    load_target_effect()
+    load_target_premise()
     load_waist_hip_proportion()
     load_week_day()
     load_weight_tem()

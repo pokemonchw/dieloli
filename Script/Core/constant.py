@@ -51,6 +51,21 @@ class Behavior:
     """ 进食 """
 
 
+class StateMachine:
+    """ 状态机id """
+
+    MOVE_TO_CLASS = 0
+    """ 移动到所属教室 """
+    MOVE_TO_RAND_CAFETERIA = 1
+    """ 移动到随机取餐区 """
+    BUY_RAND_FOOD_AT_CAFETERIA = 2
+    """ 在取餐区购买随机食物 """
+    MOVE_TO_RAND_RESTAURANT = 3
+    """ 移动至随机就餐区 """
+    EAT_BAG_RAND_FOOD = 4
+    """ 食用背包内随机食物 """
+
+
 class Panel:
     """ 面板id """
 
@@ -79,89 +94,89 @@ class Premise:
     """ 处于就餐区 """
     IN_BREAKFAST_TIME = 2
     """ 处于早餐时间段 """
-    IN_LUNCH_TIME = 2
+    IN_LUNCH_TIME = 3
     """ 处于午餐时间段 """
-    IN_DINNER_TIME = 3
+    IN_DINNER_TIME = 4
     """ 处于晚餐时间段 """
-    HUNGER = 4
+    HUNGER = 5
     """ 处于饥饿状态 """
-    HAVE_FOOD = 5
+    HAVE_FOOD = 6
     """ 拥有食物 """
-    NOT_HAVE_FOOD = 6
+    NOT_HAVE_FOOD = 7
     """ 未拥有食物 """
-    HAVE_TARGET = 7
+    HAVE_TARGET = 8
     """ 拥有交互对象 """
-    TARGET_NO_PLAYER = 8
+    TARGET_NO_PLAYER = 9
     """ 交互对象不是玩家 """
-    HAVE_DRAW_ITEM = 9
+    HAVE_DRAW_ITEM = 10
     """ 拥有绘画类道具 """
-    HAVE_SHOOTING_ITEM = 10
+    HAVE_SHOOTING_ITEM = 11
     """ 拥有射击类道具 """
-    HAVE_GUITAR = 11
+    HAVE_GUITAR = 12
     """ 拥有吉他 """
-    HAVE_HARMONICA = 12
+    HAVE_HARMONICA = 13
     """ 拥有口琴 """
-    HAVE_BAM_BOO_FLUTE = 13
+    HAVE_BAM_BOO_FLUTE = 14
     """ 拥有竹笛 """
-    HAVE_BASKETBALL = 14
+    HAVE_BASKETBALL = 15
     """ 拥有篮球 """
-    HAVE_FOOTBALL = 15
+    HAVE_FOOTBALL = 16
     """ 拥有足球 """
-    HAVE_TABLE_TENNIS = 16
+    HAVE_TABLE_TENNIS = 17
     """ 拥有乒乓球 """
-    IN_SWIMMING_POOL = 17
+    IN_SWIMMING_POOL = 18
     """ 在游泳池中 """
-    IN_CLASSROOM = 18
+    IN_CLASSROOM = 19
     """ 在教室中 """
-    IS_STUDENT = 19
+    IS_STUDENT = 20
     """ 是学生 """
-    IS_TEACHER = 20
+    IS_TEACHER = 21
     """ 是老师 """
-    IN_SHOP = 21
+    IN_SHOP = 22
     """ 在商店中 """
-    IN_SLEEP_TIME = 22
+    IN_SLEEP_TIME = 23
     """ 处于睡觉时间 """
-    IN_SIESTA_TIME = 23
+    IN_SIESTA_TIME = 24
     """ 处于午休时间 """
-    TARGET_IS_FUTA_OR_WOMAN = 24
+    TARGET_IS_FUTA_OR_WOMAN = 25
     """ 目标是扶她或女性 """
-    TARGET_IS_FUTA_OR_MAN = 25
+    TARGET_IS_FUTA_OR_MAN = 26
     """ 目标是扶她或男性 """
-    IS_MAN = 26
+    IS_MAN = 27
     """ 角色是男性 """
-    IS_WOMAN = 27
+    IS_WOMAN = 28
     """ 角色是女性 """
-    TARGET_SAME_SEX = 28
+    TARGET_SAME_SEX = 29
     """ 目标与自身性别相同 """
-    TARGET_AGE_SIMILAR = 29
+    TARGET_AGE_SIMILAR = 30
     """ 目标与自身年龄相差不大 """
-    TARGET_AVERAGE_HEIGHT_SIMILAR = 30
+    TARGET_AVERAGE_HEIGHT_SIMILAR = 31
     """ 目标身高与平均身高相差不大 """
-    TARGET_AVERAGE_HEIGHT_LOW = 31
+    TARGET_AVERAGE_HEIGHT_LOW = 32
     """ 目标身高低于平均身高 """
-    TARGET_IS_PLAYER = 32
+    TARGET_IS_PLAYER = 33
     """ 目标是玩家角色 """
-    TARGET_AVERGAE_STATURE_SIMILAR = 33
+    TARGET_AVERGAE_STATURE_SIMILAR = 34
     """ 目标体型与平均体型相差不大 """
-    TARGET_NOT_PUT_ON_UNDERWEAR = 34
+    TARGET_NOT_PUT_ON_UNDERWEAR = 35
     """ 目标没穿上衣 """
-    TARGET_NOT_PUT_ON_SKIRT = 35
+    TARGET_NOT_PUT_ON_SKIRT = 36
     """ 目标没穿短裙 """
-    IS_PLAYER = 36
+    IS_PLAYER = 37
     """ 是玩家角色 """
-    NO_PLAYER = 37
+    NO_PLAYER = 38
     """ 不是玩家角色 """
-    IN_PLAYER_SCENE = 38
+    IN_PLAYER_SCENE = 39
     """ 与玩家处于相同场景 """
-    LEAVE_PLAYER_SCENE = 39
+    LEAVE_PLAYER_SCENE = 40
     """ 离开玩家所在场景 """
-    TARGET_IS_ADORE = 40
+    TARGET_IS_ADORE = 41
     """ 目标是爱慕对象 """
-    TARGET_IS_ADMIRE = 41
+    TARGET_IS_ADMIRE = 42
     """ 目标是恋慕对象 """
-    PLAYER_IS_ADORE = 42
+    PLAYER_IS_ADORE = 43
     """ 玩家是爱慕对象 """
-    EAT_SPRING_FOOD = 43
+    EAT_SPRING_FOOD = 44
     """ 食用了春药品质的食物 """
 
 

@@ -493,8 +493,6 @@ class Cache:
 
     handle_premise_data: Dict[str, FunctionType] = {}
     """ 前提处理数据 """
-    handle_target_data: Dict[str, FunctionType] = {}
-    """ 目标类型数据 """
     handle_instruct_data: Dict[int, FunctionType] = {}
     """ 指令处理数据 """
     handle_instruct_name_data: Dict[int, str] = {}
@@ -503,11 +501,8 @@ class Cache:
     """ 指令类型拥有的指令集合 """
     instruct_premise_data: Dict[int, Set] = {}
     """ 指令显示的所需前提集合 """
-    effect_target_table: Dict[str, Set] = {}
-    """
-    效果对应所需目标集合
-    效果id:目标集合
-    """
+    handle_state_machine_data: Dict[int, FunctionType] = {}
+    """ 角色状态机函数 """
     premise_talk_table: Dict[int, Dict[int, Dict[int, Set]]] = {}
     """
     口上对应的所需前提集合
@@ -538,11 +533,6 @@ class Cache:
     """ 退出存档面板 """
     wframe_mouse: WFrameMouse = WFrameMouse()
     """ 主页监听控制流程用变量组 """
-    premise_target_table: Dict[str, set] = {}
-    """
-    目标对应的所需前提集合
-    目标id:前提集合
-    """
     adv_talk_data: Dict[int, Dict[int, Dict[int, FunctionType]]] = {}
     """
     角色行为对应口上数据

@@ -14,6 +14,7 @@ from Script.Design import (
     handle_premise,
     talk,
 )
+from Script.Config import game_config
 
 game_path = game_path_config.game_path
 cache: game_type.Cache = cache_control.cache
@@ -60,9 +61,10 @@ def character_target_judge(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    target, _, judge = search_target(character_id, list(cache.handle_target_data.keys()), set())
+    target, _, judge = search_target(character_id, list(game_config.config_target.keys()), set())
     if judge:
-        cache.handle_target_data[target](character_id)
+        target_config = game_config.config_target[target]
+        cache.handle_state_machine_data[target_config.state_machine_id](character_id)
     else:
         start_time = cache.character_data[character_id].behavior.start_time
         now_judge = game_time.judge_date_big_or_small(start_time, cache.game_time)
@@ -121,7 +123,7 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
     for target in target_list:
         if target in null_target:
             continue
-        target_premise_list = cache.premise_target_table[target]
+        target_premise_list = game_config.config_target_premise_data[target]
         now_weiget = 0
         now_target_pass_judge = 0
         now_target_data = {}
@@ -132,8 +134,8 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
                 now_weiget += premise_judge
             else:
                 premise_judge = 0
-                if premise in cache.effect_target_table:
-                    now_target_list = cache.effect_target_table[premise]
+                if premise in game_config.config_effect_target_data:
+                    now_target_list = game_config.config_effect_target_data[premise]
                     now_target, now_target_weight, now_judge = search_target(
                         character_id, now_target_list, null_target
                     )
