@@ -90,70 +90,6 @@ def init_character_behavior_start_time(character_id: int):
     character_data.behavior.start_time = start_time
 
 
-def character_move_to_classroom(character_id: int):
-    """
-    设置角色行为状态为向所属教室移动
-    Keyword arguments:
-    character_id -- 角色id
-    """
-    character_data = cache.character_data[character_id]
-    _, _, move_path, move_time = character_move.character_move(
-        character_id,
-        map_handle.get_map_system_path_for_str(character_data.classroom),
-    )
-    character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
-    character_data.behavior["MoveTarget"] = move_path
-    character_data.behavior["Duration"] = move_time
-    character_data.state = constant.CharacterStatus.STATUS_MOVE
-
-
-def character_attend_class(character_id: int):
-    """
-    设置角色行为状态为上课
-    Keyword arguments:
-    character_id -- 角色id
-    """
-    character_data = cache.character_data[character_id]
-    character_data.behavior["BehaviorId"] = constant.Behavior.ATTEND_CLASS
-    character_data.behavior["Duration"] = now_time_slice["EndCourse"]
-    character_data.behavior["MoveTarget"] = []
-    character_data.state = constant.CharacterStatus.STATUS_ATTEND_CLASS
-    init_character_behavior_start_time(character_id)
-
-
-def character_move_to_rand_cafeteria(character_id: int):
-    """
-    设置角色状态为向随机取餐区移动
-    Keyword arguments:
-    character_id -- 角色id
-    """
-    character_data = cache.character_data[character_id]
-    to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["Cafeteria"]))
-    _, _, move_path, move_time = character_move.character_move(character_id, to_cafeteria)
-    character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
-    character_data.behavior["MoveTarget"] = move_path
-    character_data.behavior["Duration"] = move_time
-    character_data.state = constant.CharacterStatus.STATUS_MOVE
-
-
-def character_move_to_rand_restaurant(character_id: int):
-    """
-    设置角色状态为向随机就餐区移动
-    Keyword arguments:
-    character_id -- 角色id
-    """
-    character_data = cache.character_data[character_id]
-    to_restaurant = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["Restaurant"]))
-    _, _, move_path, move_time = character_move.character_move(
-        character_id,
-        map_handle.get_map_system_path_for_str(character_data.classroom),
-    )
-    character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
-    character_data.behavior["MoveTarget"] = move_path
-    character_data.behavior["Duration"] = move_time
-    character_data.state = constant.CharacterStatus.STATUS_MOVE
-
-
 def character_rest_to_time(character_id: int, need_time: int):
     """
     设置角色状态为休息指定时间
@@ -165,38 +101,3 @@ def character_rest_to_time(character_id: int, need_time: int):
     character_data.behavior["Duration"] = need_time
     character_data.behavior["BehaviorId"] = constant.Behavior.REST
     character_data.state = constant.CharacterStatus.STATUS_REST
-
-
-def character_buy_rand_food_at_restaurant(character_id: int):
-    """
-    角色在取餐区中随机获取一种食物放入背包
-    Keyword arguments:
-    character_id -- 角色id
-    """
-    character_data = cache.character_data[character_id]
-    food_list = [
-        food_id
-        for food_id in cache.restaurant_data
-        if isinstance(food_id, int) and len(cache.restaurant_data[food_id])
-    ]
-    now_food_id = random.choice(food_list)
-    now_food = cache.restaurant_data[now_food_id][
-        random.choice(list(cache.restaurant_data[now_food_id].keys()))
-    ]
-    character_data.food_bag[now_food.uid] = now_food
-    del cache.restaurant_data[now_food_id][now_food.uid]
-
-
-def character_eat_rand_food(character_id: int):
-    """
-    角色随机食用背包中的食物
-    Keyword arguments:
-    character_id -- 角色id
-    """
-    character_data = cache.character_data[character_id]
-    character_data.behavior["BehaviorId"] = constant.Behavior.EAT
-    character_data.behavior["EatFood"] = character_data.food_bag[
-        random.choice(list(character_data.food_bag.keys()))
-    ]
-    character_data.behavior["Duration"] = 1
-    character_data.state = constant.CharacterStatus.STATUS_EAT

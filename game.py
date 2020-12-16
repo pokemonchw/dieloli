@@ -25,10 +25,10 @@ map_config.init_map_data()
 name_config.init_name_data()
 
 
-from Script.Design import start_flow, handle_target, handle_premise, game_time
+from Script.Design import start_flow, handle_premise, game_time
 from Script.Core import game_init
-import Script.Talk
 import Script.Settle
+import Script.StateMachine
 import Script.UI.Flow
 
 game_time.init_time()

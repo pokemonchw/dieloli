@@ -43,6 +43,17 @@ class Moon:
     """ 最大亮度 """
 
 
+class TargetEffect:
+    """ 执行目标所能达成的效果id """
+
+    cid: int
+    """ 配表id """
+    target_id: int
+    """ 所属目标id """
+    effect_id: int
+    """ 达成的效果id """
+
+
 class Organ:
     """ 器官对应性别限定和文字描述 """
 
@@ -155,6 +166,17 @@ class WeightTem:
     """ 最大值 """
 
 
+class Target:
+    """ ai的目标 """
+
+    cid: int
+    """ 目标id """
+    state_machine_id: int
+    """ 执行的状态机id """
+    remarks: str
+    """ 备注 """
+
+
 class ChestTem:
     """ 罩杯对应范围和生成权重 """
 
@@ -247,6 +269,17 @@ class SocialType:
     """ 关系id """
     name: str
     """ 名字 """
+
+
+class TargetPremise:
+    """ 执行目标所需的前提id """
+
+    cid: int
+    """ 配表id """
+    target_id: int
+    """ 所属目标id """
+    premise_id: int
+    """ 所需前提id """
 
 
 class HeightTem:
@@ -677,3 +710,27 @@ class BodyFatTem:
     """ 最小值 """
     max_value: float
     """ 最大值 """
+
+
+class TalkPremise:
+    """ 口上前提表 """
+
+    cid: str
+    """ 配表id """
+    talk_id: str
+    """ 所属口上id """
+    premise: int
+    """ 前提id """
+
+
+class Talk:
+    """ 口上配置数据 """
+
+    cid: str
+    """ 口上id """
+    behavior_id: int
+    """ 触发口上的行为id """
+    adv_id: int
+    """ 口上限定的剧情npcid """
+    context: str
+    """ 口上内容 """
