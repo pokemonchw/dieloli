@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-16 11:07+0800\n"
+"POT-Creation-Date: 2020-12-16 14:50+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -818,6 +818,14 @@ msgstr ""
 
 #: ../Script/Design/handle_instruct.py:106
 msgid "查看自身属性"
+msgstr ""
+
+#: ../Script/Design/settle_behavior.py:35
+msgid "体力:"
+msgstr ""
+
+#: ../Script/Design/settle_behavior.py:37
+msgid "气力:"
 msgstr ""
 
 #: class:SexTem id:0 type:name

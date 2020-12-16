@@ -90,10 +90,9 @@ def handle_in_breakfast_time(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    character_data = cache.character_data[character_id]
-    if character_data.course.course_index <= 2 and not character_data.course.in_course:
-        return 1
-    return 0
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = game_time.get_sun_time(character_data.behavior.start_time)
+    return now_time == 4
 
 
 @add_premise(constant.Premise.IN_LUNCH_TIME)
@@ -105,10 +104,9 @@ def handle_in_lunch_time(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    character_data = cache.character_data[character_id]
-    if character_data.course.course_index >= 4 and character_data.course.course_index <= 6:
-        return 1
-    return 0
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = game_time.get_sun_time(character_data.behavior.start_time)
+    return now_time == 7
 
 
 @add_premise(constant.Premise.IN_DINNER_TIME)
@@ -120,10 +118,9 @@ def handle_in_dinner_time(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    character_data = cache.character_data[character_id]
-    if character_data.course.course_index >= 7:
-        return 1
-    return 0
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = game_time.get_sun_time(character_data.behavior.start_time)
+    return now_time == 9
 
 
 @add_premise(constant.Premise.HUNGER)

@@ -34,6 +34,8 @@ class CharacterStatus:
     """ 上课状态 """
     STATUS_EAT = 4
     """ 进食状态 """
+    STATUS_CHAT = 5
+    """ 闲聊状态 """
 
 
 class Behavior:
@@ -49,6 +51,8 @@ class Behavior:
     """ 上课 """
     EAT = 4
     """ 进食 """
+    CHAT = 5
+    """ 闲聊 """
 
 
 class StateMachine:

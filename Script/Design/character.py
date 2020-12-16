@@ -72,20 +72,20 @@ def init_class(character_data: game_type.Character):
         character_data.classroom = random.choice(cache.place_data["Classroom_" + class_grade])
 
 
-def init_character_behavior_start_time(character_id: int):
+def init_character_behavior_start_time(character_id: int, now_time: datetime.datetime):
     """
-    将角色的行动开始时间同步为当前游戏时间
+    将角色的行动开始时间同步为指定时间
     Keyword arguments:
     character_id -- 角色id
+    now_time -- 指定时间
     """
     character_data = cache.character_data[character_id]
-    game_time = cache.game_time
     start_time = datetime.datetime(
-        game_time.year,
-        game_time.month,
-        game_time.day,
-        game_time.hour,
-        game_time.minute,
+        now_time.year,
+        now_time.month,
+        now_time.day,
+        now_time.hour,
+        now_time.minute,
     )
     character_data.behavior.start_time = start_time
 

@@ -1,5 +1,6 @@
 import os
 import random
+import datetime
 from functools import wraps
 from Script.Core import (
     cache_control,
@@ -29,33 +30,34 @@ def init_character_behavior():
         if len(cache.over_behavior_character) >= len(cache.character_data):
             break
         for character_id in cache.character_data:
-            character_behavior(character_id)
+            character_behavior(character_id, cache.game_time)
     cache.over_behavior_character = {}
 
 
-def character_behavior(character_id: int):
+def character_behavior(character_id: int, now_time: datetime.datetime):
     """
     角色行为控制
     Keyword arguments:
     character_id -- 角色id
+    now_time -- 指定时间
     """
     if character_id in cache.over_behavior_character:
         return
     if cache.character_data[character_id].behavior.start_time == None:
-        character.init_character_behavior_start_time(character_id)
+        character.init_character_behavior_start_time(character_id, now_time)
     game_time.init_now_course_time_slice(character_id)
     if cache.character_data[character_id].state == constant.CharacterStatus.STATUS_ARDER:
         if character_id:
-            character_target_judge(character_id)
+            character_target_judge(character_id, now_time)
         else:
             cache.over_behavior_character[0] = 1
     else:
-        status_judge = judge_character_status(character_id)
+        status_judge = judge_character_status(character_id, now_time)
         if status_judge:
             cache.over_behavior_character[character_id] = 1
 
 
-def character_target_judge(character_id: int):
+def character_target_judge(character_id: int, now_time: datetime.datetime):
     """
     查询角色可用目标活动并执行
     Keyword arguments:
@@ -67,7 +69,7 @@ def character_target_judge(character_id: int):
         cache.handle_state_machine_data[target_config.state_machine_id](character_id)
     else:
         start_time = cache.character_data[character_id].behavior.start_time
-        now_judge = game_time.judge_date_big_or_small(start_time, cache.game_time)
+        now_judge = game_time.judge_date_big_or_small(start_time, now_time)
         if now_judge:
             cache.over_behavior_character[character_id] = 1
         else:
@@ -75,7 +77,7 @@ def character_target_judge(character_id: int):
             cache.character_data[character_id].behavior.start_time = next_time
 
 
-def judge_character_status(character_id: int) -> int:
+def judge_character_status(character_id: int, now_time: datetime.datetime) -> int:
     """
     校验并结算角色状态
     Keyword arguments:
@@ -86,7 +88,6 @@ def judge_character_status(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     start_time = character_data.behavior.start_time
     end_time = game_time.get_sub_date(minute=character_data.behavior.duration, old_date=start_time)
-    now_time = cache.game_time
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
     add_time = (end_time.timestamp() - start_time.timestamp()) / 60
     character_data.status.setdefault(27, 0)
@@ -94,7 +95,7 @@ def judge_character_status(character_id: int) -> int:
     character_data.status[27] += add_time * 0.02
     character_data.status[28] += add_time * 0.02
     if time_judge:
-        settle_behavior.handle_settle_behavior(character_id)
+        settle_behavior.handle_settle_behavior(character_id, now_time)
         talk.handle_talk(character_id)
         character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
         character_data.state = constant.CharacterStatus.STATUS_ARDER
@@ -102,7 +103,7 @@ def judge_character_status(character_id: int) -> int:
         character_data.behavior.start_time = end_time
         return 0
     elif time_judge == 2:
-        character.init_character_behavior_start_time(character_id)
+        character.init_character_behavior_start_time(character_id, now_time)
         return 0
     return 1
 
