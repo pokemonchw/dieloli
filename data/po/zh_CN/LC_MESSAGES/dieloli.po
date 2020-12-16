@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-15 18:58+0800\n"
+"POT-Creation-Date: 2020-12-16 11:07+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,185 +19,6 @@ msgstr ""
 
 #: ../game.py:19
 msgid "python3版本过旧(低于python3.9.0),请升级"
-msgstr ""
-
-#: ../Script/Talk/rest.py:18
-#, python-brace-format
-msgid "{NickName}小小的休息了一会儿"
-msgstr ""
-
-#: ../Script/Talk/rest.py:19
-#, python-brace-format
-msgid "{NickName}长长的呼了一口气"
-msgstr ""
-
-#: ../Script/Talk/rest.py:20
-#, python-brace-format
-msgid "{NickName}打了个盹"
-msgstr ""
-
-#: ../Script/Talk/rest.py:21
-#, python-brace-format
-msgid "{NickName}伸了个懒腰"
-msgstr ""
-
-#: ../Script/Talk/rest.py:22
-#, python-brace-format
-msgid "{NickName}咪起眼睛休息了一会儿"
-msgstr ""
-
-#: ../Script/Talk/rest.py:38
-#, python-brace-format
-msgid "{Name}小小的休息了一会儿"
-msgstr ""
-
-#: ../Script/Talk/rest.py:39
-#, python-brace-format
-msgid "{Name}长长的呼了一口气"
-msgstr ""
-
-#: ../Script/Talk/rest.py:40
-#, python-brace-format
-msgid "{Name}打了个盹"
-msgstr ""
-
-#: ../Script/Talk/rest.py:41
-#, python-brace-format
-msgid "{Name}咪起眼睛休息了一会儿"
-msgstr ""
-
-#: ../Script/Talk/rest.py:42
-#, python-brace-format
-msgid "{Name}伸了个懒腰"
-msgstr ""
-
-#: ../Script/Talk/rest.py:58
-#, python-brace-format
-msgid "{NickName}和{TargetName}一起休息了一会儿"
-msgstr ""
-
-#: ../Script/Talk/rest.py:59
-#, python-brace-format
-msgid "与{TargetName}一起休息了一会儿"
-msgstr ""
-
-#: ../Script/Talk/rest.py:60
-msgid "一起打了个盹"
-msgstr ""
-
-#: ../Script/Talk/rest.py:79
-#, python-brace-format
-msgid ""
-"{Name}将头靠在{PlayerNickName}肩上\n"
-"{PlayerNickName}露出微笑,轻轻揽住了{Name}的腰"
-msgstr ""
-
-#: ../Script/Talk/rest.py:80
-#, python-brace-format
-msgid ""
-"{PlayerNickName}从背后抱住了{Name}\n"
-"两人一起休息了一会儿"
-msgstr ""
-
-#: ../Script/Talk/rest.py:99
-#, python-brace-format
-msgid "{Name}将头靠在{PlayerNickName}肩上小小的休息了一会儿"
-msgstr ""
-
-#: ../Script/Talk/eat.py:18
-#, python-brace-format
-msgid "{NickName}吃掉了{FoodName}"
-msgstr ""
-
-#: ../Script/Talk/eat.py:19
-#, python-brace-format
-msgid "{NickName}将{FoodName}吃掉了"
-msgstr ""
-
-#: ../Script/Talk/eat.py:20
-#, python-brace-format
-msgid "{NickName}吃了一些{FoodName}"
-msgstr ""
-
-#: ../Script/Talk/eat.py:35
-#, python-brace-format
-msgid ""
-"{NickName}吃了一些{FoodName}\n"
-"如春药一般的绝赞美味!\n"
-"{NickName}沉浸在了食物带来的快乐之中"
-msgstr ""
-
-#: ../Script/Talk/eat.py:51
-#, python-brace-format
-msgid "{Name}吃了一些{FoodName}"
-msgstr ""
-
-#: ../Script/Talk/eat.py:52
-#, python-brace-format
-msgid "{Name}将{FoodName}吃掉了"
-msgstr ""
-
-#: ../Script/Talk/eat.py:53
-#, python-brace-format
-msgid "{Name}吃掉了{FoodName}"
-msgstr ""
-
-#: ../Script/Talk/move.py:18
-#, python-brace-format
-msgid "{NickName}来到了{SceneName}"
-msgstr ""
-
-#: ../Script/Talk/move.py:19
-#, python-brace-format
-msgid "{NickName}移动到了{SceneName}"
-msgstr ""
-
-#: ../Script/Talk/move.py:20
-#, python-brace-format
-msgid "{NickName}走到了{SceneName}"
-msgstr ""
-
-#: ../Script/Talk/move.py:36
-#, python-brace-format
-msgid "{Name}来到了{SceneName}"
-msgstr ""
-
-#: ../Script/Talk/move.py:37
-#, python-brace-format
-msgid "{Name}走了过来"
-msgstr ""
-
-#: ../Script/Talk/move.py:38
-#, python-brace-format
-msgid "{Name}冲着{PlayerNickName}打了个招呼"
-msgstr ""
-
-#: ../Script/Talk/move.py:54
-#, python-brace-format
-msgid "{Name}朝着{SceneName}离开了"
-msgstr ""
-
-#: ../Script/Talk/move.py:55
-#, python-brace-format
-msgid "{Name}走向了{SceneName}"
-msgstr ""
-
-#: ../Script/Talk/move.py:56
-#, python-brace-format
-msgid "{Name}去了{SceneName}"
-msgstr ""
-
-#: ../Script/Talk/move.py:57
-#, python-brace-format
-msgid "{Name}前往了{SceneName}"
-msgstr ""
-
-#: ../Script/Talk/move.py:79
-#, python-brace-format
-msgid ""
-"{Name}来到了{SceneName}\n"
-"她看见{PlayerNickName}的第一时间便扑了过来\n"
-"{Name}紧紧的抱住了{PlayerNickName},小脸不停的蹭着{PlayerNickName}的胸"
 msgstr ""
 
 #: ../Script/Core/flow_handle.py:262 ../Script/Core/flow_handle.py:283
@@ -3545,6 +3366,130 @@ msgstr ""
 
 #: class:WeekDay id:6 type:name
 msgid "周日"
+msgstr ""
+
+#: class:Talk id:default0 type:context
+msgid "{NickName}吃掉了{FoodName}"
+msgstr ""
+
+#: class:Talk id:default1 type:context
+msgid "{NickName}将{FoodName}吃掉了"
+msgstr ""
+
+#: class:Talk id:default2 type:context
+msgid "{NickName}吃了一些{FoodName}"
+msgstr ""
+
+#: class:Talk id:default3 type:context
+msgid "{NickName}吃了一些{FoodName}\n如春药一般的绝赞美味!\n{NickName}沉浸在了食物带来的快乐之中"
+msgstr ""
+
+#: class:Talk id:default4 type:context
+msgid "{Name}吃掉了{FoodName}"
+msgstr ""
+
+#: class:Talk id:default5 type:context
+msgid "{Name}将{FoodName}吃掉了"
+msgstr ""
+
+#: class:Talk id:default6 type:context
+msgid "{Name}吃了一些{FoodName}"
+msgstr ""
+
+#: class:Talk id:default7 type:context
+msgid "{NickName}来到了{SceneName}"
+msgstr ""
+
+#: class:Talk id:default8 type:context
+msgid "{NickName}移动到了{SceneName}"
+msgstr ""
+
+#: class:Talk id:default9 type:context
+msgid "{NickName}走到了{SceneName}"
+msgstr ""
+
+#: class:Talk id:default10 type:context
+msgid "{Name}来到了{SceneName}"
+msgstr ""
+
+#: class:Talk id:default11 type:context
+msgid "{Name}走了过来"
+msgstr ""
+
+#: class:Talk id:default12 type:context
+msgid "{Name}冲着{PlayerNickName}打了个招呼"
+msgstr ""
+
+#: class:Talk id:default13 type:context
+msgid "{Name}朝着{SceneName}离开了"
+msgstr ""
+
+#: class:Talk id:default14 type:context
+msgid "{Name}去了{SceneName}"
+msgstr ""
+
+#: class:Talk id:default15 type:context
+msgid "{Name}前往了{SceneName}"
+msgstr ""
+
+#: class:Talk id:default16 type:context
+msgid "{Name}来到了{SceneName}\n她看见{PlayerNickName}的第一时间便扑了过来\n{Name}紧紧的抱住了{PlayerNickName},小脸不停的蹭着{PlayerNickName}的胸"
+msgstr ""
+
+#: class:Talk id:default17 type:context
+msgid "{NickName}小小的休息了一会儿"
+msgstr ""
+
+#: class:Talk id:default18 type:context
+msgid "{NickName}长长的呼了一口气"
+msgstr ""
+
+#: class:Talk id:default19 type:context
+msgid "{NickName}打了个盹"
+msgstr ""
+
+#: class:Talk id:default20 type:context
+msgid "{NickName}伸了个懒腰"
+msgstr ""
+
+#: class:Talk id:default21 type:context
+msgid "{NickName}眯起眼睛休息了一会儿"
+msgstr ""
+
+#: class:Talk id:default22 type:context
+msgid "{Name}小小的休息了一会儿"
+msgstr ""
+
+#: class:Talk id:default23 type:context
+msgid "{Name}长长的呼了一口气"
+msgstr ""
+
+#: class:Talk id:default24 type:context
+msgid "{Name}打了个盹"
+msgstr ""
+
+#: class:Talk id:default25 type:context
+msgid "{Name}伸了个懒腰"
+msgstr ""
+
+#: class:Talk id:default26 type:context
+msgid "{Name}眯起眼睛休息了一会儿"
+msgstr ""
+
+#: class:Talk id:default27 type:context
+msgid "{NickName}和{TargetName}一起休息了一会儿"
+msgstr ""
+
+#: class:Talk id:default28 type:context
+msgid "与{TargetName}一起休息了一会儿"
+msgstr ""
+
+#: class:Talk id:default29 type:context
+msgid "一起打了个盹"
+msgstr ""
+
+#: class:Talk id:default30 type:context
+msgid "{Name}将头靠在{PlayerNickName}的肩上小小的休息了一会儿"
 msgstr ""
 
 #: Scene:../data/map/25/2/12/Scene.json

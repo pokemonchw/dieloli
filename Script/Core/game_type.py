@@ -503,11 +503,6 @@ class Cache:
     """ 指令显示的所需前提集合 """
     handle_state_machine_data: Dict[int, FunctionType] = {}
     """ 角色状态机函数 """
-    premise_talk_table: Dict[int, Dict[int, Dict[int, Set]]] = {}
-    """
-    口上对应的所需前提集合
-    advid:行为id:口上id:前提集合
-    """
     family_region_list: Dict[int, str] = {}
     """ 姓氏区间数据 """
     boys_region_list: Dict[int, str] = {}
@@ -533,11 +528,6 @@ class Cache:
     """ 退出存档面板 """
     wframe_mouse: WFrameMouse = WFrameMouse()
     """ 主页监听控制流程用变量组 """
-    adv_talk_data: Dict[int, Dict[int, Dict[int, FunctionType]]] = {}
-    """
-    角色行为对应口上数据
-    advid:行为id:口上id:口上对象
-    """
     cmd_map: Dict[int, object] = {}
     """ cmd存储 """
 

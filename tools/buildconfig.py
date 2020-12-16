@@ -3,13 +3,15 @@ import os
 import json
 
 config_dir = os.path.join("..", "data", "csv")
+talk_dir = os.path.join("..", "data", "talk")
 config_data = {}
 config_def_str = ""
 config_po = "\n"
 msgData = set()
+class_data = set()
 
 
-def build_csv_config(file_path: str, file_name: str):
+def build_csv_config(file_path: str, file_name: str, talk: bool):
     with open(file_path, encoding="utf-8") as now_file:
         now_read = csv.DictReader(now_file)
         now_docstring_data = {}
@@ -17,8 +19,13 @@ def build_csv_config(file_path: str, file_name: str):
         get_text_data = {}
         file_id = file_name.split(".")[0]
         i = 0
-        config_data[file_id] = {"data": [], "gettext": {}}
         class_text = ""
+        type_text = file_id
+        if talk:
+            type_text = "Talk"
+            if len(file_id.split("_")) > 1:
+                type_text = "TalkPremise"
+        config_data[type_text] = {"data": [], "gettext": {}}
         for row in now_read:
             if not i:
                 for k in row:
@@ -52,20 +59,26 @@ def build_csv_config(file_path: str, file_name: str):
                     row[k] = int(row[k])
                 elif now_type == "float":
                     row[k] = float(row[k])
+                if k == "cid" and talk:
+                    row[k] = file_id.split("_")[0] + row[k]
+                if k == "talk_id" and talk:
+                    row[k] = file_id.split("_")[0] + row[k]
                 if get_text_data[k]:
-                    build_config_po(row[k], file_id, k, row["cid"])
-            config_data[file_id]["data"].append(row)
-        config_data[file_id]["gettext"] = get_text_data
-        build_config_def(file_id, now_type_data, now_docstring_data, class_text)
+                    build_config_po(row[k], type_text, k, row["cid"])
+            config_data[type_text]["data"].append(row)
+        config_data[type_text]["gettext"] = get_text_data
+        build_config_def(type_text, now_type_data, now_docstring_data, class_text)
 
 
 def build_config_def(class_name: str, value_type: dict, docstring: dict, class_text: str):
     global config_def_str
-    config_def_str += "class " + class_name + ":"
-    config_def_str += '\n    """ ' + class_text + ' """\n'
-    for k in value_type:
-        config_def_str += "\n    " + k + ": " + value_type[k] + "\n"
-        config_def_str += "    " + '""" ' + docstring[k] + ' """'
+    if class_name not in class_data:
+        config_def_str += "class " + class_name + ":"
+        config_def_str += '\n    """ ' + class_text + ' """\n'
+        for k in value_type:
+            config_def_str += "\n    " + k + ": " + value_type[k] + "\n"
+            config_def_str += "    " + '""" ' + docstring[k] + ' """'
+        class_data.add(class_name)
 
 
 def build_config_po(message: str, message_class: str, message_type: str, message_id: str):
@@ -112,8 +125,14 @@ for i in file_list:
     if index:
         config_def_str += "\n\n\n"
     now_file = os.path.join(config_dir, i)
-    build_csv_config(now_file, i)
+    build_csv_config(now_file, i, 0)
     index += 1
+
+talk_file_list = os.listdir(talk_dir)
+for i in talk_file_list:
+    config_def_str += "\n\n\n"
+    now_file = os.path.join(talk_dir, i)
+    build_csv_config(now_file, i, 1)
 
 map_path = os.path.join("..", "data", "map")
 build_scene_config(map_path)

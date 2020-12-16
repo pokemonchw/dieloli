@@ -710,3 +710,27 @@ class BodyFatTem:
     """ 最小值 """
     max_value: float
     """ 最大值 """
+
+
+class TalkPremise:
+    """ 口上前提表 """
+
+    cid: str
+    """ 配表id """
+    talk_id: str
+    """ 所属口上id """
+    premise: int
+    """ 前提id """
+
+
+class Talk:
+    """ 口上配置数据 """
+
+    cid: str
+    """ 口上id """
+    behavior_id: int
+    """ 触发口上的行为id """
+    adv_id: int
+    """ 口上限定的剧情npcid """
+    context: str
+    """ 口上内容 """

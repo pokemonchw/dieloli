@@ -228,6 +228,14 @@ config_stature_description_text: Dict[int, config_def.StatureDescriptionText] = 
 """ 身材描述文本配置数据 """
 config_status: Dict[int, config_def.Status] = {}
 """ 角色状态类型配置数据 """
+config_talk: Dict[int, config_def.Talk] = {}
+""" 口上配置 """
+config_talk_data: Dict[int, Set] = {}
+""" 角色行为对应口上集合 """
+config_talk_premise: Dict[int, config_def.TalkPremise] = {}
+""" 口上前提配置 """
+config_talk_premise_data: Dict[int, Set] = {}
+""" 口上前提配置数据 """
 config_target: Dict[int, config_def.Target] = {}
 """ 目标配置数据 """
 config_target_effect: Dict[int, config_def.TargetEffect] = {}
@@ -850,6 +858,30 @@ def load_sun_time():
         config_sun_time[now_tem.cid] = now_tem
 
 
+def load_talk():
+    """ 载入口上配置 """
+    now_data = config_data["Talk"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Talk()
+        now_tem.__dict__ = tem_data
+        config_talk[now_tem.cid] = now_tem
+        config_talk_data.setdefault(now_tem.behavior_id, set())
+        config_talk_data[now_tem.behavior_id].add(now_tem.cid)
+
+
+def load_talk_premise():
+    """ 载入口上前提配置 """
+    now_data = config_data["TalkPremise"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.TalkPremise()
+        now_tem.__dict__ = tem_data
+        config_talk_premise[now_tem.cid] = now_tem
+        config_talk_premise_data.setdefault(now_tem.talk_id, set())
+        config_talk_premise_data[now_tem.talk_id].add(now_tem.premise)
+
+
 def load_target():
     """ 载入目标配置 """
     now_data = config_data["Target"]
@@ -971,6 +1003,8 @@ def init():
     load_stature_description_text()
     load_status()
     load_sun_time()
+    load_talk()
+    load_talk_premise()
     load_target()
     load_target_effect()
     load_target_premise()
