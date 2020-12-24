@@ -70,7 +70,9 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
             if len(status_data.favorability):
                 now_text_list.extend(
                     [
-                        _("对{character_name}好感").format(character_name=cache.character_data[i].name)
+                        _("{target_name}对{character_name}好感").format(
+                            target_name=cache.character_data[i].name, character_name=now_character_data.name
+                        )
                         + text_handle.number_to_symbol_string(round(status_data.favorability[i], 2))
                         for i in status_data.favorability
                     ]

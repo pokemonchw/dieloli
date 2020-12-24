@@ -98,7 +98,7 @@ def number_to_symbol_string(value: int) -> str:
     Return arguments:
     str -- 转换后的字符串
     """
-    symbol = "+"
-    if value < 0:
-        symbol = "-"
+    symbol = ""
+    if value >= 0:
+        symbol = "+"
     return f"{symbol}{value}"

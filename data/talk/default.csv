@@ -34,3 +34,9 @@ str,int,int,str
 28,2,0,与{TargetName}一起休息了一会儿
 29,2,0,一起打了个盹
 30,2,0,{Name}将头靠在{PlayerNickName}的肩上小小的休息了一会儿
+31,5,0,和{TargetName}一起闲聊了一会儿
+32,5,0,和{TargetName}聊了一会儿天
+33,5,0,和{TargetName}分享了最近的见闻
+34,5,0,给{TargetName}讲了个笑话
+35,5,0,给{TargetName}讲了个故事\n{TargetName}被{NickName}的风趣打动笑了出来
+36,5,0,和{TargetName}分享了最近的见闻\n{TargetName}只是将脑袋靠在{NickName}的肩上\n静静的听着{NickName}讲述

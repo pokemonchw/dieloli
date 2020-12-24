@@ -5,6 +5,7 @@ from Script.Design import (
     talk,
     game_time,
     map_handle,
+    character,
 )
 from Script.Core import constant, cache_control, game_type
 from Script.Config import game_config
@@ -23,7 +24,7 @@ def settle_rest(character_id: int, now_time: datetime.datetime) -> game_type.Cha
     Return arguments:
     game_type.CharacterStatusChange -- 行为改变的角色状态
     """
-    character_data = cache.character_data[character_id]
+    character_data: game_type.Character = cache.character_data[character_id]
     start_time = character_data.behavior.start_time
     add_time = int((now_time - start_time).seconds / 60)
     add_hit_point = add_time * 5
@@ -39,6 +40,14 @@ def settle_rest(character_id: int, now_time: datetime.datetime) -> game_type.Cha
         character_data.mana_point = character_data.mana_point_max
     now_change_data.hit_point = add_hit_point
     now_change_data.mana_point = add_mana_point
+    if character_data.target_character_id != character_id:
+        add_favorability = character.calculation_favorability(
+            character_id, character_data.target_character_id, add_time
+        )
+        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        target_data.favorability.setdefault(character_id, 0)
+        target_data.favorability[character_id] += add_favorability
+        now_change_data.favorability[target_data.cid] = add_favorability
     cache.status_up_text.setdefault(character_id, {})
     cache.status_up_text[character_id]["HitPoint"] = add_hit_point
     cache.status_up_text[character_id]["ManaPoint"] = add_mana_point
@@ -137,11 +146,11 @@ def settle_chat(character_id: int, now_time: datetime.datetime) -> game_type.Cha
     if character_data.target_character_id != character_id:
         start_time = character_data.behavior.start_time
         add_time = int((now_time - start_time).seconds / 60)
-        add_favorability = 0
-        add_favorability += character_data.nature[1] - 50
-        add_favorability += character_data.nature[5] - 50
-        add_favorability += character_data.nature[14] - 50
-        character_data.favorability.setdefault(character_data.target_character_id, 0)
-        character_data.favorability[character_data.target_character_id] += add_favorability
+        add_favorability = character.calculation_favorability(
+            character_id, character_data.target_character_id, add_time * 1.5
+        )
+        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        target_data.favorability.setdefault(character_id, 0)
+        target_data.favorability[character_id] += add_favorability
         now_change_data.favorability[character_data.target_character_id] = add_favorability
     return now_change_data

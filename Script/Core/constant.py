@@ -182,6 +182,12 @@ class Premise:
     """ 玩家是爱慕对象 """
     EAT_SPRING_FOOD = 44
     """ 食用了春药品质的食物 """
+    IS_HUMOR_MAN = 45
+    """ 是一个幽默的人 """
+    TARGET_IS_BEYOND_FRIENDSHIP = 46
+    """ 对目标抱有超越友谊的想法 """
+    IS_BEYOND_FRIENDSHIP_TARGET = 47
+    """ 目标对自己抱有超越友谊的想法 """
 
 
 class InstructType:
@@ -222,3 +228,5 @@ class Instruct:
     """ 查看属性 """
     SEE_OWNER_ATTR = 5
     """ 查看自身属性 """
+    CHAT = 6
+    """ 闲聊 """

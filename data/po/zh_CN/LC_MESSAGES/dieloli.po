@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-16 20:19+0800\n"
+"POT-Creation-Date: 2020-12-24 19:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -800,24 +800,28 @@ msgstr ""
 msgid "休息"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:76
+#: ../Script/Design/handle_instruct.py:65
 msgid "购买食物"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:83
+#: ../Script/Design/handle_instruct.py:72
 msgid "进食"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:89
+#: ../Script/Design/handle_instruct.py:78
 msgid "移动"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:96
+#: ../Script/Design/handle_instruct.py:85
 msgid "查看属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:106
+#: ../Script/Design/handle_instruct.py:95
 msgid "查看自身属性"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:102
+msgid "闲聊"
 msgstr ""
 
 #: ../Script/Design/settle_behavior.py:46
@@ -830,7 +834,7 @@ msgstr ""
 
 #: ../Script/Design/settle_behavior.py:73
 #, python-brace-format
-msgid "对{character_name}好感"
+msgid "{target_name}对{character_name}好感"
 msgstr ""
 
 #: class:SexTem id:0 type:name
@@ -3503,6 +3507,30 @@ msgstr ""
 
 #: class:Talk id:default30 type:context
 msgid "{Name}将头靠在{PlayerNickName}的肩上小小的休息了一会儿"
+msgstr ""
+
+#: class:Talk id:default31 type:context
+msgid "和{TargetName}一起闲聊了一会儿"
+msgstr ""
+
+#: class:Talk id:default32 type:context
+msgid "和{TargetName}聊了一会儿天"
+msgstr ""
+
+#: class:Talk id:default33 type:context
+msgid "和{TargetName}分享了最近的见闻"
+msgstr ""
+
+#: class:Talk id:default34 type:context
+msgid "给{TargetName}讲了个笑话"
+msgstr ""
+
+#: class:Talk id:default35 type:context
+msgid "给{TargetName}讲了个故事\n{TargetName}被{NickName}的风趣打动笑了出来"
+msgstr ""
+
+#: class:Talk id:default36 type:context
+msgid "和{TargetName}分享了最近的见闻\n{TargetName}只是将脑袋靠在{NickName}的肩上\n静静的听着{NickName}讲述"
 msgstr ""
 
 #: Scene:../data/map/25/2/12/Scene.json

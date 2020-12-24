@@ -759,3 +759,62 @@ def handle_eat_spring_food(character_id: int) -> int:
     if character_data.behavior.food_quality == 4:
         return 1
     return 0
+
+
+@add_premise(constant.Premise.IS_HUMOR_MAN)
+def handle_is_humor_man(character_id: int) -> int:
+    """
+    校验角色是否是一个幽默的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    value = 0
+    character_data: game_type.Character = cache.character_data[character_id]
+    for i in {0, 1, 2, 5, 13, 14, 15, 16}:
+        nature = character_data.nature[i]
+        if nature > 50:
+            value -= nature - 50
+        else:
+            value += 50 - nature
+    if value < 0:
+        value = 0
+    return value
+
+
+@add_premise(constant.Premise.TARGET_IS_BEYOND_FRIENDSHIP)
+def handle_target_is_beyond_friendship(character_id: int) -> int:
+    """
+    校验是否对目标抱有超越友谊的想法
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if (
+        character_data.target_character_id in character_data.social_contact_data
+        and character_data.social_contact_data[character_data.target_character_id] > 2
+    ):
+        return character_data.social_contact_data[character_data.target_character_id]
+    return 0
+
+
+@add_premise(constant.Premise.IS_BEYOND_FRIENDSHIP_TARGET)
+def handle_is_beyond_friendship_target(character_id: int) -> int:
+    """
+    校验目标是否对自己抱有超越友谊的想法
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if (
+        character_id in target_data.social_contact_data
+        and target_data.social_contact_data[character_id] > 2
+    ):
+        return target_data.social_contact_data[character_id]
+    return 0

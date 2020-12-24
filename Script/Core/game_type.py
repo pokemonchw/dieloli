@@ -468,6 +468,8 @@ class Character:
         """ 角色MP模板 """
         self.social_contact: Dict[int, Set] = {}
         """ 角色社交关系数据 关系类型:角色id集合 """
+        self.social_contact_data: Dict[int, int] = {}
+        """ 角色社交关系数据 角色id:关系类型 """
         self.favorability: Dict[int, int] = {}
         """ 角色好感度数据 角色id:好感度 """
         self.food_bag: Dict[UUID, Food] = {}

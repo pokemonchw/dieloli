@@ -28,6 +28,7 @@ def init_attr(character_id: int):
     character_id -- 角色id
     """
     character_data = cache.character_data[character_id]
+    character_data.cid = character_id
     character_data.language[character_data.mother_tongue] = 10000
     character_data.birthday = attr_calculation.get_rand_npc_birthday(character_data.age)
     character_data.end_age = attr_calculation.get_end_age(character_data.sex)
@@ -101,3 +102,45 @@ def character_rest_to_time(character_id: int, need_time: int):
     character_data.behavior["Duration"] = need_time
     character_data.behavior["BehaviorId"] = constant.Behavior.REST
     character_data.state = constant.CharacterStatus.STATUS_REST
+
+
+def calculation_favorability(character_id: int, target_character_id: int, favorability: int) -> int:
+    """
+    按角色性格和关系计算最终增加的好感值
+    Keyword arguments:
+    character_id -- 角色id
+    target_character_id -- 目标角色id
+    favorability -- 基础好感值
+    Return arguments:
+    int -- 最终的好感值
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[target_character_id]
+    fix = 1.0
+    for i in {0, 1, 2, 5, 13, 14, 15, 16}:
+        now_fix = 0
+        if character_data.nature[i] > 50:
+            nature_value = character_data.nature[i] - 50
+            now_fix -= nature_value / 50
+        else:
+            now_fix += character_data.nature[i] / 50
+        if target_data.nature[i] > 50:
+            nature_value = target_data.nature[i] - 50
+            if now_fix < 0:
+                now_fix *= -1
+                now_fix += nature_value / 50
+                now_fix = now_fix / 2
+            else:
+                now_fix += nature_value / 50
+        else:
+            nature_value = target_data.nature[i]
+            if now_fix < 0:
+                now_fix += nature_value / 50
+            else:
+                now_fix -= nature_value / 50
+                now_fix = now_fix / 2
+        fix += now_fix
+    if character_id in target_data.social_contact_data:
+        fix += target_data.social_contact_data[character_id]
+    favorability *= fix
+    return favorability
