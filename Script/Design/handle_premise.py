@@ -818,3 +818,18 @@ def handle_is_beyond_friendship_target(character_id: int) -> int:
     ):
         return target_data.social_contact_data[character_id]
     return 0
+
+
+@add_premise(constant.Premise.SCENE_HAVE_OTHER_CHARACTER)
+def handle_scene_have_other_target(character_id:int) -> int:
+    """
+    校验场景里是否有其他角色
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data:game_type.Scene = cache.scene_data[scene_path]
+    return len(scene_data.character_list) - 1

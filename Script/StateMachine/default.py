@@ -13,14 +13,14 @@ def character_move_to_classroom(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache.character_data[character_id]
+    character_data:game_type.Character = cache.character_data[character_id]
     _, _, move_path, move_time = character_move.character_move(
         character_id,
         map_handle.get_map_system_path_for_str(character_data.classroom),
     )
-    character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
-    character_data.behavior["MoveTarget"] = move_path
-    character_data.behavior["Duration"] = move_time
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
 
 
@@ -31,12 +31,12 @@ def character_move_to_rand_cafeteria(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache.character_data[character_id]
+    character_data:game_type.Character = cache.character_data[character_id]
     to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["Cafeteria"]))
     _, _, move_path, move_time = character_move.character_move(character_id, to_cafeteria)
-    character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
-    character_data.behavior["MoveTarget"] = move_path
-    character_data.behavior["Duration"] = move_time
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
 
 
@@ -68,15 +68,15 @@ def character_move_to_rand_restaurant(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache.character_data[character_id]
+    character_data:game_type.Character = cache.character_data[character_id]
     to_restaurant = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["Restaurant"]))
     _, _, move_path, move_time = character_move.character_move(
         character_id,
         map_handle.get_map_system_path_for_str(character_data.classroom),
     )
-    character_data.behavior["BehaviorId"] = constant.Behavior.MOVE
-    character_data.behavior["MoveTarget"] = move_path
-    character_data.behavior["Duration"] = move_time
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
 
 
@@ -87,10 +87,26 @@ def character_eat_rand_food(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache.character_data[character_id]
-    character_data.behavior["BehaviorId"] = constant.Behavior.EAT
-    character_data.behavior["EatFood"] = character_data.food_bag[
+    character_data:game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.EAT
+    character_data.behavior.eat_food = character_data.food_bag[
         random.choice(list(character_data.food_bag.keys()))
     ]
-    character_data.behavior["Duration"] = 1
+    character_data.behavior.duration = 1
     character_data.state = constant.CharacterStatus.STATUS_EAT
+
+@handle_state_machine.add_state_machine(constant.StateMachine.CHAT_RAND_CHARACTER)
+def character_chat_rand_character(character_id: int):
+    """
+    角色和场景内随机角色聊天
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data:game_type.Character = cache.character_data[character_id]
+    character_list = list(cache.scene_data[map_handle.get_map_system_path_str_for_list(character_data.position)].character_list)
+    character_list.remove(character_id)
+    target_id = random.choice(character_list)
+    character_data.behavior.behavior_id = constant.Behavior.CHAT
+    character_data.behavior.duration = 10
+    character_data.target_character_id = target_id
+    character_data.state = constant.CharacterStatus.STATUS_CHAT

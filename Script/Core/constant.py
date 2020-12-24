@@ -68,6 +68,8 @@ class StateMachine:
     """ 移动至随机就餐区 """
     EAT_BAG_RAND_FOOD = 4
     """ 食用背包内随机食物 """
+    CHAT_RAND_CHARACTER = 5
+    """ 和场景里随机对象闲聊 """
 
 
 class Panel:
@@ -188,6 +190,8 @@ class Premise:
     """ 对目标抱有超越友谊的想法 """
     IS_BEYOND_FRIENDSHIP_TARGET = 47
     """ 目标对自己抱有超越友谊的想法 """
+    SCENE_HAVE_OTHER_CHARACTER = 48
+    """ 场景中有自己外的其他角色 """
 
 
 class InstructType:

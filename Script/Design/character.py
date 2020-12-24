@@ -28,7 +28,6 @@ def init_attr(character_id: int):
     character_id -- 角色id
     """
     character_data = cache.character_data[character_id]
-    character_data.cid = character_id
     character_data.language[character_data.mother_tongue] = 10000
     character_data.birthday = attr_calculation.get_rand_npc_birthday(character_data.age)
     character_data.end_age = attr_calculation.get_end_age(character_data.sex)

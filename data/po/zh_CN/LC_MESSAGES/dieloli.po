@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-24 19:39+0800\n"
+"POT-Creation-Date: 2020-12-24 20:38+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -820,7 +820,7 @@ msgstr ""
 msgid "查看自身属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:102
+#: ../Script/Design/handle_instruct.py:103
 msgid "闲聊"
 msgstr ""
 
@@ -3317,6 +3317,10 @@ msgstr ""
 msgid "进食"
 msgstr ""
 
+#: class:Status id:5 type:name
+msgid "闲聊"
+msgstr ""
+
 #: class:Recipes id:0 type:name
 msgid "孜然排骨"
 msgstr ""
@@ -3531,6 +3535,18 @@ msgstr ""
 
 #: class:Talk id:default36 type:context
 msgid "和{TargetName}分享了最近的见闻\n{TargetName}只是将脑袋靠在{NickName}的肩上\n静静的听着{NickName}讲述"
+msgstr ""
+
+#: class:Talk id:default37 type:context
+msgid "{Name}和{PlayerNickName}闲聊了一会儿"
+msgstr ""
+
+#: class:Talk id:default38 type:context
+msgid "{Name}找{PlayerNickName}聊了一会儿天"
+msgstr ""
+
+#: class:Talk id:default39 type:context
+msgid "{Name}向{PlayerNickName}分享了最近的见闻"
 msgstr ""
 
 #: Scene:../data/map/25/2/12/Scene.json
