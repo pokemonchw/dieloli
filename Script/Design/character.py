@@ -27,7 +27,7 @@ def init_attr(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache.character_data[character_id]
+    character_data: game_type.Character = cache.character_data[character_id]
     character_data.language[character_data.mother_tongue] = 10000
     character_data.birthday = attr_calculation.get_rand_npc_birthday(character_data.age)
     character_data.end_age = attr_calculation.get_end_age(character_data.sex)
@@ -46,10 +46,12 @@ def init_attr(character_id: int):
         character_data.sex_experience_tem, character_data.sex
     )
     default_clothing_data = clothing.creator_suit(character_data.clothing_tem, character_data.sex)
-    character_data.clothing = {
-        clothing: {default_clothing_data[clothing].uid: default_clothing_data[clothing]}
-        for clothing in default_clothing_data
-    }
+    for clothing_id in default_clothing_data:
+        clothing_data = default_clothing_data[clothing_id]
+        character_data.clothing.setdefault(clothing_id, {})
+        character_data.clothing[clothing_id][clothing_data.uid] = clothing_data
+        character_data.clothing_data.setdefault(clothing_data.tem_id, set())
+        character_data.clothing_data[clothing_data.tem_id].add(clothing_data.uid)
     character_data.chest = attr_calculation.get_chest(character_data.chest_tem, character_data.birthday)
     character_data.hit_point_max = attr_calculation.get_max_hit_point(character_data.hit_point_tem)
     character_data.hit_point = character_data.hit_point_max

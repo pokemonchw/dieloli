@@ -821,7 +821,7 @@ def handle_is_beyond_friendship_target(character_id: int) -> int:
 
 
 @add_premise(constant.Premise.SCENE_HAVE_OTHER_CHARACTER)
-def handle_scene_have_other_target(character_id:int) -> int:
+def handle_scene_have_other_target(character_id: int) -> int:
     """
     校验场景里是否有其他角色
     Keyword arguments:
@@ -831,5 +831,255 @@ def handle_scene_have_other_target(character_id:int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
-    scene_data:game_type.Scene = cache.scene_data[scene_path]
+    scene_data: game_type.Scene = cache.scene_data[scene_path]
     return len(scene_data.character_list) - 1
+
+
+@add_premise(constant.Premise.NO_WEAR_UNDERWEAR)
+def handle_no_wear_underwear(character_id: int) -> int:
+    """
+    校验角色是否没穿上衣
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 1 not in character_data.put_on or character_data.put_on[1] == None or character_data.put_on[1] == "":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.NO_WEAR_UNDERPANTS)
+def handle_no_wear_underpants(character_id: int) -> int:
+    """
+    校验角色是否没穿内裤
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 7 not in character_data.put_on or character_data.put_on[7] == None or character_data.put_on[7] == "":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.NO_WEAR_BRA)
+def handle_no_wear_bra(character_id: int) -> int:
+    """
+    校验角色是否没穿胸罩
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 6 not in character_data.put_on or character_data.put_on[6] == None or character_data.put_on[6] == "":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.NO_WEAR_PANTS)
+def handle_no_wear_pants(character_id: int) -> int:
+    """
+    校验角色是否没穿裤子
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 2 not in character_data.put_on or character_data.put_on[2] == None or character_data.put_on[2] == "":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.NO_WEAR_SKIRT)
+def handle_no_wear_skirt(character_id: int) -> int:
+    """
+    校验角色是否没穿短裙
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 3 not in character_data.put_on or character_data.put_on[3] == None or character_data.put_on[3] == "":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.NO_WEAR_SHOES)
+def handle_no_wear_shoes(character_id: int) -> int:
+    """
+    校验角色是否没穿鞋子
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 4 not in character_data.put_on or character_data.put_on[4] == None or character_data.put_on[4] == "":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.NO_WEAR_SOCKS)
+def handle_no_wear_socks(character_id: int) -> int:
+    """
+    校验角色是否没穿袜子
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 5 not in character_data.put_on or character_data.put_on[5] == None or character_data.put_on[5] == "":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.WANT_PUT_ON)
+def handle_want_put_on(character_id: int) -> int:
+    """
+    校验角色是否想穿衣服
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return (not character_data.no_wear) * 10
+
+
+@add_premise(constant.Premise.HAVE_UNDERWEAR)
+def handle_have_underwear(character_id: int) -> int:
+    """
+    校验角色是否拥有上衣
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 1 in character_data.clothing and len(character_data.clothing[1]):
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.HAVE_UNDERPANTS)
+def handle_have_underpants(character_id: int) -> int:
+    """
+    校验角色是否拥有内裤
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 7 in character_data.clothing and len(character_data.clothing[7]):
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.HAVE_BRA)
+def handle_have_bra(character_id: int) -> int:
+    """
+    校验角色是否拥有胸罩
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 6 in character_data.clothing and len(character_data.clothing[6]):
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.HAVE_PANTS)
+def handle_have_pants(character_id: int) -> int:
+    """
+    校验角色是否拥有裤子
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 2 in character_data.clothing and len(character_data.clothing[2]):
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.HAVE_SKIRT)
+def handle_have_skirt(character_id: int) -> int:
+    """
+    校验角色是否拥有短裙
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 3 in character_data.clothing and len(character_data.clothing[3]):
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.HAVE_SHOES)
+def handle_have_shoes(character_id: int) -> int:
+    """
+    校验角色是否拥有鞋子
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 4 in character_data.clothing and len(character_data.clothing[4]):
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.HAVE_SOCKS)
+def handle_have_socks(character_id: int) -> int:
+    """
+    校验角色是否拥有袜子
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 5 in character_data.clothing and len(character_data.clothing[5]):
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.IN_DORMITORY)
+def handle_in_dormitory(character_id: int) -> int:
+    """
+    校验角色是否在宿舍中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_position = map_handle.get_map_system_path_str_for_list(character_data.position)
+    return now_position == character_data.dormitory
+
+
+@add_premise(constant.Premise.CHEST_IS_NOT_CLIFF)
+def handle_chest_is_not_cliff(character_id: int) -> int:
+    """
+    校验角色胸围是否不是绝壁
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return attr_calculation.judge_chest_group(character_data.chest.now_chest)

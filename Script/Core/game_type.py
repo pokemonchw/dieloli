@@ -404,6 +404,11 @@ class Character:
         角色拥有的服装数据
         服装穿戴位置:服装唯一id:服装数据
         """
+        self.clothing_data: Dict[int, Set] = {}
+        """
+        角色拥有的服装类型数据集合
+        服装表id:服装唯一id
+        """
         self.item: Set = set()
         """ 角色拥有的道具id集合 """
         self.height: Height = Height()
@@ -480,6 +485,8 @@ class Character:
         """ 角色当前交互对象id """
         self.adv: int = 0
         """ 剧情npc校验 """
+        self.no_wear: bool = 0
+        """ 是否不想穿衣服 """
 
 
 class Cache:

@@ -121,18 +121,21 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
     bool -- 前提是否能够被满足
     """
     target_data = {}
+    now_test_judge = 0
     for target in target_list:
         if target in null_target:
             continue
+        if target == 7:
+            now_test_judge = 1
         target_premise_list = game_config.config_target_premise_data[target]
-        now_weiget = 0
+        now_weight = 0
         now_target_pass_judge = 0
         now_target_data = {}
         premise_judge = 1
         for premise in target_premise_list:
             premise_judge = handle_premise.handle_premise(premise, character_id)
-            if premise_judge > 0:
-                now_weiget += premise_judge
+            if premise_judge:
+                now_weight += premise_judge
             else:
                 premise_judge = 0
                 if premise in game_config.config_effect_target_data:
@@ -143,6 +146,7 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
                     if now_judge:
                         now_target_data.setdefault(now_target_weight, set())
                         now_target_data[now_target_weight].add(now_target)
+                        now_weight += now_target_weight
                     else:
                         now_target_pass_judge = 1
                         break
@@ -153,12 +157,12 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
             null_target.add(target)
             continue
         if premise_judge:
-            target_data.setdefault(now_weiget, set())
-            target_data[now_weiget].add(target)
+            target_data.setdefault(now_weight, set())
+            target_data[now_weight].add(target)
         else:
             now_max_weight = max(list(now_target_data))
             target_data.setdefault(now_max_weight, set())
-            target_data[now_max_weight].add(random.choice(list(now_target_data[now_max_weight])))
+            target_data[now_weight].add(random.choice(list(now_target_data[now_max_weight])))
     if len(target_data):
         max_weight = max(list(target_data.keys()))
         return random.choice(list(target_data[max_weight])), max_weight, 1
