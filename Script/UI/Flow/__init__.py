@@ -6,4 +6,5 @@ from Script.UI.Flow import (
     title_flow,
     food_shop_flow,
     food_bag_flow,
+    item_shop_flow,
 )

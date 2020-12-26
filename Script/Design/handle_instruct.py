@@ -110,3 +110,11 @@ def handle_chat():
     character_data.behavior.behavior_id = constant.Behavior.CHAT
     character_data.state = constant.CharacterStatus.STATUS_CHAT
     update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.BUY_ITEM, constant.InstructType.ACTIVE, _("购买道具"), {constant.Premise.IN_SHOP}
+)
+def handle_buy_item():
+    """ 处理购买道具指令 """
+    cache.now_panel_id = constant.Panel.ITEM_SHOP

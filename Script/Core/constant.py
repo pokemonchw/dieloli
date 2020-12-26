@@ -103,6 +103,8 @@ class Panel:
     """ 食物商店面板 """
     FOOD_BAG = 6
     """ 食物背包面板 """
+    ITEM_SHOP = 7
+    """ 道具商店面板 """
 
 
 class Premise:
@@ -282,3 +284,5 @@ class Instruct:
     """ 查看自身属性 """
     CHAT = 6
     """ 闲聊 """
+    BUY_ITEM = 7
+    """ 购买道具 """
