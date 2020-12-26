@@ -786,9 +786,9 @@ class SeeCharacterSocialContact:
             self.draw_list.append(type_draw)
             now_draw = draw.CenterDraw()
             if social_type in character_data.social_contact and len(
-                character_data.social_contact[social_type].character_list
+                character_data.social_contact[social_type]
             ):
-                character_list = list(character_data.social_contact[social_type].character_list.keys())
+                character_list = list(character_data.social_contact[social_type])
                 now_draw = panel.PageHandlePanel(
                     character_list, SeeCharacterInfoByNameDraw, 10, 5, self.width, 1, 1, 0
                 )

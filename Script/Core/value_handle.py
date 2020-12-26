@@ -1,6 +1,7 @@
 import random
 import bisect
 import itertools
+import math
 from typing import Dict, List
 
 
@@ -11,6 +12,23 @@ def two_bit_array_to_dict(array: tuple) -> dict:
     array -- 要转换的二维数组
     """
     return {x: y for x, y in array}
+
+
+def get_rand_value_for_value_region(value_list: List[int]) -> int:
+    """
+    以列表中每个元素的值作为权重随机获取一个元素
+    Keyword arguments:
+    value_list -- 要计算的列表
+    Return arguments:
+    int -- 获得的元素
+    """
+    key_list = [math.ceil(i) for i in value_list]
+    now_data = dict(zip(itertools.accumulate(key_list), value_list))
+    weight_max = sum(key_list)
+    weight_region_list = list(now_data.keys())
+    now_weight = random.randint(0, weight_max - 1)
+    weight_region = get_next_value_for_list(now_weight, weight_region_list)
+    return now_data[weight_region]
 
 
 def get_region_list(now_data: Dict[any, int]) -> dict:

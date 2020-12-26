@@ -27,7 +27,7 @@ def init_attr(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache.character_data[character_id]
+    character_data: game_type.Character = cache.character_data[character_id]
     character_data.language[character_data.mother_tongue] = 10000
     character_data.birthday = attr_calculation.get_rand_npc_birthday(character_data.age)
     character_data.end_age = attr_calculation.get_end_age(character_data.sex)
@@ -46,10 +46,12 @@ def init_attr(character_id: int):
         character_data.sex_experience_tem, character_data.sex
     )
     default_clothing_data = clothing.creator_suit(character_data.clothing_tem, character_data.sex)
-    character_data.clothing = {
-        clothing: {default_clothing_data[clothing].uid: default_clothing_data[clothing]}
-        for clothing in default_clothing_data
-    }
+    for clothing_id in default_clothing_data:
+        clothing_data = default_clothing_data[clothing_id]
+        character_data.clothing.setdefault(clothing_id, {})
+        character_data.clothing[clothing_id][clothing_data.uid] = clothing_data
+        character_data.clothing_data.setdefault(clothing_data.tem_id, set())
+        character_data.clothing_data[clothing_data.tem_id].add(clothing_data.uid)
     character_data.chest = attr_calculation.get_chest(character_data.chest_tem, character_data.birthday)
     character_data.hit_point_max = attr_calculation.get_max_hit_point(character_data.hit_point_tem)
     character_data.hit_point = character_data.hit_point_max
@@ -72,20 +74,20 @@ def init_class(character_data: game_type.Character):
         character_data.classroom = random.choice(cache.place_data["Classroom_" + class_grade])
 
 
-def init_character_behavior_start_time(character_id: int):
+def init_character_behavior_start_time(character_id: int, now_time: datetime.datetime):
     """
-    将角色的行动开始时间同步为当前游戏时间
+    将角色的行动开始时间同步为指定时间
     Keyword arguments:
     character_id -- 角色id
+    now_time -- 指定时间
     """
     character_data = cache.character_data[character_id]
-    game_time = cache.game_time
     start_time = datetime.datetime(
-        game_time.year,
-        game_time.month,
-        game_time.day,
-        game_time.hour,
-        game_time.minute,
+        now_time.year,
+        now_time.month,
+        now_time.day,
+        now_time.hour,
+        now_time.minute,
     )
     character_data.behavior.start_time = start_time
 
@@ -101,3 +103,45 @@ def character_rest_to_time(character_id: int, need_time: int):
     character_data.behavior["Duration"] = need_time
     character_data.behavior["BehaviorId"] = constant.Behavior.REST
     character_data.state = constant.CharacterStatus.STATUS_REST
+
+
+def calculation_favorability(character_id: int, target_character_id: int, favorability: int) -> int:
+    """
+    按角色性格和关系计算最终增加的好感值
+    Keyword arguments:
+    character_id -- 角色id
+    target_character_id -- 目标角色id
+    favorability -- 基础好感值
+    Return arguments:
+    int -- 最终的好感值
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[target_character_id]
+    fix = 1.0
+    for i in {0, 1, 2, 5, 13, 14, 15, 16}:
+        now_fix = 0
+        if character_data.nature[i] > 50:
+            nature_value = character_data.nature[i] - 50
+            now_fix -= nature_value / 50
+        else:
+            now_fix += character_data.nature[i] / 50
+        if target_data.nature[i] > 50:
+            nature_value = target_data.nature[i] - 50
+            if now_fix < 0:
+                now_fix *= -1
+                now_fix += nature_value / 50
+                now_fix = now_fix / 2
+            else:
+                now_fix += nature_value / 50
+        else:
+            nature_value = target_data.nature[i]
+            if now_fix < 0:
+                now_fix += nature_value / 50
+            else:
+                now_fix -= nature_value / 50
+                now_fix = now_fix / 2
+        fix += now_fix
+    if character_id in target_data.social_contact_data:
+        fix += target_data.social_contact_data[character_id]
+    favorability *= fix
+    return favorability

@@ -34,6 +34,8 @@ class CharacterStatus:
     """ 上课状态 """
     STATUS_EAT = 4
     """ 进食状态 """
+    STATUS_CHAT = 5
+    """ 闲聊状态 """
 
 
 class Behavior:
@@ -49,6 +51,8 @@ class Behavior:
     """ 上课 """
     EAT = 4
     """ 进食 """
+    CHAT = 5
+    """ 闲聊 """
 
 
 class StateMachine:
@@ -64,6 +68,22 @@ class StateMachine:
     """ 移动至随机就餐区 """
     EAT_BAG_RAND_FOOD = 4
     """ 食用背包内随机食物 """
+    CHAT_RAND_CHARACTER = 5
+    """ 和场景里随机对象闲聊 """
+    WEAR_CLEAN_UNDERWEAR = 6
+    """ 穿干净的上衣 """
+    WEAR_CLEAN_UNDERPANTS = 7
+    """ 穿干净的内裤 """
+    WEAR_CLEAN_BRA = 8
+    """ 穿干净的胸罩 """
+    WEAR_CLEAN_PANTS = 9
+    """ 穿干净的裤子 """
+    WEAR_CLEAN_SKIRT = 10
+    """ 穿干净的短裙 """
+    WEAR_CLEAN_SHOES = 11
+    """ 穿干净的鞋子 """
+    WEAR_CLEAN_SOCKS = 12
+    """ 穿干净的袜子 """
 
 
 class Panel:
@@ -83,6 +103,8 @@ class Panel:
     """ 食物商店面板 """
     FOOD_BAG = 6
     """ 食物背包面板 """
+    ITEM_SHOP = 7
+    """ 道具商店面板 """
 
 
 class Premise:
@@ -178,6 +200,48 @@ class Premise:
     """ 玩家是爱慕对象 """
     EAT_SPRING_FOOD = 44
     """ 食用了春药品质的食物 """
+    IS_HUMOR_MAN = 45
+    """ 是一个幽默的人 """
+    TARGET_IS_BEYOND_FRIENDSHIP = 46
+    """ 对目标抱有超越友谊的想法 """
+    IS_BEYOND_FRIENDSHIP_TARGET = 47
+    """ 目标对自己抱有超越友谊的想法 """
+    SCENE_HAVE_OTHER_CHARACTER = 48
+    """ 场景中有自己外的其他角色 """
+    NO_WEAR_UNDERWEAR = 49
+    """ 没穿上衣 """
+    NO_WEAR_UNDERPANTS = 50
+    """ 没穿内裤 """
+    NO_WEAR_BRA = 51
+    """ 没穿胸罩 """
+    NO_WEAR_PANTS = 52
+    """ 没穿裤子 """
+    NO_WEAR_SKIRT = 53
+    """ 没穿短裙 """
+    NO_WEAR_SHOES = 54
+    """ 没穿鞋子 """
+    NO_WEAR_SOCKS = 55
+    """ 没穿袜子 """
+    WANT_PUT_ON = 56
+    """ 想穿衣服 """
+    HAVE_UNDERWEAR = 57
+    """ 拥有上衣 """
+    HAVE_UNDERPANTS = 58
+    """ 拥有内裤 """
+    HAVE_BRA = 59
+    """ 拥有胸罩 """
+    HAVE_PANTS = 60
+    """ 拥有裤子 """
+    HAVE_SKIRT = 61
+    """ 拥有短裙 """
+    HAVE_SHOES = 62
+    """ 拥有鞋子 """
+    HAVE_SOCKS = 63
+    """ 拥有袜子 """
+    IN_DORMITORY = 64
+    """ 在宿舍中 """
+    CHEST_IS_NOT_CLIFF = 65
+    """ 胸围不是绝壁 """
 
 
 class InstructType:
@@ -218,3 +282,7 @@ class Instruct:
     """ 查看属性 """
     SEE_OWNER_ATTR = 5
     """ 查看自身属性 """
+    CHAT = 6
+    """ 闲聊 """
+    BUY_ITEM = 7
+    """ 购买道具 """

@@ -53,22 +53,11 @@ def add_instruct(instruct_id: int, instruct_type: int, name: str, premise_set: S
 @add_instruct(constant.Instruct.REST, constant.InstructType.REST, _("休息"), {})
 def handle_rest():
     """ 处理休息指令 """
-    character.init_character_behavior_start_time(0)
+    character.init_character_behavior_start_time(0, cache.game_time)
     character_data = cache.character_data[0]
     character_data.behavior.duration = 10
     character_data.behavior.behavior_id = constant.Behavior.REST
     character_data.state = constant.CharacterStatus.STATUS_REST
-    if character_data.hit_point > character_data.hit_point_max:
-        character_data.hit_point = character_data.hit_point_max
-    target_character = cache.character_data[character_data.target_character_id]
-    if (
-        target_character.state == constant.CharacterStatus.STATUS_ARDER
-        and target_character.behavior.behavior_id == constant.Behavior.SHARE_BLANKLY
-    ):
-        target_character.state = constant.CharacterStatus.STATUS_REST
-        character.init_character_behavior_start_time(character_data.target_character_id)
-        target_character.behavior.duration = 10
-        target_character.behavior.behavior_id = constant.Behavior.REST
     update.game_update_flow(10)
 
 
@@ -108,3 +97,24 @@ def handle_see_owner_attr():
     """ 查看自身属性 """
     now_draw = see_character_info_panel.SeeCharacterInfoInScenePanel(0, width)
     now_draw.draw()
+
+
+@add_instruct(
+    constant.Instruct.CHAT, constant.InstructType.DIALOGUE, _("闲聊"), {constant.Premise.HAVE_TARGET}
+)
+def handle_chat():
+    """ 处理闲聊指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.CHAT
+    character_data.state = constant.CharacterStatus.STATUS_CHAT
+    update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.BUY_ITEM, constant.InstructType.ACTIVE, _("购买道具"), {constant.Premise.IN_SHOP}
+)
+def handle_buy_item():
+    """ 处理购买道具指令 """
+    cache.now_panel_id = constant.Panel.ITEM_SHOP

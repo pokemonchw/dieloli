@@ -84,16 +84,6 @@ class Chest:
         """ 每日胸围差增量 """
 
 
-class SocialContact:
-    """ 社交关系结构体 """
-
-    def __init__(self):
-        self.type: int = 0
-        """ 关系类型 """
-        self.character_list: Dict[int, int] = {}
-        """ 对象列表 对象id:亲密度 """
-
-
 class Food:
     """ 食物数据结构体 """
 
@@ -414,6 +404,11 @@ class Character:
         角色拥有的服装数据
         服装穿戴位置:服装唯一id:服装数据
         """
+        self.clothing_data: Dict[int, Set] = {}
+        """
+        角色拥有的服装类型数据集合
+        服装表id:服装唯一id
+        """
         self.item: Set = set()
         """ 角色拥有的道具id集合 """
         self.height: Height = Height()
@@ -476,8 +471,12 @@ class Character:
         """ 角色HP模板 """
         self.mana_point_tem: int = 1
         """ 角色MP模板 """
-        self.social_contact: Dict[int, SocialContact] = {}
-        """ 角色社交关系数据 关系类型:关系数据 """
+        self.social_contact: Dict[int, Set] = {}
+        """ 角色社交关系数据 关系类型:角色id集合 """
+        self.social_contact_data: Dict[int, int] = {}
+        """ 角色社交关系数据 角色id:关系类型 """
+        self.favorability: Dict[int, int] = {}
+        """ 角色好感度数据 角色id:好感度 """
         self.food_bag: Dict[UUID, Food] = {}
         """ 角色持有的食物数据 """
         self.course: CourseTimeSlice = CourseTimeSlice()
@@ -486,6 +485,8 @@ class Character:
         """ 角色当前交互对象id """
         self.adv: int = 0
         """ 剧情npc校验 """
+        self.no_wear: bool = 0
+        """ 是否不想穿衣服 """
 
 
 class Cache:
@@ -647,3 +648,21 @@ class Cache:
         """ 学校经度 """
         self.school_latitude: float = 0
         """ 学校纬度 """
+
+
+class CharacterStatusChange:
+    """ 角色属性状态变更结构体 """
+
+    def __init__(self):
+        self.hit_point: int = 0
+        """ hp变化 """
+        self.mana_point: int = 0
+        """ mp变化 """
+        self.status: Dict[int, int] = {}
+        """ 状态变化 """
+        self.language: Dict[int, int] = {}
+        """ 语言技能经验变化 """
+        self.knowledge: Dict[int, int] = {}
+        """ 知识技能经验变化 """
+        self.favorability: Dict[int, int] = {}
+        """ 角色好感度变化 """

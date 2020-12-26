@@ -88,3 +88,17 @@ def id_index(now_id: int) -> str:
     str -- id文本
     """
     return f"[{str(now_id).zfill(3)}]"
+
+
+def number_to_symbol_string(value: int) -> str:
+    """
+    数字转换为带正负数符号的数字字符串
+    Keyword arguments:
+    value -- 要转换的数字
+    Return arguments:
+    str -- 转换后的字符串
+    """
+    symbol = ""
+    if value >= 0:
+        symbol = "+"
+    return f"{symbol}{value}"
