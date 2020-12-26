@@ -15,6 +15,7 @@ from Script.Design import (
     character,
     handle_premise,
     talk,
+    map_handle,
 )
 from Script.Config import game_config
 
@@ -86,9 +87,16 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
     Return arguments:
     bool -- 本次update时间切片内活动是否已完成
     """
-    character_data = cache.character_data[character_id]
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
     start_time = character_data.behavior.start_time
     end_time = game_time.get_sub_date(minute=character_data.behavior.duration, old_date=start_time)
+    if (
+        character_data.target_character_id != character_id
+        and character_data.target_character_id not in scene_data.character_list
+    ):
+        end_time = now_time
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
     add_time = (end_time.timestamp() - start_time.timestamp()) / 60
     character_data.status.setdefault(27, 0)

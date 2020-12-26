@@ -1,8 +1,8 @@
 from types import FunctionType
 from Script.Core import constant
-from Script.Design import handle_panel
 from Script.UI.Panel import item_shop_panel
 from Script.Config import normal_config
+from Script.Design import handle_panel
 
 width = normal_config.config_normal.text_width
 """ 屏幕宽度 """

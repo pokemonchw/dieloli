@@ -65,6 +65,7 @@ def settle_move(character_id: int, now_time: datetime.datetime) -> game_type.Cha
     game_type.CharacterStatusChange -- 行为改变的角色状态
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    character_data.target_character_id = character_id
     now_change_data = game_type.CharacterStatusChange()
     start_time = character_data.behavior.start_time
     add_time = int((now_time - start_time).seconds / 60)

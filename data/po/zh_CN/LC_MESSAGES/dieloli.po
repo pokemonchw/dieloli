@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-25 17:30+0800\n"
+"POT-Creation-Date: 2020-12-26 13:57+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -387,6 +387,7 @@ msgid "更衣室"
 msgstr ""
 
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
+#: ../Script/UI/Panel/item_shop_panel.py:47
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
@@ -399,6 +400,7 @@ msgid "[返回]"
 msgstr ""
 
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
+#: ../Script/UI/Panel/item_shop_panel.py:47
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
@@ -422,6 +424,11 @@ msgstr ""
 
 #: ../Script/UI/Panel/see_item_info_panel.py:40
 msgid "人物道具"
+msgstr ""
+
+#: ../Script/UI/Panel/item_shop_panel.py:114
+#, python-brace-format
+msgid "{nickname}购买了{item_name}"
 msgstr ""
 
 #: ../Script/UI/Panel/food_shop_panel.py:32
@@ -822,6 +829,10 @@ msgstr ""
 
 #: ../Script/Design/handle_instruct.py:103
 msgid "闲聊"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:116
+msgid "购买道具"
 msgstr ""
 
 #: ../Script/Design/settle_behavior.py:46
