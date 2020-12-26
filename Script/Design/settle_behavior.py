@@ -24,23 +24,28 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
     status_data: game_type.CharacterStatusChange = cache.settle_behavior_data[
         cache.character_data[character_id].behavior.behavior_id
     ](character_id, now_time)
-    if status_data != None and (
-        status_data.hit_point
-        or status_data.mana_point
-        or len(status_data.knowledge)
-        or len(status_data.language)
-        or len(status_data.status)
-        or len(status_data.favorability)
-    ):
+    now_judge = False
+    if status_data == None:
+        return
+    if status_data.mana_point:
+        now_judge = True
+    if status_data.hit_point:
+        now_judge = True
+    if len(status_data.knowledge):
+        now_judge = True
+    if len(status_data.language):
+        now_judge = True
+    if len(status_data.status):
+        now_judge = True
+    if len(status_data.favorability) and not character_id:
+        now_judge = True
+    if now_judge:
         if not character_id or character_id == cache.character_data[0].target_character_id:
             now_character_data = cache.character_data[character_id]
             now_draw = draw.NormalDraw()
             now_draw.text = "\n" + now_character_data.name + "\n"
             now_draw.width = width
             now_draw.draw()
-            line_feed_draw = draw.NormalDraw()
-            line_feed_draw.text = "\n"
-            line_feed_draw.width = 1
             now_text_list = []
             if status_data.hit_point:
                 now_text_list.append(_("体力:") + str(round(status_data.hit_point, 2)))
@@ -67,7 +72,7 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
                         for i in status_data.language
                     ]
                 )
-            if len(status_data.favorability):
+            if len(status_data.favorability) and not character_id:
                 now_text_list.extend(
                     [
                         _("{target_name}对{character_name}好感").format(
@@ -80,7 +85,6 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
             now_panel = panel.LeftDrawTextListPanel()
             now_panel.set(now_text_list, width, 8)
             now_panel.draw()
-            line_feed_draw.draw()
             wait_draw = draw.WaitDraw()
             wait_draw.draw()
 

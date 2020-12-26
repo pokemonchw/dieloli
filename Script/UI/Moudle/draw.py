@@ -84,22 +84,20 @@ class LineFeedWaitDraw(NormalDraw):
 
     def draw(self):
         """ 绘制文本 """
-        text_list = self.text.split("\n")
+        text_list = self.text.split(r"\n")
         for text in text_list:
-            if self.__len__() > self.width:
+            now_width = text_handle.get_text_index(text)
+            if now_width > self.width:
                 now_text = ""
-                if self.width > 0:
-                    for i in self.text:
-                        if (
-                            text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                            < self.width
-                        ):
+                if now_width > 0:
+                    for i in text:
+                        if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < now_width:
                             now_text += i
                         break
                     now_text = now_text[:-2] + "~"
                 io_init.era_print(now_text, self.style)
             else:
-                io_init.era_print(self.text, self.style)
+                io_init.era_print(text, self.style)
             if not cache.wframe_mouse.w_frame_skip_wait_mouse:
                 flow_handle.askfor_wait()
             else:
