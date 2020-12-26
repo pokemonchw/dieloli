@@ -8,6 +8,7 @@ from Script.Core import (
     game_path_config,
     game_type,
     constant,
+    value_handle,
 )
 from Script.Design import (
     settle_behavior,
@@ -117,7 +118,7 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
     return 1
 
 
-def search_target(character_id: int, target_list: list, null_target: set) -> (str, int, bool):
+def search_target(character_id: int, target_list: list, null_target: set) -> (int, int, bool):
     """
     查找可用目标
     Keyword arguments:
@@ -125,7 +126,7 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
     target_list -- 检索的目标列表
     null_target -- 被排除的目标
     Return arguments:
-    目标id
+    int -- 目标id
     int -- 目标权重
     bool -- 前提是否能够被满足
     """
@@ -169,10 +170,12 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (st
             target_data.setdefault(now_weight, set())
             target_data[now_weight].add(target)
         else:
-            now_max_weight = max(list(now_target_data))
+            now_value_list = list(now_target_data.keys())
+            now_value_weight = value_handle.get_rand_value_for_value_region(now_value_list)
             target_data.setdefault(now_max_weight, set())
-            target_data[now_weight].add(random.choice(list(now_target_data[now_max_weight])))
+            target_data[now_weight].add(random.choice(list(now_target_data[now_value_weight])))
     if len(target_data):
-        max_weight = max(list(target_data.keys()))
-        return random.choice(list(target_data[max_weight])), max_weight, 1
+        value_list = list(target_data.keys())
+        value_weight = value_handle.get_rand_value_for_value_region(value_list)
+        return random.choice(list(target_data[value_weight])), value_weight, 1
     return "", 0, 0

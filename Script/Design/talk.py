@@ -1,7 +1,7 @@
 import random
 from functools import wraps
 from types import FunctionType
-from Script.Core import cache_control, game_type
+from Script.Core import cache_control, game_type, value_handle
 from Script.Design import map_handle
 from Script.UI.Moudle import draw
 from Script.Config import normal_config, game_config
@@ -34,7 +34,7 @@ def handle_talk(character_id):
                 now_talk_data[now_weight].add(talk_id)
     now_talk = ""
     if len(now_talk_data):
-        talk_weight = max(list(now_talk_data.keys()))
+        talk_weight = value_handle.get_rand_value_for_value_region(list(now_talk_data.keys()))
         now_talk_id = random.choice(list(now_talk_data[talk_weight]))
         now_talk = game_config.config_talk[now_talk_id].context
     if now_talk != "":
