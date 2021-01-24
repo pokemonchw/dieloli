@@ -74,3 +74,7 @@ python3.9.0
 ----
 e-mail:admin@byayoi.org \
 twitter:@nekoharuyayuzu
+
+请我喝奶茶QwQ
+----
+请前往:[爱发电]*(https://afadian.net/@byayoi)订阅
