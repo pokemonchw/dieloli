@@ -77,4 +77,4 @@ twitter:@nekoharuyayuzu
 
 请我喝奶茶QwQ
 ----
-请前往:[爱发电]*(https://afadian.net/@byayoi)订阅
+请前往:[爱发电](https://afadian.net/@byayoi)订阅
