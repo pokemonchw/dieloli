@@ -277,7 +277,6 @@ def init_restaurant_data():
         cook_index += 1
         if cook_index == max_people:
             break
-    print(cache.restaurant_data.keys())
 
 
 def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type: str) -> Dict[str, Set]:

@@ -797,6 +797,7 @@ class SeeCharacterSocialContact:
                 now_draw.text = _("空无一人")
                 now_draw.width = self.width
             self.draw_list.append(now_draw)
+            self.draw_list.append(line_feed)
 
     def draw(self):
         title_draw = draw.TitleLineDraw(_("人物社交"), self.width)
@@ -969,12 +970,14 @@ class SeeCharacterInfoHandle:
             old_button_draw.draw()
             back_draw.draw()
             next_button_draw.draw()
+            line_feed.draw()
             self.return_list.extend(now_character_panel.return_list)
             self.return_list.append(old_button_draw.return_text)
             self.return_list.append(back_draw.return_text)
             self.return_list.append(next_button_draw.return_text)
             yrn = flow_handle.askfor_all(self.return_list)
             py_cmd.clr_cmd()
+            line_feed.draw()
             if yrn == back_draw.return_text:
                 break
             elif yrn in now_character_panel.draw_data:

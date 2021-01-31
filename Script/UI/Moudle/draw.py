@@ -659,7 +659,7 @@ class CenterMergeDraw:
             value.draw()
         now_width = fix_draw.width * 2 + now_width
         if now_width < self.width:
-            fix_draw.text += (self.width - now_width) * " "
+            fix_draw.text += int(self.width - now_width) * " "
         fix_draw.draw()
 
 

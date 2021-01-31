@@ -270,11 +270,12 @@ def translate_data(data: dict):
     Keyword arguments:
     data -- 待翻译的字典数据
     """
-    if "get_text" not in data:
+    if "gettext" not in data:
         return
-    for key in data["data"]:
-        if data["get_text"][key]:
-            data[key] = get_text._(data[key])
+    for now_data in data["data"]:
+        for key in now_data:
+            if data["gettext"][key]:
+                now_data[key] = get_text._(now_data[key])
 
 
 def load_age_judge_sex_experience_tem_data():
