@@ -382,6 +382,7 @@ class CenterDrawButtonListPanel:
         column: int,
         null_text: str = "",
         cmd_func: FunctionType = None,
+        func_args: List[Tuple] = []
     ):
         """
         设置绘制信息

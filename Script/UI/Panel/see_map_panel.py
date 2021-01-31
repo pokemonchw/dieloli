@@ -1,6 +1,6 @@
-from typing import List
+from typing import List, Dict
 from types import FunctionType
-from Script.UI.Moudle import draw
+from Script.UI.Moudle import draw,panel
 from Script.Core import (
     get_text,
     cache_control,
@@ -12,6 +12,7 @@ from Script.Core import (
     py_cmd,
 )
 from Script.Design import map_handle, attr_text, character_move
+from Script.Config import game_config
 
 _: FunctionType = get_text._
 """ 翻译api """
@@ -40,6 +41,10 @@ class SeeMapPanel:
 
     def draw(self):
         """ 绘制对象 """
+        move_menu_panel_data = {
+            0 : MapSceneNameDraw
+        }
+        move_menu_panel = MoveMenuPanel(self.width)
         while 1:
             if cache.now_panel_id != constant.Panel.SEE_MAP:
                 break
@@ -111,34 +116,13 @@ class SeeMapPanel:
                         now_draw.draw()
                     line_feed.draw()
             scene_id_list = list(path_edge.keys())
-            if len(scene_id_list):
-                line = draw.LineDraw(".", self.width)
-                line.draw()
-                message_draw = draw.NormalDraw()
-                message_draw.text = _("场景名列表:\n")
-                message_draw.width = self.width
-                message_draw.draw()
-                draw_list = []
-                for scene_id in scene_id_list:
-                    load_scene_data = map_handle.get_scene_data_for_map(map_path_str, scene_id)
-                    now_scene_path = map_handle.get_map_system_path_for_str(load_scene_data.scene_path)
-                    now_id_text = f"{scene_id}:{load_scene_data.scene_name}"
-                    now_draw = draw.LeftButton(
-                        now_id_text, now_id_text, self.width, cmd_func=self.move_now, args=(now_scene_path,)
-                    )
-                    return_list.append(now_draw.return_text)
-                    draw_list.append(now_draw)
-                draw_group = value_handle.list_of_groups(draw_list, 4)
-                now_width_index = 0
-                for now_draw_list in draw_group:
-                    if len(now_draw_list) > now_width_index:
-                        now_width_index = len(now_draw_list)
-                now_width = self.width / now_width_index
-                for now_draw_list in draw_group:
-                    for now_draw in now_draw_list:
-                        now_draw.width = now_width
-                        now_draw.draw()
-                    line_feed.draw()
+            move_menu_panel.update()
+            move_menu_panel.draw()
+            return_list.extend(move_menu_panel.return_list)
+            if move_menu_panel.now_type in move_menu_panel_data:
+                now_move_menu = move_menu_panel_data[move_menu_panel.now_type](self.now_map,self.width)
+                now_move_menu.draw()
+                return_list.extend(now_move_menu.return_list)
             line = draw.LineDraw("=", self.width)
             line.draw()
             now_index = len(scene_id_list)
@@ -190,6 +174,120 @@ class SeeMapPanel:
         character_position = cache.character_data[0].position
         down_map_scene_id = map_handle.get_map_scene_id_for_scene_path(self.now_map, character_position)
         self.now_map.append(down_map_scene_id)
+
+    def move_now(self, scene_path: List[str]):
+        """
+        控制角色移动至指定场景
+        Keyword arguments:
+        scene_path -- 目标场景路径
+        """
+        py_cmd.clr_cmd()
+        line_feed.draw()
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 0
+        character_move.own_charcter_move(scene_path)
+
+
+class MoveMenuPanel:
+    """
+    快捷移动菜单面板
+    Keyword arguments:
+    width -- 绘制宽度
+    """
+
+    def __init__(self, width: int):
+        """ 初始化绘制对象 """
+        self.width: int = width
+        """ 最大绘制宽度 """
+        self.return_list: List[str] = []
+        """ 监听的按钮列表 """
+        self.now_type: int = 0
+        """ 当前的移动菜单类型 """
+        self.draw_list: List[draw.NormalDraw] = []
+        """ 绘制的对象列表 """
+        self.move_type_id_data: Dict[str,int] = {game_config.config_move_menu_type[i].name:i for i in game_config.config_move_menu_type}
+        """ 移动类型名字对应配表id """
+
+    def update(self):
+        """ 更新绘制面板 """
+        line = draw.LineDraw(".", self.width)
+        self.draw_list = []
+        self.return_list = []
+        self.draw_list.append(line)
+        menu_draw = panel.CenterDrawButtonListPanel()
+        move_name_list = [game_config.config_move_menu_type[i].name for i in game_config.config_move_menu_type]
+        move_name_draw_list = [f"[{name}]" for name in move_name_list]
+        menu_draw.set(move_name_draw_list,move_name_list,self.width,len(game_config.config_move_menu_type),move_name_draw_list[self.now_type],self.change_type)
+        self.draw_list.append(menu_draw)
+        self.return_list.extend(menu_draw.return_list)
+
+    def change_type(self,to_type:str):
+        """
+        改变当前快捷移动菜单类型
+        Keyword arguments:
+        to_type -- 指定的新类型id
+        """
+        self.now_type = self.move_type_id_data[to_type]
+        py_cmd.clr_cmd()
+
+    def draw(self):
+        """ 绘制面板 """
+        for now_draw in self.draw_list:
+            now_draw.draw()
+
+
+class MapSceneNameDraw:
+    """
+    绘制指定地图地图场景id对应场景名列表
+    Keyword arguments:
+    now_map -- 地图路径
+    width -- 绘制宽度
+    """
+
+    def __init__(self, now_map: List[str], width: int):
+        self.width: int = width
+        """ 绘制的最大宽度 """
+        self.now_map: List[str] = now_map
+        """ 当前查看的地图坐标 """
+        self.return_list: List[str] = []
+        """ 当前面板的按钮返回 """
+
+    def draw(self):
+        """ 绘制面板 """
+        self.return_list = []
+        map_path_str = map_handle.get_map_system_path_str_for_list(self.now_map)
+        map_data: game_type.Map = cache.map_data[map_path_str]
+        path_edge = map_data.path_edge
+        scene_id_list = list(path_edge.keys())
+        if len(scene_id_list):
+            character_data: game_type.Character = cache.character_data[0]
+            character_scene_id = map_handle.get_map_scene_id_for_scene_path(
+                self.now_map, character_data.position
+            )
+            scene_path = path_edge[character_scene_id].copy()
+            if character_scene_id in scene_path:
+                del scene_path[character_scene_id]
+            scene_path_list = list(scene_path.keys())
+            draw_list = []
+            for scene_id in scene_id_list:
+                load_scene_data = map_handle.get_scene_data_for_map(map_path_str,scene_id)
+                now_scene_path = map_handle.get_map_system_path_for_str(load_scene_data.scene_path)
+                now_id_text = f"{scene_id}:{load_scene_data.scene_name}"
+                now_draw = draw.LeftButton(
+                    now_id_text, now_id_text, self.width, cmd_func=self.move_now, args=(now_scene_path,)
+                )
+                self.return_list.append(now_draw.return_text)
+                draw_list.append(now_draw)
+            draw_group = value_handle.list_of_groups(draw_list, 4)
+            now_width_index = 0
+            for now_draw_list in draw_group:
+                if len(now_draw_list) > now_width_index:
+                    now_width_index = len(now_draw_list)
+            now_width = self.width / now_width_index
+            for now_draw_list in draw_group:
+                for now_draw in now_draw_list:
+                    now_draw.width = now_width
+                    now_draw.draw()
+                line_feed.draw()
 
     def move_now(self, scene_path: List[str]):
         """

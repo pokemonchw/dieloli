@@ -162,7 +162,7 @@ class InScenePanel:
 class SeeInstructPanel:
     """
     查看操作菜单面板
-    Keywor arguments:
+    Keyword arguments:
     width -- 绘制宽度
     """
 

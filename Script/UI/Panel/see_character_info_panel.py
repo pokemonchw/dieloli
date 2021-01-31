@@ -100,6 +100,7 @@ class SeeCharacterInfoPanel:
         self.draw_data[self.now_panel].draw()
         self.return_list = []
         self.return_list.extend(self.draw_data[self.now_panel].return_list)
+        line_feed.draw()
         line = draw.LineDraw("=", self.width)
         line.draw()
         self.handle_panel.draw()

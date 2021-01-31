@@ -105,9 +105,9 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
     character_data.status[27] += add_time * 0.02
     character_data.status[28] += add_time * 0.02
     if time_judge:
-        talk.handle_talk(character_id)
         settle_behavior.handle_settle_behavior(character_id, now_time)
-        character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
+        talk.handle_talk(character_id)
+        character_data.behavior = game_type.Behavior()
         character_data.state = constant.CharacterStatus.STATUS_ARDER
     if time_judge == 1:
         character_data.behavior.start_time = end_time

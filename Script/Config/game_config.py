@@ -133,6 +133,8 @@ config_moon: Dict[int, config_def.Moon] = {}
 """ 月相配置 """
 config_moon_data: Dict[int, Set] = {}
 """ 月相类型对应配置id集合 """
+config_move_menu_type: Dict[int, config_def.MoveMenuType] = {}
+""" 移动菜单过滤类型配置 """
 config_nature: Dict[int, config_def.Nature] = {}
 """ 性格配置数据 """
 config_nature_tag: Dict[int, config_def.NatureTag] = {}
@@ -610,6 +612,16 @@ def load_moon():
         config_moon_data[now_tem.type].add(now_tem.cid)
 
 
+def load_move_menu_type():
+    """ 载入移动菜单过滤类型配置 """
+    now_data = config_data["MoveMenuType"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.MoveMenuType()
+        now_tem.__dict__ = tem_data
+        config_move_menu_type[now_tem.cid] = now_tem
+
+
 def load_nature():
     """ 载入性格配置数据 """
     now_data = config_data["Nature"]
@@ -981,6 +993,7 @@ def init():
     load_language_tem()
     load_manapoint_tem()
     load_moon()
+    load_move_menu_type()
     load_nature()
     load_nature_tag()
     load_occupation_age_region()
