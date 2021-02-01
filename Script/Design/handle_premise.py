@@ -1167,3 +1167,36 @@ def handle_scene_no_have_other_character(character_id: int) -> int:
     scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path]
     return len(scene_data.character_list) == 1
+
+
+@add_premise(constant.Premise.TARGET_HEIGHT_LOW)
+def handle_target_height_low(character_id: int) -> int:
+    """
+    校验交互对象身高是否低于自身身高
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.height.now_height < character_data.height.now_height:
+        return character_data.height.now_height - target_data.height.now_height
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_ADORE)
+def handle_target_adore(character_id: int) -> int:
+    """
+    校验是否被交互对象爱慕
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.social_contact.setdefault(5, set())
+    if character_id in target_data.social_contact[5]:
+        return 1
+    return 0

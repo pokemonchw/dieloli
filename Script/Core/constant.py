@@ -266,6 +266,10 @@ class Premise:
     """ 不擅长演唱 """
     SCENE_NO_HAVE_OTHER_CHARACTER = 70
     """ 场景中没有有自己外的其他角色 """
+    TARGET_HEIGHT_LOW = 71
+    """ 交互对象身高低于自身身高 """
+    TARGET_ADORE = 72
+    """ 被交互对象爱慕 """
 
 
 class InstructType:
