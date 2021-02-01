@@ -43,11 +43,13 @@ class InScenePanel:
         character_data: game_type.Character = cache.character_data[0]
         scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
         scene_data: game_type.Scene = cache.scene_data[scene_path_str]
-        character_list = list(scene_data.character_list)
-        character_list.remove(0)
-        if not character_data.target_character_id and len(character_list):
-            character_data.target_character_id = character_list[0]
         while 1:
+            character_list = list(scene_data.character_list)
+            character_list.remove(0)
+            if character_data.target_character_id not in scene_data.character_list:
+                character_data.target_character_id = 0
+            if not character_data.target_character_id and len(character_list):
+                character_data.target_character_id = character_list[0]
             game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
             game_time_draw.now_draw.width = len(game_time_draw)
             position_text = attr_text.get_scene_path_text(character_data.position)
@@ -269,5 +271,4 @@ class SeeInstructPanel:
         instruct_id -- 指令id
         """
         py_cmd.clr_cmd()
-        line_feed.draw()
         handle_instruct.handle_instruct(instruct_id)

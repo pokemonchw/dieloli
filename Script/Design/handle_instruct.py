@@ -86,6 +86,7 @@ def handle_move():
 )
 def handle_see_attr():
     """ 查看属性 """
+    see_character_info_panel.line_feed.draw()
     now_draw = see_character_info_panel.SeeCharacterInfoInScenePanel(
         cache.character_data[0].target_character_id, width
     )
@@ -95,6 +96,7 @@ def handle_see_attr():
 @add_instruct(constant.Instruct.SEE_OWNER_ATTR, constant.InstructType.ACTIVE, _("查看自身属性"), {})
 def handle_see_owner_attr():
     """ 查看自身属性 """
+    see_character_info_panel.line_feed.draw()
     now_draw = see_character_info_panel.SeeCharacterInfoInScenePanel(0, width)
     now_draw.draw()
 

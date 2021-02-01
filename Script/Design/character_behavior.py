@@ -2,6 +2,7 @@ import os
 import random
 import datetime
 import time
+from typing import Dict
 from functools import wraps
 from Script.Core import (
     cache_control,
@@ -66,7 +67,7 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
     Keyword arguments:
     character_id -- 角色id
     """
-    target, _, judge = search_target(character_id, list(game_config.config_target.keys()), set())
+    target, _, judge = search_target(character_id, list(game_config.config_target.keys()), set(), {})
     if judge:
         target_config = game_config.config_target[target]
         cache.handle_state_machine_data[target_config.state_machine_id](character_id)
@@ -118,13 +119,16 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
     return 1
 
 
-def search_target(character_id: int, target_list: list, null_target: set) -> (int, int, bool):
+def search_target(
+    character_id: int, target_list: list, null_target: set, premise_data: Dict[int, int]
+) -> (int, int, bool):
     """
     查找可用目标
     Keyword arguments:
     character_id -- 角色id
     target_list -- 检索的目标列表
     null_target -- 被排除的目标
+    premise_data -- 已算出的前提权重
     Return arguments:
     int -- 目标id
     int -- 目标权重
@@ -143,15 +147,19 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (in
         now_target_data = {}
         premise_judge = 1
         for premise in target_premise_list:
-            premise_judge = handle_premise.handle_premise(premise, character_id)
+            premise_judge = 0
+            if premise in premise_data:
+                premise_judge = premise_data[premise]
+            else:
+                premise_judge = handle_premise.handle_premise(premise, character_id)
+                premise_data[premise] = premise_judge
             if premise_judge:
                 now_weight += premise_judge
             else:
-                premise_judge = 0
-                if premise in game_config.config_effect_target_data:
+                if premise in game_config.config_effect_target_data and premise not in premise_data:
                     now_target_list = game_config.config_effect_target_data[premise]
                     now_target, now_target_weight, now_judge = search_target(
-                        character_id, now_target_list, null_target
+                        character_id, now_target_list, null_target, premise_data
                     )
                     if now_judge:
                         now_target_data.setdefault(now_target_weight, set())

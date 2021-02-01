@@ -24,7 +24,7 @@ def character_move_to_classroom(character_id: int):
     character_data.state = constant.CharacterStatus.STATUS_MOVE
 
 
-@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_RAND_RESTAURANT)
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_RAND_CAFETERIA)
 def character_move_to_rand_cafeteria(character_id: int):
     """
     移动至随机取餐区

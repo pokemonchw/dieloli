@@ -44,6 +44,7 @@ class SeeMapPanel:
         move_menu_panel_data = {
             0: MapSceneNameDraw(self.now_map, self.width),
             1: GlobalSceneNamePanel(self.now_map, self.width),
+            2: SocialSceneNamePanel(self.now_map, self.width),
         }
         move_menu_panel = MoveMenuPanel(self.width)
         while 1:
@@ -60,6 +61,7 @@ class SeeMapPanel:
                 self.now_map, character_data.position
             )
             return_list = []
+            index = 0
             for now_draw_line in now_draw_list.draw_text:
                 fix_width = int((self.width - now_draw_line.width) / 2)
                 fix_text = " " * fix_width
@@ -118,12 +120,13 @@ class SeeMapPanel:
                     line_feed.draw()
             scene_id_list = list(path_edge.keys())
             now_index = len(scene_id_list)
+            index = now_index
             move_menu_panel.update()
             move_menu_panel.draw()
             return_list.extend(move_menu_panel.return_list)
             if move_menu_panel.now_type in move_menu_panel_data:
                 now_move_menu = move_menu_panel_data[move_menu_panel.now_type]
-                now_move_menu.update(self.now_map)
+                now_move_menu.update(self.now_map, index)
                 now_move_menu.draw()
                 return_list.extend(now_move_menu.return_list)
             line = draw.LineDraw("=", self.width)
@@ -265,12 +268,15 @@ class MapSceneNameDraw:
         """ 当前查看的地图坐标 """
         self.return_list: List[str] = []
         """ 当前面板的按钮返回 """
+        self.end_index: int = 0
+        """ 结束按钮id """
 
-    def update(self, now_map: List[str]):
+    def update(self, now_map: List[str], start_index: int):
         """
         更新当前面板对象
         Keyword arguments:
         now_map -- 当前地图
+        start_index -- 起始按钮id
         """
         self.now_map = now_map
 
@@ -339,7 +345,8 @@ class GlobalSceneNamePanel:
         """ 当前查看的地图坐标 """
         self.return_list: List[str] = []
         """ 当前面板的按钮返回 """
-        self.return_list = []
+        self.end_index: int = 0
+        """ 结束按钮id """
         character_data: game_type.Character = cache.character_data[0]
         class_room_path = map_handle.get_map_system_path_for_str(character_data.classroom)
         office_room_path = character_data.officeroom
@@ -363,14 +370,17 @@ class GlobalSceneNamePanel:
         ]
         path_list = [i for i in path_list if len(i)]
         self.handle_panel = panel.PageHandlePanel(path_list, ScenePathNameMoveDraw, 20, 3, self.width, 1)
+        self.end_index = self.handle_panel.end_index
 
-    def update(self, now_map: List[str]):
+    def update(self, now_map: List[str], start_index: int):
         """
         更新当前面板对象
         Keyword arguments:
         now_map -- 当前地图
+        start_index -- 起始按钮id
         """
         self.now_map = now_map
+        self.handle_panel.button_start_id = start_index
         self.handle_panel.update()
 
     def draw(self):
@@ -417,6 +427,100 @@ class ScenePathNameMoveDraw:
         self.now_draw = name_draw
         """ 绘制的对象 """
         self.button_return = path_text
+
+    def draw(self):
+        """ 绘制对象 """
+        self.now_draw.draw()
+
+    def move_now(self):
+        """
+        控制角色移动至指定场景
+        Keyword arguments:
+        scene_path -- 目标场景路径
+        """
+        py_cmd.clr_cmd()
+        line_feed.draw()
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 0
+        character_move.own_charcter_move(self.scene_path)
+
+
+class SocialSceneNamePanel:
+    """
+    绘制社交对象所在场景快捷寻路按钮列表
+    Keyword arguments:
+    now_map -- 地图路径
+    width -- 绘制宽度
+    """
+
+    def __init__(self, now_map: List[str], width: int):
+        self.width: int = width
+        """ 绘制的最大宽度 """
+        self.now_map: List[str] = now_map
+        """ 当前查看的地图坐标 """
+        self.return_list: List[str] = []
+        """ 当前面板的按钮返回 """
+        character_data: game_type.Character = cache.character_data[0]
+        self.handle_panel = panel.PageHandlePanel(
+            list(character_data.social_contact_data.keys()), SocialSceneNameDraw, 20, 3, self.width, 1
+        )
+        self.end_index = self.handle_panel.end_index
+        """ 结束按钮id """
+
+    def update(self, now_map: List[str], start_index: int):
+        """
+        更新当前面板对象
+        Keyword arguments:
+        now_map -- 当前地
+        start_index -- 起始按钮id
+        """
+        self.now_map = now_map
+        self.handle_panel.button_start_id = start_index
+        self.handle_panel.update()
+
+    def draw(self):
+        """ 绘制面板 """
+        self.handle_panel.draw()
+        self.return_list = self.handle_panel.return_list
+
+
+class SocialSceneNameDraw:
+    """
+    按角色id绘制角色所在场景名和移动按钮
+    Keyword arguments:
+    text -- 角色id
+    width -- 最大宽度
+    is_button -- 绘制按钮
+    num_button -- 绘制数字按钮
+    button_id -- 数字按钮的id
+    """
+
+    def __init__(self, text: int, width: int, is_button: bool, num_button: bool, button_id: int):
+        """ 初始化绘制对象 """
+        self.draw_text = ""
+        """ 场景路径绘制文本 """
+        self.width: int = width
+        """ 最大宽度 """
+        self.is_button: bool = is_button
+        """ 绘制按钮 """
+        self.num_button: bool = num_button
+        """ 绘制数字按钮 """
+        self.button_id: int = button_id
+        """ 数字按钮的id """
+        self.button_return: str = str(button_id)
+        """ 按钮返回值 """
+        self.draw_list: List[draw.NormalDraw] = []
+        """ 绘制的对象列表 """
+        character_data: game_type.Character = cache.character_data[text]
+        self.scene_path: List[str] = character_data.position
+        """ 角色所在场景 """
+        path_text = attr_text.get_scene_path_text(self.scene_path)
+        button_text = f"{character_data.name}:[{path_text}]"
+        button_text = text_handle.align(button_text, text_width=width)
+        name_draw = draw.Button(button_text, character_data.name, cmd_func=self.move_now)
+        name_draw.width = width
+        self.now_draw = name_draw
+        """ 绘制的对象 """
+        self.button_return = character_data.name
 
     def draw(self):
         """ 绘制对象 """

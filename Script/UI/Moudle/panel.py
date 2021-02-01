@@ -537,6 +537,8 @@ class PageHandlePanel:
         """ 绘制的对象列表 """
         self.null_button_text: str = null_button_text
         """ 不作为按钮绘制的文本 """
+        self.end_index: int = 0
+        """ 结束时按钮id """
 
     def update(self):
         """ 更新绘制对象 """
@@ -585,6 +587,7 @@ class PageHandlePanel:
                 draw_list.append(value_draw)
                 draw_list.append(col_fix_draw)
             draw_list.append(line_feed)
+        self.end_index = index
         if total_page:
             now_line = draw.LineDraw("-", self.width)
             draw_list.append(now_line)
@@ -612,6 +615,7 @@ class PageHandlePanel:
                 int(self.width / 3),
                 cmd_func=self.next_page,
             )
+            self.end_index = page_change_start_id + 1
             self.return_list.append(str(page_change_start_id + 1))
             draw_list.append(next_page_button)
             draw_list.append(line_feed)

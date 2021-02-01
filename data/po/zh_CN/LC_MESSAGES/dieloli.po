@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-31 22:18+0800\n"
+"POT-Creation-Date: 2021-02-01 11:42+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,26 +21,26 @@ msgstr ""
 msgid "python3版本过旧(低于python3.9.0),请升级"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:55
+#: ../Script/UI/Panel/see_map_panel.py:56
 msgid "移动:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:98
+#: ../Script/UI/Panel/see_map_panel.py:99
 msgid "你可以从这里前往:\n"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:133
+#: ../Script/UI/Panel/see_map_panel.py:134
 msgid "查看上级地图"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:146
+#: ../Script/UI/Panel/see_map_panel.py:147
 #: ../Script/UI/Panel/see_character_info_panel.py:923
 #: ../Script/UI/Panel/see_character_info_panel.py:963
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/item_shop_panel.py:47
-#: ../Script/UI/Panel/get_up_panel.py:92
+#: ../Script/UI/Panel/get_up_panel.py:98
 #: ../Script/UI/Panel/food_bag_panel.py:70
 #: ../Script/UI/Panel/food_bag_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
@@ -48,7 +48,7 @@ msgstr ""
 msgid "返回"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:154
+#: ../Script/UI/Panel/see_map_panel.py:155
 msgid "查看下级地图"
 msgstr ""
 
@@ -216,7 +216,7 @@ msgstr ""
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/item_shop_panel.py:47
-#: ../Script/UI/Panel/get_up_panel.py:92
+#: ../Script/UI/Panel/get_up_panel.py:98
 #: ../Script/UI/Panel/food_bag_panel.py:70
 #: ../Script/UI/Panel/food_bag_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
@@ -464,7 +464,7 @@ msgstr ""
 msgid "[002]读写存档"
 msgstr ""
 
-#: ../Script/UI/Panel/get_up_panel.py:74
+#: ../Script/UI/Panel/get_up_panel.py:80
 msgid "角色列表"
 msgstr ""
 
