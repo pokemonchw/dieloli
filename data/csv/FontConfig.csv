@@ -3,8 +3,8 @@ cid,name,foreground,background,font,font_size,bold,underline,italic,selectbackgr
 int,str,str,str,str,int,bool,bool,bool,str,str
 0,0,0,0,0,0,0,0,0,0,0
 字体样式配置数据(富文本用),,,,,,,,,,
-0,standard,#c8c8c8,#000,Sarasa Mono SC,18,0,0,0,grey,默认样式
-1,order,,,,16,,,,,输入框字体
+0,standard,#c8c8c8,#000,Sarasa Mono SC,27,0,0,0,grey,默认样式
+1,order,,,,22,,,,,输入框字体
 2,onbutton,#292421,,,,,,,,按钮字体
 3,selectmenu,#292421,,,,,,,,选择栏目字体
 4,onselectmenu,#c8c8c8,,,,,,,,选择栏目悬停字体

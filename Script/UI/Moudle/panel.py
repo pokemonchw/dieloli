@@ -555,6 +555,7 @@ class PageHandlePanel:
             now_page_list.append(self.text_list[i])
         draw_text_group = value_handle.list_of_groups(now_page_list, self.column)
         draw_list: List[draw.NormalDraw] = []
+        self.end_index = self.button_start_id
         index = self.button_start_id
         line_feed = draw.NormalDraw()
         line_feed.text = "\n"
@@ -587,11 +588,12 @@ class PageHandlePanel:
                 draw_list.append(value_draw)
                 draw_list.append(col_fix_draw)
             draw_list.append(line_feed)
-        self.end_index = index
+        if self.num_button:
+            self.end_index = index
         if total_page:
             now_line = draw.LineDraw("-", self.width)
             draw_list.append(now_line)
-            page_change_start_id = 0
+            page_change_start_id = self.button_start_id
             if self.num_button:
                 page_change_start_id = index
             old_page_index_text = text_handle.id_index(page_change_start_id)

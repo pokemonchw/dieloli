@@ -18,14 +18,19 @@ def build_csv_config(file_path: str, file_name: str, talk: bool):
         now_type_data = {}
         get_text_data = {}
         file_id = file_name.split(".")[0]
+        if talk:
+            path_list = file_path.split(os.sep)
+            file_id = path_list[-2] + "_" + file_id
         i = 0
         class_text = ""
         type_text = file_id
         if talk:
             type_text = "Talk"
-            if len(file_id.split("_")) > 1:
+            if "premise" in file_name:
                 type_text = "TalkPremise"
-        config_data[type_text] = {"data": [], "gettext": {}}
+        config_data.setdefault(type_text, {})
+        config_data[type_text].setdefault("data", [])
+        config_data[type_text].setdefault("gettext", {})
         for row in now_read:
             if not i:
                 for k in row:
@@ -60,9 +65,9 @@ def build_csv_config(file_path: str, file_name: str, talk: bool):
                 elif now_type == "float":
                     row[k] = float(row[k])
                 if k == "cid" and talk:
-                    row[k] = file_id.split("_")[0] + row[k]
+                    row[k] = file_id.split("-")[0] + row[k]
                 if k == "talk_id" and talk:
-                    row[k] = file_id.split("_")[0] + row[k]
+                    row[k] = file_id.split("-")[0] + row[k]
                 if get_text_data[k]:
                     build_config_po(row[k], type_text, k, row["cid"])
             config_data[type_text]["data"].append(row)
@@ -130,9 +135,11 @@ for i in file_list:
 
 talk_file_list = os.listdir(talk_dir)
 for i in talk_file_list:
-    config_def_str += "\n\n\n"
-    now_file = os.path.join(talk_dir, i)
-    build_csv_config(now_file, i, 1)
+    now_dir = os.path.join(talk_dir, i)
+    for f in os.listdir(now_dir):
+        config_def_str += "\n\n\n"
+        now_f = os.path.join(now_dir, f)
+        build_csv_config(now_f, f, 1)
 
 map_path = os.path.join("..", "data", "map")
 build_scene_config(map_path)

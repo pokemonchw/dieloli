@@ -39,8 +39,8 @@ class InScenePanel:
 
     def draw(self):
         """ 绘制对象 """
-        title_draw = draw.TitleLineDraw(_("场景"), self.width)
         character_data: game_type.Character = cache.character_data[0]
+        title_draw = draw.TitleLineDraw(_("场景"), self.width)
         scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
         scene_data: game_type.Scene = cache.scene_data[scene_path_str]
         while 1:
@@ -70,6 +70,7 @@ class InScenePanel:
                 self.width,
                 1,
                 0,
+                len(cache.handle_instruct_name_data),
                 null_button_text=character_data.target_character_id,
             )
             see_instruct_panel = SeeInstructPanel(self.width)

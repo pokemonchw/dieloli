@@ -42,11 +42,11 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
     if now_judge:
         if not character_id or character_id == cache.character_data[0].target_character_id:
             now_character_data = cache.character_data[character_id]
+            now_text_list = []
             now_draw = draw.NormalDraw()
-            now_draw.text = "\n" + now_character_data.name + "\n"
+            now_draw.text = "\n" + now_character_data.name + ": "
             now_draw.width = width
             now_draw.draw()
-            now_text_list = []
             if status_data.hit_point:
                 now_text_list.append(_("体力:") + str(round(status_data.hit_point, 2)))
             if status_data.mana_point:
@@ -54,14 +54,14 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
             if len(status_data.status):
                 now_text_list.extend(
                     [
-                        f"{game_config.config_character_state[i].name}:{round(status_data.status[i],2)}"
+                        f"{game_config.config_character_state[i].name}:{text_handle.number_to_symbol_string(round(status_data.status[i],2))}"
                         for i in status_data.status
                     ]
                 )
             if len(status_data.knowledge):
                 now_text_list.extend(
                     [
-                        f"{game_config.config_knowledge[i].name}:{round(status_data.knowledge[i],2)}"
+                        f"{game_config.config_knowledge[i].name}:{text_handle.number_to_symbol_string(round(status_data.knowledge[i],2))}"
                         for i in status_data.knowledge
                     ]
                 )

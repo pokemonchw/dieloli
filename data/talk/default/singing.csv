@@ -1,0 +1,11 @@
+cid,behavior_id,adv_id,context
+口上id,触发口上的行为id,口上限定的剧情npcid,口上内容
+str,int,int,str
+0,0,0,1
+口上配置数据,,,
+0,7,0,{PlayerNickName}在无人的地方独自唱了首歌
+1,7,0,{PlayerNickName}在跟着伴奏独自练习着唱歌
+2,7,0,{PlayerNickName}神情振奋的在音乐活动室里和大家一起合唱
+3,7,0,{PlayerNickName}对着{TargetName}唱了首歌
+4,7,0,{PlayerNickName}对着{TargetName}唱了首歌\n实在太难听了!\n{TargetName}捂住了耳朵
+5,7,0,{PlayerNickName}对着{TargetName}唱了首歌\n{TargetName}沉浸在歌声里跟着唱了起来

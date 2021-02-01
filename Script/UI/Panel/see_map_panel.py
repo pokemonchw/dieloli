@@ -48,6 +48,7 @@ class SeeMapPanel:
         }
         move_menu_panel = MoveMenuPanel(self.width)
         while 1:
+            line_feed.draw()
             if cache.now_panel_id != constant.Panel.SEE_MAP:
                 break
             map_path_str = map_handle.get_map_system_path_str_for_list(self.now_map)
@@ -128,6 +129,7 @@ class SeeMapPanel:
                 now_move_menu = move_menu_panel_data[move_menu_panel.now_type]
                 now_move_menu.update(self.now_map, index)
                 now_move_menu.draw()
+                now_index = now_move_menu.end_index + 1
                 return_list.extend(now_move_menu.return_list)
             line = draw.LineDraw("=", self.width)
             line.draw()
@@ -317,6 +319,7 @@ class MapSceneNameDraw:
                     now_draw.width = now_width
                     now_draw.draw()
                 line_feed.draw()
+        self.end_index = len(scene_id_list) - 1
 
     def move_now(self, scene_path: List[str]):
         """
@@ -382,6 +385,7 @@ class GlobalSceneNamePanel:
         self.now_map = now_map
         self.handle_panel.button_start_id = start_index
         self.handle_panel.update()
+        self.end_index = self.handle_panel.end_index
 
     def draw(self):
         """ 绘制面板 """
@@ -476,6 +480,7 @@ class SocialSceneNamePanel:
         self.now_map = now_map
         self.handle_panel.button_start_id = start_index
         self.handle_panel.update()
+        self.end_index = self.handle_panel.end_index
 
     def draw(self):
         """ 绘制面板 """

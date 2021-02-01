@@ -22,13 +22,15 @@ def handle_talk(character_id):
     if behavior_id in game_config.config_talk_data:
         for talk_id in game_config.config_talk_data[behavior_id]:
             now_weight = 1
-            for premise in game_config.config_talk_premise_data[talk_id]:
-                now_add_weight = cache.handle_premise_data[premise](character_id)
-                if now_add_weight:
-                    now_weight += now_add_weight
-                else:
-                    now_weight = 0
-                    break
+            if talk_id in game_config.config_talk_premise_data:
+                now_weight = 0
+                for premise in game_config.config_talk_premise_data[talk_id]:
+                    now_add_weight = cache.handle_premise_data[premise](character_id)
+                    if now_add_weight:
+                        now_weight += now_add_weight
+                    else:
+                        now_weight = 0
+                        break
             if now_weight:
                 now_talk_data.setdefault(now_weight, set())
                 now_talk_data[now_weight].add(talk_id)
