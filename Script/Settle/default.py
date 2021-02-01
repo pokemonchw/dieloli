@@ -6,6 +6,7 @@ from Script.Design import (
     game_time,
     map_handle,
     character,
+    attr_calculation,
 )
 from Script.Core import constant, cache_control, game_type
 from Script.Config import game_config
@@ -48,9 +49,6 @@ def settle_rest(character_id: int, now_time: datetime.datetime) -> game_type.Cha
         target_data.favorability.setdefault(character_id, 0)
         target_data.favorability[character_id] += add_favorability
         now_change_data.favorability[target_data.cid] = add_favorability
-    cache.status_up_text.setdefault(character_id, {})
-    cache.status_up_text[character_id]["HitPoint"] = add_hit_point
-    cache.status_up_text[character_id]["ManaPoint"] = add_mana_point
     return now_change_data
 
 
@@ -71,7 +69,6 @@ def settle_move(character_id: int, now_time: datetime.datetime) -> game_type.Cha
     add_time = int((now_time - start_time).seconds / 60)
     if character_data.mana_point >= add_time:
         character_data.mana_point -= add_time
-        add_time -= add_time
     else:
         add_time -= character_data.mana_point
         now_change_data.mana_point -= character_data.mana_point
@@ -155,3 +152,71 @@ def settle_chat(character_id: int, now_time: datetime.datetime) -> game_type.Cha
         target_data.favorability[character_id] += add_favorability
         now_change_data.favorability[character_data.target_character_id] = add_favorability
     return now_change_data
+
+
+def settle_social_contant(
+    character_id: int, knowledge: int, now_time: datetime.datetime
+) -> game_type.CharacterStatusChange:
+    """
+    结算角色社交技能行为
+    Keyword arguments:
+    character_id -- 角色id
+    knowledge -- 技能id
+    now_time -- 结算时间
+    Return arguments:
+    game_type.CharacterStatusChange -- 行为改变的角色状态
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.social_contact_data
+    now_change_data = game_type.CharacterStatusChange()
+    start_time = character_data.behavior.start_time
+    add_time = int((now_time - start_time).seconds / 60)
+    if character_data.mana_point >= add_time:
+        character_data.mana_point -= add_time
+        now_change_data.mana_point -= add_time
+    else:
+        now_add_time = add_time
+        now_change_data.mana_point -= character_data.mana_point
+        now_add_time -= character_data.mana_point
+        character_data.mana_point = 0
+        now_add_time *= 10
+        now_change_data.hit_point -= now_add_time
+        now_change_data.hit_point -= now_add_time
+    now_experience = add_time * character_data.knowledge_interest[knowledge]
+    character_data.knowledge.setdefault(knowledge, 0)
+    character_data.knowledge[knowledge] += now_experience
+    now_change_data.knowledge[knowledge] = now_experience
+    if character_data.target_character_id != character_id:
+        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        now_level = attr_calculation.get_experience_level_weight(character_data.knowledge[knowledge])
+        add_favorability = now_level * add_time + add_time * character_data.knowledge_interest[knowledge]
+        target_data.favorability.setdefault(character_id, 0)
+        target_data.favorability[character_id] += add_favorability
+        now_change_data.favorability[target_data.cid] = add_favorability
+    return now_change_data
+
+
+@settle_behavior.add_settle_behavior(constant.Behavior.PLAY_PIANO)
+def settle_play_piano(character_id: int, now_time: datetime.datetime) -> game_type.CharacterStatusChange:
+    """
+    结算角色弹奏钢琴行为
+    Keyword arguments:
+    character_id -- 角色id
+    now_time -- 结算时间
+    Return arguments:
+    game_type.CharacterStatusChange -- 行为改变的角色状态
+    """
+    return settle_social_contant(character_id, 25, now_time)
+
+
+@settle_behavior.add_settle_behavior(constant.Behavior.SINGING)
+def settle_singing(character_id: int, now_time: datetime.datetime) -> game_type.CharacterStatusChange:
+    """
+    结算角色唱歌行为
+    Keyword arguments:
+    character_id -- 角色id
+    now_time -- 结算时间
+    Return arguments:
+    game_type.CharacterStatusChange -- 行为改变的角色状态
+    """
+    return settle_social_contant(character_id, 15, now_time)

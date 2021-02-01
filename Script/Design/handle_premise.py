@@ -1083,3 +1083,87 @@ def handle_chest_is_not_cliff(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     return attr_calculation.judge_chest_group(character_data.chest.now_chest)
+
+
+@add_premise(constant.Premise.EXCELLED_AT_PLAY_MUSIC)
+def handle_excelled_at_play_music(character_id: int) -> int:
+    """
+    校验角色是否擅长演奏乐器
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 1 + character_data.knowledge_interest[25]
+    if 25 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[25])
+        return weight * level
+    return weight
+
+
+@add_premise(constant.Premise.EXCELLED_AT_SINGING)
+def handle_excelled_at_singing(character_id: int) -> int:
+    """
+    校验角色是否擅长演唱
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 1 + character_data.knowledge_interest[15]
+    if 15 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[15])
+        return weight * level
+    return weight
+
+
+@add_premise(constant.Premise.IN_MUSIC_CLASSROOM)
+def handle_in_music_classroom(character_id: int) -> int:
+    """
+    校验角色是否处于音乐活动室中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data = cache.scene_data[now_scene_str]
+    if now_scene_data.scene_tag == "MusicClassroom":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.NO_EXCELLED_AT_SINGING)
+def handle_no_excelled_at_singing(character_id: int) -> int:
+    """
+    校验角色是否不擅长演唱
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 8
+    if 15 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[15])
+        return 8 - level
+    return weight
+
+
+@add_premise(constant.Premise.SCENE_NO_HAVE_OTHER_CHARACTER)
+def handle_scene_no_have_other_character(character_id: int) -> int:
+    """
+    校验场景中没有自己外的其他角色
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path]
+    return len(scene_data.character_list) == 1

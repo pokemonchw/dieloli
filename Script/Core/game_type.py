@@ -618,8 +618,6 @@ class Cache:
         """ 可穿戴道具类型数据 """
         self.course_time_status: dict = {}
         """ 当前上课时间状态 """
-        self.status_up_text: dict = {}
-        """ 显示给玩家的角色状态变化文本 """
         self.behavior_tem_data: dict = {}
         """ 角色行为控制器数据 """
         self.settle_behavior_data: dict = {}

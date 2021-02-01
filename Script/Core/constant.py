@@ -36,6 +36,10 @@ class CharacterStatus:
     """ 进食状态 """
     STATUS_CHAT = 5
     """ 闲聊状态 """
+    STATUS_PLAY_PIANO = 6
+    """ 弹钢琴 """
+    STATUS_SINGING = 7
+    """ 唱歌 """
 
 
 class Behavior:
@@ -53,6 +57,10 @@ class Behavior:
     """ 进食 """
     CHAT = 5
     """ 闲聊 """
+    PLAY_PIANO = 6
+    """ 弹钢琴 """
+    SINGING = 7
+    """ 唱歌 """
 
 
 class StateMachine:
@@ -84,6 +92,12 @@ class StateMachine:
     """ 穿干净的鞋子 """
     WEAR_CLEAN_SOCKS = 12
     """ 穿干净的袜子 """
+    PLAY_PIANO = 13
+    """ 弹钢琴 """
+    MOVE_TO_MUSIC_ROOM = 14
+    """ 移动至音乐活动室 """
+    SINGING = 15
+    """ 唱歌 """
 
 
 class Panel:
@@ -242,6 +256,16 @@ class Premise:
     """ 在宿舍中 """
     CHEST_IS_NOT_CLIFF = 65
     """ 胸围不是绝壁 """
+    EXCELLED_AT_PLAY_MUSIC = 66
+    """ 擅长演奏 """
+    EXCELLED_AT_SINGING = 67
+    """ 擅长演唱 """
+    IN_MUSIC_CLASSROOM = 68
+    """ 处于音乐活动室 """
+    NO_EXCELLED_AT_SINGING = 69
+    """ 不擅长演唱 """
+    SCENE_NO_HAVE_OTHER_CHARACTER = 70
+    """ 场景中没有有自己外的其他角色 """
 
 
 class InstructType:
@@ -286,3 +310,5 @@ class Instruct:
     """ 闲聊 """
     BUY_ITEM = 7
     """ 购买道具 """
+    SINGING = 8
+    """ 唱歌 """

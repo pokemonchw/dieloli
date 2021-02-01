@@ -309,11 +309,43 @@ def get_sex_experience(tem_name: int, sex: int) -> dict:
     return sex_experience_data
 
 
-def judge_grade(experience: int) -> float:
+def get_experience_level_weight(experience: int) -> int:
+    """
+    按经验计算技能等级权重
+    Keyword arguments:
+    experience -- 经验数值
+    Return arguments:
+    int -- 权重
+    """
+    grade = 0
+    if experience < 50:
+        grade = 0
+    elif experience < 100:
+        grade = 1
+    elif experience < 200:
+        grade = 2
+    elif experience < 500:
+        grade = 3
+    elif experience < 1000:
+        grade = 4
+    elif experience < 2000:
+        grade = 5
+    elif experience < 5000:
+        grade = 6
+    elif experience < 10000:
+        grade = 7
+    elif experience >= 10000:
+        grade = 8
+    return grade
+
+
+def judge_grade(experience: int) -> str:
     """
     按经验数值评定等级
     Keyword arguments:
     experience -- 经验数值
+    Return arguments:
+    str -- 评级
     """
     grade = ""
     if experience < 50:

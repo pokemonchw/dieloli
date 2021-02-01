@@ -234,3 +234,45 @@ def character_wear_clean_socks(character_id: int):
             value_dict[clothing_data.cleanliness] = clothing
         now_value = max(value_dict.keys())
         character_data.put_on[5] = value_dict[now_value]
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.PLAY_PIANO)
+def character_play_piano(character_id: int):
+    """
+    角色弹奏钢琴
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.PLAY_PIANO
+    character_data.behavior.duration = 30
+    character_data.state = constant.CharacterStatus.STATUS_PLAY_PIANO
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_MUSIC_ROOM)
+def character_move_to_music_room(character_id: int):
+    """
+    移动至音乐活动室
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["MusicClassroom"]))
+    _, _, move_path, move_time = character_move.character_move(character_id, to_cafeteria)
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.SINGING)
+def character_singing(character_id: int):
+    """
+    唱歌
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.SINGING
+    character_data.behavior.duration = 30
+    character_data.state = constant.CharacterStatus.STATUS_SINGING

@@ -120,3 +120,14 @@ def handle_chat():
 def handle_buy_item():
     """ 处理购买道具指令 """
     cache.now_panel_id = constant.Panel.ITEM_SHOP
+
+
+@add_instruct(constant.Instruct.SINGING, constant.InstructType.PERFORM, _("唱歌"), {})
+def handle_singing():
+    """ 处理唱歌指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 5
+    character_data.behavior.behavior_id = constant.Behavior.SINGING
+    character_data.state = constant.CharacterStatus.STATUS_SINGING
+    update.game_update_flow(5)

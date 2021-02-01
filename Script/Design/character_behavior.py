@@ -141,6 +141,10 @@ def search_target(
             continue
         if target == 7:
             now_test_judge = 1
+        if target not in game_config.config_target_premise_data:
+            target_data.setdefault(1, set())
+            target_data[1].add(target)
+            continue
         target_premise_list = game_config.config_target_premise_data[target]
         now_weight = 0
         now_target_pass_judge = 0

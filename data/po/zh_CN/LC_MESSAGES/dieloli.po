@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-01 11:42+0800\n"
+"POT-Creation-Date: 2021-02-01 15:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,15 +25,15 @@ msgstr ""
 msgid "移动:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:99
+#: ../Script/UI/Panel/see_map_panel.py:100
 msgid "你可以从这里前往:\n"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:134
+#: ../Script/UI/Panel/see_map_panel.py:136
 msgid "查看上级地图"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:147
+#: ../Script/UI/Panel/see_map_panel.py:149
 #: ../Script/UI/Panel/see_character_info_panel.py:923
 #: ../Script/UI/Panel/see_character_info_panel.py:963
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
@@ -48,7 +48,7 @@ msgstr ""
 msgid "返回"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:155
+#: ../Script/UI/Panel/see_map_panel.py:157
 msgid "查看下级地图"
 msgstr ""
 
@@ -508,11 +508,11 @@ msgstr ""
 msgid "场景"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:54
+#: ../Script/UI/Panel/in_scene_panel.py:56
 msgid "当前位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:59
+#: ../Script/UI/Panel/in_scene_panel.py:61
 msgid "你在这里遇到了:"
 msgstr ""
 
@@ -521,12 +521,12 @@ msgstr ""
 msgid "输入的字符超长，最大{input_max}个英文字符，请重试。"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:596
+#: ../Script/UI/Moudle/panel.py:599
 #, python-brace-format
 msgid "{old_page_index_text} 上一页"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:610
+#: ../Script/UI/Moudle/panel.py:613
 #, python-brace-format
 msgid "{next_page_index_text} 下一页"
 msgstr ""
@@ -828,16 +828,20 @@ msgstr ""
 msgid "查看属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:95
+#: ../Script/Design/handle_instruct.py:96
 msgid "查看自身属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:103
+#: ../Script/Design/handle_instruct.py:105
 msgid "闲聊"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:116
+#: ../Script/Design/handle_instruct.py:118
 msgid "购买道具"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:126
+msgid "唱歌"
 msgstr ""
 
 #: ../Script/Core/flow_handle.py:262 ../Script/Core/flow_handle.py:283
@@ -3570,6 +3574,30 @@ msgstr ""
 
 #: class:Talk id:default39 type:context
 msgid "{Name}向{PlayerNickName}分享了最近的见闻"
+msgstr ""
+
+#: class:Talk id:default40 type:context
+msgid "{PlayerNickName}在无人的地方独自唱了首歌"
+msgstr ""
+
+#: class:Talk id:default41 type:context
+msgid "{PlayerNickName}在跟着伴奏独自练习着唱歌"
+msgstr ""
+
+#: class:Talk id:default42 type:context
+msgid "{PlayerNickName}神情振奋的在音乐活动室里和大家一起合唱"
+msgstr ""
+
+#: class:Talk id:default43 type:context
+msgid "{PlayerNickName}对着{TargetName}唱了首歌"
+msgstr ""
+
+#: class:Talk id:default44 type:context
+msgid "{PlayerNickName}对着{TargetName}唱了首歌\n实在太难听了!\n{TargetName}捂住了耳朵"
+msgstr ""
+
+#: class:Talk id:default45 type:context
+msgid "{PlayerNickName}对着{TargetName}唱了首歌\n{TargetName}沉浸在歌声里跟着唱了起来"
 msgstr ""
 
 #: Scene:../data/map/24/2/11/Scene.json
