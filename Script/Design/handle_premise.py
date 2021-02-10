@@ -1200,3 +1200,104 @@ def handle_target_adore(character_id: int) -> int:
     if character_id in target_data.social_contact[5]:
         return 1
     return 0
+
+
+@add_premise(constant.Premise.NO_EXCELLED_AT_PLAY_MUSIC)
+def handle_no_excelled_at_play_music(character_id: int) -> int:
+    """
+    校验角色是否不擅长演奏
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 8
+    if 25 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[25])
+        return 8 - level
+    return weight
+
+
+@add_premise(constant.Premise.ARROGANT_HEIGHT)
+def handle_arrogant_height(character_id: int) -> int:
+    """
+    校验角色是否傲慢情绪高涨
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.status.setdefault(15, 0)
+    return int(character_data.status[15] / 10)
+
+
+@add_premise(constant.Premise.IS_LIVELY)
+def handle_is_lively(character_id: int) -> int:
+    """
+    校验角色是否是一个活跃的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.nature[0] >= 50
+
+
+@add_premise(constant.Premise.IS_INFERIORITY)
+def handle_is_inferiority(character_id: int) -> int:
+    """
+    校验角色是否是一个自卑的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.nature[16] < 50
+
+
+@add_premise(constant.Premise.IS_AUTONOMY)
+def handle_is_autonomy(character_id: int) -> int:
+    """
+    校验角色是否是一个自律的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.nature[7] >= 50
+
+
+@add_premise(constant.Premise.SCENE_CHARACTER_ONLY_PLAYER_AND_ONE)
+def handle_scene_character_only_player_and_one(character_id: int) -> int:
+    """
+    校验场景中是否只有包括玩家在内的两个角色
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data: game_type.Scene = cache.scene_data[now_scene_str]
+    if 0 not in now_scene_data.character_list:
+        return 0
+    return len(now_scene_data.character_list) == 2
+
+
+@add_premise(constant.Premise.IS_SOLITARY)
+def handle_is_solitary(character_id: int) -> int:
+    """
+    校验角色是否是一个孤僻的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.nature[1] < 50

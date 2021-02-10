@@ -43,9 +43,21 @@ class InScenePanel:
         title_draw = draw.TitleLineDraw(_("场景"), self.width)
         scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
         scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+        character_handle_panel = panel.PageHandlePanel(
+            [],
+            see_character_info_panel.SeeCharacterInfoByNameDrawInScene,
+            10,
+            5,
+            self.width,
+            1,
+            0,
+            len(cache.handle_instruct_name_data),
+            null_button_text=character_data.target_character_id,
+        )
         while 1:
             character_list = list(scene_data.character_list)
             character_list.remove(0)
+            character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
                 character_data.target_character_id = 0
             if not character_data.target_character_id and len(character_list):
@@ -60,19 +72,6 @@ class InScenePanel:
             meet_draw = draw.NormalDraw()
             meet_draw.text = _("你在这里遇到了:")
             meet_draw.width = self.width
-            character_list = list(scene_data.character_list)
-            character_list.remove(0)
-            character_handle_panel = panel.PageHandlePanel(
-                character_list,
-                see_character_info_panel.SeeCharacterInfoByNameDrawInScene,
-                10,
-                5,
-                self.width,
-                1,
-                0,
-                len(cache.handle_instruct_name_data),
-                null_button_text=character_data.target_character_id,
-            )
             see_instruct_panel = SeeInstructPanel(self.width)
             cache.wframe_mouse.w_frame_skip_wait_mouse = 0
             if cache.now_panel_id != constant.Panel.IN_SCENE:

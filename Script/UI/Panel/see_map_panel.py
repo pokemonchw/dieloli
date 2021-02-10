@@ -359,6 +359,7 @@ class GlobalSceneNamePanel:
         small_restaurant_path = ["16", "0", "0"]
         multi_media_class_room_a_path = ["1", "3", "1"]
         multi_media_class_room_b_path = ["1", "3", "2"]
+        music_class_room_path = ["1", "4", "1"]
         dormitory_path = map_handle.get_map_system_path_for_str(character_data.dormitory)
         path_list = [
             dormitory_path,
@@ -370,6 +371,7 @@ class GlobalSceneNamePanel:
             small_restaurant_path,
             multi_media_class_room_a_path,
             multi_media_class_room_b_path,
+            music_class_room_path,
         ]
         path_list = [i for i in path_list if len(i)]
         self.handle_panel = panel.PageHandlePanel(path_list, ScenePathNameMoveDraw, 20, 3, self.width, 1)
@@ -465,7 +467,12 @@ class SocialSceneNamePanel:
         """ 当前面板的按钮返回 """
         character_data: game_type.Character = cache.character_data[0]
         self.handle_panel = panel.PageHandlePanel(
-            list(character_data.social_contact_data.keys()), SocialSceneNameDraw, 20, 3, self.width, 1
+            [k for k in character_data.social_contact_data if character_data.social_contact_data[k]],
+            SocialSceneNameDraw,
+            20,
+            3,
+            self.width,
+            1,
         )
         self.end_index = self.handle_panel.end_index
         """ 结束按钮id """

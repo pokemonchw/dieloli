@@ -131,3 +131,19 @@ def handle_singing():
     character_data.behavior.behavior_id = constant.Behavior.SINGING
     character_data.state = constant.CharacterStatus.STATUS_SINGING
     update.game_update_flow(5)
+
+
+@add_instruct(
+    constant.Instruct.PLAY_PIANO,
+    constant.InstructType.PERFORM,
+    _("弹钢琴"),
+    {constant.Premise.IN_MUSIC_CLASSROOM},
+)
+def handle_play_piano():
+    """ 处理弹钢琴指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 30
+    character_data.behavior.behavior_id = constant.Behavior.PLAY_PIANO
+    character_data.state = constant.CharacterStatus.STATUS_PLAY_PIANO
+    update.game_update_flow(30)

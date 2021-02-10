@@ -648,6 +648,16 @@ class Cache:
         """ 学校纬度 """
 
 
+class SocialChange:
+    """ 角色关系变化结构体 """
+
+    def __init__(self):
+        self.old_social: int = 0
+        """ 旧关系 """
+        self.new_social: int = 0
+        """ 新关系 """
+
+
 class CharacterStatusChange:
     """ 角色属性状态变更结构体 """
 
@@ -664,3 +674,5 @@ class CharacterStatusChange:
         """ 知识技能经验变化 """
         self.favorability: Dict[int, int] = {}
         """ 角色好感度变化 """
+        self.social_change: Dict[int, SocialChange] = {}
+        """ 角色关系变化 """

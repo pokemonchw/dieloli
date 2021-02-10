@@ -65,11 +65,6 @@ class GetUpPanel:
             yrn = flow_handle.askfor_all(return_list)
             if yrn == "0":
                 character_data: game_type.Character = cache.character_data[0]
-                for social in game_config.config_social_type:
-                    character_data.social_contact.setdefault(social, set())
-                    for i in range(social * 10, social * 10 + 9):
-                        character_data.social_contact[social].add(i)
-                        character_data.social_contact_data[i] = social
                 cache.now_panel_id = constant.Panel.IN_SCENE
                 break
 

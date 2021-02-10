@@ -154,7 +154,7 @@ def settle_chat(character_id: int, now_time: datetime.datetime) -> game_type.Cha
     return now_change_data
 
 
-def settle_social_contant(
+def settle_social_contact(
     character_id: int, knowledge: int, now_time: datetime.datetime
 ) -> game_type.CharacterStatusChange:
     """
@@ -206,7 +206,7 @@ def settle_play_piano(character_id: int, now_time: datetime.datetime) -> game_ty
     Return arguments:
     game_type.CharacterStatusChange -- 行为改变的角色状态
     """
-    return settle_social_contant(character_id, 25, now_time)
+    return settle_social_contact(character_id, 25, now_time)
 
 
 @settle_behavior.add_settle_behavior(constant.Behavior.SINGING)
@@ -219,4 +219,4 @@ def settle_singing(character_id: int, now_time: datetime.datetime) -> game_type.
     Return arguments:
     game_type.CharacterStatusChange -- 行为改变的角色状态
     """
-    return settle_social_contant(character_id, 15, now_time)
+    return settle_social_contact(character_id, 15, now_time)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-01 22:10+0800\n"
+"POT-Creation-Date: 2021-02-10 21:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,26 +21,26 @@ msgstr ""
 msgid "python3版本过旧(低于python3.9.0),请升级"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:56
+#: ../Script/UI/Panel/see_map_panel.py:57
 msgid "移动:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:100
+#: ../Script/UI/Panel/see_map_panel.py:101
 msgid "你可以从这里前往:\n"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:136
+#: ../Script/UI/Panel/see_map_panel.py:138
 msgid "查看上级地图"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:149
-#: ../Script/UI/Panel/see_character_info_panel.py:923
-#: ../Script/UI/Panel/see_character_info_panel.py:963
+#: ../Script/UI/Panel/see_map_panel.py:151
+#: ../Script/UI/Panel/see_character_info_panel.py:925
+#: ../Script/UI/Panel/see_character_info_panel.py:965
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/item_shop_panel.py:47
-#: ../Script/UI/Panel/get_up_panel.py:98
+#: ../Script/UI/Panel/get_up_panel.py:93
 #: ../Script/UI/Panel/food_bag_panel.py:70
 #: ../Script/UI/Panel/food_bag_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
@@ -48,13 +48,13 @@ msgstr ""
 msgid "返回"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:157
+#: ../Script/UI/Panel/see_map_panel.py:159
 msgid "查看下级地图"
 msgstr ""
 
 #: ../Script/UI/Panel/see_character_info_panel.py:46
 #: ../Script/UI/Panel/see_character_info_panel.py:61
-#: ../Script/UI/Panel/see_character_info_panel.py:964
+#: ../Script/UI/Panel/see_character_info_panel.py:966
 msgid "属性"
 msgstr ""
 
@@ -202,59 +202,59 @@ msgstr ""
 msgid "人物性格"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:797
+#: ../Script/UI/Panel/see_character_info_panel.py:799
 msgid "空无一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:803
+#: ../Script/UI/Panel/see_character_info_panel.py:805
 msgid "人物社交"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:923
-#: ../Script/UI/Panel/see_character_info_panel.py:963
+#: ../Script/UI/Panel/see_character_info_panel.py:925
+#: ../Script/UI/Panel/see_character_info_panel.py:965
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/item_shop_panel.py:47
-#: ../Script/UI/Panel/get_up_panel.py:98
+#: ../Script/UI/Panel/get_up_panel.py:93
 #: ../Script/UI/Panel/food_bag_panel.py:70
 #: ../Script/UI/Panel/food_bag_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
 msgid "[返回]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:958
+#: ../Script/UI/Panel/see_character_info_panel.py:960
 msgid "[上一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:958
+#: ../Script/UI/Panel/see_character_info_panel.py:960
 msgid "上一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:961
+#: ../Script/UI/Panel/see_character_info_panel.py:963
 msgid "[下一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:961
+#: ../Script/UI/Panel/see_character_info_panel.py:963
 msgid "下一人"
-msgstr ""
-
-#: ../Script/UI/Panel/see_character_info_panel.py:1030
-#, python-brace-format
-msgid "性别:{sex_config.name}"
-msgstr ""
-
-#: ../Script/UI/Panel/see_character_info_panel.py:1031
-#, python-brace-format
-msgid "年龄:{character_data.age}岁"
 msgstr ""
 
 #: ../Script/UI/Panel/see_character_info_panel.py:1032
 #, python-brace-format
-msgid "体力:({character_data.hit_point}/{character_data.hit_point_max})"
+msgid "性别:{sex_config.name}"
 msgstr ""
 
 #: ../Script/UI/Panel/see_character_info_panel.py:1033
+#, python-brace-format
+msgid "年龄:{character_data.age}岁"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:1034
+#, python-brace-format
+msgid "体力:({character_data.hit_point}/{character_data.hit_point_max})"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:1035
 #, python-brace-format
 msgid "气力:({character_data.mana_point}/{character_data.mana_point_max})"
 msgstr ""
@@ -464,7 +464,7 @@ msgstr ""
 msgid "[002]读写存档"
 msgstr ""
 
-#: ../Script/UI/Panel/get_up_panel.py:80
+#: ../Script/UI/Panel/get_up_panel.py:75
 msgid "角色列表"
 msgstr ""
 
@@ -508,11 +508,11 @@ msgstr ""
 msgid "场景"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:56
+#: ../Script/UI/Panel/in_scene_panel.py:68
 msgid "当前位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:61
+#: ../Script/UI/Panel/in_scene_panel.py:73
 msgid "你在这里遇到了:"
 msgstr ""
 
@@ -521,12 +521,12 @@ msgstr ""
 msgid "输入的字符超长，最大{input_max}个英文字符，请重试。"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:599
+#: ../Script/UI/Moudle/panel.py:601
 #, python-brace-format
 msgid "{old_page_index_text} 上一页"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:613
+#: ../Script/UI/Moudle/panel.py:615
 #, python-brace-format
 msgid "{next_page_index_text} 下一页"
 msgstr ""
@@ -795,17 +795,26 @@ msgstr ""
 msgid "退出游戏"
 msgstr ""
 
-#: ../Script/Design/settle_behavior.py:52
+#: ../Script/Design/settle_behavior.py:54
 msgid "体力:"
 msgstr ""
 
-#: ../Script/Design/settle_behavior.py:54
+#: ../Script/Design/settle_behavior.py:56
 msgid "气力:"
 msgstr ""
 
-#: ../Script/Design/settle_behavior.py:79
+#: ../Script/Design/settle_behavior.py:81
 #, python-brace-format
-msgid "{target_name}对{character_name}好感"
+msgid ""
+"\n"
+"{target_name}对{character_name}好感"
+msgstr ""
+
+#: ../Script/Design/settle_behavior.py:91
+#, python-brace-format
+msgid ""
+"\n"
+"{target_name}对{character_name}的感情变化:"
 msgstr ""
 
 #: ../Script/Design/handle_instruct.py:53
@@ -842,6 +851,10 @@ msgstr ""
 
 #: ../Script/Design/handle_instruct.py:125
 msgid "唱歌"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:136
+msgid "弹钢琴"
 msgstr ""
 
 #: ../Script/Core/flow_handle.py:262 ../Script/Core/flow_handle.py:283
@@ -1965,19 +1978,19 @@ msgid "冬"
 msgstr ""
 
 #: class:SocialType id:0 type:name
-msgid "友好"
+msgid "陌生"
 msgstr ""
 
 #: class:SocialType id:1 type:name
-msgid "信任"
+msgid "友好"
 msgstr ""
 
 #: class:SocialType id:2 type:name
-msgid "依靠"
+msgid "信任"
 msgstr ""
 
 #: class:SocialType id:3 type:name
-msgid "陷落"
+msgid "依靠"
 msgstr ""
 
 #: class:SocialType id:4 type:name
@@ -3448,6 +3461,34 @@ msgstr ""
 msgid "{PlayerNickName}对着{TargetName}唱了首歌\n{TargetName}沉浸在歌声里跟着唱了起来"
 msgstr ""
 
+#: class:Talk id:default_singing6 type:context
+msgid "{Name}自顾自的唱了一首歌"
+msgstr ""
+
+#: class:Talk id:default_singing7 type:context
+msgid "{Name}给{PlayerNickName}唱了首歌"
+msgstr ""
+
+#: class:Talk id:default_singing8 type:context
+msgid "{Name}摇头晃脑的唱着歌"
+msgstr ""
+
+#: class:Talk id:default_singing9 type:context
+msgid "{Name}跟着伴奏唱了起来"
+msgstr ""
+
+#: class:Talk id:default_singing10 type:context
+msgid "{Name}忘我的唱着歌\n实在太难听了!\n{PlayerNickName}扔不住把耳朵捂了起来"
+msgstr ""
+
+#: class:Talk id:default_singing11 type:context
+msgid "{Name}跟着伴奏轻声的哼唱着\n悦耳的声音让{PlayerNickName}不禁听入了神"
+msgstr ""
+
+#: class:Talk id:default_singing12 type:context
+msgid "{Name}一边弹着吉他一边忘我的唱着歌\n被歌词触碰到了伤心处\n{PlayerNickName}陷入了沉默"
+msgstr ""
+
 #: class:Talk id:default_rest0 type:context
 msgid "{NickName}小小的休息了一会儿"
 msgstr ""
@@ -3504,6 +3545,54 @@ msgstr ""
 msgid "{Name}将头靠在{PlayerNickName}的肩上小小的休息了一会儿"
 msgstr ""
 
+#: class:Talk id:default_play_piano0 type:context
+msgid "{PlayerNickName}独自练习了一会儿钢琴"
+msgstr ""
+
+#: class:Talk id:default_play_piano1 type:context
+msgid "{PlayerNickName}一边弹钢琴一边轻声哼唱着"
+msgstr ""
+
+#: class:Talk id:default_play_piano2 type:context
+msgid "{PlayerNickName}独自在音乐活动室中制造着噪音"
+msgstr ""
+
+#: class:Talk id:default_play_piano3 type:context
+msgid "{PlayerNickName}指尖在琴键起舞的姿态让大家都安静了下来"
+msgstr ""
+
+#: class:Talk id:default_play_piano4 type:context
+msgid "{PlayerNickName}无视了四周嘈杂的声音\n独自在角落里忘我的弹奏着"
+msgstr ""
+
+#: class:Talk id:default_play_piano5 type:context
+msgid "像是想要向谁证明自己的能力似的\n{PlayerNickName}奋力的敲打着琴键"
+msgstr ""
+
+#: class:Talk id:default_play_piano6 type:context
+msgid "{PlayerNickName}奋力的敲打着琴键\n巨大的噪音引起了{TargetName}强烈的不满"
+msgstr ""
+
+#: class:Talk id:default_play_piano7 type:context
+msgid "{PlayerNickName}认真的练习着还十分生疏的旋律"
+msgstr ""
+
+#: class:Talk id:default_play_piano8 type:context
+msgid "{Name}沉浸在自己的世界里静静的弹奏着钢琴"
+msgstr ""
+
+#: class:Talk id:default_play_piano9 type:context
+msgid "{Name}纤细的手指正在琴键上飞舞"
+msgstr ""
+
+#: class:Talk id:default_play_piano10 type:context
+msgid "{Name}弹奏了一首曲子"
+msgstr ""
+
+#: class:Talk id:default_play_piano11 type:context
+msgid "{Name}正努力的练习着演奏"
+msgstr ""
+
 #: class:Talk id:default_chat0 type:context
 msgid "和{TargetName}一起闲聊了一会儿"
 msgstr ""
@@ -3538,6 +3627,10 @@ msgstr ""
 
 #: class:Talk id:default_chat8 type:context
 msgid "{Name}向{PlayerNickName}分享了最近的见闻"
+msgstr ""
+
+#: class:Talk id:default_chat9 type:context
+msgid "{Name}旁若无人的坐在{PlayerNickName}的身边\n将头靠在了{PlayerNickName}的肩上\n「继续和我说上次的故事吧~」"
 msgstr ""
 
 #: class:Talk id:default_eat0 type:context

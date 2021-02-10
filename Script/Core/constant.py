@@ -98,6 +98,10 @@ class StateMachine:
     """ 移动至音乐活动室 """
     SINGING = 15
     """ 唱歌 """
+    SING_RAND_CHARACTER = 16
+    """ 唱歌给场景里随机对象听 """
+    PLAY_PIANO_RAND_CHARACTER = 17
+    """ 弹奏钢琴给场景里随机对象听 """
 
 
 class Panel:
@@ -270,6 +274,20 @@ class Premise:
     """ 交互对象身高低于自身身高 """
     TARGET_ADORE = 72
     """ 被交互对象爱慕 """
+    NO_EXCELLED_AT_PLAY_MUSIC = 73
+    """ 不擅长演奏 """
+    ARROGANT_HEIGHT = 74
+    """ 傲慢情绪高涨 """
+    IS_LIVELY = 75
+    """ 是一个活跃的人 """
+    IS_INFERIORITY = 76
+    """ 是一个自卑的人 """
+    IS_AUTONOMY = 77
+    """ 是一个自律的人 """
+    SCENE_CHARACTER_ONLY_PLAYER_AND_ONE = 78
+    """ 场景中只有包括玩家在内的两个角色 """
+    IS_SOLITARY = 79
+    """ 是一个孤僻的人 """
 
 
 class InstructType:
@@ -316,3 +334,5 @@ class Instruct:
     """ 购买道具 """
     SINGING = 8
     """ 唱歌 """
+    PLAY_PIANO = 9
+    """ 弹钢琴 """

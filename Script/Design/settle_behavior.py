@@ -24,6 +24,7 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
     status_data: game_type.CharacterStatusChange = cache.settle_behavior_data[
         cache.character_data[character_id].behavior.behavior_id
     ](character_id, now_time)
+    change_character_social(character_id, status_data)
     now_judge = False
     if status_data == None:
         return
@@ -38,6 +39,8 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
     if len(status_data.status):
         now_judge = True
     if len(status_data.favorability) and not character_id:
+        now_judge = True
+    if len(status_data.social_change) and not character_id:
         now_judge = True
     if now_judge:
         if not character_id or character_id == cache.character_data[0].target_character_id:
@@ -75,11 +78,23 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
             if len(status_data.favorability) and not character_id:
                 now_text_list.extend(
                     [
-                        _("{target_name}对{character_name}好感").format(
+                        _("\n{target_name}对{character_name}好感").format(
                             target_name=cache.character_data[i].name, character_name=now_character_data.name
                         )
                         + text_handle.number_to_symbol_string(round(status_data.favorability[i], 2))
                         for i in status_data.favorability
+                    ]
+                )
+            if len(status_data.social_change) and not character_id:
+                now_text_list.extend(
+                    [
+                        _("\n{target_name}对{character_name}的感情变化:").format(
+                            target_name=cache.character_data[i].name, character_name=now_character_data.name
+                        )
+                        + game_config.config_social_type[status_data.social_change[i].old_social].name
+                        + "->"
+                        + game_config.config_social_type[status_data.social_change[i].new_social].name
+                        for i in status_data.social_change
                     ]
                 )
             now_panel = panel.LeftDrawTextListPanel()
@@ -105,3 +120,42 @@ def add_settle_behavior(behavior_id: int):
         return return_wrapper
 
     return decorator
+
+
+def change_character_social(character_id: int, change_data: game_type.CharacterStatusChange):
+    """
+    处理角色关系变化
+    Keyword argumenys:
+    character_id -- 状态变化数据所属角色id
+    change_data -- 状态变化数据
+    """
+    for now_character in change_data.favorability:
+        now_character_data: game_type.Character = cache.character_data[now_character]
+        old_social = 0
+        new_social = 0
+        if character_id in now_character_data.social_contact_data:
+            old_social = now_character_data.social_contact_data[character_id]
+        now_favorability = now_character_data.favorability[character_id]
+        if now_favorability < 100:
+            new_social = 0
+        elif now_favorability < 1000:
+            new_social = 1
+        elif now_favorability < 2000:
+            new_social = 2
+        elif now_favorability < 5000:
+            new_social = 3
+        elif now_favorability < 10000:
+            new_social = 4
+        elif now_favorability >= 10000:
+            new_social = 5
+        if new_social != old_social:
+            now_change = game_type.SocialChange()
+            now_change.old_social = old_social
+            now_change.new_social = new_social
+            change_data.social_change[now_character] = now_change
+            now_character_data.social_contact.setdefault(old_social, set())
+            if character_id in now_character_data.social_contact[old_social]:
+                now_character_data.social_contact[old_social].remove(character_id)
+            now_character_data.social_contact.setdefault(new_social, set())
+            now_character_data.social_contact[new_social].add(character_id)
+            now_character_data.social_contact_data[character_id] = new_social
