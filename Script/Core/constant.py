@@ -40,6 +40,8 @@ class CharacterStatus:
     """ 弹钢琴 """
     STATUS_SINGING = 7
     """ 唱歌 """
+    STATUS_TOUCH_HEAD = 8
+    """ 摸头 """
 
 
 class Behavior:
@@ -61,6 +63,8 @@ class Behavior:
     """ 弹钢琴 """
     SINGING = 7
     """ 唱歌 """
+    TOUCH_HEAD = 8
+    """ 摸头 """
 
 
 class StateMachine:
@@ -111,17 +115,15 @@ class Panel:
     """ 标题面板 """
     CREATOR_CHARACTER = 1
     """ 创建角色面板 """
-    GET_UP = 2
-    """ 起床面板 """
-    IN_SCENE = 3
+    IN_SCENE = 2
     """ 场景互动面板 """
-    SEE_MAP = 4
+    SEE_MAP = 3
     """ 查看地图面板 """
-    FOOD_SHOP = 5
+    FOOD_SHOP = 4
     """ 食物商店面板 """
-    FOOD_BAG = 6
+    FOOD_BAG = 5
     """ 食物背包面板 """
-    ITEM_SHOP = 7
+    ITEM_SHOP = 6
     """ 道具商店面板 """
 
 
@@ -288,6 +290,10 @@ class Premise:
     """ 场景中只有包括玩家在内的两个角色 """
     IS_SOLITARY = 79
     """ 是一个孤僻的人 """
+    NO_BEYOND_FRIENDSHIP_TARGET = 80
+    """ 目标对自己没有有超越友谊的想法 """
+    TARGET_IS_HEIGHT = 81
+    """ 目标比自己高 """
 
 
 class InstructType:
@@ -311,6 +317,10 @@ class InstructType:
     """ 学习 """
     REST = 8
     """ 休息 """
+    SEX = 9
+    """ 性爱 """
+    SYSTEM = 10
+    """ 系统 """
 
 
 class Instruct:
@@ -336,3 +346,7 @@ class Instruct:
     """ 唱歌 """
     PLAY_PIANO = 9
     """ 弹钢琴 """
+    TOUCH_HEAD = 10
+    """ 摸头 """
+    SAVE = 11
+    """ 读写存档 """

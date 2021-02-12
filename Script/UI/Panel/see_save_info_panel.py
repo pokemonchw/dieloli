@@ -179,7 +179,7 @@ class SaveInfoDraw:
     def load_save(self):
         """ 载入存档 """
         save_handle.input_load_save(str(self.text))
-        cache.now_panel_id = constant.Panel.GET_UP
+        cache.now_panel_id = constant.Panel.IN_SCENE
         cache.back_save_panel = 1
 
     def delete_save(self):

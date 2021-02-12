@@ -1301,3 +1301,38 @@ def handle_is_solitary(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     return character_data.nature[1] < 50
+
+
+@add_premise(constant.Premise.NO_BEYOND_FRIENDSHIP_TARGET)
+def handle_no_beyond_friendship_target(character_id: int) -> int:
+    """
+    校验目标是否对自己没有超越友谊的想法
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if (
+        character_id in target_data.social_contact_data
+        and target_data.social_contact_data[character_id] < 3
+    ):
+        return 5 - target_data.social_contact_data[character_id]
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_IS_HEIGHT)
+def handle_target_is_height(character_id: int) -> int:
+    """
+    校验角色目标身高是否与平均身高相差不大
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.height.now_height >= character_data.height.now_height * 1.05:
+        return 1
+    return 0

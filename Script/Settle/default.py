@@ -220,3 +220,36 @@ def settle_singing(character_id: int, now_time: datetime.datetime) -> game_type.
     game_type.CharacterStatusChange -- 行为改变的角色状态
     """
     return settle_social_contact(character_id, 15, now_time)
+
+
+@settle_behavior.add_settle_behavior(constant.Behavior.TOUCH_HEAD)
+def settle_touch_head(character_id: int, now_time: datetime.datetime) -> game_type.CharacterStatusChange:
+    """
+    结算角色摸头行为
+    Keyword arguments:
+    character_id -- 角色id
+    now_time -- 结算时间
+    Return arguments:
+    game_type.CharacterStatusChange -- 行为改变的角色状态
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_change_data = game_type.CharacterStatusChange()
+    if character_data.target_character_id != character_id:
+        start_time = character_data.behavior.start_time
+        add_time = int((now_time - start_time).seconds / 60)
+        add_favorability = character.calculation_favorability(
+            character_id, character_data.target_character_id, add_time * 1.5
+        )
+        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        target_data.favorability.setdefault(character_id, 0)
+        add_favorability_coefficient = add_favorability / (add_time * 1.5)
+        social = 0
+        if character_id in target_data.social_contact_data:
+            social = target_data.social_contact_data[character_id]
+        if social >= 3:
+            add_favorability += add_favorability_coefficient * social
+        else:
+            add_favorability -= add_favorability_coefficient * social
+        target_data.favorability[character_id] += add_favorability
+        now_change_data.favorability[character_data.target_character_id] = add_favorability
+    return now_change_data

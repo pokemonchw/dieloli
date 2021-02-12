@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-10 21:31+0800\n"
+"POT-Creation-Date: 2021-02-12 19:14+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,6 @@ msgstr ""
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/item_shop_panel.py:47
-#: ../Script/UI/Panel/get_up_panel.py:93
 #: ../Script/UI/Panel/food_bag_panel.py:70
 #: ../Script/UI/Panel/food_bag_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
@@ -216,7 +215,6 @@ msgstr ""
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
 #: ../Script/UI/Panel/item_shop_panel.py:47
-#: ../Script/UI/Panel/get_up_panel.py:93
 #: ../Script/UI/Panel/food_bag_panel.py:70
 #: ../Script/UI/Panel/food_bag_panel.py:163
 #: ../Script/UI/Panel/see_save_info_panel.py:60
@@ -442,30 +440,6 @@ msgstr ""
 #: ../Script/UI/Panel/item_shop_panel.py:114
 #, python-brace-format
 msgid "{nickname}购买了{item_name}"
-msgstr ""
-
-#: ../Script/UI/Panel/get_up_panel.py:35
-msgid "主页"
-msgstr ""
-
-#: ../Script/UI/Panel/get_up_panel.py:47
-msgid "游戏菜单"
-msgstr ""
-
-#: ../Script/UI/Panel/get_up_panel.py:49
-msgid "[000]睁眼起床"
-msgstr ""
-
-#: ../Script/UI/Panel/get_up_panel.py:52
-msgid "[001]查看属性"
-msgstr ""
-
-#: ../Script/UI/Panel/get_up_panel.py:56
-msgid "[002]读写存档"
-msgstr ""
-
-#: ../Script/UI/Panel/get_up_panel.py:75
-msgid "角色列表"
 msgstr ""
 
 #: ../Script/UI/Panel/see_item_info_panel.py:40
@@ -853,8 +827,12 @@ msgstr ""
 msgid "唱歌"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:136
+#: ../Script/Design/handle_instruct.py:139
 msgid "弹钢琴"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:155
+msgid "摸头"
 msgstr ""
 
 #: ../Script/Core/flow_handle.py:262 ../Script/Core/flow_handle.py:283
@@ -1925,6 +1903,10 @@ msgstr ""
 msgid "唱歌"
 msgstr ""
 
+#: class:Status id:8 type:name
+msgid "摸头"
+msgstr ""
+
 #: class:InstructType id:0 type:name
 msgid "对话"
 msgstr ""
@@ -1947,6 +1929,14 @@ msgstr ""
 
 #: class:InstructType id:7 type:name
 msgid "学习"
+msgstr ""
+
+#: class:InstructType id:9 type:name
+msgid "性爱"
+msgstr ""
+
+#: class:InstructType id:10 type:name
+msgid "系统"
 msgstr ""
 
 #: class:School id:0 type:name
@@ -2031,10 +2021,6 @@ msgstr ""
 
 #: class:Knowledge id:8 type:name
 msgid "信仰"
-msgstr ""
-
-#: class:Knowledge id:9 type:name
-msgid "性爱"
 msgstr ""
 
 #: class:Knowledge id:10 type:name
@@ -3487,6 +3473,30 @@ msgstr ""
 
 #: class:Talk id:default_singing12 type:context
 msgid "{Name}一边弹着吉他一边忘我的唱着歌\n被歌词触碰到了伤心处\n{PlayerNickName}陷入了沉默"
+msgstr ""
+
+#: class:Talk id:default_touch_head0 type:context
+msgid "{PlayerNickName}伸出手想要摸{TargetName}的头\n被{TargetName}毫不犹豫的把手拍开了"
+msgstr ""
+
+#: class:Talk id:default_touch_head1 type:context
+msgid "{PlayerNickName}摸了摸{TargetName}的头\n{TargetName}冷冷的看了{PlayerNickName}一眼，没有说话"
+msgstr ""
+
+#: class:Talk id:default_touch_head2 type:context
+msgid "{PlayerNickName}伸出手想要摸{TargetName}的头\n{TargetName}红着脸躲开了"
+msgstr ""
+
+#: class:Talk id:default_touch_head3 type:context
+msgid "{PlayerNickName}伸出手想要摸{TargetName}的头\n「这是性骚扰！」\n{TargetName}气鼓鼓的嘟着嘴瞪了{PlayerNickName}一眼"
+msgstr ""
+
+#: class:Talk id:default_touch_head4 type:context
+msgid "{TargetName}一声不吭的任由{PlayerNickName}摸着自己的头"
+msgstr ""
+
+#: class:Talk id:default_touch_head5 type:context
+msgid "「矮子～」\n{TargetName}仗着身高优势轻易的躲开了{PlayerNickName}的手"
 msgstr ""
 
 #: class:Talk id:default_rest0 type:context

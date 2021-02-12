@@ -3,7 +3,7 @@ from typing import Set
 from types import FunctionType
 from Script.Core import constant, cache_control, game_type, get_text
 from Script.Design import update, character
-from Script.UI.Panel import see_character_info_panel
+from Script.UI.Panel import see_character_info_panel, see_save_info_panel
 from Script.Config import normal_config
 
 
@@ -82,7 +82,7 @@ def handle_move():
 
 
 @add_instruct(
-    constant.Instruct.SEE_ATTR, constant.InstructType.ACTIVE, _("查看属性"), {constant.Premise.HAVE_TARGET}
+    constant.Instruct.SEE_ATTR, constant.InstructType.SYSTEM, _("查看属性"), {constant.Premise.HAVE_TARGET}
 )
 def handle_see_attr():
     """ 查看属性 """
@@ -93,7 +93,7 @@ def handle_see_attr():
     now_draw.draw()
 
 
-@add_instruct(constant.Instruct.SEE_OWNER_ATTR, constant.InstructType.ACTIVE, _("查看自身属性"), {})
+@add_instruct(constant.Instruct.SEE_OWNER_ATTR, constant.InstructType.SYSTEM, _("查看自身属性"), {})
 def handle_see_owner_attr():
     """ 查看自身属性 """
     see_character_info_panel.line_feed.draw()
@@ -147,3 +147,26 @@ def handle_play_piano():
     character_data.behavior.behavior_id = constant.Behavior.PLAY_PIANO
     character_data.state = constant.CharacterStatus.STATUS_PLAY_PIANO
     update.game_update_flow(30)
+
+
+@add_instruct(
+    constant.Instruct.TOUCH_HEAD,
+    constant.InstructType.OBSCENITY,
+    _("摸头"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_touch_head():
+    """ 处理摸头指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 2
+    character_data.behavior.behavior_id = constant.Behavior.TOUCH_HEAD
+    character_data.state = constant.CharacterStatus.STATUS_TOUCH_HEAD
+    update.game_update_flow(2)
+
+
+@add_instruct(constant.Instruct.SAVE, constant.InstructType.SYSTEM, _("读写存档"), {})
+def handle_save():
+    """ 处理读写存档指令 """
+    now_panel = see_save_info_panel.SeeSaveListPanel(width, 1)
+    now_panel.draw()

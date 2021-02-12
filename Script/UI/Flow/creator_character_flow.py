@@ -42,7 +42,7 @@ def creator_character_panel():
             game_start()
             if confirm_character_attr_panel():
                 break
-    cache.now_panel_id = constant.Panel.GET_UP
+    cache.now_panel_id = constant.Panel.IN_SCENE
 
 
 def game_start():
