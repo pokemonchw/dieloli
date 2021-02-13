@@ -318,3 +318,29 @@ def character_play_piano_to_rand_character(character_id: int):
     character_data.behavior.duration = 30
     character_data.target_character_id = target_id
     character_data.state = constant.CharacterStatus.STATUS_PLAY_PIANO
+
+
+@handle_state_machine.add_state_machine(
+    constant.StateMachine.TOUCH_HEAD_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE
+)
+def character_touch_head_to_beyond_friendship_target_in_scene(character_id: int):
+    """
+    对场景中抱有超越友谊想法的随机对象摸头
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_list = []
+    for now_character in scene_data.character_list:
+        if (
+            now_character in character_data.social_contact_data
+            and character_data.social_contact_data[now_character] > 2
+        ):
+            character_list.append(now_character)
+    target_id = random.choice(character_list)
+    character_data.behavior.behavior_id = constant.Behavior.TOUCH_HEAD
+    character_data.target_character_id = target_id
+    character_data.behavior.duration = 2
+    character_data.state = constant.CharacterStatus.STATUS_TOUCH_HEAD

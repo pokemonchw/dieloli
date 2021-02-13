@@ -3,15 +3,19 @@ import random
 import math
 import bisect
 import ephem
+from types import FunctionType
 from dateutil import relativedelta
 from Script.Core import (
     cache_control,
     game_type,
+    get_text,
 )
 from Script.Config import normal_config, game_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 def init_time():
@@ -36,7 +40,13 @@ def get_date_text(game_time_data: datetime.datetime = None) -> str:
     """
     if game_time_data is None:
         game_time_data = cache.game_time
-    return f"时间:{game_time_data.year}年{game_time_data.month}月{game_time_data.day}日{game_time_data.hour}点{game_time_data.minute}分"
+    return _("时间:{year}年{month}月{day}日{hour}点{minute}分").format(
+        year=game_time_data.year,
+        month=game_time_data.month,
+        day=game_time_data.day,
+        hour=game_time_data.hour,
+        minute=game_time_data.minute,
+    )
 
 
 def get_week_day_text() -> str:

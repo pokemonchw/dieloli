@@ -1,9 +1,0 @@
-cid,target_id,effect_id
-配表id,所属目标id,达成的效果id
-int,int,int
-0,0,0
-执行目标所能达成的效果id,,
-0,3,0
-1,4,1
-2,5,6
-3,15,68

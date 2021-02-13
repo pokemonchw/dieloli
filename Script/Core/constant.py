@@ -42,6 +42,8 @@ class CharacterStatus:
     """ 唱歌 """
     STATUS_TOUCH_HEAD = 8
     """ 摸头 """
+    STATUS_SLEEP = 9
+    """ 睡觉 """
 
 
 class Behavior:
@@ -65,6 +67,8 @@ class Behavior:
     """ 唱歌 """
     TOUCH_HEAD = 8
     """ 摸头 """
+    SLEEP = 9
+    """ 睡觉 """
 
 
 class StateMachine:
@@ -106,6 +110,8 @@ class StateMachine:
     """ 唱歌给场景里随机对象听 """
     PLAY_PIANO_RAND_CHARACTER = 17
     """ 弹奏钢琴给场景里随机对象听 """
+    TOUCH_HEAD_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 18
+    """ 对场景中抱有超越友谊想法的随机对象摸头 """
 
 
 class Panel:
@@ -294,6 +300,8 @@ class Premise:
     """ 目标对自己没有有超越友谊的想法 """
     TARGET_IS_HEIGHT = 81
     """ 目标比自己高 """
+    BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 82
+    """ 对场景中某个角色抱有超越友谊的想法 """
 
 
 class InstructType:
@@ -350,3 +358,5 @@ class Instruct:
     """ 摸头 """
     SAVE = 11
     """ 读写存档 """
+    SLEEP = 12
+    """ 睡觉 """

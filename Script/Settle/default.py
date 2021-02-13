@@ -74,11 +74,15 @@ def settle_move(character_id: int, now_time: datetime.datetime) -> game_type.Cha
         now_change_data.mana_point -= character_data.mana_point
         character_data.mana_point = 0
         character_data.hit_point -= add_time * 10
-    map_handle.character_move_scene(
-        character_data.position,
-        character_data.behavior.move_target,
-        character_id,
-    )
+    try:
+        map_handle.character_move_scene(
+            character_data.position,
+            character_data.behavior.move_target,
+            character_id,
+        )
+    except:
+        print(character_data.position)
+        print(character_data.behavior.move_target)
     return now_change_data
 
 
@@ -252,4 +256,46 @@ def settle_touch_head(character_id: int, now_time: datetime.datetime) -> game_ty
             add_favorability -= add_favorability_coefficient * social
         target_data.favorability[character_id] += add_favorability
         now_change_data.favorability[character_data.target_character_id] = add_favorability
+    return now_change_data
+
+
+@settle_behavior.add_settle_behavior(constant.Behavior.SLEEP)
+def settle_touch_sleep(character_id: int, now_time: datetime.datetime) -> game_type.CharacterStatusChange:
+    """
+    结算角色睡觉行为
+    Keyword arguments:
+    character_id -- 角色id
+    now_time -- 结算时间
+    Return arguments:
+    game_type.CharacterStatusChange -- 行为改变的角色状态
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    start_time = character_data.behavior.start_time
+    add_time = int((now_time - start_time).seconds / 60)
+    add_hit_point = add_time * 5
+    add_mana_point = add_time * 10
+    character_data.hit_point += add_hit_point
+    character_data.mana_point += add_mana_point
+    now_change_data = game_type.CharacterStatusChange()
+    if character_data.hit_point > character_data.hit_point_max:
+        add_hit_point -= character_data.hit_point - character_data.hit_point_max
+        character_data.hit_point = character_data.hit_point_max
+    if character_data.mana_point > character_data.mana_point_max:
+        add_mana_point -= character_data.mana_point - character_data.mana_point_max
+        character_data.mana_point = character_data.mana_point_max
+    now_change_data.hit_point = add_hit_point
+    now_change_data.mana_point = add_mana_point
+    if character_data.target_character_id != character_id:
+        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        if (
+            character_id in target_data.social_contact_data
+            and target_data.social_contact_data[character_id] > 2
+        ):
+            add_favorability = character.calculation_favorability(
+                character_id, character_data.target_character_id, add_time
+            )
+            target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+            target_data.favorability.setdefault(character_id, 0)
+            target_data.favorability[character_id] += add_favorability
+            now_change_data.favorability[target_data.cid] = add_favorability
     return now_change_data

@@ -531,6 +531,12 @@ class Cache:
     """ 主页监听控制流程用变量组 """
     cmd_map: Dict[int, object] = {}
     """ cmd存储 """
+    behavior_tem_data: dict = {}
+    """ 角色行为控制器数据 """
+    settle_behavior_data: dict = {}
+    """ 角色行为结算处理器 """
+    scene_path_edge: Dict[str, Dict[str, List[str]]] = {}
+    """ 所有场景间的寻路数据 当前场景id:目标场景id[当前移动目标场景id,当前移动时间] """
 
     def __init__(self):
         """ 游戏预设配置数据 """
@@ -618,11 +624,7 @@ class Cache:
         """ 可穿戴道具类型数据 """
         self.course_time_status: dict = {}
         """ 当前上课时间状态 """
-        self.behavior_tem_data: dict = {}
-        """ 角色行为控制器数据 """
-        self.settle_behavior_data: dict = {}
-        """ 角色行为结算处理器 """
-        self.over_behavior_character: Dict[int, int] = {}
+        self.over_behavior_character: Set = set()
         """ 本次update中已结束结算的npc """
         self.teacher_class_time_table: Dict[
             int, Dict[int, Dict[int, Dict[int, Dict[int, Dict[str, int]]]]]

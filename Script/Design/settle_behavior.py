@@ -43,8 +43,18 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
     if len(status_data.social_change) and not character_id:
         now_judge = True
     if now_judge:
-        if not character_id or character_id == cache.character_data[0].target_character_id:
-            now_character_data = cache.character_data[character_id]
+        character_judge = False
+        now_character_data: game_type.Character = cache.character_data[character_id]
+        if not character_id:
+            character_judge = True
+        else:
+            player_data: game_type.Character = cache.character_data[0]
+            if (
+                character_id == player_data.target_character_id
+                and now_character_data.position == player_data.position
+            ):
+                character_judge = True
+        if character_judge:
             now_text_list = []
             now_draw = draw.NormalDraw()
             now_draw.text = "\n" + now_character_data.name + ": "

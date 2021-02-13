@@ -1319,6 +1319,8 @@ def handle_no_beyond_friendship_target(character_id: int) -> int:
         and target_data.social_contact_data[character_id] < 3
     ):
         return 5 - target_data.social_contact_data[character_id]
+    elif character_id not in target_data.social_contact_data:
+        return 5
     return 0
 
 
@@ -1335,4 +1337,25 @@ def handle_target_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_data.height.now_height >= character_data.height.now_height * 1.05:
         return 1
+    return 0
+
+
+@add_premise(constant.Premise.BEYOND_FRIENDSHIP_TARGET_IN_SCENE)
+def handle_beyond_friendship_target_in_scene(character_id: int) -> int:
+    """
+    校验是否对场景中某个角色抱有超越友谊的想法
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data: game_type.Scene = cache.scene_data[now_scene_str]
+    for i in {3, 4, 5}:
+        character_data.social_contact.setdefault(i, set())
+        for c in character_data.social_contact[i]:
+            if c in now_scene_data.character_list:
+                return 1
     return 0

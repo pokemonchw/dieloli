@@ -2,6 +2,7 @@ import os
 import random
 import datetime
 import time
+from types import FunctionType
 from typing import Dict
 from functools import wraps
 from Script.Core import (
@@ -10,6 +11,7 @@ from Script.Core import (
     game_type,
     constant,
     value_handle,
+    get_text,
 )
 from Script.Design import (
     settle_behavior,
@@ -19,11 +21,16 @@ from Script.Design import (
     talk,
     map_handle,
 )
-from Script.Config import game_config
+from Script.Config import game_config, normal_config
+from Script.UI.Moudle import draw
 
 game_path = game_path_config.game_path
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+_: FunctionType = get_text._
+""" 翻译api """
+window_width: int = normal_config.config_normal.text_width
+""" 窗体宽度 """
 
 
 def init_character_behavior():
@@ -35,7 +42,7 @@ def init_character_behavior():
             break
         for character_id in cache.character_data:
             character_behavior(character_id, cache.game_time)
-    cache.over_behavior_character = {}
+    cache.over_behavior_character = set()
 
 
 def character_behavior(character_id: int, now_time: datetime.datetime):
@@ -54,11 +61,11 @@ def character_behavior(character_id: int, now_time: datetime.datetime):
         if character_id:
             character_target_judge(character_id, now_time)
         else:
-            cache.over_behavior_character[0] = 1
+            cache.over_behavior_character.add(0)
     else:
         status_judge = judge_character_status(character_id, now_time)
         if status_judge:
-            cache.over_behavior_character[character_id] = 1
+            cache.over_behavior_character.add(character_id)
 
 
 def character_target_judge(character_id: int, now_time: datetime.datetime):
@@ -75,7 +82,7 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
         start_time = cache.character_data[character_id].behavior.start_time
         now_judge = game_time.judge_date_big_or_small(start_time, now_time)
         if now_judge:
-            cache.over_behavior_character[character_id] = 1
+            cache.over_behavior_character.add(character_id)
         else:
             next_time = game_time.get_sub_date(minute=1, old_date=start_time)
             cache.character_data[character_id].behavior.start_time = next_time
@@ -101,12 +108,17 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
         end_time = now_time
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
     add_time = (end_time.timestamp() - start_time.timestamp()) / 60
+    if not add_time:
+        character_data.behavior = game_type.Behavior()
+        character_data.behavior.start_time = end_time
+        character_data.state = constant.CharacterStatus.STATUS_ARDER
+        return 1
     character_data.status.setdefault(27, 0)
     character_data.status.setdefault(28, 0)
     character_data.status[27] += add_time * 0.02
     character_data.status[28] += add_time * 0.02
     if time_judge:
-        settle_behavior.handle_settle_behavior(character_id, now_time)
+        settle_behavior.handle_settle_behavior(character_id, end_time)
         talk.handle_talk(character_id)
         character_data.behavior = game_type.Behavior()
         character_data.state = constant.CharacterStatus.STATUS_ARDER

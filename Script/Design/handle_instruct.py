@@ -1,3 +1,4 @@
+import time
 from functools import wraps
 from typing import Set
 from types import FunctionType
@@ -170,3 +171,14 @@ def handle_save():
     """ 处理读写存档指令 """
     now_panel = see_save_info_panel.SeeSaveListPanel(width, 1)
     now_panel.draw()
+
+
+@add_instruct(constant.Instruct.SLEEP, constant.InstructType.REST, _("睡觉"), {constant.Premise.IN_DORMITORY})
+def handle_sleep():
+    """ 处理睡觉指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 640
+    character_data.behavior.behavior_id = constant.Behavior.SLEEP
+    character_data.state = constant.CharacterStatus.STATUS_SLEEP
+    update.game_update_flow(640)

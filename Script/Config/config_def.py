@@ -20,17 +20,6 @@ class Item:
     """ 描述 """
 
 
-class Target:
-    """ ai的目标 """
-
-    cid: int
-    """ 目标id """
-    state_machine_id: int
-    """ 执行的状态机id """
-    remarks: str
-    """ 备注 """
-
-
 class EndAgeTem:
     """ 性别对应平均寿命 """
 
@@ -331,17 +320,6 @@ class School:
     """ 最大年龄 """
 
 
-class TargetEffect:
-    """ 执行目标所能达成的效果id """
-
-    cid: int
-    """ 配表id """
-    target_id: int
-    """ 所属目标id """
-    effect_id: int
-    """ 达成的效果id """
-
-
 class SchoolPhaseCourse:
     """ 各学校各年级教学科目配置 """
 
@@ -462,17 +440,6 @@ class ClothingSuit:
     """ 套装编号 """
     sex: int
     """ 性别限制 """
-
-
-class TargetPremise:
-    """ 执行目标所需的前提id """
-
-    cid: int
-    """ 配表id """
-    target_id: int
-    """ 所属目标id """
-    premise_id: int
-    """ 所需前提id """
 
 
 class AttrTem:
@@ -743,3 +710,36 @@ class TalkPremise:
     """ 所属口上id """
     premise: int
     """ 前提id """
+
+
+class TargetEffect:
+    """ 执行目标所能达成的效果id """
+
+    cid: str
+    """ 配表id """
+    target_id: str
+    """ 所属目标id """
+    effect_id: int
+    """ 达成的效果id """
+
+
+class TargetPremise:
+    """ 执行目标所需的前提id """
+
+    cid: str
+    """ 配表id """
+    target_id: str
+    """ 所属目标id """
+    premise_id: int
+    """ 所需前提id """
+
+
+class Target:
+    """ ai的目标 """
+
+    cid: str
+    """ 目标id """
+    state_machine_id: int
+    """ 执行的状态机id """
+    remarks: str
+    """ 备注 """
