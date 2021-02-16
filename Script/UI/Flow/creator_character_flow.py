@@ -13,6 +13,7 @@ from Script.Design import (
     map_handle,
     interest,
     clothing,
+    attr_calculation,
 )
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
@@ -249,7 +250,7 @@ def add_setting_panel() -> FunctionType:
 @add_setting_panel()
 def setting_age_tem_panel():
     """ 设置年龄模板 """
-    character_data = cache.character_data[0]
+    character_data: game_type.Character = cache.character_data[0]
     message = _("{character_nick_name}是一个小孩子吗？").format(character_nick_name=character_data.nick_name)
     ask_list = [
         _("嘎呜～嘎呜～"),
@@ -263,7 +264,7 @@ def setting_age_tem_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.sex = int(ans)
+    character_data.age = attr_calculation.get_age(int(ans))
 
 
 @add_setting_panel()
