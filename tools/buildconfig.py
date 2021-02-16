@@ -61,6 +61,7 @@ def build_csv_config(file_path: str, file_name: str, talk: bool, target: bool):
                 i += 1
                 continue
             for k in now_type_data:
+                print(row)
                 now_type = now_type_data[k]
                 if not len(row[k]):
                     del row[k]

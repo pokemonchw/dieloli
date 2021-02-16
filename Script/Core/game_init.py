@@ -1,9 +1,5 @@
 # -*- coding: UTF-8 -*-
-from Script.Core import (
-    flow_handle,
-    io_init,
-    key_listion_event,
-)
+from Script.Core import flow_handle, io_init, key_listion_event, constant
 from Script.Config import normal_config
 
 # 字符串定义###########################################################

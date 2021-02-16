@@ -28,8 +28,8 @@ def settle_rest(character_id: int, now_time: datetime.datetime) -> game_type.Cha
     character_data: game_type.Character = cache.character_data[character_id]
     start_time = character_data.behavior.start_time
     add_time = int((now_time - start_time).seconds / 60)
-    add_hit_point = add_time * 5
-    add_mana_point = add_time * 10
+    add_hit_point = add_time
+    add_mana_point = add_time * 1.5
     character_data.hit_point += add_hit_point
     character_data.mana_point += add_mana_point
     now_change_data = game_type.CharacterStatusChange()
@@ -148,6 +148,17 @@ def settle_chat(character_id: int, now_time: datetime.datetime) -> game_type.Cha
     if character_data.target_character_id != character_id:
         start_time = character_data.behavior.start_time
         add_time = int((now_time - start_time).seconds / 60)
+        if character_data.mana_point >= add_time * 5:
+            character_data.mana_point -= add_time * 5
+            now_change_data.mana_point -= add_time * 5
+        else:
+            now_add_time = add_time
+            now_change_data.mana_point -= character_data.mana_point
+            now_add_time -= character_data.mana_point / 5
+            character_data.mana_point = 0
+            now_add_time *= 10
+            now_change_data.hit_point -= now_add_time
+            now_change_data.hit_point -= now_add_time
         add_favorability = character.calculation_favorability(
             character_id, character_data.target_character_id, add_time * 1.5
         )
@@ -175,15 +186,15 @@ def settle_social_contact(
     now_change_data = game_type.CharacterStatusChange()
     start_time = character_data.behavior.start_time
     add_time = int((now_time - start_time).seconds / 60)
-    if character_data.mana_point >= add_time:
-        character_data.mana_point -= add_time
-        now_change_data.mana_point -= add_time
+    if character_data.mana_point >= add_time * 10:
+        character_data.mana_point -= add_time * 10
+        now_change_data.mana_point -= add_time * 10
     else:
         now_add_time = add_time
         now_change_data.mana_point -= character_data.mana_point
-        now_add_time -= character_data.mana_point
+        now_add_time -= character_data.mana_point / 10
         character_data.mana_point = 0
-        now_add_time *= 10
+        now_add_time *= 15
         now_change_data.hit_point -= now_add_time
         now_change_data.hit_point -= now_add_time
     now_experience = add_time * character_data.knowledge_interest[knowledge]
@@ -272,8 +283,8 @@ def settle_touch_sleep(character_id: int, now_time: datetime.datetime) -> game_t
     character_data: game_type.Character = cache.character_data[character_id]
     start_time = character_data.behavior.start_time
     add_time = int((now_time - start_time).seconds / 60)
-    add_hit_point = add_time * 5
-    add_mana_point = add_time * 10
+    add_hit_point = add_time * 3
+    add_mana_point = add_time * 3
     character_data.hit_point += add_hit_point
     character_data.mana_point += add_mana_point
     now_change_data = game_type.CharacterStatusChange()
@@ -298,4 +309,37 @@ def settle_touch_sleep(character_id: int, now_time: datetime.datetime) -> game_t
             target_data.favorability.setdefault(character_id, 0)
             target_data.favorability[character_id] += add_favorability
             now_change_data.favorability[target_data.cid] = add_favorability
+    return now_change_data
+
+
+@settle_behavior.add_settle_behavior(constant.Behavior.EMBRACE)
+def settle_embrace(character_id: int, now_time: datetime.datetime) -> game_type.CharacterStatusChange:
+    """
+    结算角色拥抱行为
+    Keyword arguments:
+    character_id -- 角色id
+    now_time -- 结算时间
+    Return arguments:
+    game_type.CharacterStatusChange -- 行为改变的角色状态
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_change_data = game_type.CharacterStatusChange()
+    if character_data.target_character_id != character_id:
+        start_time = character_data.behavior.start_time
+        add_time = int((now_time - start_time).seconds / 60)
+        add_favorability = character.calculation_favorability(
+            character_id, character_data.target_character_id, add_time * 2
+        )
+        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        target_data.favorability.setdefault(character_id, 0)
+        add_favorability_coefficient = add_favorability / (add_time * 2)
+        social = 0
+        if character_id in target_data.social_contact_data:
+            social = target_data.social_contact_data[character_id]
+        if social >= 3:
+            add_favorability += add_favorability_coefficient * social
+        else:
+            add_favorability -= add_favorability_coefficient * social
+        target_data.favorability[character_id] += add_favorability
+        now_change_data.favorability[character_data.target_character_id] = add_favorability
     return now_change_data

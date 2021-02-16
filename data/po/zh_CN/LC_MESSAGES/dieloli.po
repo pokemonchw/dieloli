@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-13 15:37+0800\n"
+"POT-Creation-Date: 2021-02-16 21:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -769,78 +769,103 @@ msgstr ""
 msgid "退出游戏"
 msgstr ""
 
-#: ../Script/Design/settle_behavior.py:54
+#: ../Script/Design/settle_behavior.py:64
 msgid "体力:"
 msgstr ""
 
-#: ../Script/Design/settle_behavior.py:56
+#: ../Script/Design/settle_behavior.py:66
 msgid "气力:"
-msgstr ""
-
-#: ../Script/Design/settle_behavior.py:81
-#, python-brace-format
-msgid ""
-"\n"
-"{target_name}对{character_name}好感"
 msgstr ""
 
 #: ../Script/Design/settle_behavior.py:91
 #, python-brace-format
 msgid ""
 "\n"
+"{target_name}对{character_name}好感"
+msgstr ""
+
+#: ../Script/Design/settle_behavior.py:101
+#, python-brace-format
+msgid ""
+"\n"
 "{target_name}对{character_name}的感情变化:"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:53
+#: ../Script/Design/game_time.py:43
+#, python-brace-format
+msgid "时间:{year}年{month}月{day}日{hour}点{minute}分"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:56
 msgid "休息"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:65
+#: ../Script/Design/handle_instruct.py:68
 msgid "购买食物"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:72
+#: ../Script/Design/handle_instruct.py:75
 msgid "进食"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:78
+#: ../Script/Design/handle_instruct.py:81
 msgid "移动"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:85
+#: ../Script/Design/handle_instruct.py:88
 msgid "查看属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:96
+#: ../Script/Design/handle_instruct.py:99
 msgid "查看自身属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:105
+#: ../Script/Design/handle_instruct.py:108
 msgid "闲聊"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:118
+#: ../Script/Design/handle_instruct.py:121
 msgid "购买道具"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:125
+#: ../Script/Design/handle_instruct.py:128
 msgid "唱歌"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:139
+#: ../Script/Design/handle_instruct.py:142
 msgid "弹钢琴"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:155
+#: ../Script/Design/handle_instruct.py:158
 msgid "摸头"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:168
+#: ../Script/Design/handle_instruct.py:171
 msgid "读写存档"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:175
+#: ../Script/Design/handle_instruct.py:178
 msgid "睡觉"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:189
+msgid "喝泉水"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:198
+msgid "喝到了奇怪的泉水！身体变化了！！！"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:212
+msgid "喝到了甜甜的泉水～"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:218
+msgid "拥抱"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:229
+msgid "亲吻"
 msgstr ""
 
 #: ../Script/Core/flow_handle.py:262 ../Script/Core/flow_handle.py:283
@@ -1913,6 +1938,14 @@ msgstr ""
 
 #: class:Status id:8 type:name
 msgid "摸头"
+msgstr ""
+
+#: class:Status id:9 type:name
+msgid "睡觉"
+msgstr ""
+
+#: class:Status id:10 type:name
+msgid "拥抱"
 msgstr ""
 
 #: class:InstructType id:0 type:name
@@ -3483,6 +3516,10 @@ msgstr ""
 msgid "{Name}一边弹着吉他一边忘我的唱着歌\n被歌词触碰到了伤心处\n{PlayerNickName}陷入了沉默"
 msgstr ""
 
+#: class:Talk id:default_singing13 type:context
+msgid "{Name}轻声的唱着歌"
+msgstr ""
+
 #: class:Talk id:default_touch_head0 type:context
 msgid "{PlayerNickName}伸出手想要摸{TargetName}的头\n被{TargetName}毫不犹豫的把手拍开了"
 msgstr ""
@@ -3561,6 +3598,34 @@ msgstr ""
 
 #: class:Talk id:default_touch_head19 type:context
 msgid "「呐～想摸的话就随便摸吧～」\n{TargetName}凝视着{PlayerNickName}的双眼\n看到那个笑容的瞬间，{PlayerNickName}仿佛能够听见自己心跳的声音"
+msgstr ""
+
+#: class:Talk id:default_touch_head20 type:context
+msgid "{PlayerNickName}抬起手，轻拍了两下{TargetName}的头"
+msgstr ""
+
+#: class:Talk id:default_touch_head21 type:context
+msgid "{Name}摸了摸{PlayerNickName}的头"
+msgstr ""
+
+#: class:Talk id:default_touch_head22 type:context
+msgid "{Name}抬起手，轻拍了两下{PlayerNickName}的头"
+msgstr ""
+
+#: class:Talk id:default_touch_head23 type:context
+msgid "{PlayerNickName}抬起手摸了摸{TargetName}的脑袋\n头发顺滑而柔软\n{PlayerNickName}爱不释手地又摸了摸"
+msgstr ""
+
+#: class:Talk id:default_touch_head24 type:context
+msgid "{TargetName}的短发头发有些翘起，像头炸毛的小狮子\n{PlayerNickName}忍不住抬起手摸了摸{TargetName}的脑袋\n手感很好\n{PlayerNickName}爱不释手地又摸了摸"
+msgstr ""
+
+#: class:Talk id:default_touch_head25 type:context
+msgid "{Name}眼睛一转，手掌有些用力地按在{PlayerNickName}的头上\n{PlayerNickName}的头发被弄得一团乱"
+msgstr ""
+
+#: class:Talk id:default_touch_head26 type:context
+msgid "{Name}温柔地抚摸着{PlayerNickName}的头发，替{PlayerNickName}将有些杂乱的发丝理顺"
 msgstr ""
 
 #: class:Talk id:default_rest0 type:context
@@ -3735,6 +3800,58 @@ msgstr ""
 msgid "{Name}吃了一些{FoodName}"
 msgstr ""
 
+#: class:Talk id:default_sleep0 type:context
+msgid "{PlayerNickName}闭上眼睛逐渐睡着了"
+msgstr ""
+
+#: class:Talk id:default_sleep1 type:context
+msgid "「终于可以休息了」\n{PlayerNickName}疲惫的躺下了"
+msgstr ""
+
+#: class:Talk id:default_sleep2 type:context
+msgid "宿舍里吵闹的声音让{PlayerNickName}翻来覆去睡不着"
+msgstr ""
+
+#: class:Talk id:default_sleep3 type:context
+msgid "{PlayerNickName}疲惫的合上了眼睛"
+msgstr ""
+
+#: class:Talk id:default_sleep4 type:context
+msgid "{PlayerNickName}将头蒙在被窝里哼起了歌"
+msgstr ""
+
+#: class:Talk id:default_sleep5 type:context
+msgid "{PlayerNickName}躺在床上翻来覆去睡不着"
+msgstr ""
+
+#: class:Talk id:default_sleep6 type:context
+msgid "{PlayerNickName}躺着聊起了天"
+msgstr ""
+
+#: class:Talk id:default_sleep7 type:context
+msgid "{PlayerNickName}合上了沉重的眼睛"
+msgstr ""
+
+#: class:Talk id:default_sleep8 type:context
+msgid "看着初升的太阳，{PlayerNickName}微笑着闭上了眼睛"
+msgstr ""
+
+#: class:Talk id:default_sleep9 type:context
+msgid "看着初升的太阳，{PlayerNickName}迟疑着躺下了"
+msgstr ""
+
+#: class:Talk id:default_sleep10 type:context
+msgid "宿舍里的大家还在不停聊天\n{PlayerNickName}冷哼一声蒙上了被子"
+msgstr ""
+
+#: class:Talk id:default_sleep11 type:context
+msgid "{Name}闭上眼睛逐渐睡着了"
+msgstr ""
+
+#: class:Talk id:default_sleep12 type:context
+msgid "{Name}躺着聊起了天"
+msgstr ""
+
 #: class:Talk id:default_move0 type:context
 msgid "{NickName}来到了{SceneName}"
 msgstr ""
@@ -3773,6 +3890,90 @@ msgstr ""
 
 #: class:Talk id:default_move9 type:context
 msgid "{Name}来到了{SceneName}\n她看见{PlayerNickName}的第一时间便扑了过来\n{Name}紧紧的抱住了{PlayerNickName},小脸不停的蹭着{PlayerNickName}的胸"
+msgstr ""
+
+#: class:Talk id:default_embrace0 type:context
+msgid "{PlayerNickName}想要抱住{TargetName}\n被{TargetName}推开了"
+msgstr ""
+
+#: class:Talk id:default_embrace1 type:context
+msgid "「真恶心！」\n{TargetName}迅速的躲开了{PlayerNickName}的拥抱"
+msgstr ""
+
+#: class:Talk id:default_embrace2 type:context
+msgid "「想要抱抱吗？」\n{TargetName}略显不适的接受了{PlayerNickName}的怀抱"
+msgstr ""
+
+#: class:Talk id:default_embrace3 type:context
+msgid "「真拿你没办法」\n{TargetName}笑着反抱住了{PlayerNickName}"
+msgstr ""
+
+#: class:Talk id:default_embrace4 type:context
+msgid "{PlayerNickName}宠溺的抱住了{TargetName}"
+msgstr ""
+
+#: class:Talk id:default_embrace5 type:context
+msgid "{PlayerNickName}抱住{TargetName}的时候，被{TargetName}掂起脚尖在脸颊上亲了一下"
+msgstr ""
+
+#: class:Talk id:default_embrace6 type:context
+msgid "{PlayerNickName}轻轻的抱住了{TargetName}\n和{TargetName}一起静静的感受着时间流逝"
+msgstr ""
+
+#: class:Talk id:default_embrace7 type:context
+msgid "「走开！」\n{TargetName}皱着眉头一把推开了{PlayerNickName}"
+msgstr ""
+
+#: class:Talk id:default_embrace8 type:context
+msgid "被{PlayerNickName}紧紧的抱住，{TargetName}笑着摸了摸{PlayerNickName}的头"
+msgstr ""
+
+#: class:Talk id:default_embrace9 type:context
+msgid "{Name}想要抱住{PlayerNickName}却被{PlayerNickName}躲开了"
+msgstr ""
+
+#: class:Talk id:default_embrace10 type:context
+msgid "{Name}抱住了{PlayerNickName}\n小脑袋不停在{PlayerNickName}的胸膛上蹭来蹭去"
+msgstr ""
+
+#: class:Talk id:default_embrace11 type:context
+msgid "{Name}伸出双手拥抱了{PlayerNickName}一下"
+msgstr ""
+
+#: class:Talk id:default_embrace12 type:context
+msgid "{Name}给了{PlayerNickName}一个拥抱"
+msgstr ""
+
+#: class:Talk id:default_embrace13 type:context
+msgid "{PlayerNickName}轻轻的抱了{TargetName}一下"
+msgstr ""
+
+#: class:Talk id:default_embrace14 type:context
+msgid "{Name}突然伸手，从后面抱住了{PlayerNickName}"
+msgstr ""
+
+#: class:Talk id:default_embrace15 type:context
+msgid "{Name}抱了一下{PlayerNickName}，很快就松开了手"
+msgstr ""
+
+#: class:Talk id:default_embrace16 type:context
+msgid "{Name}将{PlayerNickName}拥入怀中"
+msgstr ""
+
+#: class:Talk id:default_embrace17 type:context
+msgid "{PlayerNickName}将{TargetNickName}拉入了怀中"
+msgstr ""
+
+#: class:Talk id:default_embrace18 type:context
+msgid "{PlayerNickName}将{TargetNickName}抱了起来，转了一圈"
+msgstr ""
+
+#: class:Talk id:default_embrace19 type:context
+msgid "{TargetName}一伸腿，跨坐到{PlayerNickName}的腿上\n{TargetName}脸上带着笑意，伸手环住{PlayerNickName}的脖子，身体一点点的贴近"
+msgstr ""
+
+#: class:Talk id:default_embrace20 type:context
+msgid "{TargetName}跨坐到{PlayerNickName}的腿上，抱住了{PlayerNickName}，埋首于{PlayerNickName}的肩颈处"
 msgstr ""
 
 #: Scene:../data/map/24/2/11/Scene.json
@@ -4703,10 +4904,6 @@ msgstr ""
 msgid "高三教导主任办公室"
 msgstr ""
 
-#: Scene:../data/map/3/2/17/Scene.json
-msgid "右侧走廊"
-msgstr ""
-
 #: Scene:../data/map/3/2/5/Scene.json
 msgid "少先队队部办公室"
 msgstr ""
@@ -4743,10 +4940,6 @@ msgstr ""
 msgid "左侧走廊"
 msgstr ""
 
-#: Scene:../data/map/3/2/18/Scene.json
-msgid "左厕所"
-msgstr ""
-
 #: Scene:../data/map/3/2/1/Scene.json
 msgid "高中部3年级办公室"
 msgstr ""
@@ -4775,6 +4968,10 @@ msgstr ""
 msgid "高一教导主任办公室"
 msgstr ""
 
+#: Scene:../data/map/3/0/17/Scene.json
+msgid "右侧走廊"
+msgstr ""
+
 #: Scene:../data/map/3/0/10/Scene.json
 msgid "高一2班"
 msgstr ""
@@ -4793,6 +4990,10 @@ msgstr ""
 
 #: Scene:../data/map/3/0/12/Scene.json
 msgid "初一1班"
+msgstr ""
+
+#: Scene:../data/map/3/0/18/Scene.json
+msgid "左厕所"
 msgstr ""
 
 #: Scene:../data/map/3/0/1/Scene.json

@@ -46,7 +46,7 @@ def get_end_age(sex: int) -> int:
     return random.randint(int(tem_value * 0.5), int(tem_value * 1.5))
 
 
-def get_height(tem_name: int, age: int) -> dict:
+def get_height(tem_name: int, age: int) -> game_type.Height:
     """
     按模板和年龄计算身高
     Keyword arguments:

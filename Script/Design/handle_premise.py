@@ -1359,3 +1359,120 @@ def handle_beyond_friendship_target_in_scene(character_id: int) -> int:
             if c in now_scene_data.character_list:
                 return 1
     return 0
+
+
+@add_premise(constant.Premise.HYPOSTHENIA)
+def handle_hyposthenia(character_id: int) -> int:
+    """
+    校验角色是否体力不足
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_weight = int((character_data.hit_point_max - character_data.hit_point) / 20)
+    now_weight += int((character_data.mana_point_max - character_data.mana_point) / 200)
+    return now_weight
+
+
+@add_premise(constant.Premise.PHYSICAL_STRENGHT)
+def handle_physical_strenght(character_id: int) -> int:
+    """
+    校验角色是否体力充沛
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_weight = int((character_data.hit_point_max / 2 - character_data.hit_point) / 20)
+    now_weight += int((character_data.mana_point_max / 2 - character_data.mana_point) / 200)
+    if now_weight < 0:
+        now_weight = 0
+    return now_weight
+
+
+@add_premise(constant.Premise.IS_INDULGE)
+def handle_is_indulge(character_id: int) -> int:
+    """
+    校验角色是否是一个放纵的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.nature[7] < 50
+
+
+@add_premise(constant.Premise.IN_FOUNTAIN)
+def handle_in_fountain(character_id: int) -> int:
+    """
+    校验角色是否在喷泉场景中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.position == ["8"]
+
+
+@add_premise(constant.Premise.TARGET_IS_SOLITARY)
+def handle_target_is_solitary(character_id: int) -> int:
+    """
+    校验角色是否是一个孤僻的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[1] < 50
+
+
+@add_premise(constant.Premise.TARGET_CHEST_IS_CLIFF)
+def handle__target_chest_is_cliff(character_id: int) -> int:
+    """
+    校验交互对象胸围是否是绝壁
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return not attr_calculation.judge_chest_group(target_data.chest.now_chest)
+
+
+@add_premise(constant.Premise.IS_ENTHUSIASM)
+def handle_is_enthusiasm(character_id: int) -> int:
+    """
+    校验角色是否是一个热情的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[15] >= 50
+
+
+@add_premise(constant.Premise.TARGET_ADMIRE)
+def handle_target_admire(character_id: int) -> int:
+    """
+    校验角色是否被交互对象恋慕
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.social_contact.setdefault(4, set())
+    if character_id in target_data.social_contact[4]:
+        return 1
+    return 0

@@ -1,11 +1,13 @@
 import time
+import random
 from functools import wraps
 from typing import Set
 from types import FunctionType
 from Script.Core import constant, cache_control, game_type, get_text
-from Script.Design import update, character
+from Script.Design import update, character, attr_calculation
 from Script.UI.Panel import see_character_info_panel, see_save_info_panel
 from Script.Config import normal_config
+from Script.UI.Moudle import draw
 
 
 cache: game_type.Cache = cache_control.cache
@@ -178,7 +180,69 @@ def handle_sleep():
     """ 处理睡觉指令 """
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
-    character_data.behavior.duration = 640
+    character_data.behavior.duration = 480
     character_data.behavior.behavior_id = constant.Behavior.SLEEP
     character_data.state = constant.CharacterStatus.STATUS_SLEEP
-    update.game_update_flow(640)
+    update.game_update_flow(480)
+
+
+@add_instruct(
+    constant.Instruct.DRINK_SPRING, constant.InstructType.ACTIVE, _("喝泉水"), {constant.Premise.IN_FOUNTAIN}
+)
+def handle_drink_spring():
+    """ 处理喝泉水指令 """
+    value = random.randint(0, 100)
+    now_draw = draw.WaitDraw()
+    now_draw.width = width
+    now_draw.text = "\n"
+    character_data: game_type.Character = cache.character_data[0]
+    if value <= 5 and not character_data.sex:
+        now_draw.text += _("喝到了奇怪的泉水！身体变化了！！！")
+        character_data.sex = 1
+        character_data.height = attr_calculation.get_height(1, character_data.age)
+        bmi = attr_calculation.get_bmi(character_data.weigt_tem)
+        character_data.weight = attr_calculation.get_weight(bmi, character_data.height.now_height)
+        character_data.bodyfat = attr_calculation.get_body_fat(
+            character_data.sex, character_data.bodyfat_tem
+        )
+        character_data.measurements = attr_calculation.get_measurements(
+            character_data.sex,
+            character_data.height.now_height,
+            character_data.weight,
+            character_data.bodyfat,
+            character_data.bodyfat_tem,
+        )
+    else:
+        now_draw.text += _("喝到了甜甜的泉水～")
+        character_data.status[28] = 0
+    now_draw.text += "\n"
+    now_draw.draw()
+
+
+@add_instruct(
+    constant.Instruct.EMBRACE, constant.InstructType.ACTIVE, _("拥抱"), {constant.Premise.HAVE_TARGET}
+)
+def handle_embrace():
+    """ 处理拥抱指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 3
+    character_data.behavior.behavior_id = constant.Behavior.EMBRACE
+    character_data.state = constant.CharacterStatus.STATUS_EMBRACE
+    update.game_update_flow(3)
+
+
+@add_instruct(
+    constant.Instruct.KISS,
+    constant.InstructType.OBSCENITY,
+    _("亲吻"),
+    {constant.Premise.HAVE_TARGET, constant.Premise.TARGET_ADMIRE},
+)
+def handle_embrace():
+    """ 处理亲吻指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 2
+    character_data.behavior.behavior_id = constant.Behavior.KISS
+    character_data.state = constant.CharacterStatus.STATUS_KISS
+    update.game_update_flow(2)

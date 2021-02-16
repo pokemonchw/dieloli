@@ -44,6 +44,10 @@ class CharacterStatus:
     """ 摸头 """
     STATUS_SLEEP = 9
     """ 睡觉 """
+    STATUS_EMBRACE = 10
+    """ 拥抱 """
+    STATUS_KISS = 11
+    """ 亲吻 """
 
 
 class Behavior:
@@ -69,6 +73,10 @@ class Behavior:
     """ 摸头 """
     SLEEP = 9
     """ 睡觉 """
+    EMBRACE = 10
+    """ 拥抱 """
+    KISS = 11
+    """ 亲吻 """
 
 
 class StateMachine:
@@ -112,6 +120,16 @@ class StateMachine:
     """ 弹奏钢琴给场景里随机对象听 """
     TOUCH_HEAD_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 18
     """ 对场景中抱有超越友谊想法的随机对象摸头 """
+    MOVE_TO_DORMITORY = 19
+    """ 移动至所属宿舍 """
+    SLEEP = 20
+    """ 睡觉 """
+    REST = 21
+    """ 休息一会儿 """
+    MOVE_TO_RAND_SCENE = 22
+    """ 移动至随机场景 """
+    EMBRACE_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 23
+    """ 对场景中抱有超越友谊想法的随机对象拥抱 """
 
 
 class Panel:
@@ -302,6 +320,22 @@ class Premise:
     """ 目标比自己高 """
     BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 82
     """ 对场景中某个角色抱有超越友谊的想法 """
+    HYPOSTHENIA = 83
+    """ 体力不足 """
+    PHYSICAL_STRENGHT = 84
+    """ 体力充沛 """
+    IS_INDULGE = 85
+    """ 是一个放纵的人 """
+    IN_FOUNTAIN = 86
+    """ 在喷泉场景 """
+    TARGET_IS_SOLITARY = 87
+    """ 交互对象是一个孤僻的人 """
+    TARGET_CHEST_IS_CLIFF = 88
+    """ 交互对象胸围是绝壁 """
+    TARGET_ADMIRE = 89
+    """ 被交互对象恋慕 """
+    IS_ENTHUSIASM = 90
+    """ 是一个热情的人 """
 
 
 class InstructType:
@@ -334,29 +368,42 @@ class InstructType:
 class Instruct:
     """ 指令id """
 
+    CHAT = 0
+    """ 闲聊 """
     REST = 0
     """ 休息 """
-    BUY_FOOD = 1
-    """ 购买食物 """
-    EAT = 2
-    """ 进食 """
-    MOVE = 3
-    """ 移动 """
-    SEE_ATTR = 4
-    """ 查看属性 """
-    SEE_OWNER_ATTR = 5
-    """ 查看自身属性 """
-    CHAT = 6
-    """ 闲聊 """
-    BUY_ITEM = 7
-    """ 购买道具 """
-    SINGING = 8
-    """ 唱歌 """
-    PLAY_PIANO = 9
-    """ 弹钢琴 """
-    TOUCH_HEAD = 10
-    """ 摸头 """
-    SAVE = 11
-    """ 读写存档 """
-    SLEEP = 12
+    SLEEP = 0
     """ 睡觉 """
+    SINGING = 0
+    """ 唱歌 """
+    PLAY_PIANO = 0
+    """ 弹钢琴 """
+    TOUCH_HEAD = 0
+    """ 摸头 """
+    EMBRACE = 0
+    """ 拥抱 """
+    KISS = 0
+    """ 亲吻 """
+    EAT = 0
+    """ 进食 """
+    DRINK_SPRING = 0
+    """ 喝泉水 """
+    BUY_FOOD = 0
+    """ 购买食物 """
+    BUY_ITEM = 0
+    """ 购买道具 """
+    MOVE = 0
+    """ 移动 """
+    SEE_ATTR = 0
+    """ 查看属性 """
+    SEE_OWNER_ATTR = 0
+    """ 查看自身属性 """
+    SAVE = 0
+    """ 读写存档 """
+
+
+i = 0
+for k in Instruct.__dict__:
+    if isinstance(Instruct.__dict__[k], int):
+        setattr(Instruct, k, i)
+        i += 1

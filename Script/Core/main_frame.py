@@ -44,12 +44,16 @@ def close_window():
 game_name = normal_config.config_normal.game_name
 root = Tk()
 root.title(game_name)
-root.geometry(
-    str(normal_config.config_normal.window_width)
-    + "x"
-    + str(normal_config.config_normal.window_hight)
-    + "+0+0"
-)
+width = normal_config.config_normal.window_width
+frm_width = root.winfo_rootx() - root.winfo_x()
+win_width = width + 2 * frm_width
+height = normal_config.config_normal.window_hight
+titlebar_height = root.winfo_rooty() - root.winfo_y()
+win_height = height + titlebar_height + frm_width
+x = root.winfo_screenwidth() // 2 - win_width // 2
+y = root.winfo_screenheight() // 2 - win_height // 2
+root.geometry("{}x{}+{}+{}".format(width, height, x, y))
+root.deiconify()
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 root.protocol("WM_DELETE_WINDOW", close_window)

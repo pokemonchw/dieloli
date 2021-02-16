@@ -333,14 +333,104 @@ def character_touch_head_to_beyond_friendship_target_in_scene(character_id: int)
     scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path_str]
     character_list = []
-    for now_character in scene_data.character_list:
-        if (
-            now_character in character_data.social_contact_data
-            and character_data.social_contact_data[now_character] > 2
-        ):
-            character_list.append(now_character)
-    target_id = random.choice(character_list)
-    character_data.behavior.behavior_id = constant.Behavior.TOUCH_HEAD
-    character_data.target_character_id = target_id
-    character_data.behavior.duration = 2
-    character_data.state = constant.CharacterStatus.STATUS_TOUCH_HEAD
+    for i in {3, 4, 5}:
+        character_data.social_contact.setdefault(i, set())
+        for c in character_data.social_contact[i]:
+            if c in scene_data.character_list:
+                character_list.append(c)
+    if len(character_list):
+        target_id = random.choice(character_list)
+        character_data.behavior.behavior_id = constant.Behavior.TOUCH_HEAD
+        character_data.target_character_id = target_id
+        character_data.behavior.duration = 2
+        character_data.state = constant.CharacterStatus.STATUS_TOUCH_HEAD
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_DORMITORY)
+def character_move_to_dormitory(character_id: int):
+    """
+    移动至所在宿舍
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    _, _, move_path, move_time = character_move.character_move(
+        character_id,
+        map_handle.get_map_system_path_for_str(character_data.dormitory),
+    )
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.SLEEP)
+def character_sleep(character_id: int):
+    """
+    睡觉
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.SLEEP
+    character_data.behavior.duration = 480
+    character_data.state = constant.CharacterStatus.STATUS_SLEEP
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.REST)
+def character_rest(character_id: int):
+    """
+    休息
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.REST
+    character_data.behavior.duration = 10
+    character_data.state = constant.CharacterStatus.STATUS_REST
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_RAND_SCENE)
+def character_move_to_rand_scene(character_id: int):
+    """
+    移动至随机场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_list = list(cache.scene_data.keys())
+    now_scene_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_list.remove(now_scene_str)
+    target_scene = random.choice(scene_list)
+    _, _, move_path, move_time = character_move.character_move(
+        character_id,
+        map_handle.get_map_system_path_for_str(target_scene),
+    )
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.EMBRACE_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE)
+def character_embrace_to_beyond_friendship_target_in_scene(character_id: int):
+    """
+    对场景中抱有超越友谊想法的随机对象拥抱
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_list = []
+    for i in {3, 4, 5}:
+        character_data.social_contact.setdefault(i, set())
+        for c in character_data.social_contact[i]:
+            if c in scene_data.character_list:
+                character_list.append(c)
+    if len(character_list):
+        target_id = random.choice(character_list)
+        character_data.behavior.behavior_id = constant.Behavior.EMBRACE
+        character_data.target_character_id = target_id
+        character_data.behavior.duration = 3
+        character_data.state = constant.CharacterStatus.STATUS_EMBRACE
