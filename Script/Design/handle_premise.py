@@ -1766,3 +1766,23 @@ def handle_is_heavy_feeling(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     return character_data.nature[5] >= 50
+
+
+@add_premise(constant.Premise.HAVE_LIKE_TARGET_NO_FIRST_KISS)
+def handle_have_like_target_no_first_kiss(character_id: int) -> int:
+    """
+    校验是否有自己喜欢的人的初吻还在
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_index = 0
+    for i in {4, 5}:
+        character_data.social_contact.setdefault(i, set())
+        for c in character_data.social_contact[i]:
+            c_data: game_type.Character = cache.character_data[c]
+            if c_data.first_kiss == -1:
+                character_index += 1
+    return character_index

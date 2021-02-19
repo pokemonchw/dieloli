@@ -1,6 +1,6 @@
 import datetime
 from types import FunctionType
-from Script.Design import settle_behavior, character, character_handle, map_handle
+from Script.Design import settle_behavior, character, character_handle, map_handle, attr_calculation
 from Script.Core import cache_control, constant, game_type, get_text
 from Script.Config import game_config, normal_config
 from Script.UI.Moudle import draw
@@ -220,14 +220,12 @@ def handle_add_intimacy_favorability(
             character_id, character_data.target_character_id, add_time * 1.5
         )
         add_favorability_coefficient = add_favorability / (add_time * 1.5)
-        social = target_data.social_contact_data[character_id]
+        social = 0
+        if character_id in target_data.social_contact_data:
+            social = target_data.social_contact_data[character_id]
         change_data.target_change.setdefault(character_data.target_character_id, game_type.TargetChange())
         target_change = change_data.target_change[target_data.cid]
-        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-        if (
-            character_id in target_data.social_contact_data
-            and target_data.social_contact_data[character_id] >= 2
-        ):
+        if social >= 2:
             add_favorability += add_favorability_coefficient * social
             character_handle.add_favorability(
                 character_id, target_data.cid, add_favorability, target_change
@@ -237,9 +235,11 @@ def handle_add_intimacy_favorability(
             cal_social = social
             if not cal_social:
                 cal_social = 1
-            add_disgust = (100 - add_favorability) / cal_social
+            add_disgust = (500 - add_favorability) / cal_social
             target_data.status.setdefault(12, 0)
             target_data.status[12] += add_disgust
+            target_change.status.setdefault(12, 0)
+            target_change.status[12] += add_disgust
             character_handle.add_favorability(
                 character_id, target_data.cid, add_favorability, target_change
             )
@@ -263,14 +263,13 @@ def handle_add_intimate_favorability(
             character_id, character_data.target_character_id, add_time * 2
         )
         add_favorability_coefficient = add_favorability / (add_time * 2)
-        social = target_data.social_contact_data[character_id]
+        social = 0
+        if character_id in target_data.social_contact_data:
+            social = target_data.social_contact_data[character_id]
         change_data.target_change.setdefault(character_data.target_character_id, game_type.TargetChange())
-        target_change = change_data.target_change[target_data.cid]
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-        if (
-            character_id in target_data.social_contact_data
-            and target_data.social_contact_data[character_id] >= 3
-        ):
+        if social >= 3:
             add_favorability += add_favorability_coefficient * social
             character_handle.add_favorability(
                 character_id, target_data.cid, add_favorability, target_change
@@ -280,9 +279,11 @@ def handle_add_intimate_favorability(
             cal_social = social
             if not cal_social:
                 cal_social = 1
-            add_disgust = (500 - add_favorability) / cal_social
+            add_disgust = (1000 - add_favorability) / cal_social
             target_data.status.setdefault(12, 0)
             target_data.status[12] += add_disgust
+            target_change.status.setdefault(12, 0)
+            target_change.status[12] += add_disgust
             character_handle.add_favorability(
                 character_id, target_data.cid, add_favorability, target_change
             )
@@ -416,7 +417,7 @@ def handle_add_small_mouth_sex_experience(
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
-    if target_data.social_contact[character_id] >= 3:
+    if target_data.social_contact_data[character_id] >= 3:
         character_data.sex_experience.setdefault(0, 0)
         target_data.sex_experience.setdefault(0, 0)
         character_data.sex_experience[0] += add_time
@@ -427,6 +428,44 @@ def handle_add_small_mouth_sex_experience(
         target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
         target_change.sex_experience.setdefault(0, 0)
         target_change.sex_experience[0] += add_time
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_MOUTH_HAPPY)
+def handle_add_small_mouth_happy_experience(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
+):
+    """
+    增加少量嘴部快感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.social_contact_data.setdefault(character_id, 0)
+    if target_data.social_contact_data[character_id] >= 3:
+        character_data.status.setdefault(0, 0)
+        target_data.status.setdefault(0, 0)
+        character_happy = add_time
+        target_happy = add_time
+        character_data.sex_experience.setdefault(0, 0)
+        character_happy *= 1 + attr_calculation.get_experience_level_weight(
+            character_data.sex_experience[0]
+        )
+        target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[0])
+        character_data.knowledge.setdefault(9, 0)
+        target_data.knowledge.setdefault(9, 0)
+        character_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.knowledge[9])
+        target_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+        character_data.status[0] += character_happy
+        target_data.status[0] += target_happy
+        change_data.status.setdefault(0, 0)
+        change_data.status[0] += character_happy
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
+        target_change.status.setdefault(0, 0)
+        target_change.status[0] += target_happy
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.FIRST_KISS)
@@ -441,7 +480,7 @@ def handle_first_kiss(character_id: int, add_time: int, change_data: game_type.C
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
-    if target_data.social_contact[character_id] >= 3:
+    if target_data.social_contact_data[character_id] >= 3:
         if character_data.first_kiss == -1:
             character_data.first_kiss = target_data.cid
             if (not character_id) or (not target_data.cid):
@@ -472,7 +511,10 @@ def handle_first_hand_in_hand(
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
-    if target_data.social_contact[character_id] >= 2:
+    social = 0
+    if character_id in target_data.social_contact_data:
+        social = target_data.social_contact_data[character_id]
+    if social >= 2:
         if character_data.first_hand_in_hand == -1:
             character_data.first_kiss = target_data.cid
         if target_data.first_hand_in_hand == -1:

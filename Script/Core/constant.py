@@ -138,6 +138,12 @@ class StateMachine:
     """ 和场景中自己喜欢的随机对象接吻 """
     MOVE_TO_LIKE_TARGET_SCENE = 25
     """ 移动至随机某个自己喜欢的人所在场景 """
+    HAND_IN_HAND_TO_LIKE_TARGET_IN_SCENE = 26
+    """ 牵住场景中自己喜欢的随机对象的手 """
+    KISS_TO_NO_FIRST_KISS_TARGET_IN_SCENE = 27
+    """ 和场景中自己喜欢的还是初吻的随机对象接吻 """
+    MOVE_TO_NO_FIRST_KISS_LIKE_TARGET_SCENE = 28
+    """ 移动至喜欢的还是初吻的人所在的场景 """
 
 
 class Panel:
@@ -384,6 +390,10 @@ class Premise:
     """ 没有和牵过手 """
     IS_HEAVY_FEELING = 110
     """ 是一个重情的人 """
+    HAVE_NO_FIRST_KISS_LIKE_TARGET_IN_SCENE = 111
+    """ 有自己喜欢的还是初吻的人在场景中 """
+    HAVE_LIKE_TARGET_NO_FIRST_KISS = 112
+    """ 有自己喜欢的人的初吻还在 """
 
 
 class BehaviorEffect:

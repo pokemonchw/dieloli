@@ -481,3 +481,78 @@ def character_move_to_like_target_scene(character_id: int):
         character_data.behavior.move_target = move_path
         character_data.behavior.duration = move_time
         character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.HAND_IN_HAND_TO_LIKE_TARGET_IN_SCENE)
+def character_hand_in_hand_to_like_target_in_scene(character_id: int):
+    """
+    牵住场景中自己喜欢的随机对象的手
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_list = []
+    for i in {4, 5}:
+        character_data.social_contact.setdefault(i, set())
+        for c in character_data.social_contact[i]:
+            if c in scene_data.character_list:
+                character_list.append(c)
+    if len(character_list):
+        target_id = random.choice(character_list)
+        character_data.behavior.behavior_id = constant.Behavior.HAND_IN_HAND
+        character_data.target_character_id = target_id
+        character_data.behavior.duration = 10
+        character_data.state = constant.CharacterStatus.STATUS_HAND_IN_HAND
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.KISS_TO_NO_FIRST_KISS_TARGET_IN_SCENE)
+def character_kiss_to_no_first_kiss_like_target_in_scene(character_id: int):
+    """
+    和场景中自己喜欢的还是初吻的随机对象接吻
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_list = []
+    for i in {4, 5}:
+        character_data.social_contact.setdefault(i, set())
+        for c in character_data.social_contact[i]:
+            if c in scene_data.character_list:
+                c_data: game_type.Character = cache.character_data[c]
+                if c_data.first_kiss == -1:
+                    character_list.append(c)
+    if len(character_list):
+        target_id = random.choice(character_list)
+        character_data.behavior.behavior_id = constant.Behavior.KISS
+        character_data.target_character_id = target_id
+        character_data.behavior.duration = 2
+        character_data.state = constant.CharacterStatus.STATUS_KISS
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_NO_FIRST_KISS_LIKE_TARGET_SCENE)
+def character_move_to_no_first_kiss_like_target_scene(character_id: int):
+    """
+    移动至随机某个自己喜欢的还是初吻的人所在场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_list = []
+    for i in {4, 5}:
+        character_data.social_contact.setdefault(i, set())
+        for c in character_data.social_contact[i]:
+            c_data: game_type.Character = cache.character_data[c]
+            if c_data.first_kiss == -1:
+                character_list.append(i)
+    if len(character_list):
+        target_id = random.choice(character_list)
+        target_data: game_type.Character = cache.character_data[target_id]
+        _, _, move_path, move_time = character_move.character_move(character_id, target_data.position)
+        character_data.behavior.behavior_id = constant.Behavior.MOVE
+        character_data.behavior.move_target = move_path
+        character_data.behavior.duration = move_time
+        character_data.state = constant.CharacterStatus.STATUS_MOVE
