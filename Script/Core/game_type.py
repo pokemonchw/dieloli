@@ -217,6 +217,10 @@ class NormalConfig:
     """ 食物商店单页显示道具数上限 """
     food_shop_type_max: int
     """ 食物商店单页显示食物种类数上限 """
+    font_size: int
+    """ 字体大小 """
+    order_font_size: int
+    """ 输入框字体大小 """
 
 
 class Clothing:
@@ -487,6 +491,10 @@ class Character:
         """ 剧情npc校验 """
         self.no_wear: bool = 0
         """ 是否不想穿衣服 """
+        self.first_kiss: int = -1
+        """ 初吻对象 -1为无 """
+        self.first_hand_in_hand: int = -1
+        """ 初次牵手对象 -1为无 """
 
 
 class Cache:
@@ -533,8 +541,8 @@ class Cache:
     """ cmd存储 """
     behavior_tem_data: dict = {}
     """ 角色行为控制器数据 """
-    settle_behavior_data: dict = {}
-    """ 角色行为结算处理器 """
+    settle_behavior_effect_data: Dict[int, FunctionType] = {}
+    """ 角色行为结算处理器 处理器id:处理器 """
     scene_path_edge: Dict[str, Dict[str, List[str]]] = {}
     """ 所有场景间的寻路数据 当前场景id:目标场景id[当前移动目标场景id,当前移动时间] """
 
@@ -650,7 +658,7 @@ class Cache:
         """ 学校纬度 """
 
 
-class SocialChange:
+class TargetChange:
     """ 角色关系变化结构体 """
 
     def __init__(self):
@@ -658,6 +666,12 @@ class SocialChange:
         """ 旧关系 """
         self.new_social: int = 0
         """ 新关系 """
+        self.status: Dict[int, int] = {}
+        """ 状态变化 """
+        self.favorability: int = 0
+        """ 好感度变化 """
+        self.sex_experience: Dict[int, int] = {}
+        """ 性经验变化 """
 
 
 class CharacterStatusChange:
@@ -674,7 +688,7 @@ class CharacterStatusChange:
         """ 语言技能经验变化 """
         self.knowledge: Dict[int, int] = {}
         """ 知识技能经验变化 """
-        self.favorability: Dict[int, int] = {}
-        """ 角色好感度变化 """
-        self.social_change: Dict[int, SocialChange] = {}
-        """ 角色关系变化 """
+        self.target_change: Dict[int, TargetChange] = {}
+        """ 互动目标状态变化 """
+        self.sex_experience: Dict[int, int] = {}
+        """ 性经验变化 """

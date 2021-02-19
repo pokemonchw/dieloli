@@ -595,6 +595,17 @@ class RecipesFormulaType:
     """ 菜谱配方名字 """
 
 
+class BehaviorEffect:
+    """ 行为结算器配置 """
+
+    cid: int
+    """ 表id """
+    behavior_id: int
+    """ 行为id """
+    effect_id: int
+    """ 结算器id """
+
+
 class BarConfig:
     """ 比例条名字对应的状态图片和绘制宽度 """
 

@@ -24,6 +24,10 @@ config_bar: Dict[int, config_def.BarConfig] = {}
 """ 比例条配置数据 """
 config_bar_data: Dict[str, int] = {}
 """ 比例条名字对应比例条id """
+config_behavior_effect: Dict[int, config_def.BehaviorEffect] = {}
+""" 行为结算器配置 """
+config_behavior_effect_data: Dict[int, Set] = {}
+""" 行为所包含的结算器id数据 """
 config_body_fat_tem: Dict[int, config_def.BodyFatTem] = {}
 """ 按性别划分的体脂率模板和范围 """
 config_body_fat_tem_data: Dict[int, Dict[int, int]] = {}
@@ -322,6 +326,18 @@ def load_bar_data():
         now_bar.__dict__ = tem_data
         config_bar[now_bar.cid] = now_bar
         config_bar_data[now_bar.name] = now_bar.cid
+
+
+def load_behavior_effect_data():
+    """ 载入行为结算器配置 """
+    now_data = config_data["BehaviorEffect"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.BehaviorEffect()
+        now_tem.__dict__ = tem_data
+        config_behavior_effect[now_tem.cid] = now_tem
+        config_behavior_effect_data.setdefault(now_tem.behavior_id, set())
+        config_behavior_effect_data[now_tem.behavior_id].add(now_tem.effect_id)
 
 
 def load_body_fat_tem():
@@ -968,6 +984,7 @@ def init():
     load_age_tem()
     load_attr_tem()
     load_bar_data()
+    load_behavior_effect_data()
     load_body_fat_tem()
     load_book_data()
     load_character_state_data()

@@ -3,7 +3,7 @@ import threading
 import queue
 import json
 from Script.Core import main_frame
-from Script.Config import game_config
+from Script.Config import game_config, normal_config
 
 input_evnet = threading.Event()
 _send_queue = queue.Queue()
@@ -331,7 +331,7 @@ def init_style():
             style.foreground,
             style.background,
             style.font,
-            style.font_size,
+            normal_config.config_normal.font_size,
             style.bold,
             style.underline,
             style.italic,

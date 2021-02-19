@@ -1,4 +1,3 @@
-import time
 import random
 from functools import wraps
 from typing import Set
@@ -236,9 +235,9 @@ def handle_embrace():
     constant.Instruct.KISS,
     constant.InstructType.OBSCENITY,
     _("亲吻"),
-    {constant.Premise.HAVE_TARGET, constant.Premise.TARGET_ADMIRE},
+    {constant.Premise.HAVE_TARGET},
 )
-def handle_embrace():
+def handle_kiss():
     """ 处理亲吻指令 """
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
@@ -246,3 +245,19 @@ def handle_embrace():
     character_data.behavior.behavior_id = constant.Behavior.KISS
     character_data.state = constant.CharacterStatus.STATUS_KISS
     update.game_update_flow(2)
+
+
+@add_instruct(
+    constant.Instruct.HAND_IN_HAND,
+    constant.InstructType.ACTIVE,
+    _("牵手"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_handle_in_handle():
+    """ 处理牵手指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.HAND_IN_HAND
+    character_data.state = constant.CharacterStatus.STATUS_HAND_IN_HAND
+    update.game_update_flow(10)

@@ -229,12 +229,21 @@ class CharacterInfoHead:
         """ 是否绘制面板标题 """
         character_data = cache.character_data[character_id]
         sex_text = game_config.config_sex_tem[character_data.sex].name
-        message = _("No.{character_id} 姓名:{character_name} 称呼:{character_nick_name} 性别:{sex_text}").format(
-            character_id=character_id,
-            character_name=character_data.name,
-            character_nick_name=character_data.nick_name,
-            sex_text=sex_text,
-        )
+        if character_id:
+            message = _("No.{character_id} 姓名:{character_name} 性别:{sex_text}").format(
+                character_id=character_id,
+                character_name=character_data.name,
+                sex_text=sex_text,
+            )
+        else:
+            message = _(
+                "No.{character_id} 姓名:{character_name} 称呼:{character_nick_name} 性别:{sex_text}"
+            ).format(
+                character_id=character_id,
+                character_name=character_data.name,
+                character_nick_name=character_data.nick_name,
+                sex_text=sex_text,
+            )
         message_draw = draw.CenterDraw()
         message_draw.width = width / 2
         message_draw.text = message

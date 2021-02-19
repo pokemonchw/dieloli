@@ -83,6 +83,7 @@ order_font_data = game_config.config_font[1]
 for k in game_config.config_font[0].__dict__:
     if k not in order_font_data.__dict__:
         order_font_data.__dict__[k] = game_config.config_font[0].__dict__[k]
+        order_font_data.font_size = normal_config.config_normal.order_font_size
 input_background_box = Text(
     main_frame,
     highlightbackground=normal_config.config_normal.background,

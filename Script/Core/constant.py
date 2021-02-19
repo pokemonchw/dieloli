@@ -48,6 +48,8 @@ class CharacterStatus:
     """ 拥抱 """
     STATUS_KISS = 11
     """ 亲吻 """
+    STATUS_HAND_IN_HAND = 12
+    """ 牵手 """
 
 
 class Behavior:
@@ -77,6 +79,8 @@ class Behavior:
     """ 拥抱 """
     KISS = 11
     """ 亲吻 """
+    HAND_IN_HAND = 12
+    """ 牵手 """
 
 
 class StateMachine:
@@ -130,6 +134,10 @@ class StateMachine:
     """ 移动至随机场景 """
     EMBRACE_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 23
     """ 对场景中抱有超越友谊想法的随机对象拥抱 """
+    KISS_TO_LIKE_TARGET_IN_SCENE = 24
+    """ 和场景中自己喜欢的随机对象接吻 """
+    MOVE_TO_LIKE_TARGET_SCENE = 25
+    """ 移动至随机某个自己喜欢的人所在场景 """
 
 
 class Panel:
@@ -336,6 +344,95 @@ class Premise:
     """ 被交互对象恋慕 """
     IS_ENTHUSIASM = 90
     """ 是一个热情的人 """
+    TARGET_AVERAGE_STATURE_HEIGHT = 91
+    """ 目标体型比平均体型更胖 """
+    TARGET_NO_FIRST_KISS = 92
+    """ 交互对象初吻还在 """
+    NO_FIRST_KISS = 93
+    """ 初吻还在 """
+    IS_TARGET_FIRST_KISS = 94
+    """ 是交互对象的初吻对象 """
+    HAVE_OTHER_TARGET_IN_SCENE = 95
+    """ 场景中有自己和交互对象以外的其他人 """
+    NO_HAVE_OTHER_TARGET_IN_SCENE = 96
+    """ 场景中没有自己和交互对象以外的其他人 """
+    TARGET_HAVE_FIRST_KISS = 97
+    """ 交互对象初吻不在了 """
+    HAVE_FIRST_KISS = 98
+    """ 初吻不在了 """
+    HAVE_LIKE_TARGET = 99
+    """ 有喜欢的人 """
+    HAVE_LIKE_TARGET_IN_SCENE = 100
+    """ 场景中有喜欢的人 """
+    TARGET_IS_STUDENT = 101
+    """ 交互对象是学生 """
+    TARGET_IS_ASTUTE = 102
+    """ 交互对象是一个机敏的人 """
+    TARGET_IS_INFERIORITY = 103
+    """ 交互对象是一个自卑的人 """
+    TARGET_IS_ENTHUSIASM = 104
+    """ 交互对象是一个热情的人 """
+    TARGET_IS_SELF_CONFIDENCE = 105
+    """ 交互对象是一个自信的人 """
+    IS_ASTUTE = 106
+    """ 是一个机敏的人 """
+    TARGET_IS_HEAVY_FEELING = 107
+    """ 交互对象是一个重情的人 """
+    TARGET_NO_FIRST_HAND_IN_HAND = 108
+    """ 交互对象没有牵过手 """
+    NO_FIRST_HAND_IN_HAND = 109
+    """ 没有和牵过手 """
+    IS_HEAVY_FEELING = 110
+    """ 是一个重情的人 """
+
+
+class BehaviorEffect:
+    """ 行为结算效果函数 """
+
+    ADD_SMALL_HIT_POINT = 0
+    """ 增加少量体力 """
+    ADD_SMALL_MANA_POINT = 1
+    """ 增加少量气力 """
+    ADD_INTERACTION_FAVORABILITY = 2
+    """ 增加基础互动好感 """
+    SUB_SMALL_HIT_POINT = 3
+    """ 减少少量体力 """
+    SUB_SMALL_MANA_POINT = 4
+    """ 减少少量气力 """
+    MOVE_TO_TARGET_SCENE = 5
+    """ 移动至目标场景 """
+    EAT_FOOD = 6
+    """ 食用指定食物 """
+    ADD_SOCIAL_FAVORABILITY = 7
+    """ 增加社交关系好感 """
+    ADD_INTIMACY_FAVORABILITY = 8
+    """ 增加亲密行为好感(关系不足2则增加反感) """
+    ADD_INTIMATE_FAVORABILITY = 9
+    """ 增加私密行为好感(关系不足3则增加反感) """
+    ADD_SMALL_SING_EXPERIENCE = 10
+    """ 增加少量唱歌技能经验 """
+    ADD_SMALL_ELOQUENCE_EXPERIENCE = 11
+    """ 增加少量口才技能经验 """
+    ADD_SMALL_PLAY_MUSIC_EXPERIENCE = 12
+    """ 增加少量演奏技能经验 """
+    ADD_SMALL_PERFORM_EXPERIENCE = 13
+    """ 增加少量表演技能经验 """
+    ADD_SMALL_CEREMONY_EXPERIENCE = 14
+    """ 增加少量礼仪技能经验 """
+    ADD_SMALL_SEX_EXPERIENCE = 15
+    """ 增加少量性爱技能经验 """
+    ADD_SMALL_MOUTH_SEX_EXPERIENCE = 16
+    """ 增加少量嘴部性爱经验 """
+    ADD_SMALL_MOUTH_HAPPY = 17
+    """ 增加少量嘴部快感 """
+    FIRST_KISS = 18
+    """ 记录初吻 """
+    FIRST_HAND_IN_HAND = 19
+    """ 记录初次牵手 """
+    ADD_MEDIUM_HIT_POINT = 20
+    """ 增加中量体力 """
+    ADD_MEDIUM_MANA_POINT = 21
+    """ 增加中量气力 """
 
 
 class InstructType:
@@ -380,6 +477,8 @@ class Instruct:
     """ 弹钢琴 """
     TOUCH_HEAD = 0
     """ 摸头 """
+    HAND_IN_HAND = 0
+    """ 牵手 """
     EMBRACE = 0
     """ 拥抱 """
     KISS = 0

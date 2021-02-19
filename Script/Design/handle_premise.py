@@ -1422,7 +1422,7 @@ def handle_in_fountain(character_id: int) -> int:
 @add_premise(constant.Premise.TARGET_IS_SOLITARY)
 def handle_target_is_solitary(character_id: int) -> int:
     """
-    校验角色是否是一个孤僻的人
+    校验交互对象是否是一个孤僻的人
     Keyword arguments:
     character_id -- 角色id
     Return arguments:
@@ -1476,3 +1476,293 @@ def handle_target_admire(character_id: int) -> int:
     if character_id in target_data.social_contact[4]:
         return 1
     return 0
+
+
+@add_premise(constant.Premise.TARGET_AVERAGE_STATURE_HEIGHT)
+def handle_target_average_stature_height(character_id: int) -> int:
+    """
+    校验角色目体型高是否比平均体型更胖
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    target_data = cache.character_data[character_data.target_character_id]
+    age_tem = attr_calculation.judge_age_group(target_data.age)
+    if age_tem in cache.average_bodyfat_by_age:
+        average_bodyfat = cache.average_bodyfat_by_age[age_tem][target_data.sex]
+        if target_data.bodyfat > average_bodyfat * 1.05:
+            return 1
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_NO_FIRST_KISS)
+def handle_target_no_first_kiss(character_id: int) -> int:
+    """
+    校验交互对象是否初吻还在
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.first_kiss == -1
+
+
+@add_premise(constant.Premise.NO_FIRST_KISS)
+def handle_no_first_kiss(character_id: int) -> int:
+    """
+    校验是否初吻还在
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.first_kiss == -1
+
+
+@add_premise(constant.Premise.IS_TARGET_FIRST_KISS)
+def handle_is_target_first_kiss(character_id: int) -> int:
+    """
+    校验是否是交互对象的初吻对象
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return character_id == target_data.first_kiss
+
+
+@add_premise(constant.Premise.HAVE_OTHER_TARGET_IN_SCENE)
+def handle_have_other_target_in_scene(character_id: int) -> int:
+    """
+    校验场景中是否有自己和交互对象以外的其他人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    return len(scene_data.character_list) > 2
+
+
+@add_premise(constant.Premise.NO_HAVE_OTHER_TARGET_IN_SCENE)
+def handle_no_have_other_target_in_scene(character_id: int) -> int:
+    """
+    校验场景中是否没有自己和交互对象以外的其他人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    return len(scene_data.character_list) <= 2
+
+
+@add_premise(constant.Premise.TARGET_HAVE_FIRST_KISS)
+def handle_target_have_first_kiss(character_id: int) -> int:
+    """
+    校验交互对象是否初吻不在了
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.first_kiss != -1
+
+
+@add_premise(constant.Premise.HAVE_FIRST_KISS)
+def handle_have_first_kiss(character_id: int) -> int:
+    """
+    校验是否初吻不在了
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.first_kiss != -1
+
+
+@add_premise(constant.Premise.HAVE_LIKE_TARGET)
+def handle_have_like_target(character_id: int) -> int:
+    """
+    校验是否有喜欢的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.social_contact.setdefault(4, set())
+    character_data.social_contact.setdefault(5, set())
+    return len(character_data.social_contact[4]) + len(character_data.social_contact[5])
+
+
+@add_premise(constant.Premise.HAVE_LIKE_TARGET_IN_SCENE)
+def handle_have_like_target_in_scene(character_id: int) -> int:
+    """
+    校验是否有喜欢的人在场景中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.social_contact.setdefault(4, set())
+    character_data.social_contact.setdefault(5, set())
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_list = []
+    for i in {4, 5}:
+        for c in character_data.social_contact[i]:
+            character_list.append(c)
+    return len(character_list)
+
+
+@add_premise(constant.Premise.TARGET_IS_STUDENT)
+def handle_target_is_student(character_id: int) -> int:
+    """
+    校验交互对象是否是学生
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.age <= 18
+
+
+@add_premise(constant.Premise.TARGET_IS_ASTUTE)
+def handle_target_is_astute(character_id: int) -> int:
+    """
+    校验交互对象是否是一个机敏的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[11] >= 50
+
+
+@add_premise(constant.Premise.TARGET_IS_INFERIORITY)
+def handle_target_is_inferiority(character_id: int) -> int:
+    """
+    校验交互对象是否是一个自卑的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[16] < 50
+
+
+@add_premise(constant.Premise.TARGET_IS_ENTHUSIASM)
+def handle_target_is_enthusiasm(character_id: int) -> int:
+    """
+    校验交互对象是否是一个热情的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[15] >= 50
+
+
+@add_premise(constant.Premise.TARGET_IS_SELF_CONFIDENCE)
+def handle_target_is_self_confidence(character_id: int) -> int:
+    """
+    校验交互对象是否是一个自信的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[16] >= 50
+
+
+@add_premise(constant.Premise.IS_ASTUTE)
+def handle_is_astute(character_id: int) -> int:
+    """
+    校验是否是一个机敏的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.nature[11] >= 50
+
+
+@add_premise(constant.Premise.TARGET_IS_HEAVY_FEELING)
+def handle_target_is_heavy_feeling(character_id: int) -> int:
+    """
+    校验交互对象是否是一个重情的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[5] >= 50
+
+
+@add_premise(constant.Premise.TARGET_NO_FIRST_HAND_IN_HAND)
+def handle_target_no_first_hand_in_hand(character_id: int) -> int:
+    """
+    校验交互对象是否没有牵过手
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.first_hand_in_hand == -1
+
+
+@add_premise(constant.Premise.NO_FIRST_HAND_IN_HAND)
+def handle_no_first_hand_in_hand(character_id: int) -> int:
+    """
+    校验是否没有牵过手
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.first_hand_in_hand == -1
+
+
+@add_premise(constant.Premise.IS_HEAVY_FEELING)
+def handle_is_heavy_feeling(character_id: int) -> int:
+    """
+    校验是否是一个重情的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.nature[5] >= 50
