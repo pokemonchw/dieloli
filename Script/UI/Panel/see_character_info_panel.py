@@ -274,6 +274,9 @@ class CharacterInfoHead:
             (status_draw, mp_draw),
         ]
         """ 要绘制的面板列表 """
+        wear_clothiong_list = CharacterWearClothingList(character_id, width)
+        wear_clothiong_tuple_list = [tuple(i) for i in wear_clothiong_list.draw_list]
+        self.draw_list.extend(wear_clothiong_tuple_list)
 
     def draw(self):
         """ 绘制面板 """
@@ -283,6 +286,56 @@ class CharacterInfoHead:
         for draw_tuple in self.draw_list:
             for label in draw_tuple:
                 label.draw()
+            line_feed.draw()
+
+
+class CharacterWearClothingList:
+    """
+    角色已穿戴服装列表
+    Keyword arguments:
+    character_id -- 角色id
+    width -- 最大宽度
+    """
+
+    def __init__(self, character_id: int, width: int):
+        """ 初始化绘制对象 """
+        self.character_id: int = character_id
+        """ 要绘制的角色id """
+        self.width: int = width
+        """ 当前最大可绘制宽度 """
+        character_data: game_type.Character = cache.character_data[character_id]
+        describe_list = [_("可爱的"), _("性感的"), _("帅气的"), _("清新的"), _("典雅的"), _("清洁的"), _("保暖的")]
+        clothing_info_list = []
+        for clothing_type in game_config.config_clothing_type:
+            if clothing_type in character_data.put_on and isinstance(
+                character_data.put_on[clothing_type], UUID
+            ):
+                now_id = character_data.put_on[clothing_type]
+                now_clothing: game_type.Clothing = character_data.clothing[clothing_type][now_id]
+                value_list = [
+                    now_clothing.sweet,
+                    now_clothing.sexy,
+                    now_clothing.handsome,
+                    now_clothing.fresh,
+                    now_clothing.elegant,
+                    now_clothing.cleanliness,
+                    now_clothing.warm,
+                ]
+                describe_id = value_list.index(max(value_list))
+                describe = describe_list[describe_id]
+                now_clothing_config = game_config.config_clothing_tem[now_clothing.tem_id]
+                clothing_name = f"[{now_clothing.evaluation}{describe}{now_clothing_config.name}]"
+                clothing_info_list.append(clothing_name)
+        now_draw = panel.CenterDrawTextListPanel()
+        now_draw.set(clothing_info_list, self.width, 4)
+        self.draw_list = now_draw.draw_list
+        """ 绘制的对象列表 """
+
+    def draw(self):
+        """ 绘制对象 """
+        for draw_list in self.draw_list:
+            for now_draw in draw_list:
+                now_draw.draw()
             line_feed.draw()
 
 

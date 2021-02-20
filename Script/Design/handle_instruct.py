@@ -1,4 +1,5 @@
 import random
+import time
 from functools import wraps
 from typing import Set
 from types import FunctionType
@@ -182,7 +183,10 @@ def handle_sleep():
     character_data.behavior.duration = 480
     character_data.behavior.behavior_id = constant.Behavior.SLEEP
     character_data.state = constant.CharacterStatus.STATUS_SLEEP
+    t1 = time.time()
     update.game_update_flow(480)
+    t2 = time.time()
+    print(t2 - t1)
 
 
 @add_instruct(

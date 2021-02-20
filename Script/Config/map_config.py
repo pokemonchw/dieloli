@@ -1,4 +1,5 @@
 import os
+import json
 from typing import Dict, List
 from dijkstar import Graph, find_path
 from Script.Core import game_type, json_handle, get_text, text_handle, cache_control
@@ -7,11 +8,14 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 map_data_path = os.path.join("data", "map")
 """ 地图配置数据路径 """
+scene_path_edge_path = os.path.join("data", "ScenePath.json")
 
 
 def init_map_data():
     """ 载入地图和场景数据 """
     load_dir_now(map_data_path)
+    with open(scene_path_edge_path, "r") as pathEdgeFile:
+        cache.scene_path_edge = json.load(pathEdgeFile)
 
 
 def load_dir_now(data_path: str):

@@ -16,21 +16,35 @@ def handle_talk(character_id):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache.character_data[character_id]
+    character_data: game_type.Character = cache.character_data[character_id]
     behavior_id = character_data.behavior.behavior_id
     now_talk_data = {}
+    now_premise_data = {}
+    if (
+        character_data.position != cache.character_data[0].position
+        and character_data.behavior.move_src != cache.character_data[0].position
+    ):
+        return
     if behavior_id in game_config.config_talk_data:
         for talk_id in game_config.config_talk_data[behavior_id]:
             now_weight = 1
             if talk_id in game_config.config_talk_premise_data:
                 now_weight = 0
                 for premise in game_config.config_talk_premise_data[talk_id]:
-                    now_add_weight = cache.handle_premise_data[premise](character_id)
-                    if now_add_weight:
-                        now_weight += now_add_weight
+                    if premise in now_premise_data:
+                        if not now_premise_data[premise]:
+                            now_weight = 0
+                            break
+                        else:
+                            now_weight += now_premise_data[premise]
                     else:
-                        now_weight = 0
-                        break
+                        now_add_weight = cache.handle_premise_data[premise](character_id)
+                        now_premise_data[premise] = now_add_weight
+                        if now_add_weight:
+                            now_weight += now_add_weight
+                        else:
+                            now_weight = 0
+                            break
             if now_weight:
                 now_talk_data.setdefault(now_weight, set())
                 now_talk_data[now_weight].add(talk_id)
@@ -47,10 +61,10 @@ def handle_talk(character_id):
         scene_name = scene_data.scene_name
         player_data: game_type.Character = cache.character_data[0]
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-        target_scene_path = target_data.position
-        target_scene_path_str = map_handle.get_map_system_path_str_for_list(target_scene_path)
-        target_scene_data: game_type.Scene = cache.scene_data[target_scene_path_str]
-        if target_scene_path_str != scene_path_str:
+        target_scene_path = target_data.behavior.move_target
+        if len(target_scene_path):
+            target_scene_path_str = map_handle.get_map_system_path_str_for_list(target_scene_path)
+            target_scene_data: game_type.Scene = cache.scene_data[target_scene_path_str]
             scene_name = target_scene_data.scene_name
         now_talk_text = now_talk_text.format(
             NickName=character_data.nick_name,

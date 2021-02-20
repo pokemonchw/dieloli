@@ -4,6 +4,7 @@ import json
 import uuid
 import psutil
 import signal
+import time
 from tkinter import (
     ttk,
     Tk,
@@ -162,19 +163,19 @@ def read_queue():
         quene_str = main_queue.get()
         json_data = json.loads(quene_str)
 
-        if "clear_cmd" in json_data.keys() and json_data["clear_cmd"] == "true":
+        if "clear_cmd" in json_data and json_data["clear_cmd"] == "true":
             clear_screen()
-        if "clearorder_cmd" in json_data.keys() and json_data["clearorder_cmd"] == "true":
+        if "clearorder_cmd" in json_data and json_data["clearorder_cmd"] == "true":
             clear_order()
-        if "clearcmd_cmd" in json_data.keys():
+        if "clearcmd_cmd" in json_data:
             cmd_nums = json_data["clearcmd_cmd"]
             if cmd_nums == "all":
                 io_clear_cmd()
             else:
                 io_clear_cmd(tuple(cmd_nums))
-        if "bgcolor" in json_data.keys():
+        if "bgcolor" in json_data:
             set_background(json_data["bgcolor"])
-        if "set_style" in json_data.keys():
+        if "set_style" in json_data:
             temp = json_data["set_style"]
             frame_style_def(
                 temp["style_name"],
@@ -186,7 +187,7 @@ def read_queue():
                 temp["underline"],
                 temp["italic"],
             )
-        if "image" in json_data.keys():
+        if "image" in json_data:
             from Script.Core import era_image
 
             era_image.print_image(
@@ -199,14 +200,14 @@ def read_queue():
                 now_print(c["text"], style=tuple(c["style"]))
             if c["type"] == "cmd":
                 io_print_cmd(c["text"], c["num"], c["normal_style"], c["on_style"])
-    root.after(10, read_queue)
+    root.after(1, read_queue)
 
 
 def run():
     """
     启动屏幕
     """
-    root.after(10, read_queue)
+    root.after(1, read_queue)
     root.mainloop()
 
 

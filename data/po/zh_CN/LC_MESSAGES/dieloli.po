@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-19 16:16+0800\n"
+"POT-Creation-Date: 2021-02-20 18:59+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,8 +34,8 @@ msgid "查看上级地图"
 msgstr ""
 
 #: ../Script/UI/Panel/see_map_panel.py:151
-#: ../Script/UI/Panel/see_character_info_panel.py:934
-#: ../Script/UI/Panel/see_character_info_panel.py:974
+#: ../Script/UI/Panel/see_character_info_panel.py:985
+#: ../Script/UI/Panel/see_character_info_panel.py:1025
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
@@ -53,7 +53,7 @@ msgstr ""
 
 #: ../Script/UI/Panel/see_character_info_panel.py:46
 #: ../Script/UI/Panel/see_character_info_panel.py:61
-#: ../Script/UI/Panel/see_character_info_panel.py:975
+#: ../Script/UI/Panel/see_character_info_panel.py:1026
 msgid "属性"
 msgstr ""
 
@@ -114,108 +114,150 @@ msgstr ""
 msgid "状态:{status_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:281
+#: ../Script/UI/Panel/see_character_info_panel.py:284
 msgid "人物属性"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:341
-#: ../Script/UI/Panel/see_character_info_panel.py:354
-#: ../Script/UI/Panel/see_character_info_panel.py:363
+#: ../Script/UI/Panel/see_character_info_panel.py:307
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+msgid "可爱的"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:307
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+msgid "性感的"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:307
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+msgid "帅气的"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:307
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+msgid "清新的"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:307
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+msgid "典雅的"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:307
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+msgid "清洁的"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:307
+#: ../Script/UI/Panel/see_clothing_info_panel.py:169
+#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+msgid "保暖的"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:392
+#: ../Script/UI/Panel/see_character_info_panel.py:405
+#: ../Script/UI/Panel/see_character_info_panel.py:414
 msgid "暂无"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:345
+#: ../Script/UI/Panel/see_character_info_panel.py:396
 msgid "宿舍位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:348
+#: ../Script/UI/Panel/see_character_info_panel.py:399
 msgid "教室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:358
+#: ../Script/UI/Panel/see_character_info_panel.py:409
 msgid "办公室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:391
+#: ../Script/UI/Panel/see_character_info_panel.py:442
 #, python-brace-format
 msgid "年龄:{character_age}岁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:392
+#: ../Script/UI/Panel/see_character_info_panel.py:443
 #, python-brace-format
 msgid "生日:{birthday_month}月{birthday_day}日"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:423
+#: ../Script/UI/Panel/see_character_info_panel.py:474
 msgid "身高"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:425
+#: ../Script/UI/Panel/see_character_info_panel.py:476
 msgid "体重"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:428
+#: ../Script/UI/Panel/see_character_info_panel.py:479
 msgid "罩杯:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:462
+#: ../Script/UI/Panel/see_character_info_panel.py:513
 msgid "胸围:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:463
+#: ../Script/UI/Panel/see_character_info_panel.py:514
 msgid "腰围:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:464
+#: ../Script/UI/Panel/see_character_info_panel.py:515
 msgid "臀围"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:493
+#: ../Script/UI/Panel/see_character_info_panel.py:544
 msgid "嘴部开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:494
+#: ../Script/UI/Panel/see_character_info_panel.py:545
 msgid "胸部开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:495
+#: ../Script/UI/Panel/see_character_info_panel.py:546
 msgid "阴蒂开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:496
+#: ../Script/UI/Panel/see_character_info_panel.py:547
 msgid "阴茎开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:497
+#: ../Script/UI/Panel/see_character_info_panel.py:548
 msgid "阴道开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:498
+#: ../Script/UI/Panel/see_character_info_panel.py:549
 msgid "肛门开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:571
+#: ../Script/UI/Panel/see_character_info_panel.py:622
 msgid "人物技能"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:613
+#: ../Script/UI/Panel/see_character_info_panel.py:664
 msgid "人物语言"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:762
+#: ../Script/UI/Panel/see_character_info_panel.py:813
 msgid "人物性格"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:808
+#: ../Script/UI/Panel/see_character_info_panel.py:859
 msgid "空无一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:814
+#: ../Script/UI/Panel/see_character_info_panel.py:865
 msgid "人物社交"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:934
-#: ../Script/UI/Panel/see_character_info_panel.py:974
+#: ../Script/UI/Panel/see_character_info_panel.py:985
+#: ../Script/UI/Panel/see_character_info_panel.py:1025
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
@@ -226,38 +268,38 @@ msgstr ""
 msgid "[返回]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:969
+#: ../Script/UI/Panel/see_character_info_panel.py:1020
 msgid "[上一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:969
+#: ../Script/UI/Panel/see_character_info_panel.py:1020
 msgid "上一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:972
+#: ../Script/UI/Panel/see_character_info_panel.py:1023
 msgid "[下一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:972
+#: ../Script/UI/Panel/see_character_info_panel.py:1023
 msgid "下一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1041
+#: ../Script/UI/Panel/see_character_info_panel.py:1092
 #, python-brace-format
 msgid "性别:{sex_config.name}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1042
+#: ../Script/UI/Panel/see_character_info_panel.py:1093
 #, python-brace-format
 msgid "年龄:{character_data.age}岁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1043
+#: ../Script/UI/Panel/see_character_info_panel.py:1094
 #, python-brace-format
 msgid "体力:({character_data.hit_point}/{character_data.hit_point_max})"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1044
+#: ../Script/UI/Panel/see_character_info_panel.py:1095
 #, python-brace-format
 msgid "气力:({character_data.mana_point}/{character_data.mana_point_max})"
 msgstr ""
@@ -303,41 +345,6 @@ msgstr ""
 #: ../Script/UI/Panel/see_clothing_info_panel.py:167
 #: ../Script/UI/Panel/see_clothing_info_panel.py:308
 msgid "保暖"
-msgstr ""
-
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
-msgid "可爱的"
-msgstr ""
-
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
-msgid "性感的"
-msgstr ""
-
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
-msgid "帅气的"
-msgstr ""
-
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
-msgid "清新的"
-msgstr ""
-
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
-msgid "典雅的"
-msgstr ""
-
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
-msgid "清洁的"
-msgstr ""
-
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
-msgid "保暖的"
 msgstr ""
 
 #: ../Script/UI/Panel/see_clothing_info_panel.py:244
@@ -797,79 +804,79 @@ msgstr ""
 msgid "时间:{year}年{month}月{day}日{hour}点{minute}分"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:55
+#: ../Script/Design/handle_instruct.py:56
 msgid "休息"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:67
+#: ../Script/Design/handle_instruct.py:68
 msgid "购买食物"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:74
+#: ../Script/Design/handle_instruct.py:75
 msgid "进食"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:80
+#: ../Script/Design/handle_instruct.py:81
 msgid "移动"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:87
+#: ../Script/Design/handle_instruct.py:88
 msgid "查看属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:98
+#: ../Script/Design/handle_instruct.py:99
 msgid "查看自身属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:107
+#: ../Script/Design/handle_instruct.py:108
 msgid "闲聊"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:120
+#: ../Script/Design/handle_instruct.py:121
 msgid "购买道具"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:127
+#: ../Script/Design/handle_instruct.py:128
 msgid "唱歌"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:141
+#: ../Script/Design/handle_instruct.py:142
 msgid "弹钢琴"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:157
+#: ../Script/Design/handle_instruct.py:158
 msgid "摸头"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:170
+#: ../Script/Design/handle_instruct.py:171
 msgid "读写存档"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:177
+#: ../Script/Design/handle_instruct.py:178
 msgid "睡觉"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:189
+#: ../Script/Design/handle_instruct.py:193
 msgid "喝泉水"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:199
+#: ../Script/Design/handle_instruct.py:203
 msgid "喝到了奇怪的泉水！身体变化了！！！"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:215
+#: ../Script/Design/handle_instruct.py:219
 msgid "喝到了甜甜的泉水～"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:222
+#: ../Script/Design/handle_instruct.py:226
 msgid "拥抱"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:237
+#: ../Script/Design/handle_instruct.py:241
 msgid "亲吻"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:253
+#: ../Script/Design/handle_instruct.py:257
 msgid "牵手"
 msgstr ""
 

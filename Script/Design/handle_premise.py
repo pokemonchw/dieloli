@@ -690,8 +690,11 @@ def handle_leave_player_scene(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    now_character_data = cache.character_data[character_id]
-    if now_character_data.behavior.move_src == cache.character_data[0].position:
+    now_character_data: game_type.Character = cache.character_data[character_id]
+    if (
+        now_character_data.behavior.move_src == cache.character_data[0].position
+        and now_character_data.behavior.move_target != cache.character_data[0].position
+    ):
         return 1
     return 0
 
