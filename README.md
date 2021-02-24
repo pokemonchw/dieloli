@@ -44,7 +44,7 @@ Memory: \
 
 依赖
 ----
-python3.9.0
+python3.8.0
 
 建议通过::
 
