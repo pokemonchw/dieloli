@@ -15,8 +15,8 @@ from Script.Config import game_config, name_config
 _: FunctionType = get_text._
 """ 翻译api """
 
-if sys.version_info < (3, 9, 1):
-    print(_("python3版本过旧(低于python3.9.1),请升级"))
+if sys.version_info < (3, 8, 0):
+    print(_("python3版本过旧(低于python3.8.0),请升级"))
     exit(0)
 
 
