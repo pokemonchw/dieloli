@@ -495,6 +495,8 @@ class Character:
         """ 初吻对象 -1为无 """
         self.first_hand_in_hand: int = -1
         """ 初次牵手对象 -1为无 """
+        self.dead: bool = 0
+        """ 角色已死亡 """
 
 
 class Cache:
@@ -543,8 +545,6 @@ class Cache:
     """ 角色行为控制器数据 """
     settle_behavior_effect_data: Dict[int, FunctionType] = {}
     """ 角色行为结算处理器 处理器id:处理器 """
-    scene_path_edge: Dict[str, Dict[str, List[str]]] = {}
-    """ 所有场景间的寻路数据 当前场景id:目标场景id[当前移动目标场景id,当前移动时间] """
 
     def __init__(self):
         """ 游戏预设配置数据 """

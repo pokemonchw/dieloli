@@ -43,6 +43,7 @@ def init_character_behavior():
             break
         for character_id in cache.character_data:
             character_behavior(character_id, cache.game_time)
+            judge_character_dead(character_id)
     cache.over_behavior_character = set()
 
 
@@ -55,10 +56,15 @@ def character_behavior(character_id: int, now_time: datetime.datetime):
     """
     if character_id in cache.over_behavior_character:
         return
-    if cache.character_data[character_id].behavior.start_time == None:
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        if character_id not in cache.over_behavior_character:
+            cache.over_behavior_character.add(character_id)
+        return
+    if character_data.behavior.start_time == None:
         character.init_character_behavior_start_time(character_id, now_time)
     game_time.init_now_course_time_slice(character_id)
-    if cache.character_data[character_id].state == constant.CharacterStatus.STATUS_ARDER:
+    if character_data.state == constant.CharacterStatus.STATUS_ARDER:
         if character_id:
             character_target_judge(character_id, now_time)
         else:
@@ -87,6 +93,27 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
         else:
             next_time = game_time.get_sub_date(minute=1, old_date=start_time)
             cache.character_data[character_id].behavior.start_time = next_time
+
+
+def judge_character_dead(character_id: int):
+    """
+    校验角色状态并处死角色
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    character_data.status.setdefault(27, 0)
+    character_data.status.setdefault(28, 0)
+    if character_data.status[27] >= 100 or character_data.status[28] >= 100:
+        character_data.dead = 1
+        character_data.state = 13
+        return
+    if character_data.hit_point <= 0:
+        character_data.dead = 1
+        character_data.state = 13
+        return
 
 
 def judge_character_status(character_id: int, now_time: datetime.datetime) -> int:
@@ -174,7 +201,8 @@ def search_target(
                 now_weight += premise_judge
             else:
                 if premise in game_config.config_effect_target_data and premise not in premise_data:
-                    now_target_list = game_config.config_effect_target_data[premise]
+                    now_target_list = game_config.config_effect_target_data[premise] - null_target
+                    print(game_config.config_effect_target_data[premise], now_target_list, null_target)
                     now_target, now_target_weight, now_judge = search_target(
                         character_id, now_target_list, null_target, premise_data
                     )

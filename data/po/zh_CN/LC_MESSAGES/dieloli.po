@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-20 18:59+0800\n"
+"POT-Creation-Date: 2021-02-24 09:48+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,8 +34,8 @@ msgid "查看上级地图"
 msgstr ""
 
 #: ../Script/UI/Panel/see_map_panel.py:151
-#: ../Script/UI/Panel/see_character_info_panel.py:985
-#: ../Script/UI/Panel/see_character_info_panel.py:1025
+#: ../Script/UI/Panel/see_character_info_panel.py:989
+#: ../Script/UI/Panel/see_character_info_panel.py:1029
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
@@ -53,7 +53,7 @@ msgstr ""
 
 #: ../Script/UI/Panel/see_character_info_panel.py:46
 #: ../Script/UI/Panel/see_character_info_panel.py:61
-#: ../Script/UI/Panel/see_character_info_panel.py:1026
+#: ../Script/UI/Panel/see_character_info_panel.py:1030
 msgid "属性"
 msgstr ""
 
@@ -114,7 +114,7 @@ msgstr ""
 msgid "状态:{status_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:284
+#: ../Script/UI/Panel/see_character_info_panel.py:281
 msgid "人物属性"
 msgstr ""
 
@@ -160,104 +160,108 @@ msgstr ""
 msgid "保暖的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:392
-#: ../Script/UI/Panel/see_character_info_panel.py:405
-#: ../Script/UI/Panel/see_character_info_panel.py:414
-msgid "暂无"
+#: ../Script/UI/Panel/see_character_info_panel.py:309
+msgid "衣着"
 msgstr ""
 
 #: ../Script/UI/Panel/see_character_info_panel.py:396
+#: ../Script/UI/Panel/see_character_info_panel.py:409
+#: ../Script/UI/Panel/see_character_info_panel.py:418
+msgid "暂无"
+msgstr ""
+
+#: ../Script/UI/Panel/see_character_info_panel.py:400
 msgid "宿舍位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:399
+#: ../Script/UI/Panel/see_character_info_panel.py:403
 msgid "教室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:409
+#: ../Script/UI/Panel/see_character_info_panel.py:413
 msgid "办公室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:442
+#: ../Script/UI/Panel/see_character_info_panel.py:446
 #, python-brace-format
 msgid "年龄:{character_age}岁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:443
+#: ../Script/UI/Panel/see_character_info_panel.py:447
 #, python-brace-format
 msgid "生日:{birthday_month}月{birthday_day}日"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:474
+#: ../Script/UI/Panel/see_character_info_panel.py:478
 msgid "身高"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:476
+#: ../Script/UI/Panel/see_character_info_panel.py:480
 msgid "体重"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:479
+#: ../Script/UI/Panel/see_character_info_panel.py:483
 msgid "罩杯:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:513
+#: ../Script/UI/Panel/see_character_info_panel.py:517
 msgid "胸围:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:514
+#: ../Script/UI/Panel/see_character_info_panel.py:518
 msgid "腰围:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:515
+#: ../Script/UI/Panel/see_character_info_panel.py:519
 msgid "臀围"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:544
+#: ../Script/UI/Panel/see_character_info_panel.py:548
 msgid "嘴部开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:545
+#: ../Script/UI/Panel/see_character_info_panel.py:549
 msgid "胸部开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:546
+#: ../Script/UI/Panel/see_character_info_panel.py:550
 msgid "阴蒂开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:547
+#: ../Script/UI/Panel/see_character_info_panel.py:551
 msgid "阴茎开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:548
+#: ../Script/UI/Panel/see_character_info_panel.py:552
 msgid "阴道开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:549
+#: ../Script/UI/Panel/see_character_info_panel.py:553
 msgid "肛门开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:622
+#: ../Script/UI/Panel/see_character_info_panel.py:626
 msgid "人物技能"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:664
+#: ../Script/UI/Panel/see_character_info_panel.py:668
 msgid "人物语言"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:813
+#: ../Script/UI/Panel/see_character_info_panel.py:817
 msgid "人物性格"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:859
+#: ../Script/UI/Panel/see_character_info_panel.py:863
 msgid "空无一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:865
+#: ../Script/UI/Panel/see_character_info_panel.py:869
 msgid "人物社交"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:985
-#: ../Script/UI/Panel/see_character_info_panel.py:1025
+#: ../Script/UI/Panel/see_character_info_panel.py:989
+#: ../Script/UI/Panel/see_character_info_panel.py:1029
 #: ../Script/UI/Panel/see_clothing_info_panel.py:251
 #: ../Script/UI/Panel/food_shop_panel.py:73
 #: ../Script/UI/Panel/food_shop_panel.py:163
@@ -268,38 +272,38 @@ msgstr ""
 msgid "[返回]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1020
+#: ../Script/UI/Panel/see_character_info_panel.py:1024
 msgid "[上一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1020
+#: ../Script/UI/Panel/see_character_info_panel.py:1024
 msgid "上一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1023
+#: ../Script/UI/Panel/see_character_info_panel.py:1027
 msgid "[下一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1023
+#: ../Script/UI/Panel/see_character_info_panel.py:1027
 msgid "下一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1092
+#: ../Script/UI/Panel/see_character_info_panel.py:1096
 #, python-brace-format
 msgid "性别:{sex_config.name}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1093
+#: ../Script/UI/Panel/see_character_info_panel.py:1097
 #, python-brace-format
 msgid "年龄:{character_data.age}岁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1094
+#: ../Script/UI/Panel/see_character_info_panel.py:1098
 #, python-brace-format
 msgid "体力:({character_data.hit_point}/{character_data.hit_point_max})"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1095
+#: ../Script/UI/Panel/see_character_info_panel.py:1099
 #, python-brace-format
 msgid "气力:({character_data.mana_point}/{character_data.mana_point_max})"
 msgstr ""
@@ -494,11 +498,15 @@ msgstr ""
 msgid "场景"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:68
+#: ../Script/UI/Panel/in_scene_panel.py:61
+msgid "已死亡！"
+msgstr ""
+
+#: ../Script/UI/Panel/in_scene_panel.py:75
 msgid "当前位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:73
+#: ../Script/UI/Panel/in_scene_panel.py:80
 msgid "你在这里遇到了:"
 msgstr ""
 
@@ -878,6 +886,14 @@ msgstr ""
 
 #: ../Script/Design/handle_instruct.py:257
 msgid "牵手"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:273
+msgid "抚摸"
+msgstr ""
+
+#: ../Script/Design/handle_instruct.py:289
+msgid "摸胸"
 msgstr ""
 
 #: ../Script/Core/flow_handle.py:262 ../Script/Core/flow_handle.py:283
@@ -1971,6 +1987,18 @@ msgstr ""
 
 #: class:Status id:12 type:name
 msgid "牵手"
+msgstr ""
+
+#: class:Status id:13 type:name
+msgid "死亡"
+msgstr ""
+
+#: class:Status id:14 type:name
+msgid "抚摸"
+msgstr ""
+
+#: class:Status id:15 type:name
+msgid "摸胸"
 msgstr ""
 
 #: class:InstructType id:0 type:name
@@ -3545,6 +3573,62 @@ msgstr ""
 msgid "{Name}轻声的唱着歌"
 msgstr ""
 
+#: class:Talk id:default_stroke0 type:context
+msgid "{TargetName}满脸厌恶地拍开了{PlayerNickName}的手"
+msgstr ""
+
+#: class:Talk id:default_stroke1 type:context
+msgid "{TargetName}冷冷的盯着{PlayerNickName}\n{PlayerNickName}只好悻悻地收回了手"
+msgstr ""
+
+#: class:Talk id:default_stroke2 type:context
+msgid "{TargetName}冷冷的看了眼{PlayerNickName}伸出的手\n{PlayerNickName}被{TargetName}一脚踹倒在了地上"
+msgstr ""
+
+#: class:Talk id:default_stroke3 type:context
+msgid "{TargetName}狠狠的打了{PlayerNickName}一巴掌后一脚将{PlayerNickName}踹翻在地"
+msgstr ""
+
+#: class:Talk id:default_stroke4 type:context
+msgid "{TargetName}一把拍开了{PlayerNickName}的手，并朝着{PlayerNickName}的脸吐了口口水"
+msgstr ""
+
+#: class:Talk id:default_stroke5 type:context
+msgid "「真恶心」\n{TargetName}满脸厌恶地躲开了{PlayerNickName}的手"
+msgstr ""
+
+#: class:Talk id:default_stroke6 type:context
+msgid "「你想做什么？」\n{TargetName}冷冷地抓住了{PlayerNickName}的手"
+msgstr ""
+
+#: class:Talk id:default_stroke7 type:context
+msgid "「变态！」\n{TargetName}满脸通红地瞪着{PlayerNickName}"
+msgstr ""
+
+#: class:Talk id:default_stroke8 type:context
+msgid "{PlayerNickName}将{TargetName}抱到了怀里\n察觉到{PlayerNickName}的手在自己身上不老实地摸来摸去，{TargetName}有些难受的摩擦起了双腿"
+msgstr ""
+
+#: class:Talk id:default_stroke9 type:context
+msgid "「嗯～啊～」\n{TargetName}赤裸的身体在{PlayerNickName}的手中不停地扭动着"
+msgstr ""
+
+#: class:Talk id:default_stroke10 type:context
+msgid "{TargetName}两眼水汪汪的看着{PlayerNickName}\n「不，不要摸那里，求你了」"
+msgstr ""
+
+#: class:Talk id:default_stroke11 type:context
+msgid "{Name}轻轻的抚摸着{PlayerNickName}的身体"
+msgstr ""
+
+#: class:Talk id:default_stroke12 type:context
+msgid "{Name}轻轻的抚摸着{PlayerNickName}娇小的身躯"
+msgstr ""
+
+#: class:Talk id:default_stroke13 type:context
+msgid "{Name}想要抚摸{PlayerNickName}的身体，却被{PlayerNickName}躲开了"
+msgstr ""
+
 #: class:Talk id:default_touch_head0 type:context
 msgid "{PlayerNickName}伸出手想要摸{TargetName}的头\n被{TargetName}毫不犹豫的把手拍开了"
 msgstr ""
@@ -3823,6 +3907,38 @@ msgstr ""
 
 #: class:Talk id:default_eat6 type:context
 msgid "{Name}吃了一些{FoodName}"
+msgstr ""
+
+#: class:Talk id:default_touch_chest0 type:context
+msgid "{PlayerNickName}伸出手想要去抓{TargetName}的胸部\n手被{TargetName}拍开了"
+msgstr ""
+
+#: class:Talk id:default_touch_chest1 type:context
+msgid "「嗯？」\n{TargetName}冷冷的瞪了{PlayerNickName}一眼"
+msgstr ""
+
+#: class:Talk id:default_touch_chest2 type:context
+msgid "「女生会对男生的胸部感兴趣吗？」\n{TargetName}露出了困扰的表情"
+msgstr ""
+
+#: class:Talk id:default_touch_chest3 type:context
+msgid "「滚！」\n{TargetName}瞪了{PlayerNickName}一眼后便转过身去"
+msgstr ""
+
+#: class:Talk id:default_touch_chest4 type:context
+msgid "{TargetName}主动将自己的搓衣板贴紧{PlayerNickName}的手掌\n「是{PlayerNickName}的话……没问题的！」\n{TargetName}抓住了{PlayerNickName}的手臂，双手使劲帮助{PlayerNickName}揉蹭自己的胸口"
+msgstr ""
+
+#: class:Talk id:default_touch_chest5 type:context
+msgid "{PlayerNickName}熟练的搓弄着{TargetName}的胸口\n看着{TargetName}红着脸十分难受的扭动着身体的样子\n{PlayerNickName}的嘴角不禁微微扬起"
+msgstr ""
+
+#: class:Talk id:default_touch_chest6 type:context
+msgid "{TargetName}娇小的身体在{PlayerNickName}的抚摸下不停的颤抖着"
+msgstr ""
+
+#: class:Talk id:default_touch_chest7 type:context
+msgid "{Name}痴迷地抚摸着{PlayerNickName}的身体"
 msgstr ""
 
 #: class:Talk id:default_hand_in_hand0 type:context

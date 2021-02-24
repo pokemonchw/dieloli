@@ -52,9 +52,9 @@ def character_move(character_id: str, target_scene: list) -> (str, list, list, i
     now_position_str = map_handle.get_map_system_path_str_for_list(now_position)
     target_scene_str = map_handle.get_map_system_path_str_for_list(target_scene)
     if (
-        now_position_str not in cache.scene_path_edge
-        or target_scene_str not in cache.scene_path_edge[now_position_str]
+        now_position_str not in map_handle.scene_path_edge
+        or target_scene_str not in map_handle.scene_path_edge[now_position_str]
     ):
         return "null", [], [], 0
-    now_path_data = cache.scene_path_edge[now_position_str][target_scene_str]
-    return "", [], map_handle.get_map_system_path_for_str(now_path_data[0]), now_path_data[1]
+    now_path_data = map_handle.scene_path_edge[now_position_str][target_scene_str]
+    return "", [], now_path_data[0], now_path_data[1]

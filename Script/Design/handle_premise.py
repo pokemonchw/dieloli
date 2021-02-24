@@ -1,5 +1,6 @@
 import math
 import datetime
+from uuid import UUID
 from functools import wraps
 from types import FunctionType
 from Script.Core import cache_control, constant, game_type
@@ -134,7 +135,7 @@ def handle_hunger(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     character_data.status.setdefault(27, 0)
-    return math.floor(character_data.status[27] / 10)
+    return math.floor(character_data.status[27]) * 10
 
 
 @add_premise(constant.Premise.HAVE_FOOD)
@@ -675,7 +676,7 @@ def handle_in_player_scene(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    now_character_data = cache.character_data[character_id]
+    now_character_data: game_type.Character = cache.character_data[character_id]
     if now_character_data.position == cache.character_data[0].position:
         return 1
     return 0
@@ -694,6 +695,7 @@ def handle_leave_player_scene(character_id: int) -> int:
     if (
         now_character_data.behavior.move_src == cache.character_data[0].position
         and now_character_data.behavior.move_target != cache.character_data[0].position
+        and now_character_data.position != cache.character_data[0].position
     ):
         return 1
     return 0
@@ -1789,3 +1791,141 @@ def handle_have_like_target_no_first_kiss(character_id: int) -> int:
             if c_data.first_kiss == -1:
                 character_index += 1
     return character_index
+
+
+@add_premise(constant.Premise.TARGET_IS_APATHY)
+def handle_target_is_apathy(character_id: int) -> int:
+    """
+    校验交互对象是否是一个冷漠的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[15] < 50
+
+
+@add_premise(constant.Premise.TARGET_UNARMED_COMBAT_IS_HIGHT)
+def handle_target_unarmed_combat_is_hight(character_id: int) -> int:
+    """
+    校验交互对象徒手格斗技能是否比自己高
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    character_data.knowledge.setdefault(32, 0)
+    target_data.knowledge.setdefault(32, 0)
+    character_level = attr_calculation.get_experience_level_weight(character_data.knowledge[32])
+    target_level = attr_calculation.get_experience_level_weight(target_data.knowledge[32])
+    if target_level > character_level:
+        return target_level - character_level
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_DISGUST_IS_HIGHT)
+def handle_target_disgust_is_hight(character_id: int) -> int:
+    """
+    校验交互对象是否反感情绪高涨
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.status.setdefault(12, 0)
+    return target_data.status[12]
+
+
+@add_premise(constant.Premise.TARGET_LUST_IS_HIGHT)
+def handle_target_lust_is_hight(character_id: int) -> int:
+    """
+    校验交互对象是否色欲高涨
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.status.setdefault(21, 0)
+    return target_data.status[21]
+
+
+@add_premise(constant.Premise.TARGET_IS_WOMAN)
+def handle_target_is_woman(character_id: int) -> int:
+    """
+    校验交互对象是否是女性
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.sex == 1
+
+
+@add_premise(constant.Premise.TARGET_IS_NAKED)
+def handle_target_is_naked(character_id: int) -> int:
+    """
+    校验交互对象是否一丝不挂
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.tar]
+    for i in target_data.put_on:
+        if isinstance(target_data.put_on[i], UUID):
+            return 0
+    return 1
+
+
+@add_premise(constant.Premise.TARGET_CLITORIS_LEVEL_IS_HIGHT)
+def handle_target_clitoris_is_hight(character_id: int) -> int:
+    """
+    校验交互对象是否阴蒂开发度高
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.sex_experience.setdefault(2, 0)
+    return attr_calculation.get_experience_level_weight(target_data.sex_experience[2])
+
+
+@add_premise(constant.Premise.TARGET_IS_MAN)
+def handle_target_is_man(character_id: int) -> int:
+    """
+    校验交互对象是否是男性
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return not target_data.sex
+
+
+@add_premise(constant.Premise.SEX_EXPERIENCE_IS_HIGHT)
+def handle_sex_experience_is_hight(character_id: int) -> int:
+    """
+    校验角色是否性技熟练
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.knowledge.setdefault(9, 0)
+    return attr_calculation.get_experience_level_weight(character_data.knowledge[9])

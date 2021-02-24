@@ -1,5 +1,6 @@
 import os
 import configparser
+import time
 from typing import Dict, List, Set
 from Script.Config import config_def
 from Script.Core import game_type, json_handle, get_text

@@ -265,3 +265,35 @@ def handle_handle_in_handle():
     character_data.behavior.behavior_id = constant.Behavior.HAND_IN_HAND
     character_data.state = constant.CharacterStatus.STATUS_HAND_IN_HAND
     update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.STROKE,
+    constant.InstructType.OBSCENITY,
+    _("抚摸"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_stroke():
+    """ 处理抚摸指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.STROKE
+    character_data.state = constant.CharacterStatus.STATUS_STROKE
+    update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.TOUCH_HEAD,
+    constant.InstructType.SEX,
+    _("摸胸"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_touch_chest():
+    """ 处理摸胸指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.TOUCH_CHEST
+    character_data.state = constant.CharacterStatus.STATUS_TOUCH_CHEST
+    update.game_update_flow(10)

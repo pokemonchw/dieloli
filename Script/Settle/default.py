@@ -1,6 +1,13 @@
 import datetime
 from types import FunctionType
-from Script.Design import settle_behavior, character, character_handle, map_handle, attr_calculation
+from Script.Design import (
+    settle_behavior,
+    character,
+    character_handle,
+    map_handle,
+    attr_calculation,
+    game_time,
+)
 from Script.Core import cache_control, constant, game_type, get_text
 from Script.Config import game_config, normal_config
 from Script.UI.Moudle import draw
@@ -408,7 +415,7 @@ def handle_add_small_mouth_sex_experience(
     character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
 ):
     """
-    增加少量嘴部性爱技能经验
+    增加少量嘴部性爱经验
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -450,10 +457,16 @@ def handle_add_small_mouth_happy_experience(
         character_happy = add_time
         target_happy = add_time
         character_data.sex_experience.setdefault(0, 0)
-        character_happy *= 1 + attr_calculation.get_experience_level_weight(
-            character_data.sex_experience[0]
+        character_happy *= (
+            1
+            + attr_calculation.get_experience_level_weight(character_data.sex_experience[0])
+            + character_data.status[0] / 100
         )
-        target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[0])
+        target_happy *= (
+            1
+            + attr_calculation.get_experience_level_weight(target_data.sex_experience[0])
+            + target_data.status[0] / 100
+        )
         character_data.knowledge.setdefault(9, 0)
         target_data.knowledge.setdefault(9, 0)
         character_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.knowledge[9])
@@ -559,3 +572,258 @@ def handle_add_medium_mana_point(
         add_mana_point -= character_data.mana_point - character_data.mana_point_max
         character_data.mana_point = character_data.mana_point_max
     change_data.mana_point += add_mana_point
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_CHEST_SEX_EXPERIENCE)
+def handle_target_add_small_chest_sex_experience(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
+):
+    """
+    交互对象增加少量胸部性爱经验
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.social_contact_data.setdefault(character_id, 0)
+    if target_data.social_contact_data[character_id] >= 3:
+        target_data.sex_experience.setdefault(1, 0)
+        target_data.sex_experience[1] += add_time
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
+        target_change.sex_experience.setdefault(1, 0)
+        target_change.sex_experience[1] += add_time
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_CHEST_HAPPY)
+def handle_target_add_small_mouth_happy(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
+):
+    """
+    交互对象增加少量胸部快感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.social_contact_data.setdefault(character_id, 0)
+    if target_data.social_contact_data[character_id] >= 3:
+        target_data.status.setdefault(1, 0)
+        target_happy = add_time
+        target_data.sex_experience.setdefault(1, 0)
+        target_happy *= (
+            1
+            + attr_calculation.get_experience_level_weight(target_data.sex_experience[1])
+            + target_data.status[1] / 100
+        )
+        character_data.knowledge.setdefault(9, 0)
+        target_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+        target_data.status[1] += target_happy
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
+        target_change.status.setdefault(1, 0)
+        target_change.status[1] += target_happy
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_PENIS_SEX_EXPERIENCE)
+def handle_target_add_small_penis_sex_experience(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
+):
+    """
+    交互对象增加少量阴茎性爱经验
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.sex in {1, 3}:
+        return
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.social_contact_data.setdefault(character_id, 0)
+    if target_data.social_contact_data[character_id] >= 3:
+        target_data.sex_experience.setdefault(3, 0)
+        target_data.sex_experience[3] += add_time
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
+        target_change.sex_experience.setdefault(3, 0)
+        target_change.sex_experience[3] += add_time
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_PENIS_HAPPY)
+def handle_target_add_small_penis_happy(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
+):
+    """
+    交互对象增加少量阴茎快感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.sex in {1, 3}:
+        return
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.social_contact_data.setdefault(character_id, 0)
+    if target_data.social_contact_data[character_id] >= 3:
+        target_data.status.setdefault(5, 0)
+        target_happy = add_time
+        target_data.sex_experience.setdefault(3, 0)
+        target_happy *= (
+            1
+            + attr_calculation.get_experience_level_weight(target_data.sex_experience[3])
+            + target_data.status[5] / 100
+        )
+        character_data.knowledge.setdefault(9, 0)
+        target_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+        target_data.status[5] += target_happy
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
+        target_change.status.setdefault(5, 0)
+        target_change.status[5] += target_happy
+
+
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.TARGET_ADD_SMALL_CLITORIS_SEX_EXPERIENCE
+)
+def handle_target_add_small_clitoris_sex_experience(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
+):
+    """
+    交互对象增加少量阴蒂性爱经验
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.sex in {0, 4}:
+        return
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.social_contact_data.setdefault(character_id, 0)
+    if target_data.social_contact_data[character_id] >= 3:
+        target_data.sex_experience.setdefault(2, 0)
+        target_data.sex_experience[2] += add_time
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
+        target_change.sex_experience.setdefault(2, 0)
+        target_change.sex_experience[2] += add_time
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_CLITORIS_HAPPY)
+def handle_target_add_small_clitoris_happy(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
+):
+    """
+    交互对象增加少量阴蒂快感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.sex in {0, 4}:
+        return
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.social_contact_data.setdefault(character_id, 0)
+    if target_data.social_contact_data[character_id] >= 3:
+        target_data.status.setdefault(3, 0)
+        target_happy = add_time
+        target_data.sex_experience.setdefault(2, 0)
+        target_happy *= (
+            1
+            + attr_calculation.get_experience_level_weight(target_data.sex_experience[2])
+            + target_data.status[3] / 100
+        )
+        character_data.knowledge.setdefault(9, 0)
+        target_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+        target_data.status[3] += target_happy
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
+        target_change.status.setdefault(3, 0)
+        target_change.status[3] += target_happy
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_LUST)
+def handle_add_small_lust(character_id: int, add_time: int, change_data: game_type.CharacterStatusChange):
+    """
+    自身增加少量色欲
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.status.setdefault(21, 0)
+    now_lust = character_data.status[21]
+    now_lust_multiple = 1 + now_lust / 10
+    character_data.knowledge.setdefault(9, 0)
+    now_add_lust = (add_time + character_data.knowledge[9]) * now_lust
+    character_data.status[21] += now_add_lust
+    change_data.status.setdefault(21, 0)
+    change_data.status[21] += now_add_lust
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_LUST)
+def handle_target_add_small_lust(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
+):
+    """
+    交互对象增加少量色欲
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.status.setdefault(21, 0)
+    target_data.social_contact_data.setdefault(character_id, 0)
+    if target_data.social_contact_data[character_id] >= 2:
+        now_lust = target_data.status[21]
+        now_lust_multiple = 1 + now_lust / 10
+        target_data.knowledge.setdefault(9, 0)
+        now_add_lust = (add_time + character_data.knowledge[9]) * now_lust
+        target_data.status[21] += now_add_lust
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
+        target_change.status.setdefault(21, 0)
+        target_change.status[21] += now_add_lust
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.INTERRUPT_TARGET_ACTIVITY)
+def handle_interrupt_target_activity(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange
+):
+    """
+    打断交互目标活动
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.state == constant.CharacterStatus.STATUS_DEAD:
+        return
+    if target_data.behavior.behavior_id:
+        if target_data.behavior.start_time <= character_data.behavior.start_time:
+            target_end_time = game_time.get_sub_date(
+                target_data.behavior.duration, old_date=target_data.behavior.start_time
+            )
+            if target_end_time >= character_data.behavior.start_time:
+                if target_data.behavior.behavior_id == constant.Behavior.MOVE:
+                    target_data.behavior = game_type.Behavior()
+                    target_data.state = constant.CharacterStatus.STATUS_ARDER
+                    character.init_character_behavior_start_time(
+                        target_data.cid, character_data.behavior.start_time
+                    )
+                else:
+                    settle_behavior.handle_settle_behavior(
+                        target_data.cid, character_data.behavior.start_time
+                    )

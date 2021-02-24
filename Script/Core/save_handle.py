@@ -50,7 +50,7 @@ def establish_save(save_id: str):
         "save_time": datetime.datetime.now(),
     }
     data = {
-        "1": cache,
+        "1": cache.__dict__,
         "0": save_verson,
     }
     for data_id in data:
@@ -85,7 +85,7 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
         pickle.dump(write_data, f)
 
 
-def load_save(save_id: str) -> game_type.Cache:
+def load_save(save_id: str) -> dict:
     """
     按存档id读取存档数据
     Keyword arguments:
@@ -105,8 +105,7 @@ def input_load_save(save_id: str):
     Keyword arguments:
     save_id -- 存档id
     """
-    cache.__dict__ = load_save(save_id).__dict__
-    character_handle.init_character_position()
+    cache.__dict__ = load_save(save_id)
 
 
 def remove_save(save_id: str):

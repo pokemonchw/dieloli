@@ -50,6 +50,12 @@ class CharacterStatus:
     """ 亲吻 """
     STATUS_HAND_IN_HAND = 12
     """ 牵手 """
+    STATUS_DEAD = 13
+    """ 死亡 """
+    STATUS_STROKE = 14
+    """ 抚摸 """
+    STATUS_TOUCH_CHEST = 15
+    """ 摸胸 """
 
 
 class Behavior:
@@ -81,6 +87,12 @@ class Behavior:
     """ 亲吻 """
     HAND_IN_HAND = 12
     """ 牵手 """
+    DEAD = 13
+    """ 死亡 """
+    STROKE = 14
+    """ 抚摸 """
+    TOUCH_CHEST = 15
+    """ 摸胸 """
 
 
 class StateMachine:
@@ -394,6 +406,24 @@ class Premise:
     """ 有自己喜欢的还是初吻的人在场景中 """
     HAVE_LIKE_TARGET_NO_FIRST_KISS = 112
     """ 有自己喜欢的人的初吻还在 """
+    TARGET_IS_APATHY = 113
+    """ 交互对象是一个冷漠的人 """
+    TARGET_UNARMED_COMBAT_IS_HIGHT = 114
+    """ 交互对象徒手格斗技能比自己高 """
+    TARGET_DISGUST_IS_HIGHT = 115
+    """ 交互对象反感情绪高涨 """
+    TARGET_LUST_IS_HIGHT = 116
+    """ 交互对象色欲高涨 """
+    TARGET_IS_WOMAN = 117
+    """ 交互对象是女性 """
+    TARGET_IS_NAKED = 118
+    """ 交互对象一丝不挂 """
+    TARGET_CLITORIS_LEVEL_IS_HIGHT = 119
+    """ 交互对象阴蒂开发度高 """
+    TARGET_IS_MAN = 120
+    """ 交互对象是男性 """
+    SEX_EXPERIENCE_IS_HIGHT = 121
+    """ 性技熟练 """
 
 
 class BehaviorEffect:
@@ -443,6 +473,24 @@ class BehaviorEffect:
     """ 增加中量体力 """
     ADD_MEDIUM_MANA_POINT = 21
     """ 增加中量气力 """
+    TARGET_ADD_SMALL_CHEST_SEX_EXPERIENCE = 22
+    """ 交互对象增加少量胸部性爱经验 """
+    TARGET_ADD_SMALL_CHEST_HAPPY = 23
+    """ 交互对象增加少量胸部快感 """
+    TARGET_ADD_SMALL_CLITORIS_SEX_EXPERIENCE = 24
+    """ 交互对象增加少量阴蒂性爱经验 """
+    TARGET_ADD_SMALL_PENIS_SEX_EXPERIENCE = 25
+    """ 交互对象增加少量阴茎性爱经验 """
+    TARGET_ADD_SMALL_CLITORIS_HAPPY = 26
+    """ 交互对象增加少量阴蒂快感 """
+    TARGET_ADD_SMALL_PENIS_HAPPY = 27
+    """ 交互对象增加少量阴茎经验 """
+    ADD_SMALL_LUST = 28
+    """ 自身增加少量色欲 """
+    TARGET_ADD_SMALL_LUST = 29
+    """ 交互对象增加少量色欲 """
+    INTERRUPT_TARGET_ACTIVITY = 30
+    """ 打断交互对象活动 """
 
 
 class InstructType:
@@ -487,6 +535,8 @@ class Instruct:
     """ 弹钢琴 """
     TOUCH_HEAD = 0
     """ 摸头 """
+    STROKE = 0
+    """ 抚摸 """
     HAND_IN_HAND = 0
     """ 牵手 """
     EMBRACE = 0

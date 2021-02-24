@@ -253,7 +253,7 @@ class CharacterInfoHead:
         hp_draw.set(
             "HitPointbar",
             character_data.hit_point_max,
-            character_data.hit_point,
+            int(character_data.hit_point),
             _("体力"),
         )
         mp_draw = draw.InfoBarDraw()
@@ -262,7 +262,7 @@ class CharacterInfoHead:
         mp_draw.set(
             "ManaPointbar",
             character_data.mana_point_max,
-            character_data.mana_point,
+            int(character_data.mana_point),
             _("气力"),
         )
         status_text = game_config.config_status[character_data.state].name
@@ -274,9 +274,6 @@ class CharacterInfoHead:
             (status_draw, mp_draw),
         ]
         """ 要绘制的面板列表 """
-        wear_clothiong_list = CharacterWearClothingList(character_id, width)
-        wear_clothiong_tuple_list = [tuple(i) for i in wear_clothiong_list.draw_list]
-        self.draw_list.extend(wear_clothiong_tuple_list)
 
     def draw(self):
         """ 绘制面板 """
@@ -295,17 +292,23 @@ class CharacterWearClothingList:
     Keyword arguments:
     character_id -- 角色id
     width -- 最大宽度
+    column -- 每行服装最大个数
     """
 
-    def __init__(self, character_id: int, width: int):
+    def __init__(self, character_id: int, width: int, column: int):
         """ 初始化绘制对象 """
         self.character_id: int = character_id
         """ 要绘制的角色id """
         self.width: int = width
         """ 当前最大可绘制宽度 """
+        self.column: int = column
+        """ 每行服装最大个数 """
         character_data: game_type.Character = cache.character_data[character_id]
         describe_list = [_("可爱的"), _("性感的"), _("帅气的"), _("清新的"), _("典雅的"), _("清洁的"), _("保暖的")]
         clothing_info_list = []
+        title_draw = draw.LittleTitleLineDraw(_("衣着"), width, ":")
+        self.draw_list = [title_draw]
+        """ 绘制的对象列表 """
         for clothing_type in game_config.config_clothing_type:
             if clothing_type in character_data.put_on and isinstance(
                 character_data.put_on[clothing_type], UUID
@@ -327,9 +330,8 @@ class CharacterWearClothingList:
                 clothing_name = f"[{now_clothing.evaluation}{describe}{now_clothing_config.name}]"
                 clothing_info_list.append(clothing_name)
         now_draw = panel.CenterDrawTextListPanel()
-        now_draw.set(clothing_info_list, self.width, 4)
-        self.draw_list = now_draw.draw_list
-        """ 绘制的对象列表 """
+        now_draw.set(clothing_info_list, self.width, self.column)
+        self.draw_list.extend(now_draw.draw_list)
 
     def draw(self):
         """ 绘制对象 """
