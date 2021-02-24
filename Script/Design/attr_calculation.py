@@ -46,7 +46,7 @@ def get_end_age(sex: int) -> int:
     return random.randint(int(tem_value * 0.5), int(tem_value * 1.5))
 
 
-def get_height(tem_name: int, age: int) -> dict:
+def get_height(tem_name: int, age: int) -> game_type.Height:
     """
     按模板和年龄计算身高
     Keyword arguments:
@@ -309,30 +309,62 @@ def get_sex_experience(tem_name: int, sex: int) -> dict:
     return sex_experience_data
 
 
-def judge_grade(experience: int) -> float:
+def get_experience_level_weight(experience: int) -> int:
+    """
+    按经验计算技能等级权重
+    Keyword arguments:
+    experience -- 经验数值
+    Return arguments:
+    int -- 权重
+    """
+    grade = 0
+    if experience < 100:
+        grade = 0
+    elif experience < 500:
+        grade = 1
+    elif experience < 1000:
+        grade = 2
+    elif experience < 2000:
+        grade = 3
+    elif experience < 3000:
+        grade = 4
+    elif experience < 5000:
+        grade = 5
+    elif experience < 10000:
+        grade = 6
+    elif experience < 20000:
+        grade = 7
+    elif experience >= 20000:
+        grade = 8
+    return grade
+
+
+def judge_grade(experience: int) -> str:
     """
     按经验数值评定等级
     Keyword arguments:
     experience -- 经验数值
+    Return arguments:
+    str -- 评级
     """
     grade = ""
-    if experience < 50:
+    if experience < 100:
         grade = "G"
-    elif experience < 100:
-        grade = "F"
-    elif experience < 200:
-        grade = "E"
     elif experience < 500:
-        grade = "D"
+        grade = "F"
     elif experience < 1000:
-        grade = "C"
+        grade = "E"
     elif experience < 2000:
-        grade = "B"
+        grade = "D"
+    elif experience < 3000:
+        grade = "C"
     elif experience < 5000:
-        grade = "A"
+        grade = "B"
     elif experience < 10000:
+        grade = "A"
+    elif experience < 20000:
         grade = "S"
-    elif experience >= 10000:
+    elif experience >= 20000:
         grade = "EX"
     return grade
 

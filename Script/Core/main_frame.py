@@ -4,6 +4,7 @@ import json
 import uuid
 import psutil
 import signal
+import time
 from tkinter import (
     ttk,
     Tk,
@@ -44,12 +45,16 @@ def close_window():
 game_name = normal_config.config_normal.game_name
 root = Tk()
 root.title(game_name)
-root.geometry(
-    str(normal_config.config_normal.window_width)
-    + "x"
-    + str(normal_config.config_normal.window_hight)
-    + "+0+0"
-)
+width = normal_config.config_normal.window_width
+frm_width = root.winfo_rootx() - root.winfo_x()
+win_width = width + 2 * frm_width
+height = normal_config.config_normal.window_hight
+titlebar_height = root.winfo_rooty() - root.winfo_y()
+win_height = height + titlebar_height + frm_width
+x = root.winfo_screenwidth() // 2 - win_width // 2
+y = root.winfo_screenheight() // 2 - win_height // 2
+root.geometry("{}x{}+{}+{}".format(width, height, x, y))
+root.deiconify()
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 root.protocol("WM_DELETE_WINDOW", close_window)
@@ -79,6 +84,7 @@ order_font_data = game_config.config_font[1]
 for k in game_config.config_font[0].__dict__:
     if k not in order_font_data.__dict__:
         order_font_data.__dict__[k] = game_config.config_font[0].__dict__[k]
+        order_font_data.font_size = normal_config.config_normal.order_font_size
 input_background_box = Text(
     main_frame,
     highlightbackground=normal_config.config_normal.background,
@@ -157,19 +163,19 @@ def read_queue():
         quene_str = main_queue.get()
         json_data = json.loads(quene_str)
 
-        if "clear_cmd" in json_data.keys() and json_data["clear_cmd"] == "true":
+        if "clear_cmd" in json_data and json_data["clear_cmd"] == "true":
             clear_screen()
-        if "clearorder_cmd" in json_data.keys() and json_data["clearorder_cmd"] == "true":
+        if "clearorder_cmd" in json_data and json_data["clearorder_cmd"] == "true":
             clear_order()
-        if "clearcmd_cmd" in json_data.keys():
+        if "clearcmd_cmd" in json_data:
             cmd_nums = json_data["clearcmd_cmd"]
             if cmd_nums == "all":
                 io_clear_cmd()
             else:
                 io_clear_cmd(tuple(cmd_nums))
-        if "bgcolor" in json_data.keys():
+        if "bgcolor" in json_data:
             set_background(json_data["bgcolor"])
-        if "set_style" in json_data.keys():
+        if "set_style" in json_data:
             temp = json_data["set_style"]
             frame_style_def(
                 temp["style_name"],
@@ -181,7 +187,7 @@ def read_queue():
                 temp["underline"],
                 temp["italic"],
             )
-        if "image" in json_data.keys():
+        if "image" in json_data:
             from Script.Core import era_image
 
             era_image.print_image(
@@ -194,14 +200,14 @@ def read_queue():
                 now_print(c["text"], style=tuple(c["style"]))
             if c["type"] == "cmd":
                 io_print_cmd(c["text"], c["num"], c["normal_style"], c["on_style"])
-    root.after(10, read_queue)
+    root.after(1, read_queue)
 
 
 def run():
     """
     启动屏幕
     """
-    root.after(10, read_queue)
+    root.after(1, read_queue)
     root.mainloop()
 
 

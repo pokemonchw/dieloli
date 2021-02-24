@@ -2,6 +2,9 @@ import os
 import random
 import datetime
 import time
+import asyncio
+from types import FunctionType
+from typing import Dict
 from functools import wraps
 from Script.Core import (
     cache_control,
@@ -9,6 +12,7 @@ from Script.Core import (
     game_type,
     constant,
     value_handle,
+    get_text,
 )
 from Script.Design import (
     settle_behavior,
@@ -18,11 +22,16 @@ from Script.Design import (
     talk,
     map_handle,
 )
-from Script.Config import game_config
+from Script.Config import game_config, normal_config
+from Script.UI.Moudle import draw
 
 game_path = game_path_config.game_path
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+_: FunctionType = get_text._
+""" 翻译api """
+window_width: int = normal_config.config_normal.text_width
+""" 窗体宽度 """
 
 
 def init_character_behavior():
@@ -34,7 +43,8 @@ def init_character_behavior():
             break
         for character_id in cache.character_data:
             character_behavior(character_id, cache.game_time)
-    cache.over_behavior_character = {}
+            judge_character_dead(character_id)
+    cache.over_behavior_character = set()
 
 
 def character_behavior(character_id: int, now_time: datetime.datetime):
@@ -46,18 +56,23 @@ def character_behavior(character_id: int, now_time: datetime.datetime):
     """
     if character_id in cache.over_behavior_character:
         return
-    if cache.character_data[character_id].behavior.start_time == None:
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        if character_id not in cache.over_behavior_character:
+            cache.over_behavior_character.add(character_id)
+        return
+    if character_data.behavior.start_time == None:
         character.init_character_behavior_start_time(character_id, now_time)
     game_time.init_now_course_time_slice(character_id)
-    if cache.character_data[character_id].state == constant.CharacterStatus.STATUS_ARDER:
+    if character_data.state == constant.CharacterStatus.STATUS_ARDER:
         if character_id:
             character_target_judge(character_id, now_time)
         else:
-            cache.over_behavior_character[0] = 1
+            cache.over_behavior_character.add(0)
     else:
         status_judge = judge_character_status(character_id, now_time)
         if status_judge:
-            cache.over_behavior_character[character_id] = 1
+            cache.over_behavior_character.add(character_id)
 
 
 def character_target_judge(character_id: int, now_time: datetime.datetime):
@@ -66,7 +81,7 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
     Keyword arguments:
     character_id -- 角色id
     """
-    target, _, judge = search_target(character_id, list(game_config.config_target.keys()), set())
+    target, _, judge = search_target(character_id, list(game_config.config_target.keys()), set(), {})
     if judge:
         target_config = game_config.config_target[target]
         cache.handle_state_machine_data[target_config.state_machine_id](character_id)
@@ -74,10 +89,31 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
         start_time = cache.character_data[character_id].behavior.start_time
         now_judge = game_time.judge_date_big_or_small(start_time, now_time)
         if now_judge:
-            cache.over_behavior_character[character_id] = 1
+            cache.over_behavior_character.add(character_id)
         else:
             next_time = game_time.get_sub_date(minute=1, old_date=start_time)
             cache.character_data[character_id].behavior.start_time = next_time
+
+
+def judge_character_dead(character_id: int):
+    """
+    校验角色状态并处死角色
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    character_data.status.setdefault(27, 0)
+    character_data.status.setdefault(28, 0)
+    if character_data.status[27] >= 100 or character_data.status[28] >= 100:
+        character_data.dead = 1
+        character_data.state = 13
+        return
+    if character_data.hit_point <= 0:
+        character_data.dead = 1
+        character_data.state = 13
+        return
 
 
 def judge_character_status(character_id: int, now_time: datetime.datetime) -> int:
@@ -100,14 +136,19 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
         end_time = now_time
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
     add_time = (end_time.timestamp() - start_time.timestamp()) / 60
+    if not add_time:
+        character_data.behavior = game_type.Behavior()
+        character_data.behavior.start_time = end_time
+        character_data.state = constant.CharacterStatus.STATUS_ARDER
+        return 1
     character_data.status.setdefault(27, 0)
     character_data.status.setdefault(28, 0)
     character_data.status[27] += add_time * 0.02
     character_data.status[28] += add_time * 0.02
     if time_judge:
+        settle_behavior.handle_settle_behavior(character_id, end_time)
         talk.handle_talk(character_id)
-        settle_behavior.handle_settle_behavior(character_id, now_time)
-        character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
+        character_data.behavior = game_type.Behavior()
         character_data.state = constant.CharacterStatus.STATUS_ARDER
     if time_judge == 1:
         character_data.behavior.start_time = end_time
@@ -118,13 +159,16 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
     return 1
 
 
-def search_target(character_id: int, target_list: list, null_target: set) -> (int, int, bool):
+def search_target(
+    character_id: int, target_list: list, null_target: set, premise_data: Dict[int, int]
+) -> (int, int, bool):
     """
     查找可用目标
     Keyword arguments:
     character_id -- 角色id
     target_list -- 检索的目标列表
     null_target -- 被排除的目标
+    premise_data -- 已算出的前提权重
     Return arguments:
     int -- 目标id
     int -- 目标权重
@@ -137,21 +181,30 @@ def search_target(character_id: int, target_list: list, null_target: set) -> (in
             continue
         if target == 7:
             now_test_judge = 1
+        if target not in game_config.config_target_premise_data:
+            target_data.setdefault(1, set())
+            target_data[1].add(target)
+            continue
         target_premise_list = game_config.config_target_premise_data[target]
         now_weight = 0
         now_target_pass_judge = 0
         now_target_data = {}
         premise_judge = 1
         for premise in target_premise_list:
-            premise_judge = handle_premise.handle_premise(premise, character_id)
+            premise_judge = 0
+            if premise in premise_data:
+                premise_judge = premise_data[premise]
+            else:
+                premise_judge = handle_premise.handle_premise(premise, character_id)
+                premise_data[premise] = premise_judge
             if premise_judge:
                 now_weight += premise_judge
             else:
-                premise_judge = 0
-                if premise in game_config.config_effect_target_data:
-                    now_target_list = game_config.config_effect_target_data[premise]
+                if premise in game_config.config_effect_target_data and premise not in premise_data:
+                    now_target_list = game_config.config_effect_target_data[premise] - null_target
+                    print(game_config.config_effect_target_data[premise], now_target_list, null_target)
                     now_target, now_target_weight, now_judge = search_target(
-                        character_id, now_target_list, null_target
+                        character_id, now_target_list, null_target, premise_data
                     )
                     if now_judge:
                         now_target_data.setdefault(now_target_weight, set())

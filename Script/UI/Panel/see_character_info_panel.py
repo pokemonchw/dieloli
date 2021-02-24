@@ -100,6 +100,7 @@ class SeeCharacterInfoPanel:
         self.draw_data[self.now_panel].draw()
         self.return_list = []
         self.return_list.extend(self.draw_data[self.now_panel].return_list)
+        line_feed.draw()
         line = draw.LineDraw("=", self.width)
         line.draw()
         self.handle_panel.draw()
@@ -228,12 +229,21 @@ class CharacterInfoHead:
         """ 是否绘制面板标题 """
         character_data = cache.character_data[character_id]
         sex_text = game_config.config_sex_tem[character_data.sex].name
-        message = _("No.{character_id} 姓名:{character_name} 称呼:{character_nick_name} 性别:{sex_text}").format(
-            character_id=character_id,
-            character_name=character_data.name,
-            character_nick_name=character_data.nick_name,
-            sex_text=sex_text,
-        )
+        if character_id:
+            message = _("No.{character_id} 姓名:{character_name} 性别:{sex_text}").format(
+                character_id=character_id,
+                character_name=character_data.name,
+                sex_text=sex_text,
+            )
+        else:
+            message = _(
+                "No.{character_id} 姓名:{character_name} 称呼:{character_nick_name} 性别:{sex_text}"
+            ).format(
+                character_id=character_id,
+                character_name=character_data.name,
+                character_nick_name=character_data.nick_name,
+                sex_text=sex_text,
+            )
         message_draw = draw.CenterDraw()
         message_draw.width = width / 2
         message_draw.text = message
@@ -243,7 +253,7 @@ class CharacterInfoHead:
         hp_draw.set(
             "HitPointbar",
             character_data.hit_point_max,
-            character_data.hit_point,
+            int(character_data.hit_point),
             _("体力"),
         )
         mp_draw = draw.InfoBarDraw()
@@ -252,7 +262,7 @@ class CharacterInfoHead:
         mp_draw.set(
             "ManaPointbar",
             character_data.mana_point_max,
-            character_data.mana_point,
+            int(character_data.mana_point),
             _("气力"),
         )
         status_text = game_config.config_status[character_data.state].name
@@ -273,6 +283,61 @@ class CharacterInfoHead:
         for draw_tuple in self.draw_list:
             for label in draw_tuple:
                 label.draw()
+            line_feed.draw()
+
+
+class CharacterWearClothingList:
+    """
+    角色已穿戴服装列表
+    Keyword arguments:
+    character_id -- 角色id
+    width -- 最大宽度
+    column -- 每行服装最大个数
+    """
+
+    def __init__(self, character_id: int, width: int, column: int):
+        """ 初始化绘制对象 """
+        self.character_id: int = character_id
+        """ 要绘制的角色id """
+        self.width: int = width
+        """ 当前最大可绘制宽度 """
+        self.column: int = column
+        """ 每行服装最大个数 """
+        character_data: game_type.Character = cache.character_data[character_id]
+        describe_list = [_("可爱的"), _("性感的"), _("帅气的"), _("清新的"), _("典雅的"), _("清洁的"), _("保暖的")]
+        clothing_info_list = []
+        title_draw = draw.LittleTitleLineDraw(_("衣着"), width, ":")
+        self.draw_list = [title_draw]
+        """ 绘制的对象列表 """
+        for clothing_type in game_config.config_clothing_type:
+            if clothing_type in character_data.put_on and isinstance(
+                character_data.put_on[clothing_type], UUID
+            ):
+                now_id = character_data.put_on[clothing_type]
+                now_clothing: game_type.Clothing = character_data.clothing[clothing_type][now_id]
+                value_list = [
+                    now_clothing.sweet,
+                    now_clothing.sexy,
+                    now_clothing.handsome,
+                    now_clothing.fresh,
+                    now_clothing.elegant,
+                    now_clothing.cleanliness,
+                    now_clothing.warm,
+                ]
+                describe_id = value_list.index(max(value_list))
+                describe = describe_list[describe_id]
+                now_clothing_config = game_config.config_clothing_tem[now_clothing.tem_id]
+                clothing_name = f"[{now_clothing.evaluation}{describe}{now_clothing_config.name}]"
+                clothing_info_list.append(clothing_name)
+        now_draw = panel.CenterDrawTextListPanel()
+        now_draw.set(clothing_info_list, self.width, self.column)
+        self.draw_list.extend(now_draw.draw_list)
+
+    def draw(self):
+        """ 绘制对象 """
+        for draw_list in self.draw_list:
+            for now_draw in draw_list:
+                now_draw.draw()
             line_feed.draw()
 
 
@@ -781,6 +846,8 @@ class SeeCharacterSocialContact:
         """ 当前面板监听的按钮列表 """
         character_data = cache.character_data[self.character_id]
         for social_type in game_config.config_social_type:
+            if not social_type:
+                continue
             type_config = game_config.config_social_type[social_type]
             type_draw = draw.LittleTitleLineDraw(type_config.name, self.width, ":")
             self.draw_list.append(type_draw)
@@ -796,6 +863,7 @@ class SeeCharacterSocialContact:
                 now_draw.text = _("空无一人")
                 now_draw.width = self.width
             self.draw_list.append(now_draw)
+            self.draw_list.append(line_feed)
 
     def draw(self):
         title_draw = draw.TitleLineDraw(_("人物社交"), self.width)
@@ -968,12 +1036,14 @@ class SeeCharacterInfoHandle:
             old_button_draw.draw()
             back_draw.draw()
             next_button_draw.draw()
+            line_feed.draw()
             self.return_list.extend(now_character_panel.return_list)
             self.return_list.append(old_button_draw.return_text)
             self.return_list.append(back_draw.return_text)
             self.return_list.append(next_button_draw.return_text)
             yrn = flow_handle.askfor_all(self.return_list)
             py_cmd.clr_cmd()
+            line_feed.draw()
             if yrn == back_draw.return_text:
                 break
             elif yrn in now_character_panel.draw_data:

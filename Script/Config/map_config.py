@@ -1,17 +1,49 @@
 import os
+import pickle
+import time
 from typing import Dict, List
 from dijkstar import Graph, find_path
 from Script.Core import game_type, json_handle, get_text, text_handle, cache_control
+from Script.Design import map_handle
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 map_data_path = os.path.join("data", "map")
 """ 地图配置数据路径 """
+scene_path_edge_path = os.path.join("data", "ScenePath")
+""" 寻路路径配置文件路径 """
+all_scene_data_path = os.path.join("data", "SceneData")
+""" 预处理的所有场景数据路径 """
+all_place_data_path = os.path.join("data", "PlaceData")
+""" 预处理的所有地点数据路径 """
+all_map_data_path = os.path.join("data", "MapData")
+""" 预处理的所有地图数据路径 """
 
 
 def init_map_data():
     """ 载入地图和场景数据 """
-    load_dir_now(map_data_path)
+    if (
+        os.path.exists(all_scene_data_path)
+        and os.path.exists(all_map_data_path)
+        and os.path.exists(all_place_data_path)
+        and os.path.exists(scene_path_edge_path)
+    ):
+        with open(all_scene_data_path, "rb") as all_scene_data_file:
+            cache.scene_data = pickle.load(all_scene_data_file)
+        with open(all_map_data_path, "rb") as all_map_data_file:
+            cache.map_data = pickle.load(all_map_data_file)
+        with open(all_place_data_path, "rb") as all_place_data_file:
+            cache.place_data = pickle.load(all_place_data_file)
+        map_handle.scene_path_edge = json_handle.load_json(scene_path_edge_path)
+    else:
+        load_dir_now(map_data_path)
+        with open(all_map_data_path, "wb") as all_map_data_file:
+            pickle.dump(cache.map_data, all_map_data_file)
+        with open(all_scene_data_path, "wb") as all_scene_data_file:
+            pickle.dump(cache.scene_data, all_scene_data_file)
+        with open(all_place_data_path, "wb") as all_place_data_file:
+            pickle.dump(cache.place_data, all_place_data_file)
+        map_handle.init_scene_edge_path_data()
 
 
 def load_dir_now(data_path: str):

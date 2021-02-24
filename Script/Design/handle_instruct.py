@@ -1,10 +1,13 @@
+import random
+import time
 from functools import wraps
 from typing import Set
 from types import FunctionType
 from Script.Core import constant, cache_control, game_type, get_text
-from Script.Design import update, character
-from Script.UI.Panel import see_character_info_panel
+from Script.Design import update, character, attr_calculation
+from Script.UI.Panel import see_character_info_panel, see_save_info_panel
 from Script.Config import normal_config
+from Script.UI.Moudle import draw
 
 
 cache: game_type.Cache = cache_control.cache
@@ -82,19 +85,21 @@ def handle_move():
 
 
 @add_instruct(
-    constant.Instruct.SEE_ATTR, constant.InstructType.ACTIVE, _("查看属性"), {constant.Premise.HAVE_TARGET}
+    constant.Instruct.SEE_ATTR, constant.InstructType.SYSTEM, _("查看属性"), {constant.Premise.HAVE_TARGET}
 )
 def handle_see_attr():
     """ 查看属性 """
+    see_character_info_panel.line_feed.draw()
     now_draw = see_character_info_panel.SeeCharacterInfoInScenePanel(
         cache.character_data[0].target_character_id, width
     )
     now_draw.draw()
 
 
-@add_instruct(constant.Instruct.SEE_OWNER_ATTR, constant.InstructType.ACTIVE, _("查看自身属性"), {})
+@add_instruct(constant.Instruct.SEE_OWNER_ATTR, constant.InstructType.SYSTEM, _("查看自身属性"), {})
 def handle_see_owner_attr():
     """ 查看自身属性 """
+    see_character_info_panel.line_feed.draw()
     now_draw = see_character_info_panel.SeeCharacterInfoInScenePanel(0, width)
     now_draw.draw()
 
@@ -118,3 +123,177 @@ def handle_chat():
 def handle_buy_item():
     """ 处理购买道具指令 """
     cache.now_panel_id = constant.Panel.ITEM_SHOP
+
+
+@add_instruct(constant.Instruct.SINGING, constant.InstructType.PERFORM, _("唱歌"), {})
+def handle_singing():
+    """ 处理唱歌指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 5
+    character_data.behavior.behavior_id = constant.Behavior.SINGING
+    character_data.state = constant.CharacterStatus.STATUS_SINGING
+    update.game_update_flow(5)
+
+
+@add_instruct(
+    constant.Instruct.PLAY_PIANO,
+    constant.InstructType.PERFORM,
+    _("弹钢琴"),
+    {constant.Premise.IN_MUSIC_CLASSROOM},
+)
+def handle_play_piano():
+    """ 处理弹钢琴指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 30
+    character_data.behavior.behavior_id = constant.Behavior.PLAY_PIANO
+    character_data.state = constant.CharacterStatus.STATUS_PLAY_PIANO
+    update.game_update_flow(30)
+
+
+@add_instruct(
+    constant.Instruct.TOUCH_HEAD,
+    constant.InstructType.OBSCENITY,
+    _("摸头"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_touch_head():
+    """ 处理摸头指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 2
+    character_data.behavior.behavior_id = constant.Behavior.TOUCH_HEAD
+    character_data.state = constant.CharacterStatus.STATUS_TOUCH_HEAD
+    update.game_update_flow(2)
+
+
+@add_instruct(constant.Instruct.SAVE, constant.InstructType.SYSTEM, _("读写存档"), {})
+def handle_save():
+    """ 处理读写存档指令 """
+    now_panel = see_save_info_panel.SeeSaveListPanel(width, 1)
+    now_panel.draw()
+
+
+@add_instruct(constant.Instruct.SLEEP, constant.InstructType.REST, _("睡觉"), {constant.Premise.IN_DORMITORY})
+def handle_sleep():
+    """ 处理睡觉指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 480
+    character_data.behavior.behavior_id = constant.Behavior.SLEEP
+    character_data.state = constant.CharacterStatus.STATUS_SLEEP
+    t1 = time.time()
+    update.game_update_flow(480)
+    t2 = time.time()
+    print(t2 - t1)
+
+
+@add_instruct(
+    constant.Instruct.DRINK_SPRING, constant.InstructType.ACTIVE, _("喝泉水"), {constant.Premise.IN_FOUNTAIN}
+)
+def handle_drink_spring():
+    """ 处理喝泉水指令 """
+    value = random.randint(0, 100)
+    now_draw = draw.WaitDraw()
+    now_draw.width = width
+    now_draw.text = "\n"
+    character_data: game_type.Character = cache.character_data[0]
+    if value <= 5 and not character_data.sex:
+        now_draw.text += _("喝到了奇怪的泉水！身体变化了！！！")
+        character_data.sex = 1
+        character_data.height = attr_calculation.get_height(1, character_data.age)
+        bmi = attr_calculation.get_bmi(character_data.weigt_tem)
+        character_data.weight = attr_calculation.get_weight(bmi, character_data.height.now_height)
+        character_data.bodyfat = attr_calculation.get_body_fat(
+            character_data.sex, character_data.bodyfat_tem
+        )
+        character_data.measurements = attr_calculation.get_measurements(
+            character_data.sex,
+            character_data.height.now_height,
+            character_data.weight,
+            character_data.bodyfat,
+            character_data.bodyfat_tem,
+        )
+    else:
+        now_draw.text += _("喝到了甜甜的泉水～")
+        character_data.status[28] = 0
+    now_draw.text += "\n"
+    now_draw.draw()
+
+
+@add_instruct(
+    constant.Instruct.EMBRACE, constant.InstructType.ACTIVE, _("拥抱"), {constant.Premise.HAVE_TARGET}
+)
+def handle_embrace():
+    """ 处理拥抱指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 3
+    character_data.behavior.behavior_id = constant.Behavior.EMBRACE
+    character_data.state = constant.CharacterStatus.STATUS_EMBRACE
+    update.game_update_flow(3)
+
+
+@add_instruct(
+    constant.Instruct.KISS,
+    constant.InstructType.OBSCENITY,
+    _("亲吻"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_kiss():
+    """ 处理亲吻指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 2
+    character_data.behavior.behavior_id = constant.Behavior.KISS
+    character_data.state = constant.CharacterStatus.STATUS_KISS
+    update.game_update_flow(2)
+
+
+@add_instruct(
+    constant.Instruct.HAND_IN_HAND,
+    constant.InstructType.ACTIVE,
+    _("牵手"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_handle_in_handle():
+    """ 处理牵手指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.HAND_IN_HAND
+    character_data.state = constant.CharacterStatus.STATUS_HAND_IN_HAND
+    update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.STROKE,
+    constant.InstructType.OBSCENITY,
+    _("抚摸"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_stroke():
+    """ 处理抚摸指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.STROKE
+    character_data.state = constant.CharacterStatus.STATUS_STROKE
+    update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.TOUCH_HEAD,
+    constant.InstructType.SEX,
+    _("摸胸"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_touch_chest():
+    """ 处理摸胸指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.TOUCH_CHEST
+    character_data.state = constant.CharacterStatus.STATUS_TOUCH_CHEST
+    update.game_update_flow(10)

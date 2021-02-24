@@ -4,6 +4,7 @@ import json
 
 config_dir = os.path.join("..", "data", "csv")
 talk_dir = os.path.join("..", "data", "talk")
+target_dir = os.path.join("..", "data", "target")
 config_data = {}
 config_def_str = ""
 config_po = "\n"
@@ -11,21 +12,34 @@ msgData = set()
 class_data = set()
 
 
-def build_csv_config(file_path: str, file_name: str, talk: bool):
+def build_csv_config(file_path: str, file_name: str, talk: bool, target: bool):
     with open(file_path, encoding="utf-8") as now_file:
         now_read = csv.DictReader(now_file)
         now_docstring_data = {}
         now_type_data = {}
         get_text_data = {}
         file_id = file_name.split(".")[0]
+        if talk or target:
+            path_list = file_path.split(os.sep)
+            if talk:
+                file_id = path_list[-2] + "_" + file_id
         i = 0
         class_text = ""
         type_text = file_id
         if talk:
             type_text = "Talk"
-            if len(file_id.split("_")) > 1:
+            if "premise" in file_name:
                 type_text = "TalkPremise"
-        config_data[type_text] = {"data": [], "gettext": {}}
+        if target:
+            if "target" in file_name:
+                type_text = "Target"
+            elif "premise" in file_name:
+                type_text = "TargetPremise"
+            elif "effect" in file_name:
+                type_text = "TargetEffect"
+        config_data.setdefault(type_text, {})
+        config_data[type_text].setdefault("data", [])
+        config_data[type_text].setdefault("gettext", {})
         for row in now_read:
             if not i:
                 for k in row:
@@ -47,6 +61,7 @@ def build_csv_config(file_path: str, file_name: str, talk: bool):
                 i += 1
                 continue
             for k in now_type_data:
+                print(row)
                 now_type = now_type_data[k]
                 if not len(row[k]):
                     del row[k]
@@ -60,9 +75,13 @@ def build_csv_config(file_path: str, file_name: str, talk: bool):
                 elif now_type == "float":
                     row[k] = float(row[k])
                 if k == "cid" and talk:
-                    row[k] = file_id.split("_")[0] + row[k]
+                    row[k] = file_id.split("-")[0] + row[k]
                 if k == "talk_id" and talk:
-                    row[k] = file_id.split("_")[0] + row[k]
+                    row[k] = file_id.split("-")[0] + row[k]
+                if k == "cid" and target:
+                    row[k] = path_list[-2] + row[k]
+                elif k == "target_id" and target:
+                    row[k] = path_list[-2] + row[k]
                 if get_text_data[k]:
                     build_config_po(row[k], type_text, k, row["cid"])
             config_data[type_text]["data"].append(row)
@@ -125,14 +144,24 @@ for i in file_list:
     if index:
         config_def_str += "\n\n\n"
     now_file = os.path.join(config_dir, i)
-    build_csv_config(now_file, i, 0)
+    build_csv_config(now_file, i, 0, 0)
     index += 1
 
 talk_file_list = os.listdir(talk_dir)
 for i in talk_file_list:
-    config_def_str += "\n\n\n"
-    now_file = os.path.join(talk_dir, i)
-    build_csv_config(now_file, i, 1)
+    now_dir = os.path.join(talk_dir, i)
+    for f in os.listdir(now_dir):
+        config_def_str += "\n\n\n"
+        now_f = os.path.join(now_dir, f)
+        build_csv_config(now_f, f, 1, 0)
+
+target_file_list = os.listdir(target_dir)
+for i in target_file_list:
+    now_dir = os.path.join(target_dir, i)
+    for f in os.listdir(now_dir):
+        config_def_str += "\n\n\n"
+        now_f = os.path.join(now_dir, f)
+        build_csv_config(now_f, f, 0, 1)
 
 map_path = os.path.join("..", "data", "map")
 build_scene_config(map_path)

@@ -217,6 +217,10 @@ class NormalConfig:
     """ 食物商店单页显示道具数上限 """
     food_shop_type_max: int
     """ 食物商店单页显示食物种类数上限 """
+    font_size: int
+    """ 字体大小 """
+    order_font_size: int
+    """ 输入框字体大小 """
 
 
 class Clothing:
@@ -487,6 +491,12 @@ class Character:
         """ 剧情npc校验 """
         self.no_wear: bool = 0
         """ 是否不想穿衣服 """
+        self.first_kiss: int = -1
+        """ 初吻对象 -1为无 """
+        self.first_hand_in_hand: int = -1
+        """ 初次牵手对象 -1为无 """
+        self.dead: bool = 0
+        """ 角色已死亡 """
 
 
 class Cache:
@@ -531,6 +541,10 @@ class Cache:
     """ 主页监听控制流程用变量组 """
     cmd_map: Dict[int, object] = {}
     """ cmd存储 """
+    behavior_tem_data: dict = {}
+    """ 角色行为控制器数据 """
+    settle_behavior_effect_data: Dict[int, FunctionType] = {}
+    """ 角色行为结算处理器 处理器id:处理器 """
 
     def __init__(self):
         """ 游戏预设配置数据 """
@@ -618,13 +632,7 @@ class Cache:
         """ 可穿戴道具类型数据 """
         self.course_time_status: dict = {}
         """ 当前上课时间状态 """
-        self.status_up_text: dict = {}
-        """ 显示给玩家的角色状态变化文本 """
-        self.behavior_tem_data: dict = {}
-        """ 角色行为控制器数据 """
-        self.settle_behavior_data: dict = {}
-        """ 角色行为结算处理器 """
-        self.over_behavior_character: Dict[int, int] = {}
+        self.over_behavior_character: Set = set()
         """ 本次update中已结束结算的npc """
         self.teacher_class_time_table: Dict[
             int, Dict[int, Dict[int, Dict[int, Dict[int, Dict[str, int]]]]]
@@ -650,6 +658,22 @@ class Cache:
         """ 学校纬度 """
 
 
+class TargetChange:
+    """ 角色关系变化结构体 """
+
+    def __init__(self):
+        self.old_social: int = 0
+        """ 旧关系 """
+        self.new_social: int = 0
+        """ 新关系 """
+        self.status: Dict[int, int] = {}
+        """ 状态变化 """
+        self.favorability: int = 0
+        """ 好感度变化 """
+        self.sex_experience: Dict[int, int] = {}
+        """ 性经验变化 """
+
+
 class CharacterStatusChange:
     """ 角色属性状态变更结构体 """
 
@@ -664,5 +688,7 @@ class CharacterStatusChange:
         """ 语言技能经验变化 """
         self.knowledge: Dict[int, int] = {}
         """ 知识技能经验变化 """
-        self.favorability: Dict[int, int] = {}
-        """ 角色好感度变化 """
+        self.target_change: Dict[int, TargetChange] = {}
+        """ 互动目标状态变化 """
+        self.sex_experience: Dict[int, int] = {}
+        """ 性经验变化 """

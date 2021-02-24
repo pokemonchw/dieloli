@@ -1,6 +1,6 @@
 import os
 from types import FunctionType
-from Script.Config import normal_config
+from Script.Config import normal_config, game_config
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_save_info_panel
 from Script.Design import handle_panel

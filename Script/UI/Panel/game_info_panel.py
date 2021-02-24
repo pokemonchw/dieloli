@@ -50,7 +50,7 @@ class GameTimeInfoPanel:
         sun_time_draw.width = self.width - now_width
         now_draw.draw_list.append(sun_time_draw)
         now_width += len(sun_time_draw)
-        if sun_time <= 3 or sun_time >= 10:
+        if sun_time <= 2 or sun_time >= 10:
             moon_phase = game_time.get_moon_phase(cache.game_time)
             moon_phase_config = game_config.config_moon[moon_phase]
             moon_phase_draw = draw.NormalDraw()

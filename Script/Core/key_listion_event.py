@@ -26,6 +26,7 @@ def mouse_left_check(event: Event):
     Keyword arguments:
     event -- 鼠标事件
     """
+    py_cmd.focus_cmd()
     if not cache.wframe_mouse.w_frame_up:
         set_wframe_up()
     else:
@@ -95,7 +96,6 @@ def mouse_check_push():
     """
     更正鼠标点击状态数据映射
     """
-    py_cmd.focus_cmd()
     if not cache.wframe_mouse.mouse_leave_cmd == 0:
         main_frame.send_input()
         cache.wframe_mouse.mouse_leave_cmd = 1

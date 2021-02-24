@@ -1,5 +1,6 @@
 import os
 import configparser
+import time
 from typing import Dict, List, Set
 from Script.Config import config_def
 from Script.Core import game_type, json_handle, get_text
@@ -24,6 +25,10 @@ config_bar: Dict[int, config_def.BarConfig] = {}
 """ 比例条配置数据 """
 config_bar_data: Dict[str, int] = {}
 """ 比例条名字对应比例条id """
+config_behavior_effect: Dict[int, config_def.BehaviorEffect] = {}
+""" 行为结算器配置 """
+config_behavior_effect_data: Dict[int, Set] = {}
+""" 行为所包含的结算器id数据 """
 config_body_fat_tem: Dict[int, config_def.BodyFatTem] = {}
 """ 按性别划分的体脂率模板和范围 """
 config_body_fat_tem_data: Dict[int, Dict[int, int]] = {}
@@ -133,6 +138,8 @@ config_moon: Dict[int, config_def.Moon] = {}
 """ 月相配置 """
 config_moon_data: Dict[int, Set] = {}
 """ 月相类型对应配置id集合 """
+config_move_menu_type: Dict[int, config_def.MoveMenuType] = {}
+""" 移动菜单过滤类型配置 """
 config_nature: Dict[int, config_def.Nature] = {}
 """ 性格配置数据 """
 config_nature_tag: Dict[int, config_def.NatureTag] = {}
@@ -268,11 +275,12 @@ def translate_data(data: dict):
     Keyword arguments:
     data -- 待翻译的字典数据
     """
-    if "get_text" not in data:
+    if "gettext" not in data:
         return
-    for key in data["data"]:
-        if data["get_text"][key]:
-            data[key] = get_text._(data[key])
+    for now_data in data["data"]:
+        for key in now_data:
+            if data["gettext"][key]:
+                now_data[key] = get_text._(now_data[key])
 
 
 def load_age_judge_sex_experience_tem_data():
@@ -319,6 +327,18 @@ def load_bar_data():
         now_bar.__dict__ = tem_data
         config_bar[now_bar.cid] = now_bar
         config_bar_data[now_bar.name] = now_bar.cid
+
+
+def load_behavior_effect_data():
+    """ 载入行为结算器配置 """
+    now_data = config_data["BehaviorEffect"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.BehaviorEffect()
+        now_tem.__dict__ = tem_data
+        config_behavior_effect[now_tem.cid] = now_tem
+        config_behavior_effect_data.setdefault(now_tem.behavior_id, set())
+        config_behavior_effect_data[now_tem.behavior_id].add(now_tem.effect_id)
 
 
 def load_body_fat_tem():
@@ -608,6 +628,16 @@ def load_moon():
         config_moon[now_tem.cid] = now_tem
         config_moon_data.setdefault(now_tem.type, set())
         config_moon_data[now_tem.type].add(now_tem.cid)
+
+
+def load_move_menu_type():
+    """ 载入移动菜单过滤类型配置 """
+    now_data = config_data["MoveMenuType"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.MoveMenuType()
+        now_tem.__dict__ = tem_data
+        config_move_menu_type[now_tem.cid] = now_tem
 
 
 def load_nature():
@@ -955,6 +985,7 @@ def init():
     load_age_tem()
     load_attr_tem()
     load_bar_data()
+    load_behavior_effect_data()
     load_body_fat_tem()
     load_book_data()
     load_character_state_data()
@@ -981,6 +1012,7 @@ def init():
     load_language_tem()
     load_manapoint_tem()
     load_moon()
+    load_move_menu_type()
     load_nature()
     load_nature_tag()
     load_occupation_age_region()

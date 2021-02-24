@@ -1,7 +1,7 @@
 from types import FunctionType
 from wcwidth import wcswidth
 from Script.Core import rich_text, constant
-from Script.Config import game_config
+from Script.Config import game_config, normal_config
 
 
 def align(text: str, just="left", only_fix=False, columns=1, text_width=None) -> str:
@@ -18,7 +18,7 @@ def align(text: str, just="left", only_fix=False, columns=1, text_width=None) ->
     """
     count_index = get_text_index(text)
     if text_width is None:
-        width = game_config.config_normal.text_width
+        width = normal_config.config_normal.text_width
         width = int(width / columns)
     else:
         width = int(text_width)

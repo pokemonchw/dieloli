@@ -1,9 +1,15 @@
 import os
 import time
+import json
+import pickle
 from Script.Core import py_cmd, cache_control, value_handle, text_handle, game_type
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+scene_path_edge_path = os.path.join("data", "ScenePath")
+""" 寻路路径配置文件路径 """
+scene_path_edge = {}
+""" 寻路路径 """
 
 
 def get_map_draw_for_map_path(map_path_str: str) -> str:
@@ -92,6 +98,7 @@ def character_move_scene(old_scene_path: list, new_scene_path: list, character_i
         cache.character_data[character_id].position = new_scene_path
         cache.scene_data[new_scene_path_str].character_list.add(character_id)
     cache.character_data[character_id].behavior.move_src = old_scene_path
+    cache.character_data[character_id].behavior.move_target = new_scene_path
 
 
 def get_map_system_path_str_for_list(now_list: list) -> str:
@@ -421,3 +428,102 @@ def sort_scene_character_id(scene_path_str: str):
         new_scene_character_intimate_data
     )
     cache.scene_data[scene_path_str].character_list = set(new_scene_character_intimate_data)
+
+
+def init_scene_edge_path_data():
+    """ 初始化全部地图寻路数据 """
+    global scene_path_edge
+    scene_path_edge = {}
+    for now_position_str in cache.scene_data:
+        scene_path_edge[now_position_str] = {}
+        for target_scene_str in cache.scene_data:
+            if target_scene_str == now_position_str:
+                continue
+            now_position = get_map_system_path_for_str(now_position_str)
+            target_scene = get_map_system_path_for_str(target_scene_str)
+            scene_hierarchy = judge_scene_affiliation(now_position, target_scene)
+            if scene_hierarchy == "common":
+                map_path = get_common_map_for_scene_path(now_position, target_scene)
+                now_map_scene_id = get_map_scene_id_for_scene_path(map_path, now_position)
+                target_map_scene_id = get_map_scene_id_for_scene_path(map_path, target_scene)
+                _, _, now_move_target, now_move_time = identical_map_move(
+                    now_position, map_path, now_map_scene_id, target_map_scene_id
+                )
+            else:
+                _, _, now_move_target, now_move_time = difference_map_move(now_position, target_scene)
+            scene_path_edge[now_position_str][target_scene_str] = [now_move_target, now_move_time]
+    with open(scene_path_edge_path, "w") as path_edge_file:
+        json.dump(scene_path_edge, path_edge_file)
+
+
+def difference_map_move(now_position: list, target_scene: list) -> (str, list, list, int):
+    """
+    角色跨地图层级移动
+    Keyword arguments:
+    target_scene -- 寻路目标场景(在地图系统下的绝对坐标)
+    Return arguments:
+    str:null -- 未找到路径
+    str:end -- 当前位置已是路径终点
+    list -- 路径
+    list -- 本次移动到的位置
+    int -- 本次移动花费的时间
+    """
+    is_affiliation = judge_scene_affiliation(now_position, target_scene)
+    now_true_position = get_scene_path_for_true(now_position)
+    now_true_map = get_map_for_path(now_true_position)
+    if is_affiliation == "subordinate":
+        now_true_affiliation = judge_scene_is_affiliation(now_true_position, target_scene)
+        if now_true_affiliation == "subordinate":
+            now_map_scene_id = get_map_scene_id_for_scene_path(now_true_map, now_true_position)
+            return identical_map_move(now_position, now_true_map, now_map_scene_id, "0")
+        now_map = get_map_for_path(target_scene)
+        now_map_scene_id = get_map_scene_id_for_scene_path(now_map, now_position)
+        return identical_map_move(now_position, now_map, now_map_scene_id, "0")
+    relation_map_list = get_relation_map_list_for_scene_path(now_true_position)
+    now_scene_real_map = relation_map_list[-1]
+    now_map_scene_id = get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
+    common_map = get_common_map_for_scene_path(now_true_position, target_scene)
+    if now_scene_real_map != common_map:
+        if now_map_scene_id == "0":
+            now_true_position = now_scene_real_map.copy()
+            relation_map_list = get_relation_map_list_for_scene_path(now_true_position)
+            now_scene_real_map = relation_map_list[-1]
+    target_map_scene_id = get_map_scene_id_for_scene_path(common_map, target_scene)
+    if now_scene_real_map == common_map:
+        now_map_scene_id = get_map_scene_id_for_scene_path(common_map, now_true_position)
+    else:
+        now_map_scene_id = get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
+        target_map_scene_id = "0"
+        common_map = now_scene_real_map
+    return identical_map_move(now_position, common_map, now_map_scene_id, target_map_scene_id)
+
+
+def identical_map_move(
+    now_position: list,
+    now_map: list,
+    now_map_scene_id: str,
+    target_map_scene_id: str,
+) -> (str, list, list, int):
+    """
+    角色在相同地图层级内移动
+    Keyword arguments:
+    now_position -- 当前场景位置
+    now_map -- 当前地图路径
+    now_map_scene_id -- 当前角色所在场景(当前地图层级下的相对坐标)
+    target_map_scene_id -- 寻路目标场景(当前地图层级下的相对坐标)
+    Return arguments:
+    str:null -- 未找到路径
+    str:end -- 当前位置已是路径终点
+    list -- 路径
+    list -- 本次移动到的位置
+    int -- 本次移动花费的时间
+    """
+    now_map_str = get_map_system_path_str_for_list(now_map)
+    move_end, move_path = get_path_finding(now_map_str, now_map_scene_id, target_map_scene_id)
+    now_target_position = []
+    now_need_time = 0
+    if move_path != []:
+        now_target_scene_id = move_path.path[0]
+        now_need_time = move_path.time[0]
+        now_target_position = get_scene_path_for_map_scene_id(now_map, now_target_scene_id)
+    return move_end, move_path, now_target_position, now_need_time

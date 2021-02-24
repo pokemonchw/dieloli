@@ -11,4 +11,5 @@ def start_frame():
     """
     while True:
         py_cmd.clr_cmd()
+        py_cmd.focus_cmd()
         cache.panel_data[cache.now_panel_id]()

@@ -1,0 +1,15 @@
+cid,behavior_id,adv_id,context
+口上id,触发口上的行为id,口上限定的剧情npcid,口上内容
+str,int,int,str
+0,0,0,1
+口上配置数据,,,
+0,5,0,和{TargetName}一起闲聊了一会儿
+1,5,0,和{TargetName}聊了一会儿天
+2,5,0,和{TargetName}分享了最近的见闻
+3,5,0,给{TargetName}讲了个笑话
+4,5,0,给{TargetName}讲了个故事\n{TargetName}被{NickName}的风趣打动笑了出来
+5,5,0,和{TargetName}分享了最近的见闻\n{TargetName}只是将脑袋靠在{NickName}的肩上\n静静的听着{NickName}讲述
+6,5,0,{Name}和{PlayerNickName}闲聊了一会儿
+7,5,0,{Name}找{PlayerNickName}聊了一会儿天
+8,5,0,{Name}向{PlayerNickName}分享了最近的见闻
+9,5,0,{Name}旁若无人的坐在{PlayerNickName}的身边\n将头靠在了{PlayerNickName}的肩上\n「继续和我说上次的故事吧~」

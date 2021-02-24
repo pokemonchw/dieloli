@@ -12,7 +12,6 @@ from Script.Design import (
     clothing,
     nature,
     map_handle,
-    character_move,
 )
 from Script.Config import game_config
 

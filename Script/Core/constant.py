@@ -36,6 +36,26 @@ class CharacterStatus:
     """ 进食状态 """
     STATUS_CHAT = 5
     """ 闲聊状态 """
+    STATUS_PLAY_PIANO = 6
+    """ 弹钢琴 """
+    STATUS_SINGING = 7
+    """ 唱歌 """
+    STATUS_TOUCH_HEAD = 8
+    """ 摸头 """
+    STATUS_SLEEP = 9
+    """ 睡觉 """
+    STATUS_EMBRACE = 10
+    """ 拥抱 """
+    STATUS_KISS = 11
+    """ 亲吻 """
+    STATUS_HAND_IN_HAND = 12
+    """ 牵手 """
+    STATUS_DEAD = 13
+    """ 死亡 """
+    STATUS_STROKE = 14
+    """ 抚摸 """
+    STATUS_TOUCH_CHEST = 15
+    """ 摸胸 """
 
 
 class Behavior:
@@ -53,6 +73,26 @@ class Behavior:
     """ 进食 """
     CHAT = 5
     """ 闲聊 """
+    PLAY_PIANO = 6
+    """ 弹钢琴 """
+    SINGING = 7
+    """ 唱歌 """
+    TOUCH_HEAD = 8
+    """ 摸头 """
+    SLEEP = 9
+    """ 睡觉 """
+    EMBRACE = 10
+    """ 拥抱 """
+    KISS = 11
+    """ 亲吻 """
+    HAND_IN_HAND = 12
+    """ 牵手 """
+    DEAD = 13
+    """ 死亡 """
+    STROKE = 14
+    """ 抚摸 """
+    TOUCH_CHEST = 15
+    """ 摸胸 """
 
 
 class StateMachine:
@@ -84,6 +124,38 @@ class StateMachine:
     """ 穿干净的鞋子 """
     WEAR_CLEAN_SOCKS = 12
     """ 穿干净的袜子 """
+    PLAY_PIANO = 13
+    """ 弹钢琴 """
+    MOVE_TO_MUSIC_ROOM = 14
+    """ 移动至音乐活动室 """
+    SINGING = 15
+    """ 唱歌 """
+    SING_RAND_CHARACTER = 16
+    """ 唱歌给场景里随机对象听 """
+    PLAY_PIANO_RAND_CHARACTER = 17
+    """ 弹奏钢琴给场景里随机对象听 """
+    TOUCH_HEAD_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 18
+    """ 对场景中抱有超越友谊想法的随机对象摸头 """
+    MOVE_TO_DORMITORY = 19
+    """ 移动至所属宿舍 """
+    SLEEP = 20
+    """ 睡觉 """
+    REST = 21
+    """ 休息一会儿 """
+    MOVE_TO_RAND_SCENE = 22
+    """ 移动至随机场景 """
+    EMBRACE_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 23
+    """ 对场景中抱有超越友谊想法的随机对象拥抱 """
+    KISS_TO_LIKE_TARGET_IN_SCENE = 24
+    """ 和场景中自己喜欢的随机对象接吻 """
+    MOVE_TO_LIKE_TARGET_SCENE = 25
+    """ 移动至随机某个自己喜欢的人所在场景 """
+    HAND_IN_HAND_TO_LIKE_TARGET_IN_SCENE = 26
+    """ 牵住场景中自己喜欢的随机对象的手 """
+    KISS_TO_NO_FIRST_KISS_TARGET_IN_SCENE = 27
+    """ 和场景中自己喜欢的还是初吻的随机对象接吻 """
+    MOVE_TO_NO_FIRST_KISS_LIKE_TARGET_SCENE = 28
+    """ 移动至喜欢的还是初吻的人所在的场景 """
 
 
 class Panel:
@@ -93,17 +165,15 @@ class Panel:
     """ 标题面板 """
     CREATOR_CHARACTER = 1
     """ 创建角色面板 """
-    GET_UP = 2
-    """ 起床面板 """
-    IN_SCENE = 3
+    IN_SCENE = 2
     """ 场景互动面板 """
-    SEE_MAP = 4
+    SEE_MAP = 3
     """ 查看地图面板 """
-    FOOD_SHOP = 5
+    FOOD_SHOP = 4
     """ 食物商店面板 """
-    FOOD_BAG = 6
+    FOOD_BAG = 5
     """ 食物背包面板 """
-    ITEM_SHOP = 7
+    ITEM_SHOP = 6
     """ 道具商店面板 """
 
 
@@ -242,6 +312,185 @@ class Premise:
     """ 在宿舍中 """
     CHEST_IS_NOT_CLIFF = 65
     """ 胸围不是绝壁 """
+    EXCELLED_AT_PLAY_MUSIC = 66
+    """ 擅长演奏 """
+    EXCELLED_AT_SINGING = 67
+    """ 擅长演唱 """
+    IN_MUSIC_CLASSROOM = 68
+    """ 处于音乐活动室 """
+    NO_EXCELLED_AT_SINGING = 69
+    """ 不擅长演唱 """
+    SCENE_NO_HAVE_OTHER_CHARACTER = 70
+    """ 场景中没有有自己外的其他角色 """
+    TARGET_HEIGHT_LOW = 71
+    """ 交互对象身高低于自身身高 """
+    TARGET_ADORE = 72
+    """ 被交互对象爱慕 """
+    NO_EXCELLED_AT_PLAY_MUSIC = 73
+    """ 不擅长演奏 """
+    ARROGANT_HEIGHT = 74
+    """ 傲慢情绪高涨 """
+    IS_LIVELY = 75
+    """ 是一个活跃的人 """
+    IS_INFERIORITY = 76
+    """ 是一个自卑的人 """
+    IS_AUTONOMY = 77
+    """ 是一个自律的人 """
+    SCENE_CHARACTER_ONLY_PLAYER_AND_ONE = 78
+    """ 场景中只有包括玩家在内的两个角色 """
+    IS_SOLITARY = 79
+    """ 是一个孤僻的人 """
+    NO_BEYOND_FRIENDSHIP_TARGET = 80
+    """ 目标对自己没有有超越友谊的想法 """
+    TARGET_IS_HEIGHT = 81
+    """ 目标比自己高 """
+    BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 82
+    """ 对场景中某个角色抱有超越友谊的想法 """
+    HYPOSTHENIA = 83
+    """ 体力不足 """
+    PHYSICAL_STRENGHT = 84
+    """ 体力充沛 """
+    IS_INDULGE = 85
+    """ 是一个放纵的人 """
+    IN_FOUNTAIN = 86
+    """ 在喷泉场景 """
+    TARGET_IS_SOLITARY = 87
+    """ 交互对象是一个孤僻的人 """
+    TARGET_CHEST_IS_CLIFF = 88
+    """ 交互对象胸围是绝壁 """
+    TARGET_ADMIRE = 89
+    """ 被交互对象恋慕 """
+    IS_ENTHUSIASM = 90
+    """ 是一个热情的人 """
+    TARGET_AVERAGE_STATURE_HEIGHT = 91
+    """ 目标体型比平均体型更胖 """
+    TARGET_NO_FIRST_KISS = 92
+    """ 交互对象初吻还在 """
+    NO_FIRST_KISS = 93
+    """ 初吻还在 """
+    IS_TARGET_FIRST_KISS = 94
+    """ 是交互对象的初吻对象 """
+    HAVE_OTHER_TARGET_IN_SCENE = 95
+    """ 场景中有自己和交互对象以外的其他人 """
+    NO_HAVE_OTHER_TARGET_IN_SCENE = 96
+    """ 场景中没有自己和交互对象以外的其他人 """
+    TARGET_HAVE_FIRST_KISS = 97
+    """ 交互对象初吻不在了 """
+    HAVE_FIRST_KISS = 98
+    """ 初吻不在了 """
+    HAVE_LIKE_TARGET = 99
+    """ 有喜欢的人 """
+    HAVE_LIKE_TARGET_IN_SCENE = 100
+    """ 场景中有喜欢的人 """
+    TARGET_IS_STUDENT = 101
+    """ 交互对象是学生 """
+    TARGET_IS_ASTUTE = 102
+    """ 交互对象是一个机敏的人 """
+    TARGET_IS_INFERIORITY = 103
+    """ 交互对象是一个自卑的人 """
+    TARGET_IS_ENTHUSIASM = 104
+    """ 交互对象是一个热情的人 """
+    TARGET_IS_SELF_CONFIDENCE = 105
+    """ 交互对象是一个自信的人 """
+    IS_ASTUTE = 106
+    """ 是一个机敏的人 """
+    TARGET_IS_HEAVY_FEELING = 107
+    """ 交互对象是一个重情的人 """
+    TARGET_NO_FIRST_HAND_IN_HAND = 108
+    """ 交互对象没有牵过手 """
+    NO_FIRST_HAND_IN_HAND = 109
+    """ 没有和牵过手 """
+    IS_HEAVY_FEELING = 110
+    """ 是一个重情的人 """
+    HAVE_NO_FIRST_KISS_LIKE_TARGET_IN_SCENE = 111
+    """ 有自己喜欢的还是初吻的人在场景中 """
+    HAVE_LIKE_TARGET_NO_FIRST_KISS = 112
+    """ 有自己喜欢的人的初吻还在 """
+    TARGET_IS_APATHY = 113
+    """ 交互对象是一个冷漠的人 """
+    TARGET_UNARMED_COMBAT_IS_HIGHT = 114
+    """ 交互对象徒手格斗技能比自己高 """
+    TARGET_DISGUST_IS_HIGHT = 115
+    """ 交互对象反感情绪高涨 """
+    TARGET_LUST_IS_HIGHT = 116
+    """ 交互对象色欲高涨 """
+    TARGET_IS_WOMAN = 117
+    """ 交互对象是女性 """
+    TARGET_IS_NAKED = 118
+    """ 交互对象一丝不挂 """
+    TARGET_CLITORIS_LEVEL_IS_HIGHT = 119
+    """ 交互对象阴蒂开发度高 """
+    TARGET_IS_MAN = 120
+    """ 交互对象是男性 """
+    SEX_EXPERIENCE_IS_HIGHT = 121
+    """ 性技熟练 """
+
+
+class BehaviorEffect:
+    """ 行为结算效果函数 """
+
+    ADD_SMALL_HIT_POINT = 0
+    """ 增加少量体力 """
+    ADD_SMALL_MANA_POINT = 1
+    """ 增加少量气力 """
+    ADD_INTERACTION_FAVORABILITY = 2
+    """ 增加基础互动好感 """
+    SUB_SMALL_HIT_POINT = 3
+    """ 减少少量体力 """
+    SUB_SMALL_MANA_POINT = 4
+    """ 减少少量气力 """
+    MOVE_TO_TARGET_SCENE = 5
+    """ 移动至目标场景 """
+    EAT_FOOD = 6
+    """ 食用指定食物 """
+    ADD_SOCIAL_FAVORABILITY = 7
+    """ 增加社交关系好感 """
+    ADD_INTIMACY_FAVORABILITY = 8
+    """ 增加亲密行为好感(关系不足2则增加反感) """
+    ADD_INTIMATE_FAVORABILITY = 9
+    """ 增加私密行为好感(关系不足3则增加反感) """
+    ADD_SMALL_SING_EXPERIENCE = 10
+    """ 增加少量唱歌技能经验 """
+    ADD_SMALL_ELOQUENCE_EXPERIENCE = 11
+    """ 增加少量口才技能经验 """
+    ADD_SMALL_PLAY_MUSIC_EXPERIENCE = 12
+    """ 增加少量演奏技能经验 """
+    ADD_SMALL_PERFORM_EXPERIENCE = 13
+    """ 增加少量表演技能经验 """
+    ADD_SMALL_CEREMONY_EXPERIENCE = 14
+    """ 增加少量礼仪技能经验 """
+    ADD_SMALL_SEX_EXPERIENCE = 15
+    """ 增加少量性爱技能经验 """
+    ADD_SMALL_MOUTH_SEX_EXPERIENCE = 16
+    """ 增加少量嘴部性爱经验 """
+    ADD_SMALL_MOUTH_HAPPY = 17
+    """ 增加少量嘴部快感 """
+    FIRST_KISS = 18
+    """ 记录初吻 """
+    FIRST_HAND_IN_HAND = 19
+    """ 记录初次牵手 """
+    ADD_MEDIUM_HIT_POINT = 20
+    """ 增加中量体力 """
+    ADD_MEDIUM_MANA_POINT = 21
+    """ 增加中量气力 """
+    TARGET_ADD_SMALL_CHEST_SEX_EXPERIENCE = 22
+    """ 交互对象增加少量胸部性爱经验 """
+    TARGET_ADD_SMALL_CHEST_HAPPY = 23
+    """ 交互对象增加少量胸部快感 """
+    TARGET_ADD_SMALL_CLITORIS_SEX_EXPERIENCE = 24
+    """ 交互对象增加少量阴蒂性爱经验 """
+    TARGET_ADD_SMALL_PENIS_SEX_EXPERIENCE = 25
+    """ 交互对象增加少量阴茎性爱经验 """
+    TARGET_ADD_SMALL_CLITORIS_HAPPY = 26
+    """ 交互对象增加少量阴蒂快感 """
+    TARGET_ADD_SMALL_PENIS_HAPPY = 27
+    """ 交互对象增加少量阴茎经验 """
+    ADD_SMALL_LUST = 28
+    """ 自身增加少量色欲 """
+    TARGET_ADD_SMALL_LUST = 29
+    """ 交互对象增加少量色欲 """
+    INTERRUPT_TARGET_ACTIVITY = 30
+    """ 打断交互对象活动 """
 
 
 class InstructType:
@@ -265,24 +514,55 @@ class InstructType:
     """ 学习 """
     REST = 8
     """ 休息 """
+    SEX = 9
+    """ 性爱 """
+    SYSTEM = 10
+    """ 系统 """
 
 
 class Instruct:
     """ 指令id """
 
+    CHAT = 0
+    """ 闲聊 """
     REST = 0
     """ 休息 """
-    BUY_FOOD = 1
-    """ 购买食物 """
-    EAT = 2
+    SLEEP = 0
+    """ 睡觉 """
+    SINGING = 0
+    """ 唱歌 """
+    PLAY_PIANO = 0
+    """ 弹钢琴 """
+    TOUCH_HEAD = 0
+    """ 摸头 """
+    STROKE = 0
+    """ 抚摸 """
+    HAND_IN_HAND = 0
+    """ 牵手 """
+    EMBRACE = 0
+    """ 拥抱 """
+    KISS = 0
+    """ 亲吻 """
+    EAT = 0
     """ 进食 """
-    MOVE = 3
-    """ 移动 """
-    SEE_ATTR = 4
-    """ 查看属性 """
-    SEE_OWNER_ATTR = 5
-    """ 查看自身属性 """
-    CHAT = 6
-    """ 闲聊 """
-    BUY_ITEM = 7
+    DRINK_SPRING = 0
+    """ 喝泉水 """
+    BUY_FOOD = 0
+    """ 购买食物 """
+    BUY_ITEM = 0
     """ 购买道具 """
+    MOVE = 0
+    """ 移动 """
+    SEE_ATTR = 0
+    """ 查看属性 """
+    SEE_OWNER_ATTR = 0
+    """ 查看自身属性 """
+    SAVE = 0
+    """ 读写存档 """
+
+
+i = 0
+for k in Instruct.__dict__:
+    if isinstance(Instruct.__dict__[k], int):
+        setattr(Instruct, k, i)
+        i += 1

@@ -10,19 +10,24 @@ normal_config.init_normal_config()
 
 
 from Script.Core import get_text
-from Script.Config import game_config, map_config, name_config
+from Script.Config import game_config, name_config
 
 _: FunctionType = get_text._
 """ 翻译api """
 
-if sys.version_info < (3, 9, 0):
-    print(_("python3版本过旧(低于python3.9.0),请升级"))
+if sys.version_info < (3, 9, 1):
+    print(_("python3版本过旧(低于python3.9.1),请升级"))
     exit(0)
 
 
 game_config.init()
-map_config.init_map_data()
 name_config.init_name_data()
+
+
+from Script.Config import map_config
+
+
+map_config.init_map_data()
 
 
 from Script.Design import start_flow, handle_premise, game_time
