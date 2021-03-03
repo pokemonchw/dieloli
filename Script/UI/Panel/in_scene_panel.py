@@ -1,5 +1,6 @@
 from typing import List
 from types import FunctionType
+import time
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import game_info_panel, see_character_info_panel
 from Script.Core import (
@@ -62,6 +63,7 @@ class InScenePanel:
                 now_draw.width = self.width
                 now_draw.draw()
                 continue
+            t1 = time.time()
             character_set = scene_data.character_list.copy()
             character_set.remove(0)
             character_list = list(character_set)
@@ -87,6 +89,8 @@ class InScenePanel:
             character_handle_panel.null_button_text = character_data.target_character_id
             line_feed.draw()
             title_draw.draw()
+            t2 = time.time()
+            print(t2 - t1)
             game_time_draw.draw()
             now_position_draw.draw()
             line_feed.draw()
@@ -297,15 +301,24 @@ class SeeInstructPanel:
         line = draw.LineDraw("~..", self.width)
         line.draw()
         now_instruct_list = []
+        now_premise_data = {}
         for now_type in cache.instruct_filter:
             if cache.instruct_filter[now_type] and now_type in constant.instruct_type_data:
                 for instruct in constant.instruct_type_data[now_type]:
                     premise_judge = 0
                     if instruct in constant.instruct_premise_data:
                         for premise in constant.instruct_premise_data[instruct]:
-                            if not handle_premise.handle_premise(premise, 0):
+                            if premise in now_premise_data:
+                                if now_premise_data[premise]:
+                                    continue
                                 premise_judge = 1
                                 break
+                            else:
+                                now_premise_value = handle_premise.handle_premise(premise, 0)
+                                now_premise_data[premise] = now_premise_value
+                                if not now_premise_value:
+                                    premise_judge = 1
+                                    break
                     if premise_judge:
                         continue
                     now_instruct_list.append(instruct)
