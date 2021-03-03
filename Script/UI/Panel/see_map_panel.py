@@ -190,7 +190,7 @@ class SeeMapPanel:
         """
         py_cmd.clr_cmd()
         line_feed.draw()
-        cache.wframe_mouse.w_frame_skip_wait_mouse = 0
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         character_move.own_charcter_move(scene_path)
 
 
@@ -329,7 +329,7 @@ class MapSceneNameDraw:
         """
         py_cmd.clr_cmd()
         line_feed.draw()
-        cache.wframe_mouse.w_frame_skip_wait_mouse = 0
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         character_move.own_charcter_move(scene_path)
 
 
@@ -448,7 +448,7 @@ class ScenePathNameMoveDraw:
         """
         py_cmd.clr_cmd()
         line_feed.draw()
-        cache.wframe_mouse.w_frame_skip_wait_mouse = 0
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         character_move.own_charcter_move(self.scene_path)
 
 
@@ -548,5 +548,5 @@ class SocialSceneNameDraw:
         """
         py_cmd.clr_cmd()
         line_feed.draw()
-        cache.wframe_mouse.w_frame_skip_wait_mouse = 0
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         character_move.own_charcter_move(self.scene_path)

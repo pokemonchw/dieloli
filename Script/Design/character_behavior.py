@@ -84,7 +84,7 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
     target, _, judge = search_target(character_id, list(game_config.config_target.keys()), set(), {})
     if judge:
         target_config = game_config.config_target[target]
-        cache.handle_state_machine_data[target_config.state_machine_id](character_id)
+        constant.handle_state_machine_data[target_config.state_machine_id](character_id)
     else:
         start_time = cache.character_data[character_id].behavior.start_time
         now_judge = game_time.judge_date_big_or_small(start_time, now_time)

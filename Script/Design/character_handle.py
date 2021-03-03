@@ -293,16 +293,20 @@ def init_character_dormitory():
     character_sex_data["Teacher"] = [
         k[0] for k in sorted(character_sex_data["Teacher"].items(), key=lambda x: x[1])
     ]
-    teacher_dormitory = {x: 0 for x in sorted(cache.place_data["TeacherDormitory"], key=lambda x: x[0])}
-    male_dormitory = {key: cache.place_data[key] for key in cache.place_data if "MaleDormitory" in key}
-    female_dormitory = {key: cache.place_data[key] for key in cache.place_data if "FemaleDormitory" in key}
+    teacher_dormitory = {x: 0 for x in sorted(constant.place_data["TeacherDormitory"], key=lambda x: x[0])}
+    male_dormitory = {
+        key: constant.place_data[key] for key in constant.place_data if "MaleDormitory" in key
+    }
+    female_dormitory = {
+        key: constant.place_data[key] for key in constant.place_data if "FemaleDormitory" in key
+    }
     male_dormitory = {
         x: 0 for j in [k[1] for k in sorted(male_dormitory.items(), key=lambda x: x[0])] for x in j
     }
     female_dormitory = {
         x: 0 for j in [k[1] for k in sorted(female_dormitory.items(), key=lambda x: x[0])] for x in j
     }
-    basement = {x: 0 for x in cache.place_data["Basement"]}
+    basement = {x: 0 for x in constant.place_data["Basement"]}
     male_dormitoryMax = len(male_dormitory.keys())
     female_dormitoryMax = len(female_dormitory.keys())
     teacher_dormitoryMax = len(teacher_dormitory)

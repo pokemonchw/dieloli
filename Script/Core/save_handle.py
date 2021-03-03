@@ -21,7 +21,7 @@ def get_save_dir_path(save_id: str) -> str:
     Keyword arguments:
     save_id -- 存档id
     """
-    save_path = os.path.join(game_path, "save")
+    save_path = os.path.join("save")
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     return os.path.join(save_path, save_id)
@@ -50,7 +50,7 @@ def establish_save(save_id: str):
         "save_time": datetime.datetime.now(),
     }
     data = {
-        "1": cache.__dict__,
+        "1": cache,
         "0": save_verson,
     }
     for data_id in data:
@@ -105,7 +105,7 @@ def input_load_save(save_id: str):
     Keyword arguments:
     save_id -- 存档id
     """
-    cache.__dict__ = load_save(save_id)
+    cache = load_save(save_id)
 
 
 def remove_save(save_id: str):

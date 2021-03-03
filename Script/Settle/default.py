@@ -32,6 +32,8 @@ def handle_add_small_hit_point(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     add_hit_point = add_time
     character_data.hit_point += add_hit_point
@@ -52,8 +54,10 @@ def handle_add_small_mana_point(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
-    add_mana_point = add_time * 1.5
+    add_mana_point = add_time * 10
     character_data.mana_point += add_mana_point
     if character_data.mana_point > character_data.mana_point_max:
         add_mana_point -= character_data.mana_point - character_data.mana_point_max
@@ -72,6 +76,8 @@ def handle_add_interaction_favoravility(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
@@ -92,6 +98,8 @@ def handle_sub_small_hit_point(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.hit_point -= add_time
     change_data.hit_point -= add_time
@@ -108,6 +116,8 @@ def handle_sub_small_mana_point(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     sub_mana = add_time * 1.5
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.mana_point >= sub_mana:
@@ -132,6 +142,8 @@ def handle_move_to_target_scene(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if len(character_data.behavior.move_target):
         map_handle.character_move_scene(
@@ -148,6 +160,8 @@ def handle_eat_food(character_id: int, add_time: int, change_data: game_type.Cha
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.behavior.eat_food != None:
         food: game_type.Food = character_data.behavior.eat_food
@@ -192,6 +206,8 @@ def handle_add_social_favorability(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
@@ -220,6 +236,8 @@ def handle_add_intimacy_favorability(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
@@ -263,6 +281,8 @@ def handle_add_intimate_favorability(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
@@ -307,6 +327,8 @@ def handle_add_small_sing_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.knowledge.setdefault(15, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[15]
@@ -326,6 +348,8 @@ def handle_add_small_play_music_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.knowledge.setdefault(25, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[25]
@@ -345,6 +369,8 @@ def handle_add_small_eloquence_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.knowledge.setdefault(12, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[12]
@@ -364,6 +390,8 @@ def handle_add_small_perform_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.knowledge.setdefault(11, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[11]
@@ -383,6 +411,8 @@ def handle_add_small_ceremony_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.knowledge.setdefault(30, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[30]
@@ -402,6 +432,8 @@ def handle_add_small_sex_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.knowledge.setdefault(9, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[9]
@@ -421,6 +453,8 @@ def handle_add_small_mouth_sex_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
@@ -448,6 +482,8 @@ def handle_add_small_mouth_happy_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
@@ -490,6 +526,8 @@ def handle_first_kiss(character_id: int, add_time: int, change_data: game_type.C
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
@@ -521,6 +559,8 @@ def handle_first_hand_in_hand(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
@@ -545,8 +585,10 @@ def handle_add_medium_hit_point(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
-    add_hit_point = add_time * 1.5
+    add_hit_point = add_time * 10
     character_data.hit_point += add_hit_point
     if character_data.hit_point > character_data.hit_point_max:
         add_hit_point -= character_data.hit_point - character_data.hit_point_max
@@ -565,8 +607,10 @@ def handle_add_medium_mana_point(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
-    add_mana_point = add_time * 3
+    add_mana_point = add_time * 30
     character_data.mana_point += add_mana_point
     if character_data.mana_point > character_data.mana_point_max:
         add_mana_point -= character_data.mana_point - character_data.mana_point_max
@@ -585,6 +629,8 @@ def handle_target_add_small_chest_sex_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
@@ -608,6 +654,8 @@ def handle_target_add_small_mouth_happy(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
@@ -640,6 +688,8 @@ def handle_target_add_small_penis_sex_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.sex in {1, 3}:
         return
@@ -665,6 +715,8 @@ def handle_target_add_small_penis_happy(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.sex in {1, 3}:
         return
@@ -701,6 +753,8 @@ def handle_target_add_small_clitoris_sex_experience(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.sex in {0, 4}:
         return
@@ -726,6 +780,8 @@ def handle_target_add_small_clitoris_happy(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.sex in {0, 4}:
         return
@@ -758,6 +814,8 @@ def handle_add_small_lust(character_id: int, add_time: int, change_data: game_ty
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.status.setdefault(21, 0)
     now_lust = character_data.status[21]
@@ -780,6 +838,8 @@ def handle_target_add_small_lust(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(21, 0)
@@ -807,6 +867,8 @@ def handle_interrupt_target_activity(
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
     """
+    if not add_time:
+        return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_data.state == constant.CharacterStatus.STATUS_DEAD:

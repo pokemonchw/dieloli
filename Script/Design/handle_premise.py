@@ -25,7 +25,7 @@ def add_premise(premise: int) -> FunctionType:
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        cache.handle_premise_data[premise] = return_wrapper
+        constant.handle_premise_data[premise] = return_wrapper
         return return_wrapper
 
     return decoraror
@@ -40,8 +40,8 @@ def handle_premise(premise: int, character_id: int) -> int:
     Return arguments:
     int -- 前提权重加成
     """
-    if premise in cache.handle_premise_data:
-        return cache.handle_premise_data[premise](character_id)
+    if premise in constant.handle_premise_data:
+        return constant.handle_premise_data[premise](character_id)
     else:
         return 0
 
@@ -1376,8 +1376,8 @@ def handle_hyposthenia(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    now_weight = int((character_data.hit_point_max - character_data.hit_point) / 20)
-    now_weight += int((character_data.mana_point_max - character_data.mana_point) / 200)
+    now_weight = int((character_data.hit_point_max - character_data.hit_point) / 5)
+    now_weight += int((character_data.mana_point_max - character_data.mana_point) / 10)
     return now_weight
 
 
@@ -1391,8 +1391,8 @@ def handle_physical_strenght(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    now_weight = int((character_data.hit_point_max / 2 - character_data.hit_point) / 20)
-    now_weight += int((character_data.mana_point_max / 2 - character_data.mana_point) / 200)
+    now_weight = int((character_data.hit_point_max / 2 - character_data.hit_point) / 5)
+    now_weight += int((character_data.mana_point_max / 2 - character_data.mana_point) / 10)
     if now_weight < 0:
         now_weight = 0
     return now_weight
