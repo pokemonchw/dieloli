@@ -51,7 +51,7 @@ CPU: \
 Memory: \
 在默认配置(2800个游戏角色)下，游戏占用总内存不超过250MB \
 系统: \
-本游戏兼容archlinux/steamos/chromeos/ubuntu/debian/aoscos等绝大部分支持gui的linux系操作系统，同时也可以在macos和windows7及以上操作系统中运行
+本游戏兼容archlinux/steamos/chromeos/ubuntu/debian/aoscos等绝大部分支持gui的linux系操作系统，同时也可以在macos和windows7及以上操作系统中运行 \n
 配置调整: \n
 可通过config.ini文件中的 random_npc_max 选项自由调整npc数量,该数量与宿舍/教师/课时等分配相关联,目前只在2800npc下进行过测试，其他数值出现兼容问题请提交反馈
 
