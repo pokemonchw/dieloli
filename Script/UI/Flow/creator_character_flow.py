@@ -43,6 +43,7 @@ def creator_character_panel():
             game_start()
             if confirm_character_attr_panel():
                 break
+        cache.character_data[0] = game_type.Character()
     cache.now_panel_id = constant.Panel.IN_SCENE
 
 

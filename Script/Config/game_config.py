@@ -516,7 +516,7 @@ def load_food_feel_data():
         now_tem.__dict__ = tem_data
         config_food_feel[now_tem.cid] = now_tem
         config_food_feel_data.setdefault(now_tem.food_id, {})
-        config_food_feel_data[now_tem.food_id][now_tem.feel_id] = now_tem.feel_value
+        config_food_feel_data[now_tem.food_id][now_tem.feel_id] = now_tem.feel_value * 10
 
 
 def load_food_quality_weight():

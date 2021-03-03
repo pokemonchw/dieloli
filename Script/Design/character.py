@@ -70,7 +70,7 @@ def init_class(character_data: game_type.Character):
     """
     if character_data.age <= 18 and character_data.age >= 7:
         class_grade = str(character_data.age - 6)
-        character_data.classroom = random.choice(cache.place_data["Classroom_" + class_grade])
+        character_data.classroom = random.choice(constant.place_data["Classroom_" + class_grade])
 
 
 def init_character_behavior_start_time(character_id: int, now_time: datetime.datetime):

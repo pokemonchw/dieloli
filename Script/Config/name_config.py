@@ -1,7 +1,7 @@
 import os
 import time
 from typing import Dict
-from Script.Core import json_handle, value_handle, cache_control, game_type
+from Script.Core import json_handle, value_handle, cache_control, game_type, constant
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -47,11 +47,11 @@ def init_name_region(name_data: Dict[str, int], man_judge: int):
     """
     region_list = value_handle.get_region_list(name_data)
     if man_judge == 0:
-        cache.boys_region_list = region_list
-        cache.boys_region_int_list = list(map(int, region_list))
+        constant.boys_region_list = region_list
+        constant.boys_region_int_list = list(map(int, region_list))
     elif man_judge == 1:
-        cache.girls_region_list = region_list
-        cache.girls_region_int_list = list(map(int, region_list))
+        constant.girls_region_list = region_list
+        constant.girls_region_int_list = list(map(int, region_list))
     else:
-        cache.family_region_list = region_list
-        cache.family_region_int_list = list(map(int, region_list))
+        constant.family_region_list = region_list
+        constant.family_region_int_list = list(map(int, region_list))

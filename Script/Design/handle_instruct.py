@@ -24,8 +24,8 @@ def handle_instruct(instruct: int):
     Keyword arguments:
     instruct -- 指令id
     """
-    if instruct in cache.instruct_premise_data:
-        cache.handle_instruct_data[instruct]()
+    if instruct in constant.instruct_premise_data:
+        constant.handle_instruct_data[instruct]()
 
 
 def add_instruct(instruct_id: int, instruct_type: int, name: str, premise_set: Set):
@@ -43,11 +43,11 @@ def add_instruct(instruct_id: int, instruct_type: int, name: str, premise_set: S
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        cache.handle_instruct_data[instruct_id] = return_wrapper
-        cache.instruct_premise_data[instruct_id] = premise_set
-        cache.instruct_type_data.setdefault(instruct_type, set())
-        cache.instruct_type_data[instruct_type].add(instruct_id)
-        cache.handle_instruct_name_data[instruct_id] = name
+        constant.handle_instruct_data[instruct_id] = return_wrapper
+        constant.instruct_premise_data[instruct_id] = premise_set
+        constant.instruct_type_data.setdefault(instruct_type, set())
+        constant.instruct_type_data[instruct_type].add(instruct_id)
+        constant.handle_instruct_name_data[instruct_id] = name
         return return_wrapper
 
     return decorator
@@ -183,6 +183,7 @@ def handle_sleep():
     character_data.behavior.duration = 480
     character_data.behavior.behavior_id = constant.Behavior.SLEEP
     character_data.state = constant.CharacterStatus.STATUS_SLEEP
+    cache.wframe_mouse.w_frame_skip_wait_mouse = 1
     t1 = time.time()
     update.game_update_flow(480)
     t2 = time.time()

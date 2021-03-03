@@ -502,52 +502,11 @@ class Character:
 class Cache:
     """ 游戏缓存数据结构体 """
 
-    handle_premise_data: Dict[str, FunctionType] = {}
-    """ 前提处理数据 """
-    handle_instruct_data: Dict[int, FunctionType] = {}
-    """ 指令处理数据 """
-    handle_instruct_name_data: Dict[int, str] = {}
-    """ 指令对应文本 """
-    instruct_type_data: Dict[int, Set] = {}
-    """ 指令类型拥有的指令集合 """
-    instruct_premise_data: Dict[int, Set] = {}
-    """ 指令显示的所需前提集合 """
-    handle_state_machine_data: Dict[int, FunctionType] = {}
-    """ 角色状态机函数 """
-    family_region_list: Dict[int, str] = {}
-    """ 姓氏区间数据 """
-    boys_region_list: Dict[int, str] = {}
-    """ 男孩名字区间数据 """
-    girls_region_list: Dict[int, str] = {}
-    """ 女孩名字区间数据 """
-    family_region_int_list: List[int] = []
-    """ 姓氏权重区间数据 """
-    boys_region_int_list: List[int] = []
-    """ 男孩名字权重区间数据 """
-    girls_region_int_list: List[int] = []
-    """ 女孩名字权重区间数据 """
-    panel_data: Dict[int, FunctionType] = {}
-    """
-    面板id对应的面板绘制函数集合
-    面板id:面板绘制函数对象
-    """
-    flow_contorl: FlowContorl = FlowContorl()
-    """ 流程用变量组 """
-    place_data: Dict[str, List[str]] = {}
-    """ 按房间类型分类的场景列表 场景标签:场景路径列表 """
-    back_save_panel: bool = 0
-    """ 退出存档面板 """
-    wframe_mouse: WFrameMouse = WFrameMouse()
-    """ 主页监听控制流程用变量组 """
-    cmd_map: Dict[int, object] = {}
-    """ cmd存储 """
-    behavior_tem_data: dict = {}
-    """ 角色行为控制器数据 """
-    settle_behavior_effect_data: Dict[int, FunctionType] = {}
-    """ 角色行为结算处理器 处理器id:处理器 """
-
     def __init__(self):
-        """ 游戏预设配置数据 """
+        self.back_save_panel: bool = 0
+        """ 退出存档面板 """
+        self.wframe_mouse: WFrameMouse = WFrameMouse()
+        """ 主页监听控制流程用变量组 """
         self.character_data: Dict[int, Character] = {}
         """ 角色对象数据缓存组 """
         self.npc_tem_data: List[NpcTem] = []

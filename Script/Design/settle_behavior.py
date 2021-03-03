@@ -28,7 +28,7 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
     behavior_id = now_character_data.behavior.behavior_id
     if behavior_id in game_config.config_behavior_effect_data:
         for effect_id in game_config.config_behavior_effect_data[behavior_id]:
-            cache.settle_behavior_effect_data[effect_id](character_id, add_time, status_data)
+            constant.settle_behavior_effect_data[effect_id](character_id, add_time, status_data)
     change_character_social(character_id, status_data)
     now_judge = False
     if character_id:
@@ -154,7 +154,7 @@ def add_settle_behavior_effect(behavior_effect_id: int):
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        cache.settle_behavior_effect_data[behavior_effect_id] = return_wrapper
+        constant.settle_behavior_effect_data[behavior_effect_id] = return_wrapper
         return return_wrapper
 
     return decorator

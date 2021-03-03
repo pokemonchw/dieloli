@@ -32,7 +32,7 @@ def character_move_to_rand_cafeteria(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["Cafeteria"]))
+    to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(constant.place_data["Cafeteria"]))
     _, _, move_path, move_time = character_move.character_move(character_id, to_cafeteria)
     character_data.behavior.behavior_id = constant.Behavior.MOVE
     character_data.behavior.move_target = move_path
@@ -69,7 +69,7 @@ def character_move_to_rand_restaurant(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    to_restaurant = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["Restaurant"]))
+    to_restaurant = map_handle.get_map_system_path_for_str(random.choice(constant.place_data["Restaurant"]))
     _, _, move_path, move_time = character_move.character_move(
         character_id,
         map_handle.get_map_system_path_for_str(character_data.classroom),
@@ -257,7 +257,9 @@ def character_move_to_music_room(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(cache.place_data["MusicClassroom"]))
+    to_cafeteria = map_handle.get_map_system_path_for_str(
+        random.choice(constant.place_data["MusicClassroom"])
+    )
     _, _, move_path, move_time = character_move.character_move(character_id, to_cafeteria)
     character_data.behavior.behavior_id = constant.Behavior.MOVE
     character_data.behavior.move_target = move_path

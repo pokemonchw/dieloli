@@ -3,7 +3,6 @@ from tkinter import END
 from PIL.ImageTk import PhotoImage
 from Script.Core import game_path_config, main_frame, game_type, cache_control
 
-game_path = game_path_config.game_path
 textbox = main_frame.textbox
 image_data = {}
 image_text_data = {}
@@ -20,9 +19,9 @@ def get_image_data(image_name: str, image_path: str = "") -> PhotoImage:
     image_path -- 图片路径 (default '')
     """
     if image_path == "":
-        image_path = os.path.join(game_path, "image", image_name + ".png")
+        image_path = os.path.join("image", image_name + ".png")
     else:
-        image_path = os.path.join(game_path, "image", image_path, image_name + ".png")
+        image_path = os.path.join("image", image_path, image_name + ".png")
     cache.image_id += 1
     return PhotoImage(file=image_path)
 

@@ -201,6 +201,8 @@ def read_queue():
             if c["type"] == "cmd":
                 io_print_cmd(c["text"], c["num"], c["normal_style"], c["on_style"])
     root.after(1, read_queue)
+    if textbox.get("1.0", END).count("\n") > normal_config.config_normal.text_hight * 10:
+        textbox.delete("1.0", str(normal_config.config_normal.text_hight * 5) + ".0")
 
 
 def run():

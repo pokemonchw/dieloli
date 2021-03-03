@@ -8,6 +8,7 @@ from Script.Core import (
     get_text,
     game_type,
     cache_control,
+    constant,
 )
 from Script.Config import game_config
 
@@ -64,7 +65,7 @@ def clear_default_flow():
     set_default_flow(null_func)
 
 
-cmd_map = cache.cmd_map
+cmd_map = constant.cmd_map
 
 
 def default_tail_deal_cmd_func(order):
@@ -203,8 +204,6 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
             return ""
         while not io_init._order_queue.empty():
             order = io_init.get_order()
-            if cache.flow_contorl.quit_game:
-                os._exit(0)
             if print_order and order != "":
                 io_init.era_print("\n" + order + "\n")
             if flag == "str":

@@ -163,7 +163,9 @@ def init_teacher_table():
                 phase_room_id = 7 + phase
             else:
                 phase_room_id = 10 + phase
-            classroom_list = cache.place_data[f"Classroom_{phase_room_id}"]
+            if f"Classroom_{phase_room_id}" not in cache.classroom_teacher_data:
+                continue
+            classroom_list = constant.place_data[f"Classroom_{phase_room_id}"]
             for day in class_time_table:
                 for classroom in classroom_list:
                     if classroom not in cache.classroom_teacher_data[f"Classroom_{phase_room_id}"]:
@@ -182,7 +184,7 @@ def init_teacher_table():
                                 cache.character_data[
                                     now_teacher
                                 ].officeroom = map_handle.get_map_system_path_str_for_list(
-                                    cache.place_data[f"Office_{phase_room_id}"]
+                                    constant.place_data[f"Office_{phase_room_id}"]
                                 )
                             teacher_table.setdefault(now_teacher, 0)
                             if teacher_table[now_teacher] < 14:
@@ -209,7 +211,7 @@ def course_abmain_distribution():
         if phase > 9:
             school_id = 2
             school_phase = phase - 10
-        class_list = cache.place_data["Classroom_" + str(phase)]
+        class_list = constant.place_data["Classroom_" + str(phase)]
         cache.classroom_teacher_data["Classroom_" + str(phase)] = {}
         for classroom in class_list:
             cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(classroom, {})
@@ -242,7 +244,7 @@ def course_distribution_a():
         if phase > 9:
             school_id = 2
             school_phase = phase - 10
-        classroom_list = cache.place_data["Classroom_" + str(phase)]
+        classroom_list = constant.place_data["Classroom_" + str(phase)]
         cache.classroom_teacher_data["Classroom_" + str(phase)] = {}
         for classroom in classroom_list:
             cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(classroom, {})
@@ -272,7 +274,7 @@ def course_distribution_b():
         if phase > 9:
             school_id = 2
             school_phase = phase - 10
-        classroom_list = cache.place_data["Classroom_" + str(phase)]
+        classroom_list = constant.place_data["Classroom_" + str(phase)]
         cache.classroom_teacher_data["Classroom_" + str(phase)] = {}
         teacher_course_index = 0
         for course in cache.course_data[school_id][school_phase]:

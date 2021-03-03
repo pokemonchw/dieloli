@@ -51,7 +51,7 @@ class InScenePanel:
             self.width,
             1,
             0,
-            len(cache.handle_instruct_name_data),
+            len(constant.handle_instruct_name_data),
             null_button_text=character_data.target_character_id,
         )
         while 1:
@@ -62,8 +62,9 @@ class InScenePanel:
                 now_draw.width = self.width
                 now_draw.draw()
                 continue
-            character_list = list(scene_data.character_list)
-            character_list.remove(0)
+            character_set = scene_data.character_list.copy()
+            character_set.remove(0)
+            character_list = list(character_set)
             character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
                 character_data.target_character_id = 0
@@ -297,11 +298,11 @@ class SeeInstructPanel:
         line.draw()
         now_instruct_list = []
         for now_type in cache.instruct_filter:
-            if cache.instruct_filter[now_type] and now_type in cache.instruct_type_data:
-                for instruct in cache.instruct_type_data[now_type]:
+            if cache.instruct_filter[now_type] and now_type in constant.instruct_type_data:
+                for instruct in constant.instruct_type_data[now_type]:
                     premise_judge = 0
-                    if instruct in cache.instruct_premise_data:
-                        for premise in cache.instruct_premise_data[instruct]:
+                    if instruct in constant.instruct_premise_data:
+                        for premise in constant.instruct_premise_data[instruct]:
                             if not handle_premise.handle_premise(premise, 0):
                                 premise_judge = 1
                                 break
@@ -313,7 +314,7 @@ class SeeInstructPanel:
         now_draw_list = []
         for instruct_list in instruct_group:
             for instruct_id in instruct_list:
-                instruct_name = cache.handle_instruct_name_data[instruct_id]
+                instruct_name = constant.handle_instruct_name_data[instruct_id]
                 id_text = text_handle.id_index(instruct_id)
                 now_text = f"{id_text}{instruct_name}"
                 now_draw = draw.LeftButton(

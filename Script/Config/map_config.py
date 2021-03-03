@@ -3,7 +3,7 @@ import pickle
 import time
 from typing import Dict, List
 from dijkstar import Graph, find_path
-from Script.Core import game_type, json_handle, get_text, text_handle, cache_control
+from Script.Core import game_type, json_handle, get_text, text_handle, cache_control, constant
 from Script.Design import map_handle
 
 cache: game_type.Cache = cache_control.cache
@@ -33,7 +33,7 @@ def init_map_data():
         with open(all_map_data_path, "rb") as all_map_data_file:
             cache.map_data = pickle.load(all_map_data_file)
         with open(all_place_data_path, "rb") as all_place_data_file:
-            cache.place_data = pickle.load(all_place_data_file)
+            constant.place_data = pickle.load(all_place_data_file)
         map_handle.scene_path_edge = json_handle.load_json(scene_path_edge_path)
     else:
         load_dir_now(map_data_path)
@@ -42,7 +42,7 @@ def init_map_data():
         with open(all_scene_data_path, "wb") as all_scene_data_file:
             pickle.dump(cache.scene_data, all_scene_data_file)
         with open(all_place_data_path, "wb") as all_place_data_file:
-            pickle.dump(cache.place_data, all_place_data_file)
+            pickle.dump(constant.place_data, all_place_data_file)
         map_handle.init_scene_edge_path_data()
 
 
@@ -68,8 +68,8 @@ def load_dir_now(data_path: str):
                         now_scene_data.in_door = load_scene_data["InOutDoor"] == "In"
                         now_scene_data.scene_tag = load_scene_data["SceneTag"]
                         cache.scene_data[now_scene_data.scene_path] = now_scene_data
-                        cache.place_data.setdefault(now_scene_data.scene_tag, [])
-                        cache.place_data[now_scene_data.scene_tag].append(now_scene_data.scene_path)
+                        constant.place_data.setdefault(now_scene_data.scene_tag, [])
+                        constant.place_data[now_scene_data.scene_tag].append(now_scene_data.scene_path)
                     elif now_file[0] == "Map":
                         now_map_data = game_type.Map()
                         now_map_data.map_path = get_map_system_path_str(
