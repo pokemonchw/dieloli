@@ -539,6 +539,8 @@ class Instruct:
     """ 弹钢琴 """
     TOUCH_HEAD = 0
     """ 摸头 """
+    TOUCH_CHEST = 0
+    """ 摸胸 """
     STROKE = 0
     """ 抚摸 """
     HAND_IN_HAND = 0

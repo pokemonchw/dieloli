@@ -285,7 +285,7 @@ def handle_stroke():
 
 
 @add_instruct(
-    constant.Instruct.TOUCH_HEAD,
+    constant.Instruct.TOUCH_CHEST,
     constant.InstructType.SEX,
     _("摸胸"),
     {constant.Premise.HAVE_TARGET},
