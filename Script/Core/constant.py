@@ -428,6 +428,16 @@ class Premise:
     """ 交互对象是男性 """
     SEX_EXPERIENCE_IS_HIGHT = 121
     """ 性技熟练 """
+    IS_COLLECTION_SYSTEM = 122
+    """ 玩家已启用收藏模式 """
+    UN_COLLECTION_SYSTEM = 123
+    """ 玩家未启用收藏模式 """
+    TARGET_IS_COLLECTION = 124
+    """ 交互对象已被玩家收藏 """
+    TARGET_IS_NOT_COLLECTION = 125
+    """ 交互对象未被玩家收藏 """
+    TARGET_IS_LIVE = 126
+    """ 交互对象未死亡 """
 
 
 class BehaviorEffect:
@@ -565,6 +575,14 @@ class Instruct:
     """ 查看自身属性 """
     SAVE = 0
     """ 读写存档 """
+    COLLECTION_CHARACTER = 0
+    """ 收藏角色 """
+    UN_COLLECTION_CHARACTER = 0
+    """ 取消收藏 """
+    COLLECTION_SYSTEM = 0
+    """ 启用收藏模式 """
+    UN_COLLECTION_SYSTEM = 0
+    """ 关闭收藏模式 """
 
 
 i = 0

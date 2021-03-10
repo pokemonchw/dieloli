@@ -252,7 +252,7 @@ class CharacterInfoHead:
         hp_draw.scale = 0.8
         hp_draw.set(
             "HitPointbar",
-            character_data.hit_point_max,
+            int(character_data.hit_point_max),
             int(character_data.hit_point),
             _("体力"),
         )
@@ -261,7 +261,7 @@ class CharacterInfoHead:
         mp_draw.scale = 0.8
         mp_draw.set(
             "ManaPointbar",
-            character_data.mana_point_max,
+            int(character_data.mana_point_max),
             int(character_data.mana_point),
             _("气力"),
         )
@@ -473,15 +473,17 @@ class CharacterStatureInfoText:
         """ 要绘制的角色id """
         self.width = width
         """ 当前最大可绘制宽度 """
-        character_data = cache.character_data[self.character_id]
+        character_data: game_type.Character = cache.character_data[self.character_id]
         now_height = str(round(character_data.height.now_height, 2))
-        now_height_text = _("身高") + now_height
+        now_height_text = _("身高:") + now_height
         now_weight = str(round(character_data.weight, 2))
-        now_weight_text = _("体重") + now_weight
+        now_weight_text = _("体重:") + now_weight
         now_chest_tem_id = attr_calculation.judge_chest_group(character_data.chest.now_chest)
         now_chest_tem = game_config.config_chest[now_chest_tem_id]
+        body_fat = str(round(character_data.bodyfat, 2))
+        body_fat_text = _("体脂率:") + body_fat
         now_chest_text = _("罩杯:") + now_chest_tem.info
-        self.info_list = [now_height_text, now_chest_text, now_weight_text]
+        self.info_list = [now_height_text, now_weight_text, now_chest_text, body_fat_text]
         """ 绘制的文本列表 """
 
     def draw(self):
@@ -489,7 +491,7 @@ class CharacterStatureInfoText:
         line = draw.LineDraw(".", self.width)
         line.draw()
         info_draw = panel.CenterDrawTextListPanel()
-        info_draw.set(self.info_list, self.width, 3)
+        info_draw.set(self.info_list, self.width, 4)
         info_draw.draw()
 
 
@@ -945,8 +947,51 @@ class SeeCharacterInfoByNameDraw:
         now_draw.draw()
 
 
-class SeeCharacterInfoByNameDrawInScene(SeeCharacterInfoByNameDraw):
+class SeeCharacterInfoByNameDrawInScene:
     """ 场景中点击后切换目标角色的角色名字按钮对象 """
+
+    def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
+        """ 初始化绘制对象 """
+        self.character_id: int = int(text)
+        """ 角色id """
+        self.draw_text: str = ""
+        """ 角色名绘制文本 """
+        self.width: int = width
+        """ 最大宽度 """
+        self.is_button: bool = is_button
+        """ 绘制按钮 """
+        self.num_button: bool = num_button
+        """ 绘制数字按钮 """
+        self.button_id: int = button_id
+        """ 数字按钮的id """
+        self.button_return: str = str(button_id)
+        """ 按钮返回值 """
+        character_data: game_type.Character = cache.character_data[self.character_id]
+        sex_text = game_config.config_sex_tem[character_data.sex].name
+        character_name = character_data.name + f"({sex_text})"
+        name_draw = draw.NormalDraw()
+        if is_button:
+            if num_button:
+                index_text = text_handle.id_index(button_id)
+                button_text = f"{index_text} {character_name}"
+                name_draw = draw.CenterButton(
+                    button_text, self.button_return, self.width, cmd_func=self.see_character
+                )
+            else:
+                button_text = f"[{character_name}]"
+                name_draw = draw.CenterButton(
+                    button_text, character_name, self.width, cmd_func=self.see_character
+                )
+                self.button_return = character_name
+            self.draw_text = button_text
+        else:
+            character_name = f"[{character_name}]"
+            character_name = text_handle.align(character_name, "center", 0, 1, self.width)
+            name_draw.text = character_name
+            self.draw_text = character_name
+        name_draw.width = self.width
+        self.now_draw = name_draw
+        """ 绘制的对象 """
 
     def draw(self):
         """ 绘制对象 """
@@ -1177,8 +1222,12 @@ class SeeCharacterInfoInScenePanel:
         position = cache.character_data[0].position
         position_str = map_handle.get_map_system_path_str_for_list(position)
         scene_data: game_type.Scene = cache.scene_data[position_str]
-        now_list = list(scene_data.character_list)
-        now_list.remove(0)
+        if cache.is_collection:
+            character_data: game_type.Character = cache.character_data[0]
+            now_list = [i for i in scene_data.character_list if i in character_data.collection_character]
+        else:
+            now_list = list(scene_data.character_list)
+            now_list.remove(0)
         self.handle_panel = SeeCharacterInfoHandleInScene(target_id, width, now_list)
         """ 绘制控制面板 """
 

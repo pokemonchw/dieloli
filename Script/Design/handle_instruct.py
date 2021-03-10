@@ -184,10 +184,7 @@ def handle_sleep():
     character_data.behavior.behavior_id = constant.Behavior.SLEEP
     character_data.state = constant.CharacterStatus.STATUS_SLEEP
     cache.wframe_mouse.w_frame_skip_wait_mouse = 1
-    t1 = time.time()
     update.game_update_flow(480)
-    t2 = time.time()
-    print(t2 - t1)
 
 
 @add_instruct(
@@ -204,7 +201,7 @@ def handle_drink_spring():
         now_draw.text += _("喝到了奇怪的泉水！身体变化了！！！")
         character_data.sex = 1
         character_data.height = attr_calculation.get_height(1, character_data.age)
-        bmi = attr_calculation.get_bmi(character_data.weigt_tem)
+        bmi = attr_calculation.get_bmi(character_data.weight_tem)
         character_data.weight = attr_calculation.get_weight(bmi, character_data.height.now_height)
         character_data.bodyfat = attr_calculation.get_body_fat(
             character_data.sex, character_data.bodyfat_tem
@@ -298,3 +295,61 @@ def handle_touch_chest():
     character_data.behavior.behavior_id = constant.Behavior.TOUCH_CHEST
     character_data.state = constant.CharacterStatus.STATUS_TOUCH_CHEST
     update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.COLLECTION_CHARACTER,
+    constant.InstructType.SYSTEM,
+    _("收藏角色"),
+    {constant.Premise.TARGET_IS_NOT_COLLECTION, constant.Premise.TARGET_NO_PLAYER},
+)
+def handle_collection_character():
+    """ 处理收藏角色指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    target_character_id = character_data.target_character_id
+    if target_character_id not in character_data.collection_character:
+        character_data.collection_character.add(target_character_id)
+
+
+@add_instruct(
+    constant.Instruct.UN_COLLECTION_CHARACTER,
+    constant.InstructType.SYSTEM,
+    _("取消收藏"),
+    {constant.Premise.TARGET_IS_COLLECTION, constant.Premise.TARGET_NO_PLAYER},
+)
+def handle_un_collection_character():
+    """ 处理取消指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    target_character_id = character_data.target_character_id
+    if target_character_id in character_data.collection_character:
+        character_data.collection_character.remove(target_character_id)
+
+
+@add_instruct(
+    constant.Instruct.COLLECTION_SYSTEM,
+    constant.InstructType.SYSTEM,
+    _("启用收藏模式"),
+    {constant.Premise.UN_COLLECTION_SYSTEM},
+)
+def handle_collection_system():
+    """ 处理启用收藏模式指令 """
+    cache.is_collection = 1
+    now_draw = draw.WaitDraw()
+    now_draw.width = width
+    now_draw.text = _("\n现在只会显示被收藏的角色的信息了！\n")
+    now_draw.draw()
+
+
+@add_instruct(
+    constant.Instruct.UN_COLLECTION_SYSTEM,
+    constant.InstructType.SYSTEM,
+    _("关闭收藏模式"),
+    {constant.Premise.IS_COLLECTION_SYSTEM},
+)
+def handle_un_collection_system():
+    """ 处理关闭收藏模式指令 """
+    cache.is_collection = 0
+    now_draw = draw.WaitDraw()
+    now_draw.width = width
+    now_draw.text = _("\n现在会显示所有角色的信息了！\n")
+    now_draw.draw()

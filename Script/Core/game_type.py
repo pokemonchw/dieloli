@@ -448,7 +448,7 @@ class Character:
         """ 角色宿舍坐标 """
         self.birthday: datetime.datetime = datetime.datetime(1, 1, 1)
         """ 角色生日数据 """
-        self.weigt_tem: int = 1
+        self.weight_tem: int = 1
         """ 角色体重模板 """
         self.bodyfat_tem: int = 1
         """ 角色体脂率模板 """
@@ -497,6 +497,8 @@ class Character:
         """ 初次牵手对象 -1为无 """
         self.dead: bool = 0
         """ 角色已死亡 """
+        self.collection_character: Set = set()
+        """ 收藏的角色列表 """
 
 
 class Cache:
@@ -615,6 +617,8 @@ class Cache:
         """ 学校经度 """
         self.school_latitude: float = 0
         """ 学校纬度 """
+        self.is_collection: bool = 0
+        """ 启用收藏模式 """
 
 
 class TargetChange:

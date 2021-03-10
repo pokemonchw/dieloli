@@ -10,7 +10,7 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
-def handle_talk(character_id):
+def handle_talk(character_id: int):
     """
     处理行为结算对话
     Keyword arguments:
@@ -20,6 +20,10 @@ def handle_talk(character_id):
     behavior_id = character_data.behavior.behavior_id
     now_talk_data = {}
     now_premise_data = {}
+    if cache.is_collection and character_id:
+        player_data: game_type.Character = cache.character_data[0]
+        if character_id not in player_data.collection_character:
+            return
     if (
         character_data.position != cache.character_data[0].position
         and character_data.behavior.move_src != cache.character_data[0].position
