@@ -94,7 +94,7 @@ def init_character(character_id: int, character_tem: game_type.NpcTem):
     if character_tem.Age != "":
         now_character.age = attr_calculation.get_age(character_tem.Age)
     if character_tem.Weight != "":
-        now_character.weigt_tem = character_tem.Weight
+        now_character.weight_tem = character_tem.Weight
     if character_tem.SexExperienceTem != "":
         if character_tem.SexExperienceTem != "Rand":
             now_character.sex_experience_tem = character_tem.SexExperienceTem
@@ -105,7 +105,7 @@ def init_character(character_id: int, character_tem: game_type.NpcTem):
     if character_tem.BodyFat:
         now_character.bodyfat_tem = character_tem.BodyFat
     else:
-        now_character.bodyfat_tem = now_character.weigt_tem
+        now_character.bodyfat_tem = now_character.weight_tem
     if character_tem.Chest:
         now_character.chest_tem = character_tem.Chest
     cache.character_data[character_id] = now_character
@@ -225,15 +225,15 @@ def get_rand_npc_sex_experience_tem(age: int, sex: int) -> int:
 body_fat_weight_data = game_config.config_occupation_bodyfat_region_data
 
 
-def get_rand_npc_body_fat_tem(age_judge: str, bmi_tem: str) -> str:
+def get_rand_npc_body_fat_tem(age_judge: str, bmi_tem: int) -> int:
     """
     按职业和体重随机生成体脂率模板
     Keyword arguments:
     age_judge -- 职业(student:学生,teacher:老师)
     bmi_tem -- bmi模板
     """
-    now_body_fat_data = game_config.config_occupation_bodyfat_region_data[age_judge][bmi_tem]
-    return value_handle.get_random_for_weight(now_body_fat_data)
+    # now_body_fat_data = game_config.config_occupation_bodyfat_region_data[age_judge][bmi_tem]
+    return bmi_tem
 
 
 def get_rand_npc_age_tem(age_judge: str) -> int:
@@ -342,9 +342,7 @@ def init_character_dormitory():
 
 
 def init_character_position():
-    """
-    初始化角色位置
-    """
+    """ 初始化角色位置 """
     for character_id in cache.character_data:
         character_position = cache.character_data[character_id].position
         character_dormitory = cache.character_data[character_id].dormitory

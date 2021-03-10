@@ -171,7 +171,7 @@ def input_sex_panel() -> bool:
     bool -- 完成角色创建校验
     """
     create_judge = 0
-    character_data = cache.character_data[0]
+    character_data: game_type.Character = cache.character_data[0]
     sex_list = [game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(
@@ -186,6 +186,8 @@ def input_sex_panel() -> bool:
     if now_id == len(return_list) - 1:
         now_id = random.randint(0, now_id - 1)
     character_data.sex = now_id
+    if character_data.sex in {1, 2}:
+        character_data.chest_tem = attr_calculation.get_rand_npc_chest_tem()
     create_judge = input_setting_panel()
     return create_judge
 
@@ -285,7 +287,7 @@ def setting_weight_panel():
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.weigt_tem = int(ans)
+    character_data.weight_tem = int(ans)
 
 
 @add_setting_panel()

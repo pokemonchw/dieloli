@@ -117,6 +117,8 @@ class ChestTem:
     """ 最小值 """
     max_value: float
     """ 最大值 """
+    weight_fix: float
+    """ 体重修正 """
     weight: int
     """ 权重 """
     info: str

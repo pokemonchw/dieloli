@@ -47,8 +47,8 @@ class InScenePanel:
         character_handle_panel = panel.PageHandlePanel(
             [],
             see_character_info_panel.SeeCharacterInfoByNameDrawInScene,
-            20,
             10,
+            5,
             self.width,
             1,
             0,
@@ -63,10 +63,12 @@ class InScenePanel:
                 now_draw.width = self.width
                 now_draw.draw()
                 continue
-            t1 = time.time()
             character_set = scene_data.character_list.copy()
             character_set.remove(0)
-            character_list = list(character_set)
+            if cache.is_collection:
+                character_list = [i for i in character_set if i in character_data.collection_character]
+            else:
+                character_list = list(character_set)
             character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
                 character_data.target_character_id = 0
@@ -89,13 +91,15 @@ class InScenePanel:
             character_handle_panel.null_button_text = character_data.target_character_id
             line_feed.draw()
             title_draw.draw()
-            t2 = time.time()
-            print(t2 - t1)
             game_time_draw.draw()
             now_position_draw.draw()
             line_feed.draw()
             ask_list = []
-            if len(scene_data.character_list) > 1:
+            if len(character_list) and character_data.target_character_id not in character_list:
+                character_data.target_character_id = character_list[0]
+            if not len(character_list):
+                character_data.target_character_id = 0
+            if len(character_list):
                 meet_draw.draw()
                 line_feed.draw()
                 character_handle_panel.update()
@@ -130,10 +134,10 @@ class InScenePanel:
             character_clothing_draw_list = []
             if character_data.target_character_id:
                 character_clothing_draw = see_character_info_panel.CharacterWearClothingList(
-                    0, self.width / 2, 3
+                    0, self.width / 2, 2
                 )
                 target_clothing_draw = see_character_info_panel.CharacterWearClothingList(
-                    character_data.target_character_id, self.width / 2 - 1, 3
+                    character_data.target_character_id, self.width / 2 - 1, 2
                 )
                 now_line = len(character_clothing_draw.draw_list)
                 if len(target_clothing_draw.draw_list) > now_line:
@@ -184,10 +188,10 @@ class InScenePanel:
             character_status_draw_list = []
             if character_data.target_character_id:
                 character_status_draw = see_character_info_panel.SeeCharacterStatusPanel(
-                    character_data.cid, self.width / 2, 4, 0
+                    character_data.cid, self.width / 2, 3, 0
                 )
                 target_status_draw = see_character_info_panel.SeeCharacterStatusPanel(
-                    character_data.target_character_id, self.width / 2 - 1, 4, 0
+                    character_data.target_character_id, self.width / 2 - 1, 3, 0
                 )
                 now_line = len(character_status_draw.draw_list)
                 if len(target_status_draw.draw_list) > now_line:
@@ -280,6 +284,9 @@ class SeeInstructPanel:
                     f"[{now_config.name}]",
                     now_config.name,
                     self.width / len(cache.instruct_filter),
+                    " ",
+                    "onbutton",
+                    "standard",
                     cmd_func=self.change_filter,
                     args=(now_type,),
                 )
@@ -288,11 +295,8 @@ class SeeInstructPanel:
                     f"[{now_config.name}]",
                     now_config.name,
                     self.width / len(cache.instruct_filter),
-                    " ",
-                    "onbutton",
-                    "standard",
-                    self.change_filter,
-                    (now_type,),
+                    cmd_func=self.change_filter,
+                    args=(now_type,),
                 )
             now_button.width = int(self.width / len(cache.instruct_filter))
             self.return_list.append(now_button.return_text)

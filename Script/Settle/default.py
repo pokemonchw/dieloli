@@ -35,6 +35,8 @@ def handle_add_small_hit_point(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     add_hit_point = add_time
     character_data.hit_point += add_hit_point
     if character_data.hit_point > character_data.hit_point_max:
@@ -57,6 +59,8 @@ def handle_add_small_mana_point(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     add_mana_point = add_time * 10
     character_data.mana_point += add_mana_point
     if character_data.mana_point > character_data.mana_point_max:
@@ -81,6 +85,8 @@ def handle_add_interaction_favoravility(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        if target_data.dead:
+            return
         change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
         target_change = change_data.target_change[target_data.cid]
         add_favorability = character.calculation_favorability(character_id, target_data.cid, add_time)
@@ -101,6 +107,8 @@ def handle_sub_small_hit_point(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     character_data.hit_point -= add_time
     change_data.hit_point -= add_time
 
@@ -120,6 +128,8 @@ def handle_sub_small_mana_point(
         return
     sub_mana = add_time * 1.5
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     if character_data.mana_point >= sub_mana:
         character_data.mana_point -= sub_mana
         change_data.mana_point -= sub_mana
@@ -145,6 +155,8 @@ def handle_move_to_target_scene(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     if len(character_data.behavior.move_target):
         map_handle.character_move_scene(
             character_data.position, character_data.behavior.move_target, character_id
@@ -163,6 +175,8 @@ def handle_eat_food(character_id: int, add_time: int, change_data: game_type.Cha
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     if character_data.behavior.eat_food != None:
         food: game_type.Food = character_data.behavior.eat_food
         eat_weight = 100
@@ -211,6 +225,8 @@ def handle_add_social_favorability(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        if target_data.dead:
+            return
         if (
             character_id in target_data.social_contact_data
             and target_data.social_contact_data[character_id]
@@ -241,6 +257,8 @@ def handle_add_intimacy_favorability(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        if target_data.dead:
+            return
         add_favorability = character.calculation_favorability(
             character_id, character_data.target_character_id, add_time * 1.5
         )
@@ -286,6 +304,8 @@ def handle_add_intimate_favorability(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        if target_data.dead:
+            return
         add_favorability = character.calculation_favorability(
             character_id, character_data.target_character_id, add_time * 2
         )
@@ -330,6 +350,8 @@ def handle_add_small_sing_experience(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     character_data.knowledge.setdefault(15, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[15]
     character_data.knowledge[15] += experience
@@ -351,6 +373,8 @@ def handle_add_small_play_music_experience(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     character_data.knowledge.setdefault(25, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[25]
     character_data.knowledge[25] += experience
@@ -372,6 +396,8 @@ def handle_add_small_eloquence_experience(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     character_data.knowledge.setdefault(12, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[12]
     character_data.knowledge[12] += experience
@@ -393,6 +419,8 @@ def handle_add_small_perform_experience(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     character_data.knowledge.setdefault(11, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[11]
     character_data.knowledge[11] += experience
@@ -414,6 +442,8 @@ def handle_add_small_ceremony_experience(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     character_data.knowledge.setdefault(30, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[30]
     character_data.knowledge[30] += experience
@@ -435,6 +465,8 @@ def handle_add_small_sex_experience(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     character_data.knowledge.setdefault(9, 0)
     experience = 0.01 * add_time * character_data.knowledge_interest[9]
     character_data.knowledge[9] += experience
@@ -456,6 +488,8 @@ def handle_add_small_mouth_sex_experience(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
     if target_data.social_contact_data[character_id] >= 3:
@@ -485,6 +519,8 @@ def handle_add_small_mouth_happy_experience(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
     if target_data.social_contact_data[character_id] >= 3:
@@ -588,6 +624,8 @@ def handle_add_medium_hit_point(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     add_hit_point = add_time * 10
     character_data.hit_point += add_hit_point
     if character_data.hit_point > character_data.hit_point_max:
@@ -610,6 +648,8 @@ def handle_add_medium_mana_point(
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     add_mana_point = add_time * 30
     character_data.mana_point += add_mana_point
     if character_data.mana_point > character_data.mana_point_max:
@@ -633,6 +673,8 @@ def handle_target_add_small_chest_sex_experience(
         return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
     target_data.social_contact_data.setdefault(character_id, 0)
     if target_data.social_contact_data[character_id] >= 3:
         target_data.sex_experience.setdefault(1, 0)
@@ -658,6 +700,8 @@ def handle_target_add_small_mouth_happy(
         return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
     target_data.social_contact_data.setdefault(character_id, 0)
     if target_data.social_contact_data[character_id] >= 3:
         target_data.status.setdefault(1, 0)
@@ -694,6 +738,8 @@ def handle_target_add_small_penis_sex_experience(
     if character_data.sex in {1, 3}:
         return
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
     target_data.social_contact_data.setdefault(character_id, 0)
     if target_data.social_contact_data[character_id] >= 3:
         target_data.sex_experience.setdefault(3, 0)
@@ -721,6 +767,8 @@ def handle_target_add_small_penis_happy(
     if character_data.sex in {1, 3}:
         return
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
     target_data.social_contact_data.setdefault(character_id, 0)
     if target_data.social_contact_data[character_id] >= 3:
         target_data.status.setdefault(5, 0)
@@ -759,6 +807,8 @@ def handle_target_add_small_clitoris_sex_experience(
     if character_data.sex in {0, 4}:
         return
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
     target_data.social_contact_data.setdefault(character_id, 0)
     if target_data.social_contact_data[character_id] >= 3:
         target_data.sex_experience.setdefault(2, 0)
@@ -786,6 +836,8 @@ def handle_target_add_small_clitoris_happy(
     if character_data.sex in {0, 4}:
         return
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
     target_data.social_contact_data.setdefault(character_id, 0)
     if target_data.social_contact_data[character_id] >= 3:
         target_data.status.setdefault(3, 0)
@@ -817,6 +869,8 @@ def handle_add_small_lust(character_id: int, add_time: int, change_data: game_ty
     if not add_time:
         return
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
     character_data.status.setdefault(21, 0)
     now_lust = character_data.status[21]
     now_lust_multiple = 1 + now_lust / 10
@@ -842,6 +896,8 @@ def handle_target_add_small_lust(
         return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
     target_data.status.setdefault(21, 0)
     target_data.social_contact_data.setdefault(character_id, 0)
     if target_data.social_contact_data[character_id] >= 2:
@@ -871,6 +927,8 @@ def handle_interrupt_target_activity(
         return
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
     if target_data.state == constant.CharacterStatus.STATUS_DEAD:
         return
     if target_data.behavior.behavior_id:

@@ -102,3 +102,20 @@ def list_of_groups(init_list: list, children_list_len: int) -> List[list]:
     count = len(init_list) % children_list_len
     end_list.append(init_list[-count:]) if count != 0 else end_list
     return end_list
+
+
+def get_gauss_rand(min_value: int, max_value: int) -> int:
+    """
+    通过正态分布获取两个值之间的随机值
+    Keyword arguments:
+    min_value -- 最小值
+    max_value -- 最大值
+    Return arguments:
+    int -- 获取的随机值
+    """
+    mu = (min_value + max_value) / 2
+    single = mu - min_value
+    while 1:
+        value = random.gauss(mu, single)
+        if value >= min_value and value <= max_value:
+            return value

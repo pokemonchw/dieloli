@@ -43,7 +43,7 @@ def get_end_age(sex: int) -> int:
     sex -- 性别
     """
     tem_value = game_config.config_end_age_tem_sex_data[sex]
-    return random.randint(int(tem_value * 0.5), int(tem_value * 1.5))
+    return value_handle.get_gauss_rand(int(tem_value * 0.5), int(tem_value * 1.5))
 
 
 def get_height(tem_name: int, age: int) -> game_type.Height:
@@ -54,7 +54,7 @@ def get_height(tem_name: int, age: int) -> game_type.Height:
     age -- 人物年龄
     """
     tem_data = game_config.config_height_tem_sex_data[tem_name]
-    initial_height = random.uniform(tem_data.min_value, tem_data.max_value)
+    initial_height = value_handle.get_gauss_rand(tem_data.max_value, tem_data.max_value)
     if tem_name in {0, 3}:
         expect_age = random.randint(18, 22)
         expect_height = initial_height / 0.2949
@@ -65,10 +65,8 @@ def get_height(tem_name: int, age: int) -> game_type.Height:
     growth_height_data = get_growth_height(age, expect_height, development_age, expect_age)
     growth_height = growth_height_data["GrowthHeight"]
     now_height = growth_height_data["NowHeight"]
-    if age > expect_age:
+    if now_height >= expect_height:
         now_height = expect_height
-    else:
-        now_height = 365 * growth_height * age + now_height
     height_data = game_type.Height()
     height_data.now_height = now_height
     height_data.growth_height = growth_height
@@ -88,7 +86,7 @@ def get_chest(chest_tem: int, birthday: datetime.datetime) -> game_type.Chest:
     game_type.Chest -- 胸围数据
     """
     target_chest = get_rand_npc_chest(chest_tem)
-    over_age = random.randint(14, 18)
+    over_age = int(value_handle.get_gauss_rand(14, 18))
     over_year = birthday.year + over_age
     end_date = game_time.get_rand_day_for_year(over_year)
     now_date = cache.game_time
@@ -96,7 +94,7 @@ def get_chest(chest_tem: int, birthday: datetime.datetime) -> game_type.Chest:
     now_day = game_time.count_day_for_datetime(birthday, now_date)
     sub_chest = target_chest / end_day
     now_chest = sub_chest * now_day
-    if now_chest > sub_chest:
+    if now_chest > target_chest:
         now_chest = target_chest
     chest = game_type.Chest()
     chest.now_chest = now_chest
@@ -122,7 +120,7 @@ def get_rand_npc_chest(chest_tem: int) -> int:
     chest_tem -- 罩杯模板
     """
     chest_scope = game_config.config_chest[chest_tem]
-    return random.uniform(chest_scope.min_value, chest_scope.max_value)
+    return value_handle.get_gauss_rand(chest_scope.min_value, chest_scope.max_value)
 
 
 def get_rand_npc_birthday(age: int):
@@ -154,10 +152,11 @@ def get_growth_height(now_age: int, expect_height: float, development_age: int, 
         now_height = expect_height / 2
         judge_age = expect_age - development_age
         growth_height = now_height / (judge_age * 365)
+        now_height = now_height + (now_age - development_age) * 365 * growth_height
     else:
         judge_height = expect_height / 2
-        now_height = 0
         growth_height = judge_height / (now_age * 365)
+        now_height = now_age * 365 * growth_height
     return {"GrowthHeight": growth_height, "NowHeight": now_height}
 
 
@@ -170,7 +169,7 @@ def get_bmi(tem_name: int) -> float:
     int -- bmi值
     """
     tem_data = game_config.config_weight_tem[tem_name]
-    return random.uniform(tem_data.min_value, tem_data.max_value)
+    return value_handle.get_gauss_rand(tem_data.min_value, tem_data.max_value)
 
 
 def get_body_fat(sex: int, tem_name: int) -> float:
@@ -185,7 +184,7 @@ def get_body_fat(sex: int, tem_name: int) -> float:
     sex_tem = sex in (0, 3)
     tem_data_id = game_config.config_body_fat_tem_data[sex_tem][tem_name]
     tem_data = game_config.config_body_fat_tem[tem_data_id]
-    return random.uniform(tem_data.min_value, tem_data.max_value)
+    return value_handle.get_gauss_rand(tem_data.min_value, tem_data.max_value)
 
 
 def get_weight(bmi: float, height: float) -> float:
@@ -215,23 +214,19 @@ def get_measurements(
     bodyfat -- 体脂率
     weight_tem -- 体重比例模板
     """
+    fix = 0
+    if not weight_tem:
+        fix = -5
+    elif weight_tem > 1:
+        fix = 5 * (weight_tem - 1)
     if tem_name in {0, 3}:
-        bust = 51.76 / 100 * height
-        waist = 42.79 / 100 * height
-        hip = 52.07 / 100 * height
-        new_waist = ((bodyfat / 100 * weight) + (weight * 0.082 + 34.89)) / 0.74
+        bust = value_handle.get_gauss_rand(0.4676, 0.5676) * height + fix
+        waist = value_handle.get_gauss_rand(0.3779, 0.4779) * height + fix
+        hip = value_handle.get_gauss_rand(0.4707, 0.5707) * height + fix
     else:
-        bust = 52.35 / 100 * height
-        waist = 41.34 / 100 * height
-        hip = 57.78 / 100 * height
-        new_waist = ((bodyfat / 100 * weight) + (weight * 0.082 + 44.74)) / 0.74
-    waist_hip_proportion = waist / hip
-    waist_hip_proportion_tem = game_config.config_waist_hip_proportion[weight_tem].value
-    waist_hip_proportion_fix = random.uniform(0, waist_hip_proportion_tem)
-    waist_hip_proportion = waist_hip_proportion + waist_hip_proportion_fix
-    new_hip = new_waist / waist_hip_proportion
-    fix = new_hip / hip
-    bust = bust * fix
+        bust = value_handle.get_gauss_rand(0.4735, 0.5735) * height + fix
+        waist = value_handle.get_gauss_rand(0.3634, 0.4634) * height + fix
+        hip = value_handle.get_gauss_rand(0.5278, 0.6278) * height + fix
     measurements = game_type.Measurements()
     measurements.bust = bust
     measurements.waist = waist
@@ -249,8 +244,8 @@ def get_max_hit_point(tem_id: int) -> int:
     """
     tem_data = game_config.config_hitpoint_tem[tem_id]
     max_hit_point = tem_data.max_value
-    add_value = random.randint(0, 500)
-    impairment = random.randint(0, 500)
+    add_value = value_handle.get_gauss_rand(0, 500)
+    impairment = value_handle.get_gauss_rand(0, 500)
     return max_hit_point + add_value - impairment
 
 
@@ -264,8 +259,8 @@ def get_max_mana_point(tem_id: int) -> int:
     """
     tem_data = game_config.config_manapoint_tem[tem_id]
     max_mana_point = tem_data.max_value
-    add_value = random.randint(0, 500)
-    impairment = random.randint(0, 500)
+    add_value = value_handle.get_gauss_rand(0, 500)
+    impairment = value_handle.get_gauss_rand(0, 500)
     return max_mana_point + add_value - impairment
 
 

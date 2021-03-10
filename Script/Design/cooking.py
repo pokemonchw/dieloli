@@ -378,16 +378,16 @@ def get_restaurant_food_type_list_buy_food_type(food_type: str) -> Dict[uuid.UUI
                     food_feel_data = game_config.config_food_feel_data[food_id]
                     if (
                         28 in food_feel_data
-                        and not food_config.fruit
+                        and (not food_config.fruit)
                         and food_config.eat
-                        and (27 not in food_feel_data or food_feel_data[28] > food_feel_data[27])
+                        and ((27 not in food_feel_data) or (food_feel_data[28] > food_feel_data[27]))
                     ):
                         food_list[food_id] = food_config.name
             else:
                 now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
                 now_food = cache.restaurant_data[food_id][now_food_uid]
-                if 27 in now_food.feel and (
-                    28 not in now_food.feel or now_food.feel[27] > now_food.feel[28]
+                if 28 in now_food.feel and (
+                    27 not in now_food.feel or now_food.feel[28] > now_food.feel[27]
                 ):
                     food_list[food_id] = cache.recipe_data[int(food_id)].name
         elif food_type == _("水果"):

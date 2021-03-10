@@ -126,10 +126,10 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
                         if target_change.sex_experience[organ]:
                             now_text += (
                                 " "
-                                + game_config.config_organ[i].name
+                                + game_config.config_organ[organ].name
                                 + _("经验:")
                                 + text_handle.number_to_symbol_string(
-                                    round(status_data.sex_experience[i], 2)
+                                    round(status_data.sex_experience[organ], 2)
                                 )
                             )
                             judge = 1
