@@ -49,7 +49,7 @@ class FoodBagPanel:
             for food_type in food_type_list:
                 if food_type == self.now_panel:
                     now_draw = draw.CenterDraw()
-                    now_draw.text = f"{food_type}]"
+                    now_draw.text = f"[{food_type}]"
                     now_draw.style = "onbutton"
                     now_draw.width = self.width / len(food_type_list)
                     now_draw.draw()

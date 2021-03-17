@@ -353,3 +353,14 @@ def handle_un_collection_system():
     now_draw.width = width
     now_draw.text = _("\n现在会显示所有角色的信息了！\n")
     now_draw.draw()
+
+
+@add_instruct(
+    constant.Instruct.VIEW_THE_SCHOOL_TIMETABLE,
+    constant.InstructType.STUDY,
+    _("查看课程表"),
+    {},
+)
+def handle_view_school_timetable():
+    """ 处理查看课程表指令 """
+    cache.now_panel_id = constant.Panel.VIEW_SCHOOL_TIMETABLE

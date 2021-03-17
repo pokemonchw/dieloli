@@ -227,13 +227,18 @@ class CharacterInfoHead:
         """ 当前最大可绘制宽度 """
         self.draw_title: bool = True
         """ 是否绘制面板标题 """
-        character_data = cache.character_data[character_id]
+        character_data: game_type.Character = cache.character_data[character_id]
         sex_text = game_config.config_sex_tem[character_data.sex].name
         if character_id:
-            message = _("No.{character_id} 姓名:{character_name} 性别:{sex_text}").format(
+            social = 0
+            if 0 in character_data.social_contact_data:
+                social = character_data.social_contact_data[0]
+            social_text = game_config.config_social_type[social].name
+            message = _("No.{character_id} 姓名:{character_name} 性别:{sex_text} 关系:{social_text}").format(
                 character_id=character_id,
                 character_name=character_data.name,
                 sex_text=sex_text,
+                social_text=social_text,
             )
         else:
             message = _(

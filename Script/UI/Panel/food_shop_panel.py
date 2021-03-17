@@ -1,7 +1,7 @@
 from typing import Tuple, List
 from types import FunctionType
 from uuid import UUID
-from Script.Core import cache_control, game_type, get_text, flow_handle, text_handle, constant
+from Script.Core import cache_control, game_type, get_text, flow_handle, text_handle, constant, py_cmd
 from Script.Design import map_handle, cooking
 from Script.UI.Moudle import draw, panel
 from Script.Config import game_config, normal_config
@@ -41,11 +41,13 @@ class FoodShopPanel:
         scene_name = cache.scene_data[scene_position_str].scene_name
         title_draw = draw.TitleLineDraw(scene_name, self.width)
         food_type_list = [_("主食"), _("零食"), _("饮品"), _("水果"), _("食材"), _("调料")]
-        food_name_list = list(cooking.get_restaurant_food_type_list_buy_food_type(self.now_panel).items())
-        self.handle_panel = panel.PageHandlePanel(
-            food_name_list, SeeFoodListByFoodNameDraw, 10, 5, self.width, 1, 1, 0
-        )
+        self.handle_panel = panel.PageHandlePanel([], SeeFoodListByFoodNameDraw, 10, 5, self.width, 1, 1, 0)
         while 1:
+            py_cmd.clr_cmd()
+            food_name_list = list(
+                cooking.get_restaurant_food_type_list_buy_food_type(self.now_panel).items()
+            )
+            self.handle_panel.text_list = food_name_list
             self.handle_panel.update()
             title_draw.draw()
             return_list = []
@@ -66,12 +68,14 @@ class FoodShopPanel:
                     )
                     now_draw.draw()
                     return_list.append(now_draw.return_text)
+            line_feed.draw()
             line = draw.LineDraw("+", self.width)
             line.draw()
             self.handle_panel.draw()
             return_list.extend(self.handle_panel.return_list)
             back_draw = draw.CenterButton(_("[返回]"), _("返回"), window_width)
             back_draw.draw()
+            line_feed.draw()
             return_list.append(back_draw.return_text)
             yrn = flow_handle.askfor_all(return_list)
             if yrn == back_draw.return_text:
@@ -162,6 +166,7 @@ class SeeFoodListByFoodNameDraw:
             return_list.extend(page_handle.return_list)
             back_draw = draw.CenterButton(_("[返回]"), _("返回"), window_width)
             back_draw.draw()
+            line_feed.draw()
             return_list.append(back_draw.return_text)
             yrn = flow_handle.askfor_all(return_list)
             if yrn == back_draw.return_text:

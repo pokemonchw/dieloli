@@ -12,4 +12,4 @@ str,int,int,str
 6,5,0,{Name}和{PlayerNickName}闲聊了一会儿
 7,5,0,{Name}找{PlayerNickName}聊了一会儿天
 8,5,0,{Name}向{PlayerNickName}分享了最近的见闻
-9,5,0,{Name}旁若无人的坐在{PlayerNickName}的身边\n将头靠在了{PlayerNickName}的肩上\n「继续和我说上次的故事吧~」
+9,5,0,{TargetName}旁若无人的坐在{PlayerNickName}的身边\n将头靠在了{PlayerNickName}的肩上\n「继续和我说上次的故事吧~」

@@ -179,6 +179,8 @@ class Panel:
     """ 食物背包面板 """
     ITEM_SHOP = 6
     """ 道具商店面板 """
+    VIEW_SCHOOL_TIMETABLE = 7
+    """ 查看课程表 """
 
 
 class Premise:
@@ -583,6 +585,8 @@ class Instruct:
     """ 启用收藏模式 """
     UN_COLLECTION_SYSTEM = 0
     """ 关闭收藏模式 """
+    VIEW_THE_SCHOOL_TIMETABLE = 0
+    """ 查看课程表 """
 
 
 i = 0

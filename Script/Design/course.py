@@ -26,7 +26,7 @@ def init_phase_course_hour():
                 if not len(now_course_set):
                     break
                 now_course_id = random.choice(list(now_course_set))
-                now_course_value = random.randint(1, 14)
+                now_course_value = random.randint(1, 18)
                 if now_course_value <= now_session_max:
                     now_session_max -= now_course_value
                     now_phase_course_data[now_course_id] = now_course_value
@@ -53,9 +53,7 @@ def init_phase_course_hour():
 
 
 def init_class_time_table():
-    """
-    初始化各班级课程表
-    """
+    """ 初始化各年级课程表 """
     class_time_table = {}
     for school_id in cache.course_data:
         school_config = game_config.config_school[school_id]
@@ -187,7 +185,7 @@ def init_teacher_table():
                                     constant.place_data[f"Office_{phase_room_id}"]
                                 )
                             teacher_table.setdefault(now_teacher, 0)
-                            if teacher_table[now_teacher] < 14:
+                            if teacher_table[now_teacher] < 18:
                                 teacher_table[now_teacher] += 1
                                 cache.teacher_class_time_table.setdefault(day, {})
                                 cache.teacher_class_time_table[day].setdefault(school_id, {})
@@ -196,6 +194,29 @@ def init_teacher_table():
                                 cache.teacher_class_time_table[day][school_id][phase][i][now_teacher] = {
                                     classroom: now_course
                                 }
+                                cache.class_timetable_teacher_data.setdefault(school_id, {})
+                                cache.class_timetable_teacher_data[school_id].setdefault(phase, {})
+                                cache.class_timetable_teacher_data[school_id][phase].setdefault(
+                                    classroom, {}
+                                )
+                                cache.class_timetable_teacher_data[school_id][phase][classroom].setdefault(
+                                    day, {}
+                                )
+                                cache.class_timetable_teacher_data[school_id][phase][classroom][day][
+                                    i
+                                ] = now_teacher
+                                teacher_timetable = game_type.TeacherTimeTable()
+                                teacher_timetable.class_room = map_handle.get_map_system_path_for_str(
+                                    classroom
+                                )
+                                teacher_timetable.class_times = i
+                                teacher_timetable.course = now_course
+                                now_config_id = game_config.config_school_session_data[school_id][i]
+                                now_config = game_config.config_school_session[now_config_id]
+                                teacher_timetable.time = now_config.start_time
+                                teacher_timetable.week_day = day
+                                cache.teacher_school_timetable.setdefault(now_teacher, [])
+                                cache.teacher_school_timetable[now_teacher].append(teacher_timetable)
 
 
 def course_abmain_distribution():
