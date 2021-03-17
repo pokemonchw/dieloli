@@ -28,7 +28,8 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
     behavior_id = now_character_data.behavior.behavior_id
     if behavior_id in game_config.config_behavior_effect_data:
         for effect_id in game_config.config_behavior_effect_data[behavior_id]:
-            constant.settle_behavior_effect_data[effect_id](character_id, add_time, status_data)
+            constant.settle_behavior_effect_data[effect_id](character_id, add_time, status_data, now_time)
+    change_character_favorability_for_time(character_id, now_time)
     change_character_social(character_id, status_data)
     now_judge = False
     if character_id:
@@ -129,7 +130,7 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
                                 + game_config.config_organ[organ].name
                                 + _("经验:")
                                 + text_handle.number_to_symbol_string(
-                                    round(status_data.sex_experience[organ], 2)
+                                    round(target_change.sex_experience[organ], 2)
                                 )
                             )
                             judge = 1
@@ -160,6 +161,49 @@ def add_settle_behavior_effect(behavior_effect_id: int):
     return decorator
 
 
+def get_cut_down_favorability_for_consume_time(consume_time: int):
+    """
+    从经过的时间计算出扣除的好感度
+    Keyword arguments:
+    consume_time -- 经过时间
+    """
+    if consume_time < 10:
+        return consume_time
+    elif consume_time >= 10 and consume_time < 100:
+        return (consume_time - 9) * 10 + 9
+    elif consume_time >= 100 and consume_time < 1000:
+        return (consume_time - 99) * 100 + 909
+    else:
+        return (consume_time - 999) * 1000 + 90909
+
+
+def change_character_favorability_for_time(character_id: int, now_time: datetime.datetime):
+    """
+    按最后社交时间扣除角色好感度
+    Keyword arguments:
+    character_id -- 角色id
+    now_time -- 当前时间
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    for now_character in character_data.favorability:
+        character_data.social_contact_last_time.setdefault(now_character, now_time)
+        last_add_time: datetime.datetime = character_data.social_contact_last_time[now_character]
+        now_consume_time = int((now_time - last_add_time).seconds / 60)
+        if now_consume_time < 60:
+            continue
+        now_cut_down = get_cut_down_favorability_for_consume_time(int(now_consume_time / 60))
+        if now_character in character_data.social_contact_last_cut_down_time:
+            last_cut_down_time: datetime.datetime = character_data.social_contact_last_cut_down_time[
+                now_character
+            ]
+            old_consume_time = int((last_cut_down_time - last_add_time).seconds / 60)
+            old_cut_down = get_cut_down_favorability_for_consume_time(int(old_consume_time / 60))
+            now_cut_down -= old_cut_down
+        character_data.favorability[now_character] -= now_cut_down
+        if character_data.favorability[now_character] < 0:
+            character_data.favorability[now_character] = 0
+
+
 def change_character_social(character_id: int, change_data: game_type.CharacterStatusChange):
     """
     处理角色关系变化
@@ -175,17 +219,17 @@ def change_character_social(character_id: int, change_data: game_type.CharacterS
         if character_id in now_character_data.social_contact_data:
             old_social = now_character_data.social_contact_data[character_id]
         now_favorability = now_character_data.favorability[character_id]
-        if now_favorability < 100:
+        if now_favorability < 500:
             new_social = 0
-        elif now_favorability < 1000:
-            new_social = 1
-        elif now_favorability < 2000:
-            new_social = 2
-        elif now_favorability < 5000:
-            new_social = 3
         elif now_favorability < 10000:
+            new_social = 1
+        elif now_favorability < 200000:
+            new_social = 2
+        elif now_favorability < 4000000:
+            new_social = 3
+        elif now_favorability < 80000000:
             new_social = 4
-        elif now_favorability >= 10000:
+        elif now_favorability >= 1600000000:
             new_social = 5
         if new_social != old_social:
             target_change.old_social = old_social

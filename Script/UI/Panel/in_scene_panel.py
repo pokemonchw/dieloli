@@ -160,7 +160,7 @@ class InScenePanel:
                     character_clothing_draw_list.append((c_draw, t_draw))
             else:
                 character_clothing_draw_list = see_character_info_panel.CharacterWearClothingList(
-                    0, self.width, 5
+                    0, self.width, 4
                 ).draw_list
             for label in character_clothing_draw_list:
                 if isinstance(label, tuple):
@@ -327,7 +327,7 @@ class SeeInstructPanel:
                         continue
                     now_instruct_list.append(instruct)
         now_instruct_list.sort()
-        instruct_group = value_handle.list_of_groups(now_instruct_list, 3)
+        instruct_group = value_handle.list_of_groups(now_instruct_list, 5)
         now_draw_list = []
         for instruct_list in instruct_group:
             for instruct_id in instruct_list:
@@ -344,7 +344,7 @@ class SeeInstructPanel:
                 now_draw_list.append(now_draw)
                 self.return_list.append(now_draw.return_text)
         now_draw = panel.VerticalDrawTextListGroup(self.width)
-        now_group = value_handle.list_of_groups(now_draw_list, 3)
+        now_group = value_handle.list_of_groups(now_draw_list, 5)
         now_draw.draw_list = now_group
         now_draw.draw()
 

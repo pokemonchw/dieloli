@@ -3,6 +3,7 @@ import math
 import numpy
 import sys
 import time
+import datetime
 from Script.Core import (
     cache_control,
     value_handle,
@@ -351,35 +352,50 @@ def init_character_position():
 
 
 def add_favorability(
-    character_id: int, target_id: int, add_favorability: int, target_change: game_type.TargetChange
+    character_id: int,
+    target_id: int,
+    now_add_favorability: int,
+    target_change: game_type.TargetChange,
+    now_time: datetime.datetime,
 ):
     """
     增加目标角色对当前角色的好感
     Keyword arguments:
     character_id -- 当前角色id
     target_id -- 目标角色id
-    add_favorability -- 增加的好感
+    now_add_favorability -- 增加的好感
     target_change -- 角色状态改变对象
+    now_time -- 增加好感的时间
     """
     target_data: game_type.Character = cache.character_data[target_id]
     target_data.favorability.setdefault(character_id, 0)
-    target_change.status.setdefault(12, 0)
+    if target_change != None:
+        target_change.status.setdefault(12, 0)
+    old_add_favorability = now_add_favorability
     if 12 in target_data.status:
         disgust = target_data.status[12]
         if disgust:
-            if add_favorability >= disgust:
-                add_favorability -= disgust
+            if now_add_favorability >= disgust:
+                now_add_favorability -= disgust
                 target_data.status[12] = 0
-                if add_favorability:
-                    target_data.favorability[character_id] += add_favorability
-                    target_change.favorability = add_favorability
+                if now_add_favorability:
+                    target_data.favorability[character_id] += now_add_favorability
+                    if target_change != None:
+                        target_change.favorability = now_add_favorability
                 del target_data.status[12]
             else:
-                target_data.status[12] -= add_favorability
-                target_change.status[12] -= add_favorability
+                target_data.status[12] -= now_add_favorability
+                if target_change != None:
+                    target_change.status[12] -= now_add_favorability
         else:
-            target_data.favorability[character_id] += add_favorability
-            target_change.favorability = add_favorability
+            target_data.favorability[character_id] += now_add_favorability
+            if target_change != None:
+                target_change.favorability = now_add_favorability
     else:
-        target_data.favorability[character_id] += add_favorability
-        target_change.favorability = add_favorability
+        target_data.favorability[character_id] += now_add_favorability
+        if target_change != None:
+            target_change.favorability = now_add_favorability
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data.social_contact_last_cut_down_time[character_id] = now_time
+    if target_change != None:
+        add_favorability(target_id, character_id, old_add_favorability, None, now_time)

@@ -1,4 +1,3 @@
-from types import FunctionType
 from Script.Core import constant
 from Script.Design import handle_panel
 from Script.UI.Panel import food_shop_panel

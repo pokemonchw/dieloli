@@ -431,6 +431,86 @@ class CenterDrawButtonListPanel:
             io_init.era_print("\n")
 
 
+class LeftDrawIDButtonListPanel:
+    """ 绘制一个被编号的按钮列表并左对齐每个元素 """
+
+    def __init__(self):
+        """ 初始化绘制对象 """
+        self.width = 0
+        """ 面板宽度 """
+        self.column = 0
+        """ 每行最大元素数 """
+        self.start_id = 0
+        """ 编号的启始id """
+        self.draw_list: List[List[draw.Button]] = []
+        """ 绘制按钮列表 """
+        self.return_list: List[str] = []
+        """
+        按钮返回的响应列表
+        按钮返回值:响应文本
+        """
+
+    def set(
+        self,
+        text_list: List[str],
+        start_id: int,
+        width: int,
+        column: int,
+        null_text: str = "",
+        cmd_func: FunctionType = None,
+        func_args: List[Tuple] = [],
+    ):
+        """
+        设置绘制信息
+        Keyword arguments:
+        text_list -- 按钮文本列表
+        start_id -- 编号的启始id
+        width -- 绘制宽度
+        column -- 每行最大元素数
+        null_text -- 不作为按钮绘制的文本
+        cmd_func -- 列表元素按钮绑定函数
+        """
+        self.width = width
+        self.column = column
+        new_text_list = value_handle.list_of_groups(text_list, column)
+        index = start_id
+        now_index = 0
+        self.draw_list: List[List[draw.Button]] = []
+        for now_text_list in new_text_list:
+            now_width = int(width / len(now_text_list))
+            now_list = []
+            for now_text in now_text_list:
+                if now_text != null_text:
+                    now_text = text_handle.id_index(index) + now_text
+                    now_button = draw.LeftButton(
+                        now_text,
+                        str(index),
+                        now_width,
+                        cmd_func=cmd_func,
+                        args=(func_args[now_index]),
+                    )
+                    now_list.append(now_button)
+                    self.return_list.append(str(index))
+                else:
+                    now_text = text_handle.id_index(index) + now_text
+                    now_info_draw = draw.LeftDraw()
+                    now_info_draw.width = now_width
+                    now_info_draw.text = now_text
+                    now_info_draw.style = "onbutton"
+                    now_list.append(now_info_draw)
+                index += 1
+                now_index += 1
+            self.draw_list.append(now_list)
+
+    def draw(self):
+        """ 绘制面板 """
+        now_draw = VerticalDrawTextListGroup(self.width)
+        for now_list in self.draw_list:
+            for value in now_list:
+                value.draw()
+            io_init.era_print("\n")
+
+
 class ClearScreenPanel:
     """ 绘制一屏长度的空行 """
 

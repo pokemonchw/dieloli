@@ -701,6 +701,10 @@ class OccupationBodyFatRegion:
     """ 权重区间 """
 
 
+class TalkPremise:
+    """  """
+
+
 class Talk:
     """ 口上配置数据 """
 
@@ -712,17 +716,6 @@ class Talk:
     """ 口上限定的剧情npcid """
     context: str
     """ 口上内容 """
-
-
-class TalkPremise:
-    """ 口上前提表 """
-
-    cid: str
-    """ 配表id """
-    talk_id: str
-    """ 所属口上id """
-    premise: int
-    """ 前提id """
 
 
 class TargetEffect:

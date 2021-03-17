@@ -479,6 +479,10 @@ class Character:
         """ 角色社交关系数据 关系类型:角色id集合 """
         self.social_contact_data: Dict[int, int] = {}
         """ 角色社交关系数据 角色id:关系类型 """
+        self.social_contact_last_time: Dict[int, datetime.datetime] = {}
+        """ 指定角色最后与自己社交的时间 """
+        self.social_contact_last_cut_down_time: Dict[int, datetime.datetime] = {}
+        """ 指定角色上次扣除好感时间 """
         self.favorability: Dict[int, int] = {}
         """ 角色好感度数据 角色id:好感度 """
         self.food_bag: Dict[UUID, Food] = {}
@@ -499,6 +503,22 @@ class Character:
         """ 角色已死亡 """
         self.collection_character: Set = set()
         """ 收藏的角色列表 """
+
+
+class TeacherTimeTable:
+    """ 教师上课时间数据结构体 """
+
+    def __init__(self):
+        self.class_room: List[str] = []
+        """ 上课教室 """
+        self.week_day: int = 0
+        """ 周几 """
+        self.class_times: int = 0
+        """ 第几节课 """
+        self.course: int = 0
+        """ 科目 """
+        self.time: int = 0
+        """ 上课时间 """
 
 
 class Cache:
@@ -568,6 +588,16 @@ class Cache:
         """
         各班级各科目教师配置数据
         年级房间标签(Classroom_n):教室路径:科目id:教师集合
+        """
+        self.teacher_school_timetable: Dict[int, List[TeacherTimeTable]] = {}
+        """
+        各老师每周上课数据
+        老师id:上课数据列表
+        """
+        self.class_timetable_teacher_data: Dict[int, Dict[int, Dict[str, Dict[int, Dict[int, int]]]]] = {}
+        """
+        各学校各班级上课时间对应教师数据
+        学校id:年级id:班级id:星期:课时:老师id
         """
         self.old_character_id: int = 0
         """ 离开场景面板前在场景中查看的角色id """

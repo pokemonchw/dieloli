@@ -357,6 +357,8 @@ def get_restaurant_food_type_list_buy_food_type(food_type: str) -> Dict[uuid.UUI
     """
     food_list = {}
     for food_id in cache.restaurant_data:
+        if not len(cache.restaurant_data[food_id]):
+            continue
         if food_type == _("主食"):
             now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
             now_food: game_type.Food = cache.restaurant_data[food_id][now_food_uid]
