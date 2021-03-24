@@ -107,65 +107,74 @@ class StudentTimeTablePanel:
             title_list_draw.draw()
             now_text_list = []
             times_judge = 1
-            for times in range(0, len(time_table[self.now_week]) + 1):
-                course_time_id = game_config.config_school_session_data[school_id][times]
-                course_time_config = game_config.config_school_session[course_time_id]
-                course_time = str(course_time_config.start_time)
-                minute = course_time[-2:]
-                hour = course_time[:-2]
-                course_time_text = f"{hour}:{minute}"
-                course_end_time = str(course_time_config.end_time)
-                end_minute = course_end_time[-2:]
-                end_hour = course_end_time[:-2]
-                course_end_time_text = f"{end_hour}:{end_minute}"
-                now_time_judge = 0
-                if times_judge:
-                    if self.now_week == cache.game_time.weekday():
-                        if now_time_value < course_time_config.end_time:
-                            now_time_judge = 1
-                            times_judge = 0
-                if not times:
-                    now_class_text = _("早读课")
-                    if now_time_judge:
-                        now_class_text += _("(当前)")
-                    now_text = [now_class_text, "", "", course_time_text, course_end_time_text]
-                    now_text_list.append(now_text)
-                    continue
-                cache.class_timetable_teacher_data.setdefault(school_id, {})
-                cache.class_timetable_teacher_data[school_id].setdefault(phase, {})
-                cache.class_timetable_teacher_data[school_id][phase].setdefault(
-                    character_data.classroom, {}
-                )
-                cache.class_timetable_teacher_data[school_id][phase][character_data.classroom].setdefault(
-                    self.now_week, {}
-                )
-                course_id = time_table[self.now_week][times]
-                course_config = game_config.config_course[course_id]
-                course_name = course_config.name
-                times_text = _("第{times}节").format(times=times)
-                if now_time_judge:
-                    times_text += _("(当前)")
-                if (
-                    times
-                    in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][
-                        self.now_week
-                    ]
-                ):
-                    teacher_id = cache.class_timetable_teacher_data[school_id][phase][
+            if self.now_week not in time_table:
+                now_text_list.append(_("休息日"))
+            else:
+                for times in range(0, len(time_table[self.now_week]) + 1):
+                    course_time_id = game_config.config_school_session_data[school_id][times]
+                    course_time_config = game_config.config_school_session[course_time_id]
+                    course_time = str(course_time_config.start_time)
+                    minute = course_time[-2:]
+                    hour = course_time[:-2]
+                    course_time_text = f"{hour}:{minute}"
+                    course_end_time = str(course_time_config.end_time)
+                    end_minute = course_end_time[-2:]
+                    end_hour = course_end_time[:-2]
+                    course_end_time_text = f"{end_hour}:{end_minute}"
+                    now_time_judge = 0
+                    if times_judge:
+                        if self.now_week == cache.game_time.weekday():
+                            if now_time_value < course_time_config.end_time:
+                                now_time_judge = 1
+                                times_judge = 0
+                    if not times:
+                        now_class_text = _("早读课")
+                        if now_time_judge:
+                            now_class_text += _("(当前)")
+                        now_text = [now_class_text, "", "", course_time_text, course_end_time_text]
+                        now_text_list.append(now_text)
+                        continue
+                    cache.class_timetable_teacher_data.setdefault(school_id, {})
+                    cache.class_timetable_teacher_data[school_id].setdefault(phase, {})
+                    cache.class_timetable_teacher_data[school_id][phase].setdefault(
+                        character_data.classroom, {}
+                    )
+                    cache.class_timetable_teacher_data[school_id][phase][
                         character_data.classroom
-                    ][self.now_week][times]
-                    teacher_data: game_type.Character = cache.character_data[teacher_id]
-                    teacher_name = teacher_data.name
-                    now_text = [
-                        times_text,
-                        course_name,
-                        teacher_name,
-                        course_time_text,
-                        course_end_time_text,
-                    ]
-                else:
-                    now_text = [times_text, course_name, _("自习"), course_time_text, course_end_time_text]
-                now_text_list.append(now_text)
+                    ].setdefault(self.now_week, {})
+                    course_id = time_table[self.now_week][times]
+                    course_config = game_config.config_course[course_id]
+                    course_name = course_config.name
+                    times_text = _("第{times}节").format(times=times)
+                    if now_time_judge:
+                        times_text += _("(当前)")
+                    if (
+                        times
+                        in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][
+                            self.now_week
+                        ]
+                    ):
+                        teacher_id = cache.class_timetable_teacher_data[school_id][phase][
+                            character_data.classroom
+                        ][self.now_week][times]
+                        teacher_data: game_type.Character = cache.character_data[teacher_id]
+                        teacher_name = teacher_data.name
+                        now_text = [
+                            times_text,
+                            course_name,
+                            teacher_name,
+                            course_time_text,
+                            course_end_time_text,
+                        ]
+                    else:
+                        now_text = [
+                            times_text,
+                            course_name,
+                            _("自习"),
+                            course_time_text,
+                            course_end_time_text,
+                        ]
+                    now_text_list.append(now_text)
             for now_text in now_text_list:
                 now_draw = panel.LeftDrawTextListPanel()
                 now_draw.set(now_text, self.width, 5)
