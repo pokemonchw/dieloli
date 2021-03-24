@@ -259,23 +259,23 @@ def init_character_dormitory():
         "Man": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
-            if cache.character_data[character_id].age < 18 and cache.character_data[character_id].sex == 0
+            if cache.character_data[character_id].age <= 18 and cache.character_data[character_id].sex == 0
         },
         "Woman": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
-            if cache.character_data[character_id].age < 18 and cache.character_data[character_id].sex == 1
+            if cache.character_data[character_id].age <= 18 and cache.character_data[character_id].sex == 1
         },
         "Other": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
-            if cache.character_data[character_id].age < 18
+            if cache.character_data[character_id].age <= 18
             and cache.character_data[character_id].sex not in {0, 1}
         },
         "Teacher": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
-            if cache.character_data[character_id].age >= 18
+            if cache.character_data[character_id].age > 18
         },
     }
     man_max = len(character_sex_data["Man"])
@@ -381,7 +381,7 @@ def add_favorability(
                 if now_add_favorability:
                     target_data.favorability[character_id] += now_add_favorability
                     if target_change != None:
-                        target_change.favorability = now_add_favorability
+                        target_change.favorability += now_add_favorability
                 del target_data.status[12]
             else:
                 target_data.status[12] -= now_add_favorability
@@ -390,11 +390,11 @@ def add_favorability(
         else:
             target_data.favorability[character_id] += now_add_favorability
             if target_change != None:
-                target_change.favorability = now_add_favorability
+                target_change.favorability += now_add_favorability
     else:
         target_data.favorability[character_id] += now_add_favorability
         if target_change != None:
-            target_change.favorability = now_add_favorability
+            target_change.favorability += now_add_favorability
     character_data: game_type.Character = cache.character_data[character_id]
     target_data.social_contact_last_cut_down_time[character_id] = now_time
     if target_change != None:

@@ -572,8 +572,8 @@ class CollectionSceneNamePanel:
         self.handle_panel = panel.PageHandlePanel(
             list(character_data.collection_character),
             SocialSceneNameDraw,
-            20,
-            3,
+            10,
+            2,
             self.width,
             1,
         )

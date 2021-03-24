@@ -111,18 +111,16 @@ class ImageDraw:
     image_path -- 图片所在路径 (default '')
     """
 
-    def __init__(self, image_name: str, image_path=""):
+    def __init__(self, image_name: str):
         """ 初始化绘制对象 """
         self.image_name = image_name
         """ 图片id """
-        self.image_path = image_path
-        """ 图片所在路径 """
         self.width = 1
         """ 图片宽度 """
 
     def draw(self):
         """ 绘制图片 """
-        io_init.image_print(self.image_name, self.image_path)
+        io_init.image_print(self.image_name)
 
     def __len__(self) -> int:
         """ 图片绘制宽度 """
@@ -156,11 +154,11 @@ class BarDraw:
             fix_bar = int(self.width - proportion)
             style_data = game_config.config_bar[game_config.config_bar_data[bar_id]]
             for i in range(proportion):
-                now_draw = ImageDraw(style_data.ture_bar, "bar")
+                now_draw = ImageDraw(style_data.ture_bar)
                 now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
             for i in range(fix_bar):
-                now_draw = ImageDraw(style_data.null_bar, "bar")
+                now_draw = ImageDraw(style_data.null_bar)
                 now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
 
@@ -682,7 +680,7 @@ class RightDraw(NormalDraw):
 
 
 class LeftDraw(NormalDraw):
-    """ 右对齐绘制文本 """
+    """ 左对齐绘制文本 """
 
     def draw(self):
         """ 绘制文本 """
@@ -694,8 +692,6 @@ class LeftDraw(NormalDraw):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
-        elif len(self) > self.width - 2:
-            now_text = " " + self.text
         else:
             now_text = text_handle.align(self.text, "left", 0, 1, self.width)
         io_init.era_print(now_text, self.style)

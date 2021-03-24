@@ -1,10 +1,11 @@
 import csv
 import os
 import json
+import datetime
 
-config_dir = os.path.join("..", "data", "csv")
-talk_dir = os.path.join("..", "data", "talk")
-target_dir = os.path.join("..", "data", "target")
+config_dir = os.path.join("data", "csv")
+talk_dir = os.path.join("data", "talk")
+target_dir = os.path.join("data", "target")
 config_data = {}
 config_def_str = ""
 config_po = "\n"
@@ -61,7 +62,6 @@ def build_csv_config(file_path: str, file_name: str, talk: bool, target: bool):
                 i += 1
                 continue
             for k in now_type_data:
-                print(row)
                 now_type = now_type_data[k]
                 if not len(row[k]):
                     del row[k]
@@ -163,26 +163,23 @@ for i in target_file_list:
         now_f = os.path.join(now_dir, f)
         build_csv_config(now_f, f, 0, 1)
 
-map_path = os.path.join("..", "data", "map")
+map_path = os.path.join("data", "map")
 build_scene_config(map_path)
 
-po_dir = os.path.join("..", "data", "po", "zh_CN", "LC_MESSAGES")
-po_path = os.path.join(po_dir, "dieloli.po")
-mo_path = os.path.join(po_dir, "dieloli.mo")
-if os.path.exists(po_path):
-    os.remove(po_path)
-os.system('find ../ -name "*.py" >POTFILES && xgettext -n --files-from=POTFILES -o ' + po_path)
-os.remove("POTFILES")
-os.system("msgfmt " + po_path + " -o " + mo_path)
-
-with open(po_path, "a") as po_file:
-    po_file.write(config_po)
-
-config_path = os.path.join("..", "Script", "Config", "config_def.py")
+config_path = os.path.join("Script", "Config", "config_def.py")
 config_def_str += "\n"
-with open(config_path, "w") as config_file:
+with open(config_path, "w", encoding="utf-8") as config_file:
     config_file.write(config_def_str)
 
-config_data_path = os.path.join("..", "data", "data.json")
-with open(config_data_path, "w") as config_data_file:
+config_data_path = os.path.join("data", "data.json")
+with open(config_data_path, "w", encoding="utf-8") as config_data_file:
     json.dump(config_data, config_data_file, ensure_ascii=0)
+
+package_path = os.path.join("package.json")
+with open(package_path, "w", encoding="utf-8") as package_file:
+    now_time = datetime.datetime.now()
+    version = f"{now_time.year}.{now_time.month}.{now_time.day}.{now_time.hour}"
+    version_data = {"version": version}
+    json.dump(version_data, package_file, ensure_ascii=0)
+
+print("Config Building End")

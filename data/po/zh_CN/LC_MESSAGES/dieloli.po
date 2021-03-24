@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 13:57+0800\n"
+"POT-Creation-Date: 2021-03-20 01:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,923 +17,967 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../game.py:19
-msgid "python3版本过旧(低于python3.8.0),请升级"
+#: Script/UI/Panel/game_info_panel.py:66
+msgid "(休息)"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:58
+#: Script/UI/Panel/game_info_panel.py:68
+msgid "(上学)"
+msgstr ""
+
+#: Script/UI/Panel/see_map_panel.py:58
 msgid "移动:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:102
+#: Script/UI/Panel/see_map_panel.py:102
 msgid "你可以从这里前往:\n"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:139
+#: Script/UI/Panel/see_map_panel.py:139
 msgid "查看上级地图"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:152
-#: ../Script/UI/Panel/see_character_info_panel.py:1039
-#: ../Script/UI/Panel/see_character_info_panel.py:1079
-#: ../Script/UI/Panel/see_clothing_info_panel.py:251
-#: ../Script/UI/Panel/food_shop_panel.py:76
-#: ../Script/UI/Panel/food_shop_panel.py:167
-#: ../Script/UI/Panel/item_shop_panel.py:47
-#: ../Script/UI/Panel/food_bag_panel.py:70
-#: ../Script/UI/Panel/food_bag_panel.py:163
-#: ../Script/UI/Panel/see_save_info_panel.py:60
-#: ../Script/UI/Panel/see_save_info_panel.py:169
+#: Script/UI/Panel/see_map_panel.py:152
+#: Script/UI/Panel/see_character_info_panel.py:1039
+#: Script/UI/Panel/see_character_info_panel.py:1079
+#: Script/UI/Panel/see_clothing_info_panel.py:251
+#: Script/UI/Panel/food_shop_panel.py:76 Script/UI/Panel/food_shop_panel.py:167
+#: Script/UI/Panel/item_shop_panel.py:47 Script/UI/Panel/food_bag_panel.py:70
+#: Script/UI/Panel/food_bag_panel.py:163
+#: Script/UI/Panel/see_save_info_panel.py:60
+#: Script/UI/Panel/see_save_info_panel.py:169
+#: Script/UI/Panel/view_school_timetable_panel.py:172
+#: Script/UI/Panel/view_school_timetable_panel.py:230
 msgid "返回"
 msgstr ""
 
-#: ../Script/UI/Panel/see_map_panel.py:160
+#: Script/UI/Panel/see_map_panel.py:160
 msgid "查看下级地图"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:46
-#: ../Script/UI/Panel/see_character_info_panel.py:61
-#: ../Script/UI/Panel/see_character_info_panel.py:1080
+#: Script/UI/Panel/see_character_info_panel.py:46
+#: Script/UI/Panel/see_character_info_panel.py:61
+#: Script/UI/Panel/see_character_info_panel.py:1080
 msgid "属性"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:62
+#: Script/UI/Panel/see_character_info_panel.py:62
 msgid "状态"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:63
+#: Script/UI/Panel/see_character_info_panel.py:63
 msgid "服装"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:64
+#: Script/UI/Panel/see_character_info_panel.py:64
 msgid "道具"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:65
+#: Script/UI/Panel/see_character_info_panel.py:65
 msgid "技能"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:66
+#: Script/UI/Panel/see_character_info_panel.py:66
 msgid "语言"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:67
+#: Script/UI/Panel/see_character_info_panel.py:67
 msgid "性格"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:68
+#: Script/UI/Panel/see_character_info_panel.py:68
 msgid "社交"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:203
+#: Script/UI/Panel/see_character_info_panel.py:203
 msgid "人物状态"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:237
+#: Script/UI/Panel/see_character_info_panel.py:237
 #, python-brace-format
 msgid ""
 "No.{character_id} 姓名:{character_name} 性别:{sex_text} 关系:{social_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:245
+#: Script/UI/Panel/see_character_info_panel.py:245
 #, python-brace-format
 msgid ""
 "No.{character_id} 姓名:{character_name} 称呼:{character_nick_name} 性别:"
 "{sex_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:262
+#: Script/UI/Panel/see_character_info_panel.py:262
 msgid "体力"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:271
+#: Script/UI/Panel/see_character_info_panel.py:271
 msgid "气力"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:276
+#: Script/UI/Panel/see_character_info_panel.py:276
 #, python-brace-format
 msgid "状态:{status_text}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:286
+#: Script/UI/Panel/see_character_info_panel.py:286
 msgid "人物属性"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:312
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+#: Script/UI/Panel/see_character_info_panel.py:312
+#: Script/UI/Panel/see_clothing_info_panel.py:169
+#: Script/UI/Panel/see_clothing_info_panel.py:311
 msgid "可爱的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:312
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+#: Script/UI/Panel/see_character_info_panel.py:312
+#: Script/UI/Panel/see_clothing_info_panel.py:169
+#: Script/UI/Panel/see_clothing_info_panel.py:311
 msgid "性感的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:312
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+#: Script/UI/Panel/see_character_info_panel.py:312
+#: Script/UI/Panel/see_clothing_info_panel.py:169
+#: Script/UI/Panel/see_clothing_info_panel.py:311
 msgid "帅气的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:312
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+#: Script/UI/Panel/see_character_info_panel.py:312
+#: Script/UI/Panel/see_clothing_info_panel.py:169
+#: Script/UI/Panel/see_clothing_info_panel.py:311
 msgid "清新的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:312
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+#: Script/UI/Panel/see_character_info_panel.py:312
+#: Script/UI/Panel/see_clothing_info_panel.py:169
+#: Script/UI/Panel/see_clothing_info_panel.py:311
 msgid "典雅的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:312
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+#: Script/UI/Panel/see_character_info_panel.py:312
+#: Script/UI/Panel/see_clothing_info_panel.py:169
+#: Script/UI/Panel/see_clothing_info_panel.py:311
 msgid "清洁的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:312
-#: ../Script/UI/Panel/see_clothing_info_panel.py:169
-#: ../Script/UI/Panel/see_clothing_info_panel.py:310
+#: Script/UI/Panel/see_character_info_panel.py:312
+#: Script/UI/Panel/see_clothing_info_panel.py:169
+#: Script/UI/Panel/see_clothing_info_panel.py:311
 msgid "保暖的"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:314
+#: Script/UI/Panel/see_character_info_panel.py:314
 msgid "衣着"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:401
-#: ../Script/UI/Panel/see_character_info_panel.py:414
-#: ../Script/UI/Panel/see_character_info_panel.py:423
+#: Script/UI/Panel/see_character_info_panel.py:401
+#: Script/UI/Panel/see_character_info_panel.py:414
+#: Script/UI/Panel/see_character_info_panel.py:423
 msgid "暂无"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:405
+#: Script/UI/Panel/see_character_info_panel.py:405
 msgid "宿舍位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:408
+#: Script/UI/Panel/see_character_info_panel.py:408
 msgid "教室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:418
+#: Script/UI/Panel/see_character_info_panel.py:418
 msgid "办公室位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:451
+#: Script/UI/Panel/see_character_info_panel.py:451
 #, python-brace-format
 msgid "年龄:{character_age}岁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:452
+#: Script/UI/Panel/see_character_info_panel.py:452
 #, python-brace-format
 msgid "生日:{birthday_month}月{birthday_day}日"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:483
+#: Script/UI/Panel/see_character_info_panel.py:483
 msgid "身高:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:485
+#: Script/UI/Panel/see_character_info_panel.py:485
 msgid "体重:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:489
+#: Script/UI/Panel/see_character_info_panel.py:489
 msgid "体脂率:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:490
+#: Script/UI/Panel/see_character_info_panel.py:490
 msgid "罩杯:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:524
+#: Script/UI/Panel/see_character_info_panel.py:524
 msgid "胸围:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:525
+#: Script/UI/Panel/see_character_info_panel.py:525
 msgid "腰围:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:526
+#: Script/UI/Panel/see_character_info_panel.py:526
 msgid "臀围"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:555
+#: Script/UI/Panel/see_character_info_panel.py:555
 msgid "嘴部开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:556
+#: Script/UI/Panel/see_character_info_panel.py:556
 msgid "胸部开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:557
+#: Script/UI/Panel/see_character_info_panel.py:557
 msgid "阴蒂开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:558
+#: Script/UI/Panel/see_character_info_panel.py:558
 msgid "阴茎开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:559
+#: Script/UI/Panel/see_character_info_panel.py:559
 msgid "阴道开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:560
+#: Script/UI/Panel/see_character_info_panel.py:560
 msgid "肛门开发度:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:633
+#: Script/UI/Panel/see_character_info_panel.py:633
 msgid "人物技能"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:675
+#: Script/UI/Panel/see_character_info_panel.py:675
 msgid "人物语言"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:824
+#: Script/UI/Panel/see_character_info_panel.py:824
 msgid "人物性格"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:870
+#: Script/UI/Panel/see_character_info_panel.py:870
 msgid "空无一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:876
+#: Script/UI/Panel/see_character_info_panel.py:876
 msgid "人物社交"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1039
-#: ../Script/UI/Panel/see_character_info_panel.py:1079
-#: ../Script/UI/Panel/see_clothing_info_panel.py:251
-#: ../Script/UI/Panel/food_shop_panel.py:76
-#: ../Script/UI/Panel/food_shop_panel.py:167
-#: ../Script/UI/Panel/item_shop_panel.py:47
-#: ../Script/UI/Panel/food_bag_panel.py:70
-#: ../Script/UI/Panel/food_bag_panel.py:163
-#: ../Script/UI/Panel/see_save_info_panel.py:60
+#: Script/UI/Panel/see_character_info_panel.py:1039
+#: Script/UI/Panel/see_character_info_panel.py:1079
+#: Script/UI/Panel/see_clothing_info_panel.py:251
+#: Script/UI/Panel/food_shop_panel.py:76 Script/UI/Panel/food_shop_panel.py:167
+#: Script/UI/Panel/item_shop_panel.py:47 Script/UI/Panel/food_bag_panel.py:70
+#: Script/UI/Panel/food_bag_panel.py:163
+#: Script/UI/Panel/see_save_info_panel.py:60
+#: Script/UI/Panel/view_school_timetable_panel.py:172
+#: Script/UI/Panel/view_school_timetable_panel.py:230
 msgid "[返回]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1074
+#: Script/UI/Panel/see_character_info_panel.py:1074
 msgid "[上一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1074
+#: Script/UI/Panel/see_character_info_panel.py:1074
 msgid "上一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1077
+#: Script/UI/Panel/see_character_info_panel.py:1077
 msgid "[下一人]"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1077
+#: Script/UI/Panel/see_character_info_panel.py:1077
 msgid "下一人"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1146
+#: Script/UI/Panel/see_character_info_panel.py:1146
 #, python-brace-format
 msgid "性别:{sex_config.name}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1147
+#: Script/UI/Panel/see_character_info_panel.py:1147
 #, python-brace-format
 msgid "年龄:{character_data.age}岁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1148
+#: Script/UI/Panel/see_character_info_panel.py:1148
 #, python-brace-format
 msgid "体力:({character_data.hit_point}/{character_data.hit_point_max})"
 msgstr ""
 
-#: ../Script/UI/Panel/see_character_info_panel.py:1149
+#: Script/UI/Panel/see_character_info_panel.py:1149
 #, python-brace-format
 msgid "气力:({character_data.mana_point}/{character_data.mana_point_max})"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:39
+#: Script/UI/Panel/see_clothing_info_panel.py:39
 msgid "人物服装"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:64
+#: Script/UI/Panel/see_clothing_info_panel.py:64
 msgid "未穿戴"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:161
-#: ../Script/UI/Panel/see_clothing_info_panel.py:302
+#: Script/UI/Panel/see_clothing_info_panel.py:161
+#: Script/UI/Panel/see_clothing_info_panel.py:303
 msgid "可爱"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:162
-#: ../Script/UI/Panel/see_clothing_info_panel.py:303
+#: Script/UI/Panel/see_clothing_info_panel.py:162
+#: Script/UI/Panel/see_clothing_info_panel.py:304
 msgid "性感"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:163
-#: ../Script/UI/Panel/see_clothing_info_panel.py:304
+#: Script/UI/Panel/see_clothing_info_panel.py:163
+#: Script/UI/Panel/see_clothing_info_panel.py:305
 msgid "帅气"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:164
-#: ../Script/UI/Panel/see_clothing_info_panel.py:305
+#: Script/UI/Panel/see_clothing_info_panel.py:164
+#: Script/UI/Panel/see_clothing_info_panel.py:306
 msgid "清新"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:165
-#: ../Script/UI/Panel/see_clothing_info_panel.py:306
+#: Script/UI/Panel/see_clothing_info_panel.py:165
+#: Script/UI/Panel/see_clothing_info_panel.py:307
 msgid "典雅"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:166
-#: ../Script/UI/Panel/see_clothing_info_panel.py:307
+#: Script/UI/Panel/see_clothing_info_panel.py:166
+#: Script/UI/Panel/see_clothing_info_panel.py:308
 msgid "清洁"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:167
-#: ../Script/UI/Panel/see_clothing_info_panel.py:308
+#: Script/UI/Panel/see_clothing_info_panel.py:167
+#: Script/UI/Panel/see_clothing_info_panel.py:309
 msgid "保暖"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:244
+#: Script/UI/Panel/see_clothing_info_panel.py:244
 msgid "更衣室"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:259
+#: Script/UI/Panel/see_clothing_info_panel.py:260
 msgid "空无一物"
 msgstr ""
 
-#: ../Script/UI/Panel/see_clothing_info_panel.py:319
+#: Script/UI/Panel/see_clothing_info_panel.py:320
 msgid "(已穿戴)"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:32
-#: ../Script/UI/Panel/food_shop_panel.py:43
-#: ../Script/UI/Panel/food_bag_panel.py:28
-#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:299
-#: ../Script/Design/cooking.py:362
+#: Script/UI/Panel/food_shop_panel.py:32 Script/UI/Panel/food_shop_panel.py:43
+#: Script/UI/Panel/food_bag_panel.py:28 Script/UI/Panel/food_bag_panel.py:36
+#: Script/Design/cooking.py:299 Script/Design/cooking.py:362
 msgid "主食"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:43
-#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:304
-#: ../Script/Design/cooking.py:367
+#: Script/UI/Panel/food_shop_panel.py:43 Script/UI/Panel/food_bag_panel.py:36
+#: Script/Design/cooking.py:304 Script/Design/cooking.py:367
 msgid "零食"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:43
-#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:311
-#: ../Script/Design/cooking.py:374
+#: Script/UI/Panel/food_shop_panel.py:43 Script/UI/Panel/food_bag_panel.py:36
+#: Script/Design/cooking.py:311 Script/Design/cooking.py:374
 msgid "饮品"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:43
-#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:329
-#: ../Script/Design/cooking.py:395
+#: Script/UI/Panel/food_shop_panel.py:43 Script/UI/Panel/food_bag_panel.py:36
+#: Script/Design/cooking.py:329 Script/Design/cooking.py:395
 msgid "水果"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:43
-#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:335
+#: Script/UI/Panel/food_shop_panel.py:43 Script/UI/Panel/food_bag_panel.py:36
+#: Script/Design/cooking.py:335
 msgid "食材"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:43
-#: ../Script/UI/Panel/food_bag_panel.py:36 ../Script/Design/cooking.py:341
+#: Script/UI/Panel/food_shop_panel.py:43 Script/UI/Panel/food_bag_panel.py:36
+#: Script/Design/cooking.py:341
 msgid "调料"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:208
-#: ../Script/UI/Panel/food_bag_panel.py:197
+#: Script/UI/Panel/food_shop_panel.py:208 Script/UI/Panel/food_bag_panel.py:197
 msgid "垃圾"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:208
-#: ../Script/UI/Panel/food_bag_panel.py:197
+#: Script/UI/Panel/food_shop_panel.py:208 Script/UI/Panel/food_bag_panel.py:197
 msgid "饲料"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:208
-#: ../Script/UI/Panel/food_bag_panel.py:197
+#: Script/UI/Panel/food_shop_panel.py:208 Script/UI/Panel/food_bag_panel.py:197
 msgid "粮食"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:208
-#: ../Script/UI/Panel/food_bag_panel.py:197
+#: Script/UI/Panel/food_shop_panel.py:208 Script/UI/Panel/food_bag_panel.py:197
 msgid "美味"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:208
-#: ../Script/UI/Panel/food_bag_panel.py:197
+#: Script/UI/Panel/food_shop_panel.py:208 Script/UI/Panel/food_bag_panel.py:197
 msgid "春药"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:216
-#: ../Script/UI/Panel/food_bag_panel.py:205
+#: Script/UI/Panel/food_shop_panel.py:216 Script/UI/Panel/food_bag_panel.py:205
 msgid "热量:"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:221
-#: ../Script/UI/Panel/food_bag_panel.py:210
+#: Script/UI/Panel/food_shop_panel.py:221 Script/UI/Panel/food_bag_panel.py:210
 msgid "水份:"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:230
-#: ../Script/UI/Panel/food_bag_panel.py:218
+#: Script/UI/Panel/food_shop_panel.py:230 Script/UI/Panel/food_bag_panel.py:218
 msgid "重量:"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:232
-#: ../Script/UI/Panel/food_bag_panel.py:220
+#: Script/UI/Panel/food_shop_panel.py:232 Script/UI/Panel/food_bag_panel.py:220
 msgid "克"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:234
-#: ../Script/UI/Panel/food_bag_panel.py:222
+#: Script/UI/Panel/food_shop_panel.py:234 Script/UI/Panel/food_bag_panel.py:222
 msgid "品质:"
 msgstr ""
 
-#: ../Script/UI/Panel/food_shop_panel.py:237
+#: Script/UI/Panel/food_shop_panel.py:237
 msgid "售价:"
 msgstr ""
 
-#: ../Script/UI/Panel/item_shop_panel.py:114
+#: Script/UI/Panel/item_shop_panel.py:114
 #, python-brace-format
 msgid "{nickname}购买了{item_name}"
 msgstr ""
 
-#: ../Script/UI/Panel/see_item_info_panel.py:40
+#: Script/UI/Panel/see_item_info_panel.py:40
 msgid "人物道具"
 msgstr ""
 
-#: ../Script/UI/Panel/food_bag_panel.py:35
+#: Script/UI/Panel/food_bag_panel.py:35
 msgid "食物背包"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:54
+#: Script/UI/Panel/see_save_info_panel.py:54
 msgid "存档列表"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:101
+#: Script/UI/Panel/see_save_info_panel.py:101
 msgid "空存档位"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:106
+#: Script/UI/Panel/see_save_info_panel.py:106
 msgid "游戏时间:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:107
+#: Script/UI/Panel/see_save_info_panel.py:107
 msgid "存档时间:"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:142
+#: Script/UI/Panel/see_save_info_panel.py:142
 msgid "读取"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:151
+#: Script/UI/Panel/see_save_info_panel.py:151
 msgid "覆盖"
 msgstr ""
 
-#: ../Script/UI/Panel/see_save_info_panel.py:162
+#: Script/UI/Panel/see_save_info_panel.py:162
 msgid "删除"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:44
+#: Script/UI/Panel/in_scene_panel.py:44
 msgid "场景"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:62
+#: Script/UI/Panel/in_scene_panel.py:62
 msgid "已死亡！"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:80
+#: Script/UI/Panel/in_scene_panel.py:80
 msgid "当前位置:"
 msgstr ""
 
-#: ../Script/UI/Panel/in_scene_panel.py:85
+#: Script/UI/Panel/in_scene_panel.py:85
 msgid "你在这里遇到了:"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:162
+#: Script/UI/Panel/view_school_timetable_panel.py:42
+#: Script/UI/Panel/view_school_timetable_panel.py:73
+#: Script/UI/Panel/view_school_timetable_panel.py:208
+msgid "课程表"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:46
+msgid "无课时安排"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:80
+#: Script/UI/Panel/view_school_timetable_panel.py:89
+msgid "(今日)"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:103
+msgid "课时"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:103
+msgid "科目"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:103
+msgid "教师"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:103
+msgid "上课时间"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:103
+msgid "下课时间"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:120
+msgid "早读课"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:144
+#, python-brace-format
+msgid "第{times}节"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:164
+msgid "自习"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:216
+#, python-brace-format
+msgid "{weekday} 第{times}节 班级:{class_name} 科目:{course} 上课时间:{time}"
+msgstr ""
+
+#: Script/UI/Moudle/panel.py:162
 #, python-brace-format
 msgid "输入的字符超长，最大{input_max}个英文字符，请重试。"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:601
+#: Script/UI/Moudle/panel.py:681
 #, python-brace-format
 msgid "{old_page_index_text} 上一页"
 msgstr ""
 
-#: ../Script/UI/Moudle/panel.py:615
+#: Script/UI/Moudle/panel.py:695
 #, python-brace-format
 msgid "{next_page_index_text} 下一页"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:79
+#: Script/UI/Flow/creator_character_flow.py:79
 msgid "就这样开始新的人生吧"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:79
+#: Script/UI/Flow/creator_character_flow.py:79
 msgid "重头再来一次"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:89
+#: Script/UI/Flow/creator_character_flow.py:89
 msgid "就这样了可以吗?"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:109
+#: Script/UI/Flow/creator_character_flow.py:109
 msgid "请问能告诉我你的名字吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:113
+#: Script/UI/Flow/creator_character_flow.py:113
 msgid "角色名不能为纯数字，请重新输入\n"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:115
+#: Script/UI/Flow/creator_character_flow.py:115
 msgid "角色名不能为系统保留字，请重新输入\n"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:117
+#: Script/UI/Flow/creator_character_flow.py:117
 msgid "已有角色使用该姓名，请重新输入\n"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:145
-#: ../Script/UI/Flow/creator_character_flow.py:146
+#: Script/UI/Flow/creator_character_flow.py:145
 #, python-brace-format
 msgid "该怎么称呼{character_name}好呢？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:150
+#: Script/UI/Flow/creator_character_flow.py:149
 msgid "角色昵称不能为纯数字，请重新输入"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:152
+#: Script/UI/Flow/creator_character_flow.py:151
 msgid "角色昵称不能为系统保留字，请重新输入"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:175
+#: Script/UI/Flow/creator_character_flow.py:173
 msgid "随机"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:178
+#: Script/UI/Flow/creator_character_flow.py:176
 #, python-brace-format
 msgid "那么{character_nick_name}的性别是？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:203
-#: ../Script/UI/Flow/creator_character_flow.py:319
-#: ../Script/UI/Flow/creator_character_flow.py:449
-#: ../Script/UI/Flow/creator_character_flow.py:463
-#: ../Script/UI/Flow/creator_character_flow.py:477
-#: ../Script/UI/Flow/creator_character_flow.py:491
-#: ../Script/UI/Flow/creator_character_flow.py:507
+#: Script/UI/Flow/creator_character_flow.py:201
+#: Script/UI/Flow/creator_character_flow.py:317
+#: Script/UI/Flow/creator_character_flow.py:447
+#: Script/UI/Flow/creator_character_flow.py:461
+#: Script/UI/Flow/creator_character_flow.py:475
+#: Script/UI/Flow/creator_character_flow.py:489
+#: Script/UI/Flow/creator_character_flow.py:505
 msgid "是"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:203
+#: Script/UI/Flow/creator_character_flow.py:201
 msgid "否"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:207
+#: Script/UI/Flow/creator_character_flow.py:205
 #, python-brace-format
 msgid ""
 "是否需要设置详细属性呢？将会随机抽取十道题目供{character_nick_name}进行选择。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:257
+#: Script/UI/Flow/creator_character_flow.py:255
 #, python-brace-format
 msgid "{character_nick_name}是一个小孩子吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:259
+#: Script/UI/Flow/creator_character_flow.py:257
 msgid "嘎呜～嘎呜～"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:260
+#: Script/UI/Flow/creator_character_flow.py:258
 msgid "才，才不是小孩子！"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:261
+#: Script/UI/Flow/creator_character_flow.py:259
 msgid "已经成年了哦～"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:262
+#: Script/UI/Flow/creator_character_flow.py:260
 msgid "我也想回到小时候呢～"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:263
+#: Script/UI/Flow/creator_character_flow.py:261
 msgid "你说什么？我听不清～"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:277
+#: Script/UI/Flow/creator_character_flow.py:275
 #, python-brace-format
 msgid "{character_nick_name}对自己的体重有自信吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:279
+#: Script/UI/Flow/creator_character_flow.py:277
 msgid "很轻，就像一张纸一样，风一吹就能飘起来。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:280
+#: Script/UI/Flow/creator_character_flow.py:278
 msgid "普普通通，健康的身材。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:281
+#: Script/UI/Flow/creator_character_flow.py:279
 msgid "略沉，不过从外表不怎么能够看得出来。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:282
+#: Script/UI/Flow/creator_character_flow.py:280
 msgid "肉眼可辨的比别人要胖很多。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:283
+#: Script/UI/Flow/creator_character_flow.py:281
 msgid "人类的极限，看上去像是相扑选手一样。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:297
+#: Script/UI/Flow/creator_character_flow.py:295
 #, python-brace-format
 msgid "{character_nick_name}是否有过性经验呢？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:299
+#: Script/UI/Flow/creator_character_flow.py:297
 msgid "性经验什么的完全没有过，你在问什么呢！变态！"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:300
+#: Script/UI/Flow/creator_character_flow.py:298
 msgid "只有极少的性经验哦，说是纯情也不为过。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:301
+#: Script/UI/Flow/creator_character_flow.py:299
 msgid "大概只是普通的程度吧？不多也不少的样子。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:302
+#: Script/UI/Flow/creator_character_flow.py:300
 msgid "经验非常丰富，特别有技巧哦，哼哼。"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:316
+#: Script/UI/Flow/creator_character_flow.py:314
 #, python-brace-format
 msgid "{character_nick_name}是否是一个有话就说，从来不憋在心里的人呢？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:319
-#: ../Script/UI/Flow/creator_character_flow.py:421
-#: ../Script/UI/Flow/creator_character_flow.py:449
-#: ../Script/UI/Flow/creator_character_flow.py:463
-#: ../Script/UI/Flow/creator_character_flow.py:477
-#: ../Script/UI/Flow/creator_character_flow.py:491
-#: ../Script/UI/Flow/creator_character_flow.py:507
+#: Script/UI/Flow/creator_character_flow.py:317
+#: Script/UI/Flow/creator_character_flow.py:419
+#: Script/UI/Flow/creator_character_flow.py:447
+#: Script/UI/Flow/creator_character_flow.py:461
+#: Script/UI/Flow/creator_character_flow.py:475
+#: Script/UI/Flow/creator_character_flow.py:489
+#: Script/UI/Flow/creator_character_flow.py:505
 msgid "不是"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:332
+#: Script/UI/Flow/creator_character_flow.py:330
 #, python-brace-format
 msgid "{character_nick_name}在参加聚会时，会很自然的融入进人群里吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:335
-#: ../Script/UI/Flow/creator_character_flow.py:363
-#: ../Script/UI/Flow/creator_character_flow.py:377
-#: ../Script/UI/Flow/creator_character_flow.py:391
-#: ../Script/UI/Flow/creator_character_flow.py:405
-#: ../Script/UI/Flow/creator_character_flow.py:435
+#: Script/UI/Flow/creator_character_flow.py:333
+#: Script/UI/Flow/creator_character_flow.py:361
+#: Script/UI/Flow/creator_character_flow.py:375
+#: Script/UI/Flow/creator_character_flow.py:389
+#: Script/UI/Flow/creator_character_flow.py:403
+#: Script/UI/Flow/creator_character_flow.py:433
 msgid "会"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:335
-#: ../Script/UI/Flow/creator_character_flow.py:377
-#: ../Script/UI/Flow/creator_character_flow.py:391
-#: ../Script/UI/Flow/creator_character_flow.py:405
-#: ../Script/UI/Flow/creator_character_flow.py:435
+#: Script/UI/Flow/creator_character_flow.py:333
+#: Script/UI/Flow/creator_character_flow.py:375
+#: Script/UI/Flow/creator_character_flow.py:389
+#: Script/UI/Flow/creator_character_flow.py:403
+#: Script/UI/Flow/creator_character_flow.py:433
 msgid "不会"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:348
+#: Script/UI/Flow/creator_character_flow.py:346
 #, python-brace-format
 msgid "{character_nick_name}有憧憬过未来的人生吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:349
+#: Script/UI/Flow/creator_character_flow.py:347
 msgid "有"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:349
+#: Script/UI/Flow/creator_character_flow.py:347
 msgid "没有"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:362
+#: Script/UI/Flow/creator_character_flow.py:360
 msgid "承诺过的事情就一定要做到？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:363
+#: Script/UI/Flow/creator_character_flow.py:361
 msgid "视情况而定"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:376
+#: Script/UI/Flow/creator_character_flow.py:374
 msgid "考虑问题时会顾及到别人的利益吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:390
+#: Script/UI/Flow/creator_character_flow.py:388
 msgid "关心别人的时候会让自己感到快乐？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:404
+#: Script/UI/Flow/creator_character_flow.py:402
 msgid "对于自己的任务，会一丝不苟的去完成吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:418
+#: Script/UI/Flow/creator_character_flow.py:416
 #, python-brace-format
 msgid "{character_nick_name}是一个即使不会被发现，也绝不弄虚作假的人吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:421
+#: Script/UI/Flow/creator_character_flow.py:419
 msgid "当然"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:434
+#: Script/UI/Flow/creator_character_flow.py:432
 msgid "即使在一些很随便的场合，也会表现得很严肃对吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:448
+#: Script/UI/Flow/creator_character_flow.py:446
 #, python-brace-format
 msgid "{character_nick_name}总是很轻率的做出了决定对吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:462
+#: Script/UI/Flow/creator_character_flow.py:460
 msgid "不会轻易的放弃自己的理想？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:476
+#: Script/UI/Flow/creator_character_flow.py:474
 #, python-brace-format
 msgid "喜欢多与对{character_nick_name}有利的人交往对吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:490
+#: Script/UI/Flow/creator_character_flow.py:488
 msgid "对工作会倾注全部的热情？"
 msgstr ""
 
-#: ../Script/UI/Flow/creator_character_flow.py:504
+#: Script/UI/Flow/creator_character_flow.py:502
 #, python-brace-format
 msgid "{character_nick_name}是一个心直口快，想到什么说什么的人对吗？"
 msgstr ""
 
-#: ../Script/UI/Flow/title_flow.py:30
+#: Script/UI/Flow/title_flow.py:30
 msgid "人类是可以被驯化的"
 msgstr ""
 
-#: ../Script/UI/Flow/title_flow.py:40
+#: Script/UI/Flow/title_flow.py:40
 msgid "开始游戏"
 msgstr ""
 
-#: ../Script/UI/Flow/title_flow.py:40
+#: Script/UI/Flow/title_flow.py:40
 msgid "读取存档"
 msgstr ""
 
-#: ../Script/UI/Flow/title_flow.py:40
+#: Script/UI/Flow/title_flow.py:40
 msgid "退出游戏"
 msgstr ""
 
-#: ../Script/Design/settle_behavior.py:60
+#: Script/Design/settle_behavior.py:60
 msgid "体力:"
 msgstr ""
 
-#: ../Script/Design/settle_behavior.py:62
+#: Script/Design/settle_behavior.py:62
 msgid "气力:"
 msgstr ""
 
-#: ../Script/Design/settle_behavior.py:88
-#: ../Script/Design/settle_behavior.py:131
+#: Script/Design/settle_behavior.py:88 Script/Design/settle_behavior.py:131
 msgid "经验:"
 msgstr ""
 
-#: ../Script/Design/settle_behavior.py:102
+#: Script/Design/settle_behavior.py:102
 #, python-brace-format
 msgid " 对{character_name}好感"
 msgstr ""
 
-#: ../Script/Design/game_time.py:43
+#: Script/Design/game_time.py:43
 #, python-brace-format
 msgid "时间:{year}年{month}月{day}日{hour}点{minute}分"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:56
+#: Script/Design/handle_instruct.py:56
 msgid "休息"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:68
+#: Script/Design/handle_instruct.py:68
 msgid "购买食物"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:75
+#: Script/Design/handle_instruct.py:75
 msgid "进食"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:81
+#: Script/Design/handle_instruct.py:81
 msgid "移动"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:88
+#: Script/Design/handle_instruct.py:88
 msgid "查看属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:99
+#: Script/Design/handle_instruct.py:99
 msgid "查看自身属性"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:108
+#: Script/Design/handle_instruct.py:108
 msgid "闲聊"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:121
+#: Script/Design/handle_instruct.py:121
 msgid "购买道具"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:128
+#: Script/Design/handle_instruct.py:128
 msgid "唱歌"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:142
+#: Script/Design/handle_instruct.py:142
 msgid "弹钢琴"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:158
+#: Script/Design/handle_instruct.py:158
 msgid "摸头"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:171
+#: Script/Design/handle_instruct.py:171
 msgid "读写存档"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:178
+#: Script/Design/handle_instruct.py:178
 msgid "睡觉"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:191
+#: Script/Design/handle_instruct.py:191
 msgid "喝泉水"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:201
+#: Script/Design/handle_instruct.py:201
 msgid "喝到了奇怪的泉水！身体变化了！！！"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:217
+#: Script/Design/handle_instruct.py:217
 msgid "喝到了甜甜的泉水～"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:224
+#: Script/Design/handle_instruct.py:224
 msgid "拥抱"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:239
+#: Script/Design/handle_instruct.py:239
 msgid "亲吻"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:255
+#: Script/Design/handle_instruct.py:255
 msgid "牵手"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:271
+#: Script/Design/handle_instruct.py:271
 msgid "抚摸"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:287
+#: Script/Design/handle_instruct.py:287
 msgid "摸胸"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:303
+#: Script/Design/handle_instruct.py:303
 msgid "收藏角色"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:317
+#: Script/Design/handle_instruct.py:317
 msgid "取消收藏"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:331
+#: Script/Design/handle_instruct.py:331
 msgid "启用收藏模式"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:339
+#: Script/Design/handle_instruct.py:339
 msgid ""
 "\n"
 "现在只会显示被收藏的角色的信息了！\n"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:346
+#: Script/Design/handle_instruct.py:346
 msgid "关闭收藏模式"
 msgstr ""
 
-#: ../Script/Design/handle_instruct.py:354
+#: Script/Design/handle_instruct.py:354
 msgid ""
 "\n"
 "现在会显示所有角色的信息了！\n"
 msgstr ""
 
-#: ../Script/Core/flow_handle.py:261 ../Script/Core/flow_handle.py:282
+#: Script/Design/handle_instruct.py:361
+msgid "查看课程表"
+msgstr ""
+
+#: Script/Core/flow_handle.py:261 Script/Core/flow_handle.py:282
 msgid "您输入的选项无效，请重试\n"
 msgstr ""
 
-#: ../Script/Settle/default.py:594 ../Script/Settle/default.py:601
+#: Script/Settle/default.py:657 Script/Settle/default.py:664
 #, python-brace-format
 msgid "{character_name}失去了初吻\n"
 msgstr ""
@@ -4274,1363 +4318,1363 @@ msgstr ""
 msgid "{TargetName}跨坐到{PlayerNickName}的腿上，抱住了{PlayerNickName}，埋首于{PlayerNickName}的肩颈处"
 msgstr ""
 
-#: Scene:../data/map/24/2/11/Scene.json
+#: Scene:data/map/24/2/11/Scene.json
 msgid "309号"
 msgstr ""
 
-#: Scene:../data/map/24/2/13/Scene.json
+#: Scene:data/map/24/2/13/Scene.json
 msgid "311号"
 msgstr ""
 
-#: Scene:../data/map/24/2/2/Scene.json
+#: Scene:data/map/24/2/2/Scene.json
 msgid "左厕所&浴室"
 msgstr ""
 
-#: Scene:../data/map/24/2/17/Scene.json
+#: Scene:data/map/24/2/17/Scene.json
 msgid "右厕所&浴室"
 msgstr ""
 
-#: Scene:../data/map/24/2/5/Scene.json
+#: Scene:data/map/24/2/5/Scene.json
 msgid "303号"
 msgstr ""
 
-#: Scene:../data/map/24/2/10/Scene.json
+#: Scene:data/map/24/2/10/Scene.json
 msgid "308号"
 msgstr ""
 
-#: Scene:../data/map/24/2/0/Scene.json
+#: Scene:data/map/24/2/0/Scene.json
 msgid "3F楼梯间"
 msgstr ""
 
-#: Scene:../data/map/24/2/8/Scene.json
+#: Scene:data/map/24/2/8/Scene.json
 msgid "306号"
 msgstr ""
 
-#: Scene:../data/map/24/2/7/Scene.json
+#: Scene:data/map/24/2/7/Scene.json
 msgid "305号"
 msgstr ""
 
-#: Scene:../data/map/24/2/15/Scene.json
+#: Scene:data/map/24/2/15/Scene.json
 msgid "313号"
 msgstr ""
 
-#: Scene:../data/map/24/2/3/Scene.json
+#: Scene:data/map/24/2/3/Scene.json
 msgid "301号"
 msgstr ""
 
-#: Scene:../data/map/24/2/4/Scene.json
+#: Scene:data/map/24/2/4/Scene.json
 msgid "302号"
 msgstr ""
 
-#: Scene:../data/map/24/2/12/Scene.json
+#: Scene:data/map/24/2/12/Scene.json
 msgid "310号"
 msgstr ""
 
-#: Scene:../data/map/24/2/16/Scene.json
+#: Scene:data/map/24/2/16/Scene.json
 msgid "314号"
 msgstr ""
 
-#: Scene:../data/map/24/2/1/Scene.json
+#: Scene:data/map/24/2/1/Scene.json
 msgid "过道"
 msgstr ""
 
-#: Scene:../data/map/24/2/14/Scene.json
+#: Scene:data/map/24/2/14/Scene.json
 msgid "312号"
 msgstr ""
 
-#: Scene:../data/map/24/2/9/Scene.json
+#: Scene:data/map/24/2/9/Scene.json
 msgid "307号"
 msgstr ""
 
-#: Map:../data/map/24/2/Map.json
+#: Map:data/map/24/2/Map.json
 msgid "3F"
 msgstr ""
 
-#: Scene:../data/map/24/2/6/Scene.json
+#: Scene:data/map/24/2/6/Scene.json
 msgid "304号"
 msgstr ""
 
-#: Scene:../data/map/24/5/Scene.json
+#: Scene:data/map/24/5/Scene.json
 msgid "天台"
 msgstr ""
 
-#: Scene:../data/map/24/0/11/Scene.json
+#: Scene:data/map/24/0/11/Scene.json
 msgid "109号"
 msgstr ""
 
-#: Scene:../data/map/24/0/13/Scene.json
+#: Scene:data/map/24/0/13/Scene.json
 msgid "111号"
 msgstr ""
 
-#: Scene:../data/map/24/0/5/Scene.json
+#: Scene:data/map/24/0/5/Scene.json
 msgid "103号"
 msgstr ""
 
-#: Scene:../data/map/24/0/10/Scene.json
+#: Scene:data/map/24/0/10/Scene.json
 msgid "108号"
 msgstr ""
 
-#: Scene:../data/map/24/0/0/Scene.json
+#: Scene:data/map/24/0/0/Scene.json
 msgid "女宿舍楼D入口"
 msgstr ""
 
-#: Scene:../data/map/24/0/8/Scene.json
+#: Scene:data/map/24/0/8/Scene.json
 msgid "106号"
 msgstr ""
 
-#: Scene:../data/map/24/0/7/Scene.json
+#: Scene:data/map/24/0/7/Scene.json
 msgid "105号"
 msgstr ""
 
-#: Scene:../data/map/24/0/15/Scene.json
+#: Scene:data/map/24/0/15/Scene.json
 msgid "113号"
 msgstr ""
 
-#: Scene:../data/map/24/0/3/Scene.json
+#: Scene:data/map/24/0/3/Scene.json
 msgid "101号"
 msgstr ""
 
-#: Scene:../data/map/24/0/4/Scene.json
+#: Scene:data/map/24/0/4/Scene.json
 msgid "102号"
 msgstr ""
 
-#: Scene:../data/map/24/0/12/Scene.json
+#: Scene:data/map/24/0/12/Scene.json
 msgid "110号"
 msgstr ""
 
-#: Scene:../data/map/24/0/16/Scene.json
+#: Scene:data/map/24/0/16/Scene.json
 msgid "114号"
 msgstr ""
 
-#: Scene:../data/map/24/0/14/Scene.json
+#: Scene:data/map/24/0/14/Scene.json
 msgid "112号"
 msgstr ""
 
-#: Scene:../data/map/24/0/9/Scene.json
+#: Scene:data/map/24/0/9/Scene.json
 msgid "107号"
 msgstr ""
 
-#: Map:../data/map/24/0/Map.json
+#: Map:data/map/24/0/Map.json
 msgid "1F"
 msgstr ""
 
-#: Scene:../data/map/24/0/6/Scene.json
+#: Scene:data/map/24/0/6/Scene.json
 msgid "门卫室"
 msgstr ""
 
-#: Scene:../data/map/24/3/11/Scene.json
+#: Scene:data/map/24/3/11/Scene.json
 msgid "409号"
 msgstr ""
 
-#: Scene:../data/map/24/3/13/Scene.json
+#: Scene:data/map/24/3/13/Scene.json
 msgid "411号"
 msgstr ""
 
-#: Scene:../data/map/24/3/5/Scene.json
+#: Scene:data/map/24/3/5/Scene.json
 msgid "403号"
 msgstr ""
 
-#: Scene:../data/map/24/3/10/Scene.json
+#: Scene:data/map/24/3/10/Scene.json
 msgid "408号"
 msgstr ""
 
-#: Scene:../data/map/24/3/0/Scene.json
+#: Scene:data/map/24/3/0/Scene.json
 msgid "4F楼梯间"
 msgstr ""
 
-#: Scene:../data/map/24/3/8/Scene.json
+#: Scene:data/map/24/3/8/Scene.json
 msgid "406号"
 msgstr ""
 
-#: Scene:../data/map/24/3/7/Scene.json
+#: Scene:data/map/24/3/7/Scene.json
 msgid "405号"
 msgstr ""
 
-#: Scene:../data/map/24/3/15/Scene.json
+#: Scene:data/map/24/3/15/Scene.json
 msgid "413号"
 msgstr ""
 
-#: Scene:../data/map/24/3/3/Scene.json
+#: Scene:data/map/24/3/3/Scene.json
 msgid "401号"
 msgstr ""
 
-#: Scene:../data/map/24/3/4/Scene.json
+#: Scene:data/map/24/3/4/Scene.json
 msgid "402号"
 msgstr ""
 
-#: Scene:../data/map/24/3/12/Scene.json
+#: Scene:data/map/24/3/12/Scene.json
 msgid "410号"
 msgstr ""
 
-#: Scene:../data/map/24/3/16/Scene.json
+#: Scene:data/map/24/3/16/Scene.json
 msgid "414号"
 msgstr ""
 
-#: Scene:../data/map/24/3/14/Scene.json
+#: Scene:data/map/24/3/14/Scene.json
 msgid "412号"
 msgstr ""
 
-#: Scene:../data/map/24/3/9/Scene.json
+#: Scene:data/map/24/3/9/Scene.json
 msgid "407号"
 msgstr ""
 
-#: Map:../data/map/24/3/Map.json
+#: Map:data/map/24/3/Map.json
 msgid "4F"
 msgstr ""
 
-#: Scene:../data/map/24/3/6/Scene.json
+#: Scene:data/map/24/3/6/Scene.json
 msgid "404号"
 msgstr ""
 
-#: Scene:../data/map/24/4/11/Scene.json
+#: Scene:data/map/24/4/11/Scene.json
 msgid "009号"
 msgstr ""
 
-#: Scene:../data/map/24/4/13/Scene.json
+#: Scene:data/map/24/4/13/Scene.json
 msgid "011号"
 msgstr ""
 
-#: Scene:../data/map/24/4/5/Scene.json
+#: Scene:data/map/24/4/5/Scene.json
 msgid "003号"
 msgstr ""
 
-#: Scene:../data/map/24/4/10/Scene.json
+#: Scene:data/map/24/4/10/Scene.json
 msgid "008号"
 msgstr ""
 
-#: Scene:../data/map/24/4/0/Scene.json
+#: Scene:data/map/24/4/0/Scene.json
 msgid "-1F楼梯间"
 msgstr ""
 
-#: Scene:../data/map/24/4/8/Scene.json
+#: Scene:data/map/24/4/8/Scene.json
 msgid "006号"
 msgstr ""
 
-#: Scene:../data/map/24/4/7/Scene.json
+#: Scene:data/map/24/4/7/Scene.json
 msgid "005号"
 msgstr ""
 
-#: Scene:../data/map/24/4/15/Scene.json
+#: Scene:data/map/24/4/15/Scene.json
 msgid "013号"
 msgstr ""
 
-#: Scene:../data/map/24/4/3/Scene.json
+#: Scene:data/map/24/4/3/Scene.json
 msgid "001号"
 msgstr ""
 
-#: Scene:../data/map/24/4/4/Scene.json
+#: Scene:data/map/24/4/4/Scene.json
 msgid "002号"
 msgstr ""
 
-#: Scene:../data/map/24/4/12/Scene.json
+#: Scene:data/map/24/4/12/Scene.json
 msgid "010号"
 msgstr ""
 
-#: Scene:../data/map/24/4/16/Scene.json
+#: Scene:data/map/24/4/16/Scene.json
 msgid "014号"
 msgstr ""
 
-#: Scene:../data/map/24/4/14/Scene.json
+#: Scene:data/map/24/4/14/Scene.json
 msgid "012号"
 msgstr ""
 
-#: Scene:../data/map/24/4/9/Scene.json
+#: Scene:data/map/24/4/9/Scene.json
 msgid "007号"
 msgstr ""
 
-#: Map:../data/map/24/4/Map.json
+#: Map:data/map/24/4/Map.json
 msgid "-1F"
 msgstr ""
 
-#: Scene:../data/map/24/4/6/Scene.json
+#: Scene:data/map/24/4/6/Scene.json
 msgid "004号"
 msgstr ""
 
-#: Scene:../data/map/24/1/11/Scene.json
+#: Scene:data/map/24/1/11/Scene.json
 msgid "209号"
 msgstr ""
 
-#: Scene:../data/map/24/1/13/Scene.json
+#: Scene:data/map/24/1/13/Scene.json
 msgid "211号"
 msgstr ""
 
-#: Scene:../data/map/24/1/5/Scene.json
+#: Scene:data/map/24/1/5/Scene.json
 msgid "203号"
 msgstr ""
 
-#: Scene:../data/map/24/1/10/Scene.json
+#: Scene:data/map/24/1/10/Scene.json
 msgid "208号"
 msgstr ""
 
-#: Scene:../data/map/24/1/0/Scene.json
+#: Scene:data/map/24/1/0/Scene.json
 msgid "2F楼梯间"
 msgstr ""
 
-#: Scene:../data/map/24/1/8/Scene.json
+#: Scene:data/map/24/1/8/Scene.json
 msgid "206号"
 msgstr ""
 
-#: Scene:../data/map/24/1/7/Scene.json
+#: Scene:data/map/24/1/7/Scene.json
 msgid "205号"
 msgstr ""
 
-#: Scene:../data/map/24/1/15/Scene.json
+#: Scene:data/map/24/1/15/Scene.json
 msgid "213号"
 msgstr ""
 
-#: Scene:../data/map/24/1/3/Scene.json
+#: Scene:data/map/24/1/3/Scene.json
 msgid "201号"
 msgstr ""
 
-#: Scene:../data/map/24/1/4/Scene.json
+#: Scene:data/map/24/1/4/Scene.json
 msgid "202号"
 msgstr ""
 
-#: Scene:../data/map/24/1/12/Scene.json
+#: Scene:data/map/24/1/12/Scene.json
 msgid "210号"
 msgstr ""
 
-#: Scene:../data/map/24/1/16/Scene.json
+#: Scene:data/map/24/1/16/Scene.json
 msgid "214号"
 msgstr ""
 
-#: Scene:../data/map/24/1/14/Scene.json
+#: Scene:data/map/24/1/14/Scene.json
 msgid "212号"
 msgstr ""
 
-#: Scene:../data/map/24/1/9/Scene.json
+#: Scene:data/map/24/1/9/Scene.json
 msgid "207号"
 msgstr ""
 
-#: Map:../data/map/24/1/Map.json
+#: Map:data/map/24/1/Map.json
 msgid "2F"
 msgstr ""
 
-#: Scene:../data/map/24/1/6/Scene.json
+#: Scene:data/map/24/1/6/Scene.json
 msgid "204号"
 msgstr ""
 
-#: Map:../data/map/24/Map.json
+#: Map:data/map/24/Map.json
 msgid "女生宿舍楼D"
 msgstr ""
 
-#: Scene:../data/map/11/Scene.json
+#: Scene:data/map/11/Scene.json
 msgid "超市"
 msgstr ""
 
-#: Scene:../data/map/13/2/2/Scene.json
+#: Scene:data/map/13/2/2/Scene.json
 msgid "电子借阅处D"
 msgstr ""
 
-#: Scene:../data/map/13/2/5/Scene.json
+#: Scene:data/map/13/2/5/Scene.json
 msgid "地图"
 msgstr ""
 
-#: Scene:../data/map/13/2/0/Scene.json
+#: Scene:data/map/13/2/0/Scene.json
 msgid "3F入口"
 msgstr ""
 
-#: Scene:../data/map/13/2/7/Scene.json
+#: Scene:data/map/13/2/7/Scene.json
 msgid "地方文献"
 msgstr ""
 
-#: Scene:../data/map/13/2/3/Scene.json
+#: Scene:data/map/13/2/3/Scene.json
 msgid "大厅"
 msgstr ""
 
-#: Scene:../data/map/13/2/4/Scene.json
+#: Scene:data/map/13/2/4/Scene.json
 msgid "旧外文图书"
 msgstr ""
 
-#: Scene:../data/map/13/2/1/Scene.json
+#: Scene:data/map/13/2/1/Scene.json
 msgid "电子借阅处C"
 msgstr ""
 
-#: Scene:../data/map/13/2/6/Scene.json
+#: Scene:data/map/13/2/6/Scene.json
 msgid "外文报纸"
 msgstr ""
 
-#: Scene:../data/map/13/0/2/Scene.json
+#: Scene:data/map/13/0/2/Scene.json
 msgid "还书处"
 msgstr ""
 
-#: Scene:../data/map/13/0/5/Scene.json
+#: Scene:data/map/13/0/5/Scene.json
 msgid "中文期刊"
 msgstr ""
 
-#: Scene:../data/map/13/0/0/Scene.json
+#: Scene:data/map/13/0/0/Scene.json
 msgid "图书馆入口"
 msgstr ""
 
-#: Scene:../data/map/13/0/7/Scene.json
+#: Scene:data/map/13/0/7/Scene.json
 msgid "中文古籍纸装书"
 msgstr ""
 
-#: Scene:../data/map/13/0/4/Scene.json
+#: Scene:data/map/13/0/4/Scene.json
 msgid "中文报纸"
 msgstr ""
 
-#: Scene:../data/map/13/0/1/Scene.json
+#: Scene:data/map/13/0/1/Scene.json
 msgid "借阅处"
 msgstr ""
 
-#: Scene:../data/map/13/0/6/Scene.json
+#: Scene:data/map/13/0/6/Scene.json
 msgid "中文图书"
 msgstr ""
 
-#: Scene:../data/map/13/3/2/Scene.json
+#: Scene:data/map/13/3/2/Scene.json
 msgid "电子借阅处F"
 msgstr ""
 
-#: Scene:../data/map/13/3/0/Scene.json
+#: Scene:data/map/13/3/0/Scene.json
 msgid "4F入口"
 msgstr ""
 
-#: Scene:../data/map/13/3/7/Scene.json
+#: Scene:data/map/13/3/7/Scene.json
 msgid "技术标准资料"
 msgstr ""
 
-#: Scene:../data/map/13/3/4/Scene.json
+#: Scene:data/map/13/3/4/Scene.json
 msgid "外文图书"
 msgstr ""
 
-#: Scene:../data/map/13/3/1/Scene.json
+#: Scene:data/map/13/3/1/Scene.json
 msgid "电子借阅处E"
 msgstr ""
 
-#: Scene:../data/map/13/3/6/Scene.json
+#: Scene:data/map/13/3/6/Scene.json
 msgid "专利文献"
 msgstr ""
 
-#: Scene:../data/map/13/4/2/Scene.json
+#: Scene:data/map/13/4/2/Scene.json
 msgid "电子借阅处H"
 msgstr ""
 
-#: Scene:../data/map/13/4/5/Scene.json
+#: Scene:data/map/13/4/5/Scene.json
 msgid "音像资料"
 msgstr ""
 
-#: Scene:../data/map/13/4/0/Scene.json
+#: Scene:data/map/13/4/0/Scene.json
 msgid "5F入口"
 msgstr ""
 
-#: Scene:../data/map/13/4/7/Scene.json
+#: Scene:data/map/13/4/7/Scene.json
 msgid "盲文阅读"
 msgstr ""
 
-#: Scene:../data/map/13/4/4/Scene.json
+#: Scene:data/map/13/4/4/Scene.json
 msgid "科技报告"
 msgstr ""
 
-#: Scene:../data/map/13/4/1/Scene.json
+#: Scene:data/map/13/4/1/Scene.json
 msgid "电子借阅处G"
 msgstr ""
 
-#: Map:../data/map/13/4/Map.json
+#: Map:data/map/13/4/Map.json
 msgid "5F"
 msgstr ""
 
-#: Scene:../data/map/13/4/6/Scene.json
+#: Scene:data/map/13/4/6/Scene.json
 msgid "教科书范本"
 msgstr ""
 
-#: Scene:../data/map/13/1/2/Scene.json
+#: Scene:data/map/13/1/2/Scene.json
 msgid "电子借阅处B"
 msgstr ""
 
-#: Scene:../data/map/13/1/5/Scene.json
+#: Scene:data/map/13/1/5/Scene.json
 msgid "中国家谱"
 msgstr ""
 
-#: Scene:../data/map/13/1/0/Scene.json
+#: Scene:data/map/13/1/0/Scene.json
 msgid "2F入口"
 msgstr ""
 
-#: Scene:../data/map/13/1/7/Scene.json
+#: Scene:data/map/13/1/7/Scene.json
 msgid "近现代报纸"
 msgstr ""
 
-#: Scene:../data/map/13/1/4/Scene.json
+#: Scene:data/map/13/1/4/Scene.json
 msgid "碑帖"
 msgstr ""
 
-#: Scene:../data/map/13/1/1/Scene.json
+#: Scene:data/map/13/1/1/Scene.json
 msgid "电子借阅处A"
 msgstr ""
 
-#: Scene:../data/map/13/1/6/Scene.json
+#: Scene:data/map/13/1/6/Scene.json
 msgid "旧平装图书"
 msgstr ""
 
-#: Map:../data/map/13/Map.json
+#: Map:data/map/13/Map.json
 msgid "图书馆"
 msgstr ""
 
-#: Scene:../data/map/2/Scene.json
+#: Scene:data/map/2/Scene.json
 msgid "大操场"
 msgstr ""
 
-#: Scene:../data/map/26/2/11/Scene.json
+#: Scene:data/map/26/2/11/Scene.json
 msgid "311室"
 msgstr ""
 
-#: Scene:../data/map/26/2/13/Scene.json
+#: Scene:data/map/26/2/13/Scene.json
 msgid "313室"
 msgstr ""
 
-#: Scene:../data/map/26/2/2/Scene.json
+#: Scene:data/map/26/2/2/Scene.json
 msgid "302室"
 msgstr ""
 
-#: Scene:../data/map/26/2/17/Scene.json
+#: Scene:data/map/26/2/17/Scene.json
 msgid "317室"
 msgstr ""
 
-#: Scene:../data/map/26/2/19/Scene.json
+#: Scene:data/map/26/2/19/Scene.json
 msgid "319室"
 msgstr ""
 
-#: Scene:../data/map/26/2/5/Scene.json
+#: Scene:data/map/26/2/5/Scene.json
 msgid "305室"
 msgstr ""
 
-#: Scene:../data/map/26/2/10/Scene.json
+#: Scene:data/map/26/2/10/Scene.json
 msgid "310室"
 msgstr ""
 
-#: Scene:../data/map/26/2/8/Scene.json
+#: Scene:data/map/26/2/8/Scene.json
 msgid "308室"
 msgstr ""
 
-#: Scene:../data/map/26/2/7/Scene.json
+#: Scene:data/map/26/2/7/Scene.json
 msgid "307室"
 msgstr ""
 
-#: Scene:../data/map/26/2/15/Scene.json
+#: Scene:data/map/26/2/15/Scene.json
 msgid "315室"
 msgstr ""
 
-#: Scene:../data/map/26/2/3/Scene.json
+#: Scene:data/map/26/2/3/Scene.json
 msgid "303室"
 msgstr ""
 
-#: Scene:../data/map/26/2/4/Scene.json
+#: Scene:data/map/26/2/4/Scene.json
 msgid "304室"
 msgstr ""
 
-#: Scene:../data/map/26/2/12/Scene.json
+#: Scene:data/map/26/2/12/Scene.json
 msgid "312室"
 msgstr ""
 
-#: Scene:../data/map/26/2/16/Scene.json
+#: Scene:data/map/26/2/16/Scene.json
 msgid "316室"
 msgstr ""
 
-#: Scene:../data/map/26/2/18/Scene.json
+#: Scene:data/map/26/2/18/Scene.json
 msgid "318室"
 msgstr ""
 
-#: Scene:../data/map/26/2/1/Scene.json
+#: Scene:data/map/26/2/1/Scene.json
 msgid "301室"
 msgstr ""
 
-#: Scene:../data/map/26/2/14/Scene.json
+#: Scene:data/map/26/2/14/Scene.json
 msgid "314室"
 msgstr ""
 
-#: Scene:../data/map/26/2/9/Scene.json
+#: Scene:data/map/26/2/9/Scene.json
 msgid "309室"
 msgstr ""
 
-#: Scene:../data/map/26/2/6/Scene.json
+#: Scene:data/map/26/2/6/Scene.json
 msgid "306室"
 msgstr ""
 
-#: Scene:../data/map/26/0/11/Scene.json
+#: Scene:data/map/26/0/11/Scene.json
 msgid "111室"
 msgstr ""
 
-#: Scene:../data/map/26/0/13/Scene.json
+#: Scene:data/map/26/0/13/Scene.json
 msgid "113室"
 msgstr ""
 
-#: Scene:../data/map/26/0/2/Scene.json
+#: Scene:data/map/26/0/2/Scene.json
 msgid "102室"
 msgstr ""
 
-#: Scene:../data/map/26/0/17/Scene.json
+#: Scene:data/map/26/0/17/Scene.json
 msgid "117室"
 msgstr ""
 
-#: Scene:../data/map/26/0/19/Scene.json
+#: Scene:data/map/26/0/19/Scene.json
 msgid "119室"
 msgstr ""
 
-#: Scene:../data/map/26/0/5/Scene.json
+#: Scene:data/map/26/0/5/Scene.json
 msgid "105室"
 msgstr ""
 
-#: Scene:../data/map/26/0/10/Scene.json
+#: Scene:data/map/26/0/10/Scene.json
 msgid "110室"
 msgstr ""
 
-#: Scene:../data/map/26/0/0/Scene.json
+#: Scene:data/map/26/0/0/Scene.json
 msgid "公寓楼B入口"
 msgstr ""
 
-#: Scene:../data/map/26/0/8/Scene.json
+#: Scene:data/map/26/0/8/Scene.json
 msgid "108室"
 msgstr ""
 
-#: Scene:../data/map/26/0/7/Scene.json
+#: Scene:data/map/26/0/7/Scene.json
 msgid "107室"
 msgstr ""
 
-#: Scene:../data/map/26/0/15/Scene.json
+#: Scene:data/map/26/0/15/Scene.json
 msgid "115室"
 msgstr ""
 
-#: Scene:../data/map/26/0/3/Scene.json
+#: Scene:data/map/26/0/3/Scene.json
 msgid "103室"
 msgstr ""
 
-#: Scene:../data/map/26/0/4/Scene.json
+#: Scene:data/map/26/0/4/Scene.json
 msgid "104室"
 msgstr ""
 
-#: Scene:../data/map/26/0/12/Scene.json
+#: Scene:data/map/26/0/12/Scene.json
 msgid "112室"
 msgstr ""
 
-#: Scene:../data/map/26/0/16/Scene.json
+#: Scene:data/map/26/0/16/Scene.json
 msgid "116室"
 msgstr ""
 
-#: Scene:../data/map/26/0/18/Scene.json
+#: Scene:data/map/26/0/18/Scene.json
 msgid "118室"
 msgstr ""
 
-#: Scene:../data/map/26/0/1/Scene.json
+#: Scene:data/map/26/0/1/Scene.json
 msgid "101室"
 msgstr ""
 
-#: Scene:../data/map/26/0/14/Scene.json
+#: Scene:data/map/26/0/14/Scene.json
 msgid "114室"
 msgstr ""
 
-#: Scene:../data/map/26/0/9/Scene.json
+#: Scene:data/map/26/0/9/Scene.json
 msgid "109室"
 msgstr ""
 
-#: Scene:../data/map/26/0/6/Scene.json
+#: Scene:data/map/26/0/6/Scene.json
 msgid "106室"
 msgstr ""
 
-#: Scene:../data/map/26/3/11/Scene.json
+#: Scene:data/map/26/3/11/Scene.json
 msgid "411室"
 msgstr ""
 
-#: Scene:../data/map/26/3/13/Scene.json
+#: Scene:data/map/26/3/13/Scene.json
 msgid "413室"
 msgstr ""
 
-#: Scene:../data/map/26/3/2/Scene.json
+#: Scene:data/map/26/3/2/Scene.json
 msgid "402室"
 msgstr ""
 
-#: Scene:../data/map/26/3/17/Scene.json
+#: Scene:data/map/26/3/17/Scene.json
 msgid "417室"
 msgstr ""
 
-#: Scene:../data/map/26/3/19/Scene.json
+#: Scene:data/map/26/3/19/Scene.json
 msgid "419室"
 msgstr ""
 
-#: Scene:../data/map/26/3/5/Scene.json
+#: Scene:data/map/26/3/5/Scene.json
 msgid "405室"
 msgstr ""
 
-#: Scene:../data/map/26/3/10/Scene.json
+#: Scene:data/map/26/3/10/Scene.json
 msgid "410室"
 msgstr ""
 
-#: Scene:../data/map/26/3/8/Scene.json
+#: Scene:data/map/26/3/8/Scene.json
 msgid "408室"
 msgstr ""
 
-#: Scene:../data/map/26/3/7/Scene.json
+#: Scene:data/map/26/3/7/Scene.json
 msgid "407室"
 msgstr ""
 
-#: Scene:../data/map/26/3/15/Scene.json
+#: Scene:data/map/26/3/15/Scene.json
 msgid "415室"
 msgstr ""
 
-#: Scene:../data/map/26/3/3/Scene.json
+#: Scene:data/map/26/3/3/Scene.json
 msgid "403室"
 msgstr ""
 
-#: Scene:../data/map/26/3/4/Scene.json
+#: Scene:data/map/26/3/4/Scene.json
 msgid "404室"
 msgstr ""
 
-#: Scene:../data/map/26/3/12/Scene.json
+#: Scene:data/map/26/3/12/Scene.json
 msgid "412室"
 msgstr ""
 
-#: Scene:../data/map/26/3/16/Scene.json
+#: Scene:data/map/26/3/16/Scene.json
 msgid "416室"
 msgstr ""
 
-#: Scene:../data/map/26/3/18/Scene.json
+#: Scene:data/map/26/3/18/Scene.json
 msgid "418室"
 msgstr ""
 
-#: Scene:../data/map/26/3/1/Scene.json
+#: Scene:data/map/26/3/1/Scene.json
 msgid "401室"
 msgstr ""
 
-#: Scene:../data/map/26/3/14/Scene.json
+#: Scene:data/map/26/3/14/Scene.json
 msgid "414室"
 msgstr ""
 
-#: Scene:../data/map/26/3/9/Scene.json
+#: Scene:data/map/26/3/9/Scene.json
 msgid "409室"
 msgstr ""
 
-#: Scene:../data/map/26/3/6/Scene.json
+#: Scene:data/map/26/3/6/Scene.json
 msgid "406室"
 msgstr ""
 
-#: Scene:../data/map/26/1/11/Scene.json
+#: Scene:data/map/26/1/11/Scene.json
 msgid "211室"
 msgstr ""
 
-#: Scene:../data/map/26/1/13/Scene.json
+#: Scene:data/map/26/1/13/Scene.json
 msgid "213室"
 msgstr ""
 
-#: Scene:../data/map/26/1/2/Scene.json
+#: Scene:data/map/26/1/2/Scene.json
 msgid "202室"
 msgstr ""
 
-#: Scene:../data/map/26/1/17/Scene.json
+#: Scene:data/map/26/1/17/Scene.json
 msgid "217室"
 msgstr ""
 
-#: Scene:../data/map/26/1/19/Scene.json
+#: Scene:data/map/26/1/19/Scene.json
 msgid "219室"
 msgstr ""
 
-#: Scene:../data/map/26/1/5/Scene.json
+#: Scene:data/map/26/1/5/Scene.json
 msgid "205室"
 msgstr ""
 
-#: Scene:../data/map/26/1/10/Scene.json
+#: Scene:data/map/26/1/10/Scene.json
 msgid "210室"
 msgstr ""
 
-#: Scene:../data/map/26/1/8/Scene.json
+#: Scene:data/map/26/1/8/Scene.json
 msgid "208室"
 msgstr ""
 
-#: Scene:../data/map/26/1/7/Scene.json
+#: Scene:data/map/26/1/7/Scene.json
 msgid "207室"
 msgstr ""
 
-#: Scene:../data/map/26/1/15/Scene.json
+#: Scene:data/map/26/1/15/Scene.json
 msgid "215室"
 msgstr ""
 
-#: Scene:../data/map/26/1/3/Scene.json
+#: Scene:data/map/26/1/3/Scene.json
 msgid "203室"
 msgstr ""
 
-#: Scene:../data/map/26/1/4/Scene.json
+#: Scene:data/map/26/1/4/Scene.json
 msgid "204室"
 msgstr ""
 
-#: Scene:../data/map/26/1/12/Scene.json
+#: Scene:data/map/26/1/12/Scene.json
 msgid "212室"
 msgstr ""
 
-#: Scene:../data/map/26/1/16/Scene.json
+#: Scene:data/map/26/1/16/Scene.json
 msgid "216室"
 msgstr ""
 
-#: Scene:../data/map/26/1/18/Scene.json
+#: Scene:data/map/26/1/18/Scene.json
 msgid "218室"
 msgstr ""
 
-#: Scene:../data/map/26/1/1/Scene.json
+#: Scene:data/map/26/1/1/Scene.json
 msgid "201室"
 msgstr ""
 
-#: Scene:../data/map/26/1/14/Scene.json
+#: Scene:data/map/26/1/14/Scene.json
 msgid "214室"
 msgstr ""
 
-#: Scene:../data/map/26/1/9/Scene.json
+#: Scene:data/map/26/1/9/Scene.json
 msgid "209室"
 msgstr ""
 
-#: Scene:../data/map/26/1/6/Scene.json
+#: Scene:data/map/26/1/6/Scene.json
 msgid "206室"
 msgstr ""
 
-#: Map:../data/map/26/Map.json
+#: Map:data/map/26/Map.json
 msgid "公寓楼B"
 msgstr ""
 
-#: Scene:../data/map/25/0/0/Scene.json
+#: Scene:data/map/25/0/0/Scene.json
 msgid "公寓楼A入口"
 msgstr ""
 
-#: Map:../data/map/25/Map.json
+#: Map:data/map/25/Map.json
 msgid "公寓楼A"
 msgstr ""
 
-#: Scene:../data/map/17/0/0/Scene.json
+#: Scene:data/map/17/0/0/Scene.json
 msgid "男宿舍楼A入口"
 msgstr ""
 
-#: Map:../data/map/17/Map.json
+#: Map:data/map/17/Map.json
 msgid "男生宿舍楼A"
 msgstr ""
 
-#: Scene:../data/map/19/0/0/Scene.json
+#: Scene:data/map/19/0/0/Scene.json
 msgid "男宿舍楼B入口"
 msgstr ""
 
-#: Map:../data/map/19/Map.json
+#: Map:data/map/19/Map.json
 msgid "男生宿舍楼B"
 msgstr ""
 
-#: Scene:../data/map/5/Scene.json
+#: Scene:data/map/5/Scene.json
 msgid "篮球场A"
 msgstr ""
 
-#: Scene:../data/map/10/0/2/Scene.json
+#: Scene:data/map/10/0/2/Scene.json
 msgid "取餐区(素)"
 msgstr ""
 
-#: Scene:../data/map/10/0/5/Scene.json
+#: Scene:data/map/10/0/5/Scene.json
 msgid "就餐区C"
 msgstr ""
 
-#: Scene:../data/map/10/0/0/Scene.json
+#: Scene:data/map/10/0/0/Scene.json
 msgid "大食堂入口"
 msgstr ""
 
-#: Scene:../data/map/10/0/8/Scene.json
+#: Scene:data/map/10/0/8/Scene.json
 msgid "就餐区F"
 msgstr ""
 
-#: Scene:../data/map/10/0/7/Scene.json
+#: Scene:data/map/10/0/7/Scene.json
 msgid "就餐区E"
 msgstr ""
 
-#: Scene:../data/map/10/0/3/Scene.json
+#: Scene:data/map/10/0/3/Scene.json
 msgid "就餐区A"
 msgstr ""
 
-#: Scene:../data/map/10/0/4/Scene.json
+#: Scene:data/map/10/0/4/Scene.json
 msgid "就餐区B"
 msgstr ""
 
-#: Scene:../data/map/10/0/1/Scene.json
+#: Scene:data/map/10/0/1/Scene.json
 msgid "取餐区(荤)"
 msgstr ""
 
-#: Scene:../data/map/10/0/6/Scene.json
+#: Scene:data/map/10/0/6/Scene.json
 msgid "就餐区D"
 msgstr ""
 
-#: Scene:../data/map/10/1/2/Scene.json
+#: Scene:data/map/10/1/2/Scene.json
 msgid "就餐区G"
 msgstr ""
 
-#: Scene:../data/map/10/1/3/Scene.json
+#: Scene:data/map/10/1/3/Scene.json
 msgid "就餐区H"
 msgstr ""
 
-#: Scene:../data/map/10/1/1/Scene.json
+#: Scene:data/map/10/1/1/Scene.json
 msgid "取餐区"
 msgstr ""
 
-#: Map:../data/map/10/Map.json
+#: Map:data/map/10/Map.json
 msgid "大食堂"
 msgstr ""
 
-#: Scene:../data/map/0/Scene.json
+#: Scene:data/map/0/Scene.json
 msgid "学校大门"
 msgstr ""
 
-#: Scene:../data/map/21/0/0/Scene.json
+#: Scene:data/map/21/0/0/Scene.json
 msgid "男宿舍楼C入口"
 msgstr ""
 
-#: Map:../data/map/21/Map.json
+#: Map:data/map/21/Map.json
 msgid "男生宿舍楼C"
 msgstr ""
 
-#: Scene:../data/map/8/Scene.json
+#: Scene:data/map/8/Scene.json
 msgid "喷泉"
 msgstr ""
 
-#: Scene:../data/map/7/Scene.json
+#: Scene:data/map/7/Scene.json
 msgid "小树林"
 msgstr ""
 
-#: Scene:../data/map/15/0/0/Scene.json
+#: Scene:data/map/15/0/0/Scene.json
 msgid "教职工宿舍入口"
 msgstr ""
 
-#: Map:../data/map/15/Map.json
+#: Map:data/map/15/Map.json
 msgid "教职工宿舍"
 msgstr ""
 
-#: Scene:../data/map/3/2/11/Scene.json
+#: Scene:data/map/3/2/11/Scene.json
 msgid "高三3班"
 msgstr ""
 
-#: Scene:../data/map/3/2/13/Scene.json
+#: Scene:data/map/3/2/13/Scene.json
 msgid "初三2班"
 msgstr ""
 
-#: Scene:../data/map/3/2/2/Scene.json
+#: Scene:data/map/3/2/2/Scene.json
 msgid "高三教导主任办公室"
 msgstr ""
 
-#: Scene:../data/map/3/2/5/Scene.json
+#: Scene:data/map/3/2/5/Scene.json
 msgid "少先队队部办公室"
 msgstr ""
 
-#: Scene:../data/map/3/2/10/Scene.json
+#: Scene:data/map/3/2/10/Scene.json
 msgid "高三2班"
 msgstr ""
 
-#: Scene:../data/map/3/2/8/Scene.json
+#: Scene:data/map/3/2/8/Scene.json
 msgid "右厕所"
 msgstr ""
 
-#: Scene:../data/map/3/2/7/Scene.json
+#: Scene:data/map/3/2/7/Scene.json
 msgid "初中部3年级办公室"
 msgstr ""
 
-#: Scene:../data/map/3/2/15/Scene.json
+#: Scene:data/map/3/2/15/Scene.json
 msgid "过道走廊"
 msgstr ""
 
-#: Scene:../data/map/3/2/3/Scene.json
+#: Scene:data/map/3/2/3/Scene.json
 msgid "小会议室"
 msgstr ""
 
-#: Scene:../data/map/3/2/4/Scene.json
+#: Scene:data/map/3/2/4/Scene.json
 msgid "团支部办公室"
 msgstr ""
 
-#: Scene:../data/map/3/2/12/Scene.json
+#: Scene:data/map/3/2/12/Scene.json
 msgid "初三1班"
 msgstr ""
 
-#: Scene:../data/map/3/2/16/Scene.json
+#: Scene:data/map/3/2/16/Scene.json
 msgid "左侧走廊"
 msgstr ""
 
-#: Scene:../data/map/3/2/1/Scene.json
+#: Scene:data/map/3/2/1/Scene.json
 msgid "高中部3年级办公室"
 msgstr ""
 
-#: Scene:../data/map/3/2/14/Scene.json
+#: Scene:data/map/3/2/14/Scene.json
 msgid "初三3班"
 msgstr ""
 
-#: Scene:../data/map/3/2/9/Scene.json
+#: Scene:data/map/3/2/9/Scene.json
 msgid "高一1班"
 msgstr ""
 
-#: Scene:../data/map/3/2/6/Scene.json
+#: Scene:data/map/3/2/6/Scene.json
 msgid "初一教导主任办公室"
 msgstr ""
 
-#: Scene:../data/map/3/0/11/Scene.json
+#: Scene:data/map/3/0/11/Scene.json
 msgid "高一3班"
 msgstr ""
 
-#: Scene:../data/map/3/0/13/Scene.json
+#: Scene:data/map/3/0/13/Scene.json
 msgid "初一2班"
 msgstr ""
 
-#: Scene:../data/map/3/0/2/Scene.json
+#: Scene:data/map/3/0/2/Scene.json
 msgid "高一教导主任办公室"
 msgstr ""
 
-#: Scene:../data/map/3/0/17/Scene.json
+#: Scene:data/map/3/0/17/Scene.json
 msgid "右侧走廊"
 msgstr ""
 
-#: Scene:../data/map/3/0/10/Scene.json
+#: Scene:data/map/3/0/10/Scene.json
 msgid "高一2班"
 msgstr ""
 
-#: Scene:../data/map/3/0/0/Scene.json
+#: Scene:data/map/3/0/0/Scene.json
 msgid "主教学楼入口"
 msgstr ""
 
-#: Scene:../data/map/3/0/7/Scene.json
+#: Scene:data/map/3/0/7/Scene.json
 msgid "初中部1年级办公室"
 msgstr ""
 
-#: Scene:../data/map/3/0/3/Scene.json
+#: Scene:data/map/3/0/3/Scene.json
 msgid "党支部办公室"
 msgstr ""
 
-#: Scene:../data/map/3/0/12/Scene.json
+#: Scene:data/map/3/0/12/Scene.json
 msgid "初一1班"
 msgstr ""
 
-#: Scene:../data/map/3/0/18/Scene.json
+#: Scene:data/map/3/0/18/Scene.json
 msgid "左厕所"
 msgstr ""
 
-#: Scene:../data/map/3/0/1/Scene.json
+#: Scene:data/map/3/0/1/Scene.json
 msgid "高中部1年级办公室"
 msgstr ""
 
-#: Scene:../data/map/3/0/14/Scene.json
+#: Scene:data/map/3/0/14/Scene.json
 msgid "初一3班"
 msgstr ""
 
-#: Scene:../data/map/3/3/2/Scene.json
+#: Scene:data/map/3/3/2/Scene.json
 msgid "计算机实践室B"
 msgstr ""
 
-#: Scene:../data/map/3/3/5/Scene.json
+#: Scene:data/map/3/3/5/Scene.json
 msgid "物理实验室B"
 msgstr ""
 
-#: Scene:../data/map/3/3/7/Scene.json
+#: Scene:data/map/3/3/7/Scene.json
 msgid "化学实验室B"
 msgstr ""
 
-#: Scene:../data/map/3/3/4/Scene.json
+#: Scene:data/map/3/3/4/Scene.json
 msgid "物理实验室A"
 msgstr ""
 
-#: Scene:../data/map/3/3/1/Scene.json
+#: Scene:data/map/3/3/1/Scene.json
 msgid "计算机实践室A"
 msgstr ""
 
-#: Scene:../data/map/3/3/6/Scene.json
+#: Scene:data/map/3/3/6/Scene.json
 msgid "化学实验室A"
 msgstr ""
 
-#: Scene:../data/map/3/4/5/Scene.json
+#: Scene:data/map/3/4/5/Scene.json
 msgid "社团活动室C"
 msgstr ""
 
-#: Scene:../data/map/3/4/0/Scene.json
+#: Scene:data/map/3/4/0/Scene.json
 msgid "5F楼梯间"
 msgstr ""
 
-#: Scene:../data/map/3/4/3/Scene.json
+#: Scene:data/map/3/4/3/Scene.json
 msgid "社团活动室A"
 msgstr ""
 
-#: Scene:../data/map/3/4/4/Scene.json
+#: Scene:data/map/3/4/4/Scene.json
 msgid "社团活动室B"
 msgstr ""
 
-#: Scene:../data/map/3/4/1/Scene.json
+#: Scene:data/map/3/4/1/Scene.json
 msgid "大会议室"
 msgstr ""
 
-#: Scene:../data/map/3/4/6/Scene.json
+#: Scene:data/map/3/4/6/Scene.json
 msgid "社团活动室D"
 msgstr ""
 
-#: Scene:../data/map/3/1/11/Scene.json
+#: Scene:data/map/3/1/11/Scene.json
 msgid "高二3班"
 msgstr ""
 
-#: Scene:../data/map/3/1/13/Scene.json
+#: Scene:data/map/3/1/13/Scene.json
 msgid "初二2班"
 msgstr ""
 
-#: Scene:../data/map/3/1/2/Scene.json
+#: Scene:data/map/3/1/2/Scene.json
 msgid "高二教导主任办公室"
 msgstr ""
 
-#: Scene:../data/map/3/1/5/Scene.json
+#: Scene:data/map/3/1/5/Scene.json
 msgid "财务室"
 msgstr ""
 
-#: Scene:../data/map/3/1/10/Scene.json
+#: Scene:data/map/3/1/10/Scene.json
 msgid "高二2班"
 msgstr ""
 
-#: Scene:../data/map/3/1/7/Scene.json
+#: Scene:data/map/3/1/7/Scene.json
 msgid "初中部2年级办公室"
 msgstr ""
 
-#: Scene:../data/map/3/1/3/Scene.json
+#: Scene:data/map/3/1/3/Scene.json
 msgid "广播室"
 msgstr ""
 
-#: Scene:../data/map/3/1/4/Scene.json
+#: Scene:data/map/3/1/4/Scene.json
 msgid "学生会办公室"
 msgstr ""
 
-#: Scene:../data/map/3/1/12/Scene.json
+#: Scene:data/map/3/1/12/Scene.json
 msgid "初二1班"
 msgstr ""
 
-#: Scene:../data/map/3/1/1/Scene.json
+#: Scene:data/map/3/1/1/Scene.json
 msgid "高中部2年级办公室"
 msgstr ""
 
-#: Scene:../data/map/3/1/14/Scene.json
+#: Scene:data/map/3/1/14/Scene.json
 msgid "初二3班"
 msgstr ""
 
-#: Scene:../data/map/3/1/9/Scene.json
+#: Scene:data/map/3/1/9/Scene.json
 msgid "高二1班"
 msgstr ""
 
-#: Scene:../data/map/3/1/6/Scene.json
+#: Scene:data/map/3/1/6/Scene.json
 msgid "初二教导主任办公室"
 msgstr ""
 
-#: Map:../data/map/3/Map.json
+#: Map:data/map/3/Map.json
 msgid "主教学楼"
 msgstr ""
 
-#: Scene:../data/map/20/0/0/Scene.json
+#: Scene:data/map/20/0/0/Scene.json
 msgid "女宿舍楼B入口"
 msgstr ""
 
-#: Map:../data/map/20/Map.json
+#: Map:data/map/20/Map.json
 msgid "女生宿舍楼B"
 msgstr ""
 
-#: Scene:../data/map/4/Scene.json
+#: Scene:data/map/4/Scene.json
 msgid "升旗台"
 msgstr ""
 
-#: Scene:../data/map/12/Scene.json
+#: Scene:data/map/12/Scene.json
 msgid "花坛"
 msgstr ""
 
-#: Scene:../data/map/16/2/0/Scene.json
+#: Scene:data/map/16/2/0/Scene.json
 msgid "小食堂3F楼梯间"
 msgstr ""
 
-#: Scene:../data/map/16/0/0/Scene.json
+#: Scene:data/map/16/0/0/Scene.json
 msgid "小食堂入口"
 msgstr ""
 
-#: Scene:../data/map/16/1/0/Scene.json
+#: Scene:data/map/16/1/0/Scene.json
 msgid "小食堂2F楼梯间"
 msgstr ""
 
-#: Map:../data/map/16/Map.json
+#: Map:data/map/16/Map.json
 msgid "小食堂"
 msgstr ""
 
-#: Scene:../data/map/23/0/0/Scene.json
+#: Scene:data/map/23/0/0/Scene.json
 msgid "男宿舍楼D入口"
 msgstr ""
 
-#: Map:../data/map/23/Map.json
+#: Map:data/map/23/Map.json
 msgid "男生宿舍楼D"
 msgstr ""
 
-#: Scene:../data/map/18/0/0/Scene.json
+#: Scene:data/map/18/0/0/Scene.json
 msgid "女宿舍楼A入口"
 msgstr ""
 
-#: Map:../data/map/18/Map.json
+#: Map:data/map/18/Map.json
 msgid "女生宿舍楼A"
 msgstr ""
 
-#: Scene:../data/map/22/0/0/Scene.json
+#: Scene:data/map/22/0/0/Scene.json
 msgid "女宿舍楼C入口"
 msgstr ""
 
-#: Map:../data/map/22/Map.json
+#: Map:data/map/22/Map.json
 msgid "女生宿舍楼C"
 msgstr ""
 
-#: Scene:../data/map/1/2/2/Scene.json
+#: Scene:data/map/1/2/2/Scene.json
 msgid "小学部5年级1班"
 msgstr ""
 
-#: Scene:../data/map/1/2/5/Scene.json
+#: Scene:data/map/1/2/5/Scene.json
 msgid "小学部6年级3班"
 msgstr ""
 
-#: Scene:../data/map/1/2/8/Scene.json
+#: Scene:data/map/1/2/8/Scene.json
 msgid "小学部6年级办公室"
 msgstr ""
 
-#: Scene:../data/map/1/2/7/Scene.json
+#: Scene:data/map/1/2/7/Scene.json
 msgid "小学部6年级1班"
 msgstr ""
 
-#: Scene:../data/map/1/2/3/Scene.json
+#: Scene:data/map/1/2/3/Scene.json
 msgid "小学部5年级2班"
 msgstr ""
 
-#: Scene:../data/map/1/2/4/Scene.json
+#: Scene:data/map/1/2/4/Scene.json
 msgid "小学部5年级3班"
 msgstr ""
 
-#: Scene:../data/map/1/2/1/Scene.json
+#: Scene:data/map/1/2/1/Scene.json
 msgid "小学部5年级办公室"
 msgstr ""
 
-#: Scene:../data/map/1/2/6/Scene.json
+#: Scene:data/map/1/2/6/Scene.json
 msgid "小学部6年级2班"
 msgstr ""
 
-#: Scene:../data/map/1/0/2/Scene.json
+#: Scene:data/map/1/0/2/Scene.json
 msgid "小学部1年级1班"
 msgstr ""
 
-#: Scene:../data/map/1/0/5/Scene.json
+#: Scene:data/map/1/0/5/Scene.json
 msgid "小学部2年级3班"
 msgstr ""
 
-#: Scene:../data/map/1/0/0/Scene.json
+#: Scene:data/map/1/0/0/Scene.json
 msgid "启航楼入口"
 msgstr ""
 
-#: Scene:../data/map/1/0/8/Scene.json
+#: Scene:data/map/1/0/8/Scene.json
 msgid "小学部2年级办公室"
 msgstr ""
 
-#: Scene:../data/map/1/0/7/Scene.json
+#: Scene:data/map/1/0/7/Scene.json
 msgid "小学部2年级1班"
 msgstr ""
 
-#: Scene:../data/map/1/0/3/Scene.json
+#: Scene:data/map/1/0/3/Scene.json
 msgid "小学部1年级2班"
 msgstr ""
 
-#: Scene:../data/map/1/0/4/Scene.json
+#: Scene:data/map/1/0/4/Scene.json
 msgid "小学部1年级3班"
 msgstr ""
 
-#: Scene:../data/map/1/0/1/Scene.json
+#: Scene:data/map/1/0/1/Scene.json
 msgid "小学部1年级办公室"
 msgstr ""
 
-#: Scene:../data/map/1/0/6/Scene.json
+#: Scene:data/map/1/0/6/Scene.json
 msgid "小学部2年级2班"
 msgstr ""
 
-#: Scene:../data/map/1/3/2/Scene.json
+#: Scene:data/map/1/3/2/Scene.json
 msgid "多媒体教室B"
 msgstr ""
 
-#: Scene:../data/map/1/3/1/Scene.json
+#: Scene:data/map/1/3/1/Scene.json
 msgid "多媒体教室A"
 msgstr ""
 
-#: Scene:../data/map/1/4/2/Scene.json
+#: Scene:data/map/1/4/2/Scene.json
 msgid "美术活动室"
 msgstr ""
 
-#: Scene:../data/map/1/4/1/Scene.json
+#: Scene:data/map/1/4/1/Scene.json
 msgid "音乐活动室"
 msgstr ""
 
-#: Scene:../data/map/1/1/2/Scene.json
+#: Scene:data/map/1/1/2/Scene.json
 msgid "小学部3年级1班"
 msgstr ""
 
-#: Scene:../data/map/1/1/5/Scene.json
+#: Scene:data/map/1/1/5/Scene.json
 msgid "小学部4年级3班"
 msgstr ""
 
-#: Scene:../data/map/1/1/8/Scene.json
+#: Scene:data/map/1/1/8/Scene.json
 msgid "小学部4年级办公室"
 msgstr ""
 
-#: Scene:../data/map/1/1/7/Scene.json
+#: Scene:data/map/1/1/7/Scene.json
 msgid "小学部4年级1班"
 msgstr ""
 
-#: Scene:../data/map/1/1/3/Scene.json
+#: Scene:data/map/1/1/3/Scene.json
 msgid "小学部3年级2班"
 msgstr ""
 
-#: Scene:../data/map/1/1/4/Scene.json
+#: Scene:data/map/1/1/4/Scene.json
 msgid "小学部3年级3班"
 msgstr ""
 
-#: Scene:../data/map/1/1/1/Scene.json
+#: Scene:data/map/1/1/1/Scene.json
 msgid "小学部3年级办公室"
 msgstr ""
 
-#: Scene:../data/map/1/1/6/Scene.json
+#: Scene:data/map/1/1/6/Scene.json
 msgid "小学部4年级2班"
 msgstr ""
 
-#: Map:../data/map/1/Map.json
+#: Map:data/map/1/Map.json
 msgid "启航楼"
 msgstr ""
 
-#: Scene:../data/map/14/2/Scene.json
+#: Scene:data/map/14/2/Scene.json
 msgid "浅水池"
 msgstr ""
 
-#: Scene:../data/map/14/5/Scene.json
+#: Scene:data/map/14/5/Scene.json
 msgid "女更衣间A"
 msgstr ""
 
-#: Scene:../data/map/14/0/Scene.json
+#: Scene:data/map/14/0/Scene.json
 msgid "游泳馆入口"
 msgstr ""
 
-#: Scene:../data/map/14/8/Scene.json
+#: Scene:data/map/14/8/Scene.json
 msgid "泳池过道"
 msgstr ""
 
-#: Scene:../data/map/14/7/Scene.json
+#: Scene:data/map/14/7/Scene.json
 msgid "女更衣间B"
 msgstr ""
 
-#: Scene:../data/map/14/3/Scene.json
+#: Scene:data/map/14/3/Scene.json
 msgid "深水池"
 msgstr ""
 
-#: Scene:../data/map/14/4/Scene.json
+#: Scene:data/map/14/4/Scene.json
 msgid "男更衣间A"
 msgstr ""
 
-#: Scene:../data/map/14/1/Scene.json
+#: Scene:data/map/14/1/Scene.json
 msgid "更衣间走廊"
 msgstr ""
 
-#: Map:../data/map/14/Map.json
+#: Map:data/map/14/Map.json
 msgid "游泳馆"
 msgstr ""
 
-#: Scene:../data/map/14/6/Scene.json
+#: Scene:data/map/14/6/Scene.json
 msgid "男更衣间B"
 msgstr ""
 
-#: Scene:../data/map/9/Scene.json
+#: Scene:data/map/9/Scene.json
 msgid "仓库"
 msgstr ""
 
-#: Map:../data/map/Map.json
+#: Map:data/map/Map.json
 msgid "学校"
 msgstr ""
 
-#: Scene:../data/map/6/Scene.json
+#: Scene:data/map/6/Scene.json
 msgid "篮球场B"
 msgstr ""
 

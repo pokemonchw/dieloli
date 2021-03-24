@@ -21,7 +21,7 @@ def title_panel():
     width = config_normal.text_width
     title_info = panel.TitleAndRightInfoListPanel()
     game_name = config_normal.game_name
-    info_list = [config_normal.author, config_normal.verson, config_normal.verson_time]
+    info_list = [config_normal.author, config_normal.verson_time, config_normal.verson]
     title_info.set(config_normal.game_name, info_list, width)
     title_info.draw()
     lineFeed = draw.NormalDraw()
@@ -50,5 +50,5 @@ def title_panel():
     elif now_key == now_list[1]:
         now_panel = see_save_info_panel.SeeSaveListPanel(width, 0)
         now_panel.draw()
-    elif now_key == now_list[2]:
+    elif now_key == now_list[3]:
         os._exit(0)

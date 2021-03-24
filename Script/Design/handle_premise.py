@@ -1,10 +1,11 @@
 import math
 import datetime
+from typing import List
 from uuid import UUID
 from functools import wraps
 from types import FunctionType
 from Script.Core import cache_control, constant, game_type
-from Script.Design import map_handle, game_time, attr_calculation
+from Script.Design import map_handle, game_time, attr_calculation, character, course
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
@@ -150,7 +151,7 @@ def handle_have_food(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     food_index = 0
     for food_id in character_data.food_bag:
-        if character_data.food_bag[food_id].eat:
+        if character_data.food_bag[food_id].eat and 27 in character_data.food_bag[food_id].feel:
             food_index += 1
     return food_index
 
@@ -167,7 +168,7 @@ def handle_not_have_food(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     food_index = 1
     for food_id in character_data.food_bag:
-        if character_data.food_bag[food_id].eat:
+        if character_data.food_bag[food_id].eat and 27 in character_data.food_bag[food_id].feel:
             return 0
     return food_index
 
@@ -345,17 +346,16 @@ def handle_in_swimming_pool(character_id: int) -> int:
 @add_premise(constant.Premise.IN_CLASSROOM)
 def handle_in_classroom(character_id: int) -> int:
     """
-    校验角色是否处于教室中
+    校验角色是否处于所属教室中
     Keyword arguments:
     character_id -- 角色id
     Return arguments:
     int -- 权重
     """
-    character_data = cache.character_data[character_id]
+    character_data: game_type.Character = cache.character_data[character_id]
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
-    now_scene_data = cache.scene_data[now_scene_str]
-    if now_scene_data.scene_tag.startswith("Classroom"):
+    if now_scene_str == character_data.classroom:
         return 1
     return 0
 
@@ -384,10 +384,7 @@ def handle_is_teacher(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    character_data = cache.character_data[character_id]
-    if character_data.age > 18:
-        return 1
-    return 0
+    return character_id in cache.teacher_school_timetable
 
 
 @add_premise(constant.Premise.IN_SHOP)
@@ -837,7 +834,10 @@ def handle_scene_have_other_target(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path]
-    return len(scene_data.character_list) - 1
+    now_weight = (len(scene_data.character_list) - 1) / 10
+    if now_weight > 0 and now_weight < 1:
+        now_weight = 1
+    return now_weight
 
 
 @add_premise(constant.Premise.NO_WEAR_UNDERWEAR)
@@ -1995,3 +1995,301 @@ def handle_target_is_live(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return not target_data.dead
+
+
+@add_premise(constant.Premise.THIRSTY)
+def handle_thirsty(character_id: int) -> int:
+    """
+    校验角色是否处于口渴状态
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.status.setdefault(28, 0)
+    return math.floor(character_data.status[28]) * 10
+
+
+@add_premise(constant.Premise.HAVE_DRINKS)
+def handle_have_drinks(character_id: int) -> int:
+    """
+    校验角色背包中是否有饮料
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    drinks_list = []
+    for food_id in character_data.food_bag:
+        now_food: game_type.Food = character_data.food_bag[food_id]
+        if now_food.eat and 28 in now_food.feel:
+            drinks_list.append(food_id)
+    return len(drinks_list)
+
+
+@add_premise(constant.Premise.NO_HAVE_DRINKS)
+def handle_no_have_drinks(character_id: int) -> int:
+    """
+    校验角色背包中是否没有饮料
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    drinks_list = []
+    for food_id in character_data.food_bag:
+        now_food: game_type.Food = character_data.food_bag[food_id]
+        if now_food.eat and 28 in now_food.feel:
+            return 0
+    return 1
+
+
+@add_premise(constant.Premise.ATTEND_CLASS_TODAY)
+def handle_attend_class_today(character_id: int) -> int:
+    """
+    校验角色今日是否需要上课
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    return game_time.judge_attend_class_today(character_id)
+
+
+@add_premise(constant.Premise.APPROACHING_CLASS_TIME)
+def handle_approaching_class_time(character_id: int) -> int:
+    """
+    校验角色是否临近上课时间
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time: datetime.datetime = character_data.behavior.start_time
+    now_time_value = now_time.hour * 100 + now_time.minute
+    next_time = 0
+    if character_data.age <= 18:
+        school_id = 0
+        if character_data.age in range(13, 16):
+            school_id = 1
+        elif character_data.age in range(16, 19):
+            school_id = 2
+        for session_id in game_config.config_school_session_data[school_id]:
+            session_config = game_config.config_school_session[session_id]
+            if session_config.start_time > now_time_value:
+                if next_time == 0 or session_config.start_time < next_time:
+                    next_time = session_config.start_time
+        if next_time == 0:
+            return 0
+    if character_id in cache.teacher_school_timetable:
+        now_week = now_time.weekday()
+        timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
+        for timetable in timetable_list:
+            if timetable.week_day != now_week:
+                continue
+            if timetable.time > now_time_value:
+                if next_time == 0 or timetable.time < next_time:
+                    next_time = timetable.time
+        if next_time == 0:
+            return 0
+    next_value = int(next_time / 100) * 60 + next_time % 100
+    now_value = int(now_time_value / 100) * 60 + now_time_value % 100
+    add_time = next_value - now_value
+    if add_time > 10:
+        return 0
+    return 100 / add_time * 10
+
+
+@add_premise(constant.Premise.IN_CLASS_TIME)
+def handle_in_class_time(character_id: int) -> int:
+    """
+    校验角色是否处于上课时间
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    return character.judge_character_in_class_time(character_id) * 500
+
+
+@add_premise(constant.Premise.NO_IN_CLASSROOM)
+def handle_no_in_classroom(character_id: int) -> int:
+    """
+    校验角色是否不在所属教室中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    if now_scene_str != character_data.classroom:
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.TEACHER_NO_IN_CLASSROOM)
+def handle_teacher_no_in_classroom(character_id: int) -> int:
+    """
+    校验角色所属班级的老师是否不在教室中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    if not game_time.judge_attend_class_today(character_id):
+        return 1
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.classroom == "":
+        return 1
+    classroom: game_type.Scene = cache.scene_data[character_data.classroom]
+    now_time: datetime.datetime = character_data.behavior.start_time
+    if now_time == None:
+        now_time = cache.game_time
+    now_week = now_time.weekday()
+    school_id, phase = course.get_character_school_phase(character_id)
+    now_time_value = now_time.hour * 100 + now_time.minute
+    if now_week in cache.course_time_table_data[school_id][phase]:
+        now_course_index = 0
+        next_time = 0
+        for session_config_id in game_config.config_school_session_data[school_id]:
+            session_config = game_config.config_school_session[session_config_id]
+            if not next_time:
+                if session_config.start_time >= now_time_value:
+                    next_time = session_config.start_time
+                    now_course_index = session_config.session
+                elif session_config.end_time >= now_time_value:
+                    next_time = session_config.end_time
+                    now_course_index = session_config.session
+                continue
+            if session_config.start_time >= now_time_value and session_config.start_time < next_time:
+                next_time = session_config.start_time
+                now_course_index = session_config.session
+            elif session_config.end_time >= now_time_value and session_config.end_time < next_time:
+                next_time = session_config.start_time
+                now_course_index = session_config.session
+        if school_id not in cache.class_timetable_teacher_data:
+            return 1
+        if phase not in cache.class_timetable_teacher_data[school_id]:
+            return 1
+        if character_data.classroom not in cache.class_timetable_teacher_data[school_id][phase]:
+            return 1
+        if now_week not in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom]:
+            return 1
+        if (
+            now_course_index
+            not in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][now_week]
+        ):
+            return 1
+        now_teacher = cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][
+            now_week
+        ][now_course_index]
+        if now_teacher not in classroom.character_list:
+            return 1
+        return 0
+    return 1
+
+
+@add_premise(constant.Premise.TEACHER_IN_CLASSROOM)
+def handle_teacher_in_classroom(character_id: int) -> int:
+    """
+    校验角色所属班级的老师是否在教室中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    return not handle_teacher_no_in_classroom(character_id)
+
+
+@add_premise(constant.Premise.IS_NAKED)
+def handle_is_naked(character_id: int) -> int:
+    """
+    校验角色是否一丝不挂
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    for i in character_data.put_on:
+        if isinstance(character_data.put_on[i], UUID):
+            return 0
+    return 1
+
+
+@add_premise(constant.Premise.IS_BEYOND_FRIENDSHIP_TARGET_IN_SCENE)
+def handle_is_beyond_friendship_target_in_scene(character_id: int) -> int:
+    """
+    校验场景中是否有角色对自己抱有超越友谊的想法
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    now_weight = 0
+    for now_character in scene_data.character_list:
+        if now_character == character_id:
+            continue
+        now_character_data: game_type.Character = cache.character_data[now_character]
+        if (
+            character_id in now_character_data.social_contact_data
+            and now_character_data.social_contact_data[character_id] > 2
+        ):
+            now_weight += now_character_data.social_contact_data[character_id]
+    return now_weight
+
+
+@add_premise(constant.Premise.HAVE_STUDENTS_IN_CLASSROOM)
+def handle_have_students_in_classroom(character_id: int) -> int:
+    """
+    校验是否有所教班级的学生在教室中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.age <= 18:
+        return 0
+    if character_id not in cache.teacher_school_timetable:
+        return 0
+    now_time: datetime.datetime = character_data.behavior.start_time
+    if now_time == None:
+        now_time = cache.game_time
+    now_week = now_time.weekday()
+    now_time = 0
+    now_classroom = []
+    timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
+    now_time_value = now_time.hour * 100 + now_time.minute
+    for timetable in timetable_list:
+        if timetable.week_day != now_week:
+            continue
+        if now_time == 0:
+            if timetable.time >= now_time_value:
+                now_time = timetable.time
+                now_classroom = timetable.class_room
+            elif timetable.end_time >= now_time_value:
+                now_time = timetable.end_time
+                now_classroom = timetable.class_room
+                break
+            continue
+        if timetable.time >= now_time_value and timetable.time < now_time:
+            now_time = timetable.time
+            now_classroom = timetable.class_room
+            continue
+        elif timetable.end_time >= now_time_value and timetable.end_time < now_time:
+            now_time = timetable.end_time
+            now_classroom = timetable.class_room
+    now_room_path_str = map_handle.get_map_system_path_str_for_list(now_classroom)
+    now_scene_data: game_type.Scene = cache.scene_data[now_room_path_str]
+    class_data = cache.classroom_students_data[now_room_path_str]
+    return len(class_data & now_scene_data.character_list)

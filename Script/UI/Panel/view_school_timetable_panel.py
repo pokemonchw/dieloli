@@ -68,6 +68,7 @@ class StudentTimeTablePanel:
         time_table = cache.course_time_table_data[school_id][phase]
         weekday_text_list = [game_config.config_week_day[i].name for i in game_config.config_week_day]
         character_data: game_type.Character = cache.character_data[0]
+        now_time_value = cache.game_time.hour * 100 + cache.game_time.minute
         while 1:
             now_week_text = game_config.config_week_day[self.now_week].name
             title_draw = draw.TitleLineDraw(_("课程表"), self.width)
@@ -76,6 +77,8 @@ class StudentTimeTablePanel:
             return_list = []
             for week_text in weekday_text_list:
                 if week_text == now_week_text:
+                    if index == cache.game_time.weekday():
+                        week_text = week_text + _("(今日)")
                     now_draw = draw.CenterDraw()
                     now_draw.text = f"[{week_text}]"
 
@@ -83,6 +86,8 @@ class StudentTimeTablePanel:
                     now_draw.width = self.width / len(weekday_text_list)
                     now_draw.draw()
                 else:
+                    if index == cache.game_time.weekday():
+                        week_text = week_text + _("(今日)")
                     now_draw = draw.CenterButton(
                         f"[{week_text}]",
                         week_text,
@@ -96,16 +101,34 @@ class StudentTimeTablePanel:
             line_feed.draw()
             line = draw.LineDraw("+", self.width)
             line.draw()
+            title_list = [_("课时"), _("科目"), _("教师"), _("上课时间"), _("下课时间")]
+            title_list_draw = panel.CenterDrawTextListPanel()
+            title_list_draw.set(title_list, self.width, 5)
+            title_list_draw.draw()
             now_text_list = []
+            times_judge = 1
             for times in range(0, len(time_table[self.now_week]) + 1):
+                course_time_id = game_config.config_school_session_data[school_id][times]
+                course_time_config = game_config.config_school_session[course_time_id]
+                course_time = str(course_time_config.start_time)
+                minute = course_time[-2:]
+                hour = course_time[:-2]
+                course_time_text = f"{hour}:{minute}"
+                course_end_time = str(course_time_config.end_time)
+                end_minute = course_end_time[-2:]
+                end_hour = course_end_time[:-2]
+                course_end_time_text = f"{end_hour}:{end_minute}"
+                now_time_judge = 0
+                if times_judge:
+                    if self.now_week == cache.game_time.weekday():
+                        if now_time_value < course_time_config.end_time:
+                            now_time_judge = 1
+                            times_judge = 0
                 if not times:
-                    course_time_id = game_config.config_school_session_data[school_id][0]
-                    course_time_config = game_config.config_school_session[course_time_id]
-                    course_time = str(course_time_config.start_time)
-                    minute = course_time[-2:]
-                    hour = course_time[:-2]
-                    course_time_text = f"{hour}:{minute}"
-                    now_text = _("早读课 上课时间:{course_time_text}").format(course_time_text=course_time_text)
+                    now_class_text = _("早读课")
+                    if now_time_judge:
+                        now_class_text += _("(当前)")
+                    now_text = [now_class_text, "", "", course_time_text, course_end_time_text]
                     now_text_list.append(now_text)
                     continue
                 cache.class_timetable_teacher_data.setdefault(school_id, {})
@@ -119,12 +142,9 @@ class StudentTimeTablePanel:
                 course_id = time_table[self.now_week][times]
                 course_config = game_config.config_course[course_id]
                 course_name = course_config.name
-                course_time_id = game_config.config_school_session_data[school_id][times]
-                course_time_config = game_config.config_school_session[course_time_id]
-                course_time = str(course_time_config.start_time)
-                minute = course_time[-2:]
-                hour = course_time[:-2]
-                course_time_text = f"{hour}:{minute}"
+                times_text = _("第{times}节").format(times=times)
+                if now_time_judge:
+                    times_text += _("(当前)")
                 if (
                     times
                     in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][
@@ -136,22 +156,20 @@ class StudentTimeTablePanel:
                     ][self.now_week][times]
                     teacher_data: game_type.Character = cache.character_data[teacher_id]
                     teacher_name = teacher_data.name
-                    now_text = _(
-                        "第{times}节: {course_name} 老师:{teacher_name} 上课时间:{course_time_text}"
-                    ).format(
-                        times=times,
-                        course_name=course_name,
-                        teacher_name=teacher_name,
-                        course_time_text=course_time_text,
-                    )
+                    now_text = [
+                        times_text,
+                        course_name,
+                        teacher_name,
+                        course_time_text,
+                        course_end_time_text,
+                    ]
                 else:
-                    now_text = _("第{times}节: {course_name} 自习课 上课时间:{course_time_text}").format(
-                        times=times, course_name=course_name, course_time_text=course_time_text
-                    )
+                    now_text = [times_text, course_name, _("自习"), course_time_text, course_end_time_text]
                 now_text_list.append(now_text)
-            now_draw = panel.LeftDrawTextListPanel()
-            now_draw.set(now_text_list, self.width, 1)
-            now_draw.draw()
+            for now_text in now_text_list:
+                now_draw = panel.LeftDrawTextListPanel()
+                now_draw.set(now_text, self.width, 5)
+                now_draw.draw()
             line_draw = draw.LineDraw("-", self.width)
             line_draw.draw()
             back_draw = draw.CenterButton(_("[返回]"), _("返回"), self.width)

@@ -1,6 +1,7 @@
 import random
 import uuid
 import datetime
+from typing import List
 from Script.Core import (
     cache_control,
     value_handle,
@@ -77,6 +78,8 @@ def init_class(character_data: game_type.Character):
     if character_data.age <= 18 and character_data.age >= 7:
         class_grade = str(character_data.age - 6)
         character_data.classroom = random.choice(constant.place_data["Classroom_" + class_grade])
+        cache.classroom_students_data.setdefault(character_data.classroom, set())
+        cache.classroom_students_data[character_data.classroom].add(character_data.cid)
 
 
 def init_character_behavior_start_time(character_id: int, now_time: datetime.datetime):
@@ -150,3 +153,39 @@ def calculation_favorability(character_id: int, target_character_id: int, favora
         fix += target_data.social_contact_data[character_id]
     favorability *= fix
     return favorability
+
+
+def judge_character_in_class_time(character_id: int) -> bool:
+    """
+    校验角色是否处于上课时间
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time: datetime.datetime = character_data.behavior.start_time
+    if now_time == None:
+        now_time = cache.game_time
+    now_time_value = now_time.hour * 100 + now_time.minute
+    if character_data.age <= 18:
+        school_id = 0
+        if character_data.age in range(13, 16):
+            school_id = 1
+        elif character_data.age in range(16, 19):
+            school_id = 2
+        for session_id in game_config.config_school_session_data[school_id]:
+            session_config = game_config.config_school_session[session_id]
+            if now_time_value >= session_config.start_time and now_time_value <= session_config.end_time:
+                return 1
+        return 0
+    if character_id not in cache.teacher_school_timetable:
+        return 0
+    now_week = now_time.weekday()
+    timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
+    for timetable in timetable_list:
+        if timetable.week_day != now_week:
+            continue
+        if timetable.time <= now_time_value and timetable.end_time >= now_time_value:
+            return 1
+    return 0

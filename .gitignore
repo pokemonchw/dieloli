@@ -1,2 +1,7 @@
 /save
 *__pycache__
+/data/MapData
+/data/PlaceData
+/data/SceneData
+/data/ScenePath
+/package.json

@@ -1,10 +1,13 @@
+from types import FunctionType
 from Script.UI.Moudle import draw
-from Script.Design import game_time
+from Script.Design import game_time, character
 from Script.Core import get_text, cache_control, flow_handle, py_cmd, text_handle, game_type
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 class GameTimeInfoPanel:
@@ -59,6 +62,25 @@ class GameTimeInfoPanel:
             moon_phase_draw.style = "moon"
             now_draw.draw_list.append(moon_phase_draw)
             now_width += len(moon_phase_draw)
+        now_judge = game_time.judge_attend_class_today(0)
+        attend_class = _("(休息)")
+        if now_judge:
+            attend_class = _("(上学)")
+        attend_class += " "
+        attend_class_draw = draw.NormalDraw()
+        attend_class_draw.text = attend_class
+        attend_class_draw.width = self.width - now_width
+        now_draw.draw_list.append(attend_class_draw)
+        now_width += len(attend_class_draw)
+        character_data: game_type.Character = cache.character_data[0]
+        if character.judge_character_in_class_time(0):
+            now_attend_class = _("上课时间")
+            now_attend_class += " "
+            now_attend_class_draw = draw.NormalDraw()
+            now_attend_class_draw.text = now_attend_class
+            attend_class_draw.width = self.width - now_width
+            now_width += len(now_attend_class_draw)
+            now_draw.draw_list.append(now_attend_class_draw)
         self.width = now_width
         now_draw.width = self.width
         self.now_draw: draw.NormalDraw = now_draw

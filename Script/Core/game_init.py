@@ -1,4 +1,7 @@
 # -*- coding: UTF-8 -*-
+import sys
+import os
+import traceback
 from Script.Core import flow_handle, io_init, key_listion_event, constant
 from Script.Config import normal_config
 
@@ -8,6 +11,7 @@ NO_EVENT_FUNC = "no_event_func"
 # 系统函数#############################################################
 # 初始化函数
 _main_flow = None
+error_path = os.path.join("error.log")
 
 
 def init(main_flow: object):
@@ -43,7 +47,11 @@ def init(main_flow: object):
             if flow_handle.exit_flag:
                 break
 
-    run_main_flow()
+    try:
+        run_main_flow()
+    except Exception as e:
+        traceback.print_exc(file=open(error_path, "a"))
+        os._exit(0)
 
 
 def run(main_func: object):

@@ -142,7 +142,6 @@ def input_nick_name_panel() -> bool:
     create_judge = 0
     character_data = cache.character_data[0]
     ask_nick_name_panel = panel.AskForOneMessage()
-    now_text = _("该怎么称呼{character_name}好呢？")
     ask_nick_name_panel.set(_("该怎么称呼{character_name}好呢？").format(character_name=character_data.name), 10)
     line_feed_draw.draw()
     line.draw()
@@ -170,7 +169,6 @@ def input_sex_panel() -> bool:
     Return arguments:
     bool -- 完成角色创建校验
     """
-    create_judge = 0
     character_data: game_type.Character = cache.character_data[0]
     sex_list = [game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -220,7 +218,7 @@ def input_setting_panel() -> bool:
 
 def input_setting_now() -> bool:
     """ 启动详细信息设置 """
-    panel_list = random.sample(setting_panel_data, 10)
+    panel_list = random.sample(setting_panel_data, len(setting_panel_data))
     for panel in panel_list:
         line_feed_draw.draw()
         line.draw()

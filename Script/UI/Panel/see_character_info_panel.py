@@ -334,7 +334,7 @@ class CharacterWearClothingList:
                 now_clothing_config = game_config.config_clothing_tem[now_clothing.tem_id]
                 clothing_name = f"[{now_clothing.evaluation}{describe}{now_clothing_config.name}]"
                 clothing_info_list.append(clothing_name)
-        now_draw = panel.CenterDrawTextListPanel()
+        now_draw = panel.LeftDrawTextListPanel()
         now_draw.set(clothing_info_list, self.width, self.column)
         self.draw_list.extend(now_draw.draw_list)
 
@@ -394,7 +394,7 @@ class CharacterRoomText:
         """ 要绘制的角色id """
         self.width = width
         """ 当前最大可绘制宽度 """
-        character_data = cache.character_data[self.character_id]
+        character_data: game_type.Character = cache.character_data[self.character_id]
         dormitory = character_data.dormitory
         dormitory_text = ""
         if dormitory == "":
@@ -1033,19 +1033,8 @@ class SeeCharacterInfoOnSocialPanel:
 
     def draw(self):
         """ 绘制面板 """
-        while 1:
-            line_feed.draw()
-            self.now_draw.draw()
-            back_draw = draw.CenterButton(_("[返回]"), _("返回"), self.width)
-            back_draw.draw()
-            now_draw_list = self.now_draw.return_list
-            ask_list = []
-            ask_list.extend(now_draw_list)
-            ask_list.append(back_draw.return_text)
-            yrn = flow_handle.askfor_all(ask_list)
-            py_cmd.clr_cmd()
-            if yrn == back_draw.return_text:
-                break
+        line_feed.draw()
+        self.now_draw.draw()
 
 
 class SeeCharacterInfoHandle:
