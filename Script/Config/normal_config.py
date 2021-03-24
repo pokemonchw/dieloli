@@ -1,4 +1,5 @@
 import os
+import json
 import configparser
 from typing import Dict, List
 from Script.Core import game_type
@@ -6,6 +7,7 @@ from Script.Core import game_type
 
 config_normal: game_type.NormalConfig = game_type.NormalConfig()
 """ 游戏通用配置数据 """
+package_path = os.path.join("package.json")
 
 
 def init_normal_config():
@@ -18,3 +20,6 @@ def init_normal_config():
             config_normal.__dict__[k] = int(ini_data[k])
         except:
             config_normal.__dict__[k] = ini_data[k]
+    with open(package_path, "r") as package_file:
+        version_data = json.load(package_file)
+        config_normal.verson = "Past." + version_data["version"]

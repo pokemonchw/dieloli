@@ -1,5 +1,6 @@
 import random
-from Script.Design import handle_state_machine, character, character_move, map_handle
+from Script.Config import game_config
+from Script.Design import handle_state_machine, character, character_move, map_handle, course
 from Script.Core import cache_control, game_type, constant
 
 cache: game_type.Cache = cache_control.cache
@@ -47,13 +48,19 @@ def character_buy_rand_food_at_restaurant(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
-    character_data = cache.character_data[character_id]
-    food_list = [
-        food_id
-        for food_id in cache.restaurant_data
-        if isinstance(food_id, int) and len(cache.restaurant_data[food_id])
-    ]
-    now_food_id = random.choice(food_list)
+    character_data: game_type.Character = cache.character_data[character_id]
+    new_food_list = []
+    for food_id in cache.restaurant_data:
+        if not len(cache.restaurant_data[food_id]):
+            continue
+        for food_uid in cache.restaurant_data[food_id]:
+            now_food: game_type.Food = cache.restaurant_data[food_id][food_uid]
+            if now_food.eat:
+                new_food_list.append(food_id)
+            break
+    if not len(new_food_list):
+        return
+    now_food_id = random.choice(new_food_list)
     now_food = cache.restaurant_data[now_food_id][
         random.choice(list(cache.restaurant_data[now_food_id].keys()))
     ]
@@ -89,9 +96,12 @@ def character_eat_rand_food(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.behavior.behavior_id = constant.Behavior.EAT
-    character_data.behavior.eat_food = character_data.food_bag[
-        random.choice(list(character_data.food_bag.keys()))
-    ]
+    now_food_list = []
+    for food_id in character_data.food_bag:
+        now_food: game_type.Food = character_data.food_bag[food_id]
+        if 27 in now_food.feel and now_food.eat:
+            now_food_list.append(food_id)
+    character_data.behavior.eat_food = character_data.food_bag[random.choice(now_food_list)]
     character_data.behavior.duration = 1
     character_data.state = constant.CharacterStatus.STATUS_EAT
 
@@ -558,3 +568,117 @@ def character_move_to_no_first_kiss_like_target_scene(character_id: int):
         character_data.behavior.move_target = move_path
         character_data.behavior.duration = move_time
         character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.BUY_RAND_DRINKS_AT_CAFETERIA)
+def character_buy_rand_drinks_at_restaurant(character_id: int):
+    """
+    在取餐区购买随机饮料
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    new_food_list = []
+    for food_id in cache.restaurant_data:
+        if not len(cache.restaurant_data[food_id]):
+            continue
+        for food_uid in cache.restaurant_data[food_id]:
+            now_food: game_type.Food = cache.restaurant_data[food_id][food_uid]
+            if now_food.eat and 28 in now_food.feel:
+                new_food_list.append(food_id)
+            break
+    if not len(new_food_list):
+        return
+    now_food_id = random.choice(new_food_list)
+    now_food = cache.restaurant_data[now_food_id][
+        random.choice(list(cache.restaurant_data[now_food_id].keys()))
+    ]
+    character_data.food_bag[now_food.uid] = now_food
+    del cache.restaurant_data[now_food_id][now_food.uid]
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.DRINK_RAND_DRINKS)
+def character_drink_rand_drinks(character_id: int):
+    """
+    角色饮用背包内的随机饮料
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.EAT
+    drink_list = []
+    food_list = []
+    for food_id in character_data.food_bag:
+        now_food: game_type.Food = character_data.food_bag[food_id]
+        if 28 in now_food.feel and now_food.eat:
+            if 27 in now_food.feel and now_food.feel[27] > now_food.feel[28]:
+                food_list.append(food_id)
+            else:
+                drink_list.append(food_id)
+    if len(drink_list):
+        now_list = drink_list
+    else:
+        now_list = food_list
+    character_data.behavior.eat_food = character_data.food_bag[random.choice(now_list)]
+    character_data.behavior.duration = 1
+    character_data.state = constant.CharacterStatus.STATUS_EAT
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.ATTEND_CLASS)
+def character_attend_class(character_id: int):
+    """
+    角色在教室上课
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.ATTEND_CLASS
+    end_time = 0
+    school_id, phase = course.get_character_school_phase(character_id)
+    now_time_value = cache.game_time.hour * 100 + cache.game_time.minute
+    now_course_index = 0
+    for session_id in game_config.config_school_session_data[school_id]:
+        session_config = game_config.config_school_session[session_id]
+        if session_config.start_time <= now_time_value and session_config.end_time >= now_time_value:
+            now_value = int(now_time_value / 100) * 60 + now_time_value % 100
+            end_value = int(session_config.end_time / 100) * 60 + session_config.end_time % 100
+            end_time = end_value - now_value + 1
+            now_course_index = session_config.session
+            break
+    now_week = cache.game_time.weekday()
+    if not now_course_index:
+        now_course = random.choice(list(game_config.config_school_phase_course_data[school_id][phase]))
+    else:
+        now_course = cache.course_time_table_data[school_id][phase][now_week][now_course_index]
+    character_data.behavior.duration = end_time
+    character_data.behavior.behavior_id = constant.Behavior.ATTEND_CLASS
+    character_data.state = constant.CharacterStatus.STATUS_ATTEND_CLASS
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.TEACH_A_LESSON)
+def character_teach_lesson(character_id: int):
+    """
+    角色在教室教课
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.TEACHING
+    end_time = 0
+    now_week = cache.game_time.weekday()
+    now_time_value = cache.game_time.hour * 100 + cache.game_time.minute
+    timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
+    course = 0
+    end_time = 0
+    for timetable in timetable_list:
+        if timetable.week_day != now_week:
+            continue
+        if timetable.time <= now_time_value and timetable.end_time <= now_time_value:
+            now_value = int(now_time_value / 100) * 60 + now_time_value % 100
+            end_value = int(timetable.end_time / 100) * 60 + timetable.end_time % 100
+            end_time = end_value - now_value + 1
+            course = timetable.course
+            break
+    character_data.behavior.duration = end_time
+    character_data.behavior.behavior_id = constant.Behavior.TEACHING
+    character_data.state = constant.CharacterStatus.STATUS_TEACHING

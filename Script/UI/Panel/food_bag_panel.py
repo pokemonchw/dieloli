@@ -12,6 +12,10 @@ window_width: int = normal_config.config_normal.text_width
 """ 窗体宽度 """
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+line_feed = draw.NormalDraw()
+""" 换行绘制对象 """
+line_feed.text = "\n"
+line_feed.width = 1
 
 
 class FoodBagPanel:
@@ -45,6 +49,7 @@ class FoodBagPanel:
                 break
             self.handle_panel.update()
             title_draw.draw()
+            line_feed.draw()
             return_list = []
             for food_type in food_type_list:
                 if food_type == self.now_panel:

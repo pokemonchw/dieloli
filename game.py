@@ -15,17 +15,11 @@ from Script.Config import game_config, name_config
 _: FunctionType = get_text._
 """ 翻译api """
 
-if sys.version_info < (3, 8, 0):
-    print(_("python3版本过旧(低于python3.8.0),请升级"))
-    exit(0)
-
-
 game_config.init()
 name_config.init_name_data()
 
 
 from Script.Config import map_config
-
 
 map_config.init_map_data()
 

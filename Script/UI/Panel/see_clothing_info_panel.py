@@ -250,6 +250,7 @@ class WearClothingListPanel:
                 self.return_list.extend(self.handle_panel.return_list)
                 back_draw = draw.CenterButton(_("[返回]"), _("返回"), self.width)
                 back_draw.draw()
+                line_feed.draw()
                 self.return_list.append(back_draw.return_text)
                 yrn = flow_handle.askfor_all(self.return_list)
                 py_cmd.clr_cmd()

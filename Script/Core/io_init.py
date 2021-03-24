@@ -177,7 +177,7 @@ def era_print(string: str, style="standard"):
     put_queue(json.dumps(json_str, ensure_ascii=False))
 
 
-def image_print(image_name: str, image_path=""):
+def image_print(image_name: str):
     """
     图片输出命令
     Keyword arguments:
@@ -185,7 +185,7 @@ def image_print(image_name: str, image_path=""):
     image_path -- 图片路径
     """
     json_str = new_json()
-    image_json = {"image_name": image_name, "image_path": image_path}
+    image_json = {"image_name": image_name}
     json_str["image"] = image_json
     put_queue(json.dumps(json_str, ensure_ascii=False))
 
@@ -330,7 +330,7 @@ def init_style():
             style.name,
             style.foreground,
             style.background,
-            style.font,
+            normal_config.config_normal.font,
             normal_config.config_normal.font_size,
             style.bold,
             style.underline,

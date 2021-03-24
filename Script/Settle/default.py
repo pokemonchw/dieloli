@@ -7,6 +7,7 @@ from Script.Design import (
     map_handle,
     attr_calculation,
     game_time,
+    cooking,
 )
 from Script.Core import cache_control, constant, game_type, get_text
 from Script.Config import game_config, normal_config
@@ -41,7 +42,7 @@ def handle_add_small_hit_point(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    add_hit_point = add_time
+    add_hit_point = add_time * 20
     character_data.hit_point += add_hit_point
     if character_data.hit_point > character_data.hit_point_max:
         add_hit_point -= character_data.hit_point - character_data.hit_point_max
@@ -69,7 +70,7 @@ def handle_add_small_mana_point(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    add_mana_point = add_time * 10
+    add_mana_point = add_time * 30
     character_data.mana_point += add_mana_point
     if character_data.mana_point > character_data.mana_point_max:
         add_mana_point -= character_data.mana_point - character_data.mana_point_max
@@ -124,11 +125,16 @@ def handle_sub_small_hit_point(
     """
     if not add_time:
         return
+    sub_hit = add_time * 5
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    character_data.hit_point -= add_time
-    change_data.hit_point -= add_time
+    if character_data.hit_point >= sub_hit:
+        character_data.hit_point -= sub_hit
+        change_data.hit_point -= sub_hit
+    else:
+        change_data.hit_point -= character_data.hit_point
+        character_data.hit_point = 0
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.SUB_SMALL_MANA_POINT)
@@ -148,7 +154,7 @@ def handle_sub_small_mana_point(
     """
     if not add_time:
         return
-    sub_mana = add_time * 1.5
+    sub_mana = add_time * 7.5
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
@@ -159,8 +165,8 @@ def handle_sub_small_mana_point(
         change_data.mana_point -= character_data.mana_point
         sub_mana -= character_data.mana_point
         character_data.mana_point = 0
-        character_data.hit_point -= sub_mana / 1.5
-        change_data.hit_point -= sub_mana / 1.5
+        character_data.hit_point -= sub_mana / 15
+        change_data.hit_point -= sub_mana / 15
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.MOVE_TO_TARGET_SCENE)
@@ -214,10 +220,9 @@ def handle_eat_food(
         eat_weight = 100
         if food.weight < eat_weight:
             eat_weight = food.weight
-        for feel in food.feel:
-            now_feel_value = food.feel[feel]
-            now_feel_value = now_feel_value / food.weight
-            now_feel_value *= eat_weight
+        new_food = cooking.separate_weight_food(food, eat_weight)
+        for feel in new_food.feel:
+            now_feel_value = new_food.feel[feel]
             character_data.status.setdefault(feel, 0)
             change_data.status.setdefault(feel, 0)
             if feel in {27, 28}:
@@ -228,17 +233,16 @@ def handle_eat_food(
             else:
                 character_data.status[feel] += now_feel_value
                 change_data.status[feel] += now_feel_value
-        food.weight -= eat_weight
         food_name = ""
         if food.recipe == -1:
             food_config = game_config.config_food[food.id]
             food_name = food_config.name
         else:
             food_name = cache.recipe_data[food.recipe].name
-        character_data.behavior.food_name = food_name
-        character_data.behavior.food_quality = food.quality
         if food.weight <= 0:
             del character_data.food_bag[food.uid]
+        character_data.behavior.food_name = food_name
+        character_data.behavior.food_quality = food.quality
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SOCIAL_FAVORABILITY)
@@ -716,7 +720,7 @@ def handle_add_medium_hit_point(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    add_hit_point = add_time * 10
+    add_hit_point = add_time * 50
     character_data.hit_point += add_hit_point
     if character_data.hit_point > character_data.hit_point_max:
         add_hit_point -= character_data.hit_point - character_data.hit_point_max
@@ -744,7 +748,7 @@ def handle_add_medium_mana_point(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    add_mana_point = add_time * 30
+    add_mana_point = add_time * 75
     character_data.mana_point += add_mana_point
     if character_data.mana_point > character_data.mana_point_max:
         add_mana_point -= character_data.mana_point - character_data.mana_point_max
@@ -1079,3 +1083,153 @@ def handle_interrupt_target_activity(
                     settle_behavior.handle_settle_behavior(
                         target_data.cid, character_data.behavior.start_time
                     )
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_ELOQUENCE_EXPERIENCE)
+def handle_target_add_small_eloquence_experience(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: datetime.datetime,
+):
+    """
+    交互对象增加少量口才技能经验
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间对象
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
+    experience = 0.01 * add_time * target_data.knowledge_interest[12]
+    target_data.knowledge.setdefault(12, 0)
+    target_data.knowledge[12] += experience
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_ELOQUENCE)
+def handle_target_add_favorability_for_eloquence(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: datetime.datetime,
+):
+    """
+    按口才技能增加交互对象好感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
+    character_data.knowledge.setdefault(12, 0)
+    add_favorability = character_data.knowledge[12] / 10
+    add_favorability = character.calculation_favorability(character_id, target_data.cid, add_favorability)
+    if add_favorability:
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
+        character_handle.add_favorability(
+            character_id, target_data.cid, add_favorability, target_change, now_time
+        )
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_ATTEND_CLASS_EXPERIENCE)
+def handle_add_small_attend_class_experience(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: datetime.datetime,
+):
+    """
+    按学习课程增加少量对应技能经验
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    course = character_data.behavior.course_id
+    if course in game_config.config_course_knowledge_experience_data:
+        knowledge_experience_data = game_config.config_course_knowledge_experience_data[course]
+        for knowledge in knowledge_experience_data:
+            knowledge_interest = character_data.knowledge_interest[knowledge]
+            experience = knowledge_experience_data[knowledge] / 45 * add_time * knowledge_interest
+            character_data.knowledge.setdefault(knowledge, 0)
+            character_data.knowledge[knowledge] += experience
+            change_data.knowledge.setdefault(knowledge, 0)
+            change_data.knowledge[knowledge] += experience
+    if course in game_config.config_course_language_experience_data:
+        language_experience_data = game_config.config_course_language_experience_data[course]
+        for language in language_experience_data:
+            language_interest = character_data.language_interest[language]
+            experience = language_experience_data[language] / 45 * add_time * language_interest
+            character_data.language.setdefault(language, 0)
+            character_data.language[language] += experience
+            change_data.language.setdefault(language, 0)
+            change_data.language[language] += experience
+
+
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.ADD_STUDENTS_COURSE_EXPERIENCE_FOR_IN_CLASS_ROOM
+)
+def handle_add_student_course_experience_for_in_class_room(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: datetime.datetime,
+):
+    """
+    按课程增加教室内本班级学生的技能经验
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    scene_data: game_type.Scene = cache.scene_data[character_data.classroom]
+    course = character_data.behavior.course_id
+    for now_character in (
+        scene_data.character_list & cache.classroom_students_data[character_data.classroom]
+    ):
+        now_character_data: game_type.Character = cache.character_data[now_character]
+        if course in game_config.config_course_knowledge_experience_data:
+            knowledge_experience_data = game_config.config_course_knowledge_experience_data[course]
+            for knowledge in knowledge_experience_data:
+                character_data.knowledge.setdefault(knowledge, 0)
+                experience = character_data.knowledge[knowledge] / 1000
+                knowledge_interest = now_character_data.knowledge_interest[knowledge]
+                experience *= knowledge_interest
+                now_character_data.knowledge.setdefault(knowledge, 0)
+                now_character_data.knowledge[knowledge] += experience
+        if course in game_config.config_course_language_experience_data:
+            language_experience_data = game_config.config_course_language_experience_data[course]
+            for language in language_experience_data:
+                language_interest = character_data.language_interest[language]
+                character_data.language.setdefault(language, 0)
+                experience = character_data.language[language] / 1000 * language_interest
+                now_character_data.language.setdefault(language, 0)
+                now_character_data.language[language] += experience

@@ -5,6 +5,7 @@ import uuid
 import psutil
 import signal
 import time
+import ctypes
 from tkinter import (
     ttk,
     Tk,
@@ -44,6 +45,8 @@ def close_window():
 # 显示主框架
 game_name = normal_config.config_normal.game_name
 root = Tk()
+dpi = root.winfo_fpixels("1i")
+root.tk.call("tk", "scaling", 1.0)
 root.title(game_name)
 width = normal_config.config_normal.window_width
 frm_width = root.winfo_rootx() - root.winfo_x()
@@ -84,6 +87,7 @@ order_font_data = game_config.config_font[1]
 for k in game_config.config_font[0].__dict__:
     if k not in order_font_data.__dict__:
         order_font_data.__dict__[k] = game_config.config_font[0].__dict__[k]
+        order_font_data.font = normal_config.config_normal.font
         order_font_data.font_size = normal_config.config_normal.order_font_size
 input_background_box = Text(
     main_frame,
@@ -124,6 +128,7 @@ inputbox = Entry(
     width=normal_config.config_normal.inputbox_width,
 )
 inputbox.grid(column=1, row=0, sticky=(N, E, S))
+normal_font = font.Font(family=order_font_data.font, size=normal_config.config_normal.font_size)
 
 
 input_event_func = None
@@ -192,7 +197,6 @@ def read_queue():
 
             era_image.print_image(
                 json_data["image"]["image_name"],
-                json_data["image"]["image_path"],
             )
 
         for c in json_data["content"]:
@@ -405,7 +409,6 @@ def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_styl
             textbox.tag_ranges(cmd_tag_name)[0],
             textbox.tag_ranges(cmd_tag_name)[1],
         )
-        textbox.configure(cursor="hand1")
         cache.wframe_mouse.mouse_leave_cmd = 0
 
     def leave_func(*args):

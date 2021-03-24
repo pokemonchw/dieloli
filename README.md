@@ -5,7 +5,7 @@ DieLoli
 
 介绍
 ----
-这是一个[ERALIKE游戏](http://www.emuera.net/) \
+这是一个 [ERALIKE游戏](http://www.emuera.net/) \
 在游戏中，你将与多达2800位，由算法模拟整个人生成长过程，随机生成的游戏角色一起，在校园里生活 \
 你将在游戏中体验不一样的人生，这里有魔法少女，有触手怪，有吸血鬼，也有巫女，妖怪，幽灵，和帅气的魔法师 \
 当然，这些都需要你自己去进行探索，至少，你也可以将它当成一个普通的校园恋爱模拟游戏玩 \
@@ -24,11 +24,19 @@ DieLoli
 所有的等待用户交互的文本，都可以通过鼠标右键一次性跳过 \
 可通过光标键盘上下键回溯之前的输入内容(上限20条)
 
+BUG反馈
+----
+当遇到游戏闪退，可检查 error.log 文件，并将 error.log 文件中内容贴至 issues 中进行反馈
+
+更新日志
+----
+更新日志详见 [update.log](https://github.com/pokemonchw/dieloli/blob/master/update.log) 文件
+
 著作权信息
 ----
 此项目基于Python独立进行开发 \
-早期版本曾使用[pyera](https://github.com/qsjl11/pyera/) 进行构架，现已全部废弃 \
-基于[cc by nc sa](http://creativecommons.org/licenses/by-nc-sa/2.0/) 协议，开发者允许任何人基于此项目做除商业行为外的任何事，同时允许任何人对本项目进行除协议外的任何改动，仅需注明原作者，以及以相同方式进行传播(指同样使用cc by-nc-sa协议) \
+早期版本曾使用 [pyera](https://github.com/qsjl11/pyera/) 进行构架，现已全部废弃 \
+基于 [cc by nc sa](http://creativecommons.org/licenses/by-nc-sa/2.0/) 协议，开发者允许任何人基于此项目做除商业行为外的任何事，同时允许任何人对本项目进行除协议外的任何改动，仅需注明原作者，以及以相同方式进行传播(指同样使用cc by-nc-sa协议) \
 请勿将其用作商业用途 \
 想要参与开发请与开发者联系，联系方式在本md底部
 
@@ -47,17 +55,17 @@ master分支在开发完成前作为设计展示分支使用 \
 GPU: \
 本游戏几乎没有任何显卡要求，如你所见，它是个纯文字游戏 \
 CPU: \
-在默认配置(2800个游戏角色)下，2015年9月发布的i5 6200U和2019年9月发布的i7 10710U仅差了23%，几乎可以忽略不计(由于游戏性设计的原因，本游戏为祖传单核游戏引擎) \
+在默认配置(2800个游戏角色)下，2015年9月发布的 i5 6200U 和2019年9月发布的 i7 10710U 仅差了23%，几乎可以忽略不计(由于游戏性设计的原因，本游戏为祖传单核游戏引擎) \
 Memory: \
 在默认配置(2800个游戏角色)下，游戏占用总内存不超过250MB \
 系统: \
-本游戏兼容archlinux/steamos/chromeos/ubuntu/debian/aoscos等绝大部分支持gui的linux系操作系统，同时也可以在macos和windows7及以上操作系统中运行 \
+本游戏兼容 archlinux/steamos/chromeos/ubuntu/debian/aoscos 等绝大部分支持 gui 的 linux 系操作系统，同时也可以在 macos 和 windows7 及以上操作系统中运行 \
 配置调整: \
-可通过config.ini文件中的 random_npc_max 选项自由调整npc数量,该数量与宿舍/教师/课时等分配相关联,目前只在2800npc下进行过测试，其他数值出现兼容问题请提交反馈
+可通过 config.ini 文件中的 random_npc_max 选项自由调整npc数量,该数量与宿舍/教师/课时等分配相关联,目前只在2800npc下进行过测试，其他数值出现兼容问题请提交反馈
 
 依赖
 ----
-python3.8.0
+python3.9+
 
 建议通过::
 
@@ -67,16 +75,17 @@ python3.8.0
 
 字体
 ----
-本游戏界面设计依赖Sarasa Mono SC字体，若系统未安装此字体将会fallback到系统默认字体，不能保证能否达到设计效果 \
-字体相关配置可以通过data/FontConfig.json更改 \
+本游戏界面设计依赖 Sarasa Mono SC 字体，若系统未安装此字体将会 fallback 到系统默认字体，不能保证能否达到设计效果 \
+字体相关配置可以通过 data/FontConfig.json 更改 \
 本游戏不提供Sarasa Mono SC相关字体文件 \
-请自行下载并安装:[Sarasa Mono SC](https://github.com/be5invis/Sarasa-Gothic)
+请自行下载并安装:[Sarasa Mono SC](https://github.com/be5invis/Sarasa-Gothic) \
+可通过修改 config.ini 中的 font 项自行更改字体
 
 本地化
 ----
 本项目使用gettext进行本地化设置 \
 请于 data/po 目录下创建对应语言目录 \
-切换语言请编辑config.ini中的language项 \
+切换语言请编辑 config.ini 中的 language 项 \
 协作翻译方案待定
 
 警告

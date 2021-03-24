@@ -128,26 +128,6 @@ class Recipes:
         """ 烹饪所使用的调料 """
 
 
-class CourseTimeSlice:
-    """ 上课时间和状态数据结构体 """
-
-    def __init__(self):
-        self.in_course: bool = 0
-        """ 当前时间是否是上课时间 """
-        self.to_course: int = 0
-        """ 当前距离下节课开始所需的时间 """
-        self.course_index: int = 0
-        """ 当前属于第几节课 """
-        self.end_course: int = 0
-        """ 当前距离下课时间所需的时间 """
-        self.course_id: str = ""
-        """ 课目id """
-        self.school_id: str = ""
-        """ 学校id """
-        self.phase: int = 0
-        """ 年级编号 """
-
-
 class NormalConfig:
     """ 通用配置 """
 
@@ -217,6 +197,8 @@ class NormalConfig:
     """ 食物商店单页显示道具数上限 """
     food_shop_type_max: int
     """ 食物商店单页显示食物种类数上限 """
+    font: str
+    """ 字体 """
     font_size: int
     """ 字体大小 """
     order_font_size: int
@@ -289,6 +271,8 @@ class Behavior:
         """ 前提结算用:进食行为消耗的食物名字 """
         self.food_quality: int = 0
         """ 前提结算用:进食行为消耗的食物品质 """
+        self.course_id: int = 0
+        """ 上课时所学/教的课程 """
 
 
 class Map:
@@ -429,7 +413,7 @@ class Character:
         """ 角色当前坐标数据 """
         self.classroom: str = ""
         """ 角色所属班级坐标 """
-        self.officeroom: List[str] = ""
+        self.officeroom: List[str] = []
         """ 角色所属办公室坐标 """
         self.knowledge: Dict[int, int] = {}
         """ 角色知识技能等级数据 """
@@ -487,8 +471,6 @@ class Character:
         """ 角色好感度数据 角色id:好感度 """
         self.food_bag: Dict[UUID, Food] = {}
         """ 角色持有的食物数据 """
-        self.course: CourseTimeSlice = CourseTimeSlice()
-        """ 上课时间和状态数据 """
         self.target_character_id: int = 0
         """ 角色当前交互对象id """
         self.adv: int = 0
@@ -503,6 +485,8 @@ class Character:
         """ 角色已死亡 """
         self.collection_character: Set = set()
         """ 收藏的角色列表 """
+        self.last_hunger_time: datetime.datetime = None
+        """ 最后一次结算饥饿的时间 """
 
 
 class TeacherTimeTable:
@@ -519,6 +503,8 @@ class TeacherTimeTable:
         """ 科目 """
         self.time: int = 0
         """ 上课时间 """
+        self.end_time: int = 0
+        """ 下课时间 """
 
 
 class Cache:
@@ -594,11 +580,24 @@ class Cache:
         各老师每周上课数据
         老师id:上课数据列表
         """
+        self.teacher_class_week_day_data: Dict[int, Set] = {}
+        """ 各老师每周工作日集合 """
         self.class_timetable_teacher_data: Dict[int, Dict[int, Dict[str, Dict[int, Dict[int, int]]]]] = {}
         """
         各学校各班级上课时间对应教师数据
         学校id:年级id:班级id:星期:课时:老师id
         """
+        self.teacher_class_time_table: Dict[
+            int, Dict[int, Dict[int, Dict[int, Dict[int, Dict[str, int]]]]]
+        ] = {}
+        """
+        各班级各老师上课时间表
+        周几:学校id:年级id:上课时间:教师id:教室id:科目
+        """
+        self.teacher_phase_table: Dict[int, int] = {}
+        """ 各老师所在年级 """
+        self.classroom_students_data: Dict[str, Set[str]] = {}
+        """ 各班级学生集合 """
         self.old_character_id: int = 0
         """ 离开场景面板前在场景中查看的角色id """
         self.total_number_of_people_of_all_ages: Dict[str, int] = {}
@@ -625,15 +624,6 @@ class Cache:
         """ 当前上课时间状态 """
         self.over_behavior_character: Set = set()
         """ 本次update中已结束结算的npc """
-        self.teacher_class_time_table: Dict[
-            int, Dict[int, Dict[int, Dict[int, Dict[int, Dict[str, int]]]]]
-        ] = {}
-        """
-        各班级各老师上课时间表
-        周几:学校id:年级id:上课时间:教师id:教室id:科目
-        """
-        self.teacher_phase_table: Dict[int, int] = {}
-        """ 各老师所在年级 """
         self.recipe_data: Dict[int, Recipes] = {}
         """ 菜谱数据 """
         self.restaurant_data: Dict[str, Dict[UUID, Food]] = {}

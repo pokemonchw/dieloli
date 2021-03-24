@@ -56,10 +56,14 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
         now_draw.text = "\n" + now_character_data.name + ": "
         now_draw.width = width
         now_draw.draw()
-        if status_data.hit_point:
-            now_text_list.append(_("体力:") + str(round(status_data.hit_point, 2)))
-        if status_data.mana_point:
-            now_text_list.append(_("气力:") + str(round(status_data.mana_point, 2)))
+        if status_data.hit_point and round(status_data.hit_point, 2) != 0:
+            now_text_list.append(
+                _("体力:") + text_handle.number_to_symbol_string(round(status_data.hit_point, 2))
+            )
+        if status_data.mana_point and round(status_data.mana_point, 2) != 0:
+            now_text_list.append(
+                _("气力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
+            )
         if len(status_data.status):
             now_text_list.extend(
                 [
@@ -211,8 +215,10 @@ def change_character_social(character_id: int, change_data: game_type.CharacterS
     character_id -- 状态变化数据所属角色id
     change_data -- 状态变化数据
     """
-    for now_character in change_data.target_change:
-        target_change: game_type.TargetChange = change_data.target_change[now_character]
+    character_data: game_type.Character = cache.character_data[character_id]
+    for now_character in character_data.favorability:
+        if now_character in change_data.target_change:
+            target_change: game_type.TargetChange = change_data.target_change[now_character]
         now_character_data: game_type.Character = cache.character_data[now_character]
         old_social = 0
         new_social = 0
@@ -232,8 +238,9 @@ def change_character_social(character_id: int, change_data: game_type.CharacterS
         elif now_favorability >= 1600000000:
             new_social = 5
         if new_social != old_social:
-            target_change.old_social = old_social
-            target_change.new_social = new_social
+            if now_character in change_data.target_change:
+                target_change.old_social = old_social
+                target_change.new_social = new_social
             now_character_data.social_contact.setdefault(old_social, set())
             if character_id in now_character_data.social_contact[old_social]:
                 now_character_data.social_contact[old_social].remove(character_id)

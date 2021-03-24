@@ -3,6 +3,7 @@ import random
 import datetime
 import time
 import asyncio
+from uuid import UUID
 from types import FunctionType
 from typing import Dict
 from functools import wraps
@@ -21,6 +22,7 @@ from Script.Design import (
     handle_premise,
     talk,
     map_handle,
+    cooking,
 )
 from Script.Config import game_config, normal_config
 from Script.UI.Moudle import draw
@@ -44,7 +46,25 @@ def init_character_behavior():
         for character_id in cache.character_data:
             character_behavior(character_id, cache.game_time)
             judge_character_dead(character_id)
+        character_set = set(cache.character_data.keys())
+        update_cafeteria()
     cache.over_behavior_character = set()
+
+
+def update_cafeteria():
+    """ 刷新食堂内食物 """
+    food_judge = 1
+    for food_type in cache.restaurant_data:
+        food_list: Dict[UUID, game_type.Food] = cache.restaurant_data[food_type]
+        for food_id in food_list:
+            food: game_type.Food = food_list[food_id]
+            if food.eat:
+                food_judge = 0
+            break
+        if not food_judge:
+            break
+    if food_judge:
+        cooking.init_restaurant_data()
 
 
 def character_behavior(character_id: int, now_time: datetime.datetime):
@@ -63,7 +83,6 @@ def character_behavior(character_id: int, now_time: datetime.datetime):
         return
     if character_data.behavior.start_time == None:
         character.init_character_behavior_start_time(character_id, now_time)
-    game_time.init_now_course_time_slice(character_id)
     if character_data.state == constant.CharacterStatus.STATUS_ARDER:
         if character_id:
             character_target_judge(character_id, now_time)
@@ -81,7 +100,10 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
     Keyword arguments:
     character_id -- 角色id
     """
-    target, _, judge = search_target(character_id, list(game_config.config_target.keys()), set(), {})
+    premise_data = {}
+    target, _, judge = search_target(
+        character_id, list(game_config.config_target.keys()), set(), premise_data
+    )
     if judge:
         target_config = game_config.config_target[target]
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
@@ -141,10 +163,15 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
         character_data.behavior.start_time = end_time
         character_data.state = constant.CharacterStatus.STATUS_ARDER
         return 1
+    last_hunger_time = start_time
+    if character_data.last_hunger_time != None:
+        last_hunger_time = character_data.last_hunger_time
+    hunger_time = int((now_time - last_hunger_time).seconds / 60)
     character_data.status.setdefault(27, 0)
     character_data.status.setdefault(28, 0)
-    character_data.status[27] += add_time * 0.02
-    character_data.status[28] += add_time * 0.02
+    character_data.status[27] += hunger_time * 0.02
+    character_data.status[28] += hunger_time * 0.02
+    character_data.last_hunger_time = now_time
     if time_judge:
         settle_behavior.handle_settle_behavior(character_id, end_time)
         talk.handle_talk(character_id)
@@ -202,7 +229,6 @@ def search_target(
             else:
                 if premise in game_config.config_effect_target_data and premise not in premise_data:
                     now_target_list = game_config.config_effect_target_data[premise] - null_target
-                    print(game_config.config_effect_target_data[premise], now_target_list, null_target)
                     now_target, now_target_weight, now_judge = search_target(
                         character_id, now_target_list, null_target, premise_data
                     )

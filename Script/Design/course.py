@@ -128,9 +128,7 @@ def init_class_teacher():
     """
     初始化各班级任课老师
     """
-    teacher_index = len(
-        cache.teacher_course_experience[list(cache.teacher_course_experience.keys())[0]].keys()
-    )
+    teacher_index = len(cache.teacher_course_experience[0].keys())
     course_max_a = 0
     course_max_b = 0
     vice_course_index_b = 0
@@ -179,11 +177,9 @@ def init_teacher_table():
                             classroom
                         ][now_course]:
                             if now_teacher not in teacher_table:
-                                cache.character_data[
-                                    now_teacher
-                                ].officeroom = map_handle.get_map_system_path_str_for_list(
-                                    constant.place_data[f"Office_{phase_room_id}"]
-                                )
+                                cache.character_data[now_teacher].officeroom = constant.place_data[
+                                    f"Office_{phase_room_id}"
+                                ]
                             teacher_table.setdefault(now_teacher, 0)
                             if teacher_table[now_teacher] < 18:
                                 teacher_table[now_teacher] += 1
@@ -211,10 +207,14 @@ def init_teacher_table():
                                 )
                                 teacher_timetable.class_times = i
                                 teacher_timetable.course = now_course
+                                cache.teacher_class_week_day_data.setdefault(now_teacher, set())
+                                if day not in cache.teacher_class_week_day_data[now_teacher]:
+                                    cache.teacher_class_week_day_data[now_teacher].add(day)
                                 now_config_id = game_config.config_school_session_data[school_id][i]
                                 now_config = game_config.config_school_session[now_config_id]
                                 teacher_timetable.time = now_config.start_time
                                 teacher_timetable.week_day = day
+                                teacher_timetable.end_time = now_config.end_time
                                 cache.teacher_school_timetable.setdefault(now_teacher, [])
                                 cache.teacher_school_timetable[now_teacher].append(teacher_timetable)
 
@@ -237,20 +237,31 @@ def course_abmain_distribution():
         for classroom in class_list:
             cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(classroom, {})
             for course in cache.course_data[school_id][school_phase]:
-                if cache.course_data[school_id][school_phase][course] > 7:
+                now_teacher_data = value_handle.sorted_dict_for_values(
+                    cache.teacher_course_experience[course]
+                )
+                now_course_index = cache.course_data[school_id][school_phase][course]
+                if cache.course_data[school_id][school_phase][course] > 9:
                     cache.classroom_teacher_data["Classroom_" + str(phase)][classroom].setdefault(
                         course, []
                     )
-                    for teacher in cache.teacher_course_experience[course]:
-                        if teacher not in teacher_data:
-                            teacher_data[teacher] = 0
-                            cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][
-                                course
-                            ].append(teacher)
-                            break
+                    for teacher in now_teacher_data:
+                        teacher_data.setdefault(teacher, 0)
+                        teacher_course_data.setdefault(teacher, set())
+                        if teacher_data[teacher] + now_course_index > 18:
+                            continue
+                        if course in teacher_course_data[teacher]:
+                            continue
+                        cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][course].append(
+                            teacher
+                        )
+                        teacher_data[teacher] += now_course_index
+                        teacher_course_data[teacher].add(course)
+                        break
 
 
 teacher_data = {}
+teacher_course_data = {}
 
 
 def course_distribution_a():
@@ -270,17 +281,27 @@ def course_distribution_a():
         for classroom in classroom_list:
             cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(classroom, {})
             for course in cache.course_data[school_id][school_phase]:
-                if cache.course_data[school_id][school_phase][course] <= 7:
+                now_course_index = cache.course_data[school_id][school_phase][course]
+                if cache.course_data[school_id][school_phase][course] <= 9:
                     cache.classroom_teacher_data["Classroom_" + str(phase)][classroom].setdefault(
                         course, []
                     )
-                    for teacher in cache.teacher_course_experience[course]:
-                        if teacher not in teacher_data:
-                            teacher_data[teacher] = 0
-                            cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][
-                                course
-                            ].append(teacher)
-                            break
+                    now_teacher_data = value_handle.sorted_dict_for_values(
+                        cache.teacher_course_experience[course]
+                    )
+                    for teacher in now_teacher_data:
+                        teacher_data.setdefault(teacher, 0)
+                        teacher_course_data.setdefault(teacher, set())
+                        if teacher_data[teacher] + now_course_index > 18:
+                            continue
+                        if course in teacher_course_data[teacher]:
+                            continue
+                        cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][course].append(
+                            teacher
+                        )
+                        teacher_data[teacher] += now_course_index
+                        teacher_course_data[teacher].add(course)
+                        break
 
 
 def course_distribution_b():
@@ -297,24 +318,28 @@ def course_distribution_b():
             school_phase = phase - 10
         classroom_list = constant.place_data["Classroom_" + str(phase)]
         cache.classroom_teacher_data["Classroom_" + str(phase)] = {}
-        teacher_course_index = 0
         for course in cache.course_data[school_id][school_phase]:
+            now_course_index = cache.course_data[school_id][school_phase][course]
+            now_teacher_data = value_handle.sorted_dict_for_values(cache.teacher_course_experience[course])
             for classroom in classroom_list:
                 cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(classroom, {})
-                if cache.course_data[school_id][school_phase][course] <= 7:
+                if cache.course_data[school_id][school_phase][course] <= 9:
                     cache.classroom_teacher_data["Classroom_" + str(phase)][classroom].setdefault(
                         course, []
                     )
-                    for teacher in cache.teacher_course_experience[course]:
-                        if teacher not in teacher_data:
-                            cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][
-                                course
-                            ].append(teacher)
-                            teacher_course_index += 1
-                            if teacher_course_index == 2:
-                                teacher_course_index = 0
-                                teacher_data[teacher] = 0
-                            break
+                    for teacher in now_teacher_data:
+                        teacher_data.setdefault(teacher, 0)
+                        teacher_course_data.setdefault(teacher, set())
+                        if teacher_data[teacher] + now_course_index > 18:
+                            continue
+                        if course in teacher_course_data[teacher]:
+                            continue
+                        cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][course].append(
+                            teacher
+                        )
+                        teacher_data[teacher] += now_course_index
+                        teacher_course_data[teacher].add(course)
+                        break
 
 
 def init_phase_course_hour_experience():

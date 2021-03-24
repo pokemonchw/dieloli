@@ -2,29 +2,6 @@ from typing import Dict, List, Set
 from types import FunctionType
 
 
-class TimeSlice:
-    """ 时间段分类 """
-
-    TIME_IN_CLASS = 0
-    """ 上课中 """
-    TIME_CLASS_INTERVAL = 1
-    """ 两节课之间 """
-    TIME_EARLY_READING = 2
-    """ 早读 """
-    TIME_RECESS = 3
-    """ 大课间 """
-    TIME_NOON_BREAK = 4
-    """ 午休 """
-    TIME_DINNER = 5
-    """ 晚饭 """
-    TIME_SLEEP = 6
-    """ 晚休 """
-    TIME_BREAKFAST = 7
-    """ 早餐 """
-    TIME_PLAYER = 8
-    """ 娱乐 """
-
-
 class CharacterStatus:
     """ 角色状态id """
 
@@ -60,6 +37,8 @@ class CharacterStatus:
     """ 抚摸 """
     STATUS_TOUCH_CHEST = 15
     """ 摸胸 """
+    STATUS_TEACHING = 16
+    """ 教学 """
 
 
 class Behavior:
@@ -97,6 +76,8 @@ class Behavior:
     """ 抚摸 """
     TOUCH_CHEST = 15
     """ 摸胸 """
+    TEACHING = 16
+    """ 教学 """
 
 
 class StateMachine:
@@ -160,6 +141,14 @@ class StateMachine:
     """ 和场景中自己喜欢的还是初吻的随机对象接吻 """
     MOVE_TO_NO_FIRST_KISS_LIKE_TARGET_SCENE = 28
     """ 移动至喜欢的还是初吻的人所在的场景 """
+    DRINK_RAND_DRINKS = 29
+    """ 饮用背包内随机饮料 """
+    BUY_RAND_DRINKS_AT_CAFETERIA = 30
+    """ 在取餐区购买随机饮料 """
+    ATTEND_CLASS = 31
+    """ 在教室上课 """
+    TEACH_A_LESSON = 32
+    """ 在教室教课 """
 
 
 class Panel:
@@ -440,6 +429,30 @@ class Premise:
     """ 交互对象未被玩家收藏 """
     TARGET_IS_LIVE = 126
     """ 交互对象未死亡 """
+    THIRSTY = 127
+    """ 处于口渴状态 """
+    HAVE_DRINKS = 128
+    """ 背包中有饮料 """
+    NO_HAVE_DRINKS = 129
+    """ 背包中没有饮料 """
+    ATTEND_CLASS_TODAY = 130
+    """ 今日需要上课 """
+    APPROACHING_CLASS_TIME = 131
+    """ 临近上课时间 """
+    IN_CLASS_TIME = 132
+    """ 处于上课时间 """
+    NO_IN_CLASSROOM = 133
+    """ 不在教室中 """
+    TEACHER_NO_IN_CLASSROOM = 134
+    """ 角色所属班级的老师不在教室中 """
+    TEACHER_IN_CLASSROOM = 135
+    """ 角色所属班级的老师在教室中 """
+    IS_NAKED = 136
+    """ 角色一丝不挂 """
+    IS_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 137
+    """ 场景中有角色对自己抱有超越友谊的想法 """
+    HAVE_STUDENTS_IN_CLASSROOM = 138
+    """ 有所教班级的学生在教室中 """
 
 
 class BehaviorEffect:
@@ -507,6 +520,14 @@ class BehaviorEffect:
     """ 交互对象增加少量色欲 """
     INTERRUPT_TARGET_ACTIVITY = 30
     """ 打断交互对象活动 """
+    TARGET_ADD_SMALL_ELOQUENCE_EXPERIENCE = 31
+    """ 交互对象增加少量口才技能经验 """
+    TARGET_ADD_FAVORABILITY_FOR_ELOQUENCE = 32
+    """ 按口才技能增加交互对象好感 """
+    ADD_SMALL_ATTEND_CLASS_EXPERIENCE = 33
+    """ 按学习课程增加少量对应技能经验 """
+    ADD_STUDENTS_COURSE_EXPERIENCE_FOR_IN_CLASS_ROOM = 34
+    """ 按课程增加教室内本班级学生的技能经验 """
 
 
 class InstructType:
@@ -571,12 +592,16 @@ class Instruct:
     """ 购买道具 """
     MOVE = 0
     """ 移动 """
+    ATTEND_CLASS = 0
+    """ 上课 """
+    TEACH_A_LESSON = 0
+    """ 教课 """
+    VIEW_THE_SCHOOL_TIMETABLE = 0
+    """ 查看课程表 """
     SEE_ATTR = 0
     """ 查看属性 """
     SEE_OWNER_ATTR = 0
     """ 查看自身属性 """
-    SAVE = 0
-    """ 读写存档 """
     COLLECTION_CHARACTER = 0
     """ 收藏角色 """
     UN_COLLECTION_CHARACTER = 0
@@ -585,8 +610,8 @@ class Instruct:
     """ 启用收藏模式 """
     UN_COLLECTION_SYSTEM = 0
     """ 关闭收藏模式 """
-    VIEW_THE_SCHOOL_TIMETABLE = 0
-    """ 查看课程表 """
+    SAVE = 0
+    """ 读写存档 """
 
 
 i = 0

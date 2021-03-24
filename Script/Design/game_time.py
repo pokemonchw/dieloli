@@ -168,187 +168,6 @@ def judge_date_big_or_small(time_a: datetime.datetime, time_b: datetime.datetime
         return time_b < time_a
 
 
-def init_now_course_time_slice(character_id: int):
-    """
-    初始化角色当前上课时间状态
-    Keyword arguments:
-    character_id -- 角色Id
-    """
-    character_data = cache.character_data[character_id]
-    character_age = character_data.age
-    teacher_id = -1
-    if character_age in range(7, 19):
-        phase = character_age - 7
-    elif character_id in cache.teacher_phase_table:
-        phase = cache.teacher_phase_table[character_id]
-        teacher_id = character_id
-    else:
-        phase = 12
-    if phase <= 5:
-        character_data.course = init_primary_school_course_time_status(
-            character_data.behavior.start_time, teacher_id
-        )
-    elif phase <= 11:
-        character_data.course = init_junior_middle_school_course_time_status(
-            character_data.behavior.start_time, teacher_id
-        )
-    else:
-        character_data.course = init_senior_high_school_course_time_status(
-            character_data.behavior.start_time, teacher_id
-        )
-    character_data.course.phase = phase
-
-
-def init_primary_school_course_time_status(
-    time_data: datetime.datetime, teacher_id=-1
-) -> game_type.CourseTimeSlice:
-    """
-    计算小学指定时间上课状态
-    Keyword arguments:
-    time_data -- 时间数据
-    teacher_id -- 教师id，不为-1时校验指定教师的上课班级
-    Return arguments:
-    game_type.CourseTimeSlice -- 上课时间状态数据
-    """
-    now_time_status = judge_school_course_time(0, time_data)
-    now_time_status.school_id = 0
-    if time_data.month in range(1, 7) or time_data.month in range(9, 13):
-        now_week = time_data.weekday()
-        if now_week >= 5:
-            now_time_status.end_course = 0
-            now_time_status.in_course = 0
-            now_time_status.to_course = 0
-        elif (
-            teacher_id > -1
-            and teacher_id in cache.teacher_class_time_table[now_week][now_time_status.course_index]
-        ):
-            classroom = cache.teacher_class_time_table[now_week][now_time_status.course_index][
-                teacher_id
-            ].keys()[0]
-            now_time_status.course_id = cache.teacher_class_time_table[now_week][
-                now_time_status.course_index
-            ][teacher_id][classroom]
-            cache.character_data[teacher_id].classroom = classroom
-    else:
-        now_time_status.end_course = 0
-        now_time_status.in_course = 0
-        now_time_status.to_course = 0
-    return now_time_status
-
-
-def init_junior_middle_school_course_time_status(
-    time_data: datetime.datetime, teacher_id=-1
-) -> game_type.CourseTimeSlice:
-    """
-    计算初中指定时间上课状态
-    Keyword arguments:
-    time_date -- 时间数据
-    teacher_id -- 教师id，不为-1时校验指定教师的上课班级
-    Return arguments:
-    game_type.CourseTimeSlice -- 上课时间状态数据
-    """
-    now_time_status = judge_school_course_time(1, time_data)
-    now_time_status.school_id = 1
-    if time_data.month in range(1, 7) or time_data.month in range(9, 13):
-        now_week = time_data.weekday()
-        if now_week >= 6:
-            now_time_status.end_course = 0
-            now_time_status.in_course = 0
-            now_time_status.to_course = 0
-        elif (
-            teacher_id > -1
-            and teacher_id in cache.teacher_class_time_table[now_week][now_time_status.course_index]
-        ):
-            classroom = cache.teacher_class_time_table[now_week][now_time_status.course_index][
-                teacher_id
-            ].keys()[0]
-            now_time_status.course_id = cache.teacher_class_time_table[now_week][
-                now_time_status.course_index
-            ][teacher_id][classroom]
-            cache.character_data[teacher_id].classroom = classroom
-    else:
-        now_time_status.end_course = 0
-        now_time_status.in_course = 0
-        now_time_status.to_course = 0
-    return now_time_status
-
-
-def init_senior_high_school_course_time_status(
-    time_data: datetime.datetime, teacher_id=-1
-) -> game_type.CourseTimeSlice:
-    """
-    计算高中指定时间上课状态
-    Keyword arguments:
-    time_data -- 时间数据
-    teacher_id -- 教师id，不为-1时校验指定教师的上课班级
-    Return arguments:
-    game_type.CourseTimeSlice -- 上课时间状态数据
-    """
-    now_time_status = judge_school_course_time(2, time_data)
-    now_time_status.school_id = 2
-    if time_data.month in range(1, 7) or time_data.month in range(9, 13):
-        if (
-            teacher_id > -1
-            and teacher_id in cache.teacher_class_time_table[now_week][now_time_status.course_index]
-        ):
-            classroom = cache.teacher_class_time_table[now_week][now_time_status.course_index][
-                teacher_id
-            ].keys()[0]
-            now_time_status.course_id = cache.teacher_class_time_table[now_week][
-                now_time_status.course_index
-            ][teacher_id][classroom]
-            cache.character_data[teacher_id].classroom = classroom
-    else:
-        now_time_status.end_course = 0
-        now_time_status.in_course = 0
-        now_time_status.to_course = 0
-    return now_time_status
-
-
-def judge_school_course_time(school_id: int, time_data: datetime.datetime) -> game_type.CourseTimeSlice:
-    """
-    校验指定学校指定时间上课状态
-    Keyword arguments:
-    school_id -- 学校Id
-    time_data -- 时间数据
-    Return arguments:
-    game_type,CourseTimeSlice -- 上课时间和状态数据
-    """
-    course_status = game_type.CourseTimeSlice()
-    course_time_data = game_config.config_school_session_data[school_id]
-    now_time = time_data.hour * 100 + time_data.minute
-    end_time_data = {
-        game_config.config_school_session[course_time_data[i]].end_time: i
-        for i in range(len(course_time_data))
-    }
-    now_time_index = bisect.bisect_left(list(end_time_data.keys()), now_time)
-    course_status.course_index = now_time_index
-    if now_time_index >= len(end_time_data):
-        return course_status
-    course_time_id = game_config.config_school_session_data[school_id][now_time_index]
-    course_time_config = game_config.config_school_session[course_time_id]
-    start_time = course_time_config.start_time
-    end_time = course_time_config.end_time
-    if now_time < start_time:
-        if start_time / 100 != now_time / 100:
-            index_time = (start_time / 100 - now_time / 100) * 60
-            course_status.to_course = (
-                start_time - (start_time / 100 - now_time / 100) * 100 + index_time - now_time
-            )
-        else:
-            course_status.to_course = start_time - now_time
-    else:
-        course_status.in_course = 1
-        if end_time / 100 != now_time / 100:
-            index_time = (end_time / 100 - now_time / 100) * 60
-            course_status.end_course = (
-                end_time - (end_time / 100 - now_time / 100) * 100 + index_time - now_time
-            )
-        else:
-            course_status.end_course = end_time - now_time
-    return course_status
-
-
 def ecliptic_lon(now_time: datetime.datetime) -> float:
     """
     根据日期计算黄经
@@ -505,3 +324,34 @@ def get_moon_phase(now_time: datetime.datetime) -> int:
         phase_config = game_config.config_moon[phase]
         if now_phase > phase_config.min_phase and now_phase <= phase_config.max_phase:
             return phase_config.cid
+
+
+def judge_attend_class_today(character_id: int) -> bool:
+    """
+    校验角色今日是否需要上课
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time: datetime.datetime = character_data.behavior.start_time
+    if now_time == None:
+        now_time = cache.game_time
+    now_week = now_time.weekday()
+    now_month = now_time.month
+    if now_month not in {3, 4, 5, 6, 8, 9, 10, 11, 12}:
+        return 0
+    if character_data.age <= 18:
+        if character_data.age <= 12 and now_week < 5:
+            return 1
+        elif character_data.age <= 15 and now_week < 6:
+            return 1
+        elif character_data.age <= 18 and character_data.age > 15:
+            return 1
+    elif (
+        character_id in cache.teacher_phase_table
+        and now_week in cache.teacher_class_week_day_data[character_id]
+    ):
+        return 1
+    return 0
