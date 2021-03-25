@@ -351,6 +351,15 @@ class GlobalSceneNamePanel:
         """ 当前面板的按钮返回 """
         self.end_index: int = 0
         """ 结束按钮id """
+        self.handle_panel = panel.PageHandlePanel(self.get_path_list(), ScenePathNameMoveDraw, 20, 3, self.width, 1)
+        self.end_index = self.handle_panel.end_index
+
+    def get_path_list(self) -> list:
+        """
+        获取公共场景路径列表
+        Return arguments:
+        list -- 路径列表
+        """
         character_data: game_type.Character = cache.character_data[0]
         class_room_path = map_handle.get_map_system_path_for_str(character_data.classroom)
         office_room_path = character_data.officeroom
@@ -377,8 +386,7 @@ class GlobalSceneNamePanel:
             shop_path,
         ]
         path_list = [i for i in path_list if len(i)]
-        self.handle_panel = panel.PageHandlePanel(path_list, ScenePathNameMoveDraw, 20, 3, self.width, 1)
-        self.end_index = self.handle_panel.end_index
+        return path_list
 
     def update(self, now_map: List[str], start_index: int):
         """
@@ -388,6 +396,7 @@ class GlobalSceneNamePanel:
         start_index -- 起始按钮id
         """
         self.now_map = now_map
+        self.handle_panel.text_list = self.get_path_list()
         self.handle_panel.button_start_id = start_index
         self.handle_panel.update()
         self.end_index = self.handle_panel.end_index
@@ -584,7 +593,7 @@ class CollectionSceneNamePanel:
         """
         更新当前面板对象
         Keyword arguments:
-        now_map -- 当前地
+        now_map -- 当前地图
         start_index -- 起始按钮id
         """
         self.now_map = now_map
