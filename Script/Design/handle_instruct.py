@@ -371,6 +371,7 @@ def handle_view_school_timetable():
     constant.InstructType.STUDY,
     _("上课"),
     {
+        constant.Premise.ATTEND_CLASS_TODAY,
         constant.Premise.IN_CLASSROOM,
         constant.Premise.IN_CLASS_TIME,
         constant.Premise.IS_STUDENT,
@@ -408,6 +409,7 @@ def handle_attend_class():
     constant.InstructType.STUDY,
     _("教课"),
     {
+        constant.Premise.ATTEND_CLASS_TODAY,
         constant.Premise.IN_CLASSROOM,
         constant.Premise.IN_CLASS_TIME,
         constant.Premise.IS_TEACHER,
