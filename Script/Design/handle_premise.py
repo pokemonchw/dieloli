@@ -94,7 +94,7 @@ def handle_in_breakfast_time(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = game_time.get_sun_time(character_data.behavior.start_time)
-    return now_time == 4
+    return (now_time == 4) * 100
 
 
 @add_premise(constant.Premise.IN_LUNCH_TIME)
@@ -108,7 +108,7 @@ def handle_in_lunch_time(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = game_time.get_sun_time(character_data.behavior.start_time)
-    return now_time == 7
+    return (now_time == 7) * 100
 
 
 @add_premise(constant.Premise.IN_DINNER_TIME)
@@ -122,7 +122,7 @@ def handle_in_dinner_time(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = game_time.get_sun_time(character_data.behavior.start_time)
-    return now_time == 9
+    return (now_time == 9) * 100
 
 
 @add_premise(constant.Premise.HUNGER)
@@ -134,9 +134,11 @@ def handle_hunger(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    character_data = cache.character_data[character_id]
+    character_data: game_type.Character = cache.character_data[character_id]
     character_data.status.setdefault(27, 0)
-    return math.floor(character_data.status[27]) * 10
+    if character_data.status[27] > 15:
+        return math.floor(character_data.status[27]) * 10
+    return 0
 
 
 @add_premise(constant.Premise.HAVE_FOOD)
@@ -417,7 +419,7 @@ def handle_in_sleep_time(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     now_time: datetime.datetime = character_data.behavior.start_time
     if now_time.hour >= 22 or now_time.hour <= 4:
-        return 1
+        return 100
     return 0
 
 
@@ -433,7 +435,7 @@ def handle_in_siesta_time(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     now_time: datetime.datetime = character_data.behavior.start_time
     if now_time.hour >= 12 or now_time.hour <= 15:
-        return 1
+        return 100
     return 0
 
 
@@ -571,7 +573,7 @@ def handle_target_average_height_low(character_id: int) -> int:
 
 
 @add_premise(constant.Premise.TARGET_IS_PLAYER)
-def handle_is_player(character_id: int) -> int:
+def handle_target_is_player(character_id: int) -> int:
     """
     校验角色目标是否是玩家
     Keyword arguments:
@@ -850,7 +852,7 @@ def handle_no_wear_underwear(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 1 not in character_data.put_on or character_data.put_on[1] == None or character_data.put_on[1] == "":
+    if 1 not in character_data.put_on or character_data.put_on[1] is None or character_data.put_on[1] == "":
         return 1
     return 0
 
@@ -865,7 +867,7 @@ def handle_no_wear_underpants(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 7 not in character_data.put_on or character_data.put_on[7] == None or character_data.put_on[7] == "":
+    if 7 not in character_data.put_on or character_data.put_on[7] is None or character_data.put_on[7] == "":
         return 1
     return 0
 
@@ -880,7 +882,7 @@ def handle_no_wear_bra(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 6 not in character_data.put_on or character_data.put_on[6] == None or character_data.put_on[6] == "":
+    if 6 not in character_data.put_on or character_data.put_on[6] is None or character_data.put_on[6] == "":
         return 1
     return 0
 
@@ -895,7 +897,7 @@ def handle_no_wear_pants(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 2 not in character_data.put_on or character_data.put_on[2] == None or character_data.put_on[2] == "":
+    if 2 not in character_data.put_on or character_data.put_on[2] is None or character_data.put_on[2] == "":
         return 1
     return 0
 
@@ -910,7 +912,7 @@ def handle_no_wear_skirt(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 3 not in character_data.put_on or character_data.put_on[3] == None or character_data.put_on[3] == "":
+    if 3 not in character_data.put_on or character_data.put_on[3] is None or character_data.put_on[3] == "":
         return 1
     return 0
 
@@ -925,7 +927,7 @@ def handle_no_wear_shoes(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 4 not in character_data.put_on or character_data.put_on[4] == None or character_data.put_on[4] == "":
+    if 4 not in character_data.put_on or character_data.put_on[4] is None or character_data.put_on[4] == "":
         return 1
     return 0
 
@@ -940,7 +942,7 @@ def handle_no_wear_socks(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 5 not in character_data.put_on or character_data.put_on[5] == None or character_data.put_on[5] == "":
+    if 5 not in character_data.put_on or character_data.put_on[5] is None or character_data.put_on[5] == "":
         return 1
     return 0
 
@@ -1632,7 +1634,8 @@ def handle_have_like_target_in_scene(character_id: int) -> int:
     character_list = []
     for i in {4, 5}:
         for c in character_data.social_contact[i]:
-            character_list.append(c)
+            if c in scene_data.character_list:
+                character_list.append(c)
     return len(character_list)
 
 
@@ -1881,7 +1884,7 @@ def handle_target_is_naked(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    target_data: game_type.Character = cache.character_data[character_data.tar]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     for i in target_data.put_on:
         if isinstance(target_data.put_on[i], UUID):
             return 0
@@ -1944,7 +1947,7 @@ def handle_is_collection_system(character_id: int) -> int:
 
 
 @add_premise(constant.Premise.UN_COLLECTION_SYSTEM)
-def handle_is_collection_system(character_id: int) -> int:
+def handle_un_collection_system(character_id: int) -> int:
     """
     校验玩家是否未启用收藏模式
     Keyword arguments:
@@ -2039,7 +2042,6 @@ def handle_no_have_drinks(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    drinks_list = []
     for food_id in character_data.food_bag:
         now_food: game_type.Food = character_data.food_bag[food_id]
         if now_food.eat and 28 in now_food.feel:
@@ -2099,9 +2101,9 @@ def handle_approaching_class_time(character_id: int) -> int:
     next_value = int(next_time / 100) * 60 + next_time % 100
     now_value = int(now_time_value / 100) * 60 + now_time_value % 100
     add_time = next_value - now_value
-    if add_time > 10:
+    if add_time > 30:
         return 0
-    return 100 / add_time * 10
+    return 3000 / (add_time * 10)
 
 
 @add_premise(constant.Premise.IN_CLASS_TIME)
@@ -2149,7 +2151,7 @@ def handle_teacher_no_in_classroom(character_id: int) -> int:
         return 1
     classroom: game_type.Scene = cache.scene_data[character_data.classroom]
     now_time: datetime.datetime = character_data.behavior.start_time
-    if now_time == None:
+    if now_time is None:
         now_time = cache.game_time
     now_week = now_time.weekday()
     school_id, phase = course.get_character_school_phase(character_id)
@@ -2263,7 +2265,7 @@ def handle_have_students_in_classroom(character_id: int) -> int:
     if character_id not in cache.teacher_school_timetable:
         return 0
     now_time: datetime.datetime = character_data.behavior.start_time
-    if now_time == None:
+    if now_time is None:
         now_time = cache.game_time
     now_week = now_time.weekday()
     now_time = 0
@@ -2293,3 +2295,322 @@ def handle_have_students_in_classroom(character_id: int) -> int:
     now_scene_data: game_type.Scene = cache.scene_data[now_room_path_str]
     class_data = cache.classroom_students_data[now_room_path_str]
     return len(class_data & now_scene_data.character_list)
+
+
+@add_premise(constant.Premise.GOOD_AT_ELOQUENCE)
+def handle_good_at_eloquence(character_id: int) -> int:
+    """
+    校验角色是否擅长口才
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 1 + character_data.knowledge_interest[12]
+    if 12 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[12])
+        return weight * level
+    return weight
+
+
+@add_premise(constant.Premise.GOOD_AT_LITERATURE)
+def handle_good_at_literature(character_id: int) -> int:
+    """
+    校验角色是否擅长文学
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 1 + character_data.knowledge_interest[2]
+    if 2 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[2])
+        return weight * level
+    return weight
+
+
+@add_premise(constant.Premise.GOOD_AT_WRITING)
+def handle_good_at_writing(character_id: int) -> int:
+    """
+    校验角色是否擅长写作
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 1 + character_data.knowledge_interest[28]
+    if 28 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[28])
+        return weight * level
+    return weight
+
+
+@add_premise(constant.Premise.GOOD_AT_DRAW)
+def handle_good_at_draw(character_id: int) -> int:
+    """
+    校验角色是否擅长绘画
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 1 + character_data.knowledge_interest[13]
+    if 13 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[13])
+        return weight * level
+    return weight
+
+
+@add_premise(constant.Premise.GOOD_AT_ART)
+def handle_good_at_art(character_id: int) -> int:
+    """
+    校验角色是否擅长艺术
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 1 + character_data.knowledge_interest[5]
+    if 5 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[5])
+        return weight * level
+    return weight
+
+
+@add_premise(constant.Premise.TARGET_LITTLE_KNOWLEDGE_OF_RELIGION)
+def handle_target_little_knowledge_of_religion(character_id: int) -> int:
+    """
+    校验交互对象是否对宗教一知半解
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if 7 in target_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(target_data.knowledge[7])
+        if level <= 2:
+            return 1
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_LITTLE_KNOWLEDGE_OF_FAITH)
+def handle_target_little_knowledge_of_faith(character_id: int) -> int:
+    """
+    校验交互对象是否对信仰一知半解
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if 8 in target_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(target_data.knowledge[8])
+        if level <= 2:
+            return 1
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_LITTLE_KNOWLEDGE_OF_ASTRONOMY)
+def handle_target_little_knowledge_of_astronomy(character_id: int) -> int:
+    """
+    校验交互对象是否对天文学一知半解
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if 53 in target_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(target_data.knowledge[53])
+        if level <= 2:
+            return 1
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_LITTLE_KNOWLEDGE_OF_ASTROLOGY)
+def handle_target_little_knowledge_of_astrology(character_id: int) -> int:
+    """
+    校验交互对象是否对占星学一知半解
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if 75 in target_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(target_data.knowledge[75])
+        if level <= 2:
+            return 1
+    return 0
+
+
+@add_premise(constant.Premise.RICH_EXPERIENCE_IN_SEX)
+def handle_rich_experience_in_sex(character_id: int) -> int:
+    """
+    校验角色是否性经验丰富
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_exp = 0
+    for i in character_data.sex_experience:
+        now_exp += character_data.sex_experience[i]
+    now_level = attr_calculation.get_experience_level_weight(now_exp)
+    if now_level > 4:
+        return now_level - 4
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_IS_SLEEP)
+def handle_target_is_sleep(character_id: int) -> int:
+    """
+    校验交互对象是否正在睡觉
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.state == constant.CharacterStatus.STATUS_SLEEP
+
+
+@add_premise(constant.Premise.IN_ROOFTOP_SCENE)
+def handle_in_rooftop_scene(character_id: int) -> int:
+    """
+    校验是否处于天台场景
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data = cache.scene_data[now_scene_str]
+    if now_scene_data.scene_tag == "Rooftop":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.TONIGHT_IS_FULL_MOON)
+def handle_tonight_is_full_moon(character_id: int) -> int:
+    """
+    校验今夜是否是满月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time: datetime.datetime = character_data.behavior.start_time
+    if now_time is None:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase in {11, 12}:
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.IS_STARAIGHTFORWARD)
+def handle_is_staraightforward(character_id: int) -> int:
+    """
+    校验角色是否是一个爽直的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.nature[13] >= 50
+
+
+@add_premise(constant.Premise.NO_GOOD_AT_ELOQUENCE)
+def handle_no_good_at_eloquence(character_id: int) -> int:
+    """
+    校验角色是否不擅长口才
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    weight = 8
+    if 12 in character_data.knowledge:
+        level = attr_calculation.get_experience_level_weight(character_data.knowledge[12])
+        return 8 - level
+    return weight
+
+
+@add_premise(constant.Premise.TARGET_NO_EXPERIENCE_IN_SEX)
+def handle_target_no_experience_in_sex(character_id: int) -> int:
+    """
+    校验交互对象是否没有性经验
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    for i in character_data.sex_experience:
+        if character_data.sex_experience[i]:
+            return 0
+    return 1
+
+
+@add_premise(constant.Premise.LUST_IS_HIGHT)
+def handle_lust_is_hight(character_id: int) -> int:
+    """
+    校验角色是否色欲高涨
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.status.setdefault(21, 0)
+    return character_data.status[21]
+
+
+@add_premise(constant.Premise.IN_GROVE)
+def handle_in_grove(character_id: int) -> int:
+    """
+    校验角色是否处于小树林中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    if now_position[0] == "7":
+        return 1
+    return 0
+
+
+@add_premise(constant.Premise.NO_IN_GROVE)
+def handle_no_in_grove(character_id: int) -> int:
+    """
+    校验角色是否未处于小树林中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    if now_position[0] != "7":
+        return 1
+    return 0

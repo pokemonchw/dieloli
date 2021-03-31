@@ -1,8 +1,7 @@
 # -*- coding: UTF-8 -*-
-import sys
 import os
 import traceback
-from Script.Core import flow_handle, io_init, key_listion_event, constant
+from Script.Core import flow_handle, io_init, key_listion_event
 from Script.Config import normal_config
 
 # 字符串定义###########################################################
@@ -49,7 +48,7 @@ def init(main_flow: object):
 
     try:
         run_main_flow()
-    except Exception as e:
+    except Exception:
         traceback.print_exc(file=open(error_path, "a"))
         os._exit(0)
 

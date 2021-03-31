@@ -1,6 +1,5 @@
 from Script.Core import (
     cache_control,
-    constant,
     game_type,
 )
 from Script.Config import game_config

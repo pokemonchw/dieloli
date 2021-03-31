@@ -1,4 +1,4 @@
-from typing import Tuple, List
+from typing import Tuple
 from types import FunctionType
 from uuid import UUID
 from Script.Core import cache_control, game_type, get_text, flow_handle, text_handle, constant, py_cmd

@@ -3,7 +3,7 @@ import uuid
 from types import FunctionType
 from typing import Dict, Set
 from Script.Core.game_type import Recipes, Food
-from Script.Core import constant, cache_control, value_handle, game_type, get_text
+from Script.Core import cache_control, value_handle, game_type, get_text
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache

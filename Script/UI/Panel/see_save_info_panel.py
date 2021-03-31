@@ -1,4 +1,5 @@
 import datetime
+from typing import List
 from types import FunctionType
 from Script.Core import (
     cache_control,
@@ -54,6 +55,12 @@ class SeeSaveListPanel:
             title_draw = draw.TitleLineDraw(_("存档列表"), self.width)
             title_draw.draw()
             self.return_list = []
+            auto_save_draw = SaveInfoDraw(["auto", 0], self.width, 1, 0, 0)
+            auto_save_draw.draw()
+            line_feed.draw()
+            self.return_list.append("auto")
+            now_line = draw.LineDraw(".", self.width)
+            now_line.draw()
             self.handle_panel.update()
             self.handle_panel.draw()
             self.return_list.extend(self.handle_panel.return_list)
@@ -116,7 +123,7 @@ class SaveInfoDraw:
             else:
                 new_text = text_handle.align(save_name, "center", text_width=self.width)
                 self.draw_text = new_text
-                self.button_return = save_name
+                self.button_return = text[0]
         else:
             new_text = text_handle.align(save_name, "center", text_width=self.width)
             self.draw_text = new_text

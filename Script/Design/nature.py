@@ -1,6 +1,5 @@
 import random
 from typing import Dict
-from Script.Core import constant
 from Script.Config import game_config
 
 

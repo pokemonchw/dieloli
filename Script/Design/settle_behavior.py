@@ -2,7 +2,6 @@ import datetime
 from functools import wraps
 from types import FunctionType
 from Script.Core import cache_control, constant, game_type, get_text, text_handle
-from Script.Design import game_time, talk, map_handle
 from Script.UI.Moudle import panel, draw
 from Script.Config import game_config, normal_config
 
@@ -34,7 +33,7 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
     now_judge = False
     if character_id:
         return
-    if status_data == None:
+    if status_data is None:
         return
     if status_data.mana_point:
         now_judge = True
@@ -224,6 +223,7 @@ def change_character_social(character_id: int, change_data: game_type.CharacterS
         new_social = 0
         if character_id in now_character_data.social_contact_data:
             old_social = now_character_data.social_contact_data[character_id]
+        now_character_data.favorability.setdefault(character_id, 0)
         now_favorability = now_character_data.favorability[character_id]
         if now_favorability < 500:
             new_social = 0

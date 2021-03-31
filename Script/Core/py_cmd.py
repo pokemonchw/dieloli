@@ -4,7 +4,7 @@ from Script.Core import (
     cache_control,
     game_type,
 )
-from Script.Config import game_config, normal_config
+from Script.Config import normal_config
 
 # 清除命令
 clear_default_flow = flow_handle.clear_default_flow
@@ -14,7 +14,7 @@ bind_cmd = flow_handle.bind_cmd
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
-# 输出命令
+
 def pcmd(
     cmd_str: str,
     cmd_id: str,
@@ -42,7 +42,6 @@ def pcmd(
     flow_handle.print_cmd(cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style)
 
 
-# 获得一个没有用过的命令编号
 unused_cmd_num = 500
 
 

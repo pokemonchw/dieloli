@@ -1,6 +1,7 @@
 import random
+from typing import List
 from Script.Config import game_config
-from Script.Design import handle_state_machine, character, character_move, map_handle, course
+from Script.Design import handle_state_machine, character_move, map_handle, course
 from Script.Core import cache_control, game_type, constant
 
 cache: game_type.Cache = cache_control.cache
@@ -79,7 +80,7 @@ def character_move_to_rand_restaurant(character_id: int):
     to_restaurant = map_handle.get_map_system_path_for_str(random.choice(constant.place_data["Restaurant"]))
     _, _, move_path, move_time = character_move.character_move(
         character_id,
-        map_handle.get_map_system_path_for_str(character_data.classroom),
+        to_restaurant,
     )
     character_data.behavior.behavior_id = constant.Behavior.MOVE
     character_data.behavior.move_target = move_path
@@ -114,12 +115,11 @@ def character_chat_rand_character(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_list = list(
-        cache.scene_data[
-            map_handle.get_map_system_path_str_for_list(character_data.position)
-        ].character_list
-    )
-    character_list.remove(character_id)
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_set = scene_data.character_list.copy()
+    character_set.remove(character_id)
+    character_list = list(character_set)
     target_id = random.choice(character_list)
     character_data.behavior.behavior_id = constant.Behavior.CHAT
     character_data.behavior.duration = 10
@@ -653,6 +653,7 @@ def character_attend_class(character_id: int):
     character_data.behavior.duration = end_time
     character_data.behavior.behavior_id = constant.Behavior.ATTEND_CLASS
     character_data.state = constant.CharacterStatus.STATUS_ATTEND_CLASS
+    character_data.behavior.course_id = now_course
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.TEACH_A_LESSON)
@@ -682,3 +683,19 @@ def character_teach_lesson(character_id: int):
     character_data.behavior.duration = end_time
     character_data.behavior.behavior_id = constant.Behavior.TEACHING
     character_data.state = constant.CharacterStatus.STATUS_TEACHING
+    character_data.behavior.course_id = course
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_GROVE)
+def character_move_to_grove(character_id: int):
+    """
+    移动至小树林场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    _, _, move_path, move_time = character_move.character_move(character_id, ["7"])
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE

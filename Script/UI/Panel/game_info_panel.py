@@ -1,7 +1,7 @@
 from types import FunctionType
 from Script.UI.Moudle import draw
 from Script.Design import game_time, character
-from Script.Core import get_text, cache_control, flow_handle, py_cmd, text_handle, game_type
+from Script.Core import get_text, cache_control, game_type
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
@@ -72,7 +72,6 @@ class GameTimeInfoPanel:
         attend_class_draw.width = self.width - now_width
         now_draw.draw_list.append(attend_class_draw)
         now_width += len(attend_class_draw)
-        character_data: game_type.Character = cache.character_data[0]
         if character.judge_character_in_class_time(0):
             now_attend_class = _("上课时间")
             now_attend_class += " "

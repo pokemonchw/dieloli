@@ -4,8 +4,6 @@ from types import FunctionType
 from Script.Core import (
     text_handle,
     io_init,
-    rich_text,
-    constant,
     py_cmd,
     flow_handle,
     cache_control,
@@ -386,7 +384,6 @@ class CenterButton:
                     break
                 now_text = now_text[:-2] + "~"
         else:
-            now_index = text_handle.get_text_index(self.text)
             now_text = text_handle.align(self.text, "center", 0, 1, self.width)
             now_width = self.width - text_handle.get_text_index(now_text)
             now_text = " " * int(now_width) + now_text
@@ -425,7 +422,6 @@ class LeftButton(CenterButton):
                     break
                 now_text = now_text[:-2] + "~"
         else:
-            now_index = text_handle.get_text_index(self.text)
             now_text = text_handle.align(self.text, "left", 0, 1, self.width)
             now_width = self.width - text_handle.get_text_index(now_text)
             now_text = " " * int(now_width) + now_text

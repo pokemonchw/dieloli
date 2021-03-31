@@ -149,6 +149,8 @@ class StateMachine:
     """ 在教室上课 """
     TEACH_A_LESSON = 32
     """ 在教室教课 """
+    MOVE_TO_GROVE = 33
+    """ 移动至小树林场景 """
 
 
 class Panel:
@@ -453,6 +455,44 @@ class Premise:
     """ 场景中有角色对自己抱有超越友谊的想法 """
     HAVE_STUDENTS_IN_CLASSROOM = 138
     """ 有所教班级的学生在教室中 """
+    GOOD_AT_ELOQUENCE = 139
+    """ 角色擅长口才 """
+    GOOD_AT_LITERATURE = 140
+    """ 角色擅长文学 """
+    GOOD_AT_WRITING = 141
+    """ 角色擅长写作 """
+    GOOD_AT_DRAW = 142
+    """ 角色擅长绘画 """
+    GOOD_AT_ART = 143
+    """ 角色擅长艺术 """
+    TARGET_LITTLE_KNOWLEDGE_OF_RELIGION = 144
+    """ 交互对象对宗教一知半解 """
+    TARGET_LITTLE_KNOWLEDGE_OF_FAITH = 145
+    """ 交互对象对信仰一知半解 """
+    TARGET_LITTLE_KNOWLEDGE_OF_ASTRONOMY = 146
+    """ 交互对象对天文学一知半解 """
+    TARGET_LITTLE_KNOWLEDGE_OF_ASTROLOGY = 147
+    """ 交互对象对占星学一知半解 """
+    RICH_EXPERIENCE_IN_SEX = 148
+    """ 角色性经验丰富 """
+    TARGET_IS_SLEEP = 149
+    """ 交互对象正在睡觉 """
+    IN_ROOFTOP_SCENE = 150
+    """ 处于天台场景 """
+    TONIGHT_IS_FULL_MOON = 151
+    """ 今夜是满月 """
+    IS_STARAIGHTFORWARD = 152
+    """ 是一个爽直的人 """
+    NO_GOOD_AT_ELOQUENCE = 153
+    """ 角色不擅长口才 """
+    TARGET_NO_EXPERIENCE_IN_SEX = 154
+    """ 交互对象没有性经验 """
+    LUST_IS_HIGHT = 155
+    """ 角色色欲高涨 """
+    IN_GROVE = 156
+    """ 处于小树林场景 """
+    NO_IN_GROVE = 157
+    """ 未处于小树林场景 """
 
 
 class BehaviorEffect:

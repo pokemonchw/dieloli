@@ -1,6 +1,6 @@
 import random
 import numpy
-from Script.Core import cache_control, constant, game_type
+from Script.Core import cache_control, game_type
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
@@ -11,7 +11,6 @@ def init_character_interest():
     """
     初始化全部角色兴趣/精力/天赋数值分配
     """
-    interest_list = []
     language_skills = list(game_config.config_language.keys())
     language_average = 100 / len(language_skills)
     knowledge_skills = list(game_config.config_knowledge.keys())

@@ -42,7 +42,7 @@ def handle_add_small_hit_point(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    add_hit_point = add_time * 20
+    add_hit_point = add_time * 40
     character_data.hit_point += add_hit_point
     if character_data.hit_point > character_data.hit_point_max:
         add_hit_point -= character_data.hit_point - character_data.hit_point_max
@@ -70,7 +70,7 @@ def handle_add_small_mana_point(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    add_mana_point = add_time * 30
+    add_mana_point = add_time * 60
     character_data.mana_point += add_mana_point
     if character_data.mana_point > character_data.mana_point_max:
         add_mana_point -= character_data.mana_point - character_data.mana_point_max
@@ -215,7 +215,7 @@ def handle_eat_food(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    if character_data.behavior.eat_food != None:
+    if character_data.behavior.eat_food is not None:
         food: game_type.Food = character_data.behavior.eat_food
         eat_weight = 100
         if food.weight < eat_weight:
@@ -720,7 +720,7 @@ def handle_add_medium_hit_point(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    add_hit_point = add_time * 50
+    add_hit_point = add_time * 100
     character_data.hit_point += add_hit_point
     if character_data.hit_point > character_data.hit_point_max:
         add_hit_point -= character_data.hit_point - character_data.hit_point_max
@@ -748,7 +748,7 @@ def handle_add_medium_mana_point(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    add_mana_point = add_time * 75
+    add_mana_point = add_time * 150
     character_data.mana_point += add_mana_point
     if character_data.mana_point > character_data.mana_point_max:
         add_mana_point -= character_data.mana_point - character_data.mana_point_max
@@ -1003,7 +1003,7 @@ def handle_add_small_lust(
     now_lust = character_data.status[21]
     now_lust_multiple = 1 + now_lust / 10
     character_data.knowledge.setdefault(9, 0)
-    now_add_lust = (add_time + character_data.knowledge[9]) * now_lust
+    now_add_lust = (add_time + character_data.knowledge[9]) * now_lust_multiple
     character_data.status[21] += now_add_lust
     change_data.status.setdefault(21, 0)
     change_data.status[21] += now_add_lust
@@ -1036,7 +1036,7 @@ def handle_target_add_small_lust(
         now_lust = target_data.status[21]
         now_lust_multiple = 1 + now_lust / 10
         target_data.knowledge.setdefault(9, 0)
-        now_add_lust = (add_time + character_data.knowledge[9]) * now_lust
+        now_add_lust = (add_time + character_data.knowledge[9]) * now_lust_multiple
         target_data.status[21] += now_add_lust
         change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
         target_change: game_type.TargetChange = change_data.target_change[target_data.cid]

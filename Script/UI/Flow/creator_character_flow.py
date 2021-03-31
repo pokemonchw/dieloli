@@ -1,5 +1,4 @@
 import random
-import time
 from functools import wraps
 from typing import List
 from types import FunctionType
@@ -12,7 +11,6 @@ from Script.Design import (
     cooking,
     map_handle,
     interest,
-    clothing,
     attr_calculation,
 )
 from Script.UI.Moudle import panel, draw
@@ -90,9 +88,6 @@ def confirm_character_attr_panel():
         askfor_panel.draw()
         askfor_panel_return_list = askfor_panel.get_return_list()
         ask_list.extend(askfor_panel_return_list.keys())
-        item_panel_ask_list = []
-        item_old_page_id = ""
-        item_next_page_id = ""
         yrn = flow_handle.askfor_all(ask_list)
         if yrn in askfor_panel_return_list:
             return askfor_panel_return_list[yrn] == askfor_list[0]
@@ -196,7 +191,6 @@ def input_setting_panel() -> bool:
     Return arguments:
     bool -- 完成角色创建流程
     """
-    create_judge = 0
     character_data = cache.character_data[0]
     ask_list = [_("是"), _("否")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -219,10 +213,10 @@ def input_setting_panel() -> bool:
 def input_setting_now() -> bool:
     """ 启动详细信息设置 """
     panel_list = random.sample(setting_panel_data, len(setting_panel_data))
-    for panel in panel_list:
+    for now_panel in panel_list:
         line_feed_draw.draw()
         line.draw()
-        panel()
+        now_panel()
     return 1
 
 
@@ -357,7 +351,7 @@ def setting_nature_2_panel():
 def setting_nature_3_panel():
     """ 设置性格倾向:守信 """
     character_data = cache.character_data[0]
-    message = _(f"承诺过的事情就一定要做到？")
+    message = _("承诺过的事情就一定要做到？")
     ask_list = [_("会"), _("视情况而定")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(ask_list, message)
@@ -371,7 +365,7 @@ def setting_nature_3_panel():
 def setting_nature_4_panel():
     """ 设置性格区间:无私 """
     character_data = cache.character_data[0]
-    message = _(f"考虑问题时会顾及到别人的利益吗？")
+    message = _("考虑问题时会顾及到别人的利益吗？")
     ask_list = [_("会"), _("不会")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(ask_list, message)

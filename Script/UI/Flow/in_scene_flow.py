@@ -1,4 +1,4 @@
-from Script.Core import constant, cache_control, game_type
+from Script.Core import constant
 from Script.Design import handle_panel
 from Script.Config import normal_config
 from Script.UI.Panel import in_scene_panel

@@ -1,6 +1,4 @@
-from types import FunctionType
 from wcwidth import wcswidth
-from Script.Core import rich_text, constant
 from Script.Config import game_config, normal_config
 
 

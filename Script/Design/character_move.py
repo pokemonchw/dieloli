@@ -1,5 +1,5 @@
 from Script.Core import cache_control, constant, game_type
-from Script.Design import map_handle, update, character
+from Script.Design import map_handle, update
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -33,7 +33,7 @@ def own_charcter_move(target_scene: list):
     cache.now_panel_id = constant.Panel.IN_SCENE
 
 
-def character_move(character_id: str, target_scene: list) -> (str, list, list, int):
+def character_move(character_id: int, target_scene: list) -> (str, list, list, int):
     """
     通用角色移动控制
     Keyword arguments:
