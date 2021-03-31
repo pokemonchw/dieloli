@@ -2,6 +2,7 @@
 import threading
 import queue
 import json
+from multiprocessing import Process
 from Script.Core import main_frame
 from Script.Config import game_config, normal_config
 

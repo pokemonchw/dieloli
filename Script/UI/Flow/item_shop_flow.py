@@ -1,4 +1,3 @@
-from types import FunctionType
 from Script.Core import constant
 from Script.UI.Panel import item_shop_panel
 from Script.Config import normal_config

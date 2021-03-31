@@ -1,9 +1,11 @@
 import random
 import time
+import queue
 from functools import wraps
 from typing import Set, List
 from types import FunctionType
-from Script.Core import constant, cache_control, game_type, get_text
+from threading import Thread
+from Script.Core import constant, cache_control, game_type, get_text, save_handle
 from Script.Design import update, character, attr_calculation, course
 from Script.UI.Panel import see_character_info_panel, see_save_info_panel
 from Script.Config import normal_config, game_config
@@ -16,6 +18,22 @@ _: FunctionType = get_text._
 """ 翻译api """
 width: int = normal_config.config_normal.text_width
 """ 屏幕宽度 """
+instruct_queue = queue.Queue()
+""" 待处理的指令队列 """
+
+
+def init_instruct_handle_thread():
+    """ 初始化指令处理线程 """
+    while 1:
+        if not instruct_queue.empty():
+            instruct_queue.get()
+            save_handle.establish_save("auto")
+        time.sleep(1)
+
+
+instruct_handle_thread = Thread(target=init_instruct_handle_thread)
+""" 指令处理线程 """
+instruct_handle_thread.start()
 
 
 def handle_instruct(instruct: int):
@@ -24,6 +42,7 @@ def handle_instruct(instruct: int):
     Keyword arguments:
     instruct -- 指令id
     """
+    instruct_queue.put(instruct)
     if instruct in constant.instruct_premise_data:
         constant.handle_instruct_data[instruct]()
 
@@ -401,6 +420,7 @@ def handle_attend_class():
     character_data.behavior.duration = end_time
     character_data.behavior.behavior_id = constant.Behavior.ATTEND_CLASS
     character_data.state = constant.CharacterStatus.STATUS_ATTEND_CLASS
+    character_data.behavior.course_id = now_course
     update.game_update_flow(end_time)
 
 
@@ -437,4 +457,5 @@ def handle_teach_a_lesson():
     character_data.behavior.duration = end_time
     character_data.behavior.behavior_id = constant.Behavior.TEACHING
     character_data.state = constant.CharacterStatus.STATUS_TEACHING
+    character_data.behavior.course_id = course
     update.game_update_flow(end_time)

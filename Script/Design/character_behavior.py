@@ -1,12 +1,8 @@
-import os
 import random
 import datetime
-import time
-import asyncio
 from uuid import UUID
 from types import FunctionType
 from typing import Dict
-from functools import wraps
 from Script.Core import (
     cache_control,
     game_path_config,
@@ -25,7 +21,6 @@ from Script.Design import (
     cooking,
 )
 from Script.Config import game_config, normal_config
-from Script.UI.Moudle import draw
 
 game_path = game_path_config.game_path
 cache: game_type.Cache = cache_control.cache
@@ -46,7 +41,6 @@ def init_character_behavior():
         for character_id in cache.character_data:
             character_behavior(character_id, cache.game_time)
             judge_character_dead(character_id)
-        character_set = set(cache.character_data.keys())
         update_cafeteria()
     cache.over_behavior_character = set()
 
@@ -81,7 +75,7 @@ def character_behavior(character_id: int, now_time: datetime.datetime):
         if character_id not in cache.over_behavior_character:
             cache.over_behavior_character.add(character_id)
         return
-    if character_data.behavior.start_time == None:
+    if character_data.behavior.start_time is None:
         character.init_character_behavior_start_time(character_id, now_time)
     if character_data.state == constant.CharacterStatus.STATUS_ARDER:
         if character_id:
@@ -164,7 +158,7 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
         character_data.state = constant.CharacterStatus.STATUS_ARDER
         return 1
     last_hunger_time = start_time
-    if character_data.last_hunger_time != None:
+    if character_data.last_hunger_time is not None:
         last_hunger_time = character_data.last_hunger_time
     hunger_time = int((now_time - last_hunger_time).seconds / 60)
     character_data.status.setdefault(27, 0)
@@ -202,12 +196,9 @@ def search_target(
     bool -- 前提是否能够被满足
     """
     target_data = {}
-    now_test_judge = 0
     for target in target_list:
         if target in null_target:
             continue
-        if target == 7:
-            now_test_judge = 1
         if target not in game_config.config_target_premise_data:
             target_data.setdefault(1, set())
             target_data[1].add(target)
@@ -251,7 +242,7 @@ def search_target(
         else:
             now_value_list = list(now_target_data.keys())
             now_value_weight = value_handle.get_rand_value_for_value_region(now_value_list)
-            target_data.setdefault(now_max_weight, set())
+            target_data.setdefault(now_weight, set())
             target_data[now_weight].add(random.choice(list(now_target_data[now_value_weight])))
     if len(target_data):
         value_list = list(target_data.keys())

@@ -2,7 +2,7 @@ import os
 from tkinter import END
 from PIL.ImageTk import PhotoImage
 from PIL import Image
-from Script.Core import game_path_config, main_frame, game_type, cache_control
+from Script.Core import main_frame, game_type, cache_control
 
 textbox = main_frame.textbox
 image_data = {}

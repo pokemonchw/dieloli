@@ -57,7 +57,7 @@ GPU: \
 CPU: \
 在默认配置(2800个游戏角色)下，2015年9月发布的 i5 6200U 和2019年9月发布的 i7 10710U 仅差了23%，几乎可以忽略不计(由于游戏性设计的原因，本游戏为祖传单核游戏引擎) \
 Memory: \
-在默认配置(2800个游戏角色)下，游戏占用总内存不超过250MB \
+峰值需占用1GB左右内存，请确保运行游戏前电脑至少有2GB的空闲内存空间 \
 系统: \
 本游戏兼容 archlinux/steamos/chromeos/ubuntu/debian/aoscos 等绝大部分支持 gui 的 linux 系操作系统，同时也可以在 macos 和 windows7 及以上操作系统中运行 \
 配置调整: \
@@ -94,8 +94,9 @@ python3.9+
 
 联系方式
 ----
-e-mail:admin@byayoi.org \
-twitter:@nekoharuyayuzu
+e-mail:pokemonchw@gmail.com \
+twitter:@nekoharuyayuzu \
+企鹅裙:950487389
 
 请我喝奶茶QwQ
 ----

@@ -298,7 +298,6 @@ class MapSceneNameDraw:
             scene_path = path_edge[character_scene_id].copy()
             if character_scene_id in scene_path:
                 del scene_path[character_scene_id]
-            scene_path_list = list(scene_path.keys())
             draw_list = []
             for scene_id in scene_id_list:
                 load_scene_data = map_handle.get_scene_data_for_map(map_path_str, scene_id)
@@ -351,7 +350,9 @@ class GlobalSceneNamePanel:
         """ 当前面板的按钮返回 """
         self.end_index: int = 0
         """ 结束按钮id """
-        self.handle_panel = panel.PageHandlePanel(self.get_path_list(), ScenePathNameMoveDraw, 20, 3, self.width, 1)
+        self.handle_panel = panel.PageHandlePanel(
+            self.get_path_list(), ScenePathNameMoveDraw, 20, 3, self.width, 1
+        )
         self.end_index = self.handle_panel.end_index
 
     def get_path_list(self) -> list:

@@ -1,6 +1,6 @@
 from functools import wraps
 from types import FunctionType
-from Script.Core import game_type, constant
+from Script.Core import constant
 
 
 def handle_state_machine(state_machine_id: int, character_id: int):

@@ -1,5 +1,4 @@
 import os
-import time
 from typing import Dict
 from Script.Core import json_handle, value_handle, cache_control, game_type, constant
 

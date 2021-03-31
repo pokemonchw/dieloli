@@ -1,7 +1,6 @@
 import datetime
 import random
 import math
-import bisect
 import ephem
 from types import FunctionType
 from dateutil import relativedelta
@@ -336,7 +335,7 @@ def judge_attend_class_today(character_id: int) -> bool:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time: datetime.datetime = character_data.behavior.start_time
-    if now_time == None:
+    if now_time is None:
         now_time = cache.game_time
     now_week = now_time.weekday()
     now_month = now_time.month

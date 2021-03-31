@@ -1,6 +1,4 @@
 import random
-from functools import wraps
-from types import FunctionType
 from Script.Core import cache_control, game_type, value_handle, constant
 from Script.Design import map_handle
 from Script.UI.Moudle import draw

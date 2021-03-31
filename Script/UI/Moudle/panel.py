@@ -348,7 +348,7 @@ class VerticalDrawTextListGroup:
         for draw_list in new_group:
             now_width = int(self.width / len(draw_list))
             for value in draw_list:
-                if value != None:
+                if value is not None:
                     value.draw()
                 else:
                     now_draw = draw.NormalDraw()
@@ -424,7 +424,6 @@ class CenterDrawButtonListPanel:
 
     def draw(self):
         """ 绘制面板 """
-        now_draw = VerticalDrawTextListGroup(self.width)
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()
@@ -504,7 +503,6 @@ class LeftDrawIDButtonListPanel:
 
     def draw(self):
         """ 绘制面板 """
-        now_draw = VerticalDrawTextListGroup(self.width)
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()

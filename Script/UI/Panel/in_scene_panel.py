@@ -1,6 +1,5 @@
 from typing import List
 from types import FunctionType
-import time
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import game_info_panel, see_character_info_panel
 from Script.Core import (
@@ -242,7 +241,6 @@ class InScenePanel:
                     label.draw()
             see_instruct_panel.draw()
             ask_list.extend(see_instruct_panel.return_list)
-            target_id = character_data.target_character_id
             flow_handle.askfor_all(ask_list)
             py_cmd.clr_cmd()
 

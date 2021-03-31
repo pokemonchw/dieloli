@@ -1,5 +1,5 @@
 from uuid import UUID
-from typing import Dict, Tuple, List
+from typing import Tuple, List
 from types import FunctionType
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import see_clothing_info_panel, see_item_info_panel

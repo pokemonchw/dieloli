@@ -1,13 +1,8 @@
-import os
 import random
 import datetime
-from typing import Dict, List
 from Script.Core import (
     cache_control,
-    game_path_config,
-    json_handle,
     value_handle,
-    constant,
     game_type,
 )
 from Script.Design import game_time
@@ -54,7 +49,7 @@ def get_height(tem_name: int, age: int) -> game_type.Height:
     age -- 人物年龄
     """
     tem_data = game_config.config_height_tem_sex_data[tem_name]
-    initial_height = value_handle.get_gauss_rand(tem_data.max_value, tem_data.max_value)
+    initial_height = value_handle.get_gauss_rand(tem_data.min_value, tem_data.max_value)
     if tem_name in {0, 3}:
         expect_age = random.randint(18, 22)
         expect_height = initial_height / 0.2949

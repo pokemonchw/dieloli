@@ -1,6 +1,6 @@
 import os
 from types import FunctionType
-from Script.Config import normal_config, game_config
+from Script.Config import normal_config
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_save_info_panel
 from Script.Design import handle_panel
@@ -20,7 +20,6 @@ def title_panel():
     clear_screen.draw()
     width = config_normal.text_width
     title_info = panel.TitleAndRightInfoListPanel()
-    game_name = config_normal.game_name
     info_list = [config_normal.author, config_normal.verson_time, config_normal.verson]
     title_info.set(config_normal.game_name, info_list, width)
     title_info.draw()

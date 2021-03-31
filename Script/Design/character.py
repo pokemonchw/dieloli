@@ -1,5 +1,4 @@
 import random
-import uuid
 import datetime
 from typing import List
 from Script.Core import (
@@ -12,7 +11,6 @@ from Script.Design import (
     attr_calculation,
     clothing,
     nature,
-    map_handle,
 )
 from Script.Config import game_config
 
@@ -165,7 +163,7 @@ def judge_character_in_class_time(character_id: int) -> bool:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time: datetime.datetime = character_data.behavior.start_time
-    if now_time == None:
+    if now_time is None:
         now_time = cache.game_time
     now_time_value = now_time.hour * 100 + now_time.minute
     if character_data.age <= 18:

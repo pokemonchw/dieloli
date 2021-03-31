@@ -4,7 +4,7 @@ from uuid import UUID
 from Script.Core import get_text, game_type, cache_control, constant, flow_handle, text_handle
 from Script.UI.Moudle import panel, draw
 from Script.Design import cooking, update
-from Script.Config import normal_config
+from Script.Config import normal_config, game_config
 
 _: FunctionType = get_text._
 """ 翻译api """

@@ -1,4 +1,3 @@
-import time
 from Script.Design import character_behavior, game_time
 from Script.Core import py_cmd
 

@@ -1,7 +1,5 @@
-import math
 import random
 from Script.Core import value_handle, cache_control, constant, game_type
-from Script.Core.game_type import Character
 from Script.Design import map_handle
 from Script.Config import game_config
 
@@ -131,7 +129,6 @@ def init_class_teacher():
     teacher_index = len(cache.teacher_course_experience[0].keys())
     course_max_a = 0
     course_max_b = 0
-    vice_course_index_b = 0
     for school_id in cache.course_data:
         for phase in cache.course_data[school_id]:
             course_max_a += len(cache.course_data[school_id][phase].keys()) * 3

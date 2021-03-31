@@ -2,17 +2,21 @@ import os
 import pickle
 import shutil
 import datetime
+from types import FunctionType
+from multiprocessing import Process
 from Script.Core import (
     cache_control,
     game_path_config,
     game_type,
+    get_text,
 )
-from Script.Design import character_handle
 from Script.Config import normal_config
 
 game_path = game_path_config.game_path
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 def get_save_dir_path(save_id: str) -> str:
@@ -33,8 +37,13 @@ def judge_save_file_exist(save_id: str) -> bool:
     Keyword arguments:
     save_id -- 存档id
     """
-    save_path = get_save_dir_path(save_id)
-    return os.path.exists(save_path)
+    save_head_path = os.path.join(get_save_dir_path(save_id), "0")
+    if not os.path.exists(save_head_path):
+        return 0
+    save_path = os.path.join(get_save_dir_path(save_id), "1")
+    if not os.path.exists(save_path):
+        return 0
+    return 1
 
 
 def establish_save(save_id: str):
@@ -43,6 +52,12 @@ def establish_save(save_id: str):
     Keyword arguments:
     save_id -- 存档id
     """
+    now_process = Process(target=establish_save_now, args=(save_id,))
+    now_process.start()
+    now_process.join()
+
+
+def establish_save_now(save_id: str):
     save_verson = {
         "game_verson": normal_config.config_normal.verson,
         "game_time": cache.game_time,
@@ -79,9 +94,9 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
     """
     save_path = get_save_dir_path(save_id)
     file_path = os.path.join(save_path, data_id)
-    if not judge_save_file_exist(save_id):
+    if not os.path.exists(save_path):
         os.makedirs(save_path)
-    with open(file_path, "wb") as f:
+    with open(file_path, "wb+") as f:
         pickle.dump(write_data, f)
 
 

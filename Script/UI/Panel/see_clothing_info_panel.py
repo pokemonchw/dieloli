@@ -238,7 +238,7 @@ class WearClothingListPanel:
     def draw(self):
         """ 绘制对象 """
         py_cmd.clr_cmd()
-        if self.handle_panel != None:
+        if self.handle_panel is not None:
             while 1:
                 line_feed.draw()
                 title_draw = draw.TitleLineDraw(_("更衣室"), self.width)

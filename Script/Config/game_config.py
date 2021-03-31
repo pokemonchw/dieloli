@@ -1,9 +1,7 @@
 import os
-import configparser
-import time
 from typing import Dict, List, Set
 from Script.Config import config_def
-from Script.Core import game_type, json_handle, get_text
+from Script.Core import json_handle, get_text
 
 
 data_path = os.path.join("data", "data.json")

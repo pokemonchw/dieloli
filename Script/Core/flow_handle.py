@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 import time
-import os
 from types import FunctionType
 from Script.Core import (
     text_handle,
@@ -10,7 +9,6 @@ from Script.Core import (
     cache_control,
     constant,
 )
-from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -112,7 +110,7 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
     if cmd_func == null_func:
         cmd_map[cmd_number] = null_func
         return
-    elif cmd_func == None:
+    elif cmd_func is None:
         cmd_map[cmd_number] = null_func
         return
 
@@ -179,7 +177,7 @@ def _cmd_valid(order_number):
     order_number -- 对应命令数字
     """
     return (order_number in cmd_map) and (
-        cmd_map[order_number] != null_func and cmd_map[order_number] != None
+        cmd_map[order_number] != null_func and cmd_map[order_number] is not None
     )
 
 

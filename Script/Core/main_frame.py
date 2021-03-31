@@ -4,8 +4,6 @@ import json
 import uuid
 import psutil
 import signal
-import time
-import ctypes
 from tkinter import (
     ttk,
     Tk,
@@ -45,6 +43,15 @@ def close_window():
 # 显示主框架
 game_name = normal_config.config_normal.game_name
 root = Tk()
+screen_weight = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+if normal_config.config_normal.window_width + 30 > screen_weight:
+    normal_config.config_normal.window_width = screen_weight - 30
+if normal_config.config_normal.window_hight + 30 > screen_height:
+    normal_config.config_normal.window_hight = screen_height - 30
+now_font_size = int(normal_config.config_normal.window_width / normal_config.config_normal.text_width) * 2
+normal_config.config_normal.font_size = now_font_size
+normal_config.config_normal.order_font_size = now_font_size - 2
 dpi = root.winfo_fpixels("1i")
 root.tk.call("tk", "scaling", 1.0)
 root.title(game_name)
