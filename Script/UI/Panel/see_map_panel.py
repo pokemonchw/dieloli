@@ -362,7 +362,10 @@ class GlobalSceneNamePanel:
         list -- 路径列表
         """
         character_data: game_type.Character = cache.character_data[0]
-        class_room_path = map_handle.get_map_system_path_for_str(character_data.classroom)
+        if character_data.classroom == "":
+            class_room_path = []
+        else:
+            class_room_path = map_handle.get_map_system_path_for_str(character_data.classroom)
         office_room_path = character_data.officeroom
         square_path = ["2"]
         swim_path = ["14", "0"]
