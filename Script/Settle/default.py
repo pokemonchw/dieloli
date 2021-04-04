@@ -1004,6 +1004,7 @@ def handle_add_small_lust(
     now_lust_multiple = 1 + now_lust / 10
     character_data.knowledge.setdefault(9, 0)
     now_add_lust = (add_time + character_data.knowledge[9]) * now_lust_multiple
+    print(add_time,character_data.knowledge[9],now_lust,now_lust_multiple)
     character_data.status[21] += now_add_lust
     change_data.status.setdefault(21, 0)
     change_data.status[21] += now_add_lust
