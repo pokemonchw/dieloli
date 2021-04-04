@@ -56,7 +56,10 @@ def get_text_index(text: str) -> int:
             text = text.replace(style_text_tail, "")
     for i in range(len(text)):
         text_index += wcswidth(text[i])
-    return text_index + style_width
+    now_width = text_index + style_width
+    if now_width < 0:
+        now_width = 0
+    return now_width
 
 
 def full_to_half_text(ustring: str) -> str:
