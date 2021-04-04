@@ -36,9 +36,9 @@ class NormalDraw:
         int -- 文本长度
         """
         text_index = text_handle.get_text_index(self.text)
-        if int(text_index) > int(self.width):
-            return self.width
-        return text_index
+        if text_index > self.width:
+            return int(self.width)
+        return int(text_index)
 
     def draw(self):
         """ 绘制文本 """
@@ -122,7 +122,7 @@ class ImageDraw:
 
     def __len__(self) -> int:
         """ 图片绘制宽度 """
-        return self.width
+        return int(self.width)
 
 
 class BarDraw:
@@ -361,7 +361,7 @@ class CenterButton:
         Return arguments:
         int -- 文本长度
         """
-        return self.width
+        return int(self.width)
 
     def __it__(self, other: Button):
         """
