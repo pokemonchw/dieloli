@@ -36,13 +36,13 @@ class NormalDraw:
         int -- 文本长度
         """
         text_index = text_handle.get_text_index(self.text)
-        if text_index > self.width:
+        if int(text_index) > int(self.width):
             return self.width
         return text_index
 
     def draw(self):
         """ 绘制文本 """
-        if self.__len__() > self.width:
+        if int(len(self)) > int(self.width):
             now_text = ""
             if self.width > 0:
                 for i in self.text:
@@ -60,7 +60,7 @@ class WaitDraw(NormalDraw):
 
     def draw(self):
         """ 绘制文本 """
-        if self.__len__() > self.width:
+        if int(len(self)) > int(self.width):
             now_text = ""
             if self.width > 0:
                 for i in self.text:
@@ -83,7 +83,7 @@ class LineFeedWaitDraw(NormalDraw):
         text_list = self.text.split(r"\n")
         for text in text_list:
             now_width = text_handle.get_text_index(text)
-            if now_width > self.width:
+            if int(now_width) > int(self.width):
                 now_text = ""
                 if now_width > 0:
                     for i in text:
@@ -590,12 +590,12 @@ class CenterDraw(NormalDraw):
     """ 居中绘制文本 """
 
     def __gt__(self, other) -> bool:
-        return len(self) > len(other)
+        return int(len(self)) > int(len(other))
 
     def draw(self):
         """ 绘制文本 """
         self.width = int(self.width)
-        if len(self) > self.width:
+        if int(len(self)) > int(self.width):
             now_text = ""
             if self.width > 0:
                 for i in self.text:
@@ -604,13 +604,13 @@ class CenterDraw(NormalDraw):
                     break
                 now_text = now_text[:-2] + "~"
             io_init.era_print(now_text, self.style)
-        elif len(self) > self.width - 1:
+        elif int(len(self)) > int(self.width) - 1:
             now_text = " " + self.text
-        elif len(self) > self.width - 2:
+        elif int(len(self)) > int(self.width) - 2:
             now_text = " " + self.text + " "
         else:
             now_text = text_handle.align(self.text, "center", 0, 1, self.width)
-        if len(self) < self.width:
+        if int(len(self)) < int(self.width):
             now_text += " " * (int(self.width) - text_handle.get_text_index(now_text))
         io_init.era_print(now_text, self.style)
 
@@ -634,7 +634,7 @@ class CenterMergeDraw:
         return self.width
 
     def __gt__(self, other) -> int:
-        return len(self) > len(other)
+        return int(len(self)) > int(len(other))
 
     def draw(self):
         """ 绘制列表 """
@@ -660,7 +660,7 @@ class RightDraw(NormalDraw):
 
     def draw(self):
         """ 绘制文本 """
-        if len(self) > self.width:
+        if int(len(self)) > int(self.width):
             now_text = ""
             if self.width:
                 for i in self.text:
@@ -668,7 +668,7 @@ class RightDraw(NormalDraw):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
-        elif len(self) > self.width - 2:
+        elif int(len(self)) > int(self.width) - 2:
             now_text = " " + self.text
         else:
             now_text = text_handle.align(self.text, "right", 0, 1, self.width)
@@ -680,7 +680,7 @@ class LeftDraw(NormalDraw):
 
     def draw(self):
         """ 绘制文本 """
-        if len(self) > self.width:
+        if int(len(self)) > int(self.width):
             now_text = ""
             if self.width:
                 for i in self.text:
