@@ -29,6 +29,11 @@ from Script.Core import game_init
 import Script.Settle
 import Script.StateMachine
 import Script.UI.Flow
+import multiprocessing
+
+
+if __name__ == "__main__":
+    multiprocessing.freeze_support()
 
 game_time.init_time()
 game_init.run(start_flow.start_frame)
