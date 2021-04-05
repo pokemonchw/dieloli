@@ -115,3 +115,30 @@ def get_map_path_text(map_path: List[str]) -> str:
         map_name = cache.map_data[now_map_map_system_str].map_name
         now_path_text += map_name + "-"
     return now_path_text.rstrip("-")
+
+
+def get_value_text(value:float) -> str:
+    """
+    获取数值显示的文本
+    Keyword arguments:
+    value -- 数值
+    Return arguments:
+    str -- 文本显示
+    """
+    value = round(value,2)
+    company = ["K","M","G","T","P","E","Z","Y","B","N","D"]
+    int_value = int(value)
+    value_str = str(int_value)
+    if len(value_str) < 4:
+        value_str = str(value)
+    else:
+        company_index = int((len(value_str) - 1) / 3)
+        if company_index >= len(company):
+            company_index = len(company) - 1
+        value_str = value_str[:-company_index*3]
+        value_str += company[company_index]
+    if int(value) >= 0:
+        value_str = "+" + value_str
+    else:
+        value_str = "-" + value_str
+    return value_str
