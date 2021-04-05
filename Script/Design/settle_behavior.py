@@ -2,6 +2,7 @@ import datetime
 from functools import wraps
 from types import FunctionType
 from Script.Core import cache_control, constant, game_type, get_text, text_handle
+from Script.Design import attr_text
 from Script.UI.Moudle import panel, draw
 from Script.Config import game_config, normal_config
 
@@ -66,21 +67,21 @@ def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
         if len(status_data.status):
             now_text_list.extend(
                 [
-                    f"{game_config.config_character_state[i].name}:{text_handle.number_to_symbol_string(round(status_data.status[i],2))}"
+                    f"{game_config.config_character_state[i].name}:{attr_text.get_value_text(status_data.status[i])}"
                     for i in status_data.status
                 ]
             )
         if len(status_data.knowledge):
             now_text_list.extend(
                 [
-                    f"{game_config.config_knowledge[i].name}:{text_handle.number_to_symbol_string(round(status_data.knowledge[i],2))}"
+                    f"{game_config.config_knowledge[i].name}:{attr_text.get_value_text(status_data.knowledge[i])}"
                     for i in status_data.knowledge
                 ]
             )
         if len(status_data.language):
             now_text_list.extend(
                 [
-                    f"{game_config.config_language[i].name}:{text_handle.number_to_symbol_string(round(status_data.language[i],2))}"
+                    f"{game_config.config_language[i].name}:{attr_text.get_value_text(status_data.language[i])}"
                     for i in status_data.language
                 ]
             )

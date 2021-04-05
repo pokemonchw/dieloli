@@ -189,6 +189,7 @@ class SeeCharacterStatusPanel:
                 if status_id in character_data.status:
                     status_value = character_data.status[status_id]
                 status_value = round(status_value)
+                status_value = attr_text.get_value_text(status_value)
                 now_text = f"{status_text}:{status_value}"
                 status_text_list.append(now_text)
             if self.center_status:
@@ -480,9 +481,9 @@ class CharacterStatureInfoText:
         """ 当前最大可绘制宽度 """
         character_data: game_type.Character = cache.character_data[self.character_id]
         now_height = str(round(character_data.height.now_height, 2))
-        now_height_text = _("身高:") + now_height
+        now_height_text = _("身高:") + now_height + "cm"
         now_weight = str(round(character_data.weight, 2))
-        now_weight_text = _("体重:") + now_weight
+        now_weight_text = _("体重:") + now_weight + "kg"
         now_chest_tem_id = attr_calculation.judge_chest_group(character_data.chest.now_chest)
         now_chest_tem = game_config.config_chest[now_chest_tem_id]
         body_fat = str(round(character_data.bodyfat, 2))
@@ -521,9 +522,9 @@ class CharacterMeasurementsText:
         now_bust = str(round(character_data.measurements.bust, 2))
         now_hip = str(round(character_data.measurements.hip, 2))
         now_waist = str(round(character_data.measurements.waist, 2))
-        now_bust_text = _("胸围:") + now_bust
-        now_waist_text = _("腰围:") + now_waist
-        now_hip_text = _("臀围") + now_hip
+        now_bust_text = _("胸围:") + now_bust + "cm"
+        now_waist_text = _("腰围:") + now_waist + "cm"
+        now_hip_text = _("臀围") + now_hip + "cm"
         self.info_list = [now_bust_text, now_waist_text, now_hip_text]
         """ 绘制的文本列表 """
 
