@@ -459,3 +459,42 @@ def handle_teach_a_lesson():
     character_data.state = constant.CharacterStatus.STATUS_TEACHING
     character_data.behavior.course_id = course
     update.game_update_flow(end_time)
+
+
+@add_instruct(
+    constant.Instruct.PLAY_GUITAR,
+    constant.InstructType.PERFORM,
+    _("弹吉他"),
+    {constant.Premise.HAVE_GUITAR},
+)
+def handle_play_guitar():
+    """ 处理弹吉他指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.PLAY_GUITAR
+    character_data.state = constant.CharacterStatus.STATUS_PLAY_GUITAR
+    update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.SELF_STUDY,
+    constant.InstructType.STUDY,
+    _("自习"),
+    {
+        constant.Premise.IN_CLASSROOM,
+        constant.Premise.IS_STUDENT,
+    },
+)
+def handle_self_study():
+    """ 处理自习指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    school_id, phase = course.get_character_school_phase(0)
+    now_course_list = list(game_config.config_school_phase_course_data[school_id][phase])
+    now_course = random.choice(now_course_list)
+    character_data.behavior.behavior_id = constant.Behavior.SELF_STUDY
+    character_data.behavior.duration = 10
+    character_data.state = constant.CharacterStatus.STATUS_SELF_STUDY
+    character_data.behavior.course_id = now_course
+    update.game_update_flow(10)

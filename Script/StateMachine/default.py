@@ -699,3 +699,59 @@ def character_move_to_grove(character_id: int):
     character_data.behavior.move_target = move_path
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_ITEM_SHOP)
+def character_move_to_item_shop(character_id: int):
+    """
+    移动至超市场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    _, _, move_path, move_time = character_move.character_move(character_id, ["11"])
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.BUY_GUITAR)
+def character_buy_guitar(character_id: int):
+    """
+    购买吉他
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.item.add(4)
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.PLAY_GUITAR)
+def character_play_guitar(character_id: int):
+    """
+    弹吉他
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.PLAY_GUITAR
+    character_data.behavior.duration = 10
+    character_data.state = constant.CharacterStatus.STATUS_PLAY_GUITAR
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.SELF_STUDY)
+def character_self_study(character_id: int):
+    """
+    角色在自习
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.SELF_STUDY
+    school_id, phase = course.get_character_school_phase(character_id)
+    now_course_list = list(game_config.config_school_phase_course_data[school_id][phase])
+    now_course_id = random.choice(now_course_list)
+    character_data.behavior.duration = 10
+    character_data.behavior.course_id = now_course_id
+    character_data.state = constant.CharacterStatus.STATUS_SELF_STUDY
