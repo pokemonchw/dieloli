@@ -1233,3 +1233,161 @@ def handle_add_student_course_experience_for_in_class_room(
                 experience = character_data.language[language] / 1000 * language_interest
                 now_character_data.language.setdefault(language, 0)
                 now_character_data.language[language] += experience
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_PERFORMANCE)
+def handle_target_add_favorability_for_performance(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: datetime.datetime,
+):
+    """
+    按表演技能增加交互对象好感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    target_id = character_data.target_character_id
+    scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path]
+    if target_id == character_id or target_id not in scene_data.character_list:
+        return
+    target_data: game_type.Character = cache.character_data[target_id]
+    if target_data.dead:
+        return
+    character_data.knowledge.setdefault(11, 0)
+    add_favorability = character_data.knowledge[11] / 10
+    add_favorability = character.calculation_favorability(character_id, target_id, add_favorability)
+    if add_favorability:
+        change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_id]
+        character_handle.add_favorability(
+            character_id, target_data.cid, add_favorability, target_change, now_time
+        )
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_SING)
+def handle_target_add_favorability_for_sing(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: datetime.datetime,
+):
+    """
+    按演唱技能增加交互对象好感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    target_id = character_data.target_character_id
+    scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path]
+    if target_id == character_id or target_id not in scene_data.character_list:
+        return
+    target_data: game_type.Character = cache.character_data[target_id]
+    if target_data.dead:
+        return
+    character_data.knowledge.setdefault(15, 0)
+    add_favorability = character_data.knowledge[15] / 10
+    add_favorability = character.calculation_favorability(character_id, target_data.cid, add_favorability)
+    if add_favorability:
+        change_data.target_change.setdefault(target_id, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_id]
+        character_handle.add_favorability(
+            character_id, target_data.cid, add_favorability, target_change, now_time
+        )
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_PLAY_MUSIC)
+def handle_target_add_favorability_for_play_music(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: datetime.datetime,
+):
+    """
+    按演奏技能增加交互对象好感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    target_id = character_data.target_character_id
+    scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path]
+    if target_id == character_id or target_id not in scene_data.character_list:
+        return
+    target_data: game_type.Character = cache.character_data[target_id]
+    if target_data.dead:
+        return
+    character_data.knowledge.setdefault(25, 0)
+    add_favorability = character_data.knowledge[25] / 10
+    add_favorability = character.calculation_favorability(character_id, target_data.cid, add_favorability)
+    if add_favorability:
+        change_data.target_change.setdefault(target_id, game_type.TargetChange())
+        target_change: game_type.TargetChange = change_data.target_change[target_id]
+        character_handle.add_favorability(
+            character_id, target_data.cid, add_favorability, target_change, now_time
+        )
+
+
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_TARGET_INTEREST
+)
+def handle_target_add_favorability_for_target_interest(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: datetime.datetime,
+):
+    """
+    按交互对象兴趣增加交互对象好感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    target_id = character_data.target_character_id
+    scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path]
+    if target_id == character_id or target_id not in scene_data.character_list:
+        return
+    target_data: game_type.Character = cache.character_data[target_id]
+    if target_data.dead:
+        return
+    now_add_favorability = 0
+    for knowledge in target_data.knowledge_interest:
+        if target_data.knowledge_interest[knowledge] > 1:
+            if knowledge in character_data.knowledge:
+                now_add_favorability += character_data.knowledge[knowledge] / 10
+    for language in target_data.language_interest:
+        if target_data.language_interest[language] > 1:
+            if language in character_data.language:
+                now_add_favorability += character_data.language[language] / 10

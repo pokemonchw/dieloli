@@ -2614,3 +2614,77 @@ def handle_no_in_grove(character_id: int) -> int:
     if now_position[0] != "7":
         return 1
     return 0
+
+
+@add_premise(constant.Premise.NAKED_CHARACTER_IN_SCENE)
+def handle_naked_character_in_scene(character_id: int) -> int:
+    """
+    校验场景中是否有人一丝不挂
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path]
+    for now_character in scene_data.character_list:
+        if handle_is_naked(now_character):
+            return 1
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_IS_SING)
+def handle_target_is_sing(character_id: int) -> int:
+    """
+    校验交互对象是否正在唱歌
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_id = character_data.target_character_id
+    if target_id != character_id:
+        target_data: game_type.Character = cache.character_data[target_id]
+        return target_data.state == constant.CharacterStatus.STATUS_SINGING
+    return 0
+
+
+@add_premise(constant.Premise.NO_HAVE_GUITAR)
+def handle_no_have_guitar(character_id: int) -> int:
+    """
+    校验角色是否未拥有吉他
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return 4 not in character_data.item
+
+
+@add_premise(constant.Premise.IN_ITEM_SHOP)
+def handle_in_item_shop(character_id: int) -> int:
+    """
+    校验角色是否在超市中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.position == ["11"]
+
+
+@add_premise(constant.Premise.NO_IN_ITEM_SHOP)
+def handle_no_in_item_shop(character_id: int) -> int:
+    """
+    校验角色是否不在超市中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.position != ["11"]

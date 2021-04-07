@@ -39,6 +39,10 @@ class CharacterStatus:
     """ 摸胸 """
     STATUS_TEACHING = 16
     """ 教学 """
+    STATUS_PLAY_GUITAR = 17
+    """ 弹吉他 """
+    STATUS_SELF_STUDY = 18
+    """ 自习 """
 
 
 class Behavior:
@@ -78,6 +82,10 @@ class Behavior:
     """ 摸胸 """
     TEACHING = 16
     """ 教学 """
+    PLAY_GUITAR = 17
+    """ 弹吉他 """
+    SELF_STUDY = 18
+    """ 自习 """
 
 
 class StateMachine:
@@ -151,6 +159,14 @@ class StateMachine:
     """ 在教室教课 """
     MOVE_TO_GROVE = 33
     """ 移动至小树林场景 """
+    MOVE_TO_ITEM_SHOP = 34
+    """ 移动至超市场景 """
+    BUY_GUITAR = 35
+    """ 购买吉他 """
+    PLAY_GUITAR = 36
+    """ 弹吉他 """
+    SELF_STUDY = 37
+    """ 自习 """
 
 
 class Panel:
@@ -493,6 +509,16 @@ class Premise:
     """ 处于小树林场景 """
     NO_IN_GROVE = 157
     """ 未处于小树林场景 """
+    NAKED_CHARACTER_IN_SCENE = 158
+    """ 场景中有人一丝不挂 """
+    TARGET_IS_SING = 159
+    """ 交互对象正在唱歌 """
+    NO_HAVE_GUITAR = 160
+    """ 未拥有吉他 """
+    IN_ITEM_SHOP = 161
+    """ 不在超市中 """
+    NO_IN_ITEM_SHOP = 162
+    """ 在超市中 """
 
 
 class BehaviorEffect:
@@ -568,6 +594,14 @@ class BehaviorEffect:
     """ 按学习课程增加少量对应技能经验 """
     ADD_STUDENTS_COURSE_EXPERIENCE_FOR_IN_CLASS_ROOM = 34
     """ 按课程增加教室内本班级学生的技能经验 """
+    TARGET_ADD_FAVORABILITY_FOR_PERFORMANCE = 35
+    """ 按表演技能增加交互对象好感 """
+    TARGET_ADD_FAVORABILITY_FOR_SING = 36
+    """ 按演唱技能增加交互对象好感 """
+    TARGET_ADD_FAVORABILITY_FOR_PLAY_MUSIC = 37
+    """ 按演奏技能增加交互对象好感 """
+    TARGET_ADD_FAVORABILITY_FOR_TARGET_INTEREST = 38
+    """ 按交互对象兴趣增加交互对象好感 """
 
 
 class InstructType:
@@ -610,6 +644,8 @@ class Instruct:
     """ 唱歌 """
     PLAY_PIANO = 0
     """ 弹钢琴 """
+    PLAY_GUITAR = 0
+    """ 弹吉他 """
     TOUCH_HEAD = 0
     """ 摸头 """
     TOUCH_CHEST = 0
@@ -636,6 +672,8 @@ class Instruct:
     """ 上课 """
     TEACH_A_LESSON = 0
     """ 教课 """
+    SELF_STUDY = 0
+    """ 自习 """
     VIEW_THE_SCHOOL_TIMETABLE = 0
     """ 查看课程表 """
     SEE_ATTR = 0
