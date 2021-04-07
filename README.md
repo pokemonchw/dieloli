@@ -100,4 +100,4 @@ twitter:@nekoharuyayuzu \
 
 请我喝奶茶QwQ
 ----
-请前往:[爱发电](https://afadian.net/@byayoi)
+请前往:[爱发电](https://afdian.net/@byayoi)
