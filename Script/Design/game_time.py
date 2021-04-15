@@ -15,6 +15,10 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
+gatech = ephem.Observer()
+gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
+sun = ephem.Sun()
+moon = ephem.Moon()
 
 
 def init_time():
@@ -265,11 +269,7 @@ def get_sun_time(now_time: datetime.datetime) -> int:
     Return arguments:
     int -- 太阳位置id
     """
-    gatech = ephem.Observer()
-    gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
-    now_add_time = round(cache.school_longitude / 15)
-    gatech.date = get_sub_date(hour=-now_add_time, old_date=now_time)
-    sun = ephem.Sun()
+    gatech.date = ephem.Date(now_time.utcnow())
     sun.compute(gatech)
     now_az = sun.az * 57.2957795
     if now_az >= 225 and now_az < 255:
@@ -305,19 +305,12 @@ def get_moon_phase(now_time: datetime.datetime) -> int:
     Return arguments:
     int -- 月相配置id
     """
-    gatech = ephem.Observer()
-    gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
-    now_add_time = round(cache.school_longitude / 15)
-    new_time = get_sub_date(hour=-now_add_time, old_date=now_time)
-    gatech.date = new_time
-    moon = ephem.Moon()
+    gatech.date = ephem.Date(now_time.utcnow())
     moon.compute(gatech)
     now_phase = moon.phase
-    new_time = get_sub_date(day=1, old_date=new_time)
-    gatech.date = new_time
-    next_moon = ephem.Moon()
-    next_moon.compute(gatech)
-    next_phase = next_moon.phase
+    gatech.date += 1
+    moon.compute(gatech)
+    next_phase = moon.phase
     now_type = next_phase > now_phase
     for phase in game_config.config_moon_data[now_type]:
         phase_config = game_config.config_moon[phase]
@@ -342,9 +335,9 @@ def judge_attend_class_today(character_id: int) -> bool:
     if now_month not in {3, 4, 5, 6, 8, 9, 10, 11, 12}:
         return 0
     if character_data.age <= 18:
-        if character_data.age > 14:
+        if character_data.age > 15:
             return 1
-        if character_data.age > 12 and now_week < 6:
+        if character_data.age > 13 and now_week < 6:
             return 1
         if now_week < 5:
             return 1
