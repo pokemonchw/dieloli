@@ -638,6 +638,10 @@ class Cache:
         """ 学校纬度 """
         self.is_collection: bool = 0
         """ 启用收藏模式 """
+        self.sun_phase: Dict[str, Dict[int, Dict[int, int]]] = {}
+        """ 指定日期下每分钟太阳位置 日期:时:分:位置id """
+        self.moon_phase: Dict[str, int] = {}
+        """ 指定日期月相记录 日期:月相id """
 
 
 class TargetChange:

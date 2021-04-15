@@ -1,4 +1,5 @@
 import datetime
+import time
 import random
 import math
 import ephem
@@ -19,6 +20,7 @@ gatech = ephem.Observer()
 gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
 sun = ephem.Sun()
 moon = ephem.Moon()
+time_zone = datetime.timezone(datetime.timedelta(hours=+8))
 
 
 def init_time():
@@ -269,9 +271,37 @@ def get_sun_time(now_time: datetime.datetime) -> int:
     Return arguments:
     int -- 太阳位置id
     """
-    gatech.date = ephem.Date(now_time.utcnow())
-    sun.compute(gatech)
-    now_az = sun.az * 57.2957795
+    if "sun_phase" not in cache.__dict__:
+        cache.__dict__["sun_phase"] = {}
+    now_date_str = f"{now_time.year}/{now_time.month}/{now_time.day}"
+    if now_date_str not in cache.sun_phase:
+        now_time = now_time.astimezone(time_zone)
+        new_time = datetime.datetime(now_time.year, now_time.month, now_time.day)
+        gatech.date = datetime.datetime.utcfromtimestamp(new_time.timestamp())
+        for i in range(0, 1440):
+            gatech.date += ephem.minute
+            sun.compute(gatech)
+            now_az = sun.az * 57.2957795
+            new_date: datetime.datetime = gatech.date.datetime().replace(tzinfo=datetime.timezone.utc)
+            new_date = new_date.astimezone(time_zone)
+            new_date_str = f"{new_date.year}/{new_date.month}/{new_date.day}"
+            cache.sun_phase.setdefault(new_date_str, {})
+            cache.sun_phase[new_date_str].setdefault(new_date.hour, {})
+            cache.sun_phase[new_date_str][new_date.hour][new_date.minute] = get_sun_phase_for_sun_az(now_az)
+        if len(cache.sun_phase) > 3:
+            del_date = list(cache.sun_phase.keys())[0]
+            del cache.sun_phase[del_date]
+    return cache.sun_phase[now_date_str][now_time.hour][now_time.minute]
+
+
+def get_sun_phase_for_sun_az(now_az: float) -> int:
+    """
+    根据太阳夹角获取太阳位置对应配表id
+    Keyword arguments:
+    now_az -- 太阳夹角
+    Return arguments:
+    太阳位置配表id
+    """
     if now_az >= 225 and now_az < 255:
         return 8
     elif now_az >= 255 and now_az < 285:
@@ -305,17 +335,27 @@ def get_moon_phase(now_time: datetime.datetime) -> int:
     Return arguments:
     int -- 月相配置id
     """
-    gatech.date = ephem.Date(now_time.utcnow())
-    moon.compute(gatech)
-    now_phase = moon.phase
-    gatech.date += 1
-    moon.compute(gatech)
-    next_phase = moon.phase
-    now_type = next_phase > now_phase
-    for phase in game_config.config_moon_data[now_type]:
-        phase_config = game_config.config_moon[phase]
-        if now_phase > phase_config.min_phase and now_phase <= phase_config.max_phase:
-            return phase_config.cid
+    if "moon_phase" not in cache.__dict__:
+        cache.__dict__["moon_phase"] = {}
+    now_date_str = f"{now_time.year}/{now_time.month}/{now_time.day}"
+    if now_date_str not in cache.moon_phase:
+        new_time = datetime.datetime(now_time.year, now_time.month, now_time.day)
+        gatech.date = datetime.datetime.utcfromtimestamp(time.mktime(new_time.utctimetuple()))
+        moon.compute(gatech)
+        now_phase = moon.phase
+        gatech.date += 1
+        moon.compute(gatech)
+        next_phase = moon.phase
+        now_type = next_phase > now_phase
+        for phase in game_config.config_moon_data[now_type]:
+            phase_config = game_config.config_moon[phase]
+            if now_phase > phase_config.min_phase and now_phase <= phase_config.max_phase:
+                cache.moon_phase[now_date_str] = phase_config.cid
+                break
+        if len(cache.moon_phase) > 3:
+            del_date = list(cache.moon_phase.keys())[0]
+            del cache.moon_phase[del_date]
+    return cache.moon_phase[now_date_str]
 
 
 def judge_attend_class_today(character_id: int) -> bool:
