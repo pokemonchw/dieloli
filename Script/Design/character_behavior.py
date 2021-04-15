@@ -1,5 +1,6 @@
 import random
 import datetime
+import time
 from uuid import UUID
 from types import FunctionType
 from typing import Dict
@@ -96,7 +97,10 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
     """
     premise_data = {}
     target, _, judge = search_target(
-        character_id, list(game_config.config_target.keys()), set(), premise_data
+        character_id,
+        list(game_config.config_target.keys()),
+        set(),
+        premise_data,
     )
     if judge:
         target_config = game_config.config_target[target]
@@ -181,7 +185,10 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
 
 
 def search_target(
-    character_id: int, target_list: list, null_target: set, premise_data: Dict[int, int]
+    character_id: int,
+    target_list: list,
+    null_target: set,
+    premise_data: Dict[int, int],
 ) -> (int, int, bool):
     """
     查找可用目标
@@ -221,7 +228,10 @@ def search_target(
                 if premise in game_config.config_effect_target_data and premise not in premise_data:
                     now_target_list = game_config.config_effect_target_data[premise] - null_target
                     now_target, now_target_weight, now_judge = search_target(
-                        character_id, now_target_list, null_target, premise_data
+                        character_id,
+                        now_target_list,
+                        null_target,
+                        premise_data,
                     )
                     if now_judge:
                         now_target_data.setdefault(now_target_weight, set())
