@@ -335,9 +335,9 @@ def judge_attend_class_today(character_id: int) -> bool:
     if now_month not in {3, 4, 5, 6, 8, 9, 10, 11, 12}:
         return 0
     if character_data.age <= 18:
-        if character_data.age > 14:
+        if character_data.age > 15:
             return 1
-        if character_data.age > 12 and now_week < 6:
+        if character_data.age > 13 and now_week < 6:
             return 1
         if now_week < 5:
             return 1

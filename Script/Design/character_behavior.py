@@ -36,13 +36,18 @@ def init_character_behavior():
     """
     角色行为树总控制
     """
+    t1 = time.time()
     while 1:
         if len(cache.over_behavior_character) >= len(cache.character_data):
             break
         for character_id in cache.character_data:
+            if character_id in cache.over_behavior_character:
+                continue
             character_behavior(character_id, cache.game_time)
             judge_character_dead(character_id)
         update_cafeteria()
+    t2 = time.time()
+    print(t2 - t1)
     cache.over_behavior_character = set()
 
 
@@ -69,8 +74,6 @@ def character_behavior(character_id: int, now_time: datetime.datetime):
     character_id -- 角色id
     now_time -- 指定时间
     """
-    if character_id in cache.over_behavior_character:
-        return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         if character_id not in cache.over_behavior_character:
