@@ -274,15 +274,20 @@ def get_sun_time(now_time: datetime.datetime) -> int:
     if "sun_phase" not in cache.__dict__:
         cache.__dict__["sun_phase"] = {}
     now_date_str = f"{now_time.year}/{now_time.month}/{now_time.day}"
-    if now_date_str not in cache.sun_phase:
-        now_time = now_time.astimezone(time_zone)
+    now_time = now_time.astimezone(time_zone)
+    if (
+        now_date_str not in cache.sun_phase
+        or now_time.hour not in cache.sun_phase[now_date_str]
+        or now_time.minute not in cache.sun_phase[now_date_str][now_time.hour]
+    ):
         new_time = datetime.datetime(now_time.year, now_time.month, now_time.day)
         gatech.date = datetime.datetime.utcfromtimestamp(new_time.timestamp())
-        for i in range(0, 1440):
+        for i in range(0, 1439):
             gatech.date += ephem.minute
             sun.compute(gatech)
             now_az = sun.az * 57.2957795
-            new_date: datetime.datetime = gatech.date.datetime().replace(tzinfo=datetime.timezone.utc)
+            new_date: datetime.datetime = gatech.date.datetime()
+            new_date.astimezone(datetime.timezone.utc)
             new_date = new_date.astimezone(time_zone)
             new_date_str = f"{new_date.year}/{new_date.month}/{new_date.day}"
             cache.sun_phase.setdefault(new_date_str, {})
@@ -340,6 +345,7 @@ def get_moon_phase(now_time: datetime.datetime) -> int:
     now_date_str = f"{now_time.year}/{now_time.month}/{now_time.day}"
     if now_date_str not in cache.moon_phase:
         new_time = datetime.datetime(now_time.year, now_time.month, now_time.day)
+        new_time.astimezone(time_zone)
         gatech.date = datetime.datetime.utcfromtimestamp(time.mktime(new_time.utctimetuple()))
         moon.compute(gatech)
         now_phase = moon.phase

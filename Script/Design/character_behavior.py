@@ -1,6 +1,7 @@
 import random
 import datetime
 import time
+import numpy
 from uuid import UUID
 from types import FunctionType
 from typing import Dict
@@ -76,8 +77,6 @@ def character_behavior(character_id: int, now_time: datetime.datetime):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
-        if character_id not in cache.over_behavior_character:
-            cache.over_behavior_character.add(character_id)
         return
     if character_data.behavior.start_time is None:
         character.init_character_behavior_start_time(character_id, now_time)
@@ -99,11 +98,13 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
     character_id -- 角色id
     """
     premise_data = {}
+    target_weight_data = {}
     target, _, judge = search_target(
         character_id,
         list(game_config.config_target.keys()),
         set(),
         premise_data,
+        target_weight_data,
     )
     if judge:
         target_config = game_config.config_target[target]
@@ -126,17 +127,20 @@ def judge_character_dead(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
+        if character_id not in cache.over_behavior_character:
+            cache.over_behavior_character.add(character_id)
         return
     character_data.status.setdefault(27, 0)
     character_data.status.setdefault(28, 0)
-    if character_data.status[27] >= 100 or character_data.status[28] >= 100:
+    if (
+        character_data.status[27] >= 100
+        or character_data.status[28] >= 100
+        or character_data.hit_point <= 0
+    ):
         character_data.dead = 1
         character_data.state = 13
-        return
-    if character_data.hit_point <= 0:
-        character_data.dead = 1
-        character_data.state = 13
-        return
+        if character_id not in cache.over_behavior_character:
+            cache.over_behavior_character.add(character_id)
 
 
 def judge_character_status(character_id: int, now_time: datetime.datetime) -> int:
@@ -192,6 +196,7 @@ def search_target(
     target_list: list,
     null_target: set,
     premise_data: Dict[int, int],
+    target_weight_data: Dict[int, int],
 ) -> (int, int, bool):
     """
     查找可用目标
@@ -200,6 +205,7 @@ def search_target(
     target_list -- 检索的目标列表
     null_target -- 被排除的目标
     premise_data -- 已算出的前提权重
+    target_weight_data -- 已算出权重的目标列表
     Return arguments:
     int -- 目标id
     int -- 目标权重
@@ -209,9 +215,14 @@ def search_target(
     for target in target_list:
         if target in null_target:
             continue
+        if target in target_weight_data:
+            target_data.setdefault(target_weight_data[target], set())
+            target_data[target_weight_data[target]].add(target)
+            continue
         if target not in game_config.config_target_premise_data:
             target_data.setdefault(1, set())
             target_data[1].add(target)
+            target_weight_data[target] = 1
             continue
         target_premise_list = game_config.config_target_premise_data[target]
         now_weight = 0
@@ -235,6 +246,7 @@ def search_target(
                         now_target_list,
                         null_target,
                         premise_data,
+                        target_weight_data,
                     )
                     if now_judge:
                         now_target_data.setdefault(now_target_weight, set())
@@ -248,17 +260,17 @@ def search_target(
                     break
         if now_target_pass_judge:
             null_target.add(target)
+            target_weight_data[target] = 0
             continue
         if premise_judge:
             target_data.setdefault(now_weight, set())
             target_data[now_weight].add(target)
+            target_weight_data[target] = now_weight
         else:
-            now_value_list = list(now_target_data.keys())
-            now_value_weight = value_handle.get_rand_value_for_value_region(now_value_list)
+            now_value_weight = value_handle.get_rand_value_for_value_region(now_target_data.keys())
             target_data.setdefault(now_weight, set())
             target_data[now_weight].add(random.choice(list(now_target_data[now_value_weight])))
     if len(target_data):
-        value_list = list(target_data.keys())
-        value_weight = value_handle.get_rand_value_for_value_region(value_list)
+        value_weight = value_handle.get_rand_value_for_value_region(target_data.keys())
         return random.choice(list(target_data[value_weight])), value_weight, 1
     return "", 0, 0

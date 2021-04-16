@@ -2,6 +2,7 @@ import random
 import bisect
 import itertools
 import math
+import numpy
 from typing import Dict, List
 
 
@@ -88,7 +89,7 @@ def get_old_value_for_list(now_int: int, int_list: List[int]) -> int:
     return int_list[now_id - 1]
 
 
-def list_of_groups(init_list: list, children_list_len: int) -> List[list]:
+def list_of_groups(init_list: list, children_list_len: int) -> List[List[any]]:
     """
     将列表分割为指定长度的列表集合
     Keyword arguments:
