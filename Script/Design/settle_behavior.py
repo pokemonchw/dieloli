@@ -272,7 +272,7 @@ def get_favorability_social(favorability: int) -> int:
         return 1
     elif favorability < 200000:
         return 2
-    elif now_favorability < 4000000:
+    elif favorability < 4000000:
         return 3
     elif favorability < 80000000:
         return 4
