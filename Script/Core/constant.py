@@ -3,7 +3,7 @@ from types import FunctionType
 
 
 class CharacterStatus:
-    """ 角色状态id """
+    """角色状态id"""
 
     STATUS_ARDER = 0
     """ 休闲状态 """
@@ -46,7 +46,7 @@ class CharacterStatus:
 
 
 class Behavior:
-    """ 行为id """
+    """行为id"""
 
     SHARE_BLANKLY = 0
     """ 发呆 """
@@ -89,7 +89,7 @@ class Behavior:
 
 
 class StateMachine:
-    """ 状态机id """
+    """状态机id"""
 
     MOVE_TO_CLASS = 0
     """ 移动到所属教室 """
@@ -170,7 +170,7 @@ class StateMachine:
 
 
 class Panel:
-    """ 面板id """
+    """面板id"""
 
     TITLE = 0
     """ 标题面板 """
@@ -191,7 +191,7 @@ class Panel:
 
 
 class Premise:
-    """ 前提id """
+    """前提id"""
 
     IN_CAFETERIA = 0
     """ 处于取餐区 """
@@ -522,7 +522,7 @@ class Premise:
 
 
 class BehaviorEffect:
-    """ 行为结算效果函数 """
+    """行为结算效果函数"""
 
     ADD_SMALL_HIT_POINT = 0
     """ 增加少量体力 """
@@ -605,7 +605,7 @@ class BehaviorEffect:
 
 
 class InstructType:
-    """ 指令类型 """
+    """指令类型"""
 
     DIALOGUE = 0
     """ 对话 """
@@ -632,7 +632,7 @@ class InstructType:
 
 
 class Instruct:
-    """ 指令id """
+    """指令id"""
 
     CHAT = 0
     """ 闲聊 """

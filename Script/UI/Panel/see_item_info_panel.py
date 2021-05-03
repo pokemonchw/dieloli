@@ -22,7 +22,7 @@ class SeeCharacterItemBagPanel:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 绘制的角色id """
         self.width: int = width
@@ -36,7 +36,7 @@ class SeeCharacterItemBagPanel:
         """ 页面控制对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         title_draw = draw.TitleLineDraw(_("人物道具"), self.width)
         title_draw.draw()
         self.return_list = []
@@ -57,7 +57,7 @@ class ItemNameDraw:
     """
 
     def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text: int = int(text)
         """ 道具的配表id """
         self.draw_text: str = ""
@@ -86,7 +86,7 @@ class ItemNameDraw:
             self.draw_text = f"[{item_name}]"
 
     def draw(self):
-        """ 绘制道具 """
+        """绘制道具"""
         if self.is_button:
             now_draw = draw.Button(self.draw_text, self.button_return, cmd_func=self.draw_item_info)
         else:
@@ -96,7 +96,7 @@ class ItemNameDraw:
         now_draw.draw()
 
     def draw_item_info(self):
-        """ 绘制道具信息 """
+        """绘制道具信息"""
         now_draw = ItemInfoDraw(self.text, window_width)
         now_draw.draw()
 
@@ -110,14 +110,14 @@ class ItemInfoDraw:
     """
 
     def __init__(self, cid: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.cid: int = int(cid)
         """ 道具的配表id """
         self.width: int = width
         """ 最大宽度 """
 
     def draw(self):
-        """ 绘制道具信息 """
+        """绘制道具信息"""
         py_cmd.clr_cmd()
         item_config = game_config.config_item[self.cid]
         item_draw = draw.WaitDraw()

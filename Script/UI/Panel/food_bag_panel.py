@@ -26,7 +26,7 @@ class FoodBagPanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
         self.now_panel = _("主食")
@@ -35,7 +35,7 @@ class FoodBagPanel:
         """ 当前名字列表控制面板 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         title_draw = draw.TitleLineDraw(_("食物背包"), self.width)
         food_type_list = [_("主食"), _("零食"), _("饮品"), _("水果"), _("食材"), _("调料")]
         food_id_list = list(
@@ -109,7 +109,7 @@ class SeeFoodListByFoodNameDraw:
     def __init__(
         self, text: Tuple[str, Set], width: int, is_button: bool, num_button: bool, button_id: int
     ):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text = text[0]
         """ 食物名字 """
         self.uid_list: list = list(text[1])
@@ -148,11 +148,11 @@ class SeeFoodListByFoodNameDraw:
         """ 绘制的对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.now_draw.draw()
 
     def see_food_shop_food_list(self):
-        """ 按食物名字显示食物商店的食物列表 """
+        """按食物名字显示食物商店的食物列表"""
         title_draw = draw.TitleLineDraw(self.text, window_width)
         page_handle = panel.PageHandlePanel(
             self.uid_list, EatFoodByFoodNameDraw, 10, 1, window_width, 1, 1, 0
@@ -234,11 +234,11 @@ class EatFoodByFoodNameDraw:
         """ 绘制的对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.now_draw.draw()
 
     def eat_food(self):
-        """ 食用食物 """
+        """食用食物"""
         update.game_update_flow(0)
         character_data: game_type.Character = cache.character_data[0]
         now_food = character_data.food_bag[self.text]

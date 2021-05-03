@@ -17,13 +17,13 @@ cache: game_type.Cache = cache_control.cache
 
 
 class NormalDraw:
-    """ 通用文本绘制类型 """
+    """通用文本绘制类型"""
 
     style: str = "standard"
     """ 文本的样式 """
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = 0
         """ 当前最大可绘制宽度 """
         self.text = ""
@@ -41,7 +41,7 @@ class NormalDraw:
         return int(text_index)
 
     def draw(self):
-        """ 绘制文本 """
+        """绘制文本"""
         if int(len(self)) > int(self.width):
             now_text = ""
             if self.width > 0:
@@ -56,10 +56,10 @@ class NormalDraw:
 
 
 class WaitDraw(NormalDraw):
-    """ 绘制并等待玩家鼠标左右键或输入回车 """
+    """绘制并等待玩家鼠标左右键或输入回车"""
 
     def draw(self):
-        """ 绘制文本 """
+        """绘制文本"""
         if int(len(self)) > int(self.width):
             now_text = ""
             if self.width > 0:
@@ -76,10 +76,10 @@ class WaitDraw(NormalDraw):
 
 
 class LineFeedWaitDraw(NormalDraw):
-    """ 每次换行时等待玩家左右键输入或输入回车 """
+    """每次换行时等待玩家左右键输入或输入回车"""
 
     def draw(self):
-        """ 绘制文本 """
+        """绘制文本"""
         text_list = self.text.split(r"\n")
         for text in text_list:
             now_width = text_handle.get_text_index(text)
@@ -110,26 +110,26 @@ class ImageDraw:
     """
 
     def __init__(self, image_name: str):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.image_name = image_name
         """ 图片id """
         self.width = 1
         """ 图片宽度 """
 
     def draw(self):
-        """ 绘制图片 """
+        """绘制图片"""
         io_init.image_print(self.image_name)
 
     def __len__(self) -> int:
-        """ 图片绘制宽度 """
+        """图片绘制宽度"""
         return int(self.width)
 
 
 class BarDraw:
-    """ 比例条绘制 """
+    """比例条绘制"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width = 0
         """ 比例条最大长度 """
         self.bar_id = ""
@@ -161,7 +161,7 @@ class BarDraw:
                 self.draw_list.append(now_draw)
 
     def draw(self):
-        """ 绘制比例条 """
+        """绘制比例条"""
         for bar in self.draw_list:
             bar.draw()
 
@@ -175,10 +175,10 @@ class BarDraw:
 
 
 class InfoBarDraw:
-    """ 带有文本和数值描述的比例条 例: 生命:[图片](2000/2000) """
+    """带有文本和数值描述的比例条 例: 生命:[图片](2000/2000)"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = 0
         """ 比例条最大长度 """
         self.bar_id: str = ""
@@ -224,7 +224,7 @@ class InfoBarDraw:
         self.draw_list = [fix_draw, info_draw, bar_draw, value_draw, fix_draw]
 
     def draw(self):
-        """ 绘制比例条 """
+        """绘制比例条"""
         for bar in self.draw_list:
             bar.draw()
 
@@ -250,7 +250,7 @@ class Button:
         cmd_func=None,
         args=(),
     ):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text: str = text
         """ 按钮文本 """
         self.return_text: str = return_text
@@ -285,7 +285,7 @@ class Button:
         return len(self) < len(other)
 
     def draw(self):
-        """ 绘制按钮 """
+        """绘制按钮"""
         if self.width < len(self):
             now_text = ""
             if self.width > 0:
@@ -337,7 +337,7 @@ class CenterButton:
         cmd_func: FunctionType = None,
         args=(),
     ):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text: str = text
         """ 按钮文本 """
         self.return_text: str = return_text
@@ -374,7 +374,7 @@ class CenterButton:
         return self.width < other.width
 
     def draw(self):
-        """ 绘制按钮 """
+        """绘制按钮"""
         if self.width < text_handle.get_text_index(self.text):
             now_text = ""
             if self.width > 0:
@@ -412,7 +412,7 @@ class LeftButton(CenterButton):
     """
 
     def draw(self):
-        """ 绘制按钮 """
+        """绘制按钮"""
         if self.width < text_handle.get_text_index(self.text):
             now_text = ""
             if self.width > 0:
@@ -445,7 +445,7 @@ class LineDraw:
     """
 
     def __init__(self, text: str, width: int, style="standard"):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text = text
         """ 用于绘制线条的文本 """
         self.style = style
@@ -462,7 +462,7 @@ class LineDraw:
         return self.width
 
     def draw(self):
-        """ 绘制线条 """
+        """绘制线条"""
         text_index = text_handle.get_text_index(self.text)
         text_num = self.width / text_index
         now_draw = NormalDraw()
@@ -495,7 +495,7 @@ class TitleLineDraw:
         title_style="littletitle",
         frame_style="littletitle",
     ):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.title = title
         """ 标题 """
         self.width = width
@@ -512,7 +512,7 @@ class TitleLineDraw:
         """ 标题边框样式 """
 
     def draw(self):
-        """ 绘制线条 """
+        """绘制线条"""
         title_draw = NormalDraw()
         title_draw.width = self.width
         title_draw.style = self.title_style
@@ -549,7 +549,7 @@ class LittleTitleLineDraw:
     """
 
     def __init__(self, title: str, width: int, line: str = "=", style="standard", title_style="sontitle"):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.title = title
         """ 标题 """
         self.width = width
@@ -564,7 +564,7 @@ class LittleTitleLineDraw:
         """ 线尾换行 """
 
     def draw(self):
-        """ 绘制线条 """
+        """绘制线条"""
         title_draw = NormalDraw()
         title_draw.width = self.width
         title_draw.text = self.title
@@ -587,13 +587,13 @@ class LittleTitleLineDraw:
 
 
 class CenterDraw(NormalDraw):
-    """ 居中绘制文本 """
+    """居中绘制文本"""
 
     def __gt__(self, other) -> bool:
         return int(len(self)) > int(len(other))
 
     def draw(self):
-        """ 绘制文本 """
+        """绘制文本"""
         self.width = int(self.width)
         if int(len(self)) > int(self.width):
             now_text = ""
@@ -623,21 +623,21 @@ class CenterMergeDraw:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 最大宽度 """
         self.draw_list: List[NormalDraw] = []
         """ 绘制列表 """
 
     def __len__(self) -> int:
-        """ 获取当前绘制对象宽度 """
+        """获取当前绘制对象宽度"""
         return self.width
 
     def __gt__(self, other) -> int:
         return int(len(self)) > int(len(other))
 
     def draw(self):
-        """ 绘制列表 """
+        """绘制列表"""
         now_width = 0
         for value in self.draw_list:
             now_width += len(value)
@@ -656,10 +656,10 @@ class CenterMergeDraw:
 
 
 class RightDraw(NormalDraw):
-    """ 右对齐绘制文本 """
+    """右对齐绘制文本"""
 
     def draw(self):
-        """ 绘制文本 """
+        """绘制文本"""
         if int(len(self)) > int(self.width):
             now_text = ""
             if self.width:
@@ -676,10 +676,10 @@ class RightDraw(NormalDraw):
 
 
 class LeftDraw(NormalDraw):
-    """ 左对齐绘制文本 """
+    """左对齐绘制文本"""
 
     def draw(self):
-        """ 绘制文本 """
+        """绘制文本"""
         if int(len(self)) > int(self.width):
             now_text = ""
             if self.width:
@@ -701,7 +701,7 @@ class ExpLevelDraw:
     """
 
     def __init__(self, experience: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         grade = ""
         if experience < 50:
             grade = "G"
@@ -738,5 +738,5 @@ class ExpLevelDraw:
         return len(self.grade_draw)
 
     def draw(self):
-        """ 绘制文本 """
+        """绘制文本"""
         self.grade_draw.draw()

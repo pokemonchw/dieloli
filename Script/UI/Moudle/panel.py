@@ -12,10 +12,10 @@ _: FunctionType = get_text._
 
 
 class SingleColumnButton:
-    """ 标准单列按钮监听响应 """
+    """标准单列按钮监听响应"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.button_list: List[draw.Button] = []
         """ 绘制的按钮列表 """
         self.return_list: Dict[str, str] = {}
@@ -67,17 +67,17 @@ class SingleColumnButton:
         return len(self.button_list)
 
     def draw(self):
-        """ 绘制按钮列表 """
+        """绘制按钮列表"""
         for button in self.button_list:
             button.draw()
             io_init.era_print("\n")
 
 
 class OneMessageAndSingleColumnButton:
-    """ 标准单条消息+单列数字id响应按钮监听面板 """
+    """标准单条消息+单列数字id响应按钮监听面板"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.message: draw.RichTextDraw = None
         """ 消息 """
         self.button_panel: SingleColumnButton = None
@@ -118,17 +118,17 @@ class OneMessageAndSingleColumnButton:
         return self.button_panel.return_list
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         self.message.draw()
         io_init.era_print("\n")
         self.button_panel.draw()
 
 
 class AskForOneMessage:
-    """ 标准单条消息+等待玩家输入任意字符面板 """
+    """标准单条消息+等待玩家输入任意字符面板"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.message: draw.RichTextDraw = None
         """ 消息 """
         self.input_max: int = 0
@@ -165,10 +165,10 @@ class AskForOneMessage:
 
 
 class TitleAndRightInfoListPanel:
-    """ 绘制一个标题和一串靠右对齐的列表组合的面板 """
+    """绘制一个标题和一串靠右对齐的列表组合的面板"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.title = ""
         """ 文本标题 """
         self.width = 0
@@ -201,17 +201,17 @@ class TitleAndRightInfoListPanel:
         self.draw_list.append(line)
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         for value in self.draw_list:
             value.draw()
             io_init.era_print("\n")
 
 
 class CenterDrawTextListPanel:
-    """ 绘制一个列表并居中每个元素 """
+    """绘制一个列表并居中每个元素"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = 0
         """ 面板宽度 """
         self.column: int = 0
@@ -241,7 +241,7 @@ class CenterDrawTextListPanel:
             self.draw_list.append(now_list)
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()
@@ -249,10 +249,10 @@ class CenterDrawTextListPanel:
 
 
 class LeftDrawTextListPanel:
-    """ 绘制一个列表并左对齐每个元素 """
+    """绘制一个列表并左对齐每个元素"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = 0
         """ 面板宽度 """
         self.column: int = 0
@@ -289,7 +289,7 @@ class LeftDrawTextListPanel:
             self.draw_list.append(now_list)
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()
@@ -297,10 +297,10 @@ class LeftDrawTextListPanel:
 
 
 class DrawTextListPanel:
-    """ 绘制一个对象列表 """
+    """绘制一个对象列表"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = 0
         """ 面板宽度 """
         self.column: int = 0
@@ -321,7 +321,7 @@ class DrawTextListPanel:
         self.draw_list = value_handle.list_of_groups(info_list, column)
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()
@@ -336,14 +336,14 @@ class VerticalDrawTextListGroup:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 当前最大绘制宽度 """
         self.draw_list: List[List[draw.NormalDraw]] = []
         """ 绘制的对象列表 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         new_group = itertools.zip_longest(*self.draw_list)
         for draw_list in new_group:
             now_width = int(self.width / len(draw_list))
@@ -358,10 +358,10 @@ class VerticalDrawTextListGroup:
 
 
 class CenterDrawButtonListPanel:
-    """ 绘制一个按钮列表并居中每个元素 """
+    """绘制一个按钮列表并居中每个元素"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width = 0
         """ 面板宽度 """
         self.column = 0
@@ -423,7 +423,7 @@ class CenterDrawButtonListPanel:
             self.draw_list.append(now_list)
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()
@@ -431,10 +431,10 @@ class CenterDrawButtonListPanel:
 
 
 class LeftDrawIDButtonListPanel:
-    """ 绘制一个被编号的按钮列表并左对齐每个元素 """
+    """绘制一个被编号的按钮列表并左对齐每个元素"""
 
     def __init__(self):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width = 0
         """ 面板宽度 """
         self.column = 0
@@ -502,7 +502,7 @@ class LeftDrawIDButtonListPanel:
             self.draw_list.append(now_list)
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()
@@ -510,10 +510,10 @@ class LeftDrawIDButtonListPanel:
 
 
 class ClearScreenPanel:
-    """ 绘制一屏长度的空行 """
+    """绘制一屏长度的空行"""
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         panel = "\n" * 50
         io_init.era_print(panel)
 
@@ -530,7 +530,7 @@ class PageHandleDrawType:
     """
 
     def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text: str = text
         """ 未处理的绘制的文本id """
         self.draw_text: str = ""
@@ -547,7 +547,7 @@ class PageHandleDrawType:
         """ 按钮返回值 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
 
 
 class PageHandlePanel:
@@ -581,7 +581,7 @@ class PageHandlePanel:
         col_septal_lines: str = "",
         null_button_text: str = "",
     ):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text_list: List[str] = text_list
         """ 绘制的文本列表 """
         self.draw_type: type = PageHandleDrawType
@@ -619,7 +619,7 @@ class PageHandlePanel:
         """ 结束时按钮id """
 
     def update(self):
-        """ 更新绘制对象 """
+        """更新绘制对象"""
         self.return_list = []
         start_id = self.now_page * self.limit
         total_page = int((len(self.text_list) - 1) / self.limit)
@@ -702,12 +702,12 @@ class PageHandlePanel:
         self.draw_list = draw_list
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         for value in self.draw_list:
             value.draw()
 
     def next_page(self):
-        """ 将面板切换至下一页 """
+        """将面板切换至下一页"""
         total_page = math.ceil(len(self.text_list) / self.limit)
         if self.now_page >= total_page - 1:
             self.now_page = 0
@@ -715,7 +715,7 @@ class PageHandlePanel:
             self.now_page += 1
 
     def old_page(self):
-        """ 将面板切换至上一页 """
+        """将面板切换至上一页"""
         total_page = math.ceil(len(self.text_list) / self.limit)
         if self.now_page <= 0:
             self.now_page = total_page
@@ -724,10 +724,10 @@ class PageHandlePanel:
 
 
 class ClothingPageHandlePanel(PageHandlePanel):
-    """ 服装缩略信息分页绘制对象面板 """
+    """服装缩略信息分页绘制对象面板"""
 
     def update_button(self):
-        """ 更新绘制宽度 """
+        """更新绘制宽度"""
         id_width = 0
         for value in self.draw_list:
             if "id_width" in value.__dict__:

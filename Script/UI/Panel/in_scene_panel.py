@@ -33,12 +33,12 @@ class InScenePanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         character_data: game_type.Character = cache.character_data[0]
         title_draw = draw.TitleLineDraw(_("场景"), self.width)
         scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
@@ -253,7 +253,7 @@ class SeeInstructPanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 最大绘制宽度 """
         self.return_list: List[str] = []
@@ -264,7 +264,7 @@ class SeeInstructPanel:
             cache.instruct_filter[0] = 1
 
     def draw(self):
-        """ 绘制操作菜单面板 """
+        """绘制操作菜单面板"""
         self.return_list = []
         line = draw.LineDraw("-.-", self.width)
         line.draw()

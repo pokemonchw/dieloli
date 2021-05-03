@@ -26,7 +26,7 @@ family_data: Dict[str, int] = {}
 
 
 def init_name_data():
-    """ 载入json内姓名配置数据 """
+    """载入json内姓名配置数据"""
     global man_name_data
     global woman_name_data
     global family_data

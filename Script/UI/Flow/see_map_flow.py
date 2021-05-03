@@ -9,6 +9,6 @@ width: int = normal_config.config_normal.text_width
 
 @handle_panel.add_panel(constant.Panel.SEE_MAP)
 def see_map_flow():
-    """ 查看地图面板 """
+    """查看地图面板"""
     now_panel = see_map_panel.SeeMapPanel(width)
     now_panel.draw()

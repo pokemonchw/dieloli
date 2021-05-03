@@ -20,7 +20,7 @@ all_map_data_path = os.path.join("data", "MapData")
 
 
 def init_map_data():
-    """ 载入地图和场景数据 """
+    """载入地图和场景数据"""
     if (
         os.path.exists(all_scene_data_path)
         and os.path.exists(all_map_data_path)

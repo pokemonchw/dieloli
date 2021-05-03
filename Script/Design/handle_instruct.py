@@ -23,7 +23,7 @@ instruct_queue = queue.Queue()
 
 
 def init_instruct_handle_thread():
-    """ 初始化指令处理线程 """
+    """初始化指令处理线程"""
     while 1:
         if not instruct_queue.empty():
             instruct_queue.get()
@@ -74,7 +74,7 @@ def add_instruct(instruct_id: int, instruct_type: int, name: str, premise_set: S
 
 @add_instruct(constant.Instruct.REST, constant.InstructType.REST, _("休息"), {})
 def handle_rest():
-    """ 处理休息指令 """
+    """处理休息指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.duration = 10
@@ -87,19 +87,19 @@ def handle_rest():
     constant.Instruct.BUY_FOOD, constant.InstructType.ACTIVE, _("购买食物"), {constant.Premise.IN_CAFETERIA}
 )
 def handle_buy_food():
-    """ 处理购买食物指令 """
+    """处理购买食物指令"""
     cache.now_panel_id = constant.Panel.FOOD_SHOP
 
 
 @add_instruct(constant.Instruct.EAT, constant.InstructType.ACTIVE, _("进食"), {constant.Premise.HAVE_FOOD})
 def handle_eat():
-    """ 处理进食指令 """
+    """处理进食指令"""
     cache.now_panel_id = constant.Panel.FOOD_BAG
 
 
 @add_instruct(constant.Instruct.MOVE, constant.InstructType.ACTIVE, _("移动"), {})
 def handle_move():
-    """ 处理移动指令 """
+    """处理移动指令"""
     cache.now_panel_id = constant.Panel.SEE_MAP
 
 
@@ -107,7 +107,7 @@ def handle_move():
     constant.Instruct.SEE_ATTR, constant.InstructType.SYSTEM, _("查看属性"), {constant.Premise.HAVE_TARGET}
 )
 def handle_see_attr():
-    """ 查看属性 """
+    """查看属性"""
     see_character_info_panel.line_feed.draw()
     now_draw = see_character_info_panel.SeeCharacterInfoInScenePanel(
         cache.character_data[0].target_character_id, width
@@ -117,7 +117,7 @@ def handle_see_attr():
 
 @add_instruct(constant.Instruct.SEE_OWNER_ATTR, constant.InstructType.SYSTEM, _("查看自身属性"), {})
 def handle_see_owner_attr():
-    """ 查看自身属性 """
+    """查看自身属性"""
     see_character_info_panel.line_feed.draw()
     now_draw = see_character_info_panel.SeeCharacterInfoInScenePanel(0, width)
     now_draw.draw()
@@ -127,7 +127,7 @@ def handle_see_owner_attr():
     constant.Instruct.CHAT, constant.InstructType.DIALOGUE, _("闲聊"), {constant.Premise.HAVE_TARGET}
 )
 def handle_chat():
-    """ 处理闲聊指令 """
+    """处理闲聊指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data = cache.character_data[0]
     character_data.behavior.duration = 10
@@ -140,13 +140,13 @@ def handle_chat():
     constant.Instruct.BUY_ITEM, constant.InstructType.ACTIVE, _("购买道具"), {constant.Premise.IN_SHOP}
 )
 def handle_buy_item():
-    """ 处理购买道具指令 """
+    """处理购买道具指令"""
     cache.now_panel_id = constant.Panel.ITEM_SHOP
 
 
 @add_instruct(constant.Instruct.SINGING, constant.InstructType.PERFORM, _("唱歌"), {})
 def handle_singing():
-    """ 处理唱歌指令 """
+    """处理唱歌指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data = cache.character_data[0]
     character_data.behavior.duration = 5
@@ -162,7 +162,7 @@ def handle_singing():
     {constant.Premise.IN_MUSIC_CLASSROOM},
 )
 def handle_play_piano():
-    """ 处理弹钢琴指令 """
+    """处理弹钢琴指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data = cache.character_data[0]
     character_data.behavior.duration = 30
@@ -178,7 +178,7 @@ def handle_play_piano():
     {constant.Premise.HAVE_TARGET},
 )
 def handle_touch_head():
-    """ 处理摸头指令 """
+    """处理摸头指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data = cache.character_data[0]
     character_data.behavior.duration = 2
@@ -189,14 +189,14 @@ def handle_touch_head():
 
 @add_instruct(constant.Instruct.SAVE, constant.InstructType.SYSTEM, _("读写存档"), {})
 def handle_save():
-    """ 处理读写存档指令 """
+    """处理读写存档指令"""
     now_panel = see_save_info_panel.SeeSaveListPanel(width, 1)
     now_panel.draw()
 
 
 @add_instruct(constant.Instruct.SLEEP, constant.InstructType.REST, _("睡觉"), {constant.Premise.IN_DORMITORY})
 def handle_sleep():
-    """ 处理睡觉指令 """
+    """处理睡觉指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.duration = 480
@@ -210,7 +210,7 @@ def handle_sleep():
     constant.Instruct.DRINK_SPRING, constant.InstructType.ACTIVE, _("喝泉水"), {constant.Premise.IN_FOUNTAIN}
 )
 def handle_drink_spring():
-    """ 处理喝泉水指令 """
+    """处理喝泉水指令"""
     value = random.randint(0, 100)
     now_draw = draw.WaitDraw()
     now_draw.width = width
@@ -243,7 +243,7 @@ def handle_drink_spring():
     constant.Instruct.EMBRACE, constant.InstructType.ACTIVE, _("拥抱"), {constant.Premise.HAVE_TARGET}
 )
 def handle_embrace():
-    """ 处理拥抱指令 """
+    """处理拥抱指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.duration = 3
@@ -259,7 +259,7 @@ def handle_embrace():
     {constant.Premise.HAVE_TARGET},
 )
 def handle_kiss():
-    """ 处理亲吻指令 """
+    """处理亲吻指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.duration = 2
@@ -275,7 +275,7 @@ def handle_kiss():
     {constant.Premise.HAVE_TARGET},
 )
 def handle_handle_in_handle():
-    """ 处理牵手指令 """
+    """处理牵手指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.duration = 10
@@ -291,7 +291,7 @@ def handle_handle_in_handle():
     {constant.Premise.HAVE_TARGET},
 )
 def handle_stroke():
-    """ 处理抚摸指令 """
+    """处理抚摸指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.duration = 10
@@ -307,7 +307,7 @@ def handle_stroke():
     {constant.Premise.HAVE_TARGET},
 )
 def handle_touch_chest():
-    """ 处理摸胸指令 """
+    """处理摸胸指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.duration = 10
@@ -323,7 +323,7 @@ def handle_touch_chest():
     {constant.Premise.TARGET_IS_NOT_COLLECTION, constant.Premise.TARGET_NO_PLAYER},
 )
 def handle_collection_character():
-    """ 处理收藏角色指令 """
+    """处理收藏角色指令"""
     character_data: game_type.Character = cache.character_data[0]
     target_character_id = character_data.target_character_id
     if target_character_id not in character_data.collection_character:
@@ -337,7 +337,7 @@ def handle_collection_character():
     {constant.Premise.TARGET_IS_COLLECTION, constant.Premise.TARGET_NO_PLAYER},
 )
 def handle_un_collection_character():
-    """ 处理取消指令 """
+    """处理取消指令"""
     character_data: game_type.Character = cache.character_data[0]
     target_character_id = character_data.target_character_id
     if target_character_id in character_data.collection_character:
@@ -351,7 +351,7 @@ def handle_un_collection_character():
     {constant.Premise.UN_COLLECTION_SYSTEM},
 )
 def handle_collection_system():
-    """ 处理启用收藏模式指令 """
+    """处理启用收藏模式指令"""
     cache.is_collection = 1
     now_draw = draw.WaitDraw()
     now_draw.width = width
@@ -366,7 +366,7 @@ def handle_collection_system():
     {constant.Premise.IS_COLLECTION_SYSTEM},
 )
 def handle_un_collection_system():
-    """ 处理关闭收藏模式指令 """
+    """处理关闭收藏模式指令"""
     cache.is_collection = 0
     now_draw = draw.WaitDraw()
     now_draw.width = width
@@ -381,7 +381,7 @@ def handle_un_collection_system():
     {},
 )
 def handle_view_school_timetable():
-    """ 处理查看课程表指令 """
+    """处理查看课程表指令"""
     cache.now_panel_id = constant.Panel.VIEW_SCHOOL_TIMETABLE
 
 
@@ -397,7 +397,7 @@ def handle_view_school_timetable():
     },
 )
 def handle_attend_class():
-    """ 处理上课指令 """
+    """处理上课指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     end_time = 0
@@ -436,7 +436,7 @@ def handle_attend_class():
     },
 )
 def handle_teach_a_lesson():
-    """ 处理教课指令 """
+    """处理教课指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     end_time = 0
@@ -468,7 +468,7 @@ def handle_teach_a_lesson():
     {constant.Premise.HAVE_GUITAR},
 )
 def handle_play_guitar():
-    """ 处理弹吉他指令 """
+    """处理弹吉他指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data = cache.character_data[0]
     character_data.behavior.duration = 10
@@ -487,7 +487,7 @@ def handle_play_guitar():
     },
 )
 def handle_self_study():
-    """ 处理自习指令 """
+    """处理自习指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     school_id, phase = course.get_character_school_phase(0)

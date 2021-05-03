@@ -26,7 +26,7 @@ class FoodShopPanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
         self.now_panel = _("主食")
@@ -35,7 +35,7 @@ class FoodShopPanel:
         """ 当前名字列表控制面板 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         scene_position = cache.character_data[0].position
         scene_position_str = map_handle.get_map_system_path_str_for_list(scene_position)
         scene_name = cache.scene_data[scene_position_str].scene_name
@@ -109,7 +109,7 @@ class SeeFoodListByFoodNameDraw:
     def __init__(
         self, text: Tuple[str, str], width: int, is_button: bool, num_button: bool, button_id: int
     ):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text = text[1]
         """ 食物名字 """
         self.cid = text[0]
@@ -148,11 +148,11 @@ class SeeFoodListByFoodNameDraw:
         """ 绘制的对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.now_draw.draw()
 
     def see_food_shop_food_list(self):
-        """ 按食物名字显示食物商店的食物列表 """
+        """按食物名字显示食物商店的食物列表"""
         title_draw = draw.TitleLineDraw(self.text, window_width)
         now_food_list = [(self.cid, x) for x in cache.restaurant_data[self.cid]]
         page_handle = panel.PageHandlePanel(
@@ -188,7 +188,7 @@ class BuyFoodByFoodNameDraw:
     def __init__(
         self, text: Tuple[str, UUID], width: int, is_button: bool, num_button: bool, button_id: int
     ):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text: UUID = text[1]
         """ 食物uid """
         self.cid: str = text[0]
@@ -243,10 +243,10 @@ class BuyFoodByFoodNameDraw:
         """ 绘制的对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.now_draw.draw()
 
     def buy_food(self):
-        """ 玩家购买食物 """
+        """玩家购买食物"""
         cache.character_data[0].food_bag[self.text] = cache.restaurant_data[self.cid][self.text]
         del cache.restaurant_data[self.cid][self.text]

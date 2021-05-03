@@ -24,12 +24,12 @@ class ItemShopPanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         character_data: game_type.Character = cache.character_data[0]
         scene_position = character_data.position
         scene_position_str = map_handle.get_map_system_path_str_for_list(scene_position)
@@ -65,7 +65,7 @@ class BuyItemByItemNameDraw:
     """
 
     def __init__(self, text: int, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text = text
         """ 道具id """
         self.draw_text: str = ""
@@ -103,7 +103,7 @@ class BuyItemByItemNameDraw:
         """ 绘制的对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.now_draw.draw()
 
     def buy_item(self):

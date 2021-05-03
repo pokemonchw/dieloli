@@ -32,7 +32,7 @@ class SeeMapPanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
         character_data: game_type.Character = cache.character_data[0]
@@ -40,7 +40,7 @@ class SeeMapPanel:
         """ 当前查看的地图坐标 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         move_menu_panel_data = {
             0: MapSceneNameDraw(self.now_map, self.width),
             1: GlobalSceneNamePanel(self.now_map, self.width),
@@ -171,13 +171,13 @@ class SeeMapPanel:
                 break
 
     def up_map(self):
-        """ 将当前地图切换为上级地图 """
+        """将当前地图切换为上级地图"""
         py_cmd.clr_cmd()
         up_map_path = map_handle.get_map_for_path(self.now_map)
         self.now_map = up_map_path
 
     def down_map(self):
-        """ 将当前地图切换为下级地图 """
+        """将当前地图切换为下级地图"""
         py_cmd.clr_cmd()
         character_position = cache.character_data[0].position
         down_map_scene_id = map_handle.get_map_scene_id_for_scene_path(self.now_map, character_position)
@@ -203,7 +203,7 @@ class MoveMenuPanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 最大绘制宽度 """
         self.return_list: List[str] = []
@@ -218,7 +218,7 @@ class MoveMenuPanel:
         """ 移动类型名字对应配表id """
 
     def update(self):
-        """ 更新绘制面板 """
+        """更新绘制面板"""
         line = draw.LineDraw(".", self.width)
         self.draw_list = []
         self.return_list = []
@@ -249,7 +249,7 @@ class MoveMenuPanel:
         py_cmd.clr_cmd()
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         for now_draw in self.draw_list:
             now_draw.draw()
         line = draw.LineDraw("-.-", self.width)
@@ -284,7 +284,7 @@ class MapSceneNameDraw:
         self.now_map = now_map
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         self.return_list = []
         map_path_str = map_handle.get_map_system_path_str_for_list(self.now_map)
         map_data: game_type.Map = cache.map_data[map_path_str]
@@ -406,7 +406,7 @@ class GlobalSceneNamePanel:
         self.end_index = self.handle_panel.end_index
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         self.handle_panel.draw()
         self.return_list = self.handle_panel.return_list
 
@@ -423,7 +423,7 @@ class ScenePathNameMoveDraw:
     """
 
     def __init__(self, text: List[str], width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.draw_text = ""
         """ 场景路径绘制的文本 """
         self.width: int = width
@@ -451,7 +451,7 @@ class ScenePathNameMoveDraw:
         self.button_return = path_text
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.now_draw.draw()
 
     def move_now(self):
@@ -506,7 +506,7 @@ class SocialSceneNamePanel:
         self.end_index = self.handle_panel.end_index
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         self.handle_panel.draw()
         self.return_list = self.handle_panel.return_list
 
@@ -523,7 +523,7 @@ class SocialSceneNameDraw:
     """
 
     def __init__(self, text: int, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.draw_text = ""
         """ 场景路径绘制文本 """
         self.width: int = width
@@ -551,7 +551,7 @@ class SocialSceneNameDraw:
         self.button_return = character_data.name
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.now_draw.draw()
 
     def move_now(self):
@@ -606,6 +606,6 @@ class CollectionSceneNamePanel:
         self.end_index = self.handle_panel.end_index
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         self.handle_panel.draw()
         self.return_list = self.handle_panel.return_list

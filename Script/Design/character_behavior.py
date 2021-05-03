@@ -53,7 +53,7 @@ def init_character_behavior():
 
 
 def update_cafeteria():
-    """ 刷新食堂内食物 """
+    """刷新食堂内食物"""
     food_judge = 1
     for food_type in cache.restaurant_data:
         food_list: Dict[UUID, game_type.Food] = cache.restaurant_data[food_type]

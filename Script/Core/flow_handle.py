@@ -282,7 +282,7 @@ def askfor_int(list, print_order=False):
 
 
 def askfor_wait():
-    """ 用于请求一个暂停动作，输入任何数都可以继续 """
+    """用于请求一个暂停动作，输入任何数都可以继续"""
     cache.wframe_mouse.w_frame_up = 0
     while not cache.wframe_mouse.w_frame_up:
         re = askfor_str(donot_return_null_str=False)

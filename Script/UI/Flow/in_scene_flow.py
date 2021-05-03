@@ -10,6 +10,6 @@ width: int = normal_config.config_normal.text_width
 
 @handle_panel.add_panel(constant.Panel.IN_SCENE)
 def in_scene_flow():
-    """ 场景互动面板 """
+    """场景互动面板"""
     now_panel = in_scene_panel.InScenePanel(width)
     now_panel.draw()
