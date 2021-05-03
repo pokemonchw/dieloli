@@ -3,6 +3,7 @@ import time
 import random
 import math
 import ephem
+import time
 from types import FunctionType
 from dateutil import relativedelta
 from Script.Core import (
@@ -17,7 +18,6 @@ cache: game_type.Cache = cache_control.cache
 _: FunctionType = get_text._
 """ 翻译api """
 gatech = ephem.Observer()
-gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
 sun = ephem.Sun()
 moon = ephem.Moon()
 time_zone = datetime.timezone(datetime.timedelta(hours=+8))
@@ -275,27 +275,36 @@ def get_sun_time(now_time: datetime.datetime) -> int:
         cache.__dict__["sun_phase"] = {}
     now_date_str = f"{now_time.year}/{now_time.month}/{now_time.day}"
     now_time = now_time.astimezone(time_zone)
+    gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
     if (
         (now_date_str not in cache.sun_phase)
         or (now_time.hour not in cache.sun_phase[now_date_str])
         or (now_time.minute not in cache.sun_phase[now_date_str][now_time.hour])
     ):
-        new_time = datetime.datetime(now_time.year, now_time.month, now_time.day)
-        gatech.date = datetime.datetime.utcfromtimestamp(new_time.timestamp())
+        now_unix = now_time.timestamp()
+        now_unix -= 60
         for i in range(0, 1439):
-            gatech.date += ephem.minute
+            now_unix += 60
+            now_unix_date = datetime.datetime.fromtimestamp(now_unix)
+            now_unix_date = now_unix_date.replace(tzinfo=time_zone)
+            now_unix_date = now_unix_date.astimezone(time_zone.utc)
+            gatech.date = now_unix_date
             sun.compute(gatech)
             now_az = sun.az * 57.2957795
             new_date: datetime.datetime = gatech.date.datetime()
+            new_date_unix = new_date.timestamp()
+            new_date_unix = round(new_date_unix, 0)
+            new_date = datetime.datetime.fromtimestamp(new_date_unix)
             new_date = new_date.replace(tzinfo=time_zone.utc)
             new_date = new_date.astimezone(time_zone)
             new_date_str = f"{new_date.year}/{new_date.month}/{new_date.day}"
             cache.sun_phase.setdefault(new_date_str, {})
             cache.sun_phase[new_date_str].setdefault(new_date.hour, {})
             cache.sun_phase[new_date_str][new_date.hour][new_date.minute] = get_sun_phase_for_sun_az(now_az)
-        if len(cache.sun_phase) > 3:
+        if len(cache.sun_phase) > 1:
             del_date = sorted(list(cache.sun_phase.keys()))[0]
-            del cache.sun_phase[del_date]
+            if del_date != now_date_str:
+                del cache.sun_phase[del_date]
     return cache.sun_phase[now_date_str][now_time.hour][now_time.minute]
 
 

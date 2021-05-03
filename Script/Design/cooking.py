@@ -13,7 +13,7 @@ _: FunctionType = get_text._
 
 
 def init_recipes():
-    """ 初始化菜谱数据 """
+    """初始化菜谱数据"""
     cache.recipe_data = {}
     for recipe_id in game_config.config_recipes:
         recipe_data = game_config.config_recipes[recipe_id]
@@ -221,7 +221,7 @@ def cook(food_data: Dict[str, Food], recipe_id: int, cook_level: int, maker: str
 
 
 def init_restaurant_data():
-    """ 初始化餐馆内的食物数据 """
+    """初始化餐馆内的食物数据"""
     cache.restaurant_data = {}
     max_people = len(cache.character_data)
     food_config_data = game_config.config_food

@@ -4,7 +4,7 @@ import datetime
 
 
 class FlowContorl:
-    """ 流程控制用结构体 """
+    """流程控制用结构体"""
 
     restart_game: bool = 0
     """ 重启游戏 """
@@ -13,7 +13,7 @@ class FlowContorl:
 
 
 class WFrameMouse:
-    """ 鼠标状态结构体 """
+    """鼠标状态结构体"""
 
     w_frame_up: int = 2
     """ 逐字输出状态 """
@@ -34,7 +34,7 @@ class WFrameMouse:
 
 
 class NpcTem:
-    """ npc模板用结构体对象 """
+    """npc模板用结构体对象"""
 
     def __init__(self):
         self.Name: str = ""
@@ -60,7 +60,7 @@ class NpcTem:
 
 
 class Measurements:
-    """ 三围数据结构体 """
+    """三围数据结构体"""
 
     def __init__(self):
         self.bust: float = 0
@@ -72,7 +72,7 @@ class Measurements:
 
 
 class Chest:
-    """ 胸围差数据结构体 """
+    """胸围差数据结构体"""
 
     def __init__(self):
         self.target_chest: int = 0
@@ -84,7 +84,7 @@ class Chest:
 
 
 class Food:
-    """ 食物数据结构体 """
+    """食物数据结构体"""
 
     def __init__(self):
         self.id: str = ""
@@ -112,7 +112,7 @@ class Food:
 
 
 class Recipes:
-    """ 菜谱数据结构体 """
+    """菜谱数据结构体"""
 
     def __init__(self):
         self.name: str = ""
@@ -128,7 +128,7 @@ class Recipes:
 
 
 class NormalConfig:
-    """ 通用配置 """
+    """通用配置"""
 
     game_name: str
     """ 游戏名 """
@@ -205,7 +205,7 @@ class NormalConfig:
 
 
 class Clothing:
-    """ 服装数据结构体 """
+    """服装数据结构体"""
 
     def __init__(self):
         self.uid: UUID = ""
@@ -235,7 +235,7 @@ class Clothing:
 
 
 class Height:
-    """ 身高数据结构体 """
+    """身高数据结构体"""
 
     def __init__(self):
         self.now_height: float = 0
@@ -251,7 +251,7 @@ class Height:
 
 
 class Behavior:
-    """ 角色行为状态数据 """
+    """角色行为状态数据"""
 
     def __init__(self):
         self.start_time: datetime.datetime = None
@@ -275,7 +275,7 @@ class Behavior:
 
 
 class Map:
-    """ 地图数据 """
+    """地图数据"""
 
     def __init__(self):
         self.map_path: str = ""
@@ -297,7 +297,7 @@ class Map:
 
 
 class MapDraw:
-    """ 地图绘制数据 """
+    """地图绘制数据"""
 
     def __init__(self):
         self.draw_text: List[MapDrawLine] = []
@@ -305,7 +305,7 @@ class MapDraw:
 
 
 class MapDrawLine:
-    """ 地图绘制行数据 """
+    """地图绘制行数据"""
 
     def __init__(self):
         self.width: int = 0
@@ -315,7 +315,7 @@ class MapDrawLine:
 
 
 class MapDrawText:
-    """ 地图绘制文本数据 """
+    """地图绘制文本数据"""
 
     def __init__(self):
         self.text: str = ""
@@ -325,7 +325,7 @@ class MapDrawText:
 
 
 class TargetPath:
-    """ 寻路目标路径数据 """
+    """寻路目标路径数据"""
 
     def __init__(self):
         self.path: List[str] = []
@@ -335,7 +335,7 @@ class TargetPath:
 
 
 class Scene:
-    """ 场景数据 """
+    """场景数据"""
 
     def __init__(self):
         self.scene_path: str = ""
@@ -351,7 +351,7 @@ class Scene:
 
 
 class Character:
-    """ 角色数据结构体 """
+    """角色数据结构体"""
 
     def __init__(self):
         self.cid: int = 0
@@ -489,7 +489,7 @@ class Character:
 
 
 class TeacherTimeTable:
-    """ 教师上课时间数据结构体 """
+    """教师上课时间数据结构体"""
 
     def __init__(self):
         self.class_room: List[str] = []
@@ -507,7 +507,7 @@ class TeacherTimeTable:
 
 
 class Cache:
-    """ 游戏缓存数据结构体 """
+    """游戏缓存数据结构体"""
 
     def __init__(self):
         self.back_save_panel: bool = 0
@@ -645,7 +645,7 @@ class Cache:
 
 
 class TargetChange:
-    """ 角色关系变化结构体 """
+    """角色关系变化结构体"""
 
     def __init__(self):
         self.old_social: int = 0
@@ -661,7 +661,7 @@ class TargetChange:
 
 
 class CharacterStatusChange:
-    """ 角色属性状态变更结构体 """
+    """角色属性状态变更结构体"""
 
     def __init__(self):
         self.hit_point: int = 0

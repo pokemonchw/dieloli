@@ -419,7 +419,7 @@ def handle_in_sleep_time(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     now_time: datetime.datetime = character_data.behavior.start_time
     if now_time.hour >= 22 or now_time.hour <= 4:
-        return 100
+        return 500
     return 0
 
 

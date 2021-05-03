@@ -340,7 +340,7 @@ def init_character_dormitory():
 
 
 def init_character_position():
-    """ 初始化角色位置 """
+    """初始化角色位置"""
     for character_id in cache.character_data:
         character_position = cache.character_data[character_id].position
         character_dormitory = cache.character_data[character_id].dormitory

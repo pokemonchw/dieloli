@@ -9,6 +9,6 @@ width = normal_config.config_normal.text_width
 
 @handle_panel.add_panel(constant.Panel.VIEW_SCHOOL_TIMETABLE)
 def view_school_timetable():
-    """ 查看课程表面板 """
+    """查看课程表面板"""
     now_panel = view_school_timetable_panel.SchoolTimeTablePanel(width)
     now_panel.draw()

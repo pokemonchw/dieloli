@@ -429,7 +429,7 @@ def sort_scene_character_id(scene_path_str: str):
 
 
 def init_scene_edge_path_data():
-    """ 初始化全部地图寻路数据 """
+    """初始化全部地图寻路数据"""
     global scene_path_edge
     scene_path_edge = {}
     for now_position_str in cache.scene_data:

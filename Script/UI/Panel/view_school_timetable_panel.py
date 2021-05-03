@@ -24,12 +24,12 @@ class SchoolTimeTablePanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         character_data: game_type.Character = cache.character_data[0]
         if character_data.age <= 18:
             now_draw = StudentTimeTablePanel(self.width)
@@ -56,14 +56,14 @@ class StudentTimeTablePanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
         self.now_week: int = cache.game_time.weekday()
         """ 当前星期 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         school_id, phase = course.get_character_school_phase(0)
         time_table = cache.course_time_table_data[school_id][phase]
         weekday_text_list = [game_config.config_week_day[i].name for i in game_config.config_week_day]
@@ -207,12 +207,12 @@ class TeacherTimeTablePanel:
     """
 
     def __init__(self, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[0]
         text_list = []
         args_list = []

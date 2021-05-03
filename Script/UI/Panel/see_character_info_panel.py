@@ -40,7 +40,7 @@ class SeeCharacterInfoPanel:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
         self.now_panel: str = _("属性")
@@ -96,7 +96,7 @@ class SeeCharacterInfoPanel:
         )
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         self.draw_data[self.now_panel].draw()
         self.return_list = []
         self.return_list.extend(self.draw_data[self.now_panel].return_list)
@@ -116,7 +116,7 @@ class SeeCharacterMainAttrPanel:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         head_draw = CharacterInfoHead(character_id, width)
         stature_draw = CharacterStatureText(character_id, width)
         room_draw = CharacterRoomText(character_id, width)
@@ -138,7 +138,7 @@ class SeeCharacterMainAttrPanel:
         """ 当前面板监听的按钮列表 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         for label in self.draw_list:
             label.draw()
 
@@ -153,7 +153,7 @@ class SeeCharacterStatusPanel:
     """
 
     def __init__(self, character_id: int, width: int, column: int, center_status: bool = True):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id = character_id
         """ 要绘制的角色id """
         self.width = width
@@ -200,7 +200,7 @@ class SeeCharacterStatusPanel:
             self.draw_list.extend(now_draw.draw_list)
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         title_draw = draw.TitleLineDraw(_("人物状态"), self.width)
         title_draw.draw()
         for label in self.draw_list:
@@ -221,7 +221,7 @@ class CharacterInfoHead:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 要绘制的角色id """
         self.width: int = width
@@ -282,7 +282,7 @@ class CharacterInfoHead:
         """ 要绘制的面板列表 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         if self.draw_title:
             title_draw = draw.TitleLineDraw(_("人物属性"), self.width)
             title_draw.draw()
@@ -302,7 +302,7 @@ class CharacterWearClothingList:
     """
 
     def __init__(self, character_id: int, width: int, column: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 要绘制的角色id """
         self.width: int = width
@@ -340,7 +340,7 @@ class CharacterWearClothingList:
         self.draw_list.extend(now_draw.draw_list)
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         for draw_list in self.draw_list:
             for now_draw in draw_list:
                 now_draw.draw()
@@ -356,7 +356,7 @@ class CharacterStatureText:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id = character_id
         """ 要绘制的角色id """
         self.width = width
@@ -371,7 +371,7 @@ class CharacterStatureText:
         """ 身材描述文本 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         line = draw.LineDraw(":", self.width)
         line.draw()
         info_draw = draw.CenterDraw()
@@ -390,7 +390,7 @@ class CharacterRoomText:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id = character_id
         """ 要绘制的角色id """
         self.width = width
@@ -426,7 +426,7 @@ class CharacterRoomText:
         """ 办公室位置文本 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         line = draw.LineDraw(".", self.width)
         line.draw()
         info_draw = panel.CenterDrawTextListPanel()
@@ -443,7 +443,7 @@ class CharacterBirthdayText:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id = character_id
         """ 要绘制的角色id """
         self.width = width
@@ -457,7 +457,7 @@ class CharacterBirthdayText:
         """ 绘制的文本列表 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         line = draw.LineDraw(".", self.width)
         line.draw()
         info_draw = panel.CenterDrawTextListPanel()
@@ -474,7 +474,7 @@ class CharacterStatureInfoText:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id = character_id
         """ 要绘制的角色id """
         self.width = width
@@ -493,7 +493,7 @@ class CharacterStatureInfoText:
         """ 绘制的文本列表 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         line = draw.LineDraw(".", self.width)
         line.draw()
         info_draw = panel.CenterDrawTextListPanel()
@@ -510,7 +510,7 @@ class CharacterMeasurementsText:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id = character_id
         """ 要绘制的角色id """
         self.width = width
@@ -529,7 +529,7 @@ class CharacterMeasurementsText:
         """ 绘制的文本列表 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         line = draw.LineDraw(".", self.width)
         line.draw()
         info_draw = panel.CenterDrawTextListPanel()
@@ -546,7 +546,7 @@ class CharacterSexExperienceText:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id = character_id
         """ 绘制的角色id """
         self.width = width
@@ -579,7 +579,7 @@ class CharacterSexExperienceText:
             self.draw_list.append(new_draw)
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         line = draw.LineDraw(".", self.width)
         line.draw()
         for value in self.draw_list:
@@ -595,7 +595,7 @@ class SeeCharacterKnowledgePanel:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id = character_id
         """ 要绘制的角色id """
         self.width = width
@@ -630,7 +630,7 @@ class SeeCharacterKnowledgePanel:
             self.draw_list.append(now_list)
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         title_draw = draw.TitleLineDraw(_("人物技能"), self.width)
         title_draw.draw()
         for value in self.draw_list:
@@ -652,7 +652,7 @@ class SeeCharacterLanguagePanel:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 要绘制的角色id """
         self.width: int = width
@@ -692,7 +692,7 @@ class LanguageNameDraw:
     """
 
     def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.language_id: int = text[0]
         """ 语言id """
         self.language_exp: int = text[1]
@@ -732,13 +732,13 @@ class LanguageNameDraw:
         self.draw_list = [name_draw, level_draw]
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         now_draw = draw.CenterMergeDraw(self.width)
         now_draw.draw_list = self.draw_list
         now_draw.draw()
 
     def see_language_info(self):
-        """ 绘制语言描述信息 """
+        """绘制语言描述信息"""
         now_draw = LanguageInfoDraw(self.language_id, window_width)
         now_draw.draw()
 
@@ -752,14 +752,14 @@ class LanguageInfoDraw:
     """
 
     def __init__(self, cid: int, width: int):
-        """ 绘制语言信息 """
+        """绘制语言信息"""
         self.cid: int = int(cid)
         """ 语言的配表id """
         self.width: int = width
         """ 最大宽度 """
 
     def draw(self):
-        """ 绘制道具信息 """
+        """绘制道具信息"""
         py_cmd.clr_cmd()
         language_config = game_config.config_language[self.cid]
         language_draw = draw.WaitDraw()
@@ -777,7 +777,7 @@ class SeeCharacterNaturePanel:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 要绘制的角色id """
         self.width: int = width
@@ -821,7 +821,7 @@ class SeeCharacterNaturePanel:
             self.draw_list.append(nature_draw_list)
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         title_draw = draw.TitleLineDraw(_("人物性格"), self.width)
         title_draw.draw()
         for value in self.draw_list:
@@ -843,7 +843,7 @@ class SeeCharacterSocialContact:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 要绘制的角色id """
         self.width: int = width
@@ -901,7 +901,7 @@ class SeeCharacterInfoByNameDraw:
     """
 
     def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = int(text)
         """ 角色id """
         self.draw_text: str = ""
@@ -943,21 +943,21 @@ class SeeCharacterInfoByNameDraw:
         """ 绘制的对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.now_draw.draw()
 
     def see_character(self):
-        """ 绘制角色信息 """
+        """绘制角色信息"""
         py_cmd.clr_cmd()
         now_draw = SeeCharacterInfoOnSocialPanel(self.character_id, window_width)
         now_draw.draw()
 
 
 class SeeCharacterInfoByNameDrawInScene:
-    """ 场景中点击后切换目标角色的角色名字按钮对象 """
+    """场景中点击后切换目标角色的角色名字按钮对象"""
 
     def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = int(text)
         """ 角色id """
         self.draw_text: str = ""
@@ -1000,13 +1000,13 @@ class SeeCharacterInfoByNameDrawInScene:
         """ 绘制的对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         if isinstance(self.now_draw, draw.NormalDraw):
             self.now_draw.style = "onbutton"
         self.now_draw.draw()
 
     def see_character(self):
-        """ 切换目标角色 """
+        """切换目标角色"""
         cache.character_data[0].target_character_id = self.character_id
         py_cmd.clr_cmd()
 
@@ -1020,7 +1020,7 @@ class SeeCharacterInfoOnSocialPanel:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 要绘制的角色id """
         self.width: int = width
@@ -1033,7 +1033,7 @@ class SeeCharacterInfoOnSocialPanel:
         """ 角色属性面板 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         line_feed.draw()
         self.now_draw.draw()
 
@@ -1048,7 +1048,7 @@ class SeeCharacterInfoHandle:
     """
 
     def __init__(self, character_id: int, width: int, character_list: List[int]):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 要绘制的角色id """
         self.width: int = width
@@ -1059,7 +1059,7 @@ class SeeCharacterInfoHandle:
         """ 当前面板所属的角色id列表 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         old_button_draw = draw.CenterButton(
             _("[上一人]"), _("上一人"), self.width / 3, cmd_func=self.old_character
         )
@@ -1090,12 +1090,12 @@ class SeeCharacterInfoHandle:
                 now_panel_id = yrn
 
     def old_character(self):
-        """ 切换显示上一人 """
+        """切换显示上一人"""
         now_index = self.character_list.index(self.character_id)
         self.character_id = self.character_list[now_index - 1]
 
     def next_character(self):
-        """ 切换显示下一人 """
+        """切换显示下一人"""
         now_index = self.character_list.index(self.character_id) + 1
         if now_index > len(self.character_list) - 1:
             now_index = 0
@@ -1114,7 +1114,7 @@ class GetUpCharacterInfoDraw:
     """
 
     def __init__(self, text: int, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text: int = text
         """ 角色id """
         self.draw_text: str = ""
@@ -1154,7 +1154,7 @@ class GetUpCharacterInfoDraw:
             self.draw_text = new_text
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         if self.is_button:
             now_draw = draw.Button(self.draw_text, self.button_return, cmd_func=self.draw_character_info)
         else:
@@ -1164,7 +1164,7 @@ class GetUpCharacterInfoDraw:
         now_draw.draw()
 
     def draw_character_info(self):
-        """ 绘制角色信息 """
+        """绘制角色信息"""
         line_feed.draw()
         py_cmd.clr_cmd()
         now_draw = SeeCharacterInfoHandle(self.text, window_width, list(cache.character_data.keys()))
@@ -1172,10 +1172,10 @@ class GetUpCharacterInfoDraw:
 
 
 class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
-    """ 在场景中带切换控制的查看角色属性面板 """
+    """在场景中带切换控制的查看角色属性面板"""
 
     def old_character(self):
-        """ 切换显示上一人 """
+        """切换显示上一人"""
         if len(self.character_list):
             if self.character_id:
                 now_index = self.character_list.index(self.character_id)
@@ -1188,7 +1188,7 @@ class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
                 self.character_id = self.character_list[len(self.character_list) - 1]
 
     def next_character(self):
-        """ 切换显示上一人 """
+        """切换显示上一人"""
         if len(self.character_list):
             if self.character_id:
                 now_index = self.character_list.index(self.character_id)
@@ -1209,7 +1209,7 @@ class SeeCharacterInfoInScenePanel:
     """
 
     def __init__(self, target_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.target_id: int = target_id
         """ 查看属性的目标 """
         self.width: int = width
@@ -1227,6 +1227,6 @@ class SeeCharacterInfoInScenePanel:
         """ 绘制控制面板 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.handle_panel.draw()
         cache.now_panel_id = constant.Panel.IN_SCENE

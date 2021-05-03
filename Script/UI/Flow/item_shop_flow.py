@@ -9,6 +9,6 @@ width = normal_config.config_normal.text_width
 
 @handle_panel.add_panel(constant.Panel.ITEM_SHOP)
 def item_shop_flow():
-    """ 道具商店面板 """
+    """道具商店面板"""
     now_panel = item_shop_panel.ItemShopPanel(width)
     now_panel.draw()

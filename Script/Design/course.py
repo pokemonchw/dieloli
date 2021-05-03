@@ -9,7 +9,7 @@ cache: game_type.Cache = cache_control.cache
 
 
 def init_phase_course_hour():
-    """ 初始化各年级各科目课时 """
+    """初始化各年级各科目课时"""
     for school_id in game_config.config_school:
         school_config = game_config.config_school[school_id]
         school_course_session_data = game_config.config_school_session_data[school_id]
@@ -51,7 +51,7 @@ def init_phase_course_hour():
 
 
 def init_class_time_table():
-    """ 初始化各年级课程表 """
+    """初始化各年级课程表"""
     class_time_table = {}
     for school_id in cache.course_data:
         school_config = game_config.config_school[school_id]
@@ -144,7 +144,7 @@ def init_class_teacher():
 
 
 def init_teacher_table():
-    """ 初始化教师上课时间数据 """
+    """初始化教师上课时间数据"""
     teacher_table = {}
     for school_id in cache.course_time_table_data:
         for phase in cache.course_time_table_data[school_id]:
@@ -262,7 +262,7 @@ teacher_course_data = {}
 
 
 def course_distribution_a():
-    """ 课时分配流程A """
+    """课时分配流程A"""
     course_abmain_distribution()
     for phase in range(1, 13):
         school_id = 0
@@ -302,7 +302,7 @@ def course_distribution_a():
 
 
 def course_distribution_b():
-    """ 课时分配流程B """
+    """课时分配流程B"""
     course_abmain_distribution()
     for phase in range(1, 13):
         school_id = 0
@@ -340,7 +340,7 @@ def course_distribution_b():
 
 
 def init_phase_course_hour_experience():
-    """ 按年级计算各科目课时经验标准量 """
+    """按年级计算各科目课时经验标准量"""
     phase_knownledge_experience = {}
     phase_language_experience = {}
     for school_id in cache.course_data:

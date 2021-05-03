@@ -262,7 +262,7 @@ config_weight_tem: Dict[int, config_def.WeightTem] = {}
 
 
 def load_data_json():
-    """ 载入data.json内配置数据 """
+    """载入data.json内配置数据"""
     global config_data
     config_data = json_handle.load_json(data_path)
 
@@ -282,7 +282,7 @@ def translate_data(data: dict):
 
 
 def load_age_judge_sex_experience_tem_data():
-    """ 载入不同性别不同年龄段对应生成不同性经验模板的权重 """
+    """载入不同性别不同年龄段对应生成不同性经验模板的权重"""
     now_data = config_data["AgeJudgeSexExperienceTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -297,7 +297,7 @@ def load_age_judge_sex_experience_tem_data():
 
 
 def load_age_tem():
-    """ 载入各年龄段对应年龄范围模板 """
+    """载入各年龄段对应年龄范围模板"""
     now_data = config_data["AgeTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -307,7 +307,7 @@ def load_age_tem():
 
 
 def load_attr_tem():
-    """ 载入性别对应角色各项基础属性模板 """
+    """载入性别对应角色各项基础属性模板"""
     now_data = config_data["AttrTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -317,7 +317,7 @@ def load_attr_tem():
 
 
 def load_bar_data():
-    """ 载入比例条配置数据 """
+    """载入比例条配置数据"""
     now_data = config_data["BarConfig"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -328,7 +328,7 @@ def load_bar_data():
 
 
 def load_behavior_effect_data():
-    """ 载入行为结算器配置 """
+    """载入行为结算器配置"""
     now_data = config_data["BehaviorEffect"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -340,7 +340,7 @@ def load_behavior_effect_data():
 
 
 def load_body_fat_tem():
-    """ 载入按性别划分的体脂率模板和范围配置数据 """
+    """载入按性别划分的体脂率模板和范围配置数据"""
     now_data = config_data["BodyFatTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -352,7 +352,7 @@ def load_body_fat_tem():
 
 
 def load_book_data():
-    """ 载入数据配置数据 """
+    """载入数据配置数据"""
     now_data = config_data["Book"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -362,7 +362,7 @@ def load_book_data():
 
 
 def load_character_state_data():
-    """ 载入角色状态属性配表数据 """
+    """载入角色状态属性配表数据"""
     now_data = config_data["CharacterState"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -374,7 +374,7 @@ def load_character_state_data():
 
 
 def load_character_state_type_data():
-    """ 载入角色状态类型配表数据 """
+    """载入角色状态类型配表数据"""
     now_data = config_data["CharacterStateType"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -384,7 +384,7 @@ def load_character_state_type_data():
 
 
 def load_chest_tem_data():
-    """ 载入罩杯配置数据 """
+    """载入罩杯配置数据"""
     now_data = config_data["ChestTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -394,7 +394,7 @@ def load_chest_tem_data():
 
 
 def load_clothing_evaluate():
-    """ 载入服装评价配置数据 """
+    """载入服装评价配置数据"""
     now_data = config_data["ClothingEvaluate"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -405,7 +405,7 @@ def load_clothing_evaluate():
 
 
 def load_clothing_suit():
-    """ 载入衣服套装配置数据 """
+    """载入衣服套装配置数据"""
     now_data = config_data["ClothingSuit"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -418,7 +418,7 @@ def load_clothing_suit():
 
 
 def load_clothing_tem():
-    """ 载入服装模板配置数据 """
+    """载入服装模板配置数据"""
     now_data = config_data["ClothingTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -428,7 +428,7 @@ def load_clothing_tem():
 
 
 def load_clothing_type():
-    """ 载入衣服种类配置数据 """
+    """载入衣服种类配置数据"""
     now_data = config_data["ClothingType"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -438,7 +438,7 @@ def load_clothing_type():
 
 
 def load_clothing_use_type():
-    """ 载入衣服用途配置数据 """
+    """载入衣服用途配置数据"""
     now_data = config_data["ClothingUseType"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -448,7 +448,7 @@ def load_clothing_use_type():
 
 
 def load_course():
-    """ 载入课程配置数据 """
+    """载入课程配置数据"""
     now_data = config_data["Course"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -458,7 +458,7 @@ def load_course():
 
 
 def load_course_skill_experience():
-    """ 载入课程获取技能经验配置数据 """
+    """载入课程获取技能经验配置数据"""
     now_data = config_data["CourseSkillExperience"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -474,7 +474,7 @@ def load_course_skill_experience():
 
 
 def load_end_age_tem():
-    """ 载入最终年龄范围配置模板 """
+    """载入最终年龄范围配置模板"""
     now_data = config_data["EndAgeTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -485,7 +485,7 @@ def load_end_age_tem():
 
 
 def load_font_data():
-    """ 载入字体配置数据 """
+    """载入字体配置数据"""
     now_data = config_data["FontConfig"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -496,7 +496,7 @@ def load_font_data():
 
 
 def load_food_data():
-    """ 载入食材配置数据 """
+    """载入食材配置数据"""
     now_data = config_data["Food"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -506,7 +506,7 @@ def load_food_data():
 
 
 def load_food_feel_data():
-    """ 载入食材效果配置数据 """
+    """载入食材效果配置数据"""
     now_data = config_data["FoodFeel"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -518,7 +518,7 @@ def load_food_feel_data():
 
 
 def load_food_quality_weight():
-    """ 载入烹饪技能等级制造食物品质权重配置数据 """
+    """载入烹饪技能等级制造食物品质权重配置数据"""
     now_data = config_data["FoodQualityWeight"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -530,7 +530,7 @@ def load_food_quality_weight():
 
 
 def load_height_tem():
-    """ 载入身高预期值模板 """
+    """载入身高预期值模板"""
     now_data = config_data["HeightTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -541,7 +541,7 @@ def load_height_tem():
 
 
 def load_hitpoint_tem():
-    """ 载入hp模板对应平均值配置数据 """
+    """载入hp模板对应平均值配置数据"""
     now_data = config_data["HitPointTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -551,7 +551,7 @@ def load_hitpoint_tem():
 
 
 def load_instruct_type():
-    """ 载入指令类型配置数据 """
+    """载入指令类型配置数据"""
     now_data = config_data["InstructType"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -561,7 +561,7 @@ def load_instruct_type():
 
 
 def load_item():
-    """ 载入道具配置数据 """
+    """载入道具配置数据"""
     now_data = config_data["Item"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -573,7 +573,7 @@ def load_item():
 
 
 def load_knowledge():
-    """ 载入知识技能配置数据 """
+    """载入知识技能配置数据"""
     now_data = config_data["Knowledge"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -585,7 +585,7 @@ def load_knowledge():
 
 
 def load_knowledge_type():
-    """ 载入知识技能类型配置数据 """
+    """载入知识技能类型配置数据"""
     now_data = config_data["KnowledgeType"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -595,7 +595,7 @@ def load_knowledge_type():
 
 
 def load_language_tem():
-    """ 载入语言技能配置数据 """
+    """载入语言技能配置数据"""
     now_data = config_data["Language"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -607,7 +607,7 @@ def load_language_tem():
 
 
 def load_manapoint_tem():
-    """ 载入mp模板对应平均值配置数据 """
+    """载入mp模板对应平均值配置数据"""
     now_data = config_data["ManaPointTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -617,7 +617,7 @@ def load_manapoint_tem():
 
 
 def load_moon():
-    """ 载入月相配置 """
+    """载入月相配置"""
     now_data = config_data["Moon"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -629,7 +629,7 @@ def load_moon():
 
 
 def load_move_menu_type():
-    """ 载入移动菜单过滤类型配置 """
+    """载入移动菜单过滤类型配置"""
     now_data = config_data["MoveMenuType"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -639,7 +639,7 @@ def load_move_menu_type():
 
 
 def load_nature():
-    """ 载入性格配置数据 """
+    """载入性格配置数据"""
     now_data = config_data["Nature"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -651,7 +651,7 @@ def load_nature():
 
 
 def load_nature_tag():
-    """ 载入性格标签配置数据 """
+    """载入性格标签配置数据"""
     now_data = config_data["NatureTag"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -661,7 +661,7 @@ def load_nature_tag():
 
 
 def load_occupation_age_region():
-    """ 载入学生和老师各自年龄段生成权重配置数据 """
+    """载入学生和老师各自年龄段生成权重配置数据"""
     now_data = config_data["OccupationAgeRegion"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -673,7 +673,7 @@ def load_occupation_age_region():
 
 
 def load_occupation_bmi_region():
-    """ 载入学生和老师各自bmi范围权重配置 """
+    """载入学生和老师各自bmi范围权重配置"""
     now_data = config_data["OccupationBMIRegion"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -685,7 +685,7 @@ def load_occupation_bmi_region():
 
 
 def load_occupation_bodyfat_region():
-    """ 载入学生和老师各自体致率配置数据 """
+    """载入学生和老师各自体致率配置数据"""
     now_data = config_data["OccupationBodyFatRegion"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -700,7 +700,7 @@ def load_occupation_bodyfat_region():
 
 
 def load_organ_data():
-    """ 载入器官种类配置 """
+    """载入器官种类配置"""
     now_data = config_data["Organ"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -712,7 +712,7 @@ def load_organ_data():
 
 
 def load_recipes():
-    """ 载入菜谱配置数据 """
+    """载入菜谱配置数据"""
     now_data = config_data["Recipes"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -722,7 +722,7 @@ def load_recipes():
 
 
 def load_recipes_formula():
-    """ 载入菜谱配方配置 """
+    """载入菜谱配方配置"""
     now_data = config_data["RecipesFormula"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -735,7 +735,7 @@ def load_recipes_formula():
 
 
 def load_recipes_formula_type():
-    """ 载入菜谱配方材料类型配置数据 """
+    """载入菜谱配方材料类型配置数据"""
     now_data = config_data["RecipesFormulaType"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -745,7 +745,7 @@ def load_recipes_formula_type():
 
 
 def load_school():
-    """ 载入学校配置数据 """
+    """载入学校配置数据"""
     now_data = config_data["School"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -755,7 +755,7 @@ def load_school():
 
 
 def load_school_phase_course():
-    """ 载入各学校各年级课程科目配置数据 """
+    """载入各学校各年级课程科目配置数据"""
     now_data = config_data["SchoolPhaseCourse"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -768,7 +768,7 @@ def load_school_phase_course():
 
 
 def load_school_session():
-    """ 载入学校上课时间配置 """
+    """载入学校上课时间配置"""
     now_data = config_data["SchoolSession"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -780,7 +780,7 @@ def load_school_session():
 
 
 def load_season():
-    """ 载入季节配置 """
+    """载入季节配置"""
     now_data = config_data["Season"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -790,7 +790,7 @@ def load_season():
 
 
 def load_sex_experience():
-    """ 载入性经验丰富模板对应器官性经验模板配置数据 """
+    """载入性经验丰富模板对应器官性经验模板配置数据"""
     now_data = config_data["SexExperience"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -802,7 +802,7 @@ def load_sex_experience():
 
 
 def load_sex_experience_tem():
-    """ 载入器官类型性经验丰富程度对应经验范围 """
+    """载入器官类型性经验丰富程度对应经验范围"""
     now_data = config_data["SexExperienceTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -814,7 +814,7 @@ def load_sex_experience_tem():
 
 
 def load_sex_tem():
-    """ 载入性别对应描述和性别器官模板数据 """
+    """载入性别对应描述和性别器官模板数据"""
     now_data = config_data["SexTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -825,7 +825,7 @@ def load_sex_tem():
 
 
 def load_social_type():
-    """ 载入社交关系配置数据 """
+    """载入社交关系配置数据"""
     now_data = config_data["SocialType"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -835,7 +835,7 @@ def load_social_type():
 
 
 def load_solar_period():
-    """ 载入节气配置 """
+    """载入节气配置"""
     now_data = config_data["SolarPeriod"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -845,7 +845,7 @@ def load_solar_period():
 
 
 def load_stature_description_premise():
-    """ 载入身材描述文本前提配置数据 """
+    """载入身材描述文本前提配置数据"""
     now_data = config_data["StatureDescriptionPremise"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -857,7 +857,7 @@ def load_stature_description_premise():
 
 
 def load_stature_description_text():
-    """ 载入身材描述文本配置数据 """
+    """载入身材描述文本配置数据"""
     now_data = config_data["StatureDescriptionText"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -867,7 +867,7 @@ def load_stature_description_text():
 
 
 def load_status():
-    """ 载入状态类型配置数据 """
+    """载入状态类型配置数据"""
     now_data = config_data["Status"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -877,7 +877,7 @@ def load_status():
 
 
 def load_sun_time():
-    """ 载入太阳时间配置 """
+    """载入太阳时间配置"""
     now_data = config_data["SunTime"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -887,7 +887,7 @@ def load_sun_time():
 
 
 def load_talk():
-    """ 载入口上配置 """
+    """载入口上配置"""
     now_data = config_data["Talk"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -899,7 +899,7 @@ def load_talk():
 
 
 def load_talk_premise():
-    """ 载入口上前提配置 """
+    """载入口上前提配置"""
     now_data = config_data["TalkPremise"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -911,7 +911,7 @@ def load_talk_premise():
 
 
 def load_target():
-    """ 载入目标配置 """
+    """载入目标配置"""
     now_data = config_data["Target"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -921,7 +921,7 @@ def load_target():
 
 
 def load_target_effect():
-    """ 载入目标效果配置 """
+    """载入目标效果配置"""
     now_data = config_data["TargetEffect"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -935,7 +935,7 @@ def load_target_effect():
 
 
 def load_target_premise():
-    """ 载入目标效果配置 """
+    """载入目标效果配置"""
     now_data = config_data["TargetPremise"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -947,7 +947,7 @@ def load_target_premise():
 
 
 def load_waist_hip_proportion():
-    """ 载入不同肥胖程度腰臀比例差值配置 """
+    """载入不同肥胖程度腰臀比例差值配置"""
     now_data = config_data["WaistHipProportion"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -957,7 +957,7 @@ def load_waist_hip_proportion():
 
 
 def load_week_day():
-    """ 载入星期描述文本配置数据 """
+    """载入星期描述文本配置数据"""
     now_data = config_data["WeekDay"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -967,7 +967,7 @@ def load_week_day():
 
 
 def load_weight_tem():
-    """ 载入体重模板对应体重范围 """
+    """载入体重模板对应体重范围"""
     now_data = config_data["WeightTem"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
@@ -977,7 +977,7 @@ def load_weight_tem():
 
 
 def init():
-    """ 初始化游戏配置数据 """
+    """初始化游戏配置数据"""
     load_data_json()
     load_age_judge_sex_experience_tem_data()
     load_age_tem()

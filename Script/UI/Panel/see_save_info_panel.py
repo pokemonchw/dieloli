@@ -34,7 +34,7 @@ class SeeSaveListPanel:
     """
 
     def __init__(self, width: int, write_save: bool):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.width: int = width
         """ 最大绘制宽度 """
         self.return_list: List[str] = []
@@ -46,7 +46,7 @@ class SeeSaveListPanel:
         """ 页面控制对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         while 1:
             if cache.back_save_panel:
                 cache.back_save_panel = 0
@@ -86,7 +86,7 @@ class SaveInfoDraw:
     """
 
     def __init__(self, text: str, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text: str = str(text[0])
         """ 存档id """
         self.write_save: bool = text[1]
@@ -129,7 +129,7 @@ class SaveInfoDraw:
             self.draw_text = new_text
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         if self.is_button and (self.save_exist_judge or self.write_save):
             now_draw = draw.Button(self.draw_text, self.button_return, cmd_func=self.draw_save_handle)
         else:
@@ -139,7 +139,7 @@ class SaveInfoDraw:
         now_draw.draw()
 
     def draw_save_handle(self):
-        """ 处理读写存档 """
+        """处理读写存档"""
         py_cmd.clr_cmd()
         line_feed.draw()
         if self.save_exist_judge:
@@ -184,11 +184,11 @@ class SaveInfoDraw:
             save_handle.establish_save(self.text)
 
     def load_save(self):
-        """ 载入存档 """
+        """载入存档"""
         save_handle.input_load_save(str(self.text))
         cache.now_panel_id = constant.Panel.IN_SCENE
         cache.back_save_panel = 1
 
     def delete_save(self):
-        """ 删除存档 """
+        """删除存档"""
         save_handle.remove_save(self.text)

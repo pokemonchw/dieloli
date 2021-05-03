@@ -25,7 +25,7 @@ class SeeCharacterPutOnClothingListPanel:
     """
 
     def __init__(self, character_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 绘制的角色id """
         self.width: int = width
@@ -34,7 +34,7 @@ class SeeCharacterPutOnClothingListPanel:
         """ 当前面板监听的按钮列表 """
 
     def draw(self):
-        """ 绘制面板 """
+        """绘制面板"""
         character_data = cache.character_data[self.character_id]
         title_draw = draw.TitleLineDraw(_("人物服装"), self.width)
         title_draw.draw()
@@ -102,14 +102,14 @@ class ClothingDescribeDraw:
     """
 
     def __init__(self, clothing_id: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.clothing_id: int = clothing_id
         """ 服装id """
         self.width: int = width
         """ 绘制宽度 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         clothing_config = game_config.config_clothing_tem[self.clothing_id]
         info_draw = draw.WaitDraw()
         info_draw.text = clothing_config.describe
@@ -139,7 +139,7 @@ class ClothingInfoDrawPanel:
         draw_button: bool = False,
         button_id: int = 0,
     ):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.character_id: int = character_id
         """ 服装所属的角色id """
         character_data = cache.character_data[character_id]
@@ -203,7 +203,7 @@ class ClothingInfoDrawPanel:
         now_draw.draw()
 
     def see_clothing_info(self):
-        """ 查看服装信息 """
+        """查看服装信息"""
         py_cmd.clr_cmd()
         now_draw = ClothingDescribeDraw(self.clothing_data.tem_id, self.width)
         now_draw.width = self.width
@@ -222,7 +222,7 @@ class WearClothingListPanel:
     """
 
     def __init__(self, clothing_type: int, width: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         character_data: game_type.Character = cache.character_data[0]
         self.width: int = width
         """ 绘制宽度 """
@@ -236,7 +236,7 @@ class WearClothingListPanel:
             )
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         py_cmd.clr_cmd()
         if self.handle_panel is not None:
             while 1:
@@ -277,7 +277,7 @@ class ChangeClothingDraw:
     """
 
     def __init__(self, text: Tuple, width: int, is_button: bool, num_button: bool, button_id: int):
-        """ 初始化绘制对象 """
+        """初始化绘制对象"""
         self.text: UUID = text[0]
         """ 服装id """
         self.clothing_type: int = text[1]
@@ -337,7 +337,7 @@ class ChangeClothingDraw:
         self.draw_text = " " * self.width
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.text_list[1] = text_handle.align(
             self.text_list[1], "center", text_width=self.width - self.id_width
         )
@@ -351,7 +351,7 @@ class ChangeClothingDraw:
         now_draw.draw()
 
     def change_clothing(self):
-        """ 更换角色服装 """
+        """更换角色服装"""
         py_cmd.clr_cmd()
         info_draw = ClothingDescribeDraw(self.clothing_data.tem_id, self.width)
         info_draw.draw()

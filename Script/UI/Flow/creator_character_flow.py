@@ -32,7 +32,7 @@ line = draw.LineDraw("=", width)
 
 @handle_panel.add_panel(constant.Panel.CREATOR_CHARACTER)
 def creator_character_panel():
-    """ 创建角色面板 """
+    """创建角色面板"""
     cache.character_data[0] = game_type.Character()
     character_handle.init_character_list()
     while 1:
@@ -46,7 +46,7 @@ def creator_character_panel():
 
 
 def game_start():
-    """ 初始化游戏数据 """
+    """初始化游戏数据"""
     character_handle.init_character_dormitory()
     character_handle.init_character_position()
     course.init_phase_course_hour()
@@ -64,7 +64,7 @@ def game_start():
 
 
 def confirm_character_attr_panel():
-    """ 确认角色属性面板 """
+    """确认角色属性面板"""
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
     askfor_panel = panel.OneMessageAndSingleColumnButton()
     while 1:
@@ -211,7 +211,7 @@ def input_setting_panel() -> bool:
 
 
 def input_setting_now() -> bool:
-    """ 启动详细信息设置 """
+    """启动详细信息设置"""
     panel_list = random.sample(setting_panel_data, len(setting_panel_data))
     for now_panel in panel_list:
         line_feed_draw.draw()
@@ -244,7 +244,7 @@ def add_setting_panel() -> FunctionType:
 
 @add_setting_panel()
 def setting_age_tem_panel():
-    """ 设置年龄模板 """
+    """设置年龄模板"""
     character_data: game_type.Character = cache.character_data[0]
     message = _("{character_nick_name}是一个小孩子吗？").format(character_nick_name=character_data.nick_name)
     ask_list = [
@@ -264,7 +264,7 @@ def setting_age_tem_panel():
 
 @add_setting_panel()
 def setting_weight_panel():
-    """ 设置体重模板 """
+    """设置体重模板"""
     character_data = cache.character_data[0]
     message = _("{character_nick_name}对自己的体重有自信吗？").format(character_nick_name=character_data.nick_name)
     ask_list = [
@@ -284,7 +284,7 @@ def setting_weight_panel():
 
 @add_setting_panel()
 def setting_sex_experience_panel():
-    """ 设置性经验模板 """
+    """设置性经验模板"""
     character_data = cache.character_data[0]
     message = _("{character_nick_name}是否有过性经验呢？").format(character_nick_name=character_data.nick_name)
     ask_list = [
@@ -303,7 +303,7 @@ def setting_sex_experience_panel():
 
 @add_setting_panel()
 def setting_nature_0_panel():
-    """ 设置性格倾向:活跃 """
+    """设置性格倾向:活跃"""
     character_data = cache.character_data[0]
     message = _("{character_nick_name}是否是一个有话就说，从来不憋在心里的人呢？").format(
         character_nick_name=character_data.nick_name
@@ -319,7 +319,7 @@ def setting_nature_0_panel():
 
 @add_setting_panel()
 def setting_nature_1_panel():
-    """ 设置性格倾向:合群 """
+    """设置性格倾向:合群"""
     character_data = cache.character_data[0]
     message = _("{character_nick_name}在参加聚会时，会很自然的融入进人群里吗？").format(
         character_nick_name=character_data.nick_name
@@ -335,7 +335,7 @@ def setting_nature_1_panel():
 
 @add_setting_panel()
 def setting_nature_2_panel():
-    """ 设置性格倾向:乐观 """
+    """设置性格倾向:乐观"""
     character_data = cache.character_data[0]
     message = _("{character_nick_name}有憧憬过未来的人生吗？").format(character_nick_name=character_data.nick_name)
     ask_list = [_("有"), _("没有")]
@@ -349,7 +349,7 @@ def setting_nature_2_panel():
 
 @add_setting_panel()
 def setting_nature_3_panel():
-    """ 设置性格倾向:守信 """
+    """设置性格倾向:守信"""
     character_data = cache.character_data[0]
     message = _("承诺过的事情就一定要做到？")
     ask_list = [_("会"), _("视情况而定")]
@@ -363,7 +363,7 @@ def setting_nature_3_panel():
 
 @add_setting_panel()
 def setting_nature_4_panel():
-    """ 设置性格区间:无私 """
+    """设置性格区间:无私"""
     character_data = cache.character_data[0]
     message = _("考虑问题时会顾及到别人的利益吗？")
     ask_list = [_("会"), _("不会")]
@@ -377,7 +377,7 @@ def setting_nature_4_panel():
 
 @add_setting_panel()
 def setting_nature_5_panel():
-    """ 设置性格区间:重情 """
+    """设置性格区间:重情"""
     character_data = cache.character_data[0]
     message = _("关心别人的时候会让自己感到快乐？")
     ask_list = [_("会"), _("不会")]
@@ -391,7 +391,7 @@ def setting_nature_5_panel():
 
 @add_setting_panel()
 def setting_nature_6_panel():
-    """ 设置性格区间:严谨 """
+    """设置性格区间:严谨"""
     character_data = cache.character_data[0]
     message = _("对于自己的任务，会一丝不苟的去完成吗？")
     ask_list = [_("会"), _("不会")]
@@ -405,7 +405,7 @@ def setting_nature_6_panel():
 
 @add_setting_panel()
 def setting_nature_7_panel():
-    """ 设置性格区间:自律 """
+    """设置性格区间:自律"""
     character_data = cache.character_data[0]
     message = _("{character_nick_name}是一个即使不会被发现，也绝不弄虚作假的人吗？").format(
         character_nick_name=character_data.nick_name
@@ -421,7 +421,7 @@ def setting_nature_7_panel():
 
 @add_setting_panel()
 def setting_nature_8_panel():
-    """ 设置性格区间:沉稳 """
+    """设置性格区间:沉稳"""
     character_data = cache.character_data[0]
     message = _("即使在一些很随便的场合，也会表现得很严肃对吗？")
     ask_list = [_("会"), _("不会")]
@@ -435,7 +435,7 @@ def setting_nature_8_panel():
 
 @add_setting_panel()
 def setting_nature_9_panel():
-    """ 设置性格区间:决断 """
+    """设置性格区间:决断"""
     character_data = cache.character_data[0]
     message = _("{character_nick_name}总是很轻率的做出了决定对吗？").format(character_nick_name=character_data.nick_name)
     ask_list = [_("是"), _("不是")]
@@ -449,7 +449,7 @@ def setting_nature_9_panel():
 
 @add_setting_panel()
 def setting_nature_10_panel():
-    """ 设置性格区间:坚韧 """
+    """设置性格区间:坚韧"""
     character_data = cache.character_data[0]
     message = _("不会轻易的放弃自己的理想？")
     ask_list = [_("是"), _("不是")]
@@ -463,7 +463,7 @@ def setting_nature_10_panel():
 
 @add_setting_panel()
 def setting_nature_11_panel():
-    """ 设置性格区间:机敏 """
+    """设置性格区间:机敏"""
     character_data = cache.character_data[0]
     message = _("喜欢多与对{character_nick_name}有利的人交往对吗？").format(character_nick_name=character_data.nick_name)
     ask_list = [_("是"), _("不是")]
@@ -477,7 +477,7 @@ def setting_nature_11_panel():
 
 @add_setting_panel()
 def setting_nature_12_panel():
-    """ 设置性格区间:耐性 """
+    """设置性格区间:耐性"""
     character_data = cache.character_data[0]
     message = _("对工作会倾注全部的热情？")
     ask_list = [_("是"), _("不是")]
@@ -491,7 +491,7 @@ def setting_nature_12_panel():
 
 @add_setting_panel()
 def setting_nature_13_panel():
-    """ 设置性格区间:爽直 """
+    """设置性格区间:爽直"""
     character_data = cache.character_data[0]
     message = _("{character_nick_name}是一个心直口快，想到什么说什么的人对吗？").format(
         character_nick_name=character_data.nick_name
