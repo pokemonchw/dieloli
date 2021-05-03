@@ -276,9 +276,9 @@ def get_sun_time(now_time: datetime.datetime) -> int:
     now_date_str = f"{now_time.year}/{now_time.month}/{now_time.day}"
     now_time = now_time.astimezone(time_zone)
     if (
-        now_date_str not in cache.sun_phase
-        or now_time.hour not in cache.sun_phase[now_date_str]
-        or now_time.minute not in cache.sun_phase[now_date_str][now_time.hour]
+        (now_date_str not in cache.sun_phase)
+        or (now_time.hour not in cache.sun_phase[now_date_str])
+        or (now_time.minute not in cache.sun_phase[now_date_str][now_time.hour])
     ):
         new_time = datetime.datetime(now_time.year, now_time.month, now_time.day)
         gatech.date = datetime.datetime.utcfromtimestamp(new_time.timestamp())
@@ -287,14 +287,14 @@ def get_sun_time(now_time: datetime.datetime) -> int:
             sun.compute(gatech)
             now_az = sun.az * 57.2957795
             new_date: datetime.datetime = gatech.date.datetime()
-            new_date.astimezone(datetime.timezone.utc)
+            new_date = new_date.replace(tzinfo=time_zone.utc)
             new_date = new_date.astimezone(time_zone)
             new_date_str = f"{new_date.year}/{new_date.month}/{new_date.day}"
             cache.sun_phase.setdefault(new_date_str, {})
             cache.sun_phase[new_date_str].setdefault(new_date.hour, {})
             cache.sun_phase[new_date_str][new_date.hour][new_date.minute] = get_sun_phase_for_sun_az(now_az)
         if len(cache.sun_phase) > 3:
-            del_date = list(cache.sun_phase.keys())[0]
+            del_date = sorted(list(cache.sun_phase.keys()))[0]
             del cache.sun_phase[del_date]
     return cache.sun_phase[now_date_str][now_time.hour][now_time.minute]
 

@@ -487,7 +487,7 @@ class CharacterStatureInfoText:
         now_chest_tem_id = attr_calculation.judge_chest_group(character_data.chest.now_chest)
         now_chest_tem = game_config.config_chest[now_chest_tem_id]
         body_fat = str(round(character_data.bodyfat, 2))
-        body_fat_text = _("体脂率:") + body_fat
+        body_fat_text = _("体脂率:") + body_fat + "%"
         now_chest_text = _("罩杯:") + now_chest_tem.info
         self.info_list = [now_height_text, now_weight_text, now_chest_text, body_fat_text]
         """ 绘制的文本列表 """
