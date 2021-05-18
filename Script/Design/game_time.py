@@ -263,18 +263,20 @@ def judge_datetime_solar_period(now_time: datetime.datetime) -> (bool, int):
     return 0, 0
 
 
-def get_sun_time(now_time: datetime.datetime) -> int:
+def get_sun_time(old_time: datetime.datetime) -> int:
     """
     根据时间获取太阳位置id
     Keyword arguments:
-    now_time -- 时间
+    old_time -- 时间
     Return arguments:
     int -- 太阳位置id
     """
     if "sun_phase" not in cache.__dict__:
         cache.__dict__["sun_phase"] = {}
-    now_date_str = f"{now_time.year}/{now_time.month}/{now_time.day}"
-    now_time = now_time.astimezone(time_zone)
+    now_date_str = f"{old_time.year}/{old_time.month}/{old_time.day}"
+    now_time = old_time.astimezone(time_zone)
+    if now_time.hour > old_time.hour:
+        now_time = datetime.datetime(old_time.year,old_time.month,old_time.day,old_time.minute,tzinfo=time_zone)
     gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
     if (
         (now_date_str not in cache.sun_phase)
