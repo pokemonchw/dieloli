@@ -310,6 +310,7 @@ def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type:
                     food_list[food_name].add(food_uid)
         elif food_type == _("饮品"):
             if food_data.recipe == -1:
+                food_config = game_config.config_food[food_data.id]
                 if (
                     28 in food_feel_data
                     and not food_config.fruit
@@ -328,18 +329,21 @@ def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type:
                     food_list[food_name].add(food_uid)
         elif food_type == _("水果"):
             if food_data.recipe == -1:
+                food_config = game_config.config_food[food_data.id]
                 if food_config.fruit:
                     food_name = food_config.name
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == _("食材"):
             if food_data.recipe == -1:
+                food_config = game_config.config_food[food_data.id]
                 if food_config.cook:
                     food_name = food_config.name
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == _("调料"):
             if food_data.recipe == -1:
+                food_config = game_config.config_food[food_data.id]
                 if food_config.seasoning:
                     food_name = food_config.name
                     food_list.setdefault(food_name, set())

@@ -100,7 +100,7 @@ def get_sub_date(
     if not old_date:
         old_date = cache.game_time
     old_date_data = datetime.datetime.fromtimestamp(old_date)
-    new_date:datetime.datetime = old_date_data + relativedelta.relativedelta(
+    new_date: datetime.datetime = old_date_data + relativedelta.relativedelta(
         years=year, months=month, days=day, hours=hour, minutes=minute
     )
     return new_date.timestamp()
@@ -283,7 +283,9 @@ def get_sun_time(old_time: int) -> int:
     now_date_str = f"{old_time.year}/{old_time.month}/{old_time.day}"
     now_time = old_time.astimezone(time_zone)
     if now_time.hour > old_time.hour:
-        now_time = datetime.datetime(old_time.year,old_time.month,old_time.day,old_time.minute,tzinfo=time_zone)
+        now_time = datetime.datetime(
+            old_time.year, old_time.month, old_time.day, old_time.minute, tzinfo=time_zone
+        )
     gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
     if (
         (now_date_str not in cache.sun_phase)

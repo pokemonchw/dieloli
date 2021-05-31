@@ -199,9 +199,7 @@ def change_character_favorability_for_time(character_id: int, now_time: int):
             continue
         now_cut_down = get_cut_down_favorability_for_consume_time(int(now_consume_time / 60))
         if now_character in character_data.social_contact_last_cut_down_time:
-            last_cut_down_time = character_data.social_contact_last_cut_down_time[
-                now_character
-            ]
+            last_cut_down_time = character_data.social_contact_last_cut_down_time[now_character]
             old_consume_time = int((last_cut_down_time - last_add_time) / 60)
             old_cut_down = get_cut_down_favorability_for_consume_time(int(old_consume_time / 60))
             now_cut_down -= old_cut_down

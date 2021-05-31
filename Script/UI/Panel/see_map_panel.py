@@ -65,7 +65,7 @@ class SeeMapPanel:
             return_list = []
             index = 0
             for now_draw_line in now_draw_list.draw_text:
-                now_draw_line:game_type.MapDrawLine = now_draw_line
+                now_draw_line: game_type.MapDrawLine = now_draw_line
                 fix_width = int((self.width - now_draw_line.width) / 2)
                 fix_text = " " * fix_width
                 fix_draw = draw.NormalDraw()
@@ -375,7 +375,7 @@ class GlobalSceneNamePanel:
         multi_media_class_room_a_path = ["1", "3", "1"]
         multi_media_class_room_b_path = ["1", "3", "2"]
         music_class_room_path = ["1", "4", "1"]
-        student_union_office_path = ["3","1","4"]
+        student_union_office_path = ["3", "1", "4"]
         shop_path = ["11"]
         dormitory_path = map_handle.get_map_system_path_for_str(character_data.dormitory)
         path_list = [

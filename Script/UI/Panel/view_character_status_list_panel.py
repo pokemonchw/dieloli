@@ -23,25 +23,33 @@ class CharacterStatusListPanel:
     width -- 绘制宽度
     """
 
-    def __init__(self,width:int):
-        """ 初始化绘制对象 """
+    def __init__(self, width: int):
+        """初始化绘制对象"""
         self.width: int = width
         self.handle_panel: panel.PageHandlePanel = None
         """ 当前角色列表控制面板 """
         self.now_panel = _("存活")
         """ 当前面板类型 """
-        self.live_list = [character_id for character_id in cache.character_data if cache.character_data[character_id].state != constant.CharacterStatus.STATUS_DEAD]
+        self.live_list = [
+            character_id
+            for character_id in cache.character_data
+            if cache.character_data[character_id].state != constant.CharacterStatus.STATUS_DEAD
+        ]
         """ 存活的角色列表 """
-        self.dead_list = [character_id for character_id in cache.character_data if cache.character_data[character_id].state == constant.CharacterStatus.STATUS_DEAD]
+        self.dead_list = [
+            character_id
+            for character_id in cache.character_data
+            if cache.character_data[character_id].state == constant.CharacterStatus.STATUS_DEAD
+        ]
         """ 死亡的角色列表 """
 
     def draw(self):
-        """ 绘制对象 """
-        title_draw = draw.TitleLineDraw(_("Alpha监控台"),self.width)
-        panel_type_list = [_("存活"),_("死亡")]
+        """绘制对象"""
+        title_draw = draw.TitleLineDraw(_("Alpha监控台"), self.width)
+        panel_type_list = [_("存活"), _("死亡")]
         panel_data = [
-            panel.PageHandlePanel(self.live_list,SeeCharacterStatusDraw,10,1,window_width,1,1,0),
-            panel.PageHandlePanel(self.dead_list,SeeCharacterStatusDraw,10,1,window_width,1,1,0)
+            panel.PageHandlePanel(self.live_list, SeeCharacterStatusDraw, 10, 1, window_width, 1, 1, 0),
+            panel.PageHandlePanel(self.dead_list, SeeCharacterStatusDraw, 10, 1, window_width, 1, 1, 0),
         ]
         while 1:
             if cache.now_panel_id != constant.Panel.VIEW_CHARACTER_STATUS_LIST:
@@ -71,7 +79,7 @@ class CharacterStatusListPanel:
                     now_draw.draw()
                     return_list.append(now_draw.return_text)
             line_feed.draw()
-            line = draw.LineDraw("+",self.width)
+            line = draw.LineDraw("+", self.width)
             line.draw()
             self.handle_panel.draw()
             return_list.extend(self.handle_panel.return_list)
@@ -102,13 +110,14 @@ class SeeCharacterStatusDraw:
     num_button -- 绘制数字按钮
     button_id -- 数字按钮id
     """
-    def __init__(self,text:int,width:int,is_button:bool,num_button:bool,button_id:int):
-        """ 初始化绘制对象 """
+
+    def __init__(self, text: int, width: int, is_button: bool, num_button: bool, button_id: int):
+        """初始化绘制对象"""
         self.text = text
         """ 角色id """
-        self.draw_text:str = ""
+        self.draw_text: str = ""
         """ 角色状态和名字绘制文本 """
-        self.width:int = width
+        self.width: int = width
         """ 最大宽度 """
         self.num_button: bool = num_button
         """ 绘制数字按钮 """
@@ -121,16 +130,18 @@ class SeeCharacterStatusDraw:
         status_text = game_config.config_status[character_data.state].name
         position_text = attr_text.get_scene_path_text(character_data.position)
         button_text = f"{index_text} {character_data.name} {status_text} {position_text}"
-        now_draw = draw.LeftButton(button_text,self.button_return,self.width,cmd_func=self.move_to_character)
+        now_draw = draw.LeftButton(
+            button_text, self.button_return, self.width, cmd_func=self.move_to_character
+        )
         self.now_draw = now_draw
         """ 绘制的对象 """
 
     def draw(self):
-        """ 绘制对象 """
+        """绘制对象"""
         self.now_draw.draw()
 
     def move_to_character(self):
-        """ 移动至角色所在场景 """
+        """移动至角色所在场景"""
         character_data: game_type.Character = cache.character_data[self.text]
         py_cmd.clr_cmd()
         line_feed.draw()
