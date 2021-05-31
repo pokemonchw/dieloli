@@ -506,8 +506,8 @@ def handle_self_study():
     _("Alpha监控台"),
     {
         constant.Premise.IN_STUDENT_UNION_OFFICE,
-    }
+    },
 )
 def handle_view_character_status_list():
-    """ 打开角色状态监控面板指令 """
+    """打开角色状态监控面板指令"""
     cache.now_panel_id = constant.Panel.VIEW_CHARACTER_STATUS_LIST

@@ -24,7 +24,7 @@ def get_random_name_for_sex(sex_grade: int) -> str:
         family_region_index = bisect.bisect_left(constant.family_region_int_list, family_random)
         family_region = constant.family_region_int_list[family_region_index]
         family_name = constant.family_region_list[family_region]
-        if sex_grade not in {0,1}:
+        if sex_grade not in {0, 1}:
             sex_grade = random.randint(0, 1)
         if sex_grade:
             name_random = random.randint(1, constant.girls_region_int_list[-1])

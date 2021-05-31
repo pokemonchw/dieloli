@@ -2700,4 +2700,4 @@ def handle_in_student_union_office(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.position == ["3","1","4"]
+    return character_data.position == ["3", "1", "4"]

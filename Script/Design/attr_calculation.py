@@ -84,7 +84,7 @@ def get_chest(chest_tem: int, birthday: int) -> game_type.Chest:
     over_age = int(value_handle.get_gauss_rand(14, 18))
     over_year_start = birthday + (over_age - 1) * 31536365
     over_year_end = birthday + over_age * 31536365
-    end_date = random.randint(over_year_start,over_year_end)
+    end_date = random.randint(over_year_start, over_year_end)
     now_date = cache.game_time
     end_day = int((end_date - birthday) / 86400)
     now_day = int((now_date - birthday) / 86400)
@@ -134,7 +134,9 @@ def get_rand_npc_birthday(age: int) -> int:
     birth_year = now_year - age
     birthday = game_time.get_rand_day_for_year(birth_year)
     birthday_data = datetime.datetime.fromtimestamp(birthday)
-    if now_month < birthday_data.month or (now_month == birthday_data.month and now_day < birthday_data.day):
+    if now_month < birthday_data.month or (
+        now_month == birthday_data.month and now_day < birthday_data.day
+    ):
         birthday = game_time.get_sub_date(year=-1, old_date=birthday)
     return birthday
 

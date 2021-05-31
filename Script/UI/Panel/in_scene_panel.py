@@ -84,7 +84,7 @@ class InScenePanel:
                         live_character_dict[now_character] = 0
             live_character_dict = value_handle.sorted_dict_for_values(live_character_dict)
             dead_character_dict = value_handle.sorted_dict_for_values(dead_character_dict)
-            character_list = list(live_character_dict.keys())+list(dead_character_dict.keys())
+            character_list = list(live_character_dict.keys()) + list(dead_character_dict.keys())
             character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
                 character_data.target_character_id = 0
