@@ -1,5 +1,4 @@
 import random
-import datetime
 import time
 import numpy
 from uuid import UUID
@@ -37,7 +36,6 @@ def init_character_behavior():
     """
     角色行为树总控制
     """
-    t1 = time.time()
     while 1:
         if len(cache.over_behavior_character) >= len(cache.character_data):
             break
@@ -47,8 +45,6 @@ def init_character_behavior():
             character_behavior(character_id, cache.game_time)
             judge_character_dead(character_id)
         update_cafeteria()
-    t2 = time.time()
-    print(t2 - t1)
     cache.over_behavior_character = set()
 
 
@@ -68,18 +64,18 @@ def update_cafeteria():
         cooking.init_restaurant_data()
 
 
-def character_behavior(character_id: int, now_time: datetime.datetime):
+def character_behavior(character_id: int, now_time: int):
     """
     角色行为控制
     Keyword arguments:
     character_id -- 角色id
-    now_time -- 指定时间
+    now_time -- 指定时间戳
     """
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    if character_data.behavior.start_time is None:
-        character.init_character_behavior_start_time(character_id, now_time)
+    if not character_data.behavior.start_time:
+        character_data.behavior.start_time = now_time
     if character_data.state == constant.CharacterStatus.STATUS_ARDER:
         if character_id:
             character_target_judge(character_id, now_time)
@@ -91,11 +87,12 @@ def character_behavior(character_id: int, now_time: datetime.datetime):
             cache.over_behavior_character.add(character_id)
 
 
-def character_target_judge(character_id: int, now_time: datetime.datetime):
+def character_target_judge(character_id: int, now_time: int):
     """
     查询角色可用目标活动并执行
     Keyword arguments:
     character_id -- 角色id
+    now_time -- 指定时间戳
     """
     premise_data = {}
     target_weight_data = {}
@@ -115,8 +112,7 @@ def character_target_judge(character_id: int, now_time: datetime.datetime):
         if now_judge:
             cache.over_behavior_character.add(character_id)
         else:
-            next_time = game_time.get_sub_date(minute=1, old_date=start_time)
-            cache.character_data[character_id].behavior.start_time = next_time
+            cache.character_data[character_id].behavior.start_time += 60
 
 
 def judge_character_dead(character_id: int):
@@ -143,11 +139,12 @@ def judge_character_dead(character_id: int):
             cache.over_behavior_character.add(character_id)
 
 
-def judge_character_status(character_id: int, now_time: datetime.datetime) -> int:
+def judge_character_status(character_id: int, now_time: int) -> int:
     """
     校验并结算角色状态
     Keyword arguments:
     character_id -- 角色id
+    now_time -- 指定时间戳
     Return arguments:
     bool -- 本次update时间切片内活动是否已完成
     """
@@ -155,23 +152,23 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
     scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path_str]
     start_time = character_data.behavior.start_time
-    end_time = game_time.get_sub_date(minute=character_data.behavior.duration, old_date=start_time)
+    end_time = start_time + 60 * character_data.behavior.duration
     if (
         character_data.target_character_id != character_id
         and character_data.target_character_id not in scene_data.character_list
     ):
         end_time = now_time
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
-    add_time = (end_time.timestamp() - start_time.timestamp()) / 60
+    add_time = (end_time - start_time) / 60
     if not add_time:
         character_data.behavior = game_type.Behavior()
         character_data.behavior.start_time = end_time
         character_data.state = constant.CharacterStatus.STATUS_ARDER
         return 1
     last_hunger_time = start_time
-    if character_data.last_hunger_time is not None:
+    if character_data.last_hunger_time:
         last_hunger_time = character_data.last_hunger_time
-    hunger_time = int((now_time - last_hunger_time).seconds / 60)
+    hunger_time = int((now_time - last_hunger_time) / 60)
     character_data.status.setdefault(27, 0)
     character_data.status.setdefault(28, 0)
     character_data.status[27] += hunger_time * 0.02
@@ -186,7 +183,7 @@ def judge_character_status(character_id: int, now_time: datetime.datetime) -> in
         character_data.behavior.start_time = end_time
         return 0
     elif time_judge == 2:
-        character.init_character_behavior_start_time(character_id, now_time)
+        character_data.behavior.start_time = now_time
         return 0
     return 1
 

@@ -417,7 +417,7 @@ def handle_in_sleep_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    now_time: datetime.datetime = character_data.behavior.start_time
+    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
     if now_time.hour >= 22 or now_time.hour <= 4:
         return 500
     return 0
@@ -433,7 +433,7 @@ def handle_in_siesta_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    now_time: datetime.datetime = character_data.behavior.start_time
+    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
     if now_time.hour >= 12 or now_time.hour <= 15:
         return 100
     return 0
@@ -2071,7 +2071,7 @@ def handle_approaching_class_time(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    now_time: datetime.datetime = character_data.behavior.start_time
+    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
     now_time_value = now_time.hour * 100 + now_time.minute
     next_time = 0
     if character_data.age <= 18:
@@ -2150,7 +2150,7 @@ def handle_teacher_no_in_classroom(character_id: int) -> int:
     if character_data.classroom == "":
         return 1
     classroom: game_type.Scene = cache.scene_data[character_data.classroom]
-    now_time: datetime.datetime = character_data.behavior.start_time
+    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
     if now_time is None:
         now_time = cache.game_time
     now_week = now_time.weekday()
@@ -2264,7 +2264,7 @@ def handle_have_students_in_classroom(character_id: int) -> int:
         return 0
     if character_id not in cache.teacher_school_timetable:
         return 0
-    now_time: datetime.datetime = character_data.behavior.start_time
+    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
     if now_time is None:
         now_time = cache.game_time
     now_week = now_time.weekday()
@@ -2515,8 +2515,8 @@ def handle_tonight_is_full_moon(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    now_time: datetime.datetime = character_data.behavior.start_time
-    if now_time is None:
+    now_time = character_data.behavior.start_time
+    if not now_time:
         now_time = cache.game_time
     moon_phase = game_time.get_moon_phase(now_time)
     if moon_phase in {11, 12}:
@@ -2688,3 +2688,16 @@ def handle_no_in_item_shop(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     return character_data.position != ["11"]
+
+
+@add_premise(constant.Premise.IN_STUDENT_UNION_OFFICE)
+def handle_in_student_union_office(character_id: int) -> int:
+    """
+    校验角色是否在学生会办公室中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.position == ["3","1","4"]

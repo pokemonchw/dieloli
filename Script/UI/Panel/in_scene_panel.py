@@ -68,6 +68,23 @@ class InScenePanel:
                 character_list = [i for i in character_set if i in character_data.collection_character]
             else:
                 character_list = list(character_set)
+            live_character_dict = {}
+            dead_character_dict = {}
+            for now_character in character_list:
+                now_character_data: game_type.Character = cache.character_data[now_character]
+                if now_character_data.state == constant.CharacterStatus.STATUS_DEAD:
+                    if now_character in character_data.favorability:
+                        dead_character_dict[now_character] = character_data.favorability[now_character]
+                    else:
+                        dead_character_dict[now_character] = 0
+                else:
+                    if now_character in character_data.favorability:
+                        llve_character_dict[now_character] = character_data.favorability[now_character]
+                    else:
+                        live_character_dict[now_character] = 0
+            live_character_dict = value_handle.sorted_dict_for_values(live_character_dict)
+            dead_character_dict = value_handle.sorted_dict_for_values(dead_character_dict)
+            character_list = list(live_character_dict.keys())+list(dead_character_dict.keys())
             character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
                 character_data.target_character_id = 0

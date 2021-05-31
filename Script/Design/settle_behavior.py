@@ -1,4 +1,3 @@
-import datetime
 import time
 from functools import wraps
 from types import FunctionType
@@ -15,17 +14,17 @@ _: FunctionType = get_text._
 """ 翻译api """
 
 
-def handle_settle_behavior(character_id: int, now_time: datetime.datetime):
+def handle_settle_behavior(character_id: int, now_time: int):
     """
     处理结算角色行为
     Keyword arguments:
     character_id -- 角色id
-    now_time -- 结算时间
+    now_time -- 结算的时间戳
     """
     now_character_data: game_type.Character = cache.character_data[character_id]
     status_data = game_type.CharacterStatusChange()
     start_time = now_character_data.behavior.start_time
-    add_time = int((now_time - start_time).seconds / 60)
+    add_time = int((now_time - start_time) / 60)
     behavior_id = now_character_data.behavior.behavior_id
     if behavior_id in game_config.config_behavior_effect_data:
         for effect_id in game_config.config_behavior_effect_data[behavior_id]:
@@ -182,28 +181,28 @@ def get_cut_down_favorability_for_consume_time(consume_time: int):
         return (consume_time - 999) * 1000 + 90909
 
 
-def change_character_favorability_for_time(character_id: int, now_time: datetime.datetime):
+def change_character_favorability_for_time(character_id: int, now_time: int):
     """
     按最后社交时间扣除角色好感度
     Keyword arguments:
     character_id -- 角色id
-    now_time -- 当前时间
+    now_time -- 当前时间戳
     """
     character_data: game_type.Character = cache.character_data[character_id]
     for now_character in character_data.favorability:
         if character_data.favorability[now_character] <= 500:
             continue
         character_data.social_contact_last_time.setdefault(now_character, now_time)
-        last_add_time: datetime.datetime = character_data.social_contact_last_time[now_character]
-        now_consume_time = int((now_time - last_add_time).seconds / 60)
+        last_add_time = character_data.social_contact_last_time[now_character]
+        now_consume_time = int((now_time - last_add_time) / 60)
         if now_consume_time < 60:
             continue
         now_cut_down = get_cut_down_favorability_for_consume_time(int(now_consume_time / 60))
         if now_character in character_data.social_contact_last_cut_down_time:
-            last_cut_down_time: datetime.datetime = character_data.social_contact_last_cut_down_time[
+            last_cut_down_time = character_data.social_contact_last_cut_down_time[
                 now_character
             ]
-            old_consume_time = int((last_cut_down_time - last_add_time).seconds / 60)
+            old_consume_time = int((last_cut_down_time - last_add_time) / 60)
             old_cut_down = get_cut_down_favorability_for_consume_time(int(old_consume_time / 60))
             now_cut_down -= old_cut_down
         character_data.favorability[now_character] -= now_cut_down
