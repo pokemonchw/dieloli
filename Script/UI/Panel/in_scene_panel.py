@@ -79,7 +79,7 @@ class InScenePanel:
                         dead_character_dict[now_character] = 0
                 else:
                     if now_character in character_data.favorability:
-                        llve_character_dict[now_character] = character_data.favorability[now_character]
+                        live_character_dict[now_character] = character_data.favorability[now_character]
                     else:
                         live_character_dict[now_character] = 0
             live_character_dict = value_handle.sorted_dict_for_values(live_character_dict)
