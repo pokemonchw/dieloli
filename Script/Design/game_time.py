@@ -176,7 +176,7 @@ def judge_date_big_or_small(time_a: int, time_b: int) -> int:
         return time_b < time_a
 
 
-def ecliptic_lon(now_time: datetime.datetime) -> float:
+def ecliptic_lon(now_time: int) -> float:
     """
     根据日期计算黄经
     now_time -- 日期
@@ -189,7 +189,7 @@ def ecliptic_lon(now_time: datetime.datetime) -> float:
     return e.lon
 
 
-def get_solar_period(now_time: datetime.datetime) -> int:
+def get_solar_period(now_time: int) -> int:
     """
     根据日期计算对应节气id
     Keyword arguments:
@@ -197,7 +197,7 @@ def get_solar_period(now_time: datetime.datetime) -> int:
     Return arguments:
     int -- 节气id
     """
-    e = ecliptic_lon(now_time)
+    e = ecliptic_lon(datetime.datetime.fromtimestamp(now_time))
     n = int(e * 180.0 / math.pi / 15)
     return n
 
