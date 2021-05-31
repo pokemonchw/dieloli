@@ -61,6 +61,8 @@ config_clothing_type: Dict[int, config_def.ClothingType] = {}
 """ 衣服种类配置数据 """
 config_clothing_use_type: Dict[int, config_def.ClothingUseType] = {}
 """ 衣服用途配置数据 """
+config_cook_type: Dict[int, config_def.CookType] = {}
+""" 烹饪类型配置数据 """
 config_course: Dict[int, config_def.Course] = {}
 """ 课程配置数据 """
 config_course_skill_experience: Dict[int, config_def.CourseSkillExperience] = {}
@@ -445,6 +447,16 @@ def load_clothing_use_type():
         now_type = config_def.ClothingUseType()
         now_type.__dict__ = tem_data
         config_clothing_use_type[now_type.cid] = now_type
+
+
+def load_cook_type():
+    """载入烹饪类型配置数据"""
+    now_data = config_data["CookType"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_type = config_def.CookType()
+        now_type.__dict__ = tem_data
+        config_cook_type[now_type.cid] = now_type
 
 
 def load_course():
@@ -994,6 +1006,7 @@ def init():
     load_clothing_tem()
     load_clothing_type()
     load_clothing_use_type()
+    load_cook_type()
     load_course()
     load_course_skill_experience()
     load_end_age_tem()

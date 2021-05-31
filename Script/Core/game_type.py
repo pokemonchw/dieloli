@@ -108,6 +108,10 @@ class Food:
         """ 可作为调料 """
         self.fruit: bool = False
         """ 是否是水果 """
+        self.liquid: bool = False
+        """ 是否是液体 """
+        self.cook_type: int = 0
+        """ 烹饪方式 """
 
 
 class Recipes:
@@ -124,6 +128,8 @@ class Recipes:
         """ 烹饪所使用的辅食材 """
         self.seasoning: list = []
         """ 烹饪所使用的调料 """
+        self.cook_type: int = 0
+        """ 烹饪方式 """
 
 
 class NormalConfig:
