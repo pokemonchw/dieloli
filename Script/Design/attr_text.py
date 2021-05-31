@@ -13,7 +13,7 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
-def get_random_name_for_sex(sex_grade: str) -> str:
+def get_random_name_for_sex(sex_grade: int) -> str:
     """
     按性别随机生成姓名
     Keyword arguments:
@@ -24,13 +24,9 @@ def get_random_name_for_sex(sex_grade: str) -> str:
         family_region_index = bisect.bisect_left(constant.family_region_int_list, family_random)
         family_region = constant.family_region_int_list[family_region_index]
         family_name = constant.family_region_list[family_region]
-        if sex_grade == "Man":
-            sex_judge = 1
-        elif sex_grade == "Woman":
-            sex_judge = 0
-        else:
-            sex_judge = random.randint(0, 1)
-        if sex_judge == 0:
+        if sex_grade not in {0,1}:
+            sex_grade = random.randint(0, 1)
+        if sex_grade:
             name_random = random.randint(1, constant.girls_region_int_list[-1])
             name_region_index = bisect.bisect_left(constant.girls_region_int_list, name_random)
             name_region = constant.girls_region_int_list[name_region_index]

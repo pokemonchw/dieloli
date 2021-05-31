@@ -188,6 +188,8 @@ class Panel:
     """ 道具商店面板 """
     VIEW_SCHOOL_TIMETABLE = 7
     """ 查看课程表 """
+    VIEW_CHARACTER_STATUS_LIST = 8
+    """ 查看角色状态监控面板 """
 
 
 class Premise:
@@ -519,6 +521,8 @@ class Premise:
     """ 不在超市中 """
     NO_IN_ITEM_SHOP = 162
     """ 在超市中 """
+    IN_STUDENT_UNION_OFFICE = 163
+    """ 在学生会办公室中 """
 
 
 class BehaviorEffect:
@@ -680,6 +684,8 @@ class Instruct:
     """ 查看属性 """
     SEE_OWNER_ATTR = 0
     """ 查看自身属性 """
+    VIEW_CHARACTER_STATUS_LIST = 0
+    """ 查看角色状态列表 """
     COLLECTION_CHARACTER = 0
     """ 收藏角色 """
     UN_COLLECTION_CHARACTER = 0

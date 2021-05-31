@@ -1,4 +1,3 @@
-import datetime
 from types import FunctionType
 from Script.Design import (
     settle_behavior,
@@ -27,7 +26,7 @@ def handle_add_small_hit_point(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量体力
@@ -35,7 +34,7 @@ def handle_add_small_hit_point(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -55,7 +54,7 @@ def handle_add_small_mana_point(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量气力
@@ -63,7 +62,7 @@ def handle_add_small_mana_point(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -83,7 +82,7 @@ def handle_add_interaction_favoravility(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加基础互动好感
@@ -91,7 +90,7 @@ def handle_add_interaction_favoravility(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -113,7 +112,7 @@ def handle_sub_small_hit_point(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     减少少量体力
@@ -121,7 +120,7 @@ def handle_sub_small_hit_point(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -142,7 +141,7 @@ def handle_sub_small_mana_point(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     减少少量气力
@@ -150,7 +149,7 @@ def handle_sub_small_mana_point(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -174,7 +173,7 @@ def handle_move_to_target_scene(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     移动至目标场景
@@ -182,7 +181,7 @@ def handle_move_to_target_scene(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -200,7 +199,7 @@ def handle_eat_food(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     食用指定食物
@@ -208,7 +207,7 @@ def handle_eat_food(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -250,7 +249,7 @@ def handle_add_social_favorability(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加社交关系好感
@@ -258,7 +257,7 @@ def handle_add_social_favorability(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -286,7 +285,7 @@ def handle_add_intimacy_favorability(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加亲密行为好感
@@ -294,7 +293,7 @@ def handle_add_intimacy_favorability(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -337,7 +336,7 @@ def handle_add_intimate_favorability(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加私密行为好感
@@ -345,7 +344,7 @@ def handle_add_intimate_favorability(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -389,7 +388,7 @@ def handle_add_small_sing_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量唱歌技能经验
@@ -397,7 +396,7 @@ def handle_add_small_sing_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -416,7 +415,7 @@ def handle_add_small_play_music_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量演奏技能经验
@@ -424,7 +423,7 @@ def handle_add_small_play_music_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -443,7 +442,7 @@ def handle_add_small_eloquence_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量口才技能经验
@@ -451,7 +450,7 @@ def handle_add_small_eloquence_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -470,7 +469,7 @@ def handle_add_small_perform_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量表演技能经验
@@ -478,7 +477,7 @@ def handle_add_small_perform_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -497,7 +496,7 @@ def handle_add_small_ceremony_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量礼仪技能经验
@@ -505,7 +504,7 @@ def handle_add_small_ceremony_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -524,7 +523,7 @@ def handle_add_small_sex_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量性爱技能经验
@@ -532,7 +531,7 @@ def handle_add_small_sex_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -551,7 +550,7 @@ def handle_add_small_mouth_sex_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量嘴部性爱经验
@@ -559,7 +558,7 @@ def handle_add_small_mouth_sex_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -586,7 +585,7 @@ def handle_add_small_mouth_happy_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加少量嘴部快感
@@ -594,7 +593,7 @@ def handle_add_small_mouth_happy_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -638,7 +637,7 @@ def handle_first_kiss(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     记录初吻
@@ -646,7 +645,7 @@ def handle_first_kiss(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -675,7 +674,7 @@ def handle_first_hand_in_hand(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     记录初次牵手
@@ -683,7 +682,7 @@ def handle_first_hand_in_hand(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -705,7 +704,7 @@ def handle_add_medium_hit_point(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加中量体力
@@ -713,7 +712,7 @@ def handle_add_medium_hit_point(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -733,7 +732,7 @@ def handle_add_medium_mana_point(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     增加中量气力
@@ -741,7 +740,7 @@ def handle_add_medium_mana_point(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -761,7 +760,7 @@ def handle_target_add_small_chest_sex_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     交互对象增加少量胸部性爱经验
@@ -769,7 +768,7 @@ def handle_target_add_small_chest_sex_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -792,7 +791,7 @@ def handle_target_add_small_mouth_happy(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     交互对象增加少量胸部快感
@@ -800,7 +799,7 @@ def handle_target_add_small_mouth_happy(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -832,7 +831,7 @@ def handle_target_add_small_penis_sex_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     交互对象增加少量阴茎性爱经验
@@ -840,7 +839,7 @@ def handle_target_add_small_penis_sex_experience(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -865,7 +864,7 @@ def handle_target_add_small_penis_happy(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     交互对象增加少量阴茎快感
@@ -873,7 +872,7 @@ def handle_target_add_small_penis_happy(
     character_id -- 角色id
     add_time -- 结算时间
     change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间
+    now_time -- 结算的时间戳
     """
     if not add_time:
         return
@@ -909,7 +908,7 @@ def handle_target_add_small_clitoris_sex_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     交互对象增加少量阴蒂性爱经验
@@ -942,7 +941,7 @@ def handle_target_add_small_clitoris_happy(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     交互对象增加少量阴蒂快感
@@ -984,7 +983,7 @@ def handle_add_small_lust(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     自身增加少量色欲
@@ -1014,7 +1013,7 @@ def handle_target_add_small_lust(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     交互对象增加少量色欲
@@ -1049,7 +1048,7 @@ def handle_interrupt_target_activity(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     打断交互目标活动
@@ -1090,7 +1089,7 @@ def handle_target_add_small_eloquence_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     交互对象增加少量口才技能经验
@@ -1118,7 +1117,7 @@ def handle_target_add_favorability_for_eloquence(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     按口才技能增加交互对象好感
@@ -1152,7 +1151,7 @@ def handle_add_small_attend_class_experience(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     按学习课程增加少量对应技能经验
@@ -1195,7 +1194,7 @@ def handle_add_student_course_experience_for_in_class_room(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     按课程增加教室内本班级学生的技能经验
@@ -1240,7 +1239,7 @@ def handle_target_add_favorability_for_performance(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     按表演技能增加交互对象好感
@@ -1279,7 +1278,7 @@ def handle_target_add_favorability_for_sing(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     按演唱技能增加交互对象好感
@@ -1318,7 +1317,7 @@ def handle_target_add_favorability_for_play_music(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     按演奏技能增加交互对象好感
@@ -1359,7 +1358,7 @@ def handle_target_add_favorability_for_target_interest(
     character_id: int,
     add_time: int,
     change_data: game_type.CharacterStatusChange,
-    now_time: datetime.datetime,
+    now_time: int,
 ):
     """
     按交互对象兴趣增加交互对象好感

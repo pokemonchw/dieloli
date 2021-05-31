@@ -80,7 +80,7 @@ def init_class(character_data: game_type.Character):
         cache.classroom_students_data[character_data.classroom].add(character_data.cid)
 
 
-def init_character_behavior_start_time(character_id: int, now_time: datetime.datetime):
+def init_character_behavior_start_time(character_id: int, now_time: int):
     """
     将角色的行动开始时间同步为指定时间
     Keyword arguments:
@@ -88,14 +88,7 @@ def init_character_behavior_start_time(character_id: int, now_time: datetime.dat
     now_time -- 指定时间
     """
     character_data = cache.character_data[character_id]
-    start_time = datetime.datetime(
-        now_time.year,
-        now_time.month,
-        now_time.day,
-        now_time.hour,
-        now_time.minute,
-    )
-    character_data.behavior.start_time = start_time
+    character_data.behavior.start_time = now_time
 
 
 def character_rest_to_time(character_id: int, need_time: int):
@@ -162,9 +155,11 @@ def judge_character_in_class_time(character_id: int) -> bool:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    now_time: datetime.datetime = character_data.behavior.start_time
-    if now_time is None:
-        now_time = cache.game_time
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = datetime.datetime.fromtimestamp(cache.game_time)
+    else:
+        now_time = datetime.datetime.fromtimestamp(now_time)
     now_time_value = now_time.hour * 100 + now_time.minute
     if character_data.age <= 18:
         school_id = 0

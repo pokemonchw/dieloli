@@ -7,4 +7,5 @@ from Script.UI.Flow import (
     food_bag_flow,
     item_shop_flow,
     view_school_timetable_flow,
+    view_character_status_list_flow,
 )

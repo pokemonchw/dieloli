@@ -71,7 +71,7 @@ def get_height(tem_name: int, age: int) -> game_type.Height:
     return height_data
 
 
-def get_chest(chest_tem: int, birthday: datetime.datetime) -> game_type.Chest:
+def get_chest(chest_tem: int, birthday: int) -> game_type.Chest:
     """
     按罩杯模板生成人物最终胸围差，并按人物年龄计算当前胸围差
     Keyword arguments:
@@ -82,11 +82,12 @@ def get_chest(chest_tem: int, birthday: datetime.datetime) -> game_type.Chest:
     """
     target_chest = get_rand_npc_chest(chest_tem)
     over_age = int(value_handle.get_gauss_rand(14, 18))
-    over_year = birthday.year + over_age
-    end_date = game_time.get_rand_day_for_year(over_year)
+    over_year_start = birthday + (over_age - 1) * 31536365
+    over_year_end = birthday + over_age * 31536365
+    end_date = random.randint(over_year_start,over_year_end)
     now_date = cache.game_time
-    end_day = game_time.count_day_for_datetime(birthday, end_date)
-    now_day = game_time.count_day_for_datetime(birthday, now_date)
+    end_day = int((end_date - birthday) / 86400)
+    now_day = int((now_date - birthday) / 86400)
     sub_chest = target_chest / end_day
     now_chest = sub_chest * now_day
     if now_chest > target_chest:
@@ -118,18 +119,22 @@ def get_rand_npc_chest(chest_tem: int) -> int:
     return value_handle.get_gauss_rand(chest_scope.min_value, chest_scope.max_value)
 
 
-def get_rand_npc_birthday(age: int):
+def get_rand_npc_birthday(age: int) -> int:
     """
     随机生成npc生日
     Keyword arguments:
     age -- 年龄
+    Return arguments:
+    int -- 生日
     """
-    now_year = cache.game_time.year
-    now_month = cache.game_time.month
-    now_day = cache.game_time.day
+    now_date = datetime.datetime.fromtimestamp(cache.game_time)
+    now_year = now_date.year
+    now_month = now_date.month
+    now_day = now_date.day
     birth_year = now_year - age
     birthday = game_time.get_rand_day_for_year(birth_year)
-    if now_month < birthday.month or (now_month == birthday.month and now_day < birthday.day):
+    birthday_data = datetime.datetime.fromtimestamp(birthday)
+    if now_month < birthday_data.month or (now_month == birthday_data.month and now_day < birthday_data.day):
         birthday = game_time.get_sub_date(year=-1, old_date=birthday)
     return birthday
 

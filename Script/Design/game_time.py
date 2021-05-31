@@ -34,17 +34,18 @@ def init_time():
         normal_config.config_normal.hour,
         normal_config.config_normal.minute,
     )
-    cache.game_time = game_time
+    cache.game_time = game_time.timestamp()
 
 
-def get_date_text(game_time_data: datetime.datetime = None) -> str:
+def get_date_text(text_time: int = 0) -> str:
     """
     获取时间信息描述文本
     Keyword arguments:
-    game_timeData -- 时间数据，若为None，则获取当前游戏时间
+    text_time -- 时间数据，若为0，则获取当前游戏时间
     """
-    if game_time_data is None:
-        game_time_data = cache.game_time
+    if not text_time:
+        text_time = cache.game_time
+    game_time_data = datetime.datetime.fromtimestamp(text_time)
     return _("时间:{year}年{month}月{day}日{hour}点{minute}分").format(
         year=game_time_data.year,
         month=game_time_data.month,
@@ -58,12 +59,13 @@ def get_week_day_text() -> str:
     """
     获取星期描述文本
     """
-    week_day = cache.game_time.weekday()
+    now_date = datetime.datetime.fromtimestamp(cache.game_time)
+    week_day = now_date.weekday()
     week_date_data = game_config.config_week_day[week_day]
     return week_date_data.name
 
 
-def sub_time_now(minute=0, hour=0, day=0, month=0, year=0) -> datetime.datetime:
+def sub_time_now(minute=0, hour=0, day=0, month=0, year=0):
     """
     增加当前游戏时间
     Keyword arguments:
@@ -83,8 +85,8 @@ def get_sub_date(
     day=0,
     month=0,
     year=0,
-    old_date: datetime.datetime = None,
-) -> datetime.datetime:
+    old_date: int = 0,
+) -> int:
     """
     获取旧日期增加指定时间后得到的新日期
     Keyword arguments:
@@ -93,17 +95,18 @@ def get_sub_date(
     day -- 增加天数
     month -- 增加月数
     year -- 增加年数
-    old_date -- 旧日期，若为None，则获取当前游戏时间
+    old_date -- 旧日期，若为0，则获取当前游戏时间
     """
-    if old_date is None:
+    if not old_date:
         old_date = cache.game_time
-    new_date = old_date + relativedelta.relativedelta(
+    old_date_data = datetime.datetime.fromtimestamp(old_date)
+    new_date:datetime.datetime = old_date_data + relativedelta.relativedelta(
         years=year, months=month, days=day, hours=hour, minutes=minute
     )
-    return new_date
+    return new_date.timestamp()
 
 
-def get_rand_day_for_year(year: int) -> datetime.datetime:
+def get_rand_day_for_year(year: int) -> int:
     """
     随机获取指定年份中一天的日期
     Keyword arguments:
@@ -113,7 +116,7 @@ def get_rand_day_for_year(year: int) -> datetime.datetime:
     """
     start = datetime.datetime(year, 1, 1, 0, 0, 0, 0)
     end = datetime.datetime(year, 12, 31, 23, 59, 59)
-    return get_rand_day_for_date(start, end)
+    return get_rand_day_for_date(start.timestamp(), end.timestamp())
 
 
 def timetuple_to_datetime(t: datetime.datetime.timetuple) -> datetime.datetime:
@@ -127,7 +130,7 @@ def timetuple_to_datetime(t: datetime.datetime.timetuple) -> datetime.datetime:
     return datetime.datetime(t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec)
 
 
-def get_rand_day_for_date(start_date: datetime.datetime, end_date: datetime.datetime) -> datetime.datetime:
+def get_rand_day_for_date(start_date: int, end_date: int) -> int:
     """
     随机获取两个日期中的日期
     Keyword arguments:
@@ -136,7 +139,7 @@ def get_rand_day_for_date(start_date: datetime.datetime, end_date: datetime.date
     Return arguments:
     time.localtime -- 随机日期
     """
-    sub_day = (end_date - start_date).days
+    sub_day = int((end_date - start_date) / 86400)
     sub_day = random.randint(0, sub_day)
     return get_sub_date(day=sub_day, old_date=start_date)
 
@@ -156,7 +159,7 @@ def count_day_for_datetime(
     return (start_date - end_date).days
 
 
-def judge_date_big_or_small(time_a: datetime.datetime, time_b: datetime.datetime) -> int:
+def judge_date_big_or_small(time_a: int, time_b: int) -> int:
     """
     比较当前时间是否大于或等于旧时间
     Keyword arguments:
@@ -199,7 +202,7 @@ def get_solar_period(now_time: datetime.datetime) -> int:
     return n
 
 
-def get_old_solar_period_time(now_time: datetime.datetime) -> (datetime.datetime, int):
+def get_old_solar_period_time(now_time: int) -> (int, int):
     """
     根据日期计算上个节气的开始日期
     Keyword arguments:
@@ -222,7 +225,7 @@ def get_old_solar_period_time(now_time: datetime.datetime) -> (datetime.datetime
     return new_time, s0
 
 
-def get_next_solar_period_time(now_time: datetime.datetime) -> (datetime.datetime, int):
+def get_next_solar_period_time(now_time: int) -> (int, int):
     """
     根据日期计算下个节气的开始日期
     Keyword arguments:
@@ -245,7 +248,7 @@ def get_next_solar_period_time(now_time: datetime.datetime) -> (datetime.datetim
     return new_time, s0
 
 
-def judge_datetime_solar_period(now_time: datetime.datetime) -> (bool, int):
+def judge_datetime_solar_period(now_time: int) -> (bool, int):
     """
     校验日期是否是节气以及获取节气id
     Keyword arguments:
@@ -255,15 +258,18 @@ def judge_datetime_solar_period(now_time: datetime.datetime) -> (bool, int):
     int -- 节气id
     """
     new_time, solar_period = get_old_solar_period_time(now_time)
+    new_time = datetime.datetime.fromtimestamp(new_time)
+    now_time = datetime.datetime.fromtimestamp(now_time)
     if new_time.year == now_time.year and new_time.month == now_time.month and new_time.day == now_time.day:
         return 1, solar_period
-    new_time, solar_period = get_next_solar_period_time(now_time)
+    new_time, solar_period = get_next_solar_period_time(now_time.timestamp())
+    new_time = datetime.datetime.fromtimestamp(new_time)
     if new_time.year == now_time.year and new_time.month == now_time.month and new_time.day == now_time.day:
         return 1, solar_period
     return 0, 0
 
 
-def get_sun_time(old_time: datetime.datetime) -> int:
+def get_sun_time(old_time: int) -> int:
     """
     根据时间获取太阳位置id
     Keyword arguments:
@@ -273,6 +279,7 @@ def get_sun_time(old_time: datetime.datetime) -> int:
     """
     if "sun_phase" not in cache.__dict__:
         cache.__dict__["sun_phase"] = {}
+    old_time = datetime.datetime.fromtimestamp(old_time)
     now_date_str = f"{old_time.year}/{old_time.month}/{old_time.day}"
     now_time = old_time.astimezone(time_zone)
     if now_time.hour > old_time.hour:
@@ -343,7 +350,7 @@ def get_sun_phase_for_sun_az(now_az: float) -> int:
     return 7
 
 
-def get_moon_phase(now_time: datetime.datetime) -> int:
+def get_moon_phase(now_time: int) -> int:
     """
     根据时间获取月相配置id
     Keyword arguments:
@@ -353,6 +360,7 @@ def get_moon_phase(now_time: datetime.datetime) -> int:
     """
     if "moon_phase" not in cache.__dict__:
         cache.__dict__["moon_phase"] = {}
+    now_time = datetime.datetime.fromtimestamp(now_time)
     now_date_str = f"{now_time.year}/{now_time.month}/{now_time.day}"
     if now_date_str not in cache.moon_phase:
         new_time = datetime.datetime(now_time.year, now_time.month, now_time.day)
@@ -384,9 +392,10 @@ def judge_attend_class_today(character_id: int) -> bool:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    now_time: datetime.datetime = character_data.behavior.start_time
-    if now_time is None:
+    now_time = character_data.behavior.start_time
+    if not now_time:
         now_time = cache.game_time
+    now_time = datetime.datetime.fromtimestamp(now_time)
     now_week = now_time.weekday()
     now_month = now_time.month
     if now_month not in {3, 4, 5, 6, 8, 9, 10, 11, 12}:

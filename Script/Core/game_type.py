@@ -1,6 +1,5 @@
 from uuid import UUID
 from typing import List, Dict, Set
-import datetime
 
 
 class FlowContorl:
@@ -254,8 +253,8 @@ class Behavior:
     """角色行为状态数据"""
 
     def __init__(self):
-        self.start_time: datetime.datetime = None
-        """ 行为开始时间 """
+        self.start_time: int = 0
+        """ 行为开始时间戳 """
         self.duration: int = 0
         """ 行为持续时间(单位分钟) """
         self.behavior_id: int = 0
@@ -429,8 +428,8 @@ class Character:
         """ 角色语言天赋数据 """
         self.dormitory: str = ""
         """ 角色宿舍坐标 """
-        self.birthday: datetime.datetime = datetime.datetime(1, 1, 1)
-        """ 角色生日数据 """
+        self.birthday: int = 0
+        """ 角色生日时间戳 """
         self.weight_tem: int = 1
         """ 角色体重模板 """
         self.bodyfat_tem: int = 1
@@ -462,10 +461,10 @@ class Character:
         """ 角色社交关系数据 关系类型:角色id集合 """
         self.social_contact_data: Dict[int, int] = {}
         """ 角色社交关系数据 角色id:关系类型 """
-        self.social_contact_last_time: Dict[int, datetime.datetime] = {}
-        """ 指定角色最后与自己社交的时间 """
-        self.social_contact_last_cut_down_time: Dict[int, datetime.datetime] = {}
-        """ 指定角色上次扣除好感时间 """
+        self.social_contact_last_time: Dict[int, int] = {}
+        """ 指定角色最后与自己社交的时间戳 """
+        self.social_contact_last_cut_down_time: Dict[int, int] = {}
+        """ 指定角色上次扣除好感时间戳 """
         self.favorability: Dict[int, int] = {}
         """ 角色好感度数据 角色id:好感度 """
         self.food_bag: Dict[UUID, Food] = {}
@@ -484,8 +483,8 @@ class Character:
         """ 角色已死亡 """
         self.collection_character: Set = set()
         """ 收藏的角色列表 """
-        self.last_hunger_time: datetime.datetime = None
-        """ 最后一次结算饥饿的时间 """
+        self.last_hunger_time: int = 0
+        """ 最后一次结算饥饿的时间戳 """
 
 
 class TeacherTimeTable:
@@ -540,8 +539,8 @@ class Cache:
         """ 图片id """
         self.cmd_data: dict = {}
         """ cmd数据 """
-        self.game_time: datetime.datetime = datetime.datetime(1, 1, 1)
-        """ 游戏时间 """
+        self.game_time: int = 0
+        """ 游戏时间戳 """
         self.now_panel_id: int = 0
         """ 当前游面板id """
         self.course_data: Dict[int, Dict[int, Dict[int, int]]] = {}

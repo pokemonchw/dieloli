@@ -498,3 +498,16 @@ def handle_self_study():
     character_data.state = constant.CharacterStatus.STATUS_SELF_STUDY
     character_data.behavior.course_id = now_course
     update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.VIEW_CHARACTER_STATUS_LIST,
+    constant.InstructType.SYSTEM,
+    _("Alpha监控台"),
+    {
+        constant.Premise.IN_STUDENT_UNION_OFFICE,
+    }
+)
+def handle_view_character_status_list():
+    """ 打开角色状态监控面板指令 """
+    cache.now_panel_id = constant.Panel.VIEW_CHARACTER_STATUS_LIST

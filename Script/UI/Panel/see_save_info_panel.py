@@ -108,7 +108,7 @@ class SaveInfoDraw:
         save_name = _("空存档位")
         if self.save_exist_judge:
             save_head = save_handle.load_save_info_head(self.text)
-            game_time: datetime.datetime = save_head["game_time"]
+            game_time: datetime.datetime = datetime.datetime.fromtimestamp(save_head["game_time"])
             save_time: datetime.datetime = save_head["save_time"]
             game_time_text = _("游戏时间:") + game_time.strftime("%Y-%m-%d %H:%M")
             save_time_text = _("存档时间:") + save_time.strftime("%Y-%m-%d %H:%M")
