@@ -103,7 +103,11 @@ def get_sub_date(
     new_date: datetime.datetime = old_date_data + relativedelta.relativedelta(
         years=year, months=month, days=day, hours=hour, minutes=minute
     )
-    return new_date.timestamp()
+    if new_date.year > 1969:
+        return new_date.timestamp()
+    else:
+        return (new_date - datetime.datetime(1970,1,1)).total_seconds()
+
 
 
 def get_rand_day_for_year(year: int) -> int:
@@ -116,7 +120,11 @@ def get_rand_day_for_year(year: int) -> int:
     """
     start = datetime.datetime(year, 1, 1, 0, 0, 0, 0)
     end = datetime.datetime(year, 12, 31, 23, 59, 59)
-    return random.randint(start.timestamp(),end.timestamp())
+    if year > 1969:
+        return get_rand_day_for_date(start.timestamp(),end.timestamp())
+    start_time_stamp = (start - datetime.datetime(1970, 1, 1)).total_seconds()
+    end_time_stamp = (end - datetime.datetime(1970, 1, 1)).total_seconds()
+    return random.randint(start_time_stamp,end_time_stamp)
 
 
 def timetuple_to_datetime(t: datetime.datetime.timetuple) -> datetime.datetime:
@@ -130,7 +138,7 @@ def timetuple_to_datetime(t: datetime.datetime.timetuple) -> datetime.datetime:
     return datetime.datetime(t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec)
 
 
-def get_rand_day_for_date(start_date: int, end_date: int) -> int:
+def get_rand_day_for_date(start_date: datetime.datetime, end_date: datetime.datetime) -> int:
     """
     随机获取两个日期中的日期
     Keyword arguments:

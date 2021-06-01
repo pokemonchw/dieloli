@@ -133,7 +133,10 @@ def get_rand_npc_birthday(age: int) -> int:
     now_day = now_date.day
     birth_year = now_year - age
     birthday = game_time.get_rand_day_for_year(birth_year)
-    birthday_data = datetime.datetime.fromtimestamp(birthday)
+    if birthday > 0:
+        birthday_data = datetime.datetime.fromtimestamp(birthday)
+    else:
+        birthday_data = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=birthday)
     if now_month < birthday_data.month or (
         now_month == birthday_data.month and now_day < birthday_data.day
     ):

@@ -451,7 +451,10 @@ class CharacterBirthdayText:
         """ 当前最大可绘制宽度 """
         character_data: game_type.Character = cache.character_data[self.character_id]
         age_text = _("年龄:{character_age}岁").format(character_age=character_data.age)
-        birthday = datetime.datetime.fromtimestamp(character_data.birthday)
+        if character_data.birthday > 0:
+            birthday = datetime.datetime.fromtimestamp(character_data.birthday)
+        else:
+            birthday = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=character_data.birthday)
         birthday_text = _("生日:{birthday_month}月{birthday_day}日").format(
             birthday_month=birthday.month, birthday_day=birthday.day
         )
