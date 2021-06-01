@@ -203,7 +203,7 @@ def read_queue():
                 temp["italic"],
             )
         if "image" in json_data:
-            textbox.image_create(era_image.image_data[json_data["image"]["image_name"]])
+            textbox.image_create("end", image=era_image.image_data[json_data["image"]["image_name"]])
 
         for c in json_data["content"]:
             if c["type"] == "text":
