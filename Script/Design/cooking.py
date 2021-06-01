@@ -38,7 +38,9 @@ def init_recipes():
         cache.recipe_data[len(cache.recipe_data)] = recipe
 
 
-def create_recipe(name: str, time: int, base: list, ingredients: list, seasoning: list, cook_type:int) -> Recipes:
+def create_recipe(
+    name: str, time: int, base: list, ingredients: list, seasoning: list, cook_type: int
+) -> Recipes:
     """
     创建菜谱对象
     Keyword arguments:
@@ -170,7 +172,7 @@ def cook(food_data: Dict[str, Food], recipe_id: int, cook_level: int, maker: str
     Return arguments:
     Food -- 食物对象
     """
-    recipe:game_type.Recipes = cache.recipe_data[recipe_id]
+    recipe: game_type.Recipes = cache.recipe_data[recipe_id]
     cook_judge = True
     feel_data = {}
     quality_data = game_config.config_food_quality_weight_data[cook_level]
@@ -226,7 +228,7 @@ def cook(food_data: Dict[str, Food], recipe_id: int, cook_level: int, maker: str
         now_weight += rand_weight
     if not cook_judge:
         return create_food(65, now_quality, now_weight, [])
-    return create_food("", now_quality, now_weight, feel_data, maker, recipe_id,recipe.cook_type)
+    return create_food("", now_quality, now_weight, feel_data, maker, recipe_id, recipe.cook_type)
 
 
 def init_restaurant_data():
@@ -298,7 +300,7 @@ def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type:
     Dict -- 食物名字数据 食物名字:uid集合
     """
     food_list = {}
-    character_data:game_type.Character = cache.character_data[character_id]
+    character_data: game_type.Character = cache.character_data[character_id]
     for food_uid in character_data.food_bag:
         food_data: Food = character_data.food_bag[food_uid]
         if food_data.id in game_config.config_food_feel_data:
@@ -331,9 +333,11 @@ def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type:
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
             else:
-                if 28 in food_data.feel and (
-                    27 not in food_data.feel or food_data.feel[28] > food_data.feel[27]
-                ) and food_data.cook_type == 5:
+                if (
+                    28 in food_data.feel
+                    and (27 not in food_data.feel or food_data.feel[28] > food_data.feel[27])
+                    and food_data.cook_type == 5
+                ):
                     food_name = cache.recipe_data[food_data.recipe].name
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
@@ -402,9 +406,11 @@ def get_restaurant_food_type_list_buy_food_type(food_type: str) -> Dict[uuid.UUI
             else:
                 now_food_uid = list(cache.restaurant_data[food_id].keys())[0]
                 now_food = cache.restaurant_data[food_id][now_food_uid]
-                if 28 in now_food.feel and (
-                    27 not in now_food.feel or now_food.feel[28] > now_food.feel[27]
-                ) and now_food.cook_type == 5:
+                if (
+                    28 in now_food.feel
+                    and (27 not in now_food.feel or now_food.feel[28] > now_food.feel[27])
+                    and now_food.cook_type == 5
+                ):
                     food_list[food_id] = cache.recipe_data[int(food_id)].name
         elif food_type == _("水果"):
             now_food_uid = list(cache.restaurant_data[food_id].keys())[0]

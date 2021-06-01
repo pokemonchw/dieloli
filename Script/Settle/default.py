@@ -1390,3 +1390,117 @@ def handle_target_add_favorability_for_target_interest(
         if target_data.language_interest[language] > 1:
             if language in character_data.language:
                 now_add_favorability += character_data.language[language] / 10
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_CLITORIS_HAPPY)
+def handle_add_small_clitoris_happy(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: int,
+):
+    """
+    增加少量阴蒂快感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    if character_data.sex not in {1, 2}:
+        return
+    character_data.status.setdefault(3, 0)
+    character_happy = add_time
+    character_happy *= (
+        1
+        + attr_calculation.get_experience_level_weight(character_data.sex_experience[2])
+        + character_data.status[3] / 100
+    )
+    character_data.knowledge.setdefault(9, 0)
+    character_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+    character_data.status[3] += character_happy
+    change_data.status.setdefault(3, 0)
+    change_data.status[3] += character_happy
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_PENIS_HAPPY)
+def handle_add_small_penis_happy(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange, now_time: int
+):
+    """
+    增加少量阴茎快感
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    if character_data.sex not in {0, 2}:
+        return
+    character_data.status.setdefault(5, 0)
+    character_happy = add_time
+    character_happy *= (
+        1
+        + attr_calculation.get_experience_level_weight(character_data.sex_experience[3])
+        + character_data.status[5] / 100
+    )
+    character_data.knowledge.setdefault(9, 0)
+    character_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+    character_data.status[5] += character_happy
+    change_data.status.setdefault(5, 0)
+    change_data.status[5] += character_happy
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_CLITORIS_SEX_EXPERIENCE)
+def handle_add_small_clitoris_sex_experience(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange, now_time: int
+):
+    """
+    增加少量阴蒂性爱经验
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    if character_data.sex not in {1, 2}:
+        return
+    character_data.sex_experience.setdefault(2, 0)
+    character_data.sex_experience[2] += add_time
+    change_data.sex_experience.setdefault(2, 0)
+    change_data.sex_experience[2] += add_time
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_PENIS_SEX_EXPERIENCE)
+def handle_add_small_penis_sex_experience(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange, now_time: int
+):
+    """
+    增加少量阴茎性爱经验
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    if character_data.sex not in {0, 2}:
+        return
+    character_data.sex_experience.setdefault(3, 0)
+    character_data.sex_experience[3] += add_time
+    change_data.sex_experience.setdefault(3, 0)
+    change_data.sex_experience[3] += add_time

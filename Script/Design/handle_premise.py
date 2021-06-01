@@ -2701,3 +2701,57 @@ def handle_in_student_union_office(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     return character_data.position == ["3", "1", "4"]
+
+
+@add_premise(constant.Premise.TARGET_CHEST_IS_NOT_CLIFF)
+def handle_target_chest_is_not_cliff(character_id: int) -> int:
+    """
+    校验交互对象胸围是否不是绝壁
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return attr_calculation.judge_chest_group(target_data.chest.now_chest)
+
+
+@add_premise(constant.Premise.LUST_IS_LOW)
+def handle_lust_is_low(character_id: int) -> int:
+    """
+    校验角色是否色欲低下
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.status.setdefault(21, 0)
+    return (character_data.status[21] / 100) < 10
+
+
+@add_premise(constant.Premise.IS_MAN_OR_WOMAN)
+def handle_is_man_or_woman(character_id: int) -> int:
+    """
+    校验角色是否是男性或女性
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.sex in {0, 1}
+
+
+@add_premise(constant.Premise.IS_NOT_ASEXUAL)
+def handle_is_not_asexual(character_id: int) -> int:
+    """
+    校验角色是否不是无性
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.sex != 3

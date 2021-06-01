@@ -43,6 +43,8 @@ class CharacterStatus:
     """ 弹吉他 """
     STATUS_SELF_STUDY = 18
     """ 自习 """
+    STATUS_MASTURBATION = 19
+    """ 手淫 """
 
 
 class Behavior:
@@ -86,6 +88,8 @@ class Behavior:
     """ 弹吉他 """
     SELF_STUDY = 18
     """ 自习 """
+    MASTURBATION = 19
+    """ 手淫 """
 
 
 class StateMachine:
@@ -523,6 +527,14 @@ class Premise:
     """ 在超市中 """
     IN_STUDENT_UNION_OFFICE = 163
     """ 在学生会办公室中 """
+    TARGET_CHEST_IS_NOT_CLIFF = 164
+    """ 交互对象胸围不是绝壁 """
+    LUST_IS_LOW = 165
+    """ 角色色欲低下 """
+    IS_MAN_OR_WOMAN = 166
+    """ 角色是男性或女性 """
+    IS_NOT_ASEXUAL = 167
+    """ 角色 """
 
 
 class BehaviorEffect:
@@ -606,6 +618,14 @@ class BehaviorEffect:
     """ 按演奏技能增加交互对象好感 """
     TARGET_ADD_FAVORABILITY_FOR_TARGET_INTEREST = 38
     """ 按交互对象兴趣增加交互对象好感 """
+    ADD_SMALL_CLITORIS_SEX_EXPERIENCE = 39
+    """ 增加少量阴蒂性爱经验 """
+    ADD_SMALL_PENIS_SEX_EXPERIENCE = 40
+    """ 增加少量阴茎性爱经验 """
+    ADD_SMALL_CLITORIS_HAPPY = 41
+    """ 增加少量阴蒂快感 """
+    ADD_SMALL_PENIS_HAPPY = 42
+    """ 增加少量阴茎快感 """
 
 
 class InstructType:
@@ -662,6 +682,8 @@ class Instruct:
     """ 拥抱 """
     KISS = 0
     """ 亲吻 """
+    MASTURBATION = 0
+    """ 手淫 """
     EAT = 0
     """ 进食 """
     DRINK_SPRING = 0
