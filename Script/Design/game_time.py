@@ -116,7 +116,7 @@ def get_rand_day_for_year(year: int) -> int:
     """
     start = datetime.datetime(year, 1, 1, 0, 0, 0, 0)
     end = datetime.datetime(year, 12, 31, 23, 59, 59)
-    return get_rand_day_for_date(start.timestamp(), end.timestamp())
+    return random.randint(start.timestamp(),end.timestamp())
 
 
 def timetuple_to_datetime(t: datetime.datetime.timetuple) -> datetime.datetime:
