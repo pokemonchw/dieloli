@@ -1,0 +1,14 @@
+cid,behavior_id,adv_id,context
+口上id,触发口上的行为id,口上限定的剧情npcid,口上内容
+str,int,int,str
+0,0,0,1
+口上配置数据,,,
+0,19,0,{PlayerNickName}躲在被窝里偷偷的抚摸着自己的小弟弟。
+1,19,0,{PlayerNickName}熟练的搓揉着自己的小弟弟。
+2,19,0,{PlayerNickName}一边盯着{TargetName}的胸部一边偷偷撸动着。
+3,19,0,{PlayerNickName}轻轻的搓弄了几下就陷入了沉默。
+4,19,0,{PlayerNickName}一丝不挂的望着月亮，疯狂的搓弄着自己的小弟弟。
+5,19,0,「需要我帮你吗？」\n看着{PlayerNickName}双手努力做活塞运动的样子，{TargetName}下意识舔了舔嘴唇。
+6,19,0,{PlayerNickName}轻轻的抚摸着身下的小缝。
+7,19,0,{PlayerNickName}毫不顾及周围的目光，肆意的搓揉着下体。
+8,19,0,趁着四下无人，{PlayerNickName}迅速的撸了几下。

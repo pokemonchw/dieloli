@@ -511,3 +511,23 @@ def handle_self_study():
 def handle_view_character_status_list():
     """打开角色状态监控面板指令"""
     cache.now_panel_id = constant.Panel.VIEW_CHARACTER_STATUS_LIST
+
+
+@add_instruct(
+    constant.Instruct.MASTURBATION,
+    constant.InstructType.SEX,
+    _("手淫"),
+    {
+        constant.Premise.NO_WEAR_UNDERPANTS,
+        constant.Premise.NO_WEAR_PANTS,
+        constant.Premise.IS_NOT_ASEXUAL,
+    },
+)
+def handle_masturbation():
+    """处理手淫指令"""
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.MASTURBATION
+    character_data.state = constant.CharacterStatus.STATUS_MASTURBATION
+    update.game_update_flow(10)

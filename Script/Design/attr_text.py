@@ -132,7 +132,7 @@ def get_value_text(value: float) -> str:
         if company_index >= len(company):
             company_index = len(company) - 1
         value_str = value_str[: -company_index * 3]
-        value_str += company[company_index]
+        value_str += company[company_index - 1]
     if int(value) >= 0:
         value_str = "+" + value_str
     return value_str
