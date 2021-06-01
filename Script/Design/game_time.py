@@ -99,7 +99,10 @@ def get_sub_date(
     """
     if not old_date:
         old_date = cache.game_time
-    old_date_data = datetime.datetime.fromtimestamp(old_date)
+    if old_date > 0:
+        old_date_data = datetime.datetime.fromtimestamp(old_date)
+    else:
+        old_date = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=old_date)
     new_date: datetime.datetime = old_date_data + relativedelta.relativedelta(
         years=year, months=month, days=day, hours=hour, minutes=minute
     )
