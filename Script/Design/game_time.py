@@ -109,8 +109,7 @@ def get_sub_date(
     if new_date.year > 1970:
         return new_date.timestamp()
     else:
-        return (new_date - datetime.datetime(1970,1,1)).total_seconds()
-
+        return (new_date - datetime.datetime(1970, 1, 1)).total_seconds()
 
 
 def get_rand_day_for_year(year: int) -> int:
@@ -124,10 +123,10 @@ def get_rand_day_for_year(year: int) -> int:
     start = datetime.datetime(year, 1, 1, 0, 0, 0, 0)
     end = datetime.datetime(year, 12, 31, 23, 59, 59)
     if year > 1970:
-        return get_rand_day_for_date(start.timestamp(),end.timestamp())
+        return get_rand_day_for_date(start.timestamp(), end.timestamp())
     start_time_stamp = (start - datetime.datetime(1970, 1, 1)).total_seconds()
     end_time_stamp = (end - datetime.datetime(1970, 1, 1)).total_seconds()
-    return random.randint(start_time_stamp,end_time_stamp)
+    return random.randint(start_time_stamp, end_time_stamp)
 
 
 def timetuple_to_datetime(t: datetime.datetime.timetuple) -> datetime.datetime:
