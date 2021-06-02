@@ -294,7 +294,7 @@ def get_sun_time(old_time: int) -> int:
     now_time = old_time.astimezone(time_zone)
     if now_time.hour > old_time.hour:
         now_time = datetime.datetime(
-            old_time.year, old_time.month, old_time.day, old_time.minute, tzinfo=time_zone
+            old_time.year, old_time.month, old_time.day, old_time.hour, old_time.minute, tzinfo=time_zone
         )
     gatech.long, gatech.lat = str(cache.school_longitude), str(cache.school_latitude)
     if (
