@@ -1,3 +1,4 @@
+import datetime
 from types import FunctionType
 from typing import List
 from Script.Core import cache_control, game_type, get_text, flow_handle, py_cmd, constant
@@ -59,7 +60,11 @@ class StudentTimeTablePanel:
         """初始化绘制对象"""
         self.width: int = width
         """ 绘制的最大宽度 """
-        self.now_week: int = cache.game_time.weekday()
+        if cache.game_time > 0:
+            now_date = datetime.datetime.fromtimestamp(cache.game_time)
+        else:
+            now_date = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=cache.game_time)
+        self.now_week: int = now_date.weekday()
         """ 当前星期 """
 
     def draw(self):
@@ -68,7 +73,12 @@ class StudentTimeTablePanel:
         time_table = cache.course_time_table_data[school_id][phase]
         weekday_text_list = [game_config.config_week_day[i].name for i in game_config.config_week_day]
         character_data: game_type.Character = cache.character_data[0]
-        now_time_value = cache.game_time.hour * 100 + cache.game_time.minute
+        if cache.game_time > 0:
+            now_date = datetime.datetime.fromtimestamp(cache.game_time)
+        else:
+            now_date = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=cache.game_time)
+        now_date_week = now_date.weekday()
+        now_time_value = now_date.hour * 100 + now_date.minute
         while 1:
             now_week_text = game_config.config_week_day[self.now_week].name
             title_draw = draw.TitleLineDraw(_("课程表"), self.width)
@@ -77,7 +87,7 @@ class StudentTimeTablePanel:
             return_list = []
             for week_text in weekday_text_list:
                 if week_text == now_week_text:
-                    if index == cache.game_time.weekday():
+                    if index == now_date_week:
                         week_text = week_text + _("(今日)")
                     now_draw = draw.CenterDraw()
                     now_draw.text = f"[{week_text}]"
@@ -86,7 +96,7 @@ class StudentTimeTablePanel:
                     now_draw.width = self.width / len(weekday_text_list)
                     now_draw.draw()
                 else:
-                    if index == cache.game_time.weekday():
+                    if index == now_date_week:
                         week_text = week_text + _("(今日)")
                     now_draw = draw.CenterButton(
                         f"[{week_text}]",
@@ -123,7 +133,7 @@ class StudentTimeTablePanel:
                     course_end_time_text = f"{end_hour}:{end_minute}"
                     now_time_judge = 0
                     if times_judge:
-                        if self.now_week == cache.game_time.weekday():
+                        if self.now_week == now_date_week:
                             if now_time_value < course_time_config.end_time:
                                 now_time_judge = 1
                                 times_judge = 0
