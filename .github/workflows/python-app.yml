@@ -133,4 +133,3 @@ jobs:
           asset_path: ${{ github.workspace }}/dieloli_mac.zip
           asset_name: dieloli_mac.zip
           asset_content_type: application/zip
-
