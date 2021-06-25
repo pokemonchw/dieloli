@@ -54,8 +54,7 @@ def get_text_index(text: str) -> int:
     for i in range(len(text)):
         text_index += wcswidth(text[i])
     now_width = text_index + style_width
-    if now_width < 0:
-        now_width = 0
+    now_width = max(now_width, 0)
     return now_width
 
 
