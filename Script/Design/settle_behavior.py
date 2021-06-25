@@ -166,12 +166,11 @@ def get_cut_down_favorability_for_consume_time(consume_time: int):
     """
     if consume_time < 10:
         return consume_time
-    elif consume_time >= 10 and consume_time < 100:
+    if consume_time >= 10 and consume_time < 100:
         return (consume_time - 9) * 10 + 9
-    elif consume_time >= 100 and consume_time < 1000:
+    if consume_time >= 100 and consume_time < 1000:
         return (consume_time - 99) * 100 + 909
-    else:
-        return (consume_time - 999) * 1000 + 90909
+    return (consume_time - 999) * 1000 + 90909
 
 
 def change_character_favorability_for_time(character_id: int, now_time: int):
@@ -258,12 +257,12 @@ def get_favorability_social(favorability: int) -> int:
     """
     if favorability < 500:
         return 0
-    elif favorability < 10000:
+    if favorability < 10000:
         return 1
-    elif favorability < 200000:
+    if favorability < 200000:
         return 2
-    elif favorability < 4000000:
+    if favorability < 4000000:
         return 3
-    elif favorability < 80000000:
+    if favorability < 80000000:
         return 4
     return 5
