@@ -255,6 +255,7 @@ def search_target(
                 premise_judge = premise_data[premise]
             else:
                 premise_judge = handle_premise.handle_premise(premise, character_id)
+                premise_judge = max(premise_judge,0)
                 premise_data[premise] = premise_judge
             if premise_judge:
                 now_weight += premise_judge

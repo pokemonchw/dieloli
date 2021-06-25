@@ -2104,6 +2104,7 @@ def handle_approaching_class_time(character_id: int) -> int:
     add_time = next_value - now_value
     if add_time > 30:
         return 0
+    add_time = max(add_time,1)
     return 3000 / (add_time * 10)
 
 
