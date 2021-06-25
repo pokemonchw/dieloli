@@ -366,7 +366,8 @@ class SeeInstructPanel:
         now_draw.draw_list = now_group
         now_draw.draw()
 
-    def change_filter(self, now_type: int):
+    @staticmethod
+    def change_filter(now_type: int):
         """
         更改指令类型过滤状态
         Keyword arguments:
@@ -377,7 +378,8 @@ class SeeInstructPanel:
         else:
             cache.instruct_filter[now_type] = 1
 
-    def handle_instruct(self, instruct_id: int):
+    @staticmethod
+    def handle_instruct(instruct_id: int):
         """
         处理玩家操作指令
         Keyword arguments:

@@ -534,7 +534,8 @@ class LeftDrawIDButtonListPanel:
 class ClearScreenPanel:
     """绘制一屏长度的空行"""
 
-    def draw(self):
+    @staticmethod
+    def draw():
         """绘制面板"""
         panel = "\n" * 50
         io_init.era_print(panel)
