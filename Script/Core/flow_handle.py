@@ -218,7 +218,7 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
     """
     处理命令函数
     Keyword arguments:
-    flag -- 类型，默认为order，如果为console，这回执行输入得到的内容
+    flag -- 类型，默认为order
     print_order -- 是否将输入的order输出到屏幕上
     donot_return_null_str -- 不接受输入空字符串
     """
@@ -236,8 +236,6 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
                 if order.isdigit():
                     order = str(int(order))
                 return order
-            if flag == "console":
-                exec(order)
             if flag == "order":
                 if _cmd_valid(order):
                     _cmd_deal(order)
