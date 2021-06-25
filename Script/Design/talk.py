@@ -22,9 +22,7 @@ def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
         player_data: game_type.Character = cache.character_data[0]
         if character_id not in player_data.collection_character:
             return
-    if (
-        cache.character_data[0].position not in [character_data.position, character_data.behavior.move_src]
-    ):
+    if cache.character_data[0].position not in [character_data.position, character_data.behavior.move_src]:
         return
     if behavior_id in game_config.config_talk_data:
         for talk_id in game_config.config_talk_data[behavior_id]:

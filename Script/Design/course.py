@@ -92,8 +92,8 @@ def init_class_time_table():
                                     break
                                 if all(
                                     k in class_time_table[school_id][phase][day]
-                                        for k in range(i, len(course_session))
-                                        if k != i
+                                    for k in range(i, len(course_session))
+                                    if k != i
                                 ):
                                     class_time_table[school_id][phase][day][i] = course
                                     class_hour_index[course] += 1

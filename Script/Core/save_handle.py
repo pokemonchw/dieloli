@@ -88,7 +88,7 @@ def establish_save_windows(save_id: str, save_queue: multiprocessing.Queue):
     save_queue -- 传递存档数据的消息队列
     """
     data = save_queue.get()
-    for key,value in data.items():
+    for key, value in data.items():
         write_save_data(save_id, key, value)
 
 

@@ -286,7 +286,7 @@ def askfor_all(input_list: list, print_order=False):
         continue
 
 
-def askfor_int(input_list:list, print_order=False):
+def askfor_int(input_list: list, print_order=False):
     """
     用于请求位于列表中的整数的输入，如果输入没有在列表中，则告知用户出错。
     Keyword arguments:
