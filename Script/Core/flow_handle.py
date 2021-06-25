@@ -282,10 +282,9 @@ def askfor_all(input_list: list, print_order=False):
             return order
         if order == "":
             continue
-        else:
-            io_init.era_print(order + "\n")
-            io_init.era_print(_("您输入的选项无效，请重试\n"))
-            continue
+        io_init.era_print(order + "\n")
+        io_init.era_print(_("您输入的选项无效，请重试\n"))
+        continue
 
 
 def askfor_int(list, print_order=False):
@@ -303,10 +302,9 @@ def askfor_int(list, print_order=False):
             return order
         if order == "":
             continue
-        else:
-            io_init.era_print(order + "\n")
-            io_init.era_print(_("您输入的选项无效，请重试\n"))
-            continue
+        io_init.era_print(order + "\n")
+        io_init.era_print(_("您输入的选项无效，请重试\n"))
+        continue
 
 
 def askfor_wait():
