@@ -184,7 +184,8 @@ class SeeMapPanel:
         down_map_scene_id = map_handle.get_map_scene_id_for_scene_path(self.now_map, character_position)
         self.now_map.append(down_map_scene_id)
 
-    def move_now(self, scene_path: List[str]):
+    @staticmethod
+    def move_now(scene_path: List[str]):
         """
         控制角色移动至指定场景
         Keyword arguments:
@@ -322,7 +323,8 @@ class MapSceneNameDraw:
                 line_feed.draw()
         self.end_index = len(scene_id_list) - 1
 
-    def move_now(self, scene_path: List[str]):
+    @staticmethod
+    def move_now(scene_path: List[str]):
         """
         控制角色移动至指定场景
         Keyword arguments:
@@ -356,7 +358,8 @@ class GlobalSceneNamePanel:
         )
         self.end_index = self.handle_panel.end_index
 
-    def get_path_list(self) -> list:
+    @staticmethod
+    def get_path_list() -> list:
         """
         获取公共场景路径列表
         Return arguments:

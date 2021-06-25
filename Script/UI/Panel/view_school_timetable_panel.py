@@ -258,7 +258,8 @@ class TeacherTimeTablePanel:
         if yrn == back_draw.return_text:
             cache.now_panel_id = constant.Panel.IN_SCENE
 
-    def move_now(self, move_path: List[str]):
+    @staticmethod
+    def move_now(move_path: List[str]):
         """
         移动到指定教室
         Keyword arguments:
