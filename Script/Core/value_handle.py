@@ -12,7 +12,7 @@ def two_bit_array_to_dict(array: tuple) -> dict:
     Keyword arguments:
     array -- 要转换的二维数组
     """
-    return {x: y for x, y in array}
+    return dict(array)
 
 
 def get_rand_value_for_value_region(value_list: List[int]) -> int:
