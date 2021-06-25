@@ -1,12 +1,13 @@
 import random
 import time
+import datetime
 import queue
 from functools import wraps
 from typing import Set, List
 from types import FunctionType
 from threading import Thread
 from Script.Core import constant, cache_control, game_type, get_text, save_handle
-from Script.Design import update, character, attr_calculation, course
+from Script.Design import update, character, attr_calculation, course, game_time
 from Script.UI.Panel import see_character_info_panel, see_save_info_panel
 from Script.Config import normal_config, game_config
 from Script.UI.Moudle import draw
@@ -402,7 +403,8 @@ def handle_attend_class():
     character_data: game_type.Character = cache.character_data[0]
     end_time = 0
     school_id, phase = course.get_character_school_phase(0)
-    now_time_value = cache.game_time.hour * 100 + cache.game_time.minute
+    now_time = datetime.datetime.fromtimestamp(cache.game_time, game_time.time_zone)
+    now_time_value = now_time.hour * 100 + now_time.minute
     now_course_index = 0
     for session_id in game_config.config_school_session_data[school_id]:
         session_config = game_config.config_school_session[session_id]
@@ -412,7 +414,7 @@ def handle_attend_class():
             end_time = end_value - now_value + 1
             now_course_index = session_config.session
             break
-    now_week = cache.game_time.weekday()
+    now_week = now_time.weekday()
     if not now_course_index:
         now_course = random.choice(list(game_config.config_school_phase_course_data[school_id][phase]))
     else:
@@ -440,8 +442,9 @@ def handle_teach_a_lesson():
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     end_time = 0
-    now_week = cache.game_time.weekday()
-    now_time_value = cache.game_time.hour * 100 + cache.game_time.minute
+    now_time = datetime.datetime.fromtimestamp(cache.game_time, game_time.time_zone)
+    now_time_value = now_time.hour * 100 + now_time.minute
+    now_week = now_time.weekday()
     timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[0]
     course = 0
     end_time = 0

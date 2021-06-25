@@ -364,6 +364,25 @@ def add_favorability(
     now_time -- 增加好感的时间戳
     """
     target_data: game_type.Character = cache.character_data[target_id]
+    while 1:
+        if (
+            len(target_data.favorability) > target_data.nature[1]
+            and character_id not in target_data.favorability
+        ):
+            value_dict = dict(zip(target_data.favorability.values(), target_data.favorability.keys()))
+            now_value = min(value_dict.keys())
+            now_key = value_dict[now_value]
+            del target_data.favorability[now_key]
+            if now_key in target_data.social_contact_data:
+                now_social = target_data.social_contact_data[now_key]
+                target_data.social_contact[now_social].remove(now_key)
+                del target_data.social_contact_data[now_key]
+            if now_key in target_data.social_contact_last_cut_down_time:
+                del target_data.social_contact_last_cut_down_time[now_key]
+            if now_key in target_data.social_contact_last_time:
+                del target_data.social_contact_last_time[now_key]
+        else:
+            break
     target_data.favorability.setdefault(character_id, 0)
     if target_change is not None:
         target_change.status.setdefault(12, 0)

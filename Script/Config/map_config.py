@@ -17,6 +17,8 @@ all_place_data_path = os.path.join("data", "PlaceData")
 """ 预处理的所有地点数据路径 """
 all_map_data_path = os.path.join("data", "MapData")
 """ 预处理的所有地图数据路径 """
+all_move_time_path = os.path.join("data", "MoveTime")
+""" 预处理的所有场景移动时间数据路径 """
 
 
 def init_map_data():
@@ -26,6 +28,7 @@ def init_map_data():
         and os.path.exists(all_map_data_path)
         and os.path.exists(all_place_data_path)
         and os.path.exists(scene_path_edge_path)
+        and os.path.exists(all_move_time_path)
     ):
         with open(all_scene_data_path, "rb") as all_scene_data_file:
             cache.scene_data = pickle.load(all_scene_data_file)
@@ -33,6 +36,7 @@ def init_map_data():
             cache.map_data = pickle.load(all_map_data_file)
         with open(all_place_data_path, "rb") as all_place_data_file:
             constant.place_data = pickle.load(all_place_data_file)
+        map_handle.scene_move_time = json_handle.load_json(all_move_time_path)
         map_handle.scene_path_edge = json_handle.load_json(scene_path_edge_path)
     else:
         load_dir_now(map_data_path)
@@ -43,6 +47,7 @@ def init_map_data():
         with open(all_place_data_path, "wb") as all_place_data_file:
             pickle.dump(constant.place_data, all_place_data_file)
         map_handle.init_scene_edge_path_data()
+        map_handle.init_move_time_data()
 
 
 def load_dir_now(data_path: str):

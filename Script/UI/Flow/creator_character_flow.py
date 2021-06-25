@@ -12,6 +12,7 @@ from Script.Design import (
     map_handle,
     interest,
     attr_calculation,
+    game_time,
 )
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
@@ -33,6 +34,7 @@ line = draw.LineDraw("=", width)
 @handle_panel.add_panel(constant.Panel.CREATOR_CHARACTER)
 def creator_character_panel():
     """创建角色面板"""
+    game_time.init_time()
     cache.character_data[0] = game_type.Character()
     character_handle.init_character_list()
     while 1:

@@ -8,7 +8,7 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
-def handle_talk(character_id: int):
+def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
     """
     处理行为结算对话
     Keyword arguments:
@@ -74,4 +74,4 @@ def handle_talk(character_id: int):
         now_draw = draw.LineFeedWaitDraw()
         now_draw.text = now_talk_text
         now_draw.width = normal_config.config_normal.text_width
-        now_draw.draw()
+        return now_draw

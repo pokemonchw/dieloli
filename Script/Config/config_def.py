@@ -688,6 +688,15 @@ class OccupationAgeRegion:
     """ 权重区间 """
 
 
+class CauseOfDeath:
+    """角色死因表"""
+
+    cid: int
+    """ 配表id """
+    name: str
+    """ 死因 """
+
+
 class WeightTem:
     """体重模板对应体重范围"""
 

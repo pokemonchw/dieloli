@@ -127,14 +127,14 @@ def get_rand_npc_birthday(age: int) -> int:
     Return arguments:
     int -- 生日
     """
-    now_date = datetime.datetime.fromtimestamp(cache.game_time)
+    now_date = datetime.datetime.fromtimestamp(cache.game_time, game_time.time_zone)
     now_year = now_date.year
     now_month = now_date.month
     now_day = now_date.day
     birth_year = now_year - age
     birthday = game_time.get_rand_day_for_year(birth_year)
     if birthday > 0:
-        birthday_data = datetime.datetime.fromtimestamp(birthday)
+        birthday_data = datetime.datetime.fromtimestamp(birthday, game_time.time_zone)
     else:
         birthday_data = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=birthday)
     if now_month < birthday_data.month or (

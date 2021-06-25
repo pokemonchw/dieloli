@@ -355,4 +355,9 @@ class ChangeClothingDraw:
         py_cmd.clr_cmd()
         info_draw = ClothingDescribeDraw(self.clothing_data.tem_id, self.width)
         info_draw.draw()
-        cache.character_data[0].put_on[self.clothing_type] = self.clothing_data.uid
+        character_data: game_type.Character = cache.character_data[0]
+        character_data.put_on.setdefault(self.clothing_type, "")
+        if character_data.put_on[self.clothing_type] == self.clothing_data.uid:
+            character_data.put_on[self.clothing_type] = ""
+        else:
+            character_data.put_on[self.clothing_type] = self.clothing_data.uid

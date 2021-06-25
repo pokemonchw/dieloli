@@ -1,9 +1,8 @@
-import time
 from functools import wraps
 from types import FunctionType
 from Script.Core import cache_control, constant, game_type, get_text, text_handle
 from Script.Design import attr_text
-from Script.UI.Moudle import panel, draw
+from Script.UI.Moudle import panel
 from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
@@ -52,10 +51,6 @@ def handle_settle_behavior(character_id: int, now_time: int):
         now_judge = True
     if now_judge:
         now_text_list = []
-        now_draw = draw.NormalDraw()
-        now_draw.text = "\n" + now_character_data.name + ": "
-        now_draw.width = width
-        now_draw.draw()
         if status_data.hit_point and round(status_data.hit_point, 2) != 0:
             now_text_list.append(
                 _("体力:") + text_handle.number_to_symbol_string(round(status_data.hit_point, 2))
@@ -140,11 +135,9 @@ def handle_settle_behavior(character_id: int, now_time: int):
                             judge = 1
                 if judge:
                     now_text_list.append(now_text)
-        now_panel = panel.LeftDrawTextListPanel()
+        now_panel = panel.LeftDrawTextListWaitPanel()
         now_panel.set(now_text_list, width, 8)
-        now_panel.draw()
-        wait_draw = draw.WaitDraw()
-        wait_draw.draw()
+        return now_panel
 
 
 def add_settle_behavior_effect(behavior_effect_id: int):

@@ -223,7 +223,7 @@ class BuyFoodByFoodNameDraw:
             thirsty_text = f"{thirsty_text}{round(food_data.feel[28],2)}"
         else:
             thirsty_text = f"{thirsty_text}0.00"
-        price = round(1 + sum(food_data.feel.values()) * food_data.quality, 2)
+        price = round(1 + sum(food_data.feel.values()) * food_data.quality / 100, 2)
         food_name = (
             food_name
             + f" {hunger_text} {thirsty_text} "

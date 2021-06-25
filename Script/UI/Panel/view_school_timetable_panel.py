@@ -2,7 +2,7 @@ import datetime
 from types import FunctionType
 from typing import List
 from Script.Core import cache_control, game_type, get_text, flow_handle, py_cmd, constant
-from Script.Design import attr_text, character_move, course
+from Script.Design import attr_text, character_move, course, game_time
 from Script.Config import game_config
 from Script.UI.Moudle import panel, draw
 
@@ -61,7 +61,7 @@ class StudentTimeTablePanel:
         self.width: int = width
         """ 绘制的最大宽度 """
         if cache.game_time > 0:
-            now_date = datetime.datetime.fromtimestamp(cache.game_time)
+            now_date = datetime.datetime.fromtimestamp(cache.game_time, game_time.time_zone)
         else:
             now_date = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=cache.game_time)
         self.now_week: int = now_date.weekday()
@@ -74,7 +74,7 @@ class StudentTimeTablePanel:
         weekday_text_list = [game_config.config_week_day[i].name for i in game_config.config_week_day]
         character_data: game_type.Character = cache.character_data[0]
         if cache.game_time > 0:
-            now_date = datetime.datetime.fromtimestamp(cache.game_time)
+            now_date = datetime.datetime.fromtimestamp(cache.game_time, game_time.time_zone)
         else:
             now_date = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=cache.game_time)
         now_date_week = now_date.weekday()

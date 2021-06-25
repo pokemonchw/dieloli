@@ -96,7 +96,7 @@ def create_food(
             food_feel_data = game_config.config_food_feel_data[food_id]
             for feel in food_feel_data:
                 food.feel.setdefault(feel, 0)
-                food.feel[feel] += food_feel_data[feel] / 100 * food.weight
+                food.feel[feel] += food_feel_data[feel] * food.weight
         food.cook = food_config.cook
         food.eat = food_config.eat
         food.seasoning = food_config.seasoning
