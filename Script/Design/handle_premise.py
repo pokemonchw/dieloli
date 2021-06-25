@@ -2294,7 +2294,7 @@ def handle_have_students_in_classroom(character_id: int) -> int:
             now_time = timetable.time
             now_classroom = timetable.class_room
             continue
-        elif timetable.end_time >= now_time_value and timetable.end_time < now_time:
+        if timetable.end_time >= now_time_value and timetable.end_time < now_time:
             now_time = timetable.end_time
             now_classroom = timetable.class_room
     now_room_path_str = map_handle.get_map_system_path_str_for_list(now_classroom)
