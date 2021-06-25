@@ -274,7 +274,7 @@ def get_init_learn_abllity(age: int, end_age: int):
     forget_age = int(end_age * 0.9)
     if age <= stop_age:
         return age / stop_age
-    if age > stop_age and age < end_age:
+    if stop_age < age < end_age:
         return 1 - 1 / (forget_age - stop_age) * (forget_age - age)
     return 0 - (age - forget_age) / (end_age - forget_age)
 
@@ -372,7 +372,7 @@ def judge_age_group(age: int) -> int:
     """
     for age_tem_id in game_config.config_age_tem:
         age_tem = game_config.config_age_tem[age_tem_id]
-        if age >= age_tem.min_age and age < age_tem.max_age:
+        if age_tem.min_age <= age < age_tem.max_age:
             return age_tem_id
     return 0
 
@@ -387,6 +387,6 @@ def judge_chest_group(chest: float) -> int:
     """
     for chest_tem_id in game_config.config_chest:
         chest_tem = game_config.config_chest[chest_tem_id]
-        if chest >= chest_tem.min_value and chest < chest_tem.max_value:
+        if chest_tem.min_value <= chest < chest_tem.max_value:
             return chest_tem_id
     return 0

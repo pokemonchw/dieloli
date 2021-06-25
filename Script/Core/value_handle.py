@@ -119,5 +119,5 @@ def get_gauss_rand(min_value: int, max_value: int) -> int:
     single = mu - min_value
     while 1:
         value = random.gauss(mu, single)
-        if value >= min_value and value <= max_value:
+        if min_value <= value <= max_value:
             return value

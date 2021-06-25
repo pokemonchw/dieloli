@@ -166,9 +166,9 @@ def get_cut_down_favorability_for_consume_time(consume_time: int):
     """
     if consume_time < 10:
         return consume_time
-    if consume_time >= 10 and consume_time < 100:
+    if 10 <= consume_time < 100:
         return (consume_time - 9) * 10 + 9
-    if consume_time >= 100 and consume_time < 1000:
+    if 100 <= consume_time < 1000:
         return (consume_time - 99) * 100 + 909
     return (consume_time - 999) * 1000 + 90909
 

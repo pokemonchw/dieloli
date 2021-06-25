@@ -841,7 +841,7 @@ def handle_scene_have_other_target(character_id: int) -> int:
     scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path]
     now_weight = (len(scene_data.character_list) - 1) / 10
-    if now_weight > 0 and now_weight < 1:
+    if 0 < now_weight < 1:
         now_weight = 1
     return now_weight
 
