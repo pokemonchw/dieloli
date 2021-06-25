@@ -1185,7 +1185,7 @@ class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
                 else:
                     self.character_id = 0
             else:
-                self.character_id = self.character_list[len(self.character_list) - 1]
+                self.character_id = self.character_list[-1]
 
     def next_character(self):
         """切换显示上一人"""
