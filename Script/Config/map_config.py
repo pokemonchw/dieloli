@@ -60,33 +60,32 @@ def load_dir_now(data_path: str):
         now_path = os.path.join(data_path, i)
         if os.path.isfile(now_path):
             now_file = i.split(".")
-            if len(now_file) > 1:
-                if now_file[1] == "json":
-                    if now_file[0] == "Scene":
-                        now_scene_data = game_type.Scene()
-                        now_scene_data.scene_path = get_map_system_path_str(
-                            get_map_system_path_for_path(now_path)
-                        )
-                        load_scene_data = json_handle.load_json(now_path)
-                        now_scene_data.scene_name = get_text._(load_scene_data["SceneName"])
-                        now_scene_data.in_door = load_scene_data["InOutDoor"] == "In"
-                        now_scene_data.scene_tag = load_scene_data["SceneTag"]
-                        cache.scene_data[now_scene_data.scene_path] = now_scene_data
-                        constant.place_data.setdefault(now_scene_data.scene_tag, [])
-                        constant.place_data[now_scene_data.scene_tag].append(now_scene_data.scene_path)
-                    elif now_file[0] == "Map":
-                        now_map_data = game_type.Map()
-                        now_map_data.map_path = get_map_system_path_str(
-                            get_map_system_path_for_path(now_path)
-                        )
-                        with open(os.path.join(data_path, "Map"), "r", encoding="utf-8") as now_read_file:
-                            draw_data = now_read_file.read()
-                            now_map_data.map_draw = get_print_map_data(draw_data)
-                        load_map_data = json_handle.load_json(now_path)
-                        now_map_data.map_name = get_text._(load_map_data["MapName"])
-                        now_map_data.path_edge = load_map_data["PathEdge"]
-                        now_map_data.sorted_path = get_sorted_map_path_data(now_map_data.path_edge)
-                        cache.map_data[now_map_data.map_path] = now_map_data
+            if len(now_file) > 1 and now_file[1] == "json":
+                if now_file[0] == "Scene":
+                    now_scene_data = game_type.Scene()
+                    now_scene_data.scene_path = get_map_system_path_str(
+                        get_map_system_path_for_path(now_path)
+                    )
+                    load_scene_data = json_handle.load_json(now_path)
+                    now_scene_data.scene_name = get_text._(load_scene_data["SceneName"])
+                    now_scene_data.in_door = load_scene_data["InOutDoor"] == "In"
+                    now_scene_data.scene_tag = load_scene_data["SceneTag"]
+                    cache.scene_data[now_scene_data.scene_path] = now_scene_data
+                    constant.place_data.setdefault(now_scene_data.scene_tag, [])
+                    constant.place_data[now_scene_data.scene_tag].append(now_scene_data.scene_path)
+                elif now_file[0] == "Map":
+                    now_map_data = game_type.Map()
+                    now_map_data.map_path = get_map_system_path_str(
+                        get_map_system_path_for_path(now_path)
+                    )
+                    with open(os.path.join(data_path, "Map"), "r", encoding="utf-8") as now_read_file:
+                        draw_data = now_read_file.read()
+                        now_map_data.map_draw = get_print_map_data(draw_data)
+                    load_map_data = json_handle.load_json(now_path)
+                    now_map_data.map_name = get_text._(load_map_data["MapName"])
+                    now_map_data.path_edge = load_map_data["PathEdge"]
+                    now_map_data.sorted_path = get_sorted_map_path_data(now_map_data.path_edge)
+                    cache.map_data[now_map_data.map_path] = now_map_data
         else:
             load_dir_now(now_path)
 

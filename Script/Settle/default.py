@@ -1066,23 +1066,22 @@ def handle_interrupt_target_activity(
         return
     if target_data.state == constant.CharacterStatus.STATUS_DEAD:
         return
-    if target_data.behavior.behavior_id:
-        if target_data.behavior.start_time <= character_data.behavior.start_time:
-            target_end_time = game_time.get_sub_date(
-                target_data.behavior.duration, old_date=target_data.behavior.start_time
-            )
-            if target_end_time >= character_data.behavior.start_time:
-                if target_data.behavior.behavior_id == constant.Behavior.MOVE:
-                    target_data.behavior = game_type.Behavior()
-                    target_data.state = constant.CharacterStatus.STATUS_ARDER
-                    character.init_character_behavior_start_time(
-                        target_data.cid, character_data.behavior.start_time
-                    )
-                else:
-                    settle_draw = settle_behavior.handle_settle_behavior(
-                        target_data.cid, character_data.behavior.start_time
-                    )
-                    settle_draw.draw()
+    if target_data.behavior.behavior_id and target_data.behavior.start_time <= character_data.behavior.start_time:
+        target_end_time = game_time.get_sub_date(
+            target_data.behavior.duration, old_date=target_data.behavior.start_time
+        )
+        if target_end_time >= character_data.behavior.start_time:
+            if target_data.behavior.behavior_id == constant.Behavior.MOVE:
+                target_data.behavior = game_type.Behavior()
+                target_data.state = constant.CharacterStatus.STATUS_ARDER
+                character.init_character_behavior_start_time(
+                    target_data.cid, character_data.behavior.start_time
+                )
+            else:
+                settle_draw = settle_behavior.handle_settle_behavior(
+                    target_data.cid, character_data.behavior.start_time
+                )
+                settle_draw.draw()
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_ELOQUENCE_EXPERIENCE)
@@ -1384,13 +1383,11 @@ def handle_target_add_favorability_for_target_interest(
         return
     now_add_favorability = 0
     for knowledge in target_data.knowledge_interest:
-        if target_data.knowledge_interest[knowledge] > 1:
-            if knowledge in character_data.knowledge:
+        if target_data.knowledge_interest[knowledge] > 1 and knowledge in character_data.knowledge:
                 now_add_favorability += character_data.knowledge[knowledge] / 10
     for language in target_data.language_interest:
-        if target_data.language_interest[language] > 1:
-            if language in character_data.language:
-                now_add_favorability += character_data.language[language] / 10
+        if target_data.language_interest[language] > 1 and language in character_data.language:
+            now_add_favorability += character_data.language[language] / 10
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_CLITORIS_HAPPY)

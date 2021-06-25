@@ -2085,9 +2085,8 @@ def handle_approaching_class_time(character_id: int) -> int:
             school_id = 2
         for session_id in game_config.config_school_session_data[school_id]:
             session_config = game_config.config_school_session[session_id]
-            if session_config.start_time > now_time_value:
-                if next_time == 0 or session_config.start_time < next_time:
-                    next_time = session_config.start_time
+            if session_config.start_time > now_time_value and next_time == 0 or session_config.start_time < next_time:
+                next_time = session_config.start_time
         if next_time == 0:
             return 0
     if character_id in cache.teacher_school_timetable:
@@ -2096,9 +2095,8 @@ def handle_approaching_class_time(character_id: int) -> int:
         for timetable in timetable_list:
             if timetable.week_day != now_week:
                 continue
-            if timetable.time > now_time_value:
-                if next_time == 0 or timetable.time < next_time:
-                    next_time = timetable.time
+            if timetable.time > now_time_value and next_time == 0 or timetable.time < next_time:
+                next_time = timetable.time
         if next_time == 0:
             return 0
     next_value = int(next_time / 100) * 60 + next_time % 100

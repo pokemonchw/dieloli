@@ -753,9 +753,8 @@ class ClothingPageHandlePanel(PageHandlePanel):
         """更新绘制宽度"""
         id_width = 0
         for value in self.draw_list:
-            if "id_width" in value.__dict__:
-                if value.id_width > id_width:
-                    id_width = value.id_width
+            if "id_width" in value.__dict__ and value.id_width > id_width:
+                id_width = value.id_width
         for value in self.draw_list:
             if "id_width" in value.__dict__:
                 value.id_width = id_width

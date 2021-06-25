@@ -244,10 +244,9 @@ def judge_scene_affiliation(now_scene_path: list, target_scene_path: list) -> st
     """
     judge = 1
     for i in range(len(now_scene_path)):
-        if len(target_scene_path) - 1 >= i:
-            if now_scene_path[i] != target_scene_path[i]:
-                judge = 0
-                break
+        if len(target_scene_path) - 1 >= i and now_scene_path[i] != target_scene_path[i]:
+            judge = 0
+            break
         if i > len(target_scene_path) - 1:
             break
         if target_scene_path[i] != now_scene_path[i]:
@@ -527,11 +526,10 @@ def difference_map_move(now_position: list, target_scene: list) -> (str, list, l
     now_scene_real_map = relation_map_list[-1]
     now_map_scene_id = get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
     common_map = get_common_map_for_scene_path(now_true_position, target_scene)
-    if now_scene_real_map != common_map:
-        if now_map_scene_id == "0":
-            now_true_position = now_scene_real_map.copy()
-            relation_map_list = get_relation_map_list_for_scene_path(now_true_position)
-            now_scene_real_map = relation_map_list[-1]
+    if now_scene_real_map != common_map and now_map_scene_id == "0":
+        now_true_position = now_scene_real_map.copy()
+        relation_map_list = get_relation_map_list_for_scene_path(now_true_position)
+        now_scene_real_map = relation_map_list[-1]
     target_map_scene_id = get_map_scene_id_for_scene_path(common_map, target_scene)
     if now_scene_real_map == common_map:
         now_map_scene_id = get_map_scene_id_for_scene_path(common_map, now_true_position)
