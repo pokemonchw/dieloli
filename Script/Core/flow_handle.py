@@ -286,17 +286,17 @@ def askfor_all(input_list: list, print_order=False):
         continue
 
 
-def askfor_int(list, print_order=False):
+def askfor_int(input_list:list, print_order=False):
     """
     用于请求位于列表中的整数的输入，如果输入没有在列表中，则告知用户出错。
     Keyword arguments:
-    list -- 用于判断的列表内容
+    input_list -- 用于判断的列表内容
     print_order -- 是否将输入的order输出到屏幕上
     """
     while True:
         order = order_deal("str", print_order)
         order = text_handle.full_to_half_text(order)
-        if order in list:
+        if order in input_list:
             io_init.era_print(order + "\n\n")
             return order
         if order == "":
