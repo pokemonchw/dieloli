@@ -178,9 +178,9 @@ class SeeCharacterStatusPanel:
                 if status_type == 0:
                     if character_data.sex == 0 and status_id in {2, 3, 6}:
                         continue
-                    elif character_data.sex == 1 and status_id == 5:
+                    if character_data.sex == 1 and status_id == 5:
                         continue
-                    elif character_data.sex == 3 and status_id in {2, 3, 5, 6}:
+                    if character_data.sex == 3 and status_id in {2, 3, 5, 6}:
                         continue
                 status_text = game_config.config_character_state[status_id].name
                 status_value = 0
