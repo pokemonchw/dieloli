@@ -25,7 +25,7 @@ def init_character_list():
     初始生成所有npc数据
     """
     init_character_tem()
-    id_list = iter([i + 1 for i in range(len(cache.npc_tem_data))])
+    id_list = iter(i + 1 for i in range(len(cache.npc_tem_data)))
     npc_data_iter = iter(cache.npc_tem_data)
     for now_id, now_npc_data in zip(id_list, npc_data_iter):
         init_character(now_id, now_npc_data)
