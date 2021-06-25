@@ -17,7 +17,7 @@ def init_normal_config():
     for k in ini_data.keys():
         try:
             config_normal.__dict__[k] = int(ini_data[k])
-        except:
+        except ValueError:
             config_normal.__dict__[k] = ini_data[k]
     if os.path.exists(package_path):
         with open(package_path, "r") as package_file:
