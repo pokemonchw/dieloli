@@ -189,9 +189,9 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     if time_judge:
         settle_draw = settle_behavior.handle_settle_behavior(character_id, end_time)
         talk_draw = talk.handle_talk(character_id)
-        if talk_draw != None:
+        if talk_draw is not None:
             talk_draw.draw()
-        if settle_draw != None:
+        if settle_draw is not None:
             name_draw = draw.NormalDraw()
             name_draw.text = "\n" + character_data.name + ": "
             name_draw.width = window_width
