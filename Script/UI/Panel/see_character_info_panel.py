@@ -1091,7 +1091,7 @@ class SeeCharacterInfoHandle:
             line_feed.draw()
             if yrn == back_draw.return_text:
                 break
-            elif yrn in now_character_panel.draw_data:
+            if yrn in now_character_panel.draw_data:
                 now_panel_id = yrn
 
     def old_character(self):

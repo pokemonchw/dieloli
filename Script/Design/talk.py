@@ -37,8 +37,7 @@ def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
                         if not now_premise_data[premise]:
                             now_weight = 0
                             break
-                        else:
-                            now_weight += now_premise_data[premise]
+                        now_weight += now_premise_data[premise]
                     else:
                         now_add_weight = constant.handle_premise_data[premise](character_id)
                         now_premise_data[premise] = now_add_weight
