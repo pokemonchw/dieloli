@@ -186,7 +186,7 @@ class BuyFoodByFoodNameDraw:
     """
 
     def __init__(
-        self, text: Tuple[str, UUID], width: int, is_button: bool, num_button: bool, button_id: int
+        self, text: Tuple[str, UUID], width: int, _unused: bool, num_button: bool, button_id: int
     ):
         """初始化绘制对象"""
         self.text: UUID = text[1]

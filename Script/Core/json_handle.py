@@ -7,7 +7,8 @@ def is_utf8bom(file_path: str) -> bool:
     Keyword arguments:
     filepath -- 文件路径
     """
-    return b"\xef\xbb\xbf" == open(file_path, mode="rb").read(3)
+    with open(file_path, mode="rb") as now_file:
+        return now_file.read(3) == b"\xef\xbb\xbf"
 
 
 def load_json(file_path: str) -> dict:

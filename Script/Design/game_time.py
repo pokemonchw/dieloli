@@ -3,7 +3,6 @@ import time
 import random
 import math
 import ephem
-import time
 import os
 from types import FunctionType
 from dateutil import relativedelta
@@ -113,8 +112,7 @@ def get_sub_date(
     )
     if new_date.year > 1970:
         return new_date.timestamp()
-    else:
-        return (new_date - datetime.datetime(1970, 1, 1)).total_seconds()
+    return (new_date - datetime.datetime(1970, 1, 1)).total_seconds()
 
 
 def get_rand_day_for_year(year: int) -> int:
@@ -187,8 +185,7 @@ def judge_date_big_or_small(time_a: int, time_b: int) -> int:
     """
     if time_a == time_b:
         return 2
-    else:
-        return time_b < time_a
+    return time_b < time_a
 
 
 def ecliptic_lon(now_time: int) -> float:
@@ -309,7 +306,7 @@ def get_sun_time(old_time: int) -> int:
     ):
         now_unix = now_time.timestamp()
         now_unix -= 60
-        for i in range(0, 1439):
+        for _ in range(0, 1439):
             now_unix += 60
             now_unix_date = datetime.datetime.fromtimestamp(now_unix)
             now_unix_date = now_unix_date.replace(tzinfo=time_zone)
@@ -342,27 +339,27 @@ def get_sun_phase_for_sun_az(now_az: float) -> int:
     Return arguments:
     太阳位置配表id
     """
-    if now_az >= 225 and now_az < 255:
+    if 225 <= now_az < 255:
         return 8
-    elif now_az >= 255 and now_az < 285:
+    if 255 <= now_az < 285:
         return 9
-    elif now_az >= 285 and now_az < 315:
+    if 285 <= now_az < 315:
         return 10
-    elif now_az >= 315 and now_az < 345:
+    if 315 <= now_az < 345:
         return 11
-    elif now_az >= 345 or now_az < 15:
+    if now_az >= 345 or now_az < 15:
         return 0
-    elif now_az >= 15 and now_az < 45:
+    if 15 <= now_az < 45:
         return 1
-    elif now_az >= 45 and now_az < 75:
+    if 45 <= now_az < 75:
         return 2
-    elif now_az >= 75 and now_az < 105:
+    if 75 <= now_az < 105:
         return 3
-    elif now_az >= 105 and now_az < 135:
+    if 105 <= now_az < 135:
         return 4
-    elif now_az >= 135 and now_az < 165:
+    if 135 <= now_az < 165:
         return 5
-    elif now_az >= 165 and now_az < 195:
+    if 165 <= now_az < 195:
         return 6
     return 7
 
@@ -391,7 +388,7 @@ def get_moon_phase(now_time: int) -> int:
         now_type = next_phase > now_phase
         for phase in game_config.config_moon_data[now_type]:
             phase_config = game_config.config_moon[phase]
-            if now_phase > phase_config.min_phase and now_phase <= phase_config.max_phase:
+            if phase_config.min_phase < now_phase <= phase_config.max_phase:
                 cache.moon_phase[now_date_str] = phase_config.cid
                 break
         if len(cache.moon_phase) > 3:

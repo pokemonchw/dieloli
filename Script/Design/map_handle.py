@@ -126,11 +126,10 @@ def get_path_finding(map_path_str: str, now_node: str, target_node: str) -> (str
     """
     if now_node == target_node:
         return "End", game_type.TargetPath()
-    else:
-        return (
-            "",
-            cache.map_data[map_path_str].sorted_path[now_node][target_node],
-        )
+    return (
+        "",
+        cache.map_data[map_path_str].sorted_path[now_node][target_node],
+    )
 
 
 def get_scene_to_scene_map_list(now_scene_path: list, target_scene_path: list) -> (str, list):
@@ -147,12 +146,12 @@ def get_scene_to_scene_map_list(now_scene_path: list, target_scene_path: list) -
     scene_affiliation = judge_scene_affiliation(now_scene_path, target_scene_path)
     if scene_affiliation == "common":
         return "common", []
-    elif scene_affiliation == "subordinate":
+    if scene_affiliation == "subordinate":
         return (
             "",
             get_map_hierarchy_list_for_scene_path(now_scene_path, target_scene_path),
         )
-    elif scene_affiliation == "nobelonged":
+    if scene_affiliation == "nobelonged":
         common_map = get_common_map_for_scene_path(now_scene_path, target_scene_path)
         now_scene_to_common_map = get_map_hierarchy_list_for_scene_path(now_scene_path, common_map)
         target_scene_to_common_map = get_map_hierarchy_list_for_scene_path(target_scene_path, common_map)
@@ -168,18 +167,17 @@ def get_common_map_for_scene_path(scene_a_path: list, scene_b_path: list) -> lis
     scene_bpath -- 场景B路径
     """
     hierarchy = []
-    if scene_a_path[:-1] == [] or scene_b_path[:-1] == []:
+    if [] in [scene_a_path[:-1], scene_b_path[:-1]]:
         return hierarchy
-    else:
-        for i in range(0, len(scene_a_path)):
-            try:
-                if scene_a_path[i] == scene_b_path[i]:
-                    hierarchy.append(scene_a_path[i])
-                else:
-                    break
-            except IndexError:
+    for i in range(0, len(scene_a_path)):
+        try:
+            if scene_a_path[i] == scene_b_path[i]:
+                hierarchy.append(scene_a_path[i])
+            else:
                 break
-        return get_map_path_for_true(hierarchy)
+        except IndexError:
+            break
+    return get_map_path_for_true(hierarchy)
 
 
 def get_map_hierarchy_list_for_scene_path(now_scene_path: list, target_scene_path: list) -> list:
@@ -213,9 +211,8 @@ def get_map_path_for_true(map_path: list) -> list:
     map_path_str = get_map_system_path_str_for_list(map_path)
     if map_path_str in cache.map_data:
         return map_path
-    else:
-        new_map_path = map_path[:-1]
-        return get_map_path_for_true(new_map_path)
+    new_map_path = map_path[:-1]
+    return get_map_path_for_true(new_map_path)
 
 
 def judge_scene_is_affiliation(now_scene_path: list, target_scene_path: list) -> str:
@@ -230,7 +227,7 @@ def judge_scene_is_affiliation(now_scene_path: list, target_scene_path: list) ->
     """
     if judge_scene_affiliation(now_scene_path, target_scene_path) == "subordinate":
         return "subordinate"
-    elif judge_scene_affiliation(target_scene_path, now_scene_path) == "subordinate":
+    if judge_scene_affiliation(target_scene_path, now_scene_path) == "subordinate":
         return "superior"
     return "common"
 
@@ -246,14 +243,13 @@ def judge_scene_affiliation(now_scene_path: list, target_scene_path: list) -> st
     target_scene_path -- 目标场景路径
     """
     judge = 1
-    for i in range(len(now_scene_path)):
-        if len(target_scene_path) - 1 >= i:
-            if now_scene_path[i] != target_scene_path[i]:
-                judge = 0
-                break
-        if i > len(target_scene_path) - 1:
+    for index,_unused in enumerate(now_scene_path):
+        if len(target_scene_path) - 1 >= index and now_scene_path[index] != target_scene_path[index]:
+            judge = 0
             break
-        if target_scene_path[i] != now_scene_path[i]:
+        if index > len(target_scene_path) - 1:
+            break
+        if target_scene_path[index] != now_scene_path[index]:
             judge = 0
             break
     if judge:
@@ -275,15 +271,13 @@ def get_relation_map_list_for_scene_path(scene_path: list) -> list:
     now_map_path = scene_path[:-1]
     now_pathId = now_path[-1]
     map_list = []
-    if now_map_path != [] and now_map_path[:-1] != []:
+    if [] not in [now_map_path, now_map_path[:-1]]:
         map_list.append(now_map_path)
         if now_pathId == "0":
             return map_list + get_relation_map_list_for_scene_path(now_map_path)
-        else:
-            return map_list
-    else:
-        map_list.append(now_map_path)
         return map_list
+    map_list.append(now_map_path)
+    return map_list
 
 
 def get_scene_data_for_map(map_path_str: str, map_scene_id: str) -> game_type.Scene:
@@ -344,9 +338,8 @@ def get_scene_path_for_true(scene_path: list) -> list:
     scene_path_str = get_map_system_path_str_for_list(scene_path)
     if scene_path_str in cache.scene_data:
         return scene_path
-    else:
-        scene_path.append("0")
-        return get_scene_path_for_true(scene_path)
+    scene_path.append("0")
+    return get_scene_path_for_true(scene_path)
 
 
 def get_map_door_data_for_scene_path(scene_path: list) -> dict:
@@ -369,8 +362,7 @@ def get_map_door_data(map_path_str: str) -> dict:
     map_data = cache.map_data[map_path_str]
     if "MapDoor" in map_data:
         return map_data["MapDoor"]
-    else:
-        return {}
+    return {}
 
 
 def get_scene_character_name_list(scene_path_str: str, remove_own_character=False) -> list:
@@ -450,7 +442,7 @@ def init_scene_edge_path_data():
                 now_map_scene_id = get_map_scene_id_for_scene_path(map_path, now_position)
                 target_map_scene_id = get_map_scene_id_for_scene_path(map_path, target_scene)
                 _, _, now_move_target, now_move_time = identical_map_move(
-                    now_position, map_path, now_map_scene_id, target_map_scene_id
+                    map_path, now_map_scene_id, target_map_scene_id
                 )
             else:
                 _, _, now_move_target, now_move_time = difference_map_move(now_position, target_scene)
@@ -472,7 +464,6 @@ def init_move_time_data():
             calculate_total_travel_time(now_scene, target_scene, scene_move_time)
     with open(all_move_time_path, "w") as all_move_time_file:
         json.dump(scene_move_time, all_move_time_file)
-    print(scene_move_time)
 
 
 def calculate_total_travel_time(
@@ -527,19 +518,18 @@ def difference_map_move(now_position: list, target_scene: list) -> (str, list, l
         now_true_affiliation = judge_scene_is_affiliation(now_true_position, target_scene)
         if now_true_affiliation == "subordinate":
             now_map_scene_id = get_map_scene_id_for_scene_path(now_true_map, now_true_position)
-            return identical_map_move(now_position, now_true_map, now_map_scene_id, "0")
+            return identical_map_move(now_true_map, now_map_scene_id, "0")
         now_map = get_map_for_path(target_scene)
         now_map_scene_id = get_map_scene_id_for_scene_path(now_map, now_position)
-        return identical_map_move(now_position, now_map, now_map_scene_id, "0")
+        return identical_map_move(now_map, now_map_scene_id, "0")
     relation_map_list = get_relation_map_list_for_scene_path(now_true_position)
     now_scene_real_map = relation_map_list[-1]
     now_map_scene_id = get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
     common_map = get_common_map_for_scene_path(now_true_position, target_scene)
-    if now_scene_real_map != common_map:
-        if now_map_scene_id == "0":
-            now_true_position = now_scene_real_map.copy()
-            relation_map_list = get_relation_map_list_for_scene_path(now_true_position)
-            now_scene_real_map = relation_map_list[-1]
+    if now_scene_real_map != common_map and now_map_scene_id == "0":
+        now_true_position = now_scene_real_map.copy()
+        relation_map_list = get_relation_map_list_for_scene_path(now_true_position)
+        now_scene_real_map = relation_map_list[-1]
     target_map_scene_id = get_map_scene_id_for_scene_path(common_map, target_scene)
     if now_scene_real_map == common_map:
         now_map_scene_id = get_map_scene_id_for_scene_path(common_map, now_true_position)
@@ -547,11 +537,10 @@ def difference_map_move(now_position: list, target_scene: list) -> (str, list, l
         now_map_scene_id = get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
         target_map_scene_id = "0"
         common_map = now_scene_real_map
-    return identical_map_move(now_position, common_map, now_map_scene_id, target_map_scene_id)
+    return identical_map_move(common_map, now_map_scene_id, target_map_scene_id)
 
 
 def identical_map_move(
-    now_position: list,
     now_map: list,
     now_map_scene_id: str,
     target_map_scene_id: str,
@@ -559,7 +548,6 @@ def identical_map_move(
     """
     角色在相同地图层级内移动
     Keyword arguments:
-    now_position -- 当前场景位置
     now_map -- 当前地图路径
     now_map_scene_id -- 当前角色所在场景(当前地图层级下的相对坐标)
     target_map_scene_id -- 寻路目标场景(当前地图层级下的相对坐标)

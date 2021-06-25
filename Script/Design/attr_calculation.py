@@ -60,8 +60,7 @@ def get_height(tem_name: int, age: int) -> game_type.Height:
     growth_height_data = get_growth_height(age, expect_height, development_age, expect_age)
     growth_height = growth_height_data["GrowthHeight"]
     now_height = growth_height_data["NowHeight"]
-    if now_height >= expect_height:
-        now_height = expect_height
+    now_height = min(now_height, expect_height)
     height_data = game_type.Height()
     height_data.now_height = now_height
     height_data.growth_height = growth_height
@@ -90,8 +89,7 @@ def get_chest(chest_tem: int, birthday: int) -> game_type.Chest:
     now_day = int((now_date - birthday) / 86400)
     sub_chest = target_chest / end_day
     now_chest = sub_chest * now_day
-    if now_chest > target_chest:
-        now_chest = target_chest
+    now_chest = min(now_chest, target_chest)
     chest = game_type.Chest()
     chest.now_chest = now_chest
     chest.sub_chest = sub_chest
@@ -206,8 +204,6 @@ def get_weight(bmi: float, height: float) -> float:
 def get_measurements(
     tem_name: int,
     height: float,
-    weight: float,
-    bodyfat: float,
     weight_tem: int,
 ) -> dict:
     """
@@ -215,8 +211,6 @@ def get_measurements(
     Keyword arguments:
     tem_name -- 性别模板
     height -- 身高
-    weight -- 体重
-    bodyfat -- 体脂率
     weight_tem -- 体重比例模板
     """
     fix = 0
@@ -280,10 +274,9 @@ def get_init_learn_abllity(age: int, end_age: int):
     forget_age = int(end_age * 0.9)
     if age <= stop_age:
         return age / stop_age
-    elif age > stop_age and age < end_age:
+    if stop_age < age < end_age:
         return 1 - 1 / (forget_age - stop_age) * (forget_age - age)
-    else:
-        return 0 - (age - forget_age) / (end_age - forget_age)
+    return 0 - (age - forget_age) / (end_age - forget_age)
 
 
 def get_sex_experience(tem_name: int, sex: int) -> dict:
@@ -379,7 +372,7 @@ def judge_age_group(age: int) -> int:
     """
     for age_tem_id in game_config.config_age_tem:
         age_tem = game_config.config_age_tem[age_tem_id]
-        if age >= age_tem.min_age and age < age_tem.max_age:
+        if age_tem.min_age <= age < age_tem.max_age:
             return age_tem_id
     return 0
 
@@ -394,6 +387,6 @@ def judge_chest_group(chest: float) -> int:
     """
     for chest_tem_id in game_config.config_chest:
         chest_tem = game_config.config_chest[chest_tem_id]
-        if chest >= chest_tem.min_value and chest < chest_tem.max_value:
+        if chest_tem.min_value <= chest < chest_tem.max_value:
             return chest_tem_id
     return 0

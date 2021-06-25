@@ -151,11 +151,11 @@ class BarDraw:
                 proportion = int(value / max_value * self.width)
             fix_bar = int(self.width - proportion)
             style_data = game_config.config_bar[game_config.config_bar_data[bar_id]]
-            for i in range(proportion):
+            for _ in range(proportion):
                 now_draw = ImageDraw(style_data.ture_bar)
                 now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
-            for i in range(fix_bar):
+            for _ in range(fix_bar):
                 now_draw = ImageDraw(style_data.null_bar)
                 now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
@@ -520,16 +520,14 @@ class TitleLineDraw:
         title_draw.style = self.title_style
         title_draw.text = f" {self.title} "
         fix_width = self.width - len(title_draw)
-        if fix_width < 0:
-            fix_width = 0
+        fix_width = max(fix_width, 0)
         frame_width = int(fix_width / 2)
         frame_draw = NormalDraw()
         frame_draw.width = frame_width
         frame_draw.style = self.frame_style
         frame_draw.text = self.frame
         line_width = int(fix_width / 2 - len(frame_draw))
-        if line_width < 0:
-            line_width = 0
+        line_width = max(line_width, 0)
         line_draw = NormalDraw()
         line_draw.width = line_width
         line_draw.style = self.style
@@ -572,8 +570,7 @@ class LittleTitleLineDraw:
         title_draw.text = self.title
         title_draw.style = self.title_style
         line_a_width = int(self.width / 4) - len(title_draw)
-        if line_a_width < 0:
-            line_a_width = 0
+        line_a_width = max(line_a_width, 0)
         line_a = NormalDraw()
         line_a.width = line_a_width
         line_a.style = self.style

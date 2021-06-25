@@ -12,7 +12,7 @@ def two_bit_array_to_dict(array: tuple) -> dict:
     Keyword arguments:
     array -- 要转换的二维数组
     """
-    return {x: y for x, y in array}
+    return dict(array)
 
 
 def get_rand_value_for_value_region(value_list: List[int]) -> int:
@@ -101,7 +101,8 @@ def list_of_groups(init_list: list, children_list_len: int) -> List[List[any]]:
     list_of_groups = zip(*(iter(init_list),) * children_list_len)
     end_list = [list(i) for i in list_of_groups]
     count = len(init_list) % children_list_len
-    end_list.append(init_list[-count:]) if count != 0 else end_list
+    if count:
+        end_list.append(init_list[-count:])
     return end_list
 
 
@@ -118,5 +119,5 @@ def get_gauss_rand(min_value: int, max_value: int) -> int:
     single = mu - min_value
     while 1:
         value = random.gauss(mu, single)
-        if value >= min_value and value <= max_value:
+        if min_value <= value <= max_value:
             return value

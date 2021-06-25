@@ -184,7 +184,7 @@ class EatFoodByFoodNameDraw:
     button_id -- 数字按钮id
     """
 
-    def __init__(self, text: UUID, width: int, is_button: bool, num_button: bool, button_id: int):
+    def __init__(self, text: UUID, width: int, _unused: bool, num_button: bool, button_id: int):
         self.text: UUID = text
         """ 食物id """
         self.draw_text: str = ""

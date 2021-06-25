@@ -39,15 +39,15 @@ def handle_settle_behavior(character_id: int, now_time: int):
         now_judge = True
     if status_data.hit_point:
         now_judge = True
-    if len(status_data.knowledge):
+    if status_data.knowledge:
         now_judge = True
-    if len(status_data.language):
+    if status_data.language:
         now_judge = True
-    if len(status_data.status):
+    if status_data.status:
         now_judge = True
-    if len(status_data.sex_experience):
+    if status_data.sex_experience:
         now_judge = True
-    if len(status_data.target_change) and not character_id:
+    if status_data.target_change and not character_id:
         now_judge = True
     if now_judge:
         now_text_list = []
@@ -59,28 +59,28 @@ def handle_settle_behavior(character_id: int, now_time: int):
             now_text_list.append(
                 _("气力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
             )
-        if len(status_data.status):
+        if status_data.status:
             now_text_list.extend(
                 [
                     f"{game_config.config_character_state[i].name}:{attr_text.get_value_text(status_data.status[i])}"
                     for i in status_data.status
                 ]
             )
-        if len(status_data.knowledge):
+        if status_data.knowledge:
             now_text_list.extend(
                 [
                     f"{game_config.config_knowledge[i].name}:{attr_text.get_value_text(status_data.knowledge[i])}"
                     for i in status_data.knowledge
                 ]
             )
-        if len(status_data.language):
+        if status_data.language:
             now_text_list.extend(
                 [
                     f"{game_config.config_language[i].name}:{attr_text.get_value_text(status_data.language[i])}"
                     for i in status_data.language
                 ]
             )
-        if len(status_data.sex_experience):
+        if status_data.sex_experience:
             now_text_list.extend(
                 [
                     game_config.config_organ[i].name
@@ -89,7 +89,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                     for i in status_data.sex_experience
                 ]
             )
-        if len(status_data.target_change):
+        if status_data.target_change:
             for target_character_id in status_data.target_change:
                 if character_id and target_character_id:
                     continue
@@ -110,7 +110,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                         + game_config.config_social_type[target_change.new_social].name
                     )
                     judge = 1
-                if len(target_change.status):
+                if target_change.status:
                     for status_id in target_change.status:
                         if target_change.status[status_id]:
                             now_text += (
@@ -121,7 +121,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                                 )
                             )
                             judge = 1
-                if len(target_change.sex_experience):
+                if target_change.sex_experience:
                     for organ in target_change.sex_experience:
                         if target_change.sex_experience[organ]:
                             now_text += (
@@ -166,12 +166,11 @@ def get_cut_down_favorability_for_consume_time(consume_time: int):
     """
     if consume_time < 10:
         return consume_time
-    elif consume_time >= 10 and consume_time < 100:
+    if 10 <= consume_time < 100:
         return (consume_time - 9) * 10 + 9
-    elif consume_time >= 100 and consume_time < 1000:
+    if 100 <= consume_time < 1000:
         return (consume_time - 99) * 100 + 909
-    else:
-        return (consume_time - 999) * 1000 + 90909
+    return (consume_time - 999) * 1000 + 90909
 
 
 def change_character_favorability_for_time(character_id: int, now_time: int):
@@ -209,7 +208,6 @@ def change_character_social(character_id: int, change_data: game_type.CharacterS
     character_id -- 状态变化数据所属角色id
     change_data -- 状态变化数据
     """
-    character_data: game_type.Character = cache.character_data[character_id]
     for now_character in change_data.target_change:
         change_character_social_now(character_id, now_character, change_data)
 
@@ -258,12 +256,12 @@ def get_favorability_social(favorability: int) -> int:
     """
     if favorability < 500:
         return 0
-    elif favorability < 10000:
+    if favorability < 10000:
         return 1
-    elif favorability < 200000:
+    if favorability < 200000:
         return 2
-    elif favorability < 4000000:
+    if favorability < 4000000:
         return 3
-    elif favorability < 80000000:
+    if favorability < 80000000:
         return 4
     return 5

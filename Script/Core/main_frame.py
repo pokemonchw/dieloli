@@ -153,12 +153,12 @@ def send_input(*args):
     global input_event_func
     order = get_order()
     if len(cache.input_cache) >= 21:
-        if not (order) == "":
+        if (order) != "":
             del cache.input_cache[0]
             cache.input_cache.append(order)
             cache.input_position = 0
     else:
-        if not (order) == "":
+        if (order) != "":
             cache.input_cache.append(order)
             cache.input_position = 0
     input_event_func(order)
@@ -212,9 +212,8 @@ def read_queue():
                 io_print_cmd(c["text"], c["num"], c["normal_style"], c["on_style"])
             if c["type"] == "image_cmd":
                 io_print_image_cmd(c["text"], c["num"])
-            if "\n" in c["text"]:
-                if textbox.get("1.0", END).count("\n") > normal_config.config_normal.text_hight * 10:
-                    textbox.delete("1.0", str(normal_config.config_normal.text_hight * 5) + ".0")
+            if "\n" in c["text"] and textbox.get("1.0", END).count("\n") > normal_config.config_normal.text_hight * 10:
+                textbox.delete("1.0", str(normal_config.config_normal.text_hight * 5) + ".0")
     root.after(1, read_queue)
 
 
@@ -485,9 +484,9 @@ def io_clear_cmd(*cmd_numbers: list):
                 textbox.tag_delete(cmd_tag_map[num])
                 del cmd_tag_map[num]
     else:
-        for num in cmd_tag_map.keys():
+        for num in cmd_tag_map:
             tag_tuple = textbox.tag_ranges(cmd_tag_map[num])
-            if len(tag_tuple):
+            if tag_tuple:
                 index_first = tag_tuple[0]
                 index_lskip_one_waitast = tag_tuple[1]
                 for tag_name in textbox.tag_names(index_first):

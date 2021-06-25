@@ -45,9 +45,8 @@ def run(open_func: object):
     Keyword arguments:
     open_func -- 开场流程函数
     """
-    global _flowthread
-    _flowthread = threading.Thread(target=open_func, name="flowthread")
-    _flowthread.start()
+    flowthread = threading.Thread(target=open_func, name="flowthread")
+    flowthread.start()
     main_frame.run()
 
 
@@ -300,15 +299,10 @@ def io_clear_cmd(*cmd_numbers: int):
     put_queue(json.dumps(json_str, ensure_ascii=False))
 
 
-def style_def():
-    pass
-
-
 def init_style():
     """
     富文本样式初始化
     """
-    global style_def
 
     def new_style_def(
         style_name,

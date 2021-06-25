@@ -88,8 +88,8 @@ def establish_save_windows(save_id: str, save_queue: multiprocessing.Queue):
     save_queue -- 传递存档数据的消息队列
     """
     data = save_queue.get()
-    for data_id in data:
-        write_save_data(save_id, data_id, data[data_id])
+    for key, value in data.items():
+        write_save_data(save_id, key, value)
 
 
 def establish_save_linux(save_id: str):
@@ -109,8 +109,8 @@ def establish_save_linux(save_id: str):
         "1": cache,
         "0": save_verson,
     }
-    for data_id in data:
-        write_save_data(save_id, data_id, data[data_id])
+    for key, value in data.items():
+        write_save_data(save_id, key, value)
 
 
 def load_save_info_head(save_id: str) -> dict:

@@ -228,6 +228,8 @@ class WearClothingListPanel:
         """ 绘制宽度 """
         self.handle_panel: panel.ClothingPageHandlePanel = None
         """ 页面控制对象 """
+        self.return_list = []
+        """ 返回的列表 """
         if clothing_type in character_data.clothing:
             clothing_list = character_data.clothing[clothing_type].keys()
             now_list = [(i, clothing_type) for i in clothing_list]

@@ -229,8 +229,6 @@ def handle_drink_spring():
         character_data.measurements = attr_calculation.get_measurements(
             character_data.sex,
             character_data.height.now_height,
-            character_data.weight,
-            character_data.bodyfat,
             character_data.bodyfat_tem,
         )
     else:
@@ -408,7 +406,7 @@ def handle_attend_class():
     now_course_index = 0
     for session_id in game_config.config_school_session_data[school_id]:
         session_config = game_config.config_school_session[session_id]
-        if session_config.start_time <= now_time_value and session_config.end_time >= now_time_value:
+        if session_config.start_time <= now_time_value <= session_config.end_time:
             now_value = int(now_time_value / 100) * 60 + now_time_value % 100
             end_value = int(session_config.end_time / 100) * 60 + session_config.end_time % 100
             end_time = end_value - now_value + 1

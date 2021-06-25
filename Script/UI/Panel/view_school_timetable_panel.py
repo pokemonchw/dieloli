@@ -132,11 +132,9 @@ class StudentTimeTablePanel:
                     end_hour = course_end_time[:-2]
                     course_end_time_text = f"{end_hour}:{end_minute}"
                     now_time_judge = 0
-                    if times_judge:
-                        if self.now_week == now_date_week:
-                            if now_time_value < course_time_config.end_time:
-                                now_time_judge = 1
-                                times_judge = 0
+                    if times_judge and self.now_week == now_date_week and now_time_value < course_time_config.end_time:
+                        now_time_judge = 1
+                        times_judge = 0
                     if not times:
                         now_class_text = _("早读课")
                         if now_time_judge:
@@ -258,7 +256,8 @@ class TeacherTimeTablePanel:
         if yrn == back_draw.return_text:
             cache.now_panel_id = constant.Panel.IN_SCENE
 
-    def move_now(self, move_path: List[str]):
+    @staticmethod
+    def move_now(move_path: List[str]):
         """
         移动到指定教室
         Keyword arguments:

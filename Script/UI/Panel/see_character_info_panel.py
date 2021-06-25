@@ -72,7 +72,7 @@ class SeeCharacterInfoPanel:
         self.handle_panel = panel.CenterDrawButtonListPanel()
         """ 属性列表的控制面板 """
         self.handle_panel.set(
-            [f"[{text}]" for text in self.draw_data.keys()],
+            [f"[{text}]" for text in self.draw_data],
             list(self.draw_data.keys()),
             width,
             4,
@@ -88,7 +88,7 @@ class SeeCharacterInfoPanel:
         """
         self.now_panel = panel_id
         self.handle_panel.set(
-            [f"[{text}]" for text in self.draw_data.keys()],
+            [f"[{text}]" for text in self.draw_data],
             list(self.draw_data.keys()),
             self.width,
             4,
@@ -176,15 +176,12 @@ class SeeCharacterStatusPanel:
             status_text_list = []
             for status_id in type_set:
                 if status_type == 0:
-                    if character_data.sex == 0:
-                        if status_id in {2, 3, 6}:
-                            continue
-                    elif character_data.sex == 1:
-                        if status_id == 5:
-                            continue
-                    elif character_data.sex == 3:
-                        if status_id in {2, 3, 5, 6}:
-                            continue
+                    if character_data.sex == 0 and status_id in {2, 3, 6}:
+                        continue
+                    if character_data.sex == 1 and status_id == 5:
+                        continue
+                    if character_data.sex == 3 and status_id in {2, 3, 5, 6}:
+                        continue
                 status_text = game_config.config_character_state[status_id].name
                 status_value = 0
                 if status_id in character_data.status:
@@ -418,7 +415,7 @@ class CharacterRoomText:
         """ 教室位置文本 """
         officeroom = character_data.officeroom
         now_officeroom_text = _("办公室位置:")
-        if len(officeroom):
+        if officeroom:
             officeroom_text = attr_text.get_scene_path_text(officeroom)
             now_officeroom_text += officeroom_text
         else:
@@ -521,9 +518,6 @@ class CharacterMeasurementsText:
         self.width = width
         """ 当前最大可绘制宽度 """
         character_data = cache.character_data[self.character_id]
-        character_data.measurements.bust
-        character_data.measurements.hip
-        character_data.measurements.waist
         now_bust = str(round(character_data.measurements.bust, 2))
         now_hip = str(round(character_data.measurements.hip, 2))
         now_waist = str(round(character_data.measurements.waist, 2))
@@ -865,9 +859,7 @@ class SeeCharacterSocialContact:
             type_draw = draw.LittleTitleLineDraw(type_config.name, self.width, ":")
             self.draw_list.append(type_draw)
             now_draw = draw.CenterDraw()
-            if social_type in character_data.social_contact and len(
-                character_data.social_contact[social_type]
-            ):
+            if social_type in character_data.social_contact and character_data.social_contact[social_type]:
                 character_list = list(character_data.social_contact[social_type])
                 now_draw = panel.PageHandlePanel(
                     character_list, SeeCharacterInfoByNameDraw, 10, 5, self.width, 1, 1, 0
@@ -1091,7 +1083,7 @@ class SeeCharacterInfoHandle:
             line_feed.draw()
             if yrn == back_draw.return_text:
                 break
-            elif yrn in now_character_panel.draw_data:
+            if yrn in now_character_panel.draw_data:
                 now_panel_id = yrn
 
     def old_character(self):
@@ -1181,7 +1173,7 @@ class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
 
     def old_character(self):
         """切换显示上一人"""
-        if len(self.character_list):
+        if self.character_list:
             if self.character_id:
                 now_index = self.character_list.index(self.character_id)
                 if now_index:
@@ -1190,11 +1182,11 @@ class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
                 else:
                     self.character_id = 0
             else:
-                self.character_id = self.character_list[len(self.character_list) - 1]
+                self.character_id = self.character_list[-1]
 
     def next_character(self):
         """切换显示上一人"""
-        if len(self.character_list):
+        if self.character_list:
             if self.character_id:
                 now_index = self.character_list.index(self.character_id)
                 if now_index == len(self.character_list) - 1:

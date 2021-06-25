@@ -22,10 +22,7 @@ def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
         player_data: game_type.Character = cache.character_data[0]
         if character_id not in player_data.collection_character:
             return
-    if (
-        character_data.position != cache.character_data[0].position
-        and character_data.behavior.move_src != cache.character_data[0].position
-    ):
+    if cache.character_data[0].position not in [character_data.position, character_data.behavior.move_src]:
         return
     if behavior_id in game_config.config_talk_data:
         for talk_id in game_config.config_talk_data[behavior_id]:
@@ -37,8 +34,7 @@ def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
                         if not now_premise_data[premise]:
                             now_weight = 0
                             break
-                        else:
-                            now_weight += now_premise_data[premise]
+                        now_weight += now_premise_data[premise]
                     else:
                         now_add_weight = constant.handle_premise_data[premise](character_id)
                         now_premise_data[premise] = now_add_weight
@@ -51,7 +47,7 @@ def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
                 now_talk_data.setdefault(now_weight, set())
                 now_talk_data[now_weight].add(talk_id)
     now_talk = ""
-    if len(now_talk_data):
+    if now_talk_data:
         talk_weight = value_handle.get_rand_value_for_value_region(list(now_talk_data.keys()))
         now_talk_id = random.choice(list(now_talk_data[talk_weight]))
         now_talk = game_config.config_talk[now_talk_id].context

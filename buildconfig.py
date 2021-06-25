@@ -49,23 +49,23 @@ def build_csv_config(file_path: str, file_name: str, talk: bool, target: bool):
                     now_docstring_data[k] = row[k]
                 i += 1
                 continue
-            elif i == 1:
+            if i == 1:
                 for k in row:
                     now_type_data[k] = row[k]
                 i += 1
                 continue
-            elif i == 2:
+            if i == 2:
                 for k in row:
                     get_text_data[k] = int(row[k])
                 i += 1
                 continue
-            elif i == 3:
+            if i == 3:
                 class_text = list(row.values())[0]
                 i += 1
                 continue
             for k in now_type_data:
                 now_type = now_type_data[k]
-                if not len(row[k]):
+                if not row[k]:
                     del row[k]
                     continue
                 if now_type == "int":
@@ -107,7 +107,7 @@ def build_config_po(message: str, message_class: str, message_type: str, message
     if message not in msgData:
         config_po += f"#: class:{message_class} id:{message_id} type:{message_type}\n"
         config_po += f'msgid "{message}"\n'
-        config_po += f'msgstr ""\n\n'
+        config_po += 'msgstr ""\n\n'
         msgData.add(message)
 
 

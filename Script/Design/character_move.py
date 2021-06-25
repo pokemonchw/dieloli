@@ -16,7 +16,7 @@ def own_charcter_move(target_scene: list):
         if character_data.position != target_scene:
             (
                 move_now,
-                now_path_list,
+                _,
                 now_target_position,
                 now_need_time,
             ) = character_move(0, target_scene)

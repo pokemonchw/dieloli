@@ -96,7 +96,7 @@ class SeeMapPanel:
             if character_scene_id in scene_path:
                 del scene_path[character_scene_id]
             scene_path_list = list(scene_path.keys())
-            if len(scene_path_list):
+            if scene_path_list:
                 line = draw.LineDraw(".", self.width)
                 line.draw()
                 message_draw = draw.NormalDraw()
@@ -184,7 +184,8 @@ class SeeMapPanel:
         down_map_scene_id = map_handle.get_map_scene_id_for_scene_path(self.now_map, character_position)
         self.now_map.append(down_map_scene_id)
 
-    def move_now(self, scene_path: List[str]):
+    @staticmethod
+    def move_now(scene_path: List[str]):
         """
         控制角色移动至指定场景
         Keyword arguments:
@@ -275,12 +276,11 @@ class MapSceneNameDraw:
         self.end_index: int = 0
         """ 结束按钮id """
 
-    def update(self, now_map: List[str], start_index: int):
+    def update(self, now_map: List[str],_):
         """
         更新当前面板对象
         Keyword arguments:
         now_map -- 当前地图
-        start_index -- 起始按钮id
         """
         self.now_map = now_map
 
@@ -291,7 +291,7 @@ class MapSceneNameDraw:
         map_data: game_type.Map = cache.map_data[map_path_str]
         path_edge = map_data.path_edge
         scene_id_list = list(path_edge.keys())
-        if len(scene_id_list):
+        if scene_id_list:
             character_data: game_type.Character = cache.character_data[0]
             character_scene_id = map_handle.get_map_scene_id_for_scene_path(
                 self.now_map, character_data.position
@@ -322,7 +322,8 @@ class MapSceneNameDraw:
                 line_feed.draw()
         self.end_index = len(scene_id_list) - 1
 
-    def move_now(self, scene_path: List[str]):
+    @staticmethod
+    def move_now(scene_path: List[str]):
         """
         控制角色移动至指定场景
         Keyword arguments:
@@ -356,7 +357,8 @@ class GlobalSceneNamePanel:
         )
         self.end_index = self.handle_panel.end_index
 
-    def get_path_list(self) -> list:
+    @staticmethod
+    def get_path_list() -> list:
         """
         获取公共场景路径列表
         Return arguments:

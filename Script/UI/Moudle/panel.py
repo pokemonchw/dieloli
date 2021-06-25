@@ -46,12 +46,12 @@ class SingleColumnButton:
         normal_style -- 按钮通常样式
         onbutton_style -- 鼠标悬停时样式
         """
-        for i in range(len(button_list)):
-            if i <= self.max_height:
-                draw_button = draw.Button(button_list[i], return_list[i], normal_style, onbutton_style)
+        for index,now_button in enumerate(button_list):
+            if index <= self.max_height:
+                draw_button = draw.Button(now_button, return_list[index], normal_style, onbutton_style)
                 draw_button.width = self.width
                 self.button_list.append(draw_button)
-            self.return_list[return_list[i]] = button_list[i]
+            self.return_list[return_list[index]] = now_button
 
     def get_width(self) -> int:
         """
@@ -96,11 +96,11 @@ class OneMessageAndSingleColumnButton:
         """
         new_button_list = []
         return_list = []
-        for i in range(len(button_list)):
-            now_id = text_handle.id_index(i + start_id)
-            now_id_text = now_id + button_list[i]
+        for index,now_button in enumerate(button_list):
+            now_id = text_handle.id_index(index + start_id)
+            now_id_text = now_id + now_button
             new_button_list.append(now_id_text)
-            now_i_str = str(start_id + i)
+            now_i_str = str(start_id + index)
             return_list.append(now_i_str)
         width = normal_config.config_normal.text_width
         self.message = draw.NormalDraw()
@@ -534,7 +534,8 @@ class LeftDrawIDButtonListPanel:
 class ClearScreenPanel:
     """绘制一屏长度的空行"""
 
-    def draw(self):
+    @staticmethod
+    def draw():
         """绘制面板"""
         panel = "\n" * 50
         io_init.era_print(panel)
@@ -752,9 +753,8 @@ class ClothingPageHandlePanel(PageHandlePanel):
         """更新绘制宽度"""
         id_width = 0
         for value in self.draw_list:
-            if "id_width" in value.__dict__:
-                if value.id_width > id_width:
-                    id_width = value.id_width
+            if "id_width" in value.__dict__ and value.id_width > id_width:
+                id_width = value.id_width
         for value in self.draw_list:
             if "id_width" in value.__dict__:
                 value.id_width = id_width

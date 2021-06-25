@@ -23,20 +23,17 @@ def align(text: str, just="left", only_fix=False, columns=1, text_width=None) ->
     if just == "right":
         if only_fix:
             return " " * (width - count_index)
-        else:
-            return " " * (width - count_index) + text
-    elif just == "left":
+        return " " * (width - count_index) + text
+    if just == "left":
         if only_fix:
             return " " * (width - count_index)
-        else:
-            return text + " " * (width - count_index)
-    elif just == "center":
+        return text + " " * (width - count_index)
+    if just == "center":
         width_i = width / 2
         count_i = count_index / 2
         if only_fix:
             return " " * int(width_i - count_i)
-        else:
-            return " " * int(width_i - count_i) + text + " " * int(width_i - count_i)
+        return " " * int(width_i - count_i) + text + " " * int(width_i - count_i)
 
 
 def get_text_index(text: str) -> int:
@@ -54,11 +51,10 @@ def get_text_index(text: str) -> int:
         if style_text_head in text:
             text = text.replace(style_text_head, "")
             text = text.replace(style_text_tail, "")
-    for i in range(len(text)):
-        text_index += wcswidth(text[i])
+    for _unused, now_text in enumerate(text):
+        text_index += wcswidth(now_text)
     now_width = text_index + style_width
-    if now_width < 0:
-        now_width = 0
+    now_width = max(now_width, 0)
     return now_width
 
 
@@ -73,7 +69,7 @@ def full_to_half_text(ustring: str) -> str:
         inside_code = ord(uchar)
         if inside_code == 12288:
             inside_code = 32
-        elif inside_code >= 65281 and inside_code <= 65374:
+        elif 65281 <= inside_code <= 65374:
             inside_code -= 65248
         aaa = chr(inside_code)
         rstring += aaa

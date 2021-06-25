@@ -92,7 +92,7 @@ class InScenePanel:
             character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
                 character_data.target_character_id = 0
-            if not character_data.target_character_id and len(character_list):
+            if not character_data.target_character_id and character_list:
                 character_data.target_character_id = character_list[0]
             game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
             game_time_draw.now_draw.width = len(game_time_draw)
@@ -115,11 +115,11 @@ class InScenePanel:
             now_position_draw.draw()
             line_feed.draw()
             ask_list = []
-            if len(character_list) and character_data.target_character_id not in character_list:
+            if character_list and character_data.target_character_id not in character_list:
                 character_data.target_character_id = character_list[0]
-            if not len(character_list):
+            if not character_list:
                 character_data.target_character_id = 0
-            if len(character_list):
+            if character_list:
                 meet_draw.draw()
                 line_feed.draw()
                 character_handle_panel.update()
@@ -336,12 +336,11 @@ class SeeInstructPanel:
                                     continue
                                 premise_judge = 1
                                 break
-                            else:
-                                now_premise_value = handle_premise.handle_premise(premise, 0)
-                                now_premise_data[premise] = now_premise_value
-                                if not now_premise_value:
-                                    premise_judge = 1
-                                    break
+                            now_premise_value = handle_premise.handle_premise(premise, 0)
+                            now_premise_data[premise] = now_premise_value
+                            if not now_premise_value:
+                                premise_judge = 1
+                                break
                     if premise_judge:
                         continue
                     now_instruct_list.append(instruct)
@@ -367,7 +366,8 @@ class SeeInstructPanel:
         now_draw.draw_list = now_group
         now_draw.draw()
 
-    def change_filter(self, now_type: int):
+    @staticmethod
+    def change_filter(now_type: int):
         """
         更改指令类型过滤状态
         Keyword arguments:
@@ -378,7 +378,8 @@ class SeeInstructPanel:
         else:
             cache.instruct_filter[now_type] = 1
 
-    def handle_instruct(self, instruct_id: int):
+    @staticmethod
+    def handle_instruct(instruct_id: int):
         """
         处理玩家操作指令
         Keyword arguments:

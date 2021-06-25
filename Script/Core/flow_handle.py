@@ -40,7 +40,7 @@ def set_default_flow(func, arg=(), kw=None):
     global default_flow
     if not isinstance(arg, tuple):
         arg = (arg,)
-    if func == null_func:
+    if func is null_func:
         default_flow = null_func
         return
 
@@ -61,14 +61,13 @@ def clear_default_flow():
     """
     清楚当前默认流程函数，并是设置为空函数
     """
-    global default_flow, null_func
     set_default_flow(null_func)
 
 
 cmd_map = constant.cmd_map
 
 
-def default_tail_deal_cmd_func(order):
+def default_tail_deal_cmd_func(_):
     """
     结尾命令处理空函数，用于占位
     """
@@ -111,10 +110,10 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw=None):
         kw = {}
     if not isinstance(arg, tuple):
         arg = (arg,)
-    if cmd_func == null_func:
+    if cmd_func is null_func:
         cmd_map[cmd_number] = null_func
         return
-    elif cmd_func is None:
+    if cmd_func is None:
         cmd_map[cmd_number] = null_func
         return
 
@@ -206,7 +205,7 @@ def _cmd_valid(order_number):
     order_number -- 对应命令数字
     """
     return (order_number in cmd_map) and (
-        cmd_map[order_number] != null_func and cmd_map[order_number] is not None
+        cmd_map[order_number] is not null_func and cmd_map[order_number] is not None
     )
 
 
@@ -219,7 +218,7 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
     """
     处理命令函数
     Keyword arguments:
-    flag -- 类型，默认为order，如果为console，这回执行输入得到的内容
+    flag -- 类型，默认为order
     print_order -- 是否将输入的order输出到屏幕上
     donot_return_null_str -- 不接受输入空字符串
     """
@@ -237,16 +236,13 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
                 if order.isdigit():
                     order = str(int(order))
                 return order
-            if flag == "console":
-                exec(order)
             if flag == "order":
                 if _cmd_valid(order):
                     _cmd_deal(order)
                     return
-                else:
-                    global tail_deal_cmd_func
-                    tail_deal_cmd_func(int(order))
-                    return
+                global tail_deal_cmd_func
+                tail_deal_cmd_func(int(order))
+                return
 
 
 def askfor_str(donot_return_null_str=True, print_order=False):
@@ -263,7 +259,7 @@ def askfor_str(donot_return_null_str=True, print_order=False):
         order = order_deal("str", print_order, donot_return_null_str)
         if donot_return_null_str and order != "":
             return order
-        elif not donot_return_null_str:
+        if not donot_return_null_str:
             return order
 
 
@@ -281,33 +277,31 @@ def askfor_all(input_list: list, print_order=False):
             if _cmd_valid(order):
                 _cmd_deal(order)
             return order
-        elif order == "":
+        if order == "":
             continue
-        else:
-            io_init.era_print(order + "\n")
-            io_init.era_print(_("您输入的选项无效，请重试\n"))
-            continue
+        io_init.era_print(order + "\n")
+        io_init.era_print(_("您输入的选项无效，请重试\n"))
+        continue
 
 
-def askfor_int(list, print_order=False):
+def askfor_int(input_list: list, print_order=False):
     """
     用于请求位于列表中的整数的输入，如果输入没有在列表中，则告知用户出错。
     Keyword arguments:
-    list -- 用于判断的列表内容
+    input_list -- 用于判断的列表内容
     print_order -- 是否将输入的order输出到屏幕上
     """
     while True:
         order = order_deal("str", print_order)
         order = text_handle.full_to_half_text(order)
-        if order in list:
+        if order in input_list:
             io_init.era_print(order + "\n\n")
             return order
-        elif order == "":
+        if order == "":
             continue
-        else:
-            io_init.era_print(order + "\n")
-            io_init.era_print(_("您输入的选项无效，请重试\n"))
-            continue
+        io_init.era_print(order + "\n")
+        io_init.era_print(_("您输入的选项无效，请重试\n"))
+        continue
 
 
 def askfor_wait():
