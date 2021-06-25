@@ -277,9 +277,8 @@ def get_relation_map_list_for_scene_path(scene_path: list) -> list:
         if now_pathId == "0":
             return map_list + get_relation_map_list_for_scene_path(now_map_path)
         return map_list
-    else:
-        map_list.append(now_map_path)
-        return map_list
+    map_list.append(now_map_path)
+    return map_list
 
 
 def get_scene_data_for_map(map_path_str: str, map_scene_id: str) -> game_type.Scene:
