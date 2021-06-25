@@ -1079,9 +1079,10 @@ def handle_interrupt_target_activity(
                         target_data.cid, character_data.behavior.start_time
                     )
                 else:
-                    settle_behavior.handle_settle_behavior(
+                    settle_draw = settle_behavior.handle_settle_behavior(
                         target_data.cid, character_data.behavior.start_time
                     )
+                    settle_draw.draw()
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_ELOQUENCE_EXPERIENCE)

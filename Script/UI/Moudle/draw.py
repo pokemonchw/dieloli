@@ -300,6 +300,8 @@ class Button:
                 self.return_text,
                 normal_style=self.normal_style,
                 on_style=self.on_mouse_style,
+                cmd_func=self.cmd_func,
+                arg=self.args,
             )
         else:
             py_cmd.pcmd(

@@ -1,14 +1,17 @@
 import itertools
 import math
+import time
 from typing import List, Dict, Tuple
 from types import FunctionType
 from Script.UI.Moudle import draw
-from Script.Core import io_init, flow_handle, text_handle, get_text, value_handle
+from Script.Core import io_init, flow_handle, text_handle, get_text, value_handle, cache_control, game_type
 from Script.Config import normal_config
 
 
 _: FunctionType = get_text._
 """ 翻译api """
+cache: game_type.Cache = cache_control.cache
+""" 游戏缓存数据 """
 
 
 class SingleColumnButton:
@@ -294,6 +297,21 @@ class LeftDrawTextListPanel:
             for value in now_list:
                 value.draw()
             io_init.era_print("\n")
+
+
+class LeftDrawTextListWaitPanel(LeftDrawTextListPanel):
+    """绘制一个左对齐列表并等待玩家任意键"""
+
+    def draw(self):
+        """绘制面板"""
+        for now_list in self.draw_list:
+            for value in now_list:
+                value.draw()
+            io_init.era_print("\n")
+        if not cache.wframe_mouse.w_frame_skip_wait_mouse:
+            flow_handle.askfor_wait()
+        else:
+            time.sleep(0.001)
 
 
 class DrawTextListPanel:

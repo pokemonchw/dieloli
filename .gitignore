@@ -4,4 +4,6 @@
 /data/PlaceData
 /data/SceneData
 /data/ScenePath
+/data/MoveTime
 /package.json
+error.log

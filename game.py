@@ -24,7 +24,7 @@ from Script.Config import map_config
 map_config.init_map_data()
 
 
-from Script.Design import start_flow, handle_premise, game_time
+from Script.Design import start_flow, handle_premise
 from Script.Core import game_init
 import Script.Settle
 import Script.StateMachine
@@ -35,5 +35,4 @@ import multiprocessing
 if __name__ == "__main__":
     multiprocessing.freeze_support()
 
-game_time.init_time()
 game_init.run(start_flow.start_frame)

@@ -97,12 +97,12 @@ class StateMachine:
 
     MOVE_TO_CLASS = 0
     """ 移动到所属教室 """
-    MOVE_TO_RAND_CAFETERIA = 1
-    """ 移动到随机取餐区 """
+    MOVE_TO_NEAREST_CAFETERIA = 1
+    """移动至最近的取餐区"""
     BUY_RAND_FOOD_AT_CAFETERIA = 2
     """ 在取餐区购买随机食物 """
-    MOVE_TO_RAND_RESTAURANT = 3
-    """ 移动至随机就餐区 """
+    MOVE_TO_NEAREST_RESTAURANT = 3
+    """ 移动至最近的就餐区 """
     EAT_BAG_RAND_FOOD = 4
     """ 食用背包内随机食物 """
     CHAT_RAND_CHARACTER = 5
@@ -534,7 +534,15 @@ class Premise:
     IS_MAN_OR_WOMAN = 166
     """ 角色是男性或女性 """
     IS_NOT_ASEXUAL = 167
-    """ 角色 """
+    """ 角色不是无性 """
+    IS_PRIMARY_SCHOOL_STUDENTS = 168
+    """ 角色是小学生 """
+    NO_RICH_EXPERIENCE_IN_SEX = 169
+    """ 角色性经验不丰富 """
+    NO_IN_CAFETERIA = 170
+    """ 未处于取餐区 """
+    NO_IN_RESTAURANT = 171
+    """ 未处于就餐区 """
 
 
 class BehaviorEffect:

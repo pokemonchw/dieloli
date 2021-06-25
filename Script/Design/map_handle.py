@@ -1,13 +1,18 @@
 import os
 import json
+from typing import Dict
 from Script.Core import cache_control, value_handle, game_type
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 scene_path_edge_path = os.path.join("data", "ScenePath")
 """ 寻路路径配置文件路径 """
+all_move_time_path = os.path.join("data", "MoveTime")
+""" 预处理的所有场景移动时间数据路径 """
 scene_path_edge = {}
 """ 寻路路径 """
+scene_move_time = {}
+""" 所有场景之间的寻路所需时间 """
 
 
 def get_map_draw_for_map_path(map_path_str: str) -> str:
@@ -452,6 +457,55 @@ def init_scene_edge_path_data():
             scene_path_edge[now_position_str][target_scene_str] = [now_move_target, now_move_time]
     with open(scene_path_edge_path, "w") as path_edge_file:
         json.dump(scene_path_edge, path_edge_file)
+
+
+def init_move_time_data():
+    """初始化所有场景间的移动时间数据"""
+    global scene_move_time
+    scene_move_time = {}
+    for now_position_str in cache.scene_data:
+        for target_scene_str in cache.scene_data:
+            if target_scene_str == now_position_str:
+                continue
+            now_scene = get_map_system_path_for_str(now_position_str)
+            target_scene = get_map_system_path_for_str(target_scene_str)
+            calculate_total_travel_time(now_scene, target_scene, scene_move_time)
+    with open(all_move_time_path, "w") as all_move_time_file:
+        json.dump(scene_move_time, all_move_time_file)
+    print(scene_move_time)
+
+
+def calculate_total_travel_time(
+    now_scene_path: list, target_scene_path: list, time_dict: Dict[str, str]
+) -> int:
+    """
+    计算移动时间
+    Keyword arguments:
+    now_scene_path -- 当前场景路径
+    target_scene_path -- 目标场景路径
+    time_dict -- 已知移动时间
+    Return arguments:
+    int -- 移动时间
+    """
+    now_scene_path_str = get_map_system_path_str_for_list(now_scene_path)
+    time_dict.setdefault(now_scene_path_str, {})
+    target_scene_path_str = get_map_system_path_str_for_list(target_scene_path)
+    now_path_data = scene_path_edge[now_scene_path_str][target_scene_path_str]
+    now_move_path = now_path_data[0]
+    now_move_time = now_path_data[1]
+    if now_move_path == target_scene_path:
+        time_dict[now_scene_path_str][target_scene_path_str] = now_move_time
+        return now_move_time
+    now_move_path_str = get_map_system_path_str_for_list(now_move_path)
+    if now_move_path_str not in time_dict[now_scene_path_str]:
+        time_dict[now_scene_path_str][now_move_path_str] = now_move_time
+    time_dict.setdefault(now_move_path_str, {})
+    if target_scene_path_str not in time_dict[now_move_path_str]:
+        now_move_time += calculate_total_travel_time(now_move_path, target_scene_path, time_dict)
+    else:
+        now_move_time += time_dict[now_move_path_str][target_scene_path_str]
+    time_dict[now_scene_path_str][target_scene_path_str] = now_move_time
+    return now_move_time
 
 
 def difference_map_move(now_position: list, target_scene: list) -> (str, list, list, int):

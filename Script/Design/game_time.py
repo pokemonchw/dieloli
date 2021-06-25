@@ -4,6 +4,7 @@ import random
 import math
 import ephem
 import time
+import os
 from types import FunctionType
 from dateutil import relativedelta
 from Script.Core import (
@@ -21,6 +22,8 @@ gatech = ephem.Observer()
 sun = ephem.Sun()
 moon = ephem.Moon()
 time_zone = datetime.timezone(datetime.timedelta(hours=+8))
+os.environ["TZ"] = time_zone.__str__()
+time.tzset()
 
 
 def init_time():
@@ -33,7 +36,9 @@ def init_time():
         normal_config.config_normal.day,
         normal_config.config_normal.hour,
         normal_config.config_normal.minute,
+        tzinfo=time_zone,
     )
+    game_time = game_time.astimezone(time_zone)
     cache.game_time = game_time.timestamp()
 
 
@@ -45,7 +50,7 @@ def get_date_text(text_time: int = 0) -> str:
     """
     if not text_time:
         text_time = cache.game_time
-    game_time_data = datetime.datetime.fromtimestamp(text_time)
+    game_time_data = datetime.datetime.fromtimestamp(text_time, time_zone)
     return _("时间:{year}年{month}月{day}日{hour}点{minute}分").format(
         year=game_time_data.year,
         month=game_time_data.month,
@@ -59,7 +64,7 @@ def get_week_day_text() -> str:
     """
     获取星期描述文本
     """
-    now_date = datetime.datetime.fromtimestamp(cache.game_time)
+    now_date = datetime.datetime.fromtimestamp(cache.game_time, time_zone)
     week_day = now_date.weekday()
     week_date_data = game_config.config_week_day[week_day]
     return week_date_data.name
@@ -289,7 +294,7 @@ def get_sun_time(old_time: int) -> int:
     """
     if "sun_phase" not in cache.__dict__:
         cache.__dict__["sun_phase"] = {}
-    old_time = datetime.datetime.fromtimestamp(old_time)
+    old_time = datetime.datetime.fromtimestamp(old_time, time_zone)
     now_date_str = f"{old_time.year}/{old_time.month}/{old_time.day}"
     now_time = old_time.astimezone(time_zone)
     if now_time.hour > old_time.hour:

@@ -36,6 +36,8 @@ config_body_fat_tem_data: Dict[int, Dict[int, int]] = {}
 """
 config_book: Dict[int, config_def.Book] = {}
 """ 书籍配表数据 """
+config_cause_of_death: Dict[int, config_def.CauseOfDeath] = {}
+""" 死因配表数据 """
 config_character_state: Dict[int, config_def.CharacterState] = {}
 """ 角色状态属性配表数据 """
 config_character_state_type: Dict[int, config_def.CharacterStateType] = {}
@@ -361,6 +363,16 @@ def load_book_data():
         now_tem = config_def.Book()
         now_tem.__dict__ = tem_data
         config_book[now_tem.cid] = now_tem
+
+
+def load_cause_of_death():
+    """载入死因配置数据"""
+    now_data = config_data["CauseOfDeath"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.CauseOfDeath()
+        now_tem.__dict__ = tem_data
+        config_cause_of_death[now_tem.cid] = now_tem
 
 
 def load_character_state_data():
@@ -998,6 +1010,7 @@ def init():
     load_behavior_effect_data()
     load_body_fat_tem()
     load_book_data()
+    load_cause_of_death()
     load_character_state_data()
     load_character_state_type_data()
     load_chest_tem_data()

@@ -417,9 +417,13 @@ def handle_in_sleep_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_time: datetime.datetime = datetime.datetime.fromtimestamp(
+        character_data.behavior.start_time, game_time.time_zone
+    )
     if now_time.hour >= 22 or now_time.hour <= 4:
-        return 500
+        if now_time.hour >= 22:
+            return (now_time.hour - 21) * 100
+        return now_time.hour * 100 + 200
     return 0
 
 
@@ -433,7 +437,9 @@ def handle_in_siesta_time(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_time: datetime.datetime = datetime.datetime.fromtimestamp(
+        character_data.behavior.start_time, game_time.time_zone
+    )
     if now_time.hour >= 12 or now_time.hour <= 15:
         return 100
     return 0
@@ -2150,9 +2156,9 @@ def handle_teacher_no_in_classroom(character_id: int) -> int:
     if character_data.classroom == "":
         return 1
     classroom: game_type.Scene = cache.scene_data[character_data.classroom]
-    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
-    if now_time is None:
-        now_time = cache.game_time
+    now_time: datetime.datetime = datetime.datetime.fromtimestamp(
+        character_data.behavior.start_time, game_time.time_zone
+    )
     now_week = now_time.weekday()
     school_id, phase = course.get_character_school_phase(character_id)
     now_time_value = now_time.hour * 100 + now_time.minute
@@ -2467,10 +2473,7 @@ def handle_rich_experience_in_sex(character_id: int) -> int:
     now_exp = 0
     for i in character_data.sex_experience:
         now_exp += character_data.sex_experience[i]
-    now_level = attr_calculation.get_experience_level_weight(now_exp)
-    if now_level > 4:
-        return now_level - 4
-    return 0
+    return attr_calculation.get_experience_level_weight(now_exp)
 
 
 @add_premise(constant.Premise.TARGET_IS_SLEEP)
@@ -2755,3 +2758,68 @@ def handle_is_not_asexual(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     return character_data.sex != 3
+
+
+@add_premise(constant.Premise.IS_PRIMARY_SCHOOL_STUDENTS)
+def handle_is_primary_school_students(character_id: int) -> int:
+    """
+    校验角色是否是小学生
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.age <= 12
+
+
+@add_premise(constant.Premise.NO_RICH_EXPERIENCE_IN_SEX)
+def handle_no_rich_experience_in_sex(character_id: int) -> int:
+    """
+    校验角色是否性经验不丰富
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_exp = 0
+    for i in character_data.sex_experience:
+        now_exp += character_data.sex_experience[i]
+    return 8 - attr_calculation.get_experience_level_weight(now_exp)
+
+
+@add_premise(constant.Premise.NO_IN_CAFETERIA)
+def handle_no_in_cafeteria(character_id: int) -> int:
+    """
+    校验角色是否未处于取餐区中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data = cache.scene_data[now_scene_str]
+    if now_scene_data.scene_tag == "Cafeteria":
+        return 0
+    return 1
+
+
+@add_premise(constant.Premise.NO_IN_RESTAURANT)
+def handle_no_in_restaurant(character_id: int) -> int:
+    """
+    校验角色是否未处于就餐区中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data = cache.scene_data[now_scene_str]
+    if now_scene_data.scene_tag == "Restaurant":
+        return 0
+    return 1

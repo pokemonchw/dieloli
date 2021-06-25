@@ -255,6 +255,14 @@ class Height:
         """ 预期的最终身高 """
 
 
+class TemporaryStatus:
+    """角色行为产生的临时状态数据"""
+
+    def __init__(self):
+        self.lose_first_kiss: int = 0
+        """ 正在失去初吻 """
+
+
 class Behavior:
     """角色行为状态数据"""
 
@@ -277,6 +285,8 @@ class Behavior:
         """ 前提结算用:进食行为消耗的食物品质 """
         self.course_id: int = 0
         """ 上课时所学/教的课程 """
+        self.temporary_status: TemporaryStatus = None
+        """ 角色临时状态 """
 
 
 class Map:
@@ -491,6 +501,8 @@ class Character:
         """ 收藏的角色列表 """
         self.last_hunger_time: int = 0
         """ 最后一次结算饥饿的时间戳 """
+        self.cause_of_death: int = -1
+        """ 角色死因 """
 
 
 class TeacherTimeTable:

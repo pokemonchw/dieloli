@@ -1,8 +1,9 @@
+import datetime
 from types import FunctionType
 from Script.UI.Moudle import panel, draw
 from Script.Core import get_text, game_type, cache_control, text_handle, py_cmd, constant, flow_handle
 from Script.Config import game_config, normal_config
-from Script.Design import character_move, attr_text
+from Script.Design import character_move, attr_text, game_time
 
 _: FunctionType = get_text._
 """ 翻译api """
@@ -98,6 +99,7 @@ class CharacterStatusListPanel:
         panel_type -- 要切换的列表类型
         """
         self.now_panel = panel_type
+        py_cmd.clr_cmd()
 
 
 class SeeCharacterStatusDraw:
@@ -129,7 +131,16 @@ class SeeCharacterStatusDraw:
         index_text = text_handle.id_index(button_id)
         status_text = game_config.config_status[character_data.state].name
         position_text = attr_text.get_scene_path_text(character_data.position)
-        button_text = f"{index_text} {character_data.name} {status_text} {position_text}"
+        if character_data.dead:
+            cause_of_death_config = game_config.config_cause_of_death[character_data.cause_of_death]
+            death_time_text = _("死亡时间:")
+            death_time = datetime.datetime.fromtimestamp(
+                character_data.behavior.start_time, game_time.time_zone
+            )
+            death_time_text = f"{death_time_text}{str(death_time)}"
+            button_text = f"{index_text} {character_data.name} {cause_of_death_config.name} {death_time_text} {position_text}"
+        else:
+            button_text = f"{index_text} {character_data.name} {status_text} {position_text}"
         now_draw = draw.LeftButton(
             button_text, self.button_return, self.width, cmd_func=self.move_to_character
         )

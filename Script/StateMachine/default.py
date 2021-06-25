@@ -2,7 +2,7 @@ import random
 import datetime
 from typing import List
 from Script.Config import game_config
-from Script.Design import handle_state_machine, character_move, map_handle, course
+from Script.Design import handle_state_machine, character_move, map_handle, course, game_time
 from Script.Core import cache_control, game_type, constant
 
 cache: game_type.Cache = cache_control.cache
@@ -27,7 +27,7 @@ def character_move_to_classroom(character_id: int):
     character_data.state = constant.CharacterStatus.STATUS_MOVE
 
 
-@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_RAND_CAFETERIA)
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_NEAREST_CAFETERIA)
 def character_move_to_rand_cafeteria(character_id: int):
     """
     移动至随机取餐区
@@ -35,7 +35,15 @@ def character_move_to_rand_cafeteria(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(constant.place_data["Cafeteria"]))
+    cafeteria_list = constant.place_data["Cafeteria"]
+    now_position_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    time_dict = {}
+    for cafeteria in cafeteria_list:
+        now_move_time = map_handle.scene_move_time[now_position_str][cafeteria]
+        time_dict.setdefault(now_move_time, [])
+        time_dict[now_move_time].append(cafeteria)
+    min_time = min(time_dict.keys())
+    to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(time_dict[min_time]))
     _, _, move_path, move_time = character_move.character_move(character_id, to_cafeteria)
     character_data.behavior.behavior_id = constant.Behavior.MOVE
     character_data.behavior.move_target = move_path
@@ -70,7 +78,7 @@ def character_buy_rand_food_at_restaurant(character_id: int):
     del cache.restaurant_data[now_food_id][now_food.uid]
 
 
-@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_RAND_RESTAURANT)
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_NEAREST_RESTAURANT)
 def character_move_to_rand_restaurant(character_id: int):
     """
     设置角色状态为向随机就餐区移动
@@ -78,7 +86,15 @@ def character_move_to_rand_restaurant(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    to_restaurant = map_handle.get_map_system_path_for_str(random.choice(constant.place_data["Restaurant"]))
+    restaurant_list = constant.place_data["Restaurant"]
+    now_position_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    time_dict = {}
+    for restaurant in restaurant_list:
+        now_move_time = map_handle.scene_move_time[now_position_str][restaurant]
+        time_dict.setdefault(now_move_time, [])
+        time_dict[now_move_time].append(restaurant)
+    min_time = min(time_dict.keys())
+    to_restaurant = map_handle.get_map_system_path_for_str(random.choice(time_dict[min_time]))
     _, _, move_path, move_time = character_move.character_move(
         character_id,
         to_restaurant,
@@ -636,7 +652,7 @@ def character_attend_class(character_id: int):
     character_data.behavior.behavior_id = constant.Behavior.ATTEND_CLASS
     end_time = 0
     school_id, phase = course.get_character_school_phase(character_id)
-    now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time, game_time.time_zone)
     now_time_value = now_time.hour * 100 + now_time.minute
     now_course_index = 0
     for session_id in game_config.config_school_session_data[school_id]:
@@ -648,7 +664,7 @@ def character_attend_class(character_id: int):
             now_course_index = session_config.session
             break
     now_week = now_time.weekday()
-    if not now_course_index:
+    if not now_course_index or now_course_index:
         now_course = random.choice(list(game_config.config_school_phase_course_data[school_id][phase]))
     else:
         now_course = cache.course_time_table_data[school_id][phase][now_week][now_course_index]
@@ -668,7 +684,7 @@ def character_teach_lesson(character_id: int):
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.behavior.behavior_id = constant.Behavior.TEACHING
     end_time = 0
-    now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time, game_time.time_zone)
     now_week = now_time.weekday()
     now_time_value = now_time.hour * 100 + now_time.minute
     timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
