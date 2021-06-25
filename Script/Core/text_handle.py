@@ -51,8 +51,8 @@ def get_text_index(text: str) -> int:
         if style_text_head in text:
             text = text.replace(style_text_head, "")
             text = text.replace(style_text_tail, "")
-    for i in range(len(text)):
-        text_index += wcswidth(text[i])
+    for _unused, now_text in enumerate(text):
+        text_index += wcswidth(now_text)
     now_width = text_index + style_width
     now_width = max(now_width, 0)
     return now_width

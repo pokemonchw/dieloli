@@ -128,7 +128,7 @@ def get_print_map_data(map_draw: str) -> game_type.MapDraw:
     """
     map_y_list = map_draw.split("\n")
     map_draw_data = game_type.MapDraw()
-    for map_x_list_id in range(len(map_y_list)):
+    for map_x_list_id,_unused in enumerate(map_y_list):
         set_map_button = False
         map_x_list = map_y_list[map_x_list_id]
         now_draw_list = game_type.MapDrawLine()

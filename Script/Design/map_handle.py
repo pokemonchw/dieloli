@@ -243,13 +243,13 @@ def judge_scene_affiliation(now_scene_path: list, target_scene_path: list) -> st
     target_scene_path -- 目标场景路径
     """
     judge = 1
-    for i in range(len(now_scene_path)):
-        if len(target_scene_path) - 1 >= i and now_scene_path[i] != target_scene_path[i]:
+    for index,_unused in enumerate(now_scene_path):
+        if len(target_scene_path) - 1 >= index and now_scene_path[index] != target_scene_path[index]:
             judge = 0
             break
         if i > len(target_scene_path) - 1:
             break
-        if target_scene_path[i] != now_scene_path[i]:
+        if target_scene_path[index] != now_scene_path[index]:
             judge = 0
             break
     if judge:
