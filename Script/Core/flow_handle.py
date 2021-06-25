@@ -27,7 +27,7 @@ def null_func():
 default_flow = null_func
 
 
-def set_default_flow(func, arg=(), kw={}):
+def set_default_flow(func, arg=(), kw=None):
     """
     设置默认流程
     Keyword arguments:
@@ -35,6 +35,8 @@ def set_default_flow(func, arg=(), kw={}):
     arg -- 传给func的顺序参数
     kw -- 传给kw的顺序参数
     """
+    if kw is None:
+        kw = {}
     global default_flow
     if not isinstance(arg, tuple):
         arg = (arg,)
@@ -96,7 +98,7 @@ def deco_set_tail_deal_cmd_func(func):
     return func
 
 
-def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
+def bind_cmd(cmd_number, cmd_func, arg=(), kw=None):
     """
     绑定命令数字与命令函数
     Keyword arguments:
@@ -105,6 +107,8 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw={}):
     arg -- 传给命令函数的顺序参数
     kw -- 传给命令函数的字典参数
     """
+    if kw is None:
+        kw = {}
     if not isinstance(arg, tuple):
         arg = (arg,)
     if cmd_func == null_func:
@@ -125,7 +129,7 @@ def print_cmd(
     cmd_number,
     cmd_func=null_func,
     arg=(),
-    kw={},
+    kw=None,
     normal_style="standard",
     on_style="onbutton",
 ):
@@ -140,6 +144,8 @@ def print_cmd(
     normal_style -- 正常状态下命令显示样式
     on_style -- 鼠标在其上的时候命令显示样式
     """
+    if kw is None:
+        kw = {}
     bind_cmd(cmd_number, cmd_func, arg, kw)
     io_init.io_print_cmd(cmd_str, cmd_number, normal_style, on_style)
     return cmd_str
@@ -150,7 +156,7 @@ def print_image_cmd(
     cmd_number,
     cmd_func=null_func,
     arg=(),
-    kw={},
+    kw=None,
 ):
     """
     绘制图片按钮
@@ -161,6 +167,8 @@ def print_image_cmd(
     arg -- 传给命令函数的顺序参数
     kw -- 传给命令函数的字典参数
     """
+    if kw is None:
+        kw = {}
     bind_cmd(cmd_number, cmd_func, arg, kw)
     io_init.io_print_image_cmd(cmd_str, cmd_number)
     return cmd_str
