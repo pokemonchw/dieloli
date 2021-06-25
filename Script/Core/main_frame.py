@@ -153,12 +153,12 @@ def send_input(*args):
     global input_event_func
     order = get_order()
     if len(cache.input_cache) >= 21:
-        if not (order) == "":
+        if (order) != "":
             del cache.input_cache[0]
             cache.input_cache.append(order)
             cache.input_position = 0
     else:
-        if not (order) == "":
+        if (order) != "":
             cache.input_cache.append(order)
             cache.input_position = 0
     input_event_func(order)
