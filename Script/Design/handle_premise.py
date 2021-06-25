@@ -787,8 +787,7 @@ def handle_is_humor_man(character_id: int) -> int:
             value -= nature - 50
         else:
             value += 50 - nature
-    if value < 0:
-        value = 0
+    value = max(value, 0)
     return value
 
 
@@ -1400,8 +1399,7 @@ def handle_physical_strenght(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     now_weight = int((character_data.hit_point_max / 2 - character_data.hit_point) / 5)
     now_weight += int((character_data.mana_point_max / 2 - character_data.mana_point) / 10)
-    if now_weight < 0:
-        now_weight = 0
+    now_weight = max(now_weight, 0)
     return now_weight
 
 
