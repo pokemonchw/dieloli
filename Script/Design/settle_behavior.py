@@ -208,7 +208,6 @@ def change_character_social(character_id: int, change_data: game_type.CharacterS
     character_id -- 状态变化数据所属角色id
     change_data -- 状态变化数据
     """
-    character_data: game_type.Character = cache.character_data[character_id]
     for now_character in change_data.target_change:
         change_character_social_now(character_id, now_character, change_data)
 

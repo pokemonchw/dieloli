@@ -306,7 +306,7 @@ def get_sun_time(old_time: int) -> int:
     ):
         now_unix = now_time.timestamp()
         now_unix -= 60
-        for i in range(0, 1439):
+        for _ in range(0, 1439):
             now_unix += 60
             now_unix_date = datetime.datetime.fromtimestamp(now_unix)
             now_unix_date = now_unix_date.replace(tzinfo=time_zone)

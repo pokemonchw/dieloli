@@ -501,7 +501,7 @@ def character_move_to_like_target_scene(character_id: int):
     for i in {4, 5}:
         character_data.social_contact.setdefault(i, set())
         for c in character_data.social_contact[i]:
-            character_list.append(i)
+            character_list.append(c)
     if character_list:
         target_id = random.choice(character_list)
         target_data: game_type.Character = cache.character_data[target_id]

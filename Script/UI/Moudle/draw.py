@@ -151,11 +151,11 @@ class BarDraw:
                 proportion = int(value / max_value * self.width)
             fix_bar = int(self.width - proportion)
             style_data = game_config.config_bar[game_config.config_bar_data[bar_id]]
-            for i in range(proportion):
+            for _ in range(proportion):
                 now_draw = ImageDraw(style_data.ture_bar)
                 now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
-            for i in range(fix_bar):
+            for _ in range(fix_bar):
                 now_draw = ImageDraw(style_data.null_bar)
                 now_draw.width = style_data.width
                 self.draw_list.append(now_draw)
