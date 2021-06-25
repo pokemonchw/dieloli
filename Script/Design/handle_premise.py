@@ -2265,14 +2265,12 @@ def handle_have_students_in_classroom(character_id: int) -> int:
         return 0
     if character_id not in cache.teacher_school_timetable:
         return 0
-    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
-    if now_time is None:
-        now_time = cache.game_time
-    now_week = now_time.weekday()
-    now_time = 0
+    now_date: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_week = now_date.weekday()
     now_classroom = []
+    now_time = 0
     timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
-    now_time_value = now_time.hour * 100 + now_time.minute
+    now_time_value = now_date.hour * 100 + now_date.minute
     for timetable in timetable_list:
         if timetable.week_day != now_week:
             continue
