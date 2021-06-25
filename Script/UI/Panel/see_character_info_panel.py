@@ -521,9 +521,6 @@ class CharacterMeasurementsText:
         self.width = width
         """ 当前最大可绘制宽度 """
         character_data = cache.character_data[self.character_id]
-        character_data.measurements.bust
-        character_data.measurements.hip
-        character_data.measurements.waist
         now_bust = str(round(character_data.measurements.bust, 2))
         now_hip = str(round(character_data.measurements.hip, 2))
         now_waist = str(round(character_data.measurements.waist, 2))
