@@ -167,7 +167,7 @@ def get_common_map_for_scene_path(scene_a_path: list, scene_b_path: list) -> lis
     scene_bpath -- 场景B路径
     """
     hierarchy = []
-    if scene_a_path[:-1] == [] or scene_b_path[:-1] == []:
+    if [] in {scene_a_path[:-1],scene_b_path[:-1]}
         return hierarchy
     for i in range(0, len(scene_a_path)):
         try:
@@ -272,7 +272,7 @@ def get_relation_map_list_for_scene_path(scene_path: list) -> list:
     now_map_path = scene_path[:-1]
     now_pathId = now_path[-1]
     map_list = []
-    if now_map_path != [] and now_map_path[:-1] != []:
+    if [] not in {now_map_path, now_map_path[:-1]}:
         map_list.append(now_map_path)
         if now_pathId == "0":
             return map_list + get_relation_map_list_for_scene_path(now_map_path)

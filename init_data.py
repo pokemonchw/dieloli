@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 from Script.Core import game_type, cache_control
 from Script.Config import normal_config
 
