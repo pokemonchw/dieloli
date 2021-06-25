@@ -69,7 +69,7 @@ def full_to_half_text(ustring: str) -> str:
         inside_code = ord(uchar)
         if inside_code == 12288:
             inside_code = 32
-        elif inside_code >= 65281 and inside_code <= 65374:
+        elif 65281 <= inside_code <= 65374:
             inside_code -= 65248
         aaa = chr(inside_code)
         rstring += aaa
