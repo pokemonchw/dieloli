@@ -336,12 +336,11 @@ class SeeInstructPanel:
                                     continue
                                 premise_judge = 1
                                 break
-                            else:
-                                now_premise_value = handle_premise.handle_premise(premise, 0)
-                                now_premise_data[premise] = now_premise_value
-                                if not now_premise_value:
-                                    premise_judge = 1
-                                    break
+                            now_premise_value = handle_premise.handle_premise(premise, 0)
+                            now_premise_data[premise] = now_premise_value
+                            if not now_premise_value:
+                                premise_judge = 1
+                                break
                     if premise_judge:
                         continue
                     now_instruct_list.append(instruct)

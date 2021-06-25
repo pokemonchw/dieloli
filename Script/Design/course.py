@@ -39,7 +39,7 @@ def init_phase_course_hour():
                 for course in now_phase_course_data:
                     if more_hour == session_max:
                         break
-                    elif now_phase_course_data[course] > 1 and more_hour > session_max:
+                    if now_phase_course_data[course] > 1 and more_hour > session_max:
                         now_phase_course_data[course] -= 1
                         more_hour -= 1
                     elif more_hour < session_max:
@@ -81,16 +81,16 @@ def init_class_time_table():
                                 class_time_table[school_id][phase][day][i] = course
                                 class_hour_index[course] += 1
                                 break
-                            elif i not in class_time_table[school_id][phase][day]:
+                            if i not in class_time_table[school_id][phase][day]:
                                 if course != class_time_table[school_id][phase][old_day][i]:
                                     class_time_table[school_id][phase][day][i] = course
                                     class_hour_index[course] += 1
                                     break
-                                elif i == len(class_time) - 1:
+                                if i == len(class_time) - 1:
                                     class_time_table[school_id][phase][day][i] = course
                                     class_hour_index[course] += 1
                                     break
-                                elif all(
+                                if all(
                                     [
                                         k in class_time_table[school_id][phase][day]
                                         for k in range(i, len(course_session))
