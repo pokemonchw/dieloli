@@ -40,7 +40,7 @@ def set_default_flow(func, arg=(), kw=None):
     global default_flow
     if not isinstance(arg, tuple):
         arg = (arg,)
-    if func == null_func:
+    if func is null_func:
         default_flow = null_func
         return
 
@@ -110,7 +110,7 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw=None):
         kw = {}
     if not isinstance(arg, tuple):
         arg = (arg,)
-    if cmd_func == null_func:
+    if cmd_func is null_func:
         cmd_map[cmd_number] = null_func
         return
     if cmd_func is None:
@@ -205,7 +205,7 @@ def _cmd_valid(order_number):
     order_number -- 对应命令数字
     """
     return (order_number in cmd_map) and (
-        cmd_map[order_number] != null_func and cmd_map[order_number] is not None
+        cmd_map[order_number] is not null_func and cmd_map[order_number] is not None
     )
 
 
