@@ -400,7 +400,7 @@ class CenterDrawButtonListPanel:
         column: int,
         null_text: str = "",
         cmd_func: FunctionType = None,
-        func_args: List[Tuple] = [],
+        func_args: List[Tuple] = None,
     ):
         """
         设置绘制信息
@@ -412,6 +412,8 @@ class CenterDrawButtonListPanel:
         null_text -- 不作为按钮绘制的文本
         cmd_func -- 列表元素按钮绑定函数
         """
+        if func_args is None:
+            func_args = []
         self.width = width
         self.column = column
         new_text_list = value_handle.list_of_groups(text_list, column)
@@ -475,7 +477,7 @@ class LeftDrawIDButtonListPanel:
         column: int,
         null_text: str = "",
         cmd_func: FunctionType = None,
-        func_args: List[Tuple] = [],
+        func_args: List[Tuple] = None,
     ):
         """
         设置绘制信息
@@ -487,6 +489,8 @@ class LeftDrawIDButtonListPanel:
         null_text -- 不作为按钮绘制的文本
         cmd_func -- 列表元素按钮绑定函数
         """
+        if func_args is None:
+            func_args = []
         self.width = width
         self.column = column
         new_text_list = value_handle.list_of_groups(text_list, column)
