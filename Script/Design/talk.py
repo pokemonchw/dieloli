@@ -50,7 +50,7 @@ def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
                 now_talk_data.setdefault(now_weight, set())
                 now_talk_data[now_weight].add(talk_id)
     now_talk = ""
-    if len(now_talk_data):
+    if now_talk_data:
         talk_weight = value_handle.get_rand_value_for_value_region(list(now_talk_data.keys()))
         now_talk_id = random.choice(list(now_talk_data[talk_weight]))
         now_talk = game_config.config_talk[now_talk_id].context

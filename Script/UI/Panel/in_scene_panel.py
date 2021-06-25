@@ -92,7 +92,7 @@ class InScenePanel:
             character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
                 character_data.target_character_id = 0
-            if not character_data.target_character_id and len(character_list):
+            if not character_data.target_character_id and character_list:
                 character_data.target_character_id = character_list[0]
             game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
             game_time_draw.now_draw.width = len(game_time_draw)
@@ -115,11 +115,11 @@ class InScenePanel:
             now_position_draw.draw()
             line_feed.draw()
             ask_list = []
-            if len(character_list) and character_data.target_character_id not in character_list:
+            if character_list and character_data.target_character_id not in character_list:
                 character_data.target_character_id = character_list[0]
-            if not len(character_list):
+            if not character_list:
                 character_data.target_character_id = 0
-            if len(character_list):
+            if character_list:
                 meet_draw.draw()
                 line_feed.draw()
                 character_handle_panel.update()

@@ -487,7 +487,7 @@ def io_clear_cmd(*cmd_numbers: list):
     else:
         for num in cmd_tag_map:
             tag_tuple = textbox.tag_ranges(cmd_tag_map[num])
-            if len(tag_tuple):
+            if tag_tuple:
                 index_first = tag_tuple[0]
                 index_lskip_one_waitast = tag_tuple[1]
                 for tag_name in textbox.tag_names(index_first):

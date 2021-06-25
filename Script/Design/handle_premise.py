@@ -975,7 +975,7 @@ def handle_have_underwear(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 1 in character_data.clothing and len(character_data.clothing[1]):
+    if 1 in character_data.clothing and character_data.clothing[1]:
         return 1
     return 0
 
@@ -990,7 +990,7 @@ def handle_have_underpants(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 7 in character_data.clothing and len(character_data.clothing[7]):
+    if 7 in character_data.clothing and character_data.clothing[7]:
         return 1
     return 0
 
@@ -1005,7 +1005,7 @@ def handle_have_bra(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 6 in character_data.clothing and len(character_data.clothing[6]):
+    if 6 in character_data.clothing and character_data.clothing[6]:
         return 1
     return 0
 
@@ -1020,7 +1020,7 @@ def handle_have_pants(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 2 in character_data.clothing and len(character_data.clothing[2]):
+    if 2 in character_data.clothing and character_data.clothing[2]:
         return 1
     return 0
 
@@ -1035,7 +1035,7 @@ def handle_have_skirt(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 3 in character_data.clothing and len(character_data.clothing[3]):
+    if 3 in character_data.clothing and character_data.clothing[3]:
         return 1
     return 0
 
@@ -1050,7 +1050,7 @@ def handle_have_shoes(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 4 in character_data.clothing and len(character_data.clothing[4]):
+    if 4 in character_data.clothing and character_data.clothing[4]:
         return 1
     return 0
 
@@ -1065,7 +1065,7 @@ def handle_have_socks(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 5 in character_data.clothing and len(character_data.clothing[5]):
+    if 5 in character_data.clothing and character_data.clothing[5]:
         return 1
     return 0
 

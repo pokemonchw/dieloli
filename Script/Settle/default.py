@@ -188,7 +188,7 @@ def handle_move_to_target_scene(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
-    if len(character_data.behavior.move_target):
+    if character_data.behavior.move_target:
         map_handle.character_move_scene(
             character_data.position, character_data.behavior.move_target, character_id
         )

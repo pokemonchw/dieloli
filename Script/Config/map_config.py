@@ -142,7 +142,7 @@ def get_print_map_data(map_draw: str) -> game_type.MapDraw:
             elif not set_map_button and map_x_list[i : i + 11] == "<mapbutton>":
                 i += 10
                 set_map_button = 1
-                if len(new_x_list):
+                if new_x_list:
                     now_draw = game_type.MapDrawText()
                     now_draw.text = new_x_list
                     now_draw_list.draw_list.append(now_draw)
@@ -160,7 +160,7 @@ def get_print_map_data(map_draw: str) -> game_type.MapDraw:
                 now_cmd = ""
                 i += 11
             i += 1
-        if len(new_x_list):
+        if new_x_list:
             now_draw = game_type.MapDrawText()
             now_draw.text = new_x_list
             now_draw_list.draw_list.append(now_draw)

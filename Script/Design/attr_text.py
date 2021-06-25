@@ -67,7 +67,7 @@ def get_stature_text(character_id: int) -> str:
         if now_weight:
             descript_data.setdefault(now_weight, set())
             descript_data[now_weight].add(descript_tem.text)
-    if len(descript_data):
+    if descript_data:
         max_weight = max(descript_data.keys())
         return random.choice(list(descript_data[max_weight]))
     return ""

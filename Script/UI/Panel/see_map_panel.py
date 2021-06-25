@@ -96,7 +96,7 @@ class SeeMapPanel:
             if character_scene_id in scene_path:
                 del scene_path[character_scene_id]
             scene_path_list = list(scene_path.keys())
-            if len(scene_path_list):
+            if scene_path_list:
                 line = draw.LineDraw(".", self.width)
                 line.draw()
                 message_draw = draw.NormalDraw()
@@ -291,7 +291,7 @@ class MapSceneNameDraw:
         map_data: game_type.Map = cache.map_data[map_path_str]
         path_edge = map_data.path_edge
         scene_id_list = list(path_edge.keys())
-        if len(scene_id_list):
+        if scene_id_list:
             character_data: game_type.Character = cache.character_data[0]
             character_scene_id = map_handle.get_map_scene_id_for_scene_path(
                 self.now_map, character_data.position
