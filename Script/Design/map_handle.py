@@ -247,7 +247,7 @@ def judge_scene_affiliation(now_scene_path: list, target_scene_path: list) -> st
         if len(target_scene_path) - 1 >= index and now_scene_path[index] != target_scene_path[index]:
             judge = 0
             break
-        if i > len(target_scene_path) - 1:
+        if index > len(target_scene_path) - 1:
             break
         if target_scene_path[index] != now_scene_path[index]:
             judge = 0
