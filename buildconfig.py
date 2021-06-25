@@ -49,17 +49,17 @@ def build_csv_config(file_path: str, file_name: str, talk: bool, target: bool):
                     now_docstring_data[k] = row[k]
                 i += 1
                 continue
-            elif i == 1:
+            if i == 1:
                 for k in row:
                     now_type_data[k] = row[k]
                 i += 1
                 continue
-            elif i == 2:
+            if i == 2:
                 for k in row:
                     get_text_data[k] = int(row[k])
                 i += 1
                 continue
-            elif i == 3:
+            if i == 3:
                 class_text = list(row.values())[0]
                 i += 1
                 continue
