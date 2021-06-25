@@ -60,8 +60,7 @@ def get_height(tem_name: int, age: int) -> game_type.Height:
     growth_height_data = get_growth_height(age, expect_height, development_age, expect_age)
     growth_height = growth_height_data["GrowthHeight"]
     now_height = growth_height_data["NowHeight"]
-    if now_height >= expect_height:
-        now_height = expect_height
+    now_height = min(now_height, expect_height)
     height_data = game_type.Height()
     height_data.now_height = now_height
     height_data.growth_height = growth_height
@@ -90,8 +89,7 @@ def get_chest(chest_tem: int, birthday: int) -> game_type.Chest:
     now_day = int((now_date - birthday) / 86400)
     sub_chest = target_chest / end_day
     now_chest = sub_chest * now_day
-    if now_chest > target_chest:
-        now_chest = target_chest
+    now_chest = min(now_chest, target_chest)
     chest = game_type.Chest()
     chest.now_chest = now_chest
     chest.sub_chest = sub_chest
