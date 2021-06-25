@@ -3,7 +3,6 @@ import time
 import random
 import math
 import ephem
-import time
 import os
 from types import FunctionType
 from dateutil import relativedelta
