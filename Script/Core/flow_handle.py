@@ -61,7 +61,6 @@ def clear_default_flow():
     """
     清楚当前默认流程函数，并是设置为空函数
     """
-    global default_flow, null_func
     set_default_flow(null_func)
 
 

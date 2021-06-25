@@ -38,9 +38,6 @@ def pcmd(
     if kw is None:
         kw = {}
     cache.text_wait = float(normal_config.config_normal.text_wait)
-    global last_char
-    if len(cmd_str) > 0:
-        last_char = cmd_str[-1:]
     flow_handle.print_cmd(cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style)
 
 
@@ -63,9 +60,6 @@ def pimagecmd(
     if kw is None:
         kw = {}
     cache.text_wait = float(normal_config.config_normal.text_wait)
-    global last_char
-    if len(cmd_str) > 0:
-        last_char = cmd_str[-1:]
     flow_handle.print_image_cmd(cmd_str, cmd_id, cmd_func, arg, kw)
 
 
