@@ -72,7 +72,7 @@ class SeeCharacterInfoPanel:
         self.handle_panel = panel.CenterDrawButtonListPanel()
         """ 属性列表的控制面板 """
         self.handle_panel.set(
-            [f"[{text}]" for text in self.draw_data.keys()],
+            [f"[{text}]" for text in self.draw_data],
             list(self.draw_data.keys()),
             width,
             4,
@@ -88,7 +88,7 @@ class SeeCharacterInfoPanel:
         """
         self.now_panel = panel_id
         self.handle_panel.set(
-            [f"[{text}]" for text in self.draw_data.keys()],
+            [f"[{text}]" for text in self.draw_data],
             list(self.draw_data.keys()),
             self.width,
             4,
