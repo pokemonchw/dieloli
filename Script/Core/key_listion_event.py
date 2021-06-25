@@ -20,7 +20,7 @@ def on_wframe_listion():
     wframe.bind("<Down>", key_down)
 
 
-def mouse_left_check(event: Event):
+def mouse_left_check(_: Event):
     """
     鼠标左键事件处理
     Keyword arguments:
@@ -33,7 +33,7 @@ def mouse_left_check(event: Event):
         mouse_check_push()
 
 
-def mouse_right_check(event: Event):
+def mouse_right_check(_: Event):
     """
     鼠标右键事件处理
     Keyword arguments:
@@ -48,7 +48,7 @@ def mouse_right_check(event: Event):
         mouse_check_push()
 
 
-def key_up(event: Event):
+def key_up(_: Event):
     """
     键盘上键事件处理
     Keyword arguments:
@@ -66,7 +66,7 @@ def key_up(event: Event):
             cache.input_position += 1
 
 
-def key_down(event: Event):
+def key_down(_: Event):
     """
     键盘下键事件处理
     Keyword arguments:

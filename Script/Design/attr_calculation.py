@@ -204,8 +204,6 @@ def get_weight(bmi: float, height: float) -> float:
 def get_measurements(
     tem_name: int,
     height: float,
-    weight: float,
-    bodyfat: float,
     weight_tem: int,
 ) -> dict:
     """
@@ -213,8 +211,6 @@ def get_measurements(
     Keyword arguments:
     tem_name -- 性别模板
     height -- 身高
-    weight -- 体重
-    bodyfat -- 体脂率
     weight_tem -- 体重比例模板
     """
     fix = 0

@@ -276,12 +276,11 @@ class MapSceneNameDraw:
         self.end_index: int = 0
         """ 结束按钮id """
 
-    def update(self, now_map: List[str], start_index: int):
+    def update(self, now_map: List[str],_):
         """
         更新当前面板对象
         Keyword arguments:
         now_map -- 当前地图
-        start_index -- 起始按钮id
         """
         self.now_map = now_map
 

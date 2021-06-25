@@ -443,7 +443,7 @@ def init_scene_edge_path_data():
                 now_map_scene_id = get_map_scene_id_for_scene_path(map_path, now_position)
                 target_map_scene_id = get_map_scene_id_for_scene_path(map_path, target_scene)
                 _, _, now_move_target, now_move_time = identical_map_move(
-                    now_position, map_path, now_map_scene_id, target_map_scene_id
+                    map_path, now_map_scene_id, target_map_scene_id
                 )
             else:
                 _, _, now_move_target, now_move_time = difference_map_move(now_position, target_scene)
@@ -519,10 +519,10 @@ def difference_map_move(now_position: list, target_scene: list) -> (str, list, l
         now_true_affiliation = judge_scene_is_affiliation(now_true_position, target_scene)
         if now_true_affiliation == "subordinate":
             now_map_scene_id = get_map_scene_id_for_scene_path(now_true_map, now_true_position)
-            return identical_map_move(now_position, now_true_map, now_map_scene_id, "0")
+            return identical_map_move(now_true_map, now_map_scene_id, "0")
         now_map = get_map_for_path(target_scene)
         now_map_scene_id = get_map_scene_id_for_scene_path(now_map, now_position)
-        return identical_map_move(now_position, now_map, now_map_scene_id, "0")
+        return identical_map_move(now_map, now_map_scene_id, "0")
     relation_map_list = get_relation_map_list_for_scene_path(now_true_position)
     now_scene_real_map = relation_map_list[-1]
     now_map_scene_id = get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
@@ -539,11 +539,10 @@ def difference_map_move(now_position: list, target_scene: list) -> (str, list, l
         now_map_scene_id = get_map_scene_id_for_scene_path(now_scene_real_map, now_true_position)
         target_map_scene_id = "0"
         common_map = now_scene_real_map
-    return identical_map_move(now_position, common_map, now_map_scene_id, target_map_scene_id)
+    return identical_map_move(common_map, now_map_scene_id, target_map_scene_id)
 
 
 def identical_map_move(
-    now_position: list,
     now_map: list,
     now_map_scene_id: str,
     target_map_scene_id: str,
@@ -551,7 +550,6 @@ def identical_map_move(
     """
     角色在相同地图层级内移动
     Keyword arguments:
-    now_position -- 当前场景位置
     now_map -- 当前地图路径
     now_map_scene_id -- 当前角色所在场景(当前地图层级下的相对坐标)
     target_map_scene_id -- 寻路目标场景(当前地图层级下的相对坐标)

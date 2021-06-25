@@ -229,8 +229,6 @@ def handle_drink_spring():
         character_data.measurements = attr_calculation.get_measurements(
             character_data.sex,
             character_data.height.now_height,
-            character_data.weight,
-            character_data.bodyfat,
             character_data.bodyfat_tem,
         )
     else:

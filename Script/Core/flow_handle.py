@@ -67,7 +67,7 @@ def clear_default_flow():
 cmd_map = constant.cmd_map
 
 
-def default_tail_deal_cmd_func(order):
+def default_tail_deal_cmd_func(_):
     """
     结尾命令处理空函数，用于占位
     """
