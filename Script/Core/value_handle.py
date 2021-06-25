@@ -101,7 +101,8 @@ def list_of_groups(init_list: list, children_list_len: int) -> List[List[any]]:
     list_of_groups = zip(*(iter(init_list),) * children_list_len)
     end_list = [list(i) for i in list_of_groups]
     count = len(init_list) % children_list_len
-    end_list.append(init_list[-count:]) if count != 0 else end_list
+    if count:
+        end_list.append(init_list[-count:])
     return end_list
 
 
