@@ -418,7 +418,7 @@ class CharacterRoomText:
         """ 教室位置文本 """
         officeroom = character_data.officeroom
         now_officeroom_text = _("办公室位置:")
-        if len(officeroom):
+        if officeroom:
             officeroom_text = attr_text.get_scene_path_text(officeroom)
             now_officeroom_text += officeroom_text
         else:
@@ -865,9 +865,7 @@ class SeeCharacterSocialContact:
             type_draw = draw.LittleTitleLineDraw(type_config.name, self.width, ":")
             self.draw_list.append(type_draw)
             now_draw = draw.CenterDraw()
-            if social_type in character_data.social_contact and len(
-                character_data.social_contact[social_type]
-            ):
+            if social_type in character_data.social_contact and character_data.social_contact[social_type]:
                 character_list = list(character_data.social_contact[social_type])
                 now_draw = panel.PageHandlePanel(
                     character_list, SeeCharacterInfoByNameDraw, 10, 5, self.width, 1, 1, 0
@@ -1181,7 +1179,7 @@ class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
 
     def old_character(self):
         """切换显示上一人"""
-        if len(self.character_list):
+        if self.character_list:
             if self.character_id:
                 now_index = self.character_list.index(self.character_id)
                 if now_index:
@@ -1194,7 +1192,7 @@ class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
 
     def next_character(self):
         """切换显示上一人"""
-        if len(self.character_list):
+        if self.character_list:
             if self.character_id:
                 now_index = self.character_list.index(self.character_id)
                 if now_index == len(self.character_list) - 1:

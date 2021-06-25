@@ -39,15 +39,15 @@ def handle_settle_behavior(character_id: int, now_time: int):
         now_judge = True
     if status_data.hit_point:
         now_judge = True
-    if len(status_data.knowledge):
+    if status_data.knowledge:
         now_judge = True
-    if len(status_data.language):
+    if status_data.language:
         now_judge = True
-    if len(status_data.status):
+    if status_data.status:
         now_judge = True
-    if len(status_data.sex_experience):
+    if status_data.sex_experience:
         now_judge = True
-    if len(status_data.target_change) and not character_id:
+    if status_data.target_change and not character_id:
         now_judge = True
     if now_judge:
         now_text_list = []
@@ -59,28 +59,28 @@ def handle_settle_behavior(character_id: int, now_time: int):
             now_text_list.append(
                 _("气力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
             )
-        if len(status_data.status):
+        if status_data.status:
             now_text_list.extend(
                 [
                     f"{game_config.config_character_state[i].name}:{attr_text.get_value_text(status_data.status[i])}"
                     for i in status_data.status
                 ]
             )
-        if len(status_data.knowledge):
+        if status_data.knowledge:
             now_text_list.extend(
                 [
                     f"{game_config.config_knowledge[i].name}:{attr_text.get_value_text(status_data.knowledge[i])}"
                     for i in status_data.knowledge
                 ]
             )
-        if len(status_data.language):
+        if status_data.language:
             now_text_list.extend(
                 [
                     f"{game_config.config_language[i].name}:{attr_text.get_value_text(status_data.language[i])}"
                     for i in status_data.language
                 ]
             )
-        if len(status_data.sex_experience):
+        if status_data.sex_experience:
             now_text_list.extend(
                 [
                     game_config.config_organ[i].name
@@ -89,7 +89,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                     for i in status_data.sex_experience
                 ]
             )
-        if len(status_data.target_change):
+        if status_data.target_change:
             for target_character_id in status_data.target_change:
                 if character_id and target_character_id:
                     continue
@@ -110,7 +110,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                         + game_config.config_social_type[target_change.new_social].name
                     )
                     judge = 1
-                if len(target_change.status):
+                if target_change.status:
                     for status_id in target_change.status:
                         if target_change.status[status_id]:
                             now_text += (
@@ -121,7 +121,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                                 )
                             )
                             judge = 1
-                if len(target_change.sex_experience):
+                if target_change.sex_experience:
                     for organ in target_change.sex_experience:
                         if target_change.sex_experience[organ]:
                             now_text += (

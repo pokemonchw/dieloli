@@ -21,7 +21,7 @@ def init_phase_course_hour():
             now_session_max = session_max
             more_hour = 0
             while 1:
-                if not len(now_course_set):
+                if not now_course_set:
                     break
                 now_course_id = random.choice(list(now_course_set))
                 now_course_value = random.randint(1, 18)

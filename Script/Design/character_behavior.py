@@ -290,7 +290,7 @@ def search_target(
             now_value_weight = value_handle.get_rand_value_for_value_region(now_target_data.keys())
             target_data.setdefault(now_weight, set())
             target_data[now_weight].add(random.choice(list(now_target_data[now_value_weight])))
-    if len(target_data):
+    if target_data:
         value_weight = value_handle.get_rand_value_for_value_region(target_data.keys())
         return random.choice(list(target_data[value_weight])), value_weight, 1
     return "", 0, 0
