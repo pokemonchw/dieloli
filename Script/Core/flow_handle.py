@@ -114,7 +114,7 @@ def bind_cmd(cmd_number, cmd_func, arg=(), kw=None):
     if cmd_func == null_func:
         cmd_map[cmd_number] = null_func
         return
-    elif cmd_func is None:
+    if cmd_func is None:
         cmd_map[cmd_number] = null_func
         return
 
@@ -243,10 +243,9 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
                 if _cmd_valid(order):
                     _cmd_deal(order)
                     return
-                else:
-                    global tail_deal_cmd_func
-                    tail_deal_cmd_func(int(order))
-                    return
+                global tail_deal_cmd_func
+                tail_deal_cmd_func(int(order))
+                return
 
 
 def askfor_str(donot_return_null_str=True, print_order=False):
@@ -263,7 +262,7 @@ def askfor_str(donot_return_null_str=True, print_order=False):
         order = order_deal("str", print_order, donot_return_null_str)
         if donot_return_null_str and order != "":
             return order
-        elif not donot_return_null_str:
+        if not donot_return_null_str:
             return order
 
 
@@ -281,7 +280,7 @@ def askfor_all(input_list: list, print_order=False):
             if _cmd_valid(order):
                 _cmd_deal(order)
             return order
-        elif order == "":
+        if order == "":
             continue
         else:
             io_init.era_print(order + "\n")
@@ -302,7 +301,7 @@ def askfor_int(list, print_order=False):
         if order in list:
             io_init.era_print(order + "\n\n")
             return order
-        elif order == "":
+        if order == "":
             continue
         else:
             io_init.era_print(order + "\n")

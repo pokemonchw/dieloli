@@ -43,8 +43,7 @@ def handle_premise(premise: int, character_id: int) -> int:
     """
     if premise in constant.handle_premise_data:
         return constant.handle_premise_data[premise](character_id)
-    else:
-        return 0
+    return 0
 
 
 @add_premise(constant.Premise.IN_CAFETERIA)
@@ -1332,7 +1331,7 @@ def handle_no_beyond_friendship_target(character_id: int) -> int:
         and target_data.social_contact_data[character_id] < 3
     ):
         return 5 - target_data.social_contact_data[character_id]
-    elif character_id not in target_data.social_contact_data:
+    if character_id not in target_data.social_contact_data:
         return 5
     return 0
 

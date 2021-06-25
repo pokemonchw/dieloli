@@ -126,11 +126,10 @@ def get_path_finding(map_path_str: str, now_node: str, target_node: str) -> (str
     """
     if now_node == target_node:
         return "End", game_type.TargetPath()
-    else:
-        return (
-            "",
-            cache.map_data[map_path_str].sorted_path[now_node][target_node],
-        )
+    return (
+        "",
+        cache.map_data[map_path_str].sorted_path[now_node][target_node],
+    )
 
 
 def get_scene_to_scene_map_list(now_scene_path: list, target_scene_path: list) -> (str, list):
@@ -147,12 +146,12 @@ def get_scene_to_scene_map_list(now_scene_path: list, target_scene_path: list) -
     scene_affiliation = judge_scene_affiliation(now_scene_path, target_scene_path)
     if scene_affiliation == "common":
         return "common", []
-    elif scene_affiliation == "subordinate":
+    if scene_affiliation == "subordinate":
         return (
             "",
             get_map_hierarchy_list_for_scene_path(now_scene_path, target_scene_path),
         )
-    elif scene_affiliation == "nobelonged":
+    if scene_affiliation == "nobelonged":
         common_map = get_common_map_for_scene_path(now_scene_path, target_scene_path)
         now_scene_to_common_map = get_map_hierarchy_list_for_scene_path(now_scene_path, common_map)
         target_scene_to_common_map = get_map_hierarchy_list_for_scene_path(target_scene_path, common_map)
@@ -170,16 +169,15 @@ def get_common_map_for_scene_path(scene_a_path: list, scene_b_path: list) -> lis
     hierarchy = []
     if scene_a_path[:-1] == [] or scene_b_path[:-1] == []:
         return hierarchy
-    else:
-        for i in range(0, len(scene_a_path)):
-            try:
-                if scene_a_path[i] == scene_b_path[i]:
-                    hierarchy.append(scene_a_path[i])
-                else:
-                    break
-            except IndexError:
+    for i in range(0, len(scene_a_path)):
+        try:
+            if scene_a_path[i] == scene_b_path[i]:
+                hierarchy.append(scene_a_path[i])
+            else:
                 break
-        return get_map_path_for_true(hierarchy)
+        except IndexError:
+            break
+    return get_map_path_for_true(hierarchy)
 
 
 def get_map_hierarchy_list_for_scene_path(now_scene_path: list, target_scene_path: list) -> list:
@@ -213,9 +211,8 @@ def get_map_path_for_true(map_path: list) -> list:
     map_path_str = get_map_system_path_str_for_list(map_path)
     if map_path_str in cache.map_data:
         return map_path
-    else:
-        new_map_path = map_path[:-1]
-        return get_map_path_for_true(new_map_path)
+    new_map_path = map_path[:-1]
+    return get_map_path_for_true(new_map_path)
 
 
 def judge_scene_is_affiliation(now_scene_path: list, target_scene_path: list) -> str:
@@ -230,7 +227,7 @@ def judge_scene_is_affiliation(now_scene_path: list, target_scene_path: list) ->
     """
     if judge_scene_affiliation(now_scene_path, target_scene_path) == "subordinate":
         return "subordinate"
-    elif judge_scene_affiliation(target_scene_path, now_scene_path) == "subordinate":
+    if judge_scene_affiliation(target_scene_path, now_scene_path) == "subordinate":
         return "superior"
     return "common"
 
@@ -279,8 +276,7 @@ def get_relation_map_list_for_scene_path(scene_path: list) -> list:
         map_list.append(now_map_path)
         if now_pathId == "0":
             return map_list + get_relation_map_list_for_scene_path(now_map_path)
-        else:
-            return map_list
+        return map_list
     else:
         map_list.append(now_map_path)
         return map_list
@@ -344,9 +340,8 @@ def get_scene_path_for_true(scene_path: list) -> list:
     scene_path_str = get_map_system_path_str_for_list(scene_path)
     if scene_path_str in cache.scene_data:
         return scene_path
-    else:
-        scene_path.append("0")
-        return get_scene_path_for_true(scene_path)
+    scene_path.append("0")
+    return get_scene_path_for_true(scene_path)
 
 
 def get_map_door_data_for_scene_path(scene_path: list) -> dict:
@@ -369,8 +364,7 @@ def get_map_door_data(map_path_str: str) -> dict:
     map_data = cache.map_data[map_path_str]
     if "MapDoor" in map_data:
         return map_data["MapDoor"]
-    else:
-        return {}
+    return {}
 
 
 def get_scene_character_name_list(scene_path_str: str, remove_own_character=False) -> list:

@@ -112,8 +112,7 @@ def get_sub_date(
     )
     if new_date.year > 1970:
         return new_date.timestamp()
-    else:
-        return (new_date - datetime.datetime(1970, 1, 1)).total_seconds()
+    return (new_date - datetime.datetime(1970, 1, 1)).total_seconds()
 
 
 def get_rand_day_for_year(year: int) -> int:
@@ -186,8 +185,7 @@ def judge_date_big_or_small(time_a: int, time_b: int) -> int:
     """
     if time_a == time_b:
         return 2
-    else:
-        return time_b < time_a
+    return time_b < time_a
 
 
 def ecliptic_lon(now_time: int) -> float:
@@ -343,25 +341,25 @@ def get_sun_phase_for_sun_az(now_az: float) -> int:
     """
     if now_az >= 225 and now_az < 255:
         return 8
-    elif now_az >= 255 and now_az < 285:
+    if now_az >= 255 and now_az < 285:
         return 9
-    elif now_az >= 285 and now_az < 315:
+    if now_az >= 285 and now_az < 315:
         return 10
-    elif now_az >= 315 and now_az < 345:
+    if now_az >= 315 and now_az < 345:
         return 11
-    elif now_az >= 345 or now_az < 15:
+    if now_az >= 345 or now_az < 15:
         return 0
-    elif now_az >= 15 and now_az < 45:
+    if now_az >= 15 and now_az < 45:
         return 1
-    elif now_az >= 45 and now_az < 75:
+    if now_az >= 45 and now_az < 75:
         return 2
-    elif now_az >= 75 and now_az < 105:
+    if now_az >= 75 and now_az < 105:
         return 3
-    elif now_az >= 105 and now_az < 135:
+    if now_az >= 105 and now_az < 135:
         return 4
-    elif now_az >= 135 and now_az < 165:
+    if now_az >= 135 and now_az < 165:
         return 5
-    elif now_az >= 165 and now_az < 195:
+    if now_az >= 165 and now_az < 195:
         return 6
     return 7
 

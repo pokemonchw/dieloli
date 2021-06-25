@@ -23,20 +23,17 @@ def align(text: str, just="left", only_fix=False, columns=1, text_width=None) ->
     if just == "right":
         if only_fix:
             return " " * (width - count_index)
-        else:
-            return " " * (width - count_index) + text
+        return " " * (width - count_index) + text
     elif just == "left":
         if only_fix:
             return " " * (width - count_index)
-        else:
-            return text + " " * (width - count_index)
+        return text + " " * (width - count_index)
     elif just == "center":
         width_i = width / 2
         count_i = count_index / 2
         if only_fix:
             return " " * int(width_i - count_i)
-        else:
-            return " " * int(width_i - count_i) + text + " " * int(width_i - count_i)
+        return " " * int(width_i - count_i) + text + " " * int(width_i - count_i)
 
 
 def get_text_index(text: str) -> int:

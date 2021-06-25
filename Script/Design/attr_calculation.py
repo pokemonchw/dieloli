@@ -280,10 +280,9 @@ def get_init_learn_abllity(age: int, end_age: int):
     forget_age = int(end_age * 0.9)
     if age <= stop_age:
         return age / stop_age
-    elif age > stop_age and age < end_age:
+    if age > stop_age and age < end_age:
         return 1 - 1 / (forget_age - stop_age) * (forget_age - age)
-    else:
-        return 0 - (age - forget_age) / (end_age - forget_age)
+    return 0 - (age - forget_age) / (end_age - forget_age)
 
 
 def get_sex_experience(tem_name: int, sex: int) -> dict:

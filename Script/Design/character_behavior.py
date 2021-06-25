@@ -205,7 +205,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     if time_judge == 1:
         character_data.behavior.start_time = end_time
         return 0
-    elif time_judge == 2:
+    if time_judge == 2:
         character_data.behavior.start_time = now_time
         return 0
     return 1
