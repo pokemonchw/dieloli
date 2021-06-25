@@ -20,7 +20,7 @@ def pcmd(
     cmd_id: str,
     cmd_func=flow_handle.null_func,
     arg=(),
-    kw={},
+    kw=None,
     normal_style="standard",
     on_style="onbutton",
 ):
@@ -35,6 +35,8 @@ def pcmd(
     normal_style -- 正常状态下命令显示样式
     on_style -- 鼠标在其上的时候命令显示样式
     """
+    if kw is None:
+        kw = {}
     cache.text_wait = float(normal_config.config_normal.text_wait)
     global last_char
     if len(cmd_str) > 0:
@@ -47,7 +49,7 @@ def pimagecmd(
     cmd_id: str,
     cmd_func=flow_handle.null_func,
     arg=(),
-    kw={},
+    kw=None,
 ):
     """
     打印图片按钮
@@ -58,6 +60,8 @@ def pimagecmd(
     arg -- 传给命令函数的顺序参数
     kw -- 传给命令函数的字典参数
     """
+    if kw is None:
+        kw = {}
     cache.text_wait = float(normal_config.config_normal.text_wait)
     global last_char
     if len(cmd_str) > 0:

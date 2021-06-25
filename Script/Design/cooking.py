@@ -67,7 +67,7 @@ def create_food(
     food_id: str,
     food_quality: int,
     food_weight: int,
-    food_feel={},
+    food_feel=None,
     food_maker="",
     food_recipe=-1,
     cook_type=0,
@@ -85,6 +85,8 @@ def create_food(
     Return arguments:
     Food -- 食物对象
     """
+    if food_feel is None:
+        food_feel = {}
     food = Food()
     food.id = food_id
     food.uid = uuid.uuid4()
