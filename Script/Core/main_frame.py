@@ -485,7 +485,7 @@ def io_clear_cmd(*cmd_numbers: list):
                 textbox.tag_delete(cmd_tag_map[num])
                 del cmd_tag_map[num]
     else:
-        for num in cmd_tag_map.keys():
+        for num in cmd_tag_map:
             tag_tuple = textbox.tag_ranges(cmd_tag_map[num])
             if len(tag_tuple):
                 index_first = tag_tuple[0]
