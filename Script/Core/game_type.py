@@ -571,12 +571,16 @@ class Cache:
         各个学校各年级课程表数据
         学校id:年级:周几:第几节课:科目id
         """
-        self.course_school_phase_knowledge_experience: Dict[int, Dict[int, Dict[int, Dict[int, int]]]] = {}
+        self.course_school_phase_knowledge_experience: Dict[
+            int, Dict[int, Dict[int, Dict[int, int]]]
+        ] = {}
         """
         各个学校各学年各技能理论增长经验总量
         学校id:年级:课程:技能:经验
         """
-        self.course_school_phase_language_experience: Dict[int, Dict[int, Dict[int, Dict[int, int]]]] = {}
+        self.course_school_phase_language_experience: Dict[
+            int, Dict[int, Dict[int, Dict[int, int]]]
+        ] = {}
         """
         各个学校各学年各语言理论增长经验总量
         学校id:年级:课程:语言:经验
@@ -598,7 +602,9 @@ class Cache:
         """
         self.teacher_class_week_day_data: Dict[int, Set] = {}
         """ 各老师每周工作日集合 """
-        self.class_timetable_teacher_data: Dict[int, Dict[int, Dict[str, Dict[int, Dict[int, int]]]]] = {}
+        self.class_timetable_teacher_data: Dict[
+            int, Dict[int, Dict[str, Dict[int, Dict[int, int]]]]
+        ] = {}
         """
         各学校各班级上课时间对应教师数据
         学校id:年级id:班级id:星期:课时:老师id

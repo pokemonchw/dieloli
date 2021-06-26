@@ -27,7 +27,9 @@ def handle_settle_behavior(character_id: int, now_time: int):
     behavior_id = now_character_data.behavior.behavior_id
     if behavior_id in game_config.config_behavior_effect_data:
         for effect_id in game_config.config_behavior_effect_data[behavior_id]:
-            constant.settle_behavior_effect_data[effect_id](character_id, add_time, status_data, now_time)
+            constant.settle_behavior_effect_data[effect_id](
+                character_id, add_time, status_data, now_time
+            )
     change_character_favorability_for_time(character_id, now_time)
     change_character_social(character_id, status_data)
     now_judge = False
@@ -93,7 +95,9 @@ def handle_settle_behavior(character_id: int, now_time: int):
             for target_character_id in status_data.target_change:
                 if character_id and target_character_id:
                     continue
-                target_change: game_type.TargetChange = status_data.target_change[target_character_id]
+                target_change: game_type.TargetChange = status_data.target_change[
+                    target_character_id
+                ]
                 target_data: game_type.Character = cache.character_data[target_character_id]
                 now_text = f"\n{target_data.name}:"
                 judge = 0

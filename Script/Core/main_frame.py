@@ -49,7 +49,9 @@ if normal_config.config_normal.window_width + 30 > screen_weight:
     normal_config.config_normal.window_width = screen_weight - 30
 if normal_config.config_normal.window_hight + 30 > screen_height:
     normal_config.config_normal.window_hight = screen_height - 30
-now_font_size = int(normal_config.config_normal.window_width / normal_config.config_normal.text_width) * 2
+now_font_size = (
+    int(normal_config.config_normal.window_width / normal_config.config_normal.text_width) * 2
+)
 normal_config.config_normal.font_size = now_font_size
 normal_config.config_normal.order_font_size = now_font_size - 2
 dpi = root.winfo_fpixels("1i")
@@ -203,7 +205,9 @@ def read_queue():
                 temp["italic"],
             )
         if "image" in json_data:
-            textbox.image_create("end", image=era_image.image_data[json_data["image"]["image_name"]])
+            textbox.image_create(
+                "end", image=era_image.image_data[json_data["image"]["image_name"]]
+            )
 
         for c in json_data["content"]:
             if c["type"] == "text":
@@ -212,7 +216,11 @@ def read_queue():
                 io_print_cmd(c["text"], c["num"], c["normal_style"], c["on_style"])
             if c["type"] == "image_cmd":
                 io_print_image_cmd(c["text"], c["num"])
-            if "\n" in c["text"] and textbox.get("1.0", END).count("\n") > normal_config.config_normal.text_hight * 10:
+            if (
+                "\n" in c["text"]
+                and textbox.get("1.0", END).count("\n")
+                > normal_config.config_normal.text_hight * 10
+            ):
                 textbox.delete("1.0", str(normal_config.config_normal.text_hight * 5) + ".0")
     root.after(1, read_queue)
 

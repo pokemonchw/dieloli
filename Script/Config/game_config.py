@@ -491,10 +491,14 @@ def load_course_skill_experience():
         config_course_skill_experience[now_tem.cid] = now_tem
         if now_tem.skill_type:
             config_course_language_experience_data.setdefault(now_tem.course, {})
-            config_course_language_experience_data[now_tem.course][now_tem.skill] = now_tem.experience
+            config_course_language_experience_data[now_tem.course][
+                now_tem.skill
+            ] = now_tem.experience
         else:
             config_course_knowledge_experience_data.setdefault(now_tem.course, {})
-            config_course_knowledge_experience_data[now_tem.course][now_tem.skill] = now_tem.experience
+            config_course_knowledge_experience_data[now_tem.course][
+                now_tem.skill
+            ] = now_tem.experience
 
 
 def load_end_age_tem():

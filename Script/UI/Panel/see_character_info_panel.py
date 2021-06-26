@@ -52,7 +52,9 @@ class SeeCharacterInfoPanel:
         """ 当前面板监听的按钮列表 """
         main_attr_draw = SeeCharacterMainAttrPanel(character_id, width)
         see_status_draw = SeeCharacterStatusPanel(character_id, width, 5)
-        see_clothing_draw = see_clothing_info_panel.SeeCharacterPutOnClothingListPanel(character_id, width)
+        see_clothing_draw = see_clothing_info_panel.SeeCharacterPutOnClothingListPanel(
+            character_id, width
+        )
         see_item_draw = see_item_info_panel.SeeCharacterItemBagPanel(character_id, width)
         see_knowledge_draw = SeeCharacterKnowledgePanel(character_id, width)
         see_language_draw = SeeCharacterLanguagePanel(character_id, width)
@@ -233,7 +235,9 @@ class CharacterInfoHead:
             if 0 in character_data.social_contact_data:
                 social = character_data.social_contact_data[0]
             social_text = game_config.config_social_type[social].name
-            message = _("No.{character_id} 姓名:{character_name} 性别:{sex_text} 关系:{social_text}").format(
+            message = _(
+                "No.{character_id} 姓名:{character_name} 性别:{sex_text} 关系:{social_text}"
+            ).format(
                 character_id=character_id,
                 character_name=character_data.name,
                 sex_text=sex_text,
@@ -428,7 +432,9 @@ class CharacterRoomText:
         line = draw.LineDraw(".", self.width)
         line.draw()
         info_draw = panel.CenterDrawTextListPanel()
-        info_draw.set([self.dormitory_text, self.classroom_text, self.officeroom_text], self.width, 3)
+        info_draw.set(
+            [self.dormitory_text, self.classroom_text, self.officeroom_text], self.width, 3
+        )
         info_draw.draw()
 
 
@@ -451,7 +457,9 @@ class CharacterBirthdayText:
         if character_data.birthday > 0:
             birthday = datetime.datetime.fromtimestamp(character_data.birthday)
         else:
-            birthday = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=character_data.birthday)
+            birthday = datetime.datetime(1970, 1, 1) + datetime.timedelta(
+                seconds=character_data.birthday
+            )
         birthday_text = _("生日:{birthday_month}月{birthday_day}日").format(
             birthday_month=birthday.month, birthday_day=birthday.day
         )
@@ -719,7 +727,9 @@ class LanguageNameDraw:
             if num_button:
                 index_text = text_handle.id_index(button_id)
                 button_text = f"{index_text} {language_name}:"
-                name_draw = draw.Button(button_text, self.button_return, cmd_func=self.see_language_info)
+                name_draw = draw.Button(
+                    button_text, self.button_return, cmd_func=self.see_language_info
+                )
             else:
                 button_text = f"{language_name}:"
                 name_draw = draw.Button(button_text, language_name, cmd_func=self.see_language_info)
@@ -859,7 +869,10 @@ class SeeCharacterSocialContact:
             type_draw = draw.LittleTitleLineDraw(type_config.name, self.width, ":")
             self.draw_list.append(type_draw)
             now_draw = draw.CenterDraw()
-            if social_type in character_data.social_contact and character_data.social_contact[social_type]:
+            if (
+                social_type in character_data.social_contact
+                and character_data.social_contact[social_type]
+            ):
                 character_list = list(character_data.social_contact[social_type])
                 now_draw = panel.PageHandlePanel(
                     character_list, SeeCharacterInfoByNameDraw, 10, 5, self.width, 1, 1, 0
@@ -1134,7 +1147,9 @@ class GetUpCharacterInfoDraw:
         age_text = _(f"年龄:{character_data.age}岁")
         hit_point_text = _(f"体力:({character_data.hit_point}/{character_data.hit_point_max})")
         mana_point_text = _(f"气力:({character_data.mana_point}/{character_data.mana_point_max})")
-        now_text = f"{id_text} {character_name} {sex_text} {age_text} {hit_point_text} {mana_point_text}"
+        now_text = (
+            f"{id_text} {character_name} {sex_text} {age_text} {hit_point_text} {mana_point_text}"
+        )
         if is_button:
             if num_button:
                 index_text = text_handle.id_index(self.button_id)
@@ -1153,7 +1168,9 @@ class GetUpCharacterInfoDraw:
     def draw(self):
         """绘制对象"""
         if self.is_button:
-            now_draw = draw.Button(self.draw_text, self.button_return, cmd_func=self.draw_character_info)
+            now_draw = draw.Button(
+                self.draw_text, self.button_return, cmd_func=self.draw_character_info
+            )
         else:
             now_draw = draw.NormalDraw()
             now_draw.text = self.draw_text
@@ -1164,7 +1181,9 @@ class GetUpCharacterInfoDraw:
         """绘制角色信息"""
         line_feed.draw()
         py_cmd.clr_cmd()
-        now_draw = SeeCharacterInfoHandle(self.text, window_width, list(cache.character_data.keys()))
+        now_draw = SeeCharacterInfoHandle(
+            self.text, window_width, list(cache.character_data.keys())
+        )
         now_draw.draw()
 
 
@@ -1216,7 +1235,9 @@ class SeeCharacterInfoInScenePanel:
         scene_data: game_type.Scene = cache.scene_data[position_str]
         if cache.is_collection:
             character_data: game_type.Character = cache.character_data[0]
-            now_list = [i for i in scene_data.character_list if i in character_data.collection_character]
+            now_list = [
+                i for i in scene_data.character_list if i in character_data.collection_character
+            ]
         else:
             now_list = list(scene_data.character_list)
             now_list.remove(0)

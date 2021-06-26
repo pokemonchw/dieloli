@@ -4,7 +4,15 @@ import time
 from typing import List, Dict, Tuple
 from types import FunctionType
 from Script.UI.Moudle import draw
-from Script.Core import io_init, flow_handle, text_handle, get_text, value_handle, cache_control, game_type
+from Script.Core import (
+    io_init,
+    flow_handle,
+    text_handle,
+    get_text,
+    value_handle,
+    cache_control,
+    game_type,
+)
 from Script.Config import normal_config
 
 
@@ -46,9 +54,11 @@ class SingleColumnButton:
         normal_style -- 按钮通常样式
         onbutton_style -- 鼠标悬停时样式
         """
-        for index,now_button in enumerate(button_list):
+        for index, now_button in enumerate(button_list):
             if index <= self.max_height:
-                draw_button = draw.Button(now_button, return_list[index], normal_style, onbutton_style)
+                draw_button = draw.Button(
+                    now_button, return_list[index], normal_style, onbutton_style
+                )
                 draw_button.width = self.width
                 self.button_list.append(draw_button)
             self.return_list[return_list[index]] = now_button
@@ -96,7 +106,7 @@ class OneMessageAndSingleColumnButton:
         """
         new_button_list = []
         return_list = []
-        for index,now_button in enumerate(button_list):
+        for index, now_button in enumerate(button_list):
             now_id = text_handle.id_index(index + start_id)
             now_id_text = now_id + now_button
             new_button_list.append(now_id_text)
@@ -680,7 +690,9 @@ class PageHandlePanel:
                 if value == self.null_button_text:
                     is_button = 0
                 value_draw = self.draw_type(value, value_width, is_button, self.num_button, index)
-                value_draw.draw_text = text_handle.align(value_draw.draw_text, "center", 0, 1, value_width)
+                value_draw.draw_text = text_handle.align(
+                    value_draw.draw_text, "center", 0, 1, value_width
+                )
                 if self.num_button:
                     self.return_list.append(str(index))
                 else:

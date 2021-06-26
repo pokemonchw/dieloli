@@ -16,10 +16,10 @@ def init_character_interest():
         numpy.random.shuffle(knowledge_skills)
         numpy.random.shuffle(language_skills)
         for knowledge in knowledge_skills:
-            cache.character_data[character].knowledge_interest[knowledge] = value_handle.get_gauss_rand(
-                0.5, 1.5
-            )
+            cache.character_data[character].knowledge_interest[
+                knowledge
+            ] = value_handle.get_gauss_rand(0.5, 1.5)
         for language in language_skills:
-            cache.character_data[character].language_interest[language] = value_handle.get_gauss_rand(
-                0.5, 1.5
-            )
+            cache.character_data[character].language_interest[
+                language
+            ] = value_handle.get_gauss_rand(0.5, 1.5)

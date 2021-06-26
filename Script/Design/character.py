@@ -33,7 +33,9 @@ def init_attr(character_id: int):
     character_data.height = attr_calculation.get_height(character_data.sex, character_data.age)
     bmi = attr_calculation.get_bmi(character_data.weight_tem)
     character_data.weight = attr_calculation.get_weight(bmi, character_data.height.now_height)
-    character_data.bodyfat = attr_calculation.get_body_fat(character_data.sex, character_data.bodyfat_tem)
+    character_data.bodyfat = attr_calculation.get_body_fat(
+        character_data.sex, character_data.bodyfat_tem
+    )
     character_data.measurements = attr_calculation.get_measurements(
         character_data.sex,
         character_data.height.now_height,
@@ -55,10 +57,14 @@ def init_attr(character_id: int):
             chest_tem_config.weight_fix - 0.5, chest_tem_config.weight_fix + 0.5
         )
         character_data.weight += fix_weight
-    character_data.chest = attr_calculation.get_chest(character_data.chest_tem, character_data.birthday)
+    character_data.chest = attr_calculation.get_chest(
+        character_data.chest_tem, character_data.birthday
+    )
     character_data.hit_point_max = attr_calculation.get_max_hit_point(character_data.hit_point_tem)
     character_data.hit_point = character_data.hit_point_max
-    character_data.mana_point_max = attr_calculation.get_max_mana_point(character_data.mana_point_tem)
+    character_data.mana_point_max = attr_calculation.get_max_mana_point(
+        character_data.mana_point_tem
+    )
     character_data.mana_point = character_data.mana_point_max
     new_nature = nature.get_random_nature()
     for nature_id in new_nature:

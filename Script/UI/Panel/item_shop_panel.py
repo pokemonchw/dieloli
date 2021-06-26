@@ -1,5 +1,13 @@
 from types import FunctionType
-from Script.Core import cache_control, game_type, text_handle, get_text, flow_handle, py_cmd, constant
+from Script.Core import (
+    cache_control,
+    game_type,
+    text_handle,
+    get_text,
+    flow_handle,
+    py_cmd,
+    constant,
+)
 from Script.Design import map_handle
 from Script.Config import game_config, normal_config
 from Script.UI.Moudle import panel, draw

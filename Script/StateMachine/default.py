@@ -441,7 +441,9 @@ def character_move_to_rand_scene(character_id: int):
     character_data.state = constant.CharacterStatus.STATUS_MOVE
 
 
-@handle_state_machine.add_state_machine(constant.StateMachine.EMBRACE_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE)
+@handle_state_machine.add_state_machine(
+    constant.StateMachine.EMBRACE_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE
+)
 def character_embrace_to_beyond_friendship_target_in_scene(character_id: int):
     """
     对场景中抱有超越友谊想法的随机对象拥抱
@@ -505,7 +507,9 @@ def character_move_to_like_target_scene(character_id: int):
     if character_list:
         target_id = random.choice(character_list)
         target_data: game_type.Character = cache.character_data[target_id]
-        _, _, move_path, move_time = character_move.character_move(character_id, target_data.position)
+        _, _, move_path, move_time = character_move.character_move(
+            character_id, target_data.position
+        )
         character_data.behavior.behavior_id = constant.Behavior.MOVE
         character_data.behavior.move_target = move_path
         character_data.behavior.duration = move_time
@@ -562,7 +566,9 @@ def character_kiss_to_no_first_kiss_like_target_in_scene(character_id: int):
         character_data.state = constant.CharacterStatus.STATUS_KISS
 
 
-@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_NO_FIRST_KISS_LIKE_TARGET_SCENE)
+@handle_state_machine.add_state_machine(
+    constant.StateMachine.MOVE_TO_NO_FIRST_KISS_LIKE_TARGET_SCENE
+)
 def character_move_to_no_first_kiss_like_target_scene(character_id: int):
     """
     移动至随机某个自己喜欢的还是初吻的人所在场景
@@ -580,7 +586,9 @@ def character_move_to_no_first_kiss_like_target_scene(character_id: int):
     if character_list:
         target_id = random.choice(character_list)
         target_data: game_type.Character = cache.character_data[target_id]
-        _, _, move_path, move_time = character_move.character_move(character_id, target_data.position)
+        _, _, move_path, move_time = character_move.character_move(
+            character_id, target_data.position
+        )
         character_data.behavior.behavior_id = constant.Behavior.MOVE
         character_data.behavior.move_target = move_path
         character_data.behavior.duration = move_time
@@ -652,7 +660,9 @@ def character_attend_class(character_id: int):
     character_data.behavior.behavior_id = constant.Behavior.ATTEND_CLASS
     end_time = 0
     school_id, phase = course.get_character_school_phase(character_id)
-    now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time, game_time.time_zone)
+    now_time = datetime.datetime.fromtimestamp(
+        character_data.behavior.start_time, game_time.time_zone
+    )
     now_time_value = now_time.hour * 100 + now_time.minute
     now_course_index = 0
     for session_id in game_config.config_school_session_data[school_id]:
@@ -665,7 +675,9 @@ def character_attend_class(character_id: int):
             break
     now_week = now_time.weekday()
     if not now_course_index or now_course_index:
-        now_course = random.choice(list(game_config.config_school_phase_course_data[school_id][phase]))
+        now_course = random.choice(
+            list(game_config.config_school_phase_course_data[school_id][phase])
+        )
     else:
         now_course = cache.course_time_table_data[school_id][phase][now_week][now_course_index]
     character_data.behavior.duration = end_time
@@ -684,7 +696,9 @@ def character_teach_lesson(character_id: int):
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.behavior.behavior_id = constant.Behavior.TEACHING
     end_time = 0
-    now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time, game_time.time_zone)
+    now_time = datetime.datetime.fromtimestamp(
+        character_data.behavior.start_time, game_time.time_zone
+    )
     now_week = now_time.weekday()
     now_time_value = now_time.hour * 100 + now_time.minute
     timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]

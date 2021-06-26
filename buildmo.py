@@ -10,3 +10,4 @@ if os.path.exists(po_path):
 os.system('find ./ -name "*.py" >POTFILES && xgettext -n --files-from=POTFILES -o ' + po_path)
 os.remove("POTFILES")
 os.system("msgfmt " + po_path + " -o " + mo_path)
+print("Mo Building End")

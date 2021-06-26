@@ -78,7 +78,10 @@ class SeeMapPanel:
                             self.now_map, draw_text.text
                         )
                         now_draw = draw.Button(
-                            draw_text.text, draw_text.text, cmd_func=self.move_now, args=(scene_path,)
+                            draw_text.text,
+                            draw_text.text,
+                            cmd_func=self.move_now,
+                            args=(scene_path,),
                         )
                         now_draw.width = self.width
                         now_draw.draw()
@@ -106,7 +109,9 @@ class SeeMapPanel:
                 draw_list = []
                 for scene in scene_path_list:
                     load_scene_data = map_handle.get_scene_data_for_map(map_path_str, scene)
-                    now_scene_path = map_handle.get_map_system_path_for_str(load_scene_data.scene_path)
+                    now_scene_path = map_handle.get_map_system_path_for_str(
+                        load_scene_data.scene_path
+                    )
                     now_draw = draw.CenterButton(
                         f"[{load_scene_data.scene_name}]",
                         load_scene_data.scene_name,
@@ -181,7 +186,9 @@ class SeeMapPanel:
         """将当前地图切换为下级地图"""
         py_cmd.clr_cmd()
         character_position = cache.character_data[0].position
-        down_map_scene_id = map_handle.get_map_scene_id_for_scene_path(self.now_map, character_position)
+        down_map_scene_id = map_handle.get_map_scene_id_for_scene_path(
+            self.now_map, character_position
+        )
         self.now_map.append(down_map_scene_id)
 
     @staticmethod
@@ -276,7 +283,7 @@ class MapSceneNameDraw:
         self.end_index: int = 0
         """ 结束按钮id """
 
-    def update(self, now_map: List[str],_):
+    def update(self, now_map: List[str], _):
         """
         更新当前面板对象
         Keyword arguments:
@@ -305,7 +312,11 @@ class MapSceneNameDraw:
                 now_scene_path = map_handle.get_map_system_path_for_str(load_scene_data.scene_path)
                 now_id_text = f"{scene_id}:{load_scene_data.scene_name}"
                 now_draw = draw.LeftButton(
-                    now_id_text, now_id_text, self.width, cmd_func=self.move_now, args=(now_scene_path,)
+                    now_id_text,
+                    now_id_text,
+                    self.width,
+                    cmd_func=self.move_now,
+                    args=(now_scene_path,),
                 )
                 self.return_list.append(now_draw.return_text)
                 draw_list.append(now_draw)
@@ -427,7 +438,9 @@ class ScenePathNameMoveDraw:
     button_id -- 数字按钮的id
     """
 
-    def __init__(self, text: List[str], width: int, is_button: bool, num_button: bool, button_id: int):
+    def __init__(
+        self, text: List[str], width: int, is_button: bool, num_button: bool, button_id: int
+    ):
         """初始化绘制对象"""
         self.draw_text = ""
         """ 场景路径绘制的文本 """
@@ -488,7 +501,11 @@ class SocialSceneNamePanel:
         """ 当前面板的按钮返回 """
         character_data: game_type.Character = cache.character_data[0]
         self.handle_panel = panel.PageHandlePanel(
-            [k for k in character_data.social_contact_data if character_data.social_contact_data[k]],
+            [
+                k
+                for k in character_data.social_contact_data
+                if character_data.social_contact_data[k]
+            ],
             SocialSceneNameDraw,
             20,
             3,

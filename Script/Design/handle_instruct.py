@@ -85,14 +85,19 @@ def handle_rest():
 
 
 @add_instruct(
-    constant.Instruct.BUY_FOOD, constant.InstructType.ACTIVE, _("购买食物"), {constant.Premise.IN_CAFETERIA}
+    constant.Instruct.BUY_FOOD,
+    constant.InstructType.ACTIVE,
+    _("购买食物"),
+    {constant.Premise.IN_CAFETERIA},
 )
 def handle_buy_food():
     """处理购买食物指令"""
     cache.now_panel_id = constant.Panel.FOOD_SHOP
 
 
-@add_instruct(constant.Instruct.EAT, constant.InstructType.ACTIVE, _("进食"), {constant.Premise.HAVE_FOOD})
+@add_instruct(
+    constant.Instruct.EAT, constant.InstructType.ACTIVE, _("进食"), {constant.Premise.HAVE_FOOD}
+)
 def handle_eat():
     """处理进食指令"""
     cache.now_panel_id = constant.Panel.FOOD_BAG
@@ -105,7 +110,10 @@ def handle_move():
 
 
 @add_instruct(
-    constant.Instruct.SEE_ATTR, constant.InstructType.SYSTEM, _("查看属性"), {constant.Premise.HAVE_TARGET}
+    constant.Instruct.SEE_ATTR,
+    constant.InstructType.SYSTEM,
+    _("查看属性"),
+    {constant.Premise.HAVE_TARGET},
 )
 def handle_see_attr():
     """查看属性"""
@@ -195,7 +203,9 @@ def handle_save():
     now_panel.draw()
 
 
-@add_instruct(constant.Instruct.SLEEP, constant.InstructType.REST, _("睡觉"), {constant.Premise.IN_DORMITORY})
+@add_instruct(
+    constant.Instruct.SLEEP, constant.InstructType.REST, _("睡觉"), {constant.Premise.IN_DORMITORY}
+)
 def handle_sleep():
     """处理睡觉指令"""
     character.init_character_behavior_start_time(0, cache.game_time)
@@ -208,7 +218,10 @@ def handle_sleep():
 
 
 @add_instruct(
-    constant.Instruct.DRINK_SPRING, constant.InstructType.ACTIVE, _("喝泉水"), {constant.Premise.IN_FOUNTAIN}
+    constant.Instruct.DRINK_SPRING,
+    constant.InstructType.ACTIVE,
+    _("喝泉水"),
+    {constant.Premise.IN_FOUNTAIN},
 )
 def handle_drink_spring():
     """处理喝泉水指令"""
@@ -414,7 +427,9 @@ def handle_attend_class():
             break
     now_week = now_time.weekday()
     if not now_course_index:
-        now_course = random.choice(list(game_config.config_school_phase_course_data[school_id][phase]))
+        now_course = random.choice(
+            list(game_config.config_school_phase_course_data[school_id][phase])
+        )
     else:
         now_course = cache.course_time_table_data[school_id][phase][now_week][now_course_index]
     character_data.behavior.duration = end_time

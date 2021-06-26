@@ -139,7 +139,9 @@ def input_nick_name_panel() -> bool:
     create_judge = 0
     character_data = cache.character_data[0]
     ask_nick_name_panel = panel.AskForOneMessage()
-    ask_nick_name_panel.set(_("该怎么称呼{character_name}好呢？").format(character_name=character_data.name), 10)
+    ask_nick_name_panel.set(
+        _("该怎么称呼{character_name}好呢？").format(character_name=character_data.name), 10
+    )
     line_feed_draw.draw()
     line.draw()
     not_num_error = draw.NormalDraw()
@@ -170,7 +172,8 @@ def input_sex_panel() -> bool:
     sex_list = [game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(
-        sex_list, _("那么{character_nick_name}的性别是？").format(character_nick_name=character_data.nick_name)
+        sex_list,
+        _("那么{character_nick_name}的性别是？").format(character_nick_name=character_data.nick_name),
     )
     return_list = button_panel.get_return_list()
     line_feed_draw.draw()
@@ -248,7 +251,9 @@ def add_setting_panel() -> FunctionType:
 def setting_age_tem_panel():
     """设置年龄模板"""
     character_data: game_type.Character = cache.character_data[0]
-    message = _("{character_nick_name}是一个小孩子吗？").format(character_nick_name=character_data.nick_name)
+    message = _("{character_nick_name}是一个小孩子吗？").format(
+        character_nick_name=character_data.nick_name
+    )
     ask_list = [
         _("嘎呜～嘎呜～"),
         _("才，才不是小孩子！"),
@@ -268,7 +273,9 @@ def setting_age_tem_panel():
 def setting_weight_panel():
     """设置体重模板"""
     character_data = cache.character_data[0]
-    message = _("{character_nick_name}对自己的体重有自信吗？").format(character_nick_name=character_data.nick_name)
+    message = _("{character_nick_name}对自己的体重有自信吗？").format(
+        character_nick_name=character_data.nick_name
+    )
     ask_list = [
         _("很轻，就像一张纸一样，风一吹就能飘起来。"),
         _("普普通通，健康的身材。"),
@@ -288,7 +295,9 @@ def setting_weight_panel():
 def setting_sex_experience_panel():
     """设置性经验模板"""
     character_data = cache.character_data[0]
-    message = _("{character_nick_name}是否有过性经验呢？").format(character_nick_name=character_data.nick_name)
+    message = _("{character_nick_name}是否有过性经验呢？").format(
+        character_nick_name=character_data.nick_name
+    )
     ask_list = [
         _("性经验什么的完全没有过，你在问什么呢！变态！"),
         _("只有极少的性经验哦，说是纯情也不为过。"),
@@ -339,7 +348,9 @@ def setting_nature_1_panel():
 def setting_nature_2_panel():
     """设置性格倾向:乐观"""
     character_data = cache.character_data[0]
-    message = _("{character_nick_name}有憧憬过未来的人生吗？").format(character_nick_name=character_data.nick_name)
+    message = _("{character_nick_name}有憧憬过未来的人生吗？").format(
+        character_nick_name=character_data.nick_name
+    )
     ask_list = [_("有"), _("没有")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(ask_list, message)
@@ -439,7 +450,9 @@ def setting_nature_8_panel():
 def setting_nature_9_panel():
     """设置性格区间:决断"""
     character_data = cache.character_data[0]
-    message = _("{character_nick_name}总是很轻率的做出了决定对吗？").format(character_nick_name=character_data.nick_name)
+    message = _("{character_nick_name}总是很轻率的做出了决定对吗？").format(
+        character_nick_name=character_data.nick_name
+    )
     ask_list = [_("是"), _("不是")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(ask_list, message)
@@ -467,7 +480,9 @@ def setting_nature_10_panel():
 def setting_nature_11_panel():
     """设置性格区间:机敏"""
     character_data = cache.character_data[0]
-    message = _("喜欢多与对{character_nick_name}有利的人交往对吗？").format(character_nick_name=character_data.nick_name)
+    message = _("喜欢多与对{character_nick_name}有利的人交往对吗？").format(
+        character_nick_name=character_data.nick_name
+    )
     ask_list = [_("是"), _("不是")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(ask_list, message)

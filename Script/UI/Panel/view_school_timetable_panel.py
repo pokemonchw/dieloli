@@ -71,7 +71,9 @@ class StudentTimeTablePanel:
         """绘制对象"""
         school_id, phase = course.get_character_school_phase(0)
         time_table = cache.course_time_table_data[school_id][phase]
-        weekday_text_list = [game_config.config_week_day[i].name for i in game_config.config_week_day]
+        weekday_text_list = [
+            game_config.config_week_day[i].name for i in game_config.config_week_day
+        ]
         character_data: game_type.Character = cache.character_data[0]
         if cache.game_time > 0:
             now_date = datetime.datetime.fromtimestamp(cache.game_time, game_time.time_zone)
@@ -132,7 +134,11 @@ class StudentTimeTablePanel:
                     end_hour = course_end_time[:-2]
                     course_end_time_text = f"{end_hour}:{end_minute}"
                     now_time_judge = 0
-                    if times_judge and self.now_week == now_date_week and now_time_value < course_time_config.end_time:
+                    if (
+                        times_judge
+                        and self.now_week == now_date_week
+                        and now_time_value < course_time_config.end_time
+                    ):
                         now_time_judge = 1
                         times_judge = 0
                     if not times:
@@ -158,9 +164,9 @@ class StudentTimeTablePanel:
                         times_text += _("(当前)")
                     if (
                         times
-                        in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][
-                            self.now_week
-                        ]
+                        in cache.class_timetable_teacher_data[school_id][phase][
+                            character_data.classroom
+                        ][self.now_week]
                     ):
                         teacher_id = cache.class_timetable_teacher_data[school_id][phase][
                             character_data.classroom
