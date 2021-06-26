@@ -1108,7 +1108,15 @@ def handle_interrupt_target_activity(
                 settle_draw = settle_behavior.handle_settle_behavior(
                     target_data.cid, character_data.behavior.start_time
                 )
-                settle_draw.draw()
+                if settle_draw is not None:
+                    name_draw = draw.NormalDraw()
+                    name_draw.text = "\n" + target_data.name + ": "
+                    name_draw.width = window_width
+                    name_draw.draw()
+                    settle_draw.draw()
+                    line_feed = draw.NormalDraw()
+                    line_feed.text = "\n"
+                    line_feed.draw()
 
 
 @settle_behavior.add_settle_behavior_effect(
