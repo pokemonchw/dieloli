@@ -1,7 +1,15 @@
 import datetime
 from types import FunctionType
 from Script.UI.Moudle import panel, draw
-from Script.Core import get_text, game_type, cache_control, text_handle, py_cmd, constant, flow_handle
+from Script.Core import (
+    get_text,
+    game_type,
+    cache_control,
+    text_handle,
+    py_cmd,
+    constant,
+    flow_handle,
+)
 from Script.Config import game_config, normal_config
 from Script.Design import character_move, attr_text, game_time
 
@@ -49,8 +57,12 @@ class CharacterStatusListPanel:
         title_draw = draw.TitleLineDraw(_("Alpha监控台"), self.width)
         panel_type_list = [_("存活"), _("死亡")]
         panel_data = [
-            panel.PageHandlePanel(self.live_list, SeeCharacterStatusDraw, 10, 1, window_width, 1, 1, 0),
-            panel.PageHandlePanel(self.dead_list, SeeCharacterStatusDraw, 10, 1, window_width, 1, 1, 0),
+            panel.PageHandlePanel(
+                self.live_list, SeeCharacterStatusDraw, 10, 1, window_width, 1, 1, 0
+            ),
+            panel.PageHandlePanel(
+                self.dead_list, SeeCharacterStatusDraw, 10, 1, window_width, 1, 1, 0
+            ),
         ]
         while 1:
             if cache.now_panel_id != constant.Panel.VIEW_CHARACTER_STATUS_LIST:

@@ -145,7 +145,9 @@ def create_random_npc() -> dict:
     生成随机npc数据模板
     """
     now_age_weight = random.randint(-1, age_weight_max - 1)
-    now_age_weight_regin = value_handle.get_next_value_for_list(now_age_weight, age_weight_regin_list)
+    now_age_weight_regin = value_handle.get_next_value_for_list(
+        now_age_weight, age_weight_regin_list
+    )
     age_weight_tem = age_weight_regin_data[now_age_weight_regin]
     random_npc_sex = get_rand_npc_sex()
     random_npc_name = attr_text.get_random_name_for_sex(random_npc_sex)
@@ -241,12 +243,14 @@ def init_character_dormitory():
         "Man": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
-            if cache.character_data[character_id].age <= 18 and cache.character_data[character_id].sex == 0
+            if cache.character_data[character_id].age <= 18
+            and cache.character_data[character_id].sex == 0
         },
         "Woman": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
-            if cache.character_data[character_id].age <= 18 and cache.character_data[character_id].sex == 1
+            if cache.character_data[character_id].age <= 18
+            and cache.character_data[character_id].sex == 1
         },
         "Other": {
             character_id: cache.character_data[character_id].age
@@ -276,7 +280,9 @@ def init_character_dormitory():
     character_sex_data["Teacher"] = [
         k[0] for k in sorted(character_sex_data["Teacher"].items(), key=lambda x: x[1])
     ]
-    teacher_dormitory = {x: 0 for x in sorted(constant.place_data["TeacherDormitory"], key=lambda x: x[0])}
+    teacher_dormitory = {
+        x: 0 for x in sorted(constant.place_data["TeacherDormitory"], key=lambda x: x[0])
+    }
     male_dormitory = {
         key: constant.place_data[key] for key in constant.place_data if "MaleDormitory" in key
     }
@@ -287,7 +293,9 @@ def init_character_dormitory():
         x: 0 for j in [k[1] for k in sorted(male_dormitory.items(), key=lambda x: x[0])] for x in j
     }
     female_dormitory = {
-        x: 0 for j in [k[1] for k in sorted(female_dormitory.items(), key=lambda x: x[0])] for x in j
+        x: 0
+        for j in [k[1] for k in sorted(female_dormitory.items(), key=lambda x: x[0])]
+        for x in j
     }
     basement = {x: 0 for x in constant.place_data["Basement"]}
     male_dormitoryMax = len(male_dormitory.keys())
@@ -355,7 +363,9 @@ def add_favorability(
             len(target_data.favorability) > target_data.nature[1]
             and character_id not in target_data.favorability
         ):
-            value_dict = dict(zip(target_data.favorability.values(), target_data.favorability.keys()))
+            value_dict = dict(
+                zip(target_data.favorability.values(), target_data.favorability.keys())
+            )
             now_value = min(value_dict.keys())
             now_key = value_dict[now_value]
             del target_data.favorability[now_key]

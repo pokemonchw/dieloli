@@ -69,7 +69,10 @@ class SeeCharacterPutOnClothingListPanel:
                     now_text = text_handle.align(now_text, "center", text_width=now_width)
                     now_text = f"{now_id_text}{now_text}"
                     now_draw = draw.Button(
-                        now_text, str(now_id), cmd_func=self.see_clothing_list, args=(clothing_type,)
+                        now_text,
+                        str(now_id),
+                        cmd_func=self.see_clothing_list,
+                        args=(clothing_type,),
                     )
                     self.return_list.append(str(now_id))
                 else:
@@ -189,7 +192,9 @@ class ClothingInfoDrawPanel:
         """ 绘制的文本列表 """
 
     def draw(self):
-        self.text_list[1] = text_handle.align(self.text_list[1], "center", 0, 1, self.width - self.id_width)
+        self.text_list[1] = text_handle.align(
+            self.text_list[1], "center", 0, 1, self.width - self.id_width
+        )
         text_width = text_handle.get_text_index(self.text_list[0])
         if text_width < self.id_width:
             self.text_list[0] += " " * (self.id_width - text_width)
@@ -300,7 +305,9 @@ class ChangeClothingDraw:
         now_id_text = ""
         now_id_text = text_handle.id_index(self.button_id)
         fix_width = self.width - len(now_id_text)
-        self.clothing_data: game_type.Clothing = character_data.clothing[self.clothing_type][self.text]
+        self.clothing_data: game_type.Clothing = character_data.clothing[self.clothing_type][
+            self.text
+        ]
         value_dict = {
             _("可爱"): self.clothing_data.sweet,
             _("性感"): self.clothing_data.sexy,
@@ -321,7 +328,9 @@ class ChangeClothingDraw:
         ):
             wear_text = _("(已穿戴)")
         clothing_config = game_config.config_clothing_tem[self.clothing_data.tem_id]
-        clothing_name = f"{self.clothing_data.evaluation}{describe}{clothing_config.name}{wear_text}"
+        clothing_name = (
+            f"{self.clothing_data.evaluation}{describe}{clothing_config.name}{wear_text}"
+        )
         fix_width -= text_handle.get_text_index(clothing_name)
         value_text = ""
         for value_id in value_dict:

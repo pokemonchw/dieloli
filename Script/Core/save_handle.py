@@ -74,7 +74,9 @@ def establish_save(save_id: str):
         }
         data_queue = multiprocessing.Queue()
         data_queue.put(data)
-        now_process = multiprocessing.Process(target=establish_save_windows, args=(save_id, data_queue))
+        now_process = multiprocessing.Process(
+            target=establish_save_windows, args=(save_id, data_queue)
+        )
         now_process.start()
         now_process.join()
 

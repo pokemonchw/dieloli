@@ -292,7 +292,9 @@ def init_restaurant_data():
             break
 
 
-def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type: str) -> Dict[str, Set]:
+def get_character_food_bag_type_list_buy_food_type(
+    character_id: int, food_type: str
+) -> Dict[str, Set]:
     """
     获取角色背包内指定类型的食物种类
     Keyword arguments:
@@ -344,23 +346,23 @@ def get_character_food_bag_type_list_buy_food_type(character_id: int, food_type:
                     food_list.setdefault(food_name, set())
                     food_list[food_name].add(food_uid)
         elif food_type == _("水果") and food_data.recipe == -1:
-                food_config = game_config.config_food[food_data.id]
-                if food_config.fruit:
-                    food_name = food_config.name
-                    food_list.setdefault(food_name, set())
-                    food_list[food_name].add(food_uid)
+            food_config = game_config.config_food[food_data.id]
+            if food_config.fruit:
+                food_name = food_config.name
+                food_list.setdefault(food_name, set())
+                food_list[food_name].add(food_uid)
         elif food_type == _("食材") and food_data.recipe == -1:
-                food_config = game_config.config_food[food_data.id]
-                if food_config.cook:
-                    food_name = food_config.name
-                    food_list.setdefault(food_name, set())
-                    food_list[food_name].add(food_uid)
+            food_config = game_config.config_food[food_data.id]
+            if food_config.cook:
+                food_name = food_config.name
+                food_list.setdefault(food_name, set())
+                food_list[food_name].add(food_uid)
         elif food_type == _("调料") and food_data.recipe == -1:
-                food_config = game_config.config_food[food_data.id]
-                if food_config.seasoning:
-                    food_name = food_config.name
-                    food_list.setdefault(food_name, set())
-                    food_list[food_name].add(food_uid)
+            food_config = game_config.config_food[food_data.id]
+            if food_config.seasoning:
+                food_name = food_config.name
+                food_list.setdefault(food_name, set())
+                food_list[food_name].add(food_uid)
     return food_list
 
 
@@ -399,7 +401,9 @@ def get_restaurant_food_type_list_buy_food_type(food_type: str) -> Dict[uuid.UUI
                         28 in food_feel_data
                         and (not food_config.fruit)
                         and food_config.eat
-                        and ((27 not in food_feel_data) or (food_feel_data[28] > food_feel_data[27]))
+                        and (
+                            (27 not in food_feel_data) or (food_feel_data[28] > food_feel_data[27])
+                        )
                     ) and food_config.liquid:
                         food_list[food_id] = food_config.name
             else:

@@ -113,7 +113,9 @@ def get_map_system_path_str_for_list(now_list: list) -> str:
     return os.sep.join(now_list)
 
 
-def get_path_finding(map_path_str: str, now_node: str, target_node: str) -> (str, game_type.TargetPath):
+def get_path_finding(
+    map_path_str: str, now_node: str, target_node: str
+) -> (str, game_type.TargetPath):
     """
     查询寻路路径
     Keyword arguments:
@@ -154,7 +156,9 @@ def get_scene_to_scene_map_list(now_scene_path: list, target_scene_path: list) -
     if scene_affiliation == "nobelonged":
         common_map = get_common_map_for_scene_path(now_scene_path, target_scene_path)
         now_scene_to_common_map = get_map_hierarchy_list_for_scene_path(now_scene_path, common_map)
-        target_scene_to_common_map = get_map_hierarchy_list_for_scene_path(target_scene_path, common_map)
+        target_scene_to_common_map = get_map_hierarchy_list_for_scene_path(
+            target_scene_path, common_map
+        )
         common_map_to_target_scene = value_handle.reverse_array_list(target_scene_to_common_map)
         return "", now_scene_to_common_map + common_map_to_target_scene[1:]
 
@@ -243,8 +247,11 @@ def judge_scene_affiliation(now_scene_path: list, target_scene_path: list) -> st
     target_scene_path -- 目标场景路径
     """
     judge = 1
-    for index,_unused in enumerate(now_scene_path):
-        if len(target_scene_path) - 1 >= index and now_scene_path[index] != target_scene_path[index]:
+    for index, _unused in enumerate(now_scene_path):
+        if (
+            len(target_scene_path) - 1 >= index
+            and now_scene_path[index] != target_scene_path[index]
+        ):
             judge = 0
             break
         if index > len(target_scene_path) - 1:
@@ -445,7 +452,9 @@ def init_scene_edge_path_data():
                     map_path, now_map_scene_id, target_map_scene_id
                 )
             else:
-                _, _, now_move_target, now_move_time = difference_map_move(now_position, target_scene)
+                _, _, now_move_target, now_move_time = difference_map_move(
+                    now_position, target_scene
+                )
             scene_path_edge[now_position_str][target_scene_str] = [now_move_target, now_move_time]
     with open(scene_path_edge_path, "w") as path_edge_file:
         json.dump(scene_path_edge, path_edge_file)

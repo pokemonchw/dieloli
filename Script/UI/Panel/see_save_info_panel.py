@@ -132,7 +132,9 @@ class SaveInfoDraw:
     def draw(self):
         """绘制对象"""
         if self.is_button and (self.save_exist_judge or self.write_save):
-            now_draw = draw.Button(self.draw_text, self.button_return, cmd_func=self.draw_save_handle)
+            now_draw = draw.Button(
+                self.draw_text, self.button_return, cmd_func=self.draw_save_handle
+            )
         else:
             now_draw = draw.NormalDraw()
             now_draw.text = self.draw_text

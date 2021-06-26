@@ -101,7 +101,9 @@ def handle_add_interaction_favoravility(
             return
         change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
         target_change = change_data.target_change[target_data.cid]
-        add_favorability = character.calculation_favorability(character_id, target_data.cid, add_time)
+        add_favorability = character.calculation_favorability(
+            character_id, target_data.cid, add_time
+        )
         character_handle.add_favorability(
             character_id, target_data.cid, add_favorability, target_change, now_time
         )
@@ -272,7 +274,9 @@ def handle_add_social_favorability(
         ):
             change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
             target_change = change_data.target_change[target_data.cid]
-            add_favorability = character.calculation_favorability(character_id, target_data.cid, add_time)
+            add_favorability = character.calculation_favorability(
+                character_id, target_data.cid, add_time
+            )
             add_favorability *= target_data.social_contact_data[character_id]
             if add_favorability:
                 character_handle.add_favorability(
@@ -309,7 +313,9 @@ def handle_add_intimacy_favorability(
         social = 0
         if character_id in target_data.social_contact_data:
             social = target_data.social_contact_data[character_id]
-        change_data.target_change.setdefault(character_data.target_character_id, game_type.TargetChange())
+        change_data.target_change.setdefault(
+            character_data.target_character_id, game_type.TargetChange()
+        )
         target_change = change_data.target_change[target_data.cid]
         if social >= 2:
             add_favorability += add_favorability_coefficient * social
@@ -360,7 +366,9 @@ def handle_add_intimate_favorability(
         social = 0
         if character_id in target_data.social_contact_data:
             social = target_data.social_contact_data[character_id]
-        change_data.target_change.setdefault(character_data.target_character_id, game_type.TargetChange())
+        change_data.target_change.setdefault(
+            character_data.target_character_id, game_type.TargetChange()
+        )
         target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
         if social >= 3:
@@ -620,8 +628,12 @@ def handle_add_small_mouth_happy_experience(
         )
         character_data.knowledge.setdefault(9, 0)
         target_data.knowledge.setdefault(9, 0)
-        character_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.knowledge[9])
-        target_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+        character_happy *= 1 + attr_calculation.get_experience_level_weight(
+            target_data.knowledge[9]
+        )
+        target_happy *= 1 + attr_calculation.get_experience_level_weight(
+            character_data.knowledge[9]
+        )
         character_data.status[0] += character_happy
         target_data.status[0] += target_happy
         change_data.status.setdefault(0, 0)
@@ -657,7 +669,9 @@ def handle_first_kiss(
             character_data.first_kiss = target_data.cid
             if (not character_id) or (not target_data.cid):
                 now_draw = draw.NormalDraw()
-                now_draw.text = _("{character_name}失去了初吻\n").format(character_name=character_data.name)
+                now_draw.text = _("{character_name}失去了初吻\n").format(
+                    character_name=character_data.name
+                )
                 now_draw.width = window_width
                 now_draw.draw()
         if target_data.first_kiss == -1:
@@ -755,7 +769,9 @@ def handle_add_medium_mana_point(
     change_data.mana_point += add_mana_point
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_CHEST_SEX_EXPERIENCE)
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.TARGET_ADD_SMALL_CHEST_SEX_EXPERIENCE
+)
 def handle_target_add_small_chest_sex_experience(
     character_id: int,
     add_time: int,
@@ -818,7 +834,9 @@ def handle_target_add_small_mouth_happy(
             + target_data.status[1] / 100
         )
         character_data.knowledge.setdefault(9, 0)
-        target_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+        target_happy *= 1 + attr_calculation.get_experience_level_weight(
+            character_data.knowledge[9]
+        )
         target_data.status[1] += target_happy
         change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
         target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
@@ -826,7 +844,9 @@ def handle_target_add_small_mouth_happy(
         target_change.status[1] += target_happy
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_PENIS_SEX_EXPERIENCE)
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.TARGET_ADD_SMALL_PENIS_SEX_EXPERIENCE
+)
 def handle_target_add_small_penis_sex_experience(
     character_id: int,
     add_time: int,
@@ -893,7 +913,9 @@ def handle_target_add_small_penis_happy(
             + target_data.status[5] / 100
         )
         character_data.knowledge.setdefault(9, 0)
-        target_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+        target_happy *= 1 + attr_calculation.get_experience_level_weight(
+            character_data.knowledge[9]
+        )
         target_data.status[5] += target_happy
         change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
         target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
@@ -970,7 +992,9 @@ def handle_target_add_small_clitoris_happy(
             + target_data.status[3] / 100
         )
         character_data.knowledge.setdefault(9, 0)
-        target_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+        target_happy *= 1 + attr_calculation.get_experience_level_weight(
+            character_data.knowledge[9]
+        )
         target_data.status[3] += target_happy
         change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
         target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
@@ -1066,7 +1090,10 @@ def handle_interrupt_target_activity(
         return
     if target_data.state == constant.CharacterStatus.STATUS_DEAD:
         return
-    if target_data.behavior.behavior_id and target_data.behavior.start_time <= character_data.behavior.start_time:
+    if (
+        target_data.behavior.behavior_id
+        and target_data.behavior.start_time <= character_data.behavior.start_time
+    ):
         target_end_time = game_time.get_sub_date(
             target_data.behavior.duration, old_date=target_data.behavior.start_time
         )
@@ -1084,7 +1111,9 @@ def handle_interrupt_target_activity(
                 settle_draw.draw()
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_ELOQUENCE_EXPERIENCE)
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.TARGET_ADD_SMALL_ELOQUENCE_EXPERIENCE
+)
 def handle_target_add_small_eloquence_experience(
     character_id: int,
     add_time: int,
@@ -1112,7 +1141,9 @@ def handle_target_add_small_eloquence_experience(
     target_data.knowledge[12] += experience
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_ELOQUENCE)
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_ELOQUENCE
+)
 def handle_target_add_favorability_for_eloquence(
     character_id: int,
     add_time: int,
@@ -1137,7 +1168,9 @@ def handle_target_add_favorability_for_eloquence(
         return
     character_data.knowledge.setdefault(12, 0)
     add_favorability = character_data.knowledge[12] / 10
-    add_favorability = character.calculation_favorability(character_id, target_data.cid, add_favorability)
+    add_favorability = character.calculation_favorability(
+        character_id, target_data.cid, add_favorability
+    )
     if add_favorability:
         change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
         target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
@@ -1146,7 +1179,9 @@ def handle_target_add_favorability_for_eloquence(
         )
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_ATTEND_CLASS_EXPERIENCE)
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.ADD_SMALL_ATTEND_CLASS_EXPERIENCE
+)
 def handle_add_small_attend_class_experience(
     character_id: int,
     add_time: int,
@@ -1234,7 +1269,9 @@ def handle_add_student_course_experience_for_in_class_room(
                 now_character_data.language[language] += experience
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_PERFORMANCE)
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_PERFORMANCE
+)
 def handle_target_add_favorability_for_performance(
     character_id: int,
     add_time: int,
@@ -1273,7 +1310,9 @@ def handle_target_add_favorability_for_performance(
         )
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_SING)
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_SING
+)
 def handle_target_add_favorability_for_sing(
     character_id: int,
     add_time: int,
@@ -1303,7 +1342,9 @@ def handle_target_add_favorability_for_sing(
         return
     character_data.knowledge.setdefault(15, 0)
     add_favorability = character_data.knowledge[15] / 10
-    add_favorability = character.calculation_favorability(character_id, target_data.cid, add_favorability)
+    add_favorability = character.calculation_favorability(
+        character_id, target_data.cid, add_favorability
+    )
     if add_favorability:
         change_data.target_change.setdefault(target_id, game_type.TargetChange())
         target_change: game_type.TargetChange = change_data.target_change[target_id]
@@ -1312,7 +1353,9 @@ def handle_target_add_favorability_for_sing(
         )
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_PLAY_MUSIC)
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.TARGET_ADD_FAVORABILITY_FOR_PLAY_MUSIC
+)
 def handle_target_add_favorability_for_play_music(
     character_id: int,
     add_time: int,
@@ -1342,7 +1385,9 @@ def handle_target_add_favorability_for_play_music(
         return
     character_data.knowledge.setdefault(25, 0)
     add_favorability = character_data.knowledge[25] / 10
-    add_favorability = character.calculation_favorability(character_id, target_data.cid, add_favorability)
+    add_favorability = character.calculation_favorability(
+        character_id, target_data.cid, add_favorability
+    )
     if add_favorability:
         change_data.target_change.setdefault(target_id, game_type.TargetChange())
         target_change: game_type.TargetChange = change_data.target_change[target_id]
@@ -1384,7 +1429,7 @@ def handle_target_add_favorability_for_target_interest(
     now_add_favorability = 0
     for knowledge in target_data.knowledge_interest:
         if target_data.knowledge_interest[knowledge] > 1 and knowledge in character_data.knowledge:
-                now_add_favorability += character_data.knowledge[knowledge] / 10
+            now_add_favorability += character_data.knowledge[knowledge] / 10
     for language in target_data.language_interest:
         if target_data.language_interest[language] > 1 and language in character_data.language:
             now_add_favorability += character_data.language[language] / 10
@@ -1459,7 +1504,9 @@ def handle_add_small_penis_happy(
     change_data.status[5] += character_happy
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_CLITORIS_SEX_EXPERIENCE)
+@settle_behavior.add_settle_behavior_effect(
+    constant.BehaviorEffect.ADD_SMALL_CLITORIS_SEX_EXPERIENCE
+)
 def handle_add_small_clitoris_sex_experience(
     character_id: int, add_time: int, change_data: game_type.CharacterStatusChange, now_time: int
 ):

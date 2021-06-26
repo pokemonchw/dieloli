@@ -65,7 +65,9 @@ class InScenePanel:
             character_set = scene_data.character_list.copy()
             character_set.remove(0)
             if cache.is_collection:
-                character_list = [i for i in character_set if i in character_data.collection_character]
+                character_list = [
+                    i for i in character_set if i in character_data.collection_character
+                ]
             else:
                 character_list = list(character_set)
             live_character_dict = {}
@@ -74,12 +76,16 @@ class InScenePanel:
                 now_character_data: game_type.Character = cache.character_data[now_character]
                 if now_character_data.state == constant.CharacterStatus.STATUS_DEAD:
                     if now_character in character_data.favorability:
-                        dead_character_dict[now_character] = character_data.favorability[now_character]
+                        dead_character_dict[now_character] = character_data.favorability[
+                            now_character
+                        ]
                     else:
                         dead_character_dict[now_character] = 0
                 else:
                     if now_character in character_data.favorability:
-                        live_character_dict[now_character] = character_data.favorability[now_character]
+                        live_character_dict[now_character] = character_data.favorability[
+                            now_character
+                        ]
                     else:
                         live_character_dict[now_character] = 0
             live_character_dict = value_handle.sorted_dict_for_values(live_character_dict)
@@ -141,7 +147,9 @@ class InScenePanel:
                 target_head_draw_list = [y for x in target_head_draw.draw_list for y in x]
                 target_head_draw_list[0].text += " " + target_head_draw_list[2].text
                 del target_head_draw_list[2]
-                character_info_draw_list = list(zip(character_head_draw_list, target_head_draw_list))
+                character_info_draw_list = list(
+                    zip(character_head_draw_list, target_head_draw_list)
+                )
             else:
                 character_head_draw = see_character_info_panel.CharacterInfoHead(
                     character_data.cid, self.width
@@ -291,7 +299,8 @@ class SeeInstructPanel:
         line.draw()
         fix_draw = draw.NormalDraw()
         fix_width = int(
-            (self.width - int(self.width / len(cache.instruct_filter)) * len(cache.instruct_filter)) / 2
+            (self.width - int(self.width / len(cache.instruct_filter)) * len(cache.instruct_filter))
+            / 2
         )
         fix_draw.width = fix_width
         fix_draw.text = " " * fix_width

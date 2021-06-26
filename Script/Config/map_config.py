@@ -78,7 +78,9 @@ def load_dir_now(data_path: str):
                     now_map_data.map_path = get_map_system_path_str(
                         get_map_system_path_for_path(now_path)
                     )
-                    with open(os.path.join(data_path, "Map"), "r", encoding="utf-8") as now_read_file:
+                    with open(
+                        os.path.join(data_path, "Map"), "r", encoding="utf-8"
+                    ) as now_read_file:
                         draw_data = now_read_file.read()
                         now_map_data.map_draw = get_print_map_data(draw_data)
                     load_map_data = json_handle.load_json(now_path)
@@ -128,7 +130,7 @@ def get_print_map_data(map_draw: str) -> game_type.MapDraw:
     """
     map_y_list = map_draw.split("\n")
     map_draw_data = game_type.MapDraw()
-    for map_x_list_id,_unused in enumerate(map_y_list):
+    for map_x_list_id, _unused in enumerate(map_y_list):
         set_map_button = False
         map_x_list = map_y_list[map_x_list_id]
         now_draw_list = game_type.MapDrawLine()

@@ -130,7 +130,10 @@ class SeeFoodListByFoodNameDraw:
                 index_text = text_handle.id_index(button_id)
                 button_text = f"{index_text}{self.text}"
                 name_draw = draw.LeftButton(
-                    button_text, self.button_return, self.width, cmd_func=self.see_food_shop_food_list
+                    button_text,
+                    self.button_return,
+                    self.width,
+                    cmd_func=self.see_food_shop_food_list,
                 )
             else:
                 button_text = f"[{self.text}]"
@@ -229,7 +232,9 @@ class EatFoodByFoodNameDraw:
         )
         index_text = text_handle.id_index(button_id)
         button_text = f"{index_text}{food_name}"
-        name_draw = draw.LeftButton(button_text, self.button_return, self.width, cmd_func=self.eat_food)
+        name_draw = draw.LeftButton(
+            button_text, self.button_return, self.width, cmd_func=self.eat_food
+        )
         self.now_draw = name_draw
         """ 绘制的对象 """
 

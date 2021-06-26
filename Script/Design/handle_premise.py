@@ -606,7 +606,10 @@ def handle_target_average_stature_similar(character_id: int) -> int:
     age_tem = attr_calculation.judge_age_group(target_data.age)
     if age_tem in cache.average_bodyfat_by_age:
         average_bodyfat = cache.average_bodyfat_by_age[age_tem][target_data.sex]
-        if target_data.bodyfat >= average_bodyfat * 0.95 and target_data.bodyfat <= average_bodyfat * 1.05:
+        if (
+            target_data.bodyfat >= average_bodyfat * 0.95
+            and target_data.bodyfat <= average_bodyfat * 1.05
+        ):
             return 1
     return 0
 
@@ -856,7 +859,11 @@ def handle_no_wear_underwear(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 1 not in character_data.put_on or character_data.put_on[1] is None or character_data.put_on[1] == "":
+    if (
+        1 not in character_data.put_on
+        or character_data.put_on[1] is None
+        or character_data.put_on[1] == ""
+    ):
         return 1
     return 0
 
@@ -871,7 +878,11 @@ def handle_no_wear_underpants(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 7 not in character_data.put_on or character_data.put_on[7] is None or character_data.put_on[7] == "":
+    if (
+        7 not in character_data.put_on
+        or character_data.put_on[7] is None
+        or character_data.put_on[7] == ""
+    ):
         return 1
     return 0
 
@@ -886,7 +897,11 @@ def handle_no_wear_bra(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 6 not in character_data.put_on or character_data.put_on[6] is None or character_data.put_on[6] == "":
+    if (
+        6 not in character_data.put_on
+        or character_data.put_on[6] is None
+        or character_data.put_on[6] == ""
+    ):
         return 1
     return 0
 
@@ -901,7 +916,11 @@ def handle_no_wear_pants(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 2 not in character_data.put_on or character_data.put_on[2] is None or character_data.put_on[2] == "":
+    if (
+        2 not in character_data.put_on
+        or character_data.put_on[2] is None
+        or character_data.put_on[2] == ""
+    ):
         return 1
     return 0
 
@@ -916,7 +935,11 @@ def handle_no_wear_skirt(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 3 not in character_data.put_on or character_data.put_on[3] is None or character_data.put_on[3] == "":
+    if (
+        3 not in character_data.put_on
+        or character_data.put_on[3] is None
+        or character_data.put_on[3] == ""
+    ):
         return 1
     return 0
 
@@ -931,7 +954,11 @@ def handle_no_wear_shoes(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 4 not in character_data.put_on or character_data.put_on[4] is None or character_data.put_on[4] == "":
+    if (
+        4 not in character_data.put_on
+        or character_data.put_on[4] is None
+        or character_data.put_on[4] == ""
+    ):
         return 1
     return 0
 
@@ -946,7 +973,11 @@ def handle_no_wear_socks(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if 5 not in character_data.put_on or character_data.put_on[5] is None or character_data.put_on[5] == "":
+    if (
+        5 not in character_data.put_on
+        or character_data.put_on[5] is None
+        or character_data.put_on[5] == ""
+    ):
         return 1
     return 0
 
@@ -2074,7 +2105,9 @@ def handle_approaching_class_time(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    now_time: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_time: datetime.datetime = datetime.datetime.fromtimestamp(
+        character_data.behavior.start_time
+    )
     now_time_value = now_time.hour * 100 + now_time.minute
     next_time = 0
     if character_data.age <= 18:
@@ -2085,13 +2118,19 @@ def handle_approaching_class_time(character_id: int) -> int:
             school_id = 2
         for session_id in game_config.config_school_session_data[school_id]:
             session_config = game_config.config_school_session[session_id]
-            if session_config.start_time > now_time_value and next_time == 0 or session_config.start_time < next_time:
+            if (
+                session_config.start_time > now_time_value
+                and next_time == 0
+                or session_config.start_time < next_time
+            ):
                 next_time = session_config.start_time
         if next_time == 0:
             return 0
     if character_id in cache.teacher_school_timetable:
         now_week = now_time.weekday()
-        timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
+        timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[
+            character_id
+        ]
         for timetable in timetable_list:
             if timetable.week_day != now_week:
                 continue
@@ -2104,7 +2143,7 @@ def handle_approaching_class_time(character_id: int) -> int:
     add_time = next_value - now_value
     if add_time > 30:
         return 0
-    add_time = max(add_time,1)
+    add_time = max(add_time, 1)
     return 3000 / (add_time * 10)
 
 
@@ -2171,7 +2210,10 @@ def handle_teacher_no_in_classroom(character_id: int) -> int:
                     next_time = session_config.end_time
                     now_course_index = session_config.session
                 continue
-            if session_config.start_time >= now_time_value and session_config.start_time < next_time:
+            if (
+                session_config.start_time >= now_time_value
+                and session_config.start_time < next_time
+            ):
                 next_time = session_config.start_time
                 now_course_index = session_config.session
             elif session_config.end_time >= now_time_value and session_config.end_time < next_time:
@@ -2183,16 +2225,21 @@ def handle_teacher_no_in_classroom(character_id: int) -> int:
             return 1
         if character_data.classroom not in cache.class_timetable_teacher_data[school_id][phase]:
             return 1
-        if now_week not in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom]:
+        if (
+            now_week
+            not in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom]
+        ):
             return 1
         if (
             now_course_index
-            not in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][now_week]
+            not in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][
+                now_week
+            ]
         ):
             return 1
-        now_teacher = cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][
-            now_week
-        ][now_course_index]
+        now_teacher = cache.class_timetable_teacher_data[school_id][phase][
+            character_data.classroom
+        ][now_week][now_course_index]
         if now_teacher not in classroom.character_list:
             return 1
         return 0
@@ -2266,7 +2313,9 @@ def handle_have_students_in_classroom(character_id: int) -> int:
         return 0
     if character_id not in cache.teacher_school_timetable:
         return 0
-    now_date: datetime.datetime = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_date: datetime.datetime = datetime.datetime.fromtimestamp(
+        character_data.behavior.start_time
+    )
     now_week = now_date.weekday()
     now_classroom = []
     now_time = 0

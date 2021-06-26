@@ -46,7 +46,10 @@ class NormalDraw:
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                    if (
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                        < self.width
+                    ):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -64,7 +67,10 @@ class WaitDraw(NormalDraw):
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                    if (
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                        < self.width
+                    ):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -87,7 +93,10 @@ class LineFeedWaitDraw(NormalDraw):
                 now_text = ""
                 if now_width > 0:
                     for i in text:
-                        if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < now_width:
+                        if (
+                            text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                            < now_width
+                        ):
                             now_text += i
                         break
                     now_text = now_text[:-2] + "~"
@@ -290,7 +299,10 @@ class Button:
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                    if (
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                        < self.width
+                    ):
                         now_text += i
                         continue
                     break
@@ -381,7 +393,10 @@ class CenterButton:
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                    if (
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                        < self.width
+                    ):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -419,7 +434,10 @@ class LeftButton(CenterButton):
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                    if (
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                        < self.width
+                    ):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -548,7 +566,9 @@ class LittleTitleLineDraw:
     title_style -- 标题样式
     """
 
-    def __init__(self, title: str, width: int, line: str = "=", style="standard", title_style="sontitle"):
+    def __init__(
+        self, title: str, width: int, line: str = "=", style="standard", title_style="sontitle"
+    ):
         """初始化绘制对象"""
         self.title = title
         """ 标题 """
@@ -598,7 +618,10 @@ class CenterDraw(NormalDraw):
             now_text = ""
             if self.width > 0:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                    if (
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                        < self.width
+                    ):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -663,7 +686,10 @@ class RightDraw(NormalDraw):
             now_text = ""
             if self.width:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                    if (
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                        < self.width
+                    ):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"
@@ -683,7 +709,10 @@ class LeftDraw(NormalDraw):
             now_text = ""
             if self.width:
                 for i in self.text:
-                    if text_handle.get_text_index(now_text) + text_handle.get_text_index(i) < self.width:
+                    if (
+                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
+                        < self.width
+                    ):
                         now_text += i
                     break
                 now_text = now_text[:-2] + "~"

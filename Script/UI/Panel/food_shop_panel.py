@@ -1,7 +1,15 @@
 from typing import Tuple
 from types import FunctionType
 from uuid import UUID
-from Script.Core import cache_control, game_type, get_text, flow_handle, text_handle, constant, py_cmd
+from Script.Core import (
+    cache_control,
+    game_type,
+    get_text,
+    flow_handle,
+    text_handle,
+    constant,
+    py_cmd,
+)
 from Script.Design import map_handle, cooking
 from Script.UI.Moudle import draw, panel
 from Script.Config import game_config, normal_config
@@ -41,7 +49,9 @@ class FoodShopPanel:
         scene_name = cache.scene_data[scene_position_str].scene_name
         title_draw = draw.TitleLineDraw(scene_name, self.width)
         food_type_list = [_("主食"), _("零食"), _("饮品"), _("水果"), _("食材"), _("调料")]
-        self.handle_panel = panel.PageHandlePanel([], SeeFoodListByFoodNameDraw, 10, 5, self.width, 1, 1, 0)
+        self.handle_panel = panel.PageHandlePanel(
+            [], SeeFoodListByFoodNameDraw, 10, 5, self.width, 1, 1, 0
+        )
         while 1:
             py_cmd.clr_cmd()
             food_name_list = list(
@@ -89,7 +99,9 @@ class FoodShopPanel:
         food_type -- 要切换的食物类型
         """
         self.now_panel = food_type
-        food_name_list = list(cooking.get_restaurant_food_type_list_buy_food_type(self.now_panel).items())
+        food_name_list = list(
+            cooking.get_restaurant_food_type_list_buy_food_type(self.now_panel).items()
+        )
         self.handle_panel = panel.PageHandlePanel(
             food_name_list, SeeFoodListByFoodNameDraw, 10, 5, self.width, 1, 1, 0
         )
@@ -130,7 +142,10 @@ class SeeFoodListByFoodNameDraw:
                 index_text = text_handle.id_index(button_id)
                 button_text = f"{index_text}{self.text}"
                 name_draw = draw.LeftButton(
-                    button_text, self.button_return, self.width, cmd_func=self.see_food_shop_food_list
+                    button_text,
+                    self.button_return,
+                    self.width,
+                    cmd_func=self.see_food_shop_food_list,
                 )
             else:
                 button_text = f"[{self.text}]"
@@ -238,7 +253,9 @@ class BuyFoodByFoodNameDraw:
         )
         index_text = text_handle.id_index(button_id)
         button_text = f"{index_text}{food_name}"
-        name_draw = draw.LeftButton(button_text, self.button_return, self.width, cmd_func=self.buy_food)
+        name_draw = draw.LeftButton(
+            button_text, self.button_return, self.width, cmd_func=self.buy_food
+        )
         self.now_draw = name_draw
         """ 绘制的对象 """
 

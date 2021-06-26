@@ -115,7 +115,10 @@ def get_character_school_phase(character_id: int) -> (int, int):
     character_data = cache.character_data[character_id]
     for school_id in game_config.config_school:
         school_config = game_config.config_school[school_id]
-        if character_data.age >= school_config.min_age and character_data.age <= school_config.max_age:
+        if (
+            character_data.age >= school_config.min_age
+            and character_data.age <= school_config.max_age
+        ):
             return school_id, character_data.age - school_config.min_age
     return 0, 0
 
@@ -165,12 +168,14 @@ def init_teacher_table():
                         now_course = class_time_table[day][i]
                         if (
                             now_course
-                            not in cache.classroom_teacher_data[f"Classroom_{phase_room_id}"][classroom]
+                            not in cache.classroom_teacher_data[f"Classroom_{phase_room_id}"][
+                                classroom
+                            ]
                         ):
                             continue
-                        for now_teacher in cache.classroom_teacher_data[f"Classroom_{phase_room_id}"][
-                            classroom
-                        ][now_course]:
+                        for now_teacher in cache.classroom_teacher_data[
+                            f"Classroom_{phase_room_id}"
+                        ][classroom][now_course]:
                             if now_teacher not in teacher_table:
                                 cache.character_data[now_teacher].officeroom = constant.place_data[
                                     f"Office_{phase_room_id}"
@@ -181,24 +186,26 @@ def init_teacher_table():
                                 cache.teacher_class_time_table.setdefault(day, {})
                                 cache.teacher_class_time_table[day].setdefault(school_id, {})
                                 cache.teacher_class_time_table[day][school_id].setdefault(phase, {})
-                                cache.teacher_class_time_table[day][school_id][phase].setdefault(i, {})
-                                cache.teacher_class_time_table[day][school_id][phase][i][now_teacher] = {
-                                    classroom: now_course
-                                }
+                                cache.teacher_class_time_table[day][school_id][phase].setdefault(
+                                    i, {}
+                                )
+                                cache.teacher_class_time_table[day][school_id][phase][i][
+                                    now_teacher
+                                ] = {classroom: now_course}
                                 cache.class_timetable_teacher_data.setdefault(school_id, {})
                                 cache.class_timetable_teacher_data[school_id].setdefault(phase, {})
                                 cache.class_timetable_teacher_data[school_id][phase].setdefault(
                                     classroom, {}
                                 )
-                                cache.class_timetable_teacher_data[school_id][phase][classroom].setdefault(
-                                    day, {}
-                                )
-                                cache.class_timetable_teacher_data[school_id][phase][classroom][day][
-                                    i
-                                ] = now_teacher
-                                teacher_timetable = game_type.TeacherTimeTable()
-                                teacher_timetable.class_room = map_handle.get_map_system_path_for_str(
+                                cache.class_timetable_teacher_data[school_id][phase][
                                     classroom
+                                ].setdefault(day, {})
+                                cache.class_timetable_teacher_data[school_id][phase][classroom][
+                                    day
+                                ][i] = now_teacher
+                                teacher_timetable = game_type.TeacherTimeTable()
+                                teacher_timetable.class_room = (
+                                    map_handle.get_map_system_path_for_str(classroom)
                                 )
                                 teacher_timetable.class_times = i
                                 teacher_timetable.course = now_course
@@ -211,7 +218,9 @@ def init_teacher_table():
                                 teacher_timetable.week_day = day
                                 teacher_timetable.end_time = now_config.end_time
                                 cache.teacher_school_timetable.setdefault(now_teacher, [])
-                                cache.teacher_school_timetable[now_teacher].append(teacher_timetable)
+                                cache.teacher_school_timetable[now_teacher].append(
+                                    teacher_timetable
+                                )
 
 
 def course_abmain_distribution():
@@ -247,9 +256,9 @@ def course_abmain_distribution():
                             continue
                         if course in teacher_course_data[teacher]:
                             continue
-                        cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][course].append(
-                            teacher
-                        )
+                        cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][
+                            course
+                        ].append(teacher)
                         teacher_data[teacher] += now_course_index
                         teacher_course_data[teacher].add(course)
                         break
@@ -291,9 +300,9 @@ def course_distribution_a():
                             continue
                         if course in teacher_course_data[teacher]:
                             continue
-                        cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][course].append(
-                            teacher
-                        )
+                        cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][
+                            course
+                        ].append(teacher)
                         teacher_data[teacher] += now_course_index
                         teacher_course_data[teacher].add(course)
                         break
@@ -315,7 +324,9 @@ def course_distribution_b():
         cache.classroom_teacher_data["Classroom_" + str(phase)] = {}
         for course in cache.course_data[school_id][school_phase]:
             now_course_index = cache.course_data[school_id][school_phase][course]
-            now_teacher_data = value_handle.sorted_dict_for_values(cache.teacher_course_experience[course])
+            now_teacher_data = value_handle.sorted_dict_for_values(
+                cache.teacher_course_experience[course]
+            )
             for classroom in classroom_list:
                 cache.classroom_teacher_data["Classroom_" + str(phase)].setdefault(classroom, {})
                 if cache.course_data[school_id][school_phase][course] <= 9:
@@ -329,9 +340,9 @@ def course_distribution_b():
                             continue
                         if course in teacher_course_data[teacher]:
                             continue
-                        cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][course].append(
-                            teacher
-                        )
+                        cache.classroom_teacher_data["Classroom_" + str(phase)][classroom][
+                            course
+                        ].append(teacher)
                         teacher_data[teacher] += now_course_index
                         teacher_course_data[teacher].add(course)
                         break
@@ -351,14 +362,22 @@ def init_phase_course_hour_experience():
             for course in course_data:
                 course_hour = course_data[course]
                 if course in game_config.config_course_knowledge_experience_data:
-                    knowledge_experience_data = game_config.config_course_knowledge_experience_data[course]
+                    knowledge_experience_data = game_config.config_course_knowledge_experience_data[
+                        course
+                    ]
                     for knowledge in knowledge_experience_data:
                         experience = knowledge_experience_data[knowledge] * course_hour * 38
                         phase_knownledge_experience[school_id][phase].setdefault(course, {})
-                        phase_knownledge_experience[school_id][phase][course].setdefault(knowledge, 0)
-                        phase_knownledge_experience[school_id][phase][course][knowledge] += experience
+                        phase_knownledge_experience[school_id][phase][course].setdefault(
+                            knowledge, 0
+                        )
+                        phase_knownledge_experience[school_id][phase][course][
+                            knowledge
+                        ] += experience
                 if course in game_config.config_course_language_experience_data:
-                    language_experience_data = game_config.config_course_language_experience_data[course]
+                    language_experience_data = game_config.config_course_language_experience_data[
+                        course
+                    ]
                     for language in language_experience_data:
                         experience = language_experience_data[language] * course_hour * 38
                         phase_language_experience[school_id][phase].setdefault(course, {})
@@ -383,14 +402,18 @@ def init_character_knowledge():
                 cache.teacher_course_experience[course].setdefault(i, 0)
                 for knowledge in game_config.config_course_knowledge_experience_data[course]:
                     if knowledge in character_data.knowledge:
-                        cache.teacher_course_experience[course][i] += character_data.knowledge[knowledge]
+                        cache.teacher_course_experience[course][i] += character_data.knowledge[
+                            knowledge
+                        ]
             for course in game_config.config_course_language_experience_data:
                 if course not in cache.teacher_course_experience:
                     cache.teacher_course_experience.setdefault(course, {})
                 cache.teacher_course_experience[course].setdefault(i, 0)
                 for language in game_config.config_course_language_experience_data[course]:
                     if language in character_data.language:
-                        cache.teacher_course_experience[course][i] += character_data.language[language]
+                        cache.teacher_course_experience[course][i] += character_data.language[
+                            language
+                        ]
 
 
 def init_teacher_knowledge(character_id: int):

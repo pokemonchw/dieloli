@@ -142,7 +142,9 @@ def get_rand_npc_birthday(age: int) -> int:
     return birthday
 
 
-def get_growth_height(now_age: int, expect_height: float, development_age: int, expect_age: int) -> dict:
+def get_growth_height(
+    now_age: int, expect_height: float, development_age: int, expect_age: int
+) -> dict:
     """
     计算每日身高增长量
     Keyword arguments:
@@ -295,7 +297,9 @@ def get_sex_experience(tem_name: int, sex: int) -> dict:
         organ_sex_experience_tem_id = game_config.config_sex_experience_tem_data[organ][
             sex_experience_tem_id
         ]
-        organ_sex_experience_tem = game_config.config_sex_experience_tem[organ_sex_experience_tem_id]
+        organ_sex_experience_tem = game_config.config_sex_experience_tem[
+            organ_sex_experience_tem_id
+        ]
         sex_experience_data[organ] = random.uniform(
             organ_sex_experience_tem.min_exp, organ_sex_experience_tem.max_exp
         )
