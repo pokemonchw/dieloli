@@ -165,11 +165,6 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     scene_data: game_type.Scene = cache.scene_data[scene_path_str]
     start_time = character_data.behavior.start_time
     end_time = start_time + 60 * character_data.behavior.duration
-    if (
-        character_data.target_character_id != character_id
-        and character_data.target_character_id not in scene_data.character_list
-    ):
-        end_time = now_time
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
     add_time = (end_time - start_time) / 60
     if not add_time:

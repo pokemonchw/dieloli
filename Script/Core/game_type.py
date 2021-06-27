@@ -489,8 +489,6 @@ class Character:
         """ 角色当前交互对象id """
         self.adv: int = 0
         """ 剧情npc校验 """
-        self.no_wear: bool = 0
-        """ 是否不想穿衣服 """
         self.first_kiss: int = -1
         """ 初吻对象 -1为无 """
         self.first_hand_in_hand: int = -1
