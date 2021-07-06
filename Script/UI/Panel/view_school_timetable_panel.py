@@ -184,7 +184,7 @@ class StudentTimeTablePanel:
                         now_text = [
                             times_text,
                             course_name,
-                            _("自习"),
+                            _("自习课"),
                             course_time_text,
                             course_end_time_text,
                         ]

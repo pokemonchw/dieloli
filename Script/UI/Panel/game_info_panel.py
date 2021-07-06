@@ -1,6 +1,6 @@
 from types import FunctionType
 from Script.UI.Moudle import draw
-from Script.Design import game_time, character
+from Script.Design import game_time, character, course
 from Script.Core import get_text, cache_control, game_type
 from Script.Config import game_config
 
@@ -72,14 +72,30 @@ class GameTimeInfoPanel:
         attend_class_draw.width = self.width - now_width
         now_draw.draw_list.append(attend_class_draw)
         now_width += len(attend_class_draw)
-        if character.judge_character_in_class_time(0):
-            now_attend_class = _("上课时间")
-            now_attend_class += " "
-            now_attend_class_draw = draw.NormalDraw()
-            now_attend_class_draw.text = now_attend_class
-            attend_class_draw.width = self.width - now_width
-            now_width += len(now_attend_class_draw)
-            now_draw.draw_list.append(now_attend_class_draw)
+        now_course_id = -1
+        attend_class_judge, school_id, now_week, session_id, now_course_id = character.judge_character_in_class_time(0)
+        if attend_class_judge:
+            character_data: game_type.Character = cache.character_data[0]
+            if character_data.age <= 18:
+                _unused, phase = course.get_character_school_phase(0)
+                cache.course_time_table_data[school_id].setdefault(phase,{})
+                cache.course_time_table_data[school_id][phase].setdefault(now_week,{})
+                if session_id in cache.course_time_table_data[school_id][phase][now_week]:
+                    now_course_id = cache.course_time_table_data[school_id][phase][now_week][session_id]
+            now_course_text = ""
+            if not session_id:
+                now_course_text = _("早读课")
+            elif now_course_id == -1:
+                now_course_text = _("自习课")
+            else:
+                now_course_text = game_config.config_course[now_course_id].name
+            now_course_text = f"({now_course_text})"
+            now_course_text += " "
+            course_draw = draw.NormalDraw()
+            course_draw.text = now_course_text
+            course_draw.width = self.width - now_width
+            now_draw.draw_list.append(course_draw)
+            now_width += len(course_draw)
         self.width = now_width
         now_draw.width = self.width
         self.now_draw: draw.NormalDraw = now_draw

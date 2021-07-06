@@ -788,3 +788,108 @@ def character_self_study(character_id: int):
     character_data.behavior.duration = 10
     character_data.behavior.course_id = now_course_id
     character_data.state = constant.CharacterStatus.STATUS_SELF_STUDY
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_UNDERWEAR)
+def character_undress_underwear(character_id: int):
+    """
+    角色脱掉上衣
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.put_on[1] = ""
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.WEAR_CLEAN_COAT)
+def character_wear_clean_coat(character_id: int):
+    """
+    角色穿着干净的外套
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 0 in character_data.clothing:
+        value_dict = {}
+        for clothing in character_data.clothing[0]:
+            clothing_data: game_type.Clothing = character_data.clothing[0][clothing]
+            value_dict[clothing_data.cleanliness] = clothing
+        now_value = max(value_dict.keys())
+        character_data.put_on[0] = value_dict[now_value]
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_COAT)
+def character_undress_coat(character_id: int):
+    """
+    角色脱掉外套
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.put_on[0] = ""
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_UNDERPANTS)
+def character_undress_underpants(character_id: int):
+    """
+    角色脱掉内裤
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.put_on[7] = ""
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_BRA)
+def character_undress_bra(character_id: int):
+    """
+    角色脱掉胸罩
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.put_on[6] = ""
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_PANTS)
+def character_undress_pants(character_id: int):
+    """
+    角色脱掉裤子
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.put_on[2] = ""
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_SKIRT)
+def character_undress_skirt(character_id: int):
+    """
+    角色脱掉裙子
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.put_on[3] = ""
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_SHOES)
+def character_undress_shoes(character_id: int):
+    """
+    角色脱掉鞋子
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.put_on[4] = ""
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_SOCKS)
+def character_undress_socks(character_id: int):
+    """
+    角色脱掉袜子
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.put_on[5] = ""

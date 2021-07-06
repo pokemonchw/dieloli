@@ -151,13 +151,17 @@ def calculation_favorability(character_id: int, target_character_id: int, favora
     return favorability
 
 
-def judge_character_in_class_time(character_id: int) -> bool:
+def judge_character_in_class_time(character_id: int) -> (bool, int, int, int, int):
     """
     校验角色是否处于上课时间
     Keyword arguments:
     character_id -- 角色id
     Return arguments:
     int -- 权重
+    int -- 学校id
+    int -- 周几
+    int -- 第几节课
+    int -- 教师所教科目
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = character_data.behavior.start_time
@@ -166,6 +170,7 @@ def judge_character_in_class_time(character_id: int) -> bool:
     else:
         now_time = datetime.datetime.fromtimestamp(now_time, game_time.time_zone)
     now_time_value = now_time.hour * 100 + now_time.minute
+    now_week = now_time.weekday()
     if character_data.age <= 18:
         school_id = 0
         if character_data.age in range(13, 16):
@@ -175,15 +180,14 @@ def judge_character_in_class_time(character_id: int) -> bool:
         for session_id in game_config.config_school_session_data[school_id]:
             session_config = game_config.config_school_session[session_id]
             if session_config.start_time <= now_time_value <= session_config.end_time:
-                return 1
-        return 0
+                return 1, school_id, now_week, session_config.session, -1
+        return 0, 0, 0, 0, 0
     if character_id not in cache.teacher_school_timetable:
-        return 0
-    now_week = now_time.weekday()
+        return 0, 0, 0, 0, 0
     timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
     for timetable in timetable_list:
         if timetable.week_day != now_week:
             continue
         if timetable.time <= now_time_value <= timetable.end_time:
-            return 1
-    return 0
+            return 1, school_id, now_week, timetable.class_times, timetable.course
+    return 0, 0, 0, 0, 0

@@ -171,6 +171,24 @@ class StateMachine:
     """ 弹吉他 """
     SELF_STUDY = 37
     """ 自习 """
+    UNDRESS_UNDERWEAR = 38
+    """ 脱掉上衣 """
+    UNDRESS_UNDERPANTS = 39
+    """ 脱掉内裤 """
+    UNDRESS_BRA = 40
+    """ 脱掉胸罩 """
+    UNDRESS_PANTS = 41
+    """ 脱掉裤子 """
+    UNDRESS_SKIRT = 42
+    """ 脱掉短裙 """
+    UNDRESS_SHOES = 43
+    """ 脱掉鞋子 """
+    UNDRESS_SOCKS = 44
+    """ 脱掉袜子 """
+    WEAR_CLEAN_COAT = 45
+    """ 穿着干净的外套 """
+    UNDRESS_COAT = 46
+    """ 脱掉外套 """
 
 
 class Panel:
@@ -311,8 +329,8 @@ class Premise:
     """ 没穿鞋子 """
     NO_WEAR_SOCKS = 55
     """ 没穿袜子 """
-    WANT_PUT_ON = 56
-    """ 想穿衣服 """
+    NO_IN_SLEEP_TIME = 56
+    """ 不处于睡觉时间 """
     HAVE_UNDERWEAR = 57
     """ 拥有上衣 """
     HAVE_UNDERPANTS = 58
@@ -543,6 +561,28 @@ class Premise:
     """ 未处于取餐区 """
     NO_IN_RESTAURANT = 171
     """ 未处于就餐区 """
+    NO_WEAR_COAT = 172
+    """ 没穿外套 """
+    WEAR_COAT = 173
+    """ 角色穿了外套 """
+    WEAR_UNDERWEAR = 174
+    """ 角色穿了上衣 """
+    WEAR_UNDERPANTS = 175
+    """ 角色穿了内裤 """
+    WEAR_BRA = 176
+    """ 角色穿了胸罩 """
+    WEAR_PANTS = 177
+    """ 角色穿了裤子 """
+    WEAR_SKIRT = 178
+    """ 角色穿了短裙 """
+    WEAR_SHOES = 179
+    """ 角色穿了鞋子 """
+    WEAR_SOCKS = 180
+    """ 角色穿了袜子 """
+    HAVE_COAT = 181
+    """ 角色拥有外套 """
+    IS_PLAYER_TARGET = 182
+    """ 是玩家的交互对象 """
 
 
 class BehaviorEffect:
