@@ -581,6 +581,8 @@ class Premise:
     """ 角色穿了袜子 """
     HAVE_COAT = 181
     """ 角色拥有外套 """
+    IS_PLAYER_TARGET = 182
+    """ 是玩家的交互对象 """
 
 
 class BehaviorEffect:

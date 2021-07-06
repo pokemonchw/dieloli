@@ -2143,7 +2143,8 @@ def handle_in_class_time(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    return character.judge_character_in_class_time(character_id) * 500
+    judge,_unused,_unused,_unused,_unused = character.judge_character_in_class_time(character_id)
+    return judge * 500
 
 
 @add_premise(constant.Premise.NO_IN_CLASSROOM)
@@ -3057,3 +3058,18 @@ def handle_have_coat(character_id: int) -> int:
     if 0 in character_data.clothing and character_data.clothing[0]:
         return 1
     return 0
+
+
+@add_premise(constant.Premise.IS_PLAYER_TARGET)
+def handle_is_player_target(character_id: int) -> int:
+    """
+    校验角色是否是玩家的交互对象
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    if not character_id:
+        return 0
+    player_data:game_type.Character = cache.character_data[0]
+    return player_data.target_character_id == character_id

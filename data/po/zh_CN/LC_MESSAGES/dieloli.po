@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-27 20:34+0900\n"
+"POT-Creation-Date: 2021-06-28 16:29+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,9 +25,14 @@ msgstr ""
 msgid "(上学)"
 msgstr ""
 
-#: Script/UI/Panel/game_info_panel.py:76
-#: Script/UI/Panel/view_school_timetable_panel.py:116
-msgid "上课时间"
+#: Script/UI/Panel/game_info_panel.py:87
+#: Script/UI/Panel/view_school_timetable_panel.py:145
+msgid "早读课"
+msgstr ""
+
+#: Script/UI/Panel/game_info_panel.py:89
+#: Script/UI/Panel/view_school_timetable_panel.py:187
+msgid "自习课"
 msgstr ""
 
 #: Script/UI/Panel/see_map_panel.py:58
@@ -555,15 +560,15 @@ msgid "教师"
 msgstr ""
 
 #: Script/UI/Panel/view_school_timetable_panel.py:116
+msgid "上课时间"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:116
 msgid "下课时间"
 msgstr ""
 
 #: Script/UI/Panel/view_school_timetable_panel.py:123
 msgid "休息日"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:145
-msgid "早读课"
 msgstr ""
 
 #: Script/UI/Panel/view_school_timetable_panel.py:147
@@ -574,11 +579,6 @@ msgstr ""
 #: Script/UI/Panel/view_school_timetable_panel.py:162
 #, python-brace-format
 msgid "第{times}节"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:187
-#: Script/Design/handle_instruct.py:499
-msgid "自习"
 msgstr ""
 
 #: Script/UI/Panel/view_school_timetable_panel.py:242
@@ -1012,6 +1012,10 @@ msgstr ""
 
 #: Script/Design/handle_instruct.py:483
 msgid "弹吉他"
+msgstr ""
+
+#: Script/Design/handle_instruct.py:499
+msgid "自习"
 msgstr ""
 
 #: Script/Design/handle_instruct.py:535
