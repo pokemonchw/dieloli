@@ -189,5 +189,5 @@ def judge_character_in_class_time(character_id: int) -> (bool, int, int, int, in
         if timetable.week_day != now_week:
             continue
         if timetable.time <= now_time_value <= timetable.end_time:
-            return 1, school_id, now_week, timetable.class_times, timetable.course
+            return 1, 0, now_week, timetable.class_times, timetable.course
     return 0, 0, 0, 0, 0
