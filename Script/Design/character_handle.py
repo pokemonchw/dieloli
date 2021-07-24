@@ -371,7 +371,10 @@ def add_favorability(
             del target_data.favorability[now_key]
             if now_key in target_data.social_contact_data:
                 now_social = target_data.social_contact_data[now_key]
-                if now_social in target_data.social_contact and now_key in target_data.social_contact[now_social]:
+                if (
+                    now_social in target_data.social_contact
+                    and now_key in target_data.social_contact[now_social]
+                ):
                     target_data.social_contact[now_social].remove(now_key)
                 del target_data.social_contact_data[now_key]
             if now_key in target_data.social_contact_last_cut_down_time:

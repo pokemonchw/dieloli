@@ -157,13 +157,13 @@ class SeeCharacterStatusPanel:
 
     def __init__(self, character_id: int, width: int, column: int, center_status: bool = True):
         """初始化绘制对象"""
-        self.character_id = character_id
+        self.character_id: int = character_id
         """ 要绘制的角色id """
-        self.width = width
+        self.width: int = width
         """ 面板最大宽度 """
-        self.column = column
+        self.column: int = column
         """ 每行状态最大个数 """
-        self.draw_list: List[draw.NormalDraw] = []
+        self.draw_list: List[CharacterStatusListPanel] = []
         """ 绘制的文本列表 """
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
@@ -171,45 +171,82 @@ class SeeCharacterStatusPanel:
         """ 居中绘制状态文本 """
         character_data = cache.character_data[character_id]
         for status_type in game_config.config_character_state_type_data:
-            type_data = game_config.config_character_state_type[status_type]
-            type_line = draw.LittleTitleLineDraw(type_data.name, width, ":")
-            self.draw_list.append(type_line)
-            type_set = game_config.config_character_state_type_data[status_type]
-            status_text_list = []
-            for status_id in type_set:
-                if status_type == 0:
-                    if character_data.sex == 0 and status_id in {2, 3, 6}:
-                        continue
-                    if character_data.sex == 1 and status_id == 5:
-                        continue
-                    if character_data.sex == 3 and status_id in {2, 3, 5, 6}:
-                        continue
-                status_text = game_config.config_character_state[status_id].name
-                status_value = 0
-                if status_id in character_data.status:
-                    status_value = character_data.status[status_id]
-                status_value = round(status_value)
-                status_value = attr_text.get_value_text(status_value)
-                now_text = f"{status_text}:{status_value}"
-                status_text_list.append(now_text)
-            if self.center_status:
-                now_draw = panel.CenterDrawTextListPanel()
-            else:
-                now_draw = panel.LeftDrawTextListPanel()
-            now_draw.set(status_text_list, self.width, self.column)
-            self.draw_list.extend(now_draw.draw_list)
+            now_draw = CharacterStatusListPanel(
+                character_id, status_type, width, column, center_status
+            )
+            self.draw_list.append(now_draw)
 
     def draw(self):
         """绘制面板"""
         title_draw = draw.TitleLineDraw(_("人物状态"), self.width)
         title_draw.draw()
-        for label in self.draw_list:
-            if isinstance(label, list):
-                for value in label:
-                    value.draw()
-                line_feed.draw()
-            else:
-                label.draw()
+        for now_draw in self.draw_list:
+            now_draw.draw()
+
+
+class CharacterStatusListPanel:
+    """
+    角色状态列表面板对象
+    Keyword arguments:
+    character_id -- 角色id
+    status_type -- 状态类型
+    width -- 绘制宽度
+    column -- 每行状态最大个数
+    """
+
+    def __init__(
+        self, character_id: int, status_type: int, width: int, column: int, center_status: bool = 1
+    ):
+        self.character_id: int = character_id
+        """ 要绘制的角色id """
+        self.status_type: int = status_type
+        """ 状态类型 """
+        self.width: int = width
+        """ 绘制宽度 """
+        self.column: int = column
+        """ 每行状态最大个数 """
+        self.title_draw: draw.LittleTitleLineDraw = None
+        """ 当前状态类型标题绘制对象 """
+        self.draw_list: List[List[draw.NormalDraw]] = []
+        """ 绘制的文本列表 """
+        self.center_status: bool = center_status
+        """ 居中绘制状态文本 """
+        type_data = game_config.config_character_state_type[status_type]
+        self.title_draw = draw.LittleTitleLineDraw(type_data.name, width, ":")
+        type_set = game_config.config_character_state_type_data[status_type]
+        status_text_list = []
+        character_data: game_type.Character = cache.character_data[character_id]
+        for status_id in type_set:
+            if status_type == 0:
+                if character_data.sex == 0 and status_id in {2, 3, 6}:
+                    continue
+                if character_data.sex == 1 and status_id == 5:
+                    continue
+                if character_data.sex == 3 and status_id in {2, 3, 5, 6}:
+                    continue
+            status_text = game_config.config_character_state[status_id].name
+            status_value = 0
+            if status_id in character_data.status:
+                status_value = character_data.status[status_id]
+            status_value = round(status_value)
+            status_value = attr_text.get_value_text(status_value)
+            status_value = status_value.lstrip("+")
+            now_text = f"{status_text}:{status_value}"
+            status_text_list.append(now_text)
+        if self.center_status:
+            now_draw = panel.CenterDrawTextListPanel()
+        else:
+            now_draw = panel.LeftDrawTextListPanel()
+        now_draw.set(status_text_list, self.width, self.column)
+        self.draw_list.extend(now_draw.draw_list)
+
+    def draw(self):
+        """绘制面板"""
+        self.title_draw.draw()
+        for now_list in self.draw_list:
+            for value in now_list:
+                value.draw()
+            line_feed.draw()
 
 
 class CharacterInfoHead:

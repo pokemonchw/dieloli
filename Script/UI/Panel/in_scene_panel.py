@@ -197,8 +197,11 @@ class InScenePanel:
                         if isinstance(value, list):
                             for value_draw in value:
                                 value_draw.draw()
-                        else:
-                            value.line_feed = 0
+                        elif not index:
+                            if isinstance(value, draw.LittleTitleLineDraw):
+                                value.width = self.width
+                                value.line_feed = 0
+                                index = 1
                             value.draw()
                         if not index:
                             fix_draw = draw.NormalDraw()
@@ -221,53 +224,57 @@ class InScenePanel:
                 target_status_draw = see_character_info_panel.SeeCharacterStatusPanel(
                     character_data.target_character_id, self.width / 2 - 1, 3, 0
                 )
-                now_line = len(character_status_draw.draw_list)
-                if len(target_status_draw.draw_list) > now_line:
-                    now_line = len(target_status_draw.draw_list)
-                for i in range(now_line):
-                    c_draw = None
-                    if i in range(len(character_status_draw.draw_list)):
-                        c_draw = character_status_draw.draw_list[i]
+                for type_index in range(len(character_status_draw.draw_list)):
+                    now_characer_status_draw = character_status_draw.draw_list[type_index]
+                    now_target_status_draw = target_status_draw.draw_list[type_index]
+                    now_type_draw = now_characer_status_draw.title_draw
+                    now_type_draw.width = self.width
+                    character_status_draw_list.append(now_type_draw)
+                    now_line = max(
+                        len(now_characer_status_draw.draw_list),
+                        len(now_target_status_draw.draw_list),
+                    )
+                    for i in range(now_line):
+                        c_draw = None
+                        if i in range(len(now_characer_status_draw.draw_list)):
+                            c_draw = now_characer_status_draw.draw_list[i]
+                        else:
+                            c_draw = draw.NormalDraw()
+                            c_draw.text = " " * int(self.width / 2)
+                            c_draw.width = self.width / 2
+                        t_draw = None
+                        if i in range(len(now_target_status_draw.draw_list)):
+                            t_draw = now_target_status_draw.draw_list[i]
+                        else:
+                            t_draw = draw.NormalDraw()
+                            t_draw.text = " " * int(self.width / 2 - 1)
+                            t_draw.width = self.width / 2 - 1
+                        character_status_draw_list.append((c_draw, t_draw))
+                title_draw = draw.TitleLineDraw(_("人物状态"), self.width)
+                title_draw.draw()
+                for label in character_status_draw_list:
+                    if isinstance(label, tuple):
+                        index = 0
+                        for value in label:
+                            if isinstance(value, list):
+                                for value_draw in value:
+                                    value_draw.draw()
+                            elif not index:
+                                value.draw()
+                            if not index:
+                                fix_draw = draw.NormalDraw()
+                                fix_draw.width = 1
+                                fix_draw.text = "|"
+                                fix_draw.draw()
+                                index = 1
+                        line_feed.draw()
                     else:
-                        c_draw = draw.NormalDraw()
-                        c_draw.text = " " * int(self.width / 2)
-                        c_draw.width = self.width / 2
-                    t_draw = None
-                    if i in range(len(target_status_draw.draw_list)):
-                        t_draw = target_status_draw.draw_list[i]
-                    else:
-                        t_draw = draw.NormalDraw()
-                        t_draw.text = " " * int(self.width / 2 - 1)
-                        t_draw.width = self.width / 2 - 1
-                    character_status_draw_list.append((c_draw, t_draw))
+                        label.draw()
             else:
                 character_status_draw = see_character_info_panel.SeeCharacterStatusPanel(
-                    character_data.cid, self.width, 6
+                    character_data.cid, self.width, 6, 0
                 )
-                character_status_draw_list = character_status_draw.draw_list
-            for label in character_status_draw_list:
-                if isinstance(label, tuple):
-                    index = 0
-                    for value in label:
-                        if isinstance(value, list):
-                            for value_draw in value:
-                                value_draw.draw()
-                        else:
-                            value.line_feed = 0
-                            value.draw()
-                        if not index:
-                            fix_draw = draw.NormalDraw()
-                            fix_draw.width = 1
-                            fix_draw.text = "|"
-                            fix_draw.draw()
-                            index = 1
-                    line_feed.draw()
-                elif isinstance(label, list):
-                    for value in label:
-                        value.draw()
-                    line_feed.draw()
-                else:
-                    label.draw()
+                character_status_draw.draw()
             see_instruct_panel.draw()
             ask_list.extend(see_instruct_panel.return_list)
             flow_handle.askfor_all(ask_list)

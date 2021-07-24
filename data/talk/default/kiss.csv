@@ -17,6 +17,6 @@ str,int,int,str
 11,11,0,{PlayerNickName}双手捧着{TargetName}的脸\n{TargetName}凝视了{PlayerNickName}一会儿的双眼便闭上了眼睛\n感受着{TargetName}的心跳\n{PlayerNickName}吻住了{TargetName}
 12,11,0,{PlayerNickName}和{TargetName}旁若无人的深吻着
 13,11,0,{PlayerNickName}目光灼灼的看着{TargetName}\n「我喜欢你」\n{TargetName}低下头吻住了{PlayerNickName}\n{PlayerNickName}心情雀跃的同时又有些疑虑\n{TargetName}的动作很熟练的样子
-14,11,0,{TargetName}跑到{PlayerNickName}的身边掂起脚尖亲了一下{PlayerNickName}的脸
-15,11,0,{TargetName}捧着{PlayerNickName}的脸亲了过来
-16,11,0,{TargetName}偷偷的亲了{PlayerNickName}一口
+14,11,0,{Name}跑到{PlayerNickName}的身边掂起脚尖亲了一下{PlayerNickName}的脸
+15,11,0,{Name}捧着{PlayerNickName}的脸亲了过来
+16,11,0,{Name}偷偷的亲了{PlayerNickName}一口

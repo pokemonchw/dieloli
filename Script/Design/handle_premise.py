@@ -2143,7 +2143,9 @@ def handle_in_class_time(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    judge,_unused,_unused,_unused,_unused = character.judge_character_in_class_time(character_id)
+    judge, _unused, _unused, _unused, _unused = character.judge_character_in_class_time(
+        character_id
+    )
     return judge * 500
 
 
@@ -3071,5 +3073,20 @@ def handle_is_player_target(character_id: int) -> int:
     """
     if not character_id:
         return 0
-    player_data:game_type.Character = cache.character_data[0]
+    player_data: game_type.Character = cache.character_data[0]
     return player_data.target_character_id == character_id
+
+
+@add_premise(constant.Premise.IS_FUTA_OR_WOMAN)
+def handle_is_futa_or_woman(character_id: int) -> int:
+    """
+    校验角色的性别是否为女性或扶她
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    if character_data.sex in {1, 2}:
+        return 1
+    return 0

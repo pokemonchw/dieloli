@@ -189,6 +189,8 @@ class StateMachine:
     """ 穿着干净的外套 """
     UNDRESS_COAT = 46
     """ 脱掉外套 """
+    MASTURBATION = 47
+    """ 手淫 """
 
 
 class Panel:
@@ -583,6 +585,8 @@ class Premise:
     """ 角色拥有外套 """
     IS_PLAYER_TARGET = 182
     """ 是玩家的交互对象 """
+    IS_FUTA_OR_WOMAN = 183
+    """ 角色是扶她或女性 """
 
 
 class BehaviorEffect:

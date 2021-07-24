@@ -893,3 +893,16 @@ def character_undress_socks(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.put_on[5] = ""
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MASTURBATION)
+def character_masturbation(character_id: int):
+    """
+    角色手淫
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.MASTURBATION
+    character_data.behavior.duration = 10
+    character_data.state = constant.CharacterStatus.STATUS_MASTURBATION
