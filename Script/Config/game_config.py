@@ -60,9 +60,15 @@ config_clothing_suit_data: Dict[int, Dict[int, Set]] = {}
 config_clothing_tem: Dict[int, config_def.ClothingTem] = {}
 """ 服装模板配置数据 """
 config_clothing_type: Dict[int, config_def.ClothingType] = {}
-""" 衣服种类配置数据 """
+""" 衣服种类配置 """
 config_clothing_use_type: Dict[int, config_def.ClothingUseType] = {}
 """ 衣服用途配置数据 """
+config_clothing_sex_type_data: Dict[int, Set] = {}
+""" 衣服性别分类数据 性别类型(0:男.1:女.2:通用):服装模板id集合 """
+config_clothing_type_data: Dict[int, Set] = {}
+""" 服装种类配置数据 服装种类:服装模板id集合 """
+config_clothing_type_sex_type_data: Dict[int, Dict[int, Set]] = {}
+""" 服装类型下性别类型配置数据 服装类型id:性别类型id:服装模板id集合 """
 config_cook_type: Dict[int, config_def.CookType] = {}
 """ 烹饪类型配置数据 """
 config_course: Dict[int, config_def.Course] = {}
@@ -439,6 +445,13 @@ def load_clothing_tem():
         now_tem = config_def.ClothingTem()
         now_tem.__dict__ = tem_data
         config_clothing_tem[now_tem.cid] = now_tem
+        config_clothing_sex_type_data.setdefault(now_tem.sex, set())
+        config_clothing_sex_type_data[now_tem.sex].add(now_tem.cid)
+        config_clothing_type_data.setdefault(now_tem.clothing_type, set())
+        config_clothing_type_data[now_tem.clothing_type].add(now_tem.cid)
+        config_clothing_type_sex_type_data.setdefault(now_tem.clothing_type, {})
+        config_clothing_type_sex_type_data[now_tem.clothing_type].setdefault(now_tem.sex, set())
+        config_clothing_type_sex_type_data[now_tem.clothing_type][now_tem.sex].add(now_tem.cid)
 
 
 def load_clothing_type():

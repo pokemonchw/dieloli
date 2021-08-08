@@ -214,6 +214,8 @@ class Panel:
     """ 查看课程表 """
     VIEW_CHARACTER_STATUS_LIST = 8
     """ 查看角色状态监控面板 """
+    CLOTHING_SHOP = 9
+    """ 服装商店面板 """
 
 
 class Premise:
@@ -744,6 +746,8 @@ class Instruct:
     """ 购买食物 """
     BUY_ITEM = 0
     """ 购买道具 """
+    BUY_CLOTHING = 0
+    """ 购买服装 """
     MOVE = 0
     """ 移动 """
     ATTEND_CLASS = 0

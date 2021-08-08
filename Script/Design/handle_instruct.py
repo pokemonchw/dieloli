@@ -7,7 +7,7 @@ from typing import Set, List
 from types import FunctionType
 from threading import Thread
 from Script.Core import constant, cache_control, game_type, get_text, save_handle
-from Script.Design import update, character, attr_calculation, course, game_time
+from Script.Design import update, character, attr_calculation, course, game_time, clothing
 from Script.UI.Panel import see_character_info_panel, see_save_info_panel
 from Script.Config import normal_config, game_config
 from Script.UI.Moudle import draw
@@ -215,6 +215,7 @@ def handle_sleep():
     character_data.state = constant.CharacterStatus.STATUS_SLEEP
     cache.wframe_mouse.w_frame_skip_wait_mouse = 1
     update.game_update_flow(480)
+    clothing.init_clothing_shop_data()
 
 
 @add_instruct(
@@ -547,3 +548,14 @@ def handle_masturbation():
     character_data.behavior.behavior_id = constant.Behavior.MASTURBATION
     character_data.state = constant.CharacterStatus.STATUS_MASTURBATION
     update.game_update_flow(10)
+
+
+@add_instruct(
+    constant.Instruct.BUY_CLOTHING,
+    constant.InstructType.ACTIVE,
+    _("购买服装"),
+    {constant.Premise.IN_SHOP},
+)
+def handle_but_clothing():
+    """处理购买服装指令"""
+    cache.now_panel_id = constant.Panel.CLOTHING_SHOP

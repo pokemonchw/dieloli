@@ -13,6 +13,7 @@ from Script.Design import (
     interest,
     attr_calculation,
     game_time,
+    clothing,
 )
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
@@ -59,6 +60,7 @@ def game_start():
     course.init_teacher_table()
     cooking.init_recipes()
     cooking.init_restaurant_data()
+    clothing.init_clothing_shop_data()
     character_position = cache.character_data[0].position
     map_handle.character_move_scene(["0"], character_position, 0)
     cache.school_longitude = random.uniform(120.9, 122.12)
