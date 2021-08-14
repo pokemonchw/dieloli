@@ -367,6 +367,8 @@ def add_favorability(
                 zip(target_data.favorability.values(), target_data.favorability.keys())
             )
             now_value = min(value_dict.keys())
+            if now_value > now_add_favorability:
+                return
             now_key = value_dict[now_value]
             del target_data.favorability[now_key]
             if now_key in target_data.social_contact_data:

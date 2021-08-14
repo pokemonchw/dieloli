@@ -11,7 +11,7 @@ from Script.Core import (
     flow_handle,
 )
 from Script.Config import game_config, normal_config
-from Script.Design import character_move, attr_text, game_time
+from Script.Design import character_move, attr_text, game_time, map_handle
 
 _: FunctionType = get_text._
 """ 翻译api """
@@ -152,6 +152,18 @@ class SeeCharacterStatusDraw:
             death_time_text = f"{death_time_text}{str(death_time)}"
             button_text = f"{index_text} {character_data.name} {cause_of_death_config.name} {death_time_text} {position_text}"
         else:
+            if character_data.target_character_id != character_data.cid:
+                scene_path_str = map_handle.get_map_system_path_str_for_list(
+                    character_data.position
+                )
+                scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+                if character_data.target_character_id in scene_data.character_list:
+                    target_data: game_type.Character = cache.character_data[
+                        character_data.target_character_id
+                    ]
+                    status_text = _("和{target_name}{status_text}中").format(
+                        target_name=target_data.name, status_text=status_text
+                    )
             button_text = f"{index_text} {character_data.name} {status_text} {position_text}"
         now_draw = draw.LeftButton(
             button_text, self.button_return, self.width, cmd_func=self.move_to_character

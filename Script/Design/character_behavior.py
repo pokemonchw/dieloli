@@ -182,10 +182,12 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     character_data.status[28] += hunger_time * 0.02
     character_data.last_hunger_time = now_time
     if time_judge:
+        character_data.behavior.temporary_status = game_type.TemporaryStatus()
         settle_draw = settle_behavior.handle_settle_behavior(character_id, end_time)
         talk_draw = talk.handle_talk(character_id)
         if talk_draw is not None:
             talk_draw.draw()
+            character_data.behavior.temporary_status = game_type.TemporaryStatus()
         if settle_draw is not None:
             name_draw = draw.NormalDraw()
             name_draw.text = "\n" + character_data.name + ": "

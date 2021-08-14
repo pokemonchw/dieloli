@@ -667,6 +667,7 @@ def handle_first_kiss(
     if target_data.social_contact_data[character_id] >= 3:
         if character_data.first_kiss == -1:
             character_data.first_kiss = target_data.cid
+            character_data.behavior.temporary_status.lose_first_kiss = 1
             if (not character_id) or (not target_data.cid):
                 now_draw = draw.NormalDraw()
                 now_draw.text = _("{character_name}失去了初吻\n").format(
@@ -676,6 +677,7 @@ def handle_first_kiss(
                 now_draw.draw()
         if target_data.first_kiss == -1:
             target_data.first_kiss = character_id
+            target_data.behavior.temporary_status.lose_first_kiss = 1
             if (not character_id) or (not target_data.cid):
                 now_draw = draw.NormalDraw()
                 now_draw.text = _("{character_name}失去了初吻\n").format(character_name=target_data.name)
@@ -1545,6 +1547,11 @@ def handle_add_small_penis_sex_experience(
 ):
     """
     增加少量阴茎性爱经验
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
     """
     if not add_time:
         return
@@ -1557,3 +1564,44 @@ def handle_add_small_penis_sex_experience(
     character_data.sex_experience[3] += add_time
     change_data.sex_experience.setdefault(3, 0)
     change_data.sex_experience[3] += add_time
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_FOLLOW_SELF)
+def handle_target_follow_self(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange, now_time: int
+):
+    """
+    让交互对象跟随自己
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if not character_data.target_character_id:
+        return
+    if character_data.target_character_id == character_id:
+        return
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if target_data.dead:
+        return
+    if target_data.position != character_data.position:
+        return
+    target_data.follow = character_id
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.UNFOLLOW)
+def handle_unfollow(
+    character_id: int, add_time: int, change_data: game_type.CharacterStatusChange, now_time: int
+):
+    """
+    取消跟随
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.follow = -1

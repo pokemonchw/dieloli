@@ -285,7 +285,7 @@ def handle_kiss():
     constant.Instruct.HAND_IN_HAND,
     constant.InstructType.ACTIVE,
     _("牵手"),
-    {constant.Premise.HAVE_TARGET},
+    {constant.Premise.HAVE_TARGET, constant.Premise.TARGET_NOT_FOLLOW_PLAYER},
 )
 def handle_handle_in_handle():
     """处理牵手指令"""
@@ -294,6 +294,8 @@ def handle_handle_in_handle():
     character_data.behavior.duration = 10
     character_data.behavior.behavior_id = constant.Behavior.HAND_IN_HAND
     character_data.state = constant.CharacterStatus.STATUS_HAND_IN_HAND
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.follow = 0
     update.game_update_flow(10)
 
 
@@ -559,3 +561,16 @@ def handle_masturbation():
 def handle_but_clothing():
     """处理购买服装指令"""
     cache.now_panel_id = constant.Panel.CLOTHING_SHOP
+
+
+@add_instruct(
+    constant.Instruct.LET_GO,
+    constant.InstructType.ACTIVE,
+    _("放手"),
+    {constant.Premise.TARGET_IS_FOLLOW_PLAYER},
+)
+def handle_let_go():
+    character_data: game_type.Character = cache.character_data[0]
+    if character_data.target_character_id:
+        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        target_data.follow = -1

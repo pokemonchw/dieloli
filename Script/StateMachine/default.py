@@ -30,7 +30,7 @@ def character_move_to_classroom(character_id: int):
 @handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_NEAREST_CAFETERIA)
 def character_move_to_rand_cafeteria(character_id: int):
     """
-    移动至随机取餐区
+    移动至最近取餐区
     Keyword arguments:
     character_id -- 角色id
     """
@@ -906,3 +906,19 @@ def character_masturbation(character_id: int):
     character_data.behavior.behavior_id = constant.Behavior.MASTURBATION
     character_data.behavior.duration = 10
     character_data.state = constant.CharacterStatus.STATUS_MASTURBATION
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_FOLLOW_TARGET_SCENE)
+def character_move_to_follow_target_scene(character_id: int):
+    """
+    角色移动至跟随对象所在场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.follow]
+    _, _, move_path, move_time = character_move.character_move(character_id, target_data.position)
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE

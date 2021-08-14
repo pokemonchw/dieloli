@@ -305,10 +305,7 @@ class SeeInstructPanel:
         line = draw.LineDraw("-.-", self.width)
         line.draw()
         fix_draw = draw.NormalDraw()
-        fix_width = int(
-            (self.width - int(self.width / len(cache.instruct_filter)) * len(cache.instruct_filter))
-            / 2
-        )
+        fix_width = int((self.width - int(8 * len(cache.instruct_filter))) / 2)
         fix_draw.width = fix_width
         fix_draw.text = " " * fix_width
         fix_draw.draw()
@@ -318,7 +315,7 @@ class SeeInstructPanel:
                 now_button = draw.CenterButton(
                     f"[{now_config.name}]",
                     now_config.name,
-                    self.width / len(cache.instruct_filter),
+                    8,
                     " ",
                     "onbutton",
                     "standard",
@@ -329,11 +326,10 @@ class SeeInstructPanel:
                 now_button = draw.CenterButton(
                     f"[{now_config.name}]",
                     now_config.name,
-                    self.width / len(cache.instruct_filter),
+                    8,
                     cmd_func=self.change_filter,
                     args=(now_type,),
                 )
-            now_button.width = int(self.width / len(cache.instruct_filter))
             self.return_list.append(now_button.return_text)
             now_button.draw()
         line_feed.draw()

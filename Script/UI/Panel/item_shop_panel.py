@@ -52,6 +52,8 @@ class ItemShopPanel:
             handle_panel.update()
             handle_panel.draw()
             return_list.extend(handle_panel.return_list)
+            line = draw.LineDraw("-", self.width)
+            line.draw()
             back_draw = draw.CenterButton(_("[返回]"), _("返回"), window_width)
             back_draw.draw()
             return_list.append(back_draw.return_text)

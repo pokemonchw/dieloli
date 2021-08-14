@@ -3086,7 +3086,110 @@ def handle_is_futa_or_woman(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    character_data = cache.character_data[character_id]
+    character_data: game_type.Character = cache.character_data[character_id]
     if character_data.sex in {1, 2}:
         return 1
     return 0
+
+
+@add_premise(constant.Premise.NO_FOLLOW)
+def handle_no_follow(character_id: int) -> int:
+    """
+    判断角色是否未处于跟随状态
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.follow == -1
+
+
+@add_premise(constant.Premise.NO_IN_FOLLOW_TARGET_SCENE)
+def handle_no_in_follow_target_scene(character_id: int) -> int:
+    """
+    判断角色是否不在跟随的对象的场景
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.follow == -1:
+        return 0
+    target_data: game_type.Character = cache.character_data[character_data.follow]
+    return character_data.position != target_data.position
+
+
+@add_premise(constant.Premise.HAVE_FOLLOW)
+def handle_have_follow(character_id: int) -> int:
+    """
+    校验角色是否拥有跟随对象
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.follow != -1 and character_data.follow != character_id:
+        return 500
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_IS_FOLLOW_PLAYER)
+def handle_target_is_follow_player(character_id: int) -> int:
+    """
+    校验交互对象是否正在跟随玩家
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id and character_data.target_character_id != character_id:
+        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        return not target_data.follow
+    return 0
+
+
+@add_premise(constant.Premise.TARGET_NOT_FOLLOW_PLAYER)
+def handle_target_not_follow_player(character_id: int) -> int:
+    """
+    校验交互对象是否未跟随玩家
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id and character_data.target_character_id != character_id:
+        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        return target_data.follow
+    return 0
+
+
+@add_premise(constant.Premise.IS_LOSE_FIRST_KISS)
+def handle_is_lose_first_kiss(character_id: int) -> int:
+    """
+    校验角色是否正在失去初吻
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.behavior.temporary_status.lose_first_kiss
+
+
+@add_premise(constant.Premise.TARGET_IS_LOSE_FIRST_KISS)
+def handle_target_is_lose_first_kiss(character_id: int) -> int:
+    """
+    校验交互对象是否正在失去初吻
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.behavior.temporary_status.lose_first_kiss

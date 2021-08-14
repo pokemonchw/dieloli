@@ -91,28 +91,28 @@ class ClothingShopPanel:
             line_feed.draw()
             line = draw.LineDraw("+", self.width)
             line.draw()
+            for sex_type in range(3):
+                sex_type_text = sex_type_list[sex_type]
+                if sex_type == self.clothing_sex_type:
+                    now_draw = draw.CenterDraw()
+                    now_draw.text = sex_type_text
+                    now_draw.style = "onbutton"
+                    now_draw.width = self.width / 3
+                    now_draw.draw()
+                else:
+                    now_draw = draw.CenterButton(
+                        f"[{sex_type_text}]",
+                        sex_type_text,
+                        self.width / 3,
+                        cmd_func=self.change_sex_type,
+                        args=(sex_type,),
+                    )
+                    now_draw.draw()
+                    return_list.append(now_draw.return_text)
+            line_feed.draw()
+            line = draw.LineDraw("+", self.width)
+            line.draw()
             if len(now_cid_list):
-                for sex_type in range(3):
-                    sex_type_text = sex_type_list[sex_type]
-                    if sex_type == self.clothing_sex_type:
-                        now_draw = draw.CenterDraw()
-                        now_draw.text = sex_type_text
-                        now_draw.style = "onbutton"
-                        now_draw.width = self.width / 3
-                        now_draw.draw()
-                    else:
-                        now_draw = draw.CenterButton(
-                            f"[{sex_type_text}]",
-                            sex_type_text,
-                            self.width / 3,
-                            cmd_func=self.change_sex_type,
-                            args=(sex_type,),
-                        )
-                        now_draw.draw()
-                        return_list.append(now_draw.return_text)
-                line_feed.draw()
-                line = draw.LineDraw("+", self.width)
-                line.draw()
                 self.handle_panel.text_list = now_cid_list
                 self.handle_panel.update()
                 self.handle_panel.draw()
@@ -236,6 +236,9 @@ class SeeClothingListByClothingNameDraw:
                 handle_panel.update_button()
                 handle_panel.draw()
                 return_list.extend(handle_panel.return_list)
+                line_feed.draw()
+                line = draw.LineDraw("-", window_width)
+                line.draw()
                 back_draw = draw.CenterButton(_("[返回]"), _("返回"), window_width)
                 back_draw.draw()
                 line_feed.draw()

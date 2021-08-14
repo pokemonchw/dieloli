@@ -21,8 +21,6 @@ gatech = ephem.Observer()
 sun = ephem.Sun()
 moon = ephem.Moon()
 time_zone = datetime.timezone(datetime.timedelta(hours=+8))
-# os.environ["TZ"] = time_zone.__str__()
-# time.tzset()
 
 
 def init_time():

@@ -258,14 +258,14 @@ def get_favorability_social(favorability: int) -> int:
     Return arguments:
     int -- 社交关系
     """
-    if favorability < 500:
+    if favorability < 6250:
         return 0
-    if favorability < 10000:
+    if favorability < 12500:
         return 1
-    if favorability < 200000:
+    if favorability < 25000:
         return 2
-    if favorability < 4000000:
+    if favorability < 50000:
         return 3
-    if favorability < 80000000:
+    if favorability < 100000:
         return 4
     return 5

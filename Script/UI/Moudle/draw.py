@@ -389,21 +389,7 @@ class CenterButton:
 
     def draw(self):
         """绘制按钮"""
-        if self.width < text_handle.get_text_index(self.text):
-            now_text = ""
-            if self.width > 0:
-                for i in self.text:
-                    if (
-                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.width
-                    ):
-                        now_text += i
-                    break
-                now_text = now_text[:-2] + "~"
-        else:
-            now_text = text_handle.align(self.text, "center", 0, 1, self.width)
-            now_width = self.width - text_handle.get_text_index(now_text)
-            now_text = " " * int(now_width) + now_text
+        now_text = text_handle.align(self.text, "center", 0, 1, self.width)
         py_cmd.pcmd(
             now_text,
             self.return_text,
@@ -613,27 +599,7 @@ class CenterDraw(NormalDraw):
 
     def draw(self):
         """绘制文本"""
-        self.width = int(self.width)
-        if int(len(self)) > int(self.width):
-            now_text = ""
-            if self.width > 0:
-                for i in self.text:
-                    if (
-                        text_handle.get_text_index(now_text) + text_handle.get_text_index(i)
-                        < self.width
-                    ):
-                        now_text += i
-                    break
-                now_text = now_text[:-2] + "~"
-            io_init.era_print(now_text, self.style)
-        elif int(len(self)) > int(self.width) - 1:
-            now_text = " " + self.text
-        elif int(len(self)) > int(self.width) - 2:
-            now_text = " " + self.text + " "
-        else:
-            now_text = text_handle.align(self.text, "center", 0, 1, self.width)
-        if int(len(self)) < int(self.width):
-            now_text += " " * (int(self.width) - text_handle.get_text_index(now_text))
+        now_text = text_handle.align(self.text, "center", 0, 1, self.width)
         io_init.era_print(now_text, self.style)
 
 
@@ -663,7 +629,7 @@ class CenterMergeDraw:
         now_width = 0
         for value in self.draw_list:
             now_width += len(value)
-        now_text = " " * now_width
+        now_text = "*" * now_width
         fix_text = text_handle.align(now_text, "center", 1, 1, self.width)
         fix_draw = NormalDraw()
         fix_draw.text = fix_text
@@ -671,9 +637,13 @@ class CenterMergeDraw:
         fix_draw.draw()
         for value in self.draw_list:
             value.draw()
+        old_width = now_width
         now_width = fix_draw.width * 2 + now_width
         if now_width < self.width:
             fix_draw.text += int(self.width - now_width) * " "
+        elif now_width > self.width:
+            if old_width + len(fix_draw) < self.width:
+                fix_draw.text = int(self.width - (old_width + len(fix_draw))) * " "
         fix_draw.draw()
 
 

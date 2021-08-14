@@ -191,6 +191,8 @@ class StateMachine:
     """ 脱掉外套 """
     MASTURBATION = 47
     """ 手淫 """
+    MOVE_TO_FOLLOW_TARGET_SCENE = 48
+    """ 移动至跟随对象所在场景 """
 
 
 class Panel:
@@ -589,6 +591,20 @@ class Premise:
     """ 是玩家的交互对象 """
     IS_FUTA_OR_WOMAN = 183
     """ 角色是扶她或女性 """
+    NO_FOLLOW = 184
+    """ 角色未处于跟随状态 """
+    NO_IN_FOLLOW_TARGET_SCENE = 185
+    """ 跟随的对象不在当前场景 """
+    HAVE_FOLLOW = 186
+    """ 角色拥有跟随对象 """
+    TARGET_IS_FOLLOW_PLAYER = 187
+    """ 交互对象正在跟随玩家 """
+    TARGET_NOT_FOLLOW_PLAYER = 188
+    """ 交互对象未跟随玩家 """
+    IS_LOSE_FIRST_KISS = 189
+    """ 角色正在失去初吻 """
+    TARGET_IS_LOSE_FIRST_KISS = 190
+    """ 交互对象正在失去初吻 """
 
 
 class BehaviorEffect:
@@ -680,6 +696,10 @@ class BehaviorEffect:
     """ 增加少量阴蒂快感 """
     ADD_SMALL_PENIS_HAPPY = 42
     """ 增加少量阴茎快感 """
+    TARGET_FOLLOW_SELF = 43
+    """ 交互对象跟随自己 """
+    UNFOLLOW = 44
+    """ 取消跟随状态 """
 
 
 class InstructType:
@@ -732,6 +752,8 @@ class Instruct:
     """ 抚摸 """
     HAND_IN_HAND = 0
     """ 牵手 """
+    LET_GO = 0
+    """ 放手 """
     EMBRACE = 0
     """ 拥抱 """
     KISS = 0

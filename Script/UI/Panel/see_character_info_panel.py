@@ -169,7 +169,6 @@ class SeeCharacterStatusPanel:
         """ 当前面板监听的按钮列表 """
         self.center_status: bool = center_status
         """ 居中绘制状态文本 """
-        character_data = cache.character_data[character_id]
         for status_type in game_config.config_character_state_type_data:
             now_draw = CharacterStatusListPanel(
                 character_id, status_type, width, column, center_status
@@ -272,21 +271,16 @@ class CharacterInfoHead:
             if 0 in character_data.social_contact_data:
                 social = character_data.social_contact_data[0]
             social_text = game_config.config_social_type[social].name
-            message = _(
-                "No.{character_id} 姓名:{character_name} 性别:{sex_text} 关系:{social_text}"
-            ).format(
+            message = _("No.{character_id}: {character_name} {sex_text} {social_text}").format(
                 character_id=character_id,
                 character_name=character_data.name,
                 sex_text=sex_text,
                 social_text=social_text,
             )
         else:
-            message = _(
-                "No.{character_id} 姓名:{character_name} 称呼:{character_nick_name} 性别:{sex_text}"
-            ).format(
+            message = _("No.{character_id}: {character_name} {sex_text}").format(
                 character_id=character_id,
                 character_name=character_data.name,
-                character_nick_name=character_data.nick_name,
                 sex_text=sex_text,
             )
         message_draw = draw.CenterDraw()
@@ -313,7 +307,17 @@ class CharacterInfoHead:
         status_text = game_config.config_status[character_data.state].name
         status_draw = draw.CenterDraw()
         status_draw.width = width / 2
-        status_draw.text = _("状态:{status_text}").format(status_text=status_text)
+        status_draw.text = f"{status_text}"
+        if character_data.target_character_id != character_data.cid:
+            scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+            scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+            if character_data.target_character_id in scene_data.character_list:
+                target_data: game_type.Character = cache.character_data[
+                    character_data.target_character_id
+                ]
+                status_draw.text = _("和{target_name}{status_text}中").format(
+                    target_name=target_data.name, status_text=status_text
+                )
         self.draw_list: List[Tuple[draw.NormalDraw, draw.NormalDraw]] = [
             (message_draw, hp_draw),
             (status_draw, mp_draw),
@@ -659,7 +663,7 @@ class SeeCharacterKnowledgePanel:
             for skill_list in skill_group:
                 for skill in skill_list:
                     skill_config = game_config.config_knowledge[skill]
-                    skill_draw = draw.CenterMergeDraw(int(self.width / len(skill_group)))
+                    skill_draw = draw.CenterMergeDraw(int(self.width / len(skill_list)))
                     now_text_draw = draw.NormalDraw()
                     now_text_draw.text = skill_config.name
                     now_text_draw.width = text_handle.get_text_index(skill_config.name)
@@ -1020,8 +1024,7 @@ class SeeCharacterInfoByNameDrawInScene:
         self.button_return: str = str(button_id)
         """ 按钮返回值 """
         character_data: game_type.Character = cache.character_data[self.character_id]
-        sex_text = game_config.config_sex_tem[character_data.sex].name
-        character_name = character_data.name + f"({sex_text})"
+        character_name = character_data.name
         name_draw = draw.NormalDraw()
         if is_button:
             if num_button:
