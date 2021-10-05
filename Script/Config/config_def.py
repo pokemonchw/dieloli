@@ -134,6 +134,8 @@ class Organ:
     """ 类型(0:女,1:男,2:通用) """
     name: str
     """ 名字 """
+    status_id: int
+    """ 快感状态id """
 
 
 class Nature:

@@ -13,12 +13,13 @@ _: FunctionType = get_text._
 """ 翻译api """
 
 
-def handle_settle_behavior(character_id: int, now_time: int):
+def handle_settle_behavior(character_id: int, now_time: int) -> panel.LeftDrawTextListWaitPanel:
     """
     处理结算角色行为
     Keyword arguments:
     character_id -- 角色id
     now_time -- 结算的时间戳
+    panel.LeftDrawTextListWaitPanel -- 结算的文本列表
     """
     now_character_data: game_type.Character = cache.character_data[character_id]
     status_data = game_type.CharacterStatusChange()
@@ -33,9 +34,14 @@ def handle_settle_behavior(character_id: int, now_time: int):
     change_character_favorability_for_time(character_id, now_time)
     change_character_social(character_id, status_data)
     now_judge = False
-    if character_id:
-        return
     if status_data is None:
+        return
+    player_data: game_type.Character = cache.character_data[0]
+    if (
+        character_id
+        and character_id != player_data.target_character_id
+        and now_character_data.target_character_id
+    ):
         return
     if status_data.mana_point:
         now_judge = True
@@ -257,7 +263,6 @@ def get_favorability_social(favorability: int) -> int:
     favorability -- 好感度
     Return arguments:
     int -- 社交关系
-    """
     if favorability < 6250:
         return 0
     if favorability < 12500:
@@ -267,5 +272,17 @@ def get_favorability_social(favorability: int) -> int:
     if favorability < 50000:
         return 3
     if favorability < 100000:
+        return 4
+    return 5
+    """
+    if favorability < 62:
+        return 0
+    if favorability < 125:
+        return 1
+    if favorability < 250:
+        return 2
+    if favorability < 500:
+        return 3
+    if favorability < 1000:
         return 4
     return 5

@@ -525,12 +525,9 @@ class SocialSceneNamePanel:
         self.return_list: List[str] = []
         """ 当前面板的按钮返回 """
         character_data: game_type.Character = cache.character_data[0]
+        social_data = value_handle.sorted_dict_for_values(character_data.social_contact_data)
         self.handle_panel = panel.PageHandlePanel(
-            [
-                k
-                for k in character_data.social_contact_data
-                if character_data.social_contact_data[k]
-            ],
+            [k for k in social_data if social_data[k]],
             SocialSceneNameDraw,
             20,
             2,

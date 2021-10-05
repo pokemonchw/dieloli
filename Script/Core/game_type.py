@@ -261,6 +261,18 @@ class TemporaryStatus:
     def __init__(self):
         self.lose_first_kiss: int = 0
         """ 正在失去初吻 """
+        self.mouth_climax: int = 0
+        """ 嘴高潮 """
+        self.chest_climax: int = 0
+        """ 胸高潮 """
+        self.clitoris_climax: int = 0
+        """ 阴蒂高潮 """
+        self.penis_climax: int = 0
+        """ 阴茎高潮 """
+        self.vagina_climax: int = 0
+        """ 阴道高潮 """
+        self.anus_climax: int = 0
+        """ 肛门高潮 """
 
 
 class Behavior:

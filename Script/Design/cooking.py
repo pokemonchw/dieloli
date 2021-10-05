@@ -139,9 +139,10 @@ def separate_weight_food(old_food: Food, weight: int) -> Food:
     new_food.liquid = old_food.liquid
     new_food.cook_type = old_food.cook_type
     for feel in old_food.feel:
-        now_feel_num = old_food.feel[feel] / old_food.weight * weight
-        new_food.feel[feel] = now_feel_num
-        old_food.feel[feel] -= now_feel_num
+        if old_food.feel[feel] and old_food.weight > 0 and weight > 0:
+            now_feel_num = old_food.feel[feel] / old_food.weight * weight
+            new_food.feel[feel] = now_feel_num
+            old_food.feel[feel] -= now_feel_num
     old_food.weight -= weight
     return new_food
 

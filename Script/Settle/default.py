@@ -3,6 +3,7 @@ from Script.Design import (
     settle_behavior,
     character,
     character_handle,
+    character_behavior,
     map_handle,
     attr_calculation,
     game_time,
@@ -241,7 +242,8 @@ def handle_eat_food(
         else:
             food_name = cache.recipe_data[food.recipe].name
         if food.weight <= 0:
-            del character_data.food_bag[food.uid]
+            if food.uid in character_data.food_bag:
+                del character_data.food_bag[food.uid]
         character_data.behavior.food_name = food_name
         character_data.behavior.food_quality = food.quality
 
@@ -1107,18 +1109,43 @@ def handle_interrupt_target_activity(
                     target_data.cid, character_data.behavior.start_time
                 )
             else:
+                old_statue = target_data.state
                 settle_draw = settle_behavior.handle_settle_behavior(
                     target_data.cid, character_data.behavior.start_time
                 )
-                if settle_draw is not None:
+                if not character_id or not character_data.target_character_id:
                     name_draw = draw.NormalDraw()
-                    name_draw.text = "\n" + target_data.name + ": "
+                    name_draw.text = (
+                        "\n"
+                        + target_data.name
+                        + _("停止了")
+                        + game_config.config_status[old_statue].name
+                    )
                     name_draw.width = window_width
                     name_draw.draw()
-                    settle_draw.draw()
                     line_feed = draw.NormalDraw()
                     line_feed.text = "\n"
                     line_feed.draw()
+                character_data.behavior.temporary_status = game_type.TemporaryStatus()
+                climax_draw = character_behavior.settlement_pleasant_sensation(character_id)
+                if climax_draw is not None:
+                    if not character_id or not character_data.target_character_id:
+                        climax_draw.draw()
+                        line_feed.draw()
+                        talk_draw = talk.handle_talk(character_id)
+                        if talk_draw is not None:
+                            talk_draw.draw()
+                character_data.behavior.temporary_status = game_type.TemporaryStatus()
+                target_climax_draw = character_behavior.settlement_pleasant_sensation(
+                    character_data.target_character_id
+                )
+                if climax_draw is not None:
+                    if not character_id or not character_data.target_character_id:
+                        climax_draw.draw()
+                        line_feed.draw()
+                        talk_draw = talk.handle_talk(character_data.target_character_id)
+                        if talk_draw is not None:
+                            talk_draw.draw()
 
 
 @settle_behavior.add_settle_behavior_effect(
