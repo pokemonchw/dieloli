@@ -180,7 +180,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     if time_judge:
         character_data.behavior.temporary_status = game_type.TemporaryStatus()
         settle_draw = settle_behavior.handle_settle_behavior(character_id, end_time)
-        talk_draw = talk.handle_talk(character_id)
+        talk_draw = talk.handle_talk(character_id, 0)
         if talk_draw is not None:
             talk_draw.draw()
         if settle_draw is not None:
@@ -196,7 +196,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
             if not character_id or not character_data.target_character_id:
                 climax_draw.draw()
                 line_feed.draw()
-                talk_draw = talk.handle_talk(character_id)
+                talk_draw = talk.handle_talk(character_id, 0)
                 if talk_draw is not None:
                     talk_draw.draw()
         character_data.behavior.temporary_status = game_type.TemporaryStatus()
@@ -239,17 +239,17 @@ def search_target(
             target_data.setdefault(target_weight_data[target], set())
             target_data[target_weight_data[target]].add(target)
             continue
-        if target not in game_config.config_target_premise_data:
+        target_config = game_config.config_talk[target]
+        if not len(target_config.premise):
             target_data.setdefault(1, set())
             target_data[1].add(target)
             target_weight_data[target] = 1
             continue
-        target_premise_list = game_config.config_target_premise_data[target]
         now_weight = 0
         now_target_pass_judge = 0
         now_target_data = {}
         premise_judge = 1
-        for premise in target_premise_list:
+        for premise in target_config.premise:
             premise_judge = 0
             if premise in premise_data:
                 premise_judge = premise_data[premise]

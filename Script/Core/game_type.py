@@ -718,3 +718,39 @@ class CharacterStatusChange:
         """ 互动目标状态变化 """
         self.sex_experience: Dict[int, int] = {}
         """ 性经验变化 """
+
+
+class Talk:
+    """口上数据结构体"""
+
+    def __init__(self):
+        """初始化口上对象"""
+        self.uid: str = ""
+        """ 口上唯一id """
+        self.adv_id: str = ""
+        """ 口上所属advnpcid """
+        self.status_id: str = ""
+        """ 口上所属状态id """
+        self.start: bool = 0
+        """ 是否是行为开始时的口上 """
+        self.text: str = ""
+        """ 口上文本 """
+        self.premise: dict = {}
+        """ 口上的前提集合 """
+
+
+class Target:
+    """目标数据结构体"""
+
+    def __init__(self):
+        """初始化口上对象"""
+        self.uid: str = ""
+        """ 目标唯一id """
+        self.text: str = ""
+        """ 目标描述 """
+        self.state_machine_id: str = ""
+        """ 执行的状态机id """
+        self.premise: dict = {}
+        """ 目标的前提集合 """
+        self.effect: dict = {}
+        """ 目标的效果集合 """

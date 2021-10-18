@@ -8,11 +8,12 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
-def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
+def handle_talk(character_id: int, start: int) -> draw.LineFeedWaitDraw():
     """
     处理行为结算对话
     Keyword arguments:
     character_id -- 角色id
+    start -- 是否是行为开始
     """
     character_data: game_type.Character = cache.character_data[character_id]
     behavior_id = character_data.behavior.behavior_id
@@ -27,12 +28,16 @@ def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
         character_data.behavior.move_src,
     ]:
         return
-    if behavior_id in game_config.config_talk_data:
-        for talk_id in game_config.config_talk_data[behavior_id]:
+    if (
+        behavior_id in game_config.config_talk_status_data
+        and start in game_config.config_talk_status_data[behavior_id]
+    ):
+        for talk_id in game_config.config_talk_data[behavior_id][start]:
             now_weight = 1
-            if talk_id in game_config.config_talk_premise_data:
+            talk_config = game_config.config_talk[talk_id]
+            if len(talk_config.premise):
                 now_weight = 0
-                for premise in game_config.config_talk_premise_data[talk_id]:
+                for premise in talk_config.premise:
                     if premise in now_premise_data:
                         if not now_premise_data[premise]:
                             now_weight = 0
@@ -53,7 +58,7 @@ def handle_talk(character_id: int) -> draw.LineFeedWaitDraw():
     if now_talk_data:
         talk_weight = value_handle.get_rand_value_for_value_region(list(now_talk_data.keys()))
         now_talk_id = random.choice(list(now_talk_data[talk_weight]))
-        now_talk = game_config.config_talk[now_talk_id].context
+        now_talk = game_config.config_talk[now_talk_id].text
     if now_talk != "":
         now_talk_text: str = now_talk
         scene_path = character_data.position

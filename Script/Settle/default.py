@@ -1132,7 +1132,7 @@ def handle_interrupt_target_activity(
                     if not character_id or not character_data.target_character_id:
                         climax_draw.draw()
                         line_feed.draw()
-                        talk_draw = talk.handle_talk(character_id)
+                        talk_draw = talk.handle_talk(character_id, 0)
                         if talk_draw is not None:
                             talk_draw.draw()
                 character_data.behavior.temporary_status = game_type.TemporaryStatus()
@@ -1143,7 +1143,7 @@ def handle_interrupt_target_activity(
                     if not character_id or not character_data.target_character_id:
                         climax_draw.draw()
                         line_feed.draw()
-                        talk_draw = talk.handle_talk(character_data.target_character_id)
+                        talk_draw = talk.handle_talk(character_data.target_character_id, 0)
                         if talk_draw is not None:
                             talk_draw.draw()
 

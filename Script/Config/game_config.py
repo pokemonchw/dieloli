@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List, Set
 from Script.Config import config_def
-from Script.Core import json_handle, get_text
+from Script.Core import json_handle, get_text, game_type
 
 
 data_path = os.path.join("data", "data.json")
@@ -243,26 +243,17 @@ config_stature_description_text: Dict[int, config_def.StatureDescriptionText] = 
 """ 身材描述文本配置数据 """
 config_status: Dict[int, config_def.Status] = {}
 """ 角色状态类型配置数据 """
-config_talk: Dict[int, config_def.Talk] = {}
-""" 口上配置 """
-config_talk_data: Dict[int, Set] = {}
-""" 角色行为对应口上集合 """
-config_talk_premise: Dict[int, config_def.TalkPremise] = {}
-""" 口上前提配置 """
-config_talk_premise_data: Dict[int, Set] = {}
-""" 口上前提配置数据 """
-config_target: Dict[int, config_def.Target] = {}
+config_talk: Dict[str, game_type.Talk] = {}
+""" 口上配置数据 """
+config_talk_status_data: Dict[int, Dict[int, Set]] = {}
+"""
+各个状态下口上列表
+状态id:开始/结束口上:口上id集合
+"""
+config_target: Dict[int, game_type.Target] = {}
 """ 目标配置数据 """
-config_target_effect: Dict[int, config_def.TargetEffect] = {}
-""" 目标效果配置 """
-config_target_effect_data: Dict[int, Set] = {}
-""" 目标效果配置数据 """
 config_effect_target_data: Dict[int, Set] = {}
 """ 能达成效果的目标集合 """
-config_target_premise: Dict[int, config_def.TargetPremise] = {}
-""" 目标前提配置 """
-config_target_premise_data: Dict[int, Set] = {}
-""" 目标前提配置数据 """
 config_waist_hip_proportion: Dict[int, config_def.WaistHipProportion] = {}
 """ 不同肥胖程度腰臀比例差值配置 """
 config_week_day: Dict[int, config_def.WeekDay] = {}
@@ -932,23 +923,12 @@ def load_talk():
     now_data = config_data["Talk"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = config_def.Talk()
+        now_tem = game_type.Talk()
         now_tem.__dict__ = tem_data
-        config_talk[now_tem.cid] = now_tem
-        config_talk_data.setdefault(now_tem.behavior_id, set())
-        config_talk_data[now_tem.behavior_id].add(now_tem.cid)
-
-
-def load_talk_premise():
-    """载入口上前提配置"""
-    now_data = config_data["TalkPremise"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.TalkPremise()
-        now_tem.__dict__ = tem_data
-        config_talk_premise[now_tem.cid] = now_tem
-        config_talk_premise_data.setdefault(now_tem.talk_id, set())
-        config_talk_premise_data[now_tem.talk_id].add(now_tem.premise)
+        config_talk[now_tem.uid] = now_tem
+        config_talk_status_data.setdefault(now_tem.status_id, {})
+        config_talk_status_data[now_tem.status_id].setdefault(int(now_tem.start), set())
+        config_talk_status_data[now_tem.status_id][int(now_tem.start)].add(now_tem.uid)
 
 
 def load_target():
@@ -956,35 +936,12 @@ def load_target():
     now_data = config_data["Target"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = config_def.Target()
+        now_tem = game_type.Target()
         now_tem.__dict__ = tem_data
-        config_target[now_tem.cid] = now_tem
-
-
-def load_target_effect():
-    """载入目标效果配置"""
-    now_data = config_data["TargetEffect"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.TargetEffect()
-        now_tem.__dict__ = tem_data
-        config_target_effect[now_tem.cid] = now_tem
-        config_target_effect_data.setdefault(now_tem.target_id, set())
-        config_target_effect_data[now_tem.target_id].add(now_tem.effect_id)
-        config_effect_target_data.setdefault(now_tem.effect_id, set())
-        config_effect_target_data[now_tem.effect_id].add(now_tem.target_id)
-
-
-def load_target_premise():
-    """载入目标效果配置"""
-    now_data = config_data["TargetPremise"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.TargetPremise()
-        now_tem.__dict__ = tem_data
-        config_target_premise[now_tem.cid] = now_tem
-        config_target_premise_data.setdefault(now_tem.target_id, set())
-        config_target_premise_data[now_tem.target_id].add(now_tem.premise_id)
+        config_target[now_tem.uid] = now_tem
+        for effect in now_tem.effect:
+            config_effect_target_data.setdefault(effect, set())
+            config_effect_target_data[effect].add(now_tem.uid)
 
 
 def load_waist_hip_proportion():
@@ -1077,10 +1034,7 @@ def init():
     load_status()
     load_sun_time()
     load_talk()
-    load_talk_premise()
     load_target()
-    load_target_effect()
-    load_target_premise()
     load_waist_hip_proportion()
     load_week_day()
     load_weight_tem()

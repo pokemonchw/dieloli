@@ -95,104 +95,153 @@ class Behavior:
 class StateMachine:
     """状态机id"""
 
-    MOVE_TO_CLASS = 0
+    """
+    =========================
+    寻路类状态机
+    =========================
+    """
+    MOVE_TO_CLASS = "move_to_class"
     """ 移动到所属教室 """
-    MOVE_TO_NEAREST_CAFETERIA = 1
+    MOVE_TO_NEAREST_CAFETERIA = "move_tp_nearest_cafeteria"
     """移动至最近的取餐区"""
-    BUY_RAND_FOOD_AT_CAFETERIA = 2
-    """ 在取餐区购买随机食物 """
-    MOVE_TO_NEAREST_RESTAURANT = 3
+    MOVE_TO_NEAREST_RESTAURANT = "move_to_nearest_restaurant"
     """ 移动至最近的就餐区 """
-    EAT_BAG_RAND_FOOD = 4
-    """ 食用背包内随机食物 """
-    CHAT_RAND_CHARACTER = 5
-    """ 和场景里随机对象闲聊 """
-    WEAR_CLEAN_UNDERWEAR = 6
-    """ 穿干净的上衣 """
-    WEAR_CLEAN_UNDERPANTS = 7
-    """ 穿干净的内裤 """
-    WEAR_CLEAN_BRA = 8
-    """ 穿干净的胸罩 """
-    WEAR_CLEAN_PANTS = 9
-    """ 穿干净的裤子 """
-    WEAR_CLEAN_SKIRT = 10
-    """ 穿干净的短裙 """
-    WEAR_CLEAN_SHOES = 11
-    """ 穿干净的鞋子 """
-    WEAR_CLEAN_SOCKS = 12
-    """ 穿干净的袜子 """
-    PLAY_PIANO = 13
-    """ 弹钢琴 """
-    MOVE_TO_MUSIC_ROOM = 14
+    MOVE_TO_MUSIC_ROOM = "move_to_music_room"
     """ 移动至音乐活动室 """
-    SINGING = 15
-    """ 唱歌 """
-    SING_RAND_CHARACTER = 16
-    """ 唱歌给场景里随机对象听 """
-    PLAY_PIANO_RAND_CHARACTER = 17
-    """ 弹奏钢琴给场景里随机对象听 """
-    TOUCH_HEAD_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 18
-    """ 对场景中抱有超越友谊想法的随机对象摸头 """
-    MOVE_TO_DORMITORY = 19
+    MOVE_TO_DORMITORY = "move_to_dormitory"
     """ 移动至所属宿舍 """
-    SLEEP = 20
-    """ 睡觉 """
-    REST = 21
-    """ 休息一会儿 """
-    MOVE_TO_RAND_SCENE = 22
+    MOVE_TO_RAND_SCENE = "move_to_rand_scene"
     """ 移动至随机场景 """
-    EMBRACE_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 23
-    """ 对场景中抱有超越友谊想法的随机对象拥抱 """
-    KISS_TO_LIKE_TARGET_IN_SCENE = 24
-    """ 和场景中自己喜欢的随机对象接吻 """
-    MOVE_TO_LIKE_TARGET_SCENE = 25
+    MOVE_TO_LIKE_TARGET_SCENE = "move_to_like_target_scene"
     """ 移动至随机某个自己喜欢的人所在场景 """
-    HAND_IN_HAND_TO_LIKE_TARGET_IN_SCENE = 26
-    """ 牵住场景中自己喜欢的随机对象的手 """
-    KISS_TO_NO_FIRST_KISS_TARGET_IN_SCENE = 27
-    """ 和场景中自己喜欢的还是初吻的随机对象接吻 """
-    MOVE_TO_NO_FIRST_KISS_LIKE_TARGET_SCENE = 28
+    MOVE_TO_NO_FIRST_KISS_LIKE_TARGET_SCENE = "move_to_no_first_kiss_like_target_scene"
     """ 移动至喜欢的还是初吻的人所在的场景 """
-    DRINK_RAND_DRINKS = 29
-    """ 饮用背包内随机饮料 """
-    BUY_RAND_DRINKS_AT_CAFETERIA = 30
-    """ 在取餐区购买随机饮料 """
-    ATTEND_CLASS = 31
-    """ 在教室上课 """
-    TEACH_A_LESSON = 32
-    """ 在教室教课 """
-    MOVE_TO_GROVE = 33
+    MOVE_TO_GROVE = "move_to_grove"
     """ 移动至小树林场景 """
-    MOVE_TO_ITEM_SHOP = 34
+    MOVE_TO_ITEM_SHOP = "move_to_item_shop"
     """ 移动至超市场景 """
-    BUY_GUITAR = 35
-    """ 购买吉他 """
-    PLAY_GUITAR = 36
-    """ 弹吉他 """
-    SELF_STUDY = 37
-    """ 自习 """
-    UNDRESS_UNDERWEAR = 38
-    """ 脱掉上衣 """
-    UNDRESS_UNDERPANTS = 39
-    """ 脱掉内裤 """
-    UNDRESS_BRA = 40
-    """ 脱掉胸罩 """
-    UNDRESS_PANTS = 41
-    """ 脱掉裤子 """
-    UNDRESS_SKIRT = 42
-    """ 脱掉短裙 """
-    UNDRESS_SHOES = 43
-    """ 脱掉鞋子 """
-    UNDRESS_SOCKS = 44
-    """ 脱掉袜子 """
-    WEAR_CLEAN_COAT = 45
-    """ 穿着干净的外套 """
-    UNDRESS_COAT = 46
-    """ 脱掉外套 """
-    MASTURBATION = 47
-    """ 手淫 """
-    MOVE_TO_FOLLOW_TARGET_SCENE = 48
+    MOVE_TO_FOLLOW_TARGET_SCENE = "move_to_follow_target_scene"
     """ 移动至跟随对象所在场景 """
+
+    """
+    =========================
+    购物类状态机
+    =========================
+    """
+    BUY_RAND_FOOD_AT_CAFETERIA = "buy_rand_food_at_cafeteria"
+    """ 在取餐区购买随机食物 """
+    BUY_RAND_DRINKS_AT_CAFETERIA = "buy_rand_drinks_at_cafeteria"
+    """ 在取餐区购买随机饮料 """
+    BUY_GUITAR = "buy_guitar"
+    """ 购买吉他 """
+
+    """
+    =========================
+    饮食类状态机
+    =========================
+    """
+    EAT_BAG_RAND_FOOD = "eat_bag_rand_food"
+    """ 食用背包内随机食物 """
+    DRINK_RAND_DRINKS = "drink_rand_drinks"
+    """ 饮用背包内随机饮料 """
+
+    """
+    =========================
+    穿着类状态机
+    =========================
+    """
+    WEAR_CLEAN_UNDERWEAR = "wear_clean_underwear"
+    """ 穿干净的上衣 """
+    WEAR_CLEAN_UNDERPANTS = "wear_clean_underpants"
+    """ 穿干净的内裤 """
+    WEAR_CLEAN_BRA = "wear_clean_bra"
+    """ 穿干净的胸罩 """
+    WEAR_CLEAN_PANTS = "wear_clean_pants"
+    """ 穿干净的裤子 """
+    WEAR_CLEAN_SKIRT = "wear_clean_skirt"
+    """ 穿干净的短裙 """
+    WEAR_CLEAN_SHOES = "wear_clean_shoes"
+    """ 穿干净的鞋子 """
+    WEAR_CLEAN_SOCKS = "wear_clean_socks"
+    """ 穿干净的袜子 """
+    UNDRESS_UNDERWEAR = "undress_underwear"
+    """ 脱掉上衣 """
+    UNDRESS_UNDERPANTS = "undress_underpants"
+    """ 脱掉内裤 """
+    UNDRESS_BRA = "undress_bra"
+    """ 脱掉胸罩 """
+    UNDRESS_PANTS = "undress_pants"
+    """ 脱掉裤子 """
+    UNDRESS_SKIRT = "undress_skirt"
+    """ 脱掉短裙 """
+    UNDRESS_SHOES = "undress_shoes"
+    """ 脱掉鞋子 """
+    UNDRESS_SOCKS = "undress_socks"
+    """ 脱掉袜子 """
+    WEAR_CLEAN_COAT = "wear_clean_coat"
+    """ 穿着干净的外套 """
+    UNDRESS_COAT = "undress_coat"
+    """ 脱掉外套 """
+
+    """
+    =========================
+    学习类状态机
+    =========================
+    """
+    ATTEND_CLASS = "attend_class"
+    """ 在教室上课 """
+    TEACH_A_LESSON = "teach_a_lesson"
+    """ 在教室教课 """
+    SELF_STUDY = "self_study"
+    """ 自习 """
+    PLAY_PIANO = "play_piano"
+    """ 弹钢琴 """
+    SINGING = "singing"
+    """ 唱歌 """
+    PLAY_GUITAR = "play_guitar"
+    """ 弹吉他 """
+
+    """
+    =========================
+    互动类状态机
+    =========================
+    """
+    CHAT_RAND_CHARACTER = "chat_rand_character"
+    """ 和场景里随机对象闲聊 """
+    SING_RAND_CHARACTER = "sing_rand_character"
+    """ 唱歌给场景里随机对象听 """
+    PLAY_PIANO_RAND_CHARACTER = "play_piano_rand_character"
+    """ 弹奏钢琴给场景里随机对象听 """
+    TOUCH_HEAD_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = (
+        "touch_head_to_beyond_friendship_target_in_scene"
+    )
+    """ 对场景中抱有超越友谊想法的随机对象摸头 """
+    EMBRACE_TO_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = "embrace_to_beyond_friendship_target_in_scene"
+    """ 对场景中抱有超越友谊想法的随机对象拥抱 """
+    HAND_IN_HAND_TO_LIKE_TARGET_IN_SCENE = "hand_in_hand_to_like_target_in_scene"
+    """ 牵住场景中自己喜欢的随机对象的手 """
+
+    """
+    =========================
+    回复类状态机
+    =========================
+    """
+    SLEEP = "sleep"
+    """ 睡觉 """
+    REST = "rest"
+    """ 休息一会儿 """
+
+    """
+    =========================
+    性爱类状态机
+    =========================
+    """
+    KISS_TO_LIKE_TARGET_IN_SCENE = "kiss_to_like_target_in_scene"
+    """ 和场景中自己喜欢的随机对象接吻 """
+    KISS_TO_NO_FIRST_KISS_TARGET_IN_SCENE = "kiss_to_no_first_kiss_target_in_scene"
+    """ 和场景中自己喜欢的还是初吻的随机对象接吻 """
+    MASTURBATION = "masturbation"
+    """ 手淫 """
 
 
 class Panel:
@@ -223,388 +272,471 @@ class Panel:
 class Premise:
     """前提id"""
 
-    IN_CAFETERIA = 0
-    """ 处于取餐区 """
-    IN_RESTAURANT = 1
-    """ 处于就餐区 """
-    IN_BREAKFAST_TIME = 2
-    """ 处于早餐时间段 """
-    IN_LUNCH_TIME = 3
-    """ 处于午餐时间段 """
-    IN_DINNER_TIME = 4
-    """ 处于晚餐时间段 """
-    HUNGER = 5
-    """ 处于饥饿状态 """
-    HAVE_FOOD = 6
-    """ 拥有食物 """
-    NOT_HAVE_FOOD = 7
-    """ 未拥有食物 """
-    HAVE_TARGET = 8
-    """ 拥有交互对象 """
-    TARGET_NO_PLAYER = 9
+    """
+    =========================
+    角色身份类前提
+    =========================
+    """
+    TARGET_NO_PLAYER = "target_no_player"
     """ 交互对象不是玩家 """
-    HAVE_DRAW_ITEM = 10
-    """ 拥有绘画类道具 """
-    HAVE_SHOOTING_ITEM = 11
-    """ 拥有射击类道具 """
-    HAVE_GUITAR = 12
-    """ 拥有吉他 """
-    HAVE_HARMONICA = 13
-    """ 拥有口琴 """
-    HAVE_BAM_BOO_FLUTE = 14
-    """ 拥有竹笛 """
-    HAVE_BASKETBALL = 15
-    """ 拥有篮球 """
-    HAVE_FOOTBALL = 16
-    """ 拥有足球 """
-    HAVE_TABLE_TENNIS = 17
-    """ 拥有乒乓球 """
-    IN_SWIMMING_POOL = 18
-    """ 在游泳池中 """
-    IN_CLASSROOM = 19
-    """ 在教室中 """
-    IS_STUDENT = 20
+    IS_STUDENT = "is_student"
     """ 是学生 """
-    IS_TEACHER = 21
+    IS_TEACHER = "is_teacher"
     """ 是老师 """
-    IN_SHOP = 22
-    """ 在商店中 """
-    IN_SLEEP_TIME = 23
-    """ 处于睡觉时间 """
-    IN_SIESTA_TIME = 24
-    """ 处于午休时间 """
-    TARGET_IS_FUTA_OR_WOMAN = 25
-    """ 目标是扶她或女性 """
-    TARGET_IS_FUTA_OR_MAN = 26
-    """ 目标是扶她或男性 """
-    IS_MAN = 27
-    """ 角色是男性 """
-    IS_WOMAN = 28
-    """ 角色是女性 """
-    TARGET_SAME_SEX = 29
-    """ 目标与自身性别相同 """
-    TARGET_AGE_SIMILAR = 30
-    """ 目标与自身年龄相差不大 """
-    TARGET_AVERAGE_HEIGHT_SIMILAR = 31
-    """ 目标身高与平均身高相差不大 """
-    TARGET_AVERAGE_HEIGHT_LOW = 32
-    """ 目标身高低于平均身高 """
-    TARGET_IS_PLAYER = 33
+    TARGET_IS_PLAYER = "target_is_player"
     """ 目标是玩家角色 """
-    TARGET_AVERGAE_STATURE_SIMILAR = 34
-    """ 目标体型与平均体型相差不大 """
-    TARGET_NOT_PUT_ON_UNDERWEAR = 35
-    """ 目标没穿上衣 """
-    TARGET_NOT_PUT_ON_SKIRT = 36
-    """ 目标没穿短裙 """
-    IS_PLAYER = 37
+    IS_PLAYER = "is_player"
     """ 是玩家角色 """
-    NO_PLAYER = 38
+    NO_PLAYER = "no_player"
     """ 不是玩家角色 """
-    IN_PLAYER_SCENE = 39
-    """ 与玩家处于相同场景 """
-    LEAVE_PLAYER_SCENE = 40
-    """ 离开玩家所在场景 """
-    TARGET_IS_ADORE = 41
-    """ 目标是爱慕对象 """
-    TARGET_IS_ADMIRE = 42
-    """ 目标是恋慕对象 """
-    PLAYER_IS_ADORE = 43
-    """ 玩家是爱慕对象 """
-    EAT_SPRING_FOOD = 44
-    """ 食用了春药品质的食物 """
-    IS_HUMOR_MAN = 45
-    """ 是一个幽默的人 """
-    TARGET_IS_BEYOND_FRIENDSHIP = 46
-    """ 对目标抱有超越友谊的想法 """
-    IS_BEYOND_FRIENDSHIP_TARGET = 47
-    """ 目标对自己抱有超越友谊的想法 """
-    SCENE_HAVE_OTHER_CHARACTER = 48
-    """ 场景中有自己外的其他角色 """
-    NO_WEAR_UNDERWEAR = 49
-    """ 没穿上衣 """
-    NO_WEAR_UNDERPANTS = 50
-    """ 没穿内裤 """
-    NO_WEAR_BRA = 51
-    """ 没穿胸罩 """
-    NO_WEAR_PANTS = 52
-    """ 没穿裤子 """
-    NO_WEAR_SKIRT = 53
-    """ 没穿短裙 """
-    NO_WEAR_SHOES = 54
-    """ 没穿鞋子 """
-    NO_WEAR_SOCKS = 55
-    """ 没穿袜子 """
-    NO_IN_SLEEP_TIME = 56
-    """ 不处于睡觉时间 """
-    HAVE_UNDERWEAR = 57
-    """ 拥有上衣 """
-    HAVE_UNDERPANTS = 58
-    """ 拥有内裤 """
-    HAVE_BRA = 59
-    """ 拥有胸罩 """
-    HAVE_PANTS = 60
-    """ 拥有裤子 """
-    HAVE_SKIRT = 61
-    """ 拥有短裙 """
-    HAVE_SHOES = 62
-    """ 拥有鞋子 """
-    HAVE_SOCKS = 63
-    """ 拥有袜子 """
-    IN_DORMITORY = 64
-    """ 在宿舍中 """
-    CHEST_IS_NOT_CLIFF = 65
-    """ 胸围不是绝壁 """
-    EXCELLED_AT_PLAY_MUSIC = 66
-    """ 擅长演奏 """
-    EXCELLED_AT_SINGING = 67
-    """ 擅长演唱 """
-    IN_MUSIC_CLASSROOM = 68
-    """ 处于音乐活动室 """
-    NO_EXCELLED_AT_SINGING = 69
-    """ 不擅长演唱 """
-    SCENE_NO_HAVE_OTHER_CHARACTER = 70
-    """ 场景中没有有自己外的其他角色 """
-    TARGET_HEIGHT_LOW = 71
-    """ 交互对象身高低于自身身高 """
-    TARGET_ADORE = 72
-    """ 被交互对象爱慕 """
-    NO_EXCELLED_AT_PLAY_MUSIC = 73
-    """ 不擅长演奏 """
-    ARROGANT_HEIGHT = 74
-    """ 傲慢情绪高涨 """
-    IS_LIVELY = 75
-    """ 是一个活跃的人 """
-    IS_INFERIORITY = 76
-    """ 是一个自卑的人 """
-    IS_AUTONOMY = 77
-    """ 是一个自律的人 """
-    SCENE_CHARACTER_ONLY_PLAYER_AND_ONE = 78
-    """ 场景中只有包括玩家在内的两个角色 """
-    IS_SOLITARY = 79
-    """ 是一个孤僻的人 """
-    NO_BEYOND_FRIENDSHIP_TARGET = 80
-    """ 目标对自己没有有超越友谊的想法 """
-    TARGET_IS_HEIGHT = 81
-    """ 目标比自己高 """
-    BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 82
-    """ 对场景中某个角色抱有超越友谊的想法 """
-    HYPOSTHENIA = 83
-    """ 体力不足 """
-    PHYSICAL_STRENGHT = 84
-    """ 体力充沛 """
-    IS_INDULGE = 85
-    """ 是一个放纵的人 """
-    IN_FOUNTAIN = 86
-    """ 在喷泉场景 """
-    TARGET_IS_SOLITARY = 87
-    """ 交互对象是一个孤僻的人 """
-    TARGET_CHEST_IS_CLIFF = 88
-    """ 交互对象胸围是绝壁 """
-    TARGET_ADMIRE = 89
-    """ 被交互对象恋慕 """
-    IS_ENTHUSIASM = 90
-    """ 是一个热情的人 """
-    TARGET_AVERAGE_STATURE_HEIGHT = 91
-    """ 目标体型比平均体型更胖 """
-    TARGET_NO_FIRST_KISS = 92
-    """ 交互对象初吻还在 """
-    NO_FIRST_KISS = 93
-    """ 初吻还在 """
-    IS_TARGET_FIRST_KISS = 94
-    """ 是交互对象的初吻对象 """
-    HAVE_OTHER_TARGET_IN_SCENE = 95
-    """ 场景中有自己和交互对象以外的其他人 """
-    NO_HAVE_OTHER_TARGET_IN_SCENE = 96
-    """ 场景中没有自己和交互对象以外的其他人 """
-    TARGET_HAVE_FIRST_KISS = 97
-    """ 交互对象初吻不在了 """
-    HAVE_FIRST_KISS = 98
-    """ 初吻不在了 """
-    HAVE_LIKE_TARGET = 99
-    """ 有喜欢的人 """
-    HAVE_LIKE_TARGET_IN_SCENE = 100
-    """ 场景中有喜欢的人 """
-    TARGET_IS_STUDENT = 101
+    TARGET_IS_STUDENT = "target_is_student"
     """ 交互对象是学生 """
-    TARGET_IS_ASTUTE = 102
-    """ 交互对象是一个机敏的人 """
-    TARGET_IS_INFERIORITY = 103
-    """ 交互对象是一个自卑的人 """
-    TARGET_IS_ENTHUSIASM = 104
-    """ 交互对象是一个热情的人 """
-    TARGET_IS_SELF_CONFIDENCE = 105
-    """ 交互对象是一个自信的人 """
-    IS_ASTUTE = 106
-    """ 是一个机敏的人 """
-    TARGET_IS_HEAVY_FEELING = 107
-    """ 交互对象是一个重情的人 """
-    TARGET_NO_FIRST_HAND_IN_HAND = 108
-    """ 交互对象没有牵过手 """
-    NO_FIRST_HAND_IN_HAND = 109
-    """ 没有和牵过手 """
-    IS_HEAVY_FEELING = 110
-    """ 是一个重情的人 """
-    HAVE_NO_FIRST_KISS_LIKE_TARGET_IN_SCENE = 111
-    """ 有自己喜欢的还是初吻的人在场景中 """
-    HAVE_LIKE_TARGET_NO_FIRST_KISS = 112
-    """ 有自己喜欢的人的初吻还在 """
-    TARGET_IS_APATHY = 113
-    """ 交互对象是一个冷漠的人 """
-    TARGET_UNARMED_COMBAT_IS_HIGHT = 114
-    """ 交互对象徒手格斗技能比自己高 """
-    TARGET_DISGUST_IS_HIGHT = 115
-    """ 交互对象反感情绪高涨 """
-    TARGET_LUST_IS_HIGHT = 116
-    """ 交互对象色欲高涨 """
-    TARGET_IS_WOMAN = 117
-    """ 交互对象是女性 """
-    TARGET_IS_NAKED = 118
-    """ 交互对象一丝不挂 """
-    TARGET_CLITORIS_LEVEL_IS_HIGHT = 119
-    """ 交互对象阴蒂开发度高 """
-    TARGET_IS_MAN = 120
-    """ 交互对象是男性 """
-    SEX_EXPERIENCE_IS_HIGHT = 121
-    """ 性技熟练 """
-    IS_COLLECTION_SYSTEM = 122
-    """ 玩家已启用收藏模式 """
-    UN_COLLECTION_SYSTEM = 123
-    """ 玩家未启用收藏模式 """
-    TARGET_IS_COLLECTION = 124
-    """ 交互对象已被玩家收藏 """
-    TARGET_IS_NOT_COLLECTION = 125
-    """ 交互对象未被玩家收藏 """
-    TARGET_IS_LIVE = 126
-    """ 交互对象未死亡 """
-    THIRSTY = 127
-    """ 处于口渴状态 """
-    HAVE_DRINKS = 128
-    """ 背包中有饮料 """
-    NO_HAVE_DRINKS = 129
-    """ 背包中没有饮料 """
-    ATTEND_CLASS_TODAY = 130
-    """ 今日需要上课 """
-    APPROACHING_CLASS_TIME = 131
-    """ 临近上课时间 """
-    IN_CLASS_TIME = 132
-    """ 处于上课时间 """
-    NO_IN_CLASSROOM = 133
-    """ 不在教室中 """
-    TEACHER_NO_IN_CLASSROOM = 134
-    """ 角色所属班级的老师不在教室中 """
-    TEACHER_IN_CLASSROOM = 135
-    """ 角色所属班级的老师在教室中 """
-    IS_NAKED = 136
-    """ 角色一丝不挂 """
-    IS_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = 137
-    """ 场景中有角色对自己抱有超越友谊的想法 """
-    HAVE_STUDENTS_IN_CLASSROOM = 138
-    """ 有所教班级的学生在教室中 """
-    GOOD_AT_ELOQUENCE = 139
-    """ 角色擅长口才 """
-    GOOD_AT_LITERATURE = 140
-    """ 角色擅长文学 """
-    GOOD_AT_WRITING = 141
-    """ 角色擅长写作 """
-    GOOD_AT_DRAW = 142
-    """ 角色擅长绘画 """
-    GOOD_AT_ART = 143
-    """ 角色擅长艺术 """
-    TARGET_LITTLE_KNOWLEDGE_OF_RELIGION = 144
-    """ 交互对象对宗教一知半解 """
-    TARGET_LITTLE_KNOWLEDGE_OF_FAITH = 145
-    """ 交互对象对信仰一知半解 """
-    TARGET_LITTLE_KNOWLEDGE_OF_ASTRONOMY = 146
-    """ 交互对象对天文学一知半解 """
-    TARGET_LITTLE_KNOWLEDGE_OF_ASTROLOGY = 147
-    """ 交互对象对占星学一知半解 """
-    RICH_EXPERIENCE_IN_SEX = 148
-    """ 角色性经验丰富 """
-    TARGET_IS_SLEEP = 149
-    """ 交互对象正在睡觉 """
-    IN_ROOFTOP_SCENE = 150
-    """ 处于天台场景 """
-    TONIGHT_IS_FULL_MOON = 151
-    """ 今夜是满月 """
-    IS_STARAIGHTFORWARD = 152
-    """ 是一个爽直的人 """
-    NO_GOOD_AT_ELOQUENCE = 153
-    """ 角色不擅长口才 """
-    TARGET_NO_EXPERIENCE_IN_SEX = 154
-    """ 交互对象没有性经验 """
-    LUST_IS_HIGHT = 155
-    """ 角色色欲高涨 """
-    IN_GROVE = 156
-    """ 处于小树林场景 """
-    NO_IN_GROVE = 157
-    """ 未处于小树林场景 """
-    NAKED_CHARACTER_IN_SCENE = 158
-    """ 场景中有人一丝不挂 """
-    TARGET_IS_SING = 159
-    """ 交互对象正在唱歌 """
-    NO_HAVE_GUITAR = 160
-    """ 未拥有吉他 """
-    IN_ITEM_SHOP = 161
-    """ 不在超市中 """
-    NO_IN_ITEM_SHOP = 162
-    """ 在超市中 """
-    IN_STUDENT_UNION_OFFICE = 163
-    """ 在学生会办公室中 """
-    TARGET_CHEST_IS_NOT_CLIFF = 164
-    """ 交互对象胸围不是绝壁 """
-    LUST_IS_LOW = 165
-    """ 角色色欲低下 """
-    IS_MAN_OR_WOMAN = 166
-    """ 角色是男性或女性 """
-    IS_NOT_ASEXUAL = 167
-    """ 角色不是无性 """
-    IS_PRIMARY_SCHOOL_STUDENTS = 168
+    IS_PRIMARY_SCHOOL_STUDENTS = "is_primary_school_students"
     """ 角色是小学生 """
-    NO_RICH_EXPERIENCE_IN_SEX = 169
-    """ 角色性经验不丰富 """
-    NO_IN_CAFETERIA = 170
-    """ 未处于取餐区 """
-    NO_IN_RESTAURANT = 171
-    """ 未处于就餐区 """
-    NO_WEAR_COAT = 172
-    """ 没穿外套 """
-    WEAR_COAT = 173
-    """ 角色穿了外套 """
-    WEAR_UNDERWEAR = 174
-    """ 角色穿了上衣 """
-    WEAR_UNDERPANTS = 175
-    """ 角色穿了内裤 """
-    WEAR_BRA = 176
-    """ 角色穿了胸罩 """
-    WEAR_PANTS = 177
-    """ 角色穿了裤子 """
-    WEAR_SKIRT = 178
-    """ 角色穿了短裙 """
-    WEAR_SHOES = 179
-    """ 角色穿了鞋子 """
-    WEAR_SOCKS = 180
-    """ 角色穿了袜子 """
-    HAVE_COAT = 181
-    """ 角色拥有外套 """
-    IS_PLAYER_TARGET = 182
+    IS_PLAYER_TARGET = "is_player_target"
     """ 是玩家的交互对象 """
-    IS_FUTA_OR_WOMAN = 183
+
+    """
+    =========================
+    角色性别类前提
+    =========================
+    """
+    TARGET_IS_FUTA_OR_WOMAN = "target_is_futa_or_woman"
+    """ 目标是扶她或女性 """
+    TARGET_IS_FUTA_OR_MAN = "target_is_futa_or_man"
+    """ 目标是扶她或男性 """
+    IS_MAN = "is_man"
+    """ 角色是男性 """
+    IS_WOMAN = "is_woman"
+    """ 角色是女性 """
+    TARGET_SAME_SEX = "target_same_sex"
+    """ 目标与自身性别相同 """
+    TARGET_IS_WOMAN = "target_is_woman"
+    """ 交互对象是女性 """
+    TARGET_IS_MAN = "target_is_man"
+    """ 交互对象是男性 """
+    IS_MAN_OR_WOMAN = "is_man_or_woman"
+    """ 角色是男性或女性 """
+    IS_NOT_ASEXUAL = "is_not_asexual"
+    """ 角色不是无性 """
+    IS_FUTA_OR_WOMAN = "is_futa_or_woman"
     """ 角色是扶她或女性 """
-    NO_FOLLOW = 184
+
+    """
+    =========================
+    角色性格类前提
+    =========================
+    """
+    IS_HUMOR_MAN = "is_humor_man"
+    """ 是一个幽默的人 """
+    IS_LIVELY = "is_lively"
+    """ 是一个活跃的人 """
+    IS_INFERIORITY = "is_inferiority"
+    """ 是一个自卑的人 """
+    IS_AUTONOMY = "is_autonomy"
+    """ 是一个自律的人 """
+    IS_SOLITARY = "is_solitary"
+    """ 是一个孤僻的人 """
+    IS_INDULGE = "is_indulge"
+    """ 是一个放纵的人 """
+    TARGET_IS_SOLITARY = "target_is_solitary"
+    """ 交互对象是一个孤僻的人 """
+    IS_ENTHUSIASM = "is_enthusiasm"
+    """ 是一个热情的人 """
+    TARGET_IS_ASTUTE = "target_is_astute"
+    """ 交互对象是一个机敏的人 """
+    TARGET_IS_INFERIORITY = "target_is_inferiority"
+    """ 交互对象是一个自卑的人 """
+    TARGET_IS_ENTHUSIASM = "target_is_enthusiasm"
+    """ 交互对象是一个热情的人 """
+    TARGET_IS_SELF_CONFIDENCE = "target_is_self_confidence"
+    """ 交互对象是一个自信的人 """
+    IS_ASTUTE = "is_astute"
+    """ 是一个机敏的人 """
+    TARGET_IS_HEAVY_FEELING = "target_is_heavy_feeling"
+    """ 交互对象是一个重情的人 """
+    IS_HEAVY_FEELING = "is_heavy_feeling"
+    """ 是一个重情的人 """
+    TARGET_IS_APATHY = "target_is_apathy"
+    """ 交互对象是一个冷漠的人 """
+    IS_STARAIGHTFORWARD = "is_staraightforward"
+    """ 是一个爽直的人 """
+
+    """
+    =========================
+    场景状态类前提
+    =========================
+    """
+    IN_CAFETERIA = "in_cafeteria"
+    """ 处于取餐区 """
+    IN_RESTAURANT = "in_restaurant"
+    """ 处于就餐区 """
+    IN_SWIMMING_POOL = "in_swimming_pool"
+    """ 在游泳池中 """
+    IN_CLASSROOM = "in_classroom"
+    """ 在教室中 """
+    IN_SHOP = "in_shop"
+    """ 在商店中 """
+    IN_PLAYER_SCENE = "in_player_scene"
+    """ 与玩家处于相同场景 """
+    SCENE_HAVE_OTHER_CHARACTER = "scene_have_other_character"
+    """ 场景中有自己外的其他角色 """
+    IN_DORMITORY = "in_dormitory"
+    """ 在宿舍中 """
+    IN_MUSIC_CLASSROOM = "in_music_classroom"
+    """ 处于音乐活动室 """
+    SCENE_NO_HAVE_OTHER_CHARACTER = "scene_no_have_other_character"
+    """ 场景中没有有自己外的其他角色 """
+    SCENE_CHARACTER_ONLY_PLAYER_AND_ONE = "scene_character_only_player_and_one"
+    """ 场景中只有包括玩家在内的两个角色 """
+    BEYOND_FRIENDSHIP_TARGET_IN_SCENE = "beyond_friendship_target_in_scene"
+    """ 对场景中某个角色抱有超越友谊的想法 """
+    IN_FOUNTAIN = "in_fountain"
+    """ 在喷泉场景 """
+    HAVE_OTHER_TARGET_IN_SCENE = "have_other_target_in_scene"
+    """ 场景中有自己和交互对象以外的其他人 """
+    NO_HAVE_OTHER_TARGET_IN_SCENE = "no_have_other_target_in_scene"
+    """ 场景中没有自己和交互对象以外的其他人 """
+    HAVE_LIKE_TARGET_IN_SCENE = "have_like_target_in_scene"
+    """ 场景中有喜欢的人 """
+    HAVE_NO_FIRST_KISS_LIKE_TARGET_IN_SCENE = "have_no_first_kiss_like_target_in_scene"
+    """ 有自己喜欢的还是初吻的人在场景中 """
+    NO_IN_CLASSROOM = "no_in_classroom"
+    """ 不在教室中 """
+    TEACHER_NO_IN_CLASSROOM = "target_no_in_classroom"
+    """ 角色所属班级的老师不在教室中 """
+    TEACHER_IN_CLASSROOM = "teacher_in_classroom"
+    """ 角色所属班级的老师在教室中 """
+    IS_BEYOND_FRIENDSHIP_TARGET_IN_SCENE = "is_beyond_friendship_target_in_scene"
+    """ 场景中有角色对自己抱有超越友谊的想法 """
+    HAVE_STUDENTS_IN_CLASSROOM = "have_students_in_classroom"
+    """ 有所教班级的学生在教室中 """
+    IN_ROOFTOP_SCENE = "in_rooftop_scene"
+    """ 处于天台场景 """
+    IN_GROVE = "in_grove"
+    """ 处于小树林场景 """
+    NO_IN_GROVE = "no_in_grove"
+    """ 未处于小树林场景 """
+    NAKED_CHARACTER_IN_SCENE = "naked_character_in_scene"
+    """ 场景中有人一丝不挂 """
+    IN_ITEM_SHOP = "in_item_shop"
+    """ 不在超市中 """
+    NO_IN_ITEM_SHOP = "no_in_item_shop"
+    """ 在超市中 """
+    IN_STUDENT_UNION_OFFICE = "in_student_union_office"
+    """ 在学生会办公室中 """
+    NO_IN_CAFETERIA = "no_in_cafeteria"
+    """ 未处于取餐区 """
+    NO_IN_RESTAURANT = "no_in_restaurant"
+    """ 未处于就餐区 """
+
+    """
+    =========================
+    时间状态类前提
+    =========================
+    """
+    IN_BREAKFAST_TIME = "in_breakfast_time"
+    """ 处于早餐时间段 """
+    IN_LUNCH_TIME = "in_lunch_time"
+    """ 处于午餐时间段 """
+    IN_DINNER_TIME = "in_dinner_time"
+    """ 处于晚餐时间段 """
+    IN_SLEEP_TIME = "in_sleep_time"
+    """ 处于睡觉时间 """
+    IN_SIESTA_TIME = "in_siesta_time"
+    """ 处于午休时间 """
+    NO_IN_SLEEP_TIME = "no_in_sleep_time"
+    """ 不处于睡觉时间 """
+    ATTEND_CLASS_TODAY = "attend_class_today"
+    """ 今日需要上课 """
+    APPROACHING_CLASS_TIME = "approaching_class_time"
+    """ 临近上课时间 """
+    IN_CLASS_TIME = "in_class_time"
+    """ 处于上课时间 """
+    TONIGHT_IS_FULL_MOON = "tonight_is_full_moon"
+    """ 今夜是满月 """
+
+    """
+    =========================
+    角色技能类前提
+    =========================
+    """
+    EXCELLED_AT_PLAY_MUSIC = "excelled_at_play_music"
+    """ 擅长演奏 """
+    EXCELLED_AT_SINGING = "excelled_at_singing"
+    """ 擅长演唱 """
+    NO_EXCELLED_AT_SINGING = "no_excelled_at_singing"
+    """ 不擅长演唱 """
+    NO_EXCELLED_AT_PLAY_MUSIC = "no_excelled_at_play_music"
+    """ 不擅长演奏 """
+    TARGET_UNARMED_COMBAT_IS_HIGHT = "target_unarmed_combat_is_hight"
+    """ 交互对象徒手格斗技能比自己高 """
+    GOOD_AT_ELOQUENCE = "good_at_eloquence"
+    """ 角色擅长口才 """
+    GOOD_AT_LITERATURE = "good_at_literature"
+    """ 角色擅长文学 """
+    GOOD_AT_WRITING = "good_at_writing"
+    """ 角色擅长写作 """
+    GOOD_AT_DRAW = "good_at_draw"
+    """ 角色擅长绘画 """
+    GOOD_AT_ART = "good_at_art"
+    """ 角色擅长艺术 """
+    TARGET_LITTLE_KNOWLEDGE_OF_RELIGION = "target_little_knowledge_of_religion"
+    """ 交互对象对宗教一知半解 """
+    TARGET_LITTLE_KNOWLEDGE_OF_FAITH = "target_little_knowledge_of_faith"
+    """ 交互对象对信仰一知半解 """
+    TARGET_LITTLE_KNOWLEDGE_OF_ASTRONOMY = "target_little_knowledge_of_astronomy"
+    """ 交互对象对天文学一知半解 """
+    TARGET_LITTLE_KNOWLEDGE_OF_ASTROLOGY = "target_little_knowledge_of_astrology"
+    """ 交互对象对占星学一知半解 """
+    NO_GOOD_AT_ELOQUENCE = "no_good_at_eloquence"
+    """ 角色不擅长口才 """
+
+    """
+    =========================
+    角色状态类前提
+    =========================
+    """
+    HAVE_TARGET = "have_target"
+    """ 拥有交互对象 """
+    HUNGER = "hunger"
+    """ 处于饥饿状态 """
+    EAT_SPRING_FOOD = "eat_spring_food"
+    """ 食用了春药品质的食物 """
+    ARROGANT_HEIGHT = "arrogant_height"
+    """ 傲慢情绪高涨 """
+    HYPOSTHENIA = "hyposthenia"
+    """ 体力不足 """
+    PHYSICAL_STRENGHT = "physical_strenght"
+    """ 体力充沛 """
+    TARGET_DISGUST_IS_HIGHT = "target_disgust_is_hight"
+    """ 交互对象反感情绪高涨 """
+    TARGET_LUST_IS_HIGHT = "target_lust_is_hight"
+    """ 交互对象色欲高涨 """
+    TARGET_IS_LIVE = "target_is_live"
+    """ 交互对象未死亡 """
+    THIRSTY = "thirsty"
+    """ 处于口渴状态 """
+    LUST_IS_HIGHT = "lust_is_hight"
+    """ 角色色欲高涨 """
+    LUST_IS_LOW = "lust_is_low"
+    """ 角色色欲低下 """
+    NO_FOLLOW = "no_follow"
     """ 角色未处于跟随状态 """
-    NO_IN_FOLLOW_TARGET_SCENE = 185
-    """ 跟随的对象不在当前场景 """
-    HAVE_FOLLOW = 186
-    """ 角色拥有跟随对象 """
-    TARGET_IS_FOLLOW_PLAYER = 187
-    """ 交互对象正在跟随玩家 """
-    TARGET_NOT_FOLLOW_PLAYER = 188
-    """ 交互对象未跟随玩家 """
-    IS_LOSE_FIRST_KISS = 189
+    IS_LOSE_FIRST_KISS = "is_lose_first_kiss"
     """ 角色正在失去初吻 """
-    TARGET_IS_LOSE_FIRST_KISS = 190
+    TARGET_IS_LOSE_FIRST_KISS = "target_is_lose_first_kiss"
     """ 交互对象正在失去初吻 """
+
+    """
+    =========================
+    角色道具类前提
+    =========================
+    """
+    HAVE_FOOD = "have_food"
+    """ 拥有食物 """
+    NOT_HAVE_FOOD = "not_have_food"
+    """ 未拥有食物 """
+    HAVE_DRAW_ITEM = "have_draw_item"
+    """ 拥有绘画类道具 """
+    HAVE_SHOOTING_ITEM = "have_shooting_item"
+    """ 拥有射击类道具 """
+    HAVE_GUITAR = "have_guitar"
+    """ 拥有吉他 """
+    NO_HAVE_GUITAR = "no_have_guitar"
+    """ 未拥有吉他 """
+    HAVE_HARMONICA = "have_harmonica"
+    """ 拥有口琴 """
+    HAVE_BAM_BOO_FLUTE = "have_bam_boo_flute"
+    """ 拥有竹笛 """
+    HAVE_BASKETBALL = "have_basketball"
+    """ 拥有篮球 """
+    HAVE_FOOTBALL = "have_football"
+    """ 拥有足球 """
+    HAVE_TABLE_TENNIS = "have_table_tennis"
+    """ 拥有乒乓球 """
+    HAVE_UNDERWEAR = "have_underwear"
+    """ 拥有上衣 """
+    HAVE_UNDERPANTS = "have_underpants"
+    """ 拥有内裤 """
+    HAVE_BRA = "have_bra"
+    """ 拥有胸罩 """
+    HAVE_PANTS = "have_pants"
+    """ 拥有裤子 """
+    HAVE_SKIRT = "have_skirt"
+    """ 拥有短裙 """
+    HAVE_SHOES = "have_shoes"
+    """ 拥有鞋子 """
+    HAVE_SOCKS = "have_socks"
+    """ 拥有袜子 """
+    HAVE_DRINKS = "have_drinks"
+    """ 背包中有饮料 """
+    NO_HAVE_DRINKS = "no_have_drinks"
+    """ 背包中没有饮料 """
+    HAVE_COAT = "have_coat"
+    """ 角色拥有外套 """
+
+    """
+    =========================
+    角色身材类前提
+    =========================
+    """
+    TARGET_AGE_SIMILAR = "target_age_similar"
+    """ 目标与自身年龄相差不大 """
+    TARGET_AVERAGE_HEIGHT_SIMILAR = "target_average_height_similar"
+    """ 目标身高与平均身高相差不大 """
+    TARGET_AVERAGE_HEIGHT_LOW = "target_average_height_low"
+    """ 目标身高低于平均身高 """
+    TARGET_AVERGAE_STATURE_SIMILAR = "target_average_stature_similar"
+    """ 目标体型与平均体型相差不大 """
+    CHEST_IS_NOT_CLIFF = "chest_is_not_cliff"
+    """ 胸围不是绝壁 """
+    TARGET_HEIGHT_LOW = "target_height_low"
+    """ 交互对象身高低于自身身高 """
+    TARGET_IS_HEIGHT = "target_is_height"
+    """ 目标比自己高 """
+    TARGET_CHEST_IS_CLIFF = "target_chest_is_cliff"
+    """ 交互对象胸围是绝壁 """
+    TARGET_AVERAGE_STATURE_HEIGHT = "target_average_stature_height"
+    """ 目标体型比平均体型更胖 """
+    TARGET_CHEST_IS_NOT_CLIFF = "target_chest_is_not_chiff"
+    """ 交互对象胸围不是绝壁 """
+
+    """
+    =========================
+    角色穿着类前提
+    =========================
+    """
+    TARGET_NOT_PUT_ON_UNDERWEAR = "target_not_put_on_underwear"
+    """ 目标没穿上衣 """
+    TARGET_NOT_PUT_ON_SKIRT = "target_not_put_on_skirt"
+    """ 目标没穿短裙 """
+    NO_WEAR_UNDERWEAR = "no_wear_underwear"
+    """ 没穿上衣 """
+    NO_WEAR_UNDERPANTS = "no_wear_underpants"
+    """ 没穿内裤 """
+    NO_WEAR_BRA = "no_wear_bra"
+    """ 没穿胸罩 """
+    NO_WEAR_PANTS = "no_wear_pants"
+    """ 没穿裤子 """
+    NO_WEAR_SKIRT = "no_wear_skirt"
+    """ 没穿短裙 """
+    NO_WEAR_SHOES = "no_wear_shoes"
+    """ 没穿鞋子 """
+    NO_WEAR_SOCKS = "no_wear_socks"
+    """ 没穿袜子 """
+    TARGET_IS_NAKED = "target_is_naked"
+    """ 交互对象一丝不挂 """
+    IS_NAKED = "is_naked"
+    """ 角色一丝不挂 """
+    NO_WEAR_COAT = "no_wear_coat"
+    """ 没穿外套 """
+    WEAR_COAT = "wear_coat"
+    """ 角色穿了外套 """
+    WEAR_UNDERWEAR = "wear_underwear"
+    """ 角色穿了上衣 """
+    WEAR_UNDERPANTS = "wear_underpants"
+    """ 角色穿了内裤 """
+    WEAR_BRA = "wear_bra"
+    """ 角色穿了胸罩 """
+    WEAR_PANTS = "wear_pants"
+    """ 角色穿了裤子 """
+    WEAR_SKIRT = "wear_skirt"
+    """ 角色穿了短裙 """
+    WEAR_SHOES = "wear_shoes"
+    """ 角色穿了鞋子 """
+    WEAR_SOCKS = "wear_socks"
+    """ 角色穿了袜子 """
+
+    """
+    =========================
+    角色性经验类前提
+    =========================
+    """
+    IS_TARGET_FIRST_KISS = "is_target_first_kiss"
+    """ 是交互对象的初吻对象 """
+    SEX_EXPERIENCE_IS_HIGHT = "sex_experience_is_hight"
+    """ 性技熟练 """
+    RICH_EXPERIENCE_IN_SEX = "rich_experience_in_sex"
+    """ 角色性经验丰富 """
+    TARGET_NO_EXPERIENCE_IN_SEX = "target_no_experience_in_sex"
+    """ 交互对象没有性经验 """
+    NO_RICH_EXPERIENCE_IN_SEX = "no_rich_experience_in_sex"
+    """ 角色性经验不丰富 """
+    TARGET_NO_FIRST_KISS = "target_no_first_kiss"
+    """ 交互对象初吻还在 """
+    NO_FIRST_KISS = "no_first_kiss"
+    """ 初吻还在 """
+    TARGET_HAVE_FIRST_KISS = "target_have_first_kiss"
+    """ 交互对象初吻不在了 """
+    HAVE_FIRST_KISS = "have_first_kiss"
+    """ 初吻不在了 """
+    TARGET_NO_FIRST_HAND_IN_HAND = "target_no_first_hand_in_hand"
+    """ 交互对象没有牵过手 """
+    NO_FIRST_HAND_IN_HAND = "no_first_hand_in_hand"
+    """ 没有牵过手 """
+    HAVE_LIKE_TARGET_NO_FIRST_KISS = "have_like_target_no_first_kiss"
+    """ 有自己喜欢的人的初吻还在 """
+    TARGET_CLITORIS_LEVEL_IS_HIGHT = "target_clitoris_level_is_hight"
+    """ 交互对象阴蒂开发度高 """
+
+    """
+    =========================
+    角色好感类前提
+    =========================
+    """
+    TARGET_IS_ADORE = "target_is_adore"
+    """ 目标是爱慕对象 """
+    TARGET_IS_ADMIRE = "target_is_admire"
+    """ 目标是恋慕对象 """
+    PLAYER_IS_ADORE = "player_is_adore"
+    """ 玩家是爱慕对象 """
+    TARGET_IS_BEYOND_FRIENDSHIP = "target_is_beyond_friendship"
+    """ 对目标抱有超越友谊的想法 """
+    IS_BEYOND_FRIENDSHIP_TARGET = "is_beyond_friendship_target"
+    """ 目标对自己抱有超越友谊的想法 """
+    TARGET_ADORE = "target_adore"
+    """ 被交互对象爱慕 """
+    NO_BEYOND_FRIENDSHIP_TARGET = "no_beyond_friendship"
+    """ 目标对自己没有有超越友谊的想法 """
+    TARGET_ADMIRE = "target_admire"
+    """ 被交互对象恋慕 """
+    HAVE_LIKE_TARGET = "have_like_target"
+    """ 有喜欢的人 """
+
+    """
+    =========================
+    角色行为类前提
+    =========================
+    """
+    LEAVE_PLAYER_SCENE = "leave_player_scene"
+    """ 离开玩家所在场景 """
+    TARGET_IS_SLEEP = "target_is_sleep"
+    """ 交互对象正在睡觉 """
+    TARGET_IS_SING = "target_is_sing"
+    """ 交互对象正在唱歌 """
+
+    """
+    =========================
+    辅助系统类前提
+    =========================
+    """
+    HAVE_FOLLOW = "have_follow"
+    """ 角色拥有跟随对象 """
+    NO_IN_FOLLOW_TARGET_SCENE = "no_in_follow_target_scene"
+    """ 跟随的对象不在当前场景 """
+    TARGET_IS_FOLLOW_PLAYER = "target_is_follow_player"
+    """ 交互对象正在跟随玩家 """
+    TARGET_NOT_FOLLOW_PLAYER = "target_not_follow_player"
+    """ 交互对象未跟随玩家 """
+    IS_COLLECTION_SYSTEM = "is_collection_system"
+    """ 玩家已启用收藏模式 """
+    UN_COLLECTION_SYSTEM = "un_collection_system"
+    """ 玩家未启用收藏模式 """
+    TARGET_IS_COLLECTION = "target_is_collection"
+    """ 交互对象已被玩家收藏 """
+    TARGET_IS_NOT_COLLECTION = "target_is_not_collection"
+    """ 交互对象未被玩家收藏 """
 
 
 class BehaviorEffect:

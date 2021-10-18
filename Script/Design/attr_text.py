@@ -42,37 +42,6 @@ def get_random_name_for_sex(sex_grade: int) -> str:
             return family_name + name
 
 
-def get_stature_text(character_id: int) -> str:
-    """
-    按角色Id获取身材描述信息
-    Keyword arguments:
-    character_id -- 角色Id
-    Return arguments:
-    str -- 身材描述文本
-    """
-    descript_data = {}
-    for descript in game_config.config_stature_description_text:
-        descript_tem = game_config.config_stature_description_text[descript]
-        now_weight = 0
-        if descript in game_config.config_stature_description_premise_data:
-            for premise in game_config.config_stature_description_premise_data[descript]:
-                now_add_weight = handle_premise.handle_premise(premise, character_id)
-                if now_add_weight:
-                    now_weight += now_add_weight
-                else:
-                    now_weight = 0
-                    break
-        else:
-            now_weight = 1
-        if now_weight:
-            descript_data.setdefault(now_weight, set())
-            descript_data[now_weight].add(descript_tem.text)
-    if descript_data:
-        max_weight = max(descript_data.keys())
-        return random.choice(list(descript_data[max_weight]))
-    return ""
-
-
 def get_scene_path_text(scene_path: List[str]) -> str:
     """
     从场景路径获取场景地址描述文本
