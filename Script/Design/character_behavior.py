@@ -14,7 +14,7 @@ from Script.Design import (
     settle_behavior,
     game_time,
     handle_premise,
-    talk,
+    event,
     cooking,
 )
 from Script.Config import game_config, normal_config
@@ -103,6 +103,9 @@ def character_target_judge(character_id: int, now_time: int):
     if judge:
         target_config = game_config.config_target[target]
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
+        event_draw = event.handle_event(character_id, 1)
+        if event_draw is not None:
+            event_draw.draw()
     else:
         start_time = cache.character_data[character_id].behavior.start_time
         now_judge = game_time.judge_date_big_or_small(start_time, now_time)
@@ -179,16 +182,17 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     line_feed.text = "\n"
     if time_judge:
         character_data.behavior.temporary_status = game_type.TemporaryStatus()
-        settle_draw = settle_behavior.handle_settle_behavior(character_id, end_time)
-        talk_draw = talk.handle_talk(character_id, 0)
-        if talk_draw is not None:
-            talk_draw.draw()
-        if settle_draw is not None:
-            name_draw = draw.NormalDraw()
-            name_draw.text = "\n" + character_data.name + ": "
-            name_draw.width = window_width
-            name_draw.draw()
-            settle_draw.draw()
+        event_draw = event.handle_event(character_id, 0)
+        if event_draw is not None:
+            event_draw.draw()
+        settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, event_draw.event_id)
+        if settle_output is not None:
+            if settle_output[1]:
+                name_draw = draw.NormalDraw()
+                name_draw.text = "\n" + character_data.name + ": "
+                name_draw.width = window_width
+                name_draw.draw()
+            settle_output[0].draw()
             line_feed.draw()
         character_data.behavior.temporary_status = game_type.TemporaryStatus()
         climax_draw = settlement_pleasant_sensation(character_id)
@@ -196,9 +200,9 @@ def judge_character_status(character_id: int, now_time: int) -> int:
             if not character_id or not character_data.target_character_id:
                 climax_draw.draw()
                 line_feed.draw()
-                talk_draw = talk.handle_talk(character_id, 0)
-                if talk_draw is not None:
-                    talk_draw.draw()
+                event_draw = event.handle_event(character_id, 0)
+                if event_draw is not None:
+                    event_draw.draw()
         character_data.behavior.temporary_status = game_type.TemporaryStatus()
         character_data.behavior = game_type.Behavior()
         character_data.state = constant.CharacterStatus.STATUS_ARDER
@@ -239,7 +243,7 @@ def search_target(
             target_data.setdefault(target_weight_data[target], set())
             target_data[target_weight_data[target]].add(target)
             continue
-        target_config = game_config.config_talk[target]
+        target_config = game_config.config_target[target]
         if not len(target_config.premise):
             target_data.setdefault(1, set())
             target_data[1].add(target)

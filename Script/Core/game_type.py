@@ -720,23 +720,25 @@ class CharacterStatusChange:
         """ 性经验变化 """
 
 
-class Talk:
-    """口上数据结构体"""
+class Event:
+    """事件数据结构体"""
 
     def __init__(self):
-        """初始化口上对象"""
+        """初始化事件对象"""
         self.uid: str = ""
-        """ 口上唯一id """
+        """ 事件唯一id """
         self.adv_id: str = ""
-        """ 口上所属advnpcid """
+        """ 事件所属advnpcid """
         self.status_id: str = ""
-        """ 口上所属状态id """
+        """ 事件所属状态id """
         self.start: bool = 0
-        """ 是否是行为开始时的口上 """
+        """ 是否是行为开始时的事件 """
         self.text: str = ""
-        """ 口上文本 """
+        """ 事件文本 """
         self.premise: dict = {}
-        """ 口上的前提集合 """
+        """ 事件的前提集合 """
+        self.settle: dict = {}
+        """ 事件的结算器集合 """
 
 
 class Target:

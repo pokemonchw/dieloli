@@ -6,7 +6,7 @@ import json
 import datetime
 
 config_dir = os.path.join("data", "csv")
-talk_dir = os.path.join("data", "talk")
+event_dir = os.path.join("data", "event")
 target_dir = os.path.join("data", "target")
 config_data = {}
 config_def_str = ""
@@ -126,27 +126,27 @@ for i in file_list:
     build_csv_config(now_file, i)
     index += 1
 
-talk_file_list = os.listdir(talk_dir)
-talk_list = []
-for i in talk_file_list:
+event_file_list = os.listdir(event_dir)
+event_list = []
+for i in event_file_list:
     if i.split(".")[1] != "json":
         continue
-    now_talk_path = os.path.join(talk_dir, i)
-    with open(now_talk_path, "w", encoding="utf-8") as talk_file:
-        now_talk_data = json.load(now_talk_path)
-        for talk_id in now_talk_data:
-            now_talk = now_talk_data[talk_id]
-            talk_list.append(now_talk)
-            now_talk_text = now_talk["text"]
-            if now_talk_text not in msgData:
-                config_po += f"#: Talk:{talk_id}\n"
-                config_po += f'msgid "{now_talk_text}"\n'
+    now_event_path = os.path.join(event_dir, i)
+    with open(now_event_path, "r", encoding="utf-8") as event_file:
+        now_event_data = json.loads(event_file.read())
+        for event_id in now_event_data:
+            now_event = now_event_data[event_id]
+            event_list.append(now_event)
+            now_event_text = now_event["text"]
+            if now_event_text not in msgData:
+                config_po += f"#: Event:{event_id}\n"
+                config_po += f'msgid "{now_event_text}"\n'
                 config_po += 'msgstr ""\n\n'
-                msgData.add(now_talk_text)
-config_data["Talk"] = {}
-config_data["Talk"]["data"] = talk_list
-config_data["Talk"]["gettext"] = {}
-config_data["Talk"]["gettext"]["text"] = 1
+                msgData.add(now_event_text)
+config_data["Event"] = {}
+config_data["Event"]["data"] = event_list
+config_data["Event"]["gettext"] = {}
+config_data["Event"]["gettext"]["text"] = 1
 
 target_file_list = os.listdir(target_dir)
 target_list = []
@@ -154,8 +154,8 @@ for i in target_file_list:
     if i.split(".")[1] != "json":
         continue
     now_target_path = os.path.join(target_dir, i)
-    with open(now_target_path, "w", encoding="utf-8") as target_file:
-        now_target_data = json.load(now_target_path)
+    with open(now_target_path, "r", encoding="utf-8") as target_file:
+        now_target_data = json.loads(target_file.read())
         for target_id in now_target_data:
             now_target = now_target_data[target_id]
             target_list.append(now_target)

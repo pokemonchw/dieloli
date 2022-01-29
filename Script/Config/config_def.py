@@ -1,5 +1,5 @@
 class WeekDay:
-    """星期描述配置"""
+    """ 星期描述配置 """
 
     cid: int
     """ 周id """
@@ -8,7 +8,7 @@ class WeekDay:
 
 
 class Item:
-    """道具配置数据"""
+    """ 道具配置数据 """
 
     cid: int
     """ 道具id """
@@ -21,7 +21,7 @@ class Item:
 
 
 class EndAgeTem:
-    """性别对应平均寿命"""
+    """ 性别对应平均寿命 """
 
     cid: int
     """ 模板id """
@@ -32,7 +32,7 @@ class EndAgeTem:
 
 
 class Book:
-    """书籍配置表"""
+    """ 书籍配置表 """
 
     cid: int
     """ 书本id """
@@ -43,7 +43,7 @@ class Book:
 
 
 class ClothingEvaluate:
-    """服装评价描述"""
+    """ 服装评价描述 """
 
     cid: int
     """ 评价id """
@@ -52,7 +52,7 @@ class ClothingEvaluate:
 
 
 class RecipesFormula:
-    """菜谱配方配置"""
+    """ 菜谱配方配置 """
 
     cid: int
     """ 配方id """
@@ -65,7 +65,7 @@ class RecipesFormula:
 
 
 class StatureDescriptionPremise:
-    """身材描述文本依赖前提配置"""
+    """ 身材描述文本依赖前提配置 """
 
     cid: int
     """ 配表id """
@@ -76,7 +76,7 @@ class StatureDescriptionPremise:
 
 
 class BodyFatTem:
-    """按性别划分的体脂率模板和范围"""
+    """ 按性别划分的体脂率模板和范围 """
 
     cid: int
     """ 模板id """
@@ -91,7 +91,7 @@ class BodyFatTem:
 
 
 class ClothingUseType:
-    """服装用途配置"""
+    """ 服装用途配置 """
 
     cid: int
     """ 用途id """
@@ -100,7 +100,7 @@ class ClothingUseType:
 
 
 class ClothingType:
-    """衣服种类配置"""
+    """ 衣服种类配置 """
 
     cid: int
     """ 类型id """
@@ -109,7 +109,7 @@ class ClothingType:
 
 
 class ChestTem:
-    """罩杯对应范围和生成权重"""
+    """ 罩杯对应范围和生成权重 """
 
     cid: int
     """ 模板id """
@@ -126,7 +126,7 @@ class ChestTem:
 
 
 class Organ:
-    """器官对应性别限定和文字描述"""
+    """ 器官对应性别限定和文字描述 """
 
     cid: int
     """ 器官id """
@@ -139,7 +139,7 @@ class Organ:
 
 
 class Nature:
-    """性格倾向配置"""
+    """ 性格倾向配置 """
 
     cid: int
     """ 性格id """
@@ -152,7 +152,7 @@ class Nature:
 
 
 class Food:
-    """食材配置数据"""
+    """ 食材配置数据 """
 
     cid: int
     """ 食材id """
@@ -171,7 +171,7 @@ class Food:
 
 
 class MoveMenuType:
-    """移动菜单类型"""
+    """ 移动菜单类型 """
 
     cid: int
     """ 移动类型id """
@@ -180,7 +180,7 @@ class MoveMenuType:
 
 
 class Course:
-    """课程配置数据"""
+    """ 课程配置数据 """
 
     cid: int
     """ 课程id """
@@ -189,7 +189,7 @@ class Course:
 
 
 class SchoolSession:
-    """各学校上课时间配置"""
+    """ 各学校上课时间配置 """
 
     cid: int
     """ 配表id """
@@ -204,7 +204,7 @@ class SchoolSession:
 
 
 class AgeTem:
-    """不同年龄段模板的年龄范围"""
+    """ 不同年龄段模板的年龄范围 """
 
     cid: int
     """ 模板id """
@@ -215,7 +215,7 @@ class AgeTem:
 
 
 class SolarPeriod:
-    """节气配置"""
+    """ 节气配置 """
 
     cid: int
     """ 节气id """
@@ -226,7 +226,7 @@ class SolarPeriod:
 
 
 class StatureDescriptionText:
-    """角色身材描述文本"""
+    """ 角色身材描述文本 """
 
     cid: int
     """ 描述文本id """
@@ -235,7 +235,7 @@ class StatureDescriptionText:
 
 
 class CharacterState:
-    """角色状态属性表"""
+    """ 角色状态属性表 """
 
     cid: int
     """ 配表id """
@@ -246,7 +246,7 @@ class CharacterState:
 
 
 class KnowledgeType:
-    """技能类型配置信息"""
+    """ 技能类型配置信息 """
 
     cid: int
     """ 技能类型id """
@@ -255,7 +255,7 @@ class KnowledgeType:
 
 
 class Recipes:
-    """菜谱配置"""
+    """ 菜谱配置 """
 
     cid: int
     """ 菜谱id """
@@ -268,7 +268,7 @@ class Recipes:
 
 
 class CourseSkillExperience:
-    """课程获取技能经验配置"""
+    """ 课程获取技能经验配置 """
 
     cid: int
     """ 配置id """
@@ -283,7 +283,7 @@ class CourseSkillExperience:
 
 
 class Status:
-    """状态描述配置"""
+    """ 状态描述配置 """
 
     cid: int
     """ 状态id """
@@ -292,7 +292,7 @@ class Status:
 
 
 class OccupationBMIRegion:
-    """学生和老师各自肥胖率配置"""
+    """ 学生和老师各自肥胖率配置 """
 
     cid: int
     """ 区间id """
@@ -305,7 +305,7 @@ class OccupationBMIRegion:
 
 
 class InstructType:
-    """指令类型配置"""
+    """ 指令类型配置 """
 
     cid: int
     """ 指令类型id """
@@ -314,7 +314,7 @@ class InstructType:
 
 
 class School:
-    """学校配置"""
+    """ 学校配置 """
 
     cid: int
     """ 学校id """
@@ -329,7 +329,7 @@ class School:
 
 
 class SchoolPhaseCourse:
-    """各学校各年级教学科目配置"""
+    """ 各学校各年级教学科目配置 """
 
     cid: int
     """ 配表id """
@@ -342,7 +342,7 @@ class SchoolPhaseCourse:
 
 
 class Season:
-    """季节配置"""
+    """ 季节配置 """
 
     cid: int
     """ 季节id """
@@ -351,7 +351,7 @@ class Season:
 
 
 class SocialType:
-    """关系类型配置"""
+    """ 关系类型配置 """
 
     cid: int
     """ 关系id """
@@ -360,7 +360,7 @@ class SocialType:
 
 
 class Knowledge:
-    """技能配置信息"""
+    """ 技能配置信息 """
 
     cid: int
     """ 技能id """
@@ -371,7 +371,7 @@ class Knowledge:
 
 
 class ClothingTem:
-    """服装模板"""
+    """ 服装模板 """
 
     cid: int
     """ 模板id """
@@ -388,7 +388,7 @@ class ClothingTem:
 
 
 class WaistHipProportion:
-    """不同肥胖程度腰臀比例差值配置"""
+    """ 不同肥胖程度腰臀比例差值配置 """
 
     cid: int
     """ 比例id """
@@ -399,7 +399,7 @@ class WaistHipProportion:
 
 
 class SexTem:
-    """性别对应描述和性别器官模板"""
+    """ 性别对应描述和性别器官模板 """
 
     cid: int
     """ 性别id """
@@ -414,7 +414,7 @@ class SexTem:
 
 
 class HitPointTem:
-    """hp模板对应平均值"""
+    """ hp模板对应平均值 """
 
     cid: int
     """ 模板id """
@@ -423,7 +423,7 @@ class HitPointTem:
 
 
 class Language:
-    """语言配置信息"""
+    """ 语言配置信息 """
 
     cid: int
     """ 语言id """
@@ -438,7 +438,7 @@ class Language:
 
 
 class ClothingSuit:
-    """套装配置数据"""
+    """ 套装配置数据 """
 
     cid: int
     """ 套装id """
@@ -451,7 +451,7 @@ class ClothingSuit:
 
 
 class CookType:
-    """烹饪类型配置"""
+    """ 烹饪类型配置 """
 
     cid: int
     """ 烹饪类型id """
@@ -460,7 +460,7 @@ class CookType:
 
 
 class AttrTem:
-    """性别对应的角色各项基础属性模板"""
+    """ 性别对应的角色各项基础属性模板 """
 
     cid: int
     """ 模板id """
@@ -481,7 +481,7 @@ class AttrTem:
 
 
 class AgeJudgeSexExperienceTem:
-    """不同性别不同年龄段对应生成不同性经验模板的权重"""
+    """ 不同性别不同年龄段对应生成不同性经验模板的权重 """
 
     cid: int
     """ 模板id """
@@ -496,7 +496,7 @@ class AgeJudgeSexExperienceTem:
 
 
 class SunTime:
-    """太阳时间配置"""
+    """ 太阳时间配置 """
 
     cid: int
     """ 太阳时间id """
@@ -505,7 +505,7 @@ class SunTime:
 
 
 class FontConfig:
-    """字体样式配置数据(富文本用)"""
+    """ 字体样式配置数据(富文本用) """
 
     cid: int
     """ 样式id """
@@ -532,7 +532,7 @@ class FontConfig:
 
 
 class Moon:
-    """月相配置(明日更满为正反之为负)"""
+    """ 月相配置(明日更满为正反之为负) """
 
     cid: int
     """ 月相id """
@@ -547,7 +547,7 @@ class Moon:
 
 
 class CharacterStateType:
-    """角色状态类型"""
+    """ 角色状态类型 """
 
     cid: int
     """ 类型id """
@@ -556,7 +556,7 @@ class CharacterStateType:
 
 
 class SexExperienceTem:
-    """器官类型性经验丰富程度对应经验范围"""
+    """ 器官类型性经验丰富程度对应经验范围 """
 
     cid: int
     """ 模板id """
@@ -571,7 +571,7 @@ class SexExperienceTem:
 
 
 class HeightTem:
-    """身高预期权值模板"""
+    """ 身高预期权值模板 """
 
     cid: int
     """ 模板id """
@@ -584,7 +584,7 @@ class HeightTem:
 
 
 class ManaPointTem:
-    """mp模板对应平均值"""
+    """ mp模板对应平均值 """
 
     cid: int
     """ 模板id """
@@ -593,7 +593,7 @@ class ManaPointTem:
 
 
 class NatureTag:
-    """性格倾向标签"""
+    """ 性格倾向标签 """
 
     cid: int
     """ 性格标签id """
@@ -604,7 +604,7 @@ class NatureTag:
 
 
 class RecipesFormulaType:
-    """菜谱配方类型"""
+    """ 菜谱配方类型 """
 
     cid: int
     """ 表id """
@@ -612,19 +612,8 @@ class RecipesFormulaType:
     """ 菜谱配方名字 """
 
 
-class BehaviorEffect:
-    """行为结算器配置"""
-
-    cid: int
-    """ 表id """
-    behavior_id: int
-    """ 行为id """
-    effect_id: int
-    """ 结算器id """
-
-
 class BarConfig:
-    """比例条名字对应的状态图片和绘制宽度"""
+    """ 比例条名字对应的状态图片和绘制宽度 """
 
     cid: int
     """ 比例条id """
@@ -639,7 +628,7 @@ class BarConfig:
 
 
 class FoodFeel:
-    """食材效果配置数据"""
+    """ 食材效果配置数据 """
 
     cid: int
     """ 表id """
@@ -652,7 +641,7 @@ class FoodFeel:
 
 
 class FoodQualityWeight:
-    """烹饪技能等级制造食物品质权重配置"""
+    """ 烹饪技能等级制造食物品质权重配置 """
 
     cid: int
     """ 配置表id """
@@ -665,7 +654,7 @@ class FoodQualityWeight:
 
 
 class SexExperience:
-    """性经验丰富程度模板对应器官性经验模板"""
+    """ 性经验丰富程度模板对应器官性经验模板 """
 
     cid: int
     """ 表id """
@@ -678,7 +667,7 @@ class SexExperience:
 
 
 class OccupationAgeRegion:
-    """学生和老师的年龄段生成权重区间配置"""
+    """ 学生和老师的年龄段生成权重区间配置 """
 
     cid: int
     """ 区间id """
@@ -691,7 +680,7 @@ class OccupationAgeRegion:
 
 
 class CauseOfDeath:
-    """角色死因表"""
+    """ 角色死因表 """
 
     cid: int
     """ 配表id """
@@ -700,7 +689,7 @@ class CauseOfDeath:
 
 
 class WeightTem:
-    """体重模板对应体重范围"""
+    """ 体重模板对应体重范围 """
 
     cid: int
     """ 模板id """
@@ -711,7 +700,7 @@ class WeightTem:
 
 
 class OccupationBodyFatRegion:
-    """年龄段下体重对应各体脂率范围权重"""
+    """ 年龄段下体重对应各体脂率范围权重 """
 
     cid: int
     """ 模板id """

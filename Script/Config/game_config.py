@@ -23,10 +23,6 @@ config_bar: Dict[int, config_def.BarConfig] = {}
 """ 比例条配置数据 """
 config_bar_data: Dict[str, int] = {}
 """ 比例条名字对应比例条id """
-config_behavior_effect: Dict[int, config_def.BehaviorEffect] = {}
-""" 行为结算器配置 """
-config_behavior_effect_data: Dict[int, Set] = {}
-""" 行为所包含的结算器id数据 """
 config_body_fat_tem: Dict[int, config_def.BodyFatTem] = {}
 """ 按性别划分的体脂率模板和范围 """
 config_body_fat_tem_data: Dict[int, Dict[int, int]] = {}
@@ -89,6 +85,13 @@ config_end_age_tem: Dict[int, config_def.EndAgeTem] = {}
 """ 最终年龄范围配置模板 """
 config_end_age_tem_sex_data: Dict[int, int] = {}
 """ 各性别最终年龄范围配置数据 """
+config_event: Dict[str, game_type.Event] = {}
+""" 事件配置数据 """
+config_event_status_data: Dict[int, Dict[int, Set]] = {}
+"""
+各个状态下事件列表
+状态id:开始/结束事件:口上id集合
+"""
 config_font: Dict[int, config_def.FontConfig] = {}
 """ 字体配置数据 """
 config_font_data: Dict[str, int] = {}
@@ -243,13 +246,6 @@ config_stature_description_text: Dict[int, config_def.StatureDescriptionText] = 
 """ 身材描述文本配置数据 """
 config_status: Dict[int, config_def.Status] = {}
 """ 角色状态类型配置数据 """
-config_talk: Dict[str, game_type.Talk] = {}
-""" 口上配置数据 """
-config_talk_status_data: Dict[int, Dict[int, Set]] = {}
-"""
-各个状态下口上列表
-状态id:开始/结束口上:口上id集合
-"""
 config_target: Dict[int, game_type.Target] = {}
 """ 目标配置数据 """
 config_effect_target_data: Dict[int, Set] = {}
@@ -278,7 +274,7 @@ def translate_data(data: dict):
         return
     for now_data in data["data"]:
         for key in now_data:
-            if data["gettext"][key]:
+            if key in data["gettext"] and data["gettext"][key]:
                 now_data[key] = get_text._(now_data[key])
 
 
@@ -326,18 +322,6 @@ def load_bar_data():
         now_bar.__dict__ = tem_data
         config_bar[now_bar.cid] = now_bar
         config_bar_data[now_bar.name] = now_bar.cid
-
-
-def load_behavior_effect_data():
-    """载入行为结算器配置"""
-    now_data = config_data["BehaviorEffect"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.BehaviorEffect()
-        now_tem.__dict__ = tem_data
-        config_behavior_effect[now_tem.cid] = now_tem
-        config_behavior_effect_data.setdefault(now_tem.behavior_id, set())
-        config_behavior_effect_data[now_tem.behavior_id].add(now_tem.effect_id)
 
 
 def load_body_fat_tem():
@@ -918,17 +902,17 @@ def load_sun_time():
         config_sun_time[now_tem.cid] = now_tem
 
 
-def load_talk():
-    """载入口上配置"""
-    now_data = config_data["Talk"]
+def load_event():
+    """载入事件配置"""
+    now_data = config_data["Event"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = game_type.Talk()
+        now_tem = game_type.Event()
         now_tem.__dict__ = tem_data
-        config_talk[now_tem.uid] = now_tem
-        config_talk_status_data.setdefault(now_tem.status_id, {})
-        config_talk_status_data[now_tem.status_id].setdefault(int(now_tem.start), set())
-        config_talk_status_data[now_tem.status_id][int(now_tem.start)].add(now_tem.uid)
+        config_event[now_tem.uid] = now_tem
+        config_event_status_data.setdefault(int(now_tem.status_id), {})
+        config_event_status_data[int(now_tem.status_id)].setdefault(int(now_tem.start), set())
+        config_event_status_data[int(now_tem.status_id)][int(now_tem.start)].add(now_tem.uid)
 
 
 def load_target():
@@ -981,7 +965,6 @@ def init():
     load_age_tem()
     load_attr_tem()
     load_bar_data()
-    load_behavior_effect_data()
     load_body_fat_tem()
     load_book_data()
     load_cause_of_death()
@@ -997,6 +980,7 @@ def init():
     load_course()
     load_course_skill_experience()
     load_end_age_tem()
+    load_event()
     load_font_data()
     load_food_data()
     load_food_feel_data()
@@ -1033,7 +1017,6 @@ def init():
     load_stature_description_text()
     load_status()
     load_sun_time()
-    load_talk()
     load_target()
     load_waist_hip_proportion()
     load_week_day()
