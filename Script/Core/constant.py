@@ -547,6 +547,8 @@ class Premise:
     """ 未处于就餐区 """
     HAVE_PLAY_PIANO_IN_SCENE = "have_play_piano_in_scene"
     """ 场景中有人在弹钢琴 """
+    HAVE_SINGING_IN_SCENE = "have_singing_in_scene"
+    """ 场景中有人在唱歌 """
 
     """
     =========================

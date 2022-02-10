@@ -126,6 +126,7 @@ in_student_union_office,场景状态类前提,角色在学生会办公室中
 no_in_cafeteria,场景状态类前提,角色不在取餐区
 no_in_restaurant,场景状态类前提,角色不在就餐区
 have_play_piano_in_scene,场景状态类前提,场景中有角色在弹钢琴
+have_singing_in_scene,场景状态类前提,场景中有角色在唱歌
 in_breakfast_time,时间状态类前提,处于早餐时间段
 in_lunch_time,时间状态类前提,处于午餐时间段
 in_dinner_time,时间状态类前提,处于晚餐时间段

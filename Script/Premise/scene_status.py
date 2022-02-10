@@ -674,3 +674,24 @@ def handle_have_play_piano_in_scene(character_id: int) -> int:
         if now_character_data.behavior.behavior_id == constant.Behavior.PLAY_PIANO:
             return 1
     return 0
+
+
+@handle_premise.add_premise(constant.Premise.HAVE_SINGING_IN_SCENE)
+def handle_have_singing_in_scene(character_id: int) -> int:
+    """
+    校验场景中是否有人在唱歌
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path]
+    for now_character_id in scene_data.character_list:
+        if now_character_id == character_id:
+            continue
+        now_character_data: game_type.Character = cache.character_data[character_id]
+        if now_character_data.behavior.behavior_id == constant.Behavior.SINGING:
+            return 1
+    return 0
