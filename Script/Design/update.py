@@ -1,5 +1,5 @@
 from Script.Design import character_behavior, game_time, event
-from Script.Core import py_cmd
+from Script.Core import py_cmd,cache_control
 
 
 def game_update_flow(add_time: int):

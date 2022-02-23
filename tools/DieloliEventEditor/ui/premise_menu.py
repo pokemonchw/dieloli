@@ -54,12 +54,11 @@ class PremiseMenu(QDialog):
                     premise_node = TreeItem(now_root)
                     premise_node.cid = premise
                     premise_node.setText(0, cache_control.premise_data[premise])
-                    premise_node.setToolTip(0,cache_control.premise_data[premise])
+                    premise_node.setToolTip(0,premise_node.text(0))
                     if premise in cache_control.now_event_data[cache_control.now_event_id].premise:
                         premise_node.setCheckState(0, Qt.Checked)
                     else:
                         premise_node.setCheckState(0, Qt.Unchecked)
-                    cache_control.item_premise_list.update()
                 root_list.append(now_root)
             tree.addTopLevelItems(root_list)
             tree.itemClicked.connect(self.click_item)

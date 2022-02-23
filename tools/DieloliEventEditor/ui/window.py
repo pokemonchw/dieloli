@@ -19,7 +19,7 @@ class Window(QMainWindow):
         widget -- 小部件
         stretch -- 空间占比
         """
-        self.main_layout.addWidget(widget,stretch)
+        self.main_layout.addWidget(widget, stretch)
 
     def add_tool_widget(self, widget: QWidget):
         """

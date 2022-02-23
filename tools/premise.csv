@@ -36,7 +36,7 @@ is_relax,角色性格类前提,角色是一个松散的人
 is_autonomy,角色性格类前提,角色是一个自律的人
 is_indulge,角色性格类前提,角色是一个放纵的人
 is_steady,角色性格类前提,角色是一个沉稳的人
-is_chidish,角色性格类前提,角色是一个稚拙的人
+is_childish,角色性格类前提,角色是一个稚拙的人
 is_resolution,角色性格类前提,角色是一个决断的人
 is_hesitate,角色性格类前提,角色是一个犹豫的人
 is_tenacity,角色性格类前提,角色是一个坚韧的人
@@ -73,7 +73,7 @@ target_is_relax,交互对象性格类前提,交互对象是一个松散的人
 target_is_autonomy,交互对象性格类前提,交互对象是一个自律的人
 target_is_indulge,交互对象性格类前提,交互对象是一个放纵的人
 target_is_steady,交互对象性格类前提,交互对象是一个沉稳的人
-target_is_chidish,交互对象性格类前提,交互对象是一个稚拙的人
+target_is_childish,交互对象性格类前提,交互对象是一个稚拙的人
 target_is_resolution,交互对象性格类前提,交互对象是一个决断的人
 target_is_hesitate,交互对象性格类前提,交互对象是一个犹豫的人
 target_is_tenacity,交互对象性格类前提,交互对象是一个坚韧的人
@@ -567,6 +567,8 @@ target_chest_is_not_cliff,角色身材类前提,交互对象胸围不是绝壁
 is_average_stature_low,角色身材类前提,角色体型瘦于平均体型
 target_not_put_on_underwear,角色穿着类前提,交互对象没穿上衣
 target_not_put_on_skirt,角色穿着类前提,交互对象没穿短裙
+target_not_put_on_bra,角色穿着类前提,交互对象没穿胸罩
+target_not_put_on_coat,角色穿着类前提,交互对象没穿外套
 no_wear_underwear,角色穿着类前提,角色没穿上衣
 no_wear_underpants,角色穿着类前提,角色没穿内裤
 no_wear_bra,角色穿着类前提,角色没穿胸罩

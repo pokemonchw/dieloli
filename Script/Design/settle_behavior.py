@@ -285,14 +285,14 @@ def get_favorability_social(favorability: int) -> int:
         return 4
     return 5
     """
-    if favorability < 62:
-        return 0
-    if favorability < 125:
-        return 1
-    if favorability < 250:
-        return 2
-    if favorability < 500:
-        return 3
     if favorability < 1000:
+        return 0
+    if favorability < 2000:
+        return 1
+    if favorability < 5000:
+        return 2
+    if favorability < 10000:
+        return 3
+    if favorability < 20000:
         return 4
     return 5

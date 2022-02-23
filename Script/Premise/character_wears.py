@@ -38,6 +38,38 @@ def handle_target_put_on_skirt(character_id: int) -> int:
     return 1
 
 
+@handle_premise.add_premise(constant.Premise.TARGET_NOT_PUT_ON_BRA)
+def handle_target_not_put_on_bra(character_id: int) -> int:
+    """
+    校验交互对象是否没穿胸罩
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    target_data = cache.character_data[character_data.target_character_id]
+    if (6 not in target_data.put_on) or (target_data.put_on[6] == ""):
+        return 0
+    return 1
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_NOT_PUT_ON_COAT)
+def handle_target_not_put_on_coat(character_id: int) -> int:
+    """
+    校验交互对象是否没穿外套
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    target_data = cache.character_data[character_data.target_character_id]
+    if (0 not in target_data.put_on) or (target_data.put_on[0] == ""):
+        return 0
+    return 1
+
+
 @handle_premise.add_premise(constant.Premise.NO_WEAR_UNDERWEAR)
 def handle_no_wear_underwear(character_id: int) -> int:
     """

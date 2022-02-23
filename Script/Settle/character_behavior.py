@@ -45,6 +45,14 @@ def handle_move_to_target_scene(
     if character_data.dead:
         return
     if character_data.behavior.move_target:
+        old_scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
+        old_scene_data: game_type.Scene = cache.scene_data[old_scene_path]
+        for now_character in old_scene_data.character_list:
+            if now_character == character_id:
+                continue
+            now_character_data: game_type.Character = cache.character_data[now_character]
+            if now_character_data.target_character_id == character_id:
+                now_character_data.target_character_id = 0
         map_handle.character_move_scene(
             character_data.position, character_data.behavior.move_target, character_id
         )

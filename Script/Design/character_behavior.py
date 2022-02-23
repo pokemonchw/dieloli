@@ -100,12 +100,14 @@ def character_target_judge(character_id: int, now_time: int):
         premise_data,
         target_weight_data,
     )
+    player_data: game_type.Character = cache.character_data[0]
     if judge:
         target_config = game_config.config_target[target]
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
         event_draw = event.handle_event(character_id, 1)
-        if event_draw is not None:
-            event_draw.draw()
+        if (not character_id) or (player_data.target_character_id == character_id):
+            if event_draw is not None:
+                event_draw.draw()
     else:
         start_time = cache.character_data[character_id].behavior.start_time
         now_judge = game_time.judge_date_big_or_small(start_time, now_time)
@@ -178,34 +180,38 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     character_data.status[27] += hunger_time * 0.02
     character_data.status[28] += hunger_time * 0.02
     character_data.last_hunger_time = now_time
+    player_data: game_type.Character = cache.character_data[0]
     line_feed = draw.NormalDraw()
     line_feed.text = "\n"
-    if time_judge:
-        character_data.behavior.temporary_status = game_type.TemporaryStatus()
-        event_draw = event.handle_event(character_id, 0)
-        if event_draw is not None:
-            event_draw.draw()
-        settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, event_draw.event_id)
-        if settle_output is not None:
-            if settle_output[1]:
-                name_draw = draw.NormalDraw()
-                name_draw.text = "\n" + character_data.name + ": "
-                name_draw.width = window_width
-                name_draw.draw()
-            settle_output[0].draw()
-            line_feed.draw()
-        character_data.behavior.temporary_status = game_type.TemporaryStatus()
-        climax_draw = settlement_pleasant_sensation(character_id)
-        if climax_draw is not None:
-            if not character_id or not character_data.target_character_id:
-                climax_draw.draw()
-                line_feed.draw()
-                event_draw = event.handle_event(character_id, 0)
+    while 1:
+        if time_judge:
+            character_data.behavior.temporary_status = game_type.TemporaryStatus()
+            event_draw = event.handle_event(character_id, 0)
+            if event_draw == None:
+                break
+            settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, event_draw.event_id)
+            character_data.behavior.temporary_status = game_type.TemporaryStatus()
+            character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
+            character_data.behavior.move_target = []
+            character_data.behavior.move_src = []
+            climax_draw = settlement_pleasant_sensation(character_id)
+            if (not character_id) or (player_data.target_character_id == character_id):
                 if event_draw is not None:
                     event_draw.draw()
-        character_data.behavior.temporary_status = game_type.TemporaryStatus()
-        character_data.behavior = game_type.Behavior()
-        character_data.state = constant.CharacterStatus.STATUS_ARDER
+                if settle_output is not None:
+                    if settle_output[1]:
+                        name_draw = draw.NormalDraw()
+                        name_draw.text = "\n" + character_data.name + ": "
+                        name_draw.width = window_width
+                        name_draw.draw()
+                    settle_output[0].draw()
+                    line_feed.draw()
+                if climax_draw is not None:
+                    if not character_id or not character_data.target_character_id:
+                        climax_draw.draw()
+                        line_feed.draw()
+            character_data.state = constant.CharacterStatus.STATUS_ARDER
+        break
     if time_judge == 1:
         character_data.behavior.start_time = end_time
         return 0

@@ -369,6 +369,62 @@ def handle_target_is_impetuous(character_id: int) -> int:
     return target_data.nature[12] < 50
 
 
+@handle_premise.add_premise(constant.Premise.TARGET_IS_STARAIGHTFORWARD)
+def handle_target_is_staraightforward(character_id: int) -> int:
+    """
+    校验交互对象是否是一个爽直的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[13] >= 50
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_IS_INSIDIOUS)
+def handle_target_is_insidious(character_id: int) -> int:
+    """
+    校验交互对象是否是一个阴险的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[13] < 50
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_IS_TOLERANT)
+def handle_target_is_tolerance(character_id: int) -> int:
+    """
+    校验交互对象是否是一个宽和的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[14] >= 50
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_IS_NARROW)
+def handle_target_is_narrow(character_id: int) -> int:
+    """
+    校验交互对象是否是一个阴险的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.nature[14] < 50
+
+
 @handle_premise.add_premise(constant.Premise.TARGET_IS_ENTHUSIASM)
 def handle_target_is_enthusiasm(character_id: int) -> int:
     """

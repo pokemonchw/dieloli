@@ -48,10 +48,9 @@ def handle_event(character_id: int, start: int) -> (draw_event_text_panel.DrawEv
             if now_weight:
                 now_event_data.setdefault(now_weight, set())
                 now_event_data[now_weight].add(event_id)
-    now_event = ""
+    now_event_id = ""
     if now_event_data:
         event_weight = value_handle.get_rand_value_for_value_region(list(now_event_data.keys()))
         now_event_id = random.choice(list(now_event_data[event_weight]))
-        now_event = game_config.config_event[now_event_id].text
-    if now_event != "":
-        return draw_event_text_panel.DrawEventTextPanel(now_event,character_id)
+    if now_event_id != "":
+        return draw_event_text_panel.DrawEventTextPanel(now_event_id,character_id)

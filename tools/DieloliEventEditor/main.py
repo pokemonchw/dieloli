@@ -160,7 +160,7 @@ def update_premise_and_settle_list(model_index: QModelIndex):
 
 def update_premise_and_settle_list_for_move(model_index: int):
     """
-    更新前提和结算器列表
+    移动选项时更新前提和结算器列表
     Keyword arguments:
     model_index -- 事件序号
     """
