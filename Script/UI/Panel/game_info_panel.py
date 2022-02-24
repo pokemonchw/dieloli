@@ -73,15 +73,23 @@ class GameTimeInfoPanel:
         now_draw.draw_list.append(attend_class_draw)
         now_width += len(attend_class_draw)
         now_course_id = -1
-        attend_class_judge, school_id, now_week, session_id, now_course_id = character.judge_character_in_class_time(0)
+        (
+            attend_class_judge,
+            school_id,
+            now_week,
+            session_id,
+            now_course_id,
+        ) = character.judge_character_in_class_time(0)
         if attend_class_judge:
             character_data: game_type.Character = cache.character_data[0]
             if character_data.age <= 18:
                 _unused, phase = course.get_character_school_phase(0)
-                cache.course_time_table_data[school_id].setdefault(phase,{})
-                cache.course_time_table_data[school_id][phase].setdefault(now_week,{})
+                cache.course_time_table_data[school_id].setdefault(phase, {})
+                cache.course_time_table_data[school_id][phase].setdefault(now_week, {})
                 if session_id in cache.course_time_table_data[school_id][phase][now_week]:
-                    now_course_id = cache.course_time_table_data[school_id][phase][now_week][session_id]
+                    now_course_id = cache.course_time_table_data[school_id][phase][now_week][
+                        session_id
+                    ]
             now_course_text = ""
             if not session_id:
                 now_course_text = _("早读课")

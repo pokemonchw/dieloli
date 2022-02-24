@@ -1,9 +1,7 @@
 import random
-import time
-import numpy
 from uuid import UUID
 from types import FunctionType
-from typing import Dict
+from typing import Dict, Set
 from Script.Core import (
     cache_control,
     game_path_config,
@@ -15,10 +13,8 @@ from Script.Core import (
 from Script.Design import (
     settle_behavior,
     game_time,
-    character,
     handle_premise,
-    talk,
-    map_handle,
+    event,
     cooking,
 )
 from Script.Config import game_config, normal_config
@@ -104,9 +100,14 @@ def character_target_judge(character_id: int, now_time: int):
         premise_data,
         target_weight_data,
     )
+    player_data: game_type.Character = cache.character_data[0]
     if judge:
         target_config = game_config.config_target[target]
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
+        event_draw = event.handle_event(character_id, 1)
+        if (not character_id) or (player_data.target_character_id == character_id):
+            if event_draw is not None:
+                event_draw.draw()
     else:
         start_time = cache.character_data[character_id].behavior.start_time
         now_judge = game_time.judge_date_big_or_small(start_time, now_time)
@@ -161,8 +162,6 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     bool -- 本次update时间切片内活动是否已完成
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
-    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
     start_time = character_data.behavior.start_time
     end_time = start_time + 60 * character_data.behavior.duration
     time_judge = game_time.judge_date_big_or_small(now_time, end_time)
@@ -181,22 +180,38 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     character_data.status[27] += hunger_time * 0.02
     character_data.status[28] += hunger_time * 0.02
     character_data.last_hunger_time = now_time
-    if time_judge:
-        settle_draw = settle_behavior.handle_settle_behavior(character_id, end_time)
-        talk_draw = talk.handle_talk(character_id)
-        if talk_draw is not None:
-            talk_draw.draw()
-        if settle_draw is not None:
-            name_draw = draw.NormalDraw()
-            name_draw.text = "\n" + character_data.name + ": "
-            name_draw.width = window_width
-            name_draw.draw()
-            settle_draw.draw()
-            line_feed = draw.NormalDraw()
-            line_feed.text = "\n"
-            line_feed.draw()
-        character_data.behavior = game_type.Behavior()
-        character_data.state = constant.CharacterStatus.STATUS_ARDER
+    player_data: game_type.Character = cache.character_data[0]
+    line_feed = draw.NormalDraw()
+    line_feed.text = "\n"
+    while 1:
+        if time_judge:
+            character_data.behavior.temporary_status = game_type.TemporaryStatus()
+            event_draw = event.handle_event(character_id, 0)
+            if event_draw == None:
+                break
+            settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, event_draw.event_id)
+            character_data.behavior.temporary_status = game_type.TemporaryStatus()
+            character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
+            character_data.behavior.move_target = []
+            character_data.behavior.move_src = []
+            climax_draw = settlement_pleasant_sensation(character_id)
+            if (not character_id) or (player_data.target_character_id == character_id):
+                if event_draw is not None:
+                    event_draw.draw()
+                if settle_output is not None:
+                    if settle_output[1]:
+                        name_draw = draw.NormalDraw()
+                        name_draw.text = "\n" + character_data.name + ": "
+                        name_draw.width = window_width
+                        name_draw.draw()
+                    settle_output[0].draw()
+                    line_feed.draw()
+                if climax_draw is not None:
+                    if not character_id or not character_data.target_character_id:
+                        climax_draw.draw()
+                        line_feed.draw()
+            character_data.state = constant.CharacterStatus.STATUS_ARDER
+        break
     if time_judge == 1:
         character_data.behavior.start_time = end_time
         return 0
@@ -234,17 +249,17 @@ def search_target(
             target_data.setdefault(target_weight_data[target], set())
             target_data[target_weight_data[target]].add(target)
             continue
-        if target not in game_config.config_target_premise_data:
+        target_config = game_config.config_target[target]
+        if not len(target_config.premise):
             target_data.setdefault(1, set())
             target_data[1].add(target)
             target_weight_data[target] = 1
             continue
-        target_premise_list = game_config.config_target_premise_data[target]
         now_weight = 0
         now_target_pass_judge = 0
         now_target_data = {}
         premise_judge = 1
-        for premise in target_premise_list:
+        for premise in target_config.premise:
             premise_judge = 0
             if premise in premise_data:
                 premise_judge = premise_data[premise]
@@ -290,3 +305,83 @@ def search_target(
         value_weight = value_handle.get_rand_value_for_value_region(target_data.keys())
         return random.choice(list(target_data[value_weight])), value_weight, 1
     return "", 0, 0
+
+
+def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
+    """
+    结算角色快感
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    draw.NormalDraw -- 高潮结算绘制文本
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    behavior_data: game_type.Behavior = character_data.behavior
+    climax_data: Dict[int, Set] = {1: set(), 2: set()}
+    for organ in character_data.sex_experience:
+        organ_config = game_config.config_organ[organ]
+        status_id = organ_config.status_id
+        if status_id in character_data.status:
+            if character_data.status[status_id] >= 1000:
+                now_level = 1
+                if character_data.status[status_id] >= 10000:
+                    now_level = 2
+                if status_id == 0:
+                    behavior_data.temporary_status.mouth_climax = now_level
+                elif status_id == 1:
+                    behavior_data.temporary_status.chest_climax = now_level
+                elif status_id == 2:
+                    behavior_data.temporary_status.vagina_climax = now_level
+                elif status_id == 3:
+                    behavior_data.temporary_status.clitoris_climax = now_level
+                elif status_id == 4:
+                    behavior_data.temporary_status.anus_climax = now_level
+                elif status_id == 5:
+                    behavior_data.temporary_status.penis_climax = now_level
+                if now_level == 1:
+                    character_data.status[21] *= 0.5
+                elif now_level == 2:
+                    character_data.status[21] *= 0.8
+                character_data.status[21] = max(character_data.status[21], 0)
+                character_data.status[status_id] = 0
+                climax_data[now_level].add(organ)
+                if now_level == 1:
+                    character_data.sex_experience[organ] *= 1.01
+                else:
+                    character_data.sex_experience[organ] *= 1.1
+    low_climax_text = ""
+    for organ in climax_data[1]:
+        organ_config = game_config.config_organ[organ]
+        if not len(low_climax_text):
+            low_climax_text += organ_config.name
+        else:
+            low_climax_text += "+" + organ_config.name
+    if len(low_climax_text):
+        low_climax_text += _("绝顶")
+    hight_climax_text = ""
+    for organ in climax_data[2]:
+        organ_config = game_config.config_organ[organ]
+        if not len(hight_climax_text):
+            hight_climax_text += organ_config.name
+        else:
+            hight_climax_text += "+" + organ_config.name
+    if len(hight_climax_text):
+        hight_climax_text += _("强绝顶")
+    draw_list = []
+    if len(low_climax_text):
+        draw_list.append(low_climax_text)
+    if len(hight_climax_text):
+        draw_list.append(hight_climax_text)
+    if len(draw_list):
+        draw_list.insert(0, character_data.name + ":")
+        draw_text = ""
+        for i in range(len(draw_list)):
+            if i:
+                draw_text += " " + draw_list[i]
+            else:
+                draw_text += draw_list[i]
+        now_draw = draw.NormalDraw()
+        now_draw.text = draw_text
+        now_draw.width = window_width
+        return now_draw
+    return None

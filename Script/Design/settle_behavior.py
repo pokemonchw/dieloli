@@ -13,29 +13,38 @@ _: FunctionType = get_text._
 """ 翻译api """
 
 
-def handle_settle_behavior(character_id: int, now_time: int):
+def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> panel.LeftDrawTextListWaitPanel:
     """
-    处理结算角色行为
+    处理结算角色事件
     Keyword arguments:
     character_id -- 角色id
     now_time -- 结算的时间戳
+    event_id -- 触发的事件id
+    Return arguments:
+    panel.LeftDrawTextListWaitPanel -- 结算的文本列表
+    self_draw_judge -- 结算的文本里是否有自身的信息
     """
     now_character_data: game_type.Character = cache.character_data[character_id]
     status_data = game_type.CharacterStatusChange()
     start_time = now_character_data.behavior.start_time
     add_time = int((now_time - start_time) / 60)
     behavior_id = now_character_data.behavior.behavior_id
-    if behavior_id in game_config.config_behavior_effect_data:
-        for effect_id in game_config.config_behavior_effect_data[behavior_id]:
-            constant.settle_behavior_effect_data[effect_id](
-                character_id, add_time, status_data, now_time
-            )
+    event_data: game_type.Event = game_config.config_event[event_id]
+    for settle in event_data.settle:
+        constant.settle_behavior_effect_data[settle](
+            character_id, add_time, status_data, now_time
+        )
     change_character_favorability_for_time(character_id, now_time)
     change_character_social(character_id, status_data)
     now_judge = False
-    if character_id:
-        return
     if status_data is None:
+        return
+    player_data: game_type.Character = cache.character_data[0]
+    if (
+        character_id
+        and character_id != player_data.target_character_id
+        and now_character_data.target_character_id
+    ):
         return
     if status_data.mana_point:
         now_judge = True
@@ -53,14 +62,17 @@ def handle_settle_behavior(character_id: int, now_time: int):
         now_judge = True
     if now_judge:
         now_text_list = []
+        self_draw_judge = 0
         if status_data.hit_point and round(status_data.hit_point, 2) != 0:
             now_text_list.append(
                 _("体力:") + text_handle.number_to_symbol_string(round(status_data.hit_point, 2))
             )
+            self_draw_judge = 1
         if status_data.mana_point and round(status_data.mana_point, 2) != 0:
             now_text_list.append(
                 _("气力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
             )
+            self_draw_judge = 1
         if status_data.status:
             now_text_list.extend(
                 [
@@ -68,6 +80,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                     for i in status_data.status
                 ]
             )
+            self_draw_judge = 1
         if status_data.knowledge:
             now_text_list.extend(
                 [
@@ -75,6 +88,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                     for i in status_data.knowledge
                 ]
             )
+            self_draw_judge = 1
         if status_data.language:
             now_text_list.extend(
                 [
@@ -82,6 +96,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                     for i in status_data.language
                 ]
             )
+            self_draw_judge = 1
         if status_data.sex_experience:
             now_text_list.extend(
                 [
@@ -91,6 +106,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                     for i in status_data.sex_experience
                 ]
             )
+            self_draw_judge = 1
         if status_data.target_change:
             for target_character_id in status_data.target_change:
                 if character_id and target_character_id:
@@ -141,7 +157,7 @@ def handle_settle_behavior(character_id: int, now_time: int):
                     now_text_list.append(now_text)
         now_panel = panel.LeftDrawTextListWaitPanel()
         now_panel.set(now_text_list, width, 8)
-        return now_panel
+        return now_panel, self_draw_judge
 
 
 def add_settle_behavior_effect(behavior_effect_id: int):
@@ -257,15 +273,26 @@ def get_favorability_social(favorability: int) -> int:
     favorability -- 好感度
     Return arguments:
     int -- 社交关系
-    """
-    if favorability < 500:
+    if favorability < 6250:
         return 0
-    if favorability < 10000:
+    if favorability < 12500:
         return 1
-    if favorability < 200000:
+    if favorability < 25000:
         return 2
-    if favorability < 4000000:
+    if favorability < 50000:
         return 3
-    if favorability < 80000000:
+    if favorability < 100000:
+        return 4
+    return 5
+    """
+    if favorability < 1000:
+        return 0
+    if favorability < 2000:
+        return 1
+    if favorability < 5000:
+        return 2
+    if favorability < 10000:
+        return 3
+    if favorability < 20000:
         return 4
     return 5

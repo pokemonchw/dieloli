@@ -119,7 +119,7 @@ class SeeFoodListByFoodNameDraw:
     """
 
     def __init__(
-        self, text: Tuple[str, str], width: int, is_button: bool, num_button: bool, button_id: int
+        self, text: Tuple[str, int], width: int, is_button: bool, num_button: bool, button_id: int
     ):
         """初始化绘制对象"""
         self.text = text[1]
@@ -214,7 +214,7 @@ class BuyFoodByFoodNameDraw:
         """ 最大宽度 """
         self.num_button: bool = num_button
         """ 绘制数字按钮 """
-        self.button_id: int = str(button_id)
+        self.button_id: str = str(button_id)
         """ 按钮返回值 """
         self.button_return: str = str(button_id)
         """ 按钮返回值 """

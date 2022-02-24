@@ -107,13 +107,21 @@ class SeeMapPanel:
                 message_draw.width = self.width
                 message_draw.draw()
                 draw_list = []
+                character_scene_str = map_handle.get_map_system_path_str_for_list(
+                    character_data.position
+                )
                 for scene in scene_path_list:
                     load_scene_data = map_handle.get_scene_data_for_map(map_path_str, scene)
                     now_scene_path = map_handle.get_map_system_path_for_str(
                         load_scene_data.scene_path
                     )
+                    now_move_time = map_handle.scene_move_time[character_scene_str][
+                        load_scene_data.scene_path
+                    ]
                     now_draw = draw.CenterButton(
-                        f"[{load_scene_data.scene_name}]",
+                        _("[{scene_name}:{move_time}分钟]").format(
+                            scene_name=load_scene_data.scene_name, move_time=now_move_time
+                        ),
                         load_scene_data.scene_name,
                         self.width / 4,
                         cmd_func=self.move_now,
@@ -303,6 +311,9 @@ class MapSceneNameDraw:
             character_scene_id = map_handle.get_map_scene_id_for_scene_path(
                 self.now_map, character_data.position
             )
+            character_scene_str = map_handle.get_map_system_path_str_for_list(
+                character_data.position
+            )
             scene_path = path_edge[character_scene_id].copy()
             if character_scene_id in scene_path:
                 del scene_path[character_scene_id]
@@ -310,7 +321,13 @@ class MapSceneNameDraw:
             for scene_id in scene_id_list:
                 load_scene_data = map_handle.get_scene_data_for_map(map_path_str, scene_id)
                 now_scene_path = map_handle.get_map_system_path_for_str(load_scene_data.scene_path)
-                now_id_text = f"{scene_id}:{load_scene_data.scene_name}"
+                path_str = load_scene_data.scene_path
+                move_time = 0
+                if path_str in map_handle.scene_move_time[character_scene_str]:
+                    move_time = map_handle.scene_move_time[character_scene_str][path_str]
+                now_id_text = _("{scene_id}:{scene_name}:{move_time}分钟").format(
+                    scene_id=scene_id, scene_name=load_scene_data.scene_name, move_time=move_time
+                )
                 now_draw = draw.LeftButton(
                     now_id_text,
                     now_id_text,
@@ -459,7 +476,15 @@ class ScenePathNameMoveDraw:
         self.scene_path: List[str] = text
         """ 对应场景路径 """
         path_text = attr_text.get_scene_path_text(text)
-        button_text = f"[{path_text}]"
+        character_data: game_type.Character = cache.character_data[0]
+        character_scene_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+        path_str = map_handle.get_map_system_path_str_for_list(text)
+        move_time = 0
+        if path_str in map_handle.scene_move_time[character_scene_str]:
+            move_time = map_handle.scene_move_time[character_scene_str][path_str]
+        button_text = _("[{path_text}:{move_time}分钟]").format(
+            path_text=path_text, move_time=move_time
+        )
         button_text = text_handle.align(button_text, text_width=width)
         name_draw = draw.Button(button_text, path_text, cmd_func=self.move_now)
         self.draw_text = button_text
@@ -500,15 +525,12 @@ class SocialSceneNamePanel:
         self.return_list: List[str] = []
         """ 当前面板的按钮返回 """
         character_data: game_type.Character = cache.character_data[0]
+        social_data = value_handle.sorted_dict_for_values(character_data.social_contact_data)
         self.handle_panel = panel.PageHandlePanel(
-            [
-                k
-                for k in character_data.social_contact_data
-                if character_data.social_contact_data[k]
-            ],
+            [k for k in social_data if social_data[k]],
             SocialSceneNameDraw,
             20,
-            3,
+            2,
             self.width,
             1,
         )
@@ -564,7 +586,22 @@ class SocialSceneNameDraw:
         self.scene_path: List[str] = character_data.position
         """ 角色所在场景 """
         path_text = attr_text.get_scene_path_text(self.scene_path)
-        button_text = f"{character_data.name}:[{path_text}]"
+        player_data: game_type.Character = cache.character_data[0]
+        player_scene_str = map_handle.get_map_system_path_str_for_list(player_data.position)
+        path_str = map_handle.get_map_system_path_str_for_list(self.scene_path)
+        social_type = 0
+        if text in player_data.social_contact_data:
+            social_type = player_data.social_contact_data[text]
+        type_text = game_config.config_social_type[social_type].name
+        move_time = 0
+        if path_str in map_handle.scene_move_time[player_scene_str]:
+            move_time = map_handle.scene_move_time[player_scene_str][path_str]
+        button_text = _("[{character_name}:{social_contact}|{path_text}:{move_time}分钟]").format(
+            character_name=character_data.name,
+            social_contact=type_text,
+            path_text=path_text,
+            move_time=move_time,
+        )
         button_text = text_handle.align(button_text, text_width=width)
         name_draw = draw.Button(button_text, character_data.name, cmd_func=self.move_now)
         name_draw.width = width

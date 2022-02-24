@@ -261,6 +261,18 @@ class TemporaryStatus:
     def __init__(self):
         self.lose_first_kiss: int = 0
         """ 正在失去初吻 """
+        self.mouth_climax: int = 0
+        """ 嘴高潮 """
+        self.chest_climax: int = 0
+        """ 胸高潮 """
+        self.clitoris_climax: int = 0
+        """ 阴蒂高潮 """
+        self.penis_climax: int = 0
+        """ 阴茎高潮 """
+        self.vagina_climax: int = 0
+        """ 阴道高潮 """
+        self.anus_climax: int = 0
+        """ 肛门高潮 """
 
 
 class Behavior:
@@ -285,7 +297,7 @@ class Behavior:
         """ 前提结算用:进食行为消耗的食物品质 """
         self.course_id: int = 0
         """ 上课时所学/教的课程 """
-        self.temporary_status: TemporaryStatus = None
+        self.temporary_status: TemporaryStatus = TemporaryStatus()
         """ 角色临时状态 """
 
 
@@ -501,6 +513,8 @@ class Character:
         """ 最后一次结算饥饿的时间戳 """
         self.cause_of_death: int = -1
         """ 角色死因 """
+        self.follow: int = -1
+        """ 当前跟随目标 """
 
 
 class TeacherTimeTable:
@@ -663,6 +677,11 @@ class Cache:
         """ 指定日期下每分钟太阳位置 日期:时:分:位置id """
         self.moon_phase: Dict[str, int] = {}
         """ 指定日期月相记录 日期:月相id """
+        self.clothing_shop: Dict[int, Dict[UUID, Clothing]] = {}
+        """
+        服装商店内的服装数据
+        服装类型id:服装唯一id:服装对象
+        """
 
 
 class TargetChange:
@@ -699,3 +718,41 @@ class CharacterStatusChange:
         """ 互动目标状态变化 """
         self.sex_experience: Dict[int, int] = {}
         """ 性经验变化 """
+
+
+class Event:
+    """事件数据结构体"""
+
+    def __init__(self):
+        """初始化事件对象"""
+        self.uid: str = ""
+        """ 事件唯一id """
+        self.adv_id: str = ""
+        """ 事件所属advnpcid """
+        self.status_id: str = ""
+        """ 事件所属状态id """
+        self.start: bool = 0
+        """ 是否是行为开始时的事件 """
+        self.text: str = ""
+        """ 事件文本 """
+        self.premise: dict = {}
+        """ 事件的前提集合 """
+        self.settle: dict = {}
+        """ 事件的结算器集合 """
+
+
+class Target:
+    """目标数据结构体"""
+
+    def __init__(self):
+        """初始化口上对象"""
+        self.uid: str = ""
+        """ 目标唯一id """
+        self.text: str = ""
+        """ 目标描述 """
+        self.state_machine_id: str = ""
+        """ 执行的状态机id """
+        self.premise: dict = {}
+        """ 目标的前提集合 """
+        self.effect: dict = {}
+        """ 目标的效果集合 """

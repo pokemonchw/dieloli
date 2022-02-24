@@ -4,6 +4,7 @@ from typing import List, Tuple
 from Script.Core import cache_control, game_type, text_handle, get_text, flow_handle, py_cmd
 from Script.Config import game_config
 from Script.UI.Moudle import draw, panel
+from Script.Design import map_handle
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -211,11 +212,14 @@ class ClothingInfoDrawPanel:
         """查看服装信息"""
         py_cmd.clr_cmd()
         now_draw = ClothingDescribeDraw(self.clothing_data.tem_id, self.width)
-        now_draw.width = self.width
         now_draw.draw()
         if not self.character_id:
-            wear_draw = WearClothingListPanel(self.clothing_data.wear, self.width)
-            wear_draw.draw()
+            character_data: game_type.Character = cache.character_data[0]
+            if character_data.position == map_handle.get_map_system_path_for_str(
+                character_data.dormitory
+            ):
+                wear_draw = WearClothingListPanel(self.clothing_data.wear, self.width)
+                wear_draw.draw()
 
 
 class WearClothingListPanel:
@@ -308,6 +312,7 @@ class ChangeClothingDraw:
         self.clothing_data: game_type.Clothing = character_data.clothing[self.clothing_type][
             self.text
         ]
+        """ 当前服装数据 """
         value_dict = {
             _("可爱"): self.clothing_data.sweet,
             _("性感"): self.clothing_data.sexy,

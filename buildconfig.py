@@ -6,7 +6,9 @@ import json
 import datetime
 
 config_dir = os.path.join("data", "csv")
-talk_dir = os.path.join("data", "talk")
+os.system("cp ./tools/DieloliEventEditor/default.json ./data/event/")
+event_dir = os.path.join("data", "event")
+os.system("cp ./tools/DieloliAIEditor/default.json ./data/target/")
 target_dir = os.path.join("data", "target")
 config_data = {}
 config_def_str = ""
@@ -15,31 +17,16 @@ msgData = set()
 class_data = set()
 
 
-def build_csv_config(file_path: str, file_name: str, talk: bool, target: bool):
+def build_csv_config(file_path: str, file_name: str):
     with open(file_path, encoding="utf-8") as now_file:
         now_read = csv.DictReader(now_file)
         now_docstring_data = {}
         now_type_data = {}
         get_text_data = {}
         file_id = file_name.split(".")[0]
-        if talk or target:
-            path_list = file_path.split(os.sep)
-            if talk:
-                file_id = path_list[-2] + "_" + file_id
         i = 0
         class_text = ""
         type_text = file_id
-        if talk:
-            type_text = "Talk"
-            if "premise" in file_name:
-                type_text = "TalkPremise"
-        if target:
-            if "target" in file_name:
-                type_text = "Target"
-            elif "premise" in file_name:
-                type_text = "TargetPremise"
-            elif "effect" in file_name:
-                type_text = "TargetEffect"
         config_data.setdefault(type_text, {})
         config_data[type_text].setdefault("data", [])
         config_data[type_text].setdefault("gettext", {})
@@ -76,14 +63,6 @@ def build_csv_config(file_path: str, file_name: str, talk: bool, target: bool):
                     row[k] = int(row[k])
                 elif now_type == "float":
                     row[k] = float(row[k])
-                if k == "cid" and talk:
-                    row[k] = file_id.split("-")[0] + row[k]
-                if k == "talk_id" and talk:
-                    row[k] = file_id.split("-")[0] + row[k]
-                if k == "cid" and target:
-                    row[k] = path_list[-2] + row[k]
-                elif k == "target_id" and target:
-                    row[k] = path_list[-2] + row[k]
                 if get_text_data[k]:
                     build_config_po(row[k], type_text, k, row["cid"])
             config_data[type_text]["data"].append(row)
@@ -146,24 +125,45 @@ for i in file_list:
     if index:
         config_def_str += "\n\n\n"
     now_file = os.path.join(config_dir, i)
-    build_csv_config(now_file, i, 0, 0)
+    build_csv_config(now_file, i)
     index += 1
 
-talk_file_list = os.listdir(talk_dir)
-for i in talk_file_list:
-    now_dir = os.path.join(talk_dir, i)
-    for f in os.listdir(now_dir):
-        config_def_str += "\n\n\n"
-        now_f = os.path.join(now_dir, f)
-        build_csv_config(now_f, f, 1, 0)
+event_file_list = os.listdir(event_dir)
+event_list = []
+for i in event_file_list:
+    if i.split(".")[1] != "json":
+        continue
+    now_event_path = os.path.join(event_dir, i)
+    with open(now_event_path, "r", encoding="utf-8") as event_file:
+        now_event_data = json.loads(event_file.read())
+        for event_id in now_event_data:
+            now_event = now_event_data[event_id]
+            event_list.append(now_event)
+            now_event_text = now_event["text"]
+            if now_event_text not in msgData:
+                config_po += f"#: Event:{event_id}\n"
+                config_po += f'msgid "{now_event_text}"\n'
+                config_po += 'msgstr ""\n\n'
+                msgData.add(now_event_text)
+config_data["Event"] = {}
+config_data["Event"]["data"] = event_list
+config_data["Event"]["gettext"] = {}
+config_data["Event"]["gettext"]["text"] = 1
 
 target_file_list = os.listdir(target_dir)
+target_list = []
 for i in target_file_list:
-    now_dir = os.path.join(target_dir, i)
-    for f in os.listdir(now_dir):
-        config_def_str += "\n\n\n"
-        now_f = os.path.join(now_dir, f)
-        build_csv_config(now_f, f, 0, 1)
+    if i.split(".")[1] != "json":
+        continue
+    now_target_path = os.path.join(target_dir, i)
+    with open(now_target_path, "r", encoding="utf-8") as target_file:
+        now_target_data = json.loads(target_file.read())
+        for target_id in now_target_data:
+            now_target = now_target_data[target_id]
+            target_list.append(now_target)
+config_data["Target"] = {}
+config_data["Target"]["data"] = target_list
+
 
 map_path = os.path.join("data", "map")
 build_scene_config(map_path)

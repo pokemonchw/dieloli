@@ -8,4 +8,5 @@ from Script.UI.Flow import (
     item_shop_flow,
     view_school_timetable_flow,
     view_character_status_list_flow,
+    clothing_shop_flow,
 )

@@ -29,11 +29,26 @@ def align(text: str, just="left", only_fix=False, columns=1, text_width=None) ->
             return " " * (width - count_index)
         return text + " " * (width - count_index)
     if just == "center":
-        width_i = width / 2
-        count_i = count_index / 2
+        left_text = ""
+        right_text = ""
+        if width < count_index:
+            now_text = ""
+            if width > 0:
+                for i in text:
+                    if get_text_index(now_text) + get_text_index(i) < width:
+                        now_text += i
+                    else:
+                        break
+                now_text = now_text[:-2] + "~"
+        elif width != count_index:
+            for i in range(width - count_index):
+                if not i % 2:
+                    left_text += " "
+                else:
+                    right_text += " "
         if only_fix:
-            return " " * int(width_i - count_i)
-        return " " * int(width_i - count_i) + text + " " * int(width_i - count_i)
+            return left_text
+        return f"{left_text}{text}{right_text}"
 
 
 def get_text_index(text: str) -> int:

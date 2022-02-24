@@ -323,6 +323,14 @@ class LeftDrawTextListWaitPanel(LeftDrawTextListPanel):
         else:
             time.sleep(0.001)
 
+    def __len__(self):
+        """获取面板的内容宽度"""
+        index = 0
+        for now_list in self.draw_list:
+            for value in now_list:
+                index += len(value)
+        return index
+
 
 class DrawTextListPanel:
     """绘制一个对象列表"""

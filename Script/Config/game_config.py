@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List, Set
 from Script.Config import config_def
-from Script.Core import json_handle, get_text
+from Script.Core import json_handle, get_text, game_type
 
 
 data_path = os.path.join("data", "data.json")
@@ -23,10 +23,6 @@ config_bar: Dict[int, config_def.BarConfig] = {}
 """ 比例条配置数据 """
 config_bar_data: Dict[str, int] = {}
 """ 比例条名字对应比例条id """
-config_behavior_effect: Dict[int, config_def.BehaviorEffect] = {}
-""" 行为结算器配置 """
-config_behavior_effect_data: Dict[int, Set] = {}
-""" 行为所包含的结算器id数据 """
 config_body_fat_tem: Dict[int, config_def.BodyFatTem] = {}
 """ 按性别划分的体脂率模板和范围 """
 config_body_fat_tem_data: Dict[int, Dict[int, int]] = {}
@@ -60,9 +56,15 @@ config_clothing_suit_data: Dict[int, Dict[int, Set]] = {}
 config_clothing_tem: Dict[int, config_def.ClothingTem] = {}
 """ 服装模板配置数据 """
 config_clothing_type: Dict[int, config_def.ClothingType] = {}
-""" 衣服种类配置数据 """
+""" 衣服种类配置 """
 config_clothing_use_type: Dict[int, config_def.ClothingUseType] = {}
 """ 衣服用途配置数据 """
+config_clothing_sex_type_data: Dict[int, Set] = {}
+""" 衣服性别分类数据 性别类型(0:男.1:女.2:通用):服装模板id集合 """
+config_clothing_type_data: Dict[int, Set] = {}
+""" 服装种类配置数据 服装种类:服装模板id集合 """
+config_clothing_type_sex_type_data: Dict[int, Dict[int, Set]] = {}
+""" 服装类型下性别类型配置数据 服装类型id:性别类型id:服装模板id集合 """
 config_cook_type: Dict[int, config_def.CookType] = {}
 """ 烹饪类型配置数据 """
 config_course: Dict[int, config_def.Course] = {}
@@ -83,6 +85,13 @@ config_end_age_tem: Dict[int, config_def.EndAgeTem] = {}
 """ 最终年龄范围配置模板 """
 config_end_age_tem_sex_data: Dict[int, int] = {}
 """ 各性别最终年龄范围配置数据 """
+config_event: Dict[str, game_type.Event] = {}
+""" 事件配置数据 """
+config_event_status_data: Dict[int, Dict[int, Set]] = {}
+"""
+各个状态下事件列表
+状态id:开始/结束事件:口上id集合
+"""
 config_font: Dict[int, config_def.FontConfig] = {}
 """ 字体配置数据 """
 config_font_data: Dict[str, int] = {}
@@ -237,26 +246,10 @@ config_stature_description_text: Dict[int, config_def.StatureDescriptionText] = 
 """ 身材描述文本配置数据 """
 config_status: Dict[int, config_def.Status] = {}
 """ 角色状态类型配置数据 """
-config_talk: Dict[int, config_def.Talk] = {}
-""" 口上配置 """
-config_talk_data: Dict[int, Set] = {}
-""" 角色行为对应口上集合 """
-config_talk_premise: Dict[int, config_def.TalkPremise] = {}
-""" 口上前提配置 """
-config_talk_premise_data: Dict[int, Set] = {}
-""" 口上前提配置数据 """
-config_target: Dict[int, config_def.Target] = {}
+config_target: Dict[int, game_type.Target] = {}
 """ 目标配置数据 """
-config_target_effect: Dict[int, config_def.TargetEffect] = {}
-""" 目标效果配置 """
-config_target_effect_data: Dict[int, Set] = {}
-""" 目标效果配置数据 """
 config_effect_target_data: Dict[int, Set] = {}
 """ 能达成效果的目标集合 """
-config_target_premise: Dict[int, config_def.TargetPremise] = {}
-""" 目标前提配置 """
-config_target_premise_data: Dict[int, Set] = {}
-""" 目标前提配置数据 """
 config_waist_hip_proportion: Dict[int, config_def.WaistHipProportion] = {}
 """ 不同肥胖程度腰臀比例差值配置 """
 config_week_day: Dict[int, config_def.WeekDay] = {}
@@ -281,7 +274,7 @@ def translate_data(data: dict):
         return
     for now_data in data["data"]:
         for key in now_data:
-            if data["gettext"][key]:
+            if key in data["gettext"] and data["gettext"][key]:
                 now_data[key] = get_text._(now_data[key])
 
 
@@ -329,18 +322,6 @@ def load_bar_data():
         now_bar.__dict__ = tem_data
         config_bar[now_bar.cid] = now_bar
         config_bar_data[now_bar.name] = now_bar.cid
-
-
-def load_behavior_effect_data():
-    """载入行为结算器配置"""
-    now_data = config_data["BehaviorEffect"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.BehaviorEffect()
-        now_tem.__dict__ = tem_data
-        config_behavior_effect[now_tem.cid] = now_tem
-        config_behavior_effect_data.setdefault(now_tem.behavior_id, set())
-        config_behavior_effect_data[now_tem.behavior_id].add(now_tem.effect_id)
 
 
 def load_body_fat_tem():
@@ -439,6 +420,13 @@ def load_clothing_tem():
         now_tem = config_def.ClothingTem()
         now_tem.__dict__ = tem_data
         config_clothing_tem[now_tem.cid] = now_tem
+        config_clothing_sex_type_data.setdefault(now_tem.sex, set())
+        config_clothing_sex_type_data[now_tem.sex].add(now_tem.cid)
+        config_clothing_type_data.setdefault(now_tem.clothing_type, set())
+        config_clothing_type_data[now_tem.clothing_type].add(now_tem.cid)
+        config_clothing_type_sex_type_data.setdefault(now_tem.clothing_type, {})
+        config_clothing_type_sex_type_data[now_tem.clothing_type].setdefault(now_tem.sex, set())
+        config_clothing_type_sex_type_data[now_tem.clothing_type][now_tem.sex].add(now_tem.cid)
 
 
 def load_clothing_type():
@@ -914,28 +902,17 @@ def load_sun_time():
         config_sun_time[now_tem.cid] = now_tem
 
 
-def load_talk():
-    """载入口上配置"""
-    now_data = config_data["Talk"]
+def load_event():
+    """载入事件配置"""
+    now_data = config_data["Event"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = config_def.Talk()
+        now_tem = game_type.Event()
         now_tem.__dict__ = tem_data
-        config_talk[now_tem.cid] = now_tem
-        config_talk_data.setdefault(now_tem.behavior_id, set())
-        config_talk_data[now_tem.behavior_id].add(now_tem.cid)
-
-
-def load_talk_premise():
-    """载入口上前提配置"""
-    now_data = config_data["TalkPremise"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.TalkPremise()
-        now_tem.__dict__ = tem_data
-        config_talk_premise[now_tem.cid] = now_tem
-        config_talk_premise_data.setdefault(now_tem.talk_id, set())
-        config_talk_premise_data[now_tem.talk_id].add(now_tem.premise)
+        config_event[now_tem.uid] = now_tem
+        config_event_status_data.setdefault(int(now_tem.status_id), {})
+        config_event_status_data[int(now_tem.status_id)].setdefault(int(now_tem.start), set())
+        config_event_status_data[int(now_tem.status_id)][int(now_tem.start)].add(now_tem.uid)
 
 
 def load_target():
@@ -943,35 +920,12 @@ def load_target():
     now_data = config_data["Target"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = config_def.Target()
+        now_tem = game_type.Target()
         now_tem.__dict__ = tem_data
-        config_target[now_tem.cid] = now_tem
-
-
-def load_target_effect():
-    """载入目标效果配置"""
-    now_data = config_data["TargetEffect"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.TargetEffect()
-        now_tem.__dict__ = tem_data
-        config_target_effect[now_tem.cid] = now_tem
-        config_target_effect_data.setdefault(now_tem.target_id, set())
-        config_target_effect_data[now_tem.target_id].add(now_tem.effect_id)
-        config_effect_target_data.setdefault(now_tem.effect_id, set())
-        config_effect_target_data[now_tem.effect_id].add(now_tem.target_id)
-
-
-def load_target_premise():
-    """载入目标效果配置"""
-    now_data = config_data["TargetPremise"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.TargetPremise()
-        now_tem.__dict__ = tem_data
-        config_target_premise[now_tem.cid] = now_tem
-        config_target_premise_data.setdefault(now_tem.target_id, set())
-        config_target_premise_data[now_tem.target_id].add(now_tem.premise_id)
+        config_target[now_tem.uid] = now_tem
+        for effect in now_tem.effect:
+            config_effect_target_data.setdefault(effect, set())
+            config_effect_target_data[effect].add(now_tem.uid)
 
 
 def load_waist_hip_proportion():
@@ -1011,7 +965,6 @@ def init():
     load_age_tem()
     load_attr_tem()
     load_bar_data()
-    load_behavior_effect_data()
     load_body_fat_tem()
     load_book_data()
     load_cause_of_death()
@@ -1027,6 +980,7 @@ def init():
     load_course()
     load_course_skill_experience()
     load_end_age_tem()
+    load_event()
     load_font_data()
     load_food_data()
     load_food_feel_data()
@@ -1063,11 +1017,7 @@ def init():
     load_stature_description_text()
     load_status()
     load_sun_time()
-    load_talk()
-    load_talk_premise()
     load_target()
-    load_target_effect()
-    load_target_premise()
     load_waist_hip_proportion()
     load_week_day()
     load_weight_tem()
