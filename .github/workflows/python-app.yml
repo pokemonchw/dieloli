@@ -39,10 +39,6 @@ jobs:
           Copy-Item LICENSE dist/
           Copy-Item README.md dist/
           Copy-Item image dist/ -Recurse
-          Copy-Item update.log dist/
-          Copy-Item behavior.csv dist/
-          Copy-Item premise.csv dist/
-          Copy-Item state_machine.csv dist/
           Copy-Item package.json dist/
           Rename-Item dist dieloli
       - name: Pack Game Files
@@ -109,10 +105,6 @@ jobs:
           cp LICENSE dist/
           cp README.md dist/
           cp -R image dist/
-          cp update.log dist/
-          cp behavior.csv dist/
-          cp premise.csv dist/
-          cp state_machine.csv dist/
           cp package.json dist/
           /usr/bin/codesign --remove-signature dist/game
           mv dist dieloli
