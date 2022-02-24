@@ -51,6 +51,30 @@ def character_move_to_rand_cafeteria(character_id: int):
     character_data.state = constant.CharacterStatus.STATUS_MOVE
 
 
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_NEAREST_TOILET)
+def character_move_to_nearest_toilet(character_id: int):
+    """
+    移动至最近的洗手间
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    toilet_list = constant.place_data["Toilet"]
+    now_position_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    time_dict = {}
+    for toilet in toilet_list:
+        now_move_time = map_handle.scene_move_time[now_position_str][toilet]
+        time_dict.setdefault(now_move_time, [])
+        time_dict[now_move_time].append(toilet)
+    min_time = min(time_dict.keys())
+    to_toilet = map_handle.get_map_system_path_for_str(random.choice(time_dict[min_time]))
+    _, _, move_path, move_time = character_move.character_move(character_id, to_toilet)
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
 @handle_state_machine.add_state_machine(constant.StateMachine.BUY_RAND_FOOD_AT_CAFETERIA)
 def character_buy_rand_food_at_restaurant(character_id: int):
     """

@@ -116,6 +116,24 @@ def handle_in_shop(character_id: int) -> int:
     return 0
 
 
+@handle_premise.add_premise(constant.Premise.IN_TOILET)
+def handle_in_toilet(character_id: int) -> int:
+    """
+    校验角色是否在洗手间中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data = cache.scene_data[now_scene_str]
+    if now_scene_data.scene_tag == "Toilet":
+        return 1
+    return 0
+
+
 @handle_premise.add_premise(constant.Premise.IN_PLAYER_SCENE)
 def handle_in_player_scene(character_id: int) -> int:
     """

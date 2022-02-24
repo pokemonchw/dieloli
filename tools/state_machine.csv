@@ -2,6 +2,7 @@ cid,state_machine_type,state_machine
 move_to_class,寻路类状态机,移动到所属教室
 move_to_nearest_cafeteria,寻路类状态机,移动至最近的取餐区
 move_to_nearest_restaurant,寻路类状态机,移动至最近的就餐区
+move_to_nearest_toilet,寻路类状态机,移动至最近的洗手间
 move_to_music_room,寻路类状态机,移动至音乐活动室
 move_to_dormitory,寻路类状态机,移动至所属宿舍
 move_to_rand_scene,寻路类状态机,移动至随机场景

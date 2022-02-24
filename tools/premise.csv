@@ -98,6 +98,7 @@ in_restaurant,场景状态类前提,角色处于就餐区
 in_swimming_pool,场景状态类前提,角色处于游泳池
 in_classroom,场景状态类前提,角色处于教室
 in_shop,场景状态类前提,角色处于商店
+in_toilet,场景状态类前提,角色处于洗手间
 in_player_scene,场景状态类前提,角色处于玩家所在场景
 scene_have_other_character,场景状态类前提,场景中有自己外的其他角色
 in_dormitory,场景状态类前提,角色处于宿舍

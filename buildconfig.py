@@ -6,7 +6,9 @@ import json
 import datetime
 
 config_dir = os.path.join("data", "csv")
+os.system("cp ./tools/DieloliEventEditor/default.json ./data/event/")
 event_dir = os.path.join("data", "event")
+os.system("cp ./tools/DieloliAIEditor/default.json ./data/target/")
 target_dir = os.path.join("data", "target")
 config_data = {}
 config_def_str = ""
