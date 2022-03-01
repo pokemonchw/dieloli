@@ -3472,23 +3472,21 @@ class InstructType:
     """ 对话 """
     ACTIVE = 1
     """ 主动 """
-    PASSIVE = 2
-    """ 被动 """
-    PERFORM = 3
+    PERFORM = 2
     """ 表演 """
-    OBSCENITY = 4
+    OBSCENITY = 3
     """ 猥亵 """
-    PLAY = 5
+    PLAY = 4
     """ 娱乐 """
-    BATTLE = 6
+    BATTLE = 5
     """ 战斗 """
-    STUDY = 7
+    STUDY = 6
     """ 学习 """
-    REST = 8
+    REST = 7
     """ 休息 """
-    SEX = 9
+    SEX = 8
     """ 性爱 """
-    SYSTEM = 10
+    SYSTEM = 9
     """ 系统 """
 
 
