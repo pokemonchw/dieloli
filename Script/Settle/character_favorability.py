@@ -113,7 +113,7 @@ def handle_sub_small_favorability(
     if character_data.target_character_id in character_data.social_contact_data:
         social = character_data.social_contact_data[character_data.target_character_id]
         if social:
-            add_favorability /= social
+            sub_favorability /= social
     character_handle.add_favorability(character_data.target_character_id, character_id, -sub_favorability, None, now_time)
 
 
@@ -141,7 +141,7 @@ def handle_sub_medium_favorability(
     if character_data.target_character_id in character_data.social_contact_data:
         social = character_data.social_contact_data[character_data.target_character_id]
         if social:
-            add_favorability /= social
+            sub_favorability /= social
     character_handle.add_favorability(character_data.target_character_id, character_id, -sub_favorability, None, now_time)
 
 
@@ -169,7 +169,7 @@ def handle_sub_large_favorability(
     if character_data.target_character_id in character_data.social_contact_data:
         social = character_data.social_contact_data[character_data.target_character_id]
         if social:
-            add_favorability /= social
+            sub_favorability /= social
     character_handle.add_favorability(character_data.target_character_id, character_id, -sub_favorability, None, now_time)
 
 
