@@ -299,7 +299,7 @@ def handle_target_sub_small_favorability(
     if character_id in target_data.social_contact_data:
         social = target_data.social_contact_data[character_id]
         if social:
-            add_favorability /= social
+            sub_favorability /= social
     character_handle.add_favorability(character_id,target_data.cid, -sub_favorability, None, now_time)
 
 
@@ -330,7 +330,7 @@ def handle_target_sub_medium_favorability(
     if character_id in target_data.social_contact_data:
         social = target_data.social_contact_data[character_id]
         if social:
-            add_favorability /= social
+            sub_favorability /= social
     character_handle.add_favorability(character_id,target_data.cid, -sub_favorability, None, now_time)
 
 
@@ -361,5 +361,5 @@ def handle_target_sub_medium_favorability(
     if character_id in target_data.social_contact_data:
         social = target_data.social_contact_data[character_id]
         if social:
-            add_favorability /= social
+            sub_favorability /= social
     character_handle.add_favorability(character_id,target_data.cid, -sub_favorability, None, now_time)

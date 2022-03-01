@@ -357,7 +357,12 @@ class SeeInstructPanel:
                         continue
                     now_instruct_list.append(instruct)
         now_instruct_list.sort()
-        instruct_group = value_handle.list_of_groups(now_instruct_list, 5)
+        rows = 1
+        for i in range(1,len(now_instruct_list)):
+            if i * i >= len(now_instruct_list):
+                rows = i
+                break
+        instruct_group = value_handle.list_of_groups(now_instruct_list, rows)
         now_draw_list = []
         for instruct_list in instruct_group:
             for instruct_id in instruct_list:
@@ -374,7 +379,7 @@ class SeeInstructPanel:
                 now_draw_list.append(now_draw)
                 self.return_list.append(now_draw.return_text)
         now_draw = panel.VerticalDrawTextListGroup(self.width)
-        now_group = value_handle.list_of_groups(now_draw_list, 5)
+        now_group = value_handle.list_of_groups(now_draw_list, rows)
         now_draw.draw_list = now_group
         now_draw.draw()
 
