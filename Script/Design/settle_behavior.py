@@ -202,23 +202,34 @@ def change_character_favorability_for_time(character_id: int, now_time: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     for now_character in character_data.favorability:
-        if character_data.favorability[now_character] <= 500:
-            continue
-        character_data.social_contact_last_time.setdefault(now_character, now_time)
-        last_add_time = character_data.social_contact_last_time[now_character]
-        now_consume_time = int((now_time - last_add_time) / 60)
-        if now_consume_time < 60:
-            continue
-        now_cut_down = get_cut_down_favorability_for_consume_time(int(now_consume_time / 60))
-        if now_character in character_data.social_contact_last_cut_down_time:
-            last_cut_down_time = character_data.social_contact_last_cut_down_time[now_character]
-            old_consume_time = int((last_cut_down_time - last_add_time) / 60)
-            old_cut_down = get_cut_down_favorability_for_consume_time(int(old_consume_time / 60))
-            now_cut_down -= old_cut_down
-        character_data.favorability[now_character] -= now_cut_down
-        if character_data.favorability[now_character] < 0:
-            character_data.favorability[now_character] = 0
-        change_character_social_now(now_character, character_id)
+        if character_data.favorability[now_character] > 0:
+            character_data.social_contact_last_time.setdefault(now_character, now_time)
+            last_add_time = character_data.social_contact_last_time[now_character]
+            now_consume_time = int((now_time - last_add_time) / 60)
+            if now_consume_time < 60:
+                continue
+            now_cut_down = get_cut_down_favorability_for_consume_time(int(now_consume_time / 60))
+            if now_character in character_data.social_contact_last_cut_down_time:
+                last_cut_down_time = character_data.social_contact_last_cut_down_time[now_character]
+                old_consume_time = int((last_cut_down_time - last_add_time) / 60)
+                old_cut_down = get_cut_down_favorability_for_consume_time(int(old_consume_time / 60))
+                now_cut_down -= old_cut_down
+            character_data.favorability[now_character] -= now_cut_down
+            change_character_social_now(now_character, character_id)
+        elif character_data.favorability[now_character] < 0:
+            character_data.social_contact_last_time.setdefault(now_character, now_time)
+            last_add_time = character_data.social_contact_last_time[now_character]
+            now_consume_time = int((now_time - last_add_time) / 60)
+            if now_consume_time < 60:
+                continue
+            now_cut_down = get_cut_down_favorability_for_consume_time(int(now_consume_time / 60))
+            if now_character in character_data.social_contact_last_cut_down_time:
+                last_cut_down_time = character_data.social_contact_last_cut_down_time[now_character]
+                old_consume_time = int((last_cut_down_time - last_add_time) / 60)
+                old_cut_down = get_cut_down_favorability_for_consume_time(int(old_consume_time / 60))
+                now_cut_down -= old_cut_down
+            character_data.favorability[now_character] += now_cut_down
+            change_character_social_now(now_character, character_id)
 
 
 def change_character_social(character_id: int, change_data: game_type.CharacterStatusChange):
@@ -247,8 +258,8 @@ def change_character_social_now(
     if target_id in change_data.target_change:
         target_change: game_type.TargetChange = change_data.target_change[target_id]
     target_data: game_type.Character = cache.character_data[target_id]
-    old_social = 0
-    new_social = 0
+    old_social = 5
+    new_social = 5
     if character_id in target_data.social_contact_data:
         old_social = target_data.social_contact_data[character_id]
     target_data.favorability.setdefault(character_id, 0)
@@ -273,26 +284,25 @@ def get_favorability_social(favorability: int) -> int:
     favorability -- 好感度
     Return arguments:
     int -- 社交关系
-    if favorability < 6250:
-        return 0
-    if favorability < 12500:
-        return 1
-    if favorability < 25000:
-        return 2
-    if favorability < 50000:
-        return 3
-    if favorability < 100000:
-        return 4
-    return 5
     """
-    if favorability < 1000:
+    if favorability < -20000:
         return 0
-    if favorability < 2000:
+    if favorability < -10000:
         return 1
-    if favorability < 5000:
+    if favorability < -5000:
         return 2
-    if favorability < 10000:
+    if favorability < -2000:
         return 3
-    if favorability < 20000:
+    if favorability < -1000:
         return 4
-    return 5
+    if favorability < 1000:
+        return 5
+    if favorability < 2000:
+        return 6
+    if favorability < 5000:
+        return 7
+    if favorability < 10000:
+        return 8
+    if favorability < 20000:
+        return 9
+    return 10

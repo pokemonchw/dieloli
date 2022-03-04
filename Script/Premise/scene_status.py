@@ -475,7 +475,7 @@ def handle_is_beyond_friendship_target_in_scene(character_id: int) -> int:
         now_character_data: game_type.Character = cache.character_data[now_character]
         if (
             character_id in now_character_data.social_contact_data
-            and now_character_data.social_contact_data[character_id] > 2
+            and now_character_data.social_contact_data[character_id] > 8
         ):
             now_weight += now_character_data.social_contact_data[character_id]
     return now_weight

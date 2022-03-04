@@ -265,9 +265,9 @@ class CharacterInfoHead:
         character_data: game_type.Character = cache.character_data[character_id]
         sex_text = game_config.config_sex_tem[character_data.sex].name
         if character_id:
-            social = 0
-            if 0 in character_data.social_contact_data:
-                social = character_data.social_contact_data[0]
+            social = 5
+            if 5 in character_data.social_contact_data:
+                social = character_data.social_contact_data[5]
             social_text = game_config.config_social_type[social].name
             message = _("No.{character_id}: {character_name} {sex_text} {social_text}").format(
                 character_id=character_id,

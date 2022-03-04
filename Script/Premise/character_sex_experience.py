@@ -190,7 +190,7 @@ def handle_have_like_target_no_first_kiss(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_index = 0
-    for i in {4, 5}:
+    for i in {9, 10}:
         character_data.social_contact.setdefault(i, set())
         for c in character_data.social_contact[i]:
             c_data: game_type.Character = cache.character_data[c]

@@ -81,25 +81,24 @@ def handle_first_kiss(
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
-    if target_data.social_contact_data[character_id] >= 3:
-        if character_data.first_kiss == -1:
-            character_data.first_kiss = target_data.cid
-            character_data.behavior.temporary_status.lose_first_kiss = 1
-            if (not character_id) or (not target_data.cid):
-                now_draw = draw.NormalDraw()
-                now_draw.text = _("{character_name}失去了初吻\n").format(
-                    character_name=character_data.name
-                )
-                now_draw.width = window_width
-                now_draw.draw()
-        if target_data.first_kiss == -1:
-            target_data.first_kiss = character_id
-            target_data.behavior.temporary_status.lose_first_kiss = 1
-            if (not character_id) or (not target_data.cid):
-                now_draw = draw.NormalDraw()
-                now_draw.text = _("{character_name}失去了初吻\n").format(character_name=target_data.name)
-                now_draw.width = window_width
-                now_draw.draw()
+    if character_data.first_kiss == -1:
+        character_data.first_kiss = target_data.cid
+        character_data.behavior.temporary_status.lose_first_kiss = 1
+        if (not character_id) or (not target_data.cid):
+            now_draw = draw.NormalDraw()
+            now_draw.text = _("{character_name}失去了初吻\n").format(
+                character_name=character_data.name
+            )
+            now_draw.width = window_width
+            now_draw.draw()
+    if target_data.first_kiss == -1:
+        target_data.first_kiss = character_id
+        target_data.behavior.temporary_status.lose_first_kiss = 1
+        if (not character_id) or (not target_data.cid):
+            now_draw = draw.NormalDraw()
+            now_draw.text = _("{character_name}失去了初吻\n").format(character_name=target_data.name)
+            now_draw.width = window_width
+            now_draw.draw()
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.FIRST_HAND_IN_HAND)
@@ -122,11 +121,7 @@ def handle_first_hand_in_hand(
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact_data.setdefault(character_id, 0)
-    social = 0
-    if character_id in target_data.social_contact_data:
-        social = target_data.social_contact_data[character_id]
-    if social >= 2:
-        if character_data.first_hand_in_hand == -1:
-            character_data.first_kiss = target_data.cid
-        if target_data.first_hand_in_hand == -1:
-            target_data.first_kiss = character_id
+    if character_data.first_hand_in_hand == -1:
+        character_data.first_kiss = target_data.cid
+    if target_data.first_hand_in_hand == -1:
+        target_data.first_kiss = character_id
