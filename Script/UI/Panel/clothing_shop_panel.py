@@ -330,6 +330,6 @@ class BuyClothingByClothingNameDraw:
         """购买服装"""
         py_cmd.clr_cmd()
         character_data: game_type.Character = cache.character_data[0]
-        character_data.clothing.setdefault(self.clothing_data.wear, {})
+        character_data.clothing.setdefault(self.clothing_type, {})
         character_data.clothing[self.clothing_type][self.text] = self.clothing_data
         del cache.clothing_shop[self.clothing_type][self.text]
