@@ -16,8 +16,8 @@ def handle_target_is_adore(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     target_id = character_data.target_character_id
-    character_data.social_contact.setdefault(5, set())
-    if target_id in character_data.social_contact[5]:
+    character_data.social_contact.setdefault(10, set())
+    if target_id in character_data.social_contact[10]:
         return 1
     return 0
 
@@ -33,8 +33,8 @@ def handle_target_is_admire(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     target_id = character_data.target_character_id
-    character_data.social_contact.setdefault(4, set())
-    if target_id in character_data.social_contact[4]:
+    character_data.social_contact.setdefault(9, set())
+    if target_id in character_data.social_contact[9]:
         return 1
     return 0
 
@@ -49,8 +49,8 @@ def handle_player_is_adore(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    character_data.social_contact.setdefault(5, set())
-    if 0 in character_data.social_contact[5]:
+    character_data.social_contact.setdefault(10, set())
+    if 0 in character_data.social_contact[10]:
         return 1
     return 0
 
@@ -67,7 +67,7 @@ def handle_target_is_beyond_friendship(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if (
         character_data.target_character_id in character_data.social_contact_data
-        and character_data.social_contact_data[character_data.target_character_id] > 2
+        and character_data.social_contact_data[character_data.target_character_id] > 7
     ):
         return character_data.social_contact_data[character_data.target_character_id]
     return 0
@@ -86,7 +86,7 @@ def handle_is_beyond_friendship_target(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if (
         character_id in target_data.social_contact_data
-        and target_data.social_contact_data[character_id] > 2
+        and target_data.social_contact_data[character_id] > 7
     ):
         return target_data.social_contact_data[character_id]
     return 0
@@ -103,8 +103,8 @@ def handle_target_adore(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    target_data.social_contact.setdefault(5, set())
-    if character_id in target_data.social_contact[5]:
+    target_data.social_contact.setdefault(10, set())
+    if character_id in target_data.social_contact[10]:
         return 1
     return 0
 
@@ -122,11 +122,11 @@ def handle_no_beyond_friendship_target(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if (
         character_id in target_data.social_contact_data
-        and target_data.social_contact_data[character_id] < 3
+        and target_data.social_contact_data[character_id] < 8
     ):
-        return 5 - target_data.social_contact_data[character_id]
+        return 10 - target_data.social_contact_data[character_id]
     if character_id not in target_data.social_contact_data:
-        return 5
+        return 10
     return 0
 
 
@@ -141,8 +141,8 @@ def handle_target_admire(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    target_data.social_contact.setdefault(4, set())
-    if character_id in target_data.social_contact[4]:
+    target_data.social_contact.setdefault(9, set())
+    if character_id in target_data.social_contact[9]:
         return 1
     return 0
 
@@ -157,9 +157,9 @@ def handle_have_like_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set())
-    character_data.social_contact.setdefault(5, set())
-    return len(character_data.social_contact[4]) + len(character_data.social_contact[5])
+    character_data.social_contact.setdefault(9, set())
+    character_data.social_contact.setdefault(10, set())
+    return len(character_data.social_contact[9]) + len(character_data.social_contact[10])
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_NOT_STRANGER)

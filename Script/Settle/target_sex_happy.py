@@ -24,6 +24,7 @@ def handle_target_add_small_mouth_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(0,0)
+    target_data.sex_experience.setdefault(0,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[0]) + target_data.status[0] / 100
     target_data.status[0] += target_happy
@@ -52,6 +53,7 @@ def handle_target_add_medium_mouth_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(0,0)
+    target_data.sex_experience.setdefault(0,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[0]) + target_data.status[0] / 50
     target_data.status[0] += target_happy
@@ -80,6 +82,7 @@ def handle_target_add_large_mouth_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(0,0)
+    target_data.sex_experience.setdefault(0,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[0]) + target_data.status[0] / 10
     target_data.status[0] += target_happy
@@ -108,6 +111,7 @@ def handle_target_sub_small_mouth_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(0,0)
+    target_data.sex_experience.setdefault(0,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[0]) + target_data.status[0] / 100
     target_data.status[0] -= target_happy
@@ -137,6 +141,7 @@ def handle_target_sub_medium_mouth_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(0,0)
+    target_data.sex_experience.setdefault(0,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[0]) + target_data.status[0] / 50
     target_data.status[0] -= target_happy
@@ -166,6 +171,7 @@ def handle_target_sub_large_mouth_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(0,0)
+    target_data.sex_experience.setdefault(0,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[0]) + target_data.status[0] / 10
     target_data.status[0] -= target_happy
@@ -195,6 +201,7 @@ def handle_target_add_small_chest_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(1,0)
+    target_data.sex_experience.setdefault(1,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[1]) + target_data.status[1] / 100
     target_data.status[1] += target_happy
@@ -223,6 +230,7 @@ def handle_target_add_medium_chest_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(1,0)
+    target_data.sex_experience.setdefault(1,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[1]) + target_data.status[1] / 50
     target_data.status[1] += target_happy
@@ -251,6 +259,7 @@ def handle_target_add_large_chest_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(1,0)
+    target_data.sex_experience.setdefault(1,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[1]) + target_data.status[1] / 10
     target_data.status[1] += target_happy
@@ -279,6 +288,7 @@ def handle_target_sub_small_chest_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(1,0)
+    target_data.sex_experience.setdefault(1,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[1]) + target_data.status[1] / 100
     target_data.status[1] -= target_happy
@@ -308,6 +318,7 @@ def handle_target_sub_medium_chest_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(1,0)
+    target_data.sex_experience.setdefault(1,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[1]) + target_data.status[1] / 50
     target_data.status[1] -= target_happy
@@ -337,6 +348,7 @@ def handle_target_sub_large_chest_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(1,0)
+    target_data.sex_experience.setdefault(1,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[1]) + target_data.status[1] / 10
     target_data.status[1] -= target_happy
@@ -366,6 +378,7 @@ def handle_target_add_small_vagina_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(2,0)
+    target_data.sex_experience.setdefault(4,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[4]) + target_data.status[2] / 100
     target_data.status[2] += target_happy
@@ -394,6 +407,7 @@ def handle_target_add_medium_vagina_happy(character_id: int, add_time: int, chan
     if target_data.dead:
         return
     target_data.status.setdefault(2,0)
+    target_data.sex_experience.setdefault(4,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[4]) + target_data.status[2] / 50
     target_data.status[2] += target_happy
@@ -422,6 +436,7 @@ def handle_target_add_large_vagina_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(2,0)
+    target_data.sex_experience.setdefault(4,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[4]) + target_data.status[2] / 10
     target_data.status[2] += target_happy
@@ -450,6 +465,7 @@ def handle_target_sub_small_vagina_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(2,0)
+    target_data.sex_experience.setdefault(4,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[4]) + target_data.status[2] / 100
     target_data.status[2] -= target_happy
@@ -479,6 +495,7 @@ def handle_target_sub_medium_vagina_happy(character_id: int, add_time: int, chan
     if target_data.dead:
         return
     target_data.status.setdefault(2,0)
+    target_data.sex_experience.setdefault(4,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[4]) + target_data.status[2] / 50
     target_data.status[2] -= target_happy
@@ -508,6 +525,7 @@ def handle_target_sub_large_vagina_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(2,0)
+    target_data.sex_experience.setdefault(4,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[4]) + target_data.status[2] / 10
     target_data.status[2] -= target_happy
@@ -537,6 +555,7 @@ def handle_target_add_small_clitoris_happy(character_id: int, add_time: int, cha
     if target_data.dead:
         return
     target_data.status.setdefault(3,0)
+    target_data.sex_experience.setdefault(2,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[2]) + target_data.status[3] / 100
     target_data.status[3] += target_happy
@@ -565,6 +584,7 @@ def handle_target_add_medium_clitoris_happy(character_id: int, add_time: int, ch
     if target_data.dead:
         return
     target_data.status.setdefault(3,0)
+    target_data.sex_experience.setdefault(2,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[2]) + target_data.status[3] / 50
     target_data.status[3] += target_happy
@@ -593,6 +613,7 @@ def handle_target_add_large_clitoris_happy(character_id: int, add_time: int, cha
     if target_data.dead:
         return
     target_data.status.setdefault(3,0)
+    target_data.sex_experience.setdefault(2,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[2]) + target_data.status[3] / 10
     target_data.status[3] += target_happy
@@ -621,6 +642,7 @@ def handle_target_sub_small_clitoris_happy(character_id: int, add_time: int, cha
     if target_data.dead:
         return
     target_data.status.setdefault(3,0)
+    target_data.sex_experience.setdefault(2,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[2]) + target_data.status[3] / 100
     target_data.status[3] -= target_happy
@@ -650,6 +672,7 @@ def handle_target_sub_medium_clitoris_happy(character_id: int, add_time: int, ch
     if target_data.dead:
         return
     target_data.status.setdefault(3,0)
+    target_data.sex_experience.setdefault(2,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[2]) + target_data.status[3] / 50
     target_data.status[3] -= target_happy
@@ -679,6 +702,7 @@ def handle_target_sub_large_clitoris_happy(character_id: int, add_time: int, cha
     if target_data.dead:
         return
     target_data.status.setdefault(3,0)
+    target_data.sex_experience.setdefault(2,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[2]) + target_data.status[3] / 10
     target_data.status[3] -= target_happy
@@ -708,6 +732,7 @@ def handle_target_add_small_anus_happy(character_id: int, add_time: int, change_
     if target_data.dead:
         return
     target_data.status.setdefault(4,0)
+    target_data.sex_experience.setdefault(5,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[5]) + target_data.status[4] / 100
     target_data.status[4] += target_happy
@@ -736,6 +761,7 @@ def handle_target_add_medium_anus_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(4,0)
+    target_data.sex_experience.setdefault(5,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[5]) + target_data.status[4] / 50
     target_data.status[4] += target_happy
@@ -764,6 +790,7 @@ def handle_target_add_large_anus_happy(character_id: int, add_time: int, change_
     if target_data.dead:
         return
     target_data.status.setdefault(4,0)
+    target_data.sex_experience.setdefault(5,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[5]) + target_data.status[4] / 10
     target_data.status[4] += target_happy
@@ -792,6 +819,7 @@ def handle_target_sub_small_anus_happy(character_id: int, add_time: int, change_
     if target_data.dead:
         return
     target_data.status.setdefault(4,0)
+    target_data.sex_experience.setdefault(5,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[5]) + target_data.status[4] / 100
     target_data.status[4] -= target_happy
@@ -821,6 +849,7 @@ def handle_target_sub_medium_anus_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(4,0)
+    target_data.sex_experience.setdefault(5,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[5]) + target_data.status[4] / 50
     target_data.status[4] -= target_happy
@@ -850,6 +879,7 @@ def handle_target_sub_large_anus_happy(character_id: int, add_time: int, change_
     if target_data.dead:
         return
     target_data.status.setdefault(4,0)
+    target_data.sex_experience.setdefault(5,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[5]) + target_data.status[4] / 10
     target_data.status[4] -= target_happy
@@ -879,6 +909,7 @@ def handle_target_add_small_penis_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(5,0)
+    target_data.sex_experience.setdefault(3,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[3]) + target_data.status[5] / 100
     target_data.status[5] += target_happy
@@ -907,6 +938,7 @@ def handle_target_add_medium_penis_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(5,0)
+    target_data.sex_experience.setdefault(3,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[3]) + target_data.status[5] / 50
     target_data.status[5] += target_happy
@@ -935,6 +967,7 @@ def handle_target_add_large_penis_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(5,0)
+    target_data.sex_experience.setdefault(3,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[3]) + target_data.status[5] / 10
     target_data.status[5] += target_happy
@@ -963,6 +996,7 @@ def handle_target_sub_small_penis_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(5,0)
+    target_data.sex_experience.setdefault(3,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[3]) + target_data.status[5] / 100
     target_data.status[5] -= target_happy
@@ -992,6 +1026,7 @@ def handle_target_sub_medium_penis_happy(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(5,0)
+    target_data.sex_experience.setdefault(3,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[3]) + target_data.status[5] / 50
     target_data.status[5] -= target_happy
@@ -1021,6 +1056,7 @@ def handle_target_sub_large_penis_happy(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(5,0)
+    target_data.sex_experience.setdefault(3,0)
     target_happy = add_time
     target_happy *= 1 + attr_calculation.get_experience_level_weight(target_data.sex_experience[3]) + target_data.status[5] / 10
     target_data.status[5] -= target_happy
