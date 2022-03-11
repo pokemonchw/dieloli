@@ -306,16 +306,9 @@ class CharacterInfoHead:
         status_draw = draw.CenterDraw()
         status_draw.width = width / 2
         status_draw.text = f"{status_text}"
-        if character_data.target_character_id != character_data.cid:
-            scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
-            scene_data: game_type.Scene = cache.scene_data[scene_path_str]
-            if character_data.target_character_id in scene_data.character_list:
-                target_data: game_type.Character = cache.character_data[
-                    character_data.target_character_id
-                ]
-                status_draw.text = _("和{target_name}{status_text}中").format(
-                    target_name=target_data.name, status_text=status_text
-                )
+        if character_data.ai_target != 0:
+            target = game_config.config_target[character_data.ai_target]
+            status_draw.text = target.text
         self.draw_list: List[Tuple[draw.NormalDraw, draw.NormalDraw]] = [
             (message_draw, hp_draw),
             (status_draw, mp_draw),
