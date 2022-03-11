@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 from types import FunctionType
+from Script.Core import game_path_config
 from Script.Config import normal_config
 from Script.Core import game_type, cache_control
 

@@ -50,28 +50,10 @@ master分支在开发完成前作为设计展示分支使用 \
 ----
 帮助中国的可怜萝莉控!
 
-配置要求
+下载 & 游玩
 ----
-GPU: \
-本游戏几乎没有任何显卡要求，如你所见，它是个纯文字游戏 \
-CPU: \
-在默认配置(2800个游戏角色)下，2015年9月发布的 i5 6200U 和2019年9月发布的 i7 10710U 仅差了23%，几乎可以忽略不计(由于游戏性设计的原因，本游戏为祖传单核游戏引擎) \
-Memory: \
-峰值需占用1GB左右内存，请确保运行游戏前电脑至少有2GB的空闲内存空间 \
-系统: \
-本游戏兼容 archlinux/steamos/chromeos/ubuntu/debian/aoscos 等绝大部分支持 gui 的 linux 系操作系统，同时也可以在 macos 和 windows7 及以上操作系统中运行 \
-配置调整: \
-可通过 config.ini 文件中的 random_npc_max 选项自由调整npc数量,该数量与宿舍/教师/课时等分配相关联,目前只在2800npc下进行过测试，其他数值出现兼容问题请提交反馈
-
-依赖
-----
-python3.9+
-
-建议通过::
-
-    pip install -r requirements.txt
-
-进行安装
+windows & macos系统: 下载[本地址](https://github.com/pokemonchw/dieloli/releases)对应系统最新的压缩文件, 解压后运行game.exe即可 \
+linux系统: 下载[源码](https://github.com/pokemonchw/dieloli/archive/refs/heads/master.zip), 并通过pip等工具安装[requirements.txt](https://github.com/pokemonchw/dieloli/blob/master/requirements.txt)中的依赖, 运行game.py即可, 初次运行需要较长时间预热数据
 
 字体
 ----
