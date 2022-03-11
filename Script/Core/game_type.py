@@ -515,6 +515,8 @@ class Character:
         """ 角色死因 """
         self.follow: int = -1
         """ 当前跟随目标 """
+        self.ai_target: UUID = 0
+        """ 当前行为目标 """
 
 
 class TeacherTimeTable:

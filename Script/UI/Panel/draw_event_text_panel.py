@@ -51,8 +51,8 @@ class DrawEventTextPanel(draw.LineFeedWaitDraw):
             src_scene_data: game_type.Scene = cache.scene_data[src_scene_path_str]
             src_scene_name = src_scene_data.scene_name
         target_scene_name = ""
-        if len(player_data.behavior.move_target):
-            target_scene_path_str = map_handle.get_map_system_path_str_for_list(player_data.behavior.move_target)
+        if len(character_data.behavior.move_target):
+            target_scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.behavior.move_target)
             target_scene_data: game_type.Scene = cache.scene_data[target_scene_path_str]
             target_scene_name = target_scene_data.scene_name
         now_event_text = now_event_text.format(
