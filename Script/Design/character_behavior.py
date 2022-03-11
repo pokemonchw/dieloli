@@ -4,7 +4,6 @@ from types import FunctionType
 from typing import Dict, Set
 from Script.Core import (
     cache_control,
-    game_path_config,
     game_type,
     constant,
     value_handle,
@@ -20,7 +19,6 @@ from Script.Design import (
 from Script.Config import game_config, normal_config
 from Script.UI.Moudle import draw
 
-game_path = game_path_config.game_path
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._

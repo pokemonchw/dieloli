@@ -14,7 +14,6 @@ from Script.Core import (
 )
 from Script.Config import normal_config
 
-game_path = game_path_config.game_path
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
@@ -27,10 +26,7 @@ def get_save_dir_path(save_id: str) -> str:
     Keyword arguments:
     save_id -- 存档id
     """
-    save_path = os.path.join("save")
-    if not os.path.exists(save_path):
-        os.makedirs(save_path)
-    return os.path.join(save_path, save_id)
+    return os.path.join(game_path_config.SAVE_PATH, save_id)
 
 
 def judge_save_file_exist(save_id: str) -> bool:

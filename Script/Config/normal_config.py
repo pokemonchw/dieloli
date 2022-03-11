@@ -1,7 +1,7 @@
 import os
 import json
 import configparser
-from Script.Core import game_type
+from Script.Core import game_type, game_path_config
 
 
 config_normal: game_type.NormalConfig = game_type.NormalConfig()
@@ -12,7 +12,7 @@ package_path = os.path.join("package.json")
 def init_normal_config():
     """初始化游戏通用配置数据"""
     ini_config = configparser.ConfigParser()
-    ini_config.read("config.ini", encoding="utf8")
+    ini_config.read(game_path_config.CONFIG_PATH, encoding="utf8")
     ini_data = ini_config["game"]
     for k in ini_data.keys():
         try:
