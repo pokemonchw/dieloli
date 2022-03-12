@@ -217,7 +217,7 @@ def handle_hunger(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.status.setdefault(27, 0)
     if character_data.status[27] > 15:
-        return math.floor(character_data.status[27]) * 10
+        return character_data.status[27] * 10
     return 0
 
 
@@ -246,7 +246,7 @@ def handle_thirsty(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.status[28] > 15:
-        character_data.status.setdefault(28, 0)
+        return character_data.status[28] * 10
     return 0
 
 
