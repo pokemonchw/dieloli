@@ -212,8 +212,9 @@ def judge_character_status(character_id: int, now_time: int) -> int:
                     if not character_id or not character_data.target_character_id:
                         climax_draw.draw()
                         line_feed.draw()
-            character_data.state = constant.CharacterStatus.STATUS_ARDER
         break
+    if time_judge:
+        character_data.state = constant.CharacterStatus.STATUS_ARDER
     if time_judge == 1:
         character_data.behavior.start_time = end_time
         return 0
