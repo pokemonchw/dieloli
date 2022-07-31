@@ -142,7 +142,8 @@ def input_nick_name_panel() -> bool:
     character_data = cache.character_data[0]
     ask_nick_name_panel = panel.AskForOneMessage()
     ask_nick_name_panel.set(
-        _("该怎么称呼{character_name}好呢？").format(character_name=character_data.name), 10
+        _("该怎么称呼{character_name}好呢？").format(
+            character_name=character_data.name), 10
     )
     line_feed_draw.draw()
     line.draw()
@@ -171,11 +172,13 @@ def input_sex_panel() -> bool:
     bool -- 完成角色创建校验
     """
     character_data: game_type.Character = cache.character_data[0]
-    sex_list = [game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
+    sex_list = [
+        game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(
         sex_list,
-        _("那么{character_nick_name}的性别是？").format(character_nick_name=character_data.nick_name),
+        _("那么{character_nick_name}的性别是？").format(
+            character_nick_name=character_data.nick_name),
     )
     return_list = button_panel.get_return_list()
     line_feed_draw.draw()
@@ -238,7 +241,7 @@ def add_setting_panel() -> FunctionType:
     FunctionType -- 面板对象处理函数
     """
 
-    def decoraror(func):
+    def decorator(func):
         @wraps(func)
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)
@@ -246,7 +249,7 @@ def add_setting_panel() -> FunctionType:
         setting_panel_data.append(return_wrapper)
         return return_wrapper
 
-    return decoraror
+    return decorator
 
 
 @add_setting_panel()

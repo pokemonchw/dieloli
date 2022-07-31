@@ -12,7 +12,7 @@ def add_panel(panel: int) -> FunctionType:
     FunctionType -- 面板绘制对象
     """
 
-    def decoraror(func):
+    def decorator(func):
         @wraps(func)
         def return_wrapper(*args, **kwargs):
             return func(*args, **kwargs)
@@ -20,4 +20,4 @@ def add_panel(panel: int) -> FunctionType:
         constant.panel_data[panel] = return_wrapper
         return return_wrapper
 
-    return decoraror
+    return decorator
