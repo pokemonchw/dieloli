@@ -1,7 +1,7 @@
 import os
 import random
-from functools import wraps
-from typing import List
+from functools import partial
+from typing import Any, List
 from types import FunctionType
 from Script.Core import get_text, constant, game_type, cache_control, flow_handle
 from Script.Design import (
@@ -245,6 +245,29 @@ def input_setting_panel() -> bool:
 
 def input_setting_now() -> bool:
     """启动详细信息设置"""
+    setting = json_handle.load_json(
+        creator_character_flow_json_path)["setting_panel"]
+    character_data: game_type.Character = cache.character_data[0]
+
+    def set_age(ans): return attr_calculation.get_age(int(ans))
+    def nature(ans): return abs(random.randint(0, 100) - int(ans) * 50)
+
+    setting_panel_data: List[FunctionType] = []
+    # 设置详细信息面板数据
+
+    setting_panel_data.append(partial(setting_panel,
+                                      character_data.age, set_age, setting["setting_age"]))
+    setting_panel_data.append(partial(setting_panel,
+                                      character_data.weight_tem, int, setting["setting_weight"]))
+    setting_panel_data.append(partial(setting_panel,
+                                      character_data.sex_experience_tem, int, setting["setting_sex_experience"]))
+
+    # Add default values for dictionary keys
+    nature_list = [character_data.nature.setdefault(
+        number, number) for number in range(len(setting["setting_nature"]))]
+    setting_panel_data += [partial(setting_panel, character_data.nature[index], nature,
+                                   setting["setting_nature"][f"setting_nature_{index}"]) for index in nature_list]
+
     panel_list = random.sample(setting_panel_data, len(setting_panel_data))
     for now_panel in panel_list:
         line_feed_draw.draw()
@@ -253,332 +276,16 @@ def input_setting_now() -> bool:
     return 1
 
 
-setting_panel_data: List[FunctionType] = []
-""" 设置详细信息面板数据 """
-
-
-def add_setting_panel() -> FunctionType:
-    """
-    添加创建角色时设置详细信息面板
-    Return arguments:
-    FunctionType -- 面板对象处理函数
-    """
-
-    def decorator(func):
-        @wraps(func)
-        def return_wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
-
-        setting_panel_data.append(return_wrapper)
-        return return_wrapper
-
-    return decorator
-
-
-@add_setting_panel()
-def setting_age_tem_panel():
-    """设置年龄模板"""
-    setting_age_tem = json_handle.load_json(creator_character_flow_json_path)[
-        setting_age_tem_panel.__name__]
-
-    character_data: game_type.Character = cache.character_data[0]
-    message = setting_age_tem["aske"].format(
+def setting_panel(attribute: Any, function: FunctionType, json: dict):
+    """设置模板"""
+    character_data = cache.character_data[0]
+    message = json["ask"].format(
         character_nick_name=character_data.nick_name
     )
-    ask_list = setting_age_tem["ask_list"]
+    ask_list = json["ask_list"]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(ask_list, message)
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    character_data.age = attr_calculation.get_age(int(ans))
-
-
-@add_setting_panel()
-def setting_weight_panel():
-    """设置体重模板"""
-    setting_weight = json_handle.load_json(creator_character_flow_json_path)[
-        setting_weight_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_weight["ask"].format(
-        character_nick_name=character_data.nick_name
-    )
-    ask_list = setting_weight["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.weight_tem = int(ans)
-
-
-@add_setting_panel()
-def setting_sex_experience_panel():
-    """设置性经验模板"""
-    setting_sex_experience = json_handle.load_json(creator_character_flow_json_path)[
-        setting_sex_experience_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_sex_experience["ask"].format(
-        character_nick_name=character_data.nick_name
-    )
-    ask_list = setting_sex_experience["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.sex_experience_tem = int(ans)
-
-
-@add_setting_panel()
-def setting_nature_0_panel():
-    """设置性格倾向:活跃"""
-    setting_nature_0 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_0_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_0["ask"].format(
-        character_nick_name=character_data.nick_name
-    )
-    ask_list = setting_nature_0["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[0] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_1_panel():
-    """设置性格倾向:合群"""
-    setting_nature_1 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_1_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_1["ask"].format(
-        character_nick_name=character_data.nick_name
-    )
-    ask_list = setting_nature_1["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[1] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_2_panel():
-    """设置性格倾向:乐观"""
-    setting_nature_2 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_2_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_2["ask"].format(
-        character_nick_name=character_data.nick_name
-    )
-    ask_list = setting_nature_2["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[2] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_3_panel():
-    """设置性格倾向:守信"""
-    setting_nature_3 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_3_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_3["ask"]
-    ask_list = setting_nature_3["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[3] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_4_panel():
-    """设置性格区间:无私"""
-    setting_nature_4 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_4_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_4["ask"]
-    ask_list = setting_nature_4["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[4] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_5_panel():
-    """设置性格区间:重情"""
-    setting_nature_5 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_5_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_5["ask"]
-    ask_list = setting_nature_5["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[5] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_6_panel():
-    """设置性格区间:严谨"""
-    setting_nature_6 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_6_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_6["ask"]
-    ask_list = setting_nature_6["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[6] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_7_panel():
-    """设置性格区间:自律"""
-    setting_nature_7 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_7_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_7["ask"].format(
-        character_nick_name=character_data.nick_name
-    )
-    ask_list = setting_nature_7["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[7] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_8_panel():
-    """设置性格区间:沉稳"""
-    setting_nature_8 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_8_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_8["ask"]
-    ask_list = setting_nature_8["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[8] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_9_panel():
-    """设置性格区间:决断"""
-    setting_nature_9 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_9_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_9["ask"].format(
-        character_nick_name=character_data.nick_name
-    )
-    ask_list = setting_nature_9["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[9] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_10_panel():
-    """设置性格区间:坚韧"""
-    setting_nature_10 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_10_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_10["ask"]
-    ask_list = setting_nature_10["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[10] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_11_panel():
-    """设置性格区间:机敏"""
-    setting_nature_11 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_11_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_11["ask"].format(
-        character_nick_name=character_data.nick_name
-    )
-    ask_list = setting_nature_11["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[11] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_12_panel():
-    """设置性格区间:耐性"""
-    setting_nature_12 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_12_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_12["ask"]
-    ask_list = setting_nature_12["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[12] = abs(random.randint(0, 100) - int(ans) * 50)
-
-
-@add_setting_panel()
-def setting_nature_13_panel():
-    """设置性格区间:爽直"""
-    setting_nature_13 = json_handle.load_json(creator_character_flow_json_path)[
-        setting_nature_13_panel.__name__]
-
-    character_data = cache.character_data[0]
-    message = setting_nature_13["ask"].format(
-        character_nick_name=character_data.nick_name
-    )
-    ask_list = setting_nature_13["ask_list"]
-    button_panel = panel.OneMessageAndSingleColumnButton()
-    button_panel.set(ask_list, message)
-    return_list = button_panel.get_return_list()
-    button_panel.draw()
-    ans = flow_handle.askfor_all(return_list.keys())
-    character_data.nature[13] = abs(random.randint(0, 100) - int(ans) * 50)
+    attribute = function(ans)
