@@ -276,7 +276,7 @@ def input_setting_now() -> bool:
     return 1
 
 
-def setting_panel(attribute: Any, function: FunctionType, json: dict):
+def setting_panel(_attribute: Any, function: FunctionType, json: dict):
     """设置模板"""
     character_data = cache.character_data[0]
     message = json["ask"].format(
@@ -288,4 +288,4 @@ def setting_panel(attribute: Any, function: FunctionType, json: dict):
     return_list = button_panel.get_return_list()
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
-    attribute = function(ans)
+    _attribute = function(ans)
