@@ -3,10 +3,9 @@ import bisect
 from typing import List
 from Script.Core import (
     cache_control,
-    constant,
     game_type,
 )
-from Script.Design import handle_premise, map_handle
+from Script.Design import handle_premise, map_handle, constant
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
@@ -94,14 +93,23 @@ def get_value_text(value: float) -> str:
     company = ["K", "M", "G", "T", "P", "E", "Z", "Y", "B", "N", "D"]
     int_value = int(value)
     value_str = str(int_value)
-    if len(value_str) < 4:
-        value_str = str(value)
+    if value > 0:
+        if len(value_str) < 4:
+            value_str = str(value)
+        else:
+            company_index = int((len(value_str) - 1) / 3)
+            if company_index >= len(company):
+                company_index = len(company) - 1
+            value_str = value_str[: -company_index * 3]
+            value_str += company[company_index - 1]
+            value_str = "+" + value_str
     else:
-        company_index = int((len(value_str) - 1) / 3)
-        if company_index >= len(company):
-            company_index = len(company) - 1
-        value_str = value_str[: -company_index * 3]
-        value_str += company[company_index - 1]
-    if int(value) >= 0:
-        value_str = "+" + value_str
+        if len(value_str) < 5:
+            value_str = str(value)
+        else:
+            company_index = int((len(value_str) - 2) / 3)
+            if company_index >= len(company):
+                company_index = len(company) - 1
+            value_str = value_str[: -company_index * 3]
+            value_str += company[company_index - 1]
     return value_str

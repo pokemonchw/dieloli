@@ -1,6 +1,6 @@
 import random
-from Script.Core import cache_control, game_type, value_handle, constant
-from Script.Design import map_handle
+from Script.Core import cache_control, game_type, value_handle
+from Script.Design import map_handle, constant
 from Script.UI.Panel import draw_event_text_panel
 from Script.Config import normal_config, game_config
 
@@ -53,4 +53,6 @@ def handle_event(character_id: int, start: int) -> (draw_event_text_panel.DrawEv
         event_weight = value_handle.get_rand_value_for_value_region(list(now_event_data.keys()))
         now_event_id = random.choice(list(now_event_data[event_weight]))
     if now_event_id != "":
-        return draw_event_text_panel.DrawEventTextPanel(now_event_id,character_id)
+        now_event_draw = draw_event_text_panel.DrawEventTextPanel(now_event_id,character_id)
+        if now_event_draw.text:
+            return now_event_draw

@@ -1,8 +1,8 @@
 import datetime
 from typing import List
 from uuid import UUID
-from Script.Design import handle_premise, map_handle, game_time, course
-from Script.Core import constant, game_type, cache_control
+from Script.Design import handle_premise, map_handle, game_time, course, constant
+from Script.Core import game_type, cache_control
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
@@ -351,6 +351,28 @@ def handle_have_no_first_kiss_like_target_in_scene(character_id: int):
                 c_data: game_type.Character = cache.character_data[c]
                 if c_data.first_kiss == -1:
                     character_list.append(c)
+    return len(character_list)
+
+
+@handle_premise.add_premise(constant.Premise.HAVE_DISLIKE_TARGET_IN_SCENE)
+def handle_have_dislike_target_in_scene(character_id: int) -> int:
+    """
+    校验是否有讨厌的人在场景中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.social_contact.setdefault(4, set())
+    character_data.social_contact.setdefault(5, set())
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_list = []
+    for i in {0, 1, 2, 3}:
+        for c in character_data.social_contact[i]:
+            if c in scene_data.character_list:
+                character_list.append(c)
     return len(character_list)
 
 

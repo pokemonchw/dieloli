@@ -1,5 +1,4 @@
-from Script.Core import constant
-from Script.Design import handle_panel
+from Script.Design import handle_panel, constant
 from Script.UI.Panel import clothing_shop_panel
 from Script.Config import normal_config
 

@@ -63,12 +63,9 @@ linux系统: 下载[源码](https://github.com/pokemonchw/dieloli/archive/refs/h
 请自行下载并安装:[Sarasa Mono SC](https://github.com/be5invis/Sarasa-Gothic) \
 可通过修改 config.ini 中的 font 项自行更改字体
 
-本地化
+Localization
 ----
-本项目使用gettext进行本地化设置 \
-请于 data/po 目录下创建对应语言目录 \
-切换语言请编辑 config.ini 中的 language 项 \
-协作翻译方案待定
+If you want to help with localization, please contact me by email, and I will invite you to join my smartcat
 
 警告
 ----
@@ -77,7 +74,6 @@ linux系统: 下载[源码](https://github.com/pokemonchw/dieloli/archive/refs/h
 联系方式
 ----
 e-mail:pokemonchw@gmail.com \
-twitter:@nekoharuyayuzu \
 企鹅裙:950487389
 
 请我喝奶茶QwQ

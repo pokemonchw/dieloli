@@ -5,9 +5,9 @@ from Script.Design import (
     cooking,
     game_time,
     character,
+    constant,
 )
 from Script.Core import (
-    constant,
     get_text,
     game_type,
     cache_control,
@@ -89,6 +89,7 @@ def handle_eat_food(
             character_data.status.setdefault(feel, 0)
             change_data.status.setdefault(feel, 0)
             if feel in {27, 28}:
+                now_feel_value /= 100
                 character_data.status[feel] -= now_feel_value
                 if character_data.status[feel] < 0:
                     character_data.status[feel] = 0

@@ -2,12 +2,12 @@
 # -*- coding: UTF-8 -*-
 import os
 
-po_dir = os.path.join("data", "po", "zh_CN", "LC_MESSAGES")
-po_path = os.path.join(po_dir, "dieloli.po")
-mo_path = os.path.join(po_dir, "dieloli.mo")
-if os.path.exists(po_path):
-    os.remove(po_path)
-os.system('find ./ -name "*.py" >POTFILES && xgettext -n --files-from=POTFILES -o ' + po_path)
-os.remove("POTFILES")
-os.system("msgfmt " + po_path + " -o " + mo_path)
+po_dir_path = os.path.join("data","po")
+po_dir_list = os.listdir(po_dir_path)
+for language_id in po_dir_list:
+    po_dir = os.path.join(po_dir_path,language_id,"LC_MESSAGES")
+    po_path = os.path.join(po_dir, "dieloli.po")
+    mo_path = os.path.join(po_dir, "dieloli.mo")
+    os.system("msgfmt " + po_path + " -o " + mo_path)
+    print(language_id,"Building End")
 print("Mo Building End")

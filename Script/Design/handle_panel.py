@@ -1,6 +1,6 @@
 from functools import wraps
 from types import FunctionType
-from Script.Core import constant
+from Script.Design import constant
 
 
 def add_panel(panel: int) -> FunctionType:

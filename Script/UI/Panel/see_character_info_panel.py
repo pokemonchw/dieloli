@@ -12,10 +12,9 @@ from Script.Core import (
     text_handle,
     py_cmd,
     flow_handle,
-    constant,
 )
 from Script.Config import game_config, normal_config
-from Script.Design import attr_text, map_handle, attr_calculation
+from Script.Design import attr_text, map_handle, attr_calculation, constant
 
 panel_info_data = {}
 

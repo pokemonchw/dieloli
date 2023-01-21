@@ -1,5 +1,5 @@
-from Script.Core import cache_control, constant, game_type
-from Script.Design import map_handle, update
+from Script.Core import cache_control, game_type
+from Script.Design import map_handle, update, constant
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """

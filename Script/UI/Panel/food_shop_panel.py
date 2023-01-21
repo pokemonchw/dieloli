@@ -7,10 +7,9 @@ from Script.Core import (
     get_text,
     flow_handle,
     text_handle,
-    constant,
     py_cmd,
 )
-from Script.Design import map_handle, cooking
+from Script.Design import map_handle, cooking, constant
 from Script.UI.Moudle import draw, panel
 from Script.Config import game_config, normal_config
 

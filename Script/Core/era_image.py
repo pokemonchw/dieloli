@@ -3,6 +3,7 @@ from PIL.ImageTk import PhotoImage
 from PIL import Image
 from Script.Core import main_frame, game_type, cache_control
 
+
 image_data = {}
 image_text_data = {}
 image_lock = 0

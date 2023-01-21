@@ -2,8 +2,8 @@ import os
 import pickle
 from typing import Dict, List
 from dijkstar import Graph, find_path
-from Script.Core import game_type, json_handle, get_text, text_handle, cache_control, constant
-from Script.Design import map_handle
+from Script.Core import game_type, json_handle, get_text, text_handle, cache_control
+from Script.Design import map_handle, constant
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """

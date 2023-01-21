@@ -307,6 +307,15 @@ class ChestTem:
     """ 描述 """
 
 
+class SystemLanguage:
+    """ 游戏语言配置 """
+
+    cid: str
+    """ 语言id """
+    name: str
+    """ 语言名 """
+
+
 class SchoolSession:
     """ 各学校上课时间配置 """
 

@@ -7,8 +7,9 @@ from Script.Core import (
     get_text,
     game_type,
     cache_control,
-    constant,
 )
+from Script.Design import constant
+
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """

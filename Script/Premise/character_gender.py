@@ -1,5 +1,5 @@
-from Script.Design import handle_premise
-from Script.Core import constant, game_type, cache_control
+from Script.Design import handle_premise, constant
+from Script.Core import game_type, cache_control
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -63,6 +63,45 @@ def handle_is_woman(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     return character_data.sex == 1
+
+
+@handle_premise.add_premise(constant.Premise.IS_FUTA)
+def handle_is_futa(character_id: int) -> int:
+    """
+    校验角色是否是扶她
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    return character_data.sex == 2
+
+
+@handle_premise.add_premise(constant.Premise.IS_ASEXUAL)
+def handle_is_asexual(character_id: int) -> int:
+    """
+    校验角色是否是无性
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    return character_data.sex == 2
+
+
+@handle_premise.add_premise(constant.Premise.IS_FUTA_OR_MAN)
+def handle_is_futa_or_man(character_id: int) -> int:
+    """
+    校验角色是否是扶她或男性
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    return character_data.sex in {0, 2}
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_SAME_SEX)

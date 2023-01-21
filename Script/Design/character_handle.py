@@ -4,10 +4,10 @@ import numpy
 from Script.Core import (
     cache_control,
     value_handle,
-    constant,
     game_type,
 )
 from Script.Design import (
+    constant,
     attr_calculation,
     map_handle,
     attr_text,

@@ -1,6 +1,6 @@
 import random
-from Script.Core import value_handle, cache_control, constant, game_type
-from Script.Design import map_handle
+from Script.Core import value_handle, cache_control, game_type
+from Script.Design import map_handle, constant
 from Script.Config import game_config
 
 

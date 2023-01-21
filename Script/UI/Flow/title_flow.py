@@ -3,8 +3,8 @@ from types import FunctionType
 from Script.Config import normal_config
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_save_info_panel
-from Script.Design import handle_panel
-from Script.Core import constant, get_text, flow_handle, cache_control, game_type, py_cmd
+from Script.Design import handle_panel, constant
+from Script.Core import get_text, flow_handle, cache_control, game_type, py_cmd
 
 config_normal = normal_config.config_normal
 _: FunctionType = get_text._
@@ -36,7 +36,7 @@ def title_panel():
     lineFeed.draw()
     line = draw.LineDraw("=", width)
     line.draw()
-    now_list = [_("开始游戏"), _("读取存档"), _("退出游戏")]
+    now_list = [_("开始游戏"), _("读取存档"), _("游戏设置")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(now_list, "", 0)
     button_panel.draw()
@@ -49,5 +49,5 @@ def title_panel():
     elif now_key == now_list[1]:
         now_panel = see_save_info_panel.SeeSaveListPanel(width, 0)
         now_panel.draw()
-    elif now_key == now_list[3]:
-        os._exit(0)
+    elif now_key == now_list[2]:
+        cache.now_panel_id = constant.Panel.GAME_SETTING

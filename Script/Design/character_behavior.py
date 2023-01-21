@@ -5,11 +5,11 @@ from typing import Dict, Set
 from Script.Core import (
     cache_control,
     game_type,
-    constant,
     value_handle,
     get_text,
 )
 from Script.Design import (
+    constant,
     settle_behavior,
     game_time,
     handle_premise,
@@ -27,16 +27,26 @@ window_width: int = normal_config.config_normal.text_width
 """ 窗体宽度 """
 
 
-def init_character_behavior():
+def init_character_behavior(player_start: bool):
     """
     角色行为树总控制
+    Keyword arguments:
+    player_start -- 是否是玩家状态的开始
     """
+    character_list = list(cache.character_data.keys())
+    if player_start:
+        character_list.sort()
+    else:
+        character_list.sort(reverse=1)
     while 1:
         if len(cache.over_behavior_character) >= len(cache.character_data):
             break
-        for character_id in cache.character_data:
+        for character_id in character_list:
             if character_id in cache.over_behavior_character:
                 continue
+            if not player_start and not character_id:
+                if len(cache.over_behavior_character) < len(character_list) - 1:
+                    continue
             character_data:game_type.Character = cache.character_data[character_id]
             character_behavior(character_id, cache.game_time)
             judge_character_dead(character_id)
@@ -355,27 +365,27 @@ def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
     low_climax_text = ""
     for organ in climax_data[1]:
         organ_config = game_config.config_organ[organ]
-        if not len(low_climax_text):
+        if not low_climax_text:
             low_climax_text += organ_config.name
         else:
             low_climax_text += "+" + organ_config.name
-    if len(low_climax_text):
+    if low_climax_text:
         low_climax_text += _("绝顶")
     hight_climax_text = ""
     for organ in climax_data[2]:
         organ_config = game_config.config_organ[organ]
-        if not len(hight_climax_text):
+        if not hight_climax_text:
             hight_climax_text += organ_config.name
         else:
             hight_climax_text += "+" + organ_config.name
-    if len(hight_climax_text):
+    if hight_climax_text:
         hight_climax_text += _("强绝顶")
     draw_list = []
-    if len(low_climax_text):
+    if low_climax_text:
         draw_list.append(low_climax_text)
-    if len(hight_climax_text):
+    if hight_climax_text:
         draw_list.append(hight_climax_text)
-    if len(draw_list):
+    if draw_list:
         draw_list.insert(0, character_data.name + ":")
         draw_text = ""
         for i in range(len(draw_list)):

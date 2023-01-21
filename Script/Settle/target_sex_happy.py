@@ -1,5 +1,5 @@
-from Script.Design import settle_behavior, attr_calculation
-from Script.Core import cache_control, constant, game_type
+from Script.Design import settle_behavior, attr_calculation, constant
+from Script.Core import cache_control, game_type
 
 
 cache: game_type.Cache = cache_control.cache

@@ -229,6 +229,10 @@ config_sex_tem: Dict[int, config_def.SexTem] = {}
 """ 性别对应描述和性别器官模板 """
 config_sun_time: Dict[int, config_def.SunTime] = {}
 """ 太阳时间配置 """
+config_system_language: Dict[str, config_def.SystemLanguage] = {}
+""" 系统语言配置数据 """
+config_system_language_data: Dict[str, str] = {}
+""" 系统语言名字对应语言id """
 config_random_npc_sex_region: Dict[int, int] = {}
 """
 生成随机npc时性别权重
@@ -902,6 +906,17 @@ def load_sun_time():
         config_sun_time[now_tem.cid] = now_tem
 
 
+def load_system_language():
+    """载入系统语言配置数据"""
+    now_data = config_data["SystemLanguage"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.SystemLanguage()
+        now_tem.__dict__ = tem_data
+        config_system_language[now_tem.cid] = now_tem
+        config_system_language_data[now_tem.name] = now_tem.cid
+
+
 def load_event():
     """载入事件配置"""
     now_data = config_data["Event"]
@@ -1017,6 +1032,7 @@ def init():
     load_stature_description_text()
     load_status()
     load_sun_time()
+    load_system_language()
     load_target()
     load_waist_hip_proportion()
     load_week_day()

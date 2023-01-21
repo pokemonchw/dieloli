@@ -82,6 +82,7 @@ class Chest:
         """ 每日胸围差增量 """
 
 
+
 class Food:
     """食物数据结构体"""
 
@@ -700,6 +701,10 @@ class TargetChange:
         """ 好感度变化 """
         self.sex_experience: Dict[int, int] = {}
         """ 性经验变化 """
+        self.wear: Dict[int, Clothing] = {}
+        """ 穿上的衣服 """
+        self.undress: Dict[int, Clothing] = {}
+        """ 脱下的衣服 """
 
 
 class CharacterStatusChange:
@@ -720,6 +725,10 @@ class CharacterStatusChange:
         """ 互动目标状态变化 """
         self.sex_experience: Dict[int, int] = {}
         """ 性经验变化 """
+        self.wear: Dict[int, Clothing] = {}
+        """ 穿上的衣服 """
+        self.undress: Dict[int, Clothing] = {}
+        """ 脱下的衣服 """
 
 
 class Event:

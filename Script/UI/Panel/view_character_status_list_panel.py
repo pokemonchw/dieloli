@@ -7,11 +7,10 @@ from Script.Core import (
     cache_control,
     text_handle,
     py_cmd,
-    constant,
     flow_handle,
 )
 from Script.Config import game_config, normal_config
-from Script.Design import character_move, attr_text, game_time, map_handle
+from Script.Design import character_move, attr_text, game_time, map_handle, constant
 
 _: FunctionType = get_text._
 """ 翻译api """
@@ -143,6 +142,7 @@ class SeeCharacterStatusDraw:
         index_text = text_handle.id_index(button_id)
         status_text = game_config.config_status[character_data.state].name
         position_text = attr_text.get_scene_path_text(character_data.position)
+        sex_text = game_config.config_sex_tem[character_data.sex].name
         if character_data.dead:
             cause_of_death_config = game_config.config_cause_of_death[character_data.cause_of_death]
             death_time_text = _("死亡时间:")
@@ -150,7 +150,7 @@ class SeeCharacterStatusDraw:
                 character_data.behavior.start_time, game_time.time_zone
             )
             death_time_text = f"{death_time_text}{str(death_time)}"
-            button_text = f"{index_text} {character_data.name} {cause_of_death_config.name} {death_time_text} {position_text}"
+            button_text = f"{index_text} {character_data.name} {sex_text} {character_data.age}岁 {cause_of_death_config.name} {death_time_text} {position_text}"
         else:
             if character_data.target_character_id != character_data.cid:
                 scene_path_str = map_handle.get_map_system_path_str_for_list(
@@ -164,7 +164,7 @@ class SeeCharacterStatusDraw:
                     status_text = _("和{target_name}{status_text}中").format(
                         target_name=target_data.name, status_text=status_text
                     )
-            button_text = f"{index_text} {character_data.name} {status_text} {position_text}"
+            button_text = f"{index_text} {character_data.name} {sex_text} {character_data.age}岁 {status_text} {position_text}"
         now_draw = draw.LeftButton(
             button_text, self.button_return, self.width, cmd_func=self.move_to_character
         )
