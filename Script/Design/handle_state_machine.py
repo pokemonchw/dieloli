@@ -1,6 +1,6 @@
 from functools import wraps
 from types import FunctionType
-from Script.Core import constant
+from Script.Design import constant
 
 
 def handle_state_machine(state_machine_id: int, character_id: int):

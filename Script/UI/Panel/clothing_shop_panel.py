@@ -8,8 +8,8 @@ from Script.Core import (
     text_handle,
     flow_handle,
     py_cmd,
-    constant,
 )
+from Script.Design import constant
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel.see_clothing_info_panel import ClothingDescribeDraw
 from Script.Config import game_config, normal_config

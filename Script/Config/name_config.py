@@ -1,6 +1,7 @@
 import os
 from typing import Dict
-from Script.Core import json_handle, value_handle, cache_control, game_type, constant
+from Script.Core import json_handle, value_handle, cache_control, game_type
+from Script.Design import constant
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """

@@ -11,6 +11,7 @@ from Script.Settle import (
     character_sex_happy,
     character_skills,
     character_temporary_status,
+    character_wear,
     target_body,
     target_humanity,
     target_language,

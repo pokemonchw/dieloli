@@ -12,10 +12,9 @@ from Script.Core import (
     text_handle,
     py_cmd,
     flow_handle,
-    constant,
 )
 from Script.Config import game_config, normal_config
-from Script.Design import attr_text, map_handle, attr_calculation
+from Script.Design import attr_text, map_handle, attr_calculation, constant
 
 panel_info_data = {}
 
@@ -369,6 +368,8 @@ class CharacterWearClothingList:
                 now_clothing_config = game_config.config_clothing_tem[now_clothing.tem_id]
                 clothing_name = f"[{now_clothing.evaluation}{describe}{now_clothing_config.name}]"
                 clothing_info_list.append(clothing_name)
+        if not clothing_info_list:
+            clothing_info_list.append(_("什么也没穿"))
         now_draw = panel.LeftDrawTextListPanel()
         now_draw.set(clothing_info_list, self.width, self.column)
         self.draw_list.extend(now_draw.draw_list)

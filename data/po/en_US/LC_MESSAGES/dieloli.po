@@ -134,7 +134,7 @@ msgstr "No.{character_id}: {character_name} {sex_text} {social_text}"
 #: Script/UI/Panel/see_character_info_panel.py:279
 #, python-brace-format
 msgid "No.{character_id}: {character_name} {sex_text}"
-msgstr "No.{character_id}: {character_name} {sex_text"
+msgstr "No.{character_id}: {character_name} {sex_text}"
 
 #: Script/UI/Panel/see_character_info_panel.py:294
 msgid "体力"
@@ -448,7 +448,7 @@ msgstr "Staple Food"
 #: Script/UI/Panel/food_shop_panel.py:51 Script/UI/Panel/food_bag_panel.py:40
 #: Script/Design/cooking.py:320 Script/Design/cooking.py:387
 msgid "零食"
-msgstr "Snack
+msgstr "Snack"
 
 #: Script/UI/Panel/food_shop_panel.py:51 Script/UI/Panel/food_bag_panel.py:40
 #: Script/Design/cooking.py:327 Script/Design/cooking.py:394
@@ -553,7 +553,7 @@ msgstr "Gaming Time:"
 
 #: Script/UI/Panel/see_save_info_panel.py:115
 msgid "存档时间:"
-msgstr Save Date:""
+msgstr "Save Date:"
 
 #: Script/UI/Panel/see_save_info_panel.py:152
 msgid "读取"
@@ -625,7 +625,7 @@ msgstr "Rest Day"
 #: Script/UI/Panel/view_school_timetable_panel.py:147
 #: Script/UI/Panel/view_school_timetable_panel.py:164
 msgid "(当前)"
-msgstr (current)"
+msgstr "(current)"
 
 #: Script/UI/Panel/view_school_timetable_panel.py:162
 #, python-brace-format
@@ -644,7 +644,7 @@ msgstr "Input is too long, the longest is {input_max} English characters, please
 
 #: Script/UI/Moudle/panel.py:714
 #, python-brace-format
-msgid "{old_page_index_text} {old_page_index_text} 上一页
+msgid "{old_page_index_text} {old_page_index_text} 上一页"
 msgstr "{old_page_index_text} Previous Page"
 
 #: Script/UI/Moudle/panel.py:728
@@ -687,11 +687,11 @@ msgstr "What should I call {character_name}?"
 
 #: Script/UI/Flow/creator_character_flow.py:150
 msgid "角色昵称不能为纯数字，请重新输入"
-msgstr "The nickname cannot solely be in numeric, please enter again\n"
+msgstr "The nickname cannot solely be in numeric, please enter again"
 
 #: Script/UI/Flow/creator_character_flow.py:152
 msgid "角色昵称不能为系统保留字，请重新输入"
-msgstr "The nickname cannot be a reserved word, please enter again\n"
+msgstr "The nickname cannot be a reserved word, please enter again"
 
 #: Script/UI/Flow/creator_character_flow.py:174
 msgid "随机"
@@ -782,7 +782,7 @@ msgstr "No sexual experience at all, what are you asking huh! Pervert!"
 
 #: Script/UI/Flow/creator_character_flow.py:305
 msgid "只有极少的性经验哦，说是纯情也不为过。"
-msgstr Very little sexual experience, its not unreasonable to say its pure love""
+msgstr "Very little sexual experience, its not unreasonable to say its pure love"
 
 #: Script/UI/Flow/creator_character_flow.py:306
 msgid "大概只是普通的程度吧？不多也不少的样子。"
@@ -1039,7 +1039,7 @@ msgstr "Unfavorite Character"
 #: Script/Design/handle_instruct.py:365
 msgid "启用收藏模式"
 msgstr "Enable Favorites Mode"
-.
+
 #: Script/Design/handle_instruct.py:373
 msgid "\n 现在只会显示被收藏的角色的信息了！\n"
 msgstr "\n Now only the information of favored characters will be displayed！\n"

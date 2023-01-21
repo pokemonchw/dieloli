@@ -1,6 +1,6 @@
 from uuid import UUID
-from Script.Design import handle_premise
-from Script.Core import constant, game_type, cache_control
+from Script.Design import handle_premise, constant
+from Script.Core import game_type, cache_control
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -38,6 +38,23 @@ def handle_target_put_on_skirt(character_id: int) -> int:
     return 1
 
 
+@handle_premise.add_premise(constant.Premise.TARGET_IS_NAKED)
+def handle_target_is_naked(character_id: int) -> int:
+    """
+    校验交互对象是否一丝不挂
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    for i in target_data.put_on:
+        if isinstance(target_data.put_on[i], UUID):
+            return 0
+    return 1
+
+
 @handle_premise.add_premise(constant.Premise.TARGET_NOT_PUT_ON_BRA)
 def handle_target_not_put_on_bra(character_id: int) -> int:
     """
@@ -66,6 +83,38 @@ def handle_target_not_put_on_coat(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     target_data = cache.character_data[character_data.target_character_id]
     if (0 not in target_data.put_on) or (target_data.put_on[0] == ""):
+        return 0
+    return 1
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_NOT_PUT_ON_PANTS)
+def handle_target_not_put_on_pants(character_id: int) -> int:
+    """
+    校验交互对象是否没穿裤子
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    target_data = cache.character_data[character_data.target_character_id]
+    if (2 not in target_data.put_on) or (target_data.put_on[2] == ""):
+        return 0
+    return 1
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_NOT_PUT_ON_UNDERPANTS)
+def handle_target_not_put_on_underpants(character_id: int) -> int:
+    """
+    校验交互对象是否没穿内裤
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    target_data = cache.character_data[character_data.target_character_id]
+    if (7 not in target_data.put_on) or (target_data.put_on[7] == ""):
         return 0
     return 1
 
@@ -219,23 +268,6 @@ def handle_player_is_naked(character_id: int) -> int:
     return 1
 
 
-@handle_premise.add_premise(constant.Premise.TARGET_IS_NAKED)
-def handle_target_is_naked(character_id: int) -> int:
-    """
-    校验交互对象是否一丝不挂
-    Keyword arguments:
-    character_id -- 角色id
-    Return arguments:
-    int -- 权重
-    """
-    character_data: game_type.Character = cache.character_data[character_id]
-    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    for i in target_data.put_on:
-        if isinstance(target_data.put_on[i], UUID):
-            return 0
-    return 1
-
-
 @handle_premise.add_premise(constant.Premise.IS_NAKED)
 def handle_is_naked(character_id: int) -> int:
     """
@@ -250,6 +282,22 @@ def handle_is_naked(character_id: int) -> int:
         if isinstance(character_data.put_on[i], UUID):
             return 0
     return 1
+
+
+@handle_premise.add_premise(constant.Premise.NOT_NAKED)
+def handle_not_naked(character_id: int) -> int:
+    """
+    校验角色是否不是一丝不挂
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    for i in character_data.put_on:
+        if isinstance(character_data.put_on[i], UUID):
+            return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.NO_WEAR_COAT)

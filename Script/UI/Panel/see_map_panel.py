@@ -8,10 +8,9 @@ from Script.Core import (
     flow_handle,
     value_handle,
     text_handle,
-    constant,
     py_cmd,
 )
-from Script.Design import map_handle, attr_text, character_move
+from Script.Design import map_handle, attr_text, character_move, constant
 from Script.Config import game_config
 
 _: FunctionType = get_text._
@@ -589,7 +588,7 @@ class SocialSceneNameDraw:
         player_data: game_type.Character = cache.character_data[0]
         player_scene_str = map_handle.get_map_system_path_str_for_list(player_data.position)
         path_str = map_handle.get_map_system_path_str_for_list(self.scene_path)
-        social_type = 0
+        social_type = 5
         if text in player_data.social_contact_data:
             social_type = player_data.social_contact_data[text]
         type_text = game_config.config_social_type[social_type].name

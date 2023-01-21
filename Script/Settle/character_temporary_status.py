@@ -1,9 +1,9 @@
 from types import FunctionType
 from Script.Design import (
     settle_behavior,
+    constant,
 )
 from Script.Core import (
-    constant,
     game_type,
     cache_control,
     get_text,

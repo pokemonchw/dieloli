@@ -23,7 +23,7 @@ from Script.Config import map_config
 
 map_config.init_map_data()
 
-from Script.Design import start_flow
+from Script.Design import start_flow, instruct
 from Script.Core import game_init
 import Script.Premise
 import Script.Settle

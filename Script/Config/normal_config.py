@@ -25,3 +25,17 @@ def init_normal_config():
             config_normal.verson = "Past." + version_data["version"]
     else:
         config_normal.verson = "Orgin"
+
+
+def change_normal_config(now_key: str, now_value: str):
+    """
+    更改游戏通用配置数据
+    Keyword arguments:
+    now_key -- 更改的键
+    now_value -- 更改的值
+    """
+    ini_config = configparser.ConfigParser()
+    ini_config.read(game_path_config.CONFIG_PATH, encoding="utf8")
+    ini_config.set("game",now_key,now_value)
+    with open(game_path_config.CONFIG_PATH,"w",encoding="utf-8") as f:
+        ini_config.write(f)

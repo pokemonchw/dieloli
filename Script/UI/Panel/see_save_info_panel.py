@@ -6,14 +6,13 @@ from Script.Core import (
     get_text,
     save_handle,
     text_handle,
-    constant,
     flow_handle,
     game_type,
     py_cmd,
 )
 from Script.Config import normal_config
 from Script.UI.Moudle import panel, draw
-from Script.Design import game_time
+from Script.Design import game_time, constant
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """

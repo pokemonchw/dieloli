@@ -1,6 +1,6 @@
 from types import FunctionType
-from Script.Design import settle_behavior, attr_calculation
-from Script.Core import cache_control, constant, game_type, get_text
+from Script.Design import settle_behavior, attr_calculation, constant
+from Script.Core import cache_control, game_type, get_text
 from Script.Config import normal_config
 
 

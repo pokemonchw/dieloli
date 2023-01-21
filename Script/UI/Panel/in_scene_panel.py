@@ -9,10 +9,9 @@ from Script.Core import (
     flow_handle,
     text_handle,
     value_handle,
-    constant,
     py_cmd,
 )
-from Script.Design import attr_text, map_handle, handle_instruct, handle_premise
+from Script.Design import attr_text, map_handle, handle_instruct, handle_premise, constant
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache

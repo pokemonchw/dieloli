@@ -1,7 +1,7 @@
 import datetime
 from typing import List
-from Script.Design import handle_premise, game_time, character
-from Script.Core import constant, game_type, cache_control
+from Script.Design import handle_premise, game_time, character, constant
+from Script.Core import game_type, cache_control
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
@@ -202,3 +202,39 @@ def handle_tonight_is_full_moon(character_id: int) -> int:
     if moon_phase in {11, 12}:
         return 1
     return 0
+
+
+@handle_premise.add_premise(constant.Premise.IS_SPRING)
+def handle_is_spring(character_id: int) -> int:
+    """
+    校验现在是否是春天
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    solar_period = game_time.get_solar_period(now_time)
+    season = game_config.config_solar_period[solar_period].season
+    return not season
+
+
+@handle_premise.add_premise(constant.Premise.IS_SUMMER)
+def handle_is_summer(character_id: int) -> int:
+    """
+    校验现在是否是夏天
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    solar_period = game_time.get_solar_period(now_time)
+    season = game_config.config_solar_period[solar_period].season
+    return season == 1

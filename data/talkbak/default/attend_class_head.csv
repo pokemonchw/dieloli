@@ -1,6 +1,0 @@
-cid,behavior_id,adv_id,is_end,context
-口上id,触发口上的状态id,口上限定的剧情npcid,是否是结束状态的口上,口上内容
-str,int,int,bool,str
-0,0,0,0,1
-口上配置数据,,,,
-0,3,0,0,四下无人，{PlayerNickName}一边打着哈欠一边从抽屉里拿出了书

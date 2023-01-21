@@ -2,8 +2,9 @@ import random
 from functools import wraps
 from typing import List
 from types import FunctionType
-from Script.Core import get_text, constant, game_type, cache_control, flow_handle
+from Script.Core import get_text, game_type, cache_control, flow_handle
 from Script.Design import (
+    constant,
     handle_panel,
     character,
     character_handle,

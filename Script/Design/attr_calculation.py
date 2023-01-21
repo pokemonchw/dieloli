@@ -8,6 +8,7 @@ from Script.Core import (
 from Script.Design import game_time
 from Script.Config import game_config
 
+
 cache: game_type.Cache = cache_control.cache
 """ 游戏内缓存数据 """
 

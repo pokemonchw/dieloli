@@ -1,7 +1,7 @@
 from functools import wraps
 from types import FunctionType
-from Script.Core import cache_control, constant, game_type, get_text, text_handle
-from Script.Design import attr_text
+from Script.Core import cache_control, game_type, get_text, text_handle
+from Script.Design import attr_text, constant
 from Script.UI.Moudle import panel
 from Script.Config import game_config, normal_config
 
@@ -11,6 +11,7 @@ width = normal_config.config_normal.text_width
 """ 屏幕宽度 """
 _: FunctionType = get_text._
 """ 翻译api """
+describe_list = [_("可爱的"), _("性感的"), _("帅气的"), _("清新的"), _("典雅的"), _("清洁的"), _("保暖的")]
 
 
 def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> panel.LeftDrawTextListWaitPanel:
@@ -47,19 +48,23 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
     ):
         return
     if status_data.mana_point:
-        now_judge = True
+        now_judge = 1
     if status_data.hit_point:
-        now_judge = True
+        now_judge = 1
     if status_data.knowledge:
-        now_judge = True
+        now_judge = 1
     if status_data.language:
-        now_judge = True
+        now_judge = 1
     if status_data.status:
-        now_judge = True
+        now_judge = 1
     if status_data.sex_experience:
-        now_judge = True
+        now_judge = 1
+    if status_data.wear:
+        now_judge = 1
+    if status_data.undress:
+        now_judge = 1
     if status_data.target_change and not character_id:
-        now_judge = True
+        now_judge = 1
     if now_judge:
         now_text_list = []
         self_draw_judge = 0
@@ -106,6 +111,28 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                     for i in status_data.sex_experience
                 ]
             )
+            self_draw_judge = 1
+        if status_data.wear:
+            now_text = _("\n穿上了:")
+            for clothing in status_data.wear.values():
+                clothing_config = game_config.config_clothing_tem[clothing.tem_id]
+                value_list = [clothing.sweet,clothing.sexy,clothing.handsome,clothing.fresh,clothing.elegant,clothing.cleanliness,clothing.warm]
+                describe_id = value_list.index(max(value_list))
+                describe = describe_list[describe_id]
+                clothing_name = f"[{clothing.evaluation}{describe}{clothing_config.name}]"
+                now_text += clothing_name
+            now_text_list.append(now_text)
+            self_draw_judge = 1
+        if status_data.undress:
+            now_text = _("\n脱下了:")
+            for clothing in status_data.undress.values():
+                clothing_config = game_config.config_clothing_tem[clothing.tem_id]
+                value_list = [clothing.sweet,clothing.sexy,clothing.handsome,clothing.fresh,clothing.elegant,clothing.cleanliness,clothing.warm]
+                describe_id = value_list.index(max(value_list))
+                describe = describe_list[describe_id]
+                clothing_name = f"[{clothing.evaluation}{describe}{clothing_config.name}]"
+                now_text += clothing_name
+            now_text_list.append(now_text)
             self_draw_judge = 1
         if status_data.target_change:
             for target_character_id in status_data.target_change:

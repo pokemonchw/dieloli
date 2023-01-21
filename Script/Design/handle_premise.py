@@ -3,8 +3,8 @@ import datetime
 from uuid import UUID
 from functools import wraps
 from types import FunctionType
-from Script.Core import cache_control, constant, game_type
-from Script.Design import map_handle, game_time, attr_calculation, character, course
+from Script.Core import cache_control, game_type
+from Script.Design import map_handle, game_time, attr_calculation, character, course, constant
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
