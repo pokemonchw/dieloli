@@ -449,6 +449,7 @@ msgstr "Staple Food"
 #: Script/Design/cooking.py:320 Script/Design/cooking.py:387
 msgid "零食"
 msgstr "Snack"
+
 #: Script/UI/Panel/food_shop_panel.py:51 Script/UI/Panel/food_bag_panel.py:40
 #: Script/Design/cooking.py:327 Script/Design/cooking.py:394
 msgid "饮品"
