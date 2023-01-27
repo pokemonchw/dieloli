@@ -49,7 +49,7 @@ def handle_missionary_position():
     """处理正常位插入指令"""
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.start_time = cache.game_time
-    constant.settle_behavior_effect_data[constant.BehaviorEffect.INTERRUPT_TARGET_ACTIVITY](character_id,1,None,cache.game_time)
+    constant.settle_behavior_effect_data[constant.BehaviorEffect.INTERRUPT_TARGET_ACTIVITY](0,1,None,cache.game_time)
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.behavior.start_time = character_data.behavior.start_time
     character_data.behavior.duration = 10
