@@ -67,8 +67,8 @@ def handle_target_not_put_on_bra(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     target_data = cache.character_data[character_data.target_character_id]
     if (6 not in target_data.put_on) or (target_data.put_on[6] == ""):
-        return 0
-    return 1
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_NOT_PUT_ON_COAT)
@@ -83,8 +83,8 @@ def handle_target_not_put_on_coat(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     target_data = cache.character_data[character_data.target_character_id]
     if (0 not in target_data.put_on) or (target_data.put_on[0] == ""):
-        return 0
-    return 1
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_NOT_PUT_ON_PANTS)
@@ -99,8 +99,8 @@ def handle_target_not_put_on_pants(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     target_data = cache.character_data[character_data.target_character_id]
     if (2 not in target_data.put_on) or (target_data.put_on[2] == ""):
-        return 0
-    return 1
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_NOT_PUT_ON_UNDERPANTS)
@@ -115,8 +115,8 @@ def handle_target_not_put_on_underpants(character_id: int) -> int:
     character_data = cache.character_data[character_id]
     target_data = cache.character_data[character_data.target_character_id]
     if (7 not in target_data.put_on) or (target_data.put_on[7] == ""):
-        return 0
-    return 1
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.NO_WEAR_UNDERWEAR)
