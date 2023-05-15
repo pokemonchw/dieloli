@@ -47,7 +47,7 @@ def init_character_behavior(player_start: bool):
             if not player_start and not character_id:
                 if len(cache.over_behavior_character) < len(character_list) - 1:
                     continue
-            character_data:game_type.Character = cache.character_data[character_id]
+            character_data: game_type.Character = cache.character_data[character_id]
             character_behavior(character_id, cache.game_time)
             judge_character_dead(character_id)
         update_cafeteria()
@@ -108,6 +108,7 @@ def character_target_judge(character_id: int, now_time: int):
         set(),
         premise_data,
         target_weight_data,
+        0
     )
     player_data: game_type.Character = cache.character_data[0]
     character_data: game_type.Character = cache.character_data[character_id]
@@ -235,11 +236,12 @@ def judge_character_status(character_id: int, now_time: int) -> int:
 
 
 def search_target(
-    character_id: int,
-    target_list: list,
-    null_target: set,
-    premise_data: Dict[int, int],
-    target_weight_data: Dict[int, int],
+        character_id: int,
+        target_list: set,
+        null_target: set,
+        premise_data: Dict[int, int],
+        target_weight_data: Dict[int, int],
+        sub_weight: int
 ) -> (int, int, bool):
     """
     查找可用目标
@@ -249,6 +251,7 @@ def search_target(
     null_target -- 被排除的目标
     premise_data -- 已算出的前提权重
     target_weight_data -- 已算出权重的目标列表
+    sub_weight -- 向下传递的目标权重
     Return arguments:
     int -- 目标id
     int -- 目标权重
@@ -268,7 +271,7 @@ def search_target(
             target_data[1].add(target)
             target_weight_data[target] = 1
             continue
-        now_weight = 0
+        now_weight = sub_weight
         now_target_pass_judge = 0
         now_target_data = {}
         premise_judge = 1
@@ -291,6 +294,7 @@ def search_target(
                         null_target,
                         premise_data,
                         target_weight_data,
+                        now_weight
                     )
                     if now_judge:
                         now_target_data.setdefault(now_target_weight, set())

@@ -25,6 +25,10 @@ def init_normal_config():
             config_normal.verson = "Past." + version_data["version"]
     else:
         config_normal.verson = "Orgin"
+    now_font_size = (
+            int(config_normal.window_width / config_normal.text_width) * 2
+    )
+    config_normal.font_size = now_font_size
 
 
 def change_normal_config(now_key: str, now_value: str):

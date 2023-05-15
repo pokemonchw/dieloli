@@ -7,8 +7,8 @@ from Script.Core import main_frame
 from Script.Config import game_config, normal_config
 
 input_evnet = threading.Event()
-_send_queue = queue.Queue()
-_order_queue = queue.Queue()
+_send_queue = main_frame.main_queue
+_order_queue = main_frame.order_queue
 order_swap = None
 
 
@@ -29,7 +29,6 @@ def get_order():
 
 
 main_frame.bind_return(_input_evnet_set)
-main_frame.bind_queue(_send_queue)
 
 
 def _get_input_event():
@@ -47,10 +46,9 @@ def run(open_func: object):
     """
     flowthread = threading.Thread(target=open_func, name="flowthread")
     flowthread.start()
-    main_frame.run()
 
 
-def put_queue(message: str):
+def put_queue(message: any):
     """
     向输出队列中推送信息
     Keyword arguments:
@@ -59,7 +57,7 @@ def put_queue(message: str):
     _send_queue.put_nowait(message)
 
 
-def put_order(message: str):
+def put_order(message: any):
     """
     向命令队列中推送信息
     Keyword arguments:
@@ -174,7 +172,7 @@ def era_print(string: str, style="standard"):
     """
     json_str = new_json()
     json_str["content"].append(text_json(string, style))
-    put_queue(json.dumps(json_str, ensure_ascii=False))
+    put_queue(json_str)
 
 
 def image_print(image_name: str):
@@ -187,7 +185,7 @@ def image_print(image_name: str):
     json_str = new_json()
     image_json = {"image_name": image_name}
     json_str["image"] = image_json
-    put_queue(json.dumps(json_str, ensure_ascii=False))
+    put_queue(json_str)
 
 
 def clear_screen():
@@ -196,7 +194,7 @@ def clear_screen():
     """
     json_str = new_json()
     json_str["clear_cmd"] = "true"
-    put_queue(json.dumps(json_str, ensure_ascii=False))
+    put_queue(json_str)
 
 
 def frame_style_def(
@@ -232,7 +230,7 @@ def frame_style_def(
         underline,
         italic,
     )
-    put_queue(json.dumps(json_str, ensure_ascii=False))
+    put_queue(json_str)
 
 
 def set_background(color: str):
@@ -243,7 +241,7 @@ def set_background(color: str):
     """
     json_str = new_json()
     json_str["bgcolor"] = color
-    put_queue(json.dumps(json_str, ensure_ascii=False))
+    put_queue(json_str)
 
 
 def clear_order():
@@ -252,7 +250,7 @@ def clear_order():
     """
     json_str = new_json()
     json_str["clearorder_cmd"] = "true"
-    put_queue(json.dumps(json_str, ensure_ascii=False))
+    put_queue(json_str)
 
 
 def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"):
@@ -266,7 +264,7 @@ def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_styl
     """
     json_str = new_json()
     json_str["content"].append(cmd_json(cmd_str, cmd_number, normal_style, on_style))
-    put_queue(json.dumps(json_str, ensure_ascii=False))
+    put_queue(json_str)
 
 
 def io_print_image_cmd(cmd_str: str, cmd_number: int):
@@ -282,7 +280,7 @@ def io_print_image_cmd(cmd_str: str, cmd_number: int):
     data["text"] = cmd_str
     data["num"] = cmd_number
     json_str["content"].append(data)
-    put_queue(json.dumps(json_str, ensure_ascii=False))
+    put_queue(json_str)
 
 
 def io_clear_cmd(*cmd_numbers: int):
@@ -296,7 +294,7 @@ def io_clear_cmd(*cmd_numbers: int):
         json_str["clearcmd_cmd"] = cmd_numbers
     else:
         json_str["clearcmd_cmd"] = "all"
-    put_queue(json.dumps(json_str, ensure_ascii=False))
+    put_queue(json_str)
 
 
 def init_style():
