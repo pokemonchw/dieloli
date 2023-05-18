@@ -1,7 +1,7 @@
 from tkinter import Event
 from Script.Core import main_frame, py_cmd, game_type, cache_control
 
-#wframe = main_frame.root
+wframe = main_frame.root
 
 
 cache: game_type.Cache = cache_control.cache
@@ -12,14 +12,12 @@ def on_wframe_listion():
     """
     对按键事件进行绑定
     """
-    """
     wframe.bind("<ButtonPress-1>", mouse_left_check)
     wframe.bind("<ButtonPress-3>", mouse_right_check)
     wframe.bind("<Return>", main_frame.send_input)
     wframe.bind("<KP_Enter>", main_frame.send_input)
     wframe.bind("<Up>", key_up)
     wframe.bind("<Down>", key_down)
-    """
 
 
 def mouse_left_check(_: Event):

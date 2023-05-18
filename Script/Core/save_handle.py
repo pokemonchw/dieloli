@@ -53,13 +53,7 @@ def establish_save(save_id: str):
     if save_id != "auto":
         establish_save_linux(save_id)
         return
-    now_system = platform.system()
-    if now_system == "Linux":
-        now_process = multiprocessing.Process(target=establish_save_linux, args=(save_id,))
-        now_process.start()
-        now_process.join()
-    elif now_system == "Darwin":
-        multiprocessing.set_start_method("fork")
+    if platform.system() == "Linux":
         now_process = multiprocessing.Process(target=establish_save_linux, args=(save_id,))
         now_process.start()
         now_process.join()

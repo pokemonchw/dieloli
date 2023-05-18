@@ -97,4 +97,4 @@ def focus_cmd():
     """
     使光标聚焦在命令输出框上
     """
-    main_frame.window.order_line.setFocus()
+    main_frame.inputbox.focus_force()

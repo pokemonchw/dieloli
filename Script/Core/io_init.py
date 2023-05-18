@@ -7,8 +7,8 @@ from Script.Core import main_frame
 from Script.Config import game_config, normal_config
 
 input_evnet = threading.Event()
-_send_queue = main_frame.main_queue
-_order_queue = main_frame.order_queue
+_send_queue = queue.Queue()
+_order_queue = queue.Queue()
 order_swap = None
 
 
@@ -29,6 +29,7 @@ def get_order():
 
 
 main_frame.bind_return(_input_evnet_set)
+main_frame.bind_queue(_send_queue)
 
 
 def _get_input_event():
@@ -46,9 +47,10 @@ def run(open_func: object):
     """
     flowthread = threading.Thread(target=open_func, name="flowthread")
     flowthread.start()
+    main_frame.run()
 
 
-def put_queue(message: any):
+def put_queue(message: str):
     """
     向输出队列中推送信息
     Keyword arguments:
@@ -57,7 +59,7 @@ def put_queue(message: any):
     _send_queue.put_nowait(message)
 
 
-def put_order(message: any):
+def put_order(message: str):
     """
     向命令队列中推送信息
     Keyword arguments:
@@ -97,10 +99,10 @@ def text_json(string: str, style: tuple or str):
 
 
 def cmd_json(
-    cmd_str: str,
-    cmd_num: int,
-    normal_style: tuple or str,
-    on_style: tuple or str,
+        cmd_str: str,
+        cmd_num: int,
+        normal_style: tuple or str,
+        on_style: tuple or str,
 ):
     """
     定义一个命令json
@@ -126,14 +128,14 @@ def cmd_json(
 
 
 def style_json(
-    style_name: str,
-    foreground: str,
-    background: str,
-    font: str,
-    fontsize: str,
-    bold: str,
-    underline: str,
-    italic: str,
+        style_name: str,
+        foreground: str,
+        background: str,
+        font: str,
+        fontsize: str,
+        bold: str,
+        underline: str,
+        italic: str,
 ):
     """
     定义一个样式json
@@ -198,14 +200,14 @@ def clear_screen():
 
 
 def frame_style_def(
-    style_name: str,
-    foreground: str,
-    background: str,
-    font: str,
-    fontsize: str,
-    bold: str,
-    underline: str,
-    italic: str,
+        style_name: str,
+        foreground: str,
+        background: str,
+        font: str,
+        fontsize: str,
+        bold: str,
+        underline: str,
+        italic: str,
 ):
     """
     推送一条在前端定义样式的信息
@@ -303,14 +305,14 @@ def init_style():
     """
 
     def new_style_def(
-        style_name,
-        foreground,
-        background,
-        font,
-        fontsize,
-        bold,
-        underline,
-        italic,
+            style_name,
+            foreground,
+            background,
+            font,
+            fontsize,
+            bold,
+            underline,
+            italic,
     ):
         frame_style_def(
             style_name,

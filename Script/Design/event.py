@@ -21,10 +21,9 @@ def handle_event(character_id: int, start: int) -> (draw_event_text_panel.DrawEv
     character_data: game_type.Character = cache.character_data[character_id]
     behavior_id = character_data.behavior.behavior_id
     now_event_data = {}
-    now_premise_data = {}
     if (
-        behavior_id in game_config.config_event_status_data
-        and start in game_config.config_event_status_data[behavior_id]
+            behavior_id in game_config.config_event_status_data
+            and start in game_config.config_event_status_data[behavior_id]
     ):
         for event_id in game_config.config_event_status_data[behavior_id][start]:
             now_weight = 1
@@ -32,14 +31,14 @@ def handle_event(character_id: int, start: int) -> (draw_event_text_panel.DrawEv
             if len(event_config.premise):
                 now_weight = 0
                 for premise in event_config.premise:
-                    if premise in now_premise_data:
-                        if not now_premise_data[premise]:
+                    if premise in character_data.premise_data:
+                        if not character_data.premise_data[premise]:
                             now_weight = 0
                             break
-                        now_weight += now_premise_data[premise]
+                        now_weight += character_data.premise_data[premise]
                     else:
                         now_add_weight = constant.handle_premise_data[premise](character_id)
-                        now_premise_data[premise] = now_add_weight
+                        character_data.premise_data[premise] = now_add_weight
                         if now_add_weight:
                             now_weight += now_add_weight
                         else:
@@ -53,6 +52,6 @@ def handle_event(character_id: int, start: int) -> (draw_event_text_panel.DrawEv
         event_weight = value_handle.get_rand_value_for_value_region(list(now_event_data.keys()))
         now_event_id = random.choice(list(now_event_data[event_weight]))
     if now_event_id != "":
-        now_event_draw = draw_event_text_panel.DrawEventTextPanel(now_event_id,character_id)
+        now_event_draw = draw_event_text_panel.DrawEventTextPanel(now_event_id, character_id)
         if now_event_draw.text:
             return now_event_draw

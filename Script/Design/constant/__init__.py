@@ -27,7 +27,7 @@ instruct_type_data: Dict[int, Set] = {}
 """ 指令类型拥有的指令集合 """
 instruct_premise_data: Dict[int, Set] = {}
 """ 指令显示的所需前提集合 """
-handle_state_machine_data: Dict[int, FunctionType] = {}
+handle_state_machine_data: Dict[str, FunctionType] = {}
 """ 角色状态机函数 """
 family_region_list: Dict[int, str] = {}
 """ 姓氏区间数据 """

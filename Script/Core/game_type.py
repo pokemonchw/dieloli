@@ -82,7 +82,6 @@ class Chest:
         """ 每日胸围差增量 """
 
 
-
 class Food:
     """食物数据结构体"""
 
@@ -518,6 +517,8 @@ class Character:
         """ 当前跟随目标 """
         self.ai_target: UUID = 0
         """ 当前行为目标 """
+        self.premise_data: Dict[str, float] = {}
+        """ 角色当前的前提权重列表 """
 
 
 class TeacherTimeTable:
