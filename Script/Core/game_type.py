@@ -786,3 +786,5 @@ class ExecuteTarget:
         """ 所属的目标id """
         self.weight: float = 0
         """ 目标的权重 """
+        self.score: int = 0
+        """ 近似检索到的角色对这个目标的评分，若目标可达则+1，不可达则-1 """

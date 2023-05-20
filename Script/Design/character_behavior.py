@@ -116,8 +116,10 @@ def character_target_judge(character_id: int, now_time: int):
     distance = distance_list[0][0]
     near_judge = 0
     if near_character_id in cache.character_target_data:
+        near_target = cache.character_target_data[near_character_id]
+        now_score = near_target.score * 0.0003
         now_range = random.random()
-        if now_range <= 1 - distance:
+        if now_range <= 1 - distance + now_score:
             near_judge = 1
     target: game_type.ExecuteTarget = None
     judge = False
@@ -130,6 +132,8 @@ def character_target_judge(character_id: int, now_time: int):
             0,
             ""
         )
+        if judge:
+            cache.character_target_data[near_character_id].score += 1
     if not judge:
         target, _, judge = search_target(
             character_id,
