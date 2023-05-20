@@ -427,11 +427,12 @@ def build_similar_character_searcher():
     """
     构造相似角色检索器
     """
-    character_feature = [get_character_feature_vector(character_id) for character_id in cache.character_data]
+    character_feature = [get_character_feature_vector(character_id) for character_id in
+                         range(1, len(cache.character_data))]
     vectors = feature_vector_handle.fit_transform(character_feature)
     p = hnswlib.Index(space='cosine', dim=len(vectors[0]))
     p.init_index(max_elements=len(vectors), ef_construction=200, M=16)
-    p.add_items(vectors, ids=range(len(cache.character_data)))
+    p.add_items(vectors, ids=range(1, len(cache.character_data)))
     p.set_ef(50)
     cache.similar_character_searcher = p
     cache.character_vector_data = vectors
