@@ -117,7 +117,7 @@ def character_target_judge(character_id: int, now_time: int):
     near_judge = 0
     if near_character_id in cache.character_target_data:
         now_range = random.random()
-        if now_range <= distance:
+        if now_range <= 1 - distance:
             near_judge = 1
     target = ""
     judge = False
