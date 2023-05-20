@@ -689,7 +689,7 @@ class Cache:
         """ 相似角色检索器 """
         self.character_vector_data: list = []
         """ 角色向量表 """
-        self.character_target_data: Dict[int, str] = {}
+        self.character_target_data: Dict[int, ExecuteTarget] = {}
         """ 角色正在进行的目标列表 """
 
 
@@ -773,3 +773,16 @@ class Target:
         """ 目标的前提集合 """
         self.effect: dict = {}
         """ 目标的效果集合 """
+
+
+class ExecuteTarget:
+    """ 执行的目标数据结构体 """
+
+    def __init__(self):
+        """ 初始化目标对象 """
+        self.uid: str = ""
+        """ 目标的唯一id """
+        self.affiliation: str = ""
+        """ 所属的目标id """
+        self.weight: float = 0
+        """ 目标的权重 """

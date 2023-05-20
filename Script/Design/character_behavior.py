@@ -119,24 +119,33 @@ def character_target_judge(character_id: int, now_time: int):
         now_range = random.random()
         if now_range <= 1 - distance:
             near_judge = 1
-    target = ""
+    target: game_type.ExecuteTarget = None
     judge = False
     if near_judge:
-        target, _, judge = search_target(character_id, {cache.character_target_data[near_character_id]}, set(),
-                                         target_weight_data, 0)
+        target, _, judge = search_target(
+            character_id,
+            {cache.character_target_data[near_character_id].affiliation},
+            set(),
+            target_weight_data,
+            0,
+            ""
+        )
     if not judge:
         target, _, judge = search_target(
             character_id,
             set(game_config.config_target.keys()),
             set(),
             target_weight_data,
-            0
+            0,
+            ""
         )
     player_data: game_type.Character = cache.character_data[0]
     if judge:
+        if target.affiliation == "":
+            target.affiliation = target.uid
         cache.character_target_data[character_id] = target
-        target_config = game_config.config_target[target]
-        character_data.ai_target = target
+        target_config = game_config.config_target[target.uid]
+        character_data.ai_target = target.affiliation
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
         event_draw = event.handle_event(character_id, 1)
         if (not character_id) or (player_data.target_character_id == character_id):
@@ -263,7 +272,8 @@ def search_target(
         null_target: set,
         target_weight_data: Dict[int, int],
         sub_weight: int,
-) -> (int, int, bool):
+        original_target_id: str
+) -> (game_type.ExecuteTarget, int, bool):
     """
     查找可用目标
     Keyword arguments:
@@ -273,30 +283,40 @@ def search_target(
     premise_data -- 已算出的前提权重
     target_weight_data -- 已算出权重的目标列表
     sub_weight -- 向下传递的目标权重
+    original_target_id -- 原始的目标id
     Return arguments:
-    int -- 目标id
+    game_type.ExecuteTarget -- 要执行的目标数据
     int -- 目标权重
     bool -- 前提是否能够被满足
     """
     character_data = cache.character_data[character_id]
-    target_data: Dict[float, Set] = {}
+    target_data: Dict[float, Set[game_type.ExecuteTarget]] = {}
     for target in target_list:
         if target in null_target:
             continue
         if target in target_weight_data:
             target_data.setdefault(target_weight_data[target], set())
-            target_data[target_weight_data[target]].add(target)
+            now_execute_target = game_type.ExecuteTarget()
+            now_execute_target.uid = target
+            now_execute_target.weight = target_weight_data[target]
+            now_execute_target.affiliation = original_target_id
+            target_data[target_weight_data[target]].add(now_execute_target)
             continue
         target_config = game_config.config_target[target]
         if not len(target_config.premise):
             target_data.setdefault(1, set())
-            target_data[1].add(target)
+            now_execute_target = game_type.ExecuteTarget()
+            now_execute_target.uid = target
+            now_execute_target.weight = 1
+            now_execute_target.affiliation = original_target_id
+            target_data[1].add(now_execute_target)
             target_weight_data[target] = 1
             continue
         now_weight = sub_weight
         now_target_pass_judge = 0
         now_target_data = {}
         premise_judge = 1
+        null_premise_set = set()
         for premise in target_config.premise:
             if premise in character_data.premise_data:
                 premise_judge = character_data.premise_data[premise]
@@ -308,23 +328,31 @@ def search_target(
                 now_weight += premise_judge
             else:
                 if premise in game_config.config_effect_target_data and premise not in character_data.premise_data:
-                    now_target_list = game_config.config_effect_target_data[premise] - null_target
-                    now_target_list.remove(target)
-                    now_target, now_target_weight, now_judge = search_target(
-                        character_id,
-                        now_target_list,
-                        null_target,
-                        character_data.premise_data,
-                        target_weight_data,
-                        now_weight,
-                    )
-                    if now_judge:
-                        now_target_data.setdefault(now_target_weight, set())
-                        now_target_data[now_target_weight].add(now_target)
-                        now_weight += now_target_weight
-                    else:
-                        now_target_pass_judge = 1
-                        break
+                    null_premise_set.add(premise)
+                else:
+                    now_target_pass_judge = 1
+                    break
+        if not now_target_pass_judge and null_premise_set:
+            premise_judge = 0
+            now_original_target_id = target
+            if original_target_id != "":
+                now_original_target_id = original_target_id
+            for premise in null_premise_set:
+                now_target_list = game_config.config_effect_target_data[premise] - null_target
+                now_target_list.remove(target)
+                now_target, now_target_weight, now_judge = search_target(
+                    character_id,
+                    now_target_list,
+                    null_target,
+                    character_data.premise_data,
+                    target_weight_data,
+                    now_weight,
+                    now_original_target_id,
+                )
+                if now_judge:
+                    now_target_data.setdefault(now_target_weight, set())
+                    now_target_data[now_target_weight].add(now_target)
+                    now_weight += now_target_weight
                 else:
                     now_target_pass_judge = 1
                     break
@@ -334,8 +362,12 @@ def search_target(
             continue
         if premise_judge:
             target_data.setdefault(now_weight, set())
-            target_data[now_weight].add(target)
-            target_weight_data[target] = now_weight
+            now_execute_target = game_type.ExecuteTarget()
+            now_execute_target.uid = target
+            now_execute_target.weight = now_weight
+            now_execute_target.affiliation = original_target_id
+            target_data[now_weight].add(now_execute_target)
+            target_weight_data[now_weight] = now_weight
         else:
             now_value_weight = value_handle.get_rand_value_for_value_region(list(now_target_data.keys()))
             target_data.setdefault(now_weight, set())
@@ -343,7 +375,7 @@ def search_target(
     if target_data:
         value_weight = value_handle.get_rand_value_for_value_region(list(target_data.keys()))
         return random.choice(list(target_data[value_weight])), value_weight, 1
-    return "", 0, 0
+    return None, 0, 0
 
 
 def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
