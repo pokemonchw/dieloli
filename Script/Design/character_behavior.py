@@ -1,4 +1,5 @@
 import random
+import time
 from uuid import UUID
 from concurrent.futures import ThreadPoolExecutor
 from types import FunctionType
@@ -16,6 +17,7 @@ from Script.Design import (
     handle_premise,
     event,
     cooking,
+    character_handle,
 )
 from Script.Config import game_config, normal_config
 from Script.UI.Moudle import draw
@@ -37,6 +39,8 @@ def init_character_behavior(player_start: bool):
     player_start -- 是否是玩家状态的开始
     """
     character_list = list(cache.character_data.keys())
+    character_handle.build_similar_character_searcher()
+    cache.character_target_data = {}
     if player_start:
         character_list.sort()
     else:
@@ -51,6 +55,7 @@ def init_character_behavior(player_start: bool):
                 if len(cache.over_behavior_character) < len(character_list) - 1:
                     continue
             character_behavior(character_id, cache.game_time)
+            judge_character_dead(character_id)
         update_cafeteria()
     cache.over_behavior_character = set()
 
@@ -103,17 +108,33 @@ def character_target_judge(character_id: int, now_time: int):
     character_id -- 角色id
     now_time -- 指定时间戳
     """
-    character_data: game_type.Character = cache.character_data[character_id]
     target_weight_data = {}
-    target, _, judge = search_target(
-        character_id,
-        set(game_config.config_target.keys()),
-        set(),
-        target_weight_data,
-        0
-    )
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_vector = cache.character_vector_data[character_id]
+    near_character_list, distance_list = cache.similar_character_searcher.knn_query(character_vector, k=1)
+    near_character_id = near_character_list[0][0]
+    distance = distance_list[0][0]
+    near_judge = 0
+    if near_character_id in cache.character_target_data:
+        now_range = random.random()
+        if now_range <= distance:
+            near_judge = 1
+    target = ""
+    judge = False
+    if near_judge:
+        target, _, judge = search_target(character_id, {cache.character_target_data[near_character_id]}, set(),
+                                         target_weight_data, 0)
+    if not judge:
+        target, _, judge = search_target(
+            character_id,
+            set(game_config.config_target.keys()),
+            set(),
+            target_weight_data,
+            0
+        )
     player_data: game_type.Character = cache.character_data[0]
     if judge:
+        cache.character_target_data[character_id] = target
         target_config = game_config.config_target[target]
         character_data.ai_target = target
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
@@ -241,7 +262,7 @@ def search_target(
         target_list: set,
         null_target: set,
         target_weight_data: Dict[int, int],
-        sub_weight: int
+        sub_weight: int,
 ) -> (int, int, bool):
     """
     查找可用目标
@@ -288,13 +309,14 @@ def search_target(
             else:
                 if premise in game_config.config_effect_target_data and premise not in character_data.premise_data:
                     now_target_list = game_config.config_effect_target_data[premise] - null_target
+                    now_target_list.remove(target)
                     now_target, now_target_weight, now_judge = search_target(
                         character_id,
                         now_target_list,
                         null_target,
                         character_data.premise_data,
                         target_weight_data,
-                        now_weight
+                        now_weight,
                     )
                     if now_judge:
                         now_target_data.setdefault(now_target_weight, set())

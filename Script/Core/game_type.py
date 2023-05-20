@@ -1,5 +1,6 @@
 from uuid import UUID
 from typing import List, Dict, Set
+from hnswlib import Index
 
 
 class FlowContorl:
@@ -411,8 +412,6 @@ class Character:
         """ 角色的性等级描述数据 """
         self.state: int = 0
         """ 角色当前状态 """
-        self.engraving: Dict[str, int] = {}
-        """ 角色的刻印数据 """
         self.clothing: Dict[int, Dict[UUID, Clothing]] = {}
         """
         角色拥有的服装数据
@@ -686,6 +685,12 @@ class Cache:
         服装商店内的服装数据
         服装类型id:服装唯一id:服装对象
         """
+        self.similar_character_searcher: Index = None
+        """ 相似角色检索器 """
+        self.character_vector_data: list = []
+        """ 角色向量表 """
+        self.character_target_data: Dict[int, str] = {}
+        """ 角色正在进行的目标列表 """
 
 
 class TargetChange:
