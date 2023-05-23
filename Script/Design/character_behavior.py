@@ -110,7 +110,7 @@ def character_target_judge(character_id: int, now_time: int):
     """
     target_weight_data = {}
     character_data: game_type.Character = cache.character_data[character_id]
-    character_vector = cache.character_vector_data[character_id]
+    character_vector = cache.character_vector_data[character_id - 1]
     near_character_list, distance_list = cache.similar_character_searcher.knn_query(character_vector, k=1)
     near_character_id = near_character_list[0][0]
     distance = distance_list[0][0]
@@ -123,11 +123,12 @@ def character_target_judge(character_id: int, now_time: int):
             near_judge = 1
     target: game_type.ExecuteTarget = None
     judge = False
+    null_target_set = set()
     if near_judge:
         target, _, judge = search_target(
             character_id,
             {cache.character_target_data[near_character_id].affiliation},
-            set(),
+            null_target_set,
             target_weight_data,
             0,
             ""
@@ -138,7 +139,7 @@ def character_target_judge(character_id: int, now_time: int):
         target, _, judge = search_target(
             character_id,
             set(game_config.config_target.keys()),
-            set(),
+            null_target_set,
             target_weight_data,
             0,
             ""

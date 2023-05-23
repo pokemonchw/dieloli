@@ -26,10 +26,8 @@ instruct_queue = queue.Queue()
 def init_instruct_handle_thread():
     """初始化指令处理线程"""
     while 1:
-        if not instruct_queue.empty():
-            instruct_queue.get()
-            save_handle.establish_save("auto")
-        time.sleep(1)
+        instruct_queue.get()
+        save_handle.establish_save("auto")
 
 
 instruct_handle_thread = Thread(target=init_instruct_handle_thread)

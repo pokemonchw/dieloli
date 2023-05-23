@@ -18,6 +18,9 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
+if platform.system() == "Darwin":
+    multiprocessing.set_start_method('fork')
+
 
 
 def get_save_dir_path(save_id: str) -> str:
@@ -53,7 +56,7 @@ def establish_save(save_id: str):
     if save_id != "auto":
         establish_save_linux(save_id)
         return
-    if platform.system() == "Linux":
+    if platform.system() in {"Linux", "Darwin"}:
         now_process = multiprocessing.Process(target=establish_save_linux, args=(save_id,))
         now_process.start()
         now_process.join()
@@ -127,7 +130,7 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
     """
     将存档数据写入文件
     Keyword arguments:
-    save_id -- 存档id
+    save_id -- 存档id<F2>
     data_id -- 要写入的数据在存档下的文件id
     write_data -- 要写入的数据
     """

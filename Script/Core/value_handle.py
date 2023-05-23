@@ -23,8 +23,7 @@ def get_rand_value_for_value_region(value_list: List[float]) -> float:
     Return arguments:
     int -- 获得的元素
     """
-    weights = numpy.array(value_list)
-    return numpy.random.choice(value_list, p=weights / sum(weights))
+    return random.choices(value_list, weights=value_list)[0]
 
 
 def get_region_list(now_data: Dict[any, int]) -> dict:
@@ -54,7 +53,7 @@ def get_random_for_weight(data: Dict[any, int]) -> any:
     """
     keys = list(data.keys())
     weights = list(data.values())
-    return numpy.random.choice(keys, p=weights / numpy.sum(weights))
+    return random.choices(keys, weights=weights)[0]
 
 
 def get_next_value_for_list(now_int: int, int_list: List[int]) -> int:
