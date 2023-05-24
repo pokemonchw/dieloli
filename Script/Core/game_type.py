@@ -691,6 +691,10 @@ class Cache:
         """ 角色向量表 """
         self.character_target_data: Dict[int, ExecuteTarget] = {}
         """ 角色正在进行的目标列表 """
+        self.character_target_score_data: Dict[int, int] = {}
+        """ 其他角色对这个角色的目标的评分列表 """
+        self.character_premise_target_data: Dict[str, Dict[str, int]] = {}
+        """ 角色在查找目标时，为了满足前提而选择的目标列表 {前提id:{目标id:选择该目标的人数}} """
 
 
 class TargetChange:

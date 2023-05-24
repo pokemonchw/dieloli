@@ -56,7 +56,8 @@ def establish_save(save_id: str):
     if save_id != "auto":
         establish_save_linux(save_id)
         return
-    if platform.system() in {"Linux", "Darwin"}:
+    #if platform.system() in {"Linux", "Darwin"}:
+    if platform.system() in {"Linux"}:
         now_process = multiprocessing.Process(target=establish_save_linux, args=(save_id,))
         now_process.start()
         now_process.join()
@@ -72,12 +73,12 @@ def establish_save(save_id: str):
             "0": save_verson,
         }
         data_queue = multiprocessing.Queue()
-        data_queue.put(data)
         now_process = multiprocessing.Process(
             target=establish_save_windows, args=(save_id, data_queue)
         )
         now_process.start()
         now_process.join()
+        data_queue.put(data)
 
 
 def establish_save_windows(save_id: str, save_queue: multiprocessing.Queue):

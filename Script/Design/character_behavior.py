@@ -41,6 +41,7 @@ def init_character_behavior(player_start: bool):
     character_list = list(cache.character_data.keys())
     character_handle.build_similar_character_searcher()
     cache.character_target_data = {}
+    cache.character_target_score_data = {}
     if player_start:
         character_list.sort()
     else:
@@ -122,7 +123,7 @@ def character_target_judge(character_id: int, now_time: int):
         if now_range <= 1 - distance + now_score:
             near_judge = 1
     target: game_type.ExecuteTarget = None
-    judge = False
+    judge = 0
     null_target_set = set()
     if near_judge:
         target, _, judge = search_target(
@@ -135,6 +136,28 @@ def character_target_judge(character_id: int, now_time: int):
         )
         if judge:
             cache.character_target_data[near_character_id].score += 1
+            cache.character_target_score_data[near_character_id] += 1
+    if not judge:
+        conformity_judge = 0
+        if character_data.nature[1] > 50:
+            if cache.character_target_data:
+                conformity = (character_data.nature[1] - 50) * 2
+                now_range = random.random() * 100
+                if now_range < conformity:
+                    conformity = 1
+        if conformity_judge:
+            imitate_character_id = value_handle.get_random_for_weight(cache.character_target_score_data)
+            target, _, judge = search_target(
+                character_id,
+                {cache.character_target_data[imitate_character_id].affiliation},
+                null_target_set,
+                target_weight_data,
+                0,
+                ""
+            )
+            if judge:
+                cache.character_target_data[imitate_character_id].score += 1
+                cache.character_target_score_data[imitate_character_id] += 1
     if not judge:
         target, _, judge = search_target(
             character_id,
@@ -149,6 +172,7 @@ def character_target_judge(character_id: int, now_time: int):
         if target.affiliation == "":
             target.affiliation = target.uid
         cache.character_target_data[character_id] = target
+        cache.character_target_score_data[character_id] = 0
         target_config = game_config.config_target[target.uid]
         character_data.ai_target = target.affiliation
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
@@ -343,21 +367,39 @@ def search_target(
             if original_target_id != "":
                 now_original_target_id = original_target_id
             for premise in null_premise_set:
-                now_target_list = game_config.config_effect_target_data[premise] - null_target
-                now_target_list.remove(target)
-                now_target, now_target_weight, now_judge = search_target(
-                    character_id,
-                    now_target_list,
-                    null_target,
-                    character_data.premise_data,
-                    target_weight_data,
-                    now_weight,
-                    now_original_target_id,
-                )
+                if premise in cache.character_premise_target_data:
+                    if cache.character_premise_target_data[premise]:
+                        conformity_judge = 0
+                        if character_data.nature[1] > 50:
+                            conformity = (character_data.nature - 50) * 2
+                            now_range = random.random() * 100
+                            if now_range < conformity:
+                                now_target_id = value_handle.get_random_for_weight(cache.character_premise_target_data[premise])
+                                now_target, now_weight, now_judge = search_target(
+                                    character_id,
+                                    {now_target_id},
+                                    null_target,
+                                    target_weight_data,
+                                    now_original_target_id,
+                                )
+                if not now_judge:
+                    now_target_list = game_config.config_effect_target_data[premise] - null_target
+                    now_target_list.remove(target)
+                    now_target, now_target_weight, now_judge = search_target(
+                        character_id,
+                        now_target_list,
+                        null_target,
+                        target_weight_data,
+                        now_weight,
+                        now_original_target_id,
+                    )
                 if now_judge:
                     now_target_data.setdefault(now_target_weight, set())
                     now_target_data[now_target_weight].add(now_target)
                     now_weight += now_target_weight
+                    cache.character_premise_target_data.setdefault(premise, {})
+                    cache.character_premise_target_data[premise].setdefault(now_target.uid, 0)
+                    cache.character_premise_target_data[premise][now_target.uid] += 1
                 else:
                     now_target_pass_judge = 1
                     break
