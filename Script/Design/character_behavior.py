@@ -32,29 +32,25 @@ handle_thread_pool: ThreadPoolExecutor = ThreadPoolExecutor(max_workers=50)
 """ 处理角色行为的线程池 """
 
 
-def init_character_behavior(player_start: bool):
+def init_character_behavior():
     """
     角色行为树总控制
-    Keyword arguments:
-    player_start -- 是否是玩家状态的开始
     """
     character_list = list(cache.character_data.keys())
     character_handle.build_similar_character_searcher()
     cache.character_target_data = {}
     cache.character_target_score_data = {}
-    if player_start:
-        character_list.sort()
-    else:
-        character_list.sort(reverse=1)
+    character_list.sort(reverse=1)
     while 1:
         if len(cache.over_behavior_character) >= len(cache.character_data):
             break
         for character_id in character_list:
             if character_id in cache.over_behavior_character:
                 continue
-            if not player_start and not character_id:
+            if not character_id:
                 if len(cache.over_behavior_character) < len(character_list) - 1:
                     continue
+                player_judge = 1
             character_behavior(character_id, cache.game_time)
             judge_character_dead(character_id)
         update_cafeteria()
