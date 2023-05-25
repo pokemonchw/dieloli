@@ -32,6 +32,8 @@ class StateMachine:
     """ 移动至超市场景 """
     MOVE_TO_FOLLOW_TARGET_SCENE = "move_to_follow_target_scene"
     """ 移动至跟随对象所在场景 """
+    MOVE_TO_LIBRARY = "move_to_library"
+    """ 移动至图书馆 """
 
     """
     =========================

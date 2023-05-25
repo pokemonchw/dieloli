@@ -19,14 +19,8 @@ def add_premise(premise: int) -> FunctionType:
     Return arguments:
     FunctionType -- 前提处理函数对象
     """
-
     def decoraror(func):
-        @wraps(func)
-        def return_wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
-
-        constant.handle_premise_data[premise] = return_wrapper
-        return return_wrapper
+        constant.handle_premise_data[premise] = func
 
     return decoraror
 

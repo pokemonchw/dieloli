@@ -36,23 +36,19 @@ def init_character_behavior():
     """
     角色行为树总控制
     """
-    character_list = list(cache.character_data.keys())
     character_handle.build_similar_character_searcher()
     cache.character_target_data = {}
     cache.character_target_score_data = {}
-    character_list.sort(reverse=1)
     while 1:
         if len(cache.over_behavior_character) >= len(cache.character_data):
             break
-        for character_id in character_list:
+        for character_id in range(len(cache.character_data)-1, -1, -1):
             if character_id in cache.over_behavior_character:
                 continue
             if not character_id:
                 if len(cache.over_behavior_character) < len(character_list) - 1:
                     continue
-                player_judge = 1
             character_behavior(character_id, cache.game_time)
-            judge_character_dead(character_id)
         update_cafeteria()
     cache.over_behavior_character = set()
 
