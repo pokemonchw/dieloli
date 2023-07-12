@@ -42,11 +42,11 @@ def init_character_behavior():
     while 1:
         if len(cache.over_behavior_character) >= len(cache.character_data):
             break
-        for character_id in range(len(cache.character_data)-1, -1, -1):
+        for character_id in range(len(cache.character_data) - 1, -1, -1):
             if character_id in cache.over_behavior_character:
                 continue
             if not character_id:
-                if len(cache.over_behavior_character) < len(character_list) - 1:
+                if len(cache.over_behavior_character) < len(cache.character_data) - 1:
                     continue
             character_behavior(character_id, cache.game_time)
         update_cafeteria()
@@ -136,8 +136,8 @@ def character_target_judge(character_id: int, now_time: int):
                 conformity = (character_data.nature[1] - 50) * 2
                 now_range = random.random() * 100
                 if now_range < conformity:
-                    conformity = 1
-        if conformity_judge:
+                    conformity_judge = 1
+        if conformity_judge and cache.character_target_score_data:
             imitate_character_id = value_handle.get_random_for_weight(cache.character_target_score_data)
             target, _, judge = search_target(
                 character_id,
@@ -159,6 +159,7 @@ def character_target_judge(character_id: int, now_time: int):
             0,
             ""
         )
+    # print("角色id",character_id,"不可使用的目标列表",null_target_set,"目标权重列表",target_weight_data,"角色前提权重列表",cache.character_data[character_id].premise_data)
     player_data: game_type.Character = cache.character_data[0]
     if judge:
         if target.affiliation == "":
@@ -261,7 +262,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
             character_data.behavior.move_src = []
             climax_draw = settlement_pleasant_sensation(character_id)
             if (not character_id) or (player_data.target_character_id == character_id):
-                if event_draw is not None:
+                if event_draw.text != "":
                     event_draw.draw()
                 if settle_output is not None:
                     if settle_output[1]:
@@ -359,21 +360,26 @@ def search_target(
             if original_target_id != "":
                 now_original_target_id = original_target_id
             for premise in null_premise_set:
+                now_judge = 0
+                now_target_weight = 0
                 if premise in cache.character_premise_target_data:
                     if cache.character_premise_target_data[premise]:
                         conformity_judge = 0
                         if character_data.nature[1] > 50:
-                            conformity = (character_data.nature - 50) * 2
+                            conformity = (character_data.nature[1] - 50) * 2
                             now_range = random.random() * 100
                             if now_range < conformity:
-                                now_target_id = value_handle.get_random_for_weight(cache.character_premise_target_data[premise])
-                                now_target, now_weight, now_judge = search_target(
-                                    character_id,
-                                    {now_target_id},
-                                    null_target,
-                                    target_weight_data,
-                                    now_original_target_id,
-                                )
+                                conformity_judge = 1
+                        if conformity_judge:
+                            now_target_id = value_handle.get_random_for_weight(
+                                cache.character_premise_target_data[premise])
+                            now_target, now_target_weight, conformity_judge = search_target(
+                                character_id,
+                                {now_target_id},
+                                null_target,
+                                target_weight_data,
+                                now_original_target_id,
+                            )
                 if not now_judge:
                     now_target_list = game_config.config_effect_target_data[premise] - null_target
                     now_target_list.remove(target)
@@ -406,7 +412,7 @@ def search_target(
             now_execute_target.weight = now_weight
             now_execute_target.affiliation = original_target_id
             target_data[now_weight].add(now_execute_target)
-            target_weight_data[now_weight] = now_weight
+            target_weight_data[target] = now_weight
         else:
             now_value_weight = value_handle.get_rand_value_for_value_region(list(now_target_data.keys()))
             target_data.setdefault(now_weight, set())
@@ -495,3 +501,9 @@ def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
         now_draw.width = window_width
         return now_draw
     return None
+
+
+def switch_character_status():
+    """
+    验证角色状态并对角色进行分组(寻找行动目标的角色列表，结算状态的角色列表)
+    """

@@ -92,7 +92,7 @@ def handle_chest_is_not_cliff(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return attr_calculation.judge_chest_group(character_data.chest.now_chest)
+    return attr_calculation.judge_chest_group(character_data.chest.now_chest) > 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_HEIGHT_LOW)
@@ -107,7 +107,7 @@ def handle_target_height_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_data.height.now_height < character_data.height.now_height:
-        return character_data.height.now_height - target_data.height.now_height
+        return (character_data.height.now_height - target_data.height.now_height) > 0
     return 0
 
 

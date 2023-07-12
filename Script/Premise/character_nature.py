@@ -491,5 +491,4 @@ def handle_is_humor_man(character_id: int) -> int:
             value -= nature - 50
         else:
             value += 50 - nature
-    value = max(value, 0)
-    return value
+    return value > 0

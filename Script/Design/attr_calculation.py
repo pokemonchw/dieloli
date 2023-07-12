@@ -8,7 +8,6 @@ from Script.Core import (
 from Script.Design import game_time
 from Script.Config import game_config
 
-
 cache: game_type.Cache = cache_control.cache
 """ 游戏内缓存数据 """
 
@@ -137,14 +136,14 @@ def get_rand_npc_birthday(age: int) -> int:
     else:
         birthday_data = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=birthday)
     if now_month < birthday_data.month or (
-        now_month == birthday_data.month and now_day < birthday_data.day
+            now_month == birthday_data.month and now_day < birthday_data.day
     ):
         birthday = game_time.get_sub_date(year=-1, old_date=birthday)
     return birthday
 
 
 def get_growth_height(
-    now_age: int, expect_height: float, development_age: int, expect_age: int
+        now_age: int, expect_height: float, development_age: int, expect_age: int
 ) -> dict:
     """
     计算每日身高增长量
@@ -205,10 +204,10 @@ def get_weight(bmi: float, height: float) -> float:
 
 
 def get_measurements(
-    tem_name: int,
-    height: float,
-    weight_tem: int,
-) -> dict:
+        tem_name: int,
+        height: float,
+        weight_tem: int,
+) -> game_type.Measurements:
     """
     计算角色三围
     Keyword arguments:

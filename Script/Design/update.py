@@ -22,7 +22,6 @@ def game_update_flow(add_time: int):
     line_feed_draw.text = "\n"
     while 1:
         now_time = cache.game_time
-        now_date_time = datetime.datetime.fromtimestamp(now_time)
         next_hour = now_time + 3600
         next_hour_date_time = datetime.datetime.fromtimestamp(next_hour)
         fix_next_hour_data_time = datetime.datetime(next_hour_date_time.year, next_hour_date_time.month, next_hour_date_time.day, next_hour_date_time.hour)

@@ -53,6 +53,8 @@ def get_random_for_weight(data: Dict[any, int]) -> any:
     """
     keys = list(data.keys())
     weights = list(data.values())
+    if not sum(weights):
+        weights = [1 for i in keys]
     return random.choices(keys, weights=weights)[0]
 
 
@@ -97,7 +99,7 @@ def list_of_groups(init_list: list, children_list_len: int) -> List[List[any]]:
     return end_list
 
 
-def get_gauss_rand(min_value: int, max_value: int) -> int:
+def get_gauss_rand(min_value: int, max_value: int) -> float:
     """
     通过正态分布获取两个值之间的随机值
     Keyword arguments:
@@ -110,4 +112,4 @@ def get_gauss_rand(min_value: int, max_value: int) -> int:
     single = mu - min_value
     value = numpy.random.normal(mu, single)
     value = numpy.clip(value, min_value, max_value)
-    return int(value)
+    return value

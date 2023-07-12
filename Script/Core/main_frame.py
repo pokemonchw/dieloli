@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import os
-import json
+import math
 import uuid
 import psutil
 import signal
@@ -43,24 +43,37 @@ def close_window():
 # 显示主框架
 game_name = normal_config.config_normal.game_name
 root = Tk()
-screen_weight = root.winfo_screenwidth()
+now_font_size = 20
+char_width = 20
+char_height = 20
+screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
-if normal_config.config_normal.window_width + 30 > screen_weight:
-    normal_config.config_normal.window_width = screen_weight - 30
-if normal_config.config_normal.window_hight + 30 > screen_height:
-    normal_config.config_normal.window_hight = screen_height - 30
-now_font_size = (
-    int(normal_config.config_normal.window_width / normal_config.config_normal.text_width) * 2
-)
+window_width = normal_config.config_normal.window_width
+window_height = normal_config.config_normal.window_hight
+need_width = window_width
+need_height = window_height
+if window_width > screen_width - 30:
+    need_width = screen_width - 30
+if window_height > screen_height - 30:
+    need_height = screen_height - 30
+while True:
+    test_font = font.Font(size=now_font_size)
+    char_width = test_font.measure("a") + 1
+    char_height = test_font.metrics("linespace") + 1
+    window_width = int(char_width * 120)
+    window_height = int(char_height * 50)
+    if window_width <= need_width and window_height <= need_height:
+        break
+    now_font_size -= 1
+print(now_font_size, char_width, window_width)
 normal_config.config_normal.font_size = now_font_size
 normal_config.config_normal.order_font_size = now_font_size - 2
-dpi = root.winfo_fpixels("1i")
 root.tk.call("tk", "scaling", 1.0)
 root.title(game_name)
-width = normal_config.config_normal.window_width
+width = window_width + 30
 frm_width = root.winfo_rootx() - root.winfo_x()
 win_width = width + 2 * frm_width
-height = normal_config.config_normal.window_hight
+height = window_height
 titlebar_height = root.winfo_rooty() - root.winfo_y()
 win_height = height + titlebar_height + frm_width
 x = root.winfo_screenwidth() // 2 - win_width // 2
@@ -138,8 +151,6 @@ inputbox = Entry(
 )
 inputbox.grid(column=1, row=0, sticky=(N, E, S))
 normal_font = font.Font(family=order_font_data.font, size=normal_config.config_normal.font_size)
-
-
 input_event_func = None
 send_order_state = False
 # when false, send 'skip'; when true, send cmd
@@ -216,9 +227,9 @@ def read_queue():
             if c["type"] == "image_cmd":
                 io_print_image_cmd(c["text"], c["num"])
             if (
-                "\n" in c["text"]
-                and textbox.get("1.0", END).count("\n")
-                > normal_config.config_normal.text_hight * 10
+                    "\n" in c["text"]
+                    and textbox.get("1.0", END).count("\n")
+                    > normal_config.config_normal.text_hight * 10
             ):
                 textbox.delete("1.0", str(normal_config.config_normal.text_hight * 5) + ".0")
     root.after(1, read_queue)
@@ -314,14 +325,14 @@ def clear_screen():
 
 
 def frame_style_def(
-    style_name: str,
-    foreground: str,
-    background: str,
-    font: str,
-    font_size: int,
-    bold: str,
-    under_line: str,
-    italic: str,
+        style_name: str,
+        foreground: str,
+        background: str,
+        font: str,
+        font_size: int,
+        bold: str,
+        under_line: str,
+        italic: str,
 ):
     """
     定义样式

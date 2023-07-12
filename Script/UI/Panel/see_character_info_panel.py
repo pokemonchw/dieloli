@@ -191,7 +191,7 @@ class CharacterStatusListPanel:
     """
 
     def __init__(
-        self, character_id: int, status_type: int, width: int, column: int, center_status: bool = 1
+            self, character_id: int, status_type: int, width: int, column: int, center_status: bool = 1
     ):
         self.character_id: int = character_id
         """ 要绘制的角色id """
@@ -350,7 +350,7 @@ class CharacterWearClothingList:
         """ 绘制的对象列表 """
         for clothing_type in game_config.config_clothing_type:
             if clothing_type in character_data.put_on and isinstance(
-                character_data.put_on[clothing_type], UUID
+                    character_data.put_on[clothing_type], UUID
             ):
                 now_id = character_data.put_on[clothing_type]
                 now_clothing: game_type.Clothing = character_data.clothing[clothing_type][now_id]
@@ -869,8 +869,8 @@ class SeeCharacterSocialContact:
             self.draw_list.append(type_draw)
             now_draw = draw.CenterDraw()
             if (
-                social_type in character_data.social_contact
-                and character_data.social_contact[social_type]
+                    social_type in character_data.social_contact
+                    and character_data.social_contact[social_type]
             ):
                 character_list = list(character_data.social_contact[social_type])
                 now_draw = panel.PageHandlePanel(

@@ -246,6 +246,8 @@ class Premise:
     """ 处于交互对象的宿舍中 """
     IN_MUSIC_CLASSROOM = "in_music_classroom"
     """ 处于音乐活动室 """
+    NOT_IN_MUSIC_CLASSROOM = "not_in_music_classroom"
+    """ 角色未处于音乐活动室 """
     SCENE_NO_HAVE_OTHER_CHARACTER = "scene_no_have_other_character"
     """ 场景中没有有自己外的其他角色 """
     SCENE_CHARACTER_ONLY_PLAYER_AND_ONE = "scene_character_only_player_and_one"
@@ -296,6 +298,10 @@ class Premise:
     """ 场景中有人在弹钢琴 """
     HAVE_SINGING_IN_SCENE = "have_singing_in_scene"
     """ 场景中有人在唱歌 """
+    PLAYER_NOT_IN_TARGET_SCENE = "player_not_in_target_scene"
+    """ 玩家不在角色的目标场景中 """
+    PLAYER_IN_TARGET_SCENE = "player_in_target_scene"
+    """ 玩家在角色的目标场景中 """
 
     """
     =========================

@@ -14,7 +14,7 @@ def character_move_to_classroom(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    _, _, move_path, move_time = character_move.character_move(
+    _, path_list, move_path, move_time = character_move.character_move(
         character_id,
         map_handle.get_map_system_path_for_str(character_data.classroom),
     )
@@ -293,9 +293,8 @@ def character_move_to_library(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    _, _, move_path, move_time = character_move.character_move（character_id, ["13", "0", "0"]）
+    _, _, move_path, move_time = character_move.character_move(character_id, ["13", "0", "0"])
     character_data.behavior.behavior_id = constant.Behavior.MOVE
     character_data.behavior.move_target = move_path
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
-

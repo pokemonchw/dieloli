@@ -19,7 +19,8 @@ def handle_have_food(character_id: int) -> int:
     food_index = 0
     for food_id in character_data.food_bag:
         if character_data.food_bag[food_id].eat and 27 in character_data.food_bag[food_id].feel:
-            food_index += 1
+            food_index = 1
+            break
     return food_index
 
 
@@ -290,12 +291,13 @@ def handle_have_drinks(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    drinks_list = []
+    drinks_index = 0
     for food_id in character_data.food_bag:
         now_food: game_type.Food = character_data.food_bag[food_id]
         if now_food.eat and 28 in now_food.feel:
-            drinks_list.append(food_id)
-    return len(drinks_list)
+            drinks_index = 1
+            break
+    return drinks_index
 
 
 @handle_premise.add_premise(constant.Premise.NO_HAVE_DRINKS)

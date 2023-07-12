@@ -53,5 +53,4 @@ def handle_event(character_id: int, start: int) -> (draw_event_text_panel.DrawEv
         now_event_id = random.choice(list(now_event_data[event_weight]))
     if now_event_id != "":
         now_event_draw = draw_event_text_panel.DrawEventTextPanel(now_event_id, character_id)
-        if now_event_draw.text:
-            return now_event_draw
+        return now_event_draw

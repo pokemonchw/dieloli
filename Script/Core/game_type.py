@@ -695,6 +695,10 @@ class Cache:
         """ 其他角色对这个角色的目标的评分列表 """
         self.character_premise_target_data: Dict[str, Dict[str, int]] = {}
         """ 角色在查找目标时，为了满足前提而选择的目标列表 {前提id:{目标id:选择该目标的人数}} """
+        self.settle_time_character_data: Dict[int, Set] = {}
+        """ 在指定时间要进行结算的角色列表 时间戳:角色id集合 """
+        self.character_settle_time_data: Dict[int, int] = {}
+        """ 角色的结算时间表 角色id:结算时间 """
 
 
 class TargetChange:
