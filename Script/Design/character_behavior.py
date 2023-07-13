@@ -159,7 +159,6 @@ def character_target_judge(character_id: int, now_time: int):
             0,
             ""
         )
-    # print("角色id",character_id,"不可使用的目标列表",null_target_set,"目标权重列表",target_weight_data,"角色前提权重列表",cache.character_data[character_id].premise_data)
     player_data: game_type.Character = cache.character_data[0]
     if judge:
         if target.affiliation == "":
@@ -320,21 +319,22 @@ def search_target(
             target_data.setdefault(target_weight_data[target], set())
             now_execute_target = game_type.ExecuteTarget()
             now_execute_target.uid = target
-            now_execute_target.weight = target_weight_data[target]
+            now_execute_target.weight = target_weight_data[target] + sub_weight
             now_execute_target.affiliation = original_target_id
-            target_data[target_weight_data[target]].add(now_execute_target)
+            target_data.setdefault(now_execute_target.weight, set())
+            target_data[now_execute_target.weight].add(now_execute_target)
             continue
         target_config = game_config.config_target[target]
         if not len(target_config.premise):
             target_data.setdefault(1, set())
             now_execute_target = game_type.ExecuteTarget()
             now_execute_target.uid = target
-            now_execute_target.weight = 1
+            now_execute_target.weight = 1 + sub_weight + (500 - 100 * target_config.needs_hierarchy)
             now_execute_target.affiliation = original_target_id
             target_data[1].add(now_execute_target)
-            target_weight_data[target] = 1
+            target_weight_data[target] = now_execute_target.weight = 1
             continue
-        now_weight = sub_weight
+        now_weight = sub_weight + (500 - 100 * target_config.needs_hierarchy)
         now_target_pass_judge = 0
         now_target_data = {}
         premise_judge = 1

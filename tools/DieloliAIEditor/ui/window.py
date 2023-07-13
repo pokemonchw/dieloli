@@ -11,13 +11,14 @@ class Window(QMainWindow):
         self.layout: QHBoxLayout = QHBoxLayout()
         """ 界面布局 """
 
-    def add_widget(self, widget: QWidget):
+    def add_main_widget(self, widget: QWidget, stretch: int):
         """
         添加小部件到布局中
         Keyword arguments:
         widget -- 小部件
+        stretch -- 空间占比
         """
-        self.layout.addWidget(widget)
+        self.layout.addWidget(widget, stretch)
 
     def completed_layout(self):
         """布局完成"""

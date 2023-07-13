@@ -393,7 +393,7 @@ def handle_target_old_sinitic_skills_is_height(character_id: int) -> int:
     if 11 in target_data.language:
         level = attr_calculation.get_experience_level_weight(target_data.language[11])
         return level > 5
-    return weight
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_OLD_SINITIC_SKILLS_IS_LOW)

@@ -4,6 +4,7 @@ import cache_control
 
 premise_path = os.path.join("..","premise.csv")
 state_machine_path = os.path.join("..","state_machine.csv")
+needs_hierarchy_path = os.path.join("..", "NeedsHierarchy.csv")
 
 
 def load_config():
@@ -20,3 +21,7 @@ def load_config():
             cache_control.state_machine_data[i["cid"]] = i["state_machine"]
             cache_control.state_machine_type_data.setdefault(i["state_machine_type"],set())
             cache_control.state_machine_type_data[i["state_machine_type"]].add(i["cid"])
+    with open(needs_hierarchy_path, encoding="utf-8") as now_file:
+        now_read = csv.DictReader(now_file)
+        for i in now_read:
+            cache_control.needs_hierarchy_data[int(i["cid"])] = i["name"]

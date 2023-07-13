@@ -101,9 +101,11 @@ in_swimming_pool,场景状态类前提,角色处于游泳池
 in_classroom,场景状态类前提,角色处于教室
 in_shop,场景状态类前提,角色处于商店
 in_toilet,场景状态类前提,角色处于洗手间
+not_in_toilet,场景状态类前提,角色未处于洗手间
 in_player_scene,场景状态类前提,角色处于玩家所在场景
 scene_have_other_character,场景状态类前提,场景中有自己外的其他角色
 in_dormitory,场景状态类前提,角色处于宿舍
+not_in_dormitory,场景状态类前提,角色未处于宿舍
 in_target_dormitory,场景状态类前提,角色处于交互对象的宿舍中
 in_music_classroom,场景状态类前提,角色处于音乐活动室
 not_in_music_classroom,场景状态类前提,角色未处于音乐活动室

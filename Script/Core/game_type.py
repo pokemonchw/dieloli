@@ -770,7 +770,7 @@ class Target:
     """目标数据结构体"""
 
     def __init__(self):
-        """初始化口上对象"""
+        """初始化目标对象"""
         self.uid: str = ""
         """ 目标唯一id """
         self.text: str = ""
@@ -781,6 +781,8 @@ class Target:
         """ 目标的前提集合 """
         self.effect: dict = {}
         """ 目标的效果集合 """
+        self.needs_hierarchy: int = 0
+        """ 马斯洛需求层次 """
 
 
 class ExecuteTarget:
