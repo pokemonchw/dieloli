@@ -44,8 +44,8 @@ def close_window():
 game_name = normal_config.config_normal.game_name
 root = Tk()
 now_font_size = 20
-char_width = 20
-char_height = 20
+char_width = 16
+char_height = 32
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 window_width = normal_config.config_normal.window_width
@@ -57,15 +57,14 @@ if window_width > screen_width - 30:
 if window_height > screen_height - 30:
     need_height = screen_height - 30
 while True:
-    test_font = font.Font(size=now_font_size)
-    char_width = test_font.measure("a") + 1
-    char_height = test_font.metrics("linespace") + 1
-    window_width = int(char_width * 120)
-    window_height = int(char_height * 50)
+    test_font = font.Font(family="Sarasa Mono SC",size=now_font_size)
+    char_width = test_font.measure("a")
+    char_height = test_font.metrics("linespace")
+    window_width = int(char_width * 92)
+    window_height = int(char_height* 30)
     if window_width <= need_width and window_height <= need_height:
         break
     now_font_size -= 1
-print(now_font_size, char_width, window_width)
 normal_config.config_normal.font_size = now_font_size
 normal_config.config_normal.order_font_size = now_font_size - 2
 root.tk.call("tk", "scaling", 1.0)
@@ -88,6 +87,7 @@ main_frame.grid(column=0, row=0, sticky=(N, W, E, S))
 main_frame.columnconfigure(0, weight=1)
 main_frame.rowconfigure(0, weight=1)
 
+normal_font = font.Font(family="Sarasa Mono SC", size=normal_config.config_normal.font_size)
 # 显示窗口
 textbox = Text(
     main_frame,
@@ -96,6 +96,7 @@ textbox = Text(
     highlightbackground=normal_config.config_normal.background,
     bd=0,
     cursor="",
+    font=normal_font
 )
 textbox.grid(column=0, row=0, sticky=(N, W, E, S))
 
@@ -135,7 +136,7 @@ input_background_box_cursor.config(foreground=order_font_data.foreground)
 
 # 输入栏
 order = StringVar()
-order_font = font.Font(family=order_font_data.font, size=order_font_data.font_size)
+order_font = font.Font(family="Sarasa Mono SC", size=order_font_data.font_size)
 inputbox = Entry(
     input_background_box,
     borderwidth=0,
@@ -150,10 +151,14 @@ inputbox = Entry(
     width=normal_config.config_normal.inputbox_width,
 )
 inputbox.grid(column=1, row=0, sticky=(N, E, S))
-normal_font = font.Font(family=order_font_data.font, size=normal_config.config_normal.font_size)
 input_event_func = None
 send_order_state = False
 # when false, send 'skip'; when true, send cmd
+def get_widget_font(widget):
+    # 获取小部件的字体属性
+    widget_font = font.nametofont(widget.cget("font"))
+    # 返回字体的实际名称
+    return widget_font.actual()
 
 
 from Script.Core import era_image

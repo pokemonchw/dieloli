@@ -34,6 +34,8 @@ class StateMachine:
     """ 移动至跟随对象所在场景 """
     MOVE_TO_LIBRARY = "move_to_library"
     """ 移动至图书馆 """
+    MOVE_TO_NO_MAN_SCENE = "move_to_no_man_scene"
+    """ 移动至无人场景 """
 
     """
     =========================

@@ -36,6 +36,8 @@ class Premise:
     """ 目标是扶她或男性 """
     IS_MAN = "is_man"
     """ 角色是男性 """
+    IS_NOT_MAN = "is_not_man"
+    """ 角色不是男性 """
     IS_WOMAN = "is_woman"
     """ 角色是女性 """
     IS_FUTA = "is_futa"
@@ -306,6 +308,8 @@ class Premise:
     """ 玩家不在角色的目标场景中 """
     PLAYER_IN_TARGET_SCENE = "player_in_target_scene"
     """ 玩家在角色的目标场景中 """
+    HAS_NO_CHARACTER_SCENE = "has_no_character_scene"
+    """ 存在空无一人的场景 """
 
     """
     =========================

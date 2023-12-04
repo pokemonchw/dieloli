@@ -51,6 +51,7 @@ def creator_character_panel():
 
 def game_start():
     """初始化游戏数据"""
+    character_handle.init_no_character_scene()
     character_handle.init_character_dormitory()
     character_handle.init_character_position()
     course.init_phase_course_hour()

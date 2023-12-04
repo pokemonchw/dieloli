@@ -699,6 +699,8 @@ class Cache:
         """ 在指定时间要进行结算的角色列表 时间戳:角色id集合 """
         self.character_settle_time_data: Dict[int, int] = {}
         """ 角色的结算时间表 角色id:结算时间 """
+        self.no_character_scene_set: Set = set()
+        """ 没有角色的空场景集合 """
 
 
 class TargetChange:

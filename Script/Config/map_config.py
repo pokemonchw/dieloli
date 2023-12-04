@@ -1,8 +1,7 @@
 import os
 import pickle
 from typing import Dict, List
-from dijkstar import Graph, find_path
-from Script.Core import game_type, json_handle, get_text, text_handle, cache_control
+from Script.Core import game_type, json_handle, get_text, text_handle, cache_control, dijkstra
 from Script.Design import map_handle, constant
 
 cache: game_type.Cache = cache_control.cache
@@ -180,20 +179,14 @@ def get_sorted_map_path_data(
     Return arguments:
     Dict[int,Dict[int,game_type.TargetPath]] -- 最短路径数据 当前节点:目标节点:路径对象
     """
-    graph = Graph()
     sorted_path_data = {}
-    for node in map_data.keys():
-        for target in map_data[node]:
-            graph.add_edge(node, target, {"cost": map_data[node][target]})
-    cost_func = lambda u, v, e, prev_e: e["cost"]
-    for node in map_data.keys():
-        new_data = {node: {}}
-        for target in map_data.keys():
-            if target != node:
-                find_path_data = find_path(graph, node, target, cost_func=cost_func)
-                target_path = game_type.TargetPath()
-                target_path.path = find_path_data.nodes[1:]
-                target_path.time = find_path_data.costs
-                new_data[node][target] = target_path
-        sorted_path_data.update(new_data)
+    for node in map_data:
+        node_path = dijkstra.dijkstra(map_data, node)
+        sorted_path_data.setdefault(node,{})
+        for target_id in node_path:
+            target = node_path[target_id]
+            target_path = game_type.TargetPath()
+            target_path.path = target.path[1:]
+            target_path.time = target.path_times[1:]
+            sorted_path_data[node][target.node_id] = target_path
     return sorted_path_data

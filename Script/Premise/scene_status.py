@@ -824,3 +824,17 @@ def handle_player_in_target_scene(character_id: int) -> int:
     if 0 in target_scene.character_list:
         return 1
     return 0
+
+
+@handle_premise.add_premise(constant.Premise.HAS_NO_CHARACTER_SCENE)
+def handle_has_no_character_scene(character_id: int) -> int:
+    """
+    校验是否存在空无一人的场景
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    if len(cache.no_character_scene_set):
+        return 1
+    return 0

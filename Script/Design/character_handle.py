@@ -335,6 +335,12 @@ def init_character_dormitory():
             del teacher_dormitory[now_room]
 
 
+def init_no_character_scene():
+    """ 初始化没有角色的场景列表集合 """
+    for scene_path in cache.scene_data:
+        cache.no_character_scene_set.add(scene_path)
+
+
 def init_character_position():
     """初始化角色位置"""
     for character_id in cache.character_data:

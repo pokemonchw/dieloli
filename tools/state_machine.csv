@@ -13,6 +13,7 @@ move_to_grove,寻路类状态机,移动至小树林
 move_to_item_shop,寻路类状态机,移动至超市
 move_to_follow_target_scene,寻路类状态机,移动至跟随对象所在场景
 move_to_library,寻路类状态机,移动至图书馆
+move_to_no_man_scene,寻路类状态机,移动至无人场景
 buy_rand_food_at_cafeteria,购物类状态机,在取餐区购买随机食物
 buy_rand_drinks_at_cafeteria,购物类状态机,在取餐区购买随机饮料
 buy_guitar,购物类状态机,购买吉他

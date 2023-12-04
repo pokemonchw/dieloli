@@ -298,3 +298,24 @@ def character_move_to_library(character_id: int):
     character_data.behavior.move_target = move_path
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_NO_MAN_SCENE)
+def character_move_to_no_man_scene(character_id: int):
+    """
+    角色移动至无人场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_scene_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    target_scene = random.sample(cache.no_character_scene_set, 1)[0]
+    _, _, move_path, move_time = character_move.character_move(
+        character_id,
+        map_handle.get_map_system_path_for_str(target_scene)
+    )
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+

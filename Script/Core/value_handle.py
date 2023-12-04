@@ -113,3 +113,4 @@ def get_gauss_rand(min_value: int, max_value: int) -> float:
     value = numpy.random.normal(mu, single)
     value = numpy.clip(value, min_value, max_value)
     return value
+
