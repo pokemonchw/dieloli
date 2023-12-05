@@ -1,4 +1,5 @@
 import random
+import numpy
 from Script.Design import handle_state_machine, character_move, map_handle, constant
 from Script.Core import cache_control, game_type
 
@@ -309,7 +310,8 @@ def character_move_to_no_man_scene(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_scene_str = map_handle.get_map_system_path_str_for_list(character_data.position)
-    target_scene = random.sample(cache.no_character_scene_set, 1)[0]
+    target_scene = cache.no_character_scene_set.pop()
+    cache.no_character_scene_set.add(target_scene)
     _, _, move_path, move_time = character_move.character_move(
         character_id,
         map_handle.get_map_system_path_for_str(target_scene)

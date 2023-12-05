@@ -522,7 +522,7 @@ def handle_teacher_in_classroom(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    return not handle_teacher_no_in_classroom(character_id)
+    return not handle_premise.handle_premise(constant.Premise.TEACHER_NO_IN_CLASSROOM, character_id)
 
 
 @handle_premise.add_premise(constant.Premise.IS_BEYOND_FRIENDSHIP_TARGET_IN_SCENE)

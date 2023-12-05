@@ -494,6 +494,7 @@ is_vertigo,角色肉体状态类前提,角色感到眩晕
 not_vertigo,角色肉体状态类前提,角色未感到眩晕
 is_tired,角色肉体状态类前提,角色感到疲惫
 not_tired,角色肉体状态类前提,角色未感到疲惫
+is_extreme_exhaustion,角色肉体状态类前提,角色感到极度疲惫
 is_intoxicated,角色肉体状态类前提,角色处于迷醉状态
 not_intoxicated,角色肉体状态类前提,角色未处于迷醉状态
 hunger,角色肉体状态类前提,角色处于饥饿状态
@@ -538,6 +539,7 @@ target_is_vertigo,交互对象肉体状态类前提,交互对象感到眩晕
 target_not_vertigo,交互对象肉体状态类前提,交互对象未感到眩晕
 target_is_tired,交互对象肉体状态类前提,交互对象感到疲惫
 target_not_tired,交互对象肉体状态类前提,交互对象未感到疲惫
+target_is_extreme_exhaustion,交互对象肉体状态类前提,交互对象感到极度疲惫
 target_is_intoxicated,交互对象肉体状态类前提,交互对象处于迷醉状态
 target_not_intoxicated,交互对象肉体状态类前提,交互对象未处于迷醉状态
 target_hunger,交互对象肉体状态类前提,交互对象处于饥饿状态

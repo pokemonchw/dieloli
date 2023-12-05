@@ -209,6 +209,14 @@ def judge_character_dead(character_id: int):
             dead_judge = 1
             character_data.cause_of_death = 2
             break
+        if character_data.extreme_exhaustion_time:
+            exhaustion_time = (cache.game_time - character_data.extreme_exhaustion_time) / 60
+            sudden_death_probability = exhaustion_time * (100 / 8640)
+            sudden_death_probability = max(sudden_death_probability, 100 / 8640)
+            now_range = random.randint(0,100)
+            if now_range < sudden_death_probability:
+                dead_judge = 1
+                character_data.cause_of_death = 3
         break
     if dead_judge:
         character_data.dead = 1
@@ -236,6 +244,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
         character_data.behavior.start_time = end_time
         character_data.state = constant.CharacterStatus.STATUS_ARDER
         return 1
+    # 增加饥饿和口渴
     last_hunger_time = start_time
     if character_data.last_hunger_time:
         last_hunger_time = character_data.last_hunger_time
@@ -245,6 +254,16 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     character_data.status[27] += hunger_time * 0.02
     character_data.status[28] += hunger_time * 0.02
     character_data.last_hunger_time = now_time
+    # 增加疲惫
+    if character_data.state != constant.CharacterStatus.STATUS_SLEEP:
+        character_data.status.setdefault(25, 0)
+        character_data.status[25] += add_time * 0.0694
+        if character_data.status[25] >= 100:
+            if character_data.extreme_exhaustion_time == 0:
+                character_data.extreme_exhaustion_time = cache.game_time
+        else:
+            if character_data.extreme_exhaustion_time != 0:
+                character_data.extreme_exhaustion_time = 0
     player_data: game_type.Character = cache.character_data[0]
     line_feed = draw.NormalDraw()
     line_feed.text = "\n"
@@ -502,8 +521,3 @@ def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
         return now_draw
     return None
 
-
-def switch_character_status():
-    """
-    验证角色状态并对角色进行分组(寻找行动目标的角色列表，结算状态的角色列表)
-    """

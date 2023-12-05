@@ -161,7 +161,7 @@ def handle_target_is_tired(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(25, 0)
-    return target_data.status[25] > 10
+    return target_data.status[25] > 50
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_NOT_TIRED)
@@ -176,7 +176,22 @@ def handle_target_not_tired(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(25, 0)
-    return target_data.status[25] <= 10
+    return target_data.status[25] <= 50
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_IS_EXTREME_EXHAUSTION)
+def handle_target_is_extreme_exhaustion(character_id: int) -> int:
+    """
+    校验交互对象是否感到极度疲惫
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.status.setdefault(25, 0)
+    return target_data.status[25] > 100
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_INTOXICATED)

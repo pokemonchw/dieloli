@@ -396,8 +396,6 @@ class Character:
         """ 角色预期寿命 """
         self.intimate: int = 0
         """ 角色与玩家的亲密度 """
-        self.graces: int = 0
-        """ 角色的魅力值 """
         self.hit_point_max: int = 0
         """ 角色最大HP """
         self.hit_point: int = 0
@@ -510,6 +508,8 @@ class Character:
         """ 收藏的角色列表 """
         self.last_hunger_time: int = 0
         """ 最后一次结算饥饿的时间戳 """
+        self.extreme_exhaustion_time: int = 0
+        """ 角色进入极度疲惫状态的时间戳 """
         self.cause_of_death: int = -1
         """ 角色死因 """
         self.follow: int = -1
