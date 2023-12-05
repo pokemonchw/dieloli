@@ -1095,9 +1095,9 @@ class Premise:
     =========================
     """
     HYPOSTHENIA = "hyposthenia"
-    """ 体力不足 """
+    """ 健康不足 """
     PHYSICAL_STRENGHT = "physical_strenght"
-    """ 体力充沛 """
+    """ 健康充沛 """
     IS_WARM = "is_warm"
     """ 角色感觉温暖 """
     NOT_WARM = "not_warm"

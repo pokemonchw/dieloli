@@ -9,7 +9,7 @@ cache: game_type.Cache = cache_control.cache
 @handle_premise.add_premise(constant.Premise.HYPOSTHENIA)
 def handle_hyposthenia(character_id: int) -> int:
     """
-    校验角色是否体力不足
+    校验角色是否健康不足
     Keyword arguments:
     character_id -- 角色id
     Return arguments:
@@ -29,7 +29,7 @@ def handle_hyposthenia(character_id: int) -> int:
 @handle_premise.add_premise(constant.Premise.PHYSICAL_STRENGHT)
 def handle_physical_strenght(character_id: int) -> int:
     """
-    校验角色是否体力充沛
+    校验角色是否健康充沛
     Keyword arguments:
     character_id -- 角色id
     Return arguments:

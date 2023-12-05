@@ -13,7 +13,7 @@ def handle_target_add_small_hit_point(
     now_time: int,
 ):
     """
-    交互对象增加少量体力
+    交互对象增加少量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -43,7 +43,7 @@ def handle_target_add_medium_hit_point(
     now_time: int,
 ):
     """
-    交互对象增加中量体力
+    交互对象增加中量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -73,7 +73,7 @@ def handle_target_add_large_hit_point(
     now_time: int,
 ):
     """
-    交互对象增加大量体力
+    交互对象增加大量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -103,7 +103,7 @@ def handle_target_sub_small_hit_point(
     now_time: int,
 ):
     """
-    交互对象减少少量体力
+    交互对象减少少量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -133,7 +133,7 @@ def handle_target_sub_medium_hit_point(
     now_time: int,
 ):
     """
-    交互对象减少中量体力
+    交互对象减少中量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -163,7 +163,7 @@ def handle_target_sub_large_hit_point(
     now_time: int,
 ):
     """
-    交互对象减少大量体力
+    交互对象减少大量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -193,7 +193,7 @@ def handle_target_add_small_mana_point(
     now_time: int,
 ):
     """
-    交互对象增加少量气力
+    交互对象增加少量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -223,7 +223,7 @@ def handle_target_add_medium_mana_point(
     now_time: int,
 ):
     """
-    交互对象增加中量气力
+    交互对象增加中量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -253,7 +253,7 @@ def handle_target_add_large_mana_point(
     now_time: int,
 ):
     """
-    交互对象增加大量气力
+    交互对象增加大量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -283,7 +283,7 @@ def handle_target_sub_small_mana_point(
     now_time: int,
 ):
     """
-    交互对象减少少量气力
+    交互对象减少少量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -318,7 +318,7 @@ def handle_target_sub_medium_mana_point(
     now_time: int,
 ):
     """
-    交互对象减少中量气力
+    交互对象减少中量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -353,7 +353,7 @@ def handle_target_sub_large_mana_point(
     now_time: int,
 ):
     """
-    交互对象减少大量气力
+    交互对象减少大量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间

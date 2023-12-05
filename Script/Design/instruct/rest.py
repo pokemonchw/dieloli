@@ -36,7 +36,7 @@ def handle_sleep():
         # 若角色已经死亡则不做处理
         if character_data.state == constant.CharacterStatus.STATUS_DEAD:
             continue
-        # 恢复角色的体力和气力
+        # 恢复角色的健康和体力
         character_data.hit_point = character_data.hit_point_max
         character_data.mana_point = character_data.mana_point_max
         # 将角色送回宿舍

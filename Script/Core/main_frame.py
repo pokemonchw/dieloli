@@ -18,6 +18,8 @@ from tkinter import (
     font,
     Entry,
 )
+import pyautogui
+import screeninfo
 from Script.Core import (
     text_handle,
     game_type,
@@ -46,8 +48,15 @@ root = Tk()
 now_font_size = 20
 char_width = 16
 char_height = 32
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
+# 获取所有屏幕的信息
+screens = screeninfo.get_monitors()
+current_screen = None
+x, y = pyautogui.position()
+for screen in screens:
+    if screen.x <= x <= screen.x + screen.width and screen.y <= y <= screen.y + screen.height:
+        current_screen = screen
+screen_width = current_screen.width
+screen_height = current_screen.height
 window_width = normal_config.config_normal.window_width
 window_height = normal_config.config_normal.window_hight
 need_width = window_width
@@ -75,8 +84,8 @@ win_width = width + 2 * frm_width
 height = window_height
 titlebar_height = root.winfo_rooty() - root.winfo_y()
 win_height = height + titlebar_height + frm_width
-x = root.winfo_screenwidth() // 2 - win_width // 2
-y = root.winfo_screenheight() // 2 - win_height // 2
+x = current_screen.x + (current_screen.width // 2 - win_width // 2)
+y = current_screen.y + (current_screen.height // 2 - win_height // 2)
 root.geometry("{}x{}+{}+{}".format(width, height, x, y))
 root.deiconify()
 root.columnconfigure(0, weight=1)

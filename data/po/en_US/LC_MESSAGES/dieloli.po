@@ -137,11 +137,11 @@ msgid "No.{character_id}: {character_name} {sex_text}"
 msgstr "No.{character_id}: {character_name} {sex_text}"
 
 #: Script/UI/Panel/see_character_info_panel.py:294
-msgid "体力"
+msgid "健康"
 msgstr "Strength"
 
 #: Script/UI/Panel/see_character_info_panel.py:303
-msgid "气力"
+msgid "体力"
 msgstr "Energy"
 
 #: Script/UI/Panel/see_character_info_panel.py:316
@@ -349,12 +349,12 @@ msgstr "Age:{character_data.age} years old"
 
 #: Script/UI/Panel/see_character_info_panel.py:1152
 #, python-brace-format
-msgid "体力:({character_data.hit_point}/{character_data.hit_point_max})"
+msgid "健康:({character_data.hit_point}/{character_data.hit_point_max})"
 msgstr "Strength:({character_data.hit_point}/{character_data.hit_point_max})"
 
 #: Script/UI/Panel/see_character_info_panel.py:1153
 #, python-brace-format
-msgid "气力:({character_data.mana_point}/{character_data.mana_point_max})"
+msgid "体力:({character_data.mana_point}/{character_data.mana_point_max})"
 msgstr "Energy:({character_data.mana_point}/{character_data.mana_point_max})"
 
 #: Script/UI/Panel/see_clothing_info_panel.py:40
@@ -915,11 +915,11 @@ msgid "退出游戏"
 msgstr "Exit Game"
 
 #: Script/Design/settle_behavior.py:64
-msgid "体力:"
+msgid "健康:"
 msgstr "Strength:"
 
 #: Script/Design/settle_behavior.py:68
-msgid "气力:"
+msgid "体力:"
 msgstr "Energy:"
 
 #: Script/Design/settle_behavior.py:95 Script/Design/settle_behavior.py:140

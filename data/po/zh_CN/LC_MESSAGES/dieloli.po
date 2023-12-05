@@ -84,11 +84,11 @@ msgid "保暖的"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:73
-msgid "体力:"
+msgid "健康:"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:78
-msgid "气力:"
+msgid "体力:"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:109 Script/Design/settle_behavior.py:177
@@ -810,11 +810,11 @@ msgid "No.{character_id}: {character_name} {sex_text}"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:293
-msgid "体力"
+msgid "健康"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:302
-msgid "气力"
+msgid "体力"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:320
@@ -957,12 +957,12 @@ msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:1146
 #, python-brace-format
-msgid "体力:({character_data.hit_point}/{character_data.hit_point_max})"
+msgid "健康:({character_data.hit_point}/{character_data.hit_point_max})"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:1147
 #, python-brace-format
-msgid "气力:({character_data.mana_point}/{character_data.mana_point_max})"
+msgid "体力:({character_data.mana_point}/{character_data.mana_point_max})"
 msgstr ""
 
 #: Script/UI/Panel/view_character_status_list_panel.py:39

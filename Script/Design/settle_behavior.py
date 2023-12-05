@@ -69,12 +69,12 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
         self_draw_judge = 0
         if status_data.hit_point and round(status_data.hit_point, 2) != 0:
             now_text_list.append(
-                _("体力:") + text_handle.number_to_symbol_string(round(status_data.hit_point, 2))
+                _("健康:") + text_handle.number_to_symbol_string(round(status_data.hit_point, 2))
             )
             self_draw_judge = 1
         if status_data.mana_point and round(status_data.mana_point, 2) != 0:
             now_text_list.append(
-                _("气力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
+                _("体力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
             )
             self_draw_judge = 1
         if status_data.status:

@@ -484,8 +484,8 @@ gluttony_is_height,角色心灵状态类前提,角色暴食情绪高涨
 gluttony_is_low,角色心灵状态类前提,角色暴食情绪低下
 lust_is_hight,角色心灵状态类前提,角色色欲高涨
 lust_is_low,角色心灵状态类前提,角色色欲低下
-hyposthenia,角色肉体状态类前提,角色体力不足
-physical_strenght,角色肉体状态类前提,角色体力充沛
+hyposthenia,角色肉体状态类前提,角色健康不足
+physical_strenght,角色肉体状态类前提,角色健康充沛
 is_warm,角色肉体状态类前提,角色感觉温暖
 not_warm,角色肉体状态类前提,角色未感觉温暖
 is_ache,角色肉体状态类前提,角色感觉疼痛
@@ -529,8 +529,8 @@ target_gluttony_is_height,交互对象心灵状态类前提,交互对象暴食�
 target_gluttony_is_low,交互对象心灵状态类前提,交互对象暴食情绪低下
 target_lust_is_hight,交互对象心灵状态类前提,交互对象色欲高涨
 target_lust_is_low,交互对象心灵状态类前提,交互对象色欲低下
-target_hyposthenia,交互对象肉体状态类前提,交互对象体力不足
-target_physical_strenght,交互对象肉体状态类前提,交互对象体力充沛
+target_hyposthenia,交互对象肉体状态类前提,交互对象健康不足
+target_physical_strenght,交互对象肉体状态类前提,交互对象健康充沛
 target_is_warm,交互对象肉体状态类前提,交互对象感觉温暖
 target_not_warm,交互对象肉体状态类前提,交互对象未感觉温暖
 target_is_ache,交互对象肉体状态类前提,交互对象感觉疼痛
