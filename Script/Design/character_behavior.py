@@ -49,7 +49,6 @@ def init_character_behavior():
                 if len(cache.over_behavior_character) < len(cache.character_data) - 1:
                     continue
             character_behavior(character_id, cache.game_time)
-        update_cafeteria()
     cache.over_behavior_character = set()
 
 
@@ -65,8 +64,6 @@ def update_cafeteria():
             break
         if not food_judge:
             break
-    if food_judge:
-        cooking.init_restaurant_data()
 
 
 def character_behavior(character_id: int, now_time: int):
@@ -102,8 +99,11 @@ def character_target_judge(character_id: int, now_time: int):
     now_time -- 指定时间戳
     """
     target_weight_data = {}
+    # 取出角色数据
     character_data: game_type.Character = cache.character_data[character_id]
+    # 计算角色向量
     character_vector = cache.character_vector_data[character_id - 1]
+    # 找出最相似的角色
     near_character_list, distance_list = cache.similar_character_searcher.knn_query(character_vector, k=1)
     near_character_id = near_character_list[0][0]
     distance = distance_list[0][0]
@@ -114,6 +114,7 @@ def character_target_judge(character_id: int, now_time: int):
         now_range = random.random()
         if now_range <= 1 - distance + now_score:
             near_judge = 1
+    # 获取最相似角色的行动目标
     target: game_type.ExecuteTarget = None
     judge = 0
     null_target_set = set()
@@ -126,9 +127,11 @@ def character_target_judge(character_id: int, now_time: int):
             0,
             ""
         )
+        # 自身可以使用相似角色的目标时为相似角色进行加分
         if judge:
             cache.character_target_data[near_character_id].score += 1
             cache.character_target_score_data[near_character_id] += 1
+    # 无法模仿相似角色时，若自身性格有合群倾向，则改为模仿最受欢迎的角色(即分值最高的角色)的行为
     if not judge:
         conformity_judge = 0
         if character_data.nature[1] > 50:
@@ -150,6 +153,7 @@ def character_target_judge(character_id: int, now_time: int):
             if judge:
                 cache.character_target_data[imitate_character_id].score += 1
                 cache.character_target_score_data[imitate_character_id] += 1
+    # 当以上两者都不满足时，改为自己思考现在的行动目标
     if not judge:
         target, _, judge = search_target(
             character_id,
@@ -172,14 +176,13 @@ def character_target_judge(character_id: int, now_time: int):
         if (not character_id) or (player_data.target_character_id == character_id):
             if event_draw is not None:
                 event_draw.draw()
+    start_time = cache.character_data[character_id].behavior.start_time
+    now_judge = game_time.judge_date_big_or_small(start_time, now_time)
+    if now_judge:
+        cache.over_behavior_character.add(character_id)
+        character_data.ai_target = 0
     else:
-        start_time = cache.character_data[character_id].behavior.start_time
-        now_judge = game_time.judge_date_big_or_small(start_time, now_time)
-        if now_judge:
-            cache.over_behavior_character.add(character_id)
-            character_data.ai_target = 0
-        else:
-            cache.character_data[character_id].behavior.start_time += 60
+        cache.character_data[character_id].behavior.start_time += 60
 
 
 def judge_character_dead(character_id: int):

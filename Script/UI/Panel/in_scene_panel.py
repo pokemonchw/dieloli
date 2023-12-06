@@ -12,7 +12,7 @@ from Script.Core import (
     py_cmd,
 )
 from Script.Design import attr_text, map_handle, handle_instruct, handle_premise, constant
-from Script.Config import game_config
+from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -369,10 +369,15 @@ class SeeInstructPanel:
         line.draw()
         fix_draw = draw.NormalDraw()
         fix_width = int((self.width - int(8 * len(cache.instruct_filter))) / 2)
+        if not normal_config.config_normal.nsfw:
+            fix_width = int((self.width - int(6 * len(cache.instruct_filter))) / 2)
         fix_draw.width = fix_width
         fix_draw.text = " " * fix_width
         fix_draw.draw()
         for now_type in cache.instruct_filter:
+            if not normal_config.config_normal.nsfw:
+                if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
+                    continue
             now_config = game_config.config_instruct_type[now_type]
             if cache.instruct_filter[now_type]:
                 now_button = draw.CenterButton(
@@ -401,6 +406,9 @@ class SeeInstructPanel:
         now_instruct_list = []
         now_premise_data = {}
         for now_type in cache.instruct_filter:
+            if not normal_config.config_normal.nsfw:
+                if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
+                    continue
             if cache.instruct_filter[now_type] and now_type in constant.instruct_type_data:
                 for instruct in constant.instruct_type_data[now_type]:
                     premise_judge = 0

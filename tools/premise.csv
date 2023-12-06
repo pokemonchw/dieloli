@@ -643,6 +643,8 @@ target_is_sleep,角色行为类前提,交互对象正在睡觉
 target_is_sing,角色行为类前提,交互对象正在唱歌
 is_follow_player,辅助系统类前提,角色正在跟随玩家
 have_follow,辅助系统类前提,角色拥有跟随对象
+cafeteria_has_food,商店类前提,食堂有吃的卖
+cafeteria_has_drink,商店类前提,食堂有喝的卖
 no_in_follow_target_scene,辅助系统类前提,角色跟随的对象不在当前场景
 target_is_follow_player,辅助系统类前提,交互对象正在跟随玩家
 target_not_follow_player,辅助系统类前提,交互对象未跟随玩家

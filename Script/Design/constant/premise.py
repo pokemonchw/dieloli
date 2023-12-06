@@ -1463,6 +1463,16 @@ class Premise:
 
     """
     =========================
+    商店类类前提
+    =========================
+    """
+    CAFETERIA_HAS_FOOD = "cafeteria_has_food"
+    """ 食堂有吃的卖 """
+    CAFETERIA_HAS_DRINK = "cafeteria_has_drink"
+    """ 食堂有喝的卖 """
+
+    """
+    =========================
     辅助系统类前提
     =========================
     """
@@ -1484,3 +1494,4 @@ class Premise:
     """ 交互对象已被玩家收藏 """
     TARGET_IS_NOT_COLLECTION = "target_is_not_collection"
     """ 交互对象未被玩家收藏 """
+

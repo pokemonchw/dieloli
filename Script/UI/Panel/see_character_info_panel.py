@@ -124,15 +124,24 @@ class SeeCharacterMainAttrPanel:
         birthday_draw = CharacterBirthdayText(character_id, width)
         sture_info_draw = CharacterStatureInfoText(character_id, width)
         measurement_draw = CharacterMeasurementsText(character_id, width)
-        sex_experience_draw = CharacterSexExperienceText(character_id, width)
-        self.draw_list: List[draw.NormalDraw] = [
-            head_draw,
-            room_draw,
-            birthday_draw,
-            sture_info_draw,
-            measurement_draw,
-            sex_experience_draw,
-        ]
+        if normal_config.config_normal.nsfw:
+            sex_experience_draw = CharacterSexExperienceText(character_id, width)
+            self.draw_list: List[draw.NormalDraw] = [
+                head_draw,
+                room_draw,
+                birthday_draw,
+                sture_info_draw,
+                measurement_draw,
+                sex_experience_draw,
+            ]
+        else:
+            self.draw_list: List[draw.NormalDraw] = [
+                head_draw,
+                room_draw,
+                birthday_draw,
+                sture_info_draw,
+                measurement_draw,
+            ]
         """ 绘制的面板列表 """
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
@@ -167,6 +176,9 @@ class SeeCharacterStatusPanel:
         self.center_status: bool = center_status
         """ 居中绘制状态文本 """
         for status_type in game_config.config_character_state_type_data:
+            if not normal_config.config_normal.nsfw:
+                if not status_type:
+                    continue
             now_draw = CharacterStatusListPanel(
                 character_id, status_type, width, column, center_status
             )

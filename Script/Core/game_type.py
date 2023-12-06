@@ -208,6 +208,8 @@ class NormalConfig:
     """ 字体大小 """
     order_font_size: int
     """ 输入框字体大小 """
+    nsfw: int
+    """ nsfw内容开关 """
 
 
 class Clothing:
