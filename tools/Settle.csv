@@ -820,7 +820,7 @@ settle_type,son_type,settle_info,settle_id
 角色穿着类结算器,交互对象脱下,交互对象脱下裙子,undress_target_skirt
 角色穿着类结算器,交互对象脱下,交互对象脱下鞋子,undress_target_shoes
 角色穿着类结算器,交互对象脱下,交互对象脱下袜子,undress_target_socks
-角色穿着类结算器,交互对象脱下,交互对象脱下外套,undress_target_coat
+角色穿着类结算器,交互对象脱下,交互对象脱下外套,undress_target_coats
 角色好感类结算器,角色,增加对交互对象的少量好感,add_small_favorability
 角色好感类结算器,角色,增加对交互对象的中量好感,add_medium_favorability
 角色好感类结算器,角色,增加对交互对象的大量好感,add_large_favorability

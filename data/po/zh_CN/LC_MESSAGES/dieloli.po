@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-06 14:46+0800\n"
+"POT-Creation-Date: 2023-12-07 16:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -325,11 +325,11 @@ msgstr ""
 msgid "睡觉"
 msgstr ""
 
-#: Script/Design/character_behavior.py:493
+#: Script/Design/character_behavior.py:498
 msgid "绝顶"
 msgstr ""
 
-#: Script/Design/character_behavior.py:502
+#: Script/Design/character_behavior.py:507
 msgid "强绝顶"
 msgstr ""
 
@@ -1171,11 +1171,10 @@ msgstr ""
 msgid "死亡"
 msgstr ""
 
-#: Script/UI/Panel/view_character_status_list_panel.py:148
-msgid "死亡时间:"
+#: Script/UI/Panel/view_character_status_list_panel.py:154
+msgid "发呆中"
 msgstr ""
 
-#: Script/UI/Panel/view_character_status_list_panel.py:164
-#, python-brace-format
-msgid "和{target_name}{status_text}中"
+#: Script/UI/Panel/view_character_status_list_panel.py:159
+msgid "死亡时间:"
 msgstr ""

@@ -9,11 +9,13 @@ move_to_rand_scene,寻路类状态机,移动至随机场景
 move_to_like_target_scene,寻路类状态机,移动到自己喜欢的人身边
 move_to_no_first_kiss_like_target_scene,寻路类状态机,移动至喜欢的还是初吻的人所在的场景
 move_to_dislike_target_scene,寻路类状态机,移动到自己讨厌的人所在场景
+move_to_not_has_dislike_target_scene,寻路类状态机,移动到没有自己讨厌的人的场景
 move_to_grove,寻路类状态机,移动至小树林
 move_to_item_shop,寻路类状态机,移动至超市
 move_to_follow_target_scene,寻路类状态机,移动至跟随对象所在场景
 move_to_library,寻路类状态机,移动至图书馆
 move_to_no_man_scene,寻路类状态机,移动至无人场景
+move_to_have_character_scene,寻路类状态机,移动至有人的场景
 buy_rand_food_at_cafeteria,购物类状态机,在取餐区购买随机食物
 buy_rand_drinks_at_cafeteria,购物类状态机,在取餐区购买随机饮料
 buy_guitar,购物类状态机,购买吉他
@@ -45,6 +47,7 @@ singing,学习类状态机,唱歌
 play_guitar,学习类状态机,弹吉他
 dance,学习类状态机,跳舞
 chat_rand_character,互动类状态机,和场景内随机对象聊天
+chat_like_character,互动类状态机,和场景内喜欢的人聊天
 sing_rand_character,互动类状态机,唱歌给房间内随机对象听
 play_piano_rand_character,互动类状态机,弹奏钢琴给房间内随机对象听
 touch_head_to_beyond_friendship_target_in_scene,互动类状态机,对场景中抱有超越友谊想法的随机对象摸头

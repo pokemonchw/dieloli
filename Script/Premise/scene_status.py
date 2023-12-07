@@ -370,6 +370,8 @@ def handle_have_like_target_in_scene(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.social_contact.setdefault(4, set())
     character_data.social_contact.setdefault(5, set())
+    if not character_data.social_contact[4] and not character_data.social_contact[5]:
+        return 0
     scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path_str]
     character_list = []
@@ -414,16 +416,36 @@ def handle_have_dislike_target_in_scene(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set())
-    character_data.social_contact.setdefault(5, set())
     scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path_str]
     character_list = []
-    for i in {0, 1, 2, 3}:
+    for i in {0, 1, 2, 3, 4}:
+        character_data.social_contact.setdefault(i, set())
         for c in character_data.social_contact[i]:
             if c in scene_data.character_list:
-                character_list.append(c)
-    return len(character_list) > 0
+                return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.NOT_HAS_DISLIKE_TARGET_IN_SCENE)
+def handle_not_has_dislike_target_in_scene(character_id: int) -> int:
+    """
+    校验场景中是否没有自己讨厌的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_list = []
+    for i in {0, 1, 2, 3, 4}:
+        character_data.social_contact.setdefault(i, set())
+        for c in character_data.social_contact[i]:
+            if c in scene_data.character_list:
+                return 0
+    return 1
 
 
 @handle_premise.add_premise(constant.Premise.NO_IN_CLASSROOM)
@@ -838,3 +860,28 @@ def handle_has_no_character_scene(character_id: int) -> int:
     if len(cache.no_character_scene_set):
         return 1
     return 0
+
+
+@handle_premise.add_premise(constant.Premise.NOT_HAS_LIKE_CHARACTER_IN_SCENE)
+def handle_not_has_like_character_in_scene(character_id: int) -> int:
+    """
+    校验场景中是否没有自己喜欢的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.social_contact.setdefault(4, set())
+    character_data.social_contact.setdefault(5, set())
+    if not character_data.social_contact[4] and not character_data.social_contact[5]:
+        return 1
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_list = []
+    for i in {4, 5}:
+        for c in character_data.social_contact[i]:
+            if c in scene_data.character_list:
+                return 0
+    return 1
+

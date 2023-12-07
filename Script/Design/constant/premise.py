@@ -272,6 +272,8 @@ class Premise:
     """ 有自己喜欢的还是初吻的人在场景中 """
     HAVE_DISLIKE_TARGET_IN_SCENE = "have_dislike_target_in_scene"
     """ 场景中有自己讨厌的人 """
+    NOT_HAS_DISLIKE_TARGET_IN_SCENE = "not_has_dislike_target_in_scene"
+    """ 场景中没有自己讨厌的人 """
     NO_IN_CLASSROOM = "no_in_classroom"
     """ 不在教室中 """
     TEACHER_NO_IN_CLASSROOM = "teacher_no_in_classroom"
@@ -310,6 +312,8 @@ class Premise:
     """ 玩家在角色的目标场景中 """
     HAS_NO_CHARACTER_SCENE = "has_no_character_scene"
     """ 存在空无一人的场景 """
+    NOT_HAS_LIKE_CHARACTER_IN_SCENE = "not_has_like_character_in_scene"
+    """ 场景中没有自己喜欢的人 """
 
     """
     =========================
@@ -334,6 +338,8 @@ class Premise:
     """ 临近上课时间 """
     IN_CLASS_TIME = "in_class_time"
     """ 处于上课时间 """
+    NOT_IN_CLASS_TIME = "not_in_class_time"
+    """ 不处于上课时间 """
     TONIGHT_IS_FULL_MOON = "tonight_is_full_moon"
     """ 今夜是满月 """
     IS_SPRING = "is_spring"

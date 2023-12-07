@@ -223,12 +223,10 @@ def character_move_to_dislike_target_scene(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_list = []
-    for i in {0, 1, 2, 3}:
+    for i in {0, 1, 2, 3, 4}:
         character_data.social_contact.setdefault(i, set())
         for c in character_data.social_contact[i]:
-            c_data: game_type.Character = cache.character_data[c]
-            if c_data.first_kiss == -1:
-                character_list.append(i)
+            character_list.append(c)
     if character_list:
         target_id = random.choice(character_list)
         target_data: game_type.Character = cache.character_data[target_id]
@@ -238,6 +236,38 @@ def character_move_to_dislike_target_scene(character_id: int):
         character_data.behavior.behavior_id = constant.Behavior.MOVE
         character_data.behavior.move_target = move_path
         character_data.behavior.duration = move_time
+
+
+@handle_state_machine.add_state_machine(
+    constant.StateMachine.MOVE_TO_NOT_HAS_DISLIKE_TARGET_SCENE
+)
+def character_move_to_not_has_dislike_target_scene(character_id: int):
+    """
+    移动至没有自己讨厌的人的场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_set = set()
+    for i in {0, 1, 2, 3, 4}:
+        character_data.social_contact.setdefault(i, set())
+        for c in character_data.social_contact[i]:
+            c_data = cache.character_data[c]
+            c_position = map_handle.get_map_system_path_str_for_list(c_data.position)
+            scene_set.add(c_position)
+    if not scene_set:
+        return
+    now_scene_set = set(cache.scene_data.keys())
+    new_scene_list = list(now_scene_set - scene_set)
+    if not new_scene_list:
+        return
+    target_scene_str = random.choice(new_scene_list)
+    target_scene = map_handle.get_map_system_path_for_str(target_scene_str)
+    _, _, move_path, move_time = character_move.character_move(character_id, target_scene)
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_GROVE)
@@ -311,6 +341,28 @@ def character_move_to_no_man_scene(character_id: int):
     character_data: game_type.Character = cache.character_data[character_id]
     now_scene_str = map_handle.get_map_system_path_str_for_list(character_data.position)
     target_scene = cache.no_character_scene_set.pop()
+    cache.no_character_scene_set.add(target_scene)
+    _, _, move_path, move_time = character_move.character_move(
+        character_id,
+        map_handle.get_map_system_path_for_str(target_scene)
+    )
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_HAVE_CHARACTER_SCENE)
+def character_move_to_have_character_scene(character_id: int):
+    """
+    角色移动至有人的场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_set = set(cache.scene_data.keys())
+    new_scene_list = list(scene_set - cache.no_character_scene_set)
+    target_scene = random.choice(new_scene_list)
     cache.no_character_scene_set.add(target_scene)
     _, _, move_path, move_time = character_move.character_move(
         character_id,

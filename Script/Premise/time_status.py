@@ -182,6 +182,21 @@ def handle_in_class_time(character_id: int) -> int:
     return judge
 
 
+@handle_premise.add_premise(constant.Premise.NOT_IN_CLASS_TIME)
+def handle_not_in_class_time(character_id: int) -> int:
+    """
+    校验角色是否不处于上课时间
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    judge, _unused, _unused, _unused, _unused = character.judge_character_in_class_time(
+        character_id
+    )
+    return not judge
+
+
 @handle_premise.add_premise(constant.Premise.TONIGHT_IS_FULL_MOON)
 def handle_tonight_is_full_moon(character_id: int) -> int:
     """

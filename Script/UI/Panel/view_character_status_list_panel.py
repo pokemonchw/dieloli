@@ -141,6 +141,17 @@ class SeeCharacterStatusDraw:
         character_data: game_type.Character = cache.character_data[self.text]
         index_text = text_handle.id_index(button_id)
         status_text = game_config.config_status[character_data.state].name
+        character_id = character_data.cid
+        target_text = ""
+        if character_id in cache.character_target_data:
+            now_target = cache.character_target_data[character_id]
+            target_id = now_target.uid
+            if now_target.affiliation != "":
+                target_id = now_target.affiliation
+            now_target_data = game_config.config_target[target_id]
+            target_text = now_target_data.text
+        if target_text == "":
+            target_text = _("发呆中")
         position_text = attr_text.get_scene_path_text(character_data.position)
         sex_text = game_config.config_sex_tem[character_data.sex].name
         if character_data.dead:
@@ -161,10 +172,7 @@ class SeeCharacterStatusDraw:
                     target_data: game_type.Character = cache.character_data[
                         character_data.target_character_id
                     ]
-                    status_text = _("和{target_name}{status_text}中").format(
-                        target_name=target_data.name, status_text=status_text
-                    )
-            button_text = f"{index_text} {character_data.name} {sex_text} {character_data.age}岁 {status_text} {position_text}"
+            button_text = f"{index_text} {character_data.name} {sex_text} {character_data.age}岁 {target_text} {position_text}"
         now_draw = draw.LeftButton(
             button_text, self.button_return, self.width, cmd_func=self.move_to_character
         )
