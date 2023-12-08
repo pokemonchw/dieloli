@@ -33,6 +33,11 @@ def title_panel():
     info_draw.width = width
     info_draw.draw()
     lineFeed.draw()
+    now_info_draw = draw.CenterDraw()
+    now_info_draw.text = _("(注意这是一个临时的预览版本)")
+    now_info_draw.width = width
+    now_info_draw.draw()
+    lineFeed.draw()
     lineFeed.draw()
     line = draw.LineDraw("=", width)
     line.draw()
