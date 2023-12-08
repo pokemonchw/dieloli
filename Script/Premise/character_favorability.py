@@ -69,7 +69,7 @@ def handle_target_is_beyond_friendship(character_id: int) -> int:
         character_data.target_character_id in character_data.social_contact_data
         and character_data.social_contact_data[character_data.target_character_id] > 7
     ):
-        return character_data.social_contact_data[character_data.target_character_id]
+        return 1
     return 0
 
 
@@ -88,7 +88,7 @@ def handle_is_beyond_friendship_target(character_id: int) -> int:
         character_id in target_data.social_contact_data
         and target_data.social_contact_data[character_id] > 7
     ):
-        return target_data.social_contact_data[character_id]
+        return 1
     return 0
 
 
@@ -124,9 +124,9 @@ def handle_no_beyond_friendship_target(character_id: int) -> int:
         character_id in target_data.social_contact_data
         and target_data.social_contact_data[character_id] < 8
     ):
-        return 10 - target_data.social_contact_data[character_id]
+        return 1
     if character_id not in target_data.social_contact_data:
-        return 10
+        return 1
     return 0
 
 
@@ -159,7 +159,7 @@ def handle_have_like_target(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.social_contact.setdefault(9, set())
     character_data.social_contact.setdefault(10, set())
-    return len(character_data.social_contact[9]) + len(character_data.social_contact[10])
+    return (len(character_data.social_contact[9]) + len(character_data.social_contact[10])) > 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_DISLIKE_TARGET)
@@ -176,7 +176,7 @@ def handle_have_dislike_target(character_id: int) -> int:
     character_data.social_contact.setdefault(1, set())
     character_data.social_contact.setdefault(2, set())
     character_data.social_contact.setdefault(3, set())
-    return len(character_data.social_contact[0]) + len(character_data.social_contact[1]) + len(character_data.social_contact[2]) + len(character_data.social_contact[3])
+    return (len(character_data.social_contact[0]) + len(character_data.social_contact[1]) + len(character_data.social_contact[2]) + len(character_data.social_contact[3])) > 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_NOT_STRANGER)

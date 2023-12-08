@@ -15,7 +15,7 @@ def two_bit_array_to_dict(array: tuple) -> dict:
     return dict(array)
 
 
-def get_rand_value_for_value_region(value_list: List[int]) -> int:
+def get_rand_value_for_value_region(value_list: List[float]) -> float:
     """
     以列表中每个元素的值作为权重随机获取一个元素
     Keyword arguments:
@@ -23,13 +23,7 @@ def get_rand_value_for_value_region(value_list: List[int]) -> int:
     Return arguments:
     int -- 获得的元素
     """
-    key_list = [math.ceil(i) for i in value_list]
-    now_data = dict(zip(itertools.accumulate(key_list), value_list))
-    weight_max = sum(key_list)
-    weight_region_list = list(now_data.keys())
-    now_weight = random.randint(0, weight_max - 1)
-    weight_region = get_next_value_for_list(now_weight, weight_region_list)
-    return now_data[weight_region]
+    return random.choices(value_list, weights=value_list)[0]
 
 
 def get_region_list(now_data: Dict[any, int]) -> dict:
@@ -57,12 +51,11 @@ def get_random_for_weight(data: Dict[any, int]) -> any:
     Keyword arguments:
     data -- 需要随机获取key的dict数据
     """
-    weight_max = sum(data.values())
-    weight_region_data = get_region_list(data)
-    weight_region_list = [int(i) for i in weight_region_data.keys()]
-    now_weight = random.randint(0, weight_max - 1)
-    weight_region = get_next_value_for_list(now_weight, weight_region_list)
-    return weight_region_data[weight_region]
+    keys = list(data.keys())
+    weights = list(data.values())
+    if not sum(weights):
+        weights = [1 for i in keys]
+    return random.choices(keys, weights=weights)[0]
 
 
 def get_next_value_for_list(now_int: int, int_list: List[int]) -> int:
@@ -106,7 +99,7 @@ def list_of_groups(init_list: list, children_list_len: int) -> List[List[any]]:
     return end_list
 
 
-def get_gauss_rand(min_value: int, max_value: int) -> int:
+def get_gauss_rand(min_value: int, max_value: int) -> float:
     """
     通过正态分布获取两个值之间的随机值
     Keyword arguments:
@@ -117,7 +110,7 @@ def get_gauss_rand(min_value: int, max_value: int) -> int:
     """
     mu = (min_value + max_value) / 2
     single = mu - min_value
-    while 1:
-        value = random.gauss(mu, single)
-        if min_value <= value <= max_value:
-            return value
+    value = numpy.random.normal(mu, single)
+    value = numpy.clip(value, min_value, max_value)
+    return value
+

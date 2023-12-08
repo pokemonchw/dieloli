@@ -30,7 +30,7 @@ def handle_sex_experience_is_hight(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.knowledge.setdefault(9, 0)
-    return attr_calculation.get_experience_level_weight(character_data.knowledge[9])
+    return attr_calculation.get_experience_level_weight(character_data.knowledge[9]) > 4
 
 
 @handle_premise.add_premise(constant.Premise.NO_EXPERIENCE_IN_SEX)
@@ -62,7 +62,7 @@ def handle_rich_experience_in_sex(character_id: int) -> int:
     now_exp = 0
     for i in character_data.sex_experience:
         now_exp += character_data.sex_experience[i]
-    return attr_calculation.get_experience_level_weight(now_exp)
+    return attr_calculation.get_experience_level_weight(now_exp) > 5
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_NO_EXPERIENCE_IN_SEX)
@@ -95,7 +95,7 @@ def handle_no_rich_experience_in_sex(character_id: int) -> int:
     now_exp = 0
     for i in character_data.sex_experience:
         now_exp += character_data.sex_experience[i]
-    return 8 - attr_calculation.get_experience_level_weight(now_exp)
+    return 8 - attr_calculation.get_experience_level_weight(now_exp) > 4
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_NO_FIRST_KISS)
@@ -195,8 +195,9 @@ def handle_have_like_target_no_first_kiss(character_id: int) -> int:
         for c in character_data.social_contact[i]:
             c_data: game_type.Character = cache.character_data[c]
             if c_data.first_kiss == -1:
-                character_index += 1
-    return character_index
+                character_index = 1
+                break
+    return character_index > 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_CLITORIS_LEVEL_IS_HIGHT)
@@ -211,4 +212,4 @@ def handle_target_clitoris_is_hight(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.sex_experience.setdefault(2, 0)
-    return attr_calculation.get_experience_level_weight(target_data.sex_experience[2])
+    return attr_calculation.get_experience_level_weight(target_data.sex_experience[2]) > 5

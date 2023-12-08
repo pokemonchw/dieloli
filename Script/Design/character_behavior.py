@@ -1,5 +1,7 @@
 import random
+import time
 from uuid import UUID
+from concurrent.futures import ThreadPoolExecutor
 from types import FunctionType
 from typing import Dict, Set
 from Script.Core import (
@@ -15,6 +17,7 @@ from Script.Design import (
     handle_premise,
     event,
     cooking,
+    character_handle,
 )
 from Script.Config import game_config, normal_config
 from Script.UI.Moudle import draw
@@ -25,32 +28,27 @@ _: FunctionType = get_text._
 """ 翻译api """
 window_width: int = normal_config.config_normal.text_width
 """ 窗体宽度 """
+handle_thread_pool: ThreadPoolExecutor = ThreadPoolExecutor(max_workers=50)
+""" 处理角色行为的线程池 """
 
 
-def init_character_behavior(player_start: bool):
+def init_character_behavior():
     """
     角色行为树总控制
-    Keyword arguments:
-    player_start -- 是否是玩家状态的开始
     """
-    character_list = list(cache.character_data.keys())
-    if player_start:
-        character_list.sort()
-    else:
-        character_list.sort(reverse=1)
+    character_handle.build_similar_character_searcher()
+    cache.character_target_data = {}
+    cache.character_target_score_data = {}
     while 1:
         if len(cache.over_behavior_character) >= len(cache.character_data):
             break
-        for character_id in character_list:
+        for character_id in range(len(cache.character_data) - 1, -1, -1):
             if character_id in cache.over_behavior_character:
                 continue
-            if not player_start and not character_id:
-                if len(cache.over_behavior_character) < len(character_list) - 1:
+            if not character_id:
+                if len(cache.over_behavior_character) < len(cache.character_data) - 1:
                     continue
-            character_data:game_type.Character = cache.character_data[character_id]
             character_behavior(character_id, cache.game_time)
-            judge_character_dead(character_id)
-        update_cafeteria()
     cache.over_behavior_character = set()
 
 
@@ -66,8 +64,6 @@ def update_cafeteria():
             break
         if not food_judge:
             break
-    if food_judge:
-        cooking.init_restaurant_data()
 
 
 def character_behavior(character_id: int, now_time: int):
@@ -78,6 +74,7 @@ def character_behavior(character_id: int, now_time: int):
     now_time -- 指定时间戳
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    character_data.premise_data = {}
     if character_data.dead:
         return
     if not character_data.behavior.start_time:
@@ -91,6 +88,7 @@ def character_behavior(character_id: int, now_time: int):
         status_judge = judge_character_status(character_id, now_time)
         if status_judge:
             cache.over_behavior_character.add(character_id)
+    judge_character_dead(character_id)
 
 
 def character_target_judge(character_id: int, now_time: int):
@@ -100,33 +98,91 @@ def character_target_judge(character_id: int, now_time: int):
     character_id -- 角色id
     now_time -- 指定时间戳
     """
-    premise_data = {}
     target_weight_data = {}
-    target, _, judge = search_target(
-        character_id,
-        list(game_config.config_target.keys()),
-        set(),
-        premise_data,
-        target_weight_data,
-    )
-    player_data: game_type.Character = cache.character_data[0]
+    # 取出角色数据
     character_data: game_type.Character = cache.character_data[character_id]
+    # 计算角色向量
+    character_vector = cache.character_vector_data[character_id - 1]
+    # 找出最相似的角色
+    near_character_list, distance_list = cache.similar_character_searcher.knn_query(character_vector, k=1)
+    near_character_id = near_character_list[0][0]
+    distance = distance_list[0][0]
+    near_judge = 0
+    if near_character_id in cache.character_target_data:
+        near_target = cache.character_target_data[near_character_id]
+        now_score = near_target.score * 0.0003
+        now_range = random.random()
+        if now_range <= 1 - distance + now_score:
+            near_judge = 1
+    # 获取最相似角色的行动目标
+    target: game_type.ExecuteTarget = None
+    judge = 0
+    null_target_set = set()
+    if near_judge:
+        target, _, judge = search_target(
+            character_id,
+            {cache.character_target_data[near_character_id].affiliation},
+            null_target_set,
+            target_weight_data,
+            0,
+            ""
+        )
+        # 自身可以使用相似角色的目标时为相似角色进行加分
+        if judge:
+            cache.character_target_data[near_character_id].score += 1
+            cache.character_target_score_data[near_character_id] += 1
+    # 无法模仿相似角色时，若自身性格有合群倾向，则改为模仿最受欢迎的角色(即分值最高的角色)的行为
+    if not judge:
+        conformity_judge = 0
+        if character_data.nature[1] > 50:
+            if cache.character_target_data:
+                conformity = (character_data.nature[1] - 50) * 2
+                now_range = random.random() * 100
+                if now_range < conformity:
+                    conformity_judge = 1
+        if conformity_judge and cache.character_target_score_data:
+            imitate_character_id = value_handle.get_random_for_weight(cache.character_target_score_data)
+            target, _, judge = search_target(
+                character_id,
+                {cache.character_target_data[imitate_character_id].affiliation},
+                null_target_set,
+                target_weight_data,
+                0,
+                ""
+            )
+            if judge:
+                cache.character_target_data[imitate_character_id].score += 1
+                cache.character_target_score_data[imitate_character_id] += 1
+    # 当以上两者都不满足时，改为自己思考现在的行动目标
+    if not judge:
+        target, _, judge = search_target(
+            character_id,
+            set(game_config.config_target.keys()),
+            null_target_set,
+            target_weight_data,
+            0,
+            ""
+        )
+    player_data: game_type.Character = cache.character_data[0]
     if judge:
-        target_config = game_config.config_target[target]
-        character_data.ai_target = target
+        if target.affiliation == "":
+            target.affiliation = target.uid
+        cache.character_target_data[character_id] = target
+        cache.character_target_score_data[character_id] = 0
+        target_config = game_config.config_target[target.uid]
+        character_data.ai_target = target.affiliation
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
         event_draw = event.handle_event(character_id, 1)
         if (not character_id) or (player_data.target_character_id == character_id):
             if event_draw is not None:
                 event_draw.draw()
+    start_time = cache.character_data[character_id].behavior.start_time
+    now_judge = game_time.judge_date_big_or_small(start_time, now_time)
+    if now_judge:
+        cache.over_behavior_character.add(character_id)
+        character_data.ai_target = 0
     else:
-        start_time = cache.character_data[character_id].behavior.start_time
-        now_judge = game_time.judge_date_big_or_small(start_time, now_time)
-        if now_judge:
-            cache.over_behavior_character.add(character_id)
-            character_data.ai_target = 0
-        else:
-            cache.character_data[character_id].behavior.start_time += 60
+        cache.character_data[character_id].behavior.start_time += 60
 
 
 def judge_character_dead(character_id: int):
@@ -156,6 +212,14 @@ def judge_character_dead(character_id: int):
             dead_judge = 1
             character_data.cause_of_death = 2
             break
+        if character_data.extreme_exhaustion_time:
+            exhaustion_time = (cache.game_time - character_data.extreme_exhaustion_time) / 60
+            sudden_death_probability = exhaustion_time * (100 / 8640)
+            sudden_death_probability = max(sudden_death_probability, 100 / 8640)
+            now_range = random.randint(0,100)
+            if now_range < sudden_death_probability:
+                dead_judge = 1
+                character_data.cause_of_death = 3
         break
     if dead_judge:
         character_data.dead = 1
@@ -183,6 +247,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
         character_data.behavior.start_time = end_time
         character_data.state = constant.CharacterStatus.STATUS_ARDER
         return 1
+    # 增加饥饿和口渴
     last_hunger_time = start_time
     if character_data.last_hunger_time:
         last_hunger_time = character_data.last_hunger_time
@@ -192,6 +257,16 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     character_data.status[27] += hunger_time * 0.02
     character_data.status[28] += hunger_time * 0.02
     character_data.last_hunger_time = now_time
+    # 增加疲惫
+    if character_data.state != constant.CharacterStatus.STATUS_SLEEP:
+        character_data.status.setdefault(25, 0)
+        character_data.status[25] += add_time * 0.0694
+        if character_data.status[25] >= 100:
+            if character_data.extreme_exhaustion_time == 0:
+                character_data.extreme_exhaustion_time = cache.game_time
+        else:
+            if character_data.extreme_exhaustion_time != 0:
+                character_data.extreme_exhaustion_time = 0
     player_data: game_type.Character = cache.character_data[0]
     line_feed = draw.NormalDraw()
     line_feed.text = "\n"
@@ -208,7 +283,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
             character_data.behavior.move_src = []
             climax_draw = settlement_pleasant_sensation(character_id)
             if (not character_id) or (player_data.target_character_id == character_id):
-                if event_draw is not None:
+                if event_draw.text != "":
                     event_draw.draw()
                 if settle_output is not None:
                     if settle_output[1]:
@@ -235,12 +310,13 @@ def judge_character_status(character_id: int, now_time: int) -> int:
 
 
 def search_target(
-    character_id: int,
-    target_list: list,
-    null_target: set,
-    premise_data: Dict[int, int],
-    target_weight_data: Dict[int, int],
-) -> (int, int, bool):
+        character_id: int,
+        target_list: set,
+        null_target: set,
+        target_weight_data: Dict[int, int],
+        sub_weight: int,
+        original_target_id: str
+) -> (game_type.ExecuteTarget, int, bool):
     """
     查找可用目标
     Keyword arguments:
@@ -249,56 +325,101 @@ def search_target(
     null_target -- 被排除的目标
     premise_data -- 已算出的前提权重
     target_weight_data -- 已算出权重的目标列表
+    sub_weight -- 向下传递的目标权重
+    original_target_id -- 原始的目标id
     Return arguments:
-    int -- 目标id
+    game_type.ExecuteTarget -- 要执行的目标数据
     int -- 目标权重
     bool -- 前提是否能够被满足
     """
-    target_data = {}
+    character_data = cache.character_data[character_id]
+    target_data: Dict[float, Set[game_type.ExecuteTarget]] = {}
     for target in target_list:
         if target in null_target:
             continue
         if target in target_weight_data:
             target_data.setdefault(target_weight_data[target], set())
-            target_data[target_weight_data[target]].add(target)
+            now_execute_target = game_type.ExecuteTarget()
+            now_execute_target.uid = target
+            now_execute_target.weight = target_weight_data[target] + sub_weight
+            now_execute_target.affiliation = original_target_id
+            target_data.setdefault(now_execute_target.weight, set())
+            target_data[now_execute_target.weight].add(now_execute_target)
             continue
         target_config = game_config.config_target[target]
         if not len(target_config.premise):
             target_data.setdefault(1, set())
-            target_data[1].add(target)
-            target_weight_data[target] = 1
+            now_execute_target = game_type.ExecuteTarget()
+            now_execute_target.uid = target
+            now_execute_target.weight = 1 + sub_weight + (500 - 100 * target_config.needs_hierarchy)
+            now_execute_target.affiliation = original_target_id
+            target_data[1].add(now_execute_target)
+            target_weight_data[target] = now_execute_target.weight = 1
             continue
-        now_weight = 0
+        now_weight = sub_weight + (500 - 100 * target_config.needs_hierarchy)
         now_target_pass_judge = 0
         now_target_data = {}
         premise_judge = 1
+        null_premise_set = set()
         for premise in target_config.premise:
-            premise_judge = 0
-            if premise in premise_data:
-                premise_judge = premise_data[premise]
+            if premise in character_data.premise_data:
+                premise_judge = character_data.premise_data[premise]
             else:
                 premise_judge = handle_premise.handle_premise(premise, character_id)
                 premise_judge = max(premise_judge, 0)
-                premise_data[premise] = premise_judge
+                character_data.premise_data[premise] = premise_judge
             if premise_judge:
                 now_weight += premise_judge
             else:
-                if premise in game_config.config_effect_target_data and premise not in premise_data:
+                if premise in game_config.config_effect_target_data and premise not in character_data.premise_data:
+                    null_premise_set.add(premise)
+                else:
+                    now_target_pass_judge = 1
+                    break
+        if not now_target_pass_judge and null_premise_set:
+            premise_judge = 0
+            now_original_target_id = target
+            if original_target_id != "":
+                now_original_target_id = original_target_id
+            for premise in null_premise_set:
+                now_judge = 0
+                now_target_weight = 0
+                if premise in cache.character_premise_target_data:
+                    if cache.character_premise_target_data[premise]:
+                        conformity_judge = 0
+                        if character_data.nature[1] > 50:
+                            conformity = (character_data.nature[1] - 50) * 2
+                            now_range = random.random() * 100
+                            if now_range < conformity:
+                                conformity_judge = 1
+                        if conformity_judge:
+                            now_target_id = value_handle.get_random_for_weight(
+                                cache.character_premise_target_data[premise])
+                            now_target, now_target_weight, conformity_judge = search_target(
+                                character_id,
+                                {now_target_id},
+                                null_target,
+                                target_weight_data,
+                                now_original_target_id,
+                            )
+                if not now_judge:
                     now_target_list = game_config.config_effect_target_data[premise] - null_target
+                    now_target_list.remove(target)
                     now_target, now_target_weight, now_judge = search_target(
                         character_id,
                         now_target_list,
                         null_target,
-                        premise_data,
                         target_weight_data,
+                        now_weight,
+                        now_original_target_id,
                     )
-                    if now_judge:
-                        now_target_data.setdefault(now_target_weight, set())
-                        now_target_data[now_target_weight].add(now_target)
-                        now_weight += now_target_weight
-                    else:
-                        now_target_pass_judge = 1
-                        break
+                if now_judge:
+                    now_target_data.setdefault(now_target_weight, set())
+                    now_target_data[now_target_weight].add(now_target)
+                    now_weight += now_target_weight
+                    cache.character_premise_target_data.setdefault(premise, {})
+                    cache.character_premise_target_data[premise].setdefault(now_target.uid, 0)
+                    cache.character_premise_target_data[premise][now_target.uid] += 1
                 else:
                     now_target_pass_judge = 1
                     break
@@ -308,16 +429,20 @@ def search_target(
             continue
         if premise_judge:
             target_data.setdefault(now_weight, set())
-            target_data[now_weight].add(target)
+            now_execute_target = game_type.ExecuteTarget()
+            now_execute_target.uid = target
+            now_execute_target.weight = now_weight
+            now_execute_target.affiliation = original_target_id
+            target_data[now_weight].add(now_execute_target)
             target_weight_data[target] = now_weight
         else:
-            now_value_weight = value_handle.get_rand_value_for_value_region(now_target_data.keys())
+            now_value_weight = value_handle.get_rand_value_for_value_region(list(now_target_data.keys()))
             target_data.setdefault(now_weight, set())
             target_data[now_weight].add(random.choice(list(now_target_data[now_value_weight])))
     if target_data:
-        value_weight = value_handle.get_rand_value_for_value_region(target_data.keys())
+        value_weight = value_handle.get_rand_value_for_value_region(list(target_data.keys()))
         return random.choice(list(target_data[value_weight])), value_weight, 1
-    return "", 0, 0
+    return None, 0, 0
 
 
 def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
@@ -398,3 +523,4 @@ def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
         now_draw.width = window_width
         return now_draw
     return None
+

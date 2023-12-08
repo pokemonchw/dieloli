@@ -1,6 +1,10 @@
 import random
 import math
+import time
+
 import numpy
+from sklearn.feature_extraction import DictVectorizer
+import hnswlib
 from Script.Core import (
     cache_control,
     value_handle,
@@ -14,7 +18,6 @@ from Script.Design import (
     character,
 )
 from Script.Config import game_config, normal_config
-
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -40,7 +43,7 @@ def calculate_the_average_value_of_each_attribute_of_each_age_group():
     cache.average_bodyfat_by_age = {
         sex: {
             age_tem: cache.total_bodyfat_by_age[sex][age_tem]
-            / cache.total_number_of_people_of_all_ages[sex][age_tem]
+                     / cache.total_number_of_people_of_all_ages[sex][age_tem]
             for age_tem in cache.total_bodyfat_by_age[sex]
         }
         for sex in cache.total_bodyfat_by_age
@@ -48,7 +51,7 @@ def calculate_the_average_value_of_each_attribute_of_each_age_group():
     cache.average_height_by_age = {
         sex: {
             age_tem: cache.total_height_by_age[sex][age_tem]
-            / cache.total_number_of_people_of_all_ages[sex][age_tem]
+                     / cache.total_number_of_people_of_all_ages[sex][age_tem]
             for age_tem in cache.total_height_by_age[sex]
         }
         for sex in cache.total_height_by_age
@@ -244,19 +247,19 @@ def init_character_dormitory():
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
             if cache.character_data[character_id].age <= 18
-            and cache.character_data[character_id].sex == 0
+               and cache.character_data[character_id].sex == 0
         },
         "Woman": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
             if cache.character_data[character_id].age <= 18
-            and cache.character_data[character_id].sex == 1
+               and cache.character_data[character_id].sex == 1
         },
         "Other": {
             character_id: cache.character_data[character_id].age
             for character_id in cache.character_data
             if cache.character_data[character_id].age <= 18
-            and cache.character_data[character_id].sex not in {0, 1}
+               and cache.character_data[character_id].sex not in {0, 1}
         },
         "Teacher": {
             character_id: cache.character_data[character_id].age
@@ -332,6 +335,12 @@ def init_character_dormitory():
             del teacher_dormitory[now_room]
 
 
+def init_no_character_scene():
+    """ 初始化没有角色的场景列表集合 """
+    for scene_path in cache.scene_data:
+        cache.no_character_scene_set.add(scene_path)
+
+
 def init_character_position():
     """初始化角色位置"""
     for character_id in cache.character_data:
@@ -342,11 +351,11 @@ def init_character_position():
 
 
 def add_favorability(
-    character_id: int,
-    target_id: int,
-    now_add_favorability: int,
-    target_change: game_type.TargetChange,
-    now_time: int,
+        character_id: int,
+        target_id: int,
+        now_add_favorability: int,
+        target_change: game_type.TargetChange,
+        now_time: int,
 ):
     """
     增加目标角色对当前角色的好感
@@ -360,8 +369,8 @@ def add_favorability(
     target_data: game_type.Character = cache.character_data[target_id]
     while 1:
         if (
-            len(target_data.favorability) > target_data.nature[1]
-            and character_id not in target_data.favorability
+                len(target_data.favorability) > target_data.nature[1]
+                and character_id not in target_data.favorability
         ):
             value_dict = dict(
                 zip(target_data.favorability.values(), target_data.favorability.keys())
@@ -374,8 +383,8 @@ def add_favorability(
             if now_key in target_data.social_contact_data:
                 now_social = target_data.social_contact_data[now_key]
                 if (
-                    now_social in target_data.social_contact
-                    and now_key in target_data.social_contact[now_social]
+                        now_social in target_data.social_contact
+                        and now_key in target_data.social_contact[now_social]
                 ):
                     target_data.social_contact[now_social].remove(now_key)
                 del target_data.social_contact_data[now_key]
@@ -415,3 +424,68 @@ def add_favorability(
     target_data.social_contact_last_cut_down_time[character_id] = now_time
     if target_change is not None:
         add_favorability(target_id, character_id, old_add_favorability, None, now_time)
+
+
+feature_vector_handle: DictVectorizer = DictVectorizer(sparse=False)
+
+
+def build_similar_character_searcher():
+    """
+    构造相似角色检索器
+    """
+    character_feature = [get_character_feature_vector(character_id) for character_id in
+                         range(1, len(cache.character_data))]
+    vectors = feature_vector_handle.fit_transform(character_feature)
+    p = hnswlib.Index(space='cosine', dim=len(vectors[0]))
+    p.init_index(max_elements=len(vectors), ef_construction=200, M=16)
+    p.add_items(vectors, ids=range(1, len(cache.character_data)))
+    p.set_ef(50)
+    cache.similar_character_searcher = p
+    cache.character_vector_data = vectors
+
+
+def get_character_feature_vector(character_id: int) -> dict:
+    """
+    获取角色特征向量
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    list -- 向量表
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_data = {}
+    now_data["sex"] = character_data.sex  # 提取角色性别
+    now_data["age"] = character_data.age  # 提取角色年龄
+    now_data["end_age"] = character_data.end_age  # 提取角色预期寿命
+    now_data["hit_point_max"] = character_data.hit_point_max  # 提取角色最大HP
+    now_data["hit_point"] = character_data.hit_point  # 提取角色当前HP
+    now_data["mana_point_max"] = character_data.mana_point_max  # 提取角色最大MP
+    now_data["mana_point"] = character_data.mana_point  # 提取角色当前MP
+    now_data["total_sex_experience"] = sum(character_data.sex_experience.values())  # 提取角色总性经验
+    now_data["state"] = character_data.state  # 提取角色当前状态
+    now_data.update(character_data.height.__dict__)  # 提取角色身高
+    now_data["weight"] = character_data.weight  # 提取角色体重
+    now_data.update(character_data.measurements.__dict__)  # 提取角色三围
+    for knowledge_id in character_data.knowledge:  # 提取角色知识等级
+        now_data[f"knowledge_{knowledge_id}"] = character_data.knowledge[knowledge_id]
+    for knowledge_interest_id in character_data.knowledge_interest:  # 提取角色知识天赋
+        now_data[f"knowledge_interest_{knowledge_interest_id}"] = character_data.knowledge_interest[
+            knowledge_interest_id]
+    for language_id in character_data.language:  # 提取角色语言等级
+        now_data[f"language_{language_id}"] = character_data.language[language_id]
+    for language_interest_id in character_data.language_interest:  # 提取角色语言天赋
+        now_data[f"language_interest_{language_interest_id}"] = character_data.language_interest[
+            language_interest_id]
+    now_data["birthday"] = character_data.birthday  # 提取角色生日
+    now_data.update(character_data.chest.__dict__)  # 提取角色体脂率
+    for nature_id in character_data.nature:  # 提取角色性格
+        now_data[f"nature_{nature_id}"] = character_data.nature[nature_id]
+    for status_id in character_data.status:  # 提取角色状态
+        now_data[f"status_{status_id}"] = character_data.status[status_id]
+    for social_id in character_data.social_contact:  # 提取角色社交关系
+        now_data[f"social_{social_id}"] = len(character_data.social_contact[social_id])
+    now_data["first_kiss"] = character_data.first_kiss != -1  # 角色初吻
+    now_data["first_hand_in_hand"] = character_data.first_hand_in_hand != -1  # 角色初次牵手向量
+    for now_character_id in character_data.favorability:  # 提取角色好感
+        now_data[f"favorability_{now_character_id}"] = character_data.favorability[now_character_id]
+    return now_data

@@ -64,6 +64,7 @@ class EffectMenu(QDialog):
             cache_control.now_target_data[cache_control.now_target_id].effect[item.cid] = 1
         elif item.cid in cache_control.now_target_data[cache_control.now_target_id].effect:
             del cache_control.now_target_data[cache_control.now_target_id].effect[item.cid]
+        cache_control.item_effect_list.update()
 
     def click_item(self, item: TreeItem, column: int):
         """
@@ -81,3 +82,4 @@ class EffectMenu(QDialog):
         else:
             item.setCheckState(0, Qt.Checked)
             cache_control.now_target_data[cache_control.now_target_id].effect[item.cid] = 1
+        cache_control.item_effect_list.update()

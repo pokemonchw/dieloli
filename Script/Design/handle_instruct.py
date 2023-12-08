@@ -26,10 +26,8 @@ instruct_queue = queue.Queue()
 def init_instruct_handle_thread():
     """初始化指令处理线程"""
     while 1:
-        if not instruct_queue.empty():
-            instruct_queue.get()
-            save_handle.establish_save("auto")
-        time.sleep(1)
+        instruct_queue.get()
+        save_handle.establish_save("auto")
 
 
 instruct_handle_thread = Thread(target=init_instruct_handle_thread)
@@ -59,15 +57,10 @@ def add_instruct(instruct_id: int, instruct_type: int, name: str, premise_set: S
     """
 
     def decorator(func: FunctionType):
-        @wraps(func)
-        def return_wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
-
-        constant.handle_instruct_data[instruct_id] = return_wrapper
+        constant.handle_instruct_data[instruct_id] = func
         constant.instruct_premise_data[instruct_id] = premise_set
         constant.instruct_type_data.setdefault(instruct_type, set())
         constant.instruct_type_data[instruct_type].add(instruct_id)
         constant.handle_instruct_name_data[instruct_id] = name
-        return return_wrapper
 
     return decorator

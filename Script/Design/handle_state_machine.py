@@ -22,11 +22,6 @@ def add_state_machine(state_machine_id: int):
     """
 
     def decorator(func: FunctionType):
-        @wraps(func)
-        def return_wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
-
-        constant.handle_state_machine_data[state_machine_id] = return_wrapper
-        return return_wrapper
+        constant.handle_state_machine_data[state_machine_id] = func
 
     return decorator

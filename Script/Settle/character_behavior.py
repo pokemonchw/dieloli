@@ -15,7 +15,6 @@ from Script.Core import (
 from Script.Config import game_config, normal_config
 from Script.UI.Moudle import draw
 
-
 _: FunctionType = get_text._
 """ 翻译api """
 window_width: int = normal_config.config_normal.text_width
@@ -26,10 +25,10 @@ cache: game_type.Cache = cache_control.cache
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.MOVE_TO_TARGET_SCENE)
 def handle_move_to_target_scene(
-    character_id: int,
-    add_time: int,
-    change_data: game_type.CharacterStatusChange,
-    now_time: int,
+        character_id: int,
+        add_time: int,
+        change_data: game_type.CharacterStatusChange,
+        now_time: int,
 ):
     """
     移动至目标场景
@@ -60,10 +59,10 @@ def handle_move_to_target_scene(
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.EAT_FOOD)
 def handle_eat_food(
-    character_id: int,
-    add_time: int,
-    change_data: game_type.CharacterStatusChange,
-    now_time: int,
+        character_id: int,
+        add_time: int,
+        change_data: game_type.CharacterStatusChange,
+        now_time: int,
 ):
     """
     食用指定食物
@@ -112,10 +111,10 @@ def handle_eat_food(
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.INTERRUPT_TARGET_ACTIVITY)
 def handle_interrupt_target_activity(
-    character_id: int,
-    add_time: int,
-    change_data: game_type.CharacterStatusChange,
-    now_time: int,
+        character_id: int,
+        add_time: int,
+        change_data: game_type.CharacterStatusChange,
+        now_time: int,
 ):
     """
     打断交互目标活动
@@ -134,8 +133,8 @@ def handle_interrupt_target_activity(
     if target_data.state == constant.CharacterStatus.STATUS_DEAD:
         return
     if (
-        target_data.behavior.behavior_id
-        and target_data.behavior.start_time <= character_data.behavior.start_time
+            target_data.behavior.behavior_id
+            and target_data.behavior.start_time <= character_data.behavior.start_time
     ):
         target_end_time = game_time.get_sub_date(
             target_data.behavior.duration, old_date=target_data.behavior.start_time
@@ -150,10 +149,10 @@ def handle_interrupt_target_activity(
             if not character_id or not character_data.target_character_id:
                 name_draw = draw.NormalDraw()
                 name_draw.text = (
-                    "\n"
-                    + target_data.name
-                    + _("停止了")
-                    + game_config.config_status[old_statue].name
+                        "\n"
+                        + target_data.name
+                        + _("停止了")
+                        + game_config.config_status[old_statue].name
                 )
                 name_draw.width = window_width
                 name_draw.draw()
@@ -166,10 +165,10 @@ def handle_interrupt_target_activity(
     constant.BehaviorEffect.ADD_SMALL_ATTEND_CLASS_EXPERIENCE
 )
 def handle_add_small_attend_class_experience(
-    character_id: int,
-    add_time: int,
-    change_data: game_type.CharacterStatusChange,
-    now_time: int,
+        character_id: int,
+        add_time: int,
+        change_data: game_type.CharacterStatusChange,
+        now_time: int,
 ):
     """
     按学习课程增加少量对应技能经验
@@ -209,10 +208,10 @@ def handle_add_small_attend_class_experience(
     constant.BehaviorEffect.ADD_STUDENTS_COURSE_EXPERIENCE_FOR_IN_CLASSROOM
 )
 def handle_add_student_course_experience_for_in_class_room(
-    character_id: int,
-    add_time: int,
-    change_data: game_type.CharacterStatusChange,
-    now_time: int,
+        character_id: int,
+        add_time: int,
+        change_data: game_type.CharacterStatusChange,
+        now_time: int,
 ):
     """
     按课程增加教室内本班级学生的技能经验
@@ -230,7 +229,7 @@ def handle_add_student_course_experience_for_in_class_room(
     scene_data: game_type.Scene = cache.scene_data[character_data.classroom]
     course = character_data.behavior.course_id
     for now_character in (
-        scene_data.character_list & cache.classroom_students_data[character_data.classroom]
+            scene_data.character_list & cache.classroom_students_data[character_data.classroom]
     ):
         now_character_data: game_type.Character = cache.character_data[now_character]
         if course in game_config.config_course_knowledge_experience_data:

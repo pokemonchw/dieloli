@@ -29,7 +29,7 @@ def handle_have_follow(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.follow != -1 and character_data.follow != character_id:
-        return 500
+        return 1
     return 0
 
 

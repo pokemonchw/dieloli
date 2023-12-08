@@ -13,7 +13,7 @@ def handle_add_small_hit_point(
     now_time: int,
 ):
     """
-    增加少量体力
+    增加少量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -41,7 +41,7 @@ def handle_add_medium_hit_point(
     now_time: int,
 ):
     """
-    增加中量体力
+    增加中量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -69,7 +69,7 @@ def handle_add_large_hit_point(
     now_time: int,
 ):
     """
-    增加大量体力
+    增加大量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -97,7 +97,7 @@ def handle_sub_small_hit_point(
     now_time: int,
 ):
     """
-    减少少量体力
+    减少少量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -126,7 +126,7 @@ def handle_sub_medium_hit_point(
     now_time: int,
 ):
     """
-    减少中量体力
+    减少中量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -155,7 +155,7 @@ def handle_sub_large_hit_point(
     now_time: int,
 ):
     """
-    减少大量体力
+    减少大量健康
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -184,7 +184,7 @@ def handle_add_small_mana_point(
     now_time: int,
 ):
     """
-    增加少量气力
+    增加少量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -212,7 +212,7 @@ def handle_add_medium_mana_point(
     now_time: int,
 ):
     """
-    增加中量气力
+    增加中量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -241,7 +241,7 @@ def handle_add_large_mana_point(
     now_time: int,
 ):
     """
-    增加大量气力
+    增加大量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -270,7 +270,7 @@ def handle_sub_small_mana_point(
     now_time: int,
 ):
     """
-    减少少量气力
+    减少少量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -305,7 +305,7 @@ def handle_sub_medium_mana_point(
     now_time: int,
 ):
     """
-    减少中量气力
+    减少中量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间
@@ -340,7 +340,7 @@ def handle_sub_large_mana_point(
     now_time: int,
 ):
     """
-    减少大量气力
+    减少大量体力
     Keyword arguments:
     character_id -- 角色id
     add_time -- 结算时间

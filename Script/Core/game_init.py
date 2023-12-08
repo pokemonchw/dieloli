@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os
 import traceback
-from Script.Core import flow_handle, io_init, key_listion_event
+from Script.Core import flow_handle, io_init, key_listion_event, main_frame
 from Script.Config import normal_config
 
 # 字符串定义###########################################################
@@ -63,6 +63,7 @@ def run(main_func: object):
         init(main_func)
 
     io_init.run(_init)
+    main_frame.run()
 
 
 def console_log(string: str):

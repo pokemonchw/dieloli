@@ -170,6 +170,21 @@ def count_day_for_datetime(
     return (start_date - end_date).days
 
 
+def to_next_day():
+    """ 游戏时间进入下一天 """
+    sub_time_now(day=1)
+    now_date = datetime.datetime.fromtimestamp(cache.game_time, time_zone)
+    new_date = datetime.datetime(
+        now_date.year,
+        now_date.month,
+        now_date.day,
+        normal_config.config_normal.hour,
+        normal_config.config_normal.minute,
+        tzinfo=time_zone
+    )
+    cache.game_time = new_date.timestamp()
+
+
 def judge_date_big_or_small(time_a: int, time_b: int) -> int:
     """
     比较当前时间是否大于或等于旧时间

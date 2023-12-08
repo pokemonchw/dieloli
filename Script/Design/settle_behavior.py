@@ -29,7 +29,6 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
     status_data = game_type.CharacterStatusChange()
     start_time = now_character_data.behavior.start_time
     add_time = int((now_time - start_time) / 60)
-    behavior_id = now_character_data.behavior.behavior_id
     event_data: game_type.Event = game_config.config_event[event_id]
     for settle in event_data.settle:
         constant.settle_behavior_effect_data[settle](
@@ -70,12 +69,12 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
         self_draw_judge = 0
         if status_data.hit_point and round(status_data.hit_point, 2) != 0:
             now_text_list.append(
-                _("体力:") + text_handle.number_to_symbol_string(round(status_data.hit_point, 2))
+                _("健康:") + text_handle.number_to_symbol_string(round(status_data.hit_point, 2))
             )
             self_draw_judge = 1
         if status_data.mana_point and round(status_data.mana_point, 2) != 0:
             now_text_list.append(
-                _("气力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
+                _("体力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
             )
             self_draw_judge = 1
         if status_data.status:
@@ -286,7 +285,6 @@ def change_character_social_now(
         target_change: game_type.TargetChange = change_data.target_change[target_id]
     target_data: game_type.Character = cache.character_data[target_id]
     old_social = 5
-    new_social = 5
     if character_id in target_data.social_contact_data:
         old_social = target_data.social_contact_data[character_id]
     target_data.favorability.setdefault(character_id, 0)

@@ -124,15 +124,24 @@ class SeeCharacterMainAttrPanel:
         birthday_draw = CharacterBirthdayText(character_id, width)
         sture_info_draw = CharacterStatureInfoText(character_id, width)
         measurement_draw = CharacterMeasurementsText(character_id, width)
-        sex_experience_draw = CharacterSexExperienceText(character_id, width)
-        self.draw_list: List[draw.NormalDraw] = [
-            head_draw,
-            room_draw,
-            birthday_draw,
-            sture_info_draw,
-            measurement_draw,
-            sex_experience_draw,
-        ]
+        if normal_config.config_normal.nsfw:
+            sex_experience_draw = CharacterSexExperienceText(character_id, width)
+            self.draw_list: List[draw.NormalDraw] = [
+                head_draw,
+                room_draw,
+                birthday_draw,
+                sture_info_draw,
+                measurement_draw,
+                sex_experience_draw,
+            ]
+        else:
+            self.draw_list: List[draw.NormalDraw] = [
+                head_draw,
+                room_draw,
+                birthday_draw,
+                sture_info_draw,
+                measurement_draw,
+            ]
         """ 绘制的面板列表 """
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
@@ -167,6 +176,9 @@ class SeeCharacterStatusPanel:
         self.center_status: bool = center_status
         """ 居中绘制状态文本 """
         for status_type in game_config.config_character_state_type_data:
+            if not normal_config.config_normal.nsfw:
+                if not status_type:
+                    continue
             now_draw = CharacterStatusListPanel(
                 character_id, status_type, width, column, center_status
             )
@@ -191,7 +203,7 @@ class CharacterStatusListPanel:
     """
 
     def __init__(
-        self, character_id: int, status_type: int, width: int, column: int, center_status: bool = 1
+            self, character_id: int, status_type: int, width: int, column: int, center_status: bool = 1
     ):
         self.character_id: int = character_id
         """ 要绘制的角色id """
@@ -290,7 +302,7 @@ class CharacterInfoHead:
             "HitPointbar",
             int(character_data.hit_point_max),
             int(character_data.hit_point),
-            _("体力"),
+            _("健康"),
         )
         mp_draw = draw.InfoBarDraw()
         mp_draw.width = width / 2
@@ -299,7 +311,7 @@ class CharacterInfoHead:
             "ManaPointbar",
             int(character_data.mana_point_max),
             int(character_data.mana_point),
-            _("气力"),
+            _("体力"),
         )
         status_text = game_config.config_status[character_data.state].name
         status_draw = draw.CenterDraw()
@@ -350,7 +362,7 @@ class CharacterWearClothingList:
         """ 绘制的对象列表 """
         for clothing_type in game_config.config_clothing_type:
             if clothing_type in character_data.put_on and isinstance(
-                character_data.put_on[clothing_type], UUID
+                    character_data.put_on[clothing_type], UUID
             ):
                 now_id = character_data.put_on[clothing_type]
                 now_clothing: game_type.Clothing = character_data.clothing[clothing_type][now_id]
@@ -869,8 +881,8 @@ class SeeCharacterSocialContact:
             self.draw_list.append(type_draw)
             now_draw = draw.CenterDraw()
             if (
-                social_type in character_data.social_contact
-                and character_data.social_contact[social_type]
+                    social_type in character_data.social_contact
+                    and character_data.social_contact[social_type]
             ):
                 character_list = list(character_data.social_contact[social_type])
                 now_draw = panel.PageHandlePanel(
@@ -1143,8 +1155,8 @@ class GetUpCharacterInfoDraw:
         sex_config = game_config.config_sex_tem[character_data.sex]
         sex_text = _(f"性别:{sex_config.name}")
         age_text = _(f"年龄:{character_data.age}岁")
-        hit_point_text = _(f"体力:({character_data.hit_point}/{character_data.hit_point_max})")
-        mana_point_text = _(f"气力:({character_data.mana_point}/{character_data.mana_point_max})")
+        hit_point_text = _(f"健康:({character_data.hit_point}/{character_data.hit_point_max})")
+        mana_point_text = _(f"体力:({character_data.mana_point}/{character_data.mana_point_max})")
         now_text = (
             f"{id_text} {character_name} {sex_text} {age_text} {hit_point_text} {mana_point_text}"
         )

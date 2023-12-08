@@ -250,7 +250,7 @@ config_stature_description_text: Dict[int, config_def.StatureDescriptionText] = 
 """ 身材描述文本配置数据 """
 config_status: Dict[int, config_def.Status] = {}
 """ 角色状态类型配置数据 """
-config_target: Dict[int, game_type.Target] = {}
+config_target: Dict[str, game_type.Target] = {}
 """ 目标配置数据 """
 config_effect_target_data: Dict[int, Set] = {}
 """ 能达成效果的目标集合 """

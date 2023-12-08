@@ -1,4 +1,5 @@
 from types import FunctionType
+import time
 from Script.Core import cache_control, game_type, get_text
 from Script.Design import update, character, constant, handle_instruct
 from Script.Config import normal_config
@@ -22,7 +23,10 @@ def handle_chat():
     character_data.behavior.duration = 10
     character_data.behavior.behavior_id = constant.Behavior.CHAT
     character_data.state = constant.CharacterStatus.STATUS_CHAT
+    t1 = time.time()
     update.game_update_flow(10)
+    t2 = time.time()
+    print("消耗时间:",t2-t1)
 
 
 @handle_instruct.add_instruct(constant.Instruct.ABUSE, constant.InstructType.DIALOGUE,_("辱骂"),{constant.Premise.HAVE_TARGET})
@@ -34,3 +38,4 @@ def handle_abuse():
     character_data.behavior.behavior_id = constant.Behavior.ABUSE
     character_data.state = constant.CharacterStatus.STATUS_ABUSE
     update.game_update_flow(10)
+

@@ -52,6 +52,19 @@ def handle_is_man(character_id: int) -> int:
     return 0
 
 
+@handle_premise.add_premise(constant.Premise.IS_NOT_MAN)
+def handle_is_not_man(character_id: int) -> int:
+    """
+    校验角色是否是男性
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    return character_data.sex != 0
+
+
 @handle_premise.add_premise(constant.Premise.IS_WOMAN)
 def handle_is_woman(character_id: int) -> int:
     """

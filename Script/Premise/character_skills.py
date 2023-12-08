@@ -15,11 +15,10 @@ def handle_sexual_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[9]
     if 9 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[9])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.SEXUAL_SKILLS_IS_LOW)
@@ -34,9 +33,7 @@ def handle_sexual_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 9 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[9])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -50,11 +47,10 @@ def handle_computer_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[10]
     if 10 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[10])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.COMPUTER_SKILLS_IS_LOW)
@@ -69,9 +65,7 @@ def handle_computer_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 10 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[10])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -85,11 +79,10 @@ def handle_performance_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[11]
     if 11 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[11])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.PERFORMANCE_SKILLS_IS_LOW)
@@ -104,9 +97,7 @@ def handle_performance_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 11 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[11])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -120,11 +111,10 @@ def handle_eloquence_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[12]
     if 12 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[12])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.ELOQUENCE_SKILLS_IS_LOW)
@@ -139,9 +129,7 @@ def handle_eloquence_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 12 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[12])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -155,11 +143,10 @@ def handle_painting_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[13]
     if 13 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[13])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.PAINTING_SKILLS_IS_LOW)
@@ -174,9 +161,7 @@ def handle_painting_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 13 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[13])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -190,11 +175,10 @@ def handle_ethic_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[14]
     if 14 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[14])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.SHOOT_SKILLS_IS_LOW)
@@ -209,9 +193,7 @@ def handle_shoot_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 14 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[14])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -225,11 +207,10 @@ def handle_singing_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[15]
     if 15 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[15])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.SINGING_SKILLS_IS_LOW)
@@ -244,9 +225,7 @@ def handle_singing_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 15 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[15])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -260,11 +239,10 @@ def handle_write_music_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[16]
     if 16 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[16])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.WRITE_MUSIC_SKILLS_IS_LOW)
@@ -279,9 +257,7 @@ def handle_write_music_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 16 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[16])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -295,11 +271,10 @@ def handle_cooking_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[17]
     if 17 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[17])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.COOKING_SKILLS_IS_LOW)
@@ -314,9 +289,7 @@ def handle_cooking_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 17 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[17])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -330,11 +303,10 @@ def handle_dance_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[18]
     if 18 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[18])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.DANCE_SKILLS_IS_LOW)
@@ -349,9 +321,7 @@ def handle_dance_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 18 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[18])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -365,11 +335,10 @@ def handle_tailor_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[19]
     if 19 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[19])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TAILOR_SKILLS_IS_LOW)
@@ -384,9 +353,7 @@ def handle_tailor_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 19 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[19])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -400,11 +367,10 @@ def handle_tactics_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[20]
     if 20 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[20])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TACTICS_SKILLS_IS_LOW)
@@ -419,9 +385,7 @@ def handle_tactics_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 20 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[20])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -435,11 +399,10 @@ def handle_swimming_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[21]
     if 21 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[21])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.SWIMMING_SKILLS_IS_LOW)
@@ -454,9 +417,7 @@ def handle_swimming_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 21 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[21])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -470,11 +431,10 @@ def handle_manufacture_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[22]
     if 22 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[22])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.MANUFACTURE_SKILLS_IS_LOW)
@@ -489,9 +449,7 @@ def handle_manufacture_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 22 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[22])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -505,11 +463,10 @@ def handle_first_aid_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[23]
     if 23 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[23])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.FIRST_AID_SKILLS_IS_LOW)
@@ -524,9 +481,7 @@ def handle_first_aid_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 23 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[23])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -540,11 +495,10 @@ def handle_anatomy_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[24]
     if 24 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[24])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.ANATOMY_SKILLS_IS_LOW)
@@ -559,9 +513,7 @@ def handle_anatomy_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 24 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[24])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -575,11 +527,10 @@ def handle_play_music_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[25]
     if 25 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[25])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.PLAY_MUSIC_SKILLS_IS_LOW)
@@ -594,9 +545,7 @@ def handle_play_music_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 25 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[25])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -610,11 +559,10 @@ def handle_programming_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[26]
     if 26 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[26])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.PROGRAMMING_SKILLS_IS_LOW)
@@ -629,9 +577,7 @@ def handle_programming_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 26 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[26])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -645,11 +591,10 @@ def handle_hacker_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[27]
     if 27 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[27])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HACKER_SKILLS_IS_LOW)
@@ -664,9 +609,7 @@ def handle_hacker_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 27 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[27])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -680,11 +623,10 @@ def handle_write_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[28]
     if 28 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[28])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.WRITE_SKILLS_IS_LOW)
@@ -699,9 +641,7 @@ def handle_write_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 28 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[28])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -715,11 +655,10 @@ def handle_transction_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[29]
     if 29 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[29])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TRANSACTION_SKILLS_IS_LOW)
@@ -734,9 +673,7 @@ def handle_transction_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 29 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[29])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -750,11 +687,10 @@ def handle_ceremony_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[30]
     if 30 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[30])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.CEREMONY_SKILLS_IS_LOW)
@@ -769,9 +705,7 @@ def handle_ceremony_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 30 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[30])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1
 
 
@@ -785,11 +719,10 @@ def handle_motion_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    weight = 1 + character_data.knowledge_interest[31]
     if 31 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[31])
-        return weight * level
-    return weight
+        return level > 5
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.MOTION_SKILLS_IS_LOW)
@@ -804,7 +737,5 @@ def handle_motion_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 31 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[31])
-        if level <= 2:
-            return 1
-        return 0
+        return level < 3
     return 1

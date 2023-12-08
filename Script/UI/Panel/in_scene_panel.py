@@ -12,7 +12,7 @@ from Script.Core import (
     py_cmd,
 )
 from Script.Design import attr_text, map_handle, handle_instruct, handle_premise, constant
-from Script.Config import game_config
+from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -144,6 +144,7 @@ class InScenePanel:
                 character_head_draw_list[0].text += " " + character_head_draw_list[2].text
                 del character_head_draw_list[2]
                 target_head_draw_list = [y for x in target_head_draw.draw_list for y in x]
+
                 target_head_draw_list[0].text += " " + target_head_draw_list[2].text
                 del target_head_draw_list[2]
                 character_info_draw_list = list(
@@ -158,6 +159,69 @@ class InScenePanel:
                 for value in value_tuple:
                     value.draw()
                 line_feed.draw()
+            all_character_figure_draw_list = []
+            line = draw.LineDraw(".", self.width)
+            line.draw()
+            if character_data.target_character_id:
+                character_stature_info = see_character_info_panel.CharacterStatureInfoText(0, self.width)
+                character_measurements_info = see_character_info_panel.CharacterMeasurementsText(0, self.width)
+                character_figure_info_list = character_stature_info.info_list + character_measurements_info.info_list
+                character_figure_info_list.insert(3, "")
+                character_figure_draw = panel.LeftDrawTextListPanel()
+                character_figure_draw.set(character_figure_info_list, self.width / 2 - 1, 4)
+                target_stature_info = see_character_info_panel.CharacterStatureInfoText(
+                    character_data.target_character_id, self.width)
+                target_measurements_info = see_character_info_panel.CharacterMeasurementsText(
+                    character_data.target_character_id, self.width)
+                target_figure_info_list = target_stature_info.info_list + target_measurements_info.info_list
+                target_figure_info_list.insert(3, "")
+                target_figure_draw = panel.LeftDrawTextListPanel()
+                target_figure_draw.set(target_figure_info_list, self.width / 2 - 1, 4)
+                now_line = max(len(character_figure_draw.draw_list), len(target_figure_draw.draw_list))
+                for i in range(now_line):
+                    c_draw = None
+                    if i in range(len(character_figure_draw.draw_list)):
+                        c_draw = character_figure_draw.draw_list[i]
+                    else:
+                        c_draw = draw.NormalDraw()
+                        c_draw.text = " " * int(self.width / 2)
+                        c_draw.width = self.width / 2
+                    t_draw = None
+                    if i in range(len(target_figure_draw.draw_list)):
+                        t_draw = target_figure_draw.draw_list[i]
+                    else:
+                        t_draw = draw.NormalDraw()
+                        t_draw.text = " " * int(self.width / 2)
+                        t_draw.width = self.width / 2
+                    all_character_figure_draw_list.append((c_draw, t_draw))
+            else:
+                character_stature_info = see_character_info_panel.CharacterStatureInfoText(0, self.width)
+                character_measurements_info = see_character_info_panel.CharacterMeasurementsText(0, self.width)
+                character_figure_info_list = character_stature_info.info_list + character_measurements_info.info_list
+                character_figure_info_list.insert(3, "")
+                character_figure_draw = panel.LeftDrawTextListPanel()
+                character_figure_draw.set(character_figure_info_list, self.width, 4)
+                all_character_figure_draw_list = character_figure_draw.draw_list
+            for label in all_character_figure_draw_list:
+                if isinstance(label, tuple):
+                    index = 0
+                    for value in label:
+                        if isinstance(value, list):
+                            for value_draw in value:
+                                value_draw.draw()
+                        elif not index:
+                            value.draw()
+                        if not index:
+                            fix_draw = draw.NormalDraw()
+                            fix_draw.width = 1
+                            fix_draw.text = "|"
+                            fix_draw.draw()
+                            index = 1
+                    line_feed.draw()
+                else:
+                    for value in label:
+                        value.draw()
+                    line_feed.draw()
             character_clothing_draw_list = []
             if character_data.target_character_id:
                 character_clothing_draw = see_character_info_panel.CharacterWearClothingList(
@@ -305,10 +369,15 @@ class SeeInstructPanel:
         line.draw()
         fix_draw = draw.NormalDraw()
         fix_width = int((self.width - int(8 * len(cache.instruct_filter))) / 2)
+        if not normal_config.config_normal.nsfw:
+            fix_width = int((self.width - int(6 * len(cache.instruct_filter))) / 2)
         fix_draw.width = fix_width
         fix_draw.text = " " * fix_width
         fix_draw.draw()
         for now_type in cache.instruct_filter:
+            if not normal_config.config_normal.nsfw:
+                if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
+                    continue
             now_config = game_config.config_instruct_type[now_type]
             if cache.instruct_filter[now_type]:
                 now_button = draw.CenterButton(
@@ -337,6 +406,9 @@ class SeeInstructPanel:
         now_instruct_list = []
         now_premise_data = {}
         for now_type in cache.instruct_filter:
+            if not normal_config.config_normal.nsfw:
+                if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
+                    continue
             if cache.instruct_filter[now_type] and now_type in constant.instruct_type_data:
                 for instruct in constant.instruct_type_data[now_type]:
                     premise_judge = 0
@@ -357,7 +429,7 @@ class SeeInstructPanel:
                     now_instruct_list.append(instruct)
         now_instruct_list.sort()
         rows = 1
-        for i in range(1,len(now_instruct_list)):
+        for i in range(1, len(now_instruct_list)):
             if i * i >= len(now_instruct_list):
                 rows = i
                 break

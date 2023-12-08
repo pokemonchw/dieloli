@@ -6,9 +6,7 @@ import os
 from PySide6.QtWidgets import QApplication, QFileDialog, QWidgetAction
 from PySide6.QtGui import QActionGroup, QKeySequence, QShortcut
 from PySide6.QtCore import QModelIndex
-from PySide6.QtGui import Qt
 from ui.window import Window
-from ui.menu_bar import MenuBar
 from ui.data_list import DataList
 from ui.tools_bar import ToolsBar
 from ui.item_premise_list import ItemPremiseList
@@ -21,7 +19,6 @@ import cache_control
 load_csv.load_config()
 app = QApplication(sys.argv)
 main_window: Window = Window()
-menu_bar: MenuBar = MenuBar()
 tools_bar: ToolsBar = ToolsBar()
 data_list: DataList = DataList()
 item_premise_list: ItemPremiseList = ItemPremiseList()
@@ -32,7 +29,7 @@ cache_control.item_settle_list = item_settle_list
 
 def load_event_data():
     """载入事件文件"""
-    now_file = QFileDialog.getOpenFileName(menu_bar, "选择文件", ".", "*.json")
+    now_file = QFileDialog.getOpenFileName(tools_bar, "选择文件", ".", "*.json")
     file_path = now_file[0]
     if file_path:
         cache_control.now_file_path = file_path
@@ -58,7 +55,7 @@ def load_event_data():
 
 def create_event_data():
     """新建事件文件"""
-    dialog:QFileDialog = QFileDialog(menu_bar)
+    dialog: QFileDialog = QFileDialog(tools_bar)
     dialog.setFileMode(QFileDialog.AnyFile)
     dialog.setNameFilter("Json (*.json)")
     if dialog.exec():
@@ -201,19 +198,18 @@ for v in start_list:
     action_list.append(now_action)
 start_group.triggered.connect(change_start_menu)
 tools_bar.start_menu.addActions(action_list)
-menu_bar.select_event_file_action.triggered.connect(load_event_data)
-menu_bar.new_event_file_action.triggered.connect(create_event_data)
-menu_bar.save_event_action.triggered.connect(save_event_data)
-menu_bar.exit_action.triggered.connect(exit_editor)
-main_window.setMenuBar(menu_bar)
+tools_bar.select_event_file_action.triggered.connect(load_event_data)
+tools_bar.new_event_file_action.triggered.connect(create_event_data)
+tools_bar.save_event_action.triggered.connect(save_event_data)
+tools_bar.exit_action.triggered.connect(exit_editor)
 main_window.add_tool_widget(tools_bar)
-main_window.add_main_widget(item_premise_list,1)
-main_window.add_main_widget(data_list,3)
-main_window.add_main_widget(item_settle_list,1)
+main_window.add_main_widget(item_premise_list, 1)
+main_window.add_main_widget(data_list, 3)
+main_window.add_main_widget(item_settle_list, 1)
 main_window.completed_layout()
-QShortcut(QKeySequence(main_window.tr("Ctrl+O")),main_window,load_event_data)
-QShortcut(QKeySequence(main_window.tr("Ctrl+N")),main_window,create_event_data)
-QShortcut(QKeySequence(main_window.tr("Ctrl+S")),main_window,save_event_data)
-QShortcut(QKeySequence(main_window.tr("Ctrl+Q")),main_window,exit_editor)
+QShortcut(QKeySequence(main_window.tr("Ctrl+O")), main_window, load_event_data)
+QShortcut(QKeySequence(main_window.tr("Ctrl+N")), main_window, create_event_data)
+QShortcut(QKeySequence(main_window.tr("Ctrl+S")), main_window, save_event_data)
+QShortcut(QKeySequence(main_window.tr("Ctrl+Q")), main_window, exit_editor)
 main_window.show()
 app.exec()

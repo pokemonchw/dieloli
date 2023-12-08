@@ -65,6 +65,7 @@ class PremiseMenu(QDialog):
             cache_control.now_target_data[cache_control.now_target_id].premise[item.cid] = 1
         elif item.cid in cache_control.now_target_data[cache_control.now_target_id].premise:
             del cache_control.now_target_data[cache_control.now_target_id].premise[item.cid]
+        cache_control.item_premise_list.update()
 
     def click_item(self, item: TreeItem, column: int):
         """
@@ -82,3 +83,4 @@ class PremiseMenu(QDialog):
         else:
             item.setCheckState(0, Qt.Checked)
             cache_control.now_target_data[cache_control.now_target_id].premise[item.cid] = 1
+        cache_control.item_premise_list.update()

@@ -1,6 +1,6 @@
 import uuid
-from PySide6.QtWidgets import QListWidget,QAbstractItemView,QListWidgetItem, QMenu,QWidgetAction
-from PySide6.QtGui import QFont,QCursor
+from PySide6.QtWidgets import QListWidget, QAbstractItemView, QListWidgetItem, QMenu, QWidgetAction
+from PySide6.QtGui import QFont, QCursor
 from PySide6.QtCore import Qt, QModelIndex
 from ui.premise_menu import PremiseMenu
 from ui.effect_menu import EffectMenu
@@ -13,7 +13,7 @@ class DataList(QListWidget):
 
     def __init__(self):
         """初始化表单主体"""
-        super(DataList,self).__init__()
+        super(DataList, self).__init__()
         self.font = QFont()
         self.font.setPointSize(16)
         self.setFont(self.font)
@@ -37,6 +37,7 @@ class DataList(QListWidget):
         self.edited_item = item
         self.openPersistentEditor(item)
         self.editItem(item)
+        cache_control.item_premise_list.update()
 
     def close_edit(self):
         """关闭编辑"""
@@ -83,6 +84,7 @@ class DataList(QListWidget):
             effect_action.triggered.connect(self.setting_effect)
             menu.addAction(effect_action)
         menu.exec(position)
+        cache_control.item_premise_list.update()
 
     def create_target(self):
         """新增目标"""
@@ -92,6 +94,7 @@ class DataList(QListWidget):
         target.uid = item.uid
         target.state_machine_id = cache_control.now_state_machine_id
         target.text = item.text()
+        target.needs_hierarchy = cache_control.now_needs_hierarchy
         cache_control.now_target_data[target.uid] = target
         self.addItem(item)
         self.close_edit()
@@ -104,6 +107,7 @@ class DataList(QListWidget):
             del cache_control.now_target_data[item.uid]
         self.takeItem(target_index)
         self.close_edit()
+        cache_control.now_target_id = ""
 
     def copy_target(self):
         """复制目标"""
@@ -150,7 +154,13 @@ class DataList(QListWidget):
             now_target: game_type.Target = cache_control.now_target_data[uid]
             if now_target.state_machine_id != cache_control.now_state_machine_id:
                 continue
+            if "needs_hierarchy" not in now_target.__dict__:
+                now_target.needs_hierarchy = 0
+            if now_target.needs_hierarchy != cache_control.now_needs_hierarchy:
+                continue
             item = game_type.ListItem(now_target.text)
             item.uid = uid
             self.addItem(item)
         self.close_edit()
+        cache_control.item_premise_list.update()
+

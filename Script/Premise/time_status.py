@@ -19,7 +19,7 @@ def handle_in_breakfast_time(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = game_time.get_sun_time(character_data.behavior.start_time)
-    return (now_time == 4) * 100
+    return now_time == 4
 
 
 @handle_premise.add_premise(constant.Premise.IN_LUNCH_TIME)
@@ -33,7 +33,7 @@ def handle_in_lunch_time(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = game_time.get_sun_time(character_data.behavior.start_time)
-    return (now_time == 7) * 100
+    return now_time == 7
 
 
 @handle_premise.add_premise(constant.Premise.IN_DINNER_TIME)
@@ -47,7 +47,7 @@ def handle_in_dinner_time(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = game_time.get_sun_time(character_data.behavior.start_time)
-    return (now_time == 9) * 100
+    return now_time == 9
 
 
 @handle_premise.add_premise(constant.Premise.IN_SLEEP_TIME)
@@ -64,9 +64,7 @@ def handle_in_sleep_time(character_id: int) -> int:
         character_data.behavior.start_time, game_time.time_zone
     )
     if now_time.hour >= 22 or now_time.hour <= 4:
-        if now_time.hour >= 22:
-            return (now_time.hour - 21) * 100
-        return now_time.hour * 100 + 200
+        return 1
     return 0
 
 
@@ -84,7 +82,7 @@ def handle_in_siesta_time(character_id: int) -> int:
         character_data.behavior.start_time, game_time.time_zone
     )
     if now_time.hour >= 12 or now_time.hour <= 15:
-        return 100
+        return 1
     return 0
 
 
@@ -103,7 +101,7 @@ def handle_no_in_sleep_time(character_id: int) -> int:
     )
     if now_time.hour >= 22 or now_time.hour <= 4:
         return 0
-    return 100
+    return 1
 
 
 @handle_premise.add_premise(constant.Premise.ATTEND_CLASS_TODAY)
@@ -166,8 +164,7 @@ def handle_approaching_class_time(character_id: int) -> int:
     add_time = next_value - now_value
     if add_time > 30:
         return 0
-    add_time = max(add_time, 1)
-    return 3000 / (add_time * 10)
+    return 1
 
 
 @handle_premise.add_premise(constant.Premise.IN_CLASS_TIME)
@@ -182,7 +179,22 @@ def handle_in_class_time(character_id: int) -> int:
     judge, _unused, _unused, _unused, _unused = character.judge_character_in_class_time(
         character_id
     )
-    return judge * 500
+    return judge
+
+
+@handle_premise.add_premise(constant.Premise.NOT_IN_CLASS_TIME)
+def handle_not_in_class_time(character_id: int) -> int:
+    """
+    校验角色是否不处于上课时间
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    judge, _unused, _unused, _unused, _unused = character.judge_character_in_class_time(
+        character_id
+    )
+    return not judge
 
 
 @handle_premise.add_premise(constant.Premise.TONIGHT_IS_FULL_MOON)

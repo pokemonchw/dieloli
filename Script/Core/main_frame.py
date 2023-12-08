@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import os
-import json
+import math
 import uuid
 import psutil
 import signal
@@ -18,6 +18,8 @@ from tkinter import (
     font,
     Entry,
 )
+import pyautogui
+import screeninfo
 from Script.Core import (
     text_handle,
     game_type,
@@ -43,29 +45,48 @@ def close_window():
 # 显示主框架
 game_name = normal_config.config_normal.game_name
 root = Tk()
-screen_weight = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
-if normal_config.config_normal.window_width + 30 > screen_weight:
-    normal_config.config_normal.window_width = screen_weight - 30
-if normal_config.config_normal.window_hight + 30 > screen_height:
-    normal_config.config_normal.window_hight = screen_height - 30
-now_font_size = (
-    int(normal_config.config_normal.window_width / normal_config.config_normal.text_width) * 2
-)
+now_font_size = 20
+char_width = 16
+char_height = 32
+# 获取所有屏幕的信息
+screens = screeninfo.get_monitors()
+current_screen = None
+x, y = pyautogui.position()
+for screen in screens:
+    if screen.x <= x <= screen.x + screen.width and screen.y <= y <= screen.y + screen.height:
+        current_screen = screen
+screen_width = current_screen.width
+screen_height = current_screen.height
+window_width = normal_config.config_normal.window_width
+window_height = normal_config.config_normal.window_hight
+need_width = window_width
+need_height = window_height
+if window_width > screen_width - 30:
+    need_width = screen_width - 30
+if window_height > screen_height - 30:
+    need_height = screen_height - 30
+while True:
+    test_font = font.Font(family="Sarasa Mono SC",size=now_font_size)
+    char_width = test_font.measure("a")
+    char_height = test_font.metrics("linespace")
+    window_width = int(char_width * 92)
+    window_height = int(char_height* 30)
+    if window_width <= need_width and window_height <= need_height:
+        break
+    now_font_size -= 1
 normal_config.config_normal.font_size = now_font_size
 normal_config.config_normal.order_font_size = now_font_size - 2
-dpi = root.winfo_fpixels("1i")
 root.tk.call("tk", "scaling", 1.0)
 root.title(game_name)
-width = normal_config.config_normal.window_width
+width = window_width + 30
 frm_width = root.winfo_rootx() - root.winfo_x()
 win_width = width + 2 * frm_width
-height = normal_config.config_normal.window_hight
+height = window_height
 titlebar_height = root.winfo_rooty() - root.winfo_y()
 win_height = height + titlebar_height + frm_width
-x = root.winfo_screenwidth() // 2 - win_width // 2
-y = root.winfo_screenheight() // 2 - win_height // 2
-root.geometry("{}x{}+{}+{}".format(width, height, x, y))
+x = current_screen.x + (current_screen.width // 2 - win_width // 2)
+y = current_screen.y + (current_screen.height // 2 - win_height // 2)
+root.geometry("{}x{}+{}+{}".format(win_width, win_height, x, y))
 root.deiconify()
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
@@ -75,6 +96,7 @@ main_frame.grid(column=0, row=0, sticky=(N, W, E, S))
 main_frame.columnconfigure(0, weight=1)
 main_frame.rowconfigure(0, weight=1)
 
+normal_font = font.Font(family="Sarasa Mono SC", size=normal_config.config_normal.font_size)
 # 显示窗口
 textbox = Text(
     main_frame,
@@ -83,6 +105,7 @@ textbox = Text(
     highlightbackground=normal_config.config_normal.background,
     bd=0,
     cursor="",
+    font=normal_font
 )
 textbox.grid(column=0, row=0, sticky=(N, W, E, S))
 
@@ -122,7 +145,7 @@ input_background_box_cursor.config(foreground=order_font_data.foreground)
 
 # 输入栏
 order = StringVar()
-order_font = font.Font(family=order_font_data.font, size=order_font_data.font_size)
+order_font = font.Font(family="Sarasa Mono SC", size=order_font_data.font_size)
 inputbox = Entry(
     input_background_box,
     borderwidth=0,
@@ -137,12 +160,14 @@ inputbox = Entry(
     width=normal_config.config_normal.inputbox_width,
 )
 inputbox.grid(column=1, row=0, sticky=(N, E, S))
-normal_font = font.Font(family=order_font_data.font, size=normal_config.config_normal.font_size)
-
-
 input_event_func = None
 send_order_state = False
 # when false, send 'skip'; when true, send cmd
+def get_widget_font(widget):
+    # 获取小部件的字体属性
+    widget_font = font.nametofont(widget.cget("font"))
+    # 返回字体的实际名称
+    return widget_font.actual()
 
 
 from Script.Core import era_image
@@ -177,8 +202,7 @@ def read_queue():
     从队列中获取在前端显示的信息
     """
     while not main_queue.empty():
-        quene_str = main_queue.get()
-        json_data = json.loads(quene_str)
+        json_data = main_queue.get()
 
         if "clear_cmd" in json_data and json_data["clear_cmd"] == "true":
             clear_screen()
@@ -217,9 +241,9 @@ def read_queue():
             if c["type"] == "image_cmd":
                 io_print_image_cmd(c["text"], c["num"])
             if (
-                "\n" in c["text"]
-                and textbox.get("1.0", END).count("\n")
-                > normal_config.config_normal.text_hight * 10
+                    "\n" in c["text"]
+                    and textbox.get("1.0", END).count("\n")
+                    > normal_config.config_normal.text_hight * 10
             ):
                 textbox.delete("1.0", str(normal_config.config_normal.text_hight * 5) + ".0")
     root.after(1, read_queue)
@@ -315,14 +339,14 @@ def clear_screen():
 
 
 def frame_style_def(
-    style_name: str,
-    foreground: str,
-    background: str,
-    font: str,
-    font_size: int,
-    bold: str,
-    under_line: str,
-    italic: str,
+        style_name: str,
+        foreground: str,
+        background: str,
+        font: str,
+        font_size: int,
+        bold: str,
+        under_line: str,
+        italic: str,
 ):
     """
     定义样式

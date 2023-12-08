@@ -30,6 +30,8 @@ def character_buy_rand_food_at_restaurant(character_id: int):
         random.choice(list(cache.restaurant_data[now_food_id].keys()))
     ]
     character_data.food_bag[now_food.uid] = now_food
+    if character_data.behavior.start_time < cache.game_time:
+        character_data.behavior.start_time += 60
     del cache.restaurant_data[now_food_id][now_food.uid]
 
 
@@ -57,6 +59,8 @@ def character_buy_rand_drinks_at_restaurant(character_id: int):
         random.choice(list(cache.restaurant_data[now_food_id].keys()))
     ]
     character_data.food_bag[now_food.uid] = now_food
+    if character_data.behavior.start_time < cache.game_time:
+        character_data.behavior.start_time += 60
     del cache.restaurant_data[now_food_id][now_food.uid]
 
 
@@ -69,3 +73,5 @@ def character_buy_guitar(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.item.add(4)
+    if character_data.behavior.start_time < cache.game_time:
+        character_data.behavior.start_time += 60

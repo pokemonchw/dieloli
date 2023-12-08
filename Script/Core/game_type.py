@@ -1,5 +1,6 @@
 from uuid import UUID
 from typing import List, Dict, Set
+from hnswlib import Index
 
 
 class FlowContorl:
@@ -80,7 +81,6 @@ class Chest:
         """ 当前胸围差 """
         self.sub_chest: int = 0
         """ 每日胸围差增量 """
-
 
 
 class Food:
@@ -208,6 +208,8 @@ class NormalConfig:
     """ 字体大小 """
     order_font_size: int
     """ 输入框字体大小 """
+    nsfw: int
+    """ nsfw内容开关 """
 
 
 class Clothing:
@@ -250,10 +252,10 @@ class Height:
         """ 每日身高增量 """
         self.expect_age: int = 0
         """ 预期结束身高增长年龄 """
-        self.development_age: int = 0
-        """ 预期发育期结束时间 """
         self.expect_height: float = 0
         """ 预期的最终身高 """
+        self.birth_height: float = 0
+        """ 出生时身高 """
 
 
 class TemporaryStatus:
@@ -396,8 +398,6 @@ class Character:
         """ 角色预期寿命 """
         self.intimate: int = 0
         """ 角色与玩家的亲密度 """
-        self.graces: int = 0
-        """ 角色的魅力值 """
         self.hit_point_max: int = 0
         """ 角色最大HP """
         self.hit_point: int = 0
@@ -412,8 +412,6 @@ class Character:
         """ 角色的性等级描述数据 """
         self.state: int = 0
         """ 角色当前状态 """
-        self.engraving: Dict[str, int] = {}
-        """ 角色的刻印数据 """
         self.clothing: Dict[int, Dict[UUID, Clothing]] = {}
         """
         角色拥有的服装数据
@@ -512,12 +510,16 @@ class Character:
         """ 收藏的角色列表 """
         self.last_hunger_time: int = 0
         """ 最后一次结算饥饿的时间戳 """
+        self.extreme_exhaustion_time: int = 0
+        """ 角色进入极度疲惫状态的时间戳 """
         self.cause_of_death: int = -1
         """ 角色死因 """
         self.follow: int = -1
         """ 当前跟随目标 """
         self.ai_target: UUID = 0
         """ 当前行为目标 """
+        self.premise_data: Dict[str, float] = {}
+        """ 角色当前的前提权重列表 """
 
 
 class TeacherTimeTable:
@@ -685,6 +687,22 @@ class Cache:
         服装商店内的服装数据
         服装类型id:服装唯一id:服装对象
         """
+        self.similar_character_searcher: Index = None
+        """ 相似角色检索器 """
+        self.character_vector_data: list = []
+        """ 角色向量表 """
+        self.character_target_data: Dict[int, ExecuteTarget] = {}
+        """ 角色正在进行的目标列表 """
+        self.character_target_score_data: Dict[int, int] = {}
+        """ 其他角色对这个角色的目标的评分列表 """
+        self.character_premise_target_data: Dict[str, Dict[str, int]] = {}
+        """ 角色在查找目标时，为了满足前提而选择的目标列表 {前提id:{目标id:选择该目标的人数}} """
+        self.settle_time_character_data: Dict[int, Set] = {}
+        """ 在指定时间要进行结算的角色列表 时间戳:角色id集合 """
+        self.character_settle_time_data: Dict[int, int] = {}
+        """ 角色的结算时间表 角色id:结算时间 """
+        self.no_character_scene_set: Set = set()
+        """ 没有角色的空场景集合 """
 
 
 class TargetChange:
@@ -756,7 +774,7 @@ class Target:
     """目标数据结构体"""
 
     def __init__(self):
-        """初始化口上对象"""
+        """初始化目标对象"""
         self.uid: str = ""
         """ 目标唯一id """
         self.text: str = ""
@@ -767,3 +785,20 @@ class Target:
         """ 目标的前提集合 """
         self.effect: dict = {}
         """ 目标的效果集合 """
+        self.needs_hierarchy: int = 0
+        """ 马斯洛需求层次 """
+
+
+class ExecuteTarget:
+    """ 执行的目标数据结构体 """
+
+    def __init__(self):
+        """ 初始化目标对象 """
+        self.uid: str = ""
+        """ 目标的唯一id """
+        self.affiliation: str = ""
+        """ 所属的目标id """
+        self.weight: float = 0
+        """ 目标的权重 """
+        self.score: int = 0
+        """ 近似检索到的角色对这个目标的评分，若目标可达则+1，不可达则-1 """

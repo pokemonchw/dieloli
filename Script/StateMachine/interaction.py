@@ -26,6 +26,36 @@ def character_chat_rand_character(character_id: int):
     character_data.state = constant.CharacterStatus.STATUS_CHAT
 
 
+@handle_state_machine.add_state_machine(constant.StateMachine.CHAT_LIKE_CHARACTER)
+def character_chat_like_character(character_id: int):
+    """
+    角色和场景内自己喜欢的角色聊天
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_set = scene_data.character_list.copy()
+    character_set.remove(character_id)
+    like_character_set = set()
+    character_data.social_contact.setdefault(4, set())
+    character_data.social_contact.setdefault(5, set())
+    for i in {4, 5}:
+        for c in character_data.social_contact[i]:
+            if c in character_set:
+                like_character_set.add(c)
+    if not like_character_set:
+        return
+    like_character_list = list(like_character_set)
+    target_id = random.choice(like_character_list)
+    character_data.behavior.behavior_id = constant.Behavior.CHAT
+    character_data.behavior.duration = 10
+    character_data.target_character_id = target_id
+    character_data.state = constant.CharacterStatus.STATUS_CHAT
+
+
+
 @handle_state_machine.add_state_machine(constant.StateMachine.SING_RAND_CHARACTER)
 def character_singing_to_rand_character(character_id: int):
     """

@@ -16,6 +16,8 @@ class Target:
         """ 目标的前提集合 """
         self.effect: dict = {}
         """ 目标的效果集合 """
+        self.needs_hierarchy: int = 0
+        """ 马斯洛需求层次 """
 
 
 class TreeItem(QTreeWidgetItem):
