@@ -1,7 +1,7 @@
 from types import FunctionType
 import datetime
 from Script.Core import cache_control, game_type, get_text
-from Script.Design import update, character, clothing, constant, handle_instruct, game_time, map_handle, character_handle, character_behavior
+from Script.Design import update, character, clothing, constant, handle_instruct, game_time, map_handle, character_handle, character_behavior, attr_calculation
 from Script.Config import normal_config
 from Script.UI.Moudle import draw
 
@@ -45,8 +45,14 @@ def handle_sleep():
         character_dormitory = map_handle.get_map_system_path_for_str(character_dormitory)
         map_handle.character_move_scene(character_position, character_dormitory, character_id)
         # 增加角色身高
-        if character_data.height.now_height < character_data.height.expect_height:
-            character_data.height.now_height += character_data.height.growth_height
+        _, growth_height = attr_calculation.predict_height(
+            character_data.height.birth_height,
+            character_data.height.expect_height,
+            character_data.age,
+            character_data.height.expect_age,
+            character_data.sex
+        )
+        character_data.height.now_height += growth_height
         # 初始化角色状态
         character_data.state = constant.CharacterStatus.STATUS_ARDER
         for status_id in character_data.status:

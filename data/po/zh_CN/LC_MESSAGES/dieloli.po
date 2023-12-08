@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-07 16:31+0800\n"
+"POT-Creation-Date: 2023-12-08 11:06+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,11 +301,11 @@ msgstr ""
 msgid "脱下自身衣物"
 msgstr ""
 
-#: Script/Design/instruct/dialogue.py:16
+#: Script/Design/instruct/dialogue.py:17
 msgid "闲聊"
 msgstr ""
 
-#: Script/Design/instruct/dialogue.py:28
+#: Script/Design/instruct/dialogue.py:32
 msgid "辱骂"
 msgstr ""
 

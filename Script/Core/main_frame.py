@@ -86,7 +86,7 @@ titlebar_height = root.winfo_rooty() - root.winfo_y()
 win_height = height + titlebar_height + frm_width
 x = current_screen.x + (current_screen.width // 2 - win_width // 2)
 y = current_screen.y + (current_screen.height // 2 - win_height // 2)
-root.geometry("{}x{}+{}+{}".format(width, height, x, y))
+root.geometry("{}x{}+{}+{}".format(win_width, win_height, x, y))
 root.deiconify()
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)

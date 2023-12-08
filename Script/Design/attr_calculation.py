@@ -1,5 +1,6 @@
 import random
 import datetime
+import numpy
 from Script.Core import (
     cache_control,
     value_handle,
@@ -50,23 +51,21 @@ def get_height(tem_name: int, age: int) -> game_type.Height:
     """
     tem_data = game_config.config_height_tem_sex_data[tem_name]
     initial_height = value_handle.get_gauss_rand(tem_data.min_value, tem_data.max_value)
+    expect_age = 0
+    expect_height = 0
     if tem_name in {0, 3}:
-        expect_age = random.randint(18, 22)
+        expect_age = random.randint(16,20)
         expect_height = initial_height / 0.2949
     else:
         expect_age = random.randint(13, 17)
         expect_height = initial_height / 0.3109
-    development_age = random.randint(4, 6)
-    growth_height_data = get_growth_height(age, expect_height, development_age, expect_age)
-    growth_height = growth_height_data["GrowthHeight"]
-    now_height = growth_height_data["NowHeight"]
-    now_height = min(now_height, expect_height)
+    current_height, daily_growth = predict_height(initial_height, expect_height, age, expect_age,tem_name)
     height_data = game_type.Height()
-    height_data.now_height = now_height
-    height_data.growth_height = growth_height
+    height_data.now_height = current_height
+    height_data.growth_height = daily_growth
     height_data.expect_age = expect_age
-    height_data.development_age = development_age
     height_data.expect_height = expect_height
+    height_data.birth_height = initial_height
     return height_data
 
 
@@ -142,27 +141,71 @@ def get_rand_npc_birthday(age: int) -> int:
     return birthday
 
 
-def get_growth_height(
-        now_age: int, expect_height: float, development_age: int, expect_age: int
-) -> dict:
+def logistic_growth(t: float, k: float, r: float, t0: float) -> float:
     """
-    计算每日身高增长量
+    逻辑生长函数，用于模拟身高增长。
+
+    :param t: 当前年龄。
+    :param k: 生长的最大值。
+    :param r: 生长速率。
+    :param t0: 生长曲线的中点时间。
+    :return: 在年龄 t 时的身高。
+    """
+    return k / (1 + numpy.exp(-r * (t - t0)))
+
+def segmented_growth(age: float, birth_height: float, k: float, r1: float, t1: float, r2: float, t2: float, r3: float, t3: float) -> float:
+    """
+    分段生长函数，用于模拟不同生长阶段的身高增长。
     Keyword arguments:
-    now_age -- 现在的年龄
-    expect_height -- 预期最终身高
-    development_age -- 结束发育期时的年龄
-    except_age -- 结束身高增长时的年龄
+    age -- 当前年龄
+    k -- 预期身高
+    r1 -- 婴儿时期生长速率
+    t1 -- 婴儿时期结束时间
+    r2 -- 青春期生长速率
+    t2 -- 青春期结束时间
+    r3 -- 青春期结束后生长速率
+    t3 -- 结束生长时间
+    Return arguments:
+    float -- 当前身高
     """
-    if now_age > development_age:
-        now_height = expect_height / 2
-        judge_age = expect_age - development_age
-        growth_height = now_height / (judge_age * 365)
-        now_height = now_height + (now_age - development_age) * 365 * growth_height
+    if age < t1:
+        return birth_height + logistic_growth(age, k/2 - birth_height, r1, t1/2)
+    elif age < t2:
+        return birth_height + logistic_growth(t1, k/2 - birth_height, r1, t1/2) + logistic_growth(age - t1, k/4, r2, (t2-t1)/2)
+    elif age < t3:
+        return birth_height + logistic_growth(t1, k/2 - birth_height, r1, t1/2) + logistic_growth(t2-t1, k/4, r2, (t2-t1)/2) + logistic_growth(age - t2, k/4, r3, (t3-t2)/2)
     else:
-        judge_height = expect_height / 2
-        growth_height = judge_height / (now_age * 365)
-        now_height = now_age * 365 * growth_height
-    return {"GrowthHeight": growth_height, "NowHeight": now_height}
+        return k
+
+def predict_height(birth_height: float, final_height: float, current_age: float, age_at_max_height: float, gender: int) -> (float, float):
+    """
+    预测当前身高和每日增长率。
+    Keyword arguments:
+    birth_height -- 当前身高
+    final_height -- 预期身高
+    current_age -- 当前年龄
+    age_at_max_height -- 达到最大身高的年龄
+    gender -- 性别
+    Return arguments:
+    float -- 当前身高
+    float -- 每日身高增量
+    """
+    k = final_height  # 最大身高
+    # 根据性别调整婴幼儿期和青春期的参数
+    if gender in {0, 3}:
+        r1, t1 = 0.8, 2  # 男性婴幼儿期
+        t2_start, t2_end = 12, age_at_max_height  # 男性青春期
+    else:
+        r1, t1 = 0.9, 2  # 女性婴幼儿期
+        t2_start, t2_end = 10, age_at_max_height - 1  # 女性青春期
+    r2, t2 = 0.4, (t2_start + t2_end) / 2
+    r3 = 1.2 / (t2_end - t2_start)
+    current_height = segmented_growth(current_age, birth_height, k, r1, t1, r2, t2, r3, t2_end)
+    # 计算每日增长率
+    delta = 0.001
+    future_height = segmented_growth(current_age + delta, birth_height, k, r1, t1, r2, t2, r3, t2_end)
+    daily_growth = (future_height - current_height) / delta
+    return current_height, daily_growth / 365.25
 
 
 def get_bmi(tem_name: int) -> float:

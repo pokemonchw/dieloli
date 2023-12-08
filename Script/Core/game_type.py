@@ -252,10 +252,10 @@ class Height:
         """ 每日身高增量 """
         self.expect_age: int = 0
         """ 预期结束身高增长年龄 """
-        self.development_age: int = 0
-        """ 预期发育期结束时间 """
         self.expect_height: float = 0
         """ 预期的最终身高 """
+        self.birth_height: float = 0
+        """ 出生时身高 """
 
 
 class TemporaryStatus:

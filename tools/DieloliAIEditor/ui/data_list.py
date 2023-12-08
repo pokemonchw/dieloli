@@ -163,3 +163,4 @@ class DataList(QListWidget):
             self.addItem(item)
         self.close_edit()
         cache_control.item_premise_list.update()
+
