@@ -3,6 +3,7 @@ import bisect
 import itertools
 import math
 import numpy
+import scipy
 from typing import Dict, List
 
 
@@ -109,8 +110,32 @@ def get_gauss_rand(min_value: int, max_value: int) -> float:
     int -- 获取的随机值
     """
     mu = (min_value + max_value) / 2
-    single = mu - min_value
+    single = (mu - min_value) / 6
     value = numpy.random.normal(mu, single)
     value = numpy.clip(value, min_value, max_value)
     return value
 
+
+def get_triangular_rand(min_value: int, max_value: int) -> float:
+    """
+    通过三角分布获取两个值之间的随机值
+    Keyword arguments:
+    min_value -- 最小值
+    max_value -- 最大值
+    Return arguments:
+    int -- 获取的随机值
+    """
+    return scipy.stats.triang.rvs(0.5, loc=min_value, scale=max_value-min_value, size=1)[0]
+
+
+def get_beta_rand(min_value: int, max_value: int) -> float:
+    """
+    通过贝塔分布获取两个值之间的随机值
+    Keyword arguments:
+    min_value -- 最小值
+    max_value -- 最大值
+    Return arguments:
+    int -- 获取的随机值
+    """
+    beta_sample = scipy.stats.beta.rvs(22.900000000000055, 22.900000000000055, size=1)[0]
+    return min_value + beta_sample * (max_value - min_value)

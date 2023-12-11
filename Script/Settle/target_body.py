@@ -742,7 +742,7 @@ def handle_target_add_small_tired(character_id: int, add_time: int, change_data:
         return
     target_data.status.setdefault(25,0)
     now_value = target_data.status[25]
-    now_add_value = (1 + now_value / 100) * add_time
+    now_add_value = (1 + now_value / 100) * add_time / 10
     target_data.status[25] += now_add_value
     change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
     target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
@@ -770,7 +770,7 @@ def handle_target_add_medium_tired(character_id: int, add_time: int, change_data
         return
     target_data.status.setdefault(25,0)
     now_value = target_data.status[25]
-    now_add_value = (1 + now_value / 50) * add_time
+    now_add_value = (1 + now_value / 50) * add_time / 10
     target_data.status[25] += now_add_value
     change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
     target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
@@ -798,7 +798,7 @@ def handle_target_add_large_tired(character_id: int, add_time: int, change_data:
         return
     target_data.status.setdefault(25,0)
     now_value = target_data.status[25]
-    now_add_value = (1 + now_value / 10) * add_time
+    now_add_value = (1 + now_value / 10) * add_time / 10
     target_data.status[25] += now_add_value
     change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
     target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
@@ -826,7 +826,7 @@ def handle_target_sub_small_tired(character_id: int, add_time: int, change_data:
         return
     target_data.status.setdefault(25,0)
     now_value = target_data.status[25]
-    now_sub_value = (1 + now_value / 100) * add_time
+    now_sub_value = (1 + now_value / 100) * add_time / 10
     target_data.status[25] -= now_sub_value
     target_data.status[25] = max(target_data.status[25],0)
     change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
@@ -855,7 +855,7 @@ def handle_target_sub_medium_tired(character_id: int, add_time: int, change_data
         return
     target_data.status.setdefault(25,0)
     now_value = target_data.status[25]
-    now_sub_value = (1 + now_value / 50) * add_time
+    now_sub_value = (1 + now_value / 50) * add_time / 10
     target_data.status[25] -= now_sub_value
     target_data.status[25] = max(target_data.status[25],0)
     change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
@@ -884,7 +884,7 @@ def handle_target_sub_large_tired(character_id: int, add_time: int, change_data:
         return
     target_data.status.setdefault(25,0)
     now_value = target_data.status[25]
-    now_sub_value = (1 + now_value / 10) * add_time
+    now_sub_value = (1 + now_value / 10) * add_time / 10
     target_data.status[25] -= now_sub_value
     target_data.status[25] = max(target_data.status[25],0)
     change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())

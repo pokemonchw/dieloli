@@ -666,7 +666,7 @@ def handle_add_small_tired(character_id: int, add_time: int, change_data: game_t
         return
     character_data.status.setdefault(25,0)
     now_value = character_data.status[25]
-    now_add_value = (1 + now_value / 100) * add_time
+    now_add_value = (1 + now_value / 100) * add_time / 10
     character_data.status[25] += now_add_value
     change_data.status.setdefault(25,0)
     change_data.status[25] += now_add_value
@@ -689,7 +689,7 @@ def handle_add_medium_tired(character_id: int, add_time: int, change_data: game_
         return
     character_data.status.setdefault(25,0)
     now_value = character_data.status[25]
-    now_add_value = (1 + now_value / 50) * add_time
+    now_add_value = (1 + now_value / 50) * add_time / 10
     character_data.status[25] += now_add_value
     change_data.status.setdefault(25,0)
     change_data.status[25] += now_add_value
@@ -712,7 +712,7 @@ def handle_add_large_tired(character_id: int, add_time: int, change_data: game_t
         return
     character_data.status.setdefault(25,0)
     now_value = character_data.status[25]
-    now_add_value = (1 + now_value / 50) * add_time
+    now_add_value = (1 + now_value / 10) * add_time / 10
     character_data.status[25] += now_add_value
     change_data.status.setdefault(25,0)
     change_data.status[25] += now_add_value
@@ -735,7 +735,7 @@ def handle_sub_small_tired(character_id: int, add_time: int, change_data: game_t
         return
     character_data.status.setdefault(25,0)
     now_value = character_data.status[25]
-    now_sub_value = (1 + now_value / 100) * add_time
+    now_sub_value = (1 + now_value / 100) * add_time / 10
     character_data.status[25] -= now_sub_value
     character_data.status[25] = max(character_data.status[25],0)
     change_data.status.setdefault(25,0)
@@ -759,7 +759,7 @@ def handle_sub_medium_tired(character_id: int, add_time: int, change_data: game_
         return
     character_data.status.setdefault(25,0)
     now_value = character_data.status[25]
-    now_sub_value = (1 + now_value / 50) * add_time
+    now_sub_value = (1 + now_value / 50) * add_time / 10
     character_data.status[25] -= now_sub_value
     character_data.status[25] = max(character_data.status[25],0)
     change_data.status.setdefault(25,0)
@@ -783,7 +783,7 @@ def handle_sub_large_tired(character_id: int, add_time: int, change_data: game_t
         return
     character_data.status.setdefault(25,0)
     now_value = character_data.status[25]
-    now_sub_value = (1 + now_value / 50) * add_time
+    now_sub_value = (1 + now_value / 10) * add_time / 10
     character_data.status[25] -= now_sub_value
     character_data.status[25] = max(character_data.status[25],0)
     change_data.status.setdefault(25,0)

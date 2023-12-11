@@ -1,24 +1,11 @@
-import random
 import time
+import random
 from uuid import UUID
 from concurrent.futures import ThreadPoolExecutor
 from types import FunctionType
-from typing import Dict, Set
-from Script.Core import (
-    cache_control,
-    game_type,
-    value_handle,
-    get_text,
-)
-from Script.Design import (
-    constant,
-    settle_behavior,
-    game_time,
-    handle_premise,
-    event,
-    cooking,
-    character_handle,
-)
+from typing import Dict, Set, List
+from Script.Core import cache_control, game_type, value_handle, get_text
+from Script.Design import character_handle, constant, game_time, settle_behavior, handle_premise, event, cooking
 from Script.Config import game_config, normal_config
 from Script.UI.Moudle import draw
 
@@ -40,63 +27,74 @@ def init_character_behavior():
     cache.character_target_data = {}
     cache.character_target_score_data = {}
     while 1:
-        if len(cache.over_behavior_character) >= len(cache.character_data):
-            break
-        for character_id in range(len(cache.character_data) - 1, -1, -1):
-            if character_id in cache.over_behavior_character:
+        now_status_data = {}
+        now_status_data[0] = set()
+        now_status_data[1] = set()
+        now_status_data[2] = set()
+        for i in cache.character_data:
+            if not i:
                 continue
-            if not character_id:
-                if len(cache.over_behavior_character) < len(cache.character_data) - 1:
-                    continue
-            character_behavior(character_id, cache.game_time)
-    cache.over_behavior_character = set()
-
-
-def update_cafeteria():
-    """刷新食堂内食物"""
-    food_judge = 1
-    for food_type in cache.restaurant_data:
-        food_list: Dict[UUID, game_type.Food] = cache.restaurant_data[food_type]
-        for food_id in food_list:
-            food: game_type.Food = food_list[food_id]
-            if food.eat:
-                food_judge = 0
+            now_judge = check_character_status_judge(i)
+            now_status_data[now_judge].add(i)
+        for i in cache.character_data:
+            cache.character_data[i].premise_data = {}
+            if not i:
+                continue
+            status = check_character_status_judge(i)
+            now_status_data[status].add(i)
+        if len(now_status_data[1]) == len(cache.character_data) - 1:
             break
-        if not food_judge:
-            break
+        for i in now_status_data[0]:
+            character_target_judge(i, cache.game_time)
+        for i in now_status_data[2]:
+            judge_character_status(i, cache.game_time)
+        for i in cache.character_data:
+            if not i:
+                continue
+            judge_character_dead(i)
+    judge_character_status(0, cache.game_time)
+    judge_character_dead(0)
 
 
-def character_behavior(character_id: int, now_time: int):
+def check_character_status_judge(character_id: int) -> int:
     """
-    角色行为控制
+    验证角色状态
     Keyword arguments:
     character_id -- 角色id
-    now_time -- 指定时间戳
+    Return arguments:
+    int -- (0:需要查找目标,1:跳过本轮计算,2:需要进行结算)
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.premise_data = {}
-    if character_data.dead:
-        return
-    if not character_data.behavior.start_time:
-        character_data.behavior.start_time = now_time
+    # 当角色死亡时跳过结算
+    if character_data.state == constant.CharacterStatus.STATUS_DEAD:
+        return 1
+    # 当角色状态为闲置时需要查找目标
     if character_data.state == constant.CharacterStatus.STATUS_ARDER:
-        if character_id:
-            character_target_judge(character_id, now_time)
-        else:
-            cache.over_behavior_character.add(0)
-    else:
-        status_judge = judge_character_status(character_id, now_time)
-        if status_judge:
-            cache.over_behavior_character.add(character_id)
-    judge_character_dead(character_id)
+        if character_data.behavior.start_time == 0:
+            character_data.behavior.start_time = cache.game_time
+        if character_data.behavior.start_time < cache.game_time:
+            return 0
+        return 1
+    # 当行动所需时间为0时立刻进行结算
+    if character_data.behavior.duration == 0:
+        return 2
+    start_time = character_data.behavior.start_time
+    end_time = start_time + 60 * character_data.behavior.duration
+    # 验证结算时间
+    time_judge = game_time.judge_date_big_or_small(cache.game_time, end_time)
+    if time_judge == 0:
+        return 1
+    return 2
 
 
-def character_target_judge(character_id: int, now_time: int):
+def character_target_judge(character_id: int, now_time: int) -> game_type.Character:
     """
     查询角色可用目标活动并执行
     Keyword arguments:
     character_id -- 角色id
     now_time -- 指定时间戳
+    Return arguments:
+    game_type.Character -- 更新后的角色数据
     """
     target_weight_data = {}
     # 取出角色数据
@@ -183,6 +181,7 @@ def character_target_judge(character_id: int, now_time: int):
         character_data.ai_target = 0
     else:
         cache.character_data[character_id].behavior.start_time += 60
+    return cache.character_data[character_id]
 
 
 def judge_character_dead(character_id: int):
@@ -193,6 +192,12 @@ def judge_character_dead(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
+        character_data.state = 13
+        if character_id not in cache.over_behavior_character:
+            cache.over_behavior_character.add(character_id)
+        return
+    if character_data.state == 13:
+        character_data.dead = 1
         if character_id not in cache.over_behavior_character:
             cache.over_behavior_character.add(character_id)
         return
@@ -240,7 +245,6 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     start_time = character_data.behavior.start_time
     end_time = start_time + 60 * character_data.behavior.duration
-    time_judge = game_time.judge_date_big_or_small(now_time, end_time)
     add_time = (end_time - start_time) / 60
     if not add_time:
         character_data.behavior = game_type.Behavior()
@@ -248,6 +252,8 @@ def judge_character_status(character_id: int, now_time: int) -> int:
         character_data.state = constant.CharacterStatus.STATUS_ARDER
         return 1
     # 增加饥饿和口渴
+    if end_time < now_time:
+        now_time = end_time
     last_hunger_time = start_time
     if character_data.last_hunger_time:
         last_hunger_time = character_data.last_hunger_time
@@ -271,42 +277,40 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     line_feed = draw.NormalDraw()
     line_feed.text = "\n"
     while 1:
-        if time_judge:
-            character_data.behavior.temporary_status = game_type.TemporaryStatus()
-            event_draw = event.handle_event(character_id, 0)
-            if event_draw == None:
-                break
-            settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, event_draw.event_id)
+        character_data.behavior.temporary_status = game_type.TemporaryStatus()
+        event_draw = event.handle_event(character_id, 0)
+        if event_draw == None:
             character_data.behavior.temporary_status = game_type.TemporaryStatus()
             character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
             character_data.behavior.move_target = []
             character_data.behavior.move_src = []
-            climax_draw = settlement_pleasant_sensation(character_id)
-            if (not character_id) or (player_data.target_character_id == character_id):
-                if event_draw.text != "":
-                    event_draw.draw()
-                if settle_output is not None:
-                    if settle_output[1]:
-                        name_draw = draw.NormalDraw()
-                        name_draw.text = "\n" + character_data.name + ": "
-                        name_draw.width = window_width
-                        name_draw.draw()
-                    settle_output[0].draw()
-                    line_feed.draw()
-                if climax_draw is not None:
-                    if not character_id or not character_data.target_character_id:
-                        climax_draw.draw()
-                        line_feed.draw()
-        break
-    if time_judge:
-        character_data.state = constant.CharacterStatus.STATUS_ARDER
-    if time_judge == 1:
-        character_data.behavior.start_time = end_time
-        return 0
-    if time_judge == 2:
+            character_data.behavior.start_time = now_time
+            character_data.state = constant.CharacterStatus.STATUS_ARDER
+            break
+        settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, event_draw.event_id)
+        character_data.behavior.temporary_status = game_type.TemporaryStatus()
+        character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
+        character_data.behavior.move_target = []
+        character_data.behavior.move_src = []
         character_data.behavior.start_time = now_time
-        return 0
-    return 1
+        character_data.state = constant.CharacterStatus.STATUS_ARDER
+        climax_draw = settlement_pleasant_sensation(character_id)
+        if (not character_id) or (player_data.target_character_id == character_id):
+            if event_draw.text != "":
+                event_draw.draw()
+            if settle_output is not None:
+                if settle_output[1]:
+                    name_draw = draw.NormalDraw()
+                    name_draw.text = "\n" + character_data.name + ": "
+                    name_draw.width = window_width
+                    name_draw.draw()
+                settle_output[0].draw()
+                line_feed.draw()
+            if climax_draw is not None:
+                if not character_id or not character_data.target_character_id:
+                    climax_draw.draw()
+                    line_feed.draw()
+        break
 
 
 def search_target(

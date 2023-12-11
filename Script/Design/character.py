@@ -53,7 +53,7 @@ def init_attr(character_id: int):
         character_data.clothing_data[clothing_data.tem_id].add(clothing_data.uid)
     chest_tem_config = game_config.config_chest[character_data.chest_tem]
     if chest_tem_config.weight_fix:
-        fix_weight = value_handle.get_gauss_rand(
+        fix_weight = value_handle.get_beta_rand(
             chest_tem_config.weight_fix - 0.5, chest_tem_config.weight_fix + 0.5
         )
         character_data.weight += fix_weight

@@ -19,6 +19,8 @@ def character_chat_rand_character(character_id: int):
     character_set = scene_data.character_list.copy()
     character_set.remove(character_id)
     character_list = list(character_set)
+    if not character_list:
+        return
     target_id = random.choice(character_list)
     character_data.behavior.behavior_id = constant.Behavior.CHAT
     character_data.behavior.duration = 10
