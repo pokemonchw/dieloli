@@ -72,13 +72,13 @@ def handle_sleep():
         character_data.last_hunger_time = 0
         character_data.extreme_exhaustion_time = 0
         # 刷新角色体重和体脂率
-        day_add_calories = character_data.day_add_calories
+        day_add_calories = character_data.day_add_calories - 2880
         day_sub_calories = character_data.day_use_mana_point / 5
         now_weight = character_data.weight
         now_bodyfat = character_data.bodyfat
         change_calories = day_add_calories - day_sub_calories
         change_weight = change_calories / 10
-        new_weight = now_weight + change_weight
+        new_weight = now_weight + change_weight / 1000
         character_data.weight = new_weight
         change_proportion = new_weight / now_weight
         new_bodyfat = now_bodyfat * change_proportion
