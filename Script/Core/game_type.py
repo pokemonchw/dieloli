@@ -406,6 +406,10 @@ class Character:
         """ 角色最大MP """
         self.mana_point: int = 0
         """ 角色当前MP """
+        self.day_use_mana_point: int = 0
+        """ 今日消耗体力 """
+        self.day_add_calories: int = 0
+        """ 今日增加的热量 """
         self.sex_experience: Dict[int, int] = {}
         """ 角色的性经验数据 """
         self.sex_grade: Dict[str, str] = {}

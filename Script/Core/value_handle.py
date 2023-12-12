@@ -100,42 +100,36 @@ def list_of_groups(init_list: list, children_list_len: int) -> List[List[any]]:
     return end_list
 
 
-def get_gauss_rand(min_value: int, max_value: int) -> float:
+def linear_decreasing_distribution(start: float, end: float) -> float:
     """
-    通过正态分布获取两个值之间的随机值
+    生成线性递减分布的随机数
+    根据线性递减分布，在指定的开始和结束值之间生成一个随机数
+    Keyword arguments:
+    start -- 分布的起始值
+    end -- 分布的结束值
+    Return arguments:
+    float -- 按照线性递减分布生成的随机数
+    """
+    return start + (end - start) * (1 - numpy.sqrt(numpy.random.random()))
+
+def custom_distribution(min_value: float, max_value: float) -> float:
+    """
+    按照特定的概率分布在给定的范围内生成随机数
+    这个分布在[min_value, max_value]范围内，中间20%的区域使用贝塔分布，其余部分线性递减
     Keyword arguments:
     min_value -- 最小值
     max_value -- 最大值
     Return arguments:
-    int -- 获取的随机值
+    float -- 按照指定分布生成的随机数
     """
-    mu = (min_value + max_value) / 2
-    single = (mu - min_value) / 6
-    value = numpy.random.normal(mu, single)
-    value = numpy.clip(value, min_value, max_value)
-    return value
+    mid_range_width = (max_value - min_value) * 0.2
+    mid_start = min_value + (max_value - min_value) * 0.4
+    mid_end = mid_start + mid_range_width
+    rand = numpy.random.random()
+    if rand < 0.1:
+        return linear_decreasing_distribution(mid_start, min_value)
+    elif rand < 0.9:
+        return mid_start + scipy.stats.beta.rvs(2, 2) * mid_range_width
+    else:
+        return linear_decreasing_distribution(mid_end, max_value)
 
-
-def get_triangular_rand(min_value: int, max_value: int) -> float:
-    """
-    通过三角分布获取两个值之间的随机值
-    Keyword arguments:
-    min_value -- 最小值
-    max_value -- 最大值
-    Return arguments:
-    int -- 获取的随机值
-    """
-    return scipy.stats.triang.rvs(0.5, loc=min_value, scale=max_value-min_value, size=1)[0]
-
-
-def get_beta_rand(min_value: int, max_value: int) -> float:
-    """
-    通过贝塔分布获取两个值之间的随机值
-    Keyword arguments:
-    min_value -- 最小值
-    max_value -- 最大值
-    Return arguments:
-    int -- 获取的随机值
-    """
-    beta_sample = scipy.stats.beta.rvs(22.900000000000055, 22.900000000000055, size=1)[0]
-    return min_value + beta_sample * (max_value - min_value)

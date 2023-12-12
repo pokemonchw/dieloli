@@ -295,6 +295,7 @@ def handle_sub_small_mana_point(
             sub_hit_point = character_data.hit_point
         character_data.hit_point -= sub_hit_point
         change_data.hit_point -= sub_hit_point
+    character_data.day_use_mana_point += sub_mana_point
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.SUB_MEDIUM_MANA_POINT)
@@ -330,6 +331,7 @@ def handle_sub_medium_mana_point(
             sub_hit_point = character_data.hit_point
         character_data.hit_point -= sub_hit_point
         change_data.hit_point -= sub_hit_point
+    character_data.day_use_mana_point += sub_mana_point
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.SUB_LARGE_MANA_POINT)
@@ -365,6 +367,7 @@ def handle_sub_large_mana_point(
             sub_hit_point = character_data.hit_point
         character_data.hit_point -= sub_hit_point
         change_data.hit_point -= sub_hit_point
+    character_data.day_use_mana_point += sub_mana_point
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_SMALL_ACHE)

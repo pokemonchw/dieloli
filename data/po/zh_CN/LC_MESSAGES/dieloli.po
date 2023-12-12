@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-08 11:06+0800\n"
+"POT-Creation-Date: 2023-12-12 14:07+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -325,11 +325,11 @@ msgstr ""
 msgid "睡觉"
 msgstr ""
 
-#: Script/Design/character_behavior.py:498
+#: Script/Design/character_behavior.py:502
 msgid "绝顶"
 msgstr ""
 
-#: Script/Design/character_behavior.py:507
+#: Script/Design/character_behavior.py:511
 msgid "强绝顶"
 msgstr ""
 
@@ -599,15 +599,19 @@ msgstr ""
 msgid "人类是可以被驯化的"
 msgstr ""
 
-#: Script/UI/Flow/title_flow.py:39
+#: Script/UI/Flow/title_flow.py:37
+msgid "(注意这是一个临时的预览版本)"
+msgstr ""
+
+#: Script/UI/Flow/title_flow.py:44
 msgid "开始游戏"
 msgstr ""
 
-#: Script/UI/Flow/title_flow.py:39
+#: Script/UI/Flow/title_flow.py:44
 msgid "读取存档"
 msgstr ""
 
-#: Script/UI/Flow/title_flow.py:39 Script/UI/Panel/game_setting_panel.py:37
+#: Script/UI/Flow/title_flow.py:44 Script/UI/Panel/game_setting_panel.py:37
 msgid "游戏设置"
 msgstr ""
 

@@ -88,6 +88,7 @@ def handle_eat_food(
             character_data.status.setdefault(feel, 0)
             change_data.status.setdefault(feel, 0)
             if feel in {27, 28}:
+                character_data.day_add_calories += now_feel_value
                 now_feel_value /= 100
                 character_data.status[feel] -= now_feel_value
                 if character_data.status[feel] < 0:
