@@ -37,6 +37,10 @@ def load_event_data():
         for k in now_data:
             now_event: game_type.Event = game_type.Event()
             now_event.__dict__ = now_data[k]
+            status_text = "开始"
+            if now_event.start:
+                status_text = "结束"
+            print(f"{cache_control.status_data[now_event.status_id]},{status_text},{now_event.text}")
             delete_premise_list = []
             for premise in now_event.premise:
                 if premise not in cache_control.premise_data:

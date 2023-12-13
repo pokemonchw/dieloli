@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-12 14:07+0800\n"
+"POT-Creation-Date: 2023-12-13 14:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "{character_name}失去了初吻\n"
 msgstr ""
 
-#: Script/Settle/character_behavior.py:154
+#: Script/Settle/character_behavior.py:155
 msgid "停止了"
 msgstr ""
 
@@ -321,7 +321,11 @@ msgstr ""
 msgid "休息"
 msgstr ""
 
-#: Script/Design/instruct/rest.py:29
+#: Script/Design/instruct/rest.py:28
+msgid "午睡"
+msgstr ""
+
+#: Script/Design/instruct/rest.py:41
 msgid "睡觉"
 msgstr ""
 

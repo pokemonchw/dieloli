@@ -55,3 +55,5 @@ class CharacterStatus:
     """ 正常体位(男) """
     STATUS_MISSIONARY_POSITION_FEMALE = 26
     """ 正常体位(女) """
+    STATUS_SIESTA = 27
+    """ 午睡 """

@@ -328,6 +328,19 @@ def handle_in_fountain(character_id: int) -> int:
     return character_data.position == ["8"]
 
 
+@handle_premise.add_premise(constant.Premise.IN_LIBRARY)
+def handle_in_library(character_id: int) -> int:
+    """
+    校验角色是否处于图书馆中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.position[0] == "13"
+
+
 @handle_premise.add_premise(constant.Premise.HAVE_OTHER_TARGET_IN_SCENE)
 def handle_have_other_target_in_scene(character_id: int) -> int:
     """

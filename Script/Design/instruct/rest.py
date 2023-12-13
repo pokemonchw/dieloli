@@ -25,6 +25,18 @@ def handle_rest():
     update.game_update_flow(10)
 
 
+@handle_instruct.add_instruct(constant.Instruct.SIESTA, constant.InstructType.REST, _("午睡"),{constant.Premise.IN_SIESTA_TIME})
+def handle_siesta():
+    """ 处理午睡指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 30
+    character_data.behavior.behavior_id = constant.Behavior.SIESTA
+    character_data.behavior.behavior_id = constant.Behavior.SIESTA
+    character_data.state = constant.CharacterStatus.STATUS_SIESTA
+    update.game_update_flow(30)
+
+
 @handle_instruct.add_instruct(
     constant.Instruct.SLEEP, constant.InstructType.REST, _("睡觉"), {constant.Premise.IN_DORMITORY}
 )

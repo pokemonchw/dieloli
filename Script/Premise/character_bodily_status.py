@@ -6,10 +6,10 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
-@handle_premise.add_premise(constant.Premise.HYPOSTHENIA)
-def handle_hyposthenia(character_id: int) -> int:
+@handle_premise.add_premise(constant.Premise.HP_IS_HIGHT)
+def handle_hp_is_hight(character_id: int) -> int:
     """
-    校验角色是否健康不足
+    校验角色是否身体健康
     Keyword arguments:
     character_id -- 角色id
     Return arguments:
@@ -19,17 +19,13 @@ def handle_hyposthenia(character_id: int) -> int:
     hit_point_weight = 0
     if character_data.hit_point:
         hit_point_weight = character_data.hit_point / character_data.hit_point_max
-    mana_point_weight = 0
-    if character_data.mana_point:
-        mana_point_weight = character_data.mana_point / character_data.mana_point_max
-    now_weight = hit_point_weight + mana_point_weight
-    return now_weight < 0.75
+    return hit_point_weight >= 0.75
 
 
-@handle_premise.add_premise(constant.Premise.PHYSICAL_STRENGHT)
-def handle_physical_strenght(character_id: int) -> int:
+@handle_premise.add_premise(constant.Premise.HP_IS_LOW)
+def handle_hp_is_low(character_id: int) -> int:
     """
-    校验角色是否健康充沛
+    校验角色是否身体不健康
     Keyword arguments:
     character_id -- 角色id
     Return arguments:
@@ -39,11 +35,39 @@ def handle_physical_strenght(character_id: int) -> int:
     hit_point_weight = 0
     if character_data.hit_point:
         hit_point_weight = character_data.hit_point / character_data.hit_point_max
+    return hit_point_weight < 0.75
+
+
+@handle_premise.add_premise(constant.Premise.MP_IS_HIGHT)
+def handle_mp_is_hight(character_id: int) -> int:
+    """
+    校验角色是否体力充沛
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
     mana_point_weight = 0
     if character_data.mana_point:
         mana_point_weight = character_data.mana_point / character_data.mana_point_max
-    now_weight = hit_point_weight + mana_point_weight
-    return now_weight > 0.75
+    return mana_point_weight >= 0.5
+
+
+@handle_premise.add_premise(constant.Premise.MP_IS_LOW)
+def handle_mp_is_low(character_id: int) -> int:
+    """
+    校验角色是否体力不足
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    mana_point_weight = 0
+    if character_data.mana_point:
+        mana_point_weight = character_data.mana_point / character_data.mana_point_max
+    return mana_point_weight < 0.5
 
 
 @handle_premise.add_premise(constant.Premise.IS_WARM)

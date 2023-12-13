@@ -102,6 +102,8 @@ class Instruct:
     """
     REST = 0
     """ 休息 """
+    SIESTA = 0
+    """ 午睡 """
     SLEEP = 0
     """ 睡觉 """
 

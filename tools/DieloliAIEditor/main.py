@@ -40,6 +40,7 @@ def load_ai_data():
         for k in now_data:
             now_target: game_type.Target = game_type.Target()
             now_target.__dict__ = now_data[k]
+            print(f"{cache_control.needs_hierarchy_data[now_target.needs_hierarchy]},{cache_control.state_machine_data[now_target.state_machine_id]},{now_target.text}")
             cache_control.now_target_data[k] = now_target
             cache_control.now_target_id = ""
             item_premise_list.update()

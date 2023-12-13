@@ -55,3 +55,5 @@ class Behavior:
     """ 正常体位(男) """
     MISSIONARY_POSITION_FEMALE = 26
     """ 正常体位(女) """
+    SIESTA = 27
+    """ 午睡 """
