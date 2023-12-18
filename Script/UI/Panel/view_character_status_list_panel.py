@@ -10,7 +10,7 @@ from Script.Core import (
     flow_handle,
 )
 from Script.Config import game_config, normal_config
-from Script.Design import character_move, attr_text, game_time, map_handle, constant
+from Script.Design import character_move, attr_text, game_time, map_handle, constant, attr_calculation
 
 _: FunctionType = get_text._
 """ 翻译api """
@@ -163,16 +163,16 @@ class SeeCharacterStatusDraw:
             death_time_text = f"{death_time_text}{str(death_time)}"
             button_text = f"{index_text} {character_data.name} {sex_text} {character_data.age}岁 {cause_of_death_config.name} {death_time_text} {position_text}"
         else:
-            if character_data.target_character_id != character_data.cid:
-                scene_path_str = map_handle.get_map_system_path_str_for_list(
-                    character_data.position
-                )
-                scene_data: game_type.Scene = cache.scene_data[scene_path_str]
-                if character_data.target_character_id in scene_data.character_list:
-                    target_data: game_type.Character = cache.character_data[
-                        character_data.target_character_id
-                    ]
-            button_text = f"{index_text} {character_data.name} {sex_text} {character_data.age}岁 {target_text} {position_text}"
+            now_height = str(round(character_data.height.now_height, 2))
+            now_height_text = _("身高:") + now_height + "cm"
+            now_weight = str(round(character_data.weight, 2))
+            now_weight_text = _("体重:") + now_weight + "kg"
+            now_chest_tem_id = attr_calculation.judge_chest_group(character_data.chest.now_chest)
+            now_chest_tem = game_config.config_chest[now_chest_tem_id]
+            body_fat = str(round(character_data.bodyfat, 2))
+            body_fat_text = _("体脂率:") + body_fat + "%"
+            now_chest_text = _("罩杯:") + now_chest_tem.info
+            button_text = f"{index_text} {character_data.name} {sex_text} {character_data.age}岁 {now_height_text} {now_weight_text} {body_fat_text} {now_chest_text} {target_text} {position_text}"
         now_draw = draw.LeftButton(
             button_text, self.button_return, self.width, cmd_func=self.move_to_character
         )

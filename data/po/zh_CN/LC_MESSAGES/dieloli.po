@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-13 14:17+0800\n"
+"POT-Creation-Date: 2023-12-18 13:26+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -329,11 +329,11 @@ msgstr ""
 msgid "睡觉"
 msgstr ""
 
-#: Script/Design/character_behavior.py:502
+#: Script/Design/character_behavior.py:505
 msgid "绝顶"
 msgstr ""
 
-#: Script/Design/character_behavior.py:511
+#: Script/Design/character_behavior.py:514
 msgid "强绝顶"
 msgstr ""
 
@@ -678,23 +678,28 @@ msgstr ""
 msgid "删除"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:42
+#: Script/UI/Panel/in_scene_panel.py:43
 msgid "场景"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:60
+#: Script/UI/Panel/in_scene_panel.py:62
+#: Script/UI/Panel/view_character_status_list_panel.py:159
+msgid "死亡时间:"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:65
 msgid "已死亡！"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:105
+#: Script/UI/Panel/in_scene_panel.py:110
 msgid "当前位置:"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:110
+#: Script/UI/Panel/in_scene_panel.py:115
 msgid "你在这里遇到了:"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:316
+#: Script/UI/Panel/in_scene_panel.py:321
 #: Script/UI/Panel/see_character_info_panel.py:189
 msgid "人物状态"
 msgstr ""
@@ -1021,18 +1026,22 @@ msgid "生日:{birthday_month}月{birthday_day}日"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:505
+#: Script/UI/Panel/view_character_status_list_panel.py:167
 msgid "身高:"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:507
+#: Script/UI/Panel/view_character_status_list_panel.py:169
 msgid "体重:"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:511
+#: Script/UI/Panel/view_character_status_list_panel.py:173
 msgid "体脂率:"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:512
+#: Script/UI/Panel/view_character_status_list_panel.py:174
 msgid "罩杯:"
 msgstr ""
 
@@ -1181,8 +1190,4 @@ msgstr ""
 
 #: Script/UI/Panel/view_character_status_list_panel.py:154
 msgid "发呆中"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:159
-msgid "死亡时间:"
 msgstr ""

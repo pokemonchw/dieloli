@@ -23,10 +23,7 @@ def handle_chat():
     character_data.behavior.duration = 10
     character_data.behavior.behavior_id = constant.Behavior.CHAT
     character_data.state = constant.CharacterStatus.STATUS_CHAT
-    t1 = time.time()
     update.game_update_flow(10)
-    t2 = time.time()
-    print("消耗时间:",t2-t1)
 
 
 @handle_instruct.add_instruct(constant.Instruct.ABUSE, constant.InstructType.DIALOGUE,_("辱骂"),{constant.Premise.HAVE_TARGET})
@@ -39,3 +36,13 @@ def handle_abuse():
     character_data.state = constant.CharacterStatus.STATUS_ABUSE
     update.game_update_flow(10)
 
+
+@handle_instruct.add_instruct(constant.Instruct.GENERAL_SPEECH, constant.InstructType.DIALOGUE,_("演讲"),{})
+def handle_general_speech():
+    """ 处理演讲指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.GENERAL_SPEECH
+    character_data.state = constant.CharacterStatus.STATUS_GENERAL_SPEECH
+    update.game_update_flow(10)

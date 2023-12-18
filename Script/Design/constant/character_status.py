@@ -57,3 +57,5 @@ class CharacterStatus:
     """ 正常体位(女) """
     STATUS_SIESTA = 27
     """ 午睡 """
+    STATUS_GENERAL_SPEECH = 28
+    """ 演讲 """

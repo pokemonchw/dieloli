@@ -20,6 +20,7 @@ def character_wear_clean_underwear(character_id: int):
             value_dict[clothing_data.cleanliness] = clothing
         now_value = max(value_dict.keys())
         character_data.put_on[1] = value_dict[now_value]
+        character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.WEAR_CLEAN_UNDERPANTS)
@@ -37,6 +38,7 @@ def character_wear_clean_underpants(character_id: int):
             value_dict[clothing_data.cleanliness] = clothing
         now_value = max(value_dict.keys())
         character_data.put_on[7] = value_dict[now_value]
+        character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.WEAR_CLEAN_BRA)
@@ -54,6 +56,7 @@ def character_wear_clean_bra(character_id: int):
             value_dict[clothing_data.cleanliness] = clothing
         now_value = max(value_dict.keys())
         character_data.put_on[6] = value_dict[now_value]
+        character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.WEAR_CLEAN_PANTS)
@@ -71,6 +74,7 @@ def character_wear_clean_pants(character_id: int):
             value_dict[clothing_data.cleanliness] = clothing
         now_value = max(value_dict.keys())
         character_data.put_on[2] = value_dict[now_value]
+        character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.WEAR_CLEAN_SKIRT)
@@ -88,6 +92,7 @@ def character_wear_clean_skirt(character_id: int):
             value_dict[clothing_data.cleanliness] = clothing
         now_value = max(value_dict.keys())
         character_data.put_on[3] = value_dict[now_value]
+        character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.WEAR_CLEAN_SHOES)
@@ -105,6 +110,7 @@ def character_wear_clean_shoes(character_id: int):
             value_dict[clothing_data.cleanliness] = clothing
         now_value = max(value_dict.keys())
         character_data.put_on[4] = value_dict[now_value]
+        character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.WEAR_CLEAN_SOCKS)
@@ -122,6 +128,7 @@ def character_wear_clean_socks(character_id: int):
             value_dict[clothing_data.cleanliness] = clothing
         now_value = max(value_dict.keys())
         character_data.put_on[5] = value_dict[now_value]
+        character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.WEAR_CLEAN_COAT)
@@ -139,6 +146,7 @@ def character_wear_clean_coat(character_id: int):
             value_dict[clothing_data.cleanliness] = clothing
         now_value = max(value_dict.keys())
         character_data.put_on[0] = value_dict[now_value]
+        character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_UNDERWEAR)
@@ -150,6 +158,7 @@ def character_undress_underwear(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.put_on[1] = ""
+    character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_UNDERPANTS)
@@ -161,6 +170,7 @@ def character_undress_underpants(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.put_on[7] = ""
+    character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_BRA)
@@ -172,6 +182,7 @@ def character_undress_bra(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.put_on[6] = ""
+    character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_PANTS)
@@ -183,6 +194,7 @@ def character_undress_pants(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.put_on[2] = ""
+    character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_SKIRT)
@@ -194,6 +206,7 @@ def character_undress_skirt(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.put_on[3] = ""
+    character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_SHOES)
@@ -205,6 +218,7 @@ def character_undress_shoes(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.put_on[4] = ""
+    character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_SOCKS)
@@ -216,6 +230,7 @@ def character_undress_socks(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.put_on[5] = ""
+    character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.UNDRESS_COAT)
@@ -227,6 +242,7 @@ def character_undress_coat(character_id: int):
     """
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.put_on[0] = ""
+    character_data.ai_target = 0
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.TARGET_UNDRESS)

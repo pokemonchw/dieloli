@@ -57,3 +57,5 @@ class Behavior:
     """ 正常体位(女) """
     SIESTA = 27
     """ 午睡 """
+    GENERAL_SPEECH = 28
+    """ 演讲 """

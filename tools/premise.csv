@@ -10,6 +10,7 @@ is_primary_school_students,角色身份类前提,角色是小学生
 is_player_target,角色身份类前提,是玩家的交互对象
 target_is_futa_or_woman,角色性别类前提,交互对象是扶她或女性
 target_is_futa_or_man,角色性别类前提,交互对象是扶她或男性
+is_futa_or_man,角色性别类前提,角色是扶她或男性
 is_man,角色性别类前提,角色是男性
 is_not_man,角色性别类前提,角色不是男性
 is_woman,角色性别类前提,角色是女性

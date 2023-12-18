@@ -243,6 +243,8 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     bool -- 本次update时间切片内活动是否已完成
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.behavior.start_time == 0:
+        character_data.behavior.start_time = cache.game_time
     start_time = character_data.behavior.start_time
     end_time = start_time + 60 * character_data.behavior.duration
     add_time = (end_time - start_time) / 60
@@ -294,6 +296,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
         character_data.behavior.move_src = []
         character_data.behavior.start_time = now_time
         character_data.state = constant.CharacterStatus.STATUS_ARDER
+        character_data.ai_target = 0
         climax_draw = settlement_pleasant_sensation(character_id)
         if (not character_id) or (player_data.target_character_id == character_id):
             if event_draw.text != "":

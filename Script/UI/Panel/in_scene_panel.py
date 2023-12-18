@@ -1,5 +1,6 @@
 from typing import List
 from types import FunctionType
+import datetime
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import game_info_panel, see_character_info_panel
 from Script.Core import (
@@ -11,7 +12,7 @@ from Script.Core import (
     value_handle,
     py_cmd,
 )
-from Script.Design import attr_text, map_handle, handle_instruct, handle_premise, constant
+from Script.Design import attr_text, map_handle, handle_instruct, handle_premise, constant, game_time
 from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
@@ -57,7 +58,11 @@ class InScenePanel:
             if character_data.dead:
                 cache.wframe_mouse.w_frame_skip_wait_mouse = 0
                 now_draw = draw.LineFeedWaitDraw()
-                now_draw.text = _("已死亡！")
+                cause_of_death_config = game_config.config_cause_of_death[character_data.cause_of_death]
+                death_time_text = _("死亡时间:")
+                death_time = game_time.get_date_text(character_data.behavior.start_time)
+                death_time_text = f"{death_time_text}{death_time}"
+                now_draw.text = _("已死亡！") + f" {cause_of_death_config.name} " + death_time_text
                 now_draw.width = self.width
                 now_draw.draw()
                 continue

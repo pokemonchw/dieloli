@@ -1108,7 +1108,7 @@ class Premise:
     """ 角色身体不健康 """
     MP_IS_HIGHT = "mp_is_hight"
     """ 角色体力充沛 """
-    MP_IS_LOW = "MP_IS_LOW"
+    MP_IS_LOW = "mp_is_low"
     """ 角色体力不足 """
     IS_WARM = "is_warm"
     """ 角色感觉温暖 """
