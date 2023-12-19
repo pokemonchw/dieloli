@@ -15,6 +15,8 @@ def handle_target_sexual_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 9 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[9])
@@ -32,6 +34,8 @@ def handle_target_sexual_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 9 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[9])
@@ -49,6 +53,8 @@ def handle_target_computer_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 10 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[10])
@@ -66,6 +72,8 @@ def handle_target_computer_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 10 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[10])
@@ -83,6 +91,8 @@ def handle_target_performance_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 11 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[11])
@@ -100,6 +110,8 @@ def handle_target_performance_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 11 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[11])
@@ -117,6 +129,8 @@ def handle_target_eloquence_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 12 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[12])
@@ -134,6 +148,8 @@ def handle_target_eloquence_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 12 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[12])
@@ -151,6 +167,8 @@ def handle_target_painting_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 13 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[13])
@@ -168,6 +186,8 @@ def handle_target_painting_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 13 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[13])
@@ -185,6 +205,8 @@ def handle_target_ethic_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 14 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[14])
@@ -202,6 +224,8 @@ def handle_target_shoot_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 14 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[14])
@@ -219,6 +243,8 @@ def handle_target_singing_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     weight = 1 + target_data.knowledge_interest[15]
     if 15 in target_data.knowledge:
@@ -237,6 +263,8 @@ def handle_target_singing_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 15 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[15])
@@ -254,6 +282,8 @@ def handle_target_write_music_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 16 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[16])
@@ -271,6 +301,8 @@ def handle_target_write_music_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 16 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[16])
@@ -288,6 +320,8 @@ def handle_target_cooking_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 17 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[17])
@@ -305,6 +339,8 @@ def handle_target_cooking_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 17 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[17])
@@ -322,6 +358,8 @@ def handle_target_dance_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 18 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[18])
@@ -339,6 +377,8 @@ def handle_target_dance_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 18 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[18])
@@ -356,6 +396,8 @@ def handle_target_tailor_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 19 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[19])
@@ -373,6 +415,8 @@ def handle_target_tailor_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 19 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[19])
@@ -390,6 +434,8 @@ def handle_target_tactics_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 20 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[20])
@@ -407,6 +453,8 @@ def handle_target_tactics_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 20 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[20])
@@ -424,6 +472,8 @@ def handle_target_swimming_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 21 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[21])
@@ -441,6 +491,8 @@ def handle_target_swimming_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 21 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[21])
@@ -458,6 +510,8 @@ def handle_target_manufacture_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 22 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[22])
@@ -475,6 +529,8 @@ def handle_target_manufacture_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 22 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[22])
@@ -492,6 +548,8 @@ def handle_target_first_aid_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 23 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[23])
@@ -509,6 +567,8 @@ def handle_target_first_aid_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 23 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[23])
@@ -526,6 +586,8 @@ def handle_target_anatomy_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 24 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[24])
@@ -543,6 +605,8 @@ def handle_target_anatomy_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 24 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[24])
@@ -560,6 +624,8 @@ def handle_target_play_music_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 25 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[25])
@@ -577,6 +643,8 @@ def handle_target_play_music_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 25 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[25])
@@ -594,6 +662,8 @@ def handle_target_programming_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 26 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[26])
@@ -611,6 +681,8 @@ def handle_target_programming_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 26 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[26])
@@ -628,6 +700,8 @@ def handle_target_hacker_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 27 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[27])
@@ -645,6 +719,8 @@ def handle_target_hacker_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 27 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[27])
@@ -662,6 +738,8 @@ def handle_target_write_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 28 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[28])
@@ -679,6 +757,8 @@ def handle_target_write_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 28 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[28])
@@ -696,6 +776,8 @@ def handle_target_transction_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 29 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[29])
@@ -713,6 +795,8 @@ def handle_target_transction_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 29 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[29])
@@ -730,6 +814,8 @@ def handle_target_ceremony_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 30 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[30])
@@ -747,6 +833,8 @@ def handle_target_ceremony_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 30 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[30])
@@ -764,6 +852,8 @@ def handle_target_motion_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 31 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[31])
@@ -781,6 +871,8 @@ def handle_target_motion_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 31 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[31])

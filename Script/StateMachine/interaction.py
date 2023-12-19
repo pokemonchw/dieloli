@@ -198,3 +198,18 @@ def character_abuse_to_dislike_target_in_scene(character_id: int):
         character_data.target_character_id = target_id
         character_data.behavior.duration = 10
         character_data.state = constant.CharacterStatus.STATUS_ABUSE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.GENERAL_SPEECH)
+def character_general_speech(character_id: int):
+    """
+    发表演讲
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.ABUSE
+    character_data.target_character_id = target_id
+    character_data.behavior.duration = 10
+    character_data.state = constant.CharacterStatus.STATUS_ABUSE
+

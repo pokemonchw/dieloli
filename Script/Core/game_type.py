@@ -500,7 +500,7 @@ class Character:
         """ 角色好感度数据 角色id:好感度 """
         self.food_bag: Dict[UUID, Food] = {}
         """ 角色持有的食物数据 """
-        self.target_character_id: int = 0
+        self.target_character_id: int = -1
         """ 角色当前交互对象id """
         self.adv: int = 0
         """ 剧情npc校验 """

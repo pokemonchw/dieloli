@@ -75,6 +75,8 @@ def handle_target_no_experience_in_sex(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     for i in target_data.sex_experience:
         if target_data.sex_experience[i]:
@@ -108,6 +110,8 @@ def handle_target_no_first_kiss(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.first_kiss == -1
 
@@ -135,6 +139,8 @@ def handle_target_have_first_kiss(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.first_kiss != -1
 
@@ -162,6 +168,8 @@ def handle_target_no_first_hand_in_hand(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.first_hand_in_hand == -1
 
@@ -210,6 +218,8 @@ def handle_target_clitoris_is_hight(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.sex_experience.setdefault(2, 0)
     return attr_calculation.get_experience_level_weight(target_data.sex_experience[2]) > 5

@@ -101,7 +101,7 @@ class InScenePanel:
             character_list = live_character_list + dead_character_list
             character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
-                character_data.target_character_id = 0
+                character_data.target_character_id = -1
             if not character_data.target_character_id and character_list:
                 character_data.target_character_id = character_list[0]
             game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
@@ -128,7 +128,7 @@ class InScenePanel:
             if character_list and character_data.target_character_id not in character_list:
                 character_data.target_character_id = character_list[0]
             if not character_list:
-                character_data.target_character_id = 0
+                character_data.target_character_id = -1
             if character_list:
                 meet_draw.draw()
                 line_feed.draw()
@@ -138,7 +138,7 @@ class InScenePanel:
                 line_draw = draw.LineDraw("-.-", self.width)
                 line_draw.draw()
             character_info_draw_list = []
-            if character_data.target_character_id:
+            if character_data.target_character_id != -1:
                 character_head_draw = see_character_info_panel.CharacterInfoHead(
                     character_data.cid, self.width
                 )
@@ -167,7 +167,7 @@ class InScenePanel:
             all_character_figure_draw_list = []
             line = draw.LineDraw(".", self.width)
             line.draw()
-            if character_data.target_character_id:
+            if character_data.target_character_id != -1:
                 character_stature_info = see_character_info_panel.CharacterStatureInfoText(0, self.width)
                 character_measurements_info = see_character_info_panel.CharacterMeasurementsText(0, self.width)
                 character_figure_info_list = character_stature_info.info_list + character_measurements_info.info_list
@@ -228,7 +228,7 @@ class InScenePanel:
                         value.draw()
                     line_feed.draw()
             character_clothing_draw_list = []
-            if character_data.target_character_id:
+            if character_data.target_character_id != -1:
                 character_clothing_draw = see_character_info_panel.CharacterWearClothingList(
                     0, self.width / 2, 2
                 )
@@ -285,7 +285,7 @@ class InScenePanel:
                 else:
                     label.draw()
             character_status_draw_list = []
-            if character_data.target_character_id:
+            if character_data.target_character_id != -1:
                 character_status_draw = see_character_info_panel.SeeCharacterStatusPanel(
                     character_data.cid, self.width / 2, 3, 0
                 )

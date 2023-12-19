@@ -16,6 +16,8 @@ def handle_target_is_adore(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     target_id = character_data.target_character_id
+    if target_id == -1:
+        return 0
     character_data.social_contact.setdefault(10, set())
     if target_id in character_data.social_contact[10]:
         return 1
@@ -33,6 +35,8 @@ def handle_target_is_admire(character_id: int) -> int:
     """
     character_data = cache.character_data[character_id]
     target_id = character_data.target_character_id
+    if target_id == -1:
+        return 0
     character_data.social_contact.setdefault(9, set())
     if target_id in character_data.social_contact[9]:
         return 1
@@ -65,6 +69,8 @@ def handle_target_is_beyond_friendship(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     if (
         character_data.target_character_id in character_data.social_contact_data
         and character_data.social_contact_data[character_data.target_character_id] > 7
@@ -83,6 +89,8 @@ def handle_is_beyond_friendship_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if (
         character_id in target_data.social_contact_data
@@ -102,6 +110,8 @@ def handle_target_adore(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact.setdefault(10, set())
     if character_id in target_data.social_contact[10]:
@@ -119,6 +129,8 @@ def handle_no_beyond_friendship_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 1
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if (
         character_id in target_data.social_contact_data
@@ -140,6 +152,8 @@ def handle_target_admire(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.social_contact.setdefault(9, set())
     if character_id in target_data.social_contact[9]:
@@ -189,6 +203,8 @@ def handle_target_not_stranger(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     if character_data.target_character_id in character_data.social_contact_data:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
         if character_id in target_data.social_contact_data:
@@ -206,6 +222,8 @@ def handle_dislike_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
         return social_type in {0, 1, 2, 3, 4}
@@ -222,6 +240,8 @@ def handle_detest_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
         return social_type in {0, 1, 2, 3}
@@ -238,6 +258,8 @@ def handle_hate_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
         return social_type in {0, 1, 2}
@@ -254,6 +276,8 @@ def handle_hatred_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
         return social_type in {0, 1}
@@ -270,6 +294,8 @@ def handle_deadly_enemy_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
         return not social_type
@@ -286,6 +312,8 @@ def handle_target_dislike(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]
@@ -303,6 +331,8 @@ def handle_target_detest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]
@@ -320,6 +350,8 @@ def handle_target_hate(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]
@@ -337,6 +369,8 @@ def handle_target_hatred(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]
@@ -354,6 +388,8 @@ def handle_target_deadly_enemy(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]

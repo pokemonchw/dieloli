@@ -44,7 +44,10 @@ class DrawEventTextPanel(draw.LineFeedWaitDraw):
         scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
         scene_data: game_type.Scene = cache.scene_data[scene_path_str]
         scene_name = scene_data.scene_name
-        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+        target_name = ""
+        if character_data.target_character_id != -1:
+            target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+            target_name = target_data.name
         src_scene_name = ""
         if len(player_data.behavior.move_src):
             src_scene_path_str = map_handle.get_map_system_path_str_for_list(player_data.behavior.move_src)
@@ -60,7 +63,7 @@ class DrawEventTextPanel(draw.LineFeedWaitDraw):
             FoodName=character_data.behavior.food_name,
             Name=character_data.name,
             SceneName=scene_name,
-            TargetName=target_data.name,
+            TargetName=target_name,
             TargetSceneName=target_scene_name,
             SrcSceneName=src_scene_name,
         )

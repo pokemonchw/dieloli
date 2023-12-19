@@ -16,6 +16,8 @@ def handle_target_hp_is_hight(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     hit_point_weight = 0
     if target_data.hit_point:
@@ -33,6 +35,8 @@ def handle_target_hp_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     hit_point_weight = 0
     if target_data.hit_point:
@@ -50,6 +54,8 @@ def handle_target_mp_is_hight(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     mana_point_weight = 0
     if target_data.mana_point:
@@ -67,6 +73,8 @@ def handle_target_mp_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     mana_point_weight = 0
     if target_data.mana_point:
@@ -84,6 +92,8 @@ def handle_target_is_warm(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     now_warm = 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     for clothing_type in target_data.put_on:
@@ -104,6 +114,8 @@ def handle_target_not_warm(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     now_warm = 0
     for clothing_type in target_data.put_on:
@@ -125,6 +137,8 @@ def handle_target_is_ache(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(23, 0)
     return target_data.status[23] > 10
@@ -140,6 +154,8 @@ def handle_target_not_ache(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(23, 0)
     return target_data.status[23] <= 10
@@ -155,6 +171,8 @@ def handle_target_is_vetigo(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(24, 0)
     return target_data.status[24] > 10
@@ -170,6 +188,8 @@ def handle_target_not_vertigo(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(24, 0)
     return target_data.status[24] <= 10
@@ -185,6 +205,8 @@ def handle_target_is_tired(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(25, 0)
     return target_data.status[25] > 50
@@ -200,6 +222,8 @@ def handle_target_not_tired(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(25, 0)
     return target_data.status[25] <= 50
@@ -215,6 +239,8 @@ def handle_target_is_extreme_exhaustion(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(25, 0)
     return target_data.status[25] > 100
@@ -230,6 +256,8 @@ def handle_target_is_intoxicated(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(26, 0)
     return target_data.status[26] > 10
@@ -245,6 +273,8 @@ def handle_target_not_intoxicated(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(26, 0)
     return target_data.status[26] <= 10
@@ -260,6 +290,8 @@ def handle_target_hunger(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(27, 0)
     return target_data.status[27] > 15
@@ -275,6 +307,8 @@ def handle_target_not_hunger(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(27, 0)
     return target_data.status[27] <= 15
@@ -290,6 +324,8 @@ def handle_target_thirsty(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(28, 0)
     return target_data.status[28] > 15
@@ -305,6 +341,8 @@ def handle_target_not_thirsty(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(28, 0)
     return target_data.status[28] <= 15

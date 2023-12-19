@@ -88,7 +88,7 @@ def init_character(character_id: int, character_tem: game_type.NpcTem):
     now_character.name = character_tem.Name
     now_character.sex = character_tem.Sex
     now_character.adv = character_tem.AdvNpc
-    now_character.target_character_id = character_id
+    now_character.target_character_id = -1
     if character_tem.MotherTongue != "":
         now_character.mother_tongue = character_tem.MotherTongue
     if character_tem.Age != "":

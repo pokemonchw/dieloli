@@ -15,6 +15,8 @@ def handle_target_is_lively(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[0] >= 50
 
@@ -29,6 +31,8 @@ def handle_target_is_low_key(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[0] < 50
 
@@ -43,6 +47,8 @@ def handle_target_is_gregarious(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[1] >= 50
 
@@ -57,6 +63,8 @@ def handle_target_is_solitary(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[1] < 50
 
@@ -71,6 +79,8 @@ def handle_target_is_optimisitic(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[2] >= 50
 
@@ -85,6 +95,8 @@ def handle_target_is_pessimism(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[2] < 50
 
@@ -99,6 +111,8 @@ def handle_target_is_keep_promises(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[3] >= 50
 
@@ -113,6 +127,8 @@ def handle_target_is_deceitful(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[3] < 50
 
@@ -127,6 +143,8 @@ def handle_target_is_selfless(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[4] >= 50
 
@@ -141,6 +159,8 @@ def handle_target_is_selfish(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[4] < 50
 
@@ -155,6 +175,8 @@ def handle_target_is_heavy_feeling(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[5] >= 50
 
@@ -169,6 +191,8 @@ def handle_target_is_ungrateful(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[5] < 50
 
@@ -183,6 +207,8 @@ def handle_target_is_rigorous(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[6] >= 50
 
@@ -197,6 +223,8 @@ def handle_target_is_relax(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[6] < 50
 
@@ -211,6 +239,8 @@ def handle_target_is_autonomy(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[7] >= 50
 
@@ -225,6 +255,8 @@ def handle_target_is_indulge(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[7] < 50
 
@@ -239,6 +271,8 @@ def handle_target_is_steady(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[8] >= 50
 
@@ -253,6 +287,8 @@ def handle_target_is_childish(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[8] < 50
 
@@ -267,6 +303,8 @@ def handle_target_is_resolution(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[9] >= 50
 
@@ -281,6 +319,8 @@ def handle_target_is_hesitate(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[9] < 50
 
@@ -295,6 +335,8 @@ def handle_target_is_tenacity(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[10] >= 50
 
@@ -309,6 +351,8 @@ def handle_target_is_fragile(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[10] < 50
 
@@ -323,6 +367,8 @@ def handle_target_is_astute(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[11] >= 50
 
@@ -337,6 +383,8 @@ def handle_target_is_slow(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[11] < 50
 
@@ -351,6 +399,8 @@ def handle_target_is_tolerance(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[12] >= 50
 
@@ -365,6 +415,8 @@ def handle_target_is_impetuous(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[12] < 50
 
@@ -379,6 +431,8 @@ def handle_target_is_staraightforward(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[13] >= 50
 
@@ -393,6 +447,8 @@ def handle_target_is_insidious(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[13] < 50
 
@@ -407,6 +463,8 @@ def handle_target_is_tolerance(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[14] >= 50
 
@@ -421,6 +479,8 @@ def handle_target_is_narrow(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[14] < 50
 
@@ -435,6 +495,8 @@ def handle_target_is_enthusiasm(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[15] >= 50
 
@@ -449,6 +511,8 @@ def handle_target_is_apathy(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[15] < 50
 
@@ -463,6 +527,8 @@ def handle_target_is_self_confidence(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[16] >= 50
 
@@ -477,6 +543,8 @@ def handle_target_is_inferiority(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[16] < 50
 
@@ -491,6 +559,8 @@ def handle_target_is_infferent(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[17] >= 50
 
@@ -505,5 +575,7 @@ def handle_target_is_keen(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.nature[17] < 50

@@ -277,15 +277,25 @@ class CharacterInfoHead:
         sex_text = game_config.config_sex_tem[character_data.sex].name
         if character_id:
             social = 5
-            if 5 in character_data.social_contact_data:
-                social = character_data.social_contact_data[5]
+            if 0 in character_data.social_contact_data:
+                social = character_data.social_contact_data[0]
             social_text = game_config.config_social_type[social].name
-            message = _("No.{character_id}: {character_name} {sex_text} {social_text}").format(
-                character_id=character_id,
-                character_name=character_data.name,
-                sex_text=sex_text,
-                social_text=social_text,
-            )
+            if character_data.target_character_id != -1:
+                target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+                message = _("No.{character_id}: {character_name} {sex_text} {social_text} 互动:{target_name}").format(
+                    character_id=character_id,
+                    character_name=character_data.name,
+                    sex_text=sex_text,
+                    social_text=social_text,
+                    target_name=target_data.name
+                )
+            else:
+                message = _("No.{character_id}: {character_name} {sex_text} {social_text}").format(
+                    character_id=character_id,
+                    character_name=character_data.name,
+                    sex_text=sex_text,
+                    social_text=social_text,
+                )
         else:
             message = _("No.{character_id}: {character_name} {sex_text}").format(
                 character_id=character_id,

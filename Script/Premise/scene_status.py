@@ -220,6 +220,8 @@ def handle_in_target_dormitory(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     now_position = map_handle.get_map_system_path_str_for_list(character_data.position)
     return now_position == target_data.dormitory

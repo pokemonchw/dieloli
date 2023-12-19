@@ -51,7 +51,7 @@ def handle_move_to_target_scene(
                 continue
             now_character_data: game_type.Character = cache.character_data[now_character]
             if now_character_data.target_character_id == character_id:
-                now_character_data.target_character_id = 0
+                now_character_data.target_character_id = -1
         map_handle.character_move_scene(
             character_data.position, character_data.behavior.move_target, character_id
         )

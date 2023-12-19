@@ -16,6 +16,8 @@ def handle_target_not_put_underwear(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     if (1 not in target_data.put_on) or (target_data.put_on[1] == ""):
         return 1
@@ -32,6 +34,8 @@ def handle_target_put_on_skirt(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     if (3 not in target_data.put_on) or (target_data.put_on[3] == ""):
         return 0
@@ -48,6 +52,8 @@ def handle_target_is_naked(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     for i in target_data.put_on:
         if isinstance(target_data.put_on[i], UUID):
@@ -65,6 +71,8 @@ def handle_target_not_put_on_bra(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     if (6 not in target_data.put_on) or (target_data.put_on[6] == ""):
         return 1
@@ -81,6 +89,8 @@ def handle_target_not_put_on_coat(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     if (0 not in target_data.put_on) or (target_data.put_on[0] == ""):
         return 1
@@ -97,6 +107,8 @@ def handle_target_not_put_on_pants(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     if (2 not in target_data.put_on) or (target_data.put_on[2] == ""):
         return 1
@@ -113,6 +125,8 @@ def handle_target_not_put_on_underpants(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     if (7 not in target_data.put_on) or (target_data.put_on[7] == ""):
         return 1

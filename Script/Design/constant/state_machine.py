@@ -150,6 +150,8 @@ class StateMachine:
     """ 牵住场景中自己喜欢的随机对象的手 """
     ABUSE_TO_DISLIKE_TARGET_IN_SCENE = "abuse_to_dislike_target_in_scene"
     """ 辱骂场景中自己讨厌的人 """
+    GENERAL_SPEECH = "general_speech"
+    """ 发表演讲 """
 
     """
     =========================

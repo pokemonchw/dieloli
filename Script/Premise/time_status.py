@@ -81,7 +81,6 @@ def handle_in_siesta_time(character_id: int) -> int:
     now_time: datetime.datetime = datetime.datetime.fromtimestamp(
         character_data.behavior.start_time, game_time.time_zone
     )
-    print("午休时间验证:", now_time.hour)
     if now_time.hour >= 12 and now_time.hour <= 15:
         return 1
     return 0
