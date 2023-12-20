@@ -60,6 +60,15 @@ class MoveMenuType:
     """ 名字 """
 
 
+class Identity:
+    """ 身份名称配置数据 """
+
+    cid: int
+    """ 身份id """
+    name: str
+    """ 名称 """
+
+
 class Book:
     """ 书籍配置表 """
 

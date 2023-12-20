@@ -70,19 +70,13 @@ def init_attr(character_id: int):
     for nature_id in new_nature:
         if nature_id not in character_data.nature:
             character_data.nature[nature_id] = new_nature[nature_id]
-    init_class(character_data)
-
-
-def init_class(character_data: game_type.Character):
-    """
-    初始化角色班级
-    character_data -- 角色对象
-    """
-    if character_data.age <= 18 and character_data.age >= 7:
-        class_grade = str(character_data.age - 6)
-        character_data.classroom = random.choice(constant.place_data["Classroom_" + class_grade])
-        cache.classroom_students_data.setdefault(character_data.classroom, set())
-        cache.classroom_students_data[character_data.classroom].add(character_data.cid)
+    if character_data.age <= 18:
+        now_identity = game_type.StudentIdentity()
+        now_identity.grade = character_data.age - 6
+        now_identity.classroom = random.choice(constant.place_data[f"Classroom_{now_identity.grade}"])
+        character_data.identity_data[now_identity.cid] = now_identity
+        cache.classroom_students_data.setdefault(now_identity.classroom, set())
+        cache.classroom_students_data[now_identity.classroom].add(character_id)
 
 
 def init_character_behavior_start_time(character_id: int, now_time: int):

@@ -153,5 +153,6 @@ class SystemNSFWSettingPanel:
             now_panel.set(ask_for_list, _("是否关闭NSFW内容"))
         else:
             now_panel.set(ask_for_list, _("是否开启NSFW内容"))
+        print(normal_config.config_normal.nsfw)
         now_panel.draw()
         self.return_list = now_panel.get_return_list()

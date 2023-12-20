@@ -176,10 +176,10 @@ def init_teacher_table():
                         for now_teacher in cache.classroom_teacher_data[
                             f"Classroom_{phase_room_id}"
                         ][classroom][now_course]:
+                            character_data = cache.character_data[now_teacher]
+                            character_data.identity_data.setdefault(1, game_type.TeacherIdentity())
                             if now_teacher not in teacher_table:
-                                cache.character_data[now_teacher].officeroom = constant.place_data[
-                                    f"Office_{phase_room_id}"
-                                ]
+                                character_data.identity_data[1].officeroom = constant.place_data[f"Office_{phase_room_id}"]
                             teacher_table.setdefault(now_teacher, 0)
                             if teacher_table[now_teacher] < 18:
                                 teacher_table[now_teacher] += 1
@@ -221,6 +221,10 @@ def init_teacher_table():
                                 cache.teacher_school_timetable[now_teacher].append(
                                     teacher_timetable
                                 )
+                                cache.teacher_class_time_data.setdefault(now_teacher, {})
+                                cache.teacher_class_time_data[now_teacher].setdefault(day, {})
+                                cache.teacher_class_time_data[now_teacher][day].setdefault(i, {})
+                                cache.teacher_class_time_data[now_teacher][day][i][classroom] = now_course
 
 
 def course_abmain_distribution():

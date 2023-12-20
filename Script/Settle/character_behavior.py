@@ -227,6 +227,9 @@ def handle_add_student_course_experience_for_in_class_room(
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if 1 not in character_data.identity_data:
+        return
+    identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
     scene_data: game_type.Scene = cache.scene_data[character_data.classroom]
     course = character_data.behavior.course_id
     for now_character in (

@@ -392,11 +392,16 @@ class GlobalSceneNamePanel:
         list -- 路径列表
         """
         character_data: game_type.Character = cache.character_data[0]
-        if character_data.classroom == "":
-            class_room_path = []
-        else:
-            class_room_path = map_handle.get_map_system_path_for_str(character_data.classroom)
-        office_room_path = character_data.officeroom
+        classroom_path = []
+        officeroom_path = []
+        if 0 in character_data.identity_data:
+            identity_data: game_type.StudentIdentity = character_data.identity_data[0]
+            classroom_path = map_handle.get_map_system_path_for_str(identity_data.classroom)
+        elif 1 in character_data.identity_data:
+            identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
+            if identity_data.classroom != "":
+                classroom_path = map_handle.get_map_system_path_for_str(identity_data.now_classroom)
+            officeroom_path = map_handle.get_map_system_path_for_str(identity_data.officeroom)
         square_path = ["2"]
         swim_path = ["14", "0"]
         big_restaurant_path = ["10", "0", "0"]
@@ -409,8 +414,8 @@ class GlobalSceneNamePanel:
         dormitory_path = map_handle.get_map_system_path_for_str(character_data.dormitory)
         path_list = [
             dormitory_path,
-            class_room_path,
-            office_room_path,
+            classroom_path,
+            officeroom_path,
             square_path,
             swim_path,
             big_restaurant_path,
