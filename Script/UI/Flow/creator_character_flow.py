@@ -2,7 +2,7 @@ import random
 from functools import wraps
 from typing import List
 from types import FunctionType
-from Script.Core import get_text, game_type, cache_control, flow_handle
+from Script.Core import get_text, game_type, cache_control, flow_handle, py_cmd
 from Script.Design import (
     constant,
     handle_panel,
@@ -74,6 +74,7 @@ def confirm_character_attr_panel():
     now_attr_panel = see_character_info_panel.SeeCharacterInfoPanel(0, width)
     askfor_panel = panel.OneMessageAndSingleColumnButton()
     while 1:
+        py_cmd.clr_cmd()
         line_feed_draw.draw()
         now_attr_panel.draw()
         ask_list = []
@@ -105,6 +106,7 @@ def input_name_panel() -> bool:
     Return arguments:
     bool -- 完成角色创建校验
     """
+    py_cmd.clr_cmd()
     character_data = cache.character_data[0]
     ask_name_panel = panel.AskForOneMessage()
     ask_name_panel.set(_("请问能告诉我你的名字吗？"), 10)
@@ -140,6 +142,7 @@ def input_nick_name_panel() -> bool:
     Return arguments:
     bool -- 完成角色创建校验
     """
+    py_cmd.clr_cmd()
     create_judge = 0
     character_data = cache.character_data[0]
     ask_nick_name_panel = panel.AskForOneMessage()
@@ -172,6 +175,7 @@ def input_sex_panel() -> bool:
     Return arguments:
     bool -- 完成角色创建校验
     """
+    py_cmd.clr_cmd()
     character_data: game_type.Character = cache.character_data[0]
     sex_list = [game_config.config_sex_tem[x].name for x in game_config.config_sex_tem] + [_("随机")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -200,6 +204,7 @@ def input_setting_panel() -> bool:
     Return arguments:
     bool -- 完成角色创建流程
     """
+    py_cmd.clr_cmd()
     character_data = cache.character_data[0]
     ask_list = [_("是"), _("否")]
     button_panel = panel.OneMessageAndSingleColumnButton()
@@ -223,6 +228,7 @@ def input_setting_now() -> bool:
     """启动详细信息设置"""
     panel_list = random.sample(setting_panel_data, len(setting_panel_data))
     for now_panel in panel_list:
+        py_cmd.clr_cmd()
         line_feed_draw.draw()
         line.draw()
         now_panel()

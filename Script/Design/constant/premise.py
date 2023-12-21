@@ -264,6 +264,8 @@ class Premise:
     """ 在喷泉场景 """
     IN_LIBRARY = "in_library"
     """ 在图书馆中 """
+    NOT_IN_LIBRARY = "not_in_library"
+    """ 不在图书馆中 """
     HAVE_OTHER_TARGET_IN_SCENE = "have_other_target_in_scene"
     """ 场景中有自己和交互对象以外的其他人 """
     NO_HAVE_OTHER_TARGET_IN_SCENE = "no_have_other_target_in_scene"

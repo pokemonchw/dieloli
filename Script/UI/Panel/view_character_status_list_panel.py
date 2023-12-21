@@ -38,6 +38,10 @@ class CharacterStatusListPanel:
         """ 当前角色列表控制面板 """
         self.now_panel = _("存活")
         """ 当前面板类型 """
+        self.now_gender_type = _("所有性别")
+        """ 当前面板性别类型 """
+        self.now_age_type = _("所有年龄")
+        """ 当前面板年龄类型 """
         self.live_list = [
             character_id
             for character_id in cache.character_data
@@ -63,11 +67,33 @@ class CharacterStatusListPanel:
                 self.dead_list, SeeCharacterStatusDraw, 10, 1, window_width, 1, 1, 0
             ),
         ]
+        gender_type_list = [_("所有性别"), _("男"), _("女"), _("扶她"), _("无性")]
+        age_type_list = [_("所有年龄"), _("小学"), _("初中"), _("高中"), _("成年")]
         while 1:
             if cache.now_panel_id != constant.Panel.VIEW_CHARACTER_STATUS_LIST:
                 break
             if self.now_panel == panel_type_list[0]:
                 self.handle_panel = panel_data[0]
+                now_charater_list = []
+                if self.now_gender_type == _("所有性别"):
+                    now_charater_list = self.live_list
+                elif self.now_gender_type == _("男"):
+                    now_charater_list = [character_id for character_id in self.live_list if cache.character_data[character_id].sex == 0]
+                elif self.now_gender_type == _("女"):
+                    now_charater_list = [character_id for character_id in self.live_list if cache.character_data[character_id].sex == 1]
+                elif self.now_gender_type == _("扶她"):
+                    now_charater_list = [character_id for character_id in self.live_list if cache.character_data[character_id].sex == 2]
+                elif self.now_gender_type == _("无性"):
+                    now_charater_list = [character_id for character_id in self.live_list if cache.character_data[character_id].sex == 3]
+                if self.now_age_type == _("小学"):
+                    now_charater_list = [character_id for character_id in now_charater_list if cache.character_data[character_id].age in range(7,12)]
+                elif self.now_age_type == _("初中"):
+                    now_charater_list = [character_id for character_id in now_charater_list if cache.character_data[character_id].age in range(13,15)]
+                elif self.now_age_type == _("高中"):
+                    now_charater_list = [character_id for character_id in now_charater_list if cache.character_data[character_id].age in range(16,18)]
+                elif self.now_age_type == _("成年"):
+                    now_charater_list = [character_id for character_id in now_charater_list if cache.character_data[character_id].age > 18]
+                self.handle_panel.text_list = now_charater_list
             else:
                 self.handle_panel = panel_data[1]
             self.handle_panel.update()
@@ -93,10 +119,51 @@ class CharacterStatusListPanel:
             line_feed.draw()
             line = draw.LineDraw("+", self.width)
             line.draw()
+            if self.now_panel == panel_type_list[0]:
+                for gender_type in gender_type_list:
+                    if gender_type == self.now_gender_type:
+                        now_draw = draw.CenterDraw()
+                        now_draw.text = f"[{gender_type}]"
+                        now_draw.style = "onbutton"
+                        now_draw.width = self.width / len(gender_type_list)
+                        now_draw.draw()
+                    else:
+                        now_draw = draw.CenterButton(
+                            f"[{gender_type}]",
+                            gender_type,
+                            self.width / len(gender_type_list),
+                            cmd_func=self.change_gender_type,
+                            args=(gender_type,),
+                        )
+                        now_draw.draw()
+                        return_list.append(now_draw.return_text)
+            line_feed.draw()
+            line.draw()
+            if self.now_panel == panel_type_list[0]:
+                for age_type in age_type_list:
+                    if age_type == self.now_age_type:
+                        now_draw = draw.CenterDraw()
+                        now_draw.text = f"[{age_type}]"
+                        now_draw.style = "onbutton"
+                        now_draw.width = self.width / len(age_type_list)
+                        now_draw.draw()
+                    else:
+                        now_draw = draw.CenterButton(
+                            f"[{age_type}]",
+                            age_type,
+                            self.width / len(age_type_list),
+                            cmd_func=self.change_age_type,
+                            args=(age_type,),
+                        )
+                        now_draw.draw()
+                        return_list.append(now_draw.return_text)
+            line_feed.draw()
+            line.draw()
             self.handle_panel.draw()
             return_list.extend(self.handle_panel.return_list)
             back_draw = draw.CenterButton(_("[返回]"), _("返回"), window_width)
             back_draw.draw()
+            line_feed.draw()
             return_list.append(back_draw.return_text)
             yrn = flow_handle.askfor_all(return_list)
             if yrn == back_draw.return_text:
@@ -110,6 +177,24 @@ class CharacterStatusListPanel:
         panel_type -- 要切换的列表类型
         """
         self.now_panel = panel_type
+        py_cmd.clr_cmd()
+
+    def change_gender_type(self, gender_type: str):
+        """
+        切换当前面板显示的性别列表类型
+        Keyword arguments:
+        gender_type -- 要切换的性别类型
+        """
+        self.now_gender_type = gender_type
+        py_cmd.clr_cmd()
+
+    def change_age_type(self, age_type: str):
+        """
+        切换当前面板显示的年龄列表类型
+        Keyword arguments:
+        age_type -- 要切换的年龄类型
+        """
+        self.now_age_type = age_type
         py_cmd.clr_cmd()
 
 

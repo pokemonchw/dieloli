@@ -4,6 +4,7 @@ from uuid import UUID
 from concurrent.futures import ThreadPoolExecutor
 from types import FunctionType
 from typing import Dict, Set, List
+import datetime
 from Script.Core import cache_control, game_type, value_handle, get_text
 from Script.Design import character_handle, constant, game_time, settle_behavior, handle_premise, event, cooking, map_handle
 from Script.Config import game_config, normal_config
@@ -319,12 +320,6 @@ def judge_character_status(character_id: int, now_time: int) -> int:
 
 def refresh_teacher_classroom():
     """ 刷新所有教师准备上课的班级位置 """
-    now_week = game_time.get_week_day()
-    all_class_time_table_data = cache.teacher_class_time_table[now_week]
-    now_time: datetime.datetime = datetime.datetime.fromtimestamp(
-        character_data.behavior.start_time
-    )
-    now_time_value = now_time.hour * 100 + now_time.minute
     for character_id in cache.teacher_class_time_data:
         character_data: game_type.Character = cache.character_data[character_id]
         identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
@@ -336,6 +331,8 @@ def refresh_teacher_classroom():
             character_id
         ]
         time_judge = True
+        now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+        now_time_value = now_time.hour * 100 + now_time.minute
         for timetable in timetable_list:
             if timetable.week_day != now_week:
                 continue
