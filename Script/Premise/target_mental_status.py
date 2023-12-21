@@ -15,6 +15,8 @@ def handle_target_happy_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(8, 0)
     return target_data.status[8] > 100
@@ -30,6 +32,8 @@ def handle_target_happy_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(8, 0)
     return target_data.status[8] < 10
@@ -45,6 +49,8 @@ def handle_target_pain_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(9, 0)
     return target_data.status[9] > 100
@@ -60,6 +66,8 @@ def handle_target_pain_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(9, 0)
     return target_data.status[9] < 10
@@ -75,6 +83,8 @@ def handle_target_yearn_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(10, 0)
     return target_data.status[10] > 100
@@ -90,6 +100,8 @@ def handle_target_yearn_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(10, 0)
     return target_data.status[10] < 10
@@ -105,6 +117,8 @@ def handle_target_fear_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(11, 0)
     return target_data.status[11] > 100
@@ -120,6 +134,8 @@ def handle_target_fear_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(11, 0)
     return target_data.status[11] < 10
@@ -135,6 +151,8 @@ def handle_target_antipathy_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(12, 0)
     return target_data.status[12] > 100
@@ -150,6 +168,8 @@ def handle_target_antipathy_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(12, 0)
     return target_data.status[12] < 10
@@ -165,6 +185,8 @@ def handle_target_shame_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(13, 0)
     return target_data.status[13] > 100
@@ -180,6 +202,8 @@ def handle_target_shame_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(13, 0)
     return target_data.status[13] < 10
@@ -195,6 +219,8 @@ def handle_target_depressed_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(14, 0)
     return target_data.status[14] > 100
@@ -210,6 +236,8 @@ def handle_target_depressed_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(14, 0)
     return target_data.status[14] < 10
@@ -225,6 +253,8 @@ def handle_target_arrogant_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(15, 0)
     return target_data.status[15] > 100
@@ -240,6 +270,8 @@ def handle_target_arrogant_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(15, 0)
     return target_data.status[15] < 10
@@ -254,7 +286,9 @@ def handle_target_envy_is_height(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    character_data: game_type.Character = cache.character_data[character_id]
+    character_data: game_type.Character = cache.charaer_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(16, 0)
     return target_data.status[16] > 100
@@ -270,6 +304,8 @@ def handle_target_envy_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(16, 0)
     return target_data.status[16] < 10
@@ -285,6 +321,8 @@ def handle_target_rage_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(17, 0)
     return target_data.status[17] > 100
@@ -300,6 +338,8 @@ def handle_target_rage_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(17, 0)
     return target_data.status[17] < 10
@@ -315,6 +355,8 @@ def handle_target_lazy_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(18, 0)
     return target_data.status[18] > 100
@@ -330,6 +372,8 @@ def handle_target_lazy_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(18, 0)
     return target_data.status[18] < 10
@@ -345,6 +389,8 @@ def handle_target_greedy_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(19, 0)
     return target_data.status[19] > 100
@@ -360,6 +406,8 @@ def handle_target_greedy_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(19, 0)
     return target_data.status[19] < 10
@@ -375,6 +423,8 @@ def handle_target_gluttony_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(20, 0)
     return target_data.status[20] > 100
@@ -390,6 +440,8 @@ def handle_target_gluttony_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(20, 0)
     return target_data.status[20] < 10
@@ -405,6 +457,8 @@ def handle_target_lust_is_hight(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(21, 0)
     return target_data.status[21] > 100
@@ -420,6 +474,8 @@ def handle_target_lust_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -2:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.status.setdefault(21, 0)
     return target_data.status[21] < 10

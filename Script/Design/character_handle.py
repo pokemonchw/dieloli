@@ -1,8 +1,8 @@
 import random
 import math
 import time
-
 import numpy
+from typing import Dict, Callable
 from sklearn.feature_extraction import DictVectorizer
 import hnswlib
 from Script.Core import (
@@ -88,7 +88,7 @@ def init_character(character_id: int, character_tem: game_type.NpcTem):
     now_character.name = character_tem.Name
     now_character.sex = character_tem.Sex
     now_character.adv = character_tem.AdvNpc
-    now_character.target_character_id = character_id
+    now_character.target_character_id = -1
     if character_tem.MotherTongue != "":
         now_character.mother_tongue = character_tem.MotherTongue
     if character_tem.Age != "":
@@ -237,52 +237,63 @@ def get_rand_npc_age_tem(age_judge: str) -> int:
     return now_age_tem
 
 
+def filter_characters_by(condition: Callable[[int], bool]) -> Dict[int, int]:
+    """
+    筛选符合特定条件的角色，并返回其ID和年龄的字典。
+    :param condition: 一个接受角色ID作为参数并返回布尔值的函数，用于决定是否选择该角色。
+    :return: 字典，其中键为角色ID，值为角色年龄。
+    """
+    return {
+        character_id: cache.character_data[character_id].age
+        for character_id in cache.character_data
+        if condition(character_id)
+    }
+
+
+def sort_characters_by_age(group: Dict[int, int]) -> list:
+    """
+    按年龄对角色组进行排序。
+    :param group: 字典，键为角色ID，值为角色年龄。
+    :return: 按年龄排序的角色ID列表。
+    """
+    return sorted(group, key=lambda character_id: group[character_id])
+
+
+def assign_dormitory(character_ids: list, dormitory: Dict[str, int], max_per_room: int):
+    """
+    将角色分配到宿舍。
+
+    :param character_ids: 需要分配宿舍的角色ID列表。
+    :param dormitory: 宿舍字典，键为宿舍房间名，值为该房间当前分配的角色数量。
+    :param max_per_room: 每个宿舍房间的最大角色容量。
+    """
+    for character_id in character_ids:
+        now_room = next(iter(dormitory))
+        cache.character_data[character_id].dormitory = now_room
+        dormitory[now_room] += 1
+        if dormitory[now_room] >= max_per_room:
+            del dormitory[now_room]
+
+
 def init_character_dormitory():
     """
-    分配角色宿舍
-    小于18岁，男生分配到男生宿舍，女生分配到女生宿舍，按宿舍楼层和角色年龄，从下往上，从小到大分配，其他性别分配到地下室，大于18岁，教师宿舍混居
+    初始化并分配角色到宿舍。
+    规则如下：
+    - 18岁及以下的男生分配到男生宿舍，女生分配到女生宿舍。
+    - 其他性别的18岁以下角色分配到地下室。
+    - 18岁以上的角色分配到教师宿舍。
+    宿舍分配根据年龄从小到大进行。
     """
-    character_sex_data = {
-        "Man": {
-            character_id: cache.character_data[character_id].age
-            for character_id in cache.character_data
-            if cache.character_data[character_id].age <= 18
-               and cache.character_data[character_id].sex == 0
-        },
-        "Woman": {
-            character_id: cache.character_data[character_id].age
-            for character_id in cache.character_data
-            if cache.character_data[character_id].age <= 18
-               and cache.character_data[character_id].sex == 1
-        },
-        "Other": {
-            character_id: cache.character_data[character_id].age
-            for character_id in cache.character_data
-            if cache.character_data[character_id].age <= 18
-               and cache.character_data[character_id].sex not in {0, 1}
-        },
-        "Teacher": {
-            character_id: cache.character_data[character_id].age
-            for character_id in cache.character_data
-            if cache.character_data[character_id].age > 18
-        },
+    # 分配角色到不同组
+    character_groups = {
+        "Man": filter_characters_by(lambda id: cache.character_data[id].age <= 18 and cache.character_data[id].sex == 0),
+        "Woman": filter_characters_by(lambda id: cache.character_data[id].age <= 18 and cache.character_data[id].sex == 1),
+        "Other": filter_characters_by(lambda id: cache.character_data[id].age <= 18 and cache.character_data[id].sex not in {0, 1}),
+        "Teacher": filter_characters_by(lambda id: cache.character_data[id].age > 18)
     }
-    man_max = len(character_sex_data["Man"])
-    woman_max = len(character_sex_data["Woman"])
-    other_max = len(character_sex_data["Other"])
-    teacher_max = len(character_sex_data["Teacher"])
-    character_sex_data["Man"] = [
-        k[0] for k in sorted(character_sex_data["Man"].items(), key=lambda x: x[1])
-    ]
-    character_sex_data["Woman"] = [
-        k[0] for k in sorted(character_sex_data["Woman"].items(), key=lambda x: x[1])
-    ]
-    character_sex_data["Other"] = [
-        k[0] for k in sorted(character_sex_data["Other"].items(), key=lambda x: x[1])
-    ]
-    character_sex_data["Teacher"] = [
-        k[0] for k in sorted(character_sex_data["Teacher"].items(), key=lambda x: x[1])
-    ]
+    # 对每组按年龄排序
+    for group in character_groups:
+        character_groups[group] = sort_characters_by_age(character_groups[group])
     teacher_dormitory = {
         x: 0 for x in sorted(constant.place_data["TeacherDormitory"], key=lambda x: x[0])
     }
@@ -301,38 +312,17 @@ def init_character_dormitory():
         for x in j
     }
     basement = {x: 0 for x in constant.place_data["Basement"]}
-    male_dormitoryMax = len(male_dormitory.keys())
-    female_dormitoryMax = len(female_dormitory.keys())
-    teacher_dormitoryMax = len(teacher_dormitory)
-    basement_max = len(basement)
-    single_room_man = math.ceil(man_max / male_dormitoryMax)
-    single_room_woman = math.ceil(woman_max / female_dormitoryMax)
-    single_room_basement = math.ceil(other_max / basement_max)
-    single_room_teacher = math.ceil(teacher_max / teacher_dormitoryMax)
-    for character_id in character_sex_data["Man"]:
-        now_room = list(male_dormitory.keys())[0]
-        cache.character_data[character_id].dormitory = now_room
-        male_dormitory[now_room] += 1
-        if male_dormitory[now_room] >= single_room_man:
-            del male_dormitory[now_room]
-    for character_id in character_sex_data["Woman"]:
-        now_room = list(female_dormitory.keys())[0]
-        cache.character_data[character_id].dormitory = now_room
-        female_dormitory[now_room] += 1
-        if female_dormitory[now_room] >= single_room_woman:
-            del female_dormitory[now_room]
-    for character_id in character_sex_data["Other"]:
-        now_room = list(basement.keys())[0]
-        cache.character_data[character_id].dormitory = now_room
-        basement[now_room] += 1
-        if basement[now_room] >= single_room_basement:
-            del basement[now_room]
-    for character_id in character_sex_data["Teacher"]:
-        now_room = list(teacher_dormitory.keys())[0]
-        cache.character_data[character_id].dormitory = now_room
-        teacher_dormitory[now_room] += 1
-        if teacher_dormitory[now_room] >= single_room_teacher:
-            del teacher_dormitory[now_room]
+    # 准备宿舍数据
+    dormitories = {
+        "Man": male_dormitory,
+        "Woman": female_dormitory,
+        "Other": basement,
+        "Teacher": teacher_dormitory
+    }
+    # 分配宿舍
+    for group, dormitory in dormitories.items():
+        max_per_room = math.ceil(len(character_groups[group]) / len(dormitory))
+        assign_dormitory(character_groups[group], dormitory, max_per_room)
 
 
 def init_no_character_scene():

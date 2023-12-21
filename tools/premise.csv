@@ -10,6 +10,7 @@ is_primary_school_students,角色身份类前提,角色是小学生
 is_player_target,角色身份类前提,是玩家的交互对象
 target_is_futa_or_woman,角色性别类前提,交互对象是扶她或女性
 target_is_futa_or_man,角色性别类前提,交互对象是扶她或男性
+is_futa_or_man,角色性别类前提,角色是扶她或男性
 is_man,角色性别类前提,角色是男性
 is_not_man,角色性别类前提,角色不是男性
 is_woman,角色性别类前提,角色是女性
@@ -114,6 +115,8 @@ scene_no_have_other_character,场景状态类前提,场景中没有自己外的�
 scene_character_only_player_and_one,场景状态类前提,场景中只有包括玩家在内的两个角色
 beyond_friendship_target_in_scene,场景状态类前提,对场景中某个角色抱有超越友谊的想法
 in_fountain,场景状态类前提,角色处于喷泉
+in_library,场景状态类前提,角色处于图书馆
+not_in_library,场景状态类前提,角色不处于图书馆
 have_other_target_in_scene,场景状态类前提,场景中有自己和交互对象以外的其他角色
 no_have_other_target_in_scene,场景状态类前提,场景中没有自己和交互对象以外的其他角色
 have_like_target_in_scene,场景状态类前提,有喜欢的角色在场景中
@@ -487,8 +490,10 @@ gluttony_is_height,角色心灵状态类前提,角色暴食情绪高涨
 gluttony_is_low,角色心灵状态类前提,角色暴食情绪低下
 lust_is_hight,角色心灵状态类前提,角色色欲高涨
 lust_is_low,角色心灵状态类前提,角色色欲低下
-hyposthenia,角色肉体状态类前提,角色健康不足
-physical_strenght,角色肉体状态类前提,角色健康充沛
+hp_is_hight,角色肉体状态类前提,角色身体健康
+hp_is_low,角色肉体状态类前提,角色身体不健康
+mp_is_hight,角色肉体状态类前提,角色体力充沛
+mp_is_low,角色肉体状态类前提,角色体力不足
 is_warm,角色肉体状态类前提,角色感觉温暖
 not_warm,角色肉体状态类前提,角色未感觉温暖
 is_ache,角色肉体状态类前提,角色感觉疼痛
@@ -532,8 +537,10 @@ target_gluttony_is_height,交互对象心灵状态类前提,交互对象暴食�
 target_gluttony_is_low,交互对象心灵状态类前提,交互对象暴食情绪低下
 target_lust_is_hight,交互对象心灵状态类前提,交互对象色欲高涨
 target_lust_is_low,交互对象心灵状态类前提,交互对象色欲低下
-target_hyposthenia,交互对象肉体状态类前提,交互对象健康不足
-target_physical_strenght,交互对象肉体状态类前提,交互对象健康充沛
+target_hp_is_hight,交互对象肉体状态类前提,交互对象身体健康
+target_hp_is_low,交互对象肉体状态类前提,交互对象身体不健康
+target_mp_is_hight,交互对象肉体状态类前提,交互对象体力充沛
+target_mp_is_low,交互对象肉体状态类前提,交互对象体力不足
 target_is_warm,交互对象肉体状态类前提,交互对象感觉温暖
 target_not_warm,交互对象肉体状态类前提,交互对象未感觉温暖
 target_is_ache,交互对象肉体状态类前提,交互对象感觉疼痛

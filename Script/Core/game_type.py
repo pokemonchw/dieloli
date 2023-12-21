@@ -162,16 +162,6 @@ class NormalConfig:
     """ 绘制用单屏行数 """
     inputbox_width: int
     """ 输入框宽度 """
-    year: int
-    """ 游戏时间开始年份 """
-    month: int
-    """ 游戏时间开始月份 """
-    day: int
-    """ 游戏时间开始日期 """
-    hour: int
-    """ 游戏时间开始小时数 """
-    minute: int
-    """ 游戏时间开始分钟数 """
     max_save: int
     """ 游戏存档数量上限 """
     save_page: int
@@ -406,6 +396,10 @@ class Character:
         """ 角色最大MP """
         self.mana_point: int = 0
         """ 角色当前MP """
+        self.day_use_mana_point: int = 0
+        """ 今日消耗体力 """
+        self.day_add_calories: int = 0
+        """ 今日增加的热量 """
         self.sex_experience: Dict[int, int] = {}
         """ 角色的性经验数据 """
         self.sex_grade: Dict[str, str] = {}
@@ -496,7 +490,7 @@ class Character:
         """ 角色好感度数据 角色id:好感度 """
         self.food_bag: Dict[UUID, Food] = {}
         """ 角色持有的食物数据 """
-        self.target_character_id: int = 0
+        self.target_character_id: int = -1
         """ 角色当前交互对象id """
         self.adv: int = 0
         """ 剧情npc校验 """
@@ -520,6 +514,41 @@ class Character:
         """ 当前行为目标 """
         self.premise_data: Dict[str, float] = {}
         """ 角色当前的前提权重列表 """
+        self.identity_data: Dict[int, CharacterIdentity] = {}
+        """ 角色身份数据 {身份id:身份数据} """
+
+
+class CharacterIdentity:
+    """ 角色身份数据结构 """
+
+    def __init__(self):
+        self.cid: int = 0
+        """ 身份id """
+
+
+class StudentIdentity(CharacterIdentity):
+    """ 学生身份数据结构 """
+
+    def __init__(self):
+        super().__init__()
+        self.grade: int = 0
+        """ 所属年级 """
+        self.classroom: str = ""
+        """ 所属教室位置 """
+        self.dormitory: str = ""
+        """ 所属宿舍位置 """
+
+
+class TeacherIdentity(CharacterIdentity):
+    """ 教师身份数据结构 """
+
+    def __init__(self):
+        self.cid = 1
+        """ 身份id """
+        self.officeroom: str = ""
+        """ 所属的办公室位置 """
+        self.now_classroom: str = ""
+        """ 准备上课的班级 """
 
 
 class TeacherTimeTable:
@@ -617,7 +646,7 @@ class Cache:
         各老师每周上课数据
         老师id:上课数据列表
         """
-        self.teacher_class_week_day_data: Dict[int, Set] = {}
+        self.teacher_class_week_day_data: Dict[int, Set[int]] = {}
         """ 各老师每周工作日集合 """
         self.class_timetable_teacher_data: Dict[
             int, Dict[int, Dict[str, Dict[int, Dict[int, int]]]]
@@ -634,9 +663,11 @@ class Cache:
         周几:学校id:年级id:上课时间:教师id:教室id:科目
         """
         self.teacher_phase_table: Dict[int, int] = {}
-        """ 各老师所在年级 """
-        self.classroom_students_data: Dict[str, Set[str]] = {}
-        """ 各班级学生集合 """
+        """ 各老师所在年级 {角色id:年级} """
+        self.teacher_class_time_data: Dict[int, Dict[int, Dict[int, Dict[str, int]]]] = {}
+        """ 各老师每天上课时间数据 {角色id:{星期:{课时:班级:科目}}} """
+        self.classroom_students_data: Dict[str, Set[int]] = {}
+        """ 各班级学生集合 {班级:{角色id}} """
         self.old_character_id: int = 0
         """ 离开场景面板前在场景中查看的角色id """
         self.total_number_of_people_of_all_ages: Dict[str, int] = {}

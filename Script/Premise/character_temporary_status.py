@@ -15,6 +15,8 @@ def handle_have_target(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     if character_data.target_character_id == character_id:
         return 0
     return 1
@@ -69,6 +71,8 @@ def handle_target_is_live(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return not target_data.dead
 
@@ -109,5 +113,7 @@ def handle_target_is_lose_first_kiss(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.behavior.temporary_status.lose_first_kiss

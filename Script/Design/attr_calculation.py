@@ -39,7 +39,7 @@ def get_end_age(sex: int) -> int:
     sex -- 性别
     """
     tem_value = game_config.config_end_age_tem_sex_data[sex]
-    return value_handle.get_gauss_rand(int(tem_value * 0.5), int(tem_value * 1.5))
+    return value_handle.custom_distribution(int(tem_value * 0.5), int(tem_value * 1.5))
 
 
 def get_height(tem_name: int, age: int) -> game_type.Height:
@@ -50,7 +50,7 @@ def get_height(tem_name: int, age: int) -> game_type.Height:
     age -- 人物年龄
     """
     tem_data = game_config.config_height_tem_sex_data[tem_name]
-    initial_height = value_handle.get_gauss_rand(tem_data.min_value, tem_data.max_value)
+    initial_height = value_handle.custom_distribution(tem_data.min_value, tem_data.max_value)
     expect_age = 0
     expect_height = 0
     if tem_name in {0, 3}:
@@ -79,7 +79,7 @@ def get_chest(chest_tem: int, birthday: int) -> game_type.Chest:
     game_type.Chest -- 胸围数据
     """
     target_chest = get_rand_npc_chest(chest_tem)
-    over_age = int(value_handle.get_gauss_rand(14, 18))
+    over_age = int(value_handle.custom_distribution(14, 18))
     over_year_start = birthday + (over_age - 1) * 31536365
     over_year_end = birthday + over_age * 31536365
     end_date = random.randint(over_year_start, over_year_end)
@@ -113,7 +113,7 @@ def get_rand_npc_chest(chest_tem: int) -> int:
     chest_tem -- 罩杯模板
     """
     chest_scope = game_config.config_chest[chest_tem]
-    return value_handle.get_gauss_rand(chest_scope.min_value, chest_scope.max_value)
+    return value_handle.custom_distribution(chest_scope.min_value, chest_scope.max_value)
 
 
 def get_rand_npc_birthday(age: int) -> int:
@@ -217,7 +217,7 @@ def get_bmi(tem_name: int) -> float:
     int -- bmi值
     """
     tem_data = game_config.config_weight_tem[tem_name]
-    return value_handle.get_gauss_rand(tem_data.min_value, tem_data.max_value)
+    return value_handle.custom_distribution(tem_data.min_value, tem_data.max_value)
 
 
 def get_body_fat(sex: int, tem_name: int) -> float:
@@ -232,7 +232,7 @@ def get_body_fat(sex: int, tem_name: int) -> float:
     sex_tem = sex in (0, 3)
     tem_data_id = game_config.config_body_fat_tem_data[sex_tem][tem_name]
     tem_data = game_config.config_body_fat_tem[tem_data_id]
-    return value_handle.get_gauss_rand(tem_data.min_value, tem_data.max_value)
+    return value_handle.custom_distribution(tem_data.min_value, tem_data.max_value)
 
 
 def get_weight(bmi: float, height: float) -> float:
@@ -264,13 +264,13 @@ def get_measurements(
     elif weight_tem > 1:
         fix = 5 * (weight_tem - 1)
     if tem_name in {0, 3}:
-        bust = value_handle.get_gauss_rand(0.4676, 0.5676) * height + fix
-        waist = value_handle.get_gauss_rand(0.3779, 0.4779) * height + fix
-        hip = value_handle.get_gauss_rand(0.4707, 0.5707) * height + fix
+        bust = value_handle.custom_distribution(0.4676, 0.5676) * height + fix
+        waist = value_handle.custom_distribution(0.3779, 0.4779) * height + fix
+        hip = value_handle.custom_distribution(0.4707, 0.5707) * height + fix
     else:
-        bust = value_handle.get_gauss_rand(0.4735, 0.5735) * height + fix
-        waist = value_handle.get_gauss_rand(0.3634, 0.4634) * height + fix
-        hip = value_handle.get_gauss_rand(0.5278, 0.6278) * height + fix
+        bust = value_handle.custom_distribution(0.4735, 0.5735) * height + fix
+        waist = value_handle.custom_distribution(0.3634, 0.4634) * height + fix
+        hip = value_handle.custom_distribution(0.5278, 0.6278) * height + fix
     measurements = game_type.Measurements()
     measurements.bust = bust
     measurements.waist = waist
@@ -288,8 +288,8 @@ def get_max_hit_point(tem_id: int) -> int:
     """
     tem_data = game_config.config_hitpoint_tem[tem_id]
     max_hit_point = tem_data.max_value
-    add_value = value_handle.get_gauss_rand(0, 500)
-    impairment = value_handle.get_gauss_rand(0, 500)
+    add_value = value_handle.custom_distribution(0, 500)
+    impairment = value_handle.custom_distribution(0, 500)
     return max_hit_point + add_value - impairment
 
 
@@ -303,8 +303,8 @@ def get_max_mana_point(tem_id: int) -> int:
     """
     tem_data = game_config.config_manapoint_tem[tem_id]
     max_mana_point = tem_data.max_value
-    add_value = value_handle.get_gauss_rand(0, 500)
-    impairment = value_handle.get_gauss_rand(0, 500)
+    add_value = value_handle.custom_distribution(0, 500)
+    impairment = value_handle.custom_distribution(0, 500)
     return max_mana_point + add_value - impairment
 
 

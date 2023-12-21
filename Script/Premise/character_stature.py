@@ -15,6 +15,8 @@ def handle_target_age_similar(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     if character_data.age >= target_data.age - 2 and character_data.age <= target_data.age + 2:
         return 1
@@ -31,6 +33,8 @@ def handle_target_average_height_similar(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     age_tem = attr_calculation.judge_age_group(target_data.age)
     average_height = cache.average_height_by_age[age_tem][target_data.sex]
@@ -52,6 +56,8 @@ def handle_target_average_height_low(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     age_tem = attr_calculation.judge_age_group(target_data.age)
     average_height = cache.average_height_by_age[age_tem][target_data.sex]
@@ -105,6 +111,8 @@ def handle_target_height_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_data.height.now_height < character_data.height.now_height:
         return (character_data.height.now_height - target_data.height.now_height) > 0
@@ -121,6 +129,8 @@ def handle_target_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_data.height.now_height >= character_data.height.now_height * 1.05:
         return 1
@@ -137,6 +147,8 @@ def handle__target_chest_is_cliff(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return not attr_calculation.judge_chest_group(target_data.chest.now_chest)
 
@@ -151,6 +163,8 @@ def handle_target_average_stature_height(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     age_tem = attr_calculation.judge_age_group(target_data.age)
     if age_tem in cache.average_bodyfat_by_age:

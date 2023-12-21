@@ -277,15 +277,25 @@ class CharacterInfoHead:
         sex_text = game_config.config_sex_tem[character_data.sex].name
         if character_id:
             social = 5
-            if 5 in character_data.social_contact_data:
-                social = character_data.social_contact_data[5]
+            if 0 in character_data.social_contact_data:
+                social = character_data.social_contact_data[0]
             social_text = game_config.config_social_type[social].name
-            message = _("No.{character_id}: {character_name} {sex_text} {social_text}").format(
-                character_id=character_id,
-                character_name=character_data.name,
-                sex_text=sex_text,
-                social_text=social_text,
-            )
+            if character_data.target_character_id != -1:
+                target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+                message = _("No.{character_id}: {character_name} {sex_text} {social_text} 互动:{target_name}").format(
+                    character_id=character_id,
+                    character_name=character_data.name,
+                    sex_text=sex_text,
+                    social_text=social_text,
+                    target_name=target_data.name
+                )
+            else:
+                message = _("No.{character_id}: {character_name} {sex_text} {social_text}").format(
+                    character_id=character_id,
+                    character_name=character_data.name,
+                    sex_text=sex_text,
+                    social_text=social_text,
+                )
         else:
             message = _("No.{character_id}: {character_name} {sex_text}").format(
                 character_id=character_id,
@@ -418,25 +428,38 @@ class CharacterRoomText:
             dormitory_text = attr_text.get_scene_path_text(dormitory_path)
         self.dormitory_text = _("宿舍位置:") + dormitory_text
         """ 宿舍位置文本 """
-        classroom = character_data.classroom
-        now_classroom_text = _("教室位置:")
-        if classroom != "":
-            classroom_path = map_handle.get_map_system_path_for_str(classroom)
-            classroom_text = attr_text.get_scene_path_text(classroom_path)
-            now_classroom_text += classroom_text
+        if 0 in character_data.identity_data:
+            identity_data: game_type.StudentIdentity = character_data.identity_data[0]
+            classroom = identity_data.classroom
+            now_classroom_text = _("教室位置:")
+            if classroom != "":
+                classroom_path = map_handle.get_map_system_path_for_str(classroom)
+                classroom_text = attr_text.get_scene_path_text(classroom_path)
+                now_classroom_text += classroom_text
+            else:
+                now_classroom_text += _("暂无")
+            self.classroom_text = now_classroom_text
+            self.officeroom_text = _("办公室位置:暂无")
         else:
-            now_classroom_text += _("暂无")
-        self.classroom_text = now_classroom_text
-        """ 教室位置文本 """
-        officeroom = character_data.officeroom
-        now_officeroom_text = _("办公室位置:")
-        if officeroom:
-            officeroom_text = attr_text.get_scene_path_text(officeroom)
-            now_officeroom_text += officeroom_text
-        else:
-            now_officeroom_text += _("暂无")
-        self.officeroom_text = now_officeroom_text
-        """ 办公室位置文本 """
+            identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
+            classroom = identity_data.now_classroom
+            now_classroom_text = _("教室位置:")
+            if classroom != "":
+                classroom_path = map_handle.get_map_system_path_for_str(classroom)
+                classroom_text = attr_text.get_scene_path_text(classroom_path)
+                now_classroom_text += classroom_text
+            else:
+                now_classroom_text += _("暂无")
+            officeroom = identity_data.officeroom
+            now_officeroom_text = _("办公室位置:")
+            if officeroom != "":
+                officeroom_path = map_handle.get_map_system_path_for_str(officeroom)
+                officeroom_text = attr_text.get_scene_path_text(officeroom_path)
+                now_officeroom_text += officeroom_text
+            else:
+                now_officeroom_text += _("暂无")
+            self.classroom_text = now_classroom_text
+            self.officeroom_text = now_officeroom_text
 
     def draw(self):
         """绘制面板"""

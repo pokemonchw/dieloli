@@ -89,27 +89,10 @@ def get_value_text(value: float) -> str:
     Return arguments:
     str -- 文本显示
     """
-    value = round(value, 2)
-    company = ["K", "M", "G", "T", "P", "E", "Z", "Y", "B", "N", "D"]
-    int_value = int(value)
-    value_str = str(int_value)
-    if value > 0:
-        if len(value_str) < 4:
-            value_str = str(value)
-        else:
-            company_index = int((len(value_str) - 1) / 3)
-            if company_index >= len(company):
-                company_index = len(company) - 1
-            value_str = value_str[: -company_index * 3]
-            value_str += company[company_index - 1]
-            value_str = "+" + value_str
-    else:
-        if len(value_str) < 5:
-            value_str = str(value)
-        else:
-            company_index = int((len(value_str) - 2) / 3)
-            if company_index >= len(company):
-                company_index = len(company) - 1
-            value_str = value_str[: -company_index * 3]
-            value_str += company[company_index - 1]
-    return value_str
+    units = ["", "K", "M", "G", "T", "P", "E", "Z", "Y", "B", "N", "D"]
+    rounded_value = round(value, 2)
+    if abs(rounded_value) < 1000:
+        return str(rounded_value)
+    magnitude = min(int(math.log10(abs(value)) / 3), len(units) - 1)
+    scaled_value = rounded_value / (1000 ** magnitude)
+    return f"{scaled_value:.2f}{units[magnitude]}"

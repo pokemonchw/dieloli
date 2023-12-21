@@ -20,8 +20,19 @@ def character_eat_rand_food(character_id: int):
         now_food: game_type.Food = character_data.food_bag[food_id]
         if 27 in now_food.feel and now_food.eat:
             now_food_list.append(food_id)
+    if not now_food_list:
+        return
     character_data.behavior.eat_food = character_data.food_bag[random.choice(now_food_list)]
     character_data.behavior.duration = 1
+    character_data.behavior.food_quality = now_food.quality
+    food_name = ""
+    if now_food.recipe != -1:
+        food_recipe: game_type.Recipes = cache.recipe_data[now_food.recipe]
+        food_name = food_recipe.name
+    else:
+        food_config = game_config.config_food[now_food.id]
+        food_name = food_config.name
+    character_data.behavior.food_name = food_name
     character_data.state = constant.CharacterStatus.STATUS_EAT
 
 
@@ -47,6 +58,18 @@ def character_drink_rand_drinks(character_id: int):
         now_list = drink_list
     else:
         now_list = food_list
+    if not now_list:
+        return
     character_data.behavior.eat_food = character_data.food_bag[random.choice(now_list)]
     character_data.behavior.duration = 1
+    character_data.behavior.food_quality = now_food.quality
+    food_name = ""
+    if now_food.recipe != -1:
+        food_recipe: game_type.Recipes = cache.recipe_data[now_food.recipe]
+        food_name = food_recipe.name
+    else:
+        food_config = game_config.config_food[now_food.id]
+        food_name = food_config.name
+    character_data.behavior.food_name = food_name
     character_data.state = constant.CharacterStatus.STATUS_EAT
+

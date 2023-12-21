@@ -250,6 +250,15 @@ class EatFoodByFoodNameDraw:
         character_data.behavior.behavior_id = constant.Behavior.EAT
         character_data.behavior.eat_food = now_food
         character_data.behavior.duration = 1
+        character_data.behavior.food_quality = now_food.quality
         character_data.state = constant.CharacterStatus.STATUS_EAT
+        food_name = ""
+        if now_food.recipe != -1:
+            food_recipe: game_type.Recipes = cache.recipe_data[now_food.recipe]
+            food_name = food_recipe.name
+        else:
+            food_config = game_config.config_food[now_food.id]
+            food_name = food_config.name
+        character_data.behavior.food_name = food_name
         update.game_update_flow(1)
         cache.now_panel_id = constant.Panel.IN_SCENE

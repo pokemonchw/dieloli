@@ -132,7 +132,7 @@ def handle_handle_in_handle():
 def handle_let_go():
     """处理放手指令"""
     character_data: game_type.Character = cache.character_data[0]
-    if character_data.target_character_id:
+    if character_data.target_character_id != -1:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
         target_data.follow = -1
 

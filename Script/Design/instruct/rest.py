@@ -25,6 +25,18 @@ def handle_rest():
     update.game_update_flow(10)
 
 
+@handle_instruct.add_instruct(constant.Instruct.SIESTA, constant.InstructType.REST, _("午睡"),{constant.Premise.IN_SIESTA_TIME})
+def handle_siesta():
+    """ 处理午睡指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 30
+    character_data.behavior.behavior_id = constant.Behavior.SIESTA
+    character_data.behavior.behavior_id = constant.Behavior.SIESTA
+    character_data.state = constant.CharacterStatus.STATUS_SIESTA
+    update.game_update_flow(30)
+
+
 @handle_instruct.add_instruct(
     constant.Instruct.SLEEP, constant.InstructType.REST, _("睡觉"), {constant.Premise.IN_DORMITORY}
 )
@@ -71,6 +83,20 @@ def handle_sleep():
         # 清除结算饥饿和进入极度疲惫的时间
         character_data.last_hunger_time = 0
         character_data.extreme_exhaustion_time = 0
+        # 刷新角色体重和体脂率
+        day_add_calories = character_data.day_add_calories - 2880
+        day_sub_calories = character_data.day_use_mana_point / 5
+        now_weight = character_data.weight
+        now_bodyfat = character_data.bodyfat
+        change_calories = day_add_calories - day_sub_calories
+        change_weight = change_calories / 10
+        new_weight = now_weight + change_weight / 1000
+        character_data.weight = new_weight
+        change_proportion = new_weight / now_weight
+        new_bodyfat = now_bodyfat * change_proportion
+        character_data.bodyfat = new_bodyfat
+        character_data.day_add_calories = 0
+        character_data.day_use_mana_point = 0
     # 刷新食堂
     character_behavior.update_cafeteria()
     # 完成

@@ -27,13 +27,14 @@ def init_time():
     """
     初始化游戏时间
     """
+    now_time = datetime.datetime.now()
     game_time = datetime.datetime(
-        normal_config.config_normal.year,
-        normal_config.config_normal.month,
-        normal_config.config_normal.day,
-        normal_config.config_normal.hour,
-        normal_config.config_normal.minute,
-        tzinfo=time_zone,
+        now_time.year,
+        now_time.month,
+        now_time.day,
+        6,
+        0,
+        tzinfo=time_zone
     )
     game_time = game_time.astimezone(time_zone)
     cache.game_time = game_time.timestamp()
@@ -65,6 +66,18 @@ def get_week_day_text() -> str:
     week_day = now_date.weekday()
     week_date_data = game_config.config_week_day[week_day]
     return week_date_data.name
+
+
+def get_week_day(now_time: int) -> int:
+    """ 获取当前星期 """
+    now_date = datetime.datetime.fromtimestamp(now_time, time_zone)
+    return now_date.weekday()
+
+
+def get_month(now_time: int) -> int:
+    """ 获取当前月份 """
+    now_date = datetime.datetime.fromtimestamp(now_time, time_zone)
+    return now_date.month()
 
 
 def sub_time_now(minute=0, hour=0, day=0, month=0, year=0):
@@ -436,7 +449,7 @@ def judge_attend_class_today(character_id: int) -> bool:
     now_month = now_time.month
     if now_month not in {3, 4, 5, 6, 8, 9, 10, 11, 12}:
         return 0
-    if character_data.age <= 18:
+    if 0 in character_data.identity_data:
         if character_data.age > 15:
             return 1
         if character_data.age > 13 and now_week < 6:

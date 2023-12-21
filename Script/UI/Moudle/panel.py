@@ -56,7 +56,7 @@ class SingleColumnButton:
         """
         for index, now_button in enumerate(button_list):
             if index <= self.max_height:
-                draw_button = draw.Button(
+                draw_button = draw.LeftButton(
                     now_button, return_list[index], normal_style, onbutton_style
                 )
                 draw_button.width = self.width

@@ -10,6 +10,8 @@ class Instruct:
     """ 闲聊 """
     ABUSE = 0
     """ 辱骂 """
+    GENERAL_SPEECH = 1
+    """ 演讲 """
 
     """
     =========================
@@ -102,6 +104,8 @@ class Instruct:
     """
     REST = 0
     """ 休息 """
+    SIESTA = 0
+    """ 午睡 """
     SLEEP = 0
     """ 睡觉 """
 

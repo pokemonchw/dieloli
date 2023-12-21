@@ -29,7 +29,7 @@ def own_charcter_move(target_scene: list):
             update.game_update_flow(now_need_time)
         else:
             break
-    cache.character_data[0].target_character_id = 0
+    cache.character_data[0].target_character_id = -1
     cache.now_panel_id = constant.Panel.IN_SCENE
 
 

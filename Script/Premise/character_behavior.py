@@ -50,6 +50,8 @@ def handle_target_is_sleep(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.state == constant.CharacterStatus.STATUS_SLEEP
 
@@ -65,6 +67,8 @@ def handle_target_is_sing(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     target_id = character_data.target_character_id
+    if target_id == -1:
+        return 0
     if target_id != character_id:
         target_data: game_type.Character = cache.character_data[target_id]
         return target_data.state == constant.CharacterStatus.STATUS_SINGING

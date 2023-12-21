@@ -15,6 +15,8 @@ def handle_target_is_futa_or_woman(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     if target_data.sex in {1, 2}:
         return 1
@@ -31,6 +33,8 @@ def handle_target_is_futa_or_man(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     if target_data.sex in {0, 1}:
         return 1
@@ -55,7 +59,7 @@ def handle_is_man(character_id: int) -> int:
 @handle_premise.add_premise(constant.Premise.IS_NOT_MAN)
 def handle_is_not_man(character_id: int) -> int:
     """
-    校验角色是否是男性
+    校验角色是否不是男性
     Keyword arguments:
     character_id -- 角色id
     Return arguments:
@@ -127,6 +131,8 @@ def handle_target_same_sex(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     return target_data.sex == character_data.sex
 
@@ -141,6 +147,8 @@ def handle_target_different_sex(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     return target_data.sex != character_data.sex
 
@@ -155,6 +163,8 @@ def handle_target_is_woman(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.sex == 1
 
@@ -169,6 +179,8 @@ def handle_target_is_man(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return not target_data.sex
 

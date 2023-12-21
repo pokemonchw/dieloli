@@ -93,8 +93,10 @@ def handle_in_classroom(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
-    if now_scene_str == character_data.classroom:
-        return 1
+    if 0 in character_data.identity_data:
+        identity_data: game_type.StudentIdentity = character_data.identity_data[0]
+        if now_scene_str == identity_data.classroom:
+            return 1
     return 0
 
 
@@ -220,6 +222,8 @@ def handle_in_target_dormitory(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     now_position = map_handle.get_map_system_path_str_for_list(character_data.position)
     return now_position == target_data.dormitory
@@ -326,6 +330,32 @@ def handle_in_fountain(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     return character_data.position == ["8"]
+
+
+@handle_premise.add_premise(constant.Premise.IN_LIBRARY)
+def handle_in_library(character_id: int) -> int:
+    """
+    校验角色是否处于图书馆中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.position[0] == "13"
+
+
+@handle_premise.add_premise(constant.Premise.NOT_IN_LIBRARY)
+def handle_not_in_library(character_id: int) -> int:
+    """
+    校验角色是否不处于图书馆中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return character_data.position[0] != "13"
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_OTHER_TARGET_IN_SCENE)
@@ -439,7 +469,6 @@ def handle_not_has_dislike_target_in_scene(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path_str]
-    character_list = []
     for i in {0, 1, 2, 3, 4}:
         character_data.social_contact.setdefault(i, set())
         for c in character_data.social_contact[i]:
@@ -460,8 +489,10 @@ def handle_no_in_classroom(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
-    if now_scene_str != character_data.classroom:
-        return 1
+    if 0 in character_data.identity_data:
+        identity_data: game_type.StudentIdentity = character_data.identity_data[0]
+        if now_scene_str == identity_data.classroom:
+            return 1
     return 0
 
 
@@ -475,11 +506,12 @@ def handle_teacher_no_in_classroom(character_id: int) -> int:
     int -- 权重
     """
     if not game_time.judge_attend_class_today(character_id):
-        return 1
+        return 0
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.classroom == "":
-        return 1
-    classroom: game_type.Scene = cache.scene_data[character_data.classroom]
+    if 0 not in character_data.identity_data:
+        return 0
+    identity_data: game_type.StudentIdentity = character_data.identity_data[0]
+    classroom: game_type.Scene = cache.scene_data[identity_data.classroom]
     now_time: datetime.datetime = datetime.datetime.fromtimestamp(
         character_data.behavior.start_time, game_time.time_zone
     )
@@ -512,22 +544,22 @@ def handle_teacher_no_in_classroom(character_id: int) -> int:
             return 1
         if phase not in cache.class_timetable_teacher_data[school_id]:
             return 1
-        if character_data.classroom not in cache.class_timetable_teacher_data[school_id][phase]:
+        if identity_data.classroom not in cache.class_timetable_teacher_data[school_id][phase]:
             return 1
         if (
                 now_week
-                not in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom]
+                not in cache.class_timetable_teacher_data[school_id][phase][identity_data.classroom]
         ):
             return 1
         if (
                 now_course_index
-                not in cache.class_timetable_teacher_data[school_id][phase][character_data.classroom][
+                not in cache.class_timetable_teacher_data[school_id][phase][identity_data.classroom][
             now_week
         ]
         ):
             return 1
         now_teacher = cache.class_timetable_teacher_data[school_id][phase][
-            character_data.classroom
+            identity_data.classroom
         ][now_week][now_course_index]
         if now_teacher not in classroom.character_list:
             return 1

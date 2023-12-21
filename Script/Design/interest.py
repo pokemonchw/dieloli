@@ -18,8 +18,8 @@ def init_character_interest():
         for knowledge in knowledge_skills:
             cache.character_data[character].knowledge_interest[
                 knowledge
-            ] = value_handle.get_gauss_rand(0.5, 1.5)
+            ] = value_handle.custom_distribution(0.5, 1.5)
         for language in language_skills:
             cache.character_data[character].language_interest[
                 language
-            ] = value_handle.get_gauss_rand(0.5, 1.5)
+            ] = value_handle.custom_distribution(0.5, 1.5)

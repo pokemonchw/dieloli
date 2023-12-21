@@ -295,8 +295,13 @@ def handle_have_drinks(character_id: int) -> int:
     for food_id in character_data.food_bag:
         now_food: game_type.Food = character_data.food_bag[food_id]
         if now_food.eat and 28 in now_food.feel:
-            drinks_index = 1
-            break
+            now_judge = 1
+            if 27 in now_food.feel:
+                if now_food.feel[27] > now_food.feel[28]:
+                    now_judge = 0
+            if now_judge:
+                drinks_index = 1
+                break
     return drinks_index
 
 
@@ -313,7 +318,12 @@ def handle_no_have_drinks(character_id: int) -> int:
     for food_id in character_data.food_bag:
         now_food: game_type.Food = character_data.food_bag[food_id]
         if now_food.eat and 28 in now_food.feel:
-            return 0
+            now_judge = 1
+            if 27 in now_food.feel:
+                if now_food.feel[27] > now_food.feel[28]:
+                    now_judge = 0
+            if not now_judge:
+                return 0
     return 1
 
 

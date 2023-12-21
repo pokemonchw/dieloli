@@ -59,7 +59,7 @@ def handle_target_is_follow_player(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id and character_data.target_character_id != character_id:
+    if character_data.target_character_id != -1 and character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
         return not target_data.follow
     return 0
@@ -75,9 +75,8 @@ def handle_target_not_follow_player(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id and character_data.target_character_id != character_id:
-        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-        return target_data.follow
+    if character_data.target_character_id:
+        return 1
     return 0
 
 
