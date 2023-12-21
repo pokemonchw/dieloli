@@ -491,7 +491,7 @@ def handle_no_in_classroom(character_id: int) -> int:
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
     if 0 in character_data.identity_data:
         identity_data: game_type.StudentIdentity = character_data.identity_data[0]
-        if now_scene_str == identity_data.classroom:
+        if now_scene_str != identity_data.classroom:
             return 1
     return 0
 
