@@ -15,7 +15,7 @@ def handle_target_chinese_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 0 in target_data.language:
@@ -34,7 +34,7 @@ def handle_target_chinese_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 0 in target_data.language:
@@ -53,7 +53,7 @@ def handle_target_english_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 1 in target_data.language:
@@ -72,7 +72,7 @@ def handle_target_english_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 1 in target_data.language:
@@ -91,7 +91,7 @@ def handle_target_french_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 2 in target_data.language:
@@ -110,7 +110,7 @@ def handle_target_french_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 2 in target_data.language:
@@ -129,7 +129,7 @@ def handle_target_spanish_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 3 in target_data.language:
@@ -148,7 +148,7 @@ def handle_target_spanish_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 3 in target_data.language:
@@ -167,7 +167,7 @@ def handle_target_arabic_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 4 in target_data.language:
@@ -186,7 +186,7 @@ def handle_target_arabic_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 4 in target_data.language:
@@ -205,7 +205,7 @@ def handle_target_russian_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 5 in target_data.language:
@@ -224,7 +224,7 @@ def handle_target_russian_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 5 in target_data.language:
@@ -243,7 +243,7 @@ def handle_target_japanese_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 6 in target_data.language:
@@ -262,7 +262,7 @@ def handle_target_japanese_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 6 in target_data.language:
@@ -281,7 +281,7 @@ def handle_target_hindi_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 7 in target_data.language:
@@ -300,7 +300,7 @@ def handle_target_hindi_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 7 in target_data.language:
@@ -319,7 +319,7 @@ def handle_target_old_latin_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 8 in target_data.language:
@@ -338,7 +338,7 @@ def handle_target_old_latin_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 8 in target_data.language:
@@ -357,7 +357,7 @@ def handle_target_latin_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 9 in target_data.language:
@@ -376,7 +376,7 @@ def handle_target_latin_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 9 in target_data.language:
@@ -395,7 +395,7 @@ def handle_target_ancient_chinese_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 10 in target_data.language:
@@ -414,7 +414,7 @@ def handle_target_ancient_chinese_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 10 in target_data.language:
@@ -433,7 +433,7 @@ def handle_target_old_sinitic_skills_is_height(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 11 in target_data.language:
@@ -452,7 +452,7 @@ def handle_target_old_sinitic_skills_is_low(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -2:
+    if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 11 in target_data.language:
