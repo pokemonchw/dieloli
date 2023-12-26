@@ -122,7 +122,7 @@ def init_character_tem():
     cache.npc_tem_data = npc_data
 
 
-random_npc_max = normal_config.config_normal.random_npc_max
+random_npc_max = 2800
 random_teacher_proportion = normal_config.config_normal.proportion_teacher
 random_student_proportion = normal_config.config_normal.proportion_student
 age_weight_data = {

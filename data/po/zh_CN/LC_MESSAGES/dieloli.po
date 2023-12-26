@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-21 17:13+0800\n"
+"POT-Creation-Date: 2023-12-26 15:13+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -335,11 +335,11 @@ msgstr ""
 msgid "睡觉"
 msgstr ""
 
-#: Script/Design/character_behavior.py:535
+#: Script/Design/character_behavior.py:536
 msgid "绝顶"
 msgstr ""
 
-#: Script/Design/character_behavior.py:544
+#: Script/Design/character_behavior.py:545
 msgid "强绝顶"
 msgstr ""
 
@@ -707,7 +707,7 @@ msgstr ""
 msgid "你在这里遇到了:"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:321
+#: Script/UI/Panel/in_scene_panel.py:322
 #: Script/UI/Panel/see_character_info_panel.py:189
 msgid "人物状态"
 msgstr ""
