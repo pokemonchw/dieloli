@@ -70,6 +70,7 @@ def handle_sleep():
         for status_id in character_data.status:
             character_data.status[status_id] = 0
         # 初始化角色行为
+        character_data.ai_target = 0
         character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
         character_data.behavior.temporary_status = game_type.TemporaryStatus()
         character_data.behavior.start_time = cache.game_time

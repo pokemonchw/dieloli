@@ -191,8 +191,8 @@ def to_next_day():
         now_date.year,
         now_date.month,
         now_date.day,
-        normal_config.config_normal.hour,
-        normal_config.config_normal.minute,
+        6,
+        0,
         tzinfo=time_zone
     )
     cache.game_time = new_date.timestamp()

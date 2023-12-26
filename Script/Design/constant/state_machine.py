@@ -8,6 +8,8 @@ class StateMachine:
     """
     MOVE_TO_CLASS = "move_to_class"
     """ 移动到所属教室 """
+    MOVE_TO_OFFICEROOM = "move_to_officeroom"
+    """ 移动至所属办公室 """
     MOVE_TO_NEAREST_CAFETERIA = "move_to_nearest_cafeteria"
     """移动至最近的取餐区"""
     MOVE_TO_NEAREST_RESTAURANT = "move_to_nearest_restaurant"

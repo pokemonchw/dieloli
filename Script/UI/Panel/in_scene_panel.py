@@ -139,6 +139,7 @@ class InScenePanel:
                 line_draw.draw()
             character_info_draw_list = []
             if character_data.target_character_id != -1:
+                target_data = cache.character_data[character_data.target_character_id]
                 character_head_draw = see_character_info_panel.CharacterInfoHead(
                     character_data.cid, self.width
                 )

@@ -15,10 +15,39 @@ def character_move_to_classroom(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    _, path_list, move_path, move_time = character_move.character_move(
-        character_id,
-        map_handle.get_map_system_path_for_str(character_data.classroom),
-    )
+    classroom_path = []
+    if 0 in character_data.identity_data:
+        identity_data: game_type.StudentIdentity = character_data.identity_data[0]
+        classroom_path = map_handle.get_map_system_path_for_str(identity_data.classroom)
+    elif 1 in character_data.identity_data:
+        identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
+        classroom_path = map_handle.get_map_system_path_for_str(identity_data.now_classroom)
+    if not classroom_path:
+        return
+    _, path_list, move_path, move_time = character_move.character_move(character_id, classroom_path)
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_OFFICEROOM)
+def character_move_to_officeroom(character_id: int):
+    """
+    移动至所属办公室
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    officeroom_path = []
+    if 0 in character_data.identity_data:
+        return
+    elif 1 in character_data.identity_data:
+        identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
+        officeroom_path = map_handle.get_map_system_path_for_str(identity_data.officeroom)
+    if not classroom_path:
+        return
+    _, path_list, move_path, move_time = character_move.character_move(character_id, officeroom_path)
     character_data.behavior.behavior_id = constant.Behavior.MOVE
     character_data.behavior.move_target = move_path
     character_data.behavior.duration = move_time

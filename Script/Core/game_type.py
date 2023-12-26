@@ -174,8 +174,6 @@ class NormalConfig:
     """ 开发者主页链接 """
     licenses_url: str
     """ 知识产权共享协议链接 """
-    random_npc_max: int
-    """ 最大随机npc数量 """
     proportion_teacher: int
     """ 生成教师权重 """
     proportion_student: int
@@ -734,6 +732,8 @@ class Cache:
         """ 角色的结算时间表 角色id:结算时间 """
         self.no_character_scene_set: Set = set()
         """ 没有角色的空场景集合 """
+        self.all_mass_organization: Dict[str, MassOrganization] = {}
+        """ 全部社团数据结构体 """
 
 
 class TargetChange:
@@ -833,3 +833,27 @@ class ExecuteTarget:
         """ 目标的权重 """
         self.score: int = 0
         """ 近似检索到的角色对这个目标的评分，若目标可达则+1，不可达则-1 """
+
+
+class MassOrganization:
+    """ 社团数据结构体 """
+
+    def __init__(self):
+        """ 初始化社团数据 """
+        self.uid: str = ""
+        """ 社团的id """
+        self.name: str = ""
+        """ 社团的名称 """
+        self.type: str = ""
+        """ 社团类型 """
+        self.theme: str = ""
+        """ 社团的主题 """
+        self.threshold: Set[str] = set()
+        """ 社团的加入门槛 """
+        self.character_set: Set[int] = set()
+        """ 社团的成员 """
+        self.president: int = -1
+        """ 社长id """
+        self.teacher: int = -1
+        """ 指导老师id """
+

@@ -63,7 +63,7 @@ def handle_in_sleep_time(character_id: int) -> int:
     now_time: datetime.datetime = datetime.datetime.fromtimestamp(
         character_data.behavior.start_time, game_time.time_zone
     )
-    if now_time.hour >= 22 or now_time.hour <= 4:
+    if now_time.hour >= 22 or now_time.hour <= 5:
         return 1
     return 0
 
@@ -99,7 +99,7 @@ def handle_no_in_sleep_time(character_id: int) -> int:
     now_time: datetime.datetime = datetime.datetime.fromtimestamp(
         character_data.behavior.start_time, game_time.time_zone
     )
-    if now_time.hour >= 22 or now_time.hour <= 4:
+    if now_time.hour >= 22 or now_time.hour <= 5:
         return 0
     return 1
 

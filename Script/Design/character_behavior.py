@@ -286,6 +286,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
         if event_draw == None:
             character_data.behavior.temporary_status = game_type.TemporaryStatus()
             character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
+            character_data.ai_target = 0
             character_data.behavior.move_target = []
             character_data.behavior.move_src = []
             character_data.behavior.start_time = now_time
@@ -561,3 +562,16 @@ def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
         return now_draw
     return None
 
+
+def update_cafeteria():
+    """刷新食堂内食物"""
+    food_judge = 1
+    for food_type in cache.restaurant_data:
+        food_list: Dict[UUID, game_type.Food] = cache.restaurant_data[food_type]
+        for food_id in food_list:
+            food: game_type.Food = food_list[food_id]
+            if food.eat:
+                food_judge = 0
+            break
+        if not food_judge:
+            break
