@@ -50,8 +50,6 @@ class DataList(QListWidget):
     def right_button_menu(self, old_position):
         """
         右键菜单
-        Keyword arguments:
-        position -- 鼠标点击位置
         """
         menu = QMenu()
         if not len(cache_control.now_file_path):

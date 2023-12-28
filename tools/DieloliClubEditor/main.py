@@ -3,11 +3,16 @@ import json
 import csv
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QVBoxLayout, QWidget,
-    QLabel, QLineEdit, QComboBox, QListWidget, QListWidgetItem, QTextEdit, QDateTimeEdit,
-    QFileDialog, QTimeEdit, QGroupBox, QFormLayout, QScrollArea, QSizePolicy, QTabWidget,
+    QLabel, QLineEdit, QComboBox, QListWidget, QListWidgetItem, QTextEdit,
+    QDateTimeEdit, QFileDialog, QTimeEdit, QGroupBox, QFormLayout, QScrollArea,
+    QSizePolicy, QTabWidget,
 )
 from PySide6.QtGui import QAction
 from PySide6.QtCore import QTime, Qt
+import load_csv
+import cache_control
+
+load_csv.load_config()
 
 
 class DayScheduleScrollArea(QScrollArea):
@@ -144,11 +149,21 @@ class ClubInfoWidget(QWidget):
         main_layout.addWidget(self.club_theme_combo)
 
         # 添加社团门槛选择列表
-        self.requirements_list_widget = QListWidget()
-        self.requirements_list_widget.setSelectionMode(QListWidget.MultiSelection)
-        self.load_requirements("./requirements.csv")  # 替换为您的 CSV 文件路径
         main_layout.addWidget(QLabel("社团门槛:"))
-        main_layout.addWidget(self.requirements_list_widget)
+        self.requirements_layout = QHBoxLayout()
+        # 左侧已选门槛列表
+        self.selected_requirements_list = QListWidget()
+        self.requirements_layout.addWidget(self.selected_requirements_list, 1)
+
+        # 右侧可选门槛列表
+        self.available_requirements_list = QListWidget()
+        self.available_requirements_list.itemChanged.connect(self.handleRequirementChange)
+        self.load_requirements("./requirements.csv")  # 替换为您的 CSV 文件路径
+        self.requirements_layout.addWidget(self.available_requirements_list, 2)
+
+        # 设置分割器的初始尺寸比例
+        main_layout.addLayout(self.requirements_layout)
+
         self.setLayout(main_layout)
 
     def load_requirements(self, csv_path):
@@ -158,7 +173,19 @@ class ClubInfoWidget(QWidget):
                 item = QListWidgetItem(row[0])
                 item.setFlags(item.flags() | Qt.ItemIsUserCheckable)  # 添加复选框
                 item.setCheckState(Qt.Unchecked)  # 默认未勾选
-                self.requirements_list_widget.addItem(item)
+                self.available_requirements_list.addItem(item)
+
+    def handleRequirementChange(self, item):
+        if item.checkState() == Qt.Checked:
+            # 添加到左侧已选列表
+            self.selected_requirements_list.addItem(item.text())
+        else:
+            # 从左侧已选列表中移除
+            items = self.selected_requirements_list.findItems(item.text(), Qt.MatchExactly)
+            if items:
+                item_to_remove = items[0]
+                row = self.selected_requirements_list.row(item_to_remove)
+                self.selected_requirements_list.takeItem(row)
 
 
 class ClubWidget(QWidget):
