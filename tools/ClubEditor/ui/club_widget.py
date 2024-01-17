@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QWidget, QTabWidget, QVBoxLayout
 from ui.club_info_widget import ClubInfoWidget
+from ui.club_activity_widget import ClubActivityWidget
 
 
 class ClubWidget(QWidget):
@@ -10,6 +11,8 @@ class ClubWidget(QWidget):
         tabs = QTabWidget()
         info = ClubInfoWidget()
         tabs.addTab(info, "社团信息")
+        activity = ClubActivityWidget()
+        tabs.addTab(activity, "活动信息")
         main_layout = QVBoxLayout()
         main_layout.addWidget(tabs)
         self.setLayout(main_layout)

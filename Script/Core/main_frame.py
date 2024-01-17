@@ -57,6 +57,12 @@ for screen in screens:
         current_screen = screen
 screen_width = current_screen.width
 screen_height = current_screen.height
+screen_width_magnification = 1920 / screen_width
+screen_height_magnification = 1080 / screen_height
+screen_magnification = max(screen_width_magnification, screen_height_magnification)
+char_height *= screen_magnification
+char_width *= screen_magnification
+now_font_size = int(now_font_size * screen_magnification)
 window_width = normal_config.config_normal.window_width
 window_height = normal_config.config_normal.window_hight
 need_width = window_width

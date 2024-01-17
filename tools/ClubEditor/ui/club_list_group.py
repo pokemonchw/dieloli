@@ -86,6 +86,8 @@ class ClubListGroup(QGroupBox):
         """ 删除社团 """
         target_index = self.club_list.currentRow()
         item: ClubListGroupItem = self.club_list.item(target_index)
+        if "cid" not in cache_control.club_list_data:
+            return
         del cache_control.club_list_data[item.cid]
         cache_control.update_signal.emit()
 

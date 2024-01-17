@@ -8,6 +8,6 @@ class ClubRequments(QHBoxLayout):
     def __init__(self):
         super().__init__()
         selected_requirements_list = SelectRequirementsList()
-        self.addWidget(selected_requirements_list)
+        self.addWidget(selected_requirements_list,1)
         availabe_requirements_list = AvailabeRequirementsList()
-        self.addWidget(availabe_requirements_list)
+        self.addWidget(availabe_requirements_list,3)

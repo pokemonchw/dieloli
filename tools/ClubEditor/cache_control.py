@@ -15,6 +15,10 @@ club_theme: Dict[str, str] = {}
 """ 社团主题配置 {主题id:主题描述} """
 club_theme_data: Dict[str, str] = {}
 """ 社团主题配置数据 {主题描述:主题id} """
+club_activity: Dict[str, str] = {}
+""" 社团活动配置 {活动id:活动描述} """
+club_activity_data: Dict[str, str] = {}
+""" 社团活动配置数据 {活动描述:活动id} """
 premise_data: Dict[str, str] = {}
 """ 前提列表 """
 premise_type_data: Dict[str, Set] = {}

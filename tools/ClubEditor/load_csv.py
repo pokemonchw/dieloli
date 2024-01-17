@@ -3,6 +3,7 @@ import csv
 import cache_control
 
 club_theme_path = os.path.join("..","ClubTheme.csv")
+club_activity_path = os.path.join("..", "ClubActivity.csv")
 premise_path = os.path.join("..","premise.csv")
 
 
@@ -13,6 +14,11 @@ def load_config():
         for i in now_read:
             cache_control.club_theme[i["cid"]] = i["name"]
             cache_control.club_theme_data[i["name"]] = i["cid"]
+    with open(club_activity_path, encoding="utf-8") as now_file:
+        now_read = csv.DictReader(now_file)
+        for i in now_read:
+            cache_control.club_activity[i["cid"]] = i["name"]
+            cache_control.club_activity_data[i["name"]] = i["cid"]
     with open(premise_path, encoding="utf-8") as now_file:
         now_read = csv.DictReader(now_file)
         for i in now_read:

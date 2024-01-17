@@ -15,8 +15,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
         main_layout = QHBoxLayout(central_widget)
         club_list_group = ClubListGroup()
-        main_layout.addWidget(club_list_group)
+        main_layout.addWidget(club_list_group, 1)
         club_widget = ClubWidget()
-        main_layout.addWidget(club_widget)
+        main_layout.addWidget(club_widget, 4)
         self.setLayout(main_layout)
 
