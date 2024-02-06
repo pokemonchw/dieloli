@@ -4,7 +4,7 @@ from PySide6.QtWidgets import(
     QAbstractItemView,
 )
 from PySide6.QtGui import QCursor
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QModelIndex
 import cache_control
 import game_type
 
@@ -12,7 +12,7 @@ import game_type
 class ClubListGroupItem(QListWidgetItem):
     """ 社团列表的表单对象 """
 
-    def __init__(self, club_name: str, cid: str):
+    def __init__(self, club_name: str, uid: str):
         """
         初始化表单对象
         Keyword arguments:
@@ -21,7 +21,7 @@ class ClubListGroupItem(QListWidgetItem):
         """
         super().__init__(club_name)
         self.setToolTip(club_name)
-        self.cid = cid
+        self.uid = uid
         """ 社团唯一id """
         self.name = club_name
         """ 社团名 """
@@ -35,6 +35,7 @@ class ClubListGroup(QGroupBox):
         self.club_list = QListWidget()
         self.club_list.setSelectionMode(QAbstractItemView.SingleSelection)
         self.club_list.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.club_list.itemClicked.connect(self._item_cliecked)
         list_layout = QVBoxLayout()
         list_layout.addWidget(self.club_list)
         self.setLayout(list_layout)
@@ -47,13 +48,18 @@ class ClubListGroup(QGroupBox):
         if cache_control.now_club_id not in cache_control.club_list_data:
             cache_control.now_club_id = ""
         i = 0
+        set_item = None
         for club_id in cache_control.club_list_data:
             if not i and cache_control.now_club_id == "":
                 cache_control.now_club_id = club_id
-            i += 1
             club_data = cache_control.club_list_data[club_id]
             item = ClubListGroupItem(club_data.name, club_id)
+            if club_id == cache_control.now_club_id:
+                set_item = item
             self.club_list.addItem(item)
+            i += 1
+        if set_item != None:
+            set_item.setSelected(True)
 
     def _right_button_menu(self, old_position):
         """ 右键菜单 """
@@ -71,6 +77,15 @@ class ClubListGroup(QGroupBox):
         position = QCursor.pos()
         menu.exec(position)
 
+    def _item_cliecked(self, item: ClubListGroupItem):
+        """
+        点击选中
+        Keyword arguments:
+        model_index -- 目标序号
+        """
+        cache_control.now_club_id = item.uid
+        cache_control.update_signal.emit()
+
     def _create_club(self):
         """ 创建社团 """
         uid = str(uuid.uuid4())
@@ -86,9 +101,9 @@ class ClubListGroup(QGroupBox):
         """ 删除社团 """
         target_index = self.club_list.currentRow()
         item: ClubListGroupItem = self.club_list.item(target_index)
-        if "cid" not in cache_control.club_list_data:
+        if "uid" not in item.__dict__:
             return
-        del cache_control.club_list_data[item.cid]
+        del cache_control.club_list_data[item.uid]
         cache_control.update_signal.emit()
 
 

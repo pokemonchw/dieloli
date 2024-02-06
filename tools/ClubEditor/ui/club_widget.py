@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QTabWidget, QVBoxLayout
+from PySide6.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QPushButton
 from ui.club_info_widget import ClubInfoWidget
 from ui.club_activity_widget import ClubActivityWidget
 

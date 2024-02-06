@@ -9,11 +9,11 @@ class ClubData:
         """ 社团唯一id """
         self.name: str = ""
         """ 社团名 """
-        self.theme: str = ""
+        self.theme: int = 0
         """ 社团主题 """
         self.premise_data: Dict[str, int] = {}
         """ 社团门槛数据 {前提id:占位值} """
-        self.activity_list: Dict[str, ClubActivityData] = []
+        self.activity_list: Dict[str, ClubActivityData] = {}
         """ 社团活动数据 {活动唯一id:活动数据} """
 
 
@@ -29,6 +29,8 @@ class ClubActivityData:
         """ 活动时间 {活动时间唯一id:活动时间数据} """
         self.activity_position: List[str] = []
         """ 活动地点 """
+        self.description: int = 0
+        """ 活动内容 """
 
 
 class ClubActivityTimeData:
