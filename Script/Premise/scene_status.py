@@ -9,6 +9,38 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
+@handle_premise.add_premise(constant.Premise.IN_DOOR)
+def handle_in_door(character_id: int) -> int:
+    """
+    校验角色是否处于室内
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data = cache.scene_data[now_scene_str]
+    return now_scene_data.in_door
+
+
+@handle_premise.add_premise(constant.Premise.OUT_DOOR)
+def handle_out_door(character_id: int) -> int:
+    """
+    校验角色是否处于室外
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data = cache.scene_data[now_scene_str]
+    return not now_scene_data.in_door
+
+
 @handle_premise.add_premise(constant.Premise.IN_SQUARE)
 def handle_in_square(character_id: int) -> int:
     """

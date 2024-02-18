@@ -167,3 +167,23 @@ def handle_self_undress():
     character_data.behavior.behavior_id = constant.Behavior.UNDRESS
     character_data.state = constant.CharacterStatus.STATUS_UNDRESS
     update.game_update_flow(2)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.SEE_STAR,
+    constant.InstructType.ACTIVE,
+    _("看星星"),
+    {
+        constant.Premise.IN_SLEEP_TIME,
+        constant.Premise.OUT_DOOR
+    },
+)
+def handle_see_star():
+    """ 处理看星星指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.duration = 2
+    character_data.behavior.behavior_id = constant.Behavior.UNDRESS
+    character_data.state = constant.CharacterStatus.STATUS_UNDRESS
+    update.game_update_flow(2)
+

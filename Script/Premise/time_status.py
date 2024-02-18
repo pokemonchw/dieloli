@@ -216,6 +216,443 @@ def handle_tonight_is_full_moon(character_id: int) -> int:
     return 0
 
 
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_KAIMU_MOON)
+def handle_tonight_is_kaimu_moon(character_id: int) -> int:
+    """
+    校验今夜是否是晦月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase in {0, 25}:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_SHAKUGETSU_MOON)
+def handle_tonight_is_shakugetsu_moon(character_id: int) -> int:
+    """
+    校验今夜是否是朔月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 1:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_SHINGETSU_MOON)
+def handle_tonight_is_shingetsu_moon(character_id: int) -> int:
+    """
+    校验今夜是否是新月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 2:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_KISHAKUGETSU_MOON)
+def handle_tonight_is_kishakugetsu_moon(character_id: int) -> int:
+    """
+    校验今夜是否是既朔月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 3:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_MIKAZUKI_MOON)
+def handle_tonight_is_mikazuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是三日月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 4:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_GABI_TSUKI_MOON)
+def handle_tonight_is_gabi_tsuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是蛾眉月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 5:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_YUZUKI_MOON)
+def handle_tonight_is_yuzuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是夕月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 6:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_JOGENGETSU_MOON)
+def handle_tonight_is_jogengetsu_moon(character_id: int) -> int:
+    """
+    校验今夜是否是上弦月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 7:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_KOKONOYOTSUKI_MOON)
+def handle_tonight_is_kokonoyotsuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是九夜月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 8:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_YOI_TSUKI_MOON)
+def handle_tonight_is_yoi_tsuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是宵月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 9:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_JUSAN_NICHI_TSUKI_MOON)
+def handle_tonight_is_jusan_nichi_tsuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是十三日月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 10:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_SHOBOGETSU_MOON)
+def handle_tonight_is_shobogetsu_moon(character_id: int) -> int:
+    """
+    校验今夜是否是小望月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 11:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_KIBOGETSU_MOON)
+def handle_tonight_is_kibogetsu_moon(character_id: int) -> int:
+    """
+    校验今夜是否是既望月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 14:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_TATIMACHI_TSUKI_MOON)
+def handle_tonight_is_tatimachi_tsuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是立待月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 15:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_IMACHI_TSUKI_MOON)
+def handle_tonight_is_imachi_tsuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是居待月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 16:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_NEMACHI_TSUKI_MOON)
+def handle_tonight_is_nemachi_tsuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是寝待月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 17:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_KOMACHI_TSUKI_MOON)
+def handle_tonight_is_komachi_tsuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是更待月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 18:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_KAISUKI_MOON)
+def handle_tonight_is_kaisuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是亏凸月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 19:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_YUMIBARIZUKI_MOON)
+def handle_tonight_is_yumibarizuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是弓张月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 20:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_ARIAKE_MOON)
+def handle_tonight_is_ariake_moon(character_id: int) -> int:
+    """
+    校验今夜是否是有明月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 21:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_GABI_ZANGETSU_MOON)
+def handle_tonight_is_gabi_zangetsu_moon(character_id: int) -> int:
+    """
+    校验今夜是否是蛾眉残月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 22:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_ZANGETSU_MOON)
+def handle_tonight_is_zangetsu_moon(character_id: int) -> int:
+    """
+    校验今夜是否是残月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 23:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.TONIGHT_IS_AKATSUKI_MOON)
+def handle_tonight_is_akatsuki_moon(character_id: int) -> int:
+    """
+    校验今夜是否是晓月
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    moon_phase = game_time.get_moon_phase(now_time)
+    if moon_phase == 24:
+        return 1
+    return 0
+
+
 @handle_premise.add_premise(constant.Premise.IS_SPRING)
 def handle_is_spring(character_id: int) -> int:
     """
@@ -250,3 +687,21 @@ def handle_is_summer(character_id: int) -> int:
     solar_period = game_time.get_solar_period(now_time)
     season = game_config.config_solar_period[solar_period].season
     return season == 1
+
+
+@handle_premise.add_premise(constant.Premise.IS_NIGHT)
+def handle_is_night(character_id: int) -> int:
+    """
+    校验现在是否在夜晚
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    sun_time = game_time.get_sun_time(now_time)
+    return sun_time in {0, 1, 2, 10, 11}
+

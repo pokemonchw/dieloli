@@ -59,3 +59,5 @@ class Behavior:
     """ 午睡 """
     GENERAL_SPEECH = 28
     """ 演讲 """
+    SEE_STAR = 29
+    """ 看星星 """

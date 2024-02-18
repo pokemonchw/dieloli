@@ -59,3 +59,5 @@ class CharacterStatus:
     """ 午睡 """
     STATUS_GENERAL_SPEECH = 28
     """ 演讲 """
+    STATUS_SEE_STAR = 29
+    """ 看星星 """
