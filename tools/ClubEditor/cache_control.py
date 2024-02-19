@@ -1,5 +1,5 @@
 from typing import Dict, Set
-from game_type import ClubData, Signal
+from game_type import ClubData, Signal, Map, Scene
 
 club_list_data: Dict[str, ClubData] = {}
 """ 全部社团数据 {社团唯一id:社团数据} """
@@ -29,4 +29,7 @@ activity_list: Dict[int, str] = {}
 """ 活动内容列表 """
 activity_list_data: Dict[str, int] = {}
 """ 活动内容数据 """
-
+map_data: Dict[str, Map] = {}
+""" 游戏地图数据 """
+scene_data: Dict[str, Scene] = {}
+""" 游戏场景数据 """
