@@ -80,11 +80,10 @@ class ClubListGroup(QGroupBox):
     def _item_cliecked(self, item: ClubListGroupItem):
         """
         点击选中
-        Keyword arguments:
-        model_index -- 目标序号
         """
         cache_control.now_club_id = item.uid
         cache_control.update_signal.emit()
+        cache_control.update_activity_time_signal.emit()
 
     def _create_club(self):
         """ 创建社团 """
@@ -103,7 +102,11 @@ class ClubListGroup(QGroupBox):
         item: ClubListGroupItem = self.club_list.item(target_index)
         if "uid" not in item.__dict__:
             return
+        if item.uid == cache_control.now_club_id:
+            cache_control.now_club_id = ""
+            cache_control.update_activity_time_signal.emit()
         del cache_control.club_list_data[item.uid]
         cache_control.update_signal.emit()
+        cache_control.update_activity_time_signal.emit()
 
 

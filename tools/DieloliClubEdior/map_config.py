@@ -19,7 +19,6 @@ def init_map_data():
             cache_control.scene_data = pickle.load(all_scene_data_file)
         with open(all_map_data_path, "rb") as all_map_data_file:
             cache_control.map_data = pickle.load(all_map_data_file)
-        print(cache_control.scene_data.keys())
     else:
         print("载入地图数据失败")
 

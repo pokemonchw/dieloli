@@ -36,6 +36,7 @@ class ClubActivityList(QGroupBox):
         self.activity_list.setSelectionMode(QAbstractItemView.SingleSelection)
         self.activity_list.setContextMenuPolicy(Qt.CustomContextMenu)
         self.activity_list.customContextMenuRequested.connect(self._right_button_menu)
+        self.activity_list.itemClicked.connect(self._item_cliecked)
         main_layout.addWidget(self.activity_list)
         cache_control.now_activity_id = ""
         """ 当前选中的活动id """
@@ -97,5 +98,18 @@ class ClubActivityList(QGroupBox):
         if "uid" not in club_data.activity_list:
             return
         del club_data.activity_list[item.uid]
+        if item.uid == cache_control.now_activity_id:
+            cache_control.now_activity_id = ""
+            cache_control.update_activity_time_signal.emit()
         cache_control.update_signal.emit()
+        cache_control.update_activity_time_signal.emit()
+
+
+    def _item_cliecked(self, item: ClubActivityItem):
+        """
+        点击选中
+        """
+        cache_control.now_activity_id = item.uid
+        cache_control.update_signal.emit()
+        cache_control.update_activity_time_signal.emit()
 

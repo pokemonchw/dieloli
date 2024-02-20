@@ -9,6 +9,8 @@ update_signal = Signal()
 """ ui刷新信号 """
 update_premise_signal = Signal()
 """ 设置的社团门槛刷新信号 """
+update_activity_time_signal = Signal()
+""" 更新活动时间信息的刷新信号 """
 now_club_id: str = ""
 """ 当前选中的社团id """
 now_activity_id: str = ""
