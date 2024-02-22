@@ -76,6 +76,7 @@ class ClubActivityList(QGroupBox):
         delete_action: QWidgetAction = QWidgetAction(self)
         delete_action.setText("删除活动")
         delete_action.triggered.connect(self._delete_club)
+        menu.addAction(delete_action)
         position = QCursor.pos()
         menu.exec(position)
 

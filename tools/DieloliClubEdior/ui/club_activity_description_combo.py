@@ -84,11 +84,16 @@ class ClubActivityDescriptionCombo(QWidget):
         selector = TableSelectorDialog(self.data, currentText, self)
         if selector.exec():
             self.lineEdit.setText(selector.selectedValue)
+            club_data = cache_control.club_list_data[cache_control.now_club_id]
+            activity_data = club_data.activity_list[cache_control.now_activity_id]
+            activity_data.description = cache_control.activity_list_data[selector.selectedValue]
 
     def _update(self):
         if cache_control.now_club_id == "":
             return
         club_data = cache_control.club_list_data[cache_control.now_club_id]
+        if cache_control.now_activity_id not in club_data.activity_list:
+            cache_control.now_activity_id = ""
         if cache_control.now_activity_id == "":
             if len(club_data.activity_list):
                 cache_control.now_activity_id = list(club_data.activity_list.keys())[0]

@@ -25,7 +25,7 @@ class ClubActivityData:
         """ 活动唯一id """
         self.name: str = ""
         """ 活动名 """
-        self.activity_time_list: Dict[str, ClubActivityData] = {}
+        self.activity_time_list: Dict[str, ClubActivityTimeData] = {}
         """ 活动时间 {活动时间唯一id:活动时间数据} """
         self.activity_position: List[str] = []
         """ 活动地点 """

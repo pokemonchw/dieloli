@@ -125,10 +125,13 @@ class WeeklyScheduleWidget(QWidget):
                 time_slot_widget.delete_slot()
         if cache_control.now_club_id == "":
             return
+        club_data = cache_control.club_list_data[cache_control.now_club_id]
+        if cache_control.now_activity_id == "":
+            if len(club_data.activity_list):
+                cache_control.now_activity_id = list(club_data.activity_list.keys())[0]
         if cache_control.now_activity_id == "":
             return
         days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-        club_data = cache_control.club_list_data[cache_control.now_club_id]
         activity_data: game_type.ClubActivityData = club_data.activity_list[cache_control.now_activity_id]
         for time_uid in activity_data.activity_time_list:
             now_data = activity_data.activity_time_list[time_uid]
@@ -136,8 +139,8 @@ class WeeklyScheduleWidget(QWidget):
             day_widget: DayScheduleWidget = self.day_widgets[day]
             time_slot_widget = TimeSlotWidget(day_widget)
             time_slot_widget.uid = now_data.uid
-            time_slot_widget.start_time = QTimeEdit(QTime(now_data.start_hour, now_data.start_minute))
-            time_slot_widget.end_time = QTimeEdit(QTime(now_data.end_hour, now_data.end_minute))
+            time_slot_widget.start_time.setTime(QTime(now_data.start_hour, now_data.start_minute))
+            time_slot_widget.end_time.setTime(QTime(now_data.end_hour, now_data.end_minute))
             day_widget.layout.addWidget(time_slot_widget)
             day_widget.time_slot_widgets[now_data.uid] = time_slot_widget
 

@@ -87,31 +87,31 @@ class FileMenu(QMenu):
         """ 保存社团数据文件 """
         if cache_control.now_file_path:
             with open(cache_control.now_file_path, "w", encoding="utf-8") as club_data_file:
-                now_data = {}
-                for ck in cache_control.club_list_data:
-                    club_data = cache_control.club_list_data[ck]
-                    club_dict = {}
-                    for k in club_data.__dict__:
-                        if k != "activity_list":
-                            club_dict[k] = club_data.__dict__[k]
+                club_list_data_dict= {}
+                for club_id in cache_control.club_list_data:
+                    club_data = cache_control.club_list_data[club_id]
+                    club_data_dict = {}
+                    for club_key in club_data.__dict__:
+                        if club_key != "activity_list":
+                            club_data_dict[club_key] = club_data.__dict__[club_key]
                         else:
                             activity_list_dict = {}
-                            club_dict.setdefault(k ,{})
+                            club_data_dict.setdefault(club_key ,{})
                             for activity_id in club_data.activity_list:
                                 activity_data = club_data.activity_list[activity_id]
                                 activity_dict = {}
-                                for ak in activity_data.__dict__:
-                                    if ak != "activity_time_list":
-                                        activity_dict[ak] = activity_data.__dict__[ak]
+                                for activity_key in activity_data.__dict__:
+                                    if activity_key != "activity_time_list":
+                                        activity_dict[activity_key] = activity_data.__dict__[activity_key]
                                     else:
-                                        activity_dict.setdefault(ak, {})
+                                        activity_dict.setdefault(activity_key, {})
                                         for time_uid in activity_data.activity_time_list:
                                             time_data = activity_data.activity_time_list[time_uid]
-                                            activity_dict[k][time_uid] = time_data.__dict__
-                                activity_list_dict[ak] = activity_dict
-                            club_dict[k] = activity_list_dict
-                    now_data[ck] = club_dict
-                json.dump(now_data, club_data_file, ensure_ascii=0)
+                                            activity_dict[activity_key][time_uid] = time_data.__dict__
+                                activity_list_dict[activity_id] = activity_dict
+                            club_data_dict[club_key] = activity_list_dict
+                    club_list_data_dict[club_id] = club_data_dict
+                json.dump(club_list_data_dict, club_data_file, ensure_ascii=0)
 
     def _exit_editor(self):
         """ 关闭编辑器 """

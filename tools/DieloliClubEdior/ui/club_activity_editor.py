@@ -26,6 +26,8 @@ class ActivityNameEdit(QLineEdit):
         if cache_control.now_club_id == "":
             return
         club_data = cache_control.club_list_data[cache_control.now_club_id]
+        if cache_control.now_activity_id not in club_data.activity_list:
+            cache_control.now_activity_id = ""
         if cache_control.now_activity_id == "":
             if len(club_data.activity_list):
                 cache_control.now_activity_id = list(club_data.activity_list.keys())[0]
