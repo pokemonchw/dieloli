@@ -65,6 +65,8 @@ config_clothing_type_data: Dict[int, Set] = {}
 """ 服装种类配置数据 服装种类:服装模板id集合 """
 config_clothing_type_sex_type_data: Dict[int, Dict[int, Set]] = {}
 """ 服装类型下性别类型配置数据 服装类型id:性别类型id:服装模板id集合 """
+config_club_data: Dict[str, game_type.ClubData] = {}
+""" 社团配置数据 """
 config_cook_type: Dict[int, config_def.CookType] = {}
 """ 烹饪类型配置数据 """
 config_course: Dict[int, config_def.Course] = {}
@@ -451,6 +453,26 @@ def load_clothing_use_type():
         now_type = config_def.ClothingUseType()
         now_type.__dict__ = tem_data
         config_clothing_use_type[now_type.cid] = now_type
+
+
+def load_club_data():
+    """ 载入社团配置数据 """
+    now_data = config_data["Club"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_type = game_type.ClubData()
+        now_type.__dict__ = tem_data
+        for activity_uid in now_type.activity_list:
+            activity_dict = now_type.activity_list[activity_uid]
+            activity_data = game_type.ClubActivityData()
+            activity_data.__dict__ = activity_dict
+            for time_uid in activity_data.activity_time_list:
+                time_dict = activity_data.activity_time_list[time_uid]
+                time_data = game_type.ClubActivityTimeData()
+                time_data.__dict__ = time_dict
+                activity_data.activity_time_list[time_uid] = time_data
+            now_type.activity_list[activity_uid] = activity_data
+        config_club_data[now_type.uid] = now_type
 
 
 def load_cook_type():
@@ -991,6 +1013,7 @@ def init():
     load_clothing_tem()
     load_clothing_type()
     load_clothing_use_type()
+    load_club_data()
     load_cook_type()
     load_course()
     load_course_skill_experience()

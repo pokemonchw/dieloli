@@ -27,6 +27,7 @@ class MapSceneTreeView(QDialog):
         super().__init__(parent)
         self.initUI()
         self.loadTree()
+        self.treeView.collapseAll()
 
     def initUI(self):
         """

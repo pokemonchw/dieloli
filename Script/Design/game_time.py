@@ -27,11 +27,10 @@ def init_time():
     """
     初始化游戏时间
     """
-    now_time = datetime.datetime.now()
     game_time = datetime.datetime(
-        now_time.year,
-        now_time.month,
-        now_time.day,
+        2008,
+        5,
+        13,
         6,
         0,
         tzinfo=time_zone

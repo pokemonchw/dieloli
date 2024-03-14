@@ -15,10 +15,11 @@ from Script.Design import (
     attr_calculation,
     game_time,
     clothing,
+    club_handle,
 )
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel
-from Script.Config import normal_config, game_config
+from Script.Config import normal_config, game_config, map_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -36,10 +37,12 @@ line = draw.LineDraw("=", width)
 @handle_panel.add_panel(constant.Panel.CREATOR_CHARACTER)
 def creator_character_panel():
     """创建角色面板"""
-    game_time.init_time()
-    cache.character_data[0] = game_type.Character()
-    character_handle.init_character_list()
     while 1:
+        cache.__init__()
+        map_config.init_map_data()
+        game_time.init_time()
+        cache.character_data[0] = game_type.Character()
+        character_handle.init_character_list()
         if input_name_panel():
             character.init_attr(0)
             game_start()
@@ -67,6 +70,7 @@ def game_start():
     map_handle.character_move_scene(["0"], character_position, 0)
     cache.school_longitude = random.uniform(120.9, 122.12)
     cache.school_latitude = random.uniform(30.7, 31.53)
+    club_handle.init_club_data()
 
 
 def confirm_character_attr_panel():

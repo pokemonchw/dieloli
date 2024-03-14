@@ -50,7 +50,7 @@ class ClothingShopPanel:
     def draw(self):
         """绘制对象"""
         title_draw = draw.TitleLineDraw(_("服装超市"), self.width)
-        sex_type_list = [_("男"), _("女"), ("通用")]
+        sex_type_list = [_("男"), _("女"), _("通用")]
         self.handle_panel = panel.PageHandlePanel(
             [], SeeClothingListByClothingNameDraw, 10, 5, self.width, 1, 1, 0
         )

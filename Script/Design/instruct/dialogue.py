@@ -45,4 +45,4 @@ def handle_general_speech():
     character_data.behavior.duration = 10
     character_data.behavior.behavior_id = constant.Behavior.GENERAL_SPEECH
     character_data.state = constant.CharacterStatus.STATUS_GENERAL_SPEECH
-    update.game_update_flow(30)
+    update.game_update_flow(10)

@@ -28,8 +28,10 @@ def handle_add_small_favorability(
     add_favorability = character.calculation_favorability(character_id, character_data.target_character_id, add_time)
     if character_data.target_character_id in character_data.social_contact_data:
         social = character_data.social_contact_data[character_data.target_character_id]
-        if social:
-            add_favorability *= social
+        if social > 5:
+            add_favorability *= (social - 5)
+        elif social < 5:
+            add_favorability /= (5-social)
     character_handle.add_favorability(character_data.target_character_id, character_id, add_favorability, None, now_time)
 
 

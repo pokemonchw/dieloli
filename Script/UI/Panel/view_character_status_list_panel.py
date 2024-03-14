@@ -292,7 +292,7 @@ class SeeCharacterStatusDraw:
             py_cmd.clr_cmd()
             line_feed.draw()
             cache.wframe_mouse.w_frame_skip_wait_mouse = 1
-            character_move.own_charcter_move(character_data.position)
+            character_move.own_move_to_character_scene(character_data.cid)
         elif now_key == _("收藏"):
             player_data.collection_character.add(self.text)
         elif now_key == _("取消收藏"):

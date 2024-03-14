@@ -39,8 +39,8 @@ class InScenePanel:
 
     def draw(self):
         """绘制对象"""
-        character_data: game_type.Character = cache.character_data[0]
         title_draw = draw.TitleLineDraw(_("场景"), self.width)
+        character_data: game_type.Character = cache.character_data[0]
         scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
         scene_data: game_type.Scene = cache.scene_data[scene_path_str]
         character_handle_panel = panel.PageHandlePanel(
@@ -55,6 +55,9 @@ class InScenePanel:
             null_button_text=character_data.target_character_id,
         )
         while 1:
+            character_data: game_type.Character = cache.character_data[0]
+            scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+            scene_data: game_type.Scene = cache.scene_data[scene_path_str]
             if character_data.dead:
                 cache.wframe_mouse.w_frame_skip_wait_mouse = 0
                 now_draw = draw.LineFeedWaitDraw()

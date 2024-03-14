@@ -297,6 +297,24 @@ def handle_not_in_music_classroom(character_id: int) -> int:
     return 1
 
 
+@handle_premise.add_premise(constant.Premise.IN_COMPUTER_ROOM_SCENE)
+def handle_in_computer_room_scene(character_id: int) -> int:
+    """
+    校验角色是否处于计算机实践室
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data = cache.scene_data[now_scene_str]
+    if now_scene_data.scene_tag in {"ComputerRoomA", "ComputerRoomB"}:
+        return 1
+    return 0
+
+
 @handle_premise.add_premise(constant.Premise.SCENE_NO_HAVE_OTHER_CHARACTER)
 def handle_scene_no_have_other_character(character_id: int) -> int:
     """

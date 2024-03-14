@@ -625,7 +625,7 @@ class PageHandlePanel:
         """初始化绘制对象"""
         self.text_list: List[str] = text_list
         """ 绘制的文本列表 """
-        self.draw_type: type = PageHandleDrawType
+        self.draw_type: type = draw_type
         """ 文本对象的绘制类型 """
         self.now_page: int = 0
         """ 当前页数 """
@@ -651,7 +651,6 @@ class PageHandlePanel:
         """ 将列表元素绘制成数字按钮 """
         self.button_start_id: int = button_start_id
         """ 数字按钮的开始id """
-        self.draw_type = draw_type
         self.draw_list: List[draw.NormalDraw] = []
         """ 绘制的对象列表 """
         self.null_button_text: str = null_button_text

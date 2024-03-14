@@ -258,6 +258,8 @@ class Premise:
     """ 处于音乐活动室 """
     NOT_IN_MUSIC_CLASSROOM = "not_in_music_classroom"
     """ 角色未处于音乐活动室 """
+    IN_COMPUTER_ROOM_SCENE = "in_computer_room_scene"
+    """ 处于计算机实践室 """
     SCENE_NO_HAVE_OTHER_CHARACTER = "scene_no_have_other_character"
     """ 场景中没有有自己外的其他角色 """
     SCENE_CHARACTER_ONLY_PLAYER_AND_ONE = "scene_character_only_player_and_one"
@@ -1088,6 +1090,8 @@ class Premise:
     """ 角色正在失去初吻 """
     TARGET_IS_LOSE_FIRST_KISS = "target_is_lose_first_kiss"
     """ 交互对象正在失去初吻 """
+    TARGET_IS_MOVING = "target_is_moving"
+    """ 交互对象正在移动 """
 
     """
     =========================

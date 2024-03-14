@@ -77,6 +77,7 @@ def init_attr(character_id: int):
         character_data.identity_data[now_identity.cid] = now_identity
         cache.classroom_students_data.setdefault(now_identity.classroom, set())
         cache.classroom_students_data[now_identity.classroom].add(character_id)
+        cache.student_character_set.add(character_data.cid)
 
 
 def init_character_behavior_start_time(character_id: int, now_time: int):

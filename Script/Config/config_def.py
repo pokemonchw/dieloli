@@ -215,6 +215,15 @@ class Item:
     """ 描述 """
 
 
+class ClubTheme:
+    """ 服装用途配置 """
+
+    cid: int
+    """ 主题id """
+    name: str
+    """ 主题名 """
+
+
 class HitPointTem:
     """ hp模板对应平均值 """
 

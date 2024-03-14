@@ -29,6 +29,10 @@ line_feed.text = "\n"
 line_feed.width = 1
 window_width = normal_config.config_normal.text_width
 """ 屏幕宽度 """
+interest_text = _("(UP)")
+interest_draw = draw.NormalDraw()
+interest_draw.text = interest_text
+interest_draw.width = text_handle.get_text_index(interest_text)
 
 
 class SeeCharacterInfoPanel:
@@ -666,6 +670,8 @@ class SeeCharacterKnowledgePanel:
                     now_level_draw = draw.ExpLevelDraw(now_exp)
                     skill_draw.draw_list.append(now_text_draw)
                     skill_draw.draw_list.append(now_level_draw)
+                    if character_data.knowledge_interest[skill] > 1.1:
+                        skill_draw.draw_list.append(interest_draw)
                     skill_draw.width = int(self.width / len(skill_group))
                     now_list.append(skill_draw)
             self.draw_list.append(now_list)
@@ -707,7 +713,7 @@ class SeeCharacterLanguagePanel:
             now_exp = 0
             if language in character_data.language:
                 now_exp = character_data.language[language]
-            language_text_list.append((language, now_exp))
+            language_text_list.append((language, now_exp, character_id))
         self.handle_panel = panel.PageHandlePanel(
             language_text_list, LanguageNameDraw, 20, 6, width, 1, 1, 0, ""
         )
@@ -738,6 +744,8 @@ class LanguageNameDraw:
         """ 语言id """
         self.language_exp: int = text[1]
         """ 语言经验 """
+        self.character_id: int = text[2]
+        """ 角色id """
         self.draw_text: str = ""
         """ 语言名绘制文本 """
         self.width: int = width
@@ -752,6 +760,7 @@ class LanguageNameDraw:
         """ 按钮返回值 """
         self.draw_list: List[draw.NormalDraw] = []
         """ 绘制的对象列表 """
+        character_data = cache.character_data[self.character_id]
         language_config = game_config.config_language[self.language_id]
         language_name = language_config.name
         name_draw = draw.NormalDraw()
@@ -773,6 +782,8 @@ class LanguageNameDraw:
         level_draw = draw.ExpLevelDraw(self.language_exp)
         name_draw.width = self.width - len(level_draw)
         self.draw_list = [name_draw, level_draw]
+        if character_data.language_interest[self.language_id] > 1.1:
+            self.draw_list.append(interest_draw)
 
     def draw(self):
         """绘制对象"""

@@ -101,3 +101,4 @@ class ClubActivityDescriptionCombo(QWidget):
             return
         activity_data = club_data.activity_list[cache_control.now_activity_id]
         self.lineEdit.setText(cache_control.activity_list[activity_data.description])
+

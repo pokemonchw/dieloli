@@ -10,6 +10,8 @@ os.system("cp ./tools/DieloliEventEditor/default.json ./data/event/")
 event_dir = os.path.join("data", "event")
 os.system("cp ./tools/DieloliAIEditor/default.json ./data/target/")
 target_dir = os.path.join("data", "target")
+os.system("cp ./tools/DieloliClubEdior/default.json ./data/club/")
+club_dir = os.path.join("data", "club")
 config_data = {}
 config_def_str = ""
 config_po = "\n"
@@ -163,6 +165,20 @@ for i in target_file_list:
             target_list.append(now_target)
 config_data["Target"] = {}
 config_data["Target"]["data"] = target_list
+
+club_file_list = os.listdir(club_dir)
+club_list = []
+for i in club_file_list:
+    if i.split(".")[1] != "json":
+        continue
+    now_club_path = os.path.join(club_dir, i)
+    with open(now_club_path, "r", encoding="utf-8") as club_file:
+        now_club_data = json.loads(club_file.read())
+        for club_id in now_club_data:
+            now_club = now_club_data[club_id]
+            club_list.append(now_club)
+config_data["Club"] = {}
+config_data["Club"]["data"] = club_list
 
 
 map_path = os.path.join("data", "map")

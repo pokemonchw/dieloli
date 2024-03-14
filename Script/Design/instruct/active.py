@@ -132,9 +132,12 @@ def handle_handle_in_handle():
 def handle_let_go():
     """处理放手指令"""
     character_data: game_type.Character = cache.character_data[0]
-    if character_data.target_character_id != -1:
-        target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if character_data.pulling != -1:
+        target_data: game_type.Character = cache.character_data[character_data.pulling]
         target_data.follow = -1
+        character_data.pulling = -1
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.follow = -1
 
 
 @handle_instruct.add_instruct(
@@ -182,8 +185,8 @@ def handle_see_star():
     """ 处理看星星指令 """
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
-    character_data.behavior.duration = 2
+    character_data.behavior.duration = 10
     character_data.behavior.behavior_id = constant.Behavior.UNDRESS
     character_data.state = constant.CharacterStatus.STATUS_UNDRESS
-    update.game_update_flow(2)
+    update.game_update_flow(10)
 

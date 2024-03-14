@@ -55,6 +55,14 @@ def handle_move_to_target_scene(
         map_handle.character_move_scene(
             character_data.position, character_data.behavior.move_target, character_id
         )
+        if character_data.pulling != -1:
+            pulling_character = cache.character_data[character_data.pulling]
+            if pulling_character.follow == -1:
+                character_data.pulling = -1
+            elif pulling_character.follow == character_id:
+                map_handle.character_move_scene(pulling_character.position, character_data.behavior.move_target, character_data.pulling)
+                pulling_character.target_character_id = character_id
+                character_data.target_character_id = pulling_character.cid
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.EAT_FOOD)

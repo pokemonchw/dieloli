@@ -410,6 +410,8 @@ class GlobalSceneNamePanel:
         multi_media_class_room_b_path = ["1", "3", "2"]
         music_class_room_path = ["1", "4", "1"]
         student_union_office_path = ["3", "1", "4"]
+        computer_room_a_path = ["3", "3", "1"]
+        computer_room_b_path = ["3", "3", "2"]
         shop_path = ["11"]
         dormitory_path = map_handle.get_map_system_path_for_str(character_data.dormitory)
         path_list = [
@@ -422,6 +424,8 @@ class GlobalSceneNamePanel:
             small_restaurant_path,
             multi_media_class_room_a_path,
             multi_media_class_room_b_path,
+            computer_room_a_path,
+            computer_room_b_path,
             music_class_room_path,
             shop_path,
             student_union_office_path,
@@ -586,6 +590,7 @@ class SocialSceneNameDraw:
         """ 按钮返回值 """
         self.draw_list: List[draw.NormalDraw] = []
         """ 绘制的对象列表 """
+        self.target_character_id: int = text
         character_data: game_type.Character = cache.character_data[text]
         self.scene_path: List[str] = character_data.position
         """ 角色所在场景 """
@@ -626,7 +631,7 @@ class SocialSceneNameDraw:
         py_cmd.clr_cmd()
         line_feed.draw()
         cache.wframe_mouse.w_frame_skip_wait_mouse = 1
-        character_move.own_charcter_move(self.scene_path)
+        character_move.own_move_to_character_scene(self.target_character_id)
 
 
 class CollectionSceneNamePanel:

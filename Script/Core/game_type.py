@@ -508,6 +508,8 @@ class Character:
         """ 角色死因 """
         self.follow: int = -1
         """ 当前跟随目标 """
+        self.pulling: int = -1
+        """ 当前牵手的目标(即让对方跟着自己) """
         self.ai_target: UUID = 0
         """ 当前行为目标 """
         self.premise_data: Dict[str, float] = {}
@@ -529,6 +531,8 @@ class StudentIdentity(CharacterIdentity):
 
     def __init__(self):
         super().__init__()
+        self.cid: int = 0
+        """ 身份id """
         self.grade: int = 0
         """ 所属年级 """
         self.classroom: str = ""
@@ -547,6 +551,18 @@ class TeacherIdentity(CharacterIdentity):
         """ 所属的办公室位置 """
         self.now_classroom: str = ""
         """ 准备上课的班级 """
+
+
+class ClubIdentity(CharacterIdentity):
+    """ 社团身份数据结构 """
+
+    def __init__(self):
+        self.cid = 2
+        """ 身份id """
+        self.club_uid: str = ""
+        """ 社团id """
+        self.club_identity: int = 0
+        """ 社团身份:0成员,1社长,2指导老师 """
 
 
 class TeacherTimeTable:
@@ -732,8 +748,14 @@ class Cache:
         """ 角色的结算时间表 角色id:结算时间 """
         self.no_character_scene_set: Set = set()
         """ 没有角色的空场景集合 """
-        self.all_mass_organization: Dict[str, MassOrganization] = {}
+        self.all_club_data: Dict[str, ClubData] = {}
         """ 全部社团数据结构体 """
+        self.club_create_judge: bool = False
+        """ 是否正在生成社团(验证技能经验时的临时状态，生成社团时，对角色的技能等级判断，经验要求减半) """
+        self.student_character_set: Set = set()
+        """ 学生身份角色集合 """
+        self.teacher_character_set: Set = set()
+        """ 教师身份角色集合 """
 
 
 class TargetChange:
@@ -835,21 +857,20 @@ class ExecuteTarget:
         """ 近似检索到的角色对这个目标的评分，若目标可达则+1，不可达则-1 """
 
 
-class MassOrganization:
-    """ 社团数据结构体 """
+class ClubData:
+    """ 社团数据 """
 
     def __init__(self):
-        """ 初始化社团数据 """
         self.uid: str = ""
-        """ 社团的id """
+        """ 社团唯一id """
         self.name: str = ""
-        """ 社团的名称 """
-        self.type: str = ""
-        """ 社团类型 """
-        self.theme: str = ""
-        """ 社团的主题 """
-        self.threshold: Set[str] = set()
-        """ 社团的加入门槛 """
+        """ 社团名 """
+        self.theme: int = 0
+        """ 社团主题 """
+        self.premise_data: Dict[str, int] = {}
+        """ 社团门槛数据 {前提id:占位值} """
+        self.activity_list: Dict[str, ClubActivityData] = {}
+        """ 社团活动数据 {活动唯一id:活动数据} """
         self.character_set: Set[int] = set()
         """ 社团的成员 """
         self.president: int = -1
@@ -857,3 +878,36 @@ class MassOrganization:
         self.teacher: int = -1
         """ 指导老师id """
 
+
+class ClubActivityData:
+    """ 社团活动数据 """
+
+    def __init__(self):
+        self.uid: str = ""
+        """ 活动唯一id """
+        self.name: str = ""
+        """ 活动名 """
+        self.activity_time_list: Dict[str, ClubActivityTimeData] = {}
+        """ 活动时间 {活动时间唯一id:活动时间数据} """
+        self.activity_position: List[str] = []
+        """ 活动地点 """
+        self.description: int = 0
+        """ 活动内容 """
+
+
+class ClubActivityTimeData:
+    """ 社团活动时间数据 """
+
+    def __init__(self):
+        self.uid: str = ""
+        """ 活动时间唯一id """
+        self.week_day: int = 0
+        """ 周几 """
+        self.start_hour: int = 0
+        """ 起始时间(时) """
+        self.start_minute: int = 0
+        """ 起始时间(分) """
+        self.end_hour: int = 0
+        """ 结束时间(时) """
+        self.end_minute: int = 0
+        """ 结束时间(分) """

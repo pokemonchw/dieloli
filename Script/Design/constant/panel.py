@@ -22,3 +22,6 @@ class Panel:
     CLOTHING_SHOP = 9
     """ 服装商店面板 """
     GAME_SETTING = 10
+    """ 游戏设置面板 """
+    VIEW_CLUB_LIST = 11
+    """ 查看社团列表面板 """

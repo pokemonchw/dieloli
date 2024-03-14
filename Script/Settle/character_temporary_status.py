@@ -43,6 +43,7 @@ def handle_target_follow_self(
     if target_data.position != character_data.position:
         return
     target_data.follow = character_id
+    character_data.pulling = target_data.cid
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.UNFOLLOW)
@@ -58,6 +59,10 @@ def handle_unfollow(
     now_time -- 结算的时间
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.follow != -1:
+        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        if target_data.pulling == character_id:
+            target_data.pulling = -1
     character_data.follow = -1
 
 

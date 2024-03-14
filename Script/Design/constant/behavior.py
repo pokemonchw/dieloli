@@ -61,3 +61,7 @@ class Behavior:
     """ 演讲 """
     SEE_STAR = 29
     """ 看星星 """
+    PLAY_COMPUTER = 30
+    """ 玩电脑 """
+    DRAW = 31
+    """ 画画 """

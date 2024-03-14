@@ -33,6 +33,30 @@ def own_charcter_move(target_scene: list):
     cache.now_panel_id = constant.Panel.IN_SCENE
 
 
+def own_move_to_character_scene(target_character_id: int):
+    """
+    寻路到目标对象所在场景
+    Keyword arguments:
+    target_character_id -- 目标角色id
+    """
+    while 1:
+        character_data: game_type.Character = cache.character_data[0]
+        target_data: game_type.Character = cache.character_data[target_character_id]
+        if character_data.position != target_data.position:
+            (move_now, _, now_target_position, now_need_time) = character_move(0, target_data.position)
+            if move_now == "Null":
+                break
+            character_data.behavior.behavior_id = constant.Behavior.MOVE
+            character_data.behavior.move_target = now_target_position
+            character_data.behavior.duration = now_need_time
+            character_data.state = constant.CharacterStatus.STATUS_MOVE
+            update.game_update_flow(now_need_time)
+        else:
+            break
+    cache.character_data[0].target_character_id = target_character_id
+    cache.now_panel_id = constant.Panel.IN_SCENE
+
+
 def character_move(character_id: int, target_scene: list) -> (str, list, list, int):
     """
     通用角色移动控制

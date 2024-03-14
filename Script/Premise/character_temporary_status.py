@@ -117,3 +117,19 @@ def handle_target_is_lose_first_kiss(character_id: int) -> int:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     return target_data.behavior.temporary_status.lose_first_kiss
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_IS_MOVING)
+def handle_target_is_moving(character_id: int) -> int:
+    """
+    校验交互对象是否正在移动
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    return target_data.state == constant.CharacterStatus.STATUS_MOVE

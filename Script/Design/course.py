@@ -179,6 +179,7 @@ def init_teacher_table():
                             character_data = cache.character_data[now_teacher]
                             character_data.identity_data.setdefault(1, game_type.TeacherIdentity())
                             if now_teacher not in teacher_table:
+                                cache.teacher_character_set.add(now_teacher)
                                 character_data.identity_data[1].officeroom = constant.place_data[f"Office_{phase_room_id}"]
                             teacher_table.setdefault(now_teacher, 0)
                             if teacher_table[now_teacher] < 18:

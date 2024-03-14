@@ -61,3 +61,7 @@ class CharacterStatus:
     """ 演讲 """
     STATUS_SEE_STAR = 29
     """ 看星星 """
+    STATUS_PLAY_COMPUTER = 30
+    """ 玩电脑 """
+    STATUS_DRAW = 31
+    """ 画画 """

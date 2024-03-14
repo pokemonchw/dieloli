@@ -113,6 +113,7 @@ not_in_dormitory,场景状态类前提,角色未处于宿舍
 in_target_dormitory,场景状态类前提,角色处于交互对象的宿舍中
 in_music_classroom,场景状态类前提,角色处于音乐活动室
 not_in_music_classroom,场景状态类前提,角色未处于音乐活动室
+in_computer_room_scene,场景状态类前提,角色处于计算机实践室
 scene_no_have_other_character,场景状态类前提,场景中没有自己外的其他角色
 scene_character_only_player_and_one,场景状态类前提,场景中只有包括玩家在内的两个角色
 beyond_friendship_target_in_scene,场景状态类前提,对场景中某个角色抱有超越友谊的想法
@@ -485,6 +486,7 @@ target_is_live,角色临时状态类前提,交互对象未死亡
 no_follow,角色临时状态类前提,角色未处于跟随状态
 is_lose_first_kiss,角色临时状态类前提,角色正在失去初吻
 target_is_lose_first_kiss,角色临时状态类前提,交互对象正在失去初吻
+target_is_moving,角色临时状态类前提,交互对象正在移动
 happy_is_height,角色心灵状态类前提,角色快乐情绪高涨
 happy_is_low,角色心灵状态类前提,角色快乐情绪低下
 pain_is_height,角色心灵状态类前提,角色痛苦情绪高涨
