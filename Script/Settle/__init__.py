@@ -21,4 +21,5 @@ from Script.Settle import (
     target_sex_experience,
     target_sex_happy,
     target_skills,
+    money,
 )

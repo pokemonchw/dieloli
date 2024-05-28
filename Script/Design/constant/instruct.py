@@ -138,6 +138,10 @@ class Instruct:
     """ 查看自身属性 """
     VIEW_CHARACTER_STATUS_LIST = 0
     """ 查看角色状态列表 """
+    VIEW_CLUB_LIST = 0
+    """ 查看社团列表 """
+    VIEW_CLUB_INFO = 0
+    """ 查看社团信息 """
     COLLECTION_CHARACTER = 0
     """ 收藏角色 """
     UN_COLLECTION_CHARACTER = 0

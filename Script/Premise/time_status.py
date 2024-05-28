@@ -705,3 +705,20 @@ def handle_is_night(character_id: int) -> int:
     sun_time = game_time.get_sun_time(now_time)
     return sun_time in {0, 1, 2, 10, 11}
 
+
+@handle_premise.add_premise(constant.Premise.IS_NOT_NIGHT)
+def handle_is_night_night(character_id: int) -> int:
+    """
+    校验现在是否不在夜晚
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    sun_time = game_time.get_sun_time(now_time)
+    return sun_time not in {0, 1, 2, 10, 11}
+

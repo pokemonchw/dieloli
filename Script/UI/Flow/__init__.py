@@ -10,4 +10,6 @@ from Script.UI.Flow import (
     view_character_status_list_flow,
     clothing_shop_flow,
     game_setting_flow,
+    view_club_list_flow,
+    view_club_info_flow,
 )

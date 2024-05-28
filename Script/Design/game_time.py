@@ -139,7 +139,7 @@ def get_rand_day_for_year(year: int) -> int:
         return get_rand_day_for_date(start.timestamp(), end.timestamp())
     start_time_stamp = (start - datetime.datetime(1970, 1, 1)).total_seconds()
     end_time_stamp = (end - datetime.datetime(1970, 1, 1)).total_seconds()
-    return random.randint(start_time_stamp, end_time_stamp)
+    return random.randint(int(start_time_stamp), int(end_time_stamp))
 
 
 def timetuple_to_datetime(t: datetime.datetime.timetuple) -> datetime.datetime:

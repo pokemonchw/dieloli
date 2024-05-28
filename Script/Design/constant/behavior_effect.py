@@ -1791,6 +1791,36 @@ class BehaviorEffect:
 
     """
     =========================
+    金钱类结算器
+    =========================
+    """
+    ADD_SMALL_MONEY = "add_small_money"
+    """ 增加少量金钱 """
+    ADD_MEDIUM_MONEY = "add_medium_money"
+    """ 增加中量金钱 """
+    ADD_LARGE_MONEY = "add_large_money"
+    """ 增加大量金钱 """
+    SUB_SMALL_MONEY = "sub_small_money"
+    """ 减少少量金钱 """
+    SUB_MEDIUM_MONEY = "sub_small_money"
+    """ 减少中量金钱 """
+    SUB_LARGE_MONEY = "sub_large_money"
+    """ 减少大量金钱 """
+    GIFT_TARGET_SMALL_MONEY = "gift_target_small_money"
+    """ 赠送交互对象少量金钱 """
+    GIFT_TARGET_MEDIUM_MONEY = "gift_target_medium_money"
+    """ 赠送交互对象中量金钱 """
+    GIFT_TARGET_LARGE_MONEY = "gift_target_large_money"
+    """ 赠送交互对象大量金钱 """
+    TARGET_GIFT_SMALL_MONEY = "target_gift_small_money"
+    """ 交互对象赠送少量金钱 """
+    TARGET_GIFT_MEDIUM_MONEY = "target_gift_medium_money"
+    """ 交互对象赠送中量金钱 """
+    TARGET_GIFT_LARGE_MONEY = "target_gift_large_money"
+    """ 交互对象赠送大量金钱 """
+
+    """
+    =========================
     角色行为类结算器
     =========================
     """

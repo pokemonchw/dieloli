@@ -17,6 +17,7 @@ from Script.Premise import (
     character_stature,
     character_temporary_status,
     character_wears,
+    money,
     scene_status,
     shop,
     target_bodily_status,

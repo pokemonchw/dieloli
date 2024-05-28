@@ -98,27 +98,41 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
     Return arguments:
     game_type.Character -- 更新后的角色数据
     """
+    player_data: game_type.Character = cache.character_data[0]
     target_weight_data = {}
     # 取出角色数据
     character_data: game_type.Character = cache.character_data[character_id]
     # 计算角色向量
     character_vector = cache.character_vector_data[character_id - 1]
     # 找出最相似的角色
+    target_judge_log_list = []
+    target_judge_log_list.append("角色id:"+str(character_id))
+    target_judge_log_list.append("角色姓名:"+str(character_data.name))
     near_character_list, distance_list = cache.similar_character_searcher.knn_query(character_vector, k=1)
     near_character_id = near_character_list[0][0]
+    target_judge_log_list.append("最相似的角色的id:"+str(near_character_id))
     distance = distance_list[0][0]
+    target_judge_log_list.append("相似程度:"+str(distance))
     near_judge = 0
     if near_character_id in cache.character_target_data:
+        target_judge_log_list.append("相似角色已完成了目标查找")
         near_target = cache.character_target_data[near_character_id]
+        target_judge_log_list.append("相似角色进行的目标id:"+str(near_target.affiliation))
+        affiliation_target_config = game_config.config_target[near_target.affiliation]
+        target_judge_log_list.append("相似角色进行的目标描述:"+affiliation_target_config.text)
+        target_judge_log_list.append("相似角色的目标加权:"+str(near_target.score))
         now_score = near_target.score * 0.0003
         now_range = random.random()
         if now_range <= 1 - distance + now_score:
             near_judge = 1
+    else:
+        target_judge_log_list.append("相似角色未完成目标查找")
     # 获取最相似角色的行动目标
     target: game_type.ExecuteTarget = None
     judge = 0
     null_target_set = set()
     if near_judge:
+        target_judge_log_list.append("决定模仿角色行为")
         target, _, judge = search_target(
             character_id,
             {cache.character_target_data[near_character_id].affiliation},
@@ -131,8 +145,13 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
         if judge:
             cache.character_target_data[near_character_id].score += 1
             cache.character_target_score_data[near_character_id] += 1
+        else:
+            target_judge_log_list.append("无法模仿该角色行为，放弃")
+    else:
+        target_judge_log_list.append("放弃模仿目标")
     # 无法模仿相似角色时，若自身性格有合群倾向，则改为模仿最受欢迎的角色(即分值最高的角色)的行为
     if not judge:
+        target_judge_log_list.append("尝试模仿群体行为")
         conformity_judge = 0
         if character_data.nature[1] > 50:
             if cache.character_target_data:
@@ -140,8 +159,18 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
                 now_range = random.random() * 100
                 if now_range < conformity:
                     conformity_judge = 1
+                else:
+                    target_judge_log_list.append("概率验证未通过，放弃")
+            else:
+                target_judge_log_list.append("无人完成目标查找，放弃")
+        else:
+            target_judge_log_list.append("角色不合群，放弃")
         if conformity_judge and cache.character_target_score_data:
             imitate_character_id = value_handle.get_random_for_weight(cache.character_target_score_data)
+            imitate_target_uid = cache.character_target_data[imitate_character_id].affiliation
+            imitate_target_config = game_config.config_target[imitate_target_uid]
+            target_judge_log_list.append("模仿群体行为时找到的目标id:"+imitate_target_uid)
+            target_judge_log_list.append("模仿群体行为时找到的目标描述:"+imitate_target_config.text)
             target, _, judge = search_target(
                 character_id,
                 {cache.character_target_data[imitate_character_id].affiliation},
@@ -151,10 +180,15 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
                 ""
             )
             if judge:
+                target_judge_log_list.append("模仿角色时最终决定进行的目标id:"+str(target.uid))
+                now_target_config = game_config.config_target[target.uid]
+                target_judge_log_list.append("模仿角色行为时的目标描述:"+now_target_config.text)
                 cache.character_target_data[imitate_character_id].score += 1
                 cache.character_target_score_data[imitate_character_id] += 1
-    # 当以上两者都不满足时，改为自己思考现在的行动目标
+            else:
+                target_judge_log_list.append("无法模仿该角色行为，放弃")
     if not judge:
+        target_judge_log_list.append("自己查找决策目标")
         target, _, judge = search_target(
             character_id,
             set(game_config.config_target.keys()),
@@ -163,7 +197,20 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
             0,
             ""
         )
-    player_data: game_type.Character = cache.character_data[0]
+        if judge:
+            if target.affiliation != "":
+                target_judge_log_list.append("查找的目标id:"+target.affiliation)
+                affiliation_target_config = game_config.config_target[target.affiliation]
+                target_judge_log_list.append("查找的目标描述:"+affiliation_target_config.text)
+                target_judge_log_list.append("进行的目标id:"+target.uid)
+                target_config = game_config.config_target[target.uid]
+                target_judge_log_list.append("进行的目标描述:"+target_config.text)
+            else:
+                target_judge_log_list.append("进行的目标id:"+target.uid)
+                target_config = game_config.config_target[target.uid]
+                target_judge_log_list.append("进行的目标描述:"+target_config.text)
+        else:
+            target_judge_log_list.append("未找到可用目标")
     if judge:
         if target.affiliation == "":
             target.affiliation = target.uid
@@ -172,17 +219,34 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
         target_config = game_config.config_target[target.uid]
         character_data.ai_target = target.affiliation
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
+        target_judge_log_list.append("有可用目标，开始执行")
         event_draw = event.handle_event(character_id, 1)
+        target_judge_log_list.append("查找可用的状态机开始事件")
         if (not character_id) or (player_data.target_character_id == character_id):
+            if player_data.target_character_id == character_id:
+                target_judge_log_list.append("是玩家当前关注的目标，绘制状态机开始事件文本")
             if event_draw is not None:
                 event_draw.draw()
+            else:
+                target_judge_log_list.append("无可绘制的文本")
+        else:
+            target_judge_log_list.append("不在玩家的交互列表中，放弃文本绘制")
+    else:
+        target_judge_log_list.append("无可进行的目标")
     start_time = cache.character_data[character_id].behavior.start_time
     now_judge = game_time.judge_date_big_or_small(start_time, now_time)
     if now_judge:
+        target_judge_log_list.append("角色在本轮步进中完成结算")
         cache.over_behavior_character.add(character_id)
         character_data.ai_target = 0
-    else:
+    if not judge:
+        target_judge_log_list.append("角色无可用目标，角色自身时间轴步进一分钟")
         cache.character_data[character_id].behavior.start_time += 60
+    if character_id in player_data.collection_character:
+        print("==============================")
+        for now_log in target_judge_log_list:
+            print(now_log)
+        print("==============================")
     return cache.character_data[character_id]
 
 
@@ -575,3 +639,4 @@ def update_cafeteria():
             break
         if not food_judge:
             break
+

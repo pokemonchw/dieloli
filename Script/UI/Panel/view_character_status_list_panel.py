@@ -257,7 +257,9 @@ class SeeCharacterStatusDraw:
             body_fat = str(round(character_data.bodyfat, 2))
             body_fat_text = _("体脂率:") + body_fat + "%"
             now_chest_text = _("罩杯:") + now_chest_tem.info
-            button_text = f"{index_text} {character_data.name} {sex_text} {character_data.age}岁 {now_height_text} {now_weight_text} {body_fat_text} {now_chest_text} {target_text} {position_text}"
+            age = character_data.age
+            age_text = _("{age}岁").format(age=age)
+            button_text = f"{index_text} {character_data.name} {sex_text} {age_text} {now_height_text} {now_weight_text} {body_fat_text} {now_chest_text} {target_text} {position_text}"
         player_data = cache.character_data[0]
         if self.text in player_data.collection_character:
             button_text += _(" (已收藏)")
@@ -279,9 +281,9 @@ class SeeCharacterStatusDraw:
         now_draw = panel.OneMessageAndSingleColumnButton()
         player_data = cache.character_data[0]
         if self.text in player_data.collection_character:
-            now_draw.set([_("移动至所在场景"), _("取消收藏"), _("返回")], "准备做什么?")
+            now_draw.set([_("移动至所在场景"), _("取消收藏"), _("返回")], _("准备做什么?"))
         else:
-            now_draw.set([_("移动至所在场景"), _("收藏"), _("返回")], "准备做什么?")
+            now_draw.set([_("移动至所在场景"), _("收藏"), _("返回")], _("准备做什么?"))
         now_draw.draw()
         return_list = now_draw.get_return_list()
         ans = flow_handle.askfor_all(return_list.keys())

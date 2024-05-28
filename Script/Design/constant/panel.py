@@ -25,3 +25,5 @@ class Panel:
     """ 游戏设置面板 """
     VIEW_CLUB_LIST = 11
     """ 查看社团列表面板 """
+    VIEW_CLUB_INFO = 12
+    """ 查看社团信息面板 """

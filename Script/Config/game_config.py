@@ -67,6 +67,10 @@ config_clothing_type_sex_type_data: Dict[int, Dict[int, Set]] = {}
 """ 服装类型下性别类型配置数据 服装类型id:性别类型id:服装模板id集合 """
 config_club_data: Dict[str, game_type.ClubData] = {}
 """ 社团配置数据 """
+config_club_identity: Dict[int, config_def.ClubIdentity] = {}
+"""  社团身份数据"""
+config_club_theme: Dict[int, config_def.ClubTheme] = {}
+""" 社团主题配置 """
 config_cook_type: Dict[int, config_def.CookType] = {}
 """ 烹饪类型配置数据 """
 config_course: Dict[int, config_def.Course] = {}
@@ -473,6 +477,26 @@ def load_club_data():
                 activity_data.activity_time_list[time_uid] = time_data
             now_type.activity_list[activity_uid] = activity_data
         config_club_data[now_type.uid] = now_type
+
+
+def load_club_identity():
+    """ 载入社团身份配置数据 """
+    now_data = config_data["ClubIdentity"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_type = config_def.ClubIdentity()
+        now_type.__dict__ = tem_data
+        config_club_identity[now_type.cid] = now_type
+
+
+def load_club_theme():
+    """ 载入社团主题配置数据 """
+    now_data = config_data["ClubTheme"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_type = config_def.ClubTheme()
+        now_type.__dict__ = tem_data
+        config_club_theme[now_type.cid] = now_type
 
 
 def load_cook_type():
@@ -1014,6 +1038,8 @@ def init():
     load_clothing_type()
     load_clothing_use_type()
     load_club_data()
+    load_club_identity()
+    load_club_theme()
     load_cook_type()
     load_course()
     load_course_skill_experience()

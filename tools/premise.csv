@@ -8,6 +8,8 @@ no_player,角色身份类前提,角色不是玩家
 target_is_student,角色身份类前提,交互对象是学生
 is_primary_school_students,角色身份类前提,角色是小学生
 is_player_target,角色身份类前提,是玩家的交互对象
+is_joined_club,角色身份类前提,角色已经加入了社团
+not_joined_club,角色身份类前提,角色没有加入社团
 target_is_futa_or_woman,角色性别类前提,交互对象是扶她或女性
 target_is_futa_or_man,角色性别类前提,交互对象是扶她或男性
 is_futa_or_man,角色性别类前提,角色是扶她或男性
@@ -99,6 +101,7 @@ target_is_keen,交互对象性格类前提,交互对象是一个热衷的人
 in_door,场景状态类前提,角色处于室内
 out_door,场景状态类前提,角色处于室外
 in_square,场景状态类前提,角色处于操场中
+not_in_square,场景状态类前提,角色不处于操场中
 in_cafeteria,场景状态类前提,角色处于取餐区
 in_restaurant,场景状态类前提,角色处于就餐区
 in_swimming_pool,场景状态类前提,角色处于游泳池
@@ -178,6 +181,7 @@ tonight_is_ariake_moon,时间状态类前提,今夜是有明月
 tonight_is_zangetsu_moon,时间状态类前提,今夜是残月
 tonight_is_akatsuki_moon,时间状态类前提,今夜是晓月
 is_night,时间状态类前提,处于夜晚
+is_not_night,时间状态类前提,不处于夜晚
 ethic_is_height,角色人文技能类前提,角色伦理水平高
 ethic_is_low,角色人文技能类前提,角色伦理水平低
 morality_is_height,角色人文技能类前提,角色道德水平高
@@ -687,3 +691,10 @@ is_collection_system,辅助系统类前提,玩家已开启收藏模式
 un_collection_system,辅助系统类前提,玩家未开启收藏模式
 target_is_collection,辅助系统类前提,交互对象已被玩家收藏
 target_is_not_collection,辅助系统类前提,交互对象未被玩家收藏
+have_small_money,金钱类前提,拥有少量金钱
+have_medium_money,金钱类前提,拥有中量金钱
+have_large_money,金钱类前提,拥有大量金钱
+have_enough_buy_cheapest_food,金钱类前提,拥有足够买最便宜的食物的金钱
+have_enough_buy_cheapest_drink,金钱类前提,拥有足够买最便宜的饮料的金钱
+have_enough_buy_most_expensive_food,金钱类前提,拥有足够买最贵的食物的金钱
+have_enough_buy_most_expensive_drink,金钱类前提,拥有足够买最贵的饮料的金钱

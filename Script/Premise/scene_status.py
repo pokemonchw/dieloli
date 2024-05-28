@@ -59,6 +59,24 @@ def handle_in_square(character_id: int) -> int:
     return 0
 
 
+@handle_premise.add_premise(constant.Premise.NOT_IN_SQUARE)
+def handle_not_in_square(character_id: int) -> int:
+    """
+    校验角色是否不处于操场中
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data = cache.character_data[character_id]
+    now_position = character_data.position
+    now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
+    now_scene_data = cache.scene_data[now_scene_str]
+    if now_scene_data.scene_tag == "Square":
+        return 0
+    return 1
+
+
 @handle_premise.add_premise(constant.Premise.IN_CAFETERIA)
 def handle_in_cafeteria(character_id: int) -> int:
     """
@@ -766,7 +784,7 @@ def handle_naked_character_in_scene(character_id: int) -> int:
     for now_character in scene_data.character_list:
         now_character_data: game_type.Character = cache.character_data[now_character]
         for i in now_character_data.put_on:
-            if isinstance(character_data.put_on[i], UUID):
+            if character_data.put_on[i] in {None,""}:
                 return 0
     return 1
 

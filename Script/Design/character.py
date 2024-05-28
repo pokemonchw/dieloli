@@ -66,6 +66,7 @@ def init_attr(character_id: int):
         character_data.mana_point_tem
     )
     character_data.mana_point = character_data.mana_point_max
+    character_data.money = random.randint(500, 1000)
     new_nature = nature.get_random_nature()
     for nature_id in new_nature:
         if nature_id not in character_data.nature:

@@ -200,6 +200,34 @@ def character_abuse_to_dislike_target_in_scene(character_id: int):
         character_data.state = constant.CharacterStatus.STATUS_ABUSE
 
 
+@handle_state_machine.add_state_machine(constant.StateMachine.ABUSE_NAKED_TARGET_IN_SCENE)
+def character_abuse_naked_target_in_scene(character_id: int):
+    """
+    辱骂场景中一丝不挂的人
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    character_list = []
+    for now_character_id in scene_data.character_list:
+        now_character_data: game_type.Character = cache.character_data[now_character_id]
+        now_judge = 1
+        for i in now_character_data.put_on:
+            if character_data.put_on[i] not in {None,""}:
+                now_judge = 0
+                break
+        if now_judge:
+            character_list.append(now_character_id)
+    if character_list:
+        target_id = random.choice(character_list)
+        character_data.behavior.behavior_id = constant.Behavior.ABUSE
+        character_data.target_character_id = target_id
+        character_data.behavior.duration = 10
+        character_data.state = constant.CharacterStatus.STATUS_ABUSE
+
+
 @handle_state_machine.add_state_machine(constant.StateMachine.GENERAL_SPEECH)
 def character_general_speech(character_id: int):
     """

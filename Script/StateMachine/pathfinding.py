@@ -435,6 +435,25 @@ def character_move_to_library(character_id: int):
     character_data.follow = -1
 
 
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_SQUARE)
+def character_move_to_square(character_id: int):
+    """
+    角色移动至操场
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    _, _, move_path, move_time = character_move.character_move(character_id, ["2"])
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+    if character_data.follow != -1:
+        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        if target_data.pulling == character_id:
+            target_data.pulling = -1
+    character_data.follow = -1
+
 @handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_NO_MAN_SCENE)
 def character_move_to_no_man_scene(character_id: int):
     """

@@ -24,6 +24,10 @@ class Premise:
     """ 角色是小学生 """
     IS_PLAYER_TARGET = "is_player_target"
     """ 是玩家的交互对象 """
+    IS_JOINED_CLUB = "is_joined_club"
+    """ 已经加入社团 """
+    NOT_JOINED_CLUB = "not_joined_club"
+    """ 没有加入社团 """
 
     """
     =========================
@@ -230,6 +234,8 @@ class Premise:
     """ 处于室外 """
     IN_SQUARE = "in_square"
     """ 处于操场 """
+    NOT_IN_SQUARE = "not_in_square"
+    """ 不处于操场中 """
     IN_CAFETERIA = "in_cafeteria"
     """ 处于取餐区 """
     IN_RESTAURANT = "in_restaurant"
@@ -408,6 +414,8 @@ class Premise:
     """ 现在是冬天 """
     IS_NIGHT = "is_night"
     """ 处于夜晚 """
+    IS_NOT_NIGHT = "is_not_night"
+    """ 不处于夜晚 """
 
     """
     =========================
@@ -1569,3 +1577,22 @@ class Premise:
     TARGET_IS_NOT_COLLECTION = "target_is_not_collection"
     """ 交互对象未被玩家收藏 """
 
+    """
+    =========================
+    金钱类前提
+    =========================
+    """
+    HAVE_SMALL_MONEY = "have_small_money"
+    """ 拥有少量金钱 """
+    HAVE_MEDIUM_MONEY = "have_medium_money"
+    """ 拥有中量金钱 """
+    HAVE_LARGE_MONEY = "have_large_money"
+    """ 拥有大量金钱 """
+    MONEY_ENOUGH_BUY_CHEAPEST_FOOD = "money_enough_buy_cheapest_food"
+    """ 拥有足够买最便宜的食物的钱 """
+    MONEY_ENOUGH_BUY_CHEAPEST_DRINK = "money_enough_buy_cheapest_drink"
+    """ 拥有足够买最便宜的饮料的钱 """
+    MONEY_ENOUGH_BUY_MOST_EXPENSIVE_FOOD = "money_enough_buy_most_expensive_food"
+    """ 拥有足够买最贵的食物的钱 """
+    MONEY_ENOUGH_BUY_MOST_EXPENSIVE_DRINK = "money_enough_buy_most_expensive_drink"
+    """ 拥有足够买最贵的饮料的钱 """

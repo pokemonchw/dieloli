@@ -38,6 +38,8 @@ class StateMachine:
     """ 移动至跟随对象所在场景 """
     MOVE_TO_LIBRARY = "move_to_library"
     """ 移动至图书馆 """
+    MOVE_TO_SQUARE = "move_to_square"
+    """ 移动至操场 """
     MOVE_TO_NO_MAN_SCENE = "move_to_no_man_scene"
     """ 移动至无人场景 """
     MOVE_TO_HAVE_CHARACTER_SCENE = "move_to_have_character_scene"
@@ -152,6 +154,8 @@ class StateMachine:
     """ 牵住场景中自己喜欢的随机对象的手 """
     ABUSE_TO_DISLIKE_TARGET_IN_SCENE = "abuse_to_dislike_target_in_scene"
     """ 辱骂场景中自己讨厌的人 """
+    ABUSE_NAKED_TARGET_IN_SCENE = "abuse_naked_target_in_scene"
+    """ 辱骂场景中一丝不挂的人 """
     GENERAL_SPEECH = "general_speech"
     """ 发表演讲 """
 
@@ -172,6 +176,8 @@ class StateMachine:
     """ 睡觉 """
     REST = "rest"
     """ 休息一会儿 """
+    SIESTA = "siesta"
+    """ 午睡 """
 
     """
     =========================

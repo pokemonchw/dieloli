@@ -66,11 +66,11 @@ def handle_but_clothing():
 )
 def handle_drink_spring():
     """处理喝泉水指令"""
-    value = random.randint(0, 100)
     now_draw = draw.WaitDraw()
     now_draw.width = width
     now_draw.text = "\n"
     character_data: game_type.Character = cache.character_data[0]
+    value = random.randint(0, 100)
     if value <= 5 and not character_data.sex:
         now_draw.text += _("喝到了奇怪的泉水！身体变化了！！！")
         character_data.sex = 1

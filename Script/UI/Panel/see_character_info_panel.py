@@ -123,29 +123,24 @@ class SeeCharacterMainAttrPanel:
 
     def __init__(self, character_id: int, width: int):
         """初始化绘制对象"""
+        character_data: game_type.Character = cache.character_data[character_id]
+        self.draw_list = []
         head_draw = CharacterInfoHead(character_id, width)
-        room_draw = CharacterRoomText(character_id, width)
+        self.draw_list.append(head_draw)
         birthday_draw = CharacterBirthdayText(character_id, width)
+        self.draw_list.append(birthday_draw)
+        room_draw = CharacterRoomText(character_id, width)
+        self.draw_list.append(room_draw)
+        if 2 in character_data.identity_data:
+            club_draw = CharacterClubText(character_id, width)
+            self.draw_list.append(club_draw)
         sture_info_draw = CharacterStatureInfoText(character_id, width)
+        self.draw_list.append(sture_info_draw)
         measurement_draw = CharacterMeasurementsText(character_id, width)
+        self.draw_list.append(measurement_draw)
         if normal_config.config_normal.nsfw:
             sex_experience_draw = CharacterSexExperienceText(character_id, width)
-            self.draw_list: List[draw.NormalDraw] = [
-                head_draw,
-                room_draw,
-                birthday_draw,
-                sture_info_draw,
-                measurement_draw,
-                sex_experience_draw,
-            ]
-        else:
-            self.draw_list: List[draw.NormalDraw] = [
-                head_draw,
-                room_draw,
-                birthday_draw,
-                sture_info_draw,
-                measurement_draw,
-            ]
+            self.draw_list.append(sex_experience_draw)
         """ 绘制的面板列表 """
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
@@ -473,6 +468,37 @@ class CharacterRoomText:
         info_draw.set(
             [self.dormitory_text, self.classroom_text, self.officeroom_text], self.width, 3
         )
+        info_draw.draw()
+
+class CharacterClubText:
+    """
+    角色社团信息显示面板
+    Keyword arguments:
+    character_id -- 角色id
+    width -- 最大宽度
+    """
+
+    def __init__(self, character_id: int, width: int):
+        """ 初始化绘制对象 """
+        self.character_id = character_id
+        """ 要绘制的角色id """
+        self.width = width
+        """ 当前最大可绘制宽度 """
+        character_data: game_type.Character = cache.character_data[self.character_id]
+        identity_data: game_type.ClubIdentity = character_data.identity_data[2]
+        club_data: game_type.ClubData = cache.all_club_data[identity_data.club_uid]
+        club_name_text = _("社团:{club_name}").format(club_name = club_data.name)
+        club_theme_text = _("主题:{club_theme}").format(club_theme = game_config.config_club_theme[club_data.theme].name)
+        club_identity_text = _("身份:{club_identity}").format(club_identity = game_config.config_club_identity[identity_data.club_identity].name)
+        self.info_list = [club_name_text, club_theme_text, club_identity_text]
+        """ 绘制的文本列表 """
+
+    def draw(self):
+        """ 绘制面板 """
+        line = draw.LineDraw(".", self.width)
+        line.draw()
+        info_draw = panel.CenterDrawTextListPanel()
+        info_draw.set(self.info_list, self.width, 3)
         info_draw.draw()
 
 

@@ -46,8 +46,6 @@ def close_window():
 game_name = normal_config.config_normal.game_name
 root = Tk()
 now_font_size = 20
-char_width = 16
-char_height = 32
 # 获取所有屏幕的信息
 screens = screeninfo.get_monitors()
 current_screen = None
@@ -57,31 +55,41 @@ for screen in screens:
         current_screen = screen
 screen_width = current_screen.width
 screen_height = current_screen.height
-screen_width_magnification = 1920 / screen_width
-screen_height_magnification = 1080 / screen_height
-screen_magnification = max(screen_width_magnification, screen_height_magnification)
-char_height *= screen_magnification
-char_width *= screen_magnification
-now_font_size = int(now_font_size * screen_magnification)
-window_width = normal_config.config_normal.window_width
-window_height = normal_config.config_normal.window_hight
-need_width = window_width
-need_height = window_height
-if window_width > screen_width - 30:
-    need_width = screen_width - 30
-if window_height > screen_height - 30:
-    need_height = screen_height - 30
-while True:
-    test_font = font.Font(family="Sarasa Mono SC",size=now_font_size)
-    char_width = test_font.measure("a")
-    char_height = test_font.metrics("linespace")
-    window_width = int(char_width * 92)
-    window_height = int(char_height* 30)
-    if window_width <= need_width and window_height <= need_height:
-        break
-    now_font_size -= 1
-normal_config.config_normal.font_size = now_font_size
-normal_config.config_normal.order_font_size = now_font_size - 2
+window_width = screen_width - 30
+window_height = screen_height - 30
+need_char_width = int(window_width / 120)
+need_char_height = int(window_height / 50)
+test_font = font.Font(family=normal_config.config_normal.font,size=now_font_size)
+char_width = test_font.measure("a")
+char_height = test_font.metrics("linespace")
+if char_width <= need_char_width and char_height <= need_char_height:
+    need_font_size = now_font_size
+    while True:
+        next_font_size = need_font_size + 1
+        next_font = font.Font(family=normal_config.config_normal.font,size=next_font_size)
+        next_font_char_width = next_font.measure("a")
+        next_font_char_height = next_font.metrics("linespace")
+        if next_font_char_width <= need_char_width and next_font_char_height <= need_char_height:
+            need_font_size = next_font_size
+        else:
+            break
+else:
+    need_font_size = now_font_size
+    while True:
+        next_font_size = need_font_size - 1
+        next_font = font.Font(family=normal_config.config_normal.font,size=next_font_size)
+        next_font_char_width = next_font.measure("a")
+        next_font_char_height = next_font.metrics("linespace")
+        need_font_size = next_font_size
+        if next_font_char_width <= need_char_width and next_font_char_height <= need_char_height:
+            break
+now_font = font.Font(family=normal_config.config_normal.font,size=need_font_size)
+now_char_width = now_font.measure("a")
+now_char_height = now_font.metrics("linespace")
+window_width = now_char_width * 120
+window_height = now_char_height * 50
+normal_config.config_normal.font_size = need_font_size
+normal_config.config_normal.order_font_size = need_font_size - 2
 root.tk.call("tk", "scaling", 1.0)
 root.title(game_name)
 width = window_width + 30

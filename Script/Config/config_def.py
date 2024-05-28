@@ -216,12 +216,12 @@ class Item:
 
 
 class ClubTheme:
-    """ 服装用途配置 """
+    """ 社团主题配置 """
 
     cid: int
     """ 主题id """
     name: str
-    """ 主题名 """
+    """ 主题名字 """
 
 
 class HitPointTem:
@@ -711,6 +711,15 @@ class SunTime:
     """ 太阳时间id """
     name: str
     """ 太阳时间名 """
+
+
+class ClubIdentity:
+    """ 身份名称配置数据 """
+
+    cid: int
+    """ 身份id """
+    name: str
+    """ 名称 """
 
 
 class Language:

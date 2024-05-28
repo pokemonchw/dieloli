@@ -132,3 +132,30 @@ def handle_is_player_target(character_id: int) -> int:
         return 0
     player_data: game_type.Character = cache.character_data[0]
     return player_data.target_character_id == character_id
+
+
+@handle_premise.add_premise(constant.Premise.IS_JOINED_CLUB)
+def handle_is_joined_club(character_id: int) -> int:
+    """
+    校验角色是否已经加入了社团
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return 2 in character_data.identity_data
+
+
+@handle_premise.add_premise(constant.Premise.NOT_JOINED_CLUB)
+def handle_not_joined_club(character_id: int) -> int:
+    """
+    校验角色是否没有加入社团
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    return 2 not in character_data.identity_data
+

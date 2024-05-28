@@ -114,6 +114,9 @@ class InScenePanel:
             now_position_draw = draw.NormalDraw()
             now_position_draw.text = now_position_text
             now_position_draw.width = self.width - len(game_time_draw)
+            money_draw = draw.NormalDraw()
+            money_draw.text = _(" 金钱:") + str(character_data.money)
+            money_draw.width = self.width
             meet_draw = draw.NormalDraw()
             meet_draw.text = _("你在这里遇到了:")
             meet_draw.width = self.width
@@ -126,6 +129,7 @@ class InScenePanel:
             title_draw.draw()
             game_time_draw.draw()
             now_position_draw.draw()
+            money_draw.draw()
             line_feed.draw()
             ask_list = []
             if character_list and character_data.target_character_id not in character_list:

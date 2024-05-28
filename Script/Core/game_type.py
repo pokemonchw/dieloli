@@ -424,7 +424,7 @@ class Character:
         """ 角色的三围数据 """
         self.behavior: Behavior = Behavior()
         """ 角色当前行为状态数据 """
-        self.gold: int = 0
+        self.money: int = 0
         """ 角色所持金钱数据 """
         self.position: List[str] = ["0"]
         """ 角色当前坐标数据 """
@@ -776,6 +776,8 @@ class TargetChange:
         """ 穿上的衣服 """
         self.undress: Dict[int, Clothing] = {}
         """ 脱下的衣服 """
+        self.money: int = 0
+        """ 金钱变化 """
 
 
 class CharacterStatusChange:
@@ -800,6 +802,8 @@ class CharacterStatusChange:
         """ 穿上的衣服 """
         self.undress: Dict[int, Clothing] = {}
         """ 脱下的衣服 """
+        self.money = 0
+        """ 金钱变化 """
 
 
 class Event:

@@ -29,3 +29,16 @@ def character_rest(character_id: int):
     character_data.behavior.behavior_id = constant.Behavior.REST
     character_data.behavior.duration = 10
     character_data.state = constant.CharacterStatus.STATUS_REST
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.SIESTA)
+def character_siesta(character_id: int):
+    """
+    睡午觉
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.behavior.behavior_id = constant.Behavior.SIESTA
+    character_data.behavior.duration = 30
+    character_data.state = constant.CharacterStatus.STATUS_SIESTA

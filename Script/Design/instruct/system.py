@@ -51,6 +51,32 @@ def handle_view_character_status_list():
 
 
 @handle_instruct.add_instruct(
+    constant.Instruct.VIEW_CLUB_LIST,
+    constant.InstructType.SYSTEM,
+    _("申请加入社团"),
+    {
+        constant.Premise.IN_STUDENT_UNION_OFFICE,
+        constant.Premise.NOT_JOINED_CLUB
+    },
+)
+def handle_see_club_list():
+    """ 打开查看社团列表的指令 """
+    cache.now_panel_id = constant.Panel.VIEW_CLUB_LIST
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.VIEW_CLUB_INFO,
+    constant.InstructType.SYSTEM,
+    _("查看社团信息"),
+    {
+        constant.Premise.IS_JOINED_CLUB
+    },
+)
+def handle_see_club_info():
+    cache.now_panel_id = constant.Panel.VIEW_CLUB_INFO
+
+
+@handle_instruct.add_instruct(
     constant.Instruct.COLLECTION_CHARACTER,
     constant.InstructType.SYSTEM,
     _("收藏角色"),

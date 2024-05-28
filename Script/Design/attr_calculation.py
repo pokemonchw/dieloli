@@ -82,7 +82,7 @@ def get_chest(chest_tem: int, birthday: int) -> game_type.Chest:
     over_age = int(value_handle.custom_distribution(14, 18))
     over_year_start = birthday + (over_age - 1) * 31536365
     over_year_end = birthday + over_age * 31536365
-    end_date = random.randint(over_year_start, over_year_end)
+    end_date = random.randint(int(over_year_start), int(over_year_end))
     now_date = cache.game_time
     end_day = int((end_date - birthday) / 86400)
     now_day = int((now_date - birthday) / 86400)
