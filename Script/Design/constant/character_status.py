@@ -65,3 +65,5 @@ class CharacterStatus:
     """ 玩电脑 """
     STATUS_DRAW = 31
     """ 画画 """
+    STATUS_RUN = 32
+    """ 跑步 """

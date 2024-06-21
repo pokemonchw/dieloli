@@ -66,3 +66,4 @@ def get_path_and_times(previous_nodes: Dict[str, str], graph: Dict[str, Dict[str
             path_times.append(graph[previous_nodes[vertex]][vertex])
         vertex = previous_nodes[vertex]
     return path[::-1], path_times
+

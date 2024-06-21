@@ -149,6 +149,8 @@ player_not_in_target_scene,场景状态类前提,玩家不在角色的目标场�
 player_in_target_scene,场景状态类前提,玩家在角色的目标场景中
 has_no_character_scene,场景状态类前提,存在空无一人的场景
 not_has_like_character_in_scene,场景状态类前提,场景中没有自己喜欢的人
+in_club_activity_scene,场景状态类前提,处于社团活动场景
+not_in_club_activity_scene,场景状态类前提,未处于社团活动场景
 in_breakfast_time,时间状态类前提,处于早餐时间段
 in_lunch_time,时间状态类前提,处于午餐时间段
 in_dinner_time,时间状态类前提,处于晚餐时间段
@@ -182,6 +184,7 @@ tonight_is_zangetsu_moon,时间状态类前提,今夜是残月
 tonight_is_akatsuki_moon,时间状态类前提,今夜是晓月
 is_night,时间状态类前提,处于夜晚
 is_not_night,时间状态类前提,不处于夜晚
+is_club_activity_time,时间状态类前提,处于社团活动时间
 ethic_is_height,角色人文技能类前提,角色伦理水平高
 ethic_is_low,角色人文技能类前提,角色伦理水平低
 morality_is_height,角色人文技能类前提,角色道德水平高

@@ -881,6 +881,8 @@ class ClubData:
         """ 社长id """
         self.teacher: int = -1
         """ 指导老师id """
+        self.activity_time_dict: Dict[int, Dict[int, Dict[int, str]]] = {}
+        """ 活动时间对应活动id {周:{时:{分:活动id}}} """
 
 
 class ClubActivityData:

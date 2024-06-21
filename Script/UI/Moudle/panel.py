@@ -303,10 +303,12 @@ class LeftDrawTextListPanel:
 
     def draw(self):
         """绘制面板"""
-        for now_list in self.draw_list:
+        for i in range(len(self.draw_list)):
+            now_list = self.draw_list[i]
             for value in now_list:
                 value.draw()
-            io_init.era_print("\n")
+            if i < len(self.draw_list) -1:
+                io_init.era_print("\n")
 
 
 class LeftDrawTextListWaitPanel(LeftDrawTextListPanel):

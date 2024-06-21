@@ -985,3 +985,64 @@ def handle_not_has_like_character_in_scene(character_id: int) -> int:
                 return 0
     return 1
 
+
+@handle_premise.add_premise(constant.Premise.IN_CLUB_ACTIVITY_SCENE)
+def handle_in_club_activity_scene(character_id: int) -> int:
+    """
+    校验角色是否处于社团活动场景
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 2 not in character_data.identity_data:
+        return 0
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    now_date = datetime.datetime.fromtimestamp(now_time)
+    identity_data: game_type.ClubIdentity = character_data.identity_data[2]
+    club_data: game_type.ClubData = cache.all_club_data[identity_data.club_uid]
+    now_week = now_date.weekday()
+    if now_week not in club_data.activity_time_dict:
+        return 0
+    if now_date.hour not in club_data.activity_time_dict[now_week]:
+        return 0
+    if now_date.minute not in club_data.activity_time_dict[now_week][now_date.hour]:
+        return 0
+    activity_id = club_data.activity_time_dict[now_week][now_date.hour][now_date.minute]
+    activity_data: game_type.ClubActivityData = club_data.activity_list[activity_id]
+    return character_data.position == activity_data.activity_position
+
+
+@handle_premise.add_premise(constant.Premise.NOT_IN_CLUB_ACTIVITY_SCENE)
+def handle_not_in_club_activity_scene(character_id: int) -> int:
+    """
+    校验角色是否未处于社团活动场景
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 2 not in character_data.identity_data:
+        return 1
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    now_date = datetime.datetime.fromtimestamp(now_time)
+    identity_data: game_type.ClubIdentity = character_data.identity_data[2]
+    club_data: game_type.ClubData = cache.all_club_data[identity_data.club_uid]
+    now_week = now_date.weekday()
+    if now_week not in club_data.activity_time_dict:
+        return 1
+    if now_date.hour not in club_data.activity_time_dict[now_week]:
+        return 1
+    if now_date.minute not in club_data.activity_time_dict[now_week][now_date.hour]:
+        return 1
+    activity_id = club_data.activity_time_dict[now_week][now_date.hour][now_date.minute]
+    activity_data: game_type.ClubActivityData = club_data.activity_list[activity_id]
+    return character_data.position != activity_data.activity_position
+
+

@@ -722,3 +722,31 @@ def handle_is_night_night(character_id: int) -> int:
     sun_time = game_time.get_sun_time(now_time)
     return sun_time not in {0, 1, 2, 10, 11}
 
+
+@handle_premise.add_premise(constant.Premise.IS_CLUB_ACTIVITY_TIME)
+def handle_is_club_activity_time(character_id: int) -> int:
+    """
+    校验现在是否处于社团活动时间
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 2 not in character_data.identity_data:
+        return 0
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    now_date = datetime.datetime.fromtimestamp(now_time)
+    identity_data: game_type.ClubIdentity = character_data.identity_data[2]
+    club_data: game_type.ClubData = cache.all_club_data[identity_data.club_uid]
+    now_week = now_date.weekday()
+    if now_week not in club_data.activity_time_dict:
+        return 0
+    if now_date.hour not in club_data.activity_time_dict[now_week]:
+        return 0
+    if now_date.minute not in club_data.activity_time_dict[now_week][now_date.hour]:
+        return 0
+    return 1
+

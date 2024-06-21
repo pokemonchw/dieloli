@@ -330,6 +330,10 @@ class Premise:
     """ 存在空无一人的场景 """
     NOT_HAS_LIKE_CHARACTER_IN_SCENE = "not_has_like_character_in_scene"
     """ 场景中没有自己喜欢的人 """
+    IN_CLUB_ACTIVITY_SCENE = "in_club_activity_scene"
+    """ 处于社团活动场景 """
+    NOT_IN_CLUB_ACTIVITY_SCENE = "not_in_club_activity_scene"
+    """ 未处于社团活动场景 """
 
     """
     =========================
@@ -416,6 +420,8 @@ class Premise:
     """ 处于夜晚 """
     IS_NOT_NIGHT = "is_not_night"
     """ 不处于夜晚 """
+    IS_CLUB_ACTIVITY_TIME = "is_club_activity_time"
+    """ 处于活动时间 """
 
     """
     =========================

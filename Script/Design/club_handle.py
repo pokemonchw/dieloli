@@ -83,6 +83,24 @@ def init_club_data():
         president_data = cache.character_data[president_id]
         president_data.identity_data[president_identity_data.cid] = president_identity_data
         club_data.president = member_id
+        for activity in club_data.activity_list.values():
+            for activity_time in activity.activity_time_list.values():
+                week_day = activity_time.week_day
+                start_time = (activity_time.start_hour, activity_time.start_minute)
+                end_time = (activity_time.end_hour, activity_time.end_minute)
+                club_data.activity_time_dict.setdefault(week_day, {})
+                current_time = start_time
+                while current_time != end_time:
+                    hour, minute = current_time
+                    club_data.activity_time_dict[week_day].setdefault(hour, {})
+                    club_data.activity_time_dict[week_day][hour][minute] = activity_time.uid
+                    minute += 1
+                    if minute >= 60:
+                        minute = 0
+                        hour += 1
+                    if hour >= 24:
+                        break
+                    current_time = (hour, minute)
         cache.all_club_data[club_data.uid] = club_data
     cache.club_create_judge = False
 

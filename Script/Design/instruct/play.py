@@ -32,3 +32,14 @@ def handle_draw():
     character_data.behavior.behavior_id = constant.Behavior.DRAW
     character_data.state = constant.CharacterStatus.STATUS_DRAW
     update.game_update_flow(30)
+
+
+@handle_instruct.add_instruct(constant.Instruct.RUN, constant.InstructType.PLAY, _("跑步"), {})
+def handle_run():
+    """ 处理跑步指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data = cache.character_data[0]
+    character_data.behavior.duration = 2
+    character_data.behavior.behavior_id = constant.Behavior.RUN
+    character_data.state = constant.CharacterStatus.STATUS_RUN
+    update.game_update_flow(2)

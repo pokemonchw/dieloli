@@ -651,6 +651,49 @@ class CenterMergeDraw:
         fix_draw.draw()
 
 
+class LeftMergeDraw:
+    """
+    将绘制列表合并在一起并靠左绘制
+    Keyword arguments:
+    width -- 最大宽度
+    """
+
+    def __init__(self, width: int):
+        """初始化绘制对象"""
+        self.width: int = width
+        """ 最大宽度 """
+        self.draw_list: List[NormalDraw] = []
+        """ 绘制列表 """
+
+    def __len__(self) -> int:
+        """获取当前绘制对象宽度"""
+        return self.width
+
+    def __gt__(self, other) -> int:
+        return int(len(self)) > int(len(other))
+
+    def draw(self):
+        """绘制列表"""
+        now_width = 0
+        for value in self.draw_list:
+            now_width += len(value)
+        now_text = "*" * now_width
+        fix_text = text_handle.align(now_text, "left", 1, 1, self.width)
+        fix_draw = NormalDraw()
+        fix_draw.text = fix_text
+        fix_draw.width = len(fix_text)
+        for value in self.draw_list:
+            value.draw()
+        old_width = now_width
+        now_width = fix_draw.width * 2 + now_width
+        if now_width < self.width:
+            fix_draw.text += int(self.width - now_width) * " "
+        elif now_width > self.width:
+            if old_width + len(fix_draw) < self.width:
+                fix_draw.text = int(self.width - (old_width + len(fix_draw))) * " "
+        fix_draw.draw()
+
+
 class RightDraw(NormalDraw):
     """右对齐绘制文本"""
 

@@ -93,7 +93,6 @@ class StudentTimeTablePanel:
                         week_text = week_text + _("(今日)")
                     now_draw = draw.CenterDraw()
                     now_draw.text = f"[{week_text}]"
-
                     now_draw.style = "onbutton"
                     now_draw.width = self.width / len(weekday_text_list)
                     now_draw.draw()

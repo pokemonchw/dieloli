@@ -241,3 +241,15 @@ def character_general_speech(character_id: int):
     character_data.behavior.duration = 10
     character_data.state = constant.CharacterStatus.STATUS_ABUSE
 
+
+@handle_state_machine.add_state_machine(constant.StateMachine.JOIN_CLUB_ACTIVITY)
+def character_join_club_activity(character_id: int):
+    """
+    参加社团活动
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    identity_data: game_type.ClubIdentity = character_data.identity_data[2]
+    club_data: game_type.ClubData = cache.all_club_data[identity_data.club_uid]
+    pass
