@@ -131,7 +131,7 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
     """
     将存档数据写入文件
     Keyword arguments:
-    save_id -- 存档id<F2>
+    save_id -- 存档id
     data_id -- 要写入的数据在存档下的文件id
     write_data -- 要写入的数据
     """

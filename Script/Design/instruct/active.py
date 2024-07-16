@@ -1,4 +1,5 @@
 import random
+import datetime
 from types import FunctionType
 from Script.Core import cache_control, game_type, get_text
 from Script.Design import update, character, attr_calculation, constant, handle_instruct
@@ -189,4 +190,34 @@ def handle_see_star():
     character_data.behavior.behavior_id = constant.Behavior.UNDRESS
     character_data.state = constant.CharacterStatus.STATUS_UNDRESS
     update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.CLUB_ACTIVITY,
+    constant.InstructType.ACTIVE,
+    _("社团活动"),
+    {
+        constant.Premise.IS_CLUB_ACTIVITY_TIME,
+        constant.Premise.IN_CLUB_ACTIVITY_SCENE
+    },
+)
+def handle_club_activity():
+    """ 处理参加社团活动指令 """
+    character.init_character_behavior_start_time(0, cache.game_time)
+    character_data: game_type.Character = cache.character_data[0]
+    identity_data: game_type.ClubIdentity = character_data.identity_data[2]
+    club_data: game_type.ClubData = cache.all_club_data[identity_data.club_uid]
+    now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_week = now_time.weekday()
+    week_time_dict = club_data.activity_time_dict[now_week]
+    now_hour = now_time.hour
+    hour_time_dict = week_time_dict[now_hour]
+    now_minute = now_time.minute
+    minute_time_dict = hour_time_dict[now_minute]
+    activity_id = list(minute_time_dict.keys())[0]
+    activity_data: game_type.ClubActivityData = club_data.activity_list[activity_id]
+    character_data.behavior.behavior_id = activity_data.description
+    character_data.behavior.duration = hour_time_dict[now_minute][activity_id]
+    character_data.state = activity_data.description
+    update.game_update_flow(character_data.behavior.duration+1)
 

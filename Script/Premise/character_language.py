@@ -17,7 +17,8 @@ def handle_chinese_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 0 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[0])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -33,7 +34,9 @@ def handle_chinese_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 0 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[0])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -49,7 +52,8 @@ def handle_english_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 1 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[1])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -65,7 +69,9 @@ def handle_english_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 1 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[1])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -81,7 +87,8 @@ def handle_french_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 2 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[2])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -97,7 +104,9 @@ def handle_french_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 2 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[2])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -113,7 +122,8 @@ def handle_spanish_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 3 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[3])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -129,7 +139,9 @@ def handle_spanish_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 3 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[3])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -145,7 +157,8 @@ def handle_arabic_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 4 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[4])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -161,7 +174,9 @@ def handle_arabic_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 4 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[4])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -177,7 +192,8 @@ def handle_russian_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 5 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[5])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -193,7 +209,9 @@ def handle_russian_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 5 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[5])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -209,7 +227,8 @@ def handle_japanese_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 6 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[6])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -225,7 +244,9 @@ def handle_japanese_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 6 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[6])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -241,7 +262,8 @@ def handle_hindi_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 7 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[7])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -257,7 +279,9 @@ def handle_hindi_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 7 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[7])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -273,7 +297,8 @@ def handle_old_latin_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 8 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[8])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -289,7 +314,9 @@ def handle_old_latin_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 8 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[8])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -305,7 +332,8 @@ def handle_latin_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 9 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[9])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -321,7 +349,9 @@ def handle_latin_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 9 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[9])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -337,7 +367,8 @@ def handle_ancient_chinese_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 10 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[10])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -353,7 +384,9 @@ def handle_ancient_chinese_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 10 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[10])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -369,7 +402,8 @@ def handle_old_sinitic_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 11 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[11])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -385,5 +419,7 @@ def handle_old_sinitic_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 11 in character_data.language:
         level = attr_calculation.get_experience_level_weight(character_data.language[11])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1

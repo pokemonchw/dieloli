@@ -98,7 +98,9 @@ def handle_no_have_guitar(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return 4 not in character_data.item
+    if 4 not in character_data.item:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_HARMONICA)

@@ -16,7 +16,9 @@ def handle_have_small_money(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.target_character_id >= 1000
+    if character_data.target_character_id >= 1000:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_MEDIUM_MONEY)
@@ -29,7 +31,9 @@ def handle_have_medium_money(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.target_character_id >= 10000
+    if character_data.target_character_id >= 10000:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_LARGE_MONEY)
@@ -42,7 +46,9 @@ def handle_have_large_money(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.target_character_id >= 100000
+    if character_data.target_character_id >= 100000:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.MONEY_ENOUGH_BUY_CHEAPEST_FOOD)

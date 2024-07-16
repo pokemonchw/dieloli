@@ -21,7 +21,9 @@ def character_buy_rand_food_at_restaurant(character_id: int):
         for food_uid in cache.restaurant_data[food_id]:
             now_food: game_type.Food = cache.restaurant_data[food_id][food_uid]
             if now_food.eat:
-                new_food_list.append(food_id)
+                price = round(1 + sum(now_food.feel.values()) * now_food.quality / 100, 2)
+                if price <= character_data.money:
+                    new_food_list.append(food_id)
             break
     if not new_food_list:
         return
@@ -29,10 +31,12 @@ def character_buy_rand_food_at_restaurant(character_id: int):
     now_food = cache.restaurant_data[now_food_id][
         random.choice(list(cache.restaurant_data[now_food_id].keys()))
     ]
+    price = round(1 + sum(now_food.feel.values()) * now_food.quality / 100, 2)
     character_data.food_bag[now_food.uid] = now_food
     if character_data.behavior.start_time < cache.game_time:
         character_data.behavior.start_time += 60
     del cache.restaurant_data[now_food_id][now_food.uid]
+    character_data.money - price
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.BUY_RAND_DRINKS_AT_CAFETERIA)
@@ -50,7 +54,9 @@ def character_buy_rand_drinks_at_restaurant(character_id: int):
         for food_uid in cache.restaurant_data[food_id]:
             now_food: game_type.Food = cache.restaurant_data[food_id][food_uid]
             if now_food.eat and 28 in now_food.feel:
-                new_food_list.append(food_id)
+                price = round(1 + sum(now_food.feel.values()) * now_food.quality / 100, 2)
+                if price <= character_data.money:
+                    new_food_list.append(food_id)
             break
     if not new_food_list:
         return
@@ -58,10 +64,12 @@ def character_buy_rand_drinks_at_restaurant(character_id: int):
     now_food = cache.restaurant_data[now_food_id][
         random.choice(list(cache.restaurant_data[now_food_id].keys()))
     ]
+    price = round(1 + sum(now_food.feel.values()) * now_food.quality / 100, 2)
     character_data.food_bag[now_food.uid] = now_food
     if character_data.behavior.start_time < cache.game_time:
         character_data.behavior.start_time += 60
     del cache.restaurant_data[now_food_id][now_food.uid]
+    character_data.money - price
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.BUY_GUITAR)

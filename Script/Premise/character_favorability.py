@@ -173,7 +173,9 @@ def handle_have_like_target(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.social_contact.setdefault(9, set())
     character_data.social_contact.setdefault(10, set())
-    return (len(character_data.social_contact[9]) + len(character_data.social_contact[10])) > 0
+    if (len(character_data.social_contact[9]) + len(character_data.social_contact[10])) > 0:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_DISLIKE_TARGET)
@@ -190,7 +192,9 @@ def handle_have_dislike_target(character_id: int) -> int:
     character_data.social_contact.setdefault(1, set())
     character_data.social_contact.setdefault(2, set())
     character_data.social_contact.setdefault(3, set())
-    return (len(character_data.social_contact[0]) + len(character_data.social_contact[1]) + len(character_data.social_contact[2]) + len(character_data.social_contact[3])) > 0
+    if (len(character_data.social_contact[0]) + len(character_data.social_contact[1]) + len(character_data.social_contact[2]) + len(character_data.social_contact[3])) > 0:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_NOT_STRANGER)
@@ -226,7 +230,8 @@ def handle_dislike_target(character_id: int) -> int:
         return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
-        return social_type in {0, 1, 2, 3, 4}
+        if social_type in {0, 1, 2, 3, 4}:
+            return 1
     return 0
 
 
@@ -244,7 +249,8 @@ def handle_detest_target(character_id: int) -> int:
         return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
-        return social_type in {0, 1, 2, 3}
+        if social_type in {0, 1, 2, 3}:
+            return 1
     return 0
 
 
@@ -262,7 +268,8 @@ def handle_hate_target(character_id: int) -> int:
         return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
-        return social_type in {0, 1, 2}
+        if social_type in {0, 1, 2}:
+            return 1
     return 0
 
 
@@ -280,7 +287,8 @@ def handle_hatred_target(character_id: int) -> int:
         return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
-        return social_type in {0, 1}
+        if social_type in {0, 1}:
+            return 1
     return 0
 
 
@@ -298,7 +306,8 @@ def handle_deadly_enemy_target(character_id: int) -> int:
         return 0
     if character_data.target_character_id in character_data.social_contact_data:
         social_type = character_data.social_contact_data[character_data.target_character_id]
-        return not social_type
+        if not social_type:
+            return 1
     return 0
 
 
@@ -317,7 +326,8 @@ def handle_target_dislike(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]
-        return social_type in {0, 1, 2, 3, 4}
+        if social_type in {0, 1, 2, 3, 4}:
+            return 1
     return 0
 
 
@@ -336,7 +346,8 @@ def handle_target_detest(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]
-        return social_type in {0, 1, 2, 3}
+        if social_type in {0, 1, 2, 3}:
+            return 1
     return 0
 
 
@@ -355,7 +366,8 @@ def handle_target_hate(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]
-        return social_type in {0, 1, 2}
+        if social_type in {0, 1, 2}:
+            return 1
     return 0
 
 
@@ -374,7 +386,8 @@ def handle_target_hatred(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]
-        return social_type in {0, 1}
+        if social_type in {0, 1}:
+            return 1
     return 0
 
 
@@ -393,5 +406,6 @@ def handle_target_deadly_enemy(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         social_type = target_data.social_contact_data[character_id]
-        return not social_type
+        if not social_type:
+            return 1
     return 0

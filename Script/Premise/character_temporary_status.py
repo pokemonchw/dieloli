@@ -32,7 +32,9 @@ def handle_eat_spring_food(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.behavior.food_quality == 4
+    if character_data.behavior.food_quality == 4:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.EAT_GOOD_FOOD)
@@ -45,7 +47,9 @@ def handle_eat_good_food(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.behavior.food_quality > 1
+    if character_data.behavior.food_quality > 1:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.EAT_RUBBISH_FOOD)
@@ -58,7 +62,9 @@ def handle_eat_rubbish_food(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.behavior.food_quality < 2
+    if character_data.behavior.food_quality < 2:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_LIVE)
@@ -74,7 +80,9 @@ def handle_target_is_live(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    return not target_data.dead
+    if not target_data.dead:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.NO_FOLLOW)
@@ -87,7 +95,9 @@ def handle_no_follow(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.follow == -1
+    if character_data.follow == -1:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_LOSE_FIRST_KISS)
@@ -100,7 +110,9 @@ def handle_is_lose_first_kiss(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.behavior.temporary_status.lose_first_kiss
+    if character_data.behavior.temporary_status.lose_first_kiss:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_LOSE_FIRST_KISS)
@@ -116,7 +128,9 @@ def handle_target_is_lose_first_kiss(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    return target_data.behavior.temporary_status.lose_first_kiss
+    if target_data.behavior.temporary_status.lose_first_kiss:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_MOVING)
@@ -132,4 +146,6 @@ def handle_target_is_moving(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    return target_data.state == constant.CharacterStatus.STATUS_MOVE
+    if target_data.state == constant.CharacterStatus.STATUS_MOVE:
+        return 1
+    return 0

@@ -421,7 +421,7 @@ class Premise:
     IS_NOT_NIGHT = "is_not_night"
     """ 不处于夜晚 """
     IS_CLUB_ACTIVITY_TIME = "is_club_activity_time"
-    """ 处于活动时间 """
+    """ 处于社团活动时间 """
 
     """
     =========================

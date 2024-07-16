@@ -168,7 +168,7 @@ class SeeCharacterStatusDraw:
                 if draw_skill == -1:
                     draw_skill = knowledge
                 else:
-                    if character_data.knowledge[knowledge] > draw_skill:
+                    if character_data.knowledge[knowledge] > character_data.knowledge[draw_skill]:
                         draw_skill = knowledge
         self.now_draw_list = []
         cid_text_draw = draw.LeftDraw()

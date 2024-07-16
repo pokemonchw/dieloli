@@ -1,5 +1,6 @@
 import random
 import numpy
+import datetime
 from Script.Design import handle_state_machine, character_move, map_handle, constant
 from Script.Core import cache_control, game_type
 
@@ -495,6 +496,48 @@ def character_move_to_have_character_scene(character_id: int):
     _, _, move_path, move_time = character_move.character_move(
         character_id,
         map_handle.get_map_system_path_for_str(target_scene)
+    )
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+    if character_data.follow != -1:
+        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        if target_data.pulling == character_id:
+            target_data.pulling = -1
+    character_data.follow = -1
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_CLUB_ACTIVITY_SCENE)
+def character_move_to_club_activity_scene(character_id: int):
+    """
+    角色移动至社团活动场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 2 not in character_data.identity_data:
+        return
+    identity_data: game_type.ClubIdentity = character_data.identity_data[2]
+    club_data: game_type.ClubData = cache.all_club_data[identity_data.club_uid]
+    now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_week = now_time.weekday()
+    if now_week not in club_data.activity_time_dict:
+        return
+    week_time_dict = club_data.activity_time_dict[now_week]
+    now_hour = now_time.hour
+    if now_hour not in week_time_dict:
+        return
+    hour_time_dict = week_time_dict[now_hour]
+    now_minute = now_time.minute
+    if now_minute not in hour_time_dict:
+        return
+    activity_id = list(hour_time_dict[now_minute].keys())[0]
+    activity_data: game_type.ClubActivityData = club_data.activity_list[activity_id]
+    target_scene = activity_data.activity_position
+    _, _, move_path, move_time = character_move.character_move(
+        character_id,
+        target_scene
     )
     character_data.behavior.behavior_id = constant.Behavior.MOVE
     character_data.behavior.move_target = move_path

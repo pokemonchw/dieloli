@@ -237,7 +237,10 @@ class BuyFoodByFoodNameDraw:
             thirsty_text = f"{thirsty_text}{round(food_data.feel[28],2)}"
         else:
             thirsty_text = f"{thirsty_text}0.00"
-        price = round(1 + sum(food_data.feel.values()) * food_data.quality / 100, 2)
+        self.price = round(1 + sum(food_data.feel.values()) * food_data.quality / 100, 2)
+        """ 食物价格 """
+        self.origin_food_name = food_name
+        """ 原始食物名字 """
         food_name = (
             food_name
             + f" {hunger_text} {thirsty_text} "
@@ -248,7 +251,7 @@ class BuyFoodByFoodNameDraw:
             + _("品质:")
             + quality_text_data[food_data.quality]
             + " "
-            + _("售价:" + str(price))
+            + _("售价:" + str(self.price))
         )
         index_text = text_handle.id_index(button_id)
         button_text = f"{index_text}{food_name}"
@@ -264,5 +267,19 @@ class BuyFoodByFoodNameDraw:
 
     def buy_food(self):
         """玩家购买食物"""
-        cache.character_data[0].food_bag[self.text] = cache.restaurant_data[self.cid][self.text]
-        del cache.restaurant_data[self.cid][self.text]
+        player_data: game_type.Character = cache.character_data[0]
+        if player_data.money >= self.price:
+            player_data.money -= self.price
+            cache.character_data[0].food_bag[self.text] = cache.restaurant_data[self.cid][self.text]
+            del cache.restaurant_data[self.cid][self.text]
+            py_cmd.clr_cmd()
+            now_draw = draw.LineFeedWaitDraw()
+            now_draw.text = _("购买{food_name}成功，身上的钱还剩:{money}").format(food_name=self.origin_food_name,money=round(player_data.money,2))
+            now_draw.width = self.width
+            now_draw.draw()
+        else:
+            py_cmd.clr_cmd()
+            now_draw = draw.LineFeedWaitDraw()
+            now_draw.text = _("身上的钱不够哦")
+            now_draw.width = self.width
+            now_draw.draw()

@@ -855,10 +855,14 @@ class ExecuteTarget:
         """ 目标的唯一id """
         self.affiliation: str = ""
         """ 所属的目标id """
+        self.character_id: int = 0
+        """ 所属的角色id """
         self.weight: float = 0
         """ 目标的权重 """
         self.score: int = 0
         """ 近似检索到的角色对这个目标的评分，若目标可达则+1，不可达则-1 """
+        self.imitate_character_id = 0
+        """ 被模仿的角色id """
 
 
 class ClubData:
@@ -881,8 +885,8 @@ class ClubData:
         """ 社长id """
         self.teacher: int = -1
         """ 指导老师id """
-        self.activity_time_dict: Dict[int, Dict[int, Dict[int, str]]] = {}
-        """ 活动时间对应活动id {周:{时:{分:活动id}}} """
+        self.activity_time_dict: Dict[int, Dict[int, Dict[int, Dict[str, int]]]] = {}
+        """ 活动时间对应活动id {周:{时:{分:{活动id:剩余活动时间}}}} """
 
 
 class ClubActivityData:

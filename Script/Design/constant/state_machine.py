@@ -44,6 +44,8 @@ class StateMachine:
     """ 移动至无人场景 """
     MOVE_TO_HAVE_CHARACTER_SCENE = "move_to_have_character_scene"
     """ 移动至有人的场景 """
+    MOVE_TO_CLUB_ACTIVITY_SCENE = "move_to_club_activity_scene"
+    """ 移动至社团活动场景 """
 
     """
     =========================

@@ -1,4 +1,5 @@
 import random
+import datetime
 from Script.Design import handle_state_machine, map_handle, constant
 from Script.Core import cache_control, game_type
 
@@ -250,6 +251,25 @@ def character_join_club_activity(character_id: int):
     character_id -- 角色id
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if 2 not in character_data.identity_data:
+        return
     identity_data: game_type.ClubIdentity = character_data.identity_data[2]
     club_data: game_type.ClubData = cache.all_club_data[identity_data.club_uid]
-    pass
+    now_time = datetime.datetime.fromtimestamp(character_data.behavior.start_time)
+    now_week = now_time.weekday()
+    if now_week not in club_data.activity_time_dict:
+        return
+    week_time_dict = club_data.activity_time_dict[now_week]
+    now_hour = now_time.hour
+    if now_hour not in week_time_dict:
+        return
+    hour_time_dict = week_time_dict[now_hour]
+    now_minute = now_time.minute
+    if now_minute not in hour_time_dict:
+        return
+    activity_id = list(hour_time_dict[now_minute].keys())[0]
+    activity_data: game_type.ClubActivityData = club_data.activity_list[activity_id]
+    character_data.behavior.behavior_id = activity_data.description
+    character_data.behavior.duration = hour_time_dict[now_minute][activity_id]
+    character_data.state = activity_data.description
+

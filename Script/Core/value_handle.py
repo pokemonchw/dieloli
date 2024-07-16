@@ -24,7 +24,8 @@ def get_rand_value_for_value_region(value_list: List[float]) -> float:
     Return arguments:
     int -- 获得的元素
     """
-    return random.choices(value_list, weights=value_list)[0]
+    new_list = [key for key in value_list]
+    return random.choices(new_list, weights=new_list)[0]
 
 
 def get_region_list(now_data: Dict[any, int]) -> dict:

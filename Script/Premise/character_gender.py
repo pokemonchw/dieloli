@@ -66,7 +66,9 @@ def handle_is_not_man(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.sex != 0
+    if character_data.sex != 0:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_WOMAN)
@@ -79,7 +81,9 @@ def handle_is_woman(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.sex == 1
+    if character_data.sex == 1:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_FUTA)
@@ -92,7 +96,9 @@ def handle_is_futa(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.sex == 2
+    if character_data.sex == 2:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_ASEXUAL)
@@ -105,7 +111,9 @@ def handle_is_asexual(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.sex == 2
+    if character_data.sex == 2:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_FUTA_OR_MAN)
@@ -118,7 +126,9 @@ def handle_is_futa_or_man(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
-    return character_data.sex in {0, 2}
+    if character_data.sex in {0, 2}:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_SAME_SEX)
@@ -134,7 +144,9 @@ def handle_target_same_sex(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_data = cache.character_data[character_data.target_character_id]
-    return target_data.sex == character_data.sex
+    if target_data.sex == character_data.sex:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_DIFFERENT_SEX)
@@ -150,7 +162,9 @@ def handle_target_different_sex(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_data = cache.character_data[character_data.target_character_id]
-    return target_data.sex != character_data.sex
+    if target_data.sex != character_data.sex:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_WOMAN)
@@ -166,7 +180,9 @@ def handle_target_is_woman(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    return target_data.sex == 1
+    if target_data.sex == 1:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_MAN)
@@ -182,7 +198,9 @@ def handle_target_is_man(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    return not target_data.sex
+    if not target_data.sex:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_MAN_OR_WOMAN)
@@ -195,7 +213,9 @@ def handle_is_man_or_woman(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.sex in {0, 1}
+    if character_data.sex in {0, 1}:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_NOT_ASEXUAL)
@@ -208,7 +228,9 @@ def handle_is_not_asexual(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.sex != 3
+    if character_data.sex != 3:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_FUTA_OR_WOMAN)

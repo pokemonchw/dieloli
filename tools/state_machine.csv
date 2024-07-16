@@ -18,6 +18,7 @@ move_to_library,寻路类状态机,移动至图书馆
 move_to_square,寻路类状态机,移动至操场
 move_to_no_man_scene,寻路类状态机,移动至无人场景
 move_to_have_character_scene,寻路类状态机,移动至有人的场景
+move_to_club_activity_scene,寻路类状态机,移动至社团活动场景
 buy_rand_food_at_cafeteria,购物类状态机,在取餐区购买随机食物
 buy_rand_drinks_at_cafeteria,购物类状态机,在取餐区购买随机饮料
 buy_guitar,购物类状态机,购买吉他

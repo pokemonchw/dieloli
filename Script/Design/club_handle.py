@@ -89,16 +89,19 @@ def init_club_data():
                 start_time = (activity_time.start_hour, activity_time.start_minute)
                 end_time = (activity_time.end_hour, activity_time.end_minute)
                 club_data.activity_time_dict.setdefault(week_day, {})
-                current_time = start_time
-                while current_time != end_time:
+                current_time = end_time
+                last_minute = 0
+                while current_time != start_time:
                     hour, minute = current_time
                     club_data.activity_time_dict[week_day].setdefault(hour, {})
-                    club_data.activity_time_dict[week_day][hour][minute] = activity_time.uid
-                    minute += 1
-                    if minute >= 60:
-                        minute = 0
-                        hour += 1
-                    if hour >= 24:
+                    club_data.activity_time_dict[week_day][hour].setdefault(minute, {})
+                    club_data.activity_time_dict[week_day][hour][minute][activity.uid] = last_minute
+                    last_minute += 1
+                    minute -= 1
+                    if minute < 0:
+                        minute = 59
+                        hour -= 1
+                    if hour < 0:
                         break
                     current_time = (hour, minute)
         cache.all_club_data[club_data.uid] = club_data

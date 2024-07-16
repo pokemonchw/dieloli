@@ -15,7 +15,9 @@ def handle_is_follow_player(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return not character_data.follow
+    if character_data.follow == 0:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_FOLLOW)
@@ -46,7 +48,9 @@ def handle_no_in_follow_target_scene(character_id: int) -> int:
     if character_data.follow == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.follow]
-    return character_data.position != target_data.position
+    if character_data.position != target_data.position:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_FOLLOW_PLAYER)
@@ -61,7 +65,8 @@ def handle_target_is_follow_player(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.target_character_id != -1 and character_data.target_character_id != character_id:
         target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-        return not target_data.follow
+        if target_data.follow == 0:
+            return 1
     return 0
 
 
@@ -92,7 +97,9 @@ def handle_is_collection_system(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    return cache.is_collection
+    if cache.is_collection:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.UN_COLLECTION_SYSTEM)
@@ -104,7 +111,9 @@ def handle_un_collection_system(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    return not cache.is_collection
+    if not cache.is_collection:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_COLLECTION)
@@ -118,7 +127,9 @@ def handle_target_is_collection(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     player_data: game_type.Character = cache.character_data[0]
-    return character_data.target_character_id in player_data.collection_character
+    if character_data.target_character_id in player_data.collection_character:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_NOT_COLLECTION)
@@ -132,4 +143,6 @@ def handle_target_is_not_collection(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     player_data: game_type.Character = cache.character_data[0]
-    return character_data.target_character_id not in player_data.collection_character
+    if character_data.target_character_id not in player_data.collection_character:
+        return 1
+    return 0

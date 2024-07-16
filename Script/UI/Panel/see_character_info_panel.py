@@ -426,6 +426,8 @@ class CharacterRoomText:
             dormitory_path = map_handle.get_map_system_path_for_str(dormitory)
             dormitory_text = attr_text.get_scene_path_text(dormitory_path)
         self.dormitory_text = _("宿舍位置:") + dormitory_text
+        for now_character_id in cache.character_data:
+            now_character_data: game_type.Character = cache.character_data[character_id]
         """ 宿舍位置文本 """
         if 0 in character_data.identity_data:
             identity_data: game_type.StudentIdentity = character_data.identity_data[0]
@@ -439,7 +441,7 @@ class CharacterRoomText:
                 now_classroom_text += _("暂无")
             self.classroom_text = now_classroom_text
             self.officeroom_text = _("办公室位置:暂无")
-        else:
+        elif 1 in character_data.identity_data:
             identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
             classroom = identity_data.now_classroom
             now_classroom_text = _("教室位置:")
@@ -459,6 +461,9 @@ class CharacterRoomText:
                 now_officeroom_text += _("暂无")
             self.classroom_text = now_classroom_text
             self.officeroom_text = now_officeroom_text
+        else:
+            self.classroom_text = _("教室位置:暂无")
+        self.officeroom_text = _("办公室位置:暂无")
 
     def draw(self):
         """绘制面板"""

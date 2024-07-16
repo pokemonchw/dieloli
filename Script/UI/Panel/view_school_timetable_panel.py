@@ -81,6 +81,7 @@ class StudentTimeTablePanel:
             now_date = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=cache.game_time)
         now_date_week = now_date.weekday()
         now_time_value = now_date.hour * 100 + now_date.minute
+        identity_data: game_type.StudentIdentity = character_data.identity_data[0]
         while 1:
             now_week_text = game_config.config_week_day[self.now_week].name
             title_draw = draw.TitleLineDraw(_("课程表"), self.width)
@@ -150,10 +151,10 @@ class StudentTimeTablePanel:
                     cache.class_timetable_teacher_data.setdefault(school_id, {})
                     cache.class_timetable_teacher_data[school_id].setdefault(phase, {})
                     cache.class_timetable_teacher_data[school_id][phase].setdefault(
-                        character_data.classroom, {}
+                        identity_data.classroom, {}
                     )
                     cache.class_timetable_teacher_data[school_id][phase][
-                        character_data.classroom
+                        identity_data.classroom
                     ].setdefault(self.now_week, {})
                     course_id = time_table[self.now_week][times]
                     course_config = game_config.config_course[course_id]
@@ -164,11 +165,11 @@ class StudentTimeTablePanel:
                     if (
                         times
                         in cache.class_timetable_teacher_data[school_id][phase][
-                            character_data.classroom
+                            identity_data.classroom
                         ][self.now_week]
                     ):
                         teacher_id = cache.class_timetable_teacher_data[school_id][phase][
-                            character_data.classroom
+                            identity_data.classroom
                         ][self.now_week][times]
                         teacher_data: game_type.Character = cache.character_data[teacher_id]
                         teacher_name = teacher_data.name

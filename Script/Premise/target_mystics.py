@@ -20,7 +20,8 @@ def handle_target_apothecary_skills_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 55 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[55])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -39,7 +40,9 @@ def handle_target_apothecary_skills_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 55 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[55])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -58,7 +61,8 @@ def handle_target_parapsychologies_skills_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 56 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[56])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -77,7 +81,9 @@ def handle_target_parapsychologies_skills_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 56 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[56])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -96,7 +102,8 @@ def handle_target_numerology_skills_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 57 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[57])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -115,7 +122,9 @@ def handle_target_numerology_skills_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 57 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[57])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -134,7 +143,8 @@ def handle_target_practise_divination_skills_is_height(character_id: int) -> int
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 58 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[58])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -153,7 +163,9 @@ def handle_target_practise_divination_skills_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 58 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[58])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -172,7 +184,8 @@ def handle_target_prophecy_skills_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 59 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[59])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -191,7 +204,9 @@ def handle_target_prophecy_skills_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 59 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[59])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -210,7 +225,8 @@ def handle_target_astrology_skills_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 60 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[60])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -229,7 +245,9 @@ def handle_target_astrology_skills_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 60 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[60])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -248,7 +266,8 @@ def handle_target_demonology_skills_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 61 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[61])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -267,7 +286,9 @@ def handle_target_delonology_skills_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 61 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[61])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -286,7 +307,8 @@ def handle_target_ritual_skills_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 62 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[62])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -305,5 +327,7 @@ def handle_target_ritual_skills_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 62 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[62])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1

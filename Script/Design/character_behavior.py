@@ -1,5 +1,6 @@
 import time
 import random
+import concurrent.futures
 from uuid import UUID
 from concurrent.futures import ThreadPoolExecutor
 from types import FunctionType
@@ -24,6 +25,7 @@ def init_character_behavior():
     """
     角色行为树总控制
     """
+    global time_index
     character_handle.build_similar_character_searcher()
     cache.character_target_data = {}
     cache.character_target_score_data = {}
@@ -45,8 +47,9 @@ def init_character_behavior():
             now_status_data[status].add(i)
         if len(now_status_data[1]) == len(cache.character_data) - 1:
             break
-        for i in now_status_data[0]:
-            character_target_judge(i, cache.game_time)
+        now_list = [character_target_judge(i) for i in now_status_data[0]]
+        for result in now_list:
+            run_character_target(result)
         for i in now_status_data[2]:
             judge_character_status(i, cache.game_time)
         for i in cache.character_data:
@@ -54,6 +57,7 @@ def init_character_behavior():
                 continue
             judge_character_dead(i)
         refresh_teacher_classroom()
+    time_index = 0
     judge_character_status(0, cache.game_time)
     judge_character_dead(0)
 
@@ -89,16 +93,16 @@ def check_character_status_judge(character_id: int) -> int:
     return 2
 
 
-def character_target_judge(character_id: int, now_time: int) -> game_type.Character:
+def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
     """
     查询角色可用目标活动并执行
     Keyword arguments:
     character_id -- 角色id
-    now_time -- 指定时间戳
     Return arguments:
     game_type.Character -- 更新后的角色数据
     """
-    player_data: game_type.Character = cache.character_data[0]
+    global time_index
+    now_time: int = cache.game_time
     target_weight_data = {}
     # 取出角色数据
     character_data: game_type.Character = cache.character_data[character_id]
@@ -111,13 +115,12 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
     near_judge = 0
     if near_character_id in cache.character_target_data:
         near_target = cache.character_target_data[near_character_id]
-        affiliation_target_config = game_config.config_target[near_target.affiliation]
         now_score = near_target.score * 0.0003
         now_range = random.random()
         if now_range <= 1 - distance + now_score:
             near_judge = 1
     # 获取最相似角色的行动目标
-    target: game_type.ExecuteTarget = None
+    target: game_type.ExecuteTarget = game_type.ExecuteTarget()
     judge = 0
     null_target_set = set()
     if near_judge:
@@ -131,8 +134,7 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
         )
         # 自身可以使用相似角色的目标时为相似角色进行加分
         if judge:
-            cache.character_target_data[near_character_id].score += 1
-            cache.character_target_score_data[near_character_id] += 1
+            target.imitate_character_id = near_character_id
     # 无法模仿相似角色时，若自身性格有合群倾向，则改为模仿最受欢迎的角色(即分值最高的角色)的行为
     if not judge:
         conformity_judge = 0
@@ -155,9 +157,8 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
                 ""
             )
             if judge:
+                target.imitate_character_id = imitate_character_id
                 now_target_config = game_config.config_target[target.uid]
-                cache.character_target_data[imitate_character_id].score += 1
-                cache.character_target_score_data[imitate_character_id] += 1
     if not judge:
         target, _, judge = search_target(
             character_id,
@@ -168,14 +169,31 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
             ""
         )
         if judge:
-            if target.affiliation != "":
-                affiliation_target_config = game_config.config_target[target.affiliation]
-                target_config = game_config.config_target[target.uid]
-            else:
-                target_config = game_config.config_target[target.uid]
+            target.imitate_character_id = character_id
     if judge:
         if target.affiliation == "":
             target.affiliation = target.uid
+    if target == None:
+        target = game_type.ExecuteTarget()
+    target.character_id = character_id
+    return target
+
+def run_character_target(target: game_type.ExecuteTarget):
+    """
+    执行角色目标
+    Keyword arguments:
+    Return arguments:
+    game_type.Character -- 更新后的角色数据
+    """
+    now_time: int = cache.game_time
+    player_data: game_type.Character = cache.character_data[0]
+    character_id: int = target.character_id
+    character_data: game_type.Character = cache.character_data[target.character_id]
+    if target.uid != "":
+        if target.imitate_character_id != 0:
+            if target.imitate_character_id in cache.character_target_data:
+                cache.character_target_data[target.imitate_character_id].score += 1
+                cache.character_target_score_data[target.imitate_character_id] += 1
         cache.character_target_data[character_id] = target
         cache.character_target_score_data[character_id] = 0
         target_config = game_config.config_target[target.uid]
@@ -185,14 +203,14 @@ def character_target_judge(character_id: int, now_time: int) -> game_type.Charac
         if (not character_id) or (player_data.target_character_id == character_id):
             if event_draw is not None:
                 event_draw.draw()
+        cache.character_target_data[target.character_id] = target
+    else:
+        cache.character_data[character_id].behavior.start_time += 60
     start_time = cache.character_data[character_id].behavior.start_time
     now_judge = game_time.judge_date_big_or_small(start_time, now_time)
     if now_judge:
         cache.over_behavior_character.add(character_id)
         character_data.ai_target = 0
-    if not judge:
-        cache.character_data[character_id].behavior.start_time += 60
-    return cache.character_data[character_id]
 
 
 def judge_character_dead(character_id: int):
@@ -483,11 +501,11 @@ def search_target(
             target_data[now_weight].add(now_execute_target)
             target_weight_data[target] = now_weight
         else:
-            now_value_weight = value_handle.get_rand_value_for_value_region(list(now_target_data.keys()))
+            now_value_weight = value_handle.get_rand_value_for_value_region(now_target_data)
             target_data.setdefault(now_weight, set())
-            target_data[now_weight].add(random.choice(list(now_target_data[now_value_weight])))
+            target_data[now_weight].add(random.choice(now_target_data[now_value_weight]))
     if target_data:
-        value_weight = value_handle.get_rand_value_for_value_region(list(target_data.keys()))
+        value_weight = value_handle.get_rand_value_for_value_region(target_data)
         return random.choice(list(target_data[value_weight])), value_weight, 1
     return None, 0, 0
 

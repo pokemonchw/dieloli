@@ -53,7 +53,9 @@ def handle_target_is_sleep(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    return target_data.state == constant.CharacterStatus.STATUS_SLEEP
+    if target_data.state == constant.CharacterStatus.STATUS_SLEEP:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TARGET_IS_SING)
@@ -71,5 +73,7 @@ def handle_target_is_sing(character_id: int) -> int:
         return 0
     if target_id != character_id:
         target_data: game_type.Character = cache.character_data[target_id]
-        return target_data.state == constant.CharacterStatus.STATUS_SINGING
+        if target_data.state == constant.CharacterStatus.STATUS_SINGING:
+            return 1
+        return 0
     return 0

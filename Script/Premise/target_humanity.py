@@ -20,7 +20,8 @@ def handle_target_ethic_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 0 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[0])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -39,7 +40,9 @@ def handle_target_ethic_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 0 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[0])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -58,7 +61,8 @@ def handle_target_morality_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 1 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[1])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -77,7 +81,9 @@ def handle_target_morality_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 1 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[1])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -96,7 +102,8 @@ def handle_target_literature_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 2 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[2])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -115,7 +122,9 @@ def handle_target_literature_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 2 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[2])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -134,7 +143,8 @@ def handle_target_poetry_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 3 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[3])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -153,7 +163,9 @@ def handle_target_poetry_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 3 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[3])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -172,7 +184,8 @@ def handle_target_history_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 4 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[4])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -191,7 +204,9 @@ def handle_target_history_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 4 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[4])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -210,7 +225,8 @@ def handle_target_art_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 5 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[5])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -229,7 +245,9 @@ def handle_target_art_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 5 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[5])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -248,7 +266,8 @@ def handle_target_music_theory_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 6 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[6])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -267,7 +286,9 @@ def handle_target_music_theory_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 6 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[6])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -286,7 +307,8 @@ def handle_target_religion_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 7 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[7])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -305,7 +327,9 @@ def handle_target_religion_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 7 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[7])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -324,7 +348,8 @@ def handle_target_faith_is_height(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 8 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[8])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -343,5 +368,7 @@ def handle_target_faith_is_low(character_id: int) -> int:
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if 8 in target_data.knowledge:
         level = attr_calculation.get_experience_level_weight(target_data.knowledge[8])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1

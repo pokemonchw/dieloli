@@ -76,6 +76,3 @@ If you want to help with localization, please contact me by email, and I will in
 e-mail:pokemonchw@gmail.com \
 企鹅裙:950487389
 
-请我喝奶茶QwQ
-----
-请前往:[爱发电](https://afdian.net/@byayoi)

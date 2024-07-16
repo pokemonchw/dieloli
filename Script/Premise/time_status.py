@@ -19,7 +19,9 @@ def handle_in_breakfast_time(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = game_time.get_sun_time(character_data.behavior.start_time)
-    return now_time == 4
+    if now_time == 4:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_LUNCH_TIME)
@@ -33,7 +35,9 @@ def handle_in_lunch_time(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = game_time.get_sun_time(character_data.behavior.start_time)
-    return now_time == 7
+    if now_time == 7:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_DINNER_TIME)
@@ -47,7 +51,9 @@ def handle_in_dinner_time(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_time = game_time.get_sun_time(character_data.behavior.start_time)
-    return now_time == 9
+    if now_time == 9:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_SLEEP_TIME)
@@ -113,7 +119,9 @@ def handle_attend_class_today(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    return game_time.judge_attend_class_today(character_id)
+    if game_time.judge_attend_class_today(character_id):
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.APPROACHING_CLASS_TIME)
@@ -179,7 +187,9 @@ def handle_in_class_time(character_id: int) -> int:
     judge, _unused, _unused, _unused, _unused = character.judge_character_in_class_time(
         character_id
     )
-    return judge
+    if judge:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.NOT_IN_CLASS_TIME)
@@ -194,7 +204,9 @@ def handle_not_in_class_time(character_id: int) -> int:
     judge, _unused, _unused, _unused, _unused = character.judge_character_in_class_time(
         character_id
     )
-    return not judge
+    if not judge:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.TONIGHT_IS_FULL_MOON)
@@ -668,7 +680,9 @@ def handle_is_spring(character_id: int) -> int:
         now_time = cache.game_time
     solar_period = game_time.get_solar_period(now_time)
     season = game_config.config_solar_period[solar_period].season
-    return not season
+    if not season:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_SUMMER)
@@ -686,7 +700,9 @@ def handle_is_summer(character_id: int) -> int:
         now_time = cache.game_time
     solar_period = game_time.get_solar_period(now_time)
     season = game_config.config_solar_period[solar_period].season
-    return season == 1
+    if season == 1:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_NIGHT)
@@ -703,7 +719,9 @@ def handle_is_night(character_id: int) -> int:
     if not now_time:
         now_time = cache.game_time
     sun_time = game_time.get_sun_time(now_time)
-    return sun_time in {0, 1, 2, 10, 11}
+    if sun_time in {0, 1, 2, 10, 11}:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_NOT_NIGHT)
@@ -720,7 +738,9 @@ def handle_is_night_night(character_id: int) -> int:
     if not now_time:
         now_time = cache.game_time
     sun_time = game_time.get_sun_time(now_time)
-    return sun_time not in {0, 1, 2, 10, 11}
+    if sun_time not in {0, 1, 2, 10, 11}:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_CLUB_ACTIVITY_TIME)

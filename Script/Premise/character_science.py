@@ -17,7 +17,8 @@ def handle_mechanics_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 32 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[32])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -33,7 +34,9 @@ def handle_mechanics_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 32 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[32])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -49,7 +52,8 @@ def handle_electronics_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 33 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[33])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -65,7 +69,9 @@ def handle_electronics_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 33 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[33])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -81,7 +87,8 @@ def handle_computer_science_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 34 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[34])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -97,7 +104,9 @@ def handle_computer_science_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 34 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[34])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -113,7 +122,8 @@ def handle_cryptograthy_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 35 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[35])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -129,7 +139,9 @@ def handle_cryptograthy_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 35 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[35])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -145,7 +157,8 @@ def handle_chemistry_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 36 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[36])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -161,7 +174,9 @@ def handle_chemistry_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 36 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[36])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -177,7 +192,8 @@ def handle_biology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 37 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[37])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -193,7 +209,9 @@ def handle_biology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 37 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[37])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -209,7 +227,8 @@ def handle_mathematics_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 38 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[38])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -225,7 +244,9 @@ def handle_mathematics_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 38 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[38])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -241,7 +262,8 @@ def handle_astronomy_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 39 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[39])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -257,7 +279,9 @@ def handle_astronomy_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 39 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[39])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -273,7 +297,8 @@ def handle_physics_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 40 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[40])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -289,7 +314,9 @@ def handle_physics_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 40 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[40])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -305,7 +332,8 @@ def handle_geography_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 41 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[41])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -321,7 +349,9 @@ def handle_geography_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 41 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[41])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -337,7 +367,8 @@ def handle_geology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 42 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[42])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -353,7 +384,9 @@ def handle_geology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 42 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[42])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -369,7 +402,8 @@ def handle_ecology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 43 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[43])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -385,7 +419,9 @@ def handle_ecology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 43 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[43])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -401,7 +437,8 @@ def handle_zoology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 44 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[44])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -417,7 +454,9 @@ def handle_zoology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 44 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[44])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -433,7 +472,8 @@ def handle_botany_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 45 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[45])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -449,7 +489,9 @@ def handle_botany_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 45 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[45])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -465,7 +507,8 @@ def handle_entomology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 46 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[46])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -481,7 +524,9 @@ def handle_entomology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 46 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[46])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -497,7 +542,8 @@ def handle_microbiology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 47 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[47])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -513,7 +559,9 @@ def handle_microbiology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 47 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[47])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -529,7 +577,8 @@ def handle_virology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 48 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[48])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -545,7 +594,9 @@ def handle_virology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 48 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[48])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -561,7 +612,8 @@ def handle_becteriology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 49 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[49])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -577,7 +629,9 @@ def handle_becteriology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 49 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[49])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -593,7 +647,8 @@ def handle_mycology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 50 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[50])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -609,7 +664,9 @@ def handle_mycology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 50 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[50])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -625,7 +682,8 @@ def handle_pharmacy_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 51 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[51])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -641,7 +699,9 @@ def handle_pharmacy_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 51 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[51])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -657,7 +717,8 @@ def handle_meteorology_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 52 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[52])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -673,7 +734,9 @@ def handle_meteorology_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 52 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[52])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -689,7 +752,8 @@ def handle_law_science_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 53 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[53])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -705,7 +769,9 @@ def handle_law_science_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 53 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[53])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1
 
 
@@ -721,7 +787,8 @@ def handle_linguistics_skills_is_height(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 54 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[54])
-        return level > 5
+        if level > 5:
+            return 1
     return 0
 
 
@@ -737,5 +804,7 @@ def handle_linguistics_skills_is_low(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     if 54 in character_data.knowledge:
         level = attr_calculation.get_experience_level_weight(character_data.knowledge[54])
-        return level < 3
+        if level < 3:
+            return 1
+        return 0
     return 1

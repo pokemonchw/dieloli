@@ -22,7 +22,9 @@ def handle_in_door(character_id: int) -> int:
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
     now_scene_data = cache.scene_data[now_scene_str]
-    return now_scene_data.in_door
+    if now_scene_data.in_door:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.OUT_DOOR)
@@ -38,7 +40,9 @@ def handle_out_door(character_id: int) -> int:
     now_position = character_data.position
     now_scene_str = map_handle.get_map_system_path_str_for_list(now_position)
     now_scene_data = cache.scene_data[now_scene_str]
-    return not now_scene_data.in_door
+    if not now_scene_data.in_door:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_SQUARE)
@@ -231,7 +235,9 @@ def handle_scene_have_other_target(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path]
-    return len(scene_data.character_list) > 1
+    if len(scene_data.character_list) > 1:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_DORMITORY)
@@ -245,7 +251,9 @@ def handle_in_dormitory(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_position = map_handle.get_map_system_path_str_for_list(character_data.position)
-    return now_position == character_data.dormitory
+    if now_position == character_data.dormitory:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.NOT_IN_DORMITORY)
@@ -259,7 +267,9 @@ def handle_not_in_dormitory(character_id: int) -> int:
     """
     character_data: game_type.Character = cache.character_data[character_id]
     now_position = map_handle.get_map_system_path_str_for_list(character_data.position)
-    return not now_position == character_data.dormitory
+    if not now_position == character_data.dormitory:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_TARGET_DORMITORY)
@@ -276,7 +286,9 @@ def handle_in_target_dormitory(character_id: int) -> int:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     now_position = map_handle.get_map_system_path_str_for_list(character_data.position)
-    return now_position == target_data.dormitory
+    if now_position == target_data.dormitory:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_MUSIC_CLASSROOM)
@@ -345,7 +357,9 @@ def handle_scene_no_have_other_character(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     scene_path = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path]
-    return len(scene_data.character_list) == 1
+    if len(scene_data.character_list) == 1:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.SCENE_CHARACTER_ONLY_PLAYER_AND_ONE)
@@ -363,7 +377,9 @@ def handle_scene_character_only_player_and_one(character_id: int) -> int:
     now_scene_data: game_type.Scene = cache.scene_data[now_scene_str]
     if 0 not in now_scene_data.character_list:
         return 0
-    return len(now_scene_data.character_list) == 2
+    if len(now_scene_data.character_list) == 2:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.BEYOND_FRIENDSHIP_TARGET_IN_SCENE)
@@ -397,7 +413,9 @@ def handle_in_fountain(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.position == ["8"]
+    if character_data.position == ["8"]:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_LIBRARY)
@@ -410,7 +428,9 @@ def handle_in_library(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.position[0] == "13"
+    if character_data.position[0] == "13":
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.NOT_IN_LIBRARY)
@@ -423,7 +443,9 @@ def handle_not_in_library(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.position[0] != "13"
+    if character_data.position[0] != "13":
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_OTHER_TARGET_IN_SCENE)
@@ -438,7 +460,9 @@ def handle_have_other_target_in_scene(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path_str]
-    return len(scene_data.character_list) > 2
+    if len(scene_data.character_list) > 2:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.NO_HAVE_OTHER_TARGET_IN_SCENE)
@@ -453,7 +477,9 @@ def handle_no_have_other_target_in_scene(character_id: int) -> int:
     character_data: game_type.Character = cache.character_data[character_id]
     scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path_str]
-    return len(scene_data.character_list) <= 2
+    if len(scene_data.character_list) <= 2:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_LIKE_TARGET_IN_SCENE)
@@ -477,7 +503,9 @@ def handle_have_like_target_in_scene(character_id: int) -> int:
         for c in character_data.social_contact[i]:
             if c in scene_data.character_list:
                 character_list.append(c)
-    return len(character_list) > 0
+    if len(character_list) > 0:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_NO_FIRST_KISS_LIKE_TARGET_IN_SCENE)
@@ -501,7 +529,9 @@ def handle_have_no_first_kiss_like_target_in_scene(character_id: int):
                 c_data: game_type.Character = cache.character_data[c]
                 if c_data.first_kiss == -1:
                     character_list.append(c)
-    return len(character_list) > 0
+    if len(character_list) > 0:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_DISLIKE_TARGET_IN_SCENE)
@@ -644,7 +674,9 @@ def handle_teacher_in_classroom(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    return not handle_premise.handle_premise(constant.Premise.TEACHER_NO_IN_CLASSROOM, character_id)
+    if not handle_premise.handle_premise(constant.Premise.TEACHER_NO_IN_CLASSROOM, character_id):
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IS_BEYOND_FRIENDSHIP_TARGET_IN_SCENE)
@@ -669,7 +701,9 @@ def handle_is_beyond_friendship_target_in_scene(character_id: int) -> int:
                 and now_character_data.social_contact_data[character_id] > 8
         ):
             now_weight += now_character_data.social_contact_data[character_id]
-    return now_weight > 0
+    if now_weight > 0:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.HAVE_STUDENTS_IN_CLASSROOM)
@@ -716,7 +750,9 @@ def handle_have_students_in_classroom(character_id: int) -> int:
     now_room_path_str = map_handle.get_map_system_path_str_for_list(now_classroom)
     now_scene_data: game_type.Scene = cache.scene_data[now_room_path_str]
     class_data = cache.classroom_students_data[now_room_path_str]
-    return len(class_data & now_scene_data.character_list) > 0
+    if len(class_data & now_scene_data.character_list) > 0:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_ROOFTOP_SCENE)
@@ -799,7 +835,9 @@ def handle_no_in_item_shop(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.position != ["11"]
+    if character_data.position != ["11"]:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_ITEM_SHOP)
@@ -812,7 +850,9 @@ def handle_in_item_shop(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.position == ["11"]
+    if character_data.position == ["11"]:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.IN_STUDENT_UNION_OFFICE)
@@ -825,7 +865,9 @@ def handle_in_student_union_office(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    return character_data.position == ["3", "1", "4"]
+    if character_data.position == ["3", "1", "4"]:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.NO_IN_CAFETERIA)
@@ -1011,9 +1053,11 @@ def handle_in_club_activity_scene(character_id: int) -> int:
         return 0
     if now_date.minute not in club_data.activity_time_dict[now_week][now_date.hour]:
         return 0
-    activity_id = club_data.activity_time_dict[now_week][now_date.hour][now_date.minute]
+    activity_id = list(club_data.activity_time_dict[now_week][now_date.hour][now_date.minute].keys())[0]
     activity_data: game_type.ClubActivityData = club_data.activity_list[activity_id]
-    return character_data.position == activity_data.activity_position
+    if character_data.position == activity_data.activity_position:
+        return 1
+    return 0
 
 
 @handle_premise.add_premise(constant.Premise.NOT_IN_CLUB_ACTIVITY_SCENE)
@@ -1041,8 +1085,10 @@ def handle_not_in_club_activity_scene(character_id: int) -> int:
         return 1
     if now_date.minute not in club_data.activity_time_dict[now_week][now_date.hour]:
         return 1
-    activity_id = club_data.activity_time_dict[now_week][now_date.hour][now_date.minute]
+    activity_id = list(club_data.activity_time_dict[now_week][now_date.hour][now_date.minute].keys())[0]
     activity_data: game_type.ClubActivityData = club_data.activity_list[activity_id]
-    return character_data.position != activity_data.activity_position
+    if character_data.position != activity_data.activity_position:
+        return 1
+    return 0
 
 
