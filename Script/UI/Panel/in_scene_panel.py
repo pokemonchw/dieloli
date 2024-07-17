@@ -105,8 +105,12 @@ class InScenePanel:
             character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
                 character_data.target_character_id = -1
-            if not character_data.target_character_id and character_list:
+            if character_data.target_character_id == -1 and character_list:
                 character_data.target_character_id = character_list[0]
+            elif character_data.target_character_id not in {-1, 0} and character_list:
+                if character_data.target_character_id in character_list:
+                    character_list.remove(character_data.target_character_id)
+                    character_list = [character_data.target_character_id].extend(character_list)
             game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
             game_time_draw.now_draw.width = len(game_time_draw)
             position_text = attr_text.get_scene_path_text(character_data.position)
@@ -132,10 +136,6 @@ class InScenePanel:
             money_draw.draw()
             line_feed.draw()
             ask_list = []
-            if character_list and character_data.target_character_id not in character_list:
-                character_data.target_character_id = character_list[0]
-            if not character_list:
-                character_data.target_character_id = -1
             if character_list:
                 meet_draw.draw()
                 line_feed.draw()

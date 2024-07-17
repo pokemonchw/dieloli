@@ -63,6 +63,7 @@ class GameSettingPanel:
         line_feed.draw()
         title_line = draw.LineDraw("-.-", self.width)
         title_line.draw()
+        language_option = []
         if self.now_panel == _("语言"):
             language_panel = SystemLanguageSettingPanel(self.width)
             language_panel.draw()

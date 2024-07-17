@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 13:46+0800\n"
+"POT-Creation-Date: 2024-07-17 12:25+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -953,20 +953,29 @@ msgstr ""
 msgid "水份:"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:244 Script/UI/Panel/food_bag_panel.py:226
+#: Script/UI/Panel/food_shop_panel.py:247 Script/UI/Panel/food_bag_panel.py:226
 msgid "重量:"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:246 Script/UI/Panel/food_bag_panel.py:228
+#: Script/UI/Panel/food_shop_panel.py:249 Script/UI/Panel/food_bag_panel.py:228
 msgid "克"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:248 Script/UI/Panel/food_bag_panel.py:230
+#: Script/UI/Panel/food_shop_panel.py:251 Script/UI/Panel/food_bag_panel.py:230
 msgid "品质:"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:251
+#: Script/UI/Panel/food_shop_panel.py:254
 msgid "售价:"
+msgstr ""
+
+#: Script/UI/Panel/food_shop_panel.py:277
+#, python-brace-format
+msgid "购买{food_name}成功，身上的钱还剩:{money}"
+msgstr ""
+
+#: Script/UI/Panel/food_shop_panel.py:283
+msgid "身上的钱不够哦"
 msgstr ""
 
 #: Script/UI/Panel/view_club_list_panel.py:34
