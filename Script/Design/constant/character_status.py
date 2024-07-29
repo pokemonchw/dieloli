@@ -51,8 +51,8 @@ class CharacterStatus:
     """ 穿衣 """
     STATUS_UNDRESS = 24
     """ 脱衣 """
-    STATUS_MISSIONARY_POSITION_MALE = 25
-    """ 正常体位(男) """
+    STATUS_INVITE_SEX = 25
+    """ 邀请做爱 """
     STATUS_MISSIONARY_POSITION_FEMALE = 26
     """ 正常体位(女) """
     STATUS_SIESTA = 27
@@ -67,3 +67,77 @@ class CharacterStatus:
     """ 画画 """
     STATUS_RUN = 32
     """ 跑步 """
+    STATUS_PASSIVE_SEX = 33
+    """ 做爱受体 """
+    STATUS_TOUCH_FACE = 34
+    """ 摸脸 """
+    STATUS_TOUCH_CLITORIS = 35
+    """ 抚摸阴蒂 """
+    STATUS_TOUCH_PENIS = 36
+    """ 抚摸阴茎 """
+    STATUS_TOUCH_ANUS = 37
+    """ 抚摸肛门 """
+    STATUS_TOUCH_BUTT = 38
+    """ 抚摸屁股 """
+    STATUS_TOUCH_BACK = 39
+    """ 摸背 """
+    STATUS_PENIS_RUB_FACE = 40
+    """ 阴茎蹭脸 """
+    STATUS_FINGER_INSERTION_VAGINAL = 41
+    """ 手指插入阴道 """
+    STATUS_PLAY_CLITORIS = 42
+    """ 玩弄阴蒂 """
+    STATUS_PLAY_PENIS = 43
+    """ 玩弄阴茎 """
+    STATUS_FINGER_INSERTION_ANUS = 44
+    """ 手指插入肛门 """
+    STATUS_PLAY_NIPPLE = 45
+    """ 玩弄乳头 """
+    STATUS_LICK_VAGINAL = 46
+    """ 舔阴 """
+    STATUS_LICK_PENIS = 47
+    """ 舔阴茎 """
+    STATUS_LICK_ANUS = 48
+    """ 舔肛 """
+    STATUS_LICK_NIPPLE = 49
+    """ 吸舔乳头 """
+    STATUS_LICK_FEET = 50
+    """ 舔足 """
+    STATUS_LICK_BUTT = 51
+    """ 舔屁股 """
+    STATUS_LICK_EARS = 52
+    """ 舔耳朵 """
+    STATUS_LICK_BODY = 53
+    """ 舔全身 """
+    STATUS_LICK_FACE = 54
+    """ 舔脸 """
+    STATUS_MOUTH_AND_HAND_SEX = 55
+    """ 手交口交 """
+    STATUS_MOUTH_AND_CHEST_SEX = 56
+    """ 乳交口交 """
+    STATUS_VACCUM_MOUTH_SEX = 57
+    """ 真空口交 """
+    STATUS_DEEP_MOUTH_SEX = 58
+    """ 深喉 """
+    STATUS_SIX_NINE_SEX = 59
+    """ 六九式 """
+    STATUS_INSERTION_VAGINAL = 60
+    """ 插入阴道 """
+    STATUS_HITTING_UTERUS = 61
+    """ 撞击子宫 """
+    STATUS_RIDING_INSERTION_VAGINAL = 62
+    """ 骑乘位插入阴道 """
+    STATUS_BACK_INSERTION_VAGINAL = 63
+    """ 背后位插入阴道 """
+    STATUS_BACK_RIDING_INSERTION_VAGINAL = 64
+    """ 背后位骑乘插入阴道 """
+    STATUS_NO_PENIS_SEX = 65
+    """ 磨豆腐 """
+    STATUS_INSERTION_ANUS = 66
+    """ 肛交 """
+    STATUS_BACK_INSERTION_ANUS = 67
+    """ 背后位肛交 """
+    STATUS_RIDING_INSERTION_ANUS = 68
+    """ 骑乘位肛交 """
+    STATUS_BACK_RIDING_INSERTION_ANUS = 69
+    """ 背后位骑乘肛交 """

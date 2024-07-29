@@ -51,7 +51,7 @@ class Behavior:
     """ 穿衣 """
     UNDRESS = 24
     """ 脱衣 """
-    MISSIONARY_POSITION_MALE = 25
+    INVITE_SEX = 25
     """ 正常体位(男) """
     MISSIONARY_POSITION_FEMALE = 26
     """ 正常体位(女) """
@@ -67,3 +67,77 @@ class Behavior:
     """ 画画 """
     RUN = 32
     """ 跑步 """
+    PASSIVE_SEX = 33
+    """ 做爱受体 """
+    TOUCH_FACE = 34
+    """ 摸脸 """
+    TOUCH_CLITORIS = 35
+    """ 抚摸阴蒂 """
+    TOUCH_PENIS = 36
+    """ 抚摸阴茎 """
+    TOUCH_ANUS = 37
+    """ 抚摸肛门 """
+    TOUCH_BUTT = 38
+    """ 抚摸屁股 """
+    TOUCH_BACK = 39
+    """ 摸背 """
+    PENIS_RUB_FACE = 40
+    """ 阴茎蹭脸 """
+    FINGER_INSERTION_VAGINAL = 41
+    """ 手指插入阴道 """
+    PLAY_CLITORIS = 42
+    """ 玩弄阴蒂 """
+    PLAY_PENIS = 43
+    """ 玩弄阴茎 """
+    FINGER_INSERTION_ANUS = 44
+    """ 手指插入肛门 """
+    PLAY_NIPPLE = 45
+    """ 玩弄乳头 """
+    LICK_VAGINAL = 46
+    """ 舔阴 """
+    LICK_PENIS = 47
+    """ 舔阴茎 """
+    LICK_ANUS = 48
+    """ 舔肛 """
+    LICK_NIPPLE = 49
+    """ 吸舔乳头 """
+    LICK_FEET = 50
+    """ 舔足 """
+    LICK_BUTT = 51
+    """ 舔屁股 """
+    LICK_EARS = 52
+    """ 舔耳朵 """
+    LICK_BODY = 53
+    """ 舔全身 """
+    LICK_FACE = 54
+    """ 舔脸 """
+    MOUTH_AND_HAND_SEX = 55
+    """ 手交口交 """
+    MOUTH_AND_CHEST_SEX = 56
+    """ 乳交口交 """
+    VACCUM_MOUTH_SEX = 57
+    """ 真空口交 """
+    DEEP_MOUTH_SEX = 58
+    """ 深喉 """
+    SIX_NINE_SEX = 59
+    """ 69式 """
+    INSERTION_VAGINAL = 60
+    """ 插入阴道 """
+    HITTING_UTERUS = 61
+    """ 撞击子宫 """
+    RIDING_INSERTION_VAGINAL = 62
+    """ 骑乘位插入阴道 """
+    BACK_INSERTION_VAGINAL = 63
+    """ 背后位插入阴道 """
+    BACK_RIDING_INSERTION_VAGINAL = 64
+    """ 背后位骑乘插入阴道 """
+    NO_PENIS_SEX = 65
+    """ 磨豆腐 """
+    INSERTION_ANUS = 66
+    """ 肛交 """
+    BACK_INSERTION_ANUS = 67
+    """ 背后位肛交 """
+    RIDING_INSERTION_ANUS = 68
+    """ 骑乘位肛交 """
+    BACK_RIDING_INSERTION_ANUS = 69
+    """ 背后位骑乘肛交 """
