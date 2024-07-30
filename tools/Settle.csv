@@ -842,6 +842,9 @@ settle_type,son_type,settle_info,settle_id
 角色临时状态类结算器,跟随,不再跟随别人,un_follow
 角色临时状态类结算器,第一次,失去初吻,first_kiss
 角色临时状态类结算器,第一次,记录初次和人牵手,first_hand_in_hand
+角色临时状态类结算器,做爱受体,交互对象进入做爱受体状态,target_enters_passive_sex
+角色临时状态类结算器,做爱受体,交互对象退出做爱受体状态,target_out_passive_sex
+角色临时状态类结算器,做爱受体,退出做爱受体状态,out_passive_sex
 金钱类结算器,自身,增加少量金钱,add_small_money
 金钱类结算器,自身,增加中量金钱,add_medium_money
 金钱类结算器,自身,增加大量金钱,add_large_money

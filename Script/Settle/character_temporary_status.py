@@ -130,3 +130,66 @@ def handle_first_hand_in_hand(
         character_data.first_kiss = target_data.cid
     if target_data.first_hand_in_hand == -1:
         target_data.first_kiss = character_id
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ENTERS_PASSIVE_SEX)
+def handle_target_enters_passive_sex(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: int,
+):
+    """
+    交互对象进入做爱受体状态
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间戳
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == character_id:
+        return
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.passive_sex = 1
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_OUT_PASSIVE_SEX)
+def handle_target_out_passive_sex(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: int,
+):
+    """
+    交互对象退出做爱受体状态
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间戳
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == character_id:
+        return
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.passive_sex = 0
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.OUT_PASSIVE_SEX)
+def handle_out_passive_sex(
+    character_id: int,
+    add_time: int,
+    change_data: game_type.CharacterStatusChange,
+    now_time: int,
+):
+    """
+    交互对象进入做爱受体状态
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间戳
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.passive_sex = 0

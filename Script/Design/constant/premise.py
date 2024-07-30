@@ -1106,6 +1106,10 @@ class Premise:
     """ 交互对象正在失去初吻 """
     TARGET_IS_MOVING = "target_is_moving"
     """ 交互对象正在移动 """
+    TARGET_IS_PASSIVE_SEX = "target_is_passive_sex"
+    """ 交互对象处于做爱受体状态 """
+    TARGET_NOT_PASSIVE_SEX = "target_not_passive_sex"
+    """ 交互对象未处于做爱受体状态 """
 
     """
     =========================

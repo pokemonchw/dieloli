@@ -516,6 +516,8 @@ class Character:
         """ 角色当前的前提权重列表 """
         self.identity_data: Dict[int, CharacterIdentity] = {}
         """ 角色身份数据 {身份id:身份数据} """
+        self.passive_sex: int = 0
+        """ 角色是否处于做爱受体状态 """
 
 
 class CharacterIdentity:

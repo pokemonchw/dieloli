@@ -494,6 +494,8 @@ no_follow,角色临时状态类前提,角色未处于跟随状态
 is_lose_first_kiss,角色临时状态类前提,角色正在失去初吻
 target_is_lose_first_kiss,角色临时状态类前提,交互对象正在失去初吻
 target_is_moving,角色临时状态类前提,交互对象正在移动
+target_is_passive_sex,角色临时状态类前提,交互对象处于做爱受体状态
+target_not_passive_sex,角色临时状态类前提,交互对象未处于做爱受体状态
 happy_is_height,角色心灵状态类前提,角色快乐情绪高涨
 happy_is_low,角色心灵状态类前提,角色快乐情绪低下
 pain_is_height,角色心灵状态类前提,角色痛苦情绪高涨
