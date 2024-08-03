@@ -111,14 +111,14 @@ class CharacterStatus:
     """ 舔全身 """
     STATUS_LICK_FACE = 54
     """ 舔脸 """
-    STATUS_MOUTH_AND_HAND_SEX = 55
-    """ 手交口交 """
-    STATUS_MOUTH_AND_CHEST_SEX = 56
-    """ 乳交口交 """
-    STATUS_VACCUM_MOUTH_SEX = 57
-    """ 真空口交 """
-    STATUS_DEEP_MOUTH_SEX = 58
-    """ 深喉 """
+    STATUS_TARGET_MOUTH_AND_HAND_SEX = 55
+    """ 让对方手交口交 """
+    STATUS_TARGET_MOUTH_AND_CHEST_SEX = 56
+    """ 让对方乳交口交 """
+    STATUS_TARGET_VACCUM_MOUTH_SEX = 57
+    """ 让对方真空口交 """
+    STATUS_TARGET_DEEP_MOUTH_SEX = 58
+    """ 让对方深喉 """
     STATUS_SIX_NINE_SEX = 59
     """ 六九式 """
     STATUS_INSERTION_VAGINAL = 60
@@ -141,3 +141,11 @@ class CharacterStatus:
     """ 骑乘位肛交 """
     STATUS_BACK_RIDING_INSERTION_ANUS = 69
     """ 背后位骑乘肛交 """
+    STATUS_MOUTH_AND_HAND_SEX = 70
+    """ 给对方手交口交 """
+    STATUS_MOUTH_AND_CHEST_SEX = 71
+    """ 给对方乳交口交 """
+    STATUS_VACCUM_MOUTH_SEX = 72
+    """ 给对方真空口交 """
+    STATUS_DEEP_MOUTH_SEX = 73
+    """ 给对方深喉 """

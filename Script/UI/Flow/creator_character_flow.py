@@ -230,7 +230,7 @@ def input_setting_panel() -> bool:
 
 def input_setting_now() -> bool:
     """启动详细信息设置"""
-    panel_list = random.sample(setting_panel_data, len(setting_panel_data))
+    panel_list = random.sample(setting_panel_data, min(len(setting_panel_data), 10))
     for now_panel in panel_list:
         py_cmd.clr_cmd()
         line_feed_draw.draw()

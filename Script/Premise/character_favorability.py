@@ -409,3 +409,25 @@ def handle_target_deadly_enemy(character_id: int) -> int:
         if not social_type:
             return 1
     return 0
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_LESS_THAN_ADORE)
+def handle_target_less_than_adore(character_id: int) -> int:
+    """
+    校验交互对象的好感是否小于爱慕
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if character_id not in target_data.social_contact_data:
+        return 1
+    social_contact = target_data.social_contact_data[character_id]
+    if social_contact != 10:
+        return 1
+    return 0
+

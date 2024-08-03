@@ -441,16 +441,97 @@ def handle_lick_face():
 
 
 @handle_instruct.add_instruct(
-    constant.Instruct.MOUTH_AND_HAND_SEX,
+    constant.Instruct.TARGET_MOUTH_AND_HAND_SEX,
     constant.InstructType.SEX,
-    _("手交口交"),
+    _("让对方手交口交"),
     {
         constant.Premise.HAVE_TARGET,
         constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+    }
+)
+def handle_target_mouth_and_hand_sex():
+    """ 处理让对方手交口交指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.TARGET_MOUTH_AND_HAND_SEX
+    character_data.state = constant.CharacterStatus.STATUS_TARGET_MOUTH_AND_HAND_SEX
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.TARGET_MOUTH_AND_CHEST_SEX,
+    constant.InstructType.SEX,
+    _("让对方乳交口交"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+    }
+)
+def handle_target_mouth_and_chest_sex():
+    """ 处理让对方乳交口交指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.TARGET_MOUTH_AND_CHEST_SEX
+    character_data.state = constant.CharacterStatus.STATUS_TARGET_MOUTH_AND_CHEST_SEX
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.TARGET_VACCUM_MOUTH_SEX,
+    constant.InstructType.SEX,
+    _("让对方真空口交"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+    }
+)
+def handle_target_vaccum_mouth_sex():
+    """ 处理让对方真空口交指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.TARGET_VACCUM_MOUTH_SEX
+    character_data.state = constant.CharacterStatus.STATUS_TARGET_VACCUM_MOUTH_SEX
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.TARGET_DEEP_MOUTH_SEX,
+    constant.InstructType.SEX,
+    _("让对方深喉"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+    }
+)
+def handle_target_deep_mouth_sex():
+    """ 处理让对方深喉指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.TARGET_DEEP_MOUTH_SEX
+    character_data.state = constant.CharacterStatus.STATUS_TARGET_DEEP_MOUTH_SEX
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.MOUTH_AND_HAND_SEX,
+    constant.InstructType.SEX,
+    _("给对方手交口交"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.TARGET_IS_FUTA_OR_MAN,
     }
 )
 def handle_mouth_and_hand_sex():
-    """ 处理手交口交指令 """
+    """ 处理给对方手交口交指令 """
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.start_time = cache.game_time
     character_data.behavior.duration = 10
@@ -459,3 +540,302 @@ def handle_mouth_and_hand_sex():
     update.game_update_flow(10)
 
 
+@handle_instruct.add_instruct(
+    constant.Instruct.MOUTH_AND_CHEST_SEX,
+    constant.InstructType.SEX,
+    _("给对方乳交口交"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.TARGET_IS_FUTA_OR_MAN,
+    }
+)
+def handle_mouth_and_chest_sex():
+    """ 处理给对方乳交口交指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.MOUTH_AND_CHEST_SEX
+    character_data.state = constant.CharacterStatus.STATUS_MOUTH_AND_CHEST_SEX
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.VACCUM_MOUTH_SEX,
+    constant.InstructType.SEX,
+    _("给对方真空口交"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.TARGET_IS_FUTA_OR_MAN,
+    }
+)
+def handle_vaccum_mouth_sex():
+    """ 处理让对方真空口交指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.VACCUM_MOUTH_SEX
+    character_data.state = constant.CharacterStatus.STATUS_VACCUM_MOUTH_SEX
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.DEEP_MOUTH_SEX,
+    constant.InstructType.SEX,
+    _("给对方深喉"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.TARGET_IS_FUTA_OR_MAN,
+    }
+)
+def handle_deep_mouth_sex():
+    """ 处理给对方深喉指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.DEEP_MOUTH_SEX
+    character_data.state = constant.CharacterStatus.STATUS_DEEP_MOUTH_SEX
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.SIX_NINE_SEX,
+    constant.InstructType.SEX,
+    _("69式"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+    }
+)
+def handle_six_nine_sex():
+    """ 处理给对方深喉指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.SIX_NINE_SEX
+    character_data.state = constant.CharacterStatus.STATUS_SIX_NINE_SEX
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.INSERTION_VAGINAL,
+    constant.InstructType.SEX,
+    _("插入阴道"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+        constant.Premise.TARGET_IS_FUTA_OR_WOMAN,
+    }
+)
+def handle_insertion_vaginal():
+    """ 处理插入阴道指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.INSERTION_VAGINAL
+    character_data.state = constant.CharacterStatus.STATUS_INSERTION_VAGINAL
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.HITTING_UTERUS,
+    constant.InstructType.SEX,
+    _("撞击子宫"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+        constant.Premise.TARGET_IS_FUTA_OR_WOMAN,
+    }
+)
+def handle_hitting_uterus():
+    """ 处理撞击子宫指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.HITTING_UTERUS
+    character_data.state = constant.CharacterStatus.STATUS_HITTING_UTERUS
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.RIDING_INSERTION_VAGINAL,
+    constant.InstructType.SEX,
+    _("骑乘位插入阴道"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+        constant.Premise.TARGET_IS_FUTA_OR_WOMAN,
+    }
+)
+def handle_riding_insertion_vaginal():
+    """ 处理骑乘位插入阴道指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.RIDING_INSERTION_VAGINAL
+    character_data.state = constant.CharacterStatus.STATUS_RIDING_INSERTION_VAGINAL
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.BACK_INSERTION_VAGINAL,
+    constant.InstructType.SEX,
+    _("背后位插入阴道"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+        constant.Premise.TARGET_IS_FUTA_OR_WOMAN,
+    }
+)
+def handle_back_insertion_vaginal():
+    """ 处理背后位插入阴道指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.RIDING_INSERTION_VAGINAL
+    character_data.state = constant.CharacterStatus.STATUS_RIDING_INSERTION_VAGINAL
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.BACK_RIDING_INSERTION_VAGINAL,
+    constant.InstructType.SEX,
+    _("背后位骑乘插入阴道"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+        constant.Premise.TARGET_IS_FUTA_OR_WOMAN,
+    }
+)
+def handle_back_riding_insertion_vaginal():
+    """ 处理背后位骑乘插入阴道指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.BACK_RIDING_INSERTION_VAGINAL
+    character_data.state = constant.CharacterStatus.STATUS_BACK_RIDING_INSERTION_VAGINAL
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.NO_PENIS_SEX,
+    constant.InstructType.SEX,
+    _("磨豆腐"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_WOMAN,
+        constant.Premise.TARGET_IS_WOMAN,
+    }
+)
+def handle_no_penix_sex():
+    """ 处理磨豆腐指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.NO_PENIS_SEX
+    character_data.state = constant.CharacterStatus.STATUS_NO_PENIS_SEX
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.INSERTION_ANUS,
+    constant.InstructType.SEX,
+    _("肛交"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+    }
+)
+def handle_insertion_anus():
+    """ 处理肛交指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.INSERTION_ANUS
+    character_data.state = constant.CharacterStatus.STATUS_INSERTION_ANUS
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.BACK_INSERTION_ANUS,
+    constant.InstructType.SEX,
+    _("背后位肛交"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+    }
+)
+def handle_back_insertion_anus():
+    """ 处理背后位肛交指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.BACK_INSERTION_ANUS
+    character_data.state = constant.CharacterStatus.STATUS_BACK_INSERTION_ANUS
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.RIDING_INSERTION_ANUS,
+    constant.InstructType.SEX,
+    _("骑乘位肛交"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+    }
+)
+def handle_riding_insertion_anus():
+    """ 处理骑乘位肛交指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.RIDING_INSERTION_ANUS
+    character_data.state = constant.CharacterStatus.STATUS_RIDING_INSERTION_ANUS
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.BACK_RIDING_INSERTION_ANUS,
+    constant.InstructType.SEX,
+    _("背后位骑乘肛交"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.IS_FUTA_OR_MAN,
+    }
+)
+def handle_back_riding_insertion_anus():
+    """ 处理背后位骑乘肛交指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.behavior.start_time = cache.game_time
+    character_data.behavior.duration = 10
+    character_data.behavior.behavior_id = constant.Behavior.BACK_RIDING_INSERTION_ANUS
+    character_data.state = constant.CharacterStatus.STATUS_BACK_RIDING_INSERTION_ANUS
+    update.game_update_flow(10)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.SEX_END,
+    constant.InstructType.SEX,
+    _("结束做爱"),
+    {
+        constant.Premise.HAVE_TARGET,
+        constant.Premise.TARGET_IS_PASSIVE_SEX,
+    }
+)
+def handle_sex_end():
+    """ 处理结束做爱指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    target_data.passive_sex = 0

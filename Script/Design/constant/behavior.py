@@ -111,14 +111,14 @@ class Behavior:
     """ 舔全身 """
     LICK_FACE = 54
     """ 舔脸 """
-    MOUTH_AND_HAND_SEX = 55
-    """ 手交口交 """
-    MOUTH_AND_CHEST_SEX = 56
-    """ 乳交口交 """
-    VACCUM_MOUTH_SEX = 57
-    """ 真空口交 """
-    DEEP_MOUTH_SEX = 58
-    """ 深喉 """
+    TARGET_MOUTH_AND_HAND_SEX = 55
+    """ 让对方手交口交 """
+    TARGET_MOUTH_AND_CHEST_SEX = 56
+    """ 让对方乳交口交 """
+    TARGET_VACCUM_MOUTH_SEX = 57
+    """ 让对方真空口交 """
+    TARGET_DEEP_MOUTH_SEX = 58
+    """ 让对方深喉 """
     SIX_NINE_SEX = 59
     """ 69式 """
     INSERTION_VAGINAL = 60
@@ -141,3 +141,11 @@ class Behavior:
     """ 骑乘位肛交 """
     BACK_RIDING_INSERTION_ANUS = 69
     """ 背后位骑乘肛交 """
+    MOUTH_AND_HAND_SEX = 70
+    """ 给对方手交口交 """
+    MOUTH_AND_CHEST_SEX = 71
+    """ 给对方乳交口交 """
+    VACCUM_MOUTH_SEX = 72
+    """ 给对方真空口交 """
+    DEEP_MOUTH_SEX = 73
+    """ 给对方深喉 """

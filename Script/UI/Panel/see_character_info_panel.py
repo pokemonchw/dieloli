@@ -938,8 +938,8 @@ class SeeCharacterSocialContact:
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
         character_data = cache.character_data[self.character_id]
-        for social_type in game_config.config_social_type:
-            if not social_type:
+        for social_type in game_config.config_social_type.__reversed__():
+            if social_type == 5:
                 continue
             type_config = game_config.config_social_type[social_type]
             type_draw = draw.LittleTitleLineDraw(type_config.name, self.width, ":")

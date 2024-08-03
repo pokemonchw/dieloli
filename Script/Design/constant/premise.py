@@ -1538,6 +1538,8 @@ class Premise:
     """ 被交互对象仇视 """
     TARGET_DEADLY_ENEMY = "target_deadly_enemy"
     """ 被交互对象视为死敌 """
+    TARGET_LESS_THAN_ADORE = "target_less_than_adore"
+    """ 交互对象的好感小于爱慕 """
 
     """
     =========================

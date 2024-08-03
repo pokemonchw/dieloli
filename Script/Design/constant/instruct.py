@@ -170,14 +170,22 @@ class Instruct:
     """ 舔全身 """
     LICK_FACE = 0
     """ 舔脸 """
+    TARGET_MOUTH_AND_HAND_SEX = 0
+    """ 让对方手交口交 """
+    TARGET_MOUTH_AND_CHEST_SEX = 0
+    """ 让对方乳交口交 """
+    TARGET_VACCUM_MOUTH_SEX = 0
+    """ 让对方真空口交 """
+    TARGET_DEEP_MOUTH_SEX = 0
+    """ 让对方深喉 """
     MOUTH_AND_HAND_SEX = 0
-    """ 手交口交 """
+    """ 给对方手交口交 """
     MOUTH_AND_CHEST_SEX = 0
-    """ 乳交口交 """
+    """ 给对方乳交口交 """
     VACCUM_MOUTH_SEX = 0
-    """ 真空口交 """
+    """ 给对方真空口交 """
     DEEP_MOUTH_SEX = 0
-    """ 深喉 """
+    """ 给对方深喉 """
     SIX_NINE_SEX = 0
     """ 六九式 """
     INSERTION_VAGINAL = 0
@@ -200,6 +208,8 @@ class Instruct:
     """ 骑乘位肛交 """
     BACK_RIDING_INSERTION_ANUS = 0
     """ 背后位骑乘肛交 """
+    SEX_END = 0
+    """ 结束性爱 """
 
     """
     =========================

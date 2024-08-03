@@ -681,6 +681,7 @@ target_detest,角色好感类前提,被交互对象厌恶
 target_hate,角色好感类前提,被交互对象憎恨
 target_hatred,角色好感类前提,被交互对象仇视
 target_deadly_enemy,角色好感类前提,被交互对象视为死敌
+target_less_than_adore,角色好感类前提,交互对象的好感小于爱慕
 get_into_player_scene,角色行为类前提,角色进入了玩家所在场景
 leave_player_scene,角色行为类前提,角色离开了玩家所在场景
 target_is_sleep,角色行为类前提,交互对象正在睡觉

@@ -336,7 +336,7 @@ def handle_target_sub_medium_favorability(
     character_handle.add_favorability(character_id,target_data.cid, -sub_favorability, None, now_time)
 
 
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_SUB_MEDIUM_FAVORABILITY)
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_SUB_LARGE_FAVORABILITY)
 def handle_target_sub_medium_favorability(
     character_id: int,
     add_time: int,

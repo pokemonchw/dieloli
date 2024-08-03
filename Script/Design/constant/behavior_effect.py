@@ -920,7 +920,7 @@ class BehaviorEffect:
     """ 交互对象减少大量反感 """
     TARGET_ADD_SMALL_SHAME = "target_add_small_shame"
     """ 交互对象增加少量羞耻 """
-    TARGET_ADD_MEDIUM_SHAME = "target_add_small_shame"
+    TARGET_ADD_MEDIUM_SHAME = "target_add_medium_shame"
     """ 交互对象增加中量羞耻 """
     TARGET_ADD_LARGE_SHAME = "target_add_large_shame"
     """ 交互对象增加大量羞耻 """
