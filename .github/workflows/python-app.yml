@@ -33,9 +33,7 @@ jobs:
           echo "build_exe_options = {" >> setup.py
           echo "    'packages': requirements," >> setup.py
           echo "    'excludes': []," >> setup.py
-          echo "    'include_files': [" >> setup.py
-          echo "        'data/', 'config.ini', 'LICENSE', 'README.md', 'image/', 'package.json'" >> setup.py
-          echo "    ]" >> setup.py
+          echo "    'include_files': []" >> setup.py
           echo "}" >> setup.py
           echo "setup(name='dieloli', version='0.1', description='dieloli', options={'build_exe': build_exe_options}, executables=executables)" >> setup.py
       
