@@ -27,20 +27,17 @@ jobs:
       - name: Create setup.py
         run: |
           echo "from cx_Freeze import setup, Executable" > setup.py
-          echo "import os" >> setup.py
           echo "with open('requirements.txt') as f:" >> setup.py
           echo "    requirements = f.read().splitlines()" >> setup.py
           echo "executables = [Executable('game.py')]" >> setup.py
-          echo "options = {" >> setup.py
-          echo "    'build_exe': {" >> setup.py
-          echo "        'packages': requirements," >> setup.py
-          echo "        'excludes': []," >> setup.py
-          echo "        'include_files': [" >> setup.py
-          echo "            'data/', 'config.ini', 'LICENSE', 'README.md', 'image/', 'package.json'" >> setup.py
-          echo "        ]" >> setup.py
-          echo "    }" >> setup.py
+          echo "build_exe_options = {" >> setup.py
+          echo "    'packages': requirements," >> setup.py
+          echo "    'excludes': []," >> setup.py
+          echo "    'include_files': [" >> setup.py
+          echo "        'data/', 'config.ini', 'LICENSE', 'README.md', 'image/', 'package.json'" >> setup.py
+          echo "    ]" >> setup.py
           echo "}" >> setup.py
-          echo "setup(name='dieloli', version='0.1', description='dieloli', options={'build_exe': options}, executables=executables)" >> setup.py
+          echo "setup(name='dieloli', version='0.1', description='dieloli', options={'build_exe': build_exe_options}, executables=executables)" >> setup.py
       
       - name: Run cx_Freeze
         run: |
