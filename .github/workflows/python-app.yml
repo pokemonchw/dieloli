@@ -30,7 +30,7 @@ jobs:
           echo "executables = [Executable('game.py')]" >> setup.py
           echo "build_exe_options = {" >> setup.py
           echo "    'packages': [" >> setup.py
-          echo "        'hnswlib', 'numpy', 'Pillow', 'psutil', 'PyAutoGUI', 'pyephem', 'PySide6', 'python_dateutil', 'scikit_learn', 'screeninfo', 'wcwidth'" >> setup.py
+          echo "        'hnswlib', 'numpy', 'PIL', 'psutil', 'pyautogui', 'ephem', 'dateutil', 'sklearn', 'screeninfo', 'wcwidth'" >> setup.py
           echo "    ]," >> setup.py
           echo "    'excludes': []," >> setup.py
           echo "    'include_files': []" >> setup.py
