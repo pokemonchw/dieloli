@@ -15,19 +15,19 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.12.*
+          python-version: 3.10.*
       - name: Install requirements
         run: |
           python -m pip install --upgrade pip
-          pip install py2exe
+          pip install pyinstaller
           pip install -r requirements.txt
-      - name: Run Py2exe
+      - name: Run PyInstaller
         run: |
-          python setup.py py2exe
-      - name: Build Game Config
+          pyinstaller -F game.py --noconsole
+      - name: Buildi Game Config
         run: |
           python buildconfig.py
-      - name: Build Game Cache
+      - name: Buildi Game Cache
         run: |
           python init_data.py
       - name: Copy Game Files
@@ -72,4 +72,3 @@ jobs:
           asset_path: ${{ github.workspace }}/dieloli.zip
           asset_name: dieloli_windows.zip
           asset_content_type: application/zip
-
