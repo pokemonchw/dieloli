@@ -27,11 +27,11 @@ jobs:
       - name: Create setup.py
         run: |
           echo "from cx_Freeze import setup, Executable" > setup.py
-          echo "with open('requirements.txt') as f:" >> setup.py
-          echo "    requirements = f.read().splitlines()" >> setup.py
           echo "executables = [Executable('game.py')]" >> setup.py
           echo "build_exe_options = {" >> setup.py
-          echo "    'packages': requirements," >> setup.py
+          echo "    'packages': [" >> setup.py
+          echo "        'hnswlib', 'numpy', 'Pillow', 'psutil', 'PyAutoGUI', 'pyephem', 'PySide6', 'python_dateutil', 'scikit_learn', 'screeninfo', 'wcwidth'" >> setup.py
+          echo "    ]," >> setup.py
           echo "    'excludes': []," >> setup.py
           echo "    'include_files': []" >> setup.py
           echo "}" >> setup.py
