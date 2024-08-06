@@ -24,6 +24,12 @@ jobs:
           pip install nuitka zstandard
           pip install -r requirements.txt
 
+      - name: Download Dependency Walker
+        run: |
+          Invoke-WebRequest -Uri http://www.dependencywalker.com/depends22_x64.zip -OutFile depends.zip
+          Expand-Archive depends.zip -DestinationPath $env:LOCALAPPDATA\Nuitka\Nuitka\Cache\depends\x86_64
+
+
       - name: Run Nuitka
         run: |
           python -m nuitka --standalone --onefile --enable-plugin=tk-inter game.py
