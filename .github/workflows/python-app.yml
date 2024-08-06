@@ -31,12 +31,8 @@ jobs:
 
 
       - name: Run Nuitka
-        uses: Nuitka/Nuitka-Action@main
-        with:
-          nuitka-version: main
-          script-name: game.py
-          onefile: true
-          enable-plugins: tk-inter
+        run: |
+          python -m nuitka --standalone --onefile --enable-plugin=tk-inter --assume-yes-for-downloads game.py
 
       - name: Build Game Config
         run: |
@@ -48,22 +44,21 @@ jobs:
 
       - name: Create Output Directory
         run:
-          mkdir -p dist
-          mkdir -p dist/dieloli
+          mkdir -p dieloli
 
       - name: Copy Game Files
         run: |
-          Copy-Item build/game.exe dist/dieloli/
-          Copy-Item data dist/dieloli -Recurse
-          Copy-Item config.ini dist/dieloli/
-          Copy-Item LICENSE dist/dieloli/
-          Copy-Item README.md dist/dieloli/
-          Copy-Item image dist/dieloli -Recurse
-          Copy-Item package.json dist/dieloli/
+          Copy-Item game.exe dieloli/
+          Copy-Item data dieloli -Recurse
+          Copy-Item config.ini dieloli/
+          Copy-Item LICENSE dieloli/
+          Copy-Item README.md dieloli/
+          Copy-Item image dieloli -Recurse
+          Copy-Item package.json dieloli/
 
       - name: Pack Game Files
         run: |
-          Compress-Archive -Path dist/dieloli -DestinationPath dieloli.zip
+          Compress-Archive -Path dieloli -DestinationPath dieloli.zip
 
       - uses: actions/upload-artifact@master
         with:
