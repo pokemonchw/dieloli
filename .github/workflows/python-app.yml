@@ -31,8 +31,12 @@ jobs:
 
 
       - name: Run Nuitka
-        run: |
-          python -m nuitka --standalone --onefile --enable-plugin=tk-inter game.py
+        uses: Nuitka/Nuitka-Action@main
+        with:
+          nuitka-version: main
+          script-name: game.py
+          onefile: true
+          enable-plugins: tk-inter
 
       - name: Build Game Config
         run: |
@@ -49,7 +53,7 @@ jobs:
 
       - name: Copy Game Files
         run: |
-          Copy-Item game.exe dist/dieloli/
+          Copy-Item build/game.exe dist/dieloli/
           Copy-Item data dist/dieloli -Recurse
           Copy-Item config.ini dist/dieloli/
           Copy-Item LICENSE dist/dieloli/
