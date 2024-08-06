@@ -12,46 +12,61 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+
       - name: Install Python
         uses: actions/setup-python@v1
         with:
           python-version: 3.12.*
+
       - name: Install requirements
         run: |
           python -m pip install --upgrade pip
-          pip install pyinstaller
+          pip install nuitka zstandard
           pip install -r requirements.txt
-      - name: Run PyInstaller
+
+      - name: Run Nuitka
         run: |
-          pyinstaller -F game.py
-      - name: Buildi Game Config
+          python -m nuitka --standalone --onefile --enable-plugin=tk-inter game.py
+
+      - name: Build Game Config
         run: |
           python buildconfig.py
-      - name: Buildi Game Cache
+
+      - name: Build Game Cache
         run: |
           python init_data.py
+
+      - name: Create Output Directory
+        run:
+          mkdir -p dist
+          mkdir -p dist/dieloli
+
       - name: Copy Game Files
         run: |
-          Copy-Item data dist/ -Recurse
-          Copy-Item config.ini dist/
-          Copy-Item LICENSE dist/
-          Copy-Item README.md dist/
-          Copy-Item image dist/ -Recurse
-          Copy-Item package.json dist/
-          Rename-Item dist dieloli
+          Copy-Item game.exe dist/dieloli/
+          Copy-Item data dist/dieloli -Recurse
+          Copy-Item config.ini dist/dieloli/
+          Copy-Item LICENSE dist/dieloli/
+          Copy-Item README.md dist/dieloli/
+          Copy-Item image dist/dieloli -Recurse
+          Copy-Item package.json dist/dieloli/
+
       - name: Pack Game Files
         run: |
-          Compress-Archive -Path dieloli -DestinationPath dieloli.zip
+          Compress-Archive -Path dist/dieloli -DestinationPath dieloli.zip
+
       - uses: actions/upload-artifact@master
         with:
           name: Windows
           path: dieloli.zip
+
       - name: Read Version
         id: version
         uses: ashley-taylor/read-json-property-action@v1.0
         with:
           path: package.json
           property: version
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -62,6 +77,7 @@ jobs:
           release_name: Past ${{steps.version.outputs.value}}
           draft: false
           prerelease: false
+
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
@@ -72,3 +88,4 @@ jobs:
           asset_path: ${{ github.workspace }}/dieloli.zip
           asset_name: dieloli_windows.zip
           asset_content_type: application/zip
+
