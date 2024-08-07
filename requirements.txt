@@ -1,4 +1,4 @@
-hnswlib>=0.8.0
+hnswlib==0.8.0
 numpy>=1.26.2
 Pillow>=10.1.0
 psutil>=5.9.6
