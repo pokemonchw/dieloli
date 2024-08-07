@@ -28,7 +28,7 @@ def init_character_behavior():
     global time_index
     print("======================windows闪退测试===========================")
     print("1.角色向量化，构造ANN树")
-    character_handle.build_similar_character_searcher()
+    #character_handle.build_similar_character_searcher()
     cache.character_target_data = {}
     cache.character_target_score_data = {}
     while 1:
@@ -123,6 +123,7 @@ def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
     # 计算角色向量
     character_vector = cache.character_vector_data[character_id - 1]
     # 找出最相似的角色
+    """
     near_character_list, distance_list = cache.similar_character_searcher.knn_query(character_vector, k=1)
     near_character_id = near_character_list[0][0]
     distance = distance_list[0][0]
@@ -173,6 +174,7 @@ def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
             if judge:
                 target.imitate_character_id = imitate_character_id
                 now_target_config = game_config.config_target[target.uid]
+    """
     if not judge:
         target, _, judge = search_target(
             character_id,
