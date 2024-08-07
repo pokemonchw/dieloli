@@ -3,7 +3,7 @@ import bisect
 import itertools
 import math
 import numpy
-import scipy
+from scipy import stats
 from typing import Dict, List, Tuple
 
 
@@ -130,7 +130,7 @@ def custom_distribution(min_value: float, max_value: float) -> float:
     if rand < 0.1:
         return linear_decreasing_distribution(mid_start, min_value)
     elif rand < 0.9:
-        return mid_start + scipy.stats.beta.rvs(2, 2) * mid_range_width
+        return mid_start + stats.beta.rvs(2, 2) * mid_range_width
     else:
         return linear_decreasing_distribution(mid_end, max_value)
 
