@@ -423,15 +423,23 @@ def build_similar_character_searcher():
     """
     构造相似角色检索器
     """
+    print(">>>>>>>>>>>>>>开始构建检索器")
     character_feature = [get_character_feature_vector(character_id) for character_id in
                          range(1, len(cache.character_data))]
+    print("角色向量化")
     vectors = feature_vector_handle.fit_transform(character_feature)
+    print("初始化检索器")
     p = hnswlib.Index(space='cosine', dim=len(vectors[0]))
+    print("构建树")
     p.init_index(max_elements=len(vectors), ef_construction=200, M=16)
+    print("存储角色向量")
     p.add_items(vectors, ids=range(1, len(cache.character_data)))
+    print("设置树数量")
     p.set_ef(50)
+    print("完成构建")
     cache.similar_character_searcher = p
     cache.character_vector_data = vectors
+    print(">>>>>>>>>>>>>>")
 
 
 def get_character_feature_vector(character_id: int) -> dict:
