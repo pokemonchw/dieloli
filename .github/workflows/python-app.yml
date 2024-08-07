@@ -23,7 +23,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run PyInstaller
         run: |
-          pyinstaller game.spec
+          pyinstaller -F game.py 
       - name: Buildi Game Config
         run: |
           python buildconfig.py
