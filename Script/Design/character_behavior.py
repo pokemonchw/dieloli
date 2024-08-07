@@ -26,19 +26,24 @@ def init_character_behavior():
     角色行为树总控制
     """
     global time_index
-    character_handle.build_similar_character_searcher()
+    print("======================windows闪退测试===========================")
+    print("1.角色向量化，构造ANN树")
+    #character_handle.build_similar_character_searcher()
     cache.character_target_data = {}
     cache.character_target_score_data = {}
     while 1:
+        print("-------------启动ai循环--------------")
         now_status_data = {}
         now_status_data[0] = set()
         now_status_data[1] = set()
         now_status_data[2] = set()
+        print("角色ai分类")
         for i in cache.character_data:
             if not i:
                 continue
             now_judge = check_character_status_judge(i)
             now_status_data[now_judge].add(i)
+        print("验证角色状态")
         for i in cache.character_data:
             cache.character_data[i].premise_data = {}
             if not i:
@@ -46,20 +51,29 @@ def init_character_behavior():
             status = check_character_status_judge(i)
             now_status_data[status].add(i)
         if len(now_status_data[1]) == len(cache.character_data) - 1:
+            print("----------------结束ai循环-----------------")
             break
+        print("处理ai行动目标查找")
         now_list = [character_target_judge(i) for i in now_status_data[0]]
         for result in now_list:
             run_character_target(result)
+        print("结算角色状态")
         for i in now_status_data[2]:
             judge_character_status(i, cache.game_time)
+        print("处死角色")
         for i in cache.character_data:
             if not i:
                 continue
             judge_character_dead(i)
+        print("刷新教室教室")
         refresh_teacher_classroom()
+        print("---------------------------")
     time_index = 0
+    print("结算玩家状态")
     judge_character_status(0, cache.game_time)
+    print("校验处死玩家")
     judge_character_dead(0)
+    print("=================================")
 
 
 def check_character_status_judge(character_id: int) -> int:
@@ -109,6 +123,7 @@ def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
     # 计算角色向量
     character_vector = cache.character_vector_data[character_id - 1]
     # 找出最相似的角色
+    """
     near_character_list, distance_list = cache.similar_character_searcher.knn_query(character_vector, k=1)
     near_character_id = near_character_list[0][0]
     distance = distance_list[0][0]
@@ -159,6 +174,7 @@ def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
             if judge:
                 target.imitate_character_id = imitate_character_id
                 now_target_config = game_config.config_target[target.uid]
+    """
     if not judge:
         target, _, judge = search_target(
             character_id,
