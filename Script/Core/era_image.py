@@ -16,8 +16,9 @@ for image_file_path_id in os.listdir(image_dir_path):
     old_image = PhotoImage(file=image_file_path)
     old_height = old_image.height()
     old_weight = old_image.width()
-    font_scaling = main_frame.normal_font.measure("A") / 11
-    now_height = int(old_height * font_scaling)
-    now_weight = int(old_weight * font_scaling)
+    font_width_scaling = main_frame.now_char_width / 12
+    font_height_scaling = main_frame.now_char_height / 24
+    now_height = int(old_height * font_height_scaling)
+    now_weight = int(old_weight * font_width_scaling)
     new_image = Image.open(image_file_path).resize((now_weight, now_height))
     image_data[image_file_name] = PhotoImage(new_image)

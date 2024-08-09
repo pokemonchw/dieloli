@@ -83,6 +83,8 @@ else:
         need_font_size = next_font_size
         if next_font_char_width <= need_char_width and next_font_char_height <= need_char_height:
             break
+if normal_config.config_normal.font_size != 20:
+    need_font_size = normal_config.config_normal.font_size
 now_font = font.Font(family=normal_config.config_normal.font,size=need_font_size)
 now_char_width = now_font.measure("a")
 now_char_height = now_font.metrics("linespace")
@@ -110,7 +112,7 @@ main_frame.grid(column=0, row=0, sticky=(N, W, E, S))
 main_frame.columnconfigure(0, weight=1)
 main_frame.rowconfigure(0, weight=1)
 
-normal_font = font.Font(family="Sarasa Mono SC", size=normal_config.config_normal.font_size)
+normal_font = font.Font(family=normal_config.config_normal.font, size=need_font_size)
 # 显示窗口
 textbox = Text(
     main_frame,
