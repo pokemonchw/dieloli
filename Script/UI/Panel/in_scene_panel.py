@@ -102,7 +102,6 @@ class InScenePanel:
             dead_character_list = list(dead_character_dict.keys())
             dead_character_list.reverse()
             character_list = live_character_list + dead_character_list
-            character_handle_panel.text_list = character_list
             if character_data.target_character_id not in scene_data.character_list:
                 character_data.target_character_id = -1
             if character_data.target_character_id == -1 and character_list:
@@ -110,7 +109,10 @@ class InScenePanel:
             elif character_data.target_character_id not in {-1, 0} and character_list:
                 if character_data.target_character_id in character_list:
                     character_list.remove(character_data.target_character_id)
-                    character_list = [character_data.target_character_id].extend(character_list)
+                    new_character_list = [character_data.target_character_id]
+                    new_character_list.extend(character_list)
+                    character_list = new_character_list
+            character_handle_panel.text_list = character_list
             game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
             game_time_draw.now_draw.width = len(game_time_draw)
             position_text = attr_text.get_scene_path_text(character_data.position)
