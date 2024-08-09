@@ -399,7 +399,7 @@ class GlobalSceneNamePanel:
             classroom_path = map_handle.get_map_system_path_for_str(identity_data.classroom)
         elif 1 in character_data.identity_data:
             identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
-            if identity_data.classroom != "":
+            if identity_data.now_classroom != "":
                 classroom_path = map_handle.get_map_system_path_for_str(identity_data.now_classroom)
             officeroom_path = map_handle.get_map_system_path_for_str(identity_data.officeroom)
         square_path = ["2"]

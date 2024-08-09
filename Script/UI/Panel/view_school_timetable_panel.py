@@ -228,6 +228,7 @@ class TeacherTimeTablePanel:
     def draw(self):
         """绘制对象"""
         timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[0]
+        timetable_list = sorted(timetable_list, key=lambda x: (x.week_day, x.time))
         text_list = []
         args_list = []
         line_feed.draw()
