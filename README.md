@@ -74,5 +74,5 @@ If you want to help with localization, please contact me by email, and I will in
 联系方式
 ----
 e-mail:pokemonchw@gmail.com \
-企鹅裙:950487389
+discord:https://discord.com/invite/9tCVCkR3
 
