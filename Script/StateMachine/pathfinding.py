@@ -31,7 +31,7 @@ def character_move_to_classroom(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -59,7 +59,7 @@ def character_move_to_officeroom(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -88,7 +88,7 @@ def character_move_to_rand_cafeteria(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -120,7 +120,7 @@ def character_move_to_nearest_restaurant(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -149,7 +149,7 @@ def character_move_to_nearest_toilet(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -172,7 +172,7 @@ def character_move_to_music_room(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -195,7 +195,7 @@ def character_move_to_dormitory(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -222,7 +222,7 @@ def character_move_to_rand_scene(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -252,7 +252,7 @@ def character_move_to_like_target_scene(character_id: int):
         character_data.behavior.duration = move_time
         character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -286,7 +286,7 @@ def character_move_to_no_first_kiss_like_target_scene(character_id: int):
         character_data.behavior.duration = move_time
         character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -317,7 +317,7 @@ def character_move_to_dislike_target_scene(character_id: int):
         character_data.behavior.move_target = move_path
         character_data.behavior.duration = move_time
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -354,7 +354,7 @@ def character_move_to_not_has_dislike_target_scene(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -374,7 +374,7 @@ def character_move_to_grove(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -394,7 +394,7 @@ def character_move_to_item_shop(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -430,7 +430,7 @@ def character_move_to_library(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -450,7 +450,7 @@ def character_move_to_square(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -475,7 +475,7 @@ def character_move_to_no_man_scene(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -502,7 +502,7 @@ def character_move_to_have_character_scene(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
@@ -544,7 +544,7 @@ def character_move_to_club_activity_scene(character_id: int):
     character_data.behavior.duration = move_time
     character_data.state = constant.CharacterStatus.STATUS_MOVE
     if character_data.follow != -1:
-        target_data: game_type.Character = cache.character_data[character_data.pulling]
+        target_data: game_type.Character = cache.character_data[character_data.follow]
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
