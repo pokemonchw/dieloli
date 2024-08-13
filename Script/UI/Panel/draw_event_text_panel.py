@@ -40,31 +40,48 @@ class DrawEventTextPanel(draw.LineFeedWaitDraw):
         if player_data.position not in [character_data.position, character_data.behavior.move_target]:
             return
         now_event_text: str = game_config.config_event[event_id].text
+        # 当前场景名字
         scene_path = character_data.position
         scene_path_str = map_handle.get_map_system_path_str_for_list(scene_path)
         scene_data: game_type.Scene = cache.scene_data[scene_path_str]
         scene_name = scene_data.scene_name
+        # 角色交互对象名字
         target_name = ""
         if character_data.target_character_id != -1:
-            target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-            target_name = target_data.name
+            if character_data.target_character_id != 0:
+                # 当交互对象不是玩家时，显示交互对象的名字
+                target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+                target_name = target_data.name
+            else:
+                # 当交互对象是玩家时，显示玩家的昵称
+                target_name = player_data.nick_name
+        # 角色名字
+        character_name = ""
+        if character_id == 0:
+            # 当角色是玩家时，显示玩家的昵称
+            character_name = player_data.nick_name
+        else:
+            # 当角色不是玩家时，显示角色的名字
+            character_name = character_data.name
+        # 角色移动完成时，可以使用的出发地的场景名
         src_scene_name = ""
         if len(player_data.behavior.move_src):
             src_scene_path_str = map_handle.get_map_system_path_str_for_list(player_data.behavior.move_src)
             src_scene_data: game_type.Scene = cache.scene_data[src_scene_path_str]
             src_scene_name = src_scene_data.scene_name
+        # 角色开始移动时，可以使用的目标地点的场景名字
         target_scene_name = ""
         if len(character_data.behavior.move_target):
             target_scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.behavior.move_target)
             target_scene_data: game_type.Scene = cache.scene_data[target_scene_path_str]
             target_scene_name = target_scene_data.scene_name
         now_event_text = now_event_text.format(
-            NickName=player_data.nick_name,
             FoodName=character_data.behavior.food_name,
-            Name=character_data.name,
+            Name=character_name,
             SceneName=scene_name,
             TargetName=target_name,
             TargetSceneName=target_scene_name,
             SrcSceneName=src_scene_name,
+            PlayerName=player_data.name,
         )
         self.text = now_event_text
