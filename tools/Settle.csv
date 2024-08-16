@@ -191,9 +191,6 @@ settle_type,son_type,settle_info,settle_id
 肉体状态类结算器,眩晕,减少少量眩晕,sub_small_vertigo
 肉体状态类结算器,眩晕,减少中量眩晕,sub_medium_vertigo
 肉体状态类结算器,眩晕,减少大量眩晕,sub_large_vertigo
-肉体状态类结算器,疲惫,增加少量疲惫,add_small_tired
-肉体状态类结算器,疲惫,增加中量疲惫,add_medium_tired
-肉体状态类结算器,疲惫,增加大量疲惫,add_large_tired
 肉体状态类结算器,疲惫,减少少量疲惫,sub_small_tired
 肉体状态类结算器,疲惫,减少中量疲惫,sub_medium_tired
 肉体状态类结算器,疲惫,减少大量疲惫,sub_large_tired
@@ -227,9 +224,6 @@ settle_type,son_type,settle_info,settle_id
 交互对象肉体状态类结算器,眩晕,交互对象减少少量眩晕,target_sub_small_vertigo
 交互对象肉体状态类结算器,眩晕,交互对象减少中量眩晕,target_sub_medium_vertigo
 交互对象肉体状态类结算器,眩晕,交互对象减少大量眩晕,target_sub_large_vertigo
-交互对象肉体状态类结算器,疲惫,交互对象增加少量疲惫,target_add_small_tired
-交互对象肉体状态类结算器,疲惫,交互对象增加中量疲惫,target_add_medium_tired
-交互对象肉体状态类结算器,疲惫,交互对象增加大量疲惫,target_add_large_tired
 交互对象肉体状态类结算器,疲惫,交互对象减少少量疲惫,target_sub_small_tired
 交互对象肉体状态类结算器,疲惫,交互对象减少中量疲惫,target_sub_medium_tired
 交互对象肉体状态类结算器,疲惫,交互对象减少大量疲惫,target_sub_large_tired
@@ -857,3 +851,6 @@ settle_type,son_type,settle_info,settle_id
 金钱类结算器,赠送,交互对象赠送少量金钱,target_gift_small_money
 金钱类结算器,赠送,交互对象赠送中量金钱,target_gift_medium_money
 金钱类结算器,赠送,交互对象赠送大量金钱,target_gift_large_money
+互动类结算器,聊天,让交互对象和自己聊天,let_target_chat_self
+互动类结算器,教学,让教室内所有学生进入学习状态,let_all_students_study_in_classroom
+互动类结算器,教学,让所有非本班学生的人离开教室,let_all_not_students_leaving_classroom

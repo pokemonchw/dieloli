@@ -146,42 +146,23 @@ class SaveInfoDraw:
         line_feed.draw()
         if self.save_exist_judge:
             now_ask_list = []
-            now_id = 0
-            load_save_button = draw.Button(
-                text_handle.id_index(now_id) + _("读取"), str(now_id), cmd_func=self.load_save
-            )
-            load_save_button.width = self.width
-            load_save_button.draw()
-            line_feed.draw()
-            now_ask_list.append(str(now_id))
-            now_id += 1
             if self.write_save:
-                re_write_save_button = draw.Button(
-                    text_handle.id_index(now_id) + _("覆盖"),
-                    str(now_id),
-                    cmd_func=save_handle.establish_save,
-                    args=(self.text,),
-                )
-                re_write_save_button.width = self.width
-                re_write_save_button.draw()
-                now_ask_list.append(str(now_id))
-                line_feed.draw()
-                now_id += 1
-            delete_save_button = draw.Button(
-                text_handle.id_index(now_id) + _("删除"), str(now_id), cmd_func=self.delete_save
-            )
-            delete_save_button.width = self.width
-            delete_save_button.draw()
-            now_ask_list.append(str(now_id))
-            now_id += 1
-            line_feed.draw()
-            back_button = draw.Button(text_handle.id_index(now_id) + _("返回"), str(now_id))
-            back_button.width = self.width
-            back_button.draw()
-            line_feed.draw()
-            now_ask_list.append(str(now_id))
-            flow_handle.askfor_all(now_ask_list)
+                now_ask_list = [_("读取"), _("覆盖"), _("删除"), _("返回")]
+            else:
+                now_ask_list = [_("读取"), _("删除"), _("返回")]
+            button_panel = panel.OneMessageAndSingleColumnButton()
+            button_panel.set(now_ask_list, _("准备如何处理这个存档?"), 0)
+            button_panel.draw()
+            return_list = button_panel.get_return_list()
+            ans = flow_handle.askfor_all(return_list.keys())
             py_cmd.clr_cmd()
+            now_key = return_list[ans]
+            if now_key == _("读取"):
+                self.load_save()
+            elif now_key == _("覆盖"):
+                save_handle.establish_save(self.text)
+            elif now_key == _("删除"):
+                self.delete_save()
         else:
             save_handle.establish_save(self.text)
 

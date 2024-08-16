@@ -15,6 +15,12 @@ def align(text: str, just="left", only_fix=False, columns=1, text_width=None) ->
     str -- 对齐后的文本
     """
     count_index = get_text_index(text)
+    if count_index % 2 != 0:
+        count_index += 1
+        if just == "left":
+            text += " "
+        else:
+            text = " " + text
     if text_width is None:
         width = normal_config.config_normal.text_width
         width = int(width / columns)

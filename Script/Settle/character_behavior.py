@@ -157,11 +157,13 @@ def handle_interrupt_target_activity(
         if target_end_time >= character_data.behavior.start_time:
             if not character_id or not character_data.target_character_id:
                 name_draw = draw.NormalDraw()
-                name_draw.text = (
-                        "\n"
-                        + target_data.name
-                        + _("停止了")
-                        + game_config.config_status[old_statue].name
+                character_name = target_data.name
+                origin_character_name = character_data.name
+                statue_name = game_config.config_status[old_statue].name
+                name_draw.text = _("{character_name}被{origin_character_name}打断了{statue_name}").format(
+                    character_name=character_name,
+                    origin_character_name=origin_character_name,
+                    statue_name=statue_name
                 )
                 name_draw.width = window_width
                 name_draw.draw()
@@ -238,10 +240,13 @@ def handle_add_student_course_experience_for_in_class_room(
     if 1 not in character_data.identity_data:
         return
     identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
-    scene_data: game_type.Scene = cache.scene_data[character_data.classroom]
+    now_position_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[now_position_str]
+    if now_position_str not in cache.classroom_students_data:
+        return
     course = character_data.behavior.course_id
     for now_character in (
-            scene_data.character_list & cache.classroom_students_data[character_data.classroom]
+            scene_data.character_list & cache.classroom_students_data[now_position_str]
     ):
         now_character_data: game_type.Character = cache.character_data[now_character]
         if course in game_config.config_course_knowledge_experience_data:

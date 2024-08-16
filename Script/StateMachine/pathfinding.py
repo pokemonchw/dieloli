@@ -549,3 +549,36 @@ def character_move_to_club_activity_scene(character_id: int):
             target_data.pulling = -1
     character_data.follow = -1
 
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_NEAREST_NOT_CLASSROOM)
+def character_move_to_nearest_not_classroom(character_id: int):
+    """
+    角色移动至最近的不是教室的场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_scene_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[now_scene_str]
+    map_path = map_handle.get_map_for_path(character_data.position)
+    map_path_str = map_handle.get_map_system_path_str_for_list(map_path)
+    map_data = cache.map_data[map_path_str]
+    scene_id = character_data.position[-1]
+    near_scene_path = ""
+    for now_scene_id in map_data.path_edge[scene_id]:
+        now_scene_path = map_path + [now_scene_id]
+        now_scene_path_str = map_handle.get_map_system_path_str_for_list(now_scene_path)
+        now_scene_data = cache.scene_data[now_scene_path_str]
+        if not now_scene_data.scene_tag.startswith("Classroom_"):
+            near_scene_path = now_scene_path
+            break
+    _, _, move_path, move_time = character_move.character_move(character_id,near_scene_path)
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+    if character_data.follow != -1:
+        target_data: game_type.Character = cache.character_data[character_data.follow]
+        if target_data.pulling == character_id:
+            target_data.pulling = -1
+    character_data.follow = -1

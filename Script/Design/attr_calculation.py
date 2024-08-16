@@ -357,56 +357,24 @@ def get_experience_level_weight(experience: int) -> int:
     Return arguments:
     int -- 权重
     """
-    if cache.club_create_judge:
-        return get_club_experience_level_weight(experience)
     grade = 0
-    if experience < 100:
+    if experience < 50:
         grade = 0
-    elif experience < 500:
+    elif experience < 100:
         grade = 1
+    elif experience < 200:
+        grade = 2
+    elif experience < 500:
+        grade = 3
     elif experience < 1000:
-        grade = 2
+        grade = 4
     elif experience < 2000:
-        grade = 3
-    elif experience < 3000:
-        grade = 4
-    elif experience < 5000:
         grade = 5
+    elif experience < 5000:
+        grade = 6
     elif experience < 10000:
-        grade = 6
-    elif experience < 20000:
         grade = 7
-    elif experience >= 20000:
-        grade = 8
-    return grade
-
-
-def get_club_experience_level_weight(experience: int) -> int:
-    """
-    创建社团时的技能等级验证函数
-    Keyword arguments:
-    experience -- 经验数值
-    Return arguments:
-    int -- 权重
-    """
-    grade = 0
-    if experience < 25:
-        grade = 0
-    elif experience < 125:
-        grade = 1
-    elif experience < 250:
-        grade = 2
-    elif experience < 500:
-        grade = 3
-    elif experience < 750:
-        grade = 4
-    elif experience < 1250:
-        grade = 5
-    elif experience < 2500:
-        grade = 6
-    elif experience < 5000:
-        grade = 7
-    elif experience >= 5000:
+    elif experience >= 10000:
         grade = 8
     return grade
 
@@ -420,23 +388,23 @@ def judge_grade(experience: int) -> str:
     str -- 评级
     """
     grade = ""
-    if experience < 100:
+    if experience < 50:
         grade = "G"
-    elif experience < 500:
+    elif experience < 100:
         grade = "F"
-    elif experience < 1000:
+    elif experience < 200:
         grade = "E"
-    elif experience < 2000:
+    elif experience < 500:
         grade = "D"
-    elif experience < 3000:
+    elif experience < 1000:
         grade = "C"
-    elif experience < 5000:
+    elif experience < 2000:
         grade = "B"
-    elif experience < 10000:
+    elif experience < 5000:
         grade = "A"
-    elif experience < 20000:
+    elif experience < 10000:
         grade = "S"
-    elif experience >= 20000:
+    elif experience >= 10000:
         grade = "EX"
     return grade
 

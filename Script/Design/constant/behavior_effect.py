@@ -228,12 +228,6 @@ class BehaviorEffect:
     """ 减少中量眩晕 """
     SUB_LARGE_VERTIGO = "sub_large_vertigo"
     """ 减少大量眩晕 """
-    ADD_SMALL_TIRED = "add_small_tired"
-    """ 增加少量疲惫 """
-    ADD_MEDIUM_TIRED = "add_medium_tired"
-    """ 增加中量疲惫 """
-    ADD_LARGE_TIRED = "add_large_tired"
-    """ 增加大量疲惫 """
     SUB_SMALL_TIRED = "sub_small_tired"
     """ 减少少量疲惫 """
     SUB_MEDIUM_TIRED = "sub_medium_tired"
@@ -1080,12 +1074,6 @@ class BehaviorEffect:
     """ 交互对象减少中量眩晕 """
     TARGET_SUB_LARGE_VERTIGO = "target_sub_large_vertigo"
     """ 交互对象减少大量眩晕 """
-    TARGET_ADD_SMALL_TIRED = "target_add_small_tired"
-    """ 交互对象增加少量疲惫 """
-    TARGET_ADD_MEDIUM_TIRED = "target_add_medium_tired"
-    """ 交互对象增加中量疲惫 """
-    TARGET_ADD_LARGE_TIRED = "target_add_large_tired"
-    """ 交互对象增加大量疲惫 """
     TARGET_SUB_SMALL_TIRED = "target_sub_small_tired"
     """ 交互对象减少少量疲惫 """
     TARGET_SUB_MEDIUM_TIRED = "target_sub_medium_tired"
@@ -1854,3 +1842,16 @@ class BehaviorEffect:
     """ 交互对象退出做爱受体状态 """
     OUT_PASSIVE_SEX = "out_passive_sex"
     """ 退出做爱受体状态 """
+
+    """
+    =========================
+    互动类结算器
+    =========================
+    """
+    LET_TARGET_CHAT_SELF = "let_target_chat_self"
+    """ 让交互对象和自己聊天 """
+    LET_ALL_STUDENTS_STUDY_IN_CLASSROOM = "let_all_students_study_in_classroom"
+    """ 让教室内所有学生进入学习状态 """
+    LET_ALL_NOT_STUDENTS_LEAVING_CLASSROOM = "let_all_not_students_leaving_classroom"
+    """ 让所有非本班学生的人离开教室 """
+

@@ -183,10 +183,11 @@ class SeeCharacterStatusPanel:
             )
             self.draw_list.append(now_draw)
 
-    def draw(self):
+    def draw(self, has_title: bool = True):
         """绘制面板"""
-        title_draw = draw.TitleLineDraw(_("人物状态"), self.width)
-        title_draw.draw()
+        if has_title:
+            title_draw = draw.TitleLineDraw(_("人物状态"), self.width)
+            title_draw.draw()
         for now_draw in self.draw_list:
             now_draw.draw()
 

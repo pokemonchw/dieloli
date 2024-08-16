@@ -139,7 +139,7 @@ def handle_approaching_class_time(character_id: int) -> int:
     )
     now_time_value = now_time.hour * 100 + now_time.minute
     next_time = 0
-    if character_data.age <= 18:
+    if 0 in character_data.identity_data:
         school_id = 0
         if character_data.age in range(13, 16):
             school_id = 1
@@ -155,18 +155,11 @@ def handle_approaching_class_time(character_id: int) -> int:
                 next_time = session_config.start_time
         if next_time == 0:
             return 0
-    if character_id in cache.teacher_school_timetable:
-        now_week = now_time.weekday()
-        timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[
-            character_id
-        ]
-        for timetable in timetable_list:
-            if timetable.week_day != now_week:
-                continue
-            if timetable.time > now_time_value and next_time == 0 or timetable.time < next_time:
-                next_time = timetable.time
-        if next_time == 0:
-            return 0
+    elif 1 in character_data.identity_data:
+        identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
+        if identity_data.now_classroom != "" and identity_data.now_classroom != []:
+            return 1
+        return 0
     next_value = int(next_time / 100) * 60 + next_time % 100
     now_value = int(now_time_value / 100) * 60 + now_time_value % 100
     add_time = next_value - now_value
@@ -184,6 +177,7 @@ def handle_in_class_time(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
+    character_data: game_type.Character = cache.character_data[character_id]
     judge, _unused, _unused, _unused, _unused = character.judge_character_in_class_time(
         character_id
     )

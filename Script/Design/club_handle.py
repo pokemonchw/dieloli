@@ -20,7 +20,6 @@ def init_club_data():
         student_set.remove(0)
     if 0 in teacher_set:
         teacher_set.remove(0)
-    cache.club_create_judge = True
     while 1:
         if len(cache.all_club_data) + len(club_id_set) < club_max:
             club_max = len(cache.all_club_data) + len(club_id_set)
@@ -105,5 +104,4 @@ def init_club_data():
                         break
                     current_time = (hour, minute)
         cache.all_club_data[club_data.uid] = club_data
-    cache.club_create_judge = False
 
