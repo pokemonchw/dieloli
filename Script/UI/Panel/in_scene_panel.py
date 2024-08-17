@@ -54,6 +54,8 @@ class InScenePanel:
             len(constant.handle_instruct_name_data),
             null_button_text=character_data.target_character_id,
         )
+        old_character_set = set()
+        is_collection = cache.is_collection
         while 1:
             character_data: game_type.Character = cache.character_data[0]
             scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
@@ -71,48 +73,54 @@ class InScenePanel:
                 continue
             character_set = scene_data.character_list.copy()
             character_set.remove(0)
-            if cache.is_collection:
-                character_list = [
-                    i for i in character_set if i in character_data.collection_character
-                ]
-            else:
-                character_list = list(character_set)
-            live_character_dict = {}
-            dead_character_dict = {}
-            for now_character in character_list:
-                now_character_data: game_type.Character = cache.character_data[now_character]
-                if now_character_data.state == constant.CharacterStatus.STATUS_DEAD:
-                    if now_character in character_data.favorability:
-                        dead_character_dict[now_character] = character_data.favorability[
-                            now_character
-                        ]
-                    else:
-                        dead_character_dict[now_character] = 0
+            refresh_character_list_judge = False
+            if len(old_character_set) == 0 or old_character_set != character_set or is_collection != cache.is_collection:
+                old_character_set = character_set.copy()
+                refresh_character_list_judge = True
+                is_collection = cache.is_collection
+            if refresh_character_list_judge:
+                if cache.is_collection:
+                    character_list = [
+                        i for i in character_set if i in character_data.collection_character
+                    ]
                 else:
-                    if now_character in character_data.favorability:
-                        live_character_dict[now_character] = character_data.favorability[
-                            now_character
-                        ]
+                    character_list = list(character_set)
+                live_character_dict = {}
+                dead_character_dict = {}
+                for now_character in character_list:
+                    now_character_data: game_type.Character = cache.character_data[now_character]
+                    if now_character_data.state == constant.CharacterStatus.STATUS_DEAD:
+                        if now_character in character_data.favorability:
+                            dead_character_dict[now_character] = character_data.favorability[
+                                now_character
+                            ]
+                        else:
+                            dead_character_dict[now_character] = 0
                     else:
-                        live_character_dict[now_character] = 0
-            live_character_dict = value_handle.sorted_dict_for_values(live_character_dict)
-            live_character_list = list(live_character_dict.keys())
-            live_character_list.reverse()
-            dead_character_dict = value_handle.sorted_dict_for_values(dead_character_dict)
-            dead_character_list = list(dead_character_dict.keys())
-            dead_character_list.reverse()
-            character_list = live_character_list + dead_character_list
-            if character_data.target_character_id not in scene_data.character_list:
-                character_data.target_character_id = -1
-            if character_data.target_character_id == -1 and character_list:
-                character_data.target_character_id = character_list[0]
-            elif character_data.target_character_id not in {-1, 0} and character_list:
-                if character_data.target_character_id in character_list:
-                    character_list.remove(character_data.target_character_id)
-                    new_character_list = [character_data.target_character_id]
-                    new_character_list.extend(character_list)
-                    character_list = new_character_list
-            character_handle_panel.text_list = character_list
+                        if now_character in character_data.favorability:
+                            live_character_dict[now_character] = character_data.favorability[
+                                now_character
+                            ]
+                        else:
+                            live_character_dict[now_character] = 0
+                live_character_dict = value_handle.sorted_dict_for_values(live_character_dict)
+                live_character_list = list(live_character_dict.keys())
+                live_character_list.reverse()
+                dead_character_dict = value_handle.sorted_dict_for_values(dead_character_dict)
+                dead_character_list = list(dead_character_dict.keys())
+                dead_character_list.reverse()
+                character_list = live_character_list + dead_character_list
+                if character_data.target_character_id not in scene_data.character_list:
+                    character_data.target_character_id = -1
+                if character_data.target_character_id == -1 and character_list:
+                    character_data.target_character_id = character_list[0]
+                elif character_data.target_character_id not in {-1, 0} and character_list:
+                    if character_data.target_character_id in character_list:
+                        character_list.remove(character_data.target_character_id)
+                        new_character_list = [character_data.target_character_id]
+                        new_character_list.extend(character_list)
+                        character_list = new_character_list
+                character_handle_panel.text_list = character_list
             game_time_draw = game_info_panel.GameTimeInfoPanel(self.width / 2)
             game_time_draw.now_draw.width = len(game_time_draw)
             position_text = attr_text.get_scene_path_text(character_data.position)
