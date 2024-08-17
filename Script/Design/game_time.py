@@ -455,9 +455,7 @@ def judge_attend_class_today(character_id: int) -> bool:
             return 1
         if now_week < 5:
             return 1
-    elif (
-        character_id in cache.teacher_phase_table
-        and now_week in cache.teacher_class_week_day_data[character_id]
-    ):
+        return 0
+    elif now_week in cache.teacher_class_week_day_data[character_id]:
         return 1
     return 0

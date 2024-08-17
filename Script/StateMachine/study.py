@@ -73,7 +73,7 @@ def character_teach_lesson(character_id: int):
             end_time = end_value - now_value + 1
             course = timetable.course
             break
-    character_data.behavior.duration = end_time
+    character_data.behavior.duration = min(end_time, 10)
     character_data.behavior.behavior_id = constant.Behavior.TEACHING
     character_data.state = constant.CharacterStatus.STATUS_TEACHING
     character_data.behavior.course_id = course

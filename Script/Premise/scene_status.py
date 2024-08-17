@@ -151,6 +151,10 @@ def handle_in_classroom(character_id: int) -> int:
         identity_data: game_type.StudentIdentity = character_data.identity_data[0]
         if now_scene_str == identity_data.classroom:
             return 1
+    elif 1 in character_data.identity_data:
+        identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
+        if now_scene_str == identity_data.now_classroom:
+            return 1
     return 0
 
 
@@ -591,6 +595,10 @@ def handle_no_in_classroom(character_id: int) -> int:
         identity_data: game_type.StudentIdentity = character_data.identity_data[0]
         if now_scene_str != identity_data.classroom:
             return 1
+    elif 1 in character_data.identity_data:
+        identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
+        if now_scene_str != identity_data.now_classroom:
+            return 1
     return 0
 
 
@@ -716,40 +724,15 @@ def handle_have_students_in_classroom(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.age <= 18:
+    if 1 not in character_data.identity_data:
         return 0
     if character_id not in cache.teacher_school_timetable:
         return 0
-    now_date: datetime.datetime = datetime.datetime.fromtimestamp(
-        character_data.behavior.start_time
-    )
-    now_week = now_date.weekday()
-    now_classroom = []
-    now_time = 0
-    timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
-    now_time_value = now_date.hour * 100 + now_date.minute
-    for timetable in timetable_list:
-        if timetable.week_day != now_week:
-            continue
-        if now_time == 0:
-            if timetable.time >= now_time_value:
-                now_time = timetable.time
-                now_classroom = timetable.class_room
-            elif timetable.end_time >= now_time_value:
-                now_time = timetable.end_time
-                now_classroom = timetable.class_room
-                break
-            continue
-        if timetable.time >= now_time_value and timetable.time < now_time:
-            now_time = timetable.time
-            now_classroom = timetable.class_room
-            continue
-        if timetable.end_time >= now_time_value and timetable.end_time < now_time:
-            now_time = timetable.end_time
-            now_classroom = timetable.class_room
-    now_room_path_str = map_handle.get_map_system_path_str_for_list(now_classroom)
-    now_scene_data: game_type.Scene = cache.scene_data[now_room_path_str]
-    class_data = cache.classroom_students_data[now_room_path_str]
+    identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
+    if identity_data.now_classroom == "" or identity_data.now_classroom == []:
+        return 0
+    now_scene_data: game_type.Scene = cache.scene_data[identity_data.now_classroom]
+    class_data = cache.classroom_students_data[identity_data.now_classroom]
     if len(class_data & now_scene_data.character_list) > 0:
         return 1
     return 0

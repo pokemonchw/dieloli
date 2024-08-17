@@ -483,6 +483,8 @@ def handle_target_sub_small_ache(character_id: int, add_time: int, change_data: 
     if target_data.dead:
         return
     target_data.status.setdefault(23,0)
+    if not target_data.status[23]:
+        return
     now_value = target_data.status[23]
     now_sub_value = (1 + now_value / 100) * add_time
     target_data.status[23] -= now_sub_value
@@ -512,6 +514,8 @@ def handle_target_sub_medium_ache(character_id: int, add_time: int, change_data:
     if target_data.dead:
         return
     target_data.status.setdefault(23,0)
+    if not target_data.status[23]:
+        return
     now_value = target_data.status[23]
     now_sub_value = (1 + now_value / 50) * add_time
     target_data.status[23] -= now_sub_value
@@ -541,6 +545,8 @@ def handle_target_sub_large_ache(character_id: int, add_time: int, change_data: 
     if target_data.dead:
         return
     target_data.status.setdefault(23,0)
+    if not target_data.status[23]:
+        return
     now_value = target_data.status[23]
     now_sub_value = (1 + now_value / 10) * add_time
     target_data.status[23] -= now_sub_value
@@ -654,6 +660,8 @@ def handle_target_sub_small_vertigo(character_id: int, add_time: int, change_dat
     if target_data.dead:
         return
     target_data.status.setdefault(24,0)
+    if not target_data.status[24]:
+        return
     now_value = target_data.status[24]
     now_sub_value = (1 + now_value / 100) * add_time
     target_data.status[24] -= now_sub_value
@@ -683,6 +691,8 @@ def handle_target_sub_medium_vertigo(character_id: int, add_time: int, change_da
     if target_data.dead:
         return
     target_data.status.setdefault(24,0)
+    if not target_data.status[24]:
+        return
     now_value = target_data.status[24]
     now_sub_value = (1 + now_value / 50) * add_time
     target_data.status[24] -= now_sub_value
@@ -712,6 +722,8 @@ def handle_target_sub_large_vertigo(character_id: int, add_time: int, change_dat
     if target_data.dead:
         return
     target_data.status.setdefault(24,0)
+    if not target_data.status[24]:
+        return
     now_value = target_data.status[24]
     now_sub_value = (1 + now_value / 10) * add_time
     target_data.status[24] -= now_sub_value
@@ -720,90 +732,6 @@ def handle_target_sub_large_vertigo(character_id: int, add_time: int, change_dat
     target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
     target_change.status.setdefault(24,0)
     target_change.status[24] -= now_sub_value
-
-
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_SMALL_TIRED)
-def handle_target_add_small_tired(character_id: int, add_time: int, change_data: game_type.CharacterStatusChange, now_time: int):
-    """
-    交互对象增加少量疲惫
-    Keyword arguments:
-    character_id -- 角色id
-    add_time -- 结算时间
-    change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间戳
-    """
-    if not add_time:
-        return
-    character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.dead:
-        return
-    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    if target_data.dead:
-        return
-    target_data.status.setdefault(25,0)
-    now_value = target_data.status[25]
-    now_add_value = (1 + now_value / 100) * add_time / 10
-    target_data.status[25] += now_add_value
-    change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
-    target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
-    target_change.status.setdefault(25,0)
-    target_change.status[25] += now_add_value
-
-
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_MEDIUM_TIRED)
-def handle_target_add_medium_tired(character_id: int, add_time: int, change_data: game_type.CharacterStatusChange, now_time: int):
-    """
-    交互对象增加中量疲惫
-    Keyword arguments:
-    character_id -- 角色id
-    add_time -- 结算时间
-    change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间戳
-    """
-    if not add_time:
-        return
-    character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.dead:
-        return
-    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    if target_data.dead:
-        return
-    target_data.status.setdefault(25,0)
-    now_value = target_data.status[25]
-    now_add_value = (1 + now_value / 50) * add_time / 10
-    target_data.status[25] += now_add_value
-    change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
-    target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
-    target_change.status.setdefault(25,0)
-    target_change.status[25] += now_add_value
-
-
-@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_ADD_LARGE_TIRED)
-def handle_target_add_large_tired(character_id: int, add_time: int, change_data: game_type.CharacterStatusChange, now_time: int):
-    """
-    交互对象增加大量疲惫
-    Keyword arguments:
-    character_id -- 角色id
-    add_time -- 结算时间
-    change_data -- 状态变更信息记录对象
-    now_time -- 结算的时间戳
-    """
-    if not add_time:
-        return
-    character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.dead:
-        return
-    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    if target_data.dead:
-        return
-    target_data.status.setdefault(25,0)
-    now_value = target_data.status[25]
-    now_add_value = (1 + now_value / 10) * add_time / 10
-    target_data.status[25] += now_add_value
-    change_data.target_change.setdefault(target_data.cid, game_type.TargetChange())
-    target_change: game_type.TargetChange = change_data.target_change[target_data.cid]
-    target_change.status.setdefault(25,0)
-    target_change.status[25] += now_add_value
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_SUB_SMALL_TIRED)
@@ -825,6 +753,8 @@ def handle_target_sub_small_tired(character_id: int, add_time: int, change_data:
     if target_data.dead:
         return
     target_data.status.setdefault(25,0)
+    if not target_data.status[25]:
+        return
     now_value = target_data.status[25]
     now_sub_value = (1 + now_value / 100) * add_time / 10
     target_data.status[25] -= now_sub_value
@@ -854,6 +784,8 @@ def handle_target_sub_medium_tired(character_id: int, add_time: int, change_data
     if target_data.dead:
         return
     target_data.status.setdefault(25,0)
+    if not target_data.status[25]:
+        return
     now_value = target_data.status[25]
     now_sub_value = (1 + now_value / 50) * add_time / 10
     target_data.status[25] -= now_sub_value
@@ -883,6 +815,8 @@ def handle_target_sub_large_tired(character_id: int, add_time: int, change_data:
     if target_data.dead:
         return
     target_data.status.setdefault(25,0)
+    if not target_data.status[25]:
+        return
     now_value = target_data.status[25]
     now_sub_value = (1 + now_value / 10) * add_time / 10
     target_data.status[25] -= now_sub_value
@@ -996,6 +930,8 @@ def handle_target_sub_small_intoxicated(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(26,0)
+    if not target_data.status[26]:
+        return
     now_value = target_data.status[26]
     now_sub_value = (1 + now_value / 100) * add_time
     target_data.status[26] -= now_sub_value
@@ -1025,6 +961,8 @@ def handle_target_sub_medium_intoxicated(character_id: int, add_time: int, chang
     if target_data.dead:
         return
     target_data.status.setdefault(26,0)
+    if not target_data.status[26]:
+        return
     now_value = target_data.status[26]
     now_sub_value = (1 + now_value / 50) * add_time
     target_data.status[26] -= now_sub_value
@@ -1054,6 +992,8 @@ def handle_target_sub_large_intoxicated(character_id: int, add_time: int, change
     if target_data.dead:
         return
     target_data.status.setdefault(26,0)
+    if not target_data.status[26]:
+        return
     now_value = target_data.status[26]
     now_sub_value = (1 + now_value / 10) * add_time
     target_data.status[26] -= now_sub_value

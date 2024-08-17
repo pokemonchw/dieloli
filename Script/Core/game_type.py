@@ -31,6 +31,15 @@ class WFrameMouse:
     w_frame_skip_wait_mouse: int = 0
     """ 跳过等待输入后继续输出文本 """
 
+class InScenePanelSwitch:
+    """ 场景中各面板显示开关 """
+
+    stature_switch: bool = True
+    """ 身材信息开关 """
+    clothing_switch: bool = True
+    """ 穿着信息开关 """
+    status_switch: bool = True
+    """ 状态信息开关 """
 
 class NpcTem:
     """npc模板用结构体对象"""
@@ -677,8 +686,6 @@ class Cache:
         各班级各老师上课时间表
         周几:学校id:年级id:上课时间:教师id:教室id:科目
         """
-        self.teacher_phase_table: Dict[int, int] = {}
-        """ 各老师所在年级 {角色id:年级} """
         self.teacher_class_time_data: Dict[int, Dict[int, Dict[int, Dict[str, int]]]] = {}
         """ 各老师每天上课时间数据 {角色id:{星期:{课时:班级:科目}}} """
         self.classroom_students_data: Dict[str, Set[int]] = {}
@@ -747,12 +754,12 @@ class Cache:
         """ 没有角色的空场景集合 """
         self.all_club_data: Dict[str, ClubData] = {}
         """ 全部社团数据结构体 """
-        self.club_create_judge: bool = False
-        """ 是否正在生成社团(验证技能经验时的临时状态，生成社团时，对角色的技能等级判断，经验要求减半) """
         self.student_character_set: Set = set()
         """ 学生身份角色集合 """
         self.teacher_character_set: Set = set()
         """ 教师身份角色集合 """
+        self.in_scene_panel_switch: InScenePanelSwitch = InScenePanelSwitch()
+        """ 场景中各面板显示开关 """
 
 
 class TargetChange:

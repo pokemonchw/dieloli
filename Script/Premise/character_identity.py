@@ -29,8 +29,8 @@ def handle_is_student(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    character_data = cache.character_data[character_id]
-    if character_data.age <= 18:
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 0 in character_data.identity_data:
         return 1
     return 0
 
@@ -44,7 +44,8 @@ def handle_is_teacher(character_id: int) -> int:
     Return arguments:
     int -- 权重
     """
-    if character_id in cache.teacher_school_timetable:
+    character_data: game_type.Character = cache.character_data[character_id]
+    if 1 in character_data.identity_data:
         return 1
     return 0
 

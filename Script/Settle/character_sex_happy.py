@@ -100,6 +100,8 @@ def handle_sub_small_mouth_happy(character_id: int, add_time: int, change_data: 
         return
     character_data.status.setdefault(0,0)
     character_data.sex_experience.setdefault(0,0)
+    if not character_data.status[0]:
+        return
     character_happy = add_time
     character_happy *= 1 + attr_calculation.get_experience_level_weight(character_data.sex_experience[0]) + character_data.status[0] / 100
     character_data.status[0] -= character_happy
@@ -122,6 +124,8 @@ def handle_sub_medium_mouth_happy(character_id: int, add_time: int, change_data:
         return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
+        return
+    if not character_data.status[0]:
         return
     character_data.status.setdefault(0,0)
     character_data.sex_experience.setdefault(0,0)
@@ -147,6 +151,8 @@ def handle_sub_large_mouth_happy(character_id: int, add_time: int, change_data: 
         return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
+        return
+    if not character_data.status[0]:
         return
     character_data.status.setdefault(0,0)
     character_data.sex_experience.setdefault(0,0)
@@ -245,6 +251,8 @@ def handle_sub_small_chest_happy(character_id: int, add_time: int, change_data: 
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[1]:
+        return
     character_data.status.setdefault(1,0)
     character_data.sex_experience.setdefault(1,0)
     character_happy = add_time
@@ -270,6 +278,8 @@ def handle_sub_medium_chest_happy(character_id: int, add_time: int, change_data:
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[1]:
+        return
     character_data.status.setdefault(1,0)
     character_data.sex_experience.setdefault(1,0)
     character_happy = add_time
@@ -294,6 +304,8 @@ def handle_sub_large_chest_happy(character_id: int, add_time: int, change_data: 
         return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
+        return
+    if not character_data.status[1]:
         return
     character_data.status.setdefault(1,0)
     character_data.sex_experience.setdefault(1,0)
@@ -392,6 +404,8 @@ def handle_sub_small_vagina_happy(character_id: int, add_time: int, change_data:
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[2]:
+        return
     character_data.status.setdefault(2,0)
     character_data.sex_experience.setdefault(4,0)
     character_happy = add_time
@@ -417,6 +431,8 @@ def handle_sub_medium_vagina_happy(character_id: int, add_time: int, change_data
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[2]:
+        return
     character_data.status.setdefault(2,0)
     character_data.sex_experience.setdefault(4,0)
     character_happy = add_time
@@ -441,6 +457,8 @@ def handle_sub_large_vagina_happy(character_id: int, add_time: int, change_data:
         return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
+        return
+    if not character_data.status[2]:
         return
     character_data.status.setdefault(2,0)
     character_data.sex_experience.setdefault(4,0)
@@ -539,6 +557,8 @@ def handle_sub_small_clitoris_happy(character_id: int, add_time: int, change_dat
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[3]:
+        return
     character_data.status.setdefault(3,0)
     character_data.sex_experience.setdefault(2,0)
     character_happy = add_time
@@ -564,6 +584,8 @@ def handle_sub_medium_clitoris_happy(character_id: int, add_time: int, change_da
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[3]:
+        return
     character_data.status.setdefault(3,0)
     character_data.sex_experience.setdefault(2,0)
     character_happy = add_time
@@ -588,6 +610,8 @@ def handle_sub_large_clitoris_happy(character_id: int, add_time: int, change_dat
         return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
+        return
+    if not character_data.status[3]:
         return
     character_data.status.setdefault(3,0)
     character_data.sex_experience.setdefault(2,0)
@@ -686,6 +710,8 @@ def handle_sub_small_anus_happy(character_id: int, add_time: int, change_data: g
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[4]:
+        return
     character_data.status.setdefault(4,0)
     character_data.sex_experience.setdefault(5,0)
     character_happy = add_time
@@ -711,6 +737,8 @@ def handle_sub_medium_anus_happy(character_id: int, add_time: int, change_data: 
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[4]:
+        return
     character_data.status.setdefault(4,0)
     character_data.sex_experience.setdefault(5,0)
     character_happy = add_time
@@ -735,6 +763,8 @@ def handle_sub_large_anus_happy(character_id: int, add_time: int, change_data: g
         return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
+        return
+    if not character_data.status[4]:
         return
     character_data.status.setdefault(4,0)
     character_data.sex_experience.setdefault(5,0)
@@ -833,6 +863,8 @@ def handle_sub_small_penis_happy(character_id: int, add_time: int, change_data: 
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[5]:
+        return
     character_data.status.setdefault(5,0)
     character_data.sex_experience.setdefault(3,0)
     character_happy = add_time
@@ -858,6 +890,8 @@ def handle_sub_medium_penis_happy(character_id: int, add_time: int, change_data:
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         return
+    if not character_data.status[5]:
+        return
     character_data.status.setdefault(5,0)
     character_data.sex_experience.setdefault(3,0)
     character_happy = add_time
@@ -882,6 +916,8 @@ def handle_sub_large_penis_happy(character_id: int, add_time: int, change_data: 
         return
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
+        return
+    if not character_data.status[5]:
         return
     character_data.status.setdefault(5,0)
     character_data.sex_experience.setdefault(3,0)

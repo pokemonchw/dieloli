@@ -167,7 +167,7 @@ def judge_character_in_class_time(character_id: int) -> (bool, int, int, int, in
         now_time = datetime.datetime.fromtimestamp(now_time, game_time.time_zone)
     now_time_value = now_time.hour * 100 + now_time.minute
     now_week = now_time.weekday()
-    if character_data.age <= 18:
+    if 0 in character_data.identity_data:
         school_id = 0
         if character_data.age in range(13, 16):
             school_id = 1

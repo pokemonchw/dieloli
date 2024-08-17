@@ -28,6 +28,8 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
     now_character_data: game_type.Character = cache.character_data[character_id]
     status_data = game_type.CharacterStatusChange()
     start_time = now_character_data.behavior.start_time
+    if now_time > start_time + now_character_data.behavior.duration * 60:
+        now_time = start_time + now_character_data.behavior.duration * 60
     add_time = int((now_time - start_time) / 60)
     event_data: game_type.Event = game_config.config_event[event_id]
     for settle in event_data.settle:
@@ -66,74 +68,78 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
         now_judge = 1
     if now_judge:
         now_text_list = []
-        self_draw_judge = 0
         if status_data.hit_point and round(status_data.hit_point, 2) != 0:
             now_text_list.append(
                 _("健康:") + text_handle.number_to_symbol_string(round(status_data.hit_point, 2))
             )
-            self_draw_judge = 1
         if status_data.mana_point and round(status_data.mana_point, 2) != 0:
             now_text_list.append(
                 _("体力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
             )
-            self_draw_judge = 1
+        if len(now_text_list):
+            if len(now_text_list) % 4:
+                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
         if status_data.status:
-            now_text_list.extend(
-                [
-                    f"{game_config.config_character_state[i].name}:{attr_text.get_value_text(status_data.status[i])}"
-                    for i in status_data.status
-                ]
-            )
-            self_draw_judge = 1
+            now_list = [f"{game_config.config_character_state[i].name}:{attr_text.get_value_text(status_data.status[i])}" for i in status_data.status if round(status_data.status[i], 2)]
+            if now_list:
+                now_text_list.extend([_("状态变化:"), "", "", ""])
+                now_text_list.extend(now_list)
+        if len(now_text_list):
+            if len(now_text_list) % 4:
+                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
         if status_data.knowledge:
-            now_text_list.extend(
-                [
-                    f"{game_config.config_knowledge[i].name}:{attr_text.get_value_text(status_data.knowledge[i])}"
-                    for i in status_data.knowledge
-                ]
-            )
-            self_draw_judge = 1
+            now_list = [f"{game_config.config_knowledge[i].name}:{attr_text.get_value_text(status_data.knowledge[i])}" for i in status_data.knowledge if round(status_data.knowledge[i], 2)]
+            if len(now_list):
+                now_text_list.extend([_("增加技能经验:"), "", "", ""])
+                now_text_list.extend(now_list)
+        if len(now_text_list):
+            if len(now_text_list) % 4:
+                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
         if status_data.language:
-            now_text_list.extend(
-                [
-                    f"{game_config.config_language[i].name}:{attr_text.get_value_text(status_data.language[i])}"
-                    for i in status_data.language
-                ]
-            )
-            self_draw_judge = 1
+            now_list = [f"{game_config.config_language[i].name}:{attr_text.get_value_text(status_data.language[i])}" for i in status_data.language if round(status_data.language[i], 2)]
+            if len(now_list):
+                now_text_list.extend([_("增加语言经验:"), "", "", ""])
+                now_text_list.extend(now_list)
+        if len(now_text_list):
+            if len(now_text_list) % 4:
+                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
         if status_data.sex_experience:
-            now_text_list.extend(
-                [
-                    game_config.config_organ[i].name
-                    + _("经验:")
-                    + text_handle.number_to_symbol_string(round(status_data.sex_experience[i], 2))
-                    for i in status_data.sex_experience
-                ]
-            )
-            self_draw_judge = 1
+            now_list = [
+                f"{game_config.config_organ[i].name}" + _("经验:") + text_handle.number_to_symbol_string(round(status_data.sex_experience[i], 2))
+                for i in status_data.sex_experience if round(status_data.sex_experience[i], 2)
+            ]
+            if len(now_list):
+                now_text_list.extend([_("增加性经验:"), "", "", ""])
+                now_text_list.extend(now_list)
+        if len(now_text_list):
+            if len(now_text_list) % 4:
+                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
         if status_data.wear:
-            now_text = _("\n穿上了:")
+            now_text_list.extend([_("穿上了:"), "", "", ""])
             for clothing in status_data.wear.values():
                 clothing_config = game_config.config_clothing_tem[clothing.tem_id]
                 value_list = [clothing.sweet,clothing.sexy,clothing.handsome,clothing.fresh,clothing.elegant,clothing.cleanliness,clothing.warm]
                 describe_id = value_list.index(max(value_list))
                 describe = describe_list[describe_id]
                 clothing_name = f"[{clothing.evaluation}{describe}{clothing_config.name}]"
-                now_text += clothing_name
-            now_text_list.append(now_text)
-            self_draw_judge = 1
+                now_text_list.append(clothing_name)
+        if len(now_text_list):
+            if len(now_text_list) % 4:
+                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
         if status_data.undress:
-            now_text = _("\n脱下了:")
+            now_text_list.extend([_("脱下了:"), "", "", ""])
             for clothing in status_data.undress.values():
                 clothing_config = game_config.config_clothing_tem[clothing.tem_id]
                 value_list = [clothing.sweet,clothing.sexy,clothing.handsome,clothing.fresh,clothing.elegant,clothing.cleanliness,clothing.warm]
                 describe_id = value_list.index(max(value_list))
                 describe = describe_list[describe_id]
                 clothing_name = f"[{clothing.evaluation}{describe}{clothing_config.name}]"
-                now_text += clothing_name
-            now_text_list.append(now_text)
-            self_draw_judge = 1
+                now_text_list.append(clothing_name)
+        if len(now_text_list):
+            if len(now_text_list) % 4:
+                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
         if status_data.target_change:
+            now_text_list.extend([_("互动目标变化:"), "", "", ""])
             for target_character_id in status_data.target_change:
                 if character_id and target_character_id:
                     continue
@@ -141,49 +147,33 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                     target_character_id
                 ]
                 target_data: game_type.Character = cache.character_data[target_character_id]
-                now_text = f"\n{target_data.name}:"
-                judge = 0
+                now_text_list.extend(["-", "-", "-", "-"])
+                now_text_list.extend([target_data.name, "", "", ""])
                 if target_change.favorability:
-                    now_text += _(" 对{character_name}好感").format(
-                        character_name=now_character_data.name
-                    ) + text_handle.number_to_symbol_string(round(target_change.favorability, 2))
-                    judge = 1
+                    favorability_text = _("好感:") + text_handle.number_to_symbol_string(round(target_change.favorability, 2))
+                    now_text_list.extend([favorability_text, "", "", ""])
                 if target_change.new_social != target_change.old_social:
-                    now_text += (
-                        " "
-                        + game_config.config_social_type[target_change.old_social].name
-                        + "->"
-                        + game_config.config_social_type[target_change.new_social].name
-                    )
-                    judge = 1
+                    now_text = game_config.config_social_type[target_change.old_social].name + "->" + game_config.config_social_type[target_change.new_social].name
+                    now_text_list.extend([now_text, "", "", ""])
                 if target_change.status:
-                    for status_id in target_change.status:
-                        if target_change.status[status_id]:
-                            now_text += (
-                                " "
-                                + game_config.config_character_state[status_id].name
-                                + text_handle.number_to_symbol_string(
-                                    round(target_change.status[status_id], 2)
-                                )
-                            )
-                            judge = 1
+                    now_list = [f"{game_config.config_character_state[i].name}:{attr_text.get_value_text(target_change.status[i])}" for i in target_change.status if round(target_change.status[i], 2)]
+                    if now_list:
+                        now_text_list.extend([_("状态变化:"), "", "", ""])
+                        now_text_list.extend(now_list)
+                if len(now_text_list):
+                    if len(now_text_list) % 4:
+                        now_text_list.extend([""] * (4 - len(now_text_list) % 4))
                 if target_change.sex_experience:
-                    for organ in target_change.sex_experience:
-                        if target_change.sex_experience[organ]:
-                            now_text += (
-                                " "
-                                + game_config.config_organ[organ].name
-                                + _("经验:")
-                                + text_handle.number_to_symbol_string(
-                                    round(target_change.sex_experience[organ], 2)
-                                )
-                            )
-                            judge = 1
-                if judge:
-                    now_text_list.append(now_text)
+                    now_list = [
+                        f"{game_config.config_organ[i].name}" + _("经验:") + text_handle.number_to_symbol_string(round(target_change.sex_experience[i], 2))
+                        for i in target_change.sex_experience if round(target_change.sex_experience[i], 2)
+                    ]
+                    if len(now_list):
+                        now_text_list.extend([_("增加性经验:"), "", "", ""])
+                        now_text_list.extend(now_list)
         now_panel = panel.LeftDrawTextListWaitPanel()
-        now_panel.set(now_text_list, width, 8)
-        return now_panel, self_draw_judge
+        now_panel.set(now_text_list, width, 4)
+        return now_panel, len(now_text_list)
 
 
 def add_settle_behavior_effect(behavior_effect_id: int):

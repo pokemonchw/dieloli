@@ -121,6 +121,7 @@ class DataList(QListWidget):
             target.premise[premise] = old_target.premise[premise]
         for effect in old_target.effect:
             target.effect[effect] = old_target.effect[effect]
+        target.needs_hierarchy = old_target.needs_hierarchy
         target.text = old_target.text + "(复制)"
         cache_control.now_target_data[target.uid] = target
         self.insertItem(target_index + 1, new_item)

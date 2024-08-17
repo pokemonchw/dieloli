@@ -9,14 +9,9 @@ import datetime
 from Script.Core import cache_control, game_type, value_handle, get_text
 from Script.Design import character_handle, constant, game_time, settle_behavior, handle_premise, event, cooking, map_handle
 from Script.Config import game_config, normal_config
-from Script.UI.Moudle import draw
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
-_: FunctionType = get_text._
-""" 翻译api """
-window_width: int = normal_config.config_normal.text_width
-""" 窗体宽度 """
 handle_thread_pool: ThreadPoolExecutor = ThreadPoolExecutor(max_workers=50)
 """ 处理角色行为的线程池 """
 
@@ -28,37 +23,40 @@ def init_character_behavior():
     global time_index
     cache.character_target_data = {}
     cache.character_target_score_data = {}
-    while 1:
-        now_status_data = {}
-        now_status_data[0] = set()
-        now_status_data[1] = set()
-        now_status_data[2] = set()
-        for i in cache.character_data:
-            if not i:
-                continue
-            now_judge = check_character_status_judge(i)
-            now_status_data[now_judge].add(i)
-        for i in cache.character_data:
-            cache.character_data[i].premise_data = {}
-            if not i:
-                continue
-            status = check_character_status_judge(i)
-            now_status_data[status].add(i)
-        if len(now_status_data[1]) == len(cache.character_data) - 1:
-            break
-        now_list = [character_target_judge(i) for i in now_status_data[0]]
-        for result in now_list:
-            run_character_target(result)
-        for i in now_status_data[2]:
-            judge_character_status(i, cache.game_time)
-        for i in cache.character_data:
-            if not i:
-                continue
-            judge_character_dead(i)
-        refresh_teacher_classroom()
+    update_cafeteria()
+    now_status_data = {}
+    now_status_data[0] = set()
+    now_status_data[1] = set()
+    now_status_data[2] = set()
+    for i in cache.character_data:
+        if not i:
+            continue
+        now_judge = check_character_status_judge(i)
+        now_status_data[now_judge].add(i)
+        now_character_data = cache.character_data[i]
+    for i in cache.character_data:
+        cache.character_data[i].premise_data = {}
+        if not i:
+            continue
+        status = check_character_status_judge(i)
+        now_status_data[status].add(i)
+    if len(now_status_data[1]) == len(cache.character_data) - 1:
+        return
+    now_list = [character_target_judge(i) for i in now_status_data[0]]
+    for result in now_list:
+        run_character_target(result)
+    for i in now_status_data[2]:
+        judge_character_status(i, cache.game_time)
+    for i in cache.character_data:
+        if not i:
+            continue
+        judge_character_dead(i)
+    refresh_teacher_classroom()
     time_index = 0
-    judge_character_status(0, cache.game_time)
-    judge_character_dead(0)
+    player_data: game_type.Character = cache.character_data[0]
+    if cache.game_time >= player_data.behavior.start_time + 60 * player_data.behavior.duration:
+        judge_character_status(0, cache.game_time)
+        judge_character_dead(0)
 
 
 def check_character_status_judge(character_id: int) -> int:
@@ -77,9 +75,7 @@ def check_character_status_judge(character_id: int) -> int:
     if character_data.state == constant.CharacterStatus.STATUS_ARDER:
         if character_data.behavior.start_time == 0:
             character_data.behavior.start_time = cache.game_time
-        if character_data.behavior.start_time < cache.game_time:
-            return 0
-        return 1
+        return 0
     # 当行动所需时间为0时立刻进行结算
     if character_data.behavior.duration == 0:
         return 2
@@ -144,17 +140,11 @@ def run_character_target(target: game_type.ExecuteTarget):
         target_config = game_config.config_target[target.uid]
         character_data.ai_target = target.affiliation
         constant.handle_state_machine_data[target_config.state_machine_id](character_id)
-        event_draw = event.handle_event(character_id, 1)
-        if (not character_id) or (player_data.target_character_id == character_id):
-            if event_draw is not None:
-                event_draw.draw()
+        event.handle_event(character_id, 1, now_time, now_time)
         cache.character_target_data[target.character_id] = target
-    else:
-        cache.character_data[character_id].behavior.start_time += 60
     start_time = cache.character_data[character_id].behavior.start_time
     now_judge = game_time.judge_date_big_or_small(start_time, now_time)
     if now_judge:
-        cache.over_behavior_character.add(character_id)
         character_data.ai_target = 0
 
 
@@ -167,31 +157,27 @@ def judge_character_dead(character_id: int):
     character_data: game_type.Character = cache.character_data[character_id]
     if character_data.dead:
         character_data.state = 13
-        if character_id not in cache.over_behavior_character:
-            cache.over_behavior_character.add(character_id)
         return
     if character_data.state == 13:
         character_data.dead = 1
-        if character_id not in cache.over_behavior_character:
-            cache.over_behavior_character.add(character_id)
         return
     character_data.status.setdefault(27, 0)
     character_data.status.setdefault(28, 0)
     dead_judge = 0
     while 1:
-        if character_data.status[27] >= 100:
+        if character_data.status[27] >= 100: # 饿死
             dead_judge = 1
             character_data.cause_of_death = 0
             break
-        if character_data.status[27] >= 100:
+        if character_data.status[28] >= 100: # 渴死
             dead_judge = 1
             character_data.cause_of_death = 1
             break
-        if character_data.hit_point <= 0:
+        if character_data.hit_point <= 0: # 累死
             dead_judge = 1
             character_data.cause_of_death = 2
             break
-        if character_data.extreme_exhaustion_time:
+        if character_data.extreme_exhaustion_time: # 困死
             exhaustion_time = (cache.game_time - character_data.extreme_exhaustion_time) / 60
             sudden_death_probability = exhaustion_time * (100 / 8640)
             sudden_death_probability = max(sudden_death_probability, 100 / 8640)
@@ -203,8 +189,6 @@ def judge_character_dead(character_id: int):
     if dead_judge:
         character_data.dead = 1
         character_data.state = 13
-        if character_id not in cache.over_behavior_character:
-            cache.over_behavior_character.add(character_id)
 
 
 def judge_character_status(character_id: int, now_time: int) -> int:
@@ -224,71 +208,33 @@ def judge_character_status(character_id: int, now_time: int) -> int:
     add_time = (end_time - start_time) / 60
     if not add_time:
         character_data.behavior = game_type.Behavior()
-        character_data.behavior.start_time = end_time
+        character_data.behavior.start_time = now_time
         character_data.state = constant.CharacterStatus.STATUS_ARDER
         return 1
     # 增加饥饿和口渴
-    if end_time < now_time:
-        now_time = end_time
     last_hunger_time = start_time
     if character_data.last_hunger_time:
         last_hunger_time = character_data.last_hunger_time
-    hunger_time = int((now_time - last_hunger_time) / 60)
     character_data.status.setdefault(27, 0)
     character_data.status.setdefault(28, 0)
-    character_data.status[27] += hunger_time * 0.02
-    character_data.status[28] += hunger_time * 0.02
+    character_data.status[27] += 0.02 * (now_time - last_hunger_time) / 60
+    character_data.status[28] += 0.02 * (now_time - last_hunger_time) / 60
     character_data.last_hunger_time = now_time
     # 增加疲惫
     if character_data.state != constant.CharacterStatus.STATUS_SLEEP:
         character_data.status.setdefault(25, 0)
-        character_data.status[25] += add_time * 0.0694
+        character_data.status[25] += 0.0694 * add_time
         if character_data.status[25] >= 100:
             if character_data.extreme_exhaustion_time == 0:
                 character_data.extreme_exhaustion_time = cache.game_time
         else:
             if character_data.extreme_exhaustion_time != 0:
                 character_data.extreme_exhaustion_time = 0
-    player_data: game_type.Character = cache.character_data[0]
-    line_feed = draw.NormalDraw()
-    line_feed.text = "\n"
-    while 1:
-        character_data.behavior.temporary_status = game_type.TemporaryStatus()
-        event_draw = event.handle_event(character_id, 0)
-        if event_draw == None:
-            character_data.behavior.temporary_status = game_type.TemporaryStatus()
-            character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
-            character_data.ai_target = 0
-            character_data.behavior.move_target = []
-            character_data.behavior.move_src = []
-            character_data.behavior.start_time = now_time
-            character_data.state = constant.CharacterStatus.STATUS_ARDER
-            break
-        settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, event_draw.event_id)
-        character_data.behavior.temporary_status = game_type.TemporaryStatus()
-        character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
-        character_data.behavior.move_target = []
-        character_data.behavior.move_src = []
+    character_data.behavior.temporary_status = game_type.TemporaryStatus()
+    if cache.game_time >= end_time:
+        event.handle_event(character_id, 0,start_time, end_time)
         character_data.behavior.start_time = now_time
-        character_data.state = constant.CharacterStatus.STATUS_ARDER
-        character_data.ai_target = 0
-        climax_draw = settlement_pleasant_sensation(character_id)
-        if (not character_id) or (player_data.target_character_id == character_id):
-            if event_draw.text != "":
-                event_draw.draw()
-            if settle_output is not None:
-                if settle_output[1]:
-                    name_draw = draw.NormalDraw()
-                    name_draw.text = "\n" + character_data.name + ": "
-                    name_draw.width = window_width
-                    name_draw.draw()
-                settle_output[0].draw()
-                line_feed.draw()
-            if climax_draw is not None:
-                if not character_id or not character_data.target_character_id:
-                    climax_draw.draw()
-                    line_feed.draw()
-        break
+        character_data.behavior.duration = 0
 
 
 def refresh_teacher_classroom():
@@ -311,7 +257,7 @@ def refresh_teacher_classroom():
                 continue
             if now_time_value < timetable.time - 9:
                 continue
-            if now_time > timetable.end_time:
+            if now_time_value > timetable.end_time:
                 continue
             time_judge = False
             identity_data.now_classroom = map_handle.get_map_system_path_str_for_list(timetable.class_room)
@@ -455,96 +401,23 @@ def search_target(
     return None, 0, 0
 
 
-def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
-    """
-    结算角色快感
-    Keyword arguments:
-    character_id -- 角色id
-    Return arguments:
-    draw.NormalDraw -- 高潮结算绘制文本
-    """
-    character_data: game_type.Character = cache.character_data[character_id]
-    behavior_data: game_type.Behavior = character_data.behavior
-    climax_data: Dict[int, Set] = {1: set(), 2: set()}
-    for organ in character_data.sex_experience:
-        organ_config = game_config.config_organ[organ]
-        status_id = organ_config.status_id
-        if status_id in character_data.status:
-            if character_data.status[status_id] >= 1000:
-                now_level = 1
-                if character_data.status[status_id] >= 10000:
-                    now_level = 2
-                if status_id == 0:
-                    behavior_data.temporary_status.mouth_climax = now_level
-                elif status_id == 1:
-                    behavior_data.temporary_status.chest_climax = now_level
-                elif status_id == 2:
-                    behavior_data.temporary_status.vagina_climax = now_level
-                elif status_id == 3:
-                    behavior_data.temporary_status.clitoris_climax = now_level
-                elif status_id == 4:
-                    behavior_data.temporary_status.anus_climax = now_level
-                elif status_id == 5:
-                    behavior_data.temporary_status.penis_climax = now_level
-                if now_level == 1:
-                    character_data.status[21] *= 0.5
-                elif now_level == 2:
-                    character_data.status[21] *= 0.8
-                character_data.status[21] = max(character_data.status[21], 0)
-                character_data.status[status_id] = 0
-                climax_data[now_level].add(organ)
-                if now_level == 1:
-                    character_data.sex_experience[organ] *= 1.01
-                else:
-                    character_data.sex_experience[organ] *= 1.1
-    low_climax_text = ""
-    for organ in climax_data[1]:
-        organ_config = game_config.config_organ[organ]
-        if not low_climax_text:
-            low_climax_text += organ_config.name
-        else:
-            low_climax_text += "+" + organ_config.name
-    if low_climax_text:
-        low_climax_text += _("绝顶")
-    hight_climax_text = ""
-    for organ in climax_data[2]:
-        organ_config = game_config.config_organ[organ]
-        if not hight_climax_text:
-            hight_climax_text += organ_config.name
-        else:
-            hight_climax_text += "+" + organ_config.name
-    if hight_climax_text:
-        hight_climax_text += _("强绝顶")
-    draw_list = []
-    if low_climax_text:
-        draw_list.append(low_climax_text)
-    if hight_climax_text:
-        draw_list.append(hight_climax_text)
-    if draw_list:
-        draw_list.insert(0, character_data.name + ":")
-        draw_text = ""
-        for i in range(len(draw_list)):
-            if i:
-                draw_text += " " + draw_list[i]
-            else:
-                draw_text += draw_list[i]
-        now_draw = draw.NormalDraw()
-        now_draw.text = draw_text
-        now_draw.width = window_width
-        return now_draw
-    return None
-
-
 def update_cafeteria():
     """刷新食堂内食物"""
     food_judge = 1
-    for food_type in cache.restaurant_data:
-        food_list: Dict[UUID, game_type.Food] = cache.restaurant_data[food_type]
-        for food_id in food_list:
-            food: game_type.Food = food_list[food_id]
-            if food.eat:
-                food_judge = 0
-            break
-        if not food_judge:
-            break
+    game_time_object = datetime.datetime.fromtimestamp(cache.game_time)
+    if game_time_object.hour not in {12, 13, 18, 19}:
+        if cache.restaurant_data != {}:
+            cache.restaurant_data = {}
+    else:
+        for food_type in cache.restaurant_data:
+            food_list: Dict[UUID, game_type.Food] = cache.restaurant_data[food_type]
+            for food_id in food_list:
+                food: game_type.Food = food_list[food_id]
+                if food.eat:
+                    food_judge = 0
+                break
+            if not food_judge:
+                break
+        if food_judge:
+            cooking.init_restaurant_data()
 

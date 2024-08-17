@@ -90,6 +90,8 @@ def handle_sub_small_happy(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(8,0)
+    if not character_data.status[8]:
+        return
     now_value = character_data.status[8]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[8] -= now_sub_value
@@ -114,6 +116,8 @@ def handle_sub_medium_happy(character_id: int, add_time: int, change_data: game_
     if character_data.dead:
         return
     character_data.status.setdefault(8,0)
+    if not character_data.status[8]:
+        return
     now_value = character_data.status[8]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[8] -= now_sub_value
@@ -138,6 +142,8 @@ def handle_sub_large_happy(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(8,0)
+    if not character_data.status[8]:
+        return
     now_value = character_data.status[8]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[8] -= now_sub_value
@@ -231,6 +237,8 @@ def handle_sub_small_pain(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(9,0)
+    if not character_data.status[9]:
+        return
     now_value = character_data.status[9]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[9] -= now_sub_value
@@ -255,6 +263,8 @@ def handle_sub_medium_pain(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(9,0)
+    if not character_data.status[9]:
+        return
     now_value = character_data.status[9]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[9] -= now_sub_value
@@ -279,6 +289,8 @@ def handle_sub_large_pain(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(9,0)
+    if not character_data.status[9]:
+        return
     now_value = character_data.status[9]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[9] -= now_sub_value
@@ -372,6 +384,8 @@ def handle_sub_small_yearn(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(10,0)
+    if not character_data.status[10]:
+        return
     now_value = character_data.status[10]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[10] -= now_sub_value
@@ -396,6 +410,8 @@ def handle_sub_medium_yearn(character_id: int, add_time: int, change_data: game_
     if character_data.dead:
         return
     character_data.status.setdefault(10,0)
+    if not character_data.status[10]:
+        return
     now_value = character_data.status[10]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[10] -= now_sub_value
@@ -420,6 +436,8 @@ def handle_sub_large_yearn(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(10,0)
+    if not character_data.status[10]:
+        return
     now_value = character_data.status[10]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[10] -= now_sub_value
@@ -513,6 +531,8 @@ def handle_sub_small_fear(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(11,0)
+    if not character_data.status[11]:
+        return
     now_value = character_data.status[11]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[11] -= now_sub_value
@@ -537,6 +557,8 @@ def handle_sub_medium_fear(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(11,0)
+    if not character_data.status[11]:
+        return
     now_value = character_data.status[11]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[11] -= now_sub_value
@@ -561,6 +583,8 @@ def handle_sub_large_fear(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(11,0)
+    if not character_data.status[11]:
+        return
     now_value = character_data.status[11]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[11] -= now_sub_value
@@ -654,6 +678,8 @@ def handle_sub_small_antipathy(character_id: int, add_time: int, change_data: ga
     if character_data.dead:
         return
     character_data.status.setdefault(12,0)
+    if not character_data.status[12]:
+        return
     now_value = character_data.status[12]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[12] -= now_sub_value
@@ -678,6 +704,8 @@ def handle_sub_medium_antipathy(character_id: int, add_time: int, change_data: g
     if character_data.dead:
         return
     character_data.status.setdefault(12,0)
+    if not character_data.status[12]:
+        return
     now_value = character_data.status[12]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[12] -= now_sub_value
@@ -702,6 +730,8 @@ def handle_sub_large_antipathy(character_id: int, add_time: int, change_data: ga
     if character_data.dead:
         return
     character_data.status.setdefault(12,0)
+    if not character_data.status[12]:
+        return
     now_value = character_data.status[12]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[12] -= now_sub_value
@@ -795,6 +825,8 @@ def handle_sub_small_shame(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(13,0)
+    if not character_data.status[13]:
+        return
     now_value = character_data.status[13]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[13] -= now_sub_value
@@ -819,6 +851,8 @@ def handle_sub_medium_shame(character_id: int, add_time: int, change_data: game_
     if character_data.dead:
         return
     character_data.status.setdefault(13,0)
+    if not character_data.status[13]:
+        return
     now_value = character_data.status[13]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[13] -= now_sub_value
@@ -843,6 +877,8 @@ def handle_sub_large_shame(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(13,0)
+    if not character_data.status[13]:
+        return
     now_value = character_data.status[13]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[13] -= now_sub_value
@@ -936,6 +972,8 @@ def handle_sub_small_depressed(character_id: int, add_time: int, change_data: ga
     if character_data.dead:
         return
     character_data.status.setdefault(14,0)
+    if not character_data.status[14]:
+        return
     now_value = character_data.status[14]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[14] -= now_sub_value
@@ -960,6 +998,8 @@ def handle_sub_medium_depressed(character_id: int, add_time: int, change_data: g
     if character_data.dead:
         return
     character_data.status.setdefault(14,0)
+    if not character_data.status[14]:
+        return
     now_value = character_data.status[14]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[14] -= now_sub_value
@@ -984,6 +1024,8 @@ def handle_sub_large_depressed(character_id: int, add_time: int, change_data: ga
     if character_data.dead:
         return
     character_data.status.setdefault(14,0)
+    if not character_data.status[14]:
+        return
     now_value = character_data.status[14]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[14] -= now_sub_value
@@ -1077,6 +1119,8 @@ def handle_sub_small_arrogant(character_id: int, add_time: int, change_data: gam
     if character_data.dead:
         return
     character_data.status.setdefault(15,0)
+    if not character_data.status[15]:
+        return
     now_value = character_data.status[15]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[15] -= now_sub_value
@@ -1101,6 +1145,8 @@ def handle_sub_medium_arrogant(character_id: int, add_time: int, change_data: ga
     if character_data.dead:
         return
     character_data.status.setdefault(15,0)
+    if not character_data.status[15]:
+        return
     now_value = character_data.status[15]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[15] -= now_sub_value
@@ -1125,6 +1171,8 @@ def handle_sub_large_arrogant(character_id: int, add_time: int, change_data: gam
     if character_data.dead:
         return
     character_data.status.setdefault(15,0)
+    if not character_data.status[15]:
+        return
     now_value = character_data.status[15]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[15] -= now_sub_value
@@ -1218,6 +1266,8 @@ def handle_sub_small_envy(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(16,0)
+    if not character_data.status[16]:
+        return
     now_value = character_data.status[16]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[16] -= now_sub_value
@@ -1242,6 +1292,8 @@ def handle_sub_medium_envy(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(16,0)
+    if not character_data.status[16]:
+        return
     now_value = character_data.status[16]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[16] -= now_sub_value
@@ -1266,6 +1318,8 @@ def handle_sub_large_envy(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(16,0)
+    if not character_data.status[16]:
+        return
     now_value = character_data.status[16]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[16] -= now_sub_value
@@ -1359,6 +1413,8 @@ def handle_sub_small_rage(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(17,0)
+    if not character_data.status[17]:
+        return
     now_value = character_data.status[17]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[17] -= now_sub_value
@@ -1383,6 +1439,8 @@ def handle_sub_medium_rage(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(17,0)
+    if not character_data.status[17]:
+        return
     now_value = character_data.status[17]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[17] -= now_sub_value
@@ -1407,6 +1465,8 @@ def handle_sub_large_rage(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(17,0)
+    if not character_data.status[17]:
+        return
     now_value = character_data.status[17]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[17] -= now_sub_value
@@ -1500,6 +1560,8 @@ def handle_sub_small_lazy(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(18,0)
+    if not character_data.status[18]:
+        return
     now_value = character_data.status[18]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[18] -= now_sub_value
@@ -1524,6 +1586,8 @@ def handle_sub_medium_lazy(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(18,0)
+    if not character_data.status[18]:
+        return
     now_value = character_data.status[18]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[18] -= now_sub_value
@@ -1548,6 +1612,8 @@ def handle_sub_large_lazy(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(18,0)
+    if not character_data.status[18]:
+        return
     now_value = character_data.status[18]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[18] -= now_sub_value
@@ -1641,6 +1707,8 @@ def handle_sub_small_greedy(character_id: int, add_time: int, change_data: game_
     if character_data.dead:
         return
     character_data.status.setdefault(19,0)
+    if not character_data.status[19]:
+        return
     now_value = character_data.status[19]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[19] -= now_sub_value
@@ -1665,6 +1733,8 @@ def handle_sub_medium_greedy(character_id: int, add_time: int, change_data: game
     if character_data.dead:
         return
     character_data.status.setdefault(19,0)
+    if not character_data.status[19]:
+        return
     now_value = character_data.status[19]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[19] -= now_sub_value
@@ -1689,6 +1759,8 @@ def handle_sub_large_greedy(character_id: int, add_time: int, change_data: game_
     if character_data.dead:
         return
     character_data.status.setdefault(19,0)
+    if not character_data.status[19]:
+        return
     now_value = character_data.status[19]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[19] -= now_sub_value
@@ -1782,6 +1854,8 @@ def handle_sub_small_gluttony(character_id: int, add_time: int, change_data: gam
     if character_data.dead:
         return
     character_data.status.setdefault(20,0)
+    if not character_data.status[20]:
+        return
     now_value = character_data.status[20]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[20] -= now_sub_value
@@ -1806,6 +1880,8 @@ def handle_sub_medium_gluttony(character_id: int, add_time: int, change_data: ga
     if character_data.dead:
         return
     character_data.status.setdefault(20,0)
+    if not character_data.status[20]:
+        return
     now_value = character_data.status[20]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[20] -= now_sub_value
@@ -1830,6 +1906,8 @@ def handle_sub_large_gluttony(character_id: int, add_time: int, change_data: gam
     if character_data.dead:
         return
     character_data.status.setdefault(20,0)
+    if not character_data.status[20]:
+        return
     now_value = character_data.status[20]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[20] -= now_sub_value
@@ -1923,6 +2001,8 @@ def handle_sub_small_lust(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(21,0)
+    if not character_data.status[21]:
+        return
     now_value = character_data.status[21]
     now_sub_value = (1 + now_value / 100) * add_time
     character_data.status[21] -= now_sub_value
@@ -1947,6 +2027,8 @@ def handle_sub_medium_lust(character_id: int, add_time: int, change_data: game_t
     if character_data.dead:
         return
     character_data.status.setdefault(21,0)
+    if not character_data.status[21]:
+        return
     now_value = character_data.status[21]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[21] -= now_sub_value
@@ -1971,6 +2053,8 @@ def handle_sub_large_lust(character_id: int, add_time: int, change_data: game_ty
     if character_data.dead:
         return
     character_data.status.setdefault(21,0)
+    if not character_data.status[21]:
+        return
     now_value = character_data.status[21]
     now_sub_value = (1 + now_value / 50) * add_time
     character_data.status[21] -= now_sub_value
