@@ -193,6 +193,7 @@ class StudentTimeTablePanel:
                 now_draw = panel.LeftDrawTextListPanel()
                 now_draw.set(now_text, self.width, 5)
                 now_draw.draw()
+                line_feed.draw()
             line_draw = draw.LineDraw("-", self.width)
             line_draw.draw()
             back_draw = draw.CenterButton(_("[返回]"), _("返回"), self.width)
