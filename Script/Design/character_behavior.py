@@ -7,7 +7,7 @@ from types import FunctionType
 from typing import Dict, Set, List
 import datetime
 from Script.Core import cache_control, game_type, value_handle, get_text
-from Script.Design import character_handle, constant, game_time, settle_behavior, handle_premise, event, cooking, map_handle
+from Script.Design import character_handle, constant, game_time, settle_behavior, handle_premise, event, cooking, map_handle, attr_calculation
 from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
@@ -50,12 +50,14 @@ def init_character_behavior():
     for i in cache.character_data:
         if not i:
             continue
+        attr_calculation.update_character_mana_point_and_hp_point_max(i)
         judge_character_dead(i)
     refresh_teacher_classroom()
     time_index = 0
     player_data: game_type.Character = cache.character_data[0]
     if cache.game_time >= player_data.behavior.start_time + 60 * player_data.behavior.duration:
         judge_character_status(0, cache.game_time)
+        attr_calculation.update_character_mana_point_and_hp_point_max(0)
         judge_character_dead(0)
 
 
@@ -232,8 +234,8 @@ def judge_character_status(character_id: int, now_time: int) -> int:
                 character_data.extreme_exhaustion_time = 0
     character_data.behavior.temporary_status = game_type.TemporaryStatus()
     if cache.game_time >= end_time:
-        event.handle_event(character_id, 0,start_time, end_time)
-        character_data.behavior.start_time = now_time
+        event.handle_event(character_id, 0,cache.game_time, cache.game_time)
+        character_data.behavior.start_time = cache.game_time
         character_data.behavior.duration = 0
 
 
@@ -303,6 +305,9 @@ def search_target(
             target_data[now_execute_target.weight].add(now_execute_target)
             continue
         target_config = game_config.config_target[target]
+        if character_data.passive_sex:
+            if target_config.needs_hierarchy > 1:
+                continue
         if not len(target_config.premise):
             target_data.setdefault(1, set())
             now_execute_target = game_type.ExecuteTarget()
@@ -405,7 +410,7 @@ def update_cafeteria():
     """刷新食堂内食物"""
     food_judge = 1
     game_time_object = datetime.datetime.fromtimestamp(cache.game_time)
-    if game_time_object.hour not in {12, 13, 18, 19}:
+    if game_time_object.hour not in {6, 7, 8, 12, 13, 18, 19}:
         if cache.restaurant_data != {}:
             cache.restaurant_data = {}
     else:

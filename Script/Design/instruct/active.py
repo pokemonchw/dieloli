@@ -2,7 +2,10 @@ import random
 import datetime
 from types import FunctionType
 from Script.Core import cache_control, game_type, get_text
-from Script.Design import update, character, attr_calculation, constant, handle_instruct
+from Script.Design import (
+    update, character, attr_calculation, constant, handle_instruct, character_move,
+    map_handle
+)
 from Script.Config import normal_config
 from Script.UI.Moudle import draw
 
@@ -27,6 +30,16 @@ def handle_eat():
 def handle_move():
     """处理移动指令"""
     cache.now_panel_id = constant.Panel.SEE_MAP
+
+
+@handle_instruct.add_instruct(constant.Instruct.ESCAPE_FROM_CROWD, constant.InstructType.ACTIVE, _("逃离人群"), {constant.Premise.HAS_NO_CHARACTER_SCENE})
+def handle_escape_from_crowd():
+    """处理逃离人群指令"""
+    character_data: game_type.Character = cache.character_data[0]
+    now_scene_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    target_scene = cache.no_character_scene_set.pop()
+    cache.no_character_scene_set.add(target_scene)
+    character_move.own_charcter_move(map_handle.get_map_system_path_for_str(target_scene))
 
 
 @handle_instruct.add_instruct(

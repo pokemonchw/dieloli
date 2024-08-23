@@ -127,6 +127,7 @@ for i in file_list:
     if index:
         config_def_str += "\n\n\n"
     now_file = os.path.join(config_dir, i)
+    print(i)
     build_csv_config(now_file, i)
     index += 1
 

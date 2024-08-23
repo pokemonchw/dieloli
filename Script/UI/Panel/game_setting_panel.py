@@ -90,7 +90,7 @@ class GameSettingPanel:
                 now_draw.width = self.width
                 now_draw.draw()
         elif self.now_panel == _("NSFW"):
-            if yrn in return_list:
+            if yrn == "0":
                 if normal_config.config_normal.nsfw:
                     normal_config.change_normal_config("nsfw", 0)
                     normal_config.config_normal.nsfw = 0

@@ -149,10 +149,9 @@ def handle_interrupt_target_activity(
             target_data.behavior.duration, old_date=target_data.behavior.start_time
         )
         old_statue = target_data.state
-        target_data.behavior = game_type.Behavior()
-        character.init_character_behavior_start_time(
-            target_data.cid, character_data.behavior.start_time
-        )
+        target_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
+        target_data.behavior.duration = 0
+        target_data.behavior.start_time = now_time
         target_data.state = constant.CharacterStatus.STATUS_ARDER
         if target_end_time >= character_data.behavior.start_time:
             if not character_id or not character_data.target_character_id:

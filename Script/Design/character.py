@@ -60,12 +60,6 @@ def init_attr(character_id: int):
     character_data.chest = attr_calculation.get_chest(
         character_data.chest_tem, character_data.birthday
     )
-    character_data.hit_point_max = attr_calculation.get_max_hit_point(character_data.hit_point_tem)
-    character_data.hit_point = character_data.hit_point_max
-    character_data.mana_point_max = attr_calculation.get_max_mana_point(
-        character_data.mana_point_tem
-    )
-    character_data.mana_point = character_data.mana_point_max
     character_data.money = random.randint(500, 1000)
     new_nature = nature.get_random_nature()
     for nature_id in new_nature:

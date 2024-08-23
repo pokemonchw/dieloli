@@ -702,7 +702,7 @@ class SeeCharacterKnowledgePanel:
                     now_level_draw = draw.ExpLevelDraw(now_exp)
                     skill_draw.draw_list.append(now_text_draw)
                     skill_draw.draw_list.append(now_level_draw)
-                    if character_data.knowledge_interest[skill] > 1.1:
+                    if character_data.knowledge_interest[skill] > 1:
                         skill_draw.draw_list.append(interest_draw)
                     skill_draw.width = int(self.width / len(skill_group))
                     now_list.append(skill_draw)

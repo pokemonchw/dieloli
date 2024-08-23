@@ -71,6 +71,8 @@ def game_start():
     cache.school_longitude = random.uniform(120.9, 122.12)
     cache.school_latitude = random.uniform(30.7, 31.53)
     club_handle.init_club_data()
+    for i in cache.character_data:
+        attr_calculation.init_character_hp_and_mp(i)
 
 
 def confirm_character_attr_panel():

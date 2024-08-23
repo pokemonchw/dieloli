@@ -83,7 +83,7 @@ else:
         need_font_size = next_font_size
         if next_font_char_width <= need_char_width and next_font_char_height <= need_char_height:
             break
-if normal_config.config_normal.font_size != 20:
+if normal_config.config_normal.font_size:
     need_font_size = normal_config.config_normal.font_size
 now_font = font.Font(family=normal_config.config_normal.font,size=need_font_size)
 now_char_width = now_font.measure("a")
@@ -92,7 +92,6 @@ window_width = now_char_width * 120
 window_height = now_char_height * 50
 normal_config.config_normal.font_size = need_font_size
 normal_config.config_normal.order_font_size = need_font_size - 2
-root.tk.call("tk", "scaling", 1.0)
 root.title(game_name)
 width = window_width + 30
 frm_width = root.winfo_rootx() - root.winfo_x()
@@ -161,7 +160,7 @@ input_background_box_cursor.config(foreground=order_font_data.foreground)
 
 # 输入栏
 order = StringVar()
-order_font = font.Font(family="Sarasa Mono SC", size=order_font_data.font_size)
+order_font = font.Font(family=order_font_data.font, size=order_font_data.font_size)
 inputbox = Entry(
     input_background_box,
     borderwidth=0,
@@ -185,9 +184,7 @@ def get_widget_font(widget):
     # 返回字体的实际名称
     return widget_font.actual()
 
-
 from Script.Core import era_image
-
 
 def send_input(*args):
     """

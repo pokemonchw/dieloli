@@ -76,8 +76,6 @@ class Book:
     """ 书本id """
     name: str
     """ 名字 """
-    info: str
-    """ 介绍 """
 
 
 class SexTem:
