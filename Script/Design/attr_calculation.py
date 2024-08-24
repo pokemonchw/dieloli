@@ -278,36 +278,6 @@ def get_measurements(
     return measurements
 
 
-def get_max_hit_point(tem_id: int) -> int:
-    """
-    获取最大hp值
-    Keyword arguments:
-    tem_id -- hp模板id
-    Return arguments:
-    int -- 最大hp值
-    """
-    tem_data = game_config.config_hitpoint_tem[tem_id]
-    max_hit_point = tem_data.max_value
-    add_value = value_handle.custom_distribution(0, 500)
-    impairment = value_handle.custom_distribution(0, 500)
-    return max_hit_point + add_value - impairment
-
-
-def get_max_mana_point(tem_id: int) -> int:
-    """
-    获取最大mp值
-    Keyword arguments:
-    tem_id -- mp模板
-    Return arguments:
-    int -- 最大mp值
-    """
-    tem_data = game_config.config_manapoint_tem[tem_id]
-    max_mana_point = tem_data.max_value
-    add_value = value_handle.custom_distribution(0, 500)
-    impairment = value_handle.custom_distribution(0, 500)
-    return max_mana_point + add_value - impairment
-
-
 def get_init_learn_abllity(age: int, end_age: int):
     """
     按年龄和生成学习能力
@@ -437,3 +407,103 @@ def judge_chest_group(chest: float) -> int:
         if chest_tem.min_value <= chest < chest_tem.max_value:
             return chest_tem_id
     return 0
+
+
+def init_character_hp_and_mp(character_id: int):
+    """
+    初始化角色的健康和体力
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    sport_level = 0
+    max_point = 1000
+    if 31 in character_data.knowledge:
+        sport_level = get_experience_level_weight(character_data.knowledge[31])
+    if sport_level == 1:
+        max_point = 1500
+    elif sport_level == 2:
+        max_point = 2000
+    elif sport_level == 3:
+        max_point = 2500
+    elif sport_level == 4:
+        max_point = 3000
+    elif sport_level == 5:
+        max_point = 3500
+    elif sport_level == 6:
+        max_point = 4000
+    elif sport_level == 7:
+        max_point = 4500
+    elif sport_level == 8:
+        max_point = 5000
+    if character_data.bodyfat > 20:
+        max_point *= 1 - (character_data.bodyfat - 20) / 100
+    max_point = int(max_point)
+    character_data.mana_point_max = max_point
+    character_data.mana_point = max_point
+    character_data.hit_point_max = max_point
+    character_data.hit_point = max_point
+
+
+def handle_character_weight_and_body_fat(character_id: int):
+    """
+    调整计算角色的体重和体脂率
+    Keyword arguements:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    need_consume = 0
+    if character_data.sex in {0, 2}:
+        need_consume = 88.362 + (13.397 * character_data.weight) + (4.799 * character_data.height.now_height) - 5.677 * character_data.age
+    else:
+        need_consume = 447.593 + (9.247 * character_data.weight) + (3.098 * character_data.height.now_height) - 4.33 * character_data.age
+    need_consume = int(need_consume)
+    sport_level = 0
+    if 31 in character_data.knowledge:
+        sport_level = get_experience_level_weight(character_data.knowledge[31])
+    judge_weight = 20 - sport_level
+    sport_fix = 1 - sport_level / 10
+    day_add_calories = character_data.day_add_calories * sport_fix - need_consume
+    now_judge = True
+    if day_add_calories < 0 and character_data.bodyfat <= judge_weight:
+        now_judge = False
+    if now_judge:
+        character_data.weight += day_add_calories / 100 * 9 / 1000
+        fat_weight = character_data.bodyfat * character_data.weight
+        fat_weight += day_add_calories / 100 * 9 / 1000
+        character_data.bodyfat = fat_weight / character_data.weight
+    character_data.day_add_calories = 0
+
+
+def update_character_mana_point_and_hp_point_max(character_id: int):
+    """
+    更新角色mp和hp的最大值
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    sport_level = 0
+    max_point = 1000
+    if 31 in character_data.knowledge:
+        sport_level = get_experience_level_weight(character_data.knowledge[31])
+    if sport_level == 1:
+        max_point = 1500
+    elif sport_level == 2:
+        max_point = 2000
+    elif sport_level == 3:
+        max_point = 2500
+    elif sport_level == 4:
+        max_point = 3000
+    elif sport_level == 5:
+        max_point = 3500
+    elif sport_level == 6:
+        max_point = 4000
+    elif sport_level == 7:
+        max_point = 4500
+    elif sport_level == 8:
+        max_point = 5000
+    if character_data.bodyfat > 20:
+        max_point *= 1 - (character_data.bodyfat - 20) / 100
+    max_point = int(max_point)
+    character_data.mana_point_max = max_point
+    character_data.hit_point_max = max_point

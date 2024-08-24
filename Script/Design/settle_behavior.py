@@ -28,8 +28,6 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
     now_character_data: game_type.Character = cache.character_data[character_id]
     status_data = game_type.CharacterStatusChange()
     start_time = now_character_data.behavior.start_time
-    if now_time > start_time + now_character_data.behavior.duration * 60:
-        now_time = start_time + now_character_data.behavior.duration * 60
     add_time = int((now_time - start_time) / 60)
     event_data: game_type.Event = game_config.config_event[event_id]
     for settle in event_data.settle:
@@ -138,39 +136,58 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
         if len(now_text_list):
             if len(now_text_list) % 4:
                 now_text_list.extend([""] * (4 - len(now_text_list) % 4))
+        target_change_judge = False
+        target_draw_list = []
         if status_data.target_change:
-            now_text_list.extend([_("互动目标变化:"), "", "", ""])
             for target_character_id in status_data.target_change:
                 if character_id and target_character_id:
                     continue
                 target_change: game_type.TargetChange = status_data.target_change[
                     target_character_id
                 ]
+                target_text_list = []
                 target_data: game_type.Character = cache.character_data[target_character_id]
-                now_text_list.extend(["-", "-", "-", "-"])
-                now_text_list.extend([target_data.name, "", "", ""])
+                target_text_list.extend(["-", "-", "-", "-"])
+                target_text_list.extend([target_data.name, "", "", ""])
+                target_text_judge = False
                 if target_change.favorability:
                     favorability_text = _("好感:") + text_handle.number_to_symbol_string(round(target_change.favorability, 2))
-                    now_text_list.extend([favorability_text, "", "", ""])
+                    social_type_change_text = ""
+                    if target_change.favorability > 0:
+                        social_type_change_text = get_social_type_change_text(target_data.favorability[character_id], False)
+                    else:
+                        social_type_change_text = get_social_type_change_text(target_data.favorability[character_id], True)
+                    target_text_list.extend([favorability_text, social_type_change_text, "", ""])
+                    target_text_judge = True
                 if target_change.new_social != target_change.old_social:
                     now_text = game_config.config_social_type[target_change.old_social].name + "->" + game_config.config_social_type[target_change.new_social].name
-                    now_text_list.extend([now_text, "", "", ""])
+                    target_text_list.extend([now_text, "", "", ""])
+                    target_text_judge = True
                 if target_change.status:
                     now_list = [f"{game_config.config_character_state[i].name}:{attr_text.get_value_text(target_change.status[i])}" for i in target_change.status if round(target_change.status[i], 2)]
                     if now_list:
-                        now_text_list.extend([_("状态变化:"), "", "", ""])
-                        now_text_list.extend(now_list)
+                        target_text_list.extend([_("状态变化:"), "", "", ""])
+                        target_text_list.extend(now_list)
+                        target_text_judge = True
                 if len(now_text_list):
                     if len(now_text_list) % 4:
-                        now_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                        target_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                        target_text_judge = True
                 if target_change.sex_experience:
                     now_list = [
                         f"{game_config.config_organ[i].name}" + _("经验:") + text_handle.number_to_symbol_string(round(target_change.sex_experience[i], 2))
                         for i in target_change.sex_experience if round(target_change.sex_experience[i], 2)
                     ]
                     if len(now_list):
-                        now_text_list.extend([_("增加性经验:"), "", "", ""])
-                        now_text_list.extend(now_list)
+                        target_text_list.extend([_("增加性经验:"), "", "", ""])
+                        target_text_list.extend(now_list)
+                        target_text_judge = True
+                if target_text_judge:
+                    target_draw_list.extend(target_text_list)
+                    target_change_judge = True
+        if target_change_judge:
+            now_text_list.extend([_("互动目标变化:"), "", "", ""])
+            now_text_list.extend(target_draw_list)
         now_panel = panel.LeftDrawTextListWaitPanel()
         now_panel.set(now_text_list, width, 4)
         return now_panel, len(now_text_list)
@@ -321,3 +338,124 @@ def get_favorability_social(favorability: int) -> int:
     if favorability < 20000:
         return 9
     return 10
+
+
+def get_social_type_change_text(favorability: int, is_sub: bool) -> str:
+    """
+    获取社交关系变化进度文本
+    Keyword arguments:
+    favorability -- 好感度
+    is_sub -- 是否是减少了好感
+    Return arguments:
+    str -- 变化文本
+    """
+    draw_text: str = _("距离{social_type}还需{need_favorability}点好感")
+    now_social_type = get_favorability_social(favorability)
+    if is_sub:
+        if now_social_type == 0:
+            draw_text = _("关系已经坏到了极点")
+            return draw_text
+        elif now_social_type == 1:
+            social_type = game_config.config_social_type[0].name
+            need_favorability = -20000 - favorability, 2
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 2:
+            social_type = game_config.config_social_type[1].name
+            need_favorability = -10000 - favorability, 2
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 3:
+            social_type = game_config.config_social_type[2].name
+            need_favorability = -5000 - favorability, 2
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 4:
+            social_type = game_config.config_social_type[3].name
+            need_favorability = -2000 - favorability, 2
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 5:
+            social_type = game_config.config_social_type[4].name
+            need_favorability = -1000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 6:
+            social_type = game_config.config_social_type[5].name
+            need_favorability = 1000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 7:
+            social_type = game_config.config_social_type[6].name
+            need_favorability = 2000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 8:
+            social_type = game_config.config_social_type[7].name
+            need_favorability = 5000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 9:
+            social_type = game_config.config_social_type[8].name
+            need_favorability = 10000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 10:
+            social_type = game_config.config_social_type[9].name
+            need_favorability = 20000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+    else:
+        if now_social_type == 0:
+            social_type = game_config.config_social_type[1].name
+            need_favorability = -20000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 1:
+            social_type = game_config.config_social_type[2].name
+            need_favorability = -10000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 2:
+            social_type = game_config.config_social_type[3].name
+            need_favorability = -5000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 3:
+            social_type = game_config.config_social_type[4].name
+            need_favorability = -2000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 4:
+            social_type = game_config.config_social_type[5].name
+            need_favorability = -1000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 5:
+            social_type = game_config.config_social_type[6].name
+            need_favorability = 1000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 6:
+            social_type = game_config.config_social_type[7].name
+            need_favorability = 2000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 7:
+            social_type = game_config.config_social_type[8].name
+            need_favorability = 5000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 8:
+            social_type = game_config.config_social_type[9].name
+            need_favorability = 10000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 9:
+            social_type = game_config.config_social_type[10].name
+            need_favorability = 20000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 10:
+            draw_text = _("爱情的极致")
+            return draw_text

@@ -382,9 +382,9 @@ class Character:
     def __init__(self):
         self.cid: int = 0
         """ 角色id """
-        self.name: str = ""
+        self.name: str = "主人公"
         """ 角色名字 """
-        self.nick_name: str = ""
+        self.nick_name: str = "你"
         """ 他人对角色的称呼 """
         self.sex: int = 0
         """ 角色性别 """
@@ -750,7 +750,7 @@ class Cache:
         """ 在指定时间要进行结算的角色列表 时间戳:角色id集合 """
         self.character_settle_time_data: Dict[int, int] = {}
         """ 角色的结算时间表 角色id:结算时间 """
-        self.no_character_scene_set: Set = set()
+        self.no_character_scene_set: Set[str] = set()
         """ 没有角色的空场景集合 """
         self.all_club_data: Dict[str, ClubData] = {}
         """ 全部社团数据结构体 """

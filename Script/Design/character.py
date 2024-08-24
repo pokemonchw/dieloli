@@ -26,21 +26,13 @@ def init_attr(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
+    init_character_mother_tongue(character_id)
+    init_character_birthday(character_id)
+    init_character_end_age(character_id)
+    init_character_height(character_id)
+    init_character_weight_and_bodyfat(character_id)
+    init_character_measurements(character_id)
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.language[character_data.mother_tongue] = 10000
-    character_data.birthday = attr_calculation.get_rand_npc_birthday(character_data.age)
-    character_data.end_age = attr_calculation.get_end_age(character_data.sex)
-    character_data.height = attr_calculation.get_height(character_data.sex, character_data.age)
-    bmi = attr_calculation.get_bmi(character_data.weight_tem)
-    character_data.weight = attr_calculation.get_weight(bmi, character_data.height.now_height)
-    character_data.bodyfat = attr_calculation.get_body_fat(
-        character_data.sex, character_data.bodyfat_tem
-    )
-    character_data.measurements = attr_calculation.get_measurements(
-        character_data.sex,
-        character_data.height.now_height,
-        character_data.bodyfat_tem,
-    )
     character_data.sex_experience = attr_calculation.get_sex_experience(
         character_data.sex_experience_tem, character_data.sex
     )
@@ -60,12 +52,6 @@ def init_attr(character_id: int):
     character_data.chest = attr_calculation.get_chest(
         character_data.chest_tem, character_data.birthday
     )
-    character_data.hit_point_max = attr_calculation.get_max_hit_point(character_data.hit_point_tem)
-    character_data.hit_point = character_data.hit_point_max
-    character_data.mana_point_max = attr_calculation.get_max_mana_point(
-        character_data.mana_point_tem
-    )
-    character_data.mana_point = character_data.mana_point_max
     character_data.money = random.randint(500, 1000)
     new_nature = nature.get_random_nature()
     for nature_id in new_nature:
@@ -80,6 +66,70 @@ def init_attr(character_id: int):
         cache.classroom_students_data[now_identity.classroom].add(character_id)
         cache.student_character_set.add(character_data.cid)
 
+
+def init_character_mother_tongue(character_id: int):
+    """
+    初始化角色母语
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.language[character_data.mother_tongue] = 10000
+
+
+def init_character_birthday(character_id: int):
+    """
+    初始化角色生日
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.birthday = attr_calculation.get_rand_npc_birthday(character_data.age)
+
+def init_character_end_age(character_id: int):
+    """
+    初始化角色预期寿命
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.end_age = attr_calculation.get_end_age(character_data.sex)
+
+def init_character_weight_and_bodyfat(character_id: int):
+    """
+    初始化角色体重体脂率
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    bmi = attr_calculation.get_bmi(character_data.weight_tem)
+    character_data.weight = attr_calculation.get_weight(bmi, character_data.height.now_height)
+    character_data.bodyfat = attr_calculation.get_body_fat(
+        character_data.sex, character_data.bodyfat_tem
+    )
+
+def init_character_height(character_id: int):
+    """
+    初始化角色身高
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.height = attr_calculation.get_height(character_data.sex, character_data.age)
+
+
+def init_character_measurements(character_id: int):
+    """
+    初始化角色三围
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    character_data.measurements = attr_calculation.get_measurements(
+        character_data.sex,
+        character_data.height.now_height,
+        character_data.bodyfat_tem,
+    )
 
 def init_character_behavior_start_time(character_id: int, now_time: int):
     """
@@ -117,32 +167,13 @@ def calculation_favorability(character_id: int, target_character_id: int, favora
     """
     character_data: game_type.Character = cache.character_data[character_id]
     target_data: game_type.Character = cache.character_data[target_character_id]
-    fix = 1.0
-    for i in {0, 1, 2, 5, 13, 14, 15, 16}:
-        now_fix = 0
-        if character_data.nature[i] > 50:
-            nature_value = character_data.nature[i] - 50
-            now_fix -= nature_value / 50
-        else:
-            now_fix += character_data.nature[i] / 50
-        if target_data.nature[i] > 50:
-            nature_value = target_data.nature[i] - 50
-            if now_fix < 0:
-                now_fix *= -1
-                now_fix += nature_value / 50
-                now_fix = now_fix / 2
-            else:
-                now_fix += nature_value / 50
-        else:
-            nature_value = target_data.nature[i]
-            if now_fix < 0:
-                now_fix += nature_value / 50
-            else:
-                now_fix -= nature_value / 50
-                now_fix = now_fix / 2
-        fix += now_fix
+    fix = 1
     if character_id in target_data.social_contact_data:
-        fix += target_data.social_contact_data[character_id]
+        social = target_data.social_contact_data[character_id]
+        if social < 5:
+            fix += (5 - social) / 10
+        else:
+            fix += (social - 5) / 10
     favorability *= fix
     return favorability
 

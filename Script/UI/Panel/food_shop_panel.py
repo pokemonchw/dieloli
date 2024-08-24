@@ -173,6 +173,7 @@ class SeeFoodListByFoodNameDraw:
             now_food_list, BuyFoodByFoodNameDraw, 10, 1, window_width, 1, 1, 0
         )
         while 1:
+            py_cmd.clr_cmd()
             return_list = []
             title_draw.draw()
             page_handle.update()
@@ -229,32 +230,28 @@ class BuyFoodByFoodNameDraw:
             food_name = food_config.name
         hunger_text = _("热量:")
         if 27 in food_data.feel:
-            hunger_text = f"{hunger_text}{round(food_data.feel[27],2)}"
+            one_hungry = food_data.feel[27] / food_data.weight * min(100, food_data.weight)
+            hunger_text = f"{hunger_text}{round(one_hungry, 2)}"
         else:
             hunger_text = f"{hunger_text}0.00"
         thirsty_text = _("水份:")
         if 28 in food_data.feel:
-            thirsty_text = f"{thirsty_text}{round(food_data.feel[28],2)}"
+            one_thirsty = food_data.feel[28] / food_data.weight * min(100, food_data.weight)
+            thirsty_text = f"{thirsty_text}{round(one_thirsty, 2)}"
         else:
             thirsty_text = f"{thirsty_text}0.00"
-        self.price = round(1 + sum(food_data.feel.values()) * food_data.quality / 100, 2)
+        self.price = round(1 + sum(food_data.feel.values()) * max(food_data.quality, 1) / food_data.weight, 2)
         """ 食物价格 """
         self.origin_food_name = food_name
         """ 原始食物名字 """
-        food_name = (
-            food_name
-            + f" {hunger_text} {thirsty_text} "
-            + _("重量:")
-            + str(round(food_data.weight, 2))
-            + _("克")
-            + " "
-            + _("品质:")
-            + quality_text_data[food_data.quality]
-            + " "
-            + _("售价:" + str(self.price))
-        )
+        food_name_draw_list = [food_name, hunger_text, thirsty_text, _("品质:") + quality_text_data[food_data.quality], _("售价:") + str(self.price), _("剩余份数:") + str(round(food_data.weight / 100, 2))]
         index_text = text_handle.id_index(button_id)
-        button_text = f"{index_text}{food_name}"
+        button_text = f"{index_text}"
+        button_text_width = text_handle.get_text_index(button_text)
+        food_name_draw_width = int((self.width - button_text_width) / len(food_name_draw_list))
+        for food_name_text in food_name_draw_list:
+            food_name_text = text_handle.align(food_name_text, text_width=food_name_draw_width)
+            button_text += food_name_text
         name_draw = draw.LeftButton(
             button_text, self.button_return, self.width, cmd_func=self.buy_food
         )
@@ -270,8 +267,10 @@ class BuyFoodByFoodNameDraw:
         player_data: game_type.Character = cache.character_data[0]
         if player_data.money >= self.price:
             player_data.money -= self.price
-            cache.character_data[0].food_bag[self.text] = cache.restaurant_data[self.cid][self.text]
-            del cache.restaurant_data[self.cid][self.text]
+            new_food = cooking.separate_weight_food(cache.restaurant_data[self.cid][self.text],100)
+            cache.character_data[0].food_bag[new_food.uid] = new_food
+            if cache.restaurant_data[self.cid][self.text].weight <= 0:
+                del cache.restaurant_data[self.cid][self.text]
             py_cmd.clr_cmd()
             now_draw = draw.LineFeedWaitDraw()
             now_draw.text = _("购买{food_name}成功，身上的钱还剩:{money}").format(food_name=self.origin_food_name,money=round(player_data.money,2))

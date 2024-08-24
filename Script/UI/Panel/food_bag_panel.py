@@ -49,7 +49,6 @@ class FoodBagPanel:
                 break
             self.handle_panel.update()
             title_draw.draw()
-            line_feed.draw()
             return_list = []
             for food_type in food_type_list:
                 if food_type == self.now_panel:
@@ -68,12 +67,14 @@ class FoodBagPanel:
                     )
                     now_draw.draw()
                     return_list.append(now_draw.return_text)
+            line_feed.draw()
             line = draw.LineDraw("+", self.width)
             line.draw()
             self.handle_panel.draw()
             return_list.extend(self.handle_panel.return_list)
             back_draw = draw.CenterButton(_("[返回]"), _("返回"), window_width)
             back_draw.draw()
+            line_feed.draw()
             return_list.append(back_draw.return_text)
             yrn = flow_handle.askfor_all(return_list)
             if yrn == back_draw.return_text:
