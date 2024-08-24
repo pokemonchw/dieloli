@@ -389,31 +389,40 @@ def init_phase_course_hour_experience():
     cache.course_school_phase_language_experience = phase_language_experience
 
 
-def init_character_knowledge():
+def init_all_character_knowledge():
     """
     初始化所有角色知识等级
     """
     for i in cache.character_data:
-        init_experience_for_grade(i)
-        if cache.character_data[i].age > 18:
-            character_data = cache.character_data[i]
-            init_teacher_knowledge(i)
-            for course in game_config.config_course_knowledge_experience_data:
-                cache.teacher_course_experience.setdefault(course, {})
-                cache.teacher_course_experience[course].setdefault(i, 0)
-                for knowledge in game_config.config_course_knowledge_experience_data[course]:
-                    if knowledge in character_data.knowledge:
-                        cache.teacher_course_experience[course][i] += character_data.knowledge[
-                            knowledge
-                        ]
-            for course in game_config.config_course_language_experience_data:
-                cache.teacher_course_experience.setdefault(course, {})
-                cache.teacher_course_experience[course].setdefault(i, 0)
-                for language in game_config.config_course_language_experience_data[course]:
-                    if language in character_data.language:
-                        cache.teacher_course_experience[course][i] += character_data.language[
-                            language
-                        ]
+        init_character_knowledge(i)
+
+
+def init_character_knowledge(i: int):
+    """
+    初始化所有角色知识等级
+    Keyword arguments:
+    i -- 角色id
+    """
+    init_experience_for_grade(i)
+    if cache.character_data[i].age > 18:
+        character_data = cache.character_data[i]
+        init_teacher_knowledge(i)
+        for course in game_config.config_course_knowledge_experience_data:
+            cache.teacher_course_experience.setdefault(course, {})
+            cache.teacher_course_experience[course].setdefault(i, 0)
+            for knowledge in game_config.config_course_knowledge_experience_data[course]:
+                if knowledge in character_data.knowledge:
+                    cache.teacher_course_experience[course][i] += character_data.knowledge[
+                        knowledge
+                    ]
+        for course in game_config.config_course_language_experience_data:
+            cache.teacher_course_experience.setdefault(course, {})
+            cache.teacher_course_experience[course].setdefault(i, 0)
+            for language in game_config.config_course_language_experience_data[course]:
+                if language in character_data.language:
+                    cache.teacher_course_experience[course][i] += character_data.language[
+                        language
+                    ]
 
 
 def init_teacher_knowledge(character_id: int):

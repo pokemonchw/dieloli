@@ -400,6 +400,11 @@ def get_social_type_change_text(favorability: int, is_sub: bool) -> str:
             need_favorability = 10000 - favorability
             draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
             return draw_text
+        elif now_social_type == 10:
+            social_type = game_config.config_social_type[9].name
+            need_favorability = 20000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
     else:
         if now_social_type == 0:
             social_type = game_config.config_social_type[1].name
@@ -447,5 +452,10 @@ def get_social_type_change_text(favorability: int, is_sub: bool) -> str:
             draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
             return draw_text
         elif now_social_type == 9:
+            social_type = game_config.config_social_type[10].name
+            need_favorability = 20000 - favorability
+            draw_text = draw_text.format(social_type=social_type, need_favorability=round(need_favorability, 2))
+            return draw_text
+        elif now_social_type == 10:
             draw_text = _("爱情的极致")
             return draw_text

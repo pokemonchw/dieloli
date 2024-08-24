@@ -382,9 +382,9 @@ class Character:
     def __init__(self):
         self.cid: int = 0
         """ 角色id """
-        self.name: str = ""
+        self.name: str = "主人公"
         """ 角色名字 """
-        self.nick_name: str = ""
+        self.nick_name: str = "你"
         """ 他人对角色的称呼 """
         self.sex: int = 0
         """ 角色性别 """
