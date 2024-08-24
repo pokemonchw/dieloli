@@ -107,7 +107,7 @@ def confirm_character_attr_panel():
         askfor_panel_return_list = askfor_panel.get_return_list()
         ask_list.extend(askfor_panel_return_list.keys())
         yrn = flow_handle.askfor_all(ask_list)
-        if int(yrn) == 0:
+        if yrn == "0":
             break
         elif yrn == change_attr_button_list[0]:
             change_name()
