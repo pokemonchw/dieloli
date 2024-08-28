@@ -222,6 +222,19 @@ class ClubTheme:
     """ 主题名字 """
 
 
+class Achieve:
+    """ 成就配置数据 """
+
+    cid: str
+    """ 成就id """
+    name: str
+    """ 成就名 """
+    hide: int
+    """ 是否是隐藏成就 """
+    info: str
+    """ 成就描述 """
+
+
 class HitPointTem:
     """ hp模板对应平均值 """
 
@@ -353,6 +366,15 @@ class RecipesFormula:
     """ 配方类型 """
     food_id: int
     """ 食材id """
+
+
+class DebugInstructType:
+    """ 指令类型配置 """
+
+    cid: int
+    """ 指令类型id """
+    name: str
+    """ 名字 """
 
 
 class StatureDescriptionText:

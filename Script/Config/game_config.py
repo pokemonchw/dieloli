@@ -8,6 +8,8 @@ data_path = os.path.join("data", "data.json")
 """ 原始json数据文件路径 """
 config_data = {}
 """ 原始json数据 """
+config_achieve: Dict[str, config_def.Achieve] = {}
+""" 全部成就配置数据 """
 config_age_judge_sex_experience_tem: Dict[int, config_def.AgeJudgeSexExperienceTem] = {}
 """ 不同性别不同年龄段对应生成不同性经验模板的权重 """
 config_age_judge_sex_experience_tem_data: Dict[int, Dict[int, Dict[int, int]]] = {}
@@ -87,6 +89,8 @@ config_course_language_experience_data: Dict[int, Dict[int, float]] = {}
 课程获取语言技能经验配置数据
 课程id:技能id:经验数量
 """
+config_debug_instruct_type: Dict[int, config_def.DebugInstructType] = {}
+""" debug指令类型配置 """
 config_end_age_tem: Dict[int, config_def.EndAgeTem] = {}
 """ 最终年龄范围配置模板 """
 config_end_age_tem_sex_data: Dict[int, int] = {}
@@ -286,6 +290,16 @@ def translate_data(data: dict):
         for key in now_data:
             if key in data["gettext"] and data["gettext"][key]:
                 now_data[key] = get_text._(now_data[key])
+
+
+def load_achieve():
+    """载入全部成就配置数据"""
+    now_data = config_data["Achieve"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Achieve()
+        now_tem.__dict__ = tem_data
+        config_achieve[now_tem.cid] = now_tem
 
 
 def load_age_judge_sex_experience_tem_data():
@@ -537,6 +551,16 @@ def load_course_skill_experience():
             config_course_knowledge_experience_data[now_tem.course][
                 now_tem.skill
             ] = now_tem.experience
+
+
+def load_debug_instruct_type():
+    """载入debug指令类型配置数据"""
+    now_data = config_data["DebugInstructType"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.DebugInstructType()
+        now_tem.__dict__ = tem_data
+        config_debug_instruct_type[now_tem.cid] = now_tem
 
 
 def load_end_age_tem():
@@ -1022,6 +1046,7 @@ def load_weight_tem():
 def init():
     """初始化游戏配置数据"""
     load_data_json()
+    load_achieve()
     load_age_judge_sex_experience_tem_data()
     load_age_tem()
     load_attr_tem()
@@ -1043,6 +1068,7 @@ def init():
     load_cook_type()
     load_course()
     load_course_skill_experience()
+    load_debug_instruct_type()
     load_end_age_tem()
     load_event()
     load_font_data()

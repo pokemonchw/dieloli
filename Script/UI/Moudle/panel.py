@@ -142,7 +142,7 @@ class AskForOneMessage:
 
     def __init__(self):
         """初始化绘制对象"""
-        self.message: draw.RichTextDraw = None
+        self.message: draw.NormalDraw = None
         """ 消息 """
         self.input_max: int = 0
         """ 玩家输入文本的最大长度 """
@@ -175,6 +175,45 @@ class AskForOneMessage:
             io_init.era_print(_("输入的字符超长，最大{input_max}个英文字符，请重试。").format(input_max=self.input_max))
             io_init.era_print("\n")
         return return_text
+
+
+class AskNumberForOneMessage:
+    """标准单条信息+等待玩家输入任意数字面板"""
+
+    def __init__(self):
+        """初始化绘制对象"""
+        self.message: draw.NormalDraw = None
+        """ 消息 """
+        self.number_max: int = 0
+        """ 允许玩家输入的最大的数字 """
+
+    def set(self, message: str, number_max: int):
+        """
+        设置要绘制的消息和允许玩家输入的最大的数字
+        Keyword arguments:
+        message -- 绘制的消息
+        number_max -- 允许玩家输入的最大的数字
+        """
+        self.message = draw.NormalDraw()
+        self.message.text = message
+        self.message.width = normal_config.config_normal.text_width
+        self.number_max = number_max
+
+    def draw(self) -> int:
+        """
+        绘制面板
+        Return arguments:
+        int -- 玩家输入的数字
+        """
+        return_number = 0
+        while 1:
+            self.message.draw()
+            return_number = flow_handle.askfor_int()
+            if return_number <= self.number_max:
+                break
+            io_init.era_print(_("输入的数字过大，最大值为{number_max}，请重试。").format(number_max=self.number_max))
+            io_init.era_print("\n")
+        return return_number
 
 
 class TitleAndRightInfoListPanel:

@@ -1004,3 +1004,5 @@ have_enough_buy_cheapest_food,金钱类前提,拥有足够买最便宜的食物�
 have_enough_buy_cheapest_drink,金钱类前提,拥有足够买最便宜的饮料的金钱
 have_enough_buy_most_expensive_food,金钱类前提,拥有足够买最贵的食物的金钱
 have_enough_buy_most_expensive_drink,金钱类前提,拥有足够买最贵的饮料的金钱
+debug_on,游戏系统类前提,debug模式已开启
+debug_off,游戏系统类前提,debug模式已关闭

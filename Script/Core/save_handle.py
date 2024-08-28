@@ -143,7 +143,7 @@ def write_save_data(save_id: str, data_id: str, write_data: dict):
         pickle.dump(write_data, f)
 
 
-def load_save(save_id: str) -> dict:
+def load_save(save_id: str) -> game_type.Cache:
     """
     按存档id读取存档数据
     Keyword arguments:

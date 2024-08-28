@@ -84,6 +84,7 @@ askfor_str = flow_handle.askfor_str
 
 # 请求输入一个数字
 askfor_int = flow_handle.askfor_int
+askfor_list = flow_handle.askfor_list
 askfor_all = flow_handle.askfor_all
 
 # 设置尾命令处理函数

@@ -12,7 +12,10 @@ from Script.Core import (
     value_handle,
     py_cmd,
 )
-from Script.Design import attr_text, map_handle, handle_instruct, handle_premise, constant, game_time
+from Script.Design import (
+    attr_text, map_handle, handle_instruct, handle_premise, constant, game_time,
+    handle_debug,
+)
 from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
@@ -414,6 +417,26 @@ class InScenePanel:
                 line_feed.draw()
                 ask_list.append(status_switch_button.return_text)
             see_instruct_panel.draw()
+            if cache.debug:
+                line.draw()
+                debug_info_title_draw = draw.NormalDraw()
+                debug_info_title_draw.width = self.width
+                debug_info_title_draw.text = _("口 debug指令: ")
+                debug_info_title_draw.draw()
+                debug_instruct_draw = SeeDebugPanel(self.width)
+                if cache.in_scene_panel_switch.debug_switch:
+                    debug_switch_button = draw.Button(_("[-关-]"), _("关闭debug指令菜单"),cmd_func=self.change_debug_panel_switch)
+                    debug_switch_button.width = self.width
+                    debug_switch_button.draw()
+                    ask_list.append(debug_switch_button.return_text)
+                    line_feed.draw()
+                    debug_instruct_draw.draw()
+                    ask_list.extend(debug_instruct_draw.return_list)
+                else:
+                    debug_switch_button = draw.Button(_("[-开-]"), _("开启debug指令菜单"),cmd_func=self.change_debug_panel_switch)
+                    debug_switch_button.width = self.width
+                    debug_switch_button.draw()
+                    ask_list.append(debug_switch_button.return_text)
             ask_list.extend(see_instruct_panel.return_list)
             flow_handle.askfor_all(ask_list)
             py_cmd.clr_cmd()
@@ -429,6 +452,10 @@ class InScenePanel:
     def change_status_panel_switch(self):
         """ 更改状态信息面板开关状态 """
         cache.in_scene_panel_switch.status_switch = not cache.in_scene_panel_switch.status_switch
+
+    def change_debug_panel_switch(self):
+        """ 更改debug指令面板开关状态 """
+        cache.in_scene_panel_switch.debug_switch = not cache.in_scene_panel_switch.debug_switch
 
 
 class SeeInstructPanel:
@@ -492,6 +519,7 @@ class SeeInstructPanel:
         line.draw()
         now_instruct_list = []
         now_premise_data = {}
+        instruct_len_max = 0
         for now_type in cache.instruct_filter:
             if not normal_config.config_normal.nsfw:
                 if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
@@ -514,10 +542,18 @@ class SeeInstructPanel:
                     if premise_judge:
                         continue
                     now_instruct_list.append(instruct)
+                    instruct_name = constant.handle_instruct_name_data[instruct]
+                    instruct_len = text_handle.get_text_index(instruct_name)
+                    if (instruct_len + 5) % 2 != 0:
+                        instruct_len += 1
+                    if instruct_len > instruct_len_max:
+                        instruct_len_max = instruct_len
         now_instruct_list.sort()
         rows = 1
+        instruct_len_max += 5
+        cols = int(normal_config.config_normal.text_width / instruct_len_max)
         for i in range(1, len(now_instruct_list)):
-            if i * i >= len(now_instruct_list):
+            if i * cols >= len(now_instruct_list):
                 rows = i
                 break
         instruct_group = value_handle.list_of_groups(now_instruct_list, rows)
@@ -562,3 +598,137 @@ class SeeInstructPanel:
         """
         py_cmd.clr_cmd()
         handle_instruct.handle_instruct(instruct_id)
+
+
+class SeeDebugPanel:
+    """
+    查看debug菜单面板
+    Keyword arguments:
+    width -- 绘制宽度
+    """
+
+    def __init__(self, width: int):
+        """初始化绘制对象"""
+        self.width: int = width
+        """ 最大绘制宽度 """
+        self.return_list: List[str] = []
+        """ 监听的按钮列表 """
+        if cache.debug_filter == {}:
+            for debug_type in game_config.config_debug_instruct_type:
+                cache.debug_filter[debug_type] = 0
+            cache.debug_filter[0] = 1
+
+    def draw(self):
+        """绘制操作菜单面板"""
+        self.return_list = []
+        line = draw.LineDraw("-.-", self.width)
+        line.draw()
+        fix_draw = draw.NormalDraw()
+        fix_width = int((self.width - int(len(game_config.config_debug_instruct_type) * len(cache.debug_filter))) / 2)
+        fix_draw.width = fix_width
+        fix_draw.text = " " * fix_width
+        fix_draw.draw()
+        for now_type in cache.debug_filter:
+            now_config = game_config.config_debug_instruct_type[now_type]
+            if cache.debug_filter[now_type]:
+                now_button = draw.CenterButton(
+                    f"[{now_config.name}]",
+                    now_config.name,
+                    8,
+                    " ",
+                    "onbutton",
+                    "standard",
+                    cmd_func=self.change_filter,
+                    args=(now_type,),
+                )
+            else:
+                now_button = draw.CenterButton(
+                    f"[{now_config.name}]",
+                    now_config.name,
+                    8,
+                    cmd_func=self.change_filter,
+                    args=(now_type,),
+                )
+            self.return_list.append(now_button.return_text)
+            now_button.draw()
+        line_feed.draw()
+        line = draw.LineDraw("~..", self.width)
+        line.draw()
+        now_debug_list = []
+        now_premise_data = {}
+        debug_len_max = 0
+        for now_type in cache.debug_filter:
+            if cache.debug_filter[now_type] and now_type in constant.debug_type_data:
+                for debug in constant.debug_type_data[now_type]:
+                    premise_judge = 0
+                    if debug in constant.debug_premise_data:
+                        for premise in constant.debug_premise_data[debug]:
+                            if premise in now_premise_data:
+                                if now_premise_data[premise]:
+                                    continue
+                                premise_judge = 1
+                                break
+                            now_premise_value = handle_premise.handle_premise(premise, 0)
+                            now_premise_data[premise] = now_premise_value
+                            if not now_premise_value:
+                                premise_judge = 1
+                                break
+                    if premise_judge:
+                        continue
+                    now_debug_list.append(debug)
+                    debug_name = constant.handle_debug_name_data[debug]
+                    debug_len = text_handle.get_text_index(debug_name)
+                    if (debug_len + 5) % 2 != 0:
+                        debug_len += 1
+                    if debug_len > debug_len_max:
+                        debug_len_max = debug_len
+        debug_len_max += 5
+        now_debug_list.sort()
+        rows = 1
+        cols = int(normal_config.config_normal.text_width / debug_len_max)
+        for i in range(1, len(now_debug_list)):
+            if i * cols >= len(now_debug_list):
+                rows = i
+                break
+        debug_group = value_handle.list_of_groups(now_debug_list, rows)
+        now_draw_list = []
+        for debug_list in debug_group:
+            for debug_id in debug_list:
+                debug_name = constant.handle_debug_name_data[debug_id]
+                id_text = text_handle.id_index(debug_id)
+                now_text = f"{id_text}{debug_name}"
+                now_draw = draw.LeftButton(
+                    now_text,
+                    str(debug_id),
+                    int(self.width / len(debug_group)),
+                    cmd_func=self.handle_debug,
+                    args=(debug_id,),
+                )
+                now_draw_list.append(now_draw)
+                self.return_list.append(now_draw.return_text)
+        now_draw = panel.VerticalDrawTextListGroup(self.width)
+        now_group = value_handle.list_of_groups(now_draw_list, rows)
+        now_draw.draw_list = now_group
+        now_draw.draw()
+
+    @staticmethod
+    def change_filter(now_type: int):
+        """
+        更改指令类型过滤状态
+        Keyword arguments:
+        now_type -- 指令类型
+        """
+        if cache.debug_filter[now_type]:
+            cache.debug_filter[now_type] = 0
+        else:
+            cache.debug_filter[now_type] = 1
+
+    @staticmethod
+    def handle_debug(debug_id: int):
+        """
+        处理玩家操作指令
+        Keyword arguments:
+        instruct_id -- 指令id
+        """
+        py_cmd.clr_cmd()
+        handle_debug.handle_debug(debug_id)

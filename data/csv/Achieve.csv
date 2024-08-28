@@ -1,0 +1,6 @@
+cid,name,hide,info
+成就id,成就名,是否是隐藏成就,成就描述
+str,str,int,str
+0,1,0,1
+成就配置数据,,,
+start_game,故事的起点,0,初次进入游戏
