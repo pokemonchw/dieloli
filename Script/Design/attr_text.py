@@ -1,16 +1,20 @@
 import math
 import random
 import bisect
+from types import FunctionType
 from typing import List
 from Script.Core import (
     cache_control,
     game_type,
+    get_text
 )
 from Script.Design import handle_premise, map_handle, constant
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 def get_random_name_for_sex(sex_grade: int) -> str:
@@ -97,3 +101,43 @@ def get_value_text(value: float) -> str:
     magnitude = min(int(math.log10(abs(value)) / 3), len(units) - 1)
     scaled_value = rounded_value / (1000 ** magnitude)
     return f"{scaled_value:.2f}{units[magnitude]}"
+
+
+def get_hungry_text(value: float) -> str:
+    """
+    获取饥饿值的描述文本
+    Keyword argumenst:
+    value -- 数值
+    Return arguments:
+    str -- 描述文本
+    """
+    if value < 20:
+        return _("吃饱了")
+    elif value < 40:
+        return _("肚子空空")
+    elif value < 60:
+        return _("感到饥饿")
+    elif value < 80:
+        return _("快饿晕了")
+    else:
+        return _("即将饿死")
+
+
+def get_thirsty_text(value: float) -> str:
+    """
+    获取口渴值的描述文本
+    Keyword argumenst:
+    value -- 数值
+    Return arguments:
+    str -- 描述文本
+    """
+    if value < 20:
+        return _("喝饱了")
+    elif value < 40:
+        return _("感到口渴")
+    elif value < 60:
+        return _("开始缺水")
+    elif value < 90:
+        return _("脱水了")
+    else:
+        return _("即将渴死")

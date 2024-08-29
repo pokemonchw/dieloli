@@ -3,3 +3,13 @@ class Achieve:
 
     START_GAME = "start_game"
     """ 初次启动游戏 """
+    END_GAME = "end_game"
+    """ 初次死亡 """
+    FIRST_BLOOD = "first_blood"
+    """ 第一次做爱 """
+    ONE_HUNDRED_AND_EIGHT_THOUSAND_SORROWS = "one_hundred_and_eight_thousand_sorrows"
+    """ 见证了108000人的人生 """
+    DROWNED_GIRL = "drowned_girl"
+    """ 喝下娘溺泉的水 """
+    FIRST_WEAR_CLOTHES = "first_wear_clothes"
+    """ 初次穿上衣服 """

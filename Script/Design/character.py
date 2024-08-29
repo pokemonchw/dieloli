@@ -44,11 +44,6 @@ def init_attr(character_id: int):
         character_data.clothing_data.setdefault(clothing_data.tem_id, set())
         character_data.clothing_data[clothing_data.tem_id].add(clothing_data.uid)
     chest_tem_config = game_config.config_chest[character_data.chest_tem]
-    if chest_tem_config.weight_fix:
-        fix_weight = value_handle.custom_distribution(
-            chest_tem_config.weight_fix - 0.5, chest_tem_config.weight_fix + 0.5
-        )
-        character_data.weight += fix_weight
     character_data.chest = attr_calculation.get_chest(
         character_data.chest_tem, character_data.birthday
     )

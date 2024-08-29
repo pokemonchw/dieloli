@@ -939,3 +939,13 @@ class AchieveData:
     def __init__(self):
         self.completed_data: Dict[str, bool] = {}
         """ 成就的完成状态 {成就id:是否已完成} """
+        self.first_dead: bool = False
+        """ 初次死亡 """
+        self.first_blood: bool = False
+        """ 第一次做爱 """
+        self.drowned_girl: bool = False
+        """ 喝下娘溺泉的水 """
+        self.create_npc_index: int = 0
+        """ 创建过的npc总数 """
+        self.first_wear_clothes: bool = False
+        """ 初次穿上衣服 """

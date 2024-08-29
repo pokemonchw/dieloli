@@ -29,7 +29,7 @@ class AchievePanel:
         """ 当前面板监听的按钮列表 """
         now_list = [cid for cid in game_config.config_achieve]
         self.handle_panel = panel.PageHandlePanel(
-            now_list, AchieveInfoDraw, 10, 2, self.width, True, True
+            now_list, AchieveInfoDraw, 10, 1, self.width, True, True
         )
 
     def draw(self):

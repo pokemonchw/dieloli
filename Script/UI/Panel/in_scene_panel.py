@@ -14,7 +14,7 @@ from Script.Core import (
 )
 from Script.Design import (
     attr_text, map_handle, handle_instruct, handle_premise, constant, game_time,
-    handle_debug,
+    handle_debug, handle_achieve,
 )
 from Script.Config import game_config, normal_config
 
@@ -67,12 +67,12 @@ class InScenePanel:
                 cache.wframe_mouse.w_frame_skip_wait_mouse = 0
                 now_draw = draw.LineFeedWaitDraw()
                 cause_of_death_config = game_config.config_cause_of_death[character_data.cause_of_death]
-                death_time_text = _("死亡时间:")
                 death_time = game_time.get_date_text(character_data.behavior.start_time)
-                death_time_text = f"{death_time_text}{death_time}"
-                now_draw.text = _("已死亡！") + f" {cause_of_death_config.name} " + death_time_text
+                now_draw.text = _("已死亡! 死因:") + f"{cause_of_death_config.name} " + death_time
                 now_draw.width = self.width
                 now_draw.draw()
+                cache_control.achieve.first_dead = True
+                handle_achieve.check_all_achieve()
                 continue
             character_set = scene_data.character_list.copy()
             character_set.remove(0)
@@ -359,7 +359,16 @@ class InScenePanel:
                     target_status_draw = see_character_info_panel.SeeCharacterStatusPanel(
                         character_data.target_character_id, self.width / 2 - 1, 3, 0
                     )
-                    for type_index in range(len(character_status_draw.draw_list)):
+                    now_draw_line = draw.LineDraw(".", self.width)
+                    character_status_draw_list.append(now_draw_line)
+                    character_status_draw_list.extend(character_status_draw.draw_list[1:3])
+                    fix_draw = draw.NormalDraw()
+                    fix_draw.width = 1
+                    fix_draw.text = "|"
+                    character_status_draw_list.append(fix_draw)
+                    character_status_draw_list.extend(target_status_draw.draw_list[1:3])
+                    character_status_draw_list.append(line_feed)
+                    for type_index in range(3, len(character_status_draw.draw_list)):
                         now_characer_status_draw = character_status_draw.draw_list[type_index]
                         now_target_status_draw = target_status_draw.draw_list[type_index]
                         now_type_draw = now_characer_status_draw.title_draw

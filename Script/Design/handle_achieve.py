@@ -40,7 +40,7 @@ def check_all_achieve():
                 cache_control.achieve.completed_data[cid] = True
                 now_config: config_def.Achieve = game_config.config_achieve[cid]
                 now_draw = draw.NormalDraw()
-                now_draw.text = _("达成了新的成就!") + " -> " + now_config.name + "\n"
+                now_draw.text = _("达成了新的成就") + " -> " + now_config.name + "\n"
                 now_draw.width = normal_config.config_normal.text_width
                 now_draw.draw()
     save_achieve()
@@ -51,7 +51,7 @@ def load_achieve():
     achieve_file_path = os.path.join(game_path_config.SAVE_PATH, "achieve")
     if os.path.exists(achieve_file_path):
         with open(achieve_file_path, "rb") as f:
-            cache_control.achieve.__dict__ = pickle.load(f).__dict__
+            cache_control.achieve.__dict__.update(pickle.load(f).__dict__)
 
 
 def save_achieve():
