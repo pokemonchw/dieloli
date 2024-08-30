@@ -13,7 +13,7 @@ DieLoli
 在本游戏中，你可以做任何你想做的事情，游戏设计者也就是我，并没有设计必须完成的强制性的游戏主线 \
 由于所有NPC都在自由演算的关系(类似环世界，矮人要塞，模拟人生)，每次新开游戏，都会有所不同 \
 可以在[discord频道](discord:https://discord.gg/Hu67GuXkfV)中查看和讨论本游戏具体的设计和更新计划 \
-与通常意义的"开源项目"不同，本游戏使用 [cc by nc sa]((http://creativecommons.org/licenses/by-nc-sa/2.0/) 协议 \
+与通常意义的"开源项目"不同，本游戏使用 [cc by nc sa](http://creativecommons.org/licenses/by-nc-sa/2.0/) 协议 \
 欢迎每一个人参与到本游戏的开发和设计中，也鼓励每一个人把它改成自己的游戏，本人保留署名权，同时请保持相同方式传播即可 \
 请勿将本游戏用于任何"商业用途"
 
