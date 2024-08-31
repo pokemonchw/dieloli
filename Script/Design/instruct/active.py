@@ -32,7 +32,15 @@ def handle_move():
     cache.now_panel_id = constant.Panel.SEE_MAP
 
 
-@handle_instruct.add_instruct(constant.Instruct.ESCAPE_FROM_CROWD, constant.InstructType.ACTIVE, _("逃离人群"), {constant.Premise.HAS_NO_CHARACTER_SCENE})
+@handle_instruct.add_instruct(
+    constant.Instruct.ESCAPE_FROM_CROWD,
+    constant.InstructType.ACTIVE,
+    _("逃离人群"),
+    {
+        constant.Premise.HAS_NO_CHARACTER_SCENE,
+        constant.Premise.SCENE_HAVE_OTHER_CHARACTER,
+    }
+)
 def handle_escape_from_crowd():
     """处理逃离人群指令"""
     character_data: game_type.Character = cache.character_data[0]

@@ -185,6 +185,14 @@ tonight_is_akatsuki_moon,时间状态类前提,今夜是晓月
 is_night,时间状态类前提,处于夜晚
 is_not_night,时间状态类前提,不处于夜晚
 is_club_activity_time,时间状态类前提,处于社团活动时间
+is_cloudy,天气状态类前提,现在的天气是多云
+is_heavy_rain,天气状态类前提,现在的天气是暴雨
+is_rainy,天气状态类前提,现在是普通的雨天
+is_light_rain,天气状态类前提,现在的天气是小雨
+is_thunder_storm,天气状态类前提,现在的天气是雷雨
+is_sunny,天气状态类前提,现在的天气是晴天
+is_sleet,天气状态类前提,现在的天气是大雪
+is_heavy_snow,天气状态类前提,现在的天气是大雪
 ethic_is_height,角色人文技能类前提,角色伦理水平高
 ethic_is_low,角色人文技能类前提,角色伦理水平低
 morality_is_height,角色人文技能类前提,角色道德水平高

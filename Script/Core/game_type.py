@@ -633,6 +633,10 @@ class Cache:
         """ cmd数据 """
         self.game_time: int = 0
         """ 游戏时间戳 """
+        self.weather: int = 0
+        """ 当前的天气 """
+        self.weather_last_time: int = 0
+        """ 天气剩余持续时间(单位:分) """
         self.now_panel_id: int = 0
         """ 当前游面板id """
         self.course_data: Dict[int, Dict[int, Dict[int, int]]] = {}
@@ -949,3 +953,4 @@ class AchieveData:
         """ 创建过的npc总数 """
         self.first_wear_clothes: bool = False
         """ 初次穿上衣服 """
+

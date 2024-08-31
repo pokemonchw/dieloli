@@ -238,6 +238,8 @@ class Instruct:
     """ 启用收藏模式 """
     UN_COLLECTION_SYSTEM = 0
     """ 关闭收藏模式 """
+    SEE_ACHIEVE = 0
+    """ 查看成就 """
     SAVE = 0
     """ 读写存档 """
     DEBUG_ON = 0

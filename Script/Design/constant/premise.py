@@ -425,6 +425,28 @@ class Premise:
 
     """
     =========================
+    天气状态类前提
+    =========================
+    """
+    IS_CLOUDY = "is_cloudy"
+    """ 现在的天气是多云 """
+    IS_HEAVY_RAIN = "is_heavy_rain"
+    """ 现在的天气是暴雨 """
+    IS_RAINY = "is_rainy"
+    """ 现在的天气是雨天 """
+    IS_LIGHT_RAIN = "is_light_rain"
+    """ 现在的天气是小雨 """
+    IS_THUNDER_STORM = "is_thunder_storm"
+    """ 现在的天气是雷雨 """
+    IS_SUNNY = "is_sunny"
+    """ 现在的天气是晴天 """
+    IS_SLEET = "is_sleet"
+    """ 现在的天气是雨夹雪 """
+    IS_HEAVY_SNOW = "is_heavy_snow"
+    """ 现在的天气是大雪 """
+
+    """
+    =========================
     角色人文技能类前提
     =========================
     """

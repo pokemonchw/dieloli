@@ -39,5 +39,6 @@ from Script.Premise import (
     target_science_interest,
     target_skills,
     target_skills_interest,
-    time_status
+    time_status,
+    weather_status
 )

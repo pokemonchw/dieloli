@@ -60,6 +60,7 @@ def handle_missionary_position():
     {
         constant.Premise.HAVE_TARGET,
         constant.Premise.TARGET_IS_PASSIVE_SEX,
+        constant.Premise.TARGET_IS_FUTA_OR_WOMAN,
     }
 )
 def handle_touch_clitoris():

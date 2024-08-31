@@ -17,6 +17,7 @@ from Script.Design import (
     clothing,
     club_handle,
     handle_achieve,
+    weather,
 )
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel, change_nature_panel
@@ -48,6 +49,7 @@ def creator_character_panel():
     confirm_character_attr_panel()
     cache_control.achieve.create_npc_index += len(cache.character_data)
     handle_achieve.check_all_achieve()
+    weather.handle_weather(False)
     cache.now_panel_id = constant.Panel.IN_SCENE
 
 

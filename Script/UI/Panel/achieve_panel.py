@@ -21,12 +21,14 @@ class AchievePanel:
     width -- 绘制宽度
     """
 
-    def __init__(self, width: int):
+    def __init__(self, width: int, in_scene: bool = False):
         """初始化绘制对象"""
         self.width: int = width
         """ 最大绘制宽度 """
         self.return_list: List[str] = []
         """ 当前面板监听的按钮列表 """
+        self.in_scene = in_scene
+        """ 是否是在游戏中打开的此面板 """
         now_list = [cid for cid in game_config.config_achieve]
         self.handle_panel = panel.PageHandlePanel(
             now_list, AchieveInfoDraw, 10, 1, self.width, True, True
@@ -51,7 +53,10 @@ class AchievePanel:
             yrn = flow_handle.askfor_all(self.return_list)
             py_cmd.clr_cmd()
             if yrn == back_draw.return_text:
-                cache.now_panel_id = constant.Panel.TITLE
+                if self.handle_panel:
+                    cache.now_panel_id = constant.Panel.IN_SCENE
+                else:
+                    cache.now_panel_id = constant.Panel.TITLE
                 break
 
 
