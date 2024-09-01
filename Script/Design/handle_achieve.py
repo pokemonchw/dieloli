@@ -31,6 +31,8 @@ def add_achieve(achieve_id: str):
 
 def check_all_achieve():
     """检查成就是否已完成"""
+    pass
+    """
     for cid in game_config.config_achieve:
         if cid in cache_control.achieve.completed_data and cache_control.achieve.completed_data[cid]:
             continue
@@ -44,6 +46,7 @@ def check_all_achieve():
                 now_draw.width = normal_config.config_normal.text_width
                 now_draw.draw()
     save_achieve()
+    """
 
 
 def load_achieve():
