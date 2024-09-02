@@ -60,7 +60,7 @@ jobs:
             const { data: refs } = await github.rest.git.listMatchingRefs({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'tags/${{ steps.version.outputs.value }}'
+              ref: 'tags/Test'
             });
             if (refs.length === 0) {
               return false;
