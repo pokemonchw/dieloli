@@ -15,7 +15,7 @@ achieve_handler_data: Dict[str, FunctionType] = {}
 """ 所有成就的验证器数据 """
 _: FunctionType = get_text._
 """ 翻译api """
-achieve_queue: multiprocessing.Queue()
+achieve_queue: multiprocessing.Queue = multiprocessing.Queue()
 """ 成就数据队列 """
 
 def start_save_achieve_processing():
@@ -67,7 +67,6 @@ def load_achieve():
 
 def save_achieve():
     """保存成就数据"""
-    global achieve_queue
     if platform.system() == "Linux":
         now_process = multiprocessing.Process(target=save_achieve_linux)
         now_process.start()
@@ -83,7 +82,6 @@ def save_achieve_windows(save_queue: multiprocessing.Queue):
     Keyword arguments:
     save_queue -- 传入数据的消息队列
     """
-    global achieve_queue
     while 1:
         data = achieve_queue.get()
         achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
