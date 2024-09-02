@@ -79,14 +79,45 @@ jobs:
           tag_name: Test
           release_name: Past Test
           draft: false
-          prerelease: false
+          prerelease: true
+      - name: Get Release URL for existing tag
+        id: get_release
+        uses: actions/github-script@v6
+        if: steps.check_tag.outputs.result == 'true'
+        with:
+          script: |
+            const tag = 'Test';
+            const releases = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            const release = releases.data.find(release => release.tag_name === tag);
+            if (release) {
+              return release.upload_url;
+            } else {
+              throw new Error('Release not found for tag: ' + tag);
+            }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
+        if: steps.check_tag.outputs.result == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/dieloli.zip
+          asset_name: dieloli_windows_test.zip
+          asset_content_type: application/zip
+      - name: Reupload Release Asset
+        id: reload-release-asset
+        uses: actions/upload-release-asset@v1
+        if: steps.check_tag.outputs.result == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.result }}
           asset_path: ${{ github.workspace }}/dieloli.zip
           asset_name: dieloli_windows_test.zip
           asset_content_type: application/zip
