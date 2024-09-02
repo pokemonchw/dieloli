@@ -112,12 +112,12 @@ jobs:
           asset_content_type: application/zip
       - name: Reupload Release Asset
         id: reload-release-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/reupload-release-asset@v1
         if: steps.check_tag.outputs.result == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.get_release.outputs.result }}
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ${{ github.workspace }}/dieloli.zip
           asset_name: dieloli_windows.${{ steps.version.outputs.value }}.zip
           asset_content_type: application/zip
