@@ -264,7 +264,7 @@ def askfor_str(donot_return_null_str=True, print_order=False):
             return order
 
 
-def askfor_all(input_list: list, print_order=False):
+def askfor_all(input_list: list, print_order=True):
     """
     用于请求一个位于列表中的输入，如果输入没有在列表中，则告知用户出错。
     Keyword arguments:
@@ -274,7 +274,6 @@ def askfor_all(input_list: list, print_order=False):
     while 1:
         order = order_deal("str", print_order)
         if order in input_list:
-            io_init.era_print(order + "\n")
             if _cmd_valid(order):
                 _cmd_deal(order)
             return order
@@ -285,9 +284,9 @@ def askfor_all(input_list: list, print_order=False):
         continue
 
 
-def askfor_int(input_list: list, print_order=False):
+def askfor_list(input_list: list, print_order=False):
     """
-    用于请求位于列表中的整数的输入，如果输入没有在列表中，则告知用户出错。
+    用于请求位于列表中的输入，如果输入没有在列表中，则告知用户出错。
     Keyword arguments:
     input_list -- 用于判断的列表内容
     print_order -- 是否将输入的order输出到屏幕上
@@ -296,8 +295,25 @@ def askfor_int(input_list: list, print_order=False):
         order = order_deal("str", print_order)
         order = text_handle.full_to_half_text(order)
         if order in input_list:
-            io_init.era_print(order + "\n\n")
+            io_init.era_print(order + "\n")
             return order
+        if order == "":
+            continue
+        io_init.era_print(order + "\n")
+        io_init.era_print(_("您输入的选项无效，请重试\n"))
+        continue
+
+
+def askfor_int(print_order=True):
+    """
+    用于请求输入一个数字
+    Keyword arguments:
+    print_order -- 是否将输入的order输出到屏幕上
+    """
+    while True:
+        order = order_deal("str", print_order)
+        if order.isdigit():
+            return int(order)
         if order == "":
             continue
         io_init.era_print(order + "\n")

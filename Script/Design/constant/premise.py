@@ -425,6 +425,28 @@ class Premise:
 
     """
     =========================
+    天气状态类前提
+    =========================
+    """
+    IS_CLOUDY = "is_cloudy"
+    """ 现在的天气是多云 """
+    IS_HEAVY_RAIN = "is_heavy_rain"
+    """ 现在的天气是暴雨 """
+    IS_RAINY = "is_rainy"
+    """ 现在的天气是雨天 """
+    IS_LIGHT_RAIN = "is_light_rain"
+    """ 现在的天气是小雨 """
+    IS_THUNDER_STORM = "is_thunder_storm"
+    """ 现在的天气是雷雨 """
+    IS_SUNNY = "is_sunny"
+    """ 现在的天气是晴天 """
+    IS_SLEET = "is_sleet"
+    """ 现在的天气是雨夹雪 """
+    IS_HEAVY_SNOW = "is_heavy_snow"
+    """ 现在的天气是大雪 """
+
+    """
+    =========================
     角色人文技能类前提
     =========================
     """
@@ -2268,3 +2290,13 @@ class Premise:
     """ 拥有足够买最贵的食物的钱 """
     MONEY_ENOUGH_BUY_MOST_EXPENSIVE_DRINK = "money_enough_buy_most_expensive_drink"
     """ 拥有足够买最贵的饮料的钱 """
+
+    """
+    =========================
+    游戏系统类前提
+    =========================
+    """
+    DEBUG_ON = "debug_on"
+    """ debug模式已开启 """
+    DEBUG_OFF = "debug_off"
+    """ debug模式已关闭 """

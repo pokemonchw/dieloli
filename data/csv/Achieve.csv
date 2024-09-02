@@ -1,0 +1,11 @@
+cid,name,hide,info
+成就id,成就名,是否是隐藏成就,成就描述
+str,str,int,str
+0,1,0,1
+成就配置数据,,,
+start_game,故事的起点,0,初次进入游戏
+end_game,迈入死亡,0,初次死亡
+first_blood,第一滴血,0,第一次做爱
+first_wear_clothes,穿着？尊严？,0,学会穿上衣服
+drowned_girl,变成女孩子了,1,喝下娘溺泉的水
+one_hundred_and_eight_thousand_sorrows,十万八千苦,1,见证了108000人的人生

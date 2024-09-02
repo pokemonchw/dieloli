@@ -25,6 +25,7 @@ from Script.Premise import (
     money,
     scene_status,
     shop,
+    system,
     target_bodily_status,
     target_humanity,
     target_humanity_interest,
@@ -38,5 +39,6 @@ from Script.Premise import (
     target_science_interest,
     target_skills,
     target_skills_interest,
-    time_status
+    time_status,
+    weather_status
 )

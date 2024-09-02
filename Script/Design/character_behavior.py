@@ -7,7 +7,10 @@ from types import FunctionType
 from typing import Dict, Set, List
 import datetime
 from Script.Core import cache_control, game_type, value_handle, get_text
-from Script.Design import character_handle, constant, game_time, settle_behavior, handle_premise, event, cooking, map_handle, attr_calculation
+from Script.Design import (
+    character_handle, constant, game_time, settle_behavior, handle_premise, event,
+    cooking, map_handle, attr_calculation,
+)
 from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache

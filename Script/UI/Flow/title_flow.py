@@ -41,7 +41,7 @@ def title_panel():
     lineFeed.draw()
     line = draw.LineDraw("=", width)
     line.draw()
-    now_list = [_("开始游戏"), _("读取存档"), _("游戏设置")]
+    now_list = [_("开始游戏"), _("读取存档"), _("游戏设置"), _("成就列表")]
     button_panel = panel.OneMessageAndSingleColumnButton()
     button_panel.set(now_list, "", 0)
     button_panel.draw()
@@ -56,3 +56,5 @@ def title_panel():
         now_panel.draw()
     elif now_key == now_list[2]:
         cache.now_panel_id = constant.Panel.GAME_SETTING
+    elif now_key == now_list[3]:
+        cache.now_panel_id = constant.Panel.ACHIEVE

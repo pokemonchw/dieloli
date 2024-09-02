@@ -62,6 +62,12 @@ class GameTimeInfoPanel:
             moon_phase_draw.style = "moon"
             now_draw.draw_list.append(moon_phase_draw)
             now_width += len(moon_phase_draw)
+        weather_draw = draw.NormalDraw()
+        weather_config = game_config.config_weather[cache.weather]
+        weather_draw.text = weather_config.name + " "
+        weather_draw.width = self.width - now_width
+        now_width += len(weather_draw)
+        now_draw.draw_list.append(weather_draw)
         now_judge = game_time.judge_attend_class_today(0)
         attend_class = _("(休息)")
         if now_judge:

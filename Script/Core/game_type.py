@@ -40,6 +40,8 @@ class InScenePanelSwitch:
     """ 穿着信息开关 """
     status_switch: bool = True
     """ 状态信息开关 """
+    debug_switch: bool = True
+    """ debug指令开关 """
 
 class NpcTem:
     """npc模板用结构体对象"""
@@ -613,6 +615,8 @@ class Cache:
         """ 回溯输入记录用定位 """
         self.instruct_filter: Dict[int, bool] = {}
         """ 玩家操作指令面板指令过滤状态数据 指令类型:是否展示"""
+        self.debug_filter: Dict[int, bool] = {}
+        """ 玩家debug操作指令面板指令过滤状态数据 指令类型:是否展示"""
         self.output_text_style: str = ""
         """ 富文本记录输出样式临时缓存 """
         self.text_style_position: int = 0
@@ -629,6 +633,10 @@ class Cache:
         """ cmd数据 """
         self.game_time: int = 0
         """ 游戏时间戳 """
+        self.weather: int = 0
+        """ 当前的天气 """
+        self.weather_last_time: int = 0
+        """ 天气剩余持续时间(单位:分) """
         self.now_panel_id: int = 0
         """ 当前游面板id """
         self.course_data: Dict[int, Dict[int, Dict[int, int]]] = {}
@@ -760,6 +768,8 @@ class Cache:
         """ 教师身份角色集合 """
         self.in_scene_panel_switch: InScenePanelSwitch = InScenePanelSwitch()
         """ 场景中各面板显示开关 """
+        self.debug: bool = False
+        """ debug模式开关 """
 
 
 class TargetChange:
@@ -925,3 +935,22 @@ class ClubActivityTimeData:
         """ 结束时间(时) """
         self.end_minute: int = 0
         """ 结束时间(分) """
+
+
+class AchieveData:
+    """ 所有成就记录数据 """
+
+    def __init__(self):
+        self.completed_data: Dict[str, bool] = {}
+        """ 成就的完成状态 {成就id:是否已完成} """
+        self.first_dead: bool = False
+        """ 初次死亡 """
+        self.first_blood: bool = False
+        """ 第一次做爱 """
+        self.drowned_girl: bool = False
+        """ 喝下娘溺泉的水 """
+        self.create_npc_index: int = 0
+        """ 创建过的npc总数 """
+        self.first_wear_clothes: bool = False
+        """ 初次穿上衣服 """
+

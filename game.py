@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     map_config.init_map_data()
 
-    from Script.Design import start_flow, instruct
+    from Script.Design import start_flow, instruct, debug, handle_achieve, achieve
     from Script.Core import game_init
     import Script.Premise
     import Script.Settle
@@ -34,6 +34,8 @@ if __name__ == "__main__":
     import Script.UI.Flow
     from Script.Core import main_frame
     import multiprocessing
+
+    handle_achieve.load_achieve()
 
     multiprocessing.freeze_support()
     game_init.run(start_flow.start_frame)

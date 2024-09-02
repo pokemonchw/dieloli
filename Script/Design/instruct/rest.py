@@ -1,7 +1,10 @@
 from types import FunctionType
 import datetime
 from Script.Core import cache_control, game_type, get_text
-from Script.Design import update, character, clothing, constant, handle_instruct, game_time, map_handle, character_handle, character_behavior, attr_calculation
+from Script.Design import (
+    update, character, clothing, constant, handle_instruct,
+    game_time, map_handle, character_handle, character_behavior, attr_calculation, weather
+)
 from Script.Config import normal_config
 from Script.UI.Moudle import draw
 
@@ -97,4 +100,5 @@ def handle_sleep():
     now_draw.text = "萝莉祈祷中"
     now_draw.width = normal_config.config_normal.text_width
     now_draw.draw()
+    weather.handle_weather()
 

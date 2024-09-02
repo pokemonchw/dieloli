@@ -174,6 +174,21 @@ class SeeCharacterStatusPanel:
         """ 当前面板监听的按钮列表 """
         self.center_status: bool = center_status
         """ 居中绘制状态文本 """
+        character_data: game_type.Character = cache.character_data[character_id]
+        character_data.status.setdefault(27, 0)
+        character_data.status.setdefault(28, 0)
+        hungry_text = attr_text.get_hungry_text(character_data.status[27])
+        thirsty_text = attr_text.get_thirsty_text(character_data.status[28])
+        hungry_draw = draw.CenterDraw()
+        hungry_draw.width = width / 2
+        hungry_draw.text = _("进食:") + hungry_text
+        thirsty_draw = draw.CenterDraw()
+        thirsty_draw.width = width / 2
+        thirsty_draw.text = _("饮水:") + thirsty_text
+        now_draw_line = draw.LineDraw(".", self.width)
+        self.draw_list.append(now_draw_line)
+        self.draw_list.append(hungry_draw)
+        self.draw_list.append(thirsty_draw)
         for status_type in game_config.config_character_state_type_data:
             if not normal_config.config_normal.nsfw:
                 if not status_type:
@@ -232,6 +247,8 @@ class CharacterStatusListPanel:
                     continue
                 if character_data.sex == 3 and status_id in {2, 3, 5, 6}:
                     continue
+            if status_id in {27, 28}:
+                continue
             status_text = game_config.config_character_state[status_id].name
             status_value = 0
             if status_id in character_data.status:

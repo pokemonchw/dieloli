@@ -27,3 +27,5 @@ class Panel:
     """ 查看社团列表面板 """
     VIEW_CLUB_INFO = 12
     """ 查看社团信息面板 """
+    ACHIEVE = 13
+    """ 成就面板 """

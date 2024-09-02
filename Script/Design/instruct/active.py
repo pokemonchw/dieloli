@@ -4,7 +4,7 @@ from types import FunctionType
 from Script.Core import cache_control, game_type, get_text
 from Script.Design import (
     update, character, attr_calculation, constant, handle_instruct, character_move,
-    map_handle
+    map_handle, handle_achieve
 )
 from Script.Config import normal_config
 from Script.UI.Moudle import draw
@@ -32,7 +32,15 @@ def handle_move():
     cache.now_panel_id = constant.Panel.SEE_MAP
 
 
-@handle_instruct.add_instruct(constant.Instruct.ESCAPE_FROM_CROWD, constant.InstructType.ACTIVE, _("逃离人群"), {constant.Premise.HAS_NO_CHARACTER_SCENE})
+@handle_instruct.add_instruct(
+    constant.Instruct.ESCAPE_FROM_CROWD,
+    constant.InstructType.ACTIVE,
+    _("逃离人群"),
+    {
+        constant.Premise.HAS_NO_CHARACTER_SCENE,
+        constant.Premise.SCENE_HAVE_OTHER_CHARACTER,
+    }
+)
 def handle_escape_from_crowd():
     """处理逃离人群指令"""
     character_data: game_type.Character = cache.character_data[0]
@@ -88,22 +96,20 @@ def handle_drink_spring():
     if value <= 5 and not character_data.sex:
         now_draw.text += _("喝到了奇怪的泉水！身体变化了！！！")
         character_data.sex = 1
-        character_data.height = attr_calculation.get_height(1, character_data.age)
-        bmi = attr_calculation.get_bmi(character_data.weight_tem)
-        character_data.weight = attr_calculation.get_weight(bmi, character_data.height.now_height)
-        character_data.bodyfat = attr_calculation.get_body_fat(
-            character_data.sex, character_data.bodyfat_tem
-        )
-        character_data.measurements = attr_calculation.get_measurements(
-            character_data.sex,
-            character_data.height.now_height,
-            character_data.bodyfat_tem,
-        )
+        character.init_character_end_age(0)
+        character.init_character_height(0)
+        character.init_character_weight_and_bodyfat(0)
+        character.init_character_measurements(0)
+        chest_tem = attr_calculation.get_rand_npc_chest_tem()
+        character_data.chest_tem = chest_tem
+        character_data.chest = attr_calculation.get_chest(chest_tem, character_data.birthday)
+        cache_control.achieve.drowned_girl = True
     else:
         now_draw.text += _("喝到了甜甜的泉水～")
         character_data.status[28] = 0
     now_draw.text += "\n"
     now_draw.draw()
+    handle_achieve.check_all_achieve()
 
 
 @handle_instruct.add_instruct(
@@ -168,6 +174,8 @@ def handle_wear():
     character_data.behavior.behavior_id = constant.Behavior.WEAR
     character_data.state = constant.CharacterStatus.STATUS_WEAR
     update.game_update_flow(2)
+    cache_control.achieve.first_wear_clothes = True
+    handle_achieve.check_all_achieve()
 
 
 @handle_instruct.add_instruct(
@@ -234,3 +242,20 @@ def handle_club_activity():
     character_data.state = activity_data.description
     update.game_update_flow(character_data.behavior.duration+1)
 
+
+@handle_instruct.add_instruct(
+    constant.Instruct.SUICIDE,
+    constant.InstructType.ACTIVE,
+    _("信仰之跃"),
+    {
+        constant.Premise.IN_ROOFTOP_SCENE
+    },
+)
+def handle_suicide():
+    """ 处理自杀指令 """
+    character_data: game_type.Character = cache.character_data[0]
+    character_data.cause_of_death = 4
+    character_data.dead = 1
+    character_data.state = constant.CharacterStatus.STATUS_DEAD
+    character_data.behavior.behavior_id = constant.Behavior.DEAD
+    update.game_update_flow(1)

@@ -2,6 +2,7 @@ from types import FunctionType
 from Script.Design import (
     settle_behavior,
     constant,
+    handle_achieve,
 )
 from Script.Core import (
     game_type,
@@ -152,6 +153,9 @@ def handle_target_enters_passive_sex(
         return
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.passive_sex = 1
+    if character_id == 0:
+        cache_control.achieve.first_blood = True
+        handle_achieve.check_all_achieve()
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.TARGET_OUT_PASSIVE_SEX)

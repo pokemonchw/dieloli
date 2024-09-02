@@ -1,7 +1,7 @@
 from types import FunctionType
 from Script.Core import cache_control, game_type, get_text
 from Script.Design import constant, handle_instruct
-from Script.UI.Panel import see_character_info_panel, see_save_info_panel
+from Script.UI.Panel import see_character_info_panel, see_save_info_panel, achieve_panel
 from Script.Config import normal_config
 from Script.UI.Moudle import draw
 
@@ -134,8 +134,32 @@ def handle_un_collection_system():
     now_draw.draw()
 
 
+@handle_instruct.add_instruct(
+    constant.Instruct.SEE_ACHIEVE,
+    constant.InstructType.SYSTEM,
+    _("查看成就"),
+    {},
+)
+def handle_see_achieve():
+    """处理查看成就指令"""
+    now_draw = achieve_panel.AchievePanel(width, True)
+    now_draw.draw()
+
+
 @handle_instruct.add_instruct(constant.Instruct.SAVE, constant.InstructType.SYSTEM, _("读写存档"), {})
 def handle_save():
     """处理读写存档指令"""
     now_panel = see_save_info_panel.SeeSaveListPanel(width, 1)
     now_panel.draw()
+
+
+@handle_instruct.add_instruct(constant.Instruct.DEBUG_ON, constant.InstructType.SYSTEM, _("开启debug模式"), {constant.Premise.DEBUG_OFF})
+def handle_debug_on():
+    """处理开启debug模式指令"""
+    cache.debug = True
+
+
+@handle_instruct.add_instruct(constant.Instruct.DEBUG_OFF, constant.InstructType.SYSTEM, _("关闭debug模式"), {constant.Premise.DEBUG_ON})
+def handle_debug_off():
+    """处理关闭debug模式指令"""
+    cache.debug = False

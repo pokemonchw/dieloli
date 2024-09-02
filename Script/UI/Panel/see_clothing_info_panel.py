@@ -4,7 +4,7 @@ from typing import List, Tuple
 from Script.Core import cache_control, game_type, text_handle, get_text, flow_handle, py_cmd
 from Script.Config import game_config
 from Script.UI.Moudle import draw, panel
-from Script.Design import map_handle
+from Script.Design import map_handle, handle_achieve
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -377,3 +377,5 @@ class ChangeClothingDraw:
             character_data.put_on[self.clothing_type] = ""
         else:
             character_data.put_on[self.clothing_type] = self.clothing_data.uid
+            cache_control.achieve.first_wear_clothes = True
+            handle_achieve.check_all_achieve()

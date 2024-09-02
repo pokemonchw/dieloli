@@ -46,6 +46,8 @@ class Instruct:
     """ 看星星 """
     CLUB_ACTIVITY = 0
     """ 社团活动 """
+    SUICIDE = 0
+    """ 自杀 """
 
     """
     =========================
@@ -236,5 +238,29 @@ class Instruct:
     """ 启用收藏模式 """
     UN_COLLECTION_SYSTEM = 0
     """ 关闭收藏模式 """
+    SEE_ACHIEVE = 0
+    """ 查看成就 """
     SAVE = 0
     """ 读写存档 """
+    DEBUG_ON = 0
+    """ 开启debug模式 """
+    DEBUG_OFF = 0
+    """ 关闭debug模式 """
+
+
+class Debug:
+    """debug指令id"""
+
+    """
+    =========================
+    系统类指令
+    =========================
+    """
+    ADD_MONEY = 0
+    """ 增加金钱 """
+    ADD_TARGET_FAVORABILITY = 0
+    """ 增加交互对象好感 """
+    FORCE_HAND_IN_HAND = 0
+    """ 强制牵手 """
+    FORCE_MAKE_LOVE = 0
+    """ 强制进入做爱状态 """

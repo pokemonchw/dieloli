@@ -8,6 +8,8 @@ data_path = os.path.join("data", "data.json")
 """ 原始json数据文件路径 """
 config_data = {}
 """ 原始json数据 """
+config_achieve: Dict[str, config_def.Achieve] = {}
+""" 全部成就配置数据 """
 config_age_judge_sex_experience_tem: Dict[int, config_def.AgeJudgeSexExperienceTem] = {}
 """ 不同性别不同年龄段对应生成不同性经验模板的权重 """
 config_age_judge_sex_experience_tem_data: Dict[int, Dict[int, Dict[int, int]]] = {}
@@ -87,6 +89,8 @@ config_course_language_experience_data: Dict[int, Dict[int, float]] = {}
 课程获取语言技能经验配置数据
 课程id:技能id:经验数量
 """
+config_debug_instruct_type: Dict[int, config_def.DebugInstructType] = {}
+""" debug指令类型配置 """
 config_end_age_tem: Dict[int, config_def.EndAgeTem] = {}
 """ 最终年龄范围配置模板 """
 config_end_age_tem_sex_data: Dict[int, int] = {}
@@ -248,6 +252,10 @@ config_social_type: Dict[int, config_def.SocialType] = {}
 """ 关系类型配置数据 """
 config_solar_period: Dict[int, config_def.SolarPeriod] = {}
 """ 节气配置数据 """
+config_solar_period_weather: Dict[int, config_def.SolarPeriodWeather] = {}
+""" 节气天气配置 """
+config_solar_period_weather_data: Dict[int, List] = {}
+""" 节气天气配置数据 {节气id:[天气列表]} """
 config_stature_description_premise: Dict[int, config_def.StatureDescriptionPremise] = {}
 """ 身材描述文本前提配置 """
 config_stature_description_premise_data: Dict[int, Set] = {}
@@ -262,6 +270,8 @@ config_effect_target_data: Dict[int, Set] = {}
 """ 能达成效果的目标集合 """
 config_waist_hip_proportion: Dict[int, config_def.WaistHipProportion] = {}
 """ 不同肥胖程度腰臀比例差值配置 """
+config_weather: Dict[int, config_def.Weather] = {}
+""" 天气配置数据 """
 config_week_day: Dict[int, config_def.WeekDay] = {}
 """ 星期描述文本配置数据 """
 config_weight_tem: Dict[int, config_def.WeightTem] = {}
@@ -286,6 +296,16 @@ def translate_data(data: dict):
         for key in now_data:
             if key in data["gettext"] and data["gettext"][key]:
                 now_data[key] = get_text._(now_data[key])
+
+
+def load_achieve():
+    """载入全部成就配置数据"""
+    now_data = config_data["Achieve"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Achieve()
+        now_tem.__dict__ = tem_data
+        config_achieve[now_tem.cid] = now_tem
 
 
 def load_age_judge_sex_experience_tem_data():
@@ -537,6 +557,16 @@ def load_course_skill_experience():
             config_course_knowledge_experience_data[now_tem.course][
                 now_tem.skill
             ] = now_tem.experience
+
+
+def load_debug_instruct_type():
+    """载入debug指令类型配置数据"""
+    now_data = config_data["DebugInstructType"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.DebugInstructType()
+        now_tem.__dict__ = tem_data
+        config_debug_instruct_type[now_tem.cid] = now_tem
 
 
 def load_end_age_tem():
@@ -910,6 +940,18 @@ def load_solar_period():
         config_solar_period[now_tem.cid] = now_tem
 
 
+def load_solar_period_weather():
+    """载入节气天气配置"""
+    now_data = config_data["SolarPeriodWeather"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.SolarPeriodWeather()
+        now_tem.__dict__ = tem_data
+        config_solar_period_weather[now_tem.cid] = now_tem
+        config_solar_period_weather_data.setdefault(now_tem.solar_period_id, [])
+        config_solar_period_weather_data[now_tem.solar_period_id].append(now_tem.weather_id)
+
+
 def load_stature_description_premise():
     """载入身材描述文本前提配置数据"""
     now_data = config_data["StatureDescriptionPremise"]
@@ -999,6 +1041,16 @@ def load_waist_hip_proportion():
         config_waist_hip_proportion[now_tem.cid] = now_tem
 
 
+def load_weather():
+    """载入天气配置数据"""
+    now_data = config_data["Weather"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Weather()
+        now_tem.__dict__ = tem_data
+        config_weather[now_tem.cid] = now_tem
+
+
 def load_week_day():
     """载入星期描述文本配置数据"""
     now_data = config_data["WeekDay"]
@@ -1022,6 +1074,7 @@ def load_weight_tem():
 def init():
     """初始化游戏配置数据"""
     load_data_json()
+    load_achieve()
     load_age_judge_sex_experience_tem_data()
     load_age_tem()
     load_attr_tem()
@@ -1043,6 +1096,7 @@ def init():
     load_cook_type()
     load_course()
     load_course_skill_experience()
+    load_debug_instruct_type()
     load_end_age_tem()
     load_event()
     load_font_data()
@@ -1077,6 +1131,7 @@ def init():
     load_sex_tem()
     load_social_type()
     load_solar_period()
+    load_solar_period_weather()
     load_stature_description_premise()
     load_stature_description_text()
     load_status()
@@ -1084,5 +1139,6 @@ def init():
     load_system_language()
     load_target()
     load_waist_hip_proportion()
+    load_weather()
     load_week_day()
     load_weight_tem()

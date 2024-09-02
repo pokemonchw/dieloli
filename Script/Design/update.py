@@ -1,6 +1,6 @@
 import time
 import datetime
-from Script.Design import character_behavior, game_time, event
+from Script.Design import character_behavior, game_time, event, handle_achieve, weather
 from Script.Core import py_cmd,cache_control, game_type
 from Script.UI.Moudle import draw
 from Script.Config import normal_config
@@ -44,4 +44,8 @@ def game_update_flow(add_time: int):
             next_hour_time = fix_next_hour_data_time.timestamp()
             fix_next_hour_time = (next_hour_time - now_time) / 60
         character_behavior.init_character_behavior()
+        cache.weather_last_time -= 1
+        if cache.weather_last_time <= 0:
+            weather.handle_weather()
+    handle_achieve.check_all_achieve()
 
