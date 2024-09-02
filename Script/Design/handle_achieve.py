@@ -18,15 +18,6 @@ _: FunctionType = get_text._
 achieve_queue: multiprocessing.Queue = multiprocessing.Queue()
 """ 成就数据队列 """
 
-def start_save_achieve_processing():
-    """ 启动自动保存成就进程 """
-    now_process = multiprocessing.Process(target=save_achieve_windows,args=(achieve_queue,))
-    now_process.start()
-    now_process.join()
-
-save_achieve_thread = threading.Thread(target=start_save_achieve_processing)
-save_achieve_thread.start()
-
 def add_achieve(achieve_id: str):
     """
     添加成就验证器
@@ -97,3 +88,13 @@ def save_achieve_linux():
     achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
     with open(achieve_file_path, "wb+") as f:
         pickle.dump(cache_control.achieve, f)
+
+
+def start_save_achieve_processing():
+    """ 启动自动保存成就进程 """
+    now_process = multiprocessing.Process(target=save_achieve_windows,args=(achieve_queue,))
+    now_process.start()
+    now_process.join()
+
+save_achieve_thread = threading.Thread(target=start_save_achieve_processing)
+save_achieve_thread.start()
