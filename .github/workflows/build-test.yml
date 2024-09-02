@@ -52,9 +52,27 @@ jobs:
         with:
           path: package.json
           property: version
+      - name: Check Tag Exists
+        id: check_tag
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: refs } = await github.rest.git.listMatchingRefs({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'tags/${{ steps.version.outputs.value }}'
+            });
+            if (refs.length === 0) {
+              return false;
+            } else {
+              return true;
+            }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
+        if: steps.check_tag.outputs.result == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
