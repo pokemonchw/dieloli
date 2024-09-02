@@ -5,7 +5,7 @@ on:
     branches: [ test ]
 
 jobs:
-  build-windows:
+  build-windows-test:
     runs-on: windows-latest
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
@@ -58,7 +58,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: Test Version
+          tag_name: Test
           release_name: Past Test
           draft: false
           prerelease: false
