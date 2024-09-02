@@ -83,7 +83,7 @@ def save_achieve_windows(save_queue: multiprocessing.Queue):
     save_queue -- 传入数据的消息队列
     """
     while 1:
-        data = achieve_queue.get()
+        data = save_queue.get()
         achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
         with open(achieve_file_path, "wb+") as f:
             pickle.dump(data, f)
