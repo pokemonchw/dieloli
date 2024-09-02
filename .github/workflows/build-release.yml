@@ -52,72 +52,23 @@ jobs:
         with:
           path: package.json
           property: version
-      - name: Check Tag Exists
-        id: check_tag
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { data: refs } = await github.rest.git.listMatchingRefs({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'tags/Last'
-            });
-            if (refs.length === 0) {
-              return false;
-            } else {
-              return true;
-            }
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
-        if: steps.check_tag.outputs.result == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: Last
+          tag_name: Last.${{ steps.version.outputs.value }}
           release_name: Past Last
           draft: false
           prerelease: false
-      - name: Get Release URL for existing tag
-        id: get_release
-        uses: actions/github-script@v6
-        if: steps.check_tag.outputs.result == 'true'
-        with:
-          script: |
-            const tag = 'Last';
-            const releases = await github.rest.repos.listReleases({
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
-            const release = releases.data.find(release => release.tag_name === tag);
-            if (release) {
-              return release.upload_url;
-            } else {
-              throw new Error('Release not found for tag: ' + tag);
-            }
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
-        if: steps.check_tag.outputs.result == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/dieloli.zip
-          asset_name: dieloli_windows.${{ steps.version.outputs.value }}.zip
-          asset_content_type: application/zip
-      - name: Reupload Release Asset
-        id: reload-release-asset
-        uses: actions/upload-release-asset@v1
-        if: steps.check_tag.outputs.result == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ${{ github.workspace }}/dieloli.zip
           asset_name: dieloli_windows.${{ steps.version.outputs.value }}.zip
           asset_content_type: application/zip
