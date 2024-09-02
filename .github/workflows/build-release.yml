@@ -1,4 +1,4 @@
-name: Build and Release Game
+name: Build Release
 
 on:
   pull_request:
@@ -58,7 +58,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: Past.${{steps.version.outputs.value}}
+          tag_name: Last Version
           release_name: Past ${{steps.version.outputs.value}}
           draft: false
           prerelease: false
@@ -70,5 +70,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ github.workspace }}/dieloli.zip
-          asset_name: dieloli_windows.zip
+          asset_name: dieloli_windows${{ steps.version.outputs.value }}.zip
           asset_content_type: application/zip
