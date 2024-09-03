@@ -58,8 +58,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: Last
-          release_name: Past ${{steps.version.outputs.value}}
+          tag_name: Last.${{ steps.version.outputs.value }}
+          release_name: Past Last
           draft: false
           prerelease: false
       - name: Upload Release Asset
@@ -70,5 +70,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ github.workspace }}/dieloli.zip
-          asset_name: dieloli_windows${{ steps.version.outputs.value }}.zip
+          asset_name: dieloli_windows.${{ steps.version.outputs.value }}.zip
           asset_content_type: application/zip

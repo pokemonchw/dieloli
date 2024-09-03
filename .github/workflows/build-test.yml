@@ -58,10 +58,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: Test
+          tag_name: Test.${{ steps.version.outputs.value }}
           release_name: Past Test
           draft: false
-          prerelease: false
+          prerelease: true
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1

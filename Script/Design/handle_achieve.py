@@ -15,6 +15,8 @@ achieve_handler_data: Dict[str, FunctionType] = {}
 """ 所有成就的验证器数据 """
 _: FunctionType = get_text._
 """ 翻译api """
+achieve_queue: multiprocessing.Queue = multiprocessing.Queue()
+""" 成就数据队列 """
 
 def add_achieve(achieve_id: str):
     """
@@ -31,8 +33,6 @@ def add_achieve(achieve_id: str):
 
 def check_all_achieve():
     """检查成就是否已完成"""
-    pass
-    """
     for cid in game_config.config_achieve:
         if cid in cache_control.achieve.completed_data and cache_control.achieve.completed_data[cid]:
             continue
@@ -46,7 +46,6 @@ def check_all_achieve():
                 now_draw.width = normal_config.config_normal.text_width
                 now_draw.draw()
     save_achieve()
-    """
 
 
 def load_achieve():
@@ -64,11 +63,7 @@ def save_achieve():
         now_process.start()
         now_process.join()
     else:
-        data_queue = multiprocessing.Queue()
-        now_process = multiprocessing.Process(target=save_achieve_windows, args=(data_queue,))
-        now_process.start()
-        data_queue.put(cache_control.achieve)
-        now_process.join()
+        achieve_queue.put(cache_control.achieve)
 
 
 def save_achieve_windows(save_queue: multiprocessing.Queue):
@@ -78,10 +73,11 @@ def save_achieve_windows(save_queue: multiprocessing.Queue):
     Keyword arguments:
     save_queue -- 传入数据的消息队列
     """
-    data = save_queue.get()
-    achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
-    with open(achieve_file_path, "wb+") as f:
-        pickle.dump(data, f)
+    while 1:
+        data = save_queue.get()
+        achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
+        with open(achieve_file_path, "wb+") as f:
+            pickle.dump(data, f)
 
 
 def save_achieve_linux():
@@ -92,3 +88,13 @@ def save_achieve_linux():
     achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
     with open(achieve_file_path, "wb+") as f:
         pickle.dump(cache_control.achieve, f)
+
+
+def start_save_achieve_processing():
+    """ 启动自动保存成就进程 """
+    now_process = multiprocessing.Process(target=save_achieve_windows,args=(achieve_queue,))
+    now_process.start()
+    now_process.join()
+
+save_achieve_thread = threading.Thread(target=start_save_achieve_processing)
+save_achieve_thread.start()
