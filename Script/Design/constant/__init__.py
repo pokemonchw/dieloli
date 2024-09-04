@@ -61,6 +61,8 @@ panel_data: Dict[int, FunctionType] = {}
 """
 place_data: Dict[str, List[str]] = {}
 """ 按房间类型分类的场景列表 场景标签:场景路径列表 """
+in_door_scene_list: List[str] = []
+""" 室内场景列表 """
 cmd_map: Dict[int, FunctionType] = {}
 """ cmd存储 """
 settle_behavior_effect_data: Dict[int, FunctionType] = {}

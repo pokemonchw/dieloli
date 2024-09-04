@@ -193,6 +193,8 @@ is_thunder_storm,天气状态类前提,现在的天气是雷雨
 is_sunny,天气状态类前提,现在的天气是晴天
 is_sleet,天气状态类前提,现在的天气是大雪
 is_heavy_snow,天气状态类前提,现在的天气是大雪
+now_is_rainy,天气状态类前提,现在正在下雨(所有的下雨天气)
+now_is_not_rainy,天气状态类前提,现在没有在下雨
 ethic_is_height,角色人文技能类前提,角色伦理水平高
 ethic_is_low,角色人文技能类前提,角色伦理水平低
 morality_is_height,角色人文技能类前提,角色道德水平高

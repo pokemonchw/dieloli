@@ -1,22 +1,26 @@
 import os
 import pickle
 from typing import Dict, List
-from Script.Core import game_type, json_handle, get_text, text_handle, cache_control, dijkstra
+from Script.Core import (
+    game_type, json_handle, get_text,
+    text_handle, cache_control, dijkstra,
+    game_path_config
+)
 from Script.Design import map_handle, constant
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 map_data_path = os.path.join("data", "map")
 """ 地图配置数据路径 """
-scene_path_edge_path = os.path.join("data", "ScenePath")
-""" 寻路路径配置文件路径 """
-all_scene_data_path = os.path.join("data", "SceneData")
+scene_path_edge_path = os.path.join(game_path_config.MAP_DATA_PATH, "ScenePath")
+""" 预处理的所有寻路路径配置文件路径 """
+all_scene_data_path = os.path.join(game_path_config.MAP_DATA_PATH, "SceneData")
 """ 预处理的所有场景数据路径 """
-all_place_data_path = os.path.join("data", "PlaceData")
+all_place_data_path = os.path.join(game_path_config.MAP_DATA_PATH, "PlaceData")
 """ 预处理的所有地点数据路径 """
-all_map_data_path = os.path.join("data", "MapData")
+all_map_data_path = os.path.join(game_path_config.MAP_DATA_PATH, "MapData")
 """ 预处理的所有地图数据路径 """
-all_move_time_path = os.path.join("data", "MoveTime")
+all_move_time_path = os.path.join(game_path_config.MAP_DATA_PATH, "MoveTime")
 """ 预处理的所有场景移动时间数据路径 """
 
 
@@ -47,6 +51,10 @@ def init_map_data():
             pickle.dump(constant.place_data, all_place_data_file)
         map_handle.init_scene_edge_path_data()
         map_handle.init_move_time_data()
+    for scene_path in cache.scene_data:
+        scene_data = cache.scene_data[scene_path]
+        if scene_data.in_door:
+            constant.in_door_scene_list.append(scene_data.scene_path)
 
 
 def load_dir_now(data_path: str):
