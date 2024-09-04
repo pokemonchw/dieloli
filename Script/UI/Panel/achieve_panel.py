@@ -53,7 +53,7 @@ class AchievePanel:
             yrn = flow_handle.askfor_all(self.return_list)
             py_cmd.clr_cmd()
             if yrn == back_draw.return_text:
-                if self.handle_panel:
+                if self.in_scene:
                     cache.now_panel_id = constant.Panel.IN_SCENE
                 else:
                     cache.now_panel_id = constant.Panel.TITLE
