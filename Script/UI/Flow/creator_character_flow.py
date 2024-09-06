@@ -215,6 +215,7 @@ def setting_age_tem_panel():
     character.init_character_weight_and_bodyfat(0)
     character.init_character_measurements(0)
     course.init_character_knowledge(0)
+    attr_calculation.init_character_hp_and_mp(0)
     course.init_class_teacher()
 
 
@@ -243,4 +244,5 @@ def setting_weight_panel():
     character_data.bodyfat_tem = int(ans)
     character.init_character_weight_and_bodyfat(0)
     character.init_character_measurements(0)
+    attr_calculation.init_character_hp_and_mp(0)
 
