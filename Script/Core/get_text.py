@@ -12,7 +12,7 @@ if "language" in normal_config.config_normal.__dict__:
     )
 else:
     translation: gettext.GNUTranslations = gettext.translation(
-        "dieloli", po_data, ["zh_CN", "zh_CN"]
+        "dieloli",  po_data, ["zh_CN", "zh_CN"]
     )
 """ 翻译对象类型 """
 translation_values = set(translation._catalog.values())

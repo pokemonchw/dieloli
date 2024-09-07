@@ -47,6 +47,7 @@ def creator_character_panel():
     character.init_attr(0)
     game_start()
     confirm_character_attr_panel()
+    character_handle.init_character_position()
     cache_control.achieve.create_npc_index += len(cache.character_data)
     handle_achieve.check_all_achieve()
     weather.handle_weather(False)
@@ -57,7 +58,6 @@ def game_start():
     """初始化游戏数据"""
     character_handle.init_no_character_scene()
     character_handle.init_character_dormitory()
-    character_handle.init_character_position()
     course.init_phase_course_hour()
     interest.init_character_interest()
     course.init_all_character_knowledge()
@@ -215,6 +215,7 @@ def setting_age_tem_panel():
     character.init_character_weight_and_bodyfat(0)
     character.init_character_measurements(0)
     course.init_character_knowledge(0)
+    attr_calculation.init_character_hp_and_mp(0)
     course.init_class_teacher()
 
 
@@ -243,4 +244,5 @@ def setting_weight_panel():
     character_data.bodyfat_tem = int(ans)
     character.init_character_weight_and_bodyfat(0)
     character.init_character_measurements(0)
+    attr_calculation.init_character_hp_and_mp(0)
 

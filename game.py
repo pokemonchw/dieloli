@@ -1,10 +1,14 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
+import os
 import time
 from types import FunctionType
 
 
 if __name__ == "__main__":
+    current_file_path = os.path.realpath(__file__)
+    current_dir = os.path.dirname(current_file_path)
+    os.chdir(current_dir)
 
     from Script.Core import game_path_config
     from Script.Config import normal_config

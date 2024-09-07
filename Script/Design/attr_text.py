@@ -41,7 +41,7 @@ def get_random_name_for_sex(sex_grade: int) -> str:
             name_region = constant.boys_region_int_list[name_region_index]
             name = constant.boys_region_list[name_region]
         now_name = f"{family_name}{name}"
-        if now_name not in cache.npc_name_data:
+        if now_name not in cache.npc_name_data and now_name not in constant.adv_name_set:
             cache.npc_name_data.add(now_name)
             return family_name + name
 
