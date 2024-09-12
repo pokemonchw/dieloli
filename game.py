@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     map_config.init_map_data()
 
-    from Script.Design import start_flow, instruct, debug, handle_achieve, achieve
+    from Script.Design import start_flow, instruct, debug, handle_achieve, achieve, adv
     from Script.Core import game_init
     import Script.Premise
     import Script.Settle
