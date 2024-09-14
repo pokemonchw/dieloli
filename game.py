@@ -52,11 +52,11 @@ def establish_save_windows(now_save_queue: multiprocessing.Queue):
 
 
 if __name__ == "__main__":
-
-    current_file_path = os.path.realpath(__file__)
-    current_dir = os.path.dirname(current_file_path)
-    os.chdir(current_dir)
-    print(current_dir)
+    if getattr(sys, 'frozen', False):
+        os.chdir(os.path.dirname(sys.executable))
+    else:
+        os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    print(os.getcwd())
 
     multiprocessing.freeze_support()
     multiprocessing.set_executable(sys.executable)
