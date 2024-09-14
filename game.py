@@ -30,8 +30,8 @@ if __name__ == "__main__":
 
     map_config.init_map_data()
 
-    from Script.Design import start_flow, instruct, debug, handle_achieve, achieve, adv
-    from Script.Core import game_init
+    from Script.Design import start_flow, instruct, handle_achieve, debug, achieve, adv
+    from Script.Core import game_init, save_handle
     import Script.Premise
     import Script.Settle
     import Script.StateMachine
@@ -39,6 +39,7 @@ if __name__ == "__main__":
     from Script.Core import main_frame
     import multiprocessing
 
+    save_handle.save_achieve_thread.start()
     handle_achieve.load_achieve()
     handle_achieve.save_achieve_thread.start()
 
