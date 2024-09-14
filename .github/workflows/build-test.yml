@@ -29,9 +29,11 @@ jobs:
           python init_data.py
       - name: Run PyInstaller
         run: |
-          pyinstaller -F game.py --add-data "data:data" --add-data "image:image"
+          pyinstaller -F game.py
       - name: Copy Game Files
         run: |
+          Copy-Item data dist/ -Recurse
+          Copy-Item image dist/ -Recurse
           Copy-Item config.ini dist/
           Copy-Item LICENSE dist/
           Copy-Item README.md dist/
