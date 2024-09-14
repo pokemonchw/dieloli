@@ -40,6 +40,7 @@ if __name__ == "__main__":
     import multiprocessing
 
     handle_achieve.load_achieve()
+    handle_achieve.save_achieve_thread.start()
 
     multiprocessing.freeze_support()
     game_init.run(start_flow.start_frame)
