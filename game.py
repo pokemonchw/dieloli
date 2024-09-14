@@ -5,7 +5,7 @@ import time
 from types import FunctionType
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and __spec__ is None:
     current_file_path = os.path.realpath(__file__)
     current_dir = os.path.dirname(current_file_path)
     os.chdir(current_dir)

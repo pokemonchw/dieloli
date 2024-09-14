@@ -173,7 +173,7 @@ def remove_save(save_id: str):
 
 def start_save_write_processing():
     """ 启动自动保存成就进程 """
-    if platform.system() != "Linux":
+    if platform.system() == "Linux":
         now_process = multiprocessing.Process(target=establish_save_windows,args=(save_queue,))
         now_process.start()
         now_process.join()
