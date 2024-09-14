@@ -86,9 +86,9 @@ if __name__ == "__main__":
 
     handle_achieve.load_achieve()
     if platform.system() != "Linux":
-        achieve_process = multiprocessing.Process(target=save_achieve_windows,args=(handle_achieve.achieve_queue))
+        achieve_process = multiprocessing.Process(target=save_achieve_windows,args=(handle_achieve.achieve_queue,))
         achieve_process.start()
-        save_process = multiprocessing.Process(target=establish_save_windows, args=(save_handle.save_queue))
+        save_process = multiprocessing.Process(target=establish_save_windows, args=(save_handle.save_queue,))
         save_process.start()
 
     game_init.run(start_flow.start_frame)
