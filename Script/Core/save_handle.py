@@ -73,7 +73,7 @@ def establish_save(save_id: str):
         save_queue.put(data)
 
 
-def establish_save_windows(save_queue: multiprocessing.Queue):
+def establish_save_windows(now_save_queue: multiprocessing.Queue):
     """
     针对windows的并行自动存档函数
     笔记:由于windows不支持fork机制,数据无法从主进程直接继承,pickle转换数据效率过低且不安全,最后决定使用线程安全的queue来传递数据(稳定性待测试)
@@ -82,7 +82,7 @@ def establish_save_windows(save_queue: multiprocessing.Queue):
     save_queue -- 传递存档数据的消息队列
     """
     while 1:
-        data = save_queue.get()
+        data = now_save_queue.get()
         save_id = data[0]
         save_data = data[1]
         save_version = data[2]
@@ -176,8 +176,8 @@ def remove_save(save_id: str):
 def start_save_write_processing():
     """ 启动自动保存成就进程 """
     if platform.system() != "Linux":
-        now_process = multiprocessing.Process(target=establish_save_windows,args=(achieve_queue,))
+        now_process = multiprocessing.Process(target=establish_save_windows,args=(save_queue,))
         now_process.start()
         now_process.join()
 
-save_achieve_thread = threading.Thread(target=start_save_write_processing)
+write_save_thread = threading.Thread(target=start_save_write_processing)
