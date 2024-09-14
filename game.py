@@ -1,11 +1,15 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 import os
+import sys
 import time
 from types import FunctionType
 
 
-if __name__ == "__main__" and __spec__ is None:
+if __name__ == "__main__" and __spec__ is None and getattr(sys, 'frozen', False) == False:
+    import multiprocessing
+
+    multiprocessing.freeze_support()
     current_file_path = os.path.realpath(__file__)
     current_dir = os.path.dirname(current_file_path)
     os.chdir(current_dir)
@@ -37,9 +41,6 @@ if __name__ == "__main__" and __spec__ is None:
     import Script.StateMachine
     import Script.UI.Flow
     from Script.Core import main_frame
-    import multiprocessing
-
-    multiprocessing.freeze_support()
     save_handle.write_save_thread.start()
     handle_achieve.load_achieve()
     handle_achieve.save_achieve_thread.start()
