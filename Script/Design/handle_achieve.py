@@ -66,20 +66,6 @@ def save_achieve():
         achieve_queue.put(cache_control.achieve)
 
 
-def save_achieve_windows(save_queue: multiprocessing.Queue):
-    """
-    针对windows的并行成就保存函数
-    笔记:由于windows不支持fork机制,数据无法从主进程直接继承,pickle转换数据效率过低且不安全,最后决定使用线程安全的queue来传递数据(稳定性待测试)
-    Keyword arguments:
-    save_queue -- 传入数据的消息队列
-    """
-    while 1:
-        data = save_queue.get()
-        achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
-        with open(achieve_file_path, "wb+") as f:
-            pickle.dump(data, f)
-
-
 def save_achieve_linux():
     """
     针对linux的并行成就保存函数
@@ -89,9 +75,3 @@ def save_achieve_linux():
     with open(achieve_file_path, "wb+") as f:
         pickle.dump(cache_control.achieve, f)
 
-
-def start_save_achieve_processing():
-    """ 启动自动保存成就进程 """
-    if platform.system() != "Linux":
-        now_process = multiprocessing.Process(target=save_achieve_windows,args=(achieve_queue,))
-        now_process.start()
