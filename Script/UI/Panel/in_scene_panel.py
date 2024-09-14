@@ -73,7 +73,11 @@ class InScenePanel:
                 now_draw.draw()
                 cache_control.achieve.first_dead = True
                 handle_achieve.check_all_achieve()
-                continue
+                now_draw.text = _("重新开始新的人生吧")
+                now_draw.width = self.width
+                now_draw.draw()
+                cache.now_panel_id = constant.Panel.TITLE
+                break
             character_set = scene_data.character_list.copy()
             character_set.remove(0)
             refresh_character_list_judge = False
@@ -394,8 +398,6 @@ class InScenePanel:
                                 t_draw.text = " " * int(self.width / 2 - 1)
                                 t_draw.width = self.width / 2 - 1
                             character_status_draw_list.append((c_draw, t_draw))
-                    #title_draw = draw.TitleLineDraw(_("人物状态"), self.width)
-                    #title_draw.draw()
                     for label in character_status_draw_list:
                         if isinstance(label, tuple):
                             index = 0

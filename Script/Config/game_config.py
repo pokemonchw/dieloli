@@ -1,10 +1,10 @@
 import os
 from typing import Dict, List, Set
 from Script.Config import config_def
-from Script.Core import json_handle, get_text, game_type
+from Script.Core import json_handle, get_text, game_type, game_path_config
 
 
-data_path = os.path.join("data", "data.json")
+data_path = game_path_config.resource_path(os.path.join("data", "data.json"))
 """ 原始json数据文件路径 """
 config_data = {}
 """ 原始json数据 """
