@@ -1,7 +1,7 @@
 import os
 from PIL.ImageTk import PhotoImage
 from PIL import Image
-from Script.Core import main_frame, game_type, cache_control
+from Script.Core import main_frame, game_type, cache_control, game_path_config
 
 
 image_data = {}
@@ -9,7 +9,7 @@ image_text_data = {}
 image_lock = 0
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
-image_dir_path = os.path.join("image")
+image_dir_path = game_path_config.resource_path(os.path.join("image"))
 for image_file_path_id in os.listdir(image_dir_path):
     image_file_path = os.path.join(image_dir_path, image_file_path_id)
     image_file_name = image_file_path_id.rstrip(".png")
