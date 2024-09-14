@@ -53,11 +53,13 @@ def establish_save_windows(now_save_queue: multiprocessing.Queue):
 
 if __name__ == "__main__":
 
-    multiprocessing.freeze_support()
-    multiprocessing.set_executable(sys.executable)
     current_file_path = os.path.realpath(__file__)
     current_dir = os.path.dirname(current_file_path)
     os.chdir(current_dir)
+    print(current_dir)
+
+    multiprocessing.freeze_support()
+    multiprocessing.set_executable(sys.executable)
 
     from Script.Core import game_type, cache_control
 

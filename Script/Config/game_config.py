@@ -281,6 +281,7 @@ config_weight_tem: Dict[int, config_def.WeightTem] = {}
 def load_data_json():
     """载入data.json内配置数据"""
     global config_data
+    print(os.path.realpath(data_path))
     config_data = json_handle.load_json(data_path)
 
 
