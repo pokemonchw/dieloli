@@ -5,6 +5,7 @@ import sys
 import time
 from types import FunctionType
 import platform
+import pickle
 import multiprocessing
 from Script.Config import normal_config
 
