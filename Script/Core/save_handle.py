@@ -19,8 +19,6 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
-if platform.system() == "Darwin":
-    multiprocessing.set_start_method('fork')
 save_queue: multiprocessing.Queue = multiprocessing.Queue()
 """ 存档数据队列 """
 

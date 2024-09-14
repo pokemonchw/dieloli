@@ -39,10 +39,10 @@ if __name__ == "__main__":
     from Script.Core import main_frame
     import multiprocessing
 
+    multiprocessing.freeze_support()
     save_handle.write_save_thread.start()
     handle_achieve.load_achieve()
     handle_achieve.save_achieve_thread.start()
 
-    multiprocessing.freeze_support()
     game_init.run(start_flow.start_frame)
     main_frame.run()
