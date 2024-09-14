@@ -21,22 +21,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyinstaller
           pip install -r requirements.txt
-      - name: Run PyInstaller
-        run: |
-          pyinstaller -F game.py 
       - name: Buildi Game Config
         run: |
           python buildconfig.py
       - name: Buildi Game Cache
         run: |
           python init_data.py
+      - name: Run PyInstaller
+        run: |
+          pyinstaller -F game.py --add-data "data:data" --add-data "image:image"
       - name: Copy Game Files
         run: |
           Copy-Item data dist/ -Recurse
+          Copy-Item image dist/ -Recurse
           Copy-Item config.ini dist/
           Copy-Item LICENSE dist/
           Copy-Item README.md dist/
-          Copy-Item image dist/ -Recurse
           Copy-Item package.json dist/
           Rename-Item dist dieloli
       - name: Pack Game Files

@@ -18,6 +18,7 @@ from Script.Design import (
     club_handle,
     handle_achieve,
     weather,
+    handle_adv,
 )
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel, change_nature_panel
@@ -74,6 +75,7 @@ def game_start():
     club_handle.init_club_data()
     for i in cache.character_data:
         attr_calculation.init_character_hp_and_mp(i)
+    handle_adv.handle_all_adv_npc()
 
 
 def confirm_character_attr_panel():

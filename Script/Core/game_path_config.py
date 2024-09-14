@@ -14,15 +14,16 @@ else:
     USER_PATH = "."
 os.makedirs(USER_PATH, exist_ok=True)
 
-CONFIG_PATH = os.path.join(USER_PATH,"config.ini")
+CONFIG_PATH = os.path.join(USER_PATH, "config.ini")
 """ 配置文件路径 """
 if not os.path.exists(CONFIG_PATH):
-    with open(CONFIG_PATH,"w",encoding="utf-8") as config_file:
+    with open(CONFIG_PATH, "w", encoding="utf-8") as config_file:
         config_file.write(config_info)
 
-SAVE_PATH = os.path.join(USER_PATH,"save")
+SAVE_PATH = os.path.join(USER_PATH, "save")
 """ 存档目录路径 """
 os.makedirs(SAVE_PATH, exist_ok=True)
+
 MAP_DATA_PATH = os.path.join(USER_PATH, "data")
 """ 地图预热数据路径 """
 os.makedirs(MAP_DATA_PATH, exist_ok=True)

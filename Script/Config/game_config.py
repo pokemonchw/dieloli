@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List, Set
 from Script.Config import config_def
-from Script.Core import json_handle, get_text, game_type
+from Script.Core import json_handle, get_text, game_type, game_path_config
 
 
 data_path = os.path.join("data", "data.json")
@@ -281,6 +281,7 @@ config_weight_tem: Dict[int, config_def.WeightTem] = {}
 def load_data_json():
     """载入data.json内配置数据"""
     global config_data
+    print(os.path.realpath(data_path))
     config_data = json_handle.load_json(data_path)
 
 

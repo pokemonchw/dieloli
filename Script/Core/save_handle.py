@@ -5,6 +5,7 @@ import shutil
 import datetime
 import platform
 import multiprocessing
+import threading
 from types import FunctionType
 from Script.Core import (
     cache_control,
@@ -18,9 +19,8 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
-if platform.system() == "Darwin":
-    multiprocessing.set_start_method('fork')
-
+save_queue: multiprocessing.Queue = multiprocessing.Queue()
+""" 存档数据队列 """
 
 
 def get_save_dir_path(save_id: str) -> str:
@@ -56,7 +56,6 @@ def establish_save(save_id: str):
     if save_id != "auto":
         establish_save_linux(save_id)
         return
-    #if platform.system() in {"Linux", "Darwin"}:
     if platform.system() in {"Linux"}:
         now_process = multiprocessing.Process(target=establish_save_linux, args=(save_id,))
         now_process.start()
@@ -68,30 +67,8 @@ def establish_save(save_id: str):
             "character_name": cache.character_data[0].name,
             "save_time": datetime.datetime.now(),
         }
-        data = {
-            "1": cache,
-            "0": save_verson,
-        }
-        data_queue = multiprocessing.Queue()
-        now_process = multiprocessing.Process(
-            target=establish_save_windows, args=(save_id, data_queue)
-        )
-        now_process.start()
-        data_queue.put(data)
-        now_process.join()
-
-
-def establish_save_windows(save_id: str, save_queue: multiprocessing.Queue):
-    """
-    针对windows的并行自动存档函数
-    笔记:由于windows不支持fork机制,数据无法从主进程直接继承,pickle转换数据效率过低且不安全,最后决定使用线程安全的queue来传递数据(稳定性待测试)
-    Keyword arguments:
-    save_id -- 当前存档id
-    save_queue -- 传递存档数据的消息队列
-    """
-    data = save_queue.get()
-    for key, value in data.items():
-        write_save_data(save_id, key, value)
+        data = [save_id, cache, save_verson]
+        save_queue.put(data)
 
 
 def establish_save_linux(save_id: str):
@@ -175,3 +152,4 @@ def remove_save(save_id: str):
     save_path = get_save_dir_path(save_id)
     if os.path.isdir(save_path):
         shutil.rmtree(save_path)
+
