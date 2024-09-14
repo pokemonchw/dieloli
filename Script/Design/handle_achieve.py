@@ -95,6 +95,3 @@ def start_save_achieve_processing():
     if platform.system() != "Linux":
         now_process = multiprocessing.Process(target=save_achieve_windows,args=(achieve_queue,))
         now_process.start()
-        now_process.join()
-
-save_achieve_thread = threading.Thread(target=start_save_achieve_processing)

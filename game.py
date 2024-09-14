@@ -6,10 +6,11 @@ import time
 from types import FunctionType
 
 
-if __name__ == "__main__" and __spec__ is None and getattr(sys, 'frozen', False) == False:
+if __name__ == "__main__":
     import multiprocessing
 
     multiprocessing.freeze_support()
+    multiprocessing.set_executable(sys.executable)
     current_file_path = os.path.realpath(__file__)
     current_dir = os.path.dirname(current_file_path)
     os.chdir(current_dir)
@@ -41,9 +42,9 @@ if __name__ == "__main__" and __spec__ is None and getattr(sys, 'frozen', False)
     import Script.StateMachine
     import Script.UI.Flow
     from Script.Core import main_frame
-    save_handle.write_save_thread.start()
+    save_handle.start_save_write_processing()
     handle_achieve.load_achieve()
-    handle_achieve.save_achieve_thread.start()
+    handle_achieve.start_save_achieve_processing()
 
     game_init.run(start_flow.start_frame)
     main_frame.run()
