@@ -22,12 +22,12 @@ def save_achieve_windows(save_queue: multiprocessing.Queue):
     """
     while 1:
         data = save_queue.get()
-        achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
+        achieve_file_path = os.path.join(game_path_config.SAVE_PATH, "achieve")
         with open(achieve_file_path, "wb+") as f:
             pickle.dump(data, f)
 
 
-def establish_save_windows(now_save_queue: multiprocessing.Queue, save_path_dir: str):
+def establish_save_windows(now_save_queue: multiprocessing.Queue):
     """
     针对windows的并行自动存档函数
     笔记:由于windows不支持fork机制,数据无法从主进程直接继承,pickle转换数据效率过低且不安全,最后决定使用线程安全的queue来传递数据(稳定性待测试)
@@ -86,9 +86,9 @@ if __name__ == "__main__":
 
     handle_achieve.load_achieve()
     if platform.system() != "Linux":
-        achieve_process = multiprocessing.Process(target=save_achieve_windows,args=(handle_achieve.achieve_queue, game_path_config.SAVE_PATH))
+        achieve_process = multiprocessing.Process(target=save_achieve_windows,args=(handle_achieve.achieve_queue))
         achieve_process.start()
-        save_process = multiprocessing.Process(target=establish_save_windows, args=(save_handle.save_queue, game_path_config.SAVE_PATH))
+        save_process = multiprocessing.Process(target=establish_save_windows, args=(save_handle.save_queue))
         save_process.start()
 
     game_init.run(start_flow.start_frame)

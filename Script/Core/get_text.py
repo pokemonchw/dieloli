@@ -3,9 +3,8 @@ import gettext
 import os
 from types import FunctionType
 from Script.Config import normal_config
-from Script.Core import game_path_config
 
-po_data = game_path_config.resource_path(os.path.join("data", "po"))
+po_data = os.path.join("data", "po")
 """ po文件路径 """
 
 def _translation(message: str) -> str:
@@ -15,7 +14,7 @@ def _translation(message: str) -> str:
 try:
     if "language" in normal_config.config_normal.__dict__:
         translation: gettext.GNUTranslations = gettext.translation(
-            "dieloli", po_data, [normal_config.config_normal.language,"zh_CN"]
+            "dieloli", po_data, [normal_config.config_normal.language, "zh_CN"]
         )
         """ 翻译对象类型 """
     else:
