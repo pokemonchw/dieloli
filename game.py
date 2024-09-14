@@ -8,11 +8,12 @@ import platform
 import pickle
 import multiprocessing
 from Script.Config import normal_config
+from Script.Core import game_path_config
 
 normal_config.init_normal_config()
 
 
-def save_achieve_windows(save_queue: multiprocessing.Queue, save_path: str):
+def save_achieve_windows(save_queue: multiprocessing.Queue):
     """
     针对windows的并行成就保存函数
     笔记:由于windows不支持fork机制,数据无法从主进程直接继承,pickle转换数据效率过低且不安全,最后决定使用线程安全的queue来传递数据(稳定性待测试)
@@ -21,7 +22,7 @@ def save_achieve_windows(save_queue: multiprocessing.Queue, save_path: str):
     """
     while 1:
         data = save_queue.get()
-        achieve_file_path = os.path.join(save_path,"achieve")
+        achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
         with open(achieve_file_path, "wb+") as f:
             pickle.dump(data, f)
 
@@ -39,13 +40,13 @@ def establish_save_windows(now_save_queue: multiprocessing.Queue, save_path_dir:
         save_id = data[0]
         save_data = data[1]
         save_version = data[2]
-        save_path = os.path.join(save_path_dir, save_id)
+        save_path = os.path.join(game_path_config.SAVE_PATH, save_id)
         if not os.path.exists(save_path):
             os.makedirs(save_path)
-        head_file_path = os.path.join(save_path_dir, "0")
+        head_file_path = os.path.join(save_path, "0")
         with open(head_file_path, "wb+") as f:
             pickle.dump(save_version, f)
-        data_file_path = os.path.join(save_path_dir, "1")
+        data_file_path = os.path.join(save_path, "1")
         with open(data_file_path, "wb+") as f:
             pickle.dump(save_data, f)
 
@@ -58,7 +59,6 @@ if __name__ == "__main__":
     current_dir = os.path.dirname(current_file_path)
     os.chdir(current_dir)
 
-    from Script.Core import game_path_config
     from Script.Core import game_type, cache_control
 
     cache_control.cache = game_type.Cache()

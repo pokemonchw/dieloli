@@ -38,7 +38,7 @@ if not os.path.exists(CONFIG_PATH):
     with open(CONFIG_PATH,"w",encoding="utf-8") as config_file:
         config_file.write(config_info)
 
-SAVE_PATH = os.path.join(USER_PATH,"save")
+SAVE_PATH = os.path.join(USER_PATH, "save")
 """ 存档目录路径 """
 os.makedirs(SAVE_PATH, exist_ok=True)
 
