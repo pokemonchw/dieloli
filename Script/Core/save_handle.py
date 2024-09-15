@@ -4,7 +4,6 @@ import pickle
 import shutil
 import datetime
 import platform
-import multiprocessing
 import threading
 from types import FunctionType
 from Script.Core import (
@@ -19,8 +18,6 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 _: FunctionType = get_text._
 """ 翻译api """
-save_queue: multiprocessing.Queue = multiprocessing.Queue()
-""" 存档数据队列 """
 
 
 def get_save_dir_path(save_id: str) -> str:
@@ -52,31 +49,6 @@ def establish_save(save_id: str):
     将游戏数据存入指定id的存档内
     Keyword arguments:
     save_id -- 存档id
-    """
-    if save_id != "auto":
-        establish_save_linux(save_id)
-        return
-    if platform.system() in {"Linux"}:
-        now_process = multiprocessing.Process(target=establish_save_linux, args=(save_id,))
-        now_process.start()
-        now_process.join()
-    else:
-        save_verson = {
-            "game_verson": normal_config.config_normal.verson,
-            "game_time": cache.game_time,
-            "character_name": cache.character_data[0].name,
-            "save_time": datetime.datetime.now(),
-        }
-        data = [save_id, cache, save_verson]
-        save_queue.put(data)
-
-
-def establish_save_linux(save_id: str):
-    """
-    针对linux的并行自动存档函数
-    笔记:得益于unix的fork机制,子进程直接复制了一份内存,效率高,且不用创建传参管道,数据进程安全,不受玩家操作影响
-    Keyword argumentsL
-    save_id -- 当前存档id
     """
     save_verson = {
         "game_verson": normal_config.config_normal.verson,
