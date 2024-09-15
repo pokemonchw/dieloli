@@ -15,8 +15,6 @@ achieve_handler_data: Dict[str, FunctionType] = {}
 """ 所有成就的验证器数据 """
 _: FunctionType = get_text._
 """ 翻译api """
-achieve_queue: multiprocessing.Queue = multiprocessing.Queue()
-""" 成就数据队列 """
 
 def add_achieve(achieve_id: str):
     """
@@ -58,19 +56,6 @@ def load_achieve():
 
 def save_achieve():
     """保存成就数据"""
-    if platform.system() == "Linux":
-        now_process = multiprocessing.Process(target=save_achieve_linux)
-        now_process.start()
-        now_process.join()
-    else:
-        achieve_queue.put(cache_control.achieve)
-
-
-def save_achieve_linux():
-    """
-    针对linux的并行成就保存函数
-    笔记:得益于unix的fork机制,子进程直接复制了一份内存,效率高,且不用创建传参管道,数据进程安全,不受玩家操作影响
-    """
     achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
     with open(achieve_file_path, "wb+") as f:
         pickle.dump(cache_control.achieve, f)
