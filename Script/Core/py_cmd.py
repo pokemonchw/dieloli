@@ -3,6 +3,7 @@ from Script.Core import (
     main_frame,
     cache_control,
     game_type,
+    io_init,
 )
 from Script.Config import normal_config
 

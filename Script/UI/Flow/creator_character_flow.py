@@ -2,7 +2,7 @@ import random
 from functools import wraps
 from typing import List
 from types import FunctionType
-from Script.Core import get_text, game_type, cache_control, flow_handle, py_cmd
+from Script.Core import get_text, game_type, cache_control, flow_handle, py_cmd, save_handle
 from Script.Design import (
     constant,
     handle_panel,
@@ -52,6 +52,7 @@ def creator_character_panel():
     cache_control.achieve.create_npc_index += len(cache.character_data)
     handle_achieve.check_all_achieve()
     weather.handle_weather(False)
+    save_handle.establish_save("auto")
     cache.now_panel_id = constant.Panel.IN_SCENE
 
 

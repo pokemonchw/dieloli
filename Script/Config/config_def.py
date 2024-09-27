@@ -148,6 +148,14 @@ class SolarPeriod:
     """ 节气名 """
     season: int
     """ 所属季节id """
+    highest_tem_max: int
+    """ 最高温度最大值 """
+    highest_tem_min: int
+    """ 最高温度最小值 """
+    lowest_tem_max: int
+    """ 最低温度最大值 """
+    lowest_tem_min: int
+    """ 最低温度最小值 """
 
 
 class InstructType:
