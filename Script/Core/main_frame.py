@@ -4,6 +4,7 @@ import math
 import uuid
 import psutil
 import signal
+from types import FunctionType
 from tkinter import (
     ttk,
     Tk,
@@ -91,7 +92,7 @@ now_char_height = now_font.metrics("linespace")
 window_width = now_char_width * 120
 window_height = now_char_height * 50
 normal_config.config_normal.font_size = need_font_size
-normal_config.config_normal.order_font_size = need_font_size - 2
+normal_config.config_normal.order_font_size = need_font_size
 root.title(game_name)
 width = window_width + 30
 frm_width = root.winfo_rootx() - root.winfo_x()
@@ -144,6 +145,7 @@ input_background_box = Text(
 )
 input_background_box.grid(column=0, row=1, sticky=(W, E, S))
 
+order_font = font.Font(family=order_font_data.font, size=order_font_data.font_size)
 cursor_text = "~$"
 cursor_width = text_handle.get_text_index(cursor_text)
 input_background_box_cursor = Text(
@@ -153,6 +155,7 @@ input_background_box_cursor = Text(
     highlightbackground=order_font_data.background,
     background=order_font_data.background,
     bd=0,
+    font=order_font,
 )
 input_background_box_cursor.grid(column=0, row=0, sticky=(W, E, S))
 input_background_box_cursor.insert("end", cursor_text)
@@ -160,11 +163,11 @@ input_background_box_cursor.config(foreground=order_font_data.foreground)
 
 # 输入栏
 order = StringVar()
-order_font = font.Font(family=order_font_data.font, size=order_font_data.font_size)
 inputbox = Entry(
     input_background_box,
     borderwidth=0,
-    insertborderwidth=0,
+    insertwidth=1,
+    insertbackground=order_font_data.foreground,
     selectborderwidth=0,
     highlightthickness=0,
     bg=order_font_data.background,

@@ -8,3 +8,4 @@ scipy>=1.7.3
 screeninfo>=0.8.1
 wcwidth>=0.2.9
 appdirs>=1.4.4
+polib>=1.2.0

@@ -743,6 +743,8 @@ class Cache:
         """ 指定日期下每分钟太阳位置 日期:时:分:位置id """
         self.moon_phase: Dict[str, int] = {}
         """ 指定日期月相记录 日期:月相id """
+        self.temperature_data: Dict[str, Dict[int, Dict[int, int]]] = {}
+        """ 指定日期下每分钟气温 {日期:{时:{分:气温}}} """
         self.clothing_shop: Dict[int, Dict[UUID, Clothing]] = {}
         """
         服装商店内的服装数据

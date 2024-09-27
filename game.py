@@ -24,6 +24,10 @@ if __name__ == "__main__":
     cache_control.cache = game_type.Cache()
 
     from Script.Core import get_text
+
+    get_text.rebuild_mo()
+    get_text.init_translation()
+
     from Script.Config import game_config, name_config
 
     _: FunctionType = get_text._
