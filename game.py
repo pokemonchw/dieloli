@@ -17,7 +17,6 @@ if __name__ == "__main__":
         os.chdir(os.path.dirname(sys.executable))
     else:
         os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    print(os.getcwd())
 
     from Script.Core import game_type, cache_control
 

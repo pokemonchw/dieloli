@@ -44,6 +44,8 @@ def creator_character_panel():
     map_config.init_map_data()
     game_time.init_time()
     cache.character_data[0] = game_type.Character()
+    cache.character_data[0].name = _("主人公")
+    cache.character_data[0].nick_name = _("你")
     character_handle.init_character_list()
     character.init_attr(0)
     game_start()
@@ -144,7 +146,6 @@ def change_name():
     not_system_error.text = _("角色名不能为系统保留字，请重新输入\n")
     not_name_error = draw.NormalDraw()
     not_name_error.text = _("已有角色使用该姓名，请重新输入\n")
-    create_judge = 0
     while 1:
         now_name = ask_name_panel.draw()
         if now_name.isdigit():
