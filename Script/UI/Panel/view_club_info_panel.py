@@ -42,11 +42,17 @@ class ClubInfoPanel:
         club_data: game_type.ClubData = cache.all_club_data[identity_data.club_uid]
         title_draw = draw.TitleLineDraw(club_data.name, self.width)
         club_owner_data: game_type.Character = cache.character_data[club_data.president]
+        club_owner_name = club_owner_data.name
+        if club_owner_data.nick_name != "" and club_owner_data.cid:
+            club_owner_name = club_owner_data.nick_name
         club_teacher_data: game_type.Character = cache.character_data[club_data.teacher]
-        club_owner_info = _("社长:") + club_owner_data.name
-        club_teacher_info = _("指导老师:") + club_teacher_data.name
-        club_theme_info = _("主题:") + _(game_config.config_club_theme[club_data.theme].name)
-        club_memeber_count = _("人数:") + str(len(club_data.character_set))
+        club_teacher_name = club_teacher_data.name
+        if club_teacher_data.nick_name != "" and club_teacher_data.cid:
+            club_teacher_name = club_teacher_data.nick_name
+        club_owner_info = _("社长:{club_owner_name}").format(club_owner_name=club_owner_name)
+        club_teacher_info = _("指导老师:{club_teacher_name}").format(club_teacher_name=club_teacher_name)
+        club_theme_info = _("主题:{theme_name}").format(theme_name=game_config.config_club_theme[club_data.theme].name)
+        club_memeber_count = _("人数:{people_num}").format(people_num=len(club_data.character_set))
         club_theme_info_draw = panel.LeftDrawTextListPanel()
         club_theme_info_draw.set(
             [club_theme_info, club_memeber_count],
@@ -176,7 +182,10 @@ class SeeCharacterStatusDraw:
         cid_text_draw.width = self.width / 10
         self.now_draw_list.append(cid_text_draw)
         character_name_draw = draw.LeftDraw()
-        character_name_draw.text = character_data.name
+        character_name = character_data.name
+        if character_data.nick_name != "" and character_id:
+            character_name = character_data.nick_name
+        character_name_draw.text = character_name
         character_name_draw.width = self.width / 10
         self.now_draw_list.append(character_name_draw)
         sex_text_draw = draw.LeftDraw()

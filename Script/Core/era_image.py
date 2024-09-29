@@ -1,7 +1,7 @@
 import os
 from PIL.ImageTk import PhotoImage
 from PIL import Image
-from Script.Core import main_frame, game_type, cache_control
+from Script.Core import main_frame, game_type, cache_control, game_path_config
 
 
 image_data = {}

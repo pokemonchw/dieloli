@@ -1,13 +1,13 @@
 import os
 import json
 from typing import Dict
-from Script.Core import cache_control, value_handle, game_type
+from Script.Core import cache_control, value_handle, game_type, game_path_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
-scene_path_edge_path = os.path.join("data", "ScenePath")
+scene_path_edge_path = os.path.join(game_path_config.MAP_DATA_PATH, "ScenePath")
 """ 寻路路径配置文件路径 """
-all_move_time_path = os.path.join("data", "MoveTime")
+all_move_time_path = os.path.join(game_path_config.MAP_DATA_PATH, "MoveTime")
 """ 预处理的所有场景移动时间数据路径 """
 scene_path_edge = {}
 """ 寻路路径 """

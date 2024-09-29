@@ -208,8 +208,8 @@ def handle_see_star():
     character.init_character_behavior_start_time(0, cache.game_time)
     character_data: game_type.Character = cache.character_data[0]
     character_data.behavior.duration = 10
-    character_data.behavior.behavior_id = constant.Behavior.UNDRESS
-    character_data.state = constant.CharacterStatus.STATUS_UNDRESS
+    character_data.behavior.behavior_id = constant.Behavior.SEE_STAR
+    character_data.state = constant.CharacterStatus.STATUS_SEE_STAR
     update.game_update_flow(10)
 
 

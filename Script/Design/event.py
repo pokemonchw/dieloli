@@ -97,7 +97,11 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
             line_draw_judge = True
             if settle_output[1]:
                 name_draw = draw.NormalDraw()
-                name_draw.text = _("{character_name}的状态结算:").format(character_name=character_data.name)
+                character_name = character_data.name
+                if character_data.cid:
+                    if character_data.nick_name != "":
+                        character_name = character_data.nick_name
+                name_draw.text = _("{character_name}的状态结算:").format(character_name=character_name)
                 name_draw.width = window_width
                 name_draw.draw()
                 line_feed.draw()

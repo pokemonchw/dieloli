@@ -20,17 +20,14 @@ def on_wframe_listion():
     wframe.bind("<Down>", key_down)
 
 
-def mouse_left_check(_: Event):
+def mouse_left_check(e: Event):
     """
     鼠标左键事件处理
     Keyword arguments:
     event -- 鼠标事件
     """
     py_cmd.focus_cmd()
-    if not cache.wframe_mouse.w_frame_up:
-        set_wframe_up()
-    else:
-        mouse_check_push()
+    mouse_check_push()
 
 
 def mouse_right_check(_: Event):
@@ -42,10 +39,7 @@ def mouse_right_check(_: Event):
     cache.wframe_mouse.mouse_right = 1
     cache.text_wait = 0
     cache.wframe_mouse.w_frame_skip_wait_mouse = 1
-    if not cache.wframe_mouse.w_frame_up:
-        set_wframe_up()
-    else:
-        mouse_check_push()
+    mouse_check_push()
 
 
 def key_up(_: Event):
@@ -84,18 +78,10 @@ def key_down(_: Event):
         main_frame.order.set("")
 
 
-def set_wframe_up():
-    """
-    修正逐字输出状态为nowait
-    """
-    cache.wframe_mouse.w_frame_up = 1
-    cache.wframe_mouse.w_frame_lines_up = 1
-
-
 def mouse_check_push():
     """
     更正鼠标点击状态数据映射
     """
-    if not cache.wframe_mouse.mouse_leave_cmd == 0:
+    if cache.wframe_mouse.mouse_leave_cmd:
         main_frame.send_input()
         cache.wframe_mouse.mouse_leave_cmd = 1

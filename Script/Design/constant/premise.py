@@ -444,6 +444,10 @@ class Premise:
     """ 现在的天气是雨夹雪 """
     IS_HEAVY_SNOW = "is_heavy_snow"
     """ 现在的天气是大雪 """
+    NOW_IS_RAINY = "now_is_rainy"
+    """ 现在正在下雨(所有的下雨天气) """
+    NOW_IS_NOT_RAINY = "now_is_not_rainy"
+    """ 现在没有在下雨(所有的下雨天气) """
 
     """
     =========================

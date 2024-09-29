@@ -8,7 +8,9 @@ normal_config.init_normal_config()
 
 
 from Script.Config import game_config, name_config
+from Script.Core import get_text
 
+get_text.init_translation()
 game_config.init()
 name_config.init_name_data()
 

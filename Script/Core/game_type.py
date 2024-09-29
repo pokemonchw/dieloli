@@ -14,13 +14,11 @@ class FlowContorl:
 class WFrameMouse:
     """鼠标状态结构体"""
 
-    w_frame_up: int = 2
-    """ 逐字输出状态 """
     mouse_right: int = 0
     """ 鼠标右键按下 """
     w_frame_lines_up: int = 2
     """ 逐行输出状态 """
-    mouse_leave_cmd: int = 1
+    mouse_leave_cmd: int = 0
     """ 鼠标左键事件 """
     w_frame_re_print: int = 0
     """ 再次载入游戏界面 """
@@ -384,9 +382,9 @@ class Character:
     def __init__(self):
         self.cid: int = 0
         """ 角色id """
-        self.name: str = "主人公"
+        self.name: str = ""
         """ 角色名字 """
-        self.nick_name: str = "你"
+        self.nick_name: str = ""
         """ 他人对角色的称呼 """
         self.sex: int = 0
         """ 角色性别 """
@@ -733,6 +731,8 @@ class Cache:
         """
         self.npc_name_data: Set = set()
         """ 已有的npc姓名集合 """
+        self.npc_nickname_data: Set = set()
+        """ npc昵称集合 """
         self.school_longitude: float = 0
         """ 学校经度 """
         self.school_latitude: float = 0
@@ -743,6 +743,8 @@ class Cache:
         """ 指定日期下每分钟太阳位置 日期:时:分:位置id """
         self.moon_phase: Dict[str, int] = {}
         """ 指定日期月相记录 日期:月相id """
+        self.temperature_data: Dict[str, Dict[int, Dict[int, int]]] = {}
+        """ 指定日期下每分钟气温 {日期:{时:{分:气温}}} """
         self.clothing_shop: Dict[int, Dict[UUID, Clothing]] = {}
         """
         服装商店内的服装数据

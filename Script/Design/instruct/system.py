@@ -3,7 +3,7 @@ from Script.Core import cache_control, game_type, get_text
 from Script.Design import constant, handle_instruct
 from Script.UI.Panel import see_character_info_panel, see_save_info_panel, achieve_panel
 from Script.Config import normal_config
-from Script.UI.Moudle import draw
+from Script.UI.Moudle import draw, panel
 
 
 cache: game_type.Cache = cache_control.cache
@@ -12,6 +12,9 @@ _: FunctionType = get_text._
 """ 翻译api """
 width: int = normal_config.config_normal.text_width
 """ 屏幕宽度 """
+line_feed_draw = draw.NormalDraw()
+""" 绘制换行对象 """
+line_feed_draw.text = "\n"
 
 
 @handle_instruct.add_instruct(
@@ -132,6 +135,54 @@ def handle_un_collection_system():
     now_draw.width = width
     now_draw.text = _("\n现在会显示所有角色的信息了！\n")
     now_draw.draw()
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.SET_NICK_NAME,
+    constant.InstructType.SYSTEM,
+    _("设置昵称"),
+    {constant.Premise.HAVE_TARGET},
+)
+def handle_set_nickname():
+    """处理设置昵称指令"""
+    character_data: game_type.Character = cache.character_data[0]
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    ask_name_panel = panel.AskForOneMessage()
+    ask_name_panel.set(_("想要怎么称呼{target_name}?").format(target_name=target_data.name), 10)
+    ask_name_panel.donot_return_null_str = False
+    not_num_error = draw.NormalDraw()
+    not_num_error.text = _("角色名不能为纯数字，请重新输入\n")
+    not_system_error = draw.NormalDraw()
+    not_system_error.text = _("角色名不能为系统保留字，请重新输入\n")
+    not_name_error = draw.NormalDraw()
+    not_name_error.text = _("已有角色使用该姓名，请重新输入\n")
+    line_feed_draw.draw()
+    while 1:
+        now_name = ask_name_panel.draw()
+        if now_name.isdigit():
+            not_num_error.draw()
+            continue
+        if now_name in get_text.translation_values or now_name in get_text.translation._catalog:
+            not_system_error.draw()
+            continue
+        if now_name in cache.npc_name_data:
+            if now_name == target_data.name:
+                if target_data.nick_name != "":
+                    cache.npc_nickname_data.remove(target_data.nick_name)
+                target_data.nick_name = ""
+                break
+            not_name_error.draw()
+            continue
+        if now_name in cache.npc_nickname_data:
+            if now_name == target_data.nick_name:
+                break
+            not_name_error.draw()
+            continue
+        if target_data.nick_name != "":
+            cache.npc_nickname_data.remove(target_data.nick_name)
+        target_data.nick_name = now_name
+        cache.npc_nickname_data.add(now_name)
+        break
 
 
 @handle_instruct.add_instruct(

@@ -299,17 +299,23 @@ class CharacterInfoHead:
             social_text = game_config.config_social_type[social].name
             if character_data.target_character_id != -1:
                 target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+                target_name = target_data.name
+                if target_data.nick_name != "":
+                    target_name = target_data.nick_name
                 message = _("No.{character_id}: {character_name} {sex_text} {social_text} 互动:{target_name}").format(
                     character_id=character_id,
                     character_name=character_data.name,
                     sex_text=sex_text,
                     social_text=social_text,
-                    target_name=target_data.name
+                    target_name=target_name
                 )
             else:
+                character_name = character_data.name
+                if character_data.nick_name != "":
+                    character_name = f"{character_data.nick_name}({character_data.name})"
                 message = _("No.{character_id}: {character_name} {sex_text} {social_text}").format(
                     character_id=character_id,
-                    character_name=character_data.name,
+                    character_name=character_name,
                     sex_text=sex_text,
                     social_text=social_text,
                 )
@@ -1022,6 +1028,8 @@ class SeeCharacterInfoByNameDraw:
         """ 按钮返回值 """
         character_data = cache.character_data[self.character_id]
         character_name = character_data.name
+        if character_data.nick_name != "" and self.character_id:
+            character_name = character_data.nick_name
         name_draw = draw.NormalDraw()
         if is_button:
             if num_button:
@@ -1078,6 +1086,8 @@ class SeeCharacterInfoByNameDrawInScene:
         """ 按钮返回值 """
         character_data: game_type.Character = cache.character_data[self.character_id]
         character_name = character_data.name
+        if character_data.nick_name != "":
+            character_name = character_data.nick_name
         name_draw = draw.NormalDraw()
         if is_button:
             if num_button:
@@ -1203,81 +1213,6 @@ class SeeCharacterInfoHandle:
         if now_index > len(self.character_list) - 1:
             now_index = 0
         self.character_id = self.character_list[now_index]
-
-
-class GetUpCharacterInfoDraw:
-    """
-    起床面板按角色id绘制角色缩略信息
-    Keyword arguments:
-    text -- 角色id
-    width -- 最大宽度
-    is_button -- 绘制按钮
-    num_button -- 绘制数字按钮
-    button_id -- 数字按钮的id
-    """
-
-    def __init__(self, text: int, width: int, is_button: bool, num_button: bool, button_id: int):
-        """初始化绘制对象"""
-        self.text: int = text
-        """ 角色id """
-        self.draw_text: str = ""
-        """ 角色缩略信息绘制文本 """
-        self.width: int = width
-        """ 最大宽度 """
-        self.is_button: bool = is_button
-        """ 绘制按钮 """
-        self.num_button: bool = num_button
-        """ 绘制数字按钮 """
-        self.button_id: int = button_id
-        """ 数字按钮的id """
-        self.button_return: str = str(button_id)
-        """ 按钮返回值 """
-        character_data = cache.character_data[self.text]
-        character_name = character_data.name
-        id_text = f"No.{self.text}"
-        sex_config = game_config.config_sex_tem[character_data.sex]
-        sex_text = _(f"性别:{sex_config.name}")
-        age_text = _(f"年龄:{character_data.age}岁")
-        hit_point_text = _(f"健康:({character_data.hit_point}/{character_data.hit_point_max})")
-        mana_point_text = _(f"体力:({character_data.mana_point}/{character_data.mana_point_max})")
-        now_text = (
-            f"{id_text} {character_name} {sex_text} {age_text} {hit_point_text} {mana_point_text}"
-        )
-        if is_button:
-            if num_button:
-                index_text = text_handle.id_index(self.button_id)
-                now_text_width = self.width - len(index_text)
-                new_text = text_handle.align(now_text, "center", text_width=now_text_width)
-                self.draw_text = f"{index_text}{new_text}"
-                self.button_return = str(button_id)
-            else:
-                new_text = text_handle.align(now_text, "center", text_width=self.width)
-                self.draw_text = new_text
-                self.button_return = character_name
-        else:
-            new_text = text_handle.align(now_text, "center", text_width=self.width)
-            self.draw_text = new_text
-
-    def draw(self):
-        """绘制对象"""
-        if self.is_button:
-            now_draw = draw.Button(
-                self.draw_text, self.button_return, cmd_func=self.draw_character_info
-            )
-        else:
-            now_draw = draw.NormalDraw()
-            now_draw.text = self.draw_text
-        now_draw.width = self.width
-        now_draw.draw()
-
-    def draw_character_info(self):
-        """绘制角色信息"""
-        line_feed.draw()
-        py_cmd.clr_cmd()
-        now_draw = SeeCharacterInfoHandle(
-            self.text, window_width, list(cache.character_data.keys())
-        )
-        now_draw.draw()
 
 
 class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
