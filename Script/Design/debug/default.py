@@ -52,3 +52,4 @@ def handle_force_make_love():
     character_data: game_type.Character = cache.character_data[0]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     target_data.passive_sex = 1
+

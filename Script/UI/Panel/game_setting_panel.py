@@ -128,7 +128,8 @@ class SystemLanguageSettingPanel:
         title_line = draw.LineDraw("o",self.width)
         now_panel = panel.OneMessageAndSingleColumnButton()
         language_list = [f"{i.name}" for i in game_config.config_system_language.values()]
-        now_panel.set(language_list,_("请选择需要切换的语言"))
+        now_language = game_config.config_system_language[normal_config.config_normal.language].name
+        now_panel.set(language_list,_("请选择需要切换的语言，当前语言:{now_language}").format(now_language=now_language))
         now_panel.draw()
         self.return_list = now_panel.get_return_list()
 

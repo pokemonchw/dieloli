@@ -39,3 +39,4 @@ def change_normal_config(now_key: str, now_value: str):
     ini_config.set("game",now_key,str(now_value))
     with open(game_path_config.CONFIG_PATH,"w",encoding="utf-8") as f:
         ini_config.write(f)
+    config_normal.__dict__[now_key] = now_value

@@ -29,7 +29,7 @@ def handle_view_school_timetable():
 @handle_instruct.add_instruct(
     constant.Instruct.ATTEND_CLASS,
     constant.InstructType.STUDY,
-    _("上课"),
+    _("上{ClassName}"),
     {
         constant.Premise.ATTEND_CLASS_TODAY,
         constant.Premise.IN_CLASSROOM,
@@ -113,6 +113,7 @@ def handle_teach_a_lesson():
     {
         constant.Premise.IN_CLASSROOM,
         constant.Premise.IS_STUDENT,
+        constant.Premise.NOT_IN_CLASS_TIME,
     },
 )
 def handle_self_study():

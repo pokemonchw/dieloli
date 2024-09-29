@@ -1,6 +1,6 @@
 from typing import Dict
 from types import FunctionType
-from Script.Core import cache_control, game_type, value_handle, flow_handle, get_text
+from Script.Core import cache_control, game_type, value_handle, flow_handle, get_text, py_cmd
 from Script.Config import game_config
 from Script.UI.Moudle import draw, panel
 
@@ -90,6 +90,7 @@ class ChangeNaturePanel:
                 break
 
     def change_nature(self, nature_id: int):
+        py_cmd.clr_cmd()
         if self.nature[nature_id] >= 50:
             self.nature[nature_id] -= 50
         else:

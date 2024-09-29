@@ -582,3 +582,28 @@ def character_move_to_nearest_not_classroom(character_id: int):
         if target_data.pulling == character_id:
             target_data.pulling = -1
     character_data.follow = -1
+
+
+@handle_state_machine.add_state_machine(constant.StateMachine.MOVE_TO_IN_DOOR_SCENE)
+def character_move_to_in_door_scene(character_id: int):
+    """
+    角色移动至室内场景
+    Keyword arguments:
+    character_id -- 角色id
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_scene_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[now_scene_str]
+    target_scene_path_str = random.choice(constant.in_door_scene_list)
+    target_scene_path = map_handle.get_map_system_path_for_str(target_scene_path_str)
+    _, _, move_path, move_time = character_move.character_move(character_id, target_scene_path)
+    character_data.behavior.behavior_id = constant.Behavior.MOVE
+    character_data.behavior.move_target = move_path
+    character_data.behavior.duration = move_time
+    character_data.state = constant.CharacterStatus.STATUS_MOVE
+    if character_data.follow != -1:
+        target_data: game_type.Character = cache.character_data[character_data.follow]
+        if target_data.pulling == character_id:
+            target_data.pulling = -1
+    character_data.follow = -1
+

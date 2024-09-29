@@ -6,7 +6,7 @@ from functools import wraps
 from typing import Set, List
 from types import FunctionType
 from threading import Thread
-from Script.Core import cache_control, game_type, get_text, save_handle
+from Script.Core import cache_control, game_type, get_text
 from Script.Design import update, character, attr_calculation, course, game_time, clothing, constant
 from Script.UI.Panel import see_character_info_panel, see_save_info_panel
 from Script.Config import normal_config, game_config
@@ -27,7 +27,6 @@ def init_instruct_handle_thread():
     """初始化指令处理线程"""
     while 1:
         instruct_queue.get()
-        save_handle.establish_save("auto")
 
 
 instruct_handle_thread = Thread(target=init_instruct_handle_thread)

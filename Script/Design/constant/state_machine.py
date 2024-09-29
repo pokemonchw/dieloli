@@ -48,6 +48,8 @@ class StateMachine:
     """ 移动至社团活动场景 """
     MOVE_TO_NEAREST_NOT_CLASSROOM = "move_to_nearest_not_classroom"
     """ 移动到最近的不是教室的场景 """
+    MOVE_TO_IN_DOOR_SCENE = "move_to_in_door_scene"
+    """ 移动到室内场景 """
 
     """
     =========================

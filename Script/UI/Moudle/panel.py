@@ -146,6 +146,8 @@ class AskForOneMessage:
         """ 消息 """
         self.input_max: int = 0
         """ 玩家输入文本的最大长度 """
+        self.donot_return_null_str: bool = True
+        """ 是否接受空字符串 """
 
     def set(self, message: str, input_max: int):
         """
@@ -168,7 +170,7 @@ class AskForOneMessage:
         return_text = ""
         while 1:
             self.message.draw()
-            return_text = flow_handle.askfor_str(1, 1)
+            return_text = flow_handle.askfor_str(self.donot_return_null_str, 1)
             text_index = text_handle.get_text_index(return_text)
             if text_index <= self.input_max:
                 break
