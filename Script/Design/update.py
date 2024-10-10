@@ -15,7 +15,6 @@ def game_update_flow(add_time: int):
     Keyword arguments:
     add_time -- 游戏步进的时间
     """
-    py_cmd.focus_cmd()
     event.handle_event(0, 1, cache.game_time, cache.game_time)
     line_feed_draw = draw.NormalDraw()
     line_feed_draw.text = "\n"
