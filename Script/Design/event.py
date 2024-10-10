@@ -91,7 +91,7 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
     if (not character_id) or (player_data.target_character_id == character_id):
         if now_event_draw.text != "":
             now_event_draw.draw()
-        line_draw = draw.LineDraw("+", window_width / 3)
+        line_draw = draw.LineDraw("+", int(window_width / 3))
         line_draw.draw_event = True
         line_draw_judge = False
         if settle_output is not None:

@@ -78,8 +78,9 @@ class MainWindow(QMainWindow):
 
         self.textbox_layout.addWidget(self.eventbox)
         self.textbox_layout.addWidget(self.panelbox)
-        self.textbox_layout.setStretch(0, 0)
+        self.eventbox.hide()
         self.textbox_layout.setStretch(1, 1)
+        self.textbox_layout.invalidate()
         self.main_layout.addLayout(self.textbox_layout)
 
         # 设置文本框背景颜色
@@ -267,8 +268,8 @@ class MainWindow(QMainWindow):
 
     def open_eventbox(self):
         """打开事件文本面板"""
-        self.textbox_layout.setStretch(0, 1)
-        self.textbox_layout.setStretch(1, 2)
+        self.eventbox.setFixedWidth(self.now_char_width*int(normal_config.config_normal.textbox_width/3))
+        self.eventbox.show()
         self.textbox_layout.invalidate()
 
     @Slot()
