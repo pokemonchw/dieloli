@@ -28,8 +28,8 @@ def get_order():
     return _order_queue.get()
 
 
-main_frame.bind_return(_input_evnet_set)
-main_frame.bind_queue(_send_queue)
+main_frame.window.bind_return(_input_evnet_set)
+main_frame.window.bind_queue(_send_queue)
 
 
 def _get_input_event():

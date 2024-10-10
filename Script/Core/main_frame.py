@@ -1,544 +1,634 @@
-# -*- coding: UTF-8 -*-
 import os
-import math
+import sys
 import uuid
 import psutil
 import signal
-from types import FunctionType
-from tkinter import (
-    ttk,
-    Tk,
-    Text,
-    StringVar,
-    END,
-    N,
-    W,
-    E,
-    S,
-    VERTICAL,
-    font,
-    Entry,
+import threading
+import time
+from queue import Queue, Empty
+
+from PySide6.QtCore import (
+    Qt, Signal, Slot,
+    QTimer, QObject, QThread,
 )
-import pyautogui
+from PySide6.QtGui import (
+    QColor, QFont, QFontMetrics,
+    QTextCharFormat, QTextImageFormat, QImage,
+    QCursor, QTextCursor, QPixmap,
+    QTextDocument,
+)
+from PySide6.QtWidgets import (
+    QApplication, QMainWindow, QWidget,
+    QTextEdit, QLineEdit, QLabel,
+    QVBoxLayout, QHBoxLayout
+)
+
 import screeninfo
+
 from Script.Core import (
-    text_handle,
-    game_type,
-    cache_control,
+    text_handle, game_type, cache_control,
 )
 from Script.Config import normal_config, game_config
 
 cache: game_type.Cache = cache_control.cache
-""" 游戏缓存数据 """
 
+class MainWindow(QMainWindow):
+    """主窗口类"""
 
-def close_window():
-    """
-    关闭游戏，会终止当前进程和所有子进程
-    """
-    parent = psutil.Process(os.getpid())
-    children = parent.children(recursive=True)
-    for process in children:
-        process.send_signal(signal.SIGTERM)
-    os._exit(0)
+    def __init__(self):
+        """初始化主窗口"""
+        super().__init__()
 
+        self.game_name = normal_config.config_normal.game_name
+        self.setWindowTitle(self.game_name)
 
-# 显示主框架
-game_name = normal_config.config_normal.game_name
-root = Tk()
-now_font_size = 20
-# 获取所有屏幕的信息
-screens = screeninfo.get_monitors()
-current_screen = None
-x, y = pyautogui.position()
-for screen in screens:
-    if screen.x <= x <= screen.x + screen.width and screen.y <= y <= screen.y + screen.height:
-        current_screen = screen
-screen_width = current_screen.width
-screen_height = current_screen.height
-window_width = screen_width - 30
-window_height = screen_height - 30
-need_char_width = int(window_width / 120)
-need_char_height = int(window_height / 50)
-test_font = font.Font(family=normal_config.config_normal.font,size=now_font_size)
-char_width = test_font.measure("a")
-char_height = test_font.metrics("linespace")
-if char_width <= need_char_width and char_height <= need_char_height:
-    need_font_size = now_font_size
-    while True:
-        next_font_size = need_font_size + 1
-        next_font = font.Font(family=normal_config.config_normal.font,size=next_font_size)
-        next_font_char_width = next_font.measure("a")
-        next_font_char_height = next_font.metrics("linespace")
-        if next_font_char_width <= need_char_width and next_font_char_height <= need_char_height:
-            need_font_size = next_font_size
+        # 初始化变量
+        self.styles = {}
+        self.input_event_func = None
+        self.send_order_state = False
+        self.main_queue = Queue()
+        self.cmd_tag_map = {}
+        self.user_scrolling = False  # 用户是否正在滚动的标志位
+        self.current_hover_cmd = None  # 当前悬停的指令编号
+        self.image_data = {}
+        self.image_text_data = {}
+        self.image_lock = 0
+
+        # 设置窗口和字体
+        self._setup_window_and_font()
+
+        # 创建主部件和布局
+        self.central_widget = QWidget()
+        self.setCentralWidget(self.central_widget)
+        self.main_layout = QVBoxLayout(self.central_widget)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)  # 移除主布局的边距
+        self.main_layout.setSpacing(0)  # 移除主布局的间距
+
+        # 创建文本显示区域
+        self.textbox = CommandTextEdit(self)
+        self.textbox.setReadOnly(True)
+        self.textbox.setFont(self.normal_font)
+        self.textbox.setReadOnly(True)
+
+        self.main_layout.addWidget(self.textbox)
+
+        # 设置文本框背景颜色
+        self.set_background(normal_config.config_normal.background)
+
+        # 创建输入区域
+        self._setup_input_area()
+
+        # 初始化图片数据
+        self.load_and_resize_images()
+
+        # 启动定时器读取队列
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.read_queue)
+        self.timer.start(1)  # 每 1 毫秒检查一次队列
+
+    def _setup_window_and_font(self):
+        """设置窗口大小和字体"""
+        # 获取屏幕信息
+        screens = QApplication.screens()
+        cursor_pos = QCursor.pos()
+        current_screen = QApplication.screenAt(cursor_pos)
+        screen_geometry = current_screen.geometry()
+        screen_width = screen_geometry.width()
+        screen_height = screen_geometry.height()
+
+        # 计算窗口大小和字体大小
+        window_width = screen_width - 35
+        window_height = screen_height - 35
+        need_char_width = window_width / 120
+        need_char_height = window_height / 50
+        now_font_size = 20
+        font_family = normal_config.config_normal.font
+
+        font = QFont(font_family, now_font_size)
+        font_metrics = QFontMetrics(font)
+        char_width = font_metrics.horizontalAdvance('a')
+        char_height = font_metrics.lineSpacing()
+
+        if char_width <= need_char_width and char_height <= need_char_height:
+            need_font_size = now_font_size
+            while True:
+                next_font_size = need_font_size + 1
+                next_font = QFont(font_family, next_font_size)
+                next_font_metrics = QFontMetrics(next_font)
+                next_char_width = next_font_metrics.horizontalAdvance('a')
+                next_char_height = next_font_metrics.lineSpacing()
+                if next_char_width <= need_char_width and next_char_height <= need_char_height:
+                    need_font_size = next_font_size
+                else:
+                    break
         else:
-            break
-else:
-    need_font_size = now_font_size
-    while True:
-        next_font_size = need_font_size - 1
-        next_font = font.Font(family=normal_config.config_normal.font,size=next_font_size)
-        next_font_char_width = next_font.measure("a")
-        next_font_char_height = next_font.metrics("linespace")
-        need_font_size = next_font_size
-        if next_font_char_width <= need_char_width and next_font_char_height <= need_char_height:
-            break
-if normal_config.config_normal.font_size:
-    need_font_size = normal_config.config_normal.font_size
-now_font = font.Font(family=normal_config.config_normal.font,size=need_font_size)
-now_char_width = now_font.measure("a")
-now_char_height = now_font.metrics("linespace")
-window_width = now_char_width * 120
-window_height = now_char_height * 50
-normal_config.config_normal.font_size = need_font_size
-normal_config.config_normal.order_font_size = need_font_size
-root.title(game_name)
-width = window_width + 30
-frm_width = root.winfo_rootx() - root.winfo_x()
-win_width = width + 2 * frm_width
-height = window_height
-titlebar_height = root.winfo_rooty() - root.winfo_y()
-win_height = height + titlebar_height + frm_width
-x = current_screen.x + (current_screen.width // 2 - win_width // 2)
-y = current_screen.y + (current_screen.height // 2 - win_height // 2)
-root.geometry("{}x{}+{}+{}".format(win_width, win_height, x, y))
-root.deiconify()
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
-root.protocol("WM_DELETE_WINDOW", close_window)
-main_frame = ttk.Frame(root, borderwidth=2)
-main_frame.grid(column=0, row=0, sticky=(N, W, E, S))
-main_frame.columnconfigure(0, weight=1)
-main_frame.rowconfigure(0, weight=1)
+            need_font_size = now_font_size
+            while True:
+                next_font_size = need_font_size - 1
+                if next_font_size <= 0:
+                    break
+                next_font = QFont(font_family, next_font_size)
+                next_font_metrics = QFontMetrics(next_font)
+                next_char_width = next_font_metrics.horizontalAdvance('a')
+                next_char_height = next_font_metrics.lineSpacing()
+                need_font_size = next_font_size
+                if next_char_width <= need_char_width and next_char_height <= need_char_height:
+                    break
 
-normal_font = font.Font(family=normal_config.config_normal.font, size=need_font_size)
-# 显示窗口
-textbox = Text(
-    main_frame,
-    width=normal_config.config_normal.textbox_width,
-    height=normal_config.config_normal.textbox_hight,
-    highlightbackground=normal_config.config_normal.background,
-    bd=0,
-    cursor="",
-    font=normal_font
-)
-textbox.grid(column=0, row=0, sticky=(N, W, E, S))
+        # 设置字体
+        self.normal_font = QFont(font_family, need_font_size)
+        normal_config.config_normal.font_size = need_font_size
+        normal_config.config_normal.order_font_size = need_font_size
 
-# 垂直滚动条
-s_vertical = ttk.Scrollbar(main_frame, orient=VERTICAL, command=textbox.yview)
-textbox.configure(yscrollcommand=s_vertical.set)
-s_vertical.grid(column=1, row=0, sticky=(N, E, S), rowspan=2)
+        font_metrics = QFontMetrics(self.normal_font)
+        self.now_char_width = font_metrics.horizontalAdvance('a')
+        self.now_char_height = font_metrics.lineSpacing()
+        window_width = self.now_char_width * 120
+        window_height = self.now_char_height * 50
 
-# 输入框背景容器
-order_font_data = game_config.config_font[1]
-for k in game_config.config_font[0].__dict__:
-    if k not in order_font_data.__dict__:
-        order_font_data.__dict__[k] = game_config.config_font[0].__dict__[k]
-        order_font_data.font = normal_config.config_normal.font
-        order_font_data.font_size = normal_config.config_normal.order_font_size
-input_background_box = Text(
-    main_frame,
-    highlightbackground=normal_config.config_normal.background,
-    background=normal_config.config_normal.background,
-    bd=0,
-)
-input_background_box.grid(column=0, row=1, sticky=(W, E, S))
+        # 设置窗口大小和位置
+        win_width = window_width + 35  # 调整窗口框架的宽度
+        win_height = window_height + 35  # 调整窗口框架的高度
+        x = current_screen.geometry().x() + (current_screen.geometry().width() - win_width) // 2
+        y = current_screen.geometry().y() + (current_screen.geometry().height() - win_height) // 2
+        self.setGeometry(x, y, win_width, win_height)
 
-order_font = font.Font(family=order_font_data.font, size=order_font_data.font_size)
-cursor_text = "~$"
-cursor_width = text_handle.get_text_index(cursor_text)
-input_background_box_cursor = Text(
-    input_background_box,
-    width=cursor_width,
-    height=1,
-    highlightbackground=order_font_data.background,
-    background=order_font_data.background,
-    bd=0,
-    font=order_font,
-)
-input_background_box_cursor.grid(column=0, row=0, sticky=(W, E, S))
-input_background_box_cursor.insert("end", cursor_text)
-input_background_box_cursor.config(foreground=order_font_data.foreground)
+    def _setup_input_area(self):
+        """创建输入区域"""
+        self.input_layout = QHBoxLayout()
+        self.input_layout.setContentsMargins(0, 0, 0, 0)  # 移除输入布局的边距
+        self.input_layout.setSpacing(0)  # 移除输入布局的间距
 
-# 输入栏
-order = StringVar()
-inputbox = Entry(
-    input_background_box,
-    borderwidth=0,
-    insertwidth=1,
-    insertbackground=order_font_data.foreground,
-    selectborderwidth=0,
-    highlightthickness=0,
-    bg=order_font_data.background,
-    foreground=order_font_data.foreground,
-    selectbackground=order_font_data.selectbackground,
-    textvariable=order,
-    font=order_font,
-    width=normal_config.config_normal.inputbox_width,
-)
-inputbox.grid(column=1, row=0, sticky=(N, E, S))
-input_event_func = None
-send_order_state = False
-# when false, send 'skip'; when true, send cmd
-def get_widget_font(widget):
-    # 获取小部件的字体属性
-    widget_font = font.nametofont(widget.cget("font"))
-    # 返回字体的实际名称
-    return widget_font.actual()
+        self.prompt_label = QLabel("~$")
+        self.prompt_label.setFont(self.normal_font)
+        self.prompt_label.setStyleSheet(f"color: {game_config.config_font[0].foreground};")
+        self.prompt_label.setContentsMargins(0, 0, 0, 0)  # 移除提示符的边距
 
-from Script.Core import era_image
+        self.order = ""
+        self.input_line = QLineEdit()
+        self.input_line.setFont(self.normal_font)
+        self.input_line.returnPressed.connect(self.send_input)
+        self.input_line.setFocus()
+        self.input_line.setFrame(False)  # 移除输入框的边框
 
-def send_input(*args):
-    """
-    发送一条指令
-    """
-    global input_event_func
-    order = get_order()
-    if len(cache.input_cache) >= 21:
-        if (order) != "":
-            del cache.input_cache[0]
-            cache.input_cache.append(order)
+        # 设置输入框背景颜色、字体颜色和移除边框
+        self.input_line.setStyleSheet(f"""
+            QLineEdit {{
+                background-color: {game_config.config_font[0].background};
+                color: {game_config.config_font[0].foreground};
+                selection-background-color: {game_config.config_font[0].selectbackground};
+                border: none;
+                outline: none;
+            }}
+            QLineEdit:focus {{
+                border: none;
+                outline: none;
+            }}
+        """)
+
+        # 创建一个容器部件来包含提示符和输入框，并设置背景颜色为黑色
+        self.input_container = QWidget()
+        self.input_container.setStyleSheet(f"background-color: {game_config.config_font[0].background};")
+        self.input_container_layout = QHBoxLayout(self.input_container)
+        self.input_container_layout.setContentsMargins(0, 0, 0, 0)
+        self.input_container_layout.setSpacing(0)
+        self.input_container_layout.addWidget(self.prompt_label)
+        self.input_container_layout.addWidget(self.input_line)
+
+        self.input_layout.addWidget(self.input_container)
+        self.main_layout.addLayout(self.input_layout)
+
+    def closeEvent(self, event):
+        """关闭事件处理，关闭游戏进程"""
+        self.close_window()
+        event.accept()
+
+    def close_window(self):
+        """关闭游戏，会终止当前进程和所有子进程"""
+        parent = psutil.Process(os.getpid())
+        children = parent.children(recursive=True)
+        for process in children:
+            process.send_signal(signal.SIGTERM)
+        os._exit(0)
+
+    def send_input(self):
+        """发送一条指令"""
+        order_text = self.get_order()
+        if len(cache.input_cache) >= 21:
+            if order_text != "":
+                del cache.input_cache[0]
+                cache.input_cache.append(order_text)
+                cache.input_position = 0
+        else:
+            if order_text != "":
+                cache.input_cache.append(order_text)
+                cache.input_position = 0
+        if self.input_event_func:
+            self.input_event_func(order_text)
+        self.clear_order()
+
+    def get_order(self):
+        """获取命令框中的内容"""
+        return self.input_line.text()
+
+    def set_order(self, order_str):
+        """设置命令框中的内容"""
+        self.input_line.setText(order_str)
+
+    def clear_order(self):
+        """清空命令框"""
+        self.input_line.clear()
+
+    def bind_return(self, func):
+        """
+        绑定输入处理函数
+        Keyword arguments：
+        func -- 输入处理函数
+        """
+        self.input_event_func = func
+
+    def bind_queue(self, q):
+        """
+        绑定信息队列
+        Keyword arguments：
+        q -- 消息队列
+        """
+        self.main_queue = q
+
+    @Slot()
+    def read_queue(self):
+        """从队列中获取在前端显示的信息"""
+        while not self.main_queue.empty():
+            json_data = self.main_queue.get()
+            # 处理 json_data
+            if 'clear_cmd' in json_data and json_data['clear_cmd'] == 'true':
+                self.clear_screen()
+            if 'clearorder_cmd' in json_data and json_data['clearorder_cmd'] == 'true':
+                self.clear_order()
+            if 'clearcmd_cmd' in json_data:
+                cmd_nums = json_data['clearcmd_cmd']
+                if cmd_nums == 'all':
+                    self.io_clear_cmd()
+                else:
+                    self.io_clear_cmd(*cmd_nums)
+            if 'bgcolor' in json_data:
+                self.set_background(json_data['bgcolor'])
+            if 'set_style' in json_data:
+                temp = json_data['set_style']
+                self.frame_style_def(
+                    temp["style_name"],
+                    temp["foreground"],
+                    temp["background"],
+                    temp["font"],
+                    temp["fontsize"],
+                    temp["bold"],
+                    temp["underline"],
+                    temp["italic"],
+                )
+            if 'image' in json_data:
+                self.now_print_image(json_data['image']['image_name'])
+            for c in json_data.get('content', []):
+                if c["type"] == "text":
+                    self.now_print(c["text"], style=tuple(c["style"]))
+                if c["type"] == "cmd":
+                    self.io_print_cmd(c["text"], c["num"], c["normal_style"][0], c["on_style"][0])
+                if c["type"] == "image_cmd":
+                    self.io_print_image_cmd(c["text"], c["num"])
+                # 如果需要，实现滚动限制
+        self.input_line.setFocus()
+
+    def set_background(self, color: str):
+        """
+        设置背景颜色
+        Keyword arguments:
+        color -- 背景颜色字符串
+        """
+        pal = self.textbox.palette()
+        pal.setColor(self.textbox.viewport().backgroundRole(), QColor(color))
+        self.textbox.setPalette(pal)
+        # 设置文本框的样式表以覆盖默认背景颜色
+        self.textbox.setStyleSheet(f"background-color: {color};")
+
+    def now_print(self, string: str, style=('standard',)):
+        """
+        输出文本
+        Keyword arguments:
+        string -- 要输出的字符串
+        style -- 样式名称的元组
+        """
+        cursor = self.textbox.textCursor()
+        text_format = QTextCharFormat()
+        for style_name in style:
+            if style_name in self.styles:
+                text_format.merge(self.styles[style_name])
+        cursor.insertText(string, text_format)
+        self.textbox.ensureCursorVisible()
+
+    def frame_style_def(self, style_name: str, foreground: str, background: str, font_family: str, font_size: int, bold: int, underline: int, italic: int):
+        """
+        定义样式
+        Keyword arguments:
+        style_name -- 样式名称
+        foreground -- 前景色（字体颜色）
+        background -- 背景色
+        font_family -- 字体家族
+        font_size -- 字号
+        bold -- 是否加粗（'1' 或 '0'）
+        underline -- 是否下划线（'1' 或 '0'）
+        italic -- 是否斜体（'1' 或 '0'）
+        """
+        text_format = QTextCharFormat()
+        if foreground:
+            text_format.setForeground(QColor(foreground))
+        if background:
+            text_format.setBackground(QColor(background))
+        font = QFont(font_family, font_size)
+        font.setBold(bold == '1')
+        font.setUnderline(underline == '1')
+        font.setItalic(italic == '1')
+        text_format.setFont(font)
+        self.styles[style_name] = text_format
+
+    def io_print_cmd(self, cmd_str: str, cmd_return: str, normal_style='standard', on_style='onbutton'):
+        """
+        打印一条指令
+        Keyword arguments:
+        cmd_str -- 命令文本
+        cmd_return -- 命令返回
+        normal_style -- 正常显示样式
+        on_style -- 鼠标悬停时的样式
+        """
+        cursor = self.textbox.textCursor()
+        start_pos = cursor.position()
+        text_format = self.styles.get(normal_style, QTextCharFormat())
+        cursor.insertText(cmd_str, text_format)
+        end_pos = cursor.position()
+        self.cmd_tag_map[cmd_return] = (start_pos, end_pos, normal_style, on_style)
+        self.textbox.ensureCursorVisible()
+
+    @Slot(int)
+    def send_cmd(self, cmd_return: str):
+        """
+        发送命令
+        Keyword arguments:
+        cmd_return -- 命令返回
+        """
+        self.send_order_state = True
+        self.set_order(str(cmd_return))
+        self.send_input()
+
+    def io_clear_cmd(self, *cmd_returns):
+        """
+        清除命令
+        Keyword arguments:
+        cmd_returns: 要清除的命令返回，不传参数则清除所有命令
+        """
+        if cmd_returns:
+            for cmd_return in cmd_returns:
+                if cmd_return in self.cmd_tag_map:
+                    del self.cmd_tag_map[cmd_number]
+        else:
+            self.cmd_tag_map.clear()
+
+    def clear_screen(self):
+        """清屏"""
+        self.io_clear_cmd()
+        self.textbox.clear()
+
+    def now_print_image(self, image_name: str):
+        """
+        输出图片
+        Keyword arguments:
+        image_name -- 图片名称（不含路径和扩展名）
+        """
+        cursor = self.textbox.textCursor()
+        image_format = QTextImageFormat()
+        image = self.image_data[image_name]  # QImage 对象
+        image_format.setName(image_name)  # 使用图片名称作为资源名称
+        image_format.setWidth(image.width())
+        image_format.setHeight(image.height())
+        # 将图片作为资源添加到文档中
+        self.textbox.document().addResource(QTextDocument.ImageResource, image_name, image)
+        cursor.insertImage(image_format)
+
+    def io_print_image_cmd(self, image_path: str, cmd_return: str):
+        """
+        打印一个图片按钮
+        Keyword arguments:
+        image_path -- 图片路径
+        cmd_return -- 点击图片响应的命令数字
+        """
+        cursor = self.textbox.textCursor()
+        start_pos = cursor.position()
+        image_format = QTextImageFormat()
+        image = self.image_data[image_name]  # QImage 对象
+        image_format.setName(image_name)
+        image_format.setWidth(image.width())
+        image_format.setHeight(image.height())
+        # 将图片作为资源添加到文档中
+        self.textbox.document().addResource(QTextDocument.ImageResource, image_name, image)
+        cursor.insertImage(image_format)
+        end_pos = cursor.position()
+        self.cmd_tag_map[cmd_return] = (start_pos, end_pos, '', '')
+
+    def load_and_resize_images(self):
+        """加载并调整图片大小"""
+        image_dir_path = os.path.join("image")
+        if not os.path.exists(image_dir_path):
+            print(f"图片目录 '{image_dir_path}' 不存在。")
+            return
+        for image_file_path_id in os.listdir(image_dir_path):
+            image_file_path = os.path.join(image_dir_path, image_file_path_id)
+            if not os.path.isfile(image_file_path):
+                continue
+            image_file_name = os.path.splitext(image_file_path_id)[0]  # 移除扩展名
+            old_image = QImage(image_file_path)
+            if old_image.isNull():
+                print(f"无法加载图片 '{image_file_path}'。")
+                continue
+            old_width = old_image.width()
+            old_height = old_image.height()
+            font_width_scaling = self.now_char_width / 12
+            font_height_scaling = self.now_char_height / 24
+            now_width = int(old_width * font_width_scaling)
+            now_height = int(old_height * font_height_scaling)
+            # 调整图片大小
+            new_image = old_image.scaled(now_width, now_height)
+            # 存储图片
+            self.image_data[image_file_name] = new_image  # 存储为 QImage 对象
+
+    def eventFilter(self, obj, event):
+        """事件过滤器，用于处理全局事件"""
+        if event.type() == QEvent.MouseButtonPress:
+            if event.button() == Qt.LeftButton:
+                self.mouse_left_check(event)
+            elif event.button() == Qt.RightButton:
+                self.mouse_right_check(event)
+        elif event.type() == QEvent.KeyPress:
+            if event.key() == Qt.Key_Up:
+                self.key_up(event)
+            elif event.key() == Qt.Key_Down:
+                self.key_down(event)
+        return super().eventFilter(obj, event)
+
+    def key_up(self, event):
+        """键盘上键事件处理"""
+        while cache.input_position == 0:
+            cache.input_position = len(cache.input_cache)
+        while 1 < cache.input_position <= 21:
+            cache.input_position -= 1
+            input_id = cache.input_position
+            try:
+                self.set_order(cache.input_cache[input_id])
+                break
+            except KeyError:
+                cache.input_position += 1
+
+    def key_down(self, event):
+        """键盘下键事件处理"""
+        if 0 <= cache.input_position < len(cache.input_cache) - 1:
+            try:
+                cache.input_position += 1
+                input_id = cache.input_position
+                self.set_order(cache.input_cache[input_id])
+            except KeyError:
+                cache.input_position -= 1
+        elif cache.input_position == len(cache.input_cache) - 1:
             cache.input_position = 0
-    else:
-        if (order) != "":
-            cache.input_cache.append(order)
-            cache.input_position = 0
-    input_event_func(order)
-    clear_order()
+            self.set_order("")
+
+    def mouse_check_push(self):
+        """更正鼠标点击状态数据映射"""
+        if cache.wframe_mouse.mouse_leave_cmd:
+            self.send_input()
+            cache.wframe_mouse.mouse_leave_cmd = 1
+
+    def update_cmd_style(self, cmd_number, style_name):
+        """更新指定命令的样式
+
+        参数：
+            cmd_number: 命令编号
+            style_name: 要应用的样式名称
+        """
+        if cmd_number in self.cmd_tag_map:
+            start, end, normal_style, on_style = self.cmd_tag_map[cmd_number]
+            cursor = self.textbox.textCursor()
+            cursor.setPosition(start)
+            cursor.setPosition(end, QTextCursor.KeepAnchor)
+            text_format = self.styles.get(style_name, QTextCharFormat())
+            cursor.setCharFormat(text_format)
+
+    def restore_previous_cmd_style(self):
+        """恢复之前悬停的命令的样式"""
+        if self.current_hover_cmd is not None:
+            cmd_number = self.current_hover_cmd
+            if cmd_number in self.cmd_tag_map:
+                start, end, normal_style, on_style = self.cmd_tag_map[cmd_number]
+                cursor = self.textbox.textCursor()
+                cursor.setPosition(start)
+                cursor.setPosition(end, QTextCursor.KeepAnchor)
+                text_format = self.styles.get(normal_style, QTextCharFormat())
+                cursor.setCharFormat(text_format)
+            self.current_hover_cmd = None
+
+    def init_image_data(self):
+        """ 初始化图像数据 """
+        image_text_data = {}
+        image_lock = 0
+        image_dir_path = os.path.join("image")
+        for image_file_path_id in os.listdir(image_dir_path):
+            image_file_path = os.path.join(image_dir_path, image_file_path_id)
+            image_file_name = image_file_path_id.rstrip(".png")
+            old_image = QPixmap(image_file_path)
+            old_height = old_image.height()
+            old_width = old_image.width()
+            font_width_scaling = main_frame.now_char_width / 12
+            font_height_scaling = main_frame.now_char_height / 24
+            new_height = int(old_height * font_height_scaling)
+            new_width = int(old_width * font_width_scaling)
+            new_image = old_image.scaled(new_width, new_height)
+            self.image_data[image_file_name] = new_image
 
 
-# #######################################################################
-# 运行函数
-flow_thread = None
+
+class CommandTextEdit(QTextEdit):
+    """自定义的文本编辑器，用于处理命令点击事件和鼠标悬停事件"""
+
+    commandClicked = Signal(int)
+
+    def __init__(self, main_window):
+        """初始化"""
+        super().__init__()
+        self.setMouseTracking(True)
+        self.setFrameStyle(QTextEdit.NoFrame)  # 移除文本编辑器的边框
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)  # 设置垂直滚动条策略
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)  # 隐藏水平滚动条
+        self.main_window = main_window  # 引用主窗口
+        self.setCursor(Qt.IBeamCursor)  # 设置初始光标为文本光标
+        self.setReadOnly(True)  # 设置为只读，禁用编辑
+
+    def mousePressEvent(self, event):
+        """鼠标点击事件处理"""
+        if event.button() == Qt.LeftButton:
+            cursor = self.cursorForPosition(event.pos())
+            position = cursor.position()
+            if self.main_window and hasattr(self.main_window, 'cmd_tag_map'):
+                for cmd_number, (start, end, normal_style, on_style) in self.main_window.cmd_tag_map.items():
+                    if start <= position <= end:
+                        self.main_window.send_cmd(cmd_number)
+                        return
+            self.main_window.input_line.setFocus()
+            self.main_window.mouse_check_push()
+            return
+        elif event.button() == Qt.RightButton:
+            # 处理鼠标右键事件
+            self.on_right_click(event)
+            return  # 阻止事件进一步传播，防止出现默认菜单
+        super().mousePressEvent(event)
 
 
-def read_queue():
-    """
-    从队列中获取在前端显示的信息
-    """
-    while not main_queue.empty():
-        json_data = main_queue.get()
+    def on_right_click(self, event):
+        """处理鼠标右键点击事件"""
+        cache.wframe_mouse.mouse_right = 1
+        cache.text_wait = 0
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 1
+        self.main_window.mouse_check_push()
+        event.accept()
 
-        if "clear_cmd" in json_data and json_data["clear_cmd"] == "true":
-            clear_screen()
-        if "clearorder_cmd" in json_data and json_data["clearorder_cmd"] == "true":
-            clear_order()
-        if "clearcmd_cmd" in json_data:
-            cmd_nums = json_data["clearcmd_cmd"]
-            if cmd_nums == "all":
-                io_clear_cmd()
-            else:
-                io_clear_cmd(tuple(cmd_nums))
-        if "bgcolor" in json_data:
-            set_background(json_data["bgcolor"])
-        if "set_style" in json_data:
-            temp = json_data["set_style"]
-            frame_style_def(
-                temp["style_name"],
-                temp["foreground"],
-                temp["background"],
-                temp["font"],
-                temp["fontsize"],
-                temp["bold"],
-                temp["underline"],
-                temp["italic"],
-            )
-        if "image" in json_data:
-            textbox.image_create(
-                "end", image=era_image.image_data[json_data["image"]["image_name"]]
-            )
+    def contextMenuEvent(self, event):
+        """覆盖上下文菜单事件，防止默认菜单出现"""
+        # 不调用父类方法，直接返回，禁用右键菜单
+        pass
 
-        for c in json_data["content"]:
-            if c["type"] == "text":
-                now_print(c["text"], style=tuple(c["style"]))
-            if c["type"] == "cmd":
-                io_print_cmd(c["text"], c["num"], c["normal_style"], c["on_style"])
-            if c["type"] == "image_cmd":
-                io_print_image_cmd(c["text"], c["num"])
-            if (
-                    "\n" in c["text"]
-                    and textbox.get("1.0", END).count("\n")
-                    > normal_config.config_normal.text_hight * 10
-            ):
-                textbox.delete("1.0", str(normal_config.config_normal.text_hight * 5) + ".0")
-    root.after(1, read_queue)
+    def mouseMoveEvent(self, event):
+        """鼠标移动事件处理"""
+        cursor = self.cursorForPosition(event.pos())
+        position = cursor.position()
+        main_window = self.main_window
+        found = False
+        if main_window and hasattr(main_window, 'cmd_tag_map'):
+            for cmd_number, (start, end, normal_style, on_style) in main_window.cmd_tag_map.items():
+                if start <= position <= end:
+                    self.viewport().setCursor(Qt.PointingHandCursor)
+                    if main_window.current_hover_cmd != cmd_number:
+                        # 恢复之前的样式
+                        main_window.restore_previous_cmd_style()
+                        # 更新当前的悬停指令编号
+                        main_window.current_hover_cmd = cmd_number
+                        # 更新当前指令的样式为 on_style
+                        main_window.update_cmd_style(cmd_number, on_style)
+                    found = True
+                    break
+        if not found:
+            self.viewport().setCursor(Qt.IBeamCursor)
+            # 恢复之前的样式
+            main_window.restore_previous_cmd_style()
+        super().mouseMoveEvent(event)
 
+
+app = QApplication(sys.argv)
+window = MainWindow()
 
 def run():
-    """
-    启动屏幕
-    """
-    root.after(1, read_queue)
-    root.mainloop()
-
-
-def see_end():
-    """
-    输出END信息
-    """
-    textbox.see(END)
-
-
-def set_background(color):
-    """
-    设置背景颜色
-    Keyword arguments:
-    color -- 背景颜色
-    """
-    textbox.config(insertbackground=color)
-    textbox.configure(background=color, selectbackground="red")
-
-
-# ######################################################################
-# ######################################################################
-# ######################################################################
-# 双框架公共函数
-
-main_queue = None
-
-
-def bind_return(func):
-    """
-    绑定输入处理函数
-    Keyword arguments:
-    func -- 输入处理函数
-    """
-    global input_event_func
-    input_event_func = func
-
-
-def bind_queue(q):
-    """
-    绑定信息队列
-    Keyword arguments:
-    q -- 消息队列
-    """
-    global main_queue
-    main_queue = q
-
-
-# #######################################################################
-# 输出格式化
-
-sys_print = print
-
-
-def now_print(string, style=("standard",)):
-    """
-    输出文本
-    Keyword arguments:
-    string -- 字符串
-    style -- 样式序列
-    """
-    textbox.insert(END, string, style)
-    see_end()
-
-
-def print_cmd(string, style=("standard",)):
-    """
-    输出文本
-    Keyword arguments:
-    string -- 字符串
-    style -- 样式序列
-    """
-    textbox.insert("end", string, style)
-    see_end()
-
-
-def clear_screen():
-    """
-    清屏
-    """
-    io_clear_cmd()
-    textbox.delete("1.0", END)
-
-
-def frame_style_def(
-        style_name: str,
-        foreground: str,
-        background: str,
-        font: str,
-        font_size: int,
-        bold: str,
-        under_line: str,
-        italic: str,
-):
-    """
-    定义样式
-    Keyword arguments:
-    style_name -- 样式名称
-    foreground -- 前景色/字体颜色
-    background -- 背景色
-    font -- 字体
-    fontsize -- 字号
-    bold -- 加粗
-    underline -- 下划线
-    italic -- 斜体
-    """
-    font_list = []
-    font_list.append(font)
-    font_list.append(font_size)
-    if bold == "1":
-        font_list.append("bold")
-    if under_line == "1":
-        font_list.append("underline")
-    if italic == "1":
-        font_list.append("italic")
-    textbox.tag_configure(
-        style_name,
-        foreground=foreground,
-        background=background,
-        font=tuple(font_list),
-    )
-
-
-# #########################################################3
-# 输入处理函数
-
-
-def get_order():
-    """
-    获取命令框中的内容
-    """
-    return order.get()
-
-
-def set_order(order_str: str):
-    """
-    设置命令框中内容
-    """
-    order.set(order_str)
-
-
-def clear_order():
-    """
-    清空命令框
-    """
-    order.set("")
-
-
-cmd_tag_map = {}
-
-
-def io_print_cmd(cmd_str: str, cmd_number: int, normal_style="standard", on_style="onbutton"):
-    """
-    打印一条指令
-    Keyword arguments:
-    cmd_str -- 命令文本
-    cmd_number -- 命令数字
-    normal_style -- 正常显示样式
-    on_style -- 鼠标在其上时显示样式
-    """
-    global cmd_tag_map
-    cmd_tag_name = str(uuid.uuid1())
-    textbox.tag_configure(cmd_tag_name)
-    if cmd_number in cmd_tag_map:
-        io_clear_cmd(cmd_number)
-    cmd_tag_map[cmd_number] = cmd_tag_name
-
-    def send_cmd(*args):
-        """发送命令"""
-        global send_order_state
-        send_order_state = True
-        order.set(cmd_number)
-        textbox.configure(cursor="")
-        send_input(order)
-
-    def enter_func(*args):
-        """
-        鼠标进入改变命令样式
-        """
-        textbox.tag_remove(
-            normal_style,
-            textbox.tag_ranges(cmd_tag_name)[0],
-            textbox.tag_ranges(cmd_tag_name)[1],
-        )
-        textbox.tag_add(
-            on_style,
-            textbox.tag_ranges(cmd_tag_name)[0],
-            textbox.tag_ranges(cmd_tag_name)[1],
-        )
-        cache.wframe_mouse.mouse_leave_cmd = 0
-
-    def leave_func(*args):
-        """
-        鼠标离开还原命令样式
-        """
-        textbox.tag_add(
-            normal_style,
-            textbox.tag_ranges(cmd_tag_name)[0],
-            textbox.tag_ranges(cmd_tag_name)[1],
-        )
-        textbox.tag_remove(
-            on_style,
-            textbox.tag_ranges(cmd_tag_name)[0],
-            textbox.tag_ranges(cmd_tag_name)[1],
-        )
-        textbox.configure(cursor="")
-        cache.wframe_mouse.mouse_leave_cmd = 1
-
-    textbox.tag_bind(cmd_tag_name, "<1>", send_cmd)
-    textbox.tag_bind(cmd_tag_name, "<Enter>", enter_func)
-    textbox.tag_bind(cmd_tag_name, "<Leave>", leave_func)
-    print_cmd(cmd_str, style=(cmd_tag_name, normal_style))
-
-
-def io_print_image_cmd(cmd_str: str, cmd_number: int):
-    """
-    打印一个图片按钮
-    Keyword arguments:
-    cmd_str -- 图片id
-    cmd_number -- 点击图片响应数字
-    """
-    global cmd_tag_map
-    cmd_tag_name = str(uuid.uuid1())
-    textbox.tag_configure(cmd_tag_name)
-    if cmd_number in cmd_tag_map:
-        io_clear_cmd(cmd_number)
-    cmd_tag_map[cmd_number] = cmd_tag_name
-
-    def send_cmd(*args):
-        """发送命令"""
-        global send_order_state
-        send_order_state = True
-        order.set(cmd_number)
-        textbox.configure(cursor="")
-        send_input(order)
-
-    index = textbox.index("end -1c")
-    textbox.image_create(index, image=era_image.image_data[cmd_str])
-    textbox.tag_add(cmd_tag_name, index, "{0} + 1 char".format(index))
-    textbox.tag_bind(cmd_tag_name, "<1>", send_cmd)
-    see_end()
-
-
-# 清除命令函数
-def io_clear_cmd(*cmd_numbers: list):
-    """
-    清除命令
-    Keyword arguments:
-    cmd_number -- 命令数字，不输入则清楚当前已有的全部命令
-    """
-    global cmd_tag_map
-    if cmd_numbers:
-        for num in cmd_numbers:
-            if num in cmd_tag_map:
-                index_first = textbox.tag_ranges(cmd_tag_map[num])[0]
-                index_last = textbox.tag_ranges(cmd_tag_map[num])[1]
-                for tag_name in textbox.tag_names(index_first):
-                    textbox.tag_remove(tag_name, index_first, index_last)
-                textbox.tag_add("standard", index_first, index_last)
-                textbox.tag_delete(cmd_tag_map[num])
-                del cmd_tag_map[num]
-    else:
-        for num in cmd_tag_map:
-            tag_tuple = textbox.tag_ranges(cmd_tag_map[num])
-            if tag_tuple:
-                index_first = tag_tuple[0]
-                index_lskip_one_waitast = tag_tuple[1]
-                for tag_name in textbox.tag_names(index_first):
-                    textbox.tag_remove(tag_name, index_first, index_lskip_one_waitast)
-                textbox.tag_add("standard", index_first, index_lskip_one_waitast)
-            textbox.tag_delete(cmd_tag_map[num])
-        cmd_tag_map.clear()
+    window.show()
+    app.exec()

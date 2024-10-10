@@ -1,6 +1,5 @@
 from Script.Core import (
     flow_handle,
-    main_frame,
     cache_control,
     game_type,
     io_init,
@@ -94,8 +93,3 @@ def clr_cmd(*number, clr_default_flow=True):
         flow_handle.cmd_clear()
 
 
-def focus_cmd():
-    """
-    使光标聚焦在命令输出框上
-    """
-    main_frame.inputbox.focus_force()
