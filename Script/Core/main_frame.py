@@ -64,13 +64,23 @@ class MainWindow(QMainWindow):
         self.main_layout.setContentsMargins(0, 0, 0, 0)  # 移除主布局的边距
         self.main_layout.setSpacing(0)  # 移除主布局的间距
 
-        # 创建文本显示区域
-        self.textbox = CommandTextEdit(self)
-        self.textbox.setReadOnly(True)
-        self.textbox.setFont(self.normal_font)
-        self.textbox.setReadOnly(True)
+        self.textbox_layout = QHBoxLayout()
+        # 创建事件显示区域
+        self.eventbox = CommandTextEdit(self)
+        self.eventbox.setReadOnly(True)
+        self.eventbox.setFont(self.normal_font)
+        self.eventbox.setReadOnly(True)
+        # 创建面板显示区域
+        self.panelbox = CommandTextEdit(self)
+        self.panelbox.setReadOnly(True)
+        self.panelbox.setFont(self.normal_font)
+        self.panelbox.setReadOnly(True)
 
-        self.main_layout.addWidget(self.textbox)
+        self.textbox_layout.addWidget(self.eventbox)
+        self.textbox_layout.addWidget(self.panelbox)
+        self.textbox_layout.setStretch(0, 0)
+        self.textbox_layout.setStretch(1, 1)
+        self.main_layout.addLayout(self.textbox_layout)
 
         # 设置文本框背景颜色
         self.set_background(normal_config.config_normal.background)
@@ -97,10 +107,10 @@ class MainWindow(QMainWindow):
         screen_height = screen_geometry.height()
 
         # 计算窗口大小和字体大小
-        window_width = screen_width - 35
-        window_height = screen_height - 35
-        need_char_width = window_width / 120
-        need_char_height = window_height / 50
+        window_width = screen_width - 45
+        window_height = screen_height - 45
+        need_char_width = window_width / normal_config.config_normal.textbox_width
+        need_char_height = window_height / normal_config.config_normal.text_hight
         now_font_size = 20
         font_family = normal_config.config_normal.font
 
@@ -143,12 +153,12 @@ class MainWindow(QMainWindow):
         font_metrics = QFontMetrics(self.normal_font)
         self.now_char_width = font_metrics.horizontalAdvance('a')
         self.now_char_height = font_metrics.lineSpacing()
-        window_width = self.now_char_width * 120
-        window_height = self.now_char_height * 50
+        window_width = self.now_char_width * normal_config.config_normal.textbox_width
+        window_height = self.now_char_height * normal_config.config_normal.text_hight
 
         # 设置窗口大小和位置
-        win_width = window_width + 35  # 调整窗口框架的宽度
-        win_height = window_height + 35  # 调整窗口框架的高度
+        win_width = window_width + 45  # 调整窗口框架的宽度
+        win_height = window_height + 45  # 调整窗口框架的高度
         x = current_screen.geometry().x() + (current_screen.geometry().width() - win_width) // 2
         y = current_screen.geometry().y() + (current_screen.geometry().height() - win_height) // 2
         self.setGeometry(x, y, win_width, win_height)
@@ -255,6 +265,12 @@ class MainWindow(QMainWindow):
         """
         self.main_queue = q
 
+    def open_eventbox(self):
+        """打开事件文本面板"""
+        self.textbox_layout.setStretch(0, 1)
+        self.textbox_layout.setStretch(1, 2)
+        self.textbox_layout.invalidate()
+
     @Slot()
     def read_queue(self):
         """从队列中获取在前端显示的信息"""
@@ -294,6 +310,8 @@ class MainWindow(QMainWindow):
                     self.io_print_cmd(c["text"], c["num"], c["normal_style"][0], c["on_style"][0])
                 if c["type"] == "image_cmd":
                     self.io_print_image_cmd(c["text"], c["num"])
+                if c["type"] == "event":
+                    self.event_print(c["text"], style=tuple(c["style"]))
                 # 如果需要，实现滚动限制
         self.input_line.setFocus()
 
@@ -303,11 +321,12 @@ class MainWindow(QMainWindow):
         Keyword arguments:
         color -- 背景颜色字符串
         """
-        pal = self.textbox.palette()
-        pal.setColor(self.textbox.viewport().backgroundRole(), QColor(color))
-        self.textbox.setPalette(pal)
-        # 设置文本框的样式表以覆盖默认背景颜色
-        self.textbox.setStyleSheet(f"background-color: {color};")
+        pal = self.panelbox.palette()
+        pal.setColor(self.panelbox.viewport().backgroundRole(), QColor(color))
+        self.panelbox.setPalette(pal)
+        self.panelbox.setStyleSheet(f"background-color: {color};")
+        self.eventbox.setPalette(pal)
+        self.eventbox.setStyleSheet(f"background-color: {color};")
 
     def now_print(self, string: str, style=('standard',)):
         """
@@ -316,13 +335,28 @@ class MainWindow(QMainWindow):
         string -- 要输出的字符串
         style -- 样式名称的元组
         """
-        cursor = self.textbox.textCursor()
+        cursor = self.panelbox.textCursor()
         text_format = QTextCharFormat()
         for style_name in style:
             if style_name in self.styles:
                 text_format.merge(self.styles[style_name])
         cursor.insertText(string, text_format)
-        self.textbox.ensureCursorVisible()
+        self.panelbox.ensureCursorVisible()
+
+    def event_print(self, string: str, style=('standard',)):
+        """
+        在事件面板绘制文本
+        Keyword arguments:
+        string -- 要输出的字符串
+        style -- 样式名称的元组
+        """
+        cursor = self.eventbox.textCursor()
+        text_format = QTextCharFormat()
+        for style_name in style:
+            if style_name in self.styles:
+                text_format.merge(self.styles[style_name])
+        cursor.insertText(string, text_format)
+        self.eventbox.ensureCursorVisible()
 
     def frame_style_def(self, style_name: str, foreground: str, background: str, font_family: str, font_size: int, bold: int, underline: int, italic: int):
         """
@@ -358,13 +392,13 @@ class MainWindow(QMainWindow):
         normal_style -- 正常显示样式
         on_style -- 鼠标悬停时的样式
         """
-        cursor = self.textbox.textCursor()
+        cursor = self.panelbox.textCursor()
         start_pos = cursor.position()
         text_format = self.styles.get(normal_style, QTextCharFormat())
         cursor.insertText(cmd_str, text_format)
         end_pos = cursor.position()
         self.cmd_tag_map[cmd_return] = (start_pos, end_pos, normal_style, on_style)
-        self.textbox.ensureCursorVisible()
+        self.panelbox.ensureCursorVisible()
 
     @Slot(int)
     def send_cmd(self, cmd_return: str):
@@ -393,7 +427,7 @@ class MainWindow(QMainWindow):
     def clear_screen(self):
         """清屏"""
         self.io_clear_cmd()
-        self.textbox.clear()
+        self.panelbox.clear()
 
     def now_print_image(self, image_name: str):
         """
@@ -401,14 +435,14 @@ class MainWindow(QMainWindow):
         Keyword arguments:
         image_name -- 图片名称（不含路径和扩展名）
         """
-        cursor = self.textbox.textCursor()
+        cursor = self.panelbox.textCursor()
         image_format = QTextImageFormat()
         image = self.image_data[image_name]  # QImage 对象
         image_format.setName(image_name)  # 使用图片名称作为资源名称
         image_format.setWidth(image.width())
         image_format.setHeight(image.height())
         # 将图片作为资源添加到文档中
-        self.textbox.document().addResource(QTextDocument.ImageResource, image_name, image)
+        self.panelbox.document().addResource(QTextDocument.ImageResource, image_name, image)
         cursor.insertImage(image_format)
 
     def io_print_image_cmd(self, image_path: str, cmd_return: str):
@@ -418,7 +452,7 @@ class MainWindow(QMainWindow):
         image_path -- 图片路径
         cmd_return -- 点击图片响应的命令数字
         """
-        cursor = self.textbox.textCursor()
+        cursor = self.panelbox.textCursor()
         start_pos = cursor.position()
         image_format = QTextImageFormat()
         image = self.image_data[image_name]  # QImage 对象
@@ -426,7 +460,7 @@ class MainWindow(QMainWindow):
         image_format.setWidth(image.width())
         image_format.setHeight(image.height())
         # 将图片作为资源添加到文档中
-        self.textbox.document().addResource(QTextDocument.ImageResource, image_name, image)
+        self.panelbox.document().addResource(QTextDocument.ImageResource, image_name, image)
         cursor.insertImage(image_format)
         end_pos = cursor.position()
         self.cmd_tag_map[cmd_return] = (start_pos, end_pos, '', '')
@@ -512,7 +546,7 @@ class MainWindow(QMainWindow):
         """
         if cmd_number in self.cmd_tag_map:
             start, end, normal_style, on_style = self.cmd_tag_map[cmd_number]
-            cursor = self.textbox.textCursor()
+            cursor = self.panelbox.textCursor()
             cursor.setPosition(start)
             cursor.setPosition(end, QTextCursor.KeepAnchor)
             text_format = self.styles.get(style_name, QTextCharFormat())
@@ -524,7 +558,7 @@ class MainWindow(QMainWindow):
             cmd_number = self.current_hover_cmd
             if cmd_number in self.cmd_tag_map:
                 start, end, normal_style, on_style = self.cmd_tag_map[cmd_number]
-                cursor = self.textbox.textCursor()
+                cursor = self.panelbox.textCursor()
                 cursor.setPosition(start)
                 cursor.setPosition(end, QTextCursor.KeepAnchor)
                 text_format = self.styles.get(normal_style, QTextCharFormat())

@@ -76,12 +76,13 @@ def get_unused_cmd_num():
 
 
 # 清除命令，没有参数则清除所有命令
-def clr_cmd(*number, clr_default_flow=True):
+def clr_cmd(*number, clr_default_flow=True, refresh_panel=True):
     """
     清楚绑定命令和默认处理函数
     Keyword arguments:
     number -- 清楚绑定命令数字
     clr_default_flow -- 是否同时清楚默认处理函数
+    refresh_panel -- 是否刷新面板
     """
     if clr_default_flow:
         clear_default_flow()
@@ -91,5 +92,9 @@ def clr_cmd(*number, clr_default_flow=True):
         global unused_cmd_num
         unused_cmd_num = 500
         flow_handle.cmd_clear()
+    if refresh_panel:
+        io_init.clear_screen()
+        panel = "\n" * 50
+        io_init.era_print(panel)
 
 

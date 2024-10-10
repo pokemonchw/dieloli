@@ -98,6 +98,23 @@ def text_json(string: str, style: tuple or str):
     return re
 
 
+def event_json(string: str, style: tuple or str):
+    """
+    定义一个事件json
+    Keyword arguments:
+    string -- 要显示的文本
+    style -- 显示时的样式
+    """
+    re = {}
+    re["type"] = "event"
+    re["text"] = string
+    if isinstance(style, tuple):
+        re["style"] = style
+    if isinstance(style, str):
+        re["style"] = (style,)
+    return re
+
+
 def cmd_json(
         cmd_str: str,
         cmd_num: int,
@@ -165,15 +182,19 @@ def style_json(
 # 输出格式化
 
 
-def era_print(string: str, style="standard"):
+def era_print(string: str, style="standard", draw_type="text"):
     """
     输出命令
     Keyword arguments:
     string -- 输出文本
     style -- 显示样式
+    draw_type -- 绘制位置类型 text|event
     """
     json_str = new_json()
-    json_str["content"].append(text_json(string, style))
+    if draw_type == "text":
+        json_str["content"].append(text_json(string, style))
+    else:
+        json_str["content"].append(event_json(string, style))
     put_queue(json_str)
 
 

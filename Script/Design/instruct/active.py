@@ -108,6 +108,7 @@ def handle_drink_spring():
         now_draw.text += _("喝到了甜甜的泉水～")
         character_data.status[28] = 0
     now_draw.text += "\n"
+    now_draw.draw_event = True
     now_draw.draw()
     handle_achieve.check_all_achieve()
 

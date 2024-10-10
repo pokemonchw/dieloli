@@ -2,11 +2,8 @@
 import time
 from types import FunctionType
 from Script.Core import (
-    text_handle,
-    io_init,
-    get_text,
-    game_type,
-    cache_control,
+    text_handle, io_init, get_text,
+    game_type, cache_control, main_frame
 )
 from Script.Design import constant
 
@@ -320,3 +317,9 @@ def askfor_wait():
     cache.wframe_mouse.mouse_leave_cmd = 1
     askfor_str(donot_return_null_str=False)
     cache.wframe_mouse.mouse_leave_cmd = 0
+
+
+def open_eventbox():
+    """开启事件文本面板"""
+    main_frame.window.open_eventbox()
+    io_init.era_print("\n"*50, draw_type="event")

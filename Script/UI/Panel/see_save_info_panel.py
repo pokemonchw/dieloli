@@ -171,6 +171,7 @@ class SaveInfoDraw:
         save_handle.input_load_save(str(self.text))
         cache.now_panel_id = constant.Panel.IN_SCENE
         cache.back_save_panel = 1
+        flow_handle.open_eventbox()
 
     def delete_save(self):
         """删除存档"""

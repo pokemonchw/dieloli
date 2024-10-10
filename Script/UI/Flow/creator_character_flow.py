@@ -56,6 +56,7 @@ def creator_character_panel():
     weather.handle_weather(False)
     save_handle.establish_save("auto")
     cache.now_panel_id = constant.Panel.IN_SCENE
+    flow_handle.open_eventbox()
 
 
 def game_start():

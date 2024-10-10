@@ -17,6 +17,7 @@ def game_update_flow(add_time: int):
     """
     event.handle_event(0, 1, cache.game_time, cache.game_time)
     line_feed_draw = draw.NormalDraw()
+    line_feed_draw.draw_event = True
     line_feed_draw.text = "\n"
     now_time = cache.game_time
     next_hour = now_time + 3600
@@ -35,6 +36,7 @@ def game_update_flow(add_time: int):
             time_draw.text = game_time.get_date_text(cache.game_time)
             time_draw.width = normal_config.config_normal.text_width
             time_draw.draw()
+            time_draw.draw_event = True
             line_feed_draw.draw()
             now_time = cache.game_time
             next_hour = now_time + 3600

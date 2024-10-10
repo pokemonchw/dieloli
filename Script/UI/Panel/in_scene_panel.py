@@ -62,6 +62,7 @@ class InScenePanel:
         old_character_set = set()
         is_collection = cache.is_collection
         while 1:
+            py_cmd.clr_cmd()
             character_data: game_type.Character = cache.character_data[0]
             scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
             scene_data: game_type.Scene = cache.scene_data[scene_path_str]
@@ -452,7 +453,7 @@ class InScenePanel:
                     ask_list.append(debug_switch_button.return_text)
             ask_list.extend(see_instruct_panel.return_list)
             flow_handle.askfor_all(ask_list)
-            py_cmd.clr_cmd()
+            py_cmd.clr_cmd(refresh_panel=False)
 
     def change_stature_panel_swicth(self):
         """ 更改身材信息面板开关状态 """
@@ -610,7 +611,7 @@ class SeeInstructPanel:
         Keyword arguments:
         instruct_id -- 指令id
         """
-        py_cmd.clr_cmd()
+        py_cmd.clr_cmd(refresh_panel=False)
         handle_instruct.handle_instruct(instruct_id)
 
     @staticmethod
@@ -777,5 +778,6 @@ class SeeDebugPanel:
         Keyword arguments:
         instruct_id -- 指令id
         """
-        py_cmd.clr_cmd()
+        py_cmd.clr_cmd(refresh_panel=False)
         handle_debug.handle_debug(debug_id)
+        py_cmd.clr_cmd()

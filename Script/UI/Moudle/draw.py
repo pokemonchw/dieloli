@@ -28,6 +28,8 @@ class NormalDraw:
         """ 当前最大可绘制宽度 """
         self.text = ""
         """ 当前要绘制的文本 """
+        self.draw_event: bool = False
+        """ 是否绘制到事件面板 """
 
     def __len__(self) -> int:
         """
@@ -42,6 +44,9 @@ class NormalDraw:
 
     def draw(self):
         """绘制文本"""
+        draw_type = "text"
+        if self.draw_event:
+            draw_type = "event"
         if int(len(self)) > int(self.width):
             now_text = ""
             if self.width > 0:
@@ -54,9 +59,9 @@ class NormalDraw:
                     else:
                         break
                 now_text = now_text[:-2] + "~"
-            io_init.era_print(now_text, self.style)
+            io_init.era_print(now_text, self.style, draw_type)
         else:
-            io_init.era_print(self.text, self.style)
+            io_init.era_print(self.text, self.style, draw_type)
 
 
 class WaitDraw(NormalDraw):
@@ -64,6 +69,9 @@ class WaitDraw(NormalDraw):
 
     def draw(self):
         """绘制文本"""
+        draw_type = "text"
+        if self.draw_event:
+            draw_type = "event"
         if int(len(self)) > int(self.width):
             now_text = ""
             if self.width > 0:
@@ -76,9 +84,9 @@ class WaitDraw(NormalDraw):
                     else:
                         break
                 now_text = now_text[:-2] + "~"
-            io_init.era_print(now_text, self.style)
+            io_init.era_print(now_text, self.style, draw_type)
         else:
-            io_init.era_print(self.text, self.style)
+            io_init.era_print(self.text, self.style, draw_type)
         if not cache.wframe_mouse.w_frame_skip_wait_mouse:
             flow_handle.askfor_wait()
 
@@ -89,6 +97,9 @@ class LineFeedWaitDraw(NormalDraw):
     def draw(self):
         """绘制文本"""
         text_list = self.text.split(r"\n")
+        draw_type = "text"
+        if self.draw_event:
+            draw_type = "event"
         for text in text_list:
             now_width = text_handle.get_text_index(text)
             if int(now_width) > int(self.width):
@@ -103,14 +114,14 @@ class LineFeedWaitDraw(NormalDraw):
                         else:
                             break
                     now_text = now_text[:-2] + "~"
-                io_init.era_print(now_text, self.style)
+                io_init.era_print(now_text, self.style, draw_type)
             else:
-                io_init.era_print(text, self.style)
+                io_init.era_print(text, self.style, draw_type)
             if not cache.wframe_mouse.w_frame_skip_wait_mouse:
                 flow_handle.askfor_wait()
             else:
                 time.sleep(0.001)
-            io_init.era_print("\n")
+            io_init.era_print("\n",  draw_type=draw_type)
 
 
 class ImageDraw:
@@ -462,6 +473,8 @@ class LineDraw:
         """ 文本样式 """
         self.width = width
         """ 线条宽度 """
+        self.draw_event: bool = False
+        """ 是否绘制到事件面板 """
 
     def __len__(self) -> int:
         """
@@ -476,6 +489,7 @@ class LineDraw:
         text_index = text_handle.get_text_index(self.text)
         text_num = self.width / text_index
         now_draw = NormalDraw()
+        now_draw.draw_event = self.draw_event
         now_draw.width = self.width
         now_draw.text = self.text * int(text_num) + "\n"
         now_draw.style = self.style
@@ -520,6 +534,7 @@ class TitleLineDraw:
         """ 标题样式 """
         self.frame_style = frame_style
         """ 标题边框样式 """
+        self.draw_event = False
 
     def draw(self):
         """绘制线条"""
@@ -527,6 +542,7 @@ class TitleLineDraw:
         title_draw.width = self.width
         title_draw.style = self.title_style
         title_draw.text = f" {self.title} "
+        title_draw.draw_event = self.draw_event
         fix_width = self.width - len(title_draw)
         fix_width = max(fix_width, 0)
         frame_width = int(fix_width / 2)
@@ -534,15 +550,20 @@ class TitleLineDraw:
         frame_draw.width = frame_width
         frame_draw.style = self.frame_style
         frame_draw.text = self.frame
+        frame_draw.draw_event = self.draw_event
         line_width = int(fix_width / 2 - len(frame_draw))
         line_width = max(line_width, 0)
         line_draw = NormalDraw()
         line_draw.width = line_width
         line_draw.style = self.style
         line_draw.text = self.line * line_width
+        line_draw.draw_event = self.draw_event
         for text in [line_draw, frame_draw, title_draw, frame_draw, line_draw]:
             text.draw()
-        io_init.era_print("\n")
+        draw_type = "text"
+        if self.draw_event:
+            draw_type = "event"
+        io_init.era_print("\n", draw_type=draw_type)
 
 
 class LittleTitleLineDraw:
@@ -723,6 +744,9 @@ class LeftDraw(NormalDraw):
 
     def draw(self):
         """绘制文本"""
+        draw_type = "text"
+        if self.draw_event:
+            draw_type = "event"
         if int(len(self)) > int(self.width):
             now_text = ""
             if self.width:
@@ -737,7 +761,7 @@ class LeftDraw(NormalDraw):
                 now_text = now_text[:-2] + "~"
         else:
             now_text = text_handle.align(self.text, "left", 0, 1, self.width)
-        io_init.era_print(now_text, self.style)
+        io_init.era_print(now_text, self.style, draw_type)
 
 
 class ExpLevelDraw:
