@@ -1,6 +1,7 @@
 from typing import List
 from types import FunctionType
 import datetime
+import random
 from Script.UI.Moudle import draw, panel
 from Script.UI.Panel import game_info_panel, see_character_info_panel
 from Script.Core import (
@@ -13,10 +14,11 @@ from Script.Core import (
     py_cmd,
 )
 from Script.Design import (
-    attr_text, map_handle, handle_instruct, handle_premise, constant, game_time,
-    handle_debug, handle_achieve,
+    attr_text, map_handle, handle_instruct,
+    handle_premise, constant, game_time,
+    handle_debug, handle_achieve, course,
 )
-from Script.Config import game_config, normal_config
+from Script.Config import game_config, normal_config, config_def
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
@@ -73,7 +75,11 @@ class InScenePanel:
                 now_draw.draw()
                 cache_control.achieve.first_dead = True
                 handle_achieve.check_all_achieve()
-                continue
+                now_draw.text = _("重新开始新的人生吧")
+                now_draw.width = self.width
+                now_draw.draw()
+                cache.now_panel_id = constant.Panel.TITLE
+                break
             character_set = scene_data.character_list.copy()
             character_set.remove(0)
             refresh_character_list_judge = False
@@ -394,8 +400,6 @@ class InScenePanel:
                                 t_draw.text = " " * int(self.width / 2 - 1)
                                 t_draw.width = self.width / 2 - 1
                             character_status_draw_list.append((c_draw, t_draw))
-                    #title_draw = draw.TitleLineDraw(_("人物状态"), self.width)
-                    #title_draw.draw()
                     for label in character_status_draw_list:
                         if isinstance(label, tuple):
                             index = 0
@@ -570,6 +574,7 @@ class SeeInstructPanel:
         for instruct_list in instruct_group:
             for instruct_id in instruct_list:
                 instruct_name = constant.handle_instruct_name_data[instruct_id]
+                instruct_name = self.change_instruct_text(instruct_name)
                 id_text = text_handle.id_index(instruct_id)
                 now_text = f"{id_text}{instruct_name}"
                 now_draw = draw.LeftButton(
@@ -607,6 +612,39 @@ class SeeInstructPanel:
         """
         py_cmd.clr_cmd()
         handle_instruct.handle_instruct(instruct_id)
+
+    @staticmethod
+    def change_instruct_text(instruct_text: str) -> str:
+        """
+        处理更新指令文本
+        Keyword arguments:
+        instruct_text -- 原始指令文本
+        Return arguments:
+        str -- 更新后的文本
+        """
+        if "{ClassName}" in instruct_text:
+            character_data: game_type.Character = cache.character_data[0]
+            end_time = 0
+            school_id, phase = course.get_character_school_phase(0)
+            now_time = datetime.datetime.fromtimestamp(cache.game_time, game_time.time_zone)
+            now_time_value = now_time.hour * 100 + now_time.minute
+            now_course_index = 0
+            for session_id in game_config.config_school_session_data[school_id]:
+                session_config = game_config.config_school_session[session_id]
+                if session_config.start_time <= now_time_value <= session_config.end_time:
+                    now_value = int(now_time_value / 100) * 60 + now_time_value % 100
+                    end_value = int(session_config.end_time / 100) * 60 + session_config.end_time % 100
+                    end_time = end_value - now_value + 1
+                    now_course_index = session_config.session
+                    break
+            now_week = now_time.weekday()
+            if not now_course_index:
+                instruct_text = instruct_text.format(ClassName=_("自习课"))
+            else:
+                now_course = cache.course_time_table_data[school_id][phase][now_week][now_course_index]
+                course_config:config_def.Course = game_config.config_course[now_course]
+                instruct_text = instruct_text.format(ClassName=course_config.name)
+        return instruct_text
 
 
 class SeeDebugPanel:

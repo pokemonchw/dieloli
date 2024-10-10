@@ -118,3 +118,31 @@ def handle_is_heavy_snow(character_id: int) -> int:
     if cache.weather == 7:
         return 1
     return 0
+
+
+@handle_premise.add_premise(constant.Premise.NOW_IS_RAINY)
+def handle_now_is_rainy(character_id: int) -> int:
+    """
+    校验现在是否正在下雨
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    if cache.weather in {1, 2, 3, 4, 6}:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.NOW_IS_NOT_RAINY)
+def handle_now_is_not_rainy(character_id: int) -> int:
+    """
+    校验现在是否没有在下雨
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    if cache.weather not in {1, 2, 3, 4, 6}:
+        return 1
+    return 0

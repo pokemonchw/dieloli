@@ -2,7 +2,7 @@ import random
 from functools import wraps
 from typing import List
 from types import FunctionType
-from Script.Core import get_text, game_type, cache_control, flow_handle, py_cmd
+from Script.Core import get_text, game_type, cache_control, flow_handle, py_cmd, save_handle
 from Script.Design import (
     constant,
     handle_panel,
@@ -18,6 +18,7 @@ from Script.Design import (
     club_handle,
     handle_achieve,
     weather,
+    handle_adv,
 )
 from Script.UI.Moudle import panel, draw
 from Script.UI.Panel import see_character_info_panel, change_nature_panel
@@ -43,13 +44,17 @@ def creator_character_panel():
     map_config.init_map_data()
     game_time.init_time()
     cache.character_data[0] = game_type.Character()
+    cache.character_data[0].name = _("主人公")
+    cache.character_data[0].nick_name = _("你")
     character_handle.init_character_list()
     character.init_attr(0)
     game_start()
     confirm_character_attr_panel()
+    character_handle.init_character_position()
     cache_control.achieve.create_npc_index += len(cache.character_data)
     handle_achieve.check_all_achieve()
     weather.handle_weather(False)
+    save_handle.establish_save("auto")
     cache.now_panel_id = constant.Panel.IN_SCENE
 
 
@@ -57,7 +62,6 @@ def game_start():
     """初始化游戏数据"""
     character_handle.init_no_character_scene()
     character_handle.init_character_dormitory()
-    character_handle.init_character_position()
     course.init_phase_course_hour()
     interest.init_character_interest()
     course.init_all_character_knowledge()
@@ -74,6 +78,7 @@ def game_start():
     club_handle.init_club_data()
     for i in cache.character_data:
         attr_calculation.init_character_hp_and_mp(i)
+    handle_adv.handle_all_adv_npc()
 
 
 def confirm_character_attr_panel():
@@ -141,7 +146,6 @@ def change_name():
     not_system_error.text = _("角色名不能为系统保留字，请重新输入\n")
     not_name_error = draw.NormalDraw()
     not_name_error.text = _("已有角色使用该姓名，请重新输入\n")
-    create_judge = 0
     while 1:
         now_name = ask_name_panel.draw()
         if now_name.isdigit():
@@ -215,6 +219,7 @@ def setting_age_tem_panel():
     character.init_character_weight_and_bodyfat(0)
     character.init_character_measurements(0)
     course.init_character_knowledge(0)
+    attr_calculation.init_character_hp_and_mp(0)
     course.init_class_teacher()
 
 
@@ -243,4 +248,5 @@ def setting_weight_panel():
     character_data.bodyfat_tem = int(ans)
     character.init_character_weight_and_bodyfat(0)
     character.init_character_measurements(0)
+    attr_calculation.init_character_hp_and_mp(0)
 

@@ -31,8 +31,6 @@ def add_achieve(achieve_id: str):
 
 def check_all_achieve():
     """检查成就是否已完成"""
-    pass
-    """
     for cid in game_config.config_achieve:
         if cid in cache_control.achieve.completed_data and cache_control.achieve.completed_data[cid]:
             continue
@@ -46,7 +44,6 @@ def check_all_achieve():
                 now_draw.width = normal_config.config_normal.text_width
                 now_draw.draw()
     save_achieve()
-    """
 
 
 def load_achieve():
@@ -59,36 +56,7 @@ def load_achieve():
 
 def save_achieve():
     """保存成就数据"""
-    if platform.system() == "Linux":
-        now_process = multiprocessing.Process(target=save_achieve_linux)
-        now_process.start()
-        now_process.join()
-    else:
-        data_queue = multiprocessing.Queue()
-        now_process = multiprocessing.Process(target=save_achieve_windows, args=(data_queue,))
-        now_process.start()
-        data_queue.put(cache_control.achieve)
-        now_process.join()
-
-
-def save_achieve_windows(save_queue: multiprocessing.Queue):
-    """
-    针对windows的并行成就保存函数
-    笔记:由于windows不支持fork机制,数据无法从主进程直接继承,pickle转换数据效率过低且不安全,最后决定使用线程安全的queue来传递数据(稳定性待测试)
-    Keyword arguments:
-    save_queue -- 传入数据的消息队列
-    """
-    data = save_queue.get()
-    achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
-    with open(achieve_file_path, "wb+") as f:
-        pickle.dump(data, f)
-
-
-def save_achieve_linux():
-    """
-    针对linux的并行成就保存函数
-    笔记:得益于unix的fork机制,子进程直接复制了一份内存,效率高,且不用创建传参管道,数据进程安全,不受玩家操作影响
-    """
     achieve_file_path = os.path.join(game_path_config.SAVE_PATH,"achieve")
     with open(achieve_file_path, "wb+") as f:
         pickle.dump(cache_control.achieve, f)
+

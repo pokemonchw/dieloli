@@ -1,6 +1,7 @@
 from types import FunctionType
 from typing import List, Dict, Set
 from Script.Design.constant.achieve import Achieve
+from Script.Design.constant.adv_npc import AdvNpc
 from Script.Design.constant.behavior import Behavior
 from Script.Design.constant.behavior_effect import BehaviorEffect
 from Script.Design.constant.character_status import CharacterStatus
@@ -61,7 +62,13 @@ panel_data: Dict[int, FunctionType] = {}
 """
 place_data: Dict[str, List[str]] = {}
 """ 按房间类型分类的场景列表 场景标签:场景路径列表 """
+in_door_scene_list: List[str] = []
+""" 室内场景列表 """
 cmd_map: Dict[int, FunctionType] = {}
 """ cmd存储 """
 settle_behavior_effect_data: Dict[int, FunctionType] = {}
 """ 角色行为结算处理器 处理器id:处理器 """
+adv_name_data: Dict[str, str] = {}
+""" 所有剧情npc名字数据 {adv id:npc名字} """
+adv_name_set: Set[str] = set()
+""" 所有剧情npc名字集合 """

@@ -68,6 +68,13 @@ class GameTimeInfoPanel:
         weather_draw.width = self.width - now_width
         now_width += len(weather_draw)
         now_draw.draw_list.append(weather_draw)
+        now_temperature = game_time.get_temperature(cache.game_time)
+        now_temperature = round(now_temperature,1)
+        temperature_draw = draw.NormalDraw()
+        temperature_draw.text = f"{now_temperature}°C "
+        temperature_draw.width = self.width - now_width
+        now_width += len(temperature_draw)
+        now_draw.draw_list.append(temperature_draw)
         now_judge = game_time.judge_attend_class_today(0)
         attend_class = _("(休息)")
         if now_judge:

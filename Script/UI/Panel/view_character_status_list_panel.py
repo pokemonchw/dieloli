@@ -246,7 +246,10 @@ class SeeCharacterStatusDraw:
                 character_data.behavior.start_time, game_time.time_zone
             )
             death_time_text = f"{death_time_text}{str(death_time)}"
-            button_text = f"{index_text} {character_data.name} {sex_text} {character_data.age}岁 {cause_of_death_config.name} {death_time_text} {position_text}"
+            character_name = character_data.name
+            if character_data.nick_name != "":
+                character_name = character_data.nick_name
+            button_text = f"{index_text} {character_name} {sex_text} {character_data.age}岁 {cause_of_death_config.name} {death_time_text} {position_text}"
         else:
             now_height = str(round(character_data.height.now_height, 2))
             now_height_text = _("身高:") + now_height + "cm"
@@ -259,7 +262,9 @@ class SeeCharacterStatusDraw:
             now_chest_text = _("罩杯:") + now_chest_tem.info
             age = character_data.age
             age_text = _("{age}岁").format(age=age)
-            button_text = f"{index_text} {character_data.name} {sex_text} {age_text} {now_height_text} {now_weight_text} {body_fat_text} {now_chest_text} {target_text} {position_text}"
+            if character_data.nick_name != "" and character_id:
+                character_name = character_data.nick_name
+            button_text = f"{index_text} {character_name} {sex_text} {age_text} {now_height_text} {now_weight_text} {body_fat_text} {now_chest_text} {target_text} {position_text}"
         player_data = cache.character_data[0]
         if self.text in player_data.collection_character:
             button_text += _(" (已收藏)")

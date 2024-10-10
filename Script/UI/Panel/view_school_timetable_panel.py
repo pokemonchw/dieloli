@@ -83,6 +83,7 @@ class StudentTimeTablePanel:
         now_time_value = now_date.hour * 100 + now_date.minute
         identity_data: game_type.StudentIdentity = character_data.identity_data[0]
         while 1:
+            py_cmd.clr_cmd()
             now_week_text = game_config.config_week_day[self.now_week].name
             title_draw = draw.TitleLineDraw(_("课程表"), self.width)
             title_draw.draw()
@@ -173,6 +174,8 @@ class StudentTimeTablePanel:
                         ][self.now_week][times]
                         teacher_data: game_type.Character = cache.character_data[teacher_id]
                         teacher_name = teacher_data.name
+                        if teacher_data.nick_name != "" and teacher_data.cid:
+                            teacher_name = teacher_data.nick_name
                         now_text = [
                             times_text,
                             course_name,

@@ -78,8 +78,6 @@ class Instruct:
     """ 摸胸 """
     TARGET_UNDRESS = 0
     """ 脱下对方衣服 """
-    STALKER = 0
-    """ 尾行 """
 
     """
     =========================
@@ -238,6 +236,8 @@ class Instruct:
     """ 启用收藏模式 """
     UN_COLLECTION_SYSTEM = 0
     """ 关闭收藏模式 """
+    SET_NICK_NAME = 0
+    """ 设置昵称 """
     SEE_ACHIEVE = 0
     """ 查看成就 """
     SAVE = 0
