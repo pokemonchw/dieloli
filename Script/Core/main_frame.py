@@ -22,7 +22,7 @@ from PySide6.QtGui import (
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget,
     QTextEdit, QLineEdit, QLabel,
-    QVBoxLayout, QHBoxLayout
+    QVBoxLayout, QHBoxLayout, QSizePolicy
 )
 
 import screeninfo
@@ -69,6 +69,7 @@ class MainWindow(QMainWindow):
         self.main_layout.setSpacing(0)  # 移除主布局的间距
 
         self.textbox_layout = QHBoxLayout()
+        self.eventbox_layout = QVBoxLayout()
         # 创建事件显示区域
         self.eventbox = CommandTextEdit(self)
         self.eventbox.setReadOnly(True)
@@ -81,18 +82,26 @@ class MainWindow(QMainWindow):
         self.instructbox.setFont(self.normal_font)
         self.instructbox.box_id = "instruct"
         self.instructbox.verticalScrollBar().setStyleSheet("width: 0px;")
+        self.instructbox.setContentsMargins(0, 0, 0, 0)
+        self.eventbox.setContentsMargins(0, 0, 0, 0)
         # 创建面板显示区域
         self.panelbox = CommandTextEdit(self)
         self.panelbox.setReadOnly(True)
         self.panelbox.setFont(self.normal_font)
         self.panelbox.drawDashedLine = False
+        self.panelbox.verticalScrollBar().setStyleSheet("width: 0px;")
 
-        self.textbox_layout.addWidget(self.eventbox)
-        self.textbox_layout.addWidget(self.instructbox)
         self.textbox_layout.addWidget(self.panelbox)
-        self.eventbox.hide()
-        self.instructbox.hide()
-        self.textbox_layout.setStretch(1, 1)
+        self.eventbox_layout.addWidget(self.eventbox)
+        self.eventbox_layout.addWidget(self.instructbox)
+        self.eventbox_layout.setStretch(0, 1)
+        self.eventbox_layout.setStretch(1, 2)
+        self.eventbox_layout.setContentsMargins(0, 0, 0, 0)  # 移除主布局的边距
+        self.eventbox_widget = QWidget()
+        self.eventbox_widget.setLayout(self.eventbox_layout)
+        self.textbox_layout.addWidget(self.eventbox_widget)
+        self.eventbox_widget.hide()
+        self.textbox_layout.setStretch(0, 1)
         self.textbox_layout.invalidate()
         self.main_layout.addLayout(self.textbox_layout)
 
@@ -291,16 +300,14 @@ class MainWindow(QMainWindow):
 
     def open_eventbox(self):
         """打开事件文本面板"""
-        self.eventbox.setFixedWidth(self.now_char_width*int(normal_config.config_normal.textbox_width/4))
-        self.eventbox.show()
-        self.instructbox.setFixedWidth(self.now_char_width*int(normal_config.config_normal.textbox_width/4))
-        self.instructbox.show()
+        self.textbox_layout.setStretch(1, 1)
+        self.eventbox_widget.show()
         self.textbox_layout.invalidate()
 
     def close_eventbox(self):
         """关闭事件文本面板"""
-        self.eventbox.hide()
-        self.instructbox.hide()
+        self.textbox_layout.setStretch(1, 0)
+        self.eventbox_widget.hide()
         self.textbox_layout.invalidate()
 
     @Slot()
@@ -369,6 +376,8 @@ class MainWindow(QMainWindow):
         self.eventbox.setStyleSheet(f"background-color: {color};")
         self.instructbox.setPalette(pal)
         self.instructbox.setStyleSheet(f"background-color: {color};")
+        self.eventbox_widget.setPalette(pal)
+        self.eventbox_widget.setStyleSheet(f"background-color: {color};")
 
     def now_print(self, string: str, style=('standard',)):
         """
@@ -697,6 +706,19 @@ class LineDecorationArea(QWidget):
     def paintEvent(self, event):
         self.editor.lineDecorationAreaPaintEvent(event)
 
+class TopDecorationArea(QWidget):
+    """顶部装饰线"""
+
+    def __init__(self, editor):
+        super().__init__(editor)
+        self.editor = editor
+
+    def sizeHint(self):
+        return QSize(0, self.editor.topDecorationAreaHeight())
+
+    def paintEvent(self, event):
+        self.editor.topDecorationAreaPaintEvent(event)
+
 
 class CommandTextEdit(QTextEdit):
     """自定义的文本编辑器，用于处理命令点击事件和鼠标悬停事件"""
@@ -713,31 +735,51 @@ class CommandTextEdit(QTextEdit):
         self.setReadOnly(True)  # 设置为只读，禁用编辑
         self.box_id = "main"
         self.lineDecorationArea = LineDecorationArea(self)
+        self.topDecorationArea = TopDecorationArea(self)
         # 初始化属性，控制是否绘制虚线
         self._draw_dashed_line = True
         # 设置黑底白字
         self.setStyleSheet("background-color: black; color: white;")
+        # 设置黑底白字
+        self.setStyleSheet("background-color: black; color: white;")
         # 当文本内容或滚动条变化时，更新装饰区域
-        self.document().blockCountChanged.connect(self.updateLineDecorationAreaWidth)
-        self.verticalScrollBar().valueChanged.connect(self.lineDecorationArea.update)
-        self.textChanged.connect(self.lineDecorationArea.update)
-        self.updateLineDecorationAreaWidth()
+        self.document().blockCountChanged.connect(self.updateDecorationAreas)
+        self.verticalScrollBar().valueChanged.connect(self.updateDecorationAreas)
+        self.textChanged.connect(self.updateDecorationAreas)
+        self.updateDecorationAreas()
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
     def decorationAreaWidth(self):
-        return 20 if self._draw_dashed_line else 0  # 当不绘制虚线时，宽度为 0
+        return 20 if self._draw_dashed_line else 0  # 右侧装饰区域宽度
 
-    def updateLineDecorationAreaWidth(self, _=None):
-        # 将装饰区域放在右侧
-        margin = self.decorationAreaWidth()
-        self.setViewportMargins(0, 0, margin, 0)
+    def topDecorationAreaHeight(self):
+        return 20 if self._draw_dashed_line else 0  # 上方装饰区域高度
 
-    def resizeEvent(self, event):
-        super().resizeEvent(event)
-
-        cr = self.contentsRect()
-        # 设置装饰区域的位置和大小，放在右侧
-        width = self.decorationAreaWidth()
-        self.lineDecorationArea.setGeometry(QRect(cr.right() - width, cr.top(), width, cr.height()))
+    def updateDecorationAreas(self, _=None):
+        """
+        更新视口边距，并设置装饰区域的位置和大小。
+        """
+        margin_right = self.decorationAreaWidth()
+        margin_top = self.topDecorationAreaHeight()
+        self.setViewportMargins(0, margin_top, margin_right, 0)
+        # 设置垂直装饰区域的位置和大小
+        self.lineDecorationArea.setGeometry(
+            QRect(
+                self.contentsRect().right() - margin_right,
+                self.contentsRect().top(),
+                margin_right,
+                self.contentsRect().height(),
+            )
+        )
+        # 设置水平装饰区域的位置和大小
+        self.topDecorationArea.setGeometry(
+            QRect(
+                self.contentsRect().left(),
+                self.contentsRect().top(),
+                self.contentsRect().width(),
+                margin_top,
+            )
+        )
 
     def lineDecorationAreaPaintEvent(self, event):
         if not self._draw_dashed_line:
@@ -746,30 +788,55 @@ class CommandTextEdit(QTextEdit):
         painter = QPainter(self.lineDecorationArea)
         # 设置装饰区域的背景为黑色
         painter.fillRect(event.rect(), Qt.black)
-
         # 设置虚线画笔，白色
         pen = QPen(Qt.white, 1, Qt.DashLine)
         painter.setPen(pen)
-
         # 在装饰区域中间绘制垂直虚线
         width = self.lineDecorationArea.width()
         x = width // 2
         painter.drawLine(x, event.rect().top(), x, event.rect().bottom())
 
+    def topDecorationAreaPaintEvent(self, event):
+        if not self._draw_dashed_line:
+            return  # 如果不绘制水平线，直接返回
+        painter = QPainter(self.topDecorationArea)
+        # 设置装饰区域的背景为黑色
+        painter.fillRect(event.rect(), Qt.black)
+        # 设置实线画笔，白色
+        pen = QPen(Qt.white, 1, Qt.SolidLine)
+        painter.setPen(pen)
+        # 在装饰区域中间绘制水平线
+        height = self.topDecorationArea.height()
+        y = height // 2
+        painter.drawLine(event.rect().left(), y, event.rect().right(), y)
+
     def scrollContentsBy(self, dx, dy):
+        """
+        同步滚动装饰区域。
+        """
         super().scrollContentsBy(dx, dy)
         self.lineDecorationArea.scroll(0, dy)
+        self.topDecorationArea.scroll(dx, 0)
 
     # 属性的 getter 方法
     def getDrawDashedLine(self):
         return self._draw_dashed_line
 
+    def getDrawTopLine(self):
+        return self._draw_top_line
+
     # 属性的 setter 方法
     def setDrawDashedLine(self, value):
         if self._draw_dashed_line != value:
             self._draw_dashed_line = value
-            self.updateLineDecorationAreaWidth()
+            self.updateDecorationAreas()
             self.lineDecorationArea.update()
+
+    def setDrawTopLine(self, value):
+        if self._draw_top_line != value:
+            self._draw_top_line = value
+            self.updateDecorationAreas()
+            self.topDecorationArea.update()
 
     def mousePressEvent(self, event):
         """鼠标点击事件处理"""

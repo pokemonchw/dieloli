@@ -144,7 +144,7 @@ class InScenePanel:
             meet_draw = draw.NormalDraw()
             meet_draw.text = _("你在这里遇到了:")
             meet_draw.width = self.width
-            see_instruct_panel = SeeInstructPanel(50)
+            see_instruct_panel = SeeInstructPanel(100)
             cache.wframe_mouse.w_frame_skip_wait_mouse = 0
             if cache.now_panel_id != constant.Panel.IN_SCENE:
                 break

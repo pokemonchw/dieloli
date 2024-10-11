@@ -91,7 +91,7 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
     if (not character_id) or (player_data.target_character_id == character_id):
         if now_event_draw.text != "":
             now_event_draw.draw()
-        line_draw = draw.LineDraw("+", int(window_width / 3))
+        line_draw = draw.LineDraw("+", 100)
         line_draw.draw_event = True
         line_draw_judge = False
         if settle_output is not None:
@@ -105,7 +105,7 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
                     if character_data.nick_name != "":
                         character_name = character_data.nick_name
                 name_draw.text = _("{character_name}的状态结算:").format(character_name=character_name)
-                name_draw.width = window_width / 3
+                name_draw.width = 100
                 name_draw.draw()
                 line_feed.draw()
             settle_output[0].draw()
@@ -194,7 +194,7 @@ def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():
                 draw_text += draw_list[i]
         now_draw = draw.NormalDraw()
         now_draw.text = draw_text
-        now_draw.width = window_width / 3
+        now_draw.width = 100
         now_draw.draw_event = True
         return now_draw
     return None
