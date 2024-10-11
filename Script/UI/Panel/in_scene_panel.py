@@ -375,7 +375,7 @@ class InScenePanel:
                     character_status_draw_list.append(fix_draw)
                     character_status_draw_list.extend(target_status_draw.draw_list[1:3])
                     character_status_draw_list.append(line_feed)
-                    for type_index in range(3, len(character_status_draw.draw_list)):
+                    for type_index in range(4, len(character_status_draw.draw_list)):
                         now_characer_status_draw = character_status_draw.draw_list[type_index]
                         now_target_status_draw = target_status_draw.draw_list[type_index]
                         now_type_draw = now_characer_status_draw.title_draw
@@ -524,6 +524,7 @@ class SeeInstructPanel:
                     continue
                 instruct_type_data[now_type].append(instruct)
             instruct_type_data[now_type].sort()
+        instruct_len_max += 5
         for now_type in cache.instruct_filter:
             if not normal_config.config_normal.nsfw:
                 if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
@@ -541,7 +542,6 @@ class SeeInstructPanel:
                 fix_draw = draw.LineDraw(".", self.width-instruct_type_draw.width-instruct_type_switch_button.width)
                 fix_draw.draw()
                 rows = 1
-                instruct_len_max += 5
                 now_instruct_list = instruct_type_data[now_type]
                 cols = int(normal_config.config_normal.text_width / instruct_len_max)
                 for i in range(1, len(now_instruct_list)):

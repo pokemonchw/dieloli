@@ -156,7 +156,7 @@ msgstr "The Ultimate of Love"
 #: Script/Design/game_time.py:51
 #, python-brace-format
 msgid "时间:{year}年{month}月{day}日{hour}点{minute}分"
-msgstr "Time: {year} Year {month} Month {day} Day {hour} Hour {minute} Minute"
+msgstr "Now: {year}.{month}.{day} {hour}:{minute}"
 
 #: Script/Design/cooking.py:315 Script/Design/cooking.py:382
 #: Script/UI/Panel/food_shop_panel.py:39 Script/UI/Panel/food_shop_panel.py:50
@@ -318,7 +318,7 @@ msgstr ""
 
 #: Script/Design/instruct/system.py:144
 msgid "设置昵称"
-msgstr ""
+msgstr "Set NickName"
 
 #: Script/Design/instruct/system.py:152
 #, python-brace-format
@@ -1621,7 +1621,7 @@ msgstr "(Rest)"
 
 #: Script/UI/Panel/game_info_panel.py:81
 msgid "(上学)"
-msgstr "(School)"
+msgstr "(Attend Classes)"
 
 #: Script/UI/Panel/food_bag_panel.py:39
 msgid "食物背包"
