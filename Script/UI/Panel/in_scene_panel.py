@@ -144,7 +144,7 @@ class InScenePanel:
             meet_draw = draw.NormalDraw()
             meet_draw.text = _("你在这里遇到了:")
             meet_draw.width = self.width
-            see_instruct_panel = SeeInstructPanel(self.width)
+            see_instruct_panel = SeeInstructPanel(50)
             cache.wframe_mouse.w_frame_skip_wait_mouse = 0
             if cache.now_panel_id != constant.Panel.IN_SCENE:
                 break
@@ -493,7 +493,18 @@ class SeeInstructPanel:
     def draw(self):
         """绘制操作菜单面板"""
         self.return_list = []
+        now_line_feed = draw.NormalDraw()
+        """ 换行绘制对象 """
+        now_line_feed.text = "\n"
+        now_line_feed.width = 1
+        now_line_feed.draw_instruct = True
+        now_clear_draw = draw.NormalDraw()
+        now_clear_draw.text = "\n" * 50
+        now_clear_draw.width = self.width
+        now_clear_draw.draw_instruct = True
+        now_clear_draw.draw()
         line = draw.LineDraw("-.-", self.width)
+        line.draw_instruct = True
         line.draw()
         now_premise_data = {}
         instruct_len_max = 0
@@ -525,56 +536,57 @@ class SeeInstructPanel:
                 instruct_type_data[now_type].append(instruct)
             instruct_type_data[now_type].sort()
         instruct_len_max += 5
+        col = int(self.width / instruct_len_max)
         for now_type in cache.instruct_filter:
             if not normal_config.config_normal.nsfw:
                 if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
                     continue
             instruct_type_config = game_config.config_instruct_type[now_type]
             instruct_type_draw = draw.NormalDraw()
+            instruct_type_draw.draw_instruct = True
             instruct_type_draw.text = instruct_type_config.name + ":"
             instruct_type_draw.width = text_handle.get_text_index(instruct_type_draw.text)
             instruct_type_draw.draw()
             if cache.instruct_filter[now_type] and now_type in constant.instruct_type_data:
                 instruct_type_switch_button = draw.Button(_("[-关-]"), f"Close{now_type}Instruct",cmd_func=self.change_filter,args=(now_type,))
+                instruct_type_switch_button.draw_instruct = True
                 instruct_type_switch_button.width = text_handle.get_text_index(instruct_type_switch_button.text)
                 instruct_type_switch_button.draw()
                 self.return_list.append(instruct_type_switch_button.return_text)
                 fix_draw = draw.LineDraw(".", self.width-instruct_type_draw.width-instruct_type_switch_button.width)
+                fix_draw.draw_instruct = True
                 fix_draw.draw()
                 rows = 1
                 now_instruct_list = instruct_type_data[now_type]
                 cols = int(normal_config.config_normal.text_width / instruct_len_max)
-                for i in range(1, len(now_instruct_list)):
-                    if i * cols >= len(now_instruct_list):
-                        rows = i
-                        break
-                now_draw_list = []
-                instruct_group = value_handle.list_of_groups(now_instruct_list, rows)
-                for instruct_list in instruct_group:
-                    for instruct_id in instruct_list:
-                        instruct_name = constant.handle_instruct_name_data[instruct_id]
-                        instruct_name = self.change_instruct_text(instruct_name)
-                        id_text = text_handle.id_index(instruct_id)
-                        now_text = f"{id_text}{instruct_name}"
-                        now_draw = draw.LeftButton(
-                            now_text,
-                            str(instruct_id),
-                            int(self.width / len(instruct_group)),
-                            cmd_func=self.handle_instruct,
-                            args=(instruct_id,),
-                        )
-                        now_draw_list.append(now_draw)
-                        self.return_list.append(now_draw.return_text)
-                now_draw = panel.VerticalDrawTextListGroup(self.width)
-                now_group = value_handle.list_of_groups(now_draw_list, rows)
-                now_draw.draw_list = now_group
-                now_draw.draw()
+                for i in range(len(now_instruct_list)):
+                    instruct_id = now_instruct_list[i]
+                    instruct_name = constant.handle_instruct_name_data[instruct_id]
+                    instruct_name = self.change_instruct_text(instruct_name)
+                    id_text = text_handle.id_index(instruct_id)
+                    now_text = f"{id_text}{instruct_name}"
+                    now_draw = draw.LeftButton(
+                        now_text,
+                        str(instruct_id),
+                        int(instruct_len_max),
+                        cmd_func=self.handle_instruct,
+                        args=(instruct_id,),
+                        draw_instruct=True,
+                    )
+                    now_draw.draw()
+                    self.return_list.append(now_draw.return_text)
+                    if i + 1 >= col and not (i + 1) % col and i + 1 != len(now_instruct_list):
+                        now_line_feed.draw()
+                if now_instruct_list:
+                    now_line_feed.draw()
             else:
                 instruct_type_switch_button = draw.Button(_("[-开-]"), f"Close{now_type}Instruct",cmd_func=self.change_filter,args=(now_type,))
                 instruct_type_switch_button.width = text_handle.get_text_index(instruct_type_switch_button.text)
+                instruct_type_switch_button.draw_instruct = True
                 instruct_type_switch_button.draw()
                 self.return_list.append(instruct_type_switch_button.return_text)
                 fix_draw = draw.LineDraw(".", self.width-instruct_type_draw.width-instruct_type_switch_button.width)
+                fix_draw.draw_instruct = True
                 fix_draw.draw()
 
     @staticmethod

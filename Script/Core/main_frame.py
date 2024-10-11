@@ -10,12 +10,14 @@ from queue import Queue, Empty
 from PySide6.QtCore import (
     Qt, Signal, Slot,
     QTimer, QObject, QThread,
+    QRect, QSize,
 )
 from PySide6.QtGui import (
     QColor, QFont, QFontMetrics,
     QTextCharFormat, QTextImageFormat, QImage,
     QCursor, QTextCursor, QPixmap,
     QTextDocument, QFontDatabase, QTextCursor,
+    QPainter, QPen
 )
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget,
@@ -48,8 +50,10 @@ class MainWindow(QMainWindow):
         self.send_order_state = False
         self.main_queue = Queue()
         self.cmd_tag_map = {}
+        self.instruct_cmd_tag_map = {}
         self.user_scrolling = False  # 用户是否正在滚动的标志位
         self.current_hover_cmd = None  # 当前悬停的指令编号
+        self.current_instruct_hover_cmd = None
         self.image_data = {}
         self.image_text_data = {}
         self.image_lock = 0
@@ -69,16 +73,25 @@ class MainWindow(QMainWindow):
         self.eventbox = CommandTextEdit(self)
         self.eventbox.setReadOnly(True)
         self.eventbox.setFont(self.normal_font)
-        self.eventbox.setReadOnly(True)
+        self.eventbox.box_id = "event"
+        self.eventbox.verticalScrollBar().setStyleSheet("width: 0px;")
+        # 场景面板互动指令显示区域
+        self.instructbox = CommandTextEdit(self)
+        self.instructbox.setReadOnly(True)
+        self.instructbox.setFont(self.normal_font)
+        self.instructbox.box_id = "instruct"
+        self.instructbox.verticalScrollBar().setStyleSheet("width: 0px;")
         # 创建面板显示区域
         self.panelbox = CommandTextEdit(self)
         self.panelbox.setReadOnly(True)
         self.panelbox.setFont(self.normal_font)
-        self.panelbox.setReadOnly(True)
+        self.panelbox.drawDashedLine = False
 
         self.textbox_layout.addWidget(self.eventbox)
+        self.textbox_layout.addWidget(self.instructbox)
         self.textbox_layout.addWidget(self.panelbox)
         self.eventbox.hide()
+        self.instructbox.hide()
         self.textbox_layout.setStretch(1, 1)
         self.textbox_layout.invalidate()
         self.main_layout.addLayout(self.textbox_layout)
@@ -106,10 +119,13 @@ class MainWindow(QMainWindow):
         screen_geometry = current_screen.geometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
+        fix_width = 90
+        fix_width *= screen_width / 1920
+        fix_width = int(fix_width)
 
         # 计算窗口大小和字体大小
-        window_width = screen_width - 45
-        window_height = screen_height - 45
+        window_width = screen_width - fix_width
+        window_height = screen_height - fix_width
         need_char_width = window_width / normal_config.config_normal.textbox_width
         need_char_height = window_height / normal_config.config_normal.text_hight
         now_font_size = 20
@@ -165,8 +181,8 @@ class MainWindow(QMainWindow):
         window_height = self.now_char_height * normal_config.config_normal.text_hight
 
         # 设置窗口大小和位置
-        win_width = window_width + 45  # 调整窗口框架的宽度
-        win_height = window_height + 45  # 调整窗口框架的高度
+        win_width = window_width + fix_width  # 调整窗口框架的宽度
+        win_height = window_height + fix_width  # 调整窗口框架的高度
         x = current_screen.geometry().x() + (current_screen.geometry().width() - win_width) // 2
         y = current_screen.geometry().y() + (current_screen.geometry().height() - win_height) // 2
         self.setGeometry(x, y, win_width, win_height)
@@ -275,8 +291,16 @@ class MainWindow(QMainWindow):
 
     def open_eventbox(self):
         """打开事件文本面板"""
-        self.eventbox.setFixedWidth(self.now_char_width*int(normal_config.config_normal.textbox_width/3))
+        self.eventbox.setFixedWidth(self.now_char_width*int(normal_config.config_normal.textbox_width/4))
         self.eventbox.show()
+        self.instructbox.setFixedWidth(self.now_char_width*int(normal_config.config_normal.textbox_width/4))
+        self.instructbox.show()
+        self.textbox_layout.invalidate()
+
+    def close_eventbox(self):
+        """关闭事件文本面板"""
+        self.eventbox.hide()
+        self.instructbox.hide()
         self.textbox_layout.invalidate()
 
     @Slot()
@@ -287,6 +311,10 @@ class MainWindow(QMainWindow):
             # 处理 json_data
             if 'clear_cmd' in json_data and json_data['clear_cmd'] == 'true':
                 self.clear_screen()
+            if "open_eventbox" in json_data:
+                self.open_eventbox()
+            if "close_eventbox" in json_data:
+                self.close_eventbox()
             if 'clearorder_cmd' in json_data and json_data['clearorder_cmd'] == 'true':
                 self.clear_order()
             if 'clearcmd_cmd' in json_data:
@@ -314,8 +342,12 @@ class MainWindow(QMainWindow):
             for c in json_data.get('content', []):
                 if c["type"] == "text":
                     self.now_print(c["text"], style=tuple(c["style"]))
+                if c["type"] == "instruct":
+                    self.instruct_print(c["text"], style=tuple(c["style"]))
                 if c["type"] == "cmd":
                     self.io_print_cmd(c["text"], c["num"], c["normal_style"][0], c["on_style"][0])
+                if c["type"] == "instruct_cmd":
+                    self.io_print_instruct_cmd(c["text"], c["num"], c["normal_style"][0], c["on_style"][0])
                 if c["type"] == "image_cmd":
                     self.io_print_image_cmd(c["text"], c["num"])
                 if c["type"] == "event":
@@ -335,6 +367,8 @@ class MainWindow(QMainWindow):
         self.panelbox.setStyleSheet(f"background-color: {color};")
         self.eventbox.setPalette(pal)
         self.eventbox.setStyleSheet(f"background-color: {color};")
+        self.instructbox.setPalette(pal)
+        self.instructbox.setStyleSheet(f"background-color: {color};")
 
     def now_print(self, string: str, style=('standard',)):
         """
@@ -366,6 +400,22 @@ class MainWindow(QMainWindow):
                 text_format.merge(self.styles[style_name])
         cursor.insertText(string, text_format)
         self.eventbox.ensureCursorVisible()
+
+    def instruct_print(self, string: str, style=('standard',)):
+        """
+        在指令面板绘制文本
+        Keyword arguments:
+        string -- 要输出的字符串
+        style -- 样式名称的元组
+        """
+        self.instructbox.moveCursor(QTextCursor.End)
+        cursor = self.instructbox.textCursor()
+        text_format = QTextCharFormat()
+        for style_name in style:
+            if style_name in self.styles:
+                text_format.merge(self.styles[style_name])
+        cursor.insertText(string, text_format)
+        self.instructbox.ensureCursorVisible()
 
     def frame_style_def(self, style_name: str, foreground: str, background: str, font_family: str, font_size: int, bold: int, underline: int, italic: int):
         """
@@ -410,6 +460,24 @@ class MainWindow(QMainWindow):
         self.cmd_tag_map[cmd_return] = (start_pos, end_pos, normal_style, on_style)
         self.panelbox.ensureCursorVisible()
 
+    def io_print_instruct_cmd(self, cmd_str: str, cmd_return: str, normal_style='standard', on_style='onbutton'):
+        """
+        场景操作面板打印一条指令
+        Keyword arguments:
+        cmd_str -- 命令文本
+        cmd_return -- 命令返回
+        normal_style -- 正常显示样式
+        on_style -- 鼠标悬停时的样式
+        """
+        self.instructbox.moveCursor(QTextCursor.End)
+        cursor = self.instructbox.textCursor()
+        start_pos = cursor.position()
+        text_format = self.styles.get(normal_style, QTextCharFormat())
+        cursor.insertText(cmd_str, text_format)
+        end_pos = cursor.position()
+        self.instruct_cmd_tag_map[cmd_return] = (start_pos, end_pos, normal_style, on_style)
+        self.instructbox.ensureCursorVisible()
+
     @Slot(int)
     def send_cmd(self, cmd_return: str):
         """
@@ -430,14 +498,18 @@ class MainWindow(QMainWindow):
         if cmd_returns:
             for cmd_return in cmd_returns:
                 if cmd_return in self.cmd_tag_map:
-                    del self.cmd_tag_map[cmd_number]
+                    del self.cmd_tag_map[cmd_return]
+                if cmd_return in self.instruct_cmd_tag_map:
+                    del self.instruct_cmd_tag_map[cmd_return]
         else:
             self.cmd_tag_map.clear()
+            self.instruct_cmd_tag_map.clear()
 
     def clear_screen(self):
         """清屏"""
         self.io_clear_cmd()
         self.panelbox.clear()
+        self.instructbox.clear()
 
     def now_print_image(self, image_name: str):
         """
@@ -562,6 +634,13 @@ class MainWindow(QMainWindow):
             cursor.setPosition(end, QTextCursor.KeepAnchor)
             text_format = self.styles.get(style_name, QTextCharFormat())
             cursor.setCharFormat(text_format)
+        elif cmd_number in self.instruct_cmd_tag_map:
+            start, end, normal_style, on_style = self.instruct_cmd_tag_map[cmd_number]
+            cursor = self.instructbox.textCursor()
+            cursor.setPosition(start)
+            cursor.setPosition(end, QTextCursor.KeepAnchor)
+            text_format = self.styles.get(style_name, QTextCharFormat())
+            cursor.setCharFormat(text_format)
 
     def restore_previous_cmd_style(self):
         """恢复之前悬停的命令的样式"""
@@ -575,6 +654,16 @@ class MainWindow(QMainWindow):
                 text_format = self.styles.get(normal_style, QTextCharFormat())
                 cursor.setCharFormat(text_format)
             self.current_hover_cmd = None
+        elif self.current_instruct_hover_cmd is not None:
+            cmd_number = self.current_instruct_hover_cmd
+            cmd_number = self.current_instruct_hover_cmd
+            if cmd_number in self.instruct_cmd_tag_map:
+                start, end, normal_style, on_style = self.instruct_cmd_tag_map[cmd_number]
+                cursor = self.instructbox.textCursor()
+                cursor.setPosition(start)
+                cursor.setPosition(end, QTextCursor.KeepAnchor)
+                text_format = self.styles.get(normal_style, QTextCharFormat())
+                cursor.setCharFormat(text_format)
 
     def init_image_data(self):
         """ 初始化图像数据 """
@@ -595,6 +684,19 @@ class MainWindow(QMainWindow):
             self.image_data[image_file_name] = new_image
 
 
+class LineDecorationArea(QWidget):
+    """装饰线"""
+
+    def __init__(self, editor):
+        super().__init__(editor)
+        self.editor = editor
+
+    def sizeHint(self):
+        return QSize(self.editor.decorationAreaWidth(), 0)
+
+    def paintEvent(self, event):
+        self.editor.lineDecorationAreaPaintEvent(event)
+
 
 class CommandTextEdit(QTextEdit):
     """自定义的文本编辑器，用于处理命令点击事件和鼠标悬停事件"""
@@ -606,22 +708,86 @@ class CommandTextEdit(QTextEdit):
         super().__init__()
         self.setMouseTracking(True)
         self.setFrameStyle(QTextEdit.NoFrame)  # 移除文本编辑器的边框
-        self.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)  # 设置垂直滚动条策略
-        self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)  # 隐藏水平滚动条
         self.main_window = main_window  # 引用主窗口
         self.setCursor(Qt.IBeamCursor)  # 设置初始光标为文本光标
         self.setReadOnly(True)  # 设置为只读，禁用编辑
+        self.box_id = "main"
+        self.lineDecorationArea = LineDecorationArea(self)
+        # 初始化属性，控制是否绘制虚线
+        self._draw_dashed_line = True
+        # 设置黑底白字
+        self.setStyleSheet("background-color: black; color: white;")
+        # 当文本内容或滚动条变化时，更新装饰区域
+        self.document().blockCountChanged.connect(self.updateLineDecorationAreaWidth)
+        self.verticalScrollBar().valueChanged.connect(self.lineDecorationArea.update)
+        self.textChanged.connect(self.lineDecorationArea.update)
+        self.updateLineDecorationAreaWidth()
+
+    def decorationAreaWidth(self):
+        return 20 if self._draw_dashed_line else 0  # 当不绘制虚线时，宽度为 0
+
+    def updateLineDecorationAreaWidth(self, _=None):
+        # 将装饰区域放在右侧
+        margin = self.decorationAreaWidth()
+        self.setViewportMargins(0, 0, margin, 0)
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+
+        cr = self.contentsRect()
+        # 设置装饰区域的位置和大小，放在右侧
+        width = self.decorationAreaWidth()
+        self.lineDecorationArea.setGeometry(QRect(cr.right() - width, cr.top(), width, cr.height()))
+
+    def lineDecorationAreaPaintEvent(self, event):
+        if not self._draw_dashed_line:
+            return  # 如果不绘制虚线，直接返回
+
+        painter = QPainter(self.lineDecorationArea)
+        # 设置装饰区域的背景为黑色
+        painter.fillRect(event.rect(), Qt.black)
+
+        # 设置虚线画笔，白色
+        pen = QPen(Qt.white, 1, Qt.DashLine)
+        painter.setPen(pen)
+
+        # 在装饰区域中间绘制垂直虚线
+        width = self.lineDecorationArea.width()
+        x = width // 2
+        painter.drawLine(x, event.rect().top(), x, event.rect().bottom())
+
+    def scrollContentsBy(self, dx, dy):
+        super().scrollContentsBy(dx, dy)
+        self.lineDecorationArea.scroll(0, dy)
+
+    # 属性的 getter 方法
+    def getDrawDashedLine(self):
+        return self._draw_dashed_line
+
+    # 属性的 setter 方法
+    def setDrawDashedLine(self, value):
+        if self._draw_dashed_line != value:
+            self._draw_dashed_line = value
+            self.updateLineDecorationAreaWidth()
+            self.lineDecorationArea.update()
 
     def mousePressEvent(self, event):
         """鼠标点击事件处理"""
         if event.button() == Qt.LeftButton:
             cursor = self.cursorForPosition(event.pos())
             position = cursor.position()
-            if self.main_window and hasattr(self.main_window, 'cmd_tag_map'):
-                for cmd_number, (start, end, normal_style, on_style) in self.main_window.cmd_tag_map.items():
-                    if start <= position <= end:
-                        self.main_window.send_cmd(cmd_number)
-                        return
+            if self.box_id == "main":
+                if self.main_window and hasattr(self.main_window, 'cmd_tag_map'):
+                    for cmd_number, (start, end, normal_style, on_style) in self.main_window.cmd_tag_map.items():
+                        if start <= position <= end:
+                            self.main_window.send_cmd(cmd_number)
+                            return
+            elif self.box_id == "instruct":
+                if self.main_window and hasattr(self.main_window, 'instruct_cmd_tag_map'):
+                    for cmd_number, (start, end, normal_style, on_style) in self.main_window.instruct_cmd_tag_map.items():
+                        if start <= position <= end:
+                            self.main_window.send_cmd(cmd_number)
+                            return
             self.main_window.input_line.setFocus()
             self.main_window.mouse_check_push()
             return
@@ -651,19 +817,34 @@ class CommandTextEdit(QTextEdit):
         position = cursor.position()
         main_window = self.main_window
         found = False
-        if main_window and hasattr(main_window, 'cmd_tag_map'):
-            for cmd_number, (start, end, normal_style, on_style) in main_window.cmd_tag_map.items():
-                if start <= position <= end:
-                    self.viewport().setCursor(Qt.PointingHandCursor)
-                    if main_window.current_hover_cmd != cmd_number:
-                        # 恢复之前的样式
-                        main_window.restore_previous_cmd_style()
-                        # 更新当前的悬停指令编号
-                        main_window.current_hover_cmd = cmd_number
-                        # 更新当前指令的样式为 on_style
-                        main_window.update_cmd_style(cmd_number, on_style)
-                    found = True
-                    break
+        if self.box_id == "main":
+            if main_window and hasattr(main_window, 'cmd_tag_map'):
+                for cmd_number, (start, end, normal_style, on_style) in main_window.cmd_tag_map.items():
+                    if start <= position <= end:
+                        self.viewport().setCursor(Qt.PointingHandCursor)
+                        if main_window.current_hover_cmd != cmd_number:
+                            # 恢复之前的样式
+                            main_window.restore_previous_cmd_style()
+                            # 更新当前的悬停指令编号
+                            main_window.current_hover_cmd = cmd_number
+                            # 更新当前指令的样式为 on_style
+                            main_window.update_cmd_style(cmd_number, on_style)
+                        found = True
+                        break
+        elif self.box_id == "instruct":
+            if main_window and hasattr(main_window, 'instruct_cmd_tag_map'):
+                for cmd_number, (start, end, normal_style, on_style) in main_window.instruct_cmd_tag_map.items():
+                    if start <= position <= end:
+                        self.viewport().setCursor(Qt.PointingHandCursor)
+                        if main_window.current_instruct_hover_cmd != cmd_number:
+                            # 恢复之前的样式
+                            main_window.restore_previous_cmd_style()
+                            # 更新当前的悬停指令编号
+                            main_window.current_instruct_hover_cmd = cmd_number
+                            # 更新当前指令的样式为 on_style
+                            main_window.update_cmd_style(cmd_number, on_style)
+                        found = True
+                        break
         if not found:
             self.viewport().setCursor(Qt.IBeamCursor)
             # 恢复之前的样式

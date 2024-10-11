@@ -23,6 +23,7 @@ def pcmd(
     kw=None,
     normal_style="standard",
     on_style="onbutton",
+    draw_instruct=False,
 ):
     """
     打印一条指令
@@ -34,11 +35,12 @@ def pcmd(
     kw -- 传给命令函数的字典参数
     normal_style -- 正常状态下命令显示样式
     on_style -- 鼠标在其上的时候命令显示样式
+    draw_instruct -- 是否绘制到指令面板
     """
     if kw is None:
         kw = {}
     cache.text_wait = float(normal_config.config_normal.text_wait)
-    flow_handle.print_cmd(cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style)
+    flow_handle.print_cmd(cmd_str, cmd_id, cmd_func, arg, kw, normal_style, on_style, draw_instruct)
 
 
 def pimagecmd(

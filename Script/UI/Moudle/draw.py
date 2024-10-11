@@ -30,6 +30,7 @@ class NormalDraw:
         """ 当前要绘制的文本 """
         self.draw_event: bool = False
         """ 是否绘制到事件面板 """
+        self.draw_instruct: bool = False
 
     def __len__(self) -> int:
         """
@@ -47,6 +48,8 @@ class NormalDraw:
         draw_type = "text"
         if self.draw_event:
             draw_type = "event"
+        if self.draw_instruct:
+            draw_type = "instruct"
         if int(len(self)) > int(self.width):
             now_text = ""
             if self.width > 0:
@@ -288,6 +291,8 @@ class Button:
         """ 按钮响应事件函数 """
         self.args = args
         """ 传给事件响应函数的参数列表 """
+        self.draw_instruct = False
+        """ 绘制到指令面板 """
 
     def __len__(self) -> int:
         """
@@ -328,6 +333,7 @@ class Button:
                 on_style=self.on_mouse_style,
                 cmd_func=self.cmd_func,
                 arg=self.args,
+                draw_instruct=self.draw_instruct,
             )
         else:
             py_cmd.pcmd(
@@ -337,6 +343,7 @@ class Button:
                 on_style=self.on_mouse_style,
                 cmd_func=self.cmd_func,
                 arg=self.args,
+                draw_instruct=self.draw_instruct,
             )
 
 
@@ -364,6 +371,7 @@ class CenterButton:
         on_mouse_style="onbutton",
         cmd_func: FunctionType = None,
         args=(),
+        draw_instruct: bool = False,
     ):
         """初始化绘制对象"""
         self.text: str = text
@@ -382,6 +390,8 @@ class CenterButton:
         """ 按钮响应事件函数 """
         self.args = args
         """ 传给事件响应函数的参数列表 """
+        self.draw_instruct: bool = draw_instruct
+        """ 是否绘制到指令面板 """
 
     def __len__(self) -> int:
         """
@@ -411,6 +421,7 @@ class CenterButton:
             on_style=self.on_mouse_style,
             cmd_func=self.cmd_func,
             arg=self.args,
+            draw_instruct=self.draw_instruct,
         )
 
 
@@ -453,6 +464,7 @@ class LeftButton(CenterButton):
             on_style=self.on_mouse_style,
             cmd_func=self.cmd_func,
             arg=self.args,
+            draw_instruct=self.draw_instruct,
         )
 
 
@@ -475,6 +487,8 @@ class LineDraw:
         """ 线条宽度 """
         self.draw_event: bool = False
         """ 是否绘制到事件面板 """
+        self.draw_instruct: bool = False
+        """ 是否绘制到指令面板 """
 
     def __len__(self) -> int:
         """
@@ -490,6 +504,7 @@ class LineDraw:
         text_num = self.width / text_index
         now_draw = NormalDraw()
         now_draw.draw_event = self.draw_event
+        now_draw.draw_instruct = self.draw_instruct
         now_draw.width = self.width
         now_draw.text = self.text * int(text_num) + "\n"
         now_draw.style = self.style

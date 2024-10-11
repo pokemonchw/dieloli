@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from Script.Core import py_cmd, cache_control, game_type
+from Script.Core import py_cmd, cache_control, game_type, flow_handle
 from Script.Design import constant
 
 
