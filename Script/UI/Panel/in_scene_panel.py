@@ -495,102 +495,87 @@ class SeeInstructPanel:
         self.return_list = []
         line = draw.LineDraw("-.-", self.width)
         line.draw()
-        fix_draw = draw.NormalDraw()
-        fix_width = int((self.width - int(8 * len(cache.instruct_filter))) / 2)
-        if not normal_config.config_normal.nsfw:
-            fix_width = int((self.width - int(6 * len(cache.instruct_filter))) / 2)
-        fix_draw.width = fix_width
-        fix_draw.text = " " * fix_width
-        fix_draw.draw()
-        for now_type in cache.instruct_filter:
-            if not normal_config.config_normal.nsfw:
-                if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
-                    continue
-            now_config = game_config.config_instruct_type[now_type]
-            if cache.instruct_filter[now_type]:
-                now_button = draw.CenterButton(
-                    f"[{now_config.name}]",
-                    now_config.name,
-                    8,
-                    " ",
-                    "onbutton",
-                    "standard",
-                    cmd_func=self.change_filter,
-                    args=(now_type,),
-                )
-            else:
-                now_button = draw.CenterButton(
-                    f"[{now_config.name}]",
-                    now_config.name,
-                    8,
-                    cmd_func=self.change_filter,
-                    args=(now_type,),
-                )
-            self.return_list.append(now_button.return_text)
-            now_button.draw()
-        line_feed.draw()
-        line = draw.LineDraw("~..", self.width)
-        line.draw()
-        now_instruct_list = []
         now_premise_data = {}
         instruct_len_max = 0
+        instruct_type_data = {}
+        for now_type in constant.instruct_type_data:
+            instruct_type_data.setdefault(now_type, [])
+            for instruct in constant.instruct_type_data[now_type]:
+                premise_judge = 0
+                if instruct in constant.instruct_premise_data:
+                    for premise in constant.instruct_premise_data[instruct]:
+                        if premise in now_premise_data:
+                            if now_premise_data[premise]:
+                                continue
+                            premise_judge = 1
+                            break
+                        now_premise_value = handle_premise.handle_premise(premise, 0)
+                        now_premise_data[premise] = now_premise_value
+                        if not now_premise_value:
+                            premise_judge = 1
+                            break
+                instruct_name = constant.handle_instruct_name_data[instruct]
+                instruct_len = text_handle.get_text_index(instruct_name)
+                if (instruct_len + 5) % 2 != 0:
+                    instruct_len += 1
+                if instruct_len > instruct_len_max:
+                    instruct_len_max = instruct_len
+                if premise_judge:
+                    continue
+                instruct_type_data[now_type].append(instruct)
+            instruct_type_data[now_type].sort()
         for now_type in cache.instruct_filter:
             if not normal_config.config_normal.nsfw:
                 if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
                     continue
+            instruct_type_config = game_config.config_instruct_type[now_type]
+            instruct_type_draw = draw.NormalDraw()
+            instruct_type_draw.text = instruct_type_config.name + ":"
+            instruct_type_draw.width = text_handle.get_text_index(instruct_type_draw.text)
+            instruct_type_draw.draw()
             if cache.instruct_filter[now_type] and now_type in constant.instruct_type_data:
-                for instruct in constant.instruct_type_data[now_type]:
-                    premise_judge = 0
-                    if instruct in constant.instruct_premise_data:
-                        for premise in constant.instruct_premise_data[instruct]:
-                            if premise in now_premise_data:
-                                if now_premise_data[premise]:
-                                    continue
-                                premise_judge = 1
-                                break
-                            now_premise_value = handle_premise.handle_premise(premise, 0)
-                            now_premise_data[premise] = now_premise_value
-                            if not now_premise_value:
-                                premise_judge = 1
-                                break
-                    if premise_judge:
-                        continue
-                    now_instruct_list.append(instruct)
-                    instruct_name = constant.handle_instruct_name_data[instruct]
-                    instruct_len = text_handle.get_text_index(instruct_name)
-                    if (instruct_len + 5) % 2 != 0:
-                        instruct_len += 1
-                    if instruct_len > instruct_len_max:
-                        instruct_len_max = instruct_len
-        now_instruct_list.sort()
-        rows = 1
-        instruct_len_max += 5
-        cols = int(normal_config.config_normal.text_width / instruct_len_max)
-        for i in range(1, len(now_instruct_list)):
-            if i * cols >= len(now_instruct_list):
-                rows = i
-                break
-        instruct_group = value_handle.list_of_groups(now_instruct_list, rows)
-        now_draw_list = []
-        for instruct_list in instruct_group:
-            for instruct_id in instruct_list:
-                instruct_name = constant.handle_instruct_name_data[instruct_id]
-                instruct_name = self.change_instruct_text(instruct_name)
-                id_text = text_handle.id_index(instruct_id)
-                now_text = f"{id_text}{instruct_name}"
-                now_draw = draw.LeftButton(
-                    now_text,
-                    str(instruct_id),
-                    int(self.width / len(instruct_group)),
-                    cmd_func=self.handle_instruct,
-                    args=(instruct_id,),
-                )
-                now_draw_list.append(now_draw)
-                self.return_list.append(now_draw.return_text)
-        now_draw = panel.VerticalDrawTextListGroup(self.width)
-        now_group = value_handle.list_of_groups(now_draw_list, rows)
-        now_draw.draw_list = now_group
-        now_draw.draw()
+                instruct_type_switch_button = draw.Button(_("[-关-]"), f"Close{now_type}Instruct",cmd_func=self.change_filter,args=(now_type,))
+                instruct_type_switch_button.width = text_handle.get_text_index(instruct_type_switch_button.text)
+                instruct_type_switch_button.draw()
+                self.return_list.append(instruct_type_switch_button.return_text)
+                fix_draw = draw.LineDraw(".", self.width-instruct_type_draw.width-instruct_type_switch_button.width)
+                fix_draw.draw()
+                rows = 1
+                instruct_len_max += 5
+                now_instruct_list = instruct_type_data[now_type]
+                cols = int(normal_config.config_normal.text_width / instruct_len_max)
+                for i in range(1, len(now_instruct_list)):
+                    if i * cols >= len(now_instruct_list):
+                        rows = i
+                        break
+                now_draw_list = []
+                instruct_group = value_handle.list_of_groups(now_instruct_list, rows)
+                for instruct_list in instruct_group:
+                    for instruct_id in instruct_list:
+                        instruct_name = constant.handle_instruct_name_data[instruct_id]
+                        instruct_name = self.change_instruct_text(instruct_name)
+                        id_text = text_handle.id_index(instruct_id)
+                        now_text = f"{id_text}{instruct_name}"
+                        now_draw = draw.LeftButton(
+                            now_text,
+                            str(instruct_id),
+                            int(self.width / len(instruct_group)),
+                            cmd_func=self.handle_instruct,
+                            args=(instruct_id,),
+                        )
+                        now_draw_list.append(now_draw)
+                        self.return_list.append(now_draw.return_text)
+                now_draw = panel.VerticalDrawTextListGroup(self.width)
+                now_group = value_handle.list_of_groups(now_draw_list, rows)
+                now_draw.draw_list = now_group
+                now_draw.draw()
+            else:
+                instruct_type_switch_button = draw.Button(_("[-开-]"), f"Close{now_type}Instruct",cmd_func=self.change_filter,args=(now_type,))
+                instruct_type_switch_button.width = text_handle.get_text_index(instruct_type_switch_button.text)
+                instruct_type_switch_button.draw()
+                self.return_list.append(instruct_type_switch_button.return_text)
+                fix_draw = draw.LineDraw(".", self.width-instruct_type_draw.width-instruct_type_switch_button.width)
+                fix_draw.draw()
 
     @staticmethod
     def change_filter(now_type: int):

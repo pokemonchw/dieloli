@@ -15,7 +15,7 @@ from PySide6.QtGui import (
     QColor, QFont, QFontMetrics,
     QTextCharFormat, QTextImageFormat, QImage,
     QCursor, QTextCursor, QPixmap,
-    QTextDocument,
+    QTextDocument, QFontDatabase, QTextCursor,
 )
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget,
@@ -113,7 +113,14 @@ class MainWindow(QMainWindow):
         need_char_width = window_width / normal_config.config_normal.textbox_width
         need_char_height = window_height / normal_config.config_normal.text_hight
         now_font_size = 20
-        font_family = normal_config.config_normal.font
+        try:
+            font_file_path = os.path.join("data", "font", "SarasaMonoSC-Regular.ttf")
+            font_id = QFontDatabase.addApplicationFont(font_file_path)
+            font_families = QFontDatabase.applicationFontFamilies(font_id)
+            normal_config.config_normal.font = font_families[0]
+            font_family = normal_config.config_normal.font
+        except:
+            pass
 
         font = QFont(font_family, now_font_size)
         font_metrics = QFontMetrics(font)
@@ -351,6 +358,7 @@ class MainWindow(QMainWindow):
         string -- 要输出的字符串
         style -- 样式名称的元组
         """
+        self.eventbox.moveCursor(QTextCursor.End)
         cursor = self.eventbox.textCursor()
         text_format = QTextCharFormat()
         for style_name in style:
@@ -393,6 +401,7 @@ class MainWindow(QMainWindow):
         normal_style -- 正常显示样式
         on_style -- 鼠标悬停时的样式
         """
+        self.panelbox.moveCursor(QTextCursor.End)
         cursor = self.panelbox.textCursor()
         start_pos = cursor.position()
         text_format = self.styles.get(normal_style, QTextCharFormat())
@@ -436,6 +445,7 @@ class MainWindow(QMainWindow):
         Keyword arguments:
         image_name -- 图片名称（不含路径和扩展名）
         """
+        self.panelbox.moveCursor(QTextCursor.End)
         cursor = self.panelbox.textCursor()
         image_format = QTextImageFormat()
         image = self.image_data[image_name]  # QImage 对象
@@ -453,6 +463,7 @@ class MainWindow(QMainWindow):
         image_path -- 图片路径
         cmd_return -- 点击图片响应的命令数字
         """
+        self.panelbox.moveCursor(QTextCursor.End)
         cursor = self.panelbox.textCursor()
         start_pos = cursor.position()
         image_format = QTextImageFormat()
@@ -540,10 +551,9 @@ class MainWindow(QMainWindow):
 
     def update_cmd_style(self, cmd_number, style_name):
         """更新指定命令的样式
-
-        参数：
-            cmd_number: 命令编号
-            style_name: 要应用的样式名称
+        Keyword arguments:
+        cmd_number -- 命令编号
+        style_name -- 要应用的样式名称
         """
         if cmd_number in self.cmd_tag_map:
             start, end, normal_style, on_style = self.cmd_tag_map[cmd_number]

@@ -115,11 +115,11 @@ class ClothingDescribeDraw:
     def draw(self):
         """绘制对象"""
         clothing_config = game_config.config_clothing_tem[self.clothing_id]
-        info_draw = draw.WaitDraw()
-        info_draw.text = clothing_config.describe
+        info_draw = draw.NormalDraw()
+        info_draw.text = clothing_config.describe + "\n"
         info_draw.width = self.width
+        info_draw.draw_event = True
         info_draw.draw()
-        line_feed.draw()
 
 
 class ClothingInfoDrawPanel:
@@ -210,16 +210,14 @@ class ClothingInfoDrawPanel:
 
     def see_clothing_info(self):
         """查看服装信息"""
-        py_cmd.clr_cmd()
-        now_draw = ClothingDescribeDraw(self.clothing_data.tem_id, self.width)
-        now_draw.draw()
+        py_cmd.clr_cmd(refresh_panel=False)
         if not self.character_id:
-            character_data: game_type.Character = cache.character_data[0]
-            if character_data.position == map_handle.get_map_system_path_for_str(
-                character_data.dormitory
-            ):
-                wear_draw = WearClothingListPanel(self.clothing_data.wear, self.width)
-                wear_draw.draw()
+            wear_draw = WearClothingListPanel(self.clothing_data.wear, self.width)
+            wear_draw.draw()
+        else:
+            now_draw = ClothingDescribeDraw(self.clothing_data.tem_id, self.width)
+            now_draw.draw()
+        py_cmd.clr_cmd()
 
 
 class WearClothingListPanel:

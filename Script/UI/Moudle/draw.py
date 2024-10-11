@@ -624,8 +624,11 @@ class CenterDraw(NormalDraw):
 
     def draw(self):
         """绘制文本"""
+        draw_type = "text"
+        if self.draw_event:
+            draw_type = "event"
         now_text = text_handle.align(self.text, "center", 0, 1, self.width)
-        io_init.era_print(now_text, self.style)
+        io_init.era_print(now_text, self.style, draw_type)
 
 
 class CenterMergeDraw:

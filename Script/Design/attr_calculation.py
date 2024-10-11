@@ -54,7 +54,7 @@ def get_height(tem_name: int, age: int) -> game_type.Height:
     expect_age = 0
     expect_height = 0
     if tem_name in {0, 3}:
-        expect_age = random.randint(16,20)
+        expect_age = random.randint(15,19)
         expect_height = initial_height / 0.2949
     else:
         expect_age = random.randint(13, 17)
