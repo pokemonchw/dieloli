@@ -46,7 +46,7 @@ msgstr "The option you entered is invalid. Please try again.\n"
 #: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:391
 msgid "可爱的"
-msgstr "Lovely"
+msgstr "Charmed "
 
 #: Script/Design/settle_behavior.py:14
 #: Script/UI/Panel/see_clothing_info_panel.py:173
@@ -54,7 +54,7 @@ msgstr "Lovely"
 #: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:391
 msgid "性感的"
-msgstr "Sexy"
+msgstr "Allured "
 
 #: Script/Design/settle_behavior.py:14
 #: Script/UI/Panel/see_clothing_info_panel.py:173
@@ -62,7 +62,7 @@ msgstr "Sexy"
 #: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:391
 msgid "帅气的"
-msgstr "Handsome"
+msgstr "Stylish "
 
 #: Script/Design/settle_behavior.py:14
 #: Script/UI/Panel/see_clothing_info_panel.py:173
@@ -70,7 +70,7 @@ msgstr "Handsome"
 #: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:391
 msgid "清新的"
-msgstr "Fresh"
+msgstr "Refresh "
 
 #: Script/Design/settle_behavior.py:14
 #: Script/UI/Panel/see_clothing_info_panel.py:173
@@ -78,7 +78,7 @@ msgstr "Fresh"
 #: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:391
 msgid "典雅的"
-msgstr "Elegant"
+msgstr "Refined "
 
 #: Script/Design/settle_behavior.py:14
 #: Script/UI/Panel/see_clothing_info_panel.py:173
@@ -86,7 +86,7 @@ msgstr "Elegant"
 #: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:391
 msgid "清洁的"
-msgstr "Clean"
+msgstr "Cleaned "
 
 #: Script/Design/settle_behavior.py:14
 #: Script/UI/Panel/see_clothing_info_panel.py:173
@@ -94,7 +94,7 @@ msgstr "Clean"
 #: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:391
 msgid "保暖的"
-msgstr "Warm"
+msgstr "Warming "
 
 #: Script/Design/settle_behavior.py:71
 msgid "健康:"
@@ -672,7 +672,7 @@ msgstr "End of sex"
 
 #: Script/Design/instruct/rest.py:25 class:Status id:2 type:name
 msgid "休息"
-msgstr "Rest"
+msgstr "Relaxing"
 
 #: Script/Design/instruct/rest.py:36 class:Status id:27 type:name
 msgid "午睡"
@@ -1163,43 +1163,43 @@ msgstr "Not Worn"
 #: Script/UI/Panel/see_clothing_info_panel.py:315
 #: Script/UI/Panel/clothing_shop_panel.py:285
 msgid "可爱"
-msgstr "Cute"
+msgstr "Charmer"
 
 #: Script/UI/Panel/see_clothing_info_panel.py:166
 #: Script/UI/Panel/see_clothing_info_panel.py:316
 #: Script/UI/Panel/clothing_shop_panel.py:286
 msgid "性感"
-msgstr "Sexy"
+msgstr "Allures"
 
 #: Script/UI/Panel/see_clothing_info_panel.py:167
 #: Script/UI/Panel/see_clothing_info_panel.py:317
 #: Script/UI/Panel/clothing_shop_panel.py:287
 msgid "帅气"
-msgstr "Handsome"
+msgstr "Stylish"
 
 #: Script/UI/Panel/see_clothing_info_panel.py:168
 #: Script/UI/Panel/see_clothing_info_panel.py:318
 #: Script/UI/Panel/clothing_shop_panel.py:288
 msgid "清新"
-msgstr "Fresh"
+msgstr "Refresh"
 
 #: Script/UI/Panel/see_clothing_info_panel.py:169
 #: Script/UI/Panel/see_clothing_info_panel.py:319
 #: Script/UI/Panel/clothing_shop_panel.py:289
 msgid "典雅"
-msgstr "Elegant"
+msgstr "Refined"
 
 #: Script/UI/Panel/see_clothing_info_panel.py:170
 #: Script/UI/Panel/see_clothing_info_panel.py:320
 #: Script/UI/Panel/clothing_shop_panel.py:290
 msgid "清洁"
-msgstr "Clean"
+msgstr "Cleanse"
 
 #: Script/UI/Panel/see_clothing_info_panel.py:171
 #: Script/UI/Panel/see_clothing_info_panel.py:321
 #: Script/UI/Panel/clothing_shop_panel.py:291
 msgid "保暖"
-msgstr "Warm"
+msgstr "Warmer"
 
 #: Script/UI/Panel/see_clothing_info_panel.py:253
 msgid "更衣室"
@@ -3146,43 +3146,43 @@ msgstr "Convergence of Stars and Time"
 
 #: class:ClothingEvaluate id:0 type:name
 msgid "基础的"
-msgstr "Basic"
+msgstr "Founding "
 
 #: class:ClothingEvaluate id:1 type:name
 msgid "普通的"
-msgstr "Ordinary"
+msgstr "Ordinary "
 
 #: class:ClothingEvaluate id:2 type:name
 msgid "实用的"
-msgstr "Practical"
+msgstr "Workable "
 
 #: class:ClothingEvaluate id:3 type:name
 msgid "雅致的"
-msgstr "Elegant"
+msgstr "Charming "
 
 #: class:ClothingEvaluate id:4 type:name
 msgid "精致的"
-msgstr "Exquisite"
+msgstr "Delicate "
 
 #: class:ClothingEvaluate id:5 type:name
 msgid "艺术的"
-msgstr "Artistic"
+msgstr "Artistic "
 
 #: class:ClothingEvaluate id:6 type:name
 msgid "创意的"
-msgstr "Creative"
+msgstr "Creative "
 
 #: class:ClothingEvaluate id:7 type:name
 msgid "杰作的"
-msgstr "Masterpiece"
+msgstr "Masterly "
 
 #: class:ClothingEvaluate id:8 type:name
 msgid "瑰宝的"
-msgstr "Treasure"
+msgstr "Precious "
 
 #: class:ClothingEvaluate id:9 type:name
 msgid "传世的"
-msgstr "Heritage"
+msgstr "Timeless "
 
 #: class:Nature id:0 type:good
 msgid "活跃"
@@ -3430,23 +3430,23 @@ msgstr "Dialogue"
 
 #: class:InstructType id:1 type:name
 msgid "主动"
-msgstr "Proactive"
+msgstr "Activite"
 
 #: class:InstructType id:2 type:name
 msgid "表演"
-msgstr "Performance"
+msgstr "Performe"
 
 #: class:InstructType id:3 type:name
 msgid "猥亵"
-msgstr "Obscene"
+msgstr "Lewdness"
 
 #: class:InstructType id:4 type:name
 msgid "娱乐"
-msgstr "Entertainment"
+msgstr "Pleasure"
 
 #: class:InstructType id:5 type:name
 msgid "战斗"
-msgstr "Combat"
+msgstr "Struggle"
 
 #: class:InstructType id:6 type:name
 msgid "学习"
@@ -3454,11 +3454,11 @@ msgstr "Learning"
 
 #: class:InstructType id:8 type:name
 msgid "性爱"
-msgstr "Sexuality"
+msgstr "Lovemake"
 
 #: class:InstructType id:9 type:name
 msgid "系统"
-msgstr "System"
+msgstr "Programs"
 
 #: class:ClothingUseType id:0 type:name
 msgid "便服"
