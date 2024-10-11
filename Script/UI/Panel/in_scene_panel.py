@@ -498,11 +498,6 @@ class SeeInstructPanel:
         now_line_feed.text = "\n"
         now_line_feed.width = 1
         now_line_feed.draw_instruct = True
-        now_clear_draw = draw.NormalDraw()
-        now_clear_draw.text = "\n" * 50
-        now_clear_draw.width = self.width
-        now_clear_draw.draw_instruct = True
-        now_clear_draw.draw()
         line = draw.LineDraw("-.-", self.width)
         line.draw_instruct = True
         line.draw()
