@@ -28,5 +28,5 @@ def handle_weather(draw_info:bool = True):
             now_draw = draw.WaitDraw()
             now_draw.draw_event = True
             now_draw.text = "\n" + weather_config.info + "\n"
-            now_draw.width = normal_config.config_normal.text_width
+            now_draw.width = 100
             now_draw.draw()

@@ -10,7 +10,7 @@ from queue import Queue, Empty
 from PySide6.QtCore import (
     Qt, Signal, Slot,
     QTimer, QObject, QThread,
-    QRect, QSize,
+    QRect, QSize, QPoint,
 )
 from PySide6.QtGui import (
     QColor, QFont, QFontMetrics,
@@ -300,12 +300,14 @@ class MainWindow(QMainWindow):
 
     def open_eventbox(self):
         """打开事件文本面板"""
-        self.textbox_layout.setStretch(1, 1)
+        self.textbox_layout.setStretch(0, 6)
+        self.textbox_layout.setStretch(1, 5)
         self.eventbox_widget.show()
         self.textbox_layout.invalidate()
 
     def close_eventbox(self):
         """关闭事件文本面板"""
+        self.textbox_layout.setStretch(0, 1)
         self.textbox_layout.setStretch(1, 0)
         self.eventbox_widget.hide()
         self.textbox_layout.invalidate()
@@ -393,6 +395,7 @@ class MainWindow(QMainWindow):
                 text_format.merge(self.styles[style_name])
         cursor.insertText(string, text_format)
         self.panelbox.ensureCursorVisible()
+        self.panelbox.update_hover_state()
 
     def event_print(self, string: str, style=('standard',)):
         """
@@ -425,6 +428,7 @@ class MainWindow(QMainWindow):
                 text_format.merge(self.styles[style_name])
         cursor.insertText(string, text_format)
         self.instructbox.ensureCursorVisible()
+        self.instructbox.update_hover_state()
 
     def frame_style_def(self, style_name: str, foreground: str, background: str, font_family: str, font_size: int, bold: int, underline: int, italic: int):
         """
@@ -468,6 +472,7 @@ class MainWindow(QMainWindow):
         end_pos = cursor.position()
         self.cmd_tag_map[cmd_return] = (start_pos, end_pos, normal_style, on_style)
         self.panelbox.ensureCursorVisible()
+        self.panelbox.update_hover_state()
 
     def io_print_instruct_cmd(self, cmd_str: str, cmd_return: str, normal_style='standard', on_style='onbutton'):
         """
@@ -486,6 +491,7 @@ class MainWindow(QMainWindow):
         end_pos = cursor.position()
         self.instruct_cmd_tag_map[cmd_return] = (start_pos, end_pos, normal_style, on_style)
         self.instructbox.ensureCursorVisible()
+        self.instructbox.update_hover_state()
 
     @Slot(int)
     def send_cmd(self, cmd_return: str):
@@ -536,6 +542,7 @@ class MainWindow(QMainWindow):
         # 将图片作为资源添加到文档中
         self.panelbox.document().addResource(QTextDocument.ImageResource, image_name, image)
         cursor.insertImage(image_format)
+        self.panelbox.update_hover_state()
 
     def io_print_image_cmd(self, image_path: str, cmd_return: str):
         """
@@ -557,6 +564,7 @@ class MainWindow(QMainWindow):
         cursor.insertImage(image_format)
         end_pos = cursor.position()
         self.cmd_tag_map[cmd_return] = (start_pos, end_pos, '', '')
+        self.panelbox.update_hover_state()
 
     def load_and_resize_images(self):
         """加载并调整图片大小"""
@@ -882,6 +890,21 @@ class CommandTextEdit(QTextEdit):
         """鼠标移动事件处理"""
         cursor = self.cursorForPosition(event.pos())
         position = cursor.position()
+        self.update_hover_state_for_position(position)
+        super().mouseMoveEvent(event)
+
+    def update_hover_state(self):
+        """根据当前鼠标位置更新悬停状态"""
+        # 获取全局鼠标位置
+        global_cursor_pos = QCursor.pos()
+        local_pos = self.viewport().mapFromGlobal(global_cursor_pos)
+        if self.viewport().rect().contains(local_pos):
+            # 获取当前鼠标位置对应的文本光标
+            cursor = self.cursorForPosition(local_pos)
+            position = cursor.position()
+            self.update_hover_state_for_position(position)
+
+    def update_hover_state_for_position(self, position: QPoint):
         main_window = self.main_window
         found = False
         if self.box_id == "main":
@@ -916,7 +939,6 @@ class CommandTextEdit(QTextEdit):
             self.viewport().setCursor(Qt.IBeamCursor)
             # 恢复之前的样式
             main_window.restore_previous_cmd_style()
-        super().mouseMoveEvent(event)
 
 
 app = QApplication(sys.argv)

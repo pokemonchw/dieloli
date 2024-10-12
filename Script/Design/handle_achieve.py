@@ -41,7 +41,7 @@ def check_all_achieve():
                 now_config: config_def.Achieve = game_config.config_achieve[cid]
                 now_draw = draw.NormalDraw()
                 now_draw.text = _("达成了新的成就") + " -> " + now_config.name + "\n"
-                now_draw.width = normal_config.config_normal.text_width
+                now_draw.width = 100
                 now_draw.draw_event = True
                 now_draw.draw()
     save_achieve()

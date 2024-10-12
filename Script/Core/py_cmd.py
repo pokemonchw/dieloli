@@ -96,7 +96,5 @@ def clr_cmd(*number, clr_default_flow=True, refresh_panel=True):
         flow_handle.cmd_clear()
     if refresh_panel:
         io_init.clear_screen()
-        panel = "\n" * 50
-        io_init.era_print(panel)
 
 
