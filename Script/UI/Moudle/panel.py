@@ -146,6 +146,8 @@ class AskForOneMessage:
         """ 消息 """
         self.input_max: int = 0
         """ 玩家输入文本的最大长度 """
+        self.donot_return_null_str: bool = True
+        """ 是否接受空字符串 """
 
     def set(self, message: str, input_max: int):
         """
@@ -168,7 +170,7 @@ class AskForOneMessage:
         return_text = ""
         while 1:
             self.message.draw()
-            return_text = flow_handle.askfor_str(1, 1)
+            return_text = flow_handle.askfor_str(self.donot_return_null_str, 1)
             text_index = text_handle.get_text_index(return_text)
             if text_index <= self.input_max:
                 break
@@ -311,8 +313,10 @@ class LeftDrawTextListPanel:
         """ 每行最大元素数 """
         self.draw_list: List[List[draw.LeftDraw]] = []
         """ 绘制列表 """
+        self.draw_event: bool = False
+        """ 是否绘制到事件面板 """
 
-    def set(self, info_list: List[str], width: int, column: int):
+    def set(self, info_list: List[str], width: int, column: int, draw_event=False):
         """
         设置绘制信息
         Keyword arguments:
@@ -322,6 +326,7 @@ class LeftDrawTextListPanel:
         """
         self.width = width
         self.column = column
+        self.draw_event = draw_event
         new_info_list = value_handle.list_of_groups(info_list, column)
         for now_info_list in new_info_list:
             now_width = int(width / column)
@@ -337,17 +342,20 @@ class LeftDrawTextListPanel:
                 now_info_draw = draw.LeftDraw()
                 now_info_draw.width = now_width
                 now_info_draw.text = now_info
+                now_info_draw.draw_event = draw_event
                 now_list.append(now_info_draw)
             self.draw_list.append(now_list)
 
     def draw(self):
         """绘制面板"""
+        draw_type = "text"
+        if self.draw_event:
+            draw_type = "event"
         for i in range(len(self.draw_list)):
             now_list = self.draw_list[i]
             for value in now_list:
                 value.draw()
-            if i < len(self.draw_list) -1:
-                io_init.era_print("\n")
+            io_init.era_print("\n", draw_type=draw_type)
 
 
 class LeftDrawTextListWaitPanel(LeftDrawTextListPanel):
@@ -355,10 +363,13 @@ class LeftDrawTextListWaitPanel(LeftDrawTextListPanel):
 
     def draw(self):
         """绘制面板"""
+        draw_type = "text"
+        if self.draw_event:
+            draw_type = "event"
         for now_list in self.draw_list:
             for value in now_list:
                 value.draw()
-            io_init.era_print("\n")
+            io_init.era_print("\n", draw_type=draw_type)
         if not cache.wframe_mouse.w_frame_skip_wait_mouse:
             flow_handle.askfor_wait()
         else:

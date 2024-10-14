@@ -174,6 +174,8 @@ class StudentTimeTablePanel:
                         ][self.now_week][times]
                         teacher_data: game_type.Character = cache.character_data[teacher_id]
                         teacher_name = teacher_data.name
+                        if teacher_data.nick_name != "" and teacher_data.cid:
+                            teacher_name = teacher_data.nick_name
                         now_text = [
                             times_text,
                             course_name,

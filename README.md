@@ -20,7 +20,7 @@ DieLoli
 版本说明
 ----
 游戏分为稳定版(Last Version)，和测试版(Test Version)两个版本 \
-测试版主要用于测试各种实验性的新系统，确认稳定和兼容性良好后，会被推送到正式版 \
+测试版主要用于测试各种实验性的新系统，确认稳定和兼容性良好后，会被推送到正式版
 
 发展历史
 ----
@@ -39,10 +39,7 @@ linux系统: 下载[源码](https://github.com/pokemonchw/dieloli/archive/refs/h
 
 字体
 ----
-本游戏界面设计依赖 Sarasa Mono SC 字体，若系统未安装此字体将会 fallback 到系统默认字体，不能保证能否达到设计效果 \
-本游戏不提供Sarasa Mono SC相关字体文件 \
-请自行下载并安装:[Sarasa Mono SC](https://github.com/be5invis/Sarasa-Gothic) \
-可通过修改 config.ini 中的 font 项自行更改字体
+本游戏使用了 [Sarasa Mono SC](https://github.com/be5invis/Sarasa-Gothic) 字体，存放于data目录下，出于便于玩家使用的目的，与游戏一同分发
 
 Localization
 ----

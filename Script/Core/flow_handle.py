@@ -2,11 +2,8 @@
 import time
 from types import FunctionType
 from Script.Core import (
-    text_handle,
-    io_init,
-    get_text,
-    game_type,
-    cache_control,
+    text_handle, io_init, get_text,
+    game_type, cache_control,
 )
 from Script.Design import constant
 
@@ -132,6 +129,7 @@ def print_cmd(
     kw=None,
     normal_style="standard",
     on_style="onbutton",
+    draw_instruct=False,
 ):
     """
     输出命令数字
@@ -143,11 +141,15 @@ def print_cmd(
     kw -- 传给命令函数的字典参数
     normal_style -- 正常状态下命令显示样式
     on_style -- 鼠标在其上的时候命令显示样式
+    draw_instruct -- 是否绘制到指令面板
     """
     if kw is None:
         kw = {}
     bind_cmd(cmd_number, cmd_func, arg, kw)
-    io_init.io_print_cmd(cmd_str, cmd_number, normal_style, on_style)
+    if not draw_instruct:
+        io_init.io_print_cmd(cmd_str, cmd_number, normal_style, on_style)
+    else:
+        io_init.io_print_instruct_cmd(cmd_str, cmd_number, normal_style, on_style)
     return cmd_str
 
 
@@ -225,25 +227,22 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
     """
     global __skip_flag__
     __skip_flag__ = False
-    while True:
-        time.sleep(0.01)
-        if not donot_return_null_str and cache.wframe_mouse.w_frame_up:
-            return ""
-        while not io_init._order_queue.empty():
-            order = io_init.get_order()
-            if print_order and order != "":
-                io_init.era_print("\n" + order + "\n")
-            if flag == "str":
-                if order.isdigit():
-                    order = str(int(order))
-                return order
-            if flag == "order":
-                if _cmd_valid(order):
-                    _cmd_deal(order)
-                    return
-                global tail_deal_cmd_func
-                tail_deal_cmd_func(int(order))
-                return
+    order = io_init.get_order()
+    if not donot_return_null_str and order == "":
+        return ""
+    if print_order and order != "":
+        io_init.era_print("\n" + order + "\n")
+    if flag == "str":
+        if order.isdigit():
+            order = str(int(order))
+        return order
+    if flag == "order":
+        if _cmd_valid(order):
+            _cmd_deal(order)
+            return
+        global tail_deal_cmd_func
+        tail_deal_cmd_func(int(order))
+    return
 
 
 def askfor_str(donot_return_null_str=True, print_order=False):
@@ -254,9 +253,6 @@ def askfor_str(donot_return_null_str=True, print_order=False):
     print_order -- 是否将输入的order输出到屏幕上
     """
     while True:
-        if not donot_return_null_str and cache.wframe_mouse.w_frame_up:
-            cache.wframe_mouse.w_frame_up = 0
-            return ""
         order = order_deal("str", print_order, donot_return_null_str)
         if donot_return_null_str and order != "":
             return order
@@ -323,8 +319,16 @@ def askfor_int(print_order=True):
 
 def askfor_wait():
     """用于请求一个暂停动作，输入任何数都可以继续"""
-    cache.wframe_mouse.w_frame_up = 0
-    while not cache.wframe_mouse.w_frame_up:
-        re = askfor_str(donot_return_null_str=False)
-        if re == "":
-            break
+    cache.wframe_mouse.mouse_leave_cmd = 1
+    askfor_str(donot_return_null_str=False)
+    cache.wframe_mouse.mouse_leave_cmd = 0
+
+
+def open_eventbox():
+    """开启事件文本面板"""
+    io_init.open_eventbox()
+    io_init.era_print("\n"*50, draw_type="event")
+
+def close_eventbox():
+    """关闭事件文本面板"""
+    io_init.close_eventbox()

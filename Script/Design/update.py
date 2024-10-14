@@ -15,9 +15,9 @@ def game_update_flow(add_time: int):
     Keyword arguments:
     add_time -- 游戏步进的时间
     """
-    py_cmd.focus_cmd()
     event.handle_event(0, 1, cache.game_time, cache.game_time)
     line_feed_draw = draw.NormalDraw()
+    line_feed_draw.draw_event = True
     line_feed_draw.text = "\n"
     now_time = cache.game_time
     next_hour = now_time + 3600
@@ -34,7 +34,8 @@ def game_update_flow(add_time: int):
             character_behavior.init_character_behavior()
             time_draw = draw.CenterDraw()
             time_draw.text = game_time.get_date_text(cache.game_time)
-            time_draw.width = normal_config.config_normal.text_width
+            time_draw.width = 100
+            time_draw.draw_event = True
             time_draw.draw()
             line_feed_draw.draw()
             now_time = cache.game_time

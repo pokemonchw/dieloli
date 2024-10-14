@@ -33,6 +33,8 @@ instruct_type_data: Dict[int, Set] = {}
 """ 指令类型拥有的指令集合 """
 instruct_premise_data: Dict[int, Set] = {}
 """ 指令显示的所需前提集合 """
+instruct_to_type_data: Dict[int, int] = {}
+""" 指令对应的指令类型数据 """
 handle_debug_data: Dict[str, FunctionType] = {}
 """ debug指令处理数据 """
 handle_debug_name_data: Dict[int, str] = {}

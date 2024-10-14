@@ -17,7 +17,6 @@ if __name__ == "__main__":
         os.chdir(os.path.dirname(sys.executable))
     else:
         os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    print(os.getcwd())
 
     from Script.Core import game_type, cache_control
 
@@ -46,9 +45,7 @@ if __name__ == "__main__":
     import Script.Settle
     import Script.StateMachine
     import Script.UI.Flow
-    from Script.Core import main_frame
 
     handle_achieve.load_achieve()
 
     game_init.run(start_flow.start_frame)
-    main_frame.run()

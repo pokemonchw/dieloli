@@ -11,20 +11,23 @@ _: FunctionType = None
 """ 翻译api """
 translation_values = set()
 """ 翻译后文本数据 """
+translation: gettext.GNUTranslations = None
+""" 原始翻译类 """
 
 
 def init_translation():
     """ 初始化翻译api """
     global _
     global translation_values
+    global translation
     _.__init__()
     if "language" in normal_config.config_normal.__dict__:
-        translation: gettext.GNUTranslations = gettext.translation(
+        translation = gettext.translation(
             "dieloli", po_data, [normal_config.config_normal.language, "zh_CN"]
         )
         """ 翻译对象类型 """
     else:
-        translation: gettext.GNUTranslations = gettext.translation(
+        translation = gettext.translation(
             "dieloli",  po_data, ["zh_CN", "zh_CN"]
         )
         """ 翻译对象类型 """

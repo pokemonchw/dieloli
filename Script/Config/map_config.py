@@ -1,10 +1,11 @@
 import os
 import pickle
 from typing import Dict, List
+from types import FunctionType
 from Script.Core import (
     game_type, json_handle, get_text,
     text_handle, cache_control, dijkstra,
-    game_path_config
+    game_path_config, get_text
 )
 from Script.Design import map_handle, constant
 
@@ -22,6 +23,8 @@ all_map_data_path = os.path.join(game_path_config.MAP_DATA_PATH, "MapData")
 """ 预处理的所有地图数据路径 """
 all_move_time_path = os.path.join(game_path_config.MAP_DATA_PATH, "MoveTime")
 """ 预处理的所有场景移动时间数据路径 """
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 def init_map_data():
@@ -53,8 +56,12 @@ def init_map_data():
         map_handle.init_move_time_data()
     for scene_path in cache.scene_data:
         scene_data = cache.scene_data[scene_path]
+        scene_data.scene_name = _(scene_data.scene_name)
         if scene_data.in_door:
             constant.in_door_scene_list.append(scene_data.scene_path)
+    for map_path in cache.map_data:
+        map_data = cache.map_data[map_path]
+        map_data.map_name = _(map_data.map_name)
 
 
 def load_dir_now(data_path: str):

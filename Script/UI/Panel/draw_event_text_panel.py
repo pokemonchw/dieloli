@@ -32,6 +32,7 @@ class DrawEventTextPanel(draw.LineFeedWaitDraw):
         """ 触发事件的角色id """
         self.text: str = ""
         """ 当前绘制的文本 """
+        self.draw_event = True
         player_data: game_type.Character = cache.character_data[0]
         if cache.is_collection:
             if character_id and character_id not in player_data.collection_character:
@@ -63,6 +64,8 @@ class DrawEventTextPanel(draw.LineFeedWaitDraw):
         else:
             # 当角色不是玩家时，显示角色的名字
             character_name = character_data.name
+            if character_data.nick_name != "":
+                character_name = character_data.nick_name
         # 角色移动完成时，可以使用的出发地的场景名
         src_scene_name = ""
         if len(player_data.behavior.move_src):
