@@ -5,6 +5,7 @@ import math
 import ephem
 import os
 from types import FunctionType
+from typing import Dict
 from dateutil import relativedelta
 from Script.Core import (
     cache_control,
@@ -475,55 +476,42 @@ def get_temperature(now_time: float) -> int:
         if now_date.hour in cache.temperature_data[now_date_str]:
             if now_date.minute in cache.temperature_data[now_date_str][now_date.hour]:
                 return cache.temperature_data[now_date_str][now_date.hour][now_date.minute]
-    old_midnight_time = now_time - 600
-    while 1:
-        if get_sun_time(old_midnight_time) != 0:
-            old_midnight_time -= 600
-            continue
-        break
-    now_midnoon_time = old_midnight_time + 600
-    while 1:
-        if get_sun_time(now_midnoon_time) != 7:
-            now_midnoon_time += 600
-            continue
-        break
-    next_midnight_time = now_midnoon_time + 600
-    while 1:
-        if get_sun_time(next_midnight_time) != 0:
-            next_midnight_time += 600
-            continue
-        if next_midnight_time < now_time:
-            next_midnight_time += 600
-            continue
-        break
+    now_sun_time = get_sun_time(now_time)
     now_solar_period = get_solar_period(now_time)
     now_solar_period_config = game_config.config_solar_period[now_solar_period]
-    now_lowest_temperature = random.randint(now_solar_period_config.lowest_tem_min, now_solar_period_config.lowest_tem_max)
-    now_highest_temperature = random.randint(now_solar_period_config.highest_tem_min, now_solar_period_config.highest_tem_max)
-    old_midnight_date = datetime.datetime.fromtimestamp(old_midnight_time)
-    old_midnight_date_str = f"{old_midnight_date.year}/{old_midnight_date.month}/{old_midnight_date.day}"
-    old_lowest_temperature = 0
-    try:
-        old_lowest_temperature = cache.temperature_data[old_midnight_date_str][old_midnight_date.hour][old_midnight_date.minute]
-    except:
-        old_solar_period = get_solar_period(old_midnight_time)
-        old_solar_period_config = game_config.config_solar_period[old_solar_period]
-        old_lowest_temperature = random.randint(old_solar_period_config.lowest_tem_min, old_solar_period_config.lowest_tem_max)
-    temperature_up_time_list = []
-    up_time = old_midnight_time + 60
-    while 1:
-        temperature_up_time_list.append(up_time)
-        up_time += 60
-        if up_time >= now_midnoon_time:
+    tem_up_start_time = 0
+    tem_down_start_time = 0
+    tem_down_end_time = 0
+    tem_up_time_list = []
+    tem_down_time_list = []
+    start_up_tem = random.randint(now_solar_period_config.lowest_tem_min, now_solar_period_config.lowest_tem_max)
+    start_down_tem = random.randint(now_solar_period_config.highest_tem_min, now_solar_period_config.highest_tem_max)
+    end_down_tem = start_up_tem
+    if now_sun_time == 0:
+        tem_up_start_time = now_time
+    else:
+        tem_up_start_time = now_time - 600
+        while True:
+            if get_sun_time(tem_up_start_time) != 0:
+                tem_up_start_time -= 600
+                continue
             break
-    temperature_down_time_list = []
-    down_time = now_midnoon_time + 60
-    while 1:
-        temperature_down_time_list.append(down_time)
-        down_time += 60
-        if down_time >= next_midnight_time:
+    tem_down_start_time = tem_up_start_time + 600
+    while True:
+        if get_sun_time(tem_down_start_time) != 7:
+            tem_down_start_time += 600
+            continue
+        break
+    tem_down_end_time = tem_down_start_time + 600
+    while True:
+        if get_sun_time(tem_down_end_time) != 0:
+            tem_down_end_time += 600
+            continue
+        break
+    now_up_time = tem_up_start_time
+    while True:
+        if now_up_time >= tem_down_start_time:
             break
-    for now_up_time in temperature_up_time_list:
         now_up_date = datetime.datetime.fromtimestamp(now_up_time)
         now_up_date_str = f"{now_up_date.year}/{now_up_date.month}/{now_up_date.day}"
         if now_up_date_str in cache.temperature_data:
@@ -532,23 +520,27 @@ def get_temperature(now_time: float) -> int:
                     continue
         cache.temperature_data.setdefault(now_up_date_str, {})
         cache.temperature_data[now_up_date_str].setdefault(now_up_date.hour, {})
-        time_fraction = (now_up_time - old_midnight_time) / (now_midnoon_time - old_midnight_time)
-        cache.temperature_data[now_up_date_str][now_up_date.hour][now_up_date.minute] = old_lowest_temperature + (now_highest_temperature - old_lowest_temperature) * time_fraction
-    for now_down_time in temperature_down_time_list:
+        time_fraction = (now_up_time - tem_up_start_time) / (tem_down_start_time - tem_up_start_time)
+        cache.temperature_data[now_up_date_str][now_up_date.hour][now_up_date.minute] = start_up_tem + (start_down_tem - start_up_tem) * time_fraction
+        now_up_time += 600
+    now_down_time = tem_down_start_time
+    while True:
+        if now_down_time >= tem_down_end_time:
+            break
         now_down_date = datetime.datetime.fromtimestamp(now_down_time)
-        now_down_date_str = f"{now_down_date.year}/{now_down_date.month}/{now_down_date.day}"
+        now_down_date_str = f"{now_up_date.year}/{now_up_date.month}/{now_up_date.day}"
         if now_down_date_str in cache.temperature_data:
             if now_down_date.hour in cache.temperature_data[now_down_date_str]:
                 if now_down_date.minute in cache.temperature_data[now_down_date_str][now_down_date.hour]:
                     continue
         cache.temperature_data.setdefault(now_down_date_str, {})
         cache.temperature_data[now_down_date_str].setdefault(now_down_date.hour, {})
-        time_fraction = (now_down_time - now_midnoon_time) / (next_midnight_time - now_midnoon_time)
-        cache.temperature_data[now_down_date_str][now_down_date.hour][now_down_date.minute] = now_highest_temperature - (now_highest_temperature - now_lowest_temperature) * time_fraction
-    old_day_time = old_midnight_time - 86400
+        time_fraction = (now_down_time - tem_down_start_time) / (tem_down_end_time - tem_down_start_time)
+        cache.temperature_data[now_up_date_str][now_up_date.hour][now_up_date.minute] = start_down_tem + (end_down_tem - start_down_tem) * time_fraction
+        now_down_time += 600
+    old_day_time = tem_down_start_time - 86400
     old_day_date = datetime.datetime.fromtimestamp(old_day_time)
     old_day_date_str = f"{old_day_date.year}/{old_day_date.month}/{old_day_date.day}"
     if old_day_date_str in cache.temperature_data:
         del cache.temperature_data[old_day_date_str]
     return cache.temperature_data[now_date_str][now_date.hour][now_date.minute]
-
