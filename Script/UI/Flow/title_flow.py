@@ -16,8 +16,6 @@ cache: game_type.Cache = cache_control.cache
 @handle_panel.add_panel(constant.Panel.TITLE)
 def title_panel():
     """绘制游戏标题菜单"""
-    clear_screen = panel.ClearScreenPanel()
-    clear_screen.draw()
     width = config_normal.text_width
     title_info = panel.TitleAndRightInfoListPanel()
     info_list = [config_normal.author, config_normal.verson_time, config_normal.verson]

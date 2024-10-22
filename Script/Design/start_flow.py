@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from Script.Core import py_cmd, cache_control, game_type
+from Script.Core import py_cmd, cache_control, game_type, flow_handle
 from Script.Design import constant
 
 
@@ -13,5 +13,4 @@ def start_frame():
     """
     while True:
         py_cmd.clr_cmd()
-        py_cmd.focus_cmd()
         constant.panel_data[cache.now_panel_id]()

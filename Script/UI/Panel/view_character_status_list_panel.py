@@ -262,6 +262,7 @@ class SeeCharacterStatusDraw:
             now_chest_text = _("罩杯:") + now_chest_tem.info
             age = character_data.age
             age_text = _("{age}岁").format(age=age)
+            character_name = character_data.name
             if character_data.nick_name != "" and character_id:
                 character_name = character_data.nick_name
             button_text = f"{index_text} {character_name} {sex_text} {age_text} {now_height_text} {now_weight_text} {body_fat_text} {now_chest_text} {target_text} {position_text}"

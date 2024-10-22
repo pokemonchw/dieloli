@@ -205,8 +205,7 @@ class SeeMapPanel:
         Keyword arguments:
         scene_path -- 目标场景路径
         """
-        py_cmd.clr_cmd()
-        line_feed.draw()
+        py_cmd.clr_cmd(refresh_panel=False)
         cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         character_move.own_charcter_move(scene_path)
 
@@ -356,7 +355,7 @@ class MapSceneNameDraw:
         Keyword arguments:
         scene_path -- 目标场景路径
         """
-        py_cmd.clr_cmd()
+        py_cmd.clr_cmd(refresh_panel=False)
         line_feed.draw()
         cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         character_move.own_charcter_move(scene_path)
@@ -511,7 +510,7 @@ class ScenePathNameMoveDraw:
         Keyword arguments:
         scene_path -- 目标场景路径
         """
-        py_cmd.clr_cmd()
+        py_cmd.clr_cmd(refresh_panel=False)
         line_feed.draw()
         cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         character_move.own_charcter_move(self.scene_path)
@@ -628,7 +627,7 @@ class SocialSceneNameDraw:
         Keyword arguments:
         scene_path -- 目标场景路径
         """
-        py_cmd.clr_cmd()
+        py_cmd.clr_cmd(refresh_panel=False)
         line_feed.draw()
         cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         character_move.own_move_to_character_scene(self.target_character_id)

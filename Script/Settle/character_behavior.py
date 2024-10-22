@@ -165,8 +165,10 @@ def handle_interrupt_target_activity(
                     statue_name=statue_name
                 )
                 name_draw.width = window_width
+                name_draw.draw_event = True
                 name_draw.draw()
                 line_feed = draw.NormalDraw()
+                line_feed.draw_event = True
                 line_feed.text = "\n"
                 line_feed.draw()
 
