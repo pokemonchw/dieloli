@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os
 import traceback
-from Script.Core import flow_handle, io_init, key_listion_event, main_frame
+from Script.Core import flow_handle, io_init, main_frame
 from Script.Config import normal_config
 
 # 字符串定义###########################################################
@@ -22,8 +22,6 @@ def init(main_flow: object):
     io_init.clear_screen()
     io_init.clear_order()
     flow_handle.cmd_clear()
-    # 载入按键监听
-    key_listion_event.on_wframe_listion()
     # 设置背景颜色
     io_init.set_background(normal_config.config_normal.background)
     # 初始化字体

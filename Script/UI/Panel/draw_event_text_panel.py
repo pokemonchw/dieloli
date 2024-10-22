@@ -32,6 +32,7 @@ class DrawEventTextPanel(draw.LineFeedWaitDraw):
         """ 触发事件的角色id """
         self.text: str = ""
         """ 当前绘制的文本 """
+        self.draw_event = True
         player_data: game_type.Character = cache.character_data[0]
         if cache.is_collection:
             if character_id and character_id not in player_data.collection_character:

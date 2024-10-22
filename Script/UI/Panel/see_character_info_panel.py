@@ -189,6 +189,7 @@ class SeeCharacterStatusPanel:
         self.draw_list.append(now_draw_line)
         self.draw_list.append(hungry_draw)
         self.draw_list.append(thirsty_draw)
+        self.draw_list.append(line_feed)
         for status_type in game_config.config_character_state_type_data:
             if not normal_config.config_normal.nsfw:
                 if not status_type:

@@ -7,7 +7,7 @@ from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
-width = normal_config.config_normal.text_width
+width = 100
 """ 屏幕宽度 """
 _: FunctionType = get_text._
 """ 翻译api """
@@ -76,7 +76,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
             )
         if len(now_text_list):
             if len(now_text_list) % 4:
-                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                now_text_list.extend([""] * (len(now_text_list) % 4))
         if status_data.status:
             now_list = [f"{game_config.config_character_state[i].name}:{attr_text.get_value_text(status_data.status[i])}" for i in status_data.status if round(status_data.status[i], 2)]
             if now_list:
@@ -84,7 +84,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                 now_text_list.extend(now_list)
         if len(now_text_list):
             if len(now_text_list) % 4:
-                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                now_text_list.extend([""] * (len(now_text_list) % 4))
         if status_data.knowledge:
             now_list = [f"{game_config.config_knowledge[i].name}:{attr_text.get_value_text(status_data.knowledge[i])}" for i in status_data.knowledge if round(status_data.knowledge[i], 2)]
             if len(now_list):
@@ -92,7 +92,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                 now_text_list.extend(now_list)
         if len(now_text_list):
             if len(now_text_list) % 4:
-                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                now_text_list.extend([""] * (len(now_text_list) % 4))
         if status_data.language:
             now_list = [f"{game_config.config_language[i].name}:{attr_text.get_value_text(status_data.language[i])}" for i in status_data.language if round(status_data.language[i], 2)]
             if len(now_list):
@@ -100,7 +100,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                 now_text_list.extend(now_list)
         if len(now_text_list):
             if len(now_text_list) % 4:
-                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                now_text_list.extend([""] * (len(now_text_list) % 4))
         if status_data.sex_experience:
             now_list = [
                 f"{game_config.config_organ[i].name}" + _("经验:") + text_handle.number_to_symbol_string(round(status_data.sex_experience[i], 2))
@@ -111,7 +111,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                 now_text_list.extend(now_list)
         if len(now_text_list):
             if len(now_text_list) % 4:
-                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                now_text_list.extend([""] * (len(now_text_list) % 4))
         if status_data.wear:
             now_text_list.extend([_("穿上了:"), "", "", ""])
             for clothing in status_data.wear.values():
@@ -123,7 +123,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                 now_text_list.append(clothing_name)
         if len(now_text_list):
             if len(now_text_list) % 4:
-                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                now_text_list.extend([""] * (len(now_text_list) % 4))
         if status_data.undress:
             now_text_list.extend([_("脱下了:"), "", "", ""])
             for clothing in status_data.undress.values():
@@ -135,7 +135,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                 now_text_list.append(clothing_name)
         if len(now_text_list):
             if len(now_text_list) % 4:
-                now_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                now_text_list.extend([""] * (len(now_text_list) % 4))
         target_change_judge = False
         target_draw_list = []
         if status_data.target_change:
@@ -161,7 +161,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                     target_text_judge = True
                 if target_change.new_social != target_change.old_social:
                     now_text = game_config.config_social_type[target_change.old_social].name + "->" + game_config.config_social_type[target_change.new_social].name
-                    target_text_list.extend([now_text, "", "", ""])
+                    target_text_list.extend([now_text, ""])
                     target_text_judge = True
                 if target_change.status:
                     now_list = [f"{game_config.config_character_state[i].name}:{attr_text.get_value_text(target_change.status[i])}" for i in target_change.status if round(target_change.status[i], 2)]
@@ -171,7 +171,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
                         target_text_judge = True
                 if len(now_text_list):
                     if len(now_text_list) % 4:
-                        target_text_list.extend([""] * (4 - len(now_text_list) % 4))
+                        target_text_list.extend([""] * (len(now_text_list) % 4))
                         target_text_judge = True
                 if target_change.sex_experience:
                     now_list = [
@@ -189,7 +189,7 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
             now_text_list.extend([_("互动目标变化:"), "", "", ""])
             now_text_list.extend(target_draw_list)
         now_panel = panel.LeftDrawTextListWaitPanel()
-        now_panel.set(now_text_list, width, 4)
+        now_panel.set(now_text_list, width, 4, True)
         return now_panel, len(now_text_list)
 
 

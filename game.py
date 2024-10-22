@@ -45,9 +45,7 @@ if __name__ == "__main__":
     import Script.Settle
     import Script.StateMachine
     import Script.UI.Flow
-    from Script.Core import main_frame
 
     handle_achieve.load_achieve()
 
     game_init.run(start_flow.start_frame)
-    main_frame.run()

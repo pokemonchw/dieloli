@@ -61,5 +61,6 @@ def add_instruct(instruct_id: int, instruct_type: int, name: str, premise_set: S
         constant.instruct_type_data.setdefault(instruct_type, set())
         constant.instruct_type_data[instruct_type].add(instruct_id)
         constant.handle_instruct_name_data[instruct_id] = name
+        constant.instruct_to_type_data[instruct_id] = instruct_type
 
     return decorator
