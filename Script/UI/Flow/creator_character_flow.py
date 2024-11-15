@@ -225,6 +225,7 @@ def setting_age_tem_panel():
     course.init_character_knowledge(0)
     attr_calculation.init_character_hp_and_mp(0)
     course.init_class_teacher()
+    now_id = int(ans)
     if now_id in {1, 2}:
         character_data.chest_tem = attr_calculation.get_rand_npc_chest_tem()
         character_data.chest = attr_calculation.get_chest(character_data.chest_tem, character_data.birthday)
