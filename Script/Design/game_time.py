@@ -517,12 +517,13 @@ def get_temperature(now_time: float) -> int:
         if now_up_date_str in cache.temperature_data:
             if now_up_date.hour in cache.temperature_data[now_up_date_str]:
                 if now_up_date.minute in cache.temperature_data[now_up_date_str][now_up_date.hour]:
+                    now_up_time += 60
                     continue
         cache.temperature_data.setdefault(now_up_date_str, {})
         cache.temperature_data[now_up_date_str].setdefault(now_up_date.hour, {})
         time_fraction = (now_up_time - tem_up_start_time) / (tem_down_start_time - tem_up_start_time)
         cache.temperature_data[now_up_date_str][now_up_date.hour][now_up_date.minute] = start_up_tem + (start_down_tem - start_up_tem) * time_fraction
-        now_up_time += 600
+        now_up_time += 60
     now_down_time = tem_down_start_time
     while True:
         if now_down_time >= tem_down_end_time:
@@ -532,13 +533,14 @@ def get_temperature(now_time: float) -> int:
         if now_down_date_str in cache.temperature_data:
             if now_down_date.hour in cache.temperature_data[now_down_date_str]:
                 if now_down_date.minute in cache.temperature_data[now_down_date_str][now_down_date.hour]:
+                    now_down_time += 60
                     continue
         cache.temperature_data.setdefault(now_down_date_str, {})
         cache.temperature_data[now_down_date_str].setdefault(now_down_date.hour, {})
         time_fraction = (now_down_time - tem_down_start_time) / (tem_down_end_time - tem_down_start_time)
-        cache.temperature_data[now_up_date_str][now_up_date.hour][now_up_date.minute] = start_down_tem + (end_down_tem - start_down_tem) * time_fraction
-        now_down_time += 600
-    old_day_time = tem_down_start_time - 86400
+        cache.temperature_data[now_down_date_str][now_down_date.hour][now_down_date.minute] = start_down_tem + (end_down_tem - start_down_tem) * time_fraction
+        now_down_time += 60
+    old_day_time = now_time - 86400
     old_day_date = datetime.datetime.fromtimestamp(old_day_time)
     old_day_date_str = f"{old_day_date.year}/{old_day_date.month}/{old_day_date.day}"
     if old_day_date_str in cache.temperature_data:
