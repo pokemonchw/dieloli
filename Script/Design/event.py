@@ -61,7 +61,20 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
     if now_event_data:
         event_weight = value_handle.get_rand_value_for_value_region(list(now_event_data.keys()))
         now_event_id = random.choice(list(now_event_data[event_weight]))
+    line_feed = draw.NormalDraw()
+    line_feed.text = "\n"
+    line_feed.draw_event = True
     if now_event_id == "":
+        if not character_id:
+            now_draw = draw.NormalDraw()
+            now_draw.width = window_width
+            if start:
+                now_draw.text = _("占位符:无可触发事件，待补完")
+            else:
+                now_draw.text = _("占位符:无可结算事件，待补完")
+            now_draw.draw_event = True
+            now_draw.draw()
+            line_feed.draw()
         if not start:
             character_data.behavior.temporary_status = game_type.TemporaryStatus()
             character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
@@ -85,9 +98,6 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
         character_data.ai_target = 0
     climax_draw = settlement_pleasant_sensation(character_id)
     player_data: game_type.Character = cache.character_data[0]
-    line_feed = draw.NormalDraw()
-    line_feed.text = "\n"
-    line_feed.draw_event = True
     if (not character_id) or (player_data.target_character_id == character_id):
         if now_event_draw.text != "":
             now_event_draw.draw()
