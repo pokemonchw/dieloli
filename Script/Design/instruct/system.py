@@ -146,6 +146,8 @@ def handle_un_collection_system():
 )
 def handle_set_nickname():
     """处理设置昵称指令"""
+    if 1:
+        return
     character_data: game_type.Character = cache.character_data[0]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     ask_name_panel = panel.AskForOneMessage()

@@ -56,7 +56,6 @@ def handle_sleep():
         # 若角色已经死亡则不做处理
         if character_data.state == constant.CharacterStatus.STATUS_DEAD:
             continue
-        # 恢复角色的健康和体力
         character_data.hit_point = character_data.hit_point_max
         character_data.mana_point = character_data.mana_point_max
         # 将角色送回宿舍
@@ -75,8 +74,11 @@ def handle_sleep():
         character_data.height.now_height += growth_height
         # 初始化角色状态
         character_data.state = constant.CharacterStatus.STATUS_ARDER
-        for status_id in character_data.status:
-            character_data.status[status_id] = 0
+        if character_id:
+            for status_id in character_data.status:
+                character_data.status[status_id] = 0
+        else:
+            character_data.status[25] = 0
         # 初始化角色行为
         character_data.ai_target = 0
         character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY

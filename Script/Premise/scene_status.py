@@ -803,7 +803,7 @@ def handle_naked_character_in_scene(character_id: int) -> int:
     for now_character in scene_data.character_list:
         now_character_data: game_type.Character = cache.character_data[now_character]
         for i in now_character_data.put_on:
-            if character_data.put_on[i] in {None,""}:
+            if now_character_data.put_on[i] in {None,""}:
                 return 0
     return 1
 

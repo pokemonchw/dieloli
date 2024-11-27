@@ -76,6 +76,8 @@ def handle_target_average_stature_similar(character_id: int) -> int:
     int -- 权重
     """
     character_data = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data = cache.character_data[character_data.target_character_id]
     age_tem = attr_calculation.judge_age_group(target_data.age)
     if age_tem in cache.average_bodyfat_by_age:

@@ -41,6 +41,8 @@ def handle_debug(debug: int):
     Keyword arguments:
     debug -- 指令id
     """
+    if 1:
+        return
     debug_queue.put(debug)
     if debug in constant.debug_premise_data:
         constant.handle_debug_data[debug]()
