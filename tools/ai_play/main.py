@@ -125,7 +125,7 @@ def train() -> None:
     global action_vocab, action_vocab_rev, action_counter, max_actions
     env = GameEnv()
     num_episodes: int = 1000
-    max_sequence_length: int = 1000
+    max_sequence_length: int = 100
     hidden_size: int = 128
     action_embed_size: int = 64
     num_heads: int = 8

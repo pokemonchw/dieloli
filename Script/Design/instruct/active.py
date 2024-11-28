@@ -54,7 +54,7 @@ def handle_move_to_cafeteria():
         time_dict[now_move_time].append(cafeteria)
     min_time = min(time_dict.keys())
     to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(time_dict[min_time]))
-    character_move.own_charcter_move(map_handle.get_map_system_path_for_str(to_cafeteria))
+    character_move.own_charcter_move(to_cafeteria)
 
 
 @handle_instruct.add_instruct(
