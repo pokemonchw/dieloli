@@ -22,6 +22,8 @@ class Instruct:
     """ 进食 """
     MOVE = 0
     """ 移动 """
+    MOVE_TO_CAFETERIA = 0
+    """ 去吃饭 """
     ESCAPE_FROM_CROWD = 0
     """ 逃离人群 """
     BUY_ITEM = 0

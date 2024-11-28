@@ -33,6 +33,31 @@ def handle_move():
 
 
 @handle_instruct.add_instruct(
+    constant.Instruct.MOVE_TO_CAFETERIA,
+    constant.InstructType.ACTIVE,
+    _("去买吃的"),
+    {
+        constant.Premise.HUNGER,
+        constant.Premise.NO_IN_CAFETERIA,
+        constant.Premise.NOT_HAVE_FOOD,
+    }
+)
+def handle_move_to_cafeteria():
+    """处理去买吃的指令"""
+    character_data: game_type.Character = cache.character_data[0]
+    cafeteria_list = constant.place_data["Cafeteria"]
+    now_position_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    time_dict = {}
+    for cafeteria in cafeteria_list:
+        now_move_time = map_handle.scene_move_time[now_position_str][cafeteria]
+        time_dict.setdefault(now_move_time, [])
+        time_dict[now_move_time].append(cafeteria)
+    min_time = min(time_dict.keys())
+    to_cafeteria = map_handle.get_map_system_path_for_str(random.choice(time_dict[min_time]))
+    character_move.own_charcter_move(map_handle.get_map_system_path_for_str(to_cafeteria))
+
+
+@handle_instruct.add_instruct(
     constant.Instruct.ESCAPE_FROM_CROWD,
     constant.InstructType.ACTIVE,
     _("逃离人群"),
