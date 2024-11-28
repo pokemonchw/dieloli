@@ -73,7 +73,7 @@ class GameRequestHandler(BaseHTTPRequestHandler):
         print(post_data)
         data = json.loads(post_data.decode('utf-8'))
         action = data.get('action')
-        if action not in set(flow_handle.cmd_map.keys()):
+        if action not in set(flow_handle.cmd_map.keys()) and action != "":
             self.send_error(400, "无效的动作")
             return
         main_frame.window.input_event_func(action)
