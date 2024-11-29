@@ -24,6 +24,10 @@ class Instruct:
     """ 移动 """
     MOVE_TO_CAFETERIA = 0
     """ 去吃饭 """
+    MOVE_TO_CLASSROOM = 0
+    """ 去上课 """
+    MOVE_TO_CHANGE_WEAR = 0
+    """ 去换装 """
     ESCAPE_FROM_CROWD = 0
     """ 逃离人群 """
     BUY_ITEM = 0

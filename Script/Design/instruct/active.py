@@ -58,6 +58,40 @@ def handle_move_to_cafeteria():
 
 
 @handle_instruct.add_instruct(
+    constant.Instruct.MOVE_TO_CLASSROOM,
+    constant.InstructType.ACTIVE,
+    _("去上课"),
+    {
+        constant.Premise.IN_CLASS_TIME,
+        constant.Premise.NO_IN_CLASSROOM,
+    }
+)
+def handle_move_to_classroom():
+    """处理去上课指令"""
+    character_data: game_type.Character = cache.character_data[0]
+    if 0 in character_data.identity_data:
+        identity_data: game_type.StudentIdentity = character_data.identity_data[0]
+    else:
+        identity_data: game_type.TeacherIdentity = character_data.identity_data[1]
+    classroom_path = map_handle.get_map_system_path_for_str(identity_data.classroom)
+    character_move.own_charcter_move(classroom_path)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.MOVE_TO_CHANGE_WEAR,
+    constant.InstructType.ACTIVE,
+    _("去换装"),
+    {
+        constant.Premise.NOT_IN_DORMITORY,
+    }
+)
+def handle_move_to_change_wear():
+    """处理去换装指令"""
+    character_data: game_type.Character = cache.character_data[0]
+    character_move.own_charcter_move(map_handle.get_map_system_path_for_str(character_data.dormitory))
+
+
+@handle_instruct.add_instruct(
     constant.Instruct.ESCAPE_FROM_CROWD,
     constant.InstructType.ACTIVE,
     _("逃离人群"),

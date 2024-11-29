@@ -90,7 +90,7 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             return
         main_frame.window.input_event_func(action)
         cache.wframe_mouse.w_frame_skip_wait_mouse = 1
-        time.sleep(10)
+        time.sleep(3)
         self.update_score()
         # 检查游戏是否结束的逻辑
         done = False

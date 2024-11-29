@@ -55,7 +55,10 @@ class GameEnv:
         List[str] -- 动作列表
         """
         response = requests.get(f"{self.base_url}/actions")
-        return response.json()['actions']
+        actions = response.json()['actions']
+        if not actions:
+            actions = ['']
+        return actions
 
     def get_panel_info(self) -> str:
         """
@@ -146,7 +149,7 @@ def train() -> None:
     num_heads: int = 8
     num_layers: int = 2
     dropout: float = 0.1
-    model_save_path: str = 'policy_model_1.pth'
+    model_save_path: str = 'policy_model.pth'
     policy_net = PolicyNetwork(hidden_size, max_actions, len(panel_vocab), action_embed_size, num_heads, num_layers, dropout)
     if os.path.exists(model_save_path):
         policy_net.load_state_dict(torch.load(model_save_path))
@@ -212,7 +215,7 @@ def train() -> None:
                 episode += 1
                 state = env.reset()
                 steps = 0
-    torch.save(policy_net.state_dict(), model_save_path)
+        torch.save(policy_net.state_dict(), model_save_path)
 
 
 if __name__ == '__main__':
