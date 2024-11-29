@@ -112,5 +112,7 @@ def handle_sleep():
     now_draw.width = normal_config.config_normal.text_width
     now_draw.draw()
     weather.handle_weather()
-    save_handle.establish_save("auto")
+    character_behavior.judge_character_dead(0)
+    if not character_data.dead:
+        save_handle.establish_save("auto")
 
