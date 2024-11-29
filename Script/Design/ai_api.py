@@ -35,6 +35,8 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             self.handle_state()
         elif parsed_path.path == '/rewards':
             self.handle_rewards()
+        elif parsed_path.path == '/current_panel':
+            self.handle_current_panel()
         else:
             self.send_error(404, "接口未找到")
 
@@ -59,6 +61,16 @@ class GameRequestHandler(BaseHTTPRequestHandler):
         for key in constant.handle_premise_data:
             game_state.append(constant.handle_premise_data[key](0))
         response = {'state': game_state}
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(response).encode('utf-8'))
+
+    def handle_current_panel(self):
+        """
+        处理/current_panel接口，获取当前的面板
+        """
+        response = {'panel_id': cache.now_panel_id}
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
         self.end_headers()
