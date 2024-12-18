@@ -209,6 +209,18 @@ def handle_save():
     now_panel.draw()
 
 
+@handle_instruct.add_instruct(constant.Instruct.OBSERVE_ON, constant.InstructType.SYSTEM, _("开启看海模式"), {})
+def handle_observe_on():
+    """处理开启看海模式指令"""
+    pass
+
+
+@handle_instruct.add_instruct(constant.Instruct.OBSERVE_OFF, constant.InstructType.SYSTEM, _("关闭看海模式"), {})
+def handle_observe_off():
+    """处理关闭看海模式指令"""
+    pass
+
+
 @handle_instruct.add_instruct(constant.Instruct.DEBUG_ON, constant.InstructType.SYSTEM, _("开启debug模式"), {constant.Premise.DEBUG_OFF})
 def handle_debug_on():
     """处理开启debug模式指令"""

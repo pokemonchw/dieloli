@@ -248,6 +248,10 @@ class Instruct:
     """ 查看成就 """
     SAVE = 0
     """ 读写存档 """
+    OBSERVE_ON = 0
+    """ 开启看海模式 """
+    OBSERVE_OFF = 0
+    """ 关闭看海模式 """
     DEBUG_ON = 0
     """ 开启debug模式 """
     DEBUG_OFF = 0

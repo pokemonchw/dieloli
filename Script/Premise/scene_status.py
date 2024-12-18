@@ -623,6 +623,7 @@ def handle_teacher_no_in_classroom(character_id: int) -> int:
     )
     now_week = now_time.weekday()
     school_id, phase = course.get_character_school_phase(character_id)
+    print(school_id, phase, cache.course_time_table_data.keys(), cache.course_time_table_data[school_id].keys())
     now_time_value = now_time.hour * 100 + now_time.minute
     if now_week in cache.course_time_table_data[school_id][phase]:
         now_course_index = 0
