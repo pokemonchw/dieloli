@@ -146,6 +146,8 @@ def handle_un_collection_system():
 )
 def handle_set_nickname():
     """处理设置昵称指令"""
+    if 1:
+        return
     character_data: game_type.Character = cache.character_data[0]
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     ask_name_panel = panel.AskForOneMessage()
@@ -205,6 +207,18 @@ def handle_save():
     py_cmd.clr_cmd()
     now_panel = see_save_info_panel.SeeSaveListPanel(width, 1)
     now_panel.draw()
+
+
+@handle_instruct.add_instruct(constant.Instruct.OBSERVE_ON, constant.InstructType.SYSTEM, _("开启看海模式"), {})
+def handle_observe_on():
+    """处理开启看海模式指令"""
+    pass
+
+
+@handle_instruct.add_instruct(constant.Instruct.OBSERVE_OFF, constant.InstructType.SYSTEM, _("关闭看海模式"), {})
+def handle_observe_off():
+    """处理关闭看海模式指令"""
+    pass
 
 
 @handle_instruct.add_instruct(constant.Instruct.DEBUG_ON, constant.InstructType.SYSTEM, _("开启debug模式"), {constant.Premise.DEBUG_OFF})

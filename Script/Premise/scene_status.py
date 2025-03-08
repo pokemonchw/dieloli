@@ -623,6 +623,7 @@ def handle_teacher_no_in_classroom(character_id: int) -> int:
     )
     now_week = now_time.weekday()
     school_id, phase = course.get_character_school_phase(character_id)
+    print(school_id, phase, cache.course_time_table_data.keys(), cache.course_time_table_data[school_id].keys())
     now_time_value = now_time.hour * 100 + now_time.minute
     if now_week in cache.course_time_table_data[school_id][phase]:
         now_course_index = 0
@@ -803,7 +804,7 @@ def handle_naked_character_in_scene(character_id: int) -> int:
     for now_character in scene_data.character_list:
         now_character_data: game_type.Character = cache.character_data[now_character]
         for i in now_character_data.put_on:
-            if character_data.put_on[i] in {None,""}:
+            if now_character_data.put_on[i] in {None,""}:
                 return 0
     return 1
 

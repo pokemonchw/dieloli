@@ -1,7 +1,10 @@
 import random
 import datetime
+import re
 from typing import Set
 from types import FunctionType
+from openai import OpenAI
+import ollama
 from Script.Core import cache_control, game_type, value_handle, get_text
 from Script.Design import map_handle, constant, settle_behavior
 from Script.UI.Panel import draw_event_text_panel
@@ -61,7 +64,20 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
     if now_event_data:
         event_weight = value_handle.get_rand_value_for_value_region(list(now_event_data.keys()))
         now_event_id = random.choice(list(now_event_data[event_weight]))
+    line_feed = draw.NormalDraw()
+    line_feed.text = "\n"
+    line_feed.draw_event = True
     if now_event_id == "":
+        if not character_id:
+            now_draw = draw.NormalDraw()
+            now_draw.width = window_width
+            if start:
+                now_draw.text = _("占位符:无可触发事件，待补完")
+            else:
+                now_draw.text = _("占位符:无可结算事件，待补完")
+            now_draw.draw_event = True
+            now_draw.draw()
+            line_feed.draw()
         if not start:
             character_data.behavior.temporary_status = game_type.TemporaryStatus()
             character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
@@ -74,6 +90,7 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
         return
     now_event_draw = draw_event_text_panel.DrawEventTextPanel(now_event_id, character_id)
     settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, now_event_id)
+    start_text = character_data.behavior.start_event_draw_text
     if not start:
         character_data.behavior.temporary_status = game_type.TemporaryStatus()
         character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
@@ -81,16 +98,54 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
         character_data.behavior.move_src = []
         character_data.behavior.start_time += character_data.behavior.duration
         character_data.behavior.duration = 0
+        character_data.behavior.start_event_draw_text = ""
         character_data.state = constant.CharacterStatus.STATUS_ARDER
         character_data.ai_target = 0
+    else:
+        character_data.behavior.start_event_draw_text = now_event_draw.text
     climax_draw = settlement_pleasant_sensation(character_id)
     player_data: game_type.Character = cache.character_data[0]
-    line_feed = draw.NormalDraw()
-    line_feed.text = "\n"
-    line_feed.draw_event = True
     if (not character_id) or (player_data.target_character_id == character_id):
         if now_event_draw.text != "":
-            now_event_draw.draw()
+            if  not start:
+                npc_name = character_data.name
+                action_text = game_config.config_status[character_data.state].name
+                end_text = now_event_draw.text
+                premise_text_list = [game_config.config_premise[premise_id].premise for premise_id in event_config.premise]
+                prompt = _(normal_config.config_normal.prompt).format(npc_name=npc_name, action_text=action_text, start_text=start_text, end_text=end_text, premise_text_list=premise_text_list)
+                if normal_config.config_normal.ai_mode == 1:
+                    try:
+                        ollama.list()
+                        return_text = send_event_text_to_ollama(prompt)
+                        return_text += "\n" + now_event_draw.text
+                        now_event_draw.text = return_text
+                        now_event_draw.draw()
+                    except Exception as e:
+                        now_draw = draw.WaitDraw()
+                        now_draw.text = _("无法链接ollama服务，ollama模式已自动关闭")
+                        now_draw.width = window_width
+                        now_draw.draw_event = True
+                        now_draw.draw()
+                        normal_config.change_normal_config("ai_mode", 0)
+                        now_event_draw.draw()
+                elif normal_config.config_normal.ai_mode == 2:
+                    return_text = send_event_text_to_api(prompt)
+                    if return_text == "":
+                        now_draw = draw.WaitDraw()
+                        now_draw.text = _("调用外部api失败，api模式已自动关闭")
+                        now_draw.width = window_width
+                        now_draw.draw_event = True
+                        now_draw.draw()
+                        normal_config.change_normal_config("ai_mode", 0)
+                        now_event_draw.draw()
+                    else:
+                        return_text += "\n" + now_event_draw.text
+                        now_event_draw.text = return_text
+                        now_event_draw.draw()
+                else:
+                    now_event_draw.draw()
+            else:
+                now_event_draw.draw()
         line_draw = draw.LineDraw("+", 100)
         line_draw.draw_event = True
         line_draw_judge = False
@@ -117,6 +172,52 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
                     line_draw_judge = True
                 climax_draw.draw()
                 line_feed.draw()
+
+
+def send_event_text_to_ollama(prompt: str) -> str:
+    """
+    调用AI补全事件文本
+    Keyword arguments:
+    prompt -- 提示词
+    Return arguments:
+    str -- 返回文本
+    """
+    try:
+        response = ollama.chat(
+            model=normal_config.config_normal.ollama_mode,
+            messages=[
+                {'role': 'user', 'content': prompt}
+            ]
+        )
+        pattern = r"<think>.*?</think>"
+        return_text = re.sub(pattern, "", response.message.content, flags=re.DOTALL)
+        return return_text
+    except Exception as e:
+        return ""
+
+
+def send_event_text_to_api(prompt: str) -> str:
+    """
+    调用外部api补全事件文本
+    Keyword arguments:
+    prompt -- 提示词
+    Return arguments:
+    str -- 返回文本
+    """
+    try:
+        client = OpenAI(api_key=normal_config.config_normal.ai_api_key,base_url=normal_config.config_normal.ai_api_url)
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model=normal_config.config_normal.ai_api_model,
+        )
+        return chat_completion.choices[0].message.content
+    except Exception as e:
+        return ""
 
 
 def settlement_pleasant_sensation(character_id: int) -> draw.NormalDraw():

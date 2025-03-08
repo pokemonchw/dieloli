@@ -206,6 +206,18 @@ class NormalConfig:
     """ 输入框字体大小 """
     nsfw: int
     """ nsfw内容开关 """
+    ai_mode: int
+    """ ai模式 0:关闭 1:ollama 2:外部api key """
+    ollama_mode: str
+    """ ollama模式下使用的模型 """
+    ai_api_url: str
+    """ 外部api模式下的api地址 """
+    ai_api_key: str
+    """ 外部api模式下的api key """
+    ai_api_model: str
+    """ 外部api调用的模型id """
+    prompt: str
+    """ 提示词 """
 
 
 class Clothing:
@@ -298,6 +310,8 @@ class Behavior:
         """ 上课时所学/教的课程 """
         self.temporary_status: TemporaryStatus = TemporaryStatus()
         """ 角色临时状态 """
+        self.start_event_draw_text: str = ""
+        """ 角色行为开始时触发的事件文本 """
 
 
 class Map:

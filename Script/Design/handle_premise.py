@@ -34,6 +34,8 @@ def handle_premise(premise: int, character_id: int) -> int:
     Return arguments:
     int -- 前提权重加成
     """
-    if premise in constant.handle_premise_data:
+    try:
         return constant.handle_premise_data[premise](character_id)
-    return 0
+    except Exception as e:
+        print(e)
+        return 0

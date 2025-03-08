@@ -22,6 +22,12 @@ class Instruct:
     """ 进食 """
     MOVE = 0
     """ 移动 """
+    MOVE_TO_CAFETERIA = 0
+    """ 去吃饭 """
+    MOVE_TO_CLASSROOM = 0
+    """ 去上课 """
+    MOVE_TO_CHANGE_WEAR = 0
+    """ 去换装 """
     ESCAPE_FROM_CROWD = 0
     """ 逃离人群 """
     BUY_ITEM = 0
@@ -242,6 +248,10 @@ class Instruct:
     """ 查看成就 """
     SAVE = 0
     """ 读写存档 """
+    OBSERVE_ON = 0
+    """ 开启看海模式 """
+    OBSERVE_OFF = 0
+    """ 关闭看海模式 """
     DEBUG_ON = 0
     """ 开启debug模式 """
     DEBUG_OFF = 0
