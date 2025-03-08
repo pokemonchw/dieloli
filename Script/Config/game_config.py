@@ -195,6 +195,8 @@ config_organ_data: Dict[int, Set] = {}
 性别对应器官列表配置数据
 性别 0:女 1:男 2: 通用
 """
+config_premise: Dict[str, config_def.Premise] = {}
+""" 前提描述配置 """
 config_recipes: Dict[int, config_def.Recipes] = {}
 """ 菜谱配置 """
 config_recipes_formula: Dict[int, config_def.RecipesFormula] = {}
@@ -807,6 +809,16 @@ def load_organ_data():
         config_organ_data[now_tem.organ_type].add(now_tem.cid)
 
 
+def load_premise_data():
+    """载入前提描述配置"""
+    now_data = config_data["Premise"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = config_def.Premise()
+        now_tem.__dict__ = tem_data
+        config_premise[now_tem.cid] = now_tem
+
+
 def load_recipes():
     """载入菜谱配置数据"""
     now_data = config_data["Recipes"]
@@ -1119,6 +1131,7 @@ def init():
     load_occupation_bmi_region()
     load_occupation_bodyfat_region()
     load_organ_data()
+    load_premise_data()
     load_recipes()
     load_recipes_formula()
     load_recipes_formula_type()
