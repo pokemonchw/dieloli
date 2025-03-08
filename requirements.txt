@@ -6,7 +6,6 @@ polib>=1.2.0
 psutil>=7.0.0
 pyephem>=9.99
 PySide6>=6.8.2.1
-PySide6.egg>=info
 python_dateutil>=2.9.0
 Requests>=2.32.3
 scipy>=1.15.2
