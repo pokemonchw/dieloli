@@ -31,9 +31,13 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
     add_time = int((now_time - start_time) / 60)
     event_data: game_type.Event = game_config.config_event[event_id]
     for settle in event_data.settle:
-        constant.settle_behavior_effect_data[settle](
-            character_id, add_time, status_data, now_time
-        )
+        try:
+            constant.settle_behavior_effect_data[settle](
+                character_id, add_time, status_data, now_time
+            )
+        except Exception as e:
+            print(e)
+            continue
     change_character_favorability_for_time(character_id, now_time)
     change_character_social(character_id, status_data)
     now_judge = False

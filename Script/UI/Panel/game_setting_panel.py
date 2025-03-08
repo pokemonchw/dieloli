@@ -1,6 +1,8 @@
 from typing import Set, Tuple, Dict
 from types import FunctionType
 from uuid import UUID
+import time
+import ollama
 from Script.Core import get_text, game_type, cache_control, flow_handle, text_handle, py_cmd
 from Script.UI.Moudle import panel, draw
 from Script.Design import cooking, update, constant
@@ -36,7 +38,7 @@ class GameSettingPanel:
         """绘制对象"""
         title_draw = draw.TitleLineDraw(_("游戏设置"),self.width)
         title_draw.draw()
-        panel_type_list = [_("语言"),_("NSFW")]
+        panel_type_list = [_("语言"),_("NSFW"),_("AI")]
         return_list = []
         for panel_type in panel_type_list:
             if self.now_panel == panel_type:
@@ -64,6 +66,7 @@ class GameSettingPanel:
         title_line = draw.LineDraw("-.-", self.width)
         title_line.draw()
         language_option = []
+        ai_mode_option = {}
         if self.now_panel == _("语言"):
             language_panel = SystemLanguageSettingPanel(self.width)
             language_panel.draw()
@@ -73,6 +76,11 @@ class GameSettingPanel:
             nsfw_panel = SystemNSFWSettingPanel(self.width)
             nsfw_panel.draw()
             return_list.extend(nsfw_panel.return_list)
+        elif self.now_panel == ("AI"):
+            ai_panel = SystemAISettingPanel(self.width)
+            ai_panel.draw()
+            return_list.extend(ai_panel.return_list.keys())
+            ai_mode_option = ai_panel.return_list
         back_draw = draw.CenterButton(_("[返回]"),_("返回"),self.width)
         back_draw.draw()
         line_feed.draw()
@@ -85,7 +93,7 @@ class GameSettingPanel:
                 choice_language = language_option[yrn]
                 language_id = game_config.config_system_language_data[choice_language]
                 normal_config.change_normal_config("language",language_id)
-                now_draw = draw.LeftDraw()
+                now_draw = draw.WaitDraw()
                 now_draw.text = _("请重启游戏以让设置生效")
                 now_draw.width = self.width
                 now_draw.draw()
@@ -97,6 +105,45 @@ class GameSettingPanel:
                 else:
                     normal_config.change_normal_config("nsfw", 1)
                     normal_config.config_normal.nsfw = 1
+        elif self.now_panel == _("AI"):
+            if yrn in ai_mode_option:
+                if ai_mode_option[yrn] == _("关闭AI模式"):
+                    normal_config.change_normal_config("ai_mode", 0)
+                elif ai_mode_option[yrn] == _("启用ollama模式"):
+                    try:
+                        models = ollama.list()
+                        try:
+                            model_info = ollama.show(normal_config.config_normal.ollama_mode)
+                            normal_config.change_normal_config("ai_mode", 1)
+                        except Exception as e:
+                            now_draw = draw.LeftDraw()
+                            now_draw.text = _("模型未安装，正在自动安装，请稍等(需联网)")
+                            now_draw.width = self.width
+                            now_draw.draw()
+                            install_result = ollama.pull(normal_config.config_normal.ollama_mode)
+                            model_installed = False
+                            for i in range(60):
+                                try:
+                                    model_info = ollama.show(normal_config.config_normal.ollama_mode)
+                                    model_installed = True
+                                    break
+                                except Exception as e:
+                                    time.sleep(2)
+                            if model_installed:
+                                normal_config.change_normal_config("ai_mode", 1)
+                            else:
+                                now_draw = draw.LeftDraw()
+                                now_draw.text = _("模型安装失败，已关闭ollama模式，请检查设置")
+                                now_draw.width = self.width
+                                now_draw.draw()
+                    except Exception as e:
+                        now_draw = draw.WaitDraw()
+                        now_draw.text = _("无法链接ollama服务，请确保ollama服务正常启动")
+                        now_draw.width = self.width
+                        now_draw.draw()
+                        normal_config.change_normal_config("ai_mode", 0)
+                elif ai_mode_option[yrn] == _("启用外部api模式"):
+                    normal_config.change_normal_config("ai_mode", 2)
         py_cmd.clr_cmd()
 
     def change_panel(self, panel_type: str):
@@ -155,5 +202,34 @@ class SystemNSFWSettingPanel:
             now_panel.set(ask_for_list, _("是否关闭NSFW内容"))
         else:
             now_panel.set(ask_for_list, _("是否开启NSFW内容"))
+        now_panel.draw()
+        self.return_list = now_panel.get_return_list()
+
+
+class SystemAISettingPanel:
+    """
+    用于设置是否开启AI模式的面板对象
+    Keyword arguments:
+    width -- 绘制宽度
+    """
+
+    def __init__(self, width: int):
+        """ 初始化绘制对象 """
+        self.width: int = width
+        """ 绘制的最大宽度 """
+
+    def draw(self):
+        """ 绘制对象 """
+        title_line = draw.LineDraw("o", self.width)
+        now_panel = panel.OneMessageAndSingleColumnButton()
+        info_text = _("是否开启AI模式?\n请注意:\nollama模式需本地安装ollama，同时对电脑配置要求较高\n外部api模式需要联网进行游戏，同时本游戏对tokens消耗较高\n另外目前AI模式为实验性模式，产出内容无法良好控制")
+        ask_for_list = []
+        if normal_config.config_normal.ai_mode == 0:
+            ask_for_list = [_("启用ollama模式"),_("启用外部api模式")]
+        elif normal_config.config_normal.ai_mode == 1:
+            ask_for_list = [_("关闭AI模式"),_("启用外部api模式")]
+        elif normal_config.config_normal.ai_mode == 2:
+            ask_for_list = [_("关闭AI模式"),_("启用ollama模式")]
+        now_panel.set(ask_for_list, info_text)
         now_panel.draw()
         self.return_list = now_panel.get_return_list()

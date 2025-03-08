@@ -17,7 +17,7 @@ from PySide6.QtGui import (
     QTextCharFormat, QTextImageFormat, QImage,
     QCursor, QTextCursor, QPixmap,
     QTextDocument, QFontDatabase, QTextCursor,
-    QPainter, QPen
+    QPainter, QPen,
 )
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget,

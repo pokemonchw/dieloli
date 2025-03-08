@@ -3,6 +3,7 @@
 import os
 import sys
 import time
+import threading
 from types import FunctionType
 import platform
 import pickle
@@ -39,7 +40,7 @@ if __name__ == "__main__":
 
     map_config.init_map_data()
 
-    from Script.Design import start_flow, instruct, handle_achieve, debug, achieve, adv
+    from Script.Design import start_flow, instruct, handle_achieve, debug, achieve, adv, ai_api
     from Script.Core import game_init, save_handle
     import Script.Premise
     import Script.Settle
@@ -47,5 +48,9 @@ if __name__ == "__main__":
     import Script.UI.Flow
 
     handle_achieve.load_achieve()
+
+    ai_server_thread = threading.Thread(target=ai_api.run_server)
+    ai_server_thread.daemon = True
+    ai_server_thread.start()
 
     game_init.run(start_flow.start_frame)

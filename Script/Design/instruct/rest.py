@@ -56,7 +56,6 @@ def handle_sleep():
         # 若角色已经死亡则不做处理
         if character_data.state == constant.CharacterStatus.STATUS_DEAD:
             continue
-        # 恢复角色的健康和体力
         character_data.hit_point = character_data.hit_point_max
         character_data.mana_point = character_data.mana_point_max
         # 将角色送回宿舍
@@ -75,8 +74,11 @@ def handle_sleep():
         character_data.height.now_height += growth_height
         # 初始化角色状态
         character_data.state = constant.CharacterStatus.STATUS_ARDER
-        for status_id in character_data.status:
-            character_data.status[status_id] = 0
+        if character_id:
+            for status_id in character_data.status:
+                character_data.status[status_id] = 0
+        else:
+            character_data.status[25] = 0
         # 初始化角色行为
         character_data.ai_target = 0
         character_data.behavior.behavior_id = constant.Behavior.SHARE_BLANKLY
@@ -89,8 +91,12 @@ def handle_sleep():
         character_data.behavior.eat_food = None
         character_data.behavior.food_name = ""
         character_data.behavior.food_quality = 0
-        # 清除结算饥饿和进入极度疲惫的时间
-        character_data.last_hunger_time = 0
+        last_hunger_time = character_data.last_hunger_time
+        character_data.status.setdefault(27, 0)
+        character_data.status.setdefault(28, 0)
+        character_data.status[27] += 0.02 * (cache.game_time - last_hunger_time) / 60
+        character_data.status[28] += 0.02 * (cache.game_time - last_hunger_time) / 60
+        character_data.last_hunger_time = cache.game_time
         character_data.extreme_exhaustion_time = 0
         # 刷新角色体重和体脂率
         attr_calculation.handle_character_weight_and_body_fat(character_id)
@@ -106,5 +112,7 @@ def handle_sleep():
     now_draw.width = normal_config.config_normal.text_width
     now_draw.draw()
     weather.handle_weather()
-    save_handle.establish_save("auto")
+    character_behavior.judge_character_dead(0)
+    if not character_data.dead:
+        save_handle.establish_save("auto")
 
