@@ -2,9 +2,9 @@ import time
 import random
 import concurrent.futures
 from uuid import UUID
-from concurrent.futures import ThreadPoolExecutor
 from types import FunctionType
 from typing import Dict, Set, List
+import time
 import datetime
 from Script.Core import cache_control, game_type, value_handle, get_text
 from Script.Design import (
@@ -15,8 +15,6 @@ from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
-handle_thread_pool: ThreadPoolExecutor = ThreadPoolExecutor(max_workers=50)
-""" 处理角色行为的线程池 """
 
 
 def init_character_behavior():
@@ -31,12 +29,6 @@ def init_character_behavior():
     now_status_data[0] = set()
     now_status_data[1] = set()
     now_status_data[2] = set()
-    for i in cache.character_data:
-        if not i:
-            continue
-        now_judge = check_character_status_judge(i)
-        now_status_data[now_judge].add(i)
-        now_character_data = cache.character_data[i]
     for i in cache.character_data:
         cache.character_data[i].premise_data = {}
         if not i:
