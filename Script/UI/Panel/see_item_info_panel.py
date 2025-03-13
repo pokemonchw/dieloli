@@ -1,7 +1,7 @@
 from typing import List
 from types import FunctionType
 from Script.Core import cache_control, text_handle, get_text, py_cmd, game_type
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.Config import game_config, normal_config
 
 

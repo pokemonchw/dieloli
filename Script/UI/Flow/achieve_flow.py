@@ -1,6 +1,6 @@
 from Script.Design import handle_panel, constant
 from Script.Config import normal_config
-from Script.UI.Panel import achieve_panel
+from Script.UI.Panel.achieve_panel import AchievePanel
 
 width = normal_config.config_normal.text_width
 """ 屏幕宽度 """

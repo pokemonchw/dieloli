@@ -2,7 +2,7 @@ from typing import Dict
 from types import FunctionType
 from Script.Core import cache_control, game_type, value_handle, flow_handle, get_text, py_cmd
 from Script.Config import game_config
-from Script.UI.Moudle import draw, panel
+from Script.UI.Model import draw, panel
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """

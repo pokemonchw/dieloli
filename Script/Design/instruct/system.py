@@ -3,7 +3,7 @@ from Script.Core import cache_control, game_type, get_text, py_cmd
 from Script.Design import constant, handle_instruct
 from Script.UI.Panel import see_character_info_panel, see_save_info_panel, achieve_panel
 from Script.Config import normal_config
-from Script.UI.Moudle import draw, panel
+from Script.UI.Model import draw, panel
 
 
 cache: game_type.Cache = cache_control.cache

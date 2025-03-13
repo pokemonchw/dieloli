@@ -20,7 +20,7 @@ from Script.Design import (
     weather,
     handle_adv,
 )
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.UI.Panel import see_character_info_panel, change_nature_panel
 from Script.Config import normal_config, game_config, map_config
 

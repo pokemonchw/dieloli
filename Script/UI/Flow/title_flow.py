@@ -1,7 +1,7 @@
 import os
 from types import FunctionType
 from Script.Config import normal_config
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.UI.Panel import see_save_info_panel
 from Script.Design import handle_panel, constant
 from Script.Core import get_text, flow_handle, cache_control, game_type, py_cmd

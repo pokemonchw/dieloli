@@ -2,8 +2,9 @@ from typing import List
 from types import FunctionType
 import datetime
 import random
-from Script.UI.Moudle import draw, panel
+from Script.UI.Model import draw, panel
 from Script.UI.Panel import game_info_panel, see_character_info_panel
+from Script.UI.Panel import see_character_info_panel
 from Script.Core import (
     get_text, cache_control, game_type,
     flow_handle, text_handle, value_handle,

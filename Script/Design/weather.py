@@ -2,7 +2,7 @@ import random
 from Script.Core import cache_control, game_type
 from Script.Design import game_time
 from Script.Config import game_config, config_def, normal_config
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 
 
 cache: game_type.Cache = cache_control.cache

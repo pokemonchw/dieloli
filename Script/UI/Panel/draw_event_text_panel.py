@@ -1,6 +1,6 @@
 from Script.Core import cache_control, game_type
 from Script.Design import map_handle
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 from Script.Config import normal_config, game_config
 
 

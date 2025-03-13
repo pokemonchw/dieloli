@@ -10,7 +10,7 @@ from Script.Core import cache_control, game_type, get_text, save_handle
 from Script.Design import update, character, attr_calculation, course, game_time, clothing, constant
 from Script.UI.Panel import see_character_info_panel, see_save_info_panel
 from Script.Config import normal_config, game_config
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 
 
 cache: game_type.Cache = cache_control.cache

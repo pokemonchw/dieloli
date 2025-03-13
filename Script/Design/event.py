@@ -9,7 +9,7 @@ from Script.Core import cache_control, game_type, value_handle, get_text
 from Script.Design import map_handle, constant, settle_behavior
 from Script.UI.Panel import draw_event_text_panel
 from Script.Config import normal_config, game_config
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """

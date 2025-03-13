@@ -14,7 +14,7 @@ from Script.Core import (
     cache_control,
 )
 from Script.Config import game_config, normal_config
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 
 _: FunctionType = get_text._
 """ 翻译api """

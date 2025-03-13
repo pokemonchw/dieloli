@@ -1,7 +1,7 @@
 from types import FunctionType
 from Script.Core import cache_control, game_type, get_text
 from Script.Design import handle_debug, constant, character_handle
-from Script.UI.Moudle import panel
+from Script.UI.Model import panel
 
 
 cache: game_type.Cache = cache_control.cache

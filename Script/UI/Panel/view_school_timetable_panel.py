@@ -4,7 +4,7 @@ from typing import List
 from Script.Core import cache_control, game_type, get_text, flow_handle, py_cmd
 from Script.Design import attr_text, character_move, course, game_time, constant
 from Script.Config import game_config
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 
 
 cache: game_type.Cache = cache_control.cache

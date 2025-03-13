@@ -9,7 +9,7 @@ from Script.Core import (
 )
 from Script.Design import map_handle, constant
 from Script.Config import game_config, normal_config
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """

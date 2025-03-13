@@ -1,6 +1,6 @@
 from typing import List, Dict
 from types import FunctionType
-from Script.UI.Moudle import draw, panel
+from Script.UI.Model import draw, panel
 from Script.Core import (
     get_text,
     cache_control,

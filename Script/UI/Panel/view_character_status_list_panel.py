@@ -1,6 +1,6 @@
 import datetime
 from types import FunctionType
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.Core import (
     get_text,
     game_type,
