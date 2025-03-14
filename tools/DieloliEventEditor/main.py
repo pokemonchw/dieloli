@@ -5,6 +5,8 @@ import os
 import json
 import csv
 import uuid
+import random
+from openai import OpenAI
 from typing import Optional, Dict, Set, Any
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout,
@@ -12,25 +14,43 @@ from PySide6.QtWidgets import (
     QSplitter, QTabWidget, QPushButton, QFileDialog,
     QMenuBar, QStatusBar, QMessageBox, QTreeWidget,
     QTreeWidgetItem, QDialog, QLabel, QLineEdit,
-    QMenu, QSizePolicy, QGroupBox, QComboBox
+    QMenu, QSizePolicy, QGroupBox, QComboBox,
+    QProgressDialog
 )
-from PySide6.QtCore import Qt, Signal, QObject
+from PySide6.QtCore import Qt, Signal, QObject, QThread
 from PySide6.QtGui import QFontMetrics
 
+def send_event_text_to_api(prompt: str) -> str:
+    """
+    调用外部api补全事件文本
+    Keyword arguments:
+    prompt -- 提示词
+    Return arguments:
+    str -- 返回文本
+    """
+    try:
+        client = OpenAI(api_key="", base_url="")
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="deepseek-reasoner",
+        )
+        return chat_completion.choices[0].message.content
+    except Exception:
+        return ""
 
+# ------------ 全局配置数据 ------------
 premise_data: Dict[str, str] = {}
-""" 前提配置数据 {前提id:前提描述} """
 premise_type_data: Dict[str, Set[str]] = {}
-""" 前提类型配置数据 {前提类型:{前提id集合}} """
 status_data: Dict[str, str] = {}
-""" 状态机配置数据 {状态机id:状态机描述} """
 settle_data: Dict[str, str] = {}
-""" 结算器配置数据 {结算器id:结算器描述} """
 settle_type_data: Dict[str, Dict[str, Set[str]]] = {}
-""" 结算器类型配置数据 {结算器类型:{结算器子类:{结算器id集合}}} """
 macro_data: Dict[str, str] = {}
-""" 文本宏配置数据 {宏id:宏描述} """
-
+event_text_set: set = set()
 
 def load_config() -> None:
     """ 载入前提、状态、结算器和宏配置数据 """
@@ -66,17 +86,7 @@ def load_config() -> None:
 
 
 class Event:
-    """
-    事件对象，保存事件的各项数据。
-    Attributes:
-        uid (str): 事件唯一ID。
-        adv_id (str): 事件所属广告ID（备用）。
-        status_id (str): 事件所属状态ID。
-        start (bool): 是否为开始事件（True 为开始，False 为结束）。
-        text (str): 事件文本描述。
-        premise (dict): 事件前提数据（cid -> 1）。
-        settle (dict): 事件结算器数据（settle_id -> 1）。
-    """
+    """ 事件对象 """
     def __init__(self) -> None:
         self.uid: str = ""
         self.adv_id: str = ""
@@ -88,7 +98,6 @@ class Event:
 
 
 class EventManager(QObject):
-    """ 事件管理器，负责载入、保存、添加和删除事件 """
     event_updated = Signal()
 
     def __init__(self) -> None:
@@ -97,7 +106,6 @@ class EventManager(QObject):
         self.current_event_id: Optional[str] = None
 
     def load_events(self, file_path: str) -> None:
-        """ 从指定文件中载入事件数据 """
         with open(file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
         self.events.clear()
@@ -105,21 +113,16 @@ class EventManager(QObject):
             event = Event()
             event.__dict__ = edict
             self.events[uid] = event
+            event_text_set.add(event.text)
         self.event_updated.emit()
 
     def save_events(self, file_path: str) -> None:
-        """ 将事件数据保存到指定文件中 """
         data = {uid: event.__dict__ for uid, event in self.events.items()}
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
         QMessageBox.information(None, "提示", "保存成功")
 
     def add_event(self, text: str = "新事件") -> str:
-        """
-        添加一个新事件，并自动选中该事件
-        Returns:
-            str: 新事件的 uid。
-        """
         uid = str(uuid.uuid4())
         event = Event()
         event.uid = uid
@@ -143,24 +146,16 @@ class EventManager(QObject):
         return uid
 
     def delete_event(self, uid: str) -> None:
-        """
-        删除指定 uid 的事件。
-        """
         if uid in self.events:
             del self.events[uid]
             if self.current_event_id == uid:
                 self.current_event_id = None
             self.event_updated.emit()
 
-
 premise_tree_state: Dict[str, bool] = {}
 settle_tree_state: Dict[str, bool] = {}
 
-
 class MacroTextEdit(QTextEdit):
-    """
-    支持右键菜单插入宏的文本编辑器。
-    """
     def contextMenuEvent(self, event: Any) -> None:
         menu = self.createStandardContextMenu()
         insert_macro_menu = menu.addMenu("插入宏")
@@ -171,40 +166,29 @@ class MacroTextEdit(QTextEdit):
         menu.exec(event.globalPos())
 
     def insert_macro(self, cid: str) -> None:
-        """
-        在当前光标位置插入指定宏。
-        """
         cursor = self.textCursor()
         cursor.insertText("{" + cid + "}")
 
-
 class MacroInfoTextEdit(QTextEdit):
-    """
-    只读宏信息显示编辑器，显示所有宏信息，每行一条；双击可将对应宏插入主编辑器。
-    """
     def __init__(self, main_text_edit: MacroTextEdit, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.main_text_edit = main_text_edit
         self.setReadOnly(True)
+        text = ""
+        for cid, info in macro_data.items():
+            text += "{" + cid + "}: " + info + "\n"
+        self.setPlainText(text)
 
     def mouseDoubleClickEvent(self, event: Any) -> None:
         cursor = self.cursorForPosition(event.pos())
         block = cursor.block()
         line_text = block.text().strip()
-        if line_text:
-            if line_text.startswith("{") and "}" in line_text:
-                macro = line_text[1:line_text.index("}")]
-                main_cursor = self.main_text_edit.textCursor()
-                main_cursor.insertText("{" + macro + "}")
-        super().mouseDoubleClickEvent(event)
-
+        if line_text and line_text.startswith("{") and "}" in line_text:
+            macro = line_text[1:line_text.index("}")]
+            self.main_text_edit.insertPlainText("{" + macro + "}")
 
 class StateFilterWidget(QWidget):
-    """
-    状态筛选面板，显示所有状态并支持搜索过滤，固定宽度由状态中最长文本确定。
-    """
     stateSelected = Signal(object)
-
     def __init__(self, parent: Optional[QWidget] = None) -> None:
         super().__init__(parent)
         layout = QVBoxLayout(self)
@@ -227,28 +211,14 @@ class StateFilterWidget(QWidget):
         self.list_widget.itemClicked.connect(self.on_item_clicked)
 
     def filter_list(self, text: str) -> None:
-        """
-        过滤状态列表，显示包含搜索文本的状态。
-        """
         text = text.lower()
         for item in self.all_items:
-            if item == self.all_items[0]:
-                item.setHidden(False)
-            else:
-                item.setHidden(text not in item.text().lower())
+            item.setHidden(text not in item.text().lower())
 
     def on_item_clicked(self, item: QListWidgetItem) -> None:
-        """
-        当选中状态时发射信号。
-        """
         self.stateSelected.emit(item.data(Qt.UserRole))
 
-
 class GroupedMultiSelectDialog(QDialog):
-    """
-    分组多选对话框（前提选择）
-    根据 group_mapping 显示可选项和已选项（水平并列），支持双击切换勾选及预览列表双击取消选择。
-    """
     def __init__(self, available_items: Dict[str, str],
                  group_mapping: Dict[str, Set[str]],
                  selected_items: Dict[str, int],
@@ -370,13 +340,7 @@ class GroupedMultiSelectDialog(QDialog):
             recurse(root.child(i))
         super().accept()
 
-
 class TwoLevelGroupedMultiSelectDialog(QDialog):
-    """
-    二级分组多选对话框（结算器选择）
-    根据二级分组显示可选项，下方实时显示已选项（水平并列），
-    支持双击切换勾选状态和预览列表双击取消选择。
-    """
     def __init__(self, available_items: Dict[str, str],
                  group_mapping: Dict[str, Dict[str, Set[str]]],
                  selected_items: Dict[str, int],
@@ -511,28 +475,36 @@ class TwoLevelGroupedMultiSelectDialog(QDialog):
             recurse(root.child(i))
         super().accept()
 
+class Worker(QThread):
+    finished = Signal(str)
+    error = Signal(str)
+
+    def __init__(self, prompt: str):
+        super().__init__()
+        self.prompt = prompt
+
+    def run(self):
+        try:
+            result = send_event_text_to_api(self.prompt)
+            self.finished.emit(result.strip())
+        except Exception as e:
+            self.error.emit(str(e))
 
 class MainWindow(QMainWindow):
-    """
-    编辑器主窗体，负责界面布局、事件列表、文本编辑及各模块交互。
-    """
     def __init__(self, event_manager: EventManager) -> None:
         super().__init__()
-        self.setWindowTitle("新事件编辑器")
+        self.setWindowTitle("事件编辑器")
         self.event_manager = event_manager
 
         main_splitter = QSplitter(Qt.Horizontal)
 
-        # 左侧区域：过滤器面板与事件列表并列显示
+        # 左侧区域
         left_panel = QWidget()
         left_layout = QHBoxLayout(left_panel)
-        # 过滤器面板：垂直布局，包含事件类型下拉框（上方）和状态筛选组件（下方）
         filter_panel = QWidget()
         filter_layout = QVBoxLayout(filter_panel)
-        # 先创建状态筛选组件
         self.state_filter_widget = StateFilterWidget()
         self.state_filter_widget.stateSelected.connect(self.on_state_selected)
-        # 计算过滤器宽度使用 StateFilterWidget 的公式
         state_width = self.state_filter_widget_width()
         self.event_type_combo = QComboBox()
         self.event_type_combo.addItem("开始事件", True)
@@ -545,7 +517,6 @@ class MainWindow(QMainWindow):
         filter_layout.addWidget(self.state_filter_widget)
         filter_panel.setFixedWidth(state_width)
         left_layout.addWidget(filter_panel)
-        # 事件列表
         self.event_list = QListWidget()
         self.event_list.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         self.event_list.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -553,22 +524,26 @@ class MainWindow(QMainWindow):
         left_layout.addWidget(self.event_list, 1)
         main_splitter.addWidget(left_panel)
 
-        # 右侧区域：标签页
+        # 右侧区域
         self.tab_widget = QTabWidget()
         main_splitter.addWidget(self.tab_widget)
-        # Tab 1：文本编辑
+        
+        # 文本标签页
         text_tab = QWidget()
-        text_layout = QHBoxLayout(text_tab)
+        text_layout = QVBoxLayout(text_tab)
+        self.ai_button = QPushButton("AI生成")
+        self.ai_button.clicked.connect(self.generate_ai_text)
+        text_layout.addWidget(self.ai_button)
         self.text_edit = MacroTextEdit()
         self.macro_info = MacroInfoTextEdit(self.text_edit)
         self.macro_info.setMaximumWidth(250)
-        self.populate_macro_info()
         text_splitter = QSplitter(Qt.Horizontal)
         text_splitter.addWidget(self.text_edit)
         text_splitter.addWidget(self.macro_info)
         text_layout.addWidget(text_splitter)
         self.tab_widget.addTab(text_tab, "文本")
-        # Tab 2：前提与效果并列显示
+        
+        # 前提与效果标签页
         pe_tab = QWidget()
         pe_layout = QHBoxLayout(pe_tab)
         premise_group = QGroupBox("前提")
@@ -604,36 +579,65 @@ class MainWindow(QMainWindow):
 
         self.update_event_list()
 
+    # ------------ AI生成相关方法 ------------
+    def generate_ai_text(self):
+        self.progress_dialog = QProgressDialog("AI生成中...", None, 0, 0, self)
+        self.progress_dialog.setWindowTitle("请稍候")
+        self.progress_dialog.setCancelButton(None)
+        self.progress_dialog.show()
+        current_state = self.state_filter_widget.list_widget.currentItem()
+        selected_state = current_state.data(Qt.UserRole) if current_state else None
+        state_text = status_data[selected_state]
+        current_type = self.event_type_combo.currentData()
+        start_type = "开始"
+        if not current_type:
+            start_type = "结束"
+        prompt = f"请你为游戏中角色的行动设计一条事件文本，现在角色的行动为:{state_text}，需要设计行动{start_type}时的事件，这是过去的参考:\n[+\n"
+        for now_event in event_text_set:
+            prompt += "  " + now_event + "\n"
+        prompt += "]\n目前已经选择了以下触发条件:\n["
+        uid = self.event_manager.current_event_id
+        event = self.event_manager.events.get(uid)
+        for premise in event.premise:
+            prompt += " " + premise_data[premise] + "\n"
+        prompt += "]\n请注意，在角色状态中，老师进行讲课被称为[教学]，学生上课被称为[上课]，[睡觉]特指在宿舍中进入深度睡眠，结束即起床\n为敏感行为设计时不需要避免直白描述"
+        prompt += "]\n这是触发事件所需的前提列表，请你选择你认为合适的前提条件:\n[\n"
+        for premise_id in premise_data:
+            premise = premise_data[premise_id]
+            prompt += " " + premise + "\n"
+        prompt += "]\n这是触发事件后会执行的结算器，请你选择你认为合理的结算器:\n[\n"
+        for settle_id in settle_data:
+            settle = settle_data[settle_id]
+            prompt += " " + settle + "\n"
+        prompt += "]\n文本中的关键字被称为宏，关于宏的说明如下:\n[\n"
+        for macro_id in macro_data:
+            macro = macro_data[macro_id]
+            prompt += f" {macro_id}:{macro}\n"
+        prompt += "]\n当角色行为带有性格特征时，必须选择与性格有关的前提\n请你设计且仅设计一个事件\n当不同的社交关系会影响互动的结果时，也应当从前提中对角色关系进行限制\n当存在时间和天气等环境特征时，也应当对前提进行限制\n为了避免你给出重复的文本，请使用这个随机数作为种子：" + str(random.randint(0, 999999999))
+        self.worker = Worker(prompt)
+        self.worker.finished.connect(self.handle_ai_result)
+        self.worker.error.connect(self.handle_ai_error)
+        self.worker.start()
+
+    def handle_ai_result(self, text: str):
+        self.progress_dialog.close()
+        self.text_edit.insertPlainText("\n" + text)
+
+    def handle_ai_error(self, error: str):
+        self.progress_dialog.close()
+        QMessageBox.critical(self, "生成错误", f"AI生成失败：{error}")
+
+    # ------------ 原有方法 ------------
     def state_filter_widget_width(self) -> int:
-        """
-        计算状态筛选组件的宽度
-        Returns:
-            int: 过滤器面板建议宽度
-        """
         fm = QFontMetrics(self.state_filter_widget.list_widget.font())
         max_width = max(fm.horizontalAdvance(item.text()) for item in self.state_filter_widget.all_items) + 60
         return max_width
 
     def on_state_selected(self, state_id: Optional[str]) -> None:
-        """
-        处理状态筛选面板的选中信号
-        """
         self.selected_state = state_id
         self.update_event_list()
 
-    def populate_macro_info(self) -> None:
-        """
-        填充宏信息显示区域，将所有宏信息逐行显示
-        """
-        text = ""
-        for cid, info in macro_data.items():
-            text += "{" + cid + "}: " + info + "\n"
-        self.macro_info.setPlainText(text)
-
     def show_event_list_context_menu(self, pos: Any) -> None:
-        """
-        在事件列表中显示右键菜单，支持新增、复制、删除事件
-        """
         item = self.event_list.itemAt(pos)
         menu = QMenu(self.event_list)
         new_action = menu.addAction("新增事件")
@@ -649,10 +653,6 @@ class MainWindow(QMainWindow):
             self.delete_event_item(item)
 
     def new_event(self) -> None:
-        """
-        新增事件，并自动选中、滚动到事件列表底部，
-        自动使用当前过滤器（状态和事件类型）的值
-        """
         new_uid = self.event_manager.add_event("新事件")
         current_state = self.state_filter_widget.list_widget.currentItem()
         if current_state is not None:
@@ -667,9 +667,6 @@ class MainWindow(QMainWindow):
         self.event_list.scrollToBottom()
 
     def copy_event(self, item: QListWidgetItem) -> None:
-        """
-        复制选中的事件，并自动选中、滚动到事件列表底部
-        """
         uid = item.data(Qt.UserRole)
         if uid is None:
             return
@@ -689,9 +686,6 @@ class MainWindow(QMainWindow):
         self.event_list.scrollToBottom()
 
     def delete_event_item(self, item: QListWidgetItem) -> None:
-        """
-        删除选中的事件。
-        """
         uid = item.data(Qt.UserRole)
         if uid is None:
             return
@@ -701,9 +695,6 @@ class MainWindow(QMainWindow):
             self.statusBar.showMessage("事件已删除", 2000)
 
     def _create_menu_bar(self) -> None:
-        """
-        创建菜单栏。
-        """
         menu_bar = QMenuBar(self)
         file_menu = menu_bar.addMenu("文件")
         open_action = file_menu.addAction("打开")
@@ -719,9 +710,6 @@ class MainWindow(QMainWindow):
         self.setMenuBar(menu_bar)
 
     def update_event_list(self) -> None:
-        """
-        根据当前状态和事件类型过滤更新事件列表，并自动选中当前事件
-        """
         self.event_list.blockSignals(True)
         self.event_list.clear()
         current_state = self.state_filter_widget.list_widget.currentItem()
@@ -744,9 +732,6 @@ class MainWindow(QMainWindow):
         self.event_list.blockSignals(False)
 
     def load_event_detail(self, row: int) -> None:
-        """
-        加载选中事件的详细信息到编辑器中
-        """
         if row < 0 or row >= self.event_list.count():
             return
         uid = self.event_list.item(row).data(Qt.UserRole)
@@ -760,9 +745,6 @@ class MainWindow(QMainWindow):
             self.update_settle_list(event)
 
     def update_event_text(self) -> None:
-        """
-        更新当前事件的文本内容
-        """
         uid = self.event_manager.current_event_id
         if uid:
             event = self.event_manager.events.get(uid)
@@ -771,25 +753,16 @@ class MainWindow(QMainWindow):
                 self.update_event_list()
 
     def update_premise_list(self, event: Event) -> None:
-        """
-        更新前提列表显示
-        """
         self.premise_list.clear()
         for cid in event.premise:
             self.premise_list.addItem(premise_data.get(cid, cid))
 
     def update_settle_list(self, event: Event) -> None:
-        """
-        更新结算器列表显示
-        """
         self.settle_list.clear()
         for sid in event.settle:
             self.settle_list.addItem(settle_data.get(sid, sid))
 
     def edit_premise(self) -> None:
-        """
-        编辑当前事件的前提
-        """
         uid = self.event_manager.current_event_id
         if uid:
             event = self.event_manager.events.get(uid)
@@ -799,9 +772,6 @@ class MainWindow(QMainWindow):
                 self.statusBar.showMessage("前提更新成功", 2000)
 
     def edit_settle(self) -> None:
-        """
-        编辑当前事件的结算器（效果）
-        """
         uid = self.event_manager.current_event_id
         if uid:
             event = self.event_manager.events.get(uid)
@@ -811,27 +781,18 @@ class MainWindow(QMainWindow):
                 self.statusBar.showMessage("结算器更新成功", 2000)
 
     def open_file(self) -> None:
-        """
-        打开事件文件
-        """
         file_path, _ = QFileDialog.getOpenFileName(self, "打开事件文件", ".", "Json 文件 (*.json)")
         if file_path:
             self.event_manager.load_events(file_path)
             self.statusBar.showMessage("加载成功", 2000)
 
     def save_file(self) -> None:
-        """
-        保存事件文件
-        """
         file_path, _ = QFileDialog.getSaveFileName(self, "保存事件文件", ".", "Json 文件 (*.json)")
         if file_path:
             self.event_manager.save_events(file_path)
             self.statusBar.showMessage("保存成功", 2000)
 
     def delete_event(self) -> None:
-        """
-        删除选中的事件
-        """
         row = self.event_list.currentRow()
         if row >= 0:
             uid = self.event_list.item(row).data(Qt.UserRole)
@@ -840,11 +801,7 @@ class MainWindow(QMainWindow):
                 self.event_manager.delete_event(uid)
                 self.statusBar.showMessage("事件已删除", 2000)
 
-
 def main() -> None:
-    """
-    主程序入口。
-    """
     load_config()
     app = QApplication(sys.argv)
     global main_window

@@ -220,8 +220,10 @@ class Premise:
     """ 交互对象是一个自卑的人 """
     TARGET_IS_INFFERENT = "target_is_infferent"
     """ 交互对象是一个淡泊的人 """
-    TARGET_IS_KEEN = "target_is_humor_man"
+    TARGET_IS_KEEN = "target_is_keen"
     """ 交互对象是一个热衷的人 """
+    TARGET_IS_HUMOR_MAN = "target_is_humor_man"
+    """ 交互对象是一个幽默的人 """
 
     """
     =========================

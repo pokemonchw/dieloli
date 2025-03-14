@@ -98,6 +98,7 @@ target_is_self_confidence,交互对象性格类前提,交互对象是一个自�
 target_is_inferiority,交互对象性格类前提,交互对象是一个自卑的人
 target_is_infferent,交互对象性格类前提,交互对象是一个淡泊的人
 target_is_keen,交互对象性格类前提,交互对象是一个热衷的人
+target_is_humor_man,交互对象性格类前提,交互对象是一个幽默的人
 in_door,场景状态类前提,角色处于室内
 out_door,场景状态类前提,角色处于室外
 in_square,场景状态类前提,角色处于操场中

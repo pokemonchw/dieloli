@@ -64,7 +64,6 @@ def init_clothing_shop_data():
     max_people = len(cache.character_data)
     clothing_config_data = game_config.config_clothing_tem
     clothing_id_list = list(clothing_config_data.keys())
-    index = 0
     for _unused in range(max_people):
         now_id = random.choice(clothing_id_list)
         clothing = creator_clothing(now_id)
