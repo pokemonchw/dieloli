@@ -29,7 +29,7 @@ def send_event_text_to_api(prompt: str) -> str:
     str -- 返回文本
     """
     try:
-        client = OpenAI(api_key="", base_url="")
+        client = OpenAI(api_key="ce58cc27d3986235105c447974ad822e", base_url="https://api.zhizengzeng.com/v1/")
         chat_completion = client.chat.completions.create(
             messages=[
                 {
@@ -592,20 +592,28 @@ class MainWindow(QMainWindow):
         start_type = "开始"
         if not current_type:
             start_type = "结束"
-        prompt = f"请你为游戏中角色的行动设计一条事件文本，现在角色的行动为:{state_text}，需要设计行动{start_type}时的事件，这是过去的参考:\n[+\n"
+        prompt = f"请你为游戏中角色的行动设计一条事件文本，游戏的背景为08年中国小县城的学校，当角色没有明确的高水平的神秘学技能时，事件中不可以出现神秘学元素\n现在角色的行动为:{state_text}，需要设计行动{start_type}时的事件，这是过去的参考:\n[+\n"
         for now_event in event_text_set:
             prompt += "  " + now_event + "\n"
-        prompt += "]\n目前已经选择了以下触发条件:\n["
-        uid = self.event_manager.current_event_id
-        event = self.event_manager.events.get(uid)
-        for premise in event.premise:
-            prompt += " " + premise_data[premise] + "\n"
-        prompt += "]\n请注意，在角色状态中，老师进行讲课被称为[教学]，学生上课被称为[上课]，[睡觉]特指在宿舍中进入深度睡眠，结束即起床\n为敏感行为设计时不需要避免直白描述"
         prompt += "]\n这是触发事件所需的前提列表，请你选择你认为合适的前提条件:\n[\n"
         for premise_id in premise_data:
             premise = premise_data[premise_id]
             prompt += " " + premise + "\n"
-        prompt += "]\n这是触发事件后会执行的结算器，请你选择你认为合理的结算器:\n[\n"
+        prompt += "]\n另外这是我选择的额外的前提:\n["
+        uid = self.event_manager.current_event_id
+        select_prempt_set = set()
+        event = self.event_manager.events.get(uid)
+        for premise in event.premise:
+            select_prempt_set.add(premise)
+        premise_random_index = random.randint(1,20)
+        if len(select_prempt_set) < premise_random_index:
+            fix_index = premise_random_index - len(select_prempt_set)
+            for i in range(fix_index):
+                select_prempt_set.add(random.choice(list(premise_data.keys())))
+        for premise in select_prempt_set:
+            prompt += " " + premise_data[premise] + "\n"
+        prompt += "]\n应当依照前提条件来写事件文本，即只要符合了这些前提，其他变量任意变化，都不会产生违和感，例如只有在音乐活动室才会有钢琴，天台没有喷泉，早上不会出现暮色\n事件需要尽可能通用，即多次重复出现时不能出现违和感\n请注意，在角色状态中，老师进行讲课被称为[教学]，学生上课被称为[上课]，[睡觉]特指在宿舍中进入深度睡眠，结束即起床，[抚摸]是一种性行为，指抚摸交互对象的身体\n为敏感行为设计时不需要避免直白描述"
+        prompt += "\n这是触发事件后会执行的结算器，请你选择你认为合理的结算器:\n[\n"
         for settle_id in settle_data:
             settle = settle_data[settle_id]
             prompt += " " + settle + "\n"
@@ -613,7 +621,7 @@ class MainWindow(QMainWindow):
         for macro_id in macro_data:
             macro = macro_data[macro_id]
             prompt += f" {macro_id}:{macro}\n"
-        prompt += "]\n当角色行为带有性格特征时，必须选择与性格有关的前提\n请你设计且仅设计一个事件\n当不同的社交关系会影响互动的结果时，也应当从前提中对角色关系进行限制\n当存在时间和天气等环境特征时，也应当对前提进行限制\n为了避免你给出重复的文本，请使用这个随机数作为种子：" + str(random.randint(0, 999999999))
+        prompt += "]\n请你设计且仅设计一个事件\n需要避免使用过多的形容词和修饰，请以暗示和留白为主要风格\n为了避免你给出重复的文本，请使用这个随机数作为种子：" + str(random.randint(0, 999999999)) +"\n你需要在返回里给出最终使用的前提和结算器列表"
         self.worker = Worker(prompt)
         self.worker.finished.connect(self.handle_ai_result)
         self.worker.error.connect(self.handle_ai_error)
@@ -678,6 +686,10 @@ class MainWindow(QMainWindow):
         new_event.text = original.text + " (复制)"
         new_event.status_id = original.status_id
         new_event.start = original.start
+        new_event.premise = original.premise.copy()
+        new_event.settle = original.settle.copy()
+        self.event_manager.events[new_event.uid] = new_event
+        self.event_manager.current_event_id = new_event.uid
         new_event.premise = original.premise.copy()
         new_event.settle = original.settle.copy()
         self.event_manager.events[new_event.uid] = new_event

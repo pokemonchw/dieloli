@@ -78,6 +78,8 @@ def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> p
             now_text_list.append(
                 _("体力:") + text_handle.number_to_symbol_string(round(status_data.mana_point, 2))
             )
+        if len(now_text_list) < 2:
+            now_text_list.append("")
         if len(now_text_list):
             if len(now_text_list) % 4:
                 now_text_list.extend([""] * (len(now_text_list) % 4))
