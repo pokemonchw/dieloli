@@ -592,7 +592,8 @@ class MainWindow(QMainWindow):
         start_type = "开始"
         if not current_type:
             start_type = "结束"
-        prompt = f"请你为游戏中角色的行动设计一条事件文本，游戏的背景为08年中国小县城的学校，当角色没有明确的高水平的神秘学技能时，事件中不可以出现神秘学元素\n现在角色的行动为:{state_text}，需要设计行动{start_type}时的事件，这是过去的参考:\n[+\n"
+        event_lenght = random.choice(["一", "两"])
+        prompt = f"请你为游戏中角色的行动设计一条事件文本，只允许使用最多{event_lenght}句话，每句话不超过15个字，所有断句包括逗号均视为一句\n尽可能避免直接描写对话\n需要避免重复句式\n需要避免和现有的事件相似\n游戏的背景为08年中国小县城的学校，当角色没有明确的高水平的神秘学技能时，事件中不可以出现神秘学元素\n现在角色的行动为:{state_text}，需要设计行动{start_type}时的事件\n请尽可能多的尝试不同的事件\n这是过去的参考:\n[+\n"
         for now_event in event_text_set:
             prompt += "  " + now_event + "\n"
         prompt += "]\n这是触发事件所需的前提列表，请你选择你认为合适的前提条件:\n[\n"
@@ -605,14 +606,14 @@ class MainWindow(QMainWindow):
         event = self.event_manager.events.get(uid)
         for premise in event.premise:
             select_prempt_set.add(premise)
-        premise_random_index = random.randint(1,20)
+        premise_random_index = random.randint(1, 20)
         if len(select_prempt_set) < premise_random_index:
             fix_index = premise_random_index - len(select_prempt_set)
             for i in range(fix_index):
                 select_prempt_set.add(random.choice(list(premise_data.keys())))
         for premise in select_prempt_set:
             prompt += " " + premise_data[premise] + "\n"
-        prompt += "]\n应当依照前提条件来写事件文本，即只要符合了这些前提，其他变量任意变化，都不会产生违和感，例如只有在音乐活动室才会有钢琴，天台没有喷泉，早上不会出现暮色\n事件需要尽可能通用，即多次重复出现时不能出现违和感\n请注意，在角色状态中，老师进行讲课被称为[教学]，学生上课被称为[上课]，[睡觉]特指在宿舍中进入深度睡眠，结束即起床，[抚摸]是一种性行为，指抚摸交互对象的身体\n为敏感行为设计时不需要避免直白描述"
+        prompt += "]\n应当依照前提条件来写事件文本，即只要符合了这些前提，其他变量任意变化，都不会产生违和感，例如只有在音乐活动室才会有钢琴，天台没有喷泉，早上不会出现暮色\n事件需要尽可能通用，即多次重复出现时不能出现违和感\n请注意，在角色状态中，老师进行讲课被称为[教学]，学生上课被称为[上课]，[睡觉]特指在宿舍中进入深度睡眠，结束即起床，[抚摸]是一种性行为，指抚摸交互对象的身体，[摸头]是一种类似用掌心抚摸小猫的脑袋的亲密行为\n为敏感行为设计时不需要避免直白描述\n不需要避免尴尬场景"
         prompt += "\n这是触发事件后会执行的结算器，请你选择你认为合理的结算器:\n[\n"
         for settle_id in settle_data:
             settle = settle_data[settle_id]
@@ -621,7 +622,15 @@ class MainWindow(QMainWindow):
         for macro_id in macro_data:
             macro = macro_data[macro_id]
             prompt += f" {macro_id}:{macro}\n"
-        prompt += "]\n请你设计且仅设计一个事件\n需要避免使用过多的形容词和修饰，请以暗示和留白为主要风格\n为了避免你给出重复的文本，请使用这个随机数作为种子：" + str(random.randint(0, 999999999)) +"\n你需要在返回里给出最终使用的前提和结算器列表"
+        prompt += "]\n请你设计且仅设计一个事件\n需要避免使用过多的形容词和修饰，请以暗示和留白为主要风格\n为了避免你给出重复的文本，请使用这个随机数作为种子：" + str(random.randint(0, 999999999)) +"\n你需要在返回里给出最终使用的前提和结算器列表\n"
+        prompt += "在此状态下现在已有了以下事件，请你参考这些事件的设计风格:\n["
+        for uid, event in self.event_manager.events.items():
+            if selected_state is not None and event.status_id != selected_state:
+                continue
+            if current_type is not None and event.start != current_type:
+                continue
+            prompt += " " + event.text + "\n"
+        prompt += "]\n事件描述应该简明扼要，又不失意境\n不可以出现前提条件中没有出现的内容和元素，场景，时间，行为，状态等任意描写\n尽量避免具体的物品和穿着描述"
         self.worker = Worker(prompt)
         self.worker.finished.connect(self.handle_ai_result)
         self.worker.error.connect(self.handle_ai_error)
@@ -732,7 +741,7 @@ class MainWindow(QMainWindow):
                 continue
             if current_type is not None and event.start != current_type:
                 continue
-            item = QListWidgetItem(f"{event.text} ({uid[:8]})")
+            item = QListWidgetItem(f"{event.text}")
             item.setData(Qt.UserRole, uid)
             self.event_list.addItem(item)
         if self.event_manager.current_event_id:

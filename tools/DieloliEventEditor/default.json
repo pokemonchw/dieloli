@@ -7528,37 +7528,6 @@
             "add_small_favorability": 1
         }
     },
-    "ba7d7e09-a960-44ac-9a89-9348fd507197": {
-        "uid": "ba7d7e09-a960-44ac-9a89-9348fd507197",
-        "adv_id": "",
-        "status_id": "3",
-        "start": false,
-        "text": "正当{Name}收拾教案时，{TargetName}突然按住讲台上的手腕\\n「老师今天的领带...很适合被攥紧呢」\\n{TargetName}指尖缓缓划过{Name}的喉结\\n粉笔从颤抖的指间滚落，在空荡教室敲出清脆心跳声\\n",
-        "premise": {
-            "rich_experience_in_sex": 1,
-            "antipathy_is_height": 1,
-            "lust_is_hight": 1,
-            "yearn_is_height": 1,
-            "have_target": 1,
-            "is_beyond_friendship_target": 1,
-            "target_lust_is_hight": 1,
-            "target_yearn_is_height": 1,
-            "is_man": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "sub_small_mana_point": 1,
-            "add_students_course_experience_for_in_classroom": 1,
-            "target_add_medium_favorability": 1,
-            "add_small_favorability": 1,
-            "add_small_happy": 1,
-            "add_small_yearn": 1,
-            "add_small_antipathy": 1,
-            "add_small_shame": 1,
-            "add_small_arrogant": 1,
-            "add_medium_lust": 1
-        }
-    },
     "d6177d0e-095c-426a-ae05-ef9fa6145382": {
         "uid": "d6177d0e-095c-426a-ae05-ef9fa6145382",
         "adv_id": "",
@@ -7567,638 +7536,6 @@
         "text": "{Name}的舌尖轻轻掠过{TargetName}的侧脸\\n「{Name}？！」\\n{TargetName}耳尖泛红地缩起了脖子",
         "premise": {},
         "settle": {}
-    },
-    "8c480c1f-4b1e-44ef-a1e9-18dfd6ca28c3": {
-        "uid": "8c480c1f-4b1e-44ef-a1e9-18dfd6ca28c3",
-        "adv_id": "",
-        "status_id": "1",
-        "start": true,
-        "text": "{Name}抬头望向了天空，星光在眸中流转\\n「该出发了」\\n{Name}收拾好东西，快步走向了{TargetSceneName}",
-        "premise": {
-            "in_classroom": 1,
-            "is_night": 1,
-            "astronomy_skills_is_height": 1,
-            "target_is_beyond_friendship": 1,
-            "tonight_is_yumibarizuki_moon": 1
-        },
-        "settle": {}
-    },
-    "113c3a47-22e9-4357-bc78-d4ccf5815ff3": {
-        "uid": "113c3a47-22e9-4357-bc78-d4ccf5815ff3",
-        "adv_id": "",
-        "status_id": "1",
-        "start": false,
-        "text": "{Name}抵达{SceneName}后，若有所思地驻足片刻，目光扫过熟悉的景致\\n「今天也会是平静的一天吧」\\n{Name}轻声自语，指尖无意识摩挲着书包带",
-        "premise": {
-            "in_classroom": 1,
-            "is_student": 1,
-            "scene_no_have_other_character": 1
-        },
-        "settle": {
-            "move_to_target_scene": 1,
-            "add_small_yearn": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "503537c3-9924-4ea6-96ac-17689df705e5": {
-        "uid": "503537c3-9924-4ea6-96ac-17689df705e5",
-        "adv_id": "",
-        "status_id": "4",
-        "start": false,
-        "text": "{Name}咬下最后一口{FoodName}，指尖无意识摩挲着包装纸发出沙沙声\\n突然瞥见{TargetName}衣领沾着的食物碎屑，伸手轻轻捻去",
-        "premise": {
-            "hunger": 1,
-            "target_not_stranger": 1,
-            "target_is_beyond_friendship": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_medium_happy": 1,
-            "target_add_small_shame": 1,
-            "target_add_small_favorability": 1
-        }
-    },
-    "88139130-4199-4b4c-b88e-0dbf5f1ba574": {
-        "uid": "88139130-4199-4b4c-b88e-0dbf5f1ba574",
-        "adv_id": "",
-        "status_id": "4",
-        "start": false,
-        "text": "「要尝尝吗？这个{FoodName}超赞的～」\\n{Name}将咬了一半的{FoodName}递到{TargetName}唇边，指尖残留着晶亮水痕\"",
-        "premise": {
-            "target_is_beyond_friendship": 1,
-            "no_have_other_target_in_scene": 1,
-            "lust_is_hight": 1,
-            "target_no_first_kiss": 1
-        },
-        "settle": {
-            "add_large_lust": 1,
-            "target_add_medium_shame": 1,
-            "target_add_small_yearn": 1,
-            "add_medium_favorability": 1
-        }
-    },
-    "85361f06-0fac-4280-aa3f-9d8367de760a": {
-        "uid": "85361f06-0fac-4280-aa3f-9d8367de760a",
-        "adv_id": "",
-        "status_id": "5",
-        "start": false,
-        "text": "「你看过会跳舞的粉笔吗？」\\n{Name}突然抓起讲台上的粉笔，在{TargetName}课桌上快速旋转出一串滑稽小人\\n「噗...这是什么啊！」\\n{TargetName}捂着嘴努力不笑出声，肩膀却止不住颤动",
-        "premise": {
-            "in_classroom": 1,
-            "eloquence_skills_interest_is_height": 1,
-            "target_is_humor_man": 1,
-            "not_in_class_time": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_medium_happy": 1,
-            "target_add_large_happy": 1,
-            "add_small_eloquence_experience": 1,
-            "add_small_favorability": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "b1cae3da-20d7-4f80-ae73-ea44c6bbdff9": {
-        "uid": "b1cae3da-20d7-4f80-ae73-ea44c6bbdff9",
-        "adv_id": "",
-        "status_id": "5",
-        "start": false,
-        "text": "「喂，看我发明的'课本魔术'！」\\n{Name}突然将{TargetName}的课本抛向空中，手指翻飞间夹住三支笔\\n「锵锵——变成《母猪产后护理》了！」\\n{TargetName}的书页上赫然贴着歪歪扭扭的涂鸦封面，两人课桌间爆发出压低的鹅叫声",
-        "premise": {
-            "in_classroom": 1,
-            "performance_skills_interest_is_height": 1,
-            "target_is_gregarious": 1,
-            "not_in_class_time": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_medium_happy": 1,
-            "target_add_large_happy": 1,
-            "add_small_performance_experience": 1,
-            "add_small_favorability": 1,
-            "target_add_small_favorability": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "036dccd4-2711-4db6-8843-31950b0e5e4a": {
-        "uid": "036dccd4-2711-4db6-8843-31950b0e5e4a",
-        "adv_id": "",
-        "status_id": "7",
-        "start": false,
-        "text": "「最后一个音符要飘到月亮上啦～」\\n{Name}突然踮脚将粉笔抛向空中，在黑板画出歪歪扭扭的星月轨迹\\n{TargetName}扑哧笑出声的瞬间，{Name}转身接住落下的粉笔行了个夸张的谢幕礼",
-        "premise": {
-            "in_classroom": 1,
-            "eloquence_skills_interest_is_height": 1,
-            "target_is_humor_man": 1,
-            "singing_skills_is_height": 1,
-            "not_in_class_time": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_medium_happy": 1,
-            "target_add_large_happy": 1,
-            "add_small_singing_experience": 1,
-            "add_small_favorability": 1,
-            "target_add_small_favorability": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "b8514e2b-7a02-4a35-965d-828e64ef44fd": {
-        "uid": "b8514e2b-7a02-4a35-965d-828e64ef44fd",
-        "adv_id": "",
-        "status_id": "8",
-        "start": true,
-        "text": "「这样...很痒啦」\\n{TargetName}耳尖泛红地缩了缩脖子，却将发顶轻轻抵在{Name}掌心\\n细软发丝从指缝间漏下，{Name}忍不住用指尖绕着{TargetName}翘起的发旋打转",
-        "premise": {
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "a7d7634c-32ea-4be1-aff7-2f6f07c18aaa": {
-        "uid": "a7d7634c-32ea-4be1-aff7-2f6f07c18aaa",
-        "adv_id": "",
-        "status_id": "8",
-        "start": true,
-        "text": "{Name}的指尖轻轻擦过{TargetName}的发梢，像触碰初春的新雪般小心翼翼\\n「头发...很柔软呢」\\n{TargetName}微微低头，将发顶主动贴向{Name}温热的掌心",
-        "premise": {
-            "target_is_tolerant": 1,
-            "target_is_beyond_friendship": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "235bdd26-bc7d-42aa-af8d-a41636a0a3fe": {
-        "uid": "235bdd26-bc7d-42aa-af8d-a41636a0a3fe",
-        "adv_id": "",
-        "status_id": "8",
-        "start": true,
-        "text": "「头发翘起来也很可爱呢～」\\n{Name}指尖轻轻梳理着{TargetName}的发梢，将一缕不听话的头发别到耳后\\n掌心若有若无擦过泛红的耳尖，{TargetName}的睫毛像受惊的蝴蝶般轻颤",
-        "premise": {
-            "is_student": 1,
-            "target_no_player": 1,
-            "target_is_beyond_friendship": 1,
-            "target_height_low": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "ee50a5fa-75c0-4cb3-ab5d-504fb51d8862": {
-        "uid": "ee50a5fa-75c0-4cb3-ab5d-504fb51d8862",
-        "adv_id": "",
-        "status_id": "8",
-        "start": true,
-        "text": "「发丝沾着月光的样子...很漂亮呢」\\n{Name}的指尖轻柔穿过{TargetName}的刘海，指节若有似无地蹭过发烫的耳廓\\n{TargetName}微微仰起脸，将额头主动贴上温热的掌心，月光在交错的睫毛间碎成星屑",
-        "premise": {
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "no_have_other_target_in_scene": 1,
-            "is_night": 1
-        },
-        "settle": {}
-    },
-    "c48b39b0-4409-474f-9b4c-7c57b2c58817": {
-        "uid": "c48b39b0-4409-474f-9b4c-7c57b2c58817",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "月光从窗帘缝隙漏进来，在{Name}轻颤的睫毛上碎成星屑\\n「唔...」\\n{Name}揉着眼睛撑起身，被褥从泛着薄红的肩头滑落\\n指尖无意识摩挲着枕边褶皱，那里还残留着梦中余温",
-        "premise": {
-            "scene_no_have_other_character": 1,
-            "in_sleep_time": 1
-        },
-        "settle": {
-            "add_large_hit_point": 1,
-            "add_large_mana_point": 1,
-            "sub_large_happy": 1,
-            "sub_large_pain": 1,
-            "sub_large_yearn": 1,
-            "sub_large_fear": 1,
-            "sub_large_antipathy": 1,
-            "sub_large_shame": 1,
-            "sub_large_depressed": 1,
-            "sub_large_arrogant": 1,
-            "sub_large_envy": 1,
-            "sub_large_rage": 1,
-            "sub_large_lazy": 1,
-            "sub_large_greedy": 1,
-            "sub_large_gluttony": 1,
-            "sub_large_lust": 1,
-            "sub_large_mouth_happy": 1,
-            "sub_large_chest_happy": 1,
-            "sub_large_vagina_happy": 1,
-            "sub_large_clitoris_happy": 1,
-            "sub_large_anus_happy": 1,
-            "sub_large_penis_happy": 1,
-            "sub_large_tired": 1
-        }
-    },
-    "65eea569-4e8d-47ca-ad16-adfa414b6c29": {
-        "uid": "65eea569-4e8d-47ca-ad16-adfa414b6c29",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "晨光穿过窗帘缝隙爬上{Name}的眼睑，清脆鸟鸣中{Name}揉着眼睛坐起身\\n被褥滑落露出泛着暖意的肌肤，{Name}对着空气露出满足的微笑",
-        "premise": {
-            "is_sunny": 1,
-            "is_night": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_large_hit_point": 1,
-            "add_large_mana_point": 1,
-            "sub_large_happy": 1,
-            "sub_large_pain": 1,
-            "sub_large_yearn": 1,
-            "sub_large_fear": 1,
-            "sub_large_antipathy": 1,
-            "sub_large_shame": 1,
-            "sub_large_depressed": 1,
-            "sub_large_arrogant": 1,
-            "sub_large_envy": 1,
-            "sub_large_rage": 1,
-            "sub_large_lazy": 1,
-            "sub_large_greedy": 1,
-            "sub_large_gluttony": 1,
-            "sub_large_lust": 1,
-            "sub_large_mouth_happy": 1,
-            "sub_large_chest_happy": 1,
-            "sub_large_vagina_happy": 1,
-            "sub_large_clitoris_happy": 1,
-            "sub_large_anus_happy": 1,
-            "sub_large_penis_happy": 1,
-            "sub_large_tired": 1
-        }
-    },
-    "5bc497f2-fe45-489f-91ec-7c4d0621436a": {
-        "uid": "5bc497f2-fe45-489f-91ec-7c4d0621436a",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "「唔…早上了吗…」\\n朦胧间{Name}感觉被角被轻轻掖紧\\n睁开眼时只看到{TargetName}匆匆离去的背影\\n晨光透过窗帘缝隙落在尚存余温的被角上",
-        "premise": {
-            "have_other_target_in_scene": 1,
-            "target_no_player": 1,
-            "target_is_beyond_friendship": 1,
-            "in_breakfast_time": 1
-        },
-        "settle": {
-            "add_large_hit_point": 1,
-            "add_large_mana_point": 1,
-            "sub_large_happy": 1,
-            "sub_large_pain": 1,
-            "sub_large_yearn": 1,
-            "sub_large_fear": 1,
-            "sub_large_antipathy": 1,
-            "sub_large_shame": 1,
-            "sub_large_depressed": 1,
-            "sub_large_arrogant": 1,
-            "sub_large_envy": 1,
-            "sub_large_rage": 1,
-            "sub_large_lazy": 1,
-            "sub_large_greedy": 1,
-            "sub_large_gluttony": 1,
-            "sub_large_lust": 1,
-            "sub_large_mouth_happy": 1,
-            "sub_large_chest_happy": 1,
-            "sub_large_vagina_happy": 1,
-            "sub_large_clitoris_happy": 1,
-            "sub_large_anus_happy": 1,
-            "sub_large_penis_happy": 1,
-            "sub_large_tired": 1
-        }
-    },
-    "4159475f-39e3-4a76-97a8-fc634169dfb2": {
-        "uid": "4159475f-39e3-4a76-97a8-fc634169dfb2",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "晨光穿过窗户，在{Name}眼皮上跳着细碎的金色舞步\\n清脆鸟鸣声中，{Name}揉着惺忪睡眼撑起身子，被单从肩头滑落时带起一阵混合着阳光味道的暖风",
-        "premise": {
-            "is_sunny": 1,
-            "is_student": 1,
-            "in_breakfast_time": 1
-        },
-        "settle": {
-            "add_large_hit_point": 1,
-            "add_large_mana_point": 1,
-            "sub_large_happy": 1,
-            "sub_large_pain": 1,
-            "sub_large_yearn": 1,
-            "sub_large_fear": 1,
-            "sub_large_antipathy": 1,
-            "sub_large_shame": 1,
-            "sub_large_depressed": 1,
-            "sub_large_arrogant": 1,
-            "sub_large_envy": 1,
-            "sub_large_rage": 1,
-            "sub_large_lazy": 1,
-            "sub_large_greedy": 1,
-            "sub_large_gluttony": 1,
-            "sub_large_lust": 1,
-            "sub_large_mouth_happy": 1,
-            "sub_large_chest_happy": 1,
-            "sub_large_vagina_happy": 1,
-            "sub_large_clitoris_happy": 1,
-            "sub_large_anus_happy": 1,
-            "sub_large_penis_happy": 1,
-            "sub_large_tired": 1
-        }
-    },
-    "1a3038d6-58aa-4bd8-82d7-ade337ba6ec4": {
-        "uid": "1a3038d6-58aa-4bd8-82d7-ade337ba6ec4",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "晨曦透过窗帘缝隙落在{Name}的眼睑上\\n「再不起床要迟到了哦～」\\n{TargetName}掀起被角轻笑，指尖有意无意扫过{Name}裸露的腰线\\n凉意激得{Name}猛然坐起，撞进{TargetName}盈满恶作剧笑意的眼眸",
-        "premise": {
-            "scene_have_other_character": 1,
-            "in_breakfast_time": 1
-        },
-        "settle": {
-            "add_large_hit_point": 1,
-            "add_large_mana_point": 1,
-            "sub_large_happy": 1,
-            "sub_large_pain": 1,
-            "sub_large_yearn": 1,
-            "sub_large_fear": 1,
-            "sub_large_antipathy": 1,
-            "sub_large_shame": 1,
-            "sub_large_depressed": 1,
-            "sub_large_arrogant": 1,
-            "sub_large_envy": 1,
-            "sub_large_rage": 1,
-            "sub_large_lazy": 1,
-            "sub_large_greedy": 1,
-            "sub_large_gluttony": 1,
-            "sub_large_lust": 1,
-            "sub_large_mouth_happy": 1,
-            "sub_large_chest_happy": 1,
-            "sub_large_vagina_happy": 1,
-            "sub_large_clitoris_happy": 1,
-            "sub_large_anus_happy": 1,
-            "sub_large_penis_happy": 1,
-            "sub_large_tired": 1,
-            "target_add_small_favorability": 1
-        }
-    },
-    "ba1c4690-1de2-4b82-9c18-97cbd75585a3": {
-        "uid": "ba1c4690-1de2-4b82-9c18-97cbd75585a3",
-        "adv_id": "",
-        "status_id": "10",
-        "start": true,
-        "text": "{Name}张了张口，指尖无意识攥住裙摆。月光在{TargetName}的睫毛上凝成细碎银屑，夜风卷起喷泉的水汽沾湿彼此衣袖\\n「那个…」\\n{Name}突然闭眼扑进{TargetName}怀里，鼻尖撞上衬衫第二颗纽扣，薄荷香混着剧烈心跳声在相贴的胸膛间轰鸣",
-        "premise": {
-            "is_student": 1,
-            "target_different_sex": 1,
-            "target_is_beyond_friendship": 1,
-            "is_futa_or_woman": 1,
-            "in_fountain": 1,
-            "is_night": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "93a17d6e-48fc-4d04-b69a-c4cb67f1b22f": {
-        "uid": "93a17d6e-48fc-4d04-b69a-c4cb67f1b22f",
-        "adv_id": "",
-        "status_id": "10",
-        "start": true,
-        "text": "月光如薄纱般笼罩着空无一人的天台，{Name}的指尖轻轻擦过{TargetName}微颤的手背\\n「那个...」\\n话音未落，{Name}突然张开双臂将{TargetName}紧紧圈进怀里\\n猝不及防跌入温热的怀抱，{TargetName}耳尖瞬间通红\\n「我…我很担心你……」\\n{Name}低声说着，将脸埋进{TargetName}散发着淡淡皂香的颈窝\\n交错的呼吸声在寂静中格外清晰，连心跳都成了合鸣",
-        "premise": {
-            "is_night": 1,
-            "no_have_other_target_in_scene": 1,
-            "target_is_beyond_friendship": 1,
-            "target_is_heavy_feeling": 1,
-            "target_is_inferiority": 1,
-            "target_is_tolerant": 1,
-            "is_beyond_friendship_target": 1,
-            "in_rooftop_scene": 1
-        },
-        "settle": {}
-    },
-    "0d3b04d5-72db-46dc-8f80-45f871fa3c79": {
-        "uid": "0d3b04d5-72db-46dc-8f80-45f871fa3c79",
-        "adv_id": "",
-        "status_id": "14",
-        "start": true,
-        "text": "{Name}的指尖悬停在{TargetName}发梢半寸处，暮色漫进琴房将蜷曲的碎发镀成淡金\\n{TargetName}睫毛在乐谱投下的阴影中轻颤",
-        "premise": {
-            "in_music_classroom": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "09bc1fb8-d961-476d-a769-95ebd398fd99": {
-        "uid": "09bc1fb8-d961-476d-a769-95ebd398fd99",
-        "adv_id": "",
-        "status_id": "10",
-        "start": true,
-        "text": "{Name}的指尖悬在{TargetName}肩头一寸处，暮色漫过琴谱架将颤抖的投影拖得老长\\n风掀动窗帘时漏进的光斑，在{TargetName}后颈凝成跳动的琥珀",
-        "premise": {
-            "no_have_other_target_in_scene": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "is_night": 1,
-            "in_music_classroom": 1
-        },
-        "settle": {}
-    },
-    "22ba5be5-e369-4de5-a7cd-a697f12e949f": {
-        "uid": "22ba5be5-e369-4de5-a7cd-a697f12e949f",
-        "adv_id": "",
-        "status_id": "10",
-        "start": true,
-        "text": "暮色将{TargetName}的轮廓染成琥珀色，{Name}的指尖在对方衣摆处徘徊片刻，突然伸手将人拢进怀中\\n散落的课本在课桌上发出轻微磕碰声，{TargetName}的耳尖透过发丝渗出血色",
-        "premise": {
-            "no_have_other_target_in_scene": 1,
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "in_dinner_time": 1
-        },
-        "settle": {}
-    },
-    "77dd6b7c-2e23-40a7-9fc6-930c0686d972": {
-        "uid": "77dd6b7c-2e23-40a7-9fc6-930c0686d972",
-        "adv_id": "",
-        "status_id": "10",
-        "start": true,
-        "text": "{Name}的指尖在暮色中微微颤动，隔着三寸空气描摹{TargetName}肩颈的弧度\\n练习簿从琴凳滑落，纸页间漏出半个未写完的和弦符号",
-        "premise": {
-            "no_have_other_target_in_scene": 1,
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "is_night": 1,
-            "in_music_classroom": 1
-        },
-        "settle": {}
-    },
-    "ec1da9da-a623-40c4-acd6-33d38308e546": {
-        "uid": "ec1da9da-a623-40c4-acd6-33d38308e546",
-        "adv_id": "",
-        "status_id": "11",
-        "start": false,
-        "text": "月光在{TargetName}湿润的唇瓣上碎成星屑\\n{Name}的呼吸与夜风缠绕，指尖无意识摩挲着对方发烫的耳垂",
-        "premise": {
-            "no_have_other_target_in_scene": 1,
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "is_night": 1
-        },
-        "settle": {
-            "add_medium_lust": 1,
-            "target_add_large_shame": 1,
-            "add_small_mouth_happy": 1,
-            "target_add_small_mouth_happy": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "1b4c375a-77fc-4a41-8efc-9fe98f2aca6d": {
-        "uid": "1b4c375a-77fc-4a41-8efc-9fe98f2aca6d",
-        "adv_id": "",
-        "status_id": "12",
-        "start": true,
-        "text": "星光在{TargetName}微蜷的指尖凝成碎银，{Name}的呼吸与夜风缠绕\\n「那个...」\\n衣袖相触的瞬间，{Name}的小指轻轻勾住{TargetName}的尾指，掌心温度透过相贴的肌肤渗入脉搏",
-        "premise": {
-            "target_is_adore": 1,
-            "is_beyond_friendship_target": 1,
-            "in_rooftop_scene": 1,
-            "is_night": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "97b28b0f-6ad7-4122-9ebd-a25b5b0cca82": {
-        "uid": "97b28b0f-6ad7-4122-9ebd-a25b5b0cca82",
-        "adv_id": "",
-        "status_id": "12",
-        "start": true,
-        "text": "{Name}的指尖刚触到{TargetName}的手背，{TargetName}突然将整条手臂缩进衣袖\\n「图书馆里…别这样」\\n揉皱的文库本从膝头滑落，{Name}盯着书页间漏出的半截缎带发怔",
-        "premise": {
-            "in_library": 1,
-            "is_futa": 1,
-            "antipathy_is_height": 1,
-            "target_is_woman": 1,
-            "no_have_other_target_in_scene": 1,
-            "target_shame_is_height": 1,
-            "is_beyond_friendship_target": 1
-        },
-        "settle": {}
-    },
-    "2ba45f0e-4e17-4c09-a22d-7c907fac5e8c": {
-        "uid": "2ba45f0e-4e17-4c09-a22d-7c907fac5e8c",
-        "adv_id": "",
-        "status_id": "12",
-        "start": true,
-        "text": "「那个...我帮你拿吧」\\n{Name}踮脚去够货架顶层的罐头时，指尖不经意擦过{TargetName}正要抬起的手背\\n冰凉的金属罐在推车碰撞声中传递，{TargetName}困倦的睫毛在超市冷光下轻颤，任由掌心的温度在购物车把手上停留了三秒",
-        "premise": {
-            "target_is_man": 1,
-            "is_woman": 1,
-            "in_item_shop": 1,
-            "target_is_beyond_friendship": 1,
-            "target_is_tired": 1,
-            "is_student": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "091645c0-b471-4559-8b99-7382224e38c3": {
-        "uid": "091645c0-b471-4559-8b99-7382224e38c3",
-        "adv_id": "",
-        "status_id": "14",
-        "start": true,
-        "text": "{Name}的指尖悬在{TargetName}肩头半寸处，粉笔灰从颤抖的指节簌簌落下\\n「这道题...」\\n话音未落，{TargetName}突然抱起课本退到过道，练习册摔在地上发出清脆声响\\n一双双眼睛从试卷堆里抬起，{Name}僵硬的指尖在黑板划出歪斜的抛物线",
-        "premise": {
-            "is_teacher": 1,
-            "target_is_student": 1,
-            "is_woman": 1,
-            "target_is_woman": 1,
-            "in_class_time": 1,
-            "in_classroom": 1,
-            "have_other_target_in_scene": 1,
-            "target_antipathy_is_height": 1,
-            "target_less_than_adore": 1,
-            "target_is_adore": 1,
-            "target_performance_skills_is_low": 1
-        },
-        "settle": {}
-    },
-    "211f8b87-bc9f-4e8a-93ca-f6e44481306b": {
-        "uid": "211f8b87-bc9f-4e8a-93ca-f6e44481306b",
-        "adv_id": "",
-        "status_id": "14",
-        "start": false,
-        "text": "「这样...很痒啦」\\n{TargetName}耳尖泛红地缩了缩脖子，却将发顶轻轻抵在{Name}掌心\\n细软发丝从指缝间漏下，{Name}忍不住用指尖绕着{TargetName}翘起的发旋打转",
-        "premise": {
-            "is_student": 1,
-            "target_is_student": 1,
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_medium_happy": 1,
-            "add_small_lust": 1,
-            "target_add_medium_shame": 1,
-            "target_add_small_lust": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "c775b4e7-65aa-4e63-8f38-2ef46e50c8a4": {
-        "uid": "c775b4e7-65aa-4e63-8f38-2ef46e50c8a4",
-        "adv_id": "",
-        "status_id": "14",
-        "start": false,
-        "text": "{Name}的指尖刚触到{TargetName}锁骨处的肌肤，教室后排突然传来一声冷笑\\n「真恶心」\\n讨厌的身影抱臂靠在窗边，{TargetName}慌乱地扯紧衣领退到课桌边缘\\n粉笔灰从指缝簌簌落下，在阳光里折射出细碎的光晕",
-        "premise": {
-            "have_dislike_target_in_scene": 1,
-            "beyond_friendship_target_in_scene": 1,
-            "have_other_target_in_scene": 1,
-            "have_singing_in_scene": 1,
-            "target_no_player": 1,
-            "target_same_sex": 1,
-            "target_is_woman": 1,
-            "target_shame_is_height": 1
-        },
-        "settle": {
-            "target_sub_medium_favorability": 1,
-            "target_add_medium_shame": 1,
-            "target_add_small_antipathy": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "932b92a4-ee5b-42bd-83af-00c0fd55ada2": {
-        "uid": "932b92a4-ee5b-42bd-83af-00c0fd55ada2",
-        "adv_id": "",
-        "status_id": "14",
-        "start": false,
-        "text": "「别动…」\\n{Name}的指尖沿着月光在{TargetName}腰际游走，冰凉的校服布料下渗出温热\\n{TargetName}忽然抓住不安分的手腕按在胸前，剧烈心跳透过两层衬衫布料震得{Name}指尖发麻\\n夜风掠过天台晾衣绳，带起一串金属挂钩的细碎叮铃声",
-        "premise": {
-            "no_have_other_target_in_scene": 1,
-            "target_is_woman": 1,
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "is_night": 1,
-            "in_rooftop_scene": 1
-        },
-        "settle": {
-            "target_add_medium_shame": 1,
-            "target_add_medium_lust": 1,
-            "target_add_medium_favorability": 1,
-            "sub_small_mana_point": 1
-        }
     },
     "eb88d516-367c-4168-af45-b8744b3e3566": {
         "uid": "eb88d516-367c-4168-af45-b8744b3e3566",
@@ -8289,53 +7626,490 @@
             "sub_small_mana_point": 1
         }
     },
-    "b0fb79a9-bf92-47a4-ab2c-8bec445a0e5e": {
-        "uid": "b0fb79a9-bf92-47a4-ab2c-8bec445a0e5e",
+    "767af3f9-7b22-412d-b595-813b60a4dd20": {
+        "uid": "767af3f9-7b22-412d-b595-813b60a4dd20",
         "adv_id": "",
         "status_id": "16",
         "start": true,
-        "text": "「第三单元细胞膜渗透实验需要重新校准浓度比...」\\n{Name}将教案在晨光中摊开，指节无意识地敲击着玻璃烧杯边缘\\n化学试剂在收纳盒里折射出七色光晕，备课笔记的折角被仔细抚平，钢笔水在草稿纸上洇开未写完的分子式",
+        "text": "{Name}用粉笔在黑板上快速勾勒出山峦起伏的轮廓，细碎粉尘簌簌落在讲台边缘\\n{TargetName}握着铅笔的手悬在速写本上方，目光随着老师手腕转动的节奏轻轻颤动\\n蝉鸣穿过褪色的蓝色窗帘，将粉笔与纸面摩擦的沙沙声衬得格外清晰",
         "premise": {
-            "ethic_is_height": 1,
-            "tonight_is_nemachi_tsuki_moon": 1,
-            "pharmacy_skills_is_height": 1
+            "art_is_height": 1
         },
         "settle": {}
     },
-    "b9f15e82-4eec-4a6d-aabb-0dba8d2c68e6": {
-        "uid": "b9f15e82-4eec-4a6d-aabb-0dba8d2c68e6",
+    "23d9a822-5afb-4258-9f9c-131fa9e71856": {
+        "uid": "23d9a822-5afb-4258-9f9c-131fa9e71856",
         "adv_id": "",
-        "status_id": "16",
+        "status_id": "4",
         "start": false,
-        "text": "「今天的阿语发音练习就到这里」{Name}清了清沙哑的嗓子，粉笔灰从袖口簌簌落下{TargetName}突然举起作业本站起来，用带着异国腔调的普通话问：「老师能教我用阿拉伯语写'仙人掌'吗？」\\n窗外的蝉鸣声中，{Name}捏着半包没吃完的辣条怔住两秒，突然用板书笔在黑板画出个滑稽的带刺团子：「这是老师唯一会画的沙漠植物——」\\n哄笑声里粉笔头精准砸中偷传零食的后排，{TargetName}憋着笑递来拧开的矿泉水瓶",
+        "text": "「沾到脸上了」\\n{TargetName}突然伸手抹去{Name}嘴角的残渣",
         "premise": {
-            "scene_have_other_character": 1,
-            "target_is_enthusiasm": 1,
-            "arabic_skills_is_height": 1,
-            "target_arabic_skills_interest_is_height": 1
+            "is_student": 1,
+            "target_is_student": 1,
+            "in_restaurant": 1,
+            "target_no_first_hand_in_hand": 1,
+            "have_like_target_in_scene": 1
         },
         "settle": {
-            "target_add_medium_favorability": 1,
-            "add_students_course_experience_for_in_classroom": 1,
+            "target_add_small_favorability": 1,
+            "add_small_happy": 1,
+            "target_sub_small_shame": 1,
+            "eat_food": 1
+        }
+    },
+    "27d4b2c0-01b7-4c05-9a6f-37539da60c55": {
+        "uid": "27d4b2c0-01b7-4c05-9a6f-37539da60c55",
+        "adv_id": "",
+        "status_id": "4",
+        "start": false,
+        "text": "「难听死了」\\n{Name}将空饭盒重重扣在课桌上\\n油渍溅到了{TargetName}身上",
+        "premise": {
+            "target_is_sing": 1,
+            "hatred_target": 1,
+            "no_have_other_target_in_scene": 1
+        },
+        "settle": {
+            "eat_food": 1,
+            "target_sub_medium_happy": 1,
+            "target_add_medium_antipathy": 1,
+            "add_medium_happy": 1
+        }
+    },
+    "1becc11f-a781-470c-9202-df1f6d12b997": {
+        "uid": "1becc11f-a781-470c-9202-df1f6d12b997",
+        "adv_id": "",
+        "status_id": "5",
+        "start": false,
+        "text": "{Name}突然挤眉弄眼学起老师扶眼镜的动作\\n{TargetName}噗嗤笑出了声",
+        "premise": {
+            "target_not_stranger": 1,
+            "is_humor_man": 1,
+            "is_student": 1,
+            "target_is_student": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "target_add_small_happy": 1,
             "add_small_eloquence_experience": 1,
+            "add_small_performance_experience": 1
+        }
+    },
+    "d8d63ed6-e4a9-4f34-9ce2-a68aacac0bf0": {
+        "uid": "d8d63ed6-e4a9-4f34-9ce2-a68aacac0bf0",
+        "adv_id": "",
+        "status_id": "5",
+        "start": false,
+        "text": "「这道题好难……」\\n{TargetName}红着脸摆弄衣角",
+        "premise": {
+            "is_student": 1,
+            "target_is_student": 1,
+            "in_classroom": 1,
+            "is_beyond_friendship_target": 1,
+            "no_have_other_target_in_scene": 1
+        },
+        "settle": {
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
             "sub_small_mana_point": 1
         }
     },
-    "7c0322ce-83df-4ba6-8496-2dffebe077f6": {
-        "uid": "7c0322ce-83df-4ba6-8496-2dffebe077f6",
+    "25c7dd50-2587-46b4-9f8e-1700240508a1": {
+        "uid": "25c7dd50-2587-46b4-9f8e-1700240508a1",
         "adv_id": "",
-        "status_id": "16",
+        "status_id": "7",
         "start": false,
-        "text": "「这道题的解法就像粉笔灰落在睫毛上——」\\n{Name}突然用板擦轻敲讲台，簌簌落下的粉尘恰好飘向{TargetName}的鼻尖\\n「阿嚏！」\\n{TargetName}猛然惊醒时，{Name}的三角板正指着黑板上的抛物线：「看，喷嚏的轨迹刚好符合斜抛运动公式」\\n后排传来压低的笑声，{TargetName}揉着泛红的眼睛抓起钢笔",
+        "text": "「跑调了...」\\n{Name}的声音随着电扇嗡鸣渐渐低了下去",
         "premise": {
-            "physics_skills_interest_is_height": 1,
-            "have_other_target_in_scene": 1
+            "is_student": 1,
+            "is_sunny": 1,
+            "in_classroom": 1,
+            "scene_have_other_character": 1,
+            "is_summer": 1
         },
         "settle": {
-            "target_sub_small_ache": 1,
-            "target_sub_small_tired": 1,
-            "add_students_course_experience_for_in_classroom": 1,
+            "add_small_shame": 1,
+            "sub_small_happy": 1,
+            "add_small_singing_experience": 1,
             "sub_small_mana_point": 1
         }
+    },
+    "f95dc306-541e-43f0-b7d9-11b1c27971d8": {
+        "uid": "f95dc306-541e-43f0-b7d9-11b1c27971d8",
+        "adv_id": "",
+        "status_id": "8",
+        "start": true,
+        "text": "「别动…」\\n{Name}的指尖掠过{TargetName}翘起的发梢",
+        "premise": {
+            "is_student": 1,
+            "target_is_student": 1,
+            "no_have_other_target_in_scene": 1,
+            "target_not_stranger": 1,
+            "target_less_than_adore": 1
+        },
+        "settle": {}
+    },
+    "1a0e8655-745c-4b00-9ad9-ee1d315a6745": {
+        "uid": "1a0e8655-745c-4b00-9ad9-ee1d315a6745",
+        "adv_id": "",
+        "status_id": "8",
+        "start": true,
+        "text": "{Name}踮脚去摸{TargetName}被风吹乱的头发",
+        "premise": {
+            "in_square": 1,
+            "target_is_height": 1
+        },
+        "settle": {}
+    },
+    "c8314d22-afca-4bab-a4b5-c2975e702cab": {
+        "uid": "c8314d22-afca-4bab-a4b5-c2975e702cab",
+        "adv_id": "",
+        "status_id": "8",
+        "start": true,
+        "text": "「别碰」\\n{TargetName}偏头避开{Name}的手",
+        "premise": {
+            "target_is_apathy": 1,
+            "target_not_stranger": 1
+        },
+        "settle": {}
+    },
+    "a174b152-7fad-4a6c-9d2f-210cd9bca834": {
+        "uid": "a174b152-7fad-4a6c-9d2f-210cd9bca834",
+        "adv_id": "",
+        "status_id": "8",
+        "start": true,
+        "text": "{TargetName}仰起脸看着{Name}的手",
+        "premise": {
+            "target_is_heavy_feeling": 1,
+            "target_is_adore": 1,
+            "target_adore": 1,
+            "target_is_self_confidence": 1
+        },
+        "settle": {}
+    },
+    "1b7d1416-741c-4da9-8a2c-83bcbf4a83bf": {
+        "uid": "1b7d1416-741c-4da9-8a2c-83bcbf4a83bf",
+        "adv_id": "",
+        "status_id": "9",
+        "start": 0,
+        "text": "{Name}揉着眼坐起身",
+        "premise": {},
+        "settle": {
+            "add_large_hit_point": 1,
+            "add_large_mana_point": 1,
+            "sub_large_happy": 1,
+            "sub_large_pain": 1,
+            "sub_large_yearn": 1,
+            "sub_large_fear": 1,
+            "sub_large_antipathy": 1,
+            "sub_large_shame": 1,
+            "sub_large_depressed": 1,
+            "sub_large_arrogant": 1,
+            "sub_large_envy": 1,
+            "sub_large_rage": 1,
+            "sub_large_lazy": 1,
+            "sub_large_greedy": 1,
+            "sub_large_gluttony": 1,
+            "sub_large_lust": 1,
+            "sub_large_mouth_happy": 1,
+            "sub_large_chest_happy": 1,
+            "sub_large_vagina_happy": 1,
+            "sub_large_clitoris_happy": 1,
+            "sub_large_anus_happy": 1,
+            "sub_large_penis_happy": 1,
+            "sub_large_tired": 1
+        }
+    },
+    "eec43a67-d5cd-425c-9b5e-89ce9bb55ade": {
+        "uid": "eec43a67-d5cd-425c-9b5e-89ce9bb55ade",
+        "adv_id": "",
+        "status_id": "9",
+        "start": 0,
+        "text": "{Name}从睡梦中猛然坐起",
+        "premise": {},
+        "settle": {
+            "add_large_hit_point": 1,
+            "add_large_mana_point": 1,
+            "sub_large_happy": 1,
+            "sub_large_pain": 1,
+            "sub_large_yearn": 1,
+            "sub_large_antipathy": 1,
+            "sub_large_shame": 1,
+            "sub_large_depressed": 1,
+            "sub_large_arrogant": 1,
+            "sub_large_envy": 1,
+            "sub_large_rage": 1,
+            "sub_large_lazy": 1,
+            "sub_large_greedy": 1,
+            "sub_large_gluttony": 1,
+            "sub_large_lust": 1,
+            "sub_large_mouth_happy": 1,
+            "sub_large_chest_happy": 1,
+            "sub_large_vagina_happy": 1,
+            "sub_large_clitoris_happy": 1,
+            "sub_large_anus_happy": 1,
+            "sub_large_penis_happy": 1,
+            "sub_large_tired": 1,
+            "add_medium_fear": 1
+        }
+    },
+    "214e6e4a-057d-4852-976e-bcfc85e43696": {
+        "uid": "214e6e4a-057d-4852-976e-bcfc85e43696",
+        "adv_id": "",
+        "status_id": "9",
+        "start": 0,
+        "text": "{Name}被翻书声吵醒了",
+        "premise": {
+            "is_student": 1,
+            "scene_have_other_character": 1
+        },
+        "settle": {
+            "add_large_hit_point": 1,
+            "add_large_mana_point": 1,
+            "sub_large_happy": 1,
+            "sub_large_pain": 1,
+            "sub_large_yearn": 1,
+            "sub_large_fear": 1,
+            "sub_large_antipathy": 1,
+            "sub_large_shame": 1,
+            "sub_large_depressed": 1,
+            "sub_large_arrogant": 1,
+            "sub_large_envy": 1,
+            "sub_large_rage": 1,
+            "sub_large_lazy": 1,
+            "sub_large_greedy": 1,
+            "sub_large_gluttony": 1,
+            "sub_large_lust": 1,
+            "sub_large_mouth_happy": 1,
+            "sub_large_chest_happy": 1,
+            "sub_large_vagina_happy": 1,
+            "sub_large_clitoris_happy": 1,
+            "sub_large_anus_happy": 1,
+            "sub_large_penis_happy": 1,
+            "sub_large_tired": 1
+        }
+    },
+    "687487bb-85ad-44c3-a8ac-61295f2ce91c": {
+        "uid": "687487bb-85ad-44c3-a8ac-61295f2ce91c",
+        "adv_id": "",
+        "status_id": "9",
+        "start": 0,
+        "text": "{Name}眯眼望着空荡的宿舍",
+        "premise": {
+            "scene_no_have_other_character": 1
+        },
+        "settle": {
+            "add_large_hit_point": 1,
+            "add_large_mana_point": 1,
+            "sub_large_happy": 1,
+            "sub_large_pain": 1,
+            "sub_large_yearn": 1,
+            "sub_large_fear": 1,
+            "sub_large_antipathy": 1,
+            "sub_large_shame": 1,
+            "sub_large_depressed": 1,
+            "sub_large_arrogant": 1,
+            "sub_large_envy": 1,
+            "sub_large_rage": 1,
+            "sub_large_lazy": 1,
+            "sub_large_greedy": 1,
+            "sub_large_gluttony": 1,
+            "sub_large_lust": 1,
+            "sub_large_mouth_happy": 1,
+            "sub_large_chest_happy": 1,
+            "sub_large_vagina_happy": 1,
+            "sub_large_clitoris_happy": 1,
+            "sub_large_anus_happy": 1,
+            "sub_large_penis_happy": 1,
+            "sub_large_tired": 1
+        }
+    },
+    "7c36470c-11a2-4364-bf84-b3bb01876fb5": {
+        "uid": "7c36470c-11a2-4364-bf84-b3bb01876fb5",
+        "adv_id": "",
+        "status_id": "9",
+        "start": true,
+        "text": "「唔…」\\n{Name}翻身时被角被轻轻压紧",
+        "premise": {
+            "target_adore": 1,
+            "target_is_adore": 1
+        },
+        "settle": {}
+    },
+    "65d23f1f-a787-429e-a26f-bbed9b337d21": {
+        "uid": "65d23f1f-a787-429e-a26f-bbed9b337d21",
+        "adv_id": "",
+        "status_id": "9",
+        "start": 0,
+        "text": "歌声将{Name}吵醒了",
+        "premise": {
+            "have_singing_in_scene": 1
+        },
+        "settle": {
+            "add_large_hit_point": 1,
+            "add_large_mana_point": 1,
+            "sub_large_happy": 1,
+            "sub_large_pain": 1,
+            "sub_large_yearn": 1,
+            "sub_large_fear": 1,
+            "sub_large_shame": 1,
+            "sub_large_depressed": 1,
+            "sub_large_arrogant": 1,
+            "sub_large_envy": 1,
+            "sub_large_rage": 1,
+            "sub_large_lazy": 1,
+            "sub_large_greedy": 1,
+            "sub_large_gluttony": 1,
+            "sub_large_lust": 1,
+            "sub_large_mouth_happy": 1,
+            "sub_large_chest_happy": 1,
+            "sub_large_vagina_happy": 1,
+            "sub_large_clitoris_happy": 1,
+            "sub_large_anus_happy": 1,
+            "sub_large_penis_happy": 1,
+            "sub_large_tired": 1,
+            "add_small_antipathy": 1
+        }
+    },
+    "2fa346cc-a832-4c01-b4a1-fb63de607943": {
+        "uid": "2fa346cc-a832-4c01-b4a1-fb63de607943",
+        "adv_id": "",
+        "status_id": "10",
+        "start": true,
+        "text": "{Name}擦过{TargetName}手背\\n{Name}突然转身环住了{TargetName}",
+        "premise": {
+            "is_student": 1,
+            "target_is_student": 1,
+            "target_different_sex": 1,
+            "have_other_target_in_scene": 1,
+            "is_beyond_friendship_target": 1,
+            "target_is_beyond_friendship": 1
+        },
+        "settle": {}
+    },
+    "c1e702ad-f931-4bd7-940c-2fe478360931": {
+        "uid": "c1e702ad-f931-4bd7-940c-2fe478360931",
+        "adv_id": "",
+        "status_id": "10",
+        "start": true,
+        "text": "{TargetName}耳尖泛红地看着{Name}",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "target_is_beyond_friendship": 1
+        },
+        "settle": {}
+    },
+    "0d5a06c9-850d-43db-85bd-b7a60857a958": {
+        "uid": "0d5a06c9-850d-43db-85bd-b7a60857a958",
+        "adv_id": "",
+        "status_id": "10",
+        "start": true,
+        "text": "{Name}轻轻揽住{TargetName}微颤的肩",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "target_is_beyond_friendship": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {}
+    },
+    "b7c5580d-6530-4a16-a4e0-949fff5db492": {
+        "uid": "b7c5580d-6530-4a16-a4e0-949fff5db492",
+        "adv_id": "",
+        "status_id": "10",
+        "start": true,
+        "text": "{Name}突然张开双臂圈住{TargetName}",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "target_is_beyond_friendship": 1
+        },
+        "settle": {}
+    },
+    "45c5e01f-763e-438b-9ad1-253f8f2d5e68": {
+        "uid": "45c5e01f-763e-438b-9ad1-253f8f2d5e68",
+        "adv_id": "",
+        "status_id": "10",
+        "start": true,
+        "text": " {TargetName}栽进了{Name}的怀里",
+        "premise": {
+            "target_adore": 1
+        },
+        "settle": {}
+    },
+    "2b0ab002-835b-47d4-9c7d-8e721d00bb4c": {
+        "uid": "2b0ab002-835b-47d4-9c7d-8e721d00bb4c",
+        "adv_id": "",
+        "status_id": "11",
+        "start": false,
+        "text": "{Name}的唇在{TargetName}颊边一触即离",
+        "premise": {
+            "is_autonomy": 1,
+            "target_admire": 1,
+            "target_is_beyond_friendship": 1,
+            "no_have_other_target_in_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_shame": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1
+        }
+    },
+    "18732c70-7f3e-4777-8366-765ebe7da983": {
+        "uid": "18732c70-7f3e-4777-8366-765ebe7da983",
+        "adv_id": "",
+        "status_id": "12",
+        "start": true,
+        "text": "{Name}的掌心突然贴上{TargetName}微颤的手背",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "target_shame_is_height": 1,
+            "target_is_inferiority": 1
+        },
+        "settle": {}
+    },
+    "cadcb05d-2929-484c-a808-c9d51e793a10": {
+        "uid": "cadcb05d-2929-484c-a808-c9d51e793a10",
+        "adv_id": "",
+        "status_id": "12",
+        "start": true,
+        "text": "{TargetName}冷冷的盯着{Name}伸出的手",
+        "premise": {
+            "target_is_apathy": 1,
+            "target_is_autonomy": 1,
+            "target_is_resolution": 1,
+            "no_beyond_friendship_target": 1
+        },
+        "settle": {}
+    },
+    "ff055829-2717-494b-988b-aae2e5b847bc": {
+        "uid": "ff055829-2717-494b-988b-aae2e5b847bc",
+        "adv_id": "",
+        "status_id": "12",
+        "start": true,
+        "text": "{TargetName}眨了眨眼，抖落睫毛上的雪花",
+        "premise": {
+            "is_heavy_snow": 1,
+            "out_door": 1
+        },
+        "settle": {}
+    },
+    "f508809a-4898-4e72-a523-ade074cb4007": {
+        "uid": "f508809a-4898-4e72-a523-ade074cb4007",
+        "adv_id": "",
+        "status_id": "14",
+        "start": true,
+        "text": "{Name}伸手揽住了{TargetName}的腰",
+        "premise": {},
+        "settle": {}
+    },
+    "a9755cd5-4e77-469b-a021-eea83a4648d5": {
+        "uid": "a9755cd5-4e77-469b-a021-eea83a4648d5",
+        "adv_id": "",
+        "status_id": "14",
+        "start": true,
+        "text": "「别碰我」\\n{TargetName}冷冷的盯着{Name}",
+        "premise": {
+            "target_detest": 1
+        },
+        "settle": {}
     }
 }

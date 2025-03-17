@@ -186,6 +186,10 @@ tonight_is_akatsuki_moon,时间状态类前提,今夜是晓月
 is_night,时间状态类前提,处于夜晚
 is_not_night,时间状态类前提,不处于夜晚
 is_club_activity_time,时间状态类前提,处于社团活动时间
+is_spring,时间状态类前提,现在是春天
+is_summer,时间状态类前提,现在是夏天
+is_fall,时间状态类前提,现在是秋天
+is_winter,时间状态类前提,现在是冬天
 is_cloudy,天气状态类前提,现在的天气是多云
 is_heavy_rain,天气状态类前提,现在的天气是暴雨
 is_rainy,天气状态类前提,现在是普通的雨天
