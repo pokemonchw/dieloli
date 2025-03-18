@@ -9164,5 +9164,308 @@
             "sub_small_happy": 1,
             "sub_small_mana_point": 1
         }
+    },
+    "94109a13-124e-4586-b1f7-77153f9c2146": {
+        "uid": "94109a13-124e-4586-b1f7-77153f9c2146",
+        "adv_id": "",
+        "status_id": "25",
+        "start": false,
+        "text": "{TargetName}背过身，肩膀微微发抖，沉默不语",
+        "premise": {
+            "target_less_than_adore": 1,
+            "scene_character_only_player_and_one": 1,
+            "is_student": 1,
+            "target_is_student": 1,
+            "in_door": 1,
+            "not_in_class_time": 1,
+            "is_beyond_friendship_target": 1,
+            "target_is_selfless": 1
+        },
+        "settle": {
+            "add_small_shame": 1,
+            "add_small_yearn": 1,
+            "sub_small_happy": 1,
+            "sub_small_mana_point": 1,
+            "target_add_medium_antipathy": 1,
+            "target_sub_medium_favorability": 1
+        }
+    },
+    "3379748c-7ec1-42d2-984f-4cb23f35e8f0": {
+        "uid": "3379748c-7ec1-42d2-984f-4cb23f35e8f0",
+        "adv_id": "",
+        "status_id": "25",
+        "start": 0,
+        "text": "{TargetName}低头攥紧衣角，雨声掩盖了沉默",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "target_less_than_adore": 1,
+            "target_is_live": 1,
+            "now_is_rainy": 1,
+            "target_wear_underwear": 1
+        },
+        "settle": {
+            "add_small_shame": 1,
+            "add_small_yearn": 1,
+            "add_small_lust": 1,
+            "target_add_small_antipathy": 1,
+            "target_add_small_shame": 1
+        }
+    },
+    "c0f01b90-0724-4681-9e77-158ab29d9c78": {
+        "uid": "c0f01b90-0724-4681-9e77-158ab29d9c78",
+        "adv_id": "",
+        "status_id": "25",
+        "start": 0,
+        "text": "{TargetName}侧身倚着墙，低头不语\\n{Name}停下脚步，空气中只剩沉默",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "target_less_than_adore": 1,
+            "target_is_live": 1
+        },
+        "settle": {
+            "add_small_shame": 1,
+            "add_small_yearn": 1,
+            "add_small_lust": 1,
+            "target_add_small_antipathy": 1,
+            "target_add_small_shame": 1
+        }
+    },
+    "3a95e2ec-bff8-4e19-90a9-af7ccbec6b41": {
+        "uid": "3a95e2ec-bff8-4e19-90a9-af7ccbec6b41",
+        "adv_id": "",
+        "status_id": "27",
+        "start": true,
+        "text": "{Name}靠着泳池边闭上了眼睛\\n微风拂过水面，{Name}呼吸渐渐平稳",
+        "premise": {
+            "in_swimming_pool": 1
+        },
+        "settle": {}
+    },
+    "b4d58a4c-e07f-4987-80c8-7eeeafdb5a25": {
+        "uid": "b4d58a4c-e07f-4987-80c8-7eeeafdb5a25",
+        "adv_id": "",
+        "status_id": "27",
+        "start": true,
+        "text": "{Name}倚着墙角，闭眼感受片刻温暖",
+        "premise": {
+            "in_door": 1
+        },
+        "settle": {}
+    },
+    "57664731-81dd-4d45-9adc-7e9c48ea8640": {
+        "uid": "57664731-81dd-4d45-9adc-7e9c48ea8640",
+        "adv_id": "",
+        "status_id": "27",
+        "start": 0,
+        "text": "{Name}揉了揉眼睛，靠在洗手间墙边醒来",
+        "premise": {
+            "in_toilet": 1
+        },
+        "settle": {
+            "add_small_mana_point": 1,
+            "sub_small_tired": 1,
+            "sub_small_intoxicated": 1,
+            "sub_small_pain": 1,
+            "sub_small_vertigo": 1,
+            "sub_small_ache": 1,
+            "sub_small_yearn": 1,
+            "sub_small_fear": 1,
+            "sub_small_antipathy": 1,
+            "sub_small_shame": 1,
+            "sub_small_depressed": 1,
+            "sub_small_arrogant": 1,
+            "sub_small_envy": 1,
+            "sub_small_rage": 1,
+            "add_small_lazy": 1,
+            "sub_small_greedy": 1,
+            "add_small_gluttony": 1,
+            "add_small_lust": 1,
+            "sub_small_happy": 1
+        }
+    },
+    "bb691e5d-8d95-4a6b-a74d-354d091efb83": {
+        "uid": "bb691e5d-8d95-4a6b-a74d-354d091efb83",
+        "adv_id": "",
+        "status_id": "27",
+        "start": 0,
+        "text": "{Name}睁开眼，窗外蝉鸣渐渐清晰",
+        "premise": {
+            "is_summer": 1,
+            "is_sunny": 1,
+            "is_not_night": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "add_small_mana_point": 1,
+            "sub_small_tired": 1,
+            "sub_small_intoxicated": 1,
+            "sub_small_pain": 1,
+            "sub_small_vertigo": 1,
+            "sub_small_ache": 1,
+            "sub_small_yearn": 1,
+            "sub_small_fear": 1,
+            "sub_small_antipathy": 1,
+            "sub_small_shame": 1,
+            "sub_small_depressed": 1,
+            "sub_small_arrogant": 1,
+            "sub_small_envy": 1,
+            "sub_small_rage": 1,
+            "add_small_lazy": 1,
+            "sub_small_greedy": 1,
+            "add_small_gluttony": 1,
+            "add_small_lust": 1
+        }
+    },
+    "4af33271-954f-44c8-ada5-16adbbcffadc": {
+        "uid": "4af33271-954f-44c8-ada5-16adbbcffadc",
+        "adv_id": "",
+        "status_id": "27",
+        "start": 0,
+        "text": "{Name}睁开眼，远处传来脚步声\\n{TargetName}停下步子，目光落在{Name}身上",
+        "premise": {
+            "have_target": 1
+        },
+        "settle": {
+            "add_small_mana_point": 1,
+            "sub_small_tired": 1,
+            "sub_small_intoxicated": 1,
+            "sub_small_pain": 1,
+            "sub_small_vertigo": 1,
+            "sub_small_ache": 1,
+            "sub_small_yearn": 1,
+            "sub_small_fear": 1,
+            "sub_small_antipathy": 1,
+            "sub_small_shame": 1,
+            "sub_small_depressed": 1,
+            "sub_small_arrogant": 1,
+            "sub_small_envy": 1,
+            "sub_small_rage": 1,
+            "add_small_lazy": 1,
+            "sub_small_greedy": 1,
+            "add_small_gluttony": 1,
+            "add_small_lust": 1
+        }
+    },
+    "963db98e-b0e5-4071-8c31-25991df55758": {
+        "uid": "963db98e-b0e5-4071-8c31-25991df55758",
+        "adv_id": "",
+        "status_id": "27",
+        "start": 0,
+        "text": "{Name}睁开眼看见{TargetName}站在远处，低头沉默不语",
+        "premise": {
+            "have_target": 1,
+            "is_beyond_friendship_target": 1,
+            "target_is_inferiority": 1
+        },
+        "settle": {
+            "add_small_mana_point": 1,
+            "sub_small_tired": 1,
+            "sub_small_intoxicated": 1,
+            "sub_small_pain": 1,
+            "sub_small_vertigo": 1,
+            "sub_small_ache": 1,
+            "sub_small_yearn": 1,
+            "sub_small_fear": 1,
+            "sub_small_antipathy": 1,
+            "sub_small_shame": 1,
+            "sub_small_depressed": 1,
+            "sub_small_arrogant": 1,
+            "sub_small_envy": 1,
+            "sub_small_rage": 1,
+            "add_small_lazy": 1,
+            "sub_small_greedy": 1,
+            "add_small_gluttony": 1,
+            "add_small_lust": 1,
+            "target_add_small_favorability": 1,
+            "add_small_favorability": 1
+        }
+    },
+    "240c0cbb-f6bc-497c-93b7-d5da8e324ed1": {
+        "uid": "240c0cbb-f6bc-497c-93b7-d5da8e324ed1",
+        "adv_id": "",
+        "status_id": "28",
+        "start": false,
+        "text": "{Name}停下了演讲，低头整理裙摆\\n{TargetName}眼神飘向远",
+        "premise": {
+            "is_woman": 1,
+            "wear_skirt": 1,
+            "eloquence_skills_is_low": 1,
+            "no_beyond_friendship_target": 1,
+            "in_door": 1,
+            "is_inferiority": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_antipathy": 1
+        }
+    },
+    "6d7345bd-e277-47e0-a5db-694fe3da3069": {
+        "uid": "6d7345bd-e277-47e0-a5db-694fe3da3069",
+        "adv_id": "",
+        "status_id": "28",
+        "start": false,
+        "text": "{Name}结束演讲，目光扫过教室\\n{TargetName}低头摆弄手指，嘴角微动",
+        "premise": {
+            "in_classroom": 1,
+            "target_arrogant_is_height": 1
+        },
+        "settle": {
+            "target_add_small_arrogant": 1,
+            "add_small_eloquence_experience": 1,
+            "sub_small_mana_point": 1
+        }
+    },
+    "dcc85992-f684-49f3-ae13-8827ef89c19b": {
+        "uid": "dcc85992-f684-49f3-ae13-8827ef89c19b",
+        "adv_id": "",
+        "status_id": "28",
+        "start": false,
+        "text": "{Name}擦了擦额头\\n{TargetName}皱眉转身，背对讲台",
+        "premise": {
+            "mp_is_low": 1,
+            "eloquence_skills_is_low": 1,
+            "no_beyond_friendship_target": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_arrogant": 1,
+            "target_add_small_antipathy": 1
+        }
+    },
+    "e4423582-cb6c-479c-8471-a14956c72d3d": {
+        "uid": "e4423582-cb6c-479c-8471-a14956c72d3d",
+        "adv_id": "",
+        "status_id": "28",
+        "start": 0,
+        "text": "{Name}揉着嗓子望向窗外",
+        "premise": {},
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_performance_experience": 1
+        }
+    },
+    "628f2e04-be5d-470a-b74a-fae8d8f40997": {
+        "uid": "628f2e04-be5d-470a-b74a-fae8d8f40997",
+        "adv_id": "",
+        "status_id": "29",
+        "start": true,
+        "text": "{Name}用手指在天上画线",
+        "premise": {},
+        "settle": {}
+    },
+    "6f7809b1-377a-4e07-832e-c14360d79cdc": {
+        "uid": "6f7809b1-377a-4e07-832e-c14360d79cdc",
+        "adv_id": "",
+        "status_id": "29",
+        "start": true,
+        "text": "{Name}仰头凝望夜空\\n微风吹过，{TargetName}悄悄靠近",
+        "premise": {
+            "is_night": 1,
+            "is_beyond_friendship_target": 1
+        },
+        "settle": {}
     }
 }
