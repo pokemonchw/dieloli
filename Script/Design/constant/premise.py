@@ -2182,6 +2182,8 @@ class Premise:
     """ 角色没有性经验 """
     RICH_EXPERIENCE_IN_SEX = "rich_experience_in_sex"
     """ 角色性经验丰富 """
+    TARGET_RICH_EXPERIENCE_IN_SEX = "rich_experience_in_sex"
+    """ 交互对象性经验丰富 """
     TARGET_NO_EXPERIENCE_IN_SEX = "target_no_experience_in_sex"
     """ 交互对象没有性经验 """
     NO_RICH_EXPERIENCE_IN_SEX = "no_rich_experience_in_sex"

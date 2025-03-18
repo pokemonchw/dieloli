@@ -980,6 +980,7 @@ no_experience_in_sex,角色性经验类前提,角色没有性经验
 is_target_first_kiss,角色性经验类前提,角色是交互对象的初吻对象
 sex_experience_is_hight,角色性经验类前提,角色性技熟练
 rich_experience_in_sex,角色性经验类前提,角色性经验丰富
+target_rich_experience_in_sex,角色性经验类前提,交互对象性经验丰富
 target_no_experience_in_sex,角色性经验类前提,交互对象没有性经验
 no_rich_experience_in_sex,角色性经验类前提,角色性经验不丰富
 target_no_first_kiss,角色性经验类前提,交互对象初吻还在
