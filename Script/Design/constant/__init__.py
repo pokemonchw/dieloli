@@ -5,8 +5,8 @@ from Script.Design.constant.adv_npc import AdvNpc
 from Script.Design.constant.behavior import Behavior
 from Script.Design.constant.behavior_effect import BehaviorEffect
 from Script.Design.constant.character_status import CharacterStatus
-from Script.Design.constant.instruct import Instruct, Debug
-from Script.Design.constant.instruct_type import InstructType, DebugInstructType
+from Script.Design.constant.instruct import Instruct
+from Script.Design.constant.instruct_type import InstructType
 from Script.Design.constant.panel import Panel
 from Script.Design.constant.premise import Premise
 from Script.Design.constant.state_machine import StateMachine
@@ -18,10 +18,6 @@ for k in Instruct.__dict__:
         setattr(Instruct, k, i)
         i += 1
 
-for k in Debug.__dict__:
-    if isinstance(Debug.__dict__[k], int):
-        setattr(Debug, k, i)
-        i += 1
 
 handle_premise_data: Dict[str, FunctionType] = {}
 """ 前提处理数据 """
@@ -35,14 +31,6 @@ instruct_premise_data: Dict[int, Set] = {}
 """ 指令显示的所需前提集合 """
 instruct_to_type_data: Dict[int, int] = {}
 """ 指令对应的指令类型数据 """
-handle_debug_data: Dict[str, FunctionType] = {}
-""" debug指令处理数据 """
-handle_debug_name_data: Dict[int, str] = {}
-""" debug指令对应文本 """
-debug_type_data: Dict[int, Set] = {}
-""" debug类型拥有的debug指令集合 """
-debug_premise_data: Dict[int, Set] = {}
-""" debug指令显示所需前提集合 """
 handle_state_machine_data: Dict[str, FunctionType] = {}
 """ 角色状态机函数 """
 family_region_list: Dict[int, str] = {}

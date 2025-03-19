@@ -221,13 +221,3 @@ def handle_observe_off():
     pass
 
 
-@handle_instruct.add_instruct(constant.Instruct.DEBUG_ON, constant.InstructType.SYSTEM, _("开启debug模式"), {constant.Premise.DEBUG_OFF})
-def handle_debug_on():
-    """处理开启debug模式指令"""
-    cache.debug = True
-
-
-@handle_instruct.add_instruct(constant.Instruct.DEBUG_OFF, constant.InstructType.SYSTEM, _("关闭debug模式"), {constant.Premise.DEBUG_ON})
-def handle_debug_off():
-    """处理关闭debug模式指令"""
-    cache.debug = False

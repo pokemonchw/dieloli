@@ -476,15 +476,6 @@ class ClothingUseType:
     """ 用途名字 """
 
 
-class DebugInstructType:
-    """ 指令类型配置 """
-
-    cid: int
-    """ 指令类型id """
-    name: str
-    """ 名字 """
-
-
 class SchoolPhaseCourse:
     """ 各学校各年级教学科目配置 """
 

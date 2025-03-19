@@ -25,7 +25,6 @@ from Script.Premise import (
     money,
     scene_status,
     shop,
-    system,
     target_bodily_status,
     target_humanity,
     target_humanity_interest,

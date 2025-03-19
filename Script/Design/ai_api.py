@@ -147,7 +147,6 @@ class GameRequestHandler(BaseHTTPRequestHandler):
         cmd_map_set = set(flow_handle.cmd_map.keys())
         if cache.now_panel_id == constant.Panel.IN_SCENE:
             cmd_map_set.remove(constant.Instruct.SAVE)
-            cmd_map_set.remove(constant.Instruct.DEBUG_ON)
         response = {'actions': list(flow_handle.cmd_map.keys())}
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')

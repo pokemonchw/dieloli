@@ -29,7 +29,9 @@ def send_event_text_to_api(prompt: str) -> str:
     str -- 返回文本
     """
     try:
-        client = OpenAI(api_key="", base_url="")
+        #client = OpenAI(api_key="sk-0cded0d95fb948cf85ff5d30b17265cd", base_url="https://dashscope.aliyuncs.com/compatible-mode/v1")
+        client = OpenAI(api_key="ce58cc27d3986235105c447974ad822e", base_url="https://api.zhizengzeng.com/v1")
+        print(prompt)
         chat_completion = client.chat.completions.create(
             messages=[
                 {
@@ -40,16 +42,16 @@ def send_event_text_to_api(prompt: str) -> str:
             # model="deepseek-reasoner",
             # model="gpt-4.5-preview",
             # model="o3-mini",
-            model="claude-3-7-sonnet-20250219",
+            # model="claude-3-7-sonnet-20250219",
             # model="gemini-2.0-flash",
-            # model="grok-3",
+            model="grok-3",
             # model="moonshot-v1-128k-vision-preview",
             # model="Doubao-pro-128k",
-
             temperature=0.9,
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
+        print(e)
         return ""
 
 # ------------ 全局配置数据 ------------

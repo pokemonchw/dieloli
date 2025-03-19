@@ -2322,13 +2322,3 @@ class Premise:
     """ 拥有足够买最贵的食物的钱 """
     MONEY_ENOUGH_BUY_MOST_EXPENSIVE_DRINK = "money_enough_buy_most_expensive_drink"
     """ 拥有足够买最贵的饮料的钱 """
-
-    """
-    =========================
-    游戏系统类前提
-    =========================
-    """
-    DEBUG_ON = "debug_on"
-    """ debug模式已开启 """
-    DEBUG_OFF = "debug_off"
-    """ debug模式已关闭 """
