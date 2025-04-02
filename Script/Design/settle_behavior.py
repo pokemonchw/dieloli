@@ -14,19 +14,21 @@ _: FunctionType = get_text._
 describe_list = [_("可爱的"), _("性感的"), _("帅气的"), _("清新的"), _("典雅的"), _("清洁的"), _("保暖的")]
 
 
-def handle_settle_behavior(character_id: int, now_time: int, event_id: str) -> panel.LeftDrawTextListWaitPanel:
+def handle_settle_behavior(character_id: int, now_time: int, event_id: str, now_target_id: str) -> panel.LeftDrawTextListWaitPanel:
     """
     处理结算角色事件
     Keyword arguments:
     character_id -- 角色id
     now_time -- 结算的时间戳
     event_id -- 触发的事件id
+    now_target_id -- ai目标id
     Return arguments:
     panel.LeftDrawTextListWaitPanel -- 结算的文本列表
     self_draw_judge -- 结算的文本里是否有自身的信息
     """
     now_character_data: game_type.Character = cache.character_data[character_id]
     status_data = game_type.CharacterStatusChange()
+    status_data.now_target_id = now_target_id
     start_time = now_character_data.behavior.start_time
     add_time = int((now_time - start_time) / 60)
     event_data: game_type.Event = game_config.config_event[event_id]

@@ -161,7 +161,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_shame": 1,
-            "move_to_target_scene": 1
+            "move_to_target_scene": 1,
+            "add_dislike_preference": 1
         }
     },
     "9d4fb007-7f6e-486c-8b72-d9217ce3baae": {
@@ -203,7 +204,8 @@
         "settle": {
             "move_to_target_scene": 1,
             "add_small_happy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "6766a452-0914-4c5f-b1bd-eff89b4eaec9": {
@@ -390,7 +392,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "f4d83be5-38da-4137-b8aa-85d3cb0280fb": {
@@ -418,7 +421,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "f6b5a789-f112-4e55-88a9-ee287151cfc3": {
@@ -449,7 +453,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "c509e3ac-d034-4763-90d7-fddc420a8473": {
@@ -478,7 +483,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "8c6adc8d-42cb-49e9-82e1-cbd5191b6214": {
@@ -509,7 +515,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "04b62b6a-1814-44c9-9f10-324bd66522ed": {
@@ -601,7 +608,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "sub_small_tired": 1
+            "sub_small_tired": 1,
+            "add_like_preference": 1
         }
     },
     "118223c6-43a3-4a2e-b71a-4c35af26b098": {
@@ -629,7 +637,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "sub_small_tired": 1
+            "sub_small_tired": 1,
+            "add_like_preference": 1
         }
     },
     "7af369e4-edb9-48cf-b060-c637091ff65b": {
@@ -938,7 +947,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_happy": 1,
-            "move_to_target_scene": 1
+            "move_to_target_scene": 1,
+            "add_like_preference": 1
         }
     },
     "e5df87b0-109e-444e-9a85-7e24b167f9a0": {
@@ -966,7 +976,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "9ced3200-4fa9-4498-b981-656b6808321f": {
@@ -992,7 +1003,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "24c81d0f-2fed-4b15-8e43-6a8a2d3f7af3": {
@@ -1020,7 +1032,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "3b0fb8cb-a14d-475c-9113-1c41e715b6f7": {
@@ -1081,7 +1094,8 @@
             "sub_small_mana_point": 1,
             "add_small_favorability": 1,
             "target_add_small_favorability": 1,
-            "add_small_money": 1
+            "add_small_money": 1,
+            "add_like_preference": 1
         }
     },
     "eac1e626-250d-401b-abbc-8bc4bca1a2f0": {
@@ -1184,7 +1198,8 @@
         },
         "settle": {
             "eat_food": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "3a2126d1-bbed-46ed-9724-dc7d48c0809a": {
@@ -1199,7 +1214,8 @@
         },
         "settle": {
             "eat_food": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "e8d019e3-ffd6-4768-a352-3431a06026b9": {
@@ -1215,7 +1231,8 @@
         "settle": {
             "eat_food": 1,
             "add_small_mouth_happy": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "fbafc7d7-fcfe-4570-8077-a769f522a9f8": {
@@ -1251,7 +1268,8 @@
         },
         "settle": {
             "eat_food": 1,
-            "add_small_pain": 1
+            "add_small_pain": 1,
+            "add_dislike_preference": 1
         }
     },
     "104c3bbf-b789-4e44-8a1c-ac233de551a5": {
@@ -1267,7 +1285,8 @@
         "settle": {
             "eat_food": 1,
             "add_small_pain": 1,
-            "add_small_depressed": 1
+            "add_small_depressed": 1,
+            "add_dislike_preference": 1
         }
     },
     "165eec15-49e6-4510-877e-e3cc326e738f": {
@@ -1530,8 +1549,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "target_add_small_favorability": 1,
-            "add_small_eloquence_experience": 1
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1
         }
     },
     "93a892d5-4306-4699-8a09-5549c1af80bb": {
@@ -1549,7 +1568,6 @@
         },
         "settle": {
             "add_small_eloquence_experience": 1,
-            "target_add_medium_favorability": 1,
             "target_add_small_happy": 1
         }
     },
@@ -1609,7 +1627,8 @@
             "target_add_small_favorability": 1,
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
-            "target_add_small_lust": 1
+            "target_add_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "0633d843-e1d6-4f5e-8556-ec25998250a3": {
@@ -1634,7 +1653,8 @@
             "target_add_medium_antipathy": 1,
             "target_add_small_rage": 1,
             "target_sub_small_favorability": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "a64882f8-846f-4c4a-aaf1-49c1ccfffdf3": {
@@ -1654,7 +1674,8 @@
             "sub_small_mana_point": 1,
             "target_add_medium_favorability": 1,
             "add_small_happy": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "e8eaddf3-330a-40ce-843a-bbdb3afe1d9c": {
@@ -1854,7 +1875,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "sub_small_happy": 1,
-            "add_small_play_music_experience": 1
+            "add_small_play_music_experience": 1,
+            "add_dislike_preference": 1
         }
     },
     "8645b954-94ee-4975-8a20-cbe1ba61d617": {
@@ -1873,7 +1895,8 @@
             "sub_small_happy": 1,
             "add_small_depressed": 1,
             "add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "8379a32b-c682-45e4-b0ad-56f874572756": {
@@ -1897,7 +1920,8 @@
             "add_small_antipathy": 1,
             "target_add_small_arrogant": 1,
             "add_small_depressed": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "2cb0bdf0-74bb-4735-8085-f527fddd4bdc": {
@@ -1937,7 +1961,8 @@
             "sub_small_mana_point": 1,
             "add_small_intoxicated": 1,
             "add_small_happy": 1,
-            "add_small_play_music_experience": 1
+            "add_small_play_music_experience": 1,
+            "add_like_preference": 1
         }
     },
     "cded6aa5-857a-4a71-8f95-1472632b6db7": {
@@ -1958,7 +1983,8 @@
             "sub_small_mana_point": 1,
             "target_sub_medium_favorability": 1,
             "target_add_medium_antipathy": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "42928d33-999d-4aea-a0d6-8194d83876c8": {
@@ -2000,7 +2026,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_medium_play_music_experience": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "68f3e726-6a88-4127-9c0b-04c3c9c6cdae": {
@@ -2045,7 +2072,8 @@
         "settle": {
             "add_small_play_music_experience": 1,
             "sub_small_mana_point": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "3411bf6f-e901-4047-8934-d6940a982acd": {
@@ -5097,7 +5125,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "add_small_favorability": 1
+            "add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "36f46963-839e-44a7-beb1-f803ea57a77a": {
@@ -5112,7 +5141,8 @@
         },
         "settle": {
             "eat_food": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "768fbf00-f01b-48ef-8b30-e61a60485b82": {
@@ -5130,7 +5160,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_depressed": 1,
-            "add_small_lazy": 1
+            "add_small_lazy": 1,
+            "add_dislike_preference": 1
         }
     },
     "88b843e8-ab8e-4707-958e-53257d36d0e4": {
@@ -6007,7 +6038,8 @@
             "add_small_antipathy": 1,
             "add_small_fear": 1,
             "add_small_shame": 1,
-            "move_to_target_scene": 1
+            "move_to_target_scene": 1,
+            "add_dislike_preference": 1
         }
     },
     "8d5a2ae4-809d-4160-8a68-2e7bc5615f6a": {
@@ -6074,7 +6106,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "add_large_mana_point": 1
+            "add_large_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "8a34e34e-d758-40f6-8ac0-ae0a3831f6c5": {
@@ -7285,7 +7318,8 @@
             "target_add_small_favorability": 1,
             "add_small_eloquence_experience": 1,
             "add_small_happy": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "de3ce343-c462-4063-ab08-fe3810e80738": {
@@ -7460,7 +7494,8 @@
             "target_add_small_favorability": 1,
             "add_small_happy": 1,
             "add_small_shame": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "60c6f3aa-31d3-4e2e-ad9e-f1cd4587ca6b": {
@@ -7525,7 +7560,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "add_small_favorability": 1
+            "add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "d6177d0e-095c-426a-ae05-ef9fa6145382": {
@@ -7554,7 +7590,8 @@
             "target_add_small_favorability": 1,
             "add_small_happy": 1,
             "target_sub_small_shame": 1,
-            "eat_food": 1
+            "eat_food": 1,
+            "add_like_preference": 1
         }
     },
     "27d4b2c0-01b7-4c05-9a6f-37539da60c55": {
@@ -7572,7 +7609,8 @@
             "eat_food": 1,
             "target_sub_medium_happy": 1,
             "target_add_medium_antipathy": 1,
-            "add_medium_happy": 1
+            "add_medium_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "1becc11f-a781-470c-9202-df1f6d12b997": {
@@ -7591,7 +7629,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_happy": 1,
             "add_small_eloquence_experience": 1,
-            "add_small_performance_experience": 1
+            "add_small_performance_experience": 1,
+            "add_like_preference": 1
         }
     },
     "d8d63ed6-e4a9-4f34-9ce2-a68aacac0bf0": {
@@ -7610,7 +7649,8 @@
         "settle": {
             "target_add_small_happy": 1,
             "target_add_small_favorability": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "25c7dd50-2587-46b4-9f8e-1700240508a1": {

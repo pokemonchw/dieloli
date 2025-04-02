@@ -122,9 +122,7 @@ class MainWindow(QMainWindow):
     def _setup_window_and_font(self):
         """设置窗口大小和字体"""
         # 获取屏幕信息
-        screens = QApplication.screens()
-        cursor_pos = QCursor.pos()
-        current_screen = QApplication.screenAt(cursor_pos)
+        current_screen = QApplication.screens()[1]
         screen_geometry = current_screen.geometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()

@@ -333,6 +333,7 @@ class MapSceneNameDraw:
                     cmd_func=self.move_now,
                     args=(now_scene_path,),
                 )
+                print(now_draw.text)
                 self.return_list.append(now_draw.return_text)
                 draw_list.append(now_draw)
             draw_group = value_handle.list_of_groups(draw_list, 4)

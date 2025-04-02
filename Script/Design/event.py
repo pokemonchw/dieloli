@@ -1,7 +1,7 @@
 import random
 import datetime
 import re
-from typing import Set
+from typing import Set, Dict
 from types import FunctionType
 from openai import OpenAI
 import ollama
@@ -67,6 +67,7 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
     line_feed = draw.NormalDraw()
     line_feed.text = "\n"
     line_feed.draw_event = True
+    now_target_id = character_data.ai_target
     if now_event_id == "":
         if not character_id:
             now_draw = draw.NormalDraw()
@@ -89,7 +90,7 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
             character_data.state = constant.CharacterStatus.STATUS_ARDER
         return
     now_event_draw = draw_event_text_panel.DrawEventTextPanel(now_event_id, character_id)
-    settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, now_event_id)
+    settle_output = settle_behavior.handle_settle_behavior(character_id, end_time, now_event_id, now_target_id)
     start_text = character_data.behavior.start_event_draw_text
     if not start:
         character_data.behavior.temporary_status = game_type.TemporaryStatus()
@@ -120,7 +121,7 @@ def handle_event(character_id: int, start: int, now_time: int, end_time: int) ->
                         return_text += "\n" + now_event_draw.text
                         now_event_draw.text = return_text
                         now_event_draw.draw()
-                    except Exception as e:
+                    except Exception:
                         now_draw = draw.WaitDraw()
                         now_draw.text = _("无法链接ollama服务，ollama模式已自动关闭")
                         now_draw.width = window_width
@@ -192,7 +193,7 @@ def send_event_text_to_ollama(prompt: str) -> str:
         pattern = r"<think>.*?</think>"
         return_text = re.sub(pattern, "", response.message.content, flags=re.DOTALL)
         return return_text
-    except Exception as e:
+    except Exception:
         return ""
 
 
@@ -216,7 +217,7 @@ def send_event_text_to_api(prompt: str) -> str:
             model=normal_config.config_normal.ai_api_model,
         )
         return chat_completion.choices[0].message.content
-    except Exception as e:
+    except Exception:
         return ""
 
 

@@ -538,6 +538,10 @@ class Character:
         """ 角色身份数据 {身份id:身份数据} """
         self.passive_sex: int = 0
         """ 角色是否处于做爱受体状态 """
+        self.like_preference_data: Dict[str, int] = {}
+        """ 角色偏好倾向分 {目标id:倾向分} """
+        self.dislike_preference_data: Dict[str, int] = {}
+        """ 角色排斥倾向分 {目标id:倾向分} """
 
 
 class CharacterIdentity:
@@ -828,6 +832,8 @@ class CharacterStatusChange:
         """ 脱下的衣服 """
         self.money = 0
         """ 金钱变化 """
+        self.now_target_id: str = ""
+        """ 执行变化所属的目标 """
 
 
 class Event:

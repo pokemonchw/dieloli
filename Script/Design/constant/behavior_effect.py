@@ -1855,3 +1855,13 @@ class BehaviorEffect:
     LET_ALL_NOT_STUDENTS_LEAVING_CLASSROOM = "let_all_not_students_leaving_classroom"
     """ 让所有非本班学生的人离开教室 """
 
+    """
+    =========================
+    系统类结算器
+    =========================
+    """
+    ADD_LIKE_PREFERENCE = "add_like_preference"
+    """ 增加偏好倾向分 """
+    ADD_DISLIKE_PREFERENCE = "add_dislike_preference"
+    """ 增加排斥倾向分 """
+
