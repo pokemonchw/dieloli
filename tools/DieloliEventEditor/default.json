@@ -2210,7 +2210,8 @@
             "add_small_depressed": 1,
             "add_small_arrogant": 1,
             "sub_small_mana_point": 1,
-            "add_small_singing_experience": 1
+            "add_small_singing_experience": 1,
+            "add_like_preference": 1
         }
     },
     "79ef1383-395c-4c11-9af2-66af6cebb9ba": {
@@ -2246,7 +2247,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "add_small_singing_experience": 1
+            "add_small_singing_experience": 1,
+            "add_dislike_preference": 1
         }
     },
     "99db71c8-57d2-43dd-8c1b-81ffc37d887f": {
@@ -2267,7 +2269,8 @@
         "settle": {
             "add_small_singing_experience": 1,
             "sub_small_mana_point": 1,
-            "target_add_small_favorability": 1
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "df4e1db5-31da-4f8c-b59a-693ac6392b05": {
@@ -2329,7 +2332,8 @@
             "target_add_small_depressed": 1,
             "add_small_singing_experience": 1,
             "sub_small_mana_point": 1,
-            "target_add_small_favorability": 1
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "0516cf88-5dd7-4939-a06a-72624024936c": {
@@ -2379,7 +2383,8 @@
             "add_small_singing_experience": 1,
             "sub_small_mana_point": 1,
             "target_add_small_religion_experience": 1,
-            "target_add_small_faith_experience": 1
+            "target_add_small_faith_experience": 1,
+            "add_like_preference": 1
         }
     },
     "3d8da2d1-d7a0-42b4-922c-762ed3221675": {
@@ -2416,7 +2421,8 @@
             "target_sub_small_favorability": 1,
             "add_small_singing_experience": 1,
             "sub_small_mana_point": 1,
-            "add_small_depressed": 1
+            "add_small_depressed": 1,
+            "add_dislike_preference": 1
         }
     },
     "fdb50524-122d-44fb-a3b0-62c804611738": {
@@ -2444,7 +2450,8 @@
             "target_sub_small_favorability": 1,
             "target_add_small_antipathy": 1,
             "add_small_depressed": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "9faa84d9-7f8c-400e-adb1-9bd197fe8297": {
@@ -2466,7 +2473,8 @@
             "add_small_depressed": 1,
             "add_small_lust": 1,
             "target_add_small_arrogant": 1,
-            "target_add_small_antipathy": 1
+            "target_add_small_antipathy": 1,
+            "add_dislike_preference": 1
         }
     },
     "d062b897-d947-4833-b61c-d4d68a849c0b": {
@@ -2487,7 +2495,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_favorability": 1,
             "add_small_lust": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "64e1948b-1bdc-4e13-b33b-4a6e5e7f86bc": {
@@ -2512,7 +2521,8 @@
             "add_small_depressed": 1,
             "add_small_lust": 1,
             "add_small_lazy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "9c743e65-5a57-44b1-a7f7-651d49cd05d8": {
@@ -2549,7 +2559,8 @@
             "sub_small_mana_point": 1,
             "add_small_sexual_experience": 1,
             "add_small_happy": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "2d2f6e53-a750-4bd2-8004-54cbd22bf319": {
@@ -2572,7 +2583,8 @@
             "sub_small_mana_point": 1,
             "add_small_sexual_experience": 1,
             "add_small_happy": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "63714fdd-2739-4877-9df6-da6ec536c565": {
@@ -2593,7 +2605,8 @@
             "add_small_sexual_experience": 1,
             "target_add_small_happy": 1,
             "add_small_happy": 1,
-            "add_small_lust": 1
+            "add_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "35ff5837-17f7-45ca-b315-228957bc2239": {
@@ -2613,7 +2626,8 @@
             "add_small_favorability": 1,
             "add_small_happy": 1,
             "target_add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "344335a0-fe6b-4a1d-8968-f9fcdb9ff4b1": {
@@ -2635,7 +2649,8 @@
             "add_small_sexual_experience": 1,
             "target_add_small_lust": 1,
             "add_small_happy": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "cdff1d1f-d111-4a52-a162-916b1af43033": {
@@ -2674,7 +2689,8 @@
             "target_add_small_favorability": 1,
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "1a0468f9-f4f3-4a05-96ab-870b7ff14be3": {
@@ -2707,7 +2723,8 @@
             "target_add_small_favorability": 1,
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "4bd0e64a-e51e-4f3a-b3d1-711191351e60": {
@@ -2730,7 +2747,8 @@
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
             "add_small_sexual_experience": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "7f7311f8-b38f-4da7-9308-b0587af391c8": {
@@ -3023,7 +3041,8 @@
             "add_small_depressed": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_antipathy": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "6b841123-1470-4b49-98cd-045da2e92ca5": {
@@ -3077,7 +3096,8 @@
             "sub_small_mana_point": 1,
             "add_small_depressed": 1,
             "target_add_small_antipathy": 1,
-            "target_sub_small_favorability": 1
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "10163d15-48d4-497a-88ad-f3a2cdc9f279": {
@@ -3097,7 +3117,8 @@
             "add_small_depressed": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_antipathy": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "2cfcef74-4d2a-43f8-89e7-82ea2d5f5dc2": {
@@ -3116,7 +3137,8 @@
             "add_small_shame": 1,
             "add_small_depressed": 1,
             "target_add_small_antipathy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "f63ce91d-c712-4dc1-a038-1e5c005cf6e6": {
@@ -3139,7 +3161,8 @@
             "add_small_lust": 1,
             "target_add_small_lust": 1,
             "sub_small_mana_point": 1,
-            "target_add_medium_favorability": 1
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "5548940f-404f-4c27-a069-aedcbf2fd59f": {
@@ -3220,7 +3243,8 @@
             "target_add_small_lust": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_favorability": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "ab86a40f-67df-4daa-895f-e00818bf8b64": {
@@ -3239,7 +3263,8 @@
             "target_add_small_lust": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_favorability": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "72a3c7e2-6c43-43f2-a6c9-d6330c8ecc6c": {
@@ -3260,7 +3285,8 @@
             "target_add_small_lust": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_favorability": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "303151de-aa85-4f17-b9e4-1e59d83112f0": {
@@ -3390,7 +3416,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_rage": 1,
             "add_small_depressed": 1,
-            "sub_small_happy": 1
+            "sub_small_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "95c45259-21e4-45c5-b6c8-311d61ac0877": {
@@ -3428,7 +3455,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_rage": 1,
             "add_small_depressed": 1,
-            "sub_small_happy": 1
+            "sub_small_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "85373841-a4bf-4669-877a-b68d94634570": {
@@ -3448,7 +3476,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_rage": 1,
             "add_small_depressed": 1,
-            "sub_small_happy": 1
+            "sub_small_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "2ccecd35-8e7b-4e91-8425-604f348041a4": {
@@ -3469,7 +3498,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_rage": 1,
             "add_small_depressed": 1,
-            "sub_small_happy": 1
+            "sub_small_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "53fdb70e-80e7-4152-b1ea-120bb05db4bf": {
@@ -3495,7 +3525,8 @@
             "target_add_medium_favorability": 1,
             "add_small_mouth_happy": 1,
             "add_small_lust": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "771f2b23-00f8-4261-9cee-993cc5d7369a": {
@@ -3521,7 +3552,8 @@
             "target_add_medium_favorability": 1,
             "add_small_lust": 1,
             "add_small_mouth_happy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "2fdf732e-cf00-4c29-a5e0-157d94c56d89": {
@@ -3544,7 +3576,8 @@
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
             "add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "1f3a77f3-4e51-44da-bd7f-97a72af5b7f9": {
@@ -3563,7 +3596,8 @@
             "target_add_small_happy": 1,
             "target_add_small_lust": 1,
             "target_add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "9dca660e-c5ef-495c-8a32-be83d17bfb9c": {
@@ -3690,7 +3724,8 @@
             "add_small_favorability": 1,
             "target_add_small_favorability": 1,
             "target_follow_self": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "36ad5f32-3168-402f-996c-bd32c48beacd": {
@@ -3713,7 +3748,8 @@
             "add_medium_favorability": 1,
             "target_add_medium_favorability": 1,
             "target_follow_self": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "fcfcefca-b165-4f54-b817-ff24b7948f95": {
@@ -3736,7 +3772,8 @@
             "add_medium_favorability": 1,
             "target_add_small_favorability": 1,
             "target_follow_self": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "e0f1e4b6-7fe4-4961-b081-e44b0c0ef913": {
@@ -3771,7 +3808,8 @@
             "add_medium_happy": 1,
             "target_add_medium_happy": 1,
             "target_follow_self": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "4ae7dc62-77a1-4199-a7aa-b3c2a28e0d0a": {
@@ -3814,7 +3852,8 @@
             "sub_small_favorability": 1,
             "sub_small_mana_point": 1,
             "add_small_depressed": 1,
-            "add_small_envy": 1
+            "add_small_envy": 1,
+            "add_dislike_preference": 1
         }
     },
     "a565f39f-0913-443c-8cce-cb78adb5968a": {
@@ -3833,7 +3872,8 @@
             "target_add_small_antipathy": 1,
             "sub_small_mana_point": 1,
             "sub_small_happy": 1,
-            "add_small_depressed": 1
+            "add_small_depressed": 1,
+            "add_dislike_preference": 1
         }
     },
     "7b89fd93-7154-4ffa-8940-c8acfa688bb1": {
@@ -3855,7 +3895,8 @@
             "target_add_large_happy": 1,
             "add_medium_favorability": 1,
             "target_add_medium_favorability": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "b307fe85-753f-4b64-8c89-ff69cea96aa2": {
@@ -3950,7 +3991,8 @@
             "sub_small_mana_point": 1,
             "add_small_lust": 1,
             "target_sub_small_lust": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "cb199d13-d83d-4ea0-ba85-9f6ab6f4b2a7": {
@@ -3970,7 +4012,8 @@
             "sub_small_mana_point": 1,
             "add_small_lust": 1,
             "target_sub_small_lust": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "98de42e9-aa41-4954-b750-8edf885e39e5": {
@@ -4009,7 +4052,8 @@
             "sub_small_mana_point": 1,
             "add_small_lust": 1,
             "target_sub_small_lust": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "9c283508-1311-468d-b76e-427e4122ec20": {
@@ -4045,7 +4089,8 @@
             "target_add_small_anus_happy": 1,
             "target_add_medium_favorability": 1,
             "target_add_small_chest_happy": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "fae763b8-ddf9-47ba-98ca-501b4a61c075": {
@@ -4070,7 +4115,8 @@
             "target_add_small_mouth_happy": 1,
             "target_add_small_chest_happy": 1,
             "target_add_small_anus_happy": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "a15dac42-cebd-4ace-a923-234743076961": {
@@ -4234,7 +4280,8 @@
             "target_sub_small_favorability": 1,
             "target_add_small_antipathy": 1,
             "target_add_small_arrogant": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "4ce45a79-2fff-4bd5-8d2b-99a8e4e20eb7": {
@@ -4282,7 +4329,8 @@
             "target_sub_small_favorability": 1,
             "target_add_small_antipathy": 1,
             "target_add_small_arrogant": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "dc518c61-822d-465b-aa15-14e598a915b8": {
@@ -4310,7 +4358,8 @@
             "target_add_small_yearn": 1,
             "target_add_small_shame": 1,
             "target_add_small_lust": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "ecf677ff-a0f0-4673-80c5-a0e49fcbefba": {
@@ -4340,7 +4389,8 @@
             "target_add_small_yearn": 1,
             "target_add_small_shame": 1,
             "target_add_small_lust": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "9850801f-2412-491d-8b58-bcd8bf7afe11": {
@@ -4367,7 +4417,8 @@
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
             "add_small_arrogant": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "37a3d422-727f-4d3b-9029-16b6aa61c7dc": {
@@ -4389,7 +4440,8 @@
             "target_add_small_chest_happy": 1,
             "add_small_happy": 1,
             "target_add_small_happy": 1,
-            "target_add_small_lust": 1
+            "target_add_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "fc42541a-ea3f-495f-bccc-83ed896a32a4": {
@@ -4499,7 +4551,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "add_medium_money": 1
+            "add_medium_money": 1,
+            "add_dislike_preference": 1
         }
     },
     "0441e972-fea1-4f31-84b5-29d9df3a3992": {
@@ -4546,7 +4599,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_students_course_experience_for_in_classroom": 1,
-            "add_medium_money": 1
+            "add_medium_money": 1,
+            "add_dislike_preference": 1
         }
     },
     "11eca278-870f-4881-ad08-ac03b591f2e3": {
@@ -4647,7 +4701,8 @@
             "add_small_play_music_experience": 1,
             "target_add_small_rage": 1,
             "add_small_singing_experience": 1,
-            "add_small_performance_experience": 1
+            "add_small_performance_experience": 1,
+            "add_dislike_preference": 1
         }
     },
     "c04897c0-5aec-44bc-9437-8228aa36a11b": {
@@ -4700,7 +4755,8 @@
             "add_small_singing_experience": 1,
             "add_small_play_music_experience": 1,
             "target_add_small_happy": 1,
-            "target_add_small_intoxicated": 1
+            "target_add_small_intoxicated": 1,
+            "add_like_preference": 1
         }
     },
     "7cf6fffd-6ce1-4880-bba9-8209112385c5": {
@@ -4722,7 +4778,8 @@
             "add_small_singing_experience": 1,
             "add_small_play_music_experience": 1,
             "target_add_small_happy": 1,
-            "target_add_small_intoxicated": 1
+            "target_add_small_intoxicated": 1,
+            "add_like_preference": 1
         }
     },
     "5a97216b-ade8-4ba3-aeea-9e756638852a": {
@@ -4802,7 +4859,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "add_small_attend_class_experience": 1
+            "add_small_attend_class_experience": 1,
+            "add_dislike_preference": 1
         }
     },
     "71bf9923-9417-47da-a51d-a8a4113f4464": {
@@ -4815,7 +4873,8 @@
             "is_impetuous": 1
         },
         "settle": {
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "18e54c25-a7c4-486c-8ce6-f30e56c71739": {
@@ -4994,7 +5053,8 @@
             "sub_medium_mana_point": 1,
             "add_small_lust": 1,
             "add_small_penis_experience": 1,
-            "add_medium_penis_happy": 1
+            "add_medium_penis_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "7df5405e-fb87-44ba-b217-51112e931c8b": {
@@ -5034,7 +5094,8 @@
             "target_add_medium_antipathy": 1,
             "target_add_small_fear": 1,
             "target_add_small_arrogant": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "1c3039dc-f8ef-4482-9a84-57a8b2fe30a5": {
@@ -5056,7 +5117,8 @@
             "add_small_lust": 1,
             "target_add_small_lust": 1,
             "add_small_penis_experience": 1,
-            "add_medium_penis_happy": 1
+            "add_medium_penis_happy": 1,
+            "add_like_preference": 1
         }
     },
     "aa5eece7-9737-478c-9186-67a136701b21": {
@@ -5080,7 +5142,8 @@
             "add_small_favorability": 1,
             "target_add_small_favorability": 1,
             "add_small_lust": 1,
-            "target_add_small_lust": 1
+            "target_add_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "e251cbeb-75e4-402a-a744-5a16fbdd1a17": {
@@ -5347,7 +5410,8 @@
             "add_small_pain": 1,
             "add_small_shame": 1,
             "sub_small_mana_point": 1,
-            "add_medium_money": 1
+            "add_medium_money": 1,
+            "add_dislike_preference": 1
         }
     },
     "6d8ed3ab-ac14-427d-9ac8-9ff9e440d194": {
@@ -5483,7 +5547,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_dance_experience": 1,
-            "target_add_small_favorability": 1
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "fd7af233-6001-47fd-8b0b-e7b6d0825c5d": {
@@ -5619,7 +5684,8 @@
             "target_add_small_depressed": 1,
             "target_add_small_antipathy": 1,
             "target_add_small_eloquence_experience": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "2c78e419-97fa-4c65-9fc5-5b4dee671aa8": {
@@ -5672,7 +5738,8 @@
             "interrupt_target_activity": 1,
             "add_medium_rage": 1,
             "target_add_small_ache": 1,
-            "target_add_medium_rage": 1
+            "target_add_medium_rage": 1,
+            "add_like_preference": 1
         }
     },
     "583be649-471e-4179-be3a-fee75f009156": {
@@ -5881,7 +5948,8 @@
             "add_small_lust": 1,
             "add_small_rage": 1,
             "add_small_envy": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "cdb455d1-c78c-467b-a7cd-3a54c8cd7f93": {
@@ -5908,7 +5976,8 @@
             "add_small_eloquence_experience": 1,
             "target_add_small_favorability": 1,
             "add_small_favorability": 1,
-            "undress_target_underwear": 1
+            "undress_target_underwear": 1,
+            "add_like_preference": 1
         }
     },
     "22dee734-b298-4f6e-922b-cd0be0f9bbcd": {
@@ -5941,7 +6010,8 @@
             "undress_target_shoes": 1,
             "undress_target_skirt": 1,
             "undress_target_socks": 1,
-            "undress_target_underpants": 1
+            "undress_target_underpants": 1,
+            "add_like_preference": 1
         }
     },
     "2179b2ef-4895-4f2b-92dc-8a554b917864": {
@@ -6923,7 +6993,8 @@
             "target_add_small_happy": 1,
             "target_add_small_favorability": 1,
             "target_add_small_shame": 1,
-            "target_add_small_yearn": 1
+            "target_add_small_yearn": 1,
+            "add_like_preference": 1
         }
     },
     "9973953d-b5b7-4c3d-9307-32c59fbd32b0": {
@@ -6940,7 +7011,8 @@
             "add_small_performance_experience": 1,
             "add_small_dance_experience": 1,
             "add_small_depressed": 1,
-            "add_small_lazy": 1
+            "add_small_lazy": 1,
+            "add_dislike_preference": 1
         }
     },
     "13e9e8b8-2324-4b60-9b59-182aed061fad": {
@@ -7140,7 +7212,8 @@
         "premise": {},
         "settle": {
             "add_small_yearn": 1,
-            "target_add_small_arrogant": 1
+            "target_add_small_arrogant": 1,
+            "add_dislike_preference": 1
         }
     },
     "00da3e8c-b08d-4db3-8dbc-755e4c023a26": {
@@ -7292,7 +7365,8 @@
             "add_small_singing_experience": 1,
             "target_add_small_singing_experience": 1,
             "target_add_small_favorability": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "0a113a5e-cbee-492c-8728-b585c51067db": {
@@ -7413,7 +7487,8 @@
             "target_add_small_favorability": 1,
             "add_small_attend_class_experience": 1,
             "add_small_happy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "5650b27f-f080-4b31-a942-0edc0d016667": {
@@ -7670,7 +7745,8 @@
             "add_small_shame": 1,
             "sub_small_happy": 1,
             "add_small_singing_experience": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "f95dc306-541e-43f0-b7d9-11b1c27971d8": {
@@ -8087,7 +8163,8 @@
         "settle": {
             "target_add_medium_antipathy": 1,
             "sub_medium_happy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "bda5429b-5962-4877-a5bd-d14e76fb82a7": {
@@ -8107,7 +8184,8 @@
             "target_add_medium_shame": 1,
             "add_small_happy": 1,
             "target_add_small_antipathy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "ea9784d1-33d7-4974-bf5b-e5d84abcbcd4": {
@@ -8164,7 +8242,8 @@
             "target_add_medium_shame": 1,
             "add_small_shame": 1,
             "sub_medium_happy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "1b9d12d9-b655-4c82-8fc4-161de10e4979": {
@@ -8219,7 +8298,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_medium_money": 1,
-            "add_students_course_experience_for_in_classroom": 1
+            "add_students_course_experience_for_in_classroom": 1,
+            "add_like_preference": 1
         }
     },
     "a5099a1d-539c-4469-b840-5f8a316e3fe1": {
@@ -8296,7 +8376,8 @@
         },
         "settle": {
             "add_small_play_music_experience": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "29834609-6621-4486-84ec-97f09ba2a511": {
@@ -8341,7 +8422,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "target_add_small_arrogant": 1
+            "target_add_small_arrogant": 1,
+            "add_dislike_preference": 1
         }
     },
     "7ff94e0e-23d3-4d9c-88d7-a0f5254d4d29": {
@@ -8442,7 +8524,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "add_small_attend_class_experience": 1
+            "add_small_attend_class_experience": 1,
+            "add_dislike_preference": 1
         }
     },
     "a8f5089c-1480-4c28-b5af-eb8986f6885b": {
@@ -8457,7 +8540,8 @@
         "settle": {
             "add_small_attend_class_experience": 1,
             "sub_small_mana_point": 1,
-            "add_small_lazy": 1
+            "add_small_lazy": 1,
+            "add_dislike_preference": 1
         }
     },
     "35c0e5c4-022a-4e19-b210-2c8da0c13926": {
@@ -8507,7 +8591,8 @@
         "settle": {
             "sub_medium_mana_point": 1,
             "add_small_clitoris_experience": 1,
-            "add_small_clitoris_happy": 1
+            "add_small_clitoris_happy": 1,
+            "add_like_preference": 1
         }
     },
     "9a76e565-227d-4a8d-83d9-f8f127a92701": {
@@ -8546,7 +8631,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "add_small_dance_experience": 1
+            "add_small_dance_experience": 1,
+            "add_like_preference": 1
         }
     },
     "582bc5b3-64f7-48ae-884d-bb96a745f3b5": {
@@ -8561,7 +8647,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_dance_experience": 1,
-            "target_add_small_favorability": 1
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "200af0de-08f3-406f-9365-a6a3ba9e5ddf": {
@@ -8576,7 +8663,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "add_small_dance_experience": 1
+            "add_small_dance_experience": 1,
+            "add_like_preference": 1
         }
     },
     "91d0a53d-7241-4f65-a5e9-861002299d7c": {
@@ -8597,7 +8685,8 @@
             "add_small_dance_experience": 1,
             "sub_small_mana_point": 1,
             "target_add_small_favorability": 1,
-            "add_small_favorability": 1
+            "add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "8c9d020b-7fbf-492c-b150-0a9a62fb00ff": {
@@ -8627,7 +8716,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_dance_experience": 1,
-            "target_add_medium_favorability": 1
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "ed64ae88-bd6e-44c9-8789-c1b3eebc3f58": {
@@ -8678,7 +8768,8 @@
             "sub_medium_rage": 1,
             "target_add_medium_pain": 1,
             "target_add_small_fear": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "e0262574-3204-45d0-aa2e-acb198792229": {
@@ -8697,7 +8788,8 @@
             "sub_small_mana_point": 1,
             "add_small_rage": 1,
             "add_small_shame": 1,
-            "target_add_small_arrogant": 1
+            "target_add_small_arrogant": 1,
+            "add_dislike_preference": 1
         }
     },
     "87f35255-64be-4d5c-946d-7dd459a3785b": {
@@ -8716,7 +8808,8 @@
             "target_add_small_arrogant": 1,
             "add_small_rage": 1,
             "add_small_eloquence_experience": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "80a6a950-9474-41dc-a3e9-70ef852ccae3": {
@@ -8930,7 +9023,8 @@
             "undress_target_shoes": 1,
             "undress_target_skirt": 1,
             "undress_target_socks": 1,
-            "undress_target_underpants": 1
+            "undress_target_underpants": 1,
+            "add_like_preference": 1
         }
     },
     "890b4513-6738-4288-9f5f-0b7db812608d": {
@@ -8992,7 +9086,8 @@
             "undress_target_underpants": 1,
             "undress_target_underwear": 1,
             "add_small_yearn": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "faab28f3-7af2-4fcb-9045-a4e53aa74d6e": {
@@ -9044,7 +9139,8 @@
             "target_add_medium_shame": 1,
             "add_small_happy": 1,
             "target_add_small_antipathy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "849c80a0-8f44-4d30-85e2-ae7da5f86f03": {

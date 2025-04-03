@@ -161,7 +161,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_shame": 1,
-            "move_to_target_scene": 1
+            "move_to_target_scene": 1,
+            "add_dislike_preference": 1
         }
     },
     "9d4fb007-7f6e-486c-8b72-d9217ce3baae": {
@@ -203,7 +204,8 @@
         "settle": {
             "move_to_target_scene": 1,
             "add_small_happy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "6766a452-0914-4c5f-b1bd-eff89b4eaec9": {
@@ -390,7 +392,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "f4d83be5-38da-4137-b8aa-85d3cb0280fb": {
@@ -418,7 +421,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "f6b5a789-f112-4e55-88a9-ee287151cfc3": {
@@ -449,7 +453,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "c509e3ac-d034-4763-90d7-fddc420a8473": {
@@ -478,7 +483,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "8c6adc8d-42cb-49e9-82e1-cbd5191b6214": {
@@ -509,7 +515,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "04b62b6a-1814-44c9-9f10-324bd66522ed": {
@@ -601,7 +608,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "sub_small_tired": 1
+            "sub_small_tired": 1,
+            "add_like_preference": 1
         }
     },
     "118223c6-43a3-4a2e-b71a-4c35af26b098": {
@@ -629,7 +637,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "sub_small_tired": 1
+            "sub_small_tired": 1,
+            "add_like_preference": 1
         }
     },
     "7af369e4-edb9-48cf-b060-c637091ff65b": {
@@ -938,7 +947,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_happy": 1,
-            "move_to_target_scene": 1
+            "move_to_target_scene": 1,
+            "add_like_preference": 1
         }
     },
     "e5df87b0-109e-444e-9a85-7e24b167f9a0": {
@@ -966,7 +976,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "9ced3200-4fa9-4498-b981-656b6808321f": {
@@ -992,7 +1003,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "24c81d0f-2fed-4b15-8e43-6a8a2d3f7af3": {
@@ -1020,7 +1032,8 @@
             "sub_small_lazy": 1,
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
-            "sub_small_lust": 1
+            "sub_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "3b0fb8cb-a14d-475c-9113-1c41e715b6f7": {
@@ -1081,7 +1094,8 @@
             "sub_small_mana_point": 1,
             "add_small_favorability": 1,
             "target_add_small_favorability": 1,
-            "add_small_money": 1
+            "add_small_money": 1,
+            "add_like_preference": 1
         }
     },
     "eac1e626-250d-401b-abbc-8bc4bca1a2f0": {
@@ -1184,7 +1198,8 @@
         },
         "settle": {
             "eat_food": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "3a2126d1-bbed-46ed-9724-dc7d48c0809a": {
@@ -1199,7 +1214,8 @@
         },
         "settle": {
             "eat_food": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "e8d019e3-ffd6-4768-a352-3431a06026b9": {
@@ -1215,7 +1231,8 @@
         "settle": {
             "eat_food": 1,
             "add_small_mouth_happy": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "fbafc7d7-fcfe-4570-8077-a769f522a9f8": {
@@ -1251,7 +1268,8 @@
         },
         "settle": {
             "eat_food": 1,
-            "add_small_pain": 1
+            "add_small_pain": 1,
+            "add_dislike_preference": 1
         }
     },
     "104c3bbf-b789-4e44-8a1c-ac233de551a5": {
@@ -1267,7 +1285,8 @@
         "settle": {
             "eat_food": 1,
             "add_small_pain": 1,
-            "add_small_depressed": 1
+            "add_small_depressed": 1,
+            "add_dislike_preference": 1
         }
     },
     "165eec15-49e6-4510-877e-e3cc326e738f": {
@@ -1530,8 +1549,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "target_add_small_favorability": 1,
-            "add_small_eloquence_experience": 1
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1
         }
     },
     "93a892d5-4306-4699-8a09-5549c1af80bb": {
@@ -1549,7 +1568,6 @@
         },
         "settle": {
             "add_small_eloquence_experience": 1,
-            "target_add_medium_favorability": 1,
             "target_add_small_happy": 1
         }
     },
@@ -1609,7 +1627,8 @@
             "target_add_small_favorability": 1,
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
-            "target_add_small_lust": 1
+            "target_add_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "0633d843-e1d6-4f5e-8556-ec25998250a3": {
@@ -1634,7 +1653,8 @@
             "target_add_medium_antipathy": 1,
             "target_add_small_rage": 1,
             "target_sub_small_favorability": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "a64882f8-846f-4c4a-aaf1-49c1ccfffdf3": {
@@ -1654,7 +1674,8 @@
             "sub_small_mana_point": 1,
             "target_add_medium_favorability": 1,
             "add_small_happy": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "e8eaddf3-330a-40ce-843a-bbdb3afe1d9c": {
@@ -1854,7 +1875,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "sub_small_happy": 1,
-            "add_small_play_music_experience": 1
+            "add_small_play_music_experience": 1,
+            "add_dislike_preference": 1
         }
     },
     "8645b954-94ee-4975-8a20-cbe1ba61d617": {
@@ -1873,7 +1895,8 @@
             "sub_small_happy": 1,
             "add_small_depressed": 1,
             "add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "8379a32b-c682-45e4-b0ad-56f874572756": {
@@ -1897,7 +1920,8 @@
             "add_small_antipathy": 1,
             "target_add_small_arrogant": 1,
             "add_small_depressed": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "2cb0bdf0-74bb-4735-8085-f527fddd4bdc": {
@@ -1937,7 +1961,8 @@
             "sub_small_mana_point": 1,
             "add_small_intoxicated": 1,
             "add_small_happy": 1,
-            "add_small_play_music_experience": 1
+            "add_small_play_music_experience": 1,
+            "add_like_preference": 1
         }
     },
     "cded6aa5-857a-4a71-8f95-1472632b6db7": {
@@ -1958,7 +1983,8 @@
             "sub_small_mana_point": 1,
             "target_sub_medium_favorability": 1,
             "target_add_medium_antipathy": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "42928d33-999d-4aea-a0d6-8194d83876c8": {
@@ -2000,7 +2026,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_medium_play_music_experience": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "68f3e726-6a88-4127-9c0b-04c3c9c6cdae": {
@@ -2045,7 +2072,8 @@
         "settle": {
             "add_small_play_music_experience": 1,
             "sub_small_mana_point": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "3411bf6f-e901-4047-8934-d6940a982acd": {
@@ -2182,7 +2210,8 @@
             "add_small_depressed": 1,
             "add_small_arrogant": 1,
             "sub_small_mana_point": 1,
-            "add_small_singing_experience": 1
+            "add_small_singing_experience": 1,
+            "add_like_preference": 1
         }
     },
     "79ef1383-395c-4c11-9af2-66af6cebb9ba": {
@@ -2218,7 +2247,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "add_small_singing_experience": 1
+            "add_small_singing_experience": 1,
+            "add_dislike_preference": 1
         }
     },
     "99db71c8-57d2-43dd-8c1b-81ffc37d887f": {
@@ -2239,7 +2269,8 @@
         "settle": {
             "add_small_singing_experience": 1,
             "sub_small_mana_point": 1,
-            "target_add_small_favorability": 1
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "df4e1db5-31da-4f8c-b59a-693ac6392b05": {
@@ -2301,7 +2332,8 @@
             "target_add_small_depressed": 1,
             "add_small_singing_experience": 1,
             "sub_small_mana_point": 1,
-            "target_add_small_favorability": 1
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "0516cf88-5dd7-4939-a06a-72624024936c": {
@@ -2351,7 +2383,8 @@
             "add_small_singing_experience": 1,
             "sub_small_mana_point": 1,
             "target_add_small_religion_experience": 1,
-            "target_add_small_faith_experience": 1
+            "target_add_small_faith_experience": 1,
+            "add_like_preference": 1
         }
     },
     "3d8da2d1-d7a0-42b4-922c-762ed3221675": {
@@ -2388,7 +2421,8 @@
             "target_sub_small_favorability": 1,
             "add_small_singing_experience": 1,
             "sub_small_mana_point": 1,
-            "add_small_depressed": 1
+            "add_small_depressed": 1,
+            "add_dislike_preference": 1
         }
     },
     "fdb50524-122d-44fb-a3b0-62c804611738": {
@@ -2416,7 +2450,8 @@
             "target_sub_small_favorability": 1,
             "target_add_small_antipathy": 1,
             "add_small_depressed": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "9faa84d9-7f8c-400e-adb1-9bd197fe8297": {
@@ -2438,7 +2473,8 @@
             "add_small_depressed": 1,
             "add_small_lust": 1,
             "target_add_small_arrogant": 1,
-            "target_add_small_antipathy": 1
+            "target_add_small_antipathy": 1,
+            "add_dislike_preference": 1
         }
     },
     "d062b897-d947-4833-b61c-d4d68a849c0b": {
@@ -2459,7 +2495,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_favorability": 1,
             "add_small_lust": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "64e1948b-1bdc-4e13-b33b-4a6e5e7f86bc": {
@@ -2484,7 +2521,8 @@
             "add_small_depressed": 1,
             "add_small_lust": 1,
             "add_small_lazy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "9c743e65-5a57-44b1-a7f7-651d49cd05d8": {
@@ -2521,7 +2559,8 @@
             "sub_small_mana_point": 1,
             "add_small_sexual_experience": 1,
             "add_small_happy": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "2d2f6e53-a750-4bd2-8004-54cbd22bf319": {
@@ -2544,7 +2583,8 @@
             "sub_small_mana_point": 1,
             "add_small_sexual_experience": 1,
             "add_small_happy": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "63714fdd-2739-4877-9df6-da6ec536c565": {
@@ -2565,7 +2605,8 @@
             "add_small_sexual_experience": 1,
             "target_add_small_happy": 1,
             "add_small_happy": 1,
-            "add_small_lust": 1
+            "add_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "35ff5837-17f7-45ca-b315-228957bc2239": {
@@ -2585,7 +2626,8 @@
             "add_small_favorability": 1,
             "add_small_happy": 1,
             "target_add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "344335a0-fe6b-4a1d-8968-f9fcdb9ff4b1": {
@@ -2607,7 +2649,8 @@
             "add_small_sexual_experience": 1,
             "target_add_small_lust": 1,
             "add_small_happy": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "cdff1d1f-d111-4a52-a162-916b1af43033": {
@@ -2646,7 +2689,8 @@
             "target_add_small_favorability": 1,
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "1a0468f9-f4f3-4a05-96ab-870b7ff14be3": {
@@ -2679,7 +2723,8 @@
             "target_add_small_favorability": 1,
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "4bd0e64a-e51e-4f3a-b3d1-711191351e60": {
@@ -2702,7 +2747,8 @@
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
             "add_small_sexual_experience": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "7f7311f8-b38f-4da7-9308-b0587af391c8": {
@@ -2995,7 +3041,8 @@
             "add_small_depressed": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_antipathy": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "6b841123-1470-4b49-98cd-045da2e92ca5": {
@@ -3049,7 +3096,8 @@
             "sub_small_mana_point": 1,
             "add_small_depressed": 1,
             "target_add_small_antipathy": 1,
-            "target_sub_small_favorability": 1
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "10163d15-48d4-497a-88ad-f3a2cdc9f279": {
@@ -3069,7 +3117,8 @@
             "add_small_depressed": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_antipathy": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "2cfcef74-4d2a-43f8-89e7-82ea2d5f5dc2": {
@@ -3088,7 +3137,8 @@
             "add_small_shame": 1,
             "add_small_depressed": 1,
             "target_add_small_antipathy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "f63ce91d-c712-4dc1-a038-1e5c005cf6e6": {
@@ -3111,7 +3161,8 @@
             "add_small_lust": 1,
             "target_add_small_lust": 1,
             "sub_small_mana_point": 1,
-            "target_add_medium_favorability": 1
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "5548940f-404f-4c27-a069-aedcbf2fd59f": {
@@ -3192,7 +3243,8 @@
             "target_add_small_lust": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_favorability": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "ab86a40f-67df-4daa-895f-e00818bf8b64": {
@@ -3211,7 +3263,8 @@
             "target_add_small_lust": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_favorability": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "72a3c7e2-6c43-43f2-a6c9-d6330c8ecc6c": {
@@ -3232,7 +3285,8 @@
             "target_add_small_lust": 1,
             "sub_small_mana_point": 1,
             "target_add_medium_favorability": 1,
-            "target_add_small_shame": 1
+            "target_add_small_shame": 1,
+            "add_like_preference": 1
         }
     },
     "303151de-aa85-4f17-b9e4-1e59d83112f0": {
@@ -3362,7 +3416,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_rage": 1,
             "add_small_depressed": 1,
-            "sub_small_happy": 1
+            "sub_small_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "95c45259-21e4-45c5-b6c8-311d61ac0877": {
@@ -3400,7 +3455,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_rage": 1,
             "add_small_depressed": 1,
-            "sub_small_happy": 1
+            "sub_small_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "85373841-a4bf-4669-877a-b68d94634570": {
@@ -3420,7 +3476,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_rage": 1,
             "add_small_depressed": 1,
-            "sub_small_happy": 1
+            "sub_small_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "2ccecd35-8e7b-4e91-8425-604f348041a4": {
@@ -3441,7 +3498,8 @@
             "sub_small_mana_point": 1,
             "target_add_small_rage": 1,
             "add_small_depressed": 1,
-            "sub_small_happy": 1
+            "sub_small_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "53fdb70e-80e7-4152-b1ea-120bb05db4bf": {
@@ -3467,7 +3525,8 @@
             "target_add_medium_favorability": 1,
             "add_small_mouth_happy": 1,
             "add_small_lust": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "771f2b23-00f8-4261-9cee-993cc5d7369a": {
@@ -3493,7 +3552,8 @@
             "target_add_medium_favorability": 1,
             "add_small_lust": 1,
             "add_small_mouth_happy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "2fdf732e-cf00-4c29-a5e0-157d94c56d89": {
@@ -3516,7 +3576,8 @@
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
             "add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "1f3a77f3-4e51-44da-bd7f-97a72af5b7f9": {
@@ -3535,7 +3596,8 @@
             "target_add_small_happy": 1,
             "target_add_small_lust": 1,
             "target_add_small_shame": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "9dca660e-c5ef-495c-8a32-be83d17bfb9c": {
@@ -3662,7 +3724,8 @@
             "add_small_favorability": 1,
             "target_add_small_favorability": 1,
             "target_follow_self": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "36ad5f32-3168-402f-996c-bd32c48beacd": {
@@ -3685,7 +3748,8 @@
             "add_medium_favorability": 1,
             "target_add_medium_favorability": 1,
             "target_follow_self": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "fcfcefca-b165-4f54-b817-ff24b7948f95": {
@@ -3708,7 +3772,8 @@
             "add_medium_favorability": 1,
             "target_add_small_favorability": 1,
             "target_follow_self": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "e0f1e4b6-7fe4-4961-b081-e44b0c0ef913": {
@@ -3743,7 +3808,8 @@
             "add_medium_happy": 1,
             "target_add_medium_happy": 1,
             "target_follow_self": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "4ae7dc62-77a1-4199-a7aa-b3c2a28e0d0a": {
@@ -3786,7 +3852,8 @@
             "sub_small_favorability": 1,
             "sub_small_mana_point": 1,
             "add_small_depressed": 1,
-            "add_small_envy": 1
+            "add_small_envy": 1,
+            "add_dislike_preference": 1
         }
     },
     "a565f39f-0913-443c-8cce-cb78adb5968a": {
@@ -3805,7 +3872,8 @@
             "target_add_small_antipathy": 1,
             "sub_small_mana_point": 1,
             "sub_small_happy": 1,
-            "add_small_depressed": 1
+            "add_small_depressed": 1,
+            "add_dislike_preference": 1
         }
     },
     "7b89fd93-7154-4ffa-8940-c8acfa688bb1": {
@@ -3827,7 +3895,8 @@
             "target_add_large_happy": 1,
             "add_medium_favorability": 1,
             "target_add_medium_favorability": 1,
-            "interrupt_target_activity": 1
+            "interrupt_target_activity": 1,
+            "add_like_preference": 1
         }
     },
     "b307fe85-753f-4b64-8c89-ff69cea96aa2": {
@@ -3922,7 +3991,8 @@
             "sub_small_mana_point": 1,
             "add_small_lust": 1,
             "target_sub_small_lust": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "cb199d13-d83d-4ea0-ba85-9f6ab6f4b2a7": {
@@ -3942,7 +4012,8 @@
             "sub_small_mana_point": 1,
             "add_small_lust": 1,
             "target_sub_small_lust": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "98de42e9-aa41-4954-b750-8edf885e39e5": {
@@ -3981,7 +4052,8 @@
             "sub_small_mana_point": 1,
             "add_small_lust": 1,
             "target_sub_small_lust": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "9c283508-1311-468d-b76e-427e4122ec20": {
@@ -4017,7 +4089,8 @@
             "target_add_small_anus_happy": 1,
             "target_add_medium_favorability": 1,
             "target_add_small_chest_happy": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "fae763b8-ddf9-47ba-98ca-501b4a61c075": {
@@ -4042,7 +4115,8 @@
             "target_add_small_mouth_happy": 1,
             "target_add_small_chest_happy": 1,
             "target_add_small_anus_happy": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "a15dac42-cebd-4ace-a923-234743076961": {
@@ -4206,7 +4280,8 @@
             "target_sub_small_favorability": 1,
             "target_add_small_antipathy": 1,
             "target_add_small_arrogant": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "4ce45a79-2fff-4bd5-8d2b-99a8e4e20eb7": {
@@ -4254,7 +4329,8 @@
             "target_sub_small_favorability": 1,
             "target_add_small_antipathy": 1,
             "target_add_small_arrogant": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "dc518c61-822d-465b-aa15-14e598a915b8": {
@@ -4282,7 +4358,8 @@
             "target_add_small_yearn": 1,
             "target_add_small_shame": 1,
             "target_add_small_lust": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "ecf677ff-a0f0-4673-80c5-a0e49fcbefba": {
@@ -4312,7 +4389,8 @@
             "target_add_small_yearn": 1,
             "target_add_small_shame": 1,
             "target_add_small_lust": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "9850801f-2412-491d-8b58-bcd8bf7afe11": {
@@ -4339,7 +4417,8 @@
             "target_add_small_happy": 1,
             "target_add_small_shame": 1,
             "add_small_arrogant": 1,
-            "add_small_sexual_experience": 1
+            "add_small_sexual_experience": 1,
+            "add_like_preference": 1
         }
     },
     "37a3d422-727f-4d3b-9029-16b6aa61c7dc": {
@@ -4361,7 +4440,8 @@
             "target_add_small_chest_happy": 1,
             "add_small_happy": 1,
             "target_add_small_happy": 1,
-            "target_add_small_lust": 1
+            "target_add_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "fc42541a-ea3f-495f-bccc-83ed896a32a4": {
@@ -4471,7 +4551,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "add_medium_money": 1
+            "add_medium_money": 1,
+            "add_dislike_preference": 1
         }
     },
     "0441e972-fea1-4f31-84b5-29d9df3a3992": {
@@ -4518,7 +4599,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_students_course_experience_for_in_classroom": 1,
-            "add_medium_money": 1
+            "add_medium_money": 1,
+            "add_dislike_preference": 1
         }
     },
     "11eca278-870f-4881-ad08-ac03b591f2e3": {
@@ -4619,7 +4701,8 @@
             "add_small_play_music_experience": 1,
             "target_add_small_rage": 1,
             "add_small_singing_experience": 1,
-            "add_small_performance_experience": 1
+            "add_small_performance_experience": 1,
+            "add_dislike_preference": 1
         }
     },
     "c04897c0-5aec-44bc-9437-8228aa36a11b": {
@@ -4672,7 +4755,8 @@
             "add_small_singing_experience": 1,
             "add_small_play_music_experience": 1,
             "target_add_small_happy": 1,
-            "target_add_small_intoxicated": 1
+            "target_add_small_intoxicated": 1,
+            "add_like_preference": 1
         }
     },
     "7cf6fffd-6ce1-4880-bba9-8209112385c5": {
@@ -4694,7 +4778,8 @@
             "add_small_singing_experience": 1,
             "add_small_play_music_experience": 1,
             "target_add_small_happy": 1,
-            "target_add_small_intoxicated": 1
+            "target_add_small_intoxicated": 1,
+            "add_like_preference": 1
         }
     },
     "5a97216b-ade8-4ba3-aeea-9e756638852a": {
@@ -4774,7 +4859,8 @@
         },
         "settle": {
             "sub_small_mana_point": 1,
-            "add_small_attend_class_experience": 1
+            "add_small_attend_class_experience": 1,
+            "add_dislike_preference": 1
         }
     },
     "71bf9923-9417-47da-a51d-a8a4113f4464": {
@@ -4787,7 +4873,8 @@
             "is_impetuous": 1
         },
         "settle": {
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
         }
     },
     "18e54c25-a7c4-486c-8ce6-f30e56c71739": {
@@ -4966,7 +5053,8 @@
             "sub_medium_mana_point": 1,
             "add_small_lust": 1,
             "add_small_penis_experience": 1,
-            "add_medium_penis_happy": 1
+            "add_medium_penis_happy": 1,
+            "add_dislike_preference": 1
         }
     },
     "7df5405e-fb87-44ba-b217-51112e931c8b": {
@@ -5006,7 +5094,8 @@
             "target_add_medium_antipathy": 1,
             "target_add_small_fear": 1,
             "target_add_small_arrogant": 1,
-            "target_add_small_rage": 1
+            "target_add_small_rage": 1,
+            "add_dislike_preference": 1
         }
     },
     "1c3039dc-f8ef-4482-9a84-57a8b2fe30a5": {
@@ -5028,7 +5117,8 @@
             "add_small_lust": 1,
             "target_add_small_lust": 1,
             "add_small_penis_experience": 1,
-            "add_medium_penis_happy": 1
+            "add_medium_penis_happy": 1,
+            "add_like_preference": 1
         }
     },
     "aa5eece7-9737-478c-9186-67a136701b21": {
@@ -5052,7 +5142,8 @@
             "add_small_favorability": 1,
             "target_add_small_favorability": 1,
             "add_small_lust": 1,
-            "target_add_small_lust": 1
+            "target_add_small_lust": 1,
+            "add_like_preference": 1
         }
     },
     "e251cbeb-75e4-402a-a744-5a16fbdd1a17": {
@@ -5097,7 +5188,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "add_small_favorability": 1
+            "add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "36f46963-839e-44a7-beb1-f803ea57a77a": {
@@ -5112,7 +5204,8 @@
         },
         "settle": {
             "eat_food": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "768fbf00-f01b-48ef-8b30-e61a60485b82": {
@@ -5130,7 +5223,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_depressed": 1,
-            "add_small_lazy": 1
+            "add_small_lazy": 1,
+            "add_dislike_preference": 1
         }
     },
     "88b843e8-ab8e-4707-958e-53257d36d0e4": {
@@ -5316,7 +5410,8 @@
             "add_small_pain": 1,
             "add_small_shame": 1,
             "sub_small_mana_point": 1,
-            "add_medium_money": 1
+            "add_medium_money": 1,
+            "add_dislike_preference": 1
         }
     },
     "6d8ed3ab-ac14-427d-9ac8-9ff9e440d194": {
@@ -5452,7 +5547,8 @@
         "settle": {
             "sub_small_mana_point": 1,
             "add_small_dance_experience": 1,
-            "target_add_small_favorability": 1
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "fd7af233-6001-47fd-8b0b-e7b6d0825c5d": {
@@ -5588,7 +5684,8 @@
             "target_add_small_depressed": 1,
             "target_add_small_antipathy": 1,
             "target_add_small_eloquence_experience": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_like_preference": 1
         }
     },
     "2c78e419-97fa-4c65-9fc5-5b4dee671aa8": {
@@ -5641,7 +5738,8 @@
             "interrupt_target_activity": 1,
             "add_medium_rage": 1,
             "target_add_small_ache": 1,
-            "target_add_medium_rage": 1
+            "target_add_medium_rage": 1,
+            "add_like_preference": 1
         }
     },
     "583be649-471e-4179-be3a-fee75f009156": {
@@ -5850,7 +5948,8 @@
             "add_small_lust": 1,
             "add_small_rage": 1,
             "add_small_envy": 1,
-            "target_sub_medium_favorability": 1
+            "target_sub_medium_favorability": 1,
+            "add_dislike_preference": 1
         }
     },
     "cdb455d1-c78c-467b-a7cd-3a54c8cd7f93": {
@@ -5877,7 +5976,8 @@
             "add_small_eloquence_experience": 1,
             "target_add_small_favorability": 1,
             "add_small_favorability": 1,
-            "undress_target_underwear": 1
+            "undress_target_underwear": 1,
+            "add_like_preference": 1
         }
     },
     "22dee734-b298-4f6e-922b-cd0be0f9bbcd": {
@@ -5910,7 +6010,8 @@
             "undress_target_shoes": 1,
             "undress_target_skirt": 1,
             "undress_target_socks": 1,
-            "undress_target_underpants": 1
+            "undress_target_underpants": 1,
+            "add_like_preference": 1
         }
     },
     "2179b2ef-4895-4f2b-92dc-8a554b917864": {
@@ -6007,7 +6108,8 @@
             "add_small_antipathy": 1,
             "add_small_fear": 1,
             "add_small_shame": 1,
-            "move_to_target_scene": 1
+            "move_to_target_scene": 1,
+            "add_dislike_preference": 1
         }
     },
     "8d5a2ae4-809d-4160-8a68-2e7bc5615f6a": {
@@ -6074,7 +6176,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "add_large_mana_point": 1
+            "add_large_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "8a34e34e-d758-40f6-8ac0-ae0a3831f6c5": {
@@ -6890,7 +6993,8 @@
             "target_add_small_happy": 1,
             "target_add_small_favorability": 1,
             "target_add_small_shame": 1,
-            "target_add_small_yearn": 1
+            "target_add_small_yearn": 1,
+            "add_like_preference": 1
         }
     },
     "9973953d-b5b7-4c3d-9307-32c59fbd32b0": {
@@ -6907,7 +7011,8 @@
             "add_small_performance_experience": 1,
             "add_small_dance_experience": 1,
             "add_small_depressed": 1,
-            "add_small_lazy": 1
+            "add_small_lazy": 1,
+            "add_dislike_preference": 1
         }
     },
     "13e9e8b8-2324-4b60-9b59-182aed061fad": {
@@ -7107,7 +7212,8 @@
         "premise": {},
         "settle": {
             "add_small_yearn": 1,
-            "target_add_small_arrogant": 1
+            "target_add_small_arrogant": 1,
+            "add_dislike_preference": 1
         }
     },
     "00da3e8c-b08d-4db3-8dbc-755e4c023a26": {
@@ -7259,7 +7365,8 @@
             "add_small_singing_experience": 1,
             "target_add_small_singing_experience": 1,
             "target_add_small_favorability": 1,
-            "add_small_happy": 1
+            "add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "0a113a5e-cbee-492c-8728-b585c51067db": {
@@ -7285,7 +7392,8 @@
             "target_add_small_favorability": 1,
             "add_small_eloquence_experience": 1,
             "add_small_happy": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "de3ce343-c462-4063-ab08-fe3810e80738": {
@@ -7379,7 +7487,8 @@
             "target_add_small_favorability": 1,
             "add_small_attend_class_experience": 1,
             "add_small_happy": 1,
-            "sub_small_mana_point": 1
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
         }
     },
     "5650b27f-f080-4b31-a942-0edc0d016667": {
@@ -7460,7 +7569,8 @@
             "target_add_small_favorability": 1,
             "add_small_happy": 1,
             "add_small_shame": 1,
-            "target_add_small_happy": 1
+            "target_add_small_happy": 1,
+            "add_like_preference": 1
         }
     },
     "60c6f3aa-31d3-4e2e-ad9e-f1cd4587ca6b": {
@@ -7525,38 +7635,8 @@
             "sub_small_greedy": 1,
             "sub_small_gluttony": 1,
             "sub_small_lust": 1,
-            "add_small_favorability": 1
-        }
-    },
-    "ba7d7e09-a960-44ac-9a89-9348fd507197": {
-        "uid": "ba7d7e09-a960-44ac-9a89-9348fd507197",
-        "adv_id": "",
-        "status_id": "3",
-        "start": false,
-        "text": "正当{Name}收拾教案时，{TargetName}突然按住讲台上的手腕\\n「老师今天的领带...很适合被攥紧呢」\\n{TargetName}指尖缓缓划过{Name}的喉结\\n粉笔从颤抖的指间滚落，在空荡教室敲出清脆心跳声\\n",
-        "premise": {
-            "rich_experience_in_sex": 1,
-            "antipathy_is_height": 1,
-            "lust_is_hight": 1,
-            "yearn_is_height": 1,
-            "have_target": 1,
-            "is_beyond_friendship_target": 1,
-            "target_lust_is_hight": 1,
-            "target_yearn_is_height": 1,
-            "is_man": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "sub_small_mana_point": 1,
-            "add_students_course_experience_for_in_classroom": 1,
-            "target_add_medium_favorability": 1,
             "add_small_favorability": 1,
-            "add_small_happy": 1,
-            "add_small_yearn": 1,
-            "add_small_antipathy": 1,
-            "add_small_shame": 1,
-            "add_small_arrogant": 1,
-            "add_medium_lust": 1
+            "add_like_preference": 1
         }
     },
     "d6177d0e-095c-426a-ae05-ef9fa6145382": {
@@ -7568,355 +7648,167 @@
         "premise": {},
         "settle": {}
     },
-    "8c480c1f-4b1e-44ef-a1e9-18dfd6ca28c3": {
-        "uid": "8c480c1f-4b1e-44ef-a1e9-18dfd6ca28c3",
+    "23d9a822-5afb-4258-9f9c-131fa9e71856": {
+        "uid": "23d9a822-5afb-4258-9f9c-131fa9e71856",
         "adv_id": "",
-        "status_id": "1",
-        "start": true,
-        "text": "{Name}抬头望向了天空，星光在眸中流转\\n「该出发了」\\n{Name}收拾好东西，快步走向了{TargetSceneName}",
-        "premise": {
-            "in_classroom": 1,
-            "is_night": 1,
-            "astronomy_skills_is_height": 1,
-            "target_is_beyond_friendship": 1,
-            "tonight_is_yumibarizuki_moon": 1
-        },
-        "settle": {}
-    },
-    "113c3a47-22e9-4357-bc78-d4ccf5815ff3": {
-        "uid": "113c3a47-22e9-4357-bc78-d4ccf5815ff3",
-        "adv_id": "",
-        "status_id": "1",
+        "status_id": "4",
         "start": false,
-        "text": "{Name}抵达{SceneName}后，若有所思地驻足片刻，目光扫过熟悉的景致\\n「今天也会是平静的一天吧」\\n{Name}轻声自语，指尖无意识摩挲着书包带",
+        "text": "「沾到脸上了」\\n{TargetName}突然伸手抹去{Name}嘴角的残渣",
         "premise": {
-            "in_classroom": 1,
             "is_student": 1,
-            "scene_no_have_other_character": 1
+            "target_is_student": 1,
+            "in_restaurant": 1,
+            "target_no_first_hand_in_hand": 1,
+            "have_like_target_in_scene": 1
         },
         "settle": {
-            "move_to_target_scene": 1,
-            "add_small_yearn": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "503537c3-9924-4ea6-96ac-17689df705e5": {
-        "uid": "503537c3-9924-4ea6-96ac-17689df705e5",
-        "adv_id": "",
-        "status_id": "4",
-        "start": false,
-        "text": "{Name}咬下最后一口{FoodName}，指尖无意识摩挲着包装纸发出沙沙声\\n突然瞥见{TargetName}衣领沾着的食物碎屑，伸手轻轻捻去",
-        "premise": {
-            "hunger": 1,
-            "target_not_stranger": 1,
-            "target_is_beyond_friendship": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_medium_happy": 1,
-            "target_add_small_shame": 1,
-            "target_add_small_favorability": 1
-        }
-    },
-    "88139130-4199-4b4c-b88e-0dbf5f1ba574": {
-        "uid": "88139130-4199-4b4c-b88e-0dbf5f1ba574",
-        "adv_id": "",
-        "status_id": "4",
-        "start": false,
-        "text": "「要尝尝吗？这个{FoodName}超赞的～」\\n{Name}将咬了一半的{FoodName}递到{TargetName}唇边，指尖残留着晶亮水痕\"",
-        "premise": {
-            "target_is_beyond_friendship": 1,
-            "no_have_other_target_in_scene": 1,
-            "lust_is_hight": 1,
-            "target_no_first_kiss": 1
-        },
-        "settle": {
-            "add_large_lust": 1,
-            "target_add_medium_shame": 1,
-            "target_add_small_yearn": 1,
-            "add_medium_favorability": 1
-        }
-    },
-    "85361f06-0fac-4280-aa3f-9d8367de760a": {
-        "uid": "85361f06-0fac-4280-aa3f-9d8367de760a",
-        "adv_id": "",
-        "status_id": "5",
-        "start": false,
-        "text": "「你看过会跳舞的粉笔吗？」\\n{Name}突然抓起讲台上的粉笔，在{TargetName}课桌上快速旋转出一串滑稽小人\\n「噗...这是什么啊！」\\n{TargetName}捂着嘴努力不笑出声，肩膀却止不住颤动",
-        "premise": {
-            "in_classroom": 1,
-            "eloquence_skills_interest_is_height": 1,
-            "target_is_humor_man": 1,
-            "not_in_class_time": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_medium_happy": 1,
-            "target_add_large_happy": 1,
-            "add_small_eloquence_experience": 1,
-            "add_small_favorability": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "b1cae3da-20d7-4f80-ae73-ea44c6bbdff9": {
-        "uid": "b1cae3da-20d7-4f80-ae73-ea44c6bbdff9",
-        "adv_id": "",
-        "status_id": "5",
-        "start": false,
-        "text": "「喂，看我发明的'课本魔术'！」\\n{Name}突然将{TargetName}的课本抛向空中，手指翻飞间夹住三支笔\\n「锵锵——变成《母猪产后护理》了！」\\n{TargetName}的书页上赫然贴着歪歪扭扭的涂鸦封面，两人课桌间爆发出压低的鹅叫声",
-        "premise": {
-            "in_classroom": 1,
-            "performance_skills_interest_is_height": 1,
-            "target_is_gregarious": 1,
-            "not_in_class_time": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_medium_happy": 1,
-            "target_add_large_happy": 1,
-            "add_small_performance_experience": 1,
-            "add_small_favorability": 1,
             "target_add_small_favorability": 1,
-            "sub_small_mana_point": 1
+            "add_small_happy": 1,
+            "target_sub_small_shame": 1,
+            "eat_food": 1,
+            "add_like_preference": 1
         }
     },
-    "036dccd4-2711-4db6-8843-31950b0e5e4a": {
-        "uid": "036dccd4-2711-4db6-8843-31950b0e5e4a",
+    "27d4b2c0-01b7-4c05-9a6f-37539da60c55": {
+        "uid": "27d4b2c0-01b7-4c05-9a6f-37539da60c55",
+        "adv_id": "",
+        "status_id": "4",
+        "start": false,
+        "text": "「难听死了」\\n{Name}将空饭盒重重扣在课桌上\\n油渍溅到了{TargetName}身上",
+        "premise": {
+            "target_is_sing": 1,
+            "hatred_target": 1,
+            "no_have_other_target_in_scene": 1
+        },
+        "settle": {
+            "eat_food": 1,
+            "target_sub_medium_happy": 1,
+            "target_add_medium_antipathy": 1,
+            "add_medium_happy": 1,
+            "add_dislike_preference": 1
+        }
+    },
+    "1becc11f-a781-470c-9202-df1f6d12b997": {
+        "uid": "1becc11f-a781-470c-9202-df1f6d12b997",
+        "adv_id": "",
+        "status_id": "5",
+        "start": false,
+        "text": "{Name}突然挤眉弄眼学起老师扶眼镜的动作\\n{TargetName}噗嗤笑出了声",
+        "premise": {
+            "target_not_stranger": 1,
+            "is_humor_man": 1,
+            "is_student": 1,
+            "target_is_student": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "target_add_small_happy": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_performance_experience": 1,
+            "add_like_preference": 1
+        }
+    },
+    "d8d63ed6-e4a9-4f34-9ce2-a68aacac0bf0": {
+        "uid": "d8d63ed6-e4a9-4f34-9ce2-a68aacac0bf0",
+        "adv_id": "",
+        "status_id": "5",
+        "start": false,
+        "text": "「这道题好难……」\\n{TargetName}红着脸摆弄衣角",
+        "premise": {
+            "is_student": 1,
+            "target_is_student": 1,
+            "in_classroom": 1,
+            "is_beyond_friendship_target": 1,
+            "no_have_other_target_in_scene": 1
+        },
+        "settle": {
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
+        }
+    },
+    "25c7dd50-2587-46b4-9f8e-1700240508a1": {
+        "uid": "25c7dd50-2587-46b4-9f8e-1700240508a1",
         "adv_id": "",
         "status_id": "7",
         "start": false,
-        "text": "「最后一个音符要飘到月亮上啦～」\\n{Name}突然踮脚将粉笔抛向空中，在黑板画出歪歪扭扭的星月轨迹\\n{TargetName}扑哧笑出声的瞬间，{Name}转身接住落下的粉笔行了个夸张的谢幕礼",
+        "text": "「跑调了...」\\n{Name}的声音随着电扇嗡鸣渐渐低了下去",
         "premise": {
+            "is_student": 1,
+            "is_sunny": 1,
             "in_classroom": 1,
-            "eloquence_skills_interest_is_height": 1,
-            "target_is_humor_man": 1,
-            "singing_skills_is_height": 1,
-            "not_in_class_time": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_medium_happy": 1,
-            "target_add_large_happy": 1,
-            "add_small_singing_experience": 1,
-            "add_small_favorability": 1,
-            "target_add_small_favorability": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "b8514e2b-7a02-4a35-965d-828e64ef44fd": {
-        "uid": "b8514e2b-7a02-4a35-965d-828e64ef44fd",
-        "adv_id": "",
-        "status_id": "8",
-        "start": true,
-        "text": "「这样...很痒啦」\\n{TargetName}耳尖泛红地缩了缩脖子，却将发顶轻轻抵在{Name}掌心\\n细软发丝从指缝间漏下，{Name}忍不住用指尖绕着{TargetName}翘起的发旋打转",
-        "premise": {
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "a7d7634c-32ea-4be1-aff7-2f6f07c18aaa": {
-        "uid": "a7d7634c-32ea-4be1-aff7-2f6f07c18aaa",
-        "adv_id": "",
-        "status_id": "8",
-        "start": true,
-        "text": "{Name}的指尖轻轻擦过{TargetName}的发梢，像触碰初春的新雪般小心翼翼\\n「头发...很柔软呢」\\n{TargetName}微微低头，将发顶主动贴向{Name}温热的掌心",
-        "premise": {
-            "target_is_tolerant": 1,
-            "target_is_beyond_friendship": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "235bdd26-bc7d-42aa-af8d-a41636a0a3fe": {
-        "uid": "235bdd26-bc7d-42aa-af8d-a41636a0a3fe",
-        "adv_id": "",
-        "status_id": "8",
-        "start": true,
-        "text": "「头发翘起来也很可爱呢～」\\n{Name}指尖轻轻梳理着{TargetName}的发梢，将一缕不听话的头发别到耳后\\n掌心若有若无擦过泛红的耳尖，{TargetName}的睫毛像受惊的蝴蝶般轻颤",
-        "premise": {
-            "is_student": 1,
-            "target_no_player": 1,
-            "target_is_beyond_friendship": 1,
-            "target_height_low": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "ee50a5fa-75c0-4cb3-ab5d-504fb51d8862": {
-        "uid": "ee50a5fa-75c0-4cb3-ab5d-504fb51d8862",
-        "adv_id": "",
-        "status_id": "8",
-        "start": true,
-        "text": "「发丝沾着月光的样子...很漂亮呢」\\n{Name}的指尖轻柔穿过{TargetName}的刘海，指节若有似无地蹭过发烫的耳廓\\n{TargetName}微微仰起脸，将额头主动贴上温热的掌心，月光在交错的睫毛间碎成星屑",
-        "premise": {
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "no_have_other_target_in_scene": 1,
-            "is_night": 1
-        },
-        "settle": {}
-    },
-    "c48b39b0-4409-474f-9b4c-7c57b2c58817": {
-        "uid": "c48b39b0-4409-474f-9b4c-7c57b2c58817",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "月光从窗帘缝隙漏进来，在{Name}轻颤的睫毛上碎成星屑\\n「唔...」\\n{Name}揉着眼睛撑起身，被褥从泛着薄红的肩头滑落\\n指尖无意识摩挲着枕边褶皱，那里还残留着梦中余温",
-        "premise": {
-            "scene_no_have_other_character": 1,
-            "in_sleep_time": 1
-        },
-        "settle": {
-            "add_large_hit_point": 1,
-            "add_large_mana_point": 1,
-            "sub_large_happy": 1,
-            "sub_large_pain": 1,
-            "sub_large_yearn": 1,
-            "sub_large_fear": 1,
-            "sub_large_antipathy": 1,
-            "sub_large_shame": 1,
-            "sub_large_depressed": 1,
-            "sub_large_arrogant": 1,
-            "sub_large_envy": 1,
-            "sub_large_rage": 1,
-            "sub_large_lazy": 1,
-            "sub_large_greedy": 1,
-            "sub_large_gluttony": 1,
-            "sub_large_lust": 1,
-            "sub_large_mouth_happy": 1,
-            "sub_large_chest_happy": 1,
-            "sub_large_vagina_happy": 1,
-            "sub_large_clitoris_happy": 1,
-            "sub_large_anus_happy": 1,
-            "sub_large_penis_happy": 1,
-            "sub_large_tired": 1
-        }
-    },
-    "65eea569-4e8d-47ca-ad16-adfa414b6c29": {
-        "uid": "65eea569-4e8d-47ca-ad16-adfa414b6c29",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "晨光穿过窗帘缝隙爬上{Name}的眼睑，清脆鸟鸣中{Name}揉着眼睛坐起身\\n被褥滑落露出泛着暖意的肌肤，{Name}对着空气露出满足的微笑",
-        "premise": {
-            "is_sunny": 1,
-            "is_night": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {
-            "add_large_hit_point": 1,
-            "add_large_mana_point": 1,
-            "sub_large_happy": 1,
-            "sub_large_pain": 1,
-            "sub_large_yearn": 1,
-            "sub_large_fear": 1,
-            "sub_large_antipathy": 1,
-            "sub_large_shame": 1,
-            "sub_large_depressed": 1,
-            "sub_large_arrogant": 1,
-            "sub_large_envy": 1,
-            "sub_large_rage": 1,
-            "sub_large_lazy": 1,
-            "sub_large_greedy": 1,
-            "sub_large_gluttony": 1,
-            "sub_large_lust": 1,
-            "sub_large_mouth_happy": 1,
-            "sub_large_chest_happy": 1,
-            "sub_large_vagina_happy": 1,
-            "sub_large_clitoris_happy": 1,
-            "sub_large_anus_happy": 1,
-            "sub_large_penis_happy": 1,
-            "sub_large_tired": 1
-        }
-    },
-    "5bc497f2-fe45-489f-91ec-7c4d0621436a": {
-        "uid": "5bc497f2-fe45-489f-91ec-7c4d0621436a",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "「唔…早上了吗…」\\n朦胧间{Name}感觉被角被轻轻掖紧\\n睁开眼时只看到{TargetName}匆匆离去的背影\\n晨光透过窗帘缝隙落在尚存余温的被角上",
-        "premise": {
-            "have_other_target_in_scene": 1,
-            "target_no_player": 1,
-            "target_is_beyond_friendship": 1,
-            "in_breakfast_time": 1
-        },
-        "settle": {
-            "add_large_hit_point": 1,
-            "add_large_mana_point": 1,
-            "sub_large_happy": 1,
-            "sub_large_pain": 1,
-            "sub_large_yearn": 1,
-            "sub_large_fear": 1,
-            "sub_large_antipathy": 1,
-            "sub_large_shame": 1,
-            "sub_large_depressed": 1,
-            "sub_large_arrogant": 1,
-            "sub_large_envy": 1,
-            "sub_large_rage": 1,
-            "sub_large_lazy": 1,
-            "sub_large_greedy": 1,
-            "sub_large_gluttony": 1,
-            "sub_large_lust": 1,
-            "sub_large_mouth_happy": 1,
-            "sub_large_chest_happy": 1,
-            "sub_large_vagina_happy": 1,
-            "sub_large_clitoris_happy": 1,
-            "sub_large_anus_happy": 1,
-            "sub_large_penis_happy": 1,
-            "sub_large_tired": 1
-        }
-    },
-    "4159475f-39e3-4a76-97a8-fc634169dfb2": {
-        "uid": "4159475f-39e3-4a76-97a8-fc634169dfb2",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "晨光穿过窗户，在{Name}眼皮上跳着细碎的金色舞步\\n清脆鸟鸣声中，{Name}揉着惺忪睡眼撑起身子，被单从肩头滑落时带起一阵混合着阳光味道的暖风",
-        "premise": {
-            "is_sunny": 1,
-            "is_student": 1,
-            "in_breakfast_time": 1
-        },
-        "settle": {
-            "add_large_hit_point": 1,
-            "add_large_mana_point": 1,
-            "sub_large_happy": 1,
-            "sub_large_pain": 1,
-            "sub_large_yearn": 1,
-            "sub_large_fear": 1,
-            "sub_large_antipathy": 1,
-            "sub_large_shame": 1,
-            "sub_large_depressed": 1,
-            "sub_large_arrogant": 1,
-            "sub_large_envy": 1,
-            "sub_large_rage": 1,
-            "sub_large_lazy": 1,
-            "sub_large_greedy": 1,
-            "sub_large_gluttony": 1,
-            "sub_large_lust": 1,
-            "sub_large_mouth_happy": 1,
-            "sub_large_chest_happy": 1,
-            "sub_large_vagina_happy": 1,
-            "sub_large_clitoris_happy": 1,
-            "sub_large_anus_happy": 1,
-            "sub_large_penis_happy": 1,
-            "sub_large_tired": 1
-        }
-    },
-    "1a3038d6-58aa-4bd8-82d7-ade337ba6ec4": {
-        "uid": "1a3038d6-58aa-4bd8-82d7-ade337ba6ec4",
-        "adv_id": "",
-        "status_id": "9",
-        "start": 0,
-        "text": "晨曦透过窗帘缝隙落在{Name}的眼睑上\\n「再不起床要迟到了哦～」\\n{TargetName}掀起被角轻笑，指尖有意无意扫过{Name}裸露的腰线\\n凉意激得{Name}猛然坐起，撞进{TargetName}盈满恶作剧笑意的眼眸",
-        "premise": {
             "scene_have_other_character": 1,
-            "in_breakfast_time": 1
+            "is_summer": 1
         },
+        "settle": {
+            "add_small_shame": 1,
+            "sub_small_happy": 1,
+            "add_small_singing_experience": 1,
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
+        }
+    },
+    "f95dc306-541e-43f0-b7d9-11b1c27971d8": {
+        "uid": "f95dc306-541e-43f0-b7d9-11b1c27971d8",
+        "adv_id": "",
+        "status_id": "8",
+        "start": true,
+        "text": "「别动…」\\n{Name}的指尖掠过{TargetName}翘起的发梢",
+        "premise": {
+            "is_student": 1,
+            "target_is_student": 1,
+            "no_have_other_target_in_scene": 1,
+            "target_not_stranger": 1,
+            "target_less_than_adore": 1
+        },
+        "settle": {}
+    },
+    "1a0e8655-745c-4b00-9ad9-ee1d315a6745": {
+        "uid": "1a0e8655-745c-4b00-9ad9-ee1d315a6745",
+        "adv_id": "",
+        "status_id": "8",
+        "start": true,
+        "text": "{Name}踮脚去摸{TargetName}被风吹乱的头发",
+        "premise": {
+            "in_square": 1,
+            "target_is_height": 1
+        },
+        "settle": {}
+    },
+    "c8314d22-afca-4bab-a4b5-c2975e702cab": {
+        "uid": "c8314d22-afca-4bab-a4b5-c2975e702cab",
+        "adv_id": "",
+        "status_id": "8",
+        "start": true,
+        "text": "「别碰」\\n{TargetName}偏头避开{Name}的手",
+        "premise": {
+            "target_is_apathy": 1,
+            "target_not_stranger": 1
+        },
+        "settle": {}
+    },
+    "a174b152-7fad-4a6c-9d2f-210cd9bca834": {
+        "uid": "a174b152-7fad-4a6c-9d2f-210cd9bca834",
+        "adv_id": "",
+        "status_id": "8",
+        "start": true,
+        "text": "{TargetName}仰起脸看着{Name}的手",
+        "premise": {
+            "target_is_heavy_feeling": 1,
+            "target_is_adore": 1,
+            "target_adore": 1,
+            "target_is_self_confidence": 1
+        },
+        "settle": {}
+    },
+    "1b7d1416-741c-4da9-8a2c-83bcbf4a83bf": {
+        "uid": "1b7d1416-741c-4da9-8a2c-83bcbf4a83bf",
+        "adv_id": "",
+        "status_id": "9",
+        "start": 0,
+        "text": "{Name}揉着眼坐起身",
+        "premise": {},
         "settle": {
             "add_large_hit_point": 1,
             "add_large_mana_point": 1,
@@ -7924,6 +7816,38 @@
             "sub_large_pain": 1,
             "sub_large_yearn": 1,
             "sub_large_fear": 1,
+            "sub_large_antipathy": 1,
+            "sub_large_shame": 1,
+            "sub_large_depressed": 1,
+            "sub_large_arrogant": 1,
+            "sub_large_envy": 1,
+            "sub_large_rage": 1,
+            "sub_large_lazy": 1,
+            "sub_large_greedy": 1,
+            "sub_large_gluttony": 1,
+            "sub_large_lust": 1,
+            "sub_large_mouth_happy": 1,
+            "sub_large_chest_happy": 1,
+            "sub_large_vagina_happy": 1,
+            "sub_large_clitoris_happy": 1,
+            "sub_large_anus_happy": 1,
+            "sub_large_penis_happy": 1,
+            "sub_large_tired": 1
+        }
+    },
+    "eec43a67-d5cd-425c-9b5e-89ce9bb55ade": {
+        "uid": "eec43a67-d5cd-425c-9b5e-89ce9bb55ade",
+        "adv_id": "",
+        "status_id": "9",
+        "start": 0,
+        "text": "{Name}从睡梦中猛然坐起",
+        "premise": {},
+        "settle": {
+            "add_large_hit_point": 1,
+            "add_large_mana_point": 1,
+            "sub_large_happy": 1,
+            "sub_large_pain": 1,
+            "sub_large_yearn": 1,
             "sub_large_antipathy": 1,
             "sub_large_shame": 1,
             "sub_large_depressed": 1,
@@ -7941,401 +7865,1743 @@
             "sub_large_anus_happy": 1,
             "sub_large_penis_happy": 1,
             "sub_large_tired": 1,
-            "target_add_small_favorability": 1
+            "add_medium_fear": 1
         }
     },
-    "ba1c4690-1de2-4b82-9c18-97cbd75585a3": {
-        "uid": "ba1c4690-1de2-4b82-9c18-97cbd75585a3",
+    "214e6e4a-057d-4852-976e-bcfc85e43696": {
+        "uid": "214e6e4a-057d-4852-976e-bcfc85e43696",
         "adv_id": "",
-        "status_id": "10",
-        "start": true,
-        "text": "{Name}张了张口，指尖无意识攥住裙摆。月光在{TargetName}的睫毛上凝成细碎银屑，夜风卷起喷泉的水汽沾湿彼此衣袖\\n「那个…」\\n{Name}突然闭眼扑进{TargetName}怀里，鼻尖撞上衬衫第二颗纽扣，薄荷香混着剧烈心跳声在相贴的胸膛间轰鸣",
+        "status_id": "9",
+        "start": 0,
+        "text": "{Name}被翻书声吵醒了",
         "premise": {
             "is_student": 1,
+            "scene_have_other_character": 1
+        },
+        "settle": {
+            "add_large_hit_point": 1,
+            "add_large_mana_point": 1,
+            "sub_large_happy": 1,
+            "sub_large_pain": 1,
+            "sub_large_yearn": 1,
+            "sub_large_fear": 1,
+            "sub_large_antipathy": 1,
+            "sub_large_shame": 1,
+            "sub_large_depressed": 1,
+            "sub_large_arrogant": 1,
+            "sub_large_envy": 1,
+            "sub_large_rage": 1,
+            "sub_large_lazy": 1,
+            "sub_large_greedy": 1,
+            "sub_large_gluttony": 1,
+            "sub_large_lust": 1,
+            "sub_large_mouth_happy": 1,
+            "sub_large_chest_happy": 1,
+            "sub_large_vagina_happy": 1,
+            "sub_large_clitoris_happy": 1,
+            "sub_large_anus_happy": 1,
+            "sub_large_penis_happy": 1,
+            "sub_large_tired": 1
+        }
+    },
+    "687487bb-85ad-44c3-a8ac-61295f2ce91c": {
+        "uid": "687487bb-85ad-44c3-a8ac-61295f2ce91c",
+        "adv_id": "",
+        "status_id": "9",
+        "start": 0,
+        "text": "{Name}眯眼望着空荡的宿舍",
+        "premise": {
+            "scene_no_have_other_character": 1
+        },
+        "settle": {
+            "add_large_hit_point": 1,
+            "add_large_mana_point": 1,
+            "sub_large_happy": 1,
+            "sub_large_pain": 1,
+            "sub_large_yearn": 1,
+            "sub_large_fear": 1,
+            "sub_large_antipathy": 1,
+            "sub_large_shame": 1,
+            "sub_large_depressed": 1,
+            "sub_large_arrogant": 1,
+            "sub_large_envy": 1,
+            "sub_large_rage": 1,
+            "sub_large_lazy": 1,
+            "sub_large_greedy": 1,
+            "sub_large_gluttony": 1,
+            "sub_large_lust": 1,
+            "sub_large_mouth_happy": 1,
+            "sub_large_chest_happy": 1,
+            "sub_large_vagina_happy": 1,
+            "sub_large_clitoris_happy": 1,
+            "sub_large_anus_happy": 1,
+            "sub_large_penis_happy": 1,
+            "sub_large_tired": 1
+        }
+    },
+    "7c36470c-11a2-4364-bf84-b3bb01876fb5": {
+        "uid": "7c36470c-11a2-4364-bf84-b3bb01876fb5",
+        "adv_id": "",
+        "status_id": "9",
+        "start": true,
+        "text": "「唔…」\\n{Name}翻身时被角被轻轻压紧",
+        "premise": {
+            "target_adore": 1,
+            "target_is_adore": 1
+        },
+        "settle": {}
+    },
+    "65d23f1f-a787-429e-a26f-bbed9b337d21": {
+        "uid": "65d23f1f-a787-429e-a26f-bbed9b337d21",
+        "adv_id": "",
+        "status_id": "9",
+        "start": 0,
+        "text": "歌声将{Name}吵醒了",
+        "premise": {
+            "have_singing_in_scene": 1
+        },
+        "settle": {
+            "add_large_hit_point": 1,
+            "add_large_mana_point": 1,
+            "sub_large_happy": 1,
+            "sub_large_pain": 1,
+            "sub_large_yearn": 1,
+            "sub_large_fear": 1,
+            "sub_large_shame": 1,
+            "sub_large_depressed": 1,
+            "sub_large_arrogant": 1,
+            "sub_large_envy": 1,
+            "sub_large_rage": 1,
+            "sub_large_lazy": 1,
+            "sub_large_greedy": 1,
+            "sub_large_gluttony": 1,
+            "sub_large_lust": 1,
+            "sub_large_mouth_happy": 1,
+            "sub_large_chest_happy": 1,
+            "sub_large_vagina_happy": 1,
+            "sub_large_clitoris_happy": 1,
+            "sub_large_anus_happy": 1,
+            "sub_large_penis_happy": 1,
+            "sub_large_tired": 1,
+            "add_small_antipathy": 1
+        }
+    },
+    "2fa346cc-a832-4c01-b4a1-fb63de607943": {
+        "uid": "2fa346cc-a832-4c01-b4a1-fb63de607943",
+        "adv_id": "",
+        "status_id": "10",
+        "start": true,
+        "text": "{Name}擦过{TargetName}手背\\n{Name}突然转身环住了{TargetName}",
+        "premise": {
+            "is_student": 1,
+            "target_is_student": 1,
             "target_different_sex": 1,
-            "target_is_beyond_friendship": 1,
-            "is_futa_or_woman": 1,
-            "in_fountain": 1,
-            "is_night": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "93a17d6e-48fc-4d04-b69a-c4cb67f1b22f": {
-        "uid": "93a17d6e-48fc-4d04-b69a-c4cb67f1b22f",
-        "adv_id": "",
-        "status_id": "10",
-        "start": true,
-        "text": "月光如薄纱般笼罩着空无一人的天台，{Name}的指尖轻轻擦过{TargetName}微颤的手背\\n「那个...」\\n话音未落，{Name}突然张开双臂将{TargetName}紧紧圈进怀里\\n猝不及防跌入温热的怀抱，{TargetName}耳尖瞬间通红\\n「我…我很担心你……」\\n{Name}低声说着，将脸埋进{TargetName}散发着淡淡皂香的颈窝\\n交错的呼吸声在寂静中格外清晰，连心跳都成了合鸣",
-        "premise": {
-            "is_night": 1,
-            "no_have_other_target_in_scene": 1,
-            "target_is_beyond_friendship": 1,
-            "target_is_heavy_feeling": 1,
-            "target_is_inferiority": 1,
-            "target_is_tolerant": 1,
+            "have_other_target_in_scene": 1,
             "is_beyond_friendship_target": 1,
-            "in_rooftop_scene": 1
+            "target_is_beyond_friendship": 1
         },
         "settle": {}
     },
-    "0d3b04d5-72db-46dc-8f80-45f871fa3c79": {
-        "uid": "0d3b04d5-72db-46dc-8f80-45f871fa3c79",
-        "adv_id": "",
-        "status_id": "14",
-        "start": true,
-        "text": "{Name}的指尖悬停在{TargetName}发梢半寸处，暮色漫进琴房将蜷曲的碎发镀成淡金\\n{TargetName}睫毛在乐谱投下的阴影中轻颤",
-        "premise": {
-            "in_music_classroom": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "09bc1fb8-d961-476d-a769-95ebd398fd99": {
-        "uid": "09bc1fb8-d961-476d-a769-95ebd398fd99",
+    "c1e702ad-f931-4bd7-940c-2fe478360931": {
+        "uid": "c1e702ad-f931-4bd7-940c-2fe478360931",
         "adv_id": "",
         "status_id": "10",
         "start": true,
-        "text": "{Name}的指尖悬在{TargetName}肩头一寸处，暮色漫过琴谱架将颤抖的投影拖得老长\\n风掀动窗帘时漏进的光斑，在{TargetName}后颈凝成跳动的琥珀",
+        "text": "{TargetName}耳尖泛红地看着{Name}",
         "premise": {
-            "no_have_other_target_in_scene": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "is_night": 1,
-            "in_music_classroom": 1
+            "is_beyond_friendship_target": 1,
+            "target_is_beyond_friendship": 1
         },
         "settle": {}
     },
-    "22ba5be5-e369-4de5-a7cd-a697f12e949f": {
-        "uid": "22ba5be5-e369-4de5-a7cd-a697f12e949f",
+    "0d5a06c9-850d-43db-85bd-b7a60857a958": {
+        "uid": "0d5a06c9-850d-43db-85bd-b7a60857a958",
         "adv_id": "",
         "status_id": "10",
         "start": true,
-        "text": "暮色将{TargetName}的轮廓染成琥珀色，{Name}的指尖在对方衣摆处徘徊片刻，突然伸手将人拢进怀中\\n散落的课本在课桌上发出轻微磕碰声，{TargetName}的耳尖透过发丝渗出血色",
+        "text": "{Name}轻轻揽住{TargetName}微颤的肩",
         "premise": {
-            "no_have_other_target_in_scene": 1,
             "is_beyond_friendship_target": 1,
             "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "in_dinner_time": 1
+            "target_shame_is_height": 1
         },
         "settle": {}
     },
-    "77dd6b7c-2e23-40a7-9fc6-930c0686d972": {
-        "uid": "77dd6b7c-2e23-40a7-9fc6-930c0686d972",
+    "b7c5580d-6530-4a16-a4e0-949fff5db492": {
+        "uid": "b7c5580d-6530-4a16-a4e0-949fff5db492",
         "adv_id": "",
         "status_id": "10",
         "start": true,
-        "text": "{Name}的指尖在暮色中微微颤动，隔着三寸空气描摹{TargetName}肩颈的弧度\\n练习簿从琴凳滑落，纸页间漏出半个未写完的和弦符号",
+        "text": "{Name}突然张开双臂圈住{TargetName}",
         "premise": {
-            "no_have_other_target_in_scene": 1,
             "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "is_night": 1,
-            "in_music_classroom": 1
+            "target_is_beyond_friendship": 1
         },
         "settle": {}
     },
-    "ec1da9da-a623-40c4-acd6-33d38308e546": {
-        "uid": "ec1da9da-a623-40c4-acd6-33d38308e546",
+    "45c5e01f-763e-438b-9ad1-253f8f2d5e68": {
+        "uid": "45c5e01f-763e-438b-9ad1-253f8f2d5e68",
+        "adv_id": "",
+        "status_id": "10",
+        "start": true,
+        "text": " {TargetName}栽进了{Name}的怀里",
+        "premise": {
+            "target_adore": 1
+        },
+        "settle": {}
+    },
+    "2b0ab002-835b-47d4-9c7d-8e721d00bb4c": {
+        "uid": "2b0ab002-835b-47d4-9c7d-8e721d00bb4c",
         "adv_id": "",
         "status_id": "11",
         "start": false,
-        "text": "月光在{TargetName}湿润的唇瓣上碎成星屑\\n{Name}的呼吸与夜风缠绕，指尖无意识摩挲着对方发烫的耳垂",
+        "text": "{Name}的唇在{TargetName}颊边一触即离",
         "premise": {
-            "no_have_other_target_in_scene": 1,
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "target_shame_is_height": 1,
-            "sexual_skills_interest_is_height": 1,
-            "is_night": 1
-        },
-        "settle": {
-            "add_medium_lust": 1,
-            "target_add_large_shame": 1,
-            "add_small_mouth_happy": 1,
-            "target_add_small_mouth_happy": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "1b4c375a-77fc-4a41-8efc-9fe98f2aca6d": {
-        "uid": "1b4c375a-77fc-4a41-8efc-9fe98f2aca6d",
-        "adv_id": "",
-        "status_id": "12",
-        "start": true,
-        "text": "星光在{TargetName}微蜷的指尖凝成碎银，{Name}的呼吸与夜风缠绕\\n「那个...」\\n衣袖相触的瞬间，{Name}的小指轻轻勾住{TargetName}的尾指，掌心温度透过相贴的肌肤渗入脉搏",
-        "premise": {
-            "target_is_adore": 1,
-            "is_beyond_friendship_target": 1,
-            "in_rooftop_scene": 1,
-            "is_night": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "97b28b0f-6ad7-4122-9ebd-a25b5b0cca82": {
-        "uid": "97b28b0f-6ad7-4122-9ebd-a25b5b0cca82",
-        "adv_id": "",
-        "status_id": "12",
-        "start": true,
-        "text": "{Name}的指尖刚触到{TargetName}的手背，{TargetName}突然将整条手臂缩进衣袖\\n「图书馆里…别这样」\\n揉皱的文库本从膝头滑落，{Name}盯着书页间漏出的半截缎带发怔",
-        "premise": {
-            "in_library": 1,
-            "is_futa": 1,
-            "antipathy_is_height": 1,
-            "target_is_woman": 1,
-            "no_have_other_target_in_scene": 1,
-            "target_shame_is_height": 1,
-            "is_beyond_friendship_target": 1
-        },
-        "settle": {}
-    },
-    "2ba45f0e-4e17-4c09-a22d-7c907fac5e8c": {
-        "uid": "2ba45f0e-4e17-4c09-a22d-7c907fac5e8c",
-        "adv_id": "",
-        "status_id": "12",
-        "start": true,
-        "text": "「那个...我帮你拿吧」\\n{Name}踮脚去够货架顶层的罐头时，指尖不经意擦过{TargetName}正要抬起的手背\\n冰凉的金属罐在推车碰撞声中传递，{TargetName}困倦的睫毛在超市冷光下轻颤，任由掌心的温度在购物车把手上停留了三秒",
-        "premise": {
-            "target_is_man": 1,
-            "is_woman": 1,
-            "in_item_shop": 1,
-            "target_is_beyond_friendship": 1,
-            "target_is_tired": 1,
-            "is_student": 1,
-            "no_have_other_target_in_scene": 1
-        },
-        "settle": {}
-    },
-    "091645c0-b471-4559-8b99-7382224e38c3": {
-        "uid": "091645c0-b471-4559-8b99-7382224e38c3",
-        "adv_id": "",
-        "status_id": "14",
-        "start": true,
-        "text": "{Name}的指尖悬在{TargetName}肩头半寸处，粉笔灰从颤抖的指节簌簌落下\\n「这道题...」\\n话音未落，{TargetName}突然抱起课本退到过道，练习册摔在地上发出清脆声响\\n一双双眼睛从试卷堆里抬起，{Name}僵硬的指尖在黑板划出歪斜的抛物线",
-        "premise": {
-            "is_teacher": 1,
-            "target_is_student": 1,
-            "is_woman": 1,
-            "target_is_woman": 1,
-            "in_class_time": 1,
-            "in_classroom": 1,
-            "have_other_target_in_scene": 1,
-            "target_antipathy_is_height": 1,
-            "target_less_than_adore": 1,
-            "target_is_adore": 1,
-            "target_performance_skills_is_low": 1
-        },
-        "settle": {}
-    },
-    "211f8b87-bc9f-4e8a-93ca-f6e44481306b": {
-        "uid": "211f8b87-bc9f-4e8a-93ca-f6e44481306b",
-        "adv_id": "",
-        "status_id": "14",
-        "start": false,
-        "text": "「这样...很痒啦」\\n{TargetName}耳尖泛红地缩了缩脖子，却将发顶轻轻抵在{Name}掌心\\n细软发丝从指缝间漏下，{Name}忍不住用指尖绕着{TargetName}翘起的发旋打转",
-        "premise": {
-            "is_student": 1,
-            "target_is_student": 1,
-            "is_beyond_friendship_target": 1,
+            "is_autonomy": 1,
+            "target_admire": 1,
             "target_is_beyond_friendship": 1,
             "no_have_other_target_in_scene": 1
         },
         "settle": {
-            "add_medium_happy": 1,
+            "sub_small_mana_point": 1,
+            "add_small_shame": 1,
             "add_small_lust": 1,
-            "target_add_medium_shame": 1,
-            "target_add_small_lust": 1,
-            "sub_small_mana_point": 1
+            "target_add_small_lust": 1
         }
     },
-    "c775b4e7-65aa-4e63-8f38-2ef46e50c8a4": {
-        "uid": "c775b4e7-65aa-4e63-8f38-2ef46e50c8a4",
+    "18732c70-7f3e-4777-8366-765ebe7da983": {
+        "uid": "18732c70-7f3e-4777-8366-765ebe7da983",
+        "adv_id": "",
+        "status_id": "12",
+        "start": true,
+        "text": "{Name}的掌心突然贴上{TargetName}微颤的手背",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "target_shame_is_height": 1,
+            "target_is_inferiority": 1
+        },
+        "settle": {}
+    },
+    "cadcb05d-2929-484c-a808-c9d51e793a10": {
+        "uid": "cadcb05d-2929-484c-a808-c9d51e793a10",
+        "adv_id": "",
+        "status_id": "12",
+        "start": true,
+        "text": "{TargetName}冷冷的盯着{Name}伸出的手",
+        "premise": {
+            "target_is_apathy": 1,
+            "target_is_autonomy": 1,
+            "target_is_resolution": 1,
+            "no_beyond_friendship_target": 1
+        },
+        "settle": {}
+    },
+    "ff055829-2717-494b-988b-aae2e5b847bc": {
+        "uid": "ff055829-2717-494b-988b-aae2e5b847bc",
+        "adv_id": "",
+        "status_id": "12",
+        "start": true,
+        "text": "{TargetName}眨了眨眼，抖落睫毛上的雪花",
+        "premise": {
+            "is_heavy_snow": 1,
+            "out_door": 1
+        },
+        "settle": {}
+    },
+    "f508809a-4898-4e72-a523-ade074cb4007": {
+        "uid": "f508809a-4898-4e72-a523-ade074cb4007",
+        "adv_id": "",
+        "status_id": "14",
+        "start": true,
+        "text": "{Name}伸手揽住了{TargetName}的腰",
+        "premise": {},
+        "settle": {}
+    },
+    "a9755cd5-4e77-469b-a021-eea83a4648d5": {
+        "uid": "a9755cd5-4e77-469b-a021-eea83a4648d5",
+        "adv_id": "",
+        "status_id": "14",
+        "start": true,
+        "text": "「别碰我」\\n{TargetName}冷冷的盯着{Name}",
+        "premise": {
+            "target_detest": 1
+        },
+        "settle": {}
+    },
+    "424c1a99-85bd-4048-b1d6-e698ef6fb40c": {
+        "uid": "424c1a99-85bd-4048-b1d6-e698ef6fb40c",
         "adv_id": "",
         "status_id": "14",
         "start": false,
-        "text": "{Name}的指尖刚触到{TargetName}锁骨处的肌肤，教室后排突然传来一声冷笑\\n「真恶心」\\n讨厌的身影抱臂靠在窗边，{TargetName}慌乱地扯紧衣领退到课桌边缘\\n粉笔灰从指缝簌簌落下，在阳光里折射出细碎的光晕",
-        "premise": {
-            "have_dislike_target_in_scene": 1,
-            "beyond_friendship_target_in_scene": 1,
-            "have_other_target_in_scene": 1,
-            "have_singing_in_scene": 1,
-            "target_no_player": 1,
-            "target_same_sex": 1,
-            "target_is_woman": 1,
-            "target_shame_is_height": 1
-        },
-        "settle": {
-            "target_sub_medium_favorability": 1,
-            "target_add_medium_shame": 1,
-            "target_add_small_antipathy": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "932b92a4-ee5b-42bd-83af-00c0fd55ada2": {
-        "uid": "932b92a4-ee5b-42bd-83af-00c0fd55ada2",
-        "adv_id": "",
-        "status_id": "14",
-        "start": false,
-        "text": "「别动…」\\n{Name}的指尖沿着月光在{TargetName}腰际游走，冰凉的校服布料下渗出温热\\n{TargetName}忽然抓住不安分的手腕按在胸前，剧烈心跳透过两层衬衫布料震得{Name}指尖发麻\\n夜风掠过天台晾衣绳，带起一串金属挂钩的细碎叮铃声",
-        "premise": {
-            "no_have_other_target_in_scene": 1,
-            "target_is_woman": 1,
-            "is_beyond_friendship_target": 1,
-            "target_is_beyond_friendship": 1,
-            "is_night": 1,
-            "in_rooftop_scene": 1
-        },
-        "settle": {
-            "target_add_medium_shame": 1,
-            "target_add_medium_lust": 1,
-            "target_add_medium_favorability": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "eb88d516-367c-4168-af45-b8744b3e3566": {
-        "uid": "eb88d516-367c-4168-af45-b8744b3e3566",
-        "adv_id": "",
-        "status_id": "15",
-        "start": true,
-        "text": "暮色在{TargetName}的锁骨窝积成琥珀色的池水，{Name}的指尖悬停在衣领褶皱上方三寸\\n夜风掀起校服下摆时，{Name}的手掌突然覆上温软轮廓，{TargetName}的呼吸在天台晾衣绳上打结",
-        "premise": {
-            "no_have_other_target_in_scene": 1,
-            "is_beyond_friendship_target": 1,
-            "morality_is_low": 1,
-            "is_night": 1,
-            "sexual_skills_interest_is_height": 1,
-            "in_rooftop_scene": 1
-        },
-        "settle": {}
-    },
-    "7823ab3a-d45f-451c-bfaa-7737249d2c0c": {
-        "uid": "7823ab3a-d45f-451c-bfaa-7737249d2c0c",
-        "adv_id": "",
-        "status_id": "15",
-        "start": true,
-        "text": "月光在喷泉的水雾中折射出细碎银光，{Name}的指尖悬停在{TargetName}领口半寸处，水珠顺着大理石台面滴落的声音恰好盖过急促的呼吸\\n「会冷吗？」\\n{Name}低声问着，指节却已蹭过{TargetName}微微起伏的锁骨下方",
-        "premise": {
-            "in_fountain": 1,
-            "target_is_woman": 1,
-            "no_have_other_target_in_scene": 1,
-            "target_shame_is_low": 1,
-            "target_is_fragile": 1,
-            "is_beyond_friendship_target": 1
-        },
-        "settle": {}
-    },
-    "652c5ea5-7fc8-4559-b5f2-7f5c3d868f17": {
-        "uid": "652c5ea5-7fc8-4559-b5f2-7f5c3d868f17",
-        "adv_id": "",
-        "status_id": "15",
-        "start": true,
-        "text": "「辩论赛的伶牙俐齿用在这种地方合适吗？」\\n{Name}的指尖擦过{TargetName}制服褶皱，在书架投下的阴影中缓缓上移\\n{TargetName}突然攥住袭向胸口的手腕，冷笑声混着书页霉味：「用偷拍的把柄威胁人，这就是你的道德水准？」",
-        "premise": {
-            "target_eloquence_skills_is_height": 1,
-            "deadly_enemy_target": 1,
-            "no_have_other_target_in_scene": 1,
-            "in_library": 1
-        },
-        "settle": {}
-    },
-    "871b1c4e-9b50-439d-ba5b-db79d57fe128": {
-        "uid": "871b1c4e-9b50-439d-ba5b-db79d57fe128",
-        "adv_id": "",
-        "status_id": "15",
-        "start": false,
-        "text": "{Name}的手刚碰到{TargetName}的衣角，教室后排突然传来一声口哨\\n「耍流氓还这么笨！」\\n{TargetName}猛地拍开{Name}的手，练习册摔在地上的声响惊动了整个午休的教室",
+        "text": "{TargetName}触电般退后半步",
         "premise": {
             "is_student": 1,
-            "target_is_student": 1,
-            "have_other_target_in_scene": 1,
-            "target_antipathy_is_height": 1,
-            "in_siesta_time": 1,
-            "in_classroom": 1,
-            "ethic_is_low": 1,
-            "target_shame_is_height": 1
-        },
-        "settle": {
-            "target_sub_medium_favorability": 1,
-            "add_medium_shame": 1,
-            "target_add_medium_antipathy": 1,
-            "sub_small_mana_point": 1
-        }
-    },
-    "c3479f59-7ed1-498e-b599-70ecc1aaee2b": {
-        "uid": "c3479f59-7ed1-498e-b599-70ecc1aaee2b",
-        "adv_id": "",
-        "status_id": "15",
-        "start": false,
-        "text": "「你干什么！」\\n{TargetName}猛地拍开{Name}伸向胸口的手，练习册从课桌摔落发出闷响\\n泛红的眼眶在日光灯管下泛着水光，{TargetName}攥紧校服领口退到教室后墙，粉笔灰从指缝簌簌落进阴影",
-        "premise": {
-            "target_no_player": 1,
-            "target_is_woman": 1,
             "no_have_other_target_in_scene": 1,
-            "in_classroom": 1,
+            "target_wear_skirt": 1,
             "target_is_beyond_friendship": 1,
             "no_beyond_friendship_target": 1
         },
         "settle": {
+            "sub_small_mana_point": 1,
             "target_add_medium_antipathy": 1,
-            "target_sub_medium_favorability": 1,
-            "sub_small_mana_point": 1
+            "target_add_medium_shame": 1
         }
     },
-    "b0fb79a9-bf92-47a4-ab2c-8bec445a0e5e": {
-        "uid": "b0fb79a9-bf92-47a4-ab2c-8bec445a0e5e",
+    "96ca1f75-d05b-4571-b963-fd623125f084": {
+        "uid": "96ca1f75-d05b-4571-b963-fd623125f084",
         "adv_id": "",
-        "status_id": "16",
-        "start": true,
-        "text": "「第三单元细胞膜渗透实验需要重新校准浓度比...」\\n{Name}将教案在晨光中摊开，指节无意识地敲击着玻璃烧杯边缘\\n化学试剂在收纳盒里折射出七色光晕，备课笔记的折角被仔细抚平，钢笔水在草稿纸上洇开未写完的分子式",
+        "status_id": "14",
+        "start": false,
+        "text": "{TargetName}用力的拍开了{Name}的手",
         "premise": {
-            "ethic_is_height": 1,
-            "tonight_is_nemachi_tsuki_moon": 1,
-            "pharmacy_skills_is_height": 1
+            "target_is_woman": 1,
+            "have_other_target_in_scene": 1,
+            "target_antipathy_is_height": 1,
+            "no_beyond_friendship_target": 1,
+            "target_different_sex": 1
+        },
+        "settle": {
+            "target_add_medium_antipathy": 1,
+            "sub_medium_happy": 1,
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
+        }
+    },
+    "bda5429b-5962-4877-a5bd-d14e76fb82a7": {
+        "uid": "bda5429b-5962-4877-a5bd-d14e76fb82a7",
+        "adv_id": "",
+        "status_id": "14",
+        "start": false,
+        "text": "{TargetName}浑身颤抖着忍受着{Name}的抚摸",
+        "premise": {
+            "target_is_naked": 1,
+            "target_admire": 1,
+            "target_no_experience_in_sex": 1,
+            "rich_experience_in_sex": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "target_add_medium_shame": 1,
+            "add_small_happy": 1,
+            "target_add_small_antipathy": 1,
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
+        }
+    },
+    "ea9784d1-33d7-4974-bf5b-e5d84abcbcd4": {
+        "uid": "ea9784d1-33d7-4974-bf5b-e5d84abcbcd4",
+        "adv_id": "",
+        "status_id": "15",
+        "start": true,
+        "text": "{TargetName}红着脸看着{Name}伸出的手",
+        "premise": {
+            "target_admire": 1
         },
         "settle": {}
     },
-    "b9f15e82-4eec-4a6d-aabb-0dba8d2c68e6": {
-        "uid": "b9f15e82-4eec-4a6d-aabb-0dba8d2c68e6",
+    "f41fcd3d-638e-4030-a6c6-0c0093aad91d": {
+        "uid": "f41fcd3d-638e-4030-a6c6-0c0093aad91d",
+        "adv_id": "",
+        "status_id": "15",
+        "start": true,
+        "text": "{TargetName}握紧了{Name}伸出的手",
+        "premise": {
+            "target_adore": 1
+        },
+        "settle": {}
+    },
+    "0eedfba3-7efc-430e-ace7-1b12034a7f28": {
+        "uid": "0eedfba3-7efc-430e-ace7-1b12034a7f28",
+        "adv_id": "",
+        "status_id": "15",
+        "start": true,
+        "text": "「要试试吗？」\\n{TargetName}屏息贴近",
+        "premise": {
+            "target_is_indulge": 1,
+            "hate_target": 1,
+            "target_adore": 1,
+            "ethic_is_low": 1,
+            "sexual_skills_is_low": 1
+        },
+        "settle": {}
+    },
+    "85acfca0-6db1-417b-8127-735abe98771c": {
+        "uid": "85acfca0-6db1-417b-8127-735abe98771c",
+        "adv_id": "",
+        "status_id": "15",
+        "start": false,
+        "text": "{TargetName}猛地推开{Name}的手",
+        "premise": {
+            "target_rage_is_height": 1,
+            "have_other_target_in_scene": 1
+        },
+        "settle": {
+            "target_add_medium_antipathy": 1,
+            "target_add_medium_rage": 1,
+            "add_small_arrogant": 1,
+            "target_add_medium_shame": 1,
+            "add_small_shame": 1,
+            "sub_medium_happy": 1,
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
+        }
+    },
+    "1b9d12d9-b655-4c82-8fc4-161de10e4979": {
+        "uid": "1b9d12d9-b655-4c82-8fc4-161de10e4979",
+        "adv_id": "",
+        "status_id": "15",
+        "start": false,
+        "text": "{TargetName}后倾避开了{Name}的手\\n{TargetName}将衣领攥紧了",
+        "premise": {
+            "target_is_woman": 1,
+            "target_yearn_is_low": 1,
+            "no_experience_in_sex": 1,
+            "target_wear_underwear": 1
+        },
+        "settle": {
+            "target_add_small_antipathy": 1,
+            "target_add_small_shame": 1,
+            "sub_small_mana_point": 1
+        }
+    },
+    "5951f3cc-6b18-4127-a788-67f80e1c69ae": {
+        "uid": "5951f3cc-6b18-4127-a788-67f80e1c69ae",
+        "adv_id": "",
+        "status_id": "16",
+        "start": true,
+        "text": "{Name}翻开了教案",
+        "premise": {},
+        "settle": {}
+    },
+    "f8abadc2-d965-439a-9932-de3d048e331e": {
+        "uid": "f8abadc2-d965-439a-9932-de3d048e331e",
         "adv_id": "",
         "status_id": "16",
         "start": false,
-        "text": "「今天的阿语发音练习就到这里」{Name}清了清沙哑的嗓子，粉笔灰从袖口簌簌落下{TargetName}突然举起作业本站起来，用带着异国腔调的普通话问：「老师能教我用阿拉伯语写'仙人掌'吗？」\\n窗外的蝉鸣声中，{Name}捏着半包没吃完的辣条怔住两秒，突然用板书笔在黑板画出个滑稽的带刺团子：「这是老师唯一会画的沙漠植物——」\\n哄笑声里粉笔头精准砸中偷传零食的后排，{TargetName}憋着笑递来拧开的矿泉水瓶",
+        "text": "{Name}轻轻合上教案",
+        "premise": {},
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_medium_money": 1,
+            "add_students_course_experience_for_in_classroom": 1
+        }
+    },
+    "cae7b46d-3b70-4ee3-a7f3-2bfd89d78efd": {
+        "uid": "cae7b46d-3b70-4ee3-a7f3-2bfd89d78efd",
+        "adv_id": "",
+        "status_id": "16",
+        "start": false,
+        "text": "{Name}转身时瞥见{TargetName}悄悄咽了下口水",
         "premise": {
-            "scene_have_other_character": 1,
-            "target_is_enthusiasm": 1,
-            "arabic_skills_is_height": 1,
-            "target_arabic_skills_interest_is_height": 1
+            "target_hunger": 1
         },
         "settle": {
-            "target_add_medium_favorability": 1,
+            "sub_small_mana_point": 1,
+            "add_medium_money": 1,
             "add_students_course_experience_for_in_classroom": 1,
+            "add_like_preference": 1
+        }
+    },
+    "a5099a1d-539c-4469-b840-5f8a316e3fe1": {
+        "uid": "a5099a1d-539c-4469-b840-5f8a316e3fe1",
+        "adv_id": "",
+        "status_id": "16",
+        "start": false,
+        "text": "{Name}将课本摞齐\\n轻拍{TargetName}肩头",
+        "premise": {
+            "target_is_beyond_friendship": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_medium_money": 1,
+            "add_students_course_experience_for_in_classroom": 1
+        }
+    },
+    "b9a32ecd-bd0c-42c8-b3cc-27c70c33c29a": {
+        "uid": "b9a32ecd-bd0c-42c8-b3cc-27c70c33c29a",
+        "adv_id": "",
+        "status_id": "16",
+        "start": false,
+        "text": "{TargetName}慌忙将小纸条塞进抽屉里",
+        "premise": {
+            "have_target": 1,
+            "target_is_student": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_medium_money": 1,
+            "add_students_course_experience_for_in_classroom": 1
+        }
+    },
+    "1adcfa89-ee52-46be-8897-a6d08bd04fd6": {
+        "uid": "1adcfa89-ee52-46be-8897-a6d08bd04fd6",
+        "adv_id": "",
+        "status_id": "17",
+        "start": false,
+        "text": "{Name}指尖离开了琴弦",
+        "premise": {
+            "is_woman": 1,
+            "play_music_skills_is_height": 1
+        },
+        "settle": {
+            "add_small_play_music_experience": 1,
+            "sub_small_mana_point": 1
+        }
+    },
+    "19fe81f9-19fe-4079-ae5f-1556dc7b75b8": {
+        "uid": "19fe81f9-19fe-4079-ae5f-1556dc7b75b8",
+        "adv_id": "",
+        "status_id": "17",
+        "start": false,
+        "text": "{Name}垂眼揉了揉发红的指尖",
+        "premise": {
+            "depressed_is_height": 1,
+            "motion_skills_interest_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_play_music_experience": 1
+        }
+    },
+    "a231176b-fe66-43ea-8b13-ba473ec0c4f5": {
+        "uid": "a231176b-fe66-43ea-8b13-ba473ec0c4f5",
+        "adv_id": "",
+        "status_id": "17",
+        "start": false,
+        "text": "琴弦余震渐消\\n{Name}的衣角在风里轻轻晃了晃",
+        "premise": {
+            "out_door": 1,
+            "scene_no_have_other_character": 1,
+            "play_music_skills_is_low": 1
+        },
+        "settle": {
+            "add_small_play_music_experience": 1,
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
+        }
+    },
+    "29834609-6621-4486-84ec-97f09ba2a511": {
+        "uid": "29834609-6621-4486-84ec-97f09ba2a511",
+        "adv_id": "",
+        "status_id": "17",
+        "start": false,
+        "text": " {Name}轻轻将吉他倚在墙角",
+        "premise": {
+            "in_door": 1
+        },
+        "settle": {
+            "add_small_play_music_experience": 1,
+            "sub_small_mana_point": 1
+        }
+    },
+    "3c1fcbbd-67b0-4985-ad56-a56bd334f136": {
+        "uid": "3c1fcbbd-67b0-4985-ad56-a56bd334f136",
+        "adv_id": "",
+        "status_id": "17",
+        "start": false,
+        "text": "{Name}的琴声在走廊尽头消散",
+        "premise": {
+            "play_music_skills_is_height": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "add_small_play_music_experience": 1,
+            "sub_small_mana_point": 1
+        }
+    },
+    "252974bd-ed58-420b-bcca-bfc3f6dd7deb": {
+        "uid": "252974bd-ed58-420b-bcca-bfc3f6dd7deb",
+        "adv_id": "",
+        "status_id": "17",
+        "start": false,
+        "text": "{TargetName}快睡着了",
+        "premise": {
+            "play_music_skills_is_low": 1,
+            "no_beyond_friendship_target": 1,
+            "target_is_apathy": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "target_add_small_arrogant": 1,
+            "add_dislike_preference": 1
+        }
+    },
+    "7ff94e0e-23d3-4d9c-88d7-a0f5254d4d29": {
+        "uid": "7ff94e0e-23d3-4d9c-88d7-a0f5254d4d29",
+        "adv_id": "",
+        "status_id": "17",
+        "start": true,
+        "text": "{Name}将乐谱放到了膝盖上",
+        "premise": {
+            "in_music_classroom": 1
+        },
+        "settle": {}
+    },
+    "cc0990ed-c884-4ae2-93ef-f185fd184c76": {
+        "uid": "cc0990ed-c884-4ae2-93ef-f185fd184c76",
+        "adv_id": "",
+        "status_id": "18",
+        "start": true,
+        "text": "{Name}专注地写着笔记",
+        "premise": {},
+        "settle": {}
+    },
+    "38767b38-f086-4aa8-b93b-5803c84851a3": {
+        "uid": "38767b38-f086-4aa8-b93b-5803c84851a3",
+        "adv_id": "",
+        "status_id": "18",
+        "start": true,
+        "text": "{Name}将课本摞成小山",
+        "premise": {},
+        "settle": {}
+    },
+    "2e7a8447-8768-4888-a9cd-77e75e828f83": {
+        "uid": "2e7a8447-8768-4888-a9cd-77e75e828f83",
+        "adv_id": "",
+        "status_id": "18",
+        "start": true,
+        "text": "{Name}指尖轻敲纸面",
+        "premise": {},
+        "settle": {}
+    },
+    "1f9b89c4-4a1f-46a7-9de9-1d3b3790ba16": {
+        "uid": "1f9b89c4-4a1f-46a7-9de9-1d3b3790ba16",
+        "adv_id": "",
+        "status_id": "18",
+        "start": true,
+        "text": "{Name}的笔尖随着时钟的滴答声轻轻移动",
+        "premise": {
+            "is_pessimism": 1
+        },
+        "settle": {}
+    },
+    "5b4df61c-3c86-4b04-bf2f-4743d512995e": {
+        "uid": "5b4df61c-3c86-4b04-bf2f-4743d512995e",
+        "adv_id": "",
+        "status_id": "18",
+        "start": true,
+        "text": "{Name}捂着额头怀疑地看了看公式\\n笔尖在纸上轻轻划着线条",
+        "premise": {
+            "is_student": 1,
+            "is_woman": 1
+        },
+        "settle": {}
+    },
+    "8df94232-1900-4a64-bf88-cd590670baa2": {
+        "uid": "8df94232-1900-4a64-bf88-cd590670baa2",
+        "adv_id": "",
+        "status_id": "18",
+        "start": false,
+        "text": "{Name}指尖敲打桌面\\n笔记密密麻麻排成阵",
+        "premise": {
+            "is_night": 1
+        },
+        "settle": {
+            "add_small_attend_class_experience": 1,
+            "sub_small_mana_point": 1
+        }
+    },
+    "3554f776-d0e9-4c2b-b873-4037344a5ab1": {
+        "uid": "3554f776-d0e9-4c2b-b873-4037344a5ab1",
+        "adv_id": "",
+        "status_id": "18",
+        "start": 0,
+        "text": "{Name}合上了笔记本",
+        "premise": {},
+        "settle": {
+            "add_small_attend_class_experience": 1,
+            "sub_small_mana_point": 1
+        }
+    },
+    "27e40445-989f-446a-ab33-65359484313c": {
+        "uid": "27e40445-989f-446a-ab33-65359484313c",
+        "adv_id": "",
+        "status_id": "18",
+        "start": 0,
+        "text": "{Name}揉了揉酸胀的眼睛",
+        "premise": {
+            "in_dinner_time": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_attend_class_experience": 1,
+            "add_dislike_preference": 1
+        }
+    },
+    "a8f5089c-1480-4c28-b5af-eb8986f6885b": {
+        "uid": "a8f5089c-1480-4c28-b5af-eb8986f6885b",
+        "adv_id": "",
+        "status_id": "18",
+        "start": false,
+        "text": "{Name}打了个长长的哈欠",
+        "premise": {
+            "is_tired": 1
+        },
+        "settle": {
+            "add_small_attend_class_experience": 1,
+            "sub_small_mana_point": 1,
+            "add_small_lazy": 1,
+            "add_dislike_preference": 1
+        }
+    },
+    "35c0e5c4-022a-4e19-b210-2c8da0c13926": {
+        "uid": "35c0e5c4-022a-4e19-b210-2c8da0c13926",
+        "adv_id": "",
+        "status_id": "19",
+        "start": false,
+        "text": "{Name}缓缓松开了紧握的手",
+        "premise": {
+            "is_futa_or_man": 1
+        },
+        "settle": {
+            "add_small_penis_happy": 1,
+            "add_small_penis_experience": 1,
+            "sub_medium_mana_point": 1
+        }
+    },
+    "74110978-7f79-42f0-a5ed-e873bd94fc82": {
+        "uid": "74110978-7f79-42f0-a5ed-e873bd94fc82",
+        "adv_id": "",
+        "status_id": "19",
+        "start": 0,
+        "text": "{Name}揉了揉有些发麻的指尖",
+        "premise": {
+            "mp_is_low": 1,
+            "is_man": 1
+        },
+        "settle": {
+            "sub_medium_mana_point": 1,
+            "add_small_lust": 1,
+            "add_small_penis_experience": 1,
+            "add_medium_penis_happy": 1
+        }
+    },
+    "42219706-485e-491f-a0e7-ac178594d5fd": {
+        "uid": "42219706-485e-491f-a0e7-ac178594d5fd",
+        "adv_id": "",
+        "status_id": "19",
+        "start": 0,
+        "text": "「嗯～」\\n{Name}斜靠喷泉边，仰望星空",
+        "premise": {
+            "is_futa_or_woman": 1,
+            "is_night": 1,
+            "in_fountain": 1,
+            "now_is_not_rainy": 1
+        },
+        "settle": {
+            "sub_medium_mana_point": 1,
+            "add_small_clitoris_experience": 1,
+            "add_small_clitoris_happy": 1,
+            "add_like_preference": 1
+        }
+    },
+    "9a76e565-227d-4a8d-83d9-f8f127a92701": {
+        "uid": "9a76e565-227d-4a8d-83d9-f8f127a92701",
+        "adv_id": "",
+        "status_id": "20",
+        "start": true,
+        "text": "{Name}仔细调整着呼吸",
+        "premise": {
+            "dance_skills_is_height": 1
+        },
+        "settle": {}
+    },
+    "0e029395-d48c-4759-9163-231fb4008a5f": {
+        "uid": "0e029395-d48c-4759-9163-231fb4008a5f",
+        "adv_id": "",
+        "status_id": "20",
+        "start": 0,
+        "text": "{Name}调整呼吸放松身体",
+        "premise": {},
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_dance_experience": 1
+        }
+    },
+    "164707de-32e9-41a4-9e96-79c0fbc2dce0": {
+        "uid": "164707de-32e9-41a4-9e96-79c0fbc2dce0",
+        "adv_id": "",
+        "status_id": "20",
+        "start": 0,
+        "text": "{Name}微喘着气，闭眼感受冬日阳光",
+        "premise": {
+            "is_winter": 1,
+            "is_not_night": 1,
+            "now_is_not_rainy": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_dance_experience": 1,
+            "add_like_preference": 1
+        }
+    },
+    "582bc5b3-64f7-48ae-884d-bb96a745f3b5": {
+        "uid": "582bc5b3-64f7-48ae-884d-bb96a745f3b5",
+        "adv_id": "",
+        "status_id": "20",
+        "start": 0,
+        "text": "{Name}舞姿轻盈流畅\\n{TargetName}看入了神",
+        "premise": {
+            "dance_skills_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_dance_experience": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1
+        }
+    },
+    "200af0de-08f3-406f-9365-a6a3ba9e5ddf": {
+        "uid": "200af0de-08f3-406f-9365-a6a3ba9e5ddf",
+        "adv_id": "",
+        "status_id": "20",
+        "start": 0,
+        "text": "{Name}松开紧绷的身体\\n汗水在阳光下闪着微光",
+        "premise": {
+            "is_sunny": 1,
+            "is_not_night": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_dance_experience": 1,
+            "add_like_preference": 1
+        }
+    },
+    "91d0a53d-7241-4f65-a5e9-861002299d7c": {
+        "uid": "91d0a53d-7241-4f65-a5e9-861002299d7c",
+        "adv_id": "",
+        "status_id": "20",
+        "start": false,
+        "text": "{Name}停下了舞步\\n{TargetName}双眼发光的看着{Name}",
+        "premise": {
+            "dance_skills_is_height": 1,
+            "have_target": 1,
+            "is_beyond_friendship_target": 1,
+            "target_dance_skills_interest_is_height": 1
+        },
+        "settle": {
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "add_small_dance_experience": 1,
+            "sub_small_mana_point": 1,
+            "target_add_small_favorability": 1,
+            "add_small_favorability": 1,
+            "add_like_preference": 1
+        }
+    },
+    "8c9d020b-7fbf-492c-b150-0a9a62fb00ff": {
+        "uid": "8c9d020b-7fbf-492c-b150-0a9a62fb00ff",
+        "adv_id": "",
+        "status_id": "20",
+        "start": 0,
+        "text": "{Name}收势停步",
+        "premise": {},
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_dance_experience": 1
+        }
+    },
+    "bf73fb7c-4890-4093-b53d-1d3c2e208f96": {
+        "uid": "bf73fb7c-4890-4093-b53d-1d3c2e208f96",
+        "adv_id": "",
+        "status_id": "20",
+        "start": 0,
+        "text": "{TargetName}感觉自己的心跳仿佛和{Name}的舞步同步了",
+        "premise": {
+            "have_target": 1,
+            "target_admire": 1,
+            "dance_skills_is_height": 1,
+            "target_yearn_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_dance_experience": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1
+        }
+    },
+    "ed64ae88-bd6e-44c9-8789-c1b3eebc3f58": {
+        "uid": "ed64ae88-bd6e-44c9-8789-c1b3eebc3f58",
+        "adv_id": "",
+        "status_id": "21",
+        "start": 1,
+        "text": "{Name}用讥笑的眼神刺向{TargetName}",
+        "premise": {
+            "in_toilet": 1,
+            "is_extreme_exhaustion": 1
+        },
+        "settle": {}
+    },
+    "b6c24fdd-8687-410c-aed7-508de15ad1a4": {
+        "uid": "b6c24fdd-8687-410c-aed7-508de15ad1a4",
+        "adv_id": "",
+        "status_id": "21",
+        "start": 0,
+        "text": "{Name}啐了{TargetName}一口",
+        "premise": {
+            "have_target": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_happy": 1,
+            "add_small_arrogant": 1,
+            "target_add_small_pain": 1,
+            "target_add_small_rage": 1,
+            "target_add_small_antipathy": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_eloquence_experience": 1
+        }
+    },
+    "09e2c495-8368-49f1-a1f9-c0b469872e47": {
+        "uid": "09e2c495-8368-49f1-a1f9-c0b469872e47",
+        "adv_id": "",
+        "status_id": "21",
+        "start": false,
+        "text": "{Name}狠狠瞪了{TargetName}一眼，稍稍缓了口气\\n{TargetName}低头沉默，肩膀微微颤抖",
+        "premise": {
+            "is_student": 1,
+            "target_is_student": 1,
+            "target_is_fragile": 1
+        },
+        "settle": {
+            "add_small_antipathy": 1,
+            "sub_medium_rage": 1,
+            "target_add_medium_pain": 1,
+            "target_add_small_fear": 1,
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
+        }
+    },
+    "e0262574-3204-45d0-aa2e-acb198792229": {
+        "uid": "e0262574-3204-45d0-aa2e-acb198792229",
+        "adv_id": "",
+        "status_id": "20",
+        "start": false,
+        "text": "{TargetName}毫不留情地数落{Name}的舞姿\\n{Name}停下脚步，眼神黯淡地看向地面",
+        "premise": {
+            "target_antipathy_is_height": 1,
+            "target_is_apathy": 1,
+            "target_dislike": 1,
+            "dance_skills_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_rage": 1,
+            "add_small_shame": 1,
+            "target_add_small_arrogant": 1,
+            "add_dislike_preference": 1
+        }
+    },
+    "87f35255-64be-4d5c-946d-7dd459a3785b": {
+        "uid": "87f35255-64be-4d5c-946d-7dd459a3785b",
+        "adv_id": "",
+        "status_id": "21",
+        "start": false,
+        "text": "{TargetName}皱眉转身，背对{Name}不吭声",
+        "premise": {
+            "target_arrogant_is_height": 1,
+            "target_is_apathy": 1,
+            "eloquence_skills_is_low": 1,
+            "target_eloquence_skills_is_low": 1
+        },
+        "settle": {
+            "target_add_small_arrogant": 1,
+            "add_small_rage": 1,
+            "add_small_eloquence_experience": 1,
+            "sub_small_mana_point": 1,
+            "add_dislike_preference": 1
+        }
+    },
+    "80a6a950-9474-41dc-a3e9-70ef852ccae3": {
+        "uid": "80a6a950-9474-41dc-a3e9-70ef852ccae3",
+        "adv_id": "",
+        "status_id": "21",
+        "start": true,
+        "text": "{Name}咬紧牙关，低声咒骂着{TargetName}",
+        "premise": {
+            "rage_is_height": 1
+        },
+        "settle": {}
+    },
+    "9fdfb87e-c8e4-437d-9026-352c43979f5f": {
+        "uid": "9fdfb87e-c8e4-437d-9026-352c43979f5f",
+        "adv_id": "",
+        "status_id": "21",
+        "start": false,
+        "text": "{TargetName}眼神飘向远处",
+        "premise": {
+            "target_arrogant_is_height": 1,
+            "target_is_apathy": 1,
+            "eloquence_skills_is_low": 1,
+            "target_eloquence_skills_is_low": 1
+        },
+        "settle": {
+            "target_add_small_arrogant": 1,
+            "add_small_rage": 1,
             "add_small_eloquence_experience": 1,
             "sub_small_mana_point": 1
         }
     },
-    "7c0322ce-83df-4ba6-8496-2dffebe077f6": {
-        "uid": "7c0322ce-83df-4ba6-8496-2dffebe077f6",
+    "855fc6eb-d9b3-4646-be2c-cd70d97994c8": {
+        "uid": "855fc6eb-d9b3-4646-be2c-cd70d97994c8",
         "adv_id": "",
-        "status_id": "16",
+        "status_id": "21",
         "start": false,
-        "text": "「这道题的解法就像粉笔灰落在睫毛上——」\\n{Name}突然用板擦轻敲讲台，簌簌落下的粉尘恰好飘向{TargetName}的鼻尖\\n「阿嚏！」\\n{TargetName}猛然惊醒时，{Name}的三角板正指着黑板上的抛物线：「看，喷嚏的轨迹刚好符合斜抛运动公式」\\n后排传来压低的笑声，{TargetName}揉着泛红的眼睛抓起钢笔",
+        "text": "{TargetName}缩着肩膀，默默转身",
         "premise": {
-            "physics_skills_interest_is_height": 1,
-            "have_other_target_in_scene": 1
+            "eloquence_skills_is_low": 1,
+            "target_eloquence_skills_is_low": 1,
+            "target_is_inferiority": 1
         },
         "settle": {
-            "target_sub_small_ache": 1,
-            "target_sub_small_tired": 1,
-            "add_students_course_experience_for_in_classroom": 1,
+            "add_small_rage": 1,
+            "add_small_eloquence_experience": 1,
+            "sub_small_mana_point": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "target_add_small_yearn": 1,
+            "target_add_small_depressed": 1
+        }
+    },
+    "121e27a2-ff15-48d6-9e79-8f07bbdf804b": {
+        "uid": "121e27a2-ff15-48d6-9e79-8f07bbdf804b",
+        "adv_id": "",
+        "status_id": "21",
+        "start": false,
+        "text": "{Name}骂完扭头就走，留下{TargetName}愣在原地",
+        "premise": {
+            "eloquence_skills_is_low": 1,
+            "target_eloquence_skills_is_low": 1,
+            "is_deceitful": 1
+        },
+        "settle": {
+            "add_small_eloquence_experience": 1,
+            "sub_small_mana_point": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "target_add_small_yearn": 1,
+            "target_add_small_depressed": 1,
+            "add_small_happy": 1,
+            "target_add_small_arrogant": 1
+        }
+    },
+    "a6612752-e0a2-4f4d-bc08-e61ec14b8710": {
+        "uid": "a6612752-e0a2-4f4d-bc08-e61ec14b8710",
+        "adv_id": "",
+        "status_id": "22",
+        "start": true,
+        "text": "{Name}偷偷扯向{TargetName}的上方衣角",
+        "premise": {
+            "target_wear_underwear": 1,
+            "have_other_target_in_scene": 1
+        },
+        "settle": {}
+    },
+    "7e51cb33-b27b-4a0b-b705-e6c0df2f51ca": {
+        "uid": "7e51cb33-b27b-4a0b-b705-e6c0df2f51ca",
+        "adv_id": "",
+        "status_id": "22",
+        "start": true,
+        "text": "{Name}趁着夜色靠近，伸手拉住{TargetName}的衣摆",
+        "premise": {
+            "target_wear_underwear": 1,
+            "is_night": 1
+        },
+        "settle": {}
+    },
+    "465e59cb-32d1-4a88-99ce-f202ab85c3c0": {
+        "uid": "465e59cb-32d1-4a88-99ce-f202ab85c3c0",
+        "adv_id": "",
+        "status_id": "22",
+        "start": true,
+        "text": "{Name}轻轻扯动{TargetName}的衣领，眼神游移",
+        "premise": {
+            "is_inferiority": 1,
+            "target_wear_underwear": 1
+        },
+        "settle": {}
+    },
+    "33b27cec-0eb6-43ad-be97-69e62e7e99f9": {
+        "uid": "33b27cec-0eb6-43ad-be97-69e62e7e99f9",
+        "adv_id": "",
+        "status_id": "22",
+        "start": true,
+        "text": "{Name}低头靠近，悄然解开{TargetName}的衣扣",
+        "premise": {
+            "target_wear_underwear": 1,
+            "target_admire": 1
+        },
+        "settle": {}
+    },
+    "fc9e54b4-272a-4c9e-8ce2-0223162c2dc3": {
+        "uid": "fc9e54b4-272a-4c9e-8ce2-0223162c2dc3",
+        "adv_id": "",
+        "status_id": "22",
+        "start": true,
+        "text": "{Name}猛地抓住{TargetName}的衣角",
+        "premise": {
+            "is_resolution": 1,
+            "target_wear_underwear": 1
+        },
+        "settle": {}
+    },
+    "fb91d015-c2b5-4cc7-8f3f-0b1d17100469": {
+        "uid": "fb91d015-c2b5-4cc7-8f3f-0b1d17100469",
+        "adv_id": "",
+        "status_id": "22",
+        "start": true,
+        "text": "{Name}指尖轻颤，试探着触碰{TargetName}的衣边\\n{TargetName}呼吸微滞，目光闪烁不定",
+        "premise": {
+            "is_inferiority": 1,
+            "target_admire": 1,
+            "target_is_inferiority": 1
+        },
+        "settle": {}
+    },
+    "2ae0e3e0-df71-44ee-9ff2-2a5a755fecc2": {
+        "uid": "2ae0e3e0-df71-44ee-9ff2-2a5a755fecc2",
+        "adv_id": "",
+        "status_id": "22",
+        "start": true,
+        "text": "{Name}指尖微凉，轻触{TargetName}的衣缝",
+        "premise": {
+            "target_admire": 1
+        },
+        "settle": {}
+    },
+    "05a76d09-14eb-4b52-bbf8-77bf4c33ce72": {
+        "uid": "05a76d09-14eb-4b52-bbf8-77bf4c33ce72",
+        "adv_id": "",
+        "status_id": "22",
+        "start": true,
+        "text": "{Name}屏息凝神，指尖轻触{TargetName}的衣扣",
+        "premise": {
+            "target_admire": 1,
+            "target_is_admire": 1
+        },
+        "settle": {}
+    },
+    "af7cd38c-ed48-4436-9faf-25147474bd47": {
+        "uid": "af7cd38c-ed48-4436-9faf-25147474bd47",
+        "adv_id": "",
+        "status_id": "22",
+        "start": true,
+        "text": "{Name}的手指轻挑布料边缘\\n{TargetName}微微一颤，低头不语",
+        "premise": {
+            "target_adore": 1,
+            "target_is_inferiority": 1,
+            "target_wear_underwear": 1
+        },
+        "settle": {}
+    },
+    "b46f2b89-2b13-426a-86ac-47f9bbd99228": {
+        "uid": "b46f2b89-2b13-426a-86ac-47f9bbd99228",
+        "adv_id": "",
+        "status_id": "22",
+        "start": 0,
+        "text": "{TargetName}颤抖着别过脸\\n衣物滑落在地板上",
+        "premise": {
+            "have_target": 1,
+            "target_admire": 1,
+            "target_is_live": 1,
+            "target_is_pessimism": 1
+        },
+        "settle": {
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_yearn": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_arrogant": 1,
+            "target_add_small_lust": 1,
+            "add_small_greedy": 1,
+            "target_add_small_favorability": 1,
+            "add_small_favorability": 1,
+            "undress_target_underwear": 1,
+            "undress_target_bra": 1,
+            "undress_target_coats": 1,
+            "undress_target_pants": 1,
+            "undress_target_shoes": 1,
+            "undress_target_skirt": 1,
+            "undress_target_socks": 1,
+            "undress_target_underpants": 1,
+            "add_like_preference": 1
+        }
+    },
+    "890b4513-6738-4288-9f5f-0b7db812608d": {
+        "uid": "890b4513-6738-4288-9f5f-0b7db812608d",
+        "adv_id": "",
+        "status_id": "22",
+        "start": 0,
+        "text": "{Name}的手略一停顿，{TargetName}的衣物轻轻滑落",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_adore": 1,
+            "rich_experience_in_sex": 1
+        },
+        "settle": {
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_yearn": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_arrogant": 1,
+            "target_add_small_lust": 1,
+            "add_small_greedy": 1,
+            "target_add_small_favorability": 1,
+            "add_small_favorability": 1,
+            "undress_target_underwear": 1,
+            "undress_target_bra": 1,
+            "undress_target_coats": 1,
+            "undress_target_pants": 1,
+            "undress_target_shoes": 1,
+            "undress_target_skirt": 1,
+            "undress_target_socks": 1,
+            "undress_target_underpants": 1
+        }
+    },
+    "f44550cb-4e5e-4a0f-8941-0dd2adbb4b97": {
+        "uid": "f44550cb-4e5e-4a0f-8941-0dd2adbb4b97",
+        "adv_id": "",
+        "status_id": "22",
+        "start": false,
+        "text": "笨拙的手停在半空\\n{TargetName}意外地没有拒绝",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "is_inferiority": 1,
+            "target_not_naked": 1,
+            "no_experience_in_sex": 1
+        },
+        "settle": {
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "add_small_greedy": 1,
+            "target_add_small_arrogant": 1,
+            "add_small_happy": 1,
+            "undress_target_bra": 1,
+            "undress_target_coats": 1,
+            "undress_target_pants": 1,
+            "undress_target_shoes": 1,
+            "undress_target_skirt": 1,
+            "undress_target_socks": 1,
+            "undress_target_underpants": 1,
+            "undress_target_underwear": 1,
+            "add_small_yearn": 1,
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
+        }
+    },
+    "faab28f3-7af2-4fcb-9045-a4e53aa74d6e": {
+        "uid": "faab28f3-7af2-4fcb-9045-a4e53aa74d6e",
+        "adv_id": "",
+        "status_id": "22",
+        "start": 0,
+        "text": "{TargetName}红着脸看着地面，衣物悄然滑落",
+        "premise": {
+            "have_target": 1,
+            "target_admire": 1,
+            "target_is_live": 1
+        },
+        "settle": {
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_yearn": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_arrogant": 1,
+            "target_add_small_lust": 1,
+            "add_small_greedy": 1,
+            "target_add_small_favorability": 1,
+            "add_small_favorability": 1,
+            "undress_target_underwear": 1,
+            "undress_target_bra": 1,
+            "undress_target_coats": 1,
+            "undress_target_pants": 1,
+            "undress_target_shoes": 1,
+            "undress_target_skirt": 1,
+            "undress_target_socks": 1,
+            "undress_target_underpants": 1
+        }
+    },
+    "7c6c2614-8dd2-4717-aec3-a41428bf038a": {
+        "uid": "7c6c2614-8dd2-4717-aec3-a41428bf038a",
+        "adv_id": "",
+        "status_id": "14",
+        "start": false,
+        "text": "双手轻巧游过肌肤\\n{TargetName}咬唇屏息不敢动",
+        "premise": {
+            "target_is_naked": 1,
+            "target_admire": 1,
+            "target_no_experience_in_sex": 1,
+            "rich_experience_in_sex": 1,
+            "target_shame_is_height": 1,
+            "target_is_inferiority": 1
+        },
+        "settle": {
+            "target_add_medium_shame": 1,
+            "add_small_happy": 1,
+            "target_add_small_antipathy": 1,
+            "sub_small_mana_point": 1,
+            "add_like_preference": 1
+        }
+    },
+    "849c80a0-8f44-4d30-85e2-ae7da5f86f03": {
+        "uid": "849c80a0-8f44-4d30-85e2-ae7da5f86f03",
+        "adv_id": "",
+        "status_id": "22",
+        "start": 0,
+        "text": "布料滑落的声音在空旷教室格外清晰",
+        "premise": {
+            "have_target": 1,
+            "target_admire": 1,
+            "target_is_live": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_yearn": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_arrogant": 1,
+            "target_add_small_lust": 1,
+            "add_small_greedy": 1,
+            "target_add_small_favorability": 1,
+            "add_small_favorability": 1,
+            "undress_target_underwear": 1,
+            "undress_target_bra": 1,
+            "undress_target_coats": 1,
+            "undress_target_pants": 1,
+            "undress_target_shoes": 1,
+            "undress_target_skirt": 1,
+            "undress_target_socks": 1,
+            "undress_target_underpants": 1,
+            "add_small_fear": 1,
+            "target_add_small_fear": 1
+        }
+    },
+    "51e40354-746e-468e-b919-0e7410ce502b": {
+        "uid": "51e40354-746e-468e-b919-0e7410ce502b",
+        "adv_id": "",
+        "status_id": "23",
+        "start": true,
+        "text": "{name}深吸一口气，准备穿上衣物",
+        "premise": {
+            "hp_is_low": 1
+        },
+        "settle": {}
+    },
+    "abe35d63-84d7-41e7-a1bd-5accbb4235fb": {
+        "uid": "abe35d63-84d7-41e7-a1bd-5accbb4235fb",
+        "adv_id": "",
+        "status_id": "25",
+        "start": true,
+        "text": "{Name}轻轻靠近{TargetName}",
+        "premise": {
+            "target_is_adore": 1
+        },
+        "settle": {}
+    },
+    "d0054603-ce21-46a7-99de-32ca908a9846": {
+        "uid": "d0054603-ce21-46a7-99de-32ca908a9846",
+        "adv_id": "",
+        "status_id": "25",
+        "start": true,
+        "text": "{Name}用手指轻轻勾了勾{TargetName}的衣角",
+        "premise": {
+            "is_deceitful": 1,
+            "out_door": 1,
+            "rich_experience_in_sex": 1,
+            "is_beyond_friendship_target": 1,
+            "target_is_beyond_friendship": 1
+        },
+        "settle": {}
+    },
+    "e6142298-84f1-4a7d-b4de-b32c83f93bdc": {
+        "uid": "e6142298-84f1-4a7d-b4de-b32c83f93bdc",
+        "adv_id": "",
+        "status_id": "25",
+        "start": true,
+        "text": "{Name}慢慢靠近{TargetName}\\n指尖在书页上滑动",
+        "premise": {
+            "in_library": 1,
+            "target_admire": 1,
+            "target_is_admire": 1
+        },
+        "settle": {}
+    },
+    "64b744b8-66ac-45a1-81be-a36a89099e3c": {
+        "uid": "64b744b8-66ac-45a1-81be-a36a89099e3c",
+        "adv_id": "",
+        "status_id": "25",
+        "start": true,
+        "text": "{TargetName}微红脸颊避开目光",
+        "premise": {
+            "target_admire": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {}
+    },
+    "fa1b609c-2246-42f0-a6cd-3e7f9d6faf9a": {
+        "uid": "fa1b609c-2246-42f0-a6cd-3e7f9d6faf9a",
+        "adv_id": "",
+        "status_id": "25",
+        "start": true,
+        "text": "{Name}靠近{TargetName}，眼神充满期待",
+        "premise": {
+            "target_is_beyond_friendship": 1
+        },
+        "settle": {}
+    },
+    "f818e967-98ad-4096-863d-5257d8a638d6": {
+        "uid": "f818e967-98ad-4096-863d-5257d8a638d6",
+        "adv_id": "",
+        "status_id": "25",
+        "start": true,
+        "text": "{Name}伸出手贴近{TargetName}",
+        "premise": {},
+        "settle": {}
+    },
+    "9a3f9271-30f7-40c8-a790-aaace048868c": {
+        "uid": "9a3f9271-30f7-40c8-a790-aaace048868c",
+        "adv_id": "",
+        "status_id": "25",
+        "start": 0,
+        "text": "{TargetName}皱眉推开了{Name}",
+        "premise": {
+            "no_beyond_friendship_target": 1,
+            "target_is_live": 1,
+            "target_rage_is_height": 1
+        },
+        "settle": {
+            "target_sub_large_favorability": 1,
+            "add_small_fear": 1,
+            "add_small_pain": 1,
+            "add_small_yearn": 1,
+            "add_small_shame": 1,
+            "add_small_depressed": 1,
+            "add_small_lust": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_medium_shame": 1,
+            "target_add_medium_arrogant": 1,
+            "target_add_medium_rage": 1
+        }
+    },
+    "1416f397-e235-427d-a1ed-f4af111e3fb4": {
+        "uid": "1416f397-e235-427d-a1ed-f4af111e3fb4",
+        "adv_id": "",
+        "status_id": "25",
+        "start": false,
+        "text": "{TargetName}别过脸，最终摆了摆手",
+        "premise": {
+            "target_less_than_adore": 1,
+            "scene_character_only_player_and_one": 1
+        },
+        "settle": {
+            "add_small_shame": 1,
+            "add_small_yearn": 1,
+            "sub_small_happy": 1,
             "sub_small_mana_point": 1
         }
+    },
+    "94109a13-124e-4586-b1f7-77153f9c2146": {
+        "uid": "94109a13-124e-4586-b1f7-77153f9c2146",
+        "adv_id": "",
+        "status_id": "25",
+        "start": false,
+        "text": "{TargetName}背过身，肩膀微微发抖，沉默不语",
+        "premise": {
+            "target_less_than_adore": 1,
+            "scene_character_only_player_and_one": 1,
+            "is_student": 1,
+            "target_is_student": 1,
+            "in_door": 1,
+            "not_in_class_time": 1,
+            "is_beyond_friendship_target": 1,
+            "target_is_selfless": 1
+        },
+        "settle": {
+            "add_small_shame": 1,
+            "add_small_yearn": 1,
+            "sub_small_happy": 1,
+            "sub_small_mana_point": 1,
+            "target_add_medium_antipathy": 1,
+            "target_sub_medium_favorability": 1
+        }
+    },
+    "3379748c-7ec1-42d2-984f-4cb23f35e8f0": {
+        "uid": "3379748c-7ec1-42d2-984f-4cb23f35e8f0",
+        "adv_id": "",
+        "status_id": "25",
+        "start": 0,
+        "text": "{TargetName}低头攥紧衣角，雨声掩盖了沉默",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "target_less_than_adore": 1,
+            "target_is_live": 1,
+            "now_is_rainy": 1,
+            "target_wear_underwear": 1
+        },
+        "settle": {
+            "add_small_shame": 1,
+            "add_small_yearn": 1,
+            "add_small_lust": 1,
+            "target_add_small_antipathy": 1,
+            "target_add_small_shame": 1
+        }
+    },
+    "c0f01b90-0724-4681-9e77-158ab29d9c78": {
+        "uid": "c0f01b90-0724-4681-9e77-158ab29d9c78",
+        "adv_id": "",
+        "status_id": "25",
+        "start": 0,
+        "text": "{TargetName}侧身倚着墙，低头不语\\n{Name}停下脚步，空气中只剩沉默",
+        "premise": {
+            "is_beyond_friendship_target": 1,
+            "target_less_than_adore": 1,
+            "target_is_live": 1
+        },
+        "settle": {
+            "add_small_shame": 1,
+            "add_small_yearn": 1,
+            "add_small_lust": 1,
+            "target_add_small_antipathy": 1,
+            "target_add_small_shame": 1
+        }
+    },
+    "3a95e2ec-bff8-4e19-90a9-af7ccbec6b41": {
+        "uid": "3a95e2ec-bff8-4e19-90a9-af7ccbec6b41",
+        "adv_id": "",
+        "status_id": "27",
+        "start": true,
+        "text": "{Name}靠着泳池边闭上了眼睛\\n微风拂过水面，{Name}呼吸渐渐平稳",
+        "premise": {
+            "in_swimming_pool": 1
+        },
+        "settle": {}
+    },
+    "b4d58a4c-e07f-4987-80c8-7eeeafdb5a25": {
+        "uid": "b4d58a4c-e07f-4987-80c8-7eeeafdb5a25",
+        "adv_id": "",
+        "status_id": "27",
+        "start": true,
+        "text": "{Name}倚着墙角，闭眼感受片刻温暖",
+        "premise": {
+            "in_door": 1
+        },
+        "settle": {}
+    },
+    "57664731-81dd-4d45-9adc-7e9c48ea8640": {
+        "uid": "57664731-81dd-4d45-9adc-7e9c48ea8640",
+        "adv_id": "",
+        "status_id": "27",
+        "start": 0,
+        "text": "{Name}揉了揉眼睛，靠在洗手间墙边醒来",
+        "premise": {
+            "in_toilet": 1
+        },
+        "settle": {
+            "add_small_mana_point": 1,
+            "sub_small_tired": 1,
+            "sub_small_intoxicated": 1,
+            "sub_small_pain": 1,
+            "sub_small_vertigo": 1,
+            "sub_small_ache": 1,
+            "sub_small_yearn": 1,
+            "sub_small_fear": 1,
+            "sub_small_antipathy": 1,
+            "sub_small_shame": 1,
+            "sub_small_depressed": 1,
+            "sub_small_arrogant": 1,
+            "sub_small_envy": 1,
+            "sub_small_rage": 1,
+            "add_small_lazy": 1,
+            "sub_small_greedy": 1,
+            "add_small_gluttony": 1,
+            "add_small_lust": 1,
+            "sub_small_happy": 1
+        }
+    },
+    "bb691e5d-8d95-4a6b-a74d-354d091efb83": {
+        "uid": "bb691e5d-8d95-4a6b-a74d-354d091efb83",
+        "adv_id": "",
+        "status_id": "27",
+        "start": 0,
+        "text": "{Name}睁开眼，窗外蝉鸣渐渐清晰",
+        "premise": {
+            "is_summer": 1,
+            "is_sunny": 1,
+            "is_not_night": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "add_small_mana_point": 1,
+            "sub_small_tired": 1,
+            "sub_small_intoxicated": 1,
+            "sub_small_pain": 1,
+            "sub_small_vertigo": 1,
+            "sub_small_ache": 1,
+            "sub_small_yearn": 1,
+            "sub_small_fear": 1,
+            "sub_small_antipathy": 1,
+            "sub_small_shame": 1,
+            "sub_small_depressed": 1,
+            "sub_small_arrogant": 1,
+            "sub_small_envy": 1,
+            "sub_small_rage": 1,
+            "add_small_lazy": 1,
+            "sub_small_greedy": 1,
+            "add_small_gluttony": 1,
+            "add_small_lust": 1
+        }
+    },
+    "4af33271-954f-44c8-ada5-16adbbcffadc": {
+        "uid": "4af33271-954f-44c8-ada5-16adbbcffadc",
+        "adv_id": "",
+        "status_id": "27",
+        "start": 0,
+        "text": "{Name}睁开眼，远处传来脚步声\\n{TargetName}停下步子，目光落在{Name}身上",
+        "premise": {
+            "have_target": 1
+        },
+        "settle": {
+            "add_small_mana_point": 1,
+            "sub_small_tired": 1,
+            "sub_small_intoxicated": 1,
+            "sub_small_pain": 1,
+            "sub_small_vertigo": 1,
+            "sub_small_ache": 1,
+            "sub_small_yearn": 1,
+            "sub_small_fear": 1,
+            "sub_small_antipathy": 1,
+            "sub_small_shame": 1,
+            "sub_small_depressed": 1,
+            "sub_small_arrogant": 1,
+            "sub_small_envy": 1,
+            "sub_small_rage": 1,
+            "add_small_lazy": 1,
+            "sub_small_greedy": 1,
+            "add_small_gluttony": 1,
+            "add_small_lust": 1
+        }
+    },
+    "963db98e-b0e5-4071-8c31-25991df55758": {
+        "uid": "963db98e-b0e5-4071-8c31-25991df55758",
+        "adv_id": "",
+        "status_id": "27",
+        "start": 0,
+        "text": "{Name}睁开眼看见{TargetName}站在远处，低头沉默不语",
+        "premise": {
+            "have_target": 1,
+            "is_beyond_friendship_target": 1,
+            "target_is_inferiority": 1
+        },
+        "settle": {
+            "add_small_mana_point": 1,
+            "sub_small_tired": 1,
+            "sub_small_intoxicated": 1,
+            "sub_small_pain": 1,
+            "sub_small_vertigo": 1,
+            "sub_small_ache": 1,
+            "sub_small_yearn": 1,
+            "sub_small_fear": 1,
+            "sub_small_antipathy": 1,
+            "sub_small_shame": 1,
+            "sub_small_depressed": 1,
+            "sub_small_arrogant": 1,
+            "sub_small_envy": 1,
+            "sub_small_rage": 1,
+            "add_small_lazy": 1,
+            "sub_small_greedy": 1,
+            "add_small_gluttony": 1,
+            "add_small_lust": 1,
+            "target_add_small_favorability": 1,
+            "add_small_favorability": 1
+        }
+    },
+    "240c0cbb-f6bc-497c-93b7-d5da8e324ed1": {
+        "uid": "240c0cbb-f6bc-497c-93b7-d5da8e324ed1",
+        "adv_id": "",
+        "status_id": "28",
+        "start": false,
+        "text": "{Name}停下了演讲，低头整理裙摆\\n{TargetName}眼神飘向远",
+        "premise": {
+            "is_woman": 1,
+            "wear_skirt": 1,
+            "eloquence_skills_is_low": 1,
+            "no_beyond_friendship_target": 1,
+            "in_door": 1,
+            "is_inferiority": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_antipathy": 1
+        }
+    },
+    "6d7345bd-e277-47e0-a5db-694fe3da3069": {
+        "uid": "6d7345bd-e277-47e0-a5db-694fe3da3069",
+        "adv_id": "",
+        "status_id": "28",
+        "start": false,
+        "text": "{Name}结束演讲，目光扫过教室\\n{TargetName}低头摆弄手指，嘴角微动",
+        "premise": {
+            "in_classroom": 1,
+            "target_arrogant_is_height": 1
+        },
+        "settle": {
+            "target_add_small_arrogant": 1,
+            "add_small_eloquence_experience": 1,
+            "sub_small_mana_point": 1
+        }
+    },
+    "dcc85992-f684-49f3-ae13-8827ef89c19b": {
+        "uid": "dcc85992-f684-49f3-ae13-8827ef89c19b",
+        "adv_id": "",
+        "status_id": "28",
+        "start": false,
+        "text": "{Name}擦了擦额头\\n{TargetName}皱眉转身，背对讲台",
+        "premise": {
+            "mp_is_low": 1,
+            "eloquence_skills_is_low": 1,
+            "no_beyond_friendship_target": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_arrogant": 1,
+            "target_add_small_antipathy": 1
+        }
+    },
+    "e4423582-cb6c-479c-8471-a14956c72d3d": {
+        "uid": "e4423582-cb6c-479c-8471-a14956c72d3d",
+        "adv_id": "",
+        "status_id": "28",
+        "start": 0,
+        "text": "{Name}揉着嗓子望向窗外",
+        "premise": {},
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_performance_experience": 1
+        }
+    },
+    "628f2e04-be5d-470a-b74a-fae8d8f40997": {
+        "uid": "628f2e04-be5d-470a-b74a-fae8d8f40997",
+        "adv_id": "",
+        "status_id": "29",
+        "start": true,
+        "text": "{Name}用手指在天上画线",
+        "premise": {},
+        "settle": {}
+    },
+    "6f7809b1-377a-4e07-832e-c14360d79cdc": {
+        "uid": "6f7809b1-377a-4e07-832e-c14360d79cdc",
+        "adv_id": "",
+        "status_id": "29",
+        "start": true,
+        "text": "{Name}仰头凝望夜空\\n微风吹过，{TargetName}悄悄靠近",
+        "premise": {
+            "is_night": 1,
+            "is_beyond_friendship_target": 1
+        },
+        "settle": {}
     }
 }
