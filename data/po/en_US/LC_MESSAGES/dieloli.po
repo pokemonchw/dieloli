@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-03 12:13+0800\n"
+"POT-Creation-Date: 2025-04-08 12:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,7 +116,7 @@ msgid "第{times}节"
 msgstr "Class {times}"
 
 #: Script/UI/Panel/view_school_timetable_panel.py:190
-#: Script/UI/Panel/game_info_panel.py:110 Script/UI/Panel/in_scene_panel.py:608
+#: Script/UI/Panel/game_info_panel.py:110 Script/UI/Panel/in_scene_panel.py:607
 msgid "自习课"
 msgstr "Study Class"
 
@@ -147,7 +147,7 @@ msgstr "[Return]"
 #: Script/UI/Panel/food_shop_panel.py:85 Script/UI/Panel/food_shop_panel.py:182
 #: Script/UI/Panel/item_shop_panel.py:56
 #: Script/UI/Panel/view_club_list_panel.py:56
-#: Script/UI/Panel/see_map_panel.py:165
+#: Script/UI/Panel/see_map_panel.py:160
 #: Script/UI/Panel/game_setting_panel.py:84
 #: Script/UI/Panel/food_bag_panel.py:75 Script/UI/Panel/food_bag_panel.py:172
 #: Script/UI/Panel/view_club_info_panel.py:68
@@ -313,7 +313,7 @@ msgstr "What would you like to do?"
 
 #: Script/UI/Panel/view_character_status_list_panel.py:292
 #: Script/UI/Panel/view_character_status_list_panel.py:304 class:MoveMenuType
-#: id:3 type:name
+#: id:2 type:name
 msgid "收藏"
 msgstr "Collect"
 
@@ -447,38 +447,38 @@ msgstr "No"
 msgid "想加入这个社团吗?"
 msgstr "Would you like to join this club?"
 
-#: Script/UI/Panel/see_map_panel.py:57
+#: Script/UI/Panel/see_map_panel.py:56
 msgid "移动:"
 msgstr "Move:"
 
-#: Script/UI/Panel/see_map_panel.py:105
+#: Script/UI/Panel/see_map_panel.py:100
 msgid "你可以从这里前往:\n"
 msgstr "You can go to:\n"
 
-#: Script/UI/Panel/see_map_panel.py:121
+#: Script/UI/Panel/see_map_panel.py:116
 #, python-brace-format
 msgid "[{scene_name}:{move_time}分钟]"
 msgstr "[{scene_name}: {move_time} minutes]"
 
-#: Script/UI/Panel/see_map_panel.py:152
+#: Script/UI/Panel/see_map_panel.py:147
 msgid "查看上级地图"
 msgstr "View Upper Map"
 
-#: Script/UI/Panel/see_map_panel.py:173
+#: Script/UI/Panel/see_map_panel.py:168
 msgid "查看下级地图"
 msgstr "View Lower Map"
 
-#: Script/UI/Panel/see_map_panel.py:326
+#: Script/UI/Panel/see_map_panel.py:395
 #, python-brace-format
 msgid "{scene_id}:{scene_name}:{move_time}分钟"
 msgstr "{scene_id}: {scene_name}: {move_time} minutes"
 
-#: Script/UI/Panel/see_map_panel.py:493
+#: Script/UI/Panel/see_map_panel.py:566
 #, python-brace-format
 msgid "[{path_text}:{move_time}分钟]"
 msgstr "[{path_text}: {move_time} minutes]"
 
-#: Script/UI/Panel/see_map_panel.py:608
+#: Script/UI/Panel/see_map_panel.py:681
 #, python-brace-format
 msgid "[{character_name}:{social_contact}|{path_text}:{move_time}分钟]"
 msgstr ""
@@ -806,53 +806,53 @@ msgstr " Money:"
 msgid "你在这里遇到了:"
 msgstr "You encountered here:"
 
-#: Script/UI/Panel/in_scene_panel.py:198
+#: Script/UI/Panel/in_scene_panel.py:197
 msgid "口 身材信息: "
 msgstr " Body Information: "
 
-#: Script/UI/Panel/in_scene_panel.py:201 Script/UI/Panel/in_scene_panel.py:279
-#: Script/UI/Panel/in_scene_panel.py:354 Script/UI/Panel/in_scene_panel.py:519
+#: Script/UI/Panel/in_scene_panel.py:200 Script/UI/Panel/in_scene_panel.py:278
+#: Script/UI/Panel/in_scene_panel.py:353 Script/UI/Panel/in_scene_panel.py:518
 msgid "[-关-]"
 msgstr "[-Close-]"
 
-#: Script/UI/Panel/in_scene_panel.py:201
+#: Script/UI/Panel/in_scene_panel.py:200
 msgid "关闭身材信息面板"
 msgstr "Close Body Information Panel"
 
-#: Script/UI/Panel/in_scene_panel.py:268 Script/UI/Panel/in_scene_panel.py:342
-#: Script/UI/Panel/in_scene_panel.py:425
+#: Script/UI/Panel/in_scene_panel.py:267 Script/UI/Panel/in_scene_panel.py:341
+#: Script/UI/Panel/in_scene_panel.py:424
 msgid "[+开+]"
 msgstr "[+Open+]"
 
-#: Script/UI/Panel/in_scene_panel.py:268
+#: Script/UI/Panel/in_scene_panel.py:267
 msgid "开启身材信息面板"
 msgstr "Open Body Information Panel"
 
-#: Script/UI/Panel/in_scene_panel.py:276
+#: Script/UI/Panel/in_scene_panel.py:275
 msgid "口 衣着信息: "
 msgstr " Clothing Information: "
 
-#: Script/UI/Panel/in_scene_panel.py:279
+#: Script/UI/Panel/in_scene_panel.py:278
 msgid "关闭衣着信息面板"
 msgstr "Close Clothing Information Panel"
 
-#: Script/UI/Panel/in_scene_panel.py:342
+#: Script/UI/Panel/in_scene_panel.py:341
 msgid "开启衣着信息面板"
 msgstr "Open Clothing Information Panel"
 
-#: Script/UI/Panel/in_scene_panel.py:351
+#: Script/UI/Panel/in_scene_panel.py:350
 msgid "口 状态信息: "
 msgstr " Status Information: "
 
-#: Script/UI/Panel/in_scene_panel.py:354
+#: Script/UI/Panel/in_scene_panel.py:353
 msgid "关闭状态信息面板"
 msgstr "Close Status Information Panel"
 
-#: Script/UI/Panel/in_scene_panel.py:425
+#: Script/UI/Panel/in_scene_panel.py:424
 msgid "开启状态信息面板"
 msgstr "Open Status Information Panel"
 
-#: Script/UI/Panel/in_scene_panel.py:551
+#: Script/UI/Panel/in_scene_panel.py:550
 msgid "[-开-]"
 msgstr "[-Open-]"
 
@@ -923,7 +923,7 @@ msgstr "Skills"
 msgid "性格"
 msgstr "Personality"
 
-#: Script/UI/Panel/see_character_info_panel.py:74 class:MoveMenuType id:2
+#: Script/UI/Panel/see_character_info_panel.py:74 class:MoveMenuType id:1
 #: type:name
 msgid "社交"
 msgstr "Social"
@@ -3196,10 +3196,6 @@ msgid "游泳课"
 msgstr "Swimming Class"
 
 #: class:MoveMenuType id:0 type:name
-msgid "当前"
-msgstr "Current"
-
-#: class:MoveMenuType id:1 type:name
 msgid "公共"
 msgstr "Public"
 
@@ -14353,6 +14349,9 @@ msgstr "Entrance to Boys' Dormitory C"
 #: Scene:data/map/9/Scene.json
 msgid "仓库"
 msgstr "Warehouse"
+
+#~ msgid "当前"
+#~ msgstr "Current"
 
 #~ msgid "增加金钱"
 #~ msgstr "Increase Money"

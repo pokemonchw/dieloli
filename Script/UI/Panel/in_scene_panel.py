@@ -163,7 +163,6 @@ class InScenePanel:
                 line_draw.draw()
             character_info_draw_list = []
             if character_data.target_character_id != -1:
-                target_data = cache.character_data[character_data.target_character_id]
                 character_head_draw = see_character_info_panel.CharacterInfoHead(
                     character_data.cid, self.width
                 )
@@ -589,8 +588,6 @@ class SeeInstructPanel:
         str -- 更新后的文本
         """
         if "{ClassName}" in instruct_text:
-            character_data: game_type.Character = cache.character_data[0]
-            end_time = 0
             school_id, phase = course.get_character_school_phase(0)
             now_time = datetime.datetime.fromtimestamp(cache.game_time, game_time.time_zone)
             now_time_value = now_time.hour * 100 + now_time.minute
@@ -598,9 +595,6 @@ class SeeInstructPanel:
             for session_id in game_config.config_school_session_data[school_id]:
                 session_config = game_config.config_school_session[session_id]
                 if session_config.start_time <= now_time_value <= session_config.end_time:
-                    now_value = int(now_time_value / 100) * 60 + now_time_value % 100
-                    end_value = int(session_config.end_time / 100) * 60 + session_config.end_time % 100
-                    end_time = end_value - now_value + 1
                     now_course_index = session_config.session
                     break
             now_week = now_time.weekday()
@@ -608,6 +602,6 @@ class SeeInstructPanel:
                 instruct_text = instruct_text.format(ClassName=_("自习课"))
             else:
                 now_course = cache.course_time_table_data[school_id][phase][now_week][now_course_index]
-                course_config:config_def.Course = game_config.config_course[now_course]
+                course_config: config_def.Course = game_config.config_course[now_course]
                 instruct_text = instruct_text.format(ClassName=course_config.name)
         return instruct_text
