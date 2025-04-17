@@ -11,6 +11,7 @@ from PySide6.QtCore import (
     Qt, Signal, Slot,
     QTimer, QObject, QThread,
     QRect, QSize, QPoint,
+    QEvent,
 )
 from PySide6.QtGui import (
     QColor, QFont, QFontMetrics,
@@ -122,7 +123,7 @@ class MainWindow(QMainWindow):
     def _setup_window_and_font(self):
         """设置窗口大小和字体"""
         # 获取屏幕信息
-        current_screen = QApplication.screens()[1]
+        current_screen = QApplication.screens()[0]
         screen_geometry = current_screen.geometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
@@ -553,12 +554,12 @@ class MainWindow(QMainWindow):
         cursor = self.panelbox.textCursor()
         start_pos = cursor.position()
         image_format = QTextImageFormat()
-        image = self.image_data[image_name]  # QImage 对象
-        image_format.setName(image_name)
+        image = self.image_data[image_path]  # QImage 对象
+        image_format.setName(image_path)
         image_format.setWidth(image.width())
         image_format.setHeight(image.height())
         # 将图片作为资源添加到文档中
-        self.panelbox.document().addResource(QTextDocument.ImageResource, image_name, image)
+        self.panelbox.document().addResource(QTextDocument.ImageResource, image_path, image)
         cursor.insertImage(image_format)
         end_pos = cursor.position()
         self.cmd_tag_map[cmd_return] = (start_pos, end_pos, '', '')
@@ -682,8 +683,6 @@ class MainWindow(QMainWindow):
 
     def init_image_data(self):
         """ 初始化图像数据 """
-        image_text_data = {}
-        image_lock = 0
         image_dir_path = os.path.join("image")
         for image_file_path_id in os.listdir(image_dir_path):
             image_file_path = os.path.join(image_dir_path, image_file_path_id)
@@ -691,8 +690,8 @@ class MainWindow(QMainWindow):
             old_image = QPixmap(image_file_path)
             old_height = old_image.height()
             old_width = old_image.width()
-            font_width_scaling = main_frame.now_char_width / 12
-            font_height_scaling = main_frame.now_char_height / 24
+            font_width_scaling = self.now_char_width / 12
+            font_height_scaling = self.now_char_height / 24
             new_height = int(old_height * font_height_scaling)
             new_width = int(old_width * font_width_scaling)
             new_image = old_image.scaled(new_width, new_height)
@@ -852,13 +851,13 @@ class CommandTextEdit(QTextEdit):
             if self.box_id == "main":
                 if self.main_window and hasattr(self.main_window, 'cmd_tag_map'):
                     for cmd_number, (start, end, normal_style, on_style) in self.main_window.cmd_tag_map.items():
-                        if start <= position <= end:
+                        if start <= position < end:
                             self.main_window.send_cmd(cmd_number)
                             return
             elif self.box_id == "instruct":
                 if self.main_window and hasattr(self.main_window, 'instruct_cmd_tag_map'):
                     for cmd_number, (start, end, normal_style, on_style) in self.main_window.instruct_cmd_tag_map.items():
-                        if start <= position <= end:
+                        if start <= position < end:
                             self.main_window.send_cmd(cmd_number)
                             return
             self.main_window.input_line.setFocus()
@@ -908,7 +907,7 @@ class CommandTextEdit(QTextEdit):
         if self.box_id == "main":
             if main_window and hasattr(main_window, 'cmd_tag_map'):
                 for cmd_number, (start, end, normal_style, on_style) in main_window.cmd_tag_map.items():
-                    if start <= position <= end:
+                    if start <= position < end:
                         self.viewport().setCursor(Qt.PointingHandCursor)
                         if main_window.current_hover_cmd != cmd_number:
                             # 恢复之前的样式
@@ -922,7 +921,7 @@ class CommandTextEdit(QTextEdit):
         elif self.box_id == "instruct":
             if main_window and hasattr(main_window, 'instruct_cmd_tag_map'):
                 for cmd_number, (start, end, normal_style, on_style) in main_window.instruct_cmd_tag_map.items():
-                    if start <= position <= end:
+                    if start <= position < end:
                         self.viewport().setCursor(Qt.PointingHandCursor)
                         if main_window.current_instruct_hover_cmd != cmd_number:
                             # 恢复之前的样式
@@ -937,6 +936,7 @@ class CommandTextEdit(QTextEdit):
             self.viewport().setCursor(Qt.IBeamCursor)
             # 恢复之前的样式
             main_window.restore_previous_cmd_style()
+            main_window.current_instruct_hover_cmd = None
 
 
 app = QApplication(sys.argv)

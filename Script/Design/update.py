@@ -26,7 +26,6 @@ def game_update_flow(add_time: int):
     next_hour_time = fix_next_hour_data_time.timestamp()
     fix_next_hour_time = (next_hour_time - now_time) / 60
     cache.character_data[0].behavior.start_time = cache.game_time
-    t1 = time.time()
     for _ in range(add_time):
         cache.game_time += 60
         if cache.game_time == next_hour_time:
@@ -50,6 +49,4 @@ def game_update_flow(add_time: int):
         if cache.weather_last_time <= 0:
             weather.handle_weather()
     handle_achieve.check_all_achieve()
-    t2 = time.time()
-    print(t2 - t1)
 
