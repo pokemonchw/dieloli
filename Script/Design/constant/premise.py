@@ -1938,7 +1938,7 @@ class Premise:
     """ 交互对象抑郁情绪高涨 """
     TARGET_DEPRESSED_IS_LOW = "target_depressed_is_low"
     """ 交互对象抑郁情绪低下 """
-    TARGET_ARROGANT_IS_HEIGHT = "target_arrogant_height"
+    TARGET_ARROGANT_IS_HEIGHT = "target_arrogant_is_height"
     """ 交互对象傲慢情绪高涨 """
     TARGET_ARROGANT_IS_LOW = "target_arrogant_is_low"
     """ 交互对象傲慢情绪低下 """
@@ -2302,6 +2302,10 @@ class Premise:
     """ 交互对象已被玩家收藏 """
     TARGET_IS_NOT_COLLECTION = "target_is_not_collection"
     """ 交互对象未被玩家收藏 """
+    OBSERVE_IS_ON = "observe_is_on"
+    """ 看海模式已开启 """
+    OBSERVE_IS_OFF = "observe_is_off"
+    """ 看海模式已关闭 """
 
     """
     =========================

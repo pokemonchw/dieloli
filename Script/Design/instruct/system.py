@@ -1,6 +1,7 @@
 from types import FunctionType
+import threading
 from Script.Core import cache_control, game_type, get_text, py_cmd
-from Script.Design import constant, handle_instruct
+from Script.Design import constant, handle_instruct, ai_run
 from Script.UI.Panel import see_character_info_panel, see_save_info_panel, achieve_panel
 from Script.Config import normal_config
 from Script.UI.Model import draw, panel
@@ -209,15 +210,29 @@ def handle_save():
     now_panel.draw()
 
 
-@handle_instruct.add_instruct(constant.Instruct.OBSERVE_ON, constant.InstructType.SYSTEM, _("开启看海模式"), {})
+@handle_instruct.add_instruct(
+    constant.Instruct.OBSERVE_ON,
+    constant.InstructType.SYSTEM,
+    _("开启看海模式"),
+    {
+        constant.Premise.OBSERVE_IS_OFF
+    }
+)
 def handle_observe_on():
     """处理开启看海模式指令"""
-    pass
+    cache.observe_switch = True
+    ai_thread = threading.Thread(target=ai_run.run_interactive)
+    ai_thread.start()
 
 
-@handle_instruct.add_instruct(constant.Instruct.OBSERVE_OFF, constant.InstructType.SYSTEM, _("关闭看海模式"), {})
+@handle_instruct.add_instruct(
+    constant.Instruct.OBSERVE_OFF,
+    constant.InstructType.SYSTEM,
+    _("关闭看海模式"),
+    {
+        constant.Premise.OBSERVE_IS_ON
+    }
+)
 def handle_observe_off():
     """处理关闭看海模式指令"""
-    pass
-
-
+    cache.observe_switch = False

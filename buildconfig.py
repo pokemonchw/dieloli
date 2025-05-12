@@ -13,6 +13,7 @@ os.system("cp ./tools/DieloliAIEditor/default.json ./data/target/")
 target_dir = os.path.join("data", "target")
 os.system("cp ./tools/DieloliClubEdior/default.json ./data/club/")
 club_dir = os.path.join("data", "club")
+os.system("cp ./tools/ai_play/policy_model.pth ./data/")
 config_data = {}
 config_def_str = ""
 config_po = ""

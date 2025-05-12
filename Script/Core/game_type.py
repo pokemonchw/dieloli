@@ -784,6 +784,8 @@ class Cache:
         """ 教师身份角色集合 """
         self.in_scene_panel_switch: InScenePanelSwitch = InScenePanelSwitch()
         """ 场景中各面板显示开关 """
+        self.observe_switch: bool = False
+        """ 看海模式开关 """
 
 
 class TargetChange:

@@ -2,11 +2,8 @@
 # -*- coding: UTF-8 -*-
 import os
 import sys
-import time
 import threading
 from types import FunctionType
-import platform
-import pickle
 from Script.Config import normal_config
 from Script.Core import game_path_config
 

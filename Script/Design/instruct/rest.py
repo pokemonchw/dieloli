@@ -94,8 +94,12 @@ def handle_sleep():
         last_hunger_time = character_data.last_hunger_time
         character_data.status.setdefault(27, 0)
         character_data.status.setdefault(28, 0)
-        character_data.status[27] += 0.02 * (cache.game_time - last_hunger_time) / 60
-        character_data.status[28] += 0.02 * (cache.game_time - last_hunger_time) / 60
+        if not character_id:
+            character_data.status[27] += 0.02 * (cache.game_time - last_hunger_time) / 60
+            character_data.status[28] += 0.02 * (cache.game_time - last_hunger_time) / 60
+        else:
+            character_data.status[27] = 0
+            character_data.status[28] = 0
         character_data.last_hunger_time = cache.game_time
         character_data.extreme_exhaustion_time = 0
         # 刷新角色体重和体脂率

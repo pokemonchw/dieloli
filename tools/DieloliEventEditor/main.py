@@ -29,9 +29,7 @@ def send_event_text_to_api(prompt: str) -> str:
     str -- 返回文本
     """
     try:
-        #client = OpenAI(api_key="sk-0cded0d95fb948cf85ff5d30b17265cd", base_url="https://dashscope.aliyuncs.com/compatible-mode/v1")
-        client = OpenAI(api_key="ce58cc27d3986235105c447974ad822e", base_url="https://api.zhizengzeng.com/v1")
-        print(prompt)
+        client = OpenAI(api_key="sk-zk2967dcff9bbf95f8fc8af023eaeb68ace67e625f7f21cd", base_url="https://api.zhizengzeng.com/v1")
         chat_completion = client.chat.completions.create(
             messages=[
                 {
@@ -39,14 +37,7 @@ def send_event_text_to_api(prompt: str) -> str:
                     "content": prompt,
                 }
             ],
-            # model="deepseek-reasoner",
-            # model="gpt-4.5-preview",
-            # model="o3-mini",
-            # model="claude-3-7-sonnet-20250219",
-            # model="gemini-2.0-flash",
             model="grok-3",
-            # model="moonshot-v1-128k-vision-preview",
-            # model="Doubao-pro-128k",
             temperature=0.9,
         )
         return chat_completion.choices[0].message.content
@@ -590,6 +581,22 @@ class MainWindow(QMainWindow):
 
         self.update_event_list()
 
+    def generate_premise_list(self) -> str:
+        prompt = "请从前提列表中选择一些前提条件作为游戏事件的触发前提\n前提列表:\n[\n"
+        for premise_id in premise_data:
+            premise = premise_data[premise_id]
+            prompt += " " + premise + "\n"
+        prompt += "]\n请仅给出选择的前提:"
+        return send_event_text_to_api(prompt)
+
+    def generate_settle_list(self) -> str:
+        prompt = "请从效果列表中选择一些效果作为游戏事件的结算效果\n效果列表\n[\n"
+        for settle_id in settle_data:
+            settle = settle_data[settle_id]
+            prompt += " " + settle + "\n"
+        prompt += "]\n请仅给出选择的效果:"
+        return send_event_text_to_api(prompt)
+
     # ------------ AI生成相关方法 ------------
     def generate_ai_text(self):
         self.progress_dialog = QProgressDialog("AI生成中...", None, 0, 0, self)
@@ -607,28 +614,9 @@ class MainWindow(QMainWindow):
         prompt = f"请你为游戏中角色的行动设计一条事件文本，只允许使用最多{event_lenght}句话，每句话不超过15个字，所有断句包括逗号均视为一句\n尽可能避免直接描写对话\n需要避免重复句式\n需要避免和现有的事件相似\n游戏的背景为08年中国小县城的学校，当角色没有明确的高水平的神秘学技能时，事件中不可以出现神秘学元素\n现在角色的行动为:{state_text}，需要设计行动{start_type}时的事件\n请尽可能多的尝试不同的事件\n可以多考虑故事性和冲突性\n事件类型为[结束]时，需要明确事件的结果\n这是过去的参考:\n[+\n"
         for now_event in event_text_set:
             prompt += "  " + now_event + "\n"
-        prompt += "]\n这是触发事件所需的前提列表，请你选择你认为合适的前提条件:\n[\n"
-        for premise_id in premise_data:
-            premise = premise_data[premise_id]
-            prompt += " " + premise + "\n"
-        prompt += "]\n另外这是我选择的额外的前提:\n["
-        uid = self.event_manager.current_event_id
-        select_prempt_set = set()
-        event = self.event_manager.events.get(uid)
-        for premise in event.premise:
-            select_prempt_set.add(premise)
-        premise_random_index = random.randint(1, 20)
-        if len(select_prempt_set) < premise_random_index:
-            fix_index = premise_random_index - len(select_prempt_set)
-            for i in range(fix_index):
-                select_prempt_set.add(random.choice(list(premise_data.keys())))
-        for premise in select_prempt_set:
-            prompt += " " + premise_data[premise] + "\n"
+        prompt += "]\n这是触发事件所需的前提:\n[\n" + self.generate_premise_list()
         prompt += "]\n应当依照前提条件来写事件文本，即只要符合了这些前提，其他变量任意变化，都不会产生违和感，例如只有在音乐活动室才会有钢琴，天台没有喷泉，早上不会出现暮色\n事件需要尽可能通用，即多次重复出现时不能出现违和感\n请注意，在角色状态中，老师进行讲课被称为[教学]，学生上课被称为[上课]，[睡觉]特指在宿舍中进入深度睡眠，结束即起床，[抚摸]是一种性行为，指抚摸交互对象的身体，[摸头]是一种类似用掌心抚摸小猫的脑袋的亲密行为\n[邀请做爱]指的是邀请对方现在立刻马上原地与自己开始做爱\n为敏感行为设计时不需要避免直白描述\n不需要避免尴尬场景"
-        prompt += "\n这是触发事件后会执行的结算器，请你选择你认为合理的结算器:\n[\n"
-        for settle_id in settle_data:
-            settle = settle_data[settle_id]
-            prompt += " " + settle + "\n"
+        prompt += "\n这是触发事件后会达成的效果:\n[\n" + self.generate_settle_list()
         prompt += "]\n文本中的关键字被称为宏，关于宏的说明如下:\n[\n"
         for macro_id in macro_data:
             macro = macro_data[macro_id]

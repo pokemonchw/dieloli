@@ -245,6 +245,10 @@ def order_deal(flag="order", print_order=True, donot_return_null_str=True):
     return
 
 
+wait_switch = False
+""" 是否正在等待玩家输入 """
+
+
 def askfor_str(donot_return_null_str=True, print_order=False):
     """
     用于请求一个字符串为结果的输入
@@ -252,9 +256,12 @@ def askfor_str(donot_return_null_str=True, print_order=False):
     donot_return_null_str -- 不接受输入空字符串
     print_order -- 是否将输入的order输出到屏幕上
     """
+    global wait_switch
     while True:
+        wait_switch = True
         order = order_deal("str", print_order, donot_return_null_str)
         if donot_return_null_str and order != "":
+            wait_switch = False
             return order
         if not donot_return_null_str:
             return order
@@ -267,16 +274,20 @@ def askfor_all(input_list: list, print_order=True):
     input_list -- 用于判断的列表内容
     print_order -- 是否将输入的order输出到屏幕上
     """
+    global wait_switch
     while 1:
+        wait_switch = True
         order = order_deal("str", print_order)
         if order in input_list:
             if _cmd_valid(order):
                 _cmd_deal(order)
+            wait_switch = False
             return order
         if order == "":
             continue
         io_init.era_print(order + "\n")
         io_init.era_print(_("您输入的选项无效，请重试\n"))
+        wait_switch = False
         continue
 
 
@@ -287,11 +298,14 @@ def askfor_list(input_list: list, print_order=False):
     input_list -- 用于判断的列表内容
     print_order -- 是否将输入的order输出到屏幕上
     """
+    global wait_switch
     while True:
+        wait_switch = True
         order = order_deal("str", print_order)
         order = text_handle.full_to_half_text(order)
         if order in input_list:
             io_init.era_print(order + "\n")
+            wait_switch = False
             return order
         if order == "":
             continue
@@ -306,9 +320,12 @@ def askfor_int(print_order=True):
     Keyword arguments:
     print_order -- 是否将输入的order输出到屏幕上
     """
+    global wait_switch
     while True:
+        wait_switch = True
         order = order_deal("str", print_order)
         if order.isdigit():
+            wait_switch = False
             return int(order)
         if order == "":
             continue

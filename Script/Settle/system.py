@@ -54,10 +54,8 @@ def handle_add_like_preference(
             if sum(character_data.like_preference_data.values()) >= 100:
                 min_target = min(now_data, now_data.get)
                 character_data.like_preference_data[min_target] -= 1
-            character_data.like_preference_data.setdefault(now_target_id, 0)
-            character_data.like_preference_data[now_target_id] += 1
-        elif character_data.like_preference_data[now_target_id] < 100:
-            character_data.like_preference_data[now_target_id] += 1
+        character_data.like_preference_data.setdefault(now_target_id, 0)
+        character_data.like_preference_data[now_target_id] += 1
 
 
 @settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.ADD_DISLIKE_PREFERENCE)
@@ -91,7 +89,5 @@ def handle_add_dislike_preference(
             if sum(character_data.dislike_preference_data.values()) >= 100:
                 min_target = min(now_data, now_data.get)
                 character_data.dislike_preference_data[min_target] -= 1
-            character_data.dislike_preference_data.setdefault(now_target_id, 0)
-            character_data.dislike_preference_data[now_target_id] += 1
-        elif character_data.dislike_preference_data[now_target_id] < 100:
-            character_data.dislike_preference_data[now_target_id] += 1
+        character_data.dislike_preference_data.setdefault(now_target_id, 0)
+        character_data.dislike_preference_data[now_target_id] += 1
