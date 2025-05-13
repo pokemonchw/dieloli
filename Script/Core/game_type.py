@@ -542,6 +542,8 @@ class Character:
         """ 角色偏好倾向分 {目标id:倾向分} """
         self.dislike_preference_data: Dict[str, int] = {}
         """ 角色排斥倾向分 {目标id:倾向分} """
+        self.like_dressing_style: str = ""
+        """ 角色喜好的穿搭风格 """
 
 
 class CharacterIdentity:

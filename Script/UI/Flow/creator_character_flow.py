@@ -216,6 +216,7 @@ def setting_age_tem_panel():
     button_panel.draw()
     ans = flow_handle.askfor_all(return_list.keys())
     character_data.age = attr_calculation.get_age(int(ans))
+    character_data.like_dressing_style = attr_calculation.get_like_dressing_style()
     character_handle.init_character_dormitory()
     character.init_character_birthday(0)
     character.init_character_end_age(0)

@@ -1113,6 +1113,48 @@ class Premise:
 
     """
     =========================
+    角色穿搭风格喜好类前提
+    =========================
+    """
+    LIKE_DRESSING_STYLE_IS_CHARMER = "like_dressing_style_is_charmer"
+    """ 角色喜欢可爱风格的穿搭 """
+    LIKE_DRESSING_STYLE_IS_ALLURES = "like_dressing_style_is_allures"
+    """ 角色喜欢性感风格的穿搭 """
+    LIKE_DRESSING_STYLE_IS_STYLISH = "like_dressing_style_is_stylish"
+    """ 角色喜欢帅气风格的穿搭 """
+    LIKE_DRESSING_STYLE_IS_REFRESH = "like_dressing_style_is_refresh"
+    """ 角色喜欢清新风格的穿搭 """
+    LIKE_DRESSING_STYLE_IS_REFINED = "like_dressing_style_is_refined"
+    """ 角色喜欢典雅风格的穿搭 """
+    LIKE_TARGET_LIKE_DRESSING_STYLE_IS_CHARMER = "like_target_like_dressing_style_is_charmer"
+    """ 喜欢的人喜欢可爱风格的穿搭 """
+    LIKE_TARGET_LIKE_DRESSING_STYLE_IS_ALLURES = "like_target_like_dressing_style_is_allures"
+    """ 喜欢的人喜欢性感风格的穿搭 """
+    LIKE_TARGET_LIKE_DRESSING_STYLE_IS_STYLISH = "like_target_like_dressing_style_is_stylish"
+    """ 喜欢的人喜欢帅气风格的穿搭 """
+    LIKE_TARGET_LIKE_DRESSING_STYLE_IS_REFRESH = "like_target_like_dressing_style_is_refresh"
+    """ 喜欢的人喜欢清新风格的穿搭 """
+    LIKE_TARGET_LIKE_DRESSING_STYLE_IS_REFINED = "like_target_like_dressing_style_is_refined"
+    """ 喜欢的人喜欢典雅风格的穿搭 """
+
+    """
+    =========================
+    交互对象穿搭风格喜好类前提
+    =========================
+    """
+    TARGET_LIKE_DRESSING_STYLE_IS_CHARMER = "target_like_dressing_style_is_charmer"
+    """ 交互对象喜欢可爱风格的穿搭 """
+    TARGET_LIKE_DRESSING_STYLE_IS_ALLURES = "target_like_dressing_style_is_allures"
+    """ 交互对象喜欢性感风格的穿搭 """
+    TARGET_LIKE_DRESSING_STYLE_IS_STYLISH = "target_like_dressing_style_is_stylish"
+    """ 交互对象喜欢帅气风格的穿搭 """
+    TARGET_LIKE_DRESSING_STYLE_IS_REFRESH = "target_like_dressing_style_is_refresh"
+    """ 交互对象喜欢清新风格的穿搭 """
+    TARGET_LIKE_DRESSING_STYLE_IS_REFINED = "target_like_dressing_style_is_refined"
+    """ 交互对象喜欢典雅风格的穿搭 """
+
+    """
+    =========================
     交互对象人文技能类前提
     =========================
     """
@@ -2130,6 +2172,16 @@ class Premise:
     """ 角色穿了鞋子 """
     WEAR_SOCKS = "wear_socks"
     """ 角色穿了袜子 """
+    DRESSING_STYLE_IS_CHARMER = "dressing_style_is_charmer"
+    """ 角色穿着风格为可爱 """
+    DRESSING_STYLE_IS_ALLURES = "dressing_style_is_allures"
+    """ 角色穿着风格为性感 """
+    DRESSING_STYLE_IS_STYLISH = "dressing_style_is_stylish"
+    """ 角色穿着风格为帅气 """
+    DRESSING_STYLE_IS_REFRESH = "dressing_style_is_refresh"
+    """ 角色穿着风格为清新 """
+    DRESSING_STYLE_IS_REFINED = "dressing_style_is_refined"
+    """ 角色穿着风格为典雅 """
 
     """
     =========================
@@ -2168,6 +2220,16 @@ class Premise:
     """ 交互对象穿了鞋子 """
     TARGET_WEAR_SOCKS = "target_wear_socks"
     """ 交互对象穿了袜子 """
+    TARGET_DRESSING_STYLE_IS_CHARMER = "target_dressing_style_is_charmer"
+    """ 交互对象穿着风格为可爱 """
+    TARGET_DRESSING_STYLE_IS_ALLURES = "target_dressing_style_is_allures"
+    """ 交互对象穿着风格为性感 """
+    TARGET_DRESSING_STYLE_IS_STYLISH = "target_dressing_style_is_stylish"
+    """ 交互对象穿着风格为帅气 """
+    TARGET_DRESSING_STYLE_IS_REFRESH = "target_dressing_style_is_refresh"
+    """ 交互对象穿着风格为清新 """
+    TARGET_DRESSING_STYLE_IS_REFINED = "target_dressing_style_is_refined"
+    """ 交互对象穿着风格为典雅 """
 
     """
     =========================
