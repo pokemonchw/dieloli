@@ -20,7 +20,6 @@ config_po = ""
 msgData = set()
 class_data = set()
 
-
 def build_csv_config(file_path: str, file_name: str):
     with open(file_path, encoding="utf-8") as now_file:
         now_read = csv.DictReader(now_file)
