@@ -29,6 +29,14 @@ class ClothingTem:
     describe: str
     """ 描述 """
 
+    def __init__(self):
+        self.cid = ""
+        self.name = ""
+        self.clothing_type = 0
+        self.sex = 0
+        self.tag = 0
+        self.describe = ""
+
 
 class ClothingSuit:
     """ 套装配置数据 """
@@ -37,5 +45,10 @@ class ClothingSuit:
     """ 套装id """
     name: str
     """ 套装名称 """
-    clothing_wear: Dict[int, str] = {}
+    clothing_wear: Dict[int, str]
     """ 服装设置 {穿戴位置:服装id} """
+
+    def __init__(self):
+        self.cid = ""
+        self.name = ""
+        self.clothing_wear = {}

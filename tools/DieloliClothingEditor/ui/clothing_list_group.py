@@ -85,7 +85,7 @@ class ClothingListGroup(QGroupBox):
     def _create_clothing(self):
         """ 创建服装 """
         uid = str(uuid.uuid4())
-        item = ClothingListGroupItem("未命名", item)
+        item = ClothingListGroupItem("未命名", uid)
         clothing_data = game_type.ClothingTem()
         clothing_data.name = "未命名"
         clothing_data.cid = uid
