@@ -48,14 +48,11 @@ config_clothing_evaluate: Dict[int, config_def.ClothingEvaluate] = {}
 """ 服装评价配置数据 """
 config_clothing_evaluate_list: List[str] = []
 """ 服装评价配置列表 """
-config_clothing_suit: Dict[int, config_def.ClothingSuit] = {}
+config_clothing_suit: Dict[str, game_type.ClothingSuitData] = {}
 """ 衣服套装配置列表 """
-config_clothing_suit_data: Dict[int, Dict[int, Set]] = {}
-"""
-衣服套装搭配数据
-套装编号:性别id:服装集合
-"""
-config_clothing_tem: Dict[int, config_def.ClothingTem] = {}
+config_clothing_suit_name_data: Dict[str, str] = {}
+""" 衣服套装名字对应衣服套装id数据 {套装名字:套装id} """
+config_clothing_tem: Dict[int, game_type.ClothingTemData] = {}
 """ 服装模板配置数据 """
 config_clothing_type: Dict[int, config_def.ClothingType] = {}
 """ 衣服种类配置 """
@@ -434,20 +431,18 @@ def load_clothing_suit():
     now_data = config_data["ClothingSuit"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = config_def.ClothingSuit()
+        now_tem = game_type.ClothingSuitData()
         now_tem.__dict__ = tem_data
         config_clothing_suit[now_tem.cid] = now_tem
-        config_clothing_suit_data.setdefault(now_tem.suit_type, {})
-        config_clothing_suit_data[now_tem.suit_type].setdefault(now_tem.sex, set())
-        config_clothing_suit_data[now_tem.suit_type][now_tem.sex].add(now_tem.clothing_id)
+        config_clothing_suit_name_data[now_tem.name] = now_tem.cid
 
 
 def load_clothing_tem():
     """载入服装模板配置数据"""
-    now_data = config_data["ClothingTem"]
+    now_data = config_data["Clothing"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = config_def.ClothingTem()
+        now_tem = game_type.ClothingTemData()
         now_tem.__dict__ = tem_data
         config_clothing_tem[now_tem.cid] = now_tem
         config_clothing_sex_type_data.setdefault(now_tem.sex, set())

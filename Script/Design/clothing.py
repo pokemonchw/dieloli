@@ -9,24 +9,24 @@ cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
 
-def creator_suit(suit_id: int, sex: int) -> Dict[int, game_type.Clothing]:
+def creator_suit(suit_name: str) -> Dict[int, game_type.Clothing]:
     """
     创建套装
     Keyword arguments:
-    suit_name -- 套装模板
-    sex -- 性别模板
+    suit_name -- 套装模板名字
     Return arguments:
     Dict[int,game_type.Clothing] -- 套装数据 服装穿戴位置:服装数据
     """
-    suit_data = game_config.config_clothing_suit_data[suit_id][sex]
+    suit_id = game_config.config_clothing_suit_name_data[suit_name]
+    suit_data = game_config.config_clothing_suit[suit_id]
     clothing_data = {}
-    for clothing_id in suit_data:
+    for clothing_id in suit_data.clothing_wear.values():
         clothing = creator_clothing(clothing_id)
         clothing_data[clothing.wear] = clothing
     return clothing_data
 
 
-def creator_clothing(clothing_tem_id: int) -> game_type.Clothing:
+def creator_clothing(clothing_tem_id: str) -> game_type.Clothing:
     """
     创建服装的基础函数
     Keyword arguments:

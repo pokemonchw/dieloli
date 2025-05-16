@@ -56,13 +56,18 @@ self.select_clothing_file_action,
                 clothing_data.__dict__ = now_data["clothing"][k]
                 cache_control.clothing_list_data[k] = clothing_data
             i = 0
-            for k in now_data["suit"]:
+            for suit_key in now_data["suit"]:
                 if not i:
-                    cache_control.now_suit_id = k
+                    cache_control.now_suit_id = suit_key
                 i += 1
                 suit_data = game_type.ClothingSuit()
-                suit_data.__dict__ = now_data["suit"][k]
-                cache_control.suit_list_data[k] = suit_data
+                suit_data.__dict__ = now_data["suit"][suit_key]
+                new_clothing_wear_data = {}
+                for k in suit_data.clothing_wear:
+                    int_k = int(k)
+                    new_clothing_wear_data[int_k] = suit_data.clothing_wear[k]
+                suit_data.clothing_wear = new_clothing_wear_data
+                cache_control.suit_list_data[suit_key] = suit_data
             cache_control.update_signal.emit()
 
     def _create_clothing_data(self):

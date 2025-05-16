@@ -49,6 +49,7 @@ class SuitListGroup(QGroupBox):
             cache_control.now_suit_id = ""
         i = 0
         set_item = None
+        print(cache_control.suit_list_data)
         for suit_id in cache_control.suit_list_data:
             if not i and cache_control.now_suit_id == "":
                 cache_control.now_suit_id = suit_id

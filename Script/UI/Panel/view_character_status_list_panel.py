@@ -70,6 +70,7 @@ class CharacterStatusListPanel:
         gender_type_list = [_("所有性别"), _("男"), _("女"), _("扶她"), _("无性")]
         age_type_list = [_("所有年龄"), _("小学"), _("初中"), _("高中"), _("成年")]
         while 1:
+            py_cmd.clr_cmd()
             if cache.now_panel_id != constant.Panel.VIEW_CHARACTER_STATUS_LIST:
                 break
             if self.now_panel == panel_type_list[0]:

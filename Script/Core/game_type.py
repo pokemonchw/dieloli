@@ -224,7 +224,7 @@ class Clothing:
     def __init__(self):
         self.uid: UUID = ""
         """ 服装对象的唯一id """
-        self.tem_id: int = 0
+        self.tem_id: str = ""
         """ 服装配表id """
         self.sexy: int = 0
         """ 服装性感属性 """
@@ -974,3 +974,30 @@ class AchieveData:
         self.first_wear_clothes: bool = False
         """ 初次穿上衣服 """
 
+
+class ClothingTemData:
+    """ 服装模板数据 """
+
+    def __init__(self):
+        self.cid: str = ""
+        """ 模板id """
+        self.name: str = ""
+        """ 服装名字 """
+        self.clothing_type: int = 0
+        """ 服装类型 """
+        self.sex: int = 0
+        """ 服装性别限制 """
+        self.describe: str = ""
+        """ 描述 """
+
+
+class ClothingSuitData:
+    """ 服装套装配置数据 """
+
+    def __init__(self):
+        self.cid: str = ""
+        """ 套装id """
+        self.name: str = ""
+        """ 套装名称 """
+        self.clothing_wear: Dict[int, str] = {}
+        """ 套装设置 {穿戴位置:服装id} """
