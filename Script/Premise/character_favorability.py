@@ -168,6 +168,7 @@ def handle_hate_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    target_id = character_data.target_character_id
     if target_id == -1:
         return 0
     if target_id in character_data.social_contact_data:
@@ -186,6 +187,7 @@ def handle_hatred_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    target_id = character_data.target_character_id
     if target_id == -1:
         return 0
     if target_id in character_data.social_contact_data:
@@ -204,6 +206,7 @@ def handle_deadly_enemy_target(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    target_id = character_data.target_character_id
     if target_id == -1:
         return 0
     if target_id in character_data.social_contact_data:
@@ -225,6 +228,8 @@ def handle_target_adore(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    if 10 not in target_data.social_contact:
+        return 0
     if character_id in target_data.social_contact[10]:
         return 1
     return 0
@@ -651,6 +656,8 @@ def handle_target_is_less_than_adore(character_id: int) -> int:
     if character_data.target_character_id == -1:
         return 0
     target_id = character_data.target_character_id
+    if 10 not in character_data.social_contact:
+        return 1
     if target_id in character_data.social_contact[10]:
         return 0
     return 1
@@ -931,109 +938,6 @@ def handle_have_like_target(character_id: int) -> int:
     if (len(character_data.social_contact[9]) + len(character_data.social_contact[10])) > 0:
         return 1
     return 0
-
-
-@handle_premise.add_premise(constant.Premise.HAVE_DISLIKE_TARGET)
-
-
-@handle_premise.add_premise(constant.Premise.PLAYER_IS_ADORE)
-def handle_player_is_adore(character_id: int) -> int:
-    """
-    校验玩家是否是当前角色的爱慕对象
-    Keyword arguments:
-    character_id -- 角色id
-    Return arguments:
-    int -- 权重
-    """
-    character_data = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set())
-    if 0 in character_data.social_contact[10]:
-        return 1
-    return 0
-
-
-@handle_premise.add_premise(constant.Premise.TARGET_IS_BEYOND_FRIENDSHIP)
-def handle_target_is_beyond_friendship(character_id: int) -> int:
-    """
-    校验是否对交互对象抱有超越友谊的想法
-    Keyword arguments:
-    character_id -- 角色id
-    Return arguments:
-    int -- 权重
-    """
-    character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -1:
-        return 0
-    if (
-        character_data.target_character_id in character_data.social_contact_data
-        and character_data.social_contact_data[character_data.target_character_id] > 7
-    ):
-        return 1
-    return 0
-
-
-@handle_premise.add_premise(constant.Premise.IS_BEYOND_FRIENDSHIP_TARGET)
-def handle_is_beyond_friendship_target(character_id: int) -> int:
-    """
-    校验交互对象是否对自己抱有超越友谊的想法
-    Keyword arguments:
-    character_id -- 角色id
-    Return arguments:
-    int -- 权重
-    """
-    character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -1:
-        return 0
-    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    if (
-        character_id in target_data.social_contact_data
-        and target_data.social_contact_data[character_id] > 7
-    ):
-        return 1
-    return 0
-
-
-@handle_premise.add_premise(constant.Premise.NO_BEYOND_FRIENDSHIP_TARGET)
-def handle_no_beyond_friendship_target(character_id: int) -> int:
-    """
-    校验交互对象是否对自己没有超越友谊的想法
-    Keyword arguments:
-    character_id -- 角色id
-    Return arguments:
-    int -- 权重
-    """
-    character_data: game_type.Character = cache.character_data[character_id]
-    if character_data.target_character_id == -1:
-        return 1
-    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
-    if (
-        character_id in target_data.social_contact_data
-        and target_data.social_contact_data[character_id] < 8
-    ):
-        return 1
-    if character_id not in target_data.social_contact_data:
-        return 1
-    return 0
-
-
-@handle_premise.add_premise(constant.Premise.HAVE_LIKE_TARGET)
-def handle_have_like_target(character_id: int) -> int:
-    """
-    校验角色是否有喜欢的人
-    Keyword arguments:
-    character_id -- 角色id
-    Return arguments:
-    int -- 权重
-    """
-    character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set())
-    character_data.social_contact.setdefault(10, set())
-    if (len(character_data.social_contact[9]) + len(character_data.social_contact[10])) > 0:
-        return 1
-    return 0
-
-
-@handle_premise.add_premise(constant.Premise.HAVE_DISLIKE_TARGET)
 
 
 @handle_premise.add_premise(constant.Premise.PLAYER_IS_ADORE)
