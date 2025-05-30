@@ -2,6 +2,7 @@ from types import FunctionType
 from typing import List, Dict, Set
 from Script.Design.constant.achieve import Achieve
 from Script.Design.constant.adv_npc import AdvNpc
+from Script.Design.constant.awareness import Awareness
 from Script.Design.constant.behavior import Behavior
 from Script.Design.constant.behavior_effect import BehaviorEffect
 from Script.Design.constant.character_status import CharacterStatus

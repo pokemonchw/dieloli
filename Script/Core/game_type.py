@@ -544,6 +544,8 @@ class Character:
         """ 角色排斥倾向分 {目标id:倾向分} """
         self.like_dressing_style: str = ""
         """ 角色喜好的穿搭风格 """
+        self.character_awareness_data: Dict[int, Dict[str, CharacterAwareness]] = {}
+        """ 对其他角色的认知数据 {角色id:{认知id:认知数据}} """
 
 
 class CharacterIdentity:
@@ -1001,3 +1003,15 @@ class ClothingSuitData:
         """ 套装名称 """
         self.clothing_wear: Dict[int, str] = {}
         """ 套装设置 {穿戴位置:服装id} """
+
+
+class CharacterAwareness:
+    """ 对角色的认知数据 """
+
+    def __init__(self):
+        self.cid: str = ""
+        """ 认知id """
+        self.authenticity: bool = True
+        """ 真实性 """
+        self.got_count: int = 0
+        """ 得到相同信息的计数(每1点计数增加10%置信率) """

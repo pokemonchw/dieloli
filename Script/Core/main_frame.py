@@ -179,6 +179,8 @@ class MainWindow(QMainWindow):
 
         # 设置字体
         self.normal_font = QFont(font_family, need_font_size)
+        self.normal_font.setHintingPreference(QFont.PreferFullHinting)
+        self.normal_font.setStyleStrategy(QFont.PreferAntialias)
         normal_config.config_normal.font_size = need_font_size
         normal_config.config_normal.order_font_size = need_font_size
 

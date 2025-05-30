@@ -36,6 +36,7 @@ def build_csv_config(file_path: str, file_name: str):
         config_data[type_text].setdefault("data", [])
         config_data[type_text].setdefault("gettext", {})
         for row in now_read:
+            print(row)
             if not i:
                 for k in row:
                     now_docstring_data[k] = row[k]

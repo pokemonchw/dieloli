@@ -1,5 +1,6 @@
 from Script.Premise import (
     auxiliary_system,
+    character_awareness,
     character_behavior,
     character_bodily_status,
     character_favorability,
