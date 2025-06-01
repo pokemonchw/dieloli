@@ -13,7 +13,7 @@ msgstr ""
 "#-#-#-#-#  dieloli.po (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-26 11:31+0800\n"
+"POT-Creation-Date: 2025-06-01 10:03+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,92 +25,99 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language: zh_CN\n"
 
+#: Script/Settle/character_behavior.py:162
+#, python-brace-format
+msgid "{character_name}被{origin_character_name}打断了{statue_name}"
+msgstr ""
+
+#: Script/Settle/interaction.py:174
+#, python-brace-format
+msgid "{NickName}被赶出了教室"
+msgstr ""
+
+#: Script/Settle/character_temporary_status.py:95
+#: Script/Settle/character_temporary_status.py:105
+#, python-brace-format
+msgid "{character_name}失去了初吻\n"
+msgstr ""
+
 #: Script/Core/flow_handle.py:289 Script/Core/flow_handle.py:313
 #: Script/Core/flow_handle.py:333
 msgid "您输入的选项无效，请重试\n"
 msgstr ""
 
-#: Script/Design/event.py:76
-msgid "占位符:无可触发事件，待补完"
+#: Script/Design/adv/liwei_and_lixue.py:13
+msgid "李薇"
 msgstr ""
 
-#: Script/Design/event.py:78
-msgid "占位符:无可结算事件，待补完"
+#: Script/Design/adv/liwei_and_lixue.py:64
+msgid "李雪"
 msgstr ""
 
-#: Script/Design/event.py:126
-msgid "无法链接ollama服务，ollama模式已自动关闭"
+#: Script/Design/character.py:44
+msgid "男生校服"
 msgstr ""
 
-#: Script/Design/event.py:136
-msgid "调用外部api失败，api模式已自动关闭"
+#: Script/Design/character.py:45
+msgid "女生校服"
 msgstr ""
 
-#: Script/Design/event.py:163
-#, python-brace-format
-msgid "{character_name}的状态结算:"
-msgstr ""
-
-#: Script/Design/event.py:274
-msgid "绝顶"
-msgstr ""
-
-#: Script/Design/event.py:283
-msgid "强绝顶"
+#: Script/Design/character.py:46
+msgid "通用校服"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:14
-#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_clothing_info_panel.py:173
 #: Script/UI/Panel/see_clothing_info_panel.py:323
+#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:392
 msgid "可爱的"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:14
-#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_clothing_info_panel.py:173
 #: Script/UI/Panel/see_clothing_info_panel.py:323
+#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:392
 msgid "性感的"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:14
-#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_clothing_info_panel.py:173
 #: Script/UI/Panel/see_clothing_info_panel.py:323
+#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:392
 msgid "帅气的"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:14
-#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_clothing_info_panel.py:173
 #: Script/UI/Panel/see_clothing_info_panel.py:323
+#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:392
 msgid "清新的"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:14
-#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_clothing_info_panel.py:173
 #: Script/UI/Panel/see_clothing_info_panel.py:323
+#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:392
 msgid "典雅的"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:14
-#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_clothing_info_panel.py:173
 #: Script/UI/Panel/see_clothing_info_panel.py:323
+#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:392
 msgid "清洁的"
 msgstr ""
 
 #: Script/Design/settle_behavior.py:14
-#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_clothing_info_panel.py:173
 #: Script/UI/Panel/see_clothing_info_panel.py:323
+#: Script/UI/Panel/clothing_shop_panel.py:293
 #: Script/UI/Panel/see_character_info_panel.py:392
 msgid "保暖的"
 msgstr ""
@@ -172,108 +179,109 @@ msgstr ""
 msgid "爱情的极致"
 msgstr ""
 
-#: Script/Design/character.py:44
-msgid "男生校服"
+#: Script/Design/cooking.py:315 Script/Design/cooking.py:382
+#: Script/UI/Panel/food_bag_panel.py:32 Script/UI/Panel/food_bag_panel.py:40
+#: Script/UI/Panel/food_shop_panel.py:39 Script/UI/Panel/food_shop_panel.py:50
+msgid "主食"
 msgstr ""
 
-#: Script/Design/character.py:45
-msgid "女生校服"
+#: Script/Design/cooking.py:320 Script/Design/cooking.py:387
+#: Script/UI/Panel/food_bag_panel.py:40 Script/UI/Panel/food_shop_panel.py:50
+msgid "零食"
 msgstr ""
 
-#: Script/Design/character.py:46
-msgid "通用校服"
+#: Script/Design/cooking.py:327 Script/Design/cooking.py:394
+#: Script/UI/Panel/food_bag_panel.py:40 Script/UI/Panel/food_shop_panel.py:50
+msgid "饮品"
 msgstr ""
 
-#: Script/Design/instruct/active.py:22 class:Status id:4 type:name
-msgid "进食"
+#: Script/Design/cooking.py:349 Script/Design/cooking.py:419
+#: Script/UI/Panel/food_bag_panel.py:40 Script/UI/Panel/food_shop_panel.py:50
+msgid "水果"
 msgstr ""
 
-#: Script/Design/instruct/active.py:29 class:Status id:1 type:name
-msgid "移动"
+#: Script/Design/cooking.py:355 Script/UI/Panel/food_bag_panel.py:40
+#: Script/UI/Panel/food_shop_panel.py:50
+msgid "食材"
 msgstr ""
 
-#: Script/Design/instruct/active.py:38
-msgid "去买吃的"
+#: Script/Design/cooking.py:361 Script/UI/Panel/food_bag_panel.py:40
+#: Script/UI/Panel/food_shop_panel.py:50 class:RecipesFormulaType id:2
+#: type:name
+msgid "调料"
 msgstr ""
 
-#: Script/Design/instruct/active.py:63
-msgid "去上课"
+#: Script/Design/event.py:76
+msgid "占位符:无可触发事件，待补完"
 msgstr ""
 
-#: Script/Design/instruct/active.py:83
-msgid "去换装"
+#: Script/Design/event.py:78
+msgid "占位符:无可结算事件，待补完"
 msgstr ""
 
-#: Script/Design/instruct/active.py:97
-msgid "逃离人群"
+#: Script/Design/event.py:126
+msgid "无法链接ollama服务，ollama模式已自动关闭"
 msgstr ""
 
-#: Script/Design/instruct/active.py:113
-msgid "购买道具"
+#: Script/Design/event.py:136
+msgid "调用外部api失败，api模式已自动关闭"
 msgstr ""
 
-#: Script/Design/instruct/active.py:123
-msgid "购买食物"
+#: Script/Design/event.py:163
+#, python-brace-format
+msgid "{character_name}的状态结算:"
 msgstr ""
 
-#: Script/Design/instruct/active.py:134
-msgid "购买服装"
+#: Script/Design/event.py:274
+msgid "绝顶"
 msgstr ""
 
-#: Script/Design/instruct/active.py:145
-msgid "喝泉水"
+#: Script/Design/event.py:283
+msgid "强绝顶"
 msgstr ""
 
-#: Script/Design/instruct/active.py:156
-msgid "喝到了奇怪的泉水！身体变化了！！！"
+#: Script/Design/attr_text.py:115
+msgid "吃饱了"
 msgstr ""
 
-#: Script/Design/instruct/active.py:167
-msgid "喝到了甜甜的泉水～"
+#: Script/Design/attr_text.py:117
+msgid "肚子空空"
 msgstr ""
 
-#: Script/Design/instruct/active.py:176 class:Status id:10 type:name
-msgid "拥抱"
+#: Script/Design/attr_text.py:119
+msgid "感到饥饿"
 msgstr ""
 
-#: Script/Design/instruct/active.py:191 class:Status id:12 type:name
-msgid "牵手"
+#: Script/Design/attr_text.py:121
+msgid "快饿晕了"
 msgstr ""
 
-#: Script/Design/instruct/active.py:209
-msgid "放手"
+#: Script/Design/attr_text.py:123
+msgid "即将饿死"
 msgstr ""
 
-#: Script/Design/instruct/active.py:226 class:Status id:23 type:name
-msgid "穿衣"
+#: Script/Design/attr_text.py:135
+msgid "喝饱了"
 msgstr ""
 
-#: Script/Design/instruct/active.py:244
-msgid "脱下自身衣物"
+#: Script/Design/attr_text.py:137
+msgid "感到口渴"
 msgstr ""
 
-#: Script/Design/instruct/active.py:260 class:Status id:29 type:name
-msgid "看星星"
+#: Script/Design/attr_text.py:139
+msgid "开始缺水"
 msgstr ""
 
-#: Script/Design/instruct/active.py:279
-msgid "社团活动"
+#: Script/Design/attr_text.py:141
+msgid "脱水了"
 msgstr ""
 
-#: Script/Design/instruct/active.py:309
-msgid "信仰之跃"
+#: Script/Design/attr_text.py:143
+msgid "即将渴死"
 msgstr ""
 
-#: Script/Design/instruct/rest.py:25 class:InstructType id:7 type:name
-msgid "休息"
-msgstr ""
-
-#: Script/Design/instruct/rest.py:36 class:Status id:27 type:name
-msgid "午睡"
-msgstr ""
-
-#: Script/Design/instruct/rest.py:49 class:Status id:9 type:name
-msgid "睡觉"
+#: Script/Design/handle_achieve.py:43
+msgid "达成了新的成就"
 msgstr ""
 
 #: Script/Design/instruct/obscenity.py:19 class:Status id:8 type:name
@@ -296,20 +304,28 @@ msgstr ""
 msgid "脱下对方衣服"
 msgstr ""
 
-#: Script/Design/instruct/perform.py:15 class:Status id:7 type:name
-msgid "唱歌"
+#: Script/Design/instruct/dialogue.py:17 class:Status id:5 type:name
+msgid "闲聊"
 msgstr ""
 
-#: Script/Design/instruct/perform.py:26 class:Status id:20 type:name
-msgid "跳舞"
+#: Script/Design/instruct/dialogue.py:29 class:Status id:21 type:name
+msgid "辱骂"
 msgstr ""
 
-#: Script/Design/instruct/perform.py:40 class:Status id:6 type:name
-msgid "弹钢琴"
+#: Script/Design/instruct/dialogue.py:40 class:Status id:28 type:name
+msgid "演讲"
 msgstr ""
 
-#: Script/Design/instruct/perform.py:56 class:Status id:17 type:name
-msgid "弹吉他"
+#: Script/Design/instruct/rest.py:25 class:InstructType id:7 type:name
+msgid "休息"
+msgstr ""
+
+#: Script/Design/instruct/rest.py:36 class:Status id:27 type:name
+msgid "午睡"
+msgstr ""
+
+#: Script/Design/instruct/rest.py:49 class:Status id:9 type:name
+msgid "睡觉"
 msgstr ""
 
 #: Script/Design/instruct/system.py:24
@@ -401,6 +417,23 @@ msgstr ""
 
 #: Script/Design/instruct/system.py:231
 msgid "关闭看海模式"
+msgstr ""
+
+#: Script/Design/instruct/study.py:21
+msgid "查看课程表"
+msgstr ""
+
+#: Script/Design/instruct/study.py:32
+#, python-brace-format
+msgid "上{ClassName}"
+msgstr ""
+
+#: Script/Design/instruct/study.py:74
+msgid "教课"
+msgstr ""
+
+#: Script/Design/instruct/study.py:112 class:Status id:18 type:name
+msgid "自习"
 msgstr ""
 
 #: Script/Design/instruct/sex.py:18 class:Status id:19 type:name
@@ -571,23 +604,6 @@ msgstr ""
 msgid "结束做爱"
 msgstr ""
 
-#: Script/Design/instruct/study.py:21
-msgid "查看课程表"
-msgstr ""
-
-#: Script/Design/instruct/study.py:32
-#, python-brace-format
-msgid "上{ClassName}"
-msgstr ""
-
-#: Script/Design/instruct/study.py:74
-msgid "教课"
-msgstr ""
-
-#: Script/Design/instruct/study.py:112 class:Status id:18 type:name
-msgid "自习"
-msgstr ""
-
 #: Script/Design/instruct/play.py:15 class:Status id:30 type:name
 msgid "玩电脑"
 msgstr ""
@@ -600,65 +616,100 @@ msgstr ""
 msgid "跑步"
 msgstr ""
 
-#: Script/Design/instruct/dialogue.py:17 class:Status id:5 type:name
-msgid "闲聊"
+#: Script/Design/instruct/perform.py:15 class:Status id:7 type:name
+msgid "唱歌"
 msgstr ""
 
-#: Script/Design/instruct/dialogue.py:29 class:Status id:21 type:name
-msgid "辱骂"
+#: Script/Design/instruct/perform.py:26 class:Status id:20 type:name
+msgid "跳舞"
 msgstr ""
 
-#: Script/Design/instruct/dialogue.py:40 class:Status id:28 type:name
-msgid "演讲"
+#: Script/Design/instruct/perform.py:40 class:Status id:6 type:name
+msgid "弹钢琴"
 msgstr ""
 
-#: Script/Design/attr_text.py:115
-msgid "吃饱了"
+#: Script/Design/instruct/perform.py:56 class:Status id:17 type:name
+msgid "弹吉他"
 msgstr ""
 
-#: Script/Design/attr_text.py:117
-msgid "肚子空空"
+#: Script/Design/instruct/active.py:22 class:Status id:4 type:name
+msgid "进食"
 msgstr ""
 
-#: Script/Design/attr_text.py:119
-msgid "感到饥饿"
+#: Script/Design/instruct/active.py:29 class:Status id:1 type:name
+msgid "移动"
 msgstr ""
 
-#: Script/Design/attr_text.py:121
-msgid "快饿晕了"
+#: Script/Design/instruct/active.py:38
+msgid "去买吃的"
 msgstr ""
 
-#: Script/Design/attr_text.py:123
-msgid "即将饿死"
+#: Script/Design/instruct/active.py:63
+msgid "去上课"
 msgstr ""
 
-#: Script/Design/attr_text.py:135
-msgid "喝饱了"
+#: Script/Design/instruct/active.py:83
+msgid "去换装"
 msgstr ""
 
-#: Script/Design/attr_text.py:137
-msgid "感到口渴"
+#: Script/Design/instruct/active.py:97
+msgid "逃离人群"
 msgstr ""
 
-#: Script/Design/attr_text.py:139
-msgid "开始缺水"
+#: Script/Design/instruct/active.py:113
+msgid "购买道具"
 msgstr ""
 
-#: Script/Design/attr_text.py:141
-msgid "脱水了"
+#: Script/Design/instruct/active.py:123
+msgid "购买食物"
 msgstr ""
 
-#: Script/Design/attr_text.py:143
-msgid "即将渴死"
+#: Script/Design/instruct/active.py:134
+msgid "购买服装"
 msgstr ""
 
-#: Script/Design/game_time.py:52
-#, python-brace-format
-msgid "时间:{year}年{month}月{day}日{hour}点{minute}分"
+#: Script/Design/instruct/active.py:145
+msgid "喝泉水"
 msgstr ""
 
-#: Script/Design/handle_achieve.py:43
-msgid "达成了新的成就"
+#: Script/Design/instruct/active.py:156
+msgid "喝到了奇怪的泉水！身体变化了！！！"
+msgstr ""
+
+#: Script/Design/instruct/active.py:167
+msgid "喝到了甜甜的泉水～"
+msgstr ""
+
+#: Script/Design/instruct/active.py:176 class:Status id:10 type:name
+msgid "拥抱"
+msgstr ""
+
+#: Script/Design/instruct/active.py:191 class:Status id:12 type:name
+msgid "牵手"
+msgstr ""
+
+#: Script/Design/instruct/active.py:209
+msgid "放手"
+msgstr ""
+
+#: Script/Design/instruct/active.py:226 class:Status id:23 type:name
+msgid "穿衣"
+msgstr ""
+
+#: Script/Design/instruct/active.py:244
+msgid "脱下自身衣物"
+msgstr ""
+
+#: Script/Design/instruct/active.py:260 class:Status id:29 type:name
+msgid "看星星"
+msgstr ""
+
+#: Script/Design/instruct/active.py:279
+msgid "社团活动"
+msgstr ""
+
+#: Script/Design/instruct/active.py:309
+msgid "信仰之跃"
 msgstr ""
 
 #: Script/Design/character_move.py:71
@@ -677,434 +728,9 @@ msgstr ""
 msgid "在这里遇到了{CharacterList}，要停下来吗？"
 msgstr ""
 
-#: Script/Design/cooking.py:315 Script/Design/cooking.py:382
-#: Script/UI/Panel/food_shop_panel.py:39 Script/UI/Panel/food_shop_panel.py:50
-#: Script/UI/Panel/food_bag_panel.py:32 Script/UI/Panel/food_bag_panel.py:40
-msgid "主食"
-msgstr ""
-
-#: Script/Design/cooking.py:320 Script/Design/cooking.py:387
-#: Script/UI/Panel/food_shop_panel.py:50 Script/UI/Panel/food_bag_panel.py:40
-msgid "零食"
-msgstr ""
-
-#: Script/Design/cooking.py:327 Script/Design/cooking.py:394
-#: Script/UI/Panel/food_shop_panel.py:50 Script/UI/Panel/food_bag_panel.py:40
-msgid "饮品"
-msgstr ""
-
-#: Script/Design/cooking.py:349 Script/Design/cooking.py:419
-#: Script/UI/Panel/food_shop_panel.py:50 Script/UI/Panel/food_bag_panel.py:40
-msgid "水果"
-msgstr ""
-
-#: Script/Design/cooking.py:355 Script/UI/Panel/food_shop_panel.py:50
-#: Script/UI/Panel/food_bag_panel.py:40
-msgid "食材"
-msgstr ""
-
-#: Script/Design/cooking.py:361 Script/UI/Panel/food_shop_panel.py:50
-#: Script/UI/Panel/food_bag_panel.py:40 class:RecipesFormulaType id:2 type:name
-msgid "调料"
-msgstr ""
-
-#: Script/Design/adv/liwei_and_lixue.py:13
-msgid "李薇"
-msgstr ""
-
-#: Script/Design/adv/liwei_and_lixue.py:64
-msgid "李雪"
-msgstr ""
-
-#: Script/Settle/interaction.py:174
+#: Script/Design/game_time.py:52
 #, python-brace-format
-msgid "{NickName}被赶出了教室"
-msgstr ""
-
-#: Script/Settle/character_temporary_status.py:95
-#: Script/Settle/character_temporary_status.py:105
-#, python-brace-format
-msgid "{character_name}失去了初吻\n"
-msgstr ""
-
-#: Script/Settle/character_behavior.py:162
-#, python-brace-format
-msgid "{character_name}被{origin_character_name}打断了{statue_name}"
-msgstr ""
-
-#: Script/UI/Model/panel.py:177
-#, python-brace-format
-msgid "输入的字符超长，最大{input_max}个英文字符，请重试。"
-msgstr ""
-
-#: Script/UI/Model/panel.py:216
-#, python-brace-format
-msgid "输入的数字过大，最大值为{number_max}，请重试。"
-msgstr ""
-
-#: Script/UI/Model/panel.py:773
-#, python-brace-format
-msgid "{old_page_index_text} 上一页"
-msgstr ""
-
-#: Script/UI/Model/panel.py:787
-#, python-brace-format
-msgid "{next_page_index_text} 下一页"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:47
-msgid "主人公"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:48
-msgid "你"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:100
-msgid "[更改姓名]"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:100
-msgid "[更改性别]"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:100
-msgid "[修正年龄]"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:100
-msgid "[修正身材]"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:100
-msgid "[修改性格]"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:106
-msgid "就这样开始新的人生吧"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:116
-msgid "就这样了可以吗?"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:141
-msgid "请问能告诉我你的名字吗？"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:173
-msgid "随机"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:177
-#, python-brace-format
-msgid "那么{character_nick_name}的性别是？"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:201
-#, python-brace-format
-msgid "{character_nick_name}是一个小孩子吗？"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:205
-msgid "嘎呜～嘎呜～"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:206
-msgid "才，才不是小孩子！"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:207
-msgid "已经成年了哦～"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:208
-msgid "我也想回到小时候呢～"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:209
-msgid "你说什么？我听不清～"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:239
-#, python-brace-format
-msgid "{character_nick_name}对自己的体重有自信吗？"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:243
-msgid "很轻，就像一张纸一样，风一吹就能飘起来。"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:244
-msgid "普普通通，健康的身材。"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:245
-msgid "略沉，不过从外表不怎么能够看得出来。"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:246
-msgid "肉眼可辨的比别人要胖很多。"
-msgstr ""
-
-#: Script/UI/Flow/creator_character_flow.py:247
-msgid "人类的极限，看上去像是相扑选手一样。"
-msgstr ""
-
-#: Script/UI/Flow/title_flow.py:27
-msgid "人类是可以被驯化的"
-msgstr ""
-
-#: Script/UI/Flow/title_flow.py:35
-msgid "(注意这是一个临时的预览版本)"
-msgstr ""
-
-#: Script/UI/Flow/title_flow.py:42
-msgid "开始游戏"
-msgstr ""
-
-#: Script/UI/Flow/title_flow.py:42
-msgid "读取存档"
-msgstr ""
-
-#: Script/UI/Flow/title_flow.py:42 Script/UI/Panel/game_setting_panel.py:39
-msgid "游戏设置"
-msgstr ""
-
-#: Script/UI/Flow/title_flow.py:42 Script/UI/Panel/achieve_panel.py:41
-msgid "成就列表"
-msgstr ""
-
-#: Script/UI/Panel/change_nature_panel.py:34
-#: Script/UI/Panel/see_character_info_panel.py:935
-msgid "人物性格"
-msgstr ""
-
-#: Script/UI/Panel/change_nature_panel.py:79
-msgid "保存"
-msgstr ""
-
-#: Script/UI/Panel/change_nature_panel.py:79
-msgid "取消"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:39
-#: Script/UI/Panel/view_character_status_list_panel.py:61
-msgid "存活"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:41
-#: Script/UI/Panel/view_character_status_list_panel.py:70
-#: Script/UI/Panel/view_character_status_list_panel.py:79
-msgid "所有性别"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:43
-#: Script/UI/Panel/view_character_status_list_panel.py:71
-msgid "所有年龄"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:61 class:Status id:13
-#: type:name
-msgid "死亡"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:70
-#: Script/UI/Panel/view_character_status_list_panel.py:81
-#: Script/UI/Panel/clothing_shop_panel.py:53 class:SexTem id:0 type:name
-msgid "男"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:70
-#: Script/UI/Panel/view_character_status_list_panel.py:83
-#: Script/UI/Panel/clothing_shop_panel.py:53 class:SexTem id:1 type:name
-msgid "女"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:70
-#: Script/UI/Panel/view_character_status_list_panel.py:85 class:SexTem id:2
-#: type:name
-msgid "扶她"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:70
-#: Script/UI/Panel/view_character_status_list_panel.py:87 class:SexTem id:3
-#: type:name
-msgid "无性"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:71
-#: Script/UI/Panel/view_character_status_list_panel.py:89 class:School id:0
-#: type:name
-msgid "小学"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:71
-#: Script/UI/Panel/view_character_status_list_panel.py:91 class:School id:1
-#: type:name
-msgid "初中"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:71
-#: Script/UI/Panel/view_character_status_list_panel.py:93 class:School id:2
-#: type:name
-msgid "高中"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:71
-#: Script/UI/Panel/view_character_status_list_panel.py:95
-msgid "成年"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:165
-#: Script/UI/Panel/clothing_shop_panel.py:129
-#: Script/UI/Panel/clothing_shop_panel.py:242
-#: Script/UI/Panel/food_shop_panel.py:85 Script/UI/Panel/food_shop_panel.py:182
-#: Script/UI/Panel/item_shop_panel.py:56 Script/UI/Panel/food_bag_panel.py:75
-#: Script/UI/Panel/food_bag_panel.py:172
-#: Script/UI/Panel/game_setting_panel.py:84
-#: Script/UI/Panel/view_club_info_panel.py:68
-#: Script/UI/Panel/see_clothing_info_panel.py:260
-#: Script/UI/Panel/see_save_info_panel.py:67
-#: Script/UI/Panel/view_school_timetable_panel.py:202
-#: Script/UI/Panel/view_school_timetable_panel.py:261
-#: Script/UI/Panel/achieve_panel.py:49
-#: Script/UI/Panel/see_character_info_panel.py:1183
-#: Script/UI/Panel/view_club_list_panel.py:56
-msgid "[返回]"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:165
-#: Script/UI/Panel/view_character_status_list_panel.py:291
-#: Script/UI/Panel/view_character_status_list_panel.py:293
-#: Script/UI/Panel/clothing_shop_panel.py:129
-#: Script/UI/Panel/clothing_shop_panel.py:242
-#: Script/UI/Panel/food_shop_panel.py:85 Script/UI/Panel/food_shop_panel.py:182
-#: Script/UI/Panel/item_shop_panel.py:56 Script/UI/Panel/food_bag_panel.py:75
-#: Script/UI/Panel/food_bag_panel.py:172
-#: Script/UI/Panel/game_setting_panel.py:84
-#: Script/UI/Panel/view_club_info_panel.py:68
-#: Script/UI/Panel/see_clothing_info_panel.py:260
-#: Script/UI/Panel/see_save_info_panel.py:67
-#: Script/UI/Panel/see_save_info_panel.py:150
-#: Script/UI/Panel/see_save_info_panel.py:152
-#: Script/UI/Panel/see_map_panel.py:161
-#: Script/UI/Panel/view_school_timetable_panel.py:202
-#: Script/UI/Panel/view_school_timetable_panel.py:261
-#: Script/UI/Panel/achieve_panel.py:49
-#: Script/UI/Panel/see_character_info_panel.py:1183
-#: Script/UI/Panel/view_club_list_panel.py:56
-msgid "返回"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:240
-msgid "发呆中"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:245
-msgid "死亡时间:"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:256
-#: Script/UI/Panel/see_character_info_panel.py:588
-msgid "身高:"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:258
-#: Script/UI/Panel/see_character_info_panel.py:590
-msgid "体重:"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:262
-#: Script/UI/Panel/see_character_info_panel.py:594
-msgid "体脂率:"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:263
-#: Script/UI/Panel/see_character_info_panel.py:595
-msgid "罩杯:"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:265
-#, python-brace-format
-msgid "{age}岁"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:272
-msgid " (已收藏)"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:291
-#: Script/UI/Panel/view_character_status_list_panel.py:293
-#: Script/UI/Panel/view_character_status_list_panel.py:299
-msgid "移动至所在场景"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:291
-#: Script/UI/Panel/view_character_status_list_panel.py:293
-msgid "准备做什么?"
-msgstr ""
-
-#: Script/UI/Panel/view_character_status_list_panel.py:293
-#: Script/UI/Panel/view_character_status_list_panel.py:305 class:MoveMenuType
-#: id:2 type:name
-msgid "收藏"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:52
-msgid "服装超市"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:53
-msgid "通用"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:121
-#: Script/UI/Panel/clothing_shop_panel.py:251
-#: Script/UI/Panel/see_clothing_info_panel.py:269
-msgid "空无一物"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:285
-#: Script/UI/Panel/see_clothing_info_panel.py:165
-#: Script/UI/Panel/see_clothing_info_panel.py:315
-msgid "可爱"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:286
-#: Script/UI/Panel/see_clothing_info_panel.py:166
-#: Script/UI/Panel/see_clothing_info_panel.py:316
-msgid "性感"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:287
-#: Script/UI/Panel/see_clothing_info_panel.py:167
-#: Script/UI/Panel/see_clothing_info_panel.py:317
-msgid "帅气"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:288
-#: Script/UI/Panel/see_clothing_info_panel.py:168
-#: Script/UI/Panel/see_clothing_info_panel.py:318
-msgid "清新"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:289
-#: Script/UI/Panel/see_clothing_info_panel.py:169
-#: Script/UI/Panel/see_clothing_info_panel.py:319
-msgid "典雅"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:290
-#: Script/UI/Panel/see_clothing_info_panel.py:170
-#: Script/UI/Panel/see_clothing_info_panel.py:320
-msgid "清洁"
-msgstr ""
-
-#: Script/UI/Panel/clothing_shop_panel.py:291
-#: Script/UI/Panel/see_clothing_info_panel.py:171
-#: Script/UI/Panel/see_clothing_info_panel.py:321
-msgid "保暖"
+msgid "时间:{year}年{month}月{day}日{hour}点{minute}分"
 msgstr ""
 
 #: Script/UI/Panel/in_scene_panel.py:44
@@ -1181,80 +807,269 @@ msgstr ""
 msgid "[-开-]"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:602 Script/UI/Panel/game_info_panel.py:110
+#: Script/UI/Panel/in_scene_panel.py:602
 #: Script/UI/Panel/view_school_timetable_panel.py:190
+#: Script/UI/Panel/game_info_panel.py:110
 msgid "自习课"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:223 Script/UI/Panel/food_bag_panel.py:206
-msgid "垃圾"
+#: Script/UI/Panel/see_item_info_panel.py:40
+msgid "人物道具"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:223 Script/UI/Panel/food_bag_panel.py:206
-msgid "饲料"
+#: Script/UI/Panel/see_save_info_panel.py:55
+msgid "存档列表"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:223 Script/UI/Panel/food_bag_panel.py:206
-msgid "粮食"
+#: Script/UI/Panel/see_save_info_panel.py:67
+#: Script/UI/Panel/view_school_timetable_panel.py:202
+#: Script/UI/Panel/view_school_timetable_panel.py:261
+#: Script/UI/Panel/see_clothing_info_panel.py:260
+#: Script/UI/Panel/clothing_shop_panel.py:129
+#: Script/UI/Panel/clothing_shop_panel.py:242
+#: Script/UI/Panel/food_bag_panel.py:75 Script/UI/Panel/food_bag_panel.py:172
+#: Script/UI/Panel/view_club_info_panel.py:68
+#: Script/UI/Panel/see_character_info_panel.py:1183
+#: Script/UI/Panel/view_character_status_list_panel.py:165
+#: Script/UI/Panel/achieve_panel.py:49 Script/UI/Panel/item_shop_panel.py:56
+#: Script/UI/Panel/food_shop_panel.py:85 Script/UI/Panel/food_shop_panel.py:182
+#: Script/UI/Panel/view_club_list_panel.py:56
+#: Script/UI/Panel/game_setting_panel.py:84
+msgid "[返回]"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:223 Script/UI/Panel/food_bag_panel.py:206
-msgid "美味"
+#: Script/UI/Panel/see_save_info_panel.py:67
+#: Script/UI/Panel/see_save_info_panel.py:150
+#: Script/UI/Panel/see_save_info_panel.py:152
+#: Script/UI/Panel/view_school_timetable_panel.py:202
+#: Script/UI/Panel/view_school_timetable_panel.py:261
+#: Script/UI/Panel/see_clothing_info_panel.py:260
+#: Script/UI/Panel/clothing_shop_panel.py:129
+#: Script/UI/Panel/clothing_shop_panel.py:242
+#: Script/UI/Panel/food_bag_panel.py:75 Script/UI/Panel/food_bag_panel.py:172
+#: Script/UI/Panel/view_club_info_panel.py:68
+#: Script/UI/Panel/see_character_info_panel.py:1183
+#: Script/UI/Panel/view_character_status_list_panel.py:165
+#: Script/UI/Panel/view_character_status_list_panel.py:291
+#: Script/UI/Panel/view_character_status_list_panel.py:293
+#: Script/UI/Panel/achieve_panel.py:49 Script/UI/Panel/item_shop_panel.py:56
+#: Script/UI/Panel/food_shop_panel.py:85 Script/UI/Panel/food_shop_panel.py:182
+#: Script/UI/Panel/view_club_list_panel.py:56
+#: Script/UI/Panel/game_setting_panel.py:84
+#: Script/UI/Panel/see_map_panel.py:161
+msgid "返回"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:223 Script/UI/Panel/food_bag_panel.py:206
-msgid "春药"
+#: Script/UI/Panel/see_save_info_panel.py:108
+msgid "空存档位"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:231 Script/UI/Panel/food_bag_panel.py:214
-msgid "热量:"
+#: Script/UI/Panel/see_save_info_panel.py:113
+msgid "游戏时间:"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:237 Script/UI/Panel/food_bag_panel.py:219
-msgid "水份:"
+#: Script/UI/Panel/see_save_info_panel.py:114
+msgid "存档时间:"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:247 Script/UI/Panel/food_bag_panel.py:231
-msgid "品质:"
+#: Script/UI/Panel/see_save_info_panel.py:150
+#: Script/UI/Panel/see_save_info_panel.py:152
+#: Script/UI/Panel/see_save_info_panel.py:160
+msgid "读取"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:247
-msgid "售价:"
+#: Script/UI/Panel/see_save_info_panel.py:150
+#: Script/UI/Panel/see_save_info_panel.py:162
+msgid "覆盖"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:247
-msgid "剩余份数:"
+#: Script/UI/Panel/see_save_info_panel.py:150
+#: Script/UI/Panel/see_save_info_panel.py:152
+#: Script/UI/Panel/see_save_info_panel.py:164
+msgid "删除"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:276
-#, python-brace-format
-msgid "购买{food_name}成功，身上的钱还剩:{money}"
+#: Script/UI/Panel/see_save_info_panel.py:154
+msgid "准备如何处理这个存档?"
 msgstr ""
 
-#: Script/UI/Panel/food_shop_panel.py:282
-msgid "身上的钱不够哦"
+#: Script/UI/Panel/view_school_timetable_panel.py:43
+#: Script/UI/Panel/view_school_timetable_panel.py:88
+#: Script/UI/Panel/view_school_timetable_panel.py:239
+msgid "课程表"
 msgstr ""
 
-#: Script/UI/Panel/item_shop_panel.py:123
-#, python-brace-format
-msgid "{nickname}购买了{item_name}"
+#: Script/UI/Panel/view_school_timetable_panel.py:47
+msgid "无课时安排"
 msgstr ""
 
-#: Script/UI/Panel/game_info_panel.py:79
-msgid "(休息)"
+#: Script/UI/Panel/view_school_timetable_panel.py:95
+#: Script/UI/Panel/view_school_timetable_panel.py:103
+#: Script/UI/Panel/view_club_info_panel.py:306
+#: Script/UI/Panel/view_club_info_panel.py:314
+msgid "(今日)"
 msgstr ""
 
-#: Script/UI/Panel/game_info_panel.py:81
-msgid "(上学)"
+#: Script/UI/Panel/view_school_timetable_panel.py:117
+msgid "课时"
 msgstr ""
 
-#: Script/UI/Panel/game_info_panel.py:108
+#: Script/UI/Panel/view_school_timetable_panel.py:117
+msgid "科目"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:117
+msgid "教师"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:117
+msgid "上课时间"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:117
+msgid "下课时间"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:124
+msgid "休息日"
+msgstr ""
+
 #: Script/UI/Panel/view_school_timetable_panel.py:146
+#: Script/UI/Panel/game_info_panel.py:108
 msgid "早读课"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:148
+#: Script/UI/Panel/view_school_timetable_panel.py:165
+msgid "(当前)"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:163
+#, python-brace-format
+msgid "第{times}节"
+msgstr ""
+
+#: Script/UI/Panel/view_school_timetable_panel.py:247
+#, python-brace-format
+msgid "{weekday} 第{times}节 班级:{class_name} 科目:{course} 上课时间:{time}"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:40
+msgid "人物服装"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:65
+msgid "未穿戴"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:165
+#: Script/UI/Panel/see_clothing_info_panel.py:315
+#: Script/UI/Panel/clothing_shop_panel.py:285
+msgid "可爱"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:166
+#: Script/UI/Panel/see_clothing_info_panel.py:316
+#: Script/UI/Panel/clothing_shop_panel.py:286
+msgid "性感"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:167
+#: Script/UI/Panel/see_clothing_info_panel.py:317
+#: Script/UI/Panel/clothing_shop_panel.py:287
+msgid "帅气"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:168
+#: Script/UI/Panel/see_clothing_info_panel.py:318
+#: Script/UI/Panel/clothing_shop_panel.py:288
+msgid "清新"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:169
+#: Script/UI/Panel/see_clothing_info_panel.py:319
+#: Script/UI/Panel/clothing_shop_panel.py:289
+msgid "典雅"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:170
+#: Script/UI/Panel/see_clothing_info_panel.py:320
+#: Script/UI/Panel/clothing_shop_panel.py:290
+msgid "清洁"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:171
+#: Script/UI/Panel/see_clothing_info_panel.py:321
+#: Script/UI/Panel/clothing_shop_panel.py:291
+msgid "保暖"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:253
+msgid "更衣室"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:269
+#: Script/UI/Panel/clothing_shop_panel.py:121
+#: Script/UI/Panel/clothing_shop_panel.py:251
+msgid "空无一物"
+msgstr ""
+
+#: Script/UI/Panel/see_clothing_info_panel.py:332
+msgid "(已穿戴)"
+msgstr ""
+
+#: Script/UI/Panel/clothing_shop_panel.py:52
+msgid "服装超市"
+msgstr ""
+
+#: Script/UI/Panel/clothing_shop_panel.py:53
+#: Script/UI/Panel/view_character_status_list_panel.py:70
+#: Script/UI/Panel/view_character_status_list_panel.py:81 class:SexTem id:0
+#: type:name
+msgid "男"
+msgstr ""
+
+#: Script/UI/Panel/clothing_shop_panel.py:53
+#: Script/UI/Panel/view_character_status_list_panel.py:70
+#: Script/UI/Panel/view_character_status_list_panel.py:83 class:SexTem id:1
+#: type:name
+msgid "女"
+msgstr ""
+
+#: Script/UI/Panel/clothing_shop_panel.py:53
+msgid "通用"
 msgstr ""
 
 #: Script/UI/Panel/food_bag_panel.py:39
 msgid "食物背包"
+msgstr ""
+
+#: Script/UI/Panel/food_bag_panel.py:206 Script/UI/Panel/food_shop_panel.py:223
+msgid "垃圾"
+msgstr ""
+
+#: Script/UI/Panel/food_bag_panel.py:206 Script/UI/Panel/food_shop_panel.py:223
+msgid "饲料"
+msgstr ""
+
+#: Script/UI/Panel/food_bag_panel.py:206 Script/UI/Panel/food_shop_panel.py:223
+msgid "粮食"
+msgstr ""
+
+#: Script/UI/Panel/food_bag_panel.py:206 Script/UI/Panel/food_shop_panel.py:223
+msgid "美味"
+msgstr ""
+
+#: Script/UI/Panel/food_bag_panel.py:206 Script/UI/Panel/food_shop_panel.py:223
+msgid "春药"
+msgstr ""
+
+#: Script/UI/Panel/food_bag_panel.py:214 Script/UI/Panel/food_shop_panel.py:231
+msgid "热量:"
+msgstr ""
+
+#: Script/UI/Panel/food_bag_panel.py:219 Script/UI/Panel/food_shop_panel.py:237
+msgid "水份:"
 msgstr ""
 
 #: Script/UI/Panel/food_bag_panel.py:227
@@ -1265,83 +1080,8 @@ msgstr ""
 msgid "克"
 msgstr ""
 
-#: Script/UI/Panel/game_setting_panel.py:34
-#: Script/UI/Panel/game_setting_panel.py:41
-#: Script/UI/Panel/game_setting_panel.py:70
-#: Script/UI/Panel/game_setting_panel.py:91
-#: Script/UI/Panel/see_character_info_panel.py:72
-msgid "语言"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:41
-#: Script/UI/Panel/game_setting_panel.py:75
-#: Script/UI/Panel/game_setting_panel.py:100
-msgid "NSFW"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:41
-#: Script/UI/Panel/game_setting_panel.py:108
-msgid "AI"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:97
-msgid "请重启游戏以让设置生效"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:110
-#: Script/UI/Panel/game_setting_panel.py:230
-#: Script/UI/Panel/game_setting_panel.py:232
-msgid "关闭AI模式"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:112
-#: Script/UI/Panel/game_setting_panel.py:228
-#: Script/UI/Panel/game_setting_panel.py:232
-msgid "启用ollama模式"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:120
-msgid "模型未安装，正在自动安装，请稍等(需联网)"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:136
-msgid "模型安装失败，已关闭ollama模式，请检查设置"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:141
-msgid "无法链接ollama服务，请确保ollama服务正常启动"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:145
-#: Script/UI/Panel/game_setting_panel.py:228
-#: Script/UI/Panel/game_setting_panel.py:230
-msgid "启用外部api模式"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:179
-#, python-brace-format
-msgid "请选择需要切换的语言，当前语言:{now_language}"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:200
-msgid "切换"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:202
-msgid "是否关闭NSFW内容"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:204
-msgid "是否开启NSFW内容"
-msgstr ""
-
-#: Script/UI/Panel/game_setting_panel.py:225
-msgid ""
-"是否开启AI模式?\n"
-"请注意:\n"
-"ollama模式需本地安装ollama，同时对电脑配置要求较高\n"
-"外部api模式需要联网进行游戏，同时本游戏对tokens消耗较高\n"
-"另外目前AI模式为实验性模式，产出内容无法良好控制"
+#: Script/UI/Panel/food_bag_panel.py:231 Script/UI/Panel/food_shop_panel.py:247
+msgid "品质:"
 msgstr ""
 
 #: Script/UI/Panel/view_club_info_panel.py:33
@@ -1390,13 +1130,6 @@ msgstr ""
 msgid "擅长:无"
 msgstr ""
 
-#: Script/UI/Panel/view_club_info_panel.py:306
-#: Script/UI/Panel/view_club_info_panel.py:314
-#: Script/UI/Panel/view_school_timetable_panel.py:95
-#: Script/UI/Panel/view_school_timetable_panel.py:103
-msgid "(今日)"
-msgstr ""
-
 #: Script/UI/Panel/view_club_info_panel.py:387
 msgid "活动:"
 msgstr ""
@@ -1407,152 +1140,6 @@ msgstr ""
 
 #: Script/UI/Panel/view_club_info_panel.py:387
 msgid "地点:"
-msgstr ""
-
-#: Script/UI/Panel/see_clothing_info_panel.py:40
-msgid "人物服装"
-msgstr ""
-
-#: Script/UI/Panel/see_clothing_info_panel.py:65
-msgid "未穿戴"
-msgstr ""
-
-#: Script/UI/Panel/see_clothing_info_panel.py:253
-msgid "更衣室"
-msgstr ""
-
-#: Script/UI/Panel/see_clothing_info_panel.py:332
-msgid "(已穿戴)"
-msgstr ""
-
-#: Script/UI/Panel/see_item_info_panel.py:40
-msgid "人物道具"
-msgstr ""
-
-#: Script/UI/Panel/see_save_info_panel.py:55
-msgid "存档列表"
-msgstr ""
-
-#: Script/UI/Panel/see_save_info_panel.py:108
-msgid "空存档位"
-msgstr ""
-
-#: Script/UI/Panel/see_save_info_panel.py:113
-msgid "游戏时间:"
-msgstr ""
-
-#: Script/UI/Panel/see_save_info_panel.py:114
-msgid "存档时间:"
-msgstr ""
-
-#: Script/UI/Panel/see_save_info_panel.py:150
-#: Script/UI/Panel/see_save_info_panel.py:152
-#: Script/UI/Panel/see_save_info_panel.py:160
-msgid "读取"
-msgstr ""
-
-#: Script/UI/Panel/see_save_info_panel.py:150
-#: Script/UI/Panel/see_save_info_panel.py:162
-msgid "覆盖"
-msgstr ""
-
-#: Script/UI/Panel/see_save_info_panel.py:150
-#: Script/UI/Panel/see_save_info_panel.py:152
-#: Script/UI/Panel/see_save_info_panel.py:164
-msgid "删除"
-msgstr ""
-
-#: Script/UI/Panel/see_save_info_panel.py:154
-msgid "准备如何处理这个存档?"
-msgstr ""
-
-#: Script/UI/Panel/see_map_panel.py:56
-msgid "移动:"
-msgstr ""
-
-#: Script/UI/Panel/see_map_panel.py:101
-msgid "你可以从这里前往:\n"
-msgstr ""
-
-#: Script/UI/Panel/see_map_panel.py:117
-#, python-brace-format
-msgid "[{scene_name}:{move_time}分钟]"
-msgstr ""
-
-#: Script/UI/Panel/see_map_panel.py:148
-msgid "查看上级地图"
-msgstr ""
-
-#: Script/UI/Panel/see_map_panel.py:169
-msgid "查看下级地图"
-msgstr ""
-
-#: Script/UI/Panel/see_map_panel.py:396
-#, python-brace-format
-msgid "{scene_id}:{scene_name}:{move_time}分钟"
-msgstr ""
-
-#: Script/UI/Panel/see_map_panel.py:567
-#, python-brace-format
-msgid "[{path_text}:{move_time}分钟]"
-msgstr ""
-
-#: Script/UI/Panel/see_map_panel.py:682
-#, python-brace-format
-msgid "[{character_name}:{social_contact}|{path_text}:{move_time}分钟]"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:43
-#: Script/UI/Panel/view_school_timetable_panel.py:88
-#: Script/UI/Panel/view_school_timetable_panel.py:239
-msgid "课程表"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:47
-msgid "无课时安排"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:117
-msgid "课时"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:117
-msgid "科目"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:117
-msgid "教师"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:117
-msgid "上课时间"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:117
-msgid "下课时间"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:124
-msgid "休息日"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:148
-#: Script/UI/Panel/view_school_timetable_panel.py:165
-msgid "(当前)"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:163
-#, python-brace-format
-msgid "第{times}节"
-msgstr ""
-
-#: Script/UI/Panel/view_school_timetable_panel.py:247
-#, python-brace-format
-msgid "{weekday} 第{times}节 班级:{class_name} 科目:{course} 上课时间:{time}"
-msgstr ""
-
-#: Script/UI/Panel/achieve_panel.py:119
-msgid "成就的解锁条件被偷偷藏起来了~"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:32
@@ -1579,6 +1166,14 @@ msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:71
 msgid "技能"
+msgstr ""
+
+#: Script/UI/Panel/see_character_info_panel.py:72
+#: Script/UI/Panel/game_setting_panel.py:34
+#: Script/UI/Panel/game_setting_panel.py:41
+#: Script/UI/Panel/game_setting_panel.py:70
+#: Script/UI/Panel/game_setting_panel.py:91
+msgid "语言"
 msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:73
@@ -1694,6 +1289,26 @@ msgstr ""
 msgid "生日:{birthday_month}月{birthday_day}日"
 msgstr ""
 
+#: Script/UI/Panel/see_character_info_panel.py:588
+#: Script/UI/Panel/view_character_status_list_panel.py:256
+msgid "身高:"
+msgstr ""
+
+#: Script/UI/Panel/see_character_info_panel.py:590
+#: Script/UI/Panel/view_character_status_list_panel.py:258
+msgid "体重:"
+msgstr ""
+
+#: Script/UI/Panel/see_character_info_panel.py:594
+#: Script/UI/Panel/view_character_status_list_panel.py:262
+msgid "体脂率:"
+msgstr ""
+
+#: Script/UI/Panel/see_character_info_panel.py:595
+#: Script/UI/Panel/view_character_status_list_panel.py:263
+msgid "罩杯:"
+msgstr ""
+
 #: Script/UI/Panel/see_character_info_panel.py:626
 msgid "胸围:"
 msgstr ""
@@ -1738,6 +1353,11 @@ msgstr ""
 msgid "人物语言"
 msgstr ""
 
+#: Script/UI/Panel/see_character_info_panel.py:935
+#: Script/UI/Panel/change_nature_panel.py:34
+msgid "人物性格"
+msgstr ""
+
 #: Script/UI/Panel/see_character_info_panel.py:982
 msgid "空无一人"
 msgstr ""
@@ -1760,6 +1380,142 @@ msgstr ""
 
 #: Script/UI/Panel/see_character_info_panel.py:1181
 msgid "下一人"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:39
+#: Script/UI/Panel/view_character_status_list_panel.py:61
+msgid "存活"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:41
+#: Script/UI/Panel/view_character_status_list_panel.py:70
+#: Script/UI/Panel/view_character_status_list_panel.py:79
+msgid "所有性别"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:43
+#: Script/UI/Panel/view_character_status_list_panel.py:71
+msgid "所有年龄"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:61 class:Status id:13
+#: type:name
+msgid "死亡"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:70
+#: Script/UI/Panel/view_character_status_list_panel.py:85 class:SexTem id:2
+#: type:name
+msgid "扶她"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:70
+#: Script/UI/Panel/view_character_status_list_panel.py:87 class:SexTem id:3
+#: type:name
+msgid "无性"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:71
+#: Script/UI/Panel/view_character_status_list_panel.py:89 class:School id:0
+#: type:name
+msgid "小学"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:71
+#: Script/UI/Panel/view_character_status_list_panel.py:91 class:School id:1
+#: type:name
+msgid "初中"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:71
+#: Script/UI/Panel/view_character_status_list_panel.py:93 class:School id:2
+#: type:name
+msgid "高中"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:71
+#: Script/UI/Panel/view_character_status_list_panel.py:95
+msgid "成年"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:240
+msgid "发呆中"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:245
+msgid "死亡时间:"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:265
+#, python-brace-format
+msgid "{age}岁"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:272
+msgid " (已收藏)"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:291
+#: Script/UI/Panel/view_character_status_list_panel.py:293
+#: Script/UI/Panel/view_character_status_list_panel.py:299
+msgid "移动至所在场景"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:291
+#: Script/UI/Panel/view_character_status_list_panel.py:293
+msgid "准备做什么?"
+msgstr ""
+
+#: Script/UI/Panel/view_character_status_list_panel.py:293
+#: Script/UI/Panel/view_character_status_list_panel.py:305 class:MoveMenuType
+#: id:2 type:name
+msgid "收藏"
+msgstr ""
+
+#: Script/UI/Panel/game_info_panel.py:79
+msgid "(休息)"
+msgstr ""
+
+#: Script/UI/Panel/game_info_panel.py:81
+msgid "(上学)"
+msgstr ""
+
+#: Script/UI/Panel/achieve_panel.py:41 Script/UI/Flow/title_flow.py:42
+msgid "成就列表"
+msgstr ""
+
+#: Script/UI/Panel/achieve_panel.py:119
+msgid "成就的解锁条件被偷偷藏起来了~"
+msgstr ""
+
+#: Script/UI/Panel/change_nature_panel.py:79
+msgid "保存"
+msgstr ""
+
+#: Script/UI/Panel/change_nature_panel.py:79
+msgid "取消"
+msgstr ""
+
+#: Script/UI/Panel/item_shop_panel.py:123
+#, python-brace-format
+msgid "{nickname}购买了{item_name}"
+msgstr ""
+
+#: Script/UI/Panel/food_shop_panel.py:247
+msgid "售价:"
+msgstr ""
+
+#: Script/UI/Panel/food_shop_panel.py:247
+msgid "剩余份数:"
+msgstr ""
+
+#: Script/UI/Panel/food_shop_panel.py:276
+#, python-brace-format
+msgid "购买{food_name}成功，身上的钱还剩:{money}"
+msgstr ""
+
+#: Script/UI/Panel/food_shop_panel.py:282
+msgid "身上的钱不够哦"
 msgstr ""
 
 #: Script/UI/Panel/view_club_list_panel.py:34
@@ -1790,437 +1546,270 @@ msgstr ""
 msgid "想加入这个社团吗?"
 msgstr ""
 
-#: class:InstructType id:0 type:name
-msgid "对话"
+#: Script/UI/Panel/game_setting_panel.py:39 Script/UI/Flow/title_flow.py:42
+msgid "游戏设置"
 msgstr ""
 
-#: class:InstructType id:1 type:name
-msgid "主动"
+#: Script/UI/Panel/game_setting_panel.py:41
+#: Script/UI/Panel/game_setting_panel.py:75
+#: Script/UI/Panel/game_setting_panel.py:100
+msgid "NSFW"
 msgstr ""
 
-#: class:InstructType id:2 type:name
-msgid "表演"
+#: Script/UI/Panel/game_setting_panel.py:41
+#: Script/UI/Panel/game_setting_panel.py:108
+msgid "AI"
 msgstr ""
 
-#: class:InstructType id:3 type:name
-msgid "猥亵"
+#: Script/UI/Panel/game_setting_panel.py:97
+msgid "请重启游戏以让设置生效"
 msgstr ""
 
-#: class:InstructType id:4 type:name
-msgid "娱乐"
+#: Script/UI/Panel/game_setting_panel.py:110
+#: Script/UI/Panel/game_setting_panel.py:230
+#: Script/UI/Panel/game_setting_panel.py:232
+msgid "关闭AI模式"
 msgstr ""
 
-#: class:InstructType id:5 type:name
-msgid "战斗"
+#: Script/UI/Panel/game_setting_panel.py:112
+#: Script/UI/Panel/game_setting_panel.py:228
+#: Script/UI/Panel/game_setting_panel.py:232
+msgid "启用ollama模式"
 msgstr ""
 
-#: class:InstructType id:6 type:name
-msgid "学习"
+#: Script/UI/Panel/game_setting_panel.py:120
+msgid "模型未安装，正在自动安装，请稍等(需联网)"
 msgstr ""
 
-#: class:InstructType id:8 type:name
-msgid "性爱"
+#: Script/UI/Panel/game_setting_panel.py:136
+msgid "模型安装失败，已关闭ollama模式，请检查设置"
 msgstr ""
 
-#: class:InstructType id:9 type:name
-msgid "系统"
+#: Script/UI/Panel/game_setting_panel.py:141
+msgid "无法链接ollama服务，请确保ollama服务正常启动"
 msgstr ""
 
-#: class:SocialType id:0 type:name
-msgid "死敌"
+#: Script/UI/Panel/game_setting_panel.py:145
+#: Script/UI/Panel/game_setting_panel.py:228
+#: Script/UI/Panel/game_setting_panel.py:230
+msgid "启用外部api模式"
 msgstr ""
 
-#: class:SocialType id:1 type:name
-msgid "仇恨"
+#: Script/UI/Panel/game_setting_panel.py:179
+#, python-brace-format
+msgid "请选择需要切换的语言，当前语言:{now_language}"
 msgstr ""
 
-#: class:SocialType id:2 type:name
-msgid "憎恨"
+#: Script/UI/Panel/game_setting_panel.py:200
+msgid "切换"
 msgstr ""
 
-#: class:SocialType id:3 type:name
-msgid "厌恶"
+#: Script/UI/Panel/game_setting_panel.py:202
+msgid "是否关闭NSFW内容"
 msgstr ""
 
-#: class:SocialType id:4 type:name
-msgid "讨厌"
+#: Script/UI/Panel/game_setting_panel.py:204
+msgid "是否开启NSFW内容"
 msgstr ""
 
-#: class:SocialType id:5 type:name
-msgid "陌生"
-msgstr ""
-
-#: class:SocialType id:6 type:name
-msgid "友好"
-msgstr ""
-
-#: class:SocialType id:7 type:name
-msgid "信任"
-msgstr ""
-
-#: class:SocialType id:8 type:name
-msgid "依靠"
-msgstr ""
-
-#: class:SocialType id:9 type:name
-msgid "恋慕"
-msgstr ""
-
-#: class:SocialType id:10 type:name
-msgid "爱慕"
-msgstr ""
-
-#: class:Nature id:0 type:good
-msgid "活跃"
-msgstr ""
-
-#: class:Nature id:0 type:bad
-msgid "低调"
-msgstr ""
-
-#: class:Nature id:1 type:good
-msgid "合群"
-msgstr ""
-
-#: class:Nature id:1 type:bad
-msgid "孤僻"
-msgstr ""
-
-#: class:Nature id:2 type:good
-msgid "乐观"
-msgstr ""
-
-#: class:Nature id:2 type:bad
-msgid "悲观"
-msgstr ""
-
-#: class:Nature id:3 type:good
-msgid "守信"
-msgstr ""
-
-#: class:Nature id:3 type:bad
-msgid "狡诈"
-msgstr ""
-
-#: class:Nature id:4 type:good
-msgid "无私"
-msgstr ""
-
-#: class:Nature id:4 type:bad
-msgid "自私"
-msgstr ""
-
-#: class:Nature id:5 type:good
-msgid "重情"
-msgstr ""
-
-#: class:Nature id:5 type:bad
-msgid "薄情"
-msgstr ""
-
-#: class:Nature id:6 type:good
-msgid "严谨"
-msgstr ""
-
-#: class:Nature id:6 type:bad
-msgid "松散"
-msgstr ""
-
-#: class:Nature id:7 type:good
-msgid "自律"
-msgstr ""
-
-#: class:Nature id:7 type:bad
-msgid "放纵"
-msgstr ""
-
-#: class:Nature id:8 type:good
-msgid "沉稳"
-msgstr ""
-
-#: class:Nature id:8 type:bad
-msgid "稚拙"
-msgstr ""
-
-#: class:Nature id:9 type:good
-msgid "决断"
-msgstr ""
-
-#: class:Nature id:9 type:bad
-msgid "犹豫"
-msgstr ""
-
-#: class:Nature id:10 type:good
-msgid "坚韧"
-msgstr ""
-
-#: class:Nature id:10 type:bad
-msgid "脆弱"
-msgstr ""
-
-#: class:Nature id:11 type:good
-msgid "机敏"
-msgstr ""
-
-#: class:Nature id:11 type:bad
-msgid "迟钝"
-msgstr ""
-
-#: class:Nature id:12 type:good
-msgid "耐性"
-msgstr ""
-
-#: class:Nature id:12 type:bad
-msgid "浮躁"
-msgstr ""
-
-#: class:Nature id:13 type:good
-msgid "爽直"
-msgstr ""
-
-#: class:Nature id:13 type:bad
-msgid "阴险"
-msgstr ""
-
-#: class:Nature id:14 type:good
-msgid "宽和"
-msgstr ""
-
-#: class:Nature id:14 type:bad
-msgid "狭隘"
-msgstr ""
-
-#: class:Nature id:15 type:good
-msgid "热情"
-msgstr ""
-
-#: class:Nature id:15 type:bad
-msgid "冷漠"
-msgstr ""
-
-#: class:Nature id:16 type:good
-msgid "自信"
-msgstr ""
-
-#: class:Nature id:16 type:bad
-msgid "自卑"
-msgstr ""
-
-#: class:Nature id:17 type:good
-msgid "淡泊"
-msgstr ""
-
-#: class:Nature id:17 type:bad
-msgid "热衷"
-msgstr ""
-
-#: class:CharacterStateType id:0 type:name
-msgid "性感受"
-msgstr ""
-
-#: class:CharacterStateType id:1 type:name
-msgid "心灵感受"
-msgstr ""
-
-#: class:CharacterStateType id:2 type:name
-msgid "肉体感受"
-msgstr ""
-
-#: class:KnowledgeType id:0 type:name
-msgid "人文"
-msgstr ""
-
-#: class:KnowledgeType id:1 type:name
-msgid "技巧"
-msgstr ""
-
-#: class:KnowledgeType id:2 type:name
-msgid "科学"
-msgstr ""
-
-#: class:KnowledgeType id:3 type:name
-msgid "神秘学"
-msgstr ""
-
-#: class:CookType id:0 type:name
-msgid "原料"
-msgstr ""
-
-#: class:CookType id:1 type:name
-msgid "炒菜"
-msgstr ""
-
-#: class:CookType id:2 type:name
-msgid "油炸"
-msgstr ""
-
-#: class:CookType id:3 type:name
-msgid "蒸菜"
-msgstr ""
-
-#: class:CookType id:4 type:name
-msgid "烧烤"
-msgstr ""
-
-#: class:CookType id:5 type:name
-msgid "果汁"
-msgstr ""
-
-#: class:CookType id:6 type:name
-msgid "卤肉"
-msgstr ""
-
-#: class:Language id:0 type:name
-msgid "汉语"
-msgstr ""
-
-#: class:Language id:0 type:info
+#: Script/UI/Panel/game_setting_panel.py:225
 msgid ""
-"联合国6种工作语言之一，你的母语，在这个国度，每个达到学龄的儿童都已经基本掌握"
-"的语言。"
+"是否开启AI模式?\n"
+"请注意:\n"
+"ollama模式需本地安装ollama，同时对电脑配置要求较高\n"
+"外部api模式需要联网进行游戏，同时本游戏对tokens消耗较高\n"
+"另外目前AI模式为实验性模式，产出内容无法良好控制"
 msgstr ""
 
-#: class:Language id:1 type:name
-msgid "英语"
+#: Script/UI/Panel/see_map_panel.py:56
+msgid "移动:"
 msgstr ""
 
-#: class:Language id:1 type:info
-msgid "联合国6种工作语言之一，人类通用语，每个自然人都应该掌握的语言。"
+#: Script/UI/Panel/see_map_panel.py:101
+msgid "你可以从这里前往:\n"
 msgstr ""
 
-#: class:Language id:2 type:name
-msgid "法语"
+#: Script/UI/Panel/see_map_panel.py:117
+#, python-brace-format
+msgid "[{scene_name}:{move_time}分钟]"
 msgstr ""
 
-#: class:Language id:2 type:info
-msgid "联合国6种工作语言之一，被广泛在国际性社交和外交活动中应用。"
+#: Script/UI/Panel/see_map_panel.py:148
+msgid "查看上级地图"
 msgstr ""
 
-#: class:Language id:3 type:name
-msgid "西班牙语"
+#: Script/UI/Panel/see_map_panel.py:169
+msgid "查看下级地图"
 msgstr ""
 
-#: class:Language id:3 type:info
-msgid "联合国6种工作语言之一，被称为和上帝沟通的语言。"
+#: Script/UI/Panel/see_map_panel.py:396
+#, python-brace-format
+msgid "{scene_id}:{scene_name}:{move_time}分钟"
 msgstr ""
 
-#: class:Language id:4 type:name
-msgid "阿拉伯语"
+#: Script/UI/Panel/see_map_panel.py:567
+#, python-brace-format
+msgid "[{path_text}:{move_time}分钟]"
 msgstr ""
 
-#: class:Language id:4 type:info
-msgid "联合国6种工作语言之一，伊斯兰教宗教语言，主要通行于西亚和北非地区。"
+#: Script/UI/Panel/see_map_panel.py:682
+#, python-brace-format
+msgid "[{character_name}:{social_contact}|{path_text}:{move_time}分钟]"
 msgstr ""
 
-#: class:Language id:5 type:name
-msgid "俄语"
+#: Script/UI/Model/panel.py:177
+#, python-brace-format
+msgid "输入的字符超长，最大{input_max}个英文字符，请重试。"
 msgstr ""
 
-#: class:Language id:5 type:info
-msgid "联合国6种工作语言之一，主要为前苏联成员国家使用。"
+#: Script/UI/Model/panel.py:216
+#, python-brace-format
+msgid "输入的数字过大，最大值为{number_max}，请重试。"
 msgstr ""
 
-#: class:Language id:6 type:name
-msgid "日语"
+#: Script/UI/Model/panel.py:773
+#, python-brace-format
+msgid "{old_page_index_text} 上一页"
 msgstr ""
 
-#: class:Language id:6 type:info
-msgid ""
-"由日本先进的电子产品和汽车工业，以及发达的动漫产业，而在世界范围内广泛传播的"
-"语言。"
+#: Script/UI/Model/panel.py:787
+#, python-brace-format
+msgid "{next_page_index_text} 下一页"
 msgstr ""
 
-#: class:Language id:7 type:name
-msgid "印地语"
+#: Script/UI/Flow/title_flow.py:27
+msgid "人类是可以被驯化的"
 msgstr ""
 
-#: class:Language id:7 type:info
-msgid "印度官方语言之一，印度斯坦人的文学语言。"
+#: Script/UI/Flow/title_flow.py:35
+msgid "(注意这是一个临时的预览版本)"
 msgstr ""
 
-#: class:Language id:8 type:name
-msgid "古拉丁语"
+#: Script/UI/Flow/title_flow.py:42
+msgid "开始游戏"
 msgstr ""
 
-#: class:Language id:8 type:info
-msgid "古罗马奥古斯都皇帝时代所使用的语言。"
+#: Script/UI/Flow/title_flow.py:42
+msgid "读取存档"
 msgstr ""
 
-#: class:Language id:9 type:name
-msgid "拉丁语"
+#: Script/UI/Flow/creator_character_flow.py:47
+msgid "主人公"
 msgstr ""
 
-#: class:Language id:9 type:info
-msgid "死语之一，曾随基督教和古罗马帝国的扩张而成为欧洲通用语。"
+#: Script/UI/Flow/creator_character_flow.py:48
+msgid "你"
 msgstr ""
 
-#: class:Language id:10 type:name
-msgid "古汉语"
+#: Script/UI/Flow/creator_character_flow.py:100
+msgid "[更改姓名]"
 msgstr ""
 
-#: class:Language id:10 type:info
-msgid ""
-"死语之一，中国古代被称为雅言的官方语言，中国先秦时期洛阳方言为基础而来。"
+#: Script/UI/Flow/creator_character_flow.py:100
+msgid "[更改性别]"
 msgstr ""
 
-#: class:Language id:11 type:name
-msgid "上古汉语"
+#: Script/UI/Flow/creator_character_flow.py:100
+msgid "[修正年龄]"
 msgstr ""
 
-#: class:Language id:11 type:info
-msgid "死语之一，中国商周时期所使用的，以象形文字（甲骨文）为基础的语言。"
+#: Script/UI/Flow/creator_character_flow.py:100
+msgid "[修正身材]"
 msgstr ""
 
-#: class:ClothingType id:0 type:name
-msgid "外套"
+#: Script/UI/Flow/creator_character_flow.py:100
+msgid "[修改性格]"
 msgstr ""
 
-#: class:ClothingType id:1 type:name
-msgid "上衣"
+#: Script/UI/Flow/creator_character_flow.py:106
+msgid "就这样开始新的人生吧"
 msgstr ""
 
-#: class:ClothingType id:2 type:name
-msgid "裤子"
+#: Script/UI/Flow/creator_character_flow.py:116
+msgid "就这样了可以吗?"
 msgstr ""
 
-#: class:ClothingType id:3 type:name
-msgid "裙子"
+#: Script/UI/Flow/creator_character_flow.py:141
+msgid "请问能告诉我你的名字吗？"
 msgstr ""
 
-#: class:ClothingType id:4 type:name
-msgid "鞋子"
+#: Script/UI/Flow/creator_character_flow.py:173
+msgid "随机"
 msgstr ""
 
-#: class:ClothingType id:5 type:name
-msgid "袜子"
+#: Script/UI/Flow/creator_character_flow.py:177
+#, python-brace-format
+msgid "那么{character_nick_name}的性别是？"
 msgstr ""
 
-#: class:ClothingType id:6 type:name
-msgid "胸罩"
+#: Script/UI/Flow/creator_character_flow.py:201
+#, python-brace-format
+msgid "{character_nick_name}是一个小孩子吗？"
 msgstr ""
 
-#: class:ClothingType id:7 type:name
-msgid "内裤"
+#: Script/UI/Flow/creator_character_flow.py:205
+msgid "嘎呜～嘎呜～"
 msgstr ""
 
-#: class:StatureDescriptionText id:0 type:text
-msgid "这是一个与{NickName}同龄的小孩子，身材和体型都比较接近．"
+#: Script/UI/Flow/creator_character_flow.py:206
+msgid "才，才不是小孩子！"
 msgstr ""
 
-#: class:StatureDescriptionText id:1 type:text
-msgid "{NickName}的身材即使是在同龄人中，也属于比较矮小的类型．"
+#: Script/UI/Flow/creator_character_flow.py:207
+msgid "已经成年了哦～"
 msgstr ""
 
-#: class:StatureDescriptionText id:2 type:text
-msgid "与同龄人没什么区别，平平无奇．"
+#: Script/UI/Flow/creator_character_flow.py:208
+msgid "我也想回到小时候呢～"
 msgstr ""
 
-#: class:RecipesFormulaType id:0 type:name
-msgid "主材"
+#: Script/UI/Flow/creator_character_flow.py:209
+msgid "你说什么？我听不清～"
 msgstr ""
 
-#: class:RecipesFormulaType id:1 type:name
-msgid "辅材"
+#: Script/UI/Flow/creator_character_flow.py:239
+#, python-brace-format
+msgid "{character_nick_name}对自己的体重有自信吗？"
+msgstr ""
+
+#: Script/UI/Flow/creator_character_flow.py:243
+msgid "很轻，就像一张纸一样，风一吹就能飘起来。"
+msgstr ""
+
+#: Script/UI/Flow/creator_character_flow.py:244
+msgid "普普通通，健康的身材。"
+msgstr ""
+
+#: Script/UI/Flow/creator_character_flow.py:245
+msgid "略沉，不过从外表不怎么能够看得出来。"
+msgstr ""
+
+#: Script/UI/Flow/creator_character_flow.py:246
+msgid "肉眼可辨的比别人要胖很多。"
+msgstr ""
+
+#: Script/UI/Flow/creator_character_flow.py:247
+msgid "人类的极限，看上去像是相扑选手一样。"
+msgstr ""
+
+#: class:CauseOfDeath id:0 type:name
+msgid "饿死"
+msgstr ""
+
+#: class:CauseOfDeath id:1 type:name
+msgid "渴死"
+msgstr ""
+
+#: class:CauseOfDeath id:2 type:name
+msgid "累死"
+msgstr ""
+
+#: class:CauseOfDeath id:3 type:name
+msgid "困死"
+msgstr ""
+
+#: class:CauseOfDeath id:4 type:name
+msgid "自杀"
 msgstr ""
 
 #: class:Food id:0 type:name
@@ -2511,148 +2100,148 @@ msgstr ""
 msgid "味精"
 msgstr ""
 
-#: class:Status id:0 type:name
-msgid "发呆"
+#: class:RecipesFormulaType id:0 type:name
+msgid "主材"
 msgstr ""
 
-#: class:Status id:3 type:name
-msgid "上课"
+#: class:RecipesFormulaType id:1 type:name
+msgid "辅材"
 msgstr ""
 
-#: class:Status id:16 type:name
-msgid "教学"
+#: class:ClubTheme id:0 type:name
+msgid "人文"
 msgstr ""
 
-#: class:Status id:22 type:name
-msgid "脱对方衣服"
+#: class:ClubTheme id:1 type:name
+msgid "技巧"
 msgstr ""
 
-#: class:Status id:24 type:name
-msgid "脱衣"
+#: class:ClubTheme id:2 type:name
+msgid "科学"
 msgstr ""
 
-#: class:Status id:26 type:name
-msgid "正常体位(女)"
+#: class:ClubTheme id:3 type:name
+msgid "神秘学"
 msgstr ""
 
-#: class:Status id:33 type:name
-msgid "做爱受体"
+#: class:Organ id:0 type:name
+msgid "嘴"
 msgstr ""
 
-#: class:Status id:34 type:name
-msgid "摸脸"
+#: class:Organ id:1 type:name
+msgid "胸"
 msgstr ""
 
-#: class:Status id:72 type:name
-msgid "对对方真空口交"
+#: class:Organ id:2 type:name
+msgid "阴蒂"
 msgstr ""
 
-#: class:Achieve id:start_game type:name
-msgid "故事的起点"
+#: class:Organ id:3 type:name
+msgid "阴茎"
 msgstr ""
 
-#: class:Achieve id:start_game type:info
-msgid "初次进入游戏"
+#: class:Organ id:4 type:name
+msgid "阴道"
 msgstr ""
 
-#: class:Achieve id:end_game type:name
-msgid "迈入死亡"
+#: class:Organ id:5 type:name
+msgid "肛门"
 msgstr ""
 
-#: class:Achieve id:end_game type:info
-msgid "初次死亡"
+#: class:SolarPeriod id:0 type:name
+msgid "春分"
 msgstr ""
 
-#: class:Achieve id:first_blood type:name
-msgid "第一滴血"
+#: class:SolarPeriod id:1 type:name
+msgid "清明"
 msgstr ""
 
-#: class:Achieve id:first_blood type:info
-msgid "第一次做爱"
+#: class:SolarPeriod id:2 type:name
+msgid "谷雨"
 msgstr ""
 
-#: class:Achieve id:first_wear_clothes type:name
-msgid "穿着？尊严？"
+#: class:SolarPeriod id:3 type:name
+msgid "立夏"
 msgstr ""
 
-#: class:Achieve id:first_wear_clothes type:info
-msgid "学会穿上衣服"
+#: class:SolarPeriod id:4 type:name
+msgid "小满"
 msgstr ""
 
-#: class:Achieve id:drowned_girl type:name
-msgid "变成女孩子了"
+#: class:SolarPeriod id:5 type:name
+msgid "芒种"
 msgstr ""
 
-#: class:Achieve id:drowned_girl type:info
-msgid "喝下娘溺泉的水"
+#: class:SolarPeriod id:6 type:name
+msgid "夏至"
 msgstr ""
 
-#: class:Achieve id:one_hundred_and_eight_thousand_sorrows type:name
-msgid "十万八千苦"
+#: class:SolarPeriod id:7 type:name
+msgid "小暑"
 msgstr ""
 
-#: class:Achieve id:one_hundred_and_eight_thousand_sorrows type:info
-msgid "见证了108000人的人生"
+#: class:SolarPeriod id:8 type:name
+msgid "大暑"
 msgstr ""
 
-#: class:NatureTag id:0 type:good
-msgid "外向"
+#: class:SolarPeriod id:9 type:name
+msgid "立秋"
 msgstr ""
 
-#: class:NatureTag id:0 type:bad
-msgid "内向"
+#: class:SolarPeriod id:10 type:name
+msgid "处暑"
 msgstr ""
 
-#: class:NatureTag id:1 type:good
-msgid "善良"
+#: class:SolarPeriod id:11 type:name
+msgid "白露"
 msgstr ""
 
-#: class:NatureTag id:1 type:bad
-msgid "邪恶"
+#: class:SolarPeriod id:12 type:name
+msgid "秋分"
 msgstr ""
 
-#: class:NatureTag id:2 type:good
-msgid "实诚"
+#: class:SolarPeriod id:13 type:name
+msgid "寒露"
 msgstr ""
 
-#: class:NatureTag id:2 type:bad
-msgid "懒散"
+#: class:SolarPeriod id:14 type:name
+msgid "霜降"
 msgstr ""
 
-#: class:NatureTag id:3 type:good
-msgid "刚毅"
+#: class:SolarPeriod id:15 type:name
+msgid "立冬"
 msgstr ""
 
-#: class:NatureTag id:3 type:bad
-msgid "柔寡"
+#: class:SolarPeriod id:16 type:name
+msgid "小雪"
 msgstr ""
 
-#: class:NatureTag id:4 type:good
-msgid "爽朗"
+#: class:SolarPeriod id:17 type:name
+msgid "大雪"
 msgstr ""
 
-#: class:NatureTag id:4 type:bad
-msgid "忧郁"
+#: class:SolarPeriod id:18 type:name
+msgid "冬至"
 msgstr ""
 
-#: class:NatureTag id:5 type:good
-msgid "热忱"
+#: class:SolarPeriod id:19 type:name
+msgid "小寒"
 msgstr ""
 
-#: class:NatureTag id:5 type:bad
-msgid "冷傲"
+#: class:SolarPeriod id:20 type:name
+msgid "大寒"
 msgstr ""
 
-#: class:NatureTag id:6 type:good
-msgid "自负"
+#: class:SolarPeriod id:21 type:name
+msgid "立春"
 msgstr ""
 
-#: class:NatureTag id:6 type:bad
-msgid "自谦"
+#: class:SolarPeriod id:22 type:name
+msgid "雨水"
 msgstr ""
 
-#: class:DebugInstructType id:0 type:name
-msgid "默认"
+#: class:SolarPeriod id:23 type:name
+msgid "惊蛰"
 msgstr ""
 
 #: class:Moon id:0 type:name
@@ -2751,1260 +2340,296 @@ msgstr ""
 msgid "晓月"
 msgstr ""
 
-#: class:ClubIdentity id:1 type:name
-msgid "社长"
+#: class:CookType id:0 type:name
+msgid "原料"
 msgstr ""
 
-#: class:ClubIdentity id:2 type:name
-msgid "指导老师"
+#: class:CookType id:1 type:name
+msgid "炒菜"
 msgstr ""
 
-#: class:Book id:0 type:name
-msgid "梦境拾荒者"
+#: class:CookType id:2 type:name
+msgid "油炸"
 msgstr ""
 
-#: class:Book id:1 type:name
-msgid "星空下的守护者"
+#: class:CookType id:3 type:name
+msgid "蒸菜"
 msgstr ""
 
-#: class:Book id:2 type:name
-msgid "月光古道"
+#: class:CookType id:4 type:name
+msgid "烧烤"
 msgstr ""
 
-#: class:Book id:3 type:name
-msgid "时间的倒影"
+#: class:CookType id:5 type:name
+msgid "果汁"
 msgstr ""
 
-#: class:Book id:4 type:name
-msgid "异世旅人的笔记"
+#: class:CookType id:6 type:name
+msgid "卤肉"
 msgstr ""
 
-#: class:Book id:5 type:name
-msgid "沙漏中的城堡"
+#: class:CharacterState id:0 type:name
+msgid "嘴部快感"
 msgstr ""
 
-#: class:Book id:6 type:name
-msgid "破碎的镜子"
+#: class:CharacterState id:1 type:name
+msgid "胸部快感"
 msgstr ""
 
-#: class:Book id:7 type:name
-msgid "光与影的交错"
+#: class:CharacterState id:2 type:name
+msgid "阴道快感"
 msgstr ""
 
-#: class:Book id:8 type:name
-msgid "永夜的边缘"
+#: class:CharacterState id:3 type:name
+msgid "阴蒂快感"
 msgstr ""
 
-#: class:Book id:9 type:name
-msgid "风暴中的寂静"
+#: class:CharacterState id:4 type:name
+msgid "肛门快感"
 msgstr ""
 
-#: class:Book id:10 type:name
-msgid "森林深处的秘密"
+#: class:CharacterState id:5 type:name
+msgid "阴茎快感"
 msgstr ""
 
-#: class:Book id:11 type:name
-msgid "天外来客"
+#: class:CharacterState id:6 type:name
+msgid "阴道润滑"
 msgstr ""
 
-#: class:Book id:12 type:name
-msgid "迷失在记忆中的人"
+#: class:CharacterState id:7 type:name
+msgid "肛门润滑"
 msgstr ""
 
-#: class:Book id:13 type:name
-msgid "冰封之海"
+#: class:CharacterState id:8 type:name
+msgid "快乐"
 msgstr ""
 
-#: class:Book id:14 type:name
-msgid "星辰之舞"
+#: class:CharacterState id:9 type:name
+msgid "痛苦"
 msgstr ""
 
-#: class:Book id:15 type:name
-msgid "远古神祇的回响"
+#: class:CharacterState id:10 type:name
+msgid "渴望"
 msgstr ""
 
-#: class:Book id:16 type:name
-msgid "烈焰与寒霜"
+#: class:CharacterState id:11 type:name
+msgid "恐惧"
 msgstr ""
 
-#: class:Book id:17 type:name
-msgid "梦与现实的边界"
+#: class:CharacterState id:12 type:name
+msgid "反感"
 msgstr ""
 
-#: class:Book id:18 type:name
-msgid "黑暗中的微光"
+#: class:CharacterState id:13 type:name
+msgid "羞耻"
 msgstr ""
 
-#: class:Book id:19 type:name
-msgid "荒野中的孤独旅者"
+#: class:CharacterState id:14 type:name
+msgid "抑郁"
 msgstr ""
 
-#: class:Book id:20 type:name
-msgid "月影湖畔的传说"
+#: class:CharacterState id:15 type:name
+msgid "傲慢"
 msgstr ""
 
-#: class:Book id:21 type:name
-msgid "迷雾森林的呼唤"
+#: class:CharacterState id:16 type:name
+msgid "嫉妒"
 msgstr ""
 
-#: class:Book id:22 type:name
-msgid "沉睡的古老王国"
+#: class:CharacterState id:17 type:name
+msgid "暴怒"
 msgstr ""
 
-#: class:Book id:23 type:name
-msgid "时间裂缝中的旅程"
+#: class:CharacterState id:18 type:name
+msgid "懒惰"
 msgstr ""
 
-#: class:Book id:24 type:name
-msgid "永恒之塔"
+#: class:CharacterState id:19 type:name
+msgid "贪婪"
 msgstr ""
 
-#: class:Book id:25 type:name
-msgid "无尽之海"
+#: class:CharacterState id:20 type:name
+msgid "暴食"
 msgstr ""
 
-#: class:Book id:26 type:name
-msgid "光芒背后的秘密"
+#: class:CharacterState id:21 type:name
+msgid "色欲"
 msgstr ""
 
-#: class:Book id:27 type:name
-msgid "流浪者的最后一站"
+#: class:CharacterState id:22 type:name
+msgid "温暖"
 msgstr ""
 
-#: class:Book id:28 type:name
-msgid "命运之轮"
+#: class:CharacterState id:23 type:name
+msgid "疼痛"
 msgstr ""
 
-#: class:Book id:29 type:name
-msgid "幻境之钥"
+#: class:CharacterState id:24 type:name
+msgid "眩晕"
 msgstr ""
 
-#: class:Book id:30 type:name
-msgid "时光交错"
+#: class:CharacterState id:25 type:name
+msgid "疲惫"
 msgstr ""
 
-#: class:Book id:31 type:name
-msgid "暗影中的盟约"
+#: class:CharacterState id:26 type:name
+msgid "迷醉"
 msgstr ""
 
-#: class:Book id:32 type:name
-msgid "晨曦中的誓言"
+#: class:CharacterState id:27 type:name
+msgid "饥饿"
 msgstr ""
 
-#: class:Book id:33 type:name
-msgid "星河远征"
+#: class:CharacterState id:28 type:name
+msgid "口渴"
 msgstr ""
 
-#: class:Book id:34 type:name
-msgid "失落的文明"
+#: class:Course id:0 type:name
+msgid "语言文学课"
 msgstr ""
 
-#: class:Book id:35 type:name
-msgid "永恒的守望者"
+#: class:Course id:1 type:name
+msgid "数学课"
 msgstr ""
 
-#: class:Book id:36 type:name
-msgid "黎明前的低语"
+#: class:Course id:2 type:name
+msgid "英语课"
 msgstr ""
 
-#: class:Book id:37 type:name
-msgid "火焰中的不朽"
+#: class:Course id:3 type:name
+msgid "信息技术课"
 msgstr ""
 
-#: class:Book id:38 type:name
-msgid "月色下的追忆"
+#: class:Course id:4 type:name
+msgid "美术课"
 msgstr ""
 
-#: class:Book id:39 type:name
-msgid "尘埃中的花朵"
+#: class:Course id:5 type:name
+msgid "音乐课"
 msgstr ""
 
-#: class:Book id:40 type:name
-msgid "永恒之书"
+#: class:Course id:6 type:name
+msgid "体育课"
 msgstr ""
 
-#: class:Book id:41 type:name
-msgid "命运的裂痕"
+#: class:Course id:7 type:name
+msgid "思想品德课"
 msgstr ""
 
-#: class:Book id:42 type:name
-msgid "星际探索者"
+#: class:Course id:8 type:name
+msgid "健康教育课"
 msgstr ""
 
-#: class:Book id:43 type:name
-msgid "记忆中的彼岸"
+#: class:Course id:9 type:name
+msgid "自然课"
 msgstr ""
 
-#: class:Book id:44 type:name
-msgid "末日之后的世界"
+#: class:Course id:10 type:name
+msgid "社会课"
 msgstr ""
 
-#: class:Book id:45 type:name
-msgid "光影交织的旅途"
+#: class:Course id:11 type:name
+msgid "历史课"
 msgstr ""
 
-#: class:Book id:46 type:name
-msgid "沉默的星辰"
+#: class:Course id:12 type:name
+msgid "生物课"
 msgstr ""
 
-#: class:Book id:47 type:name
-msgid "烈焰中的星火"
+#: class:Course id:13 type:name
+msgid "地理课"
 msgstr ""
 
-#: class:Book id:48 type:name
-msgid "逐梦者的传说"
+#: class:Course id:14 type:name
+msgid "物理课"
 msgstr ""
 
-#: class:Book id:49 type:name
-msgid "无限循环"
+#: class:Course id:15 type:name
+msgid "化学课"
 msgstr ""
 
-#: class:Book id:50 type:name
-msgid "星辰之门"
+#: class:Course id:16 type:name
+msgid "舞蹈课"
 msgstr ""
 
-#: class:Book id:51 type:name
-msgid "远古王国的秘密"
+#: class:Course id:17 type:name
+msgid "游泳课"
 msgstr ""
 
-#: class:Book id:52 type:name
-msgid "黎明之后的黑暗"
+#: class:CharacterStateType id:0 type:name
+msgid "性感受"
 msgstr ""
 
-#: class:Book id:53 type:name
-msgid "命运交汇"
+#: class:CharacterStateType id:1 type:name
+msgid "心灵感受"
 msgstr ""
 
-#: class:Book id:54 type:name
-msgid "失落的钥匙"
+#: class:CharacterStateType id:2 type:name
+msgid "肉体感受"
 msgstr ""
 
-#: class:Book id:55 type:name
-msgid "时空之旅"
+#: class:MoveMenuType id:0 type:name
+msgid "公共"
 msgstr ""
 
-#: class:Book id:56 type:name
-msgid "破碎的幻想"
+#: class:Weather id:0 type:name
+msgid "多云"
 msgstr ""
 
-#: class:Book id:57 type:name
-msgid "迷雾中的足迹"
+#: class:Weather id:0 type:info
+msgid "云层遮蔽了天空"
 msgstr ""
 
-#: class:Book id:58 type:name
-msgid "时间尽头的守望"
+#: class:Weather id:1 type:name
+msgid "暴雨"
 msgstr ""
 
-#: class:Book id:59 type:name
-msgid "寂静深渊"
+#: class:Weather id:1 type:info
+msgid "大雨倾盆"
 msgstr ""
 
-#: class:Book id:60 type:name
-msgid "暗影之下的城堡"
+#: class:Weather id:2 type:name
+msgid "雨"
 msgstr ""
 
-#: class:Book id:61 type:name
-msgid "星海迷途"
+#: class:Weather id:2 type:info
+msgid "雨势绵绵"
 msgstr ""
 
-#: class:Book id:62 type:name
-msgid "风暴之子"
+#: class:Weather id:3 type:name
+msgid "小雨"
 msgstr ""
 
-#: class:Book id:63 type:name
-msgid "古老誓言的复苏"
+#: class:Weather id:3 type:info
+msgid "雨水稀稀拉拉的落下了"
 msgstr ""
 
-#: class:Book id:64 type:name
-msgid "夜幕中的火光"
+#: class:Weather id:4 type:name
+msgid "雷雨"
 msgstr ""
 
-#: class:Book id:65 type:name
-msgid "命运使者"
+#: class:Weather id:4 type:info
+msgid "打雷了"
 msgstr ""
 
-#: class:Book id:66 type:name
-msgid "天际的呼唤"
+#: class:Weather id:5 type:name
+msgid "晴"
 msgstr ""
 
-#: class:Book id:67 type:name
-msgid "梦中的王国"
+#: class:Weather id:5 type:info
+msgid "天放晴了"
 msgstr ""
 
-#: class:Book id:68 type:name
-msgid "时光流逝的痕迹"
+#: class:Weather id:6 type:name
+msgid "雨夹雪"
 msgstr ""
 
-#: class:Book id:69 type:name
-msgid "永夜长歌"
+#: class:Weather id:6 type:info
+msgid "雨雪交加"
 msgstr ""
 
-#: class:Book id:70 type:name
-msgid "星辰中的神秘岛"
-msgstr ""
-
-#: class:Book id:71 type:name
-msgid "幻境迷宫"
-msgstr ""
-
-#: class:Book id:72 type:name
-msgid "命运的羁绊"
-msgstr ""
-
-#: class:Book id:73 type:name
-msgid "沉睡的古树"
-msgstr ""
-
-#: class:Book id:74 type:name
-msgid "天际尽头的灯塔"
-msgstr ""
-
-#: class:Book id:75 type:name
-msgid "穿越时间的旅者"
-msgstr ""
-
-#: class:Book id:76 type:name
-msgid "星河彼岸"
-msgstr ""
-
-#: class:Book id:77 type:name
-msgid "梦境中的预言"
-msgstr ""
-
-#: class:Book id:78 type:name
-msgid "迷雾笼罩的遗迹"
-msgstr ""
-
-#: class:Book id:79 type:name
-msgid "尘世之外"
-msgstr ""
-
-#: class:Book id:80 type:name
-msgid "光影交织的回忆"
-msgstr ""
-
-#: class:Book id:81 type:name
-msgid "时空守护者"
-msgstr ""
-
-#: class:Book id:82 type:name
-msgid "星际航行日志"
-msgstr ""
-
-#: class:Book id:83 type:name
-msgid "命运之海"
-msgstr ""
-
-#: class:Book id:84 type:name
-msgid "破晓之时"
-msgstr ""
-
-#: class:Book id:85 type:name
-msgid "永恒的契约"
-msgstr ""
-
-#: class:Book id:86 type:name
-msgid "迷失的星辰"
-msgstr ""
-
-#: class:Book id:87 type:name
-msgid "梦中沉睡的巨龙"
-msgstr ""
-
-#: class:Book id:88 type:name
-msgid "无尽时空的守望"
-msgstr ""
-
-#: class:Book id:89 type:name
-msgid "夜空中的最后一颗星"
-msgstr ""
-
-#: class:Book id:90 type:name
-msgid "命运之门"
-msgstr ""
-
-#: class:Book id:91 type:name
-msgid "失落的预言"
-msgstr ""
-
-#: class:Book id:92 type:name
-msgid "星际边界"
-msgstr ""
-
-#: class:Book id:93 type:name
-msgid "光与暗的轮舞"
-msgstr ""
-
-#: class:Book id:94 type:name
-msgid "时光之眼"
-msgstr ""
-
-#: class:Book id:95 type:name
-msgid "幻境旅者"
-msgstr ""
-
-#: class:Book id:96 type:name
-msgid "命运轮回"
-msgstr ""
-
-#: class:Book id:97 type:name
-msgid "沉寂的王座"
-msgstr ""
-
-#: class:Book id:98 type:name
-msgid "星空尽头的希望"
-msgstr ""
-
-#: class:Book id:99 type:name
-msgid "远古遗迹的守护者"
-msgstr ""
-
-#: class:Book id:100 type:name
-msgid "日暮的神秘湖"
-msgstr ""
-
-#: class:Book id:101 type:name
-msgid "星火照亮的长夜"
-msgstr ""
-
-#: class:Book id:102 type:name
-msgid "时间隧道中的回忆"
-msgstr ""
-
-#: class:Book id:103 type:name
-msgid "魔法学院的秘密档案"
-msgstr ""
-
-#: class:Book id:104 type:name
-msgid "古老神庙的回声"
-msgstr ""
-
-#: class:Book id:105 type:name
-msgid "月影森林的守护者"
-msgstr ""
-
-#: class:Book id:106 type:name
-msgid "天幕之上的城堡"
-msgstr ""
-
-#: class:Book id:107 type:name
-msgid "星辰的编织者"
-msgstr ""
-
-#: class:Book id:108 type:name
-msgid "深海之下的囚徒"
-msgstr ""
-
-#: class:Book id:109 type:name
-msgid "遗忘之地的光明"
-msgstr ""
-
-#: class:Book id:110 type:name
-msgid "命运的齿轮"
-msgstr ""
-
-#: class:Book id:111 type:name
-msgid "荒野中的魔法师"
-msgstr ""
-
-#: class:Book id:112 type:name
-msgid "水晶山脉的传说"
-msgstr ""
-
-#: class:Book id:113 type:name
-msgid "梦幻岛的最后一战"
-msgstr ""
-
-#: class:Book id:114 type:name
-msgid "时间之镜"
-msgstr ""
-
-#: class:Book id:115 type:name
-msgid "光影之间的追寻"
-msgstr ""
-
-#: class:Book id:116 type:name
-msgid "永夜的守护者"
-msgstr ""
-
-#: class:Book id:117 type:name
-msgid "群星下的遗迹"
-msgstr ""
-
-#: class:Book id:118 type:name
-msgid "无尽沙漠中的绿洲"
-msgstr ""
-
-#: class:Book id:119 type:name
-msgid "月光下的迷踪"
-msgstr ""
-
-#: class:Book id:120 type:name
-msgid "时光中的追忆者"
-msgstr ""
-
-#: class:Book id:121 type:name
-msgid "远古文明的终焉"
-msgstr ""
-
-#: class:Book id:122 type:name
-msgid "晨星的指引"
-msgstr ""
-
-#: class:Book id:123 type:name
-msgid "光之国度"
-msgstr ""
-
-#: class:Book id:124 type:name
-msgid "尘埃中的黄金城"
-msgstr ""
-
-#: class:Book id:125 type:name
-msgid "梦境编织者"
-msgstr ""
-
-#: class:Book id:126 type:name
-msgid "永恒国度的旅人"
-msgstr ""
-
-#: class:Book id:127 type:name
-msgid "失落之城的守护者"
-msgstr ""
-
-#: class:Book id:128 type:name
-msgid "群星之间的命运"
-msgstr ""
-
-#: class:Book id:129 type:name
-msgid "时间尽头的光芒"
-msgstr ""
-
-#: class:Book id:130 type:name
-msgid "黎明前的守望"
-msgstr ""
-
-#: class:Book id:131 type:name
-msgid "黑暗中的余辉"
-msgstr ""
-
-#: class:Book id:132 type:name
-msgid "遗忘之书"
-msgstr ""
-
-#: class:Book id:133 type:name
-msgid "命运的交响曲"
-msgstr ""
-
-#: class:Book id:134 type:name
-msgid "失落的边境"
-msgstr ""
-
-#: class:Book id:135 type:name
-msgid "深渊中的黎明"
-msgstr ""
-
-#: class:Book id:136 type:name
-msgid "星辰的守护"
-msgstr ""
-
-#: class:Book id:137 type:name
-msgid "古老预言的复苏"
-msgstr ""
-
-#: class:Book id:138 type:name
-msgid "天际之外的秘境"
-msgstr ""
-
-#: class:Book id:139 type:name
-msgid "永恒之岛"
-msgstr ""
-
-#: class:Book id:140 type:name
-msgid "梦幻城的传说"
-msgstr ""
-
-#: class:Book id:141 type:name
-msgid "时间裂隙中的光"
-msgstr ""
-
-#: class:Book id:142 type:name
-msgid "光与影的边界"
-msgstr ""
-
-#: class:Book id:143 type:name
-msgid "星河探险者"
-msgstr ""
-
-#: class:Book id:144 type:name
-msgid "命运的暗涌"
-msgstr ""
-
-#: class:Book id:145 type:name
-msgid "迷雾中的微光"
-msgstr ""
-
-#: class:Book id:146 type:name
-msgid "远古王国的传承"
-msgstr ""
-
-#: class:Book id:147 type:name
-msgid "无尽航线"
-msgstr ""
-
-#: class:Book id:148 type:name
-msgid "星际冒险录"
-msgstr ""
-
-#: class:Book id:149 type:name
-msgid "时间长廊的守卫者"
-msgstr ""
-
-#: class:Book id:150 type:name
-msgid "夜幕降临时"
-msgstr ""
-
-#: class:Book id:151 type:name
-msgid "破碎的星辰"
-msgstr ""
-
-#: class:Book id:152 type:name
-msgid "命运的交错"
-msgstr ""
-
-#: class:Book id:153 type:name
-msgid "光明与黑暗的契约"
-msgstr ""
-
-#: class:Book id:154 type:name
-msgid "时间之轮的回转"
-msgstr ""
-
-#: class:Book id:155 type:name
-msgid "星空之下的秘密"
-msgstr ""
-
-#: class:Book id:156 type:name
-msgid "远古守望者的觉醒"
-msgstr ""
-
-#: class:Book id:157 type:name
-msgid "光与影的轮舞"
-msgstr ""
-
-#: class:Book id:158 type:name
-msgid "命运交织的时空"
-msgstr ""
-
-#: class:Book id:159 type:name
-msgid "沉睡的海洋之心"
-msgstr ""
-
-#: class:Book id:160 type:name
-msgid "星辰之下的诺言"
-msgstr ""
-
-#: class:Book id:161 type:name
-msgid "时光中的魔法"
-msgstr ""
-
-#: class:Book id:162 type:name
-msgid "永恒光辉的守望"
-msgstr ""
-
-#: class:Book id:163 type:name
-msgid "迷失在星际的旅程"
-msgstr ""
-
-#: class:Book id:164 type:name
-msgid "梦境与现实的交汇"
-msgstr ""
-
-#: class:Book id:165 type:name
-msgid "时空之门"
-msgstr ""
-
-#: class:Book id:166 type:name
-msgid "命运的旅者"
-msgstr ""
-
-#: class:Book id:167 type:name
-msgid "黑暗中的光明"
-msgstr ""
-
-#: class:Book id:168 type:name
-msgid "星际航行者的遗失日记"
-msgstr ""
-
-#: class:Book id:169 type:name
-msgid "时光尽头的岛屿"
-msgstr ""
-
-#: class:Book id:170 type:name
-msgid "古老神殿的守护者"
-msgstr ""
-
-#: class:Book id:171 type:name
-msgid "星空尽头的旅程"
-msgstr ""
-
-#: class:Book id:172 type:name
-msgid "梦中的古老预言"
-msgstr ""
-
-#: class:Book id:173 type:name
-msgid "永恒的誓言"
-msgstr ""
-
-#: class:Book id:174 type:name
-msgid "迷雾中的秘密"
-msgstr ""
-
-#: class:Book id:175 type:name
-msgid "光影交错的传说"
-msgstr ""
-
-#: class:Book id:176 type:name
-msgid "时间之外的世界"
-msgstr ""
-
-#: class:Book id:177 type:name
-msgid "沉默的星空"
-msgstr ""
-
-#: class:Book id:178 type:name
-msgid "命运之环"
-msgstr ""
-
-#: class:Book id:179 type:name
-msgid "远古王朝的消逝"
-msgstr ""
-
-#: class:Book id:180 type:name
-msgid "时间碎片中的记忆"
-msgstr ""
-
-#: class:Book id:181 type:name
-msgid "星空下的冒险"
-msgstr ""
-
-#: class:Book id:182 type:name
-msgid "破碎的梦境"
-msgstr ""
-
-#: class:Book id:183 type:name
-msgid "光芒与黑暗的边界"
-msgstr ""
-
-#: class:Book id:184 type:name
-msgid "命运编织者"
-msgstr ""
-
-#: class:Book id:185 type:name
-msgid "深海中的沉睡者"
-msgstr ""
-
-#: class:Book id:186 type:name
-msgid "星辰交织的轨迹"
-msgstr ""
-
-#: class:Book id:187 type:name
-msgid "远古战场的回响"
-msgstr ""
-
-#: class:Book id:188 type:name
-msgid "时间尽头的守护者"
-msgstr ""
-
-#: class:Book id:189 type:name
-msgid "光与影的终极对决"
-msgstr ""
-
-#: class:Book id:190 type:name
-msgid "命运交错的国度"
-msgstr ""
-
-#: class:Book id:191 type:name
-msgid "黑夜中的希望"
-msgstr ""
-
-#: class:Book id:192 type:name
-msgid "远古传承的遗失宝藏"
-msgstr ""
-
-#: class:Book id:193 type:name
-msgid "时空之旅的终点"
-msgstr ""
-
-#: class:Book id:194 type:name
-msgid "星空彼岸的奇迹"
-msgstr ""
-
-#: class:Book id:195 type:name
-msgid "梦中的光芒"
-msgstr ""
-
-#: class:Book id:196 type:name
-msgid "光与影的终章"
-msgstr ""
-
-#: class:Book id:197 type:name
-msgid "时间的钥匙"
-msgstr ""
-
-#: class:Book id:198 type:name
-msgid "迷失的星球"
-msgstr ""
-
-#: class:Book id:199 type:name
-msgid "命运与时间的羁绊"
-msgstr ""
-
-#: class:Book id:200 type:name
-msgid "星空之下的秘密通道"
-msgstr ""
-
-#: class:Book id:201 type:name
-msgid "梦境之门"
-msgstr ""
-
-#: class:Book id:202 type:name
-msgid "命运编年史"
-msgstr ""
-
-#: class:Book id:203 type:name
-msgid "光影交错的神话"
-msgstr ""
-
-#: class:Book id:204 type:name
-msgid "时间之环"
-msgstr ""
-
-#: class:Book id:205 type:name
-msgid "永夜中的星光"
-msgstr ""
-
-#: class:Book id:206 type:name
-msgid "失落的魔法国度"
-msgstr ""
-
-#: class:Book id:207 type:name
-msgid "远古之力的觉醒"
-msgstr ""
-
-#: class:Book id:208 type:name
-msgid "黑暗中的火种"
-msgstr ""
-
-#: class:Book id:209 type:name
-msgid "星际遗迹的发现"
-msgstr ""
-
-#: class:Book id:210 type:name
-msgid "命运书写者"
-msgstr ""
-
-#: class:Book id:211 type:name
-msgid "时间之外的故事"
-msgstr ""
-
-#: class:Book id:212 type:name
-msgid "群星之间的低语"
-msgstr ""
-
-#: class:Book id:213 type:name
-msgid "梦中的命运"
-msgstr ""
-
-#: class:Book id:214 type:name
-msgid "光与暗的轮回"
-msgstr ""
-
-#: class:Book id:215 type:name
-msgid "沉寂森林的低语"
-msgstr ""
-
-#: class:Book id:216 type:name
-msgid "远古遗迹的钥匙"
-msgstr ""
-
-#: class:Book id:217 type:name
-msgid "星光指引的道路"
-msgstr ""
-
-#: class:Book id:218 type:name
-msgid "时间尽头的启示"
-msgstr ""
-
-#: class:Book id:219 type:name
-msgid "命运与星辰的共鸣"
-msgstr ""
-
-#: class:Book id:220 type:name
-msgid "失落文明的呼唤"
-msgstr ""
-
-#: class:Book id:221 type:name
-msgid "光影交织的梦境"
-msgstr ""
-
-#: class:Book id:222 type:name
-msgid "迷失在时间之海"
-msgstr ""
-
-#: class:Book id:223 type:name
-msgid "群星中的孤独旅者"
-msgstr ""
-
-#: class:Book id:224 type:name
-msgid "永恒之书的传承"
-msgstr ""
-
-#: class:Book id:225 type:name
-msgid "命运守望者"
-msgstr ""
-
-#: class:Book id:226 type:name
-msgid "时空裂缝中的回声"
-msgstr ""
-
-#: class:Book id:227 type:name
-msgid "古老誓言的守护"
-msgstr ""
-
-#: class:Book id:228 type:name
-msgid "远古神祇的记忆"
-msgstr ""
-
-#: class:Book id:229 type:name
-msgid "星辰与命运的羁绊"
-msgstr ""
-
-#: class:Book id:230 type:name
-msgid "时间迷宫"
-msgstr ""
-
-#: class:Book id:231 type:name
-msgid "沉睡在梦中的巨兽"
-msgstr ""
-
-#: class:Book id:232 type:name
-msgid "光芒与影子的编织者"
-msgstr ""
-
-#: class:Book id:233 type:name
-msgid "命运的远航"
-msgstr ""
-
-#: class:Book id:234 type:name
-msgid "破碎之城的传奇"
-msgstr ""
-
-#: class:Book id:235 type:name
-msgid "时空之外的彼岸"
-msgstr ""
-
-#: class:Book id:236 type:name
-msgid "迷雾中的光辉"
-msgstr ""
-
-#: class:Book id:237 type:name
-msgid "永恒国度的秘密档案"
-msgstr ""
-
-#: class:Book id:238 type:name
-msgid "星际冒险日志"
-msgstr ""
-
-#: class:Book id:239 type:name
-msgid "命运的星辰之舞"
-msgstr ""
-
-#: class:Book id:240 type:name
-msgid "时间的守护者"
-msgstr ""
-
-#: class:Book id:241 type:name
-msgid "黑暗深渊的回音"
-msgstr ""
-
-#: class:Book id:242 type:name
-msgid "远古遗失之地"
-msgstr ""
-
-#: class:Book id:243 type:name
-msgid "光影之间的故事"
-msgstr ""
-
-#: class:Book id:244 type:name
-msgid "时空交汇的奇迹"
-msgstr ""
-
-#: class:Book id:245 type:name
-msgid "命运交织的命题"
-msgstr ""
-
-#: class:Book id:246 type:name
-msgid "失落的星辰之城"
-msgstr ""
-
-#: class:Book id:247 type:name
-msgid "梦境编年史"
-msgstr ""
-
-#: class:Book id:248 type:name
-msgid "光影世界的冒险"
-msgstr ""
-
-#: class:Book id:249 type:name
-msgid "星空尽头的承诺"
-msgstr ""
-
-#: class:Book id:250 type:name
-msgid "时间裂隙中的幻影"
-msgstr ""
-
-#: class:Book id:251 type:name
-msgid "命运的时钟"
-msgstr ""
-
-#: class:Book id:252 type:name
-msgid "古老王朝的遗产"
-msgstr ""
-
-#: class:Book id:253 type:name
-msgid "星辰之路"
-msgstr ""
-
-#: class:Book id:254 type:name
-msgid "时光倒影中的守望者"
-msgstr ""
-
-#: class:Book id:255 type:name
-msgid "光与暗的边境"
-msgstr ""
-
-#: class:Book id:256 type:name
-msgid "命运航线"
-msgstr ""
-
-#: class:Book id:257 type:name
-msgid "黑夜中的微光"
-msgstr ""
-
-#: class:Book id:258 type:name
-msgid "沉寂星辰的苏醒"
-msgstr ""
-
-#: class:Book id:259 type:name
-msgid "远古森林的神秘传说"
-msgstr ""
-
-#: class:Book id:260 type:name
-msgid "光与影的神秘拼图"
-msgstr ""
-
-#: class:Book id:261 type:name
-msgid "时间深渊中的光芒"
-msgstr ""
-
-#: class:Book id:262 type:name
-msgid "命运星辰的指引"
-msgstr ""
-
-#: class:Book id:263 type:name
-msgid "失落之城的秘宝"
-msgstr ""
-
-#: class:Book id:264 type:name
-msgid "星空中的孤独守望者"
-msgstr ""
-
-#: class:Book id:265 type:name
-msgid "光影中的记忆"
-msgstr ""
-
-#: class:Book id:266 type:name
-msgid "时空迷途"
-msgstr ""
-
-#: class:Book id:267 type:name
-msgid "命运的彼岸"
-msgstr ""
-
-#: class:Book id:268 type:name
-msgid "古老传说的真相"
-msgstr ""
-
-#: class:Book id:269 type:name
-msgid "星辰下的征途"
-msgstr ""
-
-#: class:Book id:270 type:name
-msgid "梦境与现实的碰撞"
-msgstr ""
-
-#: class:Book id:271 type:name
-msgid "光芒消逝的边缘"
-msgstr ""
-
-#: class:Book id:272 type:name
-msgid "时间之外的守护者"
-msgstr ""
-
-#: class:Book id:273 type:name
-msgid "命运的终点"
-msgstr ""
-
-#: class:Book id:274 type:name
-msgid "黑暗森林中的指引"
-msgstr ""
-
-#: class:Book id:275 type:name
-msgid "远古国度的苏醒"
-msgstr ""
-
-#: class:Book id:276 type:name
-msgid "星空迷雾中的传奇"
-msgstr ""
-
-#: class:Book id:277 type:name
-msgid "光影交织的命运"
-msgstr ""
-
-#: class:Book id:278 type:name
-msgid "时空守护者的预言"
-msgstr ""
-
-#: class:Book id:279 type:name
-msgid "命运编织者的传承"
-msgstr ""
-
-#: class:Book id:280 type:name
-msgid "沉寂海洋的心跳"
-msgstr ""
-
-#: class:Book id:281 type:name
-msgid "星辰轨迹的记录"
-msgstr ""
-
-#: class:Book id:282 type:name
-msgid "光与影的冲突"
-msgstr ""
-
-#: class:Book id:283 type:name
-msgid "命运之石"
-msgstr ""
-
-#: class:Book id:284 type:name
-msgid "远古大陆的守护者"
-msgstr ""
-
-#: class:Book id:285 type:name
-msgid "时间轮回中的秘密"
-msgstr ""
-
-#: class:Book id:286 type:name
-msgid "黑夜之中的希望之光"
-msgstr ""
-
-#: class:Book id:287 type:name
-msgid "迷雾森林的古老传说"
-msgstr ""
-
-#: class:Book id:288 type:name
-msgid "星河守望"
-msgstr ""
-
-#: class:Book id:289 type:name
-msgid "梦境旅者的冒险"
-msgstr ""
-
-#: class:Book id:290 type:name
-msgid "光影之舞"
-msgstr ""
-
-#: class:Book id:291 type:name
-msgid "命运之子"
-msgstr ""
-
-#: class:Book id:292 type:name
-msgid "古老预言的实现"
-msgstr ""
-
-#: class:Book id:293 type:name
-msgid "时空裂缝的边缘"
-msgstr ""
-
-#: class:Book id:294 type:name
-msgid "远古之地的沉默"
-msgstr ""
-
-#: class:Book id:295 type:name
-msgid "光影交织的命运轨迹"
-msgstr ""
-
-#: class:Book id:296 type:name
-msgid "沉默的星际文明"
-msgstr ""
-
-#: class:Book id:297 type:name
-msgid "命运星辰的最后低语"
-msgstr ""
-
-#: class:Book id:298 type:name
-msgid "迷失在时间之旅"
-msgstr ""
-
-#: class:Book id:299 type:name
-msgid "星辰与时空的交汇"
-msgstr ""
-
-#: class:WeekDay id:0 type:name
-msgid "周一"
-msgstr ""
-
-#: class:WeekDay id:1 type:name
-msgid "周二"
-msgstr ""
-
-#: class:WeekDay id:2 type:name
-msgid "周三"
-msgstr ""
-
-#: class:WeekDay id:3 type:name
-msgid "周四"
-msgstr ""
-
-#: class:WeekDay id:4 type:name
-msgid "周五"
-msgstr ""
-
-#: class:WeekDay id:5 type:name
-msgid "周六"
-msgstr ""
-
-#: class:WeekDay id:6 type:name
-msgid "周日"
-msgstr ""
-
-#: class:CauseOfDeath id:0 type:name
-msgid "饿死"
-msgstr ""
-
-#: class:CauseOfDeath id:1 type:name
-msgid "渴死"
-msgstr ""
-
-#: class:CauseOfDeath id:2 type:name
-msgid "累死"
-msgstr ""
-
-#: class:CauseOfDeath id:3 type:name
-msgid "困死"
-msgstr ""
-
-#: class:CauseOfDeath id:4 type:name
-msgid "自杀"
+#: class:Weather id:7 type:info
+msgid "雪花纷飞"
 msgstr ""
 
 #: class:ClothingEvaluate id:0 type:name
@@ -4047,12 +2672,56 @@ msgstr ""
 msgid "传世的"
 msgstr ""
 
-#: class:SystemLanguage id:zh_CN type:name
-msgid "中文"
+#: class:ClothingType id:0 type:name
+msgid "外套"
 msgstr ""
 
-#: class:SystemLanguage id:en_US type:name
-msgid "英文"
+#: class:ClothingType id:1 type:name
+msgid "上衣"
+msgstr ""
+
+#: class:ClothingType id:2 type:name
+msgid "裤子"
+msgstr ""
+
+#: class:ClothingType id:3 type:name
+msgid "裙子"
+msgstr ""
+
+#: class:ClothingType id:4 type:name
+msgid "鞋子"
+msgstr ""
+
+#: class:ClothingType id:5 type:name
+msgid "袜子"
+msgstr ""
+
+#: class:ClothingType id:6 type:name
+msgid "胸罩"
+msgstr ""
+
+#: class:ClothingType id:7 type:name
+msgid "内裤"
+msgstr ""
+
+#: class:ChestTem id:0 type:info
+msgid "绝壁"
+msgstr ""
+
+#: class:ChestTem id:1 type:info
+msgid "贫乳"
+msgstr ""
+
+#: class:ChestTem id:2 type:info
+msgid "普通"
+msgstr ""
+
+#: class:ChestTem id:3 type:info
+msgid "巨乳"
+msgstr ""
+
+#: class:ChestTem id:4 type:info
+msgid "爆乳"
 msgstr ""
 
 #: class:Premise id:target_no_player type:premise
@@ -8184,192 +6853,16 @@ msgstr ""
 msgid "拥有足够买最贵的饮料的金钱"
 msgstr ""
 
-#: class:ClothingUseType id:0 type:name
-msgid "便服"
+#: class:StatureDescriptionText id:0 type:text
+msgid "这是一个与{NickName}同龄的小孩子，身材和体型都比较接近．"
 msgstr ""
 
-#: class:ClothingUseType id:1 type:name
-msgid "雨衣"
+#: class:StatureDescriptionText id:1 type:text
+msgid "{NickName}的身材即使是在同龄人中，也属于比较矮小的类型．"
 msgstr ""
 
-#: class:ClothingUseType id:2 type:name
-msgid "浴衣"
-msgstr ""
-
-#: class:ClothingUseType id:3 type:name
-msgid "泳衣"
-msgstr ""
-
-#: class:ClothingUseType id:4 type:name
-msgid "制服"
-msgstr ""
-
-#: class:ClothingUseType id:6 type:name
-msgid "情趣"
-msgstr ""
-
-#: class:SunTime id:0 type:name
-msgid "午夜"
-msgstr ""
-
-#: class:SunTime id:1 type:name
-msgid "凌晨"
-msgstr ""
-
-#: class:SunTime id:2 type:name
-msgid "拂晓"
-msgstr ""
-
-#: class:SunTime id:3 type:name
-msgid "黎明"
-msgstr ""
-
-#: class:SunTime id:4 type:name
-msgid "清晨"
-msgstr ""
-
-#: class:SunTime id:5 type:name
-msgid "早晨"
-msgstr ""
-
-#: class:SunTime id:6 type:name
-msgid "上午"
-msgstr ""
-
-#: class:SunTime id:7 type:name
-msgid "正午"
-msgstr ""
-
-#: class:SunTime id:8 type:name
-msgid "下午"
-msgstr ""
-
-#: class:SunTime id:9 type:name
-msgid "傍晚"
-msgstr ""
-
-#: class:SunTime id:10 type:name
-msgid "入夜"
-msgstr ""
-
-#: class:SunTime id:11 type:name
-msgid "深夜"
-msgstr ""
-
-#: class:Recipes id:0 type:name
-msgid "孜然排骨"
-msgstr ""
-
-#: class:Recipes id:1 type:name
-msgid "韭菜花炒甜不辣"
-msgstr ""
-
-#: class:Recipes id:2 type:name
-msgid "甜酸罗非鱼块"
-msgstr ""
-
-#: class:Recipes id:3 type:name
-msgid "醉炒冬粉"
-msgstr ""
-
-#: class:Recipes id:4 type:name
-msgid "卤鸭脖"
-msgstr ""
-
-#: class:Recipes id:5 type:name
-msgid "酥炸鲜肉藕盒"
-msgstr ""
-
-#: class:Recipes id:6 type:name
-msgid "米饭"
-msgstr ""
-
-#: class:Recipes id:7 type:name
-msgid "蜂蜜炸鸡"
-msgstr ""
-
-#: class:Recipes id:8 type:name
-msgid "芙蓉豆腐"
-msgstr ""
-
-#: class:Recipes id:9 type:name
-msgid "焗烤排骨"
-msgstr ""
-
-#: class:Recipes id:10 type:name
-msgid "西葫芦炒牛肉"
-msgstr ""
-
-#: class:Recipes id:11 type:name
-msgid "西葫芦炒虾仁"
-msgstr ""
-
-#: class:Recipes id:12 type:name
-msgid "麻婆豆腐"
-msgstr ""
-
-#: class:Recipes id:13 type:name
-msgid "红烧排骨"
-msgstr ""
-
-#: class:Recipes id:14 type:name
-msgid "红烧肉"
-msgstr ""
-
-#: class:Recipes id:15 type:name
-msgid "苹果汁"
-msgstr ""
-
-#: class:Recipes id:16 type:name
-msgid "梨子汁"
-msgstr ""
-
-#: class:Recipes id:17 type:name
-msgid "橘子汁"
-msgstr ""
-
-#: class:Recipes id:18 type:name
-msgid "桃子汁"
-msgstr ""
-
-#: class:Recipes id:19 type:name
-msgid "菠萝汁"
-msgstr ""
-
-#: class:Recipes id:20 type:name
-msgid "柚子汁"
-msgstr ""
-
-#: class:Recipes id:21 type:name
-msgid "猕猴桃汁"
-msgstr ""
-
-#: class:Recipes id:22 type:name
-msgid "黄瓜汁"
-msgstr ""
-
-#: class:Organ id:0 type:name
-msgid "嘴"
-msgstr ""
-
-#: class:Organ id:1 type:name
-msgid "胸"
-msgstr ""
-
-#: class:Organ id:2 type:name
-msgid "阴蒂"
-msgstr ""
-
-#: class:Organ id:3 type:name
-msgid "阴茎"
-msgstr ""
-
-#: class:Organ id:4 type:name
-msgid "阴道"
-msgstr ""
-
-#: class:Organ id:5 type:name
-msgid "肛门"
+#: class:StatureDescriptionText id:2 type:text
+msgid "与同龄人没什么区别，平平无奇．"
 msgstr ""
 
 #: class:Knowledge id:0 type:name
@@ -8408,8 +6901,16 @@ msgstr ""
 msgid "信仰"
 msgstr ""
 
+#: class:Knowledge id:9 type:name
+msgid "性爱"
+msgstr ""
+
 #: class:Knowledge id:10 type:name
 msgid "计算机"
+msgstr ""
+
+#: class:Knowledge id:11 type:name
+msgid "表演"
 msgstr ""
 
 #: class:Knowledge id:12 type:name
@@ -8616,244 +7117,1468 @@ msgstr ""
 msgid "仪式学"
 msgstr ""
 
-#: class:Course id:0 type:name
-msgid "语言文学课"
+#: class:SystemLanguage id:zh_CN type:name
+msgid "中文"
 msgstr ""
 
-#: class:Course id:1 type:name
-msgid "数学课"
+#: class:SystemLanguage id:en_US type:name
+msgid "英文"
 msgstr ""
 
-#: class:Course id:2 type:name
-msgid "英语课"
+#: class:WeekDay id:0 type:name
+msgid "周一"
 msgstr ""
 
-#: class:Course id:3 type:name
-msgid "信息技术课"
+#: class:WeekDay id:1 type:name
+msgid "周二"
 msgstr ""
 
-#: class:Course id:4 type:name
-msgid "美术课"
+#: class:WeekDay id:2 type:name
+msgid "周三"
 msgstr ""
 
-#: class:Course id:5 type:name
-msgid "音乐课"
+#: class:WeekDay id:3 type:name
+msgid "周四"
 msgstr ""
 
-#: class:Course id:6 type:name
-msgid "体育课"
+#: class:WeekDay id:4 type:name
+msgid "周五"
 msgstr ""
 
-#: class:Course id:7 type:name
-msgid "思想品德课"
+#: class:WeekDay id:5 type:name
+msgid "周六"
 msgstr ""
 
-#: class:Course id:8 type:name
-msgid "健康教育课"
+#: class:WeekDay id:6 type:name
+msgid "周日"
 msgstr ""
 
-#: class:Course id:9 type:name
-msgid "自然课"
+#: class:ClothingUseType id:0 type:name
+msgid "便服"
 msgstr ""
 
-#: class:Course id:10 type:name
-msgid "社会课"
+#: class:ClothingUseType id:1 type:name
+msgid "雨衣"
 msgstr ""
 
-#: class:Course id:11 type:name
-msgid "历史课"
+#: class:ClothingUseType id:2 type:name
+msgid "浴衣"
 msgstr ""
 
-#: class:Course id:12 type:name
-msgid "生物课"
+#: class:ClothingUseType id:3 type:name
+msgid "泳衣"
 msgstr ""
 
-#: class:Course id:13 type:name
-msgid "地理课"
+#: class:ClothingUseType id:4 type:name
+msgid "制服"
 msgstr ""
 
-#: class:Course id:14 type:name
-msgid "物理课"
+#: class:ClothingUseType id:6 type:name
+msgid "情趣"
 msgstr ""
 
-#: class:Course id:15 type:name
-msgid "化学课"
+#: class:DebugInstructType id:0 type:name
+msgid "默认"
 msgstr ""
 
-#: class:Course id:16 type:name
-msgid "舞蹈课"
+#: class:NatureTag id:0 type:good
+msgid "外向"
 msgstr ""
 
-#: class:Course id:17 type:name
-msgid "游泳课"
+#: class:NatureTag id:0 type:bad
+msgid "内向"
 msgstr ""
 
-#: class:SolarPeriod id:0 type:name
-msgid "春分"
+#: class:NatureTag id:1 type:good
+msgid "善良"
 msgstr ""
 
-#: class:SolarPeriod id:1 type:name
-msgid "清明"
+#: class:NatureTag id:1 type:bad
+msgid "邪恶"
 msgstr ""
 
-#: class:SolarPeriod id:2 type:name
-msgid "谷雨"
+#: class:NatureTag id:2 type:good
+msgid "实诚"
 msgstr ""
 
-#: class:SolarPeriod id:3 type:name
-msgid "立夏"
+#: class:NatureTag id:2 type:bad
+msgid "懒散"
 msgstr ""
 
-#: class:SolarPeriod id:4 type:name
-msgid "小满"
+#: class:NatureTag id:3 type:good
+msgid "刚毅"
 msgstr ""
 
-#: class:SolarPeriod id:5 type:name
-msgid "芒种"
+#: class:NatureTag id:3 type:bad
+msgid "柔寡"
 msgstr ""
 
-#: class:SolarPeriod id:6 type:name
-msgid "夏至"
+#: class:NatureTag id:4 type:good
+msgid "爽朗"
 msgstr ""
 
-#: class:SolarPeriod id:7 type:name
-msgid "小暑"
+#: class:NatureTag id:4 type:bad
+msgid "忧郁"
 msgstr ""
 
-#: class:SolarPeriod id:8 type:name
-msgid "大暑"
+#: class:NatureTag id:5 type:good
+msgid "热忱"
 msgstr ""
 
-#: class:SolarPeriod id:9 type:name
-msgid "立秋"
+#: class:NatureTag id:5 type:bad
+msgid "冷傲"
 msgstr ""
 
-#: class:SolarPeriod id:10 type:name
-msgid "处暑"
+#: class:NatureTag id:6 type:good
+msgid "自负"
 msgstr ""
 
-#: class:SolarPeriod id:11 type:name
-msgid "白露"
+#: class:NatureTag id:6 type:bad
+msgid "自谦"
 msgstr ""
 
-#: class:SolarPeriod id:12 type:name
-msgid "秋分"
+#: class:Book id:0 type:name
+msgid "梦境拾荒者"
 msgstr ""
 
-#: class:SolarPeriod id:13 type:name
-msgid "寒露"
+#: class:Book id:1 type:name
+msgid "星空下的守护者"
 msgstr ""
 
-#: class:SolarPeriod id:14 type:name
-msgid "霜降"
+#: class:Book id:2 type:name
+msgid "月光古道"
 msgstr ""
 
-#: class:SolarPeriod id:15 type:name
-msgid "立冬"
+#: class:Book id:3 type:name
+msgid "时间的倒影"
 msgstr ""
 
-#: class:SolarPeriod id:16 type:name
-msgid "小雪"
+#: class:Book id:4 type:name
+msgid "异世旅人的笔记"
 msgstr ""
 
-#: class:SolarPeriod id:17 type:name
-msgid "大雪"
+#: class:Book id:5 type:name
+msgid "沙漏中的城堡"
 msgstr ""
 
-#: class:SolarPeriod id:18 type:name
-msgid "冬至"
+#: class:Book id:6 type:name
+msgid "破碎的镜子"
 msgstr ""
 
-#: class:SolarPeriod id:19 type:name
-msgid "小寒"
+#: class:Book id:7 type:name
+msgid "光与影的交错"
 msgstr ""
 
-#: class:SolarPeriod id:20 type:name
-msgid "大寒"
+#: class:Book id:8 type:name
+msgid "永夜的边缘"
 msgstr ""
 
-#: class:SolarPeriod id:21 type:name
-msgid "立春"
+#: class:Book id:9 type:name
+msgid "风暴中的寂静"
 msgstr ""
 
-#: class:SolarPeriod id:22 type:name
-msgid "雨水"
+#: class:Book id:10 type:name
+msgid "森林深处的秘密"
 msgstr ""
 
-#: class:SolarPeriod id:23 type:name
-msgid "惊蛰"
+#: class:Book id:11 type:name
+msgid "天外来客"
 msgstr ""
 
-#: class:Identity id:0 type:name
-msgid "学生"
+#: class:Book id:12 type:name
+msgid "迷失在记忆中的人"
 msgstr ""
 
-#: class:Identity id:1 type:name
-msgid "老师"
+#: class:Book id:13 type:name
+msgid "冰封之海"
 msgstr ""
 
-#: class:Identity id:2 type:name
-msgid "社团成员"
+#: class:Book id:14 type:name
+msgid "星辰之舞"
 msgstr ""
 
-#: class:Weather id:0 type:name
-msgid "多云"
+#: class:Book id:15 type:name
+msgid "远古神祇的回响"
 msgstr ""
 
-#: class:Weather id:0 type:info
-msgid "云层遮蔽了天空"
+#: class:Book id:16 type:name
+msgid "烈焰与寒霜"
 msgstr ""
 
-#: class:Weather id:1 type:name
-msgid "暴雨"
+#: class:Book id:17 type:name
+msgid "梦与现实的边界"
 msgstr ""
 
-#: class:Weather id:1 type:info
-msgid "大雨倾盆"
+#: class:Book id:18 type:name
+msgid "黑暗中的微光"
 msgstr ""
 
-#: class:Weather id:2 type:name
-msgid "雨"
+#: class:Book id:19 type:name
+msgid "荒野中的孤独旅者"
 msgstr ""
 
-#: class:Weather id:2 type:info
-msgid "雨势绵绵"
+#: class:Book id:20 type:name
+msgid "月影湖畔的传说"
 msgstr ""
 
-#: class:Weather id:3 type:name
-msgid "小雨"
+#: class:Book id:21 type:name
+msgid "迷雾森林的呼唤"
 msgstr ""
 
-#: class:Weather id:3 type:info
-msgid "雨水稀稀拉拉的落下了"
+#: class:Book id:22 type:name
+msgid "沉睡的古老王国"
 msgstr ""
 
-#: class:Weather id:4 type:name
-msgid "雷雨"
+#: class:Book id:23 type:name
+msgid "时间裂缝中的旅程"
 msgstr ""
 
-#: class:Weather id:4 type:info
-msgid "打雷了"
+#: class:Book id:24 type:name
+msgid "永恒之塔"
 msgstr ""
 
-#: class:Weather id:5 type:name
-msgid "晴"
+#: class:Book id:25 type:name
+msgid "无尽之海"
 msgstr ""
 
-#: class:Weather id:5 type:info
-msgid "天放晴了"
+#: class:Book id:26 type:name
+msgid "光芒背后的秘密"
 msgstr ""
 
-#: class:Weather id:6 type:name
-msgid "雨夹雪"
+#: class:Book id:27 type:name
+msgid "流浪者的最后一站"
 msgstr ""
 
-#: class:Weather id:6 type:info
-msgid "雨雪交加"
+#: class:Book id:28 type:name
+msgid "命运之轮"
 msgstr ""
 
-#: class:Weather id:7 type:info
-msgid "雪花纷飞"
+#: class:Book id:29 type:name
+msgid "幻境之钥"
+msgstr ""
+
+#: class:Book id:30 type:name
+msgid "时光交错"
+msgstr ""
+
+#: class:Book id:31 type:name
+msgid "暗影中的盟约"
+msgstr ""
+
+#: class:Book id:32 type:name
+msgid "晨曦中的誓言"
+msgstr ""
+
+#: class:Book id:33 type:name
+msgid "星河远征"
+msgstr ""
+
+#: class:Book id:34 type:name
+msgid "失落的文明"
+msgstr ""
+
+#: class:Book id:35 type:name
+msgid "永恒的守望者"
+msgstr ""
+
+#: class:Book id:36 type:name
+msgid "黎明前的低语"
+msgstr ""
+
+#: class:Book id:37 type:name
+msgid "火焰中的不朽"
+msgstr ""
+
+#: class:Book id:38 type:name
+msgid "月色下的追忆"
+msgstr ""
+
+#: class:Book id:39 type:name
+msgid "尘埃中的花朵"
+msgstr ""
+
+#: class:Book id:40 type:name
+msgid "永恒之书"
+msgstr ""
+
+#: class:Book id:41 type:name
+msgid "命运的裂痕"
+msgstr ""
+
+#: class:Book id:42 type:name
+msgid "星际探索者"
+msgstr ""
+
+#: class:Book id:43 type:name
+msgid "记忆中的彼岸"
+msgstr ""
+
+#: class:Book id:44 type:name
+msgid "末日之后的世界"
+msgstr ""
+
+#: class:Book id:45 type:name
+msgid "光影交织的旅途"
+msgstr ""
+
+#: class:Book id:46 type:name
+msgid "沉默的星辰"
+msgstr ""
+
+#: class:Book id:47 type:name
+msgid "烈焰中的星火"
+msgstr ""
+
+#: class:Book id:48 type:name
+msgid "逐梦者的传说"
+msgstr ""
+
+#: class:Book id:49 type:name
+msgid "无限循环"
+msgstr ""
+
+#: class:Book id:50 type:name
+msgid "星辰之门"
+msgstr ""
+
+#: class:Book id:51 type:name
+msgid "远古王国的秘密"
+msgstr ""
+
+#: class:Book id:52 type:name
+msgid "黎明之后的黑暗"
+msgstr ""
+
+#: class:Book id:53 type:name
+msgid "命运交汇"
+msgstr ""
+
+#: class:Book id:54 type:name
+msgid "失落的钥匙"
+msgstr ""
+
+#: class:Book id:55 type:name
+msgid "时空之旅"
+msgstr ""
+
+#: class:Book id:56 type:name
+msgid "破碎的幻想"
+msgstr ""
+
+#: class:Book id:57 type:name
+msgid "迷雾中的足迹"
+msgstr ""
+
+#: class:Book id:58 type:name
+msgid "时间尽头的守望"
+msgstr ""
+
+#: class:Book id:59 type:name
+msgid "寂静深渊"
+msgstr ""
+
+#: class:Book id:60 type:name
+msgid "暗影之下的城堡"
+msgstr ""
+
+#: class:Book id:61 type:name
+msgid "星海迷途"
+msgstr ""
+
+#: class:Book id:62 type:name
+msgid "风暴之子"
+msgstr ""
+
+#: class:Book id:63 type:name
+msgid "古老誓言的复苏"
+msgstr ""
+
+#: class:Book id:64 type:name
+msgid "夜幕中的火光"
+msgstr ""
+
+#: class:Book id:65 type:name
+msgid "命运使者"
+msgstr ""
+
+#: class:Book id:66 type:name
+msgid "天际的呼唤"
+msgstr ""
+
+#: class:Book id:67 type:name
+msgid "梦中的王国"
+msgstr ""
+
+#: class:Book id:68 type:name
+msgid "时光流逝的痕迹"
+msgstr ""
+
+#: class:Book id:69 type:name
+msgid "永夜长歌"
+msgstr ""
+
+#: class:Book id:70 type:name
+msgid "星辰中的神秘岛"
+msgstr ""
+
+#: class:Book id:71 type:name
+msgid "幻境迷宫"
+msgstr ""
+
+#: class:Book id:72 type:name
+msgid "命运的羁绊"
+msgstr ""
+
+#: class:Book id:73 type:name
+msgid "沉睡的古树"
+msgstr ""
+
+#: class:Book id:74 type:name
+msgid "天际尽头的灯塔"
+msgstr ""
+
+#: class:Book id:75 type:name
+msgid "穿越时间的旅者"
+msgstr ""
+
+#: class:Book id:76 type:name
+msgid "星河彼岸"
+msgstr ""
+
+#: class:Book id:77 type:name
+msgid "梦境中的预言"
+msgstr ""
+
+#: class:Book id:78 type:name
+msgid "迷雾笼罩的遗迹"
+msgstr ""
+
+#: class:Book id:79 type:name
+msgid "尘世之外"
+msgstr ""
+
+#: class:Book id:80 type:name
+msgid "光影交织的回忆"
+msgstr ""
+
+#: class:Book id:81 type:name
+msgid "时空守护者"
+msgstr ""
+
+#: class:Book id:82 type:name
+msgid "星际航行日志"
+msgstr ""
+
+#: class:Book id:83 type:name
+msgid "命运之海"
+msgstr ""
+
+#: class:Book id:84 type:name
+msgid "破晓之时"
+msgstr ""
+
+#: class:Book id:85 type:name
+msgid "永恒的契约"
+msgstr ""
+
+#: class:Book id:86 type:name
+msgid "迷失的星辰"
+msgstr ""
+
+#: class:Book id:87 type:name
+msgid "梦中沉睡的巨龙"
+msgstr ""
+
+#: class:Book id:88 type:name
+msgid "无尽时空的守望"
+msgstr ""
+
+#: class:Book id:89 type:name
+msgid "夜空中的最后一颗星"
+msgstr ""
+
+#: class:Book id:90 type:name
+msgid "命运之门"
+msgstr ""
+
+#: class:Book id:91 type:name
+msgid "失落的预言"
+msgstr ""
+
+#: class:Book id:92 type:name
+msgid "星际边界"
+msgstr ""
+
+#: class:Book id:93 type:name
+msgid "光与暗的轮舞"
+msgstr ""
+
+#: class:Book id:94 type:name
+msgid "时光之眼"
+msgstr ""
+
+#: class:Book id:95 type:name
+msgid "幻境旅者"
+msgstr ""
+
+#: class:Book id:96 type:name
+msgid "命运轮回"
+msgstr ""
+
+#: class:Book id:97 type:name
+msgid "沉寂的王座"
+msgstr ""
+
+#: class:Book id:98 type:name
+msgid "星空尽头的希望"
+msgstr ""
+
+#: class:Book id:99 type:name
+msgid "远古遗迹的守护者"
+msgstr ""
+
+#: class:Book id:100 type:name
+msgid "日暮的神秘湖"
+msgstr ""
+
+#: class:Book id:101 type:name
+msgid "星火照亮的长夜"
+msgstr ""
+
+#: class:Book id:102 type:name
+msgid "时间隧道中的回忆"
+msgstr ""
+
+#: class:Book id:103 type:name
+msgid "魔法学院的秘密档案"
+msgstr ""
+
+#: class:Book id:104 type:name
+msgid "古老神庙的回声"
+msgstr ""
+
+#: class:Book id:105 type:name
+msgid "月影森林的守护者"
+msgstr ""
+
+#: class:Book id:106 type:name
+msgid "天幕之上的城堡"
+msgstr ""
+
+#: class:Book id:107 type:name
+msgid "星辰的编织者"
+msgstr ""
+
+#: class:Book id:108 type:name
+msgid "深海之下的囚徒"
+msgstr ""
+
+#: class:Book id:109 type:name
+msgid "遗忘之地的光明"
+msgstr ""
+
+#: class:Book id:110 type:name
+msgid "命运的齿轮"
+msgstr ""
+
+#: class:Book id:111 type:name
+msgid "荒野中的魔法师"
+msgstr ""
+
+#: class:Book id:112 type:name
+msgid "水晶山脉的传说"
+msgstr ""
+
+#: class:Book id:113 type:name
+msgid "梦幻岛的最后一战"
+msgstr ""
+
+#: class:Book id:114 type:name
+msgid "时间之镜"
+msgstr ""
+
+#: class:Book id:115 type:name
+msgid "光影之间的追寻"
+msgstr ""
+
+#: class:Book id:116 type:name
+msgid "永夜的守护者"
+msgstr ""
+
+#: class:Book id:117 type:name
+msgid "群星下的遗迹"
+msgstr ""
+
+#: class:Book id:118 type:name
+msgid "无尽沙漠中的绿洲"
+msgstr ""
+
+#: class:Book id:119 type:name
+msgid "月光下的迷踪"
+msgstr ""
+
+#: class:Book id:120 type:name
+msgid "时光中的追忆者"
+msgstr ""
+
+#: class:Book id:121 type:name
+msgid "远古文明的终焉"
+msgstr ""
+
+#: class:Book id:122 type:name
+msgid "晨星的指引"
+msgstr ""
+
+#: class:Book id:123 type:name
+msgid "光之国度"
+msgstr ""
+
+#: class:Book id:124 type:name
+msgid "尘埃中的黄金城"
+msgstr ""
+
+#: class:Book id:125 type:name
+msgid "梦境编织者"
+msgstr ""
+
+#: class:Book id:126 type:name
+msgid "永恒国度的旅人"
+msgstr ""
+
+#: class:Book id:127 type:name
+msgid "失落之城的守护者"
+msgstr ""
+
+#: class:Book id:128 type:name
+msgid "群星之间的命运"
+msgstr ""
+
+#: class:Book id:129 type:name
+msgid "时间尽头的光芒"
+msgstr ""
+
+#: class:Book id:130 type:name
+msgid "黎明前的守望"
+msgstr ""
+
+#: class:Book id:131 type:name
+msgid "黑暗中的余辉"
+msgstr ""
+
+#: class:Book id:132 type:name
+msgid "遗忘之书"
+msgstr ""
+
+#: class:Book id:133 type:name
+msgid "命运的交响曲"
+msgstr ""
+
+#: class:Book id:134 type:name
+msgid "失落的边境"
+msgstr ""
+
+#: class:Book id:135 type:name
+msgid "深渊中的黎明"
+msgstr ""
+
+#: class:Book id:136 type:name
+msgid "星辰的守护"
+msgstr ""
+
+#: class:Book id:137 type:name
+msgid "古老预言的复苏"
+msgstr ""
+
+#: class:Book id:138 type:name
+msgid "天际之外的秘境"
+msgstr ""
+
+#: class:Book id:139 type:name
+msgid "永恒之岛"
+msgstr ""
+
+#: class:Book id:140 type:name
+msgid "梦幻城的传说"
+msgstr ""
+
+#: class:Book id:141 type:name
+msgid "时间裂隙中的光"
+msgstr ""
+
+#: class:Book id:142 type:name
+msgid "光与影的边界"
+msgstr ""
+
+#: class:Book id:143 type:name
+msgid "星河探险者"
+msgstr ""
+
+#: class:Book id:144 type:name
+msgid "命运的暗涌"
+msgstr ""
+
+#: class:Book id:145 type:name
+msgid "迷雾中的微光"
+msgstr ""
+
+#: class:Book id:146 type:name
+msgid "远古王国的传承"
+msgstr ""
+
+#: class:Book id:147 type:name
+msgid "无尽航线"
+msgstr ""
+
+#: class:Book id:148 type:name
+msgid "星际冒险录"
+msgstr ""
+
+#: class:Book id:149 type:name
+msgid "时间长廊的守卫者"
+msgstr ""
+
+#: class:Book id:150 type:name
+msgid "夜幕降临时"
+msgstr ""
+
+#: class:Book id:151 type:name
+msgid "破碎的星辰"
+msgstr ""
+
+#: class:Book id:152 type:name
+msgid "命运的交错"
+msgstr ""
+
+#: class:Book id:153 type:name
+msgid "光明与黑暗的契约"
+msgstr ""
+
+#: class:Book id:154 type:name
+msgid "时间之轮的回转"
+msgstr ""
+
+#: class:Book id:155 type:name
+msgid "星空之下的秘密"
+msgstr ""
+
+#: class:Book id:156 type:name
+msgid "远古守望者的觉醒"
+msgstr ""
+
+#: class:Book id:157 type:name
+msgid "光与影的轮舞"
+msgstr ""
+
+#: class:Book id:158 type:name
+msgid "命运交织的时空"
+msgstr ""
+
+#: class:Book id:159 type:name
+msgid "沉睡的海洋之心"
+msgstr ""
+
+#: class:Book id:160 type:name
+msgid "星辰之下的诺言"
+msgstr ""
+
+#: class:Book id:161 type:name
+msgid "时光中的魔法"
+msgstr ""
+
+#: class:Book id:162 type:name
+msgid "永恒光辉的守望"
+msgstr ""
+
+#: class:Book id:163 type:name
+msgid "迷失在星际的旅程"
+msgstr ""
+
+#: class:Book id:164 type:name
+msgid "梦境与现实的交汇"
+msgstr ""
+
+#: class:Book id:165 type:name
+msgid "时空之门"
+msgstr ""
+
+#: class:Book id:166 type:name
+msgid "命运的旅者"
+msgstr ""
+
+#: class:Book id:167 type:name
+msgid "黑暗中的光明"
+msgstr ""
+
+#: class:Book id:168 type:name
+msgid "星际航行者的遗失日记"
+msgstr ""
+
+#: class:Book id:169 type:name
+msgid "时光尽头的岛屿"
+msgstr ""
+
+#: class:Book id:170 type:name
+msgid "古老神殿的守护者"
+msgstr ""
+
+#: class:Book id:171 type:name
+msgid "星空尽头的旅程"
+msgstr ""
+
+#: class:Book id:172 type:name
+msgid "梦中的古老预言"
+msgstr ""
+
+#: class:Book id:173 type:name
+msgid "永恒的誓言"
+msgstr ""
+
+#: class:Book id:174 type:name
+msgid "迷雾中的秘密"
+msgstr ""
+
+#: class:Book id:175 type:name
+msgid "光影交错的传说"
+msgstr ""
+
+#: class:Book id:176 type:name
+msgid "时间之外的世界"
+msgstr ""
+
+#: class:Book id:177 type:name
+msgid "沉默的星空"
+msgstr ""
+
+#: class:Book id:178 type:name
+msgid "命运之环"
+msgstr ""
+
+#: class:Book id:179 type:name
+msgid "远古王朝的消逝"
+msgstr ""
+
+#: class:Book id:180 type:name
+msgid "时间碎片中的记忆"
+msgstr ""
+
+#: class:Book id:181 type:name
+msgid "星空下的冒险"
+msgstr ""
+
+#: class:Book id:182 type:name
+msgid "破碎的梦境"
+msgstr ""
+
+#: class:Book id:183 type:name
+msgid "光芒与黑暗的边界"
+msgstr ""
+
+#: class:Book id:184 type:name
+msgid "命运编织者"
+msgstr ""
+
+#: class:Book id:185 type:name
+msgid "深海中的沉睡者"
+msgstr ""
+
+#: class:Book id:186 type:name
+msgid "星辰交织的轨迹"
+msgstr ""
+
+#: class:Book id:187 type:name
+msgid "远古战场的回响"
+msgstr ""
+
+#: class:Book id:188 type:name
+msgid "时间尽头的守护者"
+msgstr ""
+
+#: class:Book id:189 type:name
+msgid "光与影的终极对决"
+msgstr ""
+
+#: class:Book id:190 type:name
+msgid "命运交错的国度"
+msgstr ""
+
+#: class:Book id:191 type:name
+msgid "黑夜中的希望"
+msgstr ""
+
+#: class:Book id:192 type:name
+msgid "远古传承的遗失宝藏"
+msgstr ""
+
+#: class:Book id:193 type:name
+msgid "时空之旅的终点"
+msgstr ""
+
+#: class:Book id:194 type:name
+msgid "星空彼岸的奇迹"
+msgstr ""
+
+#: class:Book id:195 type:name
+msgid "梦中的光芒"
+msgstr ""
+
+#: class:Book id:196 type:name
+msgid "光与影的终章"
+msgstr ""
+
+#: class:Book id:197 type:name
+msgid "时间的钥匙"
+msgstr ""
+
+#: class:Book id:198 type:name
+msgid "迷失的星球"
+msgstr ""
+
+#: class:Book id:199 type:name
+msgid "命运与时间的羁绊"
+msgstr ""
+
+#: class:Book id:200 type:name
+msgid "星空之下的秘密通道"
+msgstr ""
+
+#: class:Book id:201 type:name
+msgid "梦境之门"
+msgstr ""
+
+#: class:Book id:202 type:name
+msgid "命运编年史"
+msgstr ""
+
+#: class:Book id:203 type:name
+msgid "光影交错的神话"
+msgstr ""
+
+#: class:Book id:204 type:name
+msgid "时间之环"
+msgstr ""
+
+#: class:Book id:205 type:name
+msgid "永夜中的星光"
+msgstr ""
+
+#: class:Book id:206 type:name
+msgid "失落的魔法国度"
+msgstr ""
+
+#: class:Book id:207 type:name
+msgid "远古之力的觉醒"
+msgstr ""
+
+#: class:Book id:208 type:name
+msgid "黑暗中的火种"
+msgstr ""
+
+#: class:Book id:209 type:name
+msgid "星际遗迹的发现"
+msgstr ""
+
+#: class:Book id:210 type:name
+msgid "命运书写者"
+msgstr ""
+
+#: class:Book id:211 type:name
+msgid "时间之外的故事"
+msgstr ""
+
+#: class:Book id:212 type:name
+msgid "群星之间的低语"
+msgstr ""
+
+#: class:Book id:213 type:name
+msgid "梦中的命运"
+msgstr ""
+
+#: class:Book id:214 type:name
+msgid "光与暗的轮回"
+msgstr ""
+
+#: class:Book id:215 type:name
+msgid "沉寂森林的低语"
+msgstr ""
+
+#: class:Book id:216 type:name
+msgid "远古遗迹的钥匙"
+msgstr ""
+
+#: class:Book id:217 type:name
+msgid "星光指引的道路"
+msgstr ""
+
+#: class:Book id:218 type:name
+msgid "时间尽头的启示"
+msgstr ""
+
+#: class:Book id:219 type:name
+msgid "命运与星辰的共鸣"
+msgstr ""
+
+#: class:Book id:220 type:name
+msgid "失落文明的呼唤"
+msgstr ""
+
+#: class:Book id:221 type:name
+msgid "光影交织的梦境"
+msgstr ""
+
+#: class:Book id:222 type:name
+msgid "迷失在时间之海"
+msgstr ""
+
+#: class:Book id:223 type:name
+msgid "群星中的孤独旅者"
+msgstr ""
+
+#: class:Book id:224 type:name
+msgid "永恒之书的传承"
+msgstr ""
+
+#: class:Book id:225 type:name
+msgid "命运守望者"
+msgstr ""
+
+#: class:Book id:226 type:name
+msgid "时空裂缝中的回声"
+msgstr ""
+
+#: class:Book id:227 type:name
+msgid "古老誓言的守护"
+msgstr ""
+
+#: class:Book id:228 type:name
+msgid "远古神祇的记忆"
+msgstr ""
+
+#: class:Book id:229 type:name
+msgid "星辰与命运的羁绊"
+msgstr ""
+
+#: class:Book id:230 type:name
+msgid "时间迷宫"
+msgstr ""
+
+#: class:Book id:231 type:name
+msgid "沉睡在梦中的巨兽"
+msgstr ""
+
+#: class:Book id:232 type:name
+msgid "光芒与影子的编织者"
+msgstr ""
+
+#: class:Book id:233 type:name
+msgid "命运的远航"
+msgstr ""
+
+#: class:Book id:234 type:name
+msgid "破碎之城的传奇"
+msgstr ""
+
+#: class:Book id:235 type:name
+msgid "时空之外的彼岸"
+msgstr ""
+
+#: class:Book id:236 type:name
+msgid "迷雾中的光辉"
+msgstr ""
+
+#: class:Book id:237 type:name
+msgid "永恒国度的秘密档案"
+msgstr ""
+
+#: class:Book id:238 type:name
+msgid "星际冒险日志"
+msgstr ""
+
+#: class:Book id:239 type:name
+msgid "命运的星辰之舞"
+msgstr ""
+
+#: class:Book id:240 type:name
+msgid "时间的守护者"
+msgstr ""
+
+#: class:Book id:241 type:name
+msgid "黑暗深渊的回音"
+msgstr ""
+
+#: class:Book id:242 type:name
+msgid "远古遗失之地"
+msgstr ""
+
+#: class:Book id:243 type:name
+msgid "光影之间的故事"
+msgstr ""
+
+#: class:Book id:244 type:name
+msgid "时空交汇的奇迹"
+msgstr ""
+
+#: class:Book id:245 type:name
+msgid "命运交织的命题"
+msgstr ""
+
+#: class:Book id:246 type:name
+msgid "失落的星辰之城"
+msgstr ""
+
+#: class:Book id:247 type:name
+msgid "梦境编年史"
+msgstr ""
+
+#: class:Book id:248 type:name
+msgid "光影世界的冒险"
+msgstr ""
+
+#: class:Book id:249 type:name
+msgid "星空尽头的承诺"
+msgstr ""
+
+#: class:Book id:250 type:name
+msgid "时间裂隙中的幻影"
+msgstr ""
+
+#: class:Book id:251 type:name
+msgid "命运的时钟"
+msgstr ""
+
+#: class:Book id:252 type:name
+msgid "古老王朝的遗产"
+msgstr ""
+
+#: class:Book id:253 type:name
+msgid "星辰之路"
+msgstr ""
+
+#: class:Book id:254 type:name
+msgid "时光倒影中的守望者"
+msgstr ""
+
+#: class:Book id:255 type:name
+msgid "光与暗的边境"
+msgstr ""
+
+#: class:Book id:256 type:name
+msgid "命运航线"
+msgstr ""
+
+#: class:Book id:257 type:name
+msgid "黑夜中的微光"
+msgstr ""
+
+#: class:Book id:258 type:name
+msgid "沉寂星辰的苏醒"
+msgstr ""
+
+#: class:Book id:259 type:name
+msgid "远古森林的神秘传说"
+msgstr ""
+
+#: class:Book id:260 type:name
+msgid "光与影的神秘拼图"
+msgstr ""
+
+#: class:Book id:261 type:name
+msgid "时间深渊中的光芒"
+msgstr ""
+
+#: class:Book id:262 type:name
+msgid "命运星辰的指引"
+msgstr ""
+
+#: class:Book id:263 type:name
+msgid "失落之城的秘宝"
+msgstr ""
+
+#: class:Book id:264 type:name
+msgid "星空中的孤独守望者"
+msgstr ""
+
+#: class:Book id:265 type:name
+msgid "光影中的记忆"
+msgstr ""
+
+#: class:Book id:266 type:name
+msgid "时空迷途"
+msgstr ""
+
+#: class:Book id:267 type:name
+msgid "命运的彼岸"
+msgstr ""
+
+#: class:Book id:268 type:name
+msgid "古老传说的真相"
+msgstr ""
+
+#: class:Book id:269 type:name
+msgid "星辰下的征途"
+msgstr ""
+
+#: class:Book id:270 type:name
+msgid "梦境与现实的碰撞"
+msgstr ""
+
+#: class:Book id:271 type:name
+msgid "光芒消逝的边缘"
+msgstr ""
+
+#: class:Book id:272 type:name
+msgid "时间之外的守护者"
+msgstr ""
+
+#: class:Book id:273 type:name
+msgid "命运的终点"
+msgstr ""
+
+#: class:Book id:274 type:name
+msgid "黑暗森林中的指引"
+msgstr ""
+
+#: class:Book id:275 type:name
+msgid "远古国度的苏醒"
+msgstr ""
+
+#: class:Book id:276 type:name
+msgid "星空迷雾中的传奇"
+msgstr ""
+
+#: class:Book id:277 type:name
+msgid "光影交织的命运"
+msgstr ""
+
+#: class:Book id:278 type:name
+msgid "时空守护者的预言"
+msgstr ""
+
+#: class:Book id:279 type:name
+msgid "命运编织者的传承"
+msgstr ""
+
+#: class:Book id:280 type:name
+msgid "沉寂海洋的心跳"
+msgstr ""
+
+#: class:Book id:281 type:name
+msgid "星辰轨迹的记录"
+msgstr ""
+
+#: class:Book id:282 type:name
+msgid "光与影的冲突"
+msgstr ""
+
+#: class:Book id:283 type:name
+msgid "命运之石"
+msgstr ""
+
+#: class:Book id:284 type:name
+msgid "远古大陆的守护者"
+msgstr ""
+
+#: class:Book id:285 type:name
+msgid "时间轮回中的秘密"
+msgstr ""
+
+#: class:Book id:286 type:name
+msgid "黑夜之中的希望之光"
+msgstr ""
+
+#: class:Book id:287 type:name
+msgid "迷雾森林的古老传说"
+msgstr ""
+
+#: class:Book id:288 type:name
+msgid "星河守望"
+msgstr ""
+
+#: class:Book id:289 type:name
+msgid "梦境旅者的冒险"
+msgstr ""
+
+#: class:Book id:290 type:name
+msgid "光影之舞"
+msgstr ""
+
+#: class:Book id:291 type:name
+msgid "命运之子"
+msgstr ""
+
+#: class:Book id:292 type:name
+msgid "古老预言的实现"
+msgstr ""
+
+#: class:Book id:293 type:name
+msgid "时空裂缝的边缘"
+msgstr ""
+
+#: class:Book id:294 type:name
+msgid "远古之地的沉默"
+msgstr ""
+
+#: class:Book id:295 type:name
+msgid "光影交织的命运轨迹"
+msgstr ""
+
+#: class:Book id:296 type:name
+msgid "沉默的星际文明"
+msgstr ""
+
+#: class:Book id:297 type:name
+msgid "命运星辰的最后低语"
+msgstr ""
+
+#: class:Book id:298 type:name
+msgid "迷失在时间之旅"
+msgstr ""
+
+#: class:Book id:299 type:name
+msgid "星辰与时空的交汇"
+msgstr ""
+
+#: class:Nature id:0 type:good
+msgid "活跃"
+msgstr ""
+
+#: class:Nature id:0 type:bad
+msgid "低调"
+msgstr ""
+
+#: class:Nature id:1 type:good
+msgid "合群"
+msgstr ""
+
+#: class:Nature id:1 type:bad
+msgid "孤僻"
+msgstr ""
+
+#: class:Nature id:2 type:good
+msgid "乐观"
+msgstr ""
+
+#: class:Nature id:2 type:bad
+msgid "悲观"
+msgstr ""
+
+#: class:Nature id:3 type:good
+msgid "守信"
+msgstr ""
+
+#: class:Nature id:3 type:bad
+msgid "狡诈"
+msgstr ""
+
+#: class:Nature id:4 type:good
+msgid "无私"
+msgstr ""
+
+#: class:Nature id:4 type:bad
+msgid "自私"
+msgstr ""
+
+#: class:Nature id:5 type:good
+msgid "重情"
+msgstr ""
+
+#: class:Nature id:5 type:bad
+msgid "薄情"
+msgstr ""
+
+#: class:Nature id:6 type:good
+msgid "严谨"
+msgstr ""
+
+#: class:Nature id:6 type:bad
+msgid "松散"
+msgstr ""
+
+#: class:Nature id:7 type:good
+msgid "自律"
+msgstr ""
+
+#: class:Nature id:7 type:bad
+msgid "放纵"
+msgstr ""
+
+#: class:Nature id:8 type:good
+msgid "沉稳"
+msgstr ""
+
+#: class:Nature id:8 type:bad
+msgid "稚拙"
+msgstr ""
+
+#: class:Nature id:9 type:good
+msgid "决断"
+msgstr ""
+
+#: class:Nature id:9 type:bad
+msgid "犹豫"
+msgstr ""
+
+#: class:Nature id:10 type:good
+msgid "坚韧"
+msgstr ""
+
+#: class:Nature id:10 type:bad
+msgid "脆弱"
+msgstr ""
+
+#: class:Nature id:11 type:good
+msgid "机敏"
+msgstr ""
+
+#: class:Nature id:11 type:bad
+msgid "迟钝"
+msgstr ""
+
+#: class:Nature id:12 type:good
+msgid "耐性"
+msgstr ""
+
+#: class:Nature id:12 type:bad
+msgid "浮躁"
+msgstr ""
+
+#: class:Nature id:13 type:good
+msgid "爽直"
+msgstr ""
+
+#: class:Nature id:13 type:bad
+msgid "阴险"
+msgstr ""
+
+#: class:Nature id:14 type:good
+msgid "宽和"
+msgstr ""
+
+#: class:Nature id:14 type:bad
+msgid "狭隘"
+msgstr ""
+
+#: class:Nature id:15 type:good
+msgid "热情"
+msgstr ""
+
+#: class:Nature id:15 type:bad
+msgid "冷漠"
+msgstr ""
+
+#: class:Nature id:16 type:good
+msgid "自信"
+msgstr ""
+
+#: class:Nature id:16 type:bad
+msgid "自卑"
+msgstr ""
+
+#: class:Nature id:17 type:good
+msgid "淡泊"
+msgstr ""
+
+#: class:Nature id:17 type:bad
+msgid "热衷"
 msgstr ""
 
 #: class:Season id:0 type:name
@@ -8870,10 +8595,6 @@ msgstr ""
 
 #: class:Season id:3 type:name
 msgid "冬"
-msgstr ""
-
-#: class:MoveMenuType id:0 type:name
-msgid "公共"
 msgstr ""
 
 #: class:Item id:0 type:name
@@ -8940,140 +8661,421 @@ msgstr ""
 msgid "传统而古老的的射击武器，需要掌握一定的技巧才能够进行有效的攻击"
 msgstr ""
 
-#: class:ChestTem id:0 type:info
-msgid "绝壁"
+#: class:Achieve id:start_game type:name
+msgid "故事的起点"
 msgstr ""
 
-#: class:ChestTem id:1 type:info
-msgid "贫乳"
+#: class:Achieve id:start_game type:info
+msgid "初次进入游戏"
 msgstr ""
 
-#: class:ChestTem id:2 type:info
-msgid "普通"
+#: class:Achieve id:end_game type:name
+msgid "迈入死亡"
 msgstr ""
 
-#: class:ChestTem id:3 type:info
-msgid "巨乳"
+#: class:Achieve id:end_game type:info
+msgid "初次死亡"
 msgstr ""
 
-#: class:ChestTem id:4 type:info
-msgid "爆乳"
+#: class:Achieve id:first_blood type:name
+msgid "第一滴血"
 msgstr ""
 
-#: class:CharacterState id:0 type:name
-msgid "嘴部快感"
+#: class:Achieve id:first_blood type:info
+msgid "第一次做爱"
 msgstr ""
 
-#: class:CharacterState id:1 type:name
-msgid "胸部快感"
+#: class:Achieve id:first_wear_clothes type:name
+msgid "穿着？尊严？"
 msgstr ""
 
-#: class:CharacterState id:2 type:name
-msgid "阴道快感"
+#: class:Achieve id:first_wear_clothes type:info
+msgid "学会穿上衣服"
 msgstr ""
 
-#: class:CharacterState id:3 type:name
-msgid "阴蒂快感"
+#: class:Achieve id:drowned_girl type:name
+msgid "变成女孩子了"
 msgstr ""
 
-#: class:CharacterState id:4 type:name
-msgid "肛门快感"
+#: class:Achieve id:drowned_girl type:info
+msgid "喝下娘溺泉的水"
 msgstr ""
 
-#: class:CharacterState id:5 type:name
-msgid "阴茎快感"
+#: class:Achieve id:one_hundred_and_eight_thousand_sorrows type:name
+msgid "十万八千苦"
 msgstr ""
 
-#: class:CharacterState id:6 type:name
-msgid "阴道润滑"
+#: class:Achieve id:one_hundred_and_eight_thousand_sorrows type:info
+msgid "见证了108000人的人生"
 msgstr ""
 
-#: class:CharacterState id:7 type:name
-msgid "肛门润滑"
+#: class:InstructType id:0 type:name
+msgid "对话"
 msgstr ""
 
-#: class:CharacterState id:8 type:name
-msgid "快乐"
+#: class:InstructType id:1 type:name
+msgid "主动"
 msgstr ""
 
-#: class:CharacterState id:9 type:name
-msgid "痛苦"
+#: class:InstructType id:3 type:name
+msgid "猥亵"
 msgstr ""
 
-#: class:CharacterState id:10 type:name
-msgid "渴望"
+#: class:InstructType id:4 type:name
+msgid "娱乐"
 msgstr ""
 
-#: class:CharacterState id:11 type:name
-msgid "恐惧"
+#: class:InstructType id:5 type:name
+msgid "战斗"
 msgstr ""
 
-#: class:CharacterState id:12 type:name
-msgid "反感"
+#: class:InstructType id:6 type:name
+msgid "学习"
 msgstr ""
 
-#: class:CharacterState id:13 type:name
-msgid "羞耻"
+#: class:InstructType id:9 type:name
+msgid "系统"
 msgstr ""
 
-#: class:CharacterState id:14 type:name
-msgid "抑郁"
+#: class:Recipes id:0 type:name
+msgid "孜然排骨"
 msgstr ""
 
-#: class:CharacterState id:15 type:name
-msgid "傲慢"
+#: class:Recipes id:1 type:name
+msgid "韭菜花炒甜不辣"
 msgstr ""
 
-#: class:CharacterState id:16 type:name
-msgid "嫉妒"
+#: class:Recipes id:2 type:name
+msgid "甜酸罗非鱼块"
 msgstr ""
 
-#: class:CharacterState id:17 type:name
-msgid "暴怒"
+#: class:Recipes id:3 type:name
+msgid "醉炒冬粉"
 msgstr ""
 
-#: class:CharacterState id:18 type:name
-msgid "懒惰"
+#: class:Recipes id:4 type:name
+msgid "卤鸭脖"
 msgstr ""
 
-#: class:CharacterState id:19 type:name
-msgid "贪婪"
+#: class:Recipes id:5 type:name
+msgid "酥炸鲜肉藕盒"
 msgstr ""
 
-#: class:CharacterState id:20 type:name
-msgid "暴食"
+#: class:Recipes id:6 type:name
+msgid "米饭"
 msgstr ""
 
-#: class:CharacterState id:21 type:name
-msgid "色欲"
+#: class:Recipes id:7 type:name
+msgid "蜂蜜炸鸡"
 msgstr ""
 
-#: class:CharacterState id:22 type:name
-msgid "温暖"
+#: class:Recipes id:8 type:name
+msgid "芙蓉豆腐"
 msgstr ""
 
-#: class:CharacterState id:23 type:name
-msgid "疼痛"
+#: class:Recipes id:9 type:name
+msgid "焗烤排骨"
 msgstr ""
 
-#: class:CharacterState id:24 type:name
-msgid "眩晕"
+#: class:Recipes id:10 type:name
+msgid "西葫芦炒牛肉"
 msgstr ""
 
-#: class:CharacterState id:25 type:name
-msgid "疲惫"
+#: class:Recipes id:11 type:name
+msgid "西葫芦炒虾仁"
 msgstr ""
 
-#: class:CharacterState id:26 type:name
-msgid "迷醉"
+#: class:Recipes id:12 type:name
+msgid "麻婆豆腐"
 msgstr ""
 
-#: class:CharacterState id:27 type:name
-msgid "饥饿"
+#: class:Recipes id:13 type:name
+msgid "红烧排骨"
 msgstr ""
 
-#: class:CharacterState id:28 type:name
-msgid "口渴"
+#: class:Recipes id:14 type:name
+msgid "红烧肉"
+msgstr ""
+
+#: class:Recipes id:15 type:name
+msgid "苹果汁"
+msgstr ""
+
+#: class:Recipes id:16 type:name
+msgid "梨子汁"
+msgstr ""
+
+#: class:Recipes id:17 type:name
+msgid "橘子汁"
+msgstr ""
+
+#: class:Recipes id:18 type:name
+msgid "桃子汁"
+msgstr ""
+
+#: class:Recipes id:19 type:name
+msgid "菠萝汁"
+msgstr ""
+
+#: class:Recipes id:20 type:name
+msgid "柚子汁"
+msgstr ""
+
+#: class:Recipes id:21 type:name
+msgid "猕猴桃汁"
+msgstr ""
+
+#: class:Recipes id:22 type:name
+msgid "黄瓜汁"
+msgstr ""
+
+#: class:Identity id:0 type:name
+msgid "学生"
+msgstr ""
+
+#: class:Identity id:1 type:name
+msgid "老师"
+msgstr ""
+
+#: class:Identity id:2 type:name
+msgid "社团成员"
+msgstr ""
+
+#: class:ClubIdentity id:1 type:name
+msgid "社长"
+msgstr ""
+
+#: class:ClubIdentity id:2 type:name
+msgid "指导老师"
+msgstr ""
+
+#: class:Language id:0 type:name
+msgid "汉语"
+msgstr ""
+
+#: class:Language id:0 type:info
+msgid ""
+"联合国6种工作语言之一，你的母语，在这个国度，每个达到学龄的儿童都已经基本掌握"
+"的语言。"
+msgstr ""
+
+#: class:Language id:1 type:name
+msgid "英语"
+msgstr ""
+
+#: class:Language id:1 type:info
+msgid "联合国6种工作语言之一，人类通用语，每个自然人都应该掌握的语言。"
+msgstr ""
+
+#: class:Language id:2 type:name
+msgid "法语"
+msgstr ""
+
+#: class:Language id:2 type:info
+msgid "联合国6种工作语言之一，被广泛在国际性社交和外交活动中应用。"
+msgstr ""
+
+#: class:Language id:3 type:name
+msgid "西班牙语"
+msgstr ""
+
+#: class:Language id:3 type:info
+msgid "联合国6种工作语言之一，被称为和上帝沟通的语言。"
+msgstr ""
+
+#: class:Language id:4 type:name
+msgid "阿拉伯语"
+msgstr ""
+
+#: class:Language id:4 type:info
+msgid "联合国6种工作语言之一，伊斯兰教宗教语言，主要通行于西亚和北非地区。"
+msgstr ""
+
+#: class:Language id:5 type:name
+msgid "俄语"
+msgstr ""
+
+#: class:Language id:5 type:info
+msgid "联合国6种工作语言之一，主要为前苏联成员国家使用。"
+msgstr ""
+
+#: class:Language id:6 type:name
+msgid "日语"
+msgstr ""
+
+#: class:Language id:6 type:info
+msgid ""
+"由日本先进的电子产品和汽车工业，以及发达的动漫产业，而在世界范围内广泛传播的"
+"语言。"
+msgstr ""
+
+#: class:Language id:7 type:name
+msgid "印地语"
+msgstr ""
+
+#: class:Language id:7 type:info
+msgid "印度官方语言之一，印度斯坦人的文学语言。"
+msgstr ""
+
+#: class:Language id:8 type:name
+msgid "古拉丁语"
+msgstr ""
+
+#: class:Language id:8 type:info
+msgid "古罗马奥古斯都皇帝时代所使用的语言。"
+msgstr ""
+
+#: class:Language id:9 type:name
+msgid "拉丁语"
+msgstr ""
+
+#: class:Language id:9 type:info
+msgid "死语之一，曾随基督教和古罗马帝国的扩张而成为欧洲通用语。"
+msgstr ""
+
+#: class:Language id:10 type:name
+msgid "古汉语"
+msgstr ""
+
+#: class:Language id:10 type:info
+msgid ""
+"死语之一，中国古代被称为雅言的官方语言，中国先秦时期洛阳方言为基础而来。"
+msgstr ""
+
+#: class:Language id:11 type:name
+msgid "上古汉语"
+msgstr ""
+
+#: class:Language id:11 type:info
+msgid "死语之一，中国商周时期所使用的，以象形文字（甲骨文）为基础的语言。"
+msgstr ""
+
+#: class:Status id:0 type:name
+msgid "发呆"
+msgstr ""
+
+#: class:Status id:3 type:name
+msgid "上课"
+msgstr ""
+
+#: class:Status id:16 type:name
+msgid "教学"
+msgstr ""
+
+#: class:Status id:22 type:name
+msgid "脱对方衣服"
+msgstr ""
+
+#: class:Status id:24 type:name
+msgid "脱衣"
+msgstr ""
+
+#: class:Status id:26 type:name
+msgid "正常体位(女)"
+msgstr ""
+
+#: class:Status id:33 type:name
+msgid "做爱受体"
+msgstr ""
+
+#: class:Status id:34 type:name
+msgid "摸脸"
+msgstr ""
+
+#: class:Status id:72 type:name
+msgid "对对方真空口交"
+msgstr ""
+
+#: class:SunTime id:0 type:name
+msgid "午夜"
+msgstr ""
+
+#: class:SunTime id:1 type:name
+msgid "凌晨"
+msgstr ""
+
+#: class:SunTime id:2 type:name
+msgid "拂晓"
+msgstr ""
+
+#: class:SunTime id:3 type:name
+msgid "黎明"
+msgstr ""
+
+#: class:SunTime id:4 type:name
+msgid "清晨"
+msgstr ""
+
+#: class:SunTime id:5 type:name
+msgid "早晨"
+msgstr ""
+
+#: class:SunTime id:6 type:name
+msgid "上午"
+msgstr ""
+
+#: class:SunTime id:7 type:name
+msgid "正午"
+msgstr ""
+
+#: class:SunTime id:8 type:name
+msgid "下午"
+msgstr ""
+
+#: class:SunTime id:9 type:name
+msgid "傍晚"
+msgstr ""
+
+#: class:SunTime id:10 type:name
+msgid "入夜"
+msgstr ""
+
+#: class:SunTime id:11 type:name
+msgid "深夜"
+msgstr ""
+
+#: class:SocialType id:0 type:name
+msgid "死敌"
+msgstr ""
+
+#: class:SocialType id:1 type:name
+msgid "仇恨"
+msgstr ""
+
+#: class:SocialType id:2 type:name
+msgid "憎恨"
+msgstr ""
+
+#: class:SocialType id:3 type:name
+msgid "厌恶"
+msgstr ""
+
+#: class:SocialType id:4 type:name
+msgid "讨厌"
+msgstr ""
+
+#: class:SocialType id:5 type:name
+msgid "陌生"
+msgstr ""
+
+#: class:SocialType id:6 type:name
+msgid "友好"
+msgstr ""
+
+#: class:SocialType id:7 type:name
+msgid "信任"
+msgstr ""
+
+#: class:SocialType id:8 type:name
+msgid "依靠"
+msgstr ""
+
+#: class:SocialType id:9 type:name
+msgid "恋慕"
+msgstr ""
+
+#: class:SocialType id:10 type:name
+msgid "爱慕"
 msgstr ""
 
 #: Event:d777471f-1f10-456f-8c3e-d47135ef3a71
@@ -11927,864 +11929,508 @@ msgstr ""
 #: ClothingSuitName:8c7f2788-a3d4-4e9d-99d7-d5a6d045f9f4msgid
 #: "女生校服"msgstr
 #: ClothingSuitName:54ed2686-7ead-4fa9-be6e-6162d940a397msgid
-#: "通用校服"msgstr Scene:data/map/10/1/1/Scene.json
-msgid "取餐区"
-msgstr ""
-
-#: Scene:data/map/10/1/3/Scene.json
-msgid "就餐区H"
-msgstr ""
-
-#: Scene:data/map/10/1/0/Scene.json
-msgid "2F入口"
-msgstr ""
-
-#: Map:data/map/10/1/Map.json
-msgid "2F"
-msgstr ""
-
-#: Scene:data/map/10/1/2/Scene.json
-msgid "就餐区G"
-msgstr ""
-
-#: Scene:data/map/10/0/1/Scene.json
-msgid "取餐区(荤)"
-msgstr ""
-
-#: Scene:data/map/10/0/4/Scene.json
-msgid "就餐区B"
-msgstr ""
-
-#: Scene:data/map/10/0/3/Scene.json
-msgid "就餐区A"
-msgstr ""
-
-#: Scene:data/map/10/0/6/Scene.json
-msgid "就餐区D"
-msgstr ""
-
-#: Scene:data/map/10/0/5/Scene.json
-msgid "就餐区C"
-msgstr ""
-
-#: Scene:data/map/10/0/0/Scene.json
-msgid "大食堂入口"
-msgstr ""
-
-#: Scene:data/map/10/0/8/Scene.json
-msgid "就餐区F"
-msgstr ""
-
-#: Scene:data/map/10/0/7/Scene.json
-msgid "就餐区E"
-msgstr ""
-
-#: Map:data/map/10/0/Map.json
-msgid "1F"
-msgstr ""
-
-#: Scene:data/map/10/0/2/Scene.json
-msgid "取餐区(素)"
-msgstr ""
-
-#: Map:data/map/10/Map.json
-msgid "大食堂"
-msgstr ""
-
-#: Scene:data/map/25/1/10/Scene.json
-msgid "210室"
-msgstr ""
-
-#: Scene:data/map/25/1/1/Scene.json
-msgid "201室"
-msgstr ""
-
-#: Scene:data/map/25/1/17/Scene.json
-msgid "217室"
-msgstr ""
-
-#: Scene:data/map/25/1/4/Scene.json
-msgid "204室"
-msgstr ""
-
-#: Scene:data/map/25/1/3/Scene.json
-msgid "203室"
-msgstr ""
-
-#: Scene:data/map/25/1/13/Scene.json
-msgid "213室"
-msgstr ""
-
-#: Scene:data/map/25/1/6/Scene.json
-msgid "206室"
-msgstr ""
-
-#: Scene:data/map/25/1/15/Scene.json
-msgid "215室"
-msgstr ""
-
-#: Scene:data/map/25/1/16/Scene.json
-msgid "216室"
-msgstr ""
-
-#: Scene:data/map/25/1/12/Scene.json
-msgid "212室"
-msgstr ""
-
-#: Scene:data/map/25/1/18/Scene.json
-msgid "218室"
-msgstr ""
-
-#: Scene:data/map/25/1/9/Scene.json
-msgid "209室"
-msgstr ""
-
-#: Scene:data/map/25/1/5/Scene.json
-msgid "205室"
-msgstr ""
-
-#: Scene:data/map/25/1/19/Scene.json
-msgid "219室"
-msgstr ""
-
-#: Scene:data/map/25/1/0/Scene.json
-msgid "2F楼梯间"
-msgstr ""
-
-#: Scene:data/map/25/1/14/Scene.json
-msgid "214室"
-msgstr ""
-
-#: Scene:data/map/25/1/11/Scene.json
-msgid "211室"
-msgstr ""
-
-#: Scene:data/map/25/1/8/Scene.json
-msgid "208室"
-msgstr ""
-
-#: Scene:data/map/25/1/7/Scene.json
-msgid "207室"
-msgstr ""
-
-#: Scene:data/map/25/1/2/Scene.json
-msgid "202室"
-msgstr ""
-
-#: Scene:data/map/25/3/10/Scene.json
-msgid "410室"
-msgstr ""
-
-#: Scene:data/map/25/3/1/Scene.json
-msgid "401室"
-msgstr ""
-
-#: Scene:data/map/25/3/17/Scene.json
-msgid "417室"
-msgstr ""
-
-#: Scene:data/map/25/3/4/Scene.json
-msgid "404室"
-msgstr ""
-
-#: Scene:data/map/25/3/3/Scene.json
-msgid "403室"
-msgstr ""
-
-#: Scene:data/map/25/3/13/Scene.json
-msgid "413室"
-msgstr ""
-
-#: Scene:data/map/25/3/6/Scene.json
-msgid "406室"
-msgstr ""
-
-#: Scene:data/map/25/3/15/Scene.json
-msgid "415室"
-msgstr ""
-
-#: Scene:data/map/25/3/16/Scene.json
-msgid "416室"
-msgstr ""
-
-#: Scene:data/map/25/3/12/Scene.json
-msgid "412室"
-msgstr ""
-
-#: Scene:data/map/25/3/18/Scene.json
-msgid "418室"
-msgstr ""
-
-#: Scene:data/map/25/3/9/Scene.json
-msgid "409室"
-msgstr ""
-
-#: Scene:data/map/25/3/5/Scene.json
-msgid "405室"
-msgstr ""
-
-#: Scene:data/map/25/3/19/Scene.json
-msgid "419室"
-msgstr ""
-
-#: Scene:data/map/25/3/0/Scene.json
-msgid "4F楼梯间"
-msgstr ""
-
-#: Scene:data/map/25/3/14/Scene.json
-msgid "414室"
-msgstr ""
-
-#: Scene:data/map/25/3/11/Scene.json
-msgid "411室"
-msgstr ""
-
-#: Scene:data/map/25/3/8/Scene.json
-msgid "408室"
-msgstr ""
-
-#: Scene:data/map/25/3/7/Scene.json
-msgid "407室"
-msgstr ""
-
-#: Scene:data/map/25/3/2/Scene.json
-msgid "402室"
-msgstr ""
-
-#: Scene:data/map/25/0/10/Scene.json
-msgid "110室"
-msgstr ""
-
-#: Scene:data/map/25/0/1/Scene.json
-msgid "101室"
-msgstr ""
-
-#: Scene:data/map/25/0/17/Scene.json
-msgid "117室"
-msgstr ""
-
-#: Scene:data/map/25/0/4/Scene.json
-msgid "104室"
-msgstr ""
-
-#: Scene:data/map/25/0/3/Scene.json
-msgid "103室"
-msgstr ""
-
-#: Scene:data/map/25/0/13/Scene.json
-msgid "113室"
-msgstr ""
-
-#: Scene:data/map/25/0/6/Scene.json
-msgid "106室"
-msgstr ""
-
-#: Scene:data/map/25/0/15/Scene.json
-msgid "115室"
-msgstr ""
-
-#: Scene:data/map/25/0/16/Scene.json
-msgid "116室"
-msgstr ""
-
-#: Scene:data/map/25/0/12/Scene.json
-msgid "112室"
-msgstr ""
-
-#: Scene:data/map/25/0/18/Scene.json
-msgid "118室"
-msgstr ""
-
-#: Scene:data/map/25/0/9/Scene.json
-msgid "109室"
-msgstr ""
-
-#: Scene:data/map/25/0/5/Scene.json
-msgid "105室"
-msgstr ""
-
-#: Scene:data/map/25/0/19/Scene.json
-msgid "119室"
-msgstr ""
-
-#: Scene:data/map/25/0/0/Scene.json
-msgid "公寓楼A入口"
-msgstr ""
-
-#: Scene:data/map/25/0/14/Scene.json
-msgid "114室"
-msgstr ""
-
-#: Scene:data/map/25/0/11/Scene.json
-msgid "111室"
-msgstr ""
-
-#: Scene:data/map/25/0/8/Scene.json
-msgid "108室"
-msgstr ""
-
-#: Scene:data/map/25/0/7/Scene.json
-msgid "107室"
-msgstr ""
-
-#: Scene:data/map/25/0/2/Scene.json
-msgid "102室"
-msgstr ""
-
-#: Map:data/map/25/Map.json
-msgid "公寓楼A"
-msgstr ""
-
-#: Scene:data/map/25/2/10/Scene.json
-msgid "310室"
-msgstr ""
-
-#: Scene:data/map/25/2/1/Scene.json
-msgid "301室"
-msgstr ""
-
-#: Scene:data/map/25/2/17/Scene.json
-msgid "317室"
-msgstr ""
-
-#: Scene:data/map/25/2/4/Scene.json
-msgid "304室"
-msgstr ""
-
-#: Scene:data/map/25/2/3/Scene.json
-msgid "303室"
-msgstr ""
-
-#: Scene:data/map/25/2/13/Scene.json
-msgid "313室"
-msgstr ""
-
-#: Scene:data/map/25/2/6/Scene.json
-msgid "306室"
-msgstr ""
-
-#: Scene:data/map/25/2/15/Scene.json
-msgid "315室"
-msgstr ""
-
-#: Scene:data/map/25/2/16/Scene.json
-msgid "316室"
-msgstr ""
-
-#: Scene:data/map/25/2/12/Scene.json
-msgid "312室"
-msgstr ""
-
-#: Scene:data/map/25/2/18/Scene.json
-msgid "318室"
-msgstr ""
-
-#: Scene:data/map/25/2/9/Scene.json
-msgid "309室"
-msgstr ""
-
-#: Scene:data/map/25/2/5/Scene.json
-msgid "305室"
-msgstr ""
-
-#: Scene:data/map/25/2/19/Scene.json
-msgid "319室"
-msgstr ""
-
-#: Scene:data/map/25/2/0/Scene.json
-msgid "3F楼梯间"
-msgstr ""
-
-#: Scene:data/map/25/2/14/Scene.json
-msgid "314室"
-msgstr ""
-
-#: Scene:data/map/25/2/11/Scene.json
-msgid "311室"
-msgstr ""
-
-#: Scene:data/map/25/2/8/Scene.json
-msgid "308室"
-msgstr ""
-
-#: Scene:data/map/25/2/7/Scene.json
-msgid "307室"
-msgstr ""
-
-#: Map:data/map/25/2/Map.json
-msgid "3F"
-msgstr ""
-
-#: Scene:data/map/25/2/2/Scene.json
-msgid "302室"
-msgstr ""
-
-#: Scene:data/map/1/1/10/Scene.json
-msgid "右厕所"
-msgstr ""
-
-#: Scene:data/map/1/1/1/Scene.json
-msgid "小学部3年级办公室"
-msgstr ""
-
-#: Scene:data/map/1/1/4/Scene.json
-msgid "小学部3年级3班"
-msgstr ""
-
-#: Scene:data/map/1/1/3/Scene.json
-msgid "小学部3年级2班"
-msgstr ""
-
-#: Scene:data/map/1/1/6/Scene.json
-msgid "小学部4年级2班"
+#: "通用校服"msgstr Scene:data/map/9/Scene.json
+msgid "仓库"
 msgstr ""
 
 #: Scene:data/map/1/1/9/Scene.json
 msgid "左厕所"
 msgstr ""
 
-#: Scene:data/map/1/1/5/Scene.json
-msgid "小学部4年级3班"
+#: Scene:data/map/1/1/1/Scene.json
+msgid "小学部3年级办公室"
 msgstr ""
 
-#: Scene:data/map/1/1/8/Scene.json
-msgid "小学部4年级办公室"
+#: Scene:data/map/1/1/6/Scene.json
+msgid "小学部4年级2班"
 msgstr ""
 
-#: Scene:data/map/1/1/7/Scene.json
-msgid "小学部4年级1班"
+#: Scene:data/map/1/1/3/Scene.json
+msgid "小学部3年级2班"
+msgstr ""
+
+#: Scene:data/map/1/1/10/Scene.json
+msgid "右厕所"
 msgstr ""
 
 #: Scene:data/map/1/1/2/Scene.json
 msgid "小学部3年级1班"
 msgstr ""
 
-#: Scene:data/map/1/4/1/Scene.json
-msgid "音乐活动室"
+#: Map:data/map/1/1/Map.json
+msgid "2F"
 msgstr ""
 
-#: Scene:data/map/1/4/4/Scene.json
-msgid "财务室"
+#: Scene:data/map/1/1/4/Scene.json
+msgid "小学部3年级3班"
 msgstr ""
 
-#: Scene:data/map/1/4/3/Scene.json
-msgid "教务处"
+#: Scene:data/map/1/1/8/Scene.json
+msgid "小学部4年级办公室"
 msgstr ""
 
-#: Scene:data/map/1/4/0/Scene.json
-msgid "5F楼梯间"
+#: Scene:data/map/1/1/0/Scene.json
+msgid "2F楼梯间"
 msgstr ""
 
-#: Map:data/map/1/4/Map.json
-msgid "5F"
+#: Scene:data/map/1/1/5/Scene.json
+msgid "小学部4年级3班"
 msgstr ""
 
-#: Scene:data/map/1/4/2/Scene.json
-msgid "美术活动室"
+#: Scene:data/map/1/1/7/Scene.json
+msgid "小学部4年级1班"
 msgstr ""
 
 #: Scene:data/map/1/3/1/Scene.json
 msgid "多媒体教室A"
 msgstr ""
 
-#: Map:data/map/1/3/Map.json
-msgid "4F"
-msgstr ""
-
 #: Scene:data/map/1/3/2/Scene.json
 msgid "多媒体教室B"
 msgstr ""
 
-#: Scene:data/map/1/5/Scene.json
-msgid "天台"
+#: Map:data/map/1/3/Map.json
+msgid "4F"
 msgstr ""
 
-#: Scene:data/map/1/0/1/Scene.json
-msgid "小学部1年级办公室"
-msgstr ""
-
-#: Scene:data/map/1/0/4/Scene.json
-msgid "小学部1年级3班"
-msgstr ""
-
-#: Scene:data/map/1/0/3/Scene.json
-msgid "小学部1年级2班"
-msgstr ""
-
-#: Scene:data/map/1/0/6/Scene.json
-msgid "小学部2年级2班"
-msgstr ""
-
-#: Scene:data/map/1/0/5/Scene.json
-msgid "小学部2年级3班"
-msgstr ""
-
-#: Scene:data/map/1/0/0/Scene.json
-msgid "启航楼入口"
-msgstr ""
-
-#: Scene:data/map/1/0/8/Scene.json
-msgid "小学部2年级办公室"
-msgstr ""
-
-#: Scene:data/map/1/0/7/Scene.json
-msgid "小学部2年级1班"
-msgstr ""
-
-#: Scene:data/map/1/0/2/Scene.json
-msgid "小学部1年级1班"
-msgstr ""
-
-#: Map:data/map/1/Map.json
-msgid "启航楼"
+#: Scene:data/map/1/3/0/Scene.json
+msgid "4F楼梯间"
 msgstr ""
 
 #: Scene:data/map/1/2/1/Scene.json
 msgid "小学部5年级办公室"
 msgstr ""
 
-#: Scene:data/map/1/2/4/Scene.json
-msgid "小学部5年级3班"
+#: Scene:data/map/1/2/6/Scene.json
+msgid "小学部6年级2班"
 msgstr ""
 
 #: Scene:data/map/1/2/3/Scene.json
 msgid "小学部5年级2班"
 msgstr ""
 
-#: Scene:data/map/1/2/6/Scene.json
-msgid "小学部6年级2班"
+#: Scene:data/map/1/2/2/Scene.json
+msgid "小学部5年级1班"
 msgstr ""
 
-#: Scene:data/map/1/2/5/Scene.json
-msgid "小学部6年级3班"
+#: Map:data/map/1/2/Map.json
+msgid "3F"
+msgstr ""
+
+#: Scene:data/map/1/2/4/Scene.json
+msgid "小学部5年级3班"
 msgstr ""
 
 #: Scene:data/map/1/2/8/Scene.json
 msgid "小学部6年级办公室"
 msgstr ""
 
+#: Scene:data/map/1/2/0/Scene.json
+msgid "3F楼梯间"
+msgstr ""
+
+#: Scene:data/map/1/2/5/Scene.json
+msgid "小学部6年级3班"
+msgstr ""
+
 #: Scene:data/map/1/2/7/Scene.json
 msgid "小学部6年级1班"
 msgstr ""
 
-#: Scene:data/map/1/2/2/Scene.json
-msgid "小学部5年级1班"
+#: Map:data/map/1/Map.json
+msgid "启航楼"
 msgstr ""
 
-#: Scene:data/map/17/1/10/Scene.json
-msgid "208号"
+#: Scene:data/map/1/4/1/Scene.json
+msgid "音乐活动室"
 msgstr ""
 
-#: Scene:data/map/17/1/1/Scene.json
-msgid "过道"
+#: Scene:data/map/1/4/3/Scene.json
+msgid "教务处"
 msgstr ""
 
-#: Scene:data/map/17/1/17/Scene.json
-msgid "右厕所&浴室"
+#: Scene:data/map/1/4/2/Scene.json
+msgid "美术活动室"
 msgstr ""
 
-#: Scene:data/map/17/1/4/Scene.json
-msgid "202号"
+#: Map:data/map/1/4/Map.json
+msgid "5F"
 msgstr ""
 
-#: Scene:data/map/17/1/3/Scene.json
-msgid "201号"
+#: Scene:data/map/1/4/4/Scene.json
+msgid "财务室"
 msgstr ""
 
-#: Scene:data/map/17/1/13/Scene.json
-msgid "211号"
+#: Scene:data/map/1/4/0/Scene.json
+msgid "5F楼梯间"
 msgstr ""
 
-#: Scene:data/map/17/1/6/Scene.json
-msgid "204号"
+#: Scene:data/map/1/0/1/Scene.json
+msgid "小学部1年级办公室"
 msgstr ""
 
-#: Scene:data/map/17/1/15/Scene.json
-msgid "213号"
+#: Scene:data/map/1/0/6/Scene.json
+msgid "小学部2年级2班"
 msgstr ""
 
-#: Scene:data/map/17/1/16/Scene.json
-msgid "214号"
+#: Scene:data/map/1/0/3/Scene.json
+msgid "小学部1年级2班"
 msgstr ""
 
-#: Scene:data/map/17/1/12/Scene.json
-msgid "210号"
+#: Scene:data/map/1/0/2/Scene.json
+msgid "小学部1年级1班"
 msgstr ""
 
-#: Scene:data/map/17/1/9/Scene.json
+#: Map:data/map/1/0/Map.json
+msgid "1F"
+msgstr ""
+
+#: Scene:data/map/1/0/4/Scene.json
+msgid "小学部1年级3班"
+msgstr ""
+
+#: Scene:data/map/1/0/8/Scene.json
+msgid "小学部2年级办公室"
+msgstr ""
+
+#: Scene:data/map/1/0/0/Scene.json
+msgid "启航楼入口"
+msgstr ""
+
+#: Scene:data/map/1/0/5/Scene.json
+msgid "小学部2年级3班"
+msgstr ""
+
+#: Scene:data/map/1/0/7/Scene.json
+msgid "小学部2年级1班"
+msgstr ""
+
+#: Scene:data/map/1/5/Scene.json
+msgid "天台"
+msgstr ""
+
+#: Scene:data/map/20/1/9/Scene.json
 msgid "207号"
 msgstr ""
 
-#: Scene:data/map/17/1/5/Scene.json
-msgid "203号"
+#: Scene:data/map/20/1/1/Scene.json
+msgid "过道"
 msgstr ""
 
-#: Scene:data/map/17/1/14/Scene.json
+#: Scene:data/map/20/1/17/Scene.json
+msgid "右厕所&浴室"
+msgstr ""
+
+#: Scene:data/map/20/1/6/Scene.json
+msgid "204号"
+msgstr ""
+
+#: Scene:data/map/20/1/3/Scene.json
+msgid "201号"
+msgstr ""
+
+#: Scene:data/map/20/1/10/Scene.json
+msgid "208号"
+msgstr ""
+
+#: Scene:data/map/20/1/14/Scene.json
 msgid "212号"
 msgstr ""
 
-#: Scene:data/map/17/1/11/Scene.json
-msgid "209号"
-msgstr ""
-
-#: Scene:data/map/17/1/8/Scene.json
-msgid "206号"
-msgstr ""
-
-#: Scene:data/map/17/1/7/Scene.json
-msgid "205号"
-msgstr ""
-
-#: Scene:data/map/17/1/2/Scene.json
+#: Scene:data/map/20/1/2/Scene.json
 msgid "左厕所&浴室"
 msgstr ""
 
-#: Scene:data/map/17/4/10/Scene.json
-msgid "008号"
+#: Scene:data/map/20/1/4/Scene.json
+msgid "202号"
 msgstr ""
 
-#: Scene:data/map/17/4/4/Scene.json
-msgid "002号"
+#: Scene:data/map/20/1/8/Scene.json
+msgid "206号"
 msgstr ""
 
-#: Scene:data/map/17/4/3/Scene.json
-msgid "001号"
+#: Scene:data/map/20/1/13/Scene.json
+msgid "211号"
 msgstr ""
 
-#: Scene:data/map/17/4/13/Scene.json
-msgid "011号"
+#: Scene:data/map/20/1/5/Scene.json
+msgid "203号"
 msgstr ""
 
-#: Scene:data/map/17/4/6/Scene.json
-msgid "004号"
+#: Scene:data/map/20/1/7/Scene.json
+msgid "205号"
 msgstr ""
 
-#: Scene:data/map/17/4/15/Scene.json
-msgid "013号"
+#: Scene:data/map/20/1/15/Scene.json
+msgid "213号"
 msgstr ""
 
-#: Scene:data/map/17/4/16/Scene.json
-msgid "014号"
+#: Scene:data/map/20/1/11/Scene.json
+msgid "209号"
 msgstr ""
 
-#: Scene:data/map/17/4/12/Scene.json
-msgid "010号"
+#: Scene:data/map/20/1/12/Scene.json
+msgid "210号"
 msgstr ""
 
-#: Scene:data/map/17/4/9/Scene.json
-msgid "007号"
+#: Scene:data/map/20/1/16/Scene.json
+msgid "214号"
 msgstr ""
 
-#: Scene:data/map/17/4/5/Scene.json
-msgid "003号"
-msgstr ""
-
-#: Scene:data/map/17/4/0/Scene.json
-msgid "-1F楼梯间"
-msgstr ""
-
-#: Scene:data/map/17/4/14/Scene.json
-msgid "012号"
-msgstr ""
-
-#: Scene:data/map/17/4/11/Scene.json
-msgid "009号"
-msgstr ""
-
-#: Scene:data/map/17/4/8/Scene.json
-msgid "006号"
-msgstr ""
-
-#: Scene:data/map/17/4/7/Scene.json
-msgid "005号"
-msgstr ""
-
-#: Map:data/map/17/4/Map.json
-msgid "-1F"
-msgstr ""
-
-#: Scene:data/map/17/3/10/Scene.json
-msgid "408号"
-msgstr ""
-
-#: Scene:data/map/17/3/4/Scene.json
-msgid "402号"
-msgstr ""
-
-#: Scene:data/map/17/3/3/Scene.json
-msgid "401号"
-msgstr ""
-
-#: Scene:data/map/17/3/13/Scene.json
-msgid "411号"
-msgstr ""
-
-#: Scene:data/map/17/3/6/Scene.json
-msgid "404号"
-msgstr ""
-
-#: Scene:data/map/17/3/15/Scene.json
-msgid "413号"
-msgstr ""
-
-#: Scene:data/map/17/3/16/Scene.json
-msgid "414号"
-msgstr ""
-
-#: Scene:data/map/17/3/12/Scene.json
-msgid "410号"
-msgstr ""
-
-#: Scene:data/map/17/3/9/Scene.json
+#: Scene:data/map/20/3/9/Scene.json
 msgid "407号"
 msgstr ""
 
-#: Scene:data/map/17/3/5/Scene.json
-msgid "403号"
+#: Scene:data/map/20/3/6/Scene.json
+msgid "404号"
 msgstr ""
 
-#: Scene:data/map/17/3/14/Scene.json
+#: Scene:data/map/20/3/3/Scene.json
+msgid "401号"
+msgstr ""
+
+#: Scene:data/map/20/3/10/Scene.json
+msgid "408号"
+msgstr ""
+
+#: Scene:data/map/20/3/14/Scene.json
 msgid "412号"
 msgstr ""
 
-#: Scene:data/map/17/3/11/Scene.json
-msgid "409号"
+#: Scene:data/map/20/3/4/Scene.json
+msgid "402号"
 msgstr ""
 
-#: Scene:data/map/17/3/8/Scene.json
+#: Scene:data/map/20/3/8/Scene.json
 msgid "406号"
 msgstr ""
 
-#: Scene:data/map/17/3/7/Scene.json
+#: Scene:data/map/20/3/13/Scene.json
+msgid "411号"
+msgstr ""
+
+#: Scene:data/map/20/3/5/Scene.json
+msgid "403号"
+msgstr ""
+
+#: Scene:data/map/20/3/7/Scene.json
 msgid "405号"
 msgstr ""
 
-#: Scene:data/map/17/0/10/Scene.json
-msgid "108号"
+#: Scene:data/map/20/3/15/Scene.json
+msgid "413号"
 msgstr ""
 
-#: Scene:data/map/17/0/4/Scene.json
-msgid "102号"
+#: Scene:data/map/20/3/11/Scene.json
+msgid "409号"
 msgstr ""
 
-#: Scene:data/map/17/0/3/Scene.json
-msgid "101号"
+#: Scene:data/map/20/3/12/Scene.json
+msgid "410号"
 msgstr ""
 
-#: Scene:data/map/17/0/13/Scene.json
-msgid "111号"
+#: Scene:data/map/20/3/16/Scene.json
+msgid "414号"
 msgstr ""
 
-#: Scene:data/map/17/0/6/Scene.json
-msgid "门卫室"
+#: Scene:data/map/20/2/9/Scene.json
+msgid "307号"
 msgstr ""
 
-#: Scene:data/map/17/0/15/Scene.json
-msgid "113号"
+#: Scene:data/map/20/2/6/Scene.json
+msgid "304号"
 msgstr ""
 
-#: Scene:data/map/17/0/16/Scene.json
-msgid "114号"
+#: Scene:data/map/20/2/3/Scene.json
+msgid "301号"
 msgstr ""
 
-#: Scene:data/map/17/0/12/Scene.json
-msgid "110号"
+#: Scene:data/map/20/2/10/Scene.json
+msgid "308号"
 msgstr ""
 
-#: Scene:data/map/17/0/9/Scene.json
+#: Scene:data/map/20/2/14/Scene.json
+msgid "312号"
+msgstr ""
+
+#: Scene:data/map/20/2/4/Scene.json
+msgid "302号"
+msgstr ""
+
+#: Scene:data/map/20/2/8/Scene.json
+msgid "306号"
+msgstr ""
+
+#: Scene:data/map/20/2/13/Scene.json
+msgid "311号"
+msgstr ""
+
+#: Scene:data/map/20/2/5/Scene.json
+msgid "303号"
+msgstr ""
+
+#: Scene:data/map/20/2/7/Scene.json
+msgid "305号"
+msgstr ""
+
+#: Scene:data/map/20/2/15/Scene.json
+msgid "313号"
+msgstr ""
+
+#: Scene:data/map/20/2/11/Scene.json
+msgid "309号"
+msgstr ""
+
+#: Scene:data/map/20/2/12/Scene.json
+msgid "310号"
+msgstr ""
+
+#: Scene:data/map/20/2/16/Scene.json
+msgid "314号"
+msgstr ""
+
+#: Map:data/map/20/Map.json
+msgid "女生宿舍楼B"
+msgstr ""
+
+#: Scene:data/map/20/4/9/Scene.json
+msgid "007号"
+msgstr ""
+
+#: Scene:data/map/20/4/6/Scene.json
+msgid "004号"
+msgstr ""
+
+#: Scene:data/map/20/4/3/Scene.json
+msgid "001号"
+msgstr ""
+
+#: Scene:data/map/20/4/10/Scene.json
+msgid "008号"
+msgstr ""
+
+#: Scene:data/map/20/4/14/Scene.json
+msgid "012号"
+msgstr ""
+
+#: Map:data/map/20/4/Map.json
+msgid "-1F"
+msgstr ""
+
+#: Scene:data/map/20/4/4/Scene.json
+msgid "002号"
+msgstr ""
+
+#: Scene:data/map/20/4/8/Scene.json
+msgid "006号"
+msgstr ""
+
+#: Scene:data/map/20/4/0/Scene.json
+msgid "-1F楼梯间"
+msgstr ""
+
+#: Scene:data/map/20/4/13/Scene.json
+msgid "011号"
+msgstr ""
+
+#: Scene:data/map/20/4/5/Scene.json
+msgid "003号"
+msgstr ""
+
+#: Scene:data/map/20/4/7/Scene.json
+msgid "005号"
+msgstr ""
+
+#: Scene:data/map/20/4/15/Scene.json
+msgid "013号"
+msgstr ""
+
+#: Scene:data/map/20/4/11/Scene.json
+msgid "009号"
+msgstr ""
+
+#: Scene:data/map/20/4/12/Scene.json
+msgid "010号"
+msgstr ""
+
+#: Scene:data/map/20/4/16/Scene.json
+msgid "014号"
+msgstr ""
+
+#: Scene:data/map/20/0/9/Scene.json
 msgid "107号"
 msgstr ""
 
-#: Scene:data/map/17/0/5/Scene.json
-msgid "103号"
+#: Scene:data/map/20/0/6/Scene.json
+msgid "门卫室"
 msgstr ""
 
-#: Scene:data/map/17/0/0/Scene.json
-msgid "男宿舍楼A入口"
+#: Scene:data/map/20/0/3/Scene.json
+msgid "101号"
 msgstr ""
 
-#: Scene:data/map/17/0/14/Scene.json
+#: Scene:data/map/20/0/10/Scene.json
+msgid "108号"
+msgstr ""
+
+#: Scene:data/map/20/0/14/Scene.json
 msgid "112号"
 msgstr ""
 
-#: Scene:data/map/17/0/11/Scene.json
-msgid "109号"
+#: Scene:data/map/20/0/4/Scene.json
+msgid "102号"
 msgstr ""
 
-#: Scene:data/map/17/0/8/Scene.json
+#: Scene:data/map/20/0/8/Scene.json
 msgid "106号"
 msgstr ""
 
-#: Scene:data/map/17/0/7/Scene.json
+#: Scene:data/map/20/0/0/Scene.json
+msgid "女宿舍楼B入口"
+msgstr ""
+
+#: Scene:data/map/20/0/13/Scene.json
+msgid "111号"
+msgstr ""
+
+#: Scene:data/map/20/0/5/Scene.json
+msgid "103号"
+msgstr ""
+
+#: Scene:data/map/20/0/7/Scene.json
 msgid "105号"
+msgstr ""
+
+#: Scene:data/map/20/0/15/Scene.json
+msgid "113号"
+msgstr ""
+
+#: Scene:data/map/20/0/11/Scene.json
+msgid "109号"
+msgstr ""
+
+#: Scene:data/map/20/0/12/Scene.json
+msgid "110号"
+msgstr ""
+
+#: Scene:data/map/20/0/16/Scene.json
+msgid "114号"
 msgstr ""
 
 #: Map:data/map/17/Map.json
 msgid "男生宿舍楼A"
 msgstr ""
 
-#: Scene:data/map/17/2/10/Scene.json
-msgid "308号"
+#: Scene:data/map/17/0/0/Scene.json
+msgid "男宿舍楼A入口"
 msgstr ""
 
-#: Scene:data/map/17/2/4/Scene.json
-msgid "302号"
+#: Scene:data/map/6/Scene.json
+msgid "篮球场B"
 msgstr ""
 
-#: Scene:data/map/17/2/3/Scene.json
-msgid "301号"
-msgstr ""
-
-#: Scene:data/map/17/2/13/Scene.json
-msgid "311号"
-msgstr ""
-
-#: Scene:data/map/17/2/6/Scene.json
-msgid "304号"
-msgstr ""
-
-#: Scene:data/map/17/2/15/Scene.json
-msgid "313号"
-msgstr ""
-
-#: Scene:data/map/17/2/16/Scene.json
-msgid "314号"
-msgstr ""
-
-#: Scene:data/map/17/2/12/Scene.json
-msgid "310号"
-msgstr ""
-
-#: Scene:data/map/17/2/9/Scene.json
-msgid "307号"
-msgstr ""
-
-#: Scene:data/map/17/2/5/Scene.json
-msgid "303号"
-msgstr ""
-
-#: Scene:data/map/17/2/14/Scene.json
-msgid "312号"
-msgstr ""
-
-#: Scene:data/map/17/2/11/Scene.json
-msgid "309号"
-msgstr ""
-
-#: Scene:data/map/17/2/8/Scene.json
-msgid "306号"
-msgstr ""
-
-#: Scene:data/map/17/2/7/Scene.json
-msgid "305号"
-msgstr ""
-
-#: Scene:data/map/4/Scene.json
-msgid "升旗台"
-msgstr ""
-
-#: Scene:data/map/3/1/10/Scene.json
-msgid "高二2班"
+#: Scene:data/map/3/1/9/Scene.json
+msgid "高二1班"
 msgstr ""
 
 #: Scene:data/map/3/1/1/Scene.json
@@ -12795,84 +12441,68 @@ msgstr ""
 msgid "右侧走廊"
 msgstr ""
 
-#: Scene:data/map/3/1/4/Scene.json
-msgid "学生会办公室"
+#: Scene:data/map/3/1/6/Scene.json
+msgid "初二教导主任办公室"
 msgstr ""
 
 #: Scene:data/map/3/1/3/Scene.json
 msgid "广播室"
 msgstr ""
 
-#: Scene:data/map/3/1/13/Scene.json
-msgid "初二2班"
-msgstr ""
-
-#: Scene:data/map/3/1/6/Scene.json
-msgid "初二教导主任办公室"
-msgstr ""
-
-#: Scene:data/map/3/1/15/Scene.json
-msgid "过道走廊"
-msgstr ""
-
-#: Scene:data/map/3/1/16/Scene.json
-msgid "左侧走廊"
-msgstr ""
-
-#: Scene:data/map/3/1/12/Scene.json
-msgid "初二1班"
-msgstr ""
-
-#: Scene:data/map/3/1/9/Scene.json
-msgid "高二1班"
+#: Scene:data/map/3/1/10/Scene.json
+msgid "高二2班"
 msgstr ""
 
 #: Scene:data/map/3/1/14/Scene.json
 msgid "初二3班"
 msgstr ""
 
-#: Scene:data/map/3/1/11/Scene.json
-msgid "高二3班"
+#: Scene:data/map/3/1/2/Scene.json
+msgid "高二教导主任办公室"
+msgstr ""
+
+#: Scene:data/map/3/1/4/Scene.json
+msgid "学生会办公室"
+msgstr ""
+
+#: Scene:data/map/3/1/13/Scene.json
+msgid "初二2班"
 msgstr ""
 
 #: Scene:data/map/3/1/7/Scene.json
 msgid "初中部2年级办公室"
 msgstr ""
 
-#: Scene:data/map/3/1/2/Scene.json
-msgid "高二教导主任办公室"
+#: Scene:data/map/3/1/15/Scene.json
+msgid "过道走廊"
 msgstr ""
 
-#: Scene:data/map/3/4/1/Scene.json
-msgid "大会议室"
+#: Scene:data/map/3/1/11/Scene.json
+msgid "高二3班"
 msgstr ""
 
-#: Scene:data/map/3/4/4/Scene.json
-msgid "社团活动室B"
+#: Scene:data/map/3/1/12/Scene.json
+msgid "初二1班"
 msgstr ""
 
-#: Scene:data/map/3/4/3/Scene.json
-msgid "社团活动室A"
-msgstr ""
-
-#: Scene:data/map/3/4/6/Scene.json
-msgid "社团活动室D"
-msgstr ""
-
-#: Scene:data/map/3/4/5/Scene.json
-msgid "社团活动室C"
+#: Scene:data/map/3/1/16/Scene.json
+msgid "左侧走廊"
 msgstr ""
 
 #: Scene:data/map/3/3/1/Scene.json
 msgid "计算机实践室A"
 msgstr ""
 
-#: Scene:data/map/3/3/4/Scene.json
-msgid "物理实验室A"
-msgstr ""
-
 #: Scene:data/map/3/3/6/Scene.json
 msgid "化学实验室A"
+msgstr ""
+
+#: Scene:data/map/3/3/2/Scene.json
+msgid "计算机实践室B"
+msgstr ""
+
+#: Scene:data/map/3/3/4/Scene.json
+msgid "物理实验室A"
 msgstr ""
 
 #: Scene:data/map/3/3/5/Scene.json
@@ -12883,132 +12513,636 @@ msgstr ""
 msgid "化学实验室B"
 msgstr ""
 
-#: Scene:data/map/3/3/2/Scene.json
-msgid "计算机实践室B"
-msgstr ""
-
-#: Scene:data/map/3/5/0/Scene.json
-msgid "天台入口"
-msgstr ""
-
-#: Scene:data/map/3/5/2/Scene.json
-msgid "校长办公室"
-msgstr ""
-
-#: Scene:data/map/3/0/10/Scene.json
-msgid "高一2班"
-msgstr ""
-
-#: Scene:data/map/3/0/1/Scene.json
-msgid "高中部1年级办公室"
-msgstr ""
-
-#: Scene:data/map/3/0/4/Scene.json
-msgid "团支部办公室"
-msgstr ""
-
-#: Scene:data/map/3/0/3/Scene.json
-msgid "党支部办公室"
-msgstr ""
-
-#: Scene:data/map/3/0/13/Scene.json
-msgid "初一2班"
-msgstr ""
-
-#: Scene:data/map/3/0/6/Scene.json
-msgid "初一教导主任办公室"
-msgstr ""
-
-#: Scene:data/map/3/0/12/Scene.json
-msgid "初一1班"
-msgstr ""
-
-#: Scene:data/map/3/0/9/Scene.json
-msgid "高一1班"
-msgstr ""
-
-#: Scene:data/map/3/0/5/Scene.json
-msgid "少先队队部办公室"
-msgstr ""
-
-#: Scene:data/map/3/0/0/Scene.json
-msgid "主教学楼入口"
-msgstr ""
-
-#: Scene:data/map/3/0/14/Scene.json
-msgid "初一3班"
-msgstr ""
-
-#: Scene:data/map/3/0/11/Scene.json
-msgid "高一3班"
-msgstr ""
-
-#: Scene:data/map/3/0/7/Scene.json
-msgid "初中部1年级办公室"
-msgstr ""
-
-#: Scene:data/map/3/0/2/Scene.json
-msgid "高一教导主任办公室"
-msgstr ""
-
-#: Map:data/map/3/Map.json
-msgid "主教学楼"
-msgstr ""
-
-#: Scene:data/map/3/2/10/Scene.json
-msgid "高三2班"
+#: Scene:data/map/3/2/9/Scene.json
+msgid "高三1班"
 msgstr ""
 
 #: Scene:data/map/3/2/1/Scene.json
 msgid "高中部3年级办公室"
 msgstr ""
 
+#: Scene:data/map/3/2/6/Scene.json
+msgid "初一教导主任办公室"
+msgstr ""
+
 #: Scene:data/map/3/2/3/Scene.json
 msgid "小会议室"
 msgstr ""
 
-#: Scene:data/map/3/2/13/Scene.json
-msgid "初三2班"
-msgstr ""
-
-#: Scene:data/map/3/2/12/Scene.json
-msgid "初三1班"
-msgstr ""
-
-#: Scene:data/map/3/2/9/Scene.json
-msgid "高三1班"
+#: Scene:data/map/3/2/10/Scene.json
+msgid "高三2班"
 msgstr ""
 
 #: Scene:data/map/3/2/14/Scene.json
 msgid "初三3班"
 msgstr ""
 
-#: Scene:data/map/3/2/11/Scene.json
-msgid "高三3班"
+#: Scene:data/map/3/2/2/Scene.json
+msgid "高三教导主任办公室"
+msgstr ""
+
+#: Scene:data/map/3/2/4/Scene.json
+msgid "团支部办公室"
+msgstr ""
+
+#: Scene:data/map/3/2/13/Scene.json
+msgid "初三2班"
+msgstr ""
+
+#: Scene:data/map/3/2/5/Scene.json
+msgid "少先队队部办公室"
 msgstr ""
 
 #: Scene:data/map/3/2/7/Scene.json
 msgid "初中部3年级办公室"
 msgstr ""
 
-#: Scene:data/map/3/2/2/Scene.json
-msgid "高三教导主任办公室"
+#: Scene:data/map/3/2/11/Scene.json
+msgid "高三3班"
+msgstr ""
+
+#: Scene:data/map/3/2/12/Scene.json
+msgid "初三1班"
+msgstr ""
+
+#: Map:data/map/3/Map.json
+msgid "主教学楼"
+msgstr ""
+
+#: Scene:data/map/3/4/1/Scene.json
+msgid "大会议室"
+msgstr ""
+
+#: Scene:data/map/3/4/6/Scene.json
+msgid "社团活动室D"
+msgstr ""
+
+#: Scene:data/map/3/4/3/Scene.json
+msgid "社团活动室A"
+msgstr ""
+
+#: Scene:data/map/3/4/4/Scene.json
+msgid "社团活动室B"
+msgstr ""
+
+#: Scene:data/map/3/4/5/Scene.json
+msgid "社团活动室C"
+msgstr ""
+
+#: Scene:data/map/3/0/9/Scene.json
+msgid "高一1班"
+msgstr ""
+
+#: Scene:data/map/3/0/1/Scene.json
+msgid "高中部1年级办公室"
+msgstr ""
+
+#: Scene:data/map/3/0/3/Scene.json
+msgid "党支部办公室"
+msgstr ""
+
+#: Scene:data/map/3/0/10/Scene.json
+msgid "高一2班"
+msgstr ""
+
+#: Scene:data/map/3/0/14/Scene.json
+msgid "初一3班"
+msgstr ""
+
+#: Scene:data/map/3/0/2/Scene.json
+msgid "高一教导主任办公室"
+msgstr ""
+
+#: Scene:data/map/3/0/0/Scene.json
+msgid "主教学楼入口"
+msgstr ""
+
+#: Scene:data/map/3/0/13/Scene.json
+msgid "初一2班"
+msgstr ""
+
+#: Scene:data/map/3/0/7/Scene.json
+msgid "初中部1年级办公室"
+msgstr ""
+
+#: Scene:data/map/3/0/11/Scene.json
+msgid "高一3班"
+msgstr ""
+
+#: Scene:data/map/3/0/12/Scene.json
+msgid "初一1班"
+msgstr ""
+
+#: Scene:data/map/3/5/2/Scene.json
+msgid "校长办公室"
+msgstr ""
+
+#: Scene:data/map/3/5/0/Scene.json
+msgid "天台入口"
+msgstr ""
+
+#: Map:data/map/19/Map.json
+msgid "男生宿舍楼B"
+msgstr ""
+
+#: Scene:data/map/19/0/0/Scene.json
+msgid "男宿舍楼B入口"
+msgstr ""
+
+#: Map:data/map/18/Map.json
+msgid "女生宿舍楼A"
+msgstr ""
+
+#: Scene:data/map/18/0/0/Scene.json
+msgid "女宿舍楼A入口"
+msgstr ""
+
+#: Scene:data/map/25/1/9/Scene.json
+msgid "209室"
+msgstr ""
+
+#: Scene:data/map/25/1/1/Scene.json
+msgid "201室"
+msgstr ""
+
+#: Scene:data/map/25/1/17/Scene.json
+msgid "217室"
+msgstr ""
+
+#: Scene:data/map/25/1/6/Scene.json
+msgid "206室"
+msgstr ""
+
+#: Scene:data/map/25/1/3/Scene.json
+msgid "203室"
+msgstr ""
+
+#: Scene:data/map/25/1/19/Scene.json
+msgid "219室"
+msgstr ""
+
+#: Scene:data/map/25/1/18/Scene.json
+msgid "218室"
+msgstr ""
+
+#: Scene:data/map/25/1/10/Scene.json
+msgid "210室"
+msgstr ""
+
+#: Scene:data/map/25/1/14/Scene.json
+msgid "214室"
+msgstr ""
+
+#: Scene:data/map/25/1/2/Scene.json
+msgid "202室"
+msgstr ""
+
+#: Scene:data/map/25/1/4/Scene.json
+msgid "204室"
+msgstr ""
+
+#: Scene:data/map/25/1/8/Scene.json
+msgid "208室"
+msgstr ""
+
+#: Scene:data/map/25/1/13/Scene.json
+msgid "213室"
+msgstr ""
+
+#: Scene:data/map/25/1/5/Scene.json
+msgid "205室"
+msgstr ""
+
+#: Scene:data/map/25/1/7/Scene.json
+msgid "207室"
+msgstr ""
+
+#: Scene:data/map/25/1/15/Scene.json
+msgid "215室"
+msgstr ""
+
+#: Scene:data/map/25/1/11/Scene.json
+msgid "211室"
+msgstr ""
+
+#: Scene:data/map/25/1/12/Scene.json
+msgid "212室"
+msgstr ""
+
+#: Scene:data/map/25/1/16/Scene.json
+msgid "216室"
+msgstr ""
+
+#: Scene:data/map/25/3/9/Scene.json
+msgid "409室"
+msgstr ""
+
+#: Scene:data/map/25/3/1/Scene.json
+msgid "401室"
+msgstr ""
+
+#: Scene:data/map/25/3/17/Scene.json
+msgid "417室"
+msgstr ""
+
+#: Scene:data/map/25/3/6/Scene.json
+msgid "406室"
+msgstr ""
+
+#: Scene:data/map/25/3/3/Scene.json
+msgid "403室"
+msgstr ""
+
+#: Scene:data/map/25/3/19/Scene.json
+msgid "419室"
+msgstr ""
+
+#: Scene:data/map/25/3/18/Scene.json
+msgid "418室"
+msgstr ""
+
+#: Scene:data/map/25/3/10/Scene.json
+msgid "410室"
+msgstr ""
+
+#: Scene:data/map/25/3/14/Scene.json
+msgid "414室"
+msgstr ""
+
+#: Scene:data/map/25/3/2/Scene.json
+msgid "402室"
+msgstr ""
+
+#: Scene:data/map/25/3/4/Scene.json
+msgid "404室"
+msgstr ""
+
+#: Scene:data/map/25/3/8/Scene.json
+msgid "408室"
+msgstr ""
+
+#: Scene:data/map/25/3/13/Scene.json
+msgid "413室"
+msgstr ""
+
+#: Scene:data/map/25/3/5/Scene.json
+msgid "405室"
+msgstr ""
+
+#: Scene:data/map/25/3/7/Scene.json
+msgid "407室"
+msgstr ""
+
+#: Scene:data/map/25/3/15/Scene.json
+msgid "415室"
+msgstr ""
+
+#: Scene:data/map/25/3/11/Scene.json
+msgid "411室"
+msgstr ""
+
+#: Scene:data/map/25/3/12/Scene.json
+msgid "412室"
+msgstr ""
+
+#: Scene:data/map/25/3/16/Scene.json
+msgid "416室"
+msgstr ""
+
+#: Scene:data/map/25/2/9/Scene.json
+msgid "309室"
+msgstr ""
+
+#: Scene:data/map/25/2/1/Scene.json
+msgid "301室"
+msgstr ""
+
+#: Scene:data/map/25/2/17/Scene.json
+msgid "317室"
+msgstr ""
+
+#: Scene:data/map/25/2/6/Scene.json
+msgid "306室"
+msgstr ""
+
+#: Scene:data/map/25/2/3/Scene.json
+msgid "303室"
+msgstr ""
+
+#: Scene:data/map/25/2/19/Scene.json
+msgid "319室"
+msgstr ""
+
+#: Scene:data/map/25/2/18/Scene.json
+msgid "318室"
+msgstr ""
+
+#: Scene:data/map/25/2/10/Scene.json
+msgid "310室"
+msgstr ""
+
+#: Scene:data/map/25/2/14/Scene.json
+msgid "314室"
+msgstr ""
+
+#: Scene:data/map/25/2/2/Scene.json
+msgid "302室"
+msgstr ""
+
+#: Scene:data/map/25/2/4/Scene.json
+msgid "304室"
+msgstr ""
+
+#: Scene:data/map/25/2/8/Scene.json
+msgid "308室"
+msgstr ""
+
+#: Scene:data/map/25/2/13/Scene.json
+msgid "313室"
+msgstr ""
+
+#: Scene:data/map/25/2/5/Scene.json
+msgid "305室"
+msgstr ""
+
+#: Scene:data/map/25/2/7/Scene.json
+msgid "307室"
+msgstr ""
+
+#: Scene:data/map/25/2/15/Scene.json
+msgid "315室"
+msgstr ""
+
+#: Scene:data/map/25/2/11/Scene.json
+msgid "311室"
+msgstr ""
+
+#: Scene:data/map/25/2/12/Scene.json
+msgid "312室"
+msgstr ""
+
+#: Scene:data/map/25/2/16/Scene.json
+msgid "316室"
+msgstr ""
+
+#: Map:data/map/25/Map.json
+msgid "公寓楼A"
+msgstr ""
+
+#: Scene:data/map/25/0/9/Scene.json
+msgid "109室"
+msgstr ""
+
+#: Scene:data/map/25/0/1/Scene.json
+msgid "101室"
+msgstr ""
+
+#: Scene:data/map/25/0/17/Scene.json
+msgid "117室"
+msgstr ""
+
+#: Scene:data/map/25/0/6/Scene.json
+msgid "106室"
+msgstr ""
+
+#: Scene:data/map/25/0/3/Scene.json
+msgid "103室"
+msgstr ""
+
+#: Scene:data/map/25/0/19/Scene.json
+msgid "119室"
+msgstr ""
+
+#: Scene:data/map/25/0/18/Scene.json
+msgid "118室"
+msgstr ""
+
+#: Scene:data/map/25/0/10/Scene.json
+msgid "110室"
+msgstr ""
+
+#: Scene:data/map/25/0/14/Scene.json
+msgid "114室"
+msgstr ""
+
+#: Scene:data/map/25/0/2/Scene.json
+msgid "102室"
+msgstr ""
+
+#: Scene:data/map/25/0/4/Scene.json
+msgid "104室"
+msgstr ""
+
+#: Scene:data/map/25/0/8/Scene.json
+msgid "108室"
+msgstr ""
+
+#: Scene:data/map/25/0/0/Scene.json
+msgid "公寓楼A入口"
+msgstr ""
+
+#: Scene:data/map/25/0/13/Scene.json
+msgid "113室"
+msgstr ""
+
+#: Scene:data/map/25/0/5/Scene.json
+msgid "105室"
+msgstr ""
+
+#: Scene:data/map/25/0/7/Scene.json
+msgid "107室"
+msgstr ""
+
+#: Scene:data/map/25/0/15/Scene.json
+msgid "115室"
+msgstr ""
+
+#: Scene:data/map/25/0/11/Scene.json
+msgid "111室"
+msgstr ""
+
+#: Scene:data/map/25/0/12/Scene.json
+msgid "112室"
+msgstr ""
+
+#: Scene:data/map/25/0/16/Scene.json
+msgid "116室"
+msgstr ""
+
+#: Scene:data/map/10/1/1/Scene.json
+msgid "取餐区"
+msgstr ""
+
+#: Scene:data/map/10/1/3/Scene.json
+msgid "就餐区H"
+msgstr ""
+
+#: Scene:data/map/10/1/2/Scene.json
+msgid "就餐区G"
+msgstr ""
+
+#: Scene:data/map/10/1/0/Scene.json
+msgid "2F入口"
+msgstr ""
+
+#: Map:data/map/10/Map.json
+msgid "大食堂"
+msgstr ""
+
+#: Scene:data/map/10/0/1/Scene.json
+msgid "取餐区(荤)"
+msgstr ""
+
+#: Scene:data/map/10/0/6/Scene.json
+msgid "就餐区D"
+msgstr ""
+
+#: Scene:data/map/10/0/3/Scene.json
+msgid "就餐区A"
+msgstr ""
+
+#: Scene:data/map/10/0/2/Scene.json
+msgid "取餐区(素)"
+msgstr ""
+
+#: Scene:data/map/10/0/4/Scene.json
+msgid "就餐区B"
+msgstr ""
+
+#: Scene:data/map/10/0/8/Scene.json
+msgid "就餐区F"
+msgstr ""
+
+#: Scene:data/map/10/0/0/Scene.json
+msgid "大食堂入口"
+msgstr ""
+
+#: Scene:data/map/10/0/5/Scene.json
+msgid "就餐区C"
+msgstr ""
+
+#: Scene:data/map/10/0/7/Scene.json
+msgid "就餐区E"
+msgstr ""
+
+#: Scene:data/map/14/1/Scene.json
+msgid "更衣间走廊"
+msgstr ""
+
+#: Scene:data/map/14/6/Scene.json
+msgid "男更衣间B"
+msgstr ""
+
+#: Scene:data/map/14/3/Scene.json
+msgid "深水池"
+msgstr ""
+
+#: Scene:data/map/14/2/Scene.json
+msgid "浅水池"
+msgstr ""
+
+#: Map:data/map/14/Map.json
+msgid "游泳馆"
+msgstr ""
+
+#: Scene:data/map/14/4/Scene.json
+msgid "男更衣间A"
+msgstr ""
+
+#: Scene:data/map/14/8/Scene.json
+msgid "泳池过道"
+msgstr ""
+
+#: Scene:data/map/14/0/Scene.json
+msgid "游泳馆入口"
+msgstr ""
+
+#: Scene:data/map/14/5/Scene.json
+msgid "女更衣间A"
+msgstr ""
+
+#: Scene:data/map/14/7/Scene.json
+msgid "女更衣间B"
+msgstr ""
+
+#: Map:data/map/24/Map.json
+msgid "女生宿舍楼D"
+msgstr ""
+
+#: Scene:data/map/24/0/0/Scene.json
+msgid "女宿舍楼D入口"
+msgstr ""
+
+#: Map:data/map/23/Map.json
+msgid "男生宿舍楼D"
+msgstr ""
+
+#: Scene:data/map/23/0/0/Scene.json
+msgid "男宿舍楼D入口"
+msgstr ""
+
+#: Map:data/map/21/Map.json
+msgid "男生宿舍楼C"
+msgstr ""
+
+#: Scene:data/map/21/0/0/Scene.json
+msgid "男宿舍楼C入口"
+msgstr ""
+
+#: Scene:data/map/2/Scene.json
+msgid "大操场"
+msgstr ""
+
+#: Map:data/map/Map.json
+msgid "学校"
+msgstr ""
+
+#: Scene:data/map/4/Scene.json
+msgid "升旗台"
+msgstr ""
+
+#: Scene:data/map/8/Scene.json
+msgid "喷泉"
+msgstr ""
+
+#: Scene:data/map/0/Scene.json
+msgid "学校大门"
+msgstr ""
+
+#: Map:data/map/22/Map.json
+msgid "女生宿舍楼C"
+msgstr ""
+
+#: Scene:data/map/22/0/0/Scene.json
+msgid "女宿舍楼C入口"
+msgstr ""
+
+#: Map:data/map/26/Map.json
+msgid "公寓楼B"
+msgstr ""
+
+#: Scene:data/map/26/0/0/Scene.json
+msgid "公寓楼B入口"
 msgstr ""
 
 #: Scene:data/map/13/1/1/Scene.json
 msgid "电子借阅处A"
 msgstr ""
 
-#: Scene:data/map/13/1/4/Scene.json
-msgid "碑帖"
+#: Scene:data/map/13/1/6/Scene.json
+msgid "旧平装图书"
 msgstr ""
 
 #: Scene:data/map/13/1/3/Scene.json
 msgid "大厅"
 msgstr ""
 
-#: Scene:data/map/13/1/6/Scene.json
-msgid "旧平装图书"
+#: Scene:data/map/13/1/2/Scene.json
+msgid "电子借阅处B"
+msgstr ""
+
+#: Scene:data/map/13/1/4/Scene.json
+msgid "碑帖"
 msgstr ""
 
 #: Scene:data/map/13/1/5/Scene.json
@@ -13019,286 +13153,154 @@ msgstr ""
 msgid "近现代报纸"
 msgstr ""
 
-#: Scene:data/map/13/1/2/Scene.json
-msgid "电子借阅处B"
-msgstr ""
-
-#: Scene:data/map/13/4/1/Scene.json
-msgid "电子借阅处G"
-msgstr ""
-
-#: Scene:data/map/13/4/4/Scene.json
-msgid "科技报告"
-msgstr ""
-
-#: Scene:data/map/13/4/6/Scene.json
-msgid "教科书范本"
-msgstr ""
-
-#: Scene:data/map/13/4/5/Scene.json
-msgid "音像资料"
-msgstr ""
-
-#: Scene:data/map/13/4/0/Scene.json
-msgid "5F入口"
-msgstr ""
-
-#: Scene:data/map/13/4/7/Scene.json
-msgid "盲文阅读"
-msgstr ""
-
-#: Scene:data/map/13/4/2/Scene.json
-msgid "电子借阅处H"
-msgstr ""
-
 #: Scene:data/map/13/3/1/Scene.json
 msgid "电子借阅处E"
-msgstr ""
-
-#: Scene:data/map/13/3/4/Scene.json
-msgid "外文图书"
 msgstr ""
 
 #: Scene:data/map/13/3/6/Scene.json
 msgid "专利文献"
 msgstr ""
 
-#: Scene:data/map/13/3/5/Scene.json
-msgid "地方文献"
+#: Scene:data/map/13/3/2/Scene.json
+msgid "电子借阅处F"
+msgstr ""
+
+#: Scene:data/map/13/3/4/Scene.json
+msgid "外文图书"
 msgstr ""
 
 #: Scene:data/map/13/3/0/Scene.json
 msgid "4F入口"
 msgstr ""
 
+#: Scene:data/map/13/3/5/Scene.json
+msgid "地方文献"
+msgstr ""
+
 #: Scene:data/map/13/3/7/Scene.json
 msgid "技术标准资料"
-msgstr ""
-
-#: Scene:data/map/13/3/2/Scene.json
-msgid "电子借阅处F"
-msgstr ""
-
-#: Scene:data/map/13/0/1/Scene.json
-msgid "借阅处"
-msgstr ""
-
-#: Scene:data/map/13/0/4/Scene.json
-msgid "中文报纸"
-msgstr ""
-
-#: Scene:data/map/13/0/6/Scene.json
-msgid "中文图书"
-msgstr ""
-
-#: Scene:data/map/13/0/5/Scene.json
-msgid "中文期刊"
-msgstr ""
-
-#: Scene:data/map/13/0/0/Scene.json
-msgid "图书馆入口"
-msgstr ""
-
-#: Scene:data/map/13/0/7/Scene.json
-msgid "中文古籍纸装书"
-msgstr ""
-
-#: Scene:data/map/13/0/2/Scene.json
-msgid "还书处"
-msgstr ""
-
-#: Map:data/map/13/Map.json
-msgid "图书馆"
 msgstr ""
 
 #: Scene:data/map/13/2/1/Scene.json
 msgid "电子借阅处C"
 msgstr ""
 
-#: Scene:data/map/13/2/4/Scene.json
-msgid "旧外文图书"
-msgstr ""
-
 #: Scene:data/map/13/2/6/Scene.json
 msgid "外文报纸"
-msgstr ""
-
-#: Scene:data/map/13/2/5/Scene.json
-msgid "地图"
-msgstr ""
-
-#: Scene:data/map/13/2/0/Scene.json
-msgid "3F入口"
 msgstr ""
 
 #: Scene:data/map/13/2/2/Scene.json
 msgid "电子借阅处D"
 msgstr ""
 
-#: Scene:data/map/6/Scene.json
-msgid "篮球场B"
+#: Scene:data/map/13/2/4/Scene.json
+msgid "旧外文图书"
 msgstr ""
 
-#: Scene:data/map/15/0/0/Scene.json
-msgid "教职工宿舍入口"
+#: Scene:data/map/13/2/0/Scene.json
+msgid "3F入口"
 msgstr ""
 
-#: Map:data/map/15/Map.json
-msgid "教职工宿舍"
+#: Scene:data/map/13/2/5/Scene.json
+msgid "地图"
 msgstr ""
 
-#: Scene:data/map/23/0/0/Scene.json
-msgid "男宿舍楼D入口"
+#: Map:data/map/13/Map.json
+msgid "图书馆"
 msgstr ""
 
-#: Map:data/map/23/Map.json
-msgid "男生宿舍楼D"
+#: Scene:data/map/13/4/1/Scene.json
+msgid "电子借阅处G"
 msgstr ""
 
-#: Scene:data/map/16/1/0/Scene.json
-msgid "小食堂2F楼梯间"
+#: Scene:data/map/13/4/6/Scene.json
+msgid "教科书范本"
 msgstr ""
 
-#: Scene:data/map/16/0/0/Scene.json
-msgid "小食堂入口"
+#: Scene:data/map/13/4/2/Scene.json
+msgid "电子借阅处H"
 msgstr ""
 
-#: Map:data/map/16/Map.json
-msgid "小食堂"
+#: Scene:data/map/13/4/4/Scene.json
+msgid "科技报告"
 msgstr ""
 
-#: Scene:data/map/16/2/0/Scene.json
-msgid "小食堂3F楼梯间"
+#: Scene:data/map/13/4/0/Scene.json
+msgid "5F入口"
 msgstr ""
 
-#: Scene:data/map/12/Scene.json
-msgid "花坛"
+#: Scene:data/map/13/4/5/Scene.json
+msgid "音像资料"
 msgstr ""
 
-#: Scene:data/map/18/0/0/Scene.json
-msgid "女宿舍楼A入口"
+#: Scene:data/map/13/4/7/Scene.json
+msgid "盲文阅读"
 msgstr ""
 
-#: Map:data/map/18/Map.json
-msgid "女生宿舍楼A"
+#: Scene:data/map/13/0/1/Scene.json
+msgid "借阅处"
 msgstr ""
 
-#: Scene:data/map/9/Scene.json
-msgid "仓库"
+#: Scene:data/map/13/0/6/Scene.json
+msgid "中文图书"
 msgstr ""
 
-#: Scene:data/map/24/0/0/Scene.json
-msgid "女宿舍楼D入口"
+#: Scene:data/map/13/0/2/Scene.json
+msgid "还书处"
 msgstr ""
 
-#: Map:data/map/24/Map.json
-msgid "女生宿舍楼D"
+#: Scene:data/map/13/0/4/Scene.json
+msgid "中文报纸"
 msgstr ""
 
-#: Scene:data/map/20/0/0/Scene.json
-msgid "女宿舍楼B入口"
+#: Scene:data/map/13/0/0/Scene.json
+msgid "图书馆入口"
 msgstr ""
 
-#: Map:data/map/20/Map.json
-msgid "女生宿舍楼B"
+#: Scene:data/map/13/0/5/Scene.json
+msgid "中文期刊"
+msgstr ""
+
+#: Scene:data/map/13/0/7/Scene.json
+msgid "中文古籍纸装书"
 msgstr ""
 
 #: Scene:data/map/5/Scene.json
 msgid "篮球场A"
 msgstr ""
 
-#: Scene:data/map/19/0/0/Scene.json
-msgid "男宿舍楼B入口"
+#: Scene:data/map/7/Scene.json
+msgid "小树林"
 msgstr ""
 
-#: Map:data/map/19/Map.json
-msgid "男生宿舍楼B"
+#: Map:data/map/15/Map.json
+msgid "教职工宿舍"
 msgstr ""
 
-#: Scene:data/map/0/Scene.json
-msgid "学校大门"
-msgstr ""
-
-#: Scene:data/map/14/1/Scene.json
-msgid "更衣间走廊"
-msgstr ""
-
-#: Scene:data/map/14/4/Scene.json
-msgid "男更衣间A"
-msgstr ""
-
-#: Scene:data/map/14/3/Scene.json
-msgid "深水池"
-msgstr ""
-
-#: Scene:data/map/14/6/Scene.json
-msgid "男更衣间B"
-msgstr ""
-
-#: Scene:data/map/14/5/Scene.json
-msgid "女更衣间A"
-msgstr ""
-
-#: Scene:data/map/14/0/Scene.json
-msgid "游泳馆入口"
-msgstr ""
-
-#: Scene:data/map/14/8/Scene.json
-msgid "泳池过道"
-msgstr ""
-
-#: Scene:data/map/14/7/Scene.json
-msgid "女更衣间B"
-msgstr ""
-
-#: Map:data/map/14/Map.json
-msgid "游泳馆"
-msgstr ""
-
-#: Scene:data/map/14/2/Scene.json
-msgid "浅水池"
+#: Scene:data/map/15/0/0/Scene.json
+msgid "教职工宿舍入口"
 msgstr ""
 
 #: Scene:data/map/11/Scene.json
 msgid "超市"
 msgstr ""
 
-#: Scene:data/map/26/0/0/Scene.json
-msgid "公寓楼B入口"
+#: Scene:data/map/12/Scene.json
+msgid "花坛"
 msgstr ""
 
-#: Map:data/map/26/Map.json
-msgid "公寓楼B"
+#: Scene:data/map/16/1/0/Scene.json
+msgid "小食堂2F楼梯间"
 msgstr ""
 
-#: Scene:data/map/8/Scene.json
-msgid "喷泉"
+#: Scene:data/map/16/2/0/Scene.json
+msgid "小食堂3F楼梯间"
 msgstr ""
 
-#: Scene:data/map/7/Scene.json
-msgid "小树林"
+#: Map:data/map/16/Map.json
+msgid "小食堂"
 msgstr ""
 
-#: Map:data/map/Map.json
-msgid "学校"
-msgstr ""
-
-#: Scene:data/map/2/Scene.json
-msgid "大操场"
-msgstr ""
-
-#: Scene:data/map/21/0/0/Scene.json
-msgid "男宿舍楼C入口"
-msgstr ""
-
-#: Map:data/map/21/Map.json
-msgid "男生宿舍楼C"
-msgstr ""
-
-#: Scene:data/map/22/0/0/Scene.json
-msgid "女宿舍楼C入口"
-msgstr ""
-
-#: Map:data/map/22/Map.json
-msgid "女生宿舍楼C"
+#: Scene:data/map/16/0/0/Scene.json
+msgid "小食堂入口"
 msgstr ""

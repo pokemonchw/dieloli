@@ -11,7 +11,7 @@ os.system("cp ./tools/DieloliEventEditor/default.json ./data/event/")
 event_dir = os.path.join("data", "event")
 os.system("cp ./tools/DieloliAIEditor/default.json ./data/target/")
 target_dir = os.path.join("data", "target")
-os.system("cp ./tools/DieloliClubEdior/default.json ./data/club/")
+os.system("cp ./tools/DieloliClubEditor/default.json ./data/club/")
 club_dir = os.path.join("data", "club")
 os.system("cp ./tools/ai_play/policy_model.pth ./data/")
 clothing_dir = os.path.join("data", "clothing")
@@ -36,7 +36,6 @@ def build_csv_config(file_path: str, file_name: str):
         config_data[type_text].setdefault("data", [])
         config_data[type_text].setdefault("gettext", {})
         for row in now_read:
-            print(row)
             if not i:
                 for k in row:
                     now_docstring_data[k] = row[k]
