@@ -6,7 +6,7 @@ from Script.Core import (
     value_handle,
     game_type,
 )
-from Script.Design import game_time
+from Script.Design import game_time, constant
 from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
@@ -18,6 +18,11 @@ def get_age_tem_list() -> list:
     获取年龄模板
     """
     return list(game_config.config_age_tem.keys())
+
+
+def get_like_dressing_style() -> str:
+    """ 获取穿搭风格喜好 """
+    return random.choice([constant.DressingStyle.__dict__[name] for name in constant.DressingStyle.__dict__ if name.isupper()])
 
 
 def get_age(tem_name: int) -> int:

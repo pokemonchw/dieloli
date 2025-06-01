@@ -4,7 +4,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import urllib.parse
 from Script.Design import constant, character_handle
-from Script.Core import game_type, cache_control, flow_handle, main_frame
+from Script.Core import game_type, cache_control, flow_handle, main_frame, save_handle
 from Script.UI.Flow import creator_character_flow
 
 cache: game_type.Cache = cache_control.cache
@@ -55,8 +55,55 @@ class GameRequestHandler(BaseHTTPRequestHandler):
         处理/restart接口，重置游戏，返回初始状态
         """
         # 初始化游戏状态
-        #creator_character_flow.creator_character_panel()
-        #self.ai_score = 0
+        if cache.character_data[0].dead:
+            while 1:
+                if cache.now_panel_id != constant.Panel.TITLE:
+                    main_frame.window.send_cmd("")
+                    time.sleep(1)
+                else:
+                    break
+        else:
+            main_frame.window.send_cmd("94")
+            time.sleep(1)
+        while 1:
+            if flow_handle.wait_switch:
+                break
+        main_frame.window.send_cmd("1")
+        time.sleep(1)
+        while 1:
+            if flow_handle.wait_switch:
+                break
+        main_frame.window.send_cmd("0")
+        time.sleep(1)
+        while 1:
+            if flow_handle.wait_switch:
+                break
+        main_frame.window.send_cmd("0")
+        time.sleep(1)
+        while 1:
+            if flow_handle.wait_switch:
+                break
+        cache.back_save_panel = 1
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 1
+        game_state = []
+        for key in constant.handle_premise_data:
+            game_state.append(constant.handle_premise_data[key](0))
+        response = {'state': game_state}
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(response).encode('utf-8'))
+
+    def handle_current_panel(self):
+        """
+        处理/current_panel接口，获取当前的面板
+        """
+        response = {'panel_id': cache.now_panel_id}
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        time.sleep(1)
+        cache.back_save_panel = 1
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         game_state = []
         for key in constant.handle_premise_data:
             game_state.append(constant.handle_premise_data[key](0))
@@ -89,8 +136,12 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             self.send_error(400, "无效的动作")
             return
         main_frame.window.input_event_func(action)
+        time.sleep(1)
         cache.wframe_mouse.w_frame_skip_wait_mouse = 1
-        time.sleep(3)
+        while 1:
+            if flow_handle.wait_switch:
+                break
+            time.sleep(0.1)
         self.update_score()
         # 检查游戏是否结束的逻辑
         done = False
@@ -119,32 +170,50 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             return
         player_data: game_type.Character = cache.character_data[0]
         for skill_id in player_data.knowledge:
-            if player_data.knowledge[skill_id] >= 10000:
-                ai_score += 1
+            ai_score += player_data.knowledge[skill_id]
         for skill_id in player_data.language:
-            if player_data.language[skill_id] >= 10000:
-                ai_score += 1
+            ai_score += player_data.language[skill_id]
+        for skill_id in player_data.sex_experience:
+            ai_score += player_data.sex_experience[skill_id]
         for character_id in cache.character_data:
             if not character_id:
                 continue
             character_data: game_type.Character = cache.character_data[character_id]
             if 0 in character_data.social_contact and character_data.social_contact[0] == 10:
                 ai_score += 1
+        for target_id in player_data.like_preference_data:
+            ai_score += player_data.like_preference_data[target_id] * 1000
+        for target_id in player_data.dislike_preference_data:
+            ai_score -= player_data.dislike_preference_data[target_id] * 1000
+        for friend_id in player_data.favorability:
+            friend_data = cache.character_data[friend_id]
+            if 0 in friend_data.favorability:
+                ai_score += friend_data.favorability[0]
         ai_score += (cache.game_time - 1210629600) / 86400
         for achieve_id in cache_control.achieve.completed_data:
             if cache_control.achieve.completed_data[achieve_id]:
-                ai_score += 1
+                ai_score += 10000
+        if ai_score < 0:
+            ai_score = 0
         if ai_score != now_ai_score:
             add_score = ai_score - now_ai_score
             now_ai_score = ai_score
-        print("增加积分:",add_score, "当前积分:", now_ai_score)
+        print("增加积分:", add_score, "当前积分:", now_ai_score)
 
     def handle_actions(self):
         """
         处理/actions接口，获取当前可用的命令列表
         """
         global available_actions
-        response = {'actions': list(flow_handle.cmd_map.keys())}
+        cmd_map_set = {str(k) for k in flow_handle.cmd_map.keys()}
+        if cache.now_panel_id == constant.Panel.IN_SCENE:
+            cmd_map_set.discard(str(constant.Instruct.SAVE))
+            cmd_map_set.discard(str(constant.Instruct.OBSERVE_ON))
+            cmd_map_set.discard(str(constant.Instruct.OBSERVE_OFF))
+        response = {'actions': list(cmd_map_set)}
+        if len(cmd_map_set) == 0:
+            main_frame.window.send_input()
+            cache.wframe_mouse.mouse_leave_cmd = 1
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
         self.end_headers()

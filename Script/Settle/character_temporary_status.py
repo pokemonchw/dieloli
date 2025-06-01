@@ -9,7 +9,7 @@ from Script.Core import (
     cache_control,
     get_text,
 )
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 from Script.Config import normal_config
 
 

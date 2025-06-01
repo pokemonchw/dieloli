@@ -1,5 +1,5 @@
 from types import FunctionType
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 from Script.Design import game_time, character, course
 from Script.Core import get_text, cache_control, game_type
 from Script.Config import game_config

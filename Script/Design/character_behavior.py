@@ -2,9 +2,9 @@ import time
 import random
 import concurrent.futures
 from uuid import UUID
-from concurrent.futures import ThreadPoolExecutor
 from types import FunctionType
 from typing import Dict, Set, List
+import time
 import datetime
 from Script.Core import cache_control, game_type, value_handle, get_text
 from Script.Design import (
@@ -15,8 +15,6 @@ from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
-handle_thread_pool: ThreadPoolExecutor = ThreadPoolExecutor(max_workers=50)
-""" 处理角色行为的线程池 """
 
 
 def init_character_behavior():
@@ -31,12 +29,6 @@ def init_character_behavior():
     now_status_data[0] = set()
     now_status_data[1] = set()
     now_status_data[2] = set()
-    for i in cache.character_data:
-        if not i:
-            continue
-        now_judge = check_character_status_judge(i)
-        now_status_data[now_judge].add(i)
-        now_character_data = cache.character_data[i]
     for i in cache.character_data:
         cache.character_data[i].premise_data = {}
         if not i:
@@ -102,10 +94,8 @@ def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
     game_type.Character -- 更新后的角色数据
     """
     global time_index
-    now_time: int = cache.game_time
     target_weight_data = {}
     # 取出角色数据
-    character_data: game_type.Character = cache.character_data[character_id]
     null_target_set = set()
     target, _, judge = search_target(
         character_id,
@@ -119,7 +109,7 @@ def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
         target.imitate_character_id = character_id
         if target.affiliation == "":
             target.affiliation = target.uid
-    if target == None:
+    if target is None:
         target = game_type.ExecuteTarget()
     target.character_id = character_id
     return target
@@ -132,7 +122,6 @@ def run_character_target(target: game_type.ExecuteTarget):
     game_type.Character -- 更新后的角色数据
     """
     now_time: int = cache.game_time
-    player_data: game_type.Character = cache.character_data[0]
     character_id: int = target.character_id
     character_data: game_type.Character = cache.character_data[target.character_id]
     if target.uid != "":
@@ -237,7 +226,7 @@ def judge_character_status(character_id: int, now_time: int) -> int:
                 character_data.extreme_exhaustion_time = 0
     character_data.behavior.temporary_status = game_type.TemporaryStatus()
     if cache.game_time >= end_time:
-        event.handle_event(character_id, 0,cache.game_time, cache.game_time)
+        event.handle_event(character_id, 0, cache.game_time, cache.game_time)
         character_data.behavior.start_time = cache.game_time
         character_data.behavior.duration = 0
 
@@ -316,11 +305,21 @@ def search_target(
             now_execute_target = game_type.ExecuteTarget()
             now_execute_target.uid = target
             now_execute_target.weight = 1 + sub_weight + (500 - 100 * target_config.needs_hierarchy)
+            if target in character_data.like_preference_data:
+                now_execute_target.weight += character_data.like_preference_data[target]
+            elif target in character_data.dislike_preference_data:
+                now_execute_target.weight -= character_data.dislike_preference_data[target]
+                now_execute_target.weight = max(1, now_execute_target.weight)
             now_execute_target.affiliation = original_target_id
             target_data[1].add(now_execute_target)
             target_weight_data[target] = now_execute_target.weight = 1
             continue
         now_weight = sub_weight + (500 - 100 * target_config.needs_hierarchy)
+        if target in character_data.like_preference_data:
+            now_weight += character_data.like_preference_data[target]
+        elif target in character_data.dislike_preference_data:
+            now_weight -= character_data.dislike_preference_data[target]
+            now_weight = max(1, now_weight)
         now_target_pass_judge = 0
         now_target_data = {}
         premise_judge = 1

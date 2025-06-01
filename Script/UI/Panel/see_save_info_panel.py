@@ -11,7 +11,7 @@ from Script.Core import (
     py_cmd,
 )
 from Script.Config import normal_config
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.Design import game_time, constant
 
 cache: game_type.Cache = cache_control.cache

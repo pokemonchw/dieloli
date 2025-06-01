@@ -699,6 +699,46 @@ def handle_is_summer(character_id: int) -> int:
     return 0
 
 
+@handle_premise.add_premise(constant.Premise.IS_FALL)
+def handle_is_fall(character_id: int) -> int:
+    """
+    校验现在是否是秋天
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    solar_period = game_time.get_solar_period(now_time)
+    season = game_config.config_solar_period[solar_period].season
+    if season == 2:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.IS_WINTER)
+def handle_is_winter(character_id: int) -> int:
+    """
+    校验现在是否是冬天
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    now_time = character_data.behavior.start_time
+    if not now_time:
+        now_time = cache.game_time
+    solar_period = game_time.get_solar_period(now_time)
+    season = game_config.config_solar_period[solar_period].season
+    if season == 3:
+        return 1
+    return 0
+
+
 @handle_premise.add_premise(constant.Premise.IS_NIGHT)
 def handle_is_night(character_id: int) -> int:
     """

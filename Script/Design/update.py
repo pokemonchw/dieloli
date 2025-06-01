@@ -2,7 +2,7 @@ import time
 import datetime
 from Script.Design import character_behavior, game_time, event, handle_achieve, weather
 from Script.Core import py_cmd,cache_control, game_type
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 from Script.Config import normal_config
 
 cache: game_type.Cache = cache_control.cache

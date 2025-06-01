@@ -22,9 +22,3 @@ class InstructType:
     SYSTEM = 9
     """ 系统 """
 
-
-class DebugInstructType:
-    """debug指令类型"""
-
-    DEFAULT = 0
-    """ 默认 """

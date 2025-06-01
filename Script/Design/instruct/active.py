@@ -7,7 +7,7 @@ from Script.Design import (
     map_handle, handle_achieve
 )
 from Script.Config import normal_config
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 
 
 cache: game_type.Cache = cache_control.cache

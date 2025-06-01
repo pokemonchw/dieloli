@@ -146,3 +146,31 @@ def handle_target_is_not_collection(character_id: int) -> int:
     if character_data.target_character_id not in player_data.collection_character:
         return 1
     return 0
+
+
+@handle_premise.add_premise(constant.Premise.OBSERVE_IS_ON)
+def handle_observe_is_on(character_id: int) -> int:
+    """
+    校验是否已开启看海模式
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    if cache.observe_switch:
+        return 1
+    return 0
+
+
+@handle_premise.add_premise(constant.Premise.OBSERVE_IS_OFF)
+def handle_observe_is_off(character_id: int) -> int:
+    """
+    校验是否已关闭看海模式
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    if cache.observe_switch:
+        return 0
+    return 1

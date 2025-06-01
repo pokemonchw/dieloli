@@ -1,5 +1,5 @@
 from types import FunctionType
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.Core import (
     game_type, cache_control, text_handle, get_text, py_cmd, flow_handle
 )

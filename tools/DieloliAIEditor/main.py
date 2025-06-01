@@ -29,7 +29,6 @@ item_effect_list: ItemEffectList = ItemEffectList()
 cache_control.item_effect_list = item_effect_list
 
 
-
 def load_ai_data():
     """载入ai数据"""
     now_file = QFileDialog.getOpenFileName(menu_bar, "选择文件", ".", "*.json")
@@ -40,6 +39,7 @@ def load_ai_data():
         for k in now_data:
             now_target: game_type.Target = game_type.Target()
             now_target.__dict__ = now_data[k]
+            print(now_target.text)
             cache_control.now_target_data[k] = now_target
             cache_control.now_target_id = ""
             item_premise_list.update()

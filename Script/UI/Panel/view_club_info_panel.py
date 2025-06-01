@@ -4,9 +4,9 @@ from collections import defaultdict
 from operator import attrgetter
 from Script.Core import cache_control, game_type, get_text, flow_handle, py_cmd, text_handle
 from Script.Design import constant, attr_calculation, attr_text, game_time, character_move
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.Config import game_config, normal_config
-from Script.UI.Moudle import panel
+from Script.UI.Model import panel
 
 _: FunctionType = get_text._
 """ 翻译api """

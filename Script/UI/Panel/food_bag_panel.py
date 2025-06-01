@@ -2,7 +2,7 @@ from typing import Set, Tuple
 from types import FunctionType
 from uuid import UUID
 from Script.Core import get_text, game_type, cache_control, flow_handle, text_handle
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.Design import cooking, update, constant
 from Script.Config import normal_config, game_config
 

@@ -1,0 +1,8 @@
+cid,info
+FoodName,进食时食用的食物名称(仅进食结算事件可触发)
+Name,角色的名称，当角色时玩家时，固定为[你]
+SceneName,角色所在场景名称
+TargetName,角色的交互对象名称(仅拥有交互对象时可触发)
+TargetSceneName,移动的目标场景名称(仅移动开始事件可触发)
+SrcSceneName,移动的出发场景名称(仅移动结束事件可触发)
+PlayerName,玩家的角色名称
