@@ -10,7 +10,7 @@ from Script.Core import (
     py_cmd,
 )
 from Script.Design import map_handle, cooking, constant
-from Script.UI.Moudle import draw, panel
+from Script.UI.Model import draw, panel
 from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache

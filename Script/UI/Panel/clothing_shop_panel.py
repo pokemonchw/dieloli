@@ -10,7 +10,7 @@ from Script.Core import (
     py_cmd,
 )
 from Script.Design import constant
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.UI.Panel.see_clothing_info_panel import ClothingDescribeDraw
 from Script.Config import game_config, normal_config
 

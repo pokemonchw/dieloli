@@ -4,7 +4,7 @@ from uuid import UUID
 import time
 import ollama
 from Script.Core import get_text, game_type, cache_control, flow_handle, text_handle, py_cmd
-from Script.UI.Moudle import panel, draw
+from Script.UI.Model import panel, draw
 from Script.Design import cooking, update, constant
 from Script.Config import normal_config, game_config
 

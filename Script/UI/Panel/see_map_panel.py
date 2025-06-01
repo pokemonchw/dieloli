@@ -1,6 +1,6 @@
 from typing import List, Dict
 from types import FunctionType
-from Script.UI.Moudle import draw, panel
+from Script.UI.Model import draw, panel
 from Script.Core import (
     get_text,
     cache_control,
@@ -41,10 +41,9 @@ class SeeMapPanel:
     def draw(self):
         """绘制对象"""
         move_menu_panel_data = {
-            0: MapSceneNameDraw(self.now_map, self.width),
-            1: GlobalSceneNamePanel(self.now_map, self.width),
-            2: SocialSceneNamePanel(self.now_map, self.width),
-            3: CollectionSceneNamePanel(self.now_map, self.width),
+            0: GlobalSceneNamePanel(self.now_map, self.width),
+            1: SocialSceneNamePanel(self.now_map, self.width),
+            2: CollectionSceneNamePanel(self.now_map, self.width),
         }
         move_menu_panel = MoveMenuPanel(self.width)
         while 1:
@@ -62,37 +61,34 @@ class SeeMapPanel:
                 self.now_map, character_data.position
             )
             return_list = []
-            index = 0
-            for now_draw_line in now_draw_list.draw_text:
-                now_draw_line: game_type.MapDrawLine = now_draw_line
-                fix_width = int((self.width - now_draw_line.width) / 2)
-                fix_text = " " * fix_width
-                fix_draw = draw.NormalDraw()
-                fix_draw.text = fix_text
-                fix_draw.width = fix_width
+            left_fix_draw = draw.NormalDraw()
+            left_fix_draw.width = int(self.width / 3 * 2)
+            left_fix_draw.text = " " * left_fix_draw.width
+            fix_map_draw = MapDrawFix(self.now_map, left_fix_draw.width)
+            return_list.extend(fix_map_draw.return_list)
+            right_fix_draw = draw.NormalDraw()
+            right_fix_draw.width = int(self.width / 3) - 1
+            right_fix_draw.text = " " * right_fix_draw.width
+            scene_name_draw = MapSceneNameDraw(self.now_map, right_fix_draw.width)
+            draw_line_max = max(len(scene_name_draw.draw_list), len(fix_map_draw.draw_list))
+            fix_draw = draw.NormalDraw()
+            fix_draw.text = "│"
+            fix_draw.width = 1
+            fix_map_draw_list, fix_scene_name_draw_list = value_handle.middle_align_arrays(fix_map_draw.draw_list, scene_name_draw.draw_list)
+            for i in range(draw_line_max):
+                if i < len(fix_map_draw_list) and fix_map_draw_list[i] != 0:
+                    fix_map_draw_list[i].draw()
+                else:
+                    left_fix_draw.draw()
                 fix_draw.draw()
-                for draw_text in now_draw_line.draw_list:
-                    if draw_text.is_button and draw_text.text != character_scene_id:
-                        scene_path = map_handle.get_scene_path_for_map_scene_id(
-                            self.now_map, draw_text.text
-                        )
-                        now_draw = draw.Button(
-                            draw_text.text,
-                            draw_text.text,
-                            cmd_func=self.move_now,
-                            args=(scene_path,),
-                        )
-                        now_draw.width = self.width
-                        now_draw.draw()
-                        return_list.append(now_draw.return_text)
-                    else:
-                        now_draw = draw.NormalDraw()
-                        now_draw.text = draw_text.text
-                        now_draw.width = self.width
-                        if draw_text.is_button and draw_text.text == character_scene_id:
-                            now_draw.style = "nowmap"
-                        now_draw.draw()
+                if i < len(fix_scene_name_draw_list) and fix_scene_name_draw_list[i] != 0:
+                    fix_scene_name_draw_list[i].draw()
+                else:
+                    right_fix_draw.draw()
                 line_feed.draw()
+            return_list.extend(fix_map_draw.return_list)
+            return_list.extend(scene_name_draw.return_list)
+            index = 0
             path_edge = map_data.path_edge
             scene_path = path_edge[character_scene_id].copy()
             if character_scene_id in scene_path:
@@ -210,6 +206,74 @@ class SeeMapPanel:
         character_move.own_charcter_move(scene_path)
 
 
+class MapDrawFix:
+    """
+    对地图绘制数据进行调整(调整绘制宽度，标注当前地图等)
+    Keyword arguments:
+    now_map -- 当前地图
+    width -- 总宽度
+    """
+
+    def __init__(self, now_map: list, width: int):
+        """ 初始化绘制对象 """
+        map_path_str = map_handle.get_map_system_path_str_for_list(now_map)
+        map_data: game_type.Map = cache.map_data[map_path_str]
+        now_draw_list:  game_type.MapDraw = map_data.map_draw
+        character_data: game_type.Character = cache.character_data[0]
+        character_scene_id = map_handle.get_map_scene_id_for_scene_path(
+            now_map, character_data.position
+        )
+        self.return_list = []
+        self.draw_list = []
+        for now_draw_line in now_draw_list.draw_text:
+            now_merge_draw = draw.LeftMergeDraw(width)
+            fix_width = int((width - now_draw_line.width) / 2)
+            fix_text = " " * fix_width
+            fix_draw = draw.NormalDraw()
+            fix_draw.text = fix_text
+            fix_draw.width = fix_width
+            now_merge_draw.draw_list.append(fix_draw)
+            for draw_text in now_draw_line.draw_list:
+                if draw_text.is_button and draw_text.text != character_scene_id:
+                    scene_path = map_handle.get_scene_path_for_map_scene_id(
+                        now_map, draw_text.text
+                    )
+                    now_draw = draw.Button(
+                        draw_text.text,
+                        draw_text.text,
+                        cmd_func=self.move_now,
+                        args=(scene_path,),
+                    )
+                    now_draw.width = width
+                    self.return_list.append(now_draw.text)
+                else:
+                    now_draw = draw.NormalDraw()
+                    now_draw.text = draw_text.text
+                    now_draw.width = width
+                    if draw_text.is_button and draw_text.text == character_scene_id:
+                        now_draw.style = "nowmap"
+                now_merge_draw.draw_list.append(now_draw)
+            now_merge_draw.draw_list.append(fix_draw)
+            self.draw_list.append(now_merge_draw)
+
+    def draw(self):
+        """ 绘制 """
+        for now_draw in self.draw_list:
+            now_draw.draw()
+            line_feed.draw()
+
+    @staticmethod
+    def move_now(scene_path: List[str]):
+        """
+        控制角色移动至指定场景
+        Keyword arguments:
+        scene_path -- 目标场景路径
+        """
+        py_cmd.clr_cmd(refresh_panel=False)
+        cache.wframe_mouse.w_frame_skip_wait_mouse = 1
+        character_move.own_charcter_move(scene_path)
+
+
 class MoveMenuPanel:
     """
     快捷移动菜单面板
@@ -288,6 +352,11 @@ class MapSceneNameDraw:
         """ 当前面板的按钮返回 """
         self.end_index: int = 0
         """ 结束按钮id """
+        self.draw_group: List[List[draw.LeftButton]] = []
+        """ 绘制对象列表 """
+        self.scene_name_draw_width: int = 0
+        """ 场景名字按钮绘制宽度 """
+        self.init_draw_group()
 
     def update(self, now_map: List[str], _):
         """
@@ -296,9 +365,10 @@ class MapSceneNameDraw:
         now_map -- 当前地图
         """
         self.now_map = now_map
+        self.init_draw_group()
 
-    def draw(self):
-        """绘制面板"""
+    def init_draw_group(self):
+        """ 初始化绘制对象列表 """
         self.return_list = []
         map_path_str = map_handle.get_map_system_path_str_for_list(self.now_map)
         map_data: game_type.Map = cache.map_data[map_path_str]
@@ -335,18 +405,23 @@ class MapSceneNameDraw:
                 )
                 self.return_list.append(now_draw.return_text)
                 draw_list.append(now_draw)
-            draw_group = value_handle.list_of_groups(draw_list, 4)
+            draw_group = value_handle.list_of_groups(draw_list, 1)
             now_width_index = 0
+            self.draw_list = []
             for now_draw_list in draw_group:
+                now_merge_draw = draw.LeftMergeDraw(self.width)
+                now_merge_draw.draw_list = now_draw_list
+                self.draw_list.append(now_merge_draw)
                 if len(now_draw_list) > now_width_index:
                     now_width_index = len(now_draw_list)
-            now_width = self.width / now_width_index
-            for now_draw_list in draw_group:
-                for now_draw in now_draw_list:
-                    now_draw.width = now_width
-                    now_draw.draw()
-                line_feed.draw()
+            self.scene_name_draw_width = self.width / now_width_index
         self.end_index = len(scene_id_list) - 1
+
+    def draw(self):
+        """绘制面板"""
+        for now_draw in self.draw_list:
+            now_draw.draw()
+            line_feed.draw()
 
     @staticmethod
     def move_now(scene_path: List[str]):

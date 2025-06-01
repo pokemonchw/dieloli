@@ -3,7 +3,7 @@ import math
 import time
 from typing import List, Dict, Tuple
 from types import FunctionType
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 from Script.Core import (
     io_init,
     flow_handle,

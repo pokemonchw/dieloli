@@ -8,7 +8,7 @@ import platform
 import os
 from Script.Core import cache_control, game_path_config, get_text
 from Script.Config import game_config, config_def, normal_config
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 
 
 achieve_handler_data: Dict[str, FunctionType] = {}

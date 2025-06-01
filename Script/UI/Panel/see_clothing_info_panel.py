@@ -3,7 +3,7 @@ from types import FunctionType
 from typing import List, Tuple
 from Script.Core import cache_control, game_type, text_handle, get_text, flow_handle, py_cmd
 from Script.Config import game_config
-from Script.UI.Moudle import draw, panel
+from Script.UI.Model import draw, panel
 from Script.Design import map_handle, handle_achieve
 
 cache: game_type.Cache = cache_control.cache

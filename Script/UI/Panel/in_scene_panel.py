@@ -2,8 +2,9 @@ from typing import List
 from types import FunctionType
 import datetime
 import random
-from Script.UI.Moudle import draw, panel
+from Script.UI.Model import draw, panel
 from Script.UI.Panel import game_info_panel, see_character_info_panel
+from Script.UI.Panel import see_character_info_panel
 from Script.Core import (
     get_text, cache_control, game_type,
     flow_handle, text_handle, value_handle,
@@ -12,7 +13,7 @@ from Script.Core import (
 from Script.Design import (
     attr_text, map_handle, handle_instruct,
     handle_premise, constant, game_time,
-    handle_debug, handle_achieve, course,
+    handle_achieve, course,
 )
 from Script.Config import game_config, normal_config, config_def
 
@@ -162,7 +163,6 @@ class InScenePanel:
                 line_draw.draw()
             character_info_draw_list = []
             if character_data.target_character_id != -1:
-                target_data = cache.character_data[character_data.target_character_id]
                 character_head_draw = see_character_info_panel.CharacterInfoHead(
                     character_data.cid, self.width
                 )
@@ -427,26 +427,6 @@ class InScenePanel:
                 line_feed.draw()
                 ask_list.append(status_switch_button.return_text)
             see_instruct_panel.draw()
-            if cache.debug:
-                line.draw()
-                debug_info_title_draw = draw.NormalDraw()
-                debug_info_title_draw.width = self.width
-                debug_info_title_draw.text = _("口 debug指令: ")
-                debug_info_title_draw.draw()
-                debug_instruct_draw = SeeDebugPanel(self.width)
-                if cache.in_scene_panel_switch.debug_switch:
-                    debug_switch_button = draw.Button(_("[-关-]"), _("关闭debug指令菜单"),cmd_func=self.change_debug_panel_switch)
-                    debug_switch_button.width = self.width
-                    debug_switch_button.draw()
-                    ask_list.append(debug_switch_button.return_text)
-                    line_feed.draw()
-                    debug_instruct_draw.draw()
-                    ask_list.extend(debug_instruct_draw.return_list)
-                else:
-                    debug_switch_button = draw.Button(_("[-开-]"), _("开启debug指令菜单"),cmd_func=self.change_debug_panel_switch)
-                    debug_switch_button.width = self.width
-                    debug_switch_button.draw()
-                    ask_list.append(debug_switch_button.return_text)
             ask_list.extend(see_instruct_panel.return_list)
             flow_handle.askfor_all(ask_list)
             py_cmd.clr_cmd(refresh_panel=False)
@@ -462,10 +442,6 @@ class InScenePanel:
     def change_status_panel_switch(self):
         """ 更改状态信息面板开关状态 """
         cache.in_scene_panel_switch.status_switch = not cache.in_scene_panel_switch.status_switch
-
-    def change_debug_panel_switch(self):
-        """ 更改debug指令面板开关状态 """
-        cache.in_scene_panel_switch.debug_switch = not cache.in_scene_panel_switch.debug_switch
 
 
 class SeeInstructPanel:
@@ -612,8 +588,6 @@ class SeeInstructPanel:
         str -- 更新后的文本
         """
         if "{ClassName}" in instruct_text:
-            character_data: game_type.Character = cache.character_data[0]
-            end_time = 0
             school_id, phase = course.get_character_school_phase(0)
             now_time = datetime.datetime.fromtimestamp(cache.game_time, game_time.time_zone)
             now_time_value = now_time.hour * 100 + now_time.minute
@@ -621,9 +595,6 @@ class SeeInstructPanel:
             for session_id in game_config.config_school_session_data[school_id]:
                 session_config = game_config.config_school_session[session_id]
                 if session_config.start_time <= now_time_value <= session_config.end_time:
-                    now_value = int(now_time_value / 100) * 60 + now_time_value % 100
-                    end_value = int(session_config.end_time / 100) * 60 + session_config.end_time % 100
-                    end_time = end_value - now_value + 1
                     now_course_index = session_config.session
                     break
             now_week = now_time.weekday()
@@ -631,141 +602,6 @@ class SeeInstructPanel:
                 instruct_text = instruct_text.format(ClassName=_("自习课"))
             else:
                 now_course = cache.course_time_table_data[school_id][phase][now_week][now_course_index]
-                course_config:config_def.Course = game_config.config_course[now_course]
+                course_config: config_def.Course = game_config.config_course[now_course]
                 instruct_text = instruct_text.format(ClassName=course_config.name)
         return instruct_text
-
-
-class SeeDebugPanel:
-    """
-    查看debug菜单面板
-    Keyword arguments:
-    width -- 绘制宽度
-    """
-
-    def __init__(self, width: int):
-        """初始化绘制对象"""
-        self.width: int = width
-        """ 最大绘制宽度 """
-        self.return_list: List[str] = []
-        """ 监听的按钮列表 """
-        if cache.debug_filter == {}:
-            for debug_type in game_config.config_debug_instruct_type:
-                cache.debug_filter[debug_type] = 0
-            cache.debug_filter[0] = 1
-
-    def draw(self):
-        """绘制操作菜单面板"""
-        self.return_list = []
-        line = draw.LineDraw("-.-", self.width)
-        line.draw()
-        fix_draw = draw.NormalDraw()
-        fix_width = int((self.width - int(len(game_config.config_debug_instruct_type) * len(cache.debug_filter))) / 2)
-        fix_draw.width = fix_width
-        fix_draw.text = " " * fix_width
-        fix_draw.draw()
-        for now_type in cache.debug_filter:
-            now_config = game_config.config_debug_instruct_type[now_type]
-            if cache.debug_filter[now_type]:
-                now_button = draw.CenterButton(
-                    f"[{now_config.name}]",
-                    now_config.name,
-                    8,
-                    " ",
-                    "onbutton",
-                    "standard",
-                    cmd_func=self.change_filter,
-                    args=(now_type,),
-                )
-            else:
-                now_button = draw.CenterButton(
-                    f"[{now_config.name}]",
-                    now_config.name,
-                    8,
-                    cmd_func=self.change_filter,
-                    args=(now_type,),
-                )
-            self.return_list.append(now_button.return_text)
-            now_button.draw()
-        line_feed.draw()
-        line = draw.LineDraw("~..", self.width)
-        line.draw()
-        now_debug_list = []
-        now_premise_data = {}
-        debug_len_max = 0
-        for now_type in cache.debug_filter:
-            if cache.debug_filter[now_type] and now_type in constant.debug_type_data:
-                for debug in constant.debug_type_data[now_type]:
-                    premise_judge = 0
-                    if debug in constant.debug_premise_data:
-                        for premise in constant.debug_premise_data[debug]:
-                            if premise in now_premise_data:
-                                if now_premise_data[premise]:
-                                    continue
-                                premise_judge = 1
-                                break
-                            now_premise_value = handle_premise.handle_premise(premise, 0)
-                            now_premise_data[premise] = now_premise_value
-                            if not now_premise_value:
-                                premise_judge = 1
-                                break
-                    if premise_judge:
-                        continue
-                    now_debug_list.append(debug)
-                    debug_name = constant.handle_debug_name_data[debug]
-                    debug_len = text_handle.get_text_index(debug_name)
-                    if (debug_len + 5) % 2 != 0:
-                        debug_len += 1
-                    if debug_len > debug_len_max:
-                        debug_len_max = debug_len
-        debug_len_max += 5
-        now_debug_list.sort()
-        rows = 1
-        cols = int(normal_config.config_normal.text_width / debug_len_max)
-        for i in range(1, len(now_debug_list)):
-            if i * cols >= len(now_debug_list):
-                rows = i
-                break
-        debug_group = value_handle.list_of_groups(now_debug_list, rows)
-        now_draw_list = []
-        for debug_list in debug_group:
-            for debug_id in debug_list:
-                debug_name = constant.handle_debug_name_data[debug_id]
-                id_text = text_handle.id_index(debug_id)
-                now_text = f"{id_text}{debug_name}"
-                now_draw = draw.LeftButton(
-                    now_text,
-                    str(debug_id),
-                    int(self.width / len(debug_group)),
-                    cmd_func=self.handle_debug,
-                    args=(debug_id,),
-                )
-                now_draw_list.append(now_draw)
-                self.return_list.append(now_draw.return_text)
-        now_draw = panel.VerticalDrawTextListGroup(self.width)
-        now_group = value_handle.list_of_groups(now_draw_list, rows)
-        now_draw.draw_list = now_group
-        now_draw.draw()
-
-    @staticmethod
-    def change_filter(now_type: int):
-        """
-        更改指令类型过滤状态
-        Keyword arguments:
-        now_type -- 指令类型
-        """
-        if cache.debug_filter[now_type]:
-            cache.debug_filter[now_type] = 0
-        else:
-            cache.debug_filter[now_type] = 1
-
-    @staticmethod
-    def handle_debug(debug_id: int):
-        """
-        处理玩家操作指令
-        Keyword arguments:
-        instruct_id -- 指令id
-        """
-        py_cmd.clr_cmd(refresh_panel=False)
-        handle_debug.handle_debug(debug_id)
-        py_cmd.clr_cmd()

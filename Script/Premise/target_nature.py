@@ -651,3 +651,28 @@ def handle_target_is_keen(character_id: int) -> int:
     if target_data.nature[17] < 50:
         return 1
     return 0
+
+
+@handle_premise.add_premise(constant.Premise.TARGET_IS_HUMOR_MAN)
+def handle_target_is_humor_man(character_id: int) -> int:
+    """
+    校验交互对象是否是一个幽默的人
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    value = 0
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
+    target_data: game_type.Character = cache.character_data[character_data.target_character_id]
+    for i in {0, 1, 2, 5, 13, 14, 15, 16}:
+        nature = target_data.nature[i]
+        if nature > 50:
+            value -= nature - 50
+        else:
+            value += 50 - nature
+    if value > 0:
+        return 1
+    return 0

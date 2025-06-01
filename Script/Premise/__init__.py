@@ -1,5 +1,6 @@
 from Script.Premise import (
     auxiliary_system,
+    character_awareness,
     character_behavior,
     character_bodily_status,
     character_favorability,
@@ -10,6 +11,7 @@ from Script.Premise import (
     character_item,
     character_language,
     character_language_interest,
+    character_like_dressing_style,
     character_mental_status,
     character_mystics,
     character_mystics_interest,
@@ -25,12 +27,12 @@ from Script.Premise import (
     money,
     scene_status,
     shop,
-    system,
     target_bodily_status,
     target_humanity,
     target_humanity_interest,
     target_language,
     target_language_interest,
+    target_like_dressing_style,
     target_mental_status,
     target_mystics,
     target_mystics_interest,
@@ -39,6 +41,7 @@ from Script.Premise import (
     target_science_interest,
     target_skills,
     target_skills_interest,
+    target_wears,
     time_status,
     weather_status
 )

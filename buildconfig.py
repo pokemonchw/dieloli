@@ -11,14 +11,16 @@ os.system("cp ./tools/DieloliEventEditor/default.json ./data/event/")
 event_dir = os.path.join("data", "event")
 os.system("cp ./tools/DieloliAIEditor/default.json ./data/target/")
 target_dir = os.path.join("data", "target")
-os.system("cp ./tools/DieloliClubEdior/default.json ./data/club/")
+os.system("cp ./tools/DieloliClubEditor/default.json ./data/club/")
 club_dir = os.path.join("data", "club")
+os.system("cp ./tools/ai_play/policy_model.pth ./data/")
+clothing_dir = os.path.join("data", "clothing")
+os.system("cp ./tools/DieloliClothingEditor/default.json ./data/clothing/")
 config_data = {}
 config_def_str = ""
 config_po = ""
 msgData = set()
 class_data = set()
-
 
 def build_csv_config(file_path: str, file_name: str):
     with open(file_path, encoding="utf-8") as now_file:
@@ -181,6 +183,50 @@ for i in club_file_list:
             club_list.append(now_club)
 config_data["Club"] = {}
 config_data["Club"]["data"] = club_list
+
+clothing_file_list = os.listdir(clothing_dir)
+clothing_list = []
+clothing_suit_list = []
+for i in clothing_file_list:
+    if i.split(".")[1] != "json":
+        continue
+    now_clothing_path = os.path.join(clothing_dir, i)
+    with open(now_clothing_path, "r", encoding="utf-8") as clothing_file:
+        now_clothing_file_all_data = json.loads(clothing_file.read())
+        for clothing_id in now_clothing_file_all_data["clothing"]:
+            now_clothing = now_clothing_file_all_data["clothing"][clothing_id]
+            clothing_list.append(now_clothing)
+            clothing_name = now_clothing["name"]
+            clothing_describe = now_clothing["describe"]
+            if clothing_name not in msgData:
+                config_po += f"#:  ClothingName:{clothing_id}"
+                config_po += f'msgid "{clothing_name}"'
+                config_po += 'msgstr ""\n\n'
+                msgData.add(clothing_name)
+            if clothing_describe not in msgData:
+                config_po += f"#:  ClothingDescribe:{clothing_id}"
+                config_po += f'msgid "{clothing_describe}"'
+                config_po += 'msgstr ""\n\n'
+                msgData.add(clothing_name)
+        for suit_id in now_clothing_file_all_data["suit"]:
+            now_suit = now_clothing_file_all_data["suit"][suit_id]
+            clothing_suit_list.append(now_suit)
+            suit_name = now_suit["name"]
+            if suit_name not in msgData:
+                config_po += f"#: ClothingSuitName:{suit_id}"
+                config_po += f'msgid "{suit_name}"'
+                config_po += 'msgstr ""\n\n'
+                msgData.add(suit_name)
+
+config_data["Clothing"] = {}
+config_data["Clothing"]["data"] = clothing_list
+config_data["Clothing"]["gettext"] = {}
+config_data["Clothing"]["gettext"]["name"] = 1
+config_data["Clothing"]["gettext"]["describe"] = 1
+config_data["ClothingSuit"] = {}
+config_data["ClothingSuit"]["data"] = clothing_suit_list
+config_data["ClothingSuit"]["gettext"] = {}
+config_data["ClothingSuit"]["gettext"]["describe"] = 1
 
 
 map_path = os.path.join("data", "map")

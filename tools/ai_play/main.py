@@ -1,223 +1,233 @@
 import requests
 from typing import List, Dict, Tuple
+import time
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 import os
+from collections import defaultdict
+import math
 
+# —— 超参数 —— #
+MAX_ACTIONS = 1000
+MAX_PANELS = 512
+D_MODEL = 64
+NUM_HEADS = 4
+NUM_LAYERS = 2
+DROPOUT = 0.1
+GAMMA = 0.99
+ENTROPY_COEF = 0.01
+CRITIC_COEF = 0.5
+LR = 1e-3
+MAX_SEQ_LEN = 50
+NUM_EPISODES = 1000
+MODEL_PATH = "a2c_transformer_novelty.pth"
+NOVELTY_COEF = 0.5
+MAX_STEPS_PER_EPISODE = 1000
+
+# —— Vocabulary 映射 —— #
 action_vocab: Dict[str, int] = {'<UNK>': 0}
-action_vocab_rev: Dict[int, str] = {0: '<UNK>'}
-action_counter: int = 1
-max_actions: int = 1000
+action_counter = 1
 panel_vocab: Dict[str, int] = {}
-panel_counter: int = 0
-
+panel_counter = 0
 
 class GameEnv:
     """ 游戏环境接口 """
-
     def __init__(self) -> None:
-        self.base_url: str = "http://localhost:5000"
+        self.base_url = "http://localhost:5000"
 
-    def reset(self) -> List[int]:
-        """
-        重置游戏环境
-        Return arguments:
-        List[int] -- 初始状态
-        """
-        response = requests.get(f"{self.base_url}/restart")
-        result = response.json()
-        return result['state']
+    def reset(self) -> List[float]:
+        r = requests.get(f"{self.base_url}/restart")
+        print(r)
+        return r.json()['state']
 
-    def step(self, action: str) -> Tuple[List[int], float, bool]:
-        """
-        执行动作
-        Keyword arguments:
-        action -- 动作命令
-        Return arguments:
-        List[int] -- 下一个状态
-        float -- 奖励值
-        bool -- 是否结束
-        """
-        data = {'action': action}
-        response = requests.post(f"{self.base_url}/step", json=data)
-        result = response.json()
-        next_state = result['state']
-        reward = result['reward']
-        done = result['done']
-        return next_state, reward, done
+    def step(self, action: str) -> Tuple[List[float], float, bool]:
+        r = requests.post(f"{self.base_url}/step", json={'action': action})
+        d = r.json()
+        print(r)
+        return d['state'], d['reward'], d['done']
 
     def get_available_actions(self) -> List[str]:
-        """
-        获取当前可用的动作列表
-        Return arguments:
-        List[str] -- 动作列表
-        """
-        response = requests.get(f"{self.base_url}/actions")
-        actions = response.json()['actions']
-        if not actions:
-            actions = ['']
-        return actions
+        r = requests.get(f"{self.base_url}/actions")
+        print(r)
+        return r.json().get('actions', [])
 
     def get_panel_info(self) -> str:
-        """
-        获取当前面板信息
-        Return arguments:
-        str -- 当前面板的类型ID
-        """
-        response = requests.get(f"{self.base_url}/current_panel")
-        return response.json()['panel_id']
-
+        r = requests.get(f"{self.base_url}/current_panel")
+        print(r)
+        return r.json()['panel_id']
 
 class PositionalEncoding(nn.Module):
-    """ 位置编码 """
-
-    def __init__(self, d_model: int, dropout: float = 0.1, max_len: int = 5000) -> None:
-        super(PositionalEncoding, self).__init__()
-        self.dropout = nn.Dropout(p=dropout)
-        position = torch.arange(0, max_len).unsqueeze(1).float()
-        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-torch.log(torch.tensor(10000.0)) / d_model))
+    def __init__(self, d_model: int, dropout: float=0.1, max_len: int=5000):
+        super().__init__()
+        self.dropout = nn.Dropout(dropout)
+        pos = torch.arange(0, max_len).unsqueeze(1).float()
+        div = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
         pe = torch.zeros(max_len, d_model)
-        pe[:, 0::2] = torch.sin(position * div_term)
-        pe[:, 1::2] = torch.cos(position * div_term)
-        pe = pe.unsqueeze(0)
-        self.register_buffer('pe', pe)
+        pe[:, 0::2] = torch.sin(pos * div)
+        pe[:, 1::2] = torch.cos(pos * div)
+        self.register_buffer('pe', pe.unsqueeze(0))
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        为输入添加位置编码
-        Keyword arguments:
-        x -- 输入张量，形状为 (batch_size, sequence_length, d_model)
-        Return arguments:
-        torch.Tensor -- 添加位置编码后的张量，形状为 (batch_size, sequence_length, d_model)
-        """
-        x = x + self.pe[:, :x.size(1), :]
+        x = x + self.pe[:, :x.size(1)]
         return self.dropout(x)
 
+class ActorCritic(nn.Module):
+    """ Actor‑Critic + Transformer (Novelty Bonus 版本) """
+    def __init__(self, state_dim: int,
+                 action_vocab_size: int, panel_vocab_size: int,
+                 d_model: int, num_heads: int, num_layers: int, dropout: float):
+        super().__init__()
+        # 状态编码
+        self.state_embed = nn.Linear(state_dim, d_model)
+        # 动作 & 面板 编码
+        self.action_embed = nn.Embedding(action_vocab_size, d_model)
+        self.panel_embed  = nn.Embedding(panel_vocab_size, d_model)
+        # Transformer
+        self.pos_enc = PositionalEncoding(d_model, dropout)
+        enc_layer = nn.TransformerEncoderLayer(d_model, num_heads,
+                                              dropout=dropout,
+                                              batch_first=True)
+        self.transformer = nn.TransformerEncoder(enc_layer, num_layers)
+        # 输出头
+        self.policy_head = nn.Linear(d_model, action_vocab_size)
+        self.value_head  = nn.Linear(d_model, 1)
 
-class PolicyNetwork(nn.Module):
-    """ 策略网络，使用 Transformer 根据动作序列预测下一个动作 """
+    def forward(self, state: torch.Tensor,
+                      action_seq: torch.Tensor,
+                      panel_idx: torch.Tensor
+               ) -> Tuple[torch.Tensor, torch.Tensor]:
+        # 状态嵌入
+        s_emb = self.state_embed(state)                   # (d_model,)
+        # 动作序列嵌入
+        if action_seq.numel() == 0:
+            action_seq = torch.tensor([0], dtype=torch.long)
+        a_emb = self.action_embed(action_seq)             # (L, d_model)
+        # 面板嵌入
+        p_emb = self.panel_embed(panel_idx).unsqueeze(0)  # (1, d_model)
+        # 构造 Transformer 输入：[state] + [action + panel]
+        seq = torch.cat([
+            s_emb.unsqueeze(0),                          # t=0: state
+            a_emb + p_emb.expand(a_emb.size(0), -1)      # t=1..L
+        ], dim=0).unsqueeze(0)                            # (1, L+1, d_model)
+        seq_enc = self.pos_enc(seq)
+        out = self.transformer(seq_enc)                   # (1, L+1, d_model)
+        last = out[:, -1, :]
+        logits = self.policy_head(last).squeeze(0)        # (action_vocab,)
+        value  = self.value_head(last).squeeze(0)         # (1,)
+        return logits, value
 
-    def __init__(self, hidden_size: int, action_vocab_size: int, panel_vocab_size: int, action_embed_size: int,
-                 num_heads: int, num_layers: int, dropout: float = 0.1) -> None:
-        super(PolicyNetwork, self).__init__()
-        self.hidden_size = hidden_size
-        self.action_embedding = nn.Embedding(action_vocab_size, action_embed_size)
-        self.panel_embedding = nn.Embedding(panel_vocab_size, action_embed_size)
-        self.positional_encoding = PositionalEncoding(action_embed_size, dropout)
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=action_embed_size,
-            nhead=num_heads,
-            dropout=dropout,
-            batch_first=True
-        )
-        self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
-        self.action_head = nn.Linear(action_embed_size, action_vocab_size)
+def train():
+    global action_counter, panel_counter
 
-    def forward(self, action_sequence: torch.Tensor, panel_embedding: torch.Tensor) -> torch.Tensor:
-        """
-        预测下一个动作的 logits
-        Keyword arguments:
-        action_sequence -- 动作索引的张量，形状为 (sequence_length,)
-        panel_embedding -- 当前面板的嵌入向量，形状为 (1, d_model)
-        Return arguments:
-        torch.Tensor -- 动作 logits 的张量，形状为 (action_vocab_size,)
-        """
-        if action_sequence.nelement() == 0:
-            action_sequence = torch.tensor([0], dtype=torch.long)
-        action_embeddings = self.action_embedding(action_sequence)
-        action_embeddings = action_embeddings.unsqueeze(0)
-        panel_embeddings = panel_embedding.unsqueeze(0)
-        combined_input = action_embeddings + panel_embeddings
-        combined_input = self.positional_encoding(combined_input)
-        transformer_output = self.transformer_encoder(combined_input)
-        last_output = transformer_output[:, -1, :]
-        logits = self.action_head(last_output)
-        logits = logits.squeeze(0)
-        return logits
-
-
-def train() -> None:
-    """ 训练策略网络，游戏结束时才进行重置，对过去的策略进行评估，调整优化模型，并保存模型文件 """
-    global action_vocab, action_vocab_rev, action_counter, max_actions, panel_vocab, panel_counter
     env = GameEnv()
-    num_episodes: int = 1000
-    max_sequence_length: int = 100
-    hidden_size: int = 128
-    action_embed_size: int = 64
-    num_heads: int = 8
-    num_layers: int = 2
-    dropout: float = 0.1
-    model_save_path: str = 'policy_model.pth'
-    policy_net = PolicyNetwork(hidden_size, max_actions, len(panel_vocab), action_embed_size, num_heads, num_layers, dropout)
-    if os.path.exists(model_save_path):
-        policy_net.load_state_dict(torch.load(model_save_path))
-    optimizer = optim.Adam(policy_net.parameters(), lr=1e-3)
-    entropy_coef: float = 0.01
-    episode = 0
-    state = env.reset()
-    action_sequence: List[int] = []
-    log_probs: List[torch.Tensor] = []
-    rewards: List[float] = []
-    entropies: List[torch.Tensor] = []
-    total_reward: float = 0.0
-    done: bool = False
-    steps: int = 0
-    while episode < num_episodes:
-        available_actions = env.get_available_actions()
-        panel_id = env.get_panel_info()
-        if panel_id not in panel_vocab:
-            panel_vocab[panel_id] = panel_counter
-            panel_counter += 1
-        panel_idx = panel_vocab[panel_id]
-        for action in available_actions:
-            if action not in action_vocab:
-                if action_counter < max_actions:
-                    action_vocab[action] = action_counter
-                    action_vocab_rev[action_counter] = action
-                    action_counter += 1
-                else:
-                    action_vocab[action] = 0
-        available_action_indices = [action_vocab.get(action, 0) for action in available_actions]
-        action_sequence_tensor = torch.tensor(action_sequence, dtype=torch.long) if action_sequence else torch.empty(0, dtype=torch.long)
-        panel_embedding = torch.tensor([panel_idx], dtype=torch.long)
-        logits = policy_net(action_sequence_tensor, panel_embedding)
-        available_logits = logits[available_action_indices]
-        noise = torch.randn_like(available_logits) * 1e-6
-        available_logits += noise
-        action_probs = F.softmax(available_logits, dim=0)
-        action_choice = torch.multinomial(action_probs, 1).item()
-        action = available_actions[action_choice]
-        next_state, reward, done = env.step(action)
-        total_reward += reward
-        action_sequence.append(action_vocab.get(action, 0))
-        log_probs.append(torch.log(action_probs[action_choice]))
-        rewards.append(reward)
-        entropy = -torch.sum(action_probs * torch.log(action_probs + 1e-5))
-        entropies.append(entropy)
-        steps += 1
-        if done or steps >= max_sequence_length:
-            loss = 0
-            for log_prob, reward, entropy in zip(log_probs, rewards, entropies):
-                loss += -log_prob * reward
-            loss -= entropy_coef * sum(entropies)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            action_sequence = []
-            log_probs = []
-            rewards = []
-            entropies = []
+    init_state = env.reset()
+    STATE_DIM = len(init_state)
+
+    net = ActorCritic(
+        state_dim=STATE_DIM,
+        action_vocab_size=MAX_ACTIONS,
+        panel_vocab_size=MAX_PANELS,
+        d_model=D_MODEL,
+        num_heads=NUM_HEADS,
+        num_layers=NUM_LAYERS,
+        dropout=DROPOUT
+    )
+    if os.path.exists(MODEL_PATH):
+        net.load_state_dict(torch.load(MODEL_PATH))
+    opt = optim.Adam(net.parameters(), lr=LR)
+
+    for ep in range(1, NUM_EPISODES + 1):
+        state = env.reset()
+        action_seq: List[int] = []
+        log_probs, values, rewards, entropies = [], [], [], []
+        panel_visit_counts = defaultdict(int)
+        done = False
+        for step in range(1, MAX_STEPS_PER_EPISODE + 1):
+            avail = env.get_available_actions()
+            if not avail:
+                while 1:
+                    avail = env.get_available_actions()
+                    if avail:
+                        break
+                    time.sleep(1)
+            panel_id = env.get_panel_info()
+            panel_visit_counts[panel_id] += 1
+            cnt = panel_visit_counts[panel_id]
+            novelty_bonus = NOVELTY_COEF / math.sqrt(cnt)
+
+            # 动态扩充 vocab
+            if panel_id not in panel_vocab and panel_counter < MAX_PANELS:
+                panel_vocab[panel_id] = panel_counter; panel_counter += 1
+            for a in avail:
+                if a not in action_vocab and action_counter < MAX_ACTIONS:
+                    action_vocab[a] = action_counter; action_counter += 1
+
+            avail_idxs = [action_vocab.get(a, 0) for a in avail]
+            if not avail_idxs:
+                break
+
+            seq_t   = torch.tensor(action_seq[-MAX_SEQ_LEN:], dtype=torch.long)
+            state_t = torch.tensor(state, dtype=torch.float32)
+            panel_t = torch.tensor(panel_vocab.get(panel_id, 0), dtype=torch.long)
+
+            # 前向 & 采样
+            logits, value = net(state_t, seq_t, panel_t)
+            probs = F.softmax(logits[avail_idxs], dim=0)
+            m = torch.distributions.Categorical(probs)
+            sel = m.sample()
+            act_idx = avail_idxs[sel.item()]
+            action = avail[sel.item()]
+
+            next_state, base_rew, done = env.step(action)
+            total_rew = base_rew + novelty_bonus
+
+            # 记录
+            log_probs.append(m.log_prob(sel))
+            values.append(value)
+            rewards.append(total_rew)
+            entropies.append(m.entropy())
+            action_seq.append(act_idx)
+            state = next_state
+
             if done:
-                print(f"Episode {episode + 1} finished with total reward {total_reward}")
-                total_reward = 0.0
-                episode += 1
-                state = env.reset()
-                steps = 0
-        torch.save(policy_net.state_dict(), model_save_path)
+                break
 
+        # 如果这一集没有产生任何 step，直接跳过更新
+        if not values:
+            print(f"[Episode {ep}] no steps taken, skipping update.")
+            continue
 
-if __name__ == '__main__':
+        # 计算折扣回报 & Advantage
+        R = 0
+        returns = []
+        for r in reversed(rewards):
+            R = r + GAMMA * R
+            returns.insert(0, R)
+        returns = torch.tensor(returns, dtype=torch.float32)
+        values  = torch.stack(values).squeeze()
+        logp    = torch.stack(log_probs)
+        ent     = torch.stack(entropies)
+        adv     = returns - values
+
+        # 损失
+        actor_loss   = -(logp * adv.detach()).mean()
+        critic_loss  = adv.pow(2).mean()
+        entropy_loss = -ENTROPY_COEF * ent.mean()
+        loss = actor_loss + CRITIC_COEF * critic_loss + entropy_loss
+
+        # 更新
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
+
+        if ep % 10 == 0:
+            torch.save(net.state_dict(), MODEL_PATH)
+            print(f"[Episode {ep}] loss={loss.item():.3f} return={returns.sum():.2f}")
+
+    torch.save(net.state_dict(), MODEL_PATH)
+
+if __name__ == "__main__":
     train()
 

@@ -854,3 +854,5 @@ settle_type,son_type,settle_info,settle_id
 互动类结算器,聊天,让交互对象和自己聊天,let_target_chat_self
 互动类结算器,教学,让教室内所有学生进入学习状态,let_all_students_study_in_classroom
 互动类结算器,教学,让所有非本班学生的人离开教室,let_all_not_students_leaving_classroom
+系统类结算器,倾向分,增加角色对目标的偏好倾向分,add_like_preference
+系统类结算器,倾向分,增加角色对目标的厌恶倾向分,add_dislike_preference

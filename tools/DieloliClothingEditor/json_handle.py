@@ -26,5 +26,6 @@ def load_json(file_path: str) -> dict:
             json_data = json.loads(f.read())
             f.close()
         except json.decoder.JSONDecodeError:
+            print(file_path + "  无法读取，文件可能不符合json格式")
             json_data = []
     return json_data

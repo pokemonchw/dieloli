@@ -134,3 +134,30 @@ def custom_distribution(min_value: float, max_value: float) -> float:
     else:
         return linear_decreasing_distribution(mid_end, max_value)
 
+def middle_align_arrays(a: List, b: List, pad_value=0) -> (List, List):
+    """
+    居中对齐数组
+    Keyword arguments:
+    a -- 输入的数组a
+    b -- 输入的数组b
+    pad_value -- 补齐变量
+    Return arguments:
+    list -- 补齐后的数组a
+    list -- 补齐后的数组b
+    """
+    len_a = len(a)
+    len_b = len(b)
+
+    # 先找出最长长度
+    max_len = max(len_a, len_b)
+
+    def pad_array(arr, target_len):
+        pad_total = target_len - len(arr)
+        # 如果是奇数，左边少补一个
+        pad_left = (pad_total - 1) // 2
+        return [pad_value] * pad_left + arr
+
+    a_padded = pad_array(a, max_len) if len_a < len_b else a
+    b_padded = pad_array(b, max_len) if len_b < len_a else b
+
+    return a_padded, b_padded

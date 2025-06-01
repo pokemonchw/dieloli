@@ -2,7 +2,7 @@ from types import FunctionType
 from Script.Core import cache_control, game_type, get_text
 from Script.Design import update, character, constant, handle_instruct, map_handle
 from Script.Config import normal_config
-from Script.UI.Moudle import draw
+from Script.UI.Model import draw
 
 
 cache: game_type.Cache = cache_control.cache

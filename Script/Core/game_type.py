@@ -38,8 +38,6 @@ class InScenePanelSwitch:
     """ 穿着信息开关 """
     status_switch: bool = True
     """ 状态信息开关 """
-    debug_switch: bool = True
-    """ debug指令开关 """
 
 class NpcTem:
     """npc模板用结构体对象"""
@@ -226,7 +224,7 @@ class Clothing:
     def __init__(self):
         self.uid: UUID = ""
         """ 服装对象的唯一id """
-        self.tem_id: int = 0
+        self.tem_id: str = ""
         """ 服装配表id """
         self.sexy: int = 0
         """ 服装性感属性 """
@@ -540,6 +538,14 @@ class Character:
         """ 角色身份数据 {身份id:身份数据} """
         self.passive_sex: int = 0
         """ 角色是否处于做爱受体状态 """
+        self.like_preference_data: Dict[str, int] = {}
+        """ 角色偏好倾向分 {目标id:倾向分} """
+        self.dislike_preference_data: Dict[str, int] = {}
+        """ 角色排斥倾向分 {目标id:倾向分} """
+        self.like_dressing_style: str = ""
+        """ 角色喜好的穿搭风格 """
+        self.character_awareness_data: Dict[int, Dict[str, CharacterAwareness]] = {}
+        """ 对其他角色的认知数据 {角色id:{认知id:认知数据}} """
 
 
 class CharacterIdentity:
@@ -627,8 +633,6 @@ class Cache:
         """ 回溯输入记录用定位 """
         self.instruct_filter: Dict[int, bool] = {}
         """ 玩家操作指令面板指令过滤状态数据 指令类型:是否展示"""
-        self.debug_filter: Dict[int, bool] = {}
-        """ 玩家debug操作指令面板指令过滤状态数据 指令类型:是否展示"""
         self.output_text_style: str = ""
         """ 富文本记录输出样式临时缓存 """
         self.text_style_position: int = 0
@@ -784,8 +788,8 @@ class Cache:
         """ 教师身份角色集合 """
         self.in_scene_panel_switch: InScenePanelSwitch = InScenePanelSwitch()
         """ 场景中各面板显示开关 """
-        self.debug: bool = False
-        """ debug模式开关 """
+        self.observe_switch: bool = False
+        """ 看海模式开关 """
 
 
 class TargetChange:
@@ -834,6 +838,8 @@ class CharacterStatusChange:
         """ 脱下的衣服 """
         self.money = 0
         """ 金钱变化 """
+        self.now_target_id: str = ""
+        """ 执行变化所属的目标 """
 
 
 class Event:
@@ -970,3 +976,42 @@ class AchieveData:
         self.first_wear_clothes: bool = False
         """ 初次穿上衣服 """
 
+
+class ClothingTemData:
+    """ 服装模板数据 """
+
+    def __init__(self):
+        self.cid: str = ""
+        """ 模板id """
+        self.name: str = ""
+        """ 服装名字 """
+        self.clothing_type: int = 0
+        """ 服装类型 """
+        self.sex: int = 0
+        """ 服装性别限制 """
+        self.describe: str = ""
+        """ 描述 """
+
+
+class ClothingSuitData:
+    """ 服装套装配置数据 """
+
+    def __init__(self):
+        self.cid: str = ""
+        """ 套装id """
+        self.name: str = ""
+        """ 套装名称 """
+        self.clothing_wear: Dict[int, str] = {}
+        """ 套装设置 {穿戴位置:服装id} """
+
+
+class CharacterAwareness:
+    """ 对角色的认知数据 """
+
+    def __init__(self):
+        self.cid: str = ""
+        """ 认知id """
+        self.authenticity: bool = True
+        """ 真实性 """
+        self.got_count: int = 0
+        """ 得到相同信息的计数(每1点计数增加10%置信率) """

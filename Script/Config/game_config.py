@@ -48,14 +48,11 @@ config_clothing_evaluate: Dict[int, config_def.ClothingEvaluate] = {}
 """ 服装评价配置数据 """
 config_clothing_evaluate_list: List[str] = []
 """ 服装评价配置列表 """
-config_clothing_suit: Dict[int, config_def.ClothingSuit] = {}
+config_clothing_suit: Dict[str, game_type.ClothingSuitData] = {}
 """ 衣服套装配置列表 """
-config_clothing_suit_data: Dict[int, Dict[int, Set]] = {}
-"""
-衣服套装搭配数据
-套装编号:性别id:服装集合
-"""
-config_clothing_tem: Dict[int, config_def.ClothingTem] = {}
+config_clothing_suit_name_data: Dict[str, str] = {}
+""" 衣服套装名字对应衣服套装id数据 {套装名字:套装id} """
+config_clothing_tem: Dict[int, game_type.ClothingTemData] = {}
 """ 服装模板配置数据 """
 config_clothing_type: Dict[int, config_def.ClothingType] = {}
 """ 衣服种类配置 """
@@ -89,8 +86,6 @@ config_course_language_experience_data: Dict[int, Dict[int, float]] = {}
 课程获取语言技能经验配置数据
 课程id:技能id:经验数量
 """
-config_debug_instruct_type: Dict[int, config_def.DebugInstructType] = {}
-""" debug指令类型配置 """
 config_end_age_tem: Dict[int, config_def.EndAgeTem] = {}
 """ 最终年龄范围配置模板 """
 config_end_age_tem_sex_data: Dict[int, int] = {}
@@ -436,20 +431,18 @@ def load_clothing_suit():
     now_data = config_data["ClothingSuit"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = config_def.ClothingSuit()
+        now_tem = game_type.ClothingSuitData()
         now_tem.__dict__ = tem_data
         config_clothing_suit[now_tem.cid] = now_tem
-        config_clothing_suit_data.setdefault(now_tem.suit_type, {})
-        config_clothing_suit_data[now_tem.suit_type].setdefault(now_tem.sex, set())
-        config_clothing_suit_data[now_tem.suit_type][now_tem.sex].add(now_tem.clothing_id)
+        config_clothing_suit_name_data[now_tem.name] = now_tem.cid
 
 
 def load_clothing_tem():
     """载入服装模板配置数据"""
-    now_data = config_data["ClothingTem"]
+    now_data = config_data["Clothing"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = config_def.ClothingTem()
+        now_tem = game_type.ClothingTemData()
         now_tem.__dict__ = tem_data
         config_clothing_tem[now_tem.cid] = now_tem
         config_clothing_sex_type_data.setdefault(now_tem.sex, set())
@@ -559,16 +552,6 @@ def load_course_skill_experience():
             config_course_knowledge_experience_data[now_tem.course][
                 now_tem.skill
             ] = now_tem.experience
-
-
-def load_debug_instruct_type():
-    """载入debug指令类型配置数据"""
-    now_data = config_data["DebugInstructType"]
-    translate_data(now_data)
-    for tem_data in now_data["data"]:
-        now_tem = config_def.DebugInstructType()
-        now_tem.__dict__ = tem_data
-        config_debug_instruct_type[now_tem.cid] = now_tem
 
 
 def load_end_age_tem():
@@ -1108,7 +1091,6 @@ def init():
     load_cook_type()
     load_course()
     load_course_skill_experience()
-    load_debug_instruct_type()
     load_end_age_tem()
     load_event()
     load_font_data()

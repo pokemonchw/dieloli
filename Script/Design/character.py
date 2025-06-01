@@ -1,10 +1,12 @@
 import random
 import datetime
 from typing import List
+from types import FunctionType
 from Script.Core import (
     cache_control,
     value_handle,
     game_type,
+    get_text
 )
 from Script.Design import (
     attr_calculation,
@@ -18,6 +20,8 @@ from Script.Config import game_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+_: FunctionType = get_text._
+""" 翻译api """
 
 
 def init_attr(character_id: int):
@@ -36,7 +40,15 @@ def init_attr(character_id: int):
     character_data.sex_experience = attr_calculation.get_sex_experience(
         character_data.sex_experience_tem, character_data.sex
     )
-    default_clothing_data = clothing.creator_suit(character_data.clothing_tem, character_data.sex)
+    sex_clothing_suit_data = {
+        0: _("男生校服"),
+        1: _("女生校服"),
+        2: _("通用校服")
+    }
+    suit_name = sex_clothing_suit_data[2]
+    if character_data.sex in sex_clothing_suit_data:
+        suit_name = sex_clothing_suit_data[character_data.sex]
+    default_clothing_data = clothing.creator_suit(suit_name)
     for clothing_id in default_clothing_data:
         clothing_data = default_clothing_data[clothing_id]
         character_data.clothing.setdefault(clothing_id, {})
