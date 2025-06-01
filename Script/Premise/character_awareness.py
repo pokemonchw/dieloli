@@ -754,7 +754,7 @@ def handle_know_adore_target_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -783,7 +783,7 @@ def handle_know_adore_target_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -812,7 +812,7 @@ def handle_know_adore_target_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -841,7 +841,7 @@ def handle_know_adore_target_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -870,7 +870,7 @@ def handle_know_adore_target_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -899,7 +899,7 @@ def handle_know_adore_target_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -928,7 +928,7 @@ def handle_know_adore_target_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -957,7 +957,7 @@ def handle_know_adore_target_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -986,7 +986,7 @@ def handle_know_adore_target_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -1013,7 +1013,7 @@ def handle_know_adore_target_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -1042,7 +1042,7 @@ def handle_know_adore_target_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -1071,7 +1071,7 @@ def handle_know_adore_target_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -1100,7 +1100,7 @@ def handle_know_adore_target_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -1130,7 +1130,7 @@ def handle_know_adore_target_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -1159,7 +1159,7 @@ def handle_know_adore_target_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -1188,7 +1188,7 @@ def handle_know_adore_target_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(10, set{})
+    character_data.social_contact.setdefault(10, set())
     if len(character_data.social_contact[10]) == 0:
         return 1
     character_list = list(character_data.social_contact[10])
@@ -1362,7 +1362,7 @@ def handle_know_admire_target_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1391,7 +1391,7 @@ def handle_know_admire_target_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1420,7 +1420,7 @@ def handle_know_admire_target_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1449,7 +1449,7 @@ def handle_know_admire_target_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1478,7 +1478,7 @@ def handle_know_admire_target_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1507,7 +1507,7 @@ def handle_know_admire_target_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1536,7 +1536,7 @@ def handle_know_admire_target_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1565,7 +1565,7 @@ def handle_know_admire_target_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1594,7 +1594,7 @@ def handle_know_admire_target_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1621,7 +1621,7 @@ def handle_know_admire_target_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1650,7 +1650,7 @@ def handle_know_admire_target_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1679,7 +1679,7 @@ def handle_know_admire_target_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1708,7 +1708,7 @@ def handle_know_admire_target_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1738,7 +1738,7 @@ def handle_know_admire_target_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1767,7 +1767,7 @@ def handle_know_admire_target_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1796,7 +1796,7 @@ def handle_know_admire_target_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(9, set{})
+    character_data.social_contact.setdefault(9, set())
     if len(character_data.social_contact[9]) == 0:
         return 1
     character_list = list(character_data.social_contact[9])
@@ -1969,7 +1969,7 @@ def handle_know_depend_on_target_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -1998,7 +1998,7 @@ def handle_know_depend_on_target_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2027,7 +2027,7 @@ def handle_know_depend_on_target_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2056,7 +2056,7 @@ def handle_know_depend_on_target_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2085,7 +2085,7 @@ def handle_know_depend_on_target_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2114,7 +2114,7 @@ def handle_know_depend_on_target_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2143,7 +2143,7 @@ def handle_know_depend_on_target_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2172,7 +2172,7 @@ def handle_know_depend_on_target_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2201,7 +2201,7 @@ def handle_know_depend_on_target_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2228,7 +2228,7 @@ def handle_know_depend_on_target_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2257,7 +2257,7 @@ def handle_know_depend_on_target_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2286,7 +2286,7 @@ def handle_know_depend_on_target_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2315,7 +2315,7 @@ def handle_know_depend_on_target_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2345,7 +2345,7 @@ def handle_know_depend_on_target_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2374,7 +2374,7 @@ def handle_know_depend_on_target_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2403,7 +2403,7 @@ def handle_know_depend_on_target_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(8, set{})
+    character_data.social_contact.setdefault(8, set())
     if len(character_data.social_contact[8]) == 0:
         return 1
     character_list = list(character_data.social_contact[8])
@@ -2577,7 +2577,7 @@ def handle_know_trust_target_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2606,7 +2606,7 @@ def handle_know_trust_target_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2635,7 +2635,7 @@ def handle_know_trust_target_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2664,7 +2664,7 @@ def handle_know_trust_target_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2693,7 +2693,7 @@ def handle_know_trust_target_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2722,7 +2722,7 @@ def handle_know_trust_target_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2751,7 +2751,7 @@ def handle_know_trust_target_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2780,7 +2780,7 @@ def handle_know_trust_target_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2809,7 +2809,7 @@ def handle_know_trust_target_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2836,7 +2836,7 @@ def handle_know_trust_target_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2865,7 +2865,7 @@ def handle_know_trust_target_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2894,7 +2894,7 @@ def handle_know_trust_target_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2923,7 +2923,7 @@ def handle_know_trust_target_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2953,7 +2953,7 @@ def handle_know_trust_target_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -2982,7 +2982,7 @@ def handle_know_trust_target_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -3011,7 +3011,7 @@ def handle_know_trust_target_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(7, set{})
+    character_data.social_contact.setdefault(7, set())
     if len(character_data.social_contact[7]) == 0:
         return 1
     character_list = list(character_data.social_contact[7])
@@ -3185,7 +3185,7 @@ def handle_know_friend_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3214,7 +3214,7 @@ def handle_know_friend_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3243,7 +3243,7 @@ def handle_know_friend_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3272,7 +3272,7 @@ def handle_know_friend_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3301,7 +3301,7 @@ def handle_know_friend_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3330,7 +3330,7 @@ def handle_know_friend_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3359,7 +3359,7 @@ def handle_know_friend_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3388,7 +3388,7 @@ def handle_know_friend_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3417,7 +3417,7 @@ def handle_know_friend_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3444,7 +3444,7 @@ def handle_know_friend_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3473,7 +3473,7 @@ def handle_know_friend_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3502,7 +3502,7 @@ def handle_know_friend_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3531,7 +3531,7 @@ def handle_know_friend_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3561,7 +3561,7 @@ def handle_know_friend_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3590,7 +3590,7 @@ def handle_know_friend_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3609,7 +3609,7 @@ def handle_know_friend_social_status(character_id: int) -> int:
     return 1
 
 
-@handle_premise.add_premise(constant.Premise.KNOW_FRIEND_POSITION)
+@handle_premise.add_premise(constant.Premise.KNOW_FRIEND_TARGET_POSITION)
 def handle_know_friend_position(character_id: int) -> int:
     """
     校验角色是否了解朋友所处的地点位置
@@ -3619,7 +3619,7 @@ def handle_know_friend_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(6, set{})
+    character_data.social_contact.setdefault(6, set())
     if len(character_data.social_contact[6]) == 0:
         return 1
     character_list = list(character_data.social_contact[6])
@@ -3793,7 +3793,7 @@ def handle_know_dislike_target_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -3822,7 +3822,7 @@ def handle_know_dislike_target_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -3851,7 +3851,7 @@ def handle_know_dislike_target_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -3880,7 +3880,7 @@ def handle_know_dislike_target_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -3909,7 +3909,7 @@ def handle_know_dislike_target_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -3938,7 +3938,7 @@ def handle_know_dislike_target_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -3967,7 +3967,7 @@ def handle_know_dislike_target_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -3996,7 +3996,7 @@ def handle_know_dislike_target_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -4025,7 +4025,7 @@ def handle_know_dislike_target_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -4052,7 +4052,7 @@ def handle_know_dislike_target_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -4081,7 +4081,7 @@ def handle_know_dislike_target_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -4110,7 +4110,7 @@ def handle_know_dislike_target_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -4139,7 +4139,7 @@ def handle_know_dislike_target_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -4169,7 +4169,7 @@ def handle_know_dislike_target_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -4198,7 +4198,7 @@ def handle_know_dislike_target_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -4227,7 +4227,7 @@ def handle_know_dislike_target_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(4, set{})
+    character_data.social_contact.setdefault(4, set())
     if len(character_data.social_contact[4]) == 0:
         return 1
     character_list = list(character_data.social_contact[4])
@@ -4401,7 +4401,7 @@ def handle_know_detest_target_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4430,7 +4430,7 @@ def handle_know_detest_target_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4459,7 +4459,7 @@ def handle_know_detest_target_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4488,7 +4488,7 @@ def handle_know_detest_target_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4517,7 +4517,7 @@ def handle_know_detest_target_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4546,7 +4546,7 @@ def handle_know_detest_target_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4575,7 +4575,7 @@ def handle_know_detest_target_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4604,7 +4604,7 @@ def handle_know_detest_target_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4633,7 +4633,7 @@ def handle_know_detest_target_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4660,7 +4660,7 @@ def handle_know_detest_target_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4689,7 +4689,7 @@ def handle_know_detest_target_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4718,7 +4718,7 @@ def handle_know_detest_target_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4747,7 +4747,7 @@ def handle_know_detest_target_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4776,7 +4776,7 @@ def handle_know_detest_target_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4805,7 +4805,7 @@ def handle_know_detest_target_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -4834,7 +4834,7 @@ def handle_know_detest_target_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(3, set{})
+    character_data.social_contact.setdefault(3, set())
     if len(character_data.social_contact[3]) == 0:
         return 1
     character_list = list(character_data.social_contact[3])
@@ -5008,7 +5008,7 @@ def handle_know_hate_target_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5037,7 +5037,7 @@ def handle_know_hate_target_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5066,7 +5066,7 @@ def handle_know_hate_target_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5095,7 +5095,7 @@ def handle_know_hate_target_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5124,7 +5124,7 @@ def handle_know_hate_target_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5153,7 +5153,7 @@ def handle_know_hate_target_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5182,7 +5182,7 @@ def handle_know_hate_target_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5211,7 +5211,7 @@ def handle_know_hate_target_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5240,7 +5240,7 @@ def handle_know_hate_target_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5267,7 +5267,7 @@ def handle_know_hate_target_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5296,7 +5296,7 @@ def handle_know_hate_target_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5325,7 +5325,7 @@ def handle_know_hate_target_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5354,7 +5354,7 @@ def handle_know_hate_target_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5384,7 +5384,7 @@ def handle_know_hate_target_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5413,7 +5413,7 @@ def handle_know_hate_target_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5442,7 +5442,7 @@ def handle_know_hate_target_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(2, set{})
+    character_data.social_contact.setdefault(2, set())
     if len(character_data.social_contact[2]) == 0:
         return 1
     character_list = list(character_data.social_contact[2])
@@ -5616,7 +5616,7 @@ def handle_know_hatred_target_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5645,7 +5645,7 @@ def handle_know_hatred_target_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5674,7 +5674,7 @@ def handle_know_hatred_target_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5703,7 +5703,7 @@ def handle_know_hatred_target_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5732,7 +5732,7 @@ def handle_know_hatred_target_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5761,7 +5761,7 @@ def handle_know_hatred_target_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5790,7 +5790,7 @@ def handle_know_hatred_target_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5819,7 +5819,7 @@ def handle_know_hatred_target_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5848,7 +5848,7 @@ def handle_know_hatred_target_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5875,7 +5875,7 @@ def handle_know_hatred_target_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5904,7 +5904,7 @@ def handle_know_hatred_target_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5933,7 +5933,7 @@ def handle_know_hatred_target_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5962,7 +5962,7 @@ def handle_know_hatred_target_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -5991,7 +5991,7 @@ def handle_know_hatred_target_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -6020,7 +6020,7 @@ def handle_know_hatred_target_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -6049,7 +6049,7 @@ def handle_know_hatred_target_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(1, set{})
+    character_data.social_contact.setdefault(1, set())
     if len(character_data.social_contact[1]) == 0:
         return 1
     character_list = list(character_data.social_contact[1])
@@ -6223,7 +6223,7 @@ def handle_know_deadly_enemy_science(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6252,7 +6252,7 @@ def handle_know_deadly_enemy_mystics(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6281,7 +6281,7 @@ def handle_know_deadly_enemy_language(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6310,7 +6310,7 @@ def handle_know_deadly_enemy_humanity_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6339,7 +6339,7 @@ def handle_know_deadly_enemy_skills_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6368,7 +6368,7 @@ def handle_know_deadly_enemy_science_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6397,7 +6397,7 @@ def handle_know_deadly_enemy_mystics_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6426,7 +6426,7 @@ def handle_know_deadly_enemy_language_interest(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6455,7 +6455,7 @@ def handle_know_deadly_enemy_like_dressing_style(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6482,7 +6482,7 @@ def handle_know_deadly_enemy_mental_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6511,7 +6511,7 @@ def handle_know_deadly_enemy_bodily_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6540,7 +6540,7 @@ def handle_know_deadly_enemy_stature(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6569,7 +6569,7 @@ def handle_know_deadly_enemy_wears(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6598,7 +6598,7 @@ def handle_know_deadly_enemy_sex_experience(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6627,7 +6627,7 @@ def handle_know_deadly_enemy_social_status(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
@@ -6656,7 +6656,7 @@ def handle_know_deadly_enemy_position(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
-    character_data.social_contact.setdefault(0, set{})
+    character_data.social_contact.setdefault(0, set())
     if len(character_data.social_contact[0]) == 0:
         return 1
     character_list = list(character_data.social_contact[0])
