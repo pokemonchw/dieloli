@@ -73,8 +73,8 @@ jobs:
           asset_name: dieloli_windows_test.zip
           asset_content_type: application/zip
 
-  build-mac:
-    needs: build-windows
+  build-mac-test:
+    needs: build-windows-test
     runs-on: macos-latest
     steps:
       - name: Checkout
