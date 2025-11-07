@@ -136,7 +136,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ needs.build-windows.outputs.upload_url }}
+          upload_url: ${{ needs.build-windows-test.outputs.upload_url }}
           asset_path: ${{ github.workspace }}/dieloli_mac.zip
           asset_name: dieloli_mac.${{ steps.version.outputs.value }}.zip
           asset_content_type: application/zip
