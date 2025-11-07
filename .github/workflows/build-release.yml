@@ -15,7 +15,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.12.*
+          python-version: 3.13.*
       - name: Install requirements
         run: |
           python -m pip install --upgrade pip
@@ -71,4 +71,71 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ github.workspace }}/dieloli.zip
           asset_name: dieloli_windows.${{ steps.version.outputs.value }}.zip
+          asset_content_type: application/zip
+  build-mac:
+    needs: build-windows
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.13.*
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r requirements.txt
+
+      - name: Build Game Config
+        run: |
+          python buildconfig.py
+
+      - name: Build Game Cache
+        run: |
+          python init_data.py
+
+      - name: Run PyInstaller
+        run: |
+          pyinstaller -F game.py --add-data "data:data" --add-data "image:image"
+
+      - name: Copy Game Files
+        run: |
+          cp -R data dist/
+          cp -R image dist/
+          cp config.ini dist/
+          cp LICENSE dist/
+          cp README.md dist/
+          cp package.json dist/
+          /usr/bin/codesign --remove-signature dist/game || true
+          mv dist dieloli
+
+      - name: Pack Game Files
+        run: |
+          zip -r dieloli_mac.zip dieloli
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: MacOS
+          path: dieloli_mac.zip
+
+      - name: Read Version
+        id: version
+        uses: ashley-taylor/read-json-property-action@v1.0
+        with:
+          path: package.json
+          property: version
+
+      - name: Upload Release Asset (macOS)
+        id: upload-release-asset-mac
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.build-windows.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/dieloli_mac.zip
+          asset_name: dieloli_mac.${{ steps.version.outputs.value }}.zip
           asset_content_type: application/zip
