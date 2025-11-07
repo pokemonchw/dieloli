@@ -187,15 +187,7 @@ class MainWindow(QMainWindow):
         font_metrics = QFontMetrics(self.normal_font)
         self.now_char_width = font_metrics.horizontalAdvance('a')
         self.now_char_height = font_metrics.lineSpacing()
-        window_width = self.now_char_width * normal_config.config_normal.textbox_width
-        window_height = self.now_char_height * normal_config.config_normal.text_hight
-
-        # 设置窗口大小和位置
-        win_width = window_width + fix_width  # 调整窗口框架的宽度
-        win_height = window_height + fix_width  # 调整窗口框架的高度
-        x = current_screen.geometry().x() + (current_screen.geometry().width() - win_width) // 2
-        y = current_screen.geometry().y() + (current_screen.geometry().height() - win_height) // 2
-        self.setGeometry(x, y, win_width, win_height)
+        self.showMaximized()
 
     def _setup_input_area(self):
         """创建输入区域"""
