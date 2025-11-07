@@ -1082,3 +1082,223 @@ have_enough_buy_cheapest_food,金钱类前提,拥有足够买最便宜的食物�
 have_enough_buy_cheapest_drink,金钱类前提,拥有足够买最便宜的饮料的金钱
 have_enough_buy_most_expensive_food,金钱类前提,拥有足够买最贵的食物的金钱
 have_enough_buy_most_expensive_drink,金钱类前提,拥有足够买最贵的饮料的金钱
+know_target_temperament,认知类前提,了解交互对象性格
+know_target_identity,认知类前提,了解交互对象身份
+know_target_gender,认知类前提,了解交互对象性别
+know_target_humanity,认知类前提,了解交互对象人文水平
+know_target_skills,认知类前提,了解交互对象技巧水平
+know_target_science,认知类前提,了解交互对象科学知识水平
+know_target_mystics,认知类前提,了解交互对象神秘学知识水平
+know_target_language,认知类前提,了解交互对象语言水平
+know_target_humanity_interest,认知类前提,了解交互对象人文天赋水平
+know_target_skills_interest,认知类前提,了解交互对象技巧天赋水平
+know_target_science_interest,认知类前提,了解交互对象科学知识天赋水平
+know_target_language_interest,认知类前提,了解交互对象语言天赋水平
+know_target_like_dressing_style,认知类前提,了解交互对象喜欢的穿搭风格
+know_target_mental_status,认知类前提,了解交互对象心灵状态
+know_target_bodily_status,认知类前提,了解交互对象肉体状态
+know_target_stature,认知类前提,了解交互对象身材
+know_target_wears,认知类前提,了解交互对象穿着
+know_target_sex_experience,认知类前提,了解交互对象性经验
+know_target_social_status,认知类前提,了解交互对象社交关系
+know_target_position,认知类前提,了解交互对象所处的地点位置
+know_adore_target_temperament,认知类前提,了解爱慕的对象性格
+know_adore_target_identity,认知类前提,了解爱慕的对象身份
+know_adore_target_gender,认知类前提,了解爱慕的对象性别
+know_adore_target_humanity,认知类前提,了解爱慕的对象人文水平
+know_adore_target_skills,认知类前提,了解爱慕的对象技巧水平
+know_adore_target_science,认知类前提,了解爱慕的对象科学知识水平
+know_adore_target_mystics,认知类前提,了解爱慕的对象神秘学知识水平
+know_adore_target_language,认知类前提,了解爱慕的对象语言水平
+know_adore_target_humanity_interest,认知类前提,了解爱慕的对象人文天赋水平
+know_adore_target_skills_interest,认知类前提,了解爱慕的对象技巧天赋水平
+know_adore_target_science_interest,认知类前提,了解爱慕的对象科学知识天赋水平
+know_adore_target_language_interest,认知类前提,了解爱慕的对象语言天赋水平
+know_adore_target_like_dressing_style,认知类前提,了解爱慕的对象喜欢的穿搭风格
+know_adore_target_mental_status,认知类前提,了解爱慕的对象心灵状态
+know_adore_target_bodily_status,认知类前提,了解爱慕的对象肉体状态
+know_adore_target_stature,认知类前提,了解爱慕的对象身材
+know_adore_target_wears,认知类前提,了解爱慕的对象穿着
+know_adore_target_sex_experience,认知类前提,了解爱慕的对象性经验
+know_adore_target_social_status,认知类前提,了解爱慕的对象社交关系
+know_adore_target_position,认知类前提,了解爱慕的对象所处的地点位置
+know_admire_target_temperament,认知类前提,了解恋慕的对象性格
+know_admire_target_identity,认知类前提,了解恋慕的对象身份
+know_admire_target_gender,认知类前提,了解恋慕的对象性别
+know_admire_target_humanity,认知类前提,了解恋慕的对象人文水平
+know_admire_target_skills,认知类前提,了解恋慕的对象技巧水平
+know_admire_target_science,认知类前提,了解恋慕的对象科学知识水平
+know_admire_target_mystics,认知类前提,了解恋慕的对象神秘学知识水平
+know_admire_target_language,认知类前提,了解恋慕的对象语言水平
+know_admire_target_humanity_interest,认知类前提,了解恋慕的对象人文天赋水平
+know_admire_target_skills_interest,认知类前提,了解恋慕的对象技巧天赋水平
+know_admire_target_science_interest,认知类前提,了解恋慕的对象科学知识天赋水平
+know_admire_target_language_interest,认知类前提,了解恋慕的对象语言天赋水平
+know_admire_target_like_dressing_style,认知类前提,了解恋慕的对象喜欢的穿搭风格
+know_admire_target_mental_status,认知类前提,了解恋慕的对象心灵状态
+know_admire_target_bodily_status,认知类前提,了解恋慕的对象肉体状态
+know_admire_target_stature,认知类前提,了解恋慕的对象身材
+know_admire_target_wears,认知类前提,了解恋慕的对象穿着
+know_admire_target_sex_experience,认知类前提,了解恋慕的对象性经验
+know_admire_target_social_status,认知类前提,了解恋慕的对象社交关系
+know_admire_target_position,认知类前提,了解恋慕的对象所处的地点位置
+know_depend_on_target_temperament,认知类前提,了解依靠的对象性格
+know_depend_on_target_identity,认知类前提,了解依靠的对象身份
+know_depend_on_target_gender,认知类前提,了解依靠的对象性别
+know_depend_on_target_humanity,认知类前提,了解依靠的对象人文水平
+know_depend_on_target_skills,认知类前提,了解依靠的对象技巧水平
+know_depend_on_target_science,认知类前提,了解依靠的对象科学知识水平
+know_depend_on_target_mystics,认知类前提,了解依靠的对象神秘学知识水平
+know_depend_on_target_language,认知类前提,了解依靠的对象语言水平
+know_depend_on_target_humanity_interest,认知类前提,了解依靠的对象人文天赋水平
+know_depend_on_target_skills_interest,认知类前提,了解依靠的对象技巧天赋水平
+know_depend_on_target_science_interest,认知类前提,了解依靠的对象科学知识天赋水平
+know_depend_on_target_language_interest,认知类前提,了解依靠的对象语言天赋水平
+know_depend_on_target_like_dressing_style,认知类前提,了解依靠的对象喜欢的穿搭风格
+know_depend_on_target_mental_status,认知类前提,了解依靠的对象心灵状态
+know_depend_on_target_bodily_status,认知类前提,了解依靠的对象肉体状态
+know_depend_on_target_stature,认知类前提,了解依靠的对象身材
+know_depend_on_target_wears,认知类前提,了解依靠的对象穿着
+know_depend_on_target_sex_experience,认知类前提,了解依靠的对象性经验
+know_depend_on_target_social_status,认知类前提,了解依靠的对象社交关系
+know_depend_on_target_position,认知类前提,了解依靠的对象所处的地点位置
+know_trust_target_temperament,认知类前提,了解信任的对象性格
+know_trust_target_identity,认知类前提,了解信任的对象身份
+know_trust_target_gender,认知类前提,了解信任的对象性别
+know_trust_target_humanity,认知类前提,了解信任的对象人文水平
+know_trust_target_skills,认知类前提,了解信任的对象技巧水平
+know_trust_target_science,认知类前提,了解信任的对象科学知识水平
+know_trust_target_mystics,认知类前提,了解信任的对象神秘学知识水平
+know_trust_target_language,认知类前提,了解信任的对象语言水平
+know_trust_target_humanity_interest,认知类前提,了解信任的对象人文天赋水平
+know_trust_target_skills_interest,认知类前提,了解信任的对象技巧天赋水平
+know_trust_target_science_interest,认知类前提,了解信任的对象科学知识天赋水平
+know_trust_target_language_interest,认知类前提,了解信任的对象语言天赋水平
+know_trust_target_like_dressing_style,认知类前提,了解信任的对象喜欢的穿搭风格
+know_trust_target_mental_status,认知类前提,了解信任的对象心灵状态
+know_trust_target_bodily_status,认知类前提,了解信任的对象肉体状态
+know_trust_target_stature,认知类前提,了解信任的对象身材
+know_trust_target_wears,认知类前提,了解信任的对象穿着
+know_trust_target_sex_experience,认知类前提,了解信任的对象性经验
+know_trust_target_social_status,认知类前提,了解信任的对象社交关系
+know_trust_target_position,认知类前提,了解信任的对象所处的地点位置
+know_friend_temperament,认知类前提,了解朋友的性格
+know_friend_identity,认知类前提,了解朋友的身份
+know_friend_gender,认知类前提,了解朋友的性别
+know_friend_humanity,认知类前提,了解朋友的人文水平
+know_friend_skills,认知类前提,了解朋友的技巧水平
+know_friend_science,认知类前提,了解朋友的科学知识水平
+know_friend_mystics,认知类前提,了解朋友的神秘学知识水平
+know_friend_language,认知类前提,了解朋友的语言水平
+know_friend_humanity_interest,认知类前提,了解朋友的人文天赋水平
+know_friend_skills_interest,认知类前提,了解朋友的技巧天赋水平
+know_friend_science_interest,认知类前提,了解朋友的科学知识天赋水平
+know_friend_language_interest,认知类前提,了解朋友的语言天赋水平
+know_friend_like_dressing_style,认知类前提,了解朋友的喜欢的穿搭风格
+know_friend_mental_status,认知类前提,了解朋友的心灵状态
+know_friend_bodily_status,认知类前提,了解朋友的肉体状态
+know_friend_stature,认知类前提,了解朋友的身材
+know_friend_wears,认知类前提,了解朋友的穿着
+know_friend_sex_experience,认知类前提,了解朋友的性经验
+know_friend_social_status,认知类前提,了解朋友的社交关系
+know_friend_position,认知类前提,了解朋友的所处的地点位置
+know_dislike_target_temperament,认知类前提,了解讨厌的对象性格
+know_dislike_target_identity,认知类前提,了解讨厌的对象身份
+know_dislike_target_gender,认知类前提,了解讨厌的对象性别
+know_dislike_target_humanity,认知类前提,了解讨厌的对象人文水平
+know_dislike_target_skills,认知类前提,了解讨厌的对象技巧水平
+know_dislike_target_science,认知类前提,了解讨厌的对象科学知识水平
+know_dislike_target_mystics,认知类前提,了解讨厌的对象神秘学知识水平
+know_dislike_target_language,认知类前提,了解讨厌的对象语言水平
+know_dislike_target_humanity_interest,认知类前提,了解讨厌的对象人文天赋水平
+know_dislike_target_skills_interest,认知类前提,了解讨厌的对象技巧天赋水平
+know_dislike_target_science_interest,认知类前提,了解讨厌的对象科学知识天赋水平
+know_dislike_target_language_interest,认知类前提,了解讨厌的对象语言天赋水平
+know_dislike_target_like_dressing_style,认知类前提,了解讨厌的对象喜欢的穿搭风格
+know_dislike_target_mental_status,认知类前提,了解讨厌的对象心灵状态
+know_dislike_target_bodily_status,认知类前提,了解讨厌的对象肉体状态
+know_dislike_target_stature,认知类前提,了解讨厌的对象身材
+know_dislike_target_wears,认知类前提,了解讨厌的对象穿着
+know_dislike_target_sex_experience,认知类前提,了解讨厌的对象性经验
+know_dislike_target_social_status,认知类前提,了解讨厌的对象社交关系
+know_dislike_target_position,认知类前提,了解讨厌的对象所处的地点位置
+know_detest_target_temperament,认知类前提,了解厌恶的对象性格
+know_detest_target_identity,认知类前提,了解厌恶的对象身份
+know_detest_target_gender,认知类前提,了解厌恶的对象性别
+know_detest_target_humanity,认知类前提,了解厌恶的对象人文水平
+know_detest_target_skills,认知类前提,了解厌恶的对象技巧水平
+know_detest_target_science,认知类前提,了解厌恶的对象科学知识水平
+know_detest_target_mystics,认知类前提,了解厌恶的对象神秘学知识水平
+know_detest_target_language,认知类前提,了解厌恶的对象语言水平
+know_detest_target_humanity_interest,认知类前提,了解厌恶的对象人文天赋水平
+know_detest_target_skills_interest,认知类前提,了解厌恶的对象技巧天赋水平
+know_detest_target_science_interest,认知类前提,了解厌恶的对象科学知识天赋水平
+know_detest_target_language_interest,认知类前提,了解厌恶的对象语言天赋水平
+know_detest_target_like_dressing_style,认知类前提,了解厌恶的对象喜欢的穿搭风格
+know_detest_target_mental_status,认知类前提,了解厌恶的对象心灵状态
+know_detest_target_bodily_status,认知类前提,了解厌恶的对象肉体状态
+know_detest_target_stature,认知类前提,了解厌恶的对象身材
+know_detest_target_wears,认知类前提,了解厌恶的对象穿着
+know_detest_target_sex_experience,认知类前提,了解厌恶的对象性经验
+know_detest_target_social_status,认知类前提,了解厌恶的对象社交关系
+know_detest_target_position,认知类前提,了解厌恶的对象所处的地点位置
+know_hate_target_temperament,认知类前提,了解憎恨的对象性格
+know_hate_target_identity,认知类前提,了解憎恨的对象身份
+know_hate_target_gender,认知类前提,了解憎恨的对象性别
+know_hate_target_humanity,认知类前提,了解憎恨的对象人文水平
+know_hate_target_skills,认知类前提,了解憎恨的对象技巧水平
+know_hate_target_science,认知类前提,了解憎恨的对象科学知识水平
+know_hate_target_mystics,认知类前提,了解憎恨的对象神秘学知识水平
+know_hate_target_language,认知类前提,了解憎恨的对象语言水平
+know_hate_target_humanity_interest,认知类前提,了解憎恨的对象人文天赋水平
+know_hate_target_skills_interest,认知类前提,了解憎恨的对象技巧天赋水平
+know_hate_target_science_interest,认知类前提,了解憎恨的对象科学知识天赋水平
+know_hate_target_language_interest,认知类前提,了解憎恨的对象语言天赋水平
+know_hate_target_like_dressing_style,认知类前提,了解憎恨的对象喜欢的穿搭风格
+know_hate_target_mental_status,认知类前提,了解憎恨的对象心灵状态
+know_hate_target_bodily_status,认知类前提,了解憎恨的对象肉体状态
+know_hate_target_stature,认知类前提,了解憎恨的对象身材
+know_hate_target_wears,认知类前提,了解憎恨的对象穿着
+know_hate_target_sex_experience,认知类前提,了解憎恨的对象性经验
+know_hate_target_social_status,认知类前提,了解憎恨的对象社交关系
+know_hate_target_position,认知类前提,了解憎恨的对象所处的地点位置
+know_hatred_target_temperament,认知类前提,了解仇视的对象性格
+know_hatred_target_identity,认知类前提,了解仇视的对象身份
+know_hatred_target_gender,认知类前提,了解仇视的对象性别
+know_hatred_target_humanity,认知类前提,了解仇视的对象人文水平
+know_hatred_target_skills,认知类前提,了解仇视的对象技巧水平
+know_hatred_target_science,认知类前提,了解仇视的对象科学知识水平
+know_hatred_target_mystics,认知类前提,了解仇视的对象神秘学知识水平
+know_hatred_target_language,认知类前提,了解仇视的对象语言水平
+know_hatred_target_humanity_interest,认知类前提,了解仇视的对象人文天赋水平
+know_hatred_target_skills_interest,认知类前提,了解仇视的对象技巧天赋水平
+know_hatred_target_science_interest,认知类前提,了解仇视的对象科学知识天赋水平
+know_hatred_target_language_interest,认知类前提,了解仇视的对象语言天赋水平
+know_hatred_target_like_dressing_style,认知类前提,了解仇视的对象喜欢的穿搭风格
+know_hatred_target_mental_status,认知类前提,了解仇视的对象心灵状态
+know_hatred_target_bodily_status,认知类前提,了解仇视的对象肉体状态
+know_hatred_target_stature,认知类前提,了解仇视的对象身材
+know_hatred_target_wears,认知类前提,了解仇视的对象穿着
+know_hatred_target_sex_experience,认知类前提,了解仇视的对象性经验
+know_hatred_target_social_status,认知类前提,了解仇视的对象社交关系
+know_hatred_target_position,认知类前提,了解仇视的对象所处的地点位置
+know_deadly_enemy_temperament,认知类前提,了解死敌的性格
+know_deadly_enemy_identity,认知类前提,了解死敌的身份
+know_deadly_enemy_gender,认知类前提,了解死敌的性别
+know_deadly_enemy_humanity,认知类前提,了解死敌的人文水平
+know_deadly_enemy_skills,认知类前提,了解死敌的技巧水平
+know_deadly_enemy_science,认知类前提,了解死敌的科学知识水平
+know_deadly_enemy_mystics,认知类前提,了解死敌的神秘学知识水平
+know_deadly_enemy_language,认知类前提,了解死敌的语言水平
+know_deadly_enemy_humanity_interest,认知类前提,了解死敌的人文天赋水平
+know_deadly_enemy_skills_interest,认知类前提,了解死敌的技巧天赋水平
+know_deadly_enemy_science_interest,认知类前提,了解死敌的科学知识天赋水平
+know_deadly_enemy_language_interest,认知类前提,了解死敌的语言天赋水平
+know_deadly_enemy_like_dressing_style,认知类前提,了解死敌的喜欢的穿搭风格
+know_deadly_enemy_mental_status,认知类前提,了解死敌的心灵状态
+know_deadly_enemy_bodily_status,认知类前提,了解死敌的肉体状态
+know_deadly_enemy_stature,认知类前提,了解死敌的身材
+know_deadly_enemy_wears,认知类前提,了解死敌的穿着
+know_deadly_enemy_sex_experience,认知类前提,了解死敌的性经验
+know_deadly_enemy_social_status,认知类前提,了解死敌的社交关系
+know_deadly_enemy_position,认知类前提,了解死敌的所处的地点位置
