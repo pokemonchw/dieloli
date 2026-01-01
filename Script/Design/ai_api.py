@@ -16,6 +16,7 @@ available_actions = []
 rewards = {}
 now_ai_score = 0
 add_score = 0
+STEP_EXCLUSIVE = threading.Lock()
 
 class GameRequestHandler(BaseHTTPRequestHandler):
     """
@@ -27,64 +28,48 @@ class GameRequestHandler(BaseHTTPRequestHandler):
         处理GET请求
         """
         parsed_path = urllib.parse.urlparse(self.path)
-        if parsed_path.path == '/restart':
-            self.handle_restart()
-        elif parsed_path.path == '/actions':
-            self.handle_actions()
-        elif parsed_path.path == '/state':
-            self.handle_state()
-        elif parsed_path.path == '/rewards':
-            self.handle_rewards()
-        elif parsed_path.path == '/current_panel':
-            self.handle_current_panel()
-        else:
-            self.send_error(404, "接口未找到")
+        try:
+            with STEP_EXCLUSIVE:
+                if parsed_path.path == '/restart':
+                    self.handle_restart()
+                elif parsed_path.path == '/actions':
+                    self.handle_actions()
+                elif parsed_path.path == '/state':
+                    self.handle_state()
+                elif parsed_path.path == '/rewards':
+                    self.handle_rewards()
+                elif parsed_path.path == '/current_panel':
+                    self.handle_current_panel()
+                else:
+                    self.send_error(404, "接口未找到")
+        except Exception:
+            import traceback
+            traceback.print_exc()   # 或 logging.exception
+            self.send_error(500, "Internal Server Error")
 
     def do_POST(self):
         """
         处理POST请求
         """
         parsed_path = urllib.parse.urlparse(self.path)
-        if parsed_path.path == '/step':
-            self.handle_step()
-        else:
-            self.send_error(404, "接口未找到")
+        try:
+            with STEP_EXCLUSIVE:
+                if parsed_path.path == '/step':
+                    self.handle_step()
+                else:
+                    self.send_error(404, "接口未找到")
+        except Exception:
+            import traceback
+            traceback.print_exc()   # 或 logging.exception
+            self.send_error(500, "Internal Server Error")
 
     def handle_restart(self):
         """
         处理/restart接口，重置游戏，返回初始状态
         """
-        # 初始化游戏状态
-        if cache.character_data[0].dead:
-            while 1:
-                if cache.now_panel_id != constant.Panel.TITLE:
-                    main_frame.window.send_cmd("")
-                    time.sleep(1)
-                else:
-                    break
-        else:
-            main_frame.window.send_cmd("94")
-            time.sleep(1)
-        while 1:
-            if flow_handle.wait_switch:
-                break
-        main_frame.window.send_cmd("1")
-        time.sleep(1)
-        while 1:
-            if flow_handle.wait_switch:
-                break
-        main_frame.window.send_cmd("0")
-        time.sleep(1)
-        while 1:
-            if flow_handle.wait_switch:
-                break
-        main_frame.window.send_cmd("0")
-        time.sleep(1)
-        while 1:
-            if flow_handle.wait_switch:
-                break
+        save_handle.input_load_save("0")
+        cache.now_panel_id = constant.Panel.IN_SCENE
         cache.back_save_panel = 1
-        cache.wframe_mouse.w_frame_skip_wait_mouse = 1
         game_state = []
         for key in constant.handle_premise_data:
             game_state.append(constant.handle_premise_data[key](0))
@@ -210,6 +195,7 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             cmd_map_set.discard(str(constant.Instruct.SAVE))
             cmd_map_set.discard(str(constant.Instruct.OBSERVE_ON))
             cmd_map_set.discard(str(constant.Instruct.OBSERVE_OFF))
+        now_list = ["21"]
         response = {'actions': list(cmd_map_set)}
         if len(cmd_map_set) == 0:
             main_frame.window.send_input()
