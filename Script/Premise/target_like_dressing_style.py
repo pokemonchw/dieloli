@@ -15,6 +15,8 @@ def handle_target_like_dressing_style_is_charmer(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_character_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_character_data.like_dressing_style == constant.DressingStyle.STYLE_CHARMER:
         return 1
@@ -31,6 +33,8 @@ def handle_target_like_dressing_style_is_allures(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_character_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_character_data.like_dressing_style == constant.DressingStyle.STYLE_ALLURES:
         return 1
@@ -47,6 +51,8 @@ def handle_target_like_dressing_style_is_stylish(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_character_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_character_data.like_dressing_style == constant.DressingStyle.STYLE_STYLISH:
         return 1
@@ -63,6 +69,8 @@ def handle_target_like_dressing_style_is_refresh(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_character_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_character_data.like_dressing_style == constant.DressingStyle.STYLE_REFRESH:
         return 1
@@ -79,6 +87,8 @@ def handle_target_like_dressing_style_is_refined(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_character_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if target_character_data.like_dressing_style == constant.DressingStyle.STYLE_REFINED:
         return 1

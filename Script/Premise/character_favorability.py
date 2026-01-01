@@ -417,6 +417,8 @@ def handle_target_deadly_enemy(character_id: int) -> int:
     int -- 权重
     """
     character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.target_character_id == -1:
+        return 0
     target_data: game_type.Character = cache.character_data[character_data.target_character_id]
     if character_id in target_data.social_contact_data:
         if target_data.social_contact_data[character_id] == 0:

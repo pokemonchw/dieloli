@@ -1222,7 +1222,8 @@ class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
     def old_character(self):
         """切换显示上一人"""
         if self.character_list:
-            if self.character_id:
+            charcater_set = set(self.character_list)
+            if self.character_id in charcater_set:
                 now_index = self.character_list.index(self.character_id)
                 if now_index:
                     now_index -= 1
@@ -1235,7 +1236,8 @@ class SeeCharacterInfoHandleInScene(SeeCharacterInfoHandle):
     def next_character(self):
         """切换显示上一人"""
         if self.character_list:
-            if self.character_id:
+            charcater_set = set(self.character_list)
+            if self.character_id in charcater_set:
                 now_index = self.character_list.index(self.character_id)
                 if now_index == len(self.character_list) - 1:
                     self.character_id = 0

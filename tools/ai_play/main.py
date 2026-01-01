@@ -1,233 +1,857 @@
-import requests
-from typing import List, Dict, Tuple
+import os
+import math
 import time
+import random
+import re
+from collections import defaultdict, deque
+from typing import List, Dict, Tuple, Optional
+
+import requests
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
-import os
-from collections import defaultdict
-import math
 
-# —— 超参数 —— #
-MAX_ACTIONS = 1000
+
+# ==================== 超参数定义 ====================
+
 MAX_PANELS = 512
-D_MODEL = 64
-NUM_HEADS = 4
-NUM_LAYERS = 2
-DROPOUT = 0.1
-GAMMA = 0.99
-ENTROPY_COEF = 0.01
-CRITIC_COEF = 0.5
-LR = 1e-3
-MAX_SEQ_LEN = 50
-NUM_EPISODES = 1000
-MODEL_PATH = "a2c_transformer_novelty.pth"
-NOVELTY_COEF = 0.5
-MAX_STEPS_PER_EPISODE = 1000
+""" 最大面板数量 """
+MAX_VERBS = 64
+""" 最大动词数量 """
+MAX_TARGETS = 256
+""" 最大目标数量 """
 
-# —— Vocabulary 映射 —— #
-action_vocab: Dict[str, int] = {'<UNK>': 0}
-action_counter = 1
-panel_vocab: Dict[str, int] = {}
-panel_counter = 0
+LATENT_DIM = 256
+""" 潜在空间维度 """
+HIDDEN_DIM = 512
+""" 隐藏层维度 """
+STATE_DIM = None
+""" 状态维度（运行时确定） """
+PANEL_EMBED_DIM = 64
+""" 面板嵌入维度 """
+VERB_EMBED_DIM = 32
+""" 动词嵌入维度 """
+TARGET_EMBED_DIM = 32
+""" 目标嵌入维度 """
+
+PLAN_HORIZON = 10
+""" 规划时间步长 """
+CEM_ITERATIONS = 6
+""" 交叉熵方法迭代次数 """
+CEM_POPULATION = 256
+""" CEM种群大小 """
+CEM_ELITE_RATIO = 0.15
+""" CEM精英比例 """
+CEM_TEMP = 1.2
+""" CEM温度参数 """
+
+EXIT_ACTION_PRIOR = 5.0
+""" 退出动作的先验权重 """
+NOOP_ACTION_PRIOR = 0.3
+""" 无操作动作的先验权重 """
+
+GAMMA = 0.98
+""" 折扣因子 """
+SEMANTIC_LOOP_PENALTY = 2.0
+""" 语义循环惩罚 """
+STATE_LOOP_PENALTY = 0.8
+""" 状态循环惩罚 """
+STUCK_PENALTY = 0.5
+""" 卡住惩罚 """
+
+LR = 2e-4
+""" 学习率 """
+BATCH_SIZE = 32
+""" 批次大小 """
+SEQ_LEN = 8
+""" 序列长度 """
+REPLAY_CAPACITY = 20000
+""" 经验回放容量 """
+WARMUP_STEPS = 800
+""" 预热步数 """
+TRAIN_INTERVAL = 4
+""" 训练间隔 """
+TRAIN_EPOCHS = 3
+""" 每次训练的轮数 """
+
+NUM_EPISODES = 1000
+""" 总训练回合数 """
+MAX_STEPS_PER_EPISODE = 1000000
+""" 每回合最大步数 """
+MODEL_PATH = "world_model_structured.pth"
+""" 模型保存路径 """
+
+W_REWARD = 1.0
+""" 奖励损失权重 """
+W_DONE = 1.0
+""" 完成损失权重 """
+W_PANEL = 3.0
+""" 面板损失权重 """
+W_RECON = 0.3
+""" 重建损失权重 """
+W_KL = 0.05
+""" KL散度损失权重 """
+
+# ==================== 词汇表定义 ====================
+
+panel_vocab: Dict[str, int] = {"<UNK>": 0}
+""" 面板词汇表 """
+panel_counter = 1
+""" 面板计数器 """
+
+verb_vocab: Dict[str, int] = {"<UNK>": 0, "<PAD>": 1}
+""" 动词词汇表 """
+verb_counter = 2
+""" 动词计数器 """
+
+target_vocab: Dict[str, int] = {"<UNK>": 0, "<PAD>": 1}
+""" 目标词汇表 """
+target_counter = 2
+""" 目标计数器 """
+
+EXIT_VERBS = {"exit", "return", "back", "close", "cancel", "返回", "退出", "关闭"}
+""" 退出类动词集合 """
+NOOP_VERBS = {"view", "check", "查看", "检查"}
+""" 无操作类动词集合 """
+
+
+# ==================== 工具函数 ====================
+
+def parse_action(action: str) -> Tuple[str, str]:
+    """
+    解析动作字符串为动词和目标
+    Keyword arguments:
+    action -- 动作字符串，格式为 "verb_target"
+    Return arguments:
+    Tuple[str, str] -- (动词, 目标)，如果没有目标则返回"<PAD>"
+    """
+    parts = action.split("_", 1)
+    if len(parts) == 1:
+        return parts[0], "<PAD>"
+    return parts[0], parts[1]
+
+
+def get_action_type(verb: str) -> str:
+    """
+    根据动词分类动作类型
+    Keyword arguments:
+    verb -- 动词字符串
+    Return arguments:
+    str -- 动作类型: "EXIT"（退出）、"NOOP"（无操作）或"NORMAL"（普通）
+    """
+    v_lower = verb.lower()
+    if v_lower in EXIT_VERBS:
+        return "EXIT"
+    if v_lower in NOOP_VERBS:
+        return "NOOP"
+    return "NORMAL"
+
+
+def get_action_indices(action: str) -> Tuple[int, int]:
+    """
+    获取动作对应的词汇表索引，如果不存在则添加到词汇表
+    Keyword arguments:
+    action -- 动作字符串
+    Return arguments:
+    Tuple[int, int] -- (动词索引, 目标索引)
+    """
+    global verb_counter, target_counter
+    verb, target = parse_action(action)
+    if verb not in verb_vocab and verb_counter < MAX_VERBS:
+        verb_vocab[verb] = verb_counter
+        verb_counter += 1
+    if target not in target_vocab and target_counter < MAX_TARGETS:
+        target_vocab[target] = target_counter
+        target_counter += 1
+    verb_idx = verb_vocab.get(verb, 0)
+    target_idx = target_vocab.get(target, 0)
+    return verb_idx, target_idx
+
+
+# ==================== 游戏环境类 ====================
 
 class GameEnv:
-    """ 游戏环境接口 """
+    """游戏环境接口类，通过HTTP与游戏服务器交互"""
+    
     def __init__(self) -> None:
+        """
+        初始化游戏环境
+        """
         self.base_url = "http://localhost:5000"
+        """ 游戏服务器基础URL """
 
     def reset(self) -> List[float]:
-        r = requests.get(f"{self.base_url}/restart")
-        print(r)
-        return r.json()['state']
+        """
+        重置游戏环境到初始状态
+        Return arguments:
+        List[float] -- 初始状态向量
+        """
+        os.system("pkill game.py")
+        os.system("./restart.sh")
+        time.sleep(10)
+        r = requests.post(f"{self.base_url}/step", json={"action": "1"})
+        time.sleep(2)
+        r = requests.post(f"{self.base_url}/step", json={"action": "0"})
+        time.sleep(2)
+        r = requests.post(f"{self.base_url}/step", json={"action": "0"})
+        d = r.json()
+        return d["state"]
 
     def step(self, action: str) -> Tuple[List[float], float, bool]:
-        r = requests.post(f"{self.base_url}/step", json={'action': action})
-        d = r.json()
+        """
+        执行一步动作
+        Keyword arguments:
+        action -- 要执行的动作字符串
+        Return arguments:
+        Tuple[List[float], float, bool] -- (下一状态, 奖励, 是否结束)
+        """
+        r = requests.post(f"{self.base_url}/step", json={"action": action})
         print(r)
-        return d['state'], d['reward'], d['done']
+        d = r.json()
+        return d["state"], d["reward"], d["done"]
 
     def get_available_actions(self) -> List[str]:
+        """
+        获取当前可用的动作列表
+        Return arguments:
+        List[str] -- 可用动作列表
+        """
         r = requests.get(f"{self.base_url}/actions")
-        print(r)
-        return r.json().get('actions', [])
+        return r.json().get("actions", [])
 
     def get_panel_info(self) -> str:
+        """
+        获取当前面板ID
+        Return arguments:
+        str -- 当前面板的ID字符串
+        """
         r = requests.get(f"{self.base_url}/current_panel")
-        print(r)
-        return r.json()['panel_id']
+        return r.json()["panel_id"]
 
-class PositionalEncoding(nn.Module):
-    def __init__(self, d_model: int, dropout: float=0.1, max_len: int=5000):
+
+# ==================== 经验回放缓冲区类 ====================
+
+class SequenceReplayBuffer:
+    """序列经验回放缓冲区，用于存储和采样序列数据"""
+
+    def __init__(self, capacity: int, seq_len: int):
+        """
+        初始化序列经验回放缓冲区
+        Keyword arguments:
+        capacity -- 缓冲区容量
+        seq_len -- 序列长度
+        """
+        self.capacity = capacity
+        """ 缓冲区最大容量 """
+        self.seq_len = seq_len
+        """ 每个序列的长度 """
+        self.sequences = deque(maxlen=capacity)
+        """ 存储序列的双端队列 """
+
+    def push_episode(self, episode_data: List[Dict]):
+        """
+        将一个回合的数据切分为序列并存入缓冲区
+        Keyword arguments:
+        episode_data -- 回合数据列表，每个元素是一个包含状态、动作等信息的字典
+        """
+        if len(episode_data) < self.seq_len:
+            return
+        for i in range(len(episode_data) - self.seq_len + 1):
+            seq = episode_data[i:i+self.seq_len]
+            self.sequences.append(seq)
+
+    def sample(self, batch_size: int):
+        """
+        从缓冲区中随机采样一个批次的序列
+        Keyword arguments:
+        batch_size -- 批次大小
+        Return arguments:
+        Dict -- 包含states、verbs、targets等键的字典，值为torch.Tensor
+        """
+        if len(self.sequences) < batch_size:
+            return None
+        batch_seqs = random.sample(self.sequences, batch_size)
+        states = []
+        verbs = []
+        targets = []
+        rewards = []
+        panels = []
+        dones = []
+        for seq in batch_seqs:
+            states.append([step['state'] for step in seq])
+            verbs.append([step['verb_idx'] for step in seq])
+            targets.append([step['target_idx'] for step in seq])
+            rewards.append([step['reward'] for step in seq])
+            panels.append([step['panel_idx'] for step in seq])
+            dones.append([step['done'] for step in seq])
+        return {
+            'states': torch.tensor(states, dtype=torch.float32),
+            'verbs': torch.tensor(verbs, dtype=torch.long),
+            'targets': torch.tensor(targets, dtype=torch.long),
+            'rewards': torch.tensor(rewards, dtype=torch.float32),
+            'panels': torch.tensor(panels, dtype=torch.long),
+            'dones': torch.tensor(dones, dtype=torch.float32),
+        }
+
+    def __len__(self):
+        """
+        返回缓冲区中序列的数量
+        Return arguments:
+        int -- 序列数量
+        """
+        return len(self.sequences)
+
+
+# ==================== 世界模型类 ====================
+
+class PanelConditionedWorldModel(nn.Module):
+    """面板条件世界模型，使用变分自编码器和GRU预测环境动态"""
+
+    def __init__(self, state_dim: int):
+        """
+        初始化面板条件世界模型
+        Keyword arguments:
+        state_dim -- 状态向量的维度
+        """
         super().__init__()
-        self.dropout = nn.Dropout(dropout)
-        pos = torch.arange(0, max_len).unsqueeze(1).float()
-        div = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
-        pe = torch.zeros(max_len, d_model)
-        pe[:, 0::2] = torch.sin(pos * div)
-        pe[:, 1::2] = torch.cos(pos * div)
-        self.register_buffer('pe', pe.unsqueeze(0))
+        self.state_encoder = nn.Sequential(
+            nn.Linear(state_dim, 128),
+            nn.LayerNorm(128),
+            nn.ReLU(),
+            nn.Linear(128, 128)
+        )
+        """ 状态编码器网络 """
+        self.panel_embed = nn.Embedding(MAX_PANELS, PANEL_EMBED_DIM)
+        """ 面板嵌入层 """
+        self.verb_embed = nn.Embedding(MAX_VERBS, VERB_EMBED_DIM)
+        """ 动词嵌入层 """
+        self.target_embed = nn.Embedding(MAX_TARGETS, TARGET_EMBED_DIM)
+        """ 目标嵌入层 """
+        action_dim = VERB_EMBED_DIM + TARGET_EMBED_DIM
+        self.gru = nn.GRUCell(
+            LATENT_DIM + action_dim + PANEL_EMBED_DIM,
+            HIDDEN_DIM
+        )
+        """ GRU循环单元，用于状态转移 """
+        self.posterior_net = nn.Sequential(
+            nn.Linear(HIDDEN_DIM + 128, 256),
+            nn.ReLU(),
+            nn.Linear(256, LATENT_DIM * 2)
+        )
+        """ 后验网络，输出潜在变量的均值和对数标准差 """
+        self.prior_net = nn.Sequential(
+            nn.Linear(HIDDEN_DIM, 256),
+            nn.ReLU(),
+            nn.Linear(256, LATENT_DIM * 2)
+        )
+        """ 先验网络，输出潜在变量的均值和对数标准差 """
+        self.reward_head = nn.Sequential(
+            nn.Linear(HIDDEN_DIM + LATENT_DIM, 128),
+            nn.ReLU(),
+            nn.Linear(128, 1)
+        )
+        """ 奖励预测头 """
+        self.done_head = nn.Sequential(
+            nn.Linear(HIDDEN_DIM + LATENT_DIM, 128),
+            nn.ReLU(),
+            nn.Linear(128, 1)
+        )
+        """ 完成标志预测头 """
+        self.panel_head = nn.Sequential(
+            nn.Linear(HIDDEN_DIM + LATENT_DIM, 128),
+            nn.ReLU(),
+            nn.Linear(128, MAX_PANELS)
+        )
+        """ 面板预测头 """
+        self.state_decoder = nn.Sequential(
+            nn.Linear(HIDDEN_DIM + LATENT_DIM, 128),
+            nn.ReLU(),
+            nn.Linear(128, state_dim)
+        )
+        """ 状态解码器网络 """
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        x = x + self.pe[:, :x.size(1)]
-        return self.dropout(x)
+    def initial_state(self, batch_size: int, device: torch.device):
+        """
+        初始化隐藏状态和潜在变量
+        Keyword arguments:
+        batch_size -- 批次大小
+        device -- 设备（CPU或CUDA）
+        Return arguments:
+        Tuple[torch.Tensor, torch.Tensor] -- (隐藏状态h, 潜在变量z)
+        """
+        h = torch.zeros(batch_size, HIDDEN_DIM, device=device)
+        z = torch.zeros(batch_size, LATENT_DIM, device=device)
+        return h, z
 
-class ActorCritic(nn.Module):
-    """ Actor‑Critic + Transformer (Novelty Bonus 版本) """
-    def __init__(self, state_dim: int,
-                 action_vocab_size: int, panel_vocab_size: int,
-                 d_model: int, num_heads: int, num_layers: int, dropout: float):
-        super().__init__()
-        # 状态编码
-        self.state_embed = nn.Linear(state_dim, d_model)
-        # 动作 & 面板 编码
-        self.action_embed = nn.Embedding(action_vocab_size, d_model)
-        self.panel_embed  = nn.Embedding(panel_vocab_size, d_model)
-        # Transformer
-        self.pos_enc = PositionalEncoding(d_model, dropout)
-        enc_layer = nn.TransformerEncoderLayer(d_model, num_heads,
-                                              dropout=dropout,
-                                              batch_first=True)
-        self.transformer = nn.TransformerEncoder(enc_layer, num_layers)
-        # 输出头
-        self.policy_head = nn.Linear(d_model, action_vocab_size)
-        self.value_head  = nn.Linear(d_model, 1)
+    def encode(self, state: torch.Tensor):
+        """
+        编码状态向量
+        Keyword arguments:
+        state -- 状态张量
+        Return arguments:
+        torch.Tensor -- 编码后的状态表示
+        """
+        return self.state_encoder(state)
 
-    def forward(self, state: torch.Tensor,
-                      action_seq: torch.Tensor,
-                      panel_idx: torch.Tensor
-               ) -> Tuple[torch.Tensor, torch.Tensor]:
-        # 状态嵌入
-        s_emb = self.state_embed(state)                   # (d_model,)
-        # 动作序列嵌入
-        if action_seq.numel() == 0:
-            action_seq = torch.tensor([0], dtype=torch.long)
-        a_emb = self.action_embed(action_seq)             # (L, d_model)
-        # 面板嵌入
-        p_emb = self.panel_embed(panel_idx).unsqueeze(0)  # (1, d_model)
-        # 构造 Transformer 输入：[state] + [action + panel]
-        seq = torch.cat([
-            s_emb.unsqueeze(0),                          # t=0: state
-            a_emb + p_emb.expand(a_emb.size(0), -1)      # t=1..L
-        ], dim=0).unsqueeze(0)                            # (1, L+1, d_model)
-        seq_enc = self.pos_enc(seq)
-        out = self.transformer(seq_enc)                   # (1, L+1, d_model)
-        last = out[:, -1, :]
-        logits = self.policy_head(last).squeeze(0)        # (action_vocab,)
-        value  = self.value_head(last).squeeze(0)         # (1,)
-        return logits, value
+    def sample_latent(self, mean: torch.Tensor, logstd: torch.Tensor):
+        """
+        从高斯分布中采样潜在变量（重参数化技巧）
+        Keyword arguments:
+        mean -- 均值张量
+        logstd -- 对数标准差张量
+        Return arguments:
+        torch.Tensor -- 采样得到的潜在变量
+        """
+        std = torch.exp(logstd)
+        eps = torch.randn_like(mean)
+        return mean + std * eps
+
+    def compose_action(self, verb_idx: torch.Tensor, target_idx: torch.Tensor):
+        """
+        组合动词和目标的嵌入表示
+        Keyword arguments:
+        verb_idx -- 动词索引张量
+        target_idx -- 目标索引张量
+        Return arguments:
+        torch.Tensor -- 拼接后的动作嵌入
+        """
+        v_emb = self.verb_embed(verb_idx)
+        t_emb = self.target_embed(target_idx)
+        return torch.cat([v_emb, t_emb], dim=-1)
+
+    def transition(self, h, z, verb_idx, target_idx, panel_idx):
+        """
+        状态转移函数，根据当前状态和动作预测下一个隐藏状态
+        Keyword arguments:
+        h -- 当前隐藏状态
+        z -- 当前潜在变量
+        verb_idx -- 动词索引
+        target_idx -- 目标索引
+        panel_idx -- 面板索引
+        Return arguments:
+        torch.Tensor -- 下一个隐藏状态
+        """
+        a_emb = self.compose_action(verb_idx, target_idx)
+        p_emb = self.panel_embed(panel_idx)
+        inp = torch.cat([z, a_emb, p_emb], dim=-1)
+        h_next = self.gru(inp, h)
+        return h_next
+
+    def posterior(self, h, obs_embed):
+        """
+        计算后验分布参数（给定观测）
+        Keyword arguments:
+        h -- 隐藏状态
+        obs_embed -- 观测嵌入
+        Return arguments:
+        Tuple[torch.Tensor, torch.Tensor] -- (均值, 对数标准差)
+        """
+        inp = torch.cat([h, obs_embed], dim=-1)
+        out = self.posterior_net(inp)
+        mean, logstd = torch.chunk(out, 2, dim=-1)
+        logstd = torch.clamp(logstd, -10, 2)
+        return mean, logstd
+
+    def prior(self, h):
+        """
+        计算先验分布参数
+        Keyword arguments:
+        h -- 隐藏状态
+        Return arguments:
+        Tuple[torch.Tensor, torch.Tensor] -- (均值, 对数标准差)
+        """
+        out = self.prior_net(h)
+        mean, logstd = torch.chunk(out, 2, dim=-1)
+        logstd = torch.clamp(logstd, -10, 2)
+        return mean, logstd
+
+    def predict(self, h, z):
+        """
+        根据隐藏状态和潜在变量预测奖励、完成标志、面板和状态
+        Keyword arguments:
+        h -- 隐藏状态
+        z -- 潜在变量
+        Return arguments:
+        Tuple -- (奖励预测, 完成预测, 面板logits, 状态重建)
+        """
+        hz = torch.cat([h, z], dim=-1)
+        r = self.reward_head(hz).squeeze(-1)
+        d = torch.sigmoid(self.done_head(hz)).squeeze(-1)
+        p = self.panel_head(hz)
+        s = self.state_decoder(hz)
+        return r, d, p, s
+
+    def forward_seq(self, states, verbs, targets, panels):
+        """
+        前向传播处理序列数据
+        Keyword arguments:
+        states -- 状态序列张量 [B, T, D]
+        verbs -- 动词序列张量 [B, T]
+        targets -- 目标序列张量 [B, T]
+        panels -- 面板序列张量 [B, T]
+        Return arguments:
+        Dict -- 包含预测结果和分布参数的字典
+        """
+        B, T, D = states.shape
+        device = states.device
+        h, z = self.initial_state(B, device)
+        outputs = {
+            'rewards': [],
+            'dones': [],
+            'panel_logits': [],
+            'state_recons': [],
+            'post_means': [],
+            'post_logstds': [],
+            'prior_means': [],
+            'prior_logstds': []
+        }
+        for t in range(T):
+            obs_embed = self.encode(states[:, t])
+            post_mean, post_logstd = self.posterior(h, obs_embed)
+            z = self.sample_latent(post_mean, post_logstd)
+            prior_mean, prior_logstd = self.prior(h)
+            r, d, p_logits, s_recon = self.predict(h, z)
+            outputs['rewards'].append(r)
+            outputs['dones'].append(d)
+            outputs['panel_logits'].append(p_logits)
+            outputs['state_recons'].append(s_recon)
+            outputs['post_means'].append(post_mean)
+            outputs['post_logstds'].append(post_logstd)
+            outputs['prior_means'].append(prior_mean)
+            outputs['prior_logstds'].append(prior_logstd)
+            if t < T - 1:
+                h = self.transition(h, z, verbs[:, t], targets[:, t], panels[:, t])
+        for k in ['rewards', 'dones', 'state_recons']:
+            outputs[k] = torch.stack(outputs[k], dim=1)
+        outputs['panel_logits'] = torch.stack(outputs['panel_logits'], dim=1)
+        for k in ['post_means', 'post_logstds', 'prior_means', 'prior_logstds']:
+            outputs[k] = torch.stack(outputs[k], dim=1)
+        return outputs
+
+    def imagine_step(self, h, z, verb_idx, target_idx, panel_idx):
+        """
+        在想象空间中执行一步模拟
+        Keyword arguments:
+        h -- 当前隐藏状态
+        z -- 当前潜在变量
+        verb_idx -- 动词索引
+        target_idx -- 目标索引
+        panel_idx -- 面板索引
+        Return arguments:
+        Tuple -- (下一隐藏状态, 下一潜在变量, 奖励预测, 完成预测, 面板logits)
+        """
+        h_next = self.transition(h, z, verb_idx, target_idx, panel_idx)
+        prior_mean, prior_logstd = self.prior(h_next)
+        z_next = self.sample_latent(prior_mean, prior_logstd)
+        r, d, p_logits, _ = self.predict(h_next, z_next)
+        return h_next, z_next, r, d, p_logits
+
+
+# ==================== 结构化CEM规划器类 ====================
+
+class StructuredCEMPlanner:
+    """使用交叉熵方法(CEM)的结构化规划器"""
+
+    def __init__(self, model: PanelConditionedWorldModel):
+        """
+        初始化规划器
+        Keyword arguments:
+        model -- 世界模型实例
+        """
+        self.model = model
+        """ 世界模型 """
+
+    def plan(self, h, z, panel_idx, available_actions, horizon=PLAN_HORIZON):
+        """
+        使用CEM规划最优动作序列
+        Keyword arguments:
+        h -- 当前隐藏状态
+        z -- 当前潜在变量
+        panel_idx -- 当前面板索引
+        available_actions -- 可用动作列表
+        horizon -- 规划时间步长
+        Return arguments:
+        str -- 最优动作字符串，如果无可用动作则返回None
+        """
+        if not available_actions:
+            return None
+        device = h.device
+        num_actions = len(available_actions)
+        # 初始化动作先验
+        priors = torch.ones(num_actions, device=device)
+        for i, (_, _, _, atype) in enumerate(available_actions):
+            if atype == "EXIT":
+                priors[i] = EXIT_ACTION_PRIOR
+            elif atype == "NOOP":
+                priors[i] = NOOP_ACTION_PRIOR
+        # 初始化分布
+        dist = [priors / priors.sum() for _ in range(horizon)]
+        best_sequence = None
+        best_score = -1e9
+        # CEM迭代
+        for iteration in range(CEM_ITERATIONS):
+            sequences = []
+            # 采样种群
+            for _ in range(CEM_POPULATION):
+                seq = []
+                for t in range(horizon):
+                    probs = dist[t]
+                    if CEM_TEMP != 1.0:
+                        probs = torch.pow(probs, 1.0 / CEM_TEMP)
+                        probs = probs / probs.sum()
+                    idx = torch.multinomial(probs, 1).item()
+                    seq.append(idx)
+                sequences.append(seq)
+            # 评估序列
+            scores = []
+            for seq in sequences:
+                score = self._evaluate_sequence(h, z, panel_idx, seq, available_actions)
+                scores.append(score)
+            # 更新最佳序列
+            scores_t = torch.tensor(scores, device=device)
+            max_idx = torch.argmax(scores_t).item()
+            if scores[max_idx] > best_score:
+                best_score = scores[max_idx]
+                best_sequence = sequences[max_idx]
+            # 选择精英并更新分布
+            num_elite = max(1, int(CEM_POPULATION * CEM_ELITE_RATIO))
+            elite_indices = torch.topk(scores_t, num_elite).indices
+            for t in range(horizon):
+                counts = torch.zeros(num_actions, device=device)
+                for idx in elite_indices:
+                    counts[sequences[idx][t]] += 1
+                dist[t] = (counts + 0.01 * priors) / (counts.sum() + 0.01 * priors.sum())
+        if best_sequence is None:
+            return available_actions[0][0]
+        best_action_idx = best_sequence[0]
+        return available_actions[best_action_idx][0]
+
+    def _evaluate_sequence(self, h, z, panel_idx, action_indices, available_actions):
+        """
+        评估一个动作序列的价值
+        Keyword arguments:
+        h -- 初始隐藏状态
+        z -- 初始潜在变量
+        panel_idx -- 初始面板索引
+        action_indices -- 动作索引序列
+        available_actions -- 可用动作列表
+        Return arguments:
+        float -- 序列的总奖励（包含惩罚项）
+        """
+        device = h.device
+        h_cur, z_cur, p_cur = h, z, panel_idx
+        total_reward = 0.0
+        discount = 1.0
+        history = []
+        panel_sequence = [int(panel_idx.item()) if isinstance(panel_idx, torch.Tensor) else int(panel_idx)]
+        with torch.no_grad():
+            for t, action_idx in enumerate(action_indices):
+                _, verb_idx, target_idx, _ = available_actions[action_idx]
+                verb_t = torch.tensor([verb_idx], device=device)
+                target_t = torch.tensor([target_idx], device=device)
+                p_t = torch.tensor([p_cur], device=device) if not isinstance(p_cur, torch.Tensor) else p_cur.unsqueeze(0)
+                # 模拟一步
+                h_next, z_next, r_pred, d_pred, p_logits = self.model.imagine_step(
+                    h_cur.unsqueeze(0), z_cur.unsqueeze(0), verb_t, target_t, p_t
+                )
+                h_cur = h_next.squeeze(0)
+                z_cur = z_next.squeeze(0)
+                p_next = torch.argmax(p_logits, dim=-1).item()
+                # 累计奖励
+                reward = r_pred.item()
+                total_reward += discount * reward
+                discount *= GAMMA
+                # 语义循环检测
+                state_action = (int(p_cur) if not isinstance(p_cur, torch.Tensor) else int(p_cur.item()), verb_idx)
+                if state_action in history:
+                    total_reward -= SEMANTIC_LOOP_PENALTY
+                history.append(state_action)
+                # 状态循环检测
+                panel_sequence.append(p_next)
+                if len(panel_sequence) >= 3:
+                    if panel_sequence[-1] == panel_sequence[-3] and panel_sequence[-1] != panel_sequence[-2]:
+                        total_reward -= STATE_LOOP_PENALTY
+                p_cur = p_next
+                if d_pred.item() > 0.5:
+                    break
+        return total_reward
+
+
+# ==================== 训练函数 ====================
+
+def train_world_model(model, buffer, optimizer, device):
+    """
+    训练世界模型
+    Keyword arguments:
+    model -- 世界模型实例
+    buffer -- 经验回放缓冲区
+    optimizer -- 优化器
+    device -- 设备
+    Return arguments:
+    Dict -- 包含各项损失平均值的字典
+    """
+    if len(buffer) < BATCH_SIZE:
+        return {}
+    losses = defaultdict(list)
+    for _ in range(TRAIN_EPOCHS):
+        batch = buffer.sample(BATCH_SIZE)
+        if batch is None:
+            continue
+        # 准备数据
+        states = batch['states'].to(device)
+        verbs = batch['verbs'].to(device)
+        targets = batch['targets'].to(device)
+        rewards = batch['rewards'].to(device)
+        panels = batch['panels'].to(device)
+        dones = batch['dones'].to(device)
+        # 前向传播
+        outputs = model.forward_seq(states, verbs, targets, panels)
+        # 计算各项损失
+        reward_loss = F.mse_loss(outputs['rewards'], rewards)
+        done_loss = F.binary_cross_entropy(outputs['dones'], dones)
+        panel_logits_flat = outputs['panel_logits'].reshape(-1, MAX_PANELS)
+        panels_flat = panels.reshape(-1)
+        panel_loss = F.cross_entropy(panel_logits_flat, panels_flat)
+        recon_loss = F.mse_loss(outputs['state_recons'], states)
+        # KL散度损失
+        post_mean = outputs['post_means']
+        post_logstd = outputs['post_logstds']
+        prior_mean = outputs['prior_means']
+        prior_logstd = outputs['prior_logstds']
+        kl = 0.5 * torch.sum(
+            (post_mean - prior_mean).pow(2) / torch.exp(2 * prior_logstd)
+            + torch.exp(2 * post_logstd - 2 * prior_logstd)
+            - 2 * (post_logstd - prior_logstd)
+            - 1,
+            dim=-1
+        ).mean()
+        # 总损失
+        total_loss = (W_REWARD * reward_loss +
+                     W_DONE * done_loss +
+                     W_PANEL * panel_loss +
+                     W_RECON * recon_loss +
+                     W_KL * kl)
+        # 反向传播和优化
+        optimizer.zero_grad()
+        total_loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
+        optimizer.step()
+        # 记录损失
+        losses['total'].append(total_loss.item())
+        losses['reward'].append(reward_loss.item())
+        losses['done'].append(done_loss.item())
+        losses['panel'].append(panel_loss.item())
+        losses['kl'].append(kl.item())
+    return {k: sum(v)/len(v) for k, v in losses.items()}
+
 
 def train():
-    global action_counter, panel_counter
-
+    """
+    主训练循环函数
+    """
+    global STATE_DIM, panel_counter, verb_counter, target_counter
+    # 初始化环境
     env = GameEnv()
     init_state = env.reset()
     STATE_DIM = len(init_state)
-
-    net = ActorCritic(
-        state_dim=STATE_DIM,
-        action_vocab_size=MAX_ACTIONS,
-        panel_vocab_size=MAX_PANELS,
-        d_model=D_MODEL,
-        num_heads=NUM_HEADS,
-        num_layers=NUM_LAYERS,
-        dropout=DROPOUT
-    )
+    # 初始化模型
+    device = torch.device("cuda")
+    model = PanelConditionedWorldModel(STATE_DIM).to(device)
+    # 加载已有模型
     if os.path.exists(MODEL_PATH):
-        net.load_state_dict(torch.load(MODEL_PATH))
-    opt = optim.Adam(net.parameters(), lr=LR)
-
+        model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
+    # 初始化优化器和规划器
+    optimizer = optim.Adam(model.parameters(), lr=LR)
+    planner = StructuredCEMPlanner(model)
+    replay = SequenceReplayBuffer(REPLAY_CAPACITY, SEQ_LEN)
+    total_steps = 0
+    # 主训练循环
     for ep in range(1, NUM_EPISODES + 1):
         state = env.reset()
-        action_seq: List[int] = []
-        log_probs, values, rewards, entropies = [], [], [], []
-        panel_visit_counts = defaultdict(int)
         done = False
+        # 初始化模型状态
+        h, z = model.initial_state(1, device)
+        h, z = h.squeeze(0), z.squeeze(0)
+        # 编码初始观测
+        with torch.no_grad():
+            state_t = torch.tensor(state, dtype=torch.float32, device=device)
+            obs_embed = model.encode(state_t)
+            post_mean, post_logstd = model.posterior(h.unsqueeze(0), obs_embed.unsqueeze(0))
+            z = model.sample_latent(post_mean, post_logstd).squeeze(0)
+        episode_reward = 0.0
+        episode_data = []
+        # 回合循环
         for step in range(1, MAX_STEPS_PER_EPISODE + 1):
+            # 获取可用动作
             avail = env.get_available_actions()
-            if not avail:
-                while 1:
-                    avail = env.get_available_actions()
-                    if avail:
-                        break
-                    time.sleep(1)
+            while not avail:
+                time.sleep(0.2)
+                avail = env.get_available_actions()
+            # 获取当前面板信息
             panel_id = env.get_panel_info()
-            panel_visit_counts[panel_id] += 1
-            cnt = panel_visit_counts[panel_id]
-            novelty_bonus = NOVELTY_COEF / math.sqrt(cnt)
-
-            # 动态扩充 vocab
             if panel_id not in panel_vocab and panel_counter < MAX_PANELS:
-                panel_vocab[panel_id] = panel_counter; panel_counter += 1
+                panel_vocab[panel_id] = panel_counter
+                panel_counter += 1
+            panel_idx = panel_vocab.get(panel_id, 0)
+            # 构建可用动作列表
+            available_actions = []
             for a in avail:
-                if a not in action_vocab and action_counter < MAX_ACTIONS:
-                    action_vocab[a] = action_counter; action_counter += 1
-
-            avail_idxs = [action_vocab.get(a, 0) for a in avail]
-            if not avail_idxs:
-                break
-
-            seq_t   = torch.tensor(action_seq[-MAX_SEQ_LEN:], dtype=torch.long)
-            state_t = torch.tensor(state, dtype=torch.float32)
-            panel_t = torch.tensor(panel_vocab.get(panel_id, 0), dtype=torch.long)
-
-            # 前向 & 采样
-            logits, value = net(state_t, seq_t, panel_t)
-            probs = F.softmax(logits[avail_idxs], dim=0)
-            m = torch.distributions.Categorical(probs)
-            sel = m.sample()
-            act_idx = avail_idxs[sel.item()]
-            action = avail[sel.item()]
-
-            next_state, base_rew, done = env.step(action)
-            total_rew = base_rew + novelty_bonus
-
-            # 记录
-            log_probs.append(m.log_prob(sel))
-            values.append(value)
-            rewards.append(total_rew)
-            entropies.append(m.entropy())
-            action_seq.append(act_idx)
+                verb_idx, target_idx = get_action_indices(a)
+                verb_str = list(verb_vocab.keys())[list(verb_vocab.values()).index(verb_idx)] if verb_idx in verb_vocab.values() else "unknown"
+                atype = get_action_type(verb_str)
+                available_actions.append((a, verb_idx, target_idx, atype))
+            # 选择动作（预热期随机，之后使用规划）
+            if total_steps < WARMUP_STEPS:
+                action = random.choice(avail)
+                verb_idx, target_idx = get_action_indices(action)
+            else:
+                action = planner.plan(h, z, panel_idx, available_actions)
+                verb_idx, target_idx = get_action_indices(action)
+            # 执行动作
+            next_state, reward, done = env.step(action)
+            episode_reward += reward
+            total_steps += 1
+            # 记录数据
+            episode_data.append({
+                'state': state,
+                'verb_idx': verb_idx,
+                'target_idx': target_idx,
+                'reward': reward,
+                'panel_idx': panel_idx,
+                'done': float(done)
+            })
+            # 更新模型状态
+            with torch.no_grad():
+                verb_t = torch.tensor([verb_idx], device=device)
+                target_t = torch.tensor([target_idx], device=device)
+                panel_t = torch.tensor([panel_idx], device=device)
+                next_state_t = torch.tensor(next_state, dtype=torch.float32, device=device)
+                # 想象一步
+                h, z, _, _, _ = model.imagine_step(h.unsqueeze(0), z.unsqueeze(0), verb_t, target_t, panel_t)
+                h, z = h.squeeze(0), z.squeeze(0)
+                # 使用真实观测更新潜在变量
+                obs_embed = model.encode(next_state_t)
+                post_mean, post_logstd = model.posterior(h.unsqueeze(0), obs_embed.unsqueeze(0))
+                z = model.sample_latent(post_mean, post_logstd).squeeze(0)
             state = next_state
-
             if done:
                 break
-
-        # 如果这一集没有产生任何 step，直接跳过更新
-        if not values:
-            print(f"[Episode {ep}] no steps taken, skipping update.")
-            continue
-
-        # 计算折扣回报 & Advantage
-        R = 0
-        returns = []
-        for r in reversed(rewards):
-            R = r + GAMMA * R
-            returns.insert(0, R)
-        returns = torch.tensor(returns, dtype=torch.float32)
-        values  = torch.stack(values).squeeze()
-        logp    = torch.stack(log_probs)
-        ent     = torch.stack(entropies)
-        adv     = returns - values
-
-        # 损失
-        actor_loss   = -(logp * adv.detach()).mean()
-        critic_loss  = adv.pow(2).mean()
-        entropy_loss = -ENTROPY_COEF * ent.mean()
-        loss = actor_loss + CRITIC_COEF * critic_loss + entropy_loss
-
-        # 更新
-        opt.zero_grad()
-        loss.backward()
-        opt.step()
-
+        # 将回合数据加入回放缓冲区
+        replay.push_episode(episode_data)
+        # 训练模型
+        if total_steps > WARMUP_STEPS and ep % 2 == 0:
+            train_losses = train_world_model(model, replay, optimizer, device)
+        # 定期保存模型和打印信息
         if ep % 10 == 0:
-            torch.save(net.state_dict(), MODEL_PATH)
-            print(f"[Episode {ep}] loss={loss.item():.3f} return={returns.sum():.2f}")
+            torch.save(model.state_dict(), MODEL_PATH)
+            mode = "WARMUP" if total_steps < WARMUP_STEPS else "PLAN"
+            print(f"[Ep {ep}] {mode} steps={step} R={episode_reward:.2f} "
+                  f"buf={len(replay)} vocab(v={verb_counter},t={target_counter},p={panel_counter})")
+        # 每回合结束保存模型
+        torch.save(model.state_dict(), MODEL_PATH)
+    print("Done!")
 
-    torch.save(net.state_dict(), MODEL_PATH)
 
 if __name__ == "__main__":
     train()
-

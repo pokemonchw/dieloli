@@ -129,6 +129,7 @@ def confirm_character_attr_panel():
         elif yrn == change_attr_button_list[3]:
             setting_weight_panel()
         elif yrn == change_attr_button_list[4]:
+            py_cmd.clr_cmd()
             change_nature_panel.ChangeNaturePanel(width).draw()
         attr_panel_id = now_attr_panel.now_panel
 
