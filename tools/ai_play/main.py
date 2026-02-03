@@ -922,6 +922,15 @@ def train():
                 verb_idx, target_idx = get_action_indices(action)
             # 执行动作
             next_state, reward, done = env.step(action)
+            delta = 0.0
+            for a, b in zip(state, next_state):
+                diff = a - b
+                delta += diff * diff
+            delta = delta ** 0.5  # L2 norm
+            STATE_STUCK_EPS = 1e-3
+            STATE_STUCK_PENALTY = 0.2
+            if delta < STATE_STUCK_EPS:
+                reward -= STATE_STUCK_PENALTY
             next_panel_id = env.get_panel_info()
             topo_map.update(
                 prev_panel=panel_id,
