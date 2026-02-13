@@ -173,7 +173,7 @@ def get_action_indices(action: str) -> Tuple[int, int]:
 
 class GameEnv:
     """游戏环境接口类，通过HTTP与游戏服务器交互"""
-
+    
     def __init__(self) -> None:
         """
         初始化游戏环境
@@ -228,45 +228,6 @@ class GameEnv:
         """
         r = requests.get(f"{self.base_url}/current_panel")
         return r.json()["panel_id"]
-
-class TopologicalMap:
-    """ 拓扑图管理器 """
-
-    def __init__(self):
-        self.nodes = defaultdict(int)
-        """ 节点列表 """
-        self.edges = defaultdict(set)
-        """ 路径集合 """
-        self.frontier_actions = defaultdict(set)
-        """ 节点下的行动集合 """
-
-    def update(self, prev_panel: int, action: str, current_panel: int, available_actions: List[str]):
-        """
-        更新节点的路径信息
-        Keyword arguments:
-        prev_panel -- 前一个面板
-        action -- 执行的行动
-        current_panel -- 当前面板
-        available_actions -- 当前面板可用的行动表
-        """
-        self.nodes[current_panel] += 1
-        if prev_panel is not None:
-            self.edges[(prev_panel, action)].add(current_panel)
-        if current_panel not in self.frontier_actions:
-            self.frontier_actions[current_panel] = set(available_actions)
-        if action in self.frontier_actions[prev_panel]:
-            self.frontier_actions[prev_panel].remove(action)
-
-    def get_intrinsic_reward(self, panel_id: int) -> float:
-        """
-        获取探索面板奖励
-        Keyword arguments:
-        panel_id -- 面板id
-        Return arguments:
-        float -- 奖励积分
-        """
-        count = self.nodes.get(panel_id, 0)
-        return 1.0 / math.sqrt(count + 1)
 
 
 # ==================== 经验回放缓冲区类 ====================
@@ -589,42 +550,19 @@ class PanelConditionedWorldModel(nn.Module):
 
 # ==================== 结构化CEM规划器类 ====================
 
-class StructuredCEMEnhancedTopologicalPlanner:
-    """使用交叉熵方法(CEM)结合拓扑图的结构化规划器"""
+class StructuredCEMPlanner:
+    """使用交叉熵方法(CEM)的结构化规划器"""
 
-    def __init__(self, model: PanelConditionedWorldModel, topo_map: TopologicalMap, intrinsic_weight: float = 0.5, frontier_weight: float = 0.3, known_loop_penalty: float = 1.0):
+    def __init__(self, model: PanelConditionedWorldModel):
         """
         初始化规划器
         Keyword arguments:
         model -- 世界模型实例
-        topo_map -- 拓扑图
-        intrinsic_weight -- 面板新颖度奖励修正
-        frontier_weight -- 动作新颖度奖励修正
-        known_loop_penalty -- 动作连通性惩罚
         """
         self.model = model
         """ 世界模型 """
-        self.topo_map = topo_map
-        """ 拓扑图 """
-        self.intrinsic_weight = intrinsic_weight
-        """ 面板新颖度奖励修正 """
-        self.frontier_weight = frontier_weight
-        """ 动作新颖度奖励修正 """
-        self.known_loop_penalty = known_loop_penalty
-        """ 动作连通性惩罚 """
 
-    @staticmethod
-    def _panel_id_from_idx(panel_idx: int) -> str:
-        """
-        将 panel index 映射回 panel_id（字符串）。
-        若未知则返回一个稳定占位符，确保 topo_map 仍能计数。
-        """
-        for k, v in panel_vocab.items():
-            if v == panel_idx:
-                return k
-        return f"<P{panel_idx}>"
-
-    def plan(self, h: torch.Tensor, z: torch.Tensor, panel_idx: torch.Tensor, available_actions, horizon=PLAN_HORIZON):
+    def plan(self, h, z, panel_idx, available_actions, horizon=PLAN_HORIZON):
         """
         使用CEM规划最优动作序列
         Keyword arguments:
@@ -689,7 +627,7 @@ class StructuredCEMEnhancedTopologicalPlanner:
         best_action_idx = best_sequence[0]
         return available_actions[best_action_idx][0]
 
-    def _evaluate_sequence(self, h, z, panel_idx, action_indices, available_actions) -> float:
+    def _evaluate_sequence(self, h, z, panel_idx, action_indices, available_actions):
         """
         评估一个动作序列的价值
         Keyword arguments:
@@ -702,93 +640,42 @@ class StructuredCEMEnhancedTopologicalPlanner:
         float -- 序列的总奖励（包含惩罚项）
         """
         device = h.device
-        # 当前 imagined rollout 的状态
-        h_cur = h
-        z_cur = z
-        if isinstance(panel_idx, torch.Tensor):
-            p_cur_idx = int(panel_idx.item())
-        else:
-            p_cur_idx = int(panel_idx)
+        h_cur, z_cur, p_cur = h, z, panel_idx
         total_reward = 0.0
         discount = 1.0
-        # 用于循环/卡住检测
-        semantic_history = []
-        panel_sequence = [p_cur_idx]
-        prev_pred_panel = p_cur_idx
-        stuck_steps = 0
+        history = []
+        panel_sequence = [int(panel_idx.item()) if isinstance(panel_idx, torch.Tensor) else int(panel_idx)]
         with torch.no_grad():
-            for t, a_sel in enumerate(action_indices):
-                # 解析动作
-                action_str, verb_idx, target_idx, _atype = available_actions[a_sel]
+            for t, action_idx in enumerate(action_indices):
+                _, verb_idx, target_idx, _ = available_actions[action_idx]
                 verb_t = torch.tensor([verb_idx], device=device)
                 target_t = torch.tensor([target_idx], device=device)
-                p_t = torch.tensor([p_cur_idx], device=device)
+                p_t = torch.tensor([p_cur], device=device) if not isinstance(p_cur, torch.Tensor) else p_cur.unsqueeze(0)
+                # 模拟一步
                 h_next, z_next, r_pred, d_pred, p_logits = self.model.imagine_step(
-                    h_cur.unsqueeze(0),
-                    z_cur.unsqueeze(0),
-                    verb_t,
-                    target_t,
-                    p_t
+                    h_cur.unsqueeze(0), z_cur.unsqueeze(0), verb_t, target_t, p_t
                 )
                 h_cur = h_next.squeeze(0)
                 z_cur = z_next.squeeze(0)
-                p_next_idx = int(torch.argmax(p_logits, dim=-1).item())
-                # 基础外在奖励
-                extrinsic = float(r_pred.item())
-                # 拓扑新颖度奖励（面板越少访问越高）
-                p_next_id = self._panel_id_from_idx(p_next_idx)
-                intrinsic = float(self.topo_map.get_intrinsic_reward(p_next_id))
-                # 动作奖励（鼓励未尝试动作）
-                p_cur_id = self._panel_id_from_idx(p_cur_idx)
-                frontier_bonus = 0.0
-                if p_cur_id in self.topo_map.frontier_actions:
-                    if action_str in self.topo_map.frontier_actions[p_cur_id]:
-                        frontier_bonus = 1.0
-                # 已知连通性校验/惩罚（基于真实拓扑图）
-                known_pen = 0.0
-                if (p_cur_id, action_str) in self.topo_map.edges:
-                    known_dsts = self.topo_map.edges[(p_cur_id, action_str)]
-                    if p_cur_id in known_dsts:
-                        known_pen += self.known_loop_penalty
-                    imagined_seen_ids = {self._panel_id_from_idx(x) for x in panel_sequence}
-                    if len(known_dsts.intersection(imagined_seen_ids)) > 0:
-                        known_pen += 0.5 * self.known_loop_penalty
-                # 语义循环惩罚
-                state_action = (p_cur_idx, verb_idx)
-                semantic_pen = 0.0
-                if state_action in semantic_history:
-                    semantic_pen += SEMANTIC_LOOP_PENALTY
-                semantic_history.append(state_action)
-                # 状态循环惩罚
-                state_loop_pen = 0.0
-                panel_sequence.append(p_next_idx)
+                p_next = torch.argmax(p_logits, dim=-1).item()
+                # 累计奖励
+                reward = r_pred.item()
+                total_reward += discount * reward
+                discount *= GAMMA
+                # 语义循环检测
+                state_action = (int(p_cur) if not isinstance(p_cur, torch.Tensor) else int(p_cur.item()), verb_idx)
+                if state_action in history:
+                    total_reward -= SEMANTIC_LOOP_PENALTY
+                history.append(state_action)
+                # 状态循环检测
+                panel_sequence.append(p_next)
                 if len(panel_sequence) >= 3:
                     if panel_sequence[-1] == panel_sequence[-3] and panel_sequence[-1] != panel_sequence[-2]:
-                        state_loop_pen += STATE_LOOP_PENALTY
-                # 卡住惩罚（连续不换面板）
-                stuck_pen = 0.0
-                if p_next_idx == prev_pred_panel:
-                    stuck_steps += 1
-                else:
-                    stuck_steps = 0
-                prev_pred_panel = p_next_idx
-                if stuck_steps >= 2:
-                    stuck_pen = STUCK_PENALTY * float(stuck_steps)
-                step_value = (
-                    extrinsic
-                    + self.intrinsic_weight * intrinsic
-                    + self.frontier_weight * frontier_bonus
-                    - known_pen
-                    - semantic_pen
-                    - state_loop_pen
-                    - stuck_pen
-                )
-                total_reward += discount * step_value
-                discount *= GAMMA
-                p_cur_idx = p_next_idx
-                if float(d_pred.item()) > 0.5:
+                        total_reward -= STATE_LOOP_PENALTY
+                p_cur = p_next
+                if d_pred.item() > 0.5:
                     break
-        return float(total_reward)
+        return total_reward
 
 
 # ==================== 训练函数 ====================
@@ -832,11 +719,13 @@ def train_world_model(model, buffer, optimizer, device):
         post_logstd = outputs['post_logstds']
         prior_mean = outputs['prior_means']
         prior_logstd = outputs['prior_logstds']
-        kl_val = 0.5 * ((post_mean - prior_mean.detach()).pow(2) / torch.exp(2 * prior_logstd.detach()) + torch.exp(2 * post_logstd - 2 * prior_logstd.detach()) - 2 * (post_logstd - prior_logstd.detach()) - 1).sum(dim=-1).mean()
-        alpha = 0.8
-        loss_prior = 0.5 * torch.sum((post_mean.detach() - prior_mean).pow(2) / torch.exp(2 * prior_logstd) + torch.exp(2 * post_logstd.detach() - 2 * prior_logstd) - 2 * (post_logstd.detach() - prior_logstd) - 1, dim=-1).mean()
-        loss_posterior = 0.5 * torch.sum((post_mean - prior_mean.detach()).pow(2) / torch.exp(2 * prior_logstd.detach()) + torch.exp(2 * post_logstd - 2 * prior_logstd.detach()) - 2 * (post_logstd - prior_logstd.detach()) - 1, dim=-1).mean()
-        kl = alpha * loss_prior + (1 - alpha) * loss_posterior
+        kl = 0.5 * torch.sum(
+            (post_mean - prior_mean).pow(2) / torch.exp(2 * prior_logstd)
+            + torch.exp(2 * post_logstd - 2 * prior_logstd)
+            - 2 * (post_logstd - prior_logstd)
+            - 1,
+            dim=-1
+        ).mean()
         # 总损失
         total_loss = (W_REWARD * reward_loss +
                      W_DONE * done_loss +
@@ -874,8 +763,7 @@ def train():
         model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
     # 初始化优化器和规划器
     optimizer = optim.Adam(model.parameters(), lr=LR)
-    topo_map = TopologicalMap()
-    planner = StructuredCEMEnhancedTopologicalPlanner(model, topo_map)
+    planner = StructuredCEMPlanner(model)
     replay = SequenceReplayBuffer(REPLAY_CAPACITY, SEQ_LEN)
     total_steps = 0
     # 主训练循环
@@ -922,24 +810,7 @@ def train():
                 verb_idx, target_idx = get_action_indices(action)
             # 执行动作
             next_state, reward, done = env.step(action)
-            delta = 0.0
-            for a, b in zip(state, next_state):
-                diff = a - b
-                delta += diff * diff
-            delta = delta ** 0.5  # L2 norm
-            STATE_STUCK_EPS = 1e-3
-            STATE_STUCK_PENALTY = 0.2
-            if delta < STATE_STUCK_EPS:
-                reward -= STATE_STUCK_PENALTY
-            next_panel_id = env.get_panel_info()
-            topo_map.update(
-                prev_panel=panel_id,
-                action=action,
-                current_panel=next_panel_id,
-                available_actions=avail
-            )
-            intrinsic_r = topo_map.get_intrinsic_reward(next_panel_id)
-            episode_reward += reward + 0.1 * intrinsic_r
+            episode_reward += reward
             total_steps += 1
             # 记录数据
             episode_data.append({
