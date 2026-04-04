@@ -149,3 +149,5 @@ class CharacterStatus:
     """ 给对方真空口交 """
     STATUS_DEEP_MOUTH_SEX = 73
     """ 给对方深喉 """
+    STATUS_SOCIAL_INTERACTING = 74
+    """ 协同社交场状态 """

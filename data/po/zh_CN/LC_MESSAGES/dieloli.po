@@ -13,7 +13,7 @@ msgstr ""
 "#-#-#-#-#  dieloli.po (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-01 10:03+0800\n"
+"POT-Creation-Date: 2026-04-04 22:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "{character_name}被{origin_character_name}打断了{statue_name}"
 msgstr ""
 
-#: Script/Settle/interaction.py:174
+#: Script/Settle/interaction.py:229
 #, python-brace-format
 msgid "{NickName}被赶出了教室"
 msgstr ""
@@ -389,17 +389,17 @@ msgid "想要怎么称呼{target_name}?"
 msgstr ""
 
 #: Script/Design/instruct/system.py:158
-#: Script/UI/Flow/creator_character_flow.py:145
+#: Script/UI/Flow/creator_character_flow.py:146
 msgid "角色名不能为纯数字，请重新输入\n"
 msgstr ""
 
 #: Script/Design/instruct/system.py:160
-#: Script/UI/Flow/creator_character_flow.py:147
+#: Script/UI/Flow/creator_character_flow.py:148
 msgid "角色名不能为系统保留字，请重新输入\n"
 msgstr ""
 
 #: Script/Design/instruct/system.py:162
-#: Script/UI/Flow/creator_character_flow.py:149
+#: Script/UI/Flow/creator_character_flow.py:150
 msgid "已有角色使用该姓名，请重新输入\n"
 msgstr ""
 
@@ -757,57 +757,74 @@ msgstr ""
 msgid "你在这里遇到了:"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:197
+#: Script/UI/Panel/in_scene_panel.py:160
+msgid "场景内的互动群组:"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:170
+#, python-brace-format
+msgid "  - {names_text} 正在进行互动活动。"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:177
+msgid "[加入]"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:227
 msgid "口 身材信息: "
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:200 Script/UI/Panel/in_scene_panel.py:278
-#: Script/UI/Panel/in_scene_panel.py:353 Script/UI/Panel/in_scene_panel.py:518
+#: Script/UI/Panel/in_scene_panel.py:230 Script/UI/Panel/in_scene_panel.py:308
+#: Script/UI/Panel/in_scene_panel.py:383 Script/UI/Panel/in_scene_panel.py:565
 msgid "[-关-]"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:200
+#: Script/UI/Panel/in_scene_panel.py:230
 msgid "关闭身材信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:267 Script/UI/Panel/in_scene_panel.py:341
-#: Script/UI/Panel/in_scene_panel.py:424
+#: Script/UI/Panel/in_scene_panel.py:297 Script/UI/Panel/in_scene_panel.py:371
+#: Script/UI/Panel/in_scene_panel.py:454
 msgid "[+开+]"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:267
+#: Script/UI/Panel/in_scene_panel.py:297
 msgid "开启身材信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:275
+#: Script/UI/Panel/in_scene_panel.py:305
 msgid "口 衣着信息: "
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:278
+#: Script/UI/Panel/in_scene_panel.py:308
 msgid "关闭衣着信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:341
+#: Script/UI/Panel/in_scene_panel.py:371
 msgid "开启衣着信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:350
+#: Script/UI/Panel/in_scene_panel.py:380
 msgid "口 状态信息: "
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:353
+#: Script/UI/Panel/in_scene_panel.py:383
 msgid "关闭状态信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:424
+#: Script/UI/Panel/in_scene_panel.py:454
 msgid "开启状态信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:550
+#: Script/UI/Panel/in_scene_panel.py:477
+msgid "你加入了他们的互动。"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:597
 msgid "[-开-]"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:602
+#: Script/UI/Panel/in_scene_panel.py:649
 #: Script/UI/Panel/view_school_timetable_panel.py:190
 #: Script/UI/Panel/game_info_panel.py:110
 msgid "自习课"
@@ -1729,66 +1746,66 @@ msgstr ""
 msgid "就这样了可以吗?"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:141
+#: Script/UI/Flow/creator_character_flow.py:142
 msgid "请问能告诉我你的名字吗？"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:173
+#: Script/UI/Flow/creator_character_flow.py:174
 msgid "随机"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:177
+#: Script/UI/Flow/creator_character_flow.py:178
 #, python-brace-format
 msgid "那么{character_nick_name}的性别是？"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:201
+#: Script/UI/Flow/creator_character_flow.py:202
 #, python-brace-format
 msgid "{character_nick_name}是一个小孩子吗？"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:205
+#: Script/UI/Flow/creator_character_flow.py:206
 msgid "嘎呜～嘎呜～"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:206
+#: Script/UI/Flow/creator_character_flow.py:207
 msgid "才，才不是小孩子！"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:207
+#: Script/UI/Flow/creator_character_flow.py:208
 msgid "已经成年了哦～"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:208
+#: Script/UI/Flow/creator_character_flow.py:209
 msgid "我也想回到小时候呢～"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:209
+#: Script/UI/Flow/creator_character_flow.py:210
 msgid "你说什么？我听不清～"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:239
+#: Script/UI/Flow/creator_character_flow.py:240
 #, python-brace-format
 msgid "{character_nick_name}对自己的体重有自信吗？"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:243
+#: Script/UI/Flow/creator_character_flow.py:244
 msgid "很轻，就像一张纸一样，风一吹就能飘起来。"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:244
+#: Script/UI/Flow/creator_character_flow.py:245
 msgid "普普通通，健康的身材。"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:245
+#: Script/UI/Flow/creator_character_flow.py:246
 msgid "略沉，不过从外表不怎么能够看得出来。"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:246
+#: Script/UI/Flow/creator_character_flow.py:247
 msgid "肉眼可辨的比别人要胖很多。"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:247
+#: Script/UI/Flow/creator_character_flow.py:248
 msgid "人类的极限，看上去像是相扑选手一样。"
 msgstr ""
 
@@ -8986,6 +9003,10 @@ msgstr ""
 msgid "对对方真空口交"
 msgstr ""
 
+#: class:Status id:74 type:name
+msgid "互动"
+msgstr ""
+
 #: class:SunTime id:0 type:name
 msgid "午夜"
 msgstr ""
@@ -11594,6 +11615,12 @@ msgstr ""
 msgid ""
 "{Name}仰头凝望夜空\n"
 "微风吹过，{TargetName}悄悄靠近"
+msgstr ""
+
+#: Event:06871845-1e3a-4f64-9f95-b04359098cfe
+msgid ""
+"雨气未散\n"
+"{Name}在{TargetName}的目光里将衣服抱起"
 msgstr ""
 
 #: ClothingName:621d296a-9c1d-49c4-afd1-034359005878msgid "深衣"msgstr ""

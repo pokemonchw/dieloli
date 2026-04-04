@@ -9,13 +9,65 @@ import datetime
 from Script.Core import cache_control, game_type, value_handle, get_text
 from Script.Design import (
     character_handle, constant, game_time, settle_behavior, handle_premise, event,
-    cooking, map_handle, attr_calculation,
+    cooking, map_handle, attr_calculation, session_handler,
 )
 from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
 
+
+def update_social_sessions():
+    """ 更新社交场 """
+    ended_sessions = []
+    for session_uid, session in cache.interaction_sessions.items():
+        # Check if all members are still in the session and in same scene
+        valid = True
+        
+        # If pending, allow some time before killing it
+        if session.is_pending:
+            if cache.game_time - session.start_time > 5 * 60:
+                ended_sessions.append(session_uid)
+            continue
+            
+        initiator_data = cache.character_data.get(session.initiator)
+        if not initiator_data or initiator_data.state != constant.CharacterStatus.STATUS_SOCIAL_INTERACTING:
+            valid = False
+            
+        for member_id in session.members:
+            member_data = cache.character_data.get(member_id)
+            if not member_data or member_data.state != constant.CharacterStatus.STATUS_SOCIAL_INTERACTING:
+                valid = False
+                break
+                
+        if not valid:
+            ended_sessions.append(session_uid)
+            continue
+            
+        # Delegate update logic to SessionHandler
+        handler = session_handler.get_session_handler(session_uid)
+        if handler:
+            should_end = handler.on_update()
+            if should_end:
+                ended_sessions.append(session_uid)
+
+    for session_uid in ended_sessions:
+        session = cache.interaction_sessions[session_uid]
+        handler = session_handler.get_session_handler(session_uid)
+        if handler:
+            handler.on_finish()
+            
+        for member_id in session.members:
+            member_data = cache.character_data.get(member_id)
+            if member_data and member_data.active_session == session_uid:
+                member_data.state = constant.CharacterStatus.STATUS_ARDER
+                member_data.active_session = ""
+                member_data.behavior.duration = 0
+        del cache.interaction_sessions[session_uid]
+        # Also clean up from scene
+        for scene_data in cache.scene_data.values():
+            if hasattr(scene_data, 'social_fields') and session_uid in scene_data.social_fields:
+                del scene_data.social_fields[session_uid]
 
 def init_character_behavior():
     """
@@ -25,6 +77,10 @@ def init_character_behavior():
     cache.character_target_data = {}
     cache.character_target_score_data = {}
     update_cafeteria()
+    
+    # Process all social sessions
+    update_social_sessions()
+    
     now_status_data = {}
     now_status_data[0] = set()
     now_status_data[1] = set()
@@ -68,6 +124,13 @@ def check_character_status_judge(character_id: int) -> int:
     # 当角色死亡时跳过结算
     if character_data.state == constant.CharacterStatus.STATUS_DEAD:
         return 1
+        
+    # Check if we have incoming social requests to evaluate
+    if character_data.social_requests:
+        # Sort by weight or just check the first one
+        # For simplicity, we just trigger an evaluation if we have requests
+        return 0
+        
     # 当角色状态为闲置时需要查找目标
     if character_data.state == constant.CharacterStatus.STATUS_ARDER:
         if character_data.behavior.start_time == 0:
@@ -85,6 +148,24 @@ def check_character_status_judge(character_id: int) -> int:
     return 2
 
 
+def handle_reject_social_request(session_uid: str):
+    """ 处理社交请求被拒绝的情况 """
+    if session_uid in cache.interaction_sessions:
+        session = cache.interaction_sessions[session_uid]
+        # Notify members (including initiator) to exit wait state
+        for member_id in session.members:
+            member_data = cache.character_data.get(member_id)
+            if member_data and member_data.active_session == session_uid:
+                member_data.state = constant.CharacterStatus.STATUS_ARDER
+                member_data.active_session = ""
+                member_data.behavior.duration = 0
+                member_data.behavior.start_time = cache.game_time
+        # Destroy session
+        del cache.interaction_sessions[session_uid]
+        for scene_data in cache.scene_data.values():
+            if hasattr(scene_data, 'social_fields') and session_uid in scene_data.social_fields:
+                del scene_data.social_fields[session_uid]
+
 def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
     """
     查询角色可用目标活动并执行
@@ -94,10 +175,12 @@ def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
     game_type.Character -- 更新后的角色数据
     """
     global time_index
+    character_data: game_type.Character = cache.character_data[character_id]
+        
     target_weight_data = {}
     # 取出角色数据
     null_target_set = set()
-    target, _, judge = search_target(
+    target, target_weight, judge = search_target(
         character_id,
         set(game_config.config_target.keys()),
         null_target_set,
@@ -105,12 +188,46 @@ def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
         0,
         ""
     )
+    if target is None:
+        target = game_type.ExecuteTarget()
+        target_weight = 0
+
+    # Process social requests
+    if character_data.social_requests:
+        # Sort requests by weight
+        character_data.social_requests.sort(key=lambda x: x['weight'], reverse=True)
+        best_request = character_data.social_requests[0]
+        
+        # Compare best request weight with normal target weight
+        if best_request['weight'] > target_weight:
+            session_uid = best_request['session_uid']
+            if session_uid in cache.interaction_sessions:
+                # Accept this session
+                session = cache.interaction_sessions[session_uid]
+                session.is_pending = False
+                
+                # Create a fake target to represent accepting the session
+                social_target = game_type.ExecuteTarget()
+                social_target.uid = "SOCIAL_SESSION_ACCEPT" # Special identifier
+                social_target.character_id = character_id
+                social_target.weight = best_request['weight']
+                
+                # Reject other requests
+                for req in character_data.social_requests[1:]:
+                    handle_reject_social_request(req['session_uid'])
+                
+                character_data.social_requests = []
+                return social_target
+
+        # Reject all requests if none beats current behavior
+        for req in character_data.social_requests:
+            handle_reject_social_request(req['session_uid'])
+        character_data.social_requests = []
+        
     if judge:
         target.imitate_character_id = character_id
         if target.affiliation == "":
             target.affiliation = target.uid
-    if target is None:
-        target = game_type.ExecuteTarget()
     target.character_id = character_id
     return target
 
@@ -124,6 +241,21 @@ def run_character_target(target: game_type.ExecuteTarget):
     now_time: int = cache.game_time
     character_id: int = target.character_id
     character_data: game_type.Character = cache.character_data[target.character_id]
+    
+    if target.uid == "SOCIAL_SESSION_ACCEPT":
+        # Handle accepting social session
+        # Find which session is being accepted? We assume active_session or finding from interactions
+        # For simplicity, we just set state to SOCIAL_INTERACTING
+        character_data.state = constant.CharacterStatus.STATUS_SOCIAL_INTERACTING
+        character_data.behavior.start_time = now_time
+        character_data.behavior.duration = 10
+        # Should also add to session members if not already
+        for session_uid, session in cache.interaction_sessions.items():
+            if character_id in session.members:
+                character_data.active_session = session_uid
+                break
+        return
+        
     if target.uid != "":
         if target.imitate_character_id != 0:
             if target.imitate_character_id in cache.character_target_data:

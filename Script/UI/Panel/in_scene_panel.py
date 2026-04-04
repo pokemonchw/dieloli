@@ -153,6 +153,36 @@ class InScenePanel:
             money_draw.draw()
             line_feed.draw()
             ask_list = []
+            
+            # Display social fields
+            if hasattr(scene_data, 'social_fields') and scene_data.social_fields:
+                social_fields_draw = draw.NormalDraw()
+                social_fields_draw.text = _("场景内的互动群组:")
+                social_fields_draw.width = self.width
+                social_fields_draw.draw()
+                line_feed.draw()
+                for session_uid, session_type in scene_data.social_fields.items():
+                    session = cache.interaction_sessions.get(session_uid)
+                    if session:
+                        member_names = [cache.character_data[m].name for m in session.members if m in cache.character_data]
+                        names_text = ", ".join(member_names)
+                        session_draw = draw.NormalDraw()
+                        session_draw.text = _("  - {names_text} 正在进行互动活动。").format(
+                            names_text=names_text
+                        )
+                        session_draw.width = text_handle.get_text_index(session_draw.text)
+                        session_draw.draw()
+                        
+                        if 0 not in session.members: # If player is not in session
+                            join_btn = draw.Button(_("[加入]"), f"JoinSession_{session_uid}", cmd_func=self.join_session, args=(session_uid,))
+                            join_btn.width = text_handle.get_text_index(join_btn.text)
+                            join_btn.draw()
+                            ask_list.append(join_btn.return_text)
+                        line_feed.draw()
+                
+                line_draw = draw.LineDraw("-.-", self.width)
+                line_draw.draw()
+                
             if character_list:
                 meet_draw.draw()
                 line_feed.draw()
@@ -431,6 +461,23 @@ class InScenePanel:
             flow_handle.askfor_all(ask_list)
             py_cmd.clr_cmd(refresh_panel=False)
 
+    def join_session(self, session_uid: str):
+        """ 加入社交场会话 """
+        character_data: game_type.Character = cache.character_data[0]
+        session = cache.interaction_sessions.get(session_uid)
+        if session and 0 not in session.members:
+            session.members.append(0)
+            character_data.state = constant.CharacterStatus.STATUS_SOCIAL_INTERACTING
+            character_data.active_session = session_uid
+            character_data.behavior.behavior_id = session.type
+            character_data.behavior.start_time = cache.game_time
+            character_data.behavior.duration = 10
+            
+            now_draw = draw.LineFeedWaitDraw()
+            now_draw.text = _("你加入了他们的互动。")
+            now_draw.width = self.width
+            now_draw.draw()
+        
     def change_stature_panel_swicth(self):
         """ 更改身材信息面板开关状态 """
         cache.in_scene_panel_switch.stature_switch = not cache.in_scene_panel_switch.stature_switch

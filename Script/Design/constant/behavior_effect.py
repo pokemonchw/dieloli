@@ -1,5 +1,8 @@
 class BehaviorEffect:
     """行为结算效果函数"""
+    
+    UPDATE_SOCIAL_SESSION = "update_social_session"
+    """ 更新社交场 """
 
     """
     =========================

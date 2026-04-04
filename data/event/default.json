@@ -9603,5 +9603,18 @@
             "is_beyond_friendship_target": 1
         },
         "settle": {}
+    },
+    "06871845-1e3a-4f64-9f95-b04359098cfe": {
+        "uid": "06871845-1e3a-4f64-9f95-b04359098cfe",
+        "adv_id": "",
+        "status_id": "23",
+        "start": true,
+        "text": "雨气未散\\n{Name}在{TargetName}的目光里将衣服抱起",
+        "premise": {
+            "now_is_rainy": 1,
+            "have_target": 1,
+            "is_rigorous": 1
+        },
+        "settle": {}
     }
 }

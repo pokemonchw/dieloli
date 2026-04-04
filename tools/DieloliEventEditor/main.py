@@ -29,7 +29,7 @@ def send_event_text_to_api(prompt: str) -> str:
     str -- 返回文本
     """
     try:
-        client = OpenAI(api_key="sk-zk2e96f4e49119e7bdaf6e91203473cfc046821a3c5bc8b8", base_url="https://api.zhizengzeng.com/v1")
+        client = OpenAI(api_key="sk-zk2494baf3a7a28bde9e12c89bee0b801536959d7ad12e9e", base_url="https://api.zhizengzeng.com/v1")
         chat_completion = client.chat.completions.create(
             messages=[
                 {

@@ -386,6 +386,8 @@ class Scene:
         """ 场景标签 """
         self.character_list: set = set()
         """ 场景内角色列表 """
+        self.social_fields: Dict[str, str] = {}
+        """ 场景内正在进行的社交场 {会话uid:类型描述} """
 
 
 class Character:
@@ -546,6 +548,10 @@ class Character:
         """ 角色喜好的穿搭风格 """
         self.character_awareness_data: Dict[int, Dict[str, CharacterAwareness]] = {}
         """ 对其他角色的认知数据 {角色id:{认知id:认知数据}} """
+        self.social_requests: List[Dict] = []
+        """ 收到的社交请求列表 [{'initiator': id, 'type': session_type, 'target': uuid, ...}] """
+        self.active_session: str = ""
+        """ 当前正在参与的社交场uid """
 
 
 class CharacterIdentity:
@@ -611,6 +617,26 @@ class TeacherTimeTable:
         """ 上课时间 """
         self.end_time: int = 0
         """ 下课时间 """
+
+
+class InteractionSession:
+    """ 社交场(InteractionSession)结构体 """
+
+    def __init__(self, initiator_id: int, target_ids: List[int], session_type: int):
+        self.uid: str = ""
+        """ 会话唯一id """
+        self.initiator: int = initiator_id
+        """ 发起者id """
+        self.members: List[int] = [initiator_id] + target_ids
+        """ 参与者id列表 """
+        self.type: int = session_type
+        """ 会话类型 """
+        self.data: dict = {}
+        """ 存放交互过程中的临时数据 """
+        self.start_time: int = 0
+        """ 开始时间戳 """
+        self.is_pending: bool = True
+        """ 是否正在等待响应 """
 
 
 class Cache:
@@ -790,6 +816,8 @@ class Cache:
         """ 场景中各面板显示开关 """
         self.observe_switch: bool = False
         """ 看海模式开关 """
+        self.interaction_sessions: Dict[str, InteractionSession] = {}
+        """ 社交场会话记录 会话uid:会话数据 """
 
 
 class TargetChange:
