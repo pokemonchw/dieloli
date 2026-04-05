@@ -91,6 +91,7 @@ class SeeCharacterInfoPanel:
         Keyword arguments:
         panel_id -- 要切换的面板id
         """
+        py_cmd.clr_cmd()
         self.now_panel = panel_id
         self.handle_panel.set(
             [f"[{text}]" for text in self.draw_data],

@@ -1,7 +1,7 @@
 from typing import Set, Tuple
 from types import FunctionType
 from uuid import UUID
-from Script.Core import get_text, game_type, cache_control, flow_handle, text_handle
+from Script.Core import get_text, game_type, cache_control, flow_handle, text_handle, py_cmd
 from Script.UI.Model import panel, draw
 from Script.Design import cooking, update, constant
 from Script.Config import normal_config, game_config
@@ -87,6 +87,7 @@ class FoodBagPanel:
         Keyword arguments:
         food_type -- 要切换的食物类型
         """
+        py_cmd.clr_cmd()
         self.now_panel = food_type
         food_id_list = list(
             cooking.get_character_food_bag_type_list_buy_food_type(0, self.now_panel).items()

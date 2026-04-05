@@ -12,6 +12,7 @@ from Script.Core import (
     value_handle,
     cache_control,
     game_type,
+    py_cmd,
 )
 from Script.Config import normal_config
 
@@ -802,6 +803,7 @@ class PageHandlePanel:
 
     def next_page(self):
         """将面板切换至下一页"""
+        py_cmd.clr_cmd()
         total_page = math.ceil(len(self.text_list) / self.limit)
         if self.now_page >= total_page - 1:
             self.now_page = 0
@@ -810,6 +812,7 @@ class PageHandlePanel:
 
     def old_page(self):
         """将面板切换至上一页"""
+        py_cmd.clr_cmd()
         total_page = math.ceil(len(self.text_list) / self.limit)
         if self.now_page <= 0:
             self.now_page = total_page
