@@ -15,13 +15,13 @@ from Script.Config import game_config, normal_config
 
 cache: game_type.Cache = cache_control.cache
 """ 游戏缓存数据 """
+_ = get_text._
 
 
 def update_social_sessions():
     """ 更新社交场 """
     ended_sessions = []
     for session_uid, session in cache.interaction_sessions.items():
-        # Check if all members are still in the session and in same scene
         valid = True
         
         # If pending, allow some time before killing it
@@ -31,21 +31,37 @@ def update_social_sessions():
             continue
             
         initiator_data = cache.character_data.get(session.initiator)
-        if not initiator_data or initiator_data.state != constant.CharacterStatus.STATUS_SOCIAL_INTERACTING:
+        if not initiator_data or initiator_data.state != constant.CharacterStatus.STATUS_SOCIAL_INTERACTING or initiator_data.active_session != session_uid:
             valid = False
             
+        handler = session_handler.get_session_handler(session_uid)
+        
+        members_to_remove = []
         for member_id in session.members:
             member_data = cache.character_data.get(member_id)
+            # If member data is invalid or they are no longer interacting, remove them
+            # We also need to check if they moved away from the initiator's scene
             if not member_data or member_data.state != constant.CharacterStatus.STATUS_SOCIAL_INTERACTING:
-                valid = False
-                break
+                members_to_remove.append(member_id)
+            elif member_data.active_session != session_uid:
+                members_to_remove.append(member_id)
+            elif initiator_data and member_data.position != initiator_data.position:
+                members_to_remove.append(member_id)
                 
+        for m in members_to_remove:
+            if m != session.initiator:
+                session.members.remove(m)
+                if handler:
+                    handler.on_member_leave(m)
+                
+        if len(session.members) < 2 and session.type not in [constant.Behavior.TEACHING, constant.Behavior.PLAY_COMPUTER, constant.Behavior.EAT]:
+            valid = False
+            
         if not valid:
             ended_sessions.append(session_uid)
             continue
             
         # Delegate update logic to SessionHandler
-        handler = session_handler.get_session_handler(session_uid)
         if handler:
             should_end = handler.on_update()
             if should_end:
@@ -160,11 +176,49 @@ def handle_reject_social_request(session_uid: str):
                 member_data.active_session = ""
                 member_data.behavior.duration = 0
                 member_data.behavior.start_time = cache.game_time
+                if member_id == 0: # 如果是玩家被拒绝
+                    from Script.UI.Model import draw
+                    from Script.Config import normal_config
+                    now_draw = draw.LineFeedWaitDraw()
+                    now_draw.draw_event = True
+                    now_draw.text = _("互动邀请被忽略或拒绝了")
+                    now_draw.width = normal_config.config_normal.text_width
+                    now_draw.draw()
+                    
         # Destroy session
         del cache.interaction_sessions[session_uid]
         for scene_data in cache.scene_data.values():
             if hasattr(scene_data, 'social_fields') and session_uid in scene_data.social_fields:
                 del scene_data.social_fields[session_uid]
+
+def evaluate_social_request_weight(character_id: int, request: dict) -> int:
+    """评估社交请求的权重"""
+    character_data: game_type.Character = cache.character_data[character_id]
+    initiator_id = request['initiator']
+    request_type = request['type']
+    base_weight = request.get('weight', 100)
+    
+    favorability = character_data.favorability.get(initiator_id, 0)
+    
+    # 简单的情感折算，每1000好感增加10权重
+    fav_bonus = int(favorability / 100)
+    
+    # 疲劳状态惩罚
+    tired_penalty = 0
+    if 27 in character_data.status and character_data.status[27] > 50:
+        tired_penalty = 50
+        
+    final_weight = base_weight + fav_bonus - tired_penalty
+    
+    # 根据类型进行调整
+    if request_type == constant.Behavior.CHAT:
+        if favorability < -1000:
+            final_weight -= 200
+    elif request_type == constant.Behavior.ABUSE:
+        final_weight = max(final_weight, 400)
+        
+    return max(0, int(final_weight))
+
 
 def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
     """
@@ -194,23 +248,33 @@ def character_target_judge(character_id: int) -> game_type.ExecuteTarget:
 
     # Process social requests
     if character_data.social_requests:
-        # Sort requests by weight
-        character_data.social_requests.sort(key=lambda x: x['weight'], reverse=True)
+        # Evaluate dynamic weights
+        for req in character_data.social_requests:
+            req['eval_weight'] = evaluate_social_request_weight(character_id, req)
+
+        # Sort requests by eval_weight
+        character_data.social_requests.sort(key=lambda x: x['eval_weight'], reverse=True)
         best_request = character_data.social_requests[0]
         
-        # Compare best request weight with normal target weight
-        if best_request['weight'] > target_weight:
+        # Compare best request eval_weight with normal target weight
+        if best_request['eval_weight'] > target_weight:
             session_uid = best_request['session_uid']
             if session_uid in cache.interaction_sessions:
                 # Accept this session
                 session = cache.interaction_sessions[session_uid]
                 session.is_pending = False
                 
+                # Initialize session through handler
+                handler = session_handler.get_session_handler(session_uid)
+                if handler:
+                    handler.on_start()
+                
                 # Create a fake target to represent accepting the session
                 social_target = game_type.ExecuteTarget()
                 social_target.uid = "SOCIAL_SESSION_ACCEPT" # Special identifier
                 social_target.character_id = character_id
-                social_target.weight = best_request['weight']
+                social_target.weight = best_request['eval_weight']
+                social_target.affiliation = session_uid
                 
                 # Reject other requests
                 for req in character_data.social_requests[1:]:
@@ -249,11 +313,7 @@ def run_character_target(target: game_type.ExecuteTarget):
         character_data.state = constant.CharacterStatus.STATUS_SOCIAL_INTERACTING
         character_data.behavior.start_time = now_time
         character_data.behavior.duration = 10
-        # Should also add to session members if not already
-        for session_uid, session in cache.interaction_sessions.items():
-            if character_id in session.members:
-                character_data.active_session = session_uid
-                break
+        character_data.active_session = target.affiliation
         return
         
     if target.uid != "":

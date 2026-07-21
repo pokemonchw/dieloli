@@ -112,7 +112,10 @@ def input_load_save(save_id: str):
     Keyword arguments:
     save_id -- 存档id
     """
-    cache.__dict__ = load_save(save_id).__dict__
+    save_cache = load_save(save_id)
+    cache.__dict__ = save_cache.__dict__
+    if not hasattr(cache, "library_hidden_notes"):
+        cache.library_hidden_notes = {}
 
 
 def remove_save(save_id: str):

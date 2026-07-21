@@ -151,3 +151,5 @@ class CharacterStatus:
     """ 给对方深喉 """
     STATUS_SOCIAL_INTERACTING = 74
     """ 协同社交场状态 """
+    STATUS_READ_BOOK = 75
+    """ 阅读书籍 """

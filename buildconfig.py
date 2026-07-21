@@ -13,6 +13,10 @@ os.system("cp ./tools/DieloliAIEditor/default.json ./data/target/")
 target_dir = os.path.join("data", "target")
 os.system("cp ./tools/DieloliClubEditor/default.json ./data/club/")
 club_dir = os.path.join("data", "club")
+os.system("cp ./tools/DieloliBookEditor/default.json ./data/book/")
+book_dir = os.path.join("data", "book")
+os.system("cp ./tools/DieloliLibraryNoteEditor/default.json ./data/library_note/")
+library_note_dir = os.path.join("data", "library_note")
 os.system("cp ./tools/ai_play/policy_model.pth ./data/")
 clothing_dir = os.path.join("data", "clothing")
 os.system("cp ./tools/DieloliClothingEditor/default.json ./data/clothing/")
@@ -183,6 +187,42 @@ for i in club_file_list:
             club_list.append(now_club)
 config_data["Club"] = {}
 config_data["Club"]["data"] = club_list
+
+book_file_list = os.listdir(book_dir)
+book_list = []
+for i in book_file_list:
+    if i.split(".")[1] != "json":
+        continue
+    now_book_path = os.path.join(book_dir, i)
+    with open(now_book_path, "r", encoding="utf-8") as book_file:
+        now_book_data = json.loads(book_file.read())
+        for book_id in now_book_data:
+            now_book = now_book_data[book_id]
+            book_list.append(now_book)
+config_data["Book"] = {}
+config_data["Book"]["data"] = book_list
+
+library_note_file_list = os.listdir(library_note_dir)
+library_note_list = []
+for i in library_note_file_list:
+    if i.split(".")[1] != "json":
+        continue
+    now_library_note_path = os.path.join(library_note_dir, i)
+    with open(now_library_note_path, "r", encoding="utf-8") as library_note_file:
+        now_library_note_data = json.loads(library_note_file.read())
+        for note_id in now_library_note_data:
+            now_note = now_library_note_data[note_id]
+            library_note_list.append(now_note)
+            now_note_text = now_note.get("content_template", "")
+            if now_note_text and now_note_text not in msgData:
+                config_po += f"#: LibraryNote:{note_id}\n"
+                config_po += f'msgid "{now_note_text}"\n'
+                config_po += 'msgstr ""\n\n'
+                msgData.add(now_note_text)
+config_data["LibraryNote"] = {}
+config_data["LibraryNote"]["data"] = library_note_list
+config_data["LibraryNote"]["gettext"] = {}
+config_data["LibraryNote"]["gettext"]["content_template"] = 1
 
 clothing_file_list = os.listdir(clothing_dir)
 clothing_list = []

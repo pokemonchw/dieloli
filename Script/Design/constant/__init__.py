@@ -5,6 +5,7 @@ from Script.Design.constant.adv_npc import AdvNpc
 from Script.Design.constant.awareness import Awareness
 from Script.Design.constant.behavior import Behavior
 from Script.Design.constant.behavior_effect import BehaviorEffect
+from Script.Design.constant.book_type import BookType
 from Script.Design.constant.character_status import CharacterStatus
 from Script.Design.constant.dressing_style import DressingStyle
 from Script.Design.constant.instruct import Instruct

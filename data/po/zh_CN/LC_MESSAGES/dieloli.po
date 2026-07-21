@@ -13,7 +13,7 @@ msgstr ""
 "#-#-#-#-#  dieloli.po (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-04 22:10+0800\n"
+"POT-Creation-Date: 2026-04-05 12:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "{character_name}被{origin_character_name}打断了{statue_name}"
 msgstr ""
 
-#: Script/Settle/interaction.py:229
+#: Script/Settle/interaction.py:123
 #, python-brace-format
 msgid "{NickName}被赶出了教室"
 msgstr ""
@@ -44,6 +44,10 @@ msgstr ""
 #: Script/Core/flow_handle.py:289 Script/Core/flow_handle.py:313
 #: Script/Core/flow_handle.py:333
 msgid "您输入的选项无效，请重试\n"
+msgstr ""
+
+#: Script/Design/character_behavior.py:184
+msgid "互动邀请被忽略或拒绝了"
 msgstr ""
 
 #: Script/Design/adv/liwei_and_lixue.py:13
@@ -304,15 +308,16 @@ msgstr ""
 msgid "脱下对方衣服"
 msgstr ""
 
-#: Script/Design/instruct/dialogue.py:17 class:Status id:5 type:name
+#: Script/Design/instruct/dialogue.py:18 Script/UI/Panel/in_scene_panel.py:171
+#: class:Status id:5 type:name
 msgid "闲聊"
 msgstr ""
 
-#: Script/Design/instruct/dialogue.py:29 class:Status id:21 type:name
+#: Script/Design/instruct/dialogue.py:57 class:Status id:21 type:name
 msgid "辱骂"
 msgstr ""
 
-#: Script/Design/instruct/dialogue.py:40 class:Status id:28 type:name
+#: Script/Design/instruct/dialogue.py:95 class:Status id:28 type:name
 msgid "演讲"
 msgstr ""
 
@@ -389,17 +394,17 @@ msgid "想要怎么称呼{target_name}?"
 msgstr ""
 
 #: Script/Design/instruct/system.py:158
-#: Script/UI/Flow/creator_character_flow.py:146
+#: Script/UI/Flow/creator_character_flow.py:147
 msgid "角色名不能为纯数字，请重新输入\n"
 msgstr ""
 
 #: Script/Design/instruct/system.py:160
-#: Script/UI/Flow/creator_character_flow.py:148
+#: Script/UI/Flow/creator_character_flow.py:149
 msgid "角色名不能为系统保留字，请重新输入\n"
 msgstr ""
 
 #: Script/Design/instruct/system.py:162
-#: Script/UI/Flow/creator_character_flow.py:150
+#: Script/UI/Flow/creator_character_flow.py:151
 msgid "已有角色使用该姓名，请重新输入\n"
 msgstr ""
 
@@ -712,6 +717,10 @@ msgstr ""
 msgid "信仰之跃"
 msgstr ""
 
+#: Script/Design/instruct/active.py:325
+msgid "阅读"
+msgstr ""
+
 #: Script/Design/character_move.py:71
 #: Script/UI/Panel/view_club_list_panel.py:123
 #: Script/UI/Panel/view_club_list_panel.py:129
@@ -758,73 +767,93 @@ msgid "你在这里遇到了:"
 msgstr ""
 
 #: Script/UI/Panel/in_scene_panel.py:160
-msgid "场景内的互动群组:"
+msgid "正在互动的人群:"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:170
+#: Script/UI/Panel/in_scene_panel.py:169
+msgid "互动中"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:173 class:Status id:3 type:name
+msgid "上课"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:175
+msgid "聚餐"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:177 class:InstructType id:4 type:name
+msgid "娱乐"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:179
+msgid "争吵"
+msgstr ""
+
+#: Script/UI/Panel/in_scene_panel.py:184
 #, python-brace-format
-msgid "  - {names_text} 正在进行互动活动。"
+msgid " 【{action_text}】 {names_text} (氛围: {atmosphere})"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:177
+#: Script/UI/Panel/in_scene_panel.py:193
 msgid "[加入]"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:227
+#: Script/UI/Panel/in_scene_panel.py:243
 msgid "口 身材信息: "
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:230 Script/UI/Panel/in_scene_panel.py:308
-#: Script/UI/Panel/in_scene_panel.py:383 Script/UI/Panel/in_scene_panel.py:565
+#: Script/UI/Panel/in_scene_panel.py:246 Script/UI/Panel/in_scene_panel.py:324
+#: Script/UI/Panel/in_scene_panel.py:399 Script/UI/Panel/in_scene_panel.py:619
 msgid "[-关-]"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:230
+#: Script/UI/Panel/in_scene_panel.py:246
 msgid "关闭身材信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:297 Script/UI/Panel/in_scene_panel.py:371
-#: Script/UI/Panel/in_scene_panel.py:454
+#: Script/UI/Panel/in_scene_panel.py:313 Script/UI/Panel/in_scene_panel.py:387
+#: Script/UI/Panel/in_scene_panel.py:470
 msgid "[+开+]"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:297
+#: Script/UI/Panel/in_scene_panel.py:313
 msgid "开启身材信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:305
+#: Script/UI/Panel/in_scene_panel.py:321
 msgid "口 衣着信息: "
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:308
+#: Script/UI/Panel/in_scene_panel.py:324
 msgid "关闭衣着信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:371
+#: Script/UI/Panel/in_scene_panel.py:387
 msgid "开启衣着信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:380
+#: Script/UI/Panel/in_scene_panel.py:396
 msgid "口 状态信息: "
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:383
+#: Script/UI/Panel/in_scene_panel.py:399
 msgid "关闭状态信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:454
+#: Script/UI/Panel/in_scene_panel.py:470
 msgid "开启状态信息面板"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:477
+#: Script/UI/Panel/in_scene_panel.py:499
 msgid "你加入了他们的互动。"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:597
+#: Script/UI/Panel/in_scene_panel.py:651
 msgid "[-开-]"
 msgstr ""
 
-#: Script/UI/Panel/in_scene_panel.py:649
+#: Script/UI/Panel/in_scene_panel.py:703
 #: Script/UI/Panel/view_school_timetable_panel.py:190
 #: Script/UI/Panel/game_info_panel.py:110
 msgid "自习课"
@@ -848,8 +877,9 @@ msgstr ""
 #: Script/UI/Panel/view_club_info_panel.py:68
 #: Script/UI/Panel/see_character_info_panel.py:1183
 #: Script/UI/Panel/view_character_status_list_panel.py:165
-#: Script/UI/Panel/achieve_panel.py:49 Script/UI/Panel/item_shop_panel.py:56
-#: Script/UI/Panel/food_shop_panel.py:85 Script/UI/Panel/food_shop_panel.py:182
+#: Script/UI/Panel/achieve_panel.py:49 Script/UI/Panel/book_bag_panel.py:54
+#: Script/UI/Panel/item_shop_panel.py:56 Script/UI/Panel/food_shop_panel.py:85
+#: Script/UI/Panel/food_shop_panel.py:182
 #: Script/UI/Panel/view_club_list_panel.py:56
 #: Script/UI/Panel/game_setting_panel.py:84
 msgid "[返回]"
@@ -869,8 +899,9 @@ msgstr ""
 #: Script/UI/Panel/view_character_status_list_panel.py:165
 #: Script/UI/Panel/view_character_status_list_panel.py:291
 #: Script/UI/Panel/view_character_status_list_panel.py:293
-#: Script/UI/Panel/achieve_panel.py:49 Script/UI/Panel/item_shop_panel.py:56
-#: Script/UI/Panel/food_shop_panel.py:85 Script/UI/Panel/food_shop_panel.py:182
+#: Script/UI/Panel/achieve_panel.py:49 Script/UI/Panel/book_bag_panel.py:54
+#: Script/UI/Panel/item_shop_panel.py:56 Script/UI/Panel/food_shop_panel.py:85
+#: Script/UI/Panel/food_shop_panel.py:182
 #: Script/UI/Panel/view_club_list_panel.py:56
 #: Script/UI/Panel/game_setting_panel.py:84
 #: Script/UI/Panel/see_map_panel.py:161
@@ -1505,6 +1536,14 @@ msgstr ""
 msgid "成就的解锁条件被偷偷藏起来了~"
 msgstr ""
 
+#: Script/UI/Panel/book_bag_panel.py:36
+msgid "书籍背包"
+msgstr ""
+
+#: Script/UI/Panel/book_bag_panel.py:88
+msgid "未知书籍"
+msgstr ""
+
 #: Script/UI/Panel/change_nature_panel.py:79
 msgid "保存"
 msgstr ""
@@ -1718,94 +1757,94 @@ msgstr ""
 msgid "你"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:100
+#: Script/UI/Flow/creator_character_flow.py:101
 msgid "[更改姓名]"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:100
+#: Script/UI/Flow/creator_character_flow.py:101
 msgid "[更改性别]"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:100
+#: Script/UI/Flow/creator_character_flow.py:101
 msgid "[修正年龄]"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:100
+#: Script/UI/Flow/creator_character_flow.py:101
 msgid "[修正身材]"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:100
+#: Script/UI/Flow/creator_character_flow.py:101
 msgid "[修改性格]"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:106
+#: Script/UI/Flow/creator_character_flow.py:107
 msgid "就这样开始新的人生吧"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:116
+#: Script/UI/Flow/creator_character_flow.py:117
 msgid "就这样了可以吗?"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:142
+#: Script/UI/Flow/creator_character_flow.py:143
 msgid "请问能告诉我你的名字吗？"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:174
+#: Script/UI/Flow/creator_character_flow.py:175
 msgid "随机"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:178
+#: Script/UI/Flow/creator_character_flow.py:179
 #, python-brace-format
 msgid "那么{character_nick_name}的性别是？"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:202
+#: Script/UI/Flow/creator_character_flow.py:203
 #, python-brace-format
 msgid "{character_nick_name}是一个小孩子吗？"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:206
+#: Script/UI/Flow/creator_character_flow.py:207
 msgid "嘎呜～嘎呜～"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:207
+#: Script/UI/Flow/creator_character_flow.py:208
 msgid "才，才不是小孩子！"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:208
+#: Script/UI/Flow/creator_character_flow.py:209
 msgid "已经成年了哦～"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:209
+#: Script/UI/Flow/creator_character_flow.py:210
 msgid "我也想回到小时候呢～"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:210
+#: Script/UI/Flow/creator_character_flow.py:211
 msgid "你说什么？我听不清～"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:240
+#: Script/UI/Flow/creator_character_flow.py:241
 #, python-brace-format
 msgid "{character_nick_name}对自己的体重有自信吗？"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:244
+#: Script/UI/Flow/creator_character_flow.py:245
 msgid "很轻，就像一张纸一样，风一吹就能飘起来。"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:245
+#: Script/UI/Flow/creator_character_flow.py:246
 msgid "普普通通，健康的身材。"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:246
+#: Script/UI/Flow/creator_character_flow.py:247
 msgid "略沉，不过从外表不怎么能够看得出来。"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:247
+#: Script/UI/Flow/creator_character_flow.py:248
 msgid "肉眼可辨的比别人要胖很多。"
 msgstr ""
 
-#: Script/UI/Flow/creator_character_flow.py:248
+#: Script/UI/Flow/creator_character_flow.py:249
 msgid "人类的极限，看上去像是相扑选手一样。"
 msgstr ""
 
@@ -7254,1206 +7293,6 @@ msgstr ""
 msgid "自谦"
 msgstr ""
 
-#: class:Book id:0 type:name
-msgid "梦境拾荒者"
-msgstr ""
-
-#: class:Book id:1 type:name
-msgid "星空下的守护者"
-msgstr ""
-
-#: class:Book id:2 type:name
-msgid "月光古道"
-msgstr ""
-
-#: class:Book id:3 type:name
-msgid "时间的倒影"
-msgstr ""
-
-#: class:Book id:4 type:name
-msgid "异世旅人的笔记"
-msgstr ""
-
-#: class:Book id:5 type:name
-msgid "沙漏中的城堡"
-msgstr ""
-
-#: class:Book id:6 type:name
-msgid "破碎的镜子"
-msgstr ""
-
-#: class:Book id:7 type:name
-msgid "光与影的交错"
-msgstr ""
-
-#: class:Book id:8 type:name
-msgid "永夜的边缘"
-msgstr ""
-
-#: class:Book id:9 type:name
-msgid "风暴中的寂静"
-msgstr ""
-
-#: class:Book id:10 type:name
-msgid "森林深处的秘密"
-msgstr ""
-
-#: class:Book id:11 type:name
-msgid "天外来客"
-msgstr ""
-
-#: class:Book id:12 type:name
-msgid "迷失在记忆中的人"
-msgstr ""
-
-#: class:Book id:13 type:name
-msgid "冰封之海"
-msgstr ""
-
-#: class:Book id:14 type:name
-msgid "星辰之舞"
-msgstr ""
-
-#: class:Book id:15 type:name
-msgid "远古神祇的回响"
-msgstr ""
-
-#: class:Book id:16 type:name
-msgid "烈焰与寒霜"
-msgstr ""
-
-#: class:Book id:17 type:name
-msgid "梦与现实的边界"
-msgstr ""
-
-#: class:Book id:18 type:name
-msgid "黑暗中的微光"
-msgstr ""
-
-#: class:Book id:19 type:name
-msgid "荒野中的孤独旅者"
-msgstr ""
-
-#: class:Book id:20 type:name
-msgid "月影湖畔的传说"
-msgstr ""
-
-#: class:Book id:21 type:name
-msgid "迷雾森林的呼唤"
-msgstr ""
-
-#: class:Book id:22 type:name
-msgid "沉睡的古老王国"
-msgstr ""
-
-#: class:Book id:23 type:name
-msgid "时间裂缝中的旅程"
-msgstr ""
-
-#: class:Book id:24 type:name
-msgid "永恒之塔"
-msgstr ""
-
-#: class:Book id:25 type:name
-msgid "无尽之海"
-msgstr ""
-
-#: class:Book id:26 type:name
-msgid "光芒背后的秘密"
-msgstr ""
-
-#: class:Book id:27 type:name
-msgid "流浪者的最后一站"
-msgstr ""
-
-#: class:Book id:28 type:name
-msgid "命运之轮"
-msgstr ""
-
-#: class:Book id:29 type:name
-msgid "幻境之钥"
-msgstr ""
-
-#: class:Book id:30 type:name
-msgid "时光交错"
-msgstr ""
-
-#: class:Book id:31 type:name
-msgid "暗影中的盟约"
-msgstr ""
-
-#: class:Book id:32 type:name
-msgid "晨曦中的誓言"
-msgstr ""
-
-#: class:Book id:33 type:name
-msgid "星河远征"
-msgstr ""
-
-#: class:Book id:34 type:name
-msgid "失落的文明"
-msgstr ""
-
-#: class:Book id:35 type:name
-msgid "永恒的守望者"
-msgstr ""
-
-#: class:Book id:36 type:name
-msgid "黎明前的低语"
-msgstr ""
-
-#: class:Book id:37 type:name
-msgid "火焰中的不朽"
-msgstr ""
-
-#: class:Book id:38 type:name
-msgid "月色下的追忆"
-msgstr ""
-
-#: class:Book id:39 type:name
-msgid "尘埃中的花朵"
-msgstr ""
-
-#: class:Book id:40 type:name
-msgid "永恒之书"
-msgstr ""
-
-#: class:Book id:41 type:name
-msgid "命运的裂痕"
-msgstr ""
-
-#: class:Book id:42 type:name
-msgid "星际探索者"
-msgstr ""
-
-#: class:Book id:43 type:name
-msgid "记忆中的彼岸"
-msgstr ""
-
-#: class:Book id:44 type:name
-msgid "末日之后的世界"
-msgstr ""
-
-#: class:Book id:45 type:name
-msgid "光影交织的旅途"
-msgstr ""
-
-#: class:Book id:46 type:name
-msgid "沉默的星辰"
-msgstr ""
-
-#: class:Book id:47 type:name
-msgid "烈焰中的星火"
-msgstr ""
-
-#: class:Book id:48 type:name
-msgid "逐梦者的传说"
-msgstr ""
-
-#: class:Book id:49 type:name
-msgid "无限循环"
-msgstr ""
-
-#: class:Book id:50 type:name
-msgid "星辰之门"
-msgstr ""
-
-#: class:Book id:51 type:name
-msgid "远古王国的秘密"
-msgstr ""
-
-#: class:Book id:52 type:name
-msgid "黎明之后的黑暗"
-msgstr ""
-
-#: class:Book id:53 type:name
-msgid "命运交汇"
-msgstr ""
-
-#: class:Book id:54 type:name
-msgid "失落的钥匙"
-msgstr ""
-
-#: class:Book id:55 type:name
-msgid "时空之旅"
-msgstr ""
-
-#: class:Book id:56 type:name
-msgid "破碎的幻想"
-msgstr ""
-
-#: class:Book id:57 type:name
-msgid "迷雾中的足迹"
-msgstr ""
-
-#: class:Book id:58 type:name
-msgid "时间尽头的守望"
-msgstr ""
-
-#: class:Book id:59 type:name
-msgid "寂静深渊"
-msgstr ""
-
-#: class:Book id:60 type:name
-msgid "暗影之下的城堡"
-msgstr ""
-
-#: class:Book id:61 type:name
-msgid "星海迷途"
-msgstr ""
-
-#: class:Book id:62 type:name
-msgid "风暴之子"
-msgstr ""
-
-#: class:Book id:63 type:name
-msgid "古老誓言的复苏"
-msgstr ""
-
-#: class:Book id:64 type:name
-msgid "夜幕中的火光"
-msgstr ""
-
-#: class:Book id:65 type:name
-msgid "命运使者"
-msgstr ""
-
-#: class:Book id:66 type:name
-msgid "天际的呼唤"
-msgstr ""
-
-#: class:Book id:67 type:name
-msgid "梦中的王国"
-msgstr ""
-
-#: class:Book id:68 type:name
-msgid "时光流逝的痕迹"
-msgstr ""
-
-#: class:Book id:69 type:name
-msgid "永夜长歌"
-msgstr ""
-
-#: class:Book id:70 type:name
-msgid "星辰中的神秘岛"
-msgstr ""
-
-#: class:Book id:71 type:name
-msgid "幻境迷宫"
-msgstr ""
-
-#: class:Book id:72 type:name
-msgid "命运的羁绊"
-msgstr ""
-
-#: class:Book id:73 type:name
-msgid "沉睡的古树"
-msgstr ""
-
-#: class:Book id:74 type:name
-msgid "天际尽头的灯塔"
-msgstr ""
-
-#: class:Book id:75 type:name
-msgid "穿越时间的旅者"
-msgstr ""
-
-#: class:Book id:76 type:name
-msgid "星河彼岸"
-msgstr ""
-
-#: class:Book id:77 type:name
-msgid "梦境中的预言"
-msgstr ""
-
-#: class:Book id:78 type:name
-msgid "迷雾笼罩的遗迹"
-msgstr ""
-
-#: class:Book id:79 type:name
-msgid "尘世之外"
-msgstr ""
-
-#: class:Book id:80 type:name
-msgid "光影交织的回忆"
-msgstr ""
-
-#: class:Book id:81 type:name
-msgid "时空守护者"
-msgstr ""
-
-#: class:Book id:82 type:name
-msgid "星际航行日志"
-msgstr ""
-
-#: class:Book id:83 type:name
-msgid "命运之海"
-msgstr ""
-
-#: class:Book id:84 type:name
-msgid "破晓之时"
-msgstr ""
-
-#: class:Book id:85 type:name
-msgid "永恒的契约"
-msgstr ""
-
-#: class:Book id:86 type:name
-msgid "迷失的星辰"
-msgstr ""
-
-#: class:Book id:87 type:name
-msgid "梦中沉睡的巨龙"
-msgstr ""
-
-#: class:Book id:88 type:name
-msgid "无尽时空的守望"
-msgstr ""
-
-#: class:Book id:89 type:name
-msgid "夜空中的最后一颗星"
-msgstr ""
-
-#: class:Book id:90 type:name
-msgid "命运之门"
-msgstr ""
-
-#: class:Book id:91 type:name
-msgid "失落的预言"
-msgstr ""
-
-#: class:Book id:92 type:name
-msgid "星际边界"
-msgstr ""
-
-#: class:Book id:93 type:name
-msgid "光与暗的轮舞"
-msgstr ""
-
-#: class:Book id:94 type:name
-msgid "时光之眼"
-msgstr ""
-
-#: class:Book id:95 type:name
-msgid "幻境旅者"
-msgstr ""
-
-#: class:Book id:96 type:name
-msgid "命运轮回"
-msgstr ""
-
-#: class:Book id:97 type:name
-msgid "沉寂的王座"
-msgstr ""
-
-#: class:Book id:98 type:name
-msgid "星空尽头的希望"
-msgstr ""
-
-#: class:Book id:99 type:name
-msgid "远古遗迹的守护者"
-msgstr ""
-
-#: class:Book id:100 type:name
-msgid "日暮的神秘湖"
-msgstr ""
-
-#: class:Book id:101 type:name
-msgid "星火照亮的长夜"
-msgstr ""
-
-#: class:Book id:102 type:name
-msgid "时间隧道中的回忆"
-msgstr ""
-
-#: class:Book id:103 type:name
-msgid "魔法学院的秘密档案"
-msgstr ""
-
-#: class:Book id:104 type:name
-msgid "古老神庙的回声"
-msgstr ""
-
-#: class:Book id:105 type:name
-msgid "月影森林的守护者"
-msgstr ""
-
-#: class:Book id:106 type:name
-msgid "天幕之上的城堡"
-msgstr ""
-
-#: class:Book id:107 type:name
-msgid "星辰的编织者"
-msgstr ""
-
-#: class:Book id:108 type:name
-msgid "深海之下的囚徒"
-msgstr ""
-
-#: class:Book id:109 type:name
-msgid "遗忘之地的光明"
-msgstr ""
-
-#: class:Book id:110 type:name
-msgid "命运的齿轮"
-msgstr ""
-
-#: class:Book id:111 type:name
-msgid "荒野中的魔法师"
-msgstr ""
-
-#: class:Book id:112 type:name
-msgid "水晶山脉的传说"
-msgstr ""
-
-#: class:Book id:113 type:name
-msgid "梦幻岛的最后一战"
-msgstr ""
-
-#: class:Book id:114 type:name
-msgid "时间之镜"
-msgstr ""
-
-#: class:Book id:115 type:name
-msgid "光影之间的追寻"
-msgstr ""
-
-#: class:Book id:116 type:name
-msgid "永夜的守护者"
-msgstr ""
-
-#: class:Book id:117 type:name
-msgid "群星下的遗迹"
-msgstr ""
-
-#: class:Book id:118 type:name
-msgid "无尽沙漠中的绿洲"
-msgstr ""
-
-#: class:Book id:119 type:name
-msgid "月光下的迷踪"
-msgstr ""
-
-#: class:Book id:120 type:name
-msgid "时光中的追忆者"
-msgstr ""
-
-#: class:Book id:121 type:name
-msgid "远古文明的终焉"
-msgstr ""
-
-#: class:Book id:122 type:name
-msgid "晨星的指引"
-msgstr ""
-
-#: class:Book id:123 type:name
-msgid "光之国度"
-msgstr ""
-
-#: class:Book id:124 type:name
-msgid "尘埃中的黄金城"
-msgstr ""
-
-#: class:Book id:125 type:name
-msgid "梦境编织者"
-msgstr ""
-
-#: class:Book id:126 type:name
-msgid "永恒国度的旅人"
-msgstr ""
-
-#: class:Book id:127 type:name
-msgid "失落之城的守护者"
-msgstr ""
-
-#: class:Book id:128 type:name
-msgid "群星之间的命运"
-msgstr ""
-
-#: class:Book id:129 type:name
-msgid "时间尽头的光芒"
-msgstr ""
-
-#: class:Book id:130 type:name
-msgid "黎明前的守望"
-msgstr ""
-
-#: class:Book id:131 type:name
-msgid "黑暗中的余辉"
-msgstr ""
-
-#: class:Book id:132 type:name
-msgid "遗忘之书"
-msgstr ""
-
-#: class:Book id:133 type:name
-msgid "命运的交响曲"
-msgstr ""
-
-#: class:Book id:134 type:name
-msgid "失落的边境"
-msgstr ""
-
-#: class:Book id:135 type:name
-msgid "深渊中的黎明"
-msgstr ""
-
-#: class:Book id:136 type:name
-msgid "星辰的守护"
-msgstr ""
-
-#: class:Book id:137 type:name
-msgid "古老预言的复苏"
-msgstr ""
-
-#: class:Book id:138 type:name
-msgid "天际之外的秘境"
-msgstr ""
-
-#: class:Book id:139 type:name
-msgid "永恒之岛"
-msgstr ""
-
-#: class:Book id:140 type:name
-msgid "梦幻城的传说"
-msgstr ""
-
-#: class:Book id:141 type:name
-msgid "时间裂隙中的光"
-msgstr ""
-
-#: class:Book id:142 type:name
-msgid "光与影的边界"
-msgstr ""
-
-#: class:Book id:143 type:name
-msgid "星河探险者"
-msgstr ""
-
-#: class:Book id:144 type:name
-msgid "命运的暗涌"
-msgstr ""
-
-#: class:Book id:145 type:name
-msgid "迷雾中的微光"
-msgstr ""
-
-#: class:Book id:146 type:name
-msgid "远古王国的传承"
-msgstr ""
-
-#: class:Book id:147 type:name
-msgid "无尽航线"
-msgstr ""
-
-#: class:Book id:148 type:name
-msgid "星际冒险录"
-msgstr ""
-
-#: class:Book id:149 type:name
-msgid "时间长廊的守卫者"
-msgstr ""
-
-#: class:Book id:150 type:name
-msgid "夜幕降临时"
-msgstr ""
-
-#: class:Book id:151 type:name
-msgid "破碎的星辰"
-msgstr ""
-
-#: class:Book id:152 type:name
-msgid "命运的交错"
-msgstr ""
-
-#: class:Book id:153 type:name
-msgid "光明与黑暗的契约"
-msgstr ""
-
-#: class:Book id:154 type:name
-msgid "时间之轮的回转"
-msgstr ""
-
-#: class:Book id:155 type:name
-msgid "星空之下的秘密"
-msgstr ""
-
-#: class:Book id:156 type:name
-msgid "远古守望者的觉醒"
-msgstr ""
-
-#: class:Book id:157 type:name
-msgid "光与影的轮舞"
-msgstr ""
-
-#: class:Book id:158 type:name
-msgid "命运交织的时空"
-msgstr ""
-
-#: class:Book id:159 type:name
-msgid "沉睡的海洋之心"
-msgstr ""
-
-#: class:Book id:160 type:name
-msgid "星辰之下的诺言"
-msgstr ""
-
-#: class:Book id:161 type:name
-msgid "时光中的魔法"
-msgstr ""
-
-#: class:Book id:162 type:name
-msgid "永恒光辉的守望"
-msgstr ""
-
-#: class:Book id:163 type:name
-msgid "迷失在星际的旅程"
-msgstr ""
-
-#: class:Book id:164 type:name
-msgid "梦境与现实的交汇"
-msgstr ""
-
-#: class:Book id:165 type:name
-msgid "时空之门"
-msgstr ""
-
-#: class:Book id:166 type:name
-msgid "命运的旅者"
-msgstr ""
-
-#: class:Book id:167 type:name
-msgid "黑暗中的光明"
-msgstr ""
-
-#: class:Book id:168 type:name
-msgid "星际航行者的遗失日记"
-msgstr ""
-
-#: class:Book id:169 type:name
-msgid "时光尽头的岛屿"
-msgstr ""
-
-#: class:Book id:170 type:name
-msgid "古老神殿的守护者"
-msgstr ""
-
-#: class:Book id:171 type:name
-msgid "星空尽头的旅程"
-msgstr ""
-
-#: class:Book id:172 type:name
-msgid "梦中的古老预言"
-msgstr ""
-
-#: class:Book id:173 type:name
-msgid "永恒的誓言"
-msgstr ""
-
-#: class:Book id:174 type:name
-msgid "迷雾中的秘密"
-msgstr ""
-
-#: class:Book id:175 type:name
-msgid "光影交错的传说"
-msgstr ""
-
-#: class:Book id:176 type:name
-msgid "时间之外的世界"
-msgstr ""
-
-#: class:Book id:177 type:name
-msgid "沉默的星空"
-msgstr ""
-
-#: class:Book id:178 type:name
-msgid "命运之环"
-msgstr ""
-
-#: class:Book id:179 type:name
-msgid "远古王朝的消逝"
-msgstr ""
-
-#: class:Book id:180 type:name
-msgid "时间碎片中的记忆"
-msgstr ""
-
-#: class:Book id:181 type:name
-msgid "星空下的冒险"
-msgstr ""
-
-#: class:Book id:182 type:name
-msgid "破碎的梦境"
-msgstr ""
-
-#: class:Book id:183 type:name
-msgid "光芒与黑暗的边界"
-msgstr ""
-
-#: class:Book id:184 type:name
-msgid "命运编织者"
-msgstr ""
-
-#: class:Book id:185 type:name
-msgid "深海中的沉睡者"
-msgstr ""
-
-#: class:Book id:186 type:name
-msgid "星辰交织的轨迹"
-msgstr ""
-
-#: class:Book id:187 type:name
-msgid "远古战场的回响"
-msgstr ""
-
-#: class:Book id:188 type:name
-msgid "时间尽头的守护者"
-msgstr ""
-
-#: class:Book id:189 type:name
-msgid "光与影的终极对决"
-msgstr ""
-
-#: class:Book id:190 type:name
-msgid "命运交错的国度"
-msgstr ""
-
-#: class:Book id:191 type:name
-msgid "黑夜中的希望"
-msgstr ""
-
-#: class:Book id:192 type:name
-msgid "远古传承的遗失宝藏"
-msgstr ""
-
-#: class:Book id:193 type:name
-msgid "时空之旅的终点"
-msgstr ""
-
-#: class:Book id:194 type:name
-msgid "星空彼岸的奇迹"
-msgstr ""
-
-#: class:Book id:195 type:name
-msgid "梦中的光芒"
-msgstr ""
-
-#: class:Book id:196 type:name
-msgid "光与影的终章"
-msgstr ""
-
-#: class:Book id:197 type:name
-msgid "时间的钥匙"
-msgstr ""
-
-#: class:Book id:198 type:name
-msgid "迷失的星球"
-msgstr ""
-
-#: class:Book id:199 type:name
-msgid "命运与时间的羁绊"
-msgstr ""
-
-#: class:Book id:200 type:name
-msgid "星空之下的秘密通道"
-msgstr ""
-
-#: class:Book id:201 type:name
-msgid "梦境之门"
-msgstr ""
-
-#: class:Book id:202 type:name
-msgid "命运编年史"
-msgstr ""
-
-#: class:Book id:203 type:name
-msgid "光影交错的神话"
-msgstr ""
-
-#: class:Book id:204 type:name
-msgid "时间之环"
-msgstr ""
-
-#: class:Book id:205 type:name
-msgid "永夜中的星光"
-msgstr ""
-
-#: class:Book id:206 type:name
-msgid "失落的魔法国度"
-msgstr ""
-
-#: class:Book id:207 type:name
-msgid "远古之力的觉醒"
-msgstr ""
-
-#: class:Book id:208 type:name
-msgid "黑暗中的火种"
-msgstr ""
-
-#: class:Book id:209 type:name
-msgid "星际遗迹的发现"
-msgstr ""
-
-#: class:Book id:210 type:name
-msgid "命运书写者"
-msgstr ""
-
-#: class:Book id:211 type:name
-msgid "时间之外的故事"
-msgstr ""
-
-#: class:Book id:212 type:name
-msgid "群星之间的低语"
-msgstr ""
-
-#: class:Book id:213 type:name
-msgid "梦中的命运"
-msgstr ""
-
-#: class:Book id:214 type:name
-msgid "光与暗的轮回"
-msgstr ""
-
-#: class:Book id:215 type:name
-msgid "沉寂森林的低语"
-msgstr ""
-
-#: class:Book id:216 type:name
-msgid "远古遗迹的钥匙"
-msgstr ""
-
-#: class:Book id:217 type:name
-msgid "星光指引的道路"
-msgstr ""
-
-#: class:Book id:218 type:name
-msgid "时间尽头的启示"
-msgstr ""
-
-#: class:Book id:219 type:name
-msgid "命运与星辰的共鸣"
-msgstr ""
-
-#: class:Book id:220 type:name
-msgid "失落文明的呼唤"
-msgstr ""
-
-#: class:Book id:221 type:name
-msgid "光影交织的梦境"
-msgstr ""
-
-#: class:Book id:222 type:name
-msgid "迷失在时间之海"
-msgstr ""
-
-#: class:Book id:223 type:name
-msgid "群星中的孤独旅者"
-msgstr ""
-
-#: class:Book id:224 type:name
-msgid "永恒之书的传承"
-msgstr ""
-
-#: class:Book id:225 type:name
-msgid "命运守望者"
-msgstr ""
-
-#: class:Book id:226 type:name
-msgid "时空裂缝中的回声"
-msgstr ""
-
-#: class:Book id:227 type:name
-msgid "古老誓言的守护"
-msgstr ""
-
-#: class:Book id:228 type:name
-msgid "远古神祇的记忆"
-msgstr ""
-
-#: class:Book id:229 type:name
-msgid "星辰与命运的羁绊"
-msgstr ""
-
-#: class:Book id:230 type:name
-msgid "时间迷宫"
-msgstr ""
-
-#: class:Book id:231 type:name
-msgid "沉睡在梦中的巨兽"
-msgstr ""
-
-#: class:Book id:232 type:name
-msgid "光芒与影子的编织者"
-msgstr ""
-
-#: class:Book id:233 type:name
-msgid "命运的远航"
-msgstr ""
-
-#: class:Book id:234 type:name
-msgid "破碎之城的传奇"
-msgstr ""
-
-#: class:Book id:235 type:name
-msgid "时空之外的彼岸"
-msgstr ""
-
-#: class:Book id:236 type:name
-msgid "迷雾中的光辉"
-msgstr ""
-
-#: class:Book id:237 type:name
-msgid "永恒国度的秘密档案"
-msgstr ""
-
-#: class:Book id:238 type:name
-msgid "星际冒险日志"
-msgstr ""
-
-#: class:Book id:239 type:name
-msgid "命运的星辰之舞"
-msgstr ""
-
-#: class:Book id:240 type:name
-msgid "时间的守护者"
-msgstr ""
-
-#: class:Book id:241 type:name
-msgid "黑暗深渊的回音"
-msgstr ""
-
-#: class:Book id:242 type:name
-msgid "远古遗失之地"
-msgstr ""
-
-#: class:Book id:243 type:name
-msgid "光影之间的故事"
-msgstr ""
-
-#: class:Book id:244 type:name
-msgid "时空交汇的奇迹"
-msgstr ""
-
-#: class:Book id:245 type:name
-msgid "命运交织的命题"
-msgstr ""
-
-#: class:Book id:246 type:name
-msgid "失落的星辰之城"
-msgstr ""
-
-#: class:Book id:247 type:name
-msgid "梦境编年史"
-msgstr ""
-
-#: class:Book id:248 type:name
-msgid "光影世界的冒险"
-msgstr ""
-
-#: class:Book id:249 type:name
-msgid "星空尽头的承诺"
-msgstr ""
-
-#: class:Book id:250 type:name
-msgid "时间裂隙中的幻影"
-msgstr ""
-
-#: class:Book id:251 type:name
-msgid "命运的时钟"
-msgstr ""
-
-#: class:Book id:252 type:name
-msgid "古老王朝的遗产"
-msgstr ""
-
-#: class:Book id:253 type:name
-msgid "星辰之路"
-msgstr ""
-
-#: class:Book id:254 type:name
-msgid "时光倒影中的守望者"
-msgstr ""
-
-#: class:Book id:255 type:name
-msgid "光与暗的边境"
-msgstr ""
-
-#: class:Book id:256 type:name
-msgid "命运航线"
-msgstr ""
-
-#: class:Book id:257 type:name
-msgid "黑夜中的微光"
-msgstr ""
-
-#: class:Book id:258 type:name
-msgid "沉寂星辰的苏醒"
-msgstr ""
-
-#: class:Book id:259 type:name
-msgid "远古森林的神秘传说"
-msgstr ""
-
-#: class:Book id:260 type:name
-msgid "光与影的神秘拼图"
-msgstr ""
-
-#: class:Book id:261 type:name
-msgid "时间深渊中的光芒"
-msgstr ""
-
-#: class:Book id:262 type:name
-msgid "命运星辰的指引"
-msgstr ""
-
-#: class:Book id:263 type:name
-msgid "失落之城的秘宝"
-msgstr ""
-
-#: class:Book id:264 type:name
-msgid "星空中的孤独守望者"
-msgstr ""
-
-#: class:Book id:265 type:name
-msgid "光影中的记忆"
-msgstr ""
-
-#: class:Book id:266 type:name
-msgid "时空迷途"
-msgstr ""
-
-#: class:Book id:267 type:name
-msgid "命运的彼岸"
-msgstr ""
-
-#: class:Book id:268 type:name
-msgid "古老传说的真相"
-msgstr ""
-
-#: class:Book id:269 type:name
-msgid "星辰下的征途"
-msgstr ""
-
-#: class:Book id:270 type:name
-msgid "梦境与现实的碰撞"
-msgstr ""
-
-#: class:Book id:271 type:name
-msgid "光芒消逝的边缘"
-msgstr ""
-
-#: class:Book id:272 type:name
-msgid "时间之外的守护者"
-msgstr ""
-
-#: class:Book id:273 type:name
-msgid "命运的终点"
-msgstr ""
-
-#: class:Book id:274 type:name
-msgid "黑暗森林中的指引"
-msgstr ""
-
-#: class:Book id:275 type:name
-msgid "远古国度的苏醒"
-msgstr ""
-
-#: class:Book id:276 type:name
-msgid "星空迷雾中的传奇"
-msgstr ""
-
-#: class:Book id:277 type:name
-msgid "光影交织的命运"
-msgstr ""
-
-#: class:Book id:278 type:name
-msgid "时空守护者的预言"
-msgstr ""
-
-#: class:Book id:279 type:name
-msgid "命运编织者的传承"
-msgstr ""
-
-#: class:Book id:280 type:name
-msgid "沉寂海洋的心跳"
-msgstr ""
-
-#: class:Book id:281 type:name
-msgid "星辰轨迹的记录"
-msgstr ""
-
-#: class:Book id:282 type:name
-msgid "光与影的冲突"
-msgstr ""
-
-#: class:Book id:283 type:name
-msgid "命运之石"
-msgstr ""
-
-#: class:Book id:284 type:name
-msgid "远古大陆的守护者"
-msgstr ""
-
-#: class:Book id:285 type:name
-msgid "时间轮回中的秘密"
-msgstr ""
-
-#: class:Book id:286 type:name
-msgid "黑夜之中的希望之光"
-msgstr ""
-
-#: class:Book id:287 type:name
-msgid "迷雾森林的古老传说"
-msgstr ""
-
-#: class:Book id:288 type:name
-msgid "星河守望"
-msgstr ""
-
-#: class:Book id:289 type:name
-msgid "梦境旅者的冒险"
-msgstr ""
-
-#: class:Book id:290 type:name
-msgid "光影之舞"
-msgstr ""
-
-#: class:Book id:291 type:name
-msgid "命运之子"
-msgstr ""
-
-#: class:Book id:292 type:name
-msgid "古老预言的实现"
-msgstr ""
-
-#: class:Book id:293 type:name
-msgid "时空裂缝的边缘"
-msgstr ""
-
-#: class:Book id:294 type:name
-msgid "远古之地的沉默"
-msgstr ""
-
-#: class:Book id:295 type:name
-msgid "光影交织的命运轨迹"
-msgstr ""
-
-#: class:Book id:296 type:name
-msgid "沉默的星际文明"
-msgstr ""
-
-#: class:Book id:297 type:name
-msgid "命运星辰的最后低语"
-msgstr ""
-
-#: class:Book id:298 type:name
-msgid "迷失在时间之旅"
-msgstr ""
-
-#: class:Book id:299 type:name
-msgid "星辰与时空的交汇"
-msgstr ""
-
 #: class:Nature id:0 type:good
 msgid "活跃"
 msgstr ""
@@ -8738,10 +7577,6 @@ msgstr ""
 msgid "猥亵"
 msgstr ""
 
-#: class:InstructType id:4 type:name
-msgid "娱乐"
-msgstr ""
-
 #: class:InstructType id:5 type:name
 msgid "战斗"
 msgstr ""
@@ -8969,10 +7804,6 @@ msgstr ""
 
 #: class:Status id:0 type:name
 msgid "发呆"
-msgstr ""
-
-#: class:Status id:3 type:name
-msgid "上课"
 msgstr ""
 
 #: class:Status id:16 type:name

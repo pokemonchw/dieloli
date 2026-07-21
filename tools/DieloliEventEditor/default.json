@@ -4452,7 +4452,6 @@
         "text": "{Name}站在讲台上翻开了书",
         "premise": {},
         "settle": {
-            "let_all_not_students_leaving_classroom": 1,
             "let_all_students_study_in_classroom": 1
         }
     },
@@ -4464,7 +4463,6 @@
         "text": "{Name}环视了一圈教室",
         "premise": {},
         "settle": {
-            "let_all_not_students_leaving_classroom": 1,
             "let_all_students_study_in_classroom": 1
         }
     },
@@ -4476,7 +4474,6 @@
         "text": "{Name}煞有其事的挺直了背",
         "premise": {},
         "settle": {
-            "let_all_not_students_leaving_classroom": 1,
             "let_all_students_study_in_classroom": 1
         }
     },
@@ -4488,7 +4485,6 @@
         "text": "{Name}用力的咳了几声",
         "premise": {},
         "settle": {
-            "let_all_not_students_leaving_classroom": 1,
             "let_all_students_study_in_classroom": 1
         }
     },
@@ -4500,7 +4496,6 @@
         "text": "{Name}擦干净了黑板",
         "premise": {},
         "settle": {
-            "let_all_not_students_leaving_classroom": 1,
             "let_all_students_study_in_classroom": 1
         }
     },
@@ -4512,8 +4507,7 @@
         "text": "「上课了」\\n{Name}拍了拍讲台",
         "premise": {},
         "settle": {
-            "let_all_students_study_in_classroom": 1,
-            "let_all_not_students_leaving_classroom": 1
+            "let_all_students_study_in_classroom": 1
         }
     },
     "4a8392f0-c284-49c6-b708-72639bace58a": {

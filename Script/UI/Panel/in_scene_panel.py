@@ -157,7 +157,7 @@ class InScenePanel:
             # Display social fields
             if hasattr(scene_data, 'social_fields') and scene_data.social_fields:
                 social_fields_draw = draw.NormalDraw()
-                social_fields_draw.text = _("场景内的互动群组:")
+                social_fields_draw.text = _("正在互动的人群:")
                 social_fields_draw.width = self.width
                 social_fields_draw.draw()
                 line_feed.draw()
@@ -166,9 +166,25 @@ class InScenePanel:
                     if session:
                         member_names = [cache.character_data[m].name for m in session.members if m in cache.character_data]
                         names_text = ", ".join(member_names)
+                        action_text = _("互动中")
+                        if session.type == constant.Behavior.CHAT:
+                            action_text = _("闲聊")
+                        elif session.type == constant.Behavior.TEACHING:
+                            action_text = _("上课")
+                        elif session.type == constant.Behavior.EAT:
+                            action_text = _("聚餐")
+                        elif session.type == constant.Behavior.PLAY_COMPUTER:
+                            action_text = _("娱乐")
+                        elif session.type == constant.Behavior.ABUSE:
+                            action_text = _("争吵")
+                            
+                        atmosphere = session.data.get('atmosphere', 50)
+                        
                         session_draw = draw.NormalDraw()
-                        session_draw.text = _("  - {names_text} 正在进行互动活动。").format(
-                            names_text=names_text
+                        session_draw.text = _(" 【{action_text}】 {names_text} (氛围: {atmosphere})").format(
+                            action_text=action_text,
+                            names_text=names_text,
+                            atmosphere=atmosphere
                         )
                         session_draw.width = text_handle.get_text_index(session_draw.text)
                         session_draw.draw()
@@ -466,6 +482,12 @@ class InScenePanel:
         character_data: game_type.Character = cache.character_data[0]
         session = cache.interaction_sessions.get(session_uid)
         if session and 0 not in session.members:
+            # 从其他会话中移除，保证同一时间只处于一个群组
+            for other_uid, other_session in cache.interaction_sessions.items():
+                if other_uid != session_uid and 0 in other_session.members:
+                    other_session.members.remove(0)
+                    if other_session.initiator == 0:
+                        other_session.is_pending = False
             session.members.append(0)
             character_data.state = constant.CharacterStatus.STATUS_SOCIAL_INTERACTING
             character_data.active_session = session_uid
@@ -523,7 +545,37 @@ class SeeInstructPanel:
         now_premise_data = {}
         instruct_len_max = 0
         instruct_type_data = {}
+
+        character_data: game_type.Character = cache.character_data[0]
+        allowed_instruct_types = set(constant.instruct_type_data.keys())
+
+        if character_data.state == constant.CharacterStatus.STATUS_SOCIAL_INTERACTING and character_data.active_session:
+            session = cache.interaction_sessions.get(character_data.active_session)
+            if session:
+                allowed_instruct_types = {constant.InstructType.SYSTEM, constant.InstructType.REST}
+                if session.type == constant.Behavior.CHAT:
+                    allowed_instruct_types.add(constant.InstructType.DIALOGUE)
+                elif session.type in (constant.Behavior.TEACHING, constant.Behavior.ATTEND_CLASS, constant.Behavior.SELF_STUDY):
+                    allowed_instruct_types.add(constant.InstructType.STUDY)
+                elif session.type == constant.Behavior.EAT:
+                    allowed_instruct_types.add(constant.InstructType.ACTIVE)
+                    allowed_instruct_types.add(constant.InstructType.DIALOGUE)
+                elif session.type in (constant.Behavior.PLAY_COMPUTER, constant.Behavior.PLAY_PIANO, constant.Behavior.PLAY_GUITAR, 
+                                      constant.Behavior.DRAW, constant.Behavior.SEE_STAR, constant.Behavior.RUN, constant.Behavior.SHARE_BLANKLY):
+                    allowed_instruct_types.add(constant.InstructType.PLAY)
+                    allowed_instruct_types.add(constant.InstructType.DIALOGUE)
+                elif session.type in (constant.Behavior.GENERAL_SPEECH, constant.Behavior.SINGING, constant.Behavior.DANCE):
+                    allowed_instruct_types.add(constant.InstructType.PERFORM)
+                    allowed_instruct_types.add(constant.InstructType.DIALOGUE)
+                elif session.type == constant.Behavior.ABUSE:
+                    allowed_instruct_types.add(constant.InstructType.DIALOGUE)
+                else:
+                    allowed_instruct_types.add(constant.InstructType.ACTIVE)
+                    allowed_instruct_types.add(constant.InstructType.DIALOGUE)
+
         for now_type in constant.instruct_type_data:
+            if now_type not in allowed_instruct_types:
+                continue
             instruct_type_data.setdefault(now_type, [])
             for instruct in constant.instruct_type_data[now_type]:
                 premise_judge = 0
@@ -552,6 +604,8 @@ class SeeInstructPanel:
         instruct_len_max += 5
         col = int(self.width / instruct_len_max)
         for now_type in cache.instruct_filter:
+            if now_type not in allowed_instruct_types:
+                continue
             if not normal_config.config_normal.nsfw:
                 if now_type in {constant.InstructType.SEX, constant.InstructType.OBSCENITY}:
                     continue

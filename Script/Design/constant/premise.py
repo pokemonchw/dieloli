@@ -28,6 +28,8 @@ class Premise:
     """ 已经加入社团 """
     NOT_JOINED_CLUB = "not_joined_club"
     """ 没有加入社团 """
+    HAVE_BOOK = "have_book"
+    """ 拥有书籍 """
 
     """
     =========================

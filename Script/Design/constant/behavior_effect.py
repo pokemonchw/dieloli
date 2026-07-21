@@ -3,6 +3,8 @@ class BehaviorEffect:
     
     UPDATE_SOCIAL_SESSION = "update_social_session"
     """ 更新社交场 """
+    READ_BOOK = "read_book"
+    """ 阅读书籍 """
 
     """
     =========================

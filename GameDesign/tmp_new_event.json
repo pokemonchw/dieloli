@@ -1,0 +1,20 @@
+{
+  "uid": "55c662e5-61f2-4a2d-bfd9-9f7a8fcc9767",
+  "adv_id": "",
+  "status_id": "5",
+  "start": 0,
+  "text": "{TargetName}的视线停留在{Name}的衣领处\n听到话语后手指立即收回\n面部皮肤的血液流速加快\n喉咙发出单音节的声音\n躯干向前倾斜",
+  "premise": {
+    "target_is_admire": 1,
+    "is_rigorous": 1,
+    "target_shame_is_height": 1,
+    "have_target": 1,
+    "target_is_live": 1
+  },
+  "settle": {
+    "target_add_small_shame": 1,
+    "target_add_small_lust": 1,
+    "target_add_small_favorability": 1,
+    "sub_small_mana_point": 1
+  }
+}

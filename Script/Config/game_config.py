@@ -32,7 +32,7 @@ config_body_fat_tem_data: Dict[int, Dict[int, int]] = {}
 性别划分的体脂率模板对应范围数据
 性别:体脂率范围:体脂率范围配置id
 """
-config_book: Dict[int, config_def.Book] = {}
+config_book: Dict[str, game_type.Book] = {}
 """ 书籍配表数据 """
 config_cause_of_death: Dict[int, config_def.CauseOfDeath] = {}
 """ 死因配表数据 """
@@ -245,6 +245,8 @@ config_random_npc_sex_region: Dict[int, int] = {}
 生成随机npc时性别权重
 性别:权重
 """
+config_library_note: Dict[str, game_type.LibraryNoteConfig] = {}
+""" 图书馆夹带物/漂流瓶配置数据 """
 config_social_type: Dict[int, config_def.SocialType] = {}
 """ 关系类型配置数据 """
 config_solar_period: Dict[int, config_def.SolarPeriod] = {}
@@ -368,9 +370,9 @@ def load_book_data():
     now_data = config_data["Book"]
     translate_data(now_data)
     for tem_data in now_data["data"]:
-        now_tem = config_def.Book()
+        now_tem = game_type.Book()
         now_tem.__dict__ = tem_data
-        config_book[now_tem.cid] = now_tem
+        config_book[now_tem.uid] = now_tem
 
 
 def load_cause_of_death():
@@ -685,6 +687,18 @@ def load_language_tem():
         config_language[now_tem.cid] = now_tem
         config_language_family_data.setdefault(now_tem.family, set())
         config_language_family_data[now_tem.family].add(now_tem.cid)
+
+
+def load_library_note():
+    """载入图书馆夹带物配置"""
+    if "LibraryNote" not in config_data:
+        return
+    now_data = config_data["LibraryNote"]
+    translate_data(now_data)
+    for tem_data in now_data["data"]:
+        now_tem = game_type.LibraryNoteConfig()
+        now_tem.__dict__ = tem_data
+        config_library_note[str(now_tem.uid)] = now_tem
 
 
 def load_manapoint_tem():
@@ -1104,6 +1118,7 @@ def init():
     load_knowledge()
     load_knowledge_type()
     load_language_tem()
+    load_library_note()
     load_manapoint_tem()
     load_moon()
     load_move_menu_type()

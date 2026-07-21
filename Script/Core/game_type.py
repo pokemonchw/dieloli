@@ -310,6 +310,10 @@ class Behavior:
         """ 角色临时状态 """
         self.start_event_draw_text: str = ""
         """ 角色行为开始时触发的事件文本 """
+        self.read_book_id: str = ""
+        """ 正在阅读的书籍id """
+        self.book_name: str = ""
+        """ 正在阅读的书籍名字 """
 
 
 class Map:
@@ -510,6 +514,8 @@ class Character:
         """ 角色好感度数据 角色id:好感度 """
         self.food_bag: Dict[UUID, Food] = {}
         """ 角色持有的食物数据 """
+        self.book_bag: Set[str] = set()
+        """ 角色拥有的书籍id集合 """
         self.target_character_id: int = -1
         """ 角色当前交互对象id """
         self.adv: int = 0
@@ -637,6 +643,64 @@ class InteractionSession:
         """ 开始时间戳 """
         self.is_pending: bool = True
         """ 是否正在等待响应 """
+
+
+class Book:
+    """ 书籍数据结构体 """
+
+    def __init__(self):
+        self.uid: str = ""
+        """ 书籍唯一id """
+        self.name: str = ""
+        """ 书籍名字 """
+        self.info: str = ""
+        """ 书籍信息 """
+        self.settle_list: List[str] = []
+        """ 阅读书籍后触发的结算器列表 """
+        self.type: int = 0
+        """ 书籍分类 """
+
+
+class HiddenNote:
+    """夹带物/漂流瓶数据类"""
+
+    def __init__(self):
+        self.uid: int = 0
+        """ 唯一ID """
+        self.book_id: str = ""
+        """ 书籍ID（如果夹在书里） """
+        self.owner_id: int = 0
+        """ 留下纸条的NPC_ID """
+        self.config_id: int = 0
+        """ 配置ID """
+        self.type: int = 0
+        """ 类型（例如：留言、漂流瓶等） """
+        self.item_id: int = 0
+        """ 附带的实物ID """
+        self.target_id: int = 0
+        """ 目标NPC_ID """
+        self.create_time: int = 0
+        """ 创建时间戳 """
+        self.authenticity: int = 0
+        """ 真实度（用于判断是否为伪造） """
+
+
+class LibraryNoteConfig:
+    """夹带物/漂流瓶模板配置数据类"""
+
+    def __init__(self):
+        self.uid: int = 0
+        """ 配置ID """
+        self.type: int = 0
+        """ 类型 """
+        self.premise_condition: Dict[str, int] = {}
+        """ 触发前提，对应Premise机制（动态计算权重） """
+        self.related_knowledge: int = 0
+        """ 关联书籍类型/知识库 """
+        self.content_template: str = ""
+        """ 文本内容模板 """
+        self.action_effect: Dict[str, int] = {}
+        """ 行为效果（可能产生的影响） """
 
 
 class Cache:
@@ -818,6 +882,8 @@ class Cache:
         """ 看海模式开关 """
         self.interaction_sessions: Dict[str, InteractionSession] = {}
         """ 社交场会话记录 会话uid:会话数据 """
+        self.library_hidden_notes: Dict[int, List[HiddenNote]] = {}
+        """ 图书馆每本书中的夹带物 {书籍id: [夹带物列表]} """
 
 
 class TargetChange:

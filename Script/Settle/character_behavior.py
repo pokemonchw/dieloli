@@ -267,3 +267,43 @@ def handle_add_student_course_experience_for_in_class_room(
                 experience = character_data.language[language] / 1000 * language_interest
                 now_character_data.language.setdefault(language, 0)
                 now_character_data.language[language] += experience
+
+
+@settle_behavior.add_settle_behavior_effect(constant.BehaviorEffect.READ_BOOK)
+def handle_read_book(
+        character_id: int,
+        add_time: int,
+        change_data: game_type.CharacterStatusChange,
+        now_time: int,
+):
+    """
+    处理阅读书籍的结算效果
+    Keyword arguments:
+    character_id -- 角色id
+    add_time -- 结算时间
+    change_data -- 状态变更信息记录对象
+    now_time -- 结算的时间
+    """
+    if not add_time:
+        return
+    character_data: game_type.Character = cache.character_data[character_id]
+    if character_data.dead:
+        return
+    
+    read_book_id = character_data.behavior.read_book_id
+    if not read_book_id:
+        return
+    
+    book_data = game_config.config_book.get(read_book_id)
+    if not book_data:
+        return
+        
+    for effect in book_data.settle_list:
+        if effect in constant.settle_behavior_effect_data:
+            try:
+                constant.settle_behavior_effect_data[effect](
+                    character_id, add_time, change_data, now_time
+                )
+            except Exception as e:
+                print(e)
+                continue

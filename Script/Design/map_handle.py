@@ -97,6 +97,15 @@ def character_move_scene(old_scene_path: list, new_scene_path: list, character_i
     new_scene_path_str = get_map_system_path_str_for_list(new_scene_path)
     if character_id in cache.scene_data[old_scene_path_str].character_list:
         cache.scene_data[old_scene_path_str].character_list.remove(character_id)
+        import random
+        for c_id in cache.scene_data[old_scene_path_str].character_list:
+            c_data = cache.character_data.get(c_id)
+            if c_data and c_data.target_character_id == character_id and c_data.active_session:
+                session = cache.interaction_sessions.get(c_data.active_session)
+                if session:
+                    valid_members = [m for m in session.members if m != c_id and m in cache.scene_data[old_scene_path_str].character_list]
+                    if valid_members:
+                        c_data.target_character_id = random.choice(valid_members)
     if not len(cache.scene_data[old_scene_path_str].character_list):
         cache.no_character_scene_set.add(old_scene_path_str)
     if character_id not in cache.scene_data[new_scene_path_str].character_list:

@@ -397,6 +397,19 @@ def init_all_character_knowledge():
         init_character_knowledge(i)
 
 
+def init_student_textbook():
+    """
+    为所有学生，分发所在年级的所有教科书
+    """
+    for character_id in cache.character_data:
+        character_data = cache.character_data[character_id]
+        if 7 <= character_data.age <= 18:
+            grade_type = character_data.age - 7
+            for book_uid, book in game_config.config_book.items():
+                if book.type == grade_type:
+                    character_data.book_bag.add(book_uid)
+
+
 def init_character_knowledge(i: int):
     """
     初始化所有角色知识等级

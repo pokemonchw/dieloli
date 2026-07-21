@@ -149,3 +149,5 @@ class Behavior:
     """ 给对方真空口交 """
     DEEP_MOUTH_SEX = 73
     """ 给对方深喉 """
+    READ_BOOK = 74
+    """ 阅读书籍 """

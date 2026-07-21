@@ -319,3 +319,11 @@ def handle_suicide():
     character_data.state = constant.CharacterStatus.STATUS_DEAD
     character_data.behavior.behavior_id = constant.Behavior.DEAD
     update.game_update_flow(1)
+
+
+@handle_instruct.add_instruct(
+    constant.Instruct.READ_BOOK, constant.InstructType.STUDY, _("阅读"), {constant.Premise.HAVE_BOOK}
+)
+def handle_read_book():
+    """处理阅读书籍指令"""
+    cache.now_panel_id = constant.Panel.BOOK_BAG

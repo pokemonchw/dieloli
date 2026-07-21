@@ -342,3 +342,18 @@ def handle_have_coat(character_id: int) -> int:
     if 0 in character_data.clothing and character_data.clothing[0]:
         return 1
     return 0
+
+
+@handle_premise.add_premise(constant.Premise.HAVE_BOOK)
+def handle_have_book(character_id: int) -> int:
+    """
+    校验角色是否拥有书籍
+    Keyword arguments:
+    character_id -- 角色id
+    Return arguments:
+    int -- 权重
+    """
+    character_data: game_type.Character = cache.character_data[character_id]
+    if len(character_data.book_bag) > 0:
+        return 1
+    return 0

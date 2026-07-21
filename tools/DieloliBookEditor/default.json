@@ -1,0 +1,1548 @@
+{
+  "3f257c34-c323-4b44-8335-12a9f316d817": {
+    "uid": "3f257c34-c323-4b44-8335-12a9f316d817",
+    "name": "小学一年级语文教科书",
+    "settle_list": [
+      "add_small_chinese_experience",
+      "add_small_literature_experience",
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学一年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 0
+  },
+  "2a56b0f2-9081-4bf8-a8f5-16bbd0e4dede": {
+    "uid": "2a56b0f2-9081-4bf8-a8f5-16bbd0e4dede",
+    "name": "小学一年级数学教科书",
+    "settle_list": [
+      "add_small_mathematics_experience"
+    ],
+    "info": "这是一本《小学一年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 0
+  },
+  "4aa18fcb-f351-427b-a933-909f651900cc": {
+    "uid": "4aa18fcb-f351-427b-a933-909f651900cc",
+    "name": "小学一年级音乐教科书",
+    "settle_list": [
+      "add_small_music_experience",
+      "add_small_singing_experience"
+    ],
+    "info": "这是一本《小学一年级音乐教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 0
+  },
+  "2917caaf-df6a-4a45-8198-413a9124b70d": {
+    "uid": "2917caaf-df6a-4a45-8198-413a9124b70d",
+    "name": "小学一年级社会教科书",
+    "settle_list": [
+      "add_small_ceremony_experience",
+      "add_small_morality_experience"
+    ],
+    "info": "这是一本《小学一年级社会教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 0
+  },
+  "40809145-a735-467f-95e8-b8cf360d832e": {
+    "uid": "40809145-a735-467f-95e8-b8cf360d832e",
+    "name": "小学二年级语文教科书",
+    "settle_list": [
+      "add_small_chinese_experience",
+      "add_small_literature_experience",
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学二年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 1
+  },
+  "95ce0c2f-34ce-43f5-a1b3-767149fa80d8": {
+    "uid": "95ce0c2f-34ce-43f5-a1b3-767149fa80d8",
+    "name": "小学二年级数学教科书",
+    "settle_list": [
+      "add_small_mathematics_experience"
+    ],
+    "info": "这是一本《小学二年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 1
+  },
+  "7c0243ec-0fda-43c6-a1c8-e5147323b87a": {
+    "uid": "7c0243ec-0fda-43c6-a1c8-e5147323b87a",
+    "name": "小学二年级美术教科书",
+    "settle_list": [
+      "add_small_art_experience",
+      "add_small_painting_experience"
+    ],
+    "info": "这是一本《小学二年级美术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 1
+  },
+  "f0e1e95a-0ed7-4811-ab9e-8cfa3bfda47b": {
+    "uid": "f0e1e95a-0ed7-4811-ab9e-8cfa3bfda47b",
+    "name": "小学二年级音乐教科书",
+    "settle_list": [
+      "add_small_music_experience",
+      "add_small_singing_experience"
+    ],
+    "info": "这是一本《小学二年级音乐教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 1
+  },
+  "675c481a-6f91-4d0d-af61-dca922986793": {
+    "uid": "675c481a-6f91-4d0d-af61-dca922986793",
+    "name": "小学二年级社会教科书",
+    "settle_list": [
+      "add_small_ceremony_experience",
+      "add_small_morality_experience"
+    ],
+    "info": "这是一本《小学二年级社会教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 1
+  },
+  "59005828-0ed6-4f89-b524-ee5400687edf": {
+    "uid": "59005828-0ed6-4f89-b524-ee5400687edf",
+    "name": "小学三年级语文教科书",
+    "settle_list": [
+      "add_small_chinese_experience",
+      "add_small_literature_experience",
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学三年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "d5965163-4e1f-4cef-89a9-b35a528e4e26": {
+    "uid": "d5965163-4e1f-4cef-89a9-b35a528e4e26",
+    "name": "小学三年级数学教科书",
+    "settle_list": [
+      "add_small_mathematics_experience"
+    ],
+    "info": "这是一本《小学三年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "a3a0b1b2-f064-4539-b02d-cc837b3850b2": {
+    "uid": "a3a0b1b2-f064-4539-b02d-cc837b3850b2",
+    "name": "小学三年级英语教科书",
+    "settle_list": [
+      "add_small_english_experience"
+    ],
+    "info": "这是一本《小学三年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "325eb110-45b5-408f-9709-e09c592167a9": {
+    "uid": "325eb110-45b5-408f-9709-e09c592167a9",
+    "name": "小学三年级信息技术教科书",
+    "settle_list": [
+      "add_small_computer_experience"
+    ],
+    "info": "这是一本《小学三年级信息技术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "f972ed85-dcbf-4911-a708-7bf98f1b5c9a": {
+    "uid": "f972ed85-dcbf-4911-a708-7bf98f1b5c9a",
+    "name": "小学三年级美术教科书",
+    "settle_list": [
+      "add_small_art_experience",
+      "add_small_painting_experience"
+    ],
+    "info": "这是一本《小学三年级美术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "3a893cd5-2f29-426e-889b-4c3e01ee53a0": {
+    "uid": "3a893cd5-2f29-426e-889b-4c3e01ee53a0",
+    "name": "小学三年级音乐教科书",
+    "settle_list": [
+      "add_small_music_experience",
+      "add_small_singing_experience"
+    ],
+    "info": "这是一本《小学三年级音乐教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "dd2d6c75-b7ab-419e-a1e9-e0fb2acf824d": {
+    "uid": "dd2d6c75-b7ab-419e-a1e9-e0fb2acf824d",
+    "name": "小学三年级体育教科书",
+    "settle_list": [
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学三年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "1cdfd5ff-ab50-4ca8-9c38-02f5ceaea8f4": {
+    "uid": "1cdfd5ff-ab50-4ca8-9c38-02f5ceaea8f4",
+    "name": "小学三年级思想品德教科书",
+    "settle_list": [
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学三年级思想品德教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "5d7c3e56-4dfc-44c2-8c69-d78b5fecb482": {
+    "uid": "5d7c3e56-4dfc-44c2-8c69-d78b5fecb482",
+    "name": "小学三年级自然教科书",
+    "settle_list": [
+      "add_small_ecology_experience",
+      "add_small_zoology_experience",
+      "add_small_botany_experience"
+    ],
+    "info": "这是一本《小学三年级自然教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "7ed8055a-868f-4671-b97e-4a29cfec0a54": {
+    "uid": "7ed8055a-868f-4671-b97e-4a29cfec0a54",
+    "name": "小学三年级舞蹈教科书",
+    "settle_list": [
+      "add_small_dance_experience",
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学三年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "2847e829-9ac1-4034-91e4-d8d176f1a803": {
+    "uid": "2847e829-9ac1-4034-91e4-d8d176f1a803",
+    "name": "小学三年级游泳教科书",
+    "settle_list": [
+      "add_small_swimming_experience",
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学三年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 2
+  },
+  "33bbd6d8-b061-4560-a2ae-7fdd9a135348": {
+    "uid": "33bbd6d8-b061-4560-a2ae-7fdd9a135348",
+    "name": "小学四年级语文教科书",
+    "settle_list": [
+      "add_small_chinese_experience",
+      "add_small_literature_experience",
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学四年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "4ce22274-50ed-41ee-8855-99bbda1b3872": {
+    "uid": "4ce22274-50ed-41ee-8855-99bbda1b3872",
+    "name": "小学四年级数学教科书",
+    "settle_list": [
+      "add_small_mathematics_experience"
+    ],
+    "info": "这是一本《小学四年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "6f10fa13-9018-43cd-8c1c-1e0896310f0e": {
+    "uid": "6f10fa13-9018-43cd-8c1c-1e0896310f0e",
+    "name": "小学四年级英语教科书",
+    "settle_list": [
+      "add_small_english_experience"
+    ],
+    "info": "这是一本《小学四年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "d415e719-90c4-41b2-8ed9-3b5193d1221f": {
+    "uid": "d415e719-90c4-41b2-8ed9-3b5193d1221f",
+    "name": "小学四年级信息技术教科书",
+    "settle_list": [
+      "add_small_computer_experience"
+    ],
+    "info": "这是一本《小学四年级信息技术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "c989990b-7240-447a-a66f-f58a2c6e7897": {
+    "uid": "c989990b-7240-447a-a66f-f58a2c6e7897",
+    "name": "小学四年级美术教科书",
+    "settle_list": [
+      "add_small_art_experience",
+      "add_small_painting_experience"
+    ],
+    "info": "这是一本《小学四年级美术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "e6a43c7d-d1d9-4512-bdc7-94dd5ed96051": {
+    "uid": "e6a43c7d-d1d9-4512-bdc7-94dd5ed96051",
+    "name": "小学四年级音乐教科书",
+    "settle_list": [
+      "add_small_music_experience",
+      "add_small_singing_experience"
+    ],
+    "info": "这是一本《小学四年级音乐教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "31ab0a3e-9101-49ed-aa3a-b621826dbc9f": {
+    "uid": "31ab0a3e-9101-49ed-aa3a-b621826dbc9f",
+    "name": "小学四年级体育教科书",
+    "settle_list": [
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学四年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "26cd45c6-c59e-4bf5-8c39-d6cddc01ae2b": {
+    "uid": "26cd45c6-c59e-4bf5-8c39-d6cddc01ae2b",
+    "name": "小学四年级思想品德教科书",
+    "settle_list": [
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学四年级思想品德教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "8eafaaef-deb0-41c3-a4c6-8c364cc8e2ec": {
+    "uid": "8eafaaef-deb0-41c3-a4c6-8c364cc8e2ec",
+    "name": "小学四年级健康教育教科书",
+    "settle_list": [
+      "add_small_first_aid_experience"
+    ],
+    "info": "这是一本《小学四年级健康教育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "25ab7bad-2137-4e87-a812-eafa50386e07": {
+    "uid": "25ab7bad-2137-4e87-a812-eafa50386e07",
+    "name": "小学四年级舞蹈教科书",
+    "settle_list": [
+      "add_small_dance_experience",
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学四年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "5afdab1b-0541-4cdb-9b92-3ab169fbae78": {
+    "uid": "5afdab1b-0541-4cdb-9b92-3ab169fbae78",
+    "name": "小学四年级游泳教科书",
+    "settle_list": [
+      "add_small_swimming_experience",
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学四年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 3
+  },
+  "de8fdcb0-0887-459d-aa8e-a6977eb4e298": {
+    "uid": "de8fdcb0-0887-459d-aa8e-a6977eb4e298",
+    "name": "小学五年级语文教科书",
+    "settle_list": [
+      "add_small_chinese_experience",
+      "add_small_literature_experience",
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学五年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 4
+  },
+  "eddf4314-06f9-4731-a1b1-7b09ceea1fa0": {
+    "uid": "eddf4314-06f9-4731-a1b1-7b09ceea1fa0",
+    "name": "小学五年级数学教科书",
+    "settle_list": [
+      "add_small_mathematics_experience"
+    ],
+    "info": "这是一本《小学五年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 4
+  },
+  "c8358c9b-ffc5-4bf0-be57-469d508ff727": {
+    "uid": "c8358c9b-ffc5-4bf0-be57-469d508ff727",
+    "name": "小学五年级英语教科书",
+    "settle_list": [
+      "add_small_english_experience"
+    ],
+    "info": "这是一本《小学五年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 4
+  },
+  "ad880091-a537-4fbd-bda7-eca6b6aa60db": {
+    "uid": "ad880091-a537-4fbd-bda7-eca6b6aa60db",
+    "name": "小学五年级信息技术教科书",
+    "settle_list": [
+      "add_small_computer_experience"
+    ],
+    "info": "这是一本《小学五年级信息技术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 4
+  },
+  "9ab8dff4-1966-40a6-b514-9244e6d2d79e": {
+    "uid": "9ab8dff4-1966-40a6-b514-9244e6d2d79e",
+    "name": "小学五年级体育教科书",
+    "settle_list": [
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学五年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 4
+  },
+  "8750cc77-c9f9-49d5-a676-ce76ff87128f": {
+    "uid": "8750cc77-c9f9-49d5-a676-ce76ff87128f",
+    "name": "小学五年级思想品德教科书",
+    "settle_list": [
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学五年级思想品德教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 4
+  },
+  "36976c20-acf5-4638-95dd-1757dbf5d028": {
+    "uid": "36976c20-acf5-4638-95dd-1757dbf5d028",
+    "name": "小学五年级健康教育教科书",
+    "settle_list": [
+      "add_small_first_aid_experience"
+    ],
+    "info": "这是一本《小学五年级健康教育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 4
+  },
+  "44bb33c8-9514-4e7d-b1e2-15d4c1c62969": {
+    "uid": "44bb33c8-9514-4e7d-b1e2-15d4c1c62969",
+    "name": "小学五年级舞蹈教科书",
+    "settle_list": [
+      "add_small_dance_experience",
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学五年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 4
+  },
+  "46f4e8bb-c4ca-42f2-a72f-ffca80a9c4c0": {
+    "uid": "46f4e8bb-c4ca-42f2-a72f-ffca80a9c4c0",
+    "name": "小学五年级游泳教科书",
+    "settle_list": [
+      "add_small_swimming_experience",
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学五年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 4
+  },
+  "68a36e82-b1d2-40e3-8ca1-b9bd73100af4": {
+    "uid": "68a36e82-b1d2-40e3-8ca1-b9bd73100af4",
+    "name": "小学六年级语文教科书",
+    "settle_list": [
+      "add_small_chinese_experience",
+      "add_small_literature_experience",
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学六年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 5
+  },
+  "2d2e7717-1588-4247-b4af-c534b8f5580d": {
+    "uid": "2d2e7717-1588-4247-b4af-c534b8f5580d",
+    "name": "小学六年级数学教科书",
+    "settle_list": [
+      "add_small_mathematics_experience"
+    ],
+    "info": "这是一本《小学六年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 5
+  },
+  "8228b3b4-2b27-416d-aaaf-05aebd56cc15": {
+    "uid": "8228b3b4-2b27-416d-aaaf-05aebd56cc15",
+    "name": "小学六年级英语教科书",
+    "settle_list": [
+      "add_small_english_experience"
+    ],
+    "info": "这是一本《小学六年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 5
+  },
+  "fff11b7f-525f-4a0c-907a-df2965e3c29d": {
+    "uid": "fff11b7f-525f-4a0c-907a-df2965e3c29d",
+    "name": "小学六年级体育教科书",
+    "settle_list": [
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学六年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 5
+  },
+  "8754d7c2-f8c8-4590-b3f4-b1ee81795fea": {
+    "uid": "8754d7c2-f8c8-4590-b3f4-b1ee81795fea",
+    "name": "小学六年级思想品德教科书",
+    "settle_list": [
+      "add_small_morality_experience",
+      "add_small_ceremony_experience"
+    ],
+    "info": "这是一本《小学六年级思想品德教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 5
+  },
+  "d33b9144-9d6f-4102-b70b-3fc0a2240043": {
+    "uid": "d33b9144-9d6f-4102-b70b-3fc0a2240043",
+    "name": "小学六年级舞蹈教科书",
+    "settle_list": [
+      "add_small_dance_experience",
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学六年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 5
+  },
+  "d2d1ab58-08cd-4b77-aab5-18995e77efe5": {
+    "uid": "d2d1ab58-08cd-4b77-aab5-18995e77efe5",
+    "name": "小学六年级游泳教科书",
+    "settle_list": [
+      "add_small_swimming_experience",
+      "add_small_motion_experience"
+    ],
+    "info": "这是一本《小学六年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 5
+  },
+  "b2c8f2fb-e891-4973-a2cb-99aeb1def415": {
+    "uid": "b2c8f2fb-e891-4973-a2cb-99aeb1def415",
+    "name": "初中一年级语文教科书",
+    "settle_list": [
+      "add_medium_chinese_experience",
+      "add_medium_literature_experience",
+      "add_medium_ancient_chinese_experience",
+      "add_medium_poetry_experience",
+      "add_medium_ethic_experience",
+      "add_medium_eloquence_experience",
+      "add_medium_write_experience"
+    ],
+    "info": "这是一本《初中一年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "fa15b7af-6222-48b0-9e59-cf3586250bc6": {
+    "uid": "fa15b7af-6222-48b0-9e59-cf3586250bc6",
+    "name": "初中一年级数学教科书",
+    "settle_list": [
+      "add_medium_mathematics_experience"
+    ],
+    "info": "这是一本《初中一年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "f6929056-6cbd-46fd-a9a4-73b4ed0b2a58": {
+    "uid": "f6929056-6cbd-46fd-a9a4-73b4ed0b2a58",
+    "name": "初中一年级英语教科书",
+    "settle_list": [
+      "add_medium_english_experience",
+      "add_medium_linguistics_experience"
+    ],
+    "info": "这是一本《初中一年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "2bd97cfa-5a4e-4b78-9647-0e8287345bca": {
+    "uid": "2bd97cfa-5a4e-4b78-9647-0e8287345bca",
+    "name": "初中一年级信息技术教科书",
+    "settle_list": [
+      "add_medium_computer_experience",
+      "add_medium_programming_experience",
+      "add_medium_electronics_experience"
+    ],
+    "info": "这是一本《初中一年级信息技术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "213d3ee1-c443-4cae-b665-cfad38d31c87": {
+    "uid": "213d3ee1-c443-4cae-b665-cfad38d31c87",
+    "name": "初中一年级美术教科书",
+    "settle_list": [
+      "add_medium_art_experience",
+      "add_medium_painting_experience",
+      "add_medium_shoot_experience"
+    ],
+    "info": "这是一本《初中一年级美术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "c197a5e5-370e-4557-accf-a78921ad021f": {
+    "uid": "c197a5e5-370e-4557-accf-a78921ad021f",
+    "name": "初中一年级音乐教科书",
+    "settle_list": [
+      "add_medium_music_experience",
+      "add_medium_singing_experience",
+      "add_medium_play_music_experience"
+    ],
+    "info": "这是一本《初中一年级音乐教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "8217d1dc-e29f-41e3-8140-d0d9bbe9e8bd": {
+    "uid": "8217d1dc-e29f-41e3-8140-d0d9bbe9e8bd",
+    "name": "初中一年级体育教科书",
+    "settle_list": [
+      "add_medium_motion_experience",
+      "add_medium_first_aid_experience",
+      "add_medium_tactics_experience"
+    ],
+    "info": "这是一本《初中一年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "36f7d711-b271-4da4-9b76-20d200ca390f": {
+    "uid": "36f7d711-b271-4da4-9b76-20d200ca390f",
+    "name": "初中一年级思想品德教科书",
+    "settle_list": [
+      "add_medium_morality_experience",
+      "add_medium_ethic_experience",
+      "add_medium_ceremony_experience",
+      "add_medium_law_science_experience"
+    ],
+    "info": "这是一本《初中一年级思想品德教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "a1f008b2-6dbb-4fcd-8344-8a709f60b4bc": {
+    "uid": "a1f008b2-6dbb-4fcd-8344-8a709f60b4bc",
+    "name": "初中一年级健康教育教科书",
+    "settle_list": [
+      "add_medium_first_aid_experience",
+      "add_medium_anatomy_experience",
+      "add_medium_biology_experience"
+    ],
+    "info": "这是一本《初中一年级健康教育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "21f9dec8-0ed2-4ef7-a516-33be9df252ba": {
+    "uid": "21f9dec8-0ed2-4ef7-a516-33be9df252ba",
+    "name": "初中一年级社会教科书",
+    "settle_list": [
+      "add_medium_history_experience",
+      "add_medium_geography_experience",
+      "add_medium_ceremony_experience",
+      "add_medium_transaction_experience"
+    ],
+    "info": "这是一本《初中一年级社会教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "38cb3bb6-f8f8-4c1f-9815-5ae73ce38b88": {
+    "uid": "38cb3bb6-f8f8-4c1f-9815-5ae73ce38b88",
+    "name": "初中一年级历史教科书",
+    "settle_list": [
+      "add_medium_history_experience",
+      "add_medium_ancient_chinese_experience"
+    ],
+    "info": "这是一本《初中一年级历史教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "9244a29a-f256-47d6-bdf3-2a811b86f69d": {
+    "uid": "9244a29a-f256-47d6-bdf3-2a811b86f69d",
+    "name": "初中一年级生物教科书",
+    "settle_list": [
+      "add_medium_biology_experience",
+      "add_medium_botany_experience",
+      "add_medium_zoology_experience",
+      "add_medium_anatomy_experience",
+      "add_medium_entomology_experience"
+    ],
+    "info": "这是一本《初中一年级生物教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "b89a978c-8cf2-498c-a3fb-ff948f79e134": {
+    "uid": "b89a978c-8cf2-498c-a3fb-ff948f79e134",
+    "name": "初中一年级地理教科书",
+    "settle_list": [
+      "add_medium_geography_experience",
+      "add_medium_meteorology_experience",
+      "add_medium_geology_experience"
+    ],
+    "info": "这是一本《初中一年级地理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "eba94da2-fe2e-433d-b4a9-327801551d18": {
+    "uid": "eba94da2-fe2e-433d-b4a9-327801551d18",
+    "name": "初中一年级舞蹈教科书",
+    "settle_list": [
+      "add_medium_dance_experience",
+      "add_medium_motion_experience",
+      "add_medium_performance_experience",
+      "add_medium_art_experience"
+    ],
+    "info": "这是一本《初中一年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "d8ed4729-dae0-4473-ab7c-a23ba65684ec": {
+    "uid": "d8ed4729-dae0-4473-ab7c-a23ba65684ec",
+    "name": "初中一年级游泳教科书",
+    "settle_list": [
+      "add_medium_swimming_experience",
+      "add_medium_motion_experience",
+      "add_medium_first_aid_experience"
+    ],
+    "info": "这是一本《初中一年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 6
+  },
+  "02400e20-d249-48c1-8c22-7cd0a82d5e0d": {
+    "uid": "02400e20-d249-48c1-8c22-7cd0a82d5e0d",
+    "name": "初中二年级语文教科书",
+    "settle_list": [
+      "add_medium_chinese_experience",
+      "add_medium_literature_experience",
+      "add_medium_ancient_chinese_experience",
+      "add_medium_poetry_experience",
+      "add_medium_ethic_experience",
+      "add_medium_eloquence_experience",
+      "add_medium_write_experience"
+    ],
+    "info": "这是一本《初中二年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "410d42a4-772e-4274-b1d0-a431ed1c73d2": {
+    "uid": "410d42a4-772e-4274-b1d0-a431ed1c73d2",
+    "name": "初中二年级数学教科书",
+    "settle_list": [
+      "add_medium_mathematics_experience"
+    ],
+    "info": "这是一本《初中二年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "4c7fbcd4-e92b-4cc7-b84f-d8fb7d24ee7d": {
+    "uid": "4c7fbcd4-e92b-4cc7-b84f-d8fb7d24ee7d",
+    "name": "初中二年级英语教科书",
+    "settle_list": [
+      "add_medium_english_experience",
+      "add_medium_linguistics_experience"
+    ],
+    "info": "这是一本《初中二年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "80069b80-73ac-4ae6-9dc2-b496d7b11e2c": {
+    "uid": "80069b80-73ac-4ae6-9dc2-b496d7b11e2c",
+    "name": "初中二年级信息技术教科书",
+    "settle_list": [
+      "add_medium_computer_experience",
+      "add_medium_programming_experience",
+      "add_medium_electronics_experience"
+    ],
+    "info": "这是一本《初中二年级信息技术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "914e102e-5417-4b50-a60f-c8501d17662c": {
+    "uid": "914e102e-5417-4b50-a60f-c8501d17662c",
+    "name": "初中二年级美术教科书",
+    "settle_list": [
+      "add_medium_art_experience",
+      "add_medium_painting_experience",
+      "add_medium_shoot_experience"
+    ],
+    "info": "这是一本《初中二年级美术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "9adeedf6-4acc-4a2f-8038-79e021ad8ca9": {
+    "uid": "9adeedf6-4acc-4a2f-8038-79e021ad8ca9",
+    "name": "初中二年级音乐教科书",
+    "settle_list": [
+      "add_medium_music_experience",
+      "add_medium_singing_experience",
+      "add_medium_play_music_experience"
+    ],
+    "info": "这是一本《初中二年级音乐教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "a2ba66bb-5109-485d-8ec6-637b491c8965": {
+    "uid": "a2ba66bb-5109-485d-8ec6-637b491c8965",
+    "name": "初中二年级体育教科书",
+    "settle_list": [
+      "add_medium_motion_experience",
+      "add_medium_first_aid_experience",
+      "add_medium_tactics_experience"
+    ],
+    "info": "这是一本《初中二年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "4774e712-28ae-4e18-ad72-91aa068333ce": {
+    "uid": "4774e712-28ae-4e18-ad72-91aa068333ce",
+    "name": "初中二年级思想品德教科书",
+    "settle_list": [
+      "add_medium_morality_experience",
+      "add_medium_ethic_experience",
+      "add_medium_ceremony_experience",
+      "add_medium_law_science_experience"
+    ],
+    "info": "这是一本《初中二年级思想品德教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "c29a3929-3c35-4aea-b360-b98e4b14a586": {
+    "uid": "c29a3929-3c35-4aea-b360-b98e4b14a586",
+    "name": "初中二年级健康教育教科书",
+    "settle_list": [
+      "add_medium_first_aid_experience",
+      "add_medium_anatomy_experience",
+      "add_medium_biology_experience"
+    ],
+    "info": "这是一本《初中二年级健康教育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "cac2b4eb-45c2-4b33-b9e9-dd63d4167aa6": {
+    "uid": "cac2b4eb-45c2-4b33-b9e9-dd63d4167aa6",
+    "name": "初中二年级社会教科书",
+    "settle_list": [
+      "add_medium_history_experience",
+      "add_medium_geography_experience",
+      "add_medium_ceremony_experience",
+      "add_medium_transaction_experience"
+    ],
+    "info": "这是一本《初中二年级社会教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "ed9f6232-2656-4f22-b325-7e8c33484ccb": {
+    "uid": "ed9f6232-2656-4f22-b325-7e8c33484ccb",
+    "name": "初中二年级历史教科书",
+    "settle_list": [
+      "add_medium_history_experience",
+      "add_medium_ancient_chinese_experience"
+    ],
+    "info": "这是一本《初中二年级历史教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "89054e4c-5848-49b6-8223-0f7f2f4dac65": {
+    "uid": "89054e4c-5848-49b6-8223-0f7f2f4dac65",
+    "name": "初中二年级生物教科书",
+    "settle_list": [
+      "add_medium_biology_experience",
+      "add_medium_botany_experience",
+      "add_medium_zoology_experience",
+      "add_medium_anatomy_experience",
+      "add_medium_entomology_experience"
+    ],
+    "info": "这是一本《初中二年级生物教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "aa3b44f8-dcdd-462a-bd33-9b1927737490": {
+    "uid": "aa3b44f8-dcdd-462a-bd33-9b1927737490",
+    "name": "初中二年级地理教科书",
+    "settle_list": [
+      "add_medium_geography_experience",
+      "add_medium_meteorology_experience",
+      "add_medium_geology_experience"
+    ],
+    "info": "这是一本《初中二年级地理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "10c62bbf-b9db-4650-92e3-4121c458babb": {
+    "uid": "10c62bbf-b9db-4650-92e3-4121c458babb",
+    "name": "初中二年级物理教科书",
+    "settle_list": [
+      "add_medium_physics_experience",
+      "add_medium_mechanics_experience"
+    ],
+    "info": "这是一本《初中二年级物理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "037d6130-ac64-4681-88ae-40030e5bdc9e": {
+    "uid": "037d6130-ac64-4681-88ae-40030e5bdc9e",
+    "name": "初中二年级化学教科书",
+    "settle_list": [
+      "add_medium_chemistry_experience",
+      "add_medium_biology_experience",
+      "add_medium_pharmacy_experience"
+    ],
+    "info": "这是一本《初中二年级化学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "0eb47f94-4f89-4569-b629-13ebc0e13f97": {
+    "uid": "0eb47f94-4f89-4569-b629-13ebc0e13f97",
+    "name": "初中二年级舞蹈教科书",
+    "settle_list": [
+      "add_medium_dance_experience",
+      "add_medium_motion_experience",
+      "add_medium_performance_experience",
+      "add_medium_art_experience"
+    ],
+    "info": "这是一本《初中二年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "ae1401dc-5900-47ac-be93-702bc1b1dcba": {
+    "uid": "ae1401dc-5900-47ac-be93-702bc1b1dcba",
+    "name": "初中二年级游泳教科书",
+    "settle_list": [
+      "add_medium_swimming_experience",
+      "add_medium_motion_experience",
+      "add_medium_first_aid_experience"
+    ],
+    "info": "这是一本《初中二年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 7
+  },
+  "f127a1ae-81c8-44ce-8665-adbe5e2db92d": {
+    "uid": "f127a1ae-81c8-44ce-8665-adbe5e2db92d",
+    "name": "初中三年级语文教科书",
+    "settle_list": [
+      "add_medium_chinese_experience",
+      "add_medium_literature_experience",
+      "add_medium_ancient_chinese_experience",
+      "add_medium_poetry_experience",
+      "add_medium_ethic_experience",
+      "add_medium_eloquence_experience",
+      "add_medium_write_experience"
+    ],
+    "info": "这是一本《初中三年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 8
+  },
+  "4f8b45e2-84dd-4914-8290-df25dcd75996": {
+    "uid": "4f8b45e2-84dd-4914-8290-df25dcd75996",
+    "name": "初中三年级数学教科书",
+    "settle_list": [
+      "add_medium_mathematics_experience"
+    ],
+    "info": "这是一本《初中三年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 8
+  },
+  "9c688a82-1a02-4048-b81f-246981d4325f": {
+    "uid": "9c688a82-1a02-4048-b81f-246981d4325f",
+    "name": "初中三年级英语教科书",
+    "settle_list": [
+      "add_medium_english_experience",
+      "add_medium_linguistics_experience"
+    ],
+    "info": "这是一本《初中三年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 8
+  },
+  "203e1b07-234b-4ed6-892c-f5cdcdc6aea6": {
+    "uid": "203e1b07-234b-4ed6-892c-f5cdcdc6aea6",
+    "name": "初中三年级信息技术教科书",
+    "settle_list": [
+      "add_medium_computer_experience",
+      "add_medium_programming_experience",
+      "add_medium_electronics_experience"
+    ],
+    "info": "这是一本《初中三年级信息技术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 8
+  },
+  "fb55361a-9b02-4221-8089-f5d5c7d2621d": {
+    "uid": "fb55361a-9b02-4221-8089-f5d5c7d2621d",
+    "name": "初中三年级体育教科书",
+    "settle_list": [
+      "add_medium_motion_experience",
+      "add_medium_first_aid_experience",
+      "add_medium_tactics_experience"
+    ],
+    "info": "这是一本《初中三年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 8
+  },
+  "99392de1-3cc8-4d3a-96bd-08f99480c973": {
+    "uid": "99392de1-3cc8-4d3a-96bd-08f99480c973",
+    "name": "初中三年级物理教科书",
+    "settle_list": [
+      "add_medium_physics_experience",
+      "add_medium_mechanics_experience"
+    ],
+    "info": "这是一本《初中三年级物理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 8
+  },
+  "7d605078-d0a4-4109-84f0-224e1975819b": {
+    "uid": "7d605078-d0a4-4109-84f0-224e1975819b",
+    "name": "初中三年级化学教科书",
+    "settle_list": [
+      "add_medium_chemistry_experience",
+      "add_medium_biology_experience",
+      "add_medium_pharmacy_experience"
+    ],
+    "info": "这是一本《初中三年级化学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 8
+  },
+  "3b9e1d36-dab2-48f2-90fb-9053deb66ec4": {
+    "uid": "3b9e1d36-dab2-48f2-90fb-9053deb66ec4",
+    "name": "初中三年级舞蹈教科书",
+    "settle_list": [
+      "add_medium_dance_experience",
+      "add_medium_motion_experience",
+      "add_medium_performance_experience",
+      "add_medium_art_experience"
+    ],
+    "info": "这是一本《初中三年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 8
+  },
+  "f797f7ba-c123-4889-bcc6-644d1422e6e9": {
+    "uid": "f797f7ba-c123-4889-bcc6-644d1422e6e9",
+    "name": "初中三年级游泳教科书",
+    "settle_list": [
+      "add_medium_swimming_experience",
+      "add_medium_motion_experience",
+      "add_medium_first_aid_experience"
+    ],
+    "info": "这是一本《初中三年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 8
+  },
+  "2ecdcc76-fa49-42f2-99e6-87593233523f": {
+    "uid": "2ecdcc76-fa49-42f2-99e6-87593233523f",
+    "name": "高中一年级语文教科书",
+    "settle_list": [
+      "add_large_chinese_experience",
+      "add_large_literature_experience",
+      "add_large_ancient_chinese_experience",
+      "add_large_old_sinitic_experience",
+      "add_large_poetry_experience",
+      "add_large_ethic_experience",
+      "add_large_religion_experience",
+      "add_large_linguistics_experience",
+      "add_large_eloquence_experience",
+      "add_large_write_experience"
+    ],
+    "info": "这是一本《高中一年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "0d71a15d-d0ff-417d-a3f2-18a96f23ffa9": {
+    "uid": "0d71a15d-d0ff-417d-a3f2-18a96f23ffa9",
+    "name": "高中一年级数学教科书",
+    "settle_list": [
+      "add_large_mathematics_experience",
+      "add_large_numerology_experience",
+      "add_large_cryptography_experience"
+    ],
+    "info": "这是一本《高中一年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "96b2a0df-48ec-4844-9b45-818925abfbe3": {
+    "uid": "96b2a0df-48ec-4844-9b45-818925abfbe3",
+    "name": "高中一年级英语教科书",
+    "settle_list": [
+      "add_large_english_experience",
+      "add_large_linguistics_experience",
+      "add_large_french_experience",
+      "add_large_spanish_experience"
+    ],
+    "info": "这是一本《高中一年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "94bf975f-6dad-454b-b93b-9c9c6f6e6703": {
+    "uid": "94bf975f-6dad-454b-b93b-9c9c6f6e6703",
+    "name": "高中一年级信息技术教科书",
+    "settle_list": [
+      "add_large_computer_experience",
+      "add_large_computer_science_experience",
+      "add_large_programming_experience",
+      "add_large_hacker_experience",
+      "add_large_electronics_experience",
+      "add_large_cryptography_experience"
+    ],
+    "info": "这是一本《高中一年级信息技术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "b93c3217-eb14-4d64-a9fc-7c1207f81fc2": {
+    "uid": "b93c3217-eb14-4d64-a9fc-7c1207f81fc2",
+    "name": "高中一年级美术教科书",
+    "settle_list": [
+      "add_large_art_experience",
+      "add_large_painting_experience",
+      "add_large_shoot_experience",
+      "add_large_manufacture_experience"
+    ],
+    "info": "这是一本《高中一年级美术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "52aa24da-3532-4a6d-94cf-b891b229c8ae": {
+    "uid": "52aa24da-3532-4a6d-94cf-b891b229c8ae",
+    "name": "高中一年级音乐教科书",
+    "settle_list": [
+      "add_large_music_experience",
+      "add_large_singing_experience",
+      "add_large_play_music_experience",
+      "add_large_write_music_experience"
+    ],
+    "info": "这是一本《高中一年级音乐教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "6c3502a1-791d-41e2-b93a-5a644f1b3651": {
+    "uid": "6c3502a1-791d-41e2-b93a-5a644f1b3651",
+    "name": "高中一年级体育教科书",
+    "settle_list": [
+      "add_large_motion_experience",
+      "add_large_first_aid_experience",
+      "add_large_tactics_experience",
+      "add_large_anatomy_experience"
+    ],
+    "info": "这是一本《高中一年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "b185e443-ba90-4ebd-a86e-e3e270deb909": {
+    "uid": "b185e443-ba90-4ebd-a86e-e3e270deb909",
+    "name": "高中一年级思想品德教科书",
+    "settle_list": [
+      "add_large_morality_experience",
+      "add_large_ethic_experience",
+      "add_large_ceremony_experience",
+      "add_large_law_science_experience",
+      "add_large_faith_experience"
+    ],
+    "info": "这是一本《高中一年级思想品德教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "d8565d00-8ec8-468d-8146-935f0f3adff7": {
+    "uid": "d8565d00-8ec8-468d-8146-935f0f3adff7",
+    "name": "高中一年级健康教育教科书",
+    "settle_list": [
+      "add_large_first_aid_experience",
+      "add_large_anatomy_experience",
+      "add_large_biology_experience",
+      "add_large_pharmacy_experience"
+    ],
+    "info": "这是一本《高中一年级健康教育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "fa53c8f8-10f7-42ad-b86f-ec0e659c0531": {
+    "uid": "fa53c8f8-10f7-42ad-b86f-ec0e659c0531",
+    "name": "高中一年级历史教科书",
+    "settle_list": [
+      "add_large_history_experience",
+      "add_large_ancient_chinese_experience",
+      "add_large_old_sinitic_experience",
+      "add_large_religion_experience"
+    ],
+    "info": "这是一本《高中一年级历史教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "002b1682-ae50-4e2e-bfd7-ec97c7249df4": {
+    "uid": "002b1682-ae50-4e2e-bfd7-ec97c7249df4",
+    "name": "高中一年级生物教科书",
+    "settle_list": [
+      "add_large_biology_experience",
+      "add_large_botany_experience",
+      "add_large_zoology_experience",
+      "add_large_anatomy_experience",
+      "add_large_microbiology_experience",
+      "add_large_virology_experience",
+      "add_large_becteriology_experience",
+      "add_large_mycology_experience",
+      "add_large_entomology_experience"
+    ],
+    "info": "这是一本《高中一年级生物教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "9b8724fc-3bfe-4bb4-92c2-bee0403da7dc": {
+    "uid": "9b8724fc-3bfe-4bb4-92c2-bee0403da7dc",
+    "name": "高中一年级地理教科书",
+    "settle_list": [
+      "add_large_geography_experience",
+      "add_large_meteorology_experience",
+      "add_large_geology_experience",
+      "add_large_astronomy_experience",
+      "add_large_astrology_experience"
+    ],
+    "info": "这是一本《高中一年级地理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "6eb702da-acd7-4d13-9b26-718d058b73b7": {
+    "uid": "6eb702da-acd7-4d13-9b26-718d058b73b7",
+    "name": "高中一年级物理教科书",
+    "settle_list": [
+      "add_large_physics_experience",
+      "add_large_mechanics_experience",
+      "add_large_astronomy_experience",
+      "add_large_electronics_experience"
+    ],
+    "info": "这是一本《高中一年级物理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "ecee6e33-07b1-4824-8543-47138c936a71": {
+    "uid": "ecee6e33-07b1-4824-8543-47138c936a71",
+    "name": "高中一年级化学教科书",
+    "settle_list": [
+      "add_large_chemistry_experience",
+      "add_large_biology_experience",
+      "add_large_pharmacy_experience",
+      "add_large_apothecary_experience"
+    ],
+    "info": "这是一本《高中一年级化学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "3014b449-fb29-478a-a387-67ad7b4935eb": {
+    "uid": "3014b449-fb29-478a-a387-67ad7b4935eb",
+    "name": "高中一年级舞蹈教科书",
+    "settle_list": [
+      "add_large_dance_experience",
+      "add_large_motion_experience",
+      "add_large_performance_experience",
+      "add_large_art_experience",
+      "add_large_ceremony_experience"
+    ],
+    "info": "这是一本《高中一年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "71685da6-9efa-48e6-be70-1d0e53d296f1": {
+    "uid": "71685da6-9efa-48e6-be70-1d0e53d296f1",
+    "name": "高中一年级游泳教科书",
+    "settle_list": [
+      "add_large_swimming_experience",
+      "add_large_motion_experience",
+      "add_large_first_aid_experience",
+      "add_large_anatomy_experience"
+    ],
+    "info": "这是一本《高中一年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 9
+  },
+  "3b3f73a9-34e1-4777-a3c4-9d210ba4f315": {
+    "uid": "3b3f73a9-34e1-4777-a3c4-9d210ba4f315",
+    "name": "高中二年级语文教科书",
+    "settle_list": [
+      "add_large_chinese_experience",
+      "add_large_literature_experience",
+      "add_large_ancient_chinese_experience",
+      "add_large_old_sinitic_experience",
+      "add_large_poetry_experience",
+      "add_large_ethic_experience",
+      "add_large_religion_experience",
+      "add_large_linguistics_experience",
+      "add_large_eloquence_experience",
+      "add_large_write_experience"
+    ],
+    "info": "这是一本《高中二年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "a446807e-b909-4769-83b0-ea79c8b7b7d2": {
+    "uid": "a446807e-b909-4769-83b0-ea79c8b7b7d2",
+    "name": "高中二年级数学教科书",
+    "settle_list": [
+      "add_large_mathematics_experience",
+      "add_large_numerology_experience",
+      "add_large_cryptography_experience"
+    ],
+    "info": "这是一本《高中二年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "90b68b39-58e7-4142-86c1-bb56dc27893a": {
+    "uid": "90b68b39-58e7-4142-86c1-bb56dc27893a",
+    "name": "高中二年级英语教科书",
+    "settle_list": [
+      "add_large_english_experience",
+      "add_large_linguistics_experience",
+      "add_large_french_experience",
+      "add_large_spanish_experience"
+    ],
+    "info": "这是一本《高中二年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "23909edb-37c0-4eea-b049-39c611b8829d": {
+    "uid": "23909edb-37c0-4eea-b049-39c611b8829d",
+    "name": "高中二年级信息技术教科书",
+    "settle_list": [
+      "add_large_computer_experience",
+      "add_large_computer_science_experience",
+      "add_large_programming_experience",
+      "add_large_hacker_experience",
+      "add_large_electronics_experience",
+      "add_large_cryptography_experience"
+    ],
+    "info": "这是一本《高中二年级信息技术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "7c142121-955f-4ee2-8544-550ac132263b": {
+    "uid": "7c142121-955f-4ee2-8544-550ac132263b",
+    "name": "高中二年级美术教科书",
+    "settle_list": [
+      "add_large_art_experience",
+      "add_large_painting_experience",
+      "add_large_shoot_experience",
+      "add_large_manufacture_experience"
+    ],
+    "info": "这是一本《高中二年级美术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "9d6f348d-10aa-46d0-acaa-597107f1b6f2": {
+    "uid": "9d6f348d-10aa-46d0-acaa-597107f1b6f2",
+    "name": "高中二年级音乐教科书",
+    "settle_list": [
+      "add_large_music_experience",
+      "add_large_singing_experience",
+      "add_large_play_music_experience",
+      "add_large_write_music_experience"
+    ],
+    "info": "这是一本《高中二年级音乐教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "edfce834-c830-4f66-8de8-e9c2f2663249": {
+    "uid": "edfce834-c830-4f66-8de8-e9c2f2663249",
+    "name": "高中二年级体育教科书",
+    "settle_list": [
+      "add_large_motion_experience",
+      "add_large_first_aid_experience",
+      "add_large_tactics_experience",
+      "add_large_anatomy_experience"
+    ],
+    "info": "这是一本《高中二年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "ad550b3f-bf8d-4ac5-9cbe-0eb4724b49f4": {
+    "uid": "ad550b3f-bf8d-4ac5-9cbe-0eb4724b49f4",
+    "name": "高中二年级思想品德教科书",
+    "settle_list": [
+      "add_large_morality_experience",
+      "add_large_ethic_experience",
+      "add_large_ceremony_experience",
+      "add_large_law_science_experience",
+      "add_large_faith_experience"
+    ],
+    "info": "这是一本《高中二年级思想品德教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "f42b64ef-c7c5-4ac5-ba96-63004ac4bce3": {
+    "uid": "f42b64ef-c7c5-4ac5-ba96-63004ac4bce3",
+    "name": "高中二年级健康教育教科书",
+    "settle_list": [
+      "add_large_first_aid_experience",
+      "add_large_anatomy_experience",
+      "add_large_biology_experience",
+      "add_large_pharmacy_experience"
+    ],
+    "info": "这是一本《高中二年级健康教育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "64711bdc-2325-42ab-bcf1-0fb9f0f61635": {
+    "uid": "64711bdc-2325-42ab-bcf1-0fb9f0f61635",
+    "name": "高中二年级历史教科书",
+    "settle_list": [
+      "add_large_history_experience",
+      "add_large_ancient_chinese_experience",
+      "add_large_old_sinitic_experience",
+      "add_large_religion_experience"
+    ],
+    "info": "这是一本《高中二年级历史教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "1598db00-8952-4952-a20c-a588e02aab2e": {
+    "uid": "1598db00-8952-4952-a20c-a588e02aab2e",
+    "name": "高中二年级生物教科书",
+    "settle_list": [
+      "add_large_biology_experience",
+      "add_large_botany_experience",
+      "add_large_zoology_experience",
+      "add_large_anatomy_experience",
+      "add_large_microbiology_experience",
+      "add_large_virology_experience",
+      "add_large_becteriology_experience",
+      "add_large_mycology_experience",
+      "add_large_entomology_experience"
+    ],
+    "info": "这是一本《高中二年级生物教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "6318a19b-0705-48eb-a32f-b345f900a157": {
+    "uid": "6318a19b-0705-48eb-a32f-b345f900a157",
+    "name": "高中二年级地理教科书",
+    "settle_list": [
+      "add_large_geography_experience",
+      "add_large_meteorology_experience",
+      "add_large_geology_experience",
+      "add_large_astronomy_experience",
+      "add_large_astrology_experience"
+    ],
+    "info": "这是一本《高中二年级地理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "53595d38-2ecd-4da9-b30a-0d9f802ceb8d": {
+    "uid": "53595d38-2ecd-4da9-b30a-0d9f802ceb8d",
+    "name": "高中二年级物理教科书",
+    "settle_list": [
+      "add_large_physics_experience",
+      "add_large_mechanics_experience",
+      "add_large_astronomy_experience",
+      "add_large_electronics_experience"
+    ],
+    "info": "这是一本《高中二年级物理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "a55c01c8-20d1-4a32-869d-76f41df9129e": {
+    "uid": "a55c01c8-20d1-4a32-869d-76f41df9129e",
+    "name": "高中二年级化学教科书",
+    "settle_list": [
+      "add_large_chemistry_experience",
+      "add_large_biology_experience",
+      "add_large_pharmacy_experience",
+      "add_large_apothecary_experience"
+    ],
+    "info": "这是一本《高中二年级化学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "494ed9ee-8cfe-43c0-aaeb-cca7b83c6b80": {
+    "uid": "494ed9ee-8cfe-43c0-aaeb-cca7b83c6b80",
+    "name": "高中二年级舞蹈教科书",
+    "settle_list": [
+      "add_large_dance_experience",
+      "add_large_motion_experience",
+      "add_large_performance_experience",
+      "add_large_art_experience",
+      "add_large_ceremony_experience"
+    ],
+    "info": "这是一本《高中二年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "33f08a5a-ee7e-404b-b79a-2f3ff0da24dc": {
+    "uid": "33f08a5a-ee7e-404b-b79a-2f3ff0da24dc",
+    "name": "高中二年级游泳教科书",
+    "settle_list": [
+      "add_large_swimming_experience",
+      "add_large_motion_experience",
+      "add_large_first_aid_experience",
+      "add_large_anatomy_experience"
+    ],
+    "info": "这是一本《高中二年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 10
+  },
+  "398fc3cc-bf92-491a-9d80-beaee1fd6960": {
+    "uid": "398fc3cc-bf92-491a-9d80-beaee1fd6960",
+    "name": "高中三年级语文教科书",
+    "settle_list": [
+      "add_large_chinese_experience",
+      "add_large_literature_experience",
+      "add_large_ancient_chinese_experience",
+      "add_large_old_sinitic_experience",
+      "add_large_poetry_experience",
+      "add_large_ethic_experience",
+      "add_large_religion_experience",
+      "add_large_linguistics_experience",
+      "add_large_eloquence_experience",
+      "add_large_write_experience"
+    ],
+    "info": "这是一本《高中三年级语文教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "920d048f-17e7-4f1e-abd1-ef75db4dccf1": {
+    "uid": "920d048f-17e7-4f1e-abd1-ef75db4dccf1",
+    "name": "高中三年级数学教科书",
+    "settle_list": [
+      "add_large_mathematics_experience",
+      "add_large_numerology_experience",
+      "add_large_cryptography_experience"
+    ],
+    "info": "这是一本《高中三年级数学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "a8122d44-c205-4194-ab92-a8312ed602ba": {
+    "uid": "a8122d44-c205-4194-ab92-a8312ed602ba",
+    "name": "高中三年级英语教科书",
+    "settle_list": [
+      "add_large_english_experience",
+      "add_large_linguistics_experience",
+      "add_large_french_experience",
+      "add_large_spanish_experience"
+    ],
+    "info": "这是一本《高中三年级英语教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "b1529f92-8140-4d66-969c-401de050db59": {
+    "uid": "b1529f92-8140-4d66-969c-401de050db59",
+    "name": "高中三年级信息技术教科书",
+    "settle_list": [
+      "add_large_computer_experience",
+      "add_large_computer_science_experience",
+      "add_large_programming_experience",
+      "add_large_hacker_experience",
+      "add_large_electronics_experience",
+      "add_large_cryptography_experience"
+    ],
+    "info": "这是一本《高中三年级信息技术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "15145827-109d-45d8-ab7f-864fda1452c0": {
+    "uid": "15145827-109d-45d8-ab7f-864fda1452c0",
+    "name": "高中三年级美术教科书",
+    "settle_list": [
+      "add_large_art_experience",
+      "add_large_painting_experience",
+      "add_large_shoot_experience",
+      "add_large_manufacture_experience"
+    ],
+    "info": "这是一本《高中三年级美术教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "c9066af3-83e2-4209-9e00-c0946530110d": {
+    "uid": "c9066af3-83e2-4209-9e00-c0946530110d",
+    "name": "高中三年级音乐教科书",
+    "settle_list": [
+      "add_large_music_experience",
+      "add_large_singing_experience",
+      "add_large_play_music_experience",
+      "add_large_write_music_experience"
+    ],
+    "info": "这是一本《高中三年级音乐教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "bc841af9-7c89-47ad-90a4-847191022031": {
+    "uid": "bc841af9-7c89-47ad-90a4-847191022031",
+    "name": "高中三年级体育教科书",
+    "settle_list": [
+      "add_large_motion_experience",
+      "add_large_first_aid_experience",
+      "add_large_tactics_experience",
+      "add_large_anatomy_experience"
+    ],
+    "info": "这是一本《高中三年级体育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "a47d2431-9df9-48aa-ae93-b8bdbb7c01d6": {
+    "uid": "a47d2431-9df9-48aa-ae93-b8bdbb7c01d6",
+    "name": "高中三年级思想品德教科书",
+    "settle_list": [
+      "add_large_morality_experience",
+      "add_large_ethic_experience",
+      "add_large_ceremony_experience",
+      "add_large_law_science_experience",
+      "add_large_faith_experience"
+    ],
+    "info": "这是一本《高中三年级思想品德教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "26974491-62a0-461f-ad05-9bcb68194e35": {
+    "uid": "26974491-62a0-461f-ad05-9bcb68194e35",
+    "name": "高中三年级健康教育教科书",
+    "settle_list": [
+      "add_large_first_aid_experience",
+      "add_large_anatomy_experience",
+      "add_large_biology_experience",
+      "add_large_pharmacy_experience"
+    ],
+    "info": "这是一本《高中三年级健康教育教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "fd45c273-44d8-4139-9937-7c9e4f066a40": {
+    "uid": "fd45c273-44d8-4139-9937-7c9e4f066a40",
+    "name": "高中三年级历史教科书",
+    "settle_list": [
+      "add_large_history_experience",
+      "add_large_ancient_chinese_experience",
+      "add_large_old_sinitic_experience",
+      "add_large_religion_experience"
+    ],
+    "info": "这是一本《高中三年级历史教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "44b3bedb-a02f-4c17-82cf-650d955f2bdd": {
+    "uid": "44b3bedb-a02f-4c17-82cf-650d955f2bdd",
+    "name": "高中三年级生物教科书",
+    "settle_list": [
+      "add_large_biology_experience",
+      "add_large_botany_experience",
+      "add_large_zoology_experience",
+      "add_large_anatomy_experience",
+      "add_large_microbiology_experience",
+      "add_large_virology_experience",
+      "add_large_becteriology_experience",
+      "add_large_mycology_experience",
+      "add_large_entomology_experience"
+    ],
+    "info": "这是一本《高中三年级生物教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "ccbd5db2-7c0e-4618-86d8-0526fe658c08": {
+    "uid": "ccbd5db2-7c0e-4618-86d8-0526fe658c08",
+    "name": "高中三年级地理教科书",
+    "settle_list": [
+      "add_large_geography_experience",
+      "add_large_meteorology_experience",
+      "add_large_geology_experience",
+      "add_large_astronomy_experience",
+      "add_large_astrology_experience"
+    ],
+    "info": "这是一本《高中三年级地理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "80ab0cb1-021c-46c9-8dbc-619d23b7009b": {
+    "uid": "80ab0cb1-021c-46c9-8dbc-619d23b7009b",
+    "name": "高中三年级物理教科书",
+    "settle_list": [
+      "add_large_physics_experience",
+      "add_large_mechanics_experience",
+      "add_large_astronomy_experience",
+      "add_large_electronics_experience"
+    ],
+    "info": "这是一本《高中三年级物理教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "38177599-2268-4129-a537-013e15626077": {
+    "uid": "38177599-2268-4129-a537-013e15626077",
+    "name": "高中三年级化学教科书",
+    "settle_list": [
+      "add_large_chemistry_experience",
+      "add_large_biology_experience",
+      "add_large_pharmacy_experience",
+      "add_large_apothecary_experience"
+    ],
+    "info": "这是一本《高中三年级化学教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "e1384cfe-11ae-4e1e-abf1-97dacb8c9b74": {
+    "uid": "e1384cfe-11ae-4e1e-abf1-97dacb8c9b74",
+    "name": "高中三年级舞蹈教科书",
+    "settle_list": [
+      "add_large_dance_experience",
+      "add_large_motion_experience",
+      "add_large_performance_experience",
+      "add_large_art_experience",
+      "add_large_ceremony_experience"
+    ],
+    "info": "这是一本《高中三年级舞蹈教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  },
+  "ccaca2f4-e1ee-4f89-9919-427ece921948": {
+    "uid": "ccaca2f4-e1ee-4f89-9919-427ece921948",
+    "name": "高中三年级游泳教科书",
+    "settle_list": [
+      "add_large_swimming_experience",
+      "add_large_motion_experience",
+      "add_large_first_aid_experience",
+      "add_large_anatomy_experience"
+    ],
+    "info": "这是一本《高中三年级游泳教科书》，适合对应阶段的学生阅读和学习，涵盖了该学科的基础知识和核心概念。用心阅读可以获得相关属性的成长和经验。",
+    "type": 11
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "uid": "65995d19-2801-4f4b-a659-fe6ba840a2b5",
+  "adv_id": "",
+  "status_id": "5",
+  "start": 1,
+  "text": "{Name}低下头\n视线停留在{TargetName}的胸部\n手指攥住衣角\n开口挑起关于饮食的话题\n声音发颤",
+  "premise": {
+    "is_inferiority": 1,
+    "is_average_stature_low": 1,
+    "target_chest_is_not_cliff": 1,
+    "have_target": 1,
+    "target_is_live": 1
+  },
+  "settle": {}
+}

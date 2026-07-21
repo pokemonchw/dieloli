@@ -14,6 +14,8 @@ def character_eat_rand_food(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
+    import uuid
+    from Script.Design import session_handler, map_handle
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.behavior.behavior_id = constant.Behavior.EAT
     now_food_list = []
@@ -24,17 +26,44 @@ def character_eat_rand_food(character_id: int):
     if not now_food_list:
         return
     character_data.behavior.eat_food = character_data.food_bag[random.choice(now_food_list)]
-    character_data.behavior.duration = 1
-    character_data.behavior.food_quality = now_food.quality
+    
+    # Check if in cafeteria (Map 10 or 16)
+    in_cafeteria = False
+    if character_data.position and len(character_data.position) > 0:
+        in_cafeteria = character_data.position[0] in [10, 16]
+        
+    if in_cafeteria:
+        character_data.behavior.duration = 10
+        # Start DiningSession
+        scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+        scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+        session_uid = str(uuid.uuid4())
+        session = game_type.InteractionSession(character_id, [], constant.Behavior.EAT)
+        session.uid = session_uid
+        session.start_time = cache.game_time
+        session.is_pending = False
+        cache.interaction_sessions[session_uid] = session
+        scene_data.social_fields[session_uid] = "Dining"
+        
+        handler = session_handler.get_session_handler(session_uid)
+        if handler:
+            handler.on_start()
+            
+        character_data.state = constant.CharacterStatus.STATUS_SOCIAL_INTERACTING
+        character_data.active_session = session_uid
+    else:
+        character_data.behavior.duration = 1
+        character_data.state = constant.CharacterStatus.STATUS_EAT
+        
+    character_data.behavior.food_quality = character_data.behavior.eat_food.quality
     food_name = ""
-    if now_food.recipe != -1:
-        food_recipe: game_type.Recipes = cache.recipe_data[now_food.recipe]
+    if character_data.behavior.eat_food.recipe != -1:
+        food_recipe: game_type.Recipes = cache.recipe_data[character_data.behavior.eat_food.recipe]
         food_name = food_recipe.name
     else:
-        food_config = game_config.config_food[now_food.id]
+        food_config = game_config.config_food[character_data.behavior.eat_food.id]
         food_name = food_config.name
     character_data.behavior.food_name = food_name
-    character_data.state = constant.CharacterStatus.STATUS_EAT
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.DRINK_RAND_DRINKS)
@@ -63,13 +92,13 @@ def character_drink_rand_drinks(character_id: int):
         return
     character_data.behavior.eat_food = character_data.food_bag[random.choice(now_list)]
     character_data.behavior.duration = 1
-    character_data.behavior.food_quality = now_food.quality
+    character_data.behavior.food_quality = character_data.behavior.eat_food.quality
     food_name = ""
-    if now_food.recipe != -1:
-        food_recipe: game_type.Recipes = cache.recipe_data[now_food.recipe]
+    if character_data.behavior.eat_food.recipe != -1:
+        food_recipe: game_type.Recipes = cache.recipe_data[character_data.behavior.eat_food.recipe]
         food_name = food_recipe.name
     else:
-        food_config = game_config.config_food[now_food.id]
+        food_config = game_config.config_food[character_data.behavior.eat_food.id]
         food_name = food_config.name
     character_data.behavior.food_name = food_name
     character_data.state = constant.CharacterStatus.STATUS_EAT

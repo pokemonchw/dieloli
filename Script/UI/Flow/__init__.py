@@ -13,4 +13,5 @@ from Script.UI.Flow import (
     game_setting_flow,
     view_club_list_flow,
     view_club_info_flow,
+    book_bag_flow,
 )

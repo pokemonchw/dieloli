@@ -522,15 +522,6 @@ class NatureTag:
     """ 负面倾向 """
 
 
-class Book:
-    """ 书籍配置表 """
-
-    cid: int
-    """ 书本id """
-    name: str
-    """ 名字 """
-
-
 class Nature:
     """ 性格倾向配置 """
 

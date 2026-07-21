@@ -1,6 +1,6 @@
 import random
 import datetime
-from Script.Design import handle_state_machine, map_handle, constant
+from Script.Design import handle_state_machine, map_handle, constant, session_handler
 from Script.Core import cache_control, game_type
 
 cache: game_type.Cache = cache_control.cache
@@ -32,6 +32,11 @@ def character_chat_rand_character(character_id: int):
     session.start_time = cache.game_time
     cache.interaction_sessions[session_uid] = session
     scene_data.social_fields[session_uid] = "Chat"
+    
+    # Initialize session through handler for initiator
+    handler = session_handler.get_session_handler(session_uid)
+    if handler:
+        handler.on_start()
     
     target_data = cache.character_data[target_id]
     target_data.social_requests.append({
@@ -203,6 +208,7 @@ def character_abuse_to_dislike_target_in_scene(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
+    import uuid
     character_data: game_type.Character = cache.character_data[character_id]
     scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
     scene_data: game_type.Scene = cache.scene_data[scene_path_str]
@@ -214,10 +220,32 @@ def character_abuse_to_dislike_target_in_scene(character_id: int):
                 character_list.append(c)
     if character_list:
         target_id = random.choice(character_list)
+        
+        # Start ArgumentSession
+        session_uid = str(uuid.uuid4())
+        session = game_type.InteractionSession(character_id, [target_id], constant.Behavior.ABUSE)
+        session.uid = session_uid
+        session.start_time = cache.game_time
+        cache.interaction_sessions[session_uid] = session
+        scene_data.social_fields[session_uid] = "Argument"
+        
+        handler = session_handler.get_session_handler(session_uid)
+        if handler:
+            handler.on_start()
+            
+        target_data = cache.character_data[target_id]
+        target_data.social_requests.append({
+            'initiator': character_id,
+            'session_uid': session_uid,
+            'type': constant.Behavior.ABUSE,
+            'weight': 400 # High weight because it's a conflict
+        })
+        
         character_data.behavior.behavior_id = constant.Behavior.ABUSE
         character_data.target_character_id = target_id
         character_data.behavior.duration = 10
-        character_data.state = constant.CharacterStatus.STATUS_ABUSE
+        character_data.state = constant.CharacterStatus.STATUS_SOCIAL_INTERACTING
+        character_data.active_session = session_uid
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.ABUSE_NAKED_TARGET_IN_SCENE)

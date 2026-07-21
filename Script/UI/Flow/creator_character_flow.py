@@ -66,6 +66,7 @@ def game_start():
     course.init_phase_course_hour()
     interest.init_character_interest()
     course.init_all_character_knowledge()
+    course.init_student_textbook()
     course.init_class_teacher()
     course.init_class_time_table()
     course.init_teacher_table()

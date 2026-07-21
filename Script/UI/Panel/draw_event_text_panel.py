@@ -80,6 +80,7 @@ class DrawEventTextPanel(draw.LineFeedWaitDraw):
             target_scene_name = target_scene_data.scene_name
         now_event_text = now_event_text.format(
             FoodName=character_data.behavior.food_name,
+            BookName=character_data.behavior.book_name,
             Name=character_name,
             SceneName=scene_name,
             TargetName=target_name,

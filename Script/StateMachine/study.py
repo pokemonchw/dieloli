@@ -53,6 +53,8 @@ def character_teach_lesson(character_id: int):
     Keyword arguments:
     character_id -- 角色id
     """
+    import uuid
+    from Script.Design import session_handler, map_handle
     character_data: game_type.Character = cache.character_data[character_id]
     character_data.behavior.behavior_id = constant.Behavior.TEACHING
     end_time = 0
@@ -62,7 +64,7 @@ def character_teach_lesson(character_id: int):
     now_week = now_time.weekday()
     now_time_value = now_time.hour * 100 + now_time.minute
     timetable_list: List[game_type.TeacherTimeTable] = cache.teacher_school_timetable[character_id]
-    course = 0
+    course_id = 0
     end_time = 0
     for timetable in timetable_list:
         if timetable.week_day != now_week:
@@ -71,12 +73,42 @@ def character_teach_lesson(character_id: int):
             now_value = int(now_time_value / 100) * 60 + now_time_value % 100
             end_value = int(timetable.end_time / 100) * 60 + timetable.end_time % 100
             end_time = end_value - now_value + 1
-            course = timetable.course
+            course_id = timetable.course
             break
+            
+    # Initiate Classroom Session
+    scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.position)
+    scene_data: game_type.Scene = cache.scene_data[scene_path_str]
+    session_uid = str(uuid.uuid4())
+    session = game_type.InteractionSession(character_id, [], constant.Behavior.TEACHING)
+    session.uid = session_uid
+    session.start_time = cache.game_time
+    session.data['course'] = course_id
+    cache.interaction_sessions[session_uid] = session
+    scene_data.social_fields[session_uid] = "Classroom"
+    
+    # Broadcast to students in the classroom
+    for target_id in scene_data.character_list:
+        if target_id == character_id:
+            continue
+        target_data = cache.character_data[target_id]
+        if 0 in target_data.identity_data: # Is student
+            target_data.social_requests.append({
+                'initiator': character_id,
+                'session_uid': session_uid,
+                'type': constant.Behavior.TEACHING,
+                'weight': 300 # High weight for class
+            })
+            
+    handler = session_handler.get_session_handler(session_uid)
+    if handler:
+        handler.on_start()
+        
     character_data.behavior.duration = min(end_time, 10)
     character_data.behavior.behavior_id = constant.Behavior.TEACHING
-    character_data.state = constant.CharacterStatus.STATUS_TEACHING
-    character_data.behavior.course_id = course
+    character_data.state = constant.CharacterStatus.STATUS_SOCIAL_INTERACTING
+    character_data.active_session = session_uid
+    character_data.behavior.course_id = course_id
 
 
 @handle_state_machine.add_state_machine(constant.StateMachine.SELF_STUDY)
