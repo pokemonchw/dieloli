@@ -17,7 +17,6 @@ os.system("cp ./tools/DieloliBookEditor/default.json ./data/book/")
 book_dir = os.path.join("data", "book")
 os.system("cp ./tools/DieloliLibraryNoteEditor/default.json ./data/library_note/")
 library_note_dir = os.path.join("data", "library_note")
-os.system("cp ./tools/ai_play/policy_model.pth ./data/")
 clothing_dir = os.path.join("data", "clothing")
 os.system("cp ./tools/DieloliClothingEditor/default.json ./data/clothing/")
 config_data = {}
@@ -25,6 +24,12 @@ config_def_str = ""
 config_po = ""
 msgData = set()
 class_data = set()
+
+
+def build_po_entry(reference: str, message: str) -> str:
+    """生成经过转义的 po 文本条目"""
+    return f"#: {reference}\nmsgid {json.dumps(message, ensure_ascii=False)}\nmsgstr \"\"\n\n"
+
 
 def build_csv_config(file_path: str, file_name: str):
     with open(file_path, encoding="utf-8") as now_file:
@@ -93,9 +98,8 @@ def build_config_def(class_name: str, value_type: dict, docstring: dict, class_t
 def build_config_po(message: str, message_class: str, message_type: str, message_id: str):
     global config_po
     if message not in msgData:
-        config_po += f"#: class:{message_class} id:{message_id} type:{message_type}\n"
-        config_po += f'msgid "{message}"\n'
-        config_po += 'msgstr ""\n\n'
+        reference = f"class:{message_class} id:{message_id} type:{message_type}"
+        config_po += build_po_entry(reference, message)
         msgData.add(message)
 
 
@@ -109,18 +113,14 @@ def build_scene_config(data_path):
                     scene_data = json.loads(now_file.read())
                     scene_name = scene_data["SceneName"]
                     if scene_name not in msgData:
-                        config_po += f"#: Scene:{now_path}\n"
-                        config_po += f'msgid "{scene_name}"\n'
-                        config_po += 'msgstr ""\n\n'
+                        config_po += build_po_entry(f"Scene:{now_path}", scene_name)
                         msgData.add(scene_name)
             elif i == "Map.json":
                 with open(now_path, "r", encoding="utf-8") as now_file:
                     map_data = json.loads(now_file.read())
                     map_name = map_data["MapName"]
                     if map_name not in msgData:
-                        config_po += f"#: Map:{now_path}\n"
-                        config_po += f'msgid "{map_name}"\n'
-                        config_po += 'msgstr ""\n\n'
+                        config_po += build_po_entry(f"Map:{now_path}", map_name)
                         msgData.add(map_name)
         else:
             build_scene_config(now_path)
@@ -151,9 +151,7 @@ for i in event_file_list:
             event_list.append(now_event)
             now_event_text = now_event["text"]
             if now_event_text not in msgData:
-                config_po += f"#: Event:{event_id}\n"
-                config_po += f'msgid "{now_event_text}"\n'
-                config_po += 'msgstr ""\n\n'
+                config_po += build_po_entry(f"Event:{event_id}", now_event_text)
                 msgData.add(now_event_text)
 config_data["Event"] = {}
 config_data["Event"]["data"] = event_list
@@ -215,9 +213,7 @@ for i in library_note_file_list:
             library_note_list.append(now_note)
             now_note_text = now_note.get("content_template", "")
             if now_note_text and now_note_text not in msgData:
-                config_po += f"#: LibraryNote:{note_id}\n"
-                config_po += f'msgid "{now_note_text}"\n'
-                config_po += 'msgstr ""\n\n'
+                config_po += build_po_entry(f"LibraryNote:{note_id}", now_note_text)
                 msgData.add(now_note_text)
 config_data["LibraryNote"] = {}
 config_data["LibraryNote"]["data"] = library_note_list
@@ -239,23 +235,17 @@ for i in clothing_file_list:
             clothing_name = now_clothing["name"]
             clothing_describe = now_clothing["describe"]
             if clothing_name not in msgData:
-                config_po += f"#:  ClothingName:{clothing_id}"
-                config_po += f'msgid "{clothing_name}"'
-                config_po += 'msgstr ""\n\n'
+                config_po += build_po_entry(f"ClothingName:{clothing_id}", clothing_name)
                 msgData.add(clothing_name)
             if clothing_describe not in msgData:
-                config_po += f"#:  ClothingDescribe:{clothing_id}"
-                config_po += f'msgid "{clothing_describe}"'
-                config_po += 'msgstr ""\n\n'
-                msgData.add(clothing_name)
+                config_po += build_po_entry(f"ClothingDescribe:{clothing_id}", clothing_describe)
+                msgData.add(clothing_describe)
         for suit_id in now_clothing_file_all_data["suit"]:
             now_suit = now_clothing_file_all_data["suit"][suit_id]
             clothing_suit_list.append(now_suit)
             suit_name = now_suit["name"]
             if suit_name not in msgData:
-                config_po += f"#: ClothingSuitName:{suit_id}"
-                config_po += f'msgid "{suit_name}"'
-                config_po += 'msgstr ""\n\n'
+                config_po += build_po_entry(f"ClothingSuitName:{suit_id}", suit_name)
                 msgData.add(suit_name)
 
 config_data["Clothing"] = {}

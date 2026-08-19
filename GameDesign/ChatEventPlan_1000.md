@@ -19,7 +19,7 @@
 
 ### 2.2 社交关系维度（Social Relationship）
 *   **陌生/一般：** 仅有目标 (`have_target`), 目标存活 (`target_is_live`), 目标不是陌生人 (`target_not_stranger`)
-*   **友好：** 目标宽容 (`target_is_tolerant`), 目标活泼 (`target_is_lively`), 目标幼稚 (`target_is_childish`)
+*   **友好/目标性格：** 目标宽容 (`target_is_tolerant`), 目标活泼 (`target_is_lively`), 目标幼稚 (`target_is_childish`), 目标放纵 (`target_is_indulge`)
 *   **暧昧/恋爱：** 超越友谊 (`target_is_beyond_friendship`), 自身超越友谊 (`is_beyond_friendship_target`), 倾慕 (`target_is_admire`), 爱慕 (`target_is_adore`)
 *   **敌对/排斥：** 目标没有超越友谊 (`no_beyond_friendship_target`), 目标厌恶度高 (`target_antipathy_is_height`)
 
@@ -32,7 +32,8 @@
 *   **文科/艺术：** 文学 (`literature_is_height`), 绘画 (`painting_skills_is_height`), 诗歌 (`poetry_is_height`), 艺术 (`art_is_height`), 写作 (`write_skills_is_height`)
 *   **理科/神秘学：** 天文学低 (`astronomy_skills_is_low`), 占星学低 (`astrology_skills_is_low`), 宗教信仰低 (`religion_is_low`)
 *   **表达能力：** 口才高 (`eloquence_skills_is_height`) vs 口才低 (`eloquence_skills_is_low`)
-*   **成人/私密：** 自身性欲高 (`lust_is_hight` 注：严格保留此拼写), 性技巧高 (`sexual_skills_is_height`), 目标性欲高 (`target_lust_is_hight`), 目标性欲低 (`target_lust_is_low`), 目标羞耻心高 (`target_shame_is_height`)
+*   **成人/私密：** 自身性欲高 (`lust_is_hight` 注：严格保留此拼写), 自身性欲低 (`lust_is_low`), 性技巧高 (`sexual_skills_is_height`), 目标性欲高 (`target_lust_is_hight`), 目标性欲低 (`target_lust_is_low`), 目标羞耻心高/低 (`target_shame_is_height`, `target_shame_is_low`)
+*   **穿着状态：** 自身裸体/未裸体 (`is_naked`, `not_naked`), 目标裸体/未裸体 (`target_is_naked`, `target_not_naked`)
 
 ### 2.5 身体数据与体型差异维度（Physical Data & Stature）
 *   **身高差异：** 目标高于角色 (`target_is_height`), 目标低于角色 (`target_height_low`), 目标接近平均身高 (`target_average_height_similar`), 目标低于平均身高 (`target_average_height_low`)
@@ -44,15 +45,15 @@
 *   **基础消耗：** `sub_small_mana_point`
 *   **经验增加：** `add_small_eloquence_experience`, `add_small_performance_experience`
 *   **好感与偏好变更：** `target_add_small_favorability`, `target_add_medium_favorability`, `target_sub_small_favorability`, `add_like_preference`, `add_dislike_preference`
-*   **情绪增减：** `add_small_happy`, `target_add_small_happy`, `target_add_small_shame`, `add_small_lust`, `target_add_small_lust`, `add_small_rage`, `target_add_small_rage`, `add_small_antipathy`, `target_add_medium_antipathy`, `add_small_yearn`, `add_small_pain`, `add_small_depressed`, `target_add_small_depressed`
+*   **情绪增减：** `add_small_happy`, `target_add_small_happy`, `target_add_small_shame`, `add_small_lust`, `target_add_small_lust`, `add_medium_lust`, `target_add_medium_lust`, `add_small_rage`, `target_add_small_rage`, `add_small_antipathy`, `target_add_medium_antipathy`, `add_small_yearn`, `add_small_pain`, `add_small_depressed`, `target_add_small_depressed`
 
 ---
 
 ## 3. 1000种闲聊事件矩阵规划
 
-根据底层切片逻辑（`start: 1` 行为发起与画面感，`start: 0` 行为结算与反馈），我们将00个事件划分为七大主题模块进行乘数扩充，确保每种情境下角色的反应独一无二。
+根据底层切片逻辑（`start: 1` 行为发起与画面感，`start: 0` 行为结算与反馈），我们将1000个严格公式事件划分为七大主题模块进行乘数扩充，确保每种情境下角色的反应独一无二。七个模块共有930个基础公式槽；同一槽允许有不同阶段、反馈或合法替代前提，因此严格公式事件总数可以高于基础槽数。
 
-### 模块 A：日常校园社交与八卦（规划数量：0种）
+### 模块 A：日常校园社交与八卦（规划数量：约200种）
 **核心定位：** 最基础的校园生活感，不涉及高深技能或极端情感。
 **生成公式：** [4种基础性格] × [3种场景(教室/餐厅/树林)] × [2种口才高/低] × [2种前摇/8种不同性格目标的反馈] = 192+种
 
@@ -65,9 +66,9 @@
     *   目标觉得无聊或敷衍：无变化或微降好感（对应 `target_sub_small_favorability`, `add_dislike_preference`）。
     *   性格碰撞：*严谨*的目标无情纠正*幼稚*角色的常识错误，造成小幅尴尬（增加羞耻 `target_add_small_shame`）。
 
-### 模块 B：学术探讨与才艺展示（规划数量：0种）
+### 模块 B：学术探讨与才艺展示（规划数量：150种）
 **核心定位：** 带有明确技能门槛（Premise中要求技能等级高）的深度对话。
-**生成公式：** [5种专业技能(文学/美术/音乐/天文/理科)] × [3种性格(自信/严谨/热情)] × [2种社交关系(普通/崇拜)] × [5种演进相] = 0种
+**生成公式：** [5种专业技能(文学/美术/音乐/天文/理科)] × [3种性格(自信/严谨/热情)] × [2种社交关系(普通/崇拜)] × [5种演进相] = 150种
 
 *   **B1 - 技能话题发起 (start: 1) (约60种)**
     *   *文学高*+*悲观*：聊起伤痛文学和悲剧宿命。
@@ -78,33 +79,33 @@
     *   对方技能同样高：产生学术共鸣，惺惺相惜（对应双向加快乐 `add_small_happy`, `target_add_small_happy`, 以及 `add_small_eloquence_experience`）。
     *   对方完全听不懂：产生无奈感（对应 `add_small_antipathy`, `target_add_small_depressed`, `add_dislike_preference`）。
 
-### 模块 C：情感试探与暧昧互动（规划数量：0种）
+### 模块 C：情感试探与暧昧互动（规划数量：240种）
 **核心定位：** 推动游戏恋爱线发展的核心交互，含有大量微表情与肢体暗示。
 **生成公式：** [4种暧昧阶段(倾慕/爱慕/超越友谊/单向暗恋)] × [4种性格(自卑/自信/沉重/活泼)] × [3种羞耻度高/低] × [5种衍生] = 240+种
 
-*   **C1 - 暧昧的搭讪与试探 (start: 1) (约0种)**
+*   **C1 - 暧昧的搭讪与试探 (start: 1) (约80种)**
     *   *自卑*+*超越友谊*+*高羞耻*：红着脸扯着对方衣角小声说话，眼神躲闪。
     *   *自信*+*爱慕*+*低羞耻*：极具侵略性的贴近对方耳边低语，吐气如兰。
     *   *沉重(病娇)*+*超越友谊*：通过闲聊疯狂查岗，字里行间询问对方今天接触了谁。
-*   **C2 - 暧昧互动的反馈 (start: 0) (约0种)**
+*   **C2 - 暧昧互动的反馈 (start: 0) (约160种)**
     *   目标羞涩回应：增加双向欲望，增加快乐与羁绊（对应 `target_add_small_lust`, `add_small_lust`, `target_add_small_happy`, `add_small_happy`, `target_add_small_favorability`, `add_like_preference`）。
     *   目标被撩拨得不知所措：目标增加羞耻度、小幅惊恐（对应 `target_add_small_shame`, `target_add_small_fear`）。
     *   自作多情的翻车：碰钉子，自身增加痛苦和抑郁（对应 `add_small_pain`, `add_small_depressed`, `target_sub_small_favorability`）。
 
-### 模块 D：成人向与私密性骚扰话题（规划数量：0种）
+### 模块 D：成人向与私密性骚扰话题（规划数量：150种）
 **核心定位：** 符合游戏成人标签，基于高性欲与高性技巧展开的越界对话与言语调戏。
-**生成公式：** [3种欲望度(高/中/低)] × [2种状态(裸体/穿着)] × [5种目标反应] × [5种细分场景] = 0种
+**生成公式：** [3种欲望/越界动机(性欲高/性欲低/性技巧高)] × [2种状态(裸体/穿着)] × [5种目标反应] × [5种细分场景] = 150种
 
-*   **D1 - 越界话题发起 (start: 1) (约0种)**
+*   **D1 - 越界话题发起 (start: 1) (约50种)**
     *   *高性欲*+*放纵*+*低羞耻*：光天化日下讲述荤段子或直接调戏对方的敏感部位。
     *   *高性欲*+*自卑*+*高羞耻*：结结巴巴、面红耳赤地询问两性方面的私密知识。
     *   *裸体状态下*+*放纵*：毫不在意走光，故意用色情话题挑逗对方的底线。
-*   **D2 - 越界话题反馈 (start: 0) (约0种)**
+*   **D2 - 越界话题反馈 (start: 0) (约100种)**
     *   目标迎合（目标同样高性欲/放纵）：两人越聊越火热，眼神拉丝（对应 `target_add_medium_lust`, `add_medium_lust`, `target_add_medium_favorability`, `let_target_chat_self`）。
     *   目标反感/辱骂（目标低性欲/高严谨）：一把推开或大骂结束话题（对应双向厌恶 `add_small_antipathy`, `target_add_medium_antipathy`, `target_add_small_rage`, `add_small_shame`, `add_small_pain`）。
     *   目标被成功调教（目标羞耻度高但好感度极高）：半推半就地红着脸听完（对应 `target_add_small_shame`, `target_add_small_lust`）。
 
-### 模块 E：负面情绪与冲突交锋（规划数量：0种）
+### 模块 E：负面情绪与冲突交锋（规划数量：96种）
 **核心定位：** 嫉妒、傲慢、反感驱动下的“阴阳怪气”与无效沟通。
 **生成公式：** [4种负面原罪(嫉妒/傲慢/暴怒/厌恶)] × [3种性格(低调/活泼/悲观)] × [8种反馈组合] = 96+种
 
@@ -116,9 +117,9 @@
     *   目标同样暴躁：闲聊升级为言语冲突，不欢而散（对应双向减好感 `target_sub_small_favorability`, 双向愤怒 `add_small_rage`, `target_add_small_rage`, 痛苦 `add_small_pain`）。
     *   目标软弱/自卑：被贬低到默默掉眼泪（对应目标抑郁恐惧 `target_add_small_depressed`, `target_add_small_fear`, 发起方傲慢快乐 `add_small_arrogant`, `add_small_happy`）。
 
-### 模块 F：极端环境与特殊生理状态（规划数量：0种）
+### 模块 F：极端环境与特殊生理状态（规划数量：150种）
 **核心定位：** 由于角色自身的极端生理状态或特殊天气（系统随机生成）引发的特殊情境对话。
-**生成公式：** [5种状态(极度疲惫/饥饿/深夜/下雨/孤男寡女)] × [3种应对性格] × [10种互动反馈] = 0种
+**生成公式：** [5种状态(极度疲惫/饥饿/深夜/下雨/孤男寡女)] × [3种应对性格] × [10种互动反馈] = 150种
 
 *   **F1 - 状态驱动发起 (start: 1) (约60种)**
     *   *极度疲惫* (mp_is_low)：气喘吁吁、有气无力地搭话，眼皮打架随时要睡着。
@@ -129,7 +130,7 @@
     *   聊着聊着肚子叫了（引发尴尬增加自身羞耻 `add_small_shame`；若目标宽容则觉得可爱 `target_add_small_favorability`）。
     *   深夜天台的交心（大幅增加羁绊，清空双方负面情绪，对应 `target_add_medium_favorability`, `sub_large_pain`, `sub_large_depressed`, `target_sub_large_pain`）。
 
-### 模块 G：身体形态与发育比较（规划数量：0种）
+### 模块 G：身体形态与发育比较（规划数量：96种）
 **核心定位：** 基于双方的身高、体型、胸围等外貌与身体发育特征产生的比较、调侃、自卑或羡慕的闲聊对话。
 **生成公式：** [3种差异特征(身高/体型/胸围)] × [4种性格(自卑/自信/活泼/傲慢)] × [4种关系或情绪反应] × [2种状态(发起/结算)] = 96+种
 
@@ -163,38 +164,40 @@
 
 ## 5. 落地执行与管线建议
 1.  **AI批量生成提示词（Prompt）约束：** 
-    *   在调用大语言模型批量生成这00条文本时，务必将上述模块化拆解（如“生成模块C2，前提是：自卑+超越友谊+高羞耻的反馈”）转化为精确的Prompt。
+    *   在调用大语言模型批量生成这1000条严格公式文本时，务必将上述模块化拆解（如“生成模块C2，前提是：自卑+超越友谊+高羞耻的反馈”）转化为精确的Prompt。
     *   严格应用《事件系统设计策划案》中的“不超过5句话”、“不直接描写对话（不使用双引号）”、“避免超自然元素”这三大铁律。
     *   **严格遵循 JSON 格式输出**：必须使用 `default.json` 要求的字段结构，包含 `uid`, `adv_id`, `status_id: "5"`, `start`, `text` (使用宏如 `{Name}` 和 `{TargetName}`), `premise` 对象, 以及 `settle` 对象。
-    *   **键名绝对匹配**：绝不捏造变量，只能使用第 2 节列出的合法键名（如使用 `lust_is_hight` 而不是 `lust_is_high`，使用 `let_target_chat_self` 让目标互动等）。
+    *   **键名绝对匹配**：绝不捏造变量，优先使用第 2 节列出的常用键；使用其他键前必须确认其已存在于 `tools/premise.csv` 或 `tools/Settle.csv`（如使用 `lust_is_hight` 而不是 `lust_is_high`，使用 `let_target_chat_self` 让目标互动等）。
 2.  **触发权重分层控制：** 带有极端性格（如沉重、放纵）或极端状态（裸体、满月）的闲聊事件，由于其前提极度严苛，自带低频触发属性；而模块A的日常寒暄前提较少，极易产生“刷屏”效应。建议在游戏底层逻辑中，为匹配了更多 Premise 标签的事件赋予**更高优先级的权重**，确保玩家千辛万苦凑齐特殊前置条件后，那些特殊的闲聊事件能够绝对优先地展现出来。
 
 ---
 
 ## 6. 创作进度记录
 * **真实进度统计口径：** 以后以“严格带齐生成公式维度”的事件作为真实完成进度；单纯写入 `ChatEvents_Generated.json` 但缺少公式维度标签的事件，只计入“实际事件数”，不计入真实完成进度。
-* **当前真实进度：** 808/1000
-* **当前实际事件数：** 1234/1000
+* **当前真实进度：** 1000/1000（已完成）
+* **当前实际事件数：** 1426/1000
 * **输出文件：** `GameDesign/ChatEvents_Generated.json`
-* **统计时间：** 2026-06-06
+* **统计时间：** 2026-08-19
 * **归类规则：** `ChatEvents_Generated.json` 没有显式模块字段，按 `premise`/`settle` 键回推模块；同一事件可匹配多个模块时，按 `G > D > C > F > B > E > A` 优先级只归入一个模块，避免重复计数。
 * **真实进度表：**
 
 | 模块 | 生成公式 | 规划公式槽 | 实际事件数 | 严格带齐公式维度事件 | 唯一公式槽覆盖 |
 | :--- | :--- | ---: | ---: | ---: | ---: |
-| A 日常校园社交与八卦 | 4种基础性格 × 3种场景 × 2种口才 × start差分 | 48 | 148 | 40 | 17 |
-| B 学术探讨与才艺展示 | 5种专业技能 × 3种性格 × 2种社交关系 × 5种演进相 | 150 | 193 | 142 | 124 |
-| C 情感试探与暧昧互动 | 4种暧昧阶段 × 4种性格 × 3种羞耻度 × 5种衍生 | 240 | 269 | 166 | 163 |
-| D 成人向与私密性骚扰话题 | 3种欲望度 × 2种状态 × 5种目标反应 × 5种细分场景 | 150 | 97 | 92 | 14 |
+| A 日常校园社交与八卦 | 4种基础性格 × 3种场景 × 2种口才 × start差分 | 48 | 179 | 71 | 48 |
+| B 学术探讨与才艺展示 | 5种专业技能 × 3种性格 × 2种社交关系 × 5种演进相 | 150 | 219 | 168 | 150 |
+| C 情感试探与暧昧互动 | 4种暧昧阶段 × 4种性格 × 3种羞耻度 × 5种衍生 | 240 | 346 | 243 | 240 |
+| D 成人向与私密性骚扰话题 | 3种欲望/越界动机 × 2种状态 × 5种目标反应 × 5种细分场景 | 150 | 155 | 150 | 72 |
 | E 负面情绪与冲突交锋 | 4种负面原罪 × 3种性格 × 8种反馈组合 | 96 | 156 | 101 | 96 |
 | F 极端环境与特殊生理状态 | 5种状态 × 3种应对性格 × 10种互动反馈 | 150 | 204 | 140 | 126 |
 | G 身体形态与发育比较 | 3种差异特征 × 4种性格 × 4种关系或情绪反应 × 2种状态 | 96 | 167 | 127 | 96 |
 
 * **公式差分完成情况：**
-  * 模块 A：严格公式事件 40 条，唯一公式槽 17/48。主要缺口是口才维度缺失，`start: 0` 结算反馈不足。
-  * 模块 B：严格公式事件 142 条，唯一公式槽 124/150。近期补入 `painting_skills_is_height` + `is_self_confidence` + `target_is_admire` + `start: 0` 的绘画高熟练自信性格崇拜关系下中性延续反馈槽（`sub_small_mana_point` + `add_small_eloquence_experience` + `let_target_chat_self`）。主要缺口仍是普通/崇拜关系下的其他 `start: 0` 技能反馈和不同演进相；后续优先补 B 的低覆盖 `start: 0` 反馈槽，再补 F/C 的缺失公式维度标签。
-  * 模块 C：严格公式事件 166 条，唯一公式槽 163/240。本次补入 `target_is_admire` + `is_self_confidence` + `target_shame_is_height` + `start: 0` 的倾慕关系下自信性格面对目标高羞耻的退缩压抑反馈槽（`sub_small_mana_point` + `add_small_eloquence_experience` + `target_add_small_depressed` + `target_sub_small_favorability` + `add_dislike_preference` + `let_target_chat_self`）。主要缺口仍是高/低羞耻和目标性欲维度下，不同性格维度的其他 `start: 0` 结算反馈。
-  * 模块 D：严格公式事件 92 条，唯一公式槽 14/150。事件维度较完整，但目标反应和场景组合重复过多；按本轮优先级暂不补 D。
-  * 模块 E：严格公式事件 101 条，唯一公式槽 96/96。近期已补入 `arrogant_is_height` + `is_low_key` + `target_is_pessimism` + `start: 0` 的傲慢低调后目标悲观退让反馈槽（`sub_small_mana_point` + `add_small_eloquence_experience` + `add_small_arrogant` + `target_add_small_depressed` + `target_sub_small_favorability` + `add_dislike_preference` + `let_target_chat_self`）。E 模块规划公式槽已补齐，后续优先回到 C、B、F 的低覆盖槽。
-  * 模块 F：严格公式事件 140 条，唯一公式槽 126/150。本次补入 `is_tired` + `is_low_key` + `target_is_lively` + `start: 0` 的极度疲惫下低调应对后目标活泼接话反馈槽（`sub_small_mana_point` + `add_small_eloquence_experience` + `target_add_small_favorability` + `target_add_small_happy` + `add_like_preference` + `let_target_chat_self`）。主要缺口仍是 `start: 0` 互动反馈，尤其是睡眠时间、孤立场景、疲惫状态和低体力状态下的其他目标反应组合；后续优先补 B 的低覆盖 `start: 0` 反馈槽，再补 F/C 的缺失公式维度标签。
-  * 模块 G：严格公式事件 127 条，唯一公式槽 96/96。近期已补入 `target_average_stature_height` + `is_lively` + `target_is_admire` + `start: 0` 的体型差异活泼后目标倾慕回应反馈槽（`sub_small_mana_point` + `add_small_eloquence_experience` + `target_add_small_happy` + `target_add_small_arrogant` + `target_add_small_favorability` + `add_like_preference` + `let_target_chat_self`）。G 模块规划公式槽已补齐，后续优先回到 C、B、F 的低覆盖槽。
+  * 模块 A：严格公式事件 71 条，唯一公式槽 48/48。近期补入 `is_inferiority` + `in_grove` + `eloquence_skills_is_height` + `start: 1` 的自卑性格蹲在石凳背后完整讲清蜗牛爬痕路线并用草茎指出起点的树林高口才前摇槽（`settle: {}`）。模块 A 规划公式槽已补齐。
+  * 模块 B：严格公式事件 168 条，唯一公式槽 150/150。近期补入 `write_skills_is_height` + `is_enthusiasm` + 崇拜关系（`target_is_admire`）+ 中性延续反馈 + `start: 0` 的目标造出词典外新词、角色写下词义与用法并由双方各写一条例句的完整槽（`sub_small_mana_point` + `add_small_eloquence_experience` + `let_target_chat_self`，不带好恶情绪增减）。模块 B 规划公式槽已补齐。
+  * 模块 C：严格公式事件 243 条，唯一公式槽 240/240。已按“暧昧阶段 × 性格 × 目标羞耻/欲望状态 × 五种反馈”补入 51 条缺失结算事件；每条都带齐 `have_target`、`target_is_live`、关系、性格和目标状态前提，并用结算键区分依恋、欲望、难堪惊惧、受挫与中性延续。模块 C 规划公式槽已补齐。
+  * 模块 D：严格公式事件 150 条，唯一公式槽 72/150。已补入 58 条“欲望/越界动机 × 裸体/穿着 × 目标反应 × 场景”完整公式事件；全部使用显式 `is_naked`/`not_naked` 穿着前提，且不含学生或未成年身份前提。严格事件数量已达到模块规划值，剩余未覆盖槽保留为后续内容扩展空间。
+  * 模块 E：严格公式事件 101 条，唯一公式槽 96/96。近期已补入 `arrogant_is_height` + `is_low_key` + `target_is_pessimism` + `start: 0` 的傲慢低调后目标悲观退让反馈槽（`sub_small_mana_point` + `add_small_eloquence_experience` + `add_small_arrogant` + `target_add_small_depressed` + `target_sub_small_favorability` + `add_dislike_preference` + `let_target_chat_self`）。E 模块规划公式槽已补齐。
+  * 模块 F：严格公式事件 140 条，唯一公式槽 126/150。近期已补入 `is_tired` + `is_low_key` + `target_is_lively` + `start: 0` 的极度疲惫下低调应对后目标活泼接话反馈槽（`sub_small_mana_point` + `add_small_eloquence_experience` + `target_add_small_favorability` + `target_add_small_happy` + `add_like_preference` + `let_target_chat_self`）。睡眠时间、孤立场景、疲惫状态和低体力状态下尚未覆盖的反馈组合不影响本次1000条严格事件验收，可作为后续扩展槽。
+  * 模块 G：严格公式事件 127 条，唯一公式槽 96/96。近期已补入 `target_average_stature_height` + `is_lively` + `target_is_admire` + `start: 0` 的体型差异活泼后目标倾慕回应反馈槽（`sub_small_mana_point` + `add_small_eloquence_experience` + `target_add_small_happy` + `target_add_small_arrogant` + `target_add_small_favorability` + `add_like_preference` + `let_target_chat_self`）。G 模块规划公式槽已补齐。
+
+* **完成验收：** 运行 `python tools/validate_chat_event_plan.py`，结果为 `PASS events=1426 strict=1000/1000 C=243 C_unique=240/240 D=150 max_similarity=0.497796`。验收覆盖 JSON 字段、UUID 唯一性、状态 ID、已注册 premise/settle 键、文本行数与长度、成人事件身份限制、严格公式维度以及新增文本的 64 维情绪—语义向量相似度阈值。

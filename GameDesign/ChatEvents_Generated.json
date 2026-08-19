@@ -974,13 +974,13 @@
         "adv_id": "",
         "status_id": "5",
         "start": 1,
-        "text": "{Name}的视线停留在{TargetName}的胸部布料上\n{Name}低下头将视线转移至自己的脚尖位置\n双臂在身前交叉重叠\n「衣服的尺寸会有偏差吧」\n{Name}收紧手腕处的肌肉",
+        "text": "{Name}的视线停留在{TargetName}的胸部布料上\n{Name}低下头将视线转移至对方的脚尖位置\n双臂在身前交叉重叠\n「衣服的尺寸会有偏差吧」\n{Name}收紧手腕处的肌肉",
         "premise": {
-            "chest_is_cliff": 1,
-            "target_chest_is_not_cliff": 1,
             "is_inferiority": 1,
             "have_target": 1,
-            "target_is_live": 1
+            "target_is_live": 1,
+            "chest_is_not_cliff": 1,
+            "target_chest_is_cliff": 1
         },
         "settle": {}
     },
@@ -3936,12 +3936,12 @@
         "start": 0,
         "text": "{TargetName}抬起手臂\n手掌停留在{Name}的头顶\n手指顺着头发的纹理向下滑动\n「现在的样子就很好」\n{Name}的双肩向下回落",
         "premise": {
-            "chest_is_cliff": 1,
-            "target_chest_is_not_cliff": 1,
             "is_inferiority": 1,
             "target_is_tolerant": 1,
             "have_target": 1,
-            "target_is_live": 1
+            "target_is_live": 1,
+            "chest_is_not_cliff": 1,
+            "target_chest_is_cliff": 1
         },
         "settle": {
             "target_add_medium_favorability": 1,
@@ -13296,10 +13296,10 @@
             "target_is_live": 1,
             "target_not_stranger": 1,
             "no_have_other_target_in_scene": 1,
-            "chest_is_cliff": 1,
-            "target_chest_is_not_cliff": 1,
             "is_inferiority": 1,
-            "target_shame_is_height": 1
+            "target_shame_is_height": 1,
+            "chest_is_not_cliff": 1,
+            "target_chest_is_cliff": 1
         },
         "settle": {
             "sub_small_mana_point": 1,
@@ -20413,10 +20413,10 @@
             "have_target": 1,
             "target_is_live": 1,
             "target_not_stranger": 1,
-            "chest_is_cliff": 1,
-            "target_chest_is_not_cliff": 1,
             "is_inferiority": 1,
-            "target_shame_is_height": 1
+            "target_shame_is_height": 1,
+            "chest_is_not_cliff": 1,
+            "target_chest_is_cliff": 1
         },
         "settle": {
             "sub_small_mana_point": 1,
@@ -20721,10 +20721,10 @@
             "have_target": 1,
             "target_is_live": 1,
             "target_not_stranger": 1,
-            "chest_is_cliff": 1,
-            "target_chest_is_not_cliff": 1,
             "is_inferiority": 1,
-            "target_rage_is_height": 1
+            "target_rage_is_height": 1,
+            "chest_is_not_cliff": 1,
+            "target_chest_is_cliff": 1
         },
         "settle": {
             "sub_small_mana_point": 1,
@@ -25410,6 +25410,4471 @@
             "target_add_small_favorability": 1,
             "target_add_small_happy": 1,
             "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "ea11f784-c905-4897-88c4-f3fe3e10746d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}分配{TargetName}往后的夜晚\n{TargetName}要求从今晚开始\n{Name}索要同一张床\n{TargetName}把床位一并交出",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_beyond_friendship": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_lust": 1,
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "66ca4f23-d626-4341-9dbd-30a8e54f3c70",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "画页底边被{Name}抬高\n积水汇拢后由吸水纸带走\n{TargetName}复做两遍\n讨论换到下一层颜色",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "painting_skills_is_height": 1,
+            "is_rigorous": 1,
+            "target_is_admire": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "db5adbf9-d87b-425c-874a-22cb4299a3f6",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}说「坐到我腿上」\n{TargetName}跨坐上去",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_beyond_friendship": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_lust": 1,
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "098489bc-43dc-4746-8db3-71be5559c319",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}出了一道谜语\n谜底写作{TargetName}\n{TargetName}猜成{Name}\n{Name}同时判对\n两个谜底被{TargetName}连读",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "is_beyond_friendship_target": 1,
+            "is_lively": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6420832b-8c19-4974-afb7-802f2b69896f",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}主持一场假婚礼\n{TargetName}兼任来宾和新人\n誓词念到每晚同床\n{TargetName}删掉婚礼前的假字",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "is_beyond_friendship_target": 1,
+            "is_lively": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_lust": 1,
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "0ff86d40-cd13-4738-b46d-2f871141cfe1",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把恋人名额放上拍卖\n价码从牵手起算\n{TargetName}背对{Name}举手\n又把价码加到接吻\n举起的手没有放下",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_beyond_friendship": 1,
+            "is_lively": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "923c7c1f-1b3c-4853-8665-d967126fbfc8",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}连着示范三种吹法\n{TargetName}滴下一团墨水\n又将底页调转\n墨痕分叉后相接",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "painting_skills_is_height": 1,
+            "is_enthusiasm": 1,
+            "target_is_admire": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "898ceff7-ba99-4f99-8fea-8166f239deeb",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}用伴字让{TargetName}组词\n{TargetName}在侣字前合住嘴唇\n{TargetName}改用云字出题\n{Name}答了云朵",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_lively": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "16d90964-1d3f-4a72-8277-5834c5644979",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}掐着脉搏数至第十拍\n第十拍改叫{TargetName}\n{TargetName}屈指补拍\n漏拍又被{Name}叫作同名\n{TargetName}撤手后漏报余数",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "is_beyond_friendship_target": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "32f64bcc-3811-460e-8181-481933e5830f",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}口述独占床伴契约\n{TargetName}在末栏签押\n{Name}补记签押后生效\n纸卷滑进{TargetName}袖筒\n印泥留在腕弯",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "920e112a-62c5-481f-b587-3b37cd48d8c7",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}分配同居身份\n{Name}自选访客\n{TargetName}改填住户\n{TargetName}念住字时呛咳",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_beyond_friendship": 1,
+            "is_inferiority": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "a1a4dce3-b4f4-4340-86d0-f8703fc1e20a",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}编写一则征婚启事\n对象栏填入{TargetName}\n期限栏填作终身\n{TargetName}申请撤下启事\n{Name}宣读报名成功",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_beyond_friendship": 1,
+            "is_self_confidence": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "eb72f178-4ad1-4655-9958-90367b5b320b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{TargetName}请求{Name}在臀缝旁侧咬出齿印\n{Name}改要把姓氏烙进皮下\n烙印还要保留终身\n{TargetName}把臀部转离{Name}",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "is_beyond_friendship_target": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "1d3ade9f-e480-40d5-a582-257778f6367a",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}宣布通话规矩\n听筒由{TargetName}先放回去\n{TargetName}索要缘由\n{Name}要听完道别\n话费被{TargetName}列成算式",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6369bc43-edff-4227-afbe-955ca863c33d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}请{TargetName}代拟遗嘱\n受益栏写入{TargetName}\n合葬条款由{Name}追加\n墓位序号改作同号\n{TargetName}噤声并退后三步",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_beyond_friendship": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6352f152-a46c-4026-a1e9-027851663a74",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}摊出暗号表\n叩击左耳代表惦记{Name}\n{TargetName}十指反扣腰后\n「免了」\n{Name}涂黑右耳栏的释义",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "5b71b553-556d-484b-b487-ff68e261eccd",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}用换气次数限定{TargetName}对视的时长\n{TargetName}数到四便呛咳\n第五次被转脸略过\n计数改由{TargetName}接管",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "bc7f7ee6-1571-4031-ae1b-fe8d0476672a",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}将两支牙刷竖进漱口缸\n{TargetName}拔出自用那支\n刷柄沿缸口挪过半周\n又被{TargetName}竖回{Name}牙刷旁\n缸底承下两股滴水",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "deb3ccf6-791f-4790-a975-a918629a04d7",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把转笔刀列为被告\n刀口侵占笔杆的罪状由{Name}宣读\n{TargetName}竖起三角板宣判\n刨花归还原告",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_lively": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_lively": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "45d223a9-8bfe-4276-87d6-4bb1aeb96c88",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}拍响双掌把「礼堂」说成「梨糖」\n下句又换了两次读音\n{TargetName}把糖块充作第二个字\n{Name}在练习纸写回「礼堂」",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_lively": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_tolerant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "aee348ef-44f2-47d0-93db-016930c23c60",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}倒退到菜目板前念全各栏菜名\n{TargetName}用饭勺掩住荤菜栏\n荤菜名称被{Name}报准\n饭勺滑向汤品栏",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_lively": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_childish": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "95956e5f-329d-489b-890c-2134001331c5",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}用筷套拼出九格棋盘\n吃子规则改了三回\n{TargetName}将菜票叠作棋子跳过中格\n{Name}把边线扩到落点外",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_lively": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_lively": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "29042efd-369a-4ff5-86e9-8062bb13a35c",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "{Name}伏在蚁路旁\n蚂蚁跨过草梗的先后被串成故事\n叶屑搬运填入末段\n{Name}招手让{TargetName}靠向土缝",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_lively": 1,
+            "eloquence_skills_is_height": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "0671d2d5-be8a-44d2-833b-5ae01c3a6297",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}铺开五片树叶\n每道叶脉被定作题签\n{TargetName}抽中断柄叶片\n{Name}为它配完一则见闻",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_lively": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_childish": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "a53725c6-d4b9-49a6-88aa-cd9f5e606445",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把树壳翘边叫作留言箱\n箱字后接了两声哑音\n{TargetName}在纸签记下问句\n纸签被送进翘边",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_lively": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_tolerant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "d5809021-3d63-4114-b489-fa4c70e5acd6",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把失踪板擦的去向讲成六站\n每次转手都对上课桌号\n{TargetName}从算术册夹层抖出板擦\n它由{TargetName}归入粉笔槽",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_enthusiasm": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_tolerant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "b513f1b7-859e-4c8f-8b38-12a2a47f5cef",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把画报四格讲成五段\n第三段又回到第一幅\n{TargetName}折起报角显出末格\n{Name}用尺角标回格序",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_enthusiasm": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_tolerant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "bece8493-1e13-401b-8ada-60b9e43bd81b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}按四枚取餐号讲过邻桌换盘经过\n四次换手首尾相接\n{TargetName}在出餐口铺下四枚号牌\n末位先被窗口叫到\n{Name}掌侧抵上碟沿撤掉第三程",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_enthusiasm": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_rigorous": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_shame": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6a80e212-7ee7-4b4f-a2c0-06be3214a96d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "{Name}喊住{TargetName}后拣出三粒花生\n匙柄将它们分到铁盘各角\n「那桌的人先挨着水壶又挨着筷筒还」\n一粒花生被送回杯侧\n{Name}张嘴后只吹动一片花生皮",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_enthusiasm": 1,
+            "eloquence_skills_is_low": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "26ccf229-6a34-44a1-afa4-ffcaa162db19",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把面条两头都叫作这一头\n匙柄在两头间换了三回\n{TargetName}将两缕面条缠成活结\n{Name}与{TargetName}各握一双竹筷\n面结由两双竹筷托离汤面",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_enthusiasm": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_lively": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "f1f82c59-ae01-4b35-92b7-ce805c5d07bc",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}沿鞋印讲过绕树追赶经过\n拐弯处各有折枝断口\n{TargetName}踩进第四处土印\n「最后是我」\n{Name}把折枝插到那处土边",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_enthusiasm": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_staraightforward": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "242e6ceb-2fde-4797-a482-c6c9288f99f3",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "果荚嵌进{Name}鞋带结\n{Name}招呼{TargetName}看鞋面\n「它像谁的发辫不对是」\n鞋带结被{Name}撑开",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_enthusiasm": 1,
+            "eloquence_skills_is_low": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "8a82ed01-5685-4758-aafe-8a8cff808b2b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "鸟羽勾在{TargetName}发梢\n{Name}把鸟羽误叫成叶片\n{TargetName}将鸟羽夹上耳廓\n{TargetName}两臂展开\n{Name}两掌沿衣缝起落",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_enthusiasm": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_childish": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "068ab82f-a155-436e-9d77-607514d21c85",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "{Name}背对{TargetName}伏向课桌抽屉\n「绰号从右角改到左角时少了一横」\n下句带出写字者的排号\n{Name}小臂抵上抽屉内壁",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_solitary": 1,
+            "eloquence_skills_is_height": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "7dd477cd-3c41-46d5-9ea7-559ff9717e79",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在讲桌背侧讲过调座经过\n每个称谓连着排号\n{TargetName}把下颏送过讲桌底边\n{Name}耳廓贴向桌腿",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_solitary": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_childish": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_shame": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6088bc73-61a7-448c-a47d-92ccbf9244af",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把订书机叫成「咬纸的」\n{Name}下颏垂向课桌缝\n{TargetName}让订书机压柄起落\n钉仓滑到{Name}虎口外\n{Name}把作业角送进钉口",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_solitary": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_childish": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_shame": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "56f5fbf0-668e-4799-a282-7cfb6152fd94",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐盒内盖映出{TargetName}\n{Name}朝着内盖转述找零争执\n钱数与双方答话一一对应\n{TargetName}扶稳盖沿\n{Name}合起餐盒",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_solitary": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_tolerant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "c77b6abc-a927-43a2-b21d-520a64f485d5",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把纸巾叠作纸嘴\n断音挤过纸缝\n{TargetName}叠出第二张纸嘴\n两张纸嘴在饭盘边碰合\n{Name}把纸嘴摁平",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_solitary": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_childish": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_shame": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6dfe2035-d50e-4849-8258-f73b01cd8d3e",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "{Name}与{TargetName}各站树身一面\n「左边署名先刻下年月补在底边右边两笔改过三次」\n整句没有断音\n{Name}拇甲触到末道凿口",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_solitary": 1,
+            "eloquence_skills_is_height": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "59c7111e-9eb6-4ac2-8a08-242050084e1e",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}背向{TargetName}沿树间行走\n「头一次调了窗边那桌第二次是后排第三次才是我」\n枝条拦在{Name}肩前\n{TargetName}架高枝条\n{Name}俯身跨过枝条",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_solitary": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_tolerant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "769978cb-6b9a-4139-ad7e-bf965593da88",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}屈膝停在露根另一边\n露根被{Name}叫作树脚\n{TargetName}将鞋头并齐根端\n根须又成了{Name}口中的脚趾\n{TargetName}在鞋内屈起脚趾",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_solitary": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_childish": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_shame": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6610f918-4d81-4649-bcfa-1060a77a4374",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "方凳被{Name}拖出末排\n{Name}与{TargetName}分处桌排两头\n「伞先借给门边那位午后交到第二排放学前回到这里」\n{Name}没有落座\n指节挂住方凳边沿",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_inferiority": 1,
+            "eloquence_skills_is_height": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "c3f5835f-a466-4e79-9d97-d6bc630af152",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "窗帘垂在{Name}鼻尖前\n「牌子先挂在门后午间移去板槽课前又回到墙钩」\n{TargetName}从帘底推来值日牌\n{Name}将值日牌拉进帘后\n帘角盖回值日牌上",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_inferiority": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_tolerant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_shame": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "86b24e3a-bbcf-4a4b-bdce-9b25bd5d4365",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}从桌沿下探出双指\n「俩」\n{TargetName}把双指举过发旋\n{Name}的双指退回桌沿下\n{TargetName}发旋后的双指屈起又伸直",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_classroom": 1,
+            "is_inferiority": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_childish": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_shame": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "af576b4a-0a68-43eb-aa8c-b4c3285f71fa",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "{Name}双膝托着饭盘\n「第一桌收走凳子到了第二桌人都换去窗边第三桌只留下我」\n{TargetName}隔着空凳落座\n{Name}鞋头探进凳档下",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_inferiority": 1,
+            "eloquence_skills_is_height": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "28ae6885-1b9f-4244-8c27-5c00c585ec71",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}下颏藏在售饭窗沿下\n「汤勺落在饭桶旁午后送去洗碗池回收时又进了筷笼」\n{TargetName}屈膝把下颏藏进窗沿下\n{Name}将汤勺搁上窗沿",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_inferiority": 1,
+            "eloquence_skills_is_height": 1,
+            "target_is_childish": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_shame": 1,
+            "target_add_small_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "610a2f72-abb6-48d3-afe9-966a0e069cd1",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "{TargetName}袖角垂向汤碗\n{Name}把餐桌号牌移到袖角下\n「袖 你」\n袖角压住牌顶\n{Name}双手撤到托盘背面",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_inferiority": 1,
+            "eloquence_skills_is_low": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "67d823f6-df5a-436c-ade4-1ff5fcec316d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把一双竹筷放进碗筐\n「筷 筐」\n{TargetName}将那双移进筒口\n{Name}端着空碗退到回收台侧\n碗沿停在筐口外",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_restaurant": 1,
+            "is_inferiority": 1,
+            "eloquence_skills_is_low": 1,
+            "target_is_rigorous": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_shame": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "d7e04328-57aa-4687-b965-eabc04400a1a",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "{Name}蹲在石凳背后\n「蜗牛从苔边爬上凳面绕开裂缝又沿侧边回到草茎下」\n{Name}把草茎压向爬痕起点\n{TargetName}鞋尖停在石凳前\n{Name}肩头缩到凳面下",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "in_grove": 1,
+            "is_inferiority": 1,
+            "eloquence_skills_is_height": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "30b6474f-52a6-49e9-a05f-d19e9ae9b22e",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把两张故事末页压在膝上\n「左页让守门人回家右页让他守到天亮」\n{TargetName}将两页首行并齐\n{Name}把左页收进书封\n右页停在{TargetName}膝前",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "literature_is_height": 1,
+            "is_self_confidence": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e4ae8970-9dd7-4154-8772-c465df6a1533",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}用纸带盖住故事里的姓名\n「不看名字也能从三句答话分出三个人」\n{TargetName}沿纸带念到换行处\n{Name}把纸带移到后段\n三句答话留在纸带外",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "literature_is_height": 1,
+            "is_self_confidence": 1,
+            "target_is_admire": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "5f56ba7a-9d1e-41f9-8d15-e1e3cdfd5d65",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把三封信的落款写在书签上\n「第二封没有收信人所以要夹在第三章前」\n{TargetName}将书签插进章节之间\n{Name}按住签尾看过章号\n书签边露出半行",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "literature_is_height": 1,
+            "is_rigorous": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "36f02b4b-4a09-4da6-b5ce-862375fd7d5d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}用两个火柴盒隔出故事里的两间屋\n「门没开前里屋的答话不能放进外屋那段」\n{TargetName}把姓名纸片移回盒外\n{Name}将盒盖横在两盒之间\n纸片停在盒盖外",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "literature_is_height": 1,
+            "is_rigorous": 1,
+            "target_is_admire": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6cf33c31-616a-43bd-8713-12354256dd85",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在纸袋三面写下吱嗒当\n「门轴用吱雨点用嗒锅盖落下用当」\n{TargetName}依次按过三面\n{Name}把纸袋翻到第四面\n第四面留给{TargetName}",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "literature_is_height": 1,
+            "is_enthusiasm": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "b8d9e6cc-8164-4cdd-8be8-2e915d25f718",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把九张字卡摆成一列\n「上海自来水来自海上」\n{TargetName}捏住右端字卡\n{Name}每次取走首尾两张\n中间的水字留在桌面",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "literature_is_height": 1,
+            "is_enthusiasm": 1,
+            "target_is_admire": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "677890dd-3a55-478f-9abf-761537796d67",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把报纸标题裁成六条\n「字面朝里只留笔画宽窄」\n{Name}将六条穿成方格\n{TargetName}托住方格转过一周\n{Name}指甲压平交叉处",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "art_is_height": 1,
+            "is_self_confidence": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_arrogant": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e8b89adb-aa1a-4c91-8d7b-7b26baced0d3",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把泥团压出三道起伏\n「先留住中间再把两边推开」\n{TargetName}用线绳切下底部\n{Name}拇指掏开背面\n切面贴上{Name}掌根",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "art_is_height": 1,
+            "is_self_confidence": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "bf375493-5909-42ab-9ebf-d6f4763e73f3",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{TargetName}把皂块推到{Name}肘边\n{Name}削平表面再刻下反字\n「印下去才会变成正字」\n{TargetName}把刻面按进印泥\n{Name}握住皂块压向木片",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "art_is_height": 1,
+            "is_self_confidence": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "5d09c5fb-2e9e-4297-8f6c-b1a3c2db62ff",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "{Name}把铜丝弯成两个套环\n瓷片穿进其中一环\n「它下沉就把接头往里移」\n{Name}托住接头\n套环转到{TargetName}眼前",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "art_is_height": 1,
+            "is_self_confidence": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "c0900b81-7fc4-4d0e-a514-0a818eac52ac",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}解开布结露出一圈白线\n{TargetName}把蘸色棉团移向白线\n「这里漏染了」\n{Name}将棉团按回染盘\n布角盖住白线",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "art_is_height": 1,
+            "is_self_confidence": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_small_depressed": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "d15089bd-75bc-460e-aa45-6f244e095b58",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "蛋壳碎片排成四列\n{Name}用尺角量过胶面空隙\n{TargetName}举起一片等在旁边\n「弧面朝上」\n碎片压入{Name}标出的格内",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "art_is_height": 1,
+            "is_rigorous": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_arrogant": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "83c2679f-f68c-4f79-b7d4-f75d3ec1e539",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "十二枚图钉围住纸板圆边\n{Name}把棉线从第一枚拉到第四枚\n「每次往前数三格」\n余线搭在{TargetName}虎口旁",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "art_is_height": 1,
+            "is_rigorous": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "f0ea3867-95b9-47a3-baea-53d09229a914",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把三片镜面合成筒\n玻璃珠从{TargetName}掌心滚入夹层\n「三条接缝都要贴紧」\n{Name}逐边按过接缝\n筒身在两人指间转过半圈",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "art_is_height": 1,
+            "is_rigorous": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "76d5f266-e9de-4978-bbe5-25c3be327753",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "票本下角排着八个抬臂动作\n{TargetName}用拇指拨过票边\n「第四页低了半格」\n{Name}翻回那页\n票本垫在{TargetName}指甲下",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "art_is_height": 1,
+            "is_rigorous": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "816b253a-b126-49ad-bbc2-681f46a6fd64",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "{Name}在纸杯底扎出五个孔\n手电筒贴住杯口\n五个光点落到{TargetName}袖口\n「转杯子光点就会换位」\n{Name}握住杯沿转过半周",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "art_is_height": 1,
+            "is_enthusiasm": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "a3381bbe-a25e-4f1c-a3f9-ff8de98a5d9e",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "旧挂历一角被{Name}剪成梳齿\n{Name}让纸齿互相咬合成圆环\n{TargetName}接过余料补上末齿\n圆环套过{TargetName}的手掌\n{TargetName}将接口折紧",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "art_is_height": 1,
+            "is_enthusiasm": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_performance_experience": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_small_arrogant": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "ae506b54-2067-40bd-a118-4bc003a39338",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "橘皮被{Name}撕成六块\n六块弯边围住一滴水\n{TargetName}翻过其中两块露出白瓤\n{Name}移开对面的两块\n水面留下两种颜色的倒影",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "art_is_height": 1,
+            "target_art_is_height": 1,
+            "is_enthusiasm": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_performance_experience": 1,
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "25458d22-7212-4bd0-808b-76ff33c6be09",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "牙刷毛蘸过稀墨\n{Name}用指腹弹出一排墨点\n{TargetName}抽走垫在下方的麻绳\n布片露出一道无墨弯线\n牙刷柄落到{TargetName}指间",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "art_is_height": 1,
+            "is_enthusiasm": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_performance_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "79d0c840-bd6c-4774-8e96-05cd1c8616c2",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 1,
+        "text": "镜片被{Name}呵出一层雾\n指甲在雾面划出三层屋檐\n{Name}转动镜架让线条重叠\n{TargetName}托着镜腿看向透光处\n雾线在镜片上缩短",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "art_is_height": 1,
+            "is_enthusiasm": 1
+        },
+        "settle": {}
+    },
+    {
+        "uid": "e63da8c0-acce-4683-8ee4-bac0c183e588",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "软木塞由{Name}削出方印\n{TargetName}把塞面压进白浆\n方印落成一道斜痕\n{Name}抽走垫板\n{TargetName}捏着塞柄没有再落印",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "art_is_height": 1,
+            "is_enthusiasm": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_performance_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_small_depressed": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "4f2a2876-f946-48c4-9198-c03b043f1751",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "三枚易拉罐拉环被{Name}错扣\n{TargetName}托住中间那枚\n{Name}将两侧拉环翻成直角\n三个孔位排成折线\n折线由{TargetName}转向下一面",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "art_is_height": 1,
+            "is_enthusiasm": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_performance_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "548b5d75-535c-44c9-a27a-14ec0f40b5e0",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}先以自己的口吻讲完一场争执\n同一段又改成旁观者所见\n{TargetName}指出两处相反的细节\n{Name}保留两种说法\n下一个视角交给{TargetName}",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "write_skills_is_height": 1,
+            "is_self_confidence": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "ebc6fcab-ae90-43fc-9783-ac9bf0240f8c",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{TargetName}说出一个词典里没有的词\n{Name}为它写下词义和用法\n首条例句从{Name}开始\n{TargetName}把新词放进第二条例句\n两种用法并列在词义后",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "write_skills_is_height": 1,
+            "is_enthusiasm": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "414e7e23-5fa8-4504-961d-8078f9fd2c1c",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}让两人同时报出想见的人\n两人开口时{Name}喊出{TargetName}\n{TargetName}停过两次才报出另一个名字\n两个名字没有重合\n{Name}没有再喊第二遍",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "64588af5-3cb5-416f-a4a2-d7204ffbb75d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}让{TargetName}扮作赴约回来的人\n{TargetName}只讲出门前经过\n{Name}问起回程\n{TargetName}又把话接到出门前\n{Name}改问同行人数",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "2214dc3b-a84c-41a2-81d4-81cca22a69c9",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把一句问话吹成两段口哨\n前段问谁留到最后\n{TargetName}没有开口\n后段由{TargetName}吹向{Name}\n{Name}接回同一声口哨",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "3674c167-22ab-41eb-9290-b1359d6044cf",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}捏住鼻子叫{TargetName}\n{TargetName}照做后叫出{Name}\n两个名字都变了音\n{Name}松开鼻子再叫一次\n{TargetName}仍捏着鼻子回应",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_self_confidence": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "0bd16cd6-1cda-4745-b074-40057fbafc13",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}问{TargetName}性交中要停时说什么\n{TargetName}说「关窗」\n{Name}问放慢动作该说什么\n{TargetName}说「留灯」\n{Name}把两个说法各重复一遍",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "5ef053cd-c837-4a30-8a31-8842c3d76848",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}说性交后的床单归自己洗\n{TargetName}把枕套也分给{Name}\n{Name}连被套一起认下\n{TargetName}提出两人共同晾晒",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "a5c15b2e-3819-4b50-9db7-ef5e25adb86b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}撑开气球口朝向{TargetName}\n「高潮后的第一口气留给我」\n{TargetName}捂住嘴后把气吹进气球\n{Name}系紧气球结\n{TargetName}把气球按回{Name}胸前",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "86e1bb90-58a1-4ef2-9485-8b5359868a75",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}规定{TargetName}自慰前先打来电话\n{TargetName}说自己不会开口\n{Name}把第一句话替{TargetName}说完\n{TargetName}的回答停在喉咙里",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "eea0f2b0-dab4-425f-852f-a618abe5ff35",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}要求{TargetName}拍下裸体照片只给{Name}\n{TargetName}扣上镜头盖\n{Name}又把镜头盖取下\n{TargetName}抽出胶卷片头\n片头被扯断",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "197f6a7e-ce3d-457e-927b-ddbcebef85cf",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}折出一只纸耳\n{Name}说自慰的事只许对纸耳讲\n{TargetName}朝纸耳讲起自慰\n{Name}把纸耳贴到自己耳旁",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "32f2e686-544c-5f95-9f9b-a861762c82f5",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在电话本末页写下备用号码\n{Name}没有移开注视\n{TargetName}用手背挡住脸颊\n{TargetName}照着{Name}的安排完成动作\n{TargetName}把接听时段圈在号码旁",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_self_confidence": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6cd14d8a-bc5e-5d21-9243-01bcb084a209",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}将两张返程票压在掌下\n{Name}没有移开注视\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}抽走靠窗的那一张",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "ba8b1488-86af-5004-9ee1-464090ce3951",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把门牌背面的空格留给{TargetName}\n{Name}没有移开注视\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}写下自己的姓",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "0ac900e1-52b2-5f3b-a37b-b2f77417f053",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在日历上划出同一天\n{Name}要求这件事只由两人保留\n{TargetName}贴近{Name}缩短了距离\n{TargetName}照着{Name}的安排完成动作\n{TargetName}把那一格折向内侧",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "b4ef29ad-2bb3-5243-a7d5-3d643d18ecd8",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把伞柄转到{TargetName}手边\n{Name}要求这件事只由两人保留\n{TargetName}贴近{Name}缩短了距离\n{TargetName}照着{Name}的安排完成动作\n{TargetName}握住伞柄下端",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "853d81ec-628a-5c3d-abea-5443c6eef545",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}将闹钟拨到同一刻度\n{Name}要求这件事只由两人保留\n{TargetName}贴近{Name}缩短了距离\n{TargetName}照着{Name}的安排完成动作\n{TargetName}按下背后的开关",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "32b0907c-55f7-569d-bb31-bf4fb96a5558",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把两个茶杯并到一起\n{Name}要求这件事只由两人保留\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}调换了杯子的位置",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "7c4c83fa-845e-534a-9f1b-ed56c631cbfa",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把围巾中段搭上{TargetName}肩头\n{Name}要求这件事只由两人保留\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}收紧另一端",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "2a443816-72c7-5153-afe9-cd0f0bcaff30",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}翻到相册里空着的一页\n{Name}要求这件事只由两人保留\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}把照片角塞进卡槽",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "047d34ac-3f4c-5dd3-997e-f18683e3ce9b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}将书签夹进故事末章\n{Name}要求这件事只由两人保留\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}又把它移回开头",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "4b8a5a04-375e-5e32-9ccb-95da5ddedf03",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把盆栽的浇水日期写成双数\n{Name}用指尖敲出三下节拍\n{TargetName}贴近{Name}缩短了距离\n{TargetName}照着{Name}的安排完成动作\n{TargetName}接过剩下的日期",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "925b0b3c-7c87-5671-b3a5-9bc9824a3b1e",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}旋动收音机的调频钮\n{Name}用指尖敲出三下节拍\n{TargetName}贴近{Name}缩短了距离\n{TargetName}照着{Name}的安排完成动作\n{TargetName}在杂音停下时按住旋钮",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "a1b12fb0-25d7-552c-9eea-f1fc692820fb",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把备用钥匙穿进细绳\n{Name}用指尖敲出三下节拍\n{TargetName}贴近{Name}缩短了距离\n{TargetName}照着{Name}的安排完成动作\n{TargetName}将绳结系在腕上",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "01140d57-80bc-5e4b-a3a1-a748138a0c60",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在信封收件栏写到一半\n{Name}用指尖敲出三下节拍\n{TargetName}贴近{Name}缩短了距离\n{TargetName}照着{Name}的安排完成动作\n{TargetName}补完余下地址",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "81167635-33f9-5655-a619-2a427ca38c97",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把印章按在纸页左边\n{Name}用指尖敲出三下节拍\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}在右边留下另一枚印记",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "4cfc1f89-410d-52be-8e5a-9468026cbcac",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}校准手表后递向{TargetName}\n{Name}用指尖敲出三下节拍\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}让两块表同时走动",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "cb0409f4-57d7-5b42-93ba-dcbe66844277",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}将两根鞋带接成一个结\n{Name}用指尖敲出三下节拍\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}拉紧结扣",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "8fb68bbe-c538-55e7-9c96-294c67aab915",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在扇面画出一条分界\n{Name}用指尖敲出三下节拍\n{TargetName}向后移开半步\n{TargetName}照着{Name}的安排完成动作\n{TargetName}越过分界添了一笔",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_admire": 1,
+            "is_lively": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e8044a9d-594c-5ebe-a43e-2ac50f1c2f60",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把手电筒光圈移到{TargetName}脚边\n{Name}说到一半便把声音压低\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}用鞋尖挡住光线",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "2561ac39-2dd6-5cf7-b388-9b2e63186271",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}取出收音机里的旧电池\n{Name}说到一半便把声音压低\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}装入另一节电池",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "17fe48fd-ec92-5991-87ce-5c577d957c0b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在账本上并列写下两个名字\n{Name}说到一半便把声音压低\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}把页角压平",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "064c4369-e607-5134-8eb1-a1b89175ace4",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}折好纸鹤的一侧翅膀\n{Name}说到一半便把声音压低\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}折出另一侧",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "a3db867b-5c54-5b0f-8aab-fcf385a5b665",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把两枚棋子放进同一格\n{Name}说到一半便把声音压低\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}没有挪开棋子",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "54c53879-547f-51a1-b7c9-8e851d36ec4f",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}留下拼图中央的缺口\n{Name}说到一半便把声音压低\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}将最后一片按进去",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "645df764-e9a5-5c24-a5f8-0c37c71966f7",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}撕下一对连在一起的邮票\n{Name}说到一半便把声音压低\n{TargetName}向后移开半步\n{TargetName}把最后的选择交给{Name}\n{TargetName}只取走其中一枚",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "512a0419-e3b1-53a5-bf7c-53c8ed02fdc5",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把发卡扣在纸条上\n{Name}说到一半便把声音压低\n{TargetName}向后移开半步\n{TargetName}把最后的选择交给{Name}\n{TargetName}将纸条折成两层",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "dad18f79-7fa0-576e-bd8b-76fb85508628",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}从衣袋里取出备用纽扣\n{Name}说到一半便把声音压低\n{TargetName}向后移开半步\n{TargetName}把最后的选择交给{Name}\n{TargetName}把纽扣缝回{Name}袖口",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "2cc92bb1-ab10-5a14-a3c7-075f2944b545",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}让硬币沿指节滚向{TargetName}\n{Name}说到一半便把声音压低\n{TargetName}向后移开半步\n{TargetName}把最后的选择交给{Name}\n{TargetName}用掌心接住硬币",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_inferiority": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e53a4781-fe1d-57d4-97ad-9cd42a3c5bb1",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把两张票根拼回原来的边线\n{Name}没有移开注视\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}按住接缝",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_self_confidence": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "9cbf34fa-36c6-5e41-9f3d-29cc0a8dd1dc",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}清空火柴盒后推过桌面\n{Name}没有移开注视\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}放入一张折好的纸片",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_self_confidence": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "2797bb14-160b-587a-bdf8-12c9e4a715ba",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在药盒背面标出服用次序\n{Name}没有移开注视\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}补上最后一次的时间",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_self_confidence": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "1d015c89-9754-5395-ba94-624bc8927354",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把毛巾搭在两人之间\n{Name}没有移开注视\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}将自己的那端叠起",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "1aa639a3-fb49-57cb-842e-95ebc6a0fe00",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把枕套开口翻向{TargetName}\n{Name}没有移开注视\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}塞入枕芯的一角",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "9df015a9-3240-5402-b951-eb1250db8867",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}捏住被角不肯松手\n{Name}没有移开注视\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}抓住相邻的被边",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "66a70d8d-00c4-586b-accf-db3367c24ff8",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在晾衣绳上夹住一张便笺\n{Name}没有移开注视\n{TargetName}向后移开半步\n{TargetName}把最后的选择交给{Name}\n{TargetName}用另一枚夹子固定便笺",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "779d0cd6-9b26-54a5-8aa7-e62ee4f6cc6d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把牙刷杯移到水池中央\n{Name}没有移开注视\n{TargetName}向后移开半步\n{TargetName}把最后的选择交给{Name}\n{TargetName}将另一只牙刷放进去",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_self_confidence": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "bec1f88b-1a05-5310-8e4b-da9cce97d951",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}从梳齿间取下一根头发\n{Name}要求这件事只由两人保留\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}把头发绕在指尖",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "50720aec-aaec-5504-a7cc-4a569262fe87",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}用手掌遮住镜面一半\n{Name}要求这件事只由两人保留\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}的脸停在另一半镜面里",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "94591e50-5d66-58d6-bbd4-af8b7e8e0625",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把胶卷片头递给{TargetName}\n{Name}要求这件事只由两人保留\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}将片头卷入暗盒",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "19520fb1-7c5f-5734-bebb-a16a844ca7e5",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}拆开圆珠笔留下空笔管\n{Name}要求这件事只由两人保留\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}装回新的笔芯",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "94ce1e9b-32a9-5247-8676-f3abfd88514d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在墨水瓶口刮净笔尖\n{Name}要求这件事只由两人保留\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}接过笔写下日期",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "a7869cfe-4429-5c63-ab02-2d8bc24fec23",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把橡皮切痕对准纸上的线\n{Name}要求这件事只由两人保留\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}沿线擦掉一个字",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6c250099-3fba-54f7-91a6-00a4ddd80d4d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}用尺子量出两掌的距离\n{Name}要求这件事只由两人保留\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}将尺子推回零刻度",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "0f0df8fa-d5f4-59f0-a55a-5b4a6321189d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在地图上按住一个路口\n{Name}要求这件事只由两人保留\n{TargetName}向后移开半步\n{TargetName}把最后的选择交给{Name}\n{TargetName}从路口画出返程线",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "88e80842-96ef-5021-b565-a9f9a68324c7",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把菜谱里的一人份改成两人份\n{Name}要求这件事只由两人保留\n{TargetName}向后移开半步\n{TargetName}把最后的选择交给{Name}\n{TargetName}重算了盐的用量",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "add_small_happy": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "b037082b-981b-52ec-930a-af1eb41cec52",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}将饭盒隔板抽出来\n{Name}要求这件事只由两人保留\n{TargetName}向后移开半步\n{TargetName}把最后的选择交给{Name}\n{TargetName}把两份食物并在一起",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_heavy_feeling": 1,
+            "target_lust_is_low": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "0dd33f97-d980-52d7-8e0e-0d6fce131fbf",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}在水壶外壳刻下一道线\n{Name}用指尖敲出三下节拍\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}让水面停在线上",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_lively": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "aa433a6d-d7ba-5d38-b953-a057a715d44f",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}展平一张糖纸\n{Name}用指尖敲出三下节拍\n{TargetName}用手背挡住脸颊\n{TargetName}把最后的选择交给{Name}\n{TargetName}沿折痕叠出方块",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_lively": 1,
+            "target_shame_is_height": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e26fc86c-417e-56cf-8ab4-841ff4b9a204",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把风筝线轴交给{TargetName}\n{Name}用指尖敲出三下节拍\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}放出一段线又收回",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_lively": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_yearn": 1,
+            "target_add_medium_favorability": 1,
+            "target_add_small_happy": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "d485324e-7207-535e-9033-c044de67a113",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}拆下门铃外壳露出按钮\n{Name}用指尖敲出三下节拍\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}按下按钮测试声响",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_lively": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_fear": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "bda6c07c-fbd9-5d70-8379-7d1275a630da",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "{Name}把两张借书卡叠在一起\n{Name}用指尖敲出三下节拍\n{TargetName}贴近{Name}缩短了距离\n{TargetName}把最后的选择交给{Name}\n{TargetName}将归还日期写成同一天",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "target_is_adore": 1,
+            "is_lively": 1,
+            "target_lust_is_hight": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_pain": 1,
+            "add_small_depressed": 1,
+            "target_sub_small_favorability": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "20bdb7ff-8ec6-5121-bc9a-685794fad5ab",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}身上的衣物没有脱下\n{Name}按实际操作次序说明\n{Name}说明避孕套的破损检查并等待回应\n{TargetName}接过话题继续补充并逐项复述检查顺序",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "not_naked": 1,
+            "target_is_indulge": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "3fe84379-b714-5b80-a2c8-4f2b04ca9733",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "喷泉水声盖过两人的音量\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明停止性交时使用的口令并等待回应\n{TargetName}接过话题继续补充并选定一个停止词",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_is_indulge": 1,
+            "in_fountain": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "8aa35f12-90c5-5c13-a396-4ceeabfe65ae",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明润滑液每次取用的分量并等待回应\n{TargetName}靠近后继续讨论并用指节比出用量",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "537b9554-f2b2-56ce-b529-cea95c5c0e3b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明避孕套宽度与肉棒尺寸的对应并等待回应\n{TargetName}靠近后继续讨论并报出适合的宽度",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "b8bab06b-aaef-54b5-a584-f6eca1dc15f9",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}身上的衣物没有脱下\n{Name}的呼吸没有变化\n{Name}说明自慰间隔与身体反应并等待回应\n{TargetName}没有回避问题并说出上次自慰的日期",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "not_naked": 1,
+            "target_shame_is_low": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "8f5db410-aec5-5855-9362-5ba0ab0adf09",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明梦里出现的性交姿势并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_lust_is_low": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "811dbb96-4fb6-5f2c-92d3-94db413099ff",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}身上的衣物没有脱下\n{Name}的呼吸没有变化\n{Name}说明两人偏好的性交体位并等待回应\n{TargetName}靠近后继续讨论并调整椅子示意角度",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "not_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "607d2f33-ddbe-52fc-9d2e-82b0ba8db3a0",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "空教室的门保持关闭\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明口交时舌头移动的节奏并等待回应\n{TargetName}靠近后继续讨论并在掌心点出节拍",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "8fdd9550-b748-5f3d-a295-7730d718b054",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明肛交前清洗肛门的步骤并等待回应\n{TargetName}靠近后继续讨论并补上清洗后的检查",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "52e00315-d8ef-51c3-a879-9b7865d9ad40",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "空教室的门保持关闭\n{Name}身上的衣物没有脱下\n{Name}的呼吸没有变化\n{Name}说明阴毛修剪后留下的长度并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "not_naked": 1,
+            "target_lust_is_low": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "fd225aa2-95e2-5a5f-b3d8-5053c5d467ae",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明乳头被触碰时的反应并等待回应\n{TargetName}接过话题继续补充并指向不能用力的位置",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_is_indulge": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "d3efae08-552a-5495-b52b-13aa919de9c3",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明高潮前呼吸变化的判断并等待回应\n{TargetName}接过话题继续补充并示范需要停下的信号",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_is_indulge": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "a1e67472-2b5f-5b35-bb62-6894b0c39260",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明性交结束后的清洗次序并等待回应\n{TargetName}没有回避问题并把毛巾也列入次序",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_shame_is_low": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "0f0d0f7c-9c4e-5b5c-8dca-035272b5d019",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明性玩具在住处的存放位置并等待回应\n{TargetName}遮住脸仍作出回答并否定了第一个位置",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_shame_is_height": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6ef2c629-13f9-50aa-b6dd-1feff3da2e6f",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "空教室的门保持关闭\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明捆绑手腕时绳结的松紧并等待回应\n{TargetName}遮住脸仍作出回答并要求留下两指空隙",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_shame_is_height": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e022784b-a116-5d18-9652-28c9828f4a0d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}保持裸体没有遮住下体\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明蒙眼之前再次确认同意并等待回应\n{TargetName}靠近后继续讨论并约定摘下眼罩的手势",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "cea278fa-7834-5168-b60d-3626a53b2484",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}身上的衣物没有脱下\n{Name}的呼吸没有变化\n{Name}说明角色扮演中不能使用的称呼并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "not_naked": 1,
+            "target_lust_is_low": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "1161bdf4-5ac0-5f9f-bd6b-2a2e03e84d28",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明裸体照片的保存期限并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_lust_is_low": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "4faee62d-ec6d-540a-8e09-f665969c2286",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}保持裸体没有遮住下体\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明短信里可以直写的性要求并等待回应\n{TargetName}接过话题继续补充并改短了一条短信",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "is_naked": 1,
+            "target_is_indulge": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "8077db07-b621-5217-839e-756c97058f6d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "空教室的门保持关闭\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明电话自慰时保持通话的时间并等待回应\n{TargetName}遮住脸仍作出回答并规定先挂电话的人",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_shame_is_height": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "73df2bcc-3717-5e56-b20b-ff7a6354ace3",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明洗澡时性交需要避开的动作并等待回应\n{TargetName}接过话题继续补充并指出脚下容易滑动",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_is_indulge": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "7d9147c3-bd22-5e3d-a7f2-976a193bc12c",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}身上的衣物没有脱下\n{Name}的呼吸没有变化\n{Name}说明镜子前性交时两人的站位并等待回应\n{TargetName}接过话题继续补充并换到镜面另一侧",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "not_naked": 1,
+            "target_is_indulge": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "b3bf916f-444a-5061-885f-600cd4fa23e7",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "喷泉水声盖过两人的音量\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明在室外裸体停留的边界并等待回应\n{TargetName}遮住脸仍作出回答并划掉了人多的地点",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_shame_is_height": 1,
+            "in_fountain": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "10a59f2d-2732-5e1a-83ca-a3ad0930934b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明暴露身体时可以持续的秒数并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_lust_is_low": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "25f38fa9-229f-5d90-9847-7c9991d26438",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "喷泉水声盖过两人的音量\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明内裤在调情中脱下的顺序并等待回应\n{TargetName}遮住脸仍作出回答并把顺序倒了过来",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_shame_is_height": 1,
+            "in_fountain": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "6b9ff2fd-59e3-5efd-848d-c86e1ab1c21b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "喷泉水声盖过两人的音量\n{Name}身上的衣物没有脱下\n{Name}的呼吸没有变化\n{Name}说明性交前能否保留身上的气味并等待回应\n{TargetName}没有回避问题并拒绝使用香水",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "not_naked": 1,
+            "target_shame_is_low": 1,
+            "in_fountain": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "93a5f739-8e33-5f66-9ab4-30b22ba23a8c",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明皮肤温度升高后的停顿并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_lust_is_low": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e078ac0c-6f53-5e82-a463-6cd01bbcd6b8",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "喷泉水声盖过两人的音量\n{Name}身上的衣物没有脱下\n{Name}按实际操作次序说明\n{Name}说明咬痕允许留下的位置并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "not_naked": 1,
+            "target_lust_is_low": 1,
+            "in_fountain": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "3e786f7c-57fe-5b4b-a62f-3c4c6ab0a4bd",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}保持裸体没有遮住下体\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明吻痕消退前如何遮住并等待回应\n{TargetName}没有回避问题并量了衣领的高度",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "is_naked": 1,
+            "target_shame_is_low": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "248c6dbc-6c28-5e84-9e4d-c47a15a9397a",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "喷泉水声盖过两人的音量\n{Name}保持裸体没有遮住下体\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明手指进入小穴时的弯曲方向并等待回应\n{TargetName}接过话题继续补充并握住手指校正方向",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "is_naked": 1,
+            "target_is_indulge": 1,
+            "in_fountain": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "fdf1df5c-1cd9-557c-a8cd-ff29c36fc2e7",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明肉棒进入小穴的深度并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_lust_is_low": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "9a53cf0f-0732-5d76-b618-dd11ad332ebd",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}身上的衣物没有脱下\n{Name}按实际操作次序说明\n{Name}说明射精时精液可以落下的位置并等待回应\n{TargetName}靠近后继续讨论并排除了头发和眼睛",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "not_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "a87410b0-d4bc-56b4-b1ac-564b1339b50e",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明月经期间性交要铺的垫布并等待回应\n{TargetName}遮住脸仍作出回答并把清洗方式写在后面",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_shame_is_height": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "0479dc67-7ce0-557b-a375-4aa8f7d6f4f6",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明晨勃时是否需要独自处理并等待回应\n{TargetName}靠近后继续讨论并给出叫醒自己的条件",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "99406701-b2c5-550a-a23e-300423542e3e",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明小穴分泌润滑液后的判断并等待回应\n{TargetName}没有回避问题并说明仍要询问同意",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_shame_is_low": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "4f418e8e-e424-561f-9e2b-f06a1fcc0f29",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}身上的衣物没有脱下\n{Name}按实际操作次序说明\n{Name}说明包皮后退时需要停止的疼痛并等待回应\n{TargetName}没有回避问题并用手指圈出受力位置",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "not_naked": 1,
+            "target_shame_is_low": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e108ed80-2deb-5179-aebc-9d4af69ca85d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}保持裸体没有遮住下体\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明刺激阴蒂时不能越过的力度并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "is_naked": 1,
+            "target_lust_is_low": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "37df3926-da45-516c-a26a-a51c29f7f600",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "空教室的门保持关闭\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明刺激前列腺前需要的准备并等待回应\n{TargetName}靠近后继续讨论并增加了手套一项",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "01265c32-8875-5038-b7df-d367fb986262",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "喷泉水声盖过两人的音量\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明连续高潮之间需要的停顿并等待回应\n{TargetName}靠近后继续讨论并用呼吸次数计算间隔",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_fountain": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "acbdf37c-2b15-5194-aa0d-1423c3d689a3",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明延迟高潮时采用的停止次数并等待回应\n{TargetName}接过话题继续补充并把次数改少一次",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_is_indulge": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "96ff463a-2e1d-5f72-bf15-c5d6e0c28e8c",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明性交结束后先递水还是毛巾并等待回应\n{TargetName}遮住脸仍作出回答并选择先递水",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_shame_is_height": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "601553db-6c02-57c2-b451-d23240c920ec",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明床单沾上精液后的清洗并等待回应\n{TargetName}没有回避问题并分走了晾晒的工作",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_shame_is_low": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "c4337e93-8094-5f20-9f11-aed0787de858",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}保持裸体没有遮住下体\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明性交时控制叫声的方法并等待回应\n{TargetName}遮住脸仍作出回答并拒绝捂住口鼻",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "is_naked": 1,
+            "target_shame_is_height": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "619bf5bb-4fb8-5d9a-be4b-16d2bc6e141d",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "空教室的门保持关闭\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明关门后检查门锁的次数并等待回应\n{TargetName}接过话题继续补充并亲手转动门锁确认",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_is_indulge": 1,
+            "in_classroom": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "9937fe27-a931-52b2-8efb-f0a5bbd70ffb",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}身上的衣物没有脱下\n{Name}按实际操作次序说明\n{Name}说明一次性交可以持续的时间并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "not_naked": 1,
+            "target_lust_is_low": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "9161cda2-f626-534f-b89a-37c1b26cca22",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}身上的衣物没有脱下\n{Name}按实际操作次序说明\n{Name}说明体内射精可能造成的怀孕并等待回应\n{TargetName}靠近后继续讨论并把避孕列为前提",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "not_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "90db326a-bb60-54fb-bc68-e66c71ba2dc5",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}保持裸体没有遮住下体\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明发生性交前交换检查结果并等待回应\n{TargetName}靠近后继续讨论并约定一起去做检查",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "a846248b-06fc-5321-b421-157d6c82a020",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明排卵日期对怀孕概率的影响并等待回应\n{TargetName}没有回避问题并在周期表上标出日期",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_shame_is_low": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "3dd4883e-3381-5c93-b35f-a88d7a0d6f5b",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}保持裸体没有遮住下体\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明临时用作自慰的物品是否安全并等待回应\n{TargetName}没有回避问题并丢开了有尖角的物品",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "is_naked": 1,
+            "target_shame_is_low": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "39381874-9502-514c-a3f8-32be4779e695",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}身上的衣物没有脱下\n{Name}的呼吸没有变化\n{Name}说明振动棒电池耗尽前的提示并等待回应\n{TargetName}遮住脸仍作出回答并设定更换电池的次数",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "not_naked": 1,
+            "target_shame_is_height": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "9cc08ed0-df92-57ab-91af-43547ad9ade1",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}身上的衣物没有脱下\n{Name}按实际操作次序说明\n{Name}说明假肉棒使用后的消毒并等待回应\n{TargetName}接过话题继续补充并补充了晾干步骤",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "not_naked": 1,
+            "target_is_indulge": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_lust": 1,
+            "target_add_small_lust": 1,
+            "target_add_small_happy": 1,
+            "add_small_happy": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "7513f29c-0538-5382-a13c-9d9ae7c6f868",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}保持裸体没有遮住下体\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明绳索在皮肤留下红痕的时长并等待回应\n{TargetName}靠近后继续讨论并要求定时解开检查",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "71679283-0167-5d24-8175-d7cdaf2c5f6c",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "餐厅角落的桌面隔开过道\n{Name}保持裸体没有遮住下体\n{Name}的呼吸没有变化\n{Name}说明滴蜡前测试温度的位置并等待回应\n{TargetName}靠近后继续讨论并选择先试在手臂",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "is_naked": 1,
+            "target_lust_is_hight": 1,
+            "in_restaurant": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_medium_lust": 1,
+            "target_add_medium_lust": 1,
+            "target_add_medium_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "bc2dc811-74be-5791-b571-e905f9c26d0c",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}身上的衣物没有脱下\n{Name}的呼吸加快并看向{TargetName}下体\n{Name}说明冰块触碰乳头前的预告并等待回应\n{TargetName}遮住脸仍作出回答并约定先碰手背",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_hight": 1,
+            "not_naked": 1,
+            "target_shame_is_height": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e004dc41-087c-5135-b684-af3c3a62fd02",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "喷泉水声盖过两人的音量\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明拍打屁股时计算次数并等待回应\n{TargetName}没有回避问题并规定每次都要报数",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_shame_is_low": 1,
+            "in_fountain": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_happy": 1,
+            "target_add_small_favorability": 1,
+            "add_like_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "0ee42131-8316-5bf9-9d44-a4405e383161",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "天台铁门停在合拢的位置\n{Name}身上的衣物没有脱下\n{Name}的呼吸没有变化\n{Name}说明抓痕能够越过肩线的范围并等待回应\n{TargetName}遮住脸仍作出回答并用指尖画出边界",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "not_naked": 1,
+            "target_shame_is_height": 1,
+            "in_rooftop_scene": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "ecbe2b25-adb8-531e-a7aa-7f1d37836831",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "喷泉水声盖过两人的音量\n{Name}身上的衣物没有脱下\n{Name}的呼吸没有变化\n{Name}说明性交时拉住头发的部位并等待回应\n{TargetName}抬手终止这个话题并拒绝回答并改谈别的事",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "lust_is_low": 1,
+            "not_naked": 1,
+            "target_lust_is_low": 1,
+            "in_fountain": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "add_small_antipathy": 1,
+            "target_add_medium_antipathy": 1,
+            "target_add_small_rage": 1,
+            "add_small_shame": 1,
+            "add_small_pain": 1,
+            "add_dislike_preference": 1,
+            "let_target_chat_self": 1
+        }
+    },
+    {
+        "uid": "e4f6fb9d-8767-5b01-83bc-756fad53cb74",
+        "adv_id": "",
+        "status_id": "5",
+        "start": 0,
+        "text": "树干挡住通往小路的视线\n{Name}保持裸体没有遮住下体\n{Name}按实际操作次序说明\n{Name}说明坐在大腿上摩擦下体的速度并等待回应\n{TargetName}遮住脸仍作出回答并用膝盖示意减慢",
+        "premise": {
+            "have_target": 1,
+            "target_is_live": 1,
+            "target_not_stranger": 1,
+            "no_have_other_target_in_scene": 1,
+            "sexual_skills_is_height": 1,
+            "is_naked": 1,
+            "target_shame_is_height": 1,
+            "in_grove": 1
+        },
+        "settle": {
+            "sub_small_mana_point": 1,
+            "add_small_eloquence_experience": 1,
+            "target_add_small_shame": 1,
+            "target_add_small_lust": 1,
             "let_target_chat_self": 1
         }
     }

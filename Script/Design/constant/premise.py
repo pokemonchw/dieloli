@@ -2126,7 +2126,7 @@ class Premise:
     """ 交互对象胸围是绝壁 """
     TARGET_AVERAGE_STATURE_HEIGHT = "target_average_stature_height"
     """ 目标体型比平均体型更胖 """
-    TARGET_CHEST_IS_NOT_CLIFF = "target_chest_is_not_chiff"
+    TARGET_CHEST_IS_NOT_CLIFF = "target_chest_is_not_cliff"
     """ 交互对象胸围不是绝壁 """
     IS_AVERAGE_STATURE_LOW = "is_average_stature_low"
     """ 角色体型瘦于平均体型 """
