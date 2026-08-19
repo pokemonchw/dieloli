@@ -31,10 +31,12 @@ def handle_leave_player_scene(character_id: int) -> int:
     int -- 权重
     """
     now_character_data: game_type.Character = cache.character_data[character_id]
+    player_position = cache.character_data[0].position
     if (
-        now_character_data.behavior.move_src == cache.character_data[0].position
-        and now_character_data.behavior.move_target != cache.character_data[0].position
-        and now_character_data.position != cache.character_data[0].position
+        character_id
+        and now_character_data.position == player_position
+        and now_character_data.behavior.move_target
+        and now_character_data.behavior.move_target != player_position
     ):
         return 1
     return 0

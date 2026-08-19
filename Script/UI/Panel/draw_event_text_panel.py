@@ -68,8 +68,8 @@ class DrawEventTextPanel(draw.LineFeedWaitDraw):
                 character_name = character_data.nick_name
         # 角色移动完成时，可以使用的出发地的场景名
         src_scene_name = ""
-        if len(player_data.behavior.move_src):
-            src_scene_path_str = map_handle.get_map_system_path_str_for_list(player_data.behavior.move_src)
+        if len(character_data.behavior.move_src):
+            src_scene_path_str = map_handle.get_map_system_path_str_for_list(character_data.behavior.move_src)
             src_scene_data: game_type.Scene = cache.scene_data[src_scene_path_str]
             src_scene_name = src_scene_data.scene_name
         # 角色开始移动时，可以使用的目标地点的场景名字
